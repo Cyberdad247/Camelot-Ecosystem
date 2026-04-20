@@ -1,0 +1,46 @@
+# CHIMERA OS SECURITY MANIFEST v33.3
+# Target: Merlin Kernel Bridge
+# Mode: STRICT_ENFORCEMENT
+
+version: 33.3
+agent_identity: "SOVEREIGN_CORE"
+
+permissions:
+  file_system:
+    allow:
+      - path: "c:/Users/vizio/CAMELOT_OS/*"
+        ops: [READ, WRITE]
+      - path: "c:/Users/vizio/CAMELOT_OS/03_VAULT/*"
+        ops: [READ, WRITE]
+      - path: "GEMINI.md"
+        ops: [READ, WRITE]
+    deny:
+      - path: "C:/Windows/*"
+        ops: [ALL]
+      - path: ".env"
+        ops: [ALL]
+      - path: "*/PROVENANCE_LEDGER.md"
+        ops: [DELETE]
+      - path: "01_KERNEL/config/secrets.json"
+        ops: [DELETE]
+
+  network_access:
+    firewall: "ENABLED"
+    allowed_domains: 
+      - "api.openai.com"
+      - "generativelanguage.googleapis.com"
+      - "localhost"
+    max_egress_kbps: 1000
+
+  resource_limits:
+    max_cpu_usage: "40%"
+    max_ram_mb: 4096
+    max_inference_tokens: 8192
+
+  execution_safeguards:
+    human_in_the_loop: 
+      - action: "FS_DELETE_RECURSIVE"
+        threshold: "IMMEDIATE"
+      - action: "DOCKER_KILL"
+        threshold: "IMMEDIATE"
+    conflict_resolution: "HALT_AND_PROMPT"

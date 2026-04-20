@@ -1,0 +1,3 @@
+packages:
+  - "02_FORGE/apps/*"
+  - "02_FORGE/packages/*"

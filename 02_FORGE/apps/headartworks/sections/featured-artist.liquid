@@ -1,0 +1,120 @@
+{{ 'section-featured-artist.css' | asset_url | stylesheet_tag }}
+
+<section class="featured-artist section">
+  <div class="page-width">
+    {% if section.settings.section_heading != blank %}
+      <h2 class="featured-artist__heading">{{ section.settings.section_heading }}</h2>
+    {% endif %}
+    <div class="featured-artist__content">
+      {% if section.settings.artist_image != blank %}
+        <div class="featured-artist__image">
+          {{
+            section.settings.artist_image
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              class: 'featured-artist__image-tag',
+              sizes: '(min-width: 750px) 50vw, 100vw',
+              widths: '375, 550, 750, 1100'
+          }}
+        </div>
+      {% endif %}
+      <div class="featured-artist__info">
+        {% if section.settings.artist_name != blank %}
+          <h3 class="featured-artist__name">{{ section.settings.artist_name }}</h3>
+        {% endif %}
+        {% if section.settings.artist_bio != blank %}
+          <div class="featured-artist__bio rte">
+            {{ section.settings.artist_bio }}
+          </div>
+        {% endif %}
+        {% if section.settings.artist_link != blank %}
+          <a href="{{ section.settings.artist_link }}" class="featured-artist__link button" target="_blank">
+            View Portfolio
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Artist",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section Heading",
+      "default": "Featured Artist"
+    },
+    {
+      "type": "image_picker",
+      "id": "artist_image",
+      "label": "Artist Image"
+    },
+    {
+      "type": "text",
+      "id": "artist_name",
+      "label": "Artist Name"
+    },
+    {
+      "type": "richtext",
+      "id": "artist_bio",
+      "label": "Artist Bio"
+    },
+    {
+      "type": "url",
+      "id": "artist_link",
+      "label": "Artist Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Artist",
+      "category": "content"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .featured-artist {
+    padding: 60px 0;
+  }
+
+  .featured-artist__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .featured-artist__heading {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .featured-artist__image-tag {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .featured-artist__name {
+    margin-bottom: 20px;
+  }
+
+  .featured-artist__bio {
+    margin-bottom: 30px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .featured-artist__content {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

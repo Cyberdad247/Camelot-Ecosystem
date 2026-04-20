@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nano-Explorer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="header-container">
+      <h3>🛰️ WAR_ROOM [AGENCY]</h3>
+      <span id="btn-settings" class="settings-icon" title="Config">⚙️</span>
+  </div>
+
+  <!-- AGENT ROSTER -->
+  <div class="roster-grid">
+     <div id="card-lady_apis" class="agent-card" title="Deep Research">🕷️ APIS</div>
+     <div id="card-sir_zenith" class="agent-card" title="Security Audit">🛡️ ZENITH</div>
+     <div id="card-lady_eye" class="agent-card" title="Visual Analysis">👁️ EYE</div>
+     <div id="card-sir_oracle" class="agent-card" title="Synthesis">🔮 ORACLE</div>
+  </div>
+  
+  <label>Q-FOCUS (COMMAND LINE):</label>
+  <div class="input-row">
+      <input type="text" id="qfocus" placeholder="Type 'audit', 'deep dive', or 'analyze'...">
+      <button id="btn-deploy">DEPLOY</button>
+  </div>
+  
+  <div id="status">[STATUS]: IDLE - WAITING FOR ORDERS</div>
+
+  <div id="results-container">
+    <label class="results-label">📜 INTEL FEED:</label>
+    <pre id="results-display"></pre>
+    <div class="action-row">
+        <button id="btn-copy" class="btn-small">COPY INTEL</button>
+        <button id="btn-sync" class="btn-small btn-sync">VAULT SYNC</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

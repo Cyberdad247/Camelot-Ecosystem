@@ -1,0 +1,1162 @@
+{
+  "01_KERNEL_CORE": {
+    "root": "01_KERNEL",
+    "path": ".",
+    "cells": [
+      "api_server.py",
+      "chimera_unified_kernel.json",
+      "config.json",
+      "forge_v2.py",
+      "god_prompt.json",
+      "kernel_main.py",
+      "merlin_omega.py",
+      "README.md",
+      "security_policy.json",
+      "sync_engine.py",
+      "watchtower.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_AGENTS": {
+    "root": "01_KERNEL",
+    "path": "agents",
+    "cells": [
+      "armory.py",
+      "knight_base.py",
+      "roster.json"
+    ]
+  },
+  "01_KERNEL_AGORA": {
+    "root": "01_KERNEL",
+    "path": "agora",
+    "cells": [
+      "bridge.py",
+      "context.py",
+      "hud_bridge.py",
+      "node.py",
+      "protocol.py",
+      "router.py",
+      "videneptus.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_AGORA_KNIGHTS": {
+    "root": "01_KERNEL",
+    "path": "agora\\knights",
+    "cells": [
+      "notebook_knight.py",
+      "omni_knight.py",
+      "opencode_knight.py"
+    ]
+  },
+  "01_KERNEL_AGORA_MODELS": {
+    "root": "01_KERNEL",
+    "path": "agora\\models",
+    "cells": [
+      "proteus_vector.py"
+    ]
+  },
+  "01_KERNEL_ASSIMILATION": {
+    "root": "01_KERNEL",
+    "path": "assimilation",
+    "cells": [
+      "__init__.py",
+      "__main__.py"
+    ]
+  },
+  "01_KERNEL_ASSIMILATION_CORE": {
+    "root": "01_KERNEL",
+    "path": "assimilation\\core",
+    "cells": [
+      "handlers.py",
+      "parser.py",
+      "registry.py",
+      "reporting.py",
+      "types.py",
+      "verification.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ASSIMILATION_TESTS": {
+    "root": "01_KERNEL",
+    "path": "assimilation\\tests",
+    "cells": [
+      "test_integration.py"
+    ]
+  },
+  "01_KERNEL_AUDIO": {
+    "root": "01_KERNEL",
+    "path": "audio",
+    "cells": [
+      "vox_anima.py",
+      "vox_service.py"
+    ]
+  },
+  "01_KERNEL_AUDIO_SONUS": {
+    "root": "01_KERNEL",
+    "path": "audio\\sonus",
+    "cells": [
+      "compiler.py"
+    ]
+  },
+  "01_KERNEL_CONFIG": {
+    "root": "01_KERNEL",
+    "path": "config",
+    "cells": [
+      "cartridges.json",
+      "council_peers.json",
+      "dna.json",
+      "llm_routing.json",
+      "mcp_perplexity.json",
+      "mcp_registry.json",
+      "secrets.json",
+      "validate_schema.py"
+    ]
+  },
+  "01_KERNEL_CONFIG_SCHEMAS": {
+    "root": "01_KERNEL",
+    "path": "config\\schemas",
+    "cells": [
+      "agent_dispatch.schema.json",
+      "memory_query.schema.json",
+      "system_health.schema.json"
+    ]
+  },
+  "01_KERNEL_CONNECTIVITY": {
+    "root": "01_KERNEL",
+    "path": "connectivity",
+    "cells": [
+      "aether.py",
+      "titanlink_server.py"
+    ]
+  },
+  "01_KERNEL_CONNECTIVITY_BRIDGES": {
+    "root": "01_KERNEL",
+    "path": "connectivity\\bridges",
+    "cells": [
+      "clawdbot_client.py"
+    ]
+  },
+  "01_KERNEL_DATA": {
+    "root": "01_KERNEL",
+    "path": "data",
+    "cells": [
+      "titan_ledger.json",
+      "ukg_seed.json",
+      "wvs_map.json"
+    ]
+  },
+  "01_KERNEL_DATA_PIPELINE": {
+    "root": "01_KERNEL",
+    "path": "Data_Pipeline",
+    "cells": [
+      "Assimilation_Protocol.md",
+      "storage.py"
+    ]
+  },
+  "01_KERNEL_DEPLOYMENT_CRIBO": {
+    "root": "01_KERNEL",
+    "path": "deployment\\cribo",
+    "cells": [
+      "bundler.py"
+    ]
+  },
+  "01_KERNEL_ENGINES": {
+    "root": "01_KERNEL",
+    "path": "Engines",
+    "cells": [
+      "prism_gateway.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai",
+    "cells": [
+      "async_configs.py",
+      "async_crawler_strategy.py",
+      "async_database.py",
+      "async_dispatcher.py",
+      "async_logger.py",
+      "async_webcrawler.py",
+      "browser_manager.py",
+      "browser_profiler.py",
+      "cache_context.py",
+      "chunking_strategy.py",
+      "cli.py",
+      "config.py",
+      "content_filter_strategy.py",
+      "content_scraping_strategy.py",
+      "docker_client.py",
+      "extraction_strategy.py",
+      "hub.py",
+      "install.py",
+      "markdown_generation_strategy.py",
+      "migrations.py",
+      "models.py",
+      "model_loader.py",
+      "prompts.py",
+      "proxy_strategy.py",
+      "ssl_certificate.py",
+      "types.py",
+      "user_agent_generator.py",
+      "utils.py",
+      "__init__.py",
+      "__version__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_COMPONENTS": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\components",
+    "cells": [
+      "crawler_monitor.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_CRAWLERS": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\crawlers",
+    "cells": [
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_CRAWLERS_AMAZON_PRODUCT": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\crawlers\\amazon_product",
+    "cells": [
+      "crawler.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_CRAWLERS_GOOGLE_SEARCH": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\crawlers\\google_search",
+    "cells": [
+      "crawler.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_DEEP_CRAWLING": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\deep_crawling",
+    "cells": [
+      "base_strategy.py",
+      "bff_strategy.py",
+      "bfs_strategy.py",
+      "crazy.py",
+      "dfs_strategy.py",
+      "filters.py",
+      "scorers.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_HTML2TEXT": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\html2text",
+    "cells": [
+      "cli.py",
+      "config.py",
+      "elements.py",
+      "utils.py",
+      "_typing.py",
+      "__init__.py",
+      "__main__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_JS_SNIPPET": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\js_snippet",
+    "cells": [
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_LEGACY": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\legacy",
+    "cells": [
+      "cli.py",
+      "crawler_strategy.py",
+      "database.py",
+      "docs_manager.py",
+      "llmtxt.py",
+      "version_manager.py",
+      "web_crawler.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_CRAWL4AI_PROCESSORS_PDF": {
+    "root": "01_KERNEL",
+    "path": "Engines\\crawl4ai\\processors\\pdf",
+    "cells": [
+      "processor.py",
+      "utils.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_ENGINES_SYMBOLECT_TRANSPILER": {
+    "root": "01_KERNEL",
+    "path": "Engines\\symbolect_transpiler",
+    "cells": [
+      "symbolect.py"
+    ]
+  },
+  "01_KERNEL_EXCALIBUR": {
+    "root": "01_KERNEL",
+    "path": "EXCALIBUR",
+    "cells": [
+      "main.py",
+      "system_prompt.md"
+    ]
+  },
+  "01_KERNEL_EXP": {
+    "root": "01_KERNEL",
+    "path": "exp",
+    "cells": [
+      "calculator.py",
+      "sim_constitutional_safety.py",
+      "sim_council_debate.py",
+      "sim_engine_actuation.py",
+      "sim_excalibur_bridge.py",
+      "sim_grand_development.py",
+      "sim_notebook_knight.py",
+      "sim_oracle.py",
+      "sim_oracle_plan_test.py",
+      "sim_routing.py",
+      "verify_all_engines.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_GATES": {
+    "root": "01_KERNEL",
+    "path": "gates",
+    "cells": [
+      "zenith_exp_gate.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_GRAPH": {
+    "root": "01_KERNEL",
+    "path": "graph",
+    "cells": [
+      "knowledge_graph.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_LEARNING": {
+    "root": "01_KERNEL",
+    "path": "learning",
+    "cells": [
+      "dataset_collector.py",
+      "dataset_generator.py",
+      "omega_trainer.py"
+    ]
+  },
+  "01_KERNEL_MEMORY": {
+    "root": "01_KERNEL",
+    "path": "memory",
+    "cells": [
+      "anya_memory.py",
+      "appwrite_sync.py",
+      "base_memory.py",
+      "clara_assimilation.json",
+      "compiler.py",
+      "constrict_pipeline.py",
+      "mobile_bridge_api.py",
+      "notebook_manager.py",
+      "reflection_engine.py",
+      "sentinel_compression.py",
+      "skillgraph.py",
+      "supermemory_adapter.py",
+      "sync_engine.py",
+      "UKG_ANYA_v6_seed.json"
+    ]
+  },
+  "01_KERNEL_MEMORY_GRAPHRAG": {
+    "root": "01_KERNEL",
+    "path": "memory\\graphrag",
+    "cells": [
+      "compressor.py"
+    ]
+  },
+  "01_KERNEL_NANO_FORGE": {
+    "root": "01_KERNEL",
+    "path": "nano_forge",
+    "cells": [
+      "fingerprints.json",
+      "hybrid_conductor.py",
+      "mission_dag.py",
+      "nano_forge.py",
+      "phantom_engine.py",
+      "phantom_grid.py",
+      "profile_manager.py",
+      "rich_fingerprint_schema.json",
+      "system_manifest_schema.json"
+    ]
+  },
+  "01_KERNEL_NANO_FORGE_BEHAVIORS": {
+    "root": "01_KERNEL",
+    "path": "nano_forge\\behaviors",
+    "cells": [
+      "human_simulator.py"
+    ]
+  },
+  "01_KERNEL_NANO_FORGE_DIST_NANO_KNIGHTS": {
+    "root": "01_KERNEL",
+    "path": "nano_forge\\dist\\nano_knights",
+    "cells": [
+      "knight_scout_01.py"
+    ]
+  },
+  "01_KERNEL_NANO_FORGE_EXTENSION": {
+    "root": "01_KERNEL",
+    "path": "nano_forge\\extension",
+    "cells": [
+      "AGENCY_ACTIVATION_REPORT.md",
+      "ARCHITECTURE_DIAGRAM.md",
+      "ASSIMILATION_REPORT.md",
+      "BUNDLE_OPTIMIZATION.md",
+      "implementation_plan.md",
+      "manifest.json",
+      "package.json",
+      "README.md",
+      "VERIFICATION_LOG_KNIGHTS_EVOLUTION.md",
+      "VERIFICATION_LOG_PROMETHEUS.md",
+      "VERIFICATION_LOG_ROUND_TABLE.md",
+      "VERIFICATION_REPORT.md"
+    ]
+  },
+  "01_KERNEL_NANO_FORGE_EXTENSION__LOCALES_EN": {
+    "root": "01_KERNEL",
+    "path": "nano_forge\\extension\\_locales\\en",
+    "cells": [
+      "messages.json"
+    ]
+  },
+  "01_KERNEL_NANO_FORGE_EXTENSION__LOCALES_ZH_TW": {
+    "root": "01_KERNEL",
+    "path": "nano_forge\\extension\\_locales\\zh_TW",
+    "cells": [
+      "messages.json"
+    ]
+  },
+  "01_KERNEL_PHIALS": {
+    "root": "01_KERNEL",
+    "path": "phials",
+    "cells": [
+      "map_generator.py",
+      "memory_decay.py",
+      "nano_graph_adapter.py",
+      "semantic_tree_rag.py",
+      "tree_sitter_phial.py"
+    ]
+  },
+  "01_KERNEL_PHIALS_REGEX_CLEANER": {
+    "root": "01_KERNEL",
+    "path": "phials\\regex_cleaner",
+    "cells": [
+      "main.py"
+    ]
+  },
+  "01_KERNEL_PROMPTS": {
+    "root": "01_KERNEL",
+    "path": "prompts",
+    "cells": [
+      "merlin_v2.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_AUDIO": {
+    "root": "01_KERNEL",
+    "path": "prompts\\AUDIO",
+    "cells": [
+      "SIR_SONUS_\u03a9.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_DEVELOPMENT": {
+    "root": "01_KERNEL",
+    "path": "prompts\\DEVELOPMENT",
+    "cells": [
+      "kaito_pruner.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_FORGE": {
+    "root": "01_KERNEL",
+    "path": "prompts\\FORGE",
+    "cells": [
+      "TITAN_FORGE_\u03a9.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_GUILDS": {
+    "root": "01_KERNEL",
+    "path": "prompts\\guilds",
+    "cells": [
+      "think_tank.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_HYBRID_OMEGA": {
+    "root": "01_KERNEL",
+    "path": "prompts\\HYBRID_OMEGA",
+    "cells": [
+      "anya_omega.md",
+      "HIVE_MIND_PROTOCOL.md",
+      "lukas_edge.md",
+      "merlin_omega.md",
+      "morgana_shadow.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_LEGACY": {
+    "root": "01_KERNEL",
+    "path": "prompts\\LEGACY",
+    "cells": [
+      "v33_universal.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_ORACLE": {
+    "root": "01_KERNEL",
+    "path": "prompts\\oracle",
+    "cells": [
+      "EVENT_WEAVER.md",
+      "NPC_FORGE.md",
+      "SCENARIO_GENERATOR.md"
+    ]
+  },
+  "01_KERNEL_PROMPTS_SYNTHESIS": {
+    "root": "01_KERNEL",
+    "path": "prompts\\SYNTHESIS",
+    "cells": [
+      "\u03a9_NOTEBOOK_COMPILER.md"
+    ]
+  },
+  "01_KERNEL_PROTOCOLS": {
+    "root": "01_KERNEL",
+    "path": "Protocols",
+    "cells": [
+      "ASSIMILATE.md",
+      "AUDIT_v32.md",
+      "SECURITY.md"
+    ]
+  },
+  "01_KERNEL_PROTOCOLS_THINKTANK": {
+    "root": "01_KERNEL",
+    "path": "Protocols\\ThinkTank",
+    "cells": [
+      "ACTIVE_SESSION.md",
+      "DEFINITION.md",
+      "OMEGA_TIER.md",
+      "RADICAL_IDEAS.md",
+      "SINGULARITY_IDEAS.md",
+      "SYSTEM_CAPABILITIES.md",
+      "TACTICAL_DECATHLON.md",
+      "UNIVERSAL_PROMPT.md"
+    ]
+  },
+  "01_KERNEL_PROTOCOLS_WARROOM": {
+    "root": "01_KERNEL",
+    "path": "Protocols\\WarRoom",
+    "cells": [
+      "PROTOCOL.md"
+    ]
+  },
+  "01_KERNEL_PROXY": {
+    "root": "01_KERNEL",
+    "path": "proxy",
+    "cells": [
+      "bridge.py"
+    ]
+  },
+  "01_KERNEL_RAG": {
+    "root": "01_KERNEL",
+    "path": "rag",
+    "cells": [
+      "chronos.py",
+      "lightrag_engine.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_REASONING": {
+    "root": "01_KERNEL",
+    "path": "reasoning",
+    "cells": [
+      "aurora_vision.py",
+      "core.py",
+      "council_debate.py",
+      "dream_state.py",
+      "helix_loop.py",
+      "lyricus_voice.py",
+      "omega_learn.py",
+      "oracle_physics.py",
+      "planning_engine.py",
+      "prometheus_decomp.py",
+      "search.py",
+      "titan_forge.py",
+      "veritas_audit.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_RUNE_PHASES": {
+    "root": "01_KERNEL",
+    "path": "rune_phases",
+    "cells": [
+      "experience_check.py",
+      "graph_traverse.py",
+      "lightrag_retrieve.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SCHEMAS": {
+    "root": "01_KERNEL",
+    "path": "schemas",
+    "cells": [
+      "anya_constrict.py",
+      "logging_schema.json"
+    ]
+  },
+  "01_KERNEL_SCRIPTS": {
+    "root": "01_KERNEL",
+    "path": "scripts",
+    "cells": [
+      "audit_report.json",
+      "culture_bias.py",
+      "diagnostics.py",
+      "fetch_local_model.py",
+      "fix_encoding_build.py",
+      "knight_swarm_manager.py",
+      "knowledge_hive_ingestion.py",
+      "live_swarm_audit.py",
+      "nano_cli_auditor.py",
+      "omega_audit.py",
+      "predictive_mission_sim.py",
+      "rapid_assimilate.py",
+      "ready_puter.py",
+      "setup_kobold.py",
+      "setup_openvoice.py",
+      "setup_phase4_configs.py",
+      "setup_training.py",
+      "setup_voice_stack.py",
+      "tainted_cleanup.py",
+      "test_hive_swarm.py",
+      "test_integrations.py",
+      "test_kokoro.py",
+      "trigger_sync.py",
+      "trivy_scan.py",
+      "verify_cloud.py",
+      "verify_mcp_hub.py",
+      "verify_resonance.py"
+    ]
+  },
+  "01_KERNEL_SECURITY": {
+    "root": "01_KERNEL",
+    "path": "security",
+    "cells": [
+      "biological_isolation.py",
+      "enforcer.py",
+      "hermes.py",
+      "identity_decay.py",
+      "iron_gate.py",
+      "killswitch_controller.py",
+      "reforge_identity.py",
+      "shadow_mode.py",
+      "vault_keeper.py",
+      "warden.py",
+      "zenith_scanner.py"
+    ]
+  },
+  "01_KERNEL_SHARED": {
+    "root": "01_KERNEL",
+    "path": "shared",
+    "cells": [
+      "symbolect.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SKILLS_REPO_FORENSIC_AUDIT": {
+    "root": "01_KERNEL",
+    "path": "skills\\repo_forensic_audit",
+    "cells": [
+      "SKILL.md"
+    ]
+  },
+  "01_KERNEL_SKILLS_VISUAL_QA_SENTRY": {
+    "root": "01_KERNEL",
+    "path": "skills\\visual_qa_sentry",
+    "cells": [
+      "SKILL.md"
+    ]
+  },
+  "01_KERNEL_SQUIRE": {
+    "root": "01_KERNEL",
+    "path": "squire",
+    "cells": [
+      "biome.json",
+      "task.md"
+    ]
+  },
+  "01_KERNEL_SQUIRES": {
+    "root": "01_KERNEL",
+    "path": "Squires",
+    "cells": [
+      "ignite_notebook.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_COMMANDS": {
+    "root": "01_KERNEL",
+    "path": "Squires\\commands",
+    "cells": [
+      "embedding_commands.py",
+      "example_commands.py",
+      "podcast_commands.py",
+      "source_commands.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_MEMORY_SQUIRE": {
+    "root": "01_KERNEL",
+    "path": "Squires\\Memory_Squire",
+    "cells": [
+      "auth.py",
+      "chat_service.py",
+      "client.py",
+      "command_service.py",
+      "context_service.py",
+      "embedding_service.py",
+      "episode_profiles_service.py",
+      "insights_service.py",
+      "main.py",
+      "models.py",
+      "models_service.py",
+      "notebook_service.py",
+      "notes_service.py",
+      "podcast_api_service.py",
+      "podcast_service.py",
+      "search_service.py",
+      "settings_service.py",
+      "sources_service.py",
+      "transformations_service.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_MEMORY_SQUIRE_ROUTERS": {
+    "root": "01_KERNEL",
+    "path": "Squires\\Memory_Squire\\routers",
+    "cells": [
+      "auth.py",
+      "chat.py",
+      "commands.py",
+      "config.py",
+      "context.py",
+      "embedding.py",
+      "embedding_rebuild.py",
+      "episode_profiles.py",
+      "insights.py",
+      "models.py",
+      "notebooks.py",
+      "notes.py",
+      "podcasts.py",
+      "search.py",
+      "settings.py",
+      "sources.py",
+      "source_chat.py",
+      "speaker_profiles.py",
+      "transformations.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_NOTEBOOK_BRAIN": {
+    "root": "01_KERNEL",
+    "path": "Squires\\Notebook_Brain",
+    "cells": [
+      "auth.py",
+      "chat_service.py",
+      "client.py",
+      "command_service.py",
+      "context_service.py",
+      "embedding_service.py",
+      "engine_v1.py",
+      "episode_profiles_service.py",
+      "insights_service.py",
+      "main.py",
+      "memory.json",
+      "models.py",
+      "models_service.py",
+      "notebook_service.py",
+      "notes_service.py",
+      "podcast_api_service.py",
+      "podcast_service.py",
+      "search_service.py",
+      "settings_service.py",
+      "sources_service.py",
+      "transformations_service.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_NOTEBOOK_BRAIN_ROUTERS": {
+    "root": "01_KERNEL",
+    "path": "Squires\\Notebook_Brain\\routers",
+    "cells": [
+      "auth.py",
+      "chat.py",
+      "commands.py",
+      "config.py",
+      "context.py",
+      "embedding.py",
+      "embedding_rebuild.py",
+      "episode_profiles.py",
+      "insights.py",
+      "models.py",
+      "notebooks.py",
+      "notes.py",
+      "podcasts.py",
+      "search.py",
+      "settings.py",
+      "sources.py",
+      "source_chat.py",
+      "speaker_profiles.py",
+      "transformations.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_OPEN_NOTEBOOK": {
+    "root": "01_KERNEL",
+    "path": "Squires\\open_notebook",
+    "cells": [
+      "config.py",
+      "exceptions.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_DATABASE": {
+    "root": "01_KERNEL",
+    "path": "Squires\\open_notebook\\database",
+    "cells": [
+      "async_migrate.py",
+      "migrate.py",
+      "repository.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_DOMAIN": {
+    "root": "01_KERNEL",
+    "path": "Squires\\open_notebook\\domain",
+    "cells": [
+      "base.py",
+      "content_settings.py",
+      "models.py",
+      "notebook.py",
+      "podcast.py",
+      "transformation.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_GRAPHS": {
+    "root": "01_KERNEL",
+    "path": "Squires\\open_notebook\\graphs",
+    "cells": [
+      "ask.py",
+      "chat.py",
+      "prompt.py",
+      "source.py",
+      "source_chat.py",
+      "tools.py",
+      "transformation.py",
+      "utils.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_PLUGINS": {
+    "root": "01_KERNEL",
+    "path": "Squires\\open_notebook\\plugins",
+    "cells": [
+      "podcasts.py"
+    ]
+  },
+  "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_UTILS": {
+    "root": "01_KERNEL",
+    "path": "Squires\\open_notebook\\utils",
+    "cells": [
+      "context_builder.py",
+      "README.md",
+      "text_utils.py",
+      "token_utils.py",
+      "version_utils.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_STORAGE": {
+    "root": "01_KERNEL",
+    "path": "storage",
+    "cells": [
+      "exp_ledger.py",
+      "sync_protocol.py",
+      "__init__.py"
+    ]
+  },
+  "01_KERNEL_SWARMS": {
+    "root": "01_KERNEL",
+    "path": "swarms",
+    "cells": [
+      "atomic_pattern.py",
+      "local_intelligence_swarm.py",
+      "research_swarm.py",
+      "scout_swarm_prime.py",
+      "sit_loop.py",
+      "vision_swarm.py",
+      "voice_swarm.py"
+    ]
+  },
+  "01_KERNEL_SWARMS_PERPLEXITY": {
+    "root": "01_KERNEL",
+    "path": "swarms\\perplexity",
+    "cells": [
+      "scout_sonar.py"
+    ]
+  },
+  "01_KERNEL_TESTS": {
+    "root": "01_KERNEL",
+    "path": "tests",
+    "cells": [
+      "test_api.py",
+      "test_beaver.py",
+      "test_clawdbot_bridge.py",
+      "test_extension_bridge.py",
+      "test_hybrid_routing.py",
+      "test_iron_gate_flow.py",
+      "test_phantom_handoff.py"
+    ]
+  },
+  "01_KERNEL_TOOLS": {
+    "root": "01_KERNEL",
+    "path": "tools",
+    "cells": [
+      "analytics_engine.py",
+      "antigravity_safe.py",
+      "conductor.py",
+      "ingest_dropzone.py",
+      "ledger_commit.py",
+      "morgana_logger.py",
+      "prod_validator.py",
+      "status_reporter.py",
+      "verification_matrix.py"
+    ]
+  },
+  "01_KERNEL_TRAIN": {
+    "root": "01_KERNEL",
+    "path": "train",
+    "cells": [
+      "prep_data.py"
+    ]
+  },
+  "01_KERNEL_WORKFLOWS": {
+    "root": "01_KERNEL",
+    "path": "workflows",
+    "cells": [
+      "validation_workflow.json"
+    ]
+  },
+  "src_CORE": {
+    "root": "src",
+    "path": ".",
+    "cells": [
+      "__init__.py"
+    ]
+  },
+  "SRC_CAMELOT_CLI_CORE": {
+    "root": "src",
+    "path": "camelot_cli\\core",
+    "cells": [
+      "handlers.py",
+      "parser.py"
+    ]
+  },
+  "SRC_CONNECTIVITY": {
+    "root": "src",
+    "path": "connectivity",
+    "cells": [
+      "saltare.py"
+    ]
+  },
+  "SRC_ENGINES_INTERFACE": {
+    "root": "src",
+    "path": "engines\\interface",
+    "cells": [
+      "aether.py",
+      "antigravity.py",
+      "aurora.py",
+      "genesis.py",
+      "lyricus.py"
+    ]
+  },
+  "SRC_ENGINES_LOGIC": {
+    "root": "src",
+    "path": "engines\\logic",
+    "cells": [
+      "apee.py",
+      "prometheus.py",
+      "videneptus.py"
+    ]
+  },
+  "SRC_ENGINES_MEMORY": {
+    "root": "src",
+    "path": "engines\\memory",
+    "cells": [
+      "helix.py",
+      "ouroboros.py",
+      "veritas.py"
+    ]
+  },
+  "SRC_ENGINES_RENDERING": {
+    "root": "src",
+    "path": "engines\\rendering",
+    "cells": [
+      "prism.py"
+    ]
+  },
+  "SRC_KERNEL": {
+    "root": "src",
+    "path": "kernel",
+    "cells": [
+      "router.py"
+    ]
+  },
+  "SRC_KNIGHTS": {
+    "root": "src",
+    "path": "knights",
+    "cells": [
+      "__init__.py"
+    ]
+  },
+  "SRC_KNIGHTS_BYTEBOT": {
+    "root": "src",
+    "path": "knights\\bytebot",
+    "cells": [
+      "bytebot_knight.py",
+      "__init__.py"
+    ]
+  },
+  "SRC_KNIGHTS_BYTEBOT_COMPONENTS_BYTEBOT-AGENT": {
+    "root": "src",
+    "path": "knights\\bytebot\\components\\bytebot-agent",
+    "cells": [
+      "package.json"
+    ]
+  },
+  "SRC_KNIGHTS_BYTEBOT_COMPONENTS_BYTEBOT-AGENT-CC": {
+    "root": "src",
+    "path": "knights\\bytebot\\components\\bytebot-agent-cc",
+    "cells": [
+      "package.json"
+    ]
+  },
+  "SRC_KNIGHTS_BYTEBOT_COMPONENTS_BYTEBOTD": {
+    "root": "src",
+    "path": "knights\\bytebot\\components\\bytebotd",
+    "cells": [
+      "package.json"
+    ]
+  },
+  "SRC_SWARM": {
+    "root": "src",
+    "path": "swarm",
+    "cells": [
+      "README.md"
+    ]
+  },
+  "SRC_TOOLS": {
+    "root": "src",
+    "path": "tools",
+    "cells": [
+      "antigravity.py",
+      "context_optimizer.py",
+      "rotel.py",
+      "__init__.py"
+    ]
+  },
+  "SRC_TOOLS_ANTIGRAVITY_CORE_PYTHON": {
+    "root": "src",
+    "path": "tools\\antigravity_core\\python",
+    "cells": [
+      "api.py",
+      "config_loader.py",
+      "main.py",
+      "schemas.py",
+      "squire_ghost.py"
+    ]
+  },
+  "SRC_UKG": {
+    "root": "src",
+    "path": "ukg",
+    "cells": [
+      "ukg.py"
+    ]
+  },
+  "APPS_ANYA-LYTE": {
+    "root": "apps",
+    "path": "anya-lyte",
+    "cells": [
+      "package.json"
+    ]
+  },
+  "DOCS_GUIDES": {
+    "root": "docs",
+    "path": "GUIDES",
+    "cells": [
+      "aether_saltare_integration.md",
+      "APEE_v6.5_ENHANCEMENT.md",
+      "cribo_bundler.md",
+      "LUKAS_Ω_EDGE_BOOTSTRAP_v2.0.nkg"
+    ]
+  },
+  "RESEARCH": {
+    "root": "docs",
+    "path": "RESEARCH",
+    "cells": [
+      "KINETIC_RESEARCH_MEMO_v1.0.md"
+    ]
+  },
+  "VAULT": {
+    "root": "03_VAULT",
+    "path": "",
+    "cells": [
+      "ZERO_TRUST_VAULT.md",
+      "vault_manager.py",
+      "ollama_client.py"
+    ]
+  },
+  "02_FORGE_TITAN_MAESTRO": {
+    "root": "02_FORGE",
+    "path": "assimilated\\titan_swarm_v2\\Maestro",
+    "cells": [
+      "README.md",
+      "package.json",
+      "ARCHITECTURE.md",
+      "CONSTITUTION.md",
+      "SYMPHONY_REGISTRY.md"
+    ]
+  },
+  "02_FORGE_TITAN_HAYSTACK": {
+    "root": "02_FORGE",
+    "path": "assimilated\\titan_swarm_v2\\haystack",
+    "cells": [
+      "README.md",
+      "pyproject.toml",
+      "CONTRIBUTING.md"
+    ]
+  },
+  "02_FORGE_TITAN_VM0": {
+    "root": "02_FORGE",
+    "path": "assimilated\\titan_swarm_v2\\vm0",
+    "cells": [
+      "README.md",
+      "CLAUDE.md"
+    ]
+  },
+  "02_FORGE_TITAN_LEAKS": {
+    "root": "02_FORGE",
+    "path": "assimilated\\titan_swarm_v2\\system_prompts_leaks",
+    "cells": [
+      "readme.md",
+      "claude.txt"
+    ]
+  },
+  "03_VAULT_TITAN_MAPPING": {
+    "root": "03_VAULT",
+    "path": "KNOWLEDGE\\TITAN_SWARM",
+    "cells": [
+      "ASSIMILATION_MAPPING.md"
+    ]
+  }
+}

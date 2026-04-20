@@ -1,0 +1,53 @@
+{
+  "integration_meta": {
+    "timestamp": "2026-02-06T00:00:00Z",
+    "sovereign": "Camelot Apex",
+    "status": "INTRICATED"
+  },
+  "layer_mappings": {
+    "L1_SUBSTRATE": {
+      "extension": "uv-mcp",
+      "role": "Substrate Hygiene",
+      "binary": "uv",
+      "integration": "pyproject.toml lifecycle",
+      "impact": "10-100x dependency resolution speed"
+    },
+    "L2_KINETIC": {
+      "extension": "rust-agentic-skills",
+      "role": "Kinetic Execution",
+      "binary": "cribo",
+      "integration": "FFI bindings in Lukas",
+      "impact": "+300% execution velocity"
+    },
+    "L3_NEURAL": {
+      "extension": "huggingface-skills",
+      "role": "Model Operations",
+      "integration": "Merlin Omega Routing",
+      "impact": "Automated training/deployment pipelines"
+    },
+    "L4_SEMANTIC": {
+      "extension": "conductor, archon",
+      "role": "Semantic Truth",
+      "integration": "UKG (Universal Knowledge Glyph)",
+      "impact": "Structured project tracking & knowledge persistence"
+    },
+    "L5_AGENTIC": {
+      "extension": "gemini-kit",
+      "role": "Swarm Intelligence",
+      "integration": "Paladin Swarm Controller",
+      "impact": "Specialized role delegation (Planner/Coder/Reviewer)"
+    },
+    "L6_GOVERNANCE": {
+      "extension": "gemini-cli-security",
+      "role": "Titanium Laws Enforcement",
+      "integration": "Arthur / PROVENANCE_LEDGER.md",
+      "impact": "Automated SAST/DAST & Secret Detection"
+    },
+    "L7_INTERFACE": {
+      "extension": "computer-use, self-command",
+      "role": "Interface Autonomy",
+      "integration": "Anya Action / Nano-Browser",
+      "impact": "Headless browser automation & Self-healing loops"
+    }
+  }
+}

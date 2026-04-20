@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "target": "trivy",
+    "date": "2026-01-27T21:39:01.546645",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Node.js",
+        "Docker",
+        "Python",
+        "Rust"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Jest"
+      ],
+      "test_count": 1
+    },
+    "security": {
+      "vulnerabilities": 8,
+      "critical_findings": [
+        "Potential secret in values.yaml",
+        "Potential secret in config.yml",
+        "Potential secret in secrets.yaml"
+      ]
+    },
+    "documentation": {
+      "grade": "B",
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 66,
+    "grade": "C"
+  }
+}

@@ -1,0 +1,16 @@
+[cribo]
+version = "1.0.0"
+mode = "kinetic"
+
+[bundler]
+output_dir = "dist"
+exclude = ["__pycache__", ".venv", ".git", "node_modules"]
+compress_json = true
+
+[deployment]
+target = "edge"
+enforce_antigravity = true
+
+[knights]
+default = "sir_forge"
+allowed = ["merlin_omega", "lukas_edge", "anya_omega", "morgana_omega"]

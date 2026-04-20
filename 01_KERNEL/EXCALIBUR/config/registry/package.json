@@ -1,0 +1,45 @@
+{
+  "name": "sovereign-ide",
+  "version": "1.0.7",
+  "description": "Sovereign IDE - Camelot Apex v107.0 [Kinetic Radiant]",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "test": "vitest",
+    "lint": "eslint src/**",
+    "format": "prettier --write src/**"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "ide",
+    "typescript"
+  ],
+  "author": "Invisioned Marketing Inc.",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "dependencies": {
+    "@genkit-ai/googleai": "^0.5.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "ink": "^4.4.1",
+    "react": "^18.2.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "eslint": "^8.56.0",
+    "prettier": "^3.2.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.1"
+  }
+}

@@ -1,0 +1,17 @@
+# Ω_DEFENSE_GRID_v2.0 Configuration
+# Managed by Sir Sentinel
+
+system:
+  mode: ACTIVE_DEFENSE
+  log_level: INFO
+
+rotel:
+  memory:
+    threshold_mb: 2048
+    check_interval: 10
+  cpu:
+    threshold_percent: 80
+
+watchtower:
+  strict_mode: true
+  auto_ban: false

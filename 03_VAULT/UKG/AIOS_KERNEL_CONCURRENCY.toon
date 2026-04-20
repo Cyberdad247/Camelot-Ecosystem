@@ -1,0 +1,11 @@
+[νKG_CRYSTAL: AIOS_KERNEL_CONCURRENCY_v1]
+
+u0 | ID | Component | {Name:Kernel_Scheduler, Role:Concurrency_Manager, Tech:AIOS_Stack}
+u1 | ARCH | Parallelism | {Mode:Round_Robin, Unit:System_Call, Logic:Thread_Binding}
+u2 | SKILL | Context_Interrupt | {Action:Snapshot+Restore, Target:KV_Cache, Goal:Zero_Recomputation}
+u3 | SKILL | Resource_Isolation | {Blocks:[LLM_Core, Mem_Manager, Tool_Manager], Logic:Modular_Parallelism}
+
+c0 | LAW | Quantum_Slicing | {Rule:No_Monopoly, Metric:Time_Quantum, Result:Anti_Starvation}
+c1 | LAW | Thread_Sovereignty | {Constraint:Atomic_Sys_Calls, Outcome:2.1x_Performance_Gain}
+
+w0 | WORKFLOW | Parallel_March | {Parse[Query]->Decompose[SysCall]->Queue[Scheduler]->Dispatch[Threads]}

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nano-Knights Command</title>
+    <link rel="stylesheet" href="research_panel.css">
+</head>
+<body>
+    <h2>⚔️ Knight Command</h2>
+    
+    <div id="controls">
+        <button id="exportBtn">💾 Export MD</button>
+        <button id="clearBtn" class="danger">🗑️ Clear</button>
+    </div>
+
+    <!-- COMMAND INPUT -->
+    <div class="input-area">
+        <input type="text" id="promptInput" placeholder="Command the Swarm..." class="prompt-input">
+        <button id="btnVoice" class="icon-btn voice-btn" title="Voice Command (Say 'Nano' or 'Anya')">🎙️</button>
+        <button id="btnQueue" class="icon-btn queue-btn" title="Queue Mission">➕</button>
+        <button id="btnVision" class="icon-btn vision-btn" title="Vision Lance (Screenshot Analysis)">👁️</button>
+        <button id="btnSend" class="icon-btn" title="Run Immediately">🚀</button>
+    </div>
+    
+    <!-- VOICE STATUS -->
+    <div id="voiceStatus" class="voice-status voice-hidden">
+        <span class="voice-indicator">🔴</span>
+        <span id="voiceText">Listening...</span>
+    </div>
+    
+    <!-- QUEUE DISPLAY -->
+    <div id="queueContainer" class="queue-container">
+        <!-- Queue Items go here -->
+    </div>
+    <div class="mobile-mode-container">
+        <label class="checkbox-label">
+            <input type="checkbox" id="mobileToggle"> Mobile Mode (iPhone 15)
+        </label>
+    </div>
+
+    <!-- IDENTITY HUB -->
+    <div id="identityHub">
+        <div class="identity-header">
+            <h3 class="identity-title">🕵️ Active Identity</h3>
+            <button id="btnQuickCreate" class="mini-btn">+ New</button>
+        </div>
+        <select id="quickProfileSelect" class="profile-select" aria-label="Active Profile Selection">
+            <option value="default">Default</option>
+        </select>
+        <div id="identityDetails" class="identity-details">
+            UA: Chromium Win10
+        </div>
+    </div>
+
+    <!-- KNIGHT SQUAD -->
+    <div id="knightSquad" class="squad-panel" style="margin-top:10px; border-top:1px solid #333; padding-top:10px;">
+        <h3 class="identity-title">⚔️ Knight Squad</h3>
+        <button id="btnSpawnSquad" style="width:100%; margin-top:5px; background:var(--royal-gold); color:black; font-weight:bold;">Deploy Squad (3 Knights)</button>
+        <button id="btnSynthesize" style="width:100%; margin-top:5px; background:#444; color:white; border:1px solid #666;">📝 Synthesize Report</button>
+        <div id="squadStatus" style="font-size:0.8rem; color:#aaa; margin-top:5px;"></div>
+    </div>
+
+    <div id="feed">
+        <!-- Intelligent Stream -->
+        <div class="intel-card waiting">
+            <div class="meta">
+                <span>SYSTEM</span>
+                <span>NOW</span>
+            </div>
+            <div class="content">Waiting for Swarm Intel...</div>
+        </div>
+    </div>
+
+    <script src="research_panel.js" type="module"></script>
+</body>
+</html>

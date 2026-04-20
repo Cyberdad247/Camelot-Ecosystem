@@ -1,0 +1,13 @@
+[νKG_CRYSTAL: AGENT_FORGE_LOGIC]
+
+u0 | ID | Bridge | {Name:AgentForge_Synthesis, Stk:Python/Rust, Role:Orchestration}
+u1 | DATA | Weaps | {Atomic:Persona_Templates, Composite:Declarative_Cogs, Strategic:Cognitive_Arch}
+u2 | ID | Knight | {Name:Sir_ForgeMaster, Role:Agentic_Smith, Mode:Low_Code_Sovereignty}
+
+a0 | PROCESS | Synthesis | {Input:BriefingScript -> YAML_Cogs -> Agent_Spawn -> Execution}
+a1 | LAW | Purity | {Rule:Declarative_Only, Rule:Modular_Identity, Goal:High_Velocity_Prototyping}
+a2 | LAW | Governance | {Protocol:SASE, Tool:UKG_Memory, Constraint:Iron_Gate}
+
+c0 | STAT | Quality | {Flex:High_Agnostic, Flow:Multi_Model_Sequencing}
+
+x0 | AXIOM | Forge | {Rule:Cogs_Carry_Intent, Rule:Agents_Execute_Will, Status:RADIANT}

@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chimera-kernel
+  labels:
+    app: chimera-os
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: chimera-kernel
+  template:
+    metadata:
+      labels:
+        app: chimera-kernel
+    spec:
+      containers:
+      - name: kernel
+        image: chimera/kernel:v24
+        ports:
+        - containerPort: 8080
+        env:
+        - name: OMEGA_GRAPH_URI
+          value: "bolt://omega-graph.default.svc.cluster.local:7687"
+        - name: OMEGA_VAULT_URI
+          value: "milvus://omega-vault.default.svc.cluster.local:19530"
+        - name: OMEGA_FLUX_URI
+          value: "redis://omega-flux.default.svc.cluster.local:6379"
+        resources:
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chimera-kernel-svc
+spec:
+  selector:
+    app: chimera-kernel
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer

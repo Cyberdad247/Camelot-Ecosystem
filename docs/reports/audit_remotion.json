@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "target": "remotion",
+    "date": "2026-01-27T21:37:47.547900",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Rust",
+        "Next.js",
+        "Python",
+        "Docker",
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 100,
+      "style": "Foundational",
+      "configs": [
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc",
+        ".prettierrc"
+      ]
+    },
+    "testing": {
+      "frameworks": [
+        "Jest",
+        "Pytest"
+      ],
+      "test_count": 486
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "C",
+      "missing": [
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 86,
+    "grade": "A"
+  }
+}

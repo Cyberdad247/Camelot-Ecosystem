@@ -1,0 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "custom_css": [
+        ".contact {background: #faf8f5 !important; padding: 3rem !important; border-radius: 16px !important; margin: 0 auto !important;}",
+        ".contact input,.contact textarea {border: 2px solid #e2ddd7 !important; border-radius: 8px !important;}",
+        ".contact *:focus {border-color: #d4a373 !important; box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.2) !important;}",
+        ".contact .button {background: #d4a373 !important; border-radius: 8px !important; width: 100% !important;}"
+      ],
+      "settings": {
+        "padding_top": 20,
+        "padding_bottom": 0
+      }
+    },
+    "form": {
+      "type": "contact-form",
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "color_scheme": "background-2",
+        "padding_top": 60,
+        "padding_bottom": 100
+      }
+    },
+    "custom_liquid_U4WDPw": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "custom_css": [],
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<style>\n  .custom-contact { background: #FAF8F5; padding: 3rem; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,.05); max-width: 600px; margin: 0 auto; font-family: inherit; }\n  .custom-contact h2 { color: #2C2825; margin-bottom: 0.5rem; font-weight: 700; }\n  .custom-contact p { color: #6B655F; margin-bottom: 2rem; line-height: 1.5; }\n  .custom-contact .field { margin-bottom: 1.5rem; text-align: left; }\n  .custom-contact label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: #2C2825; font-size: 0.95rem; }\n  .custom-contact input, .custom-contact textarea { box-sizing: border-box; width: 100%; padding: 1rem; border: 1.5px solid #E2DDD7; border-radius: 8px; font-family: inherit; background: #fff; }\n  .custom-contact input:focus, .custom-contact textarea:focus { outline: none; border-color: #D4A373; box-shadow: 0 0 0 4px rgba(212,163,115,.15); }\n  .custom-contact button { background: #D4A373; color: #fff; padding: 1rem; border: none; border-radius: 8px; width: 100%; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; }\n  .custom-contact button:hover { background: #C28E5E; transform: translateY(-2px); box-shadow: 0 8px 15px rgba(212,163,115,.25); }\n</style>\n\n<div class=\"custom-contact\">\n  <h2>Let's Start a Conversation</h2>\n  <p>Whether you have a question, an idea, or just want to say hello, we're here to listen.</p>\n  \n  {% form 'contact' %}\n    {% if form.posted_successfully? %}\n      <p style=\"color: #6B8E6B; background: #eef4ee; padding: 1rem; border-radius: 8px; font-weight: 500;\">\n        Thanks for reaching out! We'll be in touch soon.\n      </p>\n    {% elsif form.errors %}\n      <p style=\"color: #C96A6A; background: #fdf0f0; padding: 1rem; border-radius: 8px; font-weight: 500;\">\n        {{ form.errors | default_errors }}\n      </p>\n    {% endif %}\n\n    <div class=\"field\">\n      <label for=\"Contact-Name\">Your Name</label>\n      <input type=\"text\" id=\"Contact-Name\" name=\"contact[name]\" placeholder=\"e.g., Jane Doe\" required>\n    </div>\n\n    <div class=\"field\">\n      <label for=\"Contact-Email\">Email Address</label>\n      <input type=\"email\" id=\"Contact-Email\" name=\"contact[email]\" placeholder=\"hello@example.com\" required>\n    </div>\n\n    <div class=\"field\">\n      <label for=\"Contact-Body\">How can we help?</label>\n      <textarea id=\"Contact-Body\" name=\"contact[body]\" rows=\"5\" placeholder=\"Share your thoughts...\" required></textarea>\n    </div>\n\n    <button type=\"submit\">Send Message</button>\n  {% endform %}\n</div>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "custom_liquid_8nEthk": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"shop-local-section\">\n  <div class=\"page-width\">\n    <h2 class=\"shop-local-heading\">Shop Local: Where to Find Us</h2>\n    \n    <div class=\"shop-local-grid\">\n      <!-- Location 1 -->\n      <div class=\"shop-local-card\">\n        <h3>Imart</h3>\n        <p class=\"product-type\">Incense</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/4901+Fleet+Ave.+Cleveland,+OH+44105\" target=\"_blank\">\n            4901 Fleet Ave.<br>Cleveland, OH 44105\n          </a>\n        </p>\n      </div>\n <!-- Location 2 -->\n      <div class=\"shop-local-card\">\n        <h3>Elevate Barbershop</h3>\n        <p class=\"product-type\">Beard Oil</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/3182+W.+25th+Street+Cleveland,+OH+44109\" target=\"_blank\">\n            3182 W. 25th Street<br>Cleveland, OH 44109\n          </a>\n        </p>\n        <p class=\"store-link\">\n          <a href=\"https://www.elevatebarbershopcleveland.com/\" target=\"_blank\">Visit Website</a>\n        </p>\n      </div>\n\n      <!-- Location 3 -->\n      <div class=\"shop-local-card\">\n        <h3>Tracy's Trinkets & More</h3>\n        <p class=\"product-type\">Hand Made Products</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/346+Great+Northern+Mall+North+Olmsted,+OH+44070\" target=\"_blank\">\n            346 Great Northern Mall<br>North Olmsted, OH 44070\n          </a>\n        </p>\n        <p class=\"store-link\">\n          <a href=\"https://tracystrinketsandtreasures.com/\" target=\"_blank\">Visit Website</a>\n        </p>\n      </div>\n\n      <!-- Location 4 -->\n      <div class=\"shop-local-card\">\n        <h3>Benjamin Beetle</h3>\n        <p class=\"product-type\">Incense</p>\n        <p class=\"address\">\n          106 N. Main Street<br>Butler, PA 16001\n        </p>\n        <p class=\"store-link\">\n          <a href=\"https://www.facebook.com/BenjaminBeetle\" target=\"_blank\">Visit Facebook Page</a>\n        </p>\n      </div>\n\n      <!-- Location 5 -->\n      <div class=\"shop-local-card\">\n        <h3>VA Hospital (Vendor Section)</h3>\n        <p class=\"product-type\">Handmade Products</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/10701+East+Blvd.+Cleveland,+OH+44106\" target=\"_blank\">\n            10701 East Blvd.<br>Cleveland, OH 44106\n          </a>\n        </p>\n        <p class=\"note\">\n          Find us every 2 wks of each month until Oct. 2026. Please call for dates.\n        </p>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n.shop-local-section {\n  background-color: #ffffff;\n  padding: 60px 0;\n}\n\n.page-width {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 20px;\n}\n\n.shop-local-heading {\n  font-family: Georgia, 'Times New Roman', Times, serif;\n  font-size: 24px;\n  font-weight: 600;\n  color: #1f2937;\n  margin: 0 0 40px 0;\n  text-align: center;\n}\n\n.shop-local-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 24px;\n}\n\n.shop-local-card {\n  background-color: #f9fafb;\n  border: 1px solid #e5e7eb;\n  padding: 20px;\n}\n\n.shop-local-card h3 {\n  font-weight: 700;\n  font-size: 18px;\n  color: #1f2937;\n  margin: 0 0 4px 0;\n}\n\n.product-type {\n  color: #db2777;\n  font-weight: 600;\n  margin: 0 0 8px 0;\n  font-size: 15px;\n}\n\n.address {\n  color: #4b5563;\n  font-size: 14px;\n  line-height: 1.5;\n  margin: 0 0 8px 0;\n}\n\n.address a {\n  color: #1155CC;\n  text-decoration: none;\n}\n\n.store-link a {\n  color: #db2777;\n  text-decoration: underline;\n  font-size: 14px;\n  font-weight: 500;\n}\n\n.note {\n  color: #6b7280;\n  font-size: 12px;\n  line-height: 1.5;\n  margin: 8px 0 0 0;\n}\n\n@media (max-width: 749px) {\n  .shop-local-grid {\n    grid-template-columns: 1fr;\n  }\n}\n</style>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "form",
+    "custom_liquid_U4WDPw",
+    "custom_liquid_8nEthk"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "target": "unsloth",
+    "date": "2026-01-27T21:36:27.448505",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Service/App",
+      "stack": [
+        "Python"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest"
+      ],
+      "test_count": 31
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "B",
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 83,
+    "grade": "A"
+  }
+}

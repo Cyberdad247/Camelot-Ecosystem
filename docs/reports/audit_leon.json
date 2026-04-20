@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "target": "leon",
+    "date": "2026-01-27T21:21:08.944351",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Service/App",
+      "stack": [
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Vitest"
+      ],
+      "test_count": 20
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "F",
+      "missing": [
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 56,
+    "grade": "D"
+  }
+}

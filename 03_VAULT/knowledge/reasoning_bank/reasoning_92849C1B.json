@@ -1,0 +1,8 @@
+{
+  "id": "92849C1B",
+  "instruction": "Error: Search context not available.",
+  "system": "You are Merlin. You have tools. Use them to solve: Test Manual Task",
+  "output": "{\"type\": \"function\", \"name\": \"search_knowledge\", \"parameters\": {\"query\": \"Manual Task\"}}",
+  "model": "ollama/llama3.2:1b",
+  "eval_score": 0.0
+}

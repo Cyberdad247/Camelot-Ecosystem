@@ -1,0 +1,64 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "Agent",
+      "attributes": {
+        "name": "Sir Lukas",
+        "role": "Engineer",
+        "skills": [
+          "Python",
+          "Backend",
+          "API"
+        ]
+      },
+      "trust_score": 0.95,
+      "provenance": {
+        "created_by": "test_suite",
+        "created_at": "2026-02-09T19:53:24.279795",
+        "hash": "1f9c2942db8c76f47e6b857158deaad1f839fb4dc5a048b1fff54eb319482ffd",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T19:53:24.281333",
+      "id": "agent_test_lukas"
+    },
+    {
+      "id": "skill_python"
+    },
+    {
+      "id": "cartridge_engineering"
+    },
+    {
+      "type": "Fact",
+      "attributes": {
+        "statement": "FastAPI is a modern Python web framework for building APIs",
+        "domain": "backend_engineering"
+      },
+      "trust_score": 1.0,
+      "provenance": {
+        "created_by": "test_suite",
+        "created_at": "2026-02-09T19:53:27.434732",
+        "hash": "1a7c7dde23499455e418571208b3aeb9323f803e1e46ef9ac81d3260ee85372e",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T19:53:27.435693",
+      "id": "fact_001"
+    }
+  ],
+  "edges": [
+    {
+      "relationship": "expert_in",
+      "weight": 1.0,
+      "source": "agent_test_lukas",
+      "target": "skill_python"
+    },
+    {
+      "relationship": "belongs_to",
+      "weight": 1.0,
+      "source": "agent_test_lukas",
+      "target": "cartridge_engineering"
+    }
+  ]
+}

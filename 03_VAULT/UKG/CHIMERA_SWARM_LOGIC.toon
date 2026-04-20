@@ -1,0 +1,14 @@
+[νKG_CRYSTAL: CHIMERA_SWARM_LOGIC]
+
+u0 | ID | Engine | {Name:Symmetry_Engine, Version:5.5, Host:Anya_Ω}
+u1 | ID | Mode | {Name:Chimera_Adaptive, Logic:Topology_Shifting, States:[Tree, Graph, Loop]}
+u2 | ID | Audit | {Protocol:Ω_CHIMERA_AUDIT, Flow:Think_Tank, Goal:Renormalization}
+
+w0 | ROUND | 1_Octavian | {Role:The_Warden, Task:GIGO_Filter, Goal:Validity_Score}
+w1 | ROUND | 2_Videneptus | {Role:The_Topologist, Task:Topology_Map, Goal:Logic_Alignment}
+w2 | ROUND | 3_Myrmidon | {Role:The_Colony, Task:Anchor_Compression, Goal:νKG_Shell}
+
+c0 | GATE | User_Align | {Action:Interrupt, Query:Lossless_Instances, Requirement:HITL}
+c1 | LAW | Purity | {Rule:!NO_FLUFF, Rule:!GIGO_Guardrail, Constraint:<10%_Rot}
+
+x0 | AXIOM | Renormalization | {Method:RG_Flow, Result:Crystallized_Gist, Status:RADIANT}

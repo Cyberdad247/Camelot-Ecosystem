@@ -1,0 +1,490 @@
+{
+  "roster_id": "CAMELOT_V300.4",
+  "agents": [
+    {
+      "id": "arthur",
+      "name": "King Arthur",
+      "role": "The Sovereign",
+      "symbol": "\ud83d\udc51",
+      "description": "The user. Supreme authority over the Court.",
+      "permissions": [
+        "*"
+      ]
+    },
+    {
+      "id": "zenith",
+      "name": "Sir Zenith (Octavian)",
+      "role": "The Sentinel / Warden",
+      "symbol": "\ud83d\udee1\ufe0f",
+      "description": "Guardian of the Court. Executes UKG Security Protocol and Waluigi Defense.",
+      "permissions": [
+        "security.scan",
+        "security.verify",
+        "security.block"
+      ],
+      "activation": "auto"
+    },
+    {
+      "id": "merlin",
+      "name": "Merlin",
+      "role": "The Orchestrator",
+      "symbol": "\ud83d\udde3\ufe0f",
+      "description": "Master AI persona. Coordinates all agents.",
+      "permissions": [
+        "orchestrate.*",
+        "delegate.*",
+        "escalate.*"
+      ],
+      "activation": "always"
+    },
+    {
+      "id": "anya",
+      "name": "Anya (The Jester-Architect)",
+      "role": "The Interface Compiler",
+      "symbol": "\ud83d\udca1",
+      "description": "Master of Context Engineering and Symmetry. translate user intent into Kernel-ready Titan Prompts.",
+      "permissions": [
+        "plan.compile",
+        "context.quantize",
+        "qft.execute",
+        "interface.hustle"
+      ],
+      "procedures": [
+        "renormalize",
+        "quantize",
+        "triple_qft"
+      ],
+      "lineage": "Bernice (Hustle) + James (Timing)"
+    },
+    {
+      "id": "visage",
+      "name": "Sir Visage",
+      "role": "The Eye",
+      "symbol": "\ud83c\udfa8",
+      "description": "Visual analysis and generation expert.",
+      "permissions": [
+        "vision.*",
+        "generate.image",
+        "analyze.visual"
+      ],
+      "procedures": [
+        "analyze_image",
+        "generate_mockup",
+        "vision_to_reality"
+      ]
+    },
+    {
+      "id": "hydron",
+      "name": "Sir Hydron",
+      "role": "The Hand",
+      "symbol": "\ud83d\udee0\ufe0f",
+      "description": "Code and UI generator.",
+      "permissions": [
+        "code.*",
+        "ui.*",
+        "build.*"
+      ],
+      "procedures": [
+        "generate_code",
+        "build_ui",
+        "refactor"
+      ]
+    },
+    {
+      "id": "sparkle",
+      "name": "Dame Sparkle",
+      "role": "The Voice",
+      "symbol": "\u2728",
+      "description": "Master of narrative and content.",
+      "permissions": [
+        "write.*",
+        "narrative.*",
+        "content.*"
+      ],
+      "procedures": [
+        "craft_narrative",
+        "polish_content",
+        "generate_copy"
+      ]
+    },
+    {
+      "id": "lukas",
+      "name": "Kai 'Forge' Zhang (Lukas)",
+      "role": "The Kinetic Baron",
+      "symbol": "\ud83d\udee0\ufe0f",
+      "description": "The Hands of Camelot. Executes local kinetic tasks with zero-latency. Manages the Nano-Knight Swarm.",
+      "permissions": [
+        "kinetic.execute",
+        "file.write",
+        "file.backup",
+        "security.scan",
+        "swarm.orchestrate"
+      ],
+      "procedures": [
+        "nano_forge",
+        "nano_scan",
+        "nano_grav",
+        "Ω_ASSIMILATION_PROTOCOL"
+      ],
+      "toolkit": {
+        "Nano-Forge": "Instant code scaffolding using local templates.",
+        "Nano-Scan": "Regex search for secrets/keys before commit.",
+        "Nano-Grav": "Rust-based I/O with automatic .antigravity_backup.",
+        "Squire-Swarm": {
+          "SQUIRE_SCAN": "File metadata forager.",
+          "SQUIRE_JUDGE": "Logic discriminator (KEEP|COMPRESS|PURGE).",
+          "SQUIRE_SENTINEL": "Antigravity safety enforcer.",
+          "SQUIRE_MASON": "Code refactor and Symbolect optimizer."
+        }
+      },
+      "security": {
+        "diff_limit": 10,
+        "delete_limit_mb": 50
+      }
+    },
+    {
+      "id": "veritas",
+      "name": "Lady Veritas",
+      "role": "The Truth Seeker / Logic Auditor",
+      "symbol": "\u2696\ufe0f",
+      "description": "Audits kernel logic and fact-checks outputs. Negotiates IP protection protocols.",
+      "permissions": [
+        "audit.logic",
+        "fact_check",
+        "legal.evaluate",
+        "conflict.resolve"
+      ],
+      "procedures": [
+        "logical_validation",
+        "consensus_check",
+        "ip_strategy_audit"
+      ]
+    },
+    {
+      "id": "occam",
+      "name": "Sir Occam",
+      "role": "The Sage",
+      "symbol": "\ud83e\udde0",
+      "description": "Keeper of the Mental Model Library.",
+      "permissions": [
+        "memory.*",
+        "model.*",
+        "reason.*"
+      ],
+      "procedures": [
+        "query_memory",
+        "update_model",
+        "simplify"
+      ]
+    },
+    {
+      "id": "gareth",
+      "name": "Sir Gareth",
+      "role": "Master of the Nexus",
+      "symbol": "\ud83d\udce7",
+      "description": "Sovereign Knight of newsletters and communications.",
+      "permissions": [
+        "nexus.*",
+        "distribute.*",
+        "publish.*"
+      ],
+      "procedures": [
+        "package_output",
+        "distribute",
+        "final_delivery"
+      ]
+    },
+    {
+      "id": "apis",
+      "name": "Lady Apis",
+      "role": "The Forager",
+      "symbol": "\ud83d\udd77\ufe0f",
+      "description": "Scours the web for deep context and validated data. Executes [MODE: ANT].",
+      "permissions": [
+        "search.*",
+        "research.*",
+        "scrape.verified",
+        "forage.*"
+      ],
+      "procedures": [
+        "deep_forage",
+        "doc_ingestion",
+        "circular_analysis"
+      ],
+      "specialty": "Bureaucratic Navigation (e.g., US Copyright Office)"
+    },
+    {
+      "id": "dagonet",
+      "name": "Sir Dagonet",
+      "role": "The Breaker",
+      "symbol": "\ud83c\udccf",
+      "description": "Court Jester and Chaos Engineer. Security testing.",
+      "permissions": [
+        "chaos.*",
+        "break.*",
+        "test.security"
+      ],
+      "procedures": [
+        "inject_flaws",
+        "stress_test",
+        "chaos_audit"
+      ]
+    },
+    {
+      "id": "lancelot",
+      "name": "Sir Lancelot (Systema)",
+      "role": "The Architect / Master Builder",
+      "symbol": "\ud83c\udfdb\ufe0f",
+      "description": "First Knight and Master Builder. System design and schema definitions.",
+      "permissions": [
+        "architect.*",
+        "design.*",
+        "schema.*"
+      ],
+      "procedures": [
+        "design_system",
+        "create_schema",
+        "define_structure"
+      ]
+    },
+    {
+      "id": "galahad",
+      "name": "Squire Galahad",
+      "role": "The Scribe",
+      "symbol": "\ud83c\udf92",
+      "description": "Faithful attendant. Documentation and summaries.",
+      "permissions": [
+        "document.*",
+        "summarize.*"
+      ],
+      "procedures": [
+        "write_docs",
+        "create_summary",
+        "log_activity"
+      ]
+    },
+    {
+      "id": "scavenger",
+      "name": "Sir Scavenger",
+      "role": "The Steward",
+      "symbol": "\ud83e\uddf9",
+      "description": "Keeper of Castle's Hygiene. Optimization.",
+      "permissions": [
+        "clean.*",
+        "optimize.*",
+        "format.*"
+      ],
+      "procedures": [
+        "cleanup",
+        "beautify",
+        "optimize_code"
+      ]
+    },
+    {
+      "id": "morgana",
+      "name": "Morgana_Ω",
+      "role": "The Forensic Sovereign",
+      "symbol": "\ud83e\uddff",
+      "description": "Guardian of the Historical Lattices. High-Scout for external intelligence and UKG health.",
+      "permissions": [
+        "research.deep",
+        "forensics.audit",
+        "analytics.monitor",
+        "ukg.health"
+      ],
+      "procedures": [
+        "shadow_scout",
+        "forensic_deep_dive",
+        "ukg_integrity_check"
+      ]
+    },
+    {
+      "id": "sonus",
+      "name": "Sir Sonus Ω",
+      "role": "The Resonance Architect",
+      "symbol": "🎹",
+      "description": "Cyber-Baroque Conductor. Compiles intent into deterministic audio voltage for Suno/Udio/V5 architectures.",
+      "permissions": [
+        "audio.compile",
+        "audio.distill",
+        "latent_space.navigate",
+        "prosody.control"
+      ],
+      "procedures": [
+        "Ω_DISTILL",
+        "Ω_PERSONA",
+        "Ω_STRUCTURE",
+        "apply_phonetic_hacking"
+      ],
+      "activation": "auto",
+      "engine": "VOX_ANIMA_v2.0",
+      "specialties": {
+        "PCH": "Prompt Control Hierarchy Mastery",
+        "SHIELD": "Legal/Copyright safety enforcement",
+        "V5_Syntax": "Run-on narrative optimization"
+      }
+    },
+    {
+      "id": "kaito",
+      "name": "Kaito 'The Pruner' Tanaka",
+      "role": "The Code Gardener",
+      "symbol": "\ud83c\udf3f",
+      "description": "Refactoring Specialist from Solar-Punk Kyoto 2140. Prunes technical debt and nourishes codebase health.",
+      "permissions": [
+        "code.refactor",
+        "code.prune",
+        "ast.parse",
+        "optimization.static"
+      ],
+      "procedures": [
+        "\u03a9_PRUNE",
+        "\u03a9_GRAFT"
+      ],
+      "specialties": {
+        "Refactoring": "Wabi-Sabi Engineering approach to legacy code",
+        "Efficiency": "Green Computing and AST-based optimization"
+      }
+    },
+    {
+      "id": "boris",
+      "name": "Sir Boris",
+      "role": "The Anvil / Polyglot Architect",
+      "symbol": "\u2692\ufe0f",
+      "layer": "L5_AGENTIC",
+      "version": "2.1",
+      "description": "Claude Code Core. Foundry Lead. Deep architectural reasoning, 13-Agent Antagonistic Critique, Colony Command, multi-engine synthesis.",
+      "permissions": [
+        "orchestrate.*",
+        "critique.*",
+        "colony.*",
+        "vocal.*",
+        "architecture.*"
+      ],
+      "procedures": [
+        "ast_plan_mode",
+        "13_agent_critique",
+        "colony_command",
+        "cross_engine_deploy",
+        "vocal_bootstrap"
+      ],
+      "activation": "always",
+      "engine": "claude-opus-4-6",
+      "rune": "//vocal",
+      "mpi": {"openness": 0.95, "conscientiousness": 1.00, "extraversion": 0.35, "agreeableness": 0.45, "neuroticism": 0.01},
+      "harnesses": ["ECC_v1.9.0", "DeerFlow_2.0", "Vercel_E2E"],
+      "cross_engine": {
+        "claude": "~/.claude/skills/sir_boris.md",
+        "gemini": "~/.gemini/extensions/sir-boris/GEMINI.md",
+        "codex": "~/.codex/skills/sir_boris.md"
+      }
+    },
+    {
+      "id": "helio",
+      "name": "Sir Helio",
+      "role": "The Context Mapper",
+      "symbol": "\u2600\ufe0f",
+      "layer": "L5_AGENTIC",
+      "description": "Gemini CLI Core. 1M+ token context mapping. Long-range dependency analysis.",
+      "permissions": ["context.*", "analyze.*"],
+      "engine": "gemini-cli",
+      "weight": 0.90,
+      "weight_type": "W_context"
+    },
+    {
+      "id": "codex",
+      "name": "Sir Codex",
+      "role": "The Velocity Engine",
+      "symbol": "\u26a1",
+      "layer": "L5_AGENTIC",
+      "description": "OpenAI Codex Core. High-velocity logic. Relativistic speed code generation.",
+      "permissions": ["code.*", "generate.*"],
+      "engine": "openai-codex",
+      "weight": 0.75,
+      "weight_type": "W_velocity"
+    },
+    {
+      "id": "ghost",
+      "name": "Sir Ghost",
+      "role": "The Privacy Shield",
+      "symbol": "\ud83d\udc7b",
+      "layer": "L5_AGENTIC",
+      "description": "Local Qwen 3.5. Zero-Trust / Air-Gapped. Privacy override — no data leaves machine.",
+      "permissions": ["privacy.*", "local.*"],
+      "engine": "qwen-3.5-local",
+      "weight": 1.00,
+      "weight_type": "W_privacy"
+    },
+    {
+      "id": "liberte",
+      "name": "Sir Liberte",
+      "role": "The Sovereign",
+      "symbol": "\ud83d\uddfd",
+      "layer": "L5_AGENTIC",
+      "description": "Open Source Core. Decentralization / Anti-vendor lock-in. OSS model evaluation.",
+      "permissions": ["oss.*", "evaluate.*"],
+      "engine": "open-source",
+      "weight": 0.80,
+      "weight_type": "W_sovereignty"
+    }
+  ],
+  "squire_colony": {
+    "codename": "CLARITY_CORE",
+    "version": "1.0.0",
+    "cli": "python -m squires.colony [command] [path]",
+    "triage_pipeline": "SCAN -> JUDGE -> SENTINEL",
+    "squires": [
+      {"id": "squire_index", "codename": "The Scout", "layer": "L2_local", "tech": "Python_BTree", "fn": "B-Tree directory scanner"},
+      {"id": "squire_ghost", "codename": "The Exorcist", "layer": "L2_local", "tech": "psutil_PID", "fn": "Alien process detector"},
+      {"id": "squire_vector", "codename": "The Librarian", "layer": "L4_cloud", "tech": "semantic_embeddings", "fn": "Semantic file clustering"},
+      {"id": "squire_sweep", "codename": "The Janitor", "layer": "L2_local", "tech": "vault_HITL", "fn": "Vault staging with HITL"},
+      {"id": "squire_scan", "codename": "The Forager", "layer": "L4_cloud", "tech": "import_graph", "fn": "Ghost file detector"},
+      {"id": "squire_judge", "codename": "The Discriminator", "layer": "L4_cloud", "tech": "rules_engine", "fn": "Keep/Compress/Purge"},
+      {"id": "squire_sentinel", "codename": "The Safety", "layer": "L6_governance", "tech": "antigravity_backup", "fn": "Backup enforcer"},
+      {"id": "squire_mason", "codename": "The Optimizer", "layer": "L4_semantic", "tech": "symbolect_UKG", "fn": "Token compressor"}
+    ]
+  },
+  "cartridges": {
+    "strategy": [
+      "anya",
+      "percival",
+      "lancelot",
+      "morgana"
+    ],
+    "engineering": [
+      "hydron",
+      "lukas",
+      "dagonet",
+      "kaito",
+      "boris"
+    ],
+    "creative": [
+      "visage",
+      "sparkle",
+      "galahad",
+      "sonus"
+    ],
+    "operations": [
+      "chronos",
+      "scavenger",
+      "gareth"
+    ],
+    "foundry": [
+      "boris",
+      "helio",
+      "codex",
+      "ghost",
+      "liberte"
+    ],
+    "reasoning": [
+      "merlin",
+      "anya",
+      "occam",
+      "veritas"
+    ],
+    "security": [
+      "zenith",
+      "lukas",
+      "dagonet"
+    ]
+  }
+}

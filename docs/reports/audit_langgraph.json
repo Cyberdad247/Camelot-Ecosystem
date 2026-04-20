@@ -1,0 +1,43 @@
+{
+  "meta": {
+    "target": "langgraph",
+    "date": "2026-01-27T21:39:24.585527",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Service/App",
+      "stack": [
+        "Node.js",
+        "Python"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest",
+        "Jest"
+      ],
+      "test_count": 60
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "C",
+      "missing": [
+        "CONTRIBUTING.md",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 76,
+    "grade": "B"
+  }
+}

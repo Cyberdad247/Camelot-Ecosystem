@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "target": "kestra",
+    "date": "2026-01-27T21:31:15.832077",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Docker",
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Vitest"
+      ],
+      "test_count": 5
+    },
+    "security": {
+      "vulnerabilities": 8,
+      "critical_findings": [
+        "Potential secret in docker-compose-ci.yml",
+        "Potential secret in application-maven.yml",
+        "Potential secret in application-test.yml"
+      ]
+    },
+    "documentation": {
+      "grade": "C",
+      "missing": [
+        "CONTRIBUTING.md",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 60,
+    "grade": "C"
+  }
+}

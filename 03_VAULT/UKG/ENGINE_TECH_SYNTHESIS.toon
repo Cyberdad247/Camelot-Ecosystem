@@ -1,0 +1,13 @@
+[νKG_CRYSTAL: ENGINE_TECH_SYNTHESIS]
+
+u0 | ID | AIOS_Sched | {Logic:HTN_Preconditions, Mode:Temporal_Scheduling, Result:Contention_Zero}
+u1 | ID | AgentArmor | {Logic:Dependency_Graphs, Mode:Global_Analysis, Result:Logical_Consistency}
+u2 | ID | LRM_o1 | {Logic:ToT_Framework, Mode:Test_Time_Compute, Result:74%_Accuracy}
+
+a0 | PROCESS | Scheduling | {HTN -> Preconditions -> State_Search -> Execution}
+a1 | PROCESS | Analysis | {PDG -> Component_Mapping -> Vector_Axis -> Taint_Tracking}
+a2 | PROCESS | Reasoning | {ToT -> Backtracking -> Simulation -> Abductive_Synthesis}
+
+c0 | STAT | LRM_Power | {Base:4%_Accuracy, LRM:74%_Accuracy, Method:Reasoning_Loops}
+
+x0 | AXIOM | Structural_Logic | {Rule:Constraint_Management, Goal:Prevent_Rat_Replanning}

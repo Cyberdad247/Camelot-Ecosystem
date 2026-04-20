@@ -1,0 +1,253 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "featured_artists_banner_R3nmBH": {
+      "type": "featured-artists-banner",
+      "settings": {
+        "heading": "Featured Artists",
+        "subheading": "Meet the talented individuals behind Head Artworks"
+      }
+    },
+    "304aa6a1-ba12-4e17-a8d1-668b434a673a": {
+      "type": "collection-list",
+      "blocks": {
+        "template--20126638735679__304aa6a1-ba12-4e17-a8d1-668b434a673a-featured_collection-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "candles"
+          }
+        },
+        "template--20126638735679__304aa6a1-ba12-4e17-a8d1-668b434a673a-featured_collection-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "incense-1"
+          }
+        },
+        "97d27c56-3245-4df7-bbce-2d977cbc4991": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "air-freshner"
+          }
+        },
+        "featured_collection_MAwwbU": {
+          "type": "featured_collection",
+          "disabled": true,
+          "settings": {
+            "collection": "subscriptions"
+          }
+        },
+        "featured_collection_eb4tKx": {
+          "type": "featured_collection",
+          "disabled": true,
+          "settings": {
+            "collection": "miscellaneous-items"
+          }
+        }
+      },
+      "block_order": [
+        "template--20126638735679__304aa6a1-ba12-4e17-a8d1-668b434a673a-featured_collection-1",
+        "template--20126638735679__304aa6a1-ba12-4e17-a8d1-668b434a673a-featured_collection-2",
+        "97d27c56-3245-4df7-bbce-2d977cbc4991",
+        "featured_collection_MAwwbU",
+        "featured_collection_eb4tKx"
+      ],
+      "settings": {
+        "title": "",
+        "heading_size": "h2",
+        "image_ratio": "adapt",
+        "columns_desktop": 3,
+        "color_scheme": "scheme-0e938df1-d187-4f4c-812a-ec372b7c70d6",
+        "show_view_all": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "Unleash Your Imagination with Unique, Handmade Novelty Treasures.",
+        "heading_size": "h2",
+        "description": "<p>Delight in the exquisite taste and quality of our handcrafted products, made from carefully selected natural ingredients. Experience the love and dedication put into every batch.</p>",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "full_width": false,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "color_scheme": "background-2",
+        "image_ratio": "adapt",
+        "image_shape": "parallelogram",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "padding_top": 0,
+        "padding_bottom": 40
+      }
+    },
+    "pagefly-home": {
+      "type": "pagefly-home",
+      "settings": {}
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "BROWSE OUR LATEST PRODUCTS",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/1.jpg",
+        "height": "adapt",
+        "desktop_image_width": "small",
+        "layout": "text_first",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "background-2",
+        "image_behavior": "zoom-in",
+        "mobile_content_alignment": "left",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "1690508671222e3e1b": {
+      "type": "apps",
+      "blocks": {
+        "54a0e944-ba94-4e4f-b094-f0277d7034d8": {
+          "type": "shopify://apps/smartcustomer-customer-reviews/blocks/product-photo-grid/888a55e3-b12d-42fd-a941-84fa4cf34213",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "54a0e944-ba94-4e4f-b094-f0277d7034d8"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "video_4HDqJa": {
+      "type": "video",
+      "disabled": true,
+      "settings": {
+        "autoplay": true,
+        "loop": true,
+        "section_height": "auto",
+        "custom_height": "500px"
+      }
+    },
+    "169116690454ddb6c1": {
+      "type": "apps",
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "image_with_text_nRfnnj": {
+      "type": "image-with-text",
+      "blocks": {
+        "button_JgB8hp": {
+          "type": "button",
+          "settings": {
+            "button_label": "Schedule Today",
+            "button_link": "shopify://pages/contact-us",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "button_JgB8hp"
+      ],
+      "disabled": true,
+      "settings": {
+        "image": "shopify://shop_images/Glamping.png",
+        "height": "adapt",
+        "desktop_image_width": "large",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "scheme-0e938df1-d187-4f4c-812a-ec372b7c70d6",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "featured_blog_gneJAe": {
+      "type": "featured-blog",
+      "settings": {
+        "heading": "Blog posts",
+        "heading_size": "h1",
+        "blog": "news",
+        "post_limit": 3,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-0e938df1-d187-4f4c-812a-ec372b7c70d6",
+        "show_image": true,
+        "show_date": true,
+        "show_author": false,
+        "show_view_all": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "custom_liquid_pKmaJw": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<div class=\"shop-local-section\">\n  <div class=\"page-width\">\n    <h2 class=\"shop-local-heading\">Shop Local: Where to Find Us</h2>\n    \n    <div class=\"shop-local-grid\">\n      <!-- Location 1 -->\n      <div class=\"shop-local-card\">\n        <h3>Imart</h3>\n        <p class=\"product-type\">Incense</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/4901+Fleet+Ave.+Cleveland,+OH+44105\" target=\"_blank\">\n            4901 Fleet Ave.<br>Cleveland, OH 44105\n          </a>\n        </p>\n      </div>\n <!-- Location 2 -->\n      <div class=\"shop-local-card\">\n        <h3>Elevate Barbershop</h3>\n        <p class=\"product-type\">Beard Oil</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/3182+W.+25th+Street+Cleveland,+OH+44109\" target=\"_blank\">\n            3182 W. 25th Street<br>Cleveland, OH 44109\n          </a>\n        </p>\n        <p class=\"store-link\">\n          <a href=\"https://www.elevatebarbershopcleveland.com/\" target=\"_blank\">Visit Website</a>\n        </p>\n      </div>\n\n      <!-- Location 3 -->\n      <div class=\"shop-local-card\">\n        <h3>Tracy's Trinkets & More</h3>\n        <p class=\"product-type\">Hand Made Products</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/346+Great+Northern+Mall+North+Olmsted,+OH+44070\" target=\"_blank\">\n            346 Great Northern Mall<br>North Olmsted, OH 44070\n          </a>\n        </p>\n        <p class=\"store-link\">\n          <a href=\"https://tracystrinketsandtreasures.com/\" target=\"_blank\">Visit Website</a>\n        </p>\n      </div>\n\n      <!-- Location 4 -->\n      <div class=\"shop-local-card\">\n        <h3>Benjamin Beetle</h3>\n        <p class=\"product-type\">Incense</p>\n        <p class=\"address\">\n          106 N. Main Street<br>Butler, PA 16001\n        </p>\n        <p class=\"store-link\">\n          <a href=\"https://www.facebook.com/BenjaminBeetle\" target=\"_blank\">Visit Facebook Page</a>\n        </p>\n      </div>\n\n      <!-- Location 5 -->\n      <div class=\"shop-local-card\">\n        <h3>VA Hospital (Vendor Section)</h3>\n        <p class=\"product-type\">Handmade Products</p>\n        <p class=\"address\">\n          <a href=\"https://www.google.com/maps/search/10701+East+Blvd.+Cleveland,+OH+44106\" target=\"_blank\">\n            10701 East Blvd.<br>Cleveland, OH 44106\n          </a>\n        </p>\n        <p class=\"note\">\n          Find us every 2 wks of each month until Oct. 2026. Please call for dates.\n        </p>\n      </div>\n    </div>\n  </div>\n</div>\n\n<style>\n.shop-local-section {\n  background-color: #ffffff;\n  padding: 60px 0;\n}\n\n.page-width {\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: 0 20px;\n}\n\n.shop-local-heading {\n  font-family: Georgia, 'Times New Roman', Times, serif;\n  font-size: 24px;\n  font-weight: 600;\n  color: #1f2937;\n  margin: 0 0 40px 0;\n  text-align: center;\n}\n\n.shop-local-grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: 24px;\n}\n\n.shop-local-card {\n  background-color: #f9fafb;\n  border: 1px solid #e5e7eb;\n  padding: 20px;\n}\n\n.shop-local-card h3 {\n  font-weight: 700;\n  font-size: 18px;\n  color: #1f2937;\n  margin: 0 0 4px 0;\n}\n\n.product-type {\n  color: #db2777;\n  font-weight: 600;\n  margin: 0 0 8px 0;\n  font-size: 15px;\n}\n\n.address {\n  color: #4b5563;\n  font-size: 14px;\n  line-height: 1.5;\n  margin: 0 0 8px 0;\n}\n\n.address a {\n  color: #1155CC;\n  text-decoration: none;\n}\n\n.store-link a {\n  color: #db2777;\n  text-decoration: underline;\n  font-size: 14px;\n  font-weight: 500;\n}\n\n.note {\n  color: #6b7280;\n  font-size: 12px;\n  line-height: 1.5;\n  margin: 8px 0 0 0;\n}\n\n@media (max-width: 749px) {\n  .shop-local-grid {\n    grid-template-columns: 1fr;\n  }\n}\n</style>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "featured_artists_banner_R3nmBH",
+    "304aa6a1-ba12-4e17-a8d1-668b434a673a",
+    "featured_collection",
+    "pagefly-home",
+    "image-with-text",
+    "1690508671222e3e1b",
+    "video_4HDqJa",
+    "169116690454ddb6c1",
+    "image_with_text_nRfnnj",
+    "featured_blog_gneJAe",
+    "custom_liquid_pKmaJw"
+  ]
+}

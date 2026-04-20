@@ -1,0 +1,11 @@
+/* Flex container for horizontal images */
+.image-row {
+  display: flex;
+  gap: 10px; /* Space between images */
+  justify-content: center; /* Center images */
+}
+
+.image-row img {
+  width: 100px; /* Set a fixed width for images */
+  height: auto; /* Maintain aspect ratio */
+}

@@ -1,0 +1,22 @@
+{
+    "system": "CAMELOT_OMEGA",
+    "architecture": "SEPTEM_REGNA_7_LAYER",
+    "heartbeat": {
+        "status": "ACTIVE",
+        "mechanism": "The_Pendulum_Daemon",
+        "frequency": {
+            "kinetic_audit": "*/5 * * * *",
+            "neural_scan": "0 */4 * * *",
+            "deep_crusade": "0 0 * * 0"
+        }
+    },
+    "layers": {
+        "L7_Interface": "React_PWA + WebSockets",
+        "L6_Governance": "Oathkeeper + HITL_Queue",
+        "L5_Agentic": "SARDA_Engine + Paladin_Swarm",
+        "L4_Semantic": "UKG_Graph + Vector_Store",
+        "L3_Neural": "Videneptus_LaC + Morgana_Router",
+        "L2_Kinetic": "Cribo + Saltare + Rotel",
+        "L1_Substrate": "Modal_Cloud + Local_Metal"
+    }
+}

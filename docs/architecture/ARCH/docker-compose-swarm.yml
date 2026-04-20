@@ -1,0 +1,28 @@
+# 🐳 PUPPETEER WORKER CONFIGURATION
+# Defines the Titan Fleet Unit.
+
+services:
+  # Message Broker
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  # The Brain (Task Queue)
+  redis:
+    image: redis:alpine
+
+  # The Worker (Puppeteer)
+  titan-worker:
+    build: 
+      context: .
+      dockerfile: Dockerfile.worker
+    deploy:
+      replicas: 5 # Scale to 5 headless browsers
+    depends_on:
+      - rabbitmq
+      - redis
+    environment:
+      - BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - RESULT_BACKEND=redis://redis:6379/0

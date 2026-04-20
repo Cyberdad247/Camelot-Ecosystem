@@ -1,0 +1,37 @@
+# Saltare MCP Gateway Configuration
+# Defines the semantic routing logic for AETHER.
+
+[llm]
+# Primary model for fast semantic routing (Cerebras)
+[llm.primary]
+provider = "cerebras"
+model = "llama-3.3-70b"
+temperature = 0.1
+api_base = "https://api.cerebras.ai/v1"
+# API key loaded from env: SALTARE_CEREBRAS_KEY
+
+# Fallback model if primary fails (OpenRouter)
+[llm.fallback]
+provider = "openrouter"
+model = "anthropic/claude-3.5-sonnet"
+temperature = 0.1
+# API key loaded from env: SALTARE_OPENROUTER_KEY
+
+[storage]
+# Meilisearch for hybrid tool discovery
+[storage.search]
+provider = "meilisearch"
+host = "http://localhost:7700"
+index = "mcp_tools"
+api_key = "${MEILI_MASTER_KEY}"
+
+[gateway]
+port = 8080
+auth_token = "${SALTARE_AUTH_TOKEN}"
+log_level = "info"
+
+[routing]
+# Routing threshold (0.0-1.0)
+confidence_threshold = 0.85
+# Default tool if no match found
+default_tool = "search_web_mcp"

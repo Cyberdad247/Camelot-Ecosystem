@@ -1,0 +1,96 @@
+openapi: 3.0.0
+info:
+  title: Camelot Kernel API
+  description: Sovereign Interface for Agent Orchestration and Memory Management.
+  version: "100.0.0"
+servers:
+  - url: http://localhost:8000
+    description: Local Kernel Bridge
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    AgentRequest:
+      type: object
+      required:
+        - intent
+      properties:
+        intent:
+          type: string
+          example: "Research quantum computing trends."
+        agent_id:
+          type: string
+          enum: [MERLIN, LANCELOT, MORGANA]
+        constraints:
+          type: object
+          properties:
+            budget: { type: number }
+            timeout: { type: number }
+
+    SystemHealth:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [RADIANT, DEGRADED, OFFLINE]
+        cpu_load: { type: number }
+        memory_usage: { type: number }
+
+security:
+  - BearerAuth: []
+
+paths:
+  /agent/dispatch:
+    post:
+      summary: Dispatch a Cognitive Agent
+      description: Routes a prompt to the appropriate Swarm Agent (Merlin/Morgana).
+      operationId: dispatchAgent
+      x-rate-limit: "60/min"
+      x-audit-log: true
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRequest'
+      responses:
+        '200':
+          description: Agent successfully dispatched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id: { type: string }
+                  status: { type: string }
+
+  /memory/query:
+    get:
+      summary: Query the GraphRAG Vault
+      description: Retrieves semantic memories from Ouroboros.
+      operationId: queryMemory
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Context retrieval successful.
+
+  /system/health:
+    get:
+      summary: System Heartbeat
+      operationId: getHealth
+      responses:
+        '200':
+          description: Kernel status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SystemHealth'

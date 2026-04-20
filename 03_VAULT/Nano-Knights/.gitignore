@@ -1,0 +1,49 @@
+# Nano-Browser .gitignore
+
+# Build Artifacts
+background.iife.js
+side-panel/
+options/
+content/index.iife.js
+*.iife.js
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+dependency_audit.log
+
+# Temporary Files
+*.tmp
+*.temp
+.cache/
+
+# Extension Testing
+*.crx
+*.pem
+*.zip
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Coverage
+coverage/
+.nyc_output/
+*.lcov

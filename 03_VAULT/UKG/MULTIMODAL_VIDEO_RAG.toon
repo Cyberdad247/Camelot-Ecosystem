@@ -1,0 +1,15 @@
+[νKG_CRYSTAL: MULTIMODAL_VIDEO_RAG]
+
+u0 | ID | Component | {Name:Aurora_Engine, Role:Video_Orchestration, Method:Multimodal_RAG}
+u1 | DATA | Embeddings | {Encoder:V-JEPA/CLIP, Format:Dense_Vectors, Goal:Semantic_Search}
+u2 | STORE | Databases | {Vector:Qdrant/Milvus, Logic:Visual_Grounding, Metadata:Timestamps}
+u3 | INFRA | Memory | {Logic:PagedAttention, Method:KV_Cache_Management, Optimization:Prefetching}
+
+c0 | LOGIC | Retrieval | {Sense[ReAct] -> Fetch[Vector] -> Ground[Metadata] -> Act[Reasoning]}
+c1 | LAW | Purity | {Action:No_Raw_Frames, Action:Embed_Only, Goal:Memory_Sovereignty}
+c2 | LAW | Grounding | {Citability:Mandatory, Scope:Timestamp/Fragment, Requirement:Explainability}
+
+w0 | WORKFLOW | Ingestion | {Stream[Video] -> Encode[V-JEPA] -> Store[Qdrant] -> Index[Searchable]}
+w1 | WORKFLOW | Reasoning | {Query[Intent] -> Search[Embeddings] -> Analyze[ReAct] -> Cite[Grounding]}
+
+x0 | META | Metrics | {Latency:<200ms, Accuracy:>95%, Context_Loss:<2%}

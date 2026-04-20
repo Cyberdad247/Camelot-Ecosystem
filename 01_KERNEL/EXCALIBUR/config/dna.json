@@ -1,0 +1,94 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "SoftwareSourceCode",
+  "name": "Camelot Apex",
+  "version": "100.2.0",
+  "archetype": "L500_QUANTUM_SOVEREIGN",
+  "author": "VaShawn O. Head",
+  "company": "Invisioned Marketing inc.",
+  "runtimePlatform": [
+    "Python 3.10+",
+    "Node.js 18+",
+    "Go 1.23+"
+  ],
+  "applicationCategory": "Cognitive Operating System",
+  "featureList": [
+    "Autonomous Agent Orchestration",
+    "Infinite Memory (Ouroboros)",
+    "Kinetic Execution (Antigravity)",
+    "Universal Knowledge Graph (Neo4j)",
+    "Semantic Intent Routing (Videneptus)",
+    "Polymorphic Omni-Knights"
+  ],
+  "auditInfo": {
+    "lastAuditDate": "2026-01-20",
+    "score": 85,
+    "status": "STABLE",
+    "recommendationsImplemented": true
+  },
+  "gateways": [
+    {
+      "id": "gateway::clawdbot",
+      "type": "external_service",
+      "role": "multichannel_messaging",
+      "description": "Clawdbot local-first AI gateway: multi-channel messaging (WhatsApp, Telegram, Slack, Discord, Signal, iMessage, Teams, WebChat) and device nodes (iOS/Android/macOS).",
+      "endpoints": {
+        "ws": "ws://127.0.0.1:18789",
+        "http": "http://127.0.0.1:18789"
+      },
+      "security": {
+        "exposure": "local_or_tailnet_only",
+        "requires_tunnel": true,
+        "notes": [
+          "Prefer Tailscale or SSH tunnel for remote access.",
+          "Run Clawdbot under non-root user with least privileges if using Docker."
+        ]
+      },
+      "capabilities": [
+        "channel:whatsapp",
+        "channel:telegram",
+        "channel:slack",
+        "channel:discord",
+        "channel:signal",
+        "channel:imessage",
+        "channel:teams",
+        "channel:webchat",
+        "workspace:skills"
+      ],
+      "owners": [
+        "AnyaMobileBridge",
+        "Merlin_Ω"
+      ]
+    },
+    {
+      "id": "gateway::claraverse",
+      "type": "external_orchestrator",
+      "role": "workflow_sidecar",
+      "description": "External Block-based Agentic Orchestrator for complex CRM and data workflows.",
+      "endpoints": {
+        "http": "http://127.0.0.1:54321/api/v1"
+      },
+      "capabilities": [
+        "workflow:block_dag",
+        "tool:crm_integrations",
+        "tool:data_analyst",
+        "tool:multimodal_inference"
+      ],
+      "owners": [
+        "Merlin_Ω",
+        "Sir_Oracle"
+      ]
+    }
+  ],
+  "devices": [
+    {
+      "id": "device::anya_mobile",
+      "type": "mobile",
+      "os": "android_ios",
+      "description": "Anya mobile interface device abstraction.",
+      "gateways": [
+        "gateway::clawdbot"
+      ]
+    }
+  ]
+}

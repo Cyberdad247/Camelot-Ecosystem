@@ -1,0 +1,238 @@
+{{ 'section-team.css' | asset_url | stylesheet_tag }}
+
+<section class="team-section section">
+  <div class="page-width">
+    {% if section.settings.title != blank %}
+      <h2 class="team-section__title">{{ section.settings.title }}</h2>
+    {% endif %}
+
+    {% if section.settings.description != blank %}
+      <div class="team-section__description rte">
+        {{ section.settings.description }}
+      </div>
+    {% endif %}
+
+    <div class="team-section__grid">
+      {%- for block in section.blocks -%}
+        <div class="team-member" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            <div class="team-member__image-wrapper">
+              {{
+                block.settings.image
+                | image_url: width: 400
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'team-member__image',
+                  sizes: '(min-width: 990px) 25vw, (min-width: 750px) 33vw, 50vw',
+                  widths: '375, 550, 750'
+              }}
+            </div>
+          {% endif %}
+
+          <div class="team-member__info">
+            {% if block.settings.name != blank %}
+              <h3 class="team-member__name">{{ block.settings.name }}</h3>
+            {% endif %}
+
+            {% if block.settings.role != blank %}
+              <p class="team-member__role">{{ block.settings.role }}</p>
+            {% endif %}
+
+            {% if block.settings.bio != blank %}
+              <div class="team-member__bio rte">{{ block.settings.bio }}</div>
+            {% endif %}
+
+            {% if block.settings.email != blank or block.settings.linkedin != blank %}
+              <div class="team-member__social">
+                {% if block.settings.email != blank %}
+                  <a href="mailto:{{ block.settings.email }}" class="team-member__social-link">
+                    {% render 'icon-email' %}
+                  </a>
+                {% endif %}
+
+                {% if block.settings.linkedin != blank %}
+                  <a
+                    href="{{ block.settings.linkedin }}"
+                    class="team-member__social-link"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    {% render 'icon-linkedin' %}
+                  </a>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Team Members",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Our Team",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "team_member",
+      "name": "Team Member",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Member Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Team member name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role",
+          "default": "Job title"
+        },
+        {
+          "type": "richtext",
+          "id": "bio",
+          "label": "Bio"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email"
+        },
+        {
+          "type": "url",
+          "id": "linkedin",
+          "label": "LinkedIn Profile URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team Members",
+      "blocks": [
+        {
+          "type": "team_member"
+        },
+        {
+          "type": "team_member"
+        },
+        {
+          "type": "team_member"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+  .team-section {
+    padding: 60px 0;
+  }
+
+  .team-section__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .team-section__description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+  }
+
+  .team-section__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .team-member {
+    text-align: center;
+  }
+
+  .team-member__image-wrapper {
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .team-member__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .team-member__image:hover {
+    transform: scale(1.05);
+  }
+
+  .team-member__name {
+    margin: 0 0 5px;
+    font-size: 1.2em;
+  }
+
+  .team-member__role {
+    color: rgba(var(--color-foreground), 0.75);
+    margin: 0 0 15px;
+    font-size: 0.9em;
+  }
+
+  .team-member__bio {
+    font-size: 0.9em;
+    margin-bottom: 15px;
+  }
+
+  .team-member__social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .team-member__social-link {
+    color: rgba(var(--color-foreground), 0.75);
+    transition: color 0.2s ease;
+  }
+
+  .team-member__social-link:hover {
+    color: rgb(var(--color-foreground));
+  }
+
+  @media screen and (max-width: 989px) {
+    .team-section__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .team-section__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .team-section {
+      padding: 40px 0;
+    }
+  }
+{% endstylesheet %}

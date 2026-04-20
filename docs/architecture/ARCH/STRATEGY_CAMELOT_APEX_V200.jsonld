@@ -1,0 +1,45 @@
+{
+  "@context": "https://camelot.os/ukg/v1",
+  "@type": "StrategicPlan",
+  "id": "strategy_apex_v200",
+  "title": "Camelot Apex v200.0 Architecture (Hyper-Advanced Assistant)",
+  "nodes": [
+    {
+      "id": "arch_core",
+      "type": "architecture",
+      "content": "Sovereign AI OS with PWA Bridge, Saltare Orchestrator, and Kokoro Voice."
+    },
+    {
+      "id": "comp_anya_lyte",
+      "type": "component",
+      "content": "Mobile Bridge (React Native/Expo) with Biometric Iron Gate and Local-First Sync."
+    },
+    {
+      "id": "comp_sir_masque",
+      "type": "component",
+      "content": "Anti-Detect Orchestrator for stealth automation using Nano-Knights."
+    },
+    {
+      "id": "proto_titan_link",
+      "type": "protocol",
+      "content": "WebSocket streaming for real-time token/audio transfer."
+    }
+  ],
+  "edges": [
+    {
+      "source": "arch_core",
+      "target": "comp_anya_lyte",
+      "rel": "EXTENDS_TO"
+    },
+    {
+      "source": "arch_core",
+      "target": "comp_sir_masque",
+      "rel": "UTILIZES"
+    },
+    {
+      "source": "comp_anya_lyte",
+      "target": "proto_titan_link",
+      "rel": "COMMUNICATES_VIA"
+    }
+  ]
+}

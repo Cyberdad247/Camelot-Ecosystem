@@ -1,0 +1,21 @@
+{
+    "@context": "https://camelot.os/ukg",
+    "UKG_NODE": {
+        "TYPE": "STRATEGIC_MAPPING",
+        "SUBJECT": "INSPIRA v6.0",
+        "DATE": "2025-12-22",
+        "SUMMARY": "Inspira v6.0 defined as the Organizational OS layer above Chimera. Established a 6-department structure with 15 distinct AI personas. Recommended mapping Inspira personas to Camelot Knights (e.g., Shield -> Zenith).",
+        "STRUCTURE": {
+            "Departments": [
+                "Executive",
+                "Engineering",
+                "Security",
+                "Development",
+                "Creative",
+                "Growth"
+            ],
+            "Total_Personas": 15
+        },
+        "PROVENANCE_HASH": "0xINSPIRA_V6_SYNC"
+    }
+}

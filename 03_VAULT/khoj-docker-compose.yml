@@ -1,0 +1,49 @@
+services:
+  database:
+    image: pgvector/pgvector:pg15
+    container_name: khoj-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - khoj_db:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_EXTERNAL_PORT}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 30s
+      timeout: 20s
+      retries: 5
+      start_period: 80s
+    restart: unless-stopped
+
+  server:
+    image: ghcr.io/khoj-ai/khoj:pre
+    container_name: khoj-server
+    command: ["python3", "src/khoj/main.py", "--host", "0.0.0.0", "--port", "42110"]
+    ports:
+      - "${KHOJ_PORT}:42110"
+    environment:
+      KHOJ_DEBUG: ${KHOJ_DEBUG}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      KHOJ_ADMIN_EMAIL: ${KHOJ_ADMIN_EMAIL}
+      KHOJ_ADMIN_PASSWORD: ${KHOJ_ADMIN_PASSWORD}
+    volumes:
+      - khoj_config:/tmp/khoj.yml
+      - khoj_logs:/app/logs
+      - khoj_data:/app/data
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  khoj_config:
+  khoj_db:
+  khoj_logs:
+  khoj_data:

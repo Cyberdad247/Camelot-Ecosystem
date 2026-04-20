@@ -1,0 +1,33 @@
+{
+  "METADATA": {
+    "SOURCE": "World Values Survey (WVS) Wave 7 (2017-2022)",
+    "MODEL": "Inglehart-Welzel Cultural Map",
+    "AXES": ["Traditional_vs_Secular", "Survival_vs_Self_Expression"]
+  },
+  "REGIONS": {
+    "SWEDEN": {
+      "coords": [1.8, 2.3],
+      "desc": "High Secular-Rational, High Self-Expression. Values autonomy, tolerance, weak religion."
+    },
+    "JAPAN": {
+      "coords": [1.9, -0.4],
+      "desc": "High Secular-Rational, Moderate Survival. Values secularism but emphasizes group conformity and order."
+    },
+    "BRAZIL": {
+      "coords": [-0.8, 0.4],
+      "desc": "Moderate Traditional, Moderate Self-Expression. Values religion/tradition but also expressiveness and joy."
+    },
+    "EGYPT": {
+      "coords": [-1.7, -1.2],
+      "desc": "High Traditional, High Survival. Values security, religion, group loyalty, and family stability."
+    },
+    "USA": {
+      "coords": [0.2, 1.5],
+      "desc": "Moderate Traditional, High Self-Expression. Unique mix of religious values and strong individualism."
+    },
+    "CHINA": {
+      "coords": [1.1, -0.9],
+      "desc": "High Secular-Rational, High Survival. Values pragmatism, security, and state/group stability."
+    }
+  }
+}

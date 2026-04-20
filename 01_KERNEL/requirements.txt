@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+requests
+psutil
+playwright
+numpy
+colorama
+pytest
+redis
+faiss-cpu
+httpx

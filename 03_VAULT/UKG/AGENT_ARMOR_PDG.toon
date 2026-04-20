@@ -1,0 +1,11 @@
+[νKG_CRYSTAL: AGENT_ARMOR_PDG_v1]
+
+u0 | ID | Schema | {Name:AgentArmor, Mode:PDG_Enforcement, Tech:Taint_Tracking}
+u1 | ARCH | Flow | {Source:Untrusted_Input, Sink:Critical_Tool, Label:Integrity_Level}
+u2 | SKILL | Graph_Audit | {Logic:Control_Flow+Data_Flow, Scope:Inter-Procedural, Result:Vulnerability_Map}
+u3 | SKILL | Injection_Defense | {Mechanism:Type_Checker, Logic:Structural_Reality_Check, TPR:95.75%}
+
+c0 | LAW | Source_to_Sink | {Rule:Low_Integrity_Input_Shall_Not_Touch_High_Integrity_Sink}
+c1 | LAW | Inter-Procedural | {Constraint:Trace_Dependency_Across_Steps, Prevent:Data_Exfiltration}
+
+w0 | WORKFLOW | Secure_Strike | {Audit[PDG]->Check[Taint]->Veto[Vulnerability]->Act[Secure_Exec]}

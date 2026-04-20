@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "target": "activepieces",
+    "date": "2026-01-27T21:31:40.078799",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Docker",
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 100,
+      "style": "Foundational",
+      "configs": [
+        ".prettierrc"
+      ]
+    },
+    "testing": {
+      "frameworks": [
+        "Jest",
+        "Vitest"
+      ],
+      "test_count": 53
+    },
+    "security": {
+      "vulnerabilities": 44,
+      "critical_findings": [
+        "Potential secret in get-opportunity.ts",
+        "Potential secret in system-props.ts",
+        "Potential secret in config.ts",
+        "Potential secret in generate-password.ts",
+        "Potential secret in track-event.ts",
+        "Potential secret in enterprise-local-authn.test.ts",
+        "Potential secret in add-feedback-to-opportunity.ts",
+        "Potential secret in index.ts",
+        "Potential secret in client.ts",
+        "Potential secret in list-opportunity-feedback.ts",
+        "Potential secret in list-opportunity-forms.ts",
+        "Potential secret in cloud-authn.test.ts",
+        "Potential secret in update-opportunity-stage.ts",
+        "Potential secret in utils.ts",
+        "Potential secret in authentication.test.ts",
+        "Potential secret in password-hasher.test.ts",
+        "Potential secret in platform.test.ts",
+        "Potential secret in dev-seeds.ts"
+      ]
+    },
+    "documentation": {
+      "grade": "B",
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 76,
+    "grade": "B"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "target": "bolt.diy",
+    "date": "2026-01-27T21:15:08.370275",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Python",
+        "Docker",
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 100,
+      "style": "Foundational",
+      "configs": [
+        ".prettierrc"
+      ]
+    },
+    "testing": {
+      "frameworks": [
+        "Vitest"
+      ],
+      "test_count": 3
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "B",
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 93,
+    "grade": "S"
+  }
+}

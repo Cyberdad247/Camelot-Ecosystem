@@ -1,0 +1,42 @@
+# Production Configuration
+environments:
+  development:
+    modal_timeout: 30
+    retry_attempts: 3
+    backup_retention_days: 7
+    max_requests_per_minute: 50
+    circuit_breaker_threshold: 3
+    circuit_breaker_timeout: 30
+    log_level: "DEBUG"
+    
+  staging:
+    modal_timeout: 45
+    retry_attempts: 4
+    backup_retention_days: 14
+    max_requests_per_minute: 75
+    circuit_breaker_threshold: 4
+    circuit_breaker_timeout: 30
+    log_level: "INFO"
+    
+  production:
+    modal_timeout: 60
+    retry_attempts: 5
+    backup_retention_days: 30
+    max_requests_per_minute: 100
+    circuit_breaker_threshold: 5
+    circuit_breaker_timeout: 30
+    log_level: "WARNING"
+
+# Database Configuration
+database:
+  appwrite_database_id: "Memory"
+  appwrite_collection_id: "Sovereign_Logs"
+  max_document_size: 4000
+  
+# Monitoring
+monitoring:
+  enable_metrics: true
+  health_check_interval: 30
+  alert_thresholds:
+    error_rate: 0.05  # 5% error rate
+    response_time: 5000  # 5 seconds

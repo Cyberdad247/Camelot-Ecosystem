@@ -1,0 +1,55 @@
+# 🧬 PHASE 2 BLUEPRINTS: EXTENDED CAPABILITIES
+## Campaign: Tier 2 Integration
+## Date: 2026-01-27
+## Status: 📋 PLANNING
+
+---
+
+## 🏔️ LOCAL LLM STACK: koboldcpp
+- **Objective**: Privacy-first inference engine for Excalibur.
+- **Components**:
+  - Binary: `koboldcpp.exe` (to be fetched/referenced in `docs/EXTERNAL/koboldcpp`).
+  - Configuration: `koboldcpp_config.json`.
+  - Model: `meta-llama-3-8b-instruct.Q4_K_M.gguf`.
+- **Integration**:
+  - Connect `litellm` model list to `http://localhost:5001/v1`.
+
+## 🎙️ VOICE CLONING: OpenVoice
+- **Objective**: Instant zero-shot voice cloning for Multi-Modal agents.
+- **Architecture**:
+  - Python Environment: `conda create -n openvoice python=3.9`.
+  - Integration: `openvoice_worker.py` (FastAPI wrapper).
+- **Binding**: Connect to `01_KERNEL/swarms/voice_swarm.py`.
+
+## ⚡ FAST TTS: kokoro-onnx
+- **Objective**: High-speed, high-quality TTS for real-time interaction.
+- **Architecture**:
+  - Runtime: ONNX.
+  - Models: Kokoro-v0.1-82M.
+- **Binding**: Primary TTS provider for `desktop_commander` notifications.
+
+## 🎨 VISION ENGINE: Fooocus
+- **Objective**: Advanced image generation for agent UI/assets.
+- **Architecture**:
+  - Backend: PyTorch / Gradio.
+  - Integration: API-based prompt submission.
+- **Usage**: Generating visual identities for new "Knights".
+
+## 🛠️ REFINERY: unsloth
+- **Objective**: 2x faster LLM fine-tuning on local hardware.
+- **Architecture**:
+  - Environment: High-RAM/GPU workstation config.
+- **Usage**: Fine-tuning "Personality Fragments" for the Hive Mind.
+
+## 🕸️ CLOUD INTERFACE: puter
+- **Objective**: Web-based OS interface for the Camelot Dashboard.
+- **Architecture**:
+  - Deployment: Local Docker or Node.js server.
+- **Usage**: Remote multi-user access to Camelot OS services.
+
+---
+
+## 🔄 CROSS-INTEGRATION PATHS
+1. **Voice Stack**: `OpenVoice` + `kokoro-onnx` -> `VoiceHub`.
+2. **Local AI**: `koboldcpp` + `unsloth` -> `ModelRefinery`.
+3. **UI/UX**: `puter` + `Fooocus` -> `CamelotTerminal`.

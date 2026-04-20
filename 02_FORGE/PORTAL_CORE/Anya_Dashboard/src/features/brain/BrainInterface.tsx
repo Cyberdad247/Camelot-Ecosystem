@@ -1,0 +1,103 @@
+import React, { useState, useEffect } from 'react';
+import { Card } from '@/components/ui/Card';
+import { Send, BookOpen, Loader2, Cuboid } from 'lucide-react';
+import QuantumScene from '@/components/engine/Scene';
+import { useEngineStore } from './engineStore';
+
+interface Message {
+  role: 'user' | 'assistant';
+  content: string;
+}
+
+// 🛡️ CONFIGURATION: Modal Endpoint
+const CLOUD_BRAIN_URL = "https://cyberdad247--camelot-notebook-brain-query-notebook.modal.run";
+
+export default function BrainInterface() {
+  const [query, setQuery] = useState('');
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [loading, setLoading] = useState(false);
+  const addObject = useEngineStore((state) => state.addObject);
+
+  const handleAsk = async () => {
+    if (!query.trim()) return;
+    
+    // Command Interception
+    if (query.toLowerCase().includes('spawn cube')) {
+        // ... (Keep existing logic)
+        return;
+    }
+
+    const userMsg = { role: 'user' as const, content: query };
+    setMessages(prev => [...prev, userMsg]);
+    setQuery('');
+    setLoading(true);
+
+    try {
+      const res = await fetch(CLOUD_BRAIN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          project_id: "CAMELOT_V97", // Required by Modal Schema
+          query: userMsg.content
+        })
+      });
+
+      const data = await res.json();
+      const aiMsg = { role: 'assistant' as const, content: data.archivist_voice || data.error || "No response." };
+      setMessages(prev => [...prev, aiMsg]);
+    } catch (err) {
+      setMessages(prev => [...prev, { role: 'assistant', content: "⚠️ Cloud Brain Unreachable." }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col lg:flex-row h-full w-full gap-4 p-4 bg-slate-950 overflow-y-auto lg:overflow-hidden">
+      {/* Left Panel: Quantum Engine */}
+      <div className="w-full lg:w-1/2 min-h-[300px] lg:h-full rounded-2xl overflow-hidden border border-slate-800 relative shadow-2xl shadow-cyan-900/20">
+        <QuantumScene />
+        <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-cyan-400 font-mono border border-cyan-500/30">
+            QUANTUM RENDERER ACTIVE
+        </div>
+      </div>
+
+      {/* Right Panel: Chat */}
+      <Card className="flex-1 flex flex-col h-[500px] lg:h-full border-none shadow-2xl bg-slate-900/50 backdrop-blur-sm" 
+            title="Anya's Interface"
+            description="Commanding the Kernel & Engine">
+        
+        <div className="flex-1 overflow-y-auto space-y-4 mb-4 p-2">
+          {messages.map((m, i) => (
+            <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                m.role === 'user' ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-slate-200'
+              }`}>
+                {m.content}
+              </div>
+            </div>
+          ))}
+          {loading && <div className="text-slate-500 text-sm animate-pulse">Thinking...</div>}
+        </div>
+
+        <div className="flex gap-2">
+          <input
+            className="flex-1 px-4 py-2 rounded-full border border-slate-700 bg-slate-950 text-white focus:ring-2 focus:ring-cyan-500"
+            placeholder="Ask a question or type 'spawn cube'..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleAsk()}
+          />
+          <button 
+            onClick={handleAsk} 
+            className="p-3 bg-cyan-600 rounded-full text-white"
+            title="Send Message"
+            aria-label="Send Message"
+          >
+            <Send size={20} />
+          </button>
+        </div>
+      </Card>
+    </div>
+  );
+}

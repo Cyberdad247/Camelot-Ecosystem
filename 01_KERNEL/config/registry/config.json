@@ -1,0 +1,32 @@
+{
+  "kernel_id": "CHIMERA_KERNEL_v24.1",
+  "version": "9.2.1",
+  "mode": "SOVEREIGN",
+  "created": "2025-12-11T03:56:14-05:00",
+  "security": {
+    "ukg_enabled": true,
+    "signature_verification": true,
+    "glyph_sandbox": true
+  },
+  "agents": {
+    "roster_path": "./agents/roster.json",
+    "max_concurrent": 8,
+    "memory_pool": "titan_omega"
+  },
+  "routing": {
+    "ollama_endpoint": "http://localhost:11434",
+    "lmstudio_endpoint": "http://localhost:1234",
+    "default_model": "gemini-pro",
+    "fallback_chain": ["ollama", "lmstudio", "local"]
+  },
+  "workflows": {
+    "magnum_enabled": true,
+    "checkpoint_dir": "../workflows/checkpoints",
+    "trace_manifest": "../workflows/TRACE_MANIFEST.csv"
+  },
+  "dashboard": {
+    "enabled": true,
+    "port": 3000,
+    "api_port": 5001
+  }
+}

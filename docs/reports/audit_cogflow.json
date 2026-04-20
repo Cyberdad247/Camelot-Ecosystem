@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "target": "CogFlow",
+    "date": "2026-01-27T21:31:23.503819",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Python",
+        "Docker"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest"
+      ],
+      "test_count": 59
+    },
+    "security": {
+      "vulnerabilities": 3,
+      "critical_findings": [
+        "Potential secret in dpo_en_demo.json"
+      ]
+    },
+    "documentation": {
+      "grade": "F",
+      "missing": [
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 46,
+    "grade": "D"
+  }
+}

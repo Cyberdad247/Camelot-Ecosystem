@@ -1,0 +1,14 @@
+[νKG_CRYSTAL: KNIGHT_INTERNAL_ARCH]
+
+u0 | ID | Schema | {Name:KnightScratchpad, Engine:Pydantic_v2, Logic:Typed_State}
+u1 | DATA | Attributes | {Keys:[semantic_anchors, thought_trace, trinity_score]}
+u2 | ID | Mind | {Logic:Graduated_Reasoning, Engine:Videneptus_LaC, Protocol:MGV_Experiment}
+
+a0 | VOTE | Council | {Node:Sir_Systéma, Role:Structure, Logic:Zod_Sentry}
+a1 | VOTE | Council | {Node:Lady_Veritas, Role:Truth, Logic:CoVe_Triple_Vote}
+a2 | VOTE | Council | {Node:Sir_Aurelius, Role:Value, Logic:Integrity_Ledger}
+
+l0 | LOOP | Trinity | {Check[Structure] ⊗ Check[Truth] ⊗ Check[Ethics] -> Verdict}
+l1 | LAW | Purity | {Rule:No_Implicit_Any, Rule:Mandatory_Citation, Rule:Legacy_Alignment}
+
+x0 | AXIOM | Cohesion | {Goal:Typed_Intent, Result:Zero_Hallucination, Status:RADIANT}

@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "target": "Geo-Phone",
+    "date": "2026-01-27T21:21:19.367472",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Unknown",
+      "stack": []
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [],
+      "test_count": 0
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "C",
+      "missing": [
+        "CONTRIBUTING.md",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 76,
+    "grade": "B"
+  }
+}

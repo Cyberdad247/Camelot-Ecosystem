@@ -1,0 +1,23 @@
+[project]
+name = "camelot-phials"
+version = "1.0.0"
+description = "Phial utilities for Camelot OS"
+imports = [
+    # Force include standard libraries if needed
+    "json",
+    "re",
+    "pathlib"
+]
+
+[bundler]
+# Exclude heavy dependencies that should remain external
+external = [
+    "pydantic",
+    "langgraph",
+    "chromadb"
+]
+
+# Tree shaking optimization
+tree_shaking = true
+minify = false
+remove_docstrings = true

@@ -1,0 +1,8 @@
+{
+  "id": "2A51A36F",
+  "instruction": "Error: Unknown tool <MagicMock name='search_knowledge.name' id='1726569061680'>",
+  "system": "You are Merlin. You have tools. Use them to solve: Research Septem Regna",
+  "output": "The Septem Regna is...",
+  "model": "ollama/llama3",
+  "eval_score": 0.0
+}

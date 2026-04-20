@@ -1,0 +1,36 @@
+# Camelot-OS Universal Tier Definition (Split-Brain Topology)
+# Single source of truth. Claude Code, Gemini CLI, and Codex all read this file.
+# Edit here — all engines pick it up via their respective shims.
+version: 1
+updated: 2026-04-12
+tiers:
+  edge:
+    role: "Kinetic Edge — Rust Axum MCP, fast I/O and file ops"
+    binary: 02_FORGE/kinetic/bin/camelot-mcp-edge.exe
+    source: kinetic_edge/mcp_server/target/release/camelot-mcp-edge.exe
+    port: 3001
+    host: 127.0.0.1
+    health: null   # binary has no HTTP /health; probe via TCP
+    ram_budget_mb: 150
+  local:
+    role: "Local Brain — Excalibur FastAPI kernel, reasoning and control plane"
+    entry: local_brain/main.py
+    python: .venv/Scripts/python.exe
+    port: 8001
+    host: 127.0.0.1
+    health: /health
+    ram_budget_mb: 300
+  cloud:
+    role: "Cloud Orchestrator — Modal morgana, on-demand only"
+    modal_app: morgana-research-agency-prod
+    deploy_file: 02_FORGE/PORTAL_CORE/Modal/morgana/morgana_core.py
+    modal_cli: .venv/Scripts/modal.exe
+    lifecycle: on-demand   # deploy+stop, never left running
+    endpoints:
+      health: https://cyberdad247--morgana-research-agency-prod-health.modal.run
+      brain:  https://cyberdad247--morgana-research-agency-prod-morgana-brain.modal.run
+    secret_binding: my-sovereign-secrets
+    ram_budget_mb: 0   # remote
+constraints:
+  total_ram_ceiling_gb: 8
+  observability_gate_mb: 1500

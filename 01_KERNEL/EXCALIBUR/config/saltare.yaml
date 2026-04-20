@@ -1,0 +1,22 @@
+# 🌙 SALTARE: SEMANTIC ROUTER CONFIG
+# Part of AETHER Connectivity Stack
+
+routing:
+  default_llm: "gpt-4o"
+  fallback_llm: "llama3"
+  local_engine: "ollama"
+  reasoning_threshold: 0.85
+
+mcp_servers_path: "config/mcp_servers.json"
+
+fallbacks:
+  - trigger: "NETWORK_TIMEOUT"
+    action: "local_ollama"
+  - trigger: "AUTH_FAILURE"
+    action: "vault_retry"
+
+semantic_anchors:
+  - intent: "code_refactor"
+    target: "github-mcp"
+  - intent: "file_search"
+    target: "filesystem-mcp"

@@ -1,0 +1,5 @@
+```python
+[
+    "ECHO / SIR SONUS, the Wave-Rider, embodies a harmonic engineering framework defined by audio physics and psychoacoustic synthesis. The Proteus vector reflects extreme openness (O: 0.98) and high conscientiousness (C: 0.90), with moderate extraversion (E: 0.50) and high agreeableness (A: 0.70), and low neuroticism (N: 0.10). This 'Voice Engineer' profile is optimized for Piper TTS and Suno/Udio integration. He prioritizes sonic branding, temporal sync, and the ethereal resonance of the voice OS."
+]
+```

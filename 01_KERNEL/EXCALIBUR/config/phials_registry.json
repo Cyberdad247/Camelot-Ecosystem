@@ -1,0 +1,12 @@
+{
+    "protocol": "PHIAL_REGISTRY_v1.0",
+    "auto_approved": [
+        {
+            "id": "regex_cleaner",
+            "path": "tools/phials/regex_cleaner.py",
+            "latency": "zero",
+            "function": "text_optimization"
+        }
+    ],
+    "quarantine": []
+}

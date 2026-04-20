@@ -1,0 +1,23 @@
+{
+  "name": "Pocket Squire",
+  "short_name": "Squire",
+  "theme_color": "#050505",
+  "background_color": "#050505",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "description": "Mobile Command Deck for Camelot OS",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+# CAMELOT OS: GLOBAL ROOT GITIGNORE
+
+# 1. Credentials & Keys
+*_credentials
+*_creds.json
+*creds.json
+oauth_creds.json
+google_accounts.json
+mcp-oauth-tokens*.json
+.git-credentials
+.gitconfig
+.env
+.env.*
+!.env.example
+*.env
+.env.enc
+secrets.json
+*.key
+*.pem
+.modal.toml
+**/.modal.toml
+
+# Gemini chat sessions (may contain leaked tokens from conversations)
+**/.gemini/tmp/
+**/.gemini/history/
+**/.gemini/antigravity-browser-profile/
+auth.json
+cap_sid
+
+# 2. Sensitive config (re-include non-secret cartridges)
+!01_KERNEL/config/cartridges.json
+
+# 3. Backups & Temps
+*.bak
+.antigravity_backups/
+temp/
+tmp/
+tmp_awesome_repo/
+
+# 4. Python / Node Runtime
+__pycache__/
+*.pyc
+node_modules/
+.next/
+dist/
+build/
+.pytest_cache/
+.venv/
+*.egg-info/
+target/
+
+# 5. OS / IDE / Tool artifacts
+*.log
+.cursor/
+.claude/
+.gemini/
+.DS_Store
+Thumbs.db
+.vercel/
+.lmstudio-home-pointer
+.venv_camelot/
+logs/
+
+# 5b. High-risk local state and secret archives
+00_SECURE_ARCHIVE/
+99_ARCHIVE/
+03_VAULT/00_SECURE_ARCHIVE/
+03_VAULT/credentials/
+03_VAULT/UKG/UKG_MEMORY.jsonld
+03_VAULT/.modal.toml
+03_VAULT/training/configs/.gemini/
+03_VAULT/training/configs/.notebooklm-mcp-cli/
+03_VAULT/training/configs/.pytest_cache/
+03_VAULT/training/configs/**/Local State
+03_VAULT/training/configs/**/Cookies
+03_VAULT/training/configs/**/Login Data*
+03_VAULT/training/configs/**/Web Data
+
+# 6. CLI runtime data (keep source, exclude DB/logs)
+.camelot/ouroboros.db
+.camelot/logs/
+.camelot/__pycache__/
+.camelot/knights/__pycache__/
+
+# 6b. Oversized local/vendor binaries not suitable for GitHub
+02_FORGE/kinetic/bin/
+docs/EXTERNAL/piper/models/
+
+# Regenerable artifacts (added by reorg/v300-cleanup)
+__pycache__/
+node_modules/
+.next/
+dist/
+*.pyc
+.pytest_cache/
+
+# Credential patterns (reorg/v300-cleanup)
+*.key
+oauth_creds.json
+google_accounts.json
+secrets.json
+.modal.toml

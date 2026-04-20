@@ -1,0 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "collection_list_ehBc7G": {
+      "type": "collection-list",
+      "blocks": {
+        "featured_collection_WpJbjU": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "candles"
+          }
+        },
+        "featured_collection_bYRzTB": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "incense-1"
+          }
+        },
+        "featured_collection_rqXzcw": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "aroma-therapy"
+          }
+        },
+        "featured_collection_G7V9jT": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "soaps"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_WpJbjU",
+        "featured_collection_bYRzTB",
+        "featured_collection_rqXzcw",
+        "featured_collection_G7V9jT"
+      ],
+      "settings": {
+        "title": "Collections",
+        "heading_size": "h1",
+        "image_ratio": "square",
+        "columns_desktop": 4,
+        "color_scheme": "scheme-0e938df1-d187-4f4c-812a-ec372b7c70d6",
+        "show_view_all": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "collection_list_ehBc7G"
+  ]
+}

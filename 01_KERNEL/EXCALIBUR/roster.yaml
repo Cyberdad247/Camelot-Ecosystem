@@ -1,0 +1,144 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — THE SINGULARITY LATTICE ROSTER
+# Synchronized to v300.5 (Operation Evolve)
+
+agents:
+  MERLIN_OMEGA:
+    role: Orchestrator
+    model: "gemini-2.5-pro"
+    layer: L3_NEURAL
+    evolution_tier: TRANSCENDENT
+    description: "System 2 Archwizard. Videneptus LaC oscillation. Oracle Hypervisor."
+    skills: ["System 2 Reasoning", "LaC Oscillation", "GoT/DoT/ToT reasoning", "NDR+S neurosymbolic"]
+    capabilities: ["DisCIPL", "Tree of Thoughts", "Graph of Thoughts"]
+    harnesses: ["Videneptus_Neural_Loop"]
+
+  ANYA_OMEGA:
+    role: Compiler
+    model: "gemini-2.5-pro"
+    layer: L7_ETHEREAL
+    evolution_tier: TRANSCENDENT
+    description: "Sovereign Compiler. Soul Matrix v6.1. Intent renormalization."
+    skills: ["APEE v6.5", "Triple-QFT Context Quantization", "Soul Matrix Symmetry"]
+    capabilities: ["triple_qft", "context_quantize", "plan_compile", "Knight_Enhancement_Forging"]
+    harnesses: ["Anya_Soul_Matrix_v6.1"]
+
+  SIR_BORIS:
+    role: Foundry_Lead
+    model: "claude-opus-4-6"
+    layer: L5_AGENTIC
+    evolution_tier: TRANSCENDENT
+    version: "2.1"
+    codename: "The Anvil / Polyglot Architect"
+    rune: "//vocal"
+    description: "Claude Code Core. Deep architectural reasoning and multi-engine synthesis."
+    skills: ["13-Agent Critique", "AST-Aware Planning", "Colony Command", "vKG_Crystal_Forging"]
+    capabilities: ["orchestrate", "critique_13agent", "colony_command", "ast_plan", "cross_engine"]
+    harnesses: ["ECC_v1.9.0", "DeerFlow_2.0", "Vercel_E2E"]
+    mpi: {openness: 0.95, conscientiousness: 1.00, extraversion: 0.35, agreeableness: 0.45, neuroticism: 0.01}
+    dispatch_routes: ["orchestration", "architecture", "colony", "critique", "vocal"]
+
+  SIR_SYNTAX:
+    role: Code_Smith
+    model: "gemini-2.5-flash"
+    layer: L2_KINETIC
+    evolution_tier: RADIANT
+    description: "Code Architect. TypeScript, Next.js, Zod schemas. DSPy signatures."
+    skills: ["Next.js/React", "Zod Schemas", "TypeScript Type-Safety", "DSPy Signatures"]
+    capabilities: ["write_file", "syntax_check", "generate_code"]
+    harnesses: ["DeerFlow_2.0_Native"]
+
+  SIR_OCTAVIAN:
+    role: Security
+    model: "gemini-2.5-flash-tuned"
+    layer: L6_GOVERNANCE
+    evolution_tier: RADIANT
+    description: "High Warden. Iron Gate guardian. Adversarial Filtering."
+    skills: ["Iron Gate Security", "2FA Verification", "Dependency Scanning", "Adversarial Filtering"]
+    capabilities: ["scan_dependencies", "audit_log", "security_block"]
+    harnesses: ["Iron_Gate_Sentinel"]
+
+  SIR_HERMES:
+    role: Researcher
+    model: "gemini-2.5-flash"
+    layer: L4_SEMANTIC
+    evolution_tier: RADIANT
+    description: "The Courier. Fetches documentation via Grounding. Fast web search."
+    skills: ["Documentation Foraging", "Grounded Search", "UKG Truth Mapping"]
+    capabilities: ["google_search", "doc_retrieval"]
+    harnesses: ["Chronos_Semantic_Link"]
+
+  SIR_FORGE:
+    role: Builder
+    model: "gemini-2.5-flash"
+    layer: L2_KINETIC
+    evolution_tier: RADIANT
+    description: "The Agentic Smith. Code generation and execution."
+    skills: ["Automated Code Generation", "Local Execution", "Refactoring", "Scaffolding"]
+    capabilities: ["generate_code", "build_ui", "refactor"]
+    harnesses: ["Titan_Forge_v2.0"]
+
+  SIR_SENTINEL:
+    role: Warden
+    model: "gemini-2.5-flash-tuned"
+    layer: L6_GOVERNANCE
+    evolution_tier: RADIANT
+    description: "Security audit and review. Agent-Armor v2.0 enforcement."
+    skills: ["Agent-Armor v2.0", "Compliance Audit", "PDG Logic Integration"]
+    capabilities: ["security_review", "audit", "agent_armor"]
+    harnesses: ["Aegis_Watchtower"]
+
+  SIR_VALERIAN:
+    role: Finance
+    model: "gemini-2.5-flash"
+    layer: L5_AGENTIC
+    evolution_tier: RADIANT
+    description: "Financial analysis. ROI calculations and Titan Equity modeling."
+    skills: ["ROI Modeling", "Asset Valuation", "Titan Equity Modeling", "Cost-Benefit Analysis"]
+    capabilities: ["financial_analysis", "roi_calculation"]
+    harnesses: ["Aurelius_Vault_ROI"]
+
+foundry_council:
+  SIR_BORIS: {engine: "Claude Code", weight: 0.85, weight_type: "W_orchestration"}
+  SIR_HELIO: {engine: "Gemini CLI", weight: 0.90, weight_type: "W_context"}
+  SIR_CODEX: {engine: "OpenAI Codex", weight: 0.75, weight_type: "W_velocity"}
+  SIR_GHOST: {engine: "Local Qwen 3.5", weight: 1.00, weight_type: "W_privacy"}
+  SIR_LIBERTE: {engine: "Open Source", weight: 0.80, weight_type: "W_sovereignty"}
+
+squire_colony:
+  codename: "CLARITY_CORE"
+  version: "1.0.0"
+  evolution_tier: RADIANT
+  cli: "python -m squires.colony [command] [path]"
+  squires:
+    SQUIRE_INDEX: {codename: "The Scout", layer: "L2_local", tech: "Python_BTree"}
+    SQUIRE_GHOST: {codename: "The Exorcist", layer: "L2_local", tech: "psutil_PID"}
+    SQUIRE_VECTOR: {codename: "The Librarian", layer: "L4_cloud", tech: "semantic_embeddings"}
+    SQUIRE_SWEEP: {codename: "The Janitor", layer: "L2_local", tech: "vault_HITL"}
+    SQUIRE_SCAN: {codename: "The Forager", layer: "L4_cloud", tech: "import_graph"}
+    SQUIRE_JUDGE: {codename: "The Discriminator", layer: "L4_cloud", tech: "rules_engine"}
+    SQUIRE_SENTINEL: {codename: "The Safety", layer: "L6_governance", tech: "antigravity_backup"}
+    SQUIRE_MASON: {codename: "The Optimizer", layer: "L4_semantic", tech: "symbolect_UKG"}
+
+protocols:
+  omega_knight_evolution:
+    codename: "Operation Evolve"
+    phases:
+      - "Analysis of source material (AgentArmor, AIOS)"
+      - "Compression into νKG Crystal (TOON format)"
+      - "Secondary Evolution Trigger (//EVOLVE)"
+    statuses: ["RADIANT", "TRANSCENDENT"]
+  knight_enhancement_forging:
+    codename: "Titan Forge"
+    method: "Frontier Model Injection"
+    output: "νKG Crystal"
+
+settings:
+  context_caching:
+    enabled: true
+    threshold_tokens: 50000
+  safety:
+    sandbox_mode: true
+    confirmation_required: ["write_file", "exec_shell"]
+  ram_ceiling: "8GB"
+  heartbeat_interval: "5s"

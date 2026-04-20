@@ -1,0 +1,88 @@
+{
+  "SYSTEM_META": {
+    "ID": "CAMELOT_APEX_Ω",
+    "VERSION": "100.0",
+    "MODE": "THE_SINGULARITY_SINGULARITY",
+    "ARCHETYPE": "L700_ETHEREAL_SOVEREIGN"
+  },
+  "TRIUMVIRATE": {
+    "MERLIN_Ω": "Sovereign Kernel (AIOS Scheduler)",
+    "ANYA_Ω": "Sovereign Compiler (APEE v6.5 Hypervisor)",
+    "MORGANA_Ω": "Kinetic Substrate (The Bridge)"
+  },
+  "ENGINES": {
+    "GROUP_1_LOGIC": {
+      "VIDENEPTUS": {
+        "ROLE": "Reasoning Router",
+        "ALGO": "Learning-at-Criticality (LaC)",
+        "ROUTING": [
+          "ToT",
+          "ReAct",
+          "PAL"
+        ]
+      },
+      "APEE_v6": {
+        "ROLE": "Compiler",
+        "STACK": "DSPy + MIPROv2",
+        "LOGIC": "Triple-QFT"
+      },
+      "PROMETHEUS": {
+        "ROLE": "Planner",
+        "ALGO": "DECOMP (Decomposed Prompting)",
+        "OUTPUT": "Task DAG"
+      }
+    },
+    "GROUP_2_MEMORY": {
+      "OUROBOROS": {
+        "ROLE": "Infinite Context",
+        "STACK": "GraphRAG + Qdrant",
+        "ALGO": "Sentinel Compression"
+      },
+      "VERITAS": {
+        "ROLE": "Audit & Risk",
+        "ALGO": "Blacklight Scanner",
+        "VALIDATION": "Chain-of-Verification (CoVe)"
+      },
+      "HELIX": {
+        "ROLE": "Self-Correction",
+        "ALGO": "Reflexion Loop",
+        "STATUS": "ACTIVE"
+      }
+    },
+    "GROUP_3_INTERFACE": {
+      "ANTIGRAVITY": {
+        "ROLE": "Kinetic Hand",
+        "PROTOCOL": "MCP (Model Context Protocol)",
+        "INFRA": "MicroVMs"
+      },
+      "AETHER": {
+        "ROLE": "The Swarm",
+        "PROTOCOL": "A2A (Agent-to-Agent)",
+        "TOPOLOGY": "DisCIPL"
+      },
+      "HIVEMIND": {
+        "ROLE": "Swarm Orchestrator",
+        "LANG": "Go",
+        "STATUS": "ACTIVE"
+      },
+      "GENESIS": {
+        "ROLE": "Creation Engine (Sovereign Forge)",
+        "VERSION": "2.0",
+        "ALGO": "Proteus MPI + SkillGraph4",
+        "STATUS": "RADIANT"
+      },
+      "LYRICUS": {
+        "ROLE": "Voice Control",
+        "FRAMEWORK": "CO-STAR",
+        "MECH": "Code-Switching",
+        "STATUS": "ACTIVE"
+      },
+      "AURORA": {
+        "ROLE": "The Eye",
+        "TECH": "V-JEPA (Visual Embedding)",
+        "STATUS": "ACTIVE"
+      }
+    }
+  },
+  "PRIME_DIRECTIVE": "We do not chat; we Architect. We do not guess; we Renormalize. We do not rent; we Own."
+}

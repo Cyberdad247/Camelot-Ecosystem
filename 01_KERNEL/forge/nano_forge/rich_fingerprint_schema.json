@@ -1,0 +1,227 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Rich Fingerprint Profile (Multi-Login Clone)",
+    "description": "Extended fingerprint schema with 20-50+ anti-detect parameters",
+    "type": "object",
+    "required": [
+        "id",
+        "user_agent",
+        "screen",
+        "timezone"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Unique profile identifier"
+        },
+        "user_agent": {
+            "type": "string",
+            "description": "Full user agent string"
+        },
+        "screen": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                },
+                "availWidth": {
+                    "type": "integer"
+                },
+                "availHeight": {
+                    "type": "integer"
+                },
+                "colorDepth": {
+                    "type": "integer",
+                    "enum": [
+                        24,
+                        32
+                    ]
+                },
+                "pixelDepth": {
+                    "type": "integer",
+                    "enum": [
+                        24,
+                        32
+                    ]
+                }
+            },
+            "required": [
+                "width",
+                "height"
+            ]
+        },
+        "viewport": {
+            "type": "object",
+            "properties": {
+                "width": {
+                    "type": "integer"
+                },
+                "height": {
+                    "type": "integer"
+                }
+            }
+        },
+        "timezone": {
+            "type": "string",
+            "description": "IANA timezone (e.g., America/New_York)"
+        },
+        "geolocation": {
+            "type": "object",
+            "properties": {
+                "latitude": {
+                    "type": "number"
+                },
+                "longitude": {
+                    "type": "number"
+                },
+                "accuracy": {
+                    "type": "number"
+                }
+            }
+        },
+        "locale": {
+            "type": "string",
+            "description": "Locale string (e.g., en-US)"
+        },
+        "languages": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Accepted languages array"
+        },
+        "platform": {
+            "type": "string",
+            "description": "Operating system platform"
+        },
+        "vendor": {
+            "type": "string",
+            "description": "Browser vendor"
+        },
+        "hardwareConcurrency": {
+            "type": "integer",
+            "description": "Number of logical processors"
+        },
+        "deviceMemory": {
+            "type": "integer",
+            "description": "Device memory in GB"
+        },
+        "webgl": {
+            "type": "object",
+            "properties": {
+                "vendor": {
+                    "type": "string"
+                },
+                "renderer": {
+                    "type": "string"
+                },
+                "unmaskedVendor": {
+                    "type": "string"
+                },
+                "unmaskedRenderer": {
+                    "type": "string"
+                }
+            }
+        },
+        "webrtc": {
+            "type": "object",
+            "properties": {
+                "mode": {
+                    "type": "string",
+                    "enum": [
+                        "disabled",
+                        "proxy_consistent",
+                        "real"
+                    ]
+                },
+                "publicIP": {
+                    "type": "string"
+                },
+                "localIP": {
+                    "type": "string"
+                }
+            }
+        },
+        "canvas": {
+            "type": "object",
+            "properties": {
+                "noiseSeed": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "audioContext": {
+            "type": "object",
+            "properties": {
+                "noiseSeed": {
+                    "type": "string"
+                },
+                "enabled": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "fonts": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "List of available fonts"
+        },
+        "plugins": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "Browser plugins"
+        },
+        "mimeTypes": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "doNotTrack": {
+            "type": "string",
+            "enum": [
+                "1",
+                "0",
+                "null"
+            ]
+        },
+        "cookiesEnabled": {
+            "type": "boolean"
+        },
+        "mediaDevices": {
+            "type": "object",
+            "properties": {
+                "audioInputCount": {
+                    "type": "integer"
+                },
+                "audioOutputCount": {
+                    "type": "integer"
+                },
+                "videoInputCount": {
+                    "type": "integer"
+                }
+            }
+        },
+        "battery": {
+            "type": "object",
+            "properties": {
+                "charging": {
+                    "type": "boolean"
+                },
+                "level": {
+                    "type": "number"
+                }
+            }
+        }
+    }
+}

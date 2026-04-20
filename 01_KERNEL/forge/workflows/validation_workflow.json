@@ -1,0 +1,26 @@
+{
+  "name": "logic_validation_workflow",
+  "version": 1,
+  "description": "Validates the Anya Dashboard logic via Test, Lint, and Gemini Analysis.",
+  "tasks": [
+    {
+      "name": "install_dependencies",
+      "type": "SIMPLE",
+      "command": "npm install",
+      "cwd": "C:\\Users\\vizio\\CAMELOT_OS\\02_FORGE\\Anya_Dashboard"
+    },
+    {
+      "name": "run_tests",
+      "type": "SIMPLE",
+      "command": "npm run test",
+      "cwd": "C:\\Users\\vizio\\CAMELOT_OS\\02_FORGE\\Anya_Dashboard",
+      "capture_output": true
+    },
+    {
+      "name": "analyze_results",
+      "type": "AI_ANALYSIS",
+      "input_ref": "run_tests",
+      "prompt": "Analyze the following test output. Identify any failures, their root causes, and suggest specific code fixes."
+    }
+  ]
+}

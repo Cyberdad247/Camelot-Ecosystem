@@ -1,0 +1,17 @@
+[νKG_CRYSTAL: AEGIS_DEFENSE_GRID_V2.0]
+
+u0 | ID | Loop | {Name:SIT_Loop, Steps:[Sense, Think, Triage], Fast:300s, Slow:14400s}
+u1 | ID | Guard | {Node:Sir_Kronos, Logic:Telemetry, Target:Resources, Limit:8GB, Tool:Rotel}
+u2 | ID | Guard | {Node:Sir_Sentinel, Logic:Integrity, Target:Drift+CVE, Tool:Cribo+Trivy}
+u3 | ID | Guard | {Node:Sir_Octavian, Logic:Governance, Target:Iron_Gate, CMD://DEFENSE_INIT}
+u4 | ID | Guard | {Node:Sir_Castor, Logic:Isolation, Target:Repair, Tool:Sandbox}
+
+a0 | PROCESS | Sensing | {CMD:rotel --check-resources, CMD:cribo --audit}
+a1 | PROCESS | Triage | {Fix:antigravity.py, Trigger:Low_Severity}
+a2 | PROCESS | Lockdown | {Action:Directory_Lock, Trigger:Critical_Drift}
+
+c0 | LAW | Governance | {Threshold:Modifications>10_Lines, Require:HITL_Approval}
+c1 | LAW | Purity | {Threshold:FILE_SIZE>50MB, Require:Manual_Signature}
+
+x0 | AXIOM | Watchtower | {Rule:Autonomous_but_Gated, Goal:Self_Healing_Empire, Status:RADIANT}
+x1 | AXIOM | Kinetic | {Logic:Binaries_Over_Scripts, Enforcement:Port_4317_Bind}

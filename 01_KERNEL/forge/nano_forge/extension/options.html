@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configuration for Nano-Browser Extension">
+    <title>Nano-Browser Configuration</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Nano-Browser v2.2 Sovereign</h1>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="general">General</button>
+        <button class="tab-btn" data-tab="neural">Neural</button>
+        <button class="tab-btn" data-tab="diagnostics">Diagnostics 🩺</button>
+    </div>
+
+
+
+    <!-- AUTH SECTION (General) -->
+    <section id="authSection" class="tab-content active" data-tab="general">
+        <h2>🔐 Sovereign Identity (2FA)</h2>
+        <div id="loginForm">
+            <div class="field">
+                <label for="authEmail">Operative Email</label>
+                <input type="text" id="authEmail" placeholder="identity@sovereign.net">
+            </div>
+            <div class="field">
+                <label for="authPassword">Passcode</label>
+                <input type="password" id="authPassword">
+            </div>
+            <div class="field">
+                <label for="auth2FA">Mobile Auth Token (6-digit)</label>
+                <div class="row">
+                    <input type="text" id="auth2FA" placeholder="000-000" maxlength="6" class="auth-token-input">
+                    <button id="btnLogin" class="primary">Initialize</button>
+                </div>
+            </div>
+        </div>
+        <div id="sessionInfo" class="hidden">
+            <div class="row row-spaced">
+                <span class="success">✅ IDENTITY VERIFIED</span>
+                <button id="btnLogout" class="danger">Terminate Session</button>
+            </div>
+            <div class="field mt-10">
+                <label>GitHub Token (Scope: Repo)</label>
+                <input type="password" id="githubToken" placeholder="ghp_...">
+            </div>
+        </div>
+    </section>
+    
+    <!-- NEURAL ENGINE CONFIG (Hybrid/Sovereign) -->
+    <section>
+        <h2>🧠 Neural Engine Configuration</h2>
+        <div class="field">
+            <label for="llmProvider">Provider Priority</label>
+            <select id="llmProvider">
+                <option value="ollama">Ollama (Local/Private)</option>
+                <option value="gemini">Google Gemini (Cloud/Fast)</option>
+            </select>
+        </div>
+
+        <div id="ollamaConfig">
+            <div class="form-group">
+                <label for="ollamaEndpoint">Ollama Endpoint (Local Intelligence)</label>
+                <input type="text" id="ollamaEndpoint" placeholder="http://127.0.0.1:11434" value="http://127.0.0.1:11434">
+            </div>
+            <div class="form-group">
+                <label for="ollamaModel">Model Name</label>
+                <input type="text" id="ollamaModel" value="gemma3:1b">
+            </div>
+        </div>
+
+        <div id="geminiConfig" class="hidden">
+            <div class="form-group">
+                <label for="geminiApiKey">Gemini API Key (Cloud Intelligence)</label>
+                <input type="password" id="geminiApiKey" placeholder="AIzam...">
+            </div>
+            <div class="form-group">
+                <label for="geminiModel">Model Name</label>
+                <input type="text" id="geminiModel" value="gemini-1.5-flash">
+            </div>
+        </div>
+
+        <div class="checkbox-group mt-15">
+            <input type="checkbox" id="hybridMode">
+            <label for="hybridMode">Enable Hybrid Mode (Offload simple tasks to Local LLM)</label>
+        </div>
+        
+        <div class="checkbox-group">
+            <input type="checkbox" id="lowMemoryMode">
+            <label for="lowMemoryMode" class="warning-text">⚠ Low Memory Mode (8GB Optimization)</label>
+        </div>
+
+        <!-- CLOUD OFFLOADING (Morgana) -->
+        <div class="checkbox-group section-dashed-top">
+            <input type="checkbox" id="allowCloudOffload">
+            <label for="allowCloudOffload" class="success-text">☁ Allow Cloud Offloading (Morgana/Modal)</label>
+        </div>
+
+        <!-- CUSTOM PROVIDER (Universal Adapter) -->
+        <div class="mt-15">
+            <label for="primaryCloudEngine">Primary Cloud Engine</label>
+            <select id="primaryCloudEngine" class="primary-select" aria-label="Select Cloud Engine">
+                <option value="gemini">Google Gemini (Default)</option>
+                <option value="modal">Modal (Custom Endpoint)</option>
+                <option value="custom">OpenAI-Compatible (Groq/HF)</option>
+            </select>
+
+            <div id="customProviderConfig" class="custom-provider-config">
+                <div class="form-group">
+                    <label for="customBaseUrl">Base URL (e.g. OpenAI/Modal URL)</label>
+                    <input type="text" id="customBaseUrl" placeholder="https://api.openai.com/v1">
+                </div>
+                <div class="form-group">
+                    <label for="customApiKey">API Key</label>
+                    <input type="password" id="customApiKey" placeholder="sk-...">
+                </div>
+                <div class="form-group">
+                    <label for="customModelId">Model ID</label>
+                    <input type="text" id="customModelId" placeholder="gpt-4-turbo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STEALTH SETTINGS -->
+    <section>
+        <h2>🕵️ Stealth Identity</h2>
+        <div class="field">
+            <label for="activeProfile">Active Profile</label>
+            <div class="row">
+                <select id="activeProfile">
+                    <option value="default">Default (Chromium)</option>
+                </select>
+                <button id="btnNewProfile">➕ New</button>
+            </div>
+        </div>
+        
+        <div class="field">
+            <label>
+                <input type="checkbox" id="sovereignMode">
+                🛡️ Sovereign Mode (Disable Voice Commands)
+            </label>
+            <p class="help-text">
+                Prevents cloud audio processing by disabling voice recognition.
+            </p>
+        </div>
+
+        <div class="field mt-15">
+            <label for="emulationMode">Device Class</label>
+            <select id="emulationMode">
+                <option value="DESKTOP">Desktop (Windows)</option>
+                <option value="MOBILE">Mobile (iPhone)</option>
+            </select>
+        </div>
+
+        <!-- IDENTITY MANAGEMENT -->
+        <div class="mt-15 section-dashed-top">
+            <label>Team Sync (Encrypted Profiles)</label>
+            <div class="row mt-5">
+                <button id="btnExport" class="flex-1">📤 Export</button>
+                <button id="btnImport" class="flex-1">📥 Import</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROXY SETTINGS -->
+    <section>
+        <h2>🌐 Network Layer</h2>
+        <div class="field">
+            <label for="proxyMode">Proxy Mode</label>
+            <select id="proxyMode">
+                <option value="direct">Direct Connection</option>
+                <option value="fixed_servers">Residential Proxy</option>
+            </select>
+        </div>
+        <div id="proxyConfig" class="hidden">
+            <div class="field">
+                <label for="proxyHost">Host:Port</label>
+                <input type="text" id="proxyHost" placeholder="127.0.0.1:8080">
+            </div>
+            <div class="field">
+                <label for="proxyAuth">Auth (User:Pass)</label>
+                <input type="text" id="proxyAuth" placeholder="user:pass">
+            </div>
+            <div class="field">
+                <label for="rotateOnBan">Review on Ban</label>
+                <input type="checkbox" id="rotateOnBan" checked>
+            </div>
+        </div>
+    </section>
+
+    </section>
+
+    <!-- DIAGNOSTICS PANEL -->
+    <section id="diagnosticsSection" class="tab-content hidden" data-tab="diagnostics">
+        <h2>🩺 System Diagnostics</h2>
+        <div class="row">
+            <button id="btnRunDiagnostics" class="primary">Run Full Suite</button>
+            <div id="diagScore" class="score-badge hidden">Score: <span id="scoreVal">0</span>%</div>
+        </div>
+        
+        <div id="diagnosticResults" class="results-grid mt-15">
+            <div class="placeholder-text">Click "Run Full Suite" to verify system integrity.</div>
+        </div>
+    </section>
+
+    <div class="actions">
+        <button id="save" class="primary">Save Configuration</button>
+        <button id="testConnection">Test Neural Link</button>
+        <div id="status"></div>
+    </div>
+  </div>
+  <script src="options.js" type="module"></script>
+</body>
+</html>

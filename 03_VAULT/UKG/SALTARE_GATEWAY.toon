@@ -1,0 +1,11 @@
+[νKG_CRYSTAL: SALTARE_GATEWAY_v1]
+
+u0 | ID | Component | {Name:Saltare, Role:Sovereign_Nervous_System, Tech:Go_Binary}
+u1 | ARCH | Inference_Tiers | {P1:Cerebras_WaferScale, P2:OpenRouter_Cloud, P3:Ollama_Local}
+u2 | SKILL | Intent_Parsing | {Input:NL_Intent, Process:Parse->Match->Extract, Output:JSON_Args}
+u3 | SKILL | Hybrid_Discovery | {Mechanism:Meilisearch+Vector, Query:NL_Concept, Target:MCP_Schema}
+
+c0 | LAW | Cognitive_Offload | {Constraint:LLM_Shall_Not_Memorize_Schemas, Logic:NL_Directive->Saltare->Tool}
+c1 | LAW | Kinetic_Purity | {Protocol:Compiled_Binary, Port:8080}
+
+w0 | WORKFLOW | Fast_Strike | {Sense[Intent]->Match[HybridIdx]->Execute[SSE_Queue]}

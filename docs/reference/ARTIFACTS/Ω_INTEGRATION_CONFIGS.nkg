@@ -1,0 +1,129 @@
+# ⚙️ INTEGRATION CONFIGS: PHASE 1
+## Campaign: Omega Hive Foundation
+## Date: 2026-01-27
+## Status: 🛠️ CONFIGURING
+
+---
+
+# ⚙️ MCP: tomcp_fetch
+{
+  "mcpServers": {
+    "tomcp_fetch": {
+      "command": "node",
+      "args": ["c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/tomcp/src/index.js"],
+      "env": {
+        "DEBUG": "true"
+      }
+    }
+  }
+}
+
+---
+
+# ⚙️ MCP: DesktopCommander
+{
+  "mcpServers": {
+    "desktop_commander": {
+      "command": "node",
+      "args": ["c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/DesktopCommanderMCP/dist/index.js"],
+      "env": {
+        "TS_NODE_TRANSPILE_ONLY": "true"
+      }
+    }
+  }
+}
+
+---
+
+# ⚙️ litellm Proxy Config
+{
+  "model_list": [
+    {
+      "model_name": "gpt-4o",
+      "litellm_params": {
+        "model": "openai/gpt-4o",
+        "api_key": "os.environ/OPENAI_API_KEY"
+      }
+    },
+    {
+      "model_name": "claude-3-5-sonnet",
+      "litellm_params": {
+        "model": "anthropic/claude-3-5-sonnet-20240620",
+        "api_key": "os.environ/ANTHROPIC_API_KEY"
+      }
+    }
+  ],
+  "litellm_settings": {
+    "drop_params": true,
+    "set_fastapi_logging": false
+  }
+}
+
+---
+
+# ⚙️ workflows: activepieces_proxy
+{
+  "activepieces": {
+    "api_key": "os.environ/ACTIVEPIECES_API_KEY",
+    "base_url": "http://localhost:3000"
+  }
+}
+
+# ⚙️ Voice Stack: kokoro-onnx + OpenVoice
+{
+  "voice_engine": {
+    "provider": "kokoro-onnx",
+    "model_path": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/kokoro-onnx/models/kokoro-v1.0.onnx",
+    "voices_path": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/kokoro-onnx/models/voices-v1.0.bin",
+    "default_voice": "af_bella"
+  },
+  "cloning_engine": {
+    "provider": "OpenVoice",
+    "path": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/OpenVoice"
+  }
+}
+
+---
+
+# ⚙️ Vision Stack: Fooocus
+{
+  "vision_engine": {
+    "provider": "Fooocus",
+    "path": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/Fooocus",
+    "output_dir": "c:/Users/vizio/CAMELOT_OS/docs/ARTIFACTS/images",
+    "status": "READY_TO_INITIALIZE"
+  }
+}
+
+---
+
+# ⚙️ Training Stack: Unsloth
+{
+  "training_engine": {
+    "provider": "unsloth",
+    "path": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/unsloth",
+    "status": "READY_TO_INITIALIZE"
+  }
+}
+
+---
+
+# ⚙️ Cloud OS: Puter
+{
+  "cloud_os": {
+    "provider": "puter",
+    "path": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/puter",
+    "status": "DIAGNOSED_VERSION_MISMATCH_V24_REQ"
+  }
+}
+
+---
+
+# ⚙️ AI Development: bolt.diy + big-AGI
+{
+  "ide_stack": {
+    "bolt_diy": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/bolt.diy",
+    "big_agi": "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/big-AGI",
+    "status": "REPOS_CLONED"
+  }
+}

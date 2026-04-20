@@ -1,0 +1,8 @@
+{
+  "id": "D5AFAE1B",
+  "instruction": "\n        ### ROLE: CAMELOT_FORGE_FIXER\n        ### SITUATION: A previous build attempt failed verification.\n        \n        [TASK]: Write a python function to add two numbers.\n        [FAILED_CODE]:\n        \n    def add_numbers(a, b)\n        return a + b\n    \n        \n        [CRITIQUE]:\n        \n        \n        ### INSTRUCTION: Generate the corrected code. Fix the errors exactly. Return ONLY the code.\n        ",
+  "system": "You are a master fixer. You fix code instantly and perfectly.",
+  "output": "```\ndef add_numbers(a, b):\n    return a + b\n```",
+  "model": "ollama/llama3.2:1b",
+  "eval_score": 0.0
+}

@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "target": "SuperAGI",
+    "date": "2026-01-27T21:32:50.774309",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Next.js",
+        "Docker",
+        "Python",
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest"
+      ],
+      "test_count": 121
+    },
+    "security": {
+      "vulnerabilities": 1,
+      "critical_findings": [
+        "Potential secret in user.py"
+      ]
+    },
+    "documentation": {
+      "grade": "B",
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 80,
+    "grade": "A"
+  }
+}

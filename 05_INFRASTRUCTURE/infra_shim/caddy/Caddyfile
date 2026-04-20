@@ -1,0 +1,28 @@
+# Sovereign Singularity Hub — Caddy Unified Gateway (Port-Based Routing)
+# (c) 2024-2026 Invisioned Marketing Inc. | ALL RIGHTS RESERVED.
+
+{
+    # Global Options
+    admin off
+}
+
+# --- 🎬 MEDIA HUB (Jellyfin) ---
+http://cybertronia.tailcd0c29.ts.net:80, http://100.118.224.52:80 {
+    reverse_proxy 127.0.0.1:8096
+
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options SAMEORIGIN
+        Referrer-Policy strict-origin-when-cross-origin
+    }
+}
+
+# --- 🧠 SOVEREIGN SPIRE (Gradio) ---
+http://cybertronia.tailcd0c29.ts.net:8081, http://100.118.224.52:8081 {
+    reverse_proxy 127.0.0.1:7860
+}
+
+# --- 🌌 CELESTIAL LAB (Next.js) ---
+http://cybertronia.tailcd0c29.ts.net:8082, http://100.118.224.52:8082 {
+    reverse_proxy 127.0.0.1:3005
+}

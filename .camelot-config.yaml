@@ -1,0 +1,34 @@
+# Camelot-OS Canonical Configuration
+# ------------------------------------
+# Global settings for cloudbrain URLs and operator defaults.
+
+cloudbrain_url: "https://notebooklm.google.com/notebook/bcaadfdd-1654-487d-9c4c-111f7dea120e"
+research_agency_url: None
+
+# Active profile determines defaults if --profile is not specified
+active_profile: default
+
+profiles:
+  default:
+    compute_tier: hybrid
+    browser_isolation: agency
+    residential_proxy: false  # Task F6: Safe default (Direct Mode)
+    stealth: true
+    ephemeral_sessions: false
+    privacy_threshold: 0.0
+
+  stealth_researcher:
+    compute_tier: apex
+    browser_isolation: stealth
+    residential_proxy: true
+    stealth: true
+    ephemeral_sessions: true
+    privacy_threshold: 0.8
+
+  lean_operator:
+    compute_tier: kinetic
+    browser_isolation: team
+    residential_proxy: false
+    stealth: false
+    ephemeral_sessions: false
+    privacy_threshold: 0.0

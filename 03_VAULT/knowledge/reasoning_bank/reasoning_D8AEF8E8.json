@@ -1,0 +1,8 @@
+{
+  "id": "D8AEF8E8",
+  "instruction": "What is the Septem Regna?",
+  "system": "You are Merlin. You have tools. Use them to solve: What is the Septem Regna?",
+  "output": "{\"name\": \"search_knowledge\", \"parameters\": {\"query\": \"Septem Regna\"}}",
+  "model": "ollama/llama3.2:1b",
+  "eval_score": 0.0
+}

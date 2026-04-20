@@ -1,0 +1,45 @@
+graph TD
+    %% VISITOR FLOW
+    Visitor((👤 Visitor)) -->|Load Site| CHECK{First Visit?}
+    CHECK -->|Yes| INTRO[Play Cinematic Intro Video]
+    CHECK -->|No| HERO[Split Hero Section]
+    
+    subgraph "HOME PAGE EXPERIENCE"
+        HERO -->|Left| AMBIENT[Ambient Loop Video]
+        HERO -->|Right| LOGIN_GATE[Login / Sign Up]
+        
+        HERO --> FEATURED[3D Product Cards + Timer]
+        FEATURED --> LIVE_STORE[Interactive Storefront]
+        
+        LIVE_STORE -- Syncs with Time --> MORNING[Morning Vibe]
+        LIVE_STORE -- Syncs with Time --> NIGHT[Night Vibe]
+        
+        LIVE_STORE --> TESTIMONIALS[Scrolling Social Proof]
+        TESTIMONIALS --> CATEGORIES[Seasonal Reveal Grid]
+    end
+
+    %% LOGGED IN FLOW
+    LOGIN_GATE -->|Auth Success| DASH[User Dashboard]
+    
+    subgraph "THE HEARTH (Dashboard)"
+        DASH --> POINTS[Claim Daily Login Points]
+        DASH --> CALENDAR[Gift Giving Calendar]
+        CALENDAR -->|Trigger| REMINDER[Email/SMS Notification]
+        
+        DASH --> FORGE[Glass Creator (POD)]
+        FORGE -->|Drag & Drop| CANVAS[Canvas Editor]
+        CANVAS -->|Save| CART
+        
+        DASH --> SUBS[Subscription Manager]
+        DASH --> HISTORY[Purchase History & Recommender]
+    end
+
+    %% CONTENT & MONETIZATION
+    CATEGORIES --> PRODUCT[Product Page (Video + Images)]
+    PRODUCT --> CART
+    
+    subgraph "GROWTH ENGINE"
+        BLOG[Blog + Affiliate Links]
+        EVENTS[Event RSVP System]
+        ABOUT[Family Spotlight (Author/Marketer)]
+    end

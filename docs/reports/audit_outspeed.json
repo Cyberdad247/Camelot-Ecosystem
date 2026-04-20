@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "target": "outspeed",
+    "date": "2026-01-27T21:21:16.404170",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Service/App",
+      "stack": [
+        "Python"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest"
+      ],
+      "test_count": 5
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "F",
+      "missing": [
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 56,
+    "grade": "D"
+  }
+}

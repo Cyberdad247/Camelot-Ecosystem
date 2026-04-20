@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Phoenix Portal - Complete Email Automation Templates | Invisioned Marketing Inc.</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f5;
+    color: #333;
+    line-height: 1.7;
+    padding: 40px 20px;
+  }
+
+  .document {
+    max-width: 900px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 60px 70px;
+    box-shadow: 0 1px 10px rgba(0,0,0,0.08);
+  }
+
+  .doc-header {
+    text-align: center;
+    border-bottom: 3px solid #d4af37;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+  }
+
+  .doc-header h1 {
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #111;
+    margin-bottom: 8px;
+  }
+
+  .doc-header .subtitle {
+    font-size: 16px;
+    color: #666;
+    letter-spacing: 1px;
+  }
+
+  .doc-header .meta {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #999;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: 22px;
+    color: #111;
+    margin: 40px 0 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 25px 0 10px;
+  }
+
+  h4 {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 20px 0 8px;
+  }
+
+  p { margin-bottom: 12px; }
+
+  .toc {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 25px 30px;
+    margin: 20px 0 40px;
+  }
+
+  .toc h3 { margin-top: 0; }
+
+  .toc ol {
+    padding-left: 20px;
+  }
+
+  .toc li {
+    margin: 6px 0;
+    font-size: 14px;
+  }
+
+  .toc a {
+    color: #333;
+    text-decoration: none;
+  }
+
+  .toc a:hover { color: #d4af37; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0 25px;
+    font-size: 14px;
+  }
+
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background: #111;
+    color: #d4af37;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  tr:hover td { background: #fafafa; }
+
+  .email-template {
+    border: 2px solid #222;
+    margin: 30px 0;
+    page-break-inside: avoid;
+  }
+
+  .email-header {
+    background: #111;
+    color: #fff;
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .email-header .email-number {
+    background: #d4af37;
+    color: #000;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 12px;
+    letter-spacing: 1px;
+  }
+
+  .email-header .email-timing {
+    font-size: 12px;
+    color: #aaa;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .email-meta {
+    background: #1a1a1a;
+    padding: 15px 25px;
+    font-size: 13px;
+  }
+
+  .email-meta .row {
+    display: flex;
+    margin: 5px 0;
+  }
+
+  .email-meta .label {
+    color: #d4af37;
+    font-weight: 600;
+    width: 120px;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding-top: 2px;
+  }
+
+  .email-meta .value {
+    color: #e0e0e0;
+  }
+
+  .email-body-preview {
+    background: #050505;
+    color: #e0e0e0;
+    padding: 40px 50px;
+    line-height: 1.8;
+  }
+
+  .email-body-preview .greeting {
+    color: #d4af37;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .email-body-preview p {
+    font-size: 15px;
+    margin-bottom: 18px;
+    color: #ccc;
+  }
+
+  .email-body-preview em {
+    color: #d4af37;
+    font-style: italic;
+  }
+
+  .email-body-preview strong {
+    color: #fff;
+  }
+
+  .email-cta {
+    display: inline-block;
+    margin: 25px 0;
+    padding: 16px 40px;
+    border: 2px solid #d4af37;
+    background: #d4af37;
+    color: #000;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .email-footer-preview {
+    background: #0a0a0a;
+    padding: 20px 50px;
+    border-top: 1px solid #222;
+    font-size: 11px;
+    color: #555;
+    text-align: center;
+  }
+
+  .implementation-note {
+    background: #fffbeb;
+    border-left: 4px solid #d4af37;
+    padding: 15px 20px;
+    margin: 15px 0;
+    font-size: 13px;
+  }
+
+  .implementation-note strong {
+    color: #333;
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+
+  .checklist li {
+    padding: 8px 0 8px 30px;
+    position: relative;
+    font-size: 14px;
+  }
+
+  .checklist li::before {
+    content: '\2610';
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+  }
+
+  .flow-diagram {
+    background: #111;
+    color: #e0e0e0;
+    padding: 30px;
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 2;
+    margin: 15px 0 25px;
+    white-space: pre-wrap;
+    border-left: 3px solid #d4af37;
+  }
+
+  .section-divider {
+    text-align: center;
+    margin: 50px 0;
+    color: #d4af37;
+    letter-spacing: 8px;
+    font-size: 12px;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 15px 0 25px;
+  }
+
+  .kpi-card {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .kpi-card .kpi-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111;
+  }
+
+  .kpi-card .kpi-label {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 5px;
+  }
+
+  @media print {
+    body { padding: 0; background: #fff; }
+    .document { box-shadow: none; padding: 40px; }
+    .email-template { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="document">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <h1>PHOENIX PORTAL</h1>
+    <div class="subtitle">Complete Email Automation Templates</div>
+    <div class="meta">
+      Invisioned Marketing Inc. &bull; HeadArtworks &bull; April 2026
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#overview">Automation Overview</a></li>
+      <li><a href="#brand-guide">Brand Voice &amp; Design Guide</a></li>
+      <li><a href="#flow">Shopify Flow Configuration</a></li>
+      <li><a href="#email1">Email 1: The Skeleton Key Delivered</a></li>
+      <li><a href="#email2">Email 2: The 300-Year Deception</a></li>
+      <li><a href="#email3">Email 3: The Frequency of Awakening</a></li>
+      <li><a href="#email4">Email 4: The Master Locksmith</a></li>
+      <li><a href="#email5">Email 5: Forge Your Own Reality</a></li>
+      <li><a href="#kpis">KPIs &amp; Benchmarks</a></li>
+      <li><a href="#testing">Testing &amp; Launch Checklist</a></li>
+    </ol>
+  </div>
+
+  <!-- 1. OVERVIEW -->
+  <h2 id="overview">1. Automation Overview</h2>
+  <p>This document contains the complete 5-email welcome automation sequence for the Phoenix Portal lead capture system on <strong>headartwork.myshopify.com</strong>. The sequence is triggered when a visitor submits the lead capture form on the Phoenix Portal page, creating a Shopify customer tagged <code>phoenix_lead</code>.</p>
+
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Email Name</th>
+      <th>Subject Line</th>
+      <th>Timing</th>
+      <th>Goal</th>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Skeleton Key Delivered</td>
+      <td>The Vault Opens: Your Skeleton Key Awaits</td>
+      <td>Immediate</td>
+      <td>Deliver download, establish brand</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>The 300-Year Deception</td>
+      <td>The 300-Year Deception</td>
+      <td>Day 1</td>
+      <td>Core thesis hook, drive book engagement</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Frequency of Awakening</td>
+      <td>Hear the Revelator</td>
+      <td>Day 3</td>
+      <td>Cross-promote YouTube content</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>The Master Locksmith</td>
+      <td>The Architect of the Portal</td>
+      <td>Day 5</td>
+      <td>Authority building, personal brand</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>Forge Your Reality</td>
+      <td>Forge Your Own Reality</td>
+      <td>Day 7</td>
+      <td>Convert to store visit + agency awareness</td>
+    </tr>
+  </table>
+
+  <div class="implementation-note">
+    <strong>Platform:</strong> Shopify Email + Shopify Flow (both free). No Klaviyo or third-party email service required. Free tier covers 10,000 emails/month.
+  </div>
+
+  <!-- 2. BRAND GUIDE -->
+  <h2 id="brand-guide">2. Brand Voice &amp; Design Guide</h2>
+
+  <h3>Voice &amp; Tone</h3>
+  <table>
+    <tr><th>Attribute</th><th>Guideline</th></tr>
+    <tr><td>Address</td><td>Always "Truth Seeker" &mdash; never "subscriber" or "customer"</td></tr>
+    <tr><td>Tone</td><td>Mysterious, empowering, philosophical. Never salesy or casual.</td></tr>
+    <tr><td>Metaphors</td><td>Skeleton Key, Vault, Portal, Defragmentation, Illusions, Master Locksmith</td></tr>
+    <tr><td>Perspective</td><td>We are welcoming them into an inner circle of truth. They have been chosen.</td></tr>
+    <tr><td>Forbidden</td><td>Exclamation marks, emoji, "Hey!", "Don't miss out!", urgency-bait language</td></tr>
+  </table>
+
+  <h3>Email Design Specifications</h3>
+  <table>
+    <tr><th>Element</th><th>Value</th></tr>
+    <tr><td>Background</td><td>#050505 (near-black)</td></tr>
+    <tr><td>Text Color</td><td>#cccccc (body) / #e0e0e0 (emphasis)</td></tr>
+    <tr><td>Accent / CTA</td><td>#d4af37 (gold)</td></tr>
+    <tr><td>Heading Color</td><td>#d4af37 (gold)</td></tr>
+    <tr><td>CTA Button</td><td>Background: #d4af37, Text: #000000, Border: 2px solid #d4af37</td></tr>
+    <tr><td>Font</td><td>System sans-serif (Helvetica Neue, Arial)</td></tr>
+    <tr><td>Body Font Size</td><td>15-16px</td></tr>
+    <tr><td>Max Width</td><td>600px centered</td></tr>
+    <tr><td>Logo</td><td>Store logo centered in header</td></tr>
+    <tr><td>Footer</td><td>Invisioned Marketing Inc. | Unsubscribe | Dark (#0a0a0a)</td></tr>
+  </table>
+
+  <div class="section-divider">&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+
+  <!-- 3. SHOPIFY FLOW -->
+  <h2 id="flow">3. Shopify Flow Configuration</h2>
+
+  <p>Navigate to: <strong>headartwork.myshopify.com/admin/flow</strong></p>
+  <p>Create a single flow with the following structure:</p>
+
+  <div class="flow-diagram">TRIGGER: Customer created
+    |
+CONDITION: Customer tags CONTAINS "phoenix_lead"
+    |
+    +---> ACTION: Send email "Phoenix - Skeleton Key Delivered"
+    |
+    +---> WAIT: 24 hours
+    |
+    +---> ACTION: Send email "Phoenix - 300 Year Deception"
+    |
+    +---> WAIT: 48 hours
+    |
+    +---> ACTION: Send email "Phoenix - Frequency of Awakening"
+    |
+    +---> WAIT: 48 hours
+    |
+    +---> ACTION: Send email "Phoenix - Master Locksmith"
+    |
+    +---> WAIT: 48 hours
+    |
+    +---> ACTION: Send email "Phoenix - Forge Your Reality"</div>
+
+  <div class="implementation-note">
+    <strong>Note:</strong> Create all 5 email templates in Shopify Email (<strong>/admin/email</strong>) BEFORE building the flow. The flow references templates by name.
+  </div>
+
+  <div class="section-divider">&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+
+  <!-- EMAIL 1 -->
+  <h2 id="email1">4. Email 1: The Skeleton Key Delivered</h2>
+
+  <div class="email-template">
+    <div class="email-header">
+      <span class="email-number">EMAIL 1 OF 5</span>
+      <span class="email-timing">Send: Immediately</span>
+    </div>
+    <div class="email-meta">
+      <div class="row"><span class="label">Subject</span><span class="value">The Vault Opens: Your Skeleton Key Awaits</span></div>
+      <div class="row"><span class="label">Preview</span><span class="value">It is time to begin your Psychic Defragmentation...</span></div>
+      <div class="row"><span class="label">Goal</span><span class="value">Deliver book download, establish brand relationship</span></div>
+    </div>
+    <div class="email-body-preview">
+      <div class="greeting">Welcome, Truth Seeker.</div>
+      <p>You have taken the crucial first step beyond the illusions.</p>
+      <p>The artifact you requested &mdash; <em>The 1% Theorem</em> &mdash; is not merely an interactive e-book; it is a <strong>Skeleton Key</strong> designed to unlock the mental prisons constructed around you.</p>
+      <p>You have entered the Phoenix Portal, a cinematic space reserved for independent thinkers who question the mainstream narrative.</p>
+      <p>It is time to begin your <strong>Psychic Defragmentation</strong>. Claim what is yours.</p>
+      <a href="https://delivery.shopifyapps.com/-/4ac1dc16f87c78e1/95ddb592359f8513" class="email-cta">Download The 1% Theorem</a>
+    </div>
+    <div class="email-footer-preview">
+      Invisioned Marketing Inc. &bull; HeadArtworks<br>
+      You received this because you entered the Phoenix Portal.<br>
+      <a href="#" style="color: #555;">Unsubscribe</a>
+    </div>
+  </div>
+
+  <!-- EMAIL 2 -->
+  <h2 id="email2">5. Email 2: The 300-Year Deception</h2>
+
+  <div class="email-template">
+    <div class="email-header">
+      <span class="email-number">EMAIL 2 OF 5</span>
+      <span class="email-timing">Send: Day 1 (24 hours)</span>
+    </div>
+    <div class="email-meta">
+      <div class="row"><span class="label">Subject</span><span class="value">The 300-Year Deception</span></div>
+      <div class="row"><span class="label">Preview</span><span class="value">How language was weaponized against your understanding...</span></div>
+      <div class="row"><span class="label">Goal</span><span class="value">Deepen engagement with core thesis, drive book reading</span></div>
+    </div>
+    <div class="email-body-preview">
+      <div class="greeting">Truth Seeker,</div>
+      <p>Have you turned the key yet?</p>
+      <p>Consider the words you use every day. If you compare the <strong>1913 Webster's Dictionary</strong> to modern definitions, a chilling linguistic drift reveals itself.</p>
+      <p>Over the last 300 years, language has been deliberately de-evolved, shifting humanity away from a <em>principles-based understanding</em> and forcing us into <em>authority-based compliance</em>.</p>
+      <p>This was no accident. <em>The 1% Theorem</em> exposes this shift. Read it closely, and watch the illusions reveal themselves.</p>
+      <a href="https://delivery.shopifyapps.com/-/4ac1dc16f87c78e1/95ddb592359f8513" class="email-cta">Unlock the Truth</a>
+    </div>
+    <div class="email-footer-preview">
+      Invisioned Marketing Inc. &bull; HeadArtworks<br>
+      You received this because you entered the Phoenix Portal.<br>
+      <a href="#" style="color: #555;">Unsubscribe</a>
+    </div>
+  </div>
+
+  <!-- EMAIL 3 -->
+  <h2 id="email3">6. Email 3: The Frequency of Awakening</h2>
+
+  <div class="email-template">
+    <div class="email-header">
+      <span class="email-number">EMAIL 3 OF 5</span>
+      <span class="email-timing">Send: Day 3 (72 hours)</span>
+    </div>
+    <div class="email-meta">
+      <div class="row"><span class="label">Subject</span><span class="value">Hear the Revelator</span></div>
+      <div class="row"><span class="label">Preview</span><span class="value">Tune your mind to a different frequency...</span></div>
+      <div class="row"><span class="label">Goal</span><span class="value">Drive YouTube engagement (playlist + interview)</span></div>
+    </div>
+    <div class="email-body-preview">
+      <div class="greeting">Truth Seeker,</div>
+      <p>The written word is only one vector of the Phoenix Portal.</p>
+      <p>To fully grasp the depths of the illusions revealed, one must also <strong>tune into the right frequency</strong>.</p>
+      <p>We invite you to explore the <em>Revelator Interview</em> series and immerse yourself in our <strong>Audio Archives</strong> on YouTube. Let the soundtrack of your awakening guide your ongoing defragmentation.</p>
+      <p>Listen closely to the Master Locksmith &mdash; the truth is hidden in plain sight.</p>
+      <a href="https://youtube.com/playlist?list=PL1l8lqBZSZtulkKcgR_qaIJ1iYrie_mws" class="email-cta">Enter the Audio Archives</a>
+      <br><br>
+      <p style="font-size: 13px; color: #888;">Or watch the Revelator Interview: <a href="https://www.youtube.com/watch?v=AciO388QcTA" style="color: #d4af37;">Watch Now</a></p>
+    </div>
+    <div class="email-footer-preview">
+      Invisioned Marketing Inc. &bull; HeadArtworks<br>
+      You received this because you entered the Phoenix Portal.<br>
+      <a href="#" style="color: #555;">Unsubscribe</a>
+    </div>
+  </div>
+
+  <!-- EMAIL 4 -->
+  <h2 id="email4">7. Email 4: The Master Locksmith</h2>
+
+  <div class="email-template">
+    <div class="email-header">
+      <span class="email-number">EMAIL 4 OF 5</span>
+      <span class="email-timing">Send: Day 5 (120 hours)</span>
+    </div>
+    <div class="email-meta">
+      <div class="row"><span class="label">Subject</span><span class="value">The Architect of the Portal</span></div>
+      <div class="row"><span class="label">Preview</span><span class="value">Meet the mind behind the Psychic Defragmentation...</span></div>
+      <div class="row"><span class="label">Goal</span><span class="value">Build personal brand authority for VaShawn F. HEAD</span></div>
+    </div>
+    <div class="email-body-preview">
+      <div class="greeting">Truth Seeker,</div>
+      <p>Every vault has a creator, and every awakening requires a guide.</p>
+      <p><strong>VaShawn F. HEAD</strong> &mdash; the Master Locksmith and counter-culture truth-teller &mdash; built the Phoenix Portal to connect spiritual seekers and intellectual rebels like you.</p>
+      <p>His mission began in 1971 at the Higbee's "Santa Line Slaying" &mdash; a moment that shattered the script of a young boy and birthed a <strong>55-year quest</strong> for the truth.</p>
+      <p>Through <em>Psychic Defragmentation</em>, he has re-ground the keys to our history, identifying how modern language has de-evolved to keep the river trapped in the cup.</p>
+      <p>We do not accept the manufactured narratives of education and governance, and neither do you. You are now part of an inner circle that demands more than mere compliance.</p>
+      <a href="https://www.youtube.com/watch?v=AciO388QcTA" class="email-cta">Discover the Vision</a>
+    </div>
+    <div class="email-footer-preview">
+      Invisioned Marketing Inc. &bull; HeadArtworks<br>
+      You received this because you entered the Phoenix Portal.<br>
+      <a href="#" style="color: #555;">Unsubscribe</a>
+    </div>
+  </div>
+
+  <!-- EMAIL 5 -->
+  <h2 id="email5">8. Email 5: Forge Your Own Reality</h2>
+
+  <div class="email-template">
+    <div class="email-header">
+      <span class="email-number">EMAIL 5 OF 5</span>
+      <span class="email-timing">Send: Day 7 (168 hours)</span>
+    </div>
+    <div class="email-meta">
+      <div class="row"><span class="label">Subject</span><span class="value">Forge Your Own Reality</span></div>
+      <div class="row"><span class="label">Preview</span><span class="value">Bring the vision into the physical world...</span></div>
+      <div class="row"><span class="label">Goal</span><span class="value">Drive store traffic + introduce Invisioned Marketing</span></div>
+    </div>
+    <div class="email-body-preview">
+      <div class="greeting">Truth Seeker,</div>
+      <p>Knowledge without action remains a dormant key.</p>
+      <p>You have begun the process of <strong>Psychic Defragmentation</strong> and witnessed the linguistic drift. Now, it is time to arm yourself with the artifacts of this awakening.</p>
+      <p>Explore the premium creations at <strong>HeadArtworks</strong> &mdash; each piece a physical manifestation of the truths revealed through the Portal.</p>
+      <a href="https://headartworks.com" class="email-cta">Enter the Store</a>
+      <br><br>
+      <p style="font-size: 13px; color: #888; border-top: 1px solid #222; padding-top: 20px; margin-top: 10px;">Are you a creator or visionary ready to build your own legacy outside the matrix of compliance? <a href="https://invisionedmarketing.agency" style="color: #d4af37;"><strong>Invisioned Marketing</strong></a> is ready to elevate your truth. The master key is in your hands.</p>
+    </div>
+    <div class="email-footer-preview">
+      Invisioned Marketing Inc. &bull; HeadArtworks<br>
+      You received this because you entered the Phoenix Portal.<br>
+      <a href="#" style="color: #555;">Unsubscribe</a>
+    </div>
+  </div>
+
+  <div class="section-divider">&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+
+  <!-- KPIs -->
+  <h2 id="kpis">9. KPIs &amp; Benchmarks</h2>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-value">&gt;40%</div>
+      <div class="kpi-label">Open Rate Target</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">&gt;8%</div>
+      <div class="kpi-label">Click Rate Target</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-value">&lt;0.5%</div>
+      <div class="kpi-label">Unsubscribe Ceiling</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Email</th><th>Open Rate Benchmark</th><th>Click Rate Benchmark</th><th>Primary Metric</th></tr>
+    <tr><td>1 - Skeleton Key</td><td>50-65%</td><td>15-25%</td><td>Download clicks</td></tr>
+    <tr><td>2 - 300 Year Deception</td><td>40-50%</td><td>8-12%</td><td>Re-download clicks</td></tr>
+    <tr><td>3 - Frequency of Awakening</td><td>35-45%</td><td>10-15%</td><td>YouTube clicks</td></tr>
+    <tr><td>4 - Master Locksmith</td><td>35-40%</td><td>6-10%</td><td>Interview video clicks</td></tr>
+    <tr><td>5 - Forge Your Reality</td><td>30-40%</td><td>5-8%</td><td>Store visits + Agency clicks</td></tr>
+  </table>
+
+  <div class="implementation-note">
+    <strong>Monitoring:</strong> Check Shopify Email analytics weekly at <code>/admin/email</code>. Review Flow execution history at <code>/admin/flow</code>. Filter customers by tag <code>phoenix_lead</code> to track list growth.
+  </div>
+
+  <div class="section-divider">&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+
+  <!-- TESTING -->
+  <h2 id="testing">10. Testing &amp; Launch Checklist</h2>
+
+  <h3>Pre-Launch</h3>
+  <ul class="checklist">
+    <li>Create all 5 email templates in Shopify Email</li>
+    <li>Apply gold/black design theme to each template</li>
+    <li>Verify download link works: delivery.shopifyapps.com/-/4ac1dc16f87c78e1/95ddb592359f8513</li>
+    <li>Verify YouTube playlist link works</li>
+    <li>Verify YouTube interview link works</li>
+    <li>Verify headartworks.com link works</li>
+    <li>Verify invisionedmarketing.agency link works</li>
+    <li>Build Shopify Flow automation with all 5 steps + wait timers</li>
+    <li>Send test email from each template to yourself</li>
+    <li>Check email renders on mobile (Gmail, Apple Mail)</li>
+    <li>Check email renders on desktop (Gmail, Outlook)</li>
+    <li>Verify unsubscribe link works</li>
+  </ul>
+
+  <h3>Launch Test</h3>
+  <ul class="checklist">
+    <li>Create test customer in Shopify admin with tag "phoenix_lead"</li>
+    <li>Verify Email 1 sends immediately</li>
+    <li>Verify Flow shows "Running" in execution history</li>
+    <li>After 24h: verify Email 2 received</li>
+    <li>After 72h: verify Email 3 received</li>
+    <li>After 120h: verify Email 4 received</li>
+    <li>After 168h: verify Email 5 received</li>
+    <li>Remove test customer or add "test" tag</li>
+  </ul>
+
+  <h3>Live Verification</h3>
+  <ul class="checklist">
+    <li>Submit Phoenix Portal lead form with real email</li>
+    <li>Confirm Shopify customer created with "phoenix_lead" tag</li>
+    <li>Confirm Email 1 arrives in inbox (not spam)</li>
+    <li>Confirm download link in email works</li>
+    <li>Monitor Shopify Flow for errors over first 7 days</li>
+  </ul>
+
+  <div class="section-divider">&mdash;&mdash;&mdash;&mdash;&mdash;</div>
+
+  <!-- FOOTER -->
+  <div style="text-align: center; padding: 30px 0 10px; color: #999; font-size: 12px;">
+    <p>PHOENIX PORTAL EMAIL AUTOMATION TEMPLATES v1.0</p>
+    <p>Invisioned Marketing Inc. &bull; HeadArtworks &bull; April 2026</p>
+    <p>Prepared by the Engineering Knights of Camelot Apex OS</p>
+    <p style="color: #d4af37; margin-top: 15px; letter-spacing: 3px;">THE ILLUSIONS REVEALED</p>
+  </div>
+
+</div>
+
+</body>
+</html>

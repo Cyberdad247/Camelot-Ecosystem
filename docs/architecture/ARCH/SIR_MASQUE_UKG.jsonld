@@ -1,0 +1,29 @@
+{
+  "@context": "https://camelot.os/ukg/v1",
+  "@type": "ResearchThread",
+  "id": "pplx_multilogin_nano_knights_01",
+  "nodes": [
+    {
+      "id": "q_1",
+      "type": "query",
+      "content": "Which anti-detect features best suit automation tasks and how to create a personal Multi-login-style system integrated with Camelot Apex Nano-Knights?"
+    },
+    {
+      "id": "design_sir_masque_1",
+      "type": "design",
+      "content": "Sir Masque Ω is a manager-type agent that orchestrates four Nano-Knights: nano_canvas for fingerprint injection, nano_proxy for routing, nano_vault for encrypted profile storage, and nano_puppet for automated headless browsing."
+    },
+    {
+      "id": "code_logic_1",
+      "type": "artifact",
+      "content": "def launch(profile_id, mission): profile = vault.decrypt(profile_id); proxy = allocator.pick(profile, mission.intent); config = build_config(profile, proxy); result = nano_puppet.run(config, mission_script); ledger.log(run_id, profile_id, proxy, result)"
+    }
+  ],
+  "edges": [
+    {
+      "source": "fact_camelot_1",
+      "target": "design_sir_masque_1",
+      "rel": "CONTEXT_FOR"
+    }
+  ]
+}

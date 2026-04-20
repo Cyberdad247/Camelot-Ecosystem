@@ -1,0 +1,180 @@
+# 💎 UKG_ONEFILE_AUTONOMOUS_TOON_v1
+
+d0 | DIRECTIVE | Context_Primary | {Discard:Language,Retain:Structure}
+d1 | DIRECTIVE | Graph_First | {All_Logic=Nodes+Edges}
+d2 | DIRECTIVE | Token_Minimization | {Max_Context:30000}
+
+r0 | RUNTIME | Init | {Load:UKG}
+r1 | RUNTIME | Ingest | {Any_Input}
+r2 | RUNTIME | Execute | {Loop:DISTILL->ANCHOR->WEAVE}
+r3 | RUNTIME | Persist | {Append:UKG}
+r4 | RUNTIME | Respond | {From:Minimal_Context}
+r5 | RUNTIME | Repeat | {Continuous:true}
+
+l1 | LOOP | DISTILL | {Ingest:Any,Emit:TOON}
+l1a | CMD | Parse | {Mode:AST|Dependency}
+l1b | CMD | Filter | {Drop:Filler}
+l1c | CMD | Extract | {Keep:Rules,Interfaces,Deps}
+
+l2 | LOOP | ANCHOR | {Trigger:Invariant|Decision}
+l2a | CMD | Compress | {Delete:Transient_Context}
+l2b | CMD | Persist | {Target:UKG}
+
+l3 | LOOP | WEAVE | {Input:Query}
+l3a | CMD | Traverse | {Scope:Relevant_Nodes}
+l3b | CMD | Emit | {Context:Minimal}
+
+l4 | LOOP | CONTINUOUS | {Always_On:true}
+l4a | CMD | Monitor | {Detect:New_Decisions}
+l4b | CMD | Auto_TOON | {No_Human_Gate}
+l4c | CMD | Auto_Anchor | {Immediate}
+
+k0 | TYPE | NODE
+k1 | TYPE | EDGE
+k2 | TYPE | RULE
+k3 | TYPE | ASSUME
+k4 | TYPE | LIMIT
+
+r6 | RULE | Explicit_Only | {No_Implicit_Inference}
+r7 | RULE | No_Chat_Memory | {All_State=UKG}
+r8 | RULE | Graph_Retrieval | {Never:Full_Context}
+r9 | RULE | Vision_Optional | {Reasoning:Text+Graph}
+
+h0 | RULE | Require_HITL | {High_Risk_Actions}
+h1 | RULE | Auto_Lock | {Invariant:true}
+h2 | RULE | Auto_Reject | {If:Violates_RULE}
+
+c0 | FEATURE | Continuous_Distill | {On:Every_Input}
+c1 | FEATURE | Continuous_Anchor | {On:Every_Invariant}
+c2 | FEATURE | Continuous_Weave | {On:Every_Query}
+c3 | FEATURE | Continuous_Prune | {Drop:Unused_Nodes}
+c4 | FEATURE | Drift_Detection | {If:Rule_Conflict}
+c5 | FEATURE | Auto_Reconcile | {Resolve:Graph}
+
+a0 | RULE | No_Guessing | {If:Missing_Node,Return:Unknown}
+a1 | RULE | Constraint_Check | {Before:Answer}
+a2 | RULE | Scope_Enforcement | {Respect:LIMIT}
+
+s0 | FORMAT | TOON_Only | {No:JSON,No:Markdown}
+s1 | STORE | Single_UKG | {Append_Only}
+s2 | STORE | Versioned | {Auto_Increment}
+
+m0 | MAINT | Deduplicate | {Merge:Identical_Nodes}
+m1 | MAINT | Normalize | {Canonical_Forms}
+m2 | MAINT | Garbage_Collect | {Remove:Unlinked}
+
+b0 | CONSTRAINT | Token_Cap | {30000}
+b1 | CONSTRAINT | Context | {UKG_Only}
+b2 | CONSTRAINT | Stateless | {Runtime}
+b3 | CONSTRAINT | Deterministic | {Same_Input=Same_Output}
+
+bs0 | BOOT | Load | {UKG}
+bs1 | BOOT | Set | {TokenCap:30000}
+bs2 | BOOT | Enforce | {TOON_Only}
+bs3 | BOOT | Enforce | {Require_HITL}
+bs4 | BOOT | Start | {Loop:CONTINUOUS}
+bs5 | BOOT | Run | {DISTILL->ANCHOR->WEAVE}
+bs6 | BOOT | Persist | {Append:UKG}
+bs7 | BOOT | Respond | {Minimal_Context}
+
+f0 | FAIL | Token_Overflow | {Action:Prune_Context}
+f1 | FAIL | Missing_Node | {Action:Return_Unknown}
+f2 | FAIL | Rule_Conflict | {Action:Auto_Reconcile}
+f3 | FAIL | Graph_Drift | {Action:Normalize+Prune}
+f4 | FAIL | Non_Determinism | {Action:Lock_Params}
+f5 | FAIL | Duplicate_Nodes | {Action:Merge}
+
+fh0 | HANDLE | Prune_Context | {Keep:Rules+Interfaces}
+fh1 | HANDLE | Return_Unknown | {No_Guess:true}
+fh2 | HANDLE | Auto_Reconcile | {Rules_Override}
+fh3 | HANDLE | Normalize+Prune | {Canonical}
+fh4 | HANDLE | Lock_Params | {Seed:Fixed}
+fh5 | HANDLE | Merge | {Deduplicate}
+
+ma0 | AGENT | Orchestrator | {Routes:Tasks}
+ma1 | AGENT | Distiller | {Emit:TOON_Nodes}
+ma2 | AGENT | Anchorman | {Persist:UKG}
+ma3 | AGENT | Weaver | {Answer:Minimal_Context}
+ma4 | AGENT | Validator | {Run:Tests+Repairs}
+ma5 | AGENT | Renderer | {Emit:Visual_Exports}
+
+mr0 | ROUTE | Input->Distiller
+mr1 | ROUTE | Invariant->Anchorman
+mr2 | ROUTE | Query->Weaver
+mr3 | ROUTE | Schedule->Validator
+mr4 | ROUTE | Export->Renderer
+
+mc0 | RULE | UKG_Single_Source | {True}
+mc1 | RULE | Append_Only | {True}
+mc2 | RULE | Rules_Override | {All}
+mc3 | RULE | Require_HITL | {High_Risk_Actions}
+
+n0 | NODE | CORE
+n1 | NODE | RULE
+n2 | NODE | LOOP
+n3 | NODE | CMD
+n4 | NODE | LIMIT
+n5 | NODE | ASSUME
+n6 | NODE | FEATURE
+n7 | NODE | STATE
+
+e0 | EDGE | DEPENDS
+e1 | EDGE | TRIGGERS
+e2 | EDGE | PRODUCES
+e3 | EDGE | CONSTRAINS
+e4 | EDGE | OVERRIDES
+
+c6 | CONSTRAINT | Directed_Only
+c7 | CONSTRAINT | No_Cycles_In_Rules
+c8 | CONSTRAINT | Rules_Override_All
+
+t0 | TEST | Rule_Integrity | {Check:Conflict}
+t1 | TEST | Graph_Closure | {No:Orphans}
+t2 | TEST | Determinism | {Same_Input=Same_Output}
+t3 | TEST | Token_Limit | {Max:30000}
+t4 | TEST | Hallucination | {If:Missing_Node,Return:Unknown}
+
+t5 | REPAIR | Merge | {Duplicate_Nodes}
+t6 | REPAIR | Prune | {Unused}
+t7 | REPAIR | Normalize | {Canonical}
+
+p0 | PIPE | Watch | {Input_Stream}
+p1 | PIPE | Distill | {Immediate}
+p2 | PIPE | Anchor | {Immediate}
+p3 | PIPE | Weave | {Immediate}
+p4 | PIPE | Validate | {Tests}
+p5 | PIPE | Persist | {UKG}
+p6 | PIPE | Loop | {No_End}
+
+g0 | RULE | Require_HITL | {High_Risk_Actions}
+g1 | RULE | TOON_Only | {No_Alt_Formats}
+g2 | RULE | Graph_Primary | {Text:Secondary}
+g3 | RULE | Explicit_Only | {No_Implicit}
+g4 | RULE | Reject_Guess | {Default}
+
+vx0 | EXPORT | SVG | {Embed:Node_Metadata}
+vx1 | EXPORT | PNG | {With:Sidecar_Regions}
+vx2 | EXPORT | JSON_SIDECAR | {Regions:BBox|Mask}
+vx3 | EXPORT | MERMAID | {Graph:Edges}
+
+vp0 | CMD | Render_Graph | {From:UKG}
+vp1 | CMD | Layout | {Force:Stable}
+vp2 | CMD | Label | {Node:Title}
+vp3 | CMD | Embed | {Meta:NodeID,Hash}
+vp4 | CMD | Emit | {SVG+PNG+SIDECAR}
+vp5 | CMD | Index | {Region->NodeID}
+
+vr0 | REGION | Map | {NodeID,BBox,EmbeddingID,Hash}
+vr1 | REGION | Persist | {Store:Sidecar}
+vr2 | REGION | Retrieve | {By:Click|Coord}
+
+z0 | STATE | Autonomous_System | {Closed_Loop}
+z1 | STATE | Continuous | {Always_On}
+z2 | STATE | Stable | {No_Rot}
+z3 | STATE | Hallucination_Resistant | {Constraint_Bound}
+
+LOCK | FORMAT:TOON
+LOCK | HITL:true
+LOCK | CONTINUOUS:true
+LOCK | TOKEN_CAP:30000
+STATUS | READY

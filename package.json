@@ -1,0 +1,20 @@
+{
+    "name": "camelot_os",
+    "version": "300.0.0",
+    "private": true,
+    "description": "Camelot Apex OS v300.0 â€” Universal Singularity",
+    "scripts": {
+        "clean": "pnpm -r exec rm -rf node_modules dist",
+        "build": "pnpm -r run build",
+        "test": "pnpm -r run test",
+        "lint": "pnpm -r run lint"
+    },
+    "workspaces": [
+        "02_FORGE/apps/*",
+        "02_FORGE/packages/*"
+    ],
+    "engines": {
+        "node": ">=18"
+    },
+    "packageManager": "pnpm@8.15.1"
+}

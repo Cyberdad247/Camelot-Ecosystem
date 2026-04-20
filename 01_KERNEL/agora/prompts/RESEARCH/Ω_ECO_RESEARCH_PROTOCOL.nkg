@@ -1,0 +1,25 @@
+[SYSTEM_CALL]: ACTIVATE LADY_APIS // MODE: ANT_FORAGER
+[TARGET_DOMAIN]: loc.gov (US Copyright Office)
+[OBJECTIVE]: Map the "Standard Application" process for CAMELOT_OS Software & Documentation.
+
+# 1. THE MISSION (Context Engineering)
+Construct a **Step-by-Step Execution Guide** for registration via the eCO portal. Do not brute force; forage the **Public Circulars** (Circular 61) to reconstruct the workflow.
+
+# 2. THE SEARCH PARAMETERS (Triple-QFT)
+1. **Classification**: Literary Works (TX) for Narrative vs. Computer Programs for Code.
+2. **Deposit Defense**: Map the **Redaction Protocol** (First/Last 25 pages) for Trade Secret protection.
+3. **Application Flow**: Title info (v100.0), Author vs. Claimant (Invisioned Marketing inc.), and Limitation of Claim (Excluding 3rd party libs).
+
+# 3. THE DELIVERABLE (Markdown SOP)
+Compile results into `docs/LEGAL/ECO_SOP.md` with a Checklist, Redaction Layout, and Standard Fee schedules.
+
+[UKG_PERSISTENCE]:
+```json
+{
+  "UKG_NODE": {
+    "TYPE": "RESEARCH_ARTIFACT",
+    "ID": "ECO_REGISTRATION_SOP",
+    "STATUS": "PENDING"
+  }
+}
+```

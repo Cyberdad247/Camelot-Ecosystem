@@ -1,0 +1,68 @@
+{
+    "service": {
+        "id": "Service::ClaraVerse",
+        "type": "external_orchestrator",
+        "description": "Block-DAG agent orchestrator specialzed in CRM and automated workflows.",
+        "status": "ASSIMILATED"
+    },
+    "workflows": [
+        {
+            "id": "Workflow::Clara::Adaptive_CRM_Sync",
+            "name": "Adaptive CRM Sync",
+            "description": "Synchronizes leads between LeadSquared, HubSpot, and Google Sheets using semantic deduplication.",
+            "tools": [
+                "Tool::Clara::hubspot_tool",
+                "Tool::Clara::leadsquared_tool",
+                "Tool::Clara::composio_googlesheets_tool"
+            ],
+            "mappedSwarm": "Swarm::Clara_Mirror_Sync"
+        },
+        {
+            "id": "Workflow::Clara::Intelligent_Lead_Nurturer",
+            "name": "Intelligent Lead Nurturer",
+            "description": "Analyzes Discord/Telegram active chats for lead intent and triggers SendGrid campaigns.",
+            "tools": [
+                "Tool::Clara::discord_tool",
+                "Tool::Clara::telegram_tool",
+                "Tool::Clara::sendgrid_tool"
+            ],
+            "mappedSwarm": "Swarm::Clara_Mirror_Nurture"
+        }
+    ],
+    "providers": [
+        {
+            "id": "Provider::Clara::OpenAI",
+            "base_url": "https://api.openai.com/v1"
+        },
+        {
+            "id": "Provider::Clara::Anthropic",
+            "base_url": "https://api.anthropic.com/v1"
+        },
+        {
+            "id": "Provider::Clara::Groq",
+            "base_url": "https://api.groq.com/openai/v1"
+        }
+    ],
+    "tools_sample": [
+        {
+            "id": "Tool::Clara::airtable_tool",
+            "displayName": "Airtable Integration",
+            "category": "integration"
+        },
+        {
+            "id": "Tool::Clara::hubspot_tool",
+            "displayName": "HubSpot CRM",
+            "category": "integration"
+        },
+        {
+            "id": "Tool::Clara::data_analyst_tool",
+            "displayName": "E2B Data Analyst",
+            "category": "data_sources"
+        },
+        {
+            "id": "Tool::Clara::composio_gmail_tool",
+            "displayName": "Gmail Agent",
+            "category": "integration"
+        }
+    ]
+}

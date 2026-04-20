@@ -1,0 +1,26 @@
+{
+  "@context": "https://camelot.os/ukg/v1",
+  "@type": "ResearchThread",
+  "id": "pplx_80af2d6f",
+  "source": "https://www.perplexity.ai/search/test-thread",
+  "timestamp": 1769845229.85607,
+  "nodes": [
+    {
+      "id": "fact_01",
+      "type": "claim",
+      "content": "Simulated extracted fact from Perplexity."
+    },
+    {
+      "id": "code_01",
+      "type": "artifact",
+      "content": "print('Hello World')"
+    }
+  ],
+  "edges": [
+    {
+      "source": "fact_01",
+      "target": "code_01",
+      "rel": "EXEMPLIFIES"
+    }
+  ]
+}

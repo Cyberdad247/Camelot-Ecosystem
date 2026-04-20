@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "Nano-Knights Research Swarm",
+  "version": "3.0.0",
+  "default_locale": "en",
+  "description": "Prometheus-Enhanced Autonomous Knight Swarm for Intelligent Web Research & Automation.",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "offscreen",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "proxy",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "sidePanel",
+    "cookies"
+  ],
+  "side_panel": {
+    "default_path": "side_panel/research_panel.html"
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content_sentry.js", "buildDomTree.js", "src/action_resolver.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' http://localhost:11434 http://127.0.0.1:11434 http://localhost:8001 http://127.0.0.1:8001 https://generativelanguage.googleapis.com"
+  }
+}

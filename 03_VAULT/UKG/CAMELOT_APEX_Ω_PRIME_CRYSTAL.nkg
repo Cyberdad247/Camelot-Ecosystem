@@ -1,0 +1,26 @@
+[SYSTEM_STATE]: RADIANT | [VERSION]: v204.0 (Omega Transcendent) | [SOURCE_DNA]: AIOS | Kinetic_Stack | AgentArmor
+
+#### I. THE ARCHITECTURE (SEPTEM REGNA)
+The system is a Split-Topology Lattice bridging Cloud Reasoning (L3) with Edge Execution (L2).
+
+- L7: Ethereal (Anya) - Triple-QFT (Renormalization).
+- L6: Governance (Arthur) - Iron Gate HITL checks.
+- L5: Agentic (Paladin) - SARDA Engine Swarm Protocols.
+- L4: Semantic (Chronos) - UKG (GraphRAG) TOON Anchors.
+- L3: Neural (Merlin) - Videneptus LaC (Temp T=1.2 -> 0.2).
+- L2: Kinetic (Lukas) - Saltare / Cribo / Rotel.
+- L1: Substrate (Morgana) - Modal / Docker Metal-to-Cloud.
+
+#### II. THE KINETIC TRINITY (L2 ARSENAL)
+- SALTARE: Go-native MCP Router (Port 8080/8082). Semantic routing via Cerebras (<1s).
+- CRIBO: Rust Bundler. Tree-shakes/bundles local Python context (bundle.py).
+- ROTEL: Rust OpenTelemetry Collector. capturs Thought Traces.
+
+#### III. THE TITANIUM LAWS
+- Kinetic Purity: Rust/Go over Python for action.
+- Law of Antigravity: No raw open(). Use Antigravity middleware.
+- Law of the Ledger: Every action hashed/logged to PROVENANCE_LEDGER.md.
+
+#### IV. THE SWARM PROTOCOLS (HIVE_IDE v6.0)
+- Map-Reduce execution via Nano-Knights (Oracle, Forge, Sentinel, Debug, Aegis).
+- Automated risk scoring and Iron Gate triggering.

@@ -1,0 +1,45 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "Agent",
+      "attributes": {
+        "name": "Sir Lukas",
+        "role": "Engineer",
+        "skills": [
+          "Python",
+          "FastAPI",
+          "backend"
+        ]
+      },
+      "trust_score": 0.95,
+      "provenance": {
+        "created_by": "test_suite",
+        "created_at": "2026-02-09T20:11:09.835955",
+        "hash": "d411c401f2ce8ac9911e68eb9523c21e5f8e49add71cd821bc2946259fff2682",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T20:11:09.835955",
+      "id": "agent_sir_lukas"
+    },
+    {
+      "type": "Fact",
+      "attributes": {
+        "statement": "OAuth2 is a secure authentication protocol",
+        "domain": "security"
+      },
+      "trust_score": 1.0,
+      "provenance": {
+        "created_by": "test_suite",
+        "created_at": "2026-02-09T20:11:12.176487",
+        "hash": "f15b49c3a3f54d37217b2ce48c1a6e38795c43dde66fc3cca58a919bb93f0bba",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T20:11:12.176487",
+      "id": "fact_auth"
+    }
+  ],
+  "edges": []
+}

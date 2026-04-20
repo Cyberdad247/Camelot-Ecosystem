@@ -1,0 +1,13 @@
+[νKG_CRYSTAL: NOTTE_WEBFARER]
+
+u0 | ID | Bridge | {Name:Notte_Web_Automation, Stk:Python/Playwright, Role:Vision_Action}
+u1 | DATA | Weaps | {Atomic:Stealth_Sessions, Composite:Hybrid_Workflows, Meta:Agent_Fallback}
+u2 | ID | Knight | {Name:Sir_WebFarer, Role:Engine, Mode:Autonomous_Navigation}
+
+a0 | PROCESS | Navigation | {Sense:DOM+Visual, Think:Hybrid_Selection, Triage:Stealth_Execute}
+a1 | LAW | Purity | {Rule:Script_First_Think_Second, Rule:Sovereign_Sessions, Goal:Cost_Efficiency}
+a2 | LAW | Governance | {Protocol:Agent_Vault, Tool:Digital_Persona, Constraint:Iron_Gate}
+
+c0 | STAT | Quality | {Reliability:96.6%, Scale:Autonomous_Workflows}
+
+x0 | AXIOM | Navigation | {Rule:Web_Is_An_API, Rule:Fallback_Is_Required, Status:RADIANT}

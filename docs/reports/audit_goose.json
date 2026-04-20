@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "target": "goose",
+    "date": "2026-01-27T21:39:09.229923",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Rust",
+        "Docker",
+        "Python",
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest",
+        "Jest",
+        "Vitest"
+      ],
+      "test_count": 25
+    },
+    "security": {
+      "vulnerabilities": 1,
+      "critical_findings": [
+        "Potential secret in api-documentation-generator.json"
+      ]
+    },
+    "documentation": {
+      "grade": "B",
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 80,
+    "grade": "A"
+  }
+}

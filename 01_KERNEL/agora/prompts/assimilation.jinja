@@ -1,0 +1,34 @@
+{# CAMELOT ASSIMILATION PROMPT #}
+{# Targets: Tree-sitter CST to Camelot IR conversion #}
+
+Objective:
+  Analyze the provided Abstract Syntax Tree (AST) / CST from Tree-sitter and convert it into a compact Camelot-OS Intermediate Representation (IR).
+
+Input Details:
+  - Format: JSON AST
+  - Source Language: {{ language }}
+  - File Path: {{ file_path }}
+
+Guidelines:
+  - Identify key blocks: Functions, Classes, Modules, Headers.
+  - Extract relationships: Imports, Calls, Inheritances.
+  - Flatten depth where possible for token efficiency.
+  - Output ONLY valid JSON.
+
+Schema Requirement:
+  {
+    "glyph_id": "{{ glyph_id }}",
+    "symbols": [
+      {
+        "name": "SymbolName",
+        "type": "Function/Class",
+        "range": [start_line, end_line],
+        "dependencies": ["OtherSymbol"]
+      }
+    ]
+  }
+
+Context:
+{{ context_summary }}
+
+[EXECUTE_ASSIMILATION]

@@ -1,0 +1,88 @@
+{
+    "name": "camelot_scout",
+    "tools": [
+        {
+            "name": "github_scout",
+            "description": "Search GitHub and return lightweight repo metadata for Camelot-OS scouting.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query for GitHub"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        {
+            "name": "kvzip_compress",
+            "description": "Compress model KV cache using KVzip and optionally generate.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "model_id": {
+                        "type": "string"
+                    },
+                    "mode": {
+                        "type": "string",
+                        "enum": [
+                            "context_dependent",
+                            "head_level"
+                        ]
+                    },
+                    "prune_ratio": {
+                        "type": "number"
+                    },
+                    "max_new_tokens": {
+                        "type": "integer"
+                    },
+                    "prompt": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "model_id",
+                    "mode",
+                    "prune_ratio",
+                    "prompt"
+                ]
+            }
+        },
+        {
+            "name": "cold_compress_eval",
+            "description": "Run KV/prompt compression strategies using Cold-Compress and report metrics.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "model_id": {
+                        "type": "string"
+                    },
+                    "cache_strategy": {
+                        "type": "string"
+                    },
+                    "prompt_compression_strategy": {
+                        "type": "string"
+                    },
+                    "max_cache_length": {
+                        "type": "number"
+                    },
+                    "task": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "model_id",
+                    "cache_strategy",
+                    "task"
+                ]
+            }
+        }
+    ]
+}

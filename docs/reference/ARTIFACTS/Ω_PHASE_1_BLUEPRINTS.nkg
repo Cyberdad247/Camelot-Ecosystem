@@ -1,0 +1,136 @@
+# 🧬 ASSIMILATION BLUEPRINTS: PHASE 1 (FOUNDATION)
+## Campaign: Omega Hive Foundation
+## Date: 2026-01-27
+## Status: 📋 PLANNING
+
+---
+
+# 🧬 ASSIMILATION BLUEPRINT: tomcp
+## 1. ANATOMY SCAN
+*   **Core Logic:** Web-to-Markdown converter and MCP server.
+*   **Entry Points:** `src/index.js` (Cloudflare Worker based) or local CLI.
+*   **Dependency Weight:** Light (Readability.js, turndown).
+*   **License:** Apache 2.0 ✅
+*   **Size:** < 1MB ✅
+
+## 2. THE CUT
+*   **Trimming:** Remove `docs/`, `examples/`, and Cloudflare-specific deploy scripts if purely local use is intended.
+*   **Bundling:** Use `cribo` to bundle the readability and turndown logic into a single phial.
+*   **Optimization:** Ensure high-speed markdown extraction for real-time Knight context.
+
+## 3. THE BINDING
+*   **Protocol:** MCP
+*   **Interface:** `fetch_clean_url(url)` -> Clean Markdown.
+*   **Safety:** Wrap in `antigravity` for read-only web access.
+*   **Schema:** 
+    ```json
+    {
+      "url": "string"
+    }
+    ```
+
+## 4. EXECUTION PLAN
+1.  Map the Cloudflare Worker logic to a local Node.js/Python script.
+2.  `cribo bundle` -> `_hive/phials/tomcp.py` (or .js).
+3.  Register as `tomcp_fetch` in `mcp_servers_config.json`.
+4.  Test with a complex documentation page (e.g., Stripe API).
+
+---
+
+# 🧬 ASSIMILATION BLUEPRINT: DesktopCommanderMCP
+## 1. ANATOMY SCAN
+*   **Core Logic:** Desktop automation (Mouse, Keyboard, Window) via MCP.
+*   **Entry Points:** TBD (likely `app.py` or `main.py`).
+*   **Dependency Weight:** Medium (PyAutoGUI, system calls).
+*   **License:** MIT ✅
+*   **Size:** ~5MB ✅
+
+## 2. THE CUT
+*   **Trimming:** Remove `assets/` and `demos/`.
+*   **Bundling:** Bundle core automation logic.
+*   **Optimization:** Use low-latency system calls for precise cursor control.
+
+## 3. THE BINDING
+*   **Protocol:** MCP
+*   **Interface:** `type_text`, `click_coordinates`, `get_active_window`.
+*   **Safety:** REQUIRES USER APPROVAL for all destructive/system-wide actions. Wrap in `antigravity` guardrails.
+
+## 4. EXECUTION PLAN
+1.  Verify system-level permissions for the Camelot Kernel to control the desktop.
+2.  `cribo bundle` -> `_hive/phials/desktop_commander.py`.
+3.  Configure as a primary tool for the `Lukas (Edge Kinetic)` knight.
+
+---
+
+# 🧬 ASSIMILATION BLUEPRINT: activepieces
+## 1. ANATOMY SCAN
+*   **Core Logic:** No-code visual workflow platform.
+*   **Entry Points:** Complex (Server-client architecture).
+*   **Dependency Weight:** Heavy (Postgres, Redis, Node.js).
+*   **License:** MIT ✅ (Open source version).
+*   **Size:** > 100MB (Needs digestion).
+
+## 2. THE CUT
+*   **Trimming:** Extract ONLY the piece-execution engine. Discard the heavy UI for now.
+*   **Bundling:** Focus on the `pieces` (connectors) library.
+*   **Optimization:** Target light piece runners instead of full-stack deployment.
+
+## 3. THE BINDING
+*   **Protocol:** API / CLI Pipe
+*   **Interface:** `execute_workflow(flow_json)` or `run_piece(piece_name, inputs)`.
+*   **Safety:** Isolate workflow execution in a sandbox.
+
+## 4. EXECUTION PLAN
+1.  Analyze the piece architecture to see if they can be run standalone as individual MCP tools.
+2.  Metabolize the piece library into specialized phials.
+3.  Bind to the `Anya_APEE` for visual flow generation.
+
+---
+
+# 🧬 ASSIMILATION BLUEPRINT: litellm (CLEANUP)
+## 1. ANATOMY SCAN
+*   **Core Logic:** Unified LLM Gateway (S3/LiteLLM).
+*   **Entry Points:** `litellm/main.py`.
+*   **Dependency Weight:** Medium.
+*   **License:** MIT ✅
+*   **Size:** ~20MB ✅
+
+## 2. THE CUT
+*   **Trimming:** Remove developer tests and cloud deployment configs.
+*   **Bundling:** `cribo` the router and completion logic.
+*   **Optimization:** Remove all hardcoded API keys and replace with environment variable lookups.
+
+## 3. THE BINDING
+*   **Protocol:** API / Proxy
+*   **Interface:** OpenAI-compatible endpoint for 100+ models.
+*   **Safety:** Implement token counting and cost limits.
+
+## 4. EXECUTION PLAN
+1.  **Sanitization Phase**: Grep for secrets and purge.
+2.  `cribo bundle` -> `_hive/phials/litellm_gateway.py`.
+3.  Configure `litellm_path` in `01_KERNEL/config/api_manifest.yaml`.
+
+---
+
+# 🧬 ASSIMILATION BLUEPRINT: SuperAGI
+## 1. ANATOMY SCAN
+*   **Core Logic:** Autonomous agent platform (Toolkits, Agents, Workflows).
+*   **Entry Points:** `superagi/main.py`.
+*   **Dependency Weight:** Heavy.
+*   **License:** MIT ✅
+*   **Size:** ~150MB.
+
+## 2. THE CUT
+*   **Trimming:** Extract the Toolkits and Agent logic. Discard the dashboard/UI.
+*   **Bundling:** Modularize based on specific toolkits (e.g., Google Search, Slack).
+*   **Optimization:** Flatten the agent loop for faster execution in the Camelot Kernel.
+
+## 3. THE BINDING
+*   **Protocol:** MCP Toolkits
+*   **Interface:** Register SuperAGI toolsets as MCP tools.
+*   **Safety:** Tool-level permissioning.
+
+## 4. EXECUTION PLAN
+1.  Convert SuperAGI toolkits into standalone MCP tools.
+2.  Integrate the agent-spawn logic with the `Knight_Roster`.
+3.  Bind top-performing toolkits (web search, coding) first.

@@ -1,0 +1,41 @@
+{
+  "meta": {
+    "target": "lightning",
+    "date": "2026-01-27T21:36:37.810159",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Service/App",
+      "stack": [
+        "Python"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest"
+      ],
+      "test_count": 259
+    },
+    "security": {
+      "vulnerabilities": 0,
+      "critical_findings": []
+    },
+    "documentation": {
+      "grade": "C",
+      "missing": [
+        "CONTRIBUTING.md",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 76,
+    "grade": "B"
+  }
+}

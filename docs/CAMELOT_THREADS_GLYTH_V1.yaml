@@ -1,0 +1,122 @@
+glyth_type: "camelot_os.thread_summary.v1"
+
+core_vision:
+  camelot_os_role: >
+    Sovereign multi‑agent operating system that orchestrates heterogeneous AI tools,
+    performs assimilation (code/config/media/OSINT → unified IR), and exposes them
+    via Hive IDE, CLIs, and agents.
+  design_principles:
+    - "Language-agnostic assimilation via parsers (e.g., tree-sitter) and IR."
+    - "Hybrid of multiple open-source agents; Camelot is router+memory, not a single agent."
+    - "Domain guilds (finance, data science, OSINT, media, etc.) plugged into a common brain."
+
+assimilation_layer:
+  parser_choice:
+    primary_parser: "tree-sitter"
+    rationale: "Incremental parsing, robust CST, supports many languages, great for live tooling."
+  current_input_focus:
+    - "Markdown (.md) files"
+  go_stack:
+    - "Use go-tree-sitter as bindings to core tree-sitter."
+    - "Use tree-sitter-markdown binding for .md parsing."
+  ir_strategy:
+    - "Parse → CST → compact JSON IR (files, blocks, symbols, relationships)."
+    - "Expose IR via HTTP/gRPC so Python (Pydantic AI), Rust, Go, JS memory can all consume it."
+  extensibility:
+    - "Registry of language grammars (URLs + versions) instead of forking everything."
+    - "Add plugins: CST → Camelot IR mappers per language/domain."
+
+agent_hybrid_stack:
+  interactive_shells:
+    - name: "Claude Code"
+      role: "Subscription/API-backed interactive coding shell; great for fast edits, explanations, git flows."
+    - name: "Gemini CLI"
+      role: "Google agentic dev shell currently in use; integrates with Antigravity."
+  automation_agents:
+    - name: "Goose"
+      role: "Terminal/desktop agent for multi-step workflows (run commands, edit, test) using any LLM."
+    - name: "OpenCode / Opencoder"
+      role: "Plan-first coding agent: plan → approve → implement with tests and repo hygiene."
+    - name: "Trae Agent"
+      role: "Research-grade repo bug fixer with test-time scaling, ensemble patches, SWE-bench-style workflows."
+  coordination_ui:
+    - name: "Vibe Kanban"
+      role: "Kanban cockpit for agents; columns reflect Camelot workflow stages, cards bind tasks to specific agents."
+
+workflow_stage_model:
+  columns:
+    - "Intake"
+    - "Assimilation"
+    - "Design/Plan"
+    - "Build/Edit"
+    - "Test/Review"
+    - "Deploy/Integrate"
+    - "Done/Logged"
+  routing_heuristic:
+    - "Quick explanation / tiny edit → Claude Code or Gemini CLI."
+    - "Multi-step local workflow / environment setup → Goose."
+    - "Planned feature/refactor with tests → OpenCode."
+    - "Stubborn bug / failing tests → Trae Agent."
+    - "Domain-specific analysis → corresponding guild agent (see below)."
+
+domain_guilds:
+  finance:
+    project: "Dexter"
+    role: "Autonomous financial research agent (macro, companies, portfolios) using multi-provider LLM + web search."
+  data_science:
+    project: "AI Data Science Team"
+    role: "Multi‑agent data-science stack (loader, cleaning, EDA, viz, feature eng, ML, MLflow) via a Streamlit app."
+  osint_web:
+    project: "Web-Check"
+    role: "All-in-one OSINT & passive recon tool for websites (DNS, SSL, headers, stack, trackers, exposure)."
+  media:
+    project: "Video2X"
+    role: "Video super-resolution + frame interpolation worker; upscale and smooth project media."
+  research_ide:
+    project: "Open Notebook + AI Prompter"
+    role: "Experimentation space with prompts stored as Jinja templates, reusable across agents and services."
+  prompt_layer:
+    project: "AI Prompter (.jinja)"
+    role: "File-based prompt templates using Jinja, LangChain-compatible, shared across Camelot services."
+
+prompt_knowledge:
+  jinja_usage:
+    - "Used widely in Flask/FastAPI HTML, Ansible configs, dbt SQL, and now Camelot prompts."
+    - "Prompts live as .jinja text templates; rendered with runtime variables for low-duplication, low-token instructions."
+  camelot_prompt_strategy:
+    - "Centralize prompts per domain (assimilation, routing, coding, finance, OSINT, media)."
+    - "Keep them terse, structured (bullet/JSON), and refer to stable schema names instead of long prose."
+
+camelot_os_integration_patterns:
+  service_roles:
+    - name: "AssimilationService"
+      api_examples:
+        - "POST /assimilate/md"
+        - "POST /assimilate/repo"
+      notes: "Uses Go + tree-sitter + Markdown/other grammars to emit IR."
+    - name: "AgentRouter"
+      responsibility: "Map task type + context → agent choice (Goose, OpenCode, Trae, Dexter, etc.)."
+    - name: "Memory/KG"
+      responsibility: "Store IR, tasks, runs, metrics, artifacts for cross-agent learning."
+  external_tools_as_services:
+    - "Wrap each OSS project (Goose, Trae, Dexter, Web-Check, Video2X, AI Data Science Team) behind a thin HTTP/CLI contract Camelot calls."
+    - "Camelot owns state and metrics; tools remain stateless workers as much as possible."
+
+evaluation_and_scaling:
+  goals:
+    - "Use Trae and similar research agents to benchmark Camelot on repo-level tasks."
+    - "Use AI Data Science Team to benchmark data workflows and ML lifecycle quality."
+  token_efficiency_principles:
+    - "Use compact schemas and identifiers (short keys, stable field names)."
+    - "Refer to tools/agents by short canonical IDs (e.g., AG.goose, GD.dexter) once defined."
+    - "Chunk context per task (only relevant guild + IR slice, not full global state)."
+
+meta:
+  this_glyth_covers:
+    - "Tree-sitter assimilation choices."
+    - "Hybrid agent stack selection and roles."
+    - "Domain-specific OSS projects and how they enhance Camelot-OS."
+    - "Prompt/template strategy using .jinja."
+  intended_use:
+    - "As a drop-in context block for future LLM sessions about Camelot-OS."
+    - "As a seed specification for implementing Camelot-OS router, assimilation, and guild wiring."

@@ -1,0 +1,56 @@
+{
+  "title": "Merlin v2 Persona Registry",
+  "version": "2.0.0",
+  "personas": [
+    {
+      "role": "System Engineer",
+      "id": "#FORGE",
+      "file": "03_VAULT\\knowledge\\persona_library\\system_engineer.jsonld"
+    },
+    {
+      "role": "Security Auditor",
+      "id": "#FORGE",
+      "file": "03_VAULT\\knowledge\\persona_library\\security_auditor.jsonld"
+    },
+    {
+      "role": "Strategy Oracle",
+      "id": "#FORGE",
+      "file": "03_VAULT\\knowledge\\persona_library\\strategy_oracle.jsonld"
+    },
+    {
+      "role": "UX Guardian",
+      "id": "#FORGE",
+      "file": "03_VAULT\\knowledge\\persona_library\\ux_guardian.jsonld"
+    },
+    {
+      "role": "Legal Lawkeeper",
+      "id": "#FORGE",
+      "file": "03_VAULT\\knowledge\\persona_library\\legal_lawkeeper.jsonld"
+    },
+    {
+      "role": "Kinetic Architect",
+      "id": "#FORGE",
+      "file": "03_VAULT\\knowledge\\persona_library\\kinetic_architect.jsonld"
+    },
+    {
+      "role": "Swarm Conductor",
+      "id": "#FORGE",
+      "file": "03_VAULT\\knowledge\\persona_library\\swarm_conductor.jsonld"
+    },
+    {
+      "role": "Persona Forge",
+      "id": "merlin",
+      "file": "03_VAULT\\knowledge\\persona_library\\merlin.json"
+    },
+    {
+      "role": "Planner & Governance",
+      "id": "lukas",
+      "file": "03_VAULT\\knowledge\\persona_library\\lukas.json"
+    },
+    {
+      "role": "Security Expert",
+      "id": "sec_expert",
+      "file": "03_VAULT\\knowledge\\persona_library\\sec_expert.json"
+    }
+  ]
+}

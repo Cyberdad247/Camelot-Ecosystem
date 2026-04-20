@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "composite": true
+  },
+  "files": [
+    "camelot.d.ts"
+  ],
+  "references": [
+    {
+      "path": "./02_FORGE"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "directed": true,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "type": "Fact",
+      "attributes": {
+        "title": "Camelot_Architecture_v24.md",
+        "summary": "Camelot OS uses a Tri-Realm architecture:\n    1. 01_KERNEL: Core logic, memory stacks, and governance.\n    2. 02_FORGE: Application development, tools, and agent cartridges.\n    3. 03_VAULT: Persisten",
+        "metadata": {
+          "domain": "system_design",
+          "version": "v24.0"
+        }
+      },
+      "trust_score": 1.0,
+      "provenance": {
+        "created_by": "TitanSeeder",
+        "created_at": "2026-02-09T21:06:01.302254",
+        "hash": "43b0eea1174e05e97d5410cb88a9af78badc3335c82bff248a172afdc7d0e0ed",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T21:06:01.302926",
+      "id": "fact_28f14dc54e26"
+    },
+    {
+      "id": "STRATEGY_CORE"
+    },
+    {
+      "type": "Cartridge",
+      "attributes": {
+        "description": "A temporary test cartridge",
+        "version": "0.1.0",
+        "capabilities": [
+          "testing",
+          "mock_logic"
+        ]
+      },
+      "trust_score": 1.0,
+      "provenance": {
+        "created_by": "TitanSeeder",
+        "created_at": "2026-02-09T21:06:01.318988",
+        "hash": "e13f63fd7e8bd3d39d4db62f8f36d3c8e9d589e5c82d8c4575a205d5b38e16d8",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T21:06:01.318988",
+      "id": "TEST_CORE"
+    },
+    {
+      "type": "Agent",
+      "attributes": {
+        "role": "Consultant",
+        "status": "Ready"
+      },
+      "trust_score": 1.0,
+      "provenance": {
+        "created_by": "TitanSeeder",
+        "created_at": "2026-02-09T21:06:01.318988",
+        "hash": "69988323abba16c4d68a1f484ab16c4cc6eaf5e071566f87495a3ea468bd8a33",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T21:06:01.319993",
+      "id": "Sir_Tester"
+    },
+    {
+      "type": "Agent",
+      "attributes": {
+        "role": "Consultant",
+        "status": "Ready"
+      },
+      "trust_score": 1.0,
+      "provenance": {
+        "created_by": "TitanSeeder",
+        "created_at": "2026-02-09T21:06:01.318988",
+        "hash": "1fcd50e790c5791b32b21a1981f34a6b25c7d3c996c3abdfdf2deaead502d1c8",
+        "signature": null
+      },
+      "updated_at": "2026-02-09T21:06:01.321462",
+      "id": "Dame_Debugger"
+    }
+  ],
+  "edges": [
+    {
+      "relationship": "informs",
+      "weight": 0.8,
+      "source": "fact_28f14dc54e26",
+      "target": "STRATEGY_CORE"
+    },
+    {
+      "relationship": "assigned_to",
+      "weight": 1.0,
+      "source": "Sir_Tester",
+      "target": "TEST_CORE"
+    },
+    {
+      "relationship": "assigned_to",
+      "weight": 1.0,
+      "source": "Dame_Debugger",
+      "target": "TEST_CORE"
+    }
+  ]
+}

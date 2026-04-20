@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AgentDispatchRequest",
+  "description": "Schema for dispatching a cognitive agent via the Excalibur Gateway.",
+  "type": "object",
+  "properties": {
+    "intent": {
+      "type": "string",
+      "minLength": 3,
+      "description": "The natural language instruction for the agent."
+    },
+    "agent_id": {
+      "type": "string",
+      "enum": ["MERLIN", "LANCELOT", "MORGANA", "ANYA", "GARETH"],
+      "default": "MERLIN"
+    },
+    "priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 5,
+      "default": 3
+    },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "timeout": { "type": "integer", "minimum": 1000, "maximum": 60000 },
+        "sandbox": { "type": "boolean", "default": true },
+        "max_tokens": { "type": "integer", "default": 2048 }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "required": ["intent"]
+}

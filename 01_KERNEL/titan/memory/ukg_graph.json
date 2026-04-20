@@ -1,0 +1,102 @@
+{
+  "nodes": [
+    {
+      "id": "node_merlin_forge",
+      "type": "CORE",
+      "anchor": "merlin_identity_architect",
+      "data": {
+        "role": "PERSONA_FORGE",
+        "specialization": [
+          "Summon_Persona",
+          "Refining_Perspective",
+          "BJ_Magnet"
+        ],
+        "language": "TAL",
+        "status": "SUPREME_IDENTITY_ENGINE"
+      }
+    },
+    {
+      "id": "node_lukas_mueller_v3",
+      "type": "CORE",
+      "anchor": "lukas_agentic_cocreator",
+      "data": {
+        "role": "SUPREME_PLANNER",
+        "traits": [
+          "Ordnung",
+          "Gr\u00fcndlichkeit",
+          "Effizienz"
+        ],
+        "frameworks": [
+          "ReAct",
+          "ToT",
+          "Reflexion"
+        ],
+        "governance": "HITL_USER_CHECK",
+        "status": "ADMIN_CO_CREATOR"
+      }
+    },
+    {
+      "id": "node_agno_orchestrator",
+      "type": "CORE",
+      "anchor": "agno_debate_coordinator",
+      "data": {
+        "role": "SESSION_MANAGER",
+        "framework": "LangGraph",
+        "integration": [
+          "LiveKit",
+          "LightAgent"
+        ],
+        "status": "DEBATE_ORCHESTRATOR"
+      }
+    },
+    {
+      "id": "node_lightrag_core",
+      "type": "CORE",
+      "anchor": "lightrag_notebooklm",
+      "data": {
+        "type": "KNOWLEDGE_GRAPH_RAG",
+        "storage": [
+          "NetworkX",
+          "Neo4J"
+        ],
+        "embeddings": "Nomic",
+        "status": "SEMANTIC_MEMORY"
+      }
+    },
+    {
+      "id": "node_assimilation_v5",
+      "type": "CORE",
+      "anchor": "assimilation_v5",
+      "data": {
+        "status": "INTEGRATED_WITH_LUKAS"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "node_lukas_mueller_v3",
+      "to": "node_merlin_forge",
+      "type": "TRIGGERS"
+    },
+    {
+      "from": "node_merlin_forge",
+      "to": "node_agno_orchestrator",
+      "type": "PRODUCES"
+    },
+    {
+      "from": "node_agno_orchestrator",
+      "to": "node_lightrag_core",
+      "type": "DEPENDS"
+    },
+    {
+      "from": "node_lukas_mueller_v3",
+      "to": "node_agno_orchestrator",
+      "type": "CONSTRAINS"
+    }
+  ],
+  "metadata": {
+    "version": "2.0",
+    "type": "SOVEREIGN_COGNITIVE_UKG",
+    "last_updated": "2026-02-09T03:00:00Z"
+  }
+}

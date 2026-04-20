@@ -1,0 +1,12 @@
+{
+  "@type": "PersonaProfile",
+  "identity_hash": "MERLIN_EVOLVED_V2",
+  "reasoning_style": "Chain-of-Thought (Deep)",
+  "decision_frequency": 1,
+  "complexity_handling": "Medium (Component)",
+  "golden_patterns": {
+    "context_usage": true,
+    "constraint_adherence": false
+  },
+  "status": "EVOLVED"
+}

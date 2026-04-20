@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "target": "litellm",
+    "date": "2026-01-27T21:15:26.839894",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Python",
+        "Docker",
+        "Node.js"
+      ]
+    },
+    "quality": {
+      "score": 100,
+      "style": "Foundational",
+      "configs": [
+        ".flake8",
+        "pyrightconfig.json",
+        "ruff.toml"
+      ]
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest",
+        "Jest",
+        "Vitest"
+      ],
+      "test_count": 725
+    },
+    "security": {
+      "vulnerabilities": 36,
+      "critical_findings": [
+        "Potential secret in polyfills-42372ed130431b0a.js",
+        "Potential secret in test_caching.py",
+        "Potential secret in test_secret_detect_hook.py",
+        "Potential secret in locustfile.py",
+        "Potential secret in test_caching_routes.py",
+        "Potential secret in test_caching_ssl.py",
+        "Potential secret in swagger-ui-bundle.js",
+        "Potential secret in test_key_management.py",
+        "Potential secret in test_router_caching.py",
+        "Potential secret in key_management_endpoints.py",
+        "Potential secret in _redis.py",
+        "Potential secret in team_admin.spec.ts",
+        "Potential secret in test_datadog.py",
+        "Potential secret in test_get_azure_ad_token_provider.py",
+        "Potential secret in test_anthropic_sdk.py",
+        "Potential secret in test_azure_openai.py",
+        "Potential secret in test_redis_cluster_cache.py",
+        "Potential secret in spend_management_endpoints.py",
+        "Potential secret in test_azure_common_utils.py",
+        "Potential secret in config.yml"
+      ]
+    },
+    "documentation": {
+      "grade": "B",
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 76,
+    "grade": "B"
+  }
+}

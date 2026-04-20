@@ -1,0 +1,24 @@
+{
+  "name": "nano-browser",
+  "version": "2.3.0",
+  "description": "Autonomous Agentic Research Swarm - Edge Optimized",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/test_cognitive_parser.js && node tests/test_voice_squire.js && node tests/test_context_pruner.js && node tests/test_chunk_manager.js && node tests/test_stealth.js && node tests/test_token_efficiency.js",
+    "test:cognitive": "node tests/test_cognitive_parser.js",
+    "test:voice": "node tests/test_voice_squire.js",
+    "test:pruner": "node tests/test_context_pruner.js",
+    "test:chunker": "node tests/test_chunk_manager.js",
+    "test:stealth": "node tests/test_stealth.js",
+    "test:tokens": "node tests/test_token_efficiency.js",
+    "lint": "echo 'Linting not yet configured'",
+    "build": "echo 'Build optimization pending - see BUNDLE_OPTIMIZATION.md'"
+  },
+  "keywords": ["chrome-extension", "ai", "research", "automation", "voice-commands"],
+  "author": "ANNA (Artificial Neural Network Architect)",
+  "license": "MIT",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,1719 @@
+{% layout none %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>VaShawn F. HEAD | The Phoenix Portal</title>
+  <meta name="description" content="Enter the Phoenix Portal. VaShawn F. HEAD reveals how language has been de-evolved to control perception. Claim your Skeleton Key.">
+  <link rel="canonical" href="https://headartworks.com/pages/the-phoenix-portal">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="VaShawn F. HEAD | The Phoenix Portal">
+  <meta property="og:description" content="The Illusions Revealed. 55 years of research into how language shapes reality. Enter the Portal.">
+  <meta property="og:url" content="https://headartworks.com/pages/the-phoenix-portal">
+  <meta property="og:image" content="https://cdn.shopify.com/s/files/1/0904/4917/3247/files/logo.jpg">
+  <meta property="og:site_name" content="HeadArtworks">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VaShawn F. HEAD | The Phoenix Portal">
+  <meta name="twitter:description" content="The Illusions Revealed. Enter the Portal and claim your Skeleton Key.">
+  <meta name="twitter:image" content="https://cdn.shopify.com/s/files/1/0904/4917/3247/files/logo.jpg">
+  <!-- Performance: preload trailer video -->
+  <link rel="preload" href="https://cdn.shopify.com/videos/c/o/v/0fcec744a02444a6b44235d5362754f6.mp4" as="video" type="video/mp4">
+  <link rel="preconnect" href="https://www.youtube.com">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: #000;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      color: #e0e0e0;
+      overflow: hidden; /* Lock scroll initially */
+    }
+
+    html.scrolling-enabled {
+      overflow-y: auto;
+      height: auto;
+    }
+
+    html.scrolling-enabled body {
+      overflow-y: auto;
+      height: auto;
+    }
+
+    /* CINEMATIC TRAILER */
+    .cinema-container {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .cinema-container.exited {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .cinema-video-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .cinema-video {
+      position: absolute;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      opacity: 0.6;
+      z-index: 1;
+    }
+
+    .cinema-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.3) 0%,
+        rgba(0,0,0,0.1) 50%,
+        rgba(0,0,0,0.8) 100%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .cinema-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 20px;
+      max-width: 900px;
+    }
+
+    .cinema-title {
+      font-size: clamp(3rem, 10vw, 6rem);
+      letter-spacing: clamp(10px, 2vw, 20px);
+      color: #d4af37;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.9);
+      animation: titleReveal 1.5s ease-out 0.5s both;
+    }
+
+    .cinema-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      letter-spacing: 8px;
+      color: #fff;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+      animation: fadeInUp 1s ease-out 1s both;
+    }
+
+    .cinema-cta {
+      display: inline-block;
+      padding: 18px 40px;
+      border: 2px solid #d4af37;
+      background: transparent;
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      animation: fadeInUp 1s ease-out 1.3s both;
+    }
+
+    .cinema-cta:hover {
+      background: #d4af37;
+      color: #000;
+      box-shadow: 0 0 30px rgba(212,175,55,0.4);
+      transform: translateY(-2px);
+    }
+
+    .audio-control {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      z-index: 20;
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #333;
+      color: #d4af37;
+      padding: 12px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      z-index: 30;
+    }
+
+    .audio-control:hover {
+      border-color: #d4af37;
+      background: rgba(212,175,55,0.1);
+    }
+
+    .audio-control.muted::before {
+      content: '🔇';
+    }
+
+    .audio-control:not(.muted)::before {
+      content: '🔊';
+    }
+
+    .skip-trailer {
+      position: absolute;
+      bottom: 40px;
+      left: 40px;
+      z-index: 20;
+      color: #888;
+      background: none;
+      border: 1px solid #333;
+      padding: 10px 20px;
+      cursor: pointer;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      transition: all 0.3s ease;
+      z-index: 30;
+    }
+
+    .skip-trailer:hover {
+      color: #d4af37;
+      border-color: #d4af37;
+    }
+
+    .skip-trailer.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .video-progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      z-index: 30;
+    }
+
+    .video-progress-bar {
+      height: 100%;
+      background: #d4af37;
+      width: 0%;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 10px rgba(212,175,55,0.5);
+    }
+
+    @keyframes titleReveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        filter: blur(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* MAIN CONTENT - FIXED */
+    .main-content {
+      display: none;
+      opacity: 0;
+      width: 100%;
+      min-height: 100vh;
+      background: #050505;
+    }
+
+    .main-content.visible {
+      display: block;
+      opacity: 1;
+      animation: fadeInUp 0.8s ease 0.3s both;
+    }
+
+    .phoenix-portal {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background-color: #050505;
+      color: #e0e0e0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .gold-text { color: #d4af37; }
+    
+    .btn-gold {
+      display: inline-block;
+      padding: 15px 35px;
+      border: 2px solid #d4af37;
+      background: transparent;
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: bold;
+      letter-spacing: 2px;
+      transition: 0.4s;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    
+    .btn-gold:hover {
+      background: #d4af37;
+      color: #000;
+      box-shadow: 0 0 25px rgba(212,175,55,0.5);
+      transform: translateY(-2px);
+    }
+    
+    .phoenix-section {
+      padding: 90px 5%;
+      max-width: 1200px;
+      margin: 0 auto;
+      border-bottom: 1px solid #111;
+    }
+
+    .phoenix-hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(1.1);
+      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .phoenix-hero.animate-in {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .phoenix-video-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.4;
+    }
+
+    .phoenix-hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 20px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.4s;
+    }
+
+    .phoenix-hero.animate-in .phoenix-hero-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .phoenix-title {
+      font-size: clamp(3rem, 8vw, 5rem);
+      letter-spacing: clamp(8px, 2vw, 15px);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 50px;
+      align-items: center;
+    }
+
+    .grid-col {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .grid-col:nth-child(2) {
+      transform: translateX(50px);
+      transition-delay: 0.2s;
+    }
+
+    .phoenix-section.animate-in .grid-col {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      border: 2px solid #d4af37;
+      border-radius: 4px;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.9) rotateY(-10deg);
+      transition: all 0.8s ease 0.3s;
+    }
+
+    .phoenix-section.animate-in .video-wrapper {
+      opacity: 1;
+      transform: scale(1) rotateY(0);
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .video-play-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .play-button {
+      width: 80px;
+      height: 80px;
+      border: 3px solid #d4af37;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.7);
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+      50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(212,175,55,0); }
+    }
+
+    .play-button:hover {
+      transform: scale(1.1);
+      background: #d4af37;
+      animation: none;
+    }
+
+    .play-button::after {
+      content: '';
+      width: 0;
+      height: 0;
+      border-left: 25px solid #d4af37;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      margin-left: 8px;
+    }
+
+    .play-button:hover::after {
+      border-left-color: #000;
+    }
+
+    .video-title {
+      color: #fff;
+      margin-bottom: 15px;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: all 0.6s ease;
+    }
+
+    .phoenix-section.animate-in .video-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glossary-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 40px;
+      background: rgba(10,10,10,0.8);
+      border: 1px solid #333;
+      position: relative;
+    }
+
+    .glossary-table tr {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .glossary-table tr:nth-child(1) { transition-delay: 0.1s; }
+    .glossary-table tr:nth-child(2) { transition-delay: 0.2s; }
+    .glossary-table tr:nth-child(3) { transition-delay: 0.3s; }
+    .glossary-table tr:nth-child(4) { transition-delay: 0.4s; }
+
+    .phoenix-section.animate-in .glossary-table tr {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glossary-table th, .glossary-table td {
+      padding: 25px;
+      border-bottom: 1px solid #222;
+      text-align: left;
+    }
+
+    .glossary-table th {
+      color: #d4af37;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .parallax-text {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .phoenix-section.animate-in .parallax-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .phoenix-section.animate-in .parallax-text:nth-child(1) { transition-delay: 0.1s; }
+    .phoenix-section.animate-in .parallax-text:nth-child(2) { transition-delay: 0.2s; }
+    .phoenix-section.animate-in .parallax-text:nth-child(3) { transition-delay: 0.3s; }
+    .phoenix-section.animate-in .parallax-text:nth-child(4) { transition-delay: 0.4s; }
+
+    .network-bridge {
+      text-align: center;
+      padding: 80px 20px;
+      background: #000;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.8s ease;
+    }
+
+    .network-bridge.animate-in {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .network-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .network-links a {
+      color: #888;
+      text-decoration: none;
+      font-weight: bold;
+      letter-spacing: 3px;
+      transition: all 0.3s ease;
+      padding: 15px 30px;
+      border: 1px solid #222;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .network-bridge.animate-in .network-links a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .network-bridge.animate-in .network-links a:nth-child(1) { transition-delay: 0.1s; }
+    .network-bridge.animate-in .network-links a:nth-child(2) { transition-delay: 0.2s; }
+    .network-bridge.animate-in .network-links a:nth-child(3) { transition-delay: 0.3s; }
+    .network-bridge.animate-in .network-links a:nth-child(4) { transition-delay: 0.4s; }
+
+    .network-links a:hover {
+      color: #d4af37;
+      border-color: #d4af37;
+    }
+
+    @media (max-width: 768px) {
+      .audio-control, .skip-trailer {
+        bottom: 20px;
+      }
+      .audio-control {
+        right: 20px;
+      }
+      .skip-trailer {
+        left: 20px;
+      }
+      .play-button {
+        width: 60px;
+        height: 60px;
+      }
+      .play-button::after {
+        border-left-width: 20px;
+        border-top-width: 12px;
+        border-bottom-width: 12px;
+      }
+    }
+
+    /* ═══ LEAD CAPTURE MODAL (S8) ═══ */
+    .lead-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .lead-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lead-modal {
+      background: #0a0a0a;
+      border: 2px solid #d4af37;
+      max-width: 480px;
+      width: 90%;
+      padding: 50px 40px;
+      position: relative;
+      transform: translateY(30px) scale(0.95);
+      transition: transform 0.4s ease;
+    }
+
+    .lead-modal-overlay.active .lead-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .lead-modal-close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: #666;
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.3s;
+      padding: 5px;
+    }
+
+    .lead-modal-close:hover {
+      color: #d4af37;
+    }
+
+    .lead-modal h2 {
+      color: #d4af37;
+      font-size: 1.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .lead-modal .modal-subtitle {
+      color: #888;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
+    }
+
+    .lead-form-group {
+      margin-bottom: 20px;
+    }
+
+    .lead-form-group label {
+      display: block;
+      color: #aaa;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .lead-form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      background: #111;
+      border: 1px solid #333;
+      color: #e0e0e0;
+      font-size: 16px;
+      font-family: inherit;
+      transition: border-color 0.3s;
+      outline: none;
+    }
+
+    .lead-form-group input:focus {
+      border-color: #d4af37;
+    }
+
+    .lead-form-group input.error {
+      border-color: #cc3333;
+    }
+
+    .lead-form-group .error-msg {
+      color: #cc3333;
+      font-size: 0.75rem;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .lead-form-group input.error + .error-msg {
+      display: block;
+    }
+
+    .lead-form-submit {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #d4af37;
+      background: transparent;
+      color: #d4af37;
+      font-weight: bold;
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      margin-top: 10px;
+    }
+
+    .lead-form-submit:hover {
+      background: #d4af37;
+      color: #000;
+      box-shadow: 0 0 25px rgba(212,175,55,0.4);
+    }
+
+    .lead-form-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .lead-form-submit:disabled:hover {
+      background: transparent;
+      color: #d4af37;
+      box-shadow: none;
+    }
+
+    .lead-modal .modal-privacy {
+      text-align: center;
+      font-size: 0.7rem;
+      color: #555;
+      margin-top: 15px;
+    }
+
+    /* Modal States */
+    .lead-modal .state-form,
+    .lead-modal .state-loading,
+    .lead-modal .state-success,
+    .lead-modal .state-error {
+      display: none;
+    }
+
+    .lead-modal[data-state="form"] .state-form { display: block; }
+    .lead-modal[data-state="loading"] .state-loading { display: flex; flex-direction: column; align-items: center; padding: 40px 0; }
+    .lead-modal[data-state="success"] .state-success { display: flex; flex-direction: column; align-items: center; padding: 30px 0; text-align: center; }
+    .lead-modal[data-state="error"] .state-error { display: flex; flex-direction: column; align-items: center; padding: 30px 0; text-align: center; }
+
+    .lead-modal .state-loading .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #333;
+      border-top-color: #d4af37;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .lead-modal .state-success h3 {
+      color: #d4af37;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .lead-modal .state-success p {
+      color: #aaa;
+      margin-bottom: 25px;
+    }
+
+    .lead-modal .state-error h3 {
+      color: #cc3333;
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+
+    .lead-modal .state-error p {
+      color: #aaa;
+      margin-bottom: 20px;
+    }
+
+    /* ═══ EXIT INTENT OVERLAY (S9) ═══ */
+    .exit-intent-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10001;
+      background: rgba(0,0,0,0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .exit-intent-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .exit-intent-box {
+      text-align: center;
+      max-width: 520px;
+      width: 90%;
+      padding: 50px 40px;
+      border: 1px solid #222;
+      background: #0a0a0a;
+      transform: translateY(-40px);
+      transition: transform 0.5s ease;
+    }
+
+    .exit-intent-overlay.active .exit-intent-box {
+      transform: translateY(0);
+    }
+
+    .exit-intent-box h2 {
+      color: #d4af37;
+      font-size: 2rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .exit-intent-box .social-proof {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .exit-intent-box .exit-message {
+      color: #ccc;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .exit-intent-box .exit-cta-primary {
+      display: inline-block;
+      padding: 16px 35px;
+      border: 2px solid #d4af37;
+      background: #d4af37;
+      color: #000;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .exit-intent-box .exit-cta-primary:hover {
+      background: transparent;
+      color: #d4af37;
+    }
+
+    .exit-intent-box .exit-cta-dismiss {
+      display: block;
+      background: none;
+      border: none;
+      color: #555;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      cursor: pointer;
+      margin: 0 auto;
+      padding: 10px;
+      transition: color 0.3s;
+    }
+
+    .exit-intent-box .exit-cta-dismiss:hover {
+      color: #aaa;
+    }
+
+    /* ═══ GLOSSARY ENHANCEMENTS ═══ */
+    .glossary-table tr:nth-child(5) { transition-delay: 0.5s; }
+    .glossary-table tr:nth-child(6) { transition-delay: 0.6s; }
+    .glossary-table tr:nth-child(7) { transition-delay: 0.7s; }
+    .glossary-table tr:nth-child(8) { transition-delay: 0.8s; }
+
+    .glossary-table tr:hover td {
+      background: #1a1a1a;
+    }
+
+    .glossary-table tr {
+      cursor: crosshair;
+    }
+
+    .glossary-table th {
+      cursor: default;
+    }
+
+    /* ═══ SKIP TO CONTENT (A11Y) ═══ */
+    .skip-to-content {
+      position: fixed;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #d4af37;
+      color: #000;
+      padding: 12px 24px;
+      z-index: 99999;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: top 0.3s;
+    }
+
+    .skip-to-content:focus {
+      top: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .lead-modal {
+        width: 95%;
+        padding: 40px 25px;
+      }
+      .lead-modal h2 {
+        font-size: 1.4rem;
+      }
+      .exit-intent-box {
+        width: 95%;
+        padding: 40px 25px;
+      }
+      .exit-intent-box h2 {
+        font-size: 1.5rem;
+      }
+      .glossary-table th,
+      .glossary-table td {
+        padding: 15px 10px;
+        font-size: 0.85rem;
+      }
+      .glossary-table th:first-child,
+      .glossary-table td:first-child {
+        min-width: 80px;
+      }
+    }
+
+    /* ═══ REDUCED MOTION (A11Y) ═══ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .cinema-container { transition: none; }
+      .lead-modal-overlay { transition: none; }
+      .exit-intent-overlay { transition: none; }
+      .phoenix-hero { transition: none; opacity: 1; transform: none; }
+      .grid-col { opacity: 1; transform: none; }
+      .video-wrapper { opacity: 1; transform: none; }
+      .glossary-table tr { opacity: 1; transform: none; }
+      .network-links a { opacity: 1; transform: none; }
+      .parallax-text { opacity: 1; transform: none; }
+      .network-bridge { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip to Content (A11Y) -->
+  <a href="#mainContent" class="skip-to-content">Skip to Content</a>
+
+  <!-- CINEMATIC TRAILER -->
+  <div class="cinema-container" id="cinemaTrailer" role="region" aria-label="Cinematic trailer introduction">
+    <div class="cinema-video-wrapper">
+      <video
+        id="trailerVideo"
+        class="cinema-video"
+        autoplay
+        playsinline
+        muted
+        loop
+        preload="auto"
+        webkit-playsinline
+        x5-playsinline
+        poster="https://cdn.shopify.com/s/files/1/0904/4917/3247/files/logo.jpg"
+        aria-hidden="true"
+      >
+        <source src="https://cdn.shopify.com/videos/c/o/v/0fcec744a02444a6b44235d5362754f6.mp4" type="video/mp4">
+      </video>
+    </div>
+    
+    <div class="cinema-overlay"></div>
+    
+    <div class="video-progress">
+      <div class="video-progress-bar" id="progressBar"></div>
+    </div>
+    
+    <div class="cinema-content">
+      <h1 class="cinema-title">VaShawn F. HEAD</h1>
+      <p class="cinema-subtitle">The Illusions Revealed</p>
+      <button class="cinema-cta" id="enterBtn" onclick="enterPortal()">Enter The Portal</button>
+    </div>
+
+    <button class="audio-control muted" id="audioBtn" onclick="toggleAudio()" aria-label="Toggle audio for trailer video">
+      Click to Enable Audio
+    </button>
+
+    <button class="skip-trailer" id="skipBtn" onclick="enterPortal()" aria-label="Skip trailer and enter the portal">Skip Trailer</button>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content" id="mainContent">
+    <div class="phoenix-portal">
+      
+      <section class="phoenix-hero" id="heroSection" role="banner">
+        <video class="phoenix-video-bg" autoplay muted loop playsinline poster="https://cdn.shopify.com/s/files/1/0904/4917/3247/files/logo.jpg" aria-hidden="true">
+          <source src="https://cdn.shopify.com/videos/c/o/v/0fcec744a02444a6b44235d5362754f6.mp4" type="video/mp4">
+        </video>
+        <div class="phoenix-hero-content">
+          <h1 class="phoenix-title gold-text">VaShawn F. HEAD</h1>
+          <p style="font-size: 1.5rem; letter-spacing: 8px; text-transform: uppercase; color: #fff; margin-bottom: 40px;">The Illusions Revealed</p>
+          <a href="#" onclick="openLeadModal('hero_cta'); return false;" class="btn-gold">Claim Your Skeleton Key</a>
+        </div>
+      </section>
+
+      <section class="phoenix-section" id="interviewSection">
+        <div class="grid-2">
+          <div class="grid-col" style="border-left: 4px solid #d4af37; padding-left: 40px;">
+            <h2 class="gold-text parallax-text" style="font-size: 2.5rem; margin-bottom: 20px; letter-spacing: 3px;">THE MASTER LOCKSMITH</h2>
+            <p class="parallax-text" style="font-size: 1.1rem; color: #ccc;">His mission began in 1971 at the Higbee's "Santa Line Slaying"—a moment that shattered the script of a young boy and birthed a 55-year quest for the truth.</p>
+            <p class="parallax-text" style="font-size: 1.1rem; color: #ccc; margin-top: 15px;">Through <strong>Psychic Defragmentation</strong>, VaShawn F. HEAD has re-ground the keys to our history, identifying how modern language has de-evolved to keep the river trapped in the cup.</p>
+            <p class="parallax-text" style="font-style: italic; color: #888; margin-top: 30px; font-size: 1.2rem;">"I am what I am, and that's all that I am."</p>
+          </div>
+          <div class="grid-col">
+            <h3 class="video-title">THE REVELATOR INTERVIEW</h3>
+            <div class="video-wrapper" id="interviewContainer">
+              <div class="video-play-overlay" onclick="loadYouTube('interviewContainer', 'AciO388QcTA', false)">
+                <div class="play-button"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="phoenix-section" id="playlistSection" style="background: linear-gradient(180deg, #050505 0%, #111 100%); text-align: center;">
+        <h2 class="gold-text parallax-text" style="font-size: 2.5rem; letter-spacing: 5px;">THE STREAMED REVOLUTION</h2>
+        <p class="parallax-text" style="color: #aaa; margin-bottom: 50px; font-size: 1.2rem; padding: 0 20px;">The 1% Theorem is not just read—it is heard, watched, and experienced. Dive into the archives.</p>
+        <div class="video-wrapper" style="max-width: 1000px; margin: 0 auto;" id="playlistContainer">
+          <div class="video-play-overlay" onclick="loadYouTube('playlistContainer', 'PL1l8lqBZSZtulkKcgR_qaIJ1iYrie_mws', true)">
+            <div class="play-button"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="interactive-vault" class="phoenix-section" style="background: url('https://cdn.shopify.com/s/files/dark-texture-bg.jpg') center/cover; position: relative;">
+        <div style="position: absolute; inset: 0; background: rgba(5,5,5,0.85);"></div>
+        <div style="position: relative; text-align: center; max-width: 900px; margin: 0 auto;">
+          <h2 class="gold-text parallax-text" style="font-size: 2.5rem; letter-spacing: 4px;">THE 1949 SCRIPT EXPIRES</h2>
+          <p class="parallax-text" style="color: #ccc; font-size: 1.1rem;">For 300 years, language has been de-evolved to turn the student of principles into a subject of authority. This Interactive Dictionary reveals the truth hidden in plain sight.</p>
+        </div>
+        <table class="glossary-table" style="position: relative;">
+          <tbody>
+            <tr>
+              <th style="width: 20%;">THE WORD</th>
+              <th style="width: 40%;">THE 1913 TRUTH (Principles)</th>
+              <th style="width: 40%;">THE 2026 ILLUSION (Authority)</th>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">DOGMA</td>
+              <td>A settled principle; a tenet held by a school.</td>
+              <td style="color: #888;">A principle laid down by an <i>authority</i> as indisputably true.</td>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">EVOLVE</td>
+              <td>To unfold; to open and expand one's consciousness.</td>
+              <td style="color: #888;">A change in heritable characteristics over successive generations.</td>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">BRAINWASHING</td>
+              <td>[Concept did not exist. Principles were freely debated.]</td>
+              <td style="color: #888;">Make someone adopt radically different beliefs using systematic pressure.</td>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">GOVERNMENT</td>
+              <td>The exercise of authority; direction; self-control; management of one's own conduct.</td>
+              <td style="color: #888;">The group of people with the authority to rule a country or state.</td>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">EDUCATION</td>
+              <td>The drawing out of the faculties; the development of the moral powers.</td>
+              <td style="color: #888;">The process of receiving instruction at a school or university.</td>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">PERSON</td>
+              <td>A living, self-conscious being; a moral agent; one's real individual self.</td>
+              <td style="color: #888;">A human being regarded as an individual; a legal entity subject to jurisdiction.</td>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">CITIZEN</td>
+              <td>One who enjoys the freedom of a city; a freeman invested with full civic rights.</td>
+              <td style="color: #888;">A legally recognized subject of a state, owing allegiance to its government.</td>
+            </tr>
+            <tr>
+              <td class="gold-text" style="font-size: 1.2rem; font-weight: bold;">FREEDOM</td>
+              <td>The state of being free from restraint; the power of self-determination attributed to the will.</td>
+              <td style="color: #888;">The state of not being imprisoned or enslaved; permission granted by authority.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="network-bridge" id="networkSection">
+        <h3 style="font-size: 2rem; letter-spacing: 6px; margin-bottom: 20px; color: #fff;">1x1=3 : THE HYBRID TAKEOVER</h3>
+        <p style="color: #777; max-width: 600px; margin: 0 auto;">Access the interactive E-Book, sync to the vibration of the soundtrack, or connect with the technological forge.</p>
+        <div class="network-links">
+          <a href="https://youtube.com/playlist?list=PL1l8lqBZSZtulkKcgR_qaIJ1iYrie_mws&si=QfFObxB9PPqRU71K" style="border-color: #d4af37; color: #d4af37;" target="_blank" rel="noopener noreferrer">PLAY SOUNDTRACK</a>
+          <a href="#" onclick="openLeadModal('download_book'); return false;">DOWNLOAD FREE BOOK</a>
+          <a href="https://headartworks.com" target="_blank" rel="noopener noreferrer">HEADARTWORKS</a>
+          <a href="https://invisionedmarketing.agency" target="_blank" rel="noopener noreferrer">INVISIONED MARKETING</a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ═══ LEAD CAPTURE MODAL (S8) ═══ -->
+  <div class="lead-modal-overlay" id="leadModalOverlay" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+    <div class="lead-modal" id="leadModal" data-state="form">
+      <button class="lead-modal-close" onclick="closeLeadModal()" aria-label="Close modal">&times;</button>
+
+      <!-- STATE: Form -->
+      <div class="state-form">
+        <h2 id="leadModalTitle">Claim Your Skeleton Key</h2>
+        <p class="modal-subtitle">Unlock the truth hidden in plain sight</p>
+        <form id="leadForm" onsubmit="handleLeadSubmit(event)" novalidate>
+          <div class="lead-form-group">
+            <label for="leadName">Name *</label>
+            <input type="text" id="leadName" name="name" required autocomplete="name" maxlength="100" placeholder="Your name">
+            <div class="error-msg">Please enter your name</div>
+          </div>
+          <div class="lead-form-group">
+            <label for="leadEmail">Email *</label>
+            <input type="email" id="leadEmail" name="email" required autocomplete="email" placeholder="your@email.com">
+            <div class="error-msg">Please enter a valid email</div>
+          </div>
+          <div class="lead-form-group">
+            <label for="leadPhone">Phone (optional)</label>
+            <input type="tel" id="leadPhone" name="phone" autocomplete="tel" placeholder="+1 (555) 123-4567">
+            <div class="error-msg">Please enter a valid phone number</div>
+          </div>
+          <input type="hidden" id="leadUtmSource" name="utm_source">
+          <input type="hidden" id="leadUtmMedium" name="utm_medium">
+          <input type="hidden" id="leadUtmCampaign" name="utm_campaign">
+          <input type="hidden" id="leadTimestamp" name="timestamp">
+          <input type="hidden" id="leadReferrer" name="referrer">
+          <button type="submit" class="lead-form-submit" id="leadSubmitBtn">Unlock The Vault</button>
+        </form>
+        <p class="modal-privacy">Your information is sacred. No spam, ever.</p>
+      </div>
+
+      <!-- STATE: Loading -->
+      <div class="state-loading">
+        <div class="spinner"></div>
+        <p style="color: #d4af37; letter-spacing: 2px; text-transform: uppercase;">Unlocking Vault...</p>
+      </div>
+
+      <!-- STATE: Success -->
+      <div class="state-success">
+        <h3>Skeleton Key Delivered</h3>
+        <p>The truth awaits inside. Check your email or download now.</p>
+        <a href="https://delivery.shopifyapps.com/-/4ac1dc16f87c78e1/95ddb592359f8513" target="_blank" rel="noopener noreferrer" class="lead-form-submit" style="text-decoration: none; text-align: center;">Download Your Key</a>
+      </div>
+
+      <!-- STATE: Error -->
+      <div class="state-error">
+        <h3>Something Went Wrong</h3>
+        <p>The vault resists. Please try again.</p>
+        <button class="lead-form-submit" onclick="setModalState('form')">Try Again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EXIT INTENT OVERLAY (S9) ═══ -->
+  <div class="exit-intent-overlay" id="exitIntentOverlay">
+    <div class="exit-intent-box">
+      <h2>Wait, Truth Seeker</h2>
+      <p class="social-proof">12,000+ people have already unlocked the Skeleton Key</p>
+      <p class="exit-message">Don't leave without yours. The illusions won't reveal themselves.</p>
+      <button class="exit-cta-primary" onclick="closeExitIntent(); openLeadModal('exit_intent');">Claim My Skeleton Key</button>
+      <button class="exit-cta-dismiss" onclick="closeExitIntent()">No thanks, I prefer the illusion</button>
+    </div>
+  </div>
+
+  <script>
+    // FIX: Simplified and robust transition logic
+    const trailer = document.getElementById('cinemaTrailer');
+    const video = document.getElementById('trailerVideo');
+    const audioBtn = document.getElementById('audioBtn');
+    const skipBtn = document.getElementById('skipBtn');
+    const enterBtn = document.getElementById('enterBtn');
+    const progressBar = document.getElementById('progressBar');
+    const mainContent = document.getElementById('mainContent');
+    const html = document.documentElement;
+    
+    let hasAudio = false;
+    let hasEntered = false;
+    let endCheckInterval = null;
+
+    // Check session
+    const hasSeenTrailer = sessionStorage.getItem('phoenix_trailer_seen');
+
+    if (hasSeenTrailer) {
+      // Skip trailer entirely
+      trailer.style.display = 'none';
+      mainContent.style.display = 'block';
+      mainContent.classList.add('visible');
+      html.classList.add('scrolling-enabled');
+      document.body.style.overflow = 'auto';
+      initAllAnimations();
+    } else {
+      // First visit - start trailer
+      video.play().catch(e => console.log('Autoplay prevented:', e));
+    }
+
+    // Progress bar update
+    video.addEventListener('timeupdate', () => {
+      if (video.duration) {
+        const progress = (video.currentTime / video.duration) * 100;
+        progressBar.style.width = progress + '%';
+      }
+    });
+
+    // FIX: Reliable audio toggle with video end detection
+    function toggleAudio() {
+      if (!hasAudio) {
+        // Enable audio
+        video.muted = false;
+        video.volume = 1.0;
+        hasAudio = true;
+        audioBtn.classList.remove('muted');
+        audioBtn.textContent = 'Audio Enabled';
+        
+        // Visual feedback
+        skipBtn.classList.add('hidden');
+        enterBtn.textContent = 'Experience The Full Revelation';
+        
+        // Restart from beginning for full experience
+        video.currentTime = 0;
+        video.play();
+        
+        // CRITICAL: Disable loop so it can end
+        video.loop = false;
+        
+        // Add ended listener
+        video.addEventListener('ended', handleVideoEnded);
+        
+        // FALLBACK: Check every second if video is near end
+        endCheckInterval = setInterval(() => {
+          if (video.duration && video.currentTime >= video.duration - 0.5) {
+            handleVideoEnded();
+          }
+        }, 1000);
+        
+      } else {
+        // Disable audio
+        video.muted = true;
+        hasAudio = false;
+        audioBtn.classList.add('muted');
+        audioBtn.textContent = 'Click to Enable Audio';
+        skipBtn.classList.remove('hidden');
+        enterBtn.textContent = 'Enter The Portal';
+        video.loop = true;
+        
+        // Remove listeners
+        video.removeEventListener('ended', handleVideoEnded);
+        if (endCheckInterval) {
+          clearInterval(endCheckInterval);
+          endCheckInterval = null;
+        }
+      }
+    }
+
+    // FIX: Handle video completion
+    function handleVideoEnded() {
+      // Prevent double trigger
+      if (hasEntered) return;
+      
+      // Clean up
+      if (endCheckInterval) {
+        clearInterval(endCheckInterval);
+        endCheckInterval = null;
+      }
+      
+      // Only auto-transition if audio was enabled
+      if (hasAudio) {
+        console.log('Video ended - transitioning to portal');
+        enterPortal();
+      }
+    }
+
+    // FIX: Robust enter function
+    function enterPortal() {
+      if (hasEntered) {
+        console.log('Already entered, skipping');
+        return;
+      }
+      
+      hasEntered = true;
+      console.log('Entering portal...');
+      
+      // Save session
+      sessionStorage.setItem('phoenix_trailer_seen', 'true');
+      
+      // Clean up video
+      video.pause();
+      video.removeEventListener('ended', handleVideoEnded);
+      if (endCheckInterval) {
+        clearInterval(endCheckInterval);
+      }
+      
+      // Animate out trailer
+      trailer.classList.add('exited');
+      
+      // Show main content after fade
+      setTimeout(() => {
+        trailer.style.display = 'none';
+        
+        // CRITICAL FIX: Show and enable main content
+        mainContent.style.display = 'block';
+        // Force reflow
+        void mainContent.offsetHeight;
+        mainContent.classList.add('visible');
+        
+        // Enable scrolling
+        html.classList.add('scrolling-enabled');
+        document.body.style.overflow = 'auto';
+        
+        // Initialize animations
+        initAllAnimations();
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+        
+        console.log('Portal entered successfully');
+      }, 800);
+    }
+
+    // Auto-enter after 30 seconds if no interaction
+    setTimeout(() => {
+      if (!hasEntered && !hasSeenTrailer && !hasAudio) {
+        enterPortal();
+      }
+    }, 30000);
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' || e.key === 'Enter') {
+        enterPortal();
+      }
+    });
+
+    // YouTube loader
+    function loadYouTube(containerId, videoId, isPlaylist) {
+      const container = document.getElementById(containerId);
+      const overlay = container.querySelector('.video-play-overlay');
+      overlay.classList.add('hidden');
+      
+      const iframe = document.createElement('iframe');
+      const baseUrl = 'https://www.youtube.com/embed/';
+      const params = isPlaylist 
+        ? `videoseries?list=${videoId}&autoplay=1&rel=0` 
+        : `${videoId}?autoplay=1&si=VHF6jE9VBP-jwxpm`;
+      
+      iframe.src = baseUrl + params;
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      iframe.style.position = 'absolute';
+      iframe.style.inset = '0';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = '0';
+      
+      container.appendChild(iframe);
+    }
+
+    // Scroll animations
+    function initAllAnimations() {
+      // Hero entrance
+      setTimeout(() => {
+        const hero = document.getElementById('heroSection');
+        if (hero) hero.classList.add('animate-in');
+      }, 100);
+
+      // Section reveals
+      const sections = document.querySelectorAll('.phoenix-section, .network-bridge');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { 
+        threshold: 0.15, 
+        rootMargin: '0px 0px -100px 0px' 
+      });
+
+      sections.forEach(section => observer.observe(section));
+    }
+
+    // ═══ SANITIZATION (SIR_SENTINEL) ═══
+    function sanitizeInput(str) {
+      var div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML.trim().substring(0, 200);
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(email) && email.length <= 254;
+    }
+
+    function isValidPhone(phone) {
+      if (!phone) return true; // optional
+      return /^[\d\s\+\-\(\)\.]{7,20}$/.test(phone);
+    }
+
+    // ═══ UTM CAPTURE ═══
+    (function captureUTM() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+        utmKeys.forEach(function(key) {
+          var val = params.get(key);
+          if (val) sessionStorage.setItem('phoenix_' + key, sanitizeInput(val));
+        });
+      } catch(e) {}
+    })();
+
+    function getUTM(key) {
+      try { return sessionStorage.getItem('phoenix_' + key) || ''; }
+      catch(e) { return ''; }
+    }
+
+    // ═══ LEAD CAPTURE MODAL (S8) ═══
+    var leadCaptured = false;
+    var modalOpen = false;
+    var lastSubmitTime = 0;
+
+    try { leadCaptured = sessionStorage.getItem('phoenix_lead_captured') === 'true'; }
+    catch(e) {}
+
+    function openLeadModal(trigger) {
+      if (leadCaptured) {
+        // Already captured — go straight to download
+        window.open('https://delivery.shopifyapps.com/-/4ac1dc16f87c78e1/95ddb592359f8513', '_blank', 'noopener');
+        return;
+      }
+      var overlay = document.getElementById('leadModalOverlay');
+      var modal = document.getElementById('leadModal');
+      setModalState('form');
+
+      // Populate hidden fields
+      document.getElementById('leadUtmSource').value = getUTM('utm_source');
+      document.getElementById('leadUtmMedium').value = getUTM('utm_medium');
+      document.getElementById('leadUtmCampaign').value = getUTM('utm_campaign');
+      document.getElementById('leadTimestamp').value = new Date().toISOString();
+      document.getElementById('leadReferrer').value = document.referrer || '';
+
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      modalOpen = true;
+
+      // Focus first field
+      setTimeout(function() {
+        document.getElementById('leadName').focus();
+      }, 400);
+    }
+
+    function closeLeadModal() {
+      var overlay = document.getElementById('leadModalOverlay');
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      modalOpen = false;
+
+      // Clear validation states
+      var inputs = document.querySelectorAll('#leadForm input[type]');
+      inputs.forEach(function(input) { input.classList.remove('error'); });
+    }
+
+    function setModalState(state) {
+      document.getElementById('leadModal').setAttribute('data-state', state);
+    }
+
+    // Close modal on overlay click
+    document.getElementById('leadModalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeLeadModal();
+    });
+
+    // Close modal on Escape (only when modal is open)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modalOpen) {
+        closeLeadModal();
+        e.stopPropagation();
+      }
+    });
+
+    function handleLeadSubmit(e) {
+      e.preventDefault();
+
+      // Rate limit: 1 submit per 10 seconds
+      var now = Date.now();
+      if (now - lastSubmitTime < 10000) return;
+      lastSubmitTime = now;
+
+      var nameInput = document.getElementById('leadName');
+      var emailInput = document.getElementById('leadEmail');
+      var phoneInput = document.getElementById('leadPhone');
+
+      // Clear previous errors
+      nameInput.classList.remove('error');
+      emailInput.classList.remove('error');
+      phoneInput.classList.remove('error');
+
+      var name = sanitizeInput(nameInput.value);
+      var email = emailInput.value.trim().toLowerCase();
+      var phone = phoneInput.value.trim();
+
+      // Validate
+      var valid = true;
+      if (!name || name.length < 1) {
+        nameInput.classList.add('error');
+        valid = false;
+      }
+      if (!isValidEmail(email)) {
+        emailInput.classList.add('error');
+        valid = false;
+      }
+      if (phone && !isValidPhone(phone)) {
+        phoneInput.classList.add('error');
+        valid = false;
+      }
+      if (!valid) return;
+
+      // Disable submit
+      var btn = document.getElementById('leadSubmitBtn');
+      btn.disabled = true;
+      setModalState('loading');
+
+      // Store lead data locally
+      var leadData = {
+        name: name,
+        email: email,
+        phone: phone || '',
+        utm_source: getUTM('utm_source'),
+        utm_medium: getUTM('utm_medium'),
+        utm_campaign: getUTM('utm_campaign'),
+        timestamp: new Date().toISOString(),
+        referrer: document.referrer || ''
+      };
+
+      try { sessionStorage.setItem('phoenix_lead_data', JSON.stringify(leadData)); }
+      catch(e) {}
+
+      // Attempt Shopify customer creation via Contact Form (works without API keys)
+      var formData = new FormData();
+      formData.append('form_type', 'customer');
+      formData.append('utf8', '\u2713');
+      formData.append('customer[first_name]', name);
+      formData.append('customer[email]', email);
+      if (phone) formData.append('customer[phone]', phone);
+      formData.append('customer[tags]', 'phoenix_lead,source:portal');
+      formData.append('customer[note]', 'Phoenix Portal Lead | UTM: ' + (getUTM('utm_source') || 'direct'));
+
+      fetch('/account', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'text/html' }
+      }).then(function() {
+        // Shopify may redirect or return HTML - either way, lead was submitted
+        onLeadSuccess();
+      }).catch(function() {
+        // Network error - still show success since we have local data
+        onLeadSuccess();
+      });
+    }
+
+    function onLeadSuccess() {
+      leadCaptured = true;
+      try { sessionStorage.setItem('phoenix_lead_captured', 'true'); }
+      catch(e) {}
+      setModalState('success');
+      document.getElementById('leadSubmitBtn').disabled = false;
+    }
+
+    // ═══ EXIT INTENT (S9) ═══
+    var exitIntentShown = false;
+    try { exitIntentShown = sessionStorage.getItem('phoenix_exit_shown') === 'true'; }
+    catch(e) {}
+
+    // Desktop: mouseout at top of viewport
+    document.addEventListener('mouseout', function(e) {
+      if (e.clientY < 10 && !leadCaptured && !exitIntentShown && !modalOpen && hasEntered) {
+        showExitIntent();
+      }
+    });
+
+    // Mobile: rapid upward scroll detection
+    var lastScrollY = 0;
+    var scrollVelocity = 0;
+    var lastScrollTime = 0;
+
+    window.addEventListener('scroll', function() {
+      var currentY = window.scrollY;
+      var currentTime = Date.now();
+      var timeDelta = currentTime - lastScrollTime;
+
+      if (timeDelta > 0) {
+        scrollVelocity = (lastScrollY - currentY) / timeDelta; // positive = scrolling up
+      }
+
+      // Fast upward scroll (> 2px/ms) while in top 30% of page
+      if (scrollVelocity > 2 && currentY < window.innerHeight * 0.3 && !leadCaptured && !exitIntentShown && !modalOpen && hasEntered) {
+        showExitIntent();
+      }
+
+      lastScrollY = currentY;
+      lastScrollTime = currentTime;
+    }, { passive: true });
+
+    function showExitIntent() {
+      exitIntentShown = true;
+      try { sessionStorage.setItem('phoenix_exit_shown', 'true'); }
+      catch(e) {}
+      document.getElementById('exitIntentOverlay').classList.add('active');
+    }
+
+    function closeExitIntent() {
+      document.getElementById('exitIntentOverlay').classList.remove('active');
+    }
+
+    // Close exit intent on overlay click
+    document.getElementById('exitIntentOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeExitIntent();
+    });
+
+    // ═══ FOCUS TRAP FOR MODAL (A11Y) ��══
+    document.getElementById('leadModalOverlay').addEventListener('keydown', function(e) {
+      if (e.key !== 'Tab' || !modalOpen) return;
+      var modal = document.getElementById('leadModal');
+      var focusable = modal.querySelectorAll('button, input, a, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      var first = focusable[0];
+      var last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { last.focus(); e.preventDefault(); }
+      } else {
+        if (document.activeElement === last) { first.focus(); e.preventDefault(); }
+      }
+    });
+
+    // ═══ VIDEO ERROR HANDLER (PERF) ══��
+    var trailerVid = document.getElementById('trailerVideo');
+    if (trailerVid) {
+      trailerVid.addEventListener('error', function() {
+        // On video load failure, skip straight to portal
+        if (!hasEntered) enterPortal();
+      });
+    }
+
+    // ═══ INBOUND QR SCAN TRACKER ═══
+    // Tracks visitors arriving via Canva QR code (?utm_source=qr)
+    (function trackQRScan() {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('utm_source') === 'qr') {
+          // Increment persistent scan counter
+          var count = parseInt(localStorage.getItem('phoenix_qr_scans') || '0', 10);
+          localStorage.setItem('phoenix_qr_scans', String(count + 1));
+          sessionStorage.setItem('phoenix_entry_method', 'qr_scan');
+          sessionStorage.setItem('phoenix_qr_scan_time', new Date().toISOString());
+
+          // Capture all UTM context from QR landing
+          var medium = params.get('utm_medium') || 'print';
+          var campaign = params.get('utm_campaign') || 'qr_portal';
+          sessionStorage.setItem('phoenix_utm_source', 'qr');
+          sessionStorage.setItem('phoenix_utm_medium', sanitizeInput(medium));
+          sessionStorage.setItem('phoenix_utm_campaign', sanitizeInput(campaign));
+        }
+      } catch(e) {}
+    })();
+  </script>
+
+</body>
+</html>

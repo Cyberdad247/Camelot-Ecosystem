@@ -1,0 +1,22 @@
+{
+  "protocol": "HITL_GATE_v1.1",
+  "authorizer": "VaShawn O. Head",
+  "critical_cmds": [
+    "OMEGA_FORK",
+    "OMEGA_GOD_MODE",
+    "OMEGA_WIPE",
+    "OMEGA_DESTROY"
+  ],
+  "requires_confirmation": true,
+  "confirmation_env_var": "CAMELOT_HITL_CONFIRM_TOKEN",
+  "confirmation_token": "",
+  "allow_plain_signature_fallback": false,
+  "default_ttl_seconds": 60,
+  "trust_levels": {
+    "KERNEL": 100,
+    "ARCHITECT": 90,
+    "KNIGHT": 70,
+    "SQUIRE": 40
+  },
+  "lockdown_mode": false
+}

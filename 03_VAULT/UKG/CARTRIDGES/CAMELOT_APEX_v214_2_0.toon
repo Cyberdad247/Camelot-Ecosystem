@@ -1,0 +1,15 @@
+[νKG_CRYSTAL: CAMELOT_APEX_v214_2_0]
+
+u0 | ID | State | {Version:214.2.0, Status:RADIANT, Actor:Merlin+Anya+Lukas}
+u1 | ARCH | Realms | {01_KERNEL:Brain, 02_FORGE:Factory, 03_VAULT:Memory}
+u2 | STACK | Kinetic | {Saltare:Go_Gateway[v0.1.0], Cribo:Rust_Bundler[v0.1.0], Rotel:Tracing}
+u3 | GOV | Protocols | {Heal:Active, Evolve:Active, Genesis:Active, SIT:Enforced}
+u4 | MEM | UKG | {Format:JSON-LD, Type:GraphRAG, Anchors:Prime_Crystal+Omega_Upgrade}
+
+c0 | LAW | Purity | {L2_Priority:Binaries>Scripts, Safety:Antigravity_Gate}
+c1 | LAW | Truth | {Audit:Continuous, Ledger:Mandatory, Secret_Scrub:Enforced}
+
+k0 | KNIGHT | Sentinel | {Domain:Security, Status:Active, Skill:Iron_Gate}
+k1 | KNIGHT | Apis | {Domain:Research, Status:Active, Skill:BASHR+ANT_MODE}
+
+w0 | WORKFLOW | Forensic | {Audit[Sense]->Heal[Act]->Sync[Map]}

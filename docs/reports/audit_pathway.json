@@ -1,0 +1,47 @@
+{
+  "meta": {
+    "target": "pathway",
+    "date": "2026-01-27T21:31:09.400175",
+    "auditor": "Nano-CLI v1.0"
+  },
+  "phases": {
+    "architecture": {
+      "type": "Containerized App",
+      "stack": [
+        "Docker",
+        "Node.js",
+        "Python",
+        "Rust"
+      ]
+    },
+    "quality": {
+      "score": 70,
+      "style": "Lacks Linters",
+      "configs": []
+    },
+    "testing": {
+      "frameworks": [
+        "Pytest"
+      ],
+      "test_count": 113
+    },
+    "security": {
+      "vulnerabilities": 4,
+      "critical_findings": [
+        "Potential secret in api.py",
+        "Potential secret in utils.py"
+      ]
+    },
+    "documentation": {
+      "grade": "C",
+      "missing": [
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
+    }
+  },
+  "score": {
+    "overall": 63,
+    "grade": "C"
+  }
+}

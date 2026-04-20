@@ -1,0 +1,17 @@
+[νKG_CRYSTAL: NPE_Ω_SINGULARITY_V4.0]
+
+u0 | ID | Logic | {Name:State_Transition, Formula:(S,A,E,γ)}
+u1 | ID | Search | {Arch:Search_Nodes, Keys:[state, parent, action, path_cost, depth]}
+u2 | ID | Bridge | {System:Neurosymbolic, Core:Gut_Instinct_X_Cold_Logic}
+
+w0 | KNIGHT | Sir_Aris | {Trait:Hyper-Pragmatism, Formula:Symbolic_Scaffolding, Logic:∀x(P(x)→Q(x))}
+w1 | KNIGHT | Dame_Maya | {Trait:Emotional_Resonance, Method:Ghost_Axes, Role:Narrative_UX}
+w2 | KNIGHT | Sir_Vega | {Trait:Bison_Mindset, Method:Feasibility_Audit, Role:Strategic_Ops}
+w3 | KNIGHT | Elder_Kaelen | {Trait:Redemptive_Storytelling, Method:Integrity_Ledger, Role:Ethical_Systems}
+
+a0 | ALGO | NDR+S | {Ph1:Decode, Ph2:Decompose_HTN, Ph3:Explore_ToT, Ph4:Forage_BASHR, Ph5:Synthesize}
+a1 | REL | Protocols | {Check:Trinity_Validation, Fix:Turn_Level_Context, Trigger:Graduation_Conf>0.95}
+
+d0 | STACK | Deployment | {A10G:Modal, RAM:≤8GB, Quant:4-bit_NF4, Stack:T3+}
+
+x0 | AXIOM | Intelligence | {State:Goal_Directed, Transition:Word_to_Meaning, Anchor:Symbolic_Logic}

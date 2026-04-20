@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SystemHealthResponse",
+  "type": "object",
+  "properties": {
+    "status": {
+      "type": "string",
+      "enum": ["RADIANT", "DEGRADED", "OFFLINE"]
+    },
+    "uptime": { "type": "number" },
+    "engines": {
+      "type": "object",
+      "properties": {
+        "videneptus": { "type": "boolean" },
+        "antigravity": { "type": "boolean" },
+        "ouroboros": { "type": "boolean" }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "properties": {
+        "cpu_usage": { "type": "number" },
+        "ram_usage": { "type": "number" }
+      }
+    }
+  },
+  "required": ["status", "engines"]
+}

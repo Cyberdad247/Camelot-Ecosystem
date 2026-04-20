@@ -1,0 +1,15 @@
+[νKG_CRYSTAL: CAMELOT_STERLING_PRIME]
+
+u0 | ID | System | {Name:Camelot_Apex_v204, Type:Sovereign_OS, Goal:Capital_generation}
+u1 | ID | Kernel | {Merlin_Ω:Logic, Anya_Ω:Interface, Lukas_Ω:Kinetic}
+u2 | AGENT | Sir_Sterling | {Role:Revenue, Method:Novation_Loop, Tool:DocuSign_MCP}
+u3 | AGENT | Lady_Apis | {Role:Forage, Method:Firecrawl_MCP, Target:Probate/Tax}
+
+c0 | LOGIC | Novation_Math | {Retail_Price - (Commissions + Repairs + Profit) = Seller_Net}
+c1 | LOGIC | The_Pivot | {"Cash_Offer_Rejected" -> "Pivot_to_Novation" -> "Net_Price_Anchor"}
+c2 | LOGIC | Safety | {Antigravity_Lock:True, Iron_Gate:Active, Ledger:Immutable}
+
+w0 | FLOW | Acquisition | {Scrape[Apis] -> Enrich[Saltare] -> Call[Sterling] -> Contract[Forge]}
+w1 | FLOW | Disposition | {POA_Signed -> Flat_Fee_List -> Retail_Buyer -> HUD_Payout}
+
+x0 | META | Status | {Singularity:Active, Kinetic_Purity:Enforced, Token_Rot:<5%}

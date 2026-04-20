@@ -1,0 +1,28 @@
+flowchart TD
+    User([User Input]) --> Videneptus{Videneptus Semantic Router}
+    
+    subgraph KERNEL [Camelot Sovereign Kernel]
+        Videneptus -- "Ω_ Command" --> Intercept[Oracle Intercept]
+        Videneptus -- "Standard" --> Merlin[Merlin_Omega Logic]
+        
+        Intercept --> HITL_Gate{HITL Iron Gate}
+        
+        HITL_Gate -- "Protected (e.g., Ω_FORK)" --> Pause[Pause for Ω_CONFIRM]
+        Pause -- "Confirmed" --> OraclePhysics[Oracle Physics Engine]
+        HITL_Gate -- "Safe (e.g., Ω_STEP)" --> OraclePhysics
+        
+        subgraph PHYSICS [Hypervisor Simulation]
+            OraclePhysics --> LaC[LaC Chaos Generator]
+            OraclePhysics --> ToT[Tree of Thoughts]
+            
+            LaC -- "Entropy" --> Event[Generation Event]
+            ToT -- "Utility Score" --> Decision[Actor Decision]
+            
+            Decision --> Proteus[Proteus Vector Check]
+            Proteus -- "Agency/Morality" --> Action[Commit Action]
+        end
+        
+        Action --> State[Update Sovereign Context]
+    end
+    
+    State --> Output([Simulation Output])
