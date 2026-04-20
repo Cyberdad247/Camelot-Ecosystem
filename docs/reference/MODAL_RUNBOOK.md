@@ -12,6 +12,9 @@
 | morgana-prod | `modal deploy CAMELOT_OS/02_FORGE/Modal/morgana/morgana_core.py` | - | shared-api-keys |
 | morgana-staging | `modal deploy CAMELOT_OS/02_FORGE/Modal/morgana/morgana_staging.py` | - | shared-api-keys |
 | tasha-voice-agent | `modal deploy CAMELOT_OS/02_FORGE/Modal/tasha_voice_agent.py` | - | my-sovereign-secrets, livekit-keys |
+| camelot-voice-pipeline | `modal deploy CAMELOT_OS/02_FORGE/PORTAL_CORE/Modal/voice_pipeline/app.py` | A10G optional | my-sovereign-secrets |
+| camelot-tts-pipeline | `modal deploy CAMELOT_OS/02_FORGE/PORTAL_CORE/Modal/tts_pipeline/app.py` | T4 optional | my-sovereign-secrets |
+| camelot-rustdesk-server | `modal deploy CAMELOT_OS/02_FORGE/PORTAL_CORE/Modal/rustdesk_server/app.py` | - | optional env |
 | resonance-bridge-v56 | `modal deploy CAMELOT_OS/02_FORGE/Modal/bridge.py` | - | github-token, hf-secret |
 | camelot-kinetic-fortress | `modal deploy "CAMELOT_OS/02_FORGE/Modal/New folder/Kinetic_fortress.py"` | - | my-sovereign-secrets |
 | camelot_modal_sky | `modal deploy CAMELOT_OS/01_KERNEL/forge/modal_cloud.py` | any | - |

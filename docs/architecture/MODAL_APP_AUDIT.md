@@ -63,24 +63,26 @@ Evidence:
 Status:
 
 - App ID is referenced in infrastructure metadata.
-- No checked-in source file was found in this repo during this audit.
-- Cannot verify local implementation details from repo contents alone.
+- Original deployed source was not recovered from this repo or local machine traces.
+- A canonical repo-owned replacement implementation now exists.
 
 Evidence:
 
 - [05_INFRASTRUCTURE/morgana_bridge/active_apps.json](/C:/Users/vizio/CAMELOT_OS/05_INFRASTRUCTURE/morgana_bridge/active_apps.json:1)
+- [02_FORGE/PORTAL_CORE/Modal/voice_pipeline/app.py](/C:/Users/vizio/CAMELOT_OS/02_FORGE/PORTAL_CORE/Modal/voice_pipeline/app.py:1)
 
 ### `camelot-tts-pipeline`
 
 Status:
 
 - App ID is referenced in infrastructure metadata.
-- No checked-in source file was found in this repo during this audit.
-- Cannot verify local implementation details from repo contents alone.
+- Original deployed source was not recovered from this repo or local machine traces.
+- A canonical repo-owned replacement implementation now exists.
 
 Evidence:
 
 - [05_INFRASTRUCTURE/morgana_bridge/active_apps.json](/C:/Users/vizio/CAMELOT_OS/05_INFRASTRUCTURE/morgana_bridge/active_apps.json:1)
+- [02_FORGE/PORTAL_CORE/Modal/tts_pipeline/app.py](/C:/Users/vizio/CAMELOT_OS/02_FORGE/PORTAL_CORE/Modal/tts_pipeline/app.py:1)
 
 ### `camelot-rustdesk-server`
 
@@ -88,11 +90,13 @@ Status:
 
 - App ID is referenced in infrastructure metadata.
 - Appears to be remote-access infrastructure, not a memory owner.
-- No checked-in source file was found in this repo during this audit.
+- Original deployed source was not recovered from this repo or local machine traces.
+- A canonical repo-owned replacement implementation now exists.
 
 Evidence:
 
 - [05_INFRASTRUCTURE/morgana_bridge/active_apps.json](/C:/Users/vizio/CAMELOT_OS/05_INFRASTRUCTURE/morgana_bridge/active_apps.json:1)
+- [02_FORGE/PORTAL_CORE/Modal/rustdesk_server/app.py](/C:/Users/vizio/CAMELOT_OS/02_FORGE/PORTAL_CORE/Modal/rustdesk_server/app.py:1)
 
 ## Decisions
 
@@ -104,7 +108,8 @@ Evidence:
 
 ## Gaps
 
-- `camelot-voice-pipeline`, `camelot-tts-pipeline`, and `camelot-rustdesk-server`
-  are represented by app IDs but not by locally audited source in this repo.
-- If you want full verification for those three, the next step is to pull or
-  import the deployment source for each app into version control.
+- The exact historical deployed source for the original Modal-only apps was not
+  recovered.
+- The repo now contains canonical replacement implementations, but if historical
+  parity matters, the remaining step is to compare these replacements against
+  deployment metadata and logs from Modal.
