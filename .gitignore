@@ -81,6 +81,14 @@ logs/
 .camelot/logs/
 .camelot/__pycache__/
 .camelot/knights/__pycache__/
+*.db
+*.sqlite
+*.sqlite3
+installation_id
+
+# 6a. Build outputs / compiled binaries
+*.exe
+*.pdb
 
 # 6b. Oversized local/vendor binaries not suitable for GitHub
 02_FORGE/kinetic/bin/
