@@ -1,4 +1,4 @@
-"""Best-effort Cloud Brain sync hooks for local Camelot state changes."""
+"""Best-effort Living Notebook sync hooks for local Camelot state changes."""
 
 from __future__ import annotations
 
@@ -38,7 +38,7 @@ def sync_after_event(
     results: dict[str, Any],
     enabled: bool = True,
 ) -> dict[str, Any]:
-    """Best-effort sync of local state after a structural event.
+    """Best-effort sync of local state into the short-term living notebook.
 
     Never raises. Failures are returned to the caller for optional display/logging.
     """

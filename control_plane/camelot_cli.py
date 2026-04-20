@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import importlib
 import json
 import os
 import re
@@ -16,6 +17,7 @@ from colorama import Fore, Style, just_fix_windows_console
 from .cli_intercept import CLIIntercept
 from .cloudbrain_sync import sync_after_event
 from .config_manager import ConfigManager, OperatorProfile
+from .hyper_evolve import append_learning, promote_mutation
 from .provenance import ProvenanceManager, VerificationRun
 from .ledger_sync import append_provenance_entry, ledger_status, sync_to_kernel
 from .main import ControlPlane, TaskPayload
@@ -26,6 +28,50 @@ just_fix_windows_console()
 
 STREAM_DELAY = float(os.getenv("CAMELOT_OS_STREAM_DELAY", "0.004"))
 PROGRESS_DELAY = float(os.getenv("CAMELOT_OS_PROGRESS_DELAY", "0.12"))
+BARE_SWARM_DIRECTIVE = "//SWARM"
+BARE_SWARM_OBJECTIVE = "bootstrap swarm invoke sequence"
+ACTIVE_CARTRIDGE_PATH = ".camelot/active_cartridge.txt"
+MODE_CARTRIDGE_MAP = {
+    "COGNITIVE": "COGNITIVE",
+    "RESEARCH": "RESEARCH",
+    "ENGINEER": "ENGINEER",
+    "CREATIVE": "CREATIVE",
+    "MARKETING": "MARKETING",
+    "LEGAL": "LEGAL",
+    "BRAINSTORM": "BRAINSTORM",
+    "CRITICAL_THINKING": "CRITICAL_THINKING",
+}
+HELP_LINES = [
+    "Commands:",
+    "/help or //HELP",
+    "/route <intent>",
+    "/status",
+    "/memory <agent>",
+    "/research <objective>",
+    "/northstar <objective>",
+    "/blueprint <objective>",
+    "/precise <objective>",
+    "/ledger-status",
+    "/sarda <intent>",
+    "cloudbrain config show",
+    "cloudbrain config set <ENV_VAR> <url>",
+    "cloudbrain config clear <ENV_VAR>",
+    "cloudbrain config diagnose",
+    "cloudbrain config discover --app-name <name> [--write]",
+    "cloudbrain config write-example [path]",
+    "//SWARM",
+    "//MODE <name> [objective]",
+    "//CARTRIDGE <name> [objective]",
+    "//COGNITIVE [objective]",
+    "//RESEARCH [objective]",
+    "//ENGINEER [objective]",
+    "//CREATIVE [objective]",
+    "//MARKETING [objective]",
+    "//LEGAL [objective]",
+    "//BRAINSTORM [objective]",
+    "//CRITICAL_THINKING [objective]",
+    "/exit",
+]
 
 
 # ---------------------------------------------------------------------------
@@ -130,6 +176,8 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
 
 def _stream_print(text: str, *, tone: str | None = None, newline: bool = True) -> None:
     rendered = _color(text, tone) if tone else text
+    stream_encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+    rendered = rendered.encode(stream_encoding, errors="replace").decode(stream_encoding, errors="replace")
     if not sys.stdout.isatty() or STREAM_DELAY <= 0:
         print(rendered, end="\n" if newline else "", flush=True)
         return
@@ -140,6 +188,38 @@ def _stream_print(text: str, *, tone: str | None = None, newline: bool = True) -
             time.sleep(STREAM_DELAY)
     if newline:
         print("", flush=True)
+
+
+def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float = 0.0) -> bool:
+    """Enforce Titanium Laws with console-safe prompt rendering."""
+    dangerous_keywords = {"delete", "rm", "remove", "wipe", "purge", "format", "exec", "shell"}
+    intent_lower = intent.lower()
+
+    is_dangerous = any(k in intent_lower for k in dangerous_keywords)
+    is_generative = any(k in intent_lower for k in {"build", "refactor", "fix", "scaffold", "implement"})
+
+    if is_dangerous or is_generative or file_count > 3:
+        _stream_print("\n[HITL_GATE] High-risk kinetic action detected.", tone="warn")
+        _stream_print(f"Action: {intent}", tone="dim")
+        brief = f"[Impact_Brief] Files: {file_count or 'N/A'} | Delta: {size_delta_mb or 'Unknown'} MB"
+        _stream_print(brief, tone="info")
+
+        try:
+            prompt_text = _color(
+                "[HITL_APPROVAL] Proceed with Kinetic Execution? [operator approval] [y/N]: ",
+                "warn",
+            )
+            stream_encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+            prompt_text = prompt_text.encode(stream_encoding, errors="replace").decode(
+                stream_encoding,
+                errors="replace",
+            )
+            choice = input(prompt_text).strip().lower()
+            return choice == "y"
+        except (EOFError, KeyboardInterrupt):
+            return False
+
+    return True
 
 
 def _progress(label: str, detail: str, *, tone: str = "dim") -> None:
@@ -256,6 +336,113 @@ def _emit(payload: Any, *, json_mode: bool = False, title: str | None = None) ->
     _stream_print(_pretty_render(payload), tone="info")
 
 
+MODAL_DISCOVERY_MAP = {
+    "CAMELOT_RESEARCH_AGENCY_URL": "research_agency",
+    "CAMELOT_RESEARCH_AGENCY_HEALTH_URL": "research_agency_health_endpoint",
+    "CAMELOT_NORTHSTAR_URL": "northstar_war_room",
+    "CAMELOT_NORTHSTAR_HEALTH_URL": "northstar_health_endpoint",
+    "CAMELOT_BLUEPRINT_URL": "development_blueprint",
+    "CAMELOT_BLUEPRINT_HEALTH_URL": "development_blueprint_health_endpoint",
+    "CAMELOT_PRECISE_MODE_URL": "precise_mode",
+    "CAMELOT_PRECISE_MODE_HEALTH_URL": "precise_mode_health_endpoint",
+}
+
+
+def _diagnose_cloud_endpoints(config_mgr: ConfigManager) -> dict[str, Any]:
+    effective = config_mgr.cloud_endpoint_map()
+    persisted = {
+        "CAMELOT_CLOUDBRAIN_URL": config_mgr._normalize_env_value(config_mgr.config.cloudbrain_url),
+        "CAMELOT_LIVING_NOTEBOOK_URL": config_mgr._normalize_env_value(config_mgr.config.living_notebook_url),
+        "CAMELOT_RESEARCH_AGENCY_URL": config_mgr._normalize_env_value(config_mgr.config.research_agency_url),
+        "CAMELOT_RESEARCH_AGENCY_HEALTH_URL": config_mgr._normalize_env_value(config_mgr.config.research_agency_health_url),
+        "CAMELOT_NORTHSTAR_URL": config_mgr._normalize_env_value(config_mgr.config.northstar_url),
+        "CAMELOT_NORTHSTAR_HEALTH_URL": config_mgr._normalize_env_value(config_mgr.config.northstar_health_url),
+        "CAMELOT_BLUEPRINT_URL": config_mgr._normalize_env_value(config_mgr.config.blueprint_url),
+        "CAMELOT_BLUEPRINT_HEALTH_URL": config_mgr._normalize_env_value(config_mgr.config.blueprint_health_url),
+        "CAMELOT_PRECISE_MODE_URL": config_mgr._normalize_env_value(config_mgr.config.precise_mode_url),
+        "CAMELOT_PRECISE_MODE_HEALTH_URL": config_mgr._normalize_env_value(config_mgr.config.precise_mode_health_url),
+    }
+    findings: list[str] = []
+    if not importlib.util.find_spec("modal"):
+        findings.append("Modal SDK is not installed in the current Python environment.")
+    for key, value in persisted.items():
+        if value:
+            findings.append(f"{key} is pinned in .camelot-config.yaml and overrides inferred defaults.")
+    if not any(persisted.values()):
+        findings.append("No explicit cloud endpoint overrides are pinned; runtime is using inferred defaults.")
+    if persisted.get("CAMELOT_CLOUDBRAIN_URL", "").startswith("https://notebooklm.google.com/notebook/"):
+        findings.append(
+            "CAMELOT_CLOUDBRAIN_URL currently points at a NotebookLM notebook URL. "
+            "That should move to CAMELOT_LIVING_NOTEBOOK_URL; long-term cloudbrain should be excalibur-brain."
+        )
+    findings.append("Modal dashboard URLs are not callable service endpoints; control plane needs *.modal.run URLs.")
+    findings.append("Best-practice alternative: discover deployed function URLs via modal.Function.from_name(...).get_web_url().")
+    return {
+        "status": "CONFIG_DIAGNOSIS",
+        "config_path": str(config_mgr.config_path),
+        "effective_endpoints": effective,
+        "persisted_overrides": persisted,
+        "findings": findings,
+    }
+
+
+def _discover_modal_endpoints(
+    *,
+    config_mgr: ConfigManager,
+    app_name: str,
+    environment_name: str,
+    write: bool,
+) -> dict[str, Any]:
+    modal_spec = importlib.util.find_spec("modal")
+    if modal_spec is None:
+        return {
+            "status": "DISCOVERY_UNAVAILABLE",
+            "reason": "Modal SDK not installed in current Python environment",
+            "app_name": app_name,
+            "discovered": {},
+        }
+
+    try:
+        modal = importlib.import_module("modal")
+    except Exception as exc:
+        return {
+            "status": "DISCOVERY_FAILED",
+            "reason": f"Failed to import modal: {exc}",
+            "app_name": app_name,
+            "discovered": {},
+        }
+
+    discovered: dict[str, str] = {}
+    errors: dict[str, str] = {}
+    for env_var, function_name in MODAL_DISCOVERY_MAP.items():
+        try:
+            remote_function = modal.Function.from_name(
+                app_name,
+                function_name,
+                environment_name=environment_name,
+            )
+            url = remote_function.get_web_url()
+            if url:
+                discovered[env_var] = url.rstrip("/")
+        except Exception as exc:
+            errors[env_var] = str(exc)
+
+    if write:
+        for env_var, url in discovered.items():
+            config_mgr.set_cloud_endpoint(env_var, url)
+
+    status = "DISCOVERY_COMPLETE" if discovered else "DISCOVERY_FAILED"
+    return {
+        "status": status,
+        "app_name": app_name,
+        "environment_name": environment_name,
+        "discovered": discovered,
+        "errors": errors,
+        "config_path": str(config_mgr.config_path),
+        "wrote_config": write and bool(discovered),
+    }
+
+
 async def _run_task(
     intent: str,
     *,
@@ -266,17 +453,22 @@ async def _run_task(
 ) -> dict[str, Any]:
     # Phase 1: Anya's Ethereal Compilation (Triple-QFT)
     compiler = AnyaCompiler()
-    if compiler.pedagogy(intent):
+    raw_intent = intent
+    preserve_cartridge_directive = raw_intent.lstrip().upper().startswith("LOAD:")
+    if not preserve_cartridge_directive and compiler.pedagogy(intent):
         _stream_print("Anya [PEDAGOGY]: Intent is ambiguous. Renormalizing...", tone="warn")
 
-    titan_prompt, confidence = compiler.compile(intent)
+    if preserve_cartridge_directive:
+        titan_prompt, confidence = raw_intent, 1.0
+    else:
+        titan_prompt, confidence = compiler.compile(intent)
     _stream_print(f"Anya [COMPILE]: {titan_prompt} | ⚡ Confidence: {confidence*100:.0f}%", tone="dim")
 
     if confidence < 0.5:
         _stream_print("Anya [PEDAGOGY]: Intent clarity is low. Scaling to 1M token context for verification.", tone="warn")
 
-    # Use renormalized intent for routing logic
-    intent = compiler.renormalize(intent)
+    # Preserve explicit cartridge directives; otherwise use renormalized intent for routing logic.
+    intent = raw_intent if preserve_cartridge_directive else compiler.renormalize(intent)
 
     # Phase 4: Iron Gate (High-risk check)
     if not _check_iron_gate(intent):
@@ -293,7 +485,25 @@ async def _run_task(
         parameters=parameters,
         constraints=constraints or [],
     )
-    return (await cp.process_task(task)).model_dump()
+    try:
+        return (await cp.process_task(task)).model_dump()
+    except RuntimeError as exc:
+        if "tmux not found" not in str(exc).lower():
+            raise
+        privacy = 0.0
+        for constraint in constraints or []:
+            if constraint.startswith("privacy="):
+                try:
+                    privacy = float(constraint.split("=", 1)[1])
+                except ValueError:
+                    privacy = 0.0
+        plan = cp.sarda_plan(intent, privacy=privacy)
+        return {
+            "status": "FALLBACK_PLAN",
+            "reason": str(exc),
+            "task": intent,
+            "result": json.loads(plan.to_json()),
+        }
 
 
 async def _run_sarda(
@@ -315,6 +525,198 @@ async def _run_sarda(
     else:
         result = cp.sarda_plan(intent, privacy=privacy)
     return json.loads(result.to_json())
+
+
+def _is_bare_swarm_directive(text: str) -> bool:
+    return text.strip().upper() == BARE_SWARM_DIRECTIVE
+
+
+def _translate_mode_directive(text: str) -> tuple[str, str] | None:
+    stripped = text.strip()
+    if not stripped.startswith("//"):
+        return None
+
+    command, _, remainder = stripped.partition(" ")
+    upper_command = command.upper()
+    remainder = remainder.strip()
+
+    if upper_command in {f"//{name}" for name in MODE_CARTRIDGE_MAP}:
+        cartridge = upper_command[2:]
+        if not remainder:
+            return cartridge, ""
+        if cartridge == "BRAINSTORM":
+            return cartridge, f"LOAD:BRAINSTORM LOAD:CREATIVE LOAD:CRITICAL_THINKING {remainder}"
+        if cartridge == "CRITICAL_THINKING":
+            return cartridge, f"LOAD:CRITICAL_THINKING LOAD:COGNITIVE {remainder}"
+        return cartridge, f"LOAD:{cartridge} {remainder}"
+
+    if upper_command in {"//MODE", "//CARTRIDGE"}:
+        if not remainder:
+            return None
+        mode_name, _, objective = remainder.partition(" ")
+        cartridge = mode_name.strip().upper()
+        if cartridge not in MODE_CARTRIDGE_MAP:
+            return None
+        objective = objective.strip() or ""
+        if not objective:
+            return cartridge, ""
+        if cartridge == "BRAINSTORM":
+            return cartridge, f"LOAD:BRAINSTORM LOAD:CREATIVE LOAD:CRITICAL_THINKING {objective}"
+        if cartridge == "CRITICAL_THINKING":
+            return cartridge, f"LOAD:CRITICAL_THINKING LOAD:COGNITIVE {objective}"
+        return cartridge, f"LOAD:{cartridge} {objective}"
+
+    return None
+
+
+def _set_active_cartridge(cartridge: str) -> dict[str, Any]:
+    os.makedirs(os.path.dirname(ACTIVE_CARTRIDGE_PATH), exist_ok=True)
+    with open(ACTIVE_CARTRIDGE_PATH, "w", encoding="utf-8") as handle:
+        handle.write(f"{cartridge}\n")
+    return {
+        "status": "ACTIVE_CARTRIDGE_SET",
+        "cartridge": cartridge,
+        "path": ACTIVE_CARTRIDGE_PATH,
+    }
+
+
+async def _invoke_swarm_directive(*, json_mode: bool = False) -> dict[str, Any]:
+    if not json_mode:
+        _stream_sarda_progress(BARE_SWARM_OBJECTIVE, execute=True)
+    output = await _run_sarda(BARE_SWARM_OBJECTIVE, execute=True)
+    if output.get("status") == "CANCELLED" and output.get("reason") == "HITL_GATE refused":
+        if not json_mode:
+            _progress("fallback", "iron gate unavailable; reverting to plan mode", tone="warn")
+            _stream_sarda_progress(BARE_SWARM_OBJECTIVE, execute=False)
+        output = await _run_sarda(BARE_SWARM_OBJECTIVE, execute=False)
+        output["fallback_reason"] = "HITL_GATE refused"
+    return output
+
+
+async def _invoke_mode_directive(
+    cartridge: str,
+    translated_intent: str,
+) -> dict[str, Any]:
+    def _extract_task_status(output: dict[str, Any]) -> str:
+        status = str(output.get("status", "")).upper()
+        if status:
+            return status
+        payload = output.get("payload")
+        if isinstance(payload, dict):
+            return str(payload.get("status", "")).upper()
+        return ""
+
+    async def _run_with_fallback(
+        preferred_intent: str,
+        *,
+        preferred_agent_id: str | None = None,
+        preferred_constraints: list[str] | None = None,
+        preferred_extra_parameters: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        output = await _run_task(
+            preferred_intent,
+            agent_id=preferred_agent_id,
+            objective=objective,
+            constraints=preferred_constraints,
+            extra_parameters=preferred_extra_parameters,
+        )
+        status = _extract_task_status(output)
+        if status not in {"FAILED", "CANCELLED", "ERROR"}:
+            return output
+        fallback = await _run_task(translated_intent)
+        if isinstance(fallback, dict):
+            fallback.setdefault("fallback_reason", status or "preferred_mode_failed")
+            fallback.setdefault("fallback_from", cartridge)
+        return fallback
+
+    objective = translated_intent
+
+    if cartridge == "BRAINSTORM":
+        return await _run_with_fallback(
+            "northstar war room objective",
+            preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=growth"],
+            preferred_extra_parameters={
+                "aspect": "growth",
+                "compute_tier": "apex",
+                "cartridge": "BRAINSTORM",
+                "browser_isolation": "team",
+                "multilogin_enabled": True,
+            },
+        )
+
+    if cartridge == "RESEARCH":
+        return await _run_with_fallback(
+            "research investigate objective",
+            preferred_agent_id="lady_apis",
+            preferred_constraints=["privacy=0.0", "compute_tier=hybrid"],
+        )
+
+    if cartridge == "LEGAL":
+        return await _run_with_fallback(
+            "northstar war room objective",
+            preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=audit"],
+            preferred_extra_parameters={
+                "aspect": "audit",
+                "compute_tier": "apex",
+                "cartridge": "LEGAL",
+                "browser_isolation": "team",
+                "multilogin_enabled": True,
+            },
+        )
+
+    if cartridge == "MARKETING":
+        return await _run_with_fallback(
+            "northstar war room objective",
+            preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=growth"],
+            preferred_extra_parameters={
+                "aspect": "growth",
+                "compute_tier": "apex",
+                "cartridge": "MARKETING",
+                "browser_isolation": "team",
+                "multilogin_enabled": True,
+            },
+        )
+
+    if cartridge == "COGNITIVE":
+        return await _run_with_fallback(
+            "northstar war room objective",
+            preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=architecture"],
+            preferred_extra_parameters={
+                "aspect": "architecture",
+                "compute_tier": "apex",
+                "cartridge": "COGNITIVE",
+                "browser_isolation": "team",
+                "multilogin_enabled": True,
+            },
+        )
+
+    if cartridge == "CREATIVE":
+        return await _run_with_fallback(
+            "northstar war room objective",
+            preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=growth"],
+            preferred_extra_parameters={
+                "aspect": "growth",
+                "compute_tier": "apex",
+                "cartridge": "CREATIVE",
+                "browser_isolation": "team",
+                "multilogin_enabled": True,
+            },
+        )
+
+    if cartridge == "CRITICAL_THINKING":
+        return await _run_with_fallback(
+            "northstar war room objective",
+            preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=architecture"],
+            preferred_extra_parameters={
+                "aspect": "architecture",
+                "compute_tier": "apex",
+                "cartridge": "CRITICAL_THINKING",
+                "browser_isolation": "team",
+                "multilogin_enabled": True,
+            },
+        )
+
+    return await _run_task(translated_intent)
 
 
 def _stream_task_progress(
@@ -434,7 +836,7 @@ def _interactive_shell(json_mode: bool = False) -> int:
     banner = [
         "Camelot-OS",
         "Prompt-first interface for routing, cloudbrain, and SARDA workflows.",
-        "Commands: /help, /route <intent>, /status, /memory <agent>, /research <objective>, /northstar <objective>, /blueprint <objective>, /precise <objective>, /ledger-status, /sarda <intent>, /exit",
+        "Use /help or //HELP for the full command surface.",
     ]
     if not json_mode:
         _stream_print(banner[0], tone="title")
@@ -454,9 +856,10 @@ def _interactive_shell(json_mode: bool = False) -> int:
             continue
         if raw in {"/exit", "exit", "quit"}:
             return 0
-        if raw == "/help":
+        if raw in {"/help", "//HELP"}:
             if not json_mode:
-                _stream_print(banner[-1], tone="dim")
+                for line in HELP_LINES:
+                    _stream_print(line, tone="dim")
             continue
 
         try:
@@ -466,6 +869,24 @@ def _interactive_shell(json_mode: bool = False) -> int:
                 from .tui_app import SovereignApp
                 app = SovereignApp()
                 app.run()
+                continue
+
+            if _is_bare_swarm_directive(raw):
+                output = asyncio.run(_invoke_swarm_directive(json_mode=json_mode))
+                _emit(output, json_mode=json_mode, title="SWARM")
+                continue
+
+            mode_directive = _translate_mode_directive(raw)
+            if mode_directive:
+                cartridge, translated_intent = mode_directive
+                if not translated_intent:
+                    output = _set_active_cartridge(cartridge)
+                    _emit(output, json_mode=json_mode, title=f"{cartridge} Mode")
+                    continue
+                if not json_mode:
+                    _stream_task_progress(translated_intent, objective=translated_intent)
+                output = asyncio.run(_invoke_mode_directive(cartridge, translated_intent))
+                _emit(output, json_mode=json_mode, title=f"{cartridge} Mode")
                 continue
 
             if raw.startswith("/route "):
@@ -666,6 +1087,68 @@ def _build_parser() -> argparse.ArgumentParser:
     cloudbrain = sub.add_parser("cloudbrain", help="Invoke cloudbrain services")
     cloud_sub = cloudbrain.add_subparsers(dest="cloudbrain_command", required=True)
     cloud_sub.add_parser("status", help="Show cloudbrain status")
+    cloud_config = cloud_sub.add_parser("config", help="Show or persist cloud endpoint configuration")
+    cloud_config_sub = cloud_config.add_subparsers(dest="cloud_config_command", required=True)
+    cloud_config_sub.add_parser("show", help="Show the effective cloud endpoint map")
+    cloud_config_sub.add_parser("diagnose", help="Diagnose endpoint inference and override state")
+    cloud_config_set = cloud_config_sub.add_parser("set", help="Persist a cloud endpoint override")
+    cloud_config_set.add_argument(
+        "env_var",
+        choices=(
+            "CAMELOT_CLOUDBRAIN_URL",
+            "CAMELOT_LIVING_NOTEBOOK_URL",
+            "CAMELOT_RESEARCH_AGENCY_URL",
+            "CAMELOT_RESEARCH_AGENCY_HEALTH_URL",
+            "CAMELOT_NORTHSTAR_URL",
+            "CAMELOT_NORTHSTAR_HEALTH_URL",
+            "CAMELOT_BLUEPRINT_URL",
+            "CAMELOT_BLUEPRINT_HEALTH_URL",
+            "CAMELOT_PRECISE_MODE_URL",
+            "CAMELOT_PRECISE_MODE_HEALTH_URL",
+            "CAMELOT_EXCALIBUR_BRIDGE_URL",
+            "CAMELOT_EXCALIBUR_HEALTH_URL",
+        ),
+    )
+    cloud_config_set.add_argument("value", help="Absolute URL for the endpoint override")
+    cloud_config_clear = cloud_config_sub.add_parser("clear", help="Remove a persisted cloud endpoint override")
+    cloud_config_clear.add_argument(
+        "env_var",
+        choices=(
+            "CAMELOT_CLOUDBRAIN_URL",
+            "CAMELOT_LIVING_NOTEBOOK_URL",
+            "CAMELOT_RESEARCH_AGENCY_URL",
+            "CAMELOT_RESEARCH_AGENCY_HEALTH_URL",
+            "CAMELOT_NORTHSTAR_URL",
+            "CAMELOT_NORTHSTAR_HEALTH_URL",
+            "CAMELOT_BLUEPRINT_URL",
+            "CAMELOT_BLUEPRINT_HEALTH_URL",
+            "CAMELOT_PRECISE_MODE_URL",
+            "CAMELOT_PRECISE_MODE_HEALTH_URL",
+            "CAMELOT_EXCALIBUR_BRIDGE_URL",
+            "CAMELOT_EXCALIBUR_HEALTH_URL",
+        ),
+    )
+    cloud_config_discover = cloud_config_sub.add_parser(
+        "discover",
+        help="Discover deployed Modal web endpoint URLs via Modal SDK",
+    )
+    cloud_config_discover.add_argument("--app-name", required=True, help="Deployed Modal app name")
+    cloud_config_discover.add_argument(
+        "--environment",
+        default="main",
+        help="Modal environment name to query",
+    )
+    cloud_config_discover.add_argument(
+        "--write",
+        action="store_true",
+        help="Persist discovered URLs into .camelot-config.yaml",
+    )
+    cloud_config_example = cloud_config_sub.add_parser("write-example", help="Write a cloud config example file")
+    cloud_config_example.add_argument(
+        "--path",
+        default=".camelot-config.yaml.example",
+        help="Destination path for the example config file",
+    )
     cloud_sync = cloud_sub.add_parser("sync", help="Sync local Camelot state into the canonical Cloud Brain notebook")
     cloud_sync.add_argument("--notebook-id", default="")
     cloud_sync.add_argument("--note-title", default="")
@@ -733,11 +1216,41 @@ def _build_parser() -> argparse.ArgumentParser:
     sarda.add_argument("--privacy", type=float, default=0.0)
     sarda.add_argument("--timeout", type=int, default=120)
 
+    evolve = sub.add_parser("evolve", help="Record learnings and promote guarded swarm mutations")
+    evolve.add_argument("--agent", required=True, help="Knight or subsystem proposing the mutation")
+    evolve.add_argument("--objective", required=True, help="Objective that produced the learning")
+    evolve.add_argument(
+        "--failure",
+        action="append",
+        dest="failures",
+        required=True,
+        help="Observed failure or friction point. Repeat for multiple entries.",
+    )
+    evolve.add_argument("--learning", required=True, help="Condensed lesson extracted from the run")
+    evolve.add_argument("--proposal", required=True, help="Concrete rule to promote into the shared registry")
+    evolve.add_argument(
+        "--verification",
+        action="append",
+        required=True,
+        help="Verification step executed before promotion. Repeat for multiple entries.",
+    )
+    evolve.add_argument(
+        "--scope",
+        action="append",
+        default=[],
+        help="Files or modules affected by the proposed mutation.",
+    )
+    evolve.add_argument(
+        "--actor",
+        default="SIR_BORIS (Codex / GPT-5)",
+        help="Actor recorded in the provenance ledger.",
+    )
+
     return parser
 
 
 def main() -> int:
-    known_commands = {"chat", "route", "cloudbrain", "sarda", "ledger"}
+    known_commands = {"chat", "route", "cloudbrain", "sarda", "ledger", "evolve"}
     argv = sys.argv[1:]
 
     if argv and not argv[0].startswith("-") and argv[0] not in known_commands:
@@ -746,10 +1259,26 @@ def main() -> int:
         if "--json" in argv:
             json_mode = True
             prompt_parts = [part for part in argv if part != "--json"]
+        prompt_text = " ".join(prompt_parts)
+        if _is_bare_swarm_directive(prompt_text):
+            output = asyncio.run(_invoke_swarm_directive(json_mode=json_mode))
+            _emit(output, json_mode=json_mode, title="SWARM")
+            return 0
+        mode_directive = _translate_mode_directive(prompt_text)
+        if mode_directive:
+            cartridge, translated_intent = mode_directive
+            if not translated_intent:
+                output = _set_active_cartridge(cartridge)
+                _emit(output, json_mode=json_mode, title=f"{cartridge} Mode")
+                return 0
+            if not json_mode:
+                _stream_task_progress(translated_intent, objective=translated_intent)
+            output = asyncio.run(_invoke_mode_directive(cartridge, translated_intent))
+            _emit(output, json_mode=json_mode, title=f"{cartridge} Mode")
+            return 0
         if not json_mode:
-            _stream_task_progress(" ".join(prompt_parts))
-        output = asyncio.run(_run_task(" ".join(prompt_parts)))
-        _log_run(output)
+            _stream_task_progress(prompt_text)
+        output = asyncio.run(_run_task(prompt_text))
         _emit(output, json_mode=json_mode, title="Camelot-OS")
         return 0
 
@@ -831,6 +1360,8 @@ def main() -> int:
         if not args.json:
             if args.cloudbrain_command == "status":
                 _stream_task_progress("cloudbrain status")
+            elif args.cloudbrain_command == "config":
+                _stream_task_progress("cloudbrain config")
             elif args.cloudbrain_command == "sync":
                 _stream_task_progress("cloud brain sync")
             elif args.cloudbrain_command == "research-health":
@@ -877,7 +1408,7 @@ def main() -> int:
                     objective=args.objective,
                     constraints=constraints,
                 )
-            else:
+            elif args.cloudbrain_command == "research":
                 constraints = [f"privacy={args.privacy}", f"compute_tier={args.tier}"]
                 if args.allow_remote_sensitive:
                     constraints.append("allow_remote_sensitive")
@@ -888,6 +1419,54 @@ def main() -> int:
                 )
         if args.cloudbrain_command == "status":
             output = asyncio.run(_run_task("cloudbrain status"))
+        elif args.cloudbrain_command == "config":
+            if args.cloud_config_command == "show":
+                output = {
+                    "status": "CONFIG_READY",
+                    "config_path": str(config_mgr.config_path),
+                    "endpoints": config_mgr.cloud_endpoint_map(),
+                }
+            elif args.cloud_config_command == "diagnose":
+                output = _diagnose_cloud_endpoints(config_mgr)
+            elif args.cloud_config_command == "set":
+                output = {
+                    "status": "CONFIG_UPDATED",
+                    **config_mgr.set_cloud_endpoint(args.env_var, args.value),
+                }
+            elif args.cloud_config_command == "clear":
+                output = {
+                    "status": "CONFIG_CLEARED",
+                    **config_mgr.set_cloud_endpoint(args.env_var, None),
+                }
+            elif args.cloud_config_command == "discover":
+                output = _discover_modal_endpoints(
+                    config_mgr=config_mgr,
+                    app_name=args.app_name,
+                    environment_name=args.environment,
+                    write=args.write,
+                )
+            else:
+                example_path = Path(args.path)
+                example_content = """# Camelot-OS cloud endpoint overrides
+# Copy to .camelot-config.yaml and replace placeholders with real production URLs.
+cloudbrain_url: "https://replace-me.modal.run"
+living_notebook_url: "https://notebooklm.google.com/notebook/replace-me"
+research_agency_url: "https://replace-me.modal.run"
+research_agency_health_url: "https://replace-me.modal.run"
+northstar_url: "https://replace-me.modal.run"
+northstar_health_url: "https://replace-me.modal.run"
+blueprint_url: "https://replace-me.modal.run"
+blueprint_health_url: "https://replace-me.modal.run"
+precise_mode_url: "https://replace-me.modal.run"
+precise_mode_health_url: "https://replace-me.modal.run"
+excalibur_bridge_url: "https://replace-me.modal.run"
+excalibur_health_url: "https://replace-me.modal.run"
+"""
+                example_path.write_text(example_content, encoding="utf-8")
+                output = {
+                    "status": "CONFIG_TEMPLATE_WRITTEN",
+                    "path": str(example_path),
+                }
         elif args.cloudbrain_command == "sync":
             extra_parameters: dict[str, Any] = {}
             if args.notebook_id:
@@ -1019,6 +1598,33 @@ def main() -> int:
         )
         _log_run(output)
         _emit(output, json_mode=args.json, title="SARDA")
+        return 0
+
+    if args.command == "evolve":
+        if not args.json:
+            _stream_task_progress(
+                "hyper evolve",
+                objective=args.objective,
+                constraints=[f"agent={args.agent}", f"verification_steps={len(args.verification)}"],
+            )
+        append_learning(
+            agent=args.agent,
+            objective=args.objective,
+            failures=list(args.failures),
+            learning=args.learning,
+            proposal=args.proposal,
+        )
+        output = promote_mutation(
+            agent=args.agent,
+            objective=args.objective,
+            learning=args.learning,
+            proposal=args.proposal,
+            verification=list(args.verification),
+            scope=list(args.scope),
+            actor=args.actor,
+        )
+        _log_run(output, success=output.get("status") == "APPROVED")
+        _emit(output, json_mode=args.json, title="Hyper Evolve")
         return 0
 
     return _interactive_shell(json_mode=args.json)

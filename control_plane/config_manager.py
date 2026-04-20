@@ -6,6 +6,7 @@ import os
 import json
 from pathlib import Path
 from typing import Any, Optional
+from urllib.parse import urlparse
 from pydantic import BaseModel, Field
 
 try:
@@ -27,7 +28,17 @@ class OperatorProfile(BaseModel):
 class CamelotConfig(BaseModel):
     """Canonical Camelot-OS configuration."""
     cloudbrain_url: Optional[str] = None
+    living_notebook_url: Optional[str] = None
     research_agency_url: Optional[str] = None
+    research_agency_health_url: Optional[str] = None
+    northstar_url: Optional[str] = None
+    northstar_health_url: Optional[str] = None
+    blueprint_url: Optional[str] = None
+    blueprint_health_url: Optional[str] = None
+    precise_mode_url: Optional[str] = None
+    precise_mode_health_url: Optional[str] = None
+    excalibur_bridge_url: Optional[str] = None
+    excalibur_health_url: Optional[str] = None
     active_profile: str = "default"
     profiles: dict[str, OperatorProfile] = Field(default_factory=lambda: {"default": OperatorProfile()})
 
@@ -88,3 +99,199 @@ class ConfigManager:
         """Update or create a profile."""
         self.config.profiles[name] = profile
         self.save()
+
+    def cloud_endpoint_map(self) -> dict[str, str]:
+        """Return the effective cloud endpoint map after config hydration rules."""
+        keys = [
+            "CAMELOT_CLOUDBRAIN_URL",
+            "CAMELOT_LIVING_NOTEBOOK_URL",
+            "CAMELOT_RESEARCH_AGENCY_URL",
+            "CAMELOT_RESEARCH_AGENCY_HEALTH_URL",
+            "CAMELOT_NORTHSTAR_URL",
+            "CAMELOT_NORTHSTAR_HEALTH_URL",
+            "CAMELOT_BLUEPRINT_URL",
+            "CAMELOT_BLUEPRINT_HEALTH_URL",
+            "CAMELOT_PRECISE_MODE_URL",
+            "CAMELOT_PRECISE_MODE_HEALTH_URL",
+            "CAMELOT_EXCALIBUR_BRIDGE_URL",
+            "CAMELOT_EXCALIBUR_HEALTH_URL",
+        ]
+        defaults = self._collect_runtime_defaults()
+        return {key: defaults.get(key, "") for key in keys}
+
+    def set_cloud_endpoint(self, env_var: str, value: Optional[str]) -> dict[str, str]:
+        """Persist a cloud endpoint override into the canonical config file."""
+        attr_map = {
+            "CAMELOT_CLOUDBRAIN_URL": "cloudbrain_url",
+            "CAMELOT_LIVING_NOTEBOOK_URL": "living_notebook_url",
+            "CAMELOT_RESEARCH_AGENCY_URL": "research_agency_url",
+            "CAMELOT_RESEARCH_AGENCY_HEALTH_URL": "research_agency_health_url",
+            "CAMELOT_NORTHSTAR_URL": "northstar_url",
+            "CAMELOT_NORTHSTAR_HEALTH_URL": "northstar_health_url",
+            "CAMELOT_BLUEPRINT_URL": "blueprint_url",
+            "CAMELOT_BLUEPRINT_HEALTH_URL": "blueprint_health_url",
+            "CAMELOT_PRECISE_MODE_URL": "precise_mode_url",
+            "CAMELOT_PRECISE_MODE_HEALTH_URL": "precise_mode_health_url",
+            "CAMELOT_EXCALIBUR_BRIDGE_URL": "excalibur_bridge_url",
+            "CAMELOT_EXCALIBUR_HEALTH_URL": "excalibur_health_url",
+        }
+        attr_name = attr_map.get(env_var)
+        if not attr_name:
+            raise ValueError(f"Unsupported cloud endpoint key: {env_var}")
+        normalized = self._normalize_env_value(value)
+        setattr(self.config, attr_name, normalized or None)
+        self.save()
+        return {
+            "env_var": env_var,
+            "value": normalized,
+            "config_path": str(self.config_path),
+        }
+
+    def hydrate_runtime_environment(self) -> dict[str, str]:
+        """Populate runtime env vars from repo config without overriding explicit env."""
+        env_updates: dict[str, str] = {}
+        for key, value in self._collect_runtime_defaults().items():
+            if value and not os.getenv(key):
+                os.environ[key] = value
+                env_updates[key] = value
+        return env_updates
+
+    def _collect_runtime_defaults(self) -> dict[str, str]:
+        defaults: dict[str, str] = {}
+        defaults.update(self._load_repo_env_defaults())
+        defaults.update(self._load_tier_runtime_defaults())
+
+        config_defaults = {
+            "CAMELOT_CLOUDBRAIN_URL": self._normalize_env_value(self.config.cloudbrain_url),
+            "CAMELOT_LIVING_NOTEBOOK_URL": self._normalize_env_value(self.config.living_notebook_url),
+            "CAMELOT_RESEARCH_AGENCY_URL": self._normalize_env_value(self.config.research_agency_url),
+            "CAMELOT_RESEARCH_AGENCY_HEALTH_URL": self._normalize_env_value(self.config.research_agency_health_url),
+            "CAMELOT_NORTHSTAR_URL": self._normalize_env_value(self.config.northstar_url),
+            "CAMELOT_NORTHSTAR_HEALTH_URL": self._normalize_env_value(self.config.northstar_health_url),
+            "CAMELOT_BLUEPRINT_URL": self._normalize_env_value(self.config.blueprint_url),
+            "CAMELOT_BLUEPRINT_HEALTH_URL": self._normalize_env_value(self.config.blueprint_health_url),
+            "CAMELOT_PRECISE_MODE_URL": self._normalize_env_value(self.config.precise_mode_url),
+            "CAMELOT_PRECISE_MODE_HEALTH_URL": self._normalize_env_value(self.config.precise_mode_health_url),
+            "CAMELOT_EXCALIBUR_BRIDGE_URL": self._normalize_env_value(self.config.excalibur_bridge_url),
+            "CAMELOT_EXCALIBUR_HEALTH_URL": self._normalize_env_value(self.config.excalibur_health_url),
+        }
+        for key, value in config_defaults.items():
+            if value:
+                defaults[key] = value
+        return defaults
+
+    @staticmethod
+    def _normalize_env_value(value: Optional[str]) -> str:
+        normalized = str(value or "").strip()
+        if normalized.lower() in {"", "none", "null"}:
+            return ""
+        return normalized
+
+    def _load_repo_env_defaults(self) -> dict[str, str]:
+        project_root = Path(__file__).parent.parent
+        env_path = project_root / ".env"
+        if not env_path.exists():
+            return {}
+
+        values: dict[str, str] = {}
+        try:
+            for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+                line = raw_line.strip()
+                if not line or line.startswith("#") or "=" not in line:
+                    continue
+                key, value = line.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip('"').strip("'")
+                if key:
+                    values[key] = value
+        except Exception:
+            return {}
+        return values
+
+    def _load_tier_runtime_defaults(self) -> dict[str, str]:
+        if yaml is None:
+            return {}
+
+        project_root = Path(__file__).parent.parent
+        tiers_path = project_root / "01_KERNEL" / "config_shim" / "tiers.yaml"
+        if not tiers_path.exists():
+            return {}
+
+        try:
+            data = yaml.safe_load(tiers_path.read_text(encoding="utf-8")) or {}
+        except Exception:
+            return {}
+
+        cloud = ((data.get("tiers") or {}).get("cloud") or {})
+        endpoints = cloud.get("endpoints") or {}
+        modal_app = str(cloud.get("modal_app") or "").strip()
+        health_url = str(endpoints.get("health") or "").strip()
+        defaults: dict[str, str] = {}
+
+        prefix = self._derive_modal_endpoint_prefix(
+            health_url=health_url,
+            brain_url="",
+            modal_app=modal_app,
+        )
+        if not prefix:
+            return defaults
+
+        defaults.update(
+            {
+                "CAMELOT_RESEARCH_AGENCY_URL": f"{prefix}-research-agency.modal.run",
+                "CAMELOT_RESEARCH_AGENCY_HEALTH_URL": f"{prefix}-research-agency-health-endpoint.modal.run",
+                "CAMELOT_NORTHSTAR_URL": f"{prefix}-northstar-war-room.modal.run",
+                "CAMELOT_NORTHSTAR_HEALTH_URL": f"{prefix}-northstar-health-endpoint.modal.run",
+                "CAMELOT_BLUEPRINT_URL": f"{prefix}-development-blueprint.modal.run",
+                "CAMELOT_BLUEPRINT_HEALTH_URL": f"{prefix}-development-blueprint-health-endpoint.modal.run",
+                "CAMELOT_PRECISE_MODE_URL": f"{prefix}-precise-mode.modal.run",
+                "CAMELOT_PRECISE_MODE_HEALTH_URL": f"{prefix}-precise-mode-health-endpoint.modal.run",
+            }
+        )
+        return defaults
+
+    @staticmethod
+    def _derive_modal_endpoint_prefix(
+        *,
+        health_url: str,
+        brain_url: str,
+        modal_app: str,
+    ) -> str:
+        for candidate in (health_url, brain_url):
+            prefix = ConfigManager._prefix_from_modal_url(candidate)
+            if prefix:
+                return prefix
+        if modal_app:
+            return f"https://cyberdad247--{modal_app}"
+        return ""
+
+    @staticmethod
+    def _prefix_from_modal_url(url: str) -> str:
+        if not url:
+            return ""
+        try:
+            parsed = urlparse(url)
+        except Exception:
+            return ""
+        host = parsed.netloc.strip()
+        if not host.endswith(".modal.run"):
+            return ""
+        host_without_suffix = host[: -len(".modal.run")]
+        for suffix in (
+            "-health",
+            "-morgana-brain",
+            "-research-agency-health-endpoint",
+            "-research-agency",
+            "-northstar-health-endpoint",
+            "-northstar-war-room",
+            "-development-blueprint-health-endpoint",
+            "-development-blueprint",
+            "-precise-mode-health-endpoint",
+            "-precise-mode",
+        ):
+            if host_without_suffix.endswith(suffix):
+                host_without_suffix = host_without_suffix[: -len(suffix)]
+                break
+        if not host_without_suffix:
+            return ""
+        return f"{parsed.scheme or 'https'}://{host_without_suffix}"

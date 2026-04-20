@@ -12,7 +12,15 @@ from typing import Any
 import httpx
 from pydantic import BaseModel, Field
 
-from cloud_orchestrator.long_term_cloudbrain import cloudbrain_status, pull_long_term_memory
+from .config_manager import ConfigManager
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+sys.path.append(str(REPO_ROOT / "01_KERNEL"))
+
+from agora.cloud_orchestrator_shim.long_term_cloudbrain import (  # type: ignore[import-not-found]
+    cloudbrain_status,
+    pull_long_term_memory,
+)
 
 
 # --- NotebookLM bridge loader (Ω₃) -----------------------------------------
@@ -42,13 +50,33 @@ def _load_notebooklm_bridge():
 # inside handler methods so lightweight consumers — e.g. the Ω₃ NotebookLM slice —
 # don't pay the import cost or fail on a missing optional dependency.
 def _modal_services():
-    from cloud_orchestrator import modal_services
+    from agora.cloud_orchestrator_shim import modal_services
     return modal_services
 
 
 def _long_term_cloudbrain():
-    from cloud_orchestrator import long_term_cloudbrain
+    from agora.cloud_orchestrator_shim import long_term_cloudbrain
     return long_term_cloudbrain
+
+
+def _has_modal_sdk() -> bool:
+    return importlib.util.find_spec("modal") is not None
+
+
+def _missing_remote_service_result(
+    *,
+    service: "CloudServiceName",
+    env_var: str,
+) -> "CloudServiceResult":
+    return CloudServiceResult(
+        service=service,
+        success=False,
+        error=(
+            f"{env_var} is not configured and local Modal execution is unavailable. "
+            "This service is cloud-backed; configure the remote endpoint URL for this environment."
+        ),
+        source="config",
+    )
 
 
 class CloudServiceName(str, Enum):
@@ -91,7 +119,9 @@ class CloudServiceRouter:
     """Routes typed requests to local or remote cloud services."""
 
     def __init__(self):
+        ConfigManager().hydrate_runtime_environment()
         self.cloudbrain_url = os.getenv("CAMELOT_CLOUDBRAIN_URL", "").rstrip("/")
+        self.living_notebook_url = os.getenv("CAMELOT_LIVING_NOTEBOOK_URL", "").rstrip("/")
         self.research_url = os.getenv("CAMELOT_RESEARCH_AGENCY_URL", "").rstrip("/")
         self.research_health_url = os.getenv("CAMELOT_RESEARCH_AGENCY_HEALTH_URL", "").rstrip("/")
         self.northstar_url = os.getenv("CAMELOT_NORTHSTAR_URL", "").rstrip("/")
@@ -100,6 +130,112 @@ class CloudServiceRouter:
         self.blueprint_health_url = os.getenv("CAMELOT_BLUEPRINT_HEALTH_URL", "").rstrip("/")
         self.precise_mode_url = os.getenv("CAMELOT_PRECISE_MODE_URL", "").rstrip("/")
         self.precise_mode_health_url = os.getenv("CAMELOT_PRECISE_MODE_HEALTH_URL", "").rstrip("/")
+        self.excalibur_bridge_url = os.getenv("CAMELOT_EXCALIBUR_BRIDGE_URL", "").rstrip("/")
+        self.excalibur_health_url = os.getenv("CAMELOT_EXCALIBUR_HEALTH_URL", "").rstrip("/")
+
+    def _brain_role_manifest(self) -> dict[str, Any]:
+        bridge = _load_notebooklm_bridge()
+        return {
+            "long_term_agentic_brain": {
+                "service": "excalibur-brain",
+                "role": "primary_remote_agentic_brain",
+                "bridge_url": self.excalibur_bridge_url or None,
+                "health_url": self.excalibur_health_url or None,
+                "local_runtime": "Open Notebook + Appwrite",
+            },
+            "short_term_working_memory": {
+                "service": "NotebookLM",
+                "role": "living_notebook",
+                "notebook_id": bridge.CANONICAL_NOTEBOOK_ID,
+                "notebook_title": bridge.CANONICAL_NOTEBOOK_TITLE,
+                "notebook_url": self.living_notebook_url or None,
+            },
+            "deprecated_config": {
+                "cloudbrain_url": self.cloudbrain_url or None,
+                "warning": (
+                    "CAMELOT_CLOUDBRAIN_URL is deprecated for NotebookLM notebook links. "
+                    "Use CAMELOT_LIVING_NOTEBOOK_URL for the living notebook and "
+                    "CAMELOT_EXCALIBUR_* for the long-term remote brain."
+                ) if self.cloudbrain_url else None,
+            },
+        }
+
+    async def _invoke_excalibur_bridge(
+        self,
+        *,
+        task: str,
+        mode: str,
+        service: CloudServiceName,
+        payload: dict[str, Any],
+    ) -> CloudServiceResult:
+        if not self.excalibur_bridge_url:
+            return CloudServiceResult(
+                service=service,
+                success=False,
+                error="CAMELOT_EXCALIBUR_BRIDGE_URL is not configured.",
+                source="config",
+            )
+
+        bridge_payload = {
+            "intent": task,
+            "task": task,
+            "mode": mode,
+            "service": service.value,
+            "payload": payload,
+        }
+        try:
+            async with httpx.AsyncClient(timeout=60.0) as client:
+                response = await client.post(self.excalibur_bridge_url, json=bridge_payload)
+                response.raise_for_status()
+                result = response.json()
+                return CloudServiceResult(
+                    service=service,
+                    success=True,
+                    result={
+                        "bridge_service": "excalibur-brain",
+                        "bridge_url": self.excalibur_bridge_url,
+                        "bridge_response": result,
+                    },
+                    source="remote_bridge",
+                )
+        except Exception as exc:
+            return CloudServiceResult(
+                service=service,
+                success=False,
+                error=str(exc),
+                source="remote_bridge",
+            )
+
+    async def _invoke_excalibur_health(self, service: CloudServiceName) -> CloudServiceResult:
+        if not self.excalibur_health_url:
+            return CloudServiceResult(
+                service=service,
+                success=False,
+                error="CAMELOT_EXCALIBUR_HEALTH_URL is not configured.",
+                source="config",
+            )
+        try:
+            async with httpx.AsyncClient(timeout=20.0) as client:
+                response = await client.get(self.excalibur_health_url)
+                response.raise_for_status()
+                result = response.json()
+                return CloudServiceResult(
+                    service=service,
+                    success=True,
+                    result={
+                        "bridge_service": "excalibur-brain",
+                        "bridge_health_url": self.excalibur_health_url,
+                        **result,
+                    },
+                    source="remote_bridge",
+                )
+        except Exception as exc:
+            return CloudServiceResult(
+                service=service,
+                success=False,
+                error=str(exc),
+                source="remote_bridge",
+            )
 
     async def invoke(self, request: CloudServiceRequest) -> CloudServiceResult:
         if request.service is CloudServiceName.CLOUDBRAIN_STATUS:
@@ -149,29 +285,32 @@ class CloudServiceRouter:
         )
 
     async def _cloudbrain_status(self) -> CloudServiceResult:
-        if self.cloudbrain_url:
-            try:
-                async with httpx.AsyncClient(timeout=20.0) as client:
-                    response = await client.get(f"{self.cloudbrain_url}/cloudbrain_health")
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.CLOUDBRAIN_STATUS,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
-            except Exception as exc:
-                return CloudServiceResult(
-                    service=CloudServiceName.CLOUDBRAIN_STATUS,
-                    success=False,
-                    error=str(exc),
-                    source="remote",
-                )
+        topology = _long_term_cloudbrain().cloudbrain_status()
+        topology["brain_roles"] = self._brain_role_manifest()
+
+        if self.excalibur_health_url:
+            remote = await self._invoke_excalibur_health(CloudServiceName.CLOUDBRAIN_STATUS)
+            if remote.success:
+                remote.result = {
+                    "topology": topology,
+                    "remote_runtime": remote.result,
+                }
+                return remote
+            return CloudServiceResult(
+                service=CloudServiceName.CLOUDBRAIN_STATUS,
+                success=True,
+                error=remote.error,
+                result={
+                    "topology": topology,
+                    "remote_runtime_error": remote.error,
+                },
+                source="local",
+            )
 
         return CloudServiceResult(
             service=CloudServiceName.CLOUDBRAIN_STATUS,
             success=True,
-            result=_long_term_cloudbrain().cloudbrain_status(),
+            result=topology,
             source="local",
         )
 
@@ -186,6 +325,7 @@ class CloudServiceRouter:
                     "agent_id": agent_id,
                     "memory_count": len(memories),
                     "memories": memories,
+                    "brain_roles": self._brain_role_manifest(),
                 },
                 source="local",
             )
@@ -210,12 +350,37 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_bridge_url:
+                    fallback = await self._invoke_excalibur_bridge(
+                        task=f"research investigate objective: {str(payload.get('objective') or '').strip() or 'research investigate objective'}",
+                        mode="RESEARCH",
+                        service=CloudServiceName.RESEARCH_AGENCY,
+                        payload=payload,
+                    )
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.RESEARCH_AGENCY,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_bridge_url:
+            objective = str(payload.get("objective") or "").strip() or "research investigate objective"
+            return await self._invoke_excalibur_bridge(
+                task=f"research investigate objective: {objective}",
+                mode="RESEARCH",
+                service=CloudServiceName.RESEARCH_AGENCY,
+                payload=payload,
+            )
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.RESEARCH_AGENCY,
+                env_var="CAMELOT_RESEARCH_AGENCY_URL",
+            )
 
         try:
             result = _modal_services().run_research_agency(payload)
@@ -246,12 +411,26 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_health_url:
+                    fallback = await self._invoke_excalibur_health(CloudServiceName.RESEARCH_AGENCY_HEALTH)
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.RESEARCH_AGENCY_HEALTH,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_health_url:
+            return await self._invoke_excalibur_health(CloudServiceName.RESEARCH_AGENCY_HEALTH)
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.RESEARCH_AGENCY_HEALTH,
+                env_var="CAMELOT_RESEARCH_AGENCY_HEALTH_URL",
+            )
 
         return CloudServiceResult(
             service=CloudServiceName.RESEARCH_AGENCY_HEALTH,
@@ -273,12 +452,37 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_bridge_url:
+                    fallback = await self._invoke_excalibur_bridge(
+                        task=f"northstar war room objective: {str(payload.get('objective') or '').strip() or 'northstar war room objective'}",
+                        mode="ANALYSIS",
+                        service=CloudServiceName.NORTHSTAR,
+                        payload=payload,
+                    )
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.NORTHSTAR,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_bridge_url:
+            objective = str(payload.get("objective") or "").strip() or "northstar war room objective"
+            return await self._invoke_excalibur_bridge(
+                task=f"northstar war room objective: {objective}",
+                mode="ANALYSIS",
+                service=CloudServiceName.NORTHSTAR,
+                payload=payload,
+            )
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.NORTHSTAR,
+                env_var="CAMELOT_NORTHSTAR_URL",
+            )
 
         try:
             result = _modal_services().run_northstar(payload)
@@ -309,12 +513,26 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_health_url:
+                    fallback = await self._invoke_excalibur_health(CloudServiceName.NORTHSTAR_HEALTH)
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.NORTHSTAR_HEALTH,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_health_url:
+            return await self._invoke_excalibur_health(CloudServiceName.NORTHSTAR_HEALTH)
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.NORTHSTAR_HEALTH,
+                env_var="CAMELOT_NORTHSTAR_HEALTH_URL",
+            )
 
         return CloudServiceResult(
             service=CloudServiceName.NORTHSTAR_HEALTH,
@@ -336,12 +554,37 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_bridge_url:
+                    fallback = await self._invoke_excalibur_bridge(
+                        task=f"development blueprint objective: {str(payload.get('objective') or '').strip() or 'development blueprint objective'}",
+                        mode="DEV",
+                        service=CloudServiceName.DEVELOPMENT_BLUEPRINT,
+                        payload=payload,
+                    )
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.DEVELOPMENT_BLUEPRINT,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_bridge_url:
+            objective = str(payload.get("objective") or "").strip() or "development blueprint objective"
+            return await self._invoke_excalibur_bridge(
+                task=f"development blueprint objective: {objective}",
+                mode="DEV",
+                service=CloudServiceName.DEVELOPMENT_BLUEPRINT,
+                payload=payload,
+            )
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.DEVELOPMENT_BLUEPRINT,
+                env_var="CAMELOT_BLUEPRINT_URL",
+            )
 
         try:
             result = _modal_services().run_development_blueprint(payload)
@@ -372,12 +615,26 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_health_url:
+                    fallback = await self._invoke_excalibur_health(CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH)
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_health_url:
+            return await self._invoke_excalibur_health(CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH)
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH,
+                env_var="CAMELOT_BLUEPRINT_HEALTH_URL",
+            )
 
         return CloudServiceResult(
             service=CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH,
@@ -399,12 +656,37 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_bridge_url:
+                    fallback = await self._invoke_excalibur_bridge(
+                        task=f"precise mode objective: {str(payload.get('objective') or '').strip() or 'precise mode objective'}",
+                        mode="ANALYSIS",
+                        service=CloudServiceName.PRECISE_MODE,
+                        payload=payload,
+                    )
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.PRECISE_MODE,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_bridge_url:
+            objective = str(payload.get("objective") or "").strip() or "precise mode objective"
+            return await self._invoke_excalibur_bridge(
+                task=f"precise mode objective: {objective}",
+                mode="ANALYSIS",
+                service=CloudServiceName.PRECISE_MODE,
+                payload=payload,
+            )
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.PRECISE_MODE,
+                env_var="CAMELOT_PRECISE_MODE_URL",
+            )
 
         try:
             result = _modal_services().run_precise_mode(payload)
@@ -435,12 +717,26 @@ class CloudServiceRouter:
                         source="remote",
                     )
             except Exception as exc:
+                if self.excalibur_health_url:
+                    fallback = await self._invoke_excalibur_health(CloudServiceName.PRECISE_MODE_HEALTH)
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
                 return CloudServiceResult(
                     service=CloudServiceName.PRECISE_MODE_HEALTH,
                     success=False,
                     error=str(exc),
                     source="remote",
                 )
+
+        if self.excalibur_health_url:
+            return await self._invoke_excalibur_health(CloudServiceName.PRECISE_MODE_HEALTH)
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.PRECISE_MODE_HEALTH,
+                env_var="CAMELOT_PRECISE_MODE_HEALTH_URL",
+            )
 
         return CloudServiceResult(
             service=CloudServiceName.PRECISE_MODE_HEALTH,

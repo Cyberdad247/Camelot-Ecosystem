@@ -35,7 +35,7 @@ Use this precedence when sources conflict:
 
 These files are the strongest sources of truth for the current system.
 
-### 1. NotebookLM Cloud Brain identity
+### 1. NotebookLM living-notebook identity
 
 File: [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:14)
 
@@ -48,8 +48,9 @@ Why it is canonical:
 
 Operational implication:
 
-- This file currently overrides older references to `Living Camelot-OS`
-  notebooks from the `v300.x` era.
+- This file defines the canonical short-term working notebook.
+- It overrides older references to `Living Camelot-OS` notebooks from the
+  `v300.x` era.
 
 ### 2. Persisted operator config
 
@@ -57,14 +58,15 @@ File: [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1)
 
 Why it is canonical:
 
-- Stores the active `cloudbrain_url`
-- Points to the same notebook ID as the NotebookLM bridge
+- Stores the active `living_notebook_url`
+- Stores the deployed `excalibur_*` bridge URLs for the remote long-term brain
 - Provides operator defaults used by the current CLI stack
 
 Operational implication:
 
 - If the bridge and config disagree in the future, treat that as a release
   blocker until reconciled.
+- `cloudbrain_url` should no longer be used for NotebookLM notebook links.
 
 ### 3. Active cloudbrain runtime topology
 
@@ -79,8 +81,10 @@ Why it is canonical:
 
 Operational implication:
 
-- This file is the main source of truth for local cloudbrain architecture,
-  readiness, and memory topology.
+- This file is the main source of truth for local long-term cloudbrain
+  architecture, readiness, and memory topology.
+- The remote long-term agentic surface is `excalibur-brain`; NotebookLM is
+  not the long-term brain.
 
 ### 4. Active typed cloud routing
 
@@ -257,6 +261,16 @@ Current canonical values:
 
 - Notebook ID: `bcaadfdd-1654-487d-9c4c-111f7dea120e`
 - Notebook title: `Living Camelot-OS v.400`
+
+Role decision:
+
+- NotebookLM is the canonical short-term living notebook and operator working
+  context.
+- `excalibur-brain` is the canonical remote long-term agentic brain surface.
+
+Supporting audit:
+
+- [docs/architecture/MODAL_APP_AUDIT.md](/C:/Users/vizio/CAMELOT_OS/docs/architecture/MODAL_APP_AUDIT.md:1)
 
 Historical notebook identities still present in docs:
 

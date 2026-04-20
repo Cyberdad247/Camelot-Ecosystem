@@ -1,0 +1,14 @@
+# Camelot-OS cloud endpoint overrides
+# Copy to .camelot-config.yaml and replace placeholders with real production URLs.
+cloudbrain_url: "https://replace-me.modal.run"
+living_notebook_url: "https://notebooklm.google.com/notebook/replace-me"
+research_agency_url: "https://replace-me.modal.run"
+research_agency_health_url: "https://replace-me.modal.run"
+northstar_url: "https://replace-me.modal.run"
+northstar_health_url: "https://replace-me.modal.run"
+blueprint_url: "https://replace-me.modal.run"
+blueprint_health_url: "https://replace-me.modal.run"
+precise_mode_url: "https://replace-me.modal.run"
+precise_mode_health_url: "https://replace-me.modal.run"
+excalibur_bridge_url: "https://replace-me.modal.run"
+excalibur_health_url: "https://replace-me.modal.run"

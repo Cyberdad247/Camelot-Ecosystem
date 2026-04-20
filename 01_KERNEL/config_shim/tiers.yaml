@@ -21,7 +21,7 @@ tiers:
     health: /health
     ram_budget_mb: 300
   cloud:
-    role: "Cloud Orchestrator — Modal morgana, on-demand only"
+    role: "Cloud Orchestrator — Modal morgana support services, on-demand only"
     modal_app: morgana-research-agency-prod
     deploy_file: 02_FORGE/PORTAL_CORE/Modal/morgana/morgana_core.py
     modal_cli: .venv/Scripts/modal.exe
@@ -29,6 +29,10 @@ tiers:
     endpoints:
       health: https://cyberdad247--morgana-research-agency-prod-health.modal.run
       brain:  https://cyberdad247--morgana-research-agency-prod-morgana-brain.modal.run
+    notes:
+      - "Do not infer long-term brain ownership from this tier."
+      - "Long-term remote brain is excalibur-brain via CAMELOT_EXCALIBUR_*."
+      - "NotebookLM living notebook is short-term working memory via CAMELOT_LIVING_NOTEBOOK_URL."
     secret_binding: my-sovereign-secrets
     ram_budget_mb: 0   # remote
 constraints:
