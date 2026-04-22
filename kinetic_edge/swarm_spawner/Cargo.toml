@@ -1,0 +1,26 @@
+[package]
+name = "swarm-spawner"
+version = "400.1.0"
+edition = "2021"
+authors = ["CAMELOT Apex OS — Lukas_Omega"]
+description = "SRDL Bio-Swarm Nano-Knight spawner — reads harness_queue.jsonl, spawns isolated processes"
+
+[[bin]]
+name = "swarm-spawner"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+uuid = { version = "1", features = ["v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+anyhow = "1"
+
+[profile.release]
+opt-level = 3
+strip = true
+lto = true
+codegen-units = 1
