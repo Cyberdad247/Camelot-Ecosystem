@@ -1,0 +1,62 @@
+{
+  "$schema": "camelot-os-v60.0-mcp-manifest",
+  "mcpServers": {
+    "ollama": {
+      "command": "npx",
+      "args": ["-y", "ollama-mcp"],
+      "env": {
+        "OLLAMA_HOST": "http://127.0.0.1:11434"
+      },
+      "layer": "L1_SUBSTRATE",
+      "role": "SLM Edge fallback sovereignty"
+    },
+    "lady-apis-sight": {
+      "command": "C:/Users/vizio/CAMELOT_OS/02_FORGE/KINETIC_ARMORY/mcp_web_search/.venv/Scripts/python.exe",
+      "args": ["-m", "mcp_web_search"],
+      "env": {
+        "PLAYWRIGHT_HEADLESS": "true"
+      },
+      "layer": "L5_AGENTIC",
+      "role": "Local anti-bot web foraging with screenshots"
+    },
+    "notebooklm": {
+      "command": "notebooklm-mcp",
+      "args": [],
+      "layer": "L4_SEMANTIC",
+      "role": "Knowledge graph synchronization"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-filesystem", "C:/Users/vizio"],
+      "layer": "L2_KINETIC",
+      "role": "Local file operations via Lukas_Omega"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "layer": "L5_AGENTIC",
+      "role": "Repository operations via Corvus scout"
+    },
+    "brave-search": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "layer": "L5_AGENTIC",
+      "role": "WebRover deep research"
+    }
+  },
+  "saltare": {
+    "port": 8080,
+    "fallback_chain": [
+      {"provider": "cerebras", "priority": 1, "note": "sub-second wafer-scale"},
+      {"provider": "openrouter", "priority": 2, "note": "cloud fallback"},
+      {"provider": "ollama", "priority": 3, "note": "local sovereignty"},
+      {"provider": "slm_edge", "priority": 4, "note": "offline 4-bit quantized"}
+    ]
+  }
+}

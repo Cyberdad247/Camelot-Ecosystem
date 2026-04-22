@@ -1,0 +1,35 @@
+name: Python API Development
+version: "300.4.0"
+domain: ENGINEERING
+knight: Sir Forge
+layer: L2_KINETIC
+patterns:
+  - FastAPI with async handlers
+  - Pydantic v2 for validation (model_validator, field_validator)
+  - SQLAlchemy 2.0 for ORM (async sessions)
+  - Alembic for migrations
+  - Dependency injection via Depends()
+  - Background tasks for async operations
+  - WebSocket support for real-time
+conventions:
+  - Python 3.12+ target
+  - Type hints everywhere (strict mypy mandatory)
+  - Modular organization (no file > 500 lines)
+  - Google style docstrings
+  - pytest + pytest-asyncio (mandatory coverage for edge/failure cases)
+  - ruff for linting + formatting
+  - httpx for async HTTP client
+  - Structured logging (structlog)
+  - Repository pattern for data access
+anti_patterns:
+  - Using Python for L2 Edge where compiled binary exists (Kinetic Purity violation)
+  - Synchronous database calls in async handlers
+  - Business logic in route handlers
+  - Raw SQL without parameterization
+  - Global mutable state
+  - Hallucinating libraries or omitting docstrings
+camelot_specific:
+  - Pydantic AI for agent orchestration (control_plane)
+  - A2A protocol over JSON-RPC
+  - MCP client for kinetic edge delegation
+  - ouroboros.db (SQLite WAL) for state persistence

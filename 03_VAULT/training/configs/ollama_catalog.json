@@ -1,0 +1,119 @@
+{
+  "_meta": {
+    "generated": "2026-04-21",
+    "authority": "LADY_APIS + SIR_BORIS",
+    "total_size_estimate_gb": 34.3,
+    "source": "~/.ollama/models/manifests/registry.ollama.ai/library/",
+    "note": "Ollama/Docker models untouched per Sovereign order — catalog only"
+  },
+  "models": [
+    {
+      "family": "gemma4",
+      "variants": ["latest"],
+      "provider": "Google DeepMind",
+      "architecture": "Gemma 4 (multimodal)",
+      "size_estimate_gb": 9.5,
+      "context_window": 128000,
+      "capabilities": ["text", "vision", "code"],
+      "camelot_assessment": {
+        "bio_swarm_species": "Pongid",
+        "use_cases": ["heavy API integration", "multimodal task analysis", "vision-enhanced audit"],
+        "camelot_role": "Sir Helio cloud burst fallback, Sir Visage media tasks",
+        "recommendation": "KEEP — flagship multimodal, largest model, assign to Pongid (300 token budget)",
+        "priority": "P0"
+      }
+    },
+    {
+      "family": "qwen3",
+      "variants": ["4b", "1.7b", "0.6b"],
+      "provider": "Alibaba / Qwen Team",
+      "architecture": "Qwen3 transformer",
+      "size_estimate_gb": {
+        "4b": 2.5,
+        "1.7b": 1.1,
+        "0.6b": 0.4
+      },
+      "context_window": 32768,
+      "capabilities": ["text", "code", "reasoning", "multilingual"],
+      "camelot_assessment": {
+        "bio_swarm_species": {
+          "4b": "Castor",
+          "1.7b": "Formica",
+          "0.6b": "Strigiform"
+        },
+        "use_cases": ["code generation", "infrastructure tasks", "oversight"],
+        "camelot_role": "Primary local swarm inference — best quality/size ratio",
+        "recommendation": "KEEP ALL — 3 variants cover 3 Bio-Swarm species perfectly",
+        "priority": "P0",
+        "note": "qwen3:4b → Castor infra tasks | qwen3:1.7b → Formica file ops | qwen3:0.6b → Strigiform oversight"
+      }
+    },
+    {
+      "family": "qwen3.5",
+      "variants": ["0.8b"],
+      "provider": "Alibaba / Qwen Team",
+      "architecture": "Qwen3.5 transformer (improved Qwen3)",
+      "size_estimate_gb": 0.5,
+      "context_window": 32768,
+      "capabilities": ["text", "code", "reasoning"],
+      "camelot_assessment": {
+        "bio_swarm_species": "Strigiform",
+        "use_cases": ["swarm oversight", "conflict detection", "inline classification"],
+        "camelot_role": "Strigiform Owl — replaces qwen3:0.6b for oversight tasks (better quality at similar size)",
+        "recommendation": "KEEP — better than qwen3:0.6b at nearly same size; promote to Strigiform primary",
+        "priority": "P1"
+      }
+    },
+    {
+      "family": "qwen2.5-coder",
+      "variants": ["3b"],
+      "provider": "Alibaba / Qwen Team",
+      "architecture": "Qwen2.5 Code-specialized transformer",
+      "size_estimate_gb": 1.9,
+      "context_window": 32768,
+      "capabilities": ["code generation", "code review", "debugging", "multi-language"],
+      "camelot_assessment": {
+        "bio_swarm_species": "Castor",
+        "use_cases": ["kinetic code generation", "AST-aware patching", "Rust/Python/Go scaffolding"],
+        "camelot_role": "Sir Forge / Sir Debug — specialized code tasks where qwen3:4b is overkill",
+        "recommendation": "KEEP — code-specialized model is faster than general Qwen3 for pure code tasks",
+        "priority": "P1",
+        "note": "Complement to qwen3:4b — route code-only tasks here to save context overhead"
+      }
+    }
+  ],
+  "species_model_routing": {
+    "Formica (Ant)":      {"primary": "qwen3:1.7b",       "fallback": "qwen3.5:0.8b", "budget_tokens": 150},
+    "Pongid (Gorilla)":   {"primary": "gemma4:latest",    "fallback": "qwen3:4b",     "budget_tokens": 300},
+    "Castor (Beaver)":    {"primary": "qwen2.5-coder:3b", "fallback": "qwen3:4b",     "budget_tokens": 200},
+    "Arachne (Spider)":   {"primary": "qwen3:4b",          "fallback": "qwen3:1.7b",   "budget_tokens": 200},
+    "Simian (Chaos)":     {"primary": "qwen3:1.7b",        "fallback": "qwen3.5:0.8b", "budget_tokens": 150},
+    "Strigiform (Owl)":   {"primary": "qwen3.5:0.8b",     "fallback": "qwen3:0.6b",   "budget_tokens": 100}
+  },
+  "ram_analysis": {
+    "note": "Ollama loads models lazily — one at a time by default",
+    "worst_case_concurrent_mb": {
+      "all_6_species": 4096,
+      "description": "If all 6 species run simultaneously (unlikely) — within 8GB ceiling"
+    },
+    "recommended_concurrency": "max 3 species simultaneously — 2048MB safe margin"
+  },
+  "recommended_actions": [
+    {
+      "action": "KEEP",
+      "models": ["gemma4:latest", "qwen3:4b", "qwen3:1.7b", "qwen3:0.6b", "qwen3.5:0.8b", "qwen2.5-coder:3b"],
+      "reason": "Full species coverage — each model maps to a Bio-Swarm role"
+    },
+    {
+      "action": "PULL IF MISSING",
+      "models": ["qwen3:0.6b"],
+      "command": "ollama pull qwen3:0.6b",
+      "reason": "Needed as fallback for Strigiform oversight tasks"
+    },
+    {
+      "action": "REGISTER IN BITNET SWARM",
+      "note": "Update bitnet_swarm.py species_model_map to add Ollama routing path when bitnet binary unavailable",
+      "priority": "P1"
+    }
+  ]
+}

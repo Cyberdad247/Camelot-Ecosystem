@@ -1,0 +1,33 @@
+# Saltare Semantic Gateway Configuration
+# The Go-based MCP multiplexer for Camelot-OS v60.0
+
+[server]
+port = 8080
+host = "127.0.0.1"
+log_level = "info"
+
+[routing]
+# Semantic tool routing via vector similarity
+engine = "meilisearch"
+fallback_engine = "typesense"
+min_confidence = 0.75
+
+[fallback_chain]
+# Multi-tier inference fallback for sovereignty
+tier_1 = { provider = "cerebras", latency_target_ms = 100 }
+tier_2 = { provider = "openrouter", latency_target_ms = 500 }
+tier_3 = { provider = "ollama", model = "deepseek-coder-v2:latest", latency_target_ms = 2000 }
+tier_4 = { provider = "local_slm", model = "qwen2.5-coder:7b", latency_target_ms = 5000 }
+
+[mcp_servers]
+github = { transport = "stdio", command = "npx -y @anthropic-ai/mcp-server-github" }
+filesystem = { transport = "stdio", command = "npx -y @anthropic-ai/mcp-server-filesystem" }
+brave = { transport = "stdio", command = "npx -y @anthropic-ai/mcp-server-brave-search" }
+notebooklm = { transport = "stdio", command = "notebooklm-mcp run" }
+
+[constraints]
+max_ram_gb = 8.0
+rotel_telemetry_port = 4317
+ram_ceiling_gb = 7.8
+swap_size_gb = 4
+context_max_tokens = 128000

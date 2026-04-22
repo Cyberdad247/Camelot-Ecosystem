@@ -1,0 +1,49 @@
+name: Swarm & Colony Operations
+version: "300.4.0"
+domain: AGENTIC
+knight: Sir Boris (Colony) / General Strategos (Swarm)
+layer: L5_AGENTIC
+swarm:
+  protocol: SRDL (Swarm Reduce Dispatch Loop)
+  phases:
+    - map: "Oracle phase — plan decomposition into subtasks"
+    - reduce: "Sentinel phase — critique, merge, quality gate"
+    - kinetic: "AST patch execution — compiled output"
+  a2a:
+    transport: JSON-RPC over HTTP
+    messages: TaskPayload, TaskResult
+    routing: KNIGHT_ROUTES dispatch table
+  triggers:
+    - "//SWARM — Full Hive Swarm v2.0"
+    - "//FLEET — Parallel Map-Reduce"
+    - ">5 files OR >3 steps OR cross-module refactor (DeerFlow)"
+colony:
+  codename: CLARITY_CORE
+  cli: "python -m squires.colony [scan|index|ghost|vector|triage|status] [path]"
+  triage_pipeline: "SCAN -> JUDGE -> SENTINEL (HITL gate)"
+  squires:
+    - SQUIRE_INDEX: "B-Tree directory scanner (<1% CPU)"
+    - SQUIRE_GHOST: "Alien process detector + quarantine"
+    - SQUIRE_VECTOR: "Semantic file clustering (19 intents)"
+    - SQUIRE_SWEEP: "Vault staging with HITL approval"
+    - SQUIRE_SCAN: "Ghost file vs active tissue detector"
+    - SQUIRE_JUDGE: "Keep/Compress/Purge classification"
+    - SQUIRE_SENTINEL: "Antigravity backup enforcer"
+    - SQUIRE_MASON: "Symbolect/UKG token compressor"
+  rules:
+    - "Before large refactor: run index + vector"
+    - "Before deletion: run full triage pipeline"
+    - "After system change: run status"
+    - "All destructive actions require .antigravity_backup"
+anti_patterns:
+  - Skipping the SENTINEL HITL gate for destructive actions
+  - Bypassing JUDGE severity assessment
+  - Purging without .antigravity_backup
+deerflow:
+  version: "2.0"
+  mode: Docker sandbox isolation
+  trigger: ">5 files OR >3 steps OR cross-module refactor"
+  features:
+    - full filesystem isolation
+    - bash access in container
+    - aggressive context compression

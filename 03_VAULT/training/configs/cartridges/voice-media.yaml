@@ -1,0 +1,34 @@
+name: Voice & Media Pipeline
+version: "300.4.0"
+domain: CREATIVE
+knight: Sir Sonus / Sir Visage
+layer: L7_ETHEREAL
+voice:
+  tts_providers:
+    - Piper TTS (Primary — local zero-cost HuggingFace ONNX models)
+    - Cartesia (Secondary — low latency)
+    - ElevenLabs (Legacy — high cost cloud)
+  streaming: LiveKit WebRTC
+  bridge: OmniRoute (port 20128 -> LiveKit)
+  latency_target: "sub-second (Titanium Law T8)"
+  singleton: VoxService (prevents multiple GPU allocations)
+  vocal_rune:
+    trigger: "//vocal"
+    executor: SIR_BORIS
+    phases:
+      - oracle: "AST-Aware Plan Mode, install notebooklm-mcp-cli, bridge OmniRoute"
+      - veritas: "13-Agent Critique, extract persona Souls, assign Voice IDs"
+      - lazarus: "E2E Self-Healing, Saltare gateway, mock voice test"
+media:
+  image: Flux / Midjourney (Sir Visage)
+  video: Singularity Engine via Ω_ACTUATE
+  audio: Sir Sonus (songwriting, TTS, audio physics)
+anti_patterns:
+  - Using expensive cloud APIs (ElevenLabs) when Piper is available
+  - Non-singleton voice services triggering memory hogs
+  - Latency exceeding sub-second mandate (T8)
+tools:
+  - "@vercel/agent-browser (E2E testing)"
+  - "Playwright headless (validation)"
+  - "NotebookLM MCP (knowledge retrieval)"
+  - "Modal GPU T4 (inference)"

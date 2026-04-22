@@ -1,0 +1,181 @@
+{
+  "_meta": {
+    "version": "400.1.0",
+    "updated": "2026-04-21",
+    "authority": "Sir Sentinel + Anya_Omega APEE v6.5",
+    "shatterpoint": "SP-01",
+    "description": "A2A RBAC access matrix. Knights are mapped to allowed execution_modes, domains, and iron_gate levels."
+  },
+  "knights": {
+    "sir_boris": {
+      "role": "ORCHESTRATOR",
+      "tier": "OMEGA",
+      "allowed_modes": ["KINETIC", "SWARM", "ORACLE", "FORGE", "SENTINEL"],
+      "allowed_domains": ["*"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": true,
+      "can_write_ledger": true,
+      "can_modify_config": true,
+      "max_net_lines": 500,
+      "cost_ceiling": "high"
+    },
+    "merlin_omega": {
+      "role": "ARCHWIZARD",
+      "tier": "OMEGA",
+      "allowed_modes": ["ORACLE", "FORGE", "SWARM"],
+      "allowed_domains": ["research", "general", "python/api", "go/binary", "rust/kinetic"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": true,
+      "can_write_ledger": true,
+      "can_modify_config": false,
+      "max_net_lines": 300,
+      "cost_ceiling": "medium"
+    },
+    "lukas_omega": {
+      "role": "KINETIC_EDGE",
+      "tier": "OMEGA",
+      "allowed_modes": ["KINETIC", "FORGE"],
+      "allowed_domains": ["rust/kinetic", "go/binary"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 200,
+      "cost_ceiling": "low"
+    },
+    "sir_forge": {
+      "role": "ENGINEER",
+      "tier": "HIGH_KNIGHT",
+      "allowed_modes": ["FORGE", "KINETIC"],
+      "allowed_domains": ["python/api", "rust/kinetic", "go/binary", "infra/cloud"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 150,
+      "cost_ceiling": "low"
+    },
+    "sir_sentinel": {
+      "role": "SECURITY",
+      "tier": "HIGH_KNIGHT",
+      "allowed_modes": ["SENTINEL", "ORACLE", "FORGE"],
+      "allowed_domains": ["security", "*"],
+      "iron_gate_override": true,
+      "can_spawn_swarm": false,
+      "can_write_ledger": true,
+      "can_modify_config": false,
+      "max_net_lines": 100,
+      "cost_ceiling": "medium"
+    },
+    "sir_debug": {
+      "role": "DEBUG_HEAL",
+      "tier": "KNIGHT",
+      "allowed_modes": ["FORGE", "ORACLE"],
+      "allowed_domains": ["python/api", "rust/kinetic", "web/ui", "general"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 50,
+      "cost_ceiling": "low"
+    },
+    "sir_alex": {
+      "role": "COGNITIVE",
+      "tier": "HIGH_KNIGHT",
+      "allowed_modes": ["ORACLE", "FORGE"],
+      "allowed_domains": ["research", "general", "security"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 100,
+      "cost_ceiling": "medium"
+    },
+    "sir_link": {
+      "role": "ATC_BRIDGE",
+      "tier": "HIGH_KNIGHT",
+      "allowed_modes": ["ORACLE", "SWARM"],
+      "allowed_domains": ["infra/cloud", "research", "general"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": true,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 50,
+      "cost_ceiling": "free"
+    },
+    "sir_helio": {
+      "role": "CONTEXT_BURST",
+      "tier": "HIGH_KNIGHT",
+      "allowed_modes": ["ORACLE", "SWARM"],
+      "allowed_domains": ["research", "infra/cloud", "general"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": true,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 100,
+      "cost_ceiling": "medium"
+    },
+    "lady_apis": {
+      "role": "RESEARCH_FORAGER",
+      "tier": "HIGH_KNIGHT",
+      "allowed_modes": ["ORACLE", "FORGE"],
+      "allowed_domains": ["research", "general"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 50,
+      "cost_ceiling": "free"
+    },
+    "sir_sonus": {
+      "role": "VOICE_MEDIA",
+      "tier": "KNIGHT",
+      "allowed_modes": ["ORACLE", "FORGE"],
+      "allowed_domains": ["voice/media"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 50,
+      "cost_ceiling": "low"
+    },
+    "sir_syntax": {
+      "role": "FRONTEND_ENGINEER",
+      "tier": "KNIGHT",
+      "allowed_modes": ["FORGE", "KINETIC"],
+      "allowed_domains": ["web/ui"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 150,
+      "cost_ceiling": "low"
+    }
+  },
+  "deny_rules": [
+    {
+      "id": "DENY-01",
+      "description": "No knight below OMEGA tier may modify config files",
+      "condition": "tier != OMEGA AND can_modify_config == true",
+      "action": "BLOCKED"
+    },
+    {
+      "id": "DENY-02",
+      "description": "KINETIC mode restricted to kinetic-tier knights only",
+      "condition": "execution_mode == KINETIC AND role NOT IN [KINETIC_EDGE, ENGINEER, ORCHESTRATOR]",
+      "action": "HITL_REQUIRED"
+    },
+    {
+      "id": "DENY-03",
+      "description": "Swarm spawn requires OMEGA or ORCHESTRATOR tier",
+      "condition": "can_spawn_swarm == true AND tier NOT IN [OMEGA, HIGH_KNIGHT]",
+      "action": "BLOCKED"
+    },
+    {
+      "id": "DENY-04",
+      "description": "Cost ceiling enforcement — no HIGH cost for simple tasks",
+      "condition": "complexity < 0.5 AND cost_ceiling == high",
+      "action": "REROUTE_CHEAPER"
+    }
+  ]
+}

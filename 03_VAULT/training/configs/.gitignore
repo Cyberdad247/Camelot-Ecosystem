@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+logs/
+memory/
+ouroboros.db
+*.db
+*.sqlite
+*.sqlite3
+context/
+assimilated/

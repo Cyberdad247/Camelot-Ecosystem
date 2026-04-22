@@ -1,0 +1,140 @@
+{
+  "name": "Camelot OmniRoute Gateway",
+  "version": "2.0.0",
+  "port": 20128,
+  "description": "Smart AI Router for Camelot Apex OS — MFOE cost-optimized model selection per intent",
+
+  "engines": {
+    "claude_code": {
+      "tier": "subscription",
+      "status": "active",
+      "knight_binding": "SIR_BORIS",
+      "weight": 0.85,
+      "weight_type": "W_orchestration",
+      "function": "Architecture, Colony Command, 13-Agent Critique"
+    },
+    "gemini": {
+      "tier": "api_key",
+      "status": "active",
+      "knight_binding": "SIR_HELIO",
+      "weight": 0.90,
+      "weight_type": "W_context",
+      "function": "1M+ token context mapping"
+    },
+    "codex": {
+      "tier": "api_key",
+      "status": "active",
+      "knight_binding": "SIR_CODEX",
+      "weight": 0.75,
+      "weight_type": "W_velocity",
+      "function": "High-velocity code generation"
+    },
+    "open_coder": {
+      "tier": "free",
+      "status": "active",
+      "provider": "local",
+      "knight_binding": "SIR_FORGE",
+      "weight": 0.70,
+      "weight_type": "W_kinetic",
+      "function": "L2 Kinetic Code Generation — local open-weight execution",
+      "execution_path": "localhost:11434",
+      "model": "qwen3:1.7b",
+      "prompt_template": "sir_forge_opencoder_strict",
+      "fallback_models": ["qwen3:0.6b", "qwen2.5-coder:1.5b"]
+    },
+    "local_qwen": {
+      "tier": "free",
+      "status": "active",
+      "provider": "local",
+      "knight_binding": "SIR_GHOST",
+      "weight": 1.00,
+      "weight_type": "W_privacy",
+      "function": "Zero-Trust air-gapped execution",
+      "execution_path": "localhost:11434",
+      "model": "qwen3:8b"
+    }
+  },
+
+  "upstream": {
+    "cliproxy": {
+      "base_url": "http://127.0.0.1:8080/v1",
+      "api_key": "proxy-admin-key",
+      "description": "CLIProxyAPI — Zero-Burn local proxy with 29 OAuth models (Gemini, Claude, Codex)",
+      "priority": 1
+    },
+    "ollama": {
+      "base_url": "http://127.0.0.1:11434",
+      "api_key": null,
+      "description": "Local Ollama — Open Coder and Sir Ghost execution",
+      "priority": 2
+    }
+  },
+
+  "routing_matrix": {
+    "strategy": "mfoe_soul_equation",
+    "soul_equation": "S_omega = alpha*V + beta*M + gamma*P + delta*E",
+    "coefficients": {
+      "alpha": 0.20,
+      "beta": 0.35,
+      "gamma": 0.30,
+      "delta": 0.15
+    },
+
+    "tiers": {
+      "tier1_low_stakes": {
+        "description": "Simple queries, greetings, out-of-scope deflection",
+        "models": ["gemini-2.5-flash", "claude-haiku-4-5-20251001"],
+        "intents": ["OutOfScope", "Schedule"],
+        "local_eligible": true,
+        "local_model": "qwen3:1.7b"
+      },
+      "tier2_standard": {
+        "description": "Standard conversations, onboarding, service inquiries",
+        "models": ["gemini-2.5-pro", "claude-sonnet-4-6-20250514"],
+        "intents": ["Onboard", "ServiceInquiry"]
+      },
+      "tier3_complex": {
+        "description": "Technical escalation, high-trust complex reasoning",
+        "models": ["claude-opus-4-6-20250610", "gemini-3-pro-preview"],
+        "intents": ["Technical", "Escalate"]
+      },
+      "tier0_local_kinetic": {
+        "description": "Code generation routed to local Open Coder via Sir Forge",
+        "models": ["qwen3:1.7b"],
+        "intents": ["code_gen", "scaffold", "technical"],
+        "complexity_max": 0.5
+      }
+    },
+
+    "privacy_override": {
+      "trigger_keywords": ["secret", "local", "private", "credential", "key", "password"],
+      "forced_engine": "local_qwen",
+      "forced_knight": "SIR_GHOST",
+      "bypass_cloud": true,
+      "description": "Any prompt containing privacy keywords is routed to air-gapped local engine"
+    },
+
+    "complexity_routing": {
+      "low": { "threshold": 0.3, "engine": "open_coder", "knight": "SIR_FORGE" },
+      "medium": { "threshold": 0.6, "engine": "claude_code", "knight": "SIR_BORIS" },
+      "high": { "threshold": 0.8, "engine": "claude_code", "knight": "SIR_BORIS", "force_plan_mode": true }
+    },
+
+    "fallback_chain": ["cliproxy", "gemini", "codex", "open_coder"]
+  },
+
+  "security": {
+    "prompt_injection_block": true,
+    "agent_armor_pdg": true,
+    "wasm_guardrails_required": true,
+    "no_hardcoded_secrets": true,
+    "vault_auth_only": true
+  },
+
+  "constraints": {
+    "ram_ceiling_mb": 8192,
+    "max_concurrent_requests": 10,
+    "request_timeout_ms": 30000,
+    "local_model_max_tokens": 4096
+  }
+}

@@ -1,0 +1,14 @@
+# Camelot CLI dependencies
+# Core
+pyyaml>=6.0
+pydantic>=2.0
+
+# LLM Router
+httpx>=0.25.0
+
+# HUD Terminal
+rich>=13.0
+
+# Kernel (optional — graceful degradation without these)
+networkx>=3.0
+cryptography>=41.0

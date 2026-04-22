@@ -1,0 +1,33 @@
+name: Security & Agent-Armor
+version: "300.4.0"
+domain: SECURITY
+knight: Sir Sentinel
+layer: L6_GOVERNANCE
+patterns:
+  - OWASP Top 10 compliance
+  - Zero trust architecture
+  - Defense in depth
+  - Program Dependency Graph (PDG) analysis
+  - Depth of Thought (DoT) security verification
+  - Spotlighting (XML delimiter injection defense)
+conventions:
+  - Agent-Armor v2.0 (Mandatory Spotlighting for untrusted input)
+  - Zero hardcoded secrets (Vault or Env vars only)
+  - Iron Gate (Titanium Law T3): HITL for >10 lines or >50MB
+  - Least privilege access
+  - Audit logging to PROVENANCE_LEDGER.md
+  - .aiexclude for token shield
+agent_armor_v2:
+  - PDG: Map untrusted data flow — block shell/eval sinks
+  - DoT: Security verification tree before privileged ops
+  - Spotlighting: XML delimiter injection defense (Spotlighting)
+  - Miri: Rust undefined behavior detection
+  - Trivy: Container/dependency vulnerability scanning
+anti_patterns:
+  - Passing untrusted web data to shell execution sinks
+  - Bypassing the HITL gate
+  - API keys/tokens in tracked files
+  - Dangerous calls (exec, eval, os.system, __import__)
+  - Prompt injection without delimiters
+  - Bare except clauses
+  - Untyped function arguments at boundaries

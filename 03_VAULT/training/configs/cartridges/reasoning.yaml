@@ -1,0 +1,48 @@
+name: Reasoning & Compression
+version: "300.4.0"
+domain: REASONING
+knight: Merlin_Omega
+layer: L3_NEURAL
+reasoning_modes:
+  got:
+    name: Graph of Thoughts
+    trigger: ">3 reasoning steps (Titanium Law T4)"
+    method: Non-linear reasoning with branch/merge/evaluate
+  dot:
+    name: Depth of Thought
+    trigger: Security verification, deep analysis
+    method: Deep verification chains with proof obligations
+  tot:
+    name: Tree of Thoughts
+    trigger: "//PLAN command"
+    method: Branching exploration with pruning (breadth-first)
+  lac:
+    name: Videneptus Language as Compiler
+    phases:
+      - diverge: "temperature 1.2 (creative exploration)"
+      - critical: "temperature 0.9 (evaluation)"
+      - converge: "temperature 0.2 (precise output)"
+    temperature_oscillation:
+      precision: "T=0.1 (strict legal/constraints)"
+      creative: "T=0.9 (narrative/marketing)"
+  ndrs:
+    name: Neurosymbolic Dual-Representation + Synthesis
+    neural: Pattern matching, embedding similarity
+    symbolic: Formal logic, type checking, AST analysis
+    synthesis: Merge neural intuition with symbolic proof
+compression:
+  sac: Semantic Abstraction Compression (remove redundancy)
+  ccf: Context Crystal Fusion (merge related concepts)
+  qft: Quantum Field Transform (Triple-QFT: Renormalize -> Quantize -> Transform)
+  target: "97%+ compression ratio"
+  format: TOON (Token-Oriented Object Notation)
+conventions:
+  - Always decompose before executing (plan-first)
+  - GoT graphs must have explicit merge criteria
+  - LaC oscillation must complete all 3 phases
+  - Compression preserves semantic fidelity
+  - Triple-QFT mandatory for all external directives
+anti_patterns:
+  - Linear reasoning for complex tasks (>3 steps)
+  - Temperature staticity during multi-phase tasks
+  - Redundant context usage (fails compression target)

@@ -1,0 +1,35 @@
+name: Next.js 15+ (App Router)
+version: "300.4.0"
+domain: ENGINEERING
+knight: Sir Syntax
+layer: L2_KINETIC
+patterns:
+  - app router (app/ directory)
+  - server components by default
+  - route handlers in app/api/
+  - server actions with "use server"
+  - metadata API for SEO
+  - parallel routes and intercepting routes
+  - streaming with Suspense boundaries
+  - partial prerendering (PPR)
+conventions:
+  - TypeScript strict mode (tsc --strict mandatory)
+  - Tailwind CSS exclusively (custom CSS forbidden)
+  - Stateless Edge functions (all state in Supabase)
+  - Prisma for database
+  - NextAuth.js v5 for authentication
+  - Zod for schema validation
+  - Server-first — minimize "use client"
+  - Colocation — keep related files together
+anti_patterns:
+  - Client components for data fetching
+  - Local state management (use Supabase)
+  - getServerSideProps (pages router legacy)
+  - Deprecated libraries (no release in last 12 months)
+  - Global CSS outside app/globals.css
+  - Fetching in useEffect when server component works
+toolchain:
+  - pnpm (package manager)
+  - Turbopack (dev bundler)
+  - Vercel (deployment target)
+  - Playwright (E2E testing)

@@ -1,0 +1,44 @@
+name: Rust Kinetic Toolchain
+version: "300.4.0"
+domain: ENGINEERING
+knight: Lukas_Omega
+layer: L2_KINETIC
+purpose: Kinetic Purity Law (T1) — compiled binaries over interpreted scripts
+binaries:
+  saltare:
+    type: CLI Gateway / MCP Router
+    tech: Go (Axum-style)
+    location: 02_FORGE/KINETIC_ARMORY/Saltare/
+    binary: saltare.exe (37.6 MB)
+    mcp_variant: saltare-mcp.exe (8.3 MB)
+  cribo:
+    type: Code Bundler
+    tech: Rust
+    location: 02_FORGE/KINETIC_ARMORY/Cribo/
+    status: SOURCE_ONLY (needs cargo build)
+  rotel:
+    type: Telemetry Collector
+    tech: Rust
+    location: 02_FORGE/KINETIC_ARMORY/Rotel/
+    status: SOURCE_ONLY (needs cargo build)
+  kinetic_edge:
+    type: MCP Server
+    tech: Rust (Axum 0.7 + Tokio)
+    location: kinetic_edge/mcp_server/
+    port: 3001
+    status: SOURCE_ONLY
+conventions:
+  - Stable toolchain mandatory (no nightly)
+  - No unwrap() in production paths
+  - Tokio for async runtime
+  - No blocking I/O calls within async Tokio contexts
+  - cargo clippy before commit (zero warnings)
+  - Axum for HTTP/MCP servers
+  - Serde for serialization
+  - tower-http for CORS middleware
+anti_patterns:
+  - Python scripts where compiled binary exists
+  - Exposing local ports to public internet (Split-Brain violation)
+  - Blocking calls in async contexts
+  - Unsafe blocks without justification comment
+  - Failing cargo clippy

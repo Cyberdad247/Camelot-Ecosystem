@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "scrapling": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "scrapling.mcp"],
+      "env": {
+        "SCRAPLING_MODE": "SPIDER",
+        "SCRAPLING_PROXY_ROUTING": "127.0.0.1:8080"
+      }
+    }
+  }
+}
