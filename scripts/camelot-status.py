@@ -130,7 +130,11 @@ check("pqcrypto binary",     pq_bin.exists(), "build: cargo build --release in k
 if pq_bin.exists():
     try:
         out = subprocess.run([str(pq_bin), "self-test"], capture_output=True, text=True, timeout=10)
-        pq_ok = '"status": "PASS"' in out.stdout
+        try:
+            pq_json = json.loads(out.stdout)
+            pq_ok = pq_json.get("status") == "PASS"
+        except Exception:
+            pq_ok = "PASS" in out.stdout
         check("PQCrypto self-test", pq_ok, "ML-KEM-768 + ML-DSA-65 NIST L3")
     except Exception as e:
         check("PQCrypto self-test", False, str(e))

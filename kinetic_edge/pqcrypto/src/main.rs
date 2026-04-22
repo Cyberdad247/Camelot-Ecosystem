@@ -46,9 +46,9 @@ fn main() -> Result<()> {
         }
 
         "dsa-sign" => {
-            if args.len() < 5 { anyhow::bail!("dsa-sign <msg_hex> <sk_hex> <knight_id>"); }
+            if args.len() < 6 { anyhow::bail!("dsa-sign <msg_hex> <sk_hex> <vk_hex> <knight_id>"); }
             let msg = hex::decode(&args[2])?;
-            let signed = dsa_sign(&msg, &args[3], &args[4])?;
+            let signed = dsa_sign(&msg, &args[3], &args[4], &args[5])?;
             println!("{}", serde_json::to_string(&signed)?);
         }
 
@@ -69,7 +69,7 @@ fn main() -> Result<()> {
             // DSA round-trip
             let dsa_kp = dsa_keygen()?;
             let msg = b"CAMELOT PQ self-test 2026-04-21";
-            let signed = dsa_sign(msg, &dsa_kp.sign_key, "self-test")?;
+            let signed = dsa_sign(msg, &dsa_kp.sign_key, &dsa_kp.verify_key, "self-test")?;
             let dsa_ok = dsa_verify(&signed)?;
 
             println!("{}", serde_json::json!({
