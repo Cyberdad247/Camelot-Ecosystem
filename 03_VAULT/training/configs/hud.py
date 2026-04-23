@@ -203,6 +203,71 @@ def _handle_forge(command: str):
         return msg
 
 
+def _handle_browse(command: str, console) -> None:
+    """//BROWSE [knight_ids] <task> — deploy browser nano-knights with feedback."""
+    import asyncio
+    rest = command[len("//BROWSE"):].strip()
+    if not rest:
+        console.print("[yellow]Usage:[/] //BROWSE [apis|sentinel|syntax|debug,…] <task>")
+        return
+
+    # Parse optional roster prefix: "apis,sentinel: go find X"
+    roster = ["apis"]
+    task = rest
+    if ":" in rest and rest.split(":")[0].replace(",", "").replace(" ", "").isalpha():
+        roster_part, task = rest.split(":", 1)
+        roster = [r.strip().lower() for r in roster_part.split(",") if r.strip()]
+        task = task.strip()
+
+    if not task:
+        console.print("[yellow]No task specified.[/]")
+        return
+
+    roster_str = ", ".join(roster)
+    console.print(f"[bright_magenta]//BROWSE[/] spawning [cyan]{roster_str}[/] → [dim]{task[:80]}[/]")
+
+    try:
+        sys.path.insert(0, CAMELOT_DIR)
+        from knights.browser_nano_knight import BrowserSquad
+        from rich.progress import Progress, SpinnerColumn, TextColumn
+        from rich.table import Table
+
+        squad = BrowserSquad(roster=roster)
+
+        with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"),
+                      transient=True, console=console) as progress:
+            progress.add_task(f"Browser squad [{roster_str}] running…", total=None)
+            results = asyncio.run(squad.deploy(task))
+
+        table = Table(title="//BROWSE Results", border_style="bright_magenta", show_lines=True)
+        table.add_column("Knight", style="cyan", width=18)
+        table.add_column("Steps", justify="right", width=6)
+        table.add_column("URLs", justify="right", width=5)
+        table.add_column("ms", justify="right", width=7)
+        table.add_column("Status", width=8)
+        table.add_column("Result", no_wrap=False)
+
+        for fb in results:
+            status_color = "green" if fb.success else "red"
+            status = f"[{status_color}]{'OK' if fb.success else 'ERR'}[/]"
+            table.add_row(
+                fb.knight_id,
+                str(fb.steps_taken),
+                str(len(fb.urls_visited)),
+                f"{fb.elapsed_ms:.0f}",
+                status,
+                fb.result[:300] if fb.result else "[dim]—[/]",
+            )
+
+        console.print(table)
+        console.print("[dim]Feedback stored to Integration Brain LT (Modal Volume).[/]")
+
+    except ImportError as e:
+        console.print(f"[red]//BROWSE:[/] browser-use not installed. Run: [cyan]pip install browser-use langchain-anthropic[/]\n{e}")
+    except Exception as e:
+        console.print(f"[red]//BROWSE error:[/] {type(e).__name__}: {e}")
+
+
 def _handle_rune(rune: str) -> str:
     """Omega_ rune dispatcher — wires 29 Omega runes to real handlers."""
     r = rune.upper().replace("OMEGA_", "").strip()
@@ -1097,6 +1162,7 @@ def render_compact_status():
 
 HELP_TEXT = """[bold]Runic Commands (11):[/]
   [bold bright_magenta]//FORGE[/]               Kinetic Rust bundler (bypasses LLM)
+  [bold bright_magenta]//BROWSE[/]              Browser nano-knights (apis|sentinel|syntax|debug: <task>)
   [bold bright_magenta]//SWARM[/]               Launch Bio-Swarm Nano-Knight cells
   [bold bright_magenta]//PLAN[/]                Task DAG planning (Sir Oracle)
   [bold bright_magenta]//HEAL[/]                PIV self-healing loop
@@ -1275,6 +1341,9 @@ def _repl_loop():
             console.print(Panel(ke, title="Kinetic Edge", border_style="bright_cyan"))
             _, cb = _boot_cloud_brain()
             console.print(Panel(cb, title="Cloud Brain (lazy)", border_style="bright_blue"))
+            continue
+        elif line.startswith("//BROWSE"):
+            _handle_browse(line, console)
             continue
         elif line.startswith("//CHAT"):
             try:

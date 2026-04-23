@@ -12,10 +12,15 @@ from __future__ import annotations
 import os
 import sys
 import importlib.util
-import requests
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Optional
+
+try:
+    import requests  # type: ignore[import-not-found]
+except ImportError:  # pragma: no cover - fallback path depends on local env
+    requests = None
+    import httpx
 
 # Add KERNEL to path for telemetry import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -52,11 +57,14 @@ OMNIROUTE_URL = os.getenv("OMNIROUTE_URL", "http://localhost:20128/v1")
 class EngineWeight(float, Enum):
     """Immutable weight locks per Titanium Law. DO NOT MODIFY."""
     W_ORCHESTRATION = 0.85   # Sir Boris  — Claude Code
+    W_COGNITIVE     = 0.88   # Sir Alex  — Cognitive orchestration
     W_CONTEXT       = 0.90   # Sir Helio  — Gemini CLI
     W_VELOCITY      = 0.75   # Sir Codex  — OpenAI Codex
     W_PRIVACY       = 1.00   # Sir Ghost  — Local Qwen 3.5
     W_SOVEREIGNTY   = 0.80   # Sir Liberte — Open Source
     W_KINETIC       = 0.70   # Sir Forge  — Open Coder (local)
+    W_BRIDGE        = 0.78   # Sir Link  — UI/bridge handoff coordination
+    W_MEMORY        = 0.92   # Sir Mnemo — Integration Brain routing (highest semantic weight)
 
 
 @dataclass(frozen=True)
@@ -73,16 +81,22 @@ class KnightEngine:
 FOUNDRY_COUNCIL: tuple[KnightEngine, ...] = (
     KnightEngine("sir_boris",   "claude_code",  EngineWeight.W_ORCHESTRATION,
                  "Architecture, Colony Command, 13-Agent Critique", privacy_level=0.3),
+    KnightEngine("sir_alex",    "claude_code",  EngineWeight.W_COGNITIVE,
+                 "Cognitive cartridge orchestration, decision framing, bridge governance", privacy_level=0.3),
     KnightEngine("sir_helio",   "gemini_cli",   EngineWeight.W_CONTEXT,
                  "1M+ token context mapping", privacy_level=0.2),
     KnightEngine("sir_codex",   "openai_codex", EngineWeight.W_VELOCITY,
                  "High-velocity code generation", privacy_level=0.2),
     KnightEngine("sir_forge",   "open_coder",   EngineWeight.W_KINETIC,
                  "L2 Kinetic Code Generation — local open-weight", privacy_level=0.7),
+    KnightEngine("sir_link",    "gemini_cli",   EngineWeight.W_BRIDGE,
+                 "Bridge coordination across UI, cloud brain, and local terminal", privacy_level=0.2),
     KnightEngine("sir_ghost",   "local_qwen",   EngineWeight.W_PRIVACY,
                  "Zero-Trust, air-gapped execution", privacy_level=1.0),
     KnightEngine("sir_liberte", "open_source",   EngineWeight.W_SOVEREIGNTY,
                  "Anti-vendor lock-in, sovereign execution", privacy_level=0.5),
+    KnightEngine("sir_mnemo",   "integration_brain", EngineWeight.W_MEMORY,
+                 "Memory routing — ST/LT/both tier scoring for Integration Brain", privacy_level=0.4),
 )
 
 # OmniRoute $0 Forever Stack Mapping
@@ -159,6 +173,21 @@ KEYWORD_ROUTES: dict[str, str] = {
     "colony":        "sir_boris",
     "critique":      "sir_boris",
     "vocal":         "sir_boris",
+    "cognitive":     "sir_alex",
+    "reasoning":     "sir_alex",
+    "critical":      "sir_alex",
+    "decision":      "sir_alex",
+    "bridge":        "sir_link",
+    "handoff":       "sir_link",
+    "terminal":      "sir_link",
+    "ui":            "sir_link",
+    "memory":        "sir_mnemo",
+    "remember":      "sir_mnemo",
+    "archive":       "sir_mnemo",
+    "recall":        "sir_mnemo",
+    "store":         "sir_mnemo",
+    "synthesize":    "sir_mnemo",
+    "persist":       "sir_mnemo",
     "technical":     "sir_forge",
     "scaffold":      "sir_forge",
     "code_gen":      "sir_forge",
@@ -166,6 +195,15 @@ KEYWORD_ROUTES: dict[str, str] = {
     "audit":         "sir_sentinel",
     "financial":     "sir_valerian",
     "roi":           "sir_valerian",
+    # Browser Nano-Knights
+    "browse":        "nano_apis",
+    "//browse":      "nano_apis",
+    "navigate":      "nano_apis",
+    "scrape":        "nano_apis",
+    "crawl":         "nano_apis",
+    "browser_audit": "nano_sentinel",
+    "browser_debug": "nano_debug",
+    "browser_code":  "nano_syntax",
 }
 
 
@@ -212,9 +250,16 @@ class SoulRouter:
         }
         try:
             # Short timeout to maintain Kinetic Purity velocity
-            resp = requests.post(SALTARE_URL, json=payload, headers=headers, timeout=0.2)
-            if resp.status_code == 200:
-                data = resp.json()
+            if requests is not None:
+                resp = requests.post(SALTARE_URL, json=payload, headers=headers, timeout=0.2)
+                status_code = resp.status_code
+                data = resp.json() if status_code == 200 else None
+            else:
+                with httpx.Client(timeout=0.2) as client:
+                    resp = client.post(SALTARE_URL, json=payload, headers=headers)
+                status_code = resp.status_code
+                data = resp.json() if status_code == 200 else None
+            if status_code == 200 and data is not None:
                 t = data.get("tensor", {})
                 return RouteDecision(
                     knight_id=data["knight_id"],
@@ -241,11 +286,18 @@ class SoulRouter:
         velocity: float = 0.5,
         magnitude: float = 0.5,
         privacy: float = 0.0,
+        _apee_compiled: bool = False,
     ) -> RouteDecision:
         """Route an intent string to the optimal Knight.
 
+        If called externally with raw intent, pass through AnyaGate first
+        (unless _apee_compiled=True, indicating AnyaGate already preprocessed).
         Tries Saltare (Go) first, falls back to local Python logic.
         """
+        # Titanium Law #11 — ANYA_IS_THE_GATE
+        # AnyaGate calls route() internally with _apee_compiled=True to avoid recursion.
+        # External callers receive a compiled intent; we honour it as-is.
+
         # 🚀 Try Saltare Ascension Route first
         decision = self.saltare_route(intent, velocity, magnitude, privacy)
         if decision:
@@ -261,6 +313,22 @@ class SoulRouter:
 
         # 🐢 Fallback to local Python logic
         intent_lower = intent.lower()
+
+        # --- Switchboard: Sir Link availability check (cache-only, zero probe cost) ---
+        try:
+            _cp_dir = os.path.dirname(__file__)
+            if _cp_dir not in sys.path:
+                sys.path.insert(0, _cp_dir)
+            from switchboard import route_sync as _sb_route_sync
+            # If preferred knight is dark, let Sir Link negotiate fallback
+            keyword_match = next((kn for kw, kn in self._routes.items() if kw in intent_lower), None)
+            if keyword_match:
+                terminal = _sb_route_sync(keyword_match)
+                if terminal and terminal.id != keyword_match and terminal.status == "live":
+                    logger.info(f"SWITCHBOARD: {keyword_match} dark → rerouted to {terminal.id}")
+                    intent_lower = intent_lower.replace(keyword_match, terminal.id)
+        except Exception:
+            pass   # switchboard optional — never blocks routing
 
         # --- Privacy Override (Titanium Law) ---
         # Trigger 1: Explicit privacy score >= 0.8
