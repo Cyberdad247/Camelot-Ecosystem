@@ -244,13 +244,21 @@ def _handle_research(command: str, console) -> None:
         with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"),
                       transient=True, console=console) as progress:
             progress.add_task(
-                f"Research agency [{tier}] running {len({'kinetic':3,'hybrid':4,'apex':5}[tier])} cells…",
+                f"Research agency [{tier}] — ancestor → cells → CHIMERA → sync…",
                 total=None
             )
             brief = asyncio.run(agency.run(objective))
 
+        # Ancestor context panel (if available)
+        if brief.ancestor_context and not brief.ancestor_context.startswith("[ancestor"):
+            console.print(Panel(
+                brief.ancestor_context[:600],
+                title="[bold cyan]NotebookLM Ancestor Brain[/] — prior knowledge",
+                border_style="cyan",
+            ))
+
         # Cell results table
-        table = Table(title=f"Research Agency — {tier.upper()} tier",
+        table = Table(title=f"Browser Cells — {tier.upper()} tier",
                       border_style="bright_magenta", show_lines=True)
         table.add_column("Cell", style="cyan", width=18)
         table.add_column("Knight", width=16)
@@ -267,17 +275,41 @@ def _handle_research(command: str, console) -> None:
                 str(len(cr.urls)),
                 f"{cr.elapsed_ms:.0f}",
                 f"[{ok_color}]{'✓' if cr.success else '✗'}[/]",
-                cr.result[:240] if cr.result else "[dim]—[/]",
+                cr.result[:200] if cr.result else "[dim]—[/]",
             )
-
         console.print(table)
+
+        # CHIMERA rounds
+        if brief.chimera:
+            chimera_table = Table(title="CHIMERA Rounds", border_style="bright_yellow", show_lines=True)
+            chimera_table.add_column("Round", style="yellow", width=8)
+            chimera_table.add_column("Owner", width=22)
+            chimera_table.add_column("Title", width=22)
+            chimera_table.add_column("ms", justify="right", width=7)
+            chimera_table.add_column("OK", width=4)
+            chimera_table.add_column("Output", no_wrap=False)
+            for r in brief.chimera:
+                ok_color = "green" if r.success else "red"
+                chimera_table.add_row(
+                    r.round_id[-1],
+                    r.owner,
+                    r.title,
+                    f"{r.elapsed_ms:.0f}",
+                    f"[{ok_color}]{'✓' if r.success else '✗'}[/]",
+                    r.output[:200] if r.output else "[dim]—[/]",
+                )
+            console.print(chimera_table)
+
+        # Final synthesis
         console.print(Panel(
-            brief.synthesis[:1200] if brief.synthesis else "[dim]no synthesis[/]",
-            title="[bold]Synthesis[/]",
+            brief.synthesis[:1400] if brief.synthesis else "[dim]no synthesis[/]",
+            title="[bold]Final Synthesis[/] — CHIMERA × NotebookLM × Integration Brain",
             border_style="bright_cyan",
         ))
         console.print(
             f"[dim]Sources: {len(brief.sources)} | "
+            f"NLM sources added: {brief.sources_added} | "
+            f"Ancestor synced: {'✓' if brief.ancestor_synced else '—'} | "
             f"LT stored: {'✓' if brief.memory_count > 0 else '—'} | "
             f"Total: {brief.elapsed_ms:.0f}ms[/]"
         )
