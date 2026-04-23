@@ -27,11 +27,17 @@ from typing import Any
 
 # ── Config ──────────────────────────────────────────────────────────────────
 
-LONG_TERM_BACKEND = os.environ.get("LONG_TERM_BACKEND", "stub")
-MODAL_ENDPOINT    = os.environ.get("MODAL_ENDPOINT", "").rstrip("/")
-APPWRITE_ENDPOINT = os.environ.get("APPWRITE_ENDPOINT", "").rstrip("/")
-APPWRITE_PROJECT  = os.environ.get("APPWRITE_PROJECT", "")
-APPWRITE_API_KEY  = os.environ.get("APPWRITE_API_KEY", "")
+LONG_TERM_BACKEND      = os.environ.get("LONG_TERM_BACKEND", "modal")
+# Modal per-function URLs (deployed 2026-04-22)
+_MODAL_BASE            = "https://cyberdad247--camelot-lt-memory"
+MODAL_HEALTH_URL       = os.environ.get("MODAL_HEALTH_URL",    f"{_MODAL_BASE}-health.modal.run")
+MODAL_STORE_URL        = os.environ.get("MODAL_STORE_URL",     f"{_MODAL_BASE}-store.modal.run")
+MODAL_SYNTHESIZE_URL   = os.environ.get("MODAL_SYNTHESIZE_URL",f"{_MODAL_BASE}-synthesize.modal.run")
+# Legacy single-endpoint alias (unused — per-function URLs take precedence)
+MODAL_ENDPOINT         = os.environ.get("MODAL_ENDPOINT", _MODAL_BASE)
+APPWRITE_ENDPOINT      = os.environ.get("APPWRITE_ENDPOINT", "").rstrip("/")
+APPWRITE_PROJECT       = os.environ.get("APPWRITE_PROJECT", "")
+APPWRITE_API_KEY       = os.environ.get("APPWRITE_API_KEY", "")
 
 # Keywords that signal long-term / sovereign storage intent
 _LT_KEYWORDS = frozenset({
@@ -67,7 +73,7 @@ async def _lt_synthesize(query: str) -> str:
         import httpx
         async with httpx.AsyncClient(timeout=30.0) as client:
             r = await client.post(
-                f"{MODAL_ENDPOINT}/synthesize",
+                MODAL_SYNTHESIZE_URL,
                 json={"query": query},
                 headers={"X-Appwrite-Project": APPWRITE_PROJECT,
                          "X-Appwrite-Key": APPWRITE_API_KEY},
@@ -86,7 +92,7 @@ async def _lt_health() -> tuple[bool, str, float]:
     try:
         import httpx
         async with httpx.AsyncClient(timeout=5.0) as client:
-            r = await client.get(f"{MODAL_ENDPOINT}/health")
+            r = await client.get(MODAL_HEALTH_URL)
             ok = r.status_code == 200
             lat = (time.perf_counter() - t0) * 1000
             return ok, f"Modal {'online' if ok else 'degraded'} (Appwrite)", lat
@@ -103,7 +109,7 @@ async def _lt_store(title: str, content: str) -> dict[str, Any]:
         import httpx
         async with httpx.AsyncClient(timeout=30.0) as client:
             r = await client.post(
-                f"{MODAL_ENDPOINT}/store",
+                MODAL_STORE_URL,
                 json={"title": title, "content": content},
                 headers={"X-Appwrite-Project": APPWRITE_PROJECT,
                          "X-Appwrite-Key": APPWRITE_API_KEY},

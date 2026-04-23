@@ -48,7 +48,7 @@ lt_image = (
 )
 
 # GPU T4 for embedding generation (Modal free tier available)
-lt_gpu = modal.gpu.T4()
+lt_gpu = "T4"
 
 # ── Appwrite client helper ────────────────────────────────────────────────────
 
