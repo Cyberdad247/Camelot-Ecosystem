@@ -1,0 +1,29 @@
+# Camelot-OS v60.0 Context Hygiene
+# Blocks RAG indexing of token-heavy artifacts
+
+package-lock.json
+yarn.lock
+poetry.lock
+pnpm-lock.yaml
+*.min.js
+*.min.css
+*.map
+dist/
+build/
+node_modules/
+.next/
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env/
+.git/objects/
+.git/pack/
+*.wasm
+*.exe
+*.dll
+*.so
+*.dylib
+coverage/
+.nyc_output/
+*.log

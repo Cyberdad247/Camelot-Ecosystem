@@ -1,0 +1,13 @@
+﻿{
+  "profile": "cyberdad247",
+  "anchored_apps": {
+    "excalibur-brain": "ap-L0WqJbZG2DOA8jIMSxR3R9",
+    "tasha-voice-agent": "ap-7dHtduCGqd73th6sZF97Gs",
+    "camelot-voice-pipeline": "ap-4zsPHxkkOzpBlh5NAT3822",
+    "camelot-tts-pipeline": "ap-wXkIC9zwnC6kzQYNVkgoPW",
+    "camelot-rustdesk-server": "ap-W3jH7B7N1TxoKmymA2GVUr"
+  },
+  "volumes": ["rustdesk-data", "squire-brain-vol", "sovereign-state-vault"],
+  "status": "RADIANT",
+  "last_handshake": "2026-04-20T09:21:00Z"
+}
