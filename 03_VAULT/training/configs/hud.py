@@ -203,6 +203,94 @@ def _handle_forge(command: str):
         return msg
 
 
+def _handle_research(command: str, console) -> None:
+    """//RESEARCH [kinetic|hybrid|apex] <objective> — Perplexity-killer research agency."""
+    import asyncio
+    rest = command[len("//RESEARCH"):].strip()
+    if not rest:
+        console.print(
+            "[yellow]Usage:[/] //RESEARCH [kinetic|hybrid|apex] <objective>\n"
+            "[dim]Tiers: kinetic=fast(3 cells) | hybrid=balanced(4) | apex=deep(5)[/]"
+        )
+        return
+
+    # Parse optional tier prefix
+    tier = "hybrid"
+    parts = rest.split(None, 1)
+    if parts[0].lower() in ("kinetic", "hybrid", "apex"):
+        tier = parts[0].lower()
+        objective = parts[1] if len(parts) > 1 else ""
+    else:
+        objective = rest
+
+    if not objective:
+        console.print("[yellow]No objective specified.[/]")
+        return
+
+    console.print(
+        f"[bright_magenta]//RESEARCH[/] [{tier.upper()}] "
+        f"[dim]{objective[:90]}[/]"
+    )
+
+    try:
+        sys.path.insert(0, CAMELOT_DIR)
+        from knights.browser_research_agency import BrowserResearchAgency
+        from rich.progress import Progress, SpinnerColumn, TextColumn
+        from rich.table import Table
+        from rich.panel import Panel
+
+        agency = BrowserResearchAgency(tier=tier)
+
+        with Progress(SpinnerColumn(), TextColumn("[progress.description]{task.description}"),
+                      transient=True, console=console) as progress:
+            progress.add_task(
+                f"Research agency [{tier}] running {len({'kinetic':3,'hybrid':4,'apex':5}[tier])} cells…",
+                total=None
+            )
+            brief = asyncio.run(agency.run(objective))
+
+        # Cell results table
+        table = Table(title=f"Research Agency — {tier.upper()} tier",
+                      border_style="bright_magenta", show_lines=True)
+        table.add_column("Cell", style="cyan", width=18)
+        table.add_column("Knight", width=16)
+        table.add_column("URLs", justify="right", width=5)
+        table.add_column("ms", justify="right", width=7)
+        table.add_column("OK", width=4)
+        table.add_column("Preview", no_wrap=False)
+
+        for cr in brief.cells:
+            ok_color = "green" if cr.success else "red"
+            table.add_row(
+                cr.cell,
+                cr.knight_id,
+                str(len(cr.urls)),
+                f"{cr.elapsed_ms:.0f}",
+                f"[{ok_color}]{'✓' if cr.success else '✗'}[/]",
+                cr.result[:240] if cr.result else "[dim]—[/]",
+            )
+
+        console.print(table)
+        console.print(Panel(
+            brief.synthesis[:1200] if brief.synthesis else "[dim]no synthesis[/]",
+            title="[bold]Synthesis[/]",
+            border_style="bright_cyan",
+        ))
+        console.print(
+            f"[dim]Sources: {len(brief.sources)} | "
+            f"LT stored: {'✓' if brief.memory_count > 0 else '—'} | "
+            f"Total: {brief.elapsed_ms:.0f}ms[/]"
+        )
+
+    except ImportError as e:
+        console.print(
+            f"[red]//RESEARCH:[/] browser-use not installed.\n"
+            f"Run: [cyan]pip install browser-use langchain-anthropic[/]\n{e}"
+        )
+    except Exception as e:
+        console.print(f"[red]//RESEARCH error:[/] {type(e).__name__}: {e}")
+
+
 def _handle_browse(command: str, console) -> None:
     """//BROWSE [knight_ids] <task> — deploy browser nano-knights with feedback."""
     import asyncio
@@ -1162,6 +1250,7 @@ def render_compact_status():
 
 HELP_TEXT = """[bold]Runic Commands (11):[/]
   [bold bright_magenta]//FORGE[/]               Kinetic Rust bundler (bypasses LLM)
+  [bold bright_magenta]//RESEARCH[/]            Research agency — Perplexity killer (kinetic|hybrid|apex <objective>)
   [bold bright_magenta]//BROWSE[/]              Browser nano-knights (apis|sentinel|syntax|debug: <task>)
   [bold bright_magenta]//SWARM[/]               Launch Bio-Swarm Nano-Knight cells
   [bold bright_magenta]//PLAN[/]                Task DAG planning (Sir Oracle)
@@ -1344,6 +1433,9 @@ def _repl_loop():
             continue
         elif line.startswith("//BROWSE"):
             _handle_browse(line, console)
+            continue
+        elif line.startswith("//RESEARCH"):
+            _handle_research(line, console)
             continue
         elif line.startswith("//CHAT"):
             try:

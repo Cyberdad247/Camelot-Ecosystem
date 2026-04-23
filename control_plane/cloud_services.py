@@ -376,6 +376,37 @@ class CloudServiceRouter:
                 payload=payload,
             )
 
+        # ── Browser Research Agency (Perplexity-killer, zero paid API) ──
+        try:
+            import sys
+            from pathlib import Path as _Path
+            _knights_dir = str(
+                _Path(os.environ.get("CAMELOT_OS_HOME", _Path.home() / "CAMELOT_OS"))
+                / "03_VAULT" / "training" / "configs"
+            )
+            if _knights_dir not in sys.path:
+                sys.path.insert(0, _knights_dir)
+            from knights.browser_research_agency import BrowserResearchAgency
+            objective = str(payload.get("objective") or "").strip() or "general research"
+            tier = str(payload.get("compute_tier") or "hybrid").lower()
+            agency = BrowserResearchAgency(tier=tier)
+            brief = await agency.run(objective, constraints=payload.get("constraints"))
+            return CloudServiceResult(
+                service=CloudServiceName.RESEARCH_AGENCY,
+                success=True,
+                result=brief.to_cloud_result(),
+                source="browser_nano_knights",
+            )
+        except ImportError:
+            pass  # browser-use not installed — fall through to Modal stub
+        except Exception as exc:
+            return CloudServiceResult(
+                service=CloudServiceName.RESEARCH_AGENCY,
+                success=False,
+                error=f"BrowserResearchAgency: {exc}",
+                source="browser_nano_knights",
+            )
+
         if not _has_modal_sdk():
             return _missing_remote_service_result(
                 service=CloudServiceName.RESEARCH_AGENCY,

@@ -23,6 +23,7 @@ from .sir_gideon import SirGideon
 from .browser_nano_knight import (
     BrowserNanoKnight, NanoApis, NanoSentinel, NanoSyntax, NanoDebug, BrowserSquad,
 )
+from .browser_research_agency import BrowserResearchAgency, BrowserScout
 from .researcher import *  # noqa: F401,F403
 from .creative import *  # noqa: F401,F403
 from .warden import *  # noqa: F401,F403
@@ -51,6 +52,8 @@ __all__ = [
     "NanoSyntax",
     "NanoDebug",
     "BrowserSquad",
+    "BrowserResearchAgency",
+    "BrowserScout",
 ]
 
 # Knight registry for dynamic dispatch by name

@@ -23,7 +23,7 @@ class ScoutSonar:
     def __init__(self, api_key: str = None):
         self.api_key = api_key or os.getenv("PERPLEXITY_API_KEY")
         if not self.api_key:
-            print("WARNING: PERPLEXITY_API_KEY not set. Scout Swarm running in mock mode.")
+            print("INFO: PERPLEXITY_API_KEY not set. Routing to BrowserScout (browser-use nano-knights).")
 
         # Define the UKG RepoPhial schema
         self.ukg_schema = {
@@ -53,11 +53,9 @@ class ScoutSonar:
         }
 
     def forage(self, query: str) -> List[Dict[str, Any]]:
-        """
-        Execute a foraging run using sonar-pro.
-        """
+        """Execute a foraging run — sonar-pro if key present, BrowserScout otherwise."""
         if not self.api_key:
-            return self._mock_response()
+            return self._browser_forage(query)
 
         headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
 
@@ -88,8 +86,22 @@ class ScoutSonar:
             print(f"Error communicating with Perplexity: {e}")
             return []
 
+    def _browser_forage(self, query: str) -> List[Dict[str, Any]]:
+        """Fallback: BrowserScout nano-knights — free, live web research."""
+        try:
+            import sys, os
+            from pathlib import Path
+            _home = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS"))
+            _kdir = str(_home / "03_VAULT" / "training" / "configs")
+            if _kdir not in sys.path:
+                sys.path.insert(0, _kdir)
+            from knights.browser_research_agency import BrowserScout
+            return BrowserScout().forage(query)
+        except Exception as e:
+            print(f"[ScoutSonar] BrowserScout unavailable ({e}). Returning mock.")
+            return self._mock_response()
+
     def _mock_response(self):
-        """Mock response for testing without API key"""
         return [
             {
                 "REPO": "mock-kvzip",
