@@ -75,8 +75,6 @@ async def _lt_synthesize(query: str) -> str:
             r = await client.post(
                 MODAL_SYNTHESIZE_URL,
                 json={"query": query},
-                headers={"X-Appwrite-Project": APPWRITE_PROJECT,
-                         "X-Appwrite-Key": APPWRITE_API_KEY},
             )
             r.raise_for_status()
             return r.json().get("result", "[LT: empty response]")
@@ -95,7 +93,7 @@ async def _lt_health() -> tuple[bool, str, float]:
             r = await client.get(MODAL_HEALTH_URL)
             ok = r.status_code == 200
             lat = (time.perf_counter() - t0) * 1000
-            return ok, f"Modal {'online' if ok else 'degraded'} (Appwrite)", lat
+            return ok, f"Modal {'online' if ok else 'degraded'} (Volume)", lat
     except Exception as e:
         lat = (time.perf_counter() - t0) * 1000
         return False, f"Modal unreachable: {type(e).__name__}", lat
@@ -111,8 +109,6 @@ async def _lt_store(title: str, content: str) -> dict[str, Any]:
             r = await client.post(
                 MODAL_STORE_URL,
                 json={"title": title, "content": content},
-                headers={"X-Appwrite-Project": APPWRITE_PROJECT,
-                         "X-Appwrite-Key": APPWRITE_API_KEY},
             )
             r.raise_for_status()
             return r.json()
