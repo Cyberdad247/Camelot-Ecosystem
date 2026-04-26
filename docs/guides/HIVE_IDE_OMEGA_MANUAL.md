@@ -56,6 +56,12 @@ I utilize a **Hybrid Memory Architecture** stored locally in `.hive/`.
 1.  **Burst:** Gemini CLI (1M Context) invoked.
 2.  **Cost Guard:** Alert if cost > $0.05.
 
+### D. Harness Gate (Production Readiness)
+*Purpose:* verify interchangeable harnesses (Codex/OpenClaw/etc.) before high-risk execution.
+1.  **API Gate:** `POST /hive/self-test` on Hive API (`localhost:18788`).
+2.  **CLI Gate:** `python -m control_plane.camelot_cli --json team self-test --runtime auto --target harness_codex --require-pass`.
+3.  **IDE Gate:** Agno Debate Bridge panel now includes **Hive Harness Self-Test** with runtime selector (`auto|go|rust|python`) and target selector.
+
 ---
 
 ## 5. Symbolect (Compression)

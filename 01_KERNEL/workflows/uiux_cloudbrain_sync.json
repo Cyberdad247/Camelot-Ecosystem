@@ -1,0 +1,28 @@
+{
+  "name": "uiux_cloudbrain_sync_workflow",
+  "version": 1,
+  "description": "Sync UI/UX cartridge knowledge and knight roles into cloudbrain, then verify NotebookLM and analyze the resulting state.",
+  "tasks": [
+    {
+      "name": "sync_uiux_cloudbrain",
+      "type": "SIMPLE",
+      "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe C:\\Users\\vizio\\CAMELOT_OS\\bin\\sync_uiux_cloudbrain.py",
+      "cwd": "C:\\Users\\vizio\\CAMELOT_OS",
+      "capture_output": true
+    },
+    {
+      "name": "verify_cloudbrain",
+      "type": "SIMPLE",
+      "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe C:\\Users\\vizio\\CAMELOT_OS\\bin\\verify_uiux_cloudbrain.py",
+      "cwd": "C:\\Users\\vizio\\CAMELOT_OS",
+      "capture_output": true
+    },
+    {
+      "name": "analyze_sync",
+      "type": "AI_ANALYSIS",
+      "input_ref": "sync_uiux_cloudbrain",
+      "force": true,
+      "prompt": "Analyze the UI/UX cloudbrain sync output. Identify missing knights, cartridge gaps, notebook sync issues, and any workflow or execution risks."
+    }
+  ]
+}

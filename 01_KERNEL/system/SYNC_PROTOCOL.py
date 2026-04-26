@@ -1,8 +1,7 @@
-# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
-# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import datetime
 import os
 import sys
+import subprocess
 from pathlib import Path
 import requests
 
@@ -27,8 +26,8 @@ LEDGER_PATH = REPO_ROOT / "PROVENANCE_LEDGER.md"
 MORGANA_URL = "http://localhost:8001/ping"
 UKG_PATH = REPO_ROOT / "03_VAULT" / "UKG" / "UKG_MEMORY.jsonld"
 
-ROTEL_PATH = REPO_ROOT / "02_FORGE" / "KINETIC_ARMORY" / "rotel" / "target" / "release" / "rotel.exe"
-SALTARE_PATH = REPO_ROOT / "02_FORGE" / "KINETIC_ARMORY" / "saltare" / "saltare_gateway.exe"
+ROTEL_PATH = REPO_ROOT / "kinetic_edge" / "rotel" / "target" / "release" / "rotel.exe"
+SALTARE_PATH = REPO_ROOT / "kinetic_edge" / "saltare" / "saltare_gateway.exe"
 
 def get_timestamp():
     return datetime.datetime.now().isoformat()
@@ -95,6 +94,12 @@ def main():
 
     logger.info("SYNC_PROTOCOL_COMPLETE", status="COHERENT")
     print("✅ SYNC COMPLETE. SYSTEM COHERENT.")
+
+    # Trigger Global Replication
+    global_sync = REPO_ROOT / "control_plane" / "global_ledger_sync.py"
+    if global_sync.exists():
+        print("\n🌐 TRIGGERING GLOBAL REPLICATION...")
+        subprocess.run([sys.executable, str(global_sync)], cwd=str(REPO_ROOT))
 
 if __name__ == "__main__":
     main()

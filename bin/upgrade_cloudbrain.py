@@ -7,7 +7,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Setup paths
-REPO_ROOT = Path(__file__).resolve().parent
+REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(REPO_ROOT))
 
 def load_base_memory():
@@ -17,7 +17,14 @@ def load_base_memory():
     spec.loader.exec_module(module)
     return module
 
-from cloud_orchestrator.long_term_cloudbrain import build_appwrite_memory_bridge
+def load_cloudbrain():
+    path = REPO_ROOT / "01_KERNEL" / "agora" / "cloud_orchestrator_shim" / "long_term_cloudbrain.py"
+    spec = importlib.util.spec_from_file_location("long_term_cloudbrain", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
 
 def upgrade_roster():
     print("[SYSTEM_BOOT] :: Upgrading Cloudbrain in Appwrite...")
@@ -27,7 +34,8 @@ def upgrade_roster():
 
     # Initialize bridge (loads env vars)
     try:
-        bridge = build_appwrite_memory_bridge()
+        cloudbrain = load_cloudbrain()
+        bridge = cloudbrain.build_appwrite_memory_bridge()
     except Exception as e:
         print(f"[ERROR] Failed to initialize Appwrite bridge: {e}")
         return
@@ -36,7 +44,7 @@ def upgrade_roster():
     roster = [
         {"agent_id": "anya", "content": "ANYA_Ω (The Sovereign Compiler): L7 Ethereal. APEE v6.5 (Triple-QFT). Voice AI natively using Gemini 3.1 Flash. Proteus: [0.90, 0.90, 0.95, 0.85, 0.15].", "tags": ["sovereign", "compiler", "v400.0"]},
         {"agent_id": "merlin", "content": "MERLIN_Ω (The Strategist): L3 Neural. Global Optimality Engine. Videneptus MFOE. S_Ω state calculation. Proteus: [0.95, 0.98, 0.40, 0.70, 0.10].", "tags": ["sovereign", "strategist", "v400.0"]},
-        {"agent_id": "lukas", "content": "LUKAS_Ω (The Kinetic Hand): L2 Kinetic. Sovereign of the Iron. Titanium Law T1. Rust/Go binaries (ZeroClaw). Proteus: [0.20, 1.00, 0.10, 0.30, 0.00].", "tags": ["sovereign", "kinetic", "v400.0"]},
+        {"agent_id": "lukas", "content": "LUKAS_Ω (The Kinetic Hand): L2 Kinetic. Sovereign of the Iron. Titanium Law T1. Rust/Go binaries (ZeroClaw). Node: Cybertron (100.118.224.52). Proteus: [0.20, 1.00, 0.10, 0.30, 0.00].", "tags": ["sovereign", "kinetic", "v400.0"]},
         {"agent_id": "morgana", "content": "MORGANA_Ω (The Cloud Witch): L1 Substrate. Metal & Cloud Bridge (Docker, Modal, Vercel). Operation Bifröst Anchor.", "tags": ["sovereign", "substrate", "v400.0"]},
         {"agent_id": "boris", "content": "SIR BORIS (The Anvil): L5 Agentic. ECC v1.9.0. 13-Agent Antagonistic Critique Pipeline. Squire Colony Commander. Proteus: [0.95, 1.00, 0.35, 0.45, 0.01].", "tags": ["knight", "architect", "v400.0"]},
         {"agent_id": "sentinel", "content": "SIR SENTINEL_Ω (The Shield): L6 Governance. AgentShield. Opus 4.6 Red-Team Loop. Zero-Trust Antibody. Proteus: [0.40, 1.00, 0.20, 0.20, 0.00].", "tags": ["knight", "security", "v400.0"]},

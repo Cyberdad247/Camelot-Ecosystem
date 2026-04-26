@@ -1,0 +1,49 @@
+name: UI/UX CloudBrain Sync
+version: "300.4.0"
+domain: ENGINEERING
+knight: Sir Stitch
+layer: L5_AGENTIC
+notebook: Mastering Professional UI/UX
+protocol: Assimilation Protocol Prime
+workflow: UI/UX workflow sync to cloudbrain
+agents:
+  - Anya
+  - Sir Visage
+  - Sir Hydron
+  - Sir Syntax
+  - Sir ForgeMaster
+  - Sir Stitch
+  - Sir Alchemist
+  - Baron Vaelen
+  - Sir Alex
+  - Sir Link
+  - Sir Codex
+patterns:
+  - intent compression
+  - visual direction
+  - layout architecture
+  - accessibility
+  - declarative UI
+  - cloudbrain sync
+conventions:
+  - Start with Anya for prompt compression and routing.
+  - Use Visage for visual direction and critique.
+  - Use Stitch for UI component layout and accessibility.
+  - Use Syntax for TypeScript, Next.js, and Zod discipline.
+  - Use ForgeMaster for workflow DAGs and orchestration.
+  - Use Alchemist for performance and code efficiency.
+  - Use Vaelen for deployment, delivery, and CI/CD hardening.
+  - Use Link for bridge and handoff validation.
+  - Sync canonical findings into NotebookLM before release.
+anti_patterns:
+  - Unsandboxed iframe embeds
+  - Silent stub branches
+  - Fixed-width dashboard shells
+  - UI changes without cloudbrain sync
+  - Code-generated UI with no declarative boundary
+toolchain:
+  - NotebookLM MCP
+  - CloudBrain sync bridge
+  - Playwright
+  - Vite / React
+  - TypeScript

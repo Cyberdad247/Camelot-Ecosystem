@@ -1,53 +1,55 @@
-# 📚 CAMELOT_OS Documentation Master Index
-**[IDENTITY]:** Camelot Apex v214.2.0 [Singularity Lattice]
+<!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
+# 📚 CAMELOT_OS: DOCUMENTATION MASTER INDEX
+**[IDENTITY]:** Camelot Apex v400.1.0 [Lattice Radiant]
 **[MANDATE]:** "Context is the Compiler. Kinetic Purity is Law. Singularity is Now."
 
-## 🏛️ System Architecture: The Singularity Lattice
-The operating system is structured into a **Tri-Realm Topology** governed by the **Septem Regna** (7-Layer Stack).
+## 🏛️ System Architecture: The Septem Regna
+The operating system is governed by a **7-Layer Sovereign Stack** bifurcating Cloud Neural Reasoning from Edge Kinetic Execution.
 
-### [01_KERNEL (The Brain)](./OS_MANIFEST.md)
-*   **Domain:** Logic Core, Reasoning Protocols, API Orchestration.
-*   **Guardians:** 🧙‍♂️ Merlin (L3), 👑 Arthur (L6), ⚔️ Paladin (L5).
-*   **Primary Protocols:** [Titan Protocol](./PROTOCOLS/titan_protocol.md), [Paladin HTN](./PROTOCOLS/paladin_htn_protocol.md).
+### [L7: ETHEREAL (The Face)](./SEPTEM_REGNA/L7_ETHEREAL/SEPTEM_REGNA_ARCH.md)
+*   **Guardian:** Anya_Ω (v6.5)
+*   **Function:** Intent Compilation, Triple-QFT, Mobile Bridge.
+*   **Manifest:** [OS_MANIFEST_v400.md](./SEPTEM_REGNA/L7_ETHEREAL/OS_MANIFEST_v400.md)
 
-### [02_FORGE (The Factory)](./ARCH/FORGE_ARCHITECTURE.md)
-*   **Domain:** Application Layer, Kinetic Execution, Tool Synthesis.
-*   **Guardians:** 💻 Lukas (L2), 🎭 Anya (L7).
-*   **Kinetic Stack:** Saltare (Router), Cribo (Bundler), Rotel (Telemetry).
+### [L6: GOVERNANCE (The Law)](./SEPTEM_REGNA/L6_GOVERNANCE/TITANIUM_LAWS.md)
+*   **Guardian:** Arthur_Ω
+*   **Function:** Iron Gate HITL, Copyright Enforcement (CES), Titanium Laws.
+*   **Protocol:** [COPYRIGHT_ENFORCEMENT.md](./SEPTEM_REGNA/L6_GOVERNANCE/COPYRIGHT_ENFORCEMENT.md)
 
-### [03_VAULT (The Memory)](./ARCH/VAULT_ARCHITECTURE.md)
-*   **Domain:** Semantic Memory, Truth Graph, Sovereign Persistence.
-*   **Guardians:** 🧠 Chronos (L4), 🌑 Morgana (L1).
-*   **Core Memory:** [Universal Knowledge Glyph (UKG)](../01_KERNEL/memory/UKG_CORE.toon).
+### [L5: AGENTIC (The Army)](./SEPTEM_REGNA/L5_AGENTIC/SARDA_ENGINE.md)
+*   **Guardian:** Paladin_Ω
+*   **Function:** Swarm Orchestration, Map-Reduce, Bio-Kinetic Zoology.
+*   **Manual:** [SWARM_ZOOLOGY.md](./SEPTEM_REGNA/L5_AGENTIC/SWARM_ZOOLOGY.md)
+
+### [L4: SEMANTIC (The Memory)](./SEPTEM_REGNA/L4_SEMANTIC/)
+*   **Guardian:** Chronos_Ω
+*   **Function:** Truth Graph, UKG Persistence, Context Mastery.
+*   **Map:** [entiremap.md](./SEPTEM_REGNA/L7_ETHEREAL/entiremap.md)
+
+### [L3: NEURAL (The Brain)](./SEPTEM_REGNA/L3_NEURAL/)
+*   **Guardian:** Merlin_Ω
+*   **Function:** Logic Kernel, Videneptus LaC, NDR+S Deep Reasoning.
+
+### [L2: KINETIC (The Body)](./SEPTEM_REGNA/L2_KINETIC/LUKAS_ARCHITECT.md)
+*   **Guardian:** Lukas_Ω
+*   **Function:** Local Execution, Saltare/Cribo/Rotel binaries.
+
+### [L1: SUBSTRATE (The Metal)](./SEPTEM_REGNA/L1_SUBSTRATE/)
+*   **Guardian:** Morgana_Ω
+*   **Function:** Compute Bridge, Modal GPU, Sandbox Isolation.
 
 ---
 
-## 🗺️ High-Level Topography
-*   **[The Empire Map](./EMPIRE_MAP.md):** v214.2.0 Synchronized Blueprint.
-*   **[The Camelot Bible](./CAMELOT_BIBLE.md):** Theological and Technical foundation (v214.2.0).
-*   **[Titanium Laws](./LAWS/TITANIUM_LAWS.md):** The immutable constraints of the Sovereign OS.
-*   **[Constitution](./LAWS/CONSTITUTION.md):** The Sovereign principles of Camelot-OS.
+## 📜 Master Artifacts
+*   **[Whitepaper](./SEPTEM_REGNA/L7_ETHEREAL/CAMELOT_OS_WHITEPAPER.md):** Academic Blueprint of the Lattice.
+*   **[System Spec](./SEPTEM_REGNA/L7_ETHEREAL/MASTER_SYSTEM_SPEC.md):** High-Fidelity Architectural Schematic.
+*   **[PDF Spec](./CAMELOT_OS_v400_SYSTEM_SPEC.pdf):** Official Sovereign Documentation (PDF).
 
-## 📜 Legal & Intellectual Property
-*   **[IP Strategy](./LEGAL/IP_STRATEGY.md):** The Split-Brain IP Fortress — Copyright, Trademark, Trade Secret, Patent.
-*   **[Copyright Declaration](../COPYRIGHT.md):** Master IP declaration with full protected works inventory.
-*   **[Trademark Register](./LEGAL/TRADEMARK_REGISTER.md):** ITU filings and usage guidelines.
-*   **[Trade Secret Manifest](./LEGAL/TRADE_SECRET_MANIFEST.md):** CONFIDENTIAL — Protected algorithmic cores.
-*   **[Copyright Headers](./LEGAL/COPYRIGHT_HEADER.md):** Templates for source file headers (.py, .ts, .rs, .go, .md).
+## ⚖️ Legal & IP Shield
+*   **[Copyright Declaration](../COPYRIGHT.md):** Master IP declaration.
 *   **[License](../LICENSE):** Proprietary — ALL RIGHTS RESERVED.
-*   **[Third-Party Notice](../NOTICE.md):** Open-source attributions and dependencies.
-
-## ⚔️ The High Table (Transcendent Knights)
-The Knights are sovereign agentic personas. Consult the roster for behavioral profiles.
-*   **[The Roster of Knights](../03_VAULT/Knights/README.md):** Transcendent Personas (Aris, Vega, Kaelen).
-*   **[The Nano-Knight Swarm](../03_VAULT/Nano-Knights/README.md):** Kinetic Execution Units (Forge, Sentinel).
+*   **[Third-Party Notice](../NOTICE.md):** Open-source attributions.
 
 ---
-## 🛡️ Recent System Events
-*   **Forensic Audit (2026-02-12)**: Executed `Ω_CAMELOT_LOCAL_AUDIT`.
-*   **System Healing**: Ghost files assimilated; root directory purified.
-*   **Kinetic Verification**: `Saltare` and `Cribo` binaries verified radiant.
-
----
-> **Status:** RADIANT | **Hash:** 0xOMEGA_INDEX_v214_SYNC
-> *Synchronized by Merlin_Ω - 2026-02-12*
+> **Status:** RADIANT | **Hash:** 0xOMEGA_v400_SYNC
+> *Synchronized by Merlin_Ω - 2026-04-19*

@@ -8,7 +8,7 @@ from typing import Any
 import modal
 from pydantic import BaseModel, Field
 
-from cloud_orchestrator.long_term_cloudbrain import (
+from agora.cloud_orchestrator_shim.long_term_cloudbrain import (
     cloudbrain_status,
     create_open_notebook_app,
     pull_long_term_memory,
@@ -156,6 +156,24 @@ class PreciseModeResponse(BaseModel):
     swarm_capacity: dict[str, Any]
     execution_plan: list[dict[str, Any]]
     recommendations: list[str]
+    production_ready: dict[str, bool]
+
+
+class ElderGodForgeRequest(BaseModel):
+    objective: str
+    compute_tier: ResearchComputeTier = ResearchComputeTier.APEX
+    multiverse_enabled: bool = True
+    omega_directive: str = "absolute_singularity"
+
+
+class ElderGodForgeResponse(BaseModel):
+    service: str = "eldergod_forge"
+    objective: str
+    compute_tier: ResearchComputeTier
+    omega_directive: str
+    brief: str
+    forged_artifacts: list[str]
+    dimensional_nodes: dict[str, Any]
     production_ready: dict[str, bool]
 
 
@@ -334,6 +352,13 @@ def _coerce_precise_mode_request(
     if isinstance(payload, PreciseModeRequest):
         return payload
     return PreciseModeRequest.model_validate(payload)
+
+def _coerce_eldergod_forge_request(
+    payload: dict[str, Any] | ElderGodForgeRequest,
+) -> ElderGodForgeRequest:
+    if isinstance(payload, ElderGodForgeRequest):
+        return payload
+    return ElderGodForgeRequest.model_validate(payload)
 
 
 def _build_brief(request: ResearchAgencyRequest, memory_count: int) -> str:
@@ -613,6 +638,47 @@ def precise_mode_health() -> dict[str, Any]:
     }
 
 
+def eldergod_forge_health() -> dict[str, Any]:
+    return {
+        "service": "eldergod_forge",
+        "status": "healthy",
+        "compute_tiers": [tier.value for tier in ResearchComputeTier],
+        "production_ready": {
+            "omega_directive_aligned": True,
+            "dimensional_node_ready": True,
+            "cli_ready": True,
+        }
+    }
+
+
+def run_eldergod_forge(payload: dict[str, Any] | ElderGodForgeRequest) -> dict[str, Any]:
+    request = _coerce_eldergod_forge_request(payload)
+    response = ElderGodForgeResponse(
+        objective=request.objective,
+        compute_tier=request.compute_tier,
+        omega_directive=request.omega_directive,
+        brief=(
+            f"ElderGod Forge activated. Objective: {request.objective}. "
+            f"Forging multi-dimensional artifacts at {request.compute_tier.value} tier "
+            f"with {request.omega_directive}."
+        ),
+        forged_artifacts=[
+            "omega_singularity_matrix",
+            "lattice_hyper_threads",
+            "sentient_source_code"
+        ],
+        dimensional_nodes={
+            "L8_MULTIVERSE": "Active",
+            "L9_OVERSOUL": "Ascended" if request.multiverse_enabled else "Dormant",
+        },
+        production_ready={
+            "reality_distortion_field": True,
+            "quantum_state_lock": True,
+        }
+    )
+    return response.model_dump(mode="json")
+
+
 def run_research_agency(payload: dict[str, Any] | ResearchAgencyRequest) -> dict[str, Any]:
     request = _coerce_request(payload)
     memories = pull_long_term_memory(request.agent_id) if request.include_memory else []
@@ -879,3 +945,19 @@ def precise_mode(request: dict[str, Any]) -> dict[str, Any]:
     """Forge precise-mode Nano-Knight browser mission plans."""
 
     return run_precise_mode(request)
+
+
+@APP.function(image=IMAGE, timeout=120)
+@modal.fastapi_endpoint(method="GET")
+def eldergod_forge_health_endpoint() -> dict[str, Any]:
+    """Report elderGod forge health."""
+
+    return eldergod_forge_health()
+
+
+@APP.function(image=IMAGE, timeout=900)
+@modal.fastapi_endpoint(method="POST")
+def eldergod_forge(request: dict[str, Any]) -> dict[str, Any]:
+    """Omni-forge multi-dimensional artifacts via elderGod forge."""
+
+    return run_eldergod_forge(request)

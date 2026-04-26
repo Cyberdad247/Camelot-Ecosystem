@@ -64,6 +64,7 @@ Location: `03_VAULT/PROMPTS/`
 |---|---|
 | `~/.codex/instructions.md` | Root Codex instructions |
 | `~/.codex/skills/sir_boris.md` | Boris persona for Codex |
+| `~/.codex/skills/engineering-uiux-pro-max/SKILL.md` | Codex-led engineering UI/UX skill with Anya, Alex, and Link coordination |
 
 ---
 
@@ -86,6 +87,20 @@ Location: `03_VAULT/Knights/`
 ### System Personas Crystal
 - Location: `03_VAULT/Knights/SYSTEM_PERSONAS_CRYSTAL.md`
 - Contains: Compressed persona definitions for all knights
+
+### Engineering UI/UX Routing
+- `Sir Codex` handles execution through the `harness_codex` path.
+- `Anya` compresses the UI/UX intent before implementation.
+- `Sir Alex` audits structure, regressions, and interface logic.
+- `Sir Link` validates the bridge, route, and interphase handoff.
+- `Sir Visage` handles visual analysis, mockups, and art direction.
+- `Sir Hydron` handles code generation and UI assembly.
+- `Sir Syntax`, `Sir ForgeMaster`, `Sir Stitch`, `Sir Alchemist`, and `Baron Vaelen` cover component composition, scaffolding, refinement, and delivery.
+
+### NotebookLM Knowledge Base
+- Notebook: `Mastering Professional UI/UX`
+- Purpose: shared source knowledge for the UI/UX engineering skill and knight routing layer
+- Source themes: AionUi multi-agent orchestration, A2UI declarative UI safety, CopilotKit shared state and HITL flows
 
 ---
 
