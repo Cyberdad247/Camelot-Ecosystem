@@ -91,6 +91,116 @@
       ]
     },
     {
+      "id": "syntax",
+      "name": "Sir Syntax",
+      "role": "The Code Architect",
+      "symbol": "ðŸ”—",
+      "description": "TypeScript and Next.js quality lead. Enforces Zod schemas, App Router structure, and UI layout discipline.",
+      "permissions": [
+        "typescript.*",
+        "nextjs.*",
+        "zod.*",
+        "layout.*"
+      ],
+      "procedures": [
+        "type_safe_ui",
+        "schema_guard",
+        "component_compose"
+      ],
+      "activation": "on_demand",
+      "engine": "claude-code",
+      "weight": 0.89,
+      "weight_type": "W_architecture"
+    },
+    {
+      "id": "forgemaster",
+      "name": "Sir ForgeMaster",
+      "role": "The Agentic Smith",
+      "symbol": "âš’ï¸",
+      "description": "Declarative orchestration lead. Designs workflow DAGs and multi-step task composition for agent pipelines.",
+      "permissions": [
+        "workflow.*",
+        "pipeline.*",
+        "orchestrate.*",
+        "a2a.*"
+      ],
+      "procedures": [
+        "pipeline_compile",
+        "workflow_dag",
+        "task_compose"
+      ],
+      "activation": "on_demand",
+      "engine": "claude-code",
+      "weight": 0.86,
+      "weight_type": "W_orchestration"
+    },
+    {
+      "id": "stitch",
+      "name": "Sir Stitch",
+      "role": "The Interface Architect",
+      "symbol": "ðŸ§µ",
+      "description": "UI/UX component and layout systems specialist. Focuses on accessibility, seams, and responsive composition.",
+      "permissions": [
+        "ui.*",
+        "accessibility.*",
+        "layout.*",
+        "design.system"
+      ],
+      "procedures": [
+        "generate_component",
+        "generate_page",
+        "a11y_audit"
+      ],
+      "activation": "on_demand",
+      "engine": "claude-code",
+      "weight": 0.87,
+      "weight_type": "W_uiux"
+    },
+    {
+      "id": "alchemist",
+      "name": "Sir Alchemist",
+      "role": "The Optimization Smith",
+      "symbol": "âœ¨",
+      "description": "Performance and efficiency specialist. Profiles code, trims bundles, and transmutates hot paths.",
+      "permissions": [
+        "perf.*",
+        "optimize.*",
+        "analyze.*",
+        "bundle.*"
+      ],
+      "procedures": [
+        "profile_code",
+        "optimize_bundle",
+        "rewrite_hot_path"
+      ],
+      "activation": "on_demand",
+      "engine": "claude-code",
+      "weight": 0.84,
+      "weight_type": "W_efficiency"
+    },
+    {
+      "id": "vaelen",
+      "name": "Baron Vaelen",
+      "role": "The Iron Industrialist",
+      "symbol": "ðŸª˜",
+      "description": "Infrastructure hardening and delivery velocity specialist. Builds deployment and CI/CD structure.",
+      "permissions": [
+        "infra.*",
+        "cicd.*",
+        "deploy.*",
+        "container.*"
+      ],
+      "procedures": [
+        "build_container",
+        "harden_pipeline",
+        "deploy_release"
+      ],
+      "activation": "on_demand",
+      "engine": "claude-code",
+      "weight": 0.85,
+      "weight_type": "W_delivery"
+    },
+    {
       "id": "sparkle",
       "name": "Dame Sparkle",
       "role": "The Voice",
@@ -379,6 +489,55 @@
       }
     },
     {
+      "id": "alex",
+      "name": "Sir Alex",
+      "role": "The Grand Orchestrator / Cognitive Governor",
+      "symbol": "🧭",
+      "layer": "L5_AGENTIC",
+      "description": "Cognitive cartridge lead. Governs analysis-first routing, decision framing, architectural tradeoffs, and long-horizon orchestration before execution.",
+      "permissions": [
+        "cognitive.*",
+        "analysis.*",
+        "architecture.*",
+        "decision.*",
+        "bridge.govern"
+      ],
+      "procedures": [
+        "cognitive_cartography",
+        "decision_framing",
+        "bridge_governance",
+        "tradeoff_synthesis"
+      ],
+      "activation": "on_demand",
+      "engine": "claude-opus-4-6",
+      "weight": 0.88,
+      "weight_type": "W_cognitive"
+    },
+    {
+      "id": "link",
+      "name": "Sir Link",
+      "role": "The Bridge Warden",
+      "symbol": "🌉",
+      "layer": "L5_AGENTIC",
+      "description": "Handoff specialist between Brain UI, cloud brain, and local terminal execution. Keeps chat, dispatch, and execution surfaces aligned.",
+      "permissions": [
+        "bridge.*",
+        "handoff.*",
+        "terminal.route",
+        "ui.route",
+        "sync.coordinate"
+      ],
+      "procedures": [
+        "brain_to_terminal_handoff",
+        "dispatch_alignment",
+        "execution_surface_selection"
+      ],
+      "activation": "on_demand",
+      "engine": "gemini-cli",
+      "weight": 0.78,
+      "weight_type": "W_bridge"
+    },
+    {
       "id": "helio",
       "name": "Sir Helio",
       "role": "The Context Mapper",
@@ -457,6 +616,19 @@
       "kaito",
       "boris"
     ],
+    "uiux": [
+      "anya",
+      "visage",
+      "hydron",
+      "syntax",
+      "forgemaster",
+      "stitch",
+      "alchemist",
+      "vaelen",
+      "alex",
+      "link",
+      "codex"
+    ],
     "creative": [
       "visage",
       "sparkle",
@@ -478,6 +650,16 @@
     "reasoning": [
       "merlin",
       "anya",
+      "alex",
+      "link",
+      "occam",
+      "veritas"
+    ],
+    "cognitive": [
+      "merlin",
+      "anya",
+      "alex",
+      "link",
       "occam",
       "veritas"
     ],

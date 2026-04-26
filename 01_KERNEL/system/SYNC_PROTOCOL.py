@@ -3,11 +3,15 @@
 import datetime
 import os
 import sys
-
+from pathlib import Path
 import requests
 
+# Resolve Repo Root
+REPO_ROOT = Path(__file__).resolve().parents[2]
+os.environ["CAMELOT_OS_HOME"] = str(REPO_ROOT)
+
 # Add KERNEL to path for telemetry import
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 try:
     from senses.telemetry_client import RotelClient
     logger = RotelClient("sync_protocol")
@@ -19,14 +23,15 @@ except ImportError:
 # SYSTEM SYNC PROTOCOL v1.0
 # Synchronizes the Kinetic State with the Provenance Ledger and UKG.
 
-LEDGER_PATH = r"c:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md"
+LEDGER_PATH = REPO_ROOT / "PROVENANCE_LEDGER.md"
 MORGANA_URL = "http://localhost:8001/ping"
-UKG_PATH = r"c:\Users\vizio\CAMELOT_OS\03_VAULT\UKG\UKG_MEMORY.jsonld"
+UKG_PATH = REPO_ROOT / "03_VAULT" / "UKG" / "UKG_MEMORY.jsonld"
 
+ROTEL_PATH = REPO_ROOT / "02_FORGE" / "KINETIC_ARMORY" / "rotel" / "target" / "release" / "rotel.exe"
+SALTARE_PATH = REPO_ROOT / "02_FORGE" / "KINETIC_ARMORY" / "saltare" / "saltare_gateway.exe"
 
 def get_timestamp():
     return datetime.datetime.now().isoformat()
-
 
 def check_morgana_health():
     try:
@@ -36,7 +41,6 @@ def check_morgana_health():
         return "UNSTABLE", f"Status: {response.status_code}"
     except Exception as e:
         return "OFFLINE", str(e)
-
 
 def update_ledger(component, action, status):
     entry = f"| {get_timestamp()} | {component} | {action} | {status} |"
@@ -49,40 +53,17 @@ def update_ledger(component, action, status):
         print(f"❌ Failed to write to ledger: {e}")
         return False
 
-
 def sync_ukg():
-    # In a real scenario, this resolves graph conflicts.
-    # Here, we verify file integrity.
-    if os.path.exists(UKG_PATH):
-        auth_size = os.path.getsize(UKG_PATH)
+    if UKG_PATH.exists():
+        auth_size = UKG_PATH.stat().st_size
         return "SYNCED", f"Size: {auth_size} bytes"
     else:
         return "MISSING", "File not found"
 
-
-def main():
-    print("🔄 INITIATING OMEGA SYNC PROTOCOL...")
-
-    # 1. Heartbeat Check
-    status, details = check_morgana_health()
-    update_ledger("MORGANA_NODE", f"HEARTBEAT_CHECK [{details}]", status)
-
-    # 2. Sync UKG
-    ukg_status, ukg_details = sync_ukg()
-    update_ledger("UKG_MEMORY", f"GRAPH_SYNC [{ukg_details}]", ukg_status)
-
-    # 3. Defense Grid Check (Kinetic Audit)
-    # We assume active since we just installed tools
-
-
-ROTEL_PATH = r"c:\Users\vizio\CAMELOT_OS\02_FORGE\KINETIC_ARMORY\rotel\target\release\rotel.exe"
-SALTARE_PATH = r"c:\Users\vizio\CAMELOT_OS\02_FORGE\KINETIC_ARMORY\saltare\saltare_gateway.exe"
-
-
 def check_kinetic_armory():
     """Verifies that Phase 8 Kinetic Binaries are compiled and present."""
-    rotel = os.path.exists(ROTEL_PATH)
-    saltare = os.path.exists(SALTARE_PATH)
+    rotel = ROTEL_PATH.exists()
+    saltare = SALTARE_PATH.exists()
 
     if rotel and saltare:
         return "ARMED", "Rotel: OK | Saltare: OK"
@@ -92,7 +73,6 @@ def check_kinetic_armory():
         return "PARTIAL", "Rotel: MISSING | Saltare: OK"
     else:
         return "EMPTY", "No Kinetic Binaries found"
-
 
 def main():
     logger.info("INITIATING_OMEGA_SYNC_PROTOCOL")
@@ -106,7 +86,7 @@ def main():
     ukg_status, ukg_details = sync_ukg()
     update_ledger("UKG_MEMORY", f"GRAPH_SYNC [{ukg_details}]", ukg_status)
 
-    # 3. Kinetic Armory Check (Phase 8)
+    # 3. Kinetic Armory Check
     armory_status, armory_details = check_kinetic_armory()
     update_ledger("KINETIC_ARMORY", f"BINARY_AUDIT [{armory_details}]", armory_status)
 
@@ -115,7 +95,6 @@ def main():
 
     logger.info("SYNC_PROTOCOL_COMPLETE", status="COHERENT")
     print("✅ SYNC COMPLETE. SYSTEM COHERENT.")
-
 
 if __name__ == "__main__":
     main()

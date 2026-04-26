@@ -3,9 +3,13 @@
 import os
 import sys
 import time
+from pathlib import Path
+
+# Resolve Repo Root
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 # Add KERNEL to path for telemetry import
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 try:
     from senses.telemetry_client import RotelClient
     logger = RotelClient("genesis_boot")
@@ -16,7 +20,6 @@ except ImportError:
 
 # GENESIS BOOT STRAP
 # Spins up the Septem Regna Stack in a single coordinated sequence.
-
 
 def print_banner():
     banner = r"""
@@ -30,90 +33,83 @@ def print_banner():
     """
     print(f"\033[1;36m{banner}\033[0m")
 
-
 def boot_morgana():
     print("🌑 LUKAS (L1/L2): Igniting Morgana Server (Port 8001)...")
-    # Launch uvicorn server in a separate thread/process
-    # Using 'start' on windows opens a new window, which is good for monitoring
-    os.system("start cmd /k title MORGANA_SERVER && python c:/Users/vizio/CAMELOT_OS/01_KERNEL/morgana_server.py")
-    time.sleep(2)  # Wait for spin up
-
+    server_py = REPO_ROOT / "01_KERNEL" / "morgana_server.py"
+    if server_py.exists():
+        os.system(f"start cmd /k title MORGANA_SERVER && python {server_py}")
+    else:
+        print(f"   [SKIP] morgana_server.py not found at {server_py}")
+    time.sleep(2)
 
 def boot_pulse():
     print("⏳ CHRONOS (L4): Starting The Pendulum Daemon...")
-    # Launch Go Pulse
-    os.system("start cmd /k title PULSE_DAEMON && go run c:/Users/vizio/CAMELOT_OS/01_KERNEL/cmd/pulse/heartbeat.go")
+    heartbeat_go = REPO_ROOT / "01_KERNEL" / "cmd" / "pulse" / "heartbeat.go"
+    if heartbeat_go.exists():
+        os.system(f"start cmd /k title PULSE_DAEMON && go run {heartbeat_go}")
+    else:
+        print(f"   [SKIP] heartbeat.go not found at {heartbeat_go}")
     time.sleep(1)
-
 
 def boot_titanlink():
     print("🛡️ MOLTBOT (L6): Igniting TitanLink Gateway (Port 18788)...")
-    # Launch FastAPI TitanLink Server
-    os.system(
-        "start cmd /k title TITANLINK_GATEWAY && python c:/Users/vizio/CAMELOT_OS/01_KERNEL/connectivity/titanlink_server.py"
-    )
+    server_py = REPO_ROOT / "01_KERNEL" / "connectivity" / "titanlink_server.py"
+    if server_py.exists():
+        os.system(f"start cmd /k title TITANLINK_GATEWAY && python {server_py}")
+    else:
+        print(f"   [SKIP] titanlink_server.py not found at {server_py}")
     time.sleep(2)
-
 
 def boot_rustdesk():
     print("⚔️ LUKAS (L2): Igniting RustDesk Spire (ID & Relay)...")
-    # Launch Native hbbs and hbbr
-    rd_dir = r"c:\Users\vizio\rustdesk-server\target\release"
-    # hbbs needs the relay server address for some features, using local tailscale IP
-    os.system(f"start cmd /k title RUSTDESK_HBBS && {rd_dir}\\hbbs.exe -r 100.118.224.52")
+    rd_dir = REPO_ROOT.parent / "rustdesk-server" / "target" / "release"
+    if rd_dir.exists():
+        os.system(f"start cmd /k title RUSTDESK_HBBS && {rd_dir}\\hbbs.exe -r 100.118.224.52")
+        time.sleep(1)
+        os.system(f"start cmd /k title RUSTDESK_HBBR && {rd_dir}\\hbbr.exe")
+    else:
+        print(f"   [SKIP] rustdesk-server not found at {rd_dir}")
     time.sleep(1)
-    os.system(f"start cmd /k title RUSTDESK_HBBR && {rd_dir}\\hbbr.exe")
-    time.sleep(1)
-
 
 def boot_interface():
     print("🎭 ANYA (L7): Connecting Neural Interface...")
-    # Launch Camelot HUD (TUI)
-    os.system("start cmd /k title CAMELOT_HUD && python c:/Users/vizio/CAMELOT_OS/02_FORGE/Camelot_HUD.py")
-    # Launch Anya Dashboard (React)
-    os.system(
-        "start cmd /k title ANYA_DASHBOARD && cd c:/Users/vizio/CAMELOT_OS/02_FORGE/Anya_Dashboard && npm run dev"
-    )
+    hud_py = REPO_ROOT / "02_FORGE" / "Camelot_HUD.py"
+    dashboard_dir = REPO_ROOT / "02_FORGE" / "Anya_Dashboard"
+    
+    if hud_py.exists():
+        os.system(f"start cmd /k title CAMELOT_HUD && python {hud_py}")
+    if dashboard_dir.exists():
+        os.system(f"start cmd /k title ANYA_DASHBOARD && cd {dashboard_dir} && npm run dev")
+    
     print("   >> Camelot HUD: ACTIVE (Local Terminal)")
     print("   >> Anya Dashboard: http://localhost:5173 (Starting...)")
 
-
 def execute_self_correction_test():
     print("\n🫀 SYSTEM: Triggering 'First Breath' Self-Correction Loop...")
-
-    # 1. Create a "Broken" File (Simulated Linter Error)
-    broken_file = r"c:\Users\vizio\CAMELOT_OS\02_FORGE\src\broken_main.ts"
-    with open(broken_file, "w") as f:
-        f.write("const x = 1; // Unused variable")
-    print(f"   >> Created Malformed File: {broken_file}")
-
-    time.sleep(1)
-
-    # 2. Trigger Biome Fix via Morgana
-    print("   >> Morgana: Executing Biome Fix...")
-    # In reality, we'd make a curl request. For this script, we assume the server is up and listening.
-
-    # 3. Simulate Receipt
-    print("   >> Correction: SUCCESS. Biome formatted the file.")
-
-    # Cleanup
-    if os.path.exists(broken_file):
-        os.remove(broken_file)
-        print("   >> Cleanup Complete.")
-
+    broken_file = REPO_ROOT / "02_FORGE" / "src" / "broken_main.ts"
+    try:
+        broken_file.parent.mkdir(parents=True, exist_ok=True)
+        with open(broken_file, "w") as f:
+            f.write("const x = 1; // Unused variable")
+        print(f"   >> Created Malformed File: {broken_file}")
+        time.sleep(1)
+        print("   >> Correction: SUCCESS. (Simulated)")
+        if broken_file.exists():
+            os.remove(broken_file)
+    except Exception as e:
+        print(f"   >> Self-Correction Test Failed: {e}")
 
 def auto_ledger_start():
     print("\n📝 GOVERNANCE: Recording Session Start in Provenance Ledger...")
-    ledger_path = r"c:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md"
+    ledger_path = REPO_ROOT / "PROVENANCE_LEDGER.md"
     timestamp = time.strftime("%Y-%m-%dT%H:%M:%S")
-    entry = f"| {timestamp} | GENESIS_BOOT | SESSION_START: Septem Regna Online (v106.3) | SUCCESS |"
+    entry = f"| {timestamp} | GENESIS_BOOT | SESSION_START: Septem Regna Online | SUCCESS |"
     try:
         with open(ledger_path, "a", encoding="utf-8") as f:
             f.write("\n" + entry)
         print("   >> Ledger Updated.")
     except Exception as e:
         print(f"   >> Failed to Update Ledger: {e}")
-
 
 if __name__ == "__main__":
     logger.info("INITIATING_GENESIS_BOOT_SEQUENCE")
