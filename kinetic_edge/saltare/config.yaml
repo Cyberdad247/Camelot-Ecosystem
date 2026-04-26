@@ -1,0 +1,29 @@
+server:
+  host: "localhost"
+  port: 8085
+  log_level: "info"
+
+mcp:
+  registry_path: "./registry.json"
+
+gateways:
+  - name: "rustdesk"
+    type: "local"
+    command: "python"
+    args: [
+        "c:\\Users\\vizio\\CAMELOT_OS\\01_KERNEL\\connectivity\\rustdesk_bridge.py",
+      ] # Direct script execution
+
+  - name: "trivy"
+    type: "local"
+    command: "trivy"
+    args: ["fs", "--scanners", "vuln,secret", "{{.target}}", "--format", "json"]
+
+  - name: "biome"
+    type: "local"
+    command: "biome"
+    args: ["check", "--apply", "{{.target}}"]
+
+telemetry:
+  endpoint: "http://localhost:4317" # Points to Rotel
+  enabled: true

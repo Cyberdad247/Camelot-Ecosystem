@@ -1,0 +1,34 @@
+server:
+  host: 0.0.0.0
+  port: 8080
+  mcp:
+    http:
+      enabled: true
+      port: 8081 # The port Antigravity/Lukas will connect to
+
+llm:
+  primary:
+    provider: openrouter
+    api_key: ${OPENROUTER_API_KEY}
+    model: google/gemini-2.5-pro
+  fallback:
+    provider: cerebras
+    api_key: ${CEREBRAS_API_KEY}
+    model: llama-3.3-70b
+  fallback2:
+    provider: openrouter
+    api_key: ${OPENROUTER_API_KEY}
+    model: google/gemini-2.0-flash-exp:free
+
+storage:
+  type: badger
+  badger:
+    path: ./data/badger
+
+# Hybrid Search (Keywords + Semantic)
+search:
+  provider: meilisearch
+  meilisearch:
+    enabled: true
+    host: http://localhost:7700
+    api_key: your-master-key
