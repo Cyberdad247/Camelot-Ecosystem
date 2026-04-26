@@ -21,6 +21,10 @@ from .hyper_evolve import append_learning, promote_mutation
 from .provenance import ProvenanceManager, VerificationRun
 from .ledger_sync import append_provenance_entry, ledger_status, sync_to_kernel
 from .main import ControlPlane, TaskPayload
+from . import boot_sequence
+from bin import bifrost
+
+CAMELOT_HOME = boot_sequence._detect_home()
 
 
 just_fix_windows_console()
@@ -51,8 +55,12 @@ HELP_LINES = [
     "/northstar <objective>",
     "/blueprint <objective>",
     "/precise <objective>",
+    "/chat [intent] [--llm <model>] [--provider <name>]",
+    "/llm <model>          (pin model)",
+    "/provider <name>      (pin provider)",
     "/ledger-status",
     "/sarda <intent>",
+    "team self-test",
     "cloudbrain config show",
     "cloudbrain config set <ENV_VAR> <url>",
     "cloudbrain config clear <ENV_VAR>",
@@ -241,8 +249,16 @@ def _pretty_render(payload: Any) -> str:
             lines.append(f"service: {inner['service']}")
         if "source" in inner:
             lines.append(f"source: {inner['source']}")
+        if "execution_target" in inner:
+            lines.append(f"execution_target: {inner['execution_target']}")
         if "reason" in inner:
             lines.append(f"reason: {inner['reason']}")
+        route = inner.get("route")
+        if isinstance(route, dict):
+            lines.append(f"route_knight: {route.get('knight_id', '-')}")
+            lines.append(f"route_engine: {route.get('engine', '-')}")
+            if route.get("reason"):
+                lines.append(f"route_reason: {route['reason']}")
         result = inner.get("result")
         if isinstance(result, dict):
             if "message" in result and "latency_ms" in result:
@@ -527,6 +543,20 @@ async def _run_sarda(
     return json.loads(result.to_json())
 
 
+def _run_team_self_test(
+    *,
+    worker_id: str,
+    prompt: str,
+    timeout: int,
+) -> dict[str, Any]:
+    cp = ControlPlane()
+    return cp.team_self_test(
+        worker_id=worker_id,
+        prompt=prompt,
+        timeout=timeout,
+    )
+
+
 def _is_bare_swarm_directive(text: str) -> bool:
     return text.strip().upper() == BARE_SWARM_DIRECTIVE
 
@@ -680,13 +710,16 @@ async def _invoke_mode_directive(
     if cartridge == "COGNITIVE":
         return await _run_with_fallback(
             "northstar war room objective",
+            preferred_agent_id="sir_alex",
             preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=architecture"],
             preferred_extra_parameters={
                 "aspect": "architecture",
                 "compute_tier": "apex",
                 "cartridge": "COGNITIVE",
+                "preferred_knight": "sir_alex",
                 "browser_isolation": "team",
                 "multilogin_enabled": True,
+                "execution_target": "analysis_only",
             },
         )
 
@@ -706,13 +739,16 @@ async def _invoke_mode_directive(
     if cartridge == "CRITICAL_THINKING":
         return await _run_with_fallback(
             "northstar war room objective",
+            preferred_agent_id="sir_alex",
             preferred_constraints=["privacy=0.0", "compute_tier=apex", "aspect=architecture"],
             preferred_extra_parameters={
                 "aspect": "architecture",
                 "compute_tier": "apex",
                 "cartridge": "CRITICAL_THINKING",
+                "preferred_knight": "sir_alex",
                 "browser_isolation": "team",
                 "multilogin_enabled": True,
+                "execution_target": "analysis_only",
             },
         )
 
@@ -796,6 +832,19 @@ def _stream_task_progress(
         _progress("capacity", "computing safe ephemeral swarm capacity", tone="info")
         return
 
+    if any(word in lower for word in {"eldergod", "elder god forge", "eldergod forge"}):
+        _progress("route", "elderGod forge path", tone="info")
+        time.sleep(PROGRESS_DELAY)
+        _progress("scope", f"objective: {objective or intent}", tone="info")
+        time.sleep(PROGRESS_DELAY)
+        if constraints:
+            _progress("guard", f"constraints: {', '.join(constraints)}", tone="warn")
+        tier = next((c.split("=", 1)[1] for c in (constraints or []) if c.startswith("compute_tier=")), None)
+        if tier:
+            _progress("tier", f"default tier: {tier}", tone="accent")
+        _progress("forge", "igniting the elderGod forge", tone="info")
+        return
+
     _progress("route", "control-plane task path", tone="info")
     time.sleep(PROGRESS_DELAY)
     _progress("execute", "delegating to control plane", tone="info")
@@ -832,7 +881,9 @@ def _stream_sarda_progress(
         _progress("plan", "previewing routes without execution", tone="info")
 
 
-def _interactive_shell(json_mode: bool = False) -> int:
+def _interactive_shell(
+    json_mode: bool = False, provider: str | None = None, llm: str | None = None
+) -> int:
     banner = [
         "Camelot-OS",
         "Prompt-first interface for routing, cloudbrain, and SARDA workflows.",
@@ -842,6 +893,11 @@ def _interactive_shell(json_mode: bool = False) -> int:
         _stream_print(banner[0], tone="title")
         _stream_print(banner[1], tone="dim")
         _stream_print(banner[2], tone="dim")
+        if provider or llm:
+            _stream_print(f"Pinned: provider={provider or 'auto'} llm={llm or 'default'}", tone="info")
+
+    current_provider = provider
+    current_llm = llm
 
     while True:
         try:
@@ -863,6 +919,45 @@ def _interactive_shell(json_mode: bool = False) -> int:
             continue
 
         try:
+            if raw.startswith("/llm "):
+                current_llm = raw[len("/llm ") :].strip()
+                _stream_print(f"Pinned LLM: {current_llm}", tone="ok")
+                continue
+
+            if raw.startswith("/provider "):
+                current_provider = raw[len("/provider ") :].strip()
+                if current_provider.lower() in ("auto", "none", ""):
+                    current_provider = None
+                _stream_print(f"Pinned Provider: {current_provider or 'auto'}", tone="ok")
+                continue
+
+            if raw == "/chat" or raw.startswith("/chat "):
+                _stream_print("Shifting to Sovereign Chat Interface...", tone="accent")
+                chat_path = CAMELOT_HOME / "03_VAULT" / "training" / "configs" / "chat.py"
+                if not chat_path.exists():
+                    _stream_print(f"error: chat.py not found at {chat_path}", tone="err")
+                    continue
+                
+                # Check for inline args
+                parts = raw.split()
+                target_provider = current_provider
+                target_llm = current_llm
+                if "--provider" in parts:
+                    idx = parts.index("--provider")
+                    if idx + 1 < len(parts): target_provider = parts[idx+1]
+                if "--llm" in parts:
+                    idx = parts.index("--llm")
+                    if idx + 1 < len(parts): target_llm = parts[idx+1]
+                elif "--model" in parts:
+                    idx = parts.index("--model")
+                    if idx + 1 < len(parts): target_llm = parts[idx+1]
+
+                spec = importlib.util.spec_from_file_location("chat", chat_path)
+                chat_mod = importlib.util.module_from_spec(spec)
+                sys.path.insert(0, str(chat_path.parent))
+                spec.loader.exec_module(chat_mod)
+                chat_mod.run_chat(provider=target_provider, model=target_llm)
+                continue
             if raw.startswith("/gui") or raw.upper() == "//GUI":
                 # Launch the Textual TUI
                 _stream_print("Launching Obsidian Spire Cockpit v2.0...", tone="ok")
@@ -907,9 +1002,34 @@ def _interactive_shell(json_mode: bool = False) -> int:
 
             if raw == "/status":
                 if not json_mode:
-                    _stream_task_progress("cloudbrain status")
-                output = asyncio.run(_run_task("cloudbrain status"))
-                _emit(output, json_mode=json_mode, title="Cloudbrain Status")
+                    _stream_print("Probing Septem Regna Layer health…", tone="title")
+                    boot_sequence.run_boot(CAMELOT_HOME)
+                    output = asyncio.run(_run_task("cloudbrain status"))
+                    _emit(output, json_mode=json_mode, title="Cloudbrain Internals")
+                else:
+                    output = boot_sequence.run_boot(CAMELOT_HOME, quick=True)
+                    _print_json(output)
+                continue
+
+            if raw == "/boot":
+                _stream_print("Initiating full 6-phase bootstrap sequence…", tone="warn")
+                boot_sequence.run_boot(CAMELOT_HOME)
+                continue
+
+            if raw == "/sync":
+                _stream_print("Triggering OMEGA SYNC PROTOCOL (UKG + Ledger + Kinetic)…", tone="accent")
+                sync_script = CAMELOT_HOME / "01_KERNEL" / "system" / "SYNC_PROTOCOL.py"
+                venv_py = boot_sequence._detect_venv_python(CAMELOT_HOME)
+                subprocess.run([str(venv_py), str(sync_script)], cwd=str(CAMELOT_HOME))
+                continue
+
+            if raw.startswith("/log"):
+                _stream_print("Reading latest Provenance Ledger entries…", tone="info")
+                ledger = CAMELOT_HOME / "PROVENANCE_LEDGER.md"
+                if ledger.exists():
+                    lines = ledger.read_text(encoding="utf-8").splitlines()
+                    for line in lines[-20:]:
+                        _stream_print(line, tone="dim")
                 continue
 
             if raw == "/research-health":
@@ -1041,10 +1161,16 @@ def _interactive_shell(json_mode: bool = False) -> int:
                 _emit(output, json_mode=json_mode, title="Ledger Status")
                 continue
 
+            # Omni-Routing Intercept
+            intercept = CLIIntercept()
+            result = intercept.intercept(raw)
+            
             if not json_mode:
+                _stream_print(intercept.format_route_log(result), tone="info")
                 _stream_task_progress(raw)
+                
             output = asyncio.run(_run_task(raw))
-            _emit(output, json_mode=json_mode, title="Camelot-OS")
+            _emit(output, json_mode=json_mode, title=f"Camelot-OS | {result.route.knight_id}")
         except Exception as exc:
             if json_mode:
                 _print_json({"success": False, "error": str(exc)})
@@ -1064,6 +1190,8 @@ def _build_parser() -> argparse.ArgumentParser:
 
     chat_parser = sub.add_parser("chat", help="Start interactive mode")
     chat_parser.add_argument("--json", action="store_true", help="Emit JSON output")
+    chat_parser.add_argument("--provider", help="Pin provider for session")
+    chat_parser.add_argument("--llm", "--model", dest="llm", help="Pin model for session")
 
     route_parser = sub.add_parser("route", help="Show routing decision for an intent")
     route_parser.add_argument("intent", nargs="+")
@@ -1157,10 +1285,15 @@ def _build_parser() -> argparse.ArgumentParser:
     cloud_sub.add_parser("northstar-health", help="Show Northstar war-room health")
     cloud_sub.add_parser("blueprint-health", help="Show development blueprint health")
     cloud_sub.add_parser("precise-health", help="Show precise-mode swarm health")
+    cloud_sub.add_parser("eldergod-health", help="Show elderGod forge health")
 
     memory = cloud_sub.add_parser("memory", help="Recall long-term memory")
     memory.add_argument("--agent-id", default="merlin")
     memory.add_argument("--privacy", type=float, default=0.0)
+
+    eldergod = cloud_sub.add_parser("eldergod", help="Invoke the elderGod forge")
+    eldergod.add_argument("objective")
+    eldergod.add_argument("--tier", choices=("kinetic", "hybrid", "apex"), default="apex")
 
     research = cloud_sub.add_parser("research", help="Invoke research agency")
     research.add_argument("objective")
@@ -1216,6 +1349,37 @@ def _build_parser() -> argparse.ArgumentParser:
     sarda.add_argument("--privacy", type=float, default=0.0)
     sarda.add_argument("--timeout", type=int, default=120)
 
+    team = sub.add_parser("team", help="OMC team operations")
+    team_sub = team.add_subparsers(dest="team_command", required=True)
+    team_self_test = team_sub.add_parser("self-test", help="Run harness dispatch self-test")
+    team_self_test.add_argument(
+        "--target",
+        default="harness_codex",
+        help="Dispatch target ID (sir_* or harness_* or harness:<name>)",
+    )
+    team_self_test.add_argument(
+        "--prompt",
+        default="codex",
+        help="Safe probe prompt",
+    )
+    team_self_test.add_argument(
+        "--timeout",
+        type=int,
+        default=30,
+        help="Collection timeout in seconds",
+    )
+    team_self_test.add_argument(
+        "--runtime",
+        choices=("auto", "go", "rust", "python"),
+        default=None,
+        help="Override CAMELOT_HARNESS_RUNTIME for this test invocation",
+    )
+    team_self_test.add_argument(
+        "--require-pass",
+        action="store_true",
+        help="Exit non-zero when self-test fails",
+    )
+
     evolve = sub.add_parser("evolve", help="Record learnings and promote guarded swarm mutations")
     evolve.add_argument("--agent", required=True, help="Knight or subsystem proposing the mutation")
     evolve.add_argument("--objective", required=True, help="Objective that produced the learning")
@@ -1250,7 +1414,13 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> int:
-    known_commands = {"chat", "route", "cloudbrain", "sarda", "ledger", "evolve"}
+    try:
+        bifrost.enforce()
+    except Exception as e:
+        _stream_print(f"BIFROST GATE REFUSED: {e}", tone="err")
+        return 77
+
+    known_commands = {"chat", "route", "cloudbrain", "sarda", "ledger", "evolve", "team"}
     argv = sys.argv[1:]
 
     if argv and not argv[0].startswith("-") and argv[0] not in known_commands:
@@ -1313,7 +1483,7 @@ def main() -> int:
                 results.setdefault("cloudbrain_sync", event)
 
     if args.command == "chat":
-        return _interactive_shell(json_mode=args.json)
+        return _interactive_shell(json_mode=args.json, provider=args.provider, llm=args.llm)
 
     if args.command == "route":
         intercept = CLIIntercept()
@@ -1395,6 +1565,17 @@ def main() -> int:
                 ]
                 _stream_task_progress(
                     "development blueprint objective",
+                    objective=args.objective,
+                    constraints=constraints,
+                )
+            elif args.cloudbrain_command == "eldergod-health":
+                _stream_task_progress("elderGod forge health")
+            elif args.cloudbrain_command == "eldergod":
+                constraints = [
+                    f"compute_tier={args.tier}",
+                ]
+                _stream_task_progress(
+                    "elderGod forge objective",
                     objective=args.objective,
                     constraints=constraints,
                 )
@@ -1538,6 +1719,22 @@ excalibur_health_url: "https://replace-me.modal.run"
                     },
                 )
             )
+        elif args.cloudbrain_command == "eldergod-health":
+            output = asyncio.run(_run_task("elderGod forge health"))
+        elif args.cloudbrain_command == "eldergod":
+            constraints = [
+                f"compute_tier={args.tier}",
+            ]
+            output = asyncio.run(
+                _run_task(
+                    "elderGod forge objective",
+                    objective=args.objective,
+                    constraints=constraints,
+                    extra_parameters={
+                        "compute_tier": args.tier,
+                    },
+                )
+            )
         elif args.cloudbrain_command == "precise":
             # Apply profile defaults if flags are not provided
             tier = args.tier or profile.compute_tier
@@ -1599,6 +1796,23 @@ excalibur_health_url: "https://replace-me.modal.run"
         _log_run(output)
         _emit(output, json_mode=args.json, title="SARDA")
         return 0
+
+    if args.command == "team":
+        if args.team_command == "self-test":
+            if args.runtime:
+                os.environ["CAMELOT_HARNESS_RUNTIME"] = args.runtime
+            if not args.json:
+                _progress("analyze", f"team self-test target={args.target} runtime={os.getenv('CAMELOT_HARNESS_RUNTIME', 'auto')}", tone="info")
+            output = _run_team_self_test(
+                worker_id=args.target,
+                prompt=args.prompt,
+                timeout=args.timeout,
+            )
+            _log_run(output, success=output.get("status") == "PASSED")
+            _emit(output, json_mode=args.json, title="Team Self-Test")
+            if args.require_pass and output.get("status") != "PASSED":
+                return 1
+            return 0
 
     if args.command == "evolve":
         if not args.json:

@@ -27,6 +27,7 @@ class KnightMatrix(DataTable):
         self.add_columns("Knight ID", "Engine / Provider", "Status", "Load")
         self.add_rows([
             ("sir_boris", "Kiro (Claude 3.5)", "ORCHESTRATING", "12%"),
+            ("sir_alex", "Claude Opus", "COGNITIVE_GOVERNOR", "9%"),
             ("sir_helio", "LongCat (Flash)", "CONTEXT_SYNC", "5%"),
             ("sir_syntax", "Qoder (DeepSeek)", "CODE_GEN", "45%"),
             ("sir_forge", "Groq (Llama3)", "KINETIC_STRIKE", "88%"),

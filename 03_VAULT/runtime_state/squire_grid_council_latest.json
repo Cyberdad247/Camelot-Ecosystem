@@ -1,0 +1,71 @@
+{
+  "squire": "SQUIRE_GRID_COUNCIL",
+  "overall": "GREEN",
+  "sections": [
+    {
+      "section": "scheduler",
+      "squire": "SQUIRE_GRID_SCHEDULER",
+      "status": "OK",
+      "detail": "status=Ready last_result=0",
+      "metrics": {
+        "task_name": "Camelot-Ledger-Guardian-5min",
+        "task_status": "Ready",
+        "last_run_result": "0"
+      }
+    },
+    {
+      "section": "discovery",
+      "squire": "SQUIRE_GRID_DISCOVERY",
+      "status": "OK",
+      "detail": "scoped=5 raw=5",
+      "metrics": {
+        "scoped_count": 5,
+        "raw_count": 5,
+        "search_roots": [
+          "C:\\Users\\vizio\\CAMELOT_OS",
+          "C:\\Users\\vizio\\.camelot"
+        ]
+      }
+    },
+    {
+      "section": "sync",
+      "squire": "SQUIRE_GRID_SYNC",
+      "status": "OK",
+      "detail": "status=SYNCED distinct_hashes=1",
+      "metrics": {
+        "distinct_hashes": 1,
+        "source_of_truth": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\PROVENANCE_LEDGER.md"
+      }
+    },
+    {
+      "section": "terminals",
+      "squire": "SQUIRE_GRID_TERMINALS",
+      "status": "OK",
+      "detail": "terminals_active=True detected_platforms=3",
+      "metrics": {
+        "terminal_count": 26,
+        "detected_platforms": 3
+      }
+    },
+    {
+      "section": "defense",
+      "squire": "SQUIRE_GRID_DEFENSE",
+      "status": "OK",
+      "detail": "grid_status=GREEN",
+      "metrics": {
+        "report": "C:\\Users\\vizio\\CAMELOT_OS\\logs\\defense_grid\\defense_grid_cycle_20260413_111123.json",
+        "grid_status": "GREEN"
+      }
+    },
+    {
+      "section": "rollback",
+      "squire": "SQUIRE_GRID_ROLLBACK",
+      "status": "OK",
+      "detail": "rollback audit present",
+      "metrics": {
+        "audit_file": "C:\\Users\\vizio\\CAMELOT_OS\\logs\\defense_grid\\ROLLBACK_AUDIT_2026-04-13.md",
+        "exists": true
+      }
+    }
+  ]
+}

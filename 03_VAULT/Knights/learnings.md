@@ -121,3 +121,173 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 - switchboard.py sir_gideon terminal registered — local_audit engine type
 - Anya APEE v6.5 panel deployed in HUD (Titanium Law #11 surface compliance)
 - camelot-status.py P4 section added: SCORPION gate + switchboard probe + sir_gideon check
+
+## Archivist Scan — 2026-04-26T07:05:05.489356+00:00 (367ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### Recurring Failures
+- `ImportError` x10: attempted relative import with no known parent package → ACTION: Check knight module path — may need skill bible reload
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T07:07:05.476072+00:00 (211ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### Recurring Failures
+- `ImportError` x10: attempted relative import with no known parent package → ACTION: Check knight module path — may need skill bible reload
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T08:07:05.719938+00:00 (59ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T09:07:05.782624+00:00 (62ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T10:07:05.859562+00:00 (199ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T11:07:06.082762+00:00 (98ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T12:07:06.210868+00:00 (125ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T13:07:06.353681+00:00 (172ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T14:07:06.541892+00:00 (78ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T15:07:06.642009+00:00 (212ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T16:07:06.875359+00:00 (69ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T17:07:06.951881+00:00 (183ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T18:07:07.152360+00:00 (187ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T19:07:07.356852+00:00 (475ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 053 | **//FORGE P2 — Modal LT + BitNet Swarm + GPU TUI + Post-Quantum Crypto** | SIR_BORIS + Lukas_Omega (5-Phase Cruc
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [
+
+## Archivist Scan — 2026-04-26T20:07:07.860122+00:00 (734ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### [Omega_EVOLVE] Events
+- | 052 | **//FORGE P1 — Lord Archivist + Runic Router + Bio-Swarm + Learnings** | SIR_BORIS (5-Phase Crucible) | [Omega_E
+- | 058 | **//FORGE P6 -- Switchboard + Anya Gate + SCORPION Status** | SIR_BORIS + SIR_LINK (5-Phase Crucible) | [Omega_S
+- | 059 | **//FORGE P7 -- Omega Rune Wiring + Gideon Loop + Switchboard 11/11** | SIR_BORIS + SIR_LINK (5-Phase Crucible) 
+- | 060 | **//FORGE P8 -- Anya Gate REPL + Banner v400.1.0 + UKG Crystal** | ANYA_OMEGA + SIR_BORIS (5-Phase Crucible) | [

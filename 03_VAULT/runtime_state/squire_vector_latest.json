@@ -1,0 +1,5378 @@
+{
+  "squire": "SQUIRE_VECTOR",
+  "root": ".",
+  "total_files": 63014,
+  "clusters": [
+    {
+      "intent": "source_code",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./tools/antigravity.py",
+          "name": "antigravity.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/camelot_defense_grid_agent.py",
+          "name": "camelot_defense_grid_agent.py",
+          "size_mb": 0.013,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/nano_scan.py",
+          "name": "nano_scan.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/Perplexity_Distiller.py",
+          "name": "Perplexity_Distiller.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/scout_agent.py",
+          "name": "scout_agent.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/squire_cli.py",
+          "name": "squire_cli.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_sonus/engine.py",
+          "name": "engine.py",
+          "size_mb": 0.003,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_sonus/server.py",
+          "name": "server.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_masque/orchestrator.py",
+          "name": "orchestrator.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_masque/proxy.py",
+          "name": "proxy.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_masque/puppet.py",
+          "name": "puppet.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_masque/vault.py",
+          "name": "vault.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_masque/__init__.py",
+          "name": "__init__.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_masque/missions/twitter_monitor.py",
+          "name": "twitter_monitor.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/sir_ears/transcribe.py",
+          "name": "transcribe.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/phials/regex_cleaner.py",
+          "name": "regex_cleaner.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/nano_physics/core.py",
+          "name": "core.py",
+          "size_mb": 0.003,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/nano_physics/run_sim.py",
+          "name": "run_sim.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/nano_physics/validate.py",
+          "name": "validate.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/merlin_eye/vision.py",
+          "name": "vision.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tools/chronos_gate/scheduler.py",
+          "name": "scheduler.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/backend_integrity.js",
+          "name": "backend_integrity.js",
+          "size_mb": 0.002,
+          "ext": ".js"
+        },
+        {
+          "path": "./tests/conftest.py",
+          "name": "conftest.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/genesis_simulation.py",
+          "name": "genesis_simulation.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/integration_phase3.py",
+          "name": "integration_phase3.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/neural_link_verifier.js",
+          "name": "neural_link_verifier.js",
+          "size_mb": 0.002,
+          "ext": ".js"
+        },
+        {
+          "path": "./tests/verify_bridge.js",
+          "name": "verify_bridge.js",
+          "size_mb": 0.002,
+          "ext": ".js"
+        },
+        {
+          "path": "./tests/data/validate_sync.js",
+          "name": "validate_sync.js",
+          "size_mb": 0.001,
+          "ext": ".js"
+        },
+        {
+          "path": "./squires/colony.py",
+          "name": "colony.py",
+          "size_mb": 0.007,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/__init__.py",
+          "name": "__init__.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/local/squire_ghost.py",
+          "name": "squire_ghost.py",
+          "size_mb": 0.011,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/local/squire_index.py",
+          "name": "squire_index.py",
+          "size_mb": 0.01,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/local/__init__.py",
+          "name": "__init__.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/cloud/squire_judge.py",
+          "name": "squire_judge.py",
+          "size_mb": 0.004,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/cloud/squire_mason.py",
+          "name": "squire_mason.py",
+          "size_mb": 0.008,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/cloud/squire_scan.py",
+          "name": "squire_scan.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/cloud/squire_sentinel.py",
+          "name": "squire_sentinel.py",
+          "size_mb": 0.005,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/cloud/squire_sweep.py",
+          "name": "squire_sweep.py",
+          "size_mb": 0.005,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/cloud/squire_vector.py",
+          "name": "squire_vector.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/cloud/__init__.py",
+          "name": "__init__.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/bridge/bridge_script.py",
+          "name": "bridge_script.py",
+          "size_mb": 0.005,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/bridge/lightpanda_bridge.py",
+          "name": "lightpanda_bridge.py",
+          "size_mb": 0.008,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/bridge/train_script.py",
+          "name": "train_script.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./squires/bridge/__init__.py",
+          "name": "__init__.py",
+          "size_mb": 0.0,
+          "ext": ".py"
+        },
+        {
+          "path": "./ledger_keeper/src/main.rs",
+          "name": "main.rs",
+          "size_mb": 0.003,
+          "ext": ".rs"
+        },
+        {
+          "path": "./kinetic_edge/mcp_server/src/main.rs",
+          "name": "main.rs",
+          "size_mb": 0.013,
+          "ext": ".rs"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth-cli.py",
+          "name": "unsloth-cli.py",
+          "size_mb": 0.015,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/chat_templates.py",
+          "name": "chat_templates.py",
+          "size_mb": 0.125,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/device_type.py",
+          "name": "device_type.py",
+          "size_mb": 0.004,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/import_fixes.py",
+          "name": "import_fixes.py",
+          "size_mb": 0.029,
+          "ext": ".py"
+        }
+      ],
+      "total_size_mb": 220.0
+    },
+    {
+      "intent": "unknown",
+      "confidence": 0.3,
+      "files": [
+        {
+          "path": "./.gitignore",
+          "name": ".gitignore",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./.prettierrc",
+          "name": ".prettierrc",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./.python-version",
+          "name": ".python-version",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./claude-ollama.cmd",
+          "name": "claude-ollama.cmd",
+          "size_mb": 0.004,
+          "ext": ".cmd"
+        },
+        {
+          "path": "./Dockerfile.kernel",
+          "name": "Dockerfile.kernel",
+          "size_mb": 0.001,
+          "ext": ".kernel"
+        },
+        {
+          "path": "./Dockerfile.sandbox",
+          "name": "Dockerfile.sandbox",
+          "size_mb": 0.0,
+          "ext": ".sandbox"
+        },
+        {
+          "path": "./run_all_tests.ps1",
+          "name": "run_all_tests.ps1",
+          "size_mb": 0.002,
+          "ext": ".ps1"
+        },
+        {
+          "path": "./VERSION",
+          "name": "VERSION",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./tools/sir_sonus/Dockerfile",
+          "name": "Dockerfile",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./tools/sir_sonus/kokoro-v0_19.onnx",
+          "name": "kokoro-v0_19.onnx",
+          "size_mb": 310.445,
+          "ext": ".onnx"
+        },
+        {
+          "path": "./logs/aegis_err.log",
+          "name": "aegis_err.log",
+          "size_mb": 0.0,
+          "ext": ".log"
+        },
+        {
+          "path": "./logs/aegis_pulse.log",
+          "name": "aegis_pulse.log",
+          "size_mb": 0.016,
+          "ext": ".log"
+        },
+        {
+          "path": "./logs/excalibur_errors.log",
+          "name": "excalibur_errors.log",
+          "size_mb": 0.004,
+          "ext": ".log"
+        },
+        {
+          "path": "./logs/kernel_status.log",
+          "name": "kernel_status.log",
+          "size_mb": 0.005,
+          "ext": ".log"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.cargo-lock",
+          "name": ".cargo-lock",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/ledger_keeper.d",
+          "name": "ledger_keeper.d",
+          "size_mb": 0.0,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/ledger_keeper.pdb",
+          "name": "ledger_keeper.pdb",
+          "size_mb": 1.457,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/anstream-c7f2b49f94cd543c.d",
+          "name": "anstream-c7f2b49f94cd543c.d",
+          "size_mb": 0.004,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/anstyle-142abeb8d7329c83.d",
+          "name": "anstyle-142abeb8d7329c83.d",
+          "size_mb": 0.002,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/anstyle_parse-17fe17c74a920f3f.d",
+          "name": "anstyle_parse-17fe17c74a920f3f.d",
+          "size_mb": 0.002,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/anstyle_query-8196ae2b2e9a2f44.d",
+          "name": "anstyle_query-8196ae2b2e9a2f44.d",
+          "size_mb": 0.001,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/anstyle_wincon-391bfe3f869ecab3.d",
+          "name": "anstyle_wincon-391bfe3f869ecab3.d",
+          "size_mb": 0.002,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/autocfg-e137e6ca9ebf7b6a.d",
+          "name": "autocfg-e137e6ca9ebf7b6a.d",
+          "size_mb": 0.002,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/chrono-07d4dcaa87b03721.d",
+          "name": "chrono-07d4dcaa87b03721.d",
+          "size_mb": 0.011,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap-4f1eca0c63673f1e.d",
+          "name": "clap-4f1eca0c63673f1e.d",
+          "size_mb": 0.001,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap_derive-975c4de75d3d5cd6.d",
+          "name": "clap_derive-975c4de75d3d5cd6.d",
+          "size_mb": 0.005,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap_derive-975c4de75d3d5cd6.dll.exp",
+          "name": "clap_derive-975c4de75d3d5cd6.dll.exp",
+          "size_mb": 0.001,
+          "ext": ".exp"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap_derive-975c4de75d3d5cd6.dll.lib",
+          "name": "clap_derive-975c4de75d3d5cd6.dll.lib",
+          "size_mb": 0.002,
+          "ext": ".lib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap_derive-975c4de75d3d5cd6.pdb",
+          "name": "clap_derive-975c4de75d3d5cd6.pdb",
+          "size_mb": 2.707,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap_lex-2ab0d5f4668880da.d",
+          "name": "clap_lex-2ab0d5f4668880da.d",
+          "size_mb": 0.001,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/colorchoice-9427f84f8df6c404.d",
+          "name": "colorchoice-9427f84f8df6c404.d",
+          "size_mb": 0.001,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/heck-491fd55b0693bce9.d",
+          "name": "heck-491fd55b0693bce9.d",
+          "size_mb": 0.003,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/is_terminal_polyfill-0af612fabd29e7cf.d",
+          "name": "is_terminal_polyfill-0af612fabd29e7cf.d",
+          "size_mb": 0.001,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/ledger_keeper.d",
+          "name": "ledger_keeper.d",
+          "size_mb": 0.0,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/ledger_keeper.pdb",
+          "name": "ledger_keeper.pdb",
+          "size_mb": 1.457,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstream-c7f2b49f94cd543c.rlib",
+          "name": "libanstream-c7f2b49f94cd543c.rlib",
+          "size_mb": 0.335,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstream-c7f2b49f94cd543c.rmeta",
+          "name": "libanstream-c7f2b49f94cd543c.rmeta",
+          "size_mb": 0.265,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle-142abeb8d7329c83.rlib",
+          "name": "libanstyle-142abeb8d7329c83.rlib",
+          "size_mb": 0.234,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle-142abeb8d7329c83.rmeta",
+          "name": "libanstyle-142abeb8d7329c83.rmeta",
+          "size_mb": 0.215,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle_parse-17fe17c74a920f3f.rlib",
+          "name": "libanstyle_parse-17fe17c74a920f3f.rlib",
+          "size_mb": 0.181,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle_parse-17fe17c74a920f3f.rmeta",
+          "name": "libanstyle_parse-17fe17c74a920f3f.rmeta",
+          "size_mb": 0.174,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle_query-8196ae2b2e9a2f44.rlib",
+          "name": "libanstyle_query-8196ae2b2e9a2f44.rlib",
+          "size_mb": 0.027,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle_query-8196ae2b2e9a2f44.rmeta",
+          "name": "libanstyle_query-8196ae2b2e9a2f44.rmeta",
+          "size_mb": 0.023,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle_wincon-391bfe3f869ecab3.rlib",
+          "name": "libanstyle_wincon-391bfe3f869ecab3.rlib",
+          "size_mb": 0.096,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libanstyle_wincon-391bfe3f869ecab3.rmeta",
+          "name": "libanstyle_wincon-391bfe3f869ecab3.rmeta",
+          "size_mb": 0.039,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libautocfg-e137e6ca9ebf7b6a.rlib",
+          "name": "libautocfg-e137e6ca9ebf7b6a.rlib",
+          "size_mb": 0.683,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libautocfg-e137e6ca9ebf7b6a.rmeta",
+          "name": "libautocfg-e137e6ca9ebf7b6a.rmeta",
+          "size_mb": 0.077,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libchrono-07d4dcaa87b03721.rlib",
+          "name": "libchrono-07d4dcaa87b03721.rlib",
+          "size_mb": 2.349,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libchrono-07d4dcaa87b03721.rmeta",
+          "name": "libchrono-07d4dcaa87b03721.rmeta",
+          "size_mb": 1.997,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libclap-4f1eca0c63673f1e.rlib",
+          "name": "libclap-4f1eca0c63673f1e.rlib",
+          "size_mb": 0.013,
+          "ext": ".rlib"
+        }
+      ],
+      "total_size_mb": 3456.3
+    },
+    {
+      "intent": "media_image",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Assistant.png",
+          "name": "Assistant.png",
+          "size_mb": 0.079,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/buy me a coffee button.png",
+          "name": "buy me a coffee button.png",
+          "size_mb": 0.018,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Colab.png",
+          "name": "Colab.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Discord button.png",
+          "name": "Discord button.png",
+          "size_mb": 0.013,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Discord.png",
+          "name": "Discord.png",
+          "size_mb": 0.013,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Documentation Button.png",
+          "name": "Documentation Button.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/documentation github button.png",
+          "name": "documentation github button.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/documentation green button.png",
+          "name": "documentation green button.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/documentation lighter.png",
+          "name": "documentation lighter.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/documentation white button.png",
+          "name": "documentation white button.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Free version button.png",
+          "name": "Free version button.png",
+          "size_mb": 0.009,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Kaggle.png",
+          "name": "Kaggle.png",
+          "size_mb": 0.009,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Kofi button.png",
+          "name": "Kofi button.png",
+          "size_mb": 0.017,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/LAION 2GPU.png",
+          "name": "LAION 2GPU.png",
+          "size_mb": 0.049,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/made with unsloth.png",
+          "name": "made with unsloth.png",
+          "size_mb": 0.067,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Merge.png",
+          "name": "Merge.png",
+          "size_mb": 0.03,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/ollama.png",
+          "name": "ollama.png",
+          "size_mb": 0.064,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/peft x trl button.png",
+          "name": "peft x trl button.png",
+          "size_mb": 0.035,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Run.png",
+          "name": "Run.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Slim Orca 2GPUs.png",
+          "name": "Slim Orca 2GPUs.png",
+          "size_mb": 0.041,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/start free finetune button.png",
+          "name": "start free finetune button.png",
+          "size_mb": 0.011,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Terminal_Type.png",
+          "name": "Terminal_Type.png",
+          "size_mb": 0.066,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth end.png",
+          "name": "unsloth end.png",
+          "size_mb": 0.851,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth loading page render.png",
+          "name": "unsloth loading page render.png",
+          "size_mb": 0.753,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth logo black text.png",
+          "name": "unsloth logo black text.png",
+          "size_mb": 0.346,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth logo only.png",
+          "name": "unsloth logo only.png",
+          "size_mb": 0.055,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth logo white text.png",
+          "name": "unsloth logo white text.png",
+          "size_mb": 0.343,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth made with love.png",
+          "name": "unsloth made with love.png",
+          "size_mb": 0.061,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth new logo.png",
+          "name": "unsloth new logo.png",
+          "size_mb": 0.057,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/unsloth sticker.png",
+          "name": "unsloth sticker.png",
+          "size_mb": 1.202,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/images/Where_Terminal.png",
+          "name": "Where_Terminal.png",
+          "size_mb": 0.171,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/utils/testdata/aqua.png",
+          "name": "aqua.png",
+          "size_mb": 0.003,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/argocd-ui.png",
+          "name": "argocd-ui.png",
+          "size_mb": 0.571,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/client-server.png",
+          "name": "client-server.png",
+          "size_mb": 0.272,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/docker-desktop.png",
+          "name": "docker-desktop.png",
+          "size_mb": 0.296,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/eks-benchmarks.png",
+          "name": "eks-benchmarks.png",
+          "size_mb": 0.082,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/fs.png",
+          "name": "fs.png",
+          "size_mb": 0.104,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/gitlab-codequality.png",
+          "name": "gitlab-codequality.png",
+          "size_mb": 0.085,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/image.png",
+          "name": "image.png",
+          "size_mb": 0.177,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/logo-horizontal.svg",
+          "name": "logo-horizontal.svg",
+          "size_mb": 0.005,
+          "ext": ".svg"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/logo-white.svg",
+          "name": "logo-white.svg",
+          "size_mb": 0.222,
+          "ext": ".svg"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/logo.png",
+          "name": "logo.png",
+          "size_mb": 0.026,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/overview.png",
+          "name": "overview.png",
+          "size_mb": 2.026,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/repo.png",
+          "name": "repo.png",
+          "size_mb": 0.221,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/secret-demo.gif",
+          "name": "secret-demo.gif",
+          "size_mb": 1.858,
+          "ext": ".gif"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/Security-Hub.jpeg",
+          "name": "Security-Hub.jpeg",
+          "size_mb": 0.073,
+          "ext": ".jpeg"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/trivy-aws.png",
+          "name": "trivy-aws.png",
+          "size_mb": 0.147,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/imgs/trivy-k8s.png",
+          "name": "trivy-k8s.png",
+          "size_mb": 0.323,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/brand/Trivy-OSS-Logo-Color-Horizontal-RGB.png",
+          "name": "Trivy-OSS-Logo-Color-Horizontal-RGB.png",
+          "size_mb": 0.043,
+          "ext": ".png"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/brand/Trivy-OSS-Logo-Color-Horizontal-RGB.svg",
+          "name": "Trivy-OSS-Logo-Color-Horizontal-RGB.svg",
+          "size_mb": 0.005,
+          "ext": ".svg"
+        }
+      ],
+      "total_size_mb": 1635.8
+    },
+    {
+      "intent": "generated",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./ledger_keeper/target/CACHEDIR.TAG",
+          "name": "CACHEDIR.TAG",
+          "size_mb": 0.0,
+          "ext": ".TAG"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap_builder-f9e3090dbf15138d.d",
+          "name": "clap_builder-f9e3090dbf15138d.d",
+          "size_mb": 0.023,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libclap_builder-f9e3090dbf15138d.rlib",
+          "name": "libclap_builder-f9e3090dbf15138d.rlib",
+          "size_mb": 4.085,
+          "ext": ".rlib"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/libclap_builder-f9e3090dbf15138d.rmeta",
+          "name": "libclap_builder-f9e3090dbf15138d.rmeta",
+          "size_mb": 2.324,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-ce10a74b868b34d7/build_script_build-ce10a74b868b34d7.d",
+          "name": "build_script_build-ce10a74b868b34d7.d",
+          "size_mb": 0.0,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-ce10a74b868b34d7/build_script_build-ce10a74b868b34d7.pdb",
+          "name": "build_script_build-ce10a74b868b34d7.pdb",
+          "size_mb": 1.496,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-ce10a74b868b34d7/build_script_build.pdb",
+          "name": "build_script_build.pdb",
+          "size_mb": 1.496,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-a69104a210edd288/invoked.timestamp",
+          "name": "invoked.timestamp",
+          "size_mb": 0.0,
+          "ext": ".timestamp"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-a69104a210edd288/output",
+          "name": "output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-a69104a210edd288/root-output",
+          "name": "root-output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-a69104a210edd288/stderr",
+          "name": "stderr",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-464d5f7cb95712b0/build_script_build-464d5f7cb95712b0.d",
+          "name": "build_script_build-464d5f7cb95712b0.d",
+          "size_mb": 0.001,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-464d5f7cb95712b0/build_script_build-464d5f7cb95712b0.pdb",
+          "name": "build_script_build-464d5f7cb95712b0.pdb",
+          "size_mb": 1.59,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-464d5f7cb95712b0/build_script_build.pdb",
+          "name": "build_script_build.pdb",
+          "size_mb": 1.59,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-31a07b00875c345a/invoked.timestamp",
+          "name": "invoked.timestamp",
+          "size_mb": 0.0,
+          "ext": ".timestamp"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-31a07b00875c345a/output",
+          "name": "output",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-31a07b00875c345a/root-output",
+          "name": "root-output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-31a07b00875c345a/stderr",
+          "name": "stderr",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-f78372254fba685e/invoked.timestamp",
+          "name": "invoked.timestamp",
+          "size_mb": 0.0,
+          "ext": ".timestamp"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-f78372254fba685e/output",
+          "name": "output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-f78372254fba685e/root-output",
+          "name": "root-output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-f78372254fba685e/stderr",
+          "name": "stderr",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-c24f575ba19a08ad/build_script_build-c24f575ba19a08ad.d",
+          "name": "build_script_build-c24f575ba19a08ad.d",
+          "size_mb": 0.0,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-c24f575ba19a08ad/build_script_build-c24f575ba19a08ad.pdb",
+          "name": "build_script_build-c24f575ba19a08ad.pdb",
+          "size_mb": 1.613,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-c24f575ba19a08ad/build_script_build.pdb",
+          "name": "build_script_build.pdb",
+          "size_mb": 1.613,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/quote-ce10a74b868b34d7/build-script-build-script-build",
+          "name": "build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/quote-ce10a74b868b34d7/dep-build-script-build-script-build",
+          "name": "dep-build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/quote-a69104a210edd288/run-build-script-build-script-build",
+          "name": "run-build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/proc-macro2-464d5f7cb95712b0/build-script-build-script-build",
+          "name": "build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/proc-macro2-464d5f7cb95712b0/dep-build-script-build-script-build",
+          "name": "dep-build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/proc-macro2-31a07b00875c345a/run-build-script-build-script-build",
+          "name": "run-build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/num-traits-f78372254fba685e/run-build-script-build-script-build",
+          "name": "run-build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/num-traits-c24f575ba19a08ad/build-script-build-script-build",
+          "name": "build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/num-traits-c24f575ba19a08ad/dep-build-script-build-script-build",
+          "name": "dep-build-script-build-script-build",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/clap_builder-f9e3090dbf15138d/dep-lib-clap_builder",
+          "name": "dep-lib-clap_builder",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/clap_builder-f9e3090dbf15138d/invoked.timestamp",
+          "name": "invoked.timestamp",
+          "size_mb": 0.0,
+          "ext": ".timestamp"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/clap_builder-f9e3090dbf15138d/lib-clap_builder",
+          "name": "lib-clap_builder",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/debug/deps/clap_builder-3ce392dcf4e7610f.d",
+          "name": "clap_builder-3ce392dcf4e7610f.d",
+          "size_mb": 0.017,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/deps/libclap_builder-3ce392dcf4e7610f.rmeta",
+          "name": "libclap_builder-3ce392dcf4e7610f.rmeta",
+          "size_mb": 1.536,
+          "ext": ".rmeta"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-de6dc0b7f234b545/invoked.timestamp",
+          "name": "invoked.timestamp",
+          "size_mb": 0.0,
+          "ext": ".timestamp"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-de6dc0b7f234b545/output",
+          "name": "output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-de6dc0b7f234b545/root-output",
+          "name": "root-output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-de6dc0b7f234b545/stderr",
+          "name": "stderr",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-7c3ebc9baa47f717/build_script_build-7c3ebc9baa47f717.d",
+          "name": "build_script_build-7c3ebc9baa47f717.d",
+          "size_mb": 0.0,
+          "ext": ".d"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-7c3ebc9baa47f717/build_script_build-7c3ebc9baa47f717.pdb",
+          "name": "build_script_build-7c3ebc9baa47f717.pdb",
+          "size_mb": 1.496,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-7c3ebc9baa47f717/build_script_build.pdb",
+          "name": "build_script_build.pdb",
+          "size_mb": 1.496,
+          "ext": ".pdb"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/proc-macro2-b20a946a3a5f7c90/invoked.timestamp",
+          "name": "invoked.timestamp",
+          "size_mb": 0.0,
+          "ext": ".timestamp"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/proc-macro2-b20a946a3a5f7c90/output",
+          "name": "output",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/proc-macro2-b20a946a3a5f7c90/root-output",
+          "name": "root-output",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/proc-macro2-b20a946a3a5f7c90/stderr",
+          "name": "stderr",
+          "size_mb": 0.0,
+          "ext": ""
+        }
+      ],
+      "total_size_mb": 1118.2
+    },
+    {
+      "intent": "config",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./.env",
+          "name": ".env",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./.modal.toml",
+          "name": ".modal.toml",
+          "size_mb": 0.0,
+          "ext": ".toml"
+        },
+        {
+          "path": "./docker-compose.yml",
+          "name": "docker-compose.yml",
+          "size_mb": 0.002,
+          "ext": ".yml"
+        },
+        {
+          "path": "./package.json",
+          "name": "package.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./pnpm-lock.yaml",
+          "name": "pnpm-lock.yaml",
+          "size_mb": 0.579,
+          "ext": ".yaml"
+        },
+        {
+          "path": "./pnpm-workspace.yaml",
+          "name": "pnpm-workspace.yaml",
+          "size_mb": 0.0,
+          "ext": ".yaml"
+        },
+        {
+          "path": "./pyproject.toml",
+          "name": "pyproject.toml",
+          "size_mb": 0.001,
+          "ext": ".toml"
+        },
+        {
+          "path": "./tools/sir_sonus/config.json",
+          "name": "config.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./tools/sir_sonus/config.yaml",
+          "name": "config.yaml",
+          "size_mb": 0.0,
+          "ext": ".yaml"
+        },
+        {
+          "path": "./tools/nano_physics/physics_log.json",
+          "name": "physics_log.json",
+          "size_mb": 0.15,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/colony_full_latest.json",
+          "name": "colony_full_latest.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/mason_compress_latest.json",
+          "name": "mason_compress_latest.json",
+          "size_mb": 0.007,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/squire_ghost_latest.json",
+          "name": "squire_ghost_latest.json",
+          "size_mb": 0.017,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/squire_ghost_scan.json",
+          "name": "squire_ghost_scan.json",
+          "size_mb": 0.012,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/squire_index_latest.json",
+          "name": "squire_index_latest.json",
+          "size_mb": 0.624,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/squire_index_scan.json",
+          "name": "squire_index_scan.json",
+          "size_mb": 0.664,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/squire_vector_latest.json",
+          "name": "squire_vector_latest.json",
+          "size_mb": 0.177,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/triage_pipeline_latest.json",
+          "name": "triage_pipeline_latest.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/defense_grid/defense_grid_cycle_20260305_183729.json",
+          "name": "defense_grid_cycle_20260305_183729.json",
+          "size_mb": 1.273,
+          "ext": ".json"
+        },
+        {
+          "path": "./logs/defense_grid/defense_grid_cycle_20260305_185933.json",
+          "name": "defense_grid_cycle_20260305_185933.json",
+          "size_mb": 0.724,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/Cargo.toml",
+          "name": "Cargo.toml",
+          "size_mb": 0.0,
+          "ext": ".toml"
+        },
+        {
+          "path": "./ledger_keeper/target/.rustc_info.json",
+          "name": ".rustc_info.json",
+          "size_mb": 0.002,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/windows-sys-232e22d4de9ec858/lib-windows_sys.json",
+          "name": "lib-windows_sys.json",
+          "size_mb": 0.008,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/windows-link-0f7abb2c51928ff9/lib-windows_link.json",
+          "name": "lib-windows_link.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/utf8parse-63c847f4690c1d2d/lib-utf8parse.json",
+          "name": "lib-utf8parse.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/unicode-ident-7f7329ca8fe0dfcc/lib-unicode_ident.json",
+          "name": "lib-unicode_ident.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/syn-926239ae2eef8753/lib-syn.json",
+          "name": "lib-syn.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/strsim-840e045c5392e5a2/lib-strsim.json",
+          "name": "lib-strsim.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/quote-ce10a74b868b34d7/build-script-build-script-build.json",
+          "name": "build-script-build-script-build.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/quote-a69104a210edd288/run-build-script-build-script-build.json",
+          "name": "run-build-script-build-script-build.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/quote-329723af98ef3520/lib-quote.json",
+          "name": "lib-quote.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/proc-macro2-ca2b27d46a1bf756/lib-proc_macro2.json",
+          "name": "lib-proc_macro2.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/proc-macro2-464d5f7cb95712b0/build-script-build-script-build.json",
+          "name": "build-script-build-script-build.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/proc-macro2-31a07b00875c345a/run-build-script-build-script-build.json",
+          "name": "run-build-script-build-script-build.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/once_cell_polyfill-4f888af43e8ba2a2/lib-once_cell_polyfill.json",
+          "name": "lib-once_cell_polyfill.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/num-traits-f78372254fba685e/run-build-script-build-script-build.json",
+          "name": "run-build-script-build-script-build.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/num-traits-ebae462d8973e818/lib-num_traits.json",
+          "name": "lib-num_traits.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/num-traits-c24f575ba19a08ad/build-script-build-script-build.json",
+          "name": "build-script-build-script-build.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/ledger_keeper-fe38c421d048700f/bin-ledger_keeper.json",
+          "name": "bin-ledger_keeper.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/is_terminal_polyfill-0af612fabd29e7cf/lib-is_terminal_polyfill.json",
+          "name": "lib-is_terminal_polyfill.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/heck-491fd55b0693bce9/lib-heck.json",
+          "name": "lib-heck.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/colorchoice-9427f84f8df6c404/lib-colorchoice.json",
+          "name": "lib-colorchoice.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/clap_lex-2ab0d5f4668880da/lib-clap_lex.json",
+          "name": "lib-clap_lex.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/clap_derive-975c4de75d3d5cd6/lib-clap_derive.json",
+          "name": "lib-clap_derive.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/clap_builder-f9e3090dbf15138d/lib-clap_builder.json",
+          "name": "lib-clap_builder.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/clap-4f1eca0c63673f1e/lib-clap.json",
+          "name": "lib-clap.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/chrono-07d4dcaa87b03721/lib-chrono.json",
+          "name": "lib-chrono.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/autocfg-e137e6ca9ebf7b6a/lib-autocfg.json",
+          "name": "lib-autocfg.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/anstyle-wincon-391bfe3f869ecab3/lib-anstyle_wincon.json",
+          "name": "lib-anstyle_wincon.json",
+          "size_mb": 0.001,
+          "ext": ".json"
+        },
+        {
+          "path": "./ledger_keeper/target/release/.fingerprint/anstyle-query-8196ae2b2e9a2f44/lib-anstyle_query.json",
+          "name": "lib-anstyle_query.json",
+          "size_mb": 0.0,
+          "ext": ".json"
+        }
+      ],
+      "total_size_mb": 165.4
+    },
+    {
+      "intent": "test",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./tests/test_cli.py",
+          "name": "test_cli.py",
+          "size_mb": 0.008,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/test_defense_grid_agent.py",
+          "name": "test_defense_grid_agent.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/test_kernel.py",
+          "name": "test_kernel.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/test_security.py",
+          "name": "test_security.py",
+          "size_mb": 0.003,
+          "ext": ".py"
+        },
+        {
+          "path": "./tests/ui/test_ui_consistency.js",
+          "name": "test_ui_consistency.js",
+          "size_mb": 0.001,
+          "ext": ".js"
+        },
+        {
+          "path": "./tests/fleet/test_swarm_integrity.py",
+          "name": "test_swarm_integrity.py",
+          "size_mb": 0.001,
+          "ext": ".py"
+        },
+        {
+          "path": "./src/blueprints/fleet_test.md",
+          "name": "fleet_test.md",
+          "size_mb": 0.0,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/kernels/moe/tests/test_grouped_gemm.py",
+          "name": "test_grouped_gemm.py",
+          "size_mb": 0.042,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/kernels/moe/tests/test_llama4_moe.py",
+          "name": "test_llama4_moe.py",
+          "size_mb": 0.008,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/kernels/moe/tests/test_qwen3_moe.py",
+          "name": "test_qwen3_moe.py",
+          "size_mb": 0.01,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/test_model_registry.py",
+          "name": "test_model_registry.py",
+          "size_mb": 0.003,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/test_raw_text.py",
+          "name": "test_raw_text.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/utils/test_attention_masks.py",
+          "name": "test_attention_masks.py",
+          "size_mb": 0.007,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/utils/test_packing.py",
+          "name": "test_packing.py",
+          "size_mb": 0.012,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/utils/test_qat.py",
+          "name": "test_qat.py",
+          "size_mb": 0.007,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/test_unsloth_save.py",
+          "name": "test_unsloth_save.py",
+          "size_mb": 0.012,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/vision_models/test_index_file_sharded_model.py",
+          "name": "test_index_file_sharded_model.py",
+          "size_mb": 0.009,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/vision_models/test_push_to_hub_merged.py",
+          "name": "test_push_to_hub_merged.py",
+          "size_mb": 0.009,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/vision_models/test_save_merge_qwen2.5vl32B_model_ocr_benchmark.py",
+          "name": "test_save_merge_qwen2.5vl32B_model_ocr_benchmark.py",
+          "size_mb": 0.009,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/vision_models/test_save_merge_vision_model_ocr_benchmark.py",
+          "name": "test_save_merge_vision_model_ocr_benchmark.py",
+          "size_mb": 0.009,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/text_to_speech_models/test_csm.py",
+          "name": "test_csm.py",
+          "size_mb": 0.005,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/text_to_speech_models/test_lasa.py",
+          "name": "test_lasa.py",
+          "size_mb": 0.007,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/text_to_speech_models/test_orpheus.py",
+          "name": "test_orpheus.py",
+          "size_mb": 0.008,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/text_to_speech_models/test_whisper.py",
+          "name": "test_whisper.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/non_peft/test_mistral_non_peft.py",
+          "name": "test_mistral_non_peft.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/non_peft/test_whisper_non_peft.py",
+          "name": "test_whisper_non_peft.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_merged_model_perplexity_llama-3.1-8b.py",
+          "name": "test_merged_model_perplexity_llama-3.1-8b.py",
+          "size_mb": 0.008,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_merged_model_perplexity_qwen_2.5.py",
+          "name": "test_merged_model_perplexity_qwen_2.5.py",
+          "size_mb": 0.009,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_merge_4bit_validation.py",
+          "name": "test_merge_4bit_validation.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_merge_model_perplexity_llama-3.2.py",
+          "name": "test_merge_model_perplexity_llama-3.2.py",
+          "size_mb": 0.007,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_merge_model_perplexity_mistral.py",
+          "name": "test_merge_model_perplexity_mistral.py",
+          "size_mb": 0.009,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_merge_model_perplexity_phi_4.py",
+          "name": "test_merge_model_perplexity_phi_4.py",
+          "size_mb": 0.007,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_push_to_hub_merged.py",
+          "name": "test_push_to_hub_merged.py",
+          "size_mb": 0.005,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_push_to_hub_merged_sharded_index_file.py",
+          "name": "test_push_to_hub_merged_sharded_index_file.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/language_models/test_save_merged_grpo_model.py",
+          "name": "test_save_merged_grpo_model.py",
+          "size_mb": 0.025,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/gpt-oss-merge/run_test.sh",
+          "name": "run_test.sh",
+          "size_mb": 0.001,
+          "ext": ".sh"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/saving/gpt-oss-merge/test_merged_model.py",
+          "name": "test_merged_model.py",
+          "size_mb": 0.002,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/qlora/test_hf_qlora_train_and_merge.py",
+          "name": "test_hf_qlora_train_and_merge.py",
+          "size_mb": 0.005,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/tests/qlora/test_unsloth_qlora_train_and_merge.py",
+          "name": "test_unsloth_qlora_train_and_merge.py",
+          "size_mb": 0.006,
+          "ext": ".py"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/path/path_test.go",
+          "name": "path_test.go",
+          "size_mb": 0.001,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/os/os_test.go",
+          "name": "os_test.go",
+          "size_mb": 0.004,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/json/jsonc_test.go",
+          "name": "jsonc_test.go",
+          "size_mb": 0.005,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/json/json_test.go",
+          "name": "json_test.go",
+          "size_mb": 0.003,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/io/counting_reader_test.go",
+          "name": "counting_reader_test.go",
+          "size_mb": 0.001,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/io/io_test.go",
+          "name": "io_test.go",
+          "size_mb": 0.002,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/http/recorder_test.go",
+          "name": "recorder_test.go",
+          "size_mb": 0.002,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/http/trace_test.go",
+          "name": "trace_test.go",
+          "size_mb": 0.006,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/x/http/useragent_test.go",
+          "name": "useragent_test.go",
+          "size_mb": 0.002,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/vulnerability/vulnerability_test.go",
+          "name": "vulnerability_test.go",
+          "size_mb": 0.016,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/vex/oci_test.go",
+          "name": "oci_test.go",
+          "size_mb": 0.004,
+          "ext": ".go"
+        }
+      ],
+      "total_size_mb": 49.1
+    },
+    {
+      "intent": "documentation",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./blueprint.md",
+          "name": "blueprint.md",
+          "size_mb": 0.01,
+          "ext": ".md"
+        },
+        {
+          "path": "./COPYRIGHT.md",
+          "name": "COPYRIGHT.md",
+          "size_mb": 0.008,
+          "ext": ".md"
+        },
+        {
+          "path": "./entiremap.md",
+          "name": "entiremap.md",
+          "size_mb": 0.159,
+          "ext": ".md"
+        },
+        {
+          "path": "./notebook_context.md",
+          "name": "notebook_context.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./OS_MANIFEST.md",
+          "name": "OS_MANIFEST.md",
+          "size_mb": 0.004,
+          "ext": ".md"
+        },
+        {
+          "path": "./PROVENANCE_LEDGER.md",
+          "name": "PROVENANCE_LEDGER.md",
+          "size_mb": 0.089,
+          "ext": ".md"
+        },
+        {
+          "path": "./tasks.md",
+          "name": "tasks.md",
+          "size_mb": 0.013,
+          "ext": ".md"
+        },
+        {
+          "path": "./verification.md",
+          "name": "verification.md",
+          "size_mb": 0.01,
+          "ext": ".md"
+        },
+        {
+          "path": "./src/blueprints/anya_lyte.md",
+          "name": "anya_lyte.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./src/blueprints/sir_masque.md",
+          "name": "sir_masque.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/AGENTS.md",
+          "name": "AGENTS.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/CAMELOT_BIBLE.md",
+          "name": "CAMELOT_BIBLE.md",
+          "size_mb": 0.003,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/GEMINI.md",
+          "name": "GEMINI.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/INDEX.md",
+          "name": "INDEX.md",
+          "size_mb": 0.003,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/newtech.md",
+          "name": "newtech.md",
+          "size_mb": 0.005,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/OS_MANIFEST.md",
+          "name": "OS_MANIFEST.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/PROVENANCE_LEDGER.md",
+          "name": "PROVENANCE_LEDGER.md",
+          "size_mb": 0.089,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/upgrade.txt",
+          "name": "upgrade.txt",
+          "size_mb": 0.011,
+          "ext": ".txt"
+        },
+        {
+          "path": "./docs/reports/AUDIT_REPORT.md",
+          "name": "AUDIT_REPORT.md",
+          "size_mb": 0.023,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reports/BRIEFING.md",
+          "name": "BRIEFING.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reports/THINK_TANK_SESSION.md",
+          "name": "THINK_TANK_SESSION.md",
+          "size_mb": 0.0,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reports/VERIFICATION.md",
+          "name": "VERIFICATION.md",
+          "size_mb": 0.0,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reports/BRIEFINGS/BRIEFING.md",
+          "name": "BRIEFING.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/ARTIFACTS.md",
+          "name": "ARTIFACTS.md",
+          "size_mb": 0.005,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/COMMANDS.md",
+          "name": "COMMANDS.md",
+          "size_mb": 0.007,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/GEMINI.md",
+          "name": "GEMINI.md",
+          "size_mb": 0.003,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MODAL_RUNBOOK.md",
+          "name": "MODAL_RUNBOOK.md",
+          "size_mb": 0.005,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROTOCOLS.md",
+          "name": "PROTOCOLS.md",
+          "size_mb": 0.007,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/SPECS/FUNCTIONAL_SPEC_FORGE_LUKAS_V200.md",
+          "name": "FUNCTIONAL_SPEC_FORGE_LUKAS_V200.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/CAMELOT_DEFENSE_GRID_ACTIVATE_AUTONOMOUS.md",
+          "name": "CAMELOT_DEFENSE_GRID_ACTIVATE_AUTONOMOUS.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/CAMELOT_DEFENSE_GRID_NOTEBOOKLM_AGGRESSIVE_VARIANT.md",
+          "name": "CAMELOT_DEFENSE_GRID_NOTEBOOKLM_AGGRESSIVE_VARIANT.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/CAMELOT_DEFENSE_GRID_NOTEBOOKLM_LIVE_PROFILE.md",
+          "name": "CAMELOT_DEFENSE_GRID_NOTEBOOKLM_LIVE_PROFILE.md",
+          "size_mb": 0.004,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/CAMELOT_DEFENSE_GRID_NOTEBOOKLM_MASTER_PROMPT.md",
+          "name": "CAMELOT_DEFENSE_GRID_NOTEBOOKLM_MASTER_PROMPT.md",
+          "size_mb": 0.005,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/CAMELOT_DEFENSE_GRID_ROLE_CARDS.md",
+          "name": "CAMELOT_DEFENSE_GRID_ROLE_CARDS.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/CAMELOT_DEFENSE_GRID_SAFETY_POLICY.md",
+          "name": "CAMELOT_DEFENSE_GRID_SAFETY_POLICY.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/CAMELOT_DEFENSE_GRID_VALIDATION_CHECKLIST.md",
+          "name": "CAMELOT_DEFENSE_GRID_VALIDATION_CHECKLIST.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/PROMPTS/PROMPT_REGISTRY.md",
+          "name": "PROMPT_REGISTRY.md",
+          "size_mb": 0.005,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MANIFESTS/AUDIT_REPORT_20260131.md",
+          "name": "AUDIT_REPORT_20260131.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MANIFESTS/AUDIT_REPORT_20260131_2215.md",
+          "name": "AUDIT_REPORT_20260131_2215.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MANIFESTS/CAMELOT_TRIAD_INTEGRATION.md",
+          "name": "CAMELOT_TRIAD_INTEGRATION.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MANIFESTS/Entire_map.md",
+          "name": "Entire_map.md",
+          "size_mb": 0.015,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MANIFESTS/ledger_tool.blueprint.md",
+          "name": "ledger_tool.blueprint.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MANIFESTS/PHASE_8_KINETIC_ASCENSION.md",
+          "name": "PHASE_8_KINETIC_ASCENSION.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/MANIFESTS/PHASE_9_ETHEREAL_RESONANCE.md",
+          "name": "PHASE_9_ETHEREAL_RESONANCE.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/LEGAL/COPYRIGHT_HEADER.md",
+          "name": "COPYRIGHT_HEADER.md",
+          "size_mb": 0.004,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/LEGAL/IP_STRATEGY.md",
+          "name": "IP_STRATEGY.md",
+          "size_mb": 0.008,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/LEGAL/MASTER_GLOSSARY.md",
+          "name": "MASTER_GLOSSARY.md",
+          "size_mb": 0.02,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/LEGAL/TRADEMARK_REGISTER.md",
+          "name": "TRADEMARK_REGISTER.md",
+          "size_mb": 0.003,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/LEGAL/TRADE_SECRET_MANIFEST.md",
+          "name": "TRADE_SECRET_MANIFEST.md",
+          "size_mb": 0.008,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/.github/ISSUE_TEMPLATE/bug---issue.md",
+          "name": "bug---issue.md",
+          "size_mb": 0.001,
+          "ext": ".md"
+        }
+      ],
+      "total_size_mb": 40.1
+    },
+    {
+      "intent": "readme",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./CONTRIBUTING.md",
+          "name": "CONTRIBUTING.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.005,
+          "ext": ""
+        },
+        {
+          "path": "./NOTICE.md",
+          "name": "NOTICE.md",
+          "size_mb": 0.003,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/CONTRIBUTING.md",
+          "name": "CONTRIBUTING.md",
+          "size_mb": 0.002,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/INTEGRATIONS/README_HAYSTACK_UKG.md",
+          "name": "README_HAYSTACK_UKG.md",
+          "size_mb": 0.009,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.011,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/kernels/moe/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.034,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/unsloth/unsloth/kernels/moe/grouped_gemm/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.034,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.011,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/NOTICE",
+          "name": "NOTICE",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/types/license.go",
+          "name": "license.go",
+          "size_mb": 0.001,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/result/testdata/test-ignore-policy-licenses-and-secrets.rego",
+          "name": "test-ignore-policy-licenses-and-secrets.rego",
+          "size_mb": 0.0,
+          "ext": ".rego"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/notification/notice.go",
+          "name": "notice.go",
+          "size_mb": 0.006,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/licensing/testdata/licensed.c",
+          "name": "licensed.c",
+          "size_mb": 0.001,
+          "ext": ".c"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/licensing/testdata/LICENSE_apache2",
+          "name": "LICENSE_apache2",
+          "size_mb": 0.011,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/licensing/testdata/LICENSE_creativecommons",
+          "name": "LICENSE_creativecommons",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/licensing/testdata/unlicensed.c",
+          "name": "unlicensed.c",
+          "size_mb": 0.0,
+          "ext": ".c"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/licensing/expression/licenses.json",
+          "name": "licenses.json",
+          "size_mb": 0.009,
+          "ext": ".json"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/flag/license_flags.go",
+          "name": "license_flags.go",
+          "size_mb": 0.004,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/types/license.go",
+          "name": "license.go",
+          "size_mb": 0.001,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/analyzer/licensing/license.go",
+          "name": "license.go",
+          "size_mb": 0.003,
+          "ext": ".go"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/integration/testdata/license-cyclonedx.json.golden",
+          "name": "license-cyclonedx.json.golden",
+          "size_mb": 0.001,
+          "ext": ".golden"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/integration/testdata/fixtures/sbom/license-cyclonedx.json",
+          "name": "license-cyclonedx.json",
+          "size_mb": 0.003,
+          "ext": ".json"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/tomcp/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.01,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/superpowers/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/packages/tools/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/packages/openai-sdk-python/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/docs/memorybench/contributing.mdx",
+          "name": "contributing.mdx",
+          "size_mb": 0.002,
+          "ext": ".mdx"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.001,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.022,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/webscaper/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.001,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/searx/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.001,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/jira/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.003,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/instagram_tool/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.002,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/image_generation/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.001,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/google_search/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.001,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/github/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.004,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/superagi/tools/code/README.MD",
+          "name": "README.MD",
+          "size_mb": 0.002,
+          "ext": ".MD"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/migrations/README",
+          "name": "README",
+          "size_mb": 0.0,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/Shoutify/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.011,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/Shoutify/.github/CONTRIBUTING.md",
+          "name": "CONTRIBUTING.md",
+          "size_mb": 0.006,
+          "ext": ".md"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tiktok/public/theboldfont-license.rtf",
+          "name": "theboldfont-license.rtf",
+          "size_mb": 0.001,
+          "ext": ".rtf"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/renderer/src/options/license-key.tsx",
+          "name": "license-key.tsx",
+          "size_mb": 0.001,
+          "ext": ".tsx"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/renderer/src/options/public-license-key.tsx",
+          "name": "public-license-key.tsx",
+          "size_mb": 0.001,
+          "ext": ".tsx"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/player/src/license-blacklist.tsx",
+          "name": "license-blacklist.tsx",
+          "size_mb": 0.003,
+          "ext": ".tsx"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/player/src/use-remotion-license-acknowledge.ts",
+          "name": "use-remotion-license-acknowledge.ts",
+          "size_mb": 0.001,
+          "ext": ".ts"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/media-parser/src/remotion-license-acknowledge.ts",
+          "name": "remotion-license-acknowledge.ts",
+          "size_mb": 0.001,
+          "ext": ".ts"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/lambda-python/LICENSE",
+          "name": "LICENSE",
+          "size_mb": 0.002,
+          "ext": ""
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/static/generated/articles-docs-contributing-bounty.png",
+          "name": "articles-docs-contributing-bounty.png",
+          "size_mb": 0.046,
+          "ext": ".png"
+        }
+      ],
+      "total_size_mb": 13.1
+    },
+    {
+      "intent": "binary",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./tools/sir_sonus/voices/af_bella.bin",
+          "name": "af_bella.bin",
+          "size_mb": 0.5,
+          "ext": ".bin"
+        },
+        {
+          "path": "./tools/sir_sonus/voices/voices.bin",
+          "name": "voices.bin",
+          "size_mb": 0.0,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/release/ledger_keeper.exe",
+          "name": "ledger_keeper.exe",
+          "size_mb": 0.712,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/clap_derive-975c4de75d3d5cd6.dll",
+          "name": "clap_derive-975c4de75d3d5cd6.dll",
+          "size_mb": 2.162,
+          "ext": ".dll"
+        },
+        {
+          "path": "./ledger_keeper/target/release/deps/ledger_keeper.exe",
+          "name": "ledger_keeper.exe",
+          "size_mb": 0.712,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-ce10a74b868b34d7/build-script-build.exe",
+          "name": "build-script-build.exe",
+          "size_mb": 0.25,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/quote-ce10a74b868b34d7/build_script_build-ce10a74b868b34d7.exe",
+          "name": "build_script_build-ce10a74b868b34d7.exe",
+          "size_mb": 0.25,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-464d5f7cb95712b0/build-script-build.exe",
+          "name": "build-script-build.exe",
+          "size_mb": 0.298,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/proc-macro2-464d5f7cb95712b0/build_script_build-464d5f7cb95712b0.exe",
+          "name": "build_script_build-464d5f7cb95712b0.exe",
+          "size_mb": 0.298,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-c24f575ba19a08ad/build-script-build.exe",
+          "name": "build-script-build.exe",
+          "size_mb": 0.347,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/release/build/num-traits-c24f575ba19a08ad/build_script_build-c24f575ba19a08ad.exe",
+          "name": "build_script_build-c24f575ba19a08ad.exe",
+          "size_mb": 0.347,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-2jwvbhjgzz2t4/s-hfe3p3pbzh-1succm8-3t8sgsie6quutdjthsporkogd/dep-graph.bin",
+          "name": "dep-graph.bin",
+          "size_mb": 0.961,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-2jwvbhjgzz2t4/s-hfe3p3pbzh-1succm8-3t8sgsie6quutdjthsporkogd/query-cache.bin",
+          "name": "query-cache.bin",
+          "size_mb": 0.373,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-2jwvbhjgzz2t4/s-hfe3p3pbzh-1succm8-3t8sgsie6quutdjthsporkogd/work-products.bin",
+          "name": "work-products.bin",
+          "size_mb": 0.0,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe43kaz84-1b37xh8-0x9sbwfr24kbktn1ve26lrqgt/dep-graph.bin",
+          "name": "dep-graph.bin",
+          "size_mb": 0.942,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe43kaz84-1b37xh8-0x9sbwfr24kbktn1ve26lrqgt/query-cache.bin",
+          "name": "query-cache.bin",
+          "size_mb": 0.363,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe43kaz84-1b37xh8-0x9sbwfr24kbktn1ve26lrqgt/work-products.bin",
+          "name": "work-products.bin",
+          "size_mb": 0.0,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe3p3pbza-0zzfkh1-dk4mn2xo4ecdyrldm7ealawt5/dep-graph.bin",
+          "name": "dep-graph.bin",
+          "size_mb": 0.936,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe3p3pbza-0zzfkh1-dk4mn2xo4ecdyrldm7ealawt5/query-cache.bin",
+          "name": "query-cache.bin",
+          "size_mb": 0.362,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe3p3pbza-0zzfkh1-dk4mn2xo4ecdyrldm7ealawt5/work-products.bin",
+          "name": "work-products.bin",
+          "size_mb": 0.0,
+          "ext": ".bin"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/deps/clap_derive-75c5d83eb8807a08.dll",
+          "name": "clap_derive-75c5d83eb8807a08.dll",
+          "size_mb": 2.272,
+          "ext": ".dll"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-7c3ebc9baa47f717/build-script-build.exe",
+          "name": "build-script-build.exe",
+          "size_mb": 0.256,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/quote-7c3ebc9baa47f717/build_script_build-7c3ebc9baa47f717.exe",
+          "name": "build_script_build-7c3ebc9baa47f717.exe",
+          "size_mb": 0.256,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/proc-macro2-14c436feccda2a72/build-script-build.exe",
+          "name": "build-script-build.exe",
+          "size_mb": 0.304,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/proc-macro2-14c436feccda2a72/build_script_build-14c436feccda2a72.exe",
+          "name": "build_script_build-14c436feccda2a72.exe",
+          "size_mb": 0.304,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/num-traits-33f6614841b1dc4d/build-script-build.exe",
+          "name": "build-script-build.exe",
+          "size_mb": 0.366,
+          "ext": ".exe"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/build/num-traits-33f6614841b1dc4d/build_script_build-33f6614841b1dc4d.exe",
+          "name": "build_script_build-33f6614841b1dc4d.exe",
+          "size_mb": 0.366,
+          "ext": ".exe"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avcodec-60.dll",
+          "name": "avcodec-60.dll",
+          "size_mb": 15.718,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avcodec-61.dll",
+          "name": "avcodec-61.dll",
+          "size_mb": 15.654,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avdevice-60.dll",
+          "name": "avdevice-60.dll",
+          "size_mb": 0.123,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avdevice-61.dll",
+          "name": "avdevice-61.dll",
+          "size_mb": 0.123,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avfilter-10.dll",
+          "name": "avfilter-10.dll",
+          "size_mb": 1.126,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avfilter-9.dll",
+          "name": "avfilter-9.dll",
+          "size_mb": 1.106,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avformat-60.dll",
+          "name": "avformat-60.dll",
+          "size_mb": 0.867,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avformat-61.dll",
+          "name": "avformat-61.dll",
+          "size_mb": 0.936,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avutil-58.dll",
+          "name": "avutil-58.dll",
+          "size_mb": 0.652,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/avutil-59.dll",
+          "name": "avutil-59.dll",
+          "size_mb": 0.696,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/ffmpeg.exe",
+          "name": "ffmpeg.exe",
+          "size_mb": 0.309,
+          "ext": ".exe"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/ffprobe.exe",
+          "name": "ffprobe.exe",
+          "size_mb": 0.161,
+          "ext": ".exe"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/libgcc_s_seh-1.dll",
+          "name": "libgcc_s_seh-1.dll",
+          "size_mb": 0.079,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/libssp-0.dll",
+          "name": "libssp-0.dll",
+          "size_mb": 0.041,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/libstdc++-6.dll",
+          "name": "libstdc++-6.dll",
+          "size_mb": 1.378,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/libvpx-1.dll",
+          "name": "libvpx-1.dll",
+          "size_mb": 3.261,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/libwinpthread-1.dll",
+          "name": "libwinpthread-1.dll",
+          "size_mb": 0.056,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/msvcr100.dll",
+          "name": "msvcr100.dll",
+          "size_mb": 0.792,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/remotion.exe",
+          "name": "remotion.exe",
+          "size_mb": 1.232,
+          "ext": ".exe"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/swresample-4.dll",
+          "name": "swresample-4.dll",
+          "size_mb": 0.107,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/swresample-5.dll",
+          "name": "swresample-5.dll",
+          "size_mb": 0.105,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/swscale-7.dll",
+          "name": "swscale-7.dll",
+          "size_mb": 0.501,
+          "ext": ".dll"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor-win32-x64-msvc/swscale-8.dll",
+          "name": "swscale-8.dll",
+          "size_mb": 0.539,
+          "ext": ".dll"
+        }
+      ],
+      "total_size_mb": 4716.0
+    },
+    {
+      "intent": "stylesheet",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/licensing/testdata/styles.css",
+          "name": "styles.css",
+          "size_mb": 0.012,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/packages/ui/globals.css",
+          "name": "globals.css",
+          "size_mb": 0.008,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/web/globals.css",
+          "name": "globals.css",
+          "size_mb": 0.003,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/memory-graph-playground/src/app/globals.css",
+          "name": "globals.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/docs/style.css",
+          "name": "style.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/browser-extension/entrypoints/welcome/welcome.css",
+          "name": "welcome.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/browser-extension/entrypoints/popup/App.css",
+          "name": "App.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/browser-extension/entrypoints/popup/style.css",
+          "name": "style.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/_app.css",
+          "name": "_app.css",
+          "size_mb": 0.041,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/Dashboard/Dashboard.module.css",
+          "name": "Dashboard.module.css",
+          "size_mb": 0.002,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/Content/Toolkits/Tool.module.css",
+          "name": "Tool.module.css",
+          "size_mb": 0.004,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/Content/Marketplace/Market.module.css",
+          "name": "Market.module.css",
+          "size_mb": 0.009,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/Content/Knowledge/Knowledge.module.css",
+          "name": "Knowledge.module.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/Content/APM/Apm.module.css",
+          "name": "Apm.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/Content/Agents/Agents.module.css",
+          "name": "Agents.module.css",
+          "size_mb": 0.009,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/pages/Content/Agents/react-datetime.css",
+          "name": "react-datetime.css",
+          "size_mb": 0.004,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/SuperAGI/gui/app/globals.css",
+          "name": "globals.css",
+          "size_mb": 0.002,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/Shoutify/src/styles/globals.css",
+          "name": "globals.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/Shoutify/src/stories/assets/storybook.css",
+          "name": "storybook.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-still/src/fonts.css",
+          "name": "fonts.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-stargazer/src/gh-styles.css",
+          "name": "gh-styles.css",
+          "size_mb": 0.005,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/src/App.css",
+          "name": "App.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/src/deviceitem.module.css",
+          "name": "deviceitem.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/src/index.css",
+          "name": "index.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-react-router/app/app.css",
+          "name": "app.css",
+          "size_mb": 0.002,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-prompt-to-motion-graphics/styles/global.css",
+          "name": "global.css",
+          "size_mb": 0.003,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-next-pages/styles/global.css",
+          "name": "global.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-next-app-tailwind/styles/global.css",
+          "name": "global.css",
+          "size_mb": 0.002,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-next-app/styles/global.css",
+          "name": "global.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/src/fonts.css",
+          "name": "fonts.css",
+          "size_mb": 0.001,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/src/index.css",
+          "name": "index.css",
+          "size_mb": 0.004,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/src/components/team.css",
+          "name": "team.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/player-example/pages/fullscreen.css",
+          "name": "fullscreen.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/style.css",
+          "name": "style.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/styles.module.scss",
+          "name": "styles.module.scss",
+          "size_mb": 0.0,
+          "ext": ".scss"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/weird-css.css",
+          "name": "weird-css.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/DarkModeTest/styles.module.css",
+          "name": "styles.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/remotion/font.css",
+          "name": "font.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/pages/styles.module.css",
+          "name": "styles.module.css",
+          "size_mb": 0.002,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/css/custom.css",
+          "name": "custom.css",
+          "size_mb": 0.008,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/components/AboutUsHeader.module.css",
+          "name": "AboutUsHeader.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/components/ContactUsHeader.module.css",
+          "name": "ContactUsHeader.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/components/credits.css",
+          "name": "credits.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/components/GoogleMaps.module.css",
+          "name": "GoogleMaps.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/components/TeamCardsCSS.module.css",
+          "name": "TeamCardsCSS.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/src/components/video-player.css",
+          "name": "video-player.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/components/bounties.css",
+          "name": "bounties.css",
+          "size_mb": 0.005,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/components/input-fields.css",
+          "name": "input-fields.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/components/transparent-video.css",
+          "name": "transparent-video.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/components/TableOfContents/toc.module.css",
+          "name": "toc.module.css",
+          "size_mb": 0.0,
+          "ext": ".css"
+        }
+      ],
+      "total_size_mb": 1.4
+    },
+    {
+      "intent": "data",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./logs/rotel_traces/rotel_20260128.jsonl",
+          "name": "rotel_20260128.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./logs/rotel_traces/rotel_20260130.jsonl",
+          "name": "rotel_20260130.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./logs/rotel_traces/rotel_20260217.jsonl",
+          "name": "rotel_20260217.jsonl",
+          "size_mb": 0.145,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./logs/rotel_traces/rotel_20260218.jsonl",
+          "name": "rotel_20260218.jsonl",
+          "size_mb": 0.132,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./logs/rotel_traces/rotel_20260219.jsonl",
+          "name": "rotel_20260219.jsonl",
+          "size_mb": 0.031,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/db/testdata/trivy.db",
+          "name": "trivy.db",
+          "size_mb": 0.0,
+          "ext": ".db"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/cache/testdata/broken-image.db",
+          "name": "broken-image.db",
+          "size_mb": 0.031,
+          "ext": ".db"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/cache/testdata/broken-layer.db",
+          "name": "broken-layer.db",
+          "size_mb": 0.031,
+          "ext": ".db"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/cache/testdata/different-image-schema.db",
+          "name": "different-image-schema.db",
+          "size_mb": 0.031,
+          "ext": ".db"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/cache/testdata/fanal.db",
+          "name": "fanal.db",
+          "size_mb": 0.031,
+          "ext": ".db"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/misc/eol/data/debian.csv",
+          "name": "debian.csv",
+          "size_mb": 0.001,
+          "ext": ".csv"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/misc/eol/data/ubuntu.csv",
+          "name": "ubuntu.csv",
+          "size_mb": 0.002,
+          "ext": ".csv"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/integration/testdata/fixtures/sbom/centos-7-cyclonedx.intoto.jsonl",
+          "name": "centos-7-cyclonedx.intoto.jsonl",
+          "size_mb": 0.004,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/Shoutify/prisma/migrations/20220910225423_init/migration.sql",
+          "name": "migration.sql",
+          "size_mb": 0.002,
+          "ext": ".sql"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pi-mono/packages/coding-agent/test/fixtures/before-compaction.jsonl",
+          "name": "before-compaction.jsonl",
+          "size_mb": 2.262,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pi-mono/packages/coding-agent/test/fixtures/large-session.jsonl",
+          "name": "large-session.jsonl",
+          "size_mb": 0.93,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/integration_tests/rag_evals/dataset/synthetic_tests/20230203_alphabet_10K.jsonl",
+          "name": "20230203_alphabet_10K.jsonl",
+          "size_mb": 0.09,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/integration_tests/rag_evals/dataset/synthetic_tests/20230203_alphabet_10K_tables.jsonl",
+          "name": "20230203_alphabet_10K_tables.jsonl",
+          "size_mb": 0.015,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/twitter/postgres_schema.sql",
+          "name": "postgres_schema.sql",
+          "size_mb": 0.002,
+          "ext": ".sql"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/option-greeks/data/definition.csv",
+          "name": "definition.csv",
+          "size_mb": 0.314,
+          "ext": ".csv"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/option-greeks/data/options.csv",
+          "name": "options.csv",
+          "size_mb": 1.415,
+          "ext": ".csv"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/kafka-linear-regression/example_regression_input.csv",
+          "name": "example_regression_input.csv",
+          "size_mb": 0.0,
+          "ext": ".csv"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/kafka-linear-regression/example_regression_output_stream.csv",
+          "name": "example_regression_output_stream.csv",
+          "size_mb": 0.001,
+          "ext": ".csv"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/from_jupyter_to_deploy/part4_deployment/ticker.csv",
+          "name": "ticker.csv",
+          "size_mb": 1.213,
+          "ext": ".csv"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/debezium-postgres-example/sql/init-db.sql",
+          "name": "init-db.sql",
+          "size_mb": 0.0,
+          "ext": ".sql"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/opencode_swarm/packages/opencode-swarm-plugin/.opencode/eval-history.jsonl",
+          "name": "eval-history.jsonl",
+          "size_mb": 0.08,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/opencode_swarm/packages/opencode-swarm-plugin/.hive/issues.jsonl",
+          "name": "issues.jsonl",
+          "size_mb": 0.061,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/opencode_swarm/packages/opencode-swarm-plugin/.hive/memories.jsonl",
+          "name": "memories.jsonl",
+          "size_mb": 14.41,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/opencode_swarm/.hive/issues.jsonl",
+          "name": "issues.jsonl",
+          "size_mb": 0.436,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/opencode_swarm/.hive/memories.jsonl",
+          "name": "memories.jsonl",
+          "size_mb": 14.43,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/openai_batch_completions.jsonl",
+          "name": "openai_batch_completions.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/proxy_unit_tests/azure_fine_tune.jsonl",
+          "name": "azure_fine_tune.jsonl",
+          "size_mb": 0.003,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/proxy_unit_tests/batch_job_results_furniture.jsonl",
+          "name": "batch_job_results_furniture.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/proxy_unit_tests/openai_batch_completions.jsonl",
+          "name": "openai_batch_completions.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/proxy_unit_tests/openai_batch_completions_router.jsonl",
+          "name": "openai_batch_completions_router.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/openai_endpoints_tests/input.jsonl",
+          "name": "input.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/openai_endpoints_tests/input_azure.jsonl",
+          "name": "input_azure.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/openai_endpoints_tests/openai_batch_completions.jsonl",
+          "name": "openai_batch_completions.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/openai_endpoints_tests/openai_fine_tuning.jsonl",
+          "name": "openai_fine_tuning.jsonl",
+          "size_mb": 0.003,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/openai_endpoints_tests/out.jsonl",
+          "name": "out.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/openai_endpoints_tests/out_azure.jsonl",
+          "name": "out_azure.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/azure_fine_tune.jsonl",
+          "name": "azure_fine_tune.jsonl",
+          "size_mb": 0.003,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/batch_job_results_furniture.jsonl",
+          "name": "batch_job_results_furniture.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/example.jsonl",
+          "name": "example.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/openai_batch_completions.jsonl",
+          "name": "openai_batch_completions.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/openai_batch_completions_router.jsonl",
+          "name": "openai_batch_completions_router.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/vertex_ai.jsonl",
+          "name": "vertex_ai.jsonl",
+          "size_mb": 0.001,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/vertex_batch_completions.jsonl",
+          "name": "vertex_batch_completions.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/local_testing/.litellm_cache/cache.db",
+          "name": "cache.db",
+          "size_mb": 0.031,
+          "ext": ".db"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/batches_tests/batch_job_results_furniture.jsonl",
+          "name": "batch_job_results_furniture.jsonl",
+          "size_mb": 0.0,
+          "ext": ".jsonl"
+        }
+      ],
+      "total_size_mb": 40.6
+    },
+    {
+      "intent": "media_video",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tts-google/assets/firebase-register.mp4",
+          "name": "firebase-register.mp4",
+          "size_mb": 1.456,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tts-google/assets/firebase-storage-enable.mp4",
+          "name": "firebase-storage-enable.mp4",
+          "size_mb": 2.048,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tts-google/assets/gcp-create-key.mp4",
+          "name": "gcp-create-key.mp4",
+          "size_mb": 2.627,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tts-google/assets/gcp-create-serviceaccount.mp4",
+          "name": "gcp-create-serviceaccount.mp4",
+          "size_mb": 2.323,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tts-google/assets/gcp-enable-api.mp4",
+          "name": "gcp-enable-api.mp4",
+          "size_mb": 0.491,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tiktok/public/sample-video.mp4",
+          "name": "sample-video.mp4",
+          "size_mb": 3.869,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-three/public/phone.mp4",
+          "name": "phone.mp4",
+          "size_mb": 0.197,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-three/public/tablet.mp4",
+          "name": "tablet.mp4",
+          "size_mb": 0.088,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/welcome/webcam1711527012951.mp4",
+          "name": "webcam1711527012951.mp4",
+          "size_mb": 1.558,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/welcome/webcam1711527094922.mp4",
+          "name": "webcam1711527094922.mp4",
+          "size_mb": 1.647,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/welcome/webcam1711527196961.mp4",
+          "name": "webcam1711527196961.mp4",
+          "size_mb": 1.744,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/welcome/webcam1711527265610.mp4",
+          "name": "webcam1711527265610.mp4",
+          "size_mb": 1.696,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/img/compose.mp4",
+          "name": "compose.mp4",
+          "size_mb": 3.932,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/img/compose.webm",
+          "name": "compose.webm",
+          "size_mb": 0.998,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/img/editing-safari.mp4",
+          "name": "editing-safari.mp4",
+          "size_mb": 0.507,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/img/editing-vp9-chrome.webm",
+          "name": "editing-vp9-chrome.webm",
+          "size_mb": 0.153,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/img/render-progress.mp4",
+          "name": "render-progress.mp4",
+          "size_mb": 1.639,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/img/render-progress.webm",
+          "name": "render-progress.webm",
+          "size_mb": 0.579,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/player-example/public/video.webm",
+          "name": "video.webm",
+          "size_mb": 0.558,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/audio-with-64msoffset-editlist.mp4",
+          "name": "audio-with-64msoffset-editlist.mp4",
+          "size_mb": 0.077,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/bigbuckbunny.mp4",
+          "name": "bigbuckbunny.mp4",
+          "size_mb": 13.665,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/empty.mp4",
+          "name": "empty.mp4",
+          "size_mb": 0.0,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/fragmented-mp4-with-no-duration-metadata.mp4",
+          "name": "fragmented-mp4-with-no-duration-metadata.mp4",
+          "size_mb": 0.047,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/garbage-at-end.mp4",
+          "name": "garbage-at-end.mp4",
+          "size_mb": 0.377,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/mehmet.mov",
+          "name": "mehmet.mov",
+          "size_mb": 3.69,
+          "ext": ".mov"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/no-frames-in-beginning.webm",
+          "name": "no-frames-in-beginning.webm",
+          "size_mb": 0.87,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/prof-color-type.mp4",
+          "name": "prof-color-type.mp4",
+          "size_mb": 0.272,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/subsequent-mdats.mp4",
+          "name": "subsequent-mdats.mp4",
+          "size_mb": 1.007,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/unevendim.webm",
+          "name": "unevendim.webm",
+          "size_mb": 0.712,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/video-start-offset.mp4",
+          "name": "video-start-offset.mp4",
+          "size_mb": 0.117,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/video.mp4",
+          "name": "video.mp4",
+          "size_mb": 1.847,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/webm-codec-from-sps.webm",
+          "name": "webm-codec-from-sps.webm",
+          "size_mb": 0.66,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/local-playlist/audio1-0000.mp4",
+          "name": "audio1-0000.mp4",
+          "size_mb": 0.001,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/local-playlist/video1-0000.mp4",
+          "name": "video1-0000.mp4",
+          "size_mb": 0.001,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/podcasted.mp4",
+          "name": "podcasted.mp4",
+          "size_mb": 0.136,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/resources/framer-24fps.mp4",
+          "name": "framer-24fps.mp4",
+          "size_mb": 0.056,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/resources/framer-music.mp4",
+          "name": "framer-music.mp4",
+          "size_mb": 2.26,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/resources/framer.mp4",
+          "name": "framer.mp4",
+          "size_mb": 0.067,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/av1-bbb.mp4",
+          "name": "av1-bbb.mp4",
+          "size_mb": 1.011,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/av1-bbb.webm",
+          "name": "av1-bbb.webm",
+          "size_mb": 1.01,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/av1.mp4",
+          "name": "av1.mp4",
+          "size_mb": 0.332,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/av1.webm",
+          "name": "av1.webm",
+          "size_mb": 0.331,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/bigbuckbunny.mp4",
+          "name": "bigbuckbunny.mp4",
+          "size_mb": 13.665,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/blush-0.5x.mp4",
+          "name": "blush-0.5x.mp4",
+          "size_mb": 0.48,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/blush-0.5x.webm",
+          "name": "blush-0.5x.webm",
+          "size_mb": 0.104,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/blush-1x.mp4",
+          "name": "blush-1x.mp4",
+          "size_mb": 0.982,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/blush-1x.webm",
+          "name": "blush-1x.webm",
+          "size_mb": 0.191,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/blush-2x.mp4",
+          "name": "blush-2x.mp4",
+          "size_mb": 2.202,
+          "ext": ".mp4"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/blush-2x.webm",
+          "name": "blush-2x.webm",
+          "size_mb": 0.601,
+          "ext": ".webm"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/clip001.mkv",
+          "name": "clip001.mkv",
+          "size_mb": 0.136,
+          "ext": ".mkv"
+        }
+      ],
+      "total_size_mb": 406.7
+    },
+    {
+      "intent": "media_audio",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-tts-google/public/error_audio.mp3",
+          "name": "error_audio.mp3",
+          "size_mb": 0.294,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/sounds/grow.m4a",
+          "name": "grow.m4a",
+          "size_mb": 0.005,
+          "ext": ".m4a"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/sounds/shrink.m4a",
+          "name": "shrink.m4a",
+          "size_mb": 0.004,
+          "ext": ".m4a"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/sounds/utope-i-woke-up-in-a-dream.mp3",
+          "name": "utope-i-woke-up-in-a-dream.mp3",
+          "size_mb": 1.637,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/sounds/utope-nature.mp3",
+          "name": "utope-nature.mp3",
+          "size_mb": 1.763,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/sounds/utope-rhythmic-reverie.mp3",
+          "name": "utope-rhythmic-reverie.mp3",
+          "size_mb": 2.399,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/public/sounds/whip.wav",
+          "name": "whip.wav",
+          "size_mb": 0.064,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-music-visualization/public/demo-track.mp3",
+          "name": "demo-track.mp3",
+          "size_mb": 9.111,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-audiogram/public/dialogue.wav",
+          "name": "dialogue.wav",
+          "size_mb": 4.566,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/studio-server/web/beep.wav",
+          "name": "beep.wav",
+          "size_mb": 0.056,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/fire.mp3",
+          "name": "fire.mp3",
+          "size_mb": 0.098,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/partyhorn.mp3",
+          "name": "partyhorn.mp3",
+          "size_mb": 0.034,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/public/sad.mp3",
+          "name": "sad.mp3",
+          "size_mb": 0.039,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/player-example/public/sample.mp3",
+          "name": "sample.mp3",
+          "size_mb": 1.037,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/player-example/public/sample2.mp3",
+          "name": "sample2.mp3",
+          "size_mb": 3.731,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/player-example/public/sample3.mp3",
+          "name": "sample3.mp3",
+          "size_mb": 2.016,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/dialogue.wav",
+          "name": "dialogue.wav",
+          "size_mb": 4.566,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/junk.wav",
+          "name": "junk.wav",
+          "size_mb": 0.84,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/mp3-infosection.mp3",
+          "name": "mp3-infosection.mp3",
+          "size_mb": 0.019,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/mp3-mpeg25.mp3",
+          "name": "mp3-mpeg25.mp3",
+          "size_mb": 0.178,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/problematic-fragmented.m4a",
+          "name": "problematic-fragmented.m4a",
+          "size_mb": 0.07,
+          "ext": ".m4a"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/sample.flac",
+          "name": "sample.flac",
+          "size_mb": 1.35,
+          "ext": ".flac"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/sample3.aac",
+          "name": "sample3.aac",
+          "size_mb": 1.677,
+          "ext": ".aac"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/syncsafe-id3.mp3",
+          "name": "syncsafe-id3.mp3",
+          "size_mb": 0.43,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/vbr.mp3",
+          "name": "vbr.mp3",
+          "size_mb": 0.222,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/voice-note.m4a",
+          "name": "voice-note.m4a",
+          "size_mb": 0.043,
+          "ext": ".m4a"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example-videos/videos/wave-format-extensible.wav",
+          "name": "wave-format-extensible.wav",
+          "size_mb": 2.744,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/new.wav",
+          "name": "new.wav",
+          "size_mb": 1.831,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/one.wav",
+          "name": "one.wav",
+          "size_mb": 0.012,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/podcasted-reference.wav",
+          "name": "podcasted-reference.wav",
+          "size_mb": 0.006,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/podcasted.wav",
+          "name": "podcasted.wav",
+          "size_mb": 0.061,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/pointfive.wav",
+          "name": "pointfive.wav",
+          "size_mb": 0.013,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/reference.wav",
+          "name": "reference.wav",
+          "size_mb": 0.007,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/resources/sound1.mp3",
+          "name": "sound1.mp3",
+          "size_mb": 2.159,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/src/resources/sound2.mp3",
+          "name": "sound2.mp3",
+          "size_mb": 1.439,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/16khz.wav",
+          "name": "16khz.wav",
+          "size_mb": 5.199,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/22khz.wav",
+          "name": "22khz.wav",
+          "size_mb": 0.077,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/audio-48000hz.wav",
+          "name": "audio-48000hz.wav",
+          "size_mb": 0.916,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/chirp.wav",
+          "name": "chirp.wav",
+          "size_mb": 2.524,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/infinite-audio.mp3",
+          "name": "infinite-audio.mp3",
+          "size_mb": 0.647,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/music.mp3",
+          "name": "music.mp3",
+          "size_mb": 4.775,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/podcast.wav",
+          "name": "podcast.wav",
+          "size_mb": 0.916,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/sample.aac",
+          "name": "sample.aac",
+          "size_mb": 1.677,
+          "ext": ".aac"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/sine.wav",
+          "name": "sine.wav",
+          "size_mb": 0.841,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/whip.mp3",
+          "name": "whip.mp3",
+          "size_mb": 0.019,
+          "ext": ".mp3"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/sounds/1.wav",
+          "name": "1.wav",
+          "size_mb": 0.586,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/sounds/2.wav",
+          "name": "2.wav",
+          "size_mb": 0.281,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/sounds/3.wav",
+          "name": "3.wav",
+          "size_mb": 0.306,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/sounds/4.wav",
+          "name": "4.wav",
+          "size_mb": 2.046,
+          "ext": ".wav"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/example/public/sounds/5.wav",
+          "name": "5.wav",
+          "size_mb": 1.703,
+          "ext": ".wav"
+        }
+      ],
+      "total_size_mb": 115.2
+    },
+    {
+      "intent": "notebook",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/from_jupyter_to_deploy/part1_jupyter_exploration.ipynb",
+          "name": "part1_jupyter_exploration.ipynb",
+          "size_mb": 0.013,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/from_jupyter_to_deploy/part2_interactive_dashboard.ipynb",
+          "name": "part2_interactive_dashboard.ipynb",
+          "size_mb": 0.011,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/from_jupyter_to_deploy/part3_kafka_and_alerts.ipynb",
+          "name": "part3_kafka_and_alerts.ipynb",
+          "size_mb": 0.011,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/projects/from_jupyter_to_deploy/part3_kafka_data_streamer.ipynb",
+          "name": "part3_kafka_data_streamer.ipynb",
+          "size_mb": 0.007,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/pathway_intro.ipynb",
+          "name": "pathway_intro.ipynb",
+          "size_mb": 0.044,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/alert-deduplication.ipynb",
+          "name": "alert-deduplication.ipynb",
+          "size_mb": 0.048,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/asof_join.ipynb",
+          "name": "asof_join.ipynb",
+          "size_mb": 0.024,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/asynctransformer.ipynb",
+          "name": "asynctransformer.ipynb",
+          "size_mb": 0.03,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/basic_datatypes.ipynb",
+          "name": "basic_datatypes.ipynb",
+          "size_mb": 0.044,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/bellman_ford.ipynb",
+          "name": "bellman_ford.ipynb",
+          "size_mb": 0.012,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/combining-time-series.ipynb",
+          "name": "combining-time-series.ipynb",
+          "size_mb": 0.038,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/consistency.ipynb",
+          "name": "consistency.ipynb",
+          "size_mb": 0.019,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/custom_reducers.ipynb",
+          "name": "custom_reducers.ipynb",
+          "size_mb": 0.013,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/from_pandas.ipynb",
+          "name": "from_pandas.ipynb",
+          "size_mb": 0.026,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/fs_connector.ipynb",
+          "name": "fs_connector.ipynb",
+          "size_mb": 0.02,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/gaussian-filtering-python.ipynb",
+          "name": "gaussian-filtering-python.ipynb",
+          "size_mb": 0.284,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/groupby_reduce_manual.ipynb",
+          "name": "groupby_reduce_manual.ipynb",
+          "size_mb": 0.027,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/indexes.ipynb",
+          "name": "indexes.ipynb",
+          "size_mb": 0.035,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/installation_first_steps.ipynb",
+          "name": "installation_first_steps.ipynb",
+          "size_mb": 0.015,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/interval_join.ipynb",
+          "name": "interval_join.ipynb",
+          "size_mb": 0.018,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/interval_join_temporal_behavior.ipynb",
+          "name": "interval_join_temporal_behavior.ipynb",
+          "size_mb": 0.024,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/iterate.ipynb",
+          "name": "iterate.ipynb",
+          "size_mb": 0.033,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/join_manual.ipynb",
+          "name": "join_manual.ipynb",
+          "size_mb": 0.055,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/json_type.ipynb",
+          "name": "json_type.ipynb",
+          "size_mb": 0.015,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/option-greeks.ipynb",
+          "name": "option-greeks.ipynb",
+          "size_mb": 0.058,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/pagerank.ipynb",
+          "name": "pagerank.ipynb",
+          "size_mb": 0.009,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/rag-evaluations.ipynb",
+          "name": "rag-evaluations.ipynb",
+          "size_mb": 0.061,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/schema-generation.ipynb",
+          "name": "schema-generation.ipynb",
+          "size_mb": 0.014,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/sql_api.ipynb",
+          "name": "sql_api.ipynb",
+          "size_mb": 0.022,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/survival_guide.ipynb",
+          "name": "survival_guide.ipynb",
+          "size_mb": 0.036,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/suspicious_user_activity.ipynb",
+          "name": "suspicious_user_activity.ipynb",
+          "size_mb": 0.007,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/transformers.ipynb",
+          "name": "transformers.ipynb",
+          "size_mb": 0.017,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/transformer_tree_example.ipynb",
+          "name": "transformer_tree_example.ipynb",
+          "size_mb": 0.013,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/udf.ipynb",
+          "name": "udf.ipynb",
+          "size_mb": 0.047,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/upsampling.ipynb",
+          "name": "upsampling.ipynb",
+          "size_mb": 0.333,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/windowby_manual.ipynb",
+          "name": "windowby_manual.ipynb",
+          "size_mb": 0.014,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/windows_temporal_behavior.ipynb",
+          "name": "windows_temporal_behavior.ipynb",
+          "size_mb": 0.035,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/tutorials/window_join.ipynb",
+          "name": "window_join.ipynb",
+          "size_mb": 0.018,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/adaptive_rag_question_answering.ipynb",
+          "name": "adaptive_rag_question_answering.ipynb",
+          "size_mb": 0.045,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/fuzzy_join_part1.ipynb",
+          "name": "fuzzy_join_part1.ipynb",
+          "size_mb": 0.018,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/fuzzy_join_part2.ipynb",
+          "name": "fuzzy_join_part2.ipynb",
+          "size_mb": 0.018,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/langchain-integration.ipynb",
+          "name": "langchain-integration.ipynb",
+          "size_mb": 0.014,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/live-data-jupyter.ipynb",
+          "name": "live-data-jupyter.ipynb",
+          "size_mb": 0.022,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/live_vector_indexing_pipeline.ipynb",
+          "name": "live_vector_indexing_pipeline.ipynb",
+          "size_mb": 0.022,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/lsh.ipynb",
+          "name": "lsh.ipynb",
+          "size_mb": 0.013,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/mistral_adaptive_rag_question_answering.ipynb",
+          "name": "mistral_adaptive_rag_question_answering.ipynb",
+          "size_mb": 0.025,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/multimodal-rag-using-Gemini.ipynb",
+          "name": "multimodal-rag-using-Gemini.ipynb",
+          "size_mb": 0.026,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/examples/notebooks/showcases/multimodal-rag.ipynb",
+          "name": "multimodal-rag.ipynb",
+          "size_mb": 0.025,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/OpenVoice/demo_part1.ipynb",
+          "name": "demo_part1.ipynb",
+          "size_mb": 0.007,
+          "ext": ".ipynb"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/OpenVoice/demo_part2.ipynb",
+          "name": "demo_part2.ipynb",
+          "size_mb": 0.007,
+          "ext": ".ipynb"
+        }
+      ],
+      "total_size_mb": 5.7
+    },
+    {
+      "intent": "template",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/docs/overrides/main.html",
+          "name": "main.html",
+          "size_mb": 0.001,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/tomcp/index.html",
+          "name": "index.html",
+          "size_mb": 0.051,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/browser-extension/entrypoints/welcome/index.html",
+          "name": "index.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/apps/browser-extension/entrypoints/popup/index.html",
+          "name": "index.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/template-recorder/index.html",
+          "name": "index.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/homepage.html",
+          "name": "homepage.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/promo-pages/team.html",
+          "name": "team.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/puter/src/puter-wisp/basic.html",
+          "name": "basic.html",
+          "size_mb": 0.012,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/puter/src/puter-js/test/index.html",
+          "name": "index.html",
+          "size_mb": 0.043,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/puter/src/dev-center/coming-soon.html",
+          "name": "coming-soon.html",
+          "size_mb": 0.001,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/puter/src/dev-center/index.html",
+          "name": "index.html",
+          "size_mb": 0.028,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pi-mono/packages/web-ui/example/index.html",
+          "name": "index.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pastemax/index.html",
+          "name": "index.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pastemax/src/index.html",
+          "name": "index.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/opencode_swarm/packages/swarm-dashboard/index.html",
+          "name": "index.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/ui/litellm-dashboard/out/404.html",
+          "name": "404.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/ui/litellm-dashboard/out/index.html",
+          "name": "index.html",
+          "size_mb": 0.005,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/ui/litellm-dashboard/out/model_hub.html",
+          "name": "model_hub.html",
+          "size_mb": 0.005,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/ui/litellm-dashboard/out/model_hub_table.html",
+          "name": "model_hub_table.html",
+          "size_mb": 0.005,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/ui/litellm-dashboard/out/onboarding.html",
+          "name": "onboarding.html",
+          "size_mb": 0.005,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm/proxy/_experimental/out/index.html",
+          "name": "index.html",
+          "size_mb": 0.005,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm/proxy/_experimental/out/model_hub_table.html",
+          "name": "model_hub_table.html",
+          "size_mb": 0.005,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm/proxy/_experimental/out/onboarding.html",
+          "name": "onboarding.html",
+          "size_mb": 0.005,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/cookbook/result.html",
+          "name": "result.html",
+          "size_mb": 0.053,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/lightning/docs/crossroad.html",
+          "name": "crossroad.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/lightning/docs/redirect.html",
+          "name": "redirect.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/lightning/docs/source-pytorch/_templates/layout.html",
+          "name": "layout.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/lightning/docs/source-fabric/_templates/layout.html",
+          "name": "layout.html",
+          "size_mb": 0.0,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/leon/app/src/index.html",
+          "name": "index.html",
+          "size_mb": 0.011,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/kestra/ui/index.html",
+          "name": "index.html",
+          "size_mb": 0.002,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/ui/install-link-generator/index.html",
+          "name": "index.html",
+          "size_mb": 0.003,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/ui/desktop/index.html",
+          "name": "index.html",
+          "size_mb": 0.002,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/crates/goose-cli/static/index.html",
+          "name": "index.html",
+          "size_mb": 0.002,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/crates/goose/src/oauth/oauth_callback.html",
+          "name": "oauth_callback.html",
+          "size_mb": 0.002,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/crates/goose/src/goose_apps/clock.html",
+          "name": "clock.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/DesktopCommanderMCP/docs/index.html",
+          "name": "index.html",
+          "size_mb": 0.099,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/CogFlow/attention_visualizer/sankey_visualizer_en.html",
+          "name": "sankey_visualizer_en.html",
+          "size_mb": 0.03,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/CogFlow/attention_visualizer/sankey_visualizer_zh.html",
+          "name": "sankey_visualizer_zh.html",
+          "size_mb": 0.03,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/index.html",
+          "name": "index.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/index.html",
+          "name": "index.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/utils/format_tool_message.html",
+          "name": "format_tool_message.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/utils/index.html",
+          "name": "index.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/components/agent_memory.html",
+          "name": "agent_memory.html",
+          "size_mb": 0.025,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/components/index.html",
+          "name": "index.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/components/system_prompt_generator.html",
+          "name": "system_prompt_generator.html",
+          "size_mb": 0.011,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/base/base_io_schema.html",
+          "name": "base_io_schema.html",
+          "size_mb": 0.01,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/base/base_tool.html",
+          "name": "base_tool.html",
+          "size_mb": 0.015,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/lib/base/index.html",
+          "name": "index.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/agents/base_agent.html",
+          "name": "base_agent.html",
+          "size_mb": 0.039,
+          "ext": ".html"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/docs/agents/index.html",
+          "name": "index.html",
+          "size_mb": 0.007,
+          "ext": ".html"
+        }
+      ],
+      "total_size_mb": 1.0
+    },
+    {
+      "intent": "archive",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/policy/testdata/bundle.tar.gz",
+          "name": "bundle.tar.gz",
+          "size_mb": 0.001,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/oci/testdata/test.tar.gz",
+          "name": "test.tar.gz",
+          "size_mb": 0.0,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/walker/testdata/test.tar",
+          "name": "test.tar",
+          "size_mb": 0.007,
+          "ext": ".tar"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/utils/testdata/test.tar.gz",
+          "name": "test.tar.gz",
+          "size_mb": 0.0,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/utils/testdata/test.txt.gz",
+          "name": "test.txt.gz",
+          "size_mb": 0.0,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/utils/testdata/testdir.tar.gz",
+          "name": "testdir.tar.gz",
+          "size_mb": 0.0,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/test/testdata/alpine-310.tar.gz",
+          "name": "alpine-310.tar.gz",
+          "size_mb": 2.582,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/test/testdata/alpine-311.tar.gz",
+          "name": "alpine-311.tar.gz",
+          "size_mb": 2.595,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/test/testdata/distroless.tar.gz",
+          "name": "distroless.tar.gz",
+          "size_mb": 7.419,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/test/testdata/image1.tar",
+          "name": "image1.tar",
+          "size_mb": 4.478,
+          "ext": ".tar"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/fanal/test/testdata/vuln-image.tar.gz",
+          "name": "vuln-image.tar.gz",
+          "size_mb": 7.419,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/pkg/db/testdata/db.tar.gz",
+          "name": "db.tar.gz",
+          "size_mb": 0.0,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/docs/static/documents/RemotionSeedFundingPressKit.zip",
+          "name": "RemotionSeedFundingPressKit.zip",
+          "size_mb": 1.842,
+          "ext": ".zip"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/cloudrun/src/gcpInstaller/gcpInstaller.tar",
+          "name": "gcpInstaller.tar",
+          "size_mb": 0.029,
+          "ext": ".tar"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/python/pathway/tests/data/pyfs-testdata.zip",
+          "name": "pyfs-testdata.zip",
+          "size_mb": 0.0,
+          "ext": ".zip"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.0.tar.gz",
+          "name": "litellm_proxy_extras-0.1.0.tar.gz",
+          "size_mb": 0.003,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.1.tar.gz",
+          "name": "litellm_proxy_extras-0.1.1.tar.gz",
+          "size_mb": 0.004,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.12.tar.gz",
+          "name": "litellm_proxy_extras-0.1.12.tar.gz",
+          "size_mb": 0.01,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.14.tar.gz",
+          "name": "litellm_proxy_extras-0.1.14.tar.gz",
+          "size_mb": 0.012,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.15.tar.gz",
+          "name": "litellm_proxy_extras-0.1.15.tar.gz",
+          "size_mb": 0.011,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.17.tar.gz",
+          "name": "litellm_proxy_extras-0.1.17.tar.gz",
+          "size_mb": 0.012,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.18.tar.gz",
+          "name": "litellm_proxy_extras-0.1.18.tar.gz",
+          "size_mb": 0.012,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.19.tar.gz",
+          "name": "litellm_proxy_extras-0.1.19.tar.gz",
+          "size_mb": 0.013,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.2.tar.gz",
+          "name": "litellm_proxy_extras-0.1.2.tar.gz",
+          "size_mb": 0.005,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.20.tar.gz",
+          "name": "litellm_proxy_extras-0.1.20.tar.gz",
+          "size_mb": 0.012,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.21.tar.gz",
+          "name": "litellm_proxy_extras-0.1.21.tar.gz",
+          "size_mb": 0.012,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.3.tar.gz",
+          "name": "litellm_proxy_extras-0.1.3.tar.gz",
+          "size_mb": 0.008,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.4.tar.gz",
+          "name": "litellm_proxy_extras-0.1.4.tar.gz",
+          "size_mb": 0.009,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.7.tar.gz",
+          "name": "litellm_proxy_extras-0.1.7.tar.gz",
+          "size_mb": 0.009,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.1.8.tar.gz",
+          "name": "litellm_proxy_extras-0.1.8.tar.gz",
+          "size_mb": 0.01,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.1.tar.gz",
+          "name": "litellm_proxy_extras-0.2.1.tar.gz",
+          "size_mb": 0.013,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.10.tar.gz",
+          "name": "litellm_proxy_extras-0.2.10.tar.gz",
+          "size_mb": 0.014,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.14.tar.gz",
+          "name": "litellm_proxy_extras-0.2.14.tar.gz",
+          "size_mb": 0.014,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.16.tar.gz",
+          "name": "litellm_proxy_extras-0.2.16.tar.gz",
+          "size_mb": 0.015,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.2.tar.gz",
+          "name": "litellm_proxy_extras-0.2.2.tar.gz",
+          "size_mb": 0.013,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.4.tar.gz",
+          "name": "litellm_proxy_extras-0.2.4.tar.gz",
+          "size_mb": 0.013,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.5.tar.gz",
+          "name": "litellm_proxy_extras-0.2.5.tar.gz",
+          "size_mb": 0.014,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.7.tar.gz",
+          "name": "litellm_proxy_extras-0.2.7.tar.gz",
+          "size_mb": 0.013,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.8.tar.gz",
+          "name": "litellm_proxy_extras-0.2.8.tar.gz",
+          "size_mb": 0.014,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/dist/litellm_proxy_extras-0.2.9.tar.gz",
+          "name": "litellm_proxy_extras-0.2.9.tar.gz",
+          "size_mb": 0.014,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.1.tar.gz",
+          "name": "litellm_enterprise-0.1.1.tar.gz",
+          "size_mb": 0.007,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.10.tar.gz",
+          "name": "litellm_enterprise-0.1.10.tar.gz",
+          "size_mb": 0.04,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.11.tar.gz",
+          "name": "litellm_enterprise-0.1.11.tar.gz",
+          "size_mb": 0.04,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.12.tar.gz",
+          "name": "litellm_enterprise-0.1.12.tar.gz",
+          "size_mb": 0.041,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.13.tar.gz",
+          "name": "litellm_enterprise-0.1.13.tar.gz",
+          "size_mb": 0.042,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.15.tar.gz",
+          "name": "litellm_enterprise-0.1.15.tar.gz",
+          "size_mb": 0.056,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.17.tar.gz",
+          "name": "litellm_enterprise-0.1.17.tar.gz",
+          "size_mb": 0.056,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.19.tar.gz",
+          "name": "litellm_enterprise-0.1.19.tar.gz",
+          "size_mb": 0.057,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.2.tar.gz",
+          "name": "litellm_enterprise-0.1.2.tar.gz",
+          "size_mb": 0.008,
+          "ext": ".gz"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/dist/litellm_enterprise-0.1.3.tar.gz",
+          "name": "litellm_enterprise-0.1.3.tar.gz",
+          "size_mb": 0.022,
+          "ext": ".gz"
+        }
+      ],
+      "total_size_mb": 103.8
+    },
+    {
+      "intent": "lock_file",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.263,
+          "ext": ".lock"
+        },
+        {
+          "path": "./ledger_keeper/Cargo.lock",
+          "name": "Cargo.lock",
+          "size_mb": 0.011,
+          "ext": ".lock"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-2jwvbhjgzz2t4/s-hfe3p3pbzh-1succm8.lock",
+          "name": "s-hfe3p3pbzh-1succm8.lock",
+          "size_mb": 0.0,
+          "ext": ".lock"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe3p3pbza-0zzfkh1.lock",
+          "name": "s-hfe3p3pbza-0zzfkh1.lock",
+          "size_mb": 0.0,
+          "ext": ".lock"
+        },
+        {
+          "path": "./ledger_keeper/target/debug/incremental/ledger_keeper-25q9jrhzoo75l/s-hfe43kaz84-1b37xh8.lock",
+          "name": "s-hfe43kaz84-1b37xh8.lock",
+          "size_mb": 0.0,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/supermemory/packages/openai-sdk-python/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.603,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/bun.lock",
+          "name": "bun.lock",
+          "size_mb": 2.017,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/lambda-ruby-example/Gemfile.lock",
+          "name": "Gemfile.lock",
+          "size_mb": 0.001,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/lambda-ruby/Gemfile.lock",
+          "name": "Gemfile.lock",
+          "size_mb": 0.001,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/lambda-php-example/composer.lock",
+          "name": "composer.lock",
+          "size_mb": 0.047,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/lambda-php/composer.lock",
+          "name": "composer.lock",
+          "size_mb": 0.063,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/remotion/packages/compositor/Cargo.lock",
+          "name": "Cargo.lock",
+          "size_mb": 0.021,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/pathway/Cargo.lock",
+          "name": "Cargo.lock",
+          "size_mb": 0.227,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/outspeed/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.409,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/opencode_swarm/bun.lock",
+          "name": "bun.lock",
+          "size_mb": 0.322,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.496,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/tests/pass_through_tests/ruby_passthrough_tests/Gemfile.lock",
+          "name": "Gemfile.lock",
+          "size_mb": 0.001,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm-proxy-extras/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.0,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/enterprise/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.0,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/deploy/charts/litellm-helm/Chart.lock",
+          "name": "Chart.lock",
+          "size_mb": 0.0,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/sdk-py/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.141,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/prebuilt/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.299,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/langgraph/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.657,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/cli/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.48,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/cli/js-monorepo-example/yarn.lock",
+          "name": "yarn.lock",
+          "size_mb": 0.096,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/cli/js-examples/yarn.lock",
+          "name": "yarn.lock",
+          "size_mb": 0.168,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/cli/examples/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.015,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/checkpoint-sqlite/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.238,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/checkpoint-postgres/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.254,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/langgraph/libs/checkpoint/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.296,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/kokoro-onnx/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.153,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/Cargo.lock",
+          "name": "Cargo.lock",
+          "size_mb": 0.23,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/flake.lock",
+          "name": "flake.lock",
+          "size_mb": 0.002,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/goose/scripts/provider-error-proxy/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.16,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/bolt.diy/docs/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.067,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.177,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/atomic-forge/tools/webpage_scraper/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.19,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/atomic-examples/youtube-to-recipe/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.163,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/atomic-examples/youtube-summarizer/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.163,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/atomic-examples/web-search-agent/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.135,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/atomic-examples/quickstart/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.144,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/atomic-examples/orchestration-agent/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.134,
+          "ext": ".lock"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/atomic_agents/atomic-examples/deep-research/poetry.lock",
+          "name": "poetry.lock",
+          "size_mb": 0.18,
+          "ext": ".lock"
+        },
+        {
+          "path": "./99_ARCHIVE/secure/LEGACY_SRC/tools/antigravity_core/Cargo.lock",
+          "name": "Cargo.lock",
+          "size_mb": 0.011,
+          "ext": ".lock"
+        },
+        {
+          "path": "./99_ARCHIVE/secure/LEGACY_SCAFFOLDS/04_DEVELOPMENT/src/open-notebook/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.523,
+          "ext": ".lock"
+        },
+        {
+          "path": "./99_ARCHIVE/external/open-notebook/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.485,
+          "ext": ".lock"
+        },
+        {
+          "path": "./99_ARCHIVE/external/open-notebook/open-notebook/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.485,
+          "ext": ".lock"
+        },
+        {
+          "path": "./03_VAULT/training/configs/.gemini/antigravity/knowledge/knowledge.lock",
+          "name": "knowledge.lock",
+          "size_mb": 0.0,
+          "ext": ".lock"
+        },
+        {
+          "path": "./03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/backend/uv.lock",
+          "name": "uv.lock",
+          "size_mb": 0.231,
+          "ext": ".lock"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/Cargo.lock",
+          "name": "Cargo.lock",
+          "size_mb": 0.142,
+          "ext": ".lock"
+        }
+      ],
+      "total_size_mb": 11.3
+    },
+    {
+      "intent": "certificate",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/integration/data/certs/cert.pem",
+          "name": "cert.pem",
+          "size_mb": 0.001,
+          "ext": ".pem"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/integration/data/certs/key.pem",
+          "name": "key.pem",
+          "size_mb": 0.002,
+          "ext": ".pem"
+        },
+        {
+          "path": "./docs/reference/EXTERNAL/litellm/litellm/proxy/auth/public_key.pem",
+          "name": "public_key.pem",
+          "size_mb": 0.0,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/ca.pem",
+          "name": "ca.pem",
+          "size_mb": 0.002,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client-cert.pem",
+          "name": "client-cert.pem",
+          "size_mb": 0.001,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client-csr.pem",
+          "name": "client-csr.pem",
+          "size_mb": 0.001,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client-key.pem",
+          "name": "client-key.pem",
+          "size_mb": 0.002,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client1.key",
+          "name": "client1.key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client1.pem",
+          "name": "client1.pem",
+          "size_mb": 0.001,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client2.key",
+          "name": "client2.key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client2.pem",
+          "name": "client2.pem",
+          "size_mb": 0.001,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/client_ca.pem",
+          "name": "client_ca.pem",
+          "size_mb": 0.001,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/server.key",
+          "name": "server.key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/KINETIC_REFERENCES/rotel/test/data/tls/server.pem",
+          "name": "server.pem",
+          "size_mb": 0.002,
+          "ext": ".pem"
+        },
+        {
+          "path": "./03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/ssh-key-2025-10-09 (1).key",
+          "name": "ssh-key-2025-10-09 (1).key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/ssh-key-2025-10-09.key",
+          "name": "ssh-key-2025-10-09.key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/ssh-key-2026-01-13 (1).key",
+          "name": "ssh-key-2026-01-13 (1).key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/ssh-key-2026-01-13 (2).key",
+          "name": "ssh-key-2026-01-13 (2).key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/ssh-key-2026-01-13.key",
+          "name": "ssh-key-2026-01-13.key",
+          "size_mb": 0.002,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/.secure/master.key",
+          "name": "master.key",
+          "size_mb": 0.0,
+          "ext": ".key"
+        },
+        {
+          "path": "./03_VAULT/.secure/vault_master.key",
+          "name": "vault_master.key",
+          "size_mb": 0.0,
+          "ext": ".key"
+        },
+        {
+          "path": "./02_FORGE/Modal/morgana/venv/Lib/site-packages/certifi/cacert.pem",
+          "name": "cacert.pem",
+          "size_mb": 0.258,
+          "ext": ".pem"
+        }
+      ],
+      "total_size_mb": 0.3
+    },
+    {
+      "intent": "ci_cd",
+      "confidence": 0.85,
+      "files": [
+        {
+          "path": "./docs/reference/EXTERNAL/trivy/contrib/Trivy.gitlab-ci.yml",
+          "name": "Trivy.gitlab-ci.yml",
+          "size_mb": 0.001,
+          "ext": ".yml"
+        }
+      ],
+      "total_size_mb": 0.0
+    }
+  ]
+}

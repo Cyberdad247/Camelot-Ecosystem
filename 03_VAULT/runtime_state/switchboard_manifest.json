@@ -1,0 +1,214 @@
+{
+  "updated": 1776970312.4501305,
+  "terminals": {
+    "sir_boris": {
+      "id": "sir_boris",
+      "engine": "claude_code",
+      "weight": 0.85,
+      "cost_tier": "medium",
+      "capability": [
+        "orchestration",
+        "architecture",
+        "critique",
+        "forge"
+      ],
+      "probe_url": "",
+      "probe_port": 8080,
+      "status": "live",
+      "latency_ms": 5.576199968345463,
+      "last_probe": 1776970312.444579,
+      "error_count": 0,
+      "notes": "Claude Code \u2014 CLIProxy gateway"
+    },
+    "sir_helio": {
+      "id": "sir_helio",
+      "engine": "gemini_cli",
+      "weight": 0.9,
+      "cost_tier": "low",
+      "capability": [
+        "context",
+        "research",
+        "burst",
+        "1m_token"
+      ],
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "assumed_live",
+      "latency_ms": 0.0,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "Gemini CLI \u2014 1M+ context mapping"
+    },
+    "sir_alex": {
+      "id": "sir_alex",
+      "engine": "claude_code",
+      "weight": 0.88,
+      "cost_tier": "medium",
+      "capability": [
+        "cognitive",
+        "reasoning",
+        "critical",
+        "decision"
+      ],
+      "probe_url": "",
+      "probe_port": 8080,
+      "status": "live",
+      "latency_ms": 5.454200028907508,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "Claude Code \u2014 cognitive cartridge orchestration"
+    },
+    "sir_link": {
+      "id": "sir_link",
+      "engine": "gemini_cli",
+      "weight": 0.78,
+      "cost_tier": "low",
+      "capability": [
+        "bridge",
+        "handoff",
+        "terminal",
+        "ui",
+        "switchboard"
+      ],
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "assumed_live",
+      "latency_ms": 0.0,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "Sir Link \u2014 handshake coordinator, switchboard ATC"
+    },
+    "sir_ghost": {
+      "id": "sir_ghost",
+      "engine": "local_qwen",
+      "weight": 1.0,
+      "cost_tier": "free",
+      "capability": [
+        "privacy",
+        "air_gapped",
+        "zero_trust"
+      ],
+      "probe_url": "",
+      "probe_port": 11434,
+      "status": "live",
+      "latency_ms": 5.424199975095689,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "Local Qwen 3.5 \u2014 air-gapped, zero trust"
+    },
+    "sir_forge": {
+      "id": "sir_forge",
+      "engine": "open_coder",
+      "weight": 0.7,
+      "cost_tier": "free",
+      "capability": [
+        "code_gen",
+        "scaffold",
+        "technical",
+        "kinetic"
+      ],
+      "probe_url": "",
+      "probe_port": 11434,
+      "status": "live",
+      "latency_ms": 5.4067999590188265,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "Open Coder local \u2014 kinetic code gen"
+    },
+    "sir_codex": {
+      "id": "sir_codex",
+      "engine": "openai_codex",
+      "weight": 0.75,
+      "cost_tier": "high",
+      "capability": [
+        "velocity",
+        "rapid_proto",
+        "openai"
+      ],
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "assumed_live",
+      "latency_ms": 0.0,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "OpenAI Codex \u2014 high-velocity generation"
+    },
+    "sir_liberte": {
+      "id": "sir_liberte",
+      "engine": "open_source",
+      "weight": 0.8,
+      "cost_tier": "free",
+      "capability": [
+        "sovereignty",
+        "oss",
+        "anti_lock"
+      ],
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "assumed_live",
+      "latency_ms": 0.0,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "Open Source \u2014 anti-vendor lock-in"
+    },
+    "sir_mnemo": {
+      "id": "sir_mnemo",
+      "engine": "integration_brain",
+      "weight": 0.92,
+      "cost_tier": "low",
+      "capability": [
+        "memory",
+        "archive",
+        "recall",
+        "synthesize",
+        "route"
+      ],
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "assumed_live",
+      "latency_ms": 0.9148000390268862,
+      "last_probe": 1776970312.4450908,
+      "error_count": 0,
+      "notes": "Integration Brain router \u2014 ST/LT memory (module probe)"
+    },
+    "sir_sentinel": {
+      "id": "sir_sentinel",
+      "engine": "claude_code",
+      "weight": 0.85,
+      "cost_tier": "medium",
+      "capability": [
+        "security",
+        "audit",
+        "armor",
+        "pdg"
+      ],
+      "probe_url": "",
+      "probe_port": 3001,
+      "status": "live",
+      "latency_ms": 4.43440000526607,
+      "last_probe": 1776970312.445613,
+      "error_count": 0,
+      "notes": "Security warden \u2014 Agent-Armor PDG"
+    },
+    "sir_gideon": {
+      "id": "sir_gideon",
+      "engine": "local_audit",
+      "weight": 0.85,
+      "cost_tier": "free",
+      "capability": [
+        "security",
+        "audit",
+        "scorpion",
+        "gideon",
+        "forensic"
+      ],
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "live",
+      "latency_ms": 0.0,
+      "last_probe": 1776970312.445613,
+      "error_count": 0,
+      "notes": "Forensic auditor \u2014 GIDEON_RISK_MATRIX //SCORPION pass"
+    }
+  }
+}

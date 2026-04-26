@@ -90,6 +90,8 @@ class CloudServiceName(str, Enum):
     DEVELOPMENT_BLUEPRINT_HEALTH = "development_blueprint_health"
     PRECISE_MODE = "precise_mode"
     PRECISE_MODE_HEALTH = "precise_mode_health"
+    ELDERGOD_FORGE = "eldergod_forge"
+    ELDERGOD_FORGE_HEALTH = "eldergod_forge_health"
     NOTEBOOKLM_HEALTH = "notebooklm_health"
     NOTEBOOKLM_SYNTHESIZE = "notebooklm_synthesize"
     NOTEBOOKLM_SYNC = "notebooklm_sync"
@@ -130,6 +132,8 @@ class CloudServiceRouter:
         self.blueprint_health_url = os.getenv("CAMELOT_BLUEPRINT_HEALTH_URL", "").rstrip("/")
         self.precise_mode_url = os.getenv("CAMELOT_PRECISE_MODE_URL", "").rstrip("/")
         self.precise_mode_health_url = os.getenv("CAMELOT_PRECISE_MODE_HEALTH_URL", "").rstrip("/")
+        self.eldergod_url = os.getenv("CAMELOT_ELDERGOD_URL", "").rstrip("/")
+        self.eldergod_health_url = os.getenv("CAMELOT_ELDERGOD_HEALTH_URL", "").rstrip("/")
         self.excalibur_bridge_url = os.getenv("CAMELOT_EXCALIBUR_BRIDGE_URL", "").rstrip("/")
         self.excalibur_health_url = os.getenv("CAMELOT_EXCALIBUR_HEALTH_URL", "").rstrip("/")
 
@@ -258,6 +262,10 @@ class CloudServiceRouter:
             return await self._precise_mode(request.payload)
         if request.service is CloudServiceName.PRECISE_MODE_HEALTH:
             return await self._precise_mode_health()
+        if request.service is CloudServiceName.ELDERGOD_FORGE:
+            return await self._eldergod_forge(request.payload)
+        if request.service is CloudServiceName.ELDERGOD_FORGE_HEALTH:
+            return await self._eldergod_forge_health()
         if request.service is CloudServiceName.NOTEBOOKLM_HEALTH:
             return await self._notebooklm_health()
         if request.service is CloudServiceName.NOTEBOOKLM_SYNTHESIZE:
@@ -776,7 +784,110 @@ class CloudServiceRouter:
             source="local",
         )
 
+    async def _eldergod_forge(self, payload: dict[str, Any]) -> CloudServiceResult:
+        if self.eldergod_url:
+            try:
+                async with httpx.AsyncClient(timeout=60.0) as client:
+                    response = await client.post(self.eldergod_url, json=payload)
+                    response.raise_for_status()
+                    return CloudServiceResult(
+                        service=CloudServiceName.ELDERGOD_FORGE,
+                        success=True,
+                        result=response.json(),
+                        source="remote",
+                    )
+            except Exception as exc:
+                if self.excalibur_bridge_url:
+                    fallback = await self._invoke_excalibur_bridge(
+                        task=f"elderGod forge objective: {str(payload.get('objective') or '').strip() or 'elderGod forge objective'}",
+                        mode="DEV",
+                        service=CloudServiceName.ELDERGOD_FORGE,
+                        payload=payload,
+                    )
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
+                return CloudServiceResult(
+                    service=CloudServiceName.ELDERGOD_FORGE,
+                    success=False,
+                    error=str(exc),
+                    source="remote",
+                )
+
+        if self.excalibur_bridge_url:
+            objective = str(payload.get("objective") or "").strip() or "elderGod forge objective"
+            return await self._invoke_excalibur_bridge(
+                task=f"elderGod forge objective: {objective}",
+                mode="DEV",
+                service=CloudServiceName.ELDERGOD_FORGE,
+                payload=payload,
+            )
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.ELDERGOD_FORGE,
+                env_var="CAMELOT_ELDERGOD_URL",
+            )
+
+        try:
+            result = _modal_services().run_eldergod_forge(payload)
+            return CloudServiceResult(
+                service=CloudServiceName.ELDERGOD_FORGE,
+                success=True,
+                result=result,
+                source="local",
+            )
+        except Exception as exc:
+            return CloudServiceResult(
+                service=CloudServiceName.ELDERGOD_FORGE,
+                success=False,
+                error=str(exc),
+                source="local",
+            )
+
+    async def _eldergod_forge_health(self) -> CloudServiceResult:
+        if self.eldergod_health_url:
+            try:
+                async with httpx.AsyncClient(timeout=20.0) as client:
+                    response = await client.get(self.eldergod_health_url)
+                    response.raise_for_status()
+                    return CloudServiceResult(
+                        service=CloudServiceName.ELDERGOD_FORGE_HEALTH,
+                        success=True,
+                        result=response.json(),
+                        source="remote",
+                    )
+            except Exception as exc:
+                if self.excalibur_health_url:
+                    fallback = await self._invoke_excalibur_health(CloudServiceName.ELDERGOD_FORGE_HEALTH)
+                    if fallback.success:
+                        fallback.result.setdefault("typed_endpoint_error", str(exc))
+                        return fallback
+                return CloudServiceResult(
+                    service=CloudServiceName.ELDERGOD_FORGE_HEALTH,
+                    success=False,
+                    error=str(exc),
+                    source="remote",
+                )
+
+        if self.excalibur_health_url:
+            return await self._invoke_excalibur_health(CloudServiceName.ELDERGOD_FORGE_HEALTH)
+
+        if not _has_modal_sdk():
+            return _missing_remote_service_result(
+                service=CloudServiceName.ELDERGOD_FORGE_HEALTH,
+                env_var="CAMELOT_ELDERGOD_HEALTH_URL",
+            )
+
+        return CloudServiceResult(
+            service=CloudServiceName.ELDERGOD_FORGE_HEALTH,
+            success=True,
+            result=_modal_services().eldergod_forge_health(),
+            source="local",
+        )
+
     # --- NotebookLM Cloud Brain (Ω₃) ---------------------------------------
+
 
     async def _notebooklm_health(self) -> CloudServiceResult:
         try:

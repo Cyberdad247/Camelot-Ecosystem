@@ -1,0 +1,209 @@
+{
+  "total_compress_candidates": 6928,
+  "sampled": 50,
+  "total_original_tokens": 5659800,
+  "total_optimized_tokens": 4123355,
+  "savings_pct": 27.1,
+  "top_savings": [
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/vendor/miniaudio/miniaudio.h",
+      "name": "miniaudio.h",
+      "size_mb": 4.006,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 1026094,
+      "optimized_tokens": 660876,
+      "savings_pct": 35.6,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/otherarch/ggml_v3.c",
+      "name": "ggml_v3.c",
+      "size_mb": 1.018,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 259668,
+      "optimized_tokens": 170476,
+      "savings_pct": 34.3,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/ffmpeg/libavcodec/metasound_data.h",
+      "name": "metasound_data.h",
+      "size_mb": 0.891,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 230164,
+      "optimized_tokens": 151652,
+      "savings_pct": 34.1,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/include/vulkan/vulkan/vulkan_core.h",
+      "name": "vulkan_core.h",
+      "size_mb": 1.09,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 280158,
+      "optimized_tokens": 209143,
+      "savings_pct": 25.3,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/otherarch/ggml_v2.c",
+      "name": "ggml_v2.c",
+      "size_mb": 0.615,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 156446,
+      "optimized_tokens": 106787,
+      "savings_pct": 31.7,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/yyjson/src/yyjson.h",
+      "name": "yyjson.h",
+      "size_mb": 0.301,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 76924,
+      "optimized_tokens": 31302,
+      "savings_pct": 59.3,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/ggml/src/ggml-vulkan/ggml-vulkan.cpp",
+      "name": "ggml-vulkan.cpp",
+      "size_mb": 0.804,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 206867,
+      "optimized_tokens": 164687,
+      "savings_pct": 20.4,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/src/llama-model.cpp",
+      "name": "llama-model.cpp",
+      "size_mb": 0.476,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 122707,
+      "optimized_tokens": 84192,
+      "savings_pct": 31.4,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/otherarch/ggml_v1.c",
+      "name": "ggml_v1.c",
+      "size_mb": 0.316,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 80408,
+      "optimized_tokens": 42117,
+      "savings_pct": 47.6,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/yyjson/src/yyjson.c",
+      "name": "yyjson.c",
+      "size_mb": 0.35,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 89376,
+      "optimized_tokens": 54114,
+      "savings_pct": 39.5,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/ffmpeg/libavcodec/twinvq_data.h",
+      "name": "twinvq_data.h",
+      "size_mb": 0.619,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 159596,
+      "optimized_tokens": 124625,
+      "savings_pct": 21.9,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/otherarch/sdcpp/thirdparty/miniz.h",
+      "name": "miniz.h",
+      "size_mb": 0.387,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 98974,
+      "optimized_tokens": 64679,
+      "savings_pct": 34.7,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/clingo-sys/clingo/libpyclingo/_clingo.c",
+      "name": "_clingo.c",
+      "size_mb": 0.744,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 189987,
+      "optimized_tokens": 156177,
+      "savings_pct": 17.8,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/yyjson/test/util/goo_double_conv.c",
+      "name": "goo_double_conv.c",
+      "size_mb": 0.252,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 64557,
+      "optimized_tokens": 30997,
+      "savings_pct": 52.0,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/vendor/stb/stb_image.h",
+      "name": "stb_image.h",
+      "size_mb": 0.278,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 70752,
+      "optimized_tokens": 40744,
+      "savings_pct": 42.4,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/mbedtls/library/ssl_tls.c",
+      "name": "ssl_tls.c",
+      "size_mb": 0.269,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 68435,
+      "optimized_tokens": 40597,
+      "savings_pct": 40.7,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/ffmpeg/libavformat/mov.c",
+      "name": "mov.c",
+      "size_mb": 0.375,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 95443,
+      "optimized_tokens": 69582,
+      "savings_pct": 27.1,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/otherarch/whispercpp/dr_wav.h",
+      "name": "dr_wav.h",
+      "size_mb": 0.236,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 60307,
+      "optimized_tokens": 34628,
+      "savings_pct": 42.6,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/ten-framework/third_party/mbedtls/library/psa_crypto.c",
+      "name": "psa_crypto.c",
+      "size_mb": 0.219,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 55801,
+      "optimized_tokens": 30705,
+      "savings_pct": 45.0,
+      "technique": "text_compression"
+    },
+    {
+      "path": "./docs/reference/EXTERNAL/koboldcpp/vendor/cpp-httplib/httplib.cpp",
+      "name": "httplib.cpp",
+      "size_mb": 0.345,
+      "reason": "ghost file, may have historical value",
+      "original_tokens": 87706,
+      "optimized_tokens": 62860,
+      "savings_pct": 28.3,
+      "technique": "text_compression"
+    }
+  ]
+}

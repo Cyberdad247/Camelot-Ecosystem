@@ -179,10 +179,30 @@ class ControlPlane:
                     privacy = 0.0
         return privacy
 
+    def _load_active_cartridge(self) -> str:
+        active_path = Path(".camelot/active_cartridge.txt")
+        if not active_path.exists():
+            return ""
+        try:
+            active_name = active_path.read_text(encoding="utf-8").strip().upper()
+        except Exception:
+            return ""
+        if not active_name:
+            return ""
+        path = Path(f".camelot/cartridges/{active_name}.md")
+        if not path.exists():
+            return ""
+        try:
+            content = path.read_text(encoding="utf-8")
+        except Exception:
+            return ""
+        logger.info("ACTIVE_CARTRIDGE_LOADED", name=active_name)
+        return f"\n--- ACTIVE CARTRIDGE: {active_name} ---\n{content}\n"
+
     def _ingest_cartridges(self, intent: str) -> str:
         """Detect and load data cartridges into the context."""
         matches = re.findall(r"LOAD:\s*(\w+)", intent.upper())
-        cartridge_context = ""
+        cartridge_context = "" if matches else self._load_active_cartridge()
         for name in matches:
             path = Path(f".camelot/cartridges/{name}.md")
             if path.exists():
@@ -285,12 +305,68 @@ class ControlPlane:
         memory_count = result.result.get("memory_count", 0)
         return f"[RESEARCH_AGENCY]\n{brief}\n[memory_count={memory_count}]"
 
+    @staticmethod
+    def _execution_target_for_service(service: CloudServiceName) -> str:
+        cloud_brain_services = {
+            CloudServiceName.CLOUDBRAIN_STATUS,
+            CloudServiceName.CLOUDBRAIN_MEMORY,
+            CloudServiceName.NOTEBOOKLM_HEALTH,
+            CloudServiceName.NOTEBOOKLM_SYNTHESIZE,
+            CloudServiceName.NOTEBOOKLM_SYNC,
+            CloudServiceName.NOTEBOOKLM_RESEARCH_START,
+            CloudServiceName.NOTEBOOKLM_RESEARCH_POLL,
+            CloudServiceName.NOTEBOOKLM_STUDIO_LIST,
+            CloudServiceName.NOTEBOOKLM_STUDIO_GENERATE,
+            CloudServiceName.NOTEBOOKLM_SOURCES_LIST,
+            CloudServiceName.NOTEBOOKLM_SOURCES_ADD,
+            CloudServiceName.NOTEBOOKLM_SOURCES_DELETE,
+        }
+        if service in cloud_brain_services:
+            return "cloud_brain"
+        return "remote_service"
+
+    def _resolve_route_context(self, task: TaskPayload) -> tuple[RouteDecision, str]:
+        preferred_knight = str(
+            task.parameters.get("preferred_knight")
+            or task.parameters.get("agent_id")
+            or ""
+        ).strip().lower()
+        intent = task.intent
+        if preferred_knight in {"sir_alex", "alex"}:
+            intent = f"cognitive {intent}"
+        elif preferred_knight in {"sir_link", "link"}:
+            intent = f"bridge {intent}"
+
+        route_task = TaskPayload(
+            intent=intent,
+            parameters=task.parameters,
+            constraints=task.constraints,
+        )
+        decision = self.route_to_knight(route_task)
+        execution_target = str(task.parameters.get("execution_target") or "").strip().lower()
+        if not execution_target:
+            if decision.knight_id == "sir_link":
+                execution_target = "local_terminal"
+            elif decision.knight_id == "sir_alex":
+                execution_target = "analysis_only"
+            else:
+                execution_target = "local_dispatch"
+        return decision, execution_target
+
     async def process_task(self, task: TaskPayload) -> A2AMessage:
         """Decompose a task and execute via MCP tool delegation."""
         # Detect and ingest cartridges
         cartridge_data = self._ingest_cartridges(task.intent)
         if cartridge_data:
             task.intent = f"{cartridge_data}\n--- INTENT ---\n{task.intent}"
+
+        route_decision, execution_target = self._resolve_route_context(task)
+        route_summary = {
+            "knight_id": route_decision.knight_id,
+            "engine": route_decision.engine,
+            "reason": route_decision.reason,
+            "score": route_decision.score,
+        }
 
         logger.info("PROCESSING_TASK", intent=task.intent)
         task_msg = A2AMessage(
@@ -323,6 +399,8 @@ class ControlPlane:
                         "status": "BLOCKED",
                         "task": task.intent,
                         "service": cloud_req.service.value,
+                        "route": route_summary,
+                        "execution_target": execution_target,
                         "reason": policy_error,
                     },
                     correlation_id=task_msg.id,
@@ -350,6 +428,8 @@ class ControlPlane:
                     "task": task.intent,
                     "service": cloud_req.service.value,
                     "source": cloud_result.source,
+                    "route": route_summary,
+                    "execution_target": self._execution_target_for_service(cloud_req.service),
                     "result": cloud_result.result if cloud_result.success else {},
                     "error": cloud_result.error,
                 },
@@ -374,6 +454,8 @@ class ControlPlane:
                     "status": "COMPLETE" if sarda_result.critique and sarda_result.critique.passed else "FAILED",
                     "task": task.intent,
                     "service": "SARDA_ENGINE",
+                    "route": route_summary,
+                    "execution_target": execution_target,
                     "result": json.loads(sarda_result.to_json()),
                 },
                 correlation_id=task_msg.id,
@@ -402,6 +484,8 @@ class ControlPlane:
             payload={
                 "status": "COMPLETE" if (tool_req and result.success) else "REASONING_ONLY",
                 "task": task.intent,
+                "route": route_summary,
+                "execution_target": execution_target,
             },
             correlation_id=task_msg.id,
         )
@@ -422,6 +506,14 @@ class ControlPlane:
         "colony": "sir_boris",
         "critique": "sir_boris",
         "vocal": "sir_boris",
+        "cognitive": "sir_alex",
+        "reasoning": "sir_alex",
+        "critical": "sir_alex",
+        "decision": "sir_alex",
+        "bridge": "sir_link",
+        "terminal": "sir_link",
+        "handoff": "sir_link",
+        "ui": "sir_link",
         "technical": "sir_forge",
         "scaffold": "sir_forge",
         "code_gen": "sir_forge",
@@ -659,6 +751,24 @@ class ControlPlane:
         if any(keyword in intent for keyword in {"precise health", "precise mode health", "swarm health"}):
             return CloudServiceRequest(service=CloudServiceName.PRECISE_MODE_HEALTH)
 
+        if any(keyword in intent for keyword in {"eldergod health", "elder god forge health", "eldergod forge health"}):
+            return CloudServiceRequest(service=CloudServiceName.ELDERGOD_FORGE_HEALTH)
+
+        if any(keyword in intent for keyword in {"eldergod", "elder god forge", "eldergod forge"}):
+            privacy = self._extract_privacy(task)
+            return CloudServiceRequest(
+                service=CloudServiceName.ELDERGOD_FORGE,
+                payload={
+                    "objective": str(task.parameters.get("objective") or task.intent),
+                    "compute_tier": str(
+                        task.parameters.get("compute_tier")
+                        or self._research_compute_tier(task.intent, privacy)
+                    ),
+                    "multiverse_enabled": bool(task.parameters.get("multiverse_enabled", True)),
+                    "omega_directive": str(task.parameters.get("omega_directive", "absolute_singularity")),
+                },
+            )
+
         if any(keyword in intent for keyword in {"memory", "context", "recall"}):
             return CloudServiceRequest(
                 service=CloudServiceName.CLOUDBRAIN_MEMORY,
@@ -756,13 +866,15 @@ class ControlPlane:
     def dispatch_parallel(
         self, tasks: list[tuple[str, str]]
     ) -> dict[str, bool]:
-        """Dispatch tasks to multiple knights in parallel.
+        """Dispatch tasks to multiple workers in parallel.
 
         Args:
-            tasks: List of (knight_id, prompt) tuples.
+            tasks: List of (worker_id, prompt) tuples.
+                worker_id can be a Knight ID (sir_*) or Harness ID
+                (harness_* or harness:<name> shorthand).
 
         Returns:
-            Dict of knight_id -> dispatch success.
+            Dict of worker_id -> dispatch success.
         """
         if not hasattr(self, "_omc_team"):
             self.spawn_team()
@@ -771,11 +883,84 @@ class ControlPlane:
             for knight_id, prompt in tasks
         }
 
+    def list_dispatch_targets(self) -> list[str]:
+        """Return all available dispatch target IDs (knights + harnesses)."""
+        if not hasattr(self, "_omc_team"):
+            self.spawn_team()
+        return sorted(self._omc_team.workers.keys())
+
     def collect_team_results(self, timeout: int = 120) -> dict:
         """Collect results from all running team workers."""
         if not hasattr(self, "_omc_team"):
             return {}
         return self._omc_team.collect_all(timeout=timeout)
+
+    def team_self_test(
+        self,
+        *,
+        worker_id: str = "harness_codex",
+        prompt: str = "codex",
+        timeout: int = 30,
+    ) -> dict[str, Any]:
+        """Run a safe dispatch probe and validate harness JSON contract."""
+        if not hasattr(self, "_omc_team"):
+            self.spawn_team()
+
+        targets = self.list_dispatch_targets()
+        if worker_id not in targets and not worker_id.startswith("harness:"):
+            return {
+                "status": "FAILED",
+                "worker_id": worker_id,
+                "error": "unknown_dispatch_target",
+                "available_targets": targets,
+            }
+
+        dispatched = self.dispatch_parallel([(worker_id, prompt)]).get(worker_id, False)
+        if not dispatched:
+            return {
+                "status": "FAILED",
+                "worker_id": worker_id,
+                "error": "dispatch_failed",
+            }
+
+        collected = self.collect_team_results(timeout=timeout)
+        raw_output = collected.get(worker_id)
+        if not raw_output and worker_id.startswith("harness:"):
+            alias = f"harness_{worker_id.split(':', 1)[1]}"
+            raw_output = collected.get(alias)
+
+        if not raw_output:
+            return {
+                "status": "FAILED",
+                "worker_id": worker_id,
+                "error": "no_output_collected",
+            }
+
+        try:
+            payload = json.loads(raw_output)
+        except Exception as exc:
+            return {
+                "status": "FAILED",
+                "worker_id": worker_id,
+                "error": "invalid_json_output",
+                "exception": str(exc),
+                "raw_output": raw_output[:1000],
+            }
+
+        required = {"backend", "knight_id", "engine_cmd"}
+        missing = sorted(item for item in required if item not in payload)
+        has_completion = ("returncode" in payload) or (str(payload.get("status", "")).lower() in {"simulated", "completed"})
+        pass_contract = not missing and has_completion
+        pass_execution = bool(payload.get("returncode") == 0 or str(payload.get("status", "")).lower() == "simulated")
+
+        return {
+            "status": "PASSED" if (pass_contract and pass_execution) else "FAILED",
+            "worker_id": worker_id,
+            "contract_passed": pass_contract,
+            "execution_passed": pass_execution,
+            "missing_keys": missing,
+            "payload": payload,
+        }
 
     def teardown_team(self) -> bool:
         """Kill the Foundry tmux session."""
