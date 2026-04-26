@@ -16,11 +16,15 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'quantum-core': ['three', '@react-three/fiber', '@react-three/drei', '@react-three/rapier'],
+          'three-core': ['three'],
+          'three-react': ['@react-three/fiber', '@react-three/drei'],
+          'three-postprocessing': ['@react-three/postprocessing'],
+          'three-rapier': ['@react-three/rapier'],
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
         },
       },
     },
-    chunkSizeWarningLimit: 1000,
+    // Rapier is an intentionally lazy-loaded physics engine chunk for the legacy 3D brain scene.
+    chunkSizeWarningLimit: 2200,
   },
 })

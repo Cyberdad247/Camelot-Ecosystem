@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Mic, MicOff, Globe, Loader2, Sparkles, Zap } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
 import { speakNeural, initVoice } from './VoiceEngine';
+import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch } from '@/lib/bifrostClient';
 
 interface AnyasLinkProps {
   externalUrl: string;
 }
 
 // 🛡️ CONFIGURATION: Your Modal Endpoint
-const CLOUD_BRAIN_URL = "https://cyberdad247--camelot-notebook-brain-generate-audio-overview.modal.run";
+const CLOUD_BRAIN_URL = runtimeConfig.cloudBrainUrl;
 
 export default function AnyasLink({ externalUrl }: AnyasLinkProps) {
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -43,7 +44,7 @@ export default function AnyasLink({ externalUrl }: AnyasLinkProps) {
     setIsProcessing(true);
     try {
         // Call Modal Function
-        const res = await fetch(CLOUD_BRAIN_URL, {
+        const res = await bifrostFetch(CLOUD_BRAIN_URL, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ topic })

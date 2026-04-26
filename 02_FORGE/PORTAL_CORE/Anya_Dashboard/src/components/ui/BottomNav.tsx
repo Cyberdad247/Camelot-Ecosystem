@@ -1,16 +1,17 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutGrid, Globe, Brain } from 'lucide-react';
+import { LayoutGrid, Globe, Brain, Map } from 'lucide-react';
 
 export default function BottomNav() {
   const navItems = [
     { path: '/anyas-link', icon: Globe, label: 'Link' },
     { path: '/brain', icon: Brain, label: 'Brain' },
+    { path: '/openviking', icon: Map, label: 'Viking' },
     { path: '/swarm', icon: LayoutGrid, label: 'Swarm' }, 
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-lg border-t border-slate-800 pb-safe">
+    <nav className="z-50 shrink-0 border-t border-slate-800 bg-slate-950/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-lg">
       <div className="flex justify-around items-center h-16">
         {navItems.map((item) => (
           <NavLink

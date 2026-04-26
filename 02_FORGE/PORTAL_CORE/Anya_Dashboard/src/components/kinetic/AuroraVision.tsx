@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, Zap, Camera, Box, Maximize2 } from 'lucide-react';
+import { runtimeConfig, tokenizedUrl } from '@/config/runtime';
 
-const KINETIC_TOKEN = "camelot-kinetic-v300-auth-token";
-const ROTEL_STREAM_URL = `http://127.0.0.1:4317/v1/stream?token=${KINETIC_TOKEN}`;
+const ROTEL_STREAM_URL = tokenizedUrl(runtimeConfig.rotel.streamUrl, runtimeConfig.rotel.token);
 
 interface FrameMetadata {
     timestamp: number;

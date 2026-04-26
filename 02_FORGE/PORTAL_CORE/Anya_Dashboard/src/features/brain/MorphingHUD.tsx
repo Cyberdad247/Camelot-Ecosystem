@@ -1,303 +1,467 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Send, Mic, MicOff, Shield, Zap, Terminal, User, Sparkles } from 'lucide-react';
-import QuantumScene from '@/components/engine/Scene';
-import { useEngineStore } from './engineStore';
-import RotelMonitor from '@/components/kinetic/RotelMonitor';
-import SaltareController from '@/components/kinetic/SaltareController';
-import AuroraVision from '@/components/kinetic/AuroraVision';
-import BriefingCard from '@/components/ui/BriefingCard';
-import { Users, Target, MousePointer2, BarChart3 } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Activity, ArrowRight, Brain, Cable, CheckCircle2, Cpu, Database, Gavel, Lightbulb, Megaphone, PenTool, Radio, Scale, Search, Shield, TerminalSquare, Zap } from 'lucide-react';
+import { useAnyaSocket, type AnyaSocketEvent } from './useAnyaSocket';
+import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
 
-// 🛡️ Personas & Vibe Logic
-type PersonaType = 'Anya_Ω' | 'Merlin_Ω' | 'Lukas_Ω' | 'Sentinel_Ω' | 'Phoenix_Ω';
+const DISPATCH_URL = runtimeConfig.bifrost.dispatchUrl;
+const BIFROST_STATUS_URL = runtimeConfig.bifrost.statusUrl;
 
-interface PersonaState {
-    id: string;
-    color: string;
-    glow: string;
-    asset: string;
-    tagline: string;
+type CartridgeId =
+  | 'COGNITIVE'
+  | 'ENGINEER'
+  | 'RESEARCH'
+  | 'CREATIVE'
+  | 'MARKETING'
+  | 'LEGAL'
+  | 'BRAINSTORM'
+  | 'CRITICAL_THINKING';
+
+interface BifrostStatus {
+  gate: string;
+  owner: string;
+  current_user: string;
+  hostname: string;
+  token_present: boolean;
+  bridge: string;
+  dispatch_url: string;
+  websocket_url: string;
+  cartridges: string[];
+  cognitive_helm: string;
+  bridge_knight: string;
 }
 
-const PERSONAS: Record<PersonaType, PersonaState> = {
-    'Anya_Ω': { id: 'Anya', color: '#06b6d4', glow: 'shadow-cyan-500/50', asset: '🎭', tagline: 'Interface Sovereign' },
-    'Merlin_Ω': { id: 'Merlin', color: '#8b5cf6', glow: 'shadow-purple-500/50', asset: '🧙‍♂️', tagline: 'Neural Conductor' },
-    'Lukas_Ω': { id: 'Lukas', color: '#f59e0b', glow: 'shadow-orange-500/50', asset: '💻', tagline: 'Kinetic Baron' },
-    'Sentinel_Ω': { id: 'Sentinel', color: '#10b981', glow: 'shadow-emerald-500/50', asset: '🛡️', tagline: 'Security Guardian' },
-    'Phoenix_Ω': { id: 'Phoenix', color: '#d4af37', glow: 'shadow-gold-500/50', asset: '🔥', tagline: 'Portal Architect' }
-};
-
 interface Message {
-    role: 'user' | 'assistant';
-    content: string;
-    persona?: PersonaType;
+  role: 'user' | 'system' | 'bridge';
+  text: string;
+  stamp: string;
+}
+
+const cartridges: Array<{
+  id: CartridgeId;
+  label: string;
+  helm: string;
+  description: string;
+  icon: React.ElementType;
+}> = [
+  {
+    id: 'COGNITIVE',
+    label: 'Cognitive',
+    helm: 'Sir Alex + Sir Link',
+    description: 'Grand orchestration, route governance, UI to terminal handoff.',
+    icon: Brain,
+  },
+  {
+    id: 'ENGINEER',
+    label: 'Engineer',
+    helm: 'Anya + Merlin',
+    description: 'Build, verify, and harden code paths through Bifrost.',
+    icon: Cpu,
+  },
+  {
+    id: 'RESEARCH',
+    label: 'Research',
+    helm: 'Merlin',
+    description: 'NotebookLM short-term memory and cloud brain lookup.',
+    icon: Search,
+  },
+  {
+    id: 'CREATIVE',
+    label: 'Creative',
+    helm: 'Anya',
+    description: 'Interface, story, voice, product language, and visual direction.',
+    icon: PenTool,
+  },
+  {
+    id: 'MARKETING',
+    label: 'Marketing',
+    helm: 'Sir Link',
+    description: 'Funnels, positioning, content systems, and delivery loops.',
+    icon: Megaphone,
+  },
+  {
+    id: 'LEGAL',
+    label: 'Legal',
+    helm: 'Sentinel',
+    description: 'Risk review, compliance posture, and gated execution.',
+    icon: Scale,
+  },
+  {
+    id: 'BRAINSTORM',
+    label: 'Brainstorm',
+    helm: 'Anya',
+    description: 'Idea generation, option trees, and divergent strategy.',
+    icon: Lightbulb,
+  },
+  {
+    id: 'CRITICAL_THINKING',
+    label: 'Critical',
+    helm: 'Sir Alex',
+    description: 'Scorpion Sting review, tradeoffs, and failure-mode pressure tests.',
+    icon: Gavel,
+  },
+];
+
+function timestamp() {
+  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+}
+
+function cartridgeForIntent(intent: string, selected: CartridgeId): CartridgeId {
+  const text = intent.toLowerCase();
+  if (text.includes('build') || text.includes('fix') || text.includes('implement') || text.includes('code')) return 'ENGINEER';
+  if (text.includes('research') || text.includes('source') || text.includes('compare')) return 'RESEARCH';
+  if (text.includes('campaign') || text.includes('funnel') || text.includes('market')) return 'MARKETING';
+  if (text.includes('legal') || text.includes('risk') || text.includes('contract')) return 'LEGAL';
+  if (text.includes('brainstorm') || text.includes('ideas')) return 'BRAINSTORM';
+  if (text.includes('critique') || text.includes('audit') || text.includes('pressure')) return 'CRITICAL_THINKING';
+  return selected;
+}
+
+function knightFor(cartridge: CartridgeId) {
+  if (cartridge === 'COGNITIVE' || cartridge === 'CRITICAL_THINKING') return 'sir_alex';
+  if (cartridge === 'MARKETING') return 'sir_link';
+  if (cartridge === 'ENGINEER') return 'anya_merlin';
+  if (cartridge === 'LEGAL') return 'sentinel';
+  return 'merlin';
+}
+
+function eventLine(event: AnyaSocketEvent) {
+  return `${event.event} :: ${event.source ?? 'bridge'}${event.detail ? ` :: ${event.detail}` : ''}`;
+}
+
+function toneClass(tone: string) {
+  if (tone === 'emerald') return 'text-emerald-300';
+  if (tone === 'cyan') return 'text-cyan-300';
+  if (tone === 'blue') return 'text-blue-300';
+  if (tone === 'violet') return 'text-violet-300';
+  return 'text-amber-300';
 }
 
 export default function MorphingHUD() {
-    const [query, setQuery] = useState('');
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [activePersona, setActivePersona] = useState<PersonaType>('Anya_Ω');
-    const [vocalCue, setVocalCue] = useState('System Online');
-    const [isListening, setIsListening] = useState(false);
-    
-    const scrollRef = useRef<HTMLDivElement>(null);
-    const state = PERSONAS[activePersona];
+  const [status, setStatus] = useState<BifrostStatus | null>(null);
+  const [statusError, setStatusError] = useState('');
+  const [selectedCartridge, setSelectedCartridge] = useState<CartridgeId>('ENGINEER');
+  const [intent, setIntent] = useState('Overhaul Anya dashboard and sync through Bifrost');
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: 'system',
+      text: 'Anya interface online. Awaiting Bifrost bridge synchronization.',
+      stamp: timestamp(),
+    },
+  ]);
+  const [isDispatching, setIsDispatching] = useState(false);
+  const { isConnected, events, latestEvent } = useAnyaSocket(bifrostWebSocketUrl());
 
-    // Auto-scroll chat
-    useEffect(() => {
-        if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadStatus() {
+      try {
+        const response = await bifrostFetch(BIFROST_STATUS_URL);
+        if (!response.ok) throw new Error(`status ${response.status}`);
+        const data = (await response.json()) as BifrostStatus;
+        if (!cancelled) {
+          setStatus(data);
+          setStatusError('');
         }
-    }, [messages, loading]);
-
-    const handleSend = async () => {
-        if (!query.trim()) return;
-
-        const userMsg: Message = { role: 'user', content: query };
-        setMessages(prev => [...prev, userMsg]);
-        setQuery('');
-        setLoading(true);
-
-        // Simulation logic for persona handoffs
-        if (query.toLowerCase().includes('switch to merlin')) {
-            setTimeout(() => {
-                setActivePersona('Merlin_Ω');
-                setVocalCue('Channeling the Neural Stack...');
-                setMessages(prev => [...prev, { role: 'assistant', content: 'Merlin Online. Awaiting architecture directive.', persona: 'Merlin_Ω' }]);
-                setLoading(false);
-            }, 800);
-            return;
+      } catch (error) {
+        if (!cancelled) {
+          setStatus(null);
+          setStatusError(error instanceof Error ? error.message : 'Bifrost status unavailable');
         }
+      }
+    }
 
-        if (query.toLowerCase().includes('phoenix') || query.toLowerCase().includes('portal')) {
-            if (activePersona !== 'Phoenix_Ω') {
-                setTimeout(() => {
-                    setActivePersona('Phoenix_Ω');
-                    setVocalCue('Establishing Portal Uplink...');
-                    setMessages(prev => [...prev, { role: 'assistant', content: 'Phoenix Protocol Active. Monitoring HeadArtworks conversion funnel.', persona: 'Phoenix_Ω' }]);
-                }, 400);
-            }
-        }
-
-        try {
-            const response = await fetch('http://localhost:8001/agent/dispatch', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-camelot-token': 'merlin-v100-dev'
-                },
-                body: JSON.stringify({
-                    agent_id: activePersona.replace('_Ω', '').toUpperCase(),
-                    intent: query
-                })
-            });
-
-            const data = await response.json();
-            
-            if (data.status === 'COMPLETED') {
-                const aiMsg: Message = { 
-                    role: 'assistant', 
-                    content: data.response,
-                    persona: activePersona 
-                };
-                setMessages(prev => [...prev, aiMsg]);
-            } else {
-                throw new Error(data.error || 'Failed to get response');
-            }
-        } catch (err) {
-            setMessages(prev => [...prev, { role: 'assistant', content: "⚠️ Connection to Kernel severed." }]);
-        } finally {
-            setLoading(false);
-        }
+    loadStatus();
+    const timer = window.setInterval(loadStatus, 5000);
+    return () => {
+      cancelled = true;
+      window.clearInterval(timer);
     };
+  }, []);
 
-    return (
-        <div className="flex flex-col h-screen w-screen bg-black font-sans text-slate-200 p-2 lg:p-6 overflow-hidden">
-            {/* TOP BAR: Status & Personas */}
-            <div className="flex items-center justify-between mb-4 px-2">
-                <div className="flex items-center gap-3">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl bg-slate-900 border-2 transition-all duration-500 ${state.glow}`} style={{ borderColor: state.color }}>
-                        {state.asset}
-                    </div>
-                    <div>
-                        <h1 className="text-lg font-bold tracking-tighter leading-none" style={{ color: state.color }}>{activePersona}</h1>
-                        <p className="text-[10px] uppercase tracking-widest opacity-50">{state.tagline}</p>
-                    </div>
+  useEffect(() => {
+    if (!latestEvent) return;
+    setMessages((current) => [
+      ...current.slice(-11),
+      {
+        role: 'bridge',
+        text: eventLine(latestEvent),
+        stamp: timestamp(),
+      },
+    ]);
+  }, [latestEvent]);
+
+  const activeCartridge = useMemo(
+    () => cartridges.find((cartridge) => cartridge.id === selectedCartridge) ?? cartridges[0],
+    [selectedCartridge],
+  );
+
+  async function dispatchIntent() {
+    const cleanIntent = intent.trim();
+    if (!cleanIntent || isDispatching) return;
+
+    const cartridge = cartridgeForIntent(cleanIntent, selectedCartridge);
+    const preferredKnight = knightFor(cartridge);
+
+    setIsDispatching(true);
+    setMessages((current) => [
+      ...current.slice(-11),
+      {
+        role: 'user',
+        text: cleanIntent,
+        stamp: timestamp(),
+      },
+    ]);
+
+    try {
+      const response = await bifrostFetch(DISPATCH_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          intent: cleanIntent,
+          cartridge,
+          preferred_knight: preferredKnight,
+          execution_target: 'bifrost_bridge',
+          metadata: {
+            source: 'anya_dashboard',
+            bridge: 'bifrost',
+            helm: 'anya_merlin',
+          },
+        }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data?.error || `dispatch ${response.status}`);
+      setMessages((current) => [
+        ...current.slice(-11),
+        {
+          role: 'system',
+          text: `${data.source ?? 'LOCAL'} :: ${data.response ?? 'Dispatch accepted.'}`,
+          stamp: timestamp(),
+        },
+      ]);
+    } catch (error) {
+      setMessages((current) => [
+        ...current.slice(-11),
+        {
+          role: 'system',
+          text: `Dispatch failed: ${error instanceof Error ? error.message : 'unknown bridge error'}`,
+          stamp: timestamp(),
+        },
+      ]);
+    } finally {
+      setIsDispatching(false);
+    }
+  }
+
+  const healthCards = [
+    {
+      label: 'Bifrost Gate',
+      value: status?.gate ?? 'offline',
+      detail: status ? `${status.current_user}@${status.hostname}` : statusError || 'No bridge response',
+      icon: Shield,
+      tone: status ? 'emerald' : 'amber',
+    },
+    {
+      label: 'Websocket',
+      value: isConnected ? 'linked' : 'offline',
+      detail: bifrostWebSocketUrl(),
+      icon: Radio,
+      tone: isConnected ? 'cyan' : 'amber',
+    },
+    {
+      label: 'Long Brain',
+      value: 'excalibur',
+      detail: 'Long-term agentic brain routed by Bifrost',
+      icon: Database,
+      tone: 'blue',
+    },
+    {
+      label: 'Short Brain',
+      value: 'notebooklm',
+      detail: 'Living notebooks for short-term context',
+      icon: Activity,
+      tone: 'violet',
+    },
+  ];
+
+  return (
+    <div className="min-h-screen overflow-y-auto bg-[#080a0d] text-slate-100">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(14,165,233,0.22),transparent_32%),radial-gradient(circle_at_80%_12%,rgba(245,158,11,0.16),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.65),rgba(2,6,23,0.95))]" />
+
+      <main className="relative mx-auto flex min-h-screen max-w-7xl flex-col gap-6 px-4 pb-28 pt-5 lg:px-8">
+        <header className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
+          <section className="rounded-[2rem] border border-white/10 bg-black/35 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur">
+            <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-400 text-xl font-black text-slate-950 shadow-lg shadow-cyan-500/30">
+                  A
                 </div>
-                
-                <div className="flex gap-2">
-                    <div className="hidden md:flex gap-1 mr-4">
-                        {(Object.keys(PERSONAS) as PersonaType[]).map(p => (
-                            <button 
-                                key={p} 
-                                onClick={() => setActivePersona(p)}
-                                className={`w-2 h-2 rounded-full transition-all ${activePersona === p ? 'scale-150' : 'opacity-20'}`}
-                                style={{ backgroundColor: PERSONAS[p].color }}
-                            />
-                        ))}
-                    </div>
-                    <div className="flex items-center gap-2 bg-slate-900/80 backdrop-blur px-3 py-1 rounded-full border border-slate-800">
-                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="text-[10px] font-mono text-emerald-500">KERNEL_V202_ACTIVE</span>
-                    </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">Anya Interface</p>
+                  <h1 className="text-3xl font-black tracking-tight md:text-5xl">Camelot Command Bridge</h1>
                 </div>
+              </div>
+              <div className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-200">
+                Bifrost Sync
+              </div>
             </div>
 
-            <div className="flex flex-1 gap-4 overflow-hidden">
-                {/* LEFT: 3D Visualization */}
-                <div className="hidden lg:block w-3/5 rounded-3xl overflow-hidden border border-slate-800/50 relative group">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 z-10 pointer-events-none" />
-                    <QuantumScene />
-                    
-                    {/* Overlay Metadata */}
-                    <div className="absolute bottom-6 left-6 z-20 space-y-2">
-                        <div className="flex items-center gap-2 bg-black/60 backdrop-blur-xl p-3 rounded-2xl border border-white/5 shadow-2xl">
-                            <Zap size={16} className="text-yellow-400" />
-                            <div className="font-mono text-[10px]">
-                                <p className="text-white/40 leading-none mb-1">KINETIC PRESSURE</p>
-                                <p className="text-white font-bold">0.84 Giga-Ops</p>
-                            </div>
-                        </div>
+            <div className="grid gap-3 md:grid-cols-4">
+              {healthCards.map((card) => {
+                const Icon = card.icon;
+                return (
+                  <div key={card.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                    <div className="mb-4 flex items-center justify-between">
+                      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{card.label}</p>
+                      <Icon className={`h-4 w-4 ${toneClass(card.tone)}`} />
                     </div>
-
-                    <div className="absolute top-6 right-6 z-20">
-                        <button className="p-3 rounded-2xl bg-white/5 backdrop-blur hover:bg-white/10 border border-white/10 transition-all">
-                            <Sparkles size={18} style={{ color: state.color }} />
-                        </button>
-                    </div>
-                </div>
-
-                {/* RIGHT: Intelligence Interface */}
-                <div className="flex-1 flex flex-col gap-4">
-                    {/* Kinetic Monitors */}
-                    <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
-                        <RotelMonitor />
-                        <SaltareController />
-                        <AuroraVision />
-                    </div>
-
-                    {/* Vocal Cue Terminal */}
-                    <div className="bg-slate-900/40 border border-slate-800 rounded-2xl p-3 font-mono text-[11px] relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-1 h-full" style={{ backgroundColor: state.color }} />
-                        <div className="flex items-center gap-2 text-slate-500 mb-1">
-                            <Terminal size={12} />
-                            <span>VOCAL_CUE_STREAM</span>
-                        </div>
-                        <p className="text-slate-300 italic">"{vocalCue}"</p>
-                    </div>
-
-                    {/* Phoenix Portal Intelligence - Dynamic Track D */}
-                    <AnimatePresence>
-                        {activePersona === 'Phoenix_Ω' && (
-                            <motion.div 
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: 20 }}
-                                className="grid grid-cols-2 lg:grid-cols-4 gap-4"
-                            >
-                                <BriefingCard 
-                                    title="Live Resonance" 
-                                    value="42" 
-                                    trend="+12%" 
-                                    trendType="positive" 
-                                    icon={Users} 
-                                    description="Active Portal Visitors"
-                                />
-                                <BriefingCard 
-                                    title="Lead Capture" 
-                                    value="8.4%" 
-                                    trend="+2.1%" 
-                                    trendType="positive" 
-                                    icon={Target} 
-                                    description="Conversion Velocity"
-                                />
-                                <BriefingCard 
-                                    title="Exit Intent" 
-                                    value="14" 
-                                    trend="-5" 
-                                    trendType="positive" 
-                                    icon={MousePointer2} 
-                                    description="Recovered Sessions"
-                                />
-                                <BriefingCard 
-                                    title="Funnel Health" 
-                                    value="RADIANT" 
-                                    icon={BarChart3} 
-                                    description="System Coherence"
-                                    color="#10b981"
-                                />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-
-                    {/* Chat Area */}
-                    <Card className="flex-1 flex flex-col bg-slate-900/20 backdrop-blur-md border-slate-800/50 shadow-none overflow-hidden rounded-3xl" title="">
-                        <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-hide">
-                            {messages.length === 0 && (
-                                <div className="h-full flex flex-col items-center justify-center text-center p-8 opacity-20">
-                                    <User size={48} className="mb-4" />
-                                    <p className="text-sm">Awaiting Sovereigns Directive...</p>
-                                </div>
-                            )}
-                            {messages.map((m, i) => (
-                                <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                                    <div className={`relative max-w-[85%] rounded-2xl px-4 py-2.5 text-sm ${
-                                        m.role === 'user' 
-                                        ? 'bg-slate-100 text-slate-950 font-medium' 
-                                        : 'bg-slate-800/80 text-slate-100 border border-slate-700'
-                                    }`}>
-                                        {m.persona && (
-                                            <span className="absolute -top-5 left-0 text-[9px] font-bold uppercase opacity-40" style={{ color: PERSONAS[m.persona].color }}>
-                                                {PERSONAS[m.persona].id}
-                                            </span>
-                                        )}
-                                        {m.content}
-                                    </div>
-                                </div>
-                            ))}
-                            {loading && (
-                                <div className="flex justify-start">
-                                    <div className="bg-slate-800/40 rounded-2xl px-4 py-2 flex gap-1">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce" />
-                                        <div className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce [animation-delay:0.2s]" />
-                                        <div className="w-1.5 h-1.5 rounded-full bg-slate-500 animate-bounce [animation-delay:0.4s]" />
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-
-                        {/* Input Area */}
-                        <div className="p-4 bg-slate-950/50 border-t border-slate-800/50">
-                            <div className="flex gap-2 items-center">
-                                <button 
-                                    onClick={() => setIsListening(!isListening)}
-                                    className={`p-3 rounded-2xl transition-all ${isListening ? 'bg-red-500 text-white animate-pulse' : 'bg-slate-800 text-slate-400 hover:bg-slate-700'}`}
-                                >
-                                    {isListening ? <MicOff size={20} /> : <Mic size={20} />}
-                                </button>
-                                
-                                <input
-                                    className="flex-1 bg-transparent border-none focus:ring-0 text-sm py-3 px-2 placeholder:text-slate-600"
-                                    placeholder={`Message ${state.id}...`}
-                                    value={query}
-                                    onChange={(e) => setQuery(e.target.value)}
-                                    onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                                />
-
-                                <button 
-                                    onClick={handleSend} 
-                                    disabled={!query.trim()}
-                                    className={`p-3 rounded-2xl transition-all ${query.trim() ? 'bg-white text-black shadow-xl shadow-white/10' : 'bg-slate-800 text-slate-600 opacity-50'}`}
-                                >
-                                    <Send size={20} />
-                                </button>
-                            </div>
-                        </div>
-                    </Card>
-                </div>
+                    <p className="text-2xl font-black lowercase">{card.value}</p>
+                    <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">{card.detail}</p>
+                  </div>
+                );
+              })}
             </div>
-        </div>
-    );
+          </section>
+
+          <aside className="rounded-[2rem] border border-amber-300/20 bg-amber-300/[0.06] p-6 backdrop-blur">
+            <p className="text-xs uppercase tracking-[0.34em] text-amber-200">Helm</p>
+            <div className="mt-5 space-y-4">
+              <div className="rounded-2xl bg-black/30 p-4">
+                <p className="text-sm text-slate-400">Operator</p>
+                <p className="text-2xl font-black">Anya + Merlin</p>
+              </div>
+              <div className="rounded-2xl bg-black/30 p-4">
+                <p className="text-sm text-slate-400">Cognitive Cartridge</p>
+                <p className="text-2xl font-black">{status?.cognitive_helm ?? 'sir_alex'}</p>
+              </div>
+              <div className="rounded-2xl bg-black/30 p-4">
+                <p className="text-sm text-slate-400">Bridge Knight</p>
+                <p className="text-2xl font-black">{status?.bridge_knight ?? 'sir_link'}</p>
+              </div>
+            </div>
+          </aside>
+        </header>
+
+        <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="rounded-[2rem] border border-white/10 bg-slate-950/70 p-5 backdrop-blur">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.34em] text-slate-500">Cartridges</p>
+                <h2 className="text-2xl font-black">Mode Router</h2>
+              </div>
+              <Zap className="text-amber-300" />
+            </div>
+
+            <div className="grid gap-3 sm:grid-cols-2">
+              {cartridges.map((cartridge) => {
+                const Icon = cartridge.icon;
+                const selected = selectedCartridge === cartridge.id;
+                return (
+                  <button
+                    key={cartridge.id}
+                    onClick={() => setSelectedCartridge(cartridge.id)}
+                    className={`group rounded-2xl border p-4 text-left transition ${
+                      selected
+                        ? 'border-cyan-300 bg-cyan-300/10 shadow-lg shadow-cyan-950/40'
+                        : 'border-white/10 bg-white/[0.03] hover:border-white/25 hover:bg-white/[0.06]'
+                    }`}
+                  >
+                    <div className="mb-3 flex items-center justify-between">
+                      <Icon className={selected ? 'text-cyan-200' : 'text-slate-400'} />
+                      {selected && <CheckCircle2 className="h-4 w-4 text-cyan-200" />}
+                    </div>
+                    <p className="font-black">{cartridge.label}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-500">{cartridge.helm}</p>
+                    <p className="mt-3 text-xs leading-5 text-slate-400">{cartridge.description}</p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="flex flex-col rounded-[2rem] border border-white/10 bg-black/45 p-5 backdrop-blur">
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.34em] text-slate-500">Dispatch</p>
+                <h2 className="text-2xl font-black">Bifrost Command Line</h2>
+              </div>
+              <TerminalSquare className="text-cyan-300" />
+            </div>
+
+            <div className="mb-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em] text-slate-500">
+                <span>{activeCartridge.label}</span>
+                <ArrowRight className="h-3 w-3" />
+                <span>{knightFor(activeCartridge.id)}</span>
+                <ArrowRight className="h-3 w-3" />
+                <span>Bifrost</span>
+              </div>
+              <textarea
+                value={intent}
+                onChange={(event) => setIntent(event.target.value)}
+                className="mt-4 min-h-32 w-full resize-none rounded-2xl border border-white/10 bg-slate-950/80 p-4 text-sm leading-6 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-cyan-300"
+                placeholder="Type the command for Anya to route through Bifrost..."
+              />
+              <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+                <p className="text-xs text-slate-500">
+                  Auto-detects cartridge keywords, but keeps your selected mode as fallback.
+                </p>
+                <button
+                  onClick={dispatchIntent}
+                  disabled={isDispatching || !intent.trim()}
+                  className="rounded-full bg-cyan-300 px-5 py-3 text-sm font-black uppercase tracking-[0.18em] text-slate-950 transition hover:bg-cyan-200 disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  {isDispatching ? 'Routing...' : 'Dispatch'}
+                </button>
+              </div>
+            </div>
+
+            <div className="grid flex-1 gap-4 lg:grid-cols-2">
+              <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                <div className="mb-3 flex items-center gap-2">
+                  <Cable className="h-4 w-4 text-cyan-300" />
+                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Conversation</p>
+                </div>
+                <div className="max-h-72 space-y-3 overflow-y-auto pr-1">
+                  {messages.map((message, index) => (
+                    <div key={`${message.stamp}-${index}`} className="rounded-xl bg-white/[0.04] p-3">
+                      <div className="mb-1 flex items-center justify-between gap-3">
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">{message.role}</span>
+                        <span className="text-[10px] text-slate-600">{message.stamp}</span>
+                      </div>
+                      <p className="whitespace-pre-wrap text-sm leading-6 text-slate-300">{message.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
+                <div className="mb-3 flex items-center gap-2">
+                  <Radio className="h-4 w-4 text-emerald-300" />
+                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Live Bridge Events</p>
+                </div>
+                <div className="max-h-72 space-y-2 overflow-y-auto pr-1 font-mono text-xs">
+                  {events.length === 0 ? (
+                    <p className="rounded-xl bg-white/[0.04] p-3 text-slate-500">Waiting for websocket events...</p>
+                  ) : (
+                    events
+                      .slice()
+                      .reverse()
+                      .map((event, index) => (
+                        <div key={`${event.timestamp_ms ?? index}-${index}`} className="rounded-xl border border-white/10 bg-black/30 p-3">
+                          <p className="text-cyan-200">{event.event}</p>
+                          <p className="mt-1 text-slate-500">{event.source ?? 'bridge'}</p>
+                          {event.detail && <p className="mt-2 leading-5 text-slate-300">{event.detail}</p>}
+                        </div>
+                      ))
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
 }

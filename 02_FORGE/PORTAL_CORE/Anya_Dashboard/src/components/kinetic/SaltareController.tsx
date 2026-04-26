@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Shield, Globe, Cpu, Zap, Lock, Activity } from 'lucide-react';
+import { runtimeConfig } from '@/config/runtime';
 
-const KINETIC_TOKEN = "camelot-kinetic-v300-auth-token";
-const SALTARE_ROUTE_URL = "http://localhost:8080/api/v1/route";
+const KINETIC_TOKEN = runtimeConfig.saltare.token;
+const SALTARE_ROUTE_URL = runtimeConfig.saltare.routeUrl;
 
 interface RouteResponse {
     knight_id: string;

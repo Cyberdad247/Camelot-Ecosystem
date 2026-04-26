@@ -1,22 +1,89 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/Card';
-import { Send, BookOpen, Loader2, Cuboid } from 'lucide-react';
+import { Send } from 'lucide-react';
 import QuantumScene from '@/components/engine/Scene';
 import { useEngineStore } from './engineStore';
+import { useAnyaSocket } from './useAnyaSocket';
+import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch } from '@/lib/bifrostClient';
 
 interface Message {
   role: 'user' | 'assistant';
   content: string;
 }
 
-// 🛡️ CONFIGURATION: Modal Endpoint
-const CLOUD_BRAIN_URL = "https://cyberdad247--camelot-notebook-brain-query-notebook.modal.run";
+const LOCAL_DISPATCH_URL = runtimeConfig.bifrost.dispatchUrl;
+
+function formatDispatchResponse(data: any): string {
+  const payload = data?.payload ?? data;
+  const route = payload?.route ?? {};
+  const result = payload?.result ?? {};
+
+  const lines: string[] = [];
+  if (payload?.status) lines.push(`status: ${payload.status}`);
+  if (payload?.execution_target) lines.push(`execution_target: ${payload.execution_target}`);
+  if (route?.knight_id) lines.push(`route_knight: ${route.knight_id}`);
+  if (route?.engine) lines.push(`route_engine: ${route.engine}`);
+  if (payload?.service) lines.push(`service: ${payload.service}`);
+
+  if (typeof result?.brief === 'string' && result.brief.trim()) {
+    lines.push('');
+    lines.push(result.brief.trim());
+  } else if (typeof result?.bridge_response?.result === 'string' && result.bridge_response.result.trim()) {
+    lines.push('');
+    lines.push(result.bridge_response.result.trim());
+  } else if (typeof data?.response === 'string' && data.response.trim()) {
+    lines.push('');
+    lines.push(data.response.trim());
+  } else if (typeof result?.archivist_voice === 'string' && result.archivist_voice.trim()) {
+    lines.push('');
+    lines.push(result.archivist_voice.trim());
+  }
+
+  if (payload?.error) {
+    lines.push('');
+    lines.push(`error: ${payload.error}`);
+  }
+
+  return lines.filter(Boolean).join('\n') || 'No response.';
+}
 
 export default function BrainInterface() {
   const [query, setQuery] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
   const addObject = useEngineStore((state) => state.addObject);
+  const { isConnected, latestEvent } = useAnyaSocket();
+
+  useEffect(() => {
+    if (!latestEvent) {
+      return;
+    }
+    if (latestEvent.event === 'bridge.ready') {
+      setMessages((prev) => {
+        if (prev.some((message) => message.content.includes('websocket uplink established'))) {
+          return prev;
+        }
+        return [
+          ...prev,
+          {
+            role: 'assistant',
+            content: `${latestEvent.source}: ${latestEvent.detail}`,
+          },
+        ];
+      });
+      return;
+    }
+    if (latestEvent.event === 'dispatch.accepted' || latestEvent.event === 'dispatch.completed') {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: `[${latestEvent.event}] ${latestEvent.source ?? 'bridge'}${latestEvent.detail ? ` | ${latestEvent.detail}` : ''}`,
+        },
+      ]);
+    }
+  }, [latestEvent]);
 
   const handleAsk = async () => {
     if (!query.trim()) return;
@@ -33,20 +100,26 @@ export default function BrainInterface() {
     setLoading(true);
 
     try {
-      const res = await fetch(CLOUD_BRAIN_URL, {
+      const res = await bifrostFetch(LOCAL_DISPATCH_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          project_id: "CAMELOT_V97", // Required by Modal Schema
-          query: userMsg.content
+          intent: userMsg.content,
+          cartridge: 'COGNITIVE',
+          preferred_knight: 'sir_alex',
+          execution_target: 'analysis_only',
+          metadata: {
+            source: 'brain_ui',
+            bridge_knight: 'sir_link',
+          },
         })
       });
 
       const data = await res.json();
-      const aiMsg = { role: 'assistant' as const, content: data.archivist_voice || data.error || "No response." };
+      const aiMsg = { role: 'assistant' as const, content: formatDispatchResponse(data) };
       setMessages(prev => [...prev, aiMsg]);
     } catch (err) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "⚠️ Cloud Brain Unreachable." }]);
+      setMessages(prev => [...prev, { role: 'assistant', content: "Local dispatch unreachable. Brain UI could not hand off through Sir Link." }]);
     } finally {
       setLoading(false);
     }
@@ -66,6 +139,12 @@ export default function BrainInterface() {
       <Card className="flex-1 flex flex-col h-[500px] lg:h-full border-none shadow-2xl bg-slate-900/50 backdrop-blur-sm" 
             title="Anya's Interface"
             description="Commanding the Kernel & Engine">
+
+        <div className="px-2 pb-2 text-[10px] uppercase tracking-widest">
+          <span className={isConnected ? 'text-emerald-400' : 'text-amber-400'}>
+            {isConnected ? 'websocket linked to morgana bridge' : 'websocket offline, dispatch still available'}
+          </span>
+        </div>
         
         <div className="flex-1 overflow-y-auto space-y-4 mb-4 p-2">
           {messages.map((m, i) => (
@@ -77,7 +156,7 @@ export default function BrainInterface() {
               </div>
             </div>
           ))}
-          {loading && <div className="text-slate-500 text-sm animate-pulse">Thinking...</div>}
+          {loading && <div className="text-slate-500 text-sm animate-pulse">Routing through Sir Alex and Sir Link...</div>}
         </div>
 
         <div className="flex gap-2">
