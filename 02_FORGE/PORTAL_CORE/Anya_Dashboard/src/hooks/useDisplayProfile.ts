@@ -27,11 +27,18 @@ function readDisplayProfile(): DisplayProfile {
     };
   }
 
+  const safeMatchMedia = (query: string) => {
+    if (typeof window.matchMedia !== 'function') {
+      return { matches: false } as MediaQueryList;
+    }
+    return window.matchMedia(query);
+  };
+
   const width = window.innerWidth;
   const height = window.innerHeight;
   const dpr = window.devicePixelRatio || 1;
-  const touch = window.matchMedia('(pointer: coarse)').matches;
-  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const touch = safeMatchMedia('(pointer: coarse)').matches;
+  const reducedMotion = safeMatchMedia('(prefers-reduced-motion: reduce)').matches;
   const lowHeight = height < 760;
   const displayClass: DisplayClass =
     width < 720 ? 'handheld' : width < 1120 ? 'tablet' : width >= 1920 && height >= 980 ? 'wall' : 'console';

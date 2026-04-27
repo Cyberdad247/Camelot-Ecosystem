@@ -86,15 +86,27 @@ export default function BrainInterface() {
   }, [latestEvent]);
 
   const handleAsk = async () => {
-    if (!query.trim()) return;
-    
-    // Command Interception
-    if (query.toLowerCase().includes('spawn cube')) {
-        // ... (Keep existing logic)
-        return;
+    const cleanQuery = query.trim();
+    if (!cleanQuery) return;
+
+    if (cleanQuery.toLowerCase().includes('spawn cube')) {
+      const cubeId = `cube-${Date.now()}`;
+      addObject({
+        id: cubeId,
+        type: 'cube',
+        position: [0, 2.5, 0],
+        color: '#22d3ee',
+      });
+      setMessages((prev) => [
+        ...prev,
+        { role: 'user', content: cleanQuery },
+        { role: 'assistant', content: `Spawned cube ${cubeId} in the Quantum Scene.` },
+      ]);
+      setQuery('');
+      return;
     }
 
-    const userMsg = { role: 'user' as const, content: query };
+    const userMsg = { role: 'user' as const, content: cleanQuery };
     setMessages(prev => [...prev, userMsg]);
     setQuery('');
     setLoading(true);

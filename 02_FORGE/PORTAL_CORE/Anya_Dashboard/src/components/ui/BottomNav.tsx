@@ -1,30 +1,33 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutGrid, Globe, Brain, Map } from 'lucide-react';
+import { LayoutDashboard, BrainCircuit, FlaskConical, Zap, Map, Settings2 } from 'lucide-react';
+
+const navItems = [
+  { path: '/', icon: LayoutDashboard, label: 'Hub', end: true },
+  { path: '/alex', icon: BrainCircuit, label: 'Alex' },
+  { path: '/research', icon: FlaskConical, label: 'Research' },
+  { path: '/dev', icon: Settings2, label: 'Dev' },
+  { path: '/cartridge/cognitive', icon: Zap, label: 'Cartridges' },
+  { path: '/openviking', icon: Map, label: 'Map' },
+];
 
 export default function BottomNav() {
-  const navItems = [
-    { path: '/anyas-link', icon: Globe, label: 'Link' },
-    { path: '/brain', icon: Brain, label: 'Brain' },
-    { path: '/openviking', icon: Map, label: 'Viking' },
-    { path: '/swarm', icon: LayoutGrid, label: 'Swarm' }, 
-  ];
-
   return (
-    <nav className="z-50 shrink-0 border-t border-slate-800 bg-slate-950/90 pb-[env(safe-area-inset-bottom)] backdrop-blur-lg">
-      <div className="flex justify-around items-center h-16">
+    <nav className="z-50 shrink-0 border-t border-slate-800 bg-slate-950/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-lg">
+      <div className="flex justify-around items-center h-14">
         {navItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
+            end={item.end}
             className={({ isActive }) =>
               `flex flex-col items-center justify-center w-full h-full gap-1 transition-colors ${
-                isActive ? 'text-blue-500' : 'text-slate-500 hover:text-slate-300'
+                isActive ? 'text-fuchsia-400' : 'text-slate-500 hover:text-slate-300'
               }`
             }
           >
-            <item.icon size={24} />
-            <span className="text-[10px] font-medium">{item.label}</span>
+            <item.icon size={20} />
+            <span className="text-[10px] font-semibold">{item.label}</span>
           </NavLink>
         ))}
       </div>

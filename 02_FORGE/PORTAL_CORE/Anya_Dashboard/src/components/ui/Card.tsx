@@ -15,7 +15,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         ref={ref}
         className={cn(
           "rounded-xl border bg-card text-card-foreground shadow-sm transition-all hover:shadow-md",
-          "w-full sm:max-w-md md:max-w-lg lg:max-w-xl", // Responsive constraints
+          "w-full",
           className
         )}
         {...props}
