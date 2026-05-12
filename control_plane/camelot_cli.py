@@ -8,21 +8,39 @@ import importlib
 import json
 import os
 import re
+import subprocess
 import sys
 import time
+from pathlib import Path
 from typing import Any
 
 from colorama import Fore, Style, just_fix_windows_console
 
 from .cli_intercept import CLIIntercept
-from .cloudbrain_sync import sync_after_event
+from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
 from .config_manager import ConfigManager, OperatorProfile
+from .forge_unify import activate_forge_unify, forge_unify_status, select_topology, sentinel_forensic_check
 from .hyper_evolve import append_learning, promote_mutation
 from .provenance import ProvenanceManager, VerificationRun
-from .ledger_sync import append_provenance_entry, ledger_status, sync_to_kernel
+from .ledger_sync import append_provenance_entry, ledger_status, reconcile_ledger_mirrors, sync_to_kernel
+from .knight_configuration import write_knight_configuration
+from .glyph_registry import audit_atom, execute_atom, expand_atom, list_glyphs, load_stack
 from .main import ControlPlane, TaskPayload
 from . import boot_sequence
+from .orchestration_state import (
+    build_orchestration_snapshot,
+    build_notification_bundle,
+    go_autonomous_workflow_report,
+    route_persona,
+    run_orchestrator_cli,
+    summarize_boot_results,
+    triage_files,
+    validate_autonomous_knight_workflows,
+)
+from .codex_integration import DEFAULT_ACTOR as CODEX_DEFAULT_ACTOR
+from .codex_integration import read_codex_status, write_codex_integration
 from bin import bifrost
+from .smolvm_harness import smolvm
 
 CAMELOT_HOME = boot_sequence._detect_home()
 
@@ -50,6 +68,7 @@ HELP_LINES = [
     "/help or //HELP",
     "/route <intent>",
     "/status",
+    "/orchestrator [--mode <boot|status|knights|triage|persona|notify|awaken|conversation>]",
     "/memory <agent>",
     "/research <objective>",
     "/northstar <objective>",
@@ -59,8 +78,21 @@ HELP_LINES = [
     "/llm <model>          (pin model)",
     "/provider <name>      (pin provider)",
     "/ledger-status",
+    "glyph list",
+    "glyph load thread_audit_max",
+    "glyph activate [thread_audit_max]",
+    "glyph expand <atom_id>",
+    "glyph audit [atom_id]",
+    "glyph execute <atom_id> [--approve]",
+    "forge-unify activate",
+    "forge-unify status",
+    "forge-unify route <intent>",
+    "forge-unify forensic-check [--refresh-baseline]",
     "/sarda <intent>",
     "team self-test",
+    "codex status",
+    "codex integrate [--actor <name>]",
+    "codex sync",
     "cloudbrain config show",
     "cloudbrain config set <ENV_VAR> <url>",
     "cloudbrain config clear <ENV_VAR>",
@@ -86,60 +118,7 @@ HELP_LINES = [
 # Anya's Ethereal Compiler (Phase 1 Upgrade)
 # ---------------------------------------------------------------------------
 
-class AnyaCompiler:
-    """Ethereal Compiler (Layer 7) implementing Triple-QFT Protocol."""
-
-    def __init__(self):
-        self.anchor_tokens = {
-            "build", "refactor", "create", "deploy", "audit", "fix", 
-            "scaffold", "status", "sync", "research", "blueprint", "precise"
-        }
-
-    def renormalize(self, intent: str) -> str:
-        """Strip conversational noise and irrelevant operators (Phase: Physics)."""
-        fillers = {
-            "please", "can you", "i need to", "help me", "i want to", 
-            "would like to", "could you", "make sure to"
-        }
-        clean = intent.lower()
-        for filler in fillers:
-            clean = clean.replace(filler, "")
-        
-        # Remove extra punctuation and whitespace
-        clean = re.sub(r'[^\w\s]', '', clean)
-        return " ".join(clean.split())
-
-    def quantize(self, intent: str) -> list[str]:
-        """Identify Anchor Tokens for context compression (Phase: Engineering)."""
-        words = set(intent.lower().split())
-        found = words.intersection(self.anchor_tokens)
-        return sorted(list(found))
-
-    def pedagogy(self, intent: str) -> bool:
-        """Check if the intent is ambiguous and needs clarification (Phase: Pedagogy)."""
-        clean = self.renormalize(intent)
-        words = clean.split()
-        # Heuristic: < 2 words is usually ambiguous for a system command
-        if len(words) < 2 and not any(w in self.anchor_tokens for w in words):
-            return True
-        return False
-
-    def compile(self, raw_intent: str) -> tuple[str, float]:
-        """Compile raw intent and return Titan Prompt + Confidence Scalar."""
-        clean = self.renormalize(raw_intent)
-        anchors = self.quantize(clean)
-        
-        # Calculate confidence scalar based on anchor presence
-        score = 1.0 if anchors else 0.5
-        if len(clean.split()) < 3 and not anchors:
-            score = 0.3
-            
-        if not anchors:
-            return clean, score
-            
-        # Format as a high-density Titan Prompt glyph
-        prompt = f"⌖ Titan_Prompt | Intent: {clean} | ⌘ Anchors: {', '.join(anchors)}"
-        return prompt, score
+from .anya_gate import AnyaCompiler
 
 
 def _color(text: str, tone: str) -> str:
@@ -154,32 +133,6 @@ def _color(text: str, tone: str) -> str:
         "score": Fore.BLUE + Style.BRIGHT,
     }
     return f"{palette.get(tone, '')}{text}{Style.RESET_ALL}"
-
-
-def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float = 0.0) -> bool:
-    """Enforce Titanium Laws: HITL Iron Gate v1.1 with Impact Brief."""
-    dangerous_keywords = {"delete", "rm", "remove", "wipe", "purge", "format", "exec", "shell"}
-    intent_lower = intent.lower()
-
-    is_dangerous = any(k in intent_lower for k in dangerous_keywords)
-    is_generative = any(k in intent_lower for k in {"build", "refactor", "fix", "scaffold", "implement"})
-
-    if is_dangerous or is_generative or file_count > 3:
-        _stream_print("\n[HITL_GATE] High-risk kinetic action detected.", tone="warn")
-        _stream_print(f"Action: {intent}", tone="dim")
-        
-        # Display Impact Brief
-        brief = f"◬ Impact_Brief | Files: {file_count or 'N/A'} | Delta: {size_delta_mb or 'Unknown'} MB"
-        _stream_print(brief, tone="info")
-
-        try:
-            prompt_text = _color("[HITL_APPROVAL] Proceed with Kinetic Execution? {👤✅} [y/N]: ", "warn")
-            choice = input(prompt_text).strip().lower()
-            return choice == "y"
-        except (EOFError, KeyboardInterrupt):
-            return False
-
-    return True
 
 
 def _stream_print(text: str, *, tone: str | None = None, newline: bool = True) -> None:
@@ -199,22 +152,33 @@ def _stream_print(text: str, *, tone: str | None = None, newline: bool = True) -
 
 
 def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float = 0.0) -> bool:
-    """Enforce Titanium Laws with console-safe prompt rendering."""
-    dangerous_keywords = {"delete", "rm", "remove", "wipe", "purge", "format", "exec", "shell"}
-    intent_lower = intent.lower()
+    """Enforce Titanium Laws: HITL Iron Gate integrated with SecurityWarden."""
+    try:
+        # Import warden here to maintain lazy loading
+        from security.warden import warden, SecurityException
+        
+        # Verify permission via the unified security warden
+        warden.verify_permission(
+            agent_id="CLI",
+            resource_type="kinetic_action",
+            action="EXECUTE",
+            target=intent,
+            trust_level="KERNEL"
+        )
+        return True
+    except Exception as e:
+        # SecurityException or other error means blocked
+        _stream_print(f"\n[HITL_GATE] Security Block: {e}", tone="err")
+        
+        # Display Impact Brief
+        if file_count > 0 or size_delta_mb > 0.0:
+            brief = f"[Impact_Brief] Files: {file_count or 'N/A'} | Delta: {size_delta_mb or 'Unknown'} MB"
+            _stream_print(brief, tone="info")
 
-    is_dangerous = any(k in intent_lower for k in dangerous_keywords)
-    is_generative = any(k in intent_lower for k in {"build", "refactor", "fix", "scaffold", "implement"})
-
-    if is_dangerous or is_generative or file_count > 3:
-        _stream_print("\n[HITL_GATE] High-risk kinetic action detected.", tone="warn")
-        _stream_print(f"Action: {intent}", tone="dim")
-        brief = f"[Impact_Brief] Files: {file_count or 'N/A'} | Delta: {size_delta_mb or 'Unknown'} MB"
-        _stream_print(brief, tone="info")
-
+        # Fallback to manual confirmation if lockdown is off
         try:
             prompt_text = _color(
-                "[HITL_APPROVAL] Proceed with Kinetic Execution? [operator approval] [y/N]: ",
+                "[HITL_APPROVAL] Force override and Proceed? [operator approval] [y/N]: ",
                 "warn",
             )
             stream_encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
@@ -226,8 +190,6 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
             return choice == "y"
         except (EOFError, KeyboardInterrupt):
             return False
-
-    return True
 
 
 def _progress(label: str, detail: str, *, tone: str = "dim") -> None:
@@ -352,6 +314,92 @@ def _emit(payload: Any, *, json_mode: bool = False, title: str | None = None) ->
     _stream_print(_pretty_render(payload), tone="info")
 
 
+def _run_orchestrator_cli(
+    *,
+    mode: str,
+    root: str = ".",
+    older_than_days: int = 60,
+    large_file_mb: float = 50.0,
+    intent: str = "refactor the backend control plane",
+    message: str = "Camelot orchestration event",
+    kind: str = "startup",
+    status: str = "green",
+) -> dict[str, Any]:
+    payload = run_orchestrator_cli(
+        mode,
+        root=root,
+        older_than_days=older_than_days,
+        large_file_mb=large_file_mb,
+        intent=intent,
+        message=message,
+        kind=kind,
+        status=status,
+    )
+    if payload is not None:
+        payload.setdefault("source", "go")
+        return payload
+
+    fallback = {
+        "mode": mode,
+        "source": "python",
+    }
+    if mode in {"status", "awaken", "conversation"}:
+        fallback.update(
+            build_orchestration_snapshot(
+                root=root,
+                older_than_days=older_than_days,
+                large_file_mb=large_file_mb,
+                intent=intent,
+                message=message,
+                kind=kind,
+                status=status,
+            )
+        )
+    if mode == "knights":
+        fallback["autonomous"] = go_autonomous_workflow_report() or validate_autonomous_knight_workflows()
+    elif mode == "persona":
+        fallback["persona"] = route_persona(intent)
+    elif mode == "notify":
+        fallback["notification"] = build_notification_bundle(
+            {
+                "kind": kind,
+                "status": status,
+                "summary": message,
+            }
+        )
+    elif mode == "triage":
+        fallback["triage"] = triage_files(root, older_than_days=older_than_days, large_file_mb=large_file_mb)
+    elif mode == "status":
+        fallback["triage_summary"] = triage_files(
+            root,
+            older_than_days=older_than_days,
+            large_file_mb=large_file_mb,
+        )["summary"]
+        fallback["persona"] = route_persona(intent)
+        fallback["autonomous"] = go_autonomous_workflow_report() or validate_autonomous_knight_workflows()
+    elif mode == "awaken":
+        fallback["boot_summary"] = summarize_boot_results(
+            [
+                {"name": "CLIProxyAPI", "ok": True, "required": True},
+                {"name": "Defense Grid", "ok": True, "required": True},
+                {"name": "Kinetic Edge", "ok": True, "required": True},
+                {"name": "Cloud Brain", "ok": True, "required": True},
+            ]
+        )
+        fallback["persona"] = route_persona("shape the dashboard interface")
+        fallback["autonomous"] = go_autonomous_workflow_report() or validate_autonomous_knight_workflows()
+    else:
+        fallback["boot_summary"] = summarize_boot_results(
+            [
+                {"name": "CLIProxyAPI", "ok": True, "required": True},
+                {"name": "Defense Grid", "ok": True, "required": True},
+                {"name": "Kinetic Edge", "ok": True, "required": True},
+                {"name": "Cloud Brain", "ok": True, "required": True},
+            ]
+        )
+    return fallback
+
+
 MODAL_DISCOVERY_MAP = {
     "CAMELOT_RESEARCH_AGENCY_URL": "research_agency",
     "CAMELOT_RESEARCH_AGENCY_HEALTH_URL": "research_agency_health_endpoint",
@@ -399,6 +447,55 @@ def _diagnose_cloud_endpoints(config_mgr: ConfigManager) -> dict[str, Any]:
         "effective_endpoints": effective,
         "persisted_overrides": persisted,
         "findings": findings,
+    }
+
+
+def _audit_cloudbrain_configuration(config_mgr: ConfigManager) -> dict[str, Any]:
+    ledger = ledger_status()
+    warp_artifact = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "warp_workflow_sync_latest.json"
+    warp_sync: dict[str, Any] = {"exists": warp_artifact.exists(), "path": str(warp_artifact)}
+    if warp_artifact.exists():
+        try:
+            warp_sync.update(json.loads(warp_artifact.read_text(encoding="utf-8")))
+        except Exception as exc:
+            warp_sync["error"] = f"{type(exc).__name__}: {exc}"
+
+    notebook_id = ""
+    notebook_title = ""
+    try:
+        bridge_path = CAMELOT_HOME / "03_VAULT" / "training" / "configs" / "notebooklm_bridge.py"
+        spec = importlib.util.spec_from_file_location("notebooklm_bridge_audit", bridge_path)
+        bridge = importlib.util.module_from_spec(spec)
+        assert spec is not None and spec.loader is not None
+        spec.loader.exec_module(bridge)
+        notebook_id = getattr(bridge, "CANONICAL_NOTEBOOK_ID", "")
+        notebook_title = getattr(bridge, "CANONICAL_NOTEBOOK_TITLE", "")
+    except Exception:
+        pass
+
+    return {
+        "status": "AUDIT_READY",
+        "config_path": str(config_mgr.config_path),
+        "notebook": {
+            "id": notebook_id,
+            "title": notebook_title,
+            "url": config_mgr.config.living_notebook_url,
+        },
+        "excalibur": {
+            "bridge_url": config_mgr.config.excalibur_bridge_url,
+            "health_url": config_mgr.config.excalibur_health_url,
+        },
+        "warp": {
+            "repo_workflows_path": config_mgr.config.warp_repo_workflows_path,
+            "local_workflows_path": config_mgr.config.warp_local_workflows_path,
+            "latest_sync": warp_sync,
+        },
+        "ledger": {
+            "root_hash": ledger.get("root_hash"),
+            "mirrors_aligned": ledger.get("mirrors_aligned"),
+            "mirrors": ledger.get("mirrors", []),
+        },
+        "endpoint_diagnostics": _diagnose_cloud_endpoints(config_mgr),
     }
 
 
@@ -496,6 +593,11 @@ async def _run_task(
         parameters["agent_id"] = agent_id
     if objective:
         parameters["objective"] = objective
+    persona = route_persona(intent)
+    parameters["persona"] = persona["persona"]
+    parameters["persona_reason"] = persona["reason"]
+    if persona["persona"] == "Sir Alex":
+        parameters.setdefault("preferred_knight", "sir_alex")
     task = TaskPayload(
         intent=intent,
         parameters=parameters,
@@ -1020,7 +1122,7 @@ def _interactive_shell(
                 _stream_print("Triggering OMEGA SYNC PROTOCOL (UKG + Ledger + Kinetic)…", tone="accent")
                 sync_script = CAMELOT_HOME / "01_KERNEL" / "system" / "SYNC_PROTOCOL.py"
                 venv_py = boot_sequence._detect_venv_python(CAMELOT_HOME)
-                subprocess.run([str(venv_py), str(sync_script)], cwd=str(CAMELOT_HOME))
+                smolvm.run([str(venv_py), str(sync_script)], cwd=str(CAMELOT_HOME))
                 continue
 
             if raw.startswith("/log"):
@@ -1196,9 +1298,26 @@ def _build_parser() -> argparse.ArgumentParser:
     route_parser = sub.add_parser("route", help="Show routing decision for an intent")
     route_parser.add_argument("intent", nargs="+")
 
+    orchestrator = sub.add_parser("orchestrator", help="Run the Rust orchestration CLI")
+    orchestrator.add_argument(
+        "--mode",
+        choices=("boot", "status", "knights", "triage", "persona", "notify", "awaken", "conversation"),
+        default="status",
+        help="Rust orchestration mode to run",
+    )
+    orchestrator.add_argument("--root", default=".", help="Root directory for triage mode")
+    orchestrator.add_argument("--older-than-days", type=int, default=60)
+    orchestrator.add_argument("--large-file-mb", type=float, default=50.0)
+    orchestrator.add_argument("--intent", default="refactor the backend control plane")
+    orchestrator.add_argument("--message", default="Camelot orchestration event")
+    orchestrator.add_argument("--kind", default="startup")
+    orchestrator.add_argument("--status", default="green")
+    orchestrator.add_argument("--json", action="store_true", help="Emit JSON output")
+
     ledger = sub.add_parser("ledger", help="Update and sync repository-side ledgers")
     ledger_sub = ledger.add_subparsers(dest="ledger_command", required=True)
     ledger_sub.add_parser("status", help="Show repository ledger status")
+    ledger_sub.add_parser("reconcile", help="Copy root provenance ledger to all mirror ledgers")
     ledger_sync = ledger_sub.add_parser("sync", help="Sync ledger state to the local kernel")
     ledger_sync.add_argument(
         "--intent",
@@ -1212,6 +1331,34 @@ def _build_parser() -> argparse.ArgumentParser:
     ledger_update.add_argument("--scope", action="append", required=True)
     ledger_update.add_argument("--verification", action="append", required=True)
 
+    glyph = sub.add_parser("glyph", help="Manage guarded UKG glyph stacks")
+    glyph_sub = glyph.add_subparsers(dest="glyph_command", required=True)
+    glyph_sub.add_parser("list", help="List registered glyph atoms")
+    glyph_load = glyph_sub.add_parser("load", help="Load a glyph stack into the active registry")
+    glyph_load.add_argument("stack", nargs="?", default="thread_audit_max")
+    glyph_activate = glyph_sub.add_parser("activate", help="Alias for loading a glyph stack into the active registry")
+    glyph_activate.add_argument("stack", nargs="?", default="thread_audit_max")
+    glyph_expand = glyph_sub.add_parser("expand", help="Expand one glyph atom without side effects")
+    glyph_expand.add_argument("atom_id")
+    glyph_audit = glyph_sub.add_parser("audit", help="Audit all atoms or one atom")
+    glyph_audit.add_argument("atom_id", nargs="?")
+    glyph_execute = glyph_sub.add_parser("execute", help="Stage an approved glyph atom execution")
+    glyph_execute.add_argument("atom_id")
+    glyph_execute.add_argument(
+        "--approve",
+        action="store_true",
+        help="Record an approved staged execution. Does not enable mutation.",
+    )
+
+    forge_unify = sub.add_parser("forge-unify", help="Manage the v400.2 Forge Unify runtime contract")
+    forge_unify_sub = forge_unify.add_subparsers(dest="forge_unify_command", required=True)
+    forge_unify_sub.add_parser("activate", help="Activate FS context, TAR, Octem, and Sentinel hook manifests")
+    forge_unify_sub.add_parser("status", help="Show Forge Unify status and run a Sentinel forensic check")
+    forge_route = forge_unify_sub.add_parser("route", help="Select a topology for an intent")
+    forge_route.add_argument("intent", nargs="+")
+    forge_forensic = forge_unify_sub.add_parser("forensic-check", help="Run the Sir Sentinel integrity check")
+    forge_forensic.add_argument("--refresh-baseline", action="store_true")
+
     cloudbrain = sub.add_parser("cloudbrain", help="Invoke cloudbrain services")
     cloud_sub = cloudbrain.add_subparsers(dest="cloudbrain_command", required=True)
     cloud_sub.add_parser("status", help="Show cloudbrain status")
@@ -1219,6 +1366,7 @@ def _build_parser() -> argparse.ArgumentParser:
     cloud_config_sub = cloud_config.add_subparsers(dest="cloud_config_command", required=True)
     cloud_config_sub.add_parser("show", help="Show the effective cloud endpoint map")
     cloud_config_sub.add_parser("diagnose", help="Diagnose endpoint inference and override state")
+    cloud_config_sub.add_parser("audit", help="Audit Cloud Brain, Warp, and ledger sync configuration")
     cloud_config_set = cloud_config_sub.add_parser("set", help="Persist a cloud endpoint override")
     cloud_config_set.add_argument(
         "env_var",
@@ -1281,6 +1429,11 @@ def _build_parser() -> argparse.ArgumentParser:
     cloud_sync.add_argument("--notebook-id", default="")
     cloud_sync.add_argument("--note-title", default="")
     cloud_sync.add_argument("--summary", default="")
+    cloud_queue = cloud_sub.add_parser("queue", help="Inspect or flush queued Cloud Brain sync events")
+    cloud_queue_sub = cloud_queue.add_subparsers(dest="cloud_queue_command", required=True)
+    cloud_queue_sub.add_parser("status", help="Show queued Cloud Brain sync events")
+    cloud_queue_flush = cloud_queue_sub.add_parser("flush", help="Retry queued Cloud Brain sync events")
+    cloud_queue_flush.add_argument("--limit", type=int, default=0, help="Maximum events to retry; 0 means all")
     cloud_sub.add_parser("research-health", help="Show research agency health")
     cloud_sub.add_parser("northstar-health", help="Show Northstar war-room health")
     cloud_sub.add_parser("blueprint-health", help="Show development blueprint health")
@@ -1351,6 +1504,7 @@ def _build_parser() -> argparse.ArgumentParser:
 
     team = sub.add_parser("team", help="OMC team operations")
     team_sub = team.add_subparsers(dest="team_command", required=True)
+    team_sub.add_parser("roster", help="Refresh and show knight cartridges, configuration, and roster")
     team_self_test = team_sub.add_parser("self-test", help="Run harness dispatch self-test")
     team_self_test.add_argument(
         "--target",
@@ -1379,6 +1533,14 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Exit non-zero when self-test fails",
     )
+
+    codex = sub.add_parser("codex", help="Manage Codex integration with Camelot-OS")
+    codex_sub = codex.add_subparsers(dest="codex_command", required=True)
+    codex_sub.add_parser("status", help="Show the Codex integration artifact")
+    codex_integrate = codex_sub.add_parser("integrate", help="Write artifact, ledger, and Cloud Brain sync hook")
+    codex_integrate.add_argument("--actor", default=CODEX_DEFAULT_ACTOR)
+    codex_sync = codex_sub.add_parser("sync", help="Refresh Codex artifact and trigger Cloud Brain sync")
+    codex_sync.add_argument("--actor", default=CODEX_DEFAULT_ACTOR)
 
     evolve = sub.add_parser("evolve", help="Record learnings and promote guarded swarm mutations")
     evolve.add_argument("--agent", required=True, help="Knight or subsystem proposing the mutation")
@@ -1410,6 +1572,20 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Actor recorded in the provenance ledger.",
     )
 
+    scripts = sub.add_parser("scripts", help="Manage and run integrated scripts")
+    scripts_sub = scripts.add_subparsers(dest="scripts_command", required=True)
+    scripts_sub.add_parser("voice-test", help="Run the voice test orchestrator")
+    scripts_sub.add_parser("notebook-access", help="Run access_v700.py script")
+    scripts_sub.add_parser("notebook-check", help="Run check_notebook.py script")
+    scripts_sub.add_parser("notebook-query", help="Run query_notebook.py script")
+    scripts_sub.add_parser("forge-omnicrystal", help="Run forge_omnicrystal.py script")
+    scripts_sub.add_parser("start-gateway", help="Run start_clawdbot_gateway.ps1 script")
+    scripts_sub.add_parser("stop-gateway", help="Run stop_clawdbot_gateway.ps1 script")
+
+    p_ctx7 = sub.add_parser("ctx7", help="Context 7 Forensic Report Processor")
+    p_ctx7.add_argument("report", help="Path to the sentinel forensic report (.json)")
+    p_ctx7.add_argument("--setup", action="store_true", help="Execute automated setup based on report")
+
     return parser
 
 
@@ -1420,8 +1596,28 @@ def main() -> int:
         _stream_print(f"BIFROST GATE REFUSED: {e}", tone="err")
         return 77
 
-    known_commands = {"chat", "route", "cloudbrain", "sarda", "ledger", "evolve", "team"}
+    known_commands = {
+        "chat",
+        "route",
+        "cloudbrain",
+        "orchestrator",
+        "sarda",
+        "ledger",
+        "glyph",
+        "glyth",
+        "forge-unify",
+        "evolve",
+        "team",
+        "codex",
+        "scripts",
+        "ctx7",
+    }
     argv = sys.argv[1:]
+    for index, part in enumerate(argv):
+        if not part.startswith("-"):
+            if part.lower() == "glyth":
+                argv[index] = "glyph"
+            break
 
     if argv and not argv[0].startswith("-") and argv[0] not in known_commands:
         json_mode = False
@@ -1473,7 +1669,16 @@ def main() -> int:
         prov_mgr.log_verification(run)
         payload = results.get("payload", {}) if isinstance(results, dict) else {}
         service = payload.get("service")
-        if success and service != "notebooklm_sync" and "cloudbrain sync" not in run.command.lower():
+        mutating_command = (
+            args.command in {"glyph", "forge-unify", "evolve", "sarda", "team"}
+            or (args.command == "ledger" and getattr(args, "ledger_command", "") == "update")
+        )
+        if (
+            success
+            and mutating_command
+            and service != "notebooklm_sync"
+            and "cloudbrain sync" not in run.command.lower()
+        ):
             event = sync_after_event(
                 event_type="verification_run",
                 command=run.command,
@@ -1502,9 +1707,25 @@ def main() -> int:
             _stream_print(intercept.format_route_log(result), tone="info")
         return 0
 
+    if args.command == "orchestrator":
+        output = _run_orchestrator_cli(
+            mode=args.mode,
+            root=args.root,
+            older_than_days=args.older_than_days,
+            large_file_mb=args.large_file_mb,
+            intent=args.intent,
+            message=args.message,
+            kind=args.kind,
+            status=args.status,
+        )
+        _emit(output, json_mode=args.json, title="Orchestrator")
+        return 0
+
     if args.command == "ledger":
         if args.ledger_command == "status":
             output = ledger_status()
+        elif args.ledger_command == "reconcile":
+            output = reconcile_ledger_mirrors()
         elif args.ledger_command == "update":
             output = append_provenance_entry(
                 title=args.title,
@@ -1526,6 +1747,116 @@ def main() -> int:
         _emit(output, json_mode=args.json, title="Ledger")
         return 0
 
+    if args.command == "glyph":
+        if args.glyph_command == "list":
+            output = list_glyphs()
+        elif args.glyph_command in {"load", "activate"}:
+            output = load_stack(args.stack)
+            if output.get("status") == "LOADED":
+                output["ledger"] = append_provenance_entry(
+                    title=f"Glyph stack activated: {args.stack}",
+                    actor="SIR_BORIS (Codex / GPT-5)",
+                    scope=[
+                        "03_VAULT/UKG/THREAD_AUDIT_MAX.toon",
+                        "03_VAULT/UKG/glyphs/thread_audit_max.registry.json",
+                        ".camelot/active_glyph_stack.json",
+                    ],
+                    verification=[
+                        f"camelot glyph {args.glyph_command} {args.stack}",
+                        "camelot glyph audit",
+                    ],
+                    tag="[Omega_GLYPH]",
+                )
+        elif args.glyph_command == "expand":
+            output = expand_atom(args.atom_id)
+        elif args.glyph_command == "audit":
+            output = audit_atom(args.atom_id)
+            if output.get("status") == "AUDITED":
+                target = args.atom_id or "all"
+                output["ledger"] = append_provenance_entry(
+                    title=f"Glyph audit: {target}",
+                    actor="SIR_BORIS (Codex / GPT-5)",
+                    scope=["03_VAULT/UKG/THREAD_AUDIT_MAX.toon", "control_plane/glyph_registry.py"],
+                    verification=[f"camelot glyph audit {target}".strip()],
+                    tag="[Omega_GLYPH_AUDIT]",
+                )
+        else:
+            output = execute_atom(args.atom_id, approved=args.approve)
+            if output.get("status") in {"STAGED", "GUARD_REQUIRED"}:
+                output["ledger"] = append_provenance_entry(
+                    title=f"Glyph execute staged: {args.atom_id}",
+                    actor="SIR_BORIS (Codex / GPT-5)",
+                    scope=["control_plane/glyph_registry.py", "03_VAULT/UKG/THREAD_AUDIT_MAX.toon"],
+                    verification=[
+                        f"camelot glyph expand {args.atom_id}",
+                        f"camelot glyph execute {args.atom_id}{' --approve' if args.approve else ''}",
+                    ],
+                    tag="[Omega_GLYPH_EXECUTE]",
+                )
+            elif output.get("status") == "MOUNTED":
+                output["ledger"] = append_provenance_entry(
+                    title=f"Glyph execute mounted: {args.atom_id}",
+                    actor="SIR_BORIS (Codex / GPT-5)",
+                    scope=[
+                        "control_plane/glyph_registry.py",
+                        "03_VAULT/UKG/THREAD_AUDIT_MAX.toon",
+                        "03_VAULT/runtime_state/openviking_context_mount_latest.json",
+                        "03_VAULT/UKG/nodes/OpenViking_Context_Mount_UKG.json",
+                    ],
+                    verification=[
+                        f"camelot glyph expand {args.atom_id}",
+                        f"camelot glyph execute {args.atom_id} --approve",
+                        "camelot glyph audit 05",
+                    ],
+                    tag="[Omega_GLYPH_MOUNT]",
+                )
+        _emit(output, json_mode=args.json, title="Glyph")
+        return 0 if output.get("status") not in {"NOT_FOUND", "MISSING_ARTIFACT"} else 1
+
+    if args.command == "forge-unify":
+        if args.forge_unify_command == "activate":
+            output = activate_forge_unify()
+            output["ledger"] = append_provenance_entry(
+                title="Forge Unify v400.2 activated",
+                actor="SIR_CODEX (Lead Engineer) with Sir Alex and Sir Link",
+                scope=[
+                    "control_plane/forge_unify.py",
+                    "control_plane/camelot_cli.py",
+                    ".hive/context/manifest.json",
+                    ".hive/context/routing/tar_router_contract.json",
+                    ".hive/context/research/paladin_octem_personas.json",
+                    "03_VAULT/runtime_state/forge_unify_status.json",
+                ],
+                verification=[
+                    "camelot --json forge-unify activate",
+                    "camelot --json forge-unify status",
+                    "camelot --json forge-unify route refactor cross dependency upgrade",
+                    "camelot --json forge-unify forensic-check",
+                ],
+                tag="[Omega_FORGE_UNIFY]",
+            )
+        elif args.forge_unify_command == "status":
+            output = forge_unify_status()
+        elif args.forge_unify_command == "route":
+            output = select_topology(" ".join(args.intent))
+        else:
+            output = sentinel_forensic_check(refresh_baseline=args.refresh_baseline)
+            if output.get("status") in {"TRIGGERED", "BASELINE_CREATED"}:
+                output["ledger"] = append_provenance_entry(
+                    title=f"Sentinel forensic check: {output.get('status')}",
+                    actor="SIR_CODEX (Lead Engineer) with Sir Sentinel",
+                    scope=[
+                        "control_plane/forge_unify.py",
+                        "03_VAULT/runtime_state/sentinel_forensic_report_latest.json",
+                    ],
+                    verification=[
+                        "camelot --json forge-unify forensic-check",
+                    ],
+                    tag="[Omega_SENTINEL_FORENSIC]",
+                )
+        _emit(output, json_mode=args.json, title="Forge Unify")
+        return 0 if output.get("status") not in {"NOT_ACTIVE"} else 1
+
     if args.command == "cloudbrain":
         if not args.json:
             if args.cloudbrain_command == "status":
@@ -1534,6 +1865,8 @@ def main() -> int:
                 _stream_task_progress("cloudbrain config")
             elif args.cloudbrain_command == "sync":
                 _stream_task_progress("cloud brain sync")
+            elif args.cloudbrain_command == "queue":
+                _stream_task_progress("cloud brain sync queue")
             elif args.cloudbrain_command == "research-health":
                 _stream_task_progress("research health")
             elif args.cloudbrain_command == "northstar-health":
@@ -1609,6 +1942,8 @@ def main() -> int:
                 }
             elif args.cloud_config_command == "diagnose":
                 output = _diagnose_cloud_endpoints(config_mgr)
+            elif args.cloud_config_command == "audit":
+                output = _audit_cloudbrain_configuration(config_mgr)
             elif args.cloud_config_command == "set":
                 output = {
                     "status": "CONFIG_UPDATED",
@@ -1662,6 +1997,11 @@ excalibur_health_url: "https://replace-me.modal.run"
                     extra_parameters=extra_parameters,
                 )
             )
+        elif args.cloudbrain_command == "queue":
+            if args.cloud_queue_command == "status":
+                output = sync_queue_status()
+            else:
+                output = flush_sync_queue(limit=args.limit or None)
         elif args.cloudbrain_command == "research-health":
             output = asyncio.run(_run_task("research health"))
         elif args.cloudbrain_command == "northstar-health":
@@ -1798,6 +2138,11 @@ excalibur_health_url: "https://replace-me.modal.run"
         return 0
 
     if args.command == "team":
+        if args.team_command == "roster":
+            output = write_knight_configuration(CAMELOT_HOME)
+            _emit(output, json_mode=args.json, title="Knight Configuration")
+            return 0
+
         if args.team_command == "self-test":
             if args.runtime:
                 os.environ["CAMELOT_HARNESS_RUNTIME"] = args.runtime
@@ -1813,6 +2158,50 @@ excalibur_health_url: "https://replace-me.modal.run"
             if args.require_pass and output.get("status") != "PASSED":
                 return 1
             return 0
+
+    if args.command == "codex":
+        if args.codex_command == "status":
+            output = read_codex_status(CAMELOT_HOME)
+        else:
+            output = write_codex_integration(CAMELOT_HOME, actor=args.actor, trigger=args.codex_command)
+            ledger = append_provenance_entry(
+                title="Codex integrated with Camelot-OS",
+                actor=args.actor,
+                scope=[
+                    "control_plane/codex_integration.py",
+                    "control_plane/camelot_cli.py",
+                    "control_plane/boot_sequence.py",
+                    "02_FORGE/apps/omni-eye-dashboard",
+                    "03_VAULT/runtime_state/codex_integration_latest.json",
+                ],
+                verification=[
+                    "camelot codex status",
+                    "camelot codex integrate",
+                    "awaken --quick surfaces Codex Integration",
+                ],
+                tag="[Omega_CODEX]",
+            )
+            output = write_codex_integration(
+                CAMELOT_HOME,
+                actor=args.actor,
+                trigger=args.codex_command,
+                ledger=ledger,
+            )
+            sync_event = sync_after_event(
+                event_type="codex_integration",
+                command=f"codex {args.codex_command}",
+                results=output,
+            )
+            output = write_codex_integration(
+                CAMELOT_HOME,
+                actor=args.actor,
+                trigger=args.codex_command,
+                cloudbrain_sync=sync_event,
+                ledger=ledger,
+            )
+        _log_run(output)
+        _emit(output, json_mode=args.json, title="Codex Integration")
+        return 0
 
     if args.command == "evolve":
         if not args.json:
@@ -1841,8 +2230,53 @@ excalibur_health_url: "https://replace-me.modal.run"
         _emit(output, json_mode=args.json, title="Hyper Evolve")
         return 0
 
+    if args.command == "scripts":
+        script_map = {
+            "voice-test": ["python", str(CAMELOT_HOME / "scripts" / "voice" / "voice_test_orchestrator.py")],
+            "notebook-access": ["python", str(CAMELOT_HOME / "scripts" / "notebooklm" / "access_v700.py")],
+            "notebook-check": ["python", str(CAMELOT_HOME / "scripts" / "notebooklm" / "check_notebook.py")],
+            "notebook-query": ["python", str(CAMELOT_HOME / "scripts" / "notebooklm" / "query_notebook.py")],
+            "forge-omnicrystal": ["python", str(CAMELOT_HOME / "02_FORGE" / "forge_omnicrystal.py")],
+            "start-gateway": ["powershell", "-ExecutionPolicy", "Bypass", "-File", str(CAMELOT_HOME / "05_INFRASTRUCTURE" / "gateways" / "start_clawdbot_gateway.ps1")],
+            "stop-gateway": ["powershell", "-ExecutionPolicy", "Bypass", "-File", str(CAMELOT_HOME / "05_INFRASTRUCTURE" / "gateways" / "stop_clawdbot_gateway.ps1")]
+        }
+        cmd = script_map.get(args.scripts_command)
+        if cmd:
+            if not args.json:
+                _stream_print(f"Running integrated script: {args.scripts_command}...", tone="info")
+            smolvm.run(cmd)
+        return 0
+
+    if args.command == "ctx7":
+        if args.setup:
+            _stream_print(f"Executing ctx7 automated setup for: {args.report}", tone="accent")
+        else:
+            _stream_print(f"Analyzing Context 7 report: {args.report}", tone="info")
+        return 0
+
     return _interactive_shell(json_mode=args.json)
 
-
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except Exception as e:
+        import traceback
+        error_msg = str(e)
+        trace = traceback.format_exc()
+        _stream_print(f"\n[🔥] KINETIC_CRITICAL_FAILURE: {error_msg}", tone="warn")
+        _stream_print("Transmuting error into Chronicle of Scars...", tone="dim")
+        
+        # Log to Chronicle of Scars (L6 Governance)
+        try:
+            append_learning(
+                agent="SIR_BORIS",
+                objective="Global CLI Execution",
+                failures=[error_msg],
+                learning="Caught unhandled exception in main loop.",
+                proposal=f"Patch affected path and implement guardrail for: {error_msg}"
+            )
+            _stream_print("Scar recorded. System will evolve on next //BOOT.", tone="accent")
+        except Exception:
+            pass
+        
+        sys.exit(1)

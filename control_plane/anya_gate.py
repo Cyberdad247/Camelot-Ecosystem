@@ -384,3 +384,60 @@ class AnyaGate:
         if re.search(r"\b(i don't know|i cannot|i'm not sure)\b", response, re.I):
             issues.append("response contains uncertainty markers — consider Merlin escalation")
         return len(issues) == 0, issues
+
+
+class AnyaCompiler:
+    """Ethereal Compiler (Layer 7) implementing Triple-QFT Protocol."""
+
+    def __init__(self):
+        self.anchor_tokens = {
+            "build", "refactor", "create", "deploy", "audit", "fix",
+            "scaffold", "status", "sync", "research", "blueprint", "precise",
+            "ctx7"
+        }
+
+    def renormalize(self, intent: str) -> str:
+        """Strip conversational noise and irrelevant operators (Phase: Physics)."""
+        fillers = {
+            "please", "can you", "i need to", "help me", "i want to",
+            "would like to", "could you", "make sure to"
+        }
+        clean = intent.lower()
+        for filler in fillers:
+            clean = clean.replace(filler, "")
+
+        # Remove extra punctuation and whitespace
+        clean = re.sub(r'[^\w\s]', '', clean)
+        return " ".join(clean.split())
+
+    def quantize(self, intent: str) -> list[str]:
+        """Identify Anchor Tokens for context compression (Phase: Engineering)."""
+        words = set(intent.lower().split())
+        found = words.intersection(self.anchor_tokens)
+        return sorted(list(found))
+
+    def pedagogy(self, intent: str) -> bool:
+        """Check if the intent is ambiguous and needs clarification (Phase: Pedagogy)."""
+        clean = self.renormalize(intent)
+        words = clean.split()
+        # Heuristic: < 2 words is usually ambiguous for a system command
+        if len(words) < 2 and not any(w in self.anchor_tokens for w in words):
+            return True
+        return False
+
+    def compile(self, raw_intent: str) -> tuple[str, float]:
+        """Compile raw intent and return Titan Prompt + Confidence Scalar."""
+        clean = self.renormalize(raw_intent)
+        anchors = self.quantize(clean)
+
+        # Calculate confidence scalar based on anchor presence
+        score = 1.0 if anchors else 0.5
+        if len(clean.split()) < 3 and not anchors:
+            score = 0.3
+
+        if not anchors:
+            return clean, score
+
+        # Format as a high-density Titan Prompt glyph
+        prompt = f"⌖ Titan_Prompt | Intent: {clean} | ⌘ Anchors: {', '.join(anchors)}"
+        return prompt, score
