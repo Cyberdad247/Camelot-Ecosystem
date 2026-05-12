@@ -17,32 +17,23 @@ from typing import Any
 from colorama import Fore, Style, just_fix_windows_console
 
 from .cli_intercept import CLIIntercept
-from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
-from .config_manager import ConfigManager, OperatorProfile
-from .forge_unify import activate_forge_unify, forge_unify_status, select_topology, sentinel_forensic_check
-from .hyper_evolve import append_learning, promote_mutation
-from .provenance import ProvenanceManager, VerificationRun
-from .ledger_sync import append_provenance_entry, ledger_status, reconcile_ledger_mirrors, sync_to_kernel
-from .knight_configuration import write_knight_configuration
-from .glyph_registry import audit_atom, execute_atom, expand_atom, list_glyphs, load_stack
-from .main import ControlPlane, TaskPayload
-from . import boot_sequence
-from .orchestration_state import (
-    build_orchestration_snapshot,
-    build_notification_bundle,
-    go_autonomous_workflow_report,
-    route_persona,
-    run_orchestrator_cli,
-    summarize_boot_results,
-    triage_files,
-    validate_autonomous_knight_workflows,
-)
-from .codex_integration import DEFAULT_ACTOR as CODEX_DEFAULT_ACTOR
-from .codex_integration import read_codex_status, write_codex_integration
-from bin import bifrost
-from .smolvm_harness import smolvm
 
-CAMELOT_HOME = boot_sequence._detect_home()
+def _detect_home() -> Path:
+    env = os.environ.get("CAMELOT_OS_HOME")
+    if env and Path(env).is_dir():
+        return Path(env)
+    candidates = [
+        Path.home() / "CAMELOT_OS",
+        Path("C:/Users/vizio/CAMELOT_OS"),
+        Path(__file__).resolve().parent.parent,
+    ]
+    for candidate in candidates:
+        if (candidate / "03_VAULT" / "training" / "configs" / "hud.py").exists():
+            return candidate
+    return Path(__file__).resolve().parent.parent
+
+
+CAMELOT_HOME = _detect_home()
 
 
 just_fix_windows_console()
@@ -117,8 +108,6 @@ HELP_LINES = [
 # ---------------------------------------------------------------------------
 # Anya's Ethereal Compiler (Phase 1 Upgrade)
 # ---------------------------------------------------------------------------
-
-from .anya_gate import AnyaCompiler
 
 
 def _color(text: str, tone: str) -> str:
@@ -325,6 +314,17 @@ def _run_orchestrator_cli(
     kind: str = "startup",
     status: str = "green",
 ) -> dict[str, Any]:
+    from .orchestration_state import (
+        build_notification_bundle,
+        build_orchestration_snapshot,
+        go_autonomous_workflow_report,
+        route_persona,
+        run_orchestrator_cli,
+        summarize_boot_results,
+        triage_files,
+        validate_autonomous_knight_workflows,
+    )
+
     payload = run_orchestrator_cli(
         mode,
         root=root,
@@ -412,7 +412,9 @@ MODAL_DISCOVERY_MAP = {
 }
 
 
-def _diagnose_cloud_endpoints(config_mgr: ConfigManager) -> dict[str, Any]:
+def _diagnose_cloud_endpoints(config_mgr: Any) -> dict[str, Any]:
+    from .config_manager import ConfigManager
+
     effective = config_mgr.cloud_endpoint_map()
     persisted = {
         "CAMELOT_CLOUDBRAIN_URL": config_mgr._normalize_env_value(config_mgr.config.cloudbrain_url),
@@ -450,7 +452,10 @@ def _diagnose_cloud_endpoints(config_mgr: ConfigManager) -> dict[str, Any]:
     }
 
 
-def _audit_cloudbrain_configuration(config_mgr: ConfigManager) -> dict[str, Any]:
+def _audit_cloudbrain_configuration(config_mgr: Any) -> dict[str, Any]:
+    from .config_manager import ConfigManager
+    from .ledger_sync import ledger_status
+
     ledger = ledger_status()
     warp_artifact = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "warp_workflow_sync_latest.json"
     warp_sync: dict[str, Any] = {"exists": warp_artifact.exists(), "path": str(warp_artifact)}
@@ -501,7 +506,7 @@ def _audit_cloudbrain_configuration(config_mgr: ConfigManager) -> dict[str, Any]
 
 def _discover_modal_endpoints(
     *,
-    config_mgr: ConfigManager,
+    config_mgr: Any,
     app_name: str,
     environment_name: str,
     write: bool,
@@ -564,6 +569,10 @@ async def _run_task(
     objective: str | None = None,
     extra_parameters: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    from .anya_gate import AnyaCompiler
+    from .main import ControlPlane, TaskPayload
+    from .orchestration_state import route_persona
+
     # Phase 1: Anya's Ethereal Compilation (Triple-QFT)
     compiler = AnyaCompiler()
     raw_intent = intent
@@ -632,6 +641,8 @@ async def _run_sarda(
     privacy: float = 0.0,
     timeout: int = 120,
 ) -> dict[str, Any]:
+    from .main import ControlPlane
+
     if execute:
         # Phase 4: Iron Gate (High-risk check)
         if not _check_iron_gate(intent):
@@ -651,6 +662,8 @@ def _run_team_self_test(
     prompt: str,
     timeout: int,
 ) -> dict[str, Any]:
+    from .main import ControlPlane
+
     cp = ControlPlane()
     return cp.team_self_test(
         worker_id=worker_id,
