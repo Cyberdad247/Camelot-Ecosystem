@@ -61,6 +61,14 @@ Thumbs.db
 .venv_camelot/
 logs/
 
+# Camelot generated runtime state
+.hive/context/
+03_VAULT/runtime_state/sentinel_forensic_report_latest.json
+03_VAULT/runtime_state/sentinel_integrity_baseline.json
+bin/interceptor.py
+control_plane/orchestrator.py
+control_plane/st_brain.py
+
 # 5b. High-risk local state and secret archives
 00_SECURE_ARCHIVE/
 99_ARCHIVE/
