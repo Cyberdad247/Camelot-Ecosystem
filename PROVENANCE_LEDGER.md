@@ -1,9 +1,39 @@
+| 1600 | **[AUTO] Edit: `C:\Users\vizio\CAMELOT_OS\scripts\claude_ledger_hook.py`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 14:51 UTC |
+| 1599 | **[AUTO] Unknown: `—`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 14:48 UTC |
+| 1598 | **[AUTO] Write: `C:\Users\vizio\CAMELOT_OS\.claude\settings.json`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 14:48 UTC |
 C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md:1:# 📖 ANTI-GRAVITY PROVENANCE LEDGER
 C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md:2:>
 C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md:3:> "History is not written; it is verified."
 C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md:4:
 C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md:5:| ID  | Task Name | Author | Status | Hash / Notes |
 C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md:6:| :-- | :--- | :--- | :--- | :--- |
+| 1615 | **[AUTO] Write: `C:\Users\vizio\.claude\agents\security-auditor.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:33 UTC |
+| 1614 | **[AUTO] Write: `C:\Users\vizio\.claude\agents\task-distributor.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:33 UTC |
+| 1613 | **[AUTO] Write: `C:\Users\vizio\.claude\agents\research-analyst.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:33 UTC |
+| 1612 | **[AUTO] Write: `C:\Users\vizio\.claude\agents\debugger.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:33 UTC |
+| 1611 | **[AUTO] Write: `C:\Users\vizio\.claude\agents\multi-agent-coordinator.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:32 UTC |
+| 1610 | **[AUTO] Write: `C:\Users\vizio\.claude\agents\codebase-orchestrator.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:32 UTC |
+| 1609 | **[AUTO] Write: `C:\Users\vizio\.claude\agents\workflow-orchestrator.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:32 UTC |
+| 1608 | **[AUTO] Edit: `C:\Users\vizio\.claude\settings.local.json`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:32 UTC |
+| 1607 | **[AUTO] Write: `C:\Users\vizio\CAMELOT_OS\scripts\sir_link_switch.py`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:32 UTC |
+| 1606 | **[AUTO] Write: `C:\Users\vizio\CAMELOT_OS\data\cliproxy_model_registry.json`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:32 UTC |
+| 1605 | **[AUTO] Write: `C:\Users\vizio\CAMELOT_OS\scripts\cliproxy_key.py`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:29 UTC |
+| 1604 | **[AUTO] Write: `C:\Users\vizio\CAMELOT_OS\scripts\cliproxy_key.bat`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 16:29 UTC |
+| 1603 | **[AUTO] Edit: `C:\Users\vizio\.claude\projects\C--Users-vizio\memory\MEMORY.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 14:54 UTC |
+| 1602 | **[AUTO] Write: `C:\Users\vizio\.claude\projects\C--Users-vizio\memory\project_camelot_integration.md`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 14:54 UTC |
+| 1601 | **[AUTO] Edit: `C:\Users\vizio\CAMELOT_OS\scripts\claude_ledger_hook.py`** | SIR_BORIS | ✅ AUTO | Claude Code hook — 2026-05-11 14:51 UTC |
+| 988 | **luxora-prestige — BTC tagline + paired CTA buttons shipped to prod** | SIR_BORIS | ✅ DEPLOYED | New production: `dpl_HFERvXmu9fPiGr74wiA2kWhXJuVx` URL `luxora-prestige-578z37apv-invisionedmarketing.vercel.app` (60s build). Three layout deltas: (1) **app/page.tsx** — added new H1 tagline above old headline: "Accept *Bitcoin* Payments for your business" / "*today*" — both lines clamp(0.92rem,4vw,2.5rem), gold italic on `Bitcoin` + `today`, first line `whitespace-nowrap` (forced single line, scales 15→40px); old "Close High-Value Buyers Using Crypto" H1 demoted to small uppercase eyebrow ("Close high-value buyers using crypto", text-[11px] tracking-[0.32em], gold accent on "using crypto"); reveal cadence retuned (logo 0.12s → tagline 0.42s → eyebrow 0.7s → sub 0.86s → CTA 1.0s). (2) **components/MagicButton.tsx** — replaced 7rem shield-disc desktop variant + tiny mobile pill with unified larger gold pill (px-10 py-5 mobile, sm:px-14 sm:py-6 desktop, text-sm→base, tracking-[0.26em→0.3em]); preserved 1.4s decryption shimmer (white sweep) + Typeform pre-warm; AnimatePresence retained, pulse rings + Luxora shield SVG removed. (3) **app/page.tsx CTA pair** — "Speak With Our Team" mailto pill matched to MagicButton dimensions exactly (same px/py/text/tracking), ghost outline variant (border-white/30 → gold on hover). Verified post-deploy: luxorapayments.com / www / .vercel.app all HTTP 200, Age=0 (fresh cache fill). Local `next.config.mjs` apex-redirect mod still uncommitted. Build clean (Next 14.2.35, 11/11 static). |
+| 987 | **luxora-prestige — Vercel rollback to previous production deployment** | SIR_BORIS | ✅ ACTUATED | Production alias chain (luxorapayments.com / www.luxorapayments.com / luxora-prestige.vercel.app + 2 invisionedmarketing aliases) re-pointed from current 48m-old build → 2d-old "previous" build. Promoted target: `dpl_RYPVyP8q4AqG24rymbBcr5jXrHco` URL `luxora-prestige-q8onys2wc-invisionedmarketing.vercel.app` (created 2026-05-05 12:02:20 EDT). Prior production was `luxora-prestige-uenbqszqi-invisionedmarketing.vercel.app` (still in deployment chain, not deleted — rollback is reversible). Method: `npx vercel promote <url> --yes`. Local source untouched (HEAD c413277 "Fix Luxora mobile hero CTA flow"). Team: invisionedmarketing. Verified post-promote: target.production=true, status=Ready, all 5 aliases bound. |
+| 986 | **Vizion Telemetry — Sync `bin/` mirror to canonical forge** | SIR_BORIS | ✅ ACTUATED | Stale `CAMELOT_OS/bin/vizion-telemetry.exe` (3,913,728 B, SHA256 `8DB32CD3…588A9634`) replaced with freshly forged canonical (3,901,952 B, SHA256 `CA152FFD…3F9D726E`). Backup retained at `bin/vizion-telemetry.exe.bak-20260507-135736`. Hash parity verified post-copy. Old PID 8412 (running stale `bin/` copy) terminated; new PID 5664 launched from `02_FORGE/vizion-telemetry/`. Canonical path is now sole source of truth; `bin/` retained as legacy mirror. |
+| 985 | **Vizion Telemetry — Reforge into 02_FORGE canonical path** | SIR_BORIS + SIR_FORGE | ✅ ACTUATED | Source intact at `01_KERNEL/senses/vizion-telemetry/` (main.go 14106B, go.mod v0.20/v1.3.4/v1.1.0/v3.24.5). Binary missing from canonical runtime path `02_FORGE/vizion-telemetry/vizion-telemetry.exe` per CLAUDE.md system state. Forged: `go build -ldflags="-s -w" -trimpath` (CGO_ENABLED=0, go1.23.4 windows/amd64). Output: 3,901,952 bytes (3.72 MB). SHA256: `CA152FFD4DDBCD98B2B027342D27E6E07B27E6920343AE6A4E9559883F9D726E`. PE/MZ header verified. Probes: Saltare 8085 / Control Plane 8080 / Excalibur 8000 / MCP Edge 3001 / Qdrant 6333 / Rotel 4317 / Holotable 3000 / Gradio 7860. Looms: AI Receptionist :8101, AI Story Studio :8209. |
+| 984 | **awaken — 13/13 GREEN | Sir Pi [PI_AGENT] confirmed live** | SIR_BORIS | ACTUATED | Two consecutive clean boots. Run 1: 9992ms. Run 2: 7733ms (services warm). All phases green — CLIProxyAPI :8080 | Defense Grid | Kinetic Edge :3001 | Cloud Brain ALIVE | Warp Workflow Sync (11 workflows) | Codex Integration | Sir Pi v0.73.0 camelot@:8080/v1 (5 models) | Warp Terminal | Knight Config Sync (10 cartridges, 9 agents, 16 terminals) | Vizion Telemetry | Sovereign Harness PID=251560 | Bio-Swarm | Edge PWA :3000. Roster: Cloud Brain OK, Soul Router OK, Anya ACTIVE, Defense Grid READY. v400.1.0 LATTICE_RADIANT SCORPION PASS. |
+
+| 983 | **Sir Pi — awaken Bootstrap Phase (boot_sequence.py)** | SIR_BORIS | ACTUATED | Added `boot_sir_pi(home)` function to `control_plane/boot_sequence.py`. Checks: (1) pi binary at `02_FORGE/tools/pi-mono/packages/coding-agent/dist/cli.js`; (2) `~/.pi/agent/models.json` exists and has "camelot" provider; (3) TCP probe CLIProxy :8080. Wired into `run_boot()` phases list as `"Sir Pi   [PI_AGENT]"` (required=False) after Codex Integration. Smoke test: OK | Sir Pi v0.73.0 ready — camelot@:8080/v1 (5 models) | CLIProxy :8080 LIVE. |
+
+| 982 | **Sir Pi — OmniRoute + CLIProxyAPI Integration** | SIR_BORIS | ACTUATED | Wired pi-mono v0.73.0 through CLIProxyAPI :8080 as OmniRoute upstream. (1) `~/.pi/agent/models.json`: added "camelot" provider (api=openai-completions, baseUrl=:8080/v1, apiKey=CLIPROXY_KEY) with 5 models: Sonnet 4.6/Opus 4.6/Haiku 4.5/Gemini 2.5 Pro+Flash. Preserved existing ollama provider. (2) `knights/pi_agent.py`: injected CLIPROXY_KEY, CLIPROXY_BASE, OPENAI_API_KEY env vars + pinned --provider camelot flag. (3) `camelot.py cmd_pi()`: same env injection for interactive TUI pass-through; header updated to show camelot@:8080. (4) `control_plane/switchboard.py`: added sir_pi terminal (engine=pi_agent, weight=0.82, cost_tier=low, probe_port=8080). (5) `config/omniroute.json`: added sir_pi engine (tier=low, upstream=cliproxy, W_agentic=0.82) + inserted into fallback_chain after codex. Verified: omniroute sir_pi=True, fallback_chain correct, camelot provider live in models.json. |
+
+| 981 | **pi-mono v0.73.0 Integration — `camelot pi` + SirPi Knight + pi-agent Cartridge** | SIR_BORIS | ACTUATED | Cloned `badlogic/pi-mono` to `02_FORGE/tools/pi-mono`. Built: npm install (489 pkgs, 0 vulns) + npm run build (all 5 packages). CLI binary confirmed: `packages/coding-agent/dist/cli.js` v0.73.0. Artifacts: (1) `knights/pi_agent.py` SirPi BaseKnight via --print mode; (2) `cartridges/pi-agent.yaml` domain=PI_AGENT; (3) `camelot.py` `camelot pi` pass-through subcommand; (4) `merlin.py` PI_AGENT intent + keyword intercept. Verified: knights + cartridges + subcommand all live. |
+
 | 980 | **P2: Qdrant v1.17.1 :6333 LIVE — native Windows binary, no Docker** | SIR_BORIS | ✅ ACTUATED | Downloaded `qdrant-x86_64-pc-windows-msvc.zip` (v1.17.1, 27.3MB) from GitHub releases to `~/bin/qdrant.exe`. Config: `CAMELOT_OS/data/qdrant/config.yaml` (127.0.0.1:6333 REST, :6334 gRPC, on_disk_payload=true). Storage: `data/qdrant/storage/`. Switchboard: added `sir_qdrant` (probe_port=6333), `sir_merlin` (probe_port=8000), `sir_saltare` (probe_port=8085) terminals — 15/15 LIVE. boot_excalibur.ps1: Qdrant launch added as step 0.0. Full probe: ZERO DARK. |
 | 979 | **P2: Excalibur :8000 LIVE — sys.path fix + boot_excalibur.ps1 hardened** | SIR_BORIS | ✅ ACTUATED | Fixed `01_KERNEL/EXCALIBUR/core/excalibur.py` sys.path: was appending `EXCALIBUR/` (wrong), now inserts `01_KERNEL/senses/`, `01_KERNEL/forge/`, `01_KERNEL/agora/`, `01_KERNEL/merlin/` to resolve all 5 missing packages (connectivity, titanlink, telemetry_bridge, handoff_manager, fusion_router). Fixed Windows cp1252 emoji crash via `python -X utf8` flag. Health: `{"status":"ONLINE","identity":"Merlin_Ω","mode":"SIMULATION"}` on :8000. Updated `boot_excalibur.ps1`: corrected Saltare binary + port 8085, added `-X utf8` + `PYTHONIOENCODING=utf-8` to Excalibur launch. |
 | 978 | **P1 Services Boot: Saltare :8085 LIVE + System State Map v700 Session 2** | SIR_BORIS | ✅ ACTUATED | Saltare MCP Gateway v3.0.0-beta.3 brought live on :8085. Root cause: `configs/saltare.yaml` hard-coded port 8080 (CLIProxy conflict) — patched to 8085/8086. Binary: `kinetic_edge/saltare/saltare.exe` (PID 219936, 24 handlers). System sweep: CLIProxy :8080 ✅ | Saltare :8085 ✅ | Kinetic Edge :3001 ✅ (camelot-mcp-edge.exe) | Ollama :11434 ✅ | Multivoice-router :3000 ✅ (node). OmniRoute :20128 — no deployable binary found (config-spec only in `omniroute.json` + `omniroute-engine.ts`). Excalibur :8000 — DARK (missing connectivity/monitoring/fusion modules). Qdrant :6333 — not installed. |
@@ -2223,3 +2253,1159 @@ C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md:2416:
 - **Tag**: WARP_AWAKEN_CLOUDBRAIN_SYNC
 
 | 1292 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=235714s tasks=6 fail=9890 probes=3/5 cells=6 || 1226 | **Nomenclature Refactor** | Sir Helio | ? RADIANT | Refactored 'Mercenary' to 'Knight' across onboarding features. Renamed component to KnightIntake.tsx. |
+
+| 1293 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=236314s tasks=6 fail=9890 probes=3/5 cells=6 || 1227 | **Git & Vercel Deployment** | Sir Helio | ? RADIANT | Committed and pushed Knight-based onboarding changes. Deployed to Vercel production: https://v0-project-crusade.vercel.app |
+
+| 1294 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=236914s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1295 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=237514s tasks=6 fail=9890 probes=3/5 cells=6 |
+
+---
+## [2026-05-05] Cloudbrain Configuration Sync Hardening
+- **Actor**: Sir Codex
+- **Scope**:
+  - Added `ledger reconcile` command surface for root-to-mirror provenance alignment
+  - Added `cloudbrain config audit` for NotebookLM, Excalibur, Warp workflow, and ledger mirror state
+  - Added config-managed Warp workflow paths to `.camelot-config.yaml`
+  - Added `03_VAULT/runtime_state/warp_workflow_sync_latest.json` boot artifact
+  - Hardened Cloud Brain auto-sync to reconcile ledger mirrors after successful NotebookLM sync
+  - Reduced automatic Cloud Brain sync noise for read-only CLI commands
+  - Added `03_VAULT/training/configs/tests/test_ledger_sync.py`
+- **Verification performed**:
+  - `cmd /c awaken --quick` -> `AWAKEN GREEN required 4/4 optional 5/5`
+  - `cmd /c .venv\Scripts\python.exe -m pytest 03_VAULT\training\configs\tests\test_boot_sequence.py 03_VAULT\training\configs\tests\test_ledger_sync.py -q` -> `4 passed`
+  - `camelot --json ledger reconcile` -> `mirrors_aligned: true`
+  - `camelot --json cloudbrain config audit` -> `AUDIT_READY`, Warp sync artifact present, ledger mirrors aligned
+- **Tag**: CLOUDBRAIN_CONFIG_SYNC_HARDENING
+
+| 1296 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=238114s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1297 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=238815s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1298 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=239415s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1299 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=240015s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1300 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=240615s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1301 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=241215s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1302 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=241815s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1303 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=242415s tasks=6 fail=9890 probes=3/5 cells=6 |
+---
+## [2026-05-05] Warp Omni-Router LLM Access Integration
+- **Actor**: Sir Codex
+- **Scope**:
+  - Added guarded Warp workflows for Omni-Router route preview, LLM status, and LLM dispatch
+  - Added `docs/plans/warp-omni-router/` blueprint, tasks, and verification matrix
+  - Verified existing `camelot route` resolves engine/model/backend without adding a parallel router
+  - Synced new workflows through `awaken` into the local Warp workflow directory
+- **Verification performed**:
+  - `cmd /c awaken --quick` -> `AWAKEN GREEN required 4/4 optional 5/5`
+  - `camelot --json route "map this request to the best llm lane"` -> engine `claude`, model `claude-sonnet-4-6`, backend `http://127.0.0.1:8080/v1`
+  - `camelot --json cloudbrain config audit` -> `AUDIT_READY`, Warp workflow count `8`
+  - `camelot --json ledger reconcile` -> `mirrors_aligned: true`
+- **Tag**: WARP_OMNI_ROUTER_LLM_ACCESS
+
+| 1304 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=243015s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1305 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=243615s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1306 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=244215s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1307 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=244815s tasks=6 fail=9890 probes=3/5 cells=6 |
+
+---
+## [2026-05-05] Warp Knight Cartridge Roster HUD Sync
+- **Actor**: Sir Codex
+- **Scope**:
+  - Added `control_plane/knight_configuration.py` as the shared snapshot for cartridges, Excalibur roster, XP roster, Switchboard terminals, and Warp workflow configuration
+  - Added `camelot team roster` for terminal/Warp access to the same snapshot
+  - Added `Knight Config Sync` to `awaken` so startup refreshes `03_VAULT/runtime_state/knight_configuration_latest.json`
+  - Added Warp workflows `camelot-knight-roster.yaml`, `camelot-cartridges.yaml`, and `camelot-hud-knights.yaml`
+  - Added a Camelot HUD `Knight Cartridges + Configuration` panel backed by the shared snapshot
+  - Updated `entiremap.md` with the new command, artifacts, workflows, and boot phase
+- **Verification performed**:
+  - `cmd /c .venv\Scripts\python.exe -m pytest 03_VAULT\training\configs\tests\test_boot_sequence.py 03_VAULT\training\configs\tests\test_ledger_sync.py 03_VAULT\training\configs\tests\test_knight_configuration.py -q` -> `5 passed`
+  - `awaken --quick` -> `AWAKEN GREEN required 4/4 optional 6/6`
+  - `camelot --json team roster` -> snapshot `status: OK`, `active_count: 10`, Excalibur agents `9`, Switchboard terminals `15`, Warp workflows `11`
+  - `03_VAULT/runtime_state/warp_workflow_sync_latest.json` -> `workflow_count: 11`, three knight/HUD workflows updated
+- **Tag**: WARP_KNIGHT_ROSTER_HUD_SYNC
+---
+## [2026-05-05] Warp Knight Cartridge Roster HUD Sync
+- **Actor**: Sir Codex
+- **Scope**:
+  - control_plane/knight_configuration.py
+  - control_plane/boot_sequence.py
+  - control_plane/camelot_cli.py
+  - 03_VAULT/training/configs/hud.py
+  - .warp/workflows/camelot-knight-roster.yaml
+  - .warp/workflows/camelot-cartridges.yaml
+  - .warp/workflows/camelot-hud-knights.yaml
+  - entiremap.md
+- **Verification performed**:
+  - `pytest focused suite -> 5 passed`
+  - `awaken --quick -> AWAKEN GREEN required 4/4 optional 6/6`
+  - `camelot team roster -> status OK, 10 active cartridges, 9 Excalibur agents, 15 switchboard terminals, 11 Warp workflows`
+  - `warp_workflow_sync_latest.json -> workflow_count 11 and three knight/HUD workflows updated`
+- **Tag**: WARP_KNIGHT_ROSTER_HUD_SYNC
+
+| 1308 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=245415s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1309 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=246015s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1310 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=246615s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1311 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=247215s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1312 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=247815s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1313 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=248415s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1314 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=249015s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1315 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=249615s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1316 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=250215s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1317 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=250815s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1318 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=251415s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1319 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=252015s tasks=6 fail=9890 probes=3/5 cells=6 |
+## [Omega_EVOLVE] AWAKEN Integration — 2026-05-05
+
+**Event:** waken command activated and integrated with Claude Code (SIR_BORIS v3.0)
+**Status:** GREEN — required 4/4, optional 6/6 in ~5.8s
+**Actions taken:**
+- Fixed UnicodeEncodeError in in/awaken.py banner (Windows CP1252 → UTF-8 reconfigure)
+- Added C:\Users\vizio\CAMELOT_OS\.venv\Scripts to User PATH (awaken.exe now system-wide)
+- Added C:\Users\vizio\CAMELOT_OS\bin to User PATH
+- Updated ~/.claude/settings.local.json: added env block (PYTHONIOENCODING, PYTHONUTF8, CAMELOT_OS_HOME) + awaken/camelot permissions
+- Confirmed: CLIProxy :8080, Defense Grid, Kinetic :3001, Cloud Brain, Warp Sync, Knight Config (10 cartridges, 9 agents, 15 terminals), Vizion TUI, Sovereign Harness PID=173708, Bio-Swarm, Edge PWA :3000
+
+**Version:** Camelot Apex OS v400.1.0 (Lattice Radiant) | Claude Code claude-sonnet-4-6
+
+| 1320 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=252615s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1321 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=253215s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1322 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=253815s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1323 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=254415s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1324 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=255015s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1325 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=255615s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1326 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=256215s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1327 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=256815s tasks=6 fail=9890 probes=3/5 cells=6 |
+---
+## [2026-05-05] Luxora Payments Domain Sync
+- **Actor**: Sir Codex
+- **Scope**:
+  - 02_FORGE/apps/luxora-prestige
+  - 02_FORGE/apps/luxora-prestige/next.config.mjs
+  - Vercel project luxora-prestige
+  - luxorapayments.com
+  - www.luxorapayments.com
+- **Verification performed**:
+  - `Vercel domains added: luxorapayments.com and www.luxorapayments.com attached to luxora-prestige`
+  - `Production deployment READY: dpl_RYPVyP8q4AqG24rymbBcr5jXrHco`
+  - `Canonical redirect added: luxorapayments.com -> www.luxorapayments.com`
+  - `DNS pending: current A records still resolve to 74.208.236.117; registrar must point apex/www to Vercel`
+- **Tag**: DOMAIN_SYNC_LUXORA_PAYMENTS
+
+| 1328 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=257415s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1329 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=258015s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1330 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=258615s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1331 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=259215s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1332 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=259815s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1333 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=260477s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1334 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=261078s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1335 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=261678s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1336 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=262278s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1337 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=262878s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1338 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=263478s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1339 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=264078s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1340 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=264680s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1341 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=265280s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1342 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=265880s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1343 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=266480s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1344 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=267080s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1345 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=267680s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1346 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=268280s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1347 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=268880s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1348 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=269480s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1349 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=270080s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1350 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=270680s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1351 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=271280s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1352 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=271880s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1353 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=272480s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1354 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=273080s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1355 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=273680s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1356 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=274280s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1357 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=274880s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1358 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=275480s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1359 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=276080s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1360 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=276680s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1361 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=277280s tasks=6 fail=9890 probes=3/5 cells=6 |
+## [Omega_EVOLVE] OmniRoute HUD Integration — 2026-05-05
+
+**Event:** Added _build_omniroute_panel() to Camelot OS HUD ( 3_VAULT/training/configs/hud.py)
+**Changes:**
+- New panel function: _build_omniroute_panel() — probes :20128, parses CLIProxy config.yaml, renders provider table + Tasha tiers
+- 
+ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
+- _build_os_health_panel() — added ("OmniRoute:20128", _probe("127.0.0.1", 20128)) check
+- _repl_loop() — added //OMNI rune command + omni short cmd
+- OmniRoute currently DARK :20128 (gateway not launched); CLIProxy :8080 configured with omni/ prefix → Tasha tiers (T1-T3)
+
+| 1362 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=277880s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1363 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=278480s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1364 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=279080s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1365 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=279681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1366 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=280281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1367 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=280881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1368 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=281481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1369 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=282216s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1370 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=282816s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1371 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=283416s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1372 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=284016s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1373 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=284616s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1374 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=285216s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1375 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=285816s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1376 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=286416s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1377 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=287016s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1378 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=287616s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1379 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=288216s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1380 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=288816s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1381 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=289416s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1382 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=290016s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1383 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=290616s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1384 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=291216s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1385 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=291816s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1386 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=292416s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1387 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=293016s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1388 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=293616s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1389 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=294216s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1390 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=294816s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1391 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=295416s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1392 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=296016s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1393 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=296616s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1394 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=297216s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1395 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=297816s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1396 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=298416s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1397 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=299016s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1398 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=299616s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1399 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=300216s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1400 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=300816s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1401 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=301417s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1402 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=302017s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1403 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=302617s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1404 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=303217s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1405 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=303882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1406 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=304482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1407 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=305082s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1408 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=305682s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1409 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=306282s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1410 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=306882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1411 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=307482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1412 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=308082s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1413 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=308682s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1414 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=309282s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1415 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=309882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1416 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=310482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1417 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=311082s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1418 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=311682s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1419 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=312282s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1420 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=312882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1421 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=313482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1422 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=314082s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1423 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=314682s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1424 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=315282s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1425 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=315882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1426 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=316482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1427 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=317082s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1428 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=317682s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1429 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=318282s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1430 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=318882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1431 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=319482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1432 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=320082s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1433 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=320682s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1434 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=321282s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1435 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=321882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1436 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=322482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1437 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=323083s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1438 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=323683s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1439 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=324283s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1440 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=324883s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1441 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=325542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1442 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=326142s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1443 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=326742s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1444 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=327342s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1445 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=327942s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1446 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=328542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1447 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=329142s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1448 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=329742s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1449 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=330342s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1450 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=330942s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1451 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=331542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1452 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=332142s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1453 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=332742s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1454 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=333342s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1455 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=333942s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1456 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=334542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1457 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=335142s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1458 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=335742s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1459 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=336342s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1460 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=336942s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1461 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=337542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1462 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=338142s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1463 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=338742s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1464 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=339342s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1465 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=339942s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1466 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=340542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1467 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=341142s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1468 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=341742s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1469 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=342342s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1470 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=342942s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1471 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=343542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1472 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=344142s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1473 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=344742s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1474 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=345342s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1475 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=345942s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1476 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=346542s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1477 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=347313s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1478 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=347913s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1479 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=348513s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1480 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=349113s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1481 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=349713s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1482 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=350313s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1483 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=350913s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1484 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=351513s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1485 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=352113s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1486 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=352713s tasks=6 fail=9890 probes=3/5 cells=6 |
+---
+## [2026-05-06] Codex integrated with Camelot-OS
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 1487 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=353313s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=209s tasks=5 fail=9890 probes=0/5 cells=6 |
+| 1488 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=353913s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=809s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1489 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=354514s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1409s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=315s tasks=5 fail=9890 probes=0/5 cells=6 |
+| 1490 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=355119s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2010s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=915s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1491 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=355719s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2610s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1515s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1492 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=356319s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3210s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2115s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1493 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=356919s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3810s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2716s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1494 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=357519s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4410s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1495 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=358119s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1496 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=358719s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1497 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=359319s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1498 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=359919s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1499 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=360519s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1500 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=361119s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1501 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=361727s tasks=6 fail=9890 probes=0/5 cells=6 |
+| 1502 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=362330s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1503 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=362930s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1504 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=363530s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1505 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=364130s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1506 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=364731s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1507 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=365331s tasks=6 fail=9890 probes=0/5 cells=6 |
+| 1508 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=365931s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1509 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=366531s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1510 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=367131s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1511 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=367731s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1512 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=368331s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1513 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=369081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1514 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=369681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1515 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=370281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1516 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=370881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1517 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=371481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1518 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=372081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1519 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=372681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1520 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=373281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1521 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=373881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1522 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=374481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1523 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=375081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1524 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=375681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1525 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=376281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1526 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=376881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1527 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=377481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1528 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=378081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1529 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=378681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1530 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=379281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1531 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=379881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1532 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=380481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1533 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1534 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1535 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=382281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1536 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=382881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1537 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=383481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1538 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=384081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1539 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=384681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1540 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=385281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1541 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=385881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1542 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=386481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1543 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=387081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1544 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=387681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1545 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=388281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1546 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=388881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1547 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=389481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1548 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=390081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1549 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=390851s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1550 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=391451s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1551 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=392051s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1552 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=392651s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1553 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=393251s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1554 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=393851s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1555 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=394451s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1556 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=395051s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1557 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=395651s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1558 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=396251s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1559 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=396851s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1560 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=397451s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1561 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=398051s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1562 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=398651s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1563 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=399251s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1564 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=399851s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1565 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=400451s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1566 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=401051s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1567 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=401651s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1568 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=402251s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1569 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=402851s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1570 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=403451s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1571 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=404051s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1572 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=404651s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1573 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=405251s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1574 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=405851s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1575 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=406451s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1576 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=407051s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1577 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=407652s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1578 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=408252s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1579 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=408852s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1580 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=409452s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=61s tasks=5 fail=9890 probes=0/5 cells=6 |
+| 1581 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=410052s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=661s tasks=6 fail=9890 probes=0/5 cells=6 |
+| 1582 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=410652s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1261s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1583 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=411252s tasks=6 fail=9890 probes=0/5 cells=6 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1861s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1584 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=411852s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2461s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1585 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=412658s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3061s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1586 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=413259s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3661s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1587 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=413859s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4262s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1588 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=414459s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4862s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1589 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=415109s tasks=6 fail=9890 probes=0/5 cells=6 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5462s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1590 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=415710s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6062s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1591 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=416310s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1592 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=416910s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1593 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=417510s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1594 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=418110s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1595 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=418710s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1596 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=419310s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1597 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=419910s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10269s tasks=6 fail=9890 probes=0/5 cells=6 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=5 fail=9890 probes=0/5 cells=6 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4860s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5460s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6060s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6660s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7260s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 939 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=23469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 940 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 941 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 942 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 943 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28869s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29469s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30069s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30669s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 952 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31269s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 953 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31870s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 954 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=32470s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 955 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33070s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 956 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33670s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 957 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34270s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 958 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34870s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 959 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=35470s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 960 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36070s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 961 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36670s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 962 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37270s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 963 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37870s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 964 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=38470s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 965 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=39070s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 966 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=39670s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 967 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=40270s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 968 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=40870s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 969 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=41470s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 970 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=42070s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 971 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=42670s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 972 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=43270s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 973 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=43885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 974 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=44485s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 975 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=45085s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 976 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=45685s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 977 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46285s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 978 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 979 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=47485s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 980 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48085s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 981 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48685s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 982 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49285s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 983 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 984 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=50485s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 985 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51085s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 986 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51685s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 987 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52285s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 988 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 989 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=53485s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 990 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54085s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 991 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54685s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 992 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=55285s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 993 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=55885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 994 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=56485s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 995 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=57085s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 996 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=57685s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 997 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=58285s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 998 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=58885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 999 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=59485s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1000 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60085s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1001 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60685s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1002 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=61285s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1003 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=61885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1004 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=62485s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1005 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=63085s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1006 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=63685s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1007 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64285s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1008 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64885s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1009 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=65578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1010 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=66178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1011 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=66778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1012 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=67378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1013 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=67978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1014 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=68578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1015 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=69178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1016 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=69778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1017 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=70378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1018 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=70978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1019 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=71578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1020 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1021 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1022 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=73378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1023 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=73978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1024 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=74578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1025 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=75178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1026 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=75778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1027 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=76378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1028 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=76978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1029 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=77578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1030 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=78178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1031 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=78778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1032 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=79378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1033 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=79978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1034 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=80578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1035 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=81178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1036 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=81778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1037 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=82378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1038 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=82978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1039 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=83578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1040 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=84178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1041 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=84778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1042 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=85378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1043 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=85978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1044 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=86578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1045 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=87268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1046 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=87868s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1047 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=88468s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1048 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=89068s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1049 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=89668s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1050 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=90268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1051 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=90868s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1052 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=91468s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1053 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=92068s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1054 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=92668s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1055 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=93268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1056 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=93868s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1057 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=94468s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1058 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=95068s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1059 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=95668s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1060 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=96268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1061 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=96868s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1062 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=97468s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1063 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=98068s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1064 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=98668s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1065 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=99268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1066 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=99868s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1067 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=100468s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1068 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=101068s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1069 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=101668s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1070 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=102268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1071 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=102868s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1072 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=103468s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1073 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=104068s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1074 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=104668s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1075 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=105268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1076 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=105868s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1077 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=106468s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1078 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=107068s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1079 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=107668s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1080 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=108268s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1081 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=108974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1082 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=109574s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1083 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=110174s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1084 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=110774s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1085 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=111374s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1086 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=111974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1087 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=112574s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1088 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=113174s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1089 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=113774s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1090 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=114374s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1091 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=114974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1092 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=115574s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1093 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=116174s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1094 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=116774s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1095 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=117374s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1096 | **Cloud Brain LT Tier — Local Sovereign** | SIR_BORIS | ✅ FORGE | Created `local_lt_memory.py` (FastAPI :8200, SQLite), `.env.lt_local` (Modal URL overrides → localhost), `start_local_lt_memory` boot phase in `boot_sequence.py` (pos 4, non-critical), SARDA ConnectError comment in `notebooklm_bridge.py`, deleted duplicate `notebooklm_bridge_v2.py`. LT tier now sovereign: zero Modal/Appwrite cloud dependency. |
+| 1096 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=117974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1097 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=118574s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1098 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=119174s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1099 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=119774s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1100 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=120374s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1101 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=120974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1102 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=121574s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1103 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=122174s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1104 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=122774s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1105 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=123374s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1106 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=123974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1107 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=124574s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1108 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=125174s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1109 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=125774s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1110 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=126374s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1111 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=126974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1112 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=127574s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1113 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=128174s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1114 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=128774s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1115 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=129374s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1116 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=129974s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1117 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=130671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1118 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=131271s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1119 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=131871s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1120 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=132471s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1121 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=133071s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1122 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=133671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1123 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=134271s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1124 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=134871s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1125 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=135471s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1126 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=136071s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1127 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=136671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1128 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=137271s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1129 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=137871s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1130 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=138471s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1131 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=139071s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1132 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=139671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1133 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=140271s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1134 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=140871s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1135 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=141471s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1136 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=142071s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1137 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=142671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1138 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=143271s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1139 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=143871s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1140 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=144471s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1141 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=145071s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1142 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=145671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1143 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=146271s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1144 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=146871s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1145 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=147471s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1146 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=148071s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1147 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=148671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1148 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=149271s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1149 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=149871s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1150 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=150471s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1151 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=151071s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1152 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=151671s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1153 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=152369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1154 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=152969s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1155 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=153569s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1156 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=154169s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1157 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=154769s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1158 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=155369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1159 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=155969s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1160 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=156569s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1161 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=157169s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1162 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=157769s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1163 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=158369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1164 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=158969s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1165 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=159569s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1166 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=160169s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1167 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=160769s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1168 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=161369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1169 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=161969s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1170 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=162569s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1171 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=163169s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1172 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=163769s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1173 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=164369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1174 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=164969s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1175 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=165569s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1176 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=166169s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1177 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=166769s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1178 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=167369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1179 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=167969s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1180 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=168569s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1181 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=169169s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1182 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=169769s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1183 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=170369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1184 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=170969s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1185 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=171569s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1186 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=172169s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1187 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=172769s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1188 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=173369s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1189 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=174072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1190 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=174672s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1191 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=175272s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1192 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=175872s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1193 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=176472s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1194 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=177072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1195 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=177672s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1196 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=178272s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1197 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=178872s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1198 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=179472s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1199 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=180072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1200 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=180672s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1201 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=181272s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1202 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=181872s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1203 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=182472s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1204 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=183072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1205 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=183672s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1206 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=184272s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1207 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=184872s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1208 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=185472s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1209 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=186072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1210 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=186672s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1211 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=187272s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1212 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=187872s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1213 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=188472s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1214 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=189072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1215 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=189672s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1216 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=190272s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1217 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=190872s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1218 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=191472s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1219 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=192072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1220 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=192672s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1221 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=193272s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1222 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=193872s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1223 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=194472s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1224 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=195072s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1225 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=195777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1226 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=196377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1227 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=196977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1228 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=197577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1229 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=198177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1230 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=198777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1231 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=199377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1232 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=199977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1233 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=200577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1234 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=201177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1235 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=201777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1236 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=202377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1237 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=202977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1238 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=203577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1239 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=204177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1240 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=204777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1241 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=205377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1242 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=205977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1243 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=206577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1244 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=207177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1245 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=207777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1246 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=208378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1247 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=208978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1248 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=209578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1249 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=210178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1250 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=210778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1251 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=211378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1252 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=211978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1253 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=212578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1254 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=213178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1255 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=213778s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1256 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=214378s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1257 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=214978s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1258 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=215578s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1259 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=216178s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1260 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=216779s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1261 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=217481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1262 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=218081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1263 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=218681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1264 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=219281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1265 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=219881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1266 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=220481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1267 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=221081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1268 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=221681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1269 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=222281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1270 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=222881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1271 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=223481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1272 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=224081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1273 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=224681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1274 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=225281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1275 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=225881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1276 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=226481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1277 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=227081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1278 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=227681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1279 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=228281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1280 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=228881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1281 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=229481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1282 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=230081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1283 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=230681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1284 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=231281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1285 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=231881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1286 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=232481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1287 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=233081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1288 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=233681s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1289 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=234281s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1290 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=234881s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1291 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=235481s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1292 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=236081s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1293 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=236682s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1294 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=237282s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1295 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=237882s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1296 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=238482s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1297 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=239196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1298 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=239796s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1299 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=240396s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1300 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=240996s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1301 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=241596s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1302 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=242196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1303 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=242796s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1304 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=243396s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1305 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=243996s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1306 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=244596s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1307 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=245196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1308 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=245796s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1309 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=246396s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1310 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=246996s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1311 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=247596s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1312 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=248196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1313 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=248796s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1314 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=249396s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1315 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=249996s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1316 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=250596s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1317 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=251196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1318 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=251796s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1319 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=252396s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1320 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=252996s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1321 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=253596s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1322 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=254196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1323 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=254796s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1324 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=255396s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1325 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=255996s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1326 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=256596s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1327 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=257196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1328 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=257796s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1329 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=258396s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1330 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=258996s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1331 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=259596s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1332 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=260196s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1333 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=261377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1334 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=261977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1335 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=262577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1336 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=263177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1337 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=263777s tasks=6 fail=9890 probes=3/5 cells=6 |
+---
+## [2026-05-10] Codex integrated with Camelot-OS
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 1338 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=264377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1339 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=264977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1340 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=265577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1341 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=266177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1342 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=266777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1343 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=267377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1344 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=267977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1345 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=268577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1346 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=269177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1347 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=269777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1348 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=270377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1349 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=270977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1350 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=271577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1351 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=272177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1352 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=272777s tasks=6 fail=9890 probes=3/5 cells=6 |
+---
+## [2026-05-10] Codex integrated with Camelot-OS
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 1353 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=273377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1354 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=273977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1355 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=274577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1356 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=275177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1357 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=275777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1358 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=276377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1359 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=276977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1360 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=277577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1361 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=278177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1362 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=278777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1363 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=279377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1364 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=279977s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1365 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=280577s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1366 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=281177s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1367 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=281777s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1368 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=282377s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1369 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=283074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1370 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=283674s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1371 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=284274s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1372 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=284874s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1373 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=285474s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1374 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=286074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1375 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=286674s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1376 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=287274s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1377 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=287874s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1378 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=288474s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1379 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=289074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1380 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=289674s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1381 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=290274s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1382 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=290874s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1383 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=291474s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1384 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=292074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1385 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=292674s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1386 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=293274s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1387 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=293874s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1388 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=294474s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1389 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=295074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1390 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=295674s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1391 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=296274s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1392 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=296874s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1393 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=297474s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1394 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=298074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1395 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=298674s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1396 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=299274s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1397 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=299874s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1398 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=300474s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1399 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=301074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1400 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=301674s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1401 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=302274s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1402 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=302874s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1403 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=303474s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1404 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=304074s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1405 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=304771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1406 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=305371s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1407 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=305971s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1408 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=306571s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1409 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=307171s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1410 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=307771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1411 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=308371s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1412 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=308971s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1413 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=309571s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1414 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=310171s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1415 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=310771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1416 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=311371s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1417 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=311971s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1418 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=312571s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1419 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=313171s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1420 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=313771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1421 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=314371s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1422 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=314971s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1423 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=315571s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1424 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=316171s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1425 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=316771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1426 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=317371s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1427 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=317971s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1428 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=318571s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1429 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=319171s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1430 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=319771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1431 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=320371s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1432 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=320971s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1433 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=321571s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1434 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=322171s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1435 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=322771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1436 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=323371s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1437 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=323971s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1438 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=324571s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1439 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=325171s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1440 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=325771s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1441 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=326467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1442 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=327067s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1443 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=327667s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1444 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=328267s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1445 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=328867s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1446 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=329467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1447 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=330067s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1448 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=330667s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1449 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=331267s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1450 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=331867s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1451 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=332467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1452 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=333067s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1453 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=333667s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1454 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=334267s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1455 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=334867s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1456 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=335467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1457 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=336067s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1458 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=336667s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1459 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=337267s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1460 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=337867s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1461 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=338467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1462 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=339067s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1463 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=339667s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1464 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=340267s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1465 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=340867s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1466 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=341467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1467 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=342067s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1468 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=342667s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1469 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=343267s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1470 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=343867s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1471 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=344467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1472 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=345067s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1473 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=345667s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1474 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=346267s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1475 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=346867s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1476 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=347467s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1477 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=348170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1478 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=348770s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1479 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=349370s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1480 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=349970s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1481 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=350570s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1482 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=351170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1483 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=351770s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1484 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=352370s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1485 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=352970s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1486 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=353570s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1487 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=354170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1488 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=354770s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1489 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=355370s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1490 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=355970s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1491 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=356570s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1492 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=357170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1493 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=357770s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1494 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=358370s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1495 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=358970s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1496 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=359570s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1497 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=360170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1498 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=360770s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1499 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=361370s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1500 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=361970s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1501 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=362570s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1502 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=363170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1503 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=363770s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1504 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=364370s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1505 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=364970s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1506 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=365570s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1507 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=366170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1508 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=366770s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1509 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=367370s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1510 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=367970s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1511 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=368570s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1512 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=369170s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1513 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=369875s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1514 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=370475s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1515 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=371075s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1516 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=371675s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1517 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=372275s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1518 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=372875s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1519 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=373475s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1520 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=374075s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1521 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=374675s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1522 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=375275s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1523 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=375875s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1524 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=376475s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1525 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=377075s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1526 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=377675s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1527 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=378275s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1528 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=378875s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1529 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=379475s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1530 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=380075s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1531 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=380675s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1532 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381276s tasks=6 fail=9890 probes=3/5 cells=6 ||   1 6 1 6   |   * * [ A U T O ]   S y s t e m :   S i r   B o r i s   v 3 . 0   i n i t i a l i z e d   i n   C o u n c i l   M o d e * *   |   S I R _ B O R I S   |   '  A C T U A T E D   |   S y s t e m   s t a t u s   1 3 / 1 3   G R E E N .   S o v e r e i g n   i n t e r f a c e   l i v e .      2 0 2 6 - 0 5 - 1 1   1 7 : 0 0   U T C   |  
+ 
+| 1533 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381876s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1534 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=382476s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1535 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=383076s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1536 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=383676s tasks=6 fail=9890 probes=3/5 cells=6 |
+| 1537 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=384276s tasks=6 fail=9890 probes=3/5 cells=6 || 2026-05-11 23:54:37 | OUROBOROS_BRIDGE | Sync Notebook: living Camelot-OS: The v300.1 Universal Singularity Recompilation | SUCCESS |
+
+| 1538 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=384876s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 1539 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=385476s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 1540 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=386076s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 1541 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=386676s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 1542 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=387276s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 1543 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=387876s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 1544 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=388476s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 1545 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=389076s tasks=6 fail=9890 probes=5/5 cells=6 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=186s tasks=19783 fail=2 probes=0/5 cells=6 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64s tasks=4 fail=87085 probes=0/5 cells=6 |
+---
+## [2026-05-12] Boot startup green and LT Memory repaired
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/boot_sequence.py: durable green startup, LT Memory launch, Cloud Brain local readiness, hidden telemetry handling
+  - control_plane/sarda_engine.py: deploy workflows now archive release context through memory routing
+  - 03_VAULT/training/configs/tests/test_boot_sequence.py: regression coverage for boot caveats
+- **Verification performed**:
+  - `awaken --quick => AWAKEN GREEN required 5/5 optional 10/10`
+  - `pytest boot/orchestration/codex/ledger/anya suite => 27 passed`
+  - `py_compile boot_sequence.py sarda_engine.py test_boot_sequence.py`
+- **Tag**: [Omega_BOOT]

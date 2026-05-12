@@ -170,6 +170,7 @@ DECOMPOSITION_RULES: dict[str, list[str]] = {
     ],
     "deploy": [
         "orchestration:coordinate deployment sequence",
+        "memory:archive deployment evidence and release context",
         "security_review:pre-deploy security scan",
         "audit:post-deploy health verification",
     ],
