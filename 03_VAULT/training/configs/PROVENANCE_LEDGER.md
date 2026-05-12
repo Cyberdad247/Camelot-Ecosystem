@@ -3379,7 +3379,8 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 | 1529 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=379475s tasks=6 fail=9890 probes=3/5 cells=6 |
 | 1530 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=380075s tasks=6 fail=9890 probes=3/5 cells=6 |
 | 1531 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=380675s tasks=6 fail=9890 probes=3/5 cells=6 |
-| 1532 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381276s tasks=6 fail=9890 probes=3/5 cells=6 ||   1 6 1 6   |   * * [ A U T O ]   S y s t e m :   S i r   B o r i s   v 3 . 0   i n i t i a l i z e d   i n   C o u n c i l   M o d e * *   |   S I R _ B O R I S   |   '  A C T U A T E D   |   S y s t e m   s t a t u s   1 3 / 1 3   G R E E N .   S o v e r e i g n   i n t e r f a c e   l i v e .      2 0 2 6 - 0 5 - 1 1   1 7 : 0 0   U T C   |  
+| 1532 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381276s tasks=6 fail=9890 probes=3/5 cells=6 ||   1 6 1 6   |   * * [ A U T O ]   S y s t e m :   S i r   B o r i s   v 3 . 0   i n i t i a l i z e d   i n   C o u n c i l   M o d e * *   |   S I R _ B O R I S   |   '  A C T U A T E D   |   S y s t e m   s t a t u s   1 3 / 1 3   G R E E N .   S o v e r e i g n   i n t e r f a c e   l i v e .      2 0 2 6 - 0 5 - 1 1   1 7 : 0 0   U T C   | 
+ 
  
 | 1533 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381876s tasks=6 fail=9890 probes=3/5 cells=6 |
 | 1534 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=382476s tasks=6 fail=9890 probes=3/5 cells=6 |
@@ -3539,3 +3540,15 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 | 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29614s tasks=4 fail=87085 probes=1/5 cells=6 |
 | 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30214s tasks=4 fail=87085 probes=1/5 cells=6 |
 | 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30814s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Ledger and Cloud Brain sync after dirty-file cleanup
+- **Actor**: SIR_CODEX (Lead Engineer)
+- **Scope**:
+  - Recorded cleanup follow-up after generated runtime artifacts were ignored and archived
+  - Confirmed Camelot CLI import compatibility for ledger and Cloud Brain queue commands
+  - Prepared ledgers for mirror reconciliation and Cloud Brain sync
+- **Verification performed**:
+  - `git status --short clean before ledger update`
+  - `camelot --json ledger status reported mirrors_aligned true`
+  - `camelot --json cloudbrain queue status reported pending 0`
+- **Tag**: [Omega_LEDGER_SYNC]

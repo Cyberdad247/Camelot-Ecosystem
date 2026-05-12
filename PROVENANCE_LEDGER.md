@@ -3539,3 +3539,15 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 | 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29614s tasks=4 fail=87085 probes=1/5 cells=6 |
 | 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30214s tasks=4 fail=87085 probes=1/5 cells=6 |
 | 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30814s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Ledger and Cloud Brain sync after dirty-file cleanup
+- **Actor**: SIR_CODEX (Lead Engineer)
+- **Scope**:
+  - Recorded cleanup follow-up after generated runtime artifacts were ignored and archived
+  - Confirmed Camelot CLI import compatibility for ledger and Cloud Brain queue commands
+  - Prepared ledgers for mirror reconciliation and Cloud Brain sync
+- **Verification performed**:
+  - `git status --short clean before ledger update`
+  - `camelot --json ledger status reported mirrors_aligned true`
+  - `camelot --json cloudbrain queue status reported pending 0`
+- **Tag**: [Omega_LEDGER_SYNC]

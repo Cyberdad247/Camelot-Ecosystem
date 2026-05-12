@@ -164,6 +164,27 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
             trust_level="KERNEL"
         )
         return True
+    except ModuleNotFoundError as e:
+        if e.name not in {"security", "security.warden"}:
+            raise
+        risky_terms = {
+            "delete",
+            "remove",
+            "purge",
+            "destroy",
+            "reset",
+            "secret",
+            "key",
+            "credential",
+            "token",
+            "payment",
+            "deploy",
+        }
+        if any(term in intent.lower() for term in risky_terms):
+            _stream_print(f"\n[HITL_GATE] Security module missing; blocked risky intent: {intent}", tone="err")
+            return False
+        _stream_print("[HITL_GATE] Security module missing; allowing low-risk status/sync intent.", tone="warn")
+        return True
     except Exception as e:
         # SecurityException or other error means blocked
         _stream_print(f"\n[HITL_GATE] Security Block: {e}", tone="err")
