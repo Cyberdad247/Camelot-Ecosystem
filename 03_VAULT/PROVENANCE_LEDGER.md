@@ -3552,3 +3552,15 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
   - `camelot --json ledger status reported mirrors_aligned true`
   - `camelot --json cloudbrain queue status reported pending 0`
 - **Tag**: [Omega_LEDGER_SYNC]
+---
+## [2026-05-12] Mission Control hardening blueprint and Claude Code install
+- **Actor**: SIR_CODEX with Sir Alex and Sir Octavian
+- **Scope**:
+  - Created Alex/Octavian skeptical blueprint for security.warden restoration and Harness heartbeat relocation
+  - Created task.md and verification.md for both hardening recommendations
+  - Installed Claude Code globally from official Anthropic npm package
+- **Verification performed**:
+  - `node --version returned v24.14.1`
+  - `cmd /c npm --version returned 11.11.0`
+  - `cmd /c claude --version returned 2.1.140`
+- **Tag**: [Omega_MISSION_CONTROL]
