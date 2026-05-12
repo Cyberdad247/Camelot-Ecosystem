@@ -16,7 +16,16 @@ from typing import Any
 
 from colorama import Fore, Style, just_fix_windows_console
 
+from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
 from .cli_intercept import CLIIntercept
+from .codex_integration import (
+    DEFAULT_ACTOR as CODEX_DEFAULT_ACTOR,
+    read_codex_status,
+    write_codex_integration,
+)
+from .config_manager import ConfigManager
+from .ledger_sync import append_provenance_entry, ledger_status, reconcile_ledger_mirrors
+from .provenance import ProvenanceManager, VerificationRun
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
@@ -1604,6 +1613,8 @@ def _build_parser() -> argparse.ArgumentParser:
 
 def main() -> int:
     try:
+        from bin import bifrost
+
         bifrost.enforce()
     except Exception as e:
         _stream_print(f"BIFROST GATE REFUSED: {e}", tone="err")

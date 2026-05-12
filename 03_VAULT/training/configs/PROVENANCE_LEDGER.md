@@ -3409,3 +3409,133 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
   - `pytest boot/orchestration/codex/ledger/anya suite => 27 passed`
   - `py_compile boot_sequence.py sarda_engine.py test_boot_sequence.py`
 - **Tag**: [Omega_BOOT]
+
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=664s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1264s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1864s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2464s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Local-first Cloud Brain sync queue
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/cloudbrain_sync.py: failed syncs persist to cloudbrain_sync_queue.jsonl and can be flushed later
+  - control_plane/camelot_cli.py: cloudbrain queue status/flush commands
+  - 03_VAULT/training/configs/tests/test_cloudbrain_sync_queue.py: regression coverage for queue behavior
+- **Verification performed**:
+  - `pytest test_cloudbrain_sync_queue.py => 5 passed`
+  - `py_compile cloudbrain_sync.py camelot_cli.py test_cloudbrain_sync_queue.py`
+  - `camelot --json cloudbrain queue status`
+- **Tag**: [Omega_CLOUDBRAIN]
+
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3064s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3664s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4266s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4866s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5466s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6066s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6666s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7268s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7868s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8468s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Camelot Mission Control vNext blueprint
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - docs/plans/camelot-mission-control-vnext: blueprint, workflow, and prompt pack for engines, Watchtower, knight roster, personality prism, RPG scratchpad, vocal weights, and visual prompts
+  - 03_VAULT/runtime_state/camelot_mission_control_character_sheets.json: generated character-sheet data for roster plus Lady Alexandria
+  - 03_VAULT/runtime_state/camelot_mission_control_rpg_scratchpad.md: operator scratchpad for Mission Control RPG state
+  - .warp/workflows/camelot-mission-control-vnext.yaml: Warp launcher for vNext generation and council verification
+- **Verification performed**:
+  - `generated 32 character sheets`
+  - `validated character-sheet JSON and Warp YAML`
+  - `synced 22 Warp workflows to local Warp directory`
+- **Tag**: [Omega_MISSION_CONTROL]
+
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9126s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Camelot Cloud Brain v701 architecture package
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - scripts/generate_cloudbrain_v701.py
+  - docs/plans/camelot-cloudbrain-v701
+  - 03_VAULT/runtime_state/camelot_cloudbrain_v701_manifest.json
+  - .warp/workflows/camelot-cloudbrain-v701-sync.yaml
+- **Verification performed**:
+  - `Generated v701 architecture, schematics, Symbolact dictionary, and assimilation protocol journal`
+  - `Validated runtime manifest JSON and Warp workflow YAML`
+  - `Synced Warp workflows: 23 installed, 1 updated`
+- **Tag**: [Omega_CLOUDBRAIN_V701]
+
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9729s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Camelot Cloud Brain v701 named snapshot synced
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - NotebookLM note: Camelot-OS v701 Architecture Snapshot
+  - docs/plans/camelot-cloudbrain-v701
+- **Verification performed**:
+  - `Created Cloud Brain note 96ecf3f1-805a-4d8e-84f4-a69e48c32c12 with 19943 chars`
+  - `Notebook ID d02cc716-d235-4d34-9185-a07860ec5272`
+- **Tag**: [Omega_CLOUDBRAIN_V701_SYNC]
+
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10330s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10930s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11530s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Camelot CLI Cloud Brain wrapper repaired
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/camelot_cli.py
+- **Verification performed**:
+  - `Restored explicit imports for Bifrost, ConfigManager, ProvenanceManager, ledger sync, Cloud Brain queue, and Codex integration`
+  - `camelot.exe --json cloudbrain queue status returned pending 0`
+  - `Focused pytest passed: 9 passed`
+- **Tag**: [Omega_CLI_REPAIR]
+
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12130s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12730s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13330s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13930s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14531s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15131s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15731s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16331s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16931s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17531s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18131s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18731s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19331s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19931s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20531s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21131s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21731s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22331s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22931s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 939 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=23531s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 940 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24132s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 941 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24732s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 942 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25332s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 943 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26013s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26613s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27213s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27814s tasks=4 fail=87085 probes=1/5 cells=6 |
+---
+## [2026-05-12] Camelot CLI v701 hardening completed
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/camelot_cli.py
+  - pyproject.toml
+  - 03_VAULT/training/configs/tests/test_cloudbrain_sync_queue.py
+  - docs/plans/camelot-cloudbrain-v701
+- **Verification performed**:
+  - `Focused pytest passed: 10 passed`
+  - `awaken --quick reported AWAKEN GREEN required 5/5 optional 10/10`
+  - `cloudbrain config audit returned AUDIT_READY`
+  - `team self-test harness_droid returned PASSED; harness_codex remains TTY-bound in API shell`
+- **Tag**: [Omega_CLI_HARDENING]
+
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28414s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29014s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29614s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30214s tasks=4 fail=87085 probes=1/5 cells=6 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30814s tasks=4 fail=87085 probes=1/5 cells=6 |

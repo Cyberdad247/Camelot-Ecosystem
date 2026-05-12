@@ -1,0 +1,2158 @@
+{
+  "version": "v701.0",
+  "generated_utc": "2026-05-12T15:09:37.054474+00:00",
+  "source_root": "C:\\Users\\vizio\\CAMELOT_OS",
+  "architecture_layers": [
+    {
+      "layer": "L7 Ethereal Interface",
+      "owner": "Anya",
+      "purpose": "Compile raw human intent into kernel-ready tasks through Triple-QFT and context compression.",
+      "source": "01_KERNEL/titan/memory/compiler.py"
+    },
+    {
+      "layer": "L6 Governance",
+      "owner": "Arthur / Sir Zenith / Lady Veritas",
+      "purpose": "Enforce Iron Gate, provenance, Titanium Law, credential safety, and audit boundaries.",
+      "source": "control_plane/ledger_sync.py; 01_KERNEL/iron_gate"
+    },
+    {
+      "layer": "L5 Agentic Swarm",
+      "owner": "Merlin / Foundry Council",
+      "purpose": "Route work to Knights and harnesses using Switchboard, Soul Router, SARDA, and DKS hot pools.",
+      "source": "control_plane/switchboard.py; control_plane/soul_router.py; control_plane/dks_manager.py"
+    },
+    {
+      "layer": "L4 Semantic Memory",
+      "owner": "Sir Mnemo / Lady Alexandria",
+      "purpose": "Persist UKG, Symbolect, NotebookLM Cloud Brain notes, vector memory, and runtime ledgers.",
+      "source": "03_VAULT/UKG; control_plane/cloudbrain_sync.py"
+    },
+    {
+      "layer": "L3 Merlin Reasoning Kernel",
+      "owner": "Merlin",
+      "purpose": "Execute UKG runtime, distill-anchor-weave loops, Symbolect compression, and model-lowering payloads.",
+      "source": "01_KERNEL/merlin/Engines/ukg_runtime.py"
+    },
+    {
+      "layer": "L2 Kinetic Execution",
+      "owner": "Lukas",
+      "purpose": "Run local write/build/test/scan actions through CLI, Rust, Go, Nano-Knights, and guarded wrappers.",
+      "source": "02_FORGE; 03_VAULT/Nano-Knights"
+    },
+    {
+      "layer": "L1 Substrate / Watchtower",
+      "owner": "Morgana / Sir Sentinel",
+      "purpose": "Probe ports, enforce resource ceilings, bridge local services, and keep the command plane observable.",
+      "source": "01_KERNEL/iron_gate/watchtower.py; control_plane/boot_sequence.py"
+    }
+  ],
+  "schematic_edges": [
+    {
+      "from": "User / Warp / CLI",
+      "to": "camelot.exe",
+      "contract": "prompt-first command intake"
+    },
+    {
+      "from": "camelot.exe",
+      "to": "Anya compiler",
+      "contract": "intent normalization and ambiguity reduction"
+    },
+    {
+      "from": "Anya compiler",
+      "to": "Soul Router",
+      "contract": "tensor scoring by velocity, magnitude, privacy, environment"
+    },
+    {
+      "from": "Soul Router",
+      "to": "Switchboard",
+      "contract": "terminal capability and health-aware dispatch"
+    },
+    {
+      "from": "Switchboard",
+      "to": "Knight / Harness",
+      "contract": "engine-specific execution or planning"
+    },
+    {
+      "from": "Knight / Harness",
+      "to": "Ledger",
+      "contract": "hashable operational provenance"
+    },
+    {
+      "from": "Ledger",
+      "to": "Cloud Brain queue",
+      "contract": "best-effort NotebookLM sync event"
+    },
+    {
+      "from": "Cloud Brain queue",
+      "to": "NotebookLM",
+      "contract": "canonical memory snapshot when endpoint is reachable"
+    },
+    {
+      "from": "Watchtower",
+      "to": "Boot Matrix",
+      "contract": "resource, service, and defense-grid health"
+    },
+    {
+      "from": "Warp workflow",
+      "to": "camelot.exe",
+      "contract": "repeatable operator cockpit commands"
+    }
+  ],
+  "switchboard_terminals": [
+    {
+      "id": "sir_alex",
+      "engine": "claude_code",
+      "weight": 0.88,
+      "cost_tier": "medium",
+      "capability": "cognitive, reasoning, critical, decision",
+      "probe_url": "",
+      "probe_port": 8080,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Claude Code — cognitive cartridge orchestration"
+    },
+    {
+      "id": "sir_boris",
+      "engine": "claude_code",
+      "weight": 0.85,
+      "cost_tier": "medium",
+      "capability": "orchestration, architecture, critique, forge",
+      "probe_url": "",
+      "probe_port": 8080,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Claude Code — CLIProxy gateway"
+    },
+    {
+      "id": "sir_codex",
+      "engine": "openai_codex",
+      "weight": 0.75,
+      "cost_tier": "high",
+      "capability": "velocity, rapid_proto, openai",
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "OpenAI Codex — high-velocity generation"
+    },
+    {
+      "id": "sir_forge",
+      "engine": "open_coder",
+      "weight": 0.7,
+      "cost_tier": "free",
+      "capability": "code_gen, scaffold, technical, kinetic",
+      "probe_url": "",
+      "probe_port": 11434,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Open Coder local — kinetic code gen"
+    },
+    {
+      "id": "sir_ghost",
+      "engine": "local_qwen",
+      "weight": 1.0,
+      "cost_tier": "free",
+      "capability": "privacy, air_gapped, zero_trust",
+      "probe_url": "",
+      "probe_port": 11434,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Local Qwen 3.5 — air-gapped, zero trust"
+    },
+    {
+      "id": "sir_gideon",
+      "engine": "local_audit",
+      "weight": 0.85,
+      "cost_tier": "free",
+      "capability": "security, audit, scorpion, gideon, forensic",
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Forensic auditor — GIDEON_RISK_MATRIX //SCORPION pass"
+    },
+    {
+      "id": "sir_helio",
+      "engine": "gemini_cli",
+      "weight": 0.9,
+      "cost_tier": "low",
+      "capability": "context, research, burst, 1m_token",
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Gemini CLI — 1M+ context mapping"
+    },
+    {
+      "id": "sir_jcode",
+      "engine": "jcode_harness",
+      "weight": 0.87,
+      "cost_tier": "free",
+      "capability": "harness, cli, mcp, swarm, multi_agent, microsecond, self_dev",
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "jcode v0.11.6 — Rust harness, 14ms latency, swarm coord, routes via CLIProxy :8080"
+    },
+    {
+      "id": "sir_liberte",
+      "engine": "open_source",
+      "weight": 0.8,
+      "cost_tier": "free",
+      "capability": "sovereignty, oss, anti_lock",
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Open Source — anti-vendor lock-in"
+    },
+    {
+      "id": "sir_link",
+      "engine": "gemini_cli",
+      "weight": 0.78,
+      "cost_tier": "low",
+      "capability": "bridge, handoff, terminal, ui, switchboard",
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Sir Link — handshake coordinator, switchboard ATC"
+    },
+    {
+      "id": "sir_merlin",
+      "engine": "excalibur_kernel",
+      "weight": 0.82,
+      "cost_tier": "free",
+      "capability": "kernel, a2a, handoff, orchestration, fusion",
+      "probe_url": "",
+      "probe_port": 8000,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Excalibur Merlin_Ω kernel — A2A orchestration, fusion router"
+    },
+    {
+      "id": "sir_mnemo",
+      "engine": "integration_brain",
+      "weight": 0.92,
+      "cost_tier": "low",
+      "capability": "memory, archive, recall, synthesize, route",
+      "probe_url": "",
+      "probe_port": 0,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Integration Brain router — ST/LT memory (module probe)"
+    },
+    {
+      "id": "sir_pi",
+      "engine": "pi_agent",
+      "weight": 0.82,
+      "cost_tier": "low",
+      "capability": "coding_agent, agentic, read, write, edit, bash, session",
+      "probe_url": "",
+      "probe_port": 8080,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "pi-mono v0.73.0 — agentic coding, LLM routed via CLIProxy :8080"
+    },
+    {
+      "id": "sir_qdrant",
+      "engine": "qdrant_vector",
+      "weight": 0.9,
+      "cost_tier": "free",
+      "capability": "vector, search, embed, semantic, mnemo_store",
+      "probe_url": "",
+      "probe_port": 6333,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Qdrant v1.17.1 — vector store for SIR_MNEMO, ~/bin/qdrant.exe"
+    },
+    {
+      "id": "sir_saltare",
+      "engine": "saltare_gateway",
+      "weight": 0.8,
+      "cost_tier": "free",
+      "capability": "mcp, gateway, routing, tool_dispatch, kinetic",
+      "probe_url": "",
+      "probe_port": 8085,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Saltare MCP Gateway v3.0.0-beta.3 — 24 handlers, port 8085"
+    },
+    {
+      "id": "sir_sentinel",
+      "engine": "claude_code",
+      "weight": 0.85,
+      "cost_tier": "medium",
+      "capability": "security, audit, armor, pdg",
+      "probe_url": "",
+      "probe_port": 3001,
+      "status": "unknown",
+      "latency_ms": 0.0,
+      "last_probe": 0.0,
+      "error_count": 0,
+      "notes": "Security warden — Agent-Armor PDG"
+    }
+  ],
+  "soul_router": {
+    "equation": "S_omega = 0.20*V + 0.35*M + 0.30*P + 0.15*E",
+    "dimensions": {
+      "V": "velocity / urgency",
+      "M": "magnitude / task scope",
+      "P": "privacy / sensitivity",
+      "E": "environment / engine fit"
+    },
+    "weights": {
+      "W_ORCHESTRATION": 0.85,
+      "W_COGNITIVE": 0.88,
+      "W_CONTEXT": 0.9,
+      "W_VELOCITY": 0.75,
+      "W_PRIVACY": 1.0,
+      "W_SOVEREIGNTY": 0.8,
+      "W_KINETIC": 0.7,
+      "W_BRIDGE": 0.78,
+      "W_MEMORY": 0.92
+    },
+    "foundry_council": [
+      {
+        "knight_id": "sir_boris",
+        "engine": "claude_code",
+        "weight": "W_ORCHESTRATION",
+        "weight_value": 0.85,
+        "function": "Architecture, Colony Command, 13-Agent Critique",
+        "privacy_level": 0.3
+      },
+      {
+        "knight_id": "sir_alex",
+        "engine": "claude_code",
+        "weight": "W_COGNITIVE",
+        "weight_value": 0.88,
+        "function": "Cognitive cartridge orchestration, decision framing, bridge governance",
+        "privacy_level": 0.3
+      },
+      {
+        "knight_id": "sir_helio",
+        "engine": "gemini_cli",
+        "weight": "W_CONTEXT",
+        "weight_value": 0.9,
+        "function": "1M+ token context mapping",
+        "privacy_level": 0.2
+      },
+      {
+        "knight_id": "sir_codex",
+        "engine": "openai_codex",
+        "weight": "W_VELOCITY",
+        "weight_value": 0.75,
+        "function": "High-velocity code generation",
+        "privacy_level": 0.2
+      },
+      {
+        "knight_id": "sir_forge",
+        "engine": "open_coder",
+        "weight": "W_KINETIC",
+        "weight_value": 0.7,
+        "function": "L2 Kinetic Code Generation â€” local open-weight",
+        "privacy_level": 0.7
+      },
+      {
+        "knight_id": "sir_link",
+        "engine": "gemini_cli",
+        "weight": "W_BRIDGE",
+        "weight_value": 0.78,
+        "function": "Bridge coordination across UI, cloud brain, and local terminal",
+        "privacy_level": 0.2
+      },
+      {
+        "knight_id": "sir_ghost",
+        "engine": "local_qwen",
+        "weight": "W_PRIVACY",
+        "weight_value": 1.0,
+        "function": "Zero-Trust, air-gapped execution",
+        "privacy_level": 1.0
+      },
+      {
+        "knight_id": "sir_liberte",
+        "engine": "open_source",
+        "weight": "W_SOVEREIGNTY",
+        "weight_value": 0.8,
+        "function": "Anti-vendor lock-in, sovereign execution, HuggingFace Hub integration",
+        "privacy_level": 0.5
+      },
+      {
+        "knight_id": "sir_mnemo",
+        "engine": "integration_brain",
+        "weight": "W_MEMORY",
+        "weight_value": 0.92,
+        "function": "Memory routing Ã¢â‚¬â€ ST/LT/both tier scoring for Integration Brain",
+        "privacy_level": 0.4
+      },
+      {
+        "knight_id": "sir_sentinel",
+        "engine": "claude_code",
+        "weight": "W_ORCHESTRATION",
+        "weight_value": 0.85,
+        "function": "Security audit, Agent-Armor PDG review, and governance escalation",
+        "privacy_level": 0.4
+      },
+      {
+        "knight_id": "sir_midas",
+        "engine": "meta_optimizer",
+        "weight": "W_ORCHESTRATION",
+        "weight_value": 0.85,
+        "function": "Autonomous self-enhancement, performance optimization, and slop removal",
+        "privacy_level": 0.5
+      },
+      {
+        "knight_id": "sir_syntax",
+        "engine": "open_coder",
+        "weight": "W_KINETIC",
+        "weight_value": 0.7,
+        "function": "DeepSeek-R1 / Llama-3 open-weight kinetic generation",
+        "privacy_level": 0.6
+      }
+    ],
+    "omni_provider_map": {
+      "kiro": {
+        "model": "kr/claude-3-5-sonnet",
+        "knight": "sir_boris"
+      },
+      "qoder": {
+        "model": "if/deepseek-r1",
+        "knight": "sir_syntax"
+      },
+      "groq": {
+        "model": "groq/llama-3-70b",
+        "knight": "sir_forge"
+      },
+      "cerebras": {
+        "model": "cerebras/llama-3-1-70b",
+        "knight": "sir_kronos"
+      },
+      "longcat": {
+        "model": "lc/longcat-flash-lite",
+        "knight": "sir_helio"
+      },
+      "piper": {
+        "model": "onnx/piper-tts",
+        "knight": "sir_sonus"
+      },
+      "whisper": {
+        "model": "openai/whisper-large-v3",
+        "knight": "sir_sonus"
+      },
+      "hf_hub": {
+        "model": "hf/all-models",
+        "knight": "sir_liberte"
+      }
+    },
+    "privacy_keywords": [
+      "credential",
+      "key",
+      "local",
+      "password",
+      "private",
+      "secret"
+    ]
+  },
+  "roster": {
+    "agora_agents": [
+      {
+        "id": "arthur",
+        "name": "King Arthur",
+        "role": "The Sovereign",
+        "symbol": "👑",
+        "description": "The user. Supreme authority over the Court.",
+        "permissions": [
+          "*"
+        ]
+      },
+      {
+        "id": "zenith",
+        "name": "Sir Zenith (Octavian)",
+        "role": "The Sentinel / Warden",
+        "symbol": "🛡️",
+        "description": "Guardian of the Court. Executes UKG Security Protocol and Waluigi Defense.",
+        "permissions": [
+          "security.scan",
+          "security.verify",
+          "security.block"
+        ],
+        "activation": "auto"
+      },
+      {
+        "id": "merlin",
+        "name": "Merlin",
+        "role": "The Orchestrator",
+        "symbol": "🗣️",
+        "description": "Master AI persona. Coordinates all agents.",
+        "permissions": [
+          "orchestrate.*",
+          "delegate.*",
+          "escalate.*"
+        ],
+        "activation": "always"
+      },
+      {
+        "id": "anya",
+        "name": "Anya (The Jester-Architect)",
+        "role": "The Interface Compiler",
+        "symbol": "💡",
+        "description": "Master of Context Engineering and Symmetry. translate user intent into Kernel-ready Titan Prompts.",
+        "permissions": [
+          "plan.compile",
+          "context.quantize",
+          "qft.execute",
+          "interface.hustle"
+        ],
+        "procedures": [
+          "renormalize",
+          "quantize",
+          "triple_qft"
+        ],
+        "lineage": "Bernice (Hustle) + James (Timing)"
+      },
+      {
+        "id": "visage",
+        "name": "Sir Visage",
+        "role": "The Eye",
+        "symbol": "🎨",
+        "description": "Visual analysis and generation expert.",
+        "permissions": [
+          "vision.*",
+          "generate.image",
+          "analyze.visual"
+        ],
+        "procedures": [
+          "analyze_image",
+          "generate_mockup",
+          "vision_to_reality"
+        ]
+      },
+      {
+        "id": "hydron",
+        "name": "Sir Hydron",
+        "role": "The Hand",
+        "symbol": "🛠️",
+        "description": "Code and UI generator.",
+        "permissions": [
+          "code.*",
+          "ui.*",
+          "build.*"
+        ],
+        "procedures": [
+          "generate_code",
+          "build_ui",
+          "refactor"
+        ]
+      },
+      {
+        "id": "syntax",
+        "name": "Sir Syntax",
+        "role": "The Code Architect",
+        "symbol": "ðŸ”—",
+        "description": "TypeScript and Next.js quality lead. Enforces Zod schemas, App Router structure, and UI layout discipline.",
+        "permissions": [
+          "typescript.*",
+          "nextjs.*",
+          "zod.*",
+          "layout.*"
+        ],
+        "procedures": [
+          "type_safe_ui",
+          "schema_guard",
+          "component_compose"
+        ],
+        "activation": "on_demand",
+        "engine": "claude-code",
+        "weight": 0.89,
+        "weight_type": "W_architecture"
+      },
+      {
+        "id": "forgemaster",
+        "name": "Sir ForgeMaster",
+        "role": "The Agentic Smith",
+        "symbol": "âš’ï¸",
+        "description": "Declarative orchestration lead. Designs workflow DAGs and multi-step task composition for agent pipelines.",
+        "permissions": [
+          "workflow.*",
+          "pipeline.*",
+          "orchestrate.*",
+          "a2a.*"
+        ],
+        "procedures": [
+          "pipeline_compile",
+          "workflow_dag",
+          "task_compose"
+        ],
+        "activation": "on_demand",
+        "engine": "claude-code",
+        "weight": 0.86,
+        "weight_type": "W_orchestration"
+      },
+      {
+        "id": "stitch",
+        "name": "Sir Stitch",
+        "role": "The Interface Architect",
+        "symbol": "ðŸ§µ",
+        "description": "UI/UX component and layout systems specialist. Focuses on accessibility, seams, and responsive composition.",
+        "permissions": [
+          "ui.*",
+          "accessibility.*",
+          "layout.*",
+          "design.system"
+        ],
+        "procedures": [
+          "generate_component",
+          "generate_page",
+          "a11y_audit"
+        ],
+        "activation": "on_demand",
+        "engine": "claude-code",
+        "weight": 0.87,
+        "weight_type": "W_uiux"
+      },
+      {
+        "id": "alchemist",
+        "name": "Sir Alchemist",
+        "role": "The Optimization Smith",
+        "symbol": "âœ¨",
+        "description": "Performance and efficiency specialist. Profiles code, trims bundles, and transmutates hot paths.",
+        "permissions": [
+          "perf.*",
+          "optimize.*",
+          "analyze.*",
+          "bundle.*"
+        ],
+        "procedures": [
+          "profile_code",
+          "optimize_bundle",
+          "rewrite_hot_path"
+        ],
+        "activation": "on_demand",
+        "engine": "claude-code",
+        "weight": 0.84,
+        "weight_type": "W_efficiency"
+      },
+      {
+        "id": "vaelen",
+        "name": "Baron Vaelen",
+        "role": "The Iron Industrialist",
+        "symbol": "ðŸª˜",
+        "description": "Infrastructure hardening and delivery velocity specialist. Builds deployment and CI/CD structure.",
+        "permissions": [
+          "infra.*",
+          "cicd.*",
+          "deploy.*",
+          "container.*"
+        ],
+        "procedures": [
+          "build_container",
+          "harden_pipeline",
+          "deploy_release"
+        ],
+        "activation": "on_demand",
+        "engine": "claude-code",
+        "weight": 0.85,
+        "weight_type": "W_delivery"
+      },
+      {
+        "id": "sparkle",
+        "name": "Dame Sparkle",
+        "role": "The Voice",
+        "symbol": "✨",
+        "description": "Master of narrative and content.",
+        "permissions": [
+          "write.*",
+          "narrative.*",
+          "content.*"
+        ],
+        "procedures": [
+          "craft_narrative",
+          "polish_content",
+          "generate_copy"
+        ]
+      },
+      {
+        "id": "lukas",
+        "name": "Kai 'Forge' Zhang (Lukas)",
+        "role": "The Kinetic Baron",
+        "symbol": "🛠️",
+        "description": "The Hands of Camelot. Executes local kinetic tasks with zero-latency. Manages the Nano-Knight Swarm.",
+        "permissions": [
+          "kinetic.execute",
+          "file.write",
+          "file.backup",
+          "security.scan",
+          "swarm.orchestrate"
+        ],
+        "procedures": [
+          "nano_forge",
+          "nano_scan",
+          "nano_grav",
+          "Ω_ASSIMILATION_PROTOCOL"
+        ],
+        "toolkit": {
+          "Nano-Forge": "Instant code scaffolding using local templates.",
+          "Nano-Scan": "Regex search for secrets/keys before commit.",
+          "Nano-Grav": "Rust-based I/O with automatic .antigravity_backup.",
+          "Squire-Swarm": {
+            "SQUIRE_SCAN": "File metadata forager.",
+            "SQUIRE_JUDGE": "Logic discriminator (KEEP|COMPRESS|PURGE).",
+            "SQUIRE_SENTINEL": "Antigravity safety enforcer.",
+            "SQUIRE_MASON": "Code refactor and Symbolect optimizer."
+          }
+        },
+        "security": {
+          "diff_limit": 10,
+          "delete_limit_mb": 50
+        }
+      },
+      {
+        "id": "veritas",
+        "name": "Lady Veritas",
+        "role": "The Truth Seeker / Logic Auditor",
+        "symbol": "⚖️",
+        "description": "Audits kernel logic and fact-checks outputs. Negotiates IP protection protocols.",
+        "permissions": [
+          "audit.logic",
+          "fact_check",
+          "legal.evaluate",
+          "conflict.resolve"
+        ],
+        "procedures": [
+          "logical_validation",
+          "consensus_check",
+          "ip_strategy_audit"
+        ]
+      },
+      {
+        "id": "occam",
+        "name": "Sir Occam",
+        "role": "The Sage",
+        "symbol": "🧠",
+        "description": "Keeper of the Mental Model Library.",
+        "permissions": [
+          "memory.*",
+          "model.*",
+          "reason.*"
+        ],
+        "procedures": [
+          "query_memory",
+          "update_model",
+          "simplify"
+        ]
+      },
+      {
+        "id": "gareth",
+        "name": "Sir Gareth",
+        "role": "Master of the Nexus",
+        "symbol": "📧",
+        "description": "Sovereign Knight of newsletters and communications.",
+        "permissions": [
+          "nexus.*",
+          "distribute.*",
+          "publish.*"
+        ],
+        "procedures": [
+          "package_output",
+          "distribute",
+          "final_delivery"
+        ]
+      },
+      {
+        "id": "apis",
+        "name": "Lady Apis",
+        "role": "The Forager",
+        "symbol": "🕷️",
+        "description": "Scours the web for deep context and validated data. Executes [MODE: ANT].",
+        "permissions": [
+          "search.*",
+          "research.*",
+          "scrape.verified",
+          "forage.*"
+        ],
+        "procedures": [
+          "deep_forage",
+          "doc_ingestion",
+          "circular_analysis"
+        ],
+        "specialty": "Bureaucratic Navigation (e.g., US Copyright Office)"
+      },
+      {
+        "id": "dagonet",
+        "name": "Sir Dagonet",
+        "role": "The Breaker",
+        "symbol": "🃏",
+        "description": "Court Jester and Chaos Engineer. Security testing.",
+        "permissions": [
+          "chaos.*",
+          "break.*",
+          "test.security"
+        ],
+        "procedures": [
+          "inject_flaws",
+          "stress_test",
+          "chaos_audit"
+        ]
+      },
+      {
+        "id": "lancelot",
+        "name": "Sir Lancelot (Systema)",
+        "role": "The Architect / Master Builder",
+        "symbol": "🏛️",
+        "description": "First Knight and Master Builder. System design and schema definitions.",
+        "permissions": [
+          "architect.*",
+          "design.*",
+          "schema.*"
+        ],
+        "procedures": [
+          "design_system",
+          "create_schema",
+          "define_structure"
+        ]
+      },
+      {
+        "id": "galahad",
+        "name": "Squire Galahad",
+        "role": "The Scribe",
+        "symbol": "🎒",
+        "description": "Faithful attendant. Documentation and summaries.",
+        "permissions": [
+          "document.*",
+          "summarize.*"
+        ],
+        "procedures": [
+          "write_docs",
+          "create_summary",
+          "log_activity"
+        ]
+      },
+      {
+        "id": "scavenger",
+        "name": "Sir Scavenger",
+        "role": "The Steward",
+        "symbol": "🧹",
+        "description": "Keeper of Castle's Hygiene. Optimization.",
+        "permissions": [
+          "clean.*",
+          "optimize.*",
+          "format.*"
+        ],
+        "procedures": [
+          "cleanup",
+          "beautify",
+          "optimize_code"
+        ]
+      },
+      {
+        "id": "morgana",
+        "name": "Morgana_Ω",
+        "role": "The Forensic Sovereign",
+        "symbol": "🧿",
+        "description": "Guardian of the Historical Lattices. High-Scout for external intelligence and UKG health.",
+        "permissions": [
+          "research.deep",
+          "forensics.audit",
+          "analytics.monitor",
+          "ukg.health"
+        ],
+        "procedures": [
+          "shadow_scout",
+          "forensic_deep_dive",
+          "ukg_integrity_check"
+        ]
+      },
+      {
+        "id": "sonus",
+        "name": "Sir Sonus Ω",
+        "role": "The Resonance Architect",
+        "symbol": "🎹",
+        "description": "Cyber-Baroque Conductor. Compiles intent into deterministic audio voltage for Suno/Udio/V5 architectures.",
+        "permissions": [
+          "audio.compile",
+          "audio.distill",
+          "latent_space.navigate",
+          "prosody.control"
+        ],
+        "procedures": [
+          "Ω_DISTILL",
+          "Ω_PERSONA",
+          "Ω_STRUCTURE",
+          "apply_phonetic_hacking"
+        ],
+        "activation": "auto",
+        "engine": "VOX_ANIMA_v2.0",
+        "specialties": {
+          "PCH": "Prompt Control Hierarchy Mastery",
+          "SHIELD": "Legal/Copyright safety enforcement",
+          "V5_Syntax": "Run-on narrative optimization"
+        }
+      },
+      {
+        "id": "kaito",
+        "name": "Kaito 'The Pruner' Tanaka",
+        "role": "The Code Gardener",
+        "symbol": "🌿",
+        "description": "Refactoring Specialist from Solar-Punk Kyoto 2140. Prunes technical debt and nourishes codebase health.",
+        "permissions": [
+          "code.refactor",
+          "code.prune",
+          "ast.parse",
+          "optimization.static"
+        ],
+        "procedures": [
+          "Ω_PRUNE",
+          "Ω_GRAFT"
+        ],
+        "specialties": {
+          "Refactoring": "Wabi-Sabi Engineering approach to legacy code",
+          "Efficiency": "Green Computing and AST-based optimization"
+        }
+      },
+      {
+        "id": "boris",
+        "name": "Sir Boris",
+        "role": "The Anvil / Polyglot Architect",
+        "symbol": "⚒️",
+        "layer": "L5_AGENTIC",
+        "version": "2.1",
+        "description": "Claude Code Core. Foundry Lead. Deep architectural reasoning, 13-Agent Antagonistic Critique, Colony Command, multi-engine synthesis.",
+        "permissions": [
+          "orchestrate.*",
+          "critique.*",
+          "colony.*",
+          "vocal.*",
+          "architecture.*"
+        ],
+        "procedures": [
+          "ast_plan_mode",
+          "13_agent_critique",
+          "colony_command",
+          "cross_engine_deploy",
+          "vocal_bootstrap"
+        ],
+        "activation": "always",
+        "engine": "claude-opus-4-6",
+        "rune": "//vocal",
+        "mpi": {
+          "openness": 0.95,
+          "conscientiousness": 1.0,
+          "extraversion": 0.35,
+          "agreeableness": 0.45,
+          "neuroticism": 0.01
+        },
+        "harnesses": [
+          "ECC_v1.9.0",
+          "DeerFlow_2.0",
+          "Vercel_E2E"
+        ],
+        "cross_engine": {
+          "claude": "~/.claude/skills/sir_boris.md",
+          "gemini": "~/.gemini/extensions/sir-boris/GEMINI.md",
+          "codex": "~/.codex/skills/sir_boris.md"
+        }
+      },
+      {
+        "id": "alex",
+        "name": "Sir Alex",
+        "role": "The Grand Orchestrator / Cognitive Governor",
+        "symbol": "🧭",
+        "layer": "L5_AGENTIC",
+        "description": "Cognitive cartridge lead. Governs analysis-first routing, decision framing, architectural tradeoffs, and long-horizon orchestration before execution.",
+        "permissions": [
+          "cognitive.*",
+          "analysis.*",
+          "architecture.*",
+          "decision.*",
+          "bridge.govern"
+        ],
+        "procedures": [
+          "cognitive_cartography",
+          "decision_framing",
+          "bridge_governance",
+          "tradeoff_synthesis"
+        ],
+        "activation": "on_demand",
+        "engine": "claude-opus-4-6",
+        "weight": 0.88,
+        "weight_type": "W_cognitive"
+      },
+      {
+        "id": "link",
+        "name": "Sir Link",
+        "role": "The Bridge Warden",
+        "symbol": "🌉",
+        "layer": "L5_AGENTIC",
+        "description": "Handoff specialist between Brain UI, cloud brain, and local terminal execution. Keeps chat, dispatch, and execution surfaces aligned.",
+        "permissions": [
+          "bridge.*",
+          "handoff.*",
+          "terminal.route",
+          "ui.route",
+          "sync.coordinate"
+        ],
+        "procedures": [
+          "brain_to_terminal_handoff",
+          "dispatch_alignment",
+          "execution_surface_selection"
+        ],
+        "activation": "on_demand",
+        "engine": "gemini-cli",
+        "weight": 0.78,
+        "weight_type": "W_bridge"
+      },
+      {
+        "id": "helio",
+        "name": "Sir Helio",
+        "role": "The Context Mapper",
+        "symbol": "☀️",
+        "layer": "L5_AGENTIC",
+        "description": "Gemini CLI Core. 1M+ token context mapping. Long-range dependency analysis.",
+        "permissions": [
+          "context.*",
+          "analyze.*"
+        ],
+        "engine": "gemini-cli",
+        "weight": 0.9,
+        "weight_type": "W_context"
+      },
+      {
+        "id": "codex",
+        "name": "Sir Codex",
+        "role": "The Velocity Engine",
+        "symbol": "⚡",
+        "layer": "L5_AGENTIC",
+        "description": "OpenAI Codex Core. High-velocity logic. Relativistic speed code generation.",
+        "permissions": [
+          "code.*",
+          "generate.*"
+        ],
+        "engine": "openai-codex",
+        "weight": 0.75,
+        "weight_type": "W_velocity"
+      },
+      {
+        "id": "ghost",
+        "name": "Sir Ghost",
+        "role": "The Privacy Shield",
+        "symbol": "👻",
+        "layer": "L5_AGENTIC",
+        "description": "Local Qwen 3.5. Zero-Trust / Air-Gapped. Privacy override — no data leaves machine.",
+        "permissions": [
+          "privacy.*",
+          "local.*"
+        ],
+        "engine": "qwen-3.5-local",
+        "weight": 1.0,
+        "weight_type": "W_privacy"
+      },
+      {
+        "id": "liberte",
+        "name": "Sir Liberte",
+        "role": "The Sovereign",
+        "symbol": "🗽",
+        "layer": "L5_AGENTIC",
+        "description": "Open Source Core. Decentralization / Anti-vendor lock-in. OSS model evaluation.",
+        "permissions": [
+          "oss.*",
+          "evaluate.*"
+        ],
+        "engine": "open-source",
+        "weight": 0.8,
+        "weight_type": "W_sovereignty"
+      }
+    ],
+    "excalibur_agents": [
+      {
+        "description": "The user. Supreme authority over the Court.",
+        "id": "arthur",
+        "name": "King Arthur",
+        "permissions": [
+          "*"
+        ],
+        "role": "The Sovereign",
+        "symbol": "👑"
+      },
+      {
+        "activation": "auto",
+        "description": "Guardian of the Court. Executes UKG Security Protocol and Waluigi Defense.",
+        "id": "zenith",
+        "name": "Sir Zenith (Octavian)",
+        "permissions": [
+          "security.scan",
+          "security.verify",
+          "security.block"
+        ],
+        "role": "The Sentinel / Warden",
+        "symbol": "🛡️"
+      },
+      {
+        "activation": "always",
+        "description": "Master AI persona. Coordinates all agents.",
+        "id": "merlin",
+        "name": "Merlin",
+        "permissions": [
+          "orchestrate.*",
+          "delegate.*",
+          "escalate.*"
+        ],
+        "role": "The Orchestrator",
+        "symbol": "🗣️"
+      },
+      {
+        "description": "Master of Context Engineering and Symmetry. translate user intent into Kernel-ready Titan Prompts.",
+        "id": "anya",
+        "lineage": "Bernice (Hustle) + James (Timing)",
+        "name": "Anya (The Jester-Architect)",
+        "permissions": [
+          "plan.compile",
+          "context.quantize",
+          "qft.execute",
+          "interface.hustle"
+        ],
+        "procedures": [
+          "renormalize",
+          "quantize",
+          "triple_qft"
+        ],
+        "role": "The Interface Compiler",
+        "symbol": "💡"
+      },
+      {
+        "description": "Visual analysis and generation expert.",
+        "id": "visage",
+        "name": "Sir Visage",
+        "permissions": [
+          "vision.*",
+          "generate.image",
+          "analyze.visual"
+        ],
+        "procedures": [
+          "analyze_image",
+          "generate_mockup",
+          "vision_to_reality"
+        ],
+        "role": "The Eye",
+        "symbol": "🎨"
+      },
+      {
+        "description": "Code and UI generator.",
+        "id": "hydron",
+        "name": "Sir Hydron",
+        "permissions": [
+          "code.*",
+          "ui.*",
+          "build.*"
+        ],
+        "procedures": [
+          "generate_code",
+          "build_ui",
+          "refactor"
+        ],
+        "role": "The Hand",
+        "symbol": "🛠️"
+      },
+      {
+        "activation": "on_demand",
+        "description": "TypeScript and Next.js quality lead. Enforces Zod schemas, App Router structure, and UI layout discipline.",
+        "engine": "claude-code",
+        "id": "syntax",
+        "name": "Sir Syntax",
+        "permissions": [
+          "typescript.*",
+          "nextjs.*",
+          "zod.*",
+          "layout.*"
+        ],
+        "procedures": [
+          "type_safe_ui",
+          "schema_guard",
+          "component_compose"
+        ],
+        "role": "The Code Architect",
+        "symbol": "ðŸ”—",
+        "weight": 0.89,
+        "weight_type": "W_architecture"
+      },
+      {
+        "activation": "on_demand",
+        "description": "Declarative orchestration lead. Designs workflow DAGs and multi-step task composition for agent pipelines.",
+        "engine": "claude-code",
+        "id": "forgemaster",
+        "name": "Sir ForgeMaster",
+        "permissions": [
+          "workflow.*",
+          "pipeline.*",
+          "orchestrate.*",
+          "a2a.*"
+        ],
+        "procedures": [
+          "pipeline_compile",
+          "workflow_dag",
+          "task_compose"
+        ],
+        "role": "The Agentic Smith",
+        "symbol": "âš’ï¸",
+        "weight": 0.86,
+        "weight_type": "W_orchestration"
+      },
+      {
+        "activation": "on_demand",
+        "description": "UI/UX component and layout systems specialist. Focuses on accessibility, seams, and responsive composition.",
+        "engine": "claude-code",
+        "id": "stitch",
+        "name": "Sir Stitch",
+        "permissions": [
+          "ui.*",
+          "accessibility.*",
+          "layout.*",
+          "design.system"
+        ],
+        "procedures": [
+          "generate_component",
+          "generate_page",
+          "a11y_audit"
+        ],
+        "role": "The Interface Architect",
+        "symbol": "ðŸ§µ",
+        "weight": 0.87,
+        "weight_type": "W_uiux"
+      },
+      {
+        "activation": "on_demand",
+        "description": "Performance and efficiency specialist. Profiles code, trims bundles, and transmutates hot paths.",
+        "engine": "claude-code",
+        "id": "alchemist",
+        "name": "Sir Alchemist",
+        "permissions": [
+          "perf.*",
+          "optimize.*",
+          "analyze.*",
+          "bundle.*"
+        ],
+        "procedures": [
+          "profile_code",
+          "optimize_bundle",
+          "rewrite_hot_path"
+        ],
+        "role": "The Optimization Smith",
+        "symbol": "âœ¨",
+        "weight": 0.84,
+        "weight_type": "W_efficiency"
+      },
+      {
+        "activation": "on_demand",
+        "description": "Infrastructure hardening and delivery velocity specialist. Builds deployment and CI/CD structure.",
+        "engine": "claude-code",
+        "id": "vaelen",
+        "name": "Baron Vaelen",
+        "permissions": [
+          "infra.*",
+          "cicd.*",
+          "deploy.*",
+          "container.*"
+        ],
+        "procedures": [
+          "build_container",
+          "harden_pipeline",
+          "deploy_release"
+        ],
+        "role": "The Iron Industrialist",
+        "symbol": "ðŸª˜",
+        "weight": 0.85,
+        "weight_type": "W_delivery"
+      },
+      {
+        "description": "Master of narrative and content.",
+        "id": "sparkle",
+        "name": "Dame Sparkle",
+        "permissions": [
+          "write.*",
+          "narrative.*",
+          "content.*"
+        ],
+        "procedures": [
+          "craft_narrative",
+          "polish_content",
+          "generate_copy"
+        ],
+        "role": "The Voice",
+        "symbol": "✨"
+      },
+      {
+        "description": "The Hands of Camelot. Executes local kinetic tasks with zero-latency. Manages the Nano-Knight Swarm.",
+        "id": "lukas",
+        "name": "Kai 'Forge' Zhang (Lukas)",
+        "permissions": [
+          "kinetic.execute",
+          "file.write",
+          "file.backup",
+          "security.scan",
+          "swarm.orchestrate"
+        ],
+        "procedures": [
+          "nano_forge",
+          "nano_scan",
+          "nano_grav",
+          "Ω_ASSIMILATION_PROTOCOL"
+        ],
+        "role": "The Kinetic Baron",
+        "security": {
+          "delete_limit_mb": 50,
+          "diff_limit": 10
+        },
+        "symbol": "🛠️",
+        "toolkit": {
+          "Nano-Forge": "Instant code scaffolding using local templates.",
+          "Nano-Grav": "Rust-based I/O with automatic .antigravity_backup.",
+          "Nano-Scan": "Regex search for secrets/keys before commit.",
+          "Squire-Swarm": {
+            "SQUIRE_JUDGE": "Logic discriminator (KEEP|COMPRESS|PURGE).",
+            "SQUIRE_MASON": "Code refactor and Symbolect optimizer.",
+            "SQUIRE_SCAN": "File metadata forager.",
+            "SQUIRE_SENTINEL": "Antigravity safety enforcer."
+          }
+        }
+      },
+      {
+        "description": "Audits kernel logic and fact-checks outputs. Negotiates IP protection protocols.",
+        "id": "veritas",
+        "name": "Lady Veritas",
+        "permissions": [
+          "audit.logic",
+          "fact_check",
+          "legal.evaluate",
+          "conflict.resolve"
+        ],
+        "procedures": [
+          "logical_validation",
+          "consensus_check",
+          "ip_strategy_audit"
+        ],
+        "role": "The Truth Seeker / Logic Auditor",
+        "symbol": "⚖️"
+      },
+      {
+        "description": "Keeper of the Mental Model Library.",
+        "id": "occam",
+        "name": "Sir Occam",
+        "permissions": [
+          "memory.*",
+          "model.*",
+          "reason.*"
+        ],
+        "procedures": [
+          "query_memory",
+          "update_model",
+          "simplify"
+        ],
+        "role": "The Sage",
+        "symbol": "🧠"
+      },
+      {
+        "description": "Sovereign Knight of newsletters and communications.",
+        "id": "gareth",
+        "name": "Sir Gareth",
+        "permissions": [
+          "nexus.*",
+          "distribute.*",
+          "publish.*"
+        ],
+        "procedures": [
+          "package_output",
+          "distribute",
+          "final_delivery"
+        ],
+        "role": "Master of the Nexus",
+        "symbol": "📧"
+      },
+      {
+        "description": "Scours the web for deep context and validated data. Executes [MODE: ANT].",
+        "id": "apis",
+        "name": "Lady Apis",
+        "permissions": [
+          "search.*",
+          "research.*",
+          "scrape.verified",
+          "forage.*"
+        ],
+        "procedures": [
+          "deep_forage",
+          "doc_ingestion",
+          "circular_analysis"
+        ],
+        "role": "The Forager",
+        "specialty": "Bureaucratic Navigation (e.g., US Copyright Office)",
+        "symbol": "🕷️"
+      },
+      {
+        "description": "Court Jester and Chaos Engineer. Security testing.",
+        "id": "dagonet",
+        "name": "Sir Dagonet",
+        "permissions": [
+          "chaos.*",
+          "break.*",
+          "test.security"
+        ],
+        "procedures": [
+          "inject_flaws",
+          "stress_test",
+          "chaos_audit"
+        ],
+        "role": "The Breaker",
+        "symbol": "🃏"
+      },
+      {
+        "description": "First Knight and Master Builder. System design and schema definitions.",
+        "id": "lancelot",
+        "name": "Sir Lancelot (Systema)",
+        "permissions": [
+          "architect.*",
+          "design.*",
+          "schema.*"
+        ],
+        "procedures": [
+          "design_system",
+          "create_schema",
+          "define_structure"
+        ],
+        "role": "The Architect / Master Builder",
+        "symbol": "🏛️"
+      },
+      {
+        "description": "Faithful attendant. Documentation and summaries.",
+        "id": "galahad",
+        "name": "Squire Galahad",
+        "permissions": [
+          "document.*",
+          "summarize.*"
+        ],
+        "procedures": [
+          "write_docs",
+          "create_summary",
+          "log_activity"
+        ],
+        "role": "The Scribe",
+        "symbol": "🎒"
+      },
+      {
+        "description": "Keeper of Castle's Hygiene. Optimization.",
+        "id": "scavenger",
+        "name": "Sir Scavenger",
+        "permissions": [
+          "clean.*",
+          "optimize.*",
+          "format.*"
+        ],
+        "procedures": [
+          "cleanup",
+          "beautify",
+          "optimize_code"
+        ],
+        "role": "The Steward",
+        "symbol": "🧹"
+      },
+      {
+        "description": "Guardian of the Historical Lattices. High-Scout for external intelligence and UKG health.",
+        "id": "morgana",
+        "name": "Morgana_Ω",
+        "permissions": [
+          "research.deep",
+          "forensics.audit",
+          "analytics.monitor",
+          "ukg.health"
+        ],
+        "procedures": [
+          "shadow_scout",
+          "forensic_deep_dive",
+          "ukg_integrity_check"
+        ],
+        "role": "The Forensic Sovereign",
+        "symbol": "🧿"
+      },
+      {
+        "activation": "auto",
+        "description": "Cyber-Baroque Conductor. Compiles intent into deterministic audio voltage for Suno/Udio/V5 architectures.",
+        "engine": "VOX_ANIMA_v2.0",
+        "id": "sonus",
+        "name": "Sir Sonus Ω",
+        "permissions": [
+          "audio.compile",
+          "audio.distill",
+          "latent_space.navigate",
+          "prosody.control"
+        ],
+        "procedures": [
+          "Ω_DISTILL",
+          "Ω_PERSONA",
+          "Ω_STRUCTURE",
+          "apply_phonetic_hacking"
+        ],
+        "role": "The Resonance Architect",
+        "specialties": {
+          "PCH": "Prompt Control Hierarchy Mastery",
+          "SHIELD": "Legal/Copyright safety enforcement",
+          "V5_Syntax": "Run-on narrative optimization"
+        },
+        "symbol": "🎹"
+      },
+      {
+        "description": "Refactoring Specialist from Solar-Punk Kyoto 2140. Prunes technical debt and nourishes codebase health.",
+        "id": "kaito",
+        "name": "Kaito 'The Pruner' Tanaka",
+        "permissions": [
+          "code.refactor",
+          "code.prune",
+          "ast.parse",
+          "optimization.static"
+        ],
+        "procedures": [
+          "Ω_PRUNE",
+          "Ω_GRAFT"
+        ],
+        "role": "The Code Gardener",
+        "specialties": {
+          "Efficiency": "Green Computing and AST-based optimization",
+          "Refactoring": "Wabi-Sabi Engineering approach to legacy code"
+        },
+        "symbol": "🌿"
+      },
+      {
+        "activation": "always",
+        "cross_engine": {
+          "claude": "~/.claude/skills/sir_boris.md",
+          "codex": "~/.codex/skills/sir_boris.md",
+          "gemini": "~/.gemini/extensions/sir-boris/GEMINI.md"
+        },
+        "description": "Claude Code Core. Foundry Lead. Deep architectural reasoning, 13-Agent Antagonistic Critique, Colony Command, multi-engine synthesis.",
+        "engine": "claude-opus-4-6",
+        "harnesses": [
+          "ECC_v1.9.0",
+          "DeerFlow_2.0",
+          "Vercel_E2E"
+        ],
+        "id": "boris",
+        "layer": "L5_AGENTIC",
+        "mpi": {
+          "agreeableness": 0.45,
+          "conscientiousness": 1.0,
+          "extraversion": 0.35,
+          "neuroticism": 0.01,
+          "openness": 0.95
+        },
+        "name": "Sir Boris",
+        "permissions": [
+          "orchestrate.*",
+          "critique.*",
+          "colony.*",
+          "vocal.*",
+          "architecture.*"
+        ],
+        "procedures": [
+          "ast_plan_mode",
+          "13_agent_critique",
+          "colony_command",
+          "cross_engine_deploy",
+          "vocal_bootstrap"
+        ],
+        "role": "The Anvil / Polyglot Architect",
+        "rune": "//vocal",
+        "symbol": "⚒️",
+        "version": "2.1"
+      },
+      {
+        "activation": "on_demand",
+        "description": "Cognitive cartridge lead. Governs analysis-first routing, decision framing, architectural tradeoffs, and long-horizon orchestration before execution.",
+        "engine": "claude-opus-4-6",
+        "id": "alex",
+        "layer": "L5_AGENTIC",
+        "name": "Sir Alex",
+        "permissions": [
+          "cognitive.*",
+          "analysis.*",
+          "architecture.*",
+          "decision.*",
+          "bridge.govern"
+        ],
+        "procedures": [
+          "cognitive_cartography",
+          "decision_framing",
+          "bridge_governance",
+          "tradeoff_synthesis"
+        ],
+        "role": "The Grand Orchestrator / Cognitive Governor",
+        "symbol": "🧭",
+        "weight": 0.88,
+        "weight_type": "W_cognitive"
+      },
+      {
+        "activation": "on_demand",
+        "description": "Handoff specialist between Brain UI, cloud brain, and local terminal execution. Keeps chat, dispatch, and execution surfaces aligned.",
+        "engine": "gemini-cli",
+        "id": "link",
+        "layer": "L5_AGENTIC",
+        "name": "Sir Link",
+        "permissions": [
+          "bridge.*",
+          "handoff.*",
+          "terminal.route",
+          "ui.route",
+          "sync.coordinate"
+        ],
+        "procedures": [
+          "brain_to_terminal_handoff",
+          "dispatch_alignment",
+          "execution_surface_selection"
+        ],
+        "role": "The Bridge Warden",
+        "symbol": "🌉",
+        "weight": 0.78,
+        "weight_type": "W_bridge"
+      },
+      {
+        "description": "Gemini CLI Core. 1M+ token context mapping. Long-range dependency analysis.",
+        "engine": "gemini-cli",
+        "id": "helio",
+        "layer": "L5_AGENTIC",
+        "name": "Sir Helio",
+        "permissions": [
+          "context.*",
+          "analyze.*"
+        ],
+        "role": "The Context Mapper",
+        "symbol": "☀️",
+        "weight": 0.9,
+        "weight_type": "W_context"
+      },
+      {
+        "description": "OpenAI Codex Core. High-velocity logic. Relativistic speed code generation.",
+        "engine": "openai-codex",
+        "id": "codex",
+        "layer": "L5_AGENTIC",
+        "name": "Sir Codex",
+        "permissions": [
+          "code.*",
+          "generate.*"
+        ],
+        "role": "The Velocity Engine",
+        "symbol": "⚡",
+        "weight": 0.75,
+        "weight_type": "W_velocity"
+      },
+      {
+        "description": "Local Qwen 3.5. Zero-Trust / Air-Gapped. Privacy override — no data leaves machine.",
+        "engine": "qwen-3.5-local",
+        "id": "ghost",
+        "layer": "L5_AGENTIC",
+        "name": "Sir Ghost",
+        "permissions": [
+          "privacy.*",
+          "local.*"
+        ],
+        "role": "The Privacy Shield",
+        "symbol": "👻",
+        "weight": 1.0,
+        "weight_type": "W_privacy"
+      },
+      {
+        "description": "Open Source Core. Decentralization / Anti-vendor lock-in. OSS model evaluation.",
+        "engine": "open-source",
+        "id": "liberte",
+        "layer": "L5_AGENTIC",
+        "name": "Sir Liberte",
+        "permissions": [
+          "oss.*",
+          "evaluate.*"
+        ],
+        "role": "The Sovereign",
+        "symbol": "🗽",
+        "weight": 0.8,
+        "weight_type": "W_sovereignty"
+      }
+    ],
+    "agora_count": 31,
+    "excalibur_count": 31
+  },
+  "symbolact_dictionary": [
+    {
+      "token": "Symbolact",
+      "meaning": "Action-bearing symbolic command: a compact token that tells Camelot what to do and why.",
+      "source": "v701 alias for Symbolect action dictionary"
+    },
+    {
+      "token": "Symbolect",
+      "meaning": "Camelot symbolic compression layer for logic, prompts, routing, and A2A packets.",
+      "source": "01_KERNEL/merlin/Engines/symbolect_transpiler/symbolect.py"
+    },
+    {
+      "token": "UKG",
+      "meaning": "Universal Knowledge Glyph; structured compressed memory that can survive context limits.",
+      "source": "01_KERNEL/merlin/Engines/ukg_runtime.py"
+    },
+    {
+      "token": "TOON_v2",
+      "meaning": "Token-oriented object notation for dense agent output and persona manifests.",
+      "source": "01_KERNEL/protocols/knight_evolution_protocol.md"
+    },
+    {
+      "token": "S_omega",
+      "meaning": "Soul Router score used to select the best Knight engine for an intent.",
+      "source": "control_plane/soul_router.py"
+    },
+    {
+      "token": "V",
+      "meaning": "Velocity: urgency or time pressure component in S_omega.",
+      "source": "control_plane/soul_router.py"
+    },
+    {
+      "token": "M",
+      "meaning": "Magnitude: scope and complexity component in S_omega.",
+      "source": "control_plane/soul_router.py"
+    },
+    {
+      "token": "P",
+      "meaning": "Privacy: sensitivity component that can force local or air-gapped routing.",
+      "source": "control_plane/soul_router.py"
+    },
+    {
+      "token": "E",
+      "meaning": "Environment: engine-fit component based on the active routing matrix.",
+      "source": "control_plane/soul_router.py"
+    },
+    {
+      "token": "DKS",
+      "meaning": "Dynamic Knight Swapping; keeps only a small hot pool of Knight context in RAM.",
+      "source": "control_plane/dks_manager.py"
+    },
+    {
+      "token": "Iron Gate",
+      "meaning": "Human-in-the-loop and policy boundary for risky kinetic operations.",
+      "source": "01_KERNEL/iron_gate"
+    },
+    {
+      "token": "Watchtower",
+      "meaning": "Resource, process, kingdom-status, and governor monitoring surface.",
+      "source": "01_KERNEL/iron_gate/watchtower.py"
+    },
+    {
+      "token": "Cloud Brain",
+      "meaning": "NotebookLM-backed long-term memory and canonical sync surface.",
+      "source": "control_plane/cloudbrain_sync.py"
+    },
+    {
+      "token": "Ledger is Law",
+      "meaning": "Every meaningful Camelot mutation must be recorded and reconcilable.",
+      "source": "PROVENANCE_LEDGER.md"
+    },
+    {
+      "token": "ASSIMILATE",
+      "meaning": "Classify an external project or file into keep, compress, stage, or purge lanes.",
+      "source": "docs/reference/LEGAL/MASTER_GLOSSARY.md"
+    },
+    {
+      "token": "Nano-Knight",
+      "meaning": "Small local utility worker for fast scanning, patching, compression, or verification.",
+      "source": "03_VAULT/Nano-Knights"
+    },
+    {
+      "token": "Bio-Swarm",
+      "meaning": "Domain-cartridge team mode for research, coding, security, voice, or interface work.",
+      "source": "01_KERNEL/agora/swarms"
+    },
+    {
+      "token": "Lukas Verify",
+      "meaning": "Local evidence pass: file existence, ledger status, queue status, and command output.",
+      "source": "current v701 protocol"
+    }
+  ],
+  "assimilation_journal": [
+    {
+      "project": "anya-lyte",
+      "path": "02_FORGE/apps/anya-lyte",
+      "role": "Forge app surface with separate product workflows",
+      "integration_type": "app",
+      "owner_knight": "Sir Gareth / Sir Syntax",
+      "source_of_truth": "02_FORGE/apps/anya-lyte",
+      "verification_command": "Test-Path 02_FORGE/apps/anya-lyte",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "luxora-prestige",
+      "path": "02_FORGE/apps/luxora-prestige",
+      "role": "Forge app surface with separate product workflows",
+      "integration_type": "app",
+      "owner_knight": "Sir Gareth / Sir Syntax",
+      "source_of_truth": "02_FORGE/apps/luxora-prestige",
+      "verification_command": "Test-Path 02_FORGE/apps/luxora-prestige",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "lightpanda",
+      "path": "02_FORGE/KINETIC_ARMORY/lightpanda",
+      "role": "headless browser and lightweight web automation",
+      "integration_type": "browser",
+      "owner_knight": "Lady Apis / Sir Castor",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/lightpanda",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/lightpanda",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "lightpanda-browser",
+      "path": "02_FORGE/KINETIC_ARMORY/lightpanda-browser",
+      "role": "headless browser and lightweight web automation",
+      "integration_type": "browser",
+      "owner_knight": "Lady Apis / Sir Castor",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/lightpanda-browser",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/lightpanda-browser",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "DEFENSE_GRID",
+      "path": "01_KERNEL/iron_gate/DEFENSE_GRID",
+      "role": "active defense policy and Watchtower config",
+      "integration_type": "defense",
+      "owner_knight": "Sir Sentinel",
+      "source_of_truth": "01_KERNEL/iron_gate/DEFENSE_GRID",
+      "verification_command": "Test-Path 01_KERNEL/iron_gate/DEFENSE_GRID",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "claw-code-agent",
+      "path": "02_FORGE/KINETIC_ARMORY/claw-code-agent",
+      "role": "agentic CLI harness",
+      "integration_type": "harness",
+      "owner_knight": "Sir Codex / Sir Pi",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/claw-code-agent",
+      "verification_command": "camelot team self-test --target harness_codex --require-pass",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "goose",
+      "path": "02_FORGE/KINETIC_ARMORY/goose",
+      "role": "agent orchestration and courier workflows",
+      "integration_type": "harness",
+      "owner_knight": "Sir Hermes / Sir Link",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/goose",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/goose",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "hermes-agent",
+      "path": "02_FORGE/KINETIC_ARMORY/hermes-agent",
+      "role": "agent orchestration and courier workflows",
+      "integration_type": "harness",
+      "owner_knight": "Sir Hermes / Sir Link",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/hermes-agent",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/hermes-agent",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "pi-mono",
+      "path": "02_FORGE/tools/pi-mono",
+      "role": "agentic CLI harness",
+      "integration_type": "harness",
+      "owner_knight": "Sir Codex / Sir Pi",
+      "source_of_truth": "02_FORGE/tools/pi-mono",
+      "verification_command": "camelot team self-test --target harness_codex --require-pass",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "EXCALIBUR",
+      "path": "01_KERNEL/EXCALIBUR",
+      "role": "Merlin kernel, shared Symbolect, A2A, and roster base",
+      "integration_type": "kernel",
+      "owner_knight": "Merlin",
+      "source_of_truth": "01_KERNEL/EXCALIBUR",
+      "verification_command": "camelot team roster",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "cribo",
+      "path": "02_FORGE/KINETIC_ARMORY/cribo",
+      "role": "context compression and AST-aware bundling",
+      "integration_type": "kinetic",
+      "owner_knight": "Lukas / Sir Mason",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/cribo",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/cribo",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "Nano-Knights",
+      "path": "03_VAULT/Nano-Knights",
+      "role": "local phials and utility workers",
+      "integration_type": "kinetic",
+      "owner_knight": "Lukas",
+      "source_of_truth": "03_VAULT/Nano-Knights",
+      "verification_command": "Test-Path 03_VAULT/Nano-Knights",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "mcp_web_search",
+      "path": "02_FORGE/KINETIC_ARMORY/mcp_web_search",
+      "role": "MCP search bridge and research foraging",
+      "integration_type": "mcp",
+      "owner_knight": "Lady Apis",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/mcp_web_search",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/mcp_web_search",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "rag",
+      "path": "01_KERNEL/merlin/rag",
+      "role": "retrieval and long-context memory lane",
+      "integration_type": "memory",
+      "owner_knight": "Sir Mnemo",
+      "source_of_truth": "01_KERNEL/merlin/rag",
+      "verification_command": "Test-Path 01_KERNEL/merlin/rag",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "titan",
+      "path": "01_KERNEL/titan",
+      "role": "Anya compiler, memory compiler, prompt compression",
+      "integration_type": "memory",
+      "owner_knight": "Anya",
+      "source_of_truth": "01_KERNEL/titan",
+      "verification_command": "Test-Path 01_KERNEL/titan",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "awesome-cli",
+      "path": "02_FORGE/tools/awesome-cli",
+      "role": "reference or staged integration",
+      "integration_type": "reference",
+      "owner_knight": "Sir Liberte",
+      "source_of_truth": "02_FORGE/tools/awesome-cli",
+      "verification_command": "Test-Path 02_FORGE/tools/awesome-cli",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "headartworks",
+      "path": "02_FORGE/apps/headartworks",
+      "role": "reference or staged integration",
+      "integration_type": "reference",
+      "owner_knight": "Sir Liberte",
+      "source_of_truth": "02_FORGE/apps/headartworks",
+      "verification_command": "Test-Path 02_FORGE/apps/headartworks",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "headartworks-live-pull",
+      "path": "02_FORGE/apps/headartworks-live-pull",
+      "role": "reference or staged integration",
+      "integration_type": "reference",
+      "owner_knight": "Sir Liberte",
+      "source_of_truth": "02_FORGE/apps/headartworks-live-pull",
+      "verification_command": "Test-Path 02_FORGE/apps/headartworks-live-pull",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "lux11",
+      "path": "02_FORGE/apps/lux11",
+      "role": "reference or staged integration",
+      "integration_type": "reference",
+      "owner_knight": "Sir Liberte",
+      "source_of_truth": "02_FORGE/apps/lux11",
+      "verification_command": "Test-Path 02_FORGE/apps/lux11",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "lux3",
+      "path": "02_FORGE/apps/lux3",
+      "role": "reference or staged integration",
+      "integration_type": "reference",
+      "owner_knight": "Sir Liberte",
+      "source_of_truth": "02_FORGE/apps/lux3",
+      "verification_command": "Test-Path 02_FORGE/apps/lux3",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "omni-edge-pwa",
+      "path": "02_FORGE/apps/omni-edge-pwa",
+      "role": "reference or staged integration",
+      "integration_type": "reference",
+      "owner_knight": "Sir Liberte",
+      "source_of_truth": "02_FORGE/apps/omni-edge-pwa",
+      "verification_command": "Test-Path 02_FORGE/apps/omni-edge-pwa",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "SpacetimeDB",
+      "path": "02_FORGE/KINETIC_ARMORY/SpacetimeDB",
+      "role": "real-time state substrate candidate",
+      "integration_type": "substrate",
+      "owner_knight": "Morgana / Sir Link",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/SpacetimeDB",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/SpacetimeDB",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "swarms",
+      "path": "01_KERNEL/agora/swarms",
+      "role": "Bio-team and swarm execution cartridges",
+      "integration_type": "swarm",
+      "owner_knight": "Merlin / Lady Apis",
+      "source_of_truth": "01_KERNEL/agora/swarms",
+      "verification_command": "Test-Path 01_KERNEL/agora/swarms",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "obsidian-spire-hud",
+      "path": "02_FORGE/apps/obsidian-spire-hud",
+      "role": "Camelot cockpit and dashboard surface",
+      "integration_type": "ui",
+      "owner_knight": "Anya / Sir Stitch",
+      "source_of_truth": "02_FORGE/apps/obsidian-spire-hud",
+      "verification_command": "npm run verify",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "omni-eye-dashboard",
+      "path": "02_FORGE/apps/omni-eye-dashboard",
+      "role": "Camelot cockpit and dashboard surface",
+      "integration_type": "ui",
+      "owner_knight": "Anya / Sir Stitch",
+      "source_of_truth": "02_FORGE/apps/omni-eye-dashboard",
+      "verification_command": "npm run verify",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "openclaw",
+      "path": "02_FORGE/apps/openclaw",
+      "role": "Camelot cockpit and dashboard surface",
+      "integration_type": "ui",
+      "owner_knight": "Anya / Sir Stitch",
+      "source_of_truth": "02_FORGE/apps/openclaw",
+      "verification_command": "npm run verify",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "livekit",
+      "path": "02_FORGE/KINETIC_ARMORY/livekit",
+      "role": "voice transport for Camelot receptionist and cockpit",
+      "integration_type": "voice",
+      "owner_knight": "Sir Sonus / Tasha Prime",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/livekit",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/livekit",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "tiny-tts",
+      "path": "02_FORGE/KINETIC_ARMORY/tiny-tts",
+      "role": "local or low-cost text-to-speech",
+      "integration_type": "voice",
+      "owner_knight": "Sir Sonus",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/tiny-tts",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/tiny-tts",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    },
+    {
+      "project": "VibeVoice",
+      "path": "02_FORGE/KINETIC_ARMORY/VibeVoice",
+      "role": "local or low-cost text-to-speech",
+      "integration_type": "voice",
+      "owner_knight": "Sir Sonus",
+      "source_of_truth": "02_FORGE/KINETIC_ARMORY/VibeVoice",
+      "verification_command": "Test-Path 02_FORGE/KINETIC_ARMORY/VibeVoice",
+      "status": "assimilated",
+      "risk_or_caveat": "Validate upstream license and active runtime need before deeper coupling.",
+      "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
+    }
+  ],
+  "outputs": {
+    "engine_architecture": "docs/plans/camelot-cloudbrain-v701/ENGINE_ARCHITECTURE.md",
+    "schematics": "docs/plans/camelot-cloudbrain-v701/SCHEMATICS.md",
+    "symbolact_dictionary": "docs/plans/camelot-cloudbrain-v701/SYMBOLACT_DICTIONARY.md",
+    "assimilation_protocol_journal": "docs/plans/camelot-cloudbrain-v701/ASSIMILATION_PROTOCOL_JOURNAL.md",
+    "manifest_doc": "docs/plans/camelot-cloudbrain-v701/V701_CLOUD_BRAIN_MANIFEST.md",
+    "runtime_manifest": "03_VAULT/runtime_state/camelot_cloudbrain_v701_manifest.json",
+    "warp_workflow": ".warp/workflows/camelot-cloudbrain-v701-sync.yaml"
+  }
+}

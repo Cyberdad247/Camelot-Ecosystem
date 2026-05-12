@@ -1,0 +1,14 @@
+---
+name: Camelot Cloud Brain v701 Sync
+description: Regenerate v701 architecture docs, reconcile ledger, and sync Cloud Brain.
+command: |
+  cd C:\Users\vizio\CAMELOT_OS
+  cmd /c .venv\Scripts\python.exe scripts\generate_cloudbrain_v701.py
+  cmd /c .venv\Scripts\camelot.exe --json ledger status
+  cmd /c .venv\Scripts\camelot.exe --json cloudbrain queue status
+tags:
+  - camelot
+  - cloudbrain
+  - v701
+  - architecture
+  - ledger

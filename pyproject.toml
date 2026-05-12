@@ -75,3 +75,12 @@ venv = ".venv"
 [tool.black]
 line-length = 120
 target-version = ['py313']
+
+[tool.pytest.ini_options]
+cache_dir = "data/.pytest_cache"
+addopts = "--basetemp=data/.pytest_tmp"
+
+[tool.uv.workspace]
+members = [
+    "01_KERNEL/senses/omni_eye_agent",
+]
