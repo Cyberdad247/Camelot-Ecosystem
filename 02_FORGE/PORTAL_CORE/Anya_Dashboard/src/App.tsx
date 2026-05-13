@@ -10,6 +10,7 @@ const AlexTaskManager = lazy(() => import('./features/alex/AlexTaskManager'));
 const ResearchDepartment = lazy(() => import('./features/research/ResearchDepartment'));
 const CartridgeDeck = lazy(() => import('./features/cartridges/CartridgeDeck'));
 const KnightIntake = lazy(() => import('./features/onboarding/KnightIntake'));
+const DefenseGridConsole = lazy(() => import('./features/defense-grid/DefenseGridConsole'));
 
 // Legacy / system pages
 const OpenVikingDashboard = lazy(() => import('./features/openviking/OpenVikingDashboard'));
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="/alex" element={<AlexTaskManager />} />
               <Route path="/research" element={<ResearchDepartment />} />
               <Route path="/dev" element={<FactoryDashboard />} />
+              <Route path="/defense-grid" element={<DefenseGridConsole />} />
               <Route path="/onboarding" element={<KnightIntake />} />
               <Route path="/cartridge/:id" element={<CartridgeDeck />} />
 

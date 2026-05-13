@@ -24,8 +24,8 @@ const navItems = [
   { label: 'Alex', path: '/alex' },
   { label: 'Research', path: '/research' },
   { label: 'Dev', path: '/dev' },
+  { label: 'Defense', path: '/defense-grid' },
   { label: 'Cartridges', path: '/cartridge/cognitive' },
-  { label: 'Map', path: '/openviking' },
 ] as const;
 
 describe('App navigation and development portal', () => {
@@ -65,5 +65,15 @@ describe('App navigation and development portal', () => {
 
     expect(within(nav).getByRole('link', { name: 'Dev' })).toHaveAttribute('aria-current', 'page');
     expect(within(nav).getAllByRole('link')).toHaveLength(navItems.length);
+  });
+
+  it('renders the Defense Grid user console route', async () => {
+    window.history.pushState({}, '', '/defense-grid');
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { name: /defense grid console/i })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /user console/i })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /^run$/i })).toBeInTheDocument();
+    expect(await screen.findByText(/lockdown requires typed confirmation/i)).toBeInTheDocument();
   });
 });

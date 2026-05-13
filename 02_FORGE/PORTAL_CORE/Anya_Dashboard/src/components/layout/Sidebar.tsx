@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, BrainCircuit, FlaskConical, Map, LayoutGrid,
-  Globe, ChevronDown, Sword, Wifi, WifiOff,
+  Globe, ChevronDown, Sword, Wifi, WifiOff, ShieldCheck,
 } from 'lucide-react';
 import { CARTRIDGES } from '@/features/cartridges/registry';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
@@ -90,6 +90,7 @@ export default function Sidebar({ collapsed }: SidebarProps) {
           </p>
         </div>
         <SideLink to="/openviking" icon={Map} label="Viking Map" />
+        <SideLink to="/defense-grid" icon={ShieldCheck} label="Defense Grid" />
         <SideLink to="/swarm" icon={LayoutGrid} label="Swarm Monitor" />
         <SideLink to="/anyas-link" icon={Globe} label="Anya's Link" />
       </nav>

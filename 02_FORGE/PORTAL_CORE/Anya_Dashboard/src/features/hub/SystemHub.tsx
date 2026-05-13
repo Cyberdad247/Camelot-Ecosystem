@@ -145,10 +145,10 @@ export default function SystemHub() {
             Run Research
           </Link>
           <Link
-            to="/openviking"
+            to="/defense-grid"
             className="rounded-lg border border-slate-700 bg-slate-900/60 px-4 py-2 text-sm font-semibold text-slate-300 hover:brightness-125 transition-all"
           >
-            View System Map
+            Open Defense Grid
           </Link>
         </div>
       </div>
