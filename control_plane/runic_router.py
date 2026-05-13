@@ -33,7 +33,32 @@ QUEUE_FILE   = CAMELOT_HOME / "logs" / "harness_queue.jsonl"
 # ---------------------------------------------------------------------------
 
 # 11 Runic Commands — sovereign execution runes
+def _handle_fleet(param: str, context: dict) -> dict:
+    import importlib.util
+    import os
+    from pathlib import Path
+    
+    # Dynamic import to bypass 01_KERNEL naming restriction
+    repo_root = Path(__file__).resolve().parent.parent
+    module_path = repo_root / "01_KERNEL" / "swarm" / "graph_orchestrator.py"
+    spec = importlib.util.spec_from_file_location("graph_orchestrator", module_path)
+    if spec and spec.loader:
+        orch_mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(orch_mod)
+        orchestrator = orch_mod.GraphOrchestrator()
+        result = orchestrator.execute_fleet(param)
+        return {"action": "graph_dispatch", "status": "ACTUATED", "result": result}
+    
+    return {"action": "graph_dispatch", "status": "ERROR", "error": "Module not found"}
+
 RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
+    "//FLEET": {
+        "knight": "sir_boris",
+        "description": "Stateful Graph-based Swarm Dispatch",
+        "mode": "AGENTIC",
+        "priority": 1,
+        "handler": "_handle_fleet",
+    },
     "//BOOT": {
         "knight": "sir_boris",
         "description": "6-phase awaken boot sequence",
@@ -201,7 +226,22 @@ def _handle_heal(param: str, context: dict) -> dict:
     return {"action": "piv_self_heal", "target": param or "auto-diagnose"}
 
 def _handle_fleet(param: str, context: dict) -> dict:
-    return {"action": "map_reduce_deploy", "terminals": "all live", "param": param}
+    """Initialize GraphOrchestrator and start execution loop for //FLEET."""
+    try:
+        from 01_KERNEL.swarm.graph_orchestrator import GraphOrchestrator
+        orchestrator = GraphOrchestrator()
+        final_state = orchestrator.run(param or "Auto-Evolution Directive")
+        return {
+            "action": "swarm_graph_execution",
+            "directive": param,
+            "status": final_state["validation_results"].get("status", "unknown"),
+            "iterations": final_state["iteration_count"],
+            "logs_count": len(final_state["evolution_logs"])
+        }
+    except ImportError as e:
+        return {"error": f"Failed to import GraphOrchestrator: {e}"}
+    except Exception as e:
+        return {"error": f"Swarm graph execution failed: {e}"}
 
 def _handle_genesis(param: str, context: dict) -> dict:
     return {"action": "project_bootstrap", "template": "BriefingScript", "name": param}
