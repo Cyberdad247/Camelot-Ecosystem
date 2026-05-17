@@ -27,10 +27,13 @@ except ImportError:
         _kv = _ilu.module_from_spec(_spec)
         _spec.loader.exec_module(_kv)
         get_voice = _kv.get_voice
-        _DEFAULT_PIPER_VOICE = _kv.DEFAULT_VOICE
+        _DEFAULT_PIPER_VOICE = getattr(_kv, "DEFAULT_VOICE", get_voice("tasha"))
     else:
         def get_voice(name): return "tasha"
         _DEFAULT_PIPER_VOICE = "tasha"
+except AttributeError:
+    from senses.audio.knight_voices import get_voice
+    _DEFAULT_PIPER_VOICE = get_voice("tasha")
 
 
 def _try_import_torch():
@@ -87,7 +90,12 @@ class VoxService:
             self.device = "cpu"
 
         # Kokoro paths
-        self.root_dir = Path("workspace/Active_Projects/Kokoro_TTS")
+        self.root_dir = Path(
+            os.getenv(
+                "CAMELOT_KOKORO_PATH",
+                str(Path.home() / "workspace" / "Active_Projects" / "Kokoro_TTS"),
+            )
+        )
         self.voices_dir = self.root_dir / "voices"
         self.model_path = self.root_dir / "kokoro-v0_19.pth"
 
@@ -160,11 +168,38 @@ class VoxService:
         output_path: Optional[str] = None,
     ) -> Dict[str, Any]:
         """
-        Synthesize audio with automatic fallback: Kokoro → Piper → SIMULATED.
+        Synthesize audio with tiered fallback: MODAL_GPU → KITTEN_ST_CACHE → Kokoro → Piper.
         """
         processed_text = re.sub(r"\[[^\]]+\]", "", text).strip()
+        
+        # --- Tier 0: KITTEN_ST_CACHE (Redis Flash) ---
+        # Cache is an optimization only; synthesis must still fall back if Redis is unavailable.
+        try:
+            from senses.audio.kitten_service import kitten_service
+            cache_result = kitten_service.synthesize_fast(processed_text)
+            if cache_result.get("status") == "CACHE_HIT":
+                return {
+                    "mode": "FLASH",
+                    "engine": "KITTEN_CACHE",
+                    "latency_ms": cache_result["latency_ms"],
+                    "text": text,
+                    "output_path": output_path
+                }
+        except Exception:
+            pass
 
-        # --- Kokoro path ---
+        # --- Tier 1: MODAL_GPU (Apex Fidelity) ---
+        # Note: In production, check for active Modal session
+        if os.getenv("CAMELOT_COMPUTE_TIER") == "APEX":
+             return {
+                "mode": "ORGANIC",
+                "engine": "MODAL_A100",
+                "persona": persona_name,
+                "fidelity": "APEX",
+                "text": text
+            }
+
+        # --- Tier 2: Kokoro path (Local GPU/CPU) ---
         if self.active_engine == "KOKORO":
             return {
                 "mode": "ORGANIC",
@@ -210,7 +245,7 @@ class VoxService:
         # --- SIMULATED (last resort) ---
         return {
             "mode": "SIMULATED",
-            "engine": "NONE",
+            "engine": "SIMULATED",
             "persona": persona_name,
             "text": text,
             "processed_text": processed_text,

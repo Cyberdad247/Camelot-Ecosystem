@@ -169,7 +169,11 @@ async def tasha_entrypoint():
                 base_url=os.environ.get("CLIPROXY_BASE", None),
                 api_key=os.environ.get("OPENAI_API_KEY", ""),
             ),
-            tts=openai.TTS(voice="nova"),
+            tts=openai.TTS(
+                voice=os.environ.get("TASHA_TTS_VOICE", "nova"),
+                base_url=os.environ.get("CLIPROXY_BASE", None),
+                api_key=os.environ.get("OPENAI_API_KEY", ""),
+            ),
             vad=silero.VAD.load(),
         )
 
