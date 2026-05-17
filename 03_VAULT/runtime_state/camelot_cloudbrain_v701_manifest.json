@@ -1858,6 +1858,18 @@
       "v701_action": "Register in Cloud Brain v701 journal, preserve source path, and use ledger-backed changes only."
     },
     {
+      "project": "clawdbot",
+      "path": "03_VAULT/Reference_Architectures/openclaw",
+      "role": "WhatsApp/Discord/Slack/Telegram gateway + multi-provider AI agent host",
+      "integration_type": "harness",
+      "owner_knight": "Sir Pi / Sir Codex",
+      "source_of_truth": "~/.clawdbot/clawdbot.json",
+      "verification_command": "camelot scripts start-gateway",
+      "status": "assimilated",
+      "risk_or_caveat": "Gateway token and OAuth credentials stored plaintext in ~/.clawdbot — rotate regularly. Workspace at ~/clawd requires agent onboarding.",
+      "v701_action": "Gateway managed via 05_INFRASTRUCTURE/gateways/. Bridge client at 01_KERNEL/senses/connectivity/bridges/clawdbot_client.py. Boot health check added to boot_sequence.py."
+    },
+    {
       "project": "claw-code-agent",
       "path": "02_FORGE/KINETIC_ARMORY/claw-code-agent",
       "role": "agentic CLI harness",

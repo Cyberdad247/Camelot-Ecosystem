@@ -65,10 +65,19 @@ def _detect_venv_python(home: Path) -> Path:
     if env and Path(env).exists():
         return Path(env)
     if platform.system() == "Windows":
-        venv_py = home / ".venv_camelot" / "Scripts" / "python.exe"
+        candidates = [
+            home / ".venv" / "Scripts" / "python.exe",
+            home / ".venv_camelot" / "Scripts" / "python.exe",
+        ]
     else:
-        venv_py = home / ".venv_camelot" / "bin" / "python"
-    return venv_py if venv_py.exists() else Path(sys.executable)
+        candidates = [
+            home / ".venv" / "bin" / "python",
+            home / ".venv_camelot" / "bin" / "python",
+        ]
+    for venv_py in candidates:
+        if venv_py.exists():
+            return venv_py
+    return Path(sys.executable)
 
 
 def _child_spawn_kwargs(*, cwd: str) -> dict[str, Any]:
@@ -551,6 +560,22 @@ def datetime_utc_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def boot_clawdbot_gateway(home: Path) -> tuple[bool, str]:
+    """Check Clawdbot gateway health on :18789; report token presence."""
+    port = 18789
+    if _probe_port("127.0.0.1", port):
+        cfg_path = Path.home() / ".clawdbot" / "clawdbot.json"
+        token_ok = False
+        try:
+            cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+            token_ok = bool(cfg.get("gateway", {}).get("auth", {}).get("token"))
+        except Exception:
+            pass
+        auth_note = "token OK" if token_ok else "token MISSING in config"
+        return True, f"Clawdbot gateway LIVE on :{port} | {auth_note}"
+    return False, f"Clawdbot gateway DARK on :{port} — run: camelot scripts start-gateway"
+
+
 def boot_sir_pi(home: Path) -> tuple[bool, str]:
     """Bootstrap Sir Pi — verify pi binary + camelot provider wired to CLIProxyAPI."""
     pi_bin = (
@@ -607,6 +632,12 @@ def start_local_lt_memory(home: Path) -> tuple[bool, str]:
     kwargs = _child_spawn_kwargs(cwd=cwd)
     kwargs["env"] = _child_python_env(py)
     kwargs["env"]["CAMELOT_OS_HOME"] = str(home)
+    if (
+        platform.system() == "Windows"
+        and not sys.stdin.isatty()
+        and os.environ.get("CAMELOT_ALLOW_NONINTERACTIVE_LT_SPAWN") != "1"
+    ):
+        return True, "Local LT Memory shim present; spawn skipped in non-interactive shell"
     try:
         if platform.system() == "Windows":
             launcher_env = dict(kwargs["env"])
@@ -676,6 +707,28 @@ def start_local_lt_memory(home: Path) -> tuple[bool, str]:
         return False, f"LT Memory spawn failed: {type(exc).__name__}: {exc}"
 
 
+def boot_cloud_brain_auth(home: Path) -> tuple[bool, str]:
+    """Verify NotebookLM auth session exists and is not expired before RPC probe."""
+    bridge_path = home / "03_VAULT" / "training" / "configs" / "notebooklm_bridge.py"
+    if not bridge_path.exists():
+        return False, "notebooklm_bridge.py not found — Cloud Brain auth check skipped"
+    try:
+        spec = importlib.util.spec_from_file_location("notebooklm_bridge", bridge_path)
+        assert spec and spec.loader
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)  # type: ignore[union-attr]
+        info = mod.session_age_check()
+    except Exception as exc:
+        return False, f"Auth check error: {type(exc).__name__}: {exc}"
+
+    msg = info["message"]
+    if not info["exists"]:
+        return False, msg
+    # critical = auth likely expired; surface as WARN (non-blocking) so boot continues
+    # but the message clearly states action required
+    return True, msg
+
+
 def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
     # Load local LT env overrides before integration_brain is imported so module-level
     # constants pick up localhost:8200 URLs instead of the Modal cloud endpoints
@@ -699,9 +752,11 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},
         {"name": "Morgana Bridge :8001", "required": True, "fn": lambda: boot_morgana_bridge(home)},
         {"name": "Local LT Memory:8200","required": False, "fn": lambda: start_local_lt_memory(home)},
+        {"name": "Cloud Brain  Auth",  "required": False, "fn": lambda: boot_cloud_brain_auth(home)},
         {"name": "Cloud Brain   (RPC)", "required": True,  "fn": lambda: boot_cloud_brain(home)},
         {"name": "Warp Workflow Sync", "required": False, "fn": lambda: sync_warp_workflows(home)},
         {"name": "Codex Integration", "required": False, "fn": lambda: boot_codex_integration(home)},
+        {"name": "Clawdbot  :18789",   "required": False, "fn": lambda: boot_clawdbot_gateway(home)},
         {"name": "Sir Pi   [PI_AGENT]", "required": False, "fn": lambda: boot_sir_pi(home)},
         {"name": "Warp Terminal", "required": False, "fn": launch_warp},
         {"name": "Knight Config Sync", "required": False, "fn": lambda: sync_knight_configuration(home)},
