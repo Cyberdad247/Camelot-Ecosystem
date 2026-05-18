@@ -55,7 +55,7 @@ export default function CartridgeDeck() {
       });
       if (res.ok) {
         const data = await res.json().catch(() => ({}));
-        setLastResult(data.result ?? data.synthesis ?? '(awaiting stream…)');
+        setLastResult(data.result ?? data.synthesis ?? data.response ?? '(awaiting stream…)');
       } else {
         setLastResult(`Error ${res.status}: ${res.statusText}`);
       }
