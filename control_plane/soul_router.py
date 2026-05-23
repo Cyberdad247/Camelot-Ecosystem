@@ -47,7 +47,10 @@ except Exception:
     KINETIC_TOKEN = os.getenv("CAMELOT_KINETIC_TOKEN", "default-token")
 
 SALTARE_URL = os.getenv("SALTARE_URL", "http://127.0.0.1:8080/api/v1/route")
-OMNIROUTE_URL = os.getenv("OMNIROUTE_URL", "http://localhost:20128/v1")
+# OmniRoute routing logic lives in cli_intercept.py — reads omniroute.json,
+# resolves all cloud engines to upstream.cliproxy (CLIProxyAPI :8080).
+# Port :20128 is not a standalone server; cli_intercept IS the OmniRoute layer.
+CLIPROXY_URL = os.getenv("CLIPROXY_URL", "http://127.0.0.1:8080/v1")
 
 
 # ---------------------------------------------------------------------------
@@ -64,7 +67,8 @@ class EngineWeight(float, Enum):
     W_SOVEREIGNTY   = 0.80   # Sir Liberte — Open Source
     W_KINETIC       = 0.70   # Sir Forge  — Open Coder (local)
     W_BRIDGE        = 0.78   # Sir Link  — UI/bridge handoff coordination
-    W_MEMORY        = 0.92   # Sir Mnemo — Integration Brain routing (highest semantic weight)
+    W_MEMORY        = 0.92   # Sir Mnemo — Integration Brain routing
+    W_LINEAR        = 0.95   # Sir Ouroboros — Linear SSM (Infinite Context)
 
 
 @dataclass(frozen=True)
@@ -97,9 +101,11 @@ FOUNDRY_COUNCIL: tuple[KnightEngine, ...] = (
                  "Anti-vendor lock-in, sovereign execution", privacy_level=0.5),
     KnightEngine("sir_mnemo",   "integration_brain", EngineWeight.W_MEMORY,
                  "Memory routing — ST/LT/both tier scoring for Integration Brain", privacy_level=0.4),
+    KnightEngine("sir_ouroboros", "ouroboros_ssm", EngineWeight.W_LINEAR,
+                 "Linear Reasoning Tier — O(N) scaling for infinite context (Mamba-3)", privacy_level=0.1),
 )
 
-# OmniRoute $0 Forever Stack Mapping
+# Free provider pool — all routed through CLIProxyAPI :8080
 OMNI_PROVIDER_MAP: dict[str, dict[str, str]] = {
     "kiro": {"model": "kr/claude-3-5-sonnet", "knight": "sir_boris"},
     "qoder": {"model": "if/deepseek-r1", "knight": "sir_syntax"},
@@ -195,6 +201,20 @@ KEYWORD_ROUTES: dict[str, str] = {
     "audit":         "sir_sentinel",
     "financial":     "sir_valerian",
     "roi":           "sir_valerian",
+    # SIR_CODEX — high-velocity code generation via CLIProxyAPI
+    "velocity":      "sir_codex",
+    "rapid_proto":   "sir_codex",
+    "boilerplate":   "sir_codex",
+    "prototype":     "sir_codex",
+    # SIR_HELIO — 1M+ context mapping via Gemini CLI -> CLIProxyAPI
+    "context_map":   "sir_helio",
+    "full_repo":     "sir_helio",
+    "1m_context":    "sir_helio",
+    "cloud_burst":   "sir_helio",
+    "ouroboros":     "sir_ouroboros",
+    "mamba":         "sir_ouroboros",
+    "linear_scaling": "sir_ouroboros",
+    "infinite_context": "sir_ouroboros",
     # Browser Nano-Knights
     "browse":        "nano_apis",
     "//browse":      "nano_apis",
@@ -286,6 +306,7 @@ class SoulRouter:
         velocity: float = 0.5,
         magnitude: float = 0.5,
         privacy: float = 0.0,
+        linear_need: float = 0.0,
         _apee_compiled: bool = False,
     ) -> RouteDecision:
         """Route an intent string to the optimal Knight.
@@ -350,6 +371,20 @@ class SoulRouter:
                 tensor=tensor,
                 reason=f"PRIVACY_OVERRIDE: {trigger} -> Sir Ghost (air-gapped)",
                 privacy_override=True,
+            )
+
+        # --- Linear Reasoning Tier (v1000) ---
+        # Trigger: Explicit linear scaling need >= 0.8
+        if linear_need >= 0.8:
+            ouro = self._engines["sir_ouroboros"]
+            tensor = IntentTensor(velocity, magnitude, privacy, float(ouro.weight))
+            return RouteDecision(
+                knight_id="sir_ouroboros",
+                engine=ouro.engine,
+                weight=float(ouro.weight),
+                score=soul_equation(tensor),
+                tensor=tensor,
+                reason=f"LINEAR_TIER_TRIGGER: linear_need={linear_need} -> Sir Ouroboros (SSM)",
             )
 
         # --- Keyword matching ---

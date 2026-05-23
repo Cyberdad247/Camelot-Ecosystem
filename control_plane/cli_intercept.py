@@ -33,42 +33,89 @@ OMNIROUTE_CONFIG = CAMELOT_OS / "03_VAULT" / "training" / "configs" / "config" /
 
 
 # ---------------------------------------------------------------------------
-# Complexity Estimator
+# Complexity & Scaling Estimator
 # ---------------------------------------------------------------------------
 
 # Keywords that indicate high complexity (magnitude >= 0.7)
 _HIGH_COMPLEXITY = frozenset({
     "architecture", "refactor", "migrate", "redesign", "multi-agent",
     "microservice", "deploy", "infrastructure", "pipeline", "orchestrat",
+    "scaling", "shard", "consensus", "evolution", "v1000", "hard-production",
 })
 
-# Keywords that indicate low complexity (magnitude <= 0.3)
-_LOW_COMPLEXITY = frozenset({
-    "list", "status", "help", "version", "check", "show", "describe",
-    "hello", "hi", "info",
-})
-
-# Keywords that indicate urgency (velocity >= 0.8)
-_URGENT = frozenset({
-    "hotfix", "urgent", "critical", "emergency", "fix now", "asap",
-    "production", "p0", "incident",
+# Keywords that suggest linear scaling / SSM preference
+_LINEAR_REASONING = frozenset({
+    "infinite context", "long context", "large file", "entire repo",
+    "ouroboros", "mamba", "ssm", "1.58-bit", "bitnet",
 })
 
 
 def estimate_complexity(intent: str) -> float:
     """Estimate complexity score [0.0-1.0] from intent keywords."""
     lower = intent.lower()
+    score = 0.4
+    
     if any(kw in lower for kw in _HIGH_COMPLEXITY):
-        return 0.8
-    if any(kw in lower for kw in _LOW_COMPLEXITY):
-        return 0.2
-    # Word count heuristic: longer prompts tend to be more complex
+        score = 0.8
+    elif any(kw in lower for kw in _LOW_COMPLEXITY):
+        score = 0.2
+        
+    # Structural indicator: count code references or paths
+    # (e.g. "update src/foo.py and tests/bar.py")
+    path_count = len(re.findall(r'[a-zA-Z0-9_\-\./]+\.[a-z]{2,4}', lower))
+    if path_count > 3:
+        score = max(score, 0.75)
+    elif path_count > 1:
+        score = max(score, 0.6)
+        
+    # Word count heuristic
     word_count = len(lower.split())
-    if word_count > 50:
-        return 0.7
-    if word_count > 20:
-        return 0.5
-    return 0.4
+    if word_count > 100:
+        score = max(score, 0.9)
+    elif word_count > 50:
+        score = max(score, 0.7)
+        
+    return score
+
+
+def estimate_linear_scaling_need(intent: str) -> float:
+    """Estimate if this task requires linear scaling (SSM) [0.0-1.0]."""
+    lower = intent.lower()
+    if any(kw in lower for kw in _LINEAR_REASONING):
+        return 0.9
+    if "context" in lower and "long" in lower:
+        return 0.85
+    return 0.0
+
+
+# ---------------------------------------------------------------------------
+# Retention API (Semantic Eviction Hints)
+# ---------------------------------------------------------------------------
+
+_SCHEMA_INTENTS = frozenset({
+    "//boot", "//scan", "omega_audit", "omega_reforge", "omega_sync",
+    "genesis", "blueprint", "titanium_laws", "harness",
+})
+
+_MISSION_INTENTS = frozenset({
+    "//forge", "//plan", "//heal", "refactor", "migrate", "deploy",
+})
+
+
+def estimate_retention_class(intent: str) -> str:
+    """Determine the semantic retention class [SCHEMA_STATIC | SESSION_STATE | ONE_OFF]."""
+    lower = intent.lower()
+    
+    # 1. SCHEMA_STATIC: System-level prompts and tool definitions
+    if any(kw in lower for kw in _SCHEMA_INTENTS):
+        return "SCHEMA_STATIC"
+        
+    # 2. SESSION_STATE: Multi-turn mission logic
+    if any(kw in lower for kw in _MISSION_INTENTS):
+        return "SESSION_STATE"
+        
+    # 3. ONE_OFF: Low-value ephemeral chat
+    return "ONE_OFF"
 
 
 def estimate_velocity(intent: str) -> float:
@@ -98,6 +145,7 @@ class DispatchResult:
     engine_cmd: str
     model: str
     backend_url: str
+    retention_class: str = "ONE_OFF"
     force_plan_mode: bool = False
     intercepted: bool = True
 
@@ -132,6 +180,8 @@ class CLIIntercept:
         velocity = estimate_velocity(intent)
         magnitude = estimate_complexity(intent)
         privacy = estimate_privacy(intent)
+        linear_need = estimate_linear_scaling_need(intent)
+        retention = estimate_retention_class(intent)
 
         # Route through MFOE matrix
         decision = self.router.route(
@@ -139,6 +189,7 @@ class CLIIntercept:
             velocity=velocity,
             magnitude=magnitude,
             privacy=privacy,
+            linear_need=linear_need,
         )
 
         # Map decision to engine execution details
@@ -152,6 +203,7 @@ class CLIIntercept:
             engine_cmd=engine_cmd,
             model=model,
             backend_url=backend_url,
+            retention_class=retention,
             force_plan_mode=force_plan,
         )
 
@@ -163,13 +215,14 @@ class CLIIntercept:
         knight = decision.knight_id
         engine_name = decision.engine
 
-        # Local engines (Open Coder / Sir Ghost) -> Ollama
-        if engine_name in ("open_coder", "local_qwen"):
+        # Local engines (Open Coder / Sir Ghost / Ouroboros) -> Ollama or local path
+        if engine_name in ("open_coder", "local_qwen", "ouroboros_ssm"):
             engine_cfg = engines.get(engine_name, engines.get("open_coder", {}))
-            model = engine_cfg.get("model", "qwen3:1.7b")
+            model = engine_cfg.get("model", "qwen3:1.7b" if engine_name != "ouroboros_ssm" else "mamba-3:8b-1.58b")
             host = engine_cfg.get("execution_path", "localhost:11434")
             url = f"http://{host}"
-            return ("ollama", model, url)
+            cmd = "ollama" if engine_name != "ouroboros_ssm" else "ouroboros"
+            return (cmd, model, url)
 
         # Cloud engines -> CLIProxyAPI
         cliproxy = upstream.get("cliproxy", {})
@@ -191,7 +244,7 @@ class CLIIntercept:
         """Format a human-readable route log line."""
         r = result.route
         lines = [
-            f"[INTERCEPT] {r.knight_id} via {result.engine_cmd}",
+            f"[INTERCEPT] {r.knight_id} via {result.engine_cmd} [Retention: {result.retention_class}]",
             f"  Model: {result.model} @ {result.backend_url}",
             f"  Score: S_omega={r.score:.4f} (W={r.weight})",
             f"  Tensor: V={r.tensor.velocity} M={r.tensor.magnitude} P={r.tensor.privacy}",
