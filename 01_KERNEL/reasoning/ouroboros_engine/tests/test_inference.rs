@@ -1,11 +1,26 @@
-use ouroboros_engine::mamba::{mamba_forward, State};
+use ouroboros_engine::{mamba_forward, State};
+
+#[test]
+fn test_ssm_state_persistence() {
+    let mut state = State::new(10);
+    let input = vec![1.0; 10];
+    
+    // First pass
+    let output1 = mamba_forward(&mut state, &input);
+    // Second pass with same input
+    let output2 = mamba_forward(&mut state, &input);
+    
+    // In a stateful SSM, output2 should be different from output1 
+    // because the state has been updated.
+    assert_ne!(output1, output2, "State should persist and influence subsequent outputs");
+}
 
 #[test]
 fn test_linear_scaling_identity() {
-    let state = State::new(1024);
-    let input = vec![1.0; 1000]; // Simulated 1k tokens
-    let output = mamba_forward(&state, &input);
-    // Identity check for failing test
+    let mut state = State::new(1024);
+    let input = vec![1.0; 1024]; // Simulated 1k tokens
+    let output = mamba_forward(&mut state, &input);
+    // Length check
     assert_eq!(output.len(), input.len());
 }
 
