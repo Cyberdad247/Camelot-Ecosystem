@@ -1,5 +1,7 @@
 import os
 import json
+import hashlib
+import hmac
 from pathlib import Path
 from typing import Any, Optional
 
@@ -12,6 +14,8 @@ class MemPalaceL2:
     """Persistent local vector index manager (Layer 2 Memory)."""
 
     def __init__(self, storage_path: Optional[Path] = None):
+        # System-level secret for HMAC salting
+        self._secret = os.environ.get("MEMPALACE_SECRET", "OMEGA_DEER_CORE_FIX_2026").encode()
         if storage_path:
             self.storage_path = storage_path
         else:
@@ -33,6 +37,13 @@ class MemPalaceL2:
         name = f"{tenant_id}_{wing}_{room}"
         return name.replace("/", "_").replace(".", "_").replace("-", "_")
 
+    def _generate_salted_id(self, content: str, tenant_id: str) -> str:
+        """Generate a salted HMAC-SHA256 ID for content and tenant."""
+        h = hmac.new(self._secret, digestmod=hashlib.sha256)
+        h.update(tenant_id.encode())
+        h.update(content.encode())
+        return h.hexdigest()
+
     def store(self, wing: str, room: str, content: str, metadata: Optional[dict[str, Any]] = None, tenant_id: str = "default"):
         """Store a drawer (entry) in the specified wing/room with integrity checksum."""
         if not self.client:
@@ -46,8 +57,8 @@ class MemPalaceL2:
         if "checksum" not in meta:
             meta["checksum"] = hashlib.sha256(content.encode()).hexdigest()
         
-        # Use a hash of the content or metadata ID as drawer_id
-        drawer_id = meta.get("id") or meta["checksum"][:16]
+        # Use a salted HMAC of the content + tenant_id as drawer_id
+        drawer_id = meta.get("id") or self._generate_salted_id(content, tenant_id)[:16]
         
         collection.upsert(
             documents=[content],
@@ -93,5 +104,3 @@ class MemPalaceL2:
         else:
             # Corpus-wide search in Chroma is harder (requires listing collections)
             return []
-
-import hashlib
