@@ -15,7 +15,12 @@ class MemPalaceL2:
 
     def __init__(self, storage_path: Optional[Path] = None):
         # System-level secret for HMAC salting
-        self._secret = os.environ.get("MEMPALACE_SECRET", "OMEGA_DEER_CORE_FIX_2026").encode()
+        secret_env = os.environ.get("MEMPALACE_SECRET")
+        if not secret_env:
+            print("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
+            secret_env = "OMEGA_DEER_CORE_FIX_2026"
+            
+        self._secret = secret_env.encode()
         if storage_path:
             self.storage_path = storage_path
         else:
@@ -58,7 +63,7 @@ class MemPalaceL2:
             meta["checksum"] = hashlib.sha256(content.encode()).hexdigest()
         
         # Use a salted HMAC of the content + tenant_id as drawer_id
-        drawer_id = meta.get("id") or self._generate_salted_id(content, tenant_id)[:16]
+        drawer_id = meta.get("id") or self._generate_salted_id(content, tenant_id)
         
         collection.upsert(
             documents=[content],
