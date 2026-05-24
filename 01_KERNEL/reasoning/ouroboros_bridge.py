@@ -4,7 +4,7 @@ class OuroborosClient:
         # For this implementation plan, we simulate the handshake.
         return True
 
-    def get_status(self):
+    def get_status(self) -> dict[str, str]:
         # Return OMEGA-PATCH capabilities mapping
         return {
             "ternary_logic": "active",
