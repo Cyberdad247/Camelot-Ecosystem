@@ -13,74 +13,19 @@ terminals are dark.
 from __future__ import annotations
 
 import re
-from enum import Enum
 from typing import Optional, TYPE_CHECKING
+
+from control_plane.taxonomy import IntentCategory, INTENT_KEYWORDS, INTENT_TERMINAL_MAP
+
+try:
+    from importlib import import_module
+    hydration = import_module("01_KERNEL.memory.hydration_manager")
+    HydrationManager = hydration.HydrationManager
+except ImportError:
+    HydrationManager = None
 
 if TYPE_CHECKING:
     from control_plane.switchboard import Switchboard, Terminal
-
-
-class IntentCategory(Enum):
-    FORGE        = "forge"        # implement, build, scaffold
-    CODE         = "code"         # debug, fix, refactor, review
-    RESEARCH     = "research"     # search, explain, look up
-    MEMORY       = "memory"       # recall, context, history
-    OPS          = "ops"          # status, metrics, health, factory
-    SECURITY     = "security"     # audit, scan, armor
-    VOICE        = "voice"        # tts, audio, speak (cascaded pipeline)
-    NATIVE_AUDIO = "native_audio" # omni realtime audio (GPT-4o/Gemini Live)
-    GENERAL      = "general"      # fallback
-
-
-# Ordered keyword lists — first match wins within each category
-_INTENT_KEYWORDS: dict[IntentCategory, list[str]] = {
-    IntentCategory.FORGE: [
-        "forge", "implement", "build", "create", "generate", "scaffold",
-        "write code", "develop", "author", "draft",
-    ],
-    IntentCategory.CODE: [
-        "debug", "fix", "refactor", "review code", "test", "error",
-        "bug", "exception", "trace", "lint", "syntax",
-    ],
-    IntentCategory.RESEARCH: [
-        "search", "find", "look up", "research", "what is", "explain",
-        "summarize", "analyze", "investigate", "survey",
-    ],
-    IntentCategory.MEMORY: [
-        "remember", "recall", "memory", "context", "history",
-        "stored", "ledger", "archive", "retrieve",
-    ],
-    IntentCategory.OPS: [
-        "status", "metrics", "health", "monitor", "throughput",
-        "uptime", "factory", "dashboard", "telemetry", "alerts",
-    ],
-    IntentCategory.SECURITY: [
-        "audit", "scan", "security", "vulnerability", "sentinel",
-        "armor", "threat", "exploit", "secrets", "compliance",
-    ],
-    IntentCategory.VOICE: [
-        "speak", "tts", "audio", "voice", "say", "pronounce",
-        "synthesize", "narrate", "kitten",
-    ],
-    IntentCategory.NATIVE_AUDIO: [
-        "realtime audio", "omni", "native audio", "live voice", "audio-in",
-        "voice call", "webrtc", "livekit", "gemini live", "gpt-4o realtime",
-        "no text", "direct audio",
-    ],
-}
-
-# Preferred terminal IDs per category — ordered by priority (first = most preferred)
-INTENT_TERMINAL_MAP: dict[IntentCategory, list[str]] = {
-    IntentCategory.FORGE:    ["sir_boris", "sir_forge", "sir_helio"],
-    IntentCategory.CODE:     ["sir_boris", "sir_codex", "sir_forge"],
-    IntentCategory.RESEARCH: ["sir_helio", "sir_mnemo", "sir_boris"],
-    IntentCategory.MEMORY:   ["sir_mnemo", "sir_helio", "sir_boris"],
-    IntentCategory.OPS:      ["sir_octavian", "sir_link", "sir_boris"],
-    IntentCategory.SECURITY: ["sir_sentinel", "sir_gideon", "sir_ghost"],
-    IntentCategory.VOICE:        ["sir_sonus", "sir_link", "sir_boris"],
-    IntentCategory.NATIVE_AUDIO: ["sir_link", "sir_helio", "sir_alex"],
-    IntentCategory.GENERAL:      ["sir_alex", "sir_boris", "sir_helio", "sir_link"],
-}
 
 
 def classify_intent(text: str) -> tuple[IntentCategory, float]:
@@ -93,7 +38,7 @@ def classify_intent(text: str) -> tuple[IntentCategory, float]:
     lower = text.lower()
     scores: dict[IntentCategory, float] = {}
 
-    for category, keywords in _INTENT_KEYWORDS.items():
+    for category, keywords in INTENT_KEYWORDS.items():
         best = 0.0
         for kw in keywords:
             if kw in lower:
@@ -127,25 +72,35 @@ async def route_by_intent(
     preferred_ids = INTENT_TERMINAL_MAP.get(category, INTENT_TERMINAL_MAP[IntentCategory.GENERAL])
 
     # Try preferred terminals in order
+    selected_terminal = None
     for tid in preferred_ids:
         t = await board.probe_one(tid)
         if t and t.status in ("live", "assumed_live"):
-            return t, category, confidence
+            selected_terminal = t
+            break
 
     # Fallback: capability-based best_for
-    capability_map = {
-        IntentCategory.FORGE:    ["forge", "orchestration"],
-        IntentCategory.CODE:     ["code_gen", "velocity"],
-        IntentCategory.RESEARCH: ["research", "context"],
-        IntentCategory.MEMORY:   ["memory", "recall"],
-        IntentCategory.OPS:      ["ops", "monitoring"],
-        IntentCategory.SECURITY:     ["security", "audit"],
-        IntentCategory.VOICE:        ["bridge", "audio"],
-        IntentCategory.NATIVE_AUDIO: ["bridge", "context"],
-        IntentCategory.GENERAL:      ["orchestration", "cognitive"],
-    }
-    fallback = await board.best_for(capability_map.get(category, ["orchestration"]))
-    return fallback, category, confidence * 0.5  # reduced confidence on fallback
+    if not selected_terminal:
+        capability_map = {
+            IntentCategory.FORGE:    ["forge", "orchestration"],
+            IntentCategory.CODE:     ["code_gen", "velocity"],
+            IntentCategory.RESEARCH: ["research", "context"],
+            IntentCategory.MEMORY:   ["memory", "recall"],
+            IntentCategory.OPS:      ["ops", "monitoring"],
+            IntentCategory.SECURITY:     ["security", "audit"],
+            IntentCategory.VOICE:        ["bridge", "audio"],
+            IntentCategory.NATIVE_AUDIO: ["bridge", "context"],
+            IntentCategory.GENERAL:      ["orchestration", "cognitive"],
+        }
+        selected_terminal = await board.best_for(capability_map.get(category, ["orchestration"]))
+        confidence *= 0.5  # reduced confidence on fallback
+
+    # LATTICE_RADIANT Sync: Store routed intent context
+    if selected_terminal and HydrationManager:
+        mgr = HydrationManager(knight_id=selected_terminal.id)
+        mgr.store_tissue(intent=f"routed_intent_{category.value}", content=text, complexity=5, tier="L1")
+
+    return selected_terminal, category, confidence
 
 
 def explain_routing(text: str) -> dict:

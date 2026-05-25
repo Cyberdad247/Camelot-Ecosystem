@@ -285,13 +285,30 @@ export default function MorphingHUD() {
     },
   ];
 
+  // PROACTIVE UX: Anticipatory Action System
+  const proactiveHints = useMemo(() => {
+    if (!status) return [];
+    const hints = [];
+    if (!status.token_present) hints.push('Generate Bifrost Token');
+    if (status.gate === 'local-user-mismatch') hints.push('Switch to Sovereign Owner');
+    if (latestEvent?.event.includes('fail')) hints.push('Run System Self-Heal');
+    return hints;
+  }, [status, latestEvent]);
+
   return (
-    <div className="min-h-screen overflow-y-auto bg-[#080a0d] text-slate-100">
+    <div className="min-h-screen overflow-y-auto bg-[#080a0d] text-slate-100 selection:bg-cyan-500/30">
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(14,165,233,0.22),transparent_32%),radial-gradient(circle_at_80%_12%,rgba(245,158,11,0.16),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.65),rgba(2,6,23,0.95))]" />
 
       <main className="relative mx-auto flex min-h-screen max-w-7xl flex-col gap-6 px-4 pb-28 pt-5 lg:px-8">
+        {/* S26 Matrix Overlay - Responsive Brutalist Layer */}
+        <div className="pointer-events-none absolute top-4 right-4 flex flex-col items-end gap-1 opacity-20 font-mono text-[10px] text-cyan-500 md:opacity-40">
+          <span>EDGE_NODE :: SM-S26-ULTRA</span>
+          <span>DISP_MODE :: MATRIX_OF_LEADERSHIP</span>
+          <span>SEC_STAT  :: ARMED</span>
+        </div>
+
         <header className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
-          <section className="rounded-[2rem] border border-white/10 bg-black/35 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur">
+          <section className="rounded-[2rem] border border-white/10 bg-black/35 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur" aria-labelledby="bridge-title">
             <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-400 text-xl font-black text-slate-950 shadow-lg shadow-cyan-500/30">
@@ -299,7 +316,7 @@ export default function MorphingHUD() {
                 </div>
                 <div>
                   <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">Anya Interface</p>
-                  <h1 className="text-3xl font-black tracking-tight md:text-5xl">Camelot Command Bridge</h1>
+                  <h1 id="bridge-title" className="text-3xl font-black tracking-tight md:text-5xl">Camelot Command Bridge</h1>
                 </div>
               </div>
               <div className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-200">
@@ -311,10 +328,10 @@ export default function MorphingHUD() {
               {healthCards.map((card) => {
                 const Icon = card.icon;
                 return (
-                  <div key={card.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                  <div key={card.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4" role="status" aria-label={`${card.label}: ${card.value}`}>
                     <div className="mb-4 flex items-center justify-between">
                       <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{card.label}</p>
-                      <Icon className={`h-4 w-4 ${toneClass(card.tone)}`} />
+                      <Icon className={`h-4 w-4 ${toneClass(card.tone)}`} aria-hidden="true" />
                     </div>
                     <p className="text-2xl font-black lowercase">{card.value}</p>
                     <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">{card.detail}</p>
@@ -324,7 +341,7 @@ export default function MorphingHUD() {
             </div>
           </section>
 
-          <aside className="rounded-[2rem] border border-amber-300/20 bg-amber-300/[0.06] p-6 backdrop-blur">
+          <aside className="rounded-[2rem] border border-amber-300/20 bg-amber-300/[0.06] p-6 backdrop-blur" aria-label="Helm Status">
             <p className="text-xs uppercase tracking-[0.34em] text-amber-200">Helm</p>
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl bg-black/30 p-4">
@@ -361,6 +378,8 @@ export default function MorphingHUD() {
                   <button
                     key={cartridge.id}
                     onClick={() => setSelectedCartridge(cartridge.id)}
+                    aria-pressed={selected}
+                    aria-label={`Select ${cartridge.label} cartridge`}
                     className={`group rounded-2xl border p-4 text-left transition ${
                       selected
                         ? 'border-cyan-300 bg-cyan-300/10 shadow-lg shadow-cyan-950/40'
@@ -368,7 +387,7 @@ export default function MorphingHUD() {
                     }`}
                   >
                     <div className="mb-3 flex items-center justify-between">
-                      <Icon className={selected ? 'text-cyan-200' : 'text-slate-400'} />
+                      <Icon className={selected ? 'text-cyan-200' : 'text-slate-400'} aria-hidden="true" />
                       {selected && <CheckCircle2 className="h-4 w-4 text-cyan-200" />}
                     </div>
                     <p className="font-black">{cartridge.label}</p>
@@ -390,6 +409,22 @@ export default function MorphingHUD() {
             </div>
 
             <div className="mb-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+              {/* Proactive UX Hints */}
+              {proactiveHints.length > 0 && (
+                <div className="mb-4 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-2 duration-500">
+                  {proactiveHints.map(hint => (
+                    <button
+                      key={hint}
+                      onClick={() => setIntent(hint)}
+                      className="rounded-lg bg-cyan-500/20 border border-cyan-500/40 px-2 py-1 text-[10px] font-bold text-cyan-300 hover:bg-cyan-500/40 transition-colors"
+                      aria-label={`Proactive hint: ${hint}`}
+                    >
+                      💡 {hint}
+                    </button>
+                  ))}
+                </div>
+              )}
+
               <div className="flex flex-wrap items-center gap-2 text-xs uppercase tracking-[0.2em] text-slate-500">
                 <span>{activeCartridge.label}</span>
                 <ArrowRight className="h-3 w-3" />
@@ -400,6 +435,7 @@ export default function MorphingHUD() {
               <textarea
                 value={intent}
                 onChange={(event) => setIntent(event.target.value)}
+                aria-label="Input intent for Bifrost routing"
                 className="mt-4 min-h-32 w-full resize-none rounded-2xl border border-white/10 bg-slate-950/80 p-4 text-sm leading-6 text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-cyan-300"
                 placeholder="Type the command for Anya to route through Bifrost..."
               />

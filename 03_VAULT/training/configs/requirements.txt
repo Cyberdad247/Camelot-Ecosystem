@@ -1,3 +1,7 @@
+﻿# DEPRECATED: Merged into root pyproject.toml
+# Install with: pip install -e "." from CAMELOT_OS root
+# This file is kept for reference only.
+
 # Camelot CLI dependencies
 # Core
 pyyaml>=6.0
@@ -9,6 +13,7 @@ httpx>=0.25.0
 # HUD Terminal
 rich>=13.0
 
-# Kernel (optional — graceful degradation without these)
+# Kernel (optional â€” graceful degradation without these)
 networkx>=3.0
 cryptography>=41.0
+

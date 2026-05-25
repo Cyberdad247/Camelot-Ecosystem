@@ -32,6 +32,7 @@ export default function CartridgeDeck() {
   const cartridge = id ? CARTRIDGE_BY_SLUG[id] : null;
   const [dispatching, setDispatching] = useState(false);
   const [lastResult, setLastResult] = useState<string | null>(null);
+  const [lastMeta, setLastMeta] = useState<{ knight?: string; model?: string; latency_ms?: number } | null>(null);
   const { events, isConnected } = useAnyaSocket();
 
   if (!cartridge) return <Navigate to="/" replace />;
@@ -44,14 +45,30 @@ export default function CartridgeDeck() {
     setDispatching(true);
     setLastResult(null);
     try {
+      // Primary: dashboard-native dispatch (real LLM via CLIProxy)
+      const primaryRes = await fetch('/api/cartridge/dispatch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ intent, cartridge: cartridge.id, params }),
+      });
+      if (primaryRes.ok) {
+        const data = await primaryRes.json().catch(() => ({}));
+        if (data.response && !data.error) {
+          setLastResult(data.response);
+          setLastMeta({ knight: data.knight, model: data.model, latency_ms: data.latency_ms });
+          return;
+        }
+        if (data.error) {
+          setLastResult(`[${data.cartridge ?? cartridge.id}] ${data.error}`);
+          return;
+        }
+      }
+
+      // Fallback: Morgana Bridge
       const res = await bifrostFetch(runtimeConfig.bifrost.dispatchUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          intent,
-          cartridge: cartridge.id,
-          params,
-        }),
+        body: JSON.stringify({ intent, cartridge: cartridge.id, params }),
       });
       if (res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -60,7 +77,7 @@ export default function CartridgeDeck() {
         setLastResult(`Error ${res.status}: ${res.statusText}`);
       }
     } catch {
-      setLastResult('Bifrost unreachable — ensure morgana_bridge is on :8001');
+      setLastResult('Dispatch unreachable — ensure dashboard server and morgana_bridge are running');
     } finally {
       setDispatching(false);
     }
@@ -122,7 +139,7 @@ export default function CartridgeDeck() {
                   : <ArrowUpRight className={cn('h-4 w-4', cartridge.textClass)} />
                 }
                 <span className={cn('text-xs font-semibold uppercase tracking-widest', cartridge.textClass)}>
-                  {dispatching ? 'Dispatching…' : 'Knight Response'}
+                  {dispatching ? 'Dispatching…' : `${lastMeta?.knight ?? cartridge.knight} Response`}
                 </span>
                 {lastResult && (
                   <button
@@ -133,8 +150,14 @@ export default function CartridgeDeck() {
                   </button>
                 )}
               </div>
+              {lastMeta && !dispatching && (
+                <div className="flex items-center gap-2 text-[10px] text-slate-500 font-mono">
+                  {lastMeta.model && <span>{lastMeta.model}</span>}
+                  {lastMeta.latency_ms && <span>· {lastMeta.latency_ms}ms</span>}
+                </div>
+              )}
               {lastResult && (
-                <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap max-h-48 overflow-y-auto">
+                <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap max-h-64 overflow-y-auto">
                   {lastResult}
                 </p>
               )}

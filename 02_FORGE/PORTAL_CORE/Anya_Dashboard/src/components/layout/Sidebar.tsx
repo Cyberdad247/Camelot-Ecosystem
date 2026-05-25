@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard, BrainCircuit, FlaskConical, Map, LayoutGrid,
-  Globe, ChevronDown, Sword, Wifi, WifiOff, ShieldCheck,
+  Globe, ChevronDown, Sword, Wifi, WifiOff, ShieldCheck, Layers3,
 } from 'lucide-react';
 import { CARTRIDGES } from '@/features/cartridges/registry';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
@@ -57,6 +57,7 @@ export default function Sidebar({ collapsed }: SidebarProps) {
       <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-0.5">
         {/* Core */}
         <SideLink to="/" icon={LayoutDashboard} label="System Hub" end />
+        <SideLink to="/camelot-os" icon={Layers3} label="Camelot OS" />
         <SideLink to="/alex" icon={BrainCircuit} label="SIR_ALEX — Tasks" />
         <SideLink to="/research" icon={FlaskConical} label="Research Dept." />
 

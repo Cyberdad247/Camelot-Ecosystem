@@ -1,150 +1,134 @@
-# Camelot-OS Source Of Truth Map
+﻿# Camelot-OS Source Of Truth Map
 
-Last reviewed: 2026-04-19
+Last reviewed: 2026-05-21
 Repo root: `C:\Users\vizio\CAMELOT_OS`
 
 ## Purpose
 
-This document separates current runtime truth from historical references,
-generated artifacts, and stale narrative docs. Use it when determining which
-files should drive engineering decisions for Cloud Brain, Living Camelot-OS,
-and version identity.
+This document defines which files are authoritative for the current Camelot-OS
+runtime. It also records which older docs are mirrors, historical snapshots, or
+broken references.
 
 ## Executive Summary
 
-Camelot-OS currently contains multiple version eras in parallel:
+The repository currently contains multiple architecture eras in parallel.
+Several older docs still reference files that do not exist in this checkout.
+Do not treat those references as canonical.
 
-- `v300.1` historical notebook context
-- `v300.4.0` manifest/bootstrap architecture docs
-- `v400 / 400.1.0` active NotebookLM bridge and repo version marker
+Current engineering truth should come from executable runtime surfaces first,
+then from the config files they load, then from verification artifacts.
 
-When files disagree, prefer executable runtime code over narrative docs, and
-prefer persisted config over older prose.
+## Current Canonical Order
 
-## Canonical Priority Order
+When files disagree, use this precedence:
 
-Use this precedence when sources conflict:
+1. Executable runtime code under `control_plane/` and `bin/`
+2. Runtime bridge and operator config loaded by that code
+3. Verification artifacts that prove the runtime behavior
+4. Maintained architecture docs aligned to the live repo
+5. Historical mirrors, notebook pulls, and archived architecture narratives
 
-1. Executed runtime code in `control_plane/` and `cloud_orchestrator/`
-2. Runtime bridge/config files that are imported or read by the CLI
-3. Verification ledgers and repeatable tests that prove current behavior
-4. Architecture docs that still match the code
-5. Historical notebook pulls, training configs, and archived reports
+## Tier 1: Executable Runtime Sources
 
-## Tier 1: Canonical Runtime Sources
+### 1. Boot contract
 
-These files are the strongest sources of truth for the current system.
-
-### 1. NotebookLM living-notebook identity
-
-File: [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:14)
+File: [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/boot_sequence.py:845)
 
 Why it is canonical:
 
-- Defines `CANONICAL_NOTEBOOK_ID = "bcaadfdd-1654-487d-9c4c-111f7dea120e"`
-- Defines `CANONICAL_NOTEBOOK_TITLE = "Living Camelot-OS v.400"`
-- Is loaded dynamically by the active control plane sync path
-- Is used for health, sync, synthesis, and research operations
+- Defines the current boot phases through `run_boot(...)`
+- Confirms the required surfaces the system expects to start
+- Includes the current optional runtime surfaces such as `Cloud Brain  Auth`,
+  `Vizion Telemetry`, and `Sovereign Harness`
 
-Operational implication:
+Current live phase anchors include:
 
-- This file defines the canonical short-term working notebook.
-- It overrides older references to `Living Camelot-OS` notebooks from the
-  `v300.x` era.
+- `CLIProxyAPI   :8080`
+- `Defense Grid`
+- `Kinetic Edge  :3001`
+- `Morgana Bridge :8001`
+- `Cloud Brain  Auth`
+- `Vizion Telemetry`
+- `Sovereign Harness`
 
-### 2. Persisted operator config
+### 2. User boot entrypoint
+
+File: [bin/awaken.py](C:/Users/vizio/CAMELOT_OS/bin/awaken.py:1)
+
+Why it is canonical:
+
+- It is the direct operator-facing bootstrap command
+- It wraps `control_plane.boot_sequence`
+- It defines the current `awaken` behavior and user-visible boot framing
+
+### 3. Runic command surface
+
+File: [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runic_router.py:1)
+
+Why it is canonical:
+
+- It defines the live rune routing tables
+- It is the source of truth for current `//...` and `Omega_...` dispatch names
+- It reflects the actual command vocabulary supported by this repo
+
+### 4. Cloud and NotebookLM routing
+
+File: [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/cloud_services.py:1)
+
+Why it is canonical:
+
+- It defines the typed cloud service router used by the current control plane
+- It documents the current split between local and remote cloud surfaces
+- It contains the deprecation note for `CAMELOT_CLOUDBRAIN_URL` as a notebook
+  identity source
+
+Operational note:
+
+- This file imports long-term cloudbrain logic through
+  `agora.cloud_orchestrator_shim`, not through a repo-root `cloud_orchestrator/`
+  directory. Any doc that still claims `cloud_orchestrator/` is the active local
+  canonical path is stale for this checkout.
+
+### 5. NotebookLM bridge identity
+
+File: [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:16)
+
+Why it is canonical:
+
+- Defines `CANONICAL_NOTEBOOK_ID`
+- Defines `CANONICAL_NOTEBOOK_TITLE`
+- Is imported by the live cloud services surface
+- Is used for health, sync, synthesis, research, and snapshot generation
+
+Current values in code:
+
+- Notebook ID: `8c656cfa-a189-409e-a72d-07692a47f17e`
+- Notebook title: `Camelot-OS v.999.3`
+
+### 6. Operator config
 
 File: [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1)
 
 Why it is canonical:
 
 - Stores the active `living_notebook_url`
-- Stores the deployed `excalibur_*` bridge URLs for the remote long-term brain
+- Stores the current Excalibur bridge URLs
 - Provides operator defaults used by the current CLI stack
 
-Operational implication:
+Current configured notebook URL:
 
-- If the bridge and config disagree in the future, treat that as a release
-  blocker until reconciled.
-- `cloudbrain_url` should no longer be used for NotebookLM notebook links.
+- `https://notebooklm.google.com/notebook/8c656cfa-a189-409e-a72d-07692a47f17e`
 
-### 3. Active cloudbrain runtime topology
+## Tier 2: Verification And Corroboration
 
-File: [cloud_orchestrator/long_term_cloudbrain.py](C:/Users/vizio/CAMELOT_OS/cloud_orchestrator/long_term_cloudbrain.py:1)
-
-Why it is canonical:
-
-- Defines the local long-term cloudbrain service surface
-- Wires Open Notebook runtime configuration
-- Defines Appwrite memory bridge loading
-- Is directly used by the current cloud service router
-
-Operational implication:
-
-- This file is the main source of truth for local long-term cloudbrain
-  architecture, readiness, and memory topology.
-- The remote long-term agentic surface is `excalibur-brain`; NotebookLM is
-  not the long-term brain.
-
-### 4. Active typed cloud routing
-
-File: [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/cloud_services.py:1)
-
-Why it is canonical:
-
-- Routes `cloudbrain`, `research`, `northstar`, `blueprint`, and
-  `precise-mode` requests
-- Loads the NotebookLM bridge on demand
-- Falls back to local services when remote URLs are absent
-
-Operational implication:
-
-- This is the best source for which service surfaces are actually supported
-  by the current CLI.
-
-### 5. Active user-facing command surface
-
-File: [control_plane/camelot_cli.py](C:/Users/vizio/CAMELOT_OS/control_plane/camelot_cli.py:1)
-
-Why it is canonical:
-
-- Defines what the operator can invoke
-- Shapes how typed results are rendered
-- Represents the currently shipped command surface
-
-Operational implication:
-
-- If a narrative doc claims a command exists, but this CLI does not expose the
-  path or typed output expectations, the doc is not authoritative.
-
-## Tier 2: Canonical Corroboration Sources
-
-These files are not the primary runtime source, but they strongly corroborate
-the live implementation.
-
-### 6. Current repo version
-
-File: [VERSION](C:/Users/vizio/CAMELOT_OS/VERSION:1)
-
-Current value:
-
-- `400.1.0`
-
-Interpretation:
-
-- The repo has moved beyond the `v300.x` document set.
-- Any document still presenting itself as the current system at `v300.x`
-  should be treated as historical unless it is explicitly maintained.
-
-### 7. Production verification matrix
+### 7. Verification matrix
 
 File: [verification.md](C:/Users/vizio/CAMELOT_OS/verification.md:1)
 
 Why it matters:
 
-- Defines the current repeatable verification commands
-- Explicitly includes `cloudbrain` health and JSON contract checks
-- Describes the present production gate, not the original concept
+- Captures the repeatable verification contract for the current repo
+- Serves as the human-readable evidence checklist
 
 ### 8. Verification ledger
 
@@ -152,219 +136,97 @@ File: [03_VAULT/Missions/verification_ledger.jsonl](C:/Users/vizio/CAMELOT_OS/03
 
 Why it matters:
 
-- Records actual command results from the current control plane
-- Confirms `cloudbrain status` and related health commands were executed
-- Shows real payload shapes and current local fallback behavior
+- Records real verification runs
+- Corroborates whether a claimed sync or validation step actually occurred
 
-## Tier 3: Useful Architecture Docs
+### 9. Ledger sync status
 
-These are high-value documents, but they no longer define the full current
-state on their own.
+File: [logs/defense_grid/ledger_sync_status.json](C:/Users/vizio/CAMELOT_OS/logs/defense_grid/ledger_sync_status.json:1)
 
-### 9. Current architecture manifest, but on an older version line
+Why it matters:
 
-File: [OS_MANIFEST.md](C:/Users/vizio/CAMELOT_OS/OS_MANIFEST.md:1)
+- Provides the current machine-readable ledger sync surface used by the repo
+- Is a stronger sync signal than narrative references inside old docs
 
-Strengths:
+## Tier 3: Maintained Architecture Docs
 
-- Good high-level topology overview
-- Accurately describes the split-brain architecture shape
-- Correctly identifies `cloud_orchestrator/` as the cloudbrain surface
+### 10. Canonical live map
 
-Weaknesses:
-
-- Still labeled `v300.4.0`
-- Does not reflect the active `VERSION` file value `400.1.0`
-- Should not be used as the authoritative notebook identity source
+File: [entiremap.md](C:/Users/vizio/CAMELOT_OS/entiremap.md:1)
 
 Usage rule:
 
-- Use for architecture orientation, not for exact current version or notebook
-  identity.
+- This is the maintained architecture map for the live repo state
+- The L7 mirror may exist for compatibility, but root `entiremap.md` is the
+  canonical copy to update first
 
-## Tier 4: Historical Sources
+### 11. L7 compatibility mirror
 
-These files are valuable for reconstructing prior system states, but not for
-current source-of-truth decisions.
-
-### 10. Bootstrap doc for the `v300.4.0` era
-
-File: [03_VAULT/training/configs/BOOTSTRAP.md](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/BOOTSTRAP.md:1)
-
-Historical signals:
-
-- Describes boot phases and older runtime assumptions
-- Names canonical notebook `a9cf586e-1971-4959-bb97-cdcd37257ebb`
-- Titles that notebook as
-  `living Camelot-OS: The v300.4.0 Universal Singularity Recompilation`
-
-Conflict with current truth:
-
-- Conflicts with the active bridge/config notebook ID
-- Conflicts with `VERSION = 400.1.0`
+File: [docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md](C:/Users/vizio/CAMELOT_OS/docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md:1)
 
 Usage rule:
 
-- Treat as a historical architecture record for the `v300.4.0` phase.
+- Mirror only
+- Must stay content-aligned with root `entiremap.md`
+- Do not update this first
 
-### 11. Historical notebook context pull
+## Known Broken Or Stale References
 
-File: [notebook_context.md](C:/Users/vizio/CAMELOT_OS/notebook_context.md:1)
+The following references appear in older docs but are not valid canonical
+anchors for this checkout:
 
-Historical signals:
+- Root `OS_MANIFEST.md` does not exist
+- Root `VERSION` does not exist
+- Root `config.json` does not exist
+- Repo-root `cloud_orchestrator/` does not exist
+- `kinetic_edge/mcp_server/` does not exist under the current `kinetic_edge/`
+  tree
+- `02_FORGE/web/` does not exist as the active dashboard path
 
-- Explicitly dated `2026-03-26`
-- References
-  `living Camelot-OS: The v300.1 Universal Singularity Recompilation`
+If a doc still uses any of those as current canonical anchors, treat that doc
+as historical or stale until corrected.
 
-Usage rule:
+## Current Live Surface Decisions
 
-- Treat as an imported historical notebook summary, not a live system spec.
+### Architecture identity
 
-### 12. Historical verification report
+Use these files together:
 
-File: [docs/reports/verification_report_v300.4.md](C:/Users/vizio/CAMELOT_OS/docs/reports/verification_report_v300.4.md:1)
-
-Historical signals:
-
-- Generated on `2026-04-03`
-- Tied to branch `reorg/v300.2-cleanup`
-- Captures a point-in-time audit snapshot
-
-Usage rule:
-
-- Useful as evidence of prior readiness work, but not current runtime truth.
-
-## Tier 5: Generated, Derived, Or Mirror Content
-
-Use these only as supporting evidence after checking the tiers above.
-
-- `docs/reports/*`
-- `03_VAULT/Missions/*.jsonl`
-- `03_VAULT/UKG/*`
-- `03_VAULT/training/configs/memory/*`
-- shell launchers such as `Camelot-OS.cmd`
-- cached client histories under `.claude/` or `.gemini/`
-
-These sources may be informative, but they are either generated, mirrored,
-historical, or downstream from canonical runtime code.
-
-## Current Source-Of-Truth Decisions
-
-### Living Camelot-OS notebook identity
-
-Current canonical source:
-
-- [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:14)
-
-Current canonical values:
-
-- Notebook ID: `bcaadfdd-1654-487d-9c4c-111f7dea120e`
-- Notebook title: `Living Camelot-OS v.400`
-
-Role decision:
-
-- NotebookLM is the canonical short-term living notebook and operator working
-  context.
-- `excalibur-brain` is the canonical remote long-term agentic brain surface.
-
-Supporting audit:
-
-- [docs/architecture/MODAL_APP_AUDIT.md](/C:/Users/vizio/CAMELOT_OS/docs/architecture/MODAL_APP_AUDIT.md:1)
-
-Historical notebook identities still present in docs:
-
-- `v300.4.0`: `a9cf586e-1971-4959-bb97-cdcd37257ebb`
-- `v300.1`: title-only reference in `notebook_context.md`
-
-### Cloudbrain architecture
-
-Current canonical sources:
-
-- [cloud_orchestrator/long_term_cloudbrain.py](C:/Users/vizio/CAMELOT_OS/cloud_orchestrator/long_term_cloudbrain.py:1)
+- [bin/awaken.py](C:/Users/vizio/CAMELOT_OS/bin/awaken.py:1)
+- [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/boot_sequence.py:845)
+- [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runic_router.py:1)
 - [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/cloud_services.py:1)
 
-Current architectural truth:
+### NotebookLM identity
 
-- Local cloudbrain uses Open Notebook + Appwrite bridge wiring
-- Control plane exposes typed cloud service routes
-- NotebookLM bridge is used for health, sync, synthesis, and research
+Use these files together:
 
-### Product version identity
+- [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:16)
+- [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1)
 
-Current canonical source:
+### Current dashboard surfaces
 
-- [VERSION](C:/Users/vizio/CAMELOT_OS/VERSION:1)
+Use these paths:
 
-Current canonical value:
+- `02_FORGE/PORTAL_CORE/Anya_Dashboard`
+- `02_FORGE/apps/omni-eye-dashboard`
 
-- `400.1.0`
+Do not keep calling `02_FORGE/web/` the current dashboard root.
 
-Conflicting narrative docs:
+## Historical And Mirror Docs
 
-- [OS_MANIFEST.md](C:/Users/vizio/CAMELOT_OS/OS_MANIFEST.md:1) says `v300.4.0`
-- [BOOTSTRAP.md](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/BOOTSTRAP.md:1) says `v300.5`
-- [NOTICE.md](C:/Users/vizio/CAMELOT_OS/NOTICE.md:2) says `v300.0.0`
+These remain useful for context, but not as current truth:
 
-## Drift And Risk Register
+- [docs/architecture/EMPIRE_MAP.md](C:/Users/vizio/CAMELOT_OS/docs/architecture/EMPIRE_MAP.md:1)
+- [03_VAULT/training/configs/BOOTSTRAP.md](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/BOOTSTRAP.md:1)
+- [docs/SEPTEM_REGNA/L7_ETHEREAL/OS_MANIFEST.md](C:/Users/vizio/CAMELOT_OS/docs/SEPTEM_REGNA/L7_ETHEREAL/OS_MANIFEST.md:1)
+- older notebook-derived architecture notes under `docs/` and `03_VAULT/`
 
-### Drift 1: Version identity drift
+## Maintenance Rule
 
-Symptoms:
+Before changing architecture docs:
 
-- Runtime says `400.1.0`
-- Multiple core docs still say `v300.x`
-
-Risk:
-
-- Operators and agents may choose the wrong notebook, wrong boot path, or
-  wrong compatibility assumptions.
-
-### Drift 2: Notebook identity drift
-
-Symptoms:
-
-- Runtime bridge/config point to notebook `bcaadfdd...`
-- Older bootstrap doc points to notebook `a9cf586e...`
-
-Risk:
-
-- Sync or planning operations may target the wrong notebook if an older doc is
-  followed manually.
-
-### Drift 3: Mixed canonical and training content
-
-Symptoms:
-
-- `03_VAULT/training/configs/` contains both live bridge code and historical
-  narrative assets
-
-Risk:
-
-- Engineers may assume all files in that directory are equally current.
-
-## Recommended Cleanup Order
-
-1. Update [OS_MANIFEST.md](C:/Users/vizio/CAMELOT_OS/OS_MANIFEST.md:1) to either
-   match `400.1.0` or mark itself as a `v300.4.0` historical manifest.
-2. Update [03_VAULT/training/configs/BOOTSTRAP.md](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/BOOTSTRAP.md:1)
-   to either reference the current notebook ID or add a historical banner.
-3. Add explicit `historical snapshot` banners to
-   [notebook_context.md](C:/Users/vizio/CAMELOT_OS/notebook_context.md:1) and
-   [docs/reports/verification_report_v300.4.md](C:/Users/vizio/CAMELOT_OS/docs/reports/verification_report_v300.4.md:1).
-4. Keep notebook identity defined in exactly one code path:
-   [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:14).
-5. Keep operator-facing notebook URL config in exactly one persisted file:
-   [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1).
-
-## Short Decision Rule
-
-If the question is:
-
-- "What notebook is current?" use `notebooklm_bridge.py`
-- "What URL/profile is the operator using?" use `.camelot-config.yaml`
-- "What does the cloudbrain actually do?" use `long_term_cloudbrain.py` and
-  `cloud_services.py`
-- "What can the operator run?" use `camelot_cli.py`
-- "What did the older v300 system say?" use `BOOTSTRAP.md` and
-  `notebook_context.md`
+1. Check the live runtime code and config first
+2. Verify referenced paths actually exist in this checkout
+3. Update root `entiremap.md` before any mirror copy
+4. Treat missing-file references as a doc bug, not as architecture truth

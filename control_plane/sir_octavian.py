@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
-QUEUE_PATH    = HOME / "control_plane" / "harness_queue.jsonl"
+QUEUE_PATH    = HOME / "logs" / "harness_queue.jsonl"
 MANIFEST_PATH = HOME / "logs" / "switchboard_manifest.json"
 LEDGER_PATH   = HOME / "PROVENANCE_LEDGER.md"
 METRICS_PATH  = HOME / "logs" / "metrics.json"

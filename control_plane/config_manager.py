@@ -39,6 +39,8 @@ class CamelotConfig(BaseModel):
     precise_mode_health_url: Optional[str] = None
     excalibur_bridge_url: Optional[str] = None
     excalibur_health_url: Optional[str] = None
+    warp_repo_workflows_path: str = ".warp/workflows"
+    warp_local_workflows_path: str = "C:/Users/vizio/AppData/Roaming/warp/Warp/data/workflows"
     active_profile: str = "default"
     profiles: dict[str, OperatorProfile] = Field(default_factory=lambda: {"default": OperatorProfile()})
 

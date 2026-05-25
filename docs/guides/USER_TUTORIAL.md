@@ -1,5 +1,10 @@
 # Camelot-OS User Tutorial
 
+> Historical tutorial warning:
+> This guide contains older workflow and topology material.
+> For current architecture truth use `docs/architecture/SOURCE_OF_TRUTH_MAP.md`
+> and `entiremap.md` first.
+
 **Version:** v300.5 — Universal Singularity
 **Audience:** New operators of the Camelot-OS 3-tier system
 **Updated:** 2026-04-13
@@ -33,14 +38,15 @@ You should already have these installed; verify in one shot:
 .venv/Scripts/modal.exe --version         # 1.4.x
 ls 02_FORGE/kinetic/bin/prometheus/prometheus.exe
 ls 02_FORGE/kinetic/bin/grafana/bin/grafana-server.exe
-ls kinetic_edge/mcp_server/target/release/camelot-mcp-edge.exe
+ls bin/camelot-mcp-edge.exe
 ```
 
 If any are missing:
 
 - **Python venv** — `uv venv .venv && VIRTUAL_ENV=$PWD/.venv uv pip install modal pyyaml circuitbreaker structlog appwrite replicate google-generativeai fastapi uvicorn`
 - **Modal auth** — `.venv/Scripts/modal.exe token set --token-id <id> --token-secret <secret>`
-- **Edge binary** — `cd kinetic_edge/mcp_server && cargo build --release`
+- **Edge binary** — use the current repo binary at `bin/camelot-mcp-edge.exe`
+  and verify the live path from `entiremap.md`
 - **Observability binaries** — see `monitoring/BINARIES_REQUIRED.md`
 
 ---
@@ -172,7 +178,7 @@ Scrape targets live in `monitoring/prometheus.yml`.
 |---|---|
 | Universal tier config | `config/tiers.yaml` |
 | Tier controller | `tier.py` |
-| Edge binary | `kinetic_edge/mcp_server/target/release/camelot-mcp-edge.exe` |
+| Edge binary | `bin/camelot-mcp-edge.exe` |
 | Local entry point | `local_brain/main.py` (loads Excalibur kernel) |
 | Cloud app | `02_FORGE/PORTAL_CORE/Modal/morgana/morgana_core.py` |
 | Vault | `security/morgana_vault.py` (wraps `03_VAULT/vault_manager.py`) |

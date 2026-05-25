@@ -3,6 +3,61 @@ import { describe, expect, it, beforeEach, vi } from 'vitest';
 import type { ReactNode } from 'react';
 import App from '../App';
 
+const camelotOsFixture = {
+  status: 'OK',
+  generated_utc: '2026-05-13T18:00:00Z',
+  repo_root: 'C:\\Users\\vizio\\CAMELOT_OS',
+  version: 'v701.0',
+  summary: {
+    architecture_layers: 7,
+    schematic_edges: 10,
+    active_cartridges: 9,
+    knights: 31,
+    codex_surfaces_online: 5,
+    cloudbrain_queue_pending: 0,
+  },
+  orchestration: {
+    layers: [],
+    edges: [],
+    codex_surfaces: { cli: true, boot: true, ledger: true, dashboard: true, cloudbrain: true },
+    switchboard_terminals: [],
+    cartridges: { active_count: 9, names: [] },
+    roster: { count: 31, agents: [] },
+  },
+  memory_tiers: [],
+  ledgers: {
+    root: { exists: true, path: 'PROVENANCE_LEDGER.md' },
+    verification: { exists: true, path: '03_VAULT/Missions/verification_ledger.jsonl' },
+    cloudbrain_manifest: { exists: true, path: '03_VAULT/runtime_state/camelot_cloudbrain_v701_manifest.json' },
+    codex_integration: { exists: true, path: '03_VAULT/runtime_state/codex_integration_latest.json' },
+    knight_configuration: { exists: true, path: '03_VAULT/runtime_state/knight_configuration_latest.json' },
+    latest_root_excerpt: '',
+  },
+  outputs: {},
+  frontier: {
+    schema: 'camelot.frontier_nodes.v1',
+    generated_utc: '2026-05-13T18:00:00Z',
+    artifact_path: '03_VAULT/runtime_state/frontier_nodes_latest.json',
+    nodes: [
+      {
+        node_id: 'chatgpt_frontier',
+        provider: 'openai',
+        surface: 'ChatGPT / OpenAI API',
+        role: 'strategic_planner',
+        permissions: ['status', 'route'],
+        memory_tiers: ['flash', 'short'],
+        status: 'available',
+      },
+    ],
+    support: {
+      status: 'disabled',
+      active_session: null,
+      sessions: [],
+    },
+    events: [],
+  },
+};
+
 vi.mock('react-router-dom', async () => {
   const actual = await vi.importActual<typeof import('react-router-dom')>('react-router-dom');
   function BrowserRouterMock({ children }: { children: ReactNode }) {
@@ -21,16 +76,26 @@ vi.mock('react-router-dom', async () => {
 
 const navItems = [
   { label: 'Hub', path: '/' },
+  { label: 'OS', path: '/camelot-os' },
   { label: 'Alex', path: '/alex' },
   { label: 'Research', path: '/research' },
   { label: 'Dev', path: '/dev' },
   { label: 'Defense', path: '/defense-grid' },
-  { label: 'Cartridges', path: '/cartridge/cognitive' },
 ] as const;
 
 describe('App navigation and development portal', () => {
   beforeEach(() => {
     window.history.pushState({}, '', '/dev');
+    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.includes('/api/camelot-os/status')) {
+        return new Response(JSON.stringify(camelotOsFixture), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      return new Response('{}', { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }));
   });
 
   it('renders the development portal headings, live status, and affordances', async () => {
@@ -75,5 +140,13 @@ describe('App navigation and development portal', () => {
     expect(await screen.findByRole('heading', { name: /user console/i })).toBeInTheDocument();
     expect(await screen.findByRole('button', { name: /^run$/i })).toBeInTheDocument();
     expect(await screen.findByText(/lockdown requires typed confirmation/i)).toBeInTheDocument();
+  });
+
+  it('renders the Camelot OS command route', async () => {
+    window.history.pushState({}, '', '/camelot-os');
+    render(<App />);
+
+    expect(await screen.findByRole('heading', { name: /camelot os command/i })).toBeInTheDocument();
+    expect(await screen.findByText(/whole-system map/i)).toBeInTheDocument();
   });
 });

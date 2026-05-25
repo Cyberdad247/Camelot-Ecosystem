@@ -61,6 +61,16 @@ class OMCTeam:
         }
     )
 
+    # Per-knight env overrides — all LLM calls route through CLIProxyAPI (:8080)
+    WORKER_ENV: dict[str, dict[str, str]] = field(
+        default_factory=lambda: {
+            "sir_boris":  {"ANTHROPIC_BASE_URL": "http://127.0.0.1:8080/v1"},
+            "sir_codex":  {"OPENAI_BASE_URL":    "http://127.0.0.1:8080/v1"},
+            "sir_alex":   {"ANTHROPIC_BASE_URL": "http://127.0.0.1:8080/v1"},
+            "sir_sentinel": {"ANTHROPIC_BASE_URL": "http://127.0.0.1:8080/v1"},
+        }
+    )
+
     # Interchangeable harness commands.
     HARNESS_COMMANDS: dict[str, str] = field(
         default_factory=lambda: {
@@ -265,8 +275,11 @@ class OMCTeam:
 
         if worker.knight_id == "sir_boris":
             shell_cmd = f'{engine_cmd} --print "{prompt}" 2>&1 | tee {result_file}'
-        elif worker.knight_id in {"sir_helio", "sir_codex"}:
+        elif worker.knight_id == "sir_helio":
             shell_cmd = f'{engine_cmd} "{prompt}" 2>&1 | tee {result_file}'
+        elif worker.knight_id == "sir_codex":
+            # Route through CLIProxyAPI for free provider pool
+            shell_cmd = f'OPENAI_BASE_URL=http://127.0.0.1:8080/v1 {engine_cmd} "{prompt}" 2>&1 | tee {result_file}'
         else:
             return False
 
@@ -338,12 +351,14 @@ class OMCTeam:
             return self._missing_engine_payload(worker)
 
         try:
+            proc_env = os.environ.copy()
+            proc_env.update(self.WORKER_ENV.get(worker.knight_id, {}))
             result = subprocess.run(
                 command,
                 capture_output=True,
                 timeout=timeout,
                 cwd=str(CAMELOT_OS),
-                env=os.environ.copy(),
+                env=proc_env,
             )
             stdout_text = (result.stdout or b"").decode("utf-8", errors="replace").strip()
             stderr_text = (result.stderr or b"").decode("utf-8", errors="replace").strip()

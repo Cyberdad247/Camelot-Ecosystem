@@ -1,9 +1,9 @@
 {
-  "crystal_id": "vKG_SYNC_LATTICE_20260525T145200",
+  "crystal_id": "vKG_SYNC_LATTICE_20260525T162610",
   "compression_level": "NANO",
   "schema_version": "v1000",
-  "north_star": "Dreams don't come true, visions do",
   "anya_seal": "ANYA_IS_THE_GATE",
+  "north_star": "Dreams dont come true, visions do",
   "agents_executed": [
     "LADY_MNEMOSYNE",
     "SIR_SOCRATES",
@@ -15,97 +15,68 @@
     "ANYA_OMEGA"
   ],
   "entropy_audit": {
-    "total_candidates": 202,
-    "distill_approved": 186,
-    "keep_protected": 16,
-    "total_bytes_reclaimed": 1155074,
+    "total_candidates": 39,
+    "distill_approved": 35,
+    "keep_protected": 4,
+    "total_bytes_reclaimed": 1762284,
     "gideon_z3_clean": true,
     "gideon_flags": []
   },
   "distill_schema": {
-    "tests:::.sqlite3::<1MB": 4,
-    "tests:::no-ext::0B": 8,
-    "data:::no-ext::0B": 12,
-    "data:::.exe::0B": 3,
-    "data:::.log::0B": 4,
-    "data:::.pid::0B": 2,
-    "03_VAULT:::.db::<1MB": 1,
-    "03_VAULT:::.log::<1KB": 6,
-    "99_HISTORY:::varies::<1KB": 146
+    "data::.exe::<1KB": 4,
+    "data::.log::0B": 2,
+    "data::.pid::<1KB": 1,
+    "tests::.sqlite3::<1MB": 4,
+    "tests::.bin::<1MB": 6,
+    "tests::.bin::<1KB": 12,
+    "tests::.bin::0B": 6
   },
   "pddl_state": {
     "domain": "camelot-entropy-distillation",
-    "predicates": [
-      "(stale ?f)",
-      "(protected ?f)",
-      "(referenced ?f)",
-      "(distilled ?f)"
-    ],
-    "axioms": [
-      "(:axiom :vars (?f) :context (and (stale ?f) (not (protected ?f)) (not (referenced ?f))) :implies (distill-approved ?f))"
-    ],
     "sat_constraints": [
       "NOT (distill x) IF (protected x)",
       "NOT (distill x) IF (referenced-in-prod x)",
       "DISTILL-APPROVED IFF (stale x AND NOT protected x AND NOT referenced x)"
     ],
-    "goal": "(forall (?f) (not (active-entropy ?f)))",
     "z3_verified": true,
-    "init_state_count": 186
+    "goal": "(forall (?f) (not (active-entropy ?f)))"
   },
-  "fingerprint_sha256": "a3f7c2e8b1d94f06",
-  "sealed_at": "2026-05-25T14:52:00Z",
-  "stale_entropy_classes": [
-    {
-      "class": "pytest-tmp-chromadb",
-      "dirs": ["tests/tmp_l2_integration","tests/tmp_mempalace_integrity","tests/tmp_mempalace_isolation","tests/tmp_mempalace_l2_scoped"],
-      "verdict": "DISTILL",
-      "reason": "Test fixture artifacts — zero production references, >40h stale",
-      "bytes": 753664
-    },
-    {
-      "class": "pytest-boot-sequence-stubs",
-      "dir": "data/pytest-boot-sequence",
-      "verdict": "DISTILL",
-      "reason": "Zero-byte log/pid/exe stubs from CI fixtures — no signal, pure entropy",
-      "bytes": 24
-    },
-    {
-      "class": "lt-memory-sqlite",
-      "path": "03_VAULT/runtime_state/lt_memory.db",
-      "verdict": "DISTILL",
-      "reason": "Stale local SQLite cache (121h) — superseded by Qdrant Cloud + Redis Agent Memory",
-      "bytes": 24576
-    },
-    {
-      "class": "sir-codex-purge-logs",
-      "dir": "03_VAULT/runtime_state/sir_codex_directory_purge",
-      "verdict": "DISTILL",
-      "reason": "Operational logs from completed purge runs — semantic content crystallized here",
-      "bytes": 3050
-    },
-    {
-      "class": "harness-queue-archive",
-      "dir": "99_HISTORY/harness_queue_archive",
-      "verdict": "DISTILL",
-      "reason": "Historical harness run artifacts — lineage preserved in PROVENANCE_LEDGER",
-      "bytes": 373760
-    }
-  ],
-  "octavian_compliance": {
-    "protected_classes_intact": [
-      "PROVENANCE_LEDGER.md",
-      "03_VAULT/UKG/nodes/**",
-      "01_KERNEL/memory/**",
-      "control_plane/runners/rust/**",
-      ".env"
-    ],
-    "financial_logs": "NONE_FLAGGED",
-    "persona_dna": "INTACT",
-    "regulatory_records": "INTACT"
-  },
-  "connected_nodes": [
-    "UKG_NANO_SWARM_V1000",
-    "CAMELOT_APEX_OMEGA_PRIME_CRYSTAL"
+  "fingerprint_sha256": "c7d3523c82623355",
+  "paths_destroyed": [
+    "data\\pytest-boot-sequence\\telemetry-hidden\\bin\\vizion-telemetry.exe",
+    "data\\pytest-boot-sequence\\morgana-spawn\\CAMELOT_OS\\logs\\morgana_bridge.err.log",
+    "data\\pytest-boot-sequence\\morgana-spawn\\CAMELOT_OS\\logs\\morgana_bridge.out.log",
+    "data\\pytest-boot-sequence\\morgana-spawn\\CAMELOT_OS\\logs\\morgana_bridge.pid",
+    "data\\pytest-boot-sequence\\morgana-spawn\\CAMELOT_OS\\01_KERNEL\\senses\\morgana_bridge\\target\\debug\\morgana_bridge.exe",
+    "data\\pytest-boot-sequence\\morgana-missing-token\\01_KERNEL\\senses\\morgana_bridge\\target\\debug\\morgana_bridge.exe",
+    "data\\pytest-boot-sequence\\lt-memory-windows\\CAMELOT_OS\\.venv_camelot\\Scripts\\python.exe",
+    "tests\\tmp_l2_integration\\chroma.sqlite3",
+    "tests\\tmp_l2_integration\\fe4500b1-617a-4238-8c39-03091fae65fd\\data_level0.bin",
+    "tests\\tmp_l2_integration\\fe4500b1-617a-4238-8c39-03091fae65fd\\header.bin",
+    "tests\\tmp_l2_integration\\fe4500b1-617a-4238-8c39-03091fae65fd\\length.bin",
+    "tests\\tmp_l2_integration\\fe4500b1-617a-4238-8c39-03091fae65fd\\link_lists.bin",
+    "tests\\tmp_mempalace_integrity\\chroma.sqlite3",
+    "tests\\tmp_mempalace_integrity\\cb51646e-1699-418a-b4df-262586d4ae6f\\data_level0.bin",
+    "tests\\tmp_mempalace_integrity\\cb51646e-1699-418a-b4df-262586d4ae6f\\header.bin",
+    "tests\\tmp_mempalace_integrity\\cb51646e-1699-418a-b4df-262586d4ae6f\\length.bin",
+    "tests\\tmp_mempalace_integrity\\cb51646e-1699-418a-b4df-262586d4ae6f\\link_lists.bin",
+    "tests\\tmp_mempalace_isolation\\chroma.sqlite3",
+    "tests\\tmp_mempalace_isolation\\9d7b52db-0da1-42dd-8d9c-cfcaa7779812\\data_level0.bin",
+    "tests\\tmp_mempalace_isolation\\9d7b52db-0da1-42dd-8d9c-cfcaa7779812\\header.bin",
+    "tests\\tmp_mempalace_isolation\\9d7b52db-0da1-42dd-8d9c-cfcaa7779812\\length.bin",
+    "tests\\tmp_mempalace_isolation\\9d7b52db-0da1-42dd-8d9c-cfcaa7779812\\link_lists.bin",
+    "tests\\tmp_mempalace_isolation\\f379b87b-3b65-4b1e-ad19-249574ac8853\\data_level0.bin",
+    "tests\\tmp_mempalace_isolation\\f379b87b-3b65-4b1e-ad19-249574ac8853\\header.bin",
+    "tests\\tmp_mempalace_isolation\\f379b87b-3b65-4b1e-ad19-249574ac8853\\length.bin",
+    "tests\\tmp_mempalace_isolation\\f379b87b-3b65-4b1e-ad19-249574ac8853\\link_lists.bin",
+    "tests\\tmp_mempalace_l2_scoped\\chroma.sqlite3",
+    "tests\\tmp_mempalace_l2_scoped\\385b2091-40b3-49a2-9cfe-51095b4b0317\\data_level0.bin",
+    "tests\\tmp_mempalace_l2_scoped\\385b2091-40b3-49a2-9cfe-51095b4b0317\\header.bin",
+    "tests\\tmp_mempalace_l2_scoped\\385b2091-40b3-49a2-9cfe-51095b4b0317\\length.bin",
+    "tests\\tmp_mempalace_l2_scoped\\385b2091-40b3-49a2-9cfe-51095b4b0317\\link_lists.bin",
+    "tests\\tmp_mempalace_l2_scoped\\ee62fd2c-8bb4-4aae-a9fd-46909198cb53\\data_level0.bin",
+    "tests\\tmp_mempalace_l2_scoped\\ee62fd2c-8bb4-4aae-a9fd-46909198cb53\\header.bin",
+    "tests\\tmp_mempalace_l2_scoped\\ee62fd2c-8bb4-4aae-a9fd-46909198cb53\\length.bin",
+    "tests\\tmp_mempalace_l2_scoped\\ee62fd2c-8bb4-4aae-a9fd-46909198cb53\\link_lists.bin"
   ]
 }

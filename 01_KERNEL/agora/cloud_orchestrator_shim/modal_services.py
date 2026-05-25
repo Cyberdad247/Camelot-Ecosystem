@@ -867,7 +867,7 @@ def run_precise_mode(payload: dict[str, Any] | PreciseModeRequest) -> dict[str, 
     return response.model_dump(mode="json")
 
 
-@APP.function(image=IMAGE, timeout=900)
+@APP.function(image=IMAGE, timeout=900, gpu="A100")
 @modal.asgi_app()
 def open_notebook_cloudbrain():
     """Expose the existing Open Notebook API as the long-term Modal cloudbrain."""

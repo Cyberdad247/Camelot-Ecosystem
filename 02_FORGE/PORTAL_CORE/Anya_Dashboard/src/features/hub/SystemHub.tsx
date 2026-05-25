@@ -133,6 +133,12 @@ export default function SystemHub() {
         </h2>
         <div className="flex flex-wrap gap-2">
           <Link
+            to="/camelot-os"
+            className="rounded-lg border border-fuchsia-500/40 bg-fuchsia-950/30 px-4 py-2 text-sm font-semibold text-fuchsia-300 hover:brightness-125 transition-all"
+          >
+            Camelot OS
+          </Link>
+          <Link
             to="/alex"
             className="rounded-lg border border-indigo-500/40 bg-indigo-950/30 px-4 py-2 text-sm font-semibold text-indigo-300 hover:brightness-125 transition-all"
           >

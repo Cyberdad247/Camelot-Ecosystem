@@ -1,6 +1,11 @@
 # TASKS.md - Production Blueprint
 *This file is the production execution board for Camelot-OS. Completed work is retained for traceability. Open items are the remaining gates to ship a supportable operator platform.*
 
+> Historical planning note:
+> Some tasks below reference older path names and architecture labels.
+> For current live surfaces use `docs/architecture/SOURCE_OF_TRUTH_MAP.md`
+> and `entiremap.md`.
+
 ## Current State
 *   [X] **P0.1** - Canonical CLI online: `Camelot-OS` runs from the repo `.venv` and supports colored incremental streaming.
 *   [X] **P0.2** - Control-plane routing online: typed cloud routing, SARDA augmentation, and policy-gated service access are implemented.

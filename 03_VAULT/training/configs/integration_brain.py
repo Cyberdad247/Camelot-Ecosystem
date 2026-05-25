@@ -70,16 +70,16 @@ async def _lt_synthesize(query: str) -> str:
     if LONG_TERM_BACKEND == "stub":
         return f"[LT-stub: Modal not yet deployed]"
     try:
-        import httpx
-        async with httpx.AsyncClient(timeout=30.0) as client:
-            r = await client.post(
-                MODAL_SYNTHESIZE_URL,
-                json={"query": query},
-            )
-            r.raise_for_status()
-            return r.json().get("result", "[LT: empty response]")
+        import websockets
+        import json
+        ws_url = MODAL_SYNTHESIZE_URL.replace('https://', 'wss://').replace('http://', 'ws://')
+        async with websockets.connect(ws_url, open_timeout=5.0) as ws:
+            await ws.send(json.dumps({"query": query}))
+            response = await asyncio.wait_for(ws.recv(), timeout=30.0)
+            data = json.loads(response)
+            return data.get("result", "[LT: empty response]")
     except Exception as e:
-        return f"[LT: Modal unreachable — {type(e).__name__}: {e}]"
+        return f"[LT: Modal unreachable via WS — {type(e).__name__}: {e}]"
 
 
 async def _lt_health() -> tuple[bool, str, float]:

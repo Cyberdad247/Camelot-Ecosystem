@@ -30,7 +30,7 @@ from pathlib import Path
 from typing import AsyncGenerator, Optional
 
 HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
-QUEUE_PATH = HOME / "control_plane" / "harness_queue.jsonl"
+QUEUE_PATH = HOME / "logs" / "harness_queue.jsonl"
 
 
 class AudioSession:
@@ -67,7 +67,7 @@ class AudioSession:
         transcript: str,
         mode: str = "efficiency",
     ) -> AsyncGenerator[bytes, None]:
-        """Run one full voice turn: classify → dispatch → TTS stream.
+        """Run one full voice turn: classify → enqueue → poll response → TTS stream.
 
         Yields audio bytes. Stops early if VAD interrupt fires.
         """
@@ -78,10 +78,18 @@ class AudioSession:
         terminal, category, confidence = await self._classify(transcript)
         terminal_id = terminal.id if terminal else "unknown"
 
-        # Step 2: dispatch to knight via harness queue; get text stream back
-        text_stream = self._dispatch_to_knight(transcript, terminal_id, turn_id, category.value)
+        # Step 2: enqueue directive to harness queue
+        enqueue_ok = await self._enqueue_task(transcript, terminal_id, turn_id, category.value)
 
-        # Step 3: synthesize with interrupt support
+        # Step 3: stream real response from harness worker (falls back to error token on queue fail)
+        if enqueue_ok:
+            text_stream = self._response_stream_from_harness(turn_id)
+        else:
+            async def _err_stream():
+                yield "[queue error — cannot dispatch]"
+            text_stream = _err_stream()
+
+        # Step 4: synthesize with interrupt support
         async for audio_chunk in self.vad.synthesize_interruptible(
             token_stream=text_stream,
             kitten=self.kitten,
@@ -163,20 +171,14 @@ class AudioSession:
 
         return await route_by_intent(text, self.board)
 
-    async def _dispatch_to_knight(
+    async def _enqueue_task(
         self,
         directive: str,
         terminal_id: str,
         turn_id: str,
         intent: str,
-    ) -> AsyncGenerator[str, None]:
-        """Enqueue directive and yield text tokens.
-
-        Current implementation: enqueue to harness_queue and yield a
-        placeholder stream. Full async streaming from harness requires
-        a response channel (e.g., Redis pub/sub or asyncio.Queue returned
-        by the harness worker). Wired as a TODO boundary.
-        """
+    ) -> bool:
+        """Write directive to harness_queue.jsonl. Returns True on success."""
         task = {
             "id": turn_id,
             "type": "forge",
@@ -190,38 +192,57 @@ class AudioSession:
         try:
             with QUEUE_PATH.open("a", encoding="utf-8") as f:
                 f.write(json.dumps(task) + "\n")
+            return True
         except Exception as e:
-            yield f"[AudioSession] queue error: {e}"
-            return
-
-        # TODO: replace with real async harness response stream
-        # For now: acknowledgement token so TTS has something to synthesize
-        yield f"Processing directive via {terminal_id}. "
-        yield f"Intent classified as {intent}. "
-        yield "Response will follow."
-        await asyncio.sleep(0)  # yield control
+            return False
 
     async def _response_stream_from_harness(
         self,
         turn_id: str,
         timeout: float = 30.0,
     ) -> AsyncGenerator[str, None]:
-        """Placeholder: poll logs/harness_responses/ for turn_id result.
+        """Stream response: tries Redis pub/sub first, falls back to file polling."""
+        # ── Redis path (low-latency) ──────────────────────────────────────────
+        raw = await asyncio.to_thread(self._redis_subscribe, turn_id, timeout)
+        if raw is not None:
+            try:
+                text = json.loads(raw).get("text", raw)
+            except Exception:
+                text = raw
+            for word in text.split():
+                yield word + " "
+                await asyncio.sleep(0)
+            return
 
-        Replace with Redis SUBSCRIBE or asyncio.Queue once harness worker
-        implements response channels.
-        """
-        response_path = HOME / "logs" / "harness_responses" / f"{turn_id}.txt"
+        # ── File-polling fallback ─────────────────────────────────────────────
+        response_path = HOME / "logs" / "harness_responses" / f"{turn_id}.json"
         deadline = time.monotonic() + timeout
         while time.monotonic() < deadline:
             if response_path.exists():
-                text = response_path.read_text(encoding="utf-8")
+                try:
+                    data = json.loads(response_path.read_text(encoding="utf-8"))
+                    text = data.get("text", "")
+                except Exception:
+                    text = response_path.read_text(encoding="utf-8")
                 for word in text.split():
                     yield word + " "
                     await asyncio.sleep(0)
                 return
             await asyncio.sleep(0.5)
         yield "[timeout waiting for harness response]"
+
+    def _redis_subscribe(self, turn_id: str, timeout: float) -> str | None:
+        """Blocking Redis subscribe — runs in thread pool via asyncio.to_thread."""
+        try:
+            import importlib.util as _ilu
+            _spec = _ilu.spec_from_file_location(
+                "redis_store", HOME / "01_KERNEL" / "memory" / "redis_store.py"
+            )
+            _mod = _ilu.module_from_spec(_spec)
+            _spec.loader.exec_module(_mod)  # type: ignore[union-attr]
+            return _mod.redis_store.subscribe_one(turn_id, timeout)
+        except Exception:
+            return None
 
 
 # Module-level singleton

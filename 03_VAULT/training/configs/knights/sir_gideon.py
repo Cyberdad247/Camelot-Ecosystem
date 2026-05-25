@@ -79,8 +79,9 @@ def _sp01_a2a_no_rbac() -> SpResult:
         evidence.append("omc_team.py: missing — dispatch gateway not found")
 
     # Secondary: files that call .execute() directly on an agent (bypassing omc_team)
-    direct_exec_re = re.compile(r"\w+\s*\.\s*execute\s*\(", re.IGNORECASE)
+    direct_exec_re = re.compile(r"(?P<receiver>\w+)\s*\.\s*execute\s*\(", re.IGNORECASE)
     omc_via_re = re.compile(r"omc_team|OMCTeam|_omc_team", re.IGNORECASE)
+    safe_receivers = {"conn", "_conn", "cur", "cursor", "pipe", "_client", "client", "db", "session"}
     skip = {"rbac_matrix.py", "harness.py", "anya_gate.py", "omc_team.py"}
     for py in CONTROL_PLANE.glob("*.py"):
         if py.name in skip:
@@ -89,8 +90,18 @@ def _sp01_a2a_no_rbac() -> SpResult:
             txt = py.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-        if direct_exec_re.search(txt) and not omc_via_re.search(txt) and not rbac_import.search(txt):
-            evidence.append(f"{py.name}: direct .execute() without RBAC or omc_team routing")
+        if omc_via_re.search(txt) or rbac_import.search(txt):
+            continue
+        for i, line in enumerate(txt.splitlines(), 1):
+            match = direct_exec_re.search(line)
+            if not match:
+                continue
+            receiver = match.group("receiver").lower()
+            if receiver in safe_receivers:
+                continue
+            if "sqlite" in line.lower() or "redis" in line.lower():
+                continue
+            evidence.append(f"{py.name}:{i}: direct .execute() without RBAC or omc_team routing")
 
     if not (VAULT_CONFIGS / "config" / "access_matrix.json").exists():
         evidence.append("access_matrix.json missing")

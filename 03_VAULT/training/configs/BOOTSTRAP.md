@@ -1,9 +1,15 @@
-# [CAMELOT_APEX_OS_v400.1.0_MASTER_BOOTSTRAP.nkg]
-# Codename: UNIVERSAL_SINGULARITY
+# [CAMELOT_APEX_OS_v700.0.0_MASTER_BOOTSTRAP.nkg]
+# Codename: SOVEREIGN_LATTICE
 # Fusion: Singularity Lattice Protocol + Idea Stacking Harvest + Apex Universal
 # Authority: Anya_Omega v202.0 (APEE v6.5 Sovereign Compiler) + Merlin_Omega (System 2 Archwizard)
 
-## //BOOT PHASE MATRIX (v400.1.0 — Ω_GATEWAY)
+> Historical bootstrap note:
+> This file captures an older v700 bootstrap narrative.
+> For current runtime truth use `control_plane/boot_sequence.py`,
+> `bin/awaken.py`, `docs/architecture/SOURCE_OF_TRUTH_MAP.md`, and
+> `entiremap.md`.
+
+## //BOOT PHASE MATRIX (v700.0.0 — Ω_SOVEREIGN)
 
 On `//BOOT`, `hud.py::main()` runs a **6-phase ignition**. Each phase is
 idempotent (safe to re-run), isolated (failure in one phase does not block
@@ -19,7 +25,7 @@ subsequent phases), and instrumented (status panel rendered via rich).
 | 6 | Interactive | Runic REPL | TTY | `interactive_loop()` | — |
 
 ### Phase 3 — Kinetic Edge (Lukas)
-- Binary: `kinetic_edge/mcp_server/target/release/camelot-mcp-edge.exe`
+- Binary: current checkout uses `bin/camelot-mcp-edge.exe`
 - Source: 1008 LoC Rust (`main.rs`, `ap2_settlement.rs`, `turboquant.rs`, `wasi_nn.rs`) + `wasi_guest/`
 - Security: AgentArmor PDG — 4 rules, 8 blocked path patterns (`.env`, `.git-credentials`, `.modal.toml`, `secrets.json`, `credentials`, `.ssh/`, `id_rsa`, `id_ed25519`), 2 allowed roots (`CAMELOT_OS/`, `.camelot/`)
 - Tools: `list_directory`, `read_file`, `stat_file`, `write_file`, `patch_file` — all taint-gated by PDG
@@ -29,8 +35,10 @@ subsequent phases), and instrumented (status panel rendered via rich).
 - Library: `notebooklm-py==0.3.4` (Cyberdad247 fork, pinned SHA `a9977180416ecf1e4ffc7c2c4c7a17f2ec89ed40`)
 - Runtime: isolated venv `CAMELOT_OS/.venv_camelot/` with **CPython 3.13.12** (uv-managed)
 - Bridge: `03_VAULT/training/configs/notebooklm_bridge.py`
-- Canonical notebook: `bcaadfdd-1654-487d-9c4c-111f7dea120e` — *"Living Camelot-OS v.400"*
-- Current release anchor: repo `VERSION` is `400.1.0`; if this file ever disagrees with `notebooklm_bridge.py` or `.camelot-config.yaml`, the code/config wins.
+- Canonical notebook: `8c656cfa-a189-409e-a72d-07692a47f17e` — *"Camelot-OS v.999.3"*
+- Current release anchor: use `notebooklm_bridge.py`, `.camelot-config.yaml`,
+  and `docs/architecture/SOURCE_OF_TRUTH_MAP.md`; there is no maintained root
+  `VERSION` file in this checkout.
 - **Lazy synthesis**: `//BOOT` only performs a `notebooks.list()` heartbeat (~1s). Full Oracle query against the canonical notebook is deferred until the first `//PLAN` invocation. Results are TTL-cached 900s.
 - **Cookie migration**: On first run, if `~/.notebooklm/profiles/default/storage_state.json` is missing, the bridge auto-converts the legacy `~/.notebooklm-mcp-cli/profiles/default/cookies.json` via `convert_rookiepy_cookies_to_storage_state()`.
 - **Refresh**: If Google returns a signin redirect, run `notebooklm login` in the venv to re-authenticate.
