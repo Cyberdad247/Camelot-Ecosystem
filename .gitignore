@@ -101,18 +101,24 @@ installation_id
 # 6b. Oversized local/vendor binaries not suitable for GitHub
 02_FORGE/kinetic/bin/
 docs/EXTERNAL/piper/models/
+docs/reference/EXTERNAL/
 
-# Regenerable artifacts (added by reorg/v300-cleanup)
-__pycache__/
-node_modules/
-.next/
-dist/
-*.pyc
-.pytest_cache/
+# 6c. openclaw build artifacts (electron/vscode fork — rebuild with npm run build)
+02_FORGE/apps/openclaw/.local/
+02_FORGE/apps/openclaw/bundled-plugin-runtime-deps/
+02_FORGE/apps/openclaw/dist-runtime/
+02_FORGE/apps/openclaw/extensions/
 
-# Credential patterns (reorg/v300-cleanup)
-*.key
-oauth_creds.json
-google_accounts.json
-secrets.json
-.modal.toml
+# 6d. Browser profiles — never belong in source tree
+**/.gemini/antigravity*/
+**/.gemini/Profile*/
+**/.gemini/Default/
+**/.gemini/OptGuideOnDeviceModel/
+**/.gemini/brain/
+**/.gemini/conversations/
+**/.gemini/browser_recordings/
+
+# (duplicate entries removed — covered above)
+
+# Git Worktrees
+.worktrees/

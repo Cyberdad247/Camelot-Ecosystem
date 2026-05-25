@@ -1,3 +1,5 @@
+mod qdrant_memory;
+
 use serde::Serialize;
 use std::env;
 use std::path::PathBuf;
@@ -63,8 +65,21 @@ fn print_payload(p: &Payload) {
     }
 }
 
-fn main() {
+#[tokio::main]
+async fn main() {
     let args: Vec<String> = env::args().collect();
+
+    // --probe-qdrant: connect to Qdrant Cloud (REST), list collections, print JSON
+    if args.contains(&"--probe-qdrant".to_string()) {
+        match qdrant_memory::QdrantRest::new() {
+            Ok(qd) => match qd.probe().await {
+                Ok(info) => println!("{}", serde_json::to_string_pretty(&info).unwrap()),
+                Err(e)   => eprintln!("probe failed: {e}"),
+            },
+            Err(e) => eprintln!("QdrantRest::new failed: {e}"),
+        }
+        return;
+    }
 
     let engine = get_arg_value(&args, "--engine", "");
     let prompt = get_arg_value(&args, "--prompt", "");

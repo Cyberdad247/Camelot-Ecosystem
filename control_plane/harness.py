@@ -26,6 +26,7 @@ import asyncio
 import json
 import os
 import signal
+import subprocess
 import sys
 import time
 from dataclasses import dataclass, field, asdict
@@ -58,15 +59,24 @@ TASK_POLL_INTERVAL_S   = 2
 ARCHIVIST_INTERVAL_S   = 3600   # 1 hr — Lord Archivist GEP scan
 GIDEON_INTERVAL_S      = 21600  # 6 hr — Sir Gideon //SCORPION pass
 GIDEON_REPORT_FILE     = LOGS_DIR / "gideon_report.json"
+TOON_V2_INTERVAL_S     = 21600  # 6 hr — TOON_v2 delta sync to Cloud Brain
+WATCHDOG_RESTART_COOLDOWN_S = 120  # min seconds between restart attempts per service
+
+# Services the watchdog can auto-restart (soft, non-critical)
+_SOFT_SERVICE_CMDS: dict[str, list] = {}  # populated lazily after HOME is resolved
 
 # ── Boot phase probes (mirrors hud.py logic without Rich) ────────────────────
 
 BOOT_PROBES: list[tuple[str, str, int]] = [
     ("CLIProxy",        "127.0.0.1", 8080),
     ("KineticEdge",     "127.0.0.1", 3001),
-    ("Qdrant",          "127.0.0.1", 6333),
+    ("Qdrant",          "127.0.0.1", 6333),   # overridden to cloud HTTPS when QDRANT_URL is set
     ("Saltare",         "127.0.0.1", 8085),
     ("Holotable",       "127.0.0.1", 3000),
+    ("OmniVoice",       "127.0.0.1", 3002),
+    ("KittenTTS",       "127.0.0.1", 8300),
+    ("SirOctavian",     "127.0.0.1", 8400),
+    ("Redis",           "127.0.0.1", 6379),
 ]
 
 
@@ -151,8 +161,57 @@ class SovereignHarness:
         self._last_sync   = "never"
         self._last_ledger = "never"
         self._probe_cache: dict[str, bool] = {}
+        self._restart_ts: dict[str, float] = {}  # service → last restart epoch
 
     # ── Watchdog ──────────────────────────────────────────────────────────────
+
+    def _soft_service_cmd(self, name: str) -> list[str] | None:
+        """Return the restart command for a soft service, or None if not restartable."""
+        venv_py = CAMELOT_HOME / ".venv" / "Scripts" / "python.exe"
+        py = str(venv_py) if venv_py.exists() else sys.executable
+        qdrant_exe = Path.home() / "bin" / "qdrant.exe"
+        qdrant_cfg = CAMELOT_HOME / "data" / "qdrant" / "config.yaml"
+        saltare_exe = CAMELOT_HOME / "kinetic_edge" / "saltare" / "saltare_gateway.exe"
+        saltare_cfg = CAMELOT_HOME / "01_KERNEL" / "EXCALIBUR" / "config" / "saltare.toml"
+        js = CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "omnivoice-router" / "omnivoice-router.js"
+        runner = LOGS_DIR / "_kitten_runner.py"
+        oct_py = CAMELOT_HOME / "control_plane" / "sir_octavian.py"
+        cmds = {
+            "Qdrant":     [str(qdrant_exe), "--config-path", str(qdrant_cfg)]
+                if qdrant_exe.exists() and qdrant_cfg.exists() else None,
+            "Saltare":    [str(saltare_exe), "--config", str(saltare_cfg), "mcp", "http", "--port", "8085"]
+                if saltare_exe.exists() and saltare_cfg.exists() else None,
+            "OmniVoice":   ["node", str(js)] if js.exists() else None,
+            "KittenTTS":   [py, str(runner)] if runner.exists() else None,
+            "SirOctavian": [py, str(oct_py), "--serve"] if oct_py.exists() else None,
+        }
+        return cmds.get(name)
+
+    async def _restart_soft_service(self, name: str) -> None:
+        cmd = self._soft_service_cmd(name)
+        if not cmd:
+            _log(f"[WATCHDOG] No restart command for {name}")
+            return
+        try:
+            import subprocess as _sp
+            import platform as _pl
+            kwargs: dict = {"cwd": str(CAMELOT_HOME)}
+            if _pl.system() == "Windows":
+                kwargs["creationflags"] = (
+                    getattr(_sp, "DETACHED_PROCESS", 0x08)
+                    | getattr(_sp, "CREATE_NEW_PROCESS_GROUP", 0x200)
+                )
+                kwargs["close_fds"] = True
+            else:
+                kwargs["start_new_session"] = True
+            out = LOGS_DIR / f"{name.lower()}_restart.log"
+            with out.open("ab") as fh:
+                kwargs["stdout"] = fh
+                kwargs["stderr"] = fh
+            proc = _sp.Popen(cmd, **kwargs)
+            _log(f"[WATCHDOG] RESTART {name} PID={proc.pid}")
+        except Exception as e:
+            _log(f"[WATCHDOG] RESTART {name} FAILED: {e}")
 
     async def _watchdog_loop(self) -> None:
         while self._running:
@@ -166,6 +225,11 @@ class SovereignHarness:
             dark = [n for n, ok in self._probe_cache.items() if not ok]
             if dark:
                 _log(f"[WATCHDOG] DARK: {', '.join(dark)}")
+                for name in dark:
+                    last = self._restart_ts.get(name, 0)
+                    if time.time() - last >= WATCHDOG_RESTART_COOLDOWN_S:
+                        self._restart_ts[name] = time.time()
+                        asyncio.create_task(self._restart_soft_service(name))
             else:
                 _log("[WATCHDOG] All probes green")
             await asyncio.sleep(WATCHDOG_INTERVAL_S)
@@ -185,6 +249,10 @@ class SovereignHarness:
                 self._last_sync = _utcnow()
                 lt_status = result.get("long_term", {})
                 st_status = result.get("short_term", {})
+                if not isinstance(st_status, dict):
+                    st_status = {"action": str(st_status)[:120]}
+                if not isinstance(lt_status, dict):
+                    lt_status = {"status": str(lt_status)[:120]}
                 _log(f"[MEMORY_SYNC] ST={st_status.get('action','?')} LT={lt_status.get('status','?')}")
             except Exception as e:
                 _log(f"[MEMORY_SYNC] ERROR: {type(e).__name__}: {e}")
@@ -290,6 +358,36 @@ class SovereignHarness:
                 _log(f"[SIR_GIDEON] SCORPION error: {type(e).__name__}: {e}")
             await asyncio.sleep(GIDEON_INTERVAL_S)
 
+    # ── TOON_v2 delta cron ────────────────────────────────────────────────────
+
+    async def _toon_v2_loop(self) -> None:
+        """Loop 8 — push ledger delta to Cloud Brain every 6h."""
+        await asyncio.sleep(900)  # 15 min after boot — let Cloud Brain auth settle
+        toon_py = CAMELOT_HOME / "scripts" / "toon_v2_delta.py"
+        while self._running:
+            if toon_py.exists():
+                try:
+                    env = {**os.environ, "CAMELOT_OS_HOME": str(CAMELOT_HOME)}
+                    proc = await asyncio.create_subprocess_exec(
+                        sys.executable, str(toon_py),
+                        stdout=asyncio.subprocess.PIPE,
+                        stderr=asyncio.subprocess.PIPE,
+                        env=env,
+                    )
+                    _, stderr = await asyncio.wait_for(proc.communicate(), timeout=120)
+                    if proc.returncode == 0:
+                        _log(f"[TOON_V2] Delta sync OK (exit=0)")
+                    else:
+                        err = (stderr or b"").decode(errors="replace").strip()[-200:]
+                        _log(f"[TOON_V2] Delta sync exit={proc.returncode}: {err}")
+                except asyncio.TimeoutError:
+                    _log("[TOON_V2] Delta sync timed out after 120s")
+                except Exception as e:
+                    _log(f"[TOON_V2] Delta sync error: {type(e).__name__}: {e}")
+            else:
+                _log("[TOON_V2] toon_v2_delta.py not found — skipping")
+            await asyncio.sleep(TOON_V2_INTERVAL_S)
+
     # ── Switchboard monitor ───────────────────────────────────────────────────
 
     async def _switchboard_loop(self) -> None:
@@ -297,7 +395,10 @@ class SovereignHarness:
         await asyncio.sleep(15)   # let boot settle
         while self._running:
             try:
-                from switchboard import probe_all, summary
+                try:
+                    from .switchboard import probe_all, summary
+                except ImportError:
+                    from control_plane.switchboard import probe_all, summary
                 await probe_all()
                 s = summary()
                 dark = [k for k, v in s.items() if v == "dark"]
@@ -312,13 +413,31 @@ class SovereignHarness:
     # ── Task queue ────────────────────────────────────────────────────────────
 
     async def _task_loop(self) -> None:
-        processed: set[str] = set()
+        processed: set[str] = self._queue_ids()
         while self._running:
             tasks = self._read_queue(processed)
             for task in sorted(tasks, key=lambda t: t.priority):
                 asyncio.create_task(self._dispatch(task))
                 processed.add(task.id)
             await asyncio.sleep(TASK_POLL_INTERVAL_S)
+
+    def _queue_ids(self) -> set[str]:
+        ids: set[str] = set()
+        if not QUEUE_FILE.exists():
+            return ids
+        try:
+            lines = QUEUE_FILE.read_text(encoding="utf-8").splitlines()
+        except Exception:
+            return ids
+        for line in lines:
+            try:
+                data = json.loads(line.strip())
+                tid = data.get("id")
+                if tid:
+                    ids.add(str(tid))
+            except Exception:
+                pass
+        return ids
 
     def _read_queue(self, processed: set[str]) -> list[HarnessTask]:
         tasks: list[HarnessTask] = []
@@ -384,12 +503,40 @@ class SovereignHarness:
             from knights.sir_gideon import SirGideon
             return SirGideon().execute(task.directive)
 
+        # Contract build — compile and smoke-test the portable Camelot runtime.
+        if task.directive.upper().startswith("//CONTRACT"):
+            script = CAMELOT_HOME / "scripts" / "build_portable.py"
+            if not script.exists():
+                return {"status": "failed", "error": f"missing build script: {script}"}
+            env = os.environ.copy()
+            env.setdefault("PYTHONIOENCODING", "utf-8")
+            proc = await asyncio.to_thread(
+                subprocess.run,
+                [sys.executable, str(script), "--test"],
+                cwd=str(CAMELOT_HOME),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=180,
+            )
+            output = (proc.stdout or "") + (proc.stderr or "")
+            return {
+                "status": "built" if proc.returncode == 0 else "failed",
+                "returncode": proc.returncode,
+                "binary": str(CAMELOT_HOME / "dist" / "camelot.exe"),
+                "summary": output[-500:],
+            }
+
         # Runic command dispatch
         if task.directive.startswith("//") or task.directive.startswith("Omega_"):
-            from .runic_router import detect_and_route
-            result = detect_and_route(task.directive)
-            if result:
-                return {"rune": result.rune, "task_id": result.task_id, "queued": result.queued}
+            try:
+                from .runic_router import parse_rune
+            except ImportError:
+                from control_plane.runic_router import parse_rune
+            parsed = parse_rune(task.directive)
+            if parsed:
+                rune, param = parsed
+                return {"rune": rune, "param": param, "status": "accepted_no_requeue"}
 
         # Generic — log and return
         return {"status": "dispatched", "knight": task.knight, "directive": task.directive}
@@ -422,6 +569,7 @@ class SovereignHarness:
             self._switchboard_loop(),
             self._archivist_loop(),
             self._gideon_loop(),
+            self._toon_v2_loop(),
         ]
 
         if once:
@@ -450,12 +598,27 @@ class SovereignHarness:
 
 # ── Logging ──────────────────────────────────────────────────────────────────
 
+_LOG_MAX_BYTES = 10 * 1024 * 1024   # 10 MB per file
+_LOG_BACKUP_COUNT = 3               # keep harness.log.1 / .2 / .3
+
+
+def _rotate_log(log_path: Path) -> None:
+    """Roll harness.log → .1 → .2 → .3, drop .3 if present."""
+    for i in range(_LOG_BACKUP_COUNT, 0, -1):
+        src = log_path.with_suffix(f".log.{i - 1}") if i > 1 else log_path
+        dst = log_path.with_name(log_path.name + f".{i}")
+        if src.exists():
+            src.replace(dst)
+
+
 def _log(msg: str) -> None:
     ts = datetime.now().strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
     print(line, flush=True)
     try:
         log_path = LOGS_DIR / "harness.log"
+        if log_path.exists() and log_path.stat().st_size >= _LOG_MAX_BYTES:
+            _rotate_log(log_path)
         with open(log_path, "a", encoding="utf-8") as f:
             f.write(line + "\n")
     except Exception:
