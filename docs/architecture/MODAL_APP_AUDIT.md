@@ -11,8 +11,8 @@ this repo and which ones actually own long-term versus short-term memory roles.
 ## Role Summary
 
 - `excalibur-brain` is the canonical remote long-term agentic brain surface.
-- NotebookLM `Living Camelot-OS v.400` is the canonical short-term living
-  notebook.
+- NotebookLM `Camelot-OS v.999.3` is the canonical short-term living notebook in
+  the current runtime bridge and operator config.
 - `morgana-research-agency-prod` is a support-service cluster for typed
   research, planning, and orchestration tasks.
 - Voice and media apps are peripheral service surfaces, not canonical memory

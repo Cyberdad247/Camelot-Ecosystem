@@ -16,6 +16,7 @@ import json
 import time
 import hashlib
 import warnings
+from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 import networkx as nx
@@ -343,60 +344,116 @@ class TitanOmega:
     Unified interface for the Titan Omega memory stack.
     Orchestrates Ω-Graph, Ω-Vault, and Ω-Flux.
     """
-    
+
+    @classmethod
+    def graft(
+        cls,
+        tier: str = "alpha_omega",
+        mode: str = "production",
+        persist: str = "all",
+    ) -> "TitanOmega":
+        """
+        Production factory — builds a fully-grafted TitanOmega stack.
+
+        tier    : alpha_omega | graph_only | vault_only
+        mode    : production | development
+        persist : all (auto-persist on every write) | on_demand
+        """
+        camelot_home = os.environ.get("CAMELOT_OS_HOME", str(Path(__file__).resolve().parents[3]))
+        data_dir = str(Path(camelot_home) / "01_KERNEL" / "titan" / "memory" / "data")
+
+        cfg = TitanOmegaConfig(
+            tier=tier,
+            mode=mode,
+            persist_strategy=persist,
+            graph_persist_path=f"{data_dir}/omega_graph.json",
+            vault_persist_path=f"{data_dir}/omega_vault.index",
+        )
+        print(f"[TitanΩ::graft] tier={tier} mode={mode} persist={persist}")
+        return cls(config=cfg)
+
     def __init__(self, config: Optional[TitanOmegaConfig] = None):
         self.config = config or TitanOmegaConfig()
-        
-        # Initialize sub-systems
-        self.graph = OmegaGraph(persist_path="data/omega_graph.json")
-        
-        if VECTOR_AVAILABLE:
-            self.vault = OmegaVault(dimension=384, persist_path="data/omega_vault.index")
+        self._auto_persist = self.config.persist_strategy == "all"
+
+        # Resolve production-safe absolute paths
+        camelot_home = os.environ.get("CAMELOT_OS_HOME", str(Path(__file__).resolve().parents[3]))
+        data_dir = Path(camelot_home) / "01_KERNEL" / "titan" / "memory" / "data"
+        data_dir.mkdir(parents=True, exist_ok=True)
+
+        graph_path = self.config.graph_persist_path or str(data_dir / "omega_graph.json")
+        vault_path = self.config.vault_persist_path or str(data_dir / "omega_vault.index")
+
+        # Initialize sub-systems based on tier
+        active_tiers = {"alpha_omega": {"graph", "vault", "flux"},
+                        "graph_only":  {"graph", "flux"},
+                        "vault_only":  {"vault", "flux"}}.get(self.config.tier, {"graph", "vault", "flux"})
+
+        self.graph = OmegaGraph(persist_path=graph_path) if "graph" in active_tiers else None
+
+        if "vault" in active_tiers and VECTOR_AVAILABLE:
+            self.vault = OmegaVault(dimension=384, persist_path=vault_path)
         else:
-            print("[WARN] FAISS not available; Ω-Vault disabled")
+            if "vault" in active_tiers:
+                print("[WARN] FAISS not available; Ω-Vault disabled")
             self.vault = None
-        
-        self.flux = OmegaFlux(default_ttl=self.config.flux_ttl_default)
-        
-        print("[TitanΩ] Memory stack initialized")
-    
+
+        self.flux = OmegaFlux(default_ttl=self.config.flux_ttl_default) if "flux" in active_tiers else None
+
+        print(f"[TitanΩ] Memory stack initialized (tier={self.config.tier} mode={self.config.mode})")
+
     def commit(self, node: GraphNode, signed_by: str) -> str:
         """
         Commit a node to Ω-Graph with provenance.
         Returns the cryptographic hash.
+        Auto-persists when persist_strategy=all.
         """
+        if self.graph is None:
+            raise RuntimeError("Ω-Graph not active in current tier configuration")
+
         node.provenance.created_by = signed_by
         node.provenance.hash = node.compute_hash()
-        
+
         node_id = self.graph.add_node(node)
-        self.graph.save()
-        
+        if self._auto_persist:
+            self.graph.save()
+
         return node.provenance.hash
-    
+
+    def add_text(self, text: str, source_id: str, metadata: Optional[Dict] = None) -> str:
+        """
+        Add text embedding to Ω-Vault.
+        Auto-persists when persist_strategy=all.
+        """
+        if self.vault is None:
+            raise RuntimeError("Ω-Vault not active in current tier configuration")
+        embedding_id = self.vault.add_text(text, source_id, metadata)
+        if self._auto_persist:
+            self.vault.save()
+        return embedding_id
+
     def hybrid_search(self, query: str, k: int = 5) -> Dict[str, Any]:
         """
         Hybrid RAG search: combines Ω-Vault vector search + Ω-Graph pattern matching.
+        Gracefully skips tiers that are not active in the current configuration.
         """
         results = {"vector_results": [], "graph_results": []}
-        
-        # Vector search
+
         if self.vault:
             vector_hits = self.vault.vector_search(query, k=k)
             results["vector_results"] = [
                 {"source_id": emb.source_id, "distance": dist, "metadata": emb.metadata}
                 for emb, dist in vector_hits
             ]
-        
-        # Graph search (simple keyword match on attributes)
-        # TODO: More sophisticated graph traversal
-        graph_hits = []
-        for node in self.graph.query({"type": "Fact"}):
-            if query.lower() in str(node.attributes).lower():
-                graph_hits.append(node)
-        
-        results["graph_results"] = [
-            {"node_id": node.node_id, "attributes": node.attributes}
-            for node in graph_hits[:k]
-        ]
-        
+
+        if self.graph:
+            graph_hits = []
+            for node in self.graph.query({"type": "Fact"}):
+                if query.lower() in str(node.attributes).lower():
+                    graph_hits.append(node)
+            results["graph_results"] = [
+                {"node_id": node.node_id, "attributes": node.attributes}
+                for node in graph_hits[:k]
+            ]
+
         return results

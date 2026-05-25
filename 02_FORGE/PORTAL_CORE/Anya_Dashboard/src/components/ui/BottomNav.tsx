@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BrainCircuit, FlaskConical, Zap, ShieldCheck, Settings2 } from 'lucide-react';
+import { LayoutDashboard, BrainCircuit, FlaskConical, Layers3, ShieldCheck, Settings2 } from 'lucide-react';
 
 const navItems = [
   { path: '/', icon: LayoutDashboard, label: 'Hub', end: true },
+  { path: '/camelot-os', icon: Layers3, label: 'OS' },
   { path: '/alex', icon: BrainCircuit, label: 'Alex' },
   { path: '/research', icon: FlaskConical, label: 'Research' },
   { path: '/dev', icon: Settings2, label: 'Dev' },
   { path: '/defense-grid', icon: ShieldCheck, label: 'Defense' },
-  { path: '/cartridge/cognitive', icon: Zap, label: 'Cartridges' },
 ];
 
 export default function BottomNav() {

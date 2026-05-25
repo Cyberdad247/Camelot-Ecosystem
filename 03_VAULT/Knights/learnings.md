@@ -295,3 +295,31 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 ## Archivist Scan — 2026-04-26T21:07:08.637919+00:00 (114ms)
 
 ### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-05-20T13:10:24.956202+00:00 (2161ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### Recurring Failures
+- `ImportError` x10: attempted relative import with no known parent package → ACTION: Check knight module path — may need skill bible reload
+
+## Archivist Scan — 2026-05-20T13:18:07.262014+00:00 (195ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### Recurring Failures
+- `ImportError` x234: attempted relative import with no known parent package → ACTION: Check knight module path — may need skill bible reload
+
+## Archivist Scan — 2026-05-20T13:26:05.377300+00:00 (223ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### Recurring Failures
+- `ImportError` x201: attempted relative import with no known parent package → ACTION: Check knight module path — may need skill bible reload
+
+## Archivist Scan — 2026-05-20T13:39:13.091034+00:00 (147ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+### Recurring Failures
+- `ImportError` x149: attempted relative import with no known parent package → ACTION: Check knight module path — may need skill bible reload

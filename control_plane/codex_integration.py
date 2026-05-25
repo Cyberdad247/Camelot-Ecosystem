@@ -70,11 +70,9 @@ def read_codex_status(home: Path) -> dict[str, Any]:
         return {"status": "CODEX_STATUS_CORRUPT", "artifact_path": str(path), "error": str(exc)}
 
 
-def boot_codex_integration(home: Path) -> tuple[bool, str, float]:
+def boot_codex_integration(home: Path) -> tuple[bool, str]:
     """Boot-matrix probe for Codex integration state."""
-    started = datetime.now(timezone.utc)
     status = read_codex_status(home)
-    elapsed_ms = (datetime.now(timezone.utc) - started).total_seconds() * 1000
     if status.get("status") == "CODEX_INTEGRATED":
-        return True, "Codex integration artifact present", elapsed_ms
-    return False, f"Codex integration not ready: {status.get('status')}", elapsed_ms
+        return True, "Codex integration artifact present"
+    return False, f"Codex integration not ready: {status.get('status')}"

@@ -18,6 +18,15 @@ MIRROR_LEDGER_PATHS = [
 ]
 
 
+def _read_bifrost_token() -> str | None:
+    token_path = Path.home() / ".camelot" / "bifrost.token"
+    try:
+        token = token_path.read_text(encoding="ascii").strip()
+    except (FileNotFoundError, PermissionError, UnicodeDecodeError):
+        return None
+    return token or None
+
+
 def ledger_status() -> dict[str, Any]:
     exists = LEDGER_PATH.exists()
     size = LEDGER_PATH.stat().st_size if exists else 0
@@ -99,15 +108,26 @@ def reconcile_ledger_mirrors() -> dict[str, Any]:
 
 async def sync_to_kernel(intent: str, *, kernel_url: str = "http://127.0.0.1:8001") -> dict[str, Any]:
     health_url = f"{kernel_url.rstrip('/')}/health"
-    command_url = f"{kernel_url.rstrip('/')}/command"
+    dispatch_url = f"{kernel_url.rstrip('/')}/agent/dispatch"
+    token = _read_bifrost_token()
+    headers = {"Content-Type": "application/json"}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+        headers["x-camelot-token"] = token
     async with httpx.AsyncClient(timeout=10.0) as client:
         health = await client.get(health_url)
         health.raise_for_status()
-        result = await client.post(command_url, params={"intent": intent})
+        result = await client.post(
+            dispatch_url,
+            headers=headers,
+            json={"intent": intent, "agent_id": "MERLIN", "execution_target": "ledger_sync"},
+        )
         result.raise_for_status()
         return {
             "status": "SYNCED",
             "kernel_url": kernel_url,
+            "dispatch_url": dispatch_url,
+            "auth": "token" if token else "missing",
             "health": health.json(),
             "result": result.json(),
         }

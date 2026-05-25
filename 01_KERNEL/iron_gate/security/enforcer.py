@@ -74,8 +74,10 @@ class PolicyEnforcer:
                     self._broadcast("FS_ACCESS", path, "MONITORED")
 
             elif event == "socket.connect":
-                host, port = args[0]
-                self._broadcast("NET_EGRESS", f"{host}:{port}", "MONITORED")
+                addr = args[1] if len(args) > 1 else args[0]
+                if isinstance(addr, (tuple, list)) and len(addr) >= 2:
+                    host, port = addr[0], addr[1]
+                    self._broadcast("NET_EGRESS", f"{host}:{port}", "MONITORED")
 
             elif event == "subprocess.Popen":
                 cmd = args[0]

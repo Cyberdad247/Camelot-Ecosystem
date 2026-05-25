@@ -20,6 +20,7 @@ import re
 import sys
 import asyncio
 import argparse
+import hashlib
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Optional
@@ -89,7 +90,7 @@ def estimate_linear_scaling_need(intent: str) -> float:
 
 
 # ---------------------------------------------------------------------------
-# Retention API (Semantic Eviction Hints)
+# Affinity & Retention API
 # ---------------------------------------------------------------------------
 
 _SCHEMA_INTENTS = frozenset({
@@ -100,6 +101,27 @@ _SCHEMA_INTENTS = frozenset({
 _MISSION_INTENTS = frozenset({
     "//forge", "//plan", "//heal", "refactor", "migrate", "deploy",
 })
+
+
+def generate_affinity_key(intent: str) -> str:
+    """Generate a cache affinity key by abstracting out dynamic values.
+    
+    This ensures that structural identical prompts (e.g. 'Audit file X' and 
+    'Audit file Y') route to the same worker node to maximize prefix hits.
+    """
+    # 1. Strip file paths and code references
+    structural = re.sub(r'[a-zA-Z0-9_\-\./]+\.[a-z]{2,4}', '<FILE>', intent)
+    
+    # 2. Strip UUIDs (Mission IDs / Notebook IDs)
+    structural = re.sub(r'\b[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\b', '<UUID>', structural)
+    
+    # 3. Strip raw numbers
+    structural = re.sub(r'\b\d+\b', '<NUM>', structural)
+    
+    # 4. Normalize whitespace
+    structural = " ".join(structural.split()).lower()
+    
+    return hashlib.md5(structural.encode()).hexdigest()[:8]
 
 
 def estimate_retention_class(intent: str) -> str:
@@ -146,6 +168,7 @@ class DispatchResult:
     model: str
     backend_url: str
     retention_class: str = "ONE_OFF"
+    affinity_key: str = ""
     force_plan_mode: bool = False
     intercepted: bool = True
 
@@ -182,6 +205,7 @@ class CLIIntercept:
         privacy = estimate_privacy(intent)
         linear_need = estimate_linear_scaling_need(intent)
         retention = estimate_retention_class(intent)
+        affinity = generate_affinity_key(intent)
 
         # Route through MFOE matrix
         decision = self.router.route(
@@ -204,6 +228,7 @@ class CLIIntercept:
             model=model,
             backend_url=backend_url,
             retention_class=retention,
+            affinity_key=affinity,
             force_plan_mode=force_plan,
         )
 

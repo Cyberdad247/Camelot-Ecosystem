@@ -29,6 +29,9 @@ Websocket auth accepts `?token=<token>`.
 - `BIFROST_CORS_ORIGIN`: optional exact allowed dashboard origin. If omitted, local/dev permissive CORS is used.
 - `CAMELOT_GATEWAY_TOKEN`: optional auth token. Set this for production.
 - `CAMELOT_OWNER`: expected owner username, default `vizio`.
+- `BIFROST_TRUSTED_TAILNET_OWNERS`: comma-separated tailnet owner allow-list, default `Cyberdad247@github,Cyberdad247@`.
+- `BIFROST_TAILSCALE_WHOIS_TIMEOUT_MS`: timeout for `tailscale whois`, default `2500`.
+- `BIFROST_ALLOW_LOOPBACK_OWNER_WITHOUT_TOKEN`: optional local-owner bypass (`false` by default).
 - `CAMELOT_ROOT`: Camelot repo root, default `C:\Users\vizio\CAMELOT_OS`.
 - `OPENVIKING_MAP_PATH`: map file path, default `<CAMELOT_ROOT>\entiremap.md`.
 - `SALTARE_GATEWAY_URL`: kinetic gateway origin, default `http://localhost:8085`.

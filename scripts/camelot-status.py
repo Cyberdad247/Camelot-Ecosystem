@@ -12,10 +12,13 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import socket
 import subprocess
 import sys
 import time
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,6 +37,30 @@ def _probe_port(host: str, port: int, timeout: float = 0.5) -> bool:
             return True
     except OSError:
         return False
+
+
+def _read_bifrost_token() -> str | None:
+    token_path = Path.home() / ".camelot" / "bifrost.token"
+    try:
+        token = token_path.read_text(encoding="ascii").strip()
+    except (FileNotFoundError, PermissionError, UnicodeDecodeError):
+        return None
+    return token or None
+
+
+def _http_status(url: str, *, token: str | None = None, timeout: float = 2.0) -> int:
+    headers = {}
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+        headers["x-camelot-token"] = token
+    request = urllib.request.Request(url, headers=headers, method="GET")
+    try:
+        with urllib.request.urlopen(request, timeout=timeout) as response:
+            return int(response.status)
+    except urllib.error.HTTPError as exc:
+        return int(exc.code)
+    except (OSError, urllib.error.URLError, TimeoutError):
+        return 0
 
 
 def check(label: str, ok: bool, detail: str = "", warn_only: bool = False) -> dict:
@@ -60,10 +87,15 @@ def section(title: str):
 section("Boot Phases (6-phase awaken)")
 check("CLIProxy :8080",        _probe_port("127.0.0.1", 8080), "control plane gateway")
 check("Kinetic Edge :3001",    _probe_port("127.0.0.1", 3001), "MCP Rust Axum server")
+check("Bifrost Sidecar :8011", _probe_port("127.0.0.1", 8011), "Go transport sidecar", warn_only=True)
 check("Qdrant :6333",          _probe_port("127.0.0.1", 6333), "vector DB", warn_only=True)
 check("Saltare :8085",         _probe_port("127.0.0.1", 8085), "gateway", warn_only=True)
 check("Holotable :3000",       _probe_port("127.0.0.1", 3000), "UI dashboard", warn_only=True)
 check("Sovereign Harness PID", (ROOT / "logs" / "harness.pid").exists(), "24/7 daemon")
+token = _read_bifrost_token()
+if token:
+    sidecar_status = _http_status("http://127.0.0.1:8011/v1/bifrost/status", token=token)
+    check("Bifrost Sidecar auth", sidecar_status == 200, f"/v1/bifrost/status={sidecar_status}", warn_only=True)
 
 section("P0 — Brain Directory + GIDEON + RBAC")
 skills_dir = ROOT / ".hive" / "skills"
@@ -95,8 +127,23 @@ check("swarm-spawner binary",(ROOT / "bin" / "swarm-spawner.exe").exists(), warn
 try:
     from runic_router import parse_rune, list_runes
     runes = list_runes()
-    rune_ok = len(runes["runic_commands"]) == 11 and len(runes["omega_runes"]) == 29
-    check("Runic Router (11+29)", rune_ok, f"runic={len(runes['runic_commands'])} omega={len(runes['omega_runes'])}")
+    required_runic = {
+        "//BOOT",
+        "//FORGE",
+        "//CONTRACT",
+        "//SWARM",
+        "//PLAN",
+        "//HEAL",
+        "//SCAN",
+        "//STATUS",
+    }
+    present_runic = set(runes["runic_commands"])
+    missing_runic = sorted(required_runic - present_runic)
+    rune_ok = not missing_runic and len(runes["omega_runes"]) == 29
+    detail = f"runic={len(runes['runic_commands'])} omega={len(runes['omega_runes'])}"
+    if missing_runic:
+        detail += f" missing={','.join(missing_runic)}"
+    check("Runic Router core+29", rune_ok, detail)
     parsed = parse_rune("//FORGE test")
     check("Rune parse //FORGE", parsed is not None, str(parsed))
 except Exception as e:
@@ -139,7 +186,7 @@ if pq_bin.exists():
     except Exception as e:
         check("PQCrypto self-test", False, str(e))
 # GPU TUI go build
-vizion_src = ROOT / "02_FORGE" / "vizion-telemetry" / "main.go"
+vizion_src = ROOT / "01_KERNEL" / "senses" / "vizion-telemetry" / "main.go"
 has_gpu = vizion_src.exists() and "gpuMsg" in vizion_src.read_text(encoding="utf-8", errors="replace")
 check("Vizion GPU panel", has_gpu, "gpuMsg struct present in main.go")
 check("vizion-telemetry.exe", (ROOT / "bin" / "vizion-telemetry.exe").exists(),
@@ -153,9 +200,31 @@ check("DefenseGrid REMEDIATION_PLAN", quarantine_plan.exists(), "6 SSH keys flag
 check("Ollama catalog",    (ROOT / "03_VAULT" / "training" / "configs" / "ollama_catalog.json").exists())
 # Ollama model check
 try:
-    out = subprocess.run(["ollama", "list"], capture_output=True, text=True, timeout=5)
-    model_count = len([l for l in out.stdout.strip().splitlines() if l and "NAME" not in l])
-    check("Ollama models loaded", model_count >= 4, f"{model_count} models (gemma4/qwen3/qwen3.5/qwen2.5-coder)")
+    ollama_bin = shutil.which("ollama")
+    model_count = 0
+    detail = ""
+    if ollama_bin:
+        out = subprocess.run([ollama_bin, "list"], capture_output=True, text=True, timeout=10)
+        lines = [l for l in out.stdout.splitlines() if l.strip()]
+        model_lines = [l for l in lines if not l.lstrip().startswith("NAME")]
+        model_count = len(model_lines)
+        detail = f"{model_count} models"
+        if out.returncode != 0 and out.stderr.strip():
+            detail += f" cli_err={out.stderr.strip()[:60]}"
+    else:
+        detail = "ollama not in PATH"
+
+    if model_count == 0:
+        try:
+            with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=3) as resp:
+                payload = json.loads(resp.read().decode("utf-8", errors="replace"))
+            model_count = len(payload.get("models", []))
+            detail = f"{model_count} models via api"
+        except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as e:
+            if not detail:
+                detail = str(e)[:60]
+
+    check("Ollama models loaded", model_count >= 4, f"{detail} (gemma4/qwen3/qwen3.5/qwen2.5-coder)")
 except FileNotFoundError:
     check("Ollama binary", False, "ollama not in PATH", warn_only=True)
 except Exception as e:

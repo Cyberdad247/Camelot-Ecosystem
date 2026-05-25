@@ -1,3 +1,7 @@
+﻿# DEPRECATED: Merged into root pyproject.toml
+# Install with: pip install -e "." from CAMELOT_OS root
+# This file is kept for reference only.
+
 fastapi
 uvicorn
 requests
@@ -9,3 +13,4 @@ pytest
 redis
 faiss-cpu
 httpx
+

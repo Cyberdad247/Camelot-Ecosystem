@@ -6,6 +6,7 @@ import FactoryDashboard from './features/agency/FactoryDashboard';
 
 // Core feature pages
 const SystemHub = lazy(() => import('./features/hub/SystemHub'));
+const CamelotOsCommand = lazy(() => import('./features/camelot-os/CamelotOsCommand'));
 const AlexTaskManager = lazy(() => import('./features/alex/AlexTaskManager'));
 const ResearchDepartment = lazy(() => import('./features/research/ResearchDepartment'));
 const CartridgeDeck = lazy(() => import('./features/cartridges/CartridgeDeck'));
@@ -18,6 +19,7 @@ const SwarmMonitor = lazy(() => import('./features/swarm/SwarmMonitor'));
 const AnyasLink = lazy(() => import('./features/brain/AnyasLink'));
 const MorphingHUD = lazy(() => import('./features/brain/MorphingHUD'));
 const BrainInterface = lazy(() => import('./features/brain/BrainInterface'));
+const SupportPortal = lazy(() => import('./features/support/SupportPortal'));
 
 function RouteLoading() {
   return (
@@ -39,6 +41,7 @@ export default function App() {
             <Route element={<AppShell />}>
               {/* Primary */}
               <Route path="/" element={<SystemHub />} />
+              <Route path="/camelot-os" element={<CamelotOsCommand />} />
               <Route path="/alex" element={<AlexTaskManager />} />
               <Route path="/research" element={<ResearchDepartment />} />
               <Route path="/dev" element={<FactoryDashboard />} />
@@ -54,6 +57,7 @@ export default function App() {
               {/* Legacy */}
               <Route path="/brain" element={<MorphingHUD />} />
               <Route path="/legacy-brain" element={<BrainInterface />} />
+              <Route path="/support/:sessionId" element={<SupportPortal />} />
 
               {/* Catch-all */}
               <Route path="*" element={<Navigate to="/" replace />} />

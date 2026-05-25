@@ -1,4 +1,8 @@
-# Titan Omega Memory Stack — Requirements
+﻿# DEPRECATED: Merged into root pyproject.toml
+# Install with: pip install -e "." from CAMELOT_OS root
+# This file is kept for reference only.
+
+# Titan Omega Memory Stack â€” Requirements
 
 # Core dependencies
 networkx>=3.0
@@ -9,3 +13,4 @@ numpy>=1.24.0
 # Already installed (from existing project)
 pydantic>=2.0.0
 fastapi>=0.100.0
+

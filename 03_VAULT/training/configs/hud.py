@@ -660,11 +660,20 @@ sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
 logging.disable(logging.CRITICAL)
 bridge = None
+_BRIDGE_PRELOAD_TIMEOUT = float(os.environ.get("CAMELOT_BRIDGE_PRELOAD_TIMEOUT", "8"))
 try:
     import bridge as _bridge_mod
     bridge = _bridge_mod
-    if bridge.is_available():
-        bridge.get_bridge_status()
+    if bridge.is_available() and _BRIDGE_PRELOAD_TIMEOUT > 0:
+        _br_result = [None]
+        def _preload_bridge():
+            try:
+                _br_result[0] = _bridge_mod.get_bridge_status()
+            except Exception:
+                pass
+        _br_t = threading.Thread(target=_preload_bridge, daemon=True)
+        _br_t.start()
+        _br_t.join(timeout=_BRIDGE_PRELOAD_TIMEOUT)
 except Exception:
     bridge = None
 builtins.print = _real_print

@@ -18,24 +18,122 @@ Tailnet peers without the token are rejected.
 """
 from __future__ import annotations
 
+import base64
 import getpass
 import hashlib
 import hmac
 import ipaddress
+import json
 import os
 import socket
 import subprocess
 import sys
+import time
+import urllib.request
 from pathlib import Path
 
 CAMELOT_OWNER = os.environ.get("CAMELOT_OWNER", "vizio")
 TOKEN_PATH = Path.home() / ".camelot" / "bifrost.token"
 TAILNET_CGNAT = ipaddress.ip_network("100.64.0.0/10")
-TRUSTED_TAILNET_OWNERS = {"Cyberdad247@github", "Cyberdad247@"}
+_DEFAULT_TRUSTED_TAILNET_OWNERS = ("Cyberdad247@github", "Cyberdad247@")
+
+
+def _parse_csv_env(name: str, default: tuple[str, ...]) -> set[str]:
+    raw = os.environ.get(name, "")
+    if not raw.strip():
+        return set(default)
+    values = {part.strip() for part in raw.split(",") if part.strip()}
+    return values or set(default)
+
+
+def _env_flag(name: str, default: bool = False) -> bool:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() in {"1", "true", "yes", "on"}
+
+
+TRUSTED_TAILNET_OWNERS = _parse_csv_env(
+    "BIFROST_TRUSTED_TAILNET_OWNERS",
+    _DEFAULT_TRUSTED_TAILNET_OWNERS,
+)
+try:
+    TAILSCALE_WHOIS_TIMEOUT_S = float(os.environ.get("BIFROST_TAILSCALE_WHOIS_TIMEOUT_S", "2.5"))
+except ValueError:
+    TAILSCALE_WHOIS_TIMEOUT_S = 2.5
+REQUIRE_TOKEN_ON_LOOPBACK = _env_flag("BIFROST_REQUIRE_TOKEN_ON_LOOPBACK", default=False)
+
+# Rule C: mobile/OIDC gateway — trusted issuers for JWT bearer tokens
+# Add your auth provider issuer URL (e.g. Auth0 tenant, Clerk, Firebase)
+MOBILE_TRUSTED_ISSUERS: set[str] = set(
+    os.environ.get("BIFROST_OIDC_ISSUERS", "").split(",")
+) - {""}
+# Example: BIFROST_OIDC_ISSUERS=https://accounts.google.com,https://my-tenant.auth0.com
 
 
 class AccessDenied(Exception):
     pass
+
+
+# ── OIDC / mobile gate helpers ────────────────────────────────────────────────
+
+def _b64url_decode(segment: str) -> bytes:
+    """Decode base64url without padding."""
+    segment += "=" * (-len(segment) % 4)
+    return base64.urlsafe_b64decode(segment)
+
+
+def verify_oidc_token(token: str) -> tuple[bool, str]:
+    """
+    Verify a JWT bearer token from a mobile/OIDC client.
+
+    Checks:
+      1. JWT structure (3 dot-separated segments)
+      2. Issuer (iss) present in MOBILE_TRUSTED_ISSUERS
+      3. Expiry (exp) not in the past
+      4. Audience (aud) contains "camelot-os" if present in token
+
+    NOTE: Cryptographic signature verification requires the issuer's public key
+    (JWKS). Install PyJWT + cryptography for full signature validation.
+    Until then this provides issuer + expiry enforcement only.
+    """
+    if not MOBILE_TRUSTED_ISSUERS:
+        return False, "no trusted OIDC issuers configured (set BIFROST_OIDC_ISSUERS)"
+
+    parts = token.split(".")
+    if len(parts) != 3:
+        return False, "malformed JWT (expected 3 segments)"
+
+    try:
+        payload = json.loads(_b64url_decode(parts[1]))
+    except Exception as e:
+        return False, f"JWT decode error: {e}"
+
+    iss = payload.get("iss", "")
+    if iss not in MOBILE_TRUSTED_ISSUERS:
+        return False, f"untrusted issuer: {iss!r}"
+
+    exp = payload.get("exp")
+    if exp is not None and time.time() > float(exp):
+        return False, "JWT expired"
+
+    aud = payload.get("aud")
+    if aud is not None:
+        audiences = [aud] if isinstance(aud, str) else aud
+        if "camelot-os" not in audiences:
+            return False, f"JWT audience mismatch: {audiences}"
+
+    sub = payload.get("sub", "unknown")
+    return True, f"oidc-jwt:iss={iss}:sub={sub}"
+
+
+def mobile_gate(token: str, remote_addr: str | None = None) -> tuple[bool, str]:
+    """Rule C: accept OIDC bearer token from any network location (mobile roaming)."""
+    ok, reason = verify_oidc_token(token)
+    if not ok:
+        return False, f"mobile-gate-denied: {reason}"
+    addr = remote_addr or "unknown"
+    return True, f"mobile-gate:{addr}:{reason}"
 
 
 def _read_token() -> str | None:
@@ -80,7 +178,7 @@ def _tailscale_whois(ip: str) -> str | None:
     try:
         out = subprocess.run(
             ["tailscale", "whois", ip],
-            capture_output=True, text=True, timeout=2.5,
+            capture_output=True, text=True, timeout=TAILSCALE_WHOIS_TIMEOUT_S,
         )
         if out.returncode != 0:
             return None
@@ -95,7 +193,8 @@ def _tailscale_whois(ip: str) -> str | None:
 
 def verify_caller(remote_addr: str | None = None,
                   presented_token: str | None = None,
-                  strict: bool = True) -> tuple[bool, str]:
+                  strict: bool = True,
+                  oidc_token: str | None = None) -> tuple[bool, str]:
     """
     Decide whether the caller may awaken Camelot-OS.
 
@@ -103,20 +202,39 @@ def verify_caller(remote_addr: str | None = None,
         remote_addr: source IP if this is a network invocation (None for local)
         presented_token: bifrost token header from remote caller
         strict: if False, warnings are returned but not raised
+        oidc_token: JWT bearer token for Rule C (mobile/OIDC clients)
 
     Returns:
         (allowed, reason)
+
+    Rules (first match wins):
+        A) loopback + local owner
+        B) tailnet peer + valid bifrost token + trusted whois owner
+        C) valid OIDC JWT from a trusted issuer (any network location)
     """
     local_user = getpass.getuser()
 
     # Rule A: Local-host owner
     if _is_loopback(remote_addr):
         if local_user == CAMELOT_OWNER:
+            if REQUIRE_TOKEN_ON_LOOPBACK and not verify_token(presented_token or ""):
+                return False, "local-owner-token-required"
             return True, f"local-owner:{local_user}"
         return False, f"local-user-mismatch: {local_user!r} != {CAMELOT_OWNER!r}"
 
+    # Rule C: OIDC mobile gate (checked before Rule B so mobile clients skip tailnet check)
+    if oidc_token:
+        ok, reason = mobile_gate(oidc_token, remote_addr)
+        if ok:
+            return True, reason
+        # Fall through to Rule B if OIDC fails — allow bifrost-token fallback
+
     # Rule B: Tailnet peer with valid bifrost token
     if not _is_tailnet(remote_addr):
+        if oidc_token:
+            # Already failed Rule C above; give the OIDC failure reason
+            _, oidc_reason = mobile_gate(oidc_token, remote_addr)
+            return False, oidc_reason
         return False, f"non-tailnet-source: {remote_addr}"
 
     if not verify_token(presented_token or ""):
@@ -131,9 +249,10 @@ def verify_caller(remote_addr: str | None = None,
     return True, f"tailnet-peer:{remote_addr}:{owner}"
 
 
-def enforce(remote_addr: str | None = None, presented_token: str | None = None):
+def enforce(remote_addr: str | None = None, presented_token: str | None = None,
+            oidc_token: str | None = None):
     """Raise AccessDenied if the caller is not authorized."""
-    ok, reason = verify_caller(remote_addr, presented_token)
+    ok, reason = verify_caller(remote_addr, presented_token, oidc_token=oidc_token)
     if not ok:
         raise AccessDenied(f"Bifrost gate: {reason}")
     return reason
@@ -149,6 +268,10 @@ def status_report() -> dict:
         "token_fingerprint": token_fingerprint(),
         "token_path": str(TOKEN_PATH),
         "trusted_owners": sorted(TRUSTED_TAILNET_OWNERS),
+        "tailscale_whois_timeout_s": TAILSCALE_WHOIS_TIMEOUT_S,
+        "require_token_on_loopback": REQUIRE_TOKEN_ON_LOOPBACK,
+        "oidc_issuers": sorted(MOBILE_TRUSTED_ISSUERS),
+        "oidc_enabled": bool(MOBILE_TRUSTED_ISSUERS),
     }
 
 

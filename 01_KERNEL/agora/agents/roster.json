@@ -6,7 +6,7 @@
       "name": "King Arthur",
       "role": "The Sovereign",
       "symbol": "\ud83d\udc51",
-      "description": "The user. Supreme authority over the Court.",
+      "description": "Governing body and ethical overseer of Camelot-OS. Represents the authorized user within the Camelot developer bloodline: VaShawn O. Head, operationally known as Vizion. Not to be confused with Vizion Wealth, which is the user's avatar and brand construct.",
       "permissions": [
         "*"
       ]

@@ -2,6 +2,10 @@
 # All system artifacts, binaries, databases, and generated outputs
 # Generated: 2026-03-31
 
+> Historical registry warning:
+> This file is a point-in-time artifact inventory from an older repo era.
+> It is not the canonical live architecture map for the current checkout.
+
 ---
 
 ## COMPILED BINARIES
@@ -15,7 +19,7 @@
 | Ledger | Go | 751 KB | `02_FORGE/kinetic/bin/ledger.exe` | OPERATIONAL |
 | Cribo | Rust | Source only | `02_FORGE/KINETIC_ARMORY/Cribo/` | NEEDS BUILD |
 | Rotel | Rust | Source only | `02_FORGE/KINETIC_ARMORY/Rotel/` | NEEDS BUILD |
-| Kinetic Edge MCP | Rust | Source only | `kinetic_edge/mcp_server/` | NEEDS BUILD |
+| Kinetic Edge MCP | Rust | Historical path reference | `kinetic_edge/mcp_server/` | STALE FOR CURRENT CHECKOUT |
 
 ---
 
@@ -37,7 +41,7 @@
 | UKG Graph | JSON-LD | ~8 KB | `03_VAULT/training/configs/memory/ukg_graph.jsonld` | Universal Knowledge Glyph (50 nodes, 42 edges) |
 | TOON Boris | JSON | 10.4 KB | `03_VAULT/training/configs/memory/toon_ukg_full.json` | Compressed Sir Boris entity (TOON v3.1) |
 | Entire Map | Markdown | 12,116 lines | `entiremap.md` | Comprehensive system documentation |
-| OS Manifest | Markdown | 1.6 KB | `OS_MANIFEST.md` | Split-brain topology spec |
+| OS Manifest | Markdown | historical reference | `OS_MANIFEST.md` | missing in current checkout |
 | Provenance Ledger | Markdown | 81 KB | `PROVENANCE_LEDGER.md` | 1045+ line audit trail (3 copies synced) |
 | Golden Samples | JSONL | 9.3 KB | `03_VAULT/training/golden_samples.jsonl` | Training data |
 

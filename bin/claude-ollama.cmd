@@ -89,8 +89,9 @@ echo [CYBERTRON] Launching Claude Code with local Ollama backend.
 echo [CYBERTRON] Model: %CLAUDE_OLLAMA_MODEL% @ %OLLAMA_HOST%
 echo.
 
-REM Set environment for Claude Code Ollama integration
-set "ANTHROPIC_BASE_URL=%OLLAMA_HOST%/v1"
+REM Set environment for Claude Code — route through CLIProxyAPI (:8080)
+REM CLIProxyAPI pools 60+ providers including local Ollama fallback
+set "ANTHROPIC_BASE_URL=http://127.0.0.1:8080/v1"
 set "ANTHROPIC_MODEL=%CLAUDE_OLLAMA_MODEL%"
 
 REM Pass through all arguments to claude

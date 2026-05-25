@@ -53,3 +53,26 @@
 - **Security:** `01_KERNEL/security/iron_gate.py`
 - **Telemetry:** `01_KERNEL/monitoring/telemetry_bridge.py`
 - **Assimilation:** Lukas Ω Edge v2.0 (Kinetic Stack: Cribo, Saltare, and Rotel).
+
+---
+
+### 🗡️ [AUTONOMOUS SENTRY] :: CI/CD IMMUNE RESPONSE
+**SENTRY:** SIR GALAHAD | **DIRECTIVE:** DESTROY NON-COMPLIANT CODE
+
+#### 1. KINETIC SPEED LIMITS (THE 1-BIT INVARIANT)
+*Execute on every PR push. Failure results in automatic branch rejection.*
+- [ ] **Lighthouse Threshold:** LCP (Largest Contentful Paint) MUST be < 1.2s.
+- [ ] **DOM Complexity:** Node count MUST be < 800.
+- [ ] **Visual Theme Lock:** Run AST scanner on CSS/Tailwind. If `#FFFFFF` or `bg-white` is detected outside of text definitions -> **REJECT**.
+
+#### 2. SYNAPTIC LOAD TESTING (WEBSOCKETS)
+*Execute via simulated Swarm Stress Test.*
+- [ ] **Auction Concurrency:** Inject 15,000 virtual users into Redis Auction State.
+- [ ] **Immune Check 1:** Millisecond latency variance across nodes must not exceed 50ms.
+- [ ] **Immune Check 2 (The Kill Switch):** 100 users click "SECURE ASSET" on exactly 1 remaining inventory unit. Ensure strict Mutex lock; 99 users must receive "ASSET SEIZED BY ANOTHER BUYER."
+
+#### 3. METABOLIC ROUTING AUDIT (OMNIROUTE)
+*Simulate 5,000 checkout payloads globally.*
+- [ ] **Arbitrage Check:** If Printify is $2 cheaper but exceeds the 7-day SLA limit, OmniRoute MUST fall back to Gelato.
+- [ ] **White-Label Enforcement:** Scan outgoing API requests. If standard POD branding parameters are not overridden by I2L variables -> **REJECT**.
+- [ ] **301-Cascade Verification:** Force TTL expiry on Test Product ID. Ping URL. Must return `301 Moved Permanently` to `/vault`, NOT `404 Not Found`.

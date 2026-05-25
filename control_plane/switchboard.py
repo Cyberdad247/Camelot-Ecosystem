@@ -84,8 +84,8 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
     ),
     "sir_codex": Terminal(
         id="sir_codex", engine="openai_codex", weight=0.75,
-        cost_tier="high", capability=["velocity","rapid_proto","openai"],
-        probe_port=0, notes="OpenAI Codex — high-velocity generation",
+        cost_tier="free", capability=["velocity","rapid_proto","openai"],
+        probe_port=8080, notes="OpenAI Codex via CLIProxyAPI :8080 — free provider pool",
     ),
     "sir_liberte": Terminal(
         id="sir_liberte", engine="open_source", weight=0.80,
@@ -106,6 +106,31 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         id="sir_gideon", engine="local_audit", weight=0.85,
         cost_tier="free", capability=["security","audit","scorpion","gideon","forensic"],
         probe_port=0, notes="Forensic auditor — GIDEON_RISK_MATRIX //SCORPION pass",
+    ),
+    "sir_octavian": Terminal(
+        id="sir_octavian", engine="local_ops", weight=0.82,
+        cost_tier="free", capability=["ops","metrics","monitoring","telemetry","status","alerts","factory"],
+        probe_port=8400, notes="Ops & metrics sentinel — factory throughput, health dashboard (:8400)",
+    ),
+    "sir_sonus": Terminal(
+        id="sir_sonus", engine="kitten_tts", weight=0.88,
+        cost_tier="free", capability=["tts","audio","voice","speak","synthesize","kitten","streaming"],
+        probe_port=8300, notes="Kitten TTS streaming node — chunked audio synthesis HTTP :8300",
+    ),
+    "sir_gravity": Terminal(
+        id="sir_gravity", engine="antigravity", weight=0.88,
+        cost_tier="free", capability=["code_gen","ide_native","gemini","google","antigravity","kinetic"],
+        probe_port=8080, notes="Google Antigravity — Gemini models via CLIProxyAPI antigravity OAuth channel",
+    ),
+    "sir_kimi": Terminal(
+        id="sir_kimi", engine="kimi_cli", weight=0.82,
+        cost_tier="free", capability=["long_context","research","chinese","moonshot","kimi","k2"],
+        probe_port=8080, notes="Moonshot Kimi K2.5 — 1M context via CLIProxyAPI kimi OAuth channel",
+    ),
+    "sir_hermes": Terminal(
+        id="sir_hermes", engine="hermes_cli", weight=0.78,
+        cost_tier="free", capability=["agent","tool_use","nous","openrouter","kinetic","autonomous"],
+        probe_port=0, notes="Nous Hermes Agent — autonomous tool-calling via subprocess (-q mode)",
     ),
 }
 
@@ -147,8 +172,14 @@ async def _probe_terminal(t: Terminal) -> None:
         gideon_py = CAMELOT_HOME / "03_VAULT" / "training" / "configs" / "knights" / "sir_gideon.py"
         t.status     = "live" if gideon_py.exists() else "dark"
         t.latency_ms = 0.0
-    elif t.engine in ("gemini_cli", "openai_codex", "open_source"):
+    elif t.engine in ("gemini_cli", "openai_codex", "open_source", "antigravity", "kimi_cli"):
         t.status     = "assumed_live"
+        t.latency_ms = 0.0
+    elif t.engine == "hermes_cli":
+        hermes_cli = (
+            CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "hermes-agent" / "cli.py"
+        )
+        t.status     = "live" if hermes_cli.exists() else "dark"
         t.latency_ms = 0.0
     else:
         t.status     = "unknown"

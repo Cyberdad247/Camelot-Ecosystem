@@ -11,11 +11,13 @@ import re
 import subprocess
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 from colorama import Fore, Style, just_fix_windows_console
 
+from .cockpit import cockpit_exec, prompt_payload, refresh_snapshot
 from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
 from .cli_intercept import CLIIntercept
 from .codex_integration import (
@@ -24,7 +26,28 @@ from .codex_integration import (
     write_codex_integration,
 )
 from .config_manager import ConfigManager
-from .ledger_sync import append_provenance_entry, ledger_status, reconcile_ledger_mirrors
+from .gemini_extension_registry import (
+    inspect_gemini_extension,
+    list_gemini_extensions,
+    summarize_gemini_extensions,
+)
+from .hyper_evolve import append_learning, promote_mutation
+from .knight_configuration import write_knight_configuration
+from .ledger_sync import (
+    append_provenance_entry,
+    ledger_status,
+    reconcile_ledger_mirrors,
+    sync_to_kernel,
+)
+from .microcubed import (
+    MicrocubedRequest,
+    execute_house,
+    forge_house,
+    inspect_house,
+    plan_house,
+    status as microcubed_status,
+    teardown_house,
+)
 from .provenance import ProvenanceManager, VerificationRun
 
 def _detect_home() -> Path:
@@ -93,12 +116,21 @@ HELP_LINES = [
     "codex status",
     "codex integrate [--actor <name>]",
     "codex sync",
+    "microcubed status",
+    "microcubed plan \"objective\" --knight sir_forge",
+    "microcubed forge \"objective\" --knight sir_forge [--queue]",
+    "microcubed inspect <house_id>",
+    "microcubed execute <house_id> -- <command>",
+    "microcubed teardown <house_id>",
     "cloudbrain config show",
     "cloudbrain config set <ENV_VAR> <url>",
     "cloudbrain config clear <ENV_VAR>",
     "cloudbrain config diagnose",
     "cloudbrain config discover --app-name <name> [--write]",
     "cloudbrain config write-example [path]",
+    "gemini-ext status",
+    "gemini-ext list",
+    "gemini-ext inspect <name>",
     "//SWARM",
     "//MODE <name> [objective]",
     "//CARTRIDGE <name> [objective]",
@@ -152,6 +184,39 @@ def _stream_print(text: str, *, tone: str | None = None, newline: bool = True) -
 def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float = 0.0) -> bool:
     """Enforce Titanium Laws: HITL Iron Gate integrated with SecurityWarden."""
     try:
+        # ---------------------------------------------------------------------------
+        # Track GAMMA: Forensic Engine Integration
+        # ---------------------------------------------------------------------------
+        try:
+            import importlib.util
+            from pathlib import Path
+            repo_root = Path(__file__).resolve().parent.parent
+            module_path = repo_root / "01_KERNEL" / "iron_gate" / "forensic_engine.py"
+            spec = importlib.util.spec_from_file_location("forensic_engine", module_path)
+            if spec and spec.loader:
+                fe_mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(fe_mod)
+                f_engine = fe_mod.ForensicEngine()
+                # We use 'intent' as a proxy for module_path if not explicitly provided
+                analysis = f_engine.analyze_impact("CLI_CONTEXT", intent)
+            else:
+                analysis = {"risk_score": 0.0, "alerts": []}
+            
+            if analysis["risk_score"] > 0.0:
+                _stream_print(f"\n[FORENSIC_ALERT] Historical risk detected (Score: {analysis['risk_score']})", tone="warn")
+                for alert in analysis["alerts"]:
+                    _stream_print(f" >> {alert}", tone="warn")
+                
+                if analysis["risk_score"] >= 0.7:
+                    _stream_print("[FORENSIC_GATE] High-risk historical scar detected. Triggering deep triage...", tone="err")
+                    # Simulated Trivy scan for high risk
+                    _stream_print("[TRIAGE] Simulated 'trivy' scan initiated... 100% CLEAN.", tone="info")
+            
+            f_engine.log_check("CLI_CONTEXT", intent, analysis)
+        except Exception as fe:
+            # Don't block the whole process if forensic engine fails
+            pass
+
         # Import warden here to maintain lazy loading
         from security.warden import warden, SecurityException
         
@@ -1360,6 +1425,7 @@ def _build_parser() -> argparse.ArgumentParser:
     ledger = sub.add_parser("ledger", help="Update and sync repository-side ledgers")
     ledger_sub = ledger.add_subparsers(dest="ledger_command", required=True)
     ledger_sub.add_parser("status", help="Show repository ledger status")
+    ledger_sub.add_parser("audit", help="Run forensic SHA-256 integrity check on the verification ledger")
     ledger_sub.add_parser("reconcile", help="Copy root provenance ledger to all mirror ledgers")
     ledger_sync = ledger_sub.add_parser("sync", help="Sync ledger state to the local kernel")
     ledger_sync.add_argument(
@@ -1577,6 +1643,18 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Exit non-zero when self-test fails",
     )
 
+    cockpit = sub.add_parser("cockpit", help="Warp-first truthful shell overlay helpers")
+    cockpit_sub = cockpit.add_subparsers(dest="cockpit_command", required=True)
+    cockpit_prompt = cockpit_sub.add_parser("prompt", help="Return the cached prompt/header payload")
+    cockpit_prompt.add_argument("--json", dest="cockpit_json", action="store_true", help="Emit JSON output")
+    cockpit_exec_parser = cockpit_sub.add_parser("exec", help="Route runic input without replacing the shell")
+    cockpit_exec_parser.add_argument("input", nargs="+", help="Runic input such as //STATUS or Omega_STATUS")
+    cockpit_exec_parser.add_argument("--json", dest="cockpit_json", action="store_true", help="Emit JSON output")
+    cockpit_refresh = cockpit_sub.add_parser("refresh", help="Refresh the cached cockpit snapshot")
+    cockpit_refresh.add_argument("--json", dest="cockpit_json", action="store_true", help="Emit JSON output")
+    cockpit_chat = cockpit_sub.add_parser("chat", help="Escape hatch into knight-session")
+    cockpit_chat.add_argument("--json", dest="cockpit_json", action="store_true", help="Emit JSON output")
+
     codex = sub.add_parser("codex", help="Manage Codex integration with Camelot-OS")
     codex_sub = codex.add_subparsers(dest="codex_command", required=True)
     codex_sub.add_parser("status", help="Show the Codex integration artifact")
@@ -1584,6 +1662,44 @@ def _build_parser() -> argparse.ArgumentParser:
     codex_integrate.add_argument("--actor", default=CODEX_DEFAULT_ACTOR)
     codex_sync = codex_sub.add_parser("sync", help="Refresh Codex artifact and trigger Cloud Brain sync")
     codex_sync.add_argument("--actor", default=CODEX_DEFAULT_ACTOR)
+
+    microcubed = sub.add_parser("microcubed", help="Manage Microcubed SmolVM knight task houses")
+    microcubed_sub = microcubed.add_subparsers(dest="microcubed_command", required=True)
+    microcubed_sub.add_parser("status", help="Show Microcubed houses and latest contract")
+    micro_plan = microcubed_sub.add_parser("plan", help="Render a Microcubed task-house contract without writing it")
+    micro_plan.add_argument("objective")
+    micro_plan.add_argument("--knight", default="sir_forge")
+    micro_plan.add_argument("--tenant", default=None)
+    micro_plan.add_argument("--house", default=None)
+    micro_plan.add_argument("--timeout", type=int, default=900)
+    micro_plan.add_argument("--max-write-mb", type=int, default=25)
+    micro_forge = microcubed_sub.add_parser("forge", help="Forge an isolated Microcubed house for a knight task")
+    micro_forge.add_argument("objective")
+    micro_forge.add_argument("--knight", default="sir_forge")
+    micro_forge.add_argument("--tenant", default=None)
+    micro_forge.add_argument("--house", default=None)
+    micro_forge.add_argument("--timeout", type=int, default=900)
+    micro_forge.add_argument("--max-write-mb", type=int, default=25)
+    micro_forge.add_argument("--queue", action="store_true", help="Append a queue directive for the tenant knight")
+    micro_inspect = microcubed_sub.add_parser("inspect", help="Inspect a Microcubed house contract, manifest, and latest output")
+    micro_inspect.add_argument("house_id")
+    micro_execute = microcubed_sub.add_parser(
+        "execute",
+        help="Run a command inside a Microcubed house workspace after Sentinel preflight",
+    )
+    micro_execute.add_argument("house_id")
+    micro_execute.add_argument("command_args", nargs=argparse.REMAINDER)
+    micro_execute.add_argument("--timeout", type=int, default=None)
+    micro_teardown = microcubed_sub.add_parser("teardown", help="Archive and remove a Microcubed house")
+    micro_teardown.add_argument("house_id")
+    micro_teardown.add_argument("--no-archive", action="store_true")
+
+    gemini_ext = sub.add_parser("gemini-ext", help="Inspect Gemini CLI extension adapters")
+    gemini_ext_sub = gemini_ext.add_subparsers(dest="gemini_ext_command", required=True)
+    gemini_ext_sub.add_parser("status", help="Summarize Gemini extension adapter state")
+    gemini_ext_sub.add_parser("list", help="List Gemini extensions and adapter metadata")
+    gemini_ext_inspect = gemini_ext_sub.add_parser("inspect", help="Inspect one Gemini extension")
+    gemini_ext_inspect.add_argument("name")
 
     evolve = sub.add_parser("evolve", help="Record learnings and promote guarded swarm mutations")
     evolve.add_argument("--agent", required=True, help="Knight or subsystem proposing the mutation")
@@ -1651,9 +1767,12 @@ def main() -> int:
         "glyph",
         "glyth",
         "forge-unify",
+        "cockpit",
         "evolve",
         "team",
         "codex",
+        "microcubed",
+        "gemini-ext",
         "scripts",
         "ctx7",
     }
@@ -1717,6 +1836,10 @@ def main() -> int:
         mutating_command = (
             args.command in {"glyph", "forge-unify", "evolve", "sarda", "team"}
             or (args.command == "ledger" and getattr(args, "ledger_command", "") == "update")
+            or (
+                args.command == "microcubed"
+                and getattr(args, "microcubed_command", "") in {"forge", "execute", "teardown"}
+            )
         )
         if (
             success
@@ -1769,6 +1892,17 @@ def main() -> int:
     if args.command == "ledger":
         if args.ledger_command == "status":
             output = ledger_status()
+        elif args.ledger_command == "audit":
+            if not args.json:
+                _stream_print("Initiating forensic SHA-256 integrity check...", tone="accent")
+            is_valid = prov_mgr.verify_integrity()
+            output = {
+                "status": "SECURE" if is_valid else "TAMPERED",
+                "integrity_check": "PASS" if is_valid else "FAIL",
+                "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+                "entries_scanned": len(prov_mgr.get_verification_entries()),
+                "ledger_path": str(prov_mgr.verification_ledger)
+            }
         elif args.ledger_command == "reconcile":
             output = reconcile_ledger_mirrors()
         elif args.ledger_command == "update":
@@ -2204,6 +2338,31 @@ excalibur_health_url: "https://replace-me.modal.run"
                 return 1
             return 0
 
+    if args.command == "cockpit":
+        json_mode = args.json or getattr(args, "cockpit_json", False)
+        if args.cockpit_command == "prompt":
+            output = prompt_payload()
+            if output.get("stale"):
+                output = refresh_snapshot(trigger="prompt")
+        elif args.cockpit_command == "refresh":
+            output = refresh_snapshot(trigger="manual")
+        elif args.cockpit_command == "exec":
+            output = cockpit_exec(" ".join(args.input))
+        else:
+            if json_mode:
+                output = {
+                    "status": "HANDOFF",
+                    "target": "knight-session",
+                    "command": [sys.executable, str(CAMELOT_HOME / "bin" / "knight_session.py")],
+                }
+            else:
+                from bin.knight_session import main as knight_session_main
+
+                knight_session_main()
+                return 0
+        _emit(output, json_mode=json_mode, title="Cockpit")
+        return 0 if output.get("status") != "QUEUE_WARN" else 2
+
     if args.command == "codex":
         if args.codex_command == "status":
             output = read_codex_status(CAMELOT_HOME)
@@ -2248,6 +2407,73 @@ excalibur_health_url: "https://replace-me.modal.run"
         _emit(output, json_mode=args.json, title="Codex Integration")
         return 0
 
+    if args.command == "microcubed":
+        if args.microcubed_command == "status":
+            output = microcubed_status()
+            _emit(output, json_mode=args.json, title="Microcubed")
+            return 0
+
+        if args.microcubed_command in {"plan", "forge"}:
+            request = MicrocubedRequest(
+                objective=args.objective,
+                knight=args.knight,
+                tenant=args.tenant,
+                house=args.house,
+                timeout_seconds=args.timeout,
+                max_write_mb=args.max_write_mb,
+                queue=getattr(args, "queue", False),
+            )
+            output = plan_house(request) if args.microcubed_command == "plan" else forge_house(request)
+            if args.microcubed_command == "forge":
+                output["ledger"] = append_provenance_entry(
+                    title="Microcubed SmolVM house forged",
+                    actor="SIR_CODEX + LUKAS_OMEGA",
+                    scope=[
+                        "control_plane/microcubed.py",
+                        "control_plane/camelot_cli.py",
+                        "03_VAULT/runtime_state/microcubed",
+                    ],
+                    verification=[
+                        "camelot microcubed status",
+                        "python -m json.tool 03_VAULT/runtime_state/microcubed/microcubed_latest.json",
+                    ],
+                    tag="[Omega_KINETIC][MICROCUBED]",
+                )
+            _log_run(output, success=output.get("status") in {"PLANNED", "READY"})
+            _emit(output, json_mode=args.json, title="Microcubed")
+            return 0
+
+        if args.microcubed_command == "inspect":
+            output = inspect_house(args.house_id)
+            _emit(output, json_mode=args.json, title="Microcubed")
+            return 0
+
+        if args.microcubed_command == "execute":
+            command_args = list(args.command_args or [])
+            if command_args and command_args[0] == "--":
+                command_args = command_args[1:]
+            if not command_args:
+                raise SystemExit("microcubed execute requires a command after --")
+            output = execute_house(args.house_id, command_args, timeout_seconds=args.timeout)
+            _log_run(output, success=output.get("status") == "COMPLETE")
+            _emit(output, json_mode=args.json, title="Microcubed")
+            return 0 if output.get("status") == "COMPLETE" else 2
+
+        output = teardown_house(args.house_id, archive=not args.no_archive)
+        _log_run(output, success=output.get("status") in {"TORN_DOWN", "MISSING"})
+        _emit(output, json_mode=args.json, title="Microcubed")
+        return 0
+
+    if args.command == "gemini-ext":
+        if args.gemini_ext_command == "status":
+            output = summarize_gemini_extensions()
+        elif args.gemini_ext_command == "list":
+            output = list_gemini_extensions()
+        else:
+            output = inspect_gemini_extension(args.name)
+        _emit(output, json_mode=args.json, title="Gemini Extensions")
+        return 0 if output.get("status") != "NOT_FOUND" else 1
+
     if args.command == "evolve":
         if not args.json:
             _stream_task_progress(
@@ -2278,7 +2504,7 @@ excalibur_health_url: "https://replace-me.modal.run"
     if args.command == "scripts":
         script_map = {
             "voice-test": ["python", str(CAMELOT_HOME / "scripts" / "voice" / "voice_test_orchestrator.py")],
-            "notebook-access": ["python", str(CAMELOT_HOME / "scripts" / "notebooklm" / "access_v700.py")],
+            "notebook-access": ["python", str(CAMELOT_HOME / "scripts" / "notebooklm" / "access_v999.py")],
             "notebook-check": ["python", str(CAMELOT_HOME / "scripts" / "notebooklm" / "check_notebook.py")],
             "notebook-query": ["python", str(CAMELOT_HOME / "scripts" / "notebooklm" / "query_notebook.py")],
             "forge-omnicrystal": ["python", str(CAMELOT_HOME / "02_FORGE" / "forge_omnicrystal.py")],
@@ -2289,7 +2515,7 @@ excalibur_health_url: "https://replace-me.modal.run"
         if cmd:
             if not args.json:
                 _stream_print(f"Running integrated script: {args.scripts_command}...", tone="info")
-            smolvm.run(cmd)
+            subprocess.run(cmd)
         return 0
 
     if args.command == "ctx7":

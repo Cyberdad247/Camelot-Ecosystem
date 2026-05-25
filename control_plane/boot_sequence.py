@@ -23,6 +23,7 @@ from .codex_integration import boot_codex_integration
 from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
 from .knight_configuration import write_knight_configuration
 from .orchestration_state import summarize_boot_results
+from .symbiotic_maintenance import boot_symbiotic_maintenance
 
 _C = {
     "g": "\033[92m",
@@ -39,6 +40,7 @@ _C = {
 
 _STRIP_RICH = re.compile(r"\[/?[a-zA-Z_ ]*\]")
 _MORGANA_TASK_NAME = "Camelot Morgana Bridge"
+_BIFROST_SIDECAR_TASK_NAME = "Camelot Bifrost Go Sidecar"
 
 
 def _strip(msg: str) -> str:
@@ -186,6 +188,23 @@ def _morgana_bridge_status(token: str | None) -> tuple[bool, str]:
     return True, "health=200 protected=200 unauth=401"
 
 
+def _bifrost_go_sidecar_status(token: str | None) -> tuple[bool, str]:
+    health = _http_status("http://127.0.0.1:8011/health")
+    if health != 200:
+        return False, f"health={health or 'unreachable'}"
+
+    if not token:
+        return False, "health=200 but token missing for protected status"
+
+    protected = _http_status("http://127.0.0.1:8011/v1/bifrost/status", token=token)
+    unauth = _http_status("http://127.0.0.1:8011/v1/bifrost/status")
+    if protected != 200:
+        return False, f"health=200 protected_status={protected or 'unreachable'}"
+    if unauth != 401:
+        return False, f"health=200 protected=200 unauth_status={unauth}"
+    return True, "health=200 protected=200 unauth=401"
+
+
 def boot_morgana_bridge(home: Path) -> tuple[bool, str]:
     """Bootstrap the Morgana Bifrost bridge and verify secure route behavior."""
     token = _read_bifrost_token()
@@ -272,6 +291,81 @@ def boot_morgana_bridge(home: Path) -> tuple[bool, str]:
         return False, f"Morgana Bridge spawned PID={pid} but not ready ({detail})"
     except Exception as exc:
         return False, f"Morgana Bridge launch failed: {type(exc).__name__}: {exc}"
+
+
+def _bifrost_go_sidecar_binary(home: Path) -> Path | None:
+    candidates = [
+        home / "bin" / "bifrost_go_sidecar.exe",
+        home / "01_KERNEL" / "senses" / "bifrost_go_sidecar" / "bifrost_go_sidecar.exe",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+    return None
+
+
+def boot_bifrost_go_sidecar(home: Path) -> tuple[bool, str]:
+    """Bootstrap the Bifrost Go sidecar and verify secure route behavior."""
+    token = _read_bifrost_token()
+    ok, detail = _bifrost_go_sidecar_status(token)
+    if ok:
+        return True, f"Bifrost Go Sidecar already running ({detail})"
+
+    binary = _bifrost_go_sidecar_binary(home)
+    sidecar_dir = home / "01_KERNEL" / "senses" / "bifrost_go_sidecar"
+    go_bin = shutil.which("go")
+    if binary is None and (go_bin is None or not sidecar_dir.exists()):
+        return False, "bifrost_go_sidecar.exe not found and `go run .` unavailable in 01_KERNEL/senses/bifrost_go_sidecar"
+    if not token:
+        return False, "Bifrost token missing at ~/.camelot/bifrost.token"
+
+    log_dir = home / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    pid_file = log_dir / "bifrost_go_sidecar.pid"
+
+    env = os.environ.copy()
+    env["CAMELOT_GATEWAY_TOKEN"] = token
+    env.setdefault("BIFROST_SIDECAR_BIND_ADDR", "127.0.0.1:8011")
+    env.setdefault("BIFROST_SIDECAR_UPSTREAM_URL", "http://127.0.0.1:8001")
+    env.setdefault("BIFROST_SIDECAR_ALLOW_ENV_TOKEN_FALLBACK", "0")
+
+    if binary is not None:
+        launch_cmd = [str(binary)]
+        cwd = str(binary.parent)
+    else:
+        launch_cmd = [go_bin, "run", "."]  # type: ignore[list-item]
+        cwd = str(sidecar_dir)
+
+    try:
+        if platform.system() == "Windows" and _windows_task_exists(_BIFROST_SIDECAR_TASK_NAME):
+            completed = subprocess.run(
+                ["schtasks", "/Run", "/TN", _BIFROST_SIDECAR_TASK_NAME],
+                capture_output=True,
+                text=True,
+                timeout=10,
+                env=env,
+            )
+            if completed.returncode != 0:
+                return False, f"Bifrost Go Sidecar task launch failed: {completed.stderr.strip() or completed.stdout.strip()}"
+            pid = _BIFROST_SIDECAR_TASK_NAME
+        else:
+            kwargs = _child_spawn_kwargs(cwd=cwd)
+            kwargs["env"] = env
+            with (log_dir / "bifrost_go_sidecar.out.log").open("ab") as stdout, (
+                log_dir / "bifrost_go_sidecar.err.log"
+            ).open("ab") as stderr:
+                proc = subprocess.Popen(launch_cmd, stdout=stdout, stderr=stderr, **kwargs)
+            pid = str(proc.pid)
+
+        pid_file.write_text(str(pid), encoding="ascii")
+        for _ in range(20):
+            time.sleep(0.25)
+            ok, detail = _bifrost_go_sidecar_status(token)
+            if ok:
+                return True, f"Bifrost Go Sidecar PID={pid} ({detail})"
+        return False, f"Bifrost Go Sidecar spawned PID={pid} but not ready ({detail})"
+    except Exception as exc:
+        return False, f"Bifrost Go Sidecar launch failed: {type(exc).__name__}: {exc}"
 
 
 def boot_harness(home: Path):
@@ -707,6 +801,146 @@ def start_local_lt_memory(home: Path) -> tuple[bool, str]:
         return False, f"LT Memory spawn failed: {type(exc).__name__}: {exc}"
 
 
+def boot_omnivoice_router(home: Path) -> tuple[bool, str]:
+    """OmniVoice Router — WebRTC signaling + energy VAD on :3002."""
+    if _probe_port("127.0.0.1", 3002):
+        return True, "OmniVoice Router already running on :3002"
+
+    router_dir = home / "02_FORGE" / "KINETIC_ARMORY" / "omnivoice-router"
+    compiled_js = router_dir / "dist" / "omnivoice-router.js"
+    entry_ts = router_dir / "omnivoice-router.ts"
+
+    if not entry_ts.exists():
+        return False, "omnivoice-router.ts not found"
+
+    if compiled_js.exists():
+        cmd = ["node", str(compiled_js)]
+    else:
+        npx = shutil.which("npx")
+        ts_node = shutil.which("ts-node")
+        if ts_node:
+            cmd = [ts_node, str(entry_ts)]
+        elif npx:
+            cmd = [npx, "ts-node", str(entry_ts)]
+        else:
+            return False, "OmniVoice Router: not compiled — run: cd omnivoice-router && npm install && npx tsc"
+
+    log_dir = home / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        kwargs = _child_spawn_kwargs(cwd=str(router_dir))
+        with (log_dir / "omnivoice.out.log").open("ab") as out, \
+             (log_dir / "omnivoice.err.log").open("ab") as err:
+            proc = subprocess.Popen(cmd, stdout=out, stderr=err, **kwargs)
+        time.sleep(3.0)
+        if _probe_port("127.0.0.1", 3002):
+            return True, f"OmniVoice Router PID={proc.pid} on :3002"
+        return False, f"OmniVoice Router spawned PID={proc.pid} but :3002 not responding"
+    except Exception as exc:
+        return False, f"OmniVoice Router launch failed: {type(exc).__name__}: {exc}"
+
+
+def boot_kitten_tts(home: Path) -> tuple[bool, str]:
+    """Kitten TTS streaming server — aiohttp HTTP endpoint on :8300."""
+    if _probe_port("127.0.0.1", 8300):
+        return True, "Kitten TTS already running on :8300"
+
+    kitten_py = home / "01_KERNEL" / "senses" / "audio" / "kitten_service.py"
+    if not kitten_py.exists():
+        return False, "kitten_service.py not found"
+
+    venv_py = _detect_venv_python(home)
+    py = str(venv_py) if venv_py.exists() else sys.executable
+    log_dir = home / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+
+    # Launch: python -c "from kitten_service import kitten_service; import asyncio; asyncio.run(kitten_service.run_streaming_server())"
+    launch_cmd = (
+        "import sys, asyncio; sys.path.insert(0, r'" + str(home) + "'); "
+        "from 01_KERNEL.senses.audio.kitten_service import kitten_service; "
+        "asyncio.run(kitten_service.run_streaming_server())"
+    )
+    # Use module path style instead (avoids dots-in-path issue on Windows)
+    runner_py = home / "logs" / "_kitten_runner.py"
+    runner_py.write_text(
+        f"import sys, asyncio\n"
+        f"sys.path.insert(0, r'{home}')\n"
+        f"sys.path.insert(0, r'{home / '01_KERNEL' / 'senses' / 'audio'}')\n"
+        f"from kitten_service import kitten_service\n"
+        f"asyncio.run(kitten_service.run_streaming_server())\n",
+        encoding="utf-8",
+    )
+    try:
+        kwargs = _child_spawn_kwargs(cwd=str(home))
+        kwargs["env"] = _child_python_env(py)
+        kwargs["env"]["CAMELOT_OS_HOME"] = str(home)
+        with (log_dir / "kitten_tts.out.log").open("ab") as out, \
+             (log_dir / "kitten_tts.err.log").open("ab") as err:
+            proc = subprocess.Popen([py, str(runner_py)], stdout=out, stderr=err, **kwargs)
+        time.sleep(3.0)
+        if _probe_port("127.0.0.1", 8300):
+            return True, f"Kitten TTS PID={proc.pid} streaming on :8300"
+        return False, f"Kitten TTS spawned PID={proc.pid} but :8300 not responding (aiohttp required)"
+    except Exception as exc:
+        return False, f"Kitten TTS launch failed: {type(exc).__name__}: {exc}"
+
+
+def boot_titan_omega(home: Path) -> tuple[bool, str]:
+    """Titan Omega — graft all three memory tiers (Ω-Graph + Ω-Vault + Ω-Flux) in production mode."""
+    import sys
+    import importlib
+    titan_dir = home / "01_KERNEL" / "titan"
+    if not titan_dir.exists():
+        return False, "01_KERNEL/titan not found — Titan memory unavailable"
+    try:
+        # Add 01_KERNEL/titan to sys.path so `memory` package resolves with relative imports
+        titan_str = str(titan_dir)
+        injected = titan_str not in sys.path
+        if injected:
+            sys.path.insert(0, titan_str)
+        # Purge any stale cached fragments before (re)loading
+        for key in list(sys.modules.keys()):
+            if "titan_omega" in key or "titan_schemas" in key:
+                del sys.modules[key]
+        mod = importlib.import_module("memory.titan_omega")
+        stack = mod.TitanOmega.graft(tier="alpha_omega", mode="production", persist="all")
+        tier = stack.config.tier
+        mode = stack.config.mode
+        graph_nodes = len(stack.graph.graph.nodes()) if stack.graph else 0
+        vault_size = len(stack.vault.embeddings) if stack.vault else 0
+        return True, f"TitanΩ grafted ({tier}/{mode}) — graph={graph_nodes} nodes, vault={vault_size} embeddings"
+    except Exception as exc:
+        return False, f"Titan graft failed: {type(exc).__name__}: {exc}"
+
+
+def boot_sir_octavian(home: Path) -> tuple[bool, str]:
+    """Sir Octavian factory metrics server — JSON endpoint on :8400."""
+    if _probe_port("127.0.0.1", 8400):
+        return True, "Sir Octavian already running on :8400"
+
+    octavian_py = home / "control_plane" / "sir_octavian.py"
+    if not octavian_py.exists():
+        return False, "sir_octavian.py not found"
+
+    venv_py = _detect_venv_python(home)
+    py = str(venv_py) if venv_py.exists() else sys.executable
+    log_dir = home / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        kwargs = _child_spawn_kwargs(cwd=str(home))
+        kwargs["env"] = _child_python_env(py)
+        kwargs["env"]["CAMELOT_OS_HOME"] = str(home)
+        with (log_dir / "sir_octavian.out.log").open("ab") as out, \
+             (log_dir / "sir_octavian.err.log").open("ab") as err:
+            proc = subprocess.Popen([py, str(octavian_py), "--serve"], stdout=out, stderr=err, **kwargs)
+        time.sleep(1.2)
+        if _probe_port("127.0.0.1", 8400):
+            return True, f"Sir Octavian PID={proc.pid} metrics on :8400"
+        return False, f"Sir Octavian spawned PID={proc.pid} but :8400 not responding (aiohttp required)"
+    except Exception as exc:
+        return False, f"Sir Octavian launch failed: {type(exc).__name__}: {exc}"
+
+
 def boot_cloud_brain_auth(home: Path) -> tuple[bool, str]:
     """Verify NotebookLM auth session exists and is not expired before RPC probe."""
     bridge_path = home / "03_VAULT" / "training" / "configs" / "notebooklm_bridge.py"
@@ -750,11 +984,17 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},
+        {"name": "OmniVoice     :3002", "required": False, "fn": lambda: boot_omnivoice_router(home)},
+        {"name": "Kitten TTS    :8300", "required": False, "fn": lambda: boot_kitten_tts(home)},
+        {"name": "Titan Omega  [Ω]",   "required": False, "fn": lambda: boot_titan_omega(home)},
+        {"name": "Sir Octavian  :8400", "required": False, "fn": lambda: boot_sir_octavian(home)},
         {"name": "Morgana Bridge :8001", "required": True, "fn": lambda: boot_morgana_bridge(home)},
+        {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},
         {"name": "Local LT Memory:8200","required": False, "fn": lambda: start_local_lt_memory(home)},
         {"name": "Cloud Brain  Auth",  "required": False, "fn": lambda: boot_cloud_brain_auth(home)},
         {"name": "Cloud Brain   (RPC)", "required": True,  "fn": lambda: boot_cloud_brain(home)},
         {"name": "Warp Workflow Sync", "required": False, "fn": lambda: sync_warp_workflows(home)},
+        {"name": "Symbiotic Maintenance", "required": False, "fn": lambda: boot_symbiotic_maintenance(home, quick=quick)},
         {"name": "Codex Integration", "required": False, "fn": lambda: boot_codex_integration(home)},
         {"name": "Clawdbot  :18789",   "required": False, "fn": lambda: boot_clawdbot_gateway(home)},
         {"name": "Sir Pi   [PI_AGENT]", "required": False, "fn": lambda: boot_sir_pi(home)},

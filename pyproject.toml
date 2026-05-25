@@ -1,84 +1,156 @@
 [project]
 name = "camelot-os"
-version = "400.1.0"
-description = "Camelot Apex OS v400.1.0 — Lattice Radiant"
+version = "1000.0.0"
+description = "Camelot Apex OS v1000.0.0 — [V1000.0_ASCENDED] Cosmic Ecosystem"
 readme = "README.md"
 requires-python = ">=3.13"
+
 dependencies = [
-    "fastapi",
-    "uvicorn",
-    "requests",
-    "psutil",
-    "playwright",
-    "numpy",
-    "colorama",
-    "pytest",
-    "redis",
-    "faiss-cpu",
-    "httpx",
-    "modal",
+    # ── Web / API ──────────────────────────────────────────────────────────
+    "fastapi>=0.95.0",
+    "uvicorn>=0.22.0",
+    "httpx>=0.25.0",
+    "requests>=2.28.0",
+    "aiohttp>=3.8.0",
+    "aiofiles>=23.0.0",
+
+    # ── LLM / AI ───────────────────────────────────────────────────────────
+    "openai>=1.0.0",
     "google-generativeai",
-    "appwrite",
-    "replicate",
-    "pydantic",
-    "scrapling[ai]>=0.4.3",
-    "supabase>=2.28.3",
-    "python-dotenv>=1.2.2",
-    "gradio",
-    "textual",
-    "reportlab",
-    "pyyaml",
-    "browser-use>=0.1",
     "langchain-anthropic>=0.3",
     "langchain-openai>=0.2",
+    "langgraph>=1.2.0",
+    "litellm>=1.75.5",
+    "browser-use>=0.1",
+
+    # ── MCP / Agent tooling ────────────────────────────────────────────────
+    "mcp>=1.26.0",
+    "typer",
+    "tenacity",
+    "jinja2",
+
+    # ── Memory / Graph ─────────────────────────────────────────────────────
+    "faiss-cpu>=1.7.4",
+    "networkx>=3.0",
+    "numpy>=1.24.0",
+
+    # ── Data / Config ──────────────────────────────────────────────────────
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.2.2",
+    "redis",
+    "supabase>=2.28.3",
+
+    # ── Cloud / Infra ──────────────────────────────────────────────────────
+    "modal",
+    "appwrite",
+    "replicate",
+    "cryptography>=41.0",
+    "PyJWT[crypto]",
+
+    # ── Scraping / Web ─────────────────────────────────────────────────────
+    "playwright>=1.40.0",
+    "beautifulsoup4>=4.12.0",
+    "trafilatura>=1.0.0",
+    "html2text>=2020.1.16",
+    "crawl4ai>=0.8.0",
+
+    # ── CLI / TUI ──────────────────────────────────────────────────────────
+    "rich>=13.0",
+    "colorama",
+    "textual",
+    "prompt_toolkit",
+    "platformdirs",
+
+    # ── Utilities ──────────────────────────────────────────────────────────
+    "psutil>=5.9.0",
+    "reportlab",
+    "croniter",
+    "gradio",
+    "pytest",
+]
+
+[project.optional-dependencies]
+
+# Heavy ML / voice stack — install with: pip install -e ".[voice]"
+voice = [
+    "torch>=2.0.0",
+    "torchaudio>=2.0.0",
+    "transformers",
+    "sentence-transformers>=2.2.0",
+    "huggingface_hub",
+    "soundfile",
+    "g2p-en",
+    "nltk",
+    "numba",
+    "edge-tts",
+]
+
+# Bot/gateway integrations — install with: pip install -e ".[gateway]"
+gateway = [
+    "python-telegram-bot>=20.0",
+    "discord.py>=2.0",
+    "firecrawl-py",
+    "fal-client",
+    "parallel-web>=0.4.2",
+]
+
+# Web search / stealth scraping extras
+web = [
+    "playwright-stealth>=1.0.0",
+    "fire",
+    "scrapling==0.4.7",
+]
+
+# All optional groups — install with: pip install -e ".[all]"
+all = [
+    "camelot-os[voice]",
+    "camelot-os[gateway]",
+    "camelot-os[web]",
 ]
 
 [project.scripts]
-camelot = "control_plane.camelot_cli:main"
-"Camelot-OS" = "control_plane.camelot_cli:main"
-awaken = "bin.awaken:main"
+camelot        = "control_plane.camelot_cli:main"
+ai             = "bin.camelot:main"
+"Camelot-OS"   = "control_plane.camelot_cli:main"
+awaken         = "bin.awaken:main"
+knight-session = "bin.knight_session:main"
+ks             = "bin.knight_session:main"
 
 [tool.setuptools.packages.find]
 include = ["control_plane*", "bin*"]
 
 [tool.codeflash]
 module-root = "."
-tests-root = "tests"
+tests-root  = "tests"
 formatter-cmds = ["disabled"]
 
 [tool.ruff]
-line-length = 120
+line-length    = 120
 target-version = "py313"
 exclude = [
-    ".git",
-    ".ruff_cache",
-    ".venv",
-    "__pypackages__",
-    "build",
-    "dist",
-    "node_modules",
-    "venv",
-    "99_ARCHIVE",
+    ".git", ".ruff_cache", ".venv", "__pypackages__",
+    "build", "dist", "node_modules", "venv", "99_ARCHIVE",
 ]
 
 [tool.ruff.lint]
-select = ["E", "F", "B", "I"]
-ignore = ["E501"]
+select  = ["E", "F", "B", "I"]
+ignore  = ["E501"]
 fixable = ["ALL"]
 
 [tool.pyright]
-include = ["."]
-exclude = ["**/node_modules", "**/__pycache__", "99_ARCHIVE"]
-venvPath = "."
-venv = ".venv"
+include   = ["."]
+exclude   = ["**/node_modules", "**/__pycache__", "99_ARCHIVE"]
+venvPath  = "."
+venv      = ".venv"
 
 [tool.black]
-line-length = 120
-target-version = ['py313']
+line-length    = 120
+target-version = ["py313"]
 
 [tool.pytest.ini_options]
 cache_dir = "data/.pytest_cache"
-addopts = "--basetemp=data/.pytest_tmp"
+addopts   = "--basetemp=data/.pytest_tmp"
 
 [tool.uv.workspace]
 members = [

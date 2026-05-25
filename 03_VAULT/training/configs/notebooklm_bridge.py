@@ -13,8 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-CANONICAL_NOTEBOOK_ID = "bcaadfdd-1654-487d-9c4c-111f7dea120e"
-CANONICAL_NOTEBOOK_TITLE = "Living Camelot-OS v.400"
+CANONICAL_NOTEBOOK_ID = "8c656cfa-a189-409e-a72d-07692a47f17e"
+CANONICAL_NOTEBOOK_TITLE = "Camelot-OS v.999.3"
 SYNC_NOTE_TITLE = "Camelot-OS Canonical Sync Snapshot"
 # Client ceiling. Health probe (notebooks.list) resolves in ~2s; chat.ask can
 # take 30-60s depending on notebook size and Gemini backend load. Keep the
@@ -233,6 +233,105 @@ def cache_stats() -> dict[str, int]:
     fresh = sum(1 for stamp, _ in _synthesis_cache.values()
                 if now - stamp < SYNTHESIS_TTL_S)
     return {"entries": len(_synthesis_cache), "fresh": fresh}
+
+
+# Session age thresholds (days)
+_AUTH_WARN_DAYS = 21
+_AUTH_CRITICAL_DAYS = 30
+
+
+def session_age_check() -> dict[str, Any]:
+    """Return NotebookLM auth session age and health.
+
+    Checks the notebooklm-py canonical storage path first, then known
+    fallback locations. Also checks browser_profile/Default/Network/Cookies
+    as a secondary freshness signal — a recent browser session means the
+    Google auth is still live even if storage_state.json wasn't re-saved.
+    Returns warn=True at >21 days, critical=True at >30 days.
+    """
+    storage_path: Path | None = None
+
+    # Prefer the library's own canonical path
+    try:
+        from notebooklm.auth import get_storage_path
+        candidate = get_storage_path()
+        if candidate.exists():
+            storage_path = candidate
+    except Exception:
+        pass
+
+    # Known fallback locations
+    if storage_path is None:
+        fallbacks = [
+            Path.home() / ".notebooklm" / "storage_state.json",
+            Path.home() / ".notebooklm-mcp-cli" / "profiles" / "default" / "storage_state.json",
+            NLM_LEGACY_COOKIES,
+        ]
+        for c in fallbacks:
+            if c.exists():
+                storage_path = c
+                break
+
+    # Secondary: browser profile cookies (present after any successful browser login,
+    # even if ENTER wasn't pressed to save storage_state.json)
+    browser_cookies = Path.home() / ".notebooklm" / "browser_profile" / "Default" / "Network" / "Cookies"
+    browser_cookie_age: float | None = None
+    if browser_cookies.exists():
+        browser_cookie_age = (time.time() - browser_cookies.stat().st_mtime) / 86400
+
+    if storage_path is None:
+        if browser_cookie_age is not None and browser_cookie_age < 1.0:
+            return {
+                "exists": True,
+                "path": str(browser_cookies),
+                "age_days": round(browser_cookie_age, 1),
+                "warn": False,
+                "critical": False,
+                "source": "browser_profile",
+                "message": (
+                    f"Browser session fresh ({browser_cookie_age * 24:.1f}h old) — "
+                    "run: notebooklm login and press ENTER to persist storage_state.json"
+                ),
+            }
+        return {
+            "exists": False,
+            "age_days": None,
+            "warn": True,
+            "critical": True,
+            "message": "No auth state found — run: notebooklm login",
+        }
+
+    age_days = (time.time() - storage_path.stat().st_mtime) / 86400
+
+    # If storage_state.json is old but browser cookies are fresh, use the
+    # better signal and prompt the user to re-save
+    if browser_cookie_age is not None and browser_cookie_age < age_days:
+        effective_age = browser_cookie_age
+        source = "browser_profile"
+        note = " (browser session fresh; run: notebooklm login + ENTER to persist)"
+    else:
+        effective_age = age_days
+        source = storage_path.name
+        note = ""
+
+    warn = effective_age > _AUTH_WARN_DAYS
+    critical = effective_age > _AUTH_CRITICAL_DAYS
+
+    msg = f"Auth session {effective_age:.1f}d old ({source}){note}"
+    if critical:
+        msg += " — CRITICAL: likely expired, run: notebooklm login"
+    elif warn:
+        msg += " — WARNING: expires soon, run: notebooklm login to refresh"
+
+    return {
+        "exists": True,
+        "path": str(storage_path),
+        "age_days": round(effective_age, 1),
+        "warn": warn,
+        "critical": critical,
+        "source": source,
+        "message": msg,
+    }
 
 
 # ---------------------------------------------------------------------------

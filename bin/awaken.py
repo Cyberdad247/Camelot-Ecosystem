@@ -18,12 +18,13 @@ from control_plane.boot_sequence import _C
 
 def _banner():
     print(f"{_C['m']}{_C['B']}")
-    print("╔══════════════════════════════════════════════════════════════╗")
-    print("║  AWAKEN — Camelot Apex OS v400.1.0 (Lattice Radiant)        ║")
-    print("║  SIR_BORIS v3.0 — One word. Any shell. Any platform.        ║")
-    print("║  6-Phase Boot: CLIProxy → Defense → Kinetic → Cloud →       ║")
-    print("║                Vizion Telemetry → Sovereign Harness (24/7)  ║")
-    print("╚══════════════════════════════════════════════════════════════╝")
+    print("+------------------------------------------------------------+")
+    print("|  AWAKEN - Camelot Apex OS v.999.3 (Sovereign Lattice)     |")
+    print("|  SIR_BORIS v3.0 - One word. Any shell. Any platform.      |")
+    print("|  6-Phase Boot: CLIProxy -> Defense -> Kinetic -> Cloud -> |")
+    print("|                Vizion Telemetry -> Sovereign Harness      |")
+    print("|                (24/7)                                     |")
+    print("+------------------------------------------------------------+")
     print(_C["x"])
 
 def main():
