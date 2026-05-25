@@ -139,11 +139,11 @@ try:
     }
     present_runic = set(runes["runic_commands"])
     missing_runic = sorted(required_runic - present_runic)
-    rune_ok = not missing_runic and len(runes["omega_runes"]) == 29
+    rune_ok = not missing_runic and len(runes["omega_runes"]) >= 30
     detail = f"runic={len(runes['runic_commands'])} omega={len(runes['omega_runes'])}"
     if missing_runic:
         detail += f" missing={','.join(missing_runic)}"
-    check("Runic Router core+29", rune_ok, detail)
+    check("Runic Router core+30", rune_ok, detail)
     parsed = parse_rune("//FORGE test")
     check("Rune parse //FORGE", parsed is not None, str(parsed))
 except Exception as e:
