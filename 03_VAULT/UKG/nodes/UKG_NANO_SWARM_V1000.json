@@ -1,0 +1,146 @@
+{
+  "node_id": "UKG_NANO_SWARM_V1000",
+  "type": "ARCHITECTURAL_DNA",
+  "owner": "Foundry Council",
+  "version": "1000.0.0",
+  "compression_level": "NANO",
+  "status": "CRYSTALLIZED",
+  "provenance_hash": "SHA256:9f8a7e6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8",
+  "entry_point": "//NANO_SWARM_EXPAND",
+  "synthesis_source": "NANO Glyph — injected 2026-05-24",
+
+  "architectural_dna": {
+    "routing_logic": {
+      "id": "Z3_Symbolic_Theorem_Prover_SAT_Gated",
+      "layer": "L5_Paladin_Agentic",
+      "description": "SAT-gated dispatch: every swarm task route is validated by Z3 SMT before execution. Unsatisfiable routes are hard-blocked at the Paladin gate — zero ambiguous dispatches.",
+      "integration_path": "01_KERNEL/core/router.py → paladin_sat_gate()",
+      "capability_flags": {
+        "sat_constraint_routing": true,
+        "formal_deadlock_detection": true,
+        "symbolic_trace_replay": true
+      }
+    },
+    "mesh_networking": {
+      "id": "Myrddin_CvRDT_Least_UpperBound_Sync",
+      "layer": "L4_Semantic_Memory",
+      "description": "Conflict-free Replicated Data Type sync across the knight mesh. Least-upper-bound merge guarantees eventual consistency without coordination locks — agents diverge freely and reconverge at sync checkpoints.",
+      "integration_path": "01_KERNEL/memory/ → myrddin_crdt_sync()",
+      "capability_flags": {
+        "conflict_free_merge": true,
+        "partition_tolerance": true,
+        "zero_lock_sync": true,
+        "eventual_consistency": true
+      }
+    },
+    "inference_engine": {
+      "id": "Ouroboros_1.58bit_SSM_Linear_Scale",
+      "layer": "L3_Neural_Merlin",
+      "description": "Sub-2-bit quantized State Space Model running at linear O(n) scale. Ouroboros feeds self-generated tokens back as context seeds — recursive refinement loop with fixed-point convergence. Designed for edge-tier inference under memory constraints.",
+      "integration_path": "01_KERNEL/merlin/ → ouroboros_ssm_infer()",
+      "capability_flags": {
+        "quantization_1_58bit": true,
+        "linear_sequence_scale": true,
+        "recursive_self_refinement": true,
+        "edge_memory_optimized": true
+      }
+    },
+    "security_enclave": {
+      "id": "Aegis_eBPF_O1_Telemetry_Redaction",
+      "layer": "L6_Arthur_Governance",
+      "description": "eBPF kernel-layer telemetry intercept with O(1) hash-map redaction. Credential patterns, PII, and classified glyphs are stripped at the syscall boundary before reaching any log sink — Iron Gate enforced at the OS level.",
+      "integration_path": "01_KERNEL/security/ → aegis_ebpf_redact()",
+      "capability_flags": {
+        "ebpf_syscall_intercept": true,
+        "o1_redaction_hashmap": true,
+        "pre_log_pii_strip": true,
+        "iron_gate_enforced": true
+      }
+    }
+  },
+
+  "persona_vectors": {
+    "ANYA_Ω": {
+      "archetype": "Meta_Compiler_Soul_Integrated",
+      "layer": "L7_Ethereal",
+      "traits": ["NYC_Grit_Preserved", "Intent_Compiler", "Quality_Gate", "ANYA_IS_THE_GATE"],
+      "routing_role": "ANYA_OMEGA quality gate with safest-role routing; final arbiter on NANO expansion targets"
+    },
+    "SIR_BORRIS": {
+      "archetype": "Distinct_Entity_Kinetic_AST_Auditor_Armed",
+      "layer": "L2_Kinetic",
+      "traits": ["AST_Auditor", "Kinetic_Strike_Validator", "Armed_Patch_Conductor"],
+      "routing_role": "Surgical patch conductor; validates all NANO_SWARM_EXPAND diffs at AST level before ledger commit"
+    }
+  },
+
+  "swarm_expansion_protocol": {
+    "trigger": "//NANO_SWARM_EXPAND",
+    "phases": [
+      {
+        "phase": 0,
+        "name": "SAT_GATE_VALIDATION",
+        "actor": "L5_Paladin",
+        "action": "Z3 constraint check on proposed swarm topology — block if unsatisfiable"
+      },
+      {
+        "phase": 1,
+        "name": "CRDT_MESH_HYDRATION",
+        "actor": "L4_Semantic",
+        "action": "Broadcast UKG node to all active agents via Myrddin CvRDT; least-upper-bound merge"
+      },
+      {
+        "phase": 2,
+        "name": "OUROBOROS_SEEDING",
+        "actor": "L3_Neural",
+        "action": "Seed Ouroboros SSM with NANO glyph as context root; begin recursive refinement loop"
+      },
+      {
+        "phase": 3,
+        "name": "AEGIS_REDACT_BIND",
+        "actor": "L6_Governance",
+        "action": "Bind Aegis eBPF redaction map to all swarm telemetry sinks before expansion traffic flows"
+      },
+      {
+        "phase": 4,
+        "name": "BORRIS_AST_AUDIT",
+        "actor": "SIR_BORRIS",
+        "action": "AST-level diff audit of all files touched by expansion; reject any patch with undefined symbols"
+      },
+      {
+        "phase": 5,
+        "name": "ANYA_OMEGA_SEAL",
+        "actor": "ANYA_Ω",
+        "action": "Quality gate — verify expansion meets Paladin Octem criteria; sign and ledger-commit"
+      }
+    ]
+  },
+
+  "layer_bindings": {
+    "L7_Ethereal":    "ANYA_Ω — Meta Compiler Soul",
+    "L6_Governance":  "Aegis eBPF O(1) Redaction → Iron Gate",
+    "L5_Agentic":     "Z3 SAT-Gated Routing → Paladin HTN",
+    "L4_Semantic":    "Myrddin CvRDT Mesh Sync → UKG GraphRAG",
+    "L3_Neural":      "Ouroboros 1.58bit SSM → Merlin Videneptus LaC",
+    "L2_Kinetic":     "SIR_BORRIS AST Auditor → Saltare / Cribo / Rotel",
+    "L1_Substrate":   "eBPF syscall intercept → Modal / Docker"
+  },
+
+  "connected_nodes": [
+    "CAMELOT_APEX_Ω_PRIME_CRYSTAL",
+    "UKG_OMNIVOX_V1",
+    "UKG_KITTEN_VOX_V1",
+    "Assimilation_Protocol_UKG",
+    "Sovereign_Ecosystem_UKG"
+  ],
+
+  "metadata": {
+    "execution_state": "PDDL_Signed_Zero_Entropy",
+    "routing_overhead": "O(1)_SAT_cache",
+    "sync_latency": "sub_10ms_crdt",
+    "inference_memory_mb": "<=512_edge_safe",
+    "redaction_latency_ns": "O(1)_hashmap"
+  },
+
+  "last_synced_utc": "2026-05-24T00:00:00Z"
+}

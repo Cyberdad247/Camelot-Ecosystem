@@ -17,39 +17,45 @@ Integration: appends to harness_queue.jsonl for async execution.
 from __future__ import annotations
 
 import json
+import os
 import re
+import threading
 import time
 import uuid
+from collections import defaultdict, deque
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 
+from control_plane.taxonomy import PRIVACY_KEYWORDS
+
+try:
+    from importlib import import_module
+    hydration = import_module("01_KERNEL.memory.hydration_manager")
+    HydrationManager = hydration.HydrationManager
+except ImportError:
+    HydrationManager = None
+
 CAMELOT_HOME = Path(__file__).parent.parent
 QUEUE_FILE   = CAMELOT_HOME / "logs" / "harness_queue.jsonl"
+
+# Rate-limit guard for _queue_task — kills runaway producers that fire the same
+# (knight, directive) thousands of times per second. Tunable via env:
+#   CAMELOT_ROUTER_DEDUP_WINDOW_SEC (default 10) — sliding window in seconds
+#   CAMELOT_ROUTER_DEDUP_MAX        (default 5)  — max identical submits per window
+#   CAMELOT_ROUTER_DEDUP_DISABLE=1               — bypass the guard entirely
+_DEDUP_WINDOW_SEC = float(os.environ.get("CAMELOT_ROUTER_DEDUP_WINDOW_SEC", "10"))
+_DEDUP_MAX        = int(os.environ.get("CAMELOT_ROUTER_DEDUP_MAX", "5"))
+_DEDUP_DISABLED   = os.environ.get("CAMELOT_ROUTER_DEDUP_DISABLE") == "1"
+_dedup_lock      = threading.Lock()
+_dedup_state: dict[tuple[str, str], deque[float]] = defaultdict(deque)
 
 # ---------------------------------------------------------------------------
 # Rune tables
 # ---------------------------------------------------------------------------
 
 # 11 Runic Commands — sovereign execution runes
-def _handle_fleet(param: str, context: dict) -> dict:
-    import importlib.util
-    import os
-    from pathlib import Path
-    
-    # Dynamic import to bypass 01_KERNEL naming restriction
-    repo_root = Path(__file__).resolve().parent.parent
-    module_path = repo_root / "01_KERNEL" / "swarm" / "graph_orchestrator.py"
-    spec = importlib.util.spec_from_file_location("graph_orchestrator", module_path)
-    if spec and spec.loader:
-        orch_mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(orch_mod)
-        orchestrator = orch_mod.GraphOrchestrator()
-        result = orchestrator.execute_fleet(param)
-        return {"action": "graph_dispatch", "status": "ACTUATED", "result": result}
-    
-    return {"action": "graph_dispatch", "status": "ERROR", "error": "Module not found"}
 
 RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     "//FLEET": {
@@ -73,6 +79,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_forge",
     },
+    "//CODEX": {
+        "knight": "sir_codex",
+        "description": "High-velocity implementation and rapid prototyping",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_codex",
+    },
+    "//CONTRACT": {
+        "knight": "sir_forge",
+        "description": "Compile Camelot into a portable runtime package",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_contract",
+    },
     "//SWARM": {
         "knight": "sir_boris",
         "description": "Full hive parallel debug/optimize vote",
@@ -93,13 +113,6 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "mode": "FORGE",
         "priority": 2,
         "handler": "_handle_heal",
-    },
-    "//FLEET": {
-        "knight": "sir_boris",
-        "description": "Map-Reduce swarm deployment across terminals",
-        "mode": "SWARM",
-        "priority": 2,
-        "handler": "_handle_fleet",
     },
     "//GENESIS": {
         "knight": "sir_boris",
@@ -136,6 +149,34 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_vocal",
     },
+    "//SCAN": {
+        "knight": "squire_colony",
+        "description": "CLARITY_CORE squire colony codebase scan",
+        "mode": "SENTINEL",
+        "priority": 2,
+        "handler": "_handle_scan",
+    },
+    "//STATUS": {
+        "knight": "sir_boris",
+        "description": "Live system status + port probes",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_status",
+    },
+    "//THINK": {
+        "knight": "merlin_omega",
+        "description": "Deep reasoning via GoT/ToT chain",
+        "mode": "ORACLE",
+        "priority": 3,
+        "handler": "_handle_think",
+    },
+    "//NANO_SWARM_EXPAND": {
+        "knight": "sir_borris",
+        "description": "6-phase UKG_NANO_SWARM_V1000 expansion: SAT-gate → CvRDT mesh → Ouroboros seed → Aegis bind → AST audit → Anya seal",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_nano_swarm_expand",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -169,6 +210,7 @@ OMEGA_RUNES: dict[str, dict[str, Any]] = {
     "Omega_GATEWAY":    {"knight": "sir_link",     "description": "Switchboard gateway diagnostics"},
     "Omega_STACK":      {"knight": "sir_boris",    "description": "Full stack topology report"},
     "Omega_SCORPION":   {"knight": "sir_gideon",   "description": "Forensic GIDEON_RISK_MATRIX audit"},
+    "Omega_CODEX":      {"knight": "sir_codex",    "description": "Direct SIR_CODEX execution lane"},
 }
 
 
@@ -192,8 +234,32 @@ class RuneResult:
 # Handler functions
 # ---------------------------------------------------------------------------
 
+def _rate_limit_check(knight: str, directive: str) -> Optional[str]:
+    """Return an error string if (knight, directive) has been submitted more than
+    _DEDUP_MAX times in the last _DEDUP_WINDOW_SEC seconds. None = allow."""
+    if _DEDUP_DISABLED:
+        return None
+    key = (knight, directive)
+    now = time.monotonic()
+    cutoff = now - _DEDUP_WINDOW_SEC
+    with _dedup_lock:
+        dq = _dedup_state[key]
+        while dq and dq[0] < cutoff:
+            dq.popleft()
+        if len(dq) >= _DEDUP_MAX:
+            return (
+                f"rate_limited: {_DEDUP_MAX}+ identical submits in "
+                f"{_DEDUP_WINDOW_SEC:.0f}s window for ({knight}, {directive[:60]!r})"
+            )
+        dq.append(now)
+    return None
+
+
 def _queue_task(knight: str, directive: str, priority: int = 2) -> tuple[str, Optional[str]]:
     task_id = f"rune-{uuid.uuid4().hex[:8]}"
+    rl_err = _rate_limit_check(knight, directive)
+    if rl_err:
+        return task_id, rl_err
     entry = {
         "id": task_id,
         "knight": knight,
@@ -216,6 +282,18 @@ def _handle_boot(param: str, context: dict) -> dict:
 def _handle_forge(param: str, context: dict) -> dict:
     return {"action": "kinetic build", "param": param or "default target"}
 
+def _handle_codex(param: str, context: dict) -> dict:
+    return {"action": "codex_velocity_execution", "param": param or "default target"}
+
+def _handle_contract(param: str, context: dict) -> dict:
+    brief = param or "portable Camelot runtime package"
+    return {
+        "action": "portable_contract_build",
+        "brief": brief,
+        "output": "dist/camelot.exe",
+        "detail": "run: python scripts/build_portable.py --test",
+    }
+
 def _handle_swarm(param: str, context: dict) -> dict:
     return {"action": "srdl_map_reduce", "param": param, "bio_swarm": "Formica+Pongid+Castor"}
 
@@ -226,22 +304,26 @@ def _handle_heal(param: str, context: dict) -> dict:
     return {"action": "piv_self_heal", "target": param or "auto-diagnose"}
 
 def _handle_fleet(param: str, context: dict) -> dict:
-    """Initialize GraphOrchestrator and start execution loop for //FLEET."""
-    try:
-        from 01_KERNEL.swarm.graph_orchestrator import GraphOrchestrator
-        orchestrator = GraphOrchestrator()
-        final_state = orchestrator.run(param or "Auto-Evolution Directive")
-        return {
-            "action": "swarm_graph_execution",
-            "directive": param,
-            "status": final_state["validation_results"].get("status", "unknown"),
-            "iterations": final_state["iteration_count"],
-            "logs_count": len(final_state["evolution_logs"])
-        }
-    except ImportError as e:
-        return {"error": f"Failed to import GraphOrchestrator: {e}"}
-    except Exception as e:
-        return {"error": f"Swarm graph execution failed: {e}"}
+    """Route //FLEET via importlib to avoid 01_KERNEL naming restriction."""
+    import importlib.util
+    repo_root = Path(__file__).resolve().parent.parent
+    module_path = repo_root / "01_KERNEL" / "swarm" / "graph_orchestrator.py"
+    if module_path.exists():
+        spec = importlib.util.spec_from_file_location("graph_orchestrator", module_path)
+        if spec and spec.loader:
+            mod = importlib.util.module_from_spec(spec)
+            try:
+                spec.loader.exec_module(mod)
+                orchestrator = mod.GraphOrchestrator()
+                final_state = orchestrator.run(param or "Auto-Evolution Directive")
+                return {
+                    "action": "swarm_graph_execution",
+                    "directive": param,
+                    "status": final_state.get("validation_results", {}).get("status", "unknown"),
+                }
+            except Exception as e:
+                return {"action": "fleet_dispatch", "error": str(e)}
+    return {"action": "fleet_dispatch", "detail": "GraphOrchestrator not available", "param": param}
 
 def _handle_genesis(param: str, context: dict) -> dict:
     return {"action": "project_bootstrap", "template": "BriefingScript", "name": param}
@@ -258,10 +340,41 @@ def _handle_defense_init(param: str, context: dict) -> dict:
 def _handle_vocal(param: str, context: dict) -> dict:
     return {"action": "vocal_pipeline", "phases": ["Oracle", "Veritas", "Lazarus"], "param": param}
 
+def _handle_scan(param: str, context: dict) -> dict:
+    return {"action": "squires_colony_triage", "path": param or ".", "detail": "run: python -m squires.colony triage"}
+
+def _handle_status(param: str, context: dict) -> dict:
+    return {"action": "system_status", "detail": "run: python -m control_plane.harness --status"}
+
+def _handle_think(param: str, context: dict) -> dict:
+    return {"action": "got_reasoning", "param": param, "knight": "merlin_omega"}
+
+def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
+    """Execute the 6-phase NANO_SWARM_EXPAND protocol via importlib."""
+    import importlib.util
+    script = CAMELOT_HOME / "scripts" / "nano_swarm_expand.py"
+    if script.exists():
+        spec = importlib.util.spec_from_file_location("nano_swarm_expand", script)
+        if spec and spec.loader:
+            mod = importlib.util.module_from_spec(spec)
+            try:
+                spec.loader.exec_module(mod)
+                exit_code = mod.run_expansion()
+                return {
+                    "action": "nano_swarm_expand",
+                    "status": "CRYSTALLIZED" if exit_code == 0 else "BLOCKED",
+                    "exit_code": exit_code,
+                }
+            except Exception as e:
+                return {"action": "nano_swarm_expand", "error": str(e)}
+    return {"action": "nano_swarm_expand", "detail": "script not found", "path": str(script)}
+
 
 _HANDLERS = {
     "_handle_boot": _handle_boot,
     "_handle_forge": _handle_forge,
+    "_handle_codex": _handle_codex,
+    "_handle_contract": _handle_contract,
     "_handle_swarm": _handle_swarm,
     "_handle_plan": _handle_plan,
     "_handle_heal": _handle_heal,
@@ -271,6 +384,10 @@ _HANDLERS = {
     "_handle_scavenge": _handle_scavenge,
     "_handle_defense_init": _handle_defense_init,
     "_handle_vocal": _handle_vocal,
+    "_handle_scan": _handle_scan,
+    "_handle_status": _handle_status,
+    "_handle_think": _handle_think,
+    "_handle_nano_swarm_expand": _handle_nano_swarm_expand,
 }
 
 
@@ -279,6 +396,33 @@ _HANDLERS = {
 # ---------------------------------------------------------------------------
 
 _RUNE_RE = re.compile(r"^(//\w+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
+_RUNE_ALIASES: dict[str, str] = {
+    "omega_codex": "Omega_CODEX",
+}
+
+
+def normalize_rune(rune: str) -> str:
+    """Normalize rune aliases/casing to canonical dispatch keys."""
+    raw = (rune or "").strip()
+    if not raw:
+        return raw
+
+    alias = _RUNE_ALIASES.get(raw.lower())
+    if alias:
+        return alias
+
+    for key in OMEGA_RUNES:
+        if raw.lower() == key.lower():
+            return key
+
+    upper = raw.upper()
+    if upper == "//VOCAL":
+        return "//vocal"
+    if upper in RUNIC_COMMANDS:
+        return upper
+    if raw in RUNIC_COMMANDS:
+        return raw
+    return raw
 
 
 def parse_rune(text: str) -> Optional[tuple[str, str]]:
@@ -286,37 +430,48 @@ def parse_rune(text: str) -> Optional[tuple[str, str]]:
     for line in text.strip().splitlines():
         m = _RUNE_RE.match(line.strip())
         if m:
-            rune = m.group(1)
+            rune = normalize_rune(m.group(1))
             param = (m.group(2) or "").strip()
-            # Normalize case for Omega runes
-            for key in OMEGA_RUNES:
-                if rune.lower() == key.lower():
-                    return key, param
-            # Normalize case for runic commands
-            upper = rune.upper()
-            if upper == "//VOCAL":
-                upper = "//vocal"
-            if upper in RUNIC_COMMANDS or rune in RUNIC_COMMANDS:
-                return (upper if upper in RUNIC_COMMANDS else rune), param
+            if rune in OMEGA_RUNES or rune in RUNIC_COMMANDS:
+                return rune, param
     return None
 
 
 def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> RuneResult:
     """Route a rune to the correct knight and queue the task."""
+    rune = normalize_rune(rune)
     context = context or {}
+
+    # Check for Privacy Shield Override
+    combined_text = f"{rune} {param}".lower()
+    is_privacy_override = any(kw in combined_text for kw in PRIVACY_KEYWORDS)
 
     # Runic command
     if rune in RUNIC_COMMANDS:
         cfg = RUNIC_COMMANDS[rune]
+        knight = "sir_ghost" if is_privacy_override else cfg["knight"]
         handler_fn = _HANDLERS.get(cfg["handler"])
         metadata = handler_fn(param, context) if handler_fn else {"action": rune}
         directive = f"{rune} {param}".strip() if param else rune
-        task_id, err = _queue_task(cfg["knight"], directive, cfg.get("priority", 2))
+
+        if HydrationManager:
+            mgr = HydrationManager(knight_id=knight)
+            complexity = 9 if cfg.get("priority", 2) <= 1 else 5
+            mgr.store_tissue(intent=directive, content=metadata, complexity=complexity, tier="L2" if complexity >= 8 else "L1")
+            hydration = mgr.hydrate_context(intent=directive, complexity=complexity)
+            if hydration.get("L2") and not "yielded no results" in str(hydration.get("L2")):
+                directive += f"\n\n[CLOUD_BRAIN_CONTEXT]: {hydration.get('L2')}"
+
+        if is_privacy_override:
+            metadata["privacy_override"] = True
+            metadata["original_knight"] = cfg["knight"]
+
+        task_id, err = _queue_task(knight, directive, cfg.get("priority", 2))
         return RuneResult(
             rune=rune,
-            knight=cfg["knight"],
+            knight=knight,
             directive=directive,
-            mode=cfg.get("mode", "FORGE"),
+            mode="SENTINEL" if is_privacy_override else cfg.get("mode", "FORGE"),
             task_id=task_id,
             queued=err is None,
             queue_error=err,
@@ -326,30 +481,54 @@ def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> Ru
     # Omega rune
     if rune in OMEGA_RUNES:
         cfg = OMEGA_RUNES[rune]
+        knight = "sir_ghost" if is_privacy_override else cfg["knight"]
         directive = f"{rune} {param}".strip() if param else rune
-        task_id, err = _queue_task(cfg["knight"], directive, priority=2)
+        metadata = {"description": cfg["description"]}
+
+        if HydrationManager:
+            mgr = HydrationManager(knight_id=knight)
+            mgr.store_tissue(intent=directive, content=cfg["description"], complexity=9, tier="L2")
+            hydration = mgr.hydrate_context(intent=directive, complexity=9)
+            if hydration.get("L2") and not "yielded no results" in str(hydration.get("L2")):
+                directive += f"\n\n[CLOUD_BRAIN_CONTEXT]: {hydration.get('L2')}"
+
+        if is_privacy_override:
+            metadata["privacy_override"] = True
+            metadata["original_knight"] = cfg["knight"]
+
+        task_id, err = _queue_task(knight, directive, priority=2)
         return RuneResult(
             rune=rune,
-            knight=cfg["knight"],
+            knight=knight,
             directive=directive,
-            mode="ORACLE",
+            mode="SENTINEL" if is_privacy_override else "ORACLE",
             task_id=task_id,
             queued=err is None,
             queue_error=err,
-            metadata={"description": cfg["description"]},
+            metadata=metadata,
         )
 
-    # Unknown rune — escalate to sir_boris
-    task_id, err = _queue_task("sir_boris", f"UNKNOWN_RUNE: {rune} {param}", priority=3)
+    # Unknown rune — escalate to sir_boris or sir_ghost
+    knight = "sir_ghost" if is_privacy_override else "sir_boris"
+    directive = f"UNKNOWN_RUNE: {rune} {param}"
+    metadata = {"warning": f"Rune '{rune}' not in dispatch table — escalated"}
+    
+    if is_privacy_override:
+        metadata["privacy_override"] = True
+
+    if HydrationManager:
+        mgr = HydrationManager(knight_id=knight)
+        mgr.store_tissue(intent=directive, content="Unknown Rune Escalation", complexity=5, tier="L1")
+    task_id, err = _queue_task(knight, directive, priority=3)
     return RuneResult(
         rune=rune,
-        knight="sir_boris",
+        knight=knight,
         directive=f"UNKNOWN_RUNE: {rune}",
-        mode="FORGE",
+        mode="SENTINEL" if is_privacy_override else "FORGE",
         task_id=task_id,
         queued=err is None,
         queue_error=err,
-        metadata={"warning": f"Rune '{rune}' not in dispatch table — escalated to SIR_BORIS"},
+        metadata=metadata,
     )
 
 
@@ -368,3 +547,59 @@ def list_runes() -> dict[str, list[str]]:
         "runic_commands": list(RUNIC_COMMANDS.keys()),
         "omega_runes": list(OMEGA_RUNES.keys()),
     }
+
+
+# ---------------------------------------------------------------------------
+# CLI entry (python -m control_plane.runic_router [--rune X] [--task Y])
+# ---------------------------------------------------------------------------
+
+def _cli_main() -> None:
+    import argparse
+    import sys
+
+    ap = argparse.ArgumentParser(
+        prog="python -m control_plane.runic_router",
+        description="CAMELOT-OS Runic Dispatch",
+    )
+    ap.add_argument("--rune", help="Rune name (e.g. FORGE, //BOOT, Omega_SYNC)")
+    ap.add_argument("--task", default="", help="Task parameter passed to the handler")
+    ap.add_argument("--detect", metavar="TEXT", help="Parse free-form text for a rune prefix")
+    ap.add_argument("--list", action="store_true", help="List all available runes")
+    args = ap.parse_args()
+
+    if args.list:
+        runes = list_runes()
+        print("=== Runic Commands ===")
+        for r in runes["runic_commands"]:
+            print(f"  {r}")
+        print("\n=== Omega Runes ===")
+        for r in runes["omega_runes"]:
+            print(f"  {r}")
+        return
+
+    if args.detect:
+        result = detect_and_route(args.detect)
+        if result is None:
+            print(json.dumps({"error": "No rune detected in input"}))
+            sys.exit(1)
+    elif args.rune:
+        raw_rune = args.rune if (args.rune.startswith("//") or args.rune.startswith("Omega_")) else f"//{args.rune.upper()}"
+        rune = normalize_rune(raw_rune)
+        result = route_rune(rune, args.task)
+    else:
+        ap.print_help()
+        return
+
+    print(json.dumps({
+        "rune": result.rune,
+        "knight": result.knight,
+        "directive": result.directive,
+        "mode": result.mode,
+        "task_id": result.task_id,
+        "queued": result.queued,
+        "metadata": result.metadata,
+    }, indent=2))
+
+
+if __name__ == "__main__":
+    _cli_main()

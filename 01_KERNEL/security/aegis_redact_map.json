@@ -1,0 +1,23 @@
+{
+  "@type": "AegisRedactMap",
+  "source_node": "UKG_NANO_SWARM_V1000",
+  "enclave": "Aegis_eBPF_O1_Telemetry_Redaction",
+  "strategy": "O1_hashmap",
+  "patterns": [
+    "[A-Za-z0-9+/]{40,}={0,2}",
+    "sk-[A-Za-z0-9]{32,}",
+    "\\bAIza[A-Za-z0-9_-]{35,}\\b",
+    "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+    "eyJ[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+",
+    "ghp_[A-Za-z0-9]{36}",
+    "xox[baprs]-[A-Za-z0-9-]+"
+  ],
+  "sinks": [
+    "logs/harness_queue.jsonl",
+    "PROVENANCE_LEDGER.md",
+    "01_KERNEL/memory/tissue/",
+    "data/"
+  ],
+  "iron_gate_enforced": true,
+  "bound_at": "2026-05-25T08:20:24.714914+00:00"
+}
