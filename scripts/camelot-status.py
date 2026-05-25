@@ -224,7 +224,7 @@ try:
             if not detail:
                 detail = str(e)[:60]
 
-    check("Ollama models loaded", model_count >= 4, f"{detail} (gemma4/qwen3/qwen3.5/qwen2.5-coder)")
+    check("Ollama models loaded", model_count >= 4, f"{detail} (gemma3/qwen3/qwen3.5/qwen2.5-coder)")
 except FileNotFoundError:
     check("Ollama binary", False, "ollama not in PATH", warn_only=True)
 except Exception as e:
