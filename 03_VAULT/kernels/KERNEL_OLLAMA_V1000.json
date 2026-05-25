@@ -1,0 +1,22 @@
+{
+  "kernel_id": "KERNEL_OLLAMA_V1000",
+  "forge_timestamp": "2026-05-25T11:36:00Z",
+  "source_directory": "C:\Users\vizio\.ollama",
+  "size_gb": 15.79,
+  "blob_count": 23,
+  "status": "CRYSTALLIZED_HITL_PENDING",
+  "models": [
+    { "name": "gemma4",        "tag": "latest", "registry": "registry.ollama.ai/library" },
+    { "name": "qwen2.5-coder", "tag": "3b",     "registry": "registry.ollama.ai/library" },
+    { "name": "qwen3",         "tag": "0.6b",   "registry": "registry.ollama.ai/library" },
+    { "name": "qwen3",         "tag": "1.7b",   "registry": "registry.ollama.ai/library" },
+    { "name": "qwen3",         "tag": "4b",     "registry": "registry.ollama.ai/library" },
+    { "name": "qwen3.5",       "tag": "0.8b",   "registry": "registry.ollama.ai/library" }
+  ],
+  "purge_safe": true,
+  "restore_method": "ollama pull <model:tag>",
+  "docker_status": "DAEMON_DEGRADED — restart Docker Desktop before pruning",
+  "octavian_shield": false,
+  "forge_agent": "MERLIN_OMEGA",
+  "seal": "ANYA_IS_THE_GATE"
+}
