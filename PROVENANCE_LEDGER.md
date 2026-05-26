@@ -5238,3 +5238,17 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 - **Action:** Cloud Brain online, high-water mark 1682
 
 | 993 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72370s tasks=0 fail=0 probes=6/9 cells=0 |
+---
+
+## [2026-05-26] Version v400.1.0 - LATTICE_RADIANT heartbeat — sustained sovereign, PRs #11-#12 merged
+
+**Status:** ALL_SYSTEMS_GO
+**Hash:** 0x9a7d2789347a675d
+**Actor:** SIR_BORIS
+
+### 🛡️ Atomic Commit
+- **Action:** 50/52 ALL SYSTEMS GO — no regressions
+- **Action:** Verification ledger entries #313-#315 chained and merged
+- **Action:** SCORPION PASS: GIDEON_RISK_SCORE=1
+- **Action:** Cloud Brain online, HWM 1682
+- **Action:** GEP scan: 8 skills, 0 gaps, 0 fail patterns
