@@ -7,6 +7,7 @@ Responsibilities:
   - Ledger loop: appends activity digest to PROVENANCE_LEDGER every 10min
   - Task queue: processes submitted tasks from logs/harness_queue.jsonl
   - Knight cells: spawn/apoptosis per cellular protocol (complexity>10, 7d idle, >5% error)
+  - OpenClaw loop: dynamic health triage every 5min, auto-queues remediation tasks
 
 Usage:
     python -m control_plane.harness            # run forever
@@ -361,6 +362,30 @@ class SovereignHarness:
                 _log(f"[SIR_GIDEON] SCORPION error: {type(e).__name__}: {e}")
             await asyncio.sleep(GIDEON_INTERVAL_S)
 
+    # ── OpenClaw health triage ────────────────────────────────────────────────
+
+    async def _openclaw_loop(self) -> None:
+        """Loop 9 — dynamic health triage every 5min. Auto-queues remediations."""
+        await asyncio.sleep(180)
+        while self._running:
+            try:
+                try:
+                    from .openclaw import run_openclaw_triage
+                except ImportError:
+                    from control_plane.openclaw import run_openclaw_triage
+                report = run_openclaw_triage(probe_cache=self._probe_cache)
+                _log(
+                    f"[OPENCLAW] {report['status']} — "
+                    f"{report['checks_ok']}/{report['checks_total']} OK "
+                    f"| auto_healed={report['auto_healed']}"
+                    + (f" | CRITICAL: {report['critical_items']}" if report.get("critical_items") else "")
+                )
+                if report.get("hitl_required"):
+                    _log("[OPENCLAW] HITL REQUIRED — see logs/openclaw_hitl_required.md")
+            except Exception as e:
+                _log(f"[OPENCLAW] error: {type(e).__name__}: {e}")
+            await asyncio.sleep(300)
+
     # ── TOON_v2 delta cron ────────────────────────────────────────────────────
 
     async def _toon_v2_loop(self) -> None:
@@ -576,6 +601,7 @@ class SovereignHarness:
             self._archivist_loop(),
             self._gideon_loop(),
             self._toon_v2_loop(),
+            self._openclaw_loop(),
         ]
 
         if once:
