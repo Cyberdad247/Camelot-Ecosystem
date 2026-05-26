@@ -301,7 +301,10 @@ class SovereignHarness:
         await asyncio.sleep(120)  # let system settle before first scan
         while self._running:
             try:
-                from .lord_archivist import run_gep_scan
+                try:
+                    from .lord_archivist import run_gep_scan
+                except ImportError:
+                    from control_plane.lord_archivist import run_gep_scan
                 report = run_gep_scan()
                 gaps = len(report.skill_gaps)
                 patterns = len(report.fail_patterns)
@@ -494,7 +497,10 @@ class SovereignHarness:
 
         # Lord Archivist — GEP scan on demand
         if knight_id in ("lord_archivist", "archivist"):
-            from .lord_archivist import run_gep_scan
+            try:
+                from .lord_archivist import run_gep_scan
+            except ImportError:
+                from control_plane.lord_archivist import run_gep_scan
             report = run_gep_scan()
             return {"gaps": report.skill_gaps, "patterns": len(report.fail_patterns), "xp": len(report.xp_entries)}
 
