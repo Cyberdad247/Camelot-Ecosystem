@@ -5162,3 +5162,47 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 | 960 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36062s tasks=0 fail=0 probes=6/9 cells=0 |
 | 961 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36662s tasks=0 fail=0 probes=6/9 cells=0 |
 | 962 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37262s tasks=0 fail=0 probes=6/9 cells=0 |
+| 963 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37862s tasks=0 fail=0 probes=6/9 cells=0 |
+---
+
+## [2026-05-26] Version v400.1.0 - LATTICE_RADIANT session — ImportError fix merged, 50/52 green
+
+**Status:** ALL_SYSTEMS_GO
+**Hash:** 0xbd976133087fe8ea
+**Actor:** SIR_BORIS
+
+### 🛡️ Atomic Commit
+- **Action:** Fixed lord_archivist GEP scan ImportError (relative import fallback)
+- **Action:** PRs #6 and #7 merged to main
+- **Action:** SCORPION PASS: GIDEON_RISK_SCORE=1
+- **Action:** 16/16 switchboard terminals live
+- **Action:** Ollama 4/4 models loaded (gemma3/qwen3/qwen3.5/qwen2.5-coder)
+
+| 964 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=38462s tasks=0 fail=0 probes=6/9 cells=0 |
+| 965 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=39062s tasks=0 fail=0 probes=6/9 cells=0 |
+| 966 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=39662s tasks=0 fail=0 probes=6/9 cells=0 |
+| 967 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=40262s tasks=0 fail=0 probes=6/9 cells=0 |
+| 968 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=40862s tasks=0 fail=0 probes=6/9 cells=0 |
+| 969 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=41462s tasks=0 fail=0 probes=6/9 cells=0 |
+| 970 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=42062s tasks=0 fail=0 probes=6/9 cells=0 |
+| 971 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=42662s tasks=0 fail=0 probes=6/9 cells=0 |
+| 972 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=43262s tasks=0 fail=0 probes=6/9 cells=0 |
+| 973 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=43862s tasks=0 fail=0 probes=6/9 cells=0 |
+| 974 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=44462s tasks=0 fail=0 probes=6/9 cells=0 |
+| 975 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=45062s tasks=0 fail=0 probes=6/9 cells=0 |
+| 976 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=45662s tasks=0 fail=0 probes=6/9 cells=0 |
+| 977 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46262s tasks=0 fail=0 probes=6/9 cells=0 |
+| 978 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46862s tasks=0 fail=0 probes=6/9 cells=0 |
+| 979 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=47462s tasks=0 fail=0 probes=6/9 cells=0 |
+| 980 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48062s tasks=0 fail=0 probes=6/9 cells=0 |
+| 981 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48662s tasks=0 fail=0 probes=6/9 cells=0 |
+| 982 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49262s tasks=0 fail=0 probes=6/9 cells=0 |
+| 983 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49862s tasks=0 fail=0 probes=6/9 cells=0 |
+| 984 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=50462s tasks=0 fail=0 probes=6/9 cells=0 |
+| 985 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51063s tasks=0 fail=0 probes=6/9 cells=0 |
+| 986 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51663s tasks=0 fail=0 probes=6/9 cells=0 |
+| 987 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52263s tasks=0 fail=0 probes=6/9 cells=0 |
+| 988 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52863s tasks=0 fail=0 probes=6/9 cells=0 |
+| 989 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=53463s tasks=0 fail=0 probes=6/9 cells=0 |
+| 990 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64781s tasks=0 fail=0 probes=6/9 cells=0 |
+| 991 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=71170s tasks=0 fail=0 probes=6/9 cells=0 |
