@@ -5206,3 +5206,17 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 | 989 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=53463s tasks=0 fail=0 probes=6/9 cells=0 |
 | 990 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64781s tasks=0 fail=0 probes=6/9 cells=0 |
 | 991 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=71170s tasks=0 fail=0 probes=6/9 cells=0 |
+---
+
+## [2026-05-26] Version v400.1.0 - LATTICE_RADIANT steady-state — 50/52 green, harness sovereign
+
+**Status:** ALL_SYSTEMS_GO
+**Hash:** 0x272c417f89da477d
+**Actor:** SIR_BORIS
+
+### 🛡️ Atomic Commit
+- **Action:** Status confirmed: 50/52 ALL SYSTEMS GO
+- **Action:** SCORPION PASS: GIDEON_RISK_SCORE=1
+- **Action:** 16/16 switchboard terminals live
+- **Action:** Cloud Brain synced (high-water mark 1682)
+- **Action:** GEP scan clean: 8 skills, 0 gaps, 0 fail patterns
