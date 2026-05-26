@@ -5284,3 +5284,17 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 - **Action:** 16/16 switchboard terminals live
 
 | 994 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72970s tasks=0 fail=0 probes=6/9 cells=0 |
+---
+
+## [2026-05-26] Version v400.1.0 - LATTICE_RADIANT heartbeat — 50/52 GO, chain #318 current
+
+**Status:** ALL_SYSTEMS_GO
+**Hash:** 0x143675506a5e5559
+**Actor:** SIR_BORIS
+
+### 🛡️ Atomic Commit
+- **Action:** 50/52 ALL SYSTEMS GO — no regressions
+- **Action:** Verification chain current at entry #318
+- **Action:** SCORPION PASS: GIDEON_RISK_SCORE=1
+- **Action:** Cloud Brain online, HWM 1682
+- **Action:** 16/16 switchboard terminals live
