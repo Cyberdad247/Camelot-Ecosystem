@@ -5343,3 +5343,5 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 - **Action:** SCORPION PASS: GIDEON_RISK_SCORE=1
 - **Action:** Cloud Brain online, HWM 1682
 - **Action:** 16/16 switchboard terminals live
+
+| 995 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=73571s tasks=0 fail=0 probes=6/9 cells=0 |
