@@ -323,3 +323,7 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 
 ### Recurring Failures
 - `ImportError` x149: attempted relative import with no known parent package → ACTION: Check knight module path — may need skill bible reload
+
+## Archivist Scan — 2026-05-26T05:20:24.311199+00:00 (153ms)
+
+### Skills: 8/8 @ v400.1.0 OK
