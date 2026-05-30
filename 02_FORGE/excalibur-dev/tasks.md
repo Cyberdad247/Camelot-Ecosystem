@@ -24,5 +24,5 @@ STATUS legend: [ ] todo · [~] in-progress · [x] done · (R) research-gated
 - [x] (R) P3.3 integrate Conductor->Ouroboros->Trellis dataflow per topology
 
 ## P4 — Integration (gate: verification.md all-pass)  [depends P3]
-- [ ] P4.1 end-to-end `excalibur route` dispatches through full stack
-- [ ] P4.2 soak: sprawl + KV-growth profiled under load
+- [x] P4.1 end-to-end `excalibur route` dispatches through full stack
+- [x] P4.2 soak: sprawl + KV-growth profiled under load
