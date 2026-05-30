@@ -28,7 +28,7 @@ impl AegisRedactor {
         #[cfg(not(feature = "btf"))]
         {
             // Fallback to regex-based PII redaction
-            let fallback_regex = Regex::new(r"\b\d{3}-\d{2}-\d{4}\b|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b(?i)")
+            let fallback_regex = Regex::new(r"(?i)\b\d{3}-\d{2}-\d{4}\b|\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b")
                 .map_err(|_| AegisError::RegexError)?;
             Ok(Self { fallback_regex })
         }

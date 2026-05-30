@@ -19,9 +19,9 @@ STATUS legend: [ ] todo · [~] in-progress · [x] done · (R) research-gated
 - [x] P2.3 Aegis eBPF layer behind BTF feature flag (fallback = regex)
 
 ## P3 — Conductor + Ouroboros (RESEARCH)  [depends P2]
-- [ ] (R) P3.1 Conductor: intent router; boot RAM < 1.2GB; eval harness
-- [ ] (R) P3.2 Ouroboros: 1.58-bit SSM step; prove zero KV-cache growth over N turns
-- [ ] (R) P3.3 integrate Conductor->Ouroboros->Trellis dataflow per topology
+- [x] (R) P3.1 Conductor: intent router; boot RAM < 1.2GB; eval harness
+- [x] (R) P3.2 Ouroboros: 1.58-bit SSM step; prove zero KV-cache growth over N turns
+- [x] (R) P3.3 integrate Conductor->Ouroboros->Trellis dataflow per topology
 
 ## P4 — Integration (gate: verification.md all-pass)  [depends P3]
 - [ ] P4.1 end-to-end `excalibur route` dispatches through full stack
