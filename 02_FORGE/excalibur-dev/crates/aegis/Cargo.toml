@@ -1,0 +1,12 @@
+[package]
+name = "excalibur-aegis"
+version.workspace = true
+edition.workspace = true
+
+[features]
+default = []
+btf = []
+
+[dependencies]
+regex = "1.10"
+thiserror = "2.0"

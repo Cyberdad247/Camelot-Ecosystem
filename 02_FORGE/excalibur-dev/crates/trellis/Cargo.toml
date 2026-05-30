@@ -1,0 +1,14 @@
+[package]
+name = "excalibur-trellis"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+thiserror = "2.0"
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bench]]
+name = "arena_bench"
+harness = false

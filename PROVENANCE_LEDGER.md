@@ -5714,3 +5714,94 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 - **Action:** 0
 - **Action:** s
 - **Action:** .
+
+| 1029 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=93983s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1030 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=94583s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1031 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=95183s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1032 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=95783s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1033 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=96383s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1034 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=96983s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1035 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=97583s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1036 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=98183s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1037 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=98783s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1038 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=99383s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1039 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=99983s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1040 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=100583s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1041 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=101183s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1042 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=101783s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1043 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=102383s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1044 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=102983s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1045 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=103583s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1046 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=104183s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1047 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=104783s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1048 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=105383s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1049 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=105983s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1050 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=106583s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1051 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=107183s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1052 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=107783s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1053 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=108383s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1054 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=108983s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1055 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=109583s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1056 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=110183s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1057 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=110783s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1058 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=111383s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1059 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=111983s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1060 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=112583s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1061 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=113183s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1062 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=113783s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1063 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=114400s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1064 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=115000s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1065 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=115600s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1066 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=116200s tasks=0 fail=0 probes=5/9 cells=0 |
+| 1067 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=116800s tasks=0 fail=0 probes=5/9 cells=0 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=6/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=0 fail=0 probes=4/9 cells=0 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=0 fail=0 probes=4/9 cells=0 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=0 fail=0 probes=4/9 cells=0 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4860s tasks=0 fail=0 probes=4/9 cells=0 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5460s tasks=0 fail=0 probes=4/9 cells=0 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6060s tasks=0 fail=0 probes=5/9 cells=0 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6660s tasks=0 fail=0 probes=5/9 cells=0 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7260s tasks=0 fail=0 probes=5/9 cells=0 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7860s tasks=0 fail=0 probes=5/9 cells=0 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8460s tasks=0 fail=0 probes=5/9 cells=0 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9060s tasks=0 fail=0 probes=5/9 cells=0 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12660s tasks=0 fail=0 probes=5/9 cells=0 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13260s tasks=0 fail=0 probes=5/9 cells=0 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13860s tasks=0 fail=0 probes=5/9 cells=0 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14460s tasks=0 fail=0 probes=5/9 cells=0 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15060s tasks=0 fail=0 probes=5/9 cells=0 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15660s tasks=0 fail=0 probes=5/9 cells=0 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16260s tasks=0 fail=0 probes=5/9 cells=0 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16860s tasks=0 fail=0 probes=5/9 cells=0 || 2026-05-30T00:58:24.459222+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //SYNC crystallize P2 completion in ledger'] | HYDRATED |
+| 2026-05-30T00:58:25.033152+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC crystallize P2 completion in ledger] | HYDRATED |
+| 2026-05-30T00:58:28.450477+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS P2_VERIFIED'] | HYDRATED |
+| 2026-05-30T00:58:29.048554+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS P2_VERIFIED' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-05-30T00:58:29.048985+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS P2_VERIFIED' to Cloud Brain] | HYDRATED |
+| 2026-05-30T00:58:29.049340+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS P2_VERIFIED] | HYDRATED |
+| 2026-05-30T00:58:29.473751+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS P2_VERIFIED, hits=3] | HYDRATED |
+| 2026-05-30T00:58:29.475569+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS P2_VERIFIED, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-05-30T00:59:15.741459+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'Omega_SYNC sync ledger with Cloud Brain'] | HYDRATED |
+| 2026-05-30T00:59:16.774198+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored 'Omega_SYNC sync ledger with Cloud Brain' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-05-30T00:59:16.774943+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_SYNC sync ledger with Cloud Brain' to Cloud Brain] | HYDRATED |
+| 2026-05-30T00:59:16.775529+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC sync ledger with Cloud Brain] | HYDRATED |
+| 2026-05-30T00:59:51.583620+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//SCAN .'] | HYDRATED |
+| 2026-05-30T00:59:52.127642+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//SCAN .' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-05-30T00:59:52.128417+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SCAN .] | HYDRATED |
+| 2026-05-30T00:59:52.519572+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //SCAN ., hits=3] | HYDRATED |
+| 2026-05-30T00:59:52.520567+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SCAN ., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+| 2026-05-30T00:59:54.182098+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//HEAL json.decoder.JSONDecodeError in hydration_manager.py'] | HYDRATED |
+| 2026-05-30T00:59:54.422510+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //HEAL json.decoder.JSONDecodeError in hydration_manager.py] | HYDRATED |
+| 2026-05-30T00:59:54.748846+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //HEAL json.decoder.JSONDecodeError in hydration_manager.py, hits=3] | HYDRATED |
+| 2026-05-30T00:59:54.749566+00:00 | HYDRATION_MGR | HYDRATE [Intent: //HEAL json.decoder.JSONDecodeError in hydration_manager.py, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17460s tasks=4 fail=0 probes=5/9 cells=3 |
