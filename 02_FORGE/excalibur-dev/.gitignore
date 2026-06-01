@@ -1,0 +1,7 @@
+/target
+**/*.rs.bk
+__pycache__/
+*.egg-info/
+orchestrator/build/
+core/audit_logs/
+.venv/

@@ -1,0 +1,35 @@
+{
+  "created_utc": "2026-05-20T16:07:17.301693+00:00",
+  "house_id": "house-sir-codex-for-verification-task-mc3-79bcba6338",
+  "last_command": [
+    ".venv\\Scripts\\python.exe",
+    "-c",
+    "from pathlib import Path; Path('codex_probe_2.txt').write_text('ok2', encoding='utf-8'); print('microcubed-ok-2')"
+  ],
+  "last_execution": {
+    "command": [
+      ".venv\\Scripts\\python.exe",
+      "-c",
+      "from pathlib import Path; Path('codex_probe_2.txt').write_text('ok2', encoding='utf-8'); print('microcubed-ok-2')"
+    ],
+    "cwd": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\microcubed\\houses\\house-sir-codex-for-verification-task-mc3-79bcba6338\\workspace",
+    "output_log": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\microcubed\\houses\\house-sir-codex-for-verification-task-mc3-79bcba6338\\logs\\execute_20260520T165207Z.json",
+    "returncode": 0,
+    "timed_out": false
+  },
+  "objective": "house sir codex for verification task",
+  "outbox_files": [],
+  "preflight": {
+    "findings": [],
+    "status": "PASSED"
+  },
+  "status": "COMPLETE",
+  "task_id": "mc3-79bcba6338",
+  "teardown_ready": true,
+  "tenant": "sir_codex",
+  "updated_utc": "2026-05-20T16:52:08.003273+00:00",
+  "workspace_files": [
+    "codex_probe.txt",
+    "codex_probe_2.txt"
+  ]
+}

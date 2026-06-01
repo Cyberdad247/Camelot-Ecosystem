@@ -1,0 +1,8 @@
+[workspace]
+resolver = "2"
+members = ["crates/conductor","crates/ouroboros","crates/trellis","crates/aegis","crates/omega-root"]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2021"
+license = "MIT"

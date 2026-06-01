@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invisioned Marketing | Sovereign Onboarding</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- jsPDF for real PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kba: {
+                            purple: '#5e2e8c',
+                            gold: '#e5a124',
+                            dark: '#050505',
+                            terminal: '#0a0a0a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #050505; color: #e0e0e0; overflow-x: hidden; }
+        
+        .terminal-hud { 
+            background: rgba(10, 10, 10, 0.96); 
+            backdrop-filter: blur(25px); 
+            border: 1px solid rgba(229, 161, 36, 0.15); 
+            box-shadow: 0 0 60px rgba(0, 0, 0, 0.9); 
+        }
+        
+        .bento-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            border-color: #e5a124;
+            background: rgba(229, 161, 36, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .tab-btn { transition: all 0.3s ease; }
+        .tab-btn.active { 
+            background: #e5a124; 
+            color: #000; 
+            font-weight: 900; 
+            box-shadow: 0 0 25px rgba(229, 161, 36, 0.4); 
+        }
+
+        .phase-nav-btn { transition: all 0.2s ease; border-bottom: 2px solid transparent; }
+        .phase-nav-btn.active { color: #e5a124; border-bottom: 2px solid #e5a124; }
+
+        .phase-content { display: none; animation: slideUp 0.5s ease-out forwards; }
+        .phase-content.active { display: block; }
+        
+        .doc-tab-content { display: none; }
+        .doc-tab-content.active { display: block; animation: fadeIn 0.4s ease-out; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #sig-canvas { border: 2px dashed #444; border-radius: 16px; background: #fff; cursor: crosshair; }
+        
+        .audit-gauge { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .gauge-fill { height: 100%; background: linear-gradient(to right, #5e2e8c, #e5a124); width: 0%; transition: width 2s ease-in-out; }
+
+        .hud-scan::after { 
+            content: ""; position: absolute; top: -100%; left: 0; width: 100%; height: 100%; 
+            background: linear-gradient(to bottom, transparent, rgba(229, 161, 36, 0.03), transparent); 
+            animation: scan 10s infinite linear; pointer-events: none; 
+        }
+        @keyframes scan { 0% { top: -100%; } 100% { top: 100%; } }
+
+        /* Vibe Anchor Imagery Background */
+        .vibe-overlay {
+            background-image: url('https://3bs8fovxstvhgl8n9ow6pahlmc9ey6yib5lw7j1k21uufydwmg-h906969431.scf.usercontent.goog/image_2771ba.png');
+            background-size: cover; background-position: center;
+            opacity: 0.1; position: absolute; inset: 0; z-index: -1;
+        }
+    </style>
+</head>
+<body class="antialiased font-sans pb-20 hud-scan">
+
+    <div class="vibe-overlay"></div>
+
+    <!-- Sovereign Dashboard Header -->
+    <header class="bg-black/95 border-b border-kba-purple/30 sticky top-0 z-50 shadow-2xl px-6 py-3 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-6">
+                <!-- Client-Infused Logo Replacement -->
+                <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center p-1 shadow-2xl border-2 border-kba-gold overflow-hidden">
+                    <img src="https://3bs8fovxstvhgl8n9ow6pahlmc9ey6yib5lw7j1k21uufydwmg-h906969431.scf.usercontent.goog/Grey%20Circle%20Script%20Creative%20Studio%20Logo_20260325_095026_0000.png" class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h1 class="text-[10px] font-black tracking-[0.4em] uppercase text-gray-500 mb-0.5">Invisioned Marketing presents</h1>
+                    <h2 class="text-xs font-black tracking-widest uppercase text-white">Camelot-OS <span class="text-kba-gold italic mx-2">Sovereign Onboarding</span></h2>
+                </div>
+            </div>
+
+            <!-- Persistent Navigation Tabs -->
+            <nav class="hidden lg:flex items-center gap-8 text-[10px] font-black uppercase tracking-widest text-gray-400">
+                <button onclick="changePhase('audit')" id="nav-audit" class="phase-nav-btn active hover:text-white">01. Audit</button>
+                <button onclick="changePhase('diagnostic')" id="nav-diagnostic" class="phase-nav-btn hover:text-white">02. Discovery</button>
+                <button onclick="changePhase('vault')" id="nav-vault" class="phase-nav-btn hover:text-white opacity-40 cursor-not-allowed">03. Sovereign Vault</button>
+            </nav>
+
+            <div class="hidden md:flex gap-6 text-[9px] font-mono text-gray-500 uppercase tracking-widest">
+                <span class="text-kba-gold" id="live-clock">--:--:--</span>
+                <span id="session-id">SID: FORGING</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        
+        <!-- Phase 0: 360 Digital Audit -->
+        <section id="phase-audit" class="phase-content active space-y-12">
+            <div class="max-w-4xl">
+                <span class="text-kba-gold text-xs font-black uppercase tracking-[0.4em] mb-3 block">Step 01: 360 Digital Baseline Audit</span>
+                <h2 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-6 italic">Performance Scan</h2>
+                <p class="text-gray-400 text-xl leading-relaxed">Andre & Pat, this is your current standing across traditional Search (SEO) and the new Generative Engine landscape (GEO).</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bento-card p-8 rounded-[32px] space-y-4">
+                    <div class="text-[10px] font-black uppercase text-gray-500 tracking-widest">Traditional SEO</div>
+                    <div class="text-4xl font-black text-white">42%</div>
+                    <div class="audit-gauge"><div id="g-seo" class="gauge-fill"></div></div>
+                    <p class="text-[9px] text-gray-500">Google Discoverability Score</p>
+                </div>
+                <div class="bento-card p-8 rounded-[32px] space-y-4 border-l-4 border-l-kba-gold">
+                    <div class="text-[10px] font-black uppercase text-kba-gold tracking-widest">Agentic GEO</div>
+                    <div class="text-4xl font-black text-white">18%</div>
+                    <div class="audit-gauge"><div id="g-geo" class="gauge-fill"></div></div>
+                    <p class="text-[9px] text-gray-500">AI search visibility index</p>
+                </div>
+                <div class="bento-card p-8 rounded-[32px] space-y-4">
+                    <div class="text-[10px] font-black uppercase text-gray-500 tracking-widest">Sales Funnel</div>
+                    <div class="text-4xl font-black text-white italic tracking-tighter text-red-500/80">Leak</div>
+                    <div class="audit-gauge"><div id="g-leak" class="gauge-fill"></div></div>
+                    <p class="text-[9px] text-gray-500">Hardware lead friction level</p>
+                </div>
+                <div class="bento-card p-8 rounded-[32px] space-y-4">
+                    <div class="text-[10px] font-black uppercase text-gray-500 tracking-widest">Apparel Velocity</div>
+                    <div class="text-4xl font-black text-white italic">3.1x</div>
+                    <div class="audit-gauge"><div id="g-vel" class="gauge-fill"></div></div>
+                    <p class="text-[9px] text-gray-500">Inventory fulfillment multiplier</p>
+                </div>
+            </div>
+
+            <div class="text-center pt-8">
+                <button onclick="changePhase('diagnostic')" class="px-12 py-5 bg-kba-gold text-black rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-2xl shadow-kba-gold/30 border-t-2 border-white/20 uppercase tracking-widest italic">Initialize Inquisition</button>
+            </div>
+        </section>
+
+        <!-- Phase 1: Diagnostic Inquisition -->
+        <section id="phase-diagnostic" class="phase-content hidden space-y-12">
+            <div class="max-w-4xl">
+                <h2 class="text-4xl md:text-7xl font-black text-white tracking-tighter mb-6 italic text-[#e5a124]">Inquisition Protocol</h2>
+                <p class="text-gray-400 text-xl leading-relaxed">Map your business friction points. Every 'YES' programmatically reforges your blueprint. There are no "guesses" here – only execution.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="diag-grid"></div>
+            <div class="text-center pt-12">
+                <button id="initialize-vault" class="hidden px-12 py-5 bg-kba-purple text-white rounded-2xl font-black text-xl hover:scale-105 transition-all shadow-2xl shadow-kba-purple/30 border border-white/10 uppercase tracking-widest">Forge Sovereign Vault</button>
+            </div>
+        </section>
+
+        <!-- Phase 2: Sovereign Vault (Tabs) -->
+        <section id="phase-vault" class="phase-content hidden space-y-10">
+            <div class="flex flex-col lg:flex-row gap-10">
+                
+                <!-- Sidebar Nav Tabs -->
+                <div class="w-full lg:w-80 flex flex-col gap-2">
+                    <div class="text-[10px] font-black uppercase text-gray-600 tracking-[0.3em] mb-2 pl-2">Sovereign Vault</div>
+                    <button class="tab-btn bento-card active px-6 py-5 rounded-2xl text-left text-sm" data-target="doc-onboarding">01. Discovery Data</button>
+                    <button class="tab-btn bento-card px-6 py-5 rounded-2xl text-left text-sm" data-target="doc-sow">02. Reforged SOW</button>
+                    <button class="tab-btn bento-card px-6 py-5 rounded-2xl text-left text-sm" data-target="doc-legal">03. Master Agreements</button>
+                    <button class="tab-btn bento-card px-6 py-5 rounded-2xl text-left text-sm" data-target="doc-privacy">04. Privacy Protocol</button>
+                    <button class="tab-btn bento-card px-6 py-5 rounded-2xl text-left text-sm border-l-4 border-kba-gold" data-target="doc-order">05. Fulfillment Order</button>
+                    <button id="handshake-btn" class="px-6 py-5 rounded-2xl text-left text-sm font-black text-kba-gold bg-kba-gold/5 border border-kba-gold/20 mt-4 opacity-40 cursor-not-allowed" data-target="doc-handshake">06. Digital Handshake</button>
+                </div>
+
+                <!-- Document Display Area -->
+                <div class="flex-1 terminal-hud rounded-[48px] p-8 md:p-16 relative min-h-[800px] border border-white/5">
+                    
+                    <!-- Tab: Onboarding -->
+                    <div id="doc-onboarding" class="doc-tab-content active space-y-10">
+                        <h3 class="text-4xl font-black text-white uppercase tracking-tighter italic">Strategic Discovery</h3>
+                        <div class="grid md:grid-cols-2 gap-8 text-sm">
+                            <div class="space-y-4">
+                                <label class="text-kba-gold font-bold uppercase tracking-widest text-[10px]">Client Identity</label>
+                                <div class="p-6 bg-white/5 rounded-2xl border border-white/5 space-y-2 leading-relaxed">
+                                    <p>Entity: <strong class="text-white">KBA Technologies</strong></p>
+                                    <p>Authorized: <strong class="text-white">Andre & Pat Clark</strong></p>
+                                    <p>Sectors: <strong class="text-white">Hardware • Apparel • Media</strong></p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <label class="text-kba-gold font-bold uppercase tracking-widest text-[10px]">30-60-90 Day Velocity</label>
+                                <div id="roadmap-list" class="p-6 bg-white/5 rounded-2xl border border-white/5 italic text-gray-400 space-y-3">
+                                    <!-- Dynamic Roadmap injected by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: SOW -->
+                    <div id="doc-sow" class="doc-tab-content space-y-8">
+                        <h3 class="text-4xl font-black text-white uppercase tracking-tighter italic">Reforged SOW</h3>
+                        <p class="text-gray-500 italic text-sm">"No guesses. Accurate to the letter. Interpretation-based changes are excluded."</p>
+                        <div id="sow-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                        <div class="p-8 bento-card rounded-3xl text-[10px] uppercase tracking-widest font-black text-gray-500">
+                            VERIFICATION LOCKED: All proofs audited against this list before dispatch.
+                        </div>
+                    </div>
+
+                    <!-- Tab: Master Agreements -->
+                    <div id="doc-legal" class="doc-tab-content space-y-10">
+                        <h3 class="text-4xl font-black text-white uppercase tracking-tighter italic text-[#e5a124]">Master SLA</h3>
+                        <div class="space-y-6 text-sm text-gray-300">
+                            <div class="p-8 bento-card rounded-3xl border-l-4 border-l-kba-gold">
+                                <h4 class="font-black text-white uppercase mb-2">48-Hour Sign-off Window</h4>
+                                <p class="text-gray-400 leading-relaxed">Clients have exactly 48 hours to sign off on mockups once delivered. Silence constitutes sign-off; failure to respond pauses the project sprint and resets the turnaround timer.</p>
+                            </div>
+                            <div class="p-8 bento-card rounded-3xl">
+                                <h4 class="font-black text-white uppercase mb-2">Financial Protocol</h4>
+                                <p class="text-gray-400 leading-relaxed">A 25% downpayment is processed immediately. Once onboarding discovery initiates, funds are strictly <strong>non-refundable</strong> as they are immediate deployed to forge infrastructure.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab: Handshake -->
+                    <div id="doc-handshake" class="doc-tab-content space-y-10 text-center">
+                        <h3 class="text-5xl font-black text-white uppercase tracking-tighter italic">The Handshake</h3>
+                        <p class="text-gray-400 italic">"I authorize the Reforged SOW and accept all non-refundable and SLA terms."</p>
+                        <canvas id="sig-canvas" width="500" height="220" class="w-full max-w-[500px] shadow-2xl shadow-black"></canvas>
+                        <div class="flex justify-center gap-4">
+                            <button onclick="clearSig()" class="px-8 py-4 bg-white/5 border border-white/10 rounded-xl font-bold uppercase text-[10px]">Reset Pen</button>
+                            <button id="finalize-all" class="px-12 py-4 bg-kba-gold text-black rounded-xl font-black uppercase tracking-widest shadow-xl shadow-kba-gold/20">Authorize & Sign</button>
+                        </div>
+                    </div>
+
+                    <!-- Post-Sign Artifact Box -->
+                    <div id="artifact-box" class="hidden space-y-10 text-center animate-in fade-in scale-in">
+                        <div class="w-24 h-24 bg-green-500 rounded-full mx-auto flex items-center justify-center text-white text-5xl shadow-2xl">✓</div>
+                        <h2 class="text-4xl font-black text-white uppercase italic tracking-tighter">Blueprint Sealed.</h2>
+                        <p class="text-gray-400 italic">Handshake verified in Cleveland, OH. Project initialized in Shadow Branch.</p>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <button onclick="downloadCertification()" class="px-10 py-5 bg-kba-gold text-black rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl">Handshake Certificate PDF</button>
+                            <button onclick="downloadFullPackage()" class="px-10 py-5 bg-white text-black rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl">Full Package Archive</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-24 border-t border-white/5 text-center px-6 bg-black">
+        <p class="text-kba-gold text-2xl mb-8 font-serif font-black tracking-widest uppercase italic underline decoration-white/10">Your Vision. Our Village.</p>
+        <p class="text-gray-600 text-[9px] font-black tracking-[0.8em]">OBSIDIAN SPIRE PROTOCOL v.700</p>
+    </footer>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        const questions = [
+            { id: 'speaker', q: "High-ticket hardware leads leaking because response latency exceeds 5 minutes?", deliverable: "AI Sales-Bot (Speaker Technical Support Tier)", price: 2000, day: 30 },
+            { id: 'inventory', q: "Clothing drop fulfillment managed manually with zero autonomous flow?", deliverable: "Autonomous Apparel Inventory & Fulfillment matrix", price: 2500, day: 60 },
+            { id: 'search', q: "Brand invisible to AI search engines for premium speakers?", deliverable: "360 GEO (Generative Engine Optimization) Campaign", price: 3500, day: 60 },
+            { id: 'autonomy', q: "Business cannot run for 30 days without constant human babysitting?", deliverable: "Camelot-OS Infrastructure Integration", price: 5000, day: 90 }
+        ];
+
+        let state = { answers: {}, price: 0, signedAt: null, location: "Cleveland, OH", sid: 'SID-' + Math.random().toString(36).substring(2, 9).toUpperCase() };
+        document.getElementById('session-id').innerText = state.sid;
+
+        // Clock Update
+        setInterval(() => {
+            document.getElementById('live-clock').innerText = new Date().toLocaleTimeString('en-US', { hour12: false });
+        }, 1000);
+
+        // Audit Gauge Animation
+        setTimeout(() => {
+            document.getElementById('g-seo').style.width = '42%';
+            document.getElementById('g-geo').style.width = '18%';
+            document.getElementById('g-leak').style.width = '15%';
+            document.getElementById('g-vel').style.width = '65%';
+        }, 500);
+
+        // Diagnostic Grid Render
+        const grid = document.getElementById('diag-grid');
+        questions.forEach(q => {
+            const card = document.createElement('div');
+            card.className = "p-8 rounded-[40px] bento-card space-y-8 cursor-default";
+            card.innerHTML = `<p class="text-white text-xl font-black h-16 leading-tight italic">${q.q}</p>
+                <div class="flex gap-4"><button class="ans-btn flex-1 py-4 bg-white/5 rounded-2xl font-black text-[10px] uppercase tracking-widest border border-white/5" onclick="handleAns('${q.id}', true, this)">YES</button>
+                <button class="ans-btn flex-1 py-4 bg-white/5 rounded-2xl font-black text-[10px] uppercase tracking-widest border border-white/5" onclick="handleAns('${q.id}', false, this)">NO</button></div>`;
+            grid.appendChild(card);
+        });
+
+        function handleAns(id, val, btn) {
+            btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('bg-kba-purple', 'bg-gray-800', 'text-white'));
+            btn.classList.add(val ? 'bg-kba-purple' : 'bg-gray-800');
+            state.answers[id] = val;
+            if (Object.keys(state.answers).length >= 1) document.getElementById('initialize-vault').classList.remove('hidden');
+        }
+
+        function changePhase(phaseId) {
+            if (phaseId === 'vault' && document.getElementById('nav-vault').classList.contains('opacity-40')) {
+                alert("ACCESS DENIED: Complete Discovery Inquisition to unlock Vault."); return;
+            }
+            document.querySelectorAll('.phase-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`phase-${phaseId}`).classList.add('active');
+            document.querySelectorAll('.phase-nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`nav-${phaseId}`).classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Vault Forge
+        document.getElementById('initialize-vault').addEventListener('click', () => {
+            document.getElementById('nav-vault').classList.remove('opacity-40', 'cursor-not-allowed');
+            changePhase('vault');
+            const list = document.getElementById('sow-list');
+            const roadmap = document.getElementById('roadmap-list');
+            list.innerHTML = ''; roadmap.innerHTML = '';
+            state.price = 0;
+
+            questions.forEach(q => {
+                if (state.answers[q.id]) {
+                    state.price += q.price;
+                    const item = document.createElement('div');
+                    item.className = "p-5 bg-white/5 border-l-4 border-kba-gold rounded-r-xl text-[9px] font-black uppercase tracking-widest text-gray-300 shadow-xl";
+                    item.innerText = q.deliverable;
+                    list.appendChild(item);
+
+                    const roadItem = document.createElement('p');
+                    roadItem.innerHTML = `[Day ${q.day}] > ${q.deliverable}`;
+                    roadmap.appendChild(roadItem);
+                }
+            });
+            document.getElementById('price-total').innerText = `$${state.price.toLocaleString()}`;
+            document.getElementById('price-down').innerText = `$${(state.price * 0.25).toLocaleString()}`;
+        });
+
+        // Tab System
+        const docsViewed = new Set();
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.doc-tab-content').forEach(c => c.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+                docsViewed.add(btn.getAttribute('data-target'));
+                if (docsViewed.size >= 5) document.getElementById('handshake-btn').classList.remove('opacity-40', 'cursor-not-allowed');
+            });
+        });
+
+        // Signature
+        const canvas = document.getElementById('sig-canvas');
+        const ctx = canvas.getContext('2d');
+        let drawing = false;
+        canvas.addEventListener('mousedown', () => drawing = true);
+        canvas.addEventListener('mouseup', () => { drawing = false; ctx.beginPath(); });
+        canvas.addEventListener('mousemove', (e) => {
+            if (!drawing) return;
+            const rect = canvas.getBoundingClientRect();
+            ctx.lineWidth = 4; ctx.strokeStyle = '#000'; ctx.lineCap = 'round';
+            ctx.lineTo(e.clientX - rect.left, e.clientY - rect.top); ctx.stroke();
+        });
+        function clearSig() { ctx.clearRect(0, 0, canvas.width, canvas.height); }
+
+        // Finalize
+        document.getElementById('finalize-all').addEventListener('click', () => {
+            if (canvas.toDataURL() === document.createElement('canvas').toDataURL()) { alert("SIGNATURE REQUIRED."); return; }
+            state.signedAt = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+            document.querySelectorAll('.doc-tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById('artifact-box').classList.remove('hidden');
+        });
+
+        // PDF certified
+        function downloadCertification() {
+            const doc = new jsPDF();
+            doc.setFont("courier", "bold"); doc.setFontSize(22);
+            doc.text("HANDSHAKE CERTIFICATE OF AUTHENTICITY", 20, 30);
+            doc.setFontSize(10); doc.setFont("courier", "normal");
+            doc.text(`Digital Session ID: ${state.sid}`, 20, 50);
+            doc.text(`Location Verified: Cleveland, OH`, 20, 56);
+            doc.text(`Handshake Certified (EST): ${state.signedAt}`, 20, 62);
+            doc.line(20, 75, 190, 75);
+            doc.text("GOVERNANCE ACTIVE: 48-Hour SLA | Non-Refundable Deposit", 20, 85);
+            const imgData = canvas.toDataURL('image/png');
+            doc.addImage(imgData, 'PNG', 20, 110, 100, 40);
+            doc.text("AUTHORIZED CEO SIGNATURE (ELECTRONICALLY SEALED)", 20, 160);
+            doc.save(`Certification_${state.sid}.pdf`);
+        }
+
+        function downloadFullPackage() {
+            const doc = new jsPDF();
+            doc.setFontSize(20); doc.text("MASTER BLUEPRINT ARCHIVE", 20, 30);
+            doc.setFontSize(10); let y = 50;
+            doc.text("PART A: REFORGED DELIVERABLES", 20, y); y += 12;
+            questions.forEach(q => { if(state.answers[q.id]) { doc.text(`[✓] ${q.deliverable}`, 25, y); y += 8; } });
+            y += 10; doc.text(`Authorized Total Stake: $${state.price.toLocaleString()}`, 20, y);
+            y += 20; doc.text("PART B: MASTER GOVERNANCE", 20, y); y += 10;
+            doc.text("- 48-hour mockup sign-off window active.", 20, y);
+            doc.save(`Full_Package_${state.sid}.pdf`);
+        }
+    </script>
+</body>
+</html>

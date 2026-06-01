@@ -20,6 +20,7 @@ from typing import Any
 
 from .config_manager import ConfigManager
 from .codex_integration import boot_codex_integration
+from .excalibur_preflight import boot_excalibur_preflight
 from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
 from .knight_configuration import write_knight_configuration
 from .orchestration_state import summarize_boot_results
@@ -981,6 +982,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
     spec.loader.exec_module(hud)
 
     phases = [
+        {"name": "EXCALIBUR Pre-Flight", "required": False, "fn": lambda: boot_excalibur_preflight(home)},
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},

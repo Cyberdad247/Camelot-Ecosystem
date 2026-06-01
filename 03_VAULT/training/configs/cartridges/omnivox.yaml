@@ -1,0 +1,34 @@
+name: OmniVox-Lattice
+version: "400.1.0"
+domain: ETHEREAL
+knight: Anya_Omega / Foundry Council
+layer: L7_ETHEREAL
+description: Universal Intent Routing & Multi-Persona Vocal Synthesis Core.
+
+routing_matrix:
+  intent_gate: "OmniRoute_A2A_v2"
+  protocol: "SRDL_Map_Reduce"
+  tensor_weights:
+    velocity: 0.9
+    magnitude: 0.6
+    privacy: 1.0
+    vocal_weight: 0.8
+
+vocal_subsystem:
+  engine: "LYRICUS_v4"
+  modes: ["SIMULTANEOUS", "SEQUENTIAL", "DEBATE"]
+  sonic_cache:
+    provider: "Redis_ST_Memory"
+    limit_mb: 25
+    ttl_sec: 1800
+
+cartridge_logic:
+  - Each intent shatters into Knight-specific subtasks.
+  - Subtasks execute in parallel via Bio-Swarm.
+  - Results are vocalized using unique prosody vectors.
+  - Active audio voltage is cached in Redis for <15ms recall.
+
+anti_patterns:
+  - Monovoice for multi-knight swarms.
+  - High-latency full synthesis for frequent status emotes.
+  - Exceeding the 25MB flash memory ceiling.

@@ -295,7 +295,7 @@ PRECISE_KNIGHTS: list[dict[str, str]] = [
         "knight_id": "LADY_APIS",
         "persona": "Lady Apis",
         "profile_bias": "desktop_macos",
-        "llm_engine": "gemini_cli",
+        "llm_engine": "antigravity.cli",
         "llm_model": "gemini-2.5-pro",
         "mission_lane": "primary source research",
     },

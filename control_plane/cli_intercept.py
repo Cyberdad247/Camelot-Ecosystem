@@ -255,7 +255,7 @@ class CLIIntercept:
 
         if engine_name == "claude_code":
             return ("claude", "claude-opus-4-6", base_url)
-        elif engine_name == "gemini_cli":
+        elif engine_name == "antigravity.cli":
             return ("gemini", "gemini-2.5-pro", base_url)
         elif engine_name == "openai_codex":
             return ("codex", "gpt-5.3-codex", base_url)

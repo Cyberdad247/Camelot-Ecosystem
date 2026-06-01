@@ -1,0 +1,60 @@
+{
+  "test_crystal": {
+    "crystal_id": "test_crystal",
+    "skill_pattern": "test",
+    "knight": "sir_boris",
+    "confidence": 0.9,
+    "context_tags": [],
+    "created_at": "2026-06-01T18:55:05.773328+00:00",
+    "reuse_count": 0
+  },
+  "crystal_001_apee_v7_triage": {
+    "crystal_id": "crystal_001_apee_v7_triage",
+    "skill_pattern": "risk_entropy triage routing",
+    "knight": "anya_omega",
+    "confidence": 0.9,
+    "context_tags": [
+      "apee",
+      "triage",
+      "governance"
+    ],
+    "created_at": "2026-06-01T18:55:05.780644+00:00",
+    "reuse_count": 0
+  },
+  "crystal_002_firnflow_scoped": {
+    "crystal_id": "crystal_002_firnflow_scoped",
+    "skill_pattern": "Wing->Room->Drawer scoped retrieval",
+    "knight": "lady_m",
+    "confidence": 0.88,
+    "context_tags": [
+      "memory",
+      "retrieval"
+    ],
+    "created_at": "2026-06-01T18:55:05.782547+00:00",
+    "reuse_count": 0
+  },
+  "crystal_003_colmad_crucible": {
+    "crystal_id": "crystal_003_colmad_crucible",
+    "skill_pattern": "3-persona adversarial consensus",
+    "knight": "merlin_omega",
+    "confidence": 0.75,
+    "context_tags": [
+      "governance",
+      "crucible"
+    ],
+    "created_at": "2026-06-01T18:55:05.795910+00:00",
+    "reuse_count": 0
+  },
+  "crystal_004_rtk_strip": {
+    "crystal_id": "crystal_004_rtk_strip",
+    "skill_pattern": "90% noise strip pre-tokenization",
+    "knight": "sir_lukas",
+    "confidence": 0.92,
+    "context_tags": [
+      "compression",
+      "rtk"
+    ],
+    "created_at": "2026-06-01T18:55:05.809143+00:00",
+    "reuse_count": 0
+  }
+}

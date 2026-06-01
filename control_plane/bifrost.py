@@ -1,0 +1,408 @@
+"""
+Bifrost — Universal Dispatch Core for CAMELOT-OS Hive IDE.
+
+Routes prompts to any registered terminal via the appropriate backend:
+  - CLIProxyAPI (:8080) — Claude, Gemini, Codex, Kimi, Qwen via OpenAI-compat
+  - Ollama (:11434)     — local_qwen, open_coder (air-gapped)
+  - Subprocess          — Hermes, Goose (kinetic stdio agents)
+  - HTTP                — custom port services (sir_octavian :8400, sir_sonus :8300)
+
+The Switchboard probes health; Bifrost dispatches real payloads.
+
+Usage:
+    # Direct streaming
+    from control_plane.bifrost import Bifrost
+    async for chunk in Bifrost().stream("sir_boris", "Explain MCP protocol"):
+        print(chunk, end="", flush=True)
+
+    # Intent-routed streaming (yields (terminal_id, chunk) pairs)
+    async for tid, chunk in Bifrost().route_and_stream("Build a login form"):
+        print(chunk, end="", flush=True)
+
+CLI:
+    python -m control_plane.bifrost sir_boris "What is the capital of France?"
+    python -m control_plane.bifrost --route "Refactor the auth module"
+"""
+from __future__ import annotations
+
+import asyncio
+import json
+import os
+import sys
+from pathlib import Path
+from typing import AsyncIterator
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+try:
+    import httpx
+    _HTTPX = True
+except ImportError:
+    _HTTPX = False
+
+CAMELOT_HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
+
+CLIPROXY_BASE = os.environ.get("CLIPROXY_BASE", "http://127.0.0.1:8080/v1")
+CLIPROXY_KEY  = os.environ.get("CLIPROXY_KEY", "proxy-admin-key")
+OLLAMA_BASE   = os.environ.get("OLLAMA_BASE", "http://127.0.0.1:11434")
+
+# Engine → (strategy, endpoint_base, default_model)
+# "cliproxy" = OpenAI-compat call through CLIProxyAPI
+# "ollama"   = Ollama generate API (local, air-gapped)
+# "cloudbrain" = NotebookLM synthesis (delegated to cloudbrain_sync)
+# "noop"     = Service exists but text dispatch not applicable (TTS, ops)
+_ENGINE_DISPATCH: dict[str, tuple[str, str, str]] = {
+    "claude_code":       ("cliproxy",    CLIPROXY_BASE, "claude-sonnet-4-6"),
+    "antigravity.cli":   ("cliproxy",    CLIPROXY_BASE, "gemini-2.5-flash"),
+    "openai_codex":      ("cliproxy",    CLIPROXY_BASE, "gpt-4o"),
+    "local_qwen":        ("ollama",      OLLAMA_BASE,   "qwen3:4b"),
+    "open_coder":        ("ollama",      OLLAMA_BASE,   "qwen2.5-coder:3b"),
+    "integration_brain": ("cloudbrain",  "",             ""),
+    "local_audit":       ("ollama",      OLLAMA_BASE,   "qwen3:4b"),
+    "local_ops":         ("noop",        "",             ""),
+    "kitten_tts":        ("noop",        "",             ""),
+    "open_source":       ("ollama",      OLLAMA_BASE,   "qwen3:4b"),
+    "antigravity":       ("cliproxy",    CLIPROXY_BASE, "gemini-2.5-pro"),
+    "kimi_cli":          ("cliproxy",    CLIPROXY_BASE, "kimi-k2"),
+    "hermes_cli":        ("cliproxy",    CLIPROXY_BASE, "claude-sonnet-4-6"),
+}
+
+# Terminal-level model overrides (take precedence over engine defaults)
+_TERMINAL_MODEL: dict[str, str] = {
+    "sir_alex":     "claude-opus-4-7",
+    "sir_boris":    "claude-sonnet-4-6",
+    "sir_helio":    "gemini-2.5-flash",
+    "sir_link":     "gemini-2.5-pro",
+    "sir_codex":    "gpt-4o",
+    "sir_ghost":    "qwen3:1.7b",
+    "sir_forge":    "qwen2.5-coder:3b",
+    "sir_sentinel": "claude-haiku-4-5-20251001",
+    "sir_gideon":   "qwen3:4b",
+    "sir_mnemo":    "",   # handled by cloudbrain strategy
+    "sir_gravity":  "gemini-2.5-pro",   # Antigravity OAuth via CLIProxy
+    "sir_kimi":     "kimi-k2.5",         # Moonshot Kimi K2.5 via CLIProxy kimi channel
+    "sir_hermes":   "claude-sonnet-4-6",
+}
+
+
+class Bifrost:
+    """Universal dispatch gateway — send a prompt to any registered terminal."""
+
+    def __init__(self) -> None:
+        from control_plane.switchboard import TERMINAL_REGISTRY
+        self._reg = TERMINAL_REGISTRY
+
+    # ── Public API ────────────────────────────────────────────────────────────
+
+    async def stream(
+        self,
+        terminal_id: str,
+        prompt: str,
+        system: str = "",
+        max_tokens: int = 2048,
+    ) -> AsyncIterator[str]:
+        """Stream text chunks from a specific terminal."""
+        strategy, base, model = self._resolve(terminal_id)
+
+        if strategy == "cliproxy":
+            async for chunk in self._stream_openai(base, model, prompt, system, max_tokens):
+                yield chunk
+        elif strategy == "ollama":
+            async for chunk in self._stream_ollama(base, model, prompt, system):
+                yield chunk
+        elif strategy == "hermes":
+            async for chunk in self._stream_hermes(prompt, system, model):
+                yield chunk
+        elif strategy == "cloudbrain":
+            result = await self._query_cloudbrain(prompt)
+            yield result
+        elif strategy == "noop":
+            yield f"[BIFROST] {terminal_id} is a service node (not a text model). Hit its HTTP endpoint directly."
+        else:
+            yield f"[BIFROST] Unknown strategy '{strategy}' for {terminal_id}"
+
+    async def route_and_stream(
+        self,
+        prompt: str,
+        system: str = "",
+    ) -> AsyncIterator[tuple[str, str]]:
+        """Intent-route a prompt; yield (terminal_id, chunk) pairs.
+
+        First chunk has terminal_id="route" and contains the routing decision.
+        Subsequent chunks have the actual terminal_id.
+        """
+        from control_plane.intent_router import route_by_intent
+        from control_plane.switchboard import Switchboard
+
+        board = Switchboard()
+        await board.probe_all()
+        terminal, category, confidence = await route_by_intent(prompt, board)
+
+        if terminal is None:
+            yield ("none", "[BIFROST] No live terminals available\n")
+            return
+
+        yield ("route", f"[BIFROST] → {terminal.id} [{category.value} conf={confidence:.2f}]\n")
+        async for chunk in self.stream(terminal.id, prompt, system):
+            yield (terminal.id, chunk)
+
+    async def parallel_stream(
+        self,
+        terminal_ids: list[str],
+        prompt: str,
+        system: str = "",
+        max_tokens: int = 2048,
+    ) -> AsyncIterator[tuple[str, str]]:
+        """Stream the same prompt to multiple terminals concurrently.
+
+        Yields (terminal_id, chunk) interleaved as they arrive.
+        """
+        queue: asyncio.Queue[tuple[str, str] | None] = asyncio.Queue()
+        n = len(terminal_ids)
+
+        async def _worker(tid: str) -> None:
+            try:
+                async for chunk in self.stream(tid, prompt, system, max_tokens):
+                    await queue.put((tid, chunk))
+            except Exception as e:
+                await queue.put((tid, f"\n[ERROR] {e}"))
+            finally:
+                await queue.put(None)  # sentinel
+
+        tasks = [asyncio.create_task(_worker(tid)) for tid in terminal_ids]
+        done = 0
+        while done < n:
+            item = await queue.get()
+            if item is None:
+                done += 1
+            else:
+                yield item
+
+        await asyncio.gather(*tasks, return_exceptions=True)
+
+    # ── Status ────────────────────────────────────────────────────────────────
+
+    async def status(self) -> list[dict]:
+        """Return current health of all terminals."""
+        from control_plane.switchboard import Switchboard
+        board = Switchboard()
+        await board.probe_all()
+        return [
+            {
+                "id":         t.id,
+                "engine":     t.engine,
+                "status":     t.status,
+                "latency_ms": t.latency_ms,
+                "cost_tier":  t.cost_tier,
+                "notes":      t.notes,
+            }
+            for t in board._reg.values()
+        ]
+
+    # ── Internal ──────────────────────────────────────────────────────────────
+
+    def _resolve(self, terminal_id: str) -> tuple[str, str, str]:
+        t = self._reg.get(terminal_id)
+        if not t:
+            raise ValueError(f"Unknown terminal: {terminal_id!r}. "
+                             f"Valid: {list(self._reg)}")
+        strategy, base, model = _ENGINE_DISPATCH.get(
+            t.engine, ("cliproxy", CLIPROXY_BASE, "claude-sonnet-4-6")
+        )
+        model = _TERMINAL_MODEL.get(terminal_id) or model
+        return strategy, base, model
+
+    async def _stream_openai(
+        self,
+        base: str,
+        model: str,
+        prompt: str,
+        system: str,
+        max_tokens: int,
+    ) -> AsyncIterator[str]:
+        if not _HTTPX:
+            yield "[BIFROST] httpx missing — run: uv add httpx"
+            return
+
+        messages: list[dict] = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+
+        payload = {
+            "model": model,
+            "messages": messages,
+            "max_tokens": max_tokens,
+            "stream": True,
+        }
+        headers = {
+            "Authorization": f"Bearer {CLIPROXY_KEY}",
+            "Content-Type": "application/json",
+        }
+
+        try:
+            async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=5.0)) as client:
+                async with client.stream(
+                    "POST", f"{base}/chat/completions",
+                    json=payload, headers=headers,
+                ) as resp:
+                    resp.raise_for_status()
+                    try:
+                        async for raw in resp.aiter_lines():
+                            if not raw.startswith("data: "):
+                                continue
+                            data = raw[6:].strip()
+                            if data == "[DONE]":
+                                break
+                            try:
+                                obj = json.loads(data)
+                                content = obj["choices"][0]["delta"].get("content", "")
+                                if content:
+                                    yield content
+                            except (json.JSONDecodeError, KeyError, IndexError):
+                                continue
+                    except GeneratorExit:
+                        pass  # caller broke out early — clean up silently
+        except httpx.HTTPStatusError as e:
+            try:
+                body = e.response.text[:200]
+            except Exception:
+                body = f"<status {e.response.status_code}>"
+            yield f"\n[BIFROST] HTTP {e.response.status_code} from {model}: {body}"
+        except Exception as e:
+            yield f"\n[BIFROST] {type(e).__name__}: {e}"
+
+    async def _stream_ollama(
+        self,
+        base: str,
+        model: str,
+        prompt: str,
+        system: str,
+    ) -> AsyncIterator[str]:
+        if not _HTTPX:
+            yield "[BIFROST] httpx missing — run: uv add httpx"
+            return
+
+        payload = {"model": model, "prompt": prompt, "system": system or "", "stream": True}
+
+        try:
+            async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=3.0)) as client:
+                async with client.stream("POST", f"{base}/api/generate", json=payload) as resp:
+                    resp.raise_for_status()
+                    async for raw in resp.aiter_lines():
+                        if not raw:
+                            continue
+                        try:
+                            obj = json.loads(raw)
+                            text = obj.get("response", "")
+                            if text:
+                                yield text
+                            if obj.get("done"):
+                                break
+                        except json.JSONDecodeError:
+                            continue
+        except Exception as e:
+            yield f"\n[BIFROST] Ollama/{model}: {type(e).__name__}: {e}"
+
+    async def _stream_hermes(
+        self,
+        prompt: str,
+        system: str,
+        model: str,
+    ) -> AsyncIterator[str]:
+        """Run Hermes agent in single-query (-q) mode via subprocess, stream stdout."""
+        hermes_dir = (
+            CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "hermes-agent"
+        )
+        hermes_python = hermes_dir / ".venv" / "Scripts" / "python.exe"
+        hermes_cli    = hermes_dir / "cli.py"
+
+        if not hermes_python.exists() or not hermes_cli.exists():
+            yield "[HERMES] hermes-agent not found. Check KINETIC_ARMORY/hermes-agent."
+            return
+
+        full_prompt = f"{system}\n\n{prompt}".strip() if system else prompt
+
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        env["PYTHONUNBUFFERED"] = "1"
+        # Route Hermes through CLIProxy so it uses existing auth
+        env["OPENAI_BASE_URL"] = CLIPROXY_BASE
+        env["OPENAI_API_KEY"]  = CLIPROXY_KEY
+
+        hermes_shim = hermes_dir / "bifrost_query.py"
+        if not hermes_shim.exists():
+            # Fallback: use cli.py -q (output includes banner noise)
+            hermes_shim = hermes_cli
+
+        cmd = [
+            str(hermes_python), str(hermes_shim),
+            full_prompt, model, CLIPROXY_BASE, CLIPROXY_KEY,
+        ]
+
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.DEVNULL,
+                cwd=str(hermes_dir),
+                env=env,
+            )
+            assert proc.stdout is not None
+            try:
+                async for line in proc.stdout:
+                    decoded = line.decode("utf-8", errors="replace")
+                    yield decoded
+            except GeneratorExit:
+                proc.terminate()
+                return
+            await proc.wait()
+        except Exception as e:
+            yield f"\n[HERMES ERROR] {type(e).__name__}: {e}"
+
+    async def _query_cloudbrain(self, prompt: str) -> str:
+        try:
+            from control_plane.cloudbrain_sync import query_cloud_brain
+            result = await asyncio.to_thread(query_cloud_brain, prompt)
+            return result or "[CLOUDBRAIN] Empty response"
+        except ImportError:
+            return "[CLOUDBRAIN] cloudbrain_sync not available"
+        except Exception as e:
+            return f"[CLOUDBRAIN ERROR] {e}"
+
+
+# ── CLI entry point ───────────────────────────────────────────────────────────
+
+async def _main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Bifrost dispatch — send a prompt to any CAMELOT terminal")
+    parser.add_argument("terminal", nargs="?", help="Terminal ID (e.g. sir_boris). Omit with --route.")
+    parser.add_argument("prompt", help="Prompt text")
+    parser.add_argument("--system", default="", help="System prompt")
+    parser.add_argument("--route", action="store_true", help="Use intent router instead of direct terminal")
+    parser.add_argument("--status", action="store_true", help="Show terminal health and exit")
+    parser.add_argument("--max-tokens", type=int, default=2048)
+    args = parser.parse_args()
+
+    bifrost = Bifrost()
+
+    if args.status:
+        rows = await bifrost.status()
+        for r in rows:
+            print(f"{r['id']:20s} {r['engine']:20s} {r['status']:12s} {r['latency_ms']:.0f}ms  {r['notes']}")
+        return
+
+    if args.route or args.terminal is None:
+        async for tid, chunk in bifrost.route_and_stream(args.prompt, args.system):
+            print(chunk, end="", flush=True)
+    else:
+        print(f"[BIFROST] → {args.terminal}", flush=True)
+        async for chunk in bifrost.stream(args.terminal, args.prompt, args.system, args.max_tokens):
+            print(chunk, end="", flush=True)
+    print()
+
+
+if __name__ == "__main__":
+    asyncio.run(_main())

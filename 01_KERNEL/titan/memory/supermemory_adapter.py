@@ -220,8 +220,12 @@ class TitanMemoryBridge:
 
 # Example usage
 if __name__ == "__main__":
-    # Initialize adapter (replace with actual API URL and key)
-    adapter = SupermemoryAdapter(api_url="http://localhost:3000/api", api_key="your_api_key_here")
+    # Initialize adapter using environment variables (Titan Protocol)
+    import os
+    API_URL = os.getenv("SUPERMEMORY_API_URL", "http://localhost:3000/api")
+    API_KEY = os.getenv("SUPERMEMORY_API_KEY", "your_api_key_here")
+    
+    adapter = SupermemoryAdapter(api_url=API_URL, api_key=API_KEY)
 
     # Create bridge
     bridge = TitanMemoryBridge(adapter)

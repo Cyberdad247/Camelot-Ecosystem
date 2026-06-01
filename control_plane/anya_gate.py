@@ -334,6 +334,113 @@ def _stage_validate(
 
 
 # ---------------------------------------------------------------------------
+# APEE v7.0 — Self-Triaging Stage (Pillar 1, EXCALIBUR_A_QNF)
+# ---------------------------------------------------------------------------
+
+# Destructive / shatterpoint signals (Ouroboros Adaptive Governance, v999 NLM).
+_SHATTERPOINT_PATTERNS: list[tuple[re.Pattern, str]] = [
+    (re.compile(r"\b(rm\s+-rf|rmdir|del\s+/|format|drop\s+(table|database))\b", re.I), "destructive_autonomy"),
+    (re.compile(r"\b(force\s*push|--force|reset\s+--hard)\b", re.I), "destructive_git"),
+    (re.compile(r"\b(secret|credential|password|api[_\s-]?key|exfiltrat)\b", re.I), "secret_leakage"),
+    (re.compile(r"\b(bypass|disable|skip)\s+(hitl|verification|ledger|security)\b", re.I), "verification_bypass"),
+    (re.compile(r"\b(prod|production)\b.*\b(deploy|mutate|delete|drop)\b", re.I), "prod_mutation"),
+]
+
+# Intents that must be mathematically verified before execution (Z3, v999 NLM).
+_Z3_PATTERNS = re.compile(
+    r"\b(git\s+(patch|apply|merge|commit)|state\s+machine|pddl|workflow\s+merge|"
+    r"\.shadow|rebase)\b", re.I,
+)
+
+# Lane assignment by intent_type + velocity.
+_LANE_BY_INTENT: dict[str, str] = {
+    "AUDIT": "CRITICAL", "FORGE": "HIGH", "BUILD": "HIGH",
+    "HEAL": "NORMAL", "ROUTE": "NORMAL", "RESEARCH": "BACKGROUND", "QUERY": "NORMAL",
+}
+
+_CARTRIDGE_HINT_BY_DOMAIN: dict[str, str] = {
+    "research": "ANT", "infra/cloud": "BEAVER", "rust/kinetic": "BEAVER",
+    "go/binary": "BEAVER", "python/api": "SPIDER", "web/ui": "SPIDER",
+    "security": "OCTOPUS",
+}
+
+
+def _stage_triage(parse: "ParseResult", enrich: "EnrichResult", knight_id: str):
+    """APEE v7.0 self-triage. Computes risk_entropy and HITL tier from the
+    parse/enrich signals. Returns a TriageScore (schema lives in factory_lane).
+
+    Risk entropy thresholds (Ouroboros Adaptive Governance):
+        < 0.15            -> AUTO
+        0.15 .. 0.55      -> PROMPT
+        > 0.55 / shatter  -> HUMAN_GATE
+    """
+    from .factory_lane import TriageScore
+
+    text = parse.ambiguity_stripped.lower()
+
+    # Shatterpoint detection
+    shatterpoints: list[str] = []
+    for pattern, label in _SHATTERPOINT_PATTERNS:
+        if pattern.search(text) and label not in shatterpoints:
+            shatterpoints.append(label)
+
+    requires_z3 = bool(_Z3_PATTERNS.search(text))
+
+    # Read-only intents (QUERY/RESEARCH with no destructive verbs) are inherently
+    # low-risk regardless of token-surface complexity, so discount the complexity
+    # contribution. The parser's "complexity" is really an entity-count proxy.
+    read_only = parse.intent_type in ("QUERY", "RESEARCH") and not shatterpoints
+    complexity_weight = 0.18 if read_only else 0.45
+
+    # risk_entropy: weighted blend of complexity, privacy, shatterpoint pressure
+    shatter_pressure = min(1.0, 0.4 * len(shatterpoints))
+    risk_entropy = min(
+        1.0,
+        complexity_weight * parse.complexity + 0.35 * parse.privacy + shatter_pressure,
+    )
+    if requires_z3:
+        risk_entropy = max(risk_entropy, 0.6)
+
+    # HITL tier from entropy + hard overrides
+    if shatterpoints or risk_entropy > 0.55 or requires_z3:
+        hitl_tier = "HUMAN_GATE"
+    elif risk_entropy >= 0.15:
+        hitl_tier = "PROMPT"
+    else:
+        hitl_tier = "AUTO"
+
+    # Lane: shatterpoints force CRITICAL
+    if shatterpoints:
+        lane = "CRITICAL"
+    else:
+        lane = _LANE_BY_INTENT.get(parse.intent_type, "NORMAL")
+        if "velocity_high" in parse.constraints and lane == "BACKGROUND":
+            lane = "NORMAL"
+
+    reason_bits = [f"entropy={risk_entropy:.2f}"]
+    if shatterpoints:
+        reason_bits.append(f"shatter={shatterpoints}")
+    if requires_z3:
+        reason_bits.append("z3_required")
+
+    cartridge = _CARTRIDGE_HINT_BY_DOMAIN.get(enrich.domain, "DEFAULT")
+
+    return TriageScore(
+        auto_dispatchable=(hitl_tier == "AUTO"),
+        priority=lane,
+        hitl_tier=hitl_tier,
+        risk_entropy=round(risk_entropy, 3),
+        risk_reason=" ".join(reason_bits),
+        assigned_knight=knight_id,
+        estimated_tokens=max(512, int(parse.complexity * 8192)),
+        cost_ceiling_usd=0.0,  # 38 free models via CLIProxy OAuth
+        shatterpoints_detected=shatterpoints,
+        requires_z3_verification=requires_z3,
+        cartridge_hint=cartridge,
+    )
+
+
+# ---------------------------------------------------------------------------
 # AnyaGate — the sovereign entry/exit point
 # ---------------------------------------------------------------------------
 
@@ -372,6 +479,17 @@ class AnyaGate:
             validation=validation,
             pipeline_ms=ms,
         )
+
+    def triage(self, raw_intent: str):
+        """APEE v7.0 self-triage entry point. Returns a TriageScore without
+        running the full compile/validate pipeline — used by the factory lane
+        to assign priority and HITL tier. Additive to process(); does not
+        replace it.
+        """
+        parse = _stage_parse(raw_intent)
+        enrich = _stage_enrich(parse)
+        knight, _engine, _weight, _reason = _stage_route(parse, enrich)
+        return _stage_triage(parse, enrich, knight)
 
     def validate_output(self, response: str) -> tuple[bool, list[str]]:
         """Exit gate — validate a response before it leaves the system."""

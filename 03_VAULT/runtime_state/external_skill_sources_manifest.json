@@ -1,0 +1,109 @@
+{
+  "generated_utc": "2026-05-20T00:00:00Z",
+  "purpose": "Reference-backed external skill source registry for Camelot universal skill database and Merlin Forge.",
+  "sources": [
+    {
+      "id": "github:nemanjadotcom/skills",
+      "url": "https://github.com/nemanjadotcom/skills.git",
+      "local_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\Reference_Architectures\\skills\\nemanjadotcom-skills",
+      "status": "cloned_reference",
+      "trust": "review_required",
+      "integration_mode": "reference_then_adapter",
+      "notable_skills": [
+        "design-brand-kit",
+        "grill-me",
+        "to-prd",
+        "to-issues",
+        "shape",
+        "ralph",
+        "ralph-local",
+        "prd-to-tasks"
+      ],
+      "notes": "Includes Claude and Codex variants of Ralph planning and implementation workflows. Treat scripts as review-required before execution."
+    },
+    {
+      "id": "github:mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills.git",
+      "local_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\Reference_Architectures\\skills\\mattpocock-skills",
+      "status": "cloned_reference",
+      "trust": "review_required",
+      "integration_mode": "reference_then_adapter",
+      "notable_skills": [
+        "diagnose",
+        "grill-with-docs",
+        "triage",
+        "improve-codebase-architecture",
+        "setup-matt-pocock-skills",
+        "tdd",
+        "to-issues",
+        "to-prd",
+        "zoom-out",
+        "prototype",
+        "grill-me",
+        "handoff",
+        "write-a-skill"
+      ],
+      "notes": "Engineering-process skill library focused on alignment, TDD, diagnosis, architecture, issue shaping, and handoff workflows."
+    },
+    {
+      "id": "github:nemanjadotcom/goal-video-resources",
+      "url": "https://github.com/nemanjadotcom/goal-video-resources.git",
+      "local_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\Reference_Architectures\\skills\\goal-video-resources",
+      "status": "cloned_reference",
+      "trust": "review_required",
+      "integration_mode": "reference_then_adapter",
+      "notable_skills": [
+        "goal-contract",
+        "shape-to-issues-ralph",
+        "hermes-codex-builder",
+        "claude-reviewer",
+        "visible-kanban-ledger",
+        "review-fix-verify-loop"
+      ],
+      "notes": "Experiment resource bundle for comparing direct /goal, Ralph, and Hermes/Codex/Claude builder-reviewer workflows. Adapted into Camelot via goal-video-workflow; scripts/prompts remain review-required."
+    },
+    {
+      "id": "camelot-local:shape",
+      "url": null,
+      "local_path": "C:\\Users\\vizio\\CAMELOT_OS\\.agents\\skills\\shape\\SKILL.md",
+      "status": "active_local_adapter",
+      "trust": "operator_supplied",
+      "integration_mode": "first_class_local_skill",
+      "notable_skills": [
+        "shape"
+      ],
+      "notes": "Operator-provided Shape Auto-Grill to PRD skill adapted into Camelot-local .agents skills."
+    },
+    {
+      "id": "camelot-local:merlin-knight-forge",
+      "url": null,
+      "local_path": "C:\\Users\\vizio\\CAMELOT_OS\\.agents\\skills\\merlin-knight-forge\\SKILL.md",
+      "schema_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\merlin_knight_creation_schema.json",
+      "status": "active_local_adapter",
+      "trust": "operator_supplied",
+      "integration_mode": "first_class_local_skill",
+      "notable_skills": [
+        "merlin-knight-forge"
+      ],
+      "notes": "Merlin-native routing wrapper that converts a task into the proper Knight character sheet, skill stack, mental framework, safety gate, output contract, and verification loop."
+    },
+    {
+      "id": "camelot-local:goal-video-workflow",
+      "url": null,
+      "local_path": "C:\\Users\\vizio\\CAMELOT_OS\\.agents\\skills\\goal-video-workflow\\SKILL.md",
+      "status": "active_local_adapter",
+      "trust": "operator_supplied",
+      "integration_mode": "first_class_local_skill",
+      "notable_skills": [
+        "goal-video-workflow"
+      ],
+      "notes": "Camelot-native adapter for goal-style orchestration: goal contract, visible ledger, builder Knight, reviewer Knight, scoped fix loop, verification, and final evidence."
+    }
+  ],
+  "governance": {
+    "default_external_trust": "review_required",
+    "scripts_require_review": true,
+    "no_auto_execution": true,
+    "merlin_usage": "External skills may be selected by Merlin only after source path, trust, platform, command surface, and risk are recorded."
+  }
+}

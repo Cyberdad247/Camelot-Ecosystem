@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "excalibur-orchestrator"
+version = "0.0.0"
+description = "EXCALIBUR LUKAS_FORGE orchestration layer (runic routing + Aegis regex PII)"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+excalibur = "excalibur.cli:main"
+
+[tool.setuptools]
+packages = ["excalibur"]

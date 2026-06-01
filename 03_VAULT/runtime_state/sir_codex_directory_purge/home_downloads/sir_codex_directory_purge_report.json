@@ -1,0 +1,94 @@
+{
+  "root": "C:\\Users\\vizio\\Downloads",
+  "generated_utc": "2026-05-24T21:53:53.405024+00:00",
+  "scanned_files": 564,
+  "scanned_dirs": 70,
+  "total_bytes": 950582344,
+  "candidate_bytes": 252057004,
+  "findings": [
+    {
+      "path": "Antigravity-x64.exe",
+      "kind": "binary",
+      "reason": "large_binary_review",
+      "size_bytes": 143766400,
+      "modified_utc": "2026-05-23T18:05:23.339638+00:00",
+      "sha256": null,
+      "duplicate_of": null,
+      "action": "review",
+      "entropy_score": 55
+    },
+    {
+      "path": "03_CODE_AND_DEVELOPMENT/ISO/linux.iso",
+      "kind": "large_file",
+      "reason": "large_file_review",
+      "size_bytes": 56166400,
+      "modified_utc": "2025-07-26T22:36:23.724840+00:00",
+      "sha256": null,
+      "duplicate_of": null,
+      "action": "archive",
+      "entropy_score": 40
+    },
+    {
+      "path": "03_CODE_AND_DEVELOPMENT/Optimize Website Design Using Provided Videos and Zip File/headartworks-redesign-source.zip",
+      "kind": "archive",
+      "reason": "low_frequency_archive",
+      "size_bytes": 40705155,
+      "modified_utc": "2025-12-24T16:51:29.786225+00:00",
+      "sha256": null,
+      "duplicate_of": null,
+      "action": "archive",
+      "entropy_score": 45
+    },
+    {
+      "path": "03_CODE_AND_DEVELOPMENT/Optimize Website Design Using Provided Videos and Zip File/RedesignAnalysisforArtisanWebsiteandInterfaces.zip",
+      "kind": "archive",
+      "reason": "low_frequency_archive",
+      "size_bytes": 9932253,
+      "modified_utc": "2025-12-24T16:51:29.976798+00:00",
+      "sha256": null,
+      "duplicate_of": null,
+      "action": "archive",
+      "entropy_score": 45
+    },
+    {
+      "path": "03_CODE_AND_DEVELOPMENT/Shopify Hydrogen Local Deployment Configuration Steps (1)/ConfiguringLocalShopifyHydrogenDeployment.zip",
+      "kind": "archive",
+      "reason": "low_frequency_archive",
+      "size_bytes": 1455383,
+      "modified_utc": "2025-07-25T21:21:51.207901+00:00",
+      "sha256": null,
+      "duplicate_of": null,
+      "action": "archive",
+      "entropy_score": 45
+    },
+    {
+      "path": "03_CODE_AND_DEVELOPMENT/Shopify Hydrogen Local Deployment Configuration Steps (1)/headartworks-hydrogen-complete.tar.gz",
+      "kind": "archive",
+      "reason": "low_frequency_archive",
+      "size_bytes": 17961,
+      "modified_utc": "2025-07-25T21:21:51.113505+00:00",
+      "sha256": null,
+      "duplicate_of": null,
+      "action": "archive",
+      "entropy_score": 45
+    },
+    {
+      "path": "03_CODE_AND_DEVELOPMENT/Shopify Hydrogen Local Deployment Configuration Steps (1)/products_export (2).zip",
+      "kind": "archive",
+      "reason": "low_frequency_archive",
+      "size_bytes": 13452,
+      "modified_utc": "2025-12-12T08:28:36.364055+00:00",
+      "sha256": null,
+      "duplicate_of": null,
+      "action": "archive",
+      "entropy_score": 45
+    }
+  ],
+  "errors": [
+    "C:\\Users\\vizio\\Downloads\\04_DOCUMENTS_AND_RECORDS\\Soundtrack\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn (1).pdf: [WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\vizio\\\\Downloads\\\\04_DOCUMENTS_AND_RECORDS\\\\Soundtrack\\\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn (1).pdf'",
+    "C:\\Users\\vizio\\Downloads\\04_DOCUMENTS_AND_RECORDS\\Soundtrack\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn (1).zip: [WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\vizio\\\\Downloads\\\\04_DOCUMENTS_AND_RECORDS\\\\Soundtrack\\\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn (1).zip'",
+    "C:\\Users\\vizio\\Downloads\\04_DOCUMENTS_AND_RECORDS\\Soundtrack\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn.jpg: [WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\vizio\\\\Downloads\\\\04_DOCUMENTS_AND_RECORDS\\\\Soundtrack\\\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn.jpg'",
+    "C:\\Users\\vizio\\Downloads\\04_DOCUMENTS_AND_RECORDS\\Soundtrack\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn.pdf: [WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\vizio\\\\Downloads\\\\04_DOCUMENTS_AND_RECORDS\\\\Soundtrack\\\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn.pdf'",
+    "C:\\Users\\vizio\\Downloads\\04_DOCUMENTS_AND_RECORDS\\Soundtrack\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn.zip: [WinError 3] The system cannot find the path specified: 'C:\\\\Users\\\\vizio\\\\Downloads\\\\04_DOCUMENTS_AND_RECORDS\\\\Soundtrack\\\\Rise of The Phoenix The Illusion Revealed By VaShawn F. Head Soundtrack Volume 1 The Original Soundtrack Title Artist Time Hyperlink Ransom Note The Breakout Boys 4.34 httpssuno.comsnSRoRSIgK9h7mn.zip'"
+  ]
+}

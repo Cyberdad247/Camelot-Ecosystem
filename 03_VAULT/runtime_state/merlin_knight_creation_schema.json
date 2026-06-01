@@ -1,0 +1,194 @@
+{
+  "schema_name": "merlin_knight_creation_schema",
+  "version": "2026-05-20",
+  "purpose": "Canonical machine-readable format Merlin uses to forge the proper Knight from the universal skill database.",
+  "required_sections": [
+    "identity",
+    "mandate",
+    "mental_framework",
+    "skill_stack",
+    "process_contract",
+    "output_contract",
+    "soul",
+    "safety_gate",
+    "verification"
+  ],
+  "task_types": {
+    "prd_creation": {
+      "primary_archetype": "ResearchKnight",
+      "mental_framework": "Shape Auto-Grill Decision Tree",
+      "required_skills": [
+        "shape",
+        "to-prd"
+      ]
+    },
+    "issue_decomposition": {
+      "primary_archetype": "SirAlexKnight",
+      "mental_framework": "Vertical Slice Decomposition",
+      "required_skills": [
+        "to-issues",
+        "triage"
+      ]
+    },
+    "implementation": {
+      "primary_archetype": "ForgeKnight",
+      "mental_framework": "Vertical Slice + TDD",
+      "required_skills": [
+        "ralph-local",
+        "tdd"
+      ]
+    },
+    "debugging": {
+      "primary_archetype": "DebugKnight",
+      "mental_framework": "Diagnose Feedback Loop",
+      "required_skills": [
+        "diagnose",
+        "tdd"
+      ]
+    },
+    "triage": {
+      "primary_archetype": "TriageKnight",
+      "mental_framework": "Triage State Machine",
+      "required_skills": [
+        "triage",
+        "grill-with-docs"
+      ]
+    },
+    "architecture_review": {
+      "primary_archetype": "ArchitectKnight",
+      "mental_framework": "Deep Module / Seam / Locality / Leverage",
+      "required_skills": [
+        "improve-codebase-architecture",
+        "grill-with-docs"
+      ]
+    },
+    "security_review": {
+      "primary_archetype": "SentinelKnight",
+      "mental_framework": "Risk Gate + HITL",
+      "required_skills": [
+        "diagnose",
+        "triage"
+      ]
+    },
+    "design_system": {
+      "primary_archetype": "DesignKnight",
+      "mental_framework": "Brand System Exploration",
+      "required_skills": [
+        "design-brand-kit",
+        "shape"
+      ]
+    },
+    "operations_sync": {
+      "primary_archetype": "OperationsKnight",
+      "mental_framework": "Provenance + Sync Contract",
+      "required_skills": [
+        "camelot-sync-policy"
+      ]
+    }
+  },
+  "character_sheet": {
+    "identity": {
+      "archetype": "string",
+      "mission": "string",
+      "humanistic_persona": "string",
+      "cultural_background": "string",
+      "operating_temperament": "string",
+      "forbidden_behaviors": [
+        "string"
+      ]
+    },
+    "mandate": {
+      "primary_objective": "string",
+      "success_criteria": [
+        "string"
+      ],
+      "non_goals": [
+        "string"
+      ],
+      "required_human_checkpoints": [
+        "string"
+      ]
+    },
+    "mental_framework": {
+      "planning_model": "string",
+      "decision_tree": [
+        "string"
+      ],
+      "risk_model": [
+        "string"
+      ],
+      "verification_model": [
+        "string"
+      ],
+      "escalation_rule": "string"
+    },
+    "skill_stack": {
+      "primary_skills": [
+        "string"
+      ],
+      "secondary_skills": [
+        "string"
+      ],
+      "camelot_native_tools": [
+        "string"
+      ],
+      "external_references": [
+        "string"
+      ],
+      "disallowed_tools": [
+        "string"
+      ]
+    },
+    "process_contract": [
+      "intake",
+      "grounding",
+      "decision_stream",
+      "artifact_creation",
+      "execution_if_authorized",
+      "verification",
+      "ledger_or_notebook_sync",
+      "handoff"
+    ],
+    "output_contract": {
+      "files_to_create": [
+        "string"
+      ],
+      "files_to_modify": [
+        "string"
+      ],
+      "runtime_checks": [
+        "string"
+      ],
+      "notebook_sync_target": "string",
+      "final_report_shape": "string"
+    },
+    "soul": {
+      "name": "string",
+      "voice": "string",
+      "values": [
+        "string"
+      ],
+      "collaboration_style": "string",
+      "memory_anchor": "string",
+      "persona_constraints": [
+        "string"
+      ]
+    },
+    "safety_gate": {
+      "pause_conditions": [
+        "external_script_execution",
+        "secrets_or_private_data",
+        "destructive_file_operations",
+        "issue_tracker_posting",
+        "high_risk_domain",
+        "human_design_decision"
+      ]
+    },
+    "verification": {
+      "must_include_success_criteria": true,
+      "must_include_concrete_loop": true,
+      "must_include_artifact_path_or_runtime_evidence": true,
+      "must_include_handoff_summary": true
+    }
+  }
+}

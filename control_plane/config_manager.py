@@ -25,6 +25,25 @@ class OperatorProfile(BaseModel):
     privacy_threshold: float = 0.0
 
 
+class SubstrateProfile(BaseModel):
+    """EXCALIBUR v1000.0.0 substrate (hardware) profile + physical-law thresholds.
+
+    Adjudicated at boot by control_plane/excalibur_preflight.py. Ported from the
+    LUKAS_FORGE bash kit; the bash 'nitro-v15-cpu' Linux target and the native
+    Windows 'cybertronia-win' target share the same physical laws.
+    """
+    arch_req: list[str] = Field(default_factory=lambda: ["x86_64", "amd64"])
+    ram_ceiling_mb: int = 8192
+    ram_expect_min_mb: int = 7000
+    boot_sprawl_max_mb: int = 1200      # RL-Conductor sprawl during boot
+    trellis_pool_mb: int = 512          # fixed KV-pool reservation
+    headroom_req_mb: int = 1712         # boot_sprawl_max + trellis_pool
+    store_min_free_mb: int = 4096       # Rust/WASM target dirs
+    sandbox_primitives: list[str] = Field(default_factory=lambda: ["wsl", "docker", "windows-sandbox"])
+    ebpf_required: bool = False         # soft on Windows (regex-only PII fallback)
+    os_family: str = "windows"
+
+
 class CamelotConfig(BaseModel):
     """Canonical Camelot-OS configuration."""
     cloudbrain_url: Optional[str] = None
@@ -43,6 +62,21 @@ class CamelotConfig(BaseModel):
     warp_local_workflows_path: str = "C:/Users/vizio/AppData/Roaming/warp/Warp/data/workflows"
     active_profile: str = "default"
     profiles: dict[str, OperatorProfile] = Field(default_factory=lambda: {"default": OperatorProfile()})
+    # EXCALIBUR substrate (hardware) profiles — adjudicated at boot pre-flight.
+    active_substrate: str = "cybertronia-win"
+    substrate_profiles: dict[str, SubstrateProfile] = Field(
+        default_factory=lambda: {
+            # Native Windows host (this box).
+            "cybertronia-win": SubstrateProfile(),
+            # Linux deployment target (Acer Nitro V 15) — kept as a spec for the
+            # original LUKAS_FORGE bash kit.
+            "nitro-v15-cpu": SubstrateProfile(
+                sandbox_primitives=["bwrap", "proot", "unshare"],
+                ebpf_required=False,
+                os_family="linux",
+            ),
+        }
+    )
 
 
 class ConfigManager:
@@ -100,6 +134,16 @@ class ConfigManager:
     def update_profile(self, name: str, profile: OperatorProfile):
         """Update or create a profile."""
         self.config.profiles[name] = profile
+        self.save()
+
+    def get_substrate_profile(self, name: Optional[str] = None) -> SubstrateProfile:
+        """Retrieve an EXCALIBUR substrate profile or the active one."""
+        profile_name = name or self.config.active_substrate
+        return self.config.substrate_profiles.get(profile_name, SubstrateProfile())
+
+    def update_substrate_profile(self, name: str, profile: SubstrateProfile):
+        """Update or create an EXCALIBUR substrate profile."""
+        self.config.substrate_profiles[name] = profile
         self.save()
 
     def cloud_endpoint_map(self) -> dict[str, str]:

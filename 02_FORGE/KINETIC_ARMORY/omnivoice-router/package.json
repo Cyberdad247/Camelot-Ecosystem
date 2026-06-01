@@ -1,0 +1,20 @@
+{
+  "name": "camelot-omnivoice-router",
+  "version": "1.0.0",
+  "description": "CAMELOT-OS OmniVoice Router — WebRTC signaling + energy VAD server",
+  "main": "omnivoice-router.js",
+  "scripts": {
+    "start": "npx ts-node --esm omnivoice-router.ts",
+    "build": "tsc",
+    "run-built": "node omnivoice-router.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/ws": "^8.5.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}

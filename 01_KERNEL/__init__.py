@@ -10,7 +10,7 @@ import os
 
 # --- LAW OF ANTIGRAVITY: SAFE I/O INJECTION ---
 try:
-    from .tools import antigravity_safe
+    from .forge.tools import antigravity_safe
     # Antigravity safe already patches builtins.open upon import
     print("[KERNEL] Antigravity Safe I/O Active.")
 except ImportError:

@@ -1,0 +1,18 @@
+{
+  "actor": "SIR_BORIS (Claude Sonnet 4.6)",
+  "artifact_path": "03_VAULT\\runtime_state\\codex_integration_latest.json",
+  "generated_utc": "2026-05-13T17:01:14.602186+00:00",
+  "pid": 28896,
+  "python": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe",
+  "repo_root": ".",
+  "repo_version": "unknown",
+  "status": "CODEX_INTEGRATED",
+  "surfaces": {
+    "boot": true,
+    "cli": true,
+    "cloudbrain": true,
+    "dashboard": true,
+    "ledger": true
+  },
+  "trigger": "boot"
+}

@@ -1,0 +1,6 @@
+set shell := ["bash", "-cu"]
+export EXCALIBUR_ROOT := justfile_directory()
+preflight: ; bash core/excalibur_audit.sh >/dev/null && bash core/excalibur_adjudicate.sh
+build: ; cargo build --workspace && python3 -m pip install -e orchestrator >/dev/null
+test: ; cargo test --workspace && cd orchestrator && PYTHONPATH=. python3 -m pytest -q
+run ARGS="": ; cd orchestrator && PYTHONPATH=. python3 -m excalibur.cli {{ARGS}}

@@ -1,0 +1,86 @@
+name: merlin-genesis-character-audit
+description: Audit Merlin's full character sheet and forge the highest-quality Knight profile using Genesis Protocol, SkillGraph4, Symbolect, Alexandrian Matrix review, and SOUL.md synthesis.
+
+nodes:
+  - id: source-recon
+    command: merlin-character-audit
+
+  - id: lady-m-evidence-audit
+    prompt: |
+      You are Lady M, Cloud Brain and memory auditor.
+      Read the source-recon artifact. Verify every claim against repo files and NotebookLM/Cloud Brain notes available to the harness.
+      Produce `lady_m_evidence_audit.md` with:
+      - confirmed Merlin character-sheet facts;
+      - missing evidence;
+      - stale assumptions;
+      - source paths;
+      - recommendations for what Merlin must remember before forging Knights.
+    depends_on: [source-recon]
+    context: fresh
+
+  - id: sir-alex-dag
+    prompt: |
+      You are Sir Alex, DAG planner.
+      Convert the audit into a precise TaskGraph for upgrading Merlin into the Forge Orchestrator.
+      Produce `sir_alex_taskgraph.md` and `forgeplan.schema.json`.
+      Include dependencies, risk gates, artifact names, and verification checkpoints.
+    depends_on: [source-recon]
+    context: fresh
+
+  - id: paladin-governance
+    prompt: |
+      Select the proper Paladin for the target Knight domain.
+      Use:
+      - Althea Vesper for research and source foraging;
+      - Kenji Thorne for execution and logistics;
+      - Elowen Stone for security, EULA, MCP, data custody;
+      - Octavian for debugging and recovery;
+      - Kavi Sunborn for creative persona and market resonance.
+      Produce `paladin_governance_report.md` with the chosen Paladin, risk model, HITL gates, denied operations, and approval conditions.
+    depends_on: [source-recon]
+    context: fresh
+
+  - id: sir-octavian-orchestration
+    prompt: |
+      You are Sir Octavian, orchestration commander.
+      Merge Sir Alex's TaskGraph, Lady M's evidence audit, and the Paladin governance report into an execution topology.
+      Produce `sir_octavian_orchestration.md`.
+      Define convergence points, retry policy, rollback boundaries, and when Merlin may proceed to forge.
+    depends_on: [lady-m-evidence-audit, sir-alex-dag, paladin-governance]
+    context: fresh
+
+  - id: merlin-genesis-forge
+    command: merlin-genesis-forge
+    depends_on: [sir-octavian-orchestration]
+    context: fresh
+
+  - id: alexandrian-matrix-review
+    command: merlin-alexandrian-review
+    depends_on: [merlin-genesis-forge]
+    context: fresh
+
+  - id: sovereign-approval
+    approval: |
+      Review the Merlin Genesis outputs:
+      - merlin_character_sheet_audit.md
+      - forgeplan.json
+      - skillgraph4.json
+      - symbolect.trace
+      - SOUL.md
+      - alexandrian_matrix_review.json
+      - paladin_governance_report.md
+      Approve only if the Knight is safe, humanistic, verifiable, and superior to generic market agents.
+    depends_on: [alexandrian-matrix-review]
+
+  - id: integration-plan
+    prompt: |
+      After approval, produce `merlin_runtime_integration_plan.md`.
+      Map each approved artifact to Camelot files:
+      - 03_VAULT/knowledge/persona_library/merlin.json
+      - 01_KERNEL/merlin/merlin_omega.py
+      - 02_FORGE/cartridge/cartridge_schemas.py
+      - control_plane/camelot_cli.py
+      - 03_VAULT/runtime_state/
+      Do not modify runtime code in this workflow. Produce the implementation plan only.
+    depends_on: [sovereign-approval]
+    context: fresh

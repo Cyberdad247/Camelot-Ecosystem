@@ -1,7 +1,8 @@
 active_profile: default
-living_notebook_url: https://notebooklm.google.com/notebook/8c656cfa-a189-409e-a72d-07692a47f17e
+active_substrate: cybertronia-win
 excalibur_bridge_url: https://cyberdad247--excalibur-brain-bridge.modal.run
 excalibur_health_url: https://cyberdad247--excalibur-brain-health.modal.run
+living_notebook_url: https://notebooklm.google.com/notebook/8c656cfa-a189-409e-a72d-07692a47f17e
 profiles:
   default:
     browser_isolation: agency
@@ -24,3 +25,38 @@ profiles:
     privacy_threshold: 0.8
     residential_proxy: true
     stealth: true
+substrate_profiles:
+  cybertronia-win:
+    arch_req:
+    - x86_64
+    - amd64
+    boot_sprawl_max_mb: 1200
+    ebpf_required: false
+    headroom_req_mb: 1712
+    os_family: windows
+    ram_ceiling_mb: 8192
+    ram_expect_min_mb: 7000
+    sandbox_primitives:
+    - wsl
+    - docker
+    - windows-sandbox
+    store_min_free_mb: 4096
+    trellis_pool_mb: 512
+  nitro-v15-cpu:
+    arch_req:
+    - x86_64
+    - amd64
+    boot_sprawl_max_mb: 1200
+    ebpf_required: false
+    headroom_req_mb: 1712
+    os_family: linux
+    ram_ceiling_mb: 8192
+    ram_expect_min_mb: 7000
+    sandbox_primitives:
+    - bwrap
+    - proot
+    - unshare
+    store_min_free_mb: 4096
+    trellis_pool_mb: 512
+warp_local_workflows_path: C:/Users/vizio/AppData/Roaming/warp/Warp/data/workflows
+warp_repo_workflows_path: .warp/workflows

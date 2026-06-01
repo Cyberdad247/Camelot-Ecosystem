@@ -1,0 +1,71 @@
+{
+  "artifact_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\knight_configuration_latest.json",
+  "cartridges": {
+    "active_count": 9,
+    "names": [
+      "nextjs",
+      "omnivox",
+      "python-api",
+      "reasoning",
+      "rust-kinetic",
+      "security",
+      "swarm-colony",
+      "uiux-cloudbrain-sync",
+      "voice-media"
+    ],
+    "source": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\training\\configs\\cartridges"
+  },
+  "excalibur_roster": {
+    "agents": [
+      "King Arthur",
+      "Sir Zenith (Octavian)",
+      "Merlin",
+      "Anya (The Jester-Architect)",
+      "Sir Visage",
+      "Sir Hydron",
+      "Sir Syntax",
+      "Sir ForgeMaster",
+      "Sir Stitch",
+      "Sir Alchemist",
+      "Baron Vaelen",
+      "Dame Sparkle",
+      "Kai 'Forge' Zhang (Lukas)",
+      "Lady Veritas",
+      "Sir Occam",
+      "Sir Gareth",
+      "Lady Apis",
+      "Sir Dagonet",
+      "Sir Lancelot (Systema)",
+      "Squire Galahad",
+      "Sir Scavenger",
+      "Morgana_\u03a9",
+      "Sir Sonus \u03a9",
+      "Kaito 'The Pruner' Tanaka",
+      "Sir Boris",
+      "Sir Alex",
+      "Sir Link",
+      "Sir Helio",
+      "Sir Codex",
+      "Sir Ghost",
+      "Sir Liberte"
+    ],
+    "count": 31,
+    "source": "C:\\Users\\vizio\\CAMELOT_OS\\01_KERNEL\\agora\\agents\\roster.json"
+  },
+  "generated_utc": "2026-05-29T23:15:21.416738+00:00",
+  "repo_root": "C:\\Users\\vizio\\CAMELOT_OS",
+  "status": "OK",
+  "switchboard_roster": {
+    "count": 0,
+    "source": "C:\\Users\\vizio\\CAMELOT_OS\\logs\\switchboard_manifest.json",
+    "terminals": []
+  },
+  "warp_workflows": {
+    "count": 2,
+    "source": "C:\\Users\\vizio\\CAMELOT_OS\\.warp\\workflows",
+    "workflows": [
+      "camelot-cloudbrain-v701-sync.yaml",
+      "camelot-cockpit.yaml"
+    ]
+  }
+}

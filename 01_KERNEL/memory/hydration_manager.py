@@ -96,8 +96,13 @@ class HydrationManager:
                 )
                 row = cursor.fetchone()
                 if row:
-                    results["L0"] = json.loads(row[0])
-                    results["tiers_active"].append("L0_LOCAL")
+                    try:
+                        results["L0"] = json.loads(row[0])
+                        results["tiers_active"].append("L0_LOCAL")
+                    except (json.JSONDecodeError, TypeError):
+                        # Fallback: Treat as raw text if JSON parsing fails
+                        results["L0"] = row[0]
+                        results["tiers_active"].append("L0_LOCAL_RAW")
             finally:
                 conn.close()
 

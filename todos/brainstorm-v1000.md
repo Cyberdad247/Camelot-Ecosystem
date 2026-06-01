@@ -1,0 +1,5 @@
+- [x] Understand Project Excalibur (v1000) concept <!-- id: 0 -->
+- [x] Prioritize implementation module (Ouroboros, Aegis, or Myrddin) <!-- id: 1 --> (Selected: Ouroboros)
+- [x] Refine selected approach (Propose 2-3 approaches) <!-- id: 2 --> (Documented in docs/plans/ouroboros_prefetch_approaches.md)
+- [x] Present design in sections (Architecture, Data Flow, etc.) <!-- id: 3 -->
+- [x] Document validated design in `docs/plans/` <!-- id: 4 -->

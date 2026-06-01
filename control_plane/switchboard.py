@@ -58,7 +58,7 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         probe_port=8080, notes="Claude Code — CLIProxy gateway",
     ),
     "sir_helio": Terminal(
-        id="sir_helio", engine="gemini_cli", weight=0.90,
+        id="sir_helio", engine="antigravity.cli", weight=0.90,
         cost_tier="low", capability=["context","research","burst","1m_token"],
         probe_port=0, notes="Gemini CLI — 1M+ context mapping",
     ),
@@ -68,7 +68,7 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         probe_port=8080, notes="Claude Code — cognitive cartridge orchestration",
     ),
     "sir_link": Terminal(
-        id="sir_link", engine="gemini_cli", weight=0.78,
+        id="sir_link", engine="antigravity.cli", weight=0.78,
         cost_tier="low", capability=["bridge","handoff","terminal","ui","switchboard"],
         probe_port=0, notes="Sir Link — handshake coordinator, switchboard ATC",
     ),
@@ -172,7 +172,7 @@ async def _probe_terminal(t: Terminal) -> None:
         gideon_py = CAMELOT_HOME / "03_VAULT" / "training" / "configs" / "knights" / "sir_gideon.py"
         t.status     = "live" if gideon_py.exists() else "dark"
         t.latency_ms = 0.0
-    elif t.engine in ("gemini_cli", "openai_codex", "open_source", "antigravity", "kimi_cli"):
+    elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli"):
         t.status     = "assumed_live"
         t.latency_ms = 0.0
     elif t.engine == "hermes_cli":

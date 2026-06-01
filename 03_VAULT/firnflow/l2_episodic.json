@@ -1,0 +1,22 @@
+{
+  "l2_doc": {
+    "value": "FirnFlow L2 episodic memory with LanceDB fallback",
+    "ts": "2026-06-01T18:55:05.762975+00:00"
+  },
+  "cartridge_state::DEFAULT": {
+    "value": "{\"name\": \"DEFAULT\", \"title\": \"Round Table Baseline\", \"lead_knight\": \"sir_boris\", \"activated_at\": 1780343483.9503214, \"working_context\": {}}",
+    "ts": "2026-06-01T19:51:23.966321+00:00"
+  },
+  "cartridge_state::ANT": {
+    "value": "{\"name\": \"ANT\", \"title\": \"Vortex Datalink\", \"lead_knight\": \"lady_apis\", \"activated_at\": 1780343483.9736676, \"working_context\": {\"last_query\": \"notebook sync\", \"forage_depth\": 3}}",
+    "ts": "2026-06-01T19:51:23.981498+00:00"
+  },
+  "cartridge_state::BEAVER": {
+    "value": "{\"name\": \"BEAVER\", \"title\": \"Tectonic Plate\", \"lead_knight\": \"sir_forge\", \"activated_at\": 1780343483.9901555, \"working_context\": {}}",
+    "ts": "2026-06-01T19:51:23.990363+00:00"
+  },
+  "knight_sleep::sir_helio": {
+    "value": "{\"last_task\": \"1M context map\", \"ctx_tokens\": 4200}",
+    "ts": "2026-06-01T19:55:01.920838+00:00"
+  }
+}

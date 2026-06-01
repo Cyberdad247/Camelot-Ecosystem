@@ -139,7 +139,7 @@ function handleLogin() {
     const email = document.getElementById('authEmail').value;
     const pass = document.getElementById('authPassword').value;
     const code = document.getElementById('auth2FA').value;
-    const ghToken = "ghp_mock_token_for_demo"; 
+    const ghToken = ""; // Insert GH token dynamically
     
     chrome.runtime.sendMessage({ 
         action: "AUTH_LOGIN", 
