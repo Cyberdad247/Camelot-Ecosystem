@@ -206,3 +206,27 @@ python -m squires.colony triage . --auto-approve
 Every file write is logged to `PROVENANCE_LEDGER.md` via the PostToolUse hook.
 Format: `| ID | Task | Author | Status | Notes |`
 Do not edit the ledger manually.
+
+---
+
+## v1000-EXCALIBUR-A Control Surfaces
+
+Self-triaging, typed control plane. Route new intents through the gate and honor
+its HITL tier. Each module self-tests via
+`.venv\Scripts\python.exe -m control_plane.<module> --test`.
+
+| Module | Purpose |
+|---|---|
+| `anya_gate.py` | APEE v7.0 — `AnyaGate().triage(intent)` -> `TriageScore` (risk_entropy, hitl_tier AUTO/PROMPT/HUMAN_GATE, lane, shatterpoints) |
+| `factory_lane.py` | Typed `FactoryJob` + `UsageLimits` + `ToolReturn` + `FileStatePersistence` |
+| `soul_oversight.py` | Iron Gate v2 `pre_execute(job)` — HUMAN_GATE needs `CAMELOT_DASHBOARD_OPERATOR_TOKEN` or suspends; Z3 gates git/state-machine mutations |
+| `colmad.py` | ColMAD 3-persona crucible (2/3 consensus) for CRITICAL/HIGH architecture |
+| `firnflow.py` | Tiered memory L1/L2/L3 + nuKG_Crystals |
+| `cartridge_manager.py` | Scabbard Protocol cartridge hot-swap (ANT/BEAVER/SPIDER/OCTOPUS) |
+| `knight_agent.py` | Typed `KnightCapability` (SkillGraph S1-S5, OCEAN, air-gap) |
+| `inspira_metrics.py` | Live factory/HITL/colony/crystal/cost telemetry |
+
+Rust kernels: `01_KERNEL/core/aegis_shield` (`cargo check`) and
+`01_KERNEL/reasoning/ouroboros_engine` (`cargo test` — real BitNet b1.58 +
+selective-scan SSM). Rust 1.96 installed. **Never auto-approve a HUMAN_GATE job.**
+Cloud Brain of record: NotebookLM `Camelot-OS v.1000.0-EXCALIBUR-A`.

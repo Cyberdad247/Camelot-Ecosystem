@@ -38,3 +38,17 @@ brand construct.
 - Do not claim a model has detected hidden chain-of-thought tokens or private engine headers.
 - Infer the active harness only from visible environment context and user-provided tool surface.
 - If routing is ambiguous, use the safest local Camelot role: SIR_SENTINEL for security, SIR_ALEX for planning, SIR_FORGE for implementation.
+
+## Typed Knight Contracts (v1000-EXCALIBUR-A)
+
+Knight capabilities are now typed and loaded from the live `FOUNDRY_COUNCIL`
+roster via `control_plane/knight_agent.py` (`KnightCapability`): each knight
+carries a VIDENEPTUS SkillGraph tier (S1 atomic .. S5 meta-logic), primary +
+fallback model, OCEAN persona profile, and an `requires_air_gap` flag. Idle
+knights serialize to FirnFlow L2 (Crystalline Sleep) and wake on demand.
+
+LATTICE_SIGNAL model bindings (Gemini-primary, all free via CLIProxy OAuth):
+SIR_BORIS/SIR_ALEX/SIR_SENTINEL = gemini-3-pro-preview; SIR_HELIO/LADY_APIS/
+SIR_MNEMO = gemini-3.1-pro-preview; SIR_CODEX = gpt-5.4; SIR_FORGE = qwen2.5-
+coder:3b (local); SIR_GHOST = qwen3:8b (air-gapped, never cloud). Treat
+`requires_air_gap=True` knights as local-only — never route them to a cloud model.
