@@ -3,7 +3,7 @@
 
 The High Knights of Camelot are Transcendent entities, each embodying a core pillar of the OS. They are organized into seven orders plus the Foundry Council and Squire Colony, overseeing the neural and creative realms of the Singularity Lattice.
 
-**Total Entities:** 4 Sovereign + 31 Knights + 4 Paladins + 5 Foundry + 8 Squires = **52 agents**
+**Total Entities:** 4 Sovereign + 32 Knights + 4 Paladins + 5 Foundry + 8 Squires = **53 agents**
 
 ---
 
@@ -38,7 +38,8 @@ The High Knights of Camelot are Transcendent entities, each embodying a core pil
 
 ### Order IV: The Builders (Execution)
 *   **[Sir Syntax](Engineering/Sir_Syntax.md)**: Code Architect. Master of TypeScript, Next.js, and Zod schemas.
-*   **[Sir ForgeMaster](Engineering/Sir_ForgeMaster.md)**: The Agentic Smith. Master of Declarative Orchestration.
+*   **[SIR_FORGE_MASTER](Engineering/SIR_FORGE_MASTER.md)**: The Sovereign Forge (L4). AgentForge Orchestrator. Commands swarm pipelines via `//FORGE_SWARM` + `//SYNC_PHIAL`. KNIGHT_LOCKED_AND_IMMORTALIZED.
+*   **[Sir ForgeMaster](Engineering/Sir_ForgeMaster.md)**: ~~SUPERSEDED_STUB~~ — redirects to SIR_FORGE_MASTER. Kinetic L2 TDD/AST ops retained.
 *   **[Sir Stitch](Engineering/Sir_Stitch.md)**: Interface Architect. Transforms intent into functional UI/UX.
 *   **[Sir Alchemist](Engineering/Sir_Alchemist.md)**: Optimization Smith. Transmuter of code into pure efficiency.
 *   **[Baron Vaelen](Engineering/Baron_Vaelen.md)**: The Iron Industrialist. Infrastructure hardening and delivery velocity (v2.0).

@@ -57,7 +57,7 @@ INTENT_KEYWORDS: dict[IntentCategory, list[str]] = {
 
 # Preferred terminal IDs per category — ordered by priority (first = most preferred)
 INTENT_TERMINAL_MAP: dict[IntentCategory, list[str]] = {
-    IntentCategory.FORGE:    ["sir_boris", "sir_forge", "sir_gravity", "sir_helio"],
+    IntentCategory.FORGE:    ["sir_boris", "sir_forge_master", "sir_forge", "sir_gravity", "sir_helio"],
     IntentCategory.CODE:     ["sir_boris", "sir_codex", "sir_hermes", "sir_forge"],
     IntentCategory.RESEARCH: ["sir_helio", "sir_kimi", "sir_mnemo", "sir_boris"],
     IntentCategory.MEMORY:   ["sir_mnemo", "sir_helio", "sir_boris"],
@@ -78,6 +78,8 @@ KEYWORD_ROUTES: dict[str, str] = {
     "bridge": "sir_link", "ui": "sir_link",
     "memory": "sir_mnemo", "archive": "sir_mnemo", "recall": "sir_mnemo",
     "technical": "sir_forge", "code_gen": "sir_forge",
+    "agentforge": "sir_forge_master", "swarm_forge": "sir_forge_master", "forge_swarm": "sir_forge_master",
+    "agent_spawn": "sir_forge_master", "phial_sync": "sir_forge_master", "swarm_orchestrate": "sir_forge_master",
     "security_review": "sir_sentinel", "audit": "sir_sentinel",
     "velocity": "sir_codex", "prototype": "sir_codex",
     "1m_context": "sir_helio", "cloud_burst": "sir_helio",
