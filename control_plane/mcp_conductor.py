@@ -128,6 +128,19 @@ def _tools() -> list[dict]:
                 "required": ["terminal_ids", "prompt"],
             },
         },
+        {
+            "name": "audit_colony",
+            "description": (
+                "Run the GIDEON forensic colony audit (GHOST scan) on a path and "
+                "return the secrets/TODO/risk summary. EXCALIBUR_A_QNF Phase 5."
+            ),
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "path": {"type": "string", "description": "Path to audit (default: 01_KERNEL)"},
+                },
+            },
+        },
     ]
 
     # Per-terminal direct ask tools
@@ -184,6 +197,13 @@ async def _call(name: str, args: dict) -> str:
             sections.append(f"=== {tid} ===\n{text}")
         return "\n\n".join(sections)
 
+    elif name in ("ask_sir_mnemo", "ask_sir_gideon", "audit_colony"):
+        # EXCALIBUR_A_QNF Phase 5: dedicated implementations (not Bifrost passthrough)
+        if name == "ask_sir_mnemo":
+            return await _ask_mnemo(args.get("prompt", ""), args.get("notebook_id"))
+        # sir_gideon / audit_colony both run the forensic colony audit
+        return await _audit_colony(args.get("path", "01_KERNEL"))
+
     elif name.startswith("ask_"):
         tid = name[4:]
         parts: list[str] = []
@@ -198,6 +218,43 @@ async def _call(name: str, args: dict) -> str:
 
     else:
         return f"[MCP] Unknown tool: {name}"
+
+
+# ── sir_mnemo: NotebookLM Cloud Brain (Phase 5, Task 5.4) ───────────────────────
+
+async def _ask_mnemo(prompt: str, notebook_id: str | None = None) -> str:
+    """Query the NotebookLM Cloud Brain directly. Auth from ~/.notebooklm."""
+    try:
+        from notebooklm import NotebookLMClient
+    except ImportError:
+        return "[sir_mnemo] notebooklm-py not installed in this environment."
+    if not prompt.strip():
+        return "[sir_mnemo] empty prompt."
+    # Default to the living notebook alias if none specified
+    nb = notebook_id or "a9cf586e-1971-4959-bb97-cdcd37257ebb"
+    try:
+        client = await NotebookLMClient.from_storage()
+        async with client:
+            result = await client.chat.ask(nb, prompt)
+            return result.answer or "[sir_mnemo] empty response."
+    except Exception as exc:
+        return f"[sir_mnemo] Cloud Brain error: {exc} (run 'notebooklm login' to refresh)"
+
+
+# ── sir_gideon: forensic colony audit (Phase 5, Task 5.3) ───────────────────────
+
+async def _audit_colony(path: str = "01_KERNEL") -> str:
+    """Run the GHOST forensic audit and return a structured summary."""
+    proc = await asyncio.create_subprocess_exec(
+        sys.executable, "-m", "squires.colony", "ghost", path,
+        stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT,
+    )
+    out, _ = await proc.communicate()
+    text = out.decode("utf-8", errors="replace")
+    # Extract the summary line
+    summary = next((ln for ln in text.splitlines() if ln.strip().startswith("Summary:")),
+                   "Summary: (not found)")
+    return f"[sir_gideon] GHOST audit of {path}\n{summary}"
 
 
 # ── MCP dispatch ──────────────────────────────────────────────────────────────

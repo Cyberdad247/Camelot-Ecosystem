@@ -6273,4 +6273,62 @@ ender_hud() — inserted panel between Sir Link and Anya/OS Health rows
 
 | 1327 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=256270s tasks=7 fail=0 probes=4/9 cells=5 |
 | 1328 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=256870s tasks=7 fail=0 probes=4/9 cells=5 |
-| 1329 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=257470s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1329 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=257470s tasks=7 fail=0 probes=4/9 cells=5 || 2026-06-01T19:57:13.652288+00:00 | ANYA_OMEGA | EXCALIBUR_A_QNF Phase 5: cartridge_manager.py (6/6 PASS) Scabbard Protocol hot-swap ANT/BEAVER/SPIDER/OCTOPUS | DONE |
+| 2026-06-01T19:57:13.652288+00:00 | SIR_ALEX | EXCALIBUR_A_QNF Phase 5: knight_agent.py (10/10 PASS) typed KnightCapability from FOUNDRY_COUNCIL, SkillGraph S1-S5, OCEAN PersRubrics, Crystalline Sleep | DONE |
+| 2026-06-01T19:57:13.652288+00:00 | LADY_M | EXCALIBUR_A_QNF Phase 5: mcp_conductor sir_gideon(audit_colony) + sir_mnemo(NotebookLM) wired - LIVE Cloud Brain query verified | DONE |
+
+| 1330 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=258070s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1331 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=258670s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1332 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=259270s tasks=7 fail=0 probes=4/9 cells=5 || 2026-06-01T20:28:02.702904+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-01T20:28:02.709820+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-01T20:28:03.524205+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-01T20:28:03.524823+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 1333 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=259870s tasks=7 fail=0 probes=4/9 cells=5 || 2026-06-01T20:31:43.516413+00:00 | SIR_OCTAVIAN | EXCALIBUR_A_QNF Phase 4: soul_oversight.py Iron Gate v2 pre_execute (7/7 PASS) - 3-tier HITL, Z3 verify (live), FileStatePersistence suspend; FIXED pre-existing SyntaxError (file never imported before) | DONE |
+| 2026-06-01T20:31:43.516413+00:00 | MERLIN_OMEGA | EXCALIBUR_A_QNF Phase 4: colmad.py Think Tank Omega crucible (7/7 PASS) - 3-persona adversarial consensus, 2/3 APPROVED else HUMAN_GATE | DONE |
+| 2026-06-01T20:31:43.516413+00:00 | SIR_LUKAS | EXCALIBUR_A_QNF Phase 6: affinity routing verified (3/3, pre-existing+better); inspira_metrics.py (6/6 PASS) live telemetry dashboard - lanes/HITL/colony/crystals/cost | DONE |
+| 2026-06-01T20:31:43.516413+00:00 | SIR_BORIS | EXCALIBUR_A_QNF GOAL CONCLUSION: Phases 1-6 COMPLETE (51+ tests pass, 7 new/fixed modules). Phases 7-8 BLOCKED: no Rust toolchain (cargo/rustc not installed). Binary rebuild deferred. | CONCLUDED |
+
+| 1334 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=260470s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1335 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=261070s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1336 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=261670s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1337 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=262271s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1338 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=262871s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1339 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=263471s tasks=7 fail=0 probes=4/9 cells=5 || 2026-06-01T21:32:26.528430+00:00 | SIR_FORGE | Rust toolchain installed: rustup + rustc/cargo 1.96.0 (user-level ~/.cargo); MSVC linker (VS18 BuildTools) auto-detected - cargo test links OK | DONE |
+| 2026-06-01T21:32:26.528430+00:00 | SIR_LUKAS | EXCALIBUR_A_QNF Phase 7: AegisShield cargo check PASS (17.2s) - bloom_router/kv_event_gate/event_publisher/prompt_canon/secure_trust/sovereign_recovery compile clean | DONE |
+| 2026-06-01T21:32:26.528430+00:00 | MERLIN_OMEGA | EXCALIBUR_A_QNF Phase 7: Ouroboros OMEGA-PATCH - real BitNet b1.58 absmean quantizer + real selective-scan SSM (replaced identity stubs); 12/12 cargo tests PASS (8 new + 4 existing) | DONE |
+
+| 1340 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=264071s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1341 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=264671s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1342 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=265271s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1343 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=265871s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1344 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=266471s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1345 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=267071s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1346 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=267671s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1347 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=268271s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1348 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=268871s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1349 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=269471s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1350 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=270071s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1351 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=270671s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1352 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=271271s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1353 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=271871s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1354 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=272471s tasks=7 fail=0 probes=4/9 cells=5 || 2026-06-02T00:04:01.459985+00:00 | SIR_FORGE | EXCALIBUR_A_QNF Phase 8: camelot.exe REBUILT 16.36MB (was 15.45) PyInstaller 6.20.0 clean. SHA256:55E6C2666E9BB9FB. Backup at .bak | SHIPPED |
+| 2026-06-02T00:04:01.459985+00:00 | SIR_OCTAVIAN | Phase 8 smoke: --version exit0, --list exit0 (LATTICE_SIGNAL gemini-primary), --help exit0. No JSONDecodeError. NOTE: --json cockpit refresh N/A to portable binary (control-plane cmd); version string still v400.1.0 (constant not bumped) | VERIFIED |
+| 2026-06-02T00:04:01.459985+00:00 | SIR_BORIS | EXCALIBUR_A_QNF GOAL CONCLUDED: Phases 1-8 COMPLETE. 75+ Python tests + 12 Rust tests pass; Rust toolchain installed; AegisShield+Ouroboros compile; binary shipped & smoke-verified. | CONCLUDED |
+
+| 1355 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=273071s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1356 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=273671s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1357 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=274271s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1358 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=274871s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1359 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=275471s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1360 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=276071s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1361 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=276671s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1362 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=277271s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1363 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=277871s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1364 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=278471s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1365 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=279071s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1366 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=279671s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1367 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=280271s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1368 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=280871s tasks=7 fail=0 probes=4/9 cells=5 || 2026-06-02T02:27:27.053401+00:00 | SIR_FORGE | EXCALIBUR_A_QNF: version bumped v400.1.0 -> v1000-EXCALIBUR-A (camelot_portable.py:39), rebuilt 16.36MB exit0. --version confirms new string. SHA256:2ECDB03C97156E50 | SHIPPED |
+
+| 1369 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=281471s tasks=7 fail=0 probes=4/9 cells=5 |

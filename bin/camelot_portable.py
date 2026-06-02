@@ -36,7 +36,7 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-__version__ = "400.1.0"
+__version__ = "1000-EXCALIBUR-A"
 _WARP_VER   = "1.0.0"
 
 # ── Load OmniRoute config ─────────────────────────────────────────────────────
