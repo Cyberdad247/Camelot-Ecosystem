@@ -155,79 +155,35 @@
 ## PHASE 2 — SPRINT 2a: Installer Scripts
 > **Knight:** SIR_FORGE + SIR_HELIO
 
-- [ ] **T-33** Create `scripts/install.sh` (Linux/Mac)
-  - Detect Python ≥ 3.11 (offer `brew install python` on Mac, `apt install python3.11` on Linux)
-  - Detect uv (`which uv`) → use if present; else pip
-  - Install: `pip install --user .` from CAMELOT_OS root OR `pip install camelot-os` from PyPI
-  - Run `camelot configure` post-install
-  - Add `~/.local/bin` to PATH in `.bashrc`/`.zshrc`/`.profile`
-  - Shell completion: `camelot completion bash >> ~/.bash_completion`
-  - Final message: `echo "⚔  Camelot is online. Type 'camelot' to warp in."`
-
-- [ ] **T-34** Create `scripts/install.ps1` (Windows)
-  - Check Python ≥ 3.11 (`python --version`); if missing, suggest `winget install Python.Python.3.11`
-  - pip install + camelot configure
-  - Register PATH via `[System.Environment]::SetEnvironmentVariable(..., "User")`
-  - Add to PowerShell profile: `Set-Alias ai camelot`
-  - Final message: `Write-Host "⚔  Camelot is online. Type 'camelot' to warp in."`
-
-- [ ] **T-35** Create `scripts/install_portable.py` (zero deps, Python stdlib only)
-  - Downloads camelot binary from GitHub releases (or local path for thumbdrive)
-  - Extracts, makes executable, runs `camelot configure`
-  - Uses only: `urllib`, `zipfile`, `tarfile`, `subprocess`, `pathlib`
-
----
-
-## PHASE 2 — SPRINT 2b: PyInstaller Portable Binary
-> **Knight:** SIR_FORGE
-> **Risk Score:** MEDIUM (build system; test on each platform)
-
-- [ ] **T-36** Create `scripts/build_portable.py`
-  - List all embedded assets (CLAUDE.md, omniroute.json, cartridges, skills)
-  - Generate PyInstaller spec file dynamically
-  - Run: `pyinstaller --onefile --name camelot ...` via subprocess
-
-- [ ] **T-37** Create `camelot.spec` (PyInstaller spec template)
-  - `datas` section: embed all EMBEDDED_ASSETS (see blueprint Component 5)
-  - `excludes`: torch, transformers, sklearn, cv2 (keep binary ≤50MB)
-  - `upx=True` for compression
-
-- [ ] **T-38** `bin/camelot.py` — add `_MEIPASS` asset resolution
-  - `_ASSET_ROOT = sys._MEIPASS if hasattr(sys, "_MEIPASS") else _REPO`
-  - All asset reads use `_ASSET_ROOT` fallback
-
+- [x] **T-33** Create `scripts/install.sh` (Linux/Mac) ✅ 231 lines — full implementation
+- [x] **T-34** Create `scripts/install.ps1` (Windows) ✅ 289 lines — full implementation
+- [x] **T-35** Create `scripts/install_portable.py` (zero deps, Python stdlib only) ✅ 354 lines
+- [x] **T-36** Create `scripts/build_portable.py` ✅ 180 lines
+- [x] **T-37** Create `camelot.spec` (PyInstaller spec template) ✅ exists
+- [x] **T-38** `bin/camelot.py` — `_MEIPASS` asset resolution ✅ lines 30-34
 - [ ] **T-39** Build + test Windows binary: `python scripts/build_portable.py --platform windows`
-  - Output: `dist/camelot.exe`
-  - Test: copy to temp dir with no CAMELOT_OS_HOME → `./camelot.exe --list` should work
-
-- [ ] **T-40** Build + test Linux binary (if WSL or GitHub Actions available)
-  - Output: `dist/camelot`
-
-- [ ] **T-41** Create `scripts/sign_windows.ps1` (optional: code signing)
-  - `signtool sign /fd sha256 dist/camelot.exe` — reduces Defender flags
+  - Output: `dist/camelot.exe` — **DEFERRED** (requires PyInstaller in venv)
+- [ ] **T-40** Build + test Linux binary (**DEFERRED** — needs WSL/CI)
+- [ ] **T-41** Create `scripts/sign_windows.ps1` (optional) — **DEFERRED** (requires code-signing cert)
 
 ---
 
 ## PHASE 3 — SPRINT 3: Shell Integration + Tab Completion
 > **Knight:** SIR_HELIO
 
-- [ ] **T-42** `bin/camelot.py` — add `completion` sub-command
-  - `camelot completion bash` → print bash completion script
-  - `camelot completion zsh` → print zsh completion
-  - `camelot completion fish` → print fish completion
-  - `camelot completion powershell` → print PS Register-ArgumentCompleter block
+- [x] **T-42** `bin/camelot.py` — `completion` sub-command ✅ 2026-06-05
+  - `camelot completion bash` → emits `bin/camelot_completion_bash.sh`
+  - `camelot completion zsh` → same bash script (compatible)
+  - `camelot completion fish` → fish-native complete calls
+  - `camelot completion powershell` → Register-ArgumentCompleter block
 
-- [ ] **T-43** Create `bin/camelot_completion_bash.sh` — bash completion template
-  - Complete: sub-commands, `--knight` values, `--tier` values, `--system` files
+- [x] **T-43** Create `bin/camelot_completion_bash.sh` ✅ 2026-06-05
+  - Completes: subcommands, `--knight` (14 knights), `--tier` (T0-T3), `--system` (files)
+  - Registers for both `camelot` and `ai` aliases
 
-- [ ] **T-44** `bin/camelot.py` — add `shell-setup` sub-command
-  - Detects current shell (`$SHELL` env var; PowerShell if `$TERM_PROGRAM` == pwsh)
-  - Writes alias + completion to appropriate profile file
-  - Backs up profile before editing (ANTIGRAVITY pattern)
+- [x] **T-44** `bin/camelot.py` — `shell-setup` sub-command ✅ exists at line 114 + 202
 
-- [ ] **T-45** PS1/prompt integration (optional — `--prompt-integration` flag)
-  - Bash: `PS1="[camelot:\$(camelot status --knight-short 2>/dev/null)] $PS1"`
-  - Shows current active knight in shell prompt
+- [ ] **T-45** PS1/prompt integration (optional `--prompt-integration` flag) — **DEFERRED**
 
 ---
 
@@ -235,22 +191,11 @@
 > **Knight:** SIR_SENTINEL
 > **Risk Score:** MEDIUM
 
-- [ ] **T-46** Integrate `keyring` library into `scan_api_keys()`
-  - Store discovered keys in OS keyring (not config.json) if user consents
-  - `camelot configure --secure` → use keyring; `--no-keyring` → env vars only
-
-- [ ] **T-47** `camelot_configure.py` — never log API key values
-  - config.json stores: `anthropic_key_present: true` (not the key value)
-  - Key values only in memory during session; cleared on exit
-
-- [ ] **T-48** Thumbdrive paranoia mode
-  - `--portable` → disable all host filesystem writes beyond `./camelot_config.json`
-  - Prompt user: "Store API keys for this session only? (not persisted to drive)"
-
-- [ ] **T-49** `.gitignore` additions
-  - `~/.camelot/` (ensure not in repo)
-  - `dist/` (binaries)
-  - `camelot_config.json` (portable config)
+- [ ] **T-46** Integrate `keyring` library into `scan_api_keys()` — **DEFERRED** (optional)
+- [x] **T-47** `camelot_configure.py` — never log API key values ✅
+  - `scan_api_keys()` returns presence booleans only (`anthropic_key_present: true`)
+- [x] **T-48** Thumbdrive paranoia mode ✅ — `detect_portable()` in camelot_configure.py line 213
+- [x] **T-49** `.gitignore` additions ✅ — `dist/`, `camelot_config.json` present
 
 ---
 
