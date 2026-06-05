@@ -1666,6 +1666,11 @@ def _build_parser() -> argparse.ArgumentParser:
     codex_sync = codex_sub.add_parser("sync", help="Refresh Codex artifact and trigger Cloud Brain sync")
     codex_sync.add_argument("--actor", default=CODEX_DEFAULT_ACTOR)
 
+    shadow = sub.add_parser("shadow", help="Shadow Veil — fingerprint-less defense pipeline status")
+    shadow_sub = shadow.add_subparsers(dest="shadow_command", required=True)
+    shadow_status_p = shadow_sub.add_parser("status", help="Show Shadow Veil pipeline status")
+    shadow_status_p.add_argument("--scan", action="store_true", help="Run a live Heimdall scan before reporting")
+
     nano_swarm = sub.add_parser("nano-swarm", help="Inspect promoted UKG nano-swarm runtime state")
     nano_swarm_sub = nano_swarm.add_subparsers(dest="nano_swarm_command", required=True)
     nano_swarm_sub.add_parser("status", help="Refresh and show promoted nano-swarm runtime status")
@@ -2416,6 +2421,38 @@ excalibur_health_url: "https://replace-me.modal.run"
             )
         _log_run(output)
         _emit(output, json_mode=args.json, title="Codex Integration")
+        return 0
+
+    if args.command == "shadow":
+        import importlib.util as _shadow_ilu
+        _shadow_spec = _shadow_ilu.spec_from_file_location(
+            "shadow_pipeline",
+            CAMELOT_HOME / "01_KERNEL/iron_gate/DEFENSE_GRID/shadow_veil/shadow_pipeline.py",
+        )
+        _shadow_mod = _shadow_ilu.module_from_spec(_shadow_spec)
+        sys.modules["shadow_pipeline"] = _shadow_mod
+        _shadow_spec.loader.exec_module(_shadow_mod)
+        sv = _shadow_mod.ShadowVeil(repo_root=CAMELOT_HOME, hermes_enabled=False)
+        if getattr(args, "scan", False):
+            st = sv.scan_once()
+        else:
+            st = sv.status()
+        output = {
+            "shadow_veil": {
+                "heimdall_ok": st.heimdall_ok,
+                "nemesis_ok": st.nemesis_ok,
+                "hermes_ok": st.hermes_ok,
+                "vector_count": st.vector_count,
+                "critical_count": st.critical_count,
+                "threats_detected": st.threats_detected,
+                "auto_responses": st.auto_responses,
+                "hitl_pending": st.hitl_pending,
+                "last_scan_at": st.last_scan_at,
+                "last_threat_at": st.last_threat_at,
+                "active": st.active,
+            }
+        }
+        _emit(output, json_mode=args.json, title="Shadow Veil Status")
         return 0
 
     if args.command == "nano-swarm":
