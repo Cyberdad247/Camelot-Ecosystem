@@ -63,6 +63,9 @@ logs/
 
 # Camelot generated runtime state
 .hive/context/
+03_VAULT/runtime_state/nano_swarm_dry_runs/
+03_VAULT/runtime_state/nano_swarm_generated/
+03_VAULT/runtime_state/nano_swarm_supervisor_logs/
 03_VAULT/runtime_state/sentinel_forensic_report_latest.json
 03_VAULT/runtime_state/sentinel_integrity_baseline.json
 bin/interceptor.py

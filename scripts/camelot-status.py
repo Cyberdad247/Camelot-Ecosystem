@@ -22,6 +22,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "03_VAULT" / "training" / "configs"))
 sys.path.insert(0, str(ROOT / "control_plane"))
 
@@ -96,6 +97,22 @@ token = _read_bifrost_token()
 if token:
     sidecar_status = _http_status("http://127.0.0.1:8011/v1/bifrost/status", token=token)
     check("Bifrost Sidecar auth", sidecar_status == 200, f"/v1/bifrost/status={sidecar_status}", warn_only=True)
+try:
+    from control_plane.nano_swarm_runtime import write_runtime_status
+
+    nano_swarm_status = write_runtime_status()
+    check(
+        "Nano Swarm Runtime",
+        bool(nano_swarm_status.get("runtime_ready")),
+        (
+            f"{nano_swarm_status.get('status')} "
+            f"nodes={nano_swarm_status.get('promoted_count')}/{nano_swarm_status.get('node_count')} "
+            f"formal_gate={nano_swarm_status.get('formal_gate_status')}"
+        ),
+        warn_only=True,
+    )
+except Exception as e:
+    check("Nano Swarm Runtime", False, str(e), warn_only=True)
 
 section("P0 — Brain Directory + GIDEON + RBAC")
 skills_dir = ROOT / ".hive" / "skills"

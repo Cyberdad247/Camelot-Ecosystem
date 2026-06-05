@@ -48,6 +48,10 @@ from .microcubed import (
     status as microcubed_status,
     teardown_house,
 )
+from .nano_swarm_runtime import (
+    supervise_nodes as supervise_nano_swarm_nodes,
+    write_runtime_status as write_nano_swarm_runtime_status,
+)
 from .provenance import ProvenanceManager, VerificationRun
 
 def _detect_home() -> Path:
@@ -116,6 +120,8 @@ HELP_LINES = [
     "codex status",
     "codex integrate [--actor <name>]",
     "codex sync",
+    "nano-swarm status",
+    "nano-swarm supervise <status|start|stop|restart> [--node <name>]",
     "microcubed status",
     "microcubed plan \"objective\" --knight sir_forge",
     "microcubed forge \"objective\" --knight sir_forge [--queue]",
@@ -1663,6 +1669,13 @@ def _build_parser() -> argparse.ArgumentParser:
     codex_sync = codex_sub.add_parser("sync", help="Refresh Codex artifact and trigger Cloud Brain sync")
     codex_sync.add_argument("--actor", default=CODEX_DEFAULT_ACTOR)
 
+    nano_swarm = sub.add_parser("nano-swarm", help="Inspect promoted UKG nano-swarm runtime state")
+    nano_swarm_sub = nano_swarm.add_subparsers(dest="nano_swarm_command", required=True)
+    nano_swarm_sub.add_parser("status", help="Refresh and show promoted nano-swarm runtime status")
+    nano_supervise = nano_swarm_sub.add_parser("supervise", help="Manage promoted nano-swarm service processes")
+    nano_supervise.add_argument("supervise_action", choices=("status", "start", "stop", "restart"))
+    nano_supervise.add_argument("--node", default=None, help="Limit action to one node")
+
     microcubed = sub.add_parser("microcubed", help="Manage Microcubed SmolVM knight task houses")
     microcubed_sub = microcubed.add_subparsers(dest="microcubed_command", required=True)
     microcubed_sub.add_parser("status", help="Show Microcubed houses and latest contract")
@@ -1771,6 +1784,7 @@ def main() -> int:
         "evolve",
         "team",
         "codex",
+        "nano-swarm",
         "microcubed",
         "gemini-ext",
         "scripts",
@@ -2406,6 +2420,16 @@ excalibur_health_url: "https://replace-me.modal.run"
         _log_run(output)
         _emit(output, json_mode=args.json, title="Codex Integration")
         return 0
+
+    if args.command == "nano-swarm":
+        if args.nano_swarm_command == "status":
+            output = write_nano_swarm_runtime_status()
+            success = bool(output.get("runtime_ready"))
+        else:
+            output = supervise_nano_swarm_nodes(args.supervise_action, node_name=args.node)
+            success = output.get("status") != "SUPERVISOR_ERROR"
+        _emit(output, json_mode=args.json, title="Nano Swarm Runtime")
+        return 0 if success else 2
 
     if args.command == "microcubed":
         if args.microcubed_command == "status":

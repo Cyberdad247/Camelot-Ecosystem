@@ -58,9 +58,9 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         probe_port=8080, notes="Claude Code — CLIProxy gateway",
     ),
     "sir_helio": Terminal(
-        id="sir_helio", engine="antigravity.cli", weight=0.90,
-        cost_tier="low", capability=["context","research","burst","1m_token"],
-        probe_port=0, notes="Gemini CLI — 1M+ context mapping",
+        id="sir_helio", engine="pydantic_ai", weight=0.95,
+        cost_tier="low", capability=["context","research","burst","1m_token","pydantic_ai"],
+        probe_port=0, notes="Sir Helio v400 — Pydantic AI Context Lord",
     ),
     "sir_alex": Terminal(
         id="sir_alex", engine="claude_code", weight=0.88,

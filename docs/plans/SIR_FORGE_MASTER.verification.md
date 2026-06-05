@@ -134,13 +134,13 @@ git log --oneline -5
 
 | Gate | Description | Status |
 |------|-------------|--------|
-| G1 | File existence & path | ⬜ |
-| G2 | Knight crystal completeness (12/12) | ⬜ |
-| G3 | Routing wired in taxonomy | ⬜ |
-| G4 | Registry consistency | ⬜ |
-| G5 | Python class integrity | ⬜ |
-| G6 | Cryptographic seal match | ⬜ |
-| G7 | Provenance ledger entry | ⬜ |
-| G8 | Git commit integrity | ⬜ |
+| G1 | File existence & path | ✅ |
+| G2 | Knight crystal completeness (12/12) | ✅ |
+| G3 | Routing wired in taxonomy | ✅ |
+| G4 | Registry consistency | ✅ |
+| G5 | Python class integrity | ✅ |
+| G6 | Cryptographic seal match | ✅ |
+| G7 | Provenance ledger entry | ✅ |
+| G8 | Git commit integrity | ✅ |
 
 **PASS threshold:** 8/8 required for `KNIGHT_LOCKED_AND_IMMORTALIZED` status.

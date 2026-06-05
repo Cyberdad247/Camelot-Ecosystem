@@ -4,7 +4,7 @@
 
 | Status Legend | |
 |---|---|
-| ⬜ PENDING | ✅ COMPLETE | 🔄 IN PROGRESS | ❌ BLOCKED |
+| ✅ COMPLETE | ✅ COMPLETE | 🔄 IN PROGRESS | ❌ BLOCKED |
 
 ---
 
