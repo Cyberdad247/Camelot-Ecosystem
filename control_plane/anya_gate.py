@@ -53,6 +53,14 @@ class TitanPrompt:
 
 
 @dataclass
+class SocratesVerdict:
+    """Northstar alignment check result (Phase 2.4 stub)."""
+    aligned: bool
+    alignment_note: str
+    northstar_check_required: bool
+
+
+@dataclass
 class ValidationResult:
     passed: bool
     issues: list[str]
@@ -153,6 +161,80 @@ _ENTITY_PATTERN = re.compile(
 
 _PRIVACY_KEYWORDS = frozenset({"secret", "private", "credential", "key", "password", "local", "air-gapped"})
 _HIGH_COMPLEXITY = frozenset({"swarm", "colony", "multi-agent", "refactor", "migrate", "architecture", "full stack"})
+
+
+def _load_rtk():
+    """Try to load the RTK shared library (control_plane/rtk/rtk.dll).
+    Returns ctypes CDLL or None if unavailable (Rust Phase 7 not yet built).
+    """
+    import ctypes, logging
+    for candidate in (
+        Path(__file__).parent / "rtk" / "rtk.dll",
+        Path(__file__).parent / "rtk.dll",
+    ):
+        if candidate.exists():
+            try:
+                lib = ctypes.CDLL(str(candidate))
+                lib.strip_context_noise.argtypes = [ctypes.c_char_p]
+                lib.strip_context_noise.restype = ctypes.c_char_p
+                return lib
+            except Exception as exc:
+                logging.warning("[RTK] load failed: %s", exc)
+    return None
+
+
+_RTK_LIB = None
+_RTK_ATTEMPTED = False
+
+
+def _stage_rtk_strip(raw: str) -> str:
+    """Stage 0: RTK strip — remove HTML/XML/markdown noise before parse.
+    Falls back to a regex-only strip if rtk.dll is not present.
+    Phase 2.2 (EXCALIBUR_A_QNF): RTK ctypes bridge.
+    """
+    global _RTK_LIB, _RTK_ATTEMPTED
+    if not _RTK_ATTEMPTED:
+        _RTK_LIB = _load_rtk()
+        _RTK_ATTEMPTED = True
+
+    if _RTK_LIB is not None:
+        try:
+            result = _RTK_LIB.strip_context_noise(raw.encode("utf-8"))
+            if result:
+                return result.decode("utf-8", errors="replace")
+        except Exception:
+            pass
+
+    # Pure-Python fallback: strip HTML tags + markdown fences
+    stripped = re.sub(r"<[^>]+>", " ", raw)
+    stripped = re.sub(r"```[^\n]*\n.*?```", " ", stripped, flags=re.DOTALL)
+    stripped = re.sub(r"\s{2,}", " ", stripped).strip()
+    return stripped
+
+
+def _stage_socrates(titan: TitanPrompt, triage: "object") -> SocratesVerdict:
+    """Stage after VALIDATE: Northstar alignment check stub (Phase 2.4).
+    For HIGH/HUMAN_GATE priority: log that alignment check is required.
+    Returns SocratesVerdict — always aligned in stub form; wired to
+    full Sir Socrates agent in a future Phase.
+    """
+    import logging
+    hitl_tier = getattr(triage, "hitl_tier", "AUTO")
+    priority = getattr(triage, "priority", "NORMAL")
+    needs_check = hitl_tier in ("HUMAN_GATE",) or priority in ("HIGH", "CRITICAL")
+    if needs_check:
+        logging.info(
+            "[SIR_SOCRATES] Northstar alignment check required — "
+            "directive=%r  priority=%s  hitl=%s",
+            titan.directive[:80],
+            priority,
+            hitl_tier,
+        )
+    return SocratesVerdict(
+        aligned=True,
+        alignment_note="stub — full Socrates agent pending Sir Socrates Knight impl",
+        northstar_check_required=needs_check,
+    )
 
 
 def _stage_parse(raw: str) -> ParseResult:
@@ -456,6 +538,7 @@ class AnyaGate:
     def process(self, raw_intent: str) -> APEEResult:
         t0 = time.perf_counter()
 
+        raw_intent = _stage_rtk_strip(raw_intent)   # Stage 0: RTK noise strip
         parse   = _stage_parse(raw_intent)
         enrich  = _stage_enrich(parse)
         titan   = _stage_compile(parse, enrich)

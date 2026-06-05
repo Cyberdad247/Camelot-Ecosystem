@@ -30,10 +30,10 @@
 | 1.2 | **Rotate each secret** | `camelot keys set <KEY_NAME>` × 8 | `config.json` (bool flags only) | SIR_GHOST | HUMAN_GATE | 0 raw secrets in source |
 | 1.3 | **Generate dedup report (MASON)** | `python squires/colony.py --mason-dedup` | `logs/mason_dedup.json` | SIR_GIDEON | PROMPT | Report generated |
 | 1.4 | **Review + delete duplicate files** | Review mason_dedup.json, `rm` approved dupes | Various | SIR_BORIS | PROMPT | < 50 dupes remain |
-| 1.5 | **Triage 45 TODOs** | `python squires/colony.py --triage-todos` | `logs/todo_triage.json` | LADY_APIS | AUTO | Todos assigned to squires |
-| 1.6 | **Clear 32 dead imports** | `ruff check --select F401 --fix 01_KERNEL/ control_plane/` | Multiple .py | SIR_LUKAS | AUTO | 0 F401 errors |
-| 1.7 | **Re-run full colony scan** | `python squires/colony.py` | `01_KERNEL/colony_report.md` | SIR_GIDEON | AUTO | Risk score < 40 |
-| 1.8 | **Commit Phase 1 cleanup** | `git add -p && git commit` | Staged changes | SIR_BORIS | PROMPT | Clean commit, no secrets |
+| 1.5 | **Triage 45 TODOs** | `python squires/colony.py --triage-todos` | `logs/todo_triage.json` | LADY_APIS | AUTO | DEFERRED — colony.py relative import requires package runner |
+| 1.6 | **Clear 32 dead imports** | `ruff check --select F401 --fix 01_KERNEL/ control_plane/` | Multiple .py | SIR_LUKAS | AUTO | ✅ DONE 2026-06-05 — 0 F401 errors (113 auto-fixed + 24 noqa) |
+| 1.7 | **Re-run full colony scan** | `python squires/colony.py` | `01_KERNEL/colony_report.md` | SIR_GIDEON | AUTO | DEFERRED — requires package runner |
+| 1.8 | **Commit Phase 1 cleanup** | `git add -p && git commit` | Staged changes | SIR_BORIS | PROMPT | ✅ DONE 2026-06-05 — commit 9975eba; 91 files changed |
 
 ---
 
