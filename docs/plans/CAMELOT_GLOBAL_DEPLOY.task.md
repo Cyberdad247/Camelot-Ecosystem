@@ -112,16 +112,16 @@
 > **Knight:** LADY_MNEMOSYNE
 > **Risk Score:** LOW (read-only; embedded fallback if files missing)
 
-- [ ] **T-25** Create `bin/camelot_context.py`
+- [x] **T-25** Create `bin/camelot_context.py` ✅ 2026-06-05
 
-- [ ] **T-26** `load_constitution()` — read `CLAUDE.md`
+- [x] **T-26** `load_constitution()` — read `CLAUDE.md` ✅
   - Try: `CAMELOT_OS_HOME/CLAUDE.md` (env var)
   - Try: `_REPO/CLAUDE.md` (relative to binary)
   - Try: embedded string (PyInstaller `_MEIPASS` asset)
   - QFT compress if > 1,500 tokens: keep `## TITANIUM LAWS`, `## IDENTITY`, `## RUNIC COMMANDS`,
     `## KNIGHT DISPATCH` sections; strip tables to headers + first/last rows
 
-- [ ] **T-27** `detect_cartridge(cwd)` — scan working directory
+- [x] **T-27** `detect_cartridge(cwd)` — scan working directory ✅
   - `package.json` → `nextjs.yaml`
   - `Cargo.toml` → `rust-kinetic.yaml`
   - `pyproject.toml` / `setup.py` / `requirements.txt` → `python-api.yaml`
@@ -129,23 +129,26 @@
   - `Makefile` + `*.c`/`*.cpp` → custom (use `reasoning.yaml` as default)
   - No match → `reasoning.yaml`
 
-- [ ] **T-28** `load_cartridge(name)` — read YAML cartridge file
+- [x] **T-28** `load_cartridge(name)` — read YAML cartridge file ✅
   - Try repo path → Try `_MEIPASS` embedded → Return `""` if not found (non-blocking)
   - Truncate to 300 tokens if larger
 
-- [ ] **T-29** `load_knight_persona(knight_id)` — extract persona block from `03_VAULT/Knights/README.md`
-  - Simple: return static 5-line identity block per knight (hardcoded dict, ~100 tokens each)
+- [x] **T-29** `load_knight_persona(knight_id)` — extract persona block from `03_VAULT/Knights/README.md` ✅
+  - Static 14-knight dict (sir_boris, sir_alex, sir_sentinel, sir_mnemo, sir_codex, sir_helio,
+    sir_link, sir_liberte, sir_forge, sir_ghost, sir_forge_master, sir_gideon, sir_octavian, lady_apis)
 
-- [ ] **T-30** `load_ukg_anchor()` — read `toon_ukg_full.json`, extract top 5 nodes by weight
-  - Return TOON-compressed anchor block ≤500 tokens
-  - Skip silently if file not found
+- [x] **T-30** `load_ukg_anchor()` — read `toon_ukg_full.json`, extract top 5 nodes by weight ✅
+  - Returns TOON-compressed anchor block ≤500 tokens (entity + OCEAN + culture + rune + code_rules)
+  - Falls back to nukg_crystals.json top-5 if toon missing
+  - Skip silently if neither file found
 
-- [ ] **T-31** `build_system_prompt(knight_id, cwd, verbose=False)` — assembles final prompt
-  - Merge layers 1-4 with section headers and token budget enforcement
-  - If `verbose`: print token count per layer to stderr
+- [x] **T-31** `build_system_prompt(knight_id, cwd, verbose=False)` — assembles final prompt ✅
+  - 4 layers merged with section headers and token budget enforcement
+  - verbose: prints per-layer token counts to stderr
 
-- [ ] **T-32** Integrate `camelot_context.build_system_prompt()` into `knight_session._build_system_prompt()`
-  - Replace current stub with call to `camelot_context`
+- [x] **T-32** Integrate `camelot_context.build_system_prompt()` into `knight_session._build_system_prompt()` ✅
+  - Delegates via import; graceful inline fallback if module unavailable
+  - Verified: 616 tok total (160+318+32+100) on CAMELOT_OS root
 
 ---
 
