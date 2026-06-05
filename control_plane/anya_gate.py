@@ -237,6 +237,42 @@ def _stage_socrates(titan: TitanPrompt, triage: "object") -> SocratesVerdict:
     )
 
 
+def _stage_socrates_full(intent: str, hitl_tier: str) -> None:
+    """Stage 7: full SirSocrates examination for HIGH/CRITICAL intents.
+
+    Imports SirSocrates lazily (avoids circular imports). Logs verdict to
+    logs/northstar_verdicts.jsonl via Lady Alexandria integration. No-ops
+    silently if sir_socrates module is unavailable.
+    """
+    if hitl_tier not in ("PROMPT", "HUMAN_GATE"):
+        return
+    try:
+        import importlib.util as _ilu
+        from pathlib import Path as _P
+        _spec = _ilu.spec_from_file_location(
+            "sir_socrates",
+            _P(__file__).resolve().parent / "sir_socrates.py",
+        )
+        if not _spec or not _spec.loader:
+            return
+        import sys as _sys
+        if "sir_socrates" not in _sys.modules:
+            _mod = _ilu.module_from_spec(_spec)
+            _sys.modules["sir_socrates"] = _mod
+            _spec.loader.exec_module(_mod)
+        else:
+            _mod = _sys.modules["sir_socrates"]
+        exam = _mod.SirSocrates().examine(intent, triage_tier=hitl_tier)
+        if not exam.overall_aligned:
+            import logging as _log
+            _log.warning(
+                "[SIR_SOCRATES] Northstar drift detected — verdict=%s blocking=%s",
+                exam.verdict, exam.blocking_questions,
+            )
+    except Exception:
+        pass   # non-blocking — Socrates unavailable should not crash the pipeline
+
+
 def _stage_parse(raw: str) -> ParseResult:
     cleaned = _NOISE_PATTERNS.sub("", raw).strip()
     cleaned = re.sub(r"\s{2,}", " ", cleaned)
@@ -543,7 +579,11 @@ class AnyaGate:
         enrich  = _stage_enrich(parse)
         titan   = _stage_compile(parse, enrich)
         knight, engine, weight, reason = _stage_route(parse, enrich)
+        triage_for_socrates = _stage_triage(parse, enrich, knight)
         validation = _stage_validate(parse, titan, enrich, knight_id=knight)
+
+        # Stage 7 (post-triage): SirSocrates Northstar examination for HIGH/CRITICAL
+        _stage_socrates_full(raw_intent, triage_for_socrates.hitl_tier)
 
         ms = (time.perf_counter() - t0) * 1000
 

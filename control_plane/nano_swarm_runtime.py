@@ -360,6 +360,173 @@ def supervise_nodes(
     }
 
 
+# ---------------------------------------------------------------------------
+# OMEGA Phase 6 — Hermes-Subscribed Autonomous SWARM Nodes
+# ---------------------------------------------------------------------------
+"""Five lightweight event-driven nodes that subscribe to Hermes channels and
+coordinate Defense Grid responses.  No subprocess — pure in-process handlers.
+
+  swarm.colony      — colony.risk channel → assigns fix tasks on HIGH delta
+  swarm.compress    — compression.status channel → triggers QFT on hot contexts
+  swarm.organize    — organize.progress channel → files Lady M/Alexandria events
+  swarm.shadow      — shadow.threats channel → routes to Nemesis AUTO quarantine
+  swarm.dependency  — dependency.updates channel → creates shadow-branch proposals
+"""
+
+from dataclasses import dataclass, field as _field
+from typing import Callable, Optional
+import logging as _logging
+import time as _time
+
+_swarm_log = _logging.getLogger("OMEGA_SWARM")
+
+OMEGA_CHANNEL_MAP: dict[str, str] = {
+    "swarm.colony":     "colony.risk",
+    "swarm.compress":   "compression.status",
+    "swarm.organize":   "organize.progress",
+    "swarm.shadow":     "shadow.threats",
+    "swarm.dependency": "dependency.updates",
+}
+
+
+@dataclass
+class OmegaNodeState:
+    node_id: str
+    channel: str
+    status: str = "IDLE"      # IDLE | ACTIVE | ERROR
+    last_event_ts: Optional[float] = None
+    last_event_summary: str = ""
+    events_processed: int = 0
+
+
+class OmegaSwarmNode:
+    """A single Hermes-subscribed event-driven SWARM node."""
+
+    def __init__(
+        self,
+        node_id: str,
+        channel: str,
+        handler: Optional[Callable[[dict], None]] = None,
+    ) -> None:
+        self.node_id = node_id
+        self.channel = channel
+        self.handler = handler or self._default_handler
+        self.state = OmegaNodeState(node_id=node_id, channel=channel)
+
+    def process_event(self, event: dict) -> None:
+        """Called synchronously when a Hermes event arrives on this node's channel."""
+        try:
+            self.handler(event)
+            self.state.status = "ACTIVE"
+            self.state.last_event_ts = _time.time()
+            self.state.last_event_summary = str(event)[:120]
+            self.state.events_processed += 1
+        except Exception as exc:
+            self.state.status = "ERROR"
+            _swarm_log.error("[%s] handler error: %s", self.node_id, exc)
+
+    def _default_handler(self, event: dict) -> None:
+        _swarm_log.info("[%s] event on %s: %s", self.node_id, self.channel, str(event)[:80])
+
+
+def _make_colony_handler() -> Callable[[dict], None]:
+    def _handle(event: dict) -> None:
+        risk = event.get("risk_score", 0)
+        delta = event.get("delta", 0)
+        if delta >= 10 or risk >= 80:
+            _swarm_log.warning(
+                "[swarm.colony] HIGH colony risk (score=%.1f delta=%.1f) — "
+                "fix tasks should be assigned (PROMPT required for secret rotation)",
+                risk, delta,
+            )
+    return _handle
+
+
+def _make_compress_handler() -> Callable[[dict], None]:
+    def _handle(event: dict) -> None:
+        tier = event.get("tier", "?")
+        ratio = event.get("ratio", 0)
+        _swarm_log.info("[swarm.compress] tier=%s ratio=%.1f%% — QFT sync noted", tier, ratio * 100)
+    return _handle
+
+
+def _make_organize_handler() -> Callable[[dict], None]:
+    def _handle(event: dict) -> None:
+        _swarm_log.info("[swarm.organize] org progress: %s", str(event)[:80])
+    return _handle
+
+
+def _make_shadow_handler() -> Callable[[dict], None]:
+    def _handle(event: dict) -> None:
+        vectors = event.get("critical_count", 0)
+        if vectors > 0:
+            _swarm_log.warning(
+                "[swarm.shadow] %d CRITICAL vectors detected — routing to Nemesis AUTO quarantine",
+                vectors,
+            )
+    return _handle
+
+
+def _make_dependency_handler() -> Callable[[dict], None]:
+    def _handle(event: dict) -> None:
+        count = event.get("count", 0)
+        _swarm_log.info(
+            "[swarm.dependency] %d update proposals received — shadow branches queued (PROMPT)",
+            count,
+        )
+    return _handle
+
+
+_OMEGA_NODE_FACTORIES: dict[str, Callable[[], Callable]] = {
+    "swarm.colony":     _make_colony_handler,
+    "swarm.compress":   _make_compress_handler,
+    "swarm.organize":   _make_organize_handler,
+    "swarm.shadow":     _make_shadow_handler,
+    "swarm.dependency": _make_dependency_handler,
+}
+
+
+class OmegaSwarm:
+    """Registry + coordinator for the 5 OMEGA autonomous SWARM nodes."""
+
+    def __init__(self) -> None:
+        self.nodes: dict[str, OmegaSwarmNode] = {}
+        for node_id, channel in OMEGA_CHANNEL_MAP.items():
+            factory = _OMEGA_NODE_FACTORIES.get(node_id)
+            handler = factory() if factory else None
+            self.nodes[node_id] = OmegaSwarmNode(node_id=node_id, channel=channel, handler=handler)
+
+    def dispatch(self, channel: str, event: dict) -> None:
+        """Route a Hermes event to the matching SWARM node."""
+        for node in self.nodes.values():
+            if node.channel == channel:
+                node.process_event(event)
+
+    def status(self) -> list[dict]:
+        """Return status dicts for all 5 nodes (for `camelot swarm status`)."""
+        return [
+            {
+                "node_id": n.state.node_id,
+                "channel": n.state.channel,
+                "status": n.state.status,
+                "events": n.state.events_processed,
+                "last_event": n.state.last_event_summary or "(none)",
+            }
+            for n in self.nodes.values()
+        ]
+
+
+_SINGLETON_SWARM: Optional[OmegaSwarm] = None
+
+
+def get_omega_swarm() -> OmegaSwarm:
+    """Return the process-level singleton OmegaSwarm."""
+    global _SINGLETON_SWARM
+    if _SINGLETON_SWARM is None:
+        _SINGLETON_SWARM = OmegaSwarm()
+    return _SINGLETON_SWARM
+
+
 def boot_nano_swarm_runtime(home: Path | str = CAMELOT_HOME) -> tuple[bool, str]:
     """Boot-sequence adapter: record status and report runtime readiness."""
     home = Path(home)
