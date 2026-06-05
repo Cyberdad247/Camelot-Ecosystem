@@ -62,6 +62,22 @@ def health_check():
     return {"status": "ONLINE", "identity": "Merlin_Ω", "mode": os.getenv("MODE", "SIMULATION")}
 
 
+@app.post("/agent/helio")
+async def sir_helio_endpoint(query: str, session_id: str = "session_001"):
+    """Dispatch a query to Sir Helio (pydantic-ai) via the control_plane knight."""
+    _camelot_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    if _camelot_root not in sys.path:
+        sys.path.insert(0, _camelot_root)
+    try:
+        from control_plane.pydantic_ai_knight import run_sir_helio
+        result = await run_sir_helio(query, session_id)
+        return {"status": "SUCCESS", "result": result}
+    except ImportError:
+        return {"status": "UNAVAILABLE", "detail": "pydantic-ai not installed in this environment"}
+    except Exception as exc:
+        return {"status": "ERROR", "detail": str(exc)}
+
+
 @app.post("/command")
 def execute_command(intent: str, background_tasks: BackgroundTasks):
     print(f"[👂] KERNEL: Received Intent -> '{intent}'")

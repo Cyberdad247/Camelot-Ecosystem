@@ -57,7 +57,7 @@ class SoulOversight:
 # Iron Gate v2 — three-tier HITL governance (EXCALIBUR_A_QNF Phase 4)
 # ---------------------------------------------------------------------------
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass

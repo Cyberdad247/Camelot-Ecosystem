@@ -985,7 +985,6 @@ def boot_pydantic_ai_knight(home: Path) -> tuple[bool, str]:
     
     try:
         import pydantic_ai
-        from pydantic_ai import Agent
         return True, f"Pydantic AI engine v{pydantic_ai.__version__} online — Sir Helio v400 ready"
     except ImportError:
         return False, "pydantic-ai library not installed"

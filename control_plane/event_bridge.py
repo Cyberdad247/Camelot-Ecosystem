@@ -1,10 +1,9 @@
 """Event Bridge — Ingests OpenClaw events and routes to Omni-Router."""
 
-from fastapi import FastAPI, Request, HTTPException, Header
+from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel
 import os
 import sys
-import asyncio
 import json
 from pathlib import Path
 from datetime import datetime, timezone

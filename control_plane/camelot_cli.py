@@ -7,7 +7,6 @@ import asyncio
 import importlib
 import json
 import os
-import re
 import subprocess
 import sys
 import time
@@ -224,7 +223,7 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
             pass
 
         # Import warden here to maintain lazy loading
-        from security.warden import warden, SecurityException
+        from security.warden import warden, SecurityException  # noqa: F401
         
         # Verify permission via the unified security warden
         warden.verify_permission(
@@ -514,7 +513,6 @@ MODAL_DISCOVERY_MAP = {
 
 
 def _diagnose_cloud_endpoints(config_mgr: Any) -> dict[str, Any]:
-    from .config_manager import ConfigManager
 
     effective = config_mgr.cloud_endpoint_map()
     persisted = {
@@ -554,7 +552,6 @@ def _diagnose_cloud_endpoints(config_mgr: Any) -> dict[str, Any]:
 
 
 def _audit_cloudbrain_configuration(config_mgr: Any) -> dict[str, Any]:
-    from .config_manager import ConfigManager
     from .ledger_sync import ledger_status
 
     ledger = ledger_status()

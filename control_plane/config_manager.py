@@ -5,7 +5,7 @@ from __future__ import annotations
 import os
 import json
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 from urllib.parse import urlparse
 from pydantic import BaseModel, Field
 

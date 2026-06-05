@@ -11,30 +11,11 @@
 > **Knight:** LADY_MNEMOSYNE + SIR_FORGE
 > **Risk Score:** LOW (edit existing file only)
 
-- [ ] **T-00** `bin/knight_session.py` — add `_build_system_prompt()` function
-  - Read `CLAUDE.md` from `_REPO` (or embedded fallback string if not found)
-  - Read active cartridge: scan `os.getcwd()` for `package.json`/`Cargo.toml`/`pyproject.toml`
-    → load matching `.yaml` cartridge from `03_VAULT/training/configs/cartridges/`
-  - Read knight persona block from `03_VAULT/Knights/README.md` (first 30 lines for knight)
-  - Merge: constitution (≤1500 tok) + cartridge (≤300 tok) + persona (≤200 tok)
-  - Return single string
-
-- [ ] **T-01** `_repl()` — inject system prompt into every new session
-  - `conversation_history` starts with `{"role": "system", "content": _build_system_prompt()}`
-  - System message NOT shown in `/history` output (filter role == "system" from display)
-  - On `/clear`: re-inject system prompt (don't lose Camelot context on clear)
-
-- [ ] **T-02** Add `--no-context` flag to `knight_session.py`
-  - Skips `_build_system_prompt()` — raw LLM mode
-  - Prompt label changes to `raw|omni`
-
-- [ ] **T-03** Add `--system <file>` flag
-  - Override: load system prompt from specified file instead of CLAUDE.md
-  - Useful for domain-specific Camelot boot (e.g., `--system cartridges/rust-kinetic.yaml`)
-
-- [ ] **T-04** Boot banner update
-  - Show: `Context: <cartridge_name> detected | Constitution: injected (<N> tokens)`
-  - Show: `System prompt: <N> tokens` in `/status` output
+- [x] **T-00** `bin/knight_session.py` — `_build_system_prompt()` ✅ (now delegates to camelot_context)
+- [x] **T-01** `_repl()` — injects system prompt; `/clear` re-injects; system msg hidden in `/history` ✅
+- [x] **T-02** `--no-context` flag ✅ (knight_session.py lines 613, 632, 646)
+- [x] **T-03** `--system <file>` flag ✅ (knight_session.py line 614)
+- [x] **T-04** Boot banner — shows `Context: <cart> · Constitution: injected ≈Nt` ✅ (line 644)
 
 ---
 
@@ -43,68 +24,26 @@
 > **Knight:** SIR_BORIS
 > **Risk Score:** LOW (new file)
 
-- [ ] **T-10** Create `bin/camelot.py`
-  - `main()` → argparse with sub-commands: `warp`, `configure`, `install`, `status`, `build`, `update`
-  - Default (no sub-command) → `warp` (same as `camelot warp`)
-  - Pass-through flags: `--knight`, `--tier`, `--system`, `--no-context`, `--portable`, `--verbose`
-  - `warp` → calls `knight_session.main()` with args forwarded
-
-- [ ] **T-11** Register `camelot` + `ai` as entry points in `pyproject.toml`
-  ```toml
-  camelot = "bin.camelot:main"
-  ai      = "bin.camelot:main"
-  ```
-
-- [ ] **T-12** Create `.venv/Scripts/camelot.cmd` wrapper (same pattern as `ks.cmd`)
-  ```batch
-  @echo off
-  "C:\Users\vizio\CAMELOT_OS\.venv\Scripts\python.exe" -X utf8 "C:\Users\vizio\CAMELOT_OS\bin\camelot.py" %*
-  ```
-
-- [ ] **T-13** Create `.venv/Scripts/ai.cmd` wrapper (alias)
+- [x] **T-10** `bin/camelot.py` ✅ — full implementation with all subcommands + completion
+- [x] **T-11** Entry points in `pyproject.toml` ✅ — `camelot`, `ai`, `Camelot-OS` registered
+- [x] **T-12** `.venv/Scripts/camelot.cmd` ✅
+- [x] **T-13** `.venv/Scripts/ai.cmd` ✅
 
 ---
 
 ## PHASE 1 — SPRINT 1b: Auto-Configuration Engine
-> **Knight:** SIR_ALEX + SIR_HELIO
-> **Risk Score:** LOW (new file; reads only, no destructive ops)
 
-- [ ] **T-14** Create `bin/camelot_configure.py`
-
-- [ ] **T-15** `probe_cliproxy()` — GET `http://127.0.0.1:8080/health`, timeout 1s
-  - Returns: `{url, models, latency_ms}` or `None`
-
-- [ ] **T-16** `probe_ollama()` — GET `http://127.0.0.1:11434/api/tags`, timeout 1s
-  - Returns: `{url, models}` or `None`
-
-- [ ] **T-17** `scan_api_keys()` — non-blocking key discovery
-  - Order: `os.environ` → `~/.anthropic/` → `~/.config/google/` → `~/.cli-proxy-api/claude.json`
-  - Returns: `{anthropic, google, openai}` — missing keys are `None`
-
-- [ ] **T-18** `detect_hardware()` — RAM (psutil), GPU (try nvidia-smi subprocess), OS, arch
-
-- [ ] **T-19** `detect_portable()` — check if exe/script is on removable media
-  - Windows: `win32api.GetDriveType()` → `DRIVE_REMOVABLE`
-  - Linux: parse `/proc/mounts` for sdcard/usb paths
-  - Mac: `diskutil info <path>` for `Removable Media: Yes`
-  - Fallback: `--portable` flag
-
-- [ ] **T-20** `resolve_tier()` — waterfall logic (see blueprint Component 2)
-  - Returns: `T0`, `T1`, `T2`, `T3`
-
-- [ ] **T-21** `resolve_default_knight()` — per-tier knight selection (see blueprint)
-
-- [ ] **T-22** `write_config()` — write `~/.camelot/config.json`
-  - In portable mode: write `./camelot_config.json` adjacent to binary
-  - Fields: tier, default_knight, cliproxy_url, ollama_url, anthropic_key_present (bool, not value),
-    google_key_present (bool), ram_gb, gpu_detected, portable, last_configured (ISO timestamp)
-
-- [ ] **T-23** `run_configure()` — orchestrates T-15→T-22, prints summary table (Rich)
-  - Invoked by `camelot configure` OR on first boot if `~/.camelot/config.json` missing
-
-- [ ] **T-24** `camelot.py` auto-configure gate
-  - On `camelot warp`: if `~/.camelot/config.json` missing → run `run_configure()` first
-  - If config exists and `last_configured` > 7 days ago → show one-line stale warning (non-blocking)
+- [x] **T-14** `bin/camelot_configure.py` ✅ — probe + tier + config write
+- [x] **T-15** `probe_cliproxy()` ✅
+- [x] **T-16** `probe_ollama()` ✅
+- [x] **T-17** `scan_api_keys()` ✅ — presence flags only (never logs values)
+- [x] **T-18** `detect_hardware()` ✅
+- [x] **T-19** `detect_portable()` ✅
+- [x] **T-20** `resolve_tier()` ✅
+- [x] **T-21** `resolve_default_knight()` ✅
+- [x] **T-22** `write_config()` ✅
+- [x] **T-23** `run_configure()` ✅
+- [x] **T-24** `camelot.py` auto-configure gate ✅
 
 ---
 

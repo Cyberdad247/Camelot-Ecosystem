@@ -16,14 +16,12 @@ Output: appends structured entries to 03_VAULT/Knights/learnings.md
 
 from __future__ import annotations
 
-import json
 import re
 import time
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 
 CAMELOT_HOME  = Path(__file__).parent.parent
 SKILLS_DIR    = CAMELOT_HOME / ".hive" / "skills"
