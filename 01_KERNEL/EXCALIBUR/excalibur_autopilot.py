@@ -7,9 +7,7 @@
 import os
 import sys
 import time
-import json
 import logging
-from typing import Optional, Dict, Any
 from datetime import datetime
 from dotenv import load_dotenv
 
@@ -20,7 +18,6 @@ from appwrite.client import Client
 from appwrite.services.databases import Databases
 from appwrite.query import Query
 from appwrite.id import ID
-from google.api_core.exceptions import GoogleAPIError
 
 # Configure Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - [G.E.M.] - %(levelname)s - %(message)s')

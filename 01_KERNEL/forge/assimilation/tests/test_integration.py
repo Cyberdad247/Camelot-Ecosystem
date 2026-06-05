@@ -8,7 +8,7 @@ kernel_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 sys.path.append(kernel_path)
 
 try:
-    from assimilation.core import handlers, types
+    from assimilation.core import handlers, types  # noqa: F401
 
     print("[SUCCESS] Imported assimilation.core.handlers")
     print("[SUCCESS] Imported assimilation.core.types")

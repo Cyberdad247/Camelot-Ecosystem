@@ -66,7 +66,6 @@ def _try_load_whisper_hf(model_size: str = "base") -> Optional[Any]:
 def _try_load_wav2vec2() -> Optional[Any]:
     try:
         from transformers import Wav2Vec2ForCTC, Wav2Vec2Processor  # type: ignore
-        import torch  # type: ignore
         model_id = "facebook/wav2vec2-base-960h"
         processor = Wav2Vec2Processor.from_pretrained(model_id)
         model = Wav2Vec2ForCTC.from_pretrained(model_id)
@@ -215,7 +214,7 @@ class STTService:
     # ── Internal ──────────────────────────────────────────────────────────────
 
     def _transcribe_fw(self, audio: bytes, language: str) -> tuple[str, str, float]:
-        import io, numpy as np  # type: ignore
+        import numpy as np  # type: ignore
         audio_np = np.frombuffer(audio, dtype=np.int16).astype(np.float32) / 32768.0
         segments, info = self._fw.transcribe(audio_np, language=language, beam_size=5)
         text = " ".join(s.text for s in segments).strip()

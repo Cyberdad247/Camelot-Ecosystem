@@ -9,8 +9,7 @@ Defines the logic for merging agent outputs.
 3. Hybrid Merge: Parallel work followed by serial synthesis.
 """
 
-import json
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from enum import Enum
 
 class FusionType(str, Enum):

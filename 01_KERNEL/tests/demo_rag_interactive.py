@@ -26,7 +26,6 @@ if sys.platform == 'win32':
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
 from integrations.haystack_ukg_bridge import HaystackUKGBridge
-import json
 
 
 def print_banner():

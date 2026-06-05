@@ -2,7 +2,7 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """Graph module initialization."""
 
-from kernel.graph.knowledge_graph import (
+from kernel.graph.knowledge_graph import (  # noqa: F401
     Entity,
     GraphQueryResult,
     KnowledgeGraphEngine,

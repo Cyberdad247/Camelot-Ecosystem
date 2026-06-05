@@ -9,7 +9,7 @@ and self-optimization trials.
 Based on Project Chimera specifications.
 """
 
-from typing import Dict, List, Any, Optional
+from typing import List, Optional
 from pydantic import BaseModel, Field
 from enum import Enum
 

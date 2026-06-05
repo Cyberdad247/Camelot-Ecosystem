@@ -4,7 +4,6 @@
 # Handles WebSocket comms with Mobile Bridge
 
 import json
-import sys
 import time
 
 # Windows cp1252 can't print emoji — safe print wrapper

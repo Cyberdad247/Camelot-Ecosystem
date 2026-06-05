@@ -9,7 +9,7 @@ Links Capability Graph, Fusion Strategies, and LLM-as-a-Judge.
 
 import time
 import uuid
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
 import os
 import sys

@@ -8,9 +8,7 @@ Subscribes to 'camelot-nexus' room, processes speech, and routes to Multi-Knight
 import asyncio
 import os
 import logging
-import time
-from livekit import rtc, agents
-from agora.swarms.voice_swarm import voice_swarm
+from livekit import rtc
 from agora.swarms.piper_tts import synthesize_stream
 
 logging.basicConfig(level=logging.INFO)

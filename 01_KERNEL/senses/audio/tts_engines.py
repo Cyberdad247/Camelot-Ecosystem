@@ -26,7 +26,6 @@ Architecture note:
 
 from __future__ import annotations
 
-import os
 from enum import Enum
 from typing import Any, Optional
 
@@ -74,7 +73,6 @@ def _load_speecht5() -> Optional[Any]:
     try:
         from transformers import SpeechT5Processor, SpeechT5ForTextToSpeech, SpeechT5HifiGan  # type: ignore
         from datasets import load_dataset  # type: ignore
-        import torch  # type: ignore
 
         processor = SpeechT5Processor.from_pretrained("microsoft/speecht5_tts")
         model     = SpeechT5ForTextToSpeech.from_pretrained("microsoft/speecht5_tts")
@@ -117,7 +115,6 @@ def _load_mms() -> Optional[Any]:
     """
     try:
         from transformers import VitsModel, AutoTokenizer  # type: ignore
-        import torch  # type: ignore
         model_id = "facebook/mms-tts-eng"
         tokenizer = AutoTokenizer.from_pretrained(model_id)
         model = VitsModel.from_pretrained(model_id)
@@ -187,7 +184,6 @@ def available_engines() -> list[str]:
     # Kokoro and Piper availability reported separately
     results.append("piper (via piper_tts.py)")
     try:
-        from kokoro import KPipeline  # type: ignore
         results.append("kokoro (via KittenService)")
     except Exception:
         pass
@@ -197,7 +193,6 @@ def available_engines() -> list[str]:
 # ── Engine implementations ────────────────────────────────────────────────────
 
 def _synth_silero(text: str, backend: dict, voice: str) -> tuple[bytes, int]:
-    import torch  # type: ignore
     sample_rate = backend["sample_rate"]
     audio_tensor = backend["model"].apply_tts(
         text=text,
@@ -226,7 +221,6 @@ def _synth_speecht5(text: str, backend: dict) -> tuple[bytes, int]:
 
 
 def _synth_bark(text: str, backend: dict, voice: str) -> tuple[bytes, int]:
-    import numpy as np  # type: ignore
     audio_np = backend["generate"](text, history_prompt=voice if voice else None)
     pcm = (audio_np * 32767).astype("int16").tobytes()
     return pcm, backend["sample_rate"]

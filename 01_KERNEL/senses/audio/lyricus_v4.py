@@ -56,7 +56,6 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
-import time
 from enum import Enum
 from typing import AsyncGenerator, NamedTuple, Optional
 
@@ -303,7 +302,6 @@ class LyricusV4:
             from agora.swarms import piper_tts  # type: ignore
             voice = profile.piper_model if profile else "en_US-lessac-medium"
             samples, sr = piper_tts.synthesize(text, voice_preset=voice)
-            import numpy as np  # type: ignore
             pcm = (samples * 32767).astype("int16").tobytes()
             return pcm, sr
         except Exception:

@@ -3,7 +3,6 @@
 import json
 import os
 from pathlib import Path
-import sys
 
 # Add KERNEL to path to import UKGRuntime
 import importlib.util

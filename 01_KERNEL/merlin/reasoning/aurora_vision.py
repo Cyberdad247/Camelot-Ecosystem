@@ -7,7 +7,7 @@ Wired to RustDeskBridge for screen capture when available.
 """
 
 import time
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 
 class AuroraEngine:

@@ -19,8 +19,6 @@ Usage:
 """
 
 import sys
-import os
-import json
 import logging
 from pathlib import Path
 
@@ -55,9 +53,9 @@ def test_1_haystack_available():
         import haystack
         logger.info(f"✅ Haystack version: {haystack.__version__}")
         
-        from haystack import Pipeline, Document
-        from haystack.components.retrievers.in_memory import InMemoryBM25Retriever
-        from haystack.document_stores.in_memory import InMemoryDocumentStore
+        from haystack import Pipeline, Document  # noqa: F401
+        from haystack.components.retrievers.in_memory import InMemoryBM25Retriever  # noqa: F401
+        from haystack.document_stores.in_memory import InMemoryDocumentStore  # noqa: F401
         
         logger.info("✅ All core Haystack imports successful")
         return True

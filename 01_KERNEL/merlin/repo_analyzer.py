@@ -2,8 +2,7 @@ import os
 import json
 import argparse
 import datetime
-import re
-from typing import Dict, List, Any
+from typing import Dict, Any
 
 class NanoRepoAuditor:
     def __init__(self, root_path: str):

@@ -3,9 +3,7 @@
 from .node import AgentNode
 from .protocol import ANPEnvelope
 from .router import AgoraRouter
-import json
 from kernel.Engines.prism_gateway import PrismAdapter
-from kernel.Engines.coherence_engine import coherence
 
 
 class Videneptus(AgentNode):

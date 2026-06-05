@@ -214,7 +214,6 @@ class OmegaAuditor:
         print("================================================================")
 
 if __name__ == "__main__":
-    import sys
     import argparse
     
     parser = argparse.ArgumentParser()

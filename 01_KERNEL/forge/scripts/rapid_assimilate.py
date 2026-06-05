@@ -19,7 +19,7 @@ except ImportError as e:
 
 # Import Trivy scanner (optional - graceful fallback if not available)
 try:
-    from trivy_scan import TrivyScanner
+    from trivy_scan import TrivyScanner  # noqa: F401
 
     TRIVY_AVAILABLE = True
     print("[SECURITY] Trivy scanner loaded successfully")

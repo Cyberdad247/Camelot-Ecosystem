@@ -10,7 +10,7 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from titan_schemas import GraphNode, GraphEdge, GraphNodeProvenance, VaultEmbedding, FluxNode
+from titan_schemas import GraphNode, GraphEdge, GraphNodeProvenance
 from titan_omega import TitanOmega
 from datetime import datetime
 

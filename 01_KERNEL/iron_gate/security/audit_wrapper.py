@@ -1,6 +1,5 @@
 import subprocess
 import os
-import sys
 
 def run_trivy_scan(target_dir):
     print(f"🛡️ [VERITAS] Starting Trivy Security Scan for: {target_dir}")

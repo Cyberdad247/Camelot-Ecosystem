@@ -7,8 +7,7 @@ Manages the pending tasks for the Autonomous Swarm.
 
 import json
 import os
-import shutil
-from typing import List, Optional
+from typing import Optional
 
 QUEUE_FILE = "03_VAULT/directives/pending_queue.json"
 HISTORY_FILE = "03_VAULT/directives/completed_log.json"

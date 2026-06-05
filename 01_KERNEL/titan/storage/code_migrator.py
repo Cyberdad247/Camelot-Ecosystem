@@ -7,9 +7,7 @@ USAGE:
     python migrate_code_to_vault.py --scan      # Scan for os.getenv() usage
     python migrate_code_to_vault.py --migrate   # Migrate to vault.get()
 """
-import os
 import re
-import sys
 from pathlib import Path
 from typing import List, Tuple, Dict
 from datetime import datetime

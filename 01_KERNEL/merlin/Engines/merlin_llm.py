@@ -8,7 +8,7 @@ Supports Ollama, Meta-Llama (via local weights), and OpenAI.
 
 import os
 import json
-from typing import Dict, Any, List, Optional
+from typing import Dict, Any, Optional
 from pathlib import Path
 
 # Use litellm for universal provider support

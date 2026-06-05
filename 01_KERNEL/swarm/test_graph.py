@@ -13,9 +13,16 @@ CAMELOT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(CAMELOT_ROOT) not in sys.path:
     sys.path.insert(0, str(CAMELOT_ROOT))
 
+import importlib.util
 import pytest
-from 01_KERNEL.swarm.graph_orchestrator import GraphOrchestrator
-import 01_KERNEL.swarm.graph_orchestrator as go
+
+_spec = importlib.util.spec_from_file_location(
+    "graph_orchestrator",
+    Path(__file__).resolve().parent / "graph_orchestrator.py",
+)
+_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_mod)
+GraphOrchestrator = _mod.GraphOrchestrator
 
 def test_graph_flow():
     """Verify the standard execution flow of the GraphOrchestrator."""

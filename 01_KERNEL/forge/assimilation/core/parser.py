@@ -16,7 +16,7 @@ try:
 except ImportError:
     try:
         # Try relative import (if running as camelot.kernel.assimilation...)
-        from ...phials import semantic_tree_rag, tree_sitter_phial
+        from ...phials import semantic_tree_rag, tree_sitter_phial  # noqa: F401
 
         PHIALS_AVAILABLE = True
         print("[DEBUG] Phials loaded via relative import")

@@ -181,7 +181,7 @@ class KnowledgeGraphEngine:
         self.working_dir.mkdir(parents=True, exist_ok=True)
 
         try:
-            from lightrag import LightRAG, QueryParam
+            from lightrag import LightRAG, QueryParam  # noqa: F401
             from lightrag.llm import gpt_4o_mini_complete, openai_embedding
         except ImportError:
             print("[GRAPH] LightRAG not installed. Using fallback mode.")

@@ -7,7 +7,6 @@ Modulates system output based on kinetic state and alert levels.
 
 import os
 import sys
-from typing import Dict, Any
 
 # Add KERNEL to path for telemetry import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))

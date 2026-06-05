@@ -1,5 +1,14 @@
+import importlib.util
 import pytest
-from 01_KERNEL.memory.chunk_kv import ChunkKVPolicy
+from pathlib import Path
+
+_spec = importlib.util.spec_from_file_location(
+    "chunk_kv",
+    Path(__file__).resolve().parents[1] / "01_KERNEL" / "memory" / "chunk_kv.py",
+)
+_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_mod)
+ChunkKVPolicy = _mod.ChunkKVPolicy
 
 def test_chunk_kv_boundary_integrity():
     policy = ChunkKVPolicy()

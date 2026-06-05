@@ -8,7 +8,7 @@ Allows the system to critique its own retrieval results and generate follow-up q
 """
 
 import logging
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from integrations.merlin_haystack_generator import MerlinGenerator
 
 logger = logging.getLogger(__name__)

@@ -17,7 +17,7 @@ Usage:
 """
 
 import logging
-from typing import Dict, Any, List
+from typing import Dict, Any
 from kernel.agora.node import AgentNode
 from kernel.agora.protocol import ANPEnvelope
 

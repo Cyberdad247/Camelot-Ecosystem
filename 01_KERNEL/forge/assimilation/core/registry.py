@@ -16,9 +16,9 @@ try:
     print("[DEBUG] Memory/Graph loaded via absolute import")
 except ImportError:
     try:
-        from ...graph import knowledge_graph
-        from ...memory import compiler, skillgraph
-        from ...memory.graphrag import compressor
+        from ...graph import knowledge_graph  # noqa: F401
+        from ...memory import compiler, skillgraph  # noqa: F401
+        from ...memory.graphrag import compressor  # noqa: F401
 
         MEMORY_AVAILABLE = True
         print("[DEBUG] Memory/Graph loaded via relative import")
