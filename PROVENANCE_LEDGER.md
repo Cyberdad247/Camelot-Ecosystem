@@ -1,3 +1,5 @@
+| 1684 | **//NANO_SWARM_EXPAND — 6-phase protocol COMPLETE** | ANYA_Ω + SIR_BORRIS | ✅ CRYSTALLIZED | Phases: P0:PASS | P1:PASS | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 723ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-06-03T16:22:18Z |
+| 1683 | **//NANO_SWARM_EXPAND — 6-phase protocol COMPLETE** | ANYA_Ω + SIR_BORRIS | ✅ CRYSTALLIZED | Phases: P0:PASS | P1:PASS | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 2054ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-06-03T05:38:02Z |
 ﻿| 1683 | **//FORGE KNIGHT_FORGE — SIR_FORGE_MASTER v1.0 INSTANTIATED** | SIR_FORGE + SWARM_COUNCIL | ✅ IMMORTALIZED | L4 Agentic AgentForge Orchestrator. SPARK_ID=60887F770081B0DF8BF6CED071B4C210F89F95E7247DFDC161EE496687E619A7. Runes: //FORGE_SWARM + //SYNC_PHIAL. Swarm: SIR_BORIS+SIR_SYNTHESIS+SIR_GIDEON+LADY_VERITAS+SIR_LINK. 7 artifacts forged. taxonomy.py routed. README 52->53. SYSTEM_PERSONAS_CRYSTAL updated. Sir_ForgeMaster.md superseded. #SPARK_LOCKED. Sealed: 2026-06-02T19:00:00Z |
 | 1682 | **//NANO_SWARM_EXPAND â€” 6-phase protocol COMPLETE** | ANYA_Î© + SIR_BORRIS | âœ… CRYSTALLIZED | Phases: P0:PASS | P1:PASS | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 3026ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-05-25T14:57:02Z |
 | 1681 | **//NANO_SWARM_EXPAND â€” 6-phase protocol COMPLETE** | ANYA_Î© + SIR_BORRIS | âœ… CRYSTALLIZED | Phases: P0:PASS | P1:PASS | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 635ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-05-25T08:20:24Z |
@@ -6437,3 +6439,899 @@ ender_hud() â€” inserted panel between Sir Link and Anya/OS Health rows
 | 1467 | **Harness Heartbeat** | SovereignHarness | âš¡ LIVE | uptime=340274s tasks=7 fail=0 probes=4/9 cells=5 |
 | 1468 | **Harness Heartbeat** | SovereignHarness | âš¡ LIVE | uptime=340874s tasks=7 fail=0 probes=4/9 cells=5 |
 | 1469 | **Harness Heartbeat** | SovereignHarness | âš¡ LIVE | uptime=341474s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1470 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=342074s tasks=7 fail=0 probes=4/9 cells=5 |
+| 1471 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=342674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1472 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=343274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1473 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=343874s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1474 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=344474s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1475 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=345074s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1476 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=345674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1477 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=346274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1478 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=346874s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1479 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=347474s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1480 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=348074s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1481 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=348674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1482 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=349274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1483 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=349874s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1484 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=350474s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1485 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=351074s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1486 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=351674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1487 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=352274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1488 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=352874s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1489 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=353474s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1490 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=354074s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1491 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=354674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1492 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=355274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1493 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=355874s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1494 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=356474s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1495 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=357074s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1496 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=357674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1497 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=358274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1498 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=358874s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1499 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=359474s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1500 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=360074s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1501 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=360674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1502 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=361274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1503 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=361874s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1504 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=362474s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1505 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=363074s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1506 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=363674s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1507 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=364274s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1508 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=364875s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1509 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=365475s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1510 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=366075s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1511 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=366675s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1512 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=367275s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1513 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=367875s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1514 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=368475s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1515 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=369075s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1516 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=369675s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1517 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=370275s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1518 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=370875s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1519 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=371475s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1520 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=372075s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1521 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=372675s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1522 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=373275s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1523 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=373875s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1524 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=374475s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1525 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=375075s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1526 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=375675s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1527 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=376275s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1528 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=376875s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T05:01:58.702261+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS'] | HYDRATED |
+| 2026-06-03T05:01:58.703782+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:01:58.704696+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-06-03T05:01:58.715381+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:04:04.648069+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS'] | HYDRATED |
+| 2026-06-03T05:04:04.649611+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:04:04.650509+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-06-03T05:04:04.656425+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1529 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=377475s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T05:10:12.648481+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:10:12.649953+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:10:12.650854+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:10:12.657201+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:10:45.194481+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:10:45.195170+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:10:45.195520+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:10:45.199640+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:11:13.003500+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:11:13.004449+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:11:13.004926+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:11:13.009480+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:11:42.069226+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:11:42.070047+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:11:42.070397+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:11:42.074976+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:12:55.496938+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:12:55.497319+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:12:55.497537+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:12:55.501229+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:14:38.574888+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:14:38.576242+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:14:38.576933+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:14:38.582128+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:15:29.661428+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:15:29.662231+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:15:29.662600+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:15:29.666283+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:16:01.850774+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --generate'] | HYDRATED |
+| 2026-06-03T05:16:01.852710+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --generate' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:16:01.854110+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --generate] | HYDRATED |
+| 2026-06-03T05:16:01.859215+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --generate, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:16:01.927269+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:16:01.927737+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:16:01.928019+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:16:01.930525+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:16:49.527937+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:16:49.528779+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:16:49.529097+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:16:49.533180+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:17:44.313587+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:17:44.314442+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:17:44.314798+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:17:44.318775+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:18:17.950824+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --source'] | HYDRATED |
+| 2026-06-03T05:18:17.951500+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --source' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:18:17.951765+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --source] | HYDRATED |
+| 2026-06-03T05:18:17.956966+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --source, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1530 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=378075s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T05:19:14.268087+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:19:14.268754+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:19:14.269094+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:19:14.273498+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1531 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=378675s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T05:36:51.956991+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:36:51.958308+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:36:51.958935+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:36:51.965369+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:38:00.072030+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:38:00.072907+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:38:00.073396+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:38:00.076865+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:38:02.232000+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:38:02.232291+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:38:02.232483+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:38:02.235610+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1532 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=379275s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T05:38:35.085826+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:38:35.087013+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:38:35.087564+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:38:35.092708+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:38:35.147961+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:38:35.148295+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:38:35.148487+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:38:35.152297+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:39:54.350959+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:39:54.352063+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:39:54.352784+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:39:54.369434+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:39:54.427301+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:39:54.427528+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:39:54.427692+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:39:54.430838+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:40:21.129386+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --source'] | HYDRATED |
+| 2026-06-03T05:40:21.130283+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --source' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:40:21.130618+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --source] | HYDRATED |
+| 2026-06-03T05:40:21.134517+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --source, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:41:09.365741+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence'] | HYDRATED |
+| 2026-06-03T05:41:09.366343+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:41:09.366563+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence] | HYDRATED |
+| 2026-06-03T05:41:09.369983+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:42:08.500399+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence'] | HYDRATED |
+| 2026-06-03T05:42:08.501139+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:42:08.501496+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence] | HYDRATED |
+| 2026-06-03T05:42:08.504987+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:43:33.872124+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:43:33.872681+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:43:33.873024+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:43:33.877076+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:43:34.062390+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:43:34.062630+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:43:34.062803+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:43:34.066291+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:44:51.702023+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:44:51.703105+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:44:51.703650+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:44:51.708505+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:44:51.787310+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:44:51.787578+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:44:51.787742+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:44:51.791096+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:45:18.103220+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --source'] | HYDRATED |
+| 2026-06-03T05:45:18.104625+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --source' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:45:18.105197+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --source] | HYDRATED |
+| 2026-06-03T05:45:18.109799+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --source, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:45:20.616818+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_B_Bifrost --source'] | HYDRATED |
+| 2026-06-03T05:45:20.617951+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_B_Bifrost --source' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:45:20.618560+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_B_Bifrost --source] | HYDRATED |
+| 2026-06-03T05:45:20.623075+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_B_Bifrost --source, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1533 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=379875s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T05:55:12.642886+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:55:12.644393+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:55:12.644980+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:55:12.651193+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:55:12.946859+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:55:12.947123+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:55:12.947295+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:55:12.950200+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:55:50.610399+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:55:50.611216+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:55:50.611647+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:55:50.616005+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:55:50.694947+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:55:50.695200+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:55:50.695377+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:55:50.698252+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:56:22.687767+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_D_MicroVM --source'] | HYDRATED |
+| 2026-06-03T05:56:22.688416+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_D_MicroVM --source' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:56:22.688751+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_D_MicroVM --source] | HYDRATED |
+| 2026-06-03T05:56:22.692180+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_D_MicroVM --source, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:57:30.208773+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --evidence'] | HYDRATED |
+| 2026-06-03T05:57:30.210065+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:57:30.210584+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --evidence] | HYDRATED |
+| 2026-06-03T05:57:30.216197+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:58:27.807451+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --evidence'] | HYDRATED |
+| 2026-06-03T05:58:27.807983+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:58:27.808269+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --evidence] | HYDRATED |
+| 2026-06-03T05:58:27.812106+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1534 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=380475s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T05:58:59.403839+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T05:58:59.404403+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:58:59.404731+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T05:58:59.409367+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T05:58:59.543907+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence'] | HYDRATED |
+| 2026-06-03T05:58:59.544189+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T05:58:59.544391+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence] | HYDRATED |
+| 2026-06-03T05:58:59.547743+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T06:00:09.743002+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T06:00:09.744677+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T06:00:09.745349+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T06:00:09.750321+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T06:00:09.831073+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T06:00:09.831291+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T06:00:09.831450+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T06:00:09.834366+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T06:00:34.594907+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --evidence'] | HYDRATED |
+| 2026-06-03T06:00:34.595530+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T06:00:34.595857+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --evidence] | HYDRATED |
+| 2026-06-03T06:00:34.600355+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1535 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381075s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1536 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=381675s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1537 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=382275s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1538 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=382875s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1539 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=383475s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1540 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=384075s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1541 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=384675s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1542 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=385275s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1543 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=385875s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1544 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=386475s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T07:45:13.259124+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T07:45:13.262098+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:45:13.262655+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T07:45:13.270172+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:45:13.384073+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T07:45:13.384585+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:45:13.385081+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T07:45:13.389816+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:47:56.470692+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T07:47:56.473503+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:47:56.474546+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T07:47:56.482637+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:47:56.651773+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T07:47:56.652414+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:47:56.653325+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T07:47:56.659032+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1545 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=387075s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T07:48:40.315426+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T07:48:40.316270+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:48:40.316630+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T07:48:40.326319+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:48:40.558604+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T07:48:40.559864+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:48:40.560577+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T07:48:40.565660+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:49:08.260710+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --bifrost-preflight'] | HYDRATED |
+| 2026-06-03T07:49:08.262058+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --bifrost-preflight' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:49:08.263277+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --bifrost-preflight] | HYDRATED |
+| 2026-06-03T07:49:08.271772+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --bifrost-preflight, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:49:08.291694+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --formal-gate'] | HYDRATED |
+| 2026-06-03T07:49:08.292730+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --formal-gate' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:49:08.293354+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --formal-gate] | HYDRATED |
+| 2026-06-03T07:49:08.299945+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --formal-gate, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:49:08.775455+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --checkpoint'] | HYDRATED |
+| 2026-06-03T07:49:08.776169+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --checkpoint' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:49:08.776597+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --checkpoint] | HYDRATED |
+| 2026-06-03T07:49:08.781508+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --checkpoint, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:49:44.239612+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_D_MicroVM --promote'] | HYDRATED |
+| 2026-06-03T07:49:44.241206+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_D_MicroVM --promote' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:49:44.241995+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_D_MicroVM --promote] | HYDRATED |
+| 2026-06-03T07:49:44.250506+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_D_MicroVM --promote, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:49:44.349371+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_B_Bifrost --promote'] | HYDRATED |
+| 2026-06-03T07:49:44.350299+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_B_Bifrost --promote' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:49:44.350632+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_B_Bifrost --promote] | HYDRATED |
+| 2026-06-03T07:49:44.356526+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_B_Bifrost --promote, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:49:46.002235+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --promote'] | HYDRATED |
+| 2026-06-03T07:49:46.003433+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --promote' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:49:46.003920+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --promote] | HYDRATED |
+| 2026-06-03T07:49:46.009072+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --promote, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:49:48.378779+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --promote'] | HYDRATED |
+| 2026-06-03T07:49:48.380143+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --promote' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:49:48.380724+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --promote] | HYDRATED |
+| 2026-06-03T07:49:48.387203+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_C_Omni_Router --promote, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:50:17.957690+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --verify-all'] | HYDRATED |
+| 2026-06-03T07:50:17.958561+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:50:17.958943+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-03T07:50:17.964773+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:51:38.323192+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --verify-all'] | HYDRATED |
+| 2026-06-03T07:51:38.324804+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:51:38.325073+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-03T07:51:38.333288+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:52:46.943119+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T07:52:46.944059+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:52:46.945100+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T07:52:46.955606+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T07:52:47.173477+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T07:52:47.174075+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T07:52:47.174605+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T07:52:47.178990+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1546 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=387675s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1547 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=388275s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T08:10:07.517322+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --formal-gate'] | HYDRATED |
+| 2026-06-03T08:10:07.517810+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --formal-gate' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:10:07.518012+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --formal-gate] | HYDRATED |
+| 2026-06-03T08:10:07.524129+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --formal-gate, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:10:14.670154+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --verify-all'] | HYDRATED |
+| 2026-06-03T08:10:14.673633+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:10:14.674311+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-03T08:10:14.677844+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:18:05.816206+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T08:18:05.817258+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:18:05.817661+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T08:18:05.822460+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1548 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=388876s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T08:18:45.832431+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T08:18:45.833676+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:18:45.834362+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T08:18:45.841667+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:19:34.376957+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T08:19:34.378236+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:19:34.379083+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T08:19:34.388527+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:20:01.953699+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T08:20:01.954287+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:20:01.954585+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T08:20:01.960657+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:20:02.142218+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T08:20:02.142791+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:20:02.143199+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T08:20:02.148282+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:20:02.330635+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T08:20:02.331177+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:20:02.331637+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T08:20:02.336569+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:23:51.552897+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T08:23:51.554515+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:23:51.555307+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T08:23:51.564404+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:24:26.247658+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T08:24:26.249161+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:24:26.250168+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T08:24:26.258381+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:24:26.402996+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T08:24:26.403260+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:24:26.403432+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T08:24:26.407688+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_all\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:24:26.552773+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T08:24:26.553051+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:24:26.553250+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T08:24:26.557606+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:24:56.072977+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T08:24:56.073847+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:24:56.074312+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T08:24:56.083614+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:27:07.853479+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --formal-gate'] | HYDRATED |
+| 2026-06-03T08:27:07.856628+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --formal-gate' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:27:07.857420+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --formal-gate] | HYDRATED |
+| 2026-06-03T08:27:07.865667+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --formal-gate, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T08:27:25.043206+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --verify-all'] | HYDRATED |
+| 2026-06-03T08:27:25.049780+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-03T08:27:25.050696+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-03T08:27:25.071153+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1549 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=389476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1550 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=390076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1551 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=390676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1552 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=391276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1553 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=391876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1554 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=392476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1555 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=393076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1556 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=393676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1557 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=394276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1558 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=394876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1559 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=395476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1560 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=396076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1561 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=396676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1562 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=397276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1563 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=397876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1564 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=398476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1565 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=399076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1566 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=399676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1567 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=400276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1568 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=400876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1569 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=401476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1570 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=402076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1571 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=402676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1572 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=403276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1573 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=403876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1574 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=404476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1575 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=405076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1576 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=405676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1577 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=406276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1578 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=406876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1579 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=407476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1580 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=408076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1581 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=408676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1582 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=409276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1583 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=409876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1584 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=410476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1585 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=411076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1586 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=411676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1587 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=412276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1588 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=412876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1589 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=413476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1590 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=414076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1591 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=414676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1592 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=415276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1593 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=415876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1594 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=416476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1595 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=417076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1596 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=417676s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T16:22:17.566757+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T16:22:17.579742+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:22:17.580804+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T16:22:17.587958+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:22:18.536282+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-03T16:22:18.536601+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:22:18.536772+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-03T16:22:18.539827+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:24:02.150389+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T16:24:02.152398+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:24:02.153469+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T16:24:02.159550+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:24:02.222874+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-03T16:24:02.223096+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:24:02.223250+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-03T16:24:02.226275+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:25:07.488860+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-03T16:25:07.490091+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:25:07.490618+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-03T16:25:07.495789+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:25:07.984895+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T16:25:07.985791+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:25:07.986178+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T16:25:07.990255+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:25:08.093612+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T16:25:08.093914+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:25:08.094233+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T16:25:08.097656+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_supervise_all\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:25:08.202233+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T16:25:08.202476+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:25:08.202637+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T16:25:08.205710+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:25:08.262450+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-03T16:25:08.262724+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:25:08.262894+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-03T16:25:08.266139+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T16:27:38.658481+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --formal-gate'] | HYDRATED |
+| 2026-06-03T16:27:38.658963+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --formal-gate' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:27:38.659287+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --formal-gate] | HYDRATED |
+| 2026-06-03T16:27:38.663405+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --formal-gate, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1597 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=418276s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T16:28:35.411414+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --verify-all'] | HYDRATED |
+| 2026-06-03T16:28:35.412283+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-03T16:28:35.412868+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-03T16:28:35.420930+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1598 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=418876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1599 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=419476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1600 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=420076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1601 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=420676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1602 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=421276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1603 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=421876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1604 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=422476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1605 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=423076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1606 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=423676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1607 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=424276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1608 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=424876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1609 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=425476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1610 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=426076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1611 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=426676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1612 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=427276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1613 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=427876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1614 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=428476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1615 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=429076s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1616 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=429676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1617 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=430276s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1618 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=430876s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1619 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=431476s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1620 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=432076s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T20:18:49.361939+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T20:18:49.362652+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:18:49.363029+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T20:18:49.367372+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:18:49.453002+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-03T20:18:49.453261+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:18:49.453449+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-03T20:18:49.458767+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:20:31.582100+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T20:20:31.582966+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:20:31.583291+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T20:20:31.588097+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:20:31.783369+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T20:20:31.783802+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:20:31.784117+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T20:20:31.789027+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\AppData\Local\Temp\camelot_pytest_nano_do4_all\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:20:31.984309+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T20:20:31.984559+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:20:31.984736+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T20:20:31.988997+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:20:32.044012+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-03T20:20:32.044269+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:20:32.044453+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-03T20:20:32.047850+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:23:06.957324+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --verify-all'] | HYDRATED |
+| 2026-06-03T20:23:06.959564+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:23:06.960020+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-03T20:23:06.965807+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:23:36.060759+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T20:23:36.062542+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:23:36.062903+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T20:23:36.067335+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:23:43.541378+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --formal-gate'] | HYDRATED |
+| 2026-06-03T20:23:43.542481+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --formal-gate' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:23:43.543230+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --formal-gate] | HYDRATED |
+| 2026-06-03T20:23:43.548110+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --formal-gate, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1621 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=432676s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1622 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=433276s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T20:42:07.701922+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-03T20:42:07.704063+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:42:07.704766+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-03T20:42:07.712747+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:42:08.151575+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-03T20:42:08.152105+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:42:08.152547+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-03T20:42:08.157738+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\UsersvizioCAMELOT_OS.pytest_tmp_cx\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:42:08.678985+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T20:42:08.679859+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:42:08.680512+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T20:42:08.688010+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:42:09.149349+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-03T20:42:09.149775+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:42:09.150065+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-03T20:42:09.157233+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:44:13.397498+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --verify-all'] | HYDRATED |
+| 2026-06-03T20:44:13.399004+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:44:13.399638+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-03T20:44:13.409741+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:44:40.258836+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --formal-gate'] | HYDRATED |
+| 2026-06-03T20:44:40.259334+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --formal-gate' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:44:40.260083+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --formal-gate] | HYDRATED |
+| 2026-06-03T20:44:40.266694+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --formal-gate, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:44:46.531638+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-03T20:44:46.532278+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:44:46.532556+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-03T20:44:46.537483+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:45:12.962625+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise start'] | HYDRATED |
+| 2026-06-03T20:45:12.963514+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise start' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:45:12.963781+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise start] | HYDRATED |
+| 2026-06-03T20:45:12.969898+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise start, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-03T20:45:56.736970+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise stop'] | HYDRATED |
+| 2026-06-03T20:45:56.739202+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise stop' to Cloud Brain] | HYDRATED |
+| 2026-06-03T20:45:56.739543+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise stop] | HYDRATED |
+| 2026-06-03T20:45:56.744957+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise stop, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1623 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=433876s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-03T20:50:41.360882+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-03T20:50:41.362217+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+---
+## [2026-06-03] Nano swarm production release gate promoted to PRODUCTION_READY
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/nano_swarm_runtime.py
+  - scripts/nano_swarm_expand.py
+  - 03_VAULT/runtime_state/nano_swarm_evidence/production_release_latest.json
+  - 03_VAULT/runtime_state/nano_swarm_runtime_latest.json
+- **Verification performed**:
+  - `pytest tests/test_nano_swarm_expand.py tests/test_nano_swarm_runtime.py -q`
+  - `runic_router verify-all`
+  - `scripts/camelot-status.py --json`
+- **Tag**: [Omega_SYNC]
+| 2026-06-03T20:52:30.243343+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-03T20:52:30.244108+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 1624 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=434477s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1625 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=435077s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1626 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=435677s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1627 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=436277s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1628 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=436877s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1629 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=437477s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1630 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=438077s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1631 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=438677s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1632 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=439277s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1633 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=439877s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1634 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=440477s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1635 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=441077s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1636 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=441677s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1637 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=442277s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1638 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=442877s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1639 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=443477s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1640 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=444077s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1641 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=444677s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1642 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=445277s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1643 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=445877s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1644 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=446477s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1645 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=447078s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1646 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=447678s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1647 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=448278s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1648 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=448878s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1649 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=449478s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1650 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=450078s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1651 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=450678s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1652 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=451278s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1653 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=451878s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1654 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=452478s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1655 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=453078s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1656 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=453678s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1657 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=454278s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1658 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=454878s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1659 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=455478s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1660 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=456078s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1661 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=456678s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1662 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=457278s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1663 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=457878s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1664 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=458478s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1665 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=459078s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1666 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=459678s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1667 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=460278s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1668 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=460878s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1669 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=461478s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1670 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=462078s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1671 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=462678s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1672 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=463278s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1673 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=463878s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1674 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=464478s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1675 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=465078s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1676 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=465678s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1677 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=466278s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1678 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=466879s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1679 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=467479s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1680 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=468079s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1681 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=468679s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1682 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=469279s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1683 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=469879s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1684 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=470479s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1685 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=471079s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1686 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=471679s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1687 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=472279s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1688 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=472880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1689 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=473480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1690 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=474080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1691 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=474680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1692 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=475280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1693 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=475880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1694 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=476480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1695 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=477080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1696 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=477680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1697 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=478280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1698 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=478880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1699 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=479480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1700 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=480080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1701 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=480680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1702 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=481280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1703 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=481880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1704 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=482480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1705 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=483080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1706 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=483680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1707 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=484280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1708 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=484880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1709 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=485480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1710 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=486080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1711 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=486680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1712 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=487280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1713 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=487880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1714 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=488480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1715 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=489080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1716 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=489680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1717 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=490280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1718 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=490880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1719 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=491480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1720 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=492080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1721 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=492680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1722 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=493280s tasks=7 fail=0 probes=6/9 cells=5 |
+---
+## [2026-06-04] Codex v5.5 Meta-Harness and Sir Codex identity integrated into AGENTS.md
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - AGENTS.md
+- **Verification performed**:
+  - `rg Codex v5.5 Meta-Harness AGENTS.md`
+  - `git diff --check -- AGENTS.md`
+- **Tag**: [Omega_SYNC]
+| 2026-06-04T13:26:13.156430+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-04T13:26:13.157717+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 1723 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=493880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1724 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=494480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1725 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=495080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1726 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=495680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1727 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=496280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1728 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=496880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1729 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=497480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1730 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=498080s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-04T14:48:27.493885+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-04T14:48:27.496700+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 1731 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=498680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1732 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=499280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1733 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=499880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1734 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=500480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1735 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=501080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1736 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=501680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1737 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=502280s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1738 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=502880s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1739 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=503480s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1740 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=504080s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1741 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=504680s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1742 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=505281s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1743 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=505881s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1744 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=506481s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1745 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=507081s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1746 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=507681s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1747 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=508281s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1748 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=508881s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1749 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=509481s tasks=7 fail=0 probes=6/9 cells=5 |
+| 1750 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=510081s tasks=7 fail=0 probes=6/9 cells=5 || 2026-06-04T18:02:19.395590+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//CODEX finalize and verify current production state'] | HYDRATED |
+| 2026-06-04T18:02:19.397332+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX finalize and verify current production state] | HYDRATED |
+| 2026-06-04T18:02:19.400172+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX finalize and verify current production state, Tiers: L0_LOCAL,L1_REDIS] | HYDRATED |
+
+| 1751 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=510681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1752 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=511281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1753 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=511881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1754 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=512481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1755 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=513081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1756 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=513681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1757 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=514281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1758 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=514881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1759 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=515481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1760 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=516081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1761 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=516681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1762 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=517281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1763 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=517881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1764 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=518481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1765 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=519081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1766 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=519681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1767 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=520281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1768 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=520881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1769 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=521481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1770 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=522081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1771 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=522681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1772 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=523281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1773 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=523881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1774 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=524481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1775 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=525081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1776 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=525681s tasks=7 fail=0 probes=6/9 cells=6 |
+---
+## [2026-06-04] Sir Codex production finalization executed and verified
+- **Actor**: SIR_CODEX (Codex)
+- **Scope**:
+  - AGENTS.md
+  - 03_VAULT/runtime_state/nano_swarm_runtime_latest.json
+  - 03_VAULT/runtime_state/nano_swarm_evidence/verify_all_latest.json
+  - 03_VAULT/runtime_state/nano_swarm_evidence/production_release_latest.json
+- **Verification performed**:
+  - `//CODEX finalize and verify current production state -> rune-1c2aa838 completed`
+  - `Nano-swarm status PRODUCTION_READY; 4/4 promoted and startable; VERIFIED; formal gate READY`
+  - `Cloud Brain sir_codex mapping unavailable; explicit Cloud Brain sync follows`
+- **Tag**: [Omega_CODEX]
+
+| 1777 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=526281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1778 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=526881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1779 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=527481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1780 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=528081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1781 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=528681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1782 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=529281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1783 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=529881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1784 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=530481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1785 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=531081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1786 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=531681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1787 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=532281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1788 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=532881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1789 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=533481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1790 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=534081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1791 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=534681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1792 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=535281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1793 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=535881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1794 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=536481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1795 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=537081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1796 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=537681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1797 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=538281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1798 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=538881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1799 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=539481s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1800 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=540081s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1801 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=540681s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1802 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=541281s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1803 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=541881s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1804 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=542482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1805 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=543082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1806 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=543682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1807 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=544282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1808 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=544882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1809 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=545482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1810 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=546082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1811 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=546682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1812 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=547282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1813 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=547882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1814 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=548482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1815 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=549082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1816 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=549682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1817 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=550282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1818 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=550882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1819 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=551482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1820 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=552082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1821 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=552682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1822 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=553282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1823 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=553882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1824 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=554482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1825 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=555082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1826 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=555682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1827 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=556282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1828 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=556882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1829 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=557482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1830 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=558082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1831 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=558682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1832 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=559282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1833 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=559882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1834 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=560482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1835 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=561082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1836 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=561682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1837 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=562282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1838 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=562882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1839 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=563482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1840 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=564082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1841 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=564682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1842 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=565282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1843 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=565882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1844 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=566482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1845 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=567082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1846 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=567682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1847 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=568282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1848 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=568882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1849 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=569482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1850 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=570082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1851 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=570682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1852 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=571282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1853 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=571882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1854 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=572482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1855 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=573082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1856 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=573682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1857 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=574282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1858 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=574882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1859 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=575482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1860 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=576082s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1861 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=576682s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1862 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=577282s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1863 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=577882s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1864 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=578482s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1865 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=579083s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1866 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=579683s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1867 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=580283s tasks=7 fail=0 probes=6/9 cells=6 |
+| 1868 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=580883s tasks=7 fail=0 probes=6/9 cells=6 || 2026-06-05T13:41:19.653767+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:47:18.845853+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-06-05T13:47:18.847166+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-06-05T13:47:18.858135+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_REDIS,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 1869 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=581483s tasks=7 fail=0 probes=6/9 cells=6 || 2026-06-05T13:53:11.923295+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:53:12.247871+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:53:12.577353+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:53:12.905809+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:53:13.232413+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:53:13.562422+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:54:06.321711+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:54:06.668843+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:54:07.007301+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:54:08.336646+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:54:08.668404+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:54:08.995931+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 1870 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=582083s tasks=7 fail=0 probes=6/9 cells=6 || 2026-06-05T13:59:24.904360+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:59:25.259026+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-05T13:59:25.260507+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:59:25.609657+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-05T13:59:25.610738+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:59:25.936527+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-05T13:59:25.937481+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:59:26.267116+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-05T13:59:26.268079+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-06-05T13:59:26.593704+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_ouroboros'] | HYDRATED |
+| 2026-06-05T13:59:26.594761+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 1871 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=582683s tasks=7 fail=0 probes=6/9 cells=6 || 2026-06-05T14:16:12.895665+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+
+| 2026-06-05T14:18:15.697803+00:00 | SIR_BORIS | **EXCALIBUR Phase 1: F401 purge 01_KERNEL** — 113 auto-fixed + 24 noqa; test_anya_gate.py + test_firnflow.py + test_soul_oversight.py (17/17 PASS); broken test imports fixed. Commit 9975eba | ✅ DEPLOYED |
+| 2026-06-05T14:18:15.697803+00:00 | SIR_BORIS | **EXCALIBUR Phase 2.2+2.4: anya_gate RTK+Socrates** — _stage_rtk_strip Stage 0 (ctypes bridge + Python fallback); SocratesVerdict dataclass; _stage_socrates Northstar stub. Commit 2645fa6 | ✅ DEPLOYED |
