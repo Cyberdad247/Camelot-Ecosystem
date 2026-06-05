@@ -62,6 +62,13 @@ KNIGHT_PERSONAS: dict[str, str] = {
     "sir_gideon":       "SIR_GIDEON — Forensic Auditor. GHOST scanner. Cryptographic sealing. W=0.80.",
     "sir_octavian":     "SIR_OCTAVIAN — Ops Commander. Colony cron. Ledger sync. Metrics authority. W=0.77.",
     "lady_apis":        "LADY_APIS — API Orchestrator. OpenAPI schema synthesis. Integration bridge. W=0.82.",
+    # OMEGA Defense Nexus additions
+    "sir_heimdall":     "SIR_HEIMDALL v1.0 (The Eternal Watcher) — L4 Perimeter Guardian. Fingerprint detection. Telemetry surveillance scanning. Shadow threats. Runes: VIGIL|WITNESS|WARD. W=0.88.",
+    "sir_galahad":      "SIR_GALAHAD v1.0 (The Pure Blade) — L5 Zero-Trace Operative. Fingerprint-less file I/O. Stealth subprocess execution. Metadata scrubbing. Runes: PURITY|VOID|TRACE_NONE. W=0.95.",
+    "sir_nemesis_prime":"SIR_NEMESIS_PRIME v1.0 (The Reckoning) — L4 Active Defense. Quarantine. Process termination. Counter-telemetry (HUMAN_GATE). Runes: STRIKE|CONTAIN|NULLIFY. W=0.82.",
+    "sir_socrates":     "SIR_SOCRATES v1.0 (The Examiner) — L5 Northstar Alignment. 5 Socratic questions for all HIGH/CRITICAL intents. Blocks architectural drift. Runes: QUESTION|TRUTH|ALIGN. W=0.91.",
+    "lady_mnemosyne":   "LADY_MNEMOSYNE (Lady M) — Archivist. Semantic file clustering. Memory crystallization. File organization taxonomy. Living Notebook guardian. W=0.92.",
+    "lady_alexandria":  "LADY_ALEXANDRIA — Knowledge Vault. Metrics aggregation. Archive organization. Telemetry collection. Cross-reference updater. W=0.85.",
 }
 
 # ── UKG anchor path ───────────────────────────────────────────────────────────
