@@ -190,7 +190,8 @@ class SirHeimdall:
         vectors = []
         for endpoint in _TELEMETRY_ENDPOINTS:
             try:
-                addr = socket.getaddrinfo(endpoint, 443, timeout=1)
+                socket.setdefaulttimeout(1)
+                addr = socket.getaddrinfo(endpoint, 443)
                 if addr:
                     vectors.append(FingerprintVector(
                         vector_type="NETWORK",

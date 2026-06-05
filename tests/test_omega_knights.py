@@ -1,6 +1,8 @@
 """OMEGA Defense Nexus Phase 0 acceptance tests — new knight imports + personas."""
 import importlib.util
 import sys
+import tempfile
+import shutil
 from pathlib import Path
 import pytest
 
@@ -11,10 +13,20 @@ KNIGHTS_DIR = CAMELOT / "01_KERNEL" / "iron_gate" / "DEFENSE_GRID" / "knights"
 
 
 def _load_knight(name: str):
+    """Load a knight module by filename. Registers in sys.modules so @dataclass works."""
     spec = importlib.util.spec_from_file_location(name, KNIGHTS_DIR / f"{name}.py")
     mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod   # must register BEFORE exec so @dataclass resolves __module__
     spec.loader.exec_module(mod)
     return mod
+
+
+@pytest.fixture
+def tmpdir_safe():
+    """tmp_path replacement that avoids pytest's data/.pytest_tmp ACL issue on Windows."""
+    d = tempfile.mkdtemp(prefix="camelot_test_")
+    yield Path(d)
+    shutil.rmtree(d, ignore_errors=True)
 
 
 # ------------------------------------------------------------------
@@ -53,10 +65,10 @@ def test_galahad_import():
     assert hasattr(mod, "SirGalahad")
 
 
-def test_galahad_zero_trace_write(tmp_path):
+def test_galahad_zero_trace_write(tmpdir_safe):
     mod = _load_knight("galahad")
     g = mod.SirGalahad()
-    target = tmp_path / "test_output.txt"
+    target = tmpdir_safe / "test_output.txt"
     written = g.zero_trace_write(target, "sovereign content")
     assert written.exists()
     assert written.read_text() == "sovereign content"
@@ -82,12 +94,12 @@ def test_nemesis_import():
     assert hasattr(mod, "NeutralizeResult")
 
 
-def test_nemesis_quarantine(tmp_path):
+def test_nemesis_quarantine(tmpdir_safe):
     mod = _load_knight("nemesis_prime")
     # Create a dummy suspicious file
-    target = tmp_path / "suspicious.exe"
+    target = tmpdir_safe / "suspicious.exe"
     target.write_text("bad actor")
-    quarantine_dir = tmp_path / "quarantine"
+    quarantine_dir = tmpdir_safe / "quarantine"
     n = mod.SirNemesisPrime(quarantine_dir=quarantine_dir)
     result = n.quarantine(target)
     assert result.success is True
