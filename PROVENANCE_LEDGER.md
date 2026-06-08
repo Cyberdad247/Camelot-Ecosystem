@@ -7722,3 +7722,8 @@ ender_hud() â€” inserted panel between Sir Link and Anya/OS Health rows
 | 2026-06-08T00:43:28.028878+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //HEAL Map sir_sonus to Soul Router OMNI_PROVIDER_MAP] | HYDRATED |
 | 2026-06-08T00:43:28.656507+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //HEAL Map sir_sonus to Soul Router OMNI_PROVIDER_MAP, hits=3] | HYDRATED |
 | 2026-06-08T00:43:28.656975+00:00 | HYDRATION_MGR | HYDRATE [Intent: //HEAL Map sir_sonus to Soul Router OMNI_PROVIDER_MAP, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+| 2026-06-08T00:48:37.184333+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //HEAL Verify Soul Router weight lock and knight roster consistency.] | HYDRATED |
+| 2026-06-08T00:48:37.567332+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //HEAL Verify Soul Router weight lock and knight roster consistency., hits=3] | HYDRATED |
+| 2026-06-08T00:48:37.567809+00:00 | HYDRATION_MGR | HYDRATE [Intent: //HEAL Verify Soul Router weight lock and knight roster consistency., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22863s tasks=12 fail=0 probes=7/9 cells=4 |

@@ -61,6 +61,7 @@ class EngineWeight(float, Enum):
     W_WARDEN        = 0.93
     W_FINANCE       = 0.82
     W_BIFROST       = 0.91
+    W_VOICE         = 0.86
 
 @dataclass(frozen=True)
 class KnightEngine:
@@ -76,6 +77,7 @@ FOUNDRY_COUNCIL: tuple[KnightEngine, ...] = (
     KnightEngine("sir_helio", "antigravity.cli", EngineWeight.W_CONTEXT, "1M+ Context Mapping", privacy_level=0.2),
     KnightEngine("sir_codex", "openai_codex", EngineWeight.W_VELOCITY, "High-Velocity Code", privacy_level=0.2),
     KnightEngine("sir_forge", "open_coder", EngineWeight.W_KINETIC, "Local Code Gen", privacy_level=0.7),
+    KnightEngine("sir_sonus", "vox_anima", EngineWeight.W_VOICE, "Voice & Resonance", privacy_level=0.3),
     KnightEngine("sir_link", "antigravity.cli", EngineWeight.W_BRIDGE, "Cross-UI Handoff", privacy_level=0.2),
     KnightEngine("sir_ghost", "local_qwen", EngineWeight.W_PRIVACY, "Zero-Trust Execution", privacy_level=1.0),
     KnightEngine("sir_liberte", "open_source", EngineWeight.W_SOVEREIGNTY, "Anti-Vendor Sovereign", privacy_level=0.5),
