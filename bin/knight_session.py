@@ -63,6 +63,28 @@ from rich.table import Table
 from control_plane.cli_intercept import CLIIntercept
 from control_plane.soul_router import CLIPROXY_URL
 
+try:
+    from bin.camelot_context import build_system_prompt as _ctx_build_system_prompt
+    from bin.camelot_context import KNIGHT_PERSONAS as _ctx_KNIGHT_PERSONAS
+    _CONTEXT_MODULE = True
+except ImportError:
+    try:
+        import importlib.util, sys as _sys
+        _spec = importlib.util.spec_from_file_location(
+            "camelot_context", Path(__file__).resolve().parent / "camelot_context.py"
+        )
+        if _spec and _spec.loader:
+            _cm = importlib.util.module_from_spec(_spec)
+            _sys.modules["camelot_context"] = _cm
+            _spec.loader.exec_module(_cm)
+            _ctx_build_system_prompt = _cm.build_system_prompt
+            _ctx_KNIGHT_PERSONAS = _cm.KNIGHT_PERSONAS
+            _CONTEXT_MODULE = True
+        else:
+            _CONTEXT_MODULE = False
+    except Exception:
+        _CONTEXT_MODULE = False
+
 # ── Load OmniRoute config ─────────────────────────────────────────────────────
 _OMNIROUTE_PATH = _REPO / "03_VAULT" / "training" / "configs" / "config" / "omniroute.json"
 
@@ -282,24 +304,34 @@ def _build_system_prompt(
         text = p.read_text(encoding="utf-8", errors="replace") if p.exists() else ""
         return text, "custom", len(text) // 4
 
+    # Delegate to camelot_context (4-layer: constitution + cartridge + persona + UKG anchor)
+    if _CONTEXT_MODULE:
+        try:
+            return _ctx_build_system_prompt(
+                knight_id=knight_id,
+                cwd=Path.cwd(),
+                verbose=verbose,
+                repo=_REPO,
+            )
+        except Exception:
+            pass  # fall through to inline
+
+    # Inline fallback (3-layer: constitution + cartridge + persona, no UKG anchor)
     cwd = Path.cwd()
     parts: list[str] = []
     total_tok = 0
 
-    # Layer 1: Constitution
     constitution, tok1 = _load_constitution()
     if constitution:
         parts.append(f"# CAMELOT-OS CONSTITUTION\n{constitution}")
         total_tok += tok1
 
-    # Layer 2: Active cartridge
     cartridge_name, cartridge_text = _detect_and_load_cartridge(cwd)
     tok2 = len(cartridge_text) // 4
     if cartridge_text:
         parts.append(f"# ACTIVE CARTRIDGE: {cartridge_name}\n{cartridge_text}")
         total_tok += tok2
 
-    # Layer 3: Knight persona
     if knight_id and knight_id in _KNIGHT_PERSONAS:
         persona_block = f"# ACTIVE KNIGHT: {knight_id.upper()}\n{_KNIGHT_PERSONAS[knight_id]}"
         parts.append(persona_block)

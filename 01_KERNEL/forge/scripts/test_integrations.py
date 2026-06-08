@@ -47,7 +47,7 @@ except Exception as e:
 print("\n[TEST 2] Supermemory Adapter")
 print("-" * 60)
 try:
-    from supermemory_adapter import MemoryAdapter, SupermemoryAdapter, TitanMemoryBridge
+    from supermemory_adapter import MemoryAdapter, SupermemoryAdapter, TitanMemoryBridge  # noqa: F401
 
     print("✅ Supermemory adapter imported successfully")
 

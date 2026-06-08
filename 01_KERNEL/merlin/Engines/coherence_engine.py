@@ -2,7 +2,6 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import json
 from typing import Any, Dict, List, Optional
-import asyncio
 
 # Use Merlin as the core verification engine
 try:

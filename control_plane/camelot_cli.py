@@ -7,7 +7,6 @@ import asyncio
 import importlib
 import json
 import os
-import re
 import subprocess
 import sys
 import time
@@ -48,6 +47,10 @@ from .microcubed import (
     status as microcubed_status,
     teardown_house,
 )
+from .nano_swarm_runtime import (
+    supervise_nodes as supervise_nano_swarm_nodes,
+    write_runtime_status as write_nano_swarm_runtime_status,
+)
 from .provenance import ProvenanceManager, VerificationRun
 
 def _detect_home() -> Path:
@@ -87,8 +90,21 @@ MODE_CARTRIDGE_MAP = {
     "CRITICAL_THINKING": "CRITICAL_THINKING",
 }
 HELP_LINES = [
+    "Core commands:",
+    "/who                 show active knight, provider, model, and last route",
+    "/route <intent>      preview which knight and model will handle an intent",
+    "/status              run Camelot health/status probes",
+    "/llm <model>         pin chat model",
+    "/provider <name>     pin chat provider",
+    "/chat [intent]       enter Sovereign Chat Interface",
+    "/commands            show the full command surface",
+    "/exit",
+]
+FULL_HELP_LINES = [
     "Commands:",
     "/help or //HELP",
+    "/who",
+    "/commands",
     "/route <intent>",
     "/status",
     "/orchestrator [--mode <boot|status|knights|triage|persona|notify|awaken|conversation>]",
@@ -116,6 +132,8 @@ HELP_LINES = [
     "codex status",
     "codex integrate [--actor <name>]",
     "codex sync",
+    "nano-swarm status",
+    "nano-swarm supervise <status|start|stop|restart> [--node <name>]",
     "microcubed status",
     "microcubed plan \"objective\" --knight sir_forge",
     "microcubed forge \"objective\" --knight sir_forge [--queue]",
@@ -181,6 +199,42 @@ def _stream_print(text: str, *, tone: str | None = None, newline: bool = True) -
         print("", flush=True)
 
 
+def _provider_label(provider: str | None) -> str:
+    return provider or "auto"
+
+
+def _model_label(model: str | None) -> str:
+    return model or "default"
+
+
+def _prompt_text(knight_id: str, provider: str | None, model: str | None) -> str:
+    return f"Camelot[{knight_id}|{_provider_label(provider)}/{_model_label(model)}]> "
+
+
+def _identity_lines(
+    knight_id: str,
+    provider: str | None,
+    model: str | None,
+    last_route: dict[str, Any] | None = None,
+) -> list[str]:
+    lines = [
+        f"Knight: {knight_id}",
+        f"Provider: {_provider_label(provider)}",
+        f"LLM: {_model_label(model)}",
+    ]
+    if last_route:
+        lines.extend(
+            [
+                f"Last route: {last_route['knight_id']} via {last_route['engine']}",
+                f"Last model: {last_route['model']} @ {last_route['backend_url']}",
+                f"Reason: {last_route['reason']}",
+            ]
+        )
+    else:
+        lines.append("Last route: none yet; run /route <intent> to preview assignment")
+    return lines
+
+
 def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float = 0.0) -> bool:
     """Enforce Titanium Laws: HITL Iron Gate integrated with SecurityWarden."""
     try:
@@ -218,7 +272,7 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
             pass
 
         # Import warden here to maintain lazy loading
-        from security.warden import warden, SecurityException
+        from security.warden import warden, SecurityException  # noqa: F401
         
         # Verify permission via the unified security warden
         warden.verify_permission(
@@ -508,7 +562,6 @@ MODAL_DISCOVERY_MAP = {
 
 
 def _diagnose_cloud_endpoints(config_mgr: Any) -> dict[str, Any]:
-    from .config_manager import ConfigManager
 
     effective = config_mgr.cloud_endpoint_map()
     persisted = {
@@ -548,7 +601,6 @@ def _diagnose_cloud_endpoints(config_mgr: Any) -> dict[str, Any]:
 
 
 def _audit_cloudbrain_configuration(config_mgr: Any) -> dict[str, Any]:
-    from .config_manager import ConfigManager
     from .ledger_sync import ledger_status
 
     ledger = ledger_status()
@@ -1108,10 +1160,12 @@ def _interactive_shell(
 
     current_provider = provider
     current_llm = llm
+    current_knight = os.getenv("CAMELOT_ACTIVE_KNIGHT", "sir_codex")
+    last_route: dict[str, Any] | None = None
 
     while True:
         try:
-            raw = input(_color("Camelot-OS> ", "accent")).strip()
+            raw = input(_color(_prompt_text(current_knight, current_provider, current_llm), "accent")).strip()
         except EOFError:
             return 0
         except KeyboardInterrupt:
@@ -1126,6 +1180,24 @@ def _interactive_shell(
             if not json_mode:
                 for line in HELP_LINES:
                     _stream_print(line, tone="dim")
+            continue
+        if raw in {"/commands", "commands"}:
+            if not json_mode:
+                for line in FULL_HELP_LINES:
+                    _stream_print(line, tone="dim")
+            continue
+        if raw in {"/who", "who"}:
+            output = {
+                "knight_id": current_knight,
+                "provider": _provider_label(current_provider),
+                "model": _model_label(current_llm),
+                "last_route": last_route,
+            }
+            if json_mode:
+                _print_json(output)
+            else:
+                for line in _identity_lines(current_knight, current_provider, current_llm, last_route):
+                    _stream_print(line, tone="info")
             continue
 
         try:
@@ -1204,6 +1276,9 @@ def _interactive_shell(
                     "backend_url": result.backend_url,
                     "reason": result.route.reason,
                 }
+                current_knight = result.route.knight_id
+                current_llm = result.model
+                last_route = output
                 if json_mode:
                     _print_json(output)
                 else:
@@ -1374,6 +1449,15 @@ def _interactive_shell(
             # Omni-Routing Intercept
             intercept = CLIIntercept()
             result = intercept.intercept(raw)
+            current_knight = result.route.knight_id
+            current_llm = result.model
+            last_route = {
+                "knight_id": result.route.knight_id,
+                "engine": result.engine_cmd,
+                "model": result.model,
+                "backend_url": result.backend_url,
+                "reason": result.route.reason,
+            }
             
             if not json_mode:
                 _stream_print(intercept.format_route_log(result), tone="info")
@@ -1663,6 +1747,18 @@ def _build_parser() -> argparse.ArgumentParser:
     codex_sync = codex_sub.add_parser("sync", help="Refresh Codex artifact and trigger Cloud Brain sync")
     codex_sync.add_argument("--actor", default=CODEX_DEFAULT_ACTOR)
 
+    shadow = sub.add_parser("shadow", help="Shadow Veil — fingerprint-less defense pipeline status")
+    shadow_sub = shadow.add_subparsers(dest="shadow_command", required=True)
+    shadow_status_p = shadow_sub.add_parser("status", help="Show Shadow Veil pipeline status")
+    shadow_status_p.add_argument("--scan", action="store_true", help="Run a live Heimdall scan before reporting")
+
+    nano_swarm = sub.add_parser("nano-swarm", help="Inspect promoted UKG nano-swarm runtime state")
+    nano_swarm_sub = nano_swarm.add_subparsers(dest="nano_swarm_command", required=True)
+    nano_swarm_sub.add_parser("status", help="Refresh and show promoted nano-swarm runtime status")
+    nano_supervise = nano_swarm_sub.add_parser("supervise", help="Manage promoted nano-swarm service processes")
+    nano_supervise.add_argument("supervise_action", choices=("status", "start", "stop", "restart"))
+    nano_supervise.add_argument("--node", default=None, help="Limit action to one node")
+
     microcubed = sub.add_parser("microcubed", help="Manage Microcubed SmolVM knight task houses")
     microcubed_sub = microcubed.add_subparsers(dest="microcubed_command", required=True)
     microcubed_sub.add_parser("status", help="Show Microcubed houses and latest contract")
@@ -1771,6 +1867,7 @@ def main() -> int:
         "evolve",
         "team",
         "codex",
+        "nano-swarm",
         "microcubed",
         "gemini-ext",
         "scripts",
@@ -2385,27 +2482,58 @@ excalibur_health_url: "https://replace-me.modal.run"
                 ],
                 tag="[Omega_CODEX]",
             )
-            output = write_codex_integration(
-                CAMELOT_HOME,
-                actor=args.actor,
-                trigger=args.codex_command,
-                ledger=ledger,
-            )
             sync_event = sync_after_event(
                 event_type="codex_integration",
                 command=f"codex {args.codex_command}",
                 results=output,
             )
-            output = write_codex_integration(
-                CAMELOT_HOME,
-                actor=args.actor,
-                trigger=args.codex_command,
-                cloudbrain_sync=sync_event,
-                ledger=ledger,
-            )
+            output["ledger"] = ledger
+            output["cloudbrain_sync"] = sync_event
         _log_run(output)
         _emit(output, json_mode=args.json, title="Codex Integration")
         return 0
+
+    if args.command == "shadow":
+        import importlib.util as _shadow_ilu
+        _shadow_spec = _shadow_ilu.spec_from_file_location(
+            "shadow_pipeline",
+            CAMELOT_HOME / "01_KERNEL/iron_gate/DEFENSE_GRID/shadow_veil/shadow_pipeline.py",
+        )
+        _shadow_mod = _shadow_ilu.module_from_spec(_shadow_spec)
+        sys.modules["shadow_pipeline"] = _shadow_mod
+        _shadow_spec.loader.exec_module(_shadow_mod)
+        sv = _shadow_mod.ShadowVeil(repo_root=CAMELOT_HOME, hermes_enabled=False)
+        if getattr(args, "scan", False):
+            st = sv.scan_once()
+        else:
+            st = sv.status()
+        output = {
+            "shadow_veil": {
+                "heimdall_ok": st.heimdall_ok,
+                "nemesis_ok": st.nemesis_ok,
+                "hermes_ok": st.hermes_ok,
+                "vector_count": st.vector_count,
+                "critical_count": st.critical_count,
+                "threats_detected": st.threats_detected,
+                "auto_responses": st.auto_responses,
+                "hitl_pending": st.hitl_pending,
+                "last_scan_at": st.last_scan_at,
+                "last_threat_at": st.last_threat_at,
+                "active": st.active,
+            }
+        }
+        _emit(output, json_mode=args.json, title="Shadow Veil Status")
+        return 0
+
+    if args.command == "nano-swarm":
+        if args.nano_swarm_command == "status":
+            output = write_nano_swarm_runtime_status()
+            success = bool(output.get("runtime_ready"))
+        else:
+            output = supervise_nano_swarm_nodes(args.supervise_action, node_name=args.node)
+            success = output.get("status") != "SUPERVISOR_ERROR"
+        _emit(output, json_mode=args.json, title="Nano Swarm Runtime")
+        return 0 if success else 2
 
     if args.command == "microcubed":
         if args.microcubed_command == "status":

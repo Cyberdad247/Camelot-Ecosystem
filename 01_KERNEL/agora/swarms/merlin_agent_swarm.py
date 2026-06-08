@@ -16,7 +16,6 @@ import os
 import asyncio
 import json
 import logging
-from typing import Dict, Any, List, Optional
 
 # Add KERNEL to path for telemetry import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))

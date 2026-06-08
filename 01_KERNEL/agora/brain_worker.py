@@ -1,9 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import asyncio
 import os
 import sys
-import json
 from fastapi import FastAPI, Request, HTTPException
 import uvicorn
 

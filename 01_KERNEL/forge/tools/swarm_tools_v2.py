@@ -10,7 +10,6 @@ Follows the Iron Gate protocol.
 
 import os
 import logging
-import json
 from typing import Dict, Any, List
 
 logger = logging.getLogger(__name__)

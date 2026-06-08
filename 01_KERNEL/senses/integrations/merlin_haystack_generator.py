@@ -18,7 +18,7 @@ import logging
 # Haystack imports
 try:
     from haystack import component, Document
-    from haystack.dataclasses import StreamingChunk
+    from haystack.dataclasses import StreamingChunk  # noqa: F401
     HAYSTACK_AVAILABLE = True
 except ImportError:
     HAYSTACK_AVAILABLE = False

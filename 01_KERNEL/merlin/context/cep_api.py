@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../m
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../context')))
 
 from titan_omega import TitanOmega
-from expansion_engine import ExpansionEngine, ContextBundle
+from expansion_engine import ExpansionEngine
 
 
 # =========================================
@@ -155,8 +155,6 @@ async def validate_context(request: ContextValidationRequest):
     try:
         # Create a minimal bundle for validation
         # (In production, would reconstruct from request)
-        from expansion_engine import ContextBundle
-        from rag_backbone import RetrievalResult
         
         # Simplified validation - just check basic properties
         validation = {

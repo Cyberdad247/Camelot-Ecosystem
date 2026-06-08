@@ -10,7 +10,7 @@ Integrates Capability Discovery, Multi-Strategy Fusion, and LLM-as-a-Judge adjud
 import os
 import sys
 from typing import List, Dict, Any, Optional
-from fastapi import APIRouter, HTTPException, BackgroundTasks
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 # Ensure internal modules are reachable

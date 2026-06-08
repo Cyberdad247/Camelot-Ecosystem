@@ -165,7 +165,6 @@ class KittenService:
 
     async def run_streaming_server(self, host: str = "0.0.0.0", port: int = 8300) -> None:
         """HTTP streaming server — POST /synthesize with JSON body {text: str}."""
-        import json
         from aiohttp import web  # type: ignore
 
         async def handle_synthesize(request: web.Request) -> web.StreamResponse:

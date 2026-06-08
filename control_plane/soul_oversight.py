@@ -16,6 +16,7 @@ Z3 symbolic verification gates any job that mutates git/state-machines.
 from typing import Any, Dict, Optional
 from pathlib import Path
 import os
+import sys
 import json
 
 class SoulOversight:
@@ -57,7 +58,7 @@ class SoulOversight:
 # Iron Gate v2 — three-tier HITL governance (EXCALIBUR_A_QNF Phase 4)
 # ---------------------------------------------------------------------------
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -92,14 +93,57 @@ def _z3_verify_patch(job: Any) -> tuple[bool, str]:
         return True, f"Z3 error ({exc}) — passed through"
 
 
+def _colony_escalate(tier: str) -> str:
+    """Escalate `tier` to HUMAN_GATE when colony risk is CRITICAL.
+
+    Reads colony_report.md lazily; silently no-ops if the file is absent
+    or the import fails (non-blocking — colony state should not crash the gate).
+    """
+    if tier == "HUMAN_GATE":
+        return tier   # already at max — no need to parse report
+    try:
+        from pathlib import Path as _Path
+        sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
+        from _01_KERNEL.iron_gate.DEFENSE_GRID.colony_nexus import ColonyNexus  # type: ignore
+        state = ColonyNexus(hermes_enabled=False).scan()
+        if state.is_critical:
+            return "HUMAN_GATE"
+    except Exception:
+        try:
+            # fallback: direct path load without package import
+            import importlib.util as _ilu
+            _p = _Path(__file__).resolve().parents[1]
+            _spec = _ilu.spec_from_file_location(
+                "colony_nexus",
+                _p / "01_KERNEL" / "iron_gate" / "DEFENSE_GRID" / "colony_nexus.py",
+            )
+            if _spec and _spec.loader:
+                _mod = _ilu.module_from_spec(_spec)
+                import sys as _sys
+                _sys.modules["colony_nexus"] = _mod
+                _spec.loader.exec_module(_mod)
+                state = _mod.ColonyNexus(hermes_enabled=False).scan()
+                if state.is_critical:
+                    return "HUMAN_GATE"
+        except Exception:
+            pass   # colony data unavailable — proceed with original tier
+    return tier
+
+
 async def pre_execute(job: Any) -> GateDecision:
     """Iron Gate v2 entry point. Called before every knight dispatch.
 
     `job` is a control_plane.factory_lane.FactoryJob (duck-typed: needs
     .triage.hitl_tier, .triage.requires_z3_verification, .triage.risk_reason).
+
+    Colony Nexus escalation: if the live colony_report.md shows CRITICAL risk
+    AND the job is not already HUMAN_GATE, escalate the tier to HUMAN_GATE.
     """
     triage = job.triage
     tier = triage.hitl_tier
+
+    # 0. Colony Nexus risk escalation
+    tier = _colony_escalate(tier)
 
     # 1. Z3 verification for git patches / state machines
     if getattr(triage, "requires_z3_verification", False):

@@ -5,12 +5,12 @@ Kernel package initialization.
 """
 
 from pathlib import Path
-import sys
-import os
+import sys  # noqa: F401
+import os  # noqa: F401
 
 # --- LAW OF ANTIGRAVITY: SAFE I/O INJECTION ---
 try:
-    from .forge.tools import antigravity_safe
+    from .forge.tools import antigravity_safe  # noqa: F401
     # Antigravity safe already patches builtins.open upon import
     print("[KERNEL] Antigravity Safe I/O Active.")
 except ImportError:

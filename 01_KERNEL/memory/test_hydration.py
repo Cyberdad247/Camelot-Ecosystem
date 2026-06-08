@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
-from unittest.mock import MagicMock, patch
-import os
+from unittest.mock import patch
 import sys
-import json
-import sqlite3
 from pathlib import Path
 
 import shutil

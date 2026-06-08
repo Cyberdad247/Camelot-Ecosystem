@@ -11,10 +11,10 @@ import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../memory')))
 
-from typing import List, Dict, Any, Tuple, Optional
+from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from titan_omega import TitanOmega
-from titan_schemas import GraphNode, VaultEmbedding
+from titan_schemas import GraphNode
 
 
 @dataclass

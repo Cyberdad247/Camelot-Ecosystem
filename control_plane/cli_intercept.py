@@ -17,13 +17,12 @@ from __future__ import annotations
 import json
 import os
 import re
-import sys
 import asyncio
 import argparse
 import hashlib
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from .soul_router import SoulRouter, RouteDecision, PRIVACY_KEYWORDS
 from .main import ControlPlane, TaskPayload
@@ -42,6 +41,17 @@ _HIGH_COMPLEXITY = frozenset({
     "architecture", "refactor", "migrate", "redesign", "multi-agent",
     "microservice", "deploy", "infrastructure", "pipeline", "orchestrat",
     "scaling", "shard", "consensus", "evolution", "v1000", "hard-production",
+})
+
+# Keywords that indicate a quick, narrow request (magnitude <= 0.2)
+_LOW_COMPLEXITY = frozenset({
+    "status", "list", "show", "who", "help", "ping", "version",
+    "simple", "quick", "small", "one-line", "one line",
+})
+
+# Keywords that indicate high velocity / immediate execution preference.
+_URGENT = frozenset({
+    "urgent", "asap", "immediately", "now", "today", "fast", "quickly",
 })
 
 # Keywords that suggest linear scaling / SSM preference

@@ -8,7 +8,7 @@ Enables Merlin to "See" and reason over visual temporal sequences.
 import os
 import sys
 import time
-from typing import List, Dict, Any
+from typing import Dict, Any
 
 # Add KERNEL to path for telemetry import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))

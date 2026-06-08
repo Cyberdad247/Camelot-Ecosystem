@@ -15,7 +15,6 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
 
 CAMELOT_HOME = Path(__file__).resolve().parent.parent
 LOGS_DIR     = CAMELOT_HOME / "logs"

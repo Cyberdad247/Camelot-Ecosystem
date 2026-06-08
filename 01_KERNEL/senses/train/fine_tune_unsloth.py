@@ -4,7 +4,6 @@ Standardizing according to Phase 7 Recommendation 1.
 """
 from unsloth import FastLanguageModel
 import torch
-import os
 
 def fine_tune_model(model_name="unsloth/llama-3-8b-bnb-4bit", dataset_path="docs/REPORTS/INTEGRATED_KNOWLEDGE_BASE.md"):
     print(f"🚀 [FORGE] Starting Fine-tuning with Unsloth: {model_name}")

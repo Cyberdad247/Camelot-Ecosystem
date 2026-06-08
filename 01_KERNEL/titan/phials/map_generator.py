@@ -7,7 +7,6 @@ Ignores noise, annotates structure, and establishes Ground Truth.
 """
 
 import os
-import sys
 from pathlib import Path
 from datetime import datetime
 

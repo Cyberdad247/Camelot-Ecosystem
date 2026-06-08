@@ -8,8 +8,6 @@ Integrates: TitanLink, RustDesk, Handoffs, and Iron Gate.
 
 import os
 import sys
-import threading
-import time
 from datetime import datetime
 from contextlib import asynccontextmanager
 
@@ -19,10 +17,6 @@ from fastapi import BackgroundTasks, FastAPI
 # Import Modules (Ensure paths are correct in Docker)
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from connectivity.rustdesk_bridge import RustDeskBridge
-from connectivity.titanlink_server import TitanLinkServer
-from monitoring.telemetry_bridge import TelemetryBridge
-from orchestration.handoff_manager import HandoffManager
 from fusion.fusion_router import router as fusion_router
 
 # Global State (Stubbed for Fusion Test)
@@ -60,6 +54,22 @@ app.include_router(fusion_router)
 @app.get("/health")
 def health_check():
     return {"status": "ONLINE", "identity": "Merlin_Ω", "mode": os.getenv("MODE", "SIMULATION")}
+
+
+@app.post("/agent/helio")
+async def sir_helio_endpoint(query: str, session_id: str = "session_001"):
+    """Dispatch a query to Sir Helio (pydantic-ai) via the control_plane knight."""
+    _camelot_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+    if _camelot_root not in sys.path:
+        sys.path.insert(0, _camelot_root)
+    try:
+        from control_plane.pydantic_ai_knight import run_sir_helio
+        result = await run_sir_helio(query, session_id)
+        return {"status": "SUCCESS", "result": result}
+    except ImportError:
+        return {"status": "UNAVAILABLE", "detail": "pydantic-ai not installed in this environment"}
+    except Exception as exc:
+        return {"status": "ERROR", "detail": str(exc)}
 
 
 @app.post("/command")

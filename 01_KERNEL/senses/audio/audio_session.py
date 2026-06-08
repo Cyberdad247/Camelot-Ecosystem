@@ -27,7 +27,7 @@ import os
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import AsyncGenerator, Optional
+from typing import AsyncGenerator
 
 HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 QUEUE_PATH = HOME / "logs" / "harness_queue.jsonl"
@@ -163,7 +163,7 @@ class AudioSession:
 
     async def _classify(self, text: str):
         """Classify intent, lazy-loading switchboard if not injected."""
-        from control_plane.intent_router import route_by_intent, IntentCategory
+        from control_plane.intent_router import route_by_intent
 
         if self.board is None:
             from control_plane.switchboard import get_board

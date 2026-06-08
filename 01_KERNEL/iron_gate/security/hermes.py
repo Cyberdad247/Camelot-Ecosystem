@@ -18,7 +18,13 @@ def notify(title, message):
     $objNotification.ShowBalloonTip(10000);
     """
     try:
-        subprocess.run(["powershell", "-Command", ps_command], capture_output=True, text=True)
+        subprocess.run(
+            ["powershell", "-Command", ps_command],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace"
+        )
         return True
     except Exception as e:
         print(f"❌ [HERMES] Delivery Failure: {e}")

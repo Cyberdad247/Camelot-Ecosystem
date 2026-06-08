@@ -189,7 +189,10 @@ def _handle_forge(command: str):
     """//FORGE — bypass LLM, invoke local Rust bundler via cribo."""
     result = subprocess.run(
         ["cribo", "--entry", "src/main.py", "--output", "bundle.py"],
-        capture_output=True, text=True,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
     )
     if result.returncode == 0:
         msg = "[green]FORGE SUCCESS[/] — bundle.py written."

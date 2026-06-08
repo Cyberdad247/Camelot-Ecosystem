@@ -15,7 +15,13 @@ class SirSentinel:
         logging.info("🛡️ [SENTINEL]: Auditing directory drift via Cribo...")
         try:
             if os.path.exists(self.cribo_path):
-                res = subprocess.run([self.cribo_path, "--audit", self.manifest_path], capture_output=True, text=True)
+                res = subprocess.run(
+                    [self.cribo_path, "--audit", self.manifest_path],
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                    errors="replace"
+                )
                 return res.stdout
             else:
                 return "SUCCESS: No drift detected (Simulated)"
@@ -27,7 +33,13 @@ class SirSentinel:
         logging.info("🛡️ [SENTINEL]: Scanning for CVEs via Trivy...")
         try:
             # Assumes trivy is in PATH
-            res = subprocess.run(["trivy", "fs", "--scanners", "vuln,secret", "."], capture_output=True, text=True)
+            res = subprocess.run(
+                ["trivy", "fs", "--scanners", "vuln,secret", "."],
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace"
+            )
             return res.stdout
         except FileNotFoundError:
             return "WARNING: Trivy not found. Vulnerability scan skipped."

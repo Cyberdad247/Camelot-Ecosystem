@@ -12,7 +12,7 @@ Implements:
 """
 
 import json
-from typing import Dict, List, Any, Optional, Union
+from typing import Dict, List, Any, Optional
 from pathlib import Path
 
 try:

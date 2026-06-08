@@ -31,7 +31,6 @@ from kernel.Engines.coherence_engine import coherence
 from kernel.Engines.prism_gateway import PrismAdapter, TheJudge
 from kernel.Engines.sentinel_compressor import SentinelCompressor
 from kernel.reasoning.aurora_vision import aurora
-from kernel.reasoning.aurora_v_jepa import aurora as aurora_vjepa
 from kernel.reasoning.core import MGVEngine
 from kernel.reasoning.helix_loop import helix
 from kernel.reasoning.lyricus_voice import lyricus

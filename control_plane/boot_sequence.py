@@ -23,6 +23,7 @@ from .codex_integration import boot_codex_integration
 from .excalibur_preflight import boot_excalibur_preflight
 from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
 from .knight_configuration import write_knight_configuration
+from .nano_swarm_runtime import boot_nano_swarm_runtime
 from .orchestration_state import summarize_boot_results
 from .symbiotic_maintenance import boot_symbiotic_maintenance
 
@@ -167,6 +168,8 @@ def _windows_task_exists(task_name: str) -> bool:
         ["schtasks", "/Query", "/TN", task_name],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         timeout=10,
     )
     return completed.returncode == 0
@@ -238,6 +241,8 @@ def boot_morgana_bridge(home: Path) -> tuple[bool, str]:
                 ["schtasks", "/Run", "/TN", _MORGANA_TASK_NAME],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=env,
             )
@@ -270,6 +275,8 @@ def boot_morgana_bridge(home: Path) -> tuple[bool, str]:
                 ],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=launcher_env,
             )
@@ -312,6 +319,18 @@ def boot_bifrost_go_sidecar(home: Path) -> tuple[bool, str]:
     if ok:
         return True, f"Bifrost Go Sidecar already running ({detail})"
 
+    bind_host, bind_port = "127.0.0.1", 8011
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(0.5)
+            if sock.connect_ex((bind_host, bind_port)) == 0:
+                return True, (
+                    "Bifrost Go Sidecar bind port already occupied "
+                    f"({bind_host}:{bind_port}); skipping duplicate launch"
+                )
+    except OSError:
+        pass
+
     binary = _bifrost_go_sidecar_binary(home)
     sidecar_dir = home / "01_KERNEL" / "senses" / "bifrost_go_sidecar"
     go_bin = shutil.which("go")
@@ -343,6 +362,8 @@ def boot_bifrost_go_sidecar(home: Path) -> tuple[bool, str]:
                 ["schtasks", "/Run", "/TN", _BIFROST_SIDECAR_TASK_NAME],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=env,
             )
@@ -611,7 +632,10 @@ def launch_warp() -> tuple[bool, str]:
     try:
         check = subprocess.run(
             ["tasklist", "/FI", "IMAGENAME eq warp.exe", "/NH"],
-            capture_output=True, text=True, timeout=5,
+            capture_output=True, text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=5,
         )
         if "warp.exe" in check.stdout.lower():
             return True, "Warp already running"
@@ -767,6 +791,8 @@ def start_local_lt_memory(home: Path) -> tuple[bool, str]:
                 ],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=launcher_env,
             )
@@ -964,6 +990,21 @@ def boot_cloud_brain_auth(home: Path) -> tuple[bool, str]:
     return True, msg
 
 
+def boot_pydantic_ai_knight(home: Path) -> tuple[bool, str]:
+    """Phase 9 - Pydantic AI Knight (Sir Helio v400)."""
+    knight_py = home / "control_plane" / "pydantic_ai_knight.py"
+    if not knight_py.exists():
+        return False, "pydantic_ai_knight.py not found"
+    
+    try:
+        import pydantic_ai
+        return True, f"Pydantic AI engine v{pydantic_ai.__version__} online — Sir Helio v400 ready"
+    except ImportError:
+        return False, "pydantic-ai library not installed"
+    except Exception as exc:
+        return False, f"Pydantic AI init failed: {exc}"
+
+
 def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
     # Load local LT env overrides before integration_brain is imported so module-level
     # constants pick up localhost:8200 URLs instead of the Modal cloud endpoints
@@ -998,6 +1039,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Warp Workflow Sync", "required": False, "fn": lambda: sync_warp_workflows(home)},
         {"name": "Symbiotic Maintenance", "required": False, "fn": lambda: boot_symbiotic_maintenance(home, quick=quick)},
         {"name": "Codex Integration", "required": False, "fn": lambda: boot_codex_integration(home)},
+        {"name": "Nano Swarm Runtime", "required": False, "fn": lambda: boot_nano_swarm_runtime(home)},
         {"name": "Clawdbot  :18789",   "required": False, "fn": lambda: boot_clawdbot_gateway(home)},
         {"name": "Sir Pi   [PI_AGENT]", "required": False, "fn": lambda: boot_sir_pi(home)},
         {"name": "Warp Terminal", "required": False, "fn": launch_warp},
@@ -1005,6 +1047,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Vizion Telemetry", "required": False, "fn": lambda: boot_telemetry(home)},
         {"name": "Sovereign Harness", "required": False, "fn": lambda: boot_harness(home)},
         {"name": "Bio-Swarm (Nano)", "required": False, "fn": lambda: boot_bioswarm(home)},
+        {"name": "Pydantic AI Knight", "required": False, "fn": lambda: boot_pydantic_ai_knight(home)},
         {"name": "Edge PWA      :3000", "required": False, "fn": lambda: boot_edge_interface(home)},
     ]
 

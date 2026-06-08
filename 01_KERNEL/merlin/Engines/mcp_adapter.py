@@ -6,9 +6,7 @@ The Unified API Gateway and Multi-Adapter MCP Interface.
 Enables dynamic tool discovery and secure external API consumption.
 """
 
-import os
-import json
-from typing import Dict, Any, List, Optional, Callable
+from typing import Dict, Any, List, Optional
 import httpx
 
 class MCPAdapter:

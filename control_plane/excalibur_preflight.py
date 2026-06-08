@@ -87,7 +87,12 @@ def _tool_version(name: str) -> str:
         return "absent"
     try:
         out = subprocess.run(
-            [exe, "--version"], capture_output=True, text=True, timeout=8
+            [exe, "--version"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=8
         )
         line = (out.stdout or out.stderr).splitlines()
         return line[0].strip().replace('"', "").replace("\\", "") if line else "unknown"

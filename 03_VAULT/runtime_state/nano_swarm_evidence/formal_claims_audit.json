@@ -1,0 +1,53 @@
+{
+  "status": "FORMAL_CLAIMS_PENDING",
+  "accepted_as_runtime_truth": false,
+  "audited_utc": "2026-06-03T06:12:00Z",
+  "claims": [
+    {
+      "claim": "Triple-QFT ingestion across React, Rust, Go, and Wasm codebases",
+      "status": "PARTIALLY_EVIDENCED",
+      "evidence": "All four physical nodes now have generated source scaffolds and build/test evidence, but no QFT ingestion engine exists."
+    },
+    {
+      "claim": "Rust Token Killer syntax purge with 99.99 percent compression",
+      "status": "UNPROVEN",
+      "evidence": "No reversible compressor metric or before/after byte-count artifact exists."
+    },
+    {
+      "claim": "PDDL and Z3 proof of absolute type safety and zero memory leaks",
+      "status": "UNPROVEN",
+      "evidence": "No PDDL file, Z3 model, solver transcript, or memory-leak proof artifact exists."
+    },
+    {
+      "claim": "strict JSON-LD manifest written through zero-copy mmap",
+      "status": "UNPROVEN",
+      "evidence": "Runtime-state JSON artifacts exist, but no zero-copy mmap writer is implemented."
+    },
+    {
+      "claim": "instant rehydration via //nano-swarm expand",
+      "status": "PARTIALLY_EVIDENCED",
+      "evidence": "The runic route validates evidence, performs dry-runs, writes reversible artifacts, and generates source for all four physical nodes."
+    }
+  ],
+  "production_release_gate": {
+    "status": "READY",
+    "checks": [
+      {
+        "claim": "all four promoted nodes build or test successfully",
+        "status": "EVIDENCED",
+        "evidence": "verify_all_latest.json records passing npm, cargo, and go commands for Node A, Node B, Node C, and Node D."
+      },
+      {
+        "claim": "all four promoted nodes expose durable local service entrypoints",
+        "status": "EVIDENCED",
+        "evidence": "nano_swarm_runtime EXPECTED_NODES defines supervisor service commands and health URLs for Node A, Node B, Node C, and Node D."
+      },
+      {
+        "claim": "aspirational formal claims are not accepted as runtime truth",
+        "status": "EVIDENCED",
+        "evidence": "blocked claims remain listed under claims and are reported as aspirational_claims_gated by the formal gate."
+      }
+    ]
+  },
+  "promotion_rule": "Do not set claimed_status to OMNI_CODEX_COMPILED until every claim is FORMALLY_EVIDENCED."
+}

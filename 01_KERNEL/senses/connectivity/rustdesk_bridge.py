@@ -5,7 +5,6 @@
 
 import os
 import sys
-import time
 
 # Add KERNEL to path for imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))

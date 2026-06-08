@@ -1,90 +1,90 @@
 {
   "engine": "SYMBIOTIC_MAINTENANCE",
-  "generated_utc": "2026-05-29T23:15:19.529363+00:00",
+  "generated_utc": "2026-06-07T23:27:37.934327+00:00",
   "strict_mode": false,
-  "quick_mode": false,
+  "quick_mode": true,
   "status": "OK",
-  "duration_ms": 4715,
+  "duration_ms": 3573,
   "audit": {
     "summary": {
-      "scanned_files": 12000,
-      "total_size_mb": 2753.61,
-      "max_files_budget": 12000
+      "scanned_files": 4500,
+      "total_size_mb": 165.67,
+      "max_files_budget": 4500
     },
     "top_extensions": [
       {
-        "extension": "<none>",
-        "count": 2245
+        "extension": ".py",
+        "count": 1281
+      },
+      {
+        "extension": ".md",
+        "count": 465
       },
       {
         "extension": ".o",
-        "count": 2104
+        "count": 449
       },
       {
         "extension": ".json",
-        "count": 1376
+        "count": 321
       },
       {
-        "extension": ".py",
-        "count": 1266
+        "extension": ".js",
+        "count": 278
       },
       {
-        "extension": ".timestamp",
-        "count": 1029
+        "extension": "<none>",
+        "count": 245
       },
       {
-        "extension": ".rmeta",
-        "count": 768
+        "extension": ".html",
+        "count": 146
       },
       {
-        "extension": ".d",
-        "count": 712
-      },
-      {
-        "extension": ".rlib",
-        "count": 467
+        "extension": ".tsx",
+        "count": 128
       }
     ],
     "largest_files": [
       {
-        "path": "01_KERNEL\\EXCALIBUR\\kernel_api_bridge\\target\\debug\\kernel_api_bridge.pdb",
-        "size_mb": 87.42
+        "path": ".colony\\index.json",
+        "size_mb": 17.01
       },
       {
-        "path": "01_KERNEL\\EXCALIBUR\\kernel_api_bridge\\target\\debug\\deps\\kernel_api_bridge.pdb",
-        "size_mb": 87.42
+        "path": "01_KERNEL\\core\\aegis_shield\\target\\debug\\deps\\libzerocopy-d4322fd0e77937d9.rmeta",
+        "size_mb": 12.03
       },
       {
-        "path": "01_KERNEL\\EXCALIBUR\\kernel_api_bridge\\target\\debug\\deps\\libreqwest-e638e247c0ed0e40.rlib",
-        "size_mb": 72.23
+        "path": "01_KERNEL\\senses\\morgana_bridge\\target\\debug\\morgana_bridge.exe",
+        "size_mb": 8.78
       },
       {
-        "path": "01_KERNEL\\EXCALIBUR\\kernel_api_bridge\\target\\debug\\deps\\libreqwest-86d8605adec5c380.rlib",
-        "size_mb": 71.76
+        "path": "01_KERNEL\\core\\aegis_shield\\target\\debug\\deps\\libsyn-8a4330ce428d6121.rlib",
+        "size_mb": 6.3
       },
       {
-        "path": "01_KERNEL\\senses\\morgana_bridge\\target\\debug\\deps\\libreqwest-784749a539ee85ba.rlib",
-        "size_mb": 67.15
+        "path": "01_KERNEL\\senses\\vizion-telemetry\\vizion-telemetry.exe",
+        "size_mb": 3.58
       },
       {
-        "path": "01_KERNEL\\senses\\morgana_bridge\\target\\debug\\deps\\libreqwest-9550a1bd5cc007cf.rlib",
-        "size_mb": 62.89
+        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\ouroboros_engine-966958f362efb595.pdb",
+        "size_mb": 3.37
       },
       {
-        "path": "01_KERNEL\\senses\\morgana_bridge\\target\\debug\\morgana_bridge.pdb",
-        "size_mb": 62.0
+        "path": ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_quantization-1fee373f9b77d72e.pdb",
+        "size_mb": 3.33
       },
       {
-        "path": "01_KERNEL\\EXCALIBUR\\kernel_api_bridge\\target\\debug\\deps\\libtokio-fc5ae2758057e03b.rlib",
-        "size_mb": 42.34
+        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_quantization-7ea4c5606af1f50c.pdb",
+        "size_mb": 3.32
       },
       {
-        "path": "01_KERNEL\\EXCALIBUR\\kernel_api_bridge\\target\\debug\\deps\\libjsonschema-19bca49d51f59ee4.rlib",
-        "size_mb": 27.12
+        "path": ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_inference-30bfc45542de911f.pdb",
+        "size_mb": 3.32
       },
       {
-        "path": "01_KERNEL\\EXCALIBUR\\kernel_api_bridge\\target\\debug\\deps\\libjsonschema-5bb4cd284279105d.rlib",
-        "size_mb": 26.89
+        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_inference-0a4c13dc52e01778.pdb",
+        "size_mb": 3.31
       }
     ],
     "stale_logs": [],
@@ -92,14 +92,6 @@
       [
         ".camelot-config.yaml.example",
         ".worktrees\\omega-patch\\.camelot-config.yaml.example"
-      ],
-      [
-        ".gitignore",
-        ".worktrees\\omega-patch\\.gitignore"
-      ],
-      [
-        ".modal.toml",
-        "01_KERNEL\\EXCALIBUR\\config\\.modal.toml"
       ],
       [
         ".prettierrc",
@@ -124,8 +116,16 @@
         ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_trellis-1elck5bodtpdl\\s-hit42nhn1f-1ypecgn.lock"
       ],
       [
-        "01_KERNEL\\forge\\rust\\orchestrator\\target\\debug\\incremental\\camelot_orchestrator-3cpsxxv7ts471\\s-hi2agifr5v-16yuypq-dm3uiknii97rps1lhiwql7wjl\\7luedgwy8wpu2rof2jnlkyf7u.o",
-        "01_KERNEL\\forge\\rust\\orchestrator\\target\\debug\\incremental\\camelot_orchestrator-3cpsxxv7ts471\\s-hi2b6iyw7g-1b3kf8b-8neiv7un4lrqy5wz6miudaepn\\7luedgwy8wpu2rof2jnlkyf7u.o"
+        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x34n4t7-17l9fu2-9gnvmpr6h2lbgppj4rz76fj1t\\work-products.bin",
+        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x4s0hjo-1gu7ytp-ben78q6nvpqvebvdybviu2838\\work-products.bin"
+      ],
+      [
+        ".camelot\\cartridges\\AETHER_ROUTING.md",
+        ".worktrees\\omega-patch\\.camelot\\cartridges\\AETHER_ROUTING.md"
+      ],
+      [
+        ".camelot\\cartridges\\BRAINSTORM.md",
+        ".worktrees\\omega-patch\\.camelot\\cartridges\\BRAINSTORM.md"
       ]
     ],
     "cache_sizes_mb": {
@@ -150,13 +150,12 @@
           "compileall",
           "-q",
           "control_plane",
-          "bin",
-          "squires"
+          "bin"
         ],
         "ok": false,
         "returncode": 1,
-        "duration_ms": 688,
-        "stdout_tail": "    <!-- Copyright \u00a9 2026 Invisioned Marketing inc. All Rights Reserved. -->\n                   ^\nSyntaxError: invalid character '\u00a9' (U+00A9)\n*** Error compiling 'control_plane\\\\tui_app.py'...\n  File \"control_plane\\tui_app.py\", line 1\n    <!-- Copyright \u00a9 2026 Invisioned Marketing inc. All Rights Reserved. -->\n                   ^\nSyntaxError: invalid character '\u00a9' (U+00A9)",
+        "duration_ms": 670,
+        "stdout_tail": "    ilities. Use --roster to list, --test to verify.\")\n                                                    ^\nSyntaxError: unterminated string literal (detected at line 239)\n*** Error compiling 'control_plane\\\\tui_app.py'...\n  File \"control_plane\\tui_app.py\", line 1\n    <!-- Copyright \ufffd 2026 Invisioned Marketing inc. All Rights Reserved. -->\n                   ^\nSyntaxError: invalid character '\ufffd' (U+00A9)",
         "stderr_tail": ""
       },
       {
@@ -167,21 +166,20 @@
           "ruff",
           "check",
           "control_plane",
-          "bin",
-          "squires"
+          "bin"
         ],
         "ok": false,
         "returncode": 1,
-        "duration_ms": 69,
-        "stdout_tail": "",
-        "stderr_tail": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe: No module named ruff"
+        "duration_ms": 134,
+        "stdout_tail": "980 |     _log(f\"[LLM] No Anthropic key and Ollama not reachable \u2014 task marked NEEDS_LLM\")\n981 |     _log(f\"[LLM] To fix: set ANTHROPIC_API_KEY  OR  start Ollama (ollama serve)\")\n    |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n982 |     return \"NEEDS_LLM\"\n    |\nhelp: Remove extraneous `f` prefix\nFound 231 errors.\n[*] 117 fixable with the `--fix` option (17 hidden fixes can be enabled with the `--unsafe-fixes` option).",
+        "stderr_tail": ""
       }
     ]
   },
   "purge": {
     "enabled": true,
-    "removed_entries": 22,
-    "reclaimed_mb": 1.535,
+    "removed_entries": 18,
+    "reclaimed_mb": 1.689,
     "removed_paths": [
       "01_KERNEL\\agora\\__pycache__",
       "01_KERNEL\\agora\\cloud_orchestrator_shim\\__pycache__",
@@ -189,7 +187,6 @@
       "01_KERNEL\\EXCALIBUR\\core\\__pycache__",
       "01_KERNEL\\forge\\assimilation\\__pycache__",
       "01_KERNEL\\forge\\assimilation\\core\\__pycache__",
-      "01_KERNEL\\forge\\monitoring\\__pycache__",
       "01_KERNEL\\iron_gate\\__pycache__",
       "01_KERNEL\\iron_gate\\judge\\__pycache__",
       "01_KERNEL\\iron_gate\\security\\__pycache__",
@@ -197,12 +194,11 @@
       "01_KERNEL\\merlin\\Engines\\symbolect_transpiler\\__pycache__",
       "01_KERNEL\\merlin\\fusion\\__pycache__",
       "01_KERNEL\\merlin\\reasoning\\__pycache__",
-      "01_KERNEL\\senses\\__pycache__",
-      "01_KERNEL\\senses\\connectivity\\__pycache__",
       "01_KERNEL\\titan\\memory\\__pycache__",
       "03_VAULT\\__pycache__",
       "03_VAULT\\training\\configs\\__pycache__",
-      "bin\\__pycache__"
+      "bin\\__pycache__",
+      "control_plane\\__pycache__"
     ],
     "errors": [
       "C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_cache: PermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_cache'",
@@ -221,9 +217,9 @@
     "cpu_count": 12,
     "recommended_workers": 4,
     "memory_total_mb": 7895.9,
-    "memory_available_mb": 796.5,
-    "memory_pressure": 0.899,
-    "disk_free_pct": 7.74,
+    "memory_available_mb": 822.7,
+    "memory_pressure": 0.896,
+    "disk_free_pct": 8.7,
     "platform": "win32"
   },
   "artifacts": {

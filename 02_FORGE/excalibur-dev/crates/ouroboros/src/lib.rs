@@ -33,14 +33,15 @@ impl OuroborosEngine {
             return Err(OuroborosError::ExecutionError("State dimension mismatch".to_string()));
         }
 
-        // Simulated 1.58-bit logic: weights are effectively {-1, 0, 1}
-        // For simplicity, we just transform the state in-place using a stable mapping.
-        for i in 0..self.state_dim {
-            let weight = if (input_token + i as u32) % 3 == 0 { -1.0 } else if (input_token + i as u32) % 3 == 1 { 0.0 } else { 1.0 };
-            current_state.data[i] = (current_state.data[i] * 0.9) + (weight * 0.1);
-        }
+        // 1.58-bit SSM step: w ∈ {-1, 0, +1} derived from input token.
+        // AVX2 path processes 8 f32 lanes per iteration when available.
+        #[cfg(target_feature = "avx2")]
+        // SAFETY: guarded by cfg; compile with RUSTFLAGS="-C target-feature=+avx2,+fma"
+        unsafe { ssm_step_avx2(&mut current_state.data, input_token) };
 
-        // Return a simulated output logit
+        #[cfg(not(target_feature = "avx2"))]
+        ssm_step_scalar(&mut current_state.data, input_token);
+
         Ok(current_state.data.iter().sum::<f32>() / self.state_dim as f32)
     }
 
@@ -48,6 +49,53 @@ impl OuroborosEngine {
         HiddenState {
             data: vec![0.0; self.state_dim],
         }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Ternary weight decode: maps (token + lane) % 3 → {-1.0, 0.0, +1.0}
+// ---------------------------------------------------------------------------
+
+#[inline(always)]
+fn trit(input_token: u32, lane: usize) -> f32 {
+    match (input_token + lane as u32) % 3 {
+        0 => -1.0,
+        1 =>  0.0,
+        _ =>  1.0,
+    }
+}
+
+#[allow(dead_code)]
+fn ssm_step_scalar(data: &mut [f32], input_token: u32) {
+    for (i, v) in data.iter_mut().enumerate() {
+        *v = *v * 0.9 + trit(input_token, i) * 0.1;
+    }
+}
+
+#[cfg(target_feature = "avx2")]
+unsafe fn ssm_step_avx2(data: &mut [f32], input_token: u32) {
+    use std::arch::x86_64::*;
+
+    let decay  = _mm256_set1_ps(0.9_f32);
+    let scale  = _mm256_set1_ps(0.1_f32);
+    let mut i  = 0usize;
+
+    while i + 8 <= data.len() {
+        let state = _mm256_loadu_ps(data.as_ptr().add(i));
+
+        // Build ternary weight vector for this 8-lane window.
+        let w: [f32; 8] = std::array::from_fn(|j| trit(input_token, i + j));
+        let weights = _mm256_loadu_ps(w.as_ptr());
+
+        // new_state = state * 0.9 + weight * 0.1
+        let next = _mm256_fmadd_ps(weights, scale, _mm256_mul_ps(state, decay));
+        _mm256_storeu_ps(data.as_mut_ptr().add(i), next);
+        i += 8;
+    }
+
+    // Scalar tail for remainder lanes.
+    for j in i..data.len() {
+        data[j] = data[j] * 0.9 + trit(input_token, j) * 0.1;
     }
 }
 

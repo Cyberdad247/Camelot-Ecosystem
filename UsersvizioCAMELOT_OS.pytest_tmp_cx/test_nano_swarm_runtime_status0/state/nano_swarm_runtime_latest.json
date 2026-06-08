@@ -1,0 +1,81 @@
+{
+  "status": "RUNTIME_READY_FORMAL_GATE_BLOCKED",
+  "runtime_ready": true,
+  "checked_utc": "2026-06-03T20:42:08.478346+00:00",
+  "promoted_root": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\forge\\ukg",
+  "state_dir": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\state",
+  "nodes": {
+    "Node_A_Frontend": {
+      "status": "PROMOTED",
+      "promoted": true,
+      "path": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\forge\\ukg\\Node_A_Frontend",
+      "stack": [
+        "React",
+        "Zustand",
+        "Tailwind_v4"
+      ],
+      "startable": true,
+      "missing_files": [],
+      "promotion": {
+        "status": "PROMOTED",
+        "node": "Node_A_Frontend"
+      }
+    },
+    "Node_B_Bifrost": {
+      "status": "PROMOTED",
+      "promoted": true,
+      "path": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\forge\\ukg\\Node_B_Bifrost",
+      "stack": [
+        "Rust",
+        "Tokio",
+        "Serde"
+      ],
+      "startable": true,
+      "missing_files": [],
+      "promotion": {
+        "status": "PROMOTED",
+        "node": "Node_B_Bifrost"
+      }
+    },
+    "Node_C_Omni_Router": {
+      "status": "PROMOTED",
+      "promoted": true,
+      "path": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\forge\\ukg\\Node_C_Omni_Router",
+      "stack": [
+        "Go",
+        "tsnet"
+      ],
+      "startable": true,
+      "missing_files": [],
+      "promotion": {
+        "status": "PROMOTED",
+        "node": "Node_C_Omni_Router"
+      }
+    },
+    "Node_D_MicroVM": {
+      "status": "PROMOTED",
+      "promoted": true,
+      "path": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\forge\\ukg\\Node_D_MicroVM",
+      "stack": [
+        "Rust",
+        "wasm-bindgen"
+      ],
+      "startable": true,
+      "missing_files": [],
+      "promotion": {
+        "status": "PROMOTED",
+        "node": "Node_D_MicroVM"
+      }
+    }
+  },
+  "node_count": 4,
+  "promoted_count": 4,
+  "startable_count": 4,
+  "all_startable": true,
+  "verify_all_status": "VERIFIED",
+  "verify_all_report": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\evidence\\verify_all_latest.json",
+  "formal_gate_status": "BLOCKED",
+  "formal_gate_ready": false,
+  "production_release_ready": false,
+  "production_release_evidence": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_nano_swarm_runtime_status0\\evidence\\production_release_latest.json"
+}

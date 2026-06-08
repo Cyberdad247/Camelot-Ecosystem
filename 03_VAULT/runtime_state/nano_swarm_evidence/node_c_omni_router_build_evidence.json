@@ -1,0 +1,22 @@
+{
+  "status": "BUILD_VERIFIED",
+  "node": "Node_C_Omni_Router",
+  "source_dir": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\nano_swarm_generated\\Node_C_Omni_Router\\source",
+  "verified_utc": "2026-06-03T06:01:00Z",
+  "commands": [
+    {
+      "command": "go mod tidy",
+      "exit_code": 0,
+      "summary": "Resolved tailscale.com tsnet dependency; Go downloaded the required 1.25.x toolchain"
+    },
+    {
+      "command": "go test ./...",
+      "exit_code": 0,
+      "summary": "Go tsnet scaffold compiled; package camelot/node-c-omni-router passed tests"
+    }
+  ],
+  "rollback": {
+    "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\nano_swarm_generated\\Node_C_Omni_Router\\source\\rollback.json",
+    "action": "delete_generated_node_dir"
+  }
+}

@@ -5,18 +5,26 @@ from __future__ import annotations
 import json
 import os
 import hashlib
+import importlib
 import importlib.util
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 from pydantic import BaseModel, Field
 
-# Dynamic import for MemPalaceL2 due to 01_KERNEL naming restriction
-_MEM_PATH = Path(__file__).resolve().parent.parent / "01_KERNEL" / "memory" / "mempalace_l2.py"
-_MEM_SPEC = importlib.util.spec_from_file_location("mempalace_l2", _MEM_PATH)
-_MEM_MOD = importlib.util.module_from_spec(_MEM_SPEC)
-_MEM_SPEC.loader.exec_module(_MEM_MOD)
-MemPalaceL2 = _MEM_MOD.MemPalaceL2
+# Dynamic import for MemPalaceL2 due to 01_KERNEL naming restriction.
+# Import as a package so mempalace_l2.py can resolve its own relative imports.
+try:
+    MemPalaceL2 = importlib.import_module("01_KERNEL.memory.mempalace_l2").MemPalaceL2
+except Exception:
+    _MEM_PATH = Path(__file__).resolve().parent.parent / "01_KERNEL" / "memory" / "mempalace_l2.py"
+    _MEM_SPEC = importlib.util.spec_from_file_location("01_KERNEL.memory.mempalace_l2", _MEM_PATH)
+    _MEM_MOD = importlib.util.module_from_spec(_MEM_SPEC)
+    assert _MEM_SPEC and _MEM_SPEC.loader
+    sys_modules = importlib.import_module("sys").modules
+    sys_modules[_MEM_SPEC.name] = _MEM_MOD
+    _MEM_SPEC.loader.exec_module(_MEM_MOD)
+    MemPalaceL2 = _MEM_MOD.MemPalaceL2
 
 
 class LaneEvent(BaseModel):

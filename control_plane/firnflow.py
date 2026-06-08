@@ -40,7 +40,7 @@ from collections import OrderedDict
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 CAMELOT_HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 FIRNFLOW_DIR = CAMELOT_HOME / "03_VAULT" / "firnflow"

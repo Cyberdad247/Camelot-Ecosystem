@@ -10,11 +10,7 @@ Simulates multiple concurrent high-intensity fusion requests to validate:
 4. System stability under load
 """
 
-import os
-import sys
 import time
-import json
-import threading
 import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 

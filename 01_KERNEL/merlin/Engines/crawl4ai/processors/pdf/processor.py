@@ -74,7 +74,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
     ):
         # Import check at initialization time
         try:
-            import PyPDF2
+            import PyPDF2  # noqa: F401
         except ImportError:
             raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
 
@@ -137,7 +137,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
         """Like process() but processes PDF pages in parallel batches"""
         # Import inside method to allow dependency to be optional
         try:
-            import PyPDF2  # For type checking
+            import PyPDF2  # For type checking  # noqa: F401
             from PyPDF2 import PdfReader
         except ImportError:
             raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
@@ -479,8 +479,8 @@ if __name__ == "__main__":
 
     try:
         # Import PyPDF2 only when running the file directly
-        import PyPDF2
-        from PyPDF2 import PdfReader
+        import PyPDF2  # noqa: F401
+        from PyPDF2 import PdfReader  # noqa: F401
     except ImportError:
         print("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
         exit(1)

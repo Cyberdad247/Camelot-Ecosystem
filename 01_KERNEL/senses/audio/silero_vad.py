@@ -15,7 +15,6 @@ Module-level singleton:
 """
 from __future__ import annotations
 
-import array
 import math
 import os
 from typing import Sequence

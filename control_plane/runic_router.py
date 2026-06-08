@@ -19,6 +19,8 @@ from __future__ import annotations
 import json
 import os
 import re
+import shlex
+import sys
 import threading
 import time
 import uuid
@@ -171,11 +173,25 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_think",
     },
     "//NANO_SWARM_EXPAND": {
-        "knight": "sir_borris",
+        "knight": "sir_boris",
         "description": "6-phase UKG_NANO_SWARM_V1000 expansion: SAT-gate → CvRDT mesh → Ouroboros seed → Aegis bind → AST audit → Anya seal",
         "mode": "SWARM",
         "priority": 1,
         "handler": "_handle_nano_swarm_expand",
+    },
+    "//BIFROST_LOCK": {
+        "knight": "sir_heimdall",
+        "description": "Emergency Bifrost perimeter lockdown",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_bifrost_lock",
+    },
+    "//SCAN_VECTORS": {
+        "knight": "sir_heimdall",
+        "description": "Deep 4-vector fingerprint scan",
+        "mode": "SENTINEL",
+        "priority": 2,
+        "handler": "_handle_scan_vectors",
     },
 }
 
@@ -211,6 +227,7 @@ OMEGA_RUNES: dict[str, dict[str, Any]] = {
     "Omega_STACK":      {"knight": "sir_boris",    "description": "Full stack topology report"},
     "Omega_SCORPION":   {"knight": "sir_gideon",   "description": "Forensic GIDEON_RISK_MATRIX audit"},
     "Omega_CODEX":      {"knight": "sir_codex",    "description": "Direct SIR_CODEX execution lane"},
+    "Omega_BIFROST":    {"knight": "sir_heimdall", "description": "Bifrost Sentinel operations"},
 }
 
 
@@ -313,6 +330,7 @@ def _handle_fleet(param: str, context: dict) -> dict:
         if spec and spec.loader:
             mod = importlib.util.module_from_spec(spec)
             try:
+                sys.modules[spec.name] = mod
                 spec.loader.exec_module(mod)
                 orchestrator = mod.GraphOrchestrator()
                 final_state = orchestrator.run(param or "Auto-Evolution Directive")
@@ -349,6 +367,12 @@ def _handle_status(param: str, context: dict) -> dict:
 def _handle_think(param: str, context: dict) -> dict:
     return {"action": "got_reasoning", "param": param, "knight": "merlin_omega"}
 
+def _handle_bifrost_lock(param: str, context: dict) -> dict:
+    return {"action": "bifrost_lockdown", "status": "AIR_GAPPED"}
+
+def _handle_scan_vectors(param: str, context: dict) -> dict:
+    return {"action": "4_vector_scan", "target": param or "project_root"}
+
 def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
     """Execute the 6-phase NANO_SWARM_EXPAND protocol via importlib."""
     import importlib.util
@@ -358,7 +382,126 @@ def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
         if spec and spec.loader:
             mod = importlib.util.module_from_spec(spec)
             try:
+                sys.modules[spec.name] = mod
                 spec.loader.exec_module(mod)
+                tokens = shlex.split(param or "", posix=False)
+                if tokens and tokens[0].lower() == "supervise":
+                    action = tokens[1].lower() if len(tokens) > 1 else "status"
+                    node_arg = None
+                    for idx, token in enumerate(tokens):
+                        if token == "--node" and idx + 1 < len(tokens):
+                            node_arg = tokens[idx + 1]
+                    from control_plane.nano_swarm_runtime import supervise_nodes
+
+                    result = supervise_nodes(action, node_name=node_arg)
+                    return {
+                        "action": "nano_swarm_supervise",
+                        "supervise": True,
+                        **result,
+                    }
+                if tokens and tokens[0].lower() == "expand":
+                    tokens = tokens[1:]
+                node = "Node_A_Frontend"
+                manifest_path = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "ukg_nano_omega_glyph_v1000_omni_codex.json"
+                report_dir = None
+                rollback_path = None
+                source_dir = None
+                for idx, token in enumerate(tokens):
+                    if token == "--node" and idx + 1 < len(tokens):
+                        node = tokens[idx + 1]
+                    elif token == "--manifest" and idx + 1 < len(tokens):
+                        manifest_path = Path(tokens[idx + 1])
+                    elif token == "--report-dir" and idx + 1 < len(tokens):
+                        report_dir = Path(tokens[idx + 1])
+                    elif token == "--rollback-path" and idx + 1 < len(tokens):
+                        rollback_path = Path(tokens[idx + 1])
+                    elif token == "--source-dir" and idx + 1 < len(tokens):
+                        source_dir = Path(tokens[idx + 1])
+                if "--verify-all" in tokens:
+                    result = mod.verify_all_generated_nodes()
+                    return {
+                        "action": "nano_swarm_expand",
+                        "verify_all": True,
+                        **result,
+                    }
+                if "--checkpoint" in tokens:
+                    result = mod.create_checkpoint(manifest_path=manifest_path)
+                    return {
+                        "action": "nano_swarm_expand",
+                        "checkpoint": True,
+                        **result,
+                    }
+                if "--formal-gate" in tokens:
+                    result = mod.evaluate_formal_claims_gate()
+                    return {
+                        "action": "nano_swarm_expand",
+                        "formal_gate": True,
+                        **result,
+                    }
+                if "--bifrost-preflight" in tokens:
+                    result = mod.bifrost_sidecar_preflight()
+                    return {
+                        "action": "nano_swarm_expand",
+                        "bifrost_preflight": True,
+                        **result,
+                    }
+                if "--runtime-status" in tokens:
+                    from control_plane.nano_swarm_runtime import write_runtime_status
+
+                    result = write_runtime_status()
+                    return {
+                        "action": "nano_swarm_expand",
+                        "runtime_status": True,
+                        **result,
+                    }
+                if "--rollback" in tokens:
+                    result = mod.rollback_generated_node(node, rollback_path=rollback_path)
+                    return {
+                        "action": "nano_swarm_expand",
+                        "rollback": True,
+                        **result,
+                    }
+                if "--promote" in tokens:
+                    kwargs = {"node_name": node}
+                    if source_dir is not None:
+                        kwargs["source_dir"] = source_dir
+                    result = mod.promote_generated_node(**kwargs)
+                    return {
+                        "action": "nano_swarm_expand",
+                        "promote": True,
+                        **result,
+                    }
+                if "--evidence" in tokens:
+                    kwargs = {"manifest_path": manifest_path}
+                    if report_dir is not None:
+                        kwargs["report_dir"] = report_dir
+                    result = mod.write_evidence_report(**kwargs)
+                    return {
+                        "action": "nano_swarm_expand",
+                        "evidence": True,
+                        **result,
+                    }
+                if "--dry-run" in tokens:
+                    result = mod.dry_run_expand(node_name=node, manifest_path=manifest_path)
+                    return {
+                        "action": "nano_swarm_expand",
+                        "dry_run": True,
+                        **result,
+                    }
+                if "--generate" in tokens:
+                    result = mod.generate_node_artifact(node_name=node, manifest_path=manifest_path)
+                    return {
+                        "action": "nano_swarm_expand",
+                        "generate": True,
+                        **result,
+                    }
+                if "--source" in tokens:
+                    result = mod.generate_node_source(node_name=node, manifest_path=manifest_path)
+                    return {
+                        "action": "nano_swarm_expand",
+                        "source": True,
+                        **result,
+                    }
                 exit_code = mod.run_expansion()
                 return {
                     "action": "nano_swarm_expand",
@@ -387,6 +530,8 @@ _HANDLERS = {
     "_handle_scan": _handle_scan,
     "_handle_status": _handle_status,
     "_handle_think": _handle_think,
+    "_handle_bifrost_lock": _handle_bifrost_lock,
+    "_handle_scan_vectors": _handle_scan_vectors,
     "_handle_nano_swarm_expand": _handle_nano_swarm_expand,
 }
 
@@ -395,9 +540,12 @@ _HANDLERS = {
 # Public API
 # ---------------------------------------------------------------------------
 
-_RUNE_RE = re.compile(r"^(//\w+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
+_RUNE_RE = re.compile(r"^(//[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
     "omega_codex": "Omega_CODEX",
+    "//nano-swarm": "//NANO_SWARM_EXPAND",
+    "//nanoswarm": "//NANO_SWARM_EXPAND",
+    "//nano": "//NANO_SWARM_EXPAND",
 }
 
 

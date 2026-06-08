@@ -32,7 +32,7 @@ def _load_language(lang: str):
         return _LANGUAGES[lang]
 
     try:
-        from tree_sitter import Language, Parser
+        from tree_sitter import Language, Parser  # noqa: F401
 
         if lang == "python":
             import tree_sitter_python as ts_lang

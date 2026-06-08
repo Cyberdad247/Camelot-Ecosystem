@@ -1,6 +1,5 @@
 import subprocess
 import os
-import sys
 
 def run_trivy_scan(target_dir):
     print(f"🛡️ [VERITAS] Starting Trivy Security Scan for: {target_dir}")
@@ -10,7 +9,13 @@ def run_trivy_scan(target_dir):
     try:
         # Check if trivy is installed locally first
         cmd = ["trivy", "fs", "--severity", "HIGH,CRITICAL", target_dir]
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace"
+        )
         
         if result.returncode == 0:
             print("✅ [VERITAS] Scan Complete. No critical vulnerabilities found.")

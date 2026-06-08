@@ -1,10 +1,10 @@
 {
-  "actor": "SIR_BORIS (Claude Sonnet 4.6)",
-  "artifact_path": "03_VAULT\\runtime_state\\codex_integration_latest.json",
-  "generated_utc": "2026-05-13T17:01:14.602186+00:00",
-  "pid": 28896,
+  "actor": "SIR_CODEX (Codex / GPT-5)",
+  "artifact_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\codex_integration_latest.json",
+  "generated_utc": "2026-06-06T02:21:48.224272+00:00",
+  "pid": 34924,
   "python": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe",
-  "repo_root": ".",
+  "repo_root": "C:\\Users\\vizio\\CAMELOT_OS",
   "repo_version": "unknown",
   "status": "CODEX_INTEGRATED",
   "surfaces": {
@@ -14,5 +14,5 @@
     "dashboard": true,
     "ledger": true
   },
-  "trigger": "boot"
+  "trigger": "sync"
 }

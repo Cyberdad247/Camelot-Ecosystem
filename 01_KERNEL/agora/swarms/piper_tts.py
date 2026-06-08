@@ -12,9 +12,7 @@ Piper voices are downloaded from rhasspy/piper-voices on HuggingFace.
 Zero API cost, sub-200ms latency, 8GB RAM safe.
 """
 
-import io
 import os
-import wave
 from typing import Any, List, Optional
 
 import numpy as np

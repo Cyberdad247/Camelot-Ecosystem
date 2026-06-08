@@ -31,6 +31,8 @@ class OpenCodeKnight(OmniKnight):
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 shell=True,  # Required for global npm binaries on Windows
             )
             stdout, stderr = process.communicate()

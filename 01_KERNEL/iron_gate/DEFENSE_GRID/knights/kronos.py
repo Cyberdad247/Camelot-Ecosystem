@@ -17,7 +17,13 @@ class SirKronos:
         try:
             # Check if binary exists, otherwise use fallback logic or mock
             if os.path.exists(self.rotel_path):
-                res = subprocess.run([self.rotel_path, "--check-resources"], capture_output=True, text=True)
+                res = subprocess.run(
+                    [self.rotel_path, "--check-resources"],
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                    errors="replace"
+                )
                 return res.stdout
             else:
                 # Mock output if binary missing for now

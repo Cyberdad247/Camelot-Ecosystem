@@ -2,4 +2,4 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """EXP module initialization."""
 
-from kernel.exp.calculator import BASE_EXP, EXPResult, calculate_exp
+from kernel.exp.calculator import BASE_EXP, EXPResult, calculate_exp  # noqa: F401
