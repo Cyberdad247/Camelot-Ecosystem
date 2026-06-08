@@ -84,4 +84,5 @@ KEYWORD_ROUTES: dict[str, str] = {
     "velocity": "sir_codex", "prototype": "sir_codex",
     "1m_context": "sir_helio", "cloud_burst": "sir_helio",
     "ouroboros": "sir_ouroboros", "mamba": "sir_ouroboros", "infinite_context": "sir_ouroboros",
+    "bifrost": "sir_heimdall", "mesh": "sir_heimdall", "sentinel": "sir_heimdall", "zero_trust": "sir_heimdall",
 }

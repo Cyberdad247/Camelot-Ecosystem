@@ -17,12 +17,9 @@ from __future__ import annotations
 import asyncio
 import json
 import os
-import socket
-import sys
 import time
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
-from typing import Any
 
 CAMELOT_HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 MANIFEST_PATH = CAMELOT_HOME / "logs" / "switchboard_manifest.json"
@@ -126,6 +123,11 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         id="sir_kimi", engine="kimi_cli", weight=0.82,
         cost_tier="free", capability=["long_context","research","chinese","moonshot","kimi","k2"],
         probe_port=8080, notes="Moonshot Kimi K2.5 — 1M context via CLIProxyAPI kimi OAuth channel",
+    ),
+    "sir_heimdall": Terminal(
+        id="sir_heimdall", engine="pydantic_ai", weight=0.99,
+        cost_tier="low", capability=["security","mesh","bifrost","zero_trust","network","sentinel"],
+        probe_port=0, notes="Sir Heimdall — Bifrost Guardian & Mesh Network Sentinel",
     ),
     "sir_hermes": Terminal(
         id="sir_hermes", engine="hermes_cli", weight=0.78,

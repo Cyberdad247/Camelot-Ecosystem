@@ -7407,3 +7407,318 @@ ender_hud() â€” inserted panel between Sir Link and Anya/OS Health rows
 | 1896 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=597683s tasks=7 fail=0 probes=6/9 cells=7 |
 | 1897 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=598283s tasks=7 fail=0 probes=6/9 cells=7 |
 | 1898 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=598883s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1899 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=599483s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=600083s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=600683s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=601283s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=601883s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=602483s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=603084s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=603684s tasks=7 fail=0 probes=6/9 cells=7 |
+| 1907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=604284s tasks=7 fail=0 probes=6/9 cells=7 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=6/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=0 fail=0 probes=6/9 cells=0 || 2026-06-06T01:34:58.870508+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_link'] | HYDRATED |
+| 2026-06-06T01:34:58.871381+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_link] | HYDRATED |
+
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6060s tasks=0 fail=0 probes=6/9 cells=0 |
+---
+## [2026-06-05] Streamline Camelot CLI Identity Surface
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - Added compact /help, /commands, /who, and identity-aware prompt showing active knight/provider/model.
+  - Fixed routing startup blockers for sir_heimdall W_BIFROST and CLI intercept complexity/urgency keyword sets.
+- **Verification performed**:
+  - `py_compile passed for camelot_cli.py, cli_intercept.py, and soul_router.py.`
+  - `Scripted CLI session verified /who, /help, /route build a dashboard, prompt update, and clean /who after routing.`
+- **Tag**: [CLI_UX_SYNC]
+---
+## [2026-06-05] Codex integrated with Camelot-OS
+- **Actor**: SIR_BORIS (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+---
+## [2026-06-05] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 939 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=23460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 940 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 941 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 942 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 943 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26460s tasks=0 fail=0 probes=6/9 cells=0 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27060s tasks=0 fail=0 probes=6/9 cells=0 |
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27660s tasks=0 fail=0 probes=6/9 cells=0 |
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28260s tasks=0 fail=0 probes=6/9 cells=0 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28860s tasks=0 fail=0 probes=6/9 cells=0 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29461s tasks=0 fail=0 probes=6/9 cells=0 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30061s tasks=0 fail=0 probes=6/9 cells=0 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30661s tasks=0 fail=0 probes=6/9 cells=0 |
+| 952 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31261s tasks=0 fail=0 probes=6/9 cells=0 |
+| 953 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31861s tasks=0 fail=0 probes=6/9 cells=0 |
+| 954 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=32461s tasks=0 fail=0 probes=6/9 cells=0 |
+| 955 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33061s tasks=0 fail=0 probes=6/9 cells=0 |
+| 956 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33661s tasks=0 fail=0 probes=6/9 cells=0 |
+| 957 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34261s tasks=0 fail=0 probes=6/9 cells=0 |
+| 958 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34861s tasks=0 fail=0 probes=6/9 cells=0 |
+| 959 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=35461s tasks=0 fail=0 probes=6/9 cells=0 |
+| 960 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36061s tasks=0 fail=0 probes=6/9 cells=0 |
+| 961 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36661s tasks=0 fail=0 probes=6/9 cells=0 |
+| 962 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37261s tasks=0 fail=0 probes=6/9 cells=0 |
+| 963 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37861s tasks=0 fail=0 probes=6/9 cells=0 |
+| 964 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=38461s tasks=0 fail=0 probes=6/9 cells=0 |
+| 965 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=45712s tasks=0 fail=0 probes=6/9 cells=0 |
+| 966 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46312s tasks=0 fail=0 probes=6/9 cells=0 |
+| 967 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46912s tasks=0 fail=0 probes=6/9 cells=0 |
+| 968 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=47512s tasks=0 fail=0 probes=6/9 cells=0 |
+| 969 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48112s tasks=0 fail=0 probes=6/9 cells=0 |
+| 970 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48712s tasks=0 fail=0 probes=6/9 cells=0 |
+| 971 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49312s tasks=0 fail=0 probes=6/9 cells=0 |
+| 972 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49912s tasks=0 fail=0 probes=6/9 cells=0 |
+| 973 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=50512s tasks=0 fail=0 probes=6/9 cells=0 |
+| 974 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51112s tasks=0 fail=0 probes=6/9 cells=0 |
+| 975 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51712s tasks=0 fail=0 probes=4/9 cells=0 |
+| 976 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52312s tasks=0 fail=0 probes=4/9 cells=0 |
+| 977 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52912s tasks=0 fail=0 probes=4/9 cells=0 |
+| 978 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=53512s tasks=0 fail=0 probes=4/9 cells=0 |
+| 979 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54112s tasks=0 fail=0 probes=4/9 cells=0 |
+| 980 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54712s tasks=0 fail=0 probes=4/9 cells=0 || 2026-06-06T15:47:03.915770+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS system_check'] | HYDRATED |
+| 2026-06-06T15:47:05.185218+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS system_check' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-06T15:47:05.185988+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS system_check' to Cloud Brain] | HYDRATED |
+| 2026-06-06T15:47:05.186544+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS system_check] | HYDRATED |
+| 2026-06-06T15:47:05.621955+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS system_check, hits=3] | HYDRATED |
+| 2026-06-06T15:47:05.626382+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS system_check, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 981 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=55312s tasks=1 fail=0 probes=4/9 cells=1 || 2026-06-06T15:55:11.416905+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //HELIO initialize Vizion Rcrds Meeting Room simulation with Anya, Vizion Wealth, and The Breakout Boys'] | HYDRATED |
+| 2026-06-06T15:55:11.936592+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //HELIO initialize Vizion Rcrds Meeting Room simulation with Anya, Vizion Wealth, and The Breakout Boys] | HYDRATED |
+| 2026-06-06T15:55:46.380879+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //BORIS Assume persona of Sir Helio. Utilize Gemini CLI engine and Hive IDE super harness. Anya work with Vizion Wealth and The Breakout Boys. Create a simulation of 1 Vizion Rcrds meeting room.'] | HYDRATED |
+| 2026-06-06T15:55:46.673194+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //BORIS Assume persona of Sir Helio. Utilize Gemini CLI engine and Hive IDE super harness. Anya work with Vizion Wealth and The Breakout Boys. Create a simulation of 1 Vizion Rcrds meeting room.] | HYDRATED |
+| 2026-06-06T15:56:59.895284+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //ANYA Coordinate with Vizion Wealth and The Breakout Boys to prepare a simulation of one Vizion Rcrds meeting room. Utilize the Gemini CLI engine and Hive IDE super harness context.'] | HYDRATED |
+| 2026-06-06T15:57:00.508614+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ANYA Coordinate with Vizion Wealth and The Breakout Boys to prepare a simulation of one Vizion Rcrds meeting room. Utilize the Gemini CLI engine and Hive IDE super harness context.] | HYDRATED |
+| 2026-06-06T15:57:53.254564+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//vocal Vizion Rcrds Meeting Room Simulation: Anya, Vizion Wealth, The Breakout Boys'] | HYDRATED |
+| 2026-06-06T15:57:53.585480+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //vocal Vizion Rcrds Meeting Room Simulation: Anya, Vizion Wealth, The Breakout Boys] | HYDRATED |
+| 2026-06-06T15:57:54.067247+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //vocal Vizion Rcrds Meeting Room Simulation: Anya, Vizion Wealth, The Breakout Boys, hits=3] | HYDRATED |
+| 2026-06-06T15:57:54.068495+00:00 | HYDRATION_MGR | HYDRATE [Intent: //vocal Vizion Rcrds Meeting Room Simulation: Anya, Vizion Wealth, The Breakout Boys, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+| 2026-06-06T15:58:48.249859+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //THOUGHT Synthesize context for Vizion Rcrds Meeting Room 1. Participants: ANYA, Vizion Wealth, The Breakout Boys. Engine: Gemini CLI. Harness: Hive IDE Super Harness.'] | HYDRATED |
+| 2026-06-06T15:58:48.615665+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //THOUGHT Synthesize context for Vizion Rcrds Meeting Room 1. Participants: ANYA, Vizion Wealth, The Breakout Boys. Engine: Gemini CLI. Harness: Hive IDE Super Harness.] | HYDRATED |
+| 2026-06-06T15:59:49.005635+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//THINK Synthesize context for Vizion Rcrds Meeting Room 1. Participants: ANYA, Vizion Wealth, The Breakout Boys. Engine: Gemini CLI. Harness: Hive IDE Super Harness.'] | HYDRATED |
+| 2026-06-06T15:59:49.246793+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //THINK Synthesize context for Vizion Rcrds Meeting Room 1. Participants: ANYA, Vizion Wealth, The Breakout Boys. Engine: Gemini CLI. Harness: Hive IDE Super Harness.] | HYDRATED |
+| 2026-06-06T15:59:49.602518+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //THINK Synthesize context for Vizion Rcrds Meeting Room 1. Participants: ANYA, Vizion Wealth, The Breakout Boys. Engine: Gemini CLI. Harness: Hive IDE Super Harness., hits=3] | HYDRATED |
+| 2026-06-06T15:59:49.602900+00:00 | HYDRATION_MGR | HYDRATE [Intent: //THINK Synthesize context for Vizion Rcrds Meeting Room 1. Participants: ANYA, Vizion Wealth, The Breakout Boys. Engine: Gemini CLI. Harness: Hive IDE Super Harness., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 982 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=55914s tasks=7 fail=0 probes=4/9 cells=3 || 2026-06-06T16:12:34.023086+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//THINK Brainstorm a 5-scene storyboard for a live performance combining realistic footage with CGI animation. Vibe: Woodstock festival. Style: Cinematic, hybrid reality. Participants: Anya, Vizion Wealth, The Breakout Boys. Optimize prompts for VEO/Kling models.'] | HYDRATED |
+| 2026-06-06T16:12:34.401262+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //THINK Brainstorm a 5-scene storyboard for a live performance combining realistic footage with CGI animation. Vibe: Woodstock festival. Style: Cinematic, hybrid reality. Participants: Anya, Vizion Wealth, The Breakout Boys. Optimize prompts for VEO/Kling models.] | HYDRATED |
+| 2026-06-06T16:12:34.920791+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //THINK Brainstorm a 5-scene storyboard for a live performance combining realistic footage with CGI animation. Vibe: Woodstock festival. Style: Cinematic, hybrid reality. Participants: Anya, Vizion Wealth, The Breakout Boys. Optimize prompts for VEO/Kling models., hits=3] | HYDRATED |
+| 2026-06-06T16:12:34.921873+00:00 | HYDRATION_MGR | HYDRATE [Intent: //THINK Brainstorm a 5-scene storyboard for a live performance combining realistic footage with CGI animation. Vibe: Woodstock festival. Style: Cinematic, hybrid reality. Participants: Anya, Vizion Wealth, The Breakout Boys. Optimize prompts for VEO/Kling models., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 983 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=56514s tasks=8 fail=0 probes=4/9 cells=3 || 2026-06-06T16:18:14.850979+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//THINK Define character sheets and 'soul' signatures for 'The Brothers' in the Vizion Rcrds Woodstock simulation. Focus on close-ups: facial textures, eye-reflections of CGI elements, and kinetic 'soul' patterns. One brother: The Architect (Structural, Stoic). Second brother: The Flame (Kinetic, Volatile). Style: 35mm Close-up.'] | HYDRATED |
+| 2026-06-06T16:18:15.194574+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //THINK Define character sheets and 'soul' signatures for 'The Brothers' in the Vizion Rcrds Woodstock simulation. Focus on close-ups: facial textures, eye-reflections of CGI elements, and kinetic 'soul' patterns. One brother: The Architect (Structural, Stoic). Second brother: The Flame (Kinetic, Volatile). Style: 35mm Close-up.] | HYDRATED |
+| 2026-06-06T16:18:15.642185+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //THINK Define character sheets and 'soul' signatures for 'The Brothers' in the Vizion Rcrds Woodstock simulation. Focus on close-ups: facial textures, eye-reflections of CGI elements, and kinetic 'soul' patterns. One brother: The Architect (Structural, Stoic). Second brother: The Flame (Kinetic, Volatile). Style: 35mm Close-up., hits=3] | HYDRATED |
+| 2026-06-06T16:18:15.643148+00:00 | HYDRATION_MGR | HYDRATE [Intent: //THINK Define character sheets and 'soul' signatures for 'The Brothers' in the Vizion Rcrds Woodstock simulation. Focus on close-ups: facial textures, eye-reflections of CGI elements, and kinetic 'soul' patterns. One brother: The Architect (Structural, Stoic). Second brother: The Flame (Kinetic, Volatile). Style: 35mm Close-up., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 984 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=57114s tasks=9 fail=0 probes=4/9 cells=3 |
+| 985 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=57714s tasks=9 fail=0 probes=4/9 cells=3 |
+| 986 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=58314s tasks=9 fail=0 probes=4/9 cells=3 |
+| 987 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=58914s tasks=9 fail=0 probes=4/9 cells=3 || 2026-06-06T16:53:07.744364+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //KINETIC Map movement signatures for The Architect and The Flame. Synchronize The Architect's [TITANIUM_STASIS] pulses with stage geometry. Synchronize The Flame's [KINETIC_VOLATILITY] surges with fractal mutations. Script the 'Soul Collision' sequence where Stasis meets Volatility.'] | HYDRATED |
+| 2026-06-06T16:53:08.122169+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //KINETIC Map movement signatures for The Architect and The Flame. Synchronize The Architect's [TITANIUM_STASIS] pulses with stage geometry. Synchronize The Flame's [KINETIC_VOLATILITY] surges with fractal mutations. Script the 'Soul Collision' sequence where Stasis meets Volatility.] | HYDRATED |
+| 2026-06-06T16:59:31.367057+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //ANYA Script the crowd's reaction to the gravity inversion during the 'Soul Collision'. Coordinate the interaction between realistic 1969 festival-goers and their holographic spirit counterparts. Ensure the transition to the Hive IDE reconstruction is emotionally anchored.'] | HYDRATED |
+| 2026-06-06T16:59:31.767014+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ANYA Script the crowd's reaction to the gravity inversion during the 'Soul Collision'. Coordinate the interaction between realistic 1969 festival-goers and their holographic spirit counterparts. Ensure the transition to the Hive IDE reconstruction is emotionally anchored.] | HYDRATED |
+| 2026-06-06T17:02:36.386321+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//FORGE Render final Woodstock CGI hybrid simulation video. Compile Scene 1 through 5, The Brothers' Close-ups, Kinetic Mapping, and Anya's Crowd Inversion into a single LATTICE RADIANT asset.'] | HYDRATED |
+| 2026-06-06T17:02:36.705427+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE Render final Woodstock CGI hybrid simulation video. Compile Scene 1 through 5, The Brothers' Close-ups, Kinetic Mapping, and Anya's Crowd Inversion into a single LATTICE RADIANT asset.] | HYDRATED |
+| 2026-06-06T17:02:37.512552+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //FORGE Render final Woodstock CGI hybrid simulation video. Compile Scene 1 through 5, The Brothers' Close-ups, Kinetic Mapping, and Anya's Crowd Inversion into a single LATTICE RADIANT asset., hits=3] | HYDRATED |
+| 2026-06-06T17:02:37.513177+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE Render final Woodstock CGI hybrid simulation video. Compile Scene 1 through 5, The Brothers' Close-ups, Kinetic Mapping, and Anya's Crowd Inversion into a single LATTICE RADIANT asset., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 988 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=59514s tasks=12 fail=0 probes=4/9 cells=4 || 2026-06-06T17:07:30.996341+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//FORGE Render Scene 1: The Arrival. Cinematic long shot, low angle, 35mm Kodachrome grain. 1969 festival crowd in mud, bioluminescent CGI Glyph swarming overhead. Optimized for VEO engine.'] | HYDRATED |
+| 2026-06-06T17:07:31.314303+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE Render Scene 1: The Arrival. Cinematic long shot, low angle, 35mm Kodachrome grain. 1969 festival crowd in mud, bioluminescent CGI Glyph swarming overhead. Optimized for VEO engine.] | HYDRATED |
+| 2026-06-06T17:07:31.851846+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //FORGE Render Scene 1: The Arrival. Cinematic long shot, low angle, 35mm Kodachrome grain. 1969 festival crowd in mud, bioluminescent CGI Glyph swarming overhead. Optimized for VEO engine., hits=3] | HYDRATED |
+| 2026-06-06T17:07:31.852761+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE Render Scene 1: The Arrival. Cinematic long shot, low angle, 35mm Kodachrome grain. 1969 festival crowd in mud, bioluminescent CGI Glyph swarming overhead. Optimized for VEO engine., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+| 2026-06-06T17:09:26.516430+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS full_audit'] | HYDRATED |
+| 2026-06-06T17:09:27.526889+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS full_audit' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-06T17:09:27.527280+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS full_audit' to Cloud Brain] | HYDRATED |
+| 2026-06-06T17:09:27.527494+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS full_audit] | HYDRATED |
+| 2026-06-06T17:09:27.932271+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS full_audit, hits=3] | HYDRATED |
+| 2026-06-06T17:09:27.935395+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS full_audit, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 989 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60114s tasks=14 fail=0 probes=4/9 cells=4 |
+| 990 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60714s tasks=14 fail=0 probes=4/9 cells=4 |
+| 991 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=61314s tasks=14 fail=0 probes=4/9 cells=4 |
+| 992 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=61914s tasks=14 fail=0 probes=4/9 cells=4 |
+| 993 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=62514s tasks=14 fail=0 probes=4/9 cells=4 |
+| 994 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=63114s tasks=14 fail=0 probes=4/9 cells=4 |
+| 995 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=63714s tasks=14 fail=0 probes=4/9 cells=4 |
+| 996 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64314s tasks=14 fail=0 probes=4/9 cells=4 |
+| 997 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64914s tasks=14 fail=0 probes=4/9 cells=4 |
+| 998 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=65514s tasks=14 fail=0 probes=4/9 cells=4 |
+| 999 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=66114s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1000 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=66714s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1001 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=67314s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1002 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=67914s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1003 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=68514s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1004 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=69114s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1005 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=69714s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1006 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=70314s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1007 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=70915s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1008 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=71515s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1009 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72115s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1010 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72715s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1011 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=73315s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1012 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=73915s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1013 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=74516s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1014 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=75116s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1015 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=75716s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1016 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=76316s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1017 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=76916s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1018 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=77516s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1019 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=78116s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1020 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=78716s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1021 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=79316s tasks=14 fail=0 probes=4/9 cells=4 |
+| 1022 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=137599s tasks=14 fail=0 probes=4/9 cells=4 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=6/9 cells=0 || 2026-06-07T18:35:23.076108+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS lattice_check'] | HYDRATED |
+| 2026-06-07T18:35:24.124299+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS lattice_check' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-07T18:35:24.125225+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS lattice_check' to Cloud Brain] | HYDRATED |
+| 2026-06-07T18:35:24.126219+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS lattice_check] | HYDRATED |
+| 2026-06-07T18:35:24.598336+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS lattice_check, hits=3] | HYDRATED |
+| 2026-06-07T18:35:24.600433+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS lattice_check, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-07T18:37:36.523607+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'UNKNOWN_RUNE: //BORIS Synthesize current state of the lattice for Sir Helio.'] | HYDRATED |
+| 2026-06-07T18:37:36.864786+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //BORIS Synthesize current state of the lattice for Sir Helio.] | HYDRATED |
+
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=2 fail=0 probes=6/9 cells=1 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=2 fail=0 probes=6/9 cells=1 || 2026-06-07T18:58:01.267539+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS lattice_check'] | HYDRATED |
+| 2026-06-07T18:58:01.833209+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS lattice_check' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-07T18:58:01.834056+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS lattice_check' to Cloud Brain] | HYDRATED |
+| 2026-06-07T18:58:01.834710+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS lattice_check] | HYDRATED |
+| 2026-06-07T18:58:06.744507+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS lattice_check, hits=3] | HYDRATED |
+| 2026-06-07T18:58:06.746303+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS lattice_check, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-07T19:00:19.823399+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS lattice_check'] | HYDRATED |
+| 2026-06-07T19:00:21.326303+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS lattice_check' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-07T19:00:21.327510+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS lattice_check' to Cloud Brain] | HYDRATED |
+| 2026-06-07T19:00:21.328734+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS lattice_check] | HYDRATED |
+| 2026-06-07T19:00:21.763497+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS lattice_check, hits=3] | HYDRATED |
+| 2026-06-07T19:00:21.765760+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS lattice_check, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-07T19:00:26.241350+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//vocal vocal_probe'] | HYDRATED |
+| 2026-06-07T19:00:26.895749+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//vocal vocal_probe' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-07T19:00:26.896547+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //vocal vocal_probe] | HYDRATED |
+| 2026-06-07T19:00:27.217854+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //vocal vocal_probe, hits=3] | HYDRATED |
+| 2026-06-07T19:00:27.218939+00:00 | HYDRATION_MGR | HYDRATE [Intent: //vocal vocal_probe, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=5 fail=0 probes=6/9 cells=2 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=5 fail=0 probes=6/9 cells=2 || 2026-06-07T19:14:45.998111+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS factory_check'] | HYDRATED |
+| 2026-06-07T19:14:46.615679+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS factory_check' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-07T19:14:46.616598+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS factory_check' to Cloud Brain] | HYDRATED |
+| 2026-06-07T19:14:46.617412+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS factory_check] | HYDRATED |
+| 2026-06-07T19:14:47.167031+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS factory_check, hits=3] | HYDRATED |
+| 2026-06-07T19:14:47.168881+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS factory_check, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=6 fail=0 probes=6/9 cells=2 || 2026-06-07T19:31:13.272046+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS lattice_check'] | HYDRATED |
+| 2026-06-07T19:31:13.968562+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS lattice_check' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-07T19:31:13.968907+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS lattice_check' to Cloud Brain] | HYDRATED |
+| 2026-06-07T19:31:13.969157+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS lattice_check] | HYDRATED |
+| 2026-06-07T19:31:14.408137+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS lattice_check, hits=3] | HYDRATED |
+| 2026-06-07T19:31:14.409022+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS lattice_check, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=7 fail=0 probes=6/9 cells=2 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=7 fail=0 probes=6/9 cells=2 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4862s tasks=7 fail=0 probes=6/9 cells=2 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5462s tasks=7 fail=0 probes=6/9 cells=2 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6062s tasks=7 fail=0 probes=6/9 cells=2 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6662s tasks=7 fail=0 probes=6/9 cells=2 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7262s tasks=7 fail=0 probes=6/9 cells=2 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7862s tasks=7 fail=0 probes=6/9 cells=2 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8462s tasks=7 fail=0 probes=6/9 cells=2 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9062s tasks=7 fail=0 probes=6/9 cells=2 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9662s tasks=7 fail=0 probes=6/9 cells=2 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10262s tasks=7 fail=0 probes=6/9 cells=2 |
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10862s tasks=7 fail=0 probes=6/9 cells=2 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11462s tasks=7 fail=0 probes=6/9 cells=2 |
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12062s tasks=7 fail=0 probes=6/9 cells=2 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12662s tasks=7 fail=0 probes=6/9 cells=2 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13262s tasks=7 fail=0 probes=6/9 cells=2 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13862s tasks=7 fail=0 probes=6/9 cells=2 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14462s tasks=7 fail=0 probes=6/9 cells=2 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15062s tasks=7 fail=0 probes=6/9 cells=2 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15662s tasks=7 fail=0 probes=6/9 cells=2 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16263s tasks=7 fail=0 probes=6/9 cells=2 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16863s tasks=7 fail=0 probes=6/9 cells=2 |
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17463s tasks=7 fail=0 probes=6/9 cells=2 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18063s tasks=7 fail=0 probes=6/9 cells=2 || 2026-06-07T23:41:55.485451+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS lattice_final_verification'] | HYDRATED |
+| 2026-06-07T23:41:58.033067+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS lattice_final_verification' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-07T23:41:58.033559+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS lattice_final_verification' to Cloud Brain] | HYDRATED |
+| 2026-06-07T23:41:58.033873+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS lattice_final_verification] | HYDRATED |
+| 2026-06-07T23:41:58.612830+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS lattice_final_verification, hits=3] | HYDRATED |
+| 2026-06-07T23:41:58.613741+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS lattice_final_verification, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18663s tasks=8 fail=0 probes=6/9 cells=2 |
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19263s tasks=8 fail=0 probes=6/9 cells=2 || 2026-06-07T23:55:17.501361+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//FORGE Perform a comprehensive lattice expansion audit and prepare for the integration of FAISS for Ω-Vault.'] | HYDRATED |
+| 2026-06-07T23:55:19.070882+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE Perform a comprehensive lattice expansion audit and prepare for the integration of FAISS for Ω-Vault.] | HYDRATED |
+| 2026-06-07T23:55:20.139020+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //FORGE Perform a comprehensive lattice expansion audit and prepare for the integration of FAISS for Ω-Vault., hits=3] | HYDRATED |
+| 2026-06-07T23:55:20.139719+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE Perform a comprehensive lattice expansion audit and prepare for the integration of FAISS for Ω-Vault., Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |
+
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19863s tasks=9 fail=0 probes=6/9 cells=3 |
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20463s tasks=9 fail=0 probes=6/9 cells=3 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21063s tasks=9 fail=0 probes=6/9 cells=3 |
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21663s tasks=9 fail=0 probes=6/9 cells=3 || 2026-06-08T00:36:02.296968+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//STATUS knight_mapping'] | HYDRATED |
+| 2026-06-08T00:36:03.533549+00:00 | HYDRATION_MGR | L1_5_AGENT_STORE [Stored '//STATUS knight_mapping' to Agent Memory (MP2P7SN8)] | HYDRATED |
+| 2026-06-08T00:36:03.534110+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS knight_mapping' to Cloud Brain] | HYDRATED |
+| 2026-06-08T00:36:03.534524+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS knight_mapping] | HYDRATED |
+| 2026-06-08T00:36:03.984527+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //STATUS knight_mapping, hits=3] | HYDRATED |
+| 2026-06-08T00:36:03.985829+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS knight_mapping, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22263s tasks=10 fail=0 probes=6/9 cells=3 || 2026-06-08T00:43:24.543896+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//HEAL Map sir_sonus to Soul Router OMNI_PROVIDER_MAP'] | HYDRATED |
+| 2026-06-08T00:43:28.028878+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //HEAL Map sir_sonus to Soul Router OMNI_PROVIDER_MAP] | HYDRATED |
+| 2026-06-08T00:43:28.656507+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //HEAL Map sir_sonus to Soul Router OMNI_PROVIDER_MAP, hits=3] | HYDRATED |
+| 2026-06-08T00:43:28.656975+00:00 | HYDRATION_MGR | HYDRATE [Intent: //HEAL Map sir_sonus to Soul Router OMNI_PROVIDER_MAP, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY] | HYDRATED |

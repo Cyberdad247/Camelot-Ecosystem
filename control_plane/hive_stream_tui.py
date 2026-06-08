@@ -43,7 +43,7 @@ from textual.binding import Binding
 from textual.containers import Container, Horizontal, Vertical
 from textual.reactive import reactive
 from textual.widgets import (
-    DataTable, Footer, Header, Input, Label, Log, RichLog, Static,
+    DataTable, Footer, Header, Input, Label, RichLog, Static,
 )
 from rich.text import Text
 

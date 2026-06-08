@@ -1,0 +1,1 @@
+{"artifact": "OMEGA-GLYPH-V1000-OMNI-CODEX", "artifact_type": "UKG_Nano_Crystal_Proposal", "version": "1000.3.0", "evidence_status": "planned", "physical_nodes": {"Node_D_MicroVM": {"stack": ["Rust", "wasm-bindgen"], "claimed_core_logic": "Deterministic_Soul_Algorithm_Execution", "evidence_class": "aspirational"}}}

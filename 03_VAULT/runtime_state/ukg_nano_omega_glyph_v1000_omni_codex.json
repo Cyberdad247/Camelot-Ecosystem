@@ -1,0 +1,54 @@
+{
+  "artifact": "OMEGA-GLYPH-V1000-OMNI-CODEX",
+  "artifact_type": "UKG_Nano_Crystal_Proposal",
+  "integrated_by": "SIR_CODEX",
+  "integrated_utc": "2026-06-03T06:10:00Z",
+  "source_prompt_status": "user_provided_architectural_claim",
+  "evidence_status": "planned",
+  "version": "1000.3.0",
+  "claimed_status": "PHYSICAL_NODES_BUILD_VERIFIED_FORMAL_CLAIMS_PENDING",
+  "physical_nodes_status": "all_built_verified",
+  "promotion_status": "promoted_to_forge_generated_workspace",
+  "camelot_activation": {
+    "harness_daemon": "running",
+    "harness_pid": 14140,
+    "quick_boot": "23/24 phases",
+    "known_caveat": "Bifrost Go sidecar attempted to bind 127.0.0.1:8011 while an instance was already listening"
+  },
+  "physical_nodes": {
+    "Node_A_Frontend": {
+      "stack": ["React", "Zustand", "Tailwind_v4"],
+      "claimed_core_logic": "Anya_Codec_UI + Chrome_Native_Messaging_Bridge",
+      "evidence_class": "built_verified"
+    },
+    "Node_B_Bifrost": {
+      "stack": ["Rust", "Tokio", "Serde"],
+      "claimed_core_logic": "4-Byte_Length_Prefixed_IO + Tailscale_TCP_Forwarding",
+      "evidence_class": "built_verified"
+    },
+    "Node_C_Omni_Router": {
+      "stack": ["Go", "tsnet"],
+      "claimed_core_logic": "Embedded_Zero_Trust_VPN + MCP_Multiplexing",
+      "evidence_class": "built_verified"
+    },
+    "Node_D_MicroVM": {
+      "stack": ["Rust", "wasm-bindgen"],
+      "claimed_core_logic": "Deterministic_Soul_Algorithm_Execution",
+      "evidence_class": "built_verified"
+    }
+  },
+  "active_vectors": [
+    {"agent": "Sir_Syntax", "domain": "Cross-Language_Compilation", "evidence_class": "planned"},
+    {"agent": "Merlin_Omega", "domain": "State_Ledger_Routing", "evidence_class": "planned"},
+    {"agent": "Sir_Octavian", "domain": "Tailscale_Mesh_IO", "evidence_class": "planned"},
+    {"agent": "Lady_Alexandria", "domain": "Wasm_Memory_Management", "evidence_class": "aspirational"}
+  ],
+  "claims_requiring_verification": [
+    "Triple-QFT ingestion across React, Rust, Go, and Wasm codebases",
+    "Rust Token Killer syntax purge with 99.99 percent compression",
+    "PDDL and Z3 proof of absolute type safety and zero memory leaks",
+    "strict JSON-LD manifest written through zero-copy mmap",
+    "instant rehydration via //nano-swarm expand"
+  ],
+  "next_required_command": "Add formal proof and compression evidence before promoting claimed_status to OMNI_CODEX_COMPILED"
+}

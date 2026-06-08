@@ -135,7 +135,11 @@ class SirHeimdall:
         try:
             result = subprocess.run(
                 ["pip", "list", "--format=columns"],
-                capture_output=True, text=True, timeout=15,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=15,
             )
             for line in result.stdout.splitlines()[2:]:
                 pkg = line.split()[0].lower() if line.split() else ""
@@ -172,7 +176,11 @@ class SirHeimdall:
                 ["grep", "-r", "--include=*.py", "-l",
                  "-e", "sentry_sdk", "-e", "bugsnag", "-e", "datadog",
                  str(root)],
-                capture_output=True, text=True, timeout=30,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=30,
             )
             for fpath in result.stdout.strip().splitlines():
                 vectors.append(FingerprintVector(

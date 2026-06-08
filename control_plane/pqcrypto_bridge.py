@@ -26,7 +26,7 @@ from __future__ import annotations
 import json
 import subprocess
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 CAMELOT_HOME = Path(__file__).parent.parent
 _BINARY_CANDIDATES = [

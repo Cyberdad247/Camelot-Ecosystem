@@ -8,3 +8,10 @@ This file records execution friction, proposed fixes, and review outcomes.
   - Local notebooklm-py CLI fails with 'Authentication expired or invalid'
 - Learning: The local python CLI auth token can expire silently, but the MCP ethereal surface retains a separate, radiant auth heartbeat.
 - Proposed Mutation: When cloudbrain sync commands fail due to auth expiration, fallback to manual ethereal synchronization using MCP notebook tools instead of halting the ascension.
+---
+## 2026-06-06T02:20:13.404547+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - write_codex_integration() got an unexpected keyword argument 'ledger'
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: write_codex_integration() got an unexpected keyword argument 'ledger'

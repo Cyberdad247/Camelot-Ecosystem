@@ -1,0 +1,6 @@
+{
+  "node": "Node_C_Omni_Router",
+  "rollback_action": "delete_generated_node_dir",
+  "target": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_generate_node_source_writ2\\generated\\Node_C_Omni_Router\\source",
+  "safe_to_delete": true
+}

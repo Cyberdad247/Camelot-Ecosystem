@@ -9,15 +9,14 @@ from __future__ import annotations
 import os
 import sys
 import importlib.util
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from enum import Enum
-from typing import Any, Optional
+from typing import Optional
 
 try:
     import requests
 except ImportError:
     requests = None
-    import httpx
 
 from control_plane.taxonomy import PRIVACY_KEYWORDS, KEYWORD_ROUTES
 
@@ -61,6 +60,7 @@ class EngineWeight(float, Enum):
     W_LINEAR        = 0.95
     W_WARDEN        = 0.93
     W_FINANCE       = 0.82
+    W_BIFROST       = 0.91
 
 @dataclass(frozen=True)
 class KnightEngine:
@@ -83,6 +83,7 @@ FOUNDRY_COUNCIL: tuple[KnightEngine, ...] = (
     KnightEngine("sir_ouroboros", "ouroboros_ssm", EngineWeight.W_LINEAR, "Linear Reasoning", privacy_level=0.1),
     KnightEngine("sir_sentinel", "gemini_flash", EngineWeight.W_WARDEN, "Security Warden", privacy_level=0.8),
     KnightEngine("sir_valerian", "gemini_flash", EngineWeight.W_FINANCE, "Financial/ROI", privacy_level=0.4),
+    KnightEngine("sir_heimdall", "pydantic_ai", EngineWeight.W_BIFROST, "Bifrost Guardian", privacy_level=0.9),
 )
 
 _ENGINE_MAP = {e.knight_id: e for e in FOUNDRY_COUNCIL}
@@ -130,6 +131,12 @@ class SoulRouter:
 
     def _sync_to_cloudbrain(self, knight_id: str, intent: str, reason: str):
         if HydrationManager:
+            try:
+                connector = import_module("01_KERNEL.memory.cloudbrain_connector")
+                if knight_id.upper() not in getattr(connector, "KNIGHT_NOTEBOOKS", {}):
+                    return
+            except Exception:
+                pass
             mgr = HydrationManager(knight_id=knight_id)
             mgr.store_tissue(
                 intent=f"soul_route_{knight_id}",

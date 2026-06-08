@@ -1,0 +1,16 @@
+{
+  "status": "EVIDENCE_RECORDED",
+  "source_manifest": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_write_evidence_report_per0\\ukg.json",
+  "schema_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\ukg_nano_crystal_schema.json",
+  "schema": {
+    "status": "SCHEMA_VALID",
+    "errors": [],
+    "node_count": 1,
+    "claims_requiring_verification": 0,
+    "evidence_classes": {
+      "generated_artifact": 1
+    }
+  },
+  "claim_evidence": [],
+  "recorded_utc": "2026-06-03T20:42:08.104050+00:00"
+}

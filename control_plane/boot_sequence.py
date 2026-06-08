@@ -168,6 +168,8 @@ def _windows_task_exists(task_name: str) -> bool:
         ["schtasks", "/Query", "/TN", task_name],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         timeout=10,
     )
     return completed.returncode == 0
@@ -239,6 +241,8 @@ def boot_morgana_bridge(home: Path) -> tuple[bool, str]:
                 ["schtasks", "/Run", "/TN", _MORGANA_TASK_NAME],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=env,
             )
@@ -271,6 +275,8 @@ def boot_morgana_bridge(home: Path) -> tuple[bool, str]:
                 ],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=launcher_env,
             )
@@ -356,6 +362,8 @@ def boot_bifrost_go_sidecar(home: Path) -> tuple[bool, str]:
                 ["schtasks", "/Run", "/TN", _BIFROST_SIDECAR_TASK_NAME],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=env,
             )
@@ -624,7 +632,10 @@ def launch_warp() -> tuple[bool, str]:
     try:
         check = subprocess.run(
             ["tasklist", "/FI", "IMAGENAME eq warp.exe", "/NH"],
-            capture_output=True, text=True, timeout=5,
+            capture_output=True, text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=5,
         )
         if "warp.exe" in check.stdout.lower():
             return True, "Warp already running"
@@ -780,6 +791,8 @@ def start_local_lt_memory(home: Path) -> tuple[bool, str]:
                 ],
                 capture_output=True,
                 text=True,
+                encoding="utf-8",
+                errors="replace",
                 timeout=10,
                 env=launcher_env,
             )

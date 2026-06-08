@@ -179,6 +179,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_nano_swarm_expand",
     },
+    "//BIFROST_LOCK": {
+        "knight": "sir_heimdall",
+        "description": "Emergency Bifrost perimeter lockdown",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_bifrost_lock",
+    },
+    "//SCAN_VECTORS": {
+        "knight": "sir_heimdall",
+        "description": "Deep 4-vector fingerprint scan",
+        "mode": "SENTINEL",
+        "priority": 2,
+        "handler": "_handle_scan_vectors",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -213,6 +227,7 @@ OMEGA_RUNES: dict[str, dict[str, Any]] = {
     "Omega_STACK":      {"knight": "sir_boris",    "description": "Full stack topology report"},
     "Omega_SCORPION":   {"knight": "sir_gideon",   "description": "Forensic GIDEON_RISK_MATRIX audit"},
     "Omega_CODEX":      {"knight": "sir_codex",    "description": "Direct SIR_CODEX execution lane"},
+    "Omega_BIFROST":    {"knight": "sir_heimdall", "description": "Bifrost Sentinel operations"},
 }
 
 
@@ -351,6 +366,12 @@ def _handle_status(param: str, context: dict) -> dict:
 
 def _handle_think(param: str, context: dict) -> dict:
     return {"action": "got_reasoning", "param": param, "knight": "merlin_omega"}
+
+def _handle_bifrost_lock(param: str, context: dict) -> dict:
+    return {"action": "bifrost_lockdown", "status": "AIR_GAPPED"}
+
+def _handle_scan_vectors(param: str, context: dict) -> dict:
+    return {"action": "4_vector_scan", "target": param or "project_root"}
 
 def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
     """Execute the 6-phase NANO_SWARM_EXPAND protocol via importlib."""
@@ -509,6 +530,8 @@ _HANDLERS = {
     "_handle_scan": _handle_scan,
     "_handle_status": _handle_status,
     "_handle_think": _handle_think,
+    "_handle_bifrost_lock": _handle_bifrost_lock,
+    "_handle_scan_vectors": _handle_scan_vectors,
     "_handle_nano_swarm_expand": _handle_nano_swarm_expand,
 }
 

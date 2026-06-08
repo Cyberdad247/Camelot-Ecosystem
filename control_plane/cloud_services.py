@@ -17,10 +17,6 @@ from .config_manager import ConfigManager
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 
-from agora.cloud_orchestrator_shim.long_term_cloudbrain import (  # type: ignore[import-not-found]
-    cloudbrain_status,
-    pull_long_term_memory,
-)
 
 
 # --- NotebookLM bridge loader (Ω₃) -----------------------------------------

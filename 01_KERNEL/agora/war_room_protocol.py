@@ -16,7 +16,13 @@ def watchtower_pulse():
     # Checks for resource spikes violating the Law of Locality (8GB Limit)
     # Source: [1, 2]
     try:
-        resources = subprocess.run(["rotel", "--check-resources"], capture_output=True, text=True)
+        resources = subprocess.run(
+            ["rotel", "--check-resources"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace"
+        )
     except FileNotFoundError:
         resources = subprocess.CompletedProcess(args=[], returncode=0, stdout="✅ [KRONOS]: Rotel binary not found (Simulated)")
     
@@ -24,7 +30,13 @@ def watchtower_pulse():
     # Scans for drift between file system and Manifest
     # Source: [1, 3]
     try:
-        drift = subprocess.run(["cribo", "--audit", "EMPIRE_MAP.md"], capture_output=True, text=True)
+        drift = subprocess.run(
+            ["cribo", "--audit", "EMPIRE_MAP.md"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace"
+        )
     except FileNotFoundError:
         drift = subprocess.CompletedProcess(args=[], returncode=0, stdout="✅ [SENTINEL]: Cribo binary not found (Simulated)")
     

@@ -90,8 +90,21 @@ MODE_CARTRIDGE_MAP = {
     "CRITICAL_THINKING": "CRITICAL_THINKING",
 }
 HELP_LINES = [
+    "Core commands:",
+    "/who                 show active knight, provider, model, and last route",
+    "/route <intent>      preview which knight and model will handle an intent",
+    "/status              run Camelot health/status probes",
+    "/llm <model>         pin chat model",
+    "/provider <name>     pin chat provider",
+    "/chat [intent]       enter Sovereign Chat Interface",
+    "/commands            show the full command surface",
+    "/exit",
+]
+FULL_HELP_LINES = [
     "Commands:",
     "/help or //HELP",
+    "/who",
+    "/commands",
     "/route <intent>",
     "/status",
     "/orchestrator [--mode <boot|status|knights|triage|persona|notify|awaken|conversation>]",
@@ -184,6 +197,42 @@ def _stream_print(text: str, *, tone: str | None = None, newline: bool = True) -
             time.sleep(STREAM_DELAY)
     if newline:
         print("", flush=True)
+
+
+def _provider_label(provider: str | None) -> str:
+    return provider or "auto"
+
+
+def _model_label(model: str | None) -> str:
+    return model or "default"
+
+
+def _prompt_text(knight_id: str, provider: str | None, model: str | None) -> str:
+    return f"Camelot[{knight_id}|{_provider_label(provider)}/{_model_label(model)}]> "
+
+
+def _identity_lines(
+    knight_id: str,
+    provider: str | None,
+    model: str | None,
+    last_route: dict[str, Any] | None = None,
+) -> list[str]:
+    lines = [
+        f"Knight: {knight_id}",
+        f"Provider: {_provider_label(provider)}",
+        f"LLM: {_model_label(model)}",
+    ]
+    if last_route:
+        lines.extend(
+            [
+                f"Last route: {last_route['knight_id']} via {last_route['engine']}",
+                f"Last model: {last_route['model']} @ {last_route['backend_url']}",
+                f"Reason: {last_route['reason']}",
+            ]
+        )
+    else:
+        lines.append("Last route: none yet; run /route <intent> to preview assignment")
+    return lines
 
 
 def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float = 0.0) -> bool:
@@ -1111,10 +1160,12 @@ def _interactive_shell(
 
     current_provider = provider
     current_llm = llm
+    current_knight = os.getenv("CAMELOT_ACTIVE_KNIGHT", "sir_codex")
+    last_route: dict[str, Any] | None = None
 
     while True:
         try:
-            raw = input(_color("Camelot-OS> ", "accent")).strip()
+            raw = input(_color(_prompt_text(current_knight, current_provider, current_llm), "accent")).strip()
         except EOFError:
             return 0
         except KeyboardInterrupt:
@@ -1129,6 +1180,24 @@ def _interactive_shell(
             if not json_mode:
                 for line in HELP_LINES:
                     _stream_print(line, tone="dim")
+            continue
+        if raw in {"/commands", "commands"}:
+            if not json_mode:
+                for line in FULL_HELP_LINES:
+                    _stream_print(line, tone="dim")
+            continue
+        if raw in {"/who", "who"}:
+            output = {
+                "knight_id": current_knight,
+                "provider": _provider_label(current_provider),
+                "model": _model_label(current_llm),
+                "last_route": last_route,
+            }
+            if json_mode:
+                _print_json(output)
+            else:
+                for line in _identity_lines(current_knight, current_provider, current_llm, last_route):
+                    _stream_print(line, tone="info")
             continue
 
         try:
@@ -1207,6 +1276,9 @@ def _interactive_shell(
                     "backend_url": result.backend_url,
                     "reason": result.route.reason,
                 }
+                current_knight = result.route.knight_id
+                current_llm = result.model
+                last_route = output
                 if json_mode:
                     _print_json(output)
                 else:
@@ -1377,6 +1449,15 @@ def _interactive_shell(
             # Omni-Routing Intercept
             intercept = CLIIntercept()
             result = intercept.intercept(raw)
+            current_knight = result.route.knight_id
+            current_llm = result.model
+            last_route = {
+                "knight_id": result.route.knight_id,
+                "engine": result.engine_cmd,
+                "model": result.model,
+                "backend_url": result.backend_url,
+                "reason": result.route.reason,
+            }
             
             if not json_mode:
                 _stream_print(intercept.format_route_log(result), tone="info")
@@ -2401,24 +2482,13 @@ excalibur_health_url: "https://replace-me.modal.run"
                 ],
                 tag="[Omega_CODEX]",
             )
-            output = write_codex_integration(
-                CAMELOT_HOME,
-                actor=args.actor,
-                trigger=args.codex_command,
-                ledger=ledger,
-            )
             sync_event = sync_after_event(
                 event_type="codex_integration",
                 command=f"codex {args.codex_command}",
                 results=output,
             )
-            output = write_codex_integration(
-                CAMELOT_HOME,
-                actor=args.actor,
-                trigger=args.codex_command,
-                cloudbrain_sync=sync_event,
-                ledger=ledger,
-            )
+            output["ledger"] = ledger
+            output["cloudbrain_sync"] = sync_event
         _log_run(output)
         _emit(output, json_mode=args.json, title="Codex Integration")
         return 0

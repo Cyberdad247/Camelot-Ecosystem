@@ -47,6 +47,7 @@ _SKILLGRAPH_TIER: dict[str, SkillTier] = {
     "sir_boris": "S3", "sir_sentinel": "S3", "sir_liberte": "S3",
     "sir_alex": "S4", "lady_apis": "S4", "sir_link": "S4", "sir_mnemo": "S4",
     "merlin_omega": "S5", "sir_helio": "S5", "sir_ouroboros": "S5",
+    "sir_heimdall": "S4",
 }
 
 # LATTICE_SIGNAL primary model bindings (OMNI_ROUTER_AUDIT). Gemini-primary.
@@ -235,3 +236,4 @@ if __name__ == "__main__":
             print(f"  {cap.skillgraph_tier} {kid:14s} {cap.primary_model:24s} {cap.function}{ag}")
     else:
         print(f"Loaded {len(roster)} knight capabilities. Use --roster to list, --test to verify.")
+ilities. Use --roster to list, --test to verify.")

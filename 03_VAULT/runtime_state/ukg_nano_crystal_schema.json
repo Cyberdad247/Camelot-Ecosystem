@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Camelot UKG Nano Crystal Proposal",
+  "type": "object",
+  "required": [
+    "artifact",
+    "artifact_type",
+    "version",
+    "evidence_status",
+    "physical_nodes"
+  ],
+  "properties": {
+    "artifact": {
+      "type": "string"
+    },
+    "artifact_type": {
+      "const": "UKG_Nano_Crystal_Proposal"
+    },
+    "version": {
+      "type": "string"
+    },
+    "evidence_status": {
+      "enum": [
+        "confirmed",
+        "planned",
+        "aspirational",
+        "rejected"
+      ]
+    },
+    "physical_nodes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "stack",
+          "claimed_core_logic",
+          "evidence_class"
+        ],
+        "properties": {
+          "stack": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "claimed_core_logic": {
+            "type": "string"
+          },
+          "evidence_class": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "claims_requiring_verification": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

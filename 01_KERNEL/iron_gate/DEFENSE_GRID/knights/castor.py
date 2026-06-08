@@ -16,7 +16,14 @@ class SirCastor:
         try:
             # Concept: wrap 'cmd' in a docker execution
             # res = subprocess.run(["docker", "run", "--rm", "camelot-sandbox", cmd], capture_output=True)
-            res = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+            res = subprocess.run(
+                cmd,
+                shell=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace"
+            )
             return res.stdout
         except Exception as e:
             logging.error(f"CASTOR REPAIR ERROR: {e}")
