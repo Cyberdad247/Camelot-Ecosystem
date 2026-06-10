@@ -1,5 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import ast
 import inspect
 import json
 import re
@@ -988,10 +989,32 @@ class JsonElementExtractionStrategy(ExtractionStrategy):
             return value.strip()
         return value
 
+    # AST node types permitted in schema expressions — no calls, imports, or assignments
+    _SAFE_EXPR_NODES = (
+        ast.Expression, ast.Constant, ast.Name, ast.Load, ast.Attribute,
+        ast.Subscript, ast.Index, ast.Slice,
+        ast.List, ast.Tuple, ast.Dict,
+        ast.BinOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.FloorDiv,
+        ast.UnaryOp, ast.USub, ast.UAdd, ast.Not,
+        ast.Compare, ast.Eq, ast.NotEq, ast.Lt, ast.Gt, ast.LtE, ast.GtE,
+        ast.BoolOp, ast.And, ast.Or,
+        ast.IfExp,
+    )
+
+    def _safe_eval(self, expr: str, context: dict):
+        try:
+            tree = ast.parse(expr, mode="eval")
+            for node in ast.walk(tree):
+                if not isinstance(node, self._SAFE_EXPR_NODES):
+                    raise ValueError(f"Disallowed expression node: {type(node).__name__}")
+            return eval(compile(tree, "<expr>", "eval"), {"__builtins__": {}}, context)
+        except Exception:
+            return None
+
     def _compute_field(self, item, field):
         try:
             if "expression" in field:
-                return eval(field["expression"], {}, item)
+                return self._safe_eval(field["expression"], item)
             elif "function" in field:
                 return field["function"](item)
         except Exception as e:

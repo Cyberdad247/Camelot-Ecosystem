@@ -20,20 +20,21 @@ class OpenCodeKnight(OmniKnight):
         """
         Executes a task via OpenCode CLI.
         """
-        mode_flag = "--plan" if plan_only else ""
-        # opencode run -p "prompt"
-        cmd = [self.cli_path, "run", mode_flag, "-p", f'"{task_prompt}"']
+        cmd = [self.cli_path, "run"]
+        if plan_only:
+            cmd.append("--plan")
+        cmd.extend(["-p", task_prompt])
 
         try:
             print(f"🗡️ [OPENCODE] Executing Kinetic Task: {task_prompt[:50]}...")
             process = subprocess.Popen(
-                " ".join(cmd),
+                cmd,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
                 encoding="utf-8",
                 errors="replace",
-                shell=True,  # Required for global npm binaries on Windows
+                shell=False,
             )
             stdout, stderr = process.communicate()
 

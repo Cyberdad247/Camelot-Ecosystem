@@ -258,8 +258,12 @@ class AsyncDatabaseManager:
                     await self.aalter_db_add_column(column, db)
             await db.commit()
 
+    _ALLOWED_COLUMNS = frozenset({"media", "links", "metadata", "screenshot", "response_headers"})
+
     async def aalter_db_add_column(self, new_column: str, db):
         """Add new column to the database"""
+        if new_column not in self._ALLOWED_COLUMNS:
+            raise ValueError(f"Column '{new_column}' is not in the allowed column list")
         if new_column == "response_headers":
             await db.execute(f'ALTER TABLE crawled_data ADD COLUMN {new_column} TEXT DEFAULT "{{}}"')
         else:

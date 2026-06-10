@@ -2,6 +2,7 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
 import json
+import re
 from typing import AsyncGenerator, List, Optional
 
 from fastapi import APIRouter, HTTPException, Path
@@ -127,6 +128,8 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
         for relation in relations:
             session_id = relation.get("in")
             if session_id:
+                if not re.match(r"^[A-Za-z_][A-Za-z0-9_]*:[A-Za-z0-9_\-]+$", str(session_id)):
+                    continue
                 session_result = await repo_query(f"SELECT * FROM {session_id}")
                 if session_result and len(session_result) > 0:
                     session_data = session_result[0]

@@ -34,7 +34,12 @@ def init_db():
     conn.close()
 
 
+_ALLOWED_COLUMNS = frozenset({"media", "links", "metadata", "screenshot", "response_headers"})
+
+
 def alter_db_add_screenshot(new_column: str = "media"):
+    if new_column not in _ALLOWED_COLUMNS:
+        raise ValueError(f"Column '{new_column}' is not in the allowed column list")
     check_db_path()
     try:
         conn = sqlite3.connect(DB_PATH)
@@ -159,11 +164,13 @@ def flush_db():
 
 
 def update_existing_records(new_column: str = "media", default_value: str = "{}"):
+    if new_column not in _ALLOWED_COLUMNS:
+        raise ValueError(f"Column '{new_column}' is not in the allowed column list")
     check_db_path()
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute(f'UPDATE crawled_data SET {new_column} = "{default_value}" WHERE screenshot IS NULL')
+        cursor.execute(f"UPDATE crawled_data SET {new_column} = ? WHERE screenshot IS NULL", (default_value,))
         conn.commit()
         conn.close()
     except Exception as e:

@@ -14,13 +14,20 @@ logger = logging.getLogger("resonance-bridge")
 # 1. DEFINE THE FASTAPI APP WITH CORS
 web_app = FastAPI()
 
-# THIS IS THE KEY: Allow ALL origins to talk to this backend
+# Explicit origin allowlist — never combine ["*"] with allow_credentials=True
+_ALLOWED_ORIGINS = [
+    o.strip() for o in os.getenv(
+        "ALLOWED_ORIGINS",
+        "http://localhost:3000,http://localhost:5173,http://localhost:8000",
+    ).split(",") if o.strip()
+]
+
 web_app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows V0, Localhost, Vercel deployments
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_ALLOWED_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["POST"],
+    allow_headers=["Content-Type"],
 )
 
 app = modal.App("resonance-bridge-v56")

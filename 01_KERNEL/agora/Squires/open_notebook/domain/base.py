@@ -1,5 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import re
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional, Type, TypeVar, Union, cast
 
@@ -41,6 +42,8 @@ class ObjectModel(BaseModel):
                 # This path is taken if called directly from ObjectModel
                 raise InvalidInputError("get_all() must be called from a specific model class")
             if order_by:
+                if not re.match(r"^[A-Za-z_][A-Za-z0-9_]*( (ASC|DESC))?$", str(order_by)):
+                    raise InvalidInputError(f"Invalid order_by value: {order_by!r}")
                 query = f"SELECT * FROM {table_name} ORDER BY {order_by}"
             else:
                 query = f"SELECT * FROM {table_name}"

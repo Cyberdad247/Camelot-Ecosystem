@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import os
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -33,11 +33,19 @@ def print_banner():
     """
     print(f"\033[1;36m{banner}\033[0m")
 
+def _spawn_console(title: str, command: str) -> None:
+    """Open a new Windows console window without shell=True injection risk."""
+    subprocess.Popen(
+        ["cmd", "/k", f"title {title} && {command}"],
+        creationflags=subprocess.CREATE_NEW_CONSOLE,
+    )
+
+
 def boot_morgana():
     print("🌑 LUKAS (L1/L2): Igniting Morgana Server (Port 8001)...")
     server_py = REPO_ROOT / "01_KERNEL" / "morgana_server.py"
     if server_py.exists():
-        os.system(f"start cmd /k title MORGANA_SERVER && python {server_py}")
+        _spawn_console("MORGANA_SERVER", f'python "{server_py}"')
     else:
         print(f"   [SKIP] morgana_server.py not found at {server_py}")
     time.sleep(2)
@@ -46,7 +54,7 @@ def boot_pulse():
     print("⏳ CHRONOS (L4): Starting The Pendulum Daemon...")
     heartbeat_go = REPO_ROOT / "01_KERNEL" / "cmd" / "pulse" / "heartbeat.go"
     if heartbeat_go.exists():
-        os.system(f"start cmd /k title PULSE_DAEMON && go run {heartbeat_go}")
+        _spawn_console("PULSE_DAEMON", f'go run "{heartbeat_go}"')
     else:
         print(f"   [SKIP] heartbeat.go not found at {heartbeat_go}")
     time.sleep(1)
@@ -55,7 +63,7 @@ def boot_titanlink():
     print("🛡️ MOLTBOT (L6): Igniting TitanLink Gateway (Port 18788)...")
     server_py = REPO_ROOT / "01_KERNEL" / "connectivity" / "titanlink_server.py"
     if server_py.exists():
-        os.system(f"start cmd /k title TITANLINK_GATEWAY && python {server_py}")
+        _spawn_console("TITANLINK_GATEWAY", f'python "{server_py}"')
     else:
         print(f"   [SKIP] titanlink_server.py not found at {server_py}")
     time.sleep(2)
@@ -64,9 +72,9 @@ def boot_rustdesk():
     print("⚔️ LUKAS (L2): Igniting RustDesk Spire (ID & Relay)...")
     rd_dir = REPO_ROOT.parent / "rustdesk-server" / "target" / "release"
     if rd_dir.exists():
-        os.system(f"start cmd /k title RUSTDESK_HBBS && {rd_dir}\\hbbs.exe -r 100.118.224.52")
+        _spawn_console("RUSTDESK_HBBS", f'"{rd_dir / "hbbs.exe"}" -r 100.118.224.52')
         time.sleep(1)
-        os.system(f"start cmd /k title RUSTDESK_HBBR && {rd_dir}\\hbbr.exe")
+        _spawn_console("RUSTDESK_HBBR", f'"{rd_dir / "hbbr.exe"}"')
     else:
         print(f"   [SKIP] rustdesk-server not found at {rd_dir}")
     time.sleep(1)
@@ -75,11 +83,11 @@ def boot_interface():
     print("🎭 ANYA (L7): Connecting Neural Interface...")
     hud_py = REPO_ROOT / "02_FORGE" / "Camelot_HUD.py"
     dashboard_dir = REPO_ROOT / "02_FORGE" / "Anya_Dashboard"
-    
+
     if hud_py.exists():
-        os.system(f"start cmd /k title CAMELOT_HUD && python {hud_py}")
+        _spawn_console("CAMELOT_HUD", f'python "{hud_py}"')
     if dashboard_dir.exists():
-        os.system(f"start cmd /k title ANYA_DASHBOARD && cd {dashboard_dir} && npm run dev")
+        _spawn_console("ANYA_DASHBOARD", f'cd "{dashboard_dir}" && npm run dev')
     
     print("   >> Camelot HUD: ACTIVE (Local Terminal)")
     print("   >> Anya Dashboard: http://localhost:5173 (Starting...)")

@@ -179,28 +179,28 @@ class Merlin_Omega(AgentNode):
 
     async def process_oracle_command(self, prompt: str, context: SovereignContext) -> str:
         """
-        Handles Ω_ORACLE commands for the Hypervisor Simulation.
+        Handles Omega_ORACLE commands for the Hypervisor Simulation.
         Enforces HITL (Human-in-the-Loop) Protocol for critical actions.
         """
         cmd = prompt.strip()
 
         # --- HITL IRON GATE ---
-        # Protected Commands: Ω_FORK, Ω_GOD_MODE
-        critical_cmds = ["Ω_FORK", "Ω_GOD_MODE"]
+        # Protected Commands: Omega_FORK, Omega_GOD_MODE
+        critical_cmds = ["Omega_FORK", "Omega_GOD_MODE"]
 
         # Check if command is critical
         is_critical = any(c in cmd for c in critical_cmds)
 
         if is_critical:
             # Check for Confirmation Token
-            if "Ω_CONFIRM" not in cmd:
-                return f"⚠️ [IRON GATE] CRITICAL ACTION DETECTED ({cmd}).\n   Use 'Ω_CONFIRM' to authorize timeline divergence or forced causality break."
+            if "Omega_CONFIRM" not in cmd:
+                return f"⚠️ [IRON GATE] CRITICAL ACTION DETECTED ({cmd}).\n   Use 'Omega_CONFIRM' to authorize timeline divergence or forced causality break."
 
-        # 0. Ω_GENESIS (Scenario Generation)
-        if "Ω_GENESIS" in cmd:
+        # 0. Omega_GENESIS (Scenario Generation)
+        if "Omega_GENESIS" in cmd:
             try:
                 scenario_prompt = gravity.read("01_KERNEL/prompts/oracle/SCENARIO_GENERATOR.md")
-                instructions = cmd.split("Ω_GENESIS")[-1].strip()
+                instructions = cmd.split("Omega_GENESIS")[-1].strip()
                 # Fuse system prompt with user instructions
                 final_input = f"{scenario_prompt}\n\nUSER INPUT: {instructions}"
                 # In a real system, we'd send this to the LLM.
@@ -209,31 +209,31 @@ class Merlin_Omega(AgentNode):
             except Exception as e:
                 return f"❌ [ORACLE] GENESIS FAILURE: Could not load generator prompt. {str(e)}"
 
-        # 1. Ω_STEP (Time Advance)
-        if "Ω_STEP" in cmd:
+        # 1. Omega_STEP (Time Advance)
+        if "Omega_STEP" in cmd:
             self.oracle.step(context)
             return f"⏳ [ORACLE] Time Advanced. Epoch: {context.world_state['epoch']} | Tension: {context.world_state.get('global_tension', 0.5)}"
 
-        # 2. Ω_XRAY (Explain Reasoning)
-        elif "Ω_XRAY" in cmd:
+        # 2. Omega_XRAY (Explain Reasoning)
+        elif "Omega_XRAY" in cmd:
             return "🔍 [ORACLE] X-RAY: ToT Trace reveals Agency (0.5) drove the decision."
 
-        # 3. Ω_FORK (Parallel Timeline) -> PROTECTED
-        elif "Ω_FORK" in cmd:
+        # 3. Omega_FORK (Parallel Timeline) -> PROTECTED
+        elif "Omega_FORK" in cmd:
             new_id = f"{context.session_id}_FORK_{int(time.time())}"
             return f"Ψ [ORACLE] Timeline Forked. Context cloned to ID: {new_id}"
 
-        # 4. Ω_GOD_MODE (Force Event) -> PROTECTED
-        elif "Ω_GOD_MODE" in cmd:
-            event = cmd.split("Ω_GOD_MODE")[-1].strip()
+        # 4. Omega_GOD_MODE (Force Event) -> PROTECTED
+        elif "Omega_GOD_MODE" in cmd:
+            event = cmd.split("Omega_GOD_MODE")[-1].strip()
             return f"⚡ [ORACLE] CAUSALITY BREACH: Event '{event}' injected into timeline."
 
-        # 5. Ω_OPEN (Kinetic Hand) -> Uses Excalibur Bridge
-        elif "Ω_OPEN" in cmd:
+        # 5. Omega_OPEN (Kinetic Hand) -> Uses Excalibur Bridge
+        elif "Omega_OPEN" in cmd:
             try:
                 from agora.bridge import bridge
 
-                instructions = cmd.split("Ω_OPEN")[-1].strip()
+                instructions = cmd.split("Omega_OPEN")[-1].strip()
                 # Determine if it's a plan or final execution
                 plan_only = "--execute" not in instructions
                 clean_instr = instructions.replace("--execute", "").strip()
@@ -259,7 +259,11 @@ class Merlin_Omega(AgentNode):
         elif "//FLEET" in cmd:
             try:
                 # Launch the Go terminal dashboard
-                subprocess.Popen("start cmd /k 01_KERNEL\\agora\\fleet\\fleet_cmd.exe", shell=True)
+                fleet_exe = Path(__file__).resolve().parents[1] / "agora" / "fleet" / "fleet_cmd.exe"
+                subprocess.Popen(
+                    ["cmd", "/k", f"title FLEET_DASHBOARD && \"{fleet_exe}\""],
+                    creationflags=subprocess.CREATE_NEW_CONSOLE,
+                )
                 return "⚔️ [FLEET] Aether Swarm Dashboard launched in separate console."
             except Exception as e:
                 return f"❌ [FLEET] Deployment failure: {e}"
@@ -279,33 +283,33 @@ class Merlin_Omega(AgentNode):
             except Exception as e:
                 return f"❌ [FORGE] Compilation error: {e}"
 
-        # 9. Ω_ACTION (Bytebot)
-        elif "Ω_ACTION" in cmd:
+        # 9. Omega_ACTION (Bytebot)
+        elif "Omega_ACTION" in cmd:
             try:
                 from src.knights.bytebot.bytebot_knight import Bytebot
 
-                action_data = cmd.split("Ω_ACTION")[-1].strip().split(" ")
+                action_data = cmd.split("Omega_ACTION")[-1].strip().split(" ")
                 action_type = action_data[0]
                 target = action_data[1] if len(action_data) > 1 else "Unknown"
                 res = Bytebot.execute_action(action_type, target)
-                self._log_provenance(f"Ω_ACTION: {action_type} on {target}", "SUCCESS")
-                return f"🤖 [BYTEBOT] Ω_ACTION Result: {res}"
+                self._log_provenance(f"Omega_ACTION: {action_type} on {target}", "SUCCESS")
+                return f"🤖 [BYTEBOT] Omega_ACTION Result: {res}"
             except Exception as e:
                 return f"❌ [BYTEBOT] Manipulation failed: {e}"
 
-        # 10. Ω_NOTIFY (Hermes)
-        elif "Ω_NOTIFY" in cmd:
+        # 10. Omega_NOTIFY (Hermes)
+        elif "Omega_NOTIFY" in cmd:
             try:
                 from security.hermes import notify
 
-                msg = cmd.split("Ω_NOTIFY")[-1].strip()
+                msg = cmd.split("Omega_NOTIFY")[-1].strip()
                 notify("⚔️ CAMELOT OS", msg)
                 return f"📧 [HERMES] Notification delivered: {msg}"
             except Exception as e:
                 return f"❌ [HERMES] Delivery failure: {e}"
 
-        # 11. Ω_SHADOW (Shadow Mode Toggle)
-        elif "Ω_SHADOW" in cmd:
+        # 11. Omega_SHADOW (Shadow Mode Toggle)
+        elif "Omega_SHADOW" in cmd:
             try:
                 from security.shadow_mode import shadow_manager
 
@@ -331,8 +335,8 @@ class Merlin_Omega(AgentNode):
             except Exception as e:
                 return f"❌ [SUMMON] Agora Routing error: {e}"
 
-        # 13. Ω_DREAM (Dream State Engine)
-        elif "Ω_DREAM" in cmd:
+        # 13. Omega_DREAM (Dream State Engine)
+        elif "Omega_DREAM" in cmd:
             try:
                 from reasoning.dream_state import dream_engine
 
@@ -345,16 +349,16 @@ class Merlin_Omega(AgentNode):
             except Exception as e:
                 return f"❌ [DREAM STATE] Neural failure: {e}"
 
-        # 14. Ω_VERITAS (Truth & Audit)
-        elif "Ω_VERITAS" in cmd:
-            target = cmd.split("Ω_VERITAS")[-1].strip()
+        # 14. Omega_VERITAS (Truth & Audit)
+        elif "Omega_VERITAS" in cmd:
+            target = cmd.split("Omega_VERITAS")[-1].strip()
             # Simulation: Audit the context or a file
             res = veritas.audit_document(target or "General Context Scan")
             return f"🔍 [VERITAS] Audit Results: {res['status']} | Findings: {len(res['findings'])}"
 
-        # 15. Ω_LYRICUS (Voice & Tone)
-        elif "Ω_LYRICUS" in cmd:
-            text = cmd.split("Ω_LYRICUS")[-1].strip()
+        # 15. Omega_LYRICUS (Voice & Tone)
+        elif "Omega_LYRICUS" in cmd:
+            text = cmd.split("Omega_LYRICUS")[-1].strip()
             tone = "Sovereign"
             if "--tone" in text:
                 parts = text.split("--tone")
@@ -363,22 +367,22 @@ class Merlin_Omega(AgentNode):
             res = lyricus.modulate(text, tone)
             return f"🎵 [LYRICUS] Modulated Output: {res}"
 
-        # 16. Ω_PROMETHEUS (Decomposition)
-        elif "Ω_PROMETHEUS" in cmd:
-            query = cmd.split("Ω_PROMETHEUS")[-1].strip()
+        # 16. Omega_PROMETHEUS (Decomposition)
+        elif "Omega_PROMETHEUS" in cmd:
+            query = cmd.split("Omega_PROMETHEUS")[-1].strip()
             steps = prometheus.decompose(query)
             return f"🔥 [PROMETHEUS] Decomposed Plan: {' -> '.join(steps)}"
 
-        # 17. Ω_HELIX (Self-Correction)
-        elif "Ω_HELIX" in cmd:
-            parts = cmd.split("Ω_HELIX")[-1].strip().split("|")
+        # 17. Omega_HELIX (Self-Correction)
+        elif "Omega_HELIX" in cmd:
+            parts = cmd.split("Omega_HELIX")[-1].strip().split("|")
             action = parts[0].strip() if len(parts) > 0 else "Unknown Action"
             obs = parts[1].strip() if len(parts) > 1 else "No Observation"
             res = helix.reflect(action, obs)
             return f"🧬 [HELIX] Reflection: {res['reflection']} | Correction: {res['correction_plan']}"
 
-        # 17.5 Ω_LEARN (Omega Learn)
-        elif "Ω_LEARN" in cmd:
+        # 17.5 Omega_LEARN (Omega Learn)
+        elif "Omega_LEARN" in cmd:
             try:
                 from learning.dataset_generator import generator
 
@@ -393,8 +397,8 @@ class Merlin_Omega(AgentNode):
             fw = aurora.select_framework(intent)
             return f"🌅 [AURORA] Framework Selected: {fw} for intent: {intent}"
 
-        # 19. Ω_WARDEN (Security Warden)
-        elif "Ω_WARDEN" in cmd:
+        # 19. Omega_WARDEN (Security Warden)
+        elif "Omega_WARDEN" in cmd:
             try:
                 from security.warden import handle_warden_command
 
@@ -402,8 +406,8 @@ class Merlin_Omega(AgentNode):
             except Exception as e:
                 return f"❌ [WARDEN] Security system error: {e}"
 
-        # 20. Ω_SYNC (Ouroboros Loop)
-        elif "Ω_SYNC" in cmd:
+        # 20. Omega_SYNC (Ouroboros Loop)
+        elif "Omega_SYNC" in cmd:
             try:
                 # Execute sync_engine.py as a subprocess
                 sync_script = os.path.join("01_KERNEL", "sync_engine.py")
@@ -473,7 +477,7 @@ class Merlin_Omega(AgentNode):
             # For now, we perform the Heuristic check locally to maintain stability during transition
 
             # --- ORACLE INTERCEPT ---
-            if any(x in raw_input for x in ["ORACLE", "Ω_", "//COUNCIL", "//DEBATE"]):
+            if any(x in raw_input for x in ["ORACLE", "Omega_", "//COUNCIL", "//DEBATE"]):
                 response = await self.process_oracle_command(raw_input, context)
                 self._log_provenance(raw_input, "SUCCESS (ORACLE)")
                 return response

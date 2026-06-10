@@ -70,7 +70,11 @@ if __name__ == "__main__":
 
     local_app = FastAPI()
     local_app.add_middleware(
-        CORSMiddleware, allow_origins=["*"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"]
+        CORSMiddleware,
+        allow_origins=["http://localhost:8005", "http://127.0.0.1:8005"],
+        allow_credentials=False,
+        allow_methods=["POST"],
+        allow_headers=["Content-Type"],
     )
 
     @local_app.post("/")
