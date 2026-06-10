@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 import api from '../services/api';
 
 const ArticleDetail = () => {
@@ -214,7 +215,7 @@ const ArticleDetail = () => {
                         <p className="mb-4">{contentToDisplay}</p>
                      ) : (
                         <div
-                           dangerouslySetInnerHTML={{ __html: contentToDisplay }}
+                           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(contentToDisplay) }}
                            className="article-content"
                         ></div>
                      )}

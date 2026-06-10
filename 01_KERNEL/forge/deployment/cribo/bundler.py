@@ -6,6 +6,7 @@ Bundles Python packages into single standalone .py files for zero-dependency dep
 """
 
 import ast
+import hashlib
 import sys
 from pathlib import Path
 from typing import Dict, List, Set
@@ -68,6 +69,13 @@ class CriboBundler:
 
         return local_modules
 
+    def _is_within_search_paths(self, resolved: Path) -> bool:
+        """Reject any path that escapes all declared search roots."""
+        return any(
+            str(resolved).startswith(str(p.resolve()))
+            for p in self.search_paths
+        )
+
     def _check_local_import(self, module_name: str, local_modules: List[str]):
         """Check if import is local and add to list"""
         if module_name in self.stdlib_modules:
@@ -75,14 +83,14 @@ class CriboBundler:
 
         for path in self.search_paths:
             # Check for .py file
-            module_path = path / f"{module_name.replace('.', '/')}.py"
-            if module_path.exists():
+            module_path = (path / f"{module_name.replace('.', '/')}.py").resolve()
+            if module_path.exists() and self._is_within_search_paths(module_path):
                 local_modules.append(module_path)
                 return
 
             # Check for package (__init__.py)
-            package_path = path / module_name.replace(".", "/") / "__init__.py"
-            if package_path.exists():
+            package_path = (path / module_name.replace(".", "/") / "__init__.py").resolve()
+            if package_path.exists() and self._is_within_search_paths(package_path):
                 local_modules.append(package_path)
                 return
 
@@ -135,39 +143,51 @@ class CriboBundler:
         # In-memory module loader shim
         bundled_content.append(
             """
+import hashlib as _hashlib
+
 class CriboLoader:
-    def __init__(self, registry):
+    def __init__(self, registry, hashes):
         self.registry = registry
-    
+        self._hashes = hashes
+
     def find_module(self, fullname, path=None):
         if fullname in self.registry:
             return self
         return None
-    
+
     def load_module(self, fullname):
         if fullname in sys.modules:
             return sys.modules[fullname]
-        
+        code = self.registry[fullname]
+        expected = self._hashes.get(fullname, "")
+        actual = _hashlib.sha256(code.encode()).hexdigest()
+        if actual != expected:
+            raise ImportError(
+                f"[Cribo] Integrity check failed for '{fullname}': "
+                f"bundle may have been tampered with"
+            )
         module = ModuleType(fullname)
         sys.modules[fullname] = module
-        exec(self.registry[fullname], module.__dict__)
+        exec(compile(code, fullname, "exec"), module.__dict__)
         return module
 
 # Registry of bundled code
 _cribo_registry = {}
+_cribo_hashes = {}
 """
         )
 
-        # Add modules to registry
+        # Add modules to registry with SHA-256 integrity hashes
         for name, code in self.module_registry.items():
-            # Escape triples
             safe_code = code.replace('"""', '\\"\\"\\"')
+            code_hash = hashlib.sha256(code.encode()).hexdigest()
             bundled_content.append(f'_cribo_registry["{name}"] = """{safe_code}"""')
+            bundled_content.append(f'_cribo_hashes["{name}"] = "{code_hash}"')
 
-        # Register loader
+        # Register loader with both registry and hash manifest
         bundled_content.append(
             """
-sys.meta_path.append(CriboLoader(_cribo_registry))
+sys.meta_path.append(CriboLoader(_cribo_registry, _cribo_hashes))
 """
         )
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Check, Loader2, FileText, Sparkles, Eye, X, Users, Globe } from 'lucide-react';
+import DOMPurify from 'dompurify';
 
 const SourceIcon = ({ url }) => {
    const [iconUrl, setIconUrl] = useState(null);
@@ -114,7 +115,7 @@ const ScriptConfirmation = ({
       return (
          <div
             dangerouslySetInnerHTML={{
-               __html: formatScriptMarkdown(scriptText.split('\n').slice(0, 3).join('\n') + '...'),
+               __html: DOMPurify.sanitize(formatScriptMarkdown(scriptText.split('\n').slice(0, 3).join('\n') + '...')),
             }}
          />
       );
@@ -443,7 +444,7 @@ const ScriptConfirmation = ({
                         <div className="p-2 sm:p-4 overflow-y-auto h-full">
                            <div
                               className="prose prose-invert prose-sm max-w-none text-xs sm:text-sm"
-                              dangerouslySetInnerHTML={{ __html: formatScriptMarkdown(scriptText) }}
+                              dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(formatScriptMarkdown(scriptText)) }}
                            />
                         </div>
                      )}

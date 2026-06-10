@@ -52,10 +52,8 @@ class IronGateWarden:
         if env_val:
             return env_val
 
-        fallback_allowed = bool(self.config.get("allow_plain_signature_fallback", False))
-        static_token = str(self.config.get("confirmation_token", "")).strip()
-        if fallback_allowed and static_token:
-            return static_token
+        # allow_plain_signature_fallback is permanently disabled — static tokens
+        # in config files can be extracted and replayed, bypassing HITL entirely.
         return ""
 
     def request_approval(self, action: Dict[str, Any]) -> str:
