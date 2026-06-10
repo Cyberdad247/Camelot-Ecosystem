@@ -1,0 +1,42 @@
+# Version control
+.git
+.gitignore
+.gitmodules
+
+# Test and debug files — must never reach the production image
+01_KERNEL/tests/
+**/test_*.py
+**/debug_*.py
+
+# Dev tooling and editor artifacts
+.vscode/
+.idea/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Local env and secrets
+.env
+.env.*
+!.env.example
+
+# Node / frontend build artifacts
+node_modules/
+.next/
+dist/
+build/
+
+# Docs / planning files
+docs/
+*.md
+!README.md
+
+# Temp / log files
+*.log
+*.tmp
+*.bak

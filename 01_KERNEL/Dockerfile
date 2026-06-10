@@ -18,10 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # 3. CREATE NON-ROOT USER
 RUN useradd -m -u 1001 camelot
 
-# 4. INSTALL PYTHON DEPENDENCIES FROM pyproject.toml
-COPY pyproject.toml .
-RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir .
+# 4. INSTALL PYTHON DEPENDENCIES — pinned via uv.lock for reproducible builds
+COPY pyproject.toml uv.lock ./
+RUN pip install --no-cache-dir uv && \
+    uv sync --frozen --no-dev
 
 # 5. INSTALL CHROMIUM FOR SIR MASQUE
 RUN playwright install chromium && \
