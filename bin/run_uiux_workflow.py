@@ -12,6 +12,7 @@ from pathlib import Path
 
 DEFAULT_WORKFLOW = Path(r"C:\Users\vizio\CAMELOT_OS\01_KERNEL\workflows\uiux_cloudbrain_sync.json")
 REPORT_FILE = Path(r"C:\Users\vizio\CAMELOT_OS\99_HISTORY\WORKFLOW_REPORT_UIUX.md")
+_REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class WorkflowRunner:
@@ -125,7 +126,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run the UI/UX cloudbrain workflow.")
     parser.add_argument("--workflow", default=str(DEFAULT_WORKFLOW), help="Path to the workflow JSON file.")
     args = parser.parse_args()
-    return WorkflowRunner(Path(args.workflow)).run()
+    workflow_path = Path(args.workflow).resolve()
+    try:
+        workflow_path.relative_to(_REPO_ROOT)
+    except ValueError:
+        raise SystemExit(
+            f"ERROR: workflow file must be inside the repo root ({_REPO_ROOT}).\n"
+            f"Refusing to execute untrusted path: {workflow_path}"
+        )
+    return WorkflowRunner(workflow_path).run()
 
 
 if __name__ == "__main__":
