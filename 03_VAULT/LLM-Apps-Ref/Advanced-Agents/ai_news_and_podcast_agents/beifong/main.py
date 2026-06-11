@@ -40,12 +40,17 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Beifong API", description="Beifong API", version="1.0.0", lifespan=lifespan)
 
+_ALLOWED_ORIGINS = [
+    o.strip() for o in os.getenv(
+        "ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:5173"
+    ).split(",") if o.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_ALLOWED_ORIGINS,
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "DELETE", "PUT", "PATCH"],
+    allow_headers=["Content-Type", "Authorization"],
 )
 
 

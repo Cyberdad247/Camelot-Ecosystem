@@ -29,14 +29,16 @@ def run_check(name, check_func):
 def verify_code_quality():
     # ESLint
     try:
-        lint_res = subprocess.run(["npm", "run", "lint"], cwd=DASHBOARD_DIR, shell=True, capture_output=True, text=True)
+        npm = "npm.cmd" if __import__("sys").platform == "win32" else "npm"
+        lint_res = subprocess.run([npm, "run", "lint"], cwd=DASHBOARD_DIR, shell=False, capture_output=True, text=True)
         lint_status = "PASS" if lint_res.returncode == 0 else "WARN"
     except:
         lint_status = "FAIL"
 
     # Security Audit
     try:
-        audit_res = subprocess.run(["npm", "audit"], cwd=DASHBOARD_DIR, shell=True, capture_output=True, text=True)
+        npm = "npm.cmd" if __import__("sys").platform == "win32" else "npm"
+        audit_res = subprocess.run([npm, "audit"], cwd=DASHBOARD_DIR, shell=False, capture_output=True, text=True)
         sec_status = "PASS" if "0 vulnerabilities" in audit_res.stdout else "WARN"
     except:
         sec_status = "FAIL"

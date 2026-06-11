@@ -36,7 +36,7 @@ def print_banner():
 def _spawn_console(title: str, command: str) -> None:
     """Open a new Windows console window without shell=True injection risk."""
     subprocess.Popen(
-        ["cmd", "/k", f"title {title} && {command}"],
+        ["cmd", "/k", f'title "{title}" && {command}'],
         creationflags=subprocess.CREATE_NEW_CONSOLE,
     )
 

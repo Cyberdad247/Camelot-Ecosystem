@@ -26,7 +26,7 @@ def setup_activepieces():
         content = content.replace("AP_API_KEY=", f"AP_API_KEY={generate_key(32)}")
         content = content.replace("AP_ENCRYPTION_KEY=", f"AP_ENCRYPTION_KEY={generate_hex_key(32)}")
         content = content.replace("AP_JWT_SECRET=", f"AP_JWT_SECRET={generate_key(32)}")
-        content = content.replace("AP_POSTGRES_PASSWORD=", "AP_POSTGRES_PASSWORD=camelot_secure_pw")
+        content = content.replace("AP_POSTGRES_PASSWORD=", f"AP_POSTGRES_PASSWORD={generate_key(24)}")
 
         with open(env_file, "w") as f:
             f.write(content)
@@ -44,8 +44,9 @@ def setup_superagi():
 
         # Replace placeholders
         content = content.replace("YOUR_OPEN_API_KEY", os.environ.get("OPENAI_API_KEY", "YOUR_OPEN_API_KEY"))
-        content = content.replace("DB_PASSWORD: password", "DB_PASSWORD: camelot_secure_pw")
-        content = content.replace("postgresql://superagi:password", "postgresql://superagi:camelot_secure_pw")
+        _db_pw = generate_key(24)
+        content = content.replace("DB_PASSWORD: password", f"DB_PASSWORD: {_db_pw}")
+        content = content.replace("postgresql://superagi:password", f"postgresql://superagi:{_db_pw}")
         content = content.replace("JWT_SECRET_KEY: 'secret'", f"JWT_SECRET_KEY: '{generate_key(32)}'")
         content = content.replace(
             "ENCRYPTION_KEY: abcdefghijklmnopqrstuvwxyz123456", f"ENCRYPTION_KEY: {generate_key(32)}"

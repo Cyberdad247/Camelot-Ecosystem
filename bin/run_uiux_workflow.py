@@ -28,6 +28,9 @@ class WorkflowRunner:
         if task_type == "SIMPLE":
             cmd = str(task["command"])
             cwd = str(task.get("cwd", "."))
+            # WARNING: shell=True is required here because cmd is a shell-style
+            # string from the workflow JSON. Only run workflow files from trusted,
+            # access-controlled paths — never from user-supplied input.
             process = subprocess.run(
                 cmd,
                 cwd=cwd,

@@ -15,7 +15,8 @@ def ready_puter():
     print("[*] Installing dependencies with npm (isolated)...")
     try:
         # Using --no-workspaces to avoid local conflict with CAMELOT_OS workspace
-        subprocess.run(["npm", "install", "--no-workspaces"], cwd=PUTER_DIR, shell=True, check=True)
+        npm = "npm.cmd" if __import__("sys").platform == "win32" else "npm"
+        subprocess.run([npm, "install", "--no-workspaces"], cwd=PUTER_DIR, shell=False, check=True)
         print("[+] Puter dependencies installed.")
     except Exception as e:
         print(f"[-] Failed to install dependencies: {e}")

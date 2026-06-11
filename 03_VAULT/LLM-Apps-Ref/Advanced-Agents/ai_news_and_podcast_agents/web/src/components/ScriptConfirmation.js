@@ -205,8 +205,10 @@ const ScriptConfirmation = ({
                            <div
                               className="text-xs text-gray-300"
                               dangerouslySetInnerHTML={{
-                                 __html: formatScriptMarkdown(
-                                    scriptText.split('\n').slice(0, 3).join('\n') + '...'
+                                 __html: DOMPurify.sanitize(
+                                    formatScriptMarkdown(
+                                       scriptText.split('\n').slice(0, 3).join('\n') + '...'
+                                    )
                                  ),
                               }}
                            />

@@ -50,7 +50,7 @@ class ExcaliburRuntime:
                 break
 
     def _simulate_merlin_thought_process(self, intent):
-        print(f"\n🧠 [MERLIN_Ω] Analyzing Request: '{intent}'")
+        print(f"\n🧠 [MERLIN_Omega] Analyzing Request: '{intent}'")
         # Logic to determine which sub-agent to call
         if "research" in intent or "docs" in intent:
             print("   ↳ Delegating to @SIR_HERMES (Researcher)...")
@@ -67,9 +67,10 @@ if __name__ == "__main__":
     try:
         import yaml
     except ImportError:
-        print("Installing dependencies...")
-        os.system("pip install pyyaml")
-        import yaml
+        raise SystemExit(
+            "ERROR: pyyaml is required. Install via: pip install pyyaml\n"
+            "Or run: uv sync --frozen"
+        )
 
     runtime = ExcaliburRuntime()
     runtime.run_loop()

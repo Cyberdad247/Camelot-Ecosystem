@@ -41,7 +41,8 @@ def verify_integrity():
 def verify_coverage():
     try:
         # Running vitest in Forge
-        result = subprocess.run(["npm", "run", "test"], cwd=FORGE_DIR, shell=True, capture_output=True, text=True)
+        npm = "npm.cmd" if __import__("sys").platform == "win32" else "npm"
+        result = subprocess.run([npm, "run", "test"], cwd=FORGE_DIR, shell=False, capture_output=True, text=True)
         if "passed" in result.stdout:
             return True, "Vitest suite passed."
         return False, f"Tests failed:\n{result.stdout}"
@@ -66,7 +67,8 @@ def verify_performance():
 def verify_security():
     # NPM Audit
     try:
-        result = subprocess.run(["npm", "audit"], cwd=FORGE_DIR, shell=True, capture_output=True, text=True)
+        npm = "npm.cmd" if __import__("sys").platform == "win32" else "npm"
+        result = subprocess.run([npm, "audit"], cwd=FORGE_DIR, shell=False, capture_output=True, text=True)
         if "0 vulnerabilities" in result.stdout or "found 0 vulnerabilities" in result.stdout:
             return True, "NPM Audit Clean."
         return True, f"Vulnerabilities found (Check logs): {result.stdout.splitlines()[-1]}"  # Pass with warning

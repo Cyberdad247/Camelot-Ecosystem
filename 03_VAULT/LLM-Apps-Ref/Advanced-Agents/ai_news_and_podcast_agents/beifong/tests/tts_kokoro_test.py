@@ -1,6 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
+import subprocess
 import soundfile as sf
 import platform
 import time
@@ -19,11 +20,11 @@ def play_audio(file_path):
     system = platform.system()
     try:
         if system == "Darwin":
-            os.system(f"afplay {file_path}")
+            subprocess.run(["afplay", str(file_path)], shell=False)
         elif system == "Linux":
-            os.system(f"aplay {file_path}")
+            subprocess.run(["aplay", str(file_path)], shell=False)
         elif system == "Windows":
-            os.system(f'start "" "{file_path}"')
+            subprocess.run(["cmd", "/c", "start", "", str(file_path)], shell=False)
         else:
             print(f"Audio saved to {file_path} (auto-play not supported on this system)")
     except Exception as e:
