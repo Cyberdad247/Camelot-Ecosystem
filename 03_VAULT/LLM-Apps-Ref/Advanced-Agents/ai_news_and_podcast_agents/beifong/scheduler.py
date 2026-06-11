@@ -1,6 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
+import shlex
 import time
 import signal
 import subprocess
@@ -97,8 +98,8 @@ def execute_task(task_id, command):
     print(f"INFO: Starting task {task_id}: {command}")
     try:
         process = subprocess.Popen(
-            command,
-            shell=True,
+            shlex.split(command),
+            shell=False,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
