@@ -1,0 +1,118 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  VERCEL_ORG_ID: team_buexhI8BOzS2AIsu7b3IiPwD
+
+jobs:
+  # ── Detect which apps changed ────────────────────────────────────
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      anya: ${{ steps.filter.outputs.anya }}
+      omni: ${{ steps.filter.outputs.omni }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            anya:
+              - '02_FORGE/PORTAL_CORE/Anya_Dashboard/**'
+            omni:
+              - '02_FORGE/apps/omni-eye-dashboard/**'
+
+  # ── Anya Dashboard ───────────────────────────────────────────────
+  deploy-anya:
+    name: Anya Dashboard → Vercel
+    needs: changes
+    if: needs.changes.outputs.anya == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02_FORGE/PORTAL_CORE/Anya_Dashboard
+    env:
+      VERCEL_PROJECT_ID: prj_56ZNRVkHUl3yKI9ipBXG1UjLxmj2
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy — production
+        if: github.event_name == 'push'
+        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy — preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        run: |
+          url=$(vercel deploy --yes --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> $GITHUB_OUTPUT
+
+      - name: Comment preview URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '**Anya Dashboard preview:** ${{ steps.preview.outputs.url }}'
+            })
+
+  # ── Omni-Eye Dashboard ───────────────────────────────────────────
+  deploy-omni:
+    name: Omni-Eye Dashboard → Vercel
+    needs: changes
+    if: needs.changes.outputs.omni == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02_FORGE/apps/omni-eye-dashboard
+    env:
+      VERCEL_PROJECT_ID: prj_v9oBWCl79010RidByXnRvunaXC5s
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Deploy — production
+        if: github.event_name == 'push'
+        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy — preview
+        if: github.event_name == 'pull_request'
+        id: preview
+        run: |
+          url=$(vercel deploy --yes --token=${{ secrets.VERCEL_TOKEN }})
+          echo "url=$url" >> $GITHUB_OUTPUT
+
+      - name: Comment preview URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '**Omni-Eye Dashboard preview:** ${{ steps.preview.outputs.url }}'
+            })
