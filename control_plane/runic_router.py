@@ -389,7 +389,8 @@ def _handle_vocal(param: str, context: dict) -> dict:
     return {"action": "vocal_pipeline", "phases": ["Oracle", "Veritas", "Lazarus"], "param": param}
 
 def _handle_scan(param: str, context: dict) -> dict:
-    return {"action": "squires_colony_triage", "path": param or ".", "detail": "run: python -m squires.colony triage"}
+    rust_bin = str(CAMELOT_HOME / "04_KINETIC" / "squires_rs" / "target" / "release" / "squires_rs.exe")
+    return {"action": "squires_colony_triage", "path": param or ".", "detail": f"run: {rust_bin} scan"}
 
 def _handle_status(param: str, context: dict) -> dict:
     return {"action": "system_status", "detail": "run: python -m control_plane.harness --status"}
