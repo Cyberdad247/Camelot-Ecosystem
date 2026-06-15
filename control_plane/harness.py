@@ -26,6 +26,7 @@ import argparse
 import asyncio
 import json
 import os
+import shutil
 import signal
 import subprocess
 import sys
@@ -61,7 +62,8 @@ ARCHIVIST_INTERVAL_S   = 3600   # 1 hr — Lord Archivist GEP scan
 GIDEON_INTERVAL_S      = 21600  # 6 hr — Sir Gideon //SCORPION pass
 GIDEON_REPORT_FILE     = LOGS_DIR / "gideon_report.json"
 TOON_V2_INTERVAL_S     = 21600  # 6 hr — TOON_v2 delta sync to Cloud Brain
-WATCHDOG_RESTART_COOLDOWN_S = 120  # min seconds between restart attempts per service
+WATCHDOG_RESTART_COOLDOWN_S = 60   # base cooldown; doubles on each consecutive failure (exp backoff)
+WATCHDOG_RESTART_MAX_COOLDOWN_S = 600  # cap at 10 min per service
 
 # Services the watchdog can auto-restart (soft, non-critical)
 _SOFT_SERVICE_CMDS: dict[str, list] = {}  # populated lazily after HOME is resolved
@@ -162,7 +164,9 @@ class SovereignHarness:
         self._last_sync   = "never"
         self._last_ledger = "never"
         self._probe_cache: dict[str, bool] = {}
-        self._restart_ts: dict[str, float] = {}  # service → last restart epoch
+        self._restart_ts: dict[str, float] = {}    # service → last restart epoch
+        self._restart_count: dict[str, int] = {}  # consecutive failures per service
+        self._prev_dark: set[str] = set()         # dark set from previous watchdog tick
 
     # ── Watchdog ──────────────────────────────────────────────────────────────
 
@@ -185,6 +189,9 @@ class SovereignHarness:
             "OmniVoice":   ["node", str(js)] if js.exists() else None,
             "KittenTTS":   [py, str(runner)] if runner.exists() else None,
             "SirOctavian": [py, str(oct_py), "--serve"] if oct_py.exists() else None,
+            "Redis":        (["redis-server.exe"] if Path(r"C:\Program Files\Redis\redis-server.exe").exists()
+                             else (["redis-server"] if shutil.which("redis-server") else
+                                   (["sc", "start", "Redis"] if sys.platform == "win32" else None))),
         }
         return cmds.get(name)
 
@@ -194,13 +201,12 @@ class SovereignHarness:
             _log(f"[WATCHDOG] No restart command for {name}")
             return
         try:
-            import subprocess as _sp
             import platform as _pl
             kwargs: dict = {"cwd": str(CAMELOT_HOME)}
             if _pl.system() == "Windows":
                 kwargs["creationflags"] = (
-                    getattr(_sp, "DETACHED_PROCESS", 0x08)
-                    | getattr(_sp, "CREATE_NEW_PROCESS_GROUP", 0x200)
+                    getattr(subprocess, "DETACHED_PROCESS", 0x08)
+                    | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0x200)
                 )
                 kwargs["close_fds"] = True
             else:
@@ -209,10 +215,17 @@ class SovereignHarness:
             with out.open("ab") as fh:
                 kwargs["stdout"] = fh
                 kwargs["stderr"] = fh
-            proc = _sp.Popen(cmd, **kwargs)
+                proc = subprocess.Popen(cmd, **kwargs)  # fh open while Popen duplicates handle
+            self._restart_count[name] = 0  # reset backoff on successful launch
             _log(f"[WATCHDOG] RESTART {name} PID={proc.pid}")
         except Exception as e:
-            _log(f"[WATCHDOG] RESTART {name} FAILED: {e}")
+            self._restart_count[name] = self._restart_count.get(name, 0) + 1
+            _log(f"[WATCHDOG] RESTART {name} FAILED (attempt {self._restart_count[name]}): {e}")
+
+    def _cooldown_for(self, name: str) -> float:
+        """Exponential backoff: base * 2^failures, capped at max."""
+        failures = self._restart_count.get(name, 0)
+        return min(WATCHDOG_RESTART_COOLDOWN_S * (2 ** failures), WATCHDOG_RESTART_MAX_COOLDOWN_S)
 
     async def _watchdog_loop(self) -> None:
         while self._running:
@@ -223,16 +236,26 @@ class SovereignHarness:
             self._probe_cache = {
                 name: ok for (name, _, _), ok in zip(BOOT_PROBES, results)
             }
-            dark = [n for n, ok in self._probe_cache.items() if not ok]
+            dark = {n for n, ok in self._probe_cache.items() if not ok}
+
+            # Log recoveries (was dark last tick, now green)
+            recovered = self._prev_dark - dark
+            for name in recovered:
+                self._restart_count[name] = 0
+                _log(f"[WATCHDOG] RECOVERED: {name} is GREEN")
+
             if dark:
-                _log(f"[WATCHDOG] DARK: {', '.join(dark)}")
+                _log(f"[WATCHDOG] DARK: {', '.join(sorted(dark))}")
+                now = time.time()
                 for name in dark:
-                    last = self._restart_ts.get(name, 0)
-                    if time.time() - last >= WATCHDOG_RESTART_COOLDOWN_S:
-                        self._restart_ts[name] = time.time()
+                    cooldown = self._cooldown_for(name)
+                    if now - self._restart_ts.get(name, 0) >= cooldown:
+                        self._restart_ts[name] = now
                         asyncio.create_task(self._restart_soft_service(name))
             else:
                 _log("[WATCHDOG] All probes green")
+
+            self._prev_dark = dark
             await asyncio.sleep(WATCHDOG_INTERVAL_S)
 
     # ── Memory sync ───────────────────────────────────────────────────────────
@@ -558,6 +581,43 @@ class SovereignHarness:
                 "summary": output[-500:],
             }
 
+        # Cybertron Dawning - OS map audit, Lady M sync, and project isolation.
+        if task.directive.upper().startswith("//DAWNING"):
+            if knight_id != "forge":
+                return {
+                    "rune": "//DAWNING",
+                    "status": "accepted_no_requeue",
+                    "reason": f"routed to {task.knight}; direct dawning execution skipped",
+                }
+            script = CAMELOT_HOME / "scripts" / "cybertron_dawning.py"
+            if not script.exists():
+                return {"status": "failed", "error": f"missing dawning script: {script}"}
+            try:
+                from .runic_router import parse_rune
+            except ImportError:
+                from control_plane.runic_router import parse_rune
+            parsed = parse_rune(task.directive)
+            project_name = parsed[1] if parsed else "default_nexus"
+            env = os.environ.copy()
+            env.setdefault("PYTHONIOENCODING", "utf-8")
+            proc = await asyncio.to_thread(
+                subprocess.run,
+                [sys.executable, str(script), project_name or "default_nexus"],
+                cwd=str(CAMELOT_HOME),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=120,
+            )
+            output = (proc.stdout or "") + (proc.stderr or "")
+            return {
+                "status": "dawning_complete" if proc.returncode == 0 else "failed",
+                "returncode": proc.returncode,
+                "project": project_name or "default_nexus",
+                "state": str(CAMELOT_HOME / "03_VAULT" / "runtime_state" / "cybertron_dawning_latest.json"),
+                "summary": output[-800:],
+            }
+
         # Runic command dispatch
         if task.directive.startswith("//") or task.directive.startswith("Omega_"):
             try:
@@ -592,6 +652,14 @@ class SovereignHarness:
         _log(f"[HARNESS] Sovereign Harness online PID={os.getpid()}")
         PID_FILE.write_text(str(os.getpid()), encoding="utf-8")
 
+        if once:
+            await asyncio.gather(self._watchdog_loop.__wrapped__(self) if hasattr(self._watchdog_loop, '__wrapped__') else asyncio.sleep(0))
+            # single watchdog cycle
+            results = await asyncio.gather(*[_probe_port(h, p) for _, h, p in BOOT_PROBES])
+            self._probe_cache = {n: ok for (n, _, _), ok in zip(BOOT_PROBES, results)}
+            print(json.dumps(asdict(self.status()), indent=2))
+            return
+
         loops = [
             self._watchdog_loop(),
             self._memory_sync_loop(),
@@ -603,14 +671,6 @@ class SovereignHarness:
             self._toon_v2_loop(),
             self._openclaw_loop(),
         ]
-
-        if once:
-            await asyncio.gather(self._watchdog_loop.__wrapped__(self) if hasattr(self._watchdog_loop, '__wrapped__') else asyncio.sleep(0))
-            # single watchdog cycle
-            results = await asyncio.gather(*[_probe_port(h, p) for _, h, p in BOOT_PROBES])
-            self._probe_cache = {n: ok for (n, _, _), ok in zip(BOOT_PROBES, results)}
-            print(json.dumps(asdict(self.status()), indent=2))
-            return
 
         def _shutdown(sig, frame):
             _log(f"[HARNESS] Signal {sig} received — shutting down")
