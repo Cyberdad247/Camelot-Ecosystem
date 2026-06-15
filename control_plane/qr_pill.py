@@ -139,6 +139,11 @@ class QRPill:
                 self.state = PillState.ERROR
                 return False
 
+            # CRITICAL: Integrate with Bifrost bridge and forge CAMELOT-OS
+            if not await self._integrate_bifrost():
+                self.state = PillState.ERROR
+                return False
+
             # Verify integrity
             if not await self._verify_integrity():
                 self.state = PillState.ERROR
@@ -389,6 +394,16 @@ class QRPill:
             "health_history_count": len(self.health_history),
             "artifacts": len(self.artifacts),
         }
+
+    async def _integrate_bifrost(self) -> bool:
+        """Integrate with Bifrost bridge, analyze, optimize, and forge CAMELOT-OS."""
+        try:
+            from control_plane.bifrost_integration import get_bifrost_integration
+
+            bifrost = get_bifrost_integration()
+            return await bifrost.integrate(self.pill_id)
+        except Exception:
+            return False
 
     def get_health_history(self, limit: int = 10) -> list[dict]:
         """Get health check history."""
