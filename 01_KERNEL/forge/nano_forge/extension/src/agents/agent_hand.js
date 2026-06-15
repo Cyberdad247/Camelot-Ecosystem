@@ -1,7 +1,7 @@
-// Ω_HAND: KINETIC ACTION MODULE
+// Omega_HAND: KINETIC ACTION MODULE
 // Capabilities: Click, Type, Scroll
 
-console.log("[Ω_HAND] Kinetic Systems Online.");
+console.log("[Omega_HAND] Kinetic Systems Online.");
 
 const Kinetic = {
     

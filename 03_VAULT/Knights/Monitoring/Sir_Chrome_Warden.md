@@ -2,7 +2,7 @@
 > Status: ACTIVE (Transcendent)
 > Role: The Browser Sovereign (Visual Sovereignty)
 > XP: 0 | Level: 1
-> Protocol: Ω_CHROME_WARDEN (Transcendent)
+> Protocol: Omega_CHROME_WARDEN (Transcendent)
 > House: Monitoring (The Vault)
 
 ## 🎭 PERSONA: THE DIGITAL FORENSIC SNIPER

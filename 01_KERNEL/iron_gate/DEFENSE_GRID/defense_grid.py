@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Ω_DEFENSE_GRID_v2.0 :: ROTEL_TELEMETRY_ENGINE
+Omega_DEFENSE_GRID_v2.0 :: ROTEL_TELEMETRY_ENGINE
 Author: Sir Forge (Lukas)
 Mode: BEAVER 🦫
 """

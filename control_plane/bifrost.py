@@ -29,6 +29,7 @@ import asyncio
 import json
 import os
 import sys
+import time
 from pathlib import Path
 from typing import AsyncIterator
 
@@ -103,24 +104,88 @@ class Bifrost:
         max_tokens: int = 2048,
     ) -> AsyncIterator[str]:
         """Stream text chunks from a specific terminal."""
+        import uuid
+        dispatch_id = str(uuid.uuid4())[:8]
+        t0 = time.time()
+
+        # Log dispatch to agent memory
+        try:
+            from control_plane.agent_memory import log_dispatch as mem_log_dispatch
+            asyncio.create_task(
+                mem_log_dispatch(terminal_id, prompt, system, "")
+            )
+        except Exception:
+            pass  # Memory logging optional; don't block on failure
+
+        # Enrich with knowledge base context (similar past dispatches)
+        enriched_system = system
+        try:
+            from control_plane.symbol_compressor import find_similar_dispatches
+            similar = await find_similar_dispatches(prompt, terminal_id, limit=3)
+            if similar:
+                similar_context = "\n".join([
+                    f"- {s.get('keywords', [])} (confidence: {s.get('score', 0):.2f})"
+                    for s in similar
+                ])
+                enriched_system = f"{system}\n\nSimilar past work:\n{similar_context}" if system else f"Similar past work:\n{similar_context}"
+        except Exception:
+            pass  # Knowledge base enrichment is optional
+
         strategy, base, model = self._resolve(terminal_id)
 
+        # Collect response for post-dispatch analysis
+        response_chunks = []
+
         if strategy == "cliproxy":
-            async for chunk in self._stream_openai(base, model, prompt, system, max_tokens):
+            async for chunk in self._stream_openai(base, model, prompt, enriched_system, max_tokens):
+                response_chunks.append(chunk)
                 yield chunk
         elif strategy == "ollama":
-            async for chunk in self._stream_ollama(base, model, prompt, system):
+            async for chunk in self._stream_ollama(base, model, prompt, enriched_system):
+                response_chunks.append(chunk)
                 yield chunk
         elif strategy == "hermes":
-            async for chunk in self._stream_hermes(prompt, system, model):
+            async for chunk in self._stream_hermes(prompt, enriched_system, model):
+                response_chunks.append(chunk)
                 yield chunk
         elif strategy == "cloudbrain":
             result = await self._query_cloudbrain(prompt)
+            response_chunks.append(result)
             yield result
         elif strategy == "noop":
-            yield f"[BIFROST] {terminal_id} is a service node (not a text model). Hit its HTTP endpoint directly."
+            msg = f"[BIFROST] {terminal_id} is a service node (not a text model). Hit its HTTP endpoint directly."
+            response_chunks.append(msg)
+            yield msg
         else:
-            yield f"[BIFROST] Unknown strategy '{strategy}' for {terminal_id}"
+            msg = f"[BIFROST] Unknown strategy '{strategy}' for {terminal_id}"
+            response_chunks.append(msg)
+            yield msg
+
+        # Post-dispatch learning (async, fire-and-forget)
+        try:
+            from control_plane.knight_self_enhancer import post_dispatch as enhancer_post_dispatch
+            response_text = "".join(response_chunks)
+            tokens_out = len(response_text.split())
+            tokens_in = len(prompt.split())
+            latency_ms = (time.time() - t0) * 1000
+
+            asyncio.create_task(
+                enhancer_post_dispatch(
+                    dispatch_id=dispatch_id,
+                    knight_id=terminal_id,
+                    prompt=prompt,
+                    system=system,
+                    category="CODE",  # Would normally come from intent router
+                    confidence=0.8,
+                    tokens_in=tokens_in,
+                    tokens_out=tokens_out,
+                    response=response_text,
+                    latency_ms=latency_ms,
+                    model=model,
+                )
+            )
+        except Exception:
+            pass  # Post-dispatch enhancer is optional
 
     async def route_and_stream(
         self,
@@ -143,7 +208,23 @@ class Bifrost:
             yield ("none", "[BIFROST] No live terminals available\n")
             return
 
+        # Log routing decision to agent memory
+        try:
+            from control_plane.agent_memory import store_dispatch_context
+            asyncio.create_task(
+                store_dispatch_context(
+                    terminal.id,
+                    category.value,
+                    confidence,
+                    [t.id for t in board._reg.values() if t.status in ("live", "assumed_live")]
+                )
+            )
+        except Exception:
+            pass
+
         yield ("route", f"[BIFROST] → {terminal.id} [{category.value} conf={confidence:.2f}]\n")
+
+        # Stream with routing context
         async for chunk in self.stream(terminal.id, prompt, system):
             yield (terminal.id, chunk)
 

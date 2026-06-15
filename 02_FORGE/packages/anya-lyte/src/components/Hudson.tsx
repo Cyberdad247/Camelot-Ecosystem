@@ -11,7 +11,7 @@ interface HudsonProps {
 }
 
 export default function Hudson({ link }: HudsonProps) {
-  const [persona, setPersona] = useState<KnightPersona>("Anya_Ω");
+  const [persona, setPersona] = useState<KnightPersona>("Anya_Omega");
   const [cue, setCue] = useState<string>("System Online");
 
   useEffect(() => {

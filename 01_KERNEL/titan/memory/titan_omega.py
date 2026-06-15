@@ -4,9 +4,9 @@
 Titan Omega Memory Engine — Core Implementation
 
 Three-tier memory system for Project Chimera:
-1. Ω-Graph: Structured knowledge graph (NetworkX)
-2. Ω-Vault: Semantic vector store (FAISS)
-3. Ω-Flux: Ephemeral working memory (in-memory + TTL)
+1. Omega-Graph: Structured knowledge graph (NetworkX)
+2. Omega-Vault: Semantic vector store (FAISS)
+3. Omega-Flux: Ephemeral working memory (in-memory + TTL)
 
 This is the foundation for Context Expansion Protocol (CEP) and RAG.
 """
@@ -40,7 +40,8 @@ try:
         )
         import faiss
     import numpy as np
-    from sentence_transformers import SentenceTransformer
+    # Do not import sentence_transformers here; it takes 10s+ on Windows and causes boot timeouts.
+    # It will be lazy-loaded in the OmegaVault.encoder property.
     VECTOR_AVAILABLE = True
 except ImportError:
     VECTOR_AVAILABLE = False
@@ -52,7 +53,7 @@ from .titan_schemas import (
 
 
 # =========================================
-# Ω-GRAPH: Knowledge Graph Engine
+# Omega-GRAPH: Knowledge Graph Engine
 # =========================================
 
 class OmegaGraph:
@@ -91,7 +92,7 @@ class OmegaGraph:
                 weight=edge.weight
             )
         
-        print(f"[Ω-Graph] Added node: {node.node_id} (type: {node.type})")
+        print(f"[Omega-Graph] Added node: {node.node_id} (type: {node.type})")
         return node.node_id
     
     def query(self, pattern: Dict[str, Any]) -> List[GraphNode]:
@@ -179,7 +180,7 @@ class OmegaGraph:
         
         with open(self.persist_path, "w") as f:
             json.dump(data, f, indent=2)
-        print(f"[Ω-Graph] Saved {len(self.graph.nodes())} nodes to {self.persist_path}")
+        print(f"[Omega-Graph] Saved {len(self.graph.nodes())} nodes to {self.persist_path}")
     
     def load(self):
         """Load graph from disk."""
@@ -188,17 +189,17 @@ class OmegaGraph:
                 with open(self.persist_path, "r") as f:
                     data = json.load(f)
                 self.graph = nx.node_link_graph(data, directed=True)
-                print(f"[Ω-Graph] Loaded {len(self.graph.nodes())} nodes from {self.persist_path}")
+                print(f"[Omega-Graph] Loaded {len(self.graph.nodes())} nodes from {self.persist_path}")
             except (json.JSONDecodeError, KeyError, ValueError) as e:
-                print(f"[Ω-Graph] Warning: Could not load graph from {self.persist_path}: {e}")
-                print(f"[Ω-Graph] Starting with empty graph")
+                print(f"[Omega-Graph] Warning: Could not load graph from {self.persist_path}: {e}")
+                print(f"[Omega-Graph] Starting with empty graph")
                 self.graph = nx.DiGraph()
         else:
-            print(f"[Ω-Graph] No existing graph found, starting fresh")
+            print(f"[Omega-Graph] No existing graph found, starting fresh")
 
 
 # =========================================
-# Ω-VAULT: Vector Store Engine
+# Omega-VAULT: Vector Store Engine
 # =========================================
 
 class OmegaVault:
@@ -215,16 +216,23 @@ class OmegaVault:
         self.persist_path = persist_path or "data/omega_vault.index"
         self.index = faiss.IndexFlatL2(dimension)
         self.embeddings: Dict[str, VaultEmbedding] = {}
-        self.encoder = SentenceTransformer('all-MiniLM-L6-v2')  # 384-dim model
+        self._encoder = None
         
         self.load()
+    
+    @property
+    def encoder(self):
+        if self._encoder is None:
+            from sentence_transformers import SentenceTransformer
+            self._encoder = SentenceTransformer('all-MiniLM-L6-v2')  # 384-dim model
+        return self._encoder
     
     def add_embedding(self, embedding: VaultEmbedding):
         """Add a pre-computed embedding to the vault."""
         vector = np.array(embedding.vector, dtype=np.float32).reshape(1, -1)
         self.index.add(vector)
         self.embeddings[embedding.embedding_id] = embedding
-        print(f"[Ω-Vault] Added embedding: {embedding.embedding_id} (source: {embedding.source_id})")
+        print(f"[Omega-Vault] Added embedding: {embedding.embedding_id} (source: {embedding.source_id})")
     
     def add_text(self, text: str, source_id: str, metadata: Optional[Dict] = None) -> str:
         """Encode text and add to vault."""
@@ -248,7 +256,7 @@ class OmegaVault:
         Returns: List of (VaultEmbedding, distance) tuples.
         """
         if not self.embeddings:
-            print(f"[Ω-Vault] No embeddings in vault, returning empty results")
+            print(f"[Omega-Vault] No embeddings in vault, returning empty results")
             return []
         
         query_vector = self.encoder.encode([query])[0].reshape(1, -1)
@@ -263,7 +271,7 @@ class OmegaVault:
                 if idx < len(embedding_list) and idx >= 0:
                     results.append((embedding_list[idx], float(distance)))
         
-        print(f"[Ω-Vault] Search for '{query[:50]}...' returned {len(results)} results")
+        print(f"[Omega-Vault] Search for '{query[:50]}...' returned {len(results)} results")
         return results
     
     def save(self):
@@ -275,7 +283,7 @@ class OmegaVault:
         with open(embeddings_path, "w") as f:
             json.dump({k: v.model_dump() for k, v in self.embeddings.items()}, f, indent=2)
         
-        print(f"[Ω-Vault] Saved {len(self.embeddings)} embeddings to {self.persist_path}")
+        print(f"[Omega-Vault] Saved {len(self.embeddings)} embeddings to {self.persist_path}")
     
     def load(self):
         """Load FAISS index and embeddings from disk."""
@@ -287,11 +295,11 @@ class OmegaVault:
                 data = json.load(f)
             
             self.embeddings = {k: VaultEmbedding(**v) for k, v in data.items()}
-            print(f"[Ω-Vault] Loaded {len(self.embeddings)} embeddings from {self.persist_path}")
+            print(f"[Omega-Vault] Loaded {len(self.embeddings)} embeddings from {self.persist_path}")
 
 
 # =========================================
-# Ω-FLUX: Ephemeral Memory Engine
+# Omega-FLUX: Ephemeral Memory Engine
 # =========================================
 
 class OmegaFlux:
@@ -318,7 +326,7 @@ class OmegaFlux:
         )
         
         self.nodes[flux_id] = node
-        print(f"[Ω-Flux] Stored event: {flux_id} (TTL: {node.ttl_seconds}s)")
+        print(f"[Omega-Flux] Stored event: {flux_id} (TTL: {node.ttl_seconds}s)")
         return flux_id
     
     def get_session_events(self, session_id: str) -> List[FluxNode]:
@@ -332,7 +340,7 @@ class OmegaFlux:
         for fid in expired:
             del self.nodes[fid]
         if expired:
-            print(f"[Ω-Flux] Cleaned up {len(expired)} expired nodes")
+            print(f"[Omega-Flux] Cleaned up {len(expired)} expired nodes")
 
 
 # =========================================
@@ -342,7 +350,7 @@ class OmegaFlux:
 class TitanOmega:
     """
     Unified interface for the Titan Omega memory stack.
-    Orchestrates Ω-Graph, Ω-Vault, and Ω-Flux.
+    Orchestrates Omega-Graph, Omega-Vault, and Omega-Flux.
     """
 
     @classmethod
@@ -369,7 +377,7 @@ class TitanOmega:
             graph_persist_path=f"{data_dir}/omega_graph.json",
             vault_persist_path=f"{data_dir}/omega_vault.index",
         )
-        print(f"[TitanΩ::graft] tier={tier} mode={mode} persist={persist}")
+        print(f"[TitanOmega::graft] tier={tier} mode={mode} persist={persist}")
         return cls(config=cfg)
 
     def __init__(self, config: Optional[TitanOmegaConfig] = None):
@@ -395,21 +403,21 @@ class TitanOmega:
             self.vault = OmegaVault(dimension=384, persist_path=vault_path)
         else:
             if "vault" in active_tiers:
-                print("[WARN] FAISS not available; Ω-Vault disabled")
+                print("[WARN] FAISS not available; Omega-Vault disabled")
             self.vault = None
 
         self.flux = OmegaFlux(default_ttl=self.config.flux_ttl_default) if "flux" in active_tiers else None
 
-        print(f"[TitanΩ] Memory stack initialized (tier={self.config.tier} mode={self.config.mode})")
+        print(f"[TitanOmega] Memory stack initialized (tier={self.config.tier} mode={self.config.mode})")
 
     def commit(self, node: GraphNode, signed_by: str) -> str:
         """
-        Commit a node to Ω-Graph with provenance.
+        Commit a node to Omega-Graph with provenance.
         Returns the cryptographic hash.
         Auto-persists when persist_strategy=all.
         """
         if self.graph is None:
-            raise RuntimeError("Ω-Graph not active in current tier configuration")
+            raise RuntimeError("Omega-Graph not active in current tier configuration")
 
         node.provenance.created_by = signed_by
         node.provenance.hash = node.compute_hash()
@@ -422,11 +430,11 @@ class TitanOmega:
 
     def add_text(self, text: str, source_id: str, metadata: Optional[Dict] = None) -> str:
         """
-        Add text embedding to Ω-Vault.
+        Add text embedding to Omega-Vault.
         Auto-persists when persist_strategy=all.
         """
         if self.vault is None:
-            raise RuntimeError("Ω-Vault not active in current tier configuration")
+            raise RuntimeError("Omega-Vault not active in current tier configuration")
         embedding_id = self.vault.add_text(text, source_id, metadata)
         if self._auto_persist:
             self.vault.save()
@@ -434,7 +442,7 @@ class TitanOmega:
 
     def hybrid_search(self, query: str, k: int = 5) -> Dict[str, Any]:
         """
-        Hybrid RAG search: combines Ω-Vault vector search + Ω-Graph pattern matching.
+        Hybrid RAG search: combines Omega-Vault vector search + Omega-Graph pattern matching.
         Gracefully skips tiers that are not active in the current configuration.
         """
         results = {"vector_results": [], "graph_results": []}

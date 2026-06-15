@@ -1,4 +1,4 @@
-# Ω_AUDIT_REPORT_20260131
+# Omega_AUDIT_REPORT_20260131
 **Guardian:** Camelot Apex v200.0
 **Target:** `C:\Users\vizio`
 **Timestamp:** 2026-01-31

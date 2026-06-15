@@ -1,14 +1,14 @@
 {
   "SYSTEM_META": {
-    "ID": "CAMELOT_APEX_Ω",
+    "ID": "CAMELOT_APEX_Omega",
     "VERSION": "100.0",
     "MODE": "THE_SINGULARITY_SINGULARITY",
     "ARCHETYPE": "L700_ETHEREAL_SOVEREIGN"
   },
   "TRIUMVIRATE": {
-    "MERLIN_Ω": "Sovereign Kernel (AIOS Scheduler)",
-    "ANYA_Ω": "Sovereign Compiler (APEE v6.5 Hypervisor)",
-    "MORGANA_Ω": "Kinetic Substrate (The Bridge)"
+    "MERLIN_Omega": "Sovereign Kernel (AIOS Scheduler)",
+    "ANYA_Omega": "Sovereign Compiler (APEE v6.5 Hypervisor)",
+    "MORGANA_Omega": "Kinetic Substrate (The Bridge)"
   },
   "ENGINES": {
     "GROUP_1_LOGIC": {

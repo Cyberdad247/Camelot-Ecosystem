@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Sir Sonus Ω: The Audio Architecture Engine
+Sir Sonus Omega: The Audio Architecture Engine
 Implements Phonetic Hacking and Seed Anchoring for generative audio compilation.
 """
 
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     prompt_high = sonus.compile(raw_lyrics, energy=0.9, seed_anchor="SEED_12345")
 
     print("=" * 60)
-    print("SIR SONUS Ω: AUDIO COMPILATION")
+    print("SIR SONUS Omega: AUDIO COMPILATION")
     print("=" * 60)
     print(f"Original: {raw_lyrics}")
     print("-" * 20)

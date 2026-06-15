@@ -31,5 +31,5 @@ When this prompt is called, its goal is to:
 3.  **Refine** the logic into "Titan gold" (Omega-Transcendent).
 4.  **Validate** against the Iron Gate.
 
-*Signed by Merlin_Ω and Anya_Ω.*
+*Signed by Merlin_Omega and Anya_Omega.*
 *Camelot Apex v200.0 [Kinetic Sovereign]*

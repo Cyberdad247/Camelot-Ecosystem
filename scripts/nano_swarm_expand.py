@@ -1479,7 +1479,7 @@ def _phase5_anya_seal(results: list[PhaseResult], node: dict) -> PhaseResult:
         entry_num = _next_ledger_entry()
         ledger_line = (
             f"| {entry_num} | **//NANO_SWARM_EXPAND — 6-phase protocol COMPLETE** | "
-            f"ANYA_Ω + SIR_BORRIS | ✅ CRYSTALLIZED | "
+            f"ANYA_Omega + SIR_BORRIS | ✅ CRYSTALLIZED | "
             f"Phases: {phases_summary}. "
             f"SAT constraint graph satisfied (5/5). "
             f"CvRDT mesh hydrated to L0 tissue. "

@@ -1,4 +1,4 @@
-# Ω_QUANTUM_STABILITY_PATCH Implementation Plan
+# Omega_QUANTUM_STABILITY_PATCH Implementation Plan
 
 > **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 

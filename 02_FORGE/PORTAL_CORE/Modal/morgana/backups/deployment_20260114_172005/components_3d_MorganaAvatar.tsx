@@ -173,7 +173,7 @@ export default function MorganaAvatar({ mode = "IDLE", onError, requestId }: Mor
         <div className="absolute bottom-2 right-4 text-[10px] font-mono text-[#D4AF37] tracking-widest opacity-80 bg-black/50 px-2 py-1 rounded">
           <div className="flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${isHealthy ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></span>
-            MORGANA_Ω_PROD // STATUS: {mode}
+            MORGANA_Omega_PROD // STATUS: {mode}
           </div>
           {requestId && <span className="text-[8px]">REQ: {requestId.slice(-8)}</span>}
           <div className="text-[7px] opacity-50">LST_CHK: {lastCheck}</div>

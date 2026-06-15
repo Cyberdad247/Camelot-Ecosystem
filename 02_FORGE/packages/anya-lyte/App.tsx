@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>ANYA LYTE Ω</Text>
+      <Text style={styles.header}>ANYA LYTE Omega</Text>
       <Text style={styles.status}>STATUS: {status}</Text>
       <Hudson />
     </View>

@@ -1,5 +1,5 @@
 # 🏛️ BLUEPRINT.md — Sovereign Streaming & Remote Desktop Hub
-**Codename:** Ω_KINETIC_NEXUS
+**Codename:** Omega_KINETIC_NEXUS
 *(c) 2024-2026 Invisioned Marketing Inc. | ALL RIGHTS RESERVED.*
 
 ## 1. Goal & Why

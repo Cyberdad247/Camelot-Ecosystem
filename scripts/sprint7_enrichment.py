@@ -12,7 +12,6 @@ import asyncio
 import importlib.util
 import json
 import os
-import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -25,13 +24,14 @@ if hasattr(sys.stderr, "reconfigure"):
 HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 sys.path.insert(0, str(HOME))
 
+from control_plane.ledger_sync import append_provenance_entry
+
 _BRIDGE = HOME / "03_VAULT" / "training" / "configs" / "notebooklm_bridge.py"
 _spec = importlib.util.spec_from_file_location("notebooklm_bridge", _BRIDGE)
 _mod = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(_mod)
 
 CANONICAL_ID = _mod.CANONICAL_NOTEBOOK_ID
-LEDGER = HOME / "PROVENANCE_LEDGER.md"
 
 SOURCES: list[dict] = [
     # S7-01: asyncio subprocess (harness _toon_v2_loop pattern)
@@ -134,18 +134,22 @@ async def main() -> dict:
         for f in results["sources_failed"]:
             print(f"  WARN  {f['tag']}: {f['error'][:80]}")
 
-    existing = LEDGER.read_text(encoding="utf-8") if LEDGER.exists() else ""
-    ids = [int(m.group(1)) for m in re.finditer(r"^\| *(\d+) *\|", existing, re.MULTILINE)]
-    next_id = max(ids, default=1665) + 1
     source_list = "; ".join(s["tag"] for s in results["sources_added"])
-    row = (
-        f"| {next_id} | **SPRINT 7 — NORTHSTAR CLOSE-OUT** | NORTHSTAR S7"
-        f" | OK DEPLOYED | "
-        f"S7-01/02: {added} URLs ({source_list[:120]}). "
-        f"S7-03: {'UKG_SPRINT6_DELTA_V705 created/updated' if delta_ok else 'FAILED'}. |\n"
+    ledger = append_provenance_entry(
+        title="SPRINT 7 - NORTHSTAR CLOSE-OUT",
+        actor="NORTHSTAR S7",
+        scope=[
+            f"S7-01/02: {added} URLs ({source_list[:120]})",
+            f"S7-03: {'UKG_SPRINT6_DELTA_V705 created/updated' if delta_ok else 'FAILED'}",
+        ],
+        verification=[
+            f"sources_added={added}",
+            f"sources_failed={failed}",
+            f"ukg_delta={'ok' if delta_ok else 'failed'}",
+        ],
+        tag="sprint7_enrichment",
     )
-    LEDGER.write_text(row + existing, encoding="utf-8")
-    print(f"[LEDGER] Entry {next_id} written")
+    print(f"[LEDGER] {ledger['status']} via append_provenance_entry")
 
     out_path = HOME / "logs" / "sprint7_enrichment_output.json"
     out_path.parent.mkdir(parents=True, exist_ok=True)

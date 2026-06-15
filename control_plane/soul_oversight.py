@@ -27,8 +27,8 @@ class SoulOversight:
         self.vault_base = Path("03_VAULT/training/configs/knights")
 
     async def audit_proposal(self, knight_id: str, current_soul: str, proposed_soul: str) -> Dict[str, Any]:
-        """Merlin_Ω audits the proposed instruction change."""
-        print(f"Merlin_Ω [🧙‍♂️]: Auditing soul-proposal for {knight_id}...")
+        """Merlin_Omega audits the proposed instruction change."""
+        print(f"Merlin_Omega [🧙‍♂️]: Auditing soul-proposal for {knight_id}...")
         
         # Simulate Videneptus LaC reasoning check
         is_aligned = "NDR+S" in proposed_soul or "Lattice" in proposed_soul

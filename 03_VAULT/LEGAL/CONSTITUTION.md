@@ -15,11 +15,11 @@ Camelot OS is a sovereign agentic operating environment designed to transition t
 7.  **Iterative Evolution**: The constitution is a living document, evolving with the Singularity.
 
 ## III. THE SEPTEM REGNA (The 7 Layers)
-- **L7: Ethereal (Anya Ω)**: The Sentient Interface & Intent Compiler (Triple-QFT / APEE v6.5).
+- **L7: Ethereal (Anya Omega)**: The Sentient Interface & Intent Compiler (Triple-QFT / APEE v6.5).
 - **L6: Governance (Arthur)**: The Iron Gate & Law (Titanium Laws).
 - **L5: Agentic (Paladin)**: The Swarm Orchestration (SARDA Engine / HTN).
 - **L4: Semantic (Chronos)**: The Long-Term Memory (UKG / TOON).
-- **L3: Neural (Merlin Ω)**: The Thinking Brain (Videneptus LaC).
+- **L3: Neural (Merlin Omega)**: The Thinking Brain (Videneptus LaC).
 - **L2: Kinetic (Lukas)**: The Zero-Latency Body (Saltare/Cribo/Rotel).
 - **L1: Substrate (Morgana)**: The Metal & Cloud Bridge (Modal/Docker).
 

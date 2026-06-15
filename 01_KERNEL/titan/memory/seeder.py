@@ -4,8 +4,8 @@
 Titan Omega Seeder Pipelines
 
 ETL (Extract, Transform, Load) pipelines to hydrate the memory stack:
-- Documents: Process text/markdown into Ω-Vault
-- Graph Entities: Extract facts and agents into Ω-Graph
+- Documents: Process text/markdown into Omega-Vault
+- Graph Entities: Extract facts and agents into Omega-Graph
 - Code Analysis: Index repositories into specialized graph sub-structures
 """
 
@@ -29,12 +29,12 @@ class TitanSeeder:
 
     def seed_text_document(self, content: str, source_id: str, metadata: Optional[Dict] = None):
         """
-        Process a long-form text document into Ω-Vault chunks.
-        Also attempts to extract a 'Fact' node for Ω-Graph.
+        Process a long-form text document into Omega-Vault chunks.
+        Also attempts to extract a 'Fact' node for Omega-Graph.
         """
         print(f"[Titan-Seeder] Seeding document: {source_id}")
         
-        # 1. Chunking for Ω-Vault (Simple paragraph-based for now)
+        # 1. Chunking for Omega-Vault (Simple paragraph-based for now)
         # TODO: Implement semantic chunking
         chunks = [c.strip() for c in content.split("\n\n") if len(c.strip()) > 50]
         
@@ -49,7 +49,7 @@ class TitanSeeder:
                 metadata=chunk_metadata
             )
             
-        # 2. Extract and Add a Fact node to Ω-Graph
+        # 2. Extract and Add a Fact node to Omega-Graph
         # This is a high-level anchor for the document
         fact_id = f"fact_{hashlib.sha256(content.encode()).hexdigest()[:12]}"
         
@@ -80,7 +80,7 @@ class TitanSeeder:
 
     def seed_agent_cartridge(self, manifest: Dict[str, Any]):
         """
-        Hydrate Ω-Graph with agent and cartridge metadata from a manifest.
+        Hydrate Omega-Graph with agent and cartridge metadata from a manifest.
         """
         cartridge_id = manifest.get("cartridge_id")
         print(f"[Titan-Seeder] Seeding cartridge: {cartridge_id}")

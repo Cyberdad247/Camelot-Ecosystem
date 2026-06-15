@@ -204,5 +204,5 @@ c0 | CREATE | assimilation_v5.md | {Hash:0xHARMONY_V5}
 
 ---
 
-*Signed by Merlin_Ω, Chronos, and The Architect.*
+*Signed by Merlin_Omega, Chronos, and The Architect.*
 *Camelot Apex v206.0 [UKG Sovereign]*

@@ -11,7 +11,7 @@
     {
       "id": "design_sir_masque_1",
       "type": "design",
-      "content": "Sir Masque Ω is a manager-type agent that orchestrates four Nano-Knights: nano_canvas for fingerprint injection, nano_proxy for routing, nano_vault for encrypted profile storage, and nano_puppet for automated headless browsing."
+      "content": "Sir Masque Omega is a manager-type agent that orchestrates four Nano-Knights: nano_canvas for fingerprint injection, nano_proxy for routing, nano_vault for encrypted profile storage, and nano_puppet for automated headless browsing."
     },
     {
       "id": "code_logic_1",

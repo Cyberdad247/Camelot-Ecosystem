@@ -1,6 +1,6 @@
 # OMNI-ROUTER AUDIT & KNIGHT LLM SIGNATURE RECONFIG
 ## Codename: LATTICE_SIGNAL
-## Architects: ANYA Ω · MERLIN_Ω (GoT) · SIR_ALEX (Cognitive Cartridge)
+## Architects: ANYA Omega · MERLIN_Omega (GoT) · SIR_ALEX (Cognitive Cartridge)
 ## Lead Engineer: SIR_BORIS
 ## Date: 2026-05-14 | Version: 1.0.0
 

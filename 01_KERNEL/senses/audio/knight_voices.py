@@ -3,9 +3,9 @@
 """
 KNIGHT_VOICES: Universal Voice Registry + Vocal Architecture Schema
 ====================================================================
-Merlin Ω Mathematical Architecture for each Knight vocal weight:
+Merlin Omega Mathematical Architecture for each Knight vocal weight:
 
-  V_Ω(k) = { F0(k), WPM(k), Δformant(k), ε(k), ρ(k), Σ(k) }
+  V_Omega(k) = { F0(k), WPM(k), Δformant(k), ε(k), ρ(k), Σ(k) }
 
   F0(k)        = round(110 + 75 × ω_k)            Hz  — fundamental frequency
   WPM(k)       = round(130 + 40 × ω_k)                — synthesis cadence
@@ -236,7 +236,7 @@ def get_sigma(knight_id: str) -> str:
 
 
 def vocal_weight_vector(knight_id: str) -> dict:
-    """Return the full Merlin Ω vocal weight vector as a plain dict."""
+    """Return the full Merlin Omega vocal weight vector as a plain dict."""
     p = get_profile(knight_id)
     if not p:
         return {}

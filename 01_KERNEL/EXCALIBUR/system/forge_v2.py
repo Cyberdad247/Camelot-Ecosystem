@@ -3,7 +3,7 @@
 """
 [⚒️] FORGE_V2: The Stochastic Universal Forge
 STATUS: ACTIVE
-ARCH: MERLIN_Ω (Project Ascension)
+ARCH: MERLIN_Omega (Project Ascension)
 
 Objective:
 Eliminate "flat" personas by implementing Multivariate Normal Distribution

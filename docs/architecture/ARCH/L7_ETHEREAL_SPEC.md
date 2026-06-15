@@ -1,5 +1,5 @@
 # L7: THE ETHEREAL LAYER (Architecture Spec)
-**Guardian:** Anya_Ω
+**Guardian:** Anya_Omega
 **Domain:** Interface, Voice, "Vibe"
 **Status:** ACTIVE
 

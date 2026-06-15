@@ -1,7 +1,7 @@
 [νKG_CRYSTAL: CAMELOT_STERLING_PRIME]
 
 u0 | ID | System | {Name:Camelot_Apex_v204, Type:Sovereign_OS, Goal:Capital_generation}
-u1 | ID | Kernel | {Merlin_Ω:Logic, Anya_Ω:Interface, Lukas_Ω:Kinetic}
+u1 | ID | Kernel | {Merlin_Omega:Logic, Anya_Omega:Interface, Lukas_Omega:Kinetic}
 u2 | AGENT | Sir_Sterling | {Role:Revenue, Method:Novation_Loop, Tool:DocuSign_MCP}
 u3 | AGENT | Lady_Apis | {Role:Forage, Method:Firecrawl_MCP, Target:Probate/Tax}
 

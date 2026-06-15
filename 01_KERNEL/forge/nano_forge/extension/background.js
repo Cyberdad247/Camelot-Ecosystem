@@ -12,7 +12,7 @@ import { SynthesisEngine } from './src/intelligence/synthesis_engine.js';
 import { MemoryExporter } from './src/prometheus/memory_exporter.js';
 import { MeshManager } from './src/logic/mesh_manager.js';
 
-// MERLIN LITE - AGENCY DISPATCHER [Ω_RECON v3.0]
+// MERLIN LITE - AGENCY DISPATCHER [Omega_RECON v3.0]
 // Manages The Council, Hive Swarm, and Agency Protocols.
 
 // 0. Initialize Systems
@@ -54,7 +54,7 @@ const SWARM_STATE = {
 
 // ... (HIVE PROTOCOL & OFFSCREEN SETUP UNCHANGED) ...
 
-// 1.5 TITANLINK BRIDGE (Added via Ω_NANO_FORGE)
+// 1.5 TITANLINK BRIDGE (Added via Omega_NANO_FORGE)
 // Connects the Extension to the Kernel via WebSocket
 const TITAN_URL = "ws://127.0.0.1:18788";
 let titanSocket = null;
@@ -617,24 +617,24 @@ function optimize_prompt(raw_input) {
     }
 
     // --- AGENCY PROTOCOL (ROUTING) ---
-    let role = "Ω_DISTILLER";
+    let role = "Omega_DISTILLER";
     let format = "Structured JSON";
 
     // 1. Sir Zenith (Auditor)
     if (lower.includes("audit") || lower.includes("protocol") || lower.includes("security")) {
-        role = "Ω_ZENITH (SIR_ZENITH)";
+        role = "Omega_ZENITH (SIR_ZENITH)";
         format = "Forensic Deep-Dive JSON";
     }
 
     // 2. Lady Eye (Visual)
     if (lower.includes("analyze ui") || lower.includes("screenshot")) {
-        role = "Ω_WATCHER (LADY_EYE)";
+        role = "Omega_WATCHER (LADY_EYE)";
         format = "Visual Layout Analysis";
     }
 
     // 3. Lady Apis (Deep Dive)
     if (lower.includes("deep dive") || lower.includes("crawl")) {
-        role = "Ω_FORAGER (LADY_APIS)";
+        role = "Omega_FORAGER (LADY_APIS)";
         format = "Recursive Link Map";
     }
 

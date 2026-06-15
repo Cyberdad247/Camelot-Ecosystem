@@ -1,6 +1,6 @@
 <!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
 # 🛡️ SOVEREIGN COPYRIGHT PROTOCOL (SCP v1.0)
-**Domain:** L6 Governance | **Guardian:** Arthur_Ω | **Status:** RADIANT
+**Domain:** L6 Governance | **Guardian:** Arthur_Omega | **Status:** RADIANT
 
 ## 📖 OVERVIEW
 The Sovereign Copyright Protocol (SCP) ensures that all Intellectual Property forged within the Camelot-OS ecosystem is legally protected and attributed to **Invisioned Marketing inc.** It enforces the presence of the "Sovereign Shield" (copyright header) on all Markdown, Python, Rust, Go, and TypeScript files.
@@ -28,8 +28,8 @@ The `PROVENANCE_LEDGER.md` will now include a `SHIELD_HASH` for every file entry
 
 ---
 
-## ⚖️ PENALTY: Ω_CRIT
-Failure to include the Sovereign Shield in core Kernel or Vault commits results in an immediate **Ω_CRIT** (Critical Reset) of the offending agent's session context.
+## ⚖️ PENALTY: Omega_CRIT
+Failure to include the Sovereign Shield in core Kernel or Vault commits results in an immediate **Omega_CRIT** (Critical Reset) of the offending agent's session context.
 
 ---
 > **"What is Forged is Shielded. What is Shielded is Sovereign."**

@@ -72,7 +72,7 @@ export class VisionHealer {
                     strategy: 'COORDINATE',
                     x: centerX / 10, // Convert to % for the executor
                     y: centerY / 10,
-                    reason: `Visual detection via Ω_OCULAR (${visionResult.label || 'Match'})`
+                    reason: `Visual detection via Omega_OCULAR (${visionResult.label || 'Match'})`
                 };
             }
         }

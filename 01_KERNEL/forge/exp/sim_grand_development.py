@@ -23,12 +23,12 @@ async def test_grand_development_workflow():
 
     # 2. Notify Sovereign
     print("Step 2: Sending Hermes notification...")
-    res2 = await kernel.process_request("Ω_NOTIFY: Titan Forge context compilation complete.")
+    res2 = await kernel.process_request("Omega_NOTIFY: Titan Forge context compilation complete.")
     print(f"Result: {res2}\n")
 
     # 3. Action: Open App (Simulation)
     print("Step 3: Triggering Bytebot native action...")
-    res3 = await kernel.process_request("Ω_ACTION SYS_INFO")
+    res3 = await kernel.process_request("Omega_ACTION SYS_INFO")
     print(f"Result: {res3}\n")
 
     # 4. Launch Fleet (Simulation - won't actually pop a window in this background environment usually but cmd is sent)

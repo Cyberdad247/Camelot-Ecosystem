@@ -19,11 +19,11 @@ async def simulate_oracle():
 
     # 2. Define Simulation Scenario
     prompts = [
-        "Ω_ORACLE: Initialize simulation. Era: 2050. Factions: CyberPunks vs Corp.",
-        "Ω_STEP: Advance time.",
-        "Ω_STEP: Advance time again.",
-        "Ω_XRAY: Why did the CyberPunks attack?",
-        "Ω_FORK: Create a peaceful timeline.",
+        "Omega_ORACLE: Initialize simulation. Era: 2050. Factions: CyberPunks vs Corp.",
+        "Omega_STEP: Advance time.",
+        "Omega_STEP: Advance time again.",
+        "Omega_XRAY: Why did the CyberPunks attack?",
+        "Omega_FORK: Create a peaceful timeline.",
     ]
 
     for prompt in prompts:

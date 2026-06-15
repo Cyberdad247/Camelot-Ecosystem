@@ -2,14 +2,14 @@ flowchart TD
     User([User Input]) --> Videneptus{Videneptus Semantic Router}
     
     subgraph KERNEL [Camelot Sovereign Kernel]
-        Videneptus -- "Ω_ Command" --> Intercept[Oracle Intercept]
+        Videneptus -- "Omega_ Command" --> Intercept[Oracle Intercept]
         Videneptus -- "Standard" --> Merlin[Merlin_Omega Logic]
         
         Intercept --> HITL_Gate{HITL Iron Gate}
         
-        HITL_Gate -- "Protected (e.g., Ω_FORK)" --> Pause[Pause for Ω_CONFIRM]
+        HITL_Gate -- "Protected (e.g., Omega_FORK)" --> Pause[Pause for Omega_CONFIRM]
         Pause -- "Confirmed" --> OraclePhysics[Oracle Physics Engine]
-        HITL_Gate -- "Safe (e.g., Ω_STEP)" --> OraclePhysics
+        HITL_Gate -- "Safe (e.g., Omega_STEP)" --> OraclePhysics
         
         subgraph PHYSICS [Hypervisor Simulation]
             OraclePhysics --> LaC[LaC Chaos Generator]

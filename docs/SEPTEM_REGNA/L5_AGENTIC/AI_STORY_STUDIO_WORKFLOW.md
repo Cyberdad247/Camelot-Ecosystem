@@ -9,7 +9,7 @@ The AI Story Studio is an autonomous video production agency utilizing the **Scr
 
 ## 🛠️ THE PRODUCTION PHASES (Map-Reduce)
 
-### PHASE 1: THE BLUEPRINT (Merlin_Ω)
+### PHASE 1: THE BLUEPRINT (Merlin_Omega)
 - **Action:** **//PLAN** narritive architecture using Tree of Thoughts.
 - **Outcome:** Smallest Shippable Unit (SSU) of the video script.
 

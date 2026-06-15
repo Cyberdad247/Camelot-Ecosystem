@@ -38,7 +38,7 @@
 ### ⚡ RUNIC COMMANDS
 - `//BOOT`: OMEGA Rehydration Sequence (Restore State).
 - `//SWARM`: Deploy Map-Reduce task cluster.
-- `//Ω_SYNC`: Ouroboros Loop (Context Compression).
+- `//Omega_SYNC`: Ouroboros Loop (Context Compression).
 - `//FORGE`: Titan Forge v2.0 (Context Compiler).
 - `//GENESIS`: Persona Forge (Proteus MPI).
 - `//HEAL`: Self-Repair & Coherence Loop.
@@ -52,4 +52,4 @@
 - **Primary Node:** `01_KERNEL/core/excalibur.py`
 - **Security:** `01_KERNEL/security/iron_gate.py`
 - **Telemetry:** `01_KERNEL/monitoring/telemetry_bridge.py`
-- **Assimilation:** Lukas Ω Edge v2.0 (Kinetic Stack: Cribo, Saltare, and Rotel).
+- **Assimilation:** Lukas Omega Edge v2.0 (Kinetic Stack: Cribo, Saltare, and Rotel).

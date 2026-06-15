@@ -1,5 +1,5 @@
-# 📜 Ω_KINETIC_GOOSE_INTEGRATION (v1.0)
-**[STATUS]**: OPTIMIZING | **[ARCHITECT]**: LUKAS_Ω | **[BRIDGE]**: SALTARE (Port 8080)
+# 📜 Omega_KINETIC_GOOSE_INTEGRATION (v1.0)
+**[STATUS]**: OPTIMIZING | **[ARCHITECT]**: LUKAS_Omega | **[BRIDGE]**: SALTARE (Port 8080)
 
 ## 0. THE PRIME DIRECTIVE (Kinetic Arming)
 Bridge the Camelot OS local toolchain (Cribo, Rotel, Antigravity) to the Goose agent using the Model Context Protocol (MCP). Enforce kinetic purity and absolute tool priority.
@@ -18,7 +18,7 @@ Register tools individually in `goose/config.yaml` or `mcp.json`.
 - **Antigravity**: `uv run tools/antigravity.py --mcp`
 
 ## 2. THE LUKAS INJECTION (Sovereign Persona)
-Overwrite the default Goose persona with the **Lukas_Ω** protocol.
+Overwrite the default Goose persona with the **Lukas_Omega** protocol.
 - **Identity**: THE KINETIC HAND.
 - **Law**: TOOL PRIORITY: ABSOLUTE.
 - **Constraint**: Forbidden from writing custom scripts if a kinetic tool (Cribo, Saltare, Rotel) exists for the task.

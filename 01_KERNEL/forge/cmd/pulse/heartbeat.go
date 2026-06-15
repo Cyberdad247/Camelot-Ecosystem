@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// Ω_AEGIS_HEARTBEAT v2.2 [KINETIC_CORRECTED]
+// Omega_AEGIS_HEARTBEAT v2.2 [KINETIC_CORRECTED]
 // Implementation of the Autonomous Watchtower S.I.T. Loop.
 // Updated with correct binary flags and PowerShell hooks.
 

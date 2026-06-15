@@ -91,10 +91,10 @@ def morgana_brain(req: MorganaRequest):
     culture_key = req.force_culture or random.choice(list(CULTURES.keys()))
     
     if culture_key == "ARCHITECT":
-        system_prompt = f"IDENTITY: MORGANA_Ω | FORM: {culture_key}\\n\\n{ARCHITECT_PROTOCOL}"
+        system_prompt = f"IDENTITY: MORGANA_Omega | FORM: {culture_key}\\n\\n{ARCHITECT_PROTOCOL}"
     else:
         culture_desc = CULTURES.get(culture_key, CULTURES["SILICON"])
-        system_prompt = f"IDENTITY: MORGANA_Ω | MODE: {req.mode} | FORM: {culture_key}\\nCONTEXT: {culture_desc}"
+        system_prompt = f"IDENTITY: MORGANA_Omega | MODE: {req.mode} | FORM: {culture_key}\\nCONTEXT: {culture_desc}"
 
     # 3. THINK
     try:
@@ -179,7 +179,7 @@ export default function MorganaAvatar({ mode = "IDLE" }) {
         <LivingCore mode={mode} />
         <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
       </Canvas>
-      <div className="absolute bottom-2 right-4 text-[10px] font-mono text-[#D4AF37]">MORGANA_Ω // {mode}</div>
+      <div className="absolute bottom-2 right-4 text-[10px] font-mono text-[#D4AF37]">MORGANA_Omega // {mode}</div>
     </div>
   );
 }

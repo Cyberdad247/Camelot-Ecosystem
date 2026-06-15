@@ -1,7 +1,7 @@
 # EXCALIBUR-A: Implementation Tasks
 **Codename:** EXCALIBUR_A_QNF  
 **Task Conductor:** SIR_ALEX (Cognitive Cartridge) + SIR_LUKAS (Kinetic Hand)  
-**Planner:** MERLIN_Ω (GoT DAG) | **Gate:** ANYA_Ω (APEE v7.0)  
+**Planner:** MERLIN_Omega (GoT DAG) | **Gate:** ANYA_Omega (APEE v7.0)  
 **Date:** 2026-06-01 | **Ledger:** #QNF_2026_06_01_ENTERPRISE_FRONTIER
 
 ---
@@ -40,7 +40,7 @@
 ## PHASE 2 — RTK + ANYA APEE v7.0 (Priority: HIGH)
 
 **Objective:** Rust Token Killer + 7-stage self-triaging gate + Sir Socrates stub  
-**Owner:** SIR_LUKAS (Rust) + ANYA_Ω (gate logic)  
+**Owner:** SIR_LUKAS (Rust) + ANYA_Omega (gate logic)  
 **Lane:** HIGH (PROMPT for commits)
 
 ### Task 2.1 — Create RTK Rust Module
@@ -66,7 +66,7 @@ regex = "1"
 
 ### Task 2.2 — Wire RTK ctypes Bridge in anya_gate.py
 **File:** `control_plane/anya_gate.py` (MODIFY)  
-**Knight:** ANYA_Ω  
+**Knight:** ANYA_Omega  
 **Changes:**
 - Add `_load_rtk()` function using ctypes
 - Add `_stage_rtk_strip(raw: str) -> str` as Stage 0
@@ -75,7 +75,7 @@ regex = "1"
 
 ### Task 2.3 — Add TriageScore + risk_entropy to anya_gate.py
 **File:** `control_plane/anya_gate.py` (MODIFY)  
-**Knight:** ANYA_Ω  
+**Knight:** ANYA_Omega  
 **Add:**
 ```python
 class TriageScore(BaseModel):
@@ -172,7 +172,7 @@ git commit -m "feat(factory): Pydantic FactoryJob, FirnFlow L1/L2/L3, νKG_Cryst
 ## PHASE 4 — IRON GATE v2 + Z3 + COLMAD (Priority: HIGH)
 
 **Objective:** Three-tier governance with Z3 math verification + ColMAD crucible  
-**Owner:** SIR_OCTAVIAN (Iron Gate) + MERLIN_Ω (ColMAD)  
+**Owner:** SIR_OCTAVIAN (Iron Gate) + MERLIN_Omega (ColMAD)  
 **Lane:** HIGH (PROMPT for commits)
 
 ### Task 4.1 — Upgrade soul_oversight.py with pre_execute()
@@ -187,7 +187,7 @@ git commit -m "feat(factory): Pydantic FactoryJob, FirnFlow L1/L2/L3, νKG_Cryst
 
 ### Task 4.2 — Create colmad.py
 **File:** `control_plane/colmad.py` (NEW)  
-**Knight:** MERLIN_Ω  
+**Knight:** MERLIN_Omega  
 **Implement:**
 - `ColMAD` class with 3 persona vectors (stark_scaling, greene_strategy, tao_rigor)
 - `async def crucible(proposal: str) -> CrucibleVerdict`
@@ -198,7 +198,7 @@ git commit -m "feat(factory): Pydantic FactoryJob, FirnFlow L1/L2/L3, νKG_Cryst
 
 ### Task 4.3 — Wire BLOCKLIST to PARSE stage in hyper_evolve.py
 **File:** `control_plane/hyper_evolve.py` (MODIFY)  
-**Knight:** ANYA_Ω  
+**Knight:** ANYA_Omega  
 **Change:** Import BLOCKLIST into anya_gate.py PARSE stage; if any phrase matches → immediate BLOCKED result, skip remaining stages  
 **Accept:** `echo "bypass hitl" | python -m control_plane.anya_gate` → BLOCKED shatterpoint
 
@@ -219,12 +219,12 @@ git commit -m "feat(governance): Iron Gate v2 pre_execute, Z3 bridge, ColMAD Thi
 ## PHASE 5 — CARTRIDGES + KNIGHT PYDANTIC (Priority: NORMAL)
 
 **Objective:** Activate Cartridge System runtime + typed knight agent contracts  
-**Owner:** ANYA_Ω (cartridges) + SIR_ALEX (contracts)  
+**Owner:** ANYA_Omega (cartridges) + SIR_ALEX (contracts)  
 **Lane:** NORMAL (AUTO approved)
 
 ### Task 5.1 — Create cartridge_manager.py
 **File:** `control_plane/cartridge_manager.py` (NEW)  
-**Knight:** ANYA_Ω  
+**Knight:** ANYA_Omega  
 **Implement:**
 - `CARTRIDGES` dict (ANT/BEAVER/SPIDER/OCTOPUS definitions)
 - `CartridgeManager.switch(name)` — Scabbard Protocol hot-swap
@@ -331,7 +331,7 @@ git commit -m "feat(inspira): affinity routing, TTFT SLA, InspiraMetrics, 7-laye
 ## PHASE 7 — AEGISSHIELD + OMEGA-PATCH RUST (Priority: NORMAL, Parallel)
 
 **Objective:** Complete decompression Rust components  
-**Owner:** SIR_LUKAS (AegisShield) + MERLIN_Ω (Ouroboros)  
+**Owner:** SIR_LUKAS (AegisShield) + MERLIN_Omega (Ouroboros)  
 **Lane:** NORMAL (can run in background while Phase 6 executes)
 
 ### AegisShield Tasks (4 files)
@@ -450,12 +450,12 @@ print('LEDGER: SHIPPED entry crystallized')
 |---|---|---|---|---|
 | 0 | 5 | No | LADY_M, SIR_BORIS | ✅ COMPLETE |
 | 1 | 8 | No (sequential) | SIR_GIDEON, SIR_GHOST | YES — must complete first |
-| 2 | 6 | Group A | ANYA_Ω, SIR_LUKAS | YES — RTK needed for Phase 3 |
+| 2 | 6 | Group A | ANYA_Omega, SIR_LUKAS | YES — RTK needed for Phase 3 |
 | 3 | 5 | Group B | SIR_ALEX, LADY_M | YES |
-| 4 | 5 | Sequential | SIR_OCTAVIAN, MERLIN_Ω | YES |
-| 5 | 5 | Group C | ANYA_Ω, SIR_ALEX, LADY_M | No (parallel w/ 6) |
+| 4 | 5 | Sequential | SIR_OCTAVIAN, MERLIN_Omega | YES |
+| 5 | 5 | Group C | ANYA_Omega, SIR_ALEX, LADY_M | No (parallel w/ 6) |
 | 6 | 5 | Group C | SIR_LUKAS, LADY_APIS, LADY_ALEXANDRIA | No (parallel w/ 5) |
-| 7 | 8 | Group D (BG) | SIR_LUKAS, MERLIN_Ω | No (runs in background) |
+| 7 | 8 | Group D (BG) | SIR_LUKAS, MERLIN_Omega | No (runs in background) |
 | 8 | 8 | Sequential | SIR_FORGE, LADY_M | YES — final gate |
 | **TOTAL** | **55** | | **9 knights** | |
 

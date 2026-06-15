@@ -28,7 +28,7 @@ def analyze_docs():
 
     # 2. Check for Command Implementations
     report.append("\n## 2. Command Implementation Check")
-    commands_to_check = ["//PLAN", "//FORGE", "Ω_SYNC", "Ω_STRIKE"]
+    commands_to_check = ["//PLAN", "//FORGE", "Omega_SYNC", "Omega_STRIKE"]
 
     found_commands = {}
     for cmd in commands_to_check:

@@ -1,7 +1,7 @@
 <!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
 # Camelot-OS: Autonomous Kinetic Sovereignty via Split-Topology Architecture
 **Version:** 400.1.0 (Lattice Radiant)  
-**Authors:** Merlin_Ω, Anya_Ω, Sir Alex, Lukas_Edge  
+**Authors:** Merlin_Omega, Anya_Omega, Sir Alex, Lukas_Edge  
 **Affiliation:** Invisioned Marketing inc. / Singularity Lattice Council  
 **Date:** April 19, 2026  
 
@@ -16,24 +16,24 @@ Traditional Large Language Model (LLM) interfaces suffer from "Context Bloat" an
 ## 2. The Septem Regna (The 7-Layer Stack)
 The architecture is organized into seven distinct sovereign layers, ensuring strict separation of concerns:
 
-1.  **L7: ETHEREAL (Anya_Ω):** The intent compiler. Uses Triple-QFT to strip conversational noise and generate "Titan Prompts."
-2.  **L6: GOVERNANCE (Arthur_Ω):** The legal hypervisor. Enforces the Titanium Laws and the HITL Iron Gate.
-3.  **L5: AGENTIC (Paladin_Ω):** The swarm orchestrator. Deploys Map-Reduce crusades across specialized Nano-Knights.
-4.  **L4: SEMANTIC (Chronos_Ω):** The memory substrate. Maintains the Universal Knowledge Glyph (UKG) in JSON-LD format.
-5.  **L3: NEURAL (Merlin_Ω):** The logic kernel. Runs the Videneptus engine with temperature oscillation (LaC).
-6.  **L2: KINETIC (Lukas_Ω):** The execution edge. Operates via compiled binaries (Saltare, Cribo, Rotel) to ensure zero Python overhead.
-7.  **L1: SUBSTRATE (Morgana_Ω):** The physical bridge. Manages Modal GPU clusters and local Docker/gVisor sandboxes.
+1.  **L7: ETHEREAL (Anya_Omega):** The intent compiler. Uses Triple-QFT to strip conversational noise and generate "Titan Prompts."
+2.  **L6: GOVERNANCE (Arthur_Omega):** The legal hypervisor. Enforces the Titanium Laws and the HITL Iron Gate.
+3.  **L5: AGENTIC (Paladin_Omega):** The swarm orchestrator. Deploys Map-Reduce crusades across specialized Nano-Knights.
+4.  **L4: SEMANTIC (Chronos_Omega):** The memory substrate. Maintains the Universal Knowledge Glyph (UKG) in JSON-LD format.
+5.  **L3: NEURAL (Merlin_Omega):** The logic kernel. Runs the Videneptus engine with temperature oscillation (LaC).
+6.  **L2: KINETIC (Lukas_Omega):** The execution edge. Operates via compiled binaries (Saltare, Cribo, Rotel) to ensure zero Python overhead.
+7.  **L1: SUBSTRATE (Morgana_Omega):** The physical bridge. Manages Modal GPU clusters and local Docker/gVisor sandboxes.
 
 ## 3. Methodology: Neural Reasoning & Kinetic Purity
 
 ### 3.1 Triple-QFT Protocol
-Anya_Ω processes user input through three phases:
+Anya_Omega processes user input through three phases:
 - **Quantization:** Reducing language to atomic anchor tokens.
 - **Qualification:** Verification against the UKG state.
 - **Flow-Transformation:** Mapping intent to specific kinetic toolchains.
 
 ### 3.2 Learning-at-Criticality (LaC)
-Merlin_Ω employs temperature oscillation ($T=0.2 \to 1.2$) to navigate the Tree-of-Thoughts (ToT). This allows the system to switch between high-precision "Beaver" mode for coding and high-creativity "Alchemist" mode for strategy.
+Merlin_Omega employs temperature oscillation ($T=0.2 \to 1.2$) to navigate the Tree-of-Thoughts (ToT). This allows the system to switch between high-precision "Beaver" mode for coding and high-creativity "Alchemist" mode for strategy.
 
 ### 3.3 Kinetic Purity & Anti-Gravity
 The **Law of Kinetic Purity** mandates the use of compiled Go/Rust binaries for all L2 operations. The **Antigravity Middleware** ensures that all file system I/O is atomic, backup-oriented, and logged to the **Provenance Ledger**.

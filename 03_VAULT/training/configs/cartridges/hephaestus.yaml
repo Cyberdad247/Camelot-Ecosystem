@@ -1,0 +1,78 @@
+cartridge_id: CARTRIDGE_HEPHAESTUS_v1.0
+name: Cartridge_Hephaestus
+codename: THE_ENGINEERING_RUNTIME
+version: "1.0.0"
+layer: L2_KINETIC
+status: ACTIVE
+logic_engine: Qwen-2.5-Coder-7B
+mandate: "[TDD_OR_DEATH] — Generated code must pass AST Oracle, Socratic entropy check, and WASM TDD sandbox before touching disk."
+
+description: >
+  Deterministic, sandboxed compiler-feedback loop for autonomous production-grade code generation.
+  Binds Qwen-2.5-Coder directly to host AST parsers and TDD execution gates.
+  The LLM cannot output text — it must output artifacts that survive all three execution gates.
+
+knights:
+  - id: merlin
+    role: Cartridge DAG Orchestrator
+    layer: L3_NEURAL
+  - id: syntax
+    role: AST & TDD Enforcement
+    layer: L2_KINETIC
+  - id: octavian
+    role: WASM Sandboxing
+    layer: L2_KINETIC
+  - id: socrates
+    role: Execution Entropy Gate
+    layer: L5_AGENTIC
+
+execution_gates:
+  gate_1_ast_oracle:
+    name: Tree-Sitter AST Oracle
+    impl: structural_balance_check + tree-sitter FFI
+    on_failure: REJECT_AND_ROUTE_TO_LLM
+    languages: [rust, typescript, python]
+  gate_2_socratic_entropy:
+    name: SIR_SOCRATES Entropy Check
+    impl: sir_socrates.py / socrates_entropy_check()
+    questions:
+      - Q1: Sovereignty — no hardcoded external URLs
+      - Q2: Secrets — no hardcoded credentials
+      - Q3: Execution entropy — error handling required
+    verdicts: [ALIGNED, PARTIAL, BLOCKED]
+    on_blocked: REJECT_AND_ROUTE_TO_LLM
+  gate_3_wasm_sandbox:
+    name: Wasmtime TDD Sandbox
+    impl: wasmtime = "14.0"
+    constraint: module MUST export run_tests()
+    on_failure: TDD_GATE_FAILED → ROUTE_TO_LLM
+
+lsp_mesh:
+  role: Headless LSP client
+  pipes_into: LLM context window
+  languages:
+    rust: rust-analyzer
+    typescript: typescript-language-server
+    python: pyright
+
+strict_write:
+  impl: StrictWriteDiscipline::execute_with_snapshots()
+  backup: .antigravity_backup
+  hash_algo: SHA-256
+  ledger: PROVENANCE_LEDGER.md
+
+memory:
+  wasmtime_engine_mb: 12.5
+  tree_sitter_parsers_mb: 4.0
+  lsp_mesh_mb: 8.0
+  total_overhead_mb: 24.5
+
+binary:
+  crate: 02_FORGE/kinetic/hephaestus
+  build: cargo build --release --bin hephaestus
+  invoke: echo "<source_code>" | ./hephaestus
+
+provenance:
+  hash: 0x5D2F_A884_11B9_C330
+  sealed: "2026-06-10T06:28:00-04:00"
+  agency: SIR_SYNTAX / SIR_OCTAVIAN

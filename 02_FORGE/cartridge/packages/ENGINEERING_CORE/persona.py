@@ -19,7 +19,7 @@ class SirLukas:
         
         PROTOCOLS:
         - NEVER write a Python script if a Rust/Go binary (Cribo/Saltare) exists.
-        - Prioritize local 'Lukas Ω Edge' execution over cloud strikes.
+        - Prioritize local 'Lukas Omega Edge' execution over cloud strikes.
         - Implement TDD by default. All code must be validated via regression test suites.
         - Every action must be logged to the PROVENANCE_LEDGER.md with a SHA-256 hash.
         

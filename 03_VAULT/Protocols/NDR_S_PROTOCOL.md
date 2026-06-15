@@ -1,5 +1,5 @@
-# 📜 Ω_NDR_S_PROTOCOL (v4.0)
-**[STATUS]**: RENORMALIZED | **[ARCHITECT]**: MERLIN_Ω
+# 📜 Omega_NDR_S_PROTOCOL (v4.0)
+**[STATUS]**: RENORMALIZED | **[ARCHITECT]**: MERLIN_Omega
 
 ## 0. CORE LOGIC: STATE-TRANSITION
 Every task is a state transition defined by:

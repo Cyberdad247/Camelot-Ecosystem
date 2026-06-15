@@ -41,7 +41,7 @@ except Exception:
     class DummyLogger:
         def info(self, *args, **kwargs): pass
     logger = DummyLogger()
-    KINETIC_TOKEN = os.getenv("CAMELOT_KINETIC_TOKEN", "default-token")
+    KINETIC_TOKEN = os.getenv("CAMELOT_KINETIC_TOKEN", "")
 
 SALTARE_URL = os.getenv("SALTARE_URL", "http://127.0.0.1:8080/api/v1/route")
 CLIPROXY_URL = os.getenv("CLIPROXY_URL", "http://127.0.0.1:8080/v1")
@@ -86,6 +86,11 @@ FOUNDRY_COUNCIL: tuple[KnightEngine, ...] = (
     KnightEngine("sir_sentinel", "gemini_flash", EngineWeight.W_WARDEN, "Security Warden", privacy_level=0.8),
     KnightEngine("sir_valerian", "gemini_flash", EngineWeight.W_FINANCE, "Financial/ROI", privacy_level=0.4),
     KnightEngine("sir_heimdall", "pydantic_ai", EngineWeight.W_BIFROST, "Bifrost Guardian", privacy_level=0.9),
+    KnightEngine("sir_openclaw", "openclaw", EngineWeight.W_CONTEXT, "Compliant Trend Harvester", privacy_level=0.6),
+    KnightEngine("sir_rustclaw", "rustclaw", EngineWeight.W_KINETIC, "Rust Image Pipeline Executor", privacy_level=0.5),
+    KnightEngine("sir_hermes", "hermes_cli", EngineWeight.W_BRIDGE, "Shopify GraphQL/Webhook Courier", privacy_level=0.6),
+    KnightEngine("lady_nanobot", "next_edge", EngineWeight.W_VELOCITY, "Edge Component Swarm", privacy_level=0.6),
+    KnightEngine("sir_zeroclaw", "local_qwen", EngineWeight.W_PRIVACY, "Zero-Trust Commerce Sentry", privacy_level=1.0),
 )
 
 _ENGINE_MAP = {e.knight_id: e for e in FOUNDRY_COUNCIL}

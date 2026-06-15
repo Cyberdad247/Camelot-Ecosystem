@@ -85,4 +85,9 @@ KEYWORD_ROUTES: dict[str, str] = {
     "1m_context": "sir_helio", "cloud_burst": "sir_helio",
     "ouroboros": "sir_ouroboros", "mamba": "sir_ouroboros", "infinite_context": "sir_ouroboros",
     "bifrost": "sir_heimdall", "mesh": "sir_heimdall", "sentinel": "sir_heimdall", "zero_trust": "sir_heimdall",
+    "openclaw": "sir_openclaw", "trend_research": "sir_openclaw",
+    "rustclaw": "sir_rustclaw", "cmyk": "sir_rustclaw",
+    "shopify": "sir_hermes", "graphql": "sir_hermes", "webhook": "sir_hermes",
+    "nanobot": "lady_nanobot", "nfc": "lady_nanobot", "webgl": "lady_nanobot",
+    "zeroclaw": "sir_zeroclaw", "trademark": "sir_zeroclaw", "affiliate_abuse": "sir_zeroclaw",
 }

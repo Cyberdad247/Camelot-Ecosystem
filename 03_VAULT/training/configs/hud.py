@@ -1530,8 +1530,8 @@ def _repl_loop():
                 console.print(f"[yellow]Runic router unavailable ({e}).[/] '//{rune_name}' unhandled.")
             continue
 
-        # ── Ouroboros Runes: Ω_ ──────────────────────────────────
-        if line.startswith(("\u03a9_", "Ω_", "Omega_", "omega_")):
+        # ── Ouroboros Runes: Omega_ ──────────────────────────────────
+        if line.startswith(("\u03a9_", "Omega_", "Omega_", "omega_")):
             console.print(Panel(_handle_rune(line), title="Ouroboros", border_style="bright_cyan"))
             continue
 
@@ -1604,7 +1604,7 @@ def main():
     Full bootstrap sequence:
       1. Render HUD dashboard
       2. Boot Defense Grid daemon (heartbeat.go) in background
-      3. Enter interactive REPL with runic routing (//FORGE, Ω_ runes, Saltare)
+      3. Enter interactive REPL with runic routing (//FORGE, Omega_ runes, Saltare)
     """
     import argparse
     parser = argparse.ArgumentParser(prog="camelot-os", description="Camelot OS HUD Terminal")

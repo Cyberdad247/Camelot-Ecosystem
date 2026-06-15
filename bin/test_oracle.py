@@ -1,4 +1,4 @@
-"""Ω₃ Oracle dispatch test — routes a synth request through CloudServiceRouter.
+"""Omega₃ Oracle dispatch test — routes a synth request through CloudServiceRouter.
 
 Exercises the full path:
     _plan_cloud_service(intent)
@@ -58,7 +58,7 @@ async def main() -> int:
             print(f"    {keys}")
         return True
 
-    print("=== Ω₃ end-to-end smoke test ===")
+    print("=== Omega₃ end-to-end smoke test ===")
     await step("NOTEBOOKLM_HEALTH", CloudServiceName.NOTEBOOKLM_HEALTH)
     await step("NOTEBOOKLM_SOURCES_LIST", CloudServiceName.NOTEBOOKLM_SOURCES_LIST)
     await step("NOTEBOOKLM_STUDIO_LIST(audio)",

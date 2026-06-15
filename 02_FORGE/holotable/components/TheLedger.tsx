@@ -30,11 +30,11 @@ export default function TheLedger() {
       line.includes("CAUSALITY BREACH")
     )
       return "text-red-500 font-bold";
-    if (line.includes("WARN") || line.includes("Ω_CONFIRM"))
+    if (line.includes("WARN") || line.includes("Omega_CONFIRM"))
       return "text-yellow-500";
     if (line.includes("SUCCESS") || line.includes("RADIANT"))
       return "text-green-500";
-    if (line.includes("Ω_")) return "text-purple-400"; // Oracle Command
+    if (line.includes("Omega_")) return "text-purple-400"; // Oracle Command
     return "text-slate-400";
   };
 

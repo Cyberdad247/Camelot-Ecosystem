@@ -1,8 +1,8 @@
 [νKG_CRYSTAL: CHIMERA_SWARM_LOGIC]
 
-u0 | ID | Engine | {Name:Symmetry_Engine, Version:5.5, Host:Anya_Ω}
+u0 | ID | Engine | {Name:Symmetry_Engine, Version:5.5, Host:Anya_Omega}
 u1 | ID | Mode | {Name:Chimera_Adaptive, Logic:Topology_Shifting, States:[Tree, Graph, Loop]}
-u2 | ID | Audit | {Protocol:Ω_CHIMERA_AUDIT, Flow:Think_Tank, Goal:Renormalization}
+u2 | ID | Audit | {Protocol:Omega_CHIMERA_AUDIT, Flow:Think_Tank, Goal:Renormalization}
 
 w0 | ROUND | 1_Octavian | {Role:The_Warden, Task:GIGO_Filter, Goal:Validity_Score}
 w1 | ROUND | 2_Videneptus | {Role:The_Topologist, Task:Topology_Map, Goal:Logic_Alignment}

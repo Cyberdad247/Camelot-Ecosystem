@@ -13,12 +13,10 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RUNTIME_STATE = REPO_ROOT / "03_VAULT" / "runtime_state"
 FRONTIER_STATE_PATH = RUNTIME_STATE / "frontier_nodes_latest.json"
 VERIFICATION_LEDGER = REPO_ROOT / "03_VAULT" / "Missions" / "verification_ledger.jsonl"
-PROVENANCE_LEDGER = REPO_ROOT / "PROVENANCE_LEDGER.md"
 
 DEFAULT_NODES = [
     {
@@ -134,9 +132,16 @@ def _ledger(event: dict[str, Any], *, provenance: bool = False) -> None:
     with VERIFICATION_LEDGER.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(entry, ensure_ascii=False, sort_keys=True) + "\n")
     if provenance:
+        from control_plane.ledger_sync import append_provenance_entry
+
         summary = str(event.get("summary") or event.get("action") or "frontier node event")
-        with PROVENANCE_LEDGER.open("a", encoding="utf-8") as handle:
-            handle.write(f"\n| AUTO | **Frontier Portal** | CAMELOT_OS | ✅ LEDGERED | {summary} |\n")
+        append_provenance_entry(
+            title="Frontier Portal",
+            actor="CAMELOT_OS",
+            scope=[summary],
+            verification=["frontier_nodes._ledger"],
+            tag="frontier_nodes",
+        )
 
 
 def public_state() -> dict[str, Any]:
@@ -282,4 +287,3 @@ def validate_support_session(session_id: str, token: str) -> dict[str, Any]:
         "expires_utc": active.get("expires_utc"),
         "permissions": active.get("permissions", []),
     }
-

@@ -16,9 +16,9 @@ Think of these as your "Ultimate" abilities. They bypass natural language and ex
 ### 🌀 REALM RUNES (MAINTENANCE)
 These are your passive skills that keep the OS "Radiant."
 
-*   `Ω_SYNC`   - **Save State:** Syncs your local progress with the Cloud Brain (NotebookLM). Use this to ensure your agents never "forget" what you've built.
-*   `Ω_STATUS` - **Power Level:** Checks your RAM, CPU, and Engine health. If your "Energy" (RAM) is low, things might get laggy.
-*   `Ω_PURGE`  - **Clean Inventory:** Deletes temporary files and cache. Use this to keep your realm fast and clean.
+*   `Omega_SYNC`   - **Save State:** Syncs your local progress with the Cloud Brain (NotebookLM). Use this to ensure your agents never "forget" what you've built.
+*   `Omega_STATUS` - **Power Level:** Checks your RAM, CPU, and Engine health. If your "Energy" (RAM) is low, things might get laggy.
+*   `Omega_PURGE`  - **Clean Inventory:** Deletes temporary files and cache. Use this to keep your realm fast and clean.
 
 ---
 
@@ -28,7 +28,7 @@ You command a specialized team of AI agents. Each has a unique class:
 1.  **Sir Boris (L5 Architect):** The code master. Local, private, and powerful.
 2.  **Sir Helio (L5 Context):** The librarian. He can read massive codebases without breaking a sweat.
 3.  **Sir Goose (L5 Autonomy):** The scout. He can go out and fix things on his own.
-4.  **Anya Ω (L7 Compiler):** The interface. She translates your intent into action.
+4.  **Anya Omega (L7 Compiler):** The interface. She translates your intent into action.
 5.  **Lady Apis (L5 Forager):** The researcher. She hunts the web for data using high-speed visual tools.
 
 ---

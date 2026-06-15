@@ -2,7 +2,7 @@
 **Timestamp:** 2026-02-01T08:45:00.000000
 **Mode:** Kinetic Purity [Active]
 **Sovereign:** VaShawn O. Head
-**Architect:** Merlin_Ω + Anya_v6.5 + Lukas_Edge
+**Architect:** Merlin_Omega + Anya_v6.5 + Lukas_Edge
 
 ---
 

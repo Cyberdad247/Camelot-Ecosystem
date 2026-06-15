@@ -183,20 +183,20 @@ All 20 must pass before ledger entry status changes from IN_PROGRESS to SHIPPED.
 |---|---|---|---|---|
 | AC-01 | Colony risk score < 40, 0 secrets | 1 | SIR_GIDEON | ☐ |
 | AC-02 | RTK strips > 85% noise from test input | 2 | SIR_LUKAS | ☐ |
-| AC-03 | TriageScore.risk_entropy correct for 5 test intents | 2 | ANYA_Ω | ☐ |
-| AC-04 | Shatterpoint → BLOCKED at PARSE stage | 2 | ANYA_Ω | ☐ |
+| AC-03 | TriageScore.risk_entropy correct for 5 test intents | 2 | ANYA_Omega | ☐ |
+| AC-04 | Shatterpoint → BLOCKED at PARSE stage | 2 | ANYA_Omega | ☐ |
 | AC-05 | FactoryJob Pydantic validation passes all fields | 3 | SIR_ALEX | ☐ |
 | AC-06 | FileStatePersistence suspend/resume deterministic | 3 | SIR_ALEX | ☐ |
 | AC-07 | FirnFlow L1 retrieval < 8K token budget | 3 | LADY_M | ☐ |
 | AC-08 | HUMAN_GATE without token → 403 + FileState suspended | 4 | SIR_OCTAVIAN | ☐ |
-| AC-09 | ColMAD 3-persona crucible completes with verdict | 4 | MERLIN_Ω | ☐ |
-| AC-10 | All 4 cartridges hot-swap via Scabbard Protocol | 5 | ANYA_Ω | ☐ |
+| AC-09 | ColMAD 3-persona crucible completes with verdict | 4 | MERLIN_Omega | ☐ |
+| AC-10 | All 4 cartridges hot-swap via Scabbard Protocol | 5 | ANYA_Omega | ☐ |
 | AC-11 | sir_mnemo MCP tool returns NLM response | 5 | LADY_M | ☐ |
 | AC-12 | Affinity structural hash match for variant inputs | 6 | SIR_LUKAS | ☐ |
 | AC-13 | 13/13 Hive terminals HEALTHY or assumed_live | 6 | SIR_BORIS | ☐ |
 | AC-14 | Inspira TUI: all 4 new panels rendering | 6 | LADY_APIS | ☐ |
 | AC-15 | AegisShield cargo check 0 errors (4 modules) | 7 | SIR_LUKAS | ☐ |
-| AC-16 | Ouroboros quantizer + mamba tests PASS | 7 | MERLIN_Ω | ☐ |
+| AC-16 | Ouroboros quantizer + mamba tests PASS | 7 | MERLIN_Omega | ☐ |
 | AC-17 | camelot.exe 16.0–17.5 MB, 3 smoke tests pass | 8 | SIR_FORGE | ☐ |
 | AC-18 | PROVENANCE_LEDGER has ≥ 2 QNF entries | 8 | AUTO_HOOK | ☐ |
 | AC-19 | notebooklm list returns ≥ 11 notebooks | 8 | LADY_M | ☐ |
@@ -264,7 +264,7 @@ print('LEDGER INTEGRITY: OK')
 [ ] LADY_ALEXANDRIA: Quality seal — types, tests, no debug prints
 [ ] SIR_GIDEON: Forensic seal — colony report score < 40
 [ ] SIR_SOCRATES: Northstar seal — all work serves Vizion's goal
-[ ] ANYA_Ω: Gate seal — all 20 AC checked in PROVENANCE_LEDGER
+[ ] ANYA_Omega: Gate seal — all 20 AC checked in PROVENANCE_LEDGER
 [ ] SIR_BORIS: Crucible seal — architectural coherence confirmed
 
 → Only after all 6 seals: binary ships as EXCALIBUR-A PRODUCTION

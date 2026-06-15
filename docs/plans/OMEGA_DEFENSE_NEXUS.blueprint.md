@@ -3,7 +3,7 @@
 **Classification:** ALPHA_OMEGA — Sovereign Priority  
 **Conductor:** SIR_BORIS v3.0 (The Anvil) — L5 Agentic Lead Architect  
 **Date:** 2026-06-05  
-**Gate:** ANYA_Ω APEE v7.0 — Approved for Execution  
+**Gate:** ANYA_Omega APEE v7.0 — Approved for Execution  
 
 ---
 

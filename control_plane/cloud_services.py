@@ -19,7 +19,7 @@ sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 
 
 
-# --- NotebookLM bridge loader (Ω₃) -----------------------------------------
+# --- NotebookLM bridge loader (Omega₃) -----------------------------------------
 # The bridge lives under 03_VAULT/training/configs/ which is not on sys.path.
 # Load it by file-spec on first use, then cache the module handle.
 
@@ -43,7 +43,7 @@ def _load_notebooklm_bridge():
 
 
 # Heavy cloud deps (modal, supabase, long-term cloudbrain) are imported lazily
-# inside handler methods so lightweight consumers — e.g. the Ω₃ NotebookLM slice —
+# inside handler methods so lightweight consumers — e.g. the Omega₃ NotebookLM slice —
 # don't pay the import cost or fail on a missing optional dependency.
 def _modal_services():
     from agora.cloud_orchestrator_shim import modal_services
@@ -882,7 +882,7 @@ class CloudServiceRouter:
             source="local",
         )
 
-    # --- NotebookLM Cloud Brain (Ω₃) ---------------------------------------
+    # --- NotebookLM Cloud Brain (Omega₃) ---------------------------------------
 
 
     async def _notebooklm_health(self) -> CloudServiceResult:
@@ -970,7 +970,7 @@ class CloudServiceRouter:
                 source="local",
             )
 
-    # --- Ω₃.2 LADY_APIS research ---------------------------------------
+    # --- Omega₃.2 LADY_APIS research ---------------------------------------
 
     async def _notebooklm_research_start(self, payload: dict[str, Any]) -> CloudServiceResult:
         query = str(payload.get("query") or payload.get("objective") or "").strip()
@@ -1013,7 +1013,7 @@ class CloudServiceRouter:
                 success=False, error=f"{type(exc).__name__}: {exc}", source="local",
             )
 
-    # --- Ω₃.3 SIR_SONUS studio ----------------------------------------
+    # --- Omega₃.3 SIR_SONUS studio ----------------------------------------
 
     async def _notebooklm_studio_list(self, payload: dict[str, Any]) -> CloudServiceResult:
         try:
@@ -1066,7 +1066,7 @@ class CloudServiceRouter:
                 success=False, error=f"{type(exc).__name__}: {exc}", source="local",
             )
 
-    # --- Ω₃.4 MASON sources -------------------------------------------
+    # --- Omega₃.4 MASON sources -------------------------------------------
 
     async def _notebooklm_sources_list(self, payload: dict[str, Any]) -> CloudServiceResult:
         try:

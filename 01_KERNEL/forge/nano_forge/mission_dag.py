@@ -16,7 +16,7 @@ class AtomicGoal:
 
 class MissionDAG:
     """
-    Ω_MISSION_DAG (Phase 53)
+    Omega_MISSION_DAG (Phase 53)
     Recursive Goal Decomposition for complex Swarm operations.
     """
 

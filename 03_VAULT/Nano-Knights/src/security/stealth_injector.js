@@ -39,7 +39,7 @@
             let activeId = sessionStorage.getItem('NANO_PROFILE_ID') || 'default';
             let profile = PROFILE_LIBRARY[activeId] || PROFILE_LIBRARY['default'];
 
-            console.log("[Ω_STEALTH] Active Identity:", activeId);
+            console.log("[Omega_STEALTH] Active Identity:", activeId);
             
             // 2. Apply Spoofer
             const NOISE_CANVAS = profile.canvasSeed || 0.0000001;

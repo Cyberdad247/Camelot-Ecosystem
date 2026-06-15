@@ -10,7 +10,7 @@ HIVE_FORGE bridges the **HiveIDE Agentic IDE** patterns with the **Camelot OS Se
 
 ### 1. STRATEGIC OMNISCIENCE (Planning)
 - **Agent:** Oracle (Aurelio Reyes)
-- **Tool:** `Ω_SCRY` + `Videneptus`
+- **Tool:** `Omega_SCRY` + `Videneptus`
 - **Output:** Task DAG (Directed Acyclic Graph)
 - **UKG Action:** `DISTILL` user intent into Core Anchors.
 
@@ -37,7 +37,7 @@ HIVE_FORGE bridges the **HiveIDE Agentic IDE** patterns with the **Camelot OS Se
 
 ### 5. HARMONY GATE (Launch)
 - **Agent:** Arthur
-- **Tool:** `Ω_HARMONY` + `Iron Gate`
+- **Tool:** `Omega_HARMONY` + `Iron Gate`
 - **Output:** [👤✅] Approval Request -> Deployment
 - **Action:** Verify all constraints are met. Log hash to `PROVENANCE_LEDGER.md`.
 

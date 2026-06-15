@@ -1,4 +1,4 @@
-// AGENCY WAR ROOM CONTROLLER [Ω_RECON v1.0]
+// AGENCY WAR ROOM CONTROLLER [Omega_RECON v1.0]
 // //THINK PROTOCOL FIX: All DOM access wrapped in DOMContentLoaded
 
 document.addEventListener("DOMContentLoaded", () => {

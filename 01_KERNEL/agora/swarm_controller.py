@@ -10,7 +10,7 @@ import httpx
 class SwarmController:
     """
     CAMELOT_OS Swarm Controller (Phase 5)
-    Bridges Merlin_Ω (L3) to the Hivemind Orchestrator (L5/Go).
+    Bridges Merlin_Omega (L3) to the Hivemind Orchestrator (L5/Go).
     """
 
     def __init__(self, base_url: str = "http://localhost:8081"):

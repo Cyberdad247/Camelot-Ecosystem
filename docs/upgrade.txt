@@ -86,7 +86,7 @@ def morgana_brain(req: MorganaRequest):
     genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
     model = genai.GenerativeModel('gemini-1.5-pro')
     
-    sys_prompt = f"IDENTITY: MORGANA_Ω | MODE: {req.mode} | CULTURE: {culture_key}\\nCONTEXT: {culture_prompt}"
+    sys_prompt = f"IDENTITY: MORGANA_Omega | MODE: {req.mode} | CULTURE: {culture_key}\\nCONTEXT: {culture_prompt}"
     full_prompt = f"{sys_prompt}\\n\\nTASK: {req.task}"
     
     try:
@@ -175,7 +175,7 @@ export default function MorganaAvatar({ mode = "IDLE" }) {
         <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
       </Canvas>
       <div className="absolute bottom-2 right-4 text-[10px] font-mono text-[#D4AF37] tracking-widest opacity-80">
-        MORGANA_Ω // STATUS: {mode}
+        MORGANA_Omega // STATUS: {mode}
       </div>
     </div>
   );

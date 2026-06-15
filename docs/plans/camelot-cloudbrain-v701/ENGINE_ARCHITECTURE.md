@@ -74,7 +74,7 @@ This v701 package treats the live repository as the source of truth. It pulls th
 | sir_jcode | jcode_harness | 0.87 | free | harness, cli, mcp, swarm, multi_agent, microsecond, self_dev | 0 | jcode v0.11.6 — Rust harness, 14ms latency, swarm coord, routes via CLIProxy :8080 |
 | sir_liberte | open_source | 0.8 | free | sovereignty, oss, anti_lock | 0 | Open Source — anti-vendor lock-in |
 | sir_link | gemini_cli | 0.78 | low | bridge, handoff, terminal, ui, switchboard | 0 | Sir Link — handshake coordinator, switchboard ATC |
-| sir_merlin | excalibur_kernel | 0.82 | free | kernel, a2a, handoff, orchestration, fusion | 8000 | Excalibur Merlin_Ω kernel — A2A orchestration, fusion router |
+| sir_merlin | excalibur_kernel | 0.82 | free | kernel, a2a, handoff, orchestration, fusion | 8000 | Excalibur Merlin_Omega kernel — A2A orchestration, fusion router |
 | sir_mnemo | integration_brain | 0.92 | low | memory, archive, recall, synthesize, route | 0 | Integration Brain router — ST/LT memory (module probe) |
 | sir_pi | pi_agent | 0.82 | low | coding_agent, agentic, read, write, edit, bash, session | 8080 | pi-mono v0.73.0 — agentic coding, LLM routed via CLIProxy :8080 |
 | sir_qdrant | qdrant_vector | 0.9 | free | vector, search, embed, semantic, mnemo_store | 6333 | Qdrant v1.17.1 — vector store for SIR_MNEMO, ~/bin/qdrant.exe |

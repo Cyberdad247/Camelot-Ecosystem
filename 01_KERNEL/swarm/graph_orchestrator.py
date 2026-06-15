@@ -190,7 +190,7 @@ class GraphOrchestrator:
 
 if __name__ == "__main__":
     orchestrator = GraphOrchestrator()
-    final_state = orchestrator.run("Ω_EVOLUTION_702 Track Alpha Actuation")
+    final_state = orchestrator.run("Omega_EVOLUTION_702 Track Alpha Actuation")
     print("\n--- SWARM EVOLUTION COMPLETE ---")
     for log in final_state["evolution_logs"]:
         print(f"> {log}")

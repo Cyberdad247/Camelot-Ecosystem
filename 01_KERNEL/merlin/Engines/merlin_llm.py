@@ -100,7 +100,7 @@ class MerlinLLM:
 
     def render_persona_prompt(self, persona: Dict[str, Any]) -> str:
         """
-        [Ω_FORGE] Renders the new Persona JSON Schema into a Markdown system prompt.
+        [Omega_FORGE] Renders the new Persona JSON Schema into a Markdown system prompt.
         """
         identity = persona.get("core_identity", {})
         caps = persona.get("capabilities", {})
@@ -191,7 +191,7 @@ class MerlinLLM:
 
     def generate_system_prompt(self, tal_manifest: Dict[str, Any]) -> str:
         """
-        [Ω_FORGE] Expands a TAL manifest into a full Markdown system prompt.
+        [Omega_FORGE] Expands a TAL manifest into a full Markdown system prompt.
         """
         root = tal_manifest.get("root", {})
         branch = tal_manifest.get("branch", {})

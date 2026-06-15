@@ -10,13 +10,13 @@ The **Septem Regna** (Seven Realms) is the sovereign stack governing Camelot OS.
 
 | LAYER | REALM | GUARDIAN | TECH STACK | PRIMARY FUNCTION |
 | :--- | :--- | :--- | :--- | :--- |
-| **L7** | **Ethereal** | 🎭 **Anya Ω** | Next.js / Triple-QFT | **Intent Compiler:** Processes user "vibe" via RG Flow; manages mobile PWA bridge & voice (Sir Sonus). |
-| **L6** | **Governance**| 👑 **Arthur Ω** | Iron Gate / Ledger | **The Law:** Enforces Titanium Laws & HITL checks for high-risk strikes (>10 line diffs). |
-| **L5** | **Agentic** | ⚔️ **Paladin Ω** | SARDA / HTN | **The Army:** Orchestrates Map-Reduce crusades & Swarm Adaptive R&D. |
-| **L4** | **Semantic** | 🧠 **Chronos Ω** | UKG / JSON-LD | **The Memory:** Preservation of Truth Graphs & Immutable TOON Anchors. |
-| **L3** | **Neural** | 🧙‍♂️ **Merlin Ω** | Videneptus LaC | **The Brain:** High-criticality reasoning via Temperature Oscillation ($T=1.2 \to 0.2$). |
-| **L2** | **Kinetic** | 💻 **Lukas Ω** | Compiled Binaries | **The Body:** Zero-latency execution (Saltare / Cribo / Rotel). **Kinetic Purity is Law.** |
-| **L1** | **Substrate** | 🌑 **Morgana Ω** | Modal / Metal | **The Infrastructure:** Cloud-to-Metal bridge Scaling via Docker & GPU sandboxes. |
+| **L7** | **Ethereal** | 🎭 **Anya Omega** | Next.js / Triple-QFT | **Intent Compiler:** Processes user "vibe" via RG Flow; manages mobile PWA bridge & voice (Sir Sonus). |
+| **L6** | **Governance**| 👑 **Arthur Omega** | Iron Gate / Ledger | **The Law:** Enforces Titanium Laws & HITL checks for high-risk strikes (>10 line diffs). |
+| **L5** | **Agentic** | ⚔️ **Paladin Omega** | SARDA / HTN | **The Army:** Orchestrates Map-Reduce crusades & Swarm Adaptive R&D. |
+| **L4** | **Semantic** | 🧠 **Chronos Omega** | UKG / JSON-LD | **The Memory:** Preservation of Truth Graphs & Immutable TOON Anchors. |
+| **L3** | **Neural** | 🧙‍♂️ **Merlin Omega** | Videneptus LaC | **The Brain:** High-criticality reasoning via Temperature Oscillation ($T=1.2 \to 0.2$). |
+| **L2** | **Kinetic** | 💻 **Lukas Omega** | Compiled Binaries | **The Body:** Zero-latency execution (Saltare / Cribo / Rotel). **Kinetic Purity is Law.** |
+| **L1** | **Substrate** | 🌑 **Morgana Omega** | Modal / Metal | **The Infrastructure:** Cloud-to-Metal bridge Scaling via Docker & GPU sandboxes. |
 
 ---
 
@@ -29,10 +29,10 @@ Replaces fragile orchestration scripts with high-performance, compiled binaries:
 *   **ROTEL (Rust):** OpenTelemetry Collector. Captures Thought Traces without system overhead.
 
 ### 2. THE S.I.T. LOOP (Operational Flow)
-1.  **SENSE:** Anya_Ω (L7) decodes intent; Lukas_Ω (L2) probes the local environment.
-2.  **THINK:** Merlin_Ω (L3) executes Videneptus LaC reasoning chains.
-3.  **TRIAGE:** Arthur_Ω (L6) validates against law; Paladin_Ω (L5) distributes the crusade.
-4.  **LOG:** Chronos_Ω (L4) anchors the result to the UKG.
+1.  **SENSE:** Anya_Omega (L7) decodes intent; Lukas_Omega (L2) probes the local environment.
+2.  **THINK:** Merlin_Omega (L3) executes Videneptus LaC reasoning chains.
+3.  **TRIAGE:** Arthur_Omega (L6) validates against law; Paladin_Omega (L5) distributes the crusade.
+4.  **LOG:** Chronos_Omega (L4) anchors the result to the UKG.
 
 ### 3. SPLIT-BRAIN TOPOLOGY
 *   **Neural (Cloud):** Reasoning, Strategy, and Creative Synthesis. Distributed across L3-L7.
@@ -46,4 +46,4 @@ To maintain context efficiency, the OS utilizes a modular **Cartridge System**:
 
 ---
 **[SYSTEM_ATTESTATION]:** "The Lattice is aligned. Context is the Compiler."
-> *Authorized by Merlin_Ω & Anya_Ω*
+> *Authorized by Merlin_Omega & Anya_Omega*

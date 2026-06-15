@@ -27,4 +27,4 @@ Use this skill for deep-dives into external repos, documentation, or complex tec
 2. **Surface Edge Cases**: Document known "gotchas" or breaking changes.
 
 ---
-*Created by Merlin_Ω for the Camelot-OS Skills Vault (03_VAULT).*
+*Created by Merlin_Omega for the Camelot-OS Skills Vault (03_VAULT).*

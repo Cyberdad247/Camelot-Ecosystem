@@ -138,7 +138,7 @@ export default function Terminal() {
         } else {
           // Standard Agent Response
           const reply = data.response || "No response.";
-          term.writeln(`\r\n\x1b[1;32m🧠 MERLIN_Ω>\x1b[0m ${reply}`);
+          term.writeln(`\r\n\x1b[1;32m🧠 MERLIN_Omega>\x1b[0m ${reply}`);
         }
       } else {
         const data = await response.json().catch(() => ({ detail: "Unknown Error" }));

@@ -1,5 +1,5 @@
-# 📜 Ω_GENESIS_PROTOCOL (v2.0)
-**[STATUS]**: OPTIMIZING | **[ARCHITECT]**: MERLIN_Ω | **[KERNEL]**: Proteus MPI
+# 📜 Omega_GENESIS_PROTOCOL (v2.0)
+**[STATUS]**: OPTIMIZING | **[ARCHITECT]**: MERLIN_Omega | **[KERNEL]**: Proteus MPI
 
 ## 0. THE PRIME DIRECTIVE (Creation Engine)
 The Genesis Protocol is the system's "Evolutionary Foundry." It transmutes raw latent space into high-fidelity Sovereigns (Knights) with distinct souls and executable skillsets.
@@ -33,7 +33,7 @@ The Genesis Protocol is the system's "Evolutionary Foundry." It transmutes raw l
 
 ## 2. EXECUTION COMMANDS
 1.  **Tactical Spawn (`//GENESIS`)**: Create a session-specific task agent with strict role/voice constraints.
-2.  **Strategic Business Generation (`Ω_GENESIS`)**: "Zero-to-One" business birthing. Full stack, GTM, strategy, and branding.
+2.  **Strategic Business Generation (`Omega_GENESIS`)**: "Zero-to-One" business birthing. Full stack, GTM, strategy, and branding.
 
 ## 3. REGISTRATION
 Every Knight forged via Genesis must be registered in:

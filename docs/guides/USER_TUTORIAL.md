@@ -98,7 +98,7 @@ powershell -NoProfile -Command "Test-NetConnection 127.0.0.1 -Port 3001"
 
 # Local
 curl http://127.0.0.1:8001/health
-# → {"status":"ONLINE","identity":"Merlin_Ω","mode":"SIMULATION"}
+# → {"status":"ONLINE","identity":"Merlin_Omega","mode":"SIMULATION"}
 
 # Cloud (only when deployed)
 curl https://cyberdad247--morgana-research-agency-prod-health.modal.run

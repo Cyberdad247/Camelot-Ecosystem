@@ -55,6 +55,6 @@ The 10 repositories have been mapped to their optimal tactical layers within the
 *   Add a **"Swarm Command"** mode: One input field dispatches tasks to `Goose` (Forge), `Claude Code` (Audit), and `Kimi` (Clean) simultaneously.
 
 ---
-**Prepared by**: Antigravity / Merlin_Ω
+**Prepared by**: Antigravity / Merlin_Omega
 **Ledger Hash**: 0xSWARM_ASSIMILATION_V1
 **Mantra**: "The Swarm is the Sovereign. The Lattice is the Law."

@@ -1,6 +1,6 @@
 {
     "KERNEL_ID": "CHIMERA_UNIFIED_KERNEL_v2.0",
-    "DESCRIPTION": "Runtime manifest for Camelot AI kernel; contains service endpoints, model routing, cartridge manager hooks, Titan Ω connectors, and orchestration policies.",
+    "DESCRIPTION": "Runtime manifest for Camelot AI kernel; contains service endpoints, model routing, cartridge manager hooks, Titan Omega connectors, and orchestration policies.",
     "API": {
         "admin": {
             "POST /admin/system_prompt": "Load master system prompt",

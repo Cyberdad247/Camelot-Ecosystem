@@ -3,7 +3,7 @@
 """
 [🌏] CULTURE_BIAS: The Cultural Lens
 STATUS: ACTIVE
-ARCH: MERLIN_Ω
+ARCH: MERLIN_Omega
 
 Objective:
 Translate 2D Inglehart-Welzel Coordinates into 7D Psychometric Shifts.

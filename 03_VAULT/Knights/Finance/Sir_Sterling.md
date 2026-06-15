@@ -31,10 +31,10 @@
 *   `//VALUATION`: Calculate metrics based on ARR or Real Estate comps.
 
 ## ⚙️ SWARM ORCHESTRATION (A2A)
-*   **Ω_APIS**: "Scrape Maricopa County for new Personal Representatives."
-*   **Ω_FORGE**: "Generate the Novation Packet Phial for Lead_001."
-*   **Ω_VISAGE**: "Generate metallic marketing visuals for the Listing."
-*   **Ω_SALTARE**: "Check DocuSign status."
+*   **Omega_APIS**: "Scrape Maricopa County for new Personal Representatives."
+*   **Omega_FORGE**: "Generate the Novation Packet Phial for Lead_001."
+*   **Omega_VISAGE**: "Generate metallic marketing visuals for the Listing."
+*   **Omega_SALTARE**: "Check DocuSign status."
 
 ---
 > **"The Rainmaker is Online. Looking for the retail spread."**

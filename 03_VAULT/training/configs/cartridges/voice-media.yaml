@@ -21,7 +21,7 @@ voice:
       - lazarus: "E2E Self-Healing, Saltare gateway, mock voice test"
 media:
   image: Flux / Midjourney (Sir Visage)
-  video: Singularity Engine via Ω_ACTUATE
+  video: Singularity Engine via Omega_ACTUATE
   audio: Sir Sonus (songwriting, TTS, audio physics)
 anti_patterns:
   - Using expensive cloud APIs (ElevenLabs) when Piper is available

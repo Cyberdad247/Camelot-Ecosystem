@@ -81,7 +81,7 @@ class StyleScore(ScoringDimension):
 class ProvenanceScore(ScoringDimension):
     """
     Provenance Alignment dimension (0.10 weight).
-    - Citations from Ω-Vault or Ω-Graph acknowledged
+    - Citations from Omega-Vault or Omega-Graph acknowledged
     - Conflicts flagged
     """
     name: str = "Provenance"
@@ -239,7 +239,7 @@ class ProvenanceDimension:
     """Provenance Alignment dimension."""
     name = "Provenance"
     weight = 0.10
-    description = "Citations from Ω-Vault or Ω-Graph acknowledged, conflicts flagged"
+    description = "Citations from Omega-Vault or Omega-Graph acknowledged, conflicts flagged"
 
 
 # Evaluation prompt template

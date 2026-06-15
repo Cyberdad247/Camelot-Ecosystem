@@ -6,7 +6,7 @@ import zlib
 from datetime import datetime
 
 # PATHS
-UKG_PATH = "Titan_Ω_Hypergraph/chromadb"  # Simulating Graph Storage
+UKG_PATH = "Titan_Omega_Hypergraph/chromadb"  # Simulating Graph Storage
 NOTEBOOK_PATH = "01_KERNEL/Squires/Notebook_Brain/memory.json"
 LEDGER_PATH = "PROVENANCE_LEDGER.md"
 VAULT_PATH = "03_VAULT"
@@ -14,7 +14,7 @@ VAULT_PATH = "03_VAULT"
 
 class BloomFilterIndex:
     """
-    [Ω_BLOOM] Lightweight probabilistic data structure for vault indexing.
+    [Omega_BLOOM] Lightweight probabilistic data structure for vault indexing.
     Prevents unnecessary disk I/O for 12,000+ artifacts.
     """
 
@@ -90,7 +90,7 @@ def sync_notebook():
 
 def log_change():
     timestamp = datetime.now().isoformat()
-    entry = f"| {timestamp} | SYSTEM_SYNC | Ω_SYNC (UKG + Notebook) | SUCCESS |\n"
+    entry = f"| {timestamp} | SYSTEM_SYNC | Omega_SYNC (UKG + Notebook) | SUCCESS |\n"
     with open(LEDGER_PATH, "a", encoding="utf-8") as f:
         f.write(entry)
     print("[LEDGER] Sync Recorded.")

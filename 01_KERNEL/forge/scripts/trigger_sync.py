@@ -44,7 +44,7 @@ def trigger_sync():
         "component": component,
         "summary": desc.strip(),
         "timestamp": date,
-        "agent": "Ω_SYNC",
+        "agent": "Omega_SYNC",
     }
 
     # Ingest into UKG

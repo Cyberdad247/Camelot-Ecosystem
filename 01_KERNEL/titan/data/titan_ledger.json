@@ -118,19 +118,19 @@
       "author": "Lord_Nexus"
     },
     {
-      "id": "LUKAS_Ω_UPGRADE",
+      "id": "LUKAS_Omega_UPGRADE",
       "timestamp": 1766275000.0,
-      "filename": "GUIDES/LUKAS_Ω_EDGE_BOOTSTRAP_v2.0.nkg",
+      "filename": "GUIDES/LUKAS_Omega_EDGE_BOOTSTRAP_v2.0.nkg",
       "version": "2.0.0",
-      "author": "Merlin_Ω",
+      "author": "Merlin_Omega",
       "note": "Edge Orchestrator Upgrade"
     },
     {
-      "id": "APEE_Ω_ENHANCE",
+      "id": "APEE_Omega_ENHANCE",
       "timestamp": 1766275100.0,
       "filename": "engines/logic/apee.py",
       "version": "6.5.0",
-      "author": "Merlin_Ω",
+      "author": "Merlin_Omega",
       "note": "Context-as-a-Compiler Enhancement"
     },
     {
@@ -207,7 +207,7 @@
       "timestamp": 1766275200.0,
       "version": "6.5.0",
       "status": "APPROVED",
-      "note": "Lukas Ω Edge & APEE v6.5 Milestone",
+      "note": "Lukas Omega Edge & APEE v6.5 Milestone",
       "approved_by": "SirZenith"
     },
     {

@@ -75,7 +75,7 @@ export default function DevHub() {
         <div className="group p-3 rounded-lg border border-slate-800/50 bg-slate-900/30 hover:border-purple-500/30 transition-all cursor-pointer">
           <div className="flex items-center justify-between">
             <span className="text-sm font-mono text-slate-300">
-              Ω_OPEN: Kinetic Refactor
+              Omega_OPEN: Kinetic Refactor
             </span>
             <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase font-bold">
               In-Progress

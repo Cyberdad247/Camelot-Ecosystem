@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-CAMELOT KERNEL [MERLIN_Ω]
+CAMELOT KERNEL [MERLIN_Omega]
 The Central Nervous System of the Sovereign OS.
 Integrates: TitanLink, RustDesk, Handoffs, and Iron Gate.
 """
@@ -29,7 +29,7 @@ telemetry = None
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup: Ignite Background Threads
-    print("[🔥] MERLIN_Ω: Neural Link Ignited (Test Mode)")
+    print("[🔥] MERLIN_Omega: Neural Link Ignited (Test Mode)")
 
     # def monitor_loop():
     #     while True:
@@ -41,7 +41,7 @@ async def lifespan(app: FastAPI):
 
     yield
     # Shutdown logic if needed
-    print("[💀] MERLIN_Ω: Severing Link.")
+    print("[💀] MERLIN_Omega: Severing Link.")
 
 
 app = FastAPI(title="Camelot Kernel", lifespan=lifespan)
@@ -53,7 +53,7 @@ app.include_router(fusion_router)
 @app.get("/")
 @app.get("/health")
 def health_check():
-    return {"status": "ONLINE", "identity": "Merlin_Ω", "mode": os.getenv("MODE", "SIMULATION")}
+    return {"status": "ONLINE", "identity": "Merlin_Omega", "mode": os.getenv("MODE", "SIMULATION")}
 
 
 @app.post("/agent/helio")

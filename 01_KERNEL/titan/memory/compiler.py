@@ -206,7 +206,7 @@ Justification: {framework_data['justification']}
         anchors = self.quantize_context(flow)
 
         # 4. Compile Symbolect
-        symbolect = f"⟨Ω:{'|'.join(anchors)}⟩"
+        symbolect = f"⟨Omega:{'|'.join(anchors)}⟩"
 
         # Log to memory
         self.engine.observe(f"Compiled Intent: {symbolect}", m_type="pattern")

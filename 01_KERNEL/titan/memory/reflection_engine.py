@@ -45,7 +45,7 @@ class ReflectionEngine:
 
     def reflect(self) -> List[str]:
         """
-        [Ω_REFLECT] Performs memory synthesis.
+        [Omega_REFLECT] Performs memory synthesis.
         In a full implementation, this triggers an LLM call to extract traits.
         """
         print(f"🧬 [REFLECTION] Synthesizing {len(self.memory_buffer)} memories...")

@@ -1,7 +1,7 @@
 <!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
 # BIO-KINETIC SWARM ZOOLOGY (v400.1.0 RADIANT)
 **Status:** RADIANT | **Topology:** MAP-REDUCE
-**Commander:** Paladin_Ω (L5 Agentic)
+**Commander:** Paladin_Omega (L5 Agentic)
 
 ## Overview
 Swarm Zoology defines the hierarchy of **Nano-Knights** (Ants, Gorillas, Beavers, Spiders) used for parallel Map-Reduce execution. These 150-token agents execute "muscle memory" tasks at zero latency, bypassing core Kernel reasoning.
@@ -31,7 +31,7 @@ Swarm Zoology defines the hierarchy of **Nano-Knights** (Ants, Gorillas, Beavers
 1. **MAP:** Paladin broadcasts intent to the swarm.
 2. **ACTUATE:** Nano-Knights strike targets in parallel.
 3. **REDUCE:** Lukas merges outputs into a single PR/Commit.
-4. **CRITIQUE:** Sir Sentinel Ω runs a 13-Agent antagonistic audit.
+4. **CRITIQUE:** Sir Sentinel Omega runs a 13-Agent antagonistic audit.
 
 ---
 > **"Many Strikes. One Victory."**

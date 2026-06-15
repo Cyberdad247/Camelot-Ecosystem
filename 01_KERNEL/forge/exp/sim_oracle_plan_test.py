@@ -23,23 +23,23 @@ async def test_full_oracle_flow():
 
     # 2. Genesis (Scenario Generation)
     print("--- 2. GENESIS (Prompt Arsenal) ---")
-    res2 = await kernel.process_request("Ω_GENESIS: Cyberpunk 2077 in Neo-Tokyo")
-    print(f"User: Ω_GENESIS: Cyberpunk 2077 in Neo-Tokyo\nResult: {res2}\n")
+    res2 = await kernel.process_request("Omega_GENESIS: Cyberpunk 2077 in Neo-Tokyo")
+    print(f"User: Omega_GENESIS: Cyberpunk 2077 in Neo-Tokyo\nResult: {res2}\n")
 
     # 3. Step (Physics)
     print("--- 3. PHYSICS STEP ---")
-    res3 = await kernel.process_request("Ω_STEP: Advance time")
-    print(f"User: Ω_STEP: Advance time\nResult: {res3}\n")
+    res3 = await kernel.process_request("Omega_STEP: Advance time")
+    print(f"User: Omega_STEP: Advance time\nResult: {res3}\n")
 
     # 4. Fork (HITL Gate) - EXPECT WARNING
     print("--- 4. FORK (HITL Trigger) ---")
-    res4 = await kernel.process_request("Ω_FORK: Split timeline")
-    print(f"User: Ω_FORK: Split timeline\nResult: {res4}\n")
+    res4 = await kernel.process_request("Omega_FORK: Split timeline")
+    print(f"User: Omega_FORK: Split timeline\nResult: {res4}\n")
 
     # 5. Confirm Fork
     print("--- 5. CONFIRMATION ---")
-    res5 = await kernel.process_request("Ω_FORK: Split timeline Ω_CONFIRM")
-    print(f"User: Ω_FORK: Split timeline Ω_CONFIRM\nResult: {res5}\n")
+    res5 = await kernel.process_request("Omega_FORK: Split timeline Omega_CONFIRM")
+    print(f"User: Omega_FORK: Split timeline Omega_CONFIRM\nResult: {res5}\n")
 
 
 if __name__ == "__main__":

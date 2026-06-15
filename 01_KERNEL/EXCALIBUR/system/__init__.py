@@ -7,4 +7,4 @@ Kernel package initialization.
 from pathlib import Path
 
 KERNEL_ROOT = Path(__file__).parent
-STORAGE_ROOT = KERNEL_ROOT.parent / "Titan_Ω_Hypergraph"
+STORAGE_ROOT = KERNEL_ROOT.parent / "Titan_Omega_Hypergraph"

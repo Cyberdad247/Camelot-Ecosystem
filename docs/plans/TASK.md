@@ -12,7 +12,7 @@
 - [ ] **Lattice Expansion:** Migrate `03_VAULT/skills` to the new Atomic Module format.
 
 ## ✅ RECENTLY COMPLETED (v214.2.0)
-- [x] Executed Forensic Audit (Ω_CAMELOT_LOCAL_AUDIT).
+- [x] Executed Forensic Audit (Omega_CAMELOT_LOCAL_AUDIT).
 - [x] Restored root purity via //HEAL protocol.
 - [x] Synchronized Portfolio Dashboard with Skillfront Modal.
 - [x] Validated Kinetic Stack binaries (Saltare, Cribo, Rotel).
@@ -24,4 +24,4 @@
 
 ---
 > **"Context is the Compiler. Revenue is the Fuel."**
-> *Synchronized by Merlin_Ω - 2026-03-20*
+> *Synchronized by Merlin_Omega - 2026-03-20*

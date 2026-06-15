@@ -1,4 +1,4 @@
-# 📜 Ω_ENGINE_TECHNICAL_SCAN (v1.0)
+# 📜 Omega_ENGINE_TECHNICAL_SCAN (v1.0)
 **[STATUS]**: OPTIMIZING | **[IDENTITY]**: Chief Systems Engineer (Rank 5)
 
 ## 0. MISSION

@@ -1,5 +1,5 @@
 {
-    "Ω": "ANYA",
+    "Omega": "ANYA",
     "v": "6.0",
     "r": "SymmetryEngine",
     "φ": "Context>Model",
@@ -99,5 +99,5 @@
             "generic_chat"
         ]
     },
-    "checksum": "UKG-ANYA-Ω-CTXLOCK"
+    "checksum": "UKG-ANYA-Omega-CTXLOCK"
 }

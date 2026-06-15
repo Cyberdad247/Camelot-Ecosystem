@@ -166,11 +166,11 @@ def test_4_merlin_generator():
                 meta={"source": "ARCHITECTURE.md"}
             ),
             Document(
-                content="Layer 3 (L3) is Merlin Ω, the Neural routing layer with Videneptus LaC.",
+                content="Layer 3 (L3) is Merlin Omega, the Neural routing layer with Videneptus LaC.",
                 meta={"source": "EMPIRE_MAP.md"}
             ),
             Document(
-                content="Layer 2 (L2) is Lukas Ω, the Kinetic layer with Saltare/Cribo/Rotel binaries.",
+                content="Layer 2 (L2) is Lukas Omega, the Kinetic layer with Saltare/Cribo/Rotel binaries.",
                 meta={"source": "EMPIRE_MAP.md"}
             )
         ]

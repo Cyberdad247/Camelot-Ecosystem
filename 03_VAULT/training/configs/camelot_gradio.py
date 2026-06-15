@@ -83,7 +83,7 @@ def build_spire_v3():
                         gr.HTML("<div class='stat-card'><b>SIR HELIO</b><br/>L5 Context<br/><span class='knight-active'>ONLINE</span></div>")
                         gr.HTML("<div class='stat-card'><b>SIR GOOSE</b><br/>L5 Autonomy<br/><span class='knight-active'>ARMED</span></div>")
                     with gr.Row():
-                        gr.HTML("<div class='stat-card'><b>ANYA Ω</b><br/>L7 Compiler<br/><span class='knight-active'>RADIANT</span></div>")
+                        gr.HTML("<div class='stat-card'><b>ANYA Omega</b><br/>L7 Compiler<br/><span class='knight-active'>RADIANT</span></div>")
                         gr.HTML("<div class='stat-card'><b>LADY APIS</b><br/>L5 Forager<br/><span class='knight-active'>ACTIVE</span></div>")
                         gr.HTML("<div class='stat-card'><b>VOX MINI</b><br/>L2 Vocal<br/><span class='knight-active'>SYNCED</span></div>")
 
@@ -105,7 +105,7 @@ def build_spire_v3():
                 
                 gr.Markdown("### 🌀 RUNIC ACTIONS")
                 with gr.Row():
-                    s_btn = gr.Button("Ω_SYNC", variant="secondary")
+                    s_btn = gr.Button("Omega_SYNC", variant="secondary")
                     f_btn = gr.Button("//FORGE", variant="secondary")
                 b_btn = gr.Button("UNLEASH BORIS", variant="primary")
                 

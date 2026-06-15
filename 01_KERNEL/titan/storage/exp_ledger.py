@@ -26,7 +26,7 @@ from typing import Optional
 
 BASE_EXP_VALUE = 10  # ALWAYS 10. NO multipliers. NO bonuses.
 ARCHIVE_AFTER_DAYS = 365
-STORAGE_ROOT = Path("Titan_Ω_Hypergraph")
+STORAGE_ROOT = Path("Titan_Omega_Hypergraph")
 ARCHIVE_ROOT = STORAGE_ROOT / "Archive" / "EXP"
 
 

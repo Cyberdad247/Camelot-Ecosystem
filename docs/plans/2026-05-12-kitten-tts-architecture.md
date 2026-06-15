@@ -7,7 +7,7 @@ The "Kitten-Crystal" system leverages the Septem Regna stack to achieve sub-200m
 
 | LAYER | INTEGRATION POINT | OPTIMIZATION |
 |-------|-------------------|--------------|
-| **L7 ETHEREAL** | Anya Ω Gate | Triple-QFT mapping of intent to "Kitten" prosody vectors. |
+| **L7 ETHEREAL** | Anya Omega Gate | Triple-QFT mapping of intent to "Kitten" prosody vectors. |
 | **L6 GOVERNANCE** | Iron Gate | Validates audio voltage levels to prevent hardware feedback loops. |
 | **L5 AGENTIC** | Bio-Swarm | Dispatches parallel phoneme synthesis across available CPU cores. |
 | **L4 SEMANTIC** | Cloud Brain (UKG) | Syncs kitten-specific vocal fingerprints (phonetic UKG nodes). |

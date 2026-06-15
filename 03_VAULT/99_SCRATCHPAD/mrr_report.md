@@ -15,4 +15,4 @@
 - **Sentinel Compliance**: 100%
 
 ---
-*Signed by Sir Oracle_Ω*
+*Signed by Sir Oracle_Omega*

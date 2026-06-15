@@ -42,7 +42,7 @@
 
   "persona_vectors": {
     "@type": "PersonaRegistry",
-    "ANYA_Ω": {
+    "ANYA_Omega": {
       "@type": "Persona",
       "archetype": "Meta_Compiler_Soul_Integrated",
       "layer": "L7",
@@ -64,7 +64,7 @@
   },
 
   "sameAs": "UKG_NANO_SWARM_V1000.json",
-  "isPartOf": "CAMELOT_APEX_Ω_PRIME_CRYSTAL",
+  "isPartOf": "CAMELOT_APEX_Omega_PRIME_CRYSTAL",
   "dateCreated": "2026-05-24",
-  "creator": "ANYA_Ω + SIR_BORRIS"
+  "creator": "ANYA_Omega + SIR_BORRIS"
 }

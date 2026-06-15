@@ -68,9 +68,9 @@ class VoxHUD(Static):
         grid = Table.grid(expand=True)
         grid.add_column()
         grid.add_column()
-        grid.add_row("ANYA Ω  ", get_bar(self.anya_pulse, "magenta"))
-        grid.add_row("BORIS Ω ", get_bar(self.boris_pulse, "cyan"))
-        grid.add_row("MERLIN Ω", get_bar(self.merlin_pulse, "yellow"))
+        grid.add_row("ANYA Omega  ", get_bar(self.anya_pulse, "magenta"))
+        grid.add_row("BORIS Omega ", get_bar(self.boris_pulse, "cyan"))
+        grid.add_row("MERLIN Omega", get_bar(self.merlin_pulse, "yellow"))
 
         return Panel(grid, title="[bold]Multi-Agent Vox HUD[/]", border_style="blue")
 

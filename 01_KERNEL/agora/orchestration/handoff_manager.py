@@ -9,7 +9,7 @@ import time
 class HandoffManager:
     def __init__(self, titan_link):
         self.titan_link = titan_link
-        self.active_knight = "Anya_Ω"
+        self.active_knight = "Anya_Omega"
 
     def transfer_control(self, from_knight, to_knight, reason):
         """
@@ -37,9 +37,9 @@ class HandoffManager:
         return event
 
     def _generate_cue(self, knight, reason):
-        if knight == "Merlin_Ω":
+        if knight == "Merlin_Omega":
             return "Consulting the Arch-Mage for strategy."
-        elif knight == "Lukas_Ω":
+        elif knight == "Lukas_Omega":
             return "Handing off to Lukas. Kinetic execution starting."
         elif knight == "Sir_Sentinel":
             return "Sentinel is scanning for threats."

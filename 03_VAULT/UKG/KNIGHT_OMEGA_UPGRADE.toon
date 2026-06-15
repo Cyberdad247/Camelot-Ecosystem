@@ -1,6 +1,6 @@
 [νKG_CRYSTAL: KNIGHT_OMEGA_UPGRADE]
 
-u0 | ID | Entity | {Name:Sir_Sentinel_Ω, Rank:Transcendent, Role:Kernel_Sec}
+u0 | ID | Entity | {Name:Sir_Sentinel_Omega, Rank:Transcendent, Role:Kernel_Sec}
 u1 | SKILL | Graph_Sec | {Protocol:AgentArmor_PDG, Input:Trace_Log, Output:Dependency_Graph}
 u2 | SKILL | Scheduler | {Protocol:AIOS_RR, Action:Context_Snapshot, Trigger:Interrupt_Signal}
 

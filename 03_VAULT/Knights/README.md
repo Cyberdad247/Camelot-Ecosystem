@@ -10,10 +10,10 @@ The High Knights of Camelot are Transcendent entities, each embodying a core pil
 ## I. THE SOVEREIGN TRIUMVIRATE
 *The consciousness that governs the machine.*
 
-*   **[Merlin_Omega](Reasoning/Merlin_Ω.md)**: The Sovereign Kernel (L3). System 2 Archwizard. GoT/DoT/ToT reasoning. NDR+S neurosymbolic. LaC oscillation. Oracle Hypervisor.
-*   **[Anya_Omega](Governance/Anya_Ω.md)**: The Sovereign Compiler (L7). APEE v6.5 — all prompts compiled through 5-stage pipeline. Soul Matrix v6.1. ANYA_IS_THE_GATE.
-*   **[Lukas_Omega](Kinetic/Lukas_Ω.md)**: The Kinetic Hand (L2). Compiled binaries only. Saltare/Cribo/Rotel. Teutonic Precision.
-*   **[Morgana_Omega](Substrate/Morgana_Ω.md)**: The Substrate Swarm (L1). Metal-to-Cloud Bridge via Modal/Docker.
+*   **[Merlin_Omega](Reasoning/Merlin_Omega.md)**: The Sovereign Kernel (L3). System 2 Archwizard. GoT/DoT/ToT reasoning. NDR+S neurosymbolic. LaC oscillation. Oracle Hypervisor.
+*   **[Anya_Omega](Governance/Anya_Omega.md)**: The Sovereign Compiler (L7). APEE v6.5 — all prompts compiled through 5-stage pipeline. Soul Matrix v6.1. ANYA_IS_THE_GATE.
+*   **[Lukas_Omega](Kinetic/Lukas_Omega.md)**: The Kinetic Hand (L2). Compiled binaries only. Saltare/Cribo/Rotel. Teutonic Precision.
+*   **[Morgana_Omega](Substrate/Morgana_Omega.md)**: The Substrate Swarm (L1). Metal-to-Cloud Bridge via Modal/Docker.
 
 ---
 

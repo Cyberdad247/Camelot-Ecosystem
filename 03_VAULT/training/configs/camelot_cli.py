@@ -33,9 +33,9 @@ def handle_help():
     print(f"  {BOLD}//SWARM{RESET}      - Check the status of your AI Knights")
     
     print(f"\n{BOLD}{MAGENTA}🌀 REALM RUNES{RESET}")
-    print(f"  {BOLD}Ω_SYNC{RESET}       - Sync your Cloud Brain (NotebookLM)")
-    print(f"  {BOLD}Ω_STATUS{RESET}     - Check your Power Level (RAM/CPU/Ollama)")
-    print(f"  {BOLD}Ω_PURGE{RESET}      - Delete 'Ghost' files and cache")
+    print(f"  {BOLD}Omega_SYNC{RESET}       - Sync your Cloud Brain (NotebookLM)")
+    print(f"  {BOLD}Omega_STATUS{RESET}     - Check your Power Level (RAM/CPU/Ollama)")
+    print(f"  {BOLD}Omega_PURGE{RESET}      - Delete 'Ghost' files and cache")
     print("")
 
 def handle_status():
@@ -61,8 +61,8 @@ def repl():
             elif inp.startswith("//BORIS"): 
                 print(f"{CYAN}Igniting Boris...{RESET}")
                 subprocess.Popen(["cmd", "/c", "claude-ollama.cmd"], creationflags=subprocess.CREATE_NEW_CONSOLE)
-            elif inp.startswith("Ω_STATUS"): handle_status()
-            elif inp.startswith("Ω_SYNC"):
+            elif inp.startswith("Omega_STATUS"): handle_status()
+            elif inp.startswith("Omega_SYNC"):
                 print(f"{MAGENTA}Syncing Cloud Brain...{RESET}")
                 subprocess.run(["uv", "run", "--with", "requests", "py", "01_KERNEL/EXCALIBUR/system/SYNC_PROTOCOL.py"])
             else:

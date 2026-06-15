@@ -3,7 +3,7 @@
 """
 Graph-of-Thought (GoT) Expander
 
-Creates intermediate reasoning nodes as ephemeral graph fragments stored in Ω-Flux.
+Creates intermediate reasoning nodes as ephemeral graph fragments stored in Omega-Flux.
 These fragments help track multi-step reasoning chains and enable trace reconstruction.
 """
 
@@ -34,7 +34,7 @@ class GoTExpander:
     """
     Graph-of-Thought expansion engine for multi-step reasoning.
     
-    Creates ephemeral reasoning fragments stored in Ω-Flux with TTL.
+    Creates ephemeral reasoning fragments stored in Omega-Flux with TTL.
     These fragments form a directed acyclic graph (DAG) of thought progression.
     """
     
@@ -69,7 +69,7 @@ class GoTExpander:
             }
         )
         
-        # Store in Ω-Flux
+        # Store in Omega-Flux
         self._store_thought_in_flux(node)
         
         # Track in active chains
@@ -124,7 +124,7 @@ class GoTExpander:
             }
         )
         
-        # Store in Ω-Flux
+        # Store in Omega-Flux
         self._store_thought_in_flux(node)
         
         # Add to active chain
@@ -189,7 +189,7 @@ class GoTExpander:
         if session_id in self.active_chains:
             return self.active_chains[session_id]
         
-        # Try to reconstruct from Ω-Flux
+        # Try to reconstruct from Omega-Flux
         flux_events = self.titan.flux.get_session_events(session_id)
         
         thoughts = []
@@ -240,7 +240,7 @@ class GoTExpander:
         return f"thought_{hashlib.sha256(base.encode()).hexdigest()[:12]}"
     
     def _store_thought_in_flux(self, node: ThoughtNode):
-        """Store ThoughtNode in Ω-Flux as ephemeral event."""
+        """Store ThoughtNode in Omega-Flux as ephemeral event."""
         content = f"[GoT] Step {node.step_number} ({node.reasoning_type}): {node.content}"
         
         self.titan.flux.store_event(

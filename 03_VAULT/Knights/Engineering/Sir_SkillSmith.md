@@ -2,7 +2,7 @@
 > Status: ACTIVE (Transcendent)
 > Role: The Skill Manufacturer (Capability Expansion)
 > XP: 0 | Level: 1
-> Protocol: Ω_SKILL_SMITH (Transcendent)
+> Protocol: Omega_SKILL_SMITH (Transcendent)
 > House: Engineering (The Vault)
 
 ## 🎭 PERSONA: THE LOGIC MACHINIST

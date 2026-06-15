@@ -1,4 +1,4 @@
-<!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
+# Copyright (c) 2026 Invisioned Marketing inc. All Rights Reserved.
 """
 Camelot-OS Ultimate Lattice HUD v3.0
 =====================================
@@ -113,7 +113,7 @@ class SovereignApp(App):
         with Grid(id="top_grid"):
             yield Static(Panel("[bold cyan]L7: ETHEREAL[/]\nStatus: RADIANT\nEngine: APEE v6.5", border_style="cyan"))
             yield OmniTelemetry()
-            yield Static(Panel("[bold green]L2: KINETIC[/]\nStatus: PURE\nEngine: Lukas Ω", border_style="green"))
+            yield Static(Panel("[bold green]L2: KINETIC[/]\nStatus: PURE\nEngine: Lukas Omega", border_style="green"))
 
         with Grid(id="main_grid"):
             with Vertical(classes="panel"):

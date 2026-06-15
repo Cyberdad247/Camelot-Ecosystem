@@ -1,7 +1,7 @@
 # CAMELOT MISSION: ONYX FORGE BLUEPRINT
 ## Task DAG — one-vizion-records Full Remediation
 **Forged:** 2026-04-25  
-**Architect:** ANYA_Ω (Gate) + SIR_ALEX (Cognitive) + SIR_LINK (ATC)  
+**Architect:** ANYA_Omega (Gate) + SIR_ALEX (Cognitive) + SIR_LINK (ATC)  
 **Lead:** SIR_BORIS v3.0  
 **Target repo:** `C:\Users\vizio\onyx`  
 **Source audit:** `//BOOT Session 2026-04-25`  

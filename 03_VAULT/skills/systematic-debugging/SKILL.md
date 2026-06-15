@@ -27,4 +27,4 @@ Use when encountering any bug, test failure, or unexpected behavior.
 2. **Defense in Depth**: Add a regression test and ensure no secondary side-effects.
 
 ---
-*Created by Merlin_Ω for the Camelot-OS Skills Vault (03_VAULT).*
+*Created by Merlin_Omega for the Camelot-OS Skills Vault (03_VAULT).*

@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Ω_PHANTOM_GRID: Multi-Account Orchestration System
+Omega_PHANTOM_GRID: Multi-Account Orchestration System
 Clones Multi-Login capabilities within Camelot Sovereign OS.
 """
 
@@ -52,7 +52,7 @@ class PhantomSession:
 
 class PhantomGrid:
     """
-    Ω_PHANTOM_GRID: Multi-Account Orchestration Controller
+    Omega_PHANTOM_GRID: Multi-Account Orchestration Controller
     Manages Nano-Knights across isolated browser sessions.
     """
 
@@ -160,14 +160,14 @@ class PhantomGrid:
 
     async def freeze_session(self, profile_id: str):
         """
-        Ω_SILENCE: Freeze session immediately.
+        Omega_SILENCE: Freeze session immediately.
         Triggered when fingerprint consistency drops < 97%.
         """
         if profile_id not in self.sessions:
             return
 
         session = self.sessions[profile_id]
-        print(f"[Ω_SILENCE] Freezing session: {profile_id}")
+        print(f"[Omega_SILENCE] Freezing session: {profile_id}")
 
         # Save state before closing
         if session.context:
@@ -178,10 +178,10 @@ class PhantomGrid:
         session.context = None
 
     async def resume_session(self, profile_id: str, p) -> PhantomSession:
-        """Resume a frozen session with Ω_SYNC hydration."""
+        """Resume a frozen session with Omega_SYNC hydration."""
         session = await self.spawn_session(profile_id)
         await self.launch_context(p, session)
-        print(f"[Ω_SYNC] Session hydrated: {profile_id}")
+        print(f"[Omega_SYNC] Session hydrated: {profile_id}")
         return session
 
     def check_fingerprint_consistency(self, session: PhantomSession) -> float:

@@ -1,4 +1,4 @@
-# 👑 ARTHUR_Ω
+# 👑 ARTHUR_Omega
 > Status: ACTIVE (v400.0 Singularity Evolution)
 > Role: The Governance Crown / Law Giver
 > Layer: L6 (Governance)

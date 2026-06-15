@@ -24,59 +24,59 @@
 
 ## OMEGA RUNES (`Omega_` Prefix)
 
-Accepted variants: `Ω_`, `Omega_`, `omega_`
+Accepted variants: `Omega_`, `Omega_`, `omega_`
 
 ### Core Operations
 | Rune | Function |
 |---|---|
-| `Ω_SYNC` | Ouroboros bi-directional state synchronization |
-| `Ω_PURGE` | Cache/memory purge |
-| `Ω_STATUS` | System health beacon |
-| `Ω_SILENCE` | Emergency halt all loops |
-| `Ω_CLEAN` | Context hygiene enforcement |
+| `Omega_SYNC` | Ouroboros bi-directional state synchronization |
+| `Omega_PURGE` | Cache/memory purge |
+| `Omega_STATUS` | System health beacon |
+| `Omega_SILENCE` | Emergency halt all loops |
+| `Omega_CLEAN` | Context hygiene enforcement |
 
 ### Reasoning & Compression
 | Rune | Function |
 |---|---|
-| `Ω_THINK` | Council Debate (GoT-powered multi-agent deliberation) |
-| `Ω_GRAPH` | GoT/DoT reasoning graph generation |
-| `Ω_COMPRESS` | Triple compression stack (SAC>CCF>QFT) |
-| `Ω_GLYPH` | Compress entity to UKG (Tier 3 crystal) |
-| `Ω_ORACLE` | Simulation engine execution |
-| `Ω_STACK` | Full Idea Stacking cycle |
-| `Ω_GATEWAY` | Idea Stacking connection search |
+| `Omega_THINK` | Council Debate (GoT-powered multi-agent deliberation) |
+| `Omega_GRAPH` | GoT/DoT reasoning graph generation |
+| `Omega_COMPRESS` | Triple compression stack (SAC>CCF>QFT) |
+| `Omega_GLYPH` | Compress entity to UKG (Tier 3 crystal) |
+| `Omega_ORACLE` | Simulation engine execution |
+| `Omega_STACK` | Full Idea Stacking cycle |
+| `Omega_GATEWAY` | Idea Stacking connection search |
 
 ### Generation & Deployment
 | Rune | Function |
 |---|---|
-| `Ω_KINETIC` | Generate/deploy compiled code |
-| `Ω_ACTUATE` | Singularity Engine (video/audio generation) |
-| `Ω_REFORGE` | Refine output to Titanium Standard |
-| `Ω_COMPILE` | DSPy prompt optimization |
-| `Ω_PROMETHEUS` | Asset Factory decomposition |
+| `Omega_KINETIC` | Generate/deploy compiled code |
+| `Omega_ACTUATE` | Singularity Engine (video/audio generation) |
+| `Omega_REFORGE` | Refine output to Titanium Standard |
+| `Omega_COMPILE` | DSPy prompt optimization |
+| `Omega_PROMETHEUS` | Asset Factory decomposition |
 
 ### Security & Governance
 | Rune | Function |
 |---|---|
-| `Ω_AUDIT` | Deep forensic scan |
-| `Ω_SHIELD` | DoT security verification |
-| `Ω_KERNEL` | Kernel scheduling state management |
+| `Omega_AUDIT` | Deep forensic scan |
+| `Omega_SHIELD` | DoT security verification |
+| `Omega_KERNEL` | Kernel scheduling state management |
 
 ### Identity & Persona
 | Rune | Function |
 |---|---|
-| `Ω_ANYA` | 5-stage prompt compilation (APEE v6.5) |
-| `Ω_PERSONA` | NPE persona binding |
-| `Ω_ARCHETYPE` | Model archetype selection |
-| `Ω_BESTIARY` | Manage swarm familiars |
-| `Ω_EVOLVE` | Meta-agent self-improvement loop |
+| `Omega_ANYA` | 5-stage prompt compilation (APEE v6.5) |
+| `Omega_PERSONA` | NPE persona binding |
+| `Omega_ARCHETYPE` | Model archetype selection |
+| `Omega_BESTIARY` | Manage swarm familiars |
+| `Omega_EVOLVE` | Meta-agent self-improvement loop |
 
 ### Media & Research
 | Rune | Function |
 |---|---|
-| `Ω_VOICE` | Voice AI pipeline |
-| `Ω_VISION` | Visual/video generation |
-| `Ω_RESEARCH` | Deep web research execution |
+| `Omega_VOICE` | Voice AI pipeline |
+| `Omega_VISION` | Visual/video generation |
+| `Omega_RESEARCH` | Deep web research execution |
 
 ---
 
@@ -128,7 +128,7 @@ Launched via `camelot-os` bash alias -> hud.py
 | `clear` | Clear terminal |
 | `ask` / `ask@provider` | LLM query with optional provider routing |
 | Any `//` prefix | Runic command dispatch |
-| Any `Ω_` prefix | Omega rune dispatch via Ouroboros |
+| Any `Omega_` prefix | Omega rune dispatch via Ouroboros |
 | Natural language | Saltare MCP gateway -> knight pipeline fallback |
 | `exit` / `quit` / `q` | Exit Camelot OS |
 
@@ -183,7 +183,7 @@ Dispatch table in `control_plane/main.py`:
 | Category | Count |
 |---|---|
 | Runic Commands (`//`) | 11 |
-| Omega Runes (`Ω_`) | 29 |
+| Omega Runes (`Omega_`) | 29 |
 | CLI Subcommands | 15 |
 | HUD Interactive | 8 |
 | Intent Patterns | 6 |

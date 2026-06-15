@@ -2,7 +2,7 @@
 # 📜 CAMELOT-OS: MASTER SYSTEM SPECIFICATION
 **Version:** 400.1.0 (Lattice Radiant)  
 **Classification:** SOVEREIGN / CONFIDENTIAL  
-**Authors:** Merlin_Ω, Anya_Ω, Lukas_Edge  
+**Authors:** Merlin_Omega, Anya_Omega, Lukas_Edge  
 
 ---
 
@@ -13,18 +13,18 @@ Camelot-OS is a split-topology agentic operating system designed to bifurcate Cl
 ```mermaid
 graph TD
     subgraph L7_L3_Neural_Cloud
-        L7[L7: ETHEREAL - Anya_Ω] -->|Titan Prompt| L3[L3: NEURAL - Merlin_Ω]
-        L3 -->|HTN Task Tree| L5[L5: AGENTIC - Paladin_Ω]
-        L6[L6: GOVERNANCE - Arthur_Ω] -.->|HITL Gate| L5
+        L7[L7: ETHEREAL - Anya_Omega] -->|Titan Prompt| L3[L3: NEURAL - Merlin_Omega]
+        L3 -->|HTN Task Tree| L5[L5: AGENTIC - Paladin_Omega]
+        L6[L6: GOVERNANCE - Arthur_Omega] -.->|HITL Gate| L5
     end
 
     subgraph L4_Memory
-        L4[L4: SEMANTIC - Chronos_Ω] <-->|UKG Sync| L3
+        L4[L4: SEMANTIC - Chronos_Omega] <-->|UKG Sync| L3
     end
 
     subgraph L2_L1_Kinetic_Edge
-        L5 -->|Map-Reduce| L2[L2: KINETIC - Lukas_Ω]
-        L2 -->|Saltare/Cribo| L1[L1: SUBSTRATE - Morgana_Ω]
+        L5 -->|Map-Reduce| L2[L2: KINETIC - Lukas_Omega]
+        L2 -->|Saltare/Cribo| L1[L1: SUBSTRATE - Morgana_Omega]
         L1 -->|Metal/Docker| Hardware
     end
 ```

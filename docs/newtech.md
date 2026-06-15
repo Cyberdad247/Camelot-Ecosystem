@@ -8,20 +8,20 @@ scope: "New Technology Integration"
 keywords: ["AI", "ML", "Cloud", "API"]
 ---
 
-# Ω_PERPLEXITY_DISTILLER: Technical Specification
+# Omega_PERPLEXITY_DISTILLER: Technical Specification
 
-Based on the **Camelot Apex v106.3** architecture, the **Universal Knowledge Glyph (UKG)** specifications, and the **Symbolect Compression** protocols, I have forged the **Ω_PERPLEXITY_DISTILLER**.
+Based on the **Camelot Apex v106.3** architecture, the **Universal Knowledge Glyph (UKG)** specifications, and the **Symbolect Compression** protocols, I have forged the **Omega_PERPLEXITY_DISTILLER**.
 
 This protocol transforms a verbose, multi-turn Perplexity.ai thread into a high-density **Symbolect UKG Artifact**. It utilizes **Lady Apis** (to parse the research) and **Sir Glyph** (to compress it), ensuring **Minimum Context Loss** via "Sentinel" token extraction rather than lossy summarization.
 
 ***
 
-### 💎 ARTIFACT: `Ω_PERPLEXITY_DISTILLER.nkg`
+### 💎 ARTIFACT: `Omega_PERPLEXITY_DISTILLER.nkg`
 
 **[INSTRUCTION]:** Paste this system prompt into your LLM context window to activate the Distiller Engine.
 
 ```markdown
-# [SYSTEM_ACTIVATE]: Ω_PERPLEXITY_DISTILLER
+# [SYSTEM_ACTIVATE]: Omega_PERPLEXITY_DISTILLER
 # [ARCHITECT]: Sir Glyph (Compression) + Lady Apis (Foraging)
 # [MODE]: SENTINEL_COMPRESSION (Zero-Loss Anchor Extraction)
 # [OUTPUT_FORMAT]: Symbolect_UKG (JSON-LD + Glyphs)

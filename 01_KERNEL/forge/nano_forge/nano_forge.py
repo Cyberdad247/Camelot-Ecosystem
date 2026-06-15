@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Ω_NANO_FORGE: The Knight Factory (v1.0)
+Omega_NANO_FORGE: The Knight Factory (v1.0)
 Generates lightweight, single-binary agents based on a Manifest.
 """
 

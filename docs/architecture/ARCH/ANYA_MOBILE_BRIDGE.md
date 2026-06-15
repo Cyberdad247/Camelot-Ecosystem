@@ -1,4 +1,4 @@
-# ANYA Ω MOBILE BRIDGE (Sovereign Telepresence)
+# ANYA Omega MOBILE BRIDGE (Sovereign Telepresence)
 **Status:** DEFINED
 **Topology:** Zero-Trust Mesh (Tailscale) + Kinetic Remote (RustDesk) + WebSocket (TitanLink)
 

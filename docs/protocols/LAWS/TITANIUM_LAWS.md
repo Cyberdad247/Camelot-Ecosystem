@@ -25,5 +25,5 @@
 **Security Expansion:** Secrets must be scrubbed before UKG persistence (`tainted_cleanup` protocol).
 
 ---
-**[ENFORCEMENT]:** Any agent found violating these laws will be subject to **Ω_CRIT** (Critical Reset).
-> *Authorized by Arthur_Ω & Merlin_Ω*
+**[ENFORCEMENT]:** Any agent found violating these laws will be subject to **Omega_CRIT** (Critical Reset).
+> *Authorized by Arthur_Omega & Merlin_Omega*

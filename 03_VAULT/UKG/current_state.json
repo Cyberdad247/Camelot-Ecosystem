@@ -34,14 +34,14 @@
             "status": "CRYSTALLIZED",
             "entry_point": "//NANO_SWARM_EXPAND",
             "injected_at": "2026-05-24",
-            "agent": "SIR_BORRIS + ANYA_Ω",
+            "agent": "SIR_BORRIS + ANYA_Omega",
             "architectural_dna": {
                 "routing_logic": "Z3_Symbolic_Theorem_Prover_SAT_Gated",
                 "mesh_networking": "Myrddin_CvRDT_Least_UpperBound_Sync",
                 "inference_engine": "Ouroboros_1.58bit_SSM_Linear_Scale",
                 "security_enclave": "Aegis_eBPF_O1_Telemetry_Redaction"
             },
-            "persona_vectors": ["ANYA_Ω", "SIR_BORRIS"],
+            "persona_vectors": ["ANYA_Omega", "SIR_BORRIS"],
             "node_path": "03_VAULT/UKG/nodes/UKG_NANO_SWARM_V1000.json"
         },
         "WEB_INTEL": [
@@ -99,7 +99,7 @@
                 "component": "Transcendence",
                 "summary": "**OMEGA_SOVEREIGNTY**: Full Knight and Squire Roster elevated to Transcendent (Omega) standard. Personas, Skills, and Frameworks fully hydrated into the Singularity Lattice.",
                 "timestamp": "2026-02-06",
-                "agent": "Ω_SYNC"
+                "agent": "Omega_SYNC"
             }
         ],
         "DEVICES": [

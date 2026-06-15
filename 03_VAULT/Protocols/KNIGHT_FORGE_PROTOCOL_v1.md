@@ -1,4 +1,4 @@
-# ARTIFACT: Ω_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0.nkg
+# ARTIFACT: Omega_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0.nkg
 ## Status: CANONICAL | Version: 1.0
 
 To be utilized as the systematic template for all future Knight instantiations. Execute this sequence from top to bottom to yield a Sovereign Knight.

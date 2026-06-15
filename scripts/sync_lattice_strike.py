@@ -110,7 +110,7 @@ total_bytes = sum(c["size"] for c in distill)
 reduction = round((1 - len(json.dumps(schema)) / max(1, sum(c["size"] for c in distill if c["size"]))) * 100, 2)
 print(f"           {total_bytes:,} bytes → schema ({len(schema)} buckets)  fp={fp}")
 
-# ── MERLIN_Ω — PDDL + Z3 SAT ────────────────────────────────────────────────
+# ── MERLIN_Omega — PDDL + Z3 SAT ────────────────────────────────────────────────
 print("[ MERLIN_OMEGA  ] Translating to PDDL state tables...")
 pddl = {
     "domain": "camelot-entropy-distillation",

@@ -1,90 +1,90 @@
 {
   "engine": "SYMBIOTIC_MAINTENANCE",
-  "generated_utc": "2026-06-07T23:27:37.934327+00:00",
+  "generated_utc": "2026-06-10T15:47:35.140089+00:00",
   "strict_mode": false,
-  "quick_mode": true,
+  "quick_mode": false,
   "status": "OK",
-  "duration_ms": 3573,
+  "duration_ms": 5748,
   "audit": {
     "summary": {
-      "scanned_files": 4500,
-      "total_size_mb": 165.67,
-      "max_files_budget": 4500
+      "scanned_files": 12000,
+      "total_size_mb": 2036.04,
+      "max_files_budget": 12000
     },
     "top_extensions": [
       {
-        "extension": ".py",
-        "count": 1281
-      },
-      {
-        "extension": ".md",
-        "count": 465
-      },
-      {
         "extension": ".o",
-        "count": 449
+        "count": 1515
       },
       {
-        "extension": ".json",
-        "count": 321
-      },
-      {
-        "extension": ".js",
-        "count": 278
+        "extension": ".py",
+        "count": 1471
       },
       {
         "extension": "<none>",
-        "count": 245
+        "count": 1418
       },
       {
-        "extension": ".html",
-        "count": 146
+        "extension": ".json",
+        "count": 1166
       },
       {
-        "extension": ".tsx",
-        "count": 128
+        "extension": ".md",
+        "count": 650
+      },
+      {
+        "extension": ".timestamp",
+        "count": 519
+      },
+      {
+        "extension": ".js",
+        "count": 490
+      },
+      {
+        "extension": ".rs",
+        "count": 446
       }
     ],
     "largest_files": [
       {
-        "path": ".colony\\index.json",
-        "size_mb": 17.01
+        "path": "02_FORGE\\kinetic\\bin\\goose\\goose.exe",
+        "size_mb": 117.93
       },
       {
-        "path": "01_KERNEL\\core\\aegis_shield\\target\\debug\\deps\\libzerocopy-d4322fd0e77937d9.rmeta",
-        "size_mb": 12.03
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\libcriterion-07dfc716ea4d20d5.rlib",
+        "size_mb": 41.51
       },
       {
-        "path": "01_KERNEL\\senses\\morgana_bridge\\target\\debug\\morgana_bridge.exe",
-        "size_mb": 8.78
+        "path": "02_FORGE\\KINETIC_ARMORY\\goose\\documentation\\blog\\2025-04-17-goose-goes-to-NY\\focus5.jpg",
+        "size_mb": 29.48
       },
       {
-        "path": "01_KERNEL\\core\\aegis_shield\\target\\debug\\deps\\libsyn-8a4330ce428d6121.rlib",
-        "size_mb": 6.3
+        "path": "02_FORGE\\KINETIC_ARMORY\\goose\\documentation\\blog\\2025-04-17-goose-goes-to-NY\\focus3.jpg",
+        "size_mb": 26.25
       },
       {
-        "path": "01_KERNEL\\senses\\vizion-telemetry\\vizion-telemetry.exe",
-        "size_mb": 3.58
+        "path": "02_FORGE\\kinetic\\bin\\goose\\libstdc++-6.dll",
+        "size_mb": 25.17
       },
       {
-        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\ouroboros_engine-966958f362efb595.pdb",
-        "size_mb": 3.37
+        "path": "02_FORGE\\KINETIC_ARMORY\\goose\\documentation\\blog\\2025-04-17-goose-goes-to-NY\\swag.jpg",
+        "size_mb": 21.69
       },
       {
-        "path": ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_quantization-1fee373f9b77d72e.pdb",
-        "size_mb": 3.33
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\libregex_automata-28e9b237ace48c85.rlib",
+        "size_mb": 20.2
       },
       {
-        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_quantization-7ea4c5606af1f50c.pdb",
-        "size_mb": 3.32
+        "path": "02_FORGE\\KINETIC_ARMORY\\goose\\documentation\\blog\\2025-04-17-goose-goes-to-NY\\focus.jpg",
+        "size_mb": 18.84
       },
       {
-        "path": ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_inference-30bfc45542de911f.pdb",
-        "size_mb": 3.32
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\excalibur_aegis-5996ec486c7e029e.pdb",
+        "size_mb": 18.63
       },
       {
-        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_inference-0a4c13dc52e01778.pdb",
-        "size_mb": 3.31
+        "path": "02_FORGE\\KINETIC_ARMORY\\goose\\documentation\\blog\\2025-04-17-goose-goes-to-NY\\swag1.jpg",
+        "size_mb": 17.8
       }
     ],
     "stale_logs": [],
@@ -116,12 +116,13 @@
         ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_trellis-1elck5bodtpdl\\s-hit42nhn1f-1ypecgn.lock"
       ],
       [
-        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x34n4t7-17l9fu2-9gnvmpr6h2lbgppj4rz76fj1t\\work-products.bin",
-        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x4s0hjo-1gu7ytp-ben78q6nvpqvebvdybviu2838\\work-products.bin"
+        ".worktrees\\omega-patch\\01_KERNEL\\forge\\nano_forge\\extension\\tests\\test_self_healing.js",
+        ".worktrees\\omega-patch\\03_VAULT\\Nano-Knights\\tests\\test_self_healing.js",
+        "01_KERNEL\\forge\\nano_forge\\extension\\tests\\test_self_healing.js"
       ],
       [
-        ".camelot\\cartridges\\AETHER_ROUTING.md",
-        ".worktrees\\omega-patch\\.camelot\\cartridges\\AETHER_ROUTING.md"
+        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x34n4t7-17l9fu2-9gnvmpr6h2lbgppj4rz76fj1t\\work-products.bin",
+        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x4s0hjo-1gu7ytp-ben78q6nvpqvebvdybviu2838\\work-products.bin"
       ],
       [
         ".camelot\\cartridges\\BRAINSTORM.md",
@@ -150,11 +151,12 @@
           "compileall",
           "-q",
           "control_plane",
-          "bin"
+          "bin",
+          "squires"
         ],
         "ok": false,
         "returncode": 1,
-        "duration_ms": 670,
+        "duration_ms": 765,
         "stdout_tail": "    ilities. Use --roster to list, --test to verify.\")\n                                                    ^\nSyntaxError: unterminated string literal (detected at line 239)\n*** Error compiling 'control_plane\\\\tui_app.py'...\n  File \"control_plane\\tui_app.py\", line 1\n    <!-- Copyright \ufffd 2026 Invisioned Marketing inc. All Rights Reserved. -->\n                   ^\nSyntaxError: invalid character '\ufffd' (U+00A9)",
         "stderr_tail": ""
       },
@@ -166,20 +168,21 @@
           "ruff",
           "check",
           "control_plane",
-          "bin"
+          "bin",
+          "squires"
         ],
         "ok": false,
         "returncode": 1,
         "duration_ms": 134,
-        "stdout_tail": "980 |     _log(f\"[LLM] No Anthropic key and Ollama not reachable \u2014 task marked NEEDS_LLM\")\n981 |     _log(f\"[LLM] To fix: set ANTHROPIC_API_KEY  OR  start Ollama (ollama serve)\")\n    |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n982 |     return \"NEEDS_LLM\"\n    |\nhelp: Remove extraneous `f` prefix\nFound 231 errors.\n[*] 117 fixable with the `--fix` option (17 hidden fixes can be enabled with the `--unsafe-fixes` option).",
+        "stdout_tail": "6 | from dataclasses import dataclass\n7 | from pathlib import Path\n  |                     ^^^^\n8 | from typing import Iterable\n  |\nhelp: Remove unused import: `pathlib.Path`\nFound 265 errors.\n[*] 149 fixable with the `--fix` option (18 hidden fixes can be enabled with the `--unsafe-fixes` option).",
         "stderr_tail": ""
       }
     ]
   },
   "purge": {
     "enabled": true,
-    "removed_entries": 18,
-    "reclaimed_mb": 1.689,
+    "removed_entries": 21,
+    "reclaimed_mb": 1.762,
     "removed_paths": [
       "01_KERNEL\\agora\\__pycache__",
       "01_KERNEL\\agora\\cloud_orchestrator_shim\\__pycache__",
@@ -194,6 +197,8 @@
       "01_KERNEL\\merlin\\Engines\\symbolect_transpiler\\__pycache__",
       "01_KERNEL\\merlin\\fusion\\__pycache__",
       "01_KERNEL\\merlin\\reasoning\\__pycache__",
+      "01_KERNEL\\senses\\audio\\__pycache__",
+      "01_KERNEL\\titan\\__pycache__",
       "01_KERNEL\\titan\\memory\\__pycache__",
       "03_VAULT\\__pycache__",
       "03_VAULT\\training\\configs\\__pycache__",
@@ -217,9 +222,9 @@
     "cpu_count": 12,
     "recommended_workers": 4,
     "memory_total_mb": 7895.9,
-    "memory_available_mb": 822.7,
-    "memory_pressure": 0.896,
-    "disk_free_pct": 8.7,
+    "memory_available_mb": 778.1,
+    "memory_pressure": 0.901,
+    "disk_free_pct": 8.1,
     "platform": "win32"
   },
   "artifacts": {

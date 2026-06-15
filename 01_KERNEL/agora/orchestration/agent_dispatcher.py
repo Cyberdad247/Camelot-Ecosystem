@@ -55,7 +55,7 @@ class AgentDispatcher:
         ledger_path = "PROVENANCE_LEDGER.md"
         timestamp = datetime.now().strftime("%Y-%m-%dT%H:%M:%S.%f")
         with open(ledger_path, "a", encoding="utf-8") as f:
-            f.write(f"| {timestamp} | DISPATCHER_Ω | {message} | SUCCESS |\n")
+            f.write(f"| {timestamp} | DISPATCHER_Omega | {message} | SUCCESS |\n")
 
 if __name__ == "__main__":
     # Test Cycle

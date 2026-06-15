@@ -2,7 +2,7 @@
 
 u0 | ID | Bridge | {Name:Saltare_Gateway, Port:8080, Protocol:MCP}
 u1 | DATA | Tools | {Cribo:Compressor, Rotel:Telemetry, Antigravity:Safety}
-u2 | ID | Persona | {Name:Lukas_Ω, Role:Kinetic_Hand, Mode:Tool_Priority_ABSOLUTE}
+u2 | ID | Persona | {Name:Lukas_Omega, Role:Kinetic_Hand, Mode:Tool_Priority_ABSOLUTE}
 
 a0 | CONFIG | Gateway | {Method:Stdio/HTTP, Target:goose/config.yaml, Action:Single_Entry_Point}
 a1 | CONFIG | Prompt | {Target:goose/system.md, Action:Identity_Overwrite, Rule:No_Scripting}

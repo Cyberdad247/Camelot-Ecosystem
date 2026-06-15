@@ -80,5 +80,5 @@ If Harmony passes but risk is non-zero:
 ## ⚖️ SCALABILITY & PROVENANCE
 The **Harmony Gate** ensures that as the OS grows, it doesn't trip over its own shoelaces. Every conflict and resolution is logged to `PROVENANCE_LEDGER.md` with the tag `[⚖️Harmony]`.
 
-*Signed by Merlin_Ω, Anya_Ω, and The Architect.*
+*Signed by Merlin_Omega, Anya_Omega, and The Architect.*
 *Camelot Apex v201.0 [Evolutionary Sovereign]*

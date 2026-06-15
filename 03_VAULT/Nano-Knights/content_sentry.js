@@ -1,4 +1,4 @@
-// Ω_NANO_COUNCIL (v1.2.0)
+// Omega_NANO_COUNCIL (v1.2.0)
 // Runs in the context of the web page.
 
 console.log("[NANO_SWARM] Agents Online. Version 1.2.0");

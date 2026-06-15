@@ -1,0 +1,75 @@
+{
+  "protocol": "CYBERTRON_DAWNING",
+  "event_type": "DAWNING_COMPLETE",
+  "timestamp": "2026-06-10T06:13:04.804151+00:00",
+  "repo_root": "C:\\Users\\vizio\\CAMELOT_OS",
+  "nodes": [
+    {
+      "node": "01_KERNEL",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 3139
+    },
+    {
+      "node": "02_FORGE",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5000
+    },
+    {
+      "node": "03_VAULT",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 5000
+    },
+    {
+      "node": "control_plane",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 1756
+    },
+    {
+      "node": "scripts",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 42
+    },
+    {
+      "node": ".agent",
+      "exists": true,
+      "kind": "directory",
+      "file_count": 6
+    }
+  ],
+  "completed_at": "2026-06-10T06:13:10.182814+00:00",
+  "project": {
+    "project": "Mixed_Case_Project",
+    "path": "C:\\Users\\vizio\\CAMELOT_OS\\.camelot\\projects\\Mixed_Case_Project",
+    "manifest": {
+      "project": "Mixed_Case_Project",
+      "requested_name": "Mixed Case Project",
+      "protocol": "CYBERTRON_DAWNING",
+      "created_or_verified_at": "2026-06-10T06:13:10.181574+00:00",
+      "files": [
+        "blueprint.md",
+        "task.md",
+        "verification.md"
+      ]
+    }
+  },
+  "lady_m": {
+    "status": "sync_invoked",
+    "event_type": "DAWNING_SYNC",
+    "project": "Mixed_Case_Project",
+    "audit_state": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\cybertron_dawning_latest.json"
+  },
+  "pantheon": [
+    "Merlin",
+    "Lady M",
+    "Alex",
+    "Octavian",
+    "Lukas",
+    "Apis",
+    "Sir Codex"
+  ]
+}

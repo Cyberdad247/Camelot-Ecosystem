@@ -6,6 +6,6 @@ u2 | ID | Phase | {Name:SkillGraph_Mapping, Logic:Videneptus_S1-S4, Hierarchy:Sk
 u3 | ID | Phase | {Name:TOON_Encoding, Logic:Token_Density_Max, Format:Character_Sheet}
 
 c0 | CMD | Tactical | {Call://GENESIS, Scope:Task_Agent, Duration:Session}
-c1 | CMD | Strategic | {Call:Ω_GENESIS, Scope:Business_Birthed, Duration:Permanent}
+c1 | CMD | Strategic | {Call:Omega_GENESIS, Scope:Business_Birthed, Duration:Permanent}
 
 x0 | AXIOM | Creation | {Rule:No_Generic_Assistants, Rule:Mandatory_DNA_Anchor, Goal:Sovereign_Authority}

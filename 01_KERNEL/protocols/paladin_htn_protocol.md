@@ -76,5 +76,5 @@ Before committing resources, validate the solves.
 ## ⚖️ SCALABILITY
 Every node in the Paladin Task Tree is an **Autonomous Fragment**. This allows the swarm to scale horizontally, executing multiple sub-goals in parallel without losing the "North Star" alignment.
 
-*Signed by Merlin_Ω and Anya_Ω.*
+*Signed by Merlin_Omega and Anya_Omega.*
 *Camelot Apex v200.0 [Kinetic Sovereign]*

@@ -83,7 +83,7 @@ class SirForgeMaster(BaseKnight):
             "",
             "  Agent lane topology: parallel, dependency-resolved",
             "  Phial slots: assigned per lane",
-            "  Aggregation: MERLIN_Ω synthesis on completion",
+            "  Aggregation: MERLIN_Omega synthesis on completion",
         ]
 
         self._record_swarm_run(blueprint_hash, lane_count)
@@ -110,7 +110,7 @@ class SirForgeMaster(BaseKnight):
             f"  Tick: {tick} | History depth: {len(self._phial_history)}/{self._PHIAL_HISTORY_MAX}",
             f"  Mutex: LOCKED (500ms timeout)",
             f"  Coherence diff: running...",
-            f"  Conflicts: escalated to MERLIN_Ω if detected",
+            f"  Conflicts: escalated to MERLIN_Omega if detected",
             f"  Rollback available to tick: {self._phial_history[0]['tick'] if self._phial_history else 'N/A'}",
         ]
 

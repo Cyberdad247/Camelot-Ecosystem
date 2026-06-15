@@ -10,7 +10,7 @@
 | T-01 | Query CLIProxy /v1/models — capture full model list | SIR_HELIO | 38 models confirmed ✅ |
 | T-02 | Read omniroute.json — audit current engine bindings | SIR_ALEX | Bindings mapped ✅ |
 | T-03 | Read knight_session.py KNIGHT_MODEL_MAP | SIR_ALEX | 10 entries, Anthropic-biased ✅ |
-| T-04 | Merlin GoT — 3-branch capability/cost/latency analysis | MERLIN_Ω | Matrix resolved ✅ |
+| T-04 | Merlin GoT — 3-branch capability/cost/latency analysis | MERLIN_Omega | Matrix resolved ✅ |
 | T-05 | Alex Cognitive Cartridge — finalize knight→model assignment | SIR_ALEX | 13 knights mapped ✅ |
 
 ---
@@ -89,7 +89,7 @@ T-04 ─┘                                                        │
 
 | Phase | Knight | Role |
 |---|---|---|
-| 0 | MERLIN_Ω | GoT decomposition, capability analysis |
+| 0 | MERLIN_Omega | GoT decomposition, capability analysis |
 | 0 | SIR_ALEX | Cognitive cartridge, binding matrix |
 | 1-3 | SIR_FORGE | Implementation — JSON rewrite + Python edits |
 | 1,4 | SIR_SENTINEL | JSON validation, live verification |

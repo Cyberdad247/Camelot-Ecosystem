@@ -1,4 +1,4 @@
-[νKG_CRYSTAL: NPE_Ω_SINGULARITY_V4.0]
+[νKG_CRYSTAL: NPE_Omega_SINGULARITY_V4.0]
 
 u0 | ID | Logic | {Name:State_Transition, Formula:(S,A,E,γ)}
 u1 | ID | Search | {Arch:Search_Nodes, Keys:[state, parent, action, path_cost, depth]}

@@ -1,4 +1,4 @@
-# 📜 Ω_AGENT_FORGE_PROTOCOL (v1.0)
+# 📜 Omega_AGENT_FORGE_PROTOCOL (v1.0)
 **[STATUS]**: RADIANT | **[ARCHITECT]**: SIR_FORGE_MASTER | **[SUBSYSTEM]**: COGNITIVE_LOGIC
 
 ## 0. THE PRIME DIRECTIVE (Agentic Synthesis)
@@ -19,7 +19,7 @@ Incorporate the low-code, declarative orchestration of the AgentForge framework 
     - **S4**: Swarm (Multi-agent collaboration).
 
 ### III. TRIAGE (Execution)
-- **Persona Spawning**: Use the **Ω_DISTILLER** to materialize the required agents.
+- **Persona Spawning**: Use the **Omega_DISTILLER** to materialize the required agents.
 - **Kinetic Strike**: Execute the Cog workflow using the Camelot KERNEL.
 
 ## 2. SYSTEM ENHANCEMENTS for CAMELOT-OS

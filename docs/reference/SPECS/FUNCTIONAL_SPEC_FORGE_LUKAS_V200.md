@@ -1,4 +1,4 @@
-# FUNCTIONAL SPECIFICATION: FORGE-LUKAS Ω (v200.0)
+# FUNCTIONAL SPECIFICATION: FORGE-LUKAS Omega (v200.0)
 **Date:** 2026-01-30
 **Status:** APPROVED
 **Target:** Camelot Apex v106.3 -> v200.0 Migration

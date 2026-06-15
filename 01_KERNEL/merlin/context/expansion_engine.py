@@ -39,7 +39,7 @@ class ExpansionEngine:
     
     Workflow:
     1. Check cache for existing context
-    2. If miss: RAG retrieval from Ω-Graph + Ω-Vault
+    2. If miss: RAG retrieval from Omega-Graph + Omega-Vault
     3. Optional: GoT reasoning expansion
     4. Token budget management
     5. King Arthur policy gate

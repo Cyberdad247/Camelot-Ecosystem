@@ -189,9 +189,9 @@ assimilation_v5_evolution.md  titan_protocol.md
 cellular_protocol.md          triple_qft_compilation.md
 distill_reconstruct_protocol.md  ukg_integration_v206.md
 hive_forge_v1.md              xp_economy_protocol.md
-iron_gate_protocol.md         Ω_CHIMERA_AUDIT.md
-knight_evolution_protocol.md  Ω_KNIGHT_FORGE.md
-lukas_architect.md            Ω_THINK_TANK_PRIME.md
+iron_gate_protocol.md         Omega_CHIMERA_AUDIT.md
+knight_evolution_protocol.md  Omega_KNIGHT_FORGE.md
+lukas_architect.md            Omega_THINK_TANK_PRIME.md
 merlin_identity_forge.md      ThinkTank/ WarRoom/
 ```
 

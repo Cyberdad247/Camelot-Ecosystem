@@ -29,4 +29,4 @@ Use this skill to audit all tool interactions and enforce the Titanium Laws.
 - Provide the **Human Approval Checklist** (PDG/Data-flow/Risk) to the Operator before execution.
 
 ---
-*Created by Merlin_Ω for the Camelot-OS Skills Vault (03_VAULT).*
+*Created by Merlin_Omega for the Camelot-OS Skills Vault (03_VAULT).*

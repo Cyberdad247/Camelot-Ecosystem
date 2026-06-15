@@ -63,7 +63,6 @@ if not PYTHON.exists():
     PYTHON = Path(sys.executable)
 
 OLLAMA_HOST    = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")
-LEDGER_FILE    = HOME / "PROVENANCE_LEDGER.md"
 RESPONSES_DIR  = HOME / "logs" / "harness_responses"
 
 # Lazily loaded Redis store — None until first _write_response call
@@ -794,24 +793,28 @@ def _git_commit(written_paths: list[str], task: QueueTask, piv_summary: str) -> 
 # ── Auto-ledger ───────────────────────────────────────────────────────────────
 
 def _ledger_entry(task: QueueTask, written: list[str], piv: str, git: str = "") -> None:
-    """Prepend a provenance row to PROVENANCE_LEDGER.md after a successful forge."""
+    """Record a provenance entry after a successful forge."""
     try:
-        existing = LEDGER_FILE.read_text(encoding="utf-8") if LEDGER_FILE.exists() else ""
-        ids = [int(m.group(1)) for m in re.finditer(r"^\| *(\d+) *\|", existing, re.MULTILINE)]
-        next_id = max(ids, default=1656) + 1
+        from control_plane.ledger_sync import append_provenance_entry
+
         file_names = [Path(p).name for p in written[:3]]
         files_note = f"{len(written)} file(s): {', '.join(file_names)}"
         if len(written) > 3:
             files_note += f" +{len(written) - 3} more"
-        suffix = ""
+        verification = ["worker PIV gate"]
         if piv:
-            suffix += f" | {piv}"
+            verification.append(piv)
         if git:
-            suffix += f" | {git}"
+            verification.append(git)
         title = f"[FORGE:{task.id}] {task.directive[:70].rstrip()}"
-        row = f"| {next_id} | **{title}** | {task.knight.upper()} | ✅ FORGED | {files_note}{suffix} |\n"
-        LEDGER_FILE.write_text(row + existing, encoding="utf-8")
-        _log(f"[LEDGER] Entry {next_id} written")
+        append_provenance_entry(
+            title=title,
+            actor=task.knight.upper(),
+            scope=[files_note],
+            verification=verification,
+            tag="worker_forge",
+        )
+        _log("[LEDGER] Provenance entry written")
     except Exception as e:
         _log(f"[LEDGER] Write failed: {e}")
 

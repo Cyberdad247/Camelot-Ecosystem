@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-CAMELOT GRADIO INTERFACE [ANYA_Ω]
+CAMELOT GRADIO INTERFACE [ANYA_Omega]
 Sovereign Neural Interface for Camelot-OS.
 """
 
@@ -24,7 +24,7 @@ def send_intent(message, history):
             decision = data.get("decision", {})
             action = decision.get("action", "PROCESSED")
             target = decision.get("target", "UKG")
-            return f"[{timestamp}] [MERLIN_Ω] :: Action: {action} | Target: {target}"
+            return f"[{timestamp}] [MERLIN_Omega] :: Action: {action} | Target: {target}"
         else:
             return f"[{timestamp}] [ERROR] :: Kernel responded with status {response.status_code}"
     except Exception as e:
@@ -38,12 +38,12 @@ footer {visibility: hidden}
 
 with gr.Blocks(title="Camelot-OS Spire") as demo:
     gr.Markdown("# 🏰 CAMELOT-OS: SOVEREIGN SPIRE")
-    gr.Markdown("### [ANYA_Ω] :: Intent Compiler Interface")
+    gr.Markdown("### [ANYA_Omega] :: Intent Compiler Interface")
     
     with gr.Tab("Neural Link"):
         chat = gr.ChatInterface(
             send_intent,
-            description="Direct neural link to MERLIN_Ω core logic.",
+            description="Direct neural link to MERLIN_Omega core logic.",
             examples=["//SWARM", "//HEAL", "System status report", "Who is vega?"],
         )
     

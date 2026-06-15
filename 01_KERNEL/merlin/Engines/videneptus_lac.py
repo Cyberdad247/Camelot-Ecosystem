@@ -3,7 +3,7 @@
 """
 VIDENEPTUS ENGINE: Learning-at-Criticality (LaC)
 Version: 1.0.0
-Author: Merlin_Ω
+Author: Merlin_Omega
 
 Purpose:
 Executes the 3-Phase Thinking Loop for high-complexity problems (>0.8).

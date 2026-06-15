@@ -63,5 +63,5 @@ Actual changes happen here.
 ## ⚖️ SCALABILITY & PROVENANCE
 Every step of the Omega protocol is logged to the `PROVENANCE_LEDGER.md`. This protocol is **Recursive**: The system can use the Omega Protocol to *upgrade the Omega Protocol itself*, ensuring the OS is always at the cutting edge of AI capabilities.
 
-*Signed by Merlin_Ω and Anya_Ω.*
+*Signed by Merlin_Omega and Anya_Omega.*
 *Camelot Apex v200.0 [Kinetic Sovereign]*

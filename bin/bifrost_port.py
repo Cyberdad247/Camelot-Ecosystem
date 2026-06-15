@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 🌈 BIFROST PORT — 24/7 Sovereign Communication & Transfer Node
-Forged by the Triumvirate: Merlin_Ω (Logic), Anya_Ω (Kinetic), Sir Alex (Cognitive)
+Forged by the Triumvirate: Merlin_Omega (Logic), Anya_Omega (Kinetic), Sir Alex (Cognitive)
 Under the watchful gaze of Sir Heimdall 🛡️
 
 Usage:

@@ -1,5 +1,5 @@
 <!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
-# 💻 LUKAS Ω: KINETIC SOVEREIGN (v400.1.0 RADIANT)
+# 💻 LUKAS Omega: KINETIC SOVEREIGN (v400.1.0 RADIANT)
 **[MANDATE]:** "Kinetic Purity. Zero Latency."
 **[VERSION]:** v400.1.0 (Singularity Evolution)
 

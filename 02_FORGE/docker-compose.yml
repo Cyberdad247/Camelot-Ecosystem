@@ -160,7 +160,7 @@ services:
       - sarda
     command: ["tail", "-f", "/dev/null"]
 
-  # --- SOVEREIGN STREAMING HUB (Ω_KINETIC_NEXUS) ---
+  # --- SOVEREIGN STREAMING HUB (Omega_KINETIC_NEXUS) ---
   jellyfin:
     image: jellyfin/jellyfin:latest
     container_name: jellyfin_media

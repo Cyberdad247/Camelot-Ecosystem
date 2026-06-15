@@ -1,7 +1,7 @@
 # 🏭 PROJEKT: SOLO_FACTORY (White Label Agency Protocol)
 
 **[CLASSIFICATION]:** SOVEREIGN_REVENUE_MODE
-**[ARCHITECT]:** Merlin_Ω
+**[ARCHITECT]:** Merlin_Omega
 **[STATUS]:** RADIANT
 **[TARGET]:** Transform Camelot-OS into an autonomous, single-operator digital marketing agency.
 

@@ -1,0 +1,193 @@
+### **Experience System for CAMELOT Personas**  
+*(Integrated into the Merlin Forge Universal Knight Template)*  
+
+Below is the **official specification** for adding an **Experience (EXP) Ledger** to **every Persona** (Squires, Knights, Paladins & Archknights). Personas **only gain experience when they resolve a complication**. The EXP Ledger is consulted on future encounters, **drastically speeding up execution**.
+
+---
+
+#### **I. CORE PRINCIPLES**
+
+1.  **EXP is Earned ONLY via Complications**  
+   - No EXP is awarded for smooth, error‑free executions.  
+   - **EXP is granted ONLY when a Persona encounters a complication (error, ambiguity, edge‑case, ethical conflict, timeout, etc.) AND successfully fixes it**.
+
+2.  **EXP Ledger = Personal Knowledge Base**  
+   - Each Persona owns a **private EXP Ledger** stored inside the **Titan_Ω Hypergraph**.  
+   - The Ledger is **queryable** before any new task begins. If a matching complication is found, the Persona **skips troubleshooting** and applies the stored solution.
+
+3.  **Re‑use = Speed**  
+   - Consulting the Ledger reduces decision‑time by **60‑90%** for recurring complications.
+
+---
+
+#### **II. EXP LEDGER STRUCTURE**  
+*(Stored in `Titan_Ω_Hypergraph/Persona_ID/EXP_Ledger/`)*  
+
+Each entry in the ledger is a **JSON object** with the following fields:
+
+```json
+{
+  "exp_id": "UUIDv4",
+  "timestamp": "2024-06-15T14:32:00Z",
+  "trigger": {
+    "prompt_hash": "sha256:5f4dcc3b5aa765d61d8327deb882cf99",   // Hash of the input prompt
+    "complication_type": "ERROR_TYPE",                     // e.g., "SyntaxError", "AmbiguousDirective", "EthicalConflict", "ResourceTimeout"
+    "cartridge": "CARTRIDGE_B_ENGINEERING",
+    "rune_phase": "Atomize",                               // Phase where complication occurred
+    "context_snapshot": {                                   // Minimal context (variables, state)
+      "task_id": "T7843",
+      "parameters": {"lang":"python", "timeout":10}
+    }
+  },
+  "resolution": {
+    "solution_steps": [
+      "Step 1: Detected missing library import.",
+      "Step 2: Added 'import pandas as pd'",
+      "Step 3: Validated with Sir_Zenith (Ethical_Gate PASS)"
+    ],
+    "fix_code_snippet": "import pandas as pd\n...",          // (if applicable)
+    "knight_responsible": "Sir_Syntax",
+    "validation_signature": "Sir_Zenith_0a8f3c"
+  },
+  "outcome": {
+    "time_to_resolve_sec": 12.4,
+    "success": true,
+    "post_validation_status": "APPROVED"
+  },
+  "tags": ["python", "import_error", "data_processing"],
+  "exp_level": 1,                                         // Increments on each successful re‑use
+  "last_reused": null                                     // Timestamp of last re‑use
+}
+```
+
+📌 **Key Rules**  
+- `exp_level` starts at **1**. Every time the same complication is **successfully re‑used**, `exp_level += 1`.  
+- Entries with `exp_level ≥ 5` are marked **`GOLDEN`** and prioritised in searches.
+
+---
+
+#### **III. WHEN EXP IS AWARDED (The ONLY 4 Conditions)**  
+
+A Persona earns EXP **ONLY** if **ALL** of the following occur:
+
+1.  **Complication Occurs**  
+   *(Error, ambiguity, conflict, timeout, unexpected input, ethical dilemma, etc.)*
+
+2.  **Persona Attempts Resolution**  
+   *(Either solo or as part of a Knight‑team)*
+
+3.  **Resolution Succeeds**  
+   *(The task completes & passes `Sir_Zenith` Ethical Gate)*
+
+4.  **Resolution is Novel**  
+   *(The exact solution is **NOT** already in the Persona’s EXP Ledger).  
+   → *If the solution already exists, only `exp_level` of the existing entry is incremented.*
+
+**EXP Value Calculation**  
+
+`EXP_GAIN = BASE_EXP × SEVERITY_MULTIPLIER × EFFICIENCY_BONUS`
+
+| Factor                | Value                                                                 |
+|-----------------------|-----------------------------------------------------------------------|
+| **BASE_EXP**          | `10 XP`                                                               |
+| **SEVERITY_MULTIPLIER**| • Low (typo, minor error) → **×1**<br>• Medium (logic flaw, ambiguity) → **×2**<br>• High (security risk, ethical breach) → **×3** |
+| **EFFICIENCY_BONUS**  | `min(1.5, (avg_resolution_time / actual_time))` <br>*(Faster fix = higher bonus. Cap = 1.5x)* |
+
+**Example**:  
+Sir_Syntax fixes a **High‑severity** security flaw in **8 sec** (avg = 20 sec).  
+
+`EXP_GAIN = 10 × 3 × (20/8) = 10 × 3 × 2.5 = 75 XP`  
+
+➡️ The EXP Ledger entry is created with **75 XP**.
+
+---
+
+#### **IV. CONSULTING THE EXP LEDGER (SPEED‑UP MECHANISM)**  
+
+Before **any** execution phase, the Persona runs **`{🧠}Experience_Check`** (a new Rune‑Script phase).
+
+**Updated Rune Script**  
+```
+[👤]Seed → {💡}Anya_Ingest → **{🧠}Experience_Check** → {🧲}Extract → {🧲⚛️}Atomize → {📐}SkillGraph4 → {💎}Validate → {💡}Anya_Translate → {⚔️}Knight_Execution → <🏆>Artifact
+```
+
+##### **{🧠} Experience_Check Workflow**
+
+1.  Generate a **prompt hash** (`SHA‑256` of the user’s input).  
+2.  Extract **`complication_risk_tags`** (Anya_APEE analyses the prompt for potential risk types).  
+3.  **Query the EXP Ledger** for entries matching:  
+    - Exact `prompt_hash`, **OR**  
+    - Same `complication_type` **AND** overlapping `tags`.  
+
+4.  **Ranking of Matches** (order of priority):  
+   1.  Exact `prompt_hash` match (`exp_level` descending)  
+   2.  Matching `complication_type` + ≥2 identical `tags` (`exp_level` descending)  
+   3.  Matching `complication_type` only (`exp_level` descending)  
+
+5.  **If a match is found**:  
+    - ✅ **Inject the `solution_steps`** directly into the execution queue.  
+    - ⏩ **Skip all troubleshooting phases** (`Extract`, `Atomize`, `Validate` related to that complication).  
+    - Log `last_reused = <timestamp>` in the ledger entry.  
+    - Increment `exp_level` of that entry (**+1**).  
+
+6.  **If NO match is found**:  
+    - Proceed through normal execution.  
+    - If a complication later occurs → **create a NEW EXP entry** upon resolution.
+
+📈 **Result:** Recurring issues are resolved **instantly** after the first fix!
+
+---
+
+#### **V. PERSONA‑LEVEL IMPLEMENTATION**
+
+| Tier       | EXP Ledger Capabilities                                                                                                                                 | Storage Limit | Hygiene (Pruning)                                  |
+|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|----------------------------------------------------|
+| **Squire** | Own ledger only. Can **read** entries from Knights in the same cartridge.                                                                              | 100 entries     | Squire_Scavenger deletes entries older than **30 days** if `exp_level < 3`. |
+| **Knight** | Own ledger + **read/write** to ledgers of Squires in its cartridge. Can **share** entries with other Knights in the same cartridge.                     | 500 entries     | Prune after **60 days** (`exp_level < 2`).          |
+| **Paladin**| Own ledger + **full read/write** to **all ledgers** in its assigned cartridges. Can **broadcast** a GOLDEN entry to all Knights/Squires.                  | 1 000 entries   | Prune after **90 days** (`exp_level < 1`).          |
+| **Archknight**| **Global Ledger Access**. Can view/consolidate EXP entries **system‑wide**. May define **mandatory GOLDEN entries** that sync to every Persona.          | Unlimited       | Managed by **S5_Chronos** (Ledger Manager).         |
+
+💡 **Broadcast Example**:  
+When `Paladin_Octem` discovers a critical security fix, it **broadcasts** the EXP entry to **every Knight & Squire** in the system. All receive the entry with `exp_level = 5 (GOLDEN)`.
+
+---
+
+#### **VI. MAINTENANCE & HYGIENE (Squire_Scavenger’s Duty)**  
+
+`Squire_Scavenger` (Cartridge D) runs daily **Ledger Hygiene Jobs**:
+
+1.  **Prune Old Entries**  
+   - Delete entries where `last_reused == null` **AND** `timestamp < (NOW - X days)` (X = tier‑specific limit).  
+   - **Never delete** `GOLDEN` entries (`exp_level ≥ 5`).
+
+2.  **Compress Duplicates**  
+   - If ≥3 entries share identical `complication_type` + `solution_steps`, merge them into **one entry** and sum their `exp_level`.
+
+3.  **Generate Ledger Health Report**  
+   - Sent daily to **Sir_Zenith** & **S5_Chronos**.
+
+---
+
+#### **VII. EXAMPLE SCENARIO**
+
+**First Encounter**  
+User prompt:  
+> *“Generate a JSON config for a web server, but include a port outside 1024‑65535.”*
+
+- **Complication**: `Sir_Syntax` tries to generate JSON → **`Port 70000` → `ValueError`**.  
+- **Resolution**: `Sir_Syntax` + `Squire_Scavenger` add validation rule: *“port must be 1024‑65535”*.  
+- **EXP Entry Created** (`exp_level = 1`).  
+
+**Second Encounter (2 days later)**  
+Same prompt arrives.  
+
+1.  `{🧠}Experience_Check` finds the EXP entry (matching `prompt_hash`).  
+2.  **Instantly** injects the validation rule **before** JSON generation.  
+3.  **No error occurs**. Execution finishes **4× faster**.  
+4.  `exp_level` increments to **2**.  
+
+After the 5th successful re‑use → entry becomes **GOLDEN**. From now on, **every Persona** consults it first.
+
+---
+
+**“From complication, wisdom is forged. The Ledger remembers — so the Knight need never stumble twice.”** ⚔️📜7

@@ -17,7 +17,7 @@ async def test_excalibur_bridge():
     kernel = Merlin_Omega()
 
     # Task: Strategic analysis followed by Kinetic delegation
-    prompt = "Ω_OPEN: Refactor the logger in api_server.py to use a more structured JSON format."
+    prompt = "Omega_OPEN: Refactor the logger in api_server.py to use a more structured JSON format."
 
     print(f"Sovereign Intent: {prompt}")
     res = await kernel.process_request(prompt)

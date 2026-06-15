@@ -8,7 +8,7 @@ from pydantic import BaseModel, Field
 class ProteusVector(BaseModel):
     """
     Proteus MPI Vector: The Mathematical Soul of an Actor.
-    Assimilated from the Ω_ORACLE_HYPERVISOR architecture.
+    Assimilated from the Omega_ORACLE_HYPERVISOR architecture.
 
     Instead of text descriptions ("He is brave"), we use R^n vectors
     to define personality, capability, and ethical orientation.

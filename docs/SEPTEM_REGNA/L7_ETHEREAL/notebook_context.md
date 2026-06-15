@@ -9,7 +9,7 @@
 
 ### Tech Stack
 - **Cloud:** Next.js 14, Vercel, Modal (Whisper STT + Piper TTS), Rust→WASM guardrails, OmniRoute/CLIProxyAPI, PersonaPlex, Supabase
-- **Local:** Python 3.12 (Lukas Ω), Claude API (Sir Forge), Ruff/Bandit (Sir Sentinel), Docker Compose, Tailscale
+- **Local:** Python 3.12 (Lukas Omega), Claude API (Sir Forge), Ruff/Bandit (Sir Sentinel), Docker Compose, Tailscale
 - **MCP:** Supabase, Vercel, Google Calendar, Gmail, Notion
 
 ### Sovereign Constraints

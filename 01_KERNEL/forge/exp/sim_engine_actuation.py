@@ -29,14 +29,14 @@ async def test_engine_actuation():
 
     # 3. Dream State Actuation
     print("Engine 3: Dream State (Neural Learning)")
-    res3 = await kernel.process_request("Ω_DREAM ON")
+    res3 = await kernel.process_request("Omega_DREAM ON")
     print(f"Result: {res3}\n")
 
     # Small wait to let background tasks log
     await asyncio.sleep(2)
 
     print("Engine 3: Waking up...")
-    res4 = await kernel.process_request("Ω_DREAM OFF")
+    res4 = await kernel.process_request("Omega_DREAM OFF")
     print(f"Result: {res4}\n")
 
     print("\n✅ All Engines Actuated and Functional.")

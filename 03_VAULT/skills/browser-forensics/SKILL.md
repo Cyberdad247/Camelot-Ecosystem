@@ -28,4 +28,4 @@ Use this skill to deploy the Nano-Browser swarm for automated UI/UX analysis and
 - Return the **Forensic Data Packet** (JSON) to the Chronos/Semantic layer for UKG ingestion.
 
 ---
-*Created by Merlin_Ω for the Camelot-OS Skills Vault (03_VAULT).*
+*Created by Merlin_Omega for the Camelot-OS Skills Vault (03_VAULT).*

@@ -20,7 +20,7 @@ All personas must be generated using the TAL assembly:
 
 ## III. POWER SETS
 ### 1. Summon Persona
-- **Trigger:** `Ω_SUMMON <role>`
+- **Trigger:** `Omega_SUMMON <role>`
 - **Action:** Merlin generates a structured `.jsonld` persona profile.
 - **Verification:** Validates against the Titanium Laws.
 

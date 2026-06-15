@@ -131,8 +131,39 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
     ),
     "sir_hermes": Terminal(
         id="sir_hermes", engine="hermes_cli", weight=0.78,
-        cost_tier="free", capability=["agent","tool_use","nous","openrouter","kinetic","autonomous"],
+        cost_tier="free", capability=[
+            "agent","tool_use","nous","openrouter","kinetic","autonomous",
+            "shopify_admin","shopify_storefront","graphql_orchestration","webhook_choreography",
+        ],
         probe_port=0, notes="Nous Hermes Agent — autonomous tool-calling via subprocess (-q mode)",
+    ),
+    "sir_openclaw": Terminal(
+        id="sir_openclaw", engine="openclaw", weight=0.90,
+        cost_tier="free", capability=[
+            "compliant_trend_research","source_attribution","robots_policy","rate_limit_respect",
+        ],
+        probe_port=0, notes="Claw Suite harvester: compliant public-source research only",
+    ),
+    "sir_rustclaw": Terminal(
+        id="sir_rustclaw", engine="rustclaw", weight=0.86,
+        cost_tier="free", capability=[
+            "rust_image_pipeline","cmyk_contrast_check","halftone_underbase_plan","avif_transcode_contract",
+        ],
+        probe_port=0, notes="Claw Suite Rust image pipeline contract",
+    ),
+    "lady_nanobot": Terminal(
+        id="lady_nanobot", engine="next_edge", weight=0.84,
+        cost_tier="free", capability=[
+            "edge_component_agents","webgl_mockup_contract","nfc_route_contract","telemetry_event_contract",
+        ],
+        probe_port=0, notes="Claw Suite edge component swarm contract",
+    ),
+    "sir_zeroclaw": Terminal(
+        id="sir_zeroclaw", engine="local_qwen", weight=1.00,
+        cost_tier="free", capability=[
+            "zero_trust","ip_trademark_guard","affiliate_abuse_guard","checkout_risk_gate",
+        ],
+        probe_port=11434, notes="Claw Suite zero-trust sentry; HUMAN_GATE for fraud and fingerprint actions",
     ),
 }
 
@@ -174,7 +205,7 @@ async def _probe_terminal(t: Terminal) -> None:
         gideon_py = CAMELOT_HOME / "03_VAULT" / "training" / "configs" / "knights" / "sir_gideon.py"
         t.status     = "live" if gideon_py.exists() else "dark"
         t.latency_ms = 0.0
-    elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli"):
+    elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli", "openclaw", "rustclaw", "next_edge"):
         t.status     = "assumed_live"
         t.latency_ms = 0.0
     elif t.engine == "hermes_cli":

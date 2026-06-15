@@ -1,6 +1,6 @@
 # SIR_FORGE_MASTER — Instantiation Blueprint
 > **Forged by:** SIR_FORGE (Kai Zhang) + Swarm Council | 2026-06-02
-> **Protocol:** Ω_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0 (corrected)
+> **Protocol:** Omega_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0 (corrected)
 > **Status:** ACTIVE — EXECUTING
 
 ---
@@ -109,7 +109,7 @@ Style: Concept art / Syd Mead meets Gustave Doré.
 
 ### `//SYNC_PHIAL`
 **Trigger:** When two or more swarm nodes require shared state reconciliation.
-**Action:** Lock phial write mutex, collect agent state vectors, run coherence diff, merge non-conflicting states, flag conflicts for HITL escalation to MERLIN_Ω.
+**Action:** Lock phial write mutex, collect agent state vectors, run coherence diff, merge non-conflicting states, flag conflicts for HITL escalation to MERLIN_Omega.
 **Cache logic:** Maintains a rolling 10-tick phial history per swarm ID for rollback.
 
 ---

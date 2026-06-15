@@ -221,7 +221,7 @@ class ProfileManager {
                     get: () => "${this.activeProfile.userAgent}" 
                 });
                 
-                console.log("[Ω_STEALTH] Fingerprint Spoofing Active.");
+                console.log("[Omega_STEALTH] Fingerprint Spoofing Active.");
             })();
         `;
     }

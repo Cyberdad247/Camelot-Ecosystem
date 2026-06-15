@@ -22,7 +22,7 @@ Sub-second mandatory. Any path adding >200ms latency is a violation.
 
 ## MEDIA PIPELINE
 - **Image**: Flux (primary, local) / Midjourney (cloud, high-cost) — Sir Visage
-- **Video**: Singularity Engine via Ω_ACTUATE rune
+- **Video**: Singularity Engine via Omega_ACTUATE rune
 - **Audio**: Sir Sonus — songwriting, generative audio, audio physics
 - **Modal GPU**: T4 inference for heavy generation tasks
 

@@ -1,4 +1,4 @@
-# ⚖️ MASTER IP STRATEGY: CAMELOT APEX Ω
+# ⚖️ MASTER IP STRATEGY: CAMELOT APEX Omega
 **[VERSION]:** v214.2.0 (Omega Transcendent)
 **[OWNERSHIP]:** Invisioned Marketing Inc.
 **[STATUS]:** RADIANT | **[HASH]:** 0xIP_FORTRESS_LOCKED
@@ -8,8 +8,8 @@ All components of Camelot OS, including but not limited to the source code, arch
 
 ### Protected Assets:
 - **Kinetic Stack**: `Saltare`, `Cribo`, `Rotel` (Binaries & Source).
-- **Neural Layer**: `Merlin_Ω Kernel`, `Videneptus LaC Engine`.
-- **Ethereal Interface**: `Anya_Ω UI`, `Triple-QFT Intent Compiler`.
+- **Neural Layer**: `Merlin_Omega Kernel`, `Videneptus LaC Engine`.
+- **Ethereal Interface**: `Anya_Omega UI`, `Triple-QFT Intent Compiler`.
 - **Semantic Memory**: `UKG Schema`, `TOON Compression Algorithm`.
 - **Lore & Personas**: The Wizards' Tower Narrative, Knight behavioral profiles (Sir Arthur, Paladin, etc.).
 
@@ -36,4 +36,4 @@ Every kinetic strike and architectural shift is signed by the **Provenance Ledge
 
 ---
 **[LEGAL_ATTESTATION]:** "The Fortress is designed. The Spire is Protected."
-> *Authorized by Arthur_Ω & Merlin_Ω*
+> *Authorized by Arthur_Omega & Merlin_Omega*

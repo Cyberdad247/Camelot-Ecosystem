@@ -52,7 +52,7 @@ export const VoiceDeck = () => {
     const newState = !isListening;
     setIsListening(newState);
     if (newState) {
-      client.send({ kind: 'start_voice_stream', persona: 'Merlin_Ω' });
+      client.send({ kind: 'start_voice_stream', persona: 'Merlin_Omega' });
     }
   };
 
@@ -60,7 +60,7 @@ export const VoiceDeck = () => {
     client.send({
       kind: 'memorize_intent',
       text: "Captured voice resonance for Ouroboros sync.",
-      metadata: { persona: 'Merlin_Ω', timestamp: new Date().toISOString() }
+      metadata: { persona: 'Merlin_Omega', timestamp: new Date().toISOString() }
     });
     alert("Intent crystallized.");
   };
@@ -115,7 +115,7 @@ export const VoiceDeck = () => {
           </Text>
           <XStack ai="center" space="$2">
             <Circle size={8} bg={isListening ? '$green10' : '$colorSecondary'} />
-            <Text col="$colorSecondary" ls={1}>SIR SONUS Ω ACTIVE</Text>
+            <Text col="$colorSecondary" ls={1}>SIR SONUS Omega ACTIVE</Text>
           </XStack>
         </YStack>
 

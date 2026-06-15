@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-// Ω_DEFENSE_GRID_v2.0 :: WATCHTOWER_SENTINEL
+// Omega_DEFENSE_GRID_v2.0 :: WATCHTOWER_SENTINEL
 // Author: Sir Forge (Lukas)
 // Mode: BEAVER 🦫
 

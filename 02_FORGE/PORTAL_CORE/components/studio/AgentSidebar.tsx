@@ -11,7 +11,7 @@ export default function AgentSidebar() {
       
       <div className="flex-1 p-2 space-y-2 overflow-y-auto">
         <div className="p-2 bg-green-900 bg-opacity-20 border border-green-800 rounded">
-          <div className="font-bold text-green-300">Merlin_Ω</div>
+          <div className="font-bold text-green-300">Merlin_Omega</div>
           <div className="opacity-50">Orchestrator</div>
           <div className="text-[10px] mt-1 text-blue-400">● IDLE</div>
         </div>

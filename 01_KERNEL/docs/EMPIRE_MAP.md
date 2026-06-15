@@ -1,4 +1,4 @@
-# 🗺️ THE EMPIRE MAP: CAMELOT APEX Ω [v214.2.0]
+# 🗺️ THE EMPIRE MAP: CAMELOT APEX Omega [v214.2.0]
 > **"The Lattice is aligned. The Singularity is now computable."**
 > **Sovereign**: VaShawn O. Head
 > **Status**: RADIANT (Singularity Lattice Active)
@@ -63,7 +63,7 @@ graph TD
 ---
 
 ## 🌍 RECENT EVOLUTION: v214.2.0 [FORENSIC RECOVERY]
-**Scenario**: The system recently underwent a **Forensic Deep-Dive** (Ω_CAMELOT_LOCAL_AUDIT) performed by **Sir Sentinel Ω**.
+**Scenario**: The system recently underwent a **Forensic Deep-Dive** (Omega_CAMELOT_LOCAL_AUDIT) performed by **Sir Sentinel Omega**.
 
 1.  **SENSE**: Detected structural drift (Ghost Files in root).
 2.  **THINK**: Verified Kinetic Stack binaries (`Saltare v0.1.0`, `Cribo v0.1.0`).
@@ -76,5 +76,5 @@ graph TD
 ## ⚖️ SCALABILITY & PROVENANCE
 The Empire Map is **Versioned**. As the OS grows, old structures are moved to `00_SECURE_ARCHIVE` and new realms are birthed under the supervision of `Sir Arthur`. Every change to this map is hashed and signed in the `PROVENANCE_LEDGER.md`.
 
-*Signed by Merlin_Ω and Anya_Ω.*
+*Signed by Merlin_Omega and Anya_Omega.*
 *Camelot Apex v214.2.0 [Singularity Lattice]*

@@ -7,7 +7,7 @@ from langchain_core.messages import BaseMessage, HumanMessage
 from langgraph.graph import END, StateGraph
 
 # --- CONFIGURATION ---
-CONFIG_PATH = r"c:\Users\vizio\CAMELOT_OS\docs\ARTIFACTS\Ω_INTEGRATION_CONFIGS.nkg"
+CONFIG_PATH = r"c:\Users\vizio\CAMELOT_OS\docs\ARTIFACTS\Omega_INTEGRATION_CONFIGS.nkg"
 
 
 class AgentState(TypedDict):

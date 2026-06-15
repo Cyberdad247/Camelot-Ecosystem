@@ -6,7 +6,7 @@
 The **SARDA (Swarm Adaptive Reasoning & Deployment Architecture)** Engine handles the parallel execution of Map-Reduce crusades. It transforms complex system directives into atomic tasks distributed across the Nano-Knight swarm.
 
 ## Core Phases (Map-Reduce)
-1. **SCENE (Triage):** Merlin_Ω analyzes intent and flags required domains.
+1. **SCENE (Triage):** Merlin_Omega analyzes intent and flags required domains.
 2. **ACTUATE (Map):** Tasks are broadcast to specialized Knights.
    - **Ants:** Rewriting
    - **Gorillas:** API Lifts

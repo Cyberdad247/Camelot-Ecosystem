@@ -3,7 +3,7 @@
 """
 Test suite for Titan Omega Memory Stack
 
-Validates Ω-Graph, Ω-Vault, and Ω-Flux functionality.
+Validates Omega-Graph, Omega-Vault, and Omega-Flux functionality.
 """
 
 import sys
@@ -16,8 +16,8 @@ from datetime import datetime
 
 
 def test_omega_graph():
-    """Test Ω-Graph: add nodes, query, retrieve."""
-    print("\n=== Testing Ω-Graph ===")
+    """Test Omega-Graph: add nodes, query, retrieve."""
+    print("\n=== Testing Omega-Graph ===")
     titan = TitanOmega()
     
     # Create test agent node
@@ -56,14 +56,14 @@ def test_omega_graph():
 
 
 def test_omega_vault():
-    """Test Ω-Vault: add text, vector search."""
-    print("\n=== Testing Ω-Vault ===")
+    """Test Omega-Vault: add text, vector search."""
+    print("\n=== Testing Omega-Vault ===")
     
     try:
         titan = TitanOmega()
         
         if not titan.vault:
-            print("⚠️  Ω-Vault skipped (FAISS not available)")
+            print("⚠️  Omega-Vault skipped (FAISS not available)")
             return
         
         # Add test documents
@@ -76,7 +76,7 @@ def test_omega_vault():
         for i, text in enumerate(texts):
             titan.vault.add_text(text, source_id=f"doc_{i}", metadata={"category": "agent_bio"})
         
-        print(f"✅ Added {len(texts)} documents to Ω-Vault")
+        print(f"✅ Added {len(texts)} documents to Omega-Vault")
         
         # Perform vector search
         results = titan.vault.vector_search("backend engineering Python", k=2)
@@ -87,22 +87,22 @@ def test_omega_vault():
         
         # Save to disk
         titan.vault.save()
-        print(f"✅ Persisted Ω-Vault to disk")
+        print(f"✅ Persisted Omega-Vault to disk")
         
     except ImportError as e:
-        print(f"⚠️  Ω-Vault test skipped: {e}")
+        print(f"⚠️  Omega-Vault test skipped: {e}")
 
 
 def test_omega_flux():
-    """Test Ω-Flux: store events, retrieve, TTL expiration."""
-    print("\n=== Testing Ω-Flux ===")
+    """Test Omega-Flux: store events, retrieve, TTL expiration."""
+    print("\n=== Testing Omega-Flux ===")
     titan = TitanOmega()
     
     session_id = "test_session_001"
     
     # Store reasoning events
     flux_id_1 = titan.flux.store_event(session_id, "Step 1: Analyzing user intent", priority="high", ttl=120)
-    flux_id_2 = titan.flux.store_event(session_id, "Step 2: Retrieving context from Ω-Graph", priority="medium", ttl=90)
+    flux_id_2 = titan.flux.store_event(session_id, "Step 2: Retrieving context from Omega-Graph", priority="medium", ttl=90)
     flux_id_3 = titan.flux.store_event(session_id, "Step 3: Generating response draft", priority="low", ttl=60)
     
     print(f"✅ Stored 3 flux events for session {session_id}")
@@ -125,7 +125,7 @@ def test_omega_flux():
 
 
 def test_hybrid_search():
-    """Test hybrid RAG: Ω-Vault vector + Ω-Graph pattern matching."""
+    """Test hybrid RAG: Omega-Vault vector + Omega-Graph pattern matching."""
     print("\n=== Testing Hybrid Search ===")
     titan = TitanOmega()
     

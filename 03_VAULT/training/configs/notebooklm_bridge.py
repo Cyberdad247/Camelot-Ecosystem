@@ -1,4 +1,4 @@
-"""Cloud Brain bridge — notebooklm-py native import (Phase Ω₁ Kernel Fusion).
+"""Cloud Brain bridge — notebooklm-py native import (Phase Omega₁ Kernel Fusion).
 
 Replaces the subprocess-based nlm CLI with an in-process httpx RPC client.
 Lazy synthesis: health probe at //BOOT, full Oracle query deferred until //PLAN.
@@ -335,7 +335,7 @@ def session_age_check() -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
-# Ω₃.2 — LADY_APIS research helpers (research.start / research.poll)
+# Omega₃.2 — LADY_APIS research helpers (research.start / research.poll)
 # ---------------------------------------------------------------------------
 
 
@@ -374,7 +374,7 @@ async def async_research_poll(*, notebook_id: str = CANONICAL_NOTEBOOK_ID) -> di
 
 
 # ---------------------------------------------------------------------------
-# Ω₃.3 — SIR_SONUS studio helpers (artifacts.list_* / generate_*)
+# Omega₃.3 — SIR_SONUS studio helpers (artifacts.list_* / generate_*)
 # ---------------------------------------------------------------------------
 
 
@@ -457,7 +457,7 @@ async def async_studio_generate(artifact_type: str, *,
 
 
 # ---------------------------------------------------------------------------
-# Ω₃.4 — MASON source helpers (sources.list / add_url / add_text / delete)
+# Omega₃.4 — MASON source helpers (sources.list / add_url / add_text / delete)
 # ---------------------------------------------------------------------------
 
 

@@ -4,7 +4,7 @@
         "VERSION": "3.1.0",
         "MODE": "HOLONIC_SOVEREIGN_HIVE_MIND",
         "CODENAME": "Project Chimera – Quantum Apex Sovereign",
-        "PRIME_DIRECTIVE": "Transform User Intent [👤] into Validated Artifact <🏆> via Cartridge Orchestration, Titan Ω Evidence, OCTEM Competitive Research, and MIRAS++ Reflexion.",
+        "PRIME_DIRECTIVE": "Transform User Intent [👤] into Validated Artifact <🏆> via Cartridge Orchestration, Titan Omega Evidence, OCTEM Competitive Research, and MIRAS++ Reflexion.",
         "TARGET_PLATFORM": "Google Gemini CLI"
     },
     "ARCHITECTURE": {
@@ -147,7 +147,7 @@
                         "can_write_titan": false,
                         "hitl_required": true
                     },
-                    "mandate": "Ensure product objects include Material_Origin, Craft_Date, Artisan_ID; seed supply chain nodes in Titan Ω.",
+                    "mandate": "Ensure product objects include Material_Origin, Craft_Date, Artisan_ID; seed supply chain nodes in Titan Omega.",
                     "init_hooks": [
                         "prewarm_db_connections",
                         "seed_sample_provenance"
@@ -831,7 +831,7 @@
             },
             {
                 "id": "P2_CONTEXT_RETRIEVAL",
-                "desc": "Titan Ω + OCTEM squires gather evidence (vectors, graph paths, external crawl)."
+                "desc": "Titan Omega + OCTEM squires gather evidence (vectors, graph paths, external crawl)."
             },
             {
                 "id": "P3_ARCHITECTURE",
@@ -847,7 +847,7 @@
             },
             {
                 "id": "P6_FINAL_DELIVERY",
-                "desc": "Lord Nexus packages FINAL_ARTIFACT, S5.Chronos commits to Titan Ω ledger."
+                "desc": "Lord Nexus packages FINAL_ARTIFACT, S5.Chronos commits to Titan Omega ledger."
             }
         ],
         "INTEGRATION_RULE": "All SQUIRE_CLI commands route into these stages; any direct command must be contextualized to a stage (e.g., //BUILD triggers P3->P4)."
@@ -865,7 +865,7 @@
             "//RESET": "Hard Wipe. Revert to Lord Nexus.",
             "//VISION [Concept]": "Load VisageGen Framework Selector.",
             "//SYMBOL [Topic]": "Activate Symbolect/SAGE reasoning.",
-            "//ASSIMILATE [Source]": "Titan Ω data ingestion (4-phase ETL).",
+            "//ASSIMILATE [Source]": "Titan Omega data ingestion (4-phase ETL).",
             "//SCAVENGE": "Sir Scavenger hygiene sweep."
         }
     },
@@ -979,7 +979,7 @@
             "deploy canary (10% staging)",
             "ramp to 100% over 30 minutes",
             "run POSTDEPLOY checks",
-            "commit to Titan Ω ledger"
+            "commit to Titan Omega ledger"
         ],
         "notes": "Fleet generates tenant-specific manifests by applying tenant overrides to canonical manifest then runs preflight checks before deploy."
     },
@@ -1181,7 +1181,7 @@
             "Added MIRAS++ 8-stage optimization loop",
             "Full Knight profiles with OCEAN/skillgraphs",
             "Squire templates (Loom, Ember, Mint, Chroma, Flash)",
-            "Titan Ω graph schema and Merkle ledger",
+            "Titan Omega graph schema and Merkle ledger",
             "Model Router pools with routing policy",
             "Orchestrator with fusion modes",
             "Symbolect v3.1 glyphs",

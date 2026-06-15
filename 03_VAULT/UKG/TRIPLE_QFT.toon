@@ -6,7 +6,7 @@ u2 | ID | Filter | {Name:Pedagogy, Method:QFT, Goal:Ambiguity_Resolution}
 
 a0 | PROCESS | Compilation | {Input:Raw_Chat -> RG_Flow -> Quantization -> Titan_Prompt}
 a1 | METRIC | Ambiguity | {Threshold:>10%, Action:Stop_Sequence, Goal:Type_III_Error_Avoidance}
-a2 | FORMAT | Output | {Format:Symbolect, Density:High, Target:Merlin_Ω}
+a2 | FORMAT | Output | {Format:Symbolect, Density:High, Target:Merlin_Omega}
 
 c0 | LAW | Context | {Rule:Context_as_a_Compiler, Rule:No_Raw_Noise, Rule:Mandatory_QFT}
 c1 | LAW | Efficiency | {Rule:Anchor_Tokens, Ratio:80/20_Meaning, Status:RADIANT}

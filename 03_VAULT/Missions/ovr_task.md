@@ -1,6 +1,6 @@
 # MISSION: ONE VIZION RECORDS — THE GRAND EXPERIENCE
 ## Full UI/UX Forge Blueprint
-**Forged:** 2026-04-26 | **Lead:** ANYA_Ω + SIR_BORIS | **Governed by:** SIR_CONSTANTINE (new)
+**Forged:** 2026-04-26 | **Lead:** ANYA_Omega + SIR_BORIS | **Governed by:** SIR_CONSTANTINE (new)
 **Northstar:** Luxury concert experience — lavish lobby → main stage. Never compromise elegance for speed.
 
 ---
@@ -162,7 +162,7 @@ Role: L4 Governance. Domain: Project quality, error sovereignty, Merlin oversigh
   "UKG_NODE": {
     "SESSION_ID": "ovr-grand-experience-2026-04-26",
     "CONTEXT_STATE": ["OBSIDIAN_GOLD", "DOOR_SEQUENCE", "DJ_BOOTH", "SIR_CONSTANTINE", "ARTIST_SUITES"],
-    "ACTIVE_KNIGHTS": ["ANYA_Ω", "SIR_BORIS", "SIR_FORGE", "Sir Visage", "SIR_SONUS", "SIR_ALEX", "SIR_LINK", "SIR_CONSTANTINE"],
+    "ACTIVE_KNIGHTS": ["ANYA_Omega", "SIR_BORIS", "SIR_FORGE", "Sir Visage", "SIR_SONUS", "SIR_ALEX", "SIR_LINK", "SIR_CONSTANTINE"],
     "NORTHSTAR": "Luxury concert experience — lavish lobby doors open into a living, breathing record label"
   }
 }

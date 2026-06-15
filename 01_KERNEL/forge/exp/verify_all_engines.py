@@ -17,18 +17,18 @@ async def verify_12_engines():
     merlin = MerlinOmega()
 
     test_commands = [
-        "Ω_STEP",  # 1. Oracle Physics
+        "Omega_STEP",  # 1. Oracle Physics
         "//COUNCIL Hello",  # 2. Council (Debate)
         "//FLEET init",  # 3. Aether (Swarm)
         "//FORGE test.py",  # 4. APEE (Titan Forge)
-        "Ω_GENESIS Knight",  # 5. Genesis (Persona Forge)
-        "Ω_VERITAS 'Arbitration clause'",  # 6. Veritas (Audit)
-        "Ω_LYRICUS Modulated text",  # 7. Lyricus (Voice)
-        "Ω_PROMETHEUS Do A then B",  # 8. Prometheus (Decomp)
-        "Ω_HELIX Action | Result",  # 9. Helix (Self-Correction)
+        "Omega_GENESIS Knight",  # 5. Genesis (Persona Forge)
+        "Omega_VERITAS 'Arbitration clause'",  # 6. Veritas (Audit)
+        "Omega_LYRICUS Modulated text",  # 7. Lyricus (Voice)
+        "Omega_PROMETHEUS Do A then B",  # 8. Prometheus (Decomp)
+        "Omega_HELIX Action | Result",  # 9. Helix (Self-Correction)
         "//VISION cinematic style",  # 10. Aurora (Multimodal)
-        "Ω_ACTION move to mouse",  # 11. Bytebot (Implicit Action)
-        "Ω_DREAM ON",  # 12. Dream State
+        "Omega_ACTION move to mouse",  # 11. Bytebot (Implicit Action)
+        "Omega_DREAM ON",  # 12. Dream State
     ]
 
     for cmd in test_commands:

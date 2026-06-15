@@ -34,7 +34,7 @@ DEFAULT_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 class LightRAGConfig:
     """Configuration for LightRAG engine."""
 
-    persist_directory: str = "Titan_Ω_Hypergraph/chromadb"
+    persist_directory: str = "Titan_Omega_Hypergraph/chromadb"
     collection_name: str = DEFAULT_COLLECTION
     embedding_model: str = DEFAULT_MODEL
     embedding_dimension: int = 384

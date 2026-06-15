@@ -25,8 +25,8 @@ from typing import Optional
 # CONFIGURATION
 # ==============================================================================
 
-GRAPH_STORAGE_PATH = Path("Titan_Ω_Hypergraph/knowledge_graph")
-DEFAULT_WORKING_DIR = Path("Titan_Ω_Hypergraph/lightrag_working")
+GRAPH_STORAGE_PATH = Path("Titan_Omega_Hypergraph/knowledge_graph")
+DEFAULT_WORKING_DIR = Path("Titan_Omega_Hypergraph/lightrag_working")
 
 
 # ==============================================================================

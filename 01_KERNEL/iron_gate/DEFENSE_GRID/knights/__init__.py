@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Ω_DEFENSE_GRID_v3.0 :: OMEGA High Guard Roster
+Omega_DEFENSE_GRID_v3.0 :: OMEGA High Guard Roster
 Original: Kronos · Sentinel · Octavian · Castor
 OMEGA additions: Heimdall · Galahad · Nemesis Prime
 """

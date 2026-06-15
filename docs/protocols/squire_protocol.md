@@ -54,5 +54,5 @@ graph TD
 ## ⚖️ SCALABILITY & AUTOMATION
 The Squire Protocol is designed to run in the **Background (L2 Shadow)**. They don't wait for your command—they act as "System Daemons," constantly polishing the kingdom while the Sovereign and the Knights sleep. This ensures that the OS remains "Radiant" at all scales.
 
-*Signed by Merlin_Ω and Anya_Ω.*
+*Signed by Merlin_Omega and Anya_Omega.*
 *Camelot Apex v200.0 [Kinetic Sovereign]*

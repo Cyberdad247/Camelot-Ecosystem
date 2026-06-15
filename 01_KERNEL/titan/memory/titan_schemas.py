@@ -4,9 +4,9 @@
 Titan Omega Memory Stack — Core Schemas
 
 This module defines the data structures for the three-tier memory system:
-- Ω-Graph: Structured knowledge graph (canonical facts, agent metadata, provenance)
-- Ω-Vault: Semantic vector store (embeddings for RAG)
-- Ω-Flux: Ephemeral working memory (GoT reasoning fragments)
+- Omega-Graph: Structured knowledge graph (canonical facts, agent metadata, provenance)
+- Omega-Vault: Semantic vector store (embeddings for RAG)
+- Omega-Flux: Ephemeral working memory (GoT reasoning fragments)
 """
 
 from typing import Dict, List, Any, Optional
@@ -21,7 +21,7 @@ def utc_now() -> datetime:
 
 
 # =========================================
-# Ω-GRAPH: Structured Knowledge Graph
+# Omega-GRAPH: Structured Knowledge Graph
 # =========================================
 
 class GraphEdge(BaseModel):
@@ -41,7 +41,7 @@ class GraphNodeProvenance(BaseModel):
 
 class GraphNode(BaseModel):
     """
-    Node in the Ω-Graph knowledge graph.
+    Node in the Omega-Graph knowledge graph.
     Used for: canonical facts, agent profiles, templates, constraints.
     """
     node_id: str = Field(..., description="Unique identifier")
@@ -59,12 +59,12 @@ class GraphNode(BaseModel):
 
 
 # =========================================
-# Ω-VAULT: Semantic Vector Store
+# Omega-VAULT: Semantic Vector Store
 # =========================================
 
 class VaultEmbedding(BaseModel):
     """
-    Entry in the Ω-Vault vector store.
+    Entry in the Omega-Vault vector store.
     Optimized for approximate nearest neighbor (ANN) queries.
     """
     embedding_id: str = Field(..., description="Unique identifier")
@@ -77,12 +77,12 @@ class VaultEmbedding(BaseModel):
 
 
 # =========================================
-# Ω-FLUX: Ephemeral Working Memory
+# Omega-FLUX: Ephemeral Working Memory
 # =========================================
 
 class FluxNode(BaseModel):
     """
-    Temporary node in Ω-Flux working memory.
+    Temporary node in Omega-Flux working memory.
     Used for: GoT reasoning fragments, intermediate calculations, transient state.
     Automatically expires after TTL.
     """
@@ -115,5 +115,5 @@ class TitanOmegaConfig(BaseModel):
     tier: str = Field(default="alpha_omega", description="Active tier set: alpha_omega | graph_only | vault_only")
     mode: str = Field(default="development", description="Runtime mode: production | development")
     persist_strategy: str = Field(default="on_demand", description="Persist policy: all | on_demand")
-    graph_persist_path: Optional[str] = Field(None, description="Absolute path override for Ω-Graph JSON")
-    vault_persist_path: Optional[str] = Field(None, description="Absolute path override for Ω-Vault index")
+    graph_persist_path: Optional[str] = Field(None, description="Absolute path override for Omega-Graph JSON")
+    vault_persist_path: Optional[str] = Field(None, description="Absolute path override for Omega-Vault index")

@@ -3,7 +3,7 @@
 """
 RAG Backbone — Hybrid Retrieval Engine
 
-Combines vector search (Ω-Vault) and graph pattern matching (Ω-Graph)
+Combines vector search (Omega-Vault) and graph pattern matching (Omega-Graph)
 for comprehensive context retrieval in the Context Expansion Protocol.
 """
 
@@ -32,8 +32,8 @@ class RAGBackbone:
     Hybrid retrieval combining vector similarity and graph traversal.
     
     Architecture:
-    1. Vector Search: Ω-Vault ANN queries for semantic similarity
-    2. Graph Search: Ω-Graph pattern matching for structured knowledge
+    1. Vector Search: Omega-Vault ANN queries for semantic similarity
+    2. Graph Search: Omega-Graph pattern matching for structured knowledge
     3. Result Merging: Deduplication and relevance ranking
     4. Contextual Boosting: Trust score and recency weighting
     """
@@ -62,10 +62,10 @@ class RAGBackbone:
         """
         print(f"[RAG] Hybrid retrieval for: '{query[:60]}...'")
         
-        # 1. Vector search from Ω-Vault
+        # 1. Vector search from Omega-Vault
         vector_results = self._vector_search(query, k=k*2)  # Get 2x for merging
         
-        # 2. Graph search from Ω-Graph
+        # 2. Graph search from Omega-Graph
         graph_results = self._graph_search(query, filters=filters, k=k*2)
         
         # 3. Merge and deduplicate
@@ -78,9 +78,9 @@ class RAGBackbone:
         return ranked[:k]
     
     def _vector_search(self, query: str, k: int) -> List[RetrievalResult]:
-        """Search Ω-Vault using vector similarity."""
+        """Search Omega-Vault using vector similarity."""
         if not self.titan.vault:
-            print("[RAG] Ω-Vault not available, skipping vector search")
+            print("[RAG] Omega-Vault not available, skipping vector search")
             return []
         
         vault_hits = self.titan.vault.vector_search(query, k=k)
@@ -115,7 +115,7 @@ class RAGBackbone:
         filters: Optional[Dict[str, Any]] = None,
         k: int = 5
     ) -> List[RetrievalResult]:
-        """Search Ω-Graph using pattern matching and keyword search."""
+        """Search Omega-Graph using pattern matching and keyword search."""
         results = []
         
         # Strategy 1: Direct pattern match if filters provided

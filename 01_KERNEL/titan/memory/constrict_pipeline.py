@@ -32,7 +32,7 @@ class CognitiveCompiler:
 
     def compile_symbolect(self, text: str) -> str:
         # Placeholder for Symbolect encoding
-        return f"⟨Ω:{text}⟩"
+        return f"⟨Omega:{text}⟩"
 
     def blacklight_scan(self, compiled: str) -> list:
         # Safety/Risk audit

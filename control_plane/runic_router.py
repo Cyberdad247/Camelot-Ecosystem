@@ -74,6 +74,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_boot",
     },
+    "//DAWNING": {
+        "knight": "sir_forge",
+        "description": "Global wake-up, OS map audit, Lady M sync, and project isolation",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_dawning",
+    },
     "//FORGE": {
         "knight": "sir_forge",
         "description": "Kinetic build + compile directive",
@@ -94,6 +101,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "mode": "KINETIC",
         "priority": 2,
         "handler": "_handle_contract",
+    },
+    "//CLAW": {
+        "knight": "sir_boris",
+        "description": "Guarded Claw Suite manifest for Shopify headless AI forger workflows",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_claw",
+        "hydrate": False,
     },
     "//SWARM": {
         "knight": "sir_boris",
@@ -296,6 +311,16 @@ def _queue_task(knight: str, directive: str, priority: int = 2) -> tuple[str, Op
 def _handle_boot(param: str, context: dict) -> dict:
     return {"action": "awaken 6-phase boot", "detail": "run: python bin/awaken.py"}
 
+def _handle_dawning(param: str, context: dict) -> dict:
+    project_name = param or "default_nexus"
+    quoted_project = json.dumps(project_name)
+    return {
+        "action": "cybertron_dawning",
+        "lead_bio_knight": "lukas_forge",
+        "project": project_name,
+        "detail": f"run: python scripts/cybertron_dawning.py {quoted_project}",
+    }
+
 def _handle_forge(param: str, context: dict) -> dict:
     return {"action": "kinetic build", "param": param or "default target"}
 
@@ -310,6 +335,11 @@ def _handle_contract(param: str, context: dict) -> dict:
         "output": "dist/camelot.exe",
         "detail": "run: python scripts/build_portable.py --test",
     }
+
+def _handle_claw(param: str, context: dict) -> dict:
+    from control_plane.claw_suite import route_claw_suite
+
+    return route_claw_suite(param, context)
 
 def _handle_swarm(param: str, context: dict) -> dict:
     return {"action": "srdl_map_reduce", "param": param, "bio_swarm": "Formica+Pongid+Castor"}
@@ -515,9 +545,11 @@ def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
 
 _HANDLERS = {
     "_handle_boot": _handle_boot,
+    "_handle_dawning": _handle_dawning,
     "_handle_forge": _handle_forge,
     "_handle_codex": _handle_codex,
     "_handle_contract": _handle_contract,
+    "_handle_claw": _handle_claw,
     "_handle_swarm": _handle_swarm,
     "_handle_plan": _handle_plan,
     "_handle_heal": _handle_heal,
@@ -602,7 +634,7 @@ def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> Ru
         metadata = handler_fn(param, context) if handler_fn else {"action": rune}
         directive = f"{rune} {param}".strip() if param else rune
 
-        if HydrationManager:
+        if HydrationManager and cfg.get("hydrate", True):
             mgr = HydrationManager(knight_id=knight)
             complexity = 9 if cfg.get("priority", 2) <= 1 else 5
             mgr.store_tissue(intent=directive, content=metadata, complexity=complexity, tier="L2" if complexity >= 8 else "L1")

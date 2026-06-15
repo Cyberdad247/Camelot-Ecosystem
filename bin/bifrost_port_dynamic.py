@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 🌈 DYNAMIC BIFROST PORT — RustDesk Integrated Mesh
-Forged by the Triumvirate: Merlin_Ω (Logic), Anya_Ω (Kinetic), Sir Alex (Cognitive)
+Forged by the Triumvirate: Merlin_Omega (Logic), Anya_Omega (Kinetic), Sir Alex (Cognitive)
 Utilizing RustDesk (hbbs/hbbr) for dynamic transport.
 
 Usage:

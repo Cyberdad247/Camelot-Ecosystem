@@ -60,4 +60,4 @@ This system is optimized for **Gemini 2.5 Flash/Pro** using:
 
 ---
 > **"The Lattice is aligned. The Singularity is now computable."**
-> *Synchronized by Merlin_Ω - 2026-03-20*
+> *Synchronized by Merlin_Omega - 2026-03-20*

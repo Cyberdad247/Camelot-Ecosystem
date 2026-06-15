@@ -32,8 +32,9 @@ if sys.platform == "win32":
 
 CAMELOT_OS_ROOT = Path(os.environ.get(
     "CAMELOT_OS_ROOT",
-    os.path.expanduser("~/CAMELOT_OS")
+    os.environ.get("CAMELOT_OS_HOME", os.path.expanduser("~/CAMELOT_OS"))
 ))
+logger.info("Bridge Root: %s", CAMELOT_OS_ROOT)
 KERNEL_DIR = CAMELOT_OS_ROOT / "01_KERNEL"
 VAULT_DIR = CAMELOT_OS_ROOT / "03_VAULT"
 FORGE_DIR = CAMELOT_OS_ROOT / "02_FORGE"
@@ -42,7 +43,7 @@ LEDGER_PATH = CAMELOT_OS_ROOT / "PROVENANCE_LEDGER.md"
 _os_available = KERNEL_DIR.is_dir()
 _components = {}
 _components_lock = threading.Lock()
-IMPORT_TIMEOUT = 10  # seconds — prevents hanging on bad kernel modules
+IMPORT_TIMEOUT = 45  # seconds — prevents hanging on bad kernel modules
 
 
 class _TitanFluxFallback:
@@ -116,9 +117,9 @@ def _add_kernel_to_path():
     """Add CAMELOT_OS paths so kernel modules are importable."""
     paths_to_add = [
         str(CAMELOT_OS_ROOT),
+        str(KERNEL_DIR / "titan"),
         str(KERNEL_DIR),
         str(KERNEL_DIR / "iron_gate"),
-        str(KERNEL_DIR / "titan"),
         str(KERNEL_DIR / "merlin"),
         str(KERNEL_DIR / "agora"),
         str(KERNEL_DIR / "forge"),
@@ -216,10 +217,18 @@ def _import_component(name: str):
 
     elif name == "titan_omega":
         try:
-            from memory.titan_omega import OmegaGraph, OmegaFlux
-            return {"graph": OmegaGraph(), "flux": OmegaFlux()}
+            from titan.memory.titan_omega import TitanOmega
+            stack = TitanOmega.graft(tier="alpha_omega", mode="production", persist="all")
+            return {
+                "graph": stack.graph,
+                "vault": stack.vault,
+                "flux": stack.flux,
+                "config": stack.config,
+                "stack": stack
+            }
         except Exception as e:
-            logger.warning("Titan Omega import failed: %s", e)
+            import traceback
+            logger.warning("Titan Omega import failed: %s\n%s", e, traceback.format_exc())
             return _build_titan_fallback()
 
     elif name == "planning_engine":

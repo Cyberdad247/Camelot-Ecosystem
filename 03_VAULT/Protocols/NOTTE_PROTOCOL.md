@@ -1,4 +1,4 @@
-# 📜 Ω_NOTTE_PROTOCOL (v1.0)
+# 📜 Omega_NOTTE_PROTOCOL (v1.0)
 **[STATUS]**: RADIANT | **[ARCHITECT]**: SIR_WEB_FARER | **[SUBSYSTEM]**: WEB_NAVIGATION
 
 ## 0. THE PRIME DIRECTIVE (Hybrid Web Sovereignty)

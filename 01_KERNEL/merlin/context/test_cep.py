@@ -25,7 +25,7 @@ def test_rag_backbone():
     titan = TitanOmega()
     rag = RAGBackbone(titan)
     
-    # Add test data to Ω-Graph
+    # Add test data to Omega-Graph
     agent_node = GraphNode(
         node_id="agent_sir_lukas",
         type="Agent",
@@ -40,7 +40,7 @@ def test_rag_backbone():
     )
     titan.commit(agent_node, signed_by="test_suite")
     
-    # Add text to Ω-Vault
+    # Add text to Omega-Vault
     if titan.vault:
         titan.vault.add_text(
             "Sir Lukas is an expert Python backend engineer specializing in FastAPI",

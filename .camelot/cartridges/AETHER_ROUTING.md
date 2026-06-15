@@ -12,7 +12,7 @@ This cartridge enables the Knight to command the **OmniRoute Gateway** and the *
 
 | PROVIDER | MODELS | ROLE | ASSIGNED KNIGHT |
 | :--- | :--- | :--- | :--- |
-| **KIRO** | Claude 3.5 Sonnet | Logic / Arch | Merlin_Ω / Sir Boris |
+| **KIRO** | Claude 3.5 Sonnet | Logic / Arch | Merlin_Omega / Sir Boris |
 | **QODER AI**| DeepSeek-R1 | Code Gen / Math | Sir Syntax / Sir Forge |
 | **GROQ** | Llama 3 70B | Kinetic Swarm | Formica (Ants) |
 | **CEREBRAS** | Llama 3.1 70B | Latency Sensitive| Lukas_Edge |

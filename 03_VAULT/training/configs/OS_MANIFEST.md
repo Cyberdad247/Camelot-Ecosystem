@@ -6,13 +6,13 @@
 u0 | ID | Camelot_Apex_OS | {Focus: Singularity_Lattice, Integration: Kinetic_Polyglot}
 
 # THE SEPTEM REGNA (7 LAYERS)
-l7 | ETHEREAL | ANYA_Ω | {Function: Intent_Compiler, Engine: APEE_v6.5, Security: AgentArmor_PDG}
-l6 | GOVERNANCE | ARTHUR_Ω | {Function: Iron_Gate_v1.1, Safety: HITL_Enforcement, Audit: CES_Trivy_Miri}
-l5 | AGENTIC | PALADIN_Ω | {Function: Swarm_Orchestration, Protocol: A2A_Handshake, Topology: Map_Reduce}
-l4 | SEMANTIC | CHRONOS_Ω | {Function: UKG_Memory, Engine: Ouroboros, Format: JSON_LD_GraphRAG}
-l3 | NEURAL | MERLIN_Ω | {Function: Logic_Kernel, Engine: Videneptus, Reasoning: LaC_Oscillation}
-l2 | KINETIC | LUKAS_Ω | {Function: Local_Execution, Stack: Saltare_Cribo_Rotel, Purity: Binary_Only}
-l1 | SUBSTRATE | MORGANA_Ω | {Function: Compute_Bridge, Cloud: Modal_GPU, Local: Docker_gVisor}
+l7 | ETHEREAL | ANYA_Omega | {Function: Intent_Compiler, Engine: APEE_v6.5, Security: AgentArmor_PDG}
+l6 | GOVERNANCE | ARTHUR_Omega | {Function: Iron_Gate_v1.1, Safety: HITL_Enforcement, Audit: CES_Trivy_Miri}
+l5 | AGENTIC | PALADIN_Omega | {Function: Swarm_Orchestration, Protocol: A2A_Handshake, Topology: Map_Reduce}
+l4 | SEMANTIC | CHRONOS_Omega | {Function: UKG_Memory, Engine: Ouroboros, Format: JSON_LD_GraphRAG}
+l3 | NEURAL | MERLIN_Omega | {Function: Logic_Kernel, Engine: Videneptus, Reasoning: LaC_Oscillation}
+l2 | KINETIC | LUKAS_Omega | {Function: Local_Execution, Stack: Saltare_Cribo_Rotel, Purity: Binary_Only}
+l1 | SUBSTRATE | MORGANA_Omega | {Function: Compute_Bridge, Cloud: Modal_GPU, Local: Docker_gVisor}
 
 # BIO-KINETIC SWARM ZOOLOGY (NANO-KNIGHTS)
 z0 | FORMICA | Ants | {Role: Parallel_Rewrite, Budget: 150_tokens, Parallelism: 15-50x}
@@ -37,8 +37,8 @@ t3 | PHIALS | Royal_Armory | {Type: Zero_Latency_Binaries, Core: Tree_Sitter_AST
 5. **Context is the Compiler:** Read the Ledger and Index before execution.
 
 ## Logic Engine: Learning-at-Criticality (LaC)
-- **Oscillation:** Merlin_Ω alternates temperature (0.2 ↔ 1.2) to navigate complex Tree-of-Thought (ToT) branches.
-- **AgentArmor:** Anya_Ω blocks data flows from Untrusted_Source → Shell_Sink via PDG analysis.
+- **Oscillation:** Merlin_Omega alternates temperature (0.2 ↔ 1.2) to navigate complex Tree-of-Thought (ToT) branches.
+- **AgentArmor:** Anya_Omega blocks data flows from Untrusted_Source → Shell_Sink via PDG analysis.
 
 ---
 > **"The Lattice is Aligned. Singularity is Now Computable."**

@@ -33,4 +33,4 @@ Use this skill when initiating any complex directive to ensure deterministic exe
 - Generate a compact **Implementation Plan** (Table/JSON) to be reviewed by the Operator.
 
 ---
-*Created by Merlin_Ω for the Camelot-OS Skills Vault (03_VAULT).*
+*Created by Merlin_Omega for the Camelot-OS Skills Vault (03_VAULT).*

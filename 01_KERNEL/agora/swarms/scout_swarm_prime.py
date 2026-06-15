@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Ω_SCOUT_SWARM_PRIME: The Efficiency Layer
+Omega_SCOUT_SWARM_PRIME: The Efficiency Layer
 A self-optimizing agentic subsystem that scouts OSS repos for zero-burn tech,
 normalizes them into UKG nodes, and exposes them as universal Phials.
 
@@ -36,7 +36,7 @@ from langgraph.graph import END, StateGraph
 
 
 class ScoutState(TypedDict):
-    """State for the Ω_SCOUT_SWARM_PRIME graph"""
+    """State for the Omega_SCOUT_SWARM_PRIME graph"""
 
     query_vectors: Dict[str, List[str]]
     candidate_repos: List[Dict[str, Any]]
@@ -251,7 +251,7 @@ def ukg_emitter(state: ScoutState) -> Dict:
 
 def build_scout_swarm_prime() -> StateGraph:
     """
-    Build the Ω_SCOUT_SWARM_PRIME graph
+    Build the Omega_SCOUT_SWARM_PRIME graph
     """
     workflow = StateGraph(ScoutState)
 
@@ -290,7 +290,7 @@ def build_scout_swarm_prime() -> StateGraph:
 if __name__ == "__main__":
     telemetry.info("SCOUT_SWARM_START", layer="Efficiency")
     print("=" * 60)
-    print("Ω_SCOUT_SWARM_PRIME: The Efficiency Layer")
+    print("Omega_SCOUT_SWARM_PRIME: The Efficiency Layer")
     print("=" * 60)
 
     # Build and execute the graph

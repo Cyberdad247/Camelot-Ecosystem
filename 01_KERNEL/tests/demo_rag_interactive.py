@@ -84,7 +84,7 @@ def main():
     # Demo queries
     demo_queries = [
         ("What is the Septem Regna architecture?", 3),
-        ("Explain the role of Merlin Ω in Camelot OS", 3),
+        ("Explain the role of Merlin Omega in Camelot OS", 3),
         ("What are the kinetic binaries in Layer 2?", 2),
     ]
     

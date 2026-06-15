@@ -235,7 +235,7 @@ def morgana_brain(req: MorganaRequest):
             vault_status = f"Connection Error: {str(e)}"
         
         # GEMINI API CALL WITH CIRCUIT BREAKER
-        sys_prompt = f"IDENTITY: MORGANA_Ω_PROD | MODE: {req.mode} | CULTURE: {culture_key}\nCONTEXT: {culture_context}"
+        sys_prompt = f"IDENTITY: MORGANA_Omega_PROD | MODE: {req.mode} | CULTURE: {culture_key}\nCONTEXT: {culture_context}"
         full_prompt = f"{sys_prompt}\n\nTASK: {req.task}"
         
         try:
@@ -303,7 +303,7 @@ def health():
         "status": "Healthy",
         "timestamp": datetime.now().isoformat(),
         "version": "v92.1",
-        "service": "MORGANA_Ω_PROD"
+        "service": "MORGANA_Omega_PROD"
     }
 """
 
@@ -486,7 +486,7 @@ export default function MorganaAvatar({ mode = "IDLE", onError, requestId }: Mor
         <div className="absolute bottom-2 right-4 text-[10px] font-mono text-[#D4AF37] tracking-widest opacity-80 bg-black/50 px-2 py-1 rounded">
           <div className="flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${isHealthy ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></span>
-            MORGANA_Ω_PROD // STATUS: {mode}
+            MORGANA_Omega_PROD // STATUS: {mode}
           </div>
           {requestId && <span className="text-[8px]">REQ: {requestId.slice(-8)}</span>}
           <div className="text-[7px] opacity-50">LST_CHK: {lastCheck}</div>

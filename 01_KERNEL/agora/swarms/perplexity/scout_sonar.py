@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Ω_SCOUT_SWARM_PRIME: Perplexity Native Adapter
+Omega_SCOUT_SWARM_PRIME: Perplexity Native Adapter
 Enables Lady Apis to forage using 'sonar-pro' with strict JSON Schema output.
 """
 
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     scout = ScoutSonar()
 
     print("=" * 60)
-    print("Ω_SCOUT_SWARM_PRIME: PERPLEXITY ADAPTER")
+    print("Omega_SCOUT_SWARM_PRIME: PERPLEXITY ADAPTER")
     print("=" * 60)
 
     query = "Find top Rust-based KV cache optimization tools from the last 6 months."

@@ -9,7 +9,7 @@
 > `bin/awaken.py`, `docs/architecture/SOURCE_OF_TRUTH_MAP.md`, and
 > `entiremap.md`.
 
-## //BOOT PHASE MATRIX (v700.0.0 — Ω_SOVEREIGN)
+## //BOOT PHASE MATRIX (v700.0.0 — Omega_SOVEREIGN)
 
 On `//BOOT`, `hud.py::main()` runs a **6-phase ignition**. Each phase is
 idempotent (safe to re-run), isolated (failure in one phase does not block

@@ -3,7 +3,7 @@
 """
 [🛡️] IDENTITY_DECAY: The Zenith Protocol
 STATUS: ACTIVE
-ARCH: MERLIN_Ω (Project Ascension)
+ARCH: MERLIN_Omega (Project Ascension)
 
 Objective:
 Prevent high-fidelity simulation of non-consenting living individuals ("Doppelgängers").

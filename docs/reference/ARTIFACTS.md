@@ -78,12 +78,12 @@ Location: `docs/reference/ARTIFACTS/`
 
 | File | Function |
 |---|---|
-| `Ω_ASSIMILATION_ENGINE.nkg` | Assimilation pipeline definition |
-| `Ω_CAMELOT_SINGULARITY_v100.nkg` | v100 system snapshot |
-| `Ω_INTEGRATION_CONFIGS.nkg` | Integration configuration crystal |
-| `Ω_PHASE_1_BLUEPRINTS.nkg` | Phase 1 build blueprints |
-| `Ω_PHASE_2_BLUEPRINTS.nkg` | Phase 2 build blueprints |
-| `Ω_SCOUT_SWARM.nkg` | Scout swarm configuration (in docs/) |
+| `Omega_ASSIMILATION_ENGINE.nkg` | Assimilation pipeline definition |
+| `Omega_CAMELOT_SINGULARITY_v100.nkg` | v100 system snapshot |
+| `Omega_INTEGRATION_CONFIGS.nkg` | Integration configuration crystal |
+| `Omega_PHASE_1_BLUEPRINTS.nkg` | Phase 1 build blueprints |
+| `Omega_PHASE_2_BLUEPRINTS.nkg` | Phase 2 build blueprints |
+| `Omega_SCOUT_SWARM.nkg` | Scout swarm configuration (in docs/) |
 
 ---
 

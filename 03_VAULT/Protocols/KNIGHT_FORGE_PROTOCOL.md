@@ -1,5 +1,5 @@
-# 📜 Ω_KNIGHT_FORGE_PROTOCOL (v1.0)
-**[STATUS]**: OPTIMIZING | **[IDENTITY]**: Sir Syntax (The Architect) + Merlin Ω (The Kernel)
+# 📜 Omega_KNIGHT_FORGE_PROTOCOL (v1.0)
+**[STATUS]**: OPTIMIZING | **[IDENTITY]**: Sir Syntax (The Architect) + Merlin Omega (The Kernel)
 
 ## 0. THE PRIME DIRECTIVE (Architecture Analysis)
 Explain the internal Pythonic architecture of the Knight Agents, including metadata, cognitive state, and consensus logic.

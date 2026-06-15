@@ -19,6 +19,7 @@ KNIGHT_NOTEBOOKS = {
     "LADY_APIS": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
     "MERLIN_OMEGA": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
     "SIR_HELIO": "56820318-bb91-451f-aac4-4b46424898cf",
+    "SIR_SONUS": "b8a1c3d5-e2f4-4687-9a01-234567890abc",
 }
 
 class CloudBrainConnector:

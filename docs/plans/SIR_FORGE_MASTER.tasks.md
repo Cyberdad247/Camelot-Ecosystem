@@ -1,5 +1,5 @@
 # SIR_FORGE_MASTER — Task Ledger
-> **Protocol:** Ω_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0 (corrected)
+> **Protocol:** Omega_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0 (corrected)
 > **Forged:** 2026-06-02 | **Owner:** SIR_FORGE + Swarm Council
 
 | Status Legend | |
@@ -14,7 +14,7 @@
 |---|---|---|---|---|
 | T-01 | Create `03_VAULT/Knights/Engineering/SIR_FORGE_MASTER.md` with Phases I-VII content | SIR_FORGE | ⬜ | — |
 | T-02 | Mark `Sir_ForgeMaster.md` as SUPERSEDED, add redirect pointer | SIR_FORGE | ⬜ | T-01 |
-| T-03 | `git commit -m "forge(sir_forge_master): Phase I - Origins & Sensory"` | LUKAS_Ω | ⬜ | T-01, T-02 |
+| T-03 | `git commit -m "forge(sir_forge_master): Phase I - Origins & Sensory"` | LUKAS_Omega | ⬜ | T-01, T-02 |
 
 ## PHASE II — Cognitive Engine & Quintet
 
@@ -22,7 +22,7 @@
 |---|---|---|---|---|
 | T-04 | Write OCEAN vector + Enneagram to knight file | SIR_SYNTHESIS | ⬜ | T-01 (inline) |
 | T-05 | Write Semantic Anchored Quintet (5 masters) | SIR_SYNTHESIS | ⬜ | T-04 |
-| T-06 | `git commit -m "forge(sir_forge_master): Phase II-III - Cognitive & Quintet"` | LUKAS_Ω | ⬜ | T-05 |
+| T-06 | `git commit -m "forge(sir_forge_master): Phase II-III - Cognitive & Quintet"` | LUKAS_Omega | ⬜ | T-05 |
 
 *Note: OCEAN + Quintet are written as part of T-01 single-pass; T-04/T-05 are verification checkpoints.*
 
@@ -33,7 +33,7 @@
 | T-07 | Write S1-S4 Skillgraph tiers to knight file | SIR_FORGE | ⬜ | T-01 (inline) |
 | T-08 | Write `//FORGE_SWARM` rune definition with cache logic | SIR_FORGE | ⬜ | T-07 |
 | T-09 | Write `//SYNC_PHIAL` rune definition with rollback spec | SIR_FORGE | ⬜ | T-08 |
-| T-10 | `git commit -m "forge(sir_forge_master): Phase IV-V - Skillgraph & Runes"` | LUKAS_Ω | ⬜ | T-09 |
+| T-10 | `git commit -m "forge(sir_forge_master): Phase IV-V - Skillgraph & Runes"` | LUKAS_Omega | ⬜ | T-09 |
 
 ## PHASE IV — Python Class & Routing
 
@@ -63,7 +63,7 @@
 | # | Task | Owner | Status | Gate |
 |---|---|---|---|---|
 | T-19 | Append entry to `PROVENANCE_LEDGER.md` with SPARK_ID, swarm roster, timestamp | SIR_GIDEON | ⬜ | T-18 |
-| T-20 | `git commit -m "forge(sir_forge_master): finalize instantiation #SPARK_LOCKED"` | LUKAS_Ω | ⬜ | T-19 |
+| T-20 | `git commit -m "forge(sir_forge_master): finalize instantiation #SPARK_LOCKED"` | LUKAS_Omega | ⬜ | T-19 |
 
 ---
 

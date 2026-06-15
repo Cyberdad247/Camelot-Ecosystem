@@ -20,7 +20,7 @@ def test_swarm_activation():
     try:
         with antigravity_safe.open(skill_path, "r", encoding="utf-8") as f:
             content = f.read()
-            if "# Skill: Ω_SWARM_CONDUCTOR" in content:
+            if "# Skill: Omega_SWARM_CONDUCTOR" in content:
                 print(f"[TEST] Skill loaded successfully: {os.path.basename(skill_path)}")
             else:
                 print("[TEST] Skill content mismatch.")

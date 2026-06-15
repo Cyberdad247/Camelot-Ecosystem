@@ -11,7 +11,7 @@ ledgers = [
 entry = """
 ---
 ## [2026-04-13] — KERNEL PURGE & LATTICE HARDENING (v400.0.0)
-- **Actor**: ANYA_Ω (Sovereign Interface) / AGENTEER (Meta-Agent)
+- **Actor**: ANYA_Omega (Sovereign Interface) / AGENTEER (Meta-Agent)
 - **Authorization**: Sovereign request
 - **Intent**: Implement all recommendations from the Agenteer's v400 self-critique.
 - **Architectural Deltas**:

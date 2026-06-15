@@ -1,0 +1,11 @@
+{
+  "project": "review_harness",
+  "requested_name": "review_harness",
+  "protocol": "CYBERTRON_DAWNING",
+  "created_or_verified_at": "2026-06-10T06:08:05.817037+00:00",
+  "files": [
+    "blueprint.md",
+    "task.md",
+    "verification.md"
+  ]
+}

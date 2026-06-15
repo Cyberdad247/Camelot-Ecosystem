@@ -19,7 +19,7 @@ Assimilate the `AgentForge` framework to enable declarative, multi-agent cogniti
 - Ensure context persistence across OS-wide orchestrations.
 
 ### Phase III: Cog Orchestration
-- Integrate the "Cogs" workflow logic with the **Merlin Ω** AIOS scheduler.
+- Integrate the "Cogs" workflow logic with the **Merlin Omega** AIOS scheduler.
 - Use declarative YAML for defining complex project build-outs.
 
 ## 4. SECURITY & GOVERNANCE (SASE)

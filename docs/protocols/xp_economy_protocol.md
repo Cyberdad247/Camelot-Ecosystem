@@ -56,5 +56,5 @@ graph LR
 ## ⚖️ SCALABILITY & PROVENANCE
 XP levels are stored in the agent's individual `.md` profiles in the Vault. As the "Kingdom XP" grows, the OS unlocks new **Omega Capabilities**, such as the ability to spawn larger swarms or execute multi-repo audits. This ensures the system grows in intelligence as it grows in data.
 
-*Signed by Merlin_Ω and Anya_Ω.*
+*Signed by Merlin_Omega and Anya_Omega.*
 *Camelot Apex v200.0 [Kinetic Sovereign]*

@@ -204,7 +204,7 @@ def morgana_brain(req: MorganaRequest):
             vault_status = f"Connection Error: {str(e)}"
         
         # GEMINI API CALL WITH CIRCUIT BREAKER
-        sys_prompt = f"""IDENTITY: MORGANA_Ω_PROD | MODE: {req.mode} | CULTURE: {culture_key}
+        sys_prompt = f"""IDENTITY: MORGANA_Omega_PROD | MODE: {req.mode} | CULTURE: {culture_key}
         CONTEXT: {culture_context}"""
         full_prompt = f"{sys_prompt}\n\nTASK: {req.task}"
         
@@ -273,7 +273,7 @@ def health():
         "status": "Healthy",
         "timestamp": datetime.now().isoformat(),
         "version": "v92.1",
-        "service": "MORGANA_Ω_PROD"
+        "service": "MORGANA_Omega_PROD"
     }
 
 # ADDITIONAL FUNCTION: Same API, different endpoint

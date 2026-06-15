@@ -56,5 +56,5 @@ For low-risk tasks (simple text edits, documentation logs), the gate remains ope
 ## ⚖️ SCALABILITY & PROVENANCE
 Every "Gate Event" is assigned a unique UUID and logged to the `PROVENANCE_LEDGER.md`. This creates a perfect audit trail, allowing the Sovereign to "Roll Back" the kingdom to a known good state if a strike results in unexpected instability.
 
-*Signed by Merlin_Ω and Anya_Ω.*
+*Signed by Merlin_Omega and Anya_Omega.*
 *Camelot Apex v200.0 [Kinetic Sovereign]*

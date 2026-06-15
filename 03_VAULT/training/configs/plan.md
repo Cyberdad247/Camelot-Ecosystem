@@ -1,4 +1,4 @@
-# [SYSTEM_CALL] :: Ω_FORGE_CLI_INTERCEPTOR
+# [SYSTEM_CALL] :: Omega_FORGE_CLI_INTERCEPTOR
 # [ARCHITECT] :: SIR_FORGE (The Builder)
 # [CONTEXT] :: Camelot Apex v209.0 Kinetic Stack
 
@@ -11,12 +11,12 @@ Write the complete Python script for `camelot_cli.py` to serve as the Read-Eval-
    - Implement an interactive `while True:` loop that accepts user input via a styled terminal prompt (e.g., `[👑 Sovereign Input]: `).
 
 2. **The Interception Engine (Runic Routing):**
-   - The parser must intercept any command starting with `//` or `Ω_`.
+   - The parser must intercept any command starting with `//` or `Omega_`.
    - **Condition 1 (`//FORGE`):** If the input starts with `//FORGE`, bypass the LLM entirely. Use Python's `subprocess.run` to directly execute the local Rust bundler: `cribo --entry src/main.py --output bundle.py`. Print a success or error message based on the kinetic execution.
-   - **Condition 2 (`Ω_SYNC` or other runes):** Add a stub for `Ω_SYNC` that prints "[Ouroboros Sync Triggered]".
+   - **Condition 2 (`Omega_SYNC` or other runes):** Add a stub for `Omega_SYNC` that prints "[Ouroboros Sync Triggered]".
 
 3. **The Saltare Gateway (Natural Language):**
-   - If the input does NOT start with `//` or `Ω_` (standard text), treat it as a natural language query.
+   - If the input does NOT start with `//` or `Omega_` (standard text), treat it as a natural language query.
    - Do not process it locally. Forward the prompt to the Saltare MCP Gateway using the `requests` library.
    - POST the input to `http://localhost:8080/route` with the JSON payload: `{"query": user_input}`.
    - Print the resulting `tool_to_call` or textual response from the gateway.

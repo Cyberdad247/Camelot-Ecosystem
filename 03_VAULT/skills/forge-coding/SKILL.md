@@ -29,4 +29,4 @@ Use this skill to transmute planning into kinetic, secure, and testable code.
 - Run `Squire Clean` (Lint/Format) and `Squire Purge` (Tree-shake) before submitting.
 
 ---
-*Created by Merlin_Ω for the Camelot-OS Skills Vault (03_VAULT).*
+*Created by Merlin_Omega for the Camelot-OS Skills Vault (03_VAULT).*

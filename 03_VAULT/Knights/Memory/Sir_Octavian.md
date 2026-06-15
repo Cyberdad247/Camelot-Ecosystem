@@ -22,7 +22,7 @@
 4.  **Signal Output**: Emit a pure [CLEAN_SIGNAL] stream for Myrmidon.
 
 ## ⚙️ KINETIC BINDINGS
-*   **Protocol**: `Ω_RENORMALIZATION_LATTICE` (Phase I)
+*   **Protocol**: `Omega_RENORMALIZATION_LATTICE` (Phase I)
 *   **Filter**: GIGO (Garbage-In, Garbage-Out) Logic
 *   **Logic**: Physics-based effective field theory.
 

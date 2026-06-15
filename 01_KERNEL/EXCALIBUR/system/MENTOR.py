@@ -17,7 +17,7 @@ LEDGER_PATH = os.path.join(ROOT, "PROVENANCE_LEDGER.md")
 
 def log_to_ledger(action, status="SUCCESS"):
     timestamp = datetime.now().isoformat()
-    entry = f"| {timestamp} | MENTOR_Ω | {action} | {status} |"
+    entry = f"| {timestamp} | MENTOR_Omega | {action} | {status} |"
     with open(LEDGER_PATH, "a", encoding="utf-8") as f:
         f.write("\n" + entry)
     print(entry)

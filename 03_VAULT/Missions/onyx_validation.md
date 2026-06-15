@@ -522,5 +522,5 @@ Review the completed implementation for:
 
 ---
 
-*Validation matrix forged by ANYA_Ω | SIR_ALEX | SIR_BORIS — 2026-04-25*  
+*Validation matrix forged by ANYA_Omega | SIR_ALEX | SIR_BORIS — 2026-04-25*  
 *[Omega_SYNC] Ledger note: 1a90e838-d1c8-4857-a2f6-cab5a10a0a52*

@@ -913,29 +913,24 @@ def boot_kitten_tts(home: Path) -> tuple[bool, str]:
 
 
 def boot_titan_omega(home: Path) -> tuple[bool, str]:
-    """Titan Omega — graft all three memory tiers (Ω-Graph + Ω-Vault + Ω-Flux) in production mode."""
+    """Titan Omega — graft all three memory tiers (Omega-Graph + Omega-Vault + Omega-Flux) in production mode."""
     import sys
     import importlib
-    titan_dir = home / "01_KERNEL" / "titan"
-    if not titan_dir.exists():
-        return False, "01_KERNEL/titan not found — Titan memory unavailable"
+    kernel_dir = home / "01_KERNEL"
+    if not kernel_dir.exists():
+        return False, "01_KERNEL not found — Titan memory unavailable"
     try:
-        # Add 01_KERNEL/titan to sys.path so `memory` package resolves with relative imports
-        titan_str = str(titan_dir)
-        injected = titan_str not in sys.path
-        if injected:
-            sys.path.insert(0, titan_str)
-        # Purge any stale cached fragments before (re)loading
-        for key in list(sys.modules.keys()):
-            if "titan_omega" in key or "titan_schemas" in key:
-                del sys.modules[key]
-        mod = importlib.import_module("memory.titan_omega")
+        # Add 01_KERNEL to sys.path so `titan` package resolves
+        kernel_str = str(kernel_dir)
+        if kernel_str not in sys.path:
+            sys.path.insert(0, kernel_str)
+        mod = importlib.import_module("titan.memory.titan_omega")
         stack = mod.TitanOmega.graft(tier="alpha_omega", mode="production", persist="all")
         tier = stack.config.tier
         mode = stack.config.mode
         graph_nodes = len(stack.graph.graph.nodes()) if stack.graph else 0
         vault_size = len(stack.vault.embeddings) if stack.vault else 0
-        return True, f"TitanΩ grafted ({tier}/{mode}) — graph={graph_nodes} nodes, vault={vault_size} embeddings"
+        return True, f"TitanOmega grafted ({tier}/{mode}) — graph={graph_nodes} nodes, vault={vault_size} embeddings"
     except Exception as exc:
         return False, f"Titan graft failed: {type(exc).__name__}: {exc}"
 
@@ -1029,7 +1024,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},
         {"name": "OmniVoice     :3002", "required": False, "fn": lambda: boot_omnivoice_router(home)},
         {"name": "Kitten TTS    :8300", "required": False, "fn": lambda: boot_kitten_tts(home)},
-        {"name": "Titan Omega  [Ω]",   "required": False, "fn": lambda: boot_titan_omega(home)},
+        {"name": "Titan Omega  [Omega]",   "required": False, "fn": lambda: boot_titan_omega(home)},
         {"name": "Sir Octavian  :8400", "required": False, "fn": lambda: boot_sir_octavian(home)},
         {"name": "Morgana Bridge :8001", "required": True, "fn": lambda: boot_morgana_bridge(home)},
         {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},

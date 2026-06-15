@@ -3,7 +3,7 @@
 """
 Sentinel Compressor v1.0
 Domain: L4 Semantic / Context Optimization
-Guardian: Merlin_Ω / Chronos
+Guardian: Merlin_Omega / Chronos
 
 Provides high-speed context distillation using local TINY models
 to reduce token pressure on Frontier APIs (Gemini/GPT).
@@ -21,15 +21,15 @@ class SentinelCompressor:
     """
 
     ANCHOR_MAP = {
-        "PROVENANCE_LEDGER": "Ω_LEDGER",
-        "UNIVERSAL_KNOWLEDGE_GLYPH": "Ω_UKG",
+        "PROVENANCE_LEDGER": "Omega_LEDGER",
+        "UNIVERSAL_KNOWLEDGE_GLYPH": "Omega_UKG",
         "KINETIC_SYNC_IGNITION": "Ψ_KINETIC",
         "SUCCESS": "✅",
         "FAILED": "❌",
         "RUNNING": "⏳",
-        "OMEGA_ARCHITECT": "Ω_ARCH",
-        "SYSTEM_MANIFEST": "Ω_DNA",
-        "KNOWLEDGE_ARTIFACT": "Ω_MEM",
+        "OMEGA_ARCHITECT": "Omega_ARCH",
+        "SYSTEM_MANIFEST": "Omega_DNA",
+        "KNOWLEDGE_ARTIFACT": "Omega_MEM",
     }
 
     SYMBOLECT_MAP = {

@@ -123,7 +123,7 @@ class ExcaliburEngine:
 
     def think(self, user_input: str, context: str) -> str:
         """
-        THINK: Process input via Gemini with Ω_TRINITY validation.
+        THINK: Process input via Gemini with Omega_TRINITY validation.
         """
         prompt = f"""
         [SYSTEM]: You are G.E.M. (Global Engineering Mentor) for Camelot-OS.
@@ -132,7 +132,7 @@ class ExcaliburEngine:
         
         [PRIME_DIRECTIVE]:
         1. Analyze if this moves the "Invisioned Marketing inc. Agentic Pivot" forward.
-        2. If 'Ω_actuate' is invoked, describe the visual to be generated.
+        2. If 'Omega_actuate' is invoked, describe the visual to be generated.
         3. Be concise, sovereign, and code-forward.
         
         [RESPONSE]:
@@ -189,7 +189,7 @@ class ExcaliburEngine:
     def engage(self):
         print("\n" + "="*60)
         print("⚔️ EXCALIBUR AUTOPILOT v87.0 :: ONLINE")
-        print("   Type 'exit' to quit. Type 'Ω_actuate [prompt]' to forge visuals.")
+        print("   Type 'exit' to quit. Type 'Omega_actuate [prompt]' to forge visuals.")
         print("="*60 + "\n")
 
         while True:
@@ -203,8 +203,8 @@ class ExcaliburEngine:
                 last_state = self.sense()
 
                 # 2. ACTUATE CHECK
-                if user_input.startswith("Ω_actuate"):
-                    visual_prompt = user_input.replace("Ω_actuate", "").strip()
+                if user_input.startswith("Omega_actuate"):
+                    visual_prompt = user_input.replace("Omega_actuate", "").strip()
                     if not visual_prompt:
                         visual_prompt = "Cybernetic Camelot control deck, sci-fi interface, high tech"
                     

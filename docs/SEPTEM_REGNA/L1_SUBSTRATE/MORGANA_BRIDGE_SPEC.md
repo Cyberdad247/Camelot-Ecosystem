@@ -1,6 +1,6 @@
 <!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
 # 🌑 MORGANA BRIDGE SPECIFICATION (v1.0)
-**Domain:** L1 Substrate | **Guardian:** Morgana_Ω | **Status:** RADIANT
+**Domain:** L1 Substrate | **Guardian:** Morgana_Omega | **Status:** RADIANT
 
 ## 📖 OVERVIEW
 The Morgana Bridge is the high-velocity conduit between the local **Singularity Lattice** and the **Modal Cloud Substrate**. It enables the Spire to delegate GPU-intensive tasks (Voice, Vision, Training) to distributed clusters while maintaining a single, unified memory state.
@@ -25,7 +25,7 @@ Every cloud strike must present the **Bifrost Identity Key** (`ap2_signing_key.b
 Modal Volumes (`rustdesk-data`, `squire-brain-vol`) are automatically mounted to `/mnt/substrate` in all **//FLEET** Docker or gVisor sandboxes.
 
 ### 3. GPU SCALING
-Tasks tagged with `[L1_GPU]` are autonomously routed to the Modal Substrate. The **Lukas_Ω** kinetic layer manages the local-to-cloud handoff with zero user friction.
+Tasks tagged with `[L1_GPU]` are autonomously routed to the Modal Substrate. The **Lukas_Omega** kinetic layer manages the local-to-cloud handoff with zero user friction.
 
 ---
 

@@ -4,9 +4,9 @@
 
 **Goal:** Instantiate SIR_FORGE_MASTER, the Sovereign Knight responsible for orchestrating the AgentForge framework within Camelot-OS.
 
-**Architecture:** Following the Ω_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0, this plan systematically generates the identity, cognitive engine, and operational physics of the knight. The final artifact will be a crystallized Markdown character sheet in the Vault, secured with a SHA-256 Spark ID.
+**Architecture:** Following the Omega_STANDARD_KNIGHT_FORGE_PROTOCOL_v1.0, this plan systematically generates the identity, cognitive engine, and operational physics of the knight. The final artifact will be a crystallized Markdown character sheet in the Vault, secured with a SHA-256 Spark ID.
 
-**Tech Stack:** Camelot-OS Protocol Ω v1.0, MFOE Routing, Proteus MPI.
+**Tech Stack:** Camelot-OS Protocol Omega v1.0, MFOE Routing, Proteus MPI.
 
 ---
 

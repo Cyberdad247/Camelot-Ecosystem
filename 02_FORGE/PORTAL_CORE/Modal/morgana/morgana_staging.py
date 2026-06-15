@@ -28,6 +28,6 @@ def health_staging():
         "status": "Healthy (Staging)",
         "timestamp": "2026-01-14T22:45:00",
         "version": "v92.1-staging",
-        "service": "MORGANA_Ω_STAGING"
+        "service": "MORGANA_Omega_STAGING"
     }</content>
 <parameter name="filePath">c:\Users\vizio\Applications\chimera-os\Modal\morgana\morgana_staging.py

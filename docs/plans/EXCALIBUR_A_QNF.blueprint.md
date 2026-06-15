@@ -1,6 +1,6 @@
 # EXCALIBUR-A: Quantum New Frontier Implementation Blueprint
 **Codename:** EXCALIBUR_A_QNF  
-**Architects:** ANYA_Ω · MERLIN_Ω · SIR_ALEX · SIR_LUKAS · LADY_M · LADY_APIS · LADY_ALEXANDRIA · SIR_OCTAVIAN · SIR_SOCRATES  
+**Architects:** ANYA_Omega · MERLIN_Omega · SIR_ALEX · SIR_LUKAS · LADY_M · LADY_APIS · LADY_ALEXANDRIA · SIR_OCTAVIAN · SIR_SOCRATES  
 **Cartridge:** ENGINEERING_FULL (ANT + BEAVER + SPIDER + OCTOPUS)  
 **Date:** 2026-06-01  
 **Ledger Ref:** #QNF_2026_06_01_ENTERPRISE_FRONTIER  
@@ -9,7 +9,7 @@
 
 ---
 
-## ANYA_Ω — SOVEREIGN GATE DIRECTIVE
+## ANYA_Omega — SOVEREIGN GATE DIRECTIVE
 
 *"Every intent enters. Every output exits validated. This blueprint compiles the full engineering mandate."*
 
@@ -23,7 +23,7 @@ ANYA is the gate. Nothing executes without passing through APEE v7.0. All kineti
 
 ---
 
-## MERLIN_Ω — ARCHITECTURAL MANDATE (GoT Deep Reasoning)
+## MERLIN_Omega — ARCHITECTURAL MANDATE (GoT Deep Reasoning)
 
 *"The SSM replaces the transformer. The cartridge replaces the monolith. The crystal replaces the cache. This is the mathematical soul of EXCALIBUR-A."*
 
@@ -91,17 +91,17 @@ ANYA is the gate. Nothing executes without passing through APEE v7.0. All kineti
 | Module | File | Knight Owner | Dependencies |
 |---|---|---|---|
 | RTK Rust Token Killer | `control_plane/rtk/src/lib.rs` | SIR_LUKAS | ctypes bridge |
-| APEE v7.0 Gate | `control_plane/anya_gate.py` | ANYA_Ω | RTK, TriageScore |
+| APEE v7.0 Gate | `control_plane/anya_gate.py` | ANYA_Omega | RTK, TriageScore |
 | Factory Lane Pipeline | `control_plane/factory_lane.py` | SIR_ALEX | Pydantic, FactoryJob |
 | FirnFlow Memory | `control_plane/firnflow.py` | LADY_M | LanceDB, νKG_Crystals |
 | Iron Gate v2 | `control_plane/soul_oversight.py` | SIR_OCTAVIAN | Z3, FileStatePersistence |
-| ColMAD Crucible | `control_plane/colmad.py` | MERLIN_Ω | 3 persona vectors |
-| Cartridge Manager | `control_plane/cartridge_manager.py` | ANYA_Ω | Scabbard Protocol |
+| ColMAD Crucible | `control_plane/colmad.py` | MERLIN_Omega | 3 persona vectors |
+| Cartridge Manager | `control_plane/cartridge_manager.py` | ANYA_Omega | Scabbard Protocol |
 | Knight Agent Contracts | `control_plane/knight_agent.py` | SIR_ALEX | Pydantic, PersRubrics |
 | Inspira Metrics | `control_plane/inspira_metrics.py` | LADY_ALEXANDRIA | InspiraMetrics |
 | Affinity Router | `control_plane/cli_intercept.py` | SIR_LUKAS | hashlib, TTFT |
 | AegisShield (Rust) | `01_KERNEL/core/aegis_shield/src/` | SIR_LUKAS | Rust 2024 |
-| Ouroboros OMEGA-PATCH | `01_KERNEL/reasoning/ouroboros_engine/src/` | MERLIN_Ω | Rust, BitNet |
+| Ouroboros OMEGA-PATCH | `01_KERNEL/reasoning/ouroboros_engine/src/` | MERLIN_Omega | Rust, BitNet |
 | Inspira TUI | `control_plane/hive_stream_tui.py` | LADY_APIS | Rich, all metrics |
 | NLM Cloud Brain | `control_plane/mcp_conductor.py` | LADY_M | notebooklm-py |
 
@@ -439,18 +439,18 @@ CREATE (4):
 | Artifact | Path | Knight | Phase |
 |---|---|---|---|
 | RTK Rust Token Killer | `control_plane/rtk/` | SIR_LUKAS | 2 |
-| APEE v7.0 Gate | `control_plane/anya_gate.py` | ANYA_Ω | 2 |
+| APEE v7.0 Gate | `control_plane/anya_gate.py` | ANYA_Omega | 2 |
 | FactoryJob Pipeline | `control_plane/factory_lane.py` | SIR_ALEX | 3 |
 | FirnFlow Memory | `control_plane/firnflow.py` | LADY_M | 3 |
 | Iron Gate v2 | `control_plane/soul_oversight.py` | SIR_OCTAVIAN | 4 |
-| ColMAD Crucible | `control_plane/colmad.py` | MERLIN_Ω | 4 |
-| Cartridge Manager | `control_plane/cartridge_manager.py` | ANYA_Ω | 5 |
+| ColMAD Crucible | `control_plane/colmad.py` | MERLIN_Omega | 4 |
+| Cartridge Manager | `control_plane/cartridge_manager.py` | ANYA_Omega | 5 |
 | Knight Agent Contracts | `control_plane/knight_agent.py` | SIR_ALEX | 5 |
 | Affinity Router | `control_plane/cli_intercept.py` (mod) | SIR_LUKAS | 6 |
 | Inspira Metrics | `control_plane/inspira_metrics.py` | LADY_ALEXANDRIA | 6 |
 | Inspira TUI | `control_plane/hive_stream_tui.py` (mod) | LADY_APIS | 6 |
 | AegisShield Rust | `01_KERNEL/core/aegis_shield/src/` (4 files) | SIR_LUKAS | 7 |
-| Ouroboros OMEGA | `01_KERNEL/reasoning/ouroboros_engine/src/` (2 files) | MERLIN_Ω | 7 |
+| Ouroboros OMEGA | `01_KERNEL/reasoning/ouroboros_engine/src/` (2 files) | MERLIN_Omega | 7 |
 | camelot.exe v1000-A | `dist/camelot.exe` | SIR_FORGE | 8 |
 | NLM 7 notebook sync | Cloud Brain | LADY_M | 8 |
 | Ledger #QNF entry | `PROVENANCE_LEDGER.md` | AUTO_HOOK | 8 |

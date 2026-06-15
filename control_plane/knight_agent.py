@@ -48,6 +48,8 @@ _SKILLGRAPH_TIER: dict[str, SkillTier] = {
     "sir_alex": "S4", "lady_apis": "S4", "sir_link": "S4", "sir_mnemo": "S4",
     "merlin_omega": "S5", "sir_helio": "S5", "sir_ouroboros": "S5",
     "sir_heimdall": "S4",
+    "sir_openclaw": "S3", "sir_rustclaw": "S2", "sir_hermes": "S3",
+    "lady_nanobot": "S3", "sir_zeroclaw": "S4",
 }
 
 # LATTICE_SIGNAL primary model bindings (OMNI_ROUTER_AUDIT). Gemini-primary.
@@ -64,6 +66,11 @@ _PRIMARY_MODEL: dict[str, str] = {
     "sir_ouroboros": "ouroboros-ssm-local",
     "sir_sentinel": "gemini-3-pro-preview",
     "sir_valerian": "gemini-3-pro-preview",
+    "sir_openclaw": "openclaw-local",
+    "sir_rustclaw": "rustclaw-local",
+    "sir_hermes": "hermes-cli",
+    "lady_nanobot": "next-edge",
+    "sir_zeroclaw": "qwen3:8b",
 }
 
 _FALLBACK_MODEL: dict[str, str] = {
@@ -74,6 +81,11 @@ _FALLBACK_MODEL: dict[str, str] = {
     "sir_link": "gemini-2.5-flash",
     "sir_sentinel": "claude-sonnet-4-6",
     "sir_mnemo": "claude-sonnet-4-6",
+    "sir_openclaw": "sir_helio",
+    "sir_rustclaw": "sir_forge",
+    "sir_hermes": "sir_link",
+    "lady_nanobot": "sir_codex",
+    "sir_zeroclaw": "sir_ghost",
 }
 
 # OCEAN PersRubrics (Blacklight NLM): Big-5 numerical persona stabilizers (0-1).
@@ -85,6 +97,11 @@ _OCEAN: dict[str, dict[str, float]] = {
     "sir_ghost":    {"O": 0.40, "C": 0.95, "E": 0.20, "A": 0.30, "N": 0.15},
     "lady_apis":    {"O": 0.95, "C": 0.70, "E": 0.65, "A": 0.70, "N": 0.20},
     "merlin_omega": {"O": 0.95, "C": 0.85, "E": 0.45, "A": 0.60, "N": 0.15},
+    "sir_openclaw": {"O": 0.85, "C": 0.85, "E": 0.35, "A": 0.45, "N": 0.20},
+    "sir_rustclaw": {"O": 0.65, "C": 0.95, "E": 0.25, "A": 0.35, "N": 0.15},
+    "sir_hermes":   {"O": 0.70, "C": 0.90, "E": 0.45, "A": 0.55, "N": 0.20},
+    "lady_nanobot": {"O": 0.90, "C": 0.75, "E": 0.60, "A": 0.60, "N": 0.20},
+    "sir_zeroclaw": {"O": 0.50, "C": 0.98, "E": 0.25, "A": 0.25, "N": 0.20},
 }
 _OCEAN_DEFAULT = {"O": 0.60, "C": 0.75, "E": 0.50, "A": 0.55, "N": 0.25}
 
@@ -236,4 +253,3 @@ if __name__ == "__main__":
             print(f"  {cap.skillgraph_tier} {kid:14s} {cap.primary_model:24s} {cap.function}{ag}")
     else:
         print(f"Loaded {len(roster)} knight capabilities. Use --roster to list, --test to verify.")
-ilities. Use --roster to list, --test to verify.")

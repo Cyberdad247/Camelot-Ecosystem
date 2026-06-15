@@ -521,25 +521,25 @@ class ControlPlane:
         "audit": "sir_sentinel",
         "financial": "sir_valerian",
         "roi": "sir_valerian",
-        # Ω₃ — Cloud Brain (notebooklm-py) dispatch
+        # Omega₃ — Cloud Brain (notebooklm-py) dispatch
         "synthesize": "merlin",
         "oracle": "merlin",
         "ask_brain": "merlin",
         "notebook_query": "merlin",
         "notebooklm_health": "merlin",
         "notebooklm_sync": "merlin",
-        # Ω₃.2 — LADY_APIS research
+        # Omega₃.2 — LADY_APIS research
         "research": "lady_apis",
         "deep_dive": "lady_apis",
         "forage": "lady_apis",
-        # Ω₃.3 — SIR_SONUS studio
+        # Omega₃.3 — SIR_SONUS studio
         "studio": "sir_sonus",
         "podcast": "sir_sonus",
         "generate_audio": "sir_sonus",
         "generate_video": "sir_sonus",
         "infographic": "sir_sonus",
         "mind_map": "sir_sonus",
-        # Ω₃.4 — MASON sources
+        # Omega₃.4 — MASON sources
         "sources": "mason",
         "add_source": "mason",
         "list_sources": "mason",
@@ -597,7 +597,7 @@ class ControlPlane:
         """Map task intent to a cloudbrain or research agency service."""
         intent = task.intent.lower()
 
-        # Ω₃ — NotebookLM Cloud Brain (check before generic cloudbrain keywords).
+        # Omega₃ — NotebookLM Cloud Brain (check before generic cloudbrain keywords).
         if any(k in intent for k in {"notebooklm health", "oracle health", "brain health"}):
             return CloudServiceRequest(service=CloudServiceName.NOTEBOOKLM_HEALTH)
 
@@ -638,7 +638,7 @@ class ControlPlane:
                 payload=payload,
             )
 
-        # Ω₃.2 — LADY_APIS research dispatch
+        # Omega₃.2 — LADY_APIS research dispatch
         if any(k in intent for k in {
             "notebook research", "notebooklm research",
             "deep research", "deep-dive research", "brain research",
@@ -663,7 +663,7 @@ class ControlPlane:
                 payload=payload,
             )
 
-        # Ω₃.3 — SIR_SONUS studio dispatch
+        # Omega₃.3 — SIR_SONUS studio dispatch
         if any(k in intent for k in {
             "studio list", "list artifacts", "list audio", "list video",
             "list reports", "list infographics", "list slide",
@@ -707,7 +707,7 @@ class ControlPlane:
                 payload=payload,
             )
 
-        # Ω₃.4 — MASON sources dispatch
+        # Omega₃.4 — MASON sources dispatch
         if any(k in intent for k in {"list sources", "sources list", "show sources"}):
             payload = {}
             if task.parameters.get("notebook_id"):

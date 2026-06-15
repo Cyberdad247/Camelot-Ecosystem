@@ -9,7 +9,7 @@ This protocol bridges the 3CX PBX phone system with the Camelot-OS Lattice. It t
 
 ## ⚙️ TECHNICAL HANDSHAKE
 1. **INGESTION:** 3CX Call Webhook -> **Saltare (Go Gateway)** on `:8080/api/v1/voice`.
-2. **TRANSCRIPTION:** Real-time stream to **Merlin_Ω (Neural)** for intent quantization.
+2. **TRANSCRIPTION:** Real-time stream to **Merlin_Omega (Neural)** for intent quantization.
 3. **SYNTHESIS:** **Sir Sonus** generates audio voltage using local Kokoro-ONNX or external TTS.
 4. **EXECUTION:** **Lukas (Kinetic)** updates the local appointment/account state via **Antigravity**.
 
