@@ -1,10 +1,10 @@
 server:
   host: 0.0.0.0
-  port: 8080
+  port: 8090
   mcp:
     http:
       enabled: true
-      port: 8081 # The port Antigravity/Lukas will connect to
+      port: 8091 # The port Antigravity/Lukas will connect to
 
 llm:
   primary:

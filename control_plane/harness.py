@@ -74,7 +74,7 @@ BOOT_PROBES: list[tuple[str, str, int]] = [
     ("CLIProxy",        "127.0.0.1", 8080),
     ("KineticEdge",     "127.0.0.1", 3001),
     ("Qdrant",          "127.0.0.1", 6333),   # overridden to cloud HTTPS when QDRANT_URL is set
-    ("Saltare",         "127.0.0.1", 8085),
+    ("Saltare",         "127.0.0.1", 8090),  # Saltare gateway server port
     ("Holotable",       "127.0.0.1", 3000),
     ("OmniVoice",       "127.0.0.1", 3002),
     ("KittenTTS",       "127.0.0.1", 8300),
@@ -170,39 +170,41 @@ class SovereignHarness:
 
     # ── Watchdog ──────────────────────────────────────────────────────────────
 
-    def _soft_service_cmd(self, name: str) -> list[str] | None:
-        """Return the restart command for a soft service, or None if not restartable."""
+    def _soft_service_cmd(self, name: str) -> tuple[list[str], str] | None:
+        """Return (cmd, cwd) for a soft service restart, or None if not restartable."""
         venv_py = CAMELOT_HOME / ".venv" / "Scripts" / "python.exe"
         py = str(venv_py) if venv_py.exists() else sys.executable
         qdrant_exe = Path.home() / "bin" / "qdrant.exe"
         qdrant_cfg = CAMELOT_HOME / "data" / "qdrant" / "config.yaml"
-        saltare_exe = CAMELOT_HOME / "kinetic_edge" / "saltare" / "saltare_gateway.exe"
-        saltare_cfg = CAMELOT_HOME / "01_KERNEL" / "EXCALIBUR" / "config" / "saltare.toml"
+        saltare_dir = CAMELOT_HOME / "kinetic_edge" / "saltare"
+        saltare_exe = saltare_dir / "saltare_gateway.exe"
         js = CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "omnivoice-router" / "omnivoice-router.js"
         runner = LOGS_DIR / "_kitten_runner.py"
         oct_py = CAMELOT_HOME / "control_plane" / "sir_octavian.py"
-        cmds = {
-            "Qdrant":     [str(qdrant_exe), "--config-path", str(qdrant_cfg)]
-                if qdrant_exe.exists() and qdrant_cfg.exists() else None,
-            "Saltare":    [str(saltare_exe), "--config", str(saltare_cfg), "mcp", "http", "--port", "8085"]
-                if saltare_exe.exists() and saltare_cfg.exists() else None,
-            "OmniVoice":   ["node", str(js)] if js.exists() else None,
-            "KittenTTS":   [py, str(runner)] if runner.exists() else None,
-            "SirOctavian": [py, str(oct_py), "--serve"] if oct_py.exists() else None,
-            "Redis":        (["redis-server.exe"] if Path(r"C:\Program Files\Redis\redis-server.exe").exists()
-                             else (["redis-server"] if shutil.which("redis-server") else
-                                   (["sc", "start", "Redis"] if sys.platform == "win32" else None))),
+        home = str(CAMELOT_HOME)
+        cmds: dict[str, tuple[list[str], str] | None] = {
+            "Qdrant":      ([str(qdrant_exe), "--config-path", str(qdrant_cfg)], home)
+                           if qdrant_exe.exists() and qdrant_cfg.exists() else None,
+            "Saltare":     ([str(saltare_exe), "server"], str(saltare_dir))
+                           if saltare_exe.exists() else None,
+            "OmniVoice":   (["node", str(js)], home) if js.exists() else None,
+            "KittenTTS":   ([py, str(runner)], home) if runner.exists() else None,
+            "SirOctavian": ([py, str(oct_py), "--serve"], home) if oct_py.exists() else None,
+            "Redis":        (["redis-server.exe"], home)
+                            if Path(r"C:\Program Files\Redis\redis-server.exe").exists()
+                            else (["redis-server"], home) if shutil.which("redis-server") else None,
         }
         return cmds.get(name)
 
     async def _restart_soft_service(self, name: str) -> None:
-        cmd = self._soft_service_cmd(name)
-        if not cmd:
+        entry = self._soft_service_cmd(name)
+        if not entry:
             _log(f"[WATCHDOG] No restart command for {name}")
             return
+        cmd, cwd = entry
         try:
             import platform as _pl
-            kwargs: dict = {"cwd": str(CAMELOT_HOME)}
+            kwargs: dict = {"cwd": cwd}
             if _pl.system() == "Windows":
                 kwargs["creationflags"] = (
                     getattr(subprocess, "DETACHED_PROCESS", 0x08)
