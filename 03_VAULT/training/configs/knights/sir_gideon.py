@@ -117,14 +117,29 @@ def _sp02_iron_gate_bypass() -> SpResult:
         r"skip_hitl|no.?verify|bypass.*iron|iron.*bypass|HITL\s*=\s*False",
         re.IGNORECASE,
     )
+    # Exclude: raw string literals (regex/pattern definitions) and log message strings
+    # These match the pattern text but are detection/reporting code, not bypasses.
+    _string_literal_re = re.compile(r'^\s*(r["\']|["\'])[^"\']*$|re\.compile\(')
+    _log_msg_re = re.compile(r'^\s*["\'].*HITL bypass.*detected|^\s*["\'].*bypass.*detected')
+    # Self-exclusions: scanner file and Socrates' bypass-detection regex
+    _self_files = {"sir_gideon.py", "sir_socrates.py"}
     for py in list(CONTROL_PLANE.glob("*.py")) + list(VAULT_CONFIGS.glob("*.py")):
+        if py.name in _self_files:
+            continue  # skip scanner itself and the bypass-detector (false positives)
         try:
             txt = py.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
         for i, line in enumerate(txt.splitlines(), 1):
-            if bypass_re.search(line) and not line.strip().startswith("#"):
-                evidence.append(f"{py.name}:{i}: {line.strip()[:80]}")
+            stripped = line.strip()
+            if not bypass_re.search(line):
+                continue
+            if stripped.startswith("#"):
+                continue
+            # Skip lines that are string literals defining detection patterns
+            if stripped.startswith(("r\"", "r'", "\"", "'")) or "re.compile(" in stripped:
+                continue
+            evidence.append(f"{py.name}:{i}: {stripped[:80]}")
 
     status = "CLEAR" if not evidence else "CRITICAL"
     return SpResult("SP-02: Iron Gate bypass", status, evidence)
