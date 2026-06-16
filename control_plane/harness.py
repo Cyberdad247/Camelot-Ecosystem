@@ -79,7 +79,7 @@ BOOT_PROBES: list[tuple[str, str, int]] = [
     ("OmniVoice",       "127.0.0.1", 3002),
     ("KittenTTS",       "127.0.0.1", 8300),
     ("SirOctavian",     "127.0.0.1", 8400),
-    ("Redis",           "127.0.0.1", 6379),
+    # Redis probe removed — using cloud Redis (REDIS_AGENT_MEMORY_API_KEY); no local instance
 ]
 
 
