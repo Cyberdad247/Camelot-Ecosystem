@@ -5,6 +5,7 @@ import { HeliosHarness } from './ai/HeliosHarness';
 import { swarmMatrix } from './swarm/MicrocubicSwarm';
 
 const app = express();
+app.use(express.static('public'));
 const server = createServer(app);
 const wss = new WebSocketServer({ server });
 
