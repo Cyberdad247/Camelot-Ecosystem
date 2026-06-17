@@ -1367,3 +1367,63 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 ## Archivist Scan — 2026-06-16T04:21:43.620402+00:00 (215ms)
 
 ### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T11:23:22.297068+00:00 (479ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T12:23:22.799220+00:00 (338ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T13:23:23.147246+00:00 (340ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T14:23:23.524597+00:00 (360ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T15:23:23.905056+00:00 (252ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T16:23:24.183990+00:00 (398ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T17:23:24.604058+00:00 (1035ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T18:23:25.693295+00:00 (674ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T19:23:26.396672+00:00 (755ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T20:23:27.180648+00:00 (445ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T21:23:27.364473+00:00 (357ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T22:23:27.750833+00:00 (325ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-16T23:23:27.947745+00:00 (400ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-17T00:35:16.114950+00:00 (6972ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-17T01:35:23.036269+00:00 (333ms)
+
+### Skills: 8/8 @ v400.1.0 OK

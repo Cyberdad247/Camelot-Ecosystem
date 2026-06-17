@@ -1,0 +1,43 @@
+{
+  "status": "OK",
+  "global_startup_command": "awaken",
+  "rune": "//BOOT",
+  "orchestrator": "sir_hermes",
+  "omniroute_endpoint": "http://127.0.0.1:20128/v1",
+  "zero_cost_engines": [
+    "claude_apex",
+    "claude_standard",
+    "codex_velocity",
+    "gemini_flash",
+    "gemini_frontier",
+    "gemini_initiator",
+    "gemini_pro",
+    "local_qwen",
+    "open_coder",
+    "ouroboros_ssm"
+  ],
+  "free_terminals": [
+    "lady_nanobot",
+    "sir_codex",
+    "sir_forge",
+    "sir_ghost",
+    "sir_gideon",
+    "sir_gravity",
+    "sir_hermes",
+    "sir_kimi",
+    "sir_liberte",
+    "sir_octavian",
+    "sir_openclaw",
+    "sir_rustclaw",
+    "sir_sonus",
+    "sir_zeroclaw"
+  ],
+  "timestamp_utc": "2026-06-16T19:38:12.425445+00:00",
+  "hermes_terminal": {
+    "present": true,
+    "engine": "hermes_cli",
+    "cost_tier": "free",
+    "cli_present": true
+  },
+  "routing_strategy": "google_priority_mfoe"
+}

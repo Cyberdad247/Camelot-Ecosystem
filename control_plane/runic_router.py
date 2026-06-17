@@ -69,7 +69,7 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     },
     "//BOOT": {
         "knight": "sir_boris",
-        "description": "6-phase awaken boot sequence",
+        "description": "global awaken boot sequence",
         "mode": "FORGE",
         "priority": 1,
         "handler": "_handle_boot",
@@ -309,7 +309,12 @@ def _queue_task(knight: str, directive: str, priority: int = 2) -> tuple[str, Op
 
 
 def _handle_boot(param: str, context: dict) -> dict:
-    return {"action": "awaken 6-phase boot", "detail": "run: python bin/awaken.py"}
+    return {
+        "action": "awaken global boot",
+        "detail": "run: awaken",
+        "canonical_command": "awaken",
+        "fallback": "python bin/awaken.py",
+    }
 
 def _handle_dawning(param: str, context: dict) -> dict:
     project_name = param or "default_nexus"
