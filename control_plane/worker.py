@@ -85,17 +85,20 @@ def _get_redis_store():
     return _redis_store
 
 # Knight → Ollama model
-# qwen3:0.6b is the confirmed-working baseline (fits in VRAM on RTX 2050 4GB).
-# Set OLLAMA_MODEL env var to override globally, e.g. qwen3:4b if you have spare VRAM.
+# Enterprise Factory Fleet (Qwen 2.5 Architecture)
+# Set OLLAMA_MODEL env var to override globally, e.g. qwen2.5:7b.
 _KNIGHT_OLLAMA_MODEL: dict[str, str] = {
-    "sir_forge":    "qwen3:0.6b",
-    "sir_debug":    "qwen3:0.6b",
-    "sir_ghost":    "qwen3:0.6b",
-    "merlin_omega": "qwen3:0.6b",
-    "sir_alex":     "qwen3:0.6b",
-    "sir_boris":    "qwen3:0.6b",
+    "sir_forge":    "qwen2.5-coder:7b",
+    "sir_debug":    "qwen2.5-coder:7b",
+    "sir_boris":    "qwen2.5-coder:7b",
+    "merlin_omega": "qwen2.5:7b",
+    "sir_alex":     "qwen2.5:3b",
+    "lady_apis":    "qwen2.5:3b",
+    "sir_sentinel": "qwen2.5:3b",
+    "sir_ghost":    "qwen2.5:1.5b",
+    "squire_colony":"qwen2.5:0.5b",
 }
-_DEFAULT_OLLAMA_MODEL = "qwen3:0.6b"
+_DEFAULT_OLLAMA_MODEL = "qwen2.5:3b"
 
 # ── Knight personas for LLM dispatch ──────────────────────────────────────────
 

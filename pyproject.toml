@@ -150,7 +150,20 @@ target-version = ["py313"]
 
 [tool.pytest.ini_options]
 cache_dir = "data/.pytest_cache"
-addopts   = "--basetemp=data/.pytest_tmp"
+addopts   = "--basetemp=data/.pytest_tmp --import-mode=importlib"
+# Canonical CAMELOT test suites only. Without these, pytest sweeps 464 test_*.py
+# across vendored references, git worktrees, and build output, producing 65
+# collection errors from basename collisions and missing 3rd-party deps.
+# 01_KERNEL is intentionally excluded: it carries a vendored MCP servers repo
+# plus co-located tests with uninstalled optional deps (freezegun, soundfile,
+# GitPython) and CWD-fragile imports. Run those explicitly once remediated.
+testpaths = ["tests", "03_VAULT/training/configs/tests"]
+norecursedirs = [
+    ".worktrees", ".venv", "node_modules", "build", "dist", "logs", "data",
+    "99_ARCHIVE", "99_HISTORY", "02_FORGE",
+    "03_VAULT/KINETIC_REFERENCES", "03_VAULT/LLM-Apps-Ref",
+    "01_KERNEL/system/omniroute_sandbox",
+]
 
 [tool.uv.workspace]
 members = [

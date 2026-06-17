@@ -791,3 +791,116 @@
 | 982 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=50041s tasks=0 fail=0 probes=9/9 cells=0 |
 | 983 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=50641s tasks=0 fail=0 probes=9/9 cells=0 |
 | 984 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51241s tasks=0 fail=0 probes=9/9 cells=0 |
+| 985 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51841s tasks=0 fail=0 probes=9/9 cells=0 |
+| 986 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52441s tasks=0 fail=0 probes=9/9 cells=0 || 2026-06-17T01:56:53.896333+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//BOOT'] | HYDRATED |
+| 2026-06-17T01:57:02.830440+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-17T01:57:02.842071+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-17T01:57:04.313781+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //BOOT, hits=3] | HYDRATED |
+| 2026-06-17T01:57:04.438053+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 987 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=53041s tasks=0 fail=0 probes=9/9 cells=0 |
+| 988 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=53641s tasks=0 fail=0 probes=9/9 cells=0 || 2026-06-17T02:20:44.646308+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//BOOT'] | HYDRATED |
+| 2026-06-17T02:20:45.262638+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-17T02:20:45.263245+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-17T02:20:46.413957+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //BOOT, hits=3] | HYDRATED |
+| 2026-06-17T02:20:46.418072+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 989 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54241s tasks=0 fail=0 probes=9/9 cells=0 |
+| 990 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54842s tasks=0 fail=0 probes=9/9 cells=0 |
+| 991 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=55442s tasks=0 fail=0 probes=9/9 cells=0 |
+| 992 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=56042s tasks=0 fail=0 probes=9/9 cells=0 |
+| 993 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=56645s tasks=0 fail=0 probes=9/9 cells=0 |
+| 994 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=57245s tasks=0 fail=0 probes=9/9 cells=0 |
+| 995 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=57845s tasks=0 fail=0 probes=9/9 cells=0 |
+| 996 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=58445s tasks=0 fail=0 probes=9/9 cells=0 |
+| 997 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=59045s tasks=0 fail=0 probes=9/9 cells=0 |
+| 998 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=59645s tasks=0 fail=0 probes=9/9 cells=0 |
+| 999 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60245s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1000 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60845s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1001 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=61445s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1002 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=62045s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1003 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=62645s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1004 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=63245s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1005 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=63845s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1006 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=64445s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1007 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=65045s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1008 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=65645s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1009 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=66245s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1010 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=66845s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1011 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=67446s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1012 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=68046s tasks=0 fail=0 probes=9/9 cells=0 || 2026-06-17T06:17:46.668037+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//BOOT'] | HYDRATED |
+| 2026-06-17T06:17:47.159168+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-17T06:17:47.160103+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-17T06:17:48.080418+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //BOOT, hits=3] | HYDRATED |
+| 2026-06-17T06:17:48.082972+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-17T06:17:58.923441+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//DAWNING alpha-nexus'] | HYDRATED |
+| 2026-06-17T06:17:59.149370+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-17T06:17:59.150389+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-17T06:17:59.744477+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //DAWNING alpha-nexus, hits=3] | HYDRATED |
+| 2026-06-17T06:17:59.746350+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-17T06:17:59.798584+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//DAWNING Mixed Case Project'] | HYDRATED |
+| 2026-06-17T06:17:59.913421+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-17T06:17:59.913921+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-17T06:18:00.245974+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //DAWNING Mixed Case Project, hits=3] | HYDRATED |
+| 2026-06-17T06:18:00.248257+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-17T06:18:20.439556+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run'] | HYDRATED |
+| 2026-06-17T06:18:20.581681+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-17T06:18:20.582631+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-17T06:18:20.996505+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, hits=3] | HYDRATED |
+| 2026-06-17T06:18:21.000199+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-17T06:18:21.717420+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\route_reports --evidence'] | HYDRATED |
+| 2026-06-17T06:18:21.833126+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-17T06:18:21.833666+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-17T06:18:22.179845+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\route_reports --evidence, hits=3] | HYDRATED |
+| 2026-06-17T06:18:22.181544+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_tmp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-17T06:18:22.569544+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND expand --runtime-status'] | HYDRATED |
+| 2026-06-17T06:18:22.690864+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-17T06:18:22.691401+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-17T06:18:23.013258+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //NANO_SWARM_EXPAND expand --runtime-status, hits=3] | HYDRATED |
+| 2026-06-17T06:18:23.017663+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-17T06:18:23.403178+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for '//NANO_SWARM_EXPAND supervise status'] | HYDRATED |
+| 2026-06-17T06:18:23.567872+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-17T06:18:23.568858+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-17T06:18:24.044013+00:00 | HYDRATION_MGR | L1_5_AGENT_RECALL [Intent: //NANO_SWARM_EXPAND supervise status, hits=3] | HYDRATED |
+| 2026-06-17T06:18:24.051204+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_REDIS,L1_5_AGENT_MEMORY,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-17T06:19:43.732308+00:00 | HYDRATION_MGR | L1_REDIS_WARN [Redis upsert failed, fell back to dark store for 'soul_route_sir_alex'] | HYDRATED |
+| 2026-06-17T06:19:43.982373+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-17T02:20:05.957286 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+
+| 1013 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=68646s tasks=0 fail=0 probes=9/9 cells=0 |
+| 1014 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=69246s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1015 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=69846s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1016 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=70446s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1017 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=71046s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1018 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=71646s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1019 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72246s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1020 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=72847s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1021 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=73447s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1022 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=74047s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1023 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=74647s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1024 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=75247s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1025 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=75847s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1026 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=76448s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1027 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=77048s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1028 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=77648s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1029 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=78248s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1030 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=78848s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1031 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=79448s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1032 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=80048s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1033 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=80649s tasks=1 fail=0 probes=7/9 cells=1 |
+| 1034 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=81249s tasks=1 fail=0 probes=7/9 cells=1 |
+| 1035 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=81849s tasks=1 fail=0 probes=7/9 cells=1 |
+| 1036 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=82449s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1037 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=83049s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1038 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=83649s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1039 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=84249s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1040 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=84849s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1041 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=85449s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1042 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=86049s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1043 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=86649s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1044 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=87250s tasks=1 fail=0 probes=9/9 cells=1 |
+| 1045 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=87875s tasks=1 fail=0 probes=0/9 cells=1 |
+| 1046 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=88475s tasks=2 fail=0 probes=9/9 cells=1 |
+| 1047 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=89075s tasks=2 fail=0 probes=9/9 cells=1 |
+| 1048 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=89675s tasks=2 fail=0 probes=9/9 cells=1 |
+| 1049 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=90275s tasks=2 fail=0 probes=9/9 cells=1 |
