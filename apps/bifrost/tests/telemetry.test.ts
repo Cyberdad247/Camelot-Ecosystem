@@ -31,8 +31,10 @@ test('E2E: WebSocket interaction triggers swarm tasks', async () => {
         });
     });
 
-    server.listen(3002);
-    const client = new WebSocket('ws://localhost:3002');
+    const PORT = 3005; // Change port to avoid conflicts
+    server.listen(PORT);
+    
+    const client = new WebSocket(`ws://localhost:${PORT}`);
 
     const feedbackPromise = new Promise((resolve) => {
         client.on('message', (msg) => {
