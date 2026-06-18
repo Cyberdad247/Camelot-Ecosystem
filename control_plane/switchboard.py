@@ -72,7 +72,7 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
     "sir_ghost": Terminal(
         id="sir_ghost", engine="local_qwen", weight=1.00,
         cost_tier="free", capability=["privacy","air_gapped","zero_trust"],
-        probe_port=11434, notes="Local Qwen 3.5 — air-gapped, zero trust",
+        probe_port=11434, notes="Local Qwen 3 4b — air-gapped, zero trust",
     ),
     "sir_forge": Terminal(
         id="sir_forge", engine="open_coder", weight=0.70,
@@ -205,7 +205,7 @@ async def _probe_terminal(t: Terminal) -> None:
         gideon_py = CAMELOT_HOME / "03_VAULT" / "training" / "configs" / "knights" / "sir_gideon.py"
         t.status     = "live" if gideon_py.exists() else "dark"
         t.latency_ms = 0.0
-    elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli", "openclaw", "rustclaw", "next_edge"):
+    elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli", "openclaw", "rustclaw", "next_edge", "pydantic_ai"):
         t.status     = "assumed_live"
         t.latency_ms = 0.0
     elif t.engine == "hermes_cli":

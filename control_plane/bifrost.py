@@ -76,7 +76,7 @@ _TERMINAL_MODEL: dict[str, str] = {
     "sir_helio":    "gemini-2.5-flash",
     "sir_link":     "gemini-2.5-pro",
     "sir_codex":    "gpt-4o",
-    "sir_ghost":    "qwen3:1.7b",
+    "sir_ghost":    "qwen3:4b",
     "sir_forge":    "qwen2.5-coder:3b",
     "sir_sentinel": "claude-haiku-4-5-20251001",
     "sir_gideon":   "qwen3:4b",
