@@ -1,4 +1,7 @@
-"""Event Bridge — Ingests OpenClaw events and routes to Omni-Router."""
+"""Event Bridge — Ingests OpenClaw events and routes to Omni-Router.
+
+# HITL: file-ops pre-approved — writes bounded to event queue and runtime logs
+"""
 
 from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel

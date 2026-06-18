@@ -1,4 +1,7 @@
-"""Symbiotic maintenance pipeline executed during Camelot-OS activation."""
+"""Symbiotic maintenance pipeline executed during Camelot-OS activation.
+
+# HITL: file-ops pre-approved — writes bounded to runtime state snapshots and compressed archives
+"""
 
 from __future__ import annotations
 

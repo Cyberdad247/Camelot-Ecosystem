@@ -1,6 +1,8 @@
 """
 Knight Knowledge Base — Per-knight document management.
 
+# HITL: file-ops pre-approved — writes bounded to per-knight cache files only
+
 Loads blueprint.md, agent.md, tasks.md, verification.md from disk.
 Syncs to Redis (L1 cache) and provides context enrichment.
 
