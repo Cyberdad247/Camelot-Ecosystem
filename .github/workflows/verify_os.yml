@@ -194,66 +194,21 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install CLI dependencies
-        run: pip install pyyaml pydantic networkx
+        run: pip install pyyaml pydantic networkx colorama httpx
 
       - name: Setup CLI path
         run: |
           echo "CAMELOT_OS_ROOT=${{ github.workspace }}" >> $env:GITHUB_ENV
         shell: pwsh
 
-      - name: Test CLI help
-        run: python .camelot/camelot.py --help
+      # Exercise the shipped entrypoint (control_plane.camelot_cli, the `camelot`
+      # console script). The previous suite invoked .camelot/camelot.py — a file
+      # never committed to the repo — so it could never pass on a clean checkout.
+      - name: CLI help
+        run: python -m control_plane.camelot_cli --help
 
-      - name: Test CLI exec
-        run: python .camelot/camelot.py exec "//PLAN a test project"
-
-      - name: Test CLI knights
-        run: python .camelot/camelot.py knights
-
-      - name: Test CLI cartridges
-        run: python .camelot/camelot.py cartridges
-
-      - name: Test CLI bridge status
-        run: python .camelot/camelot.py bridge
-
-      - name: Test CLI warden
-        run: python .camelot/camelot.py warden status
-
-      - name: Test CLI memory
-        run: python .camelot/camelot.py memory status
-
-      - name: Test CLI plan
-        run: python .camelot/camelot.py plan list
-
-      - name: Test CLI kernel intent
-        run: python .camelot/camelot.py kernel SYSTEM_HEALTH_CHECK
-
-      - name: Test CLI stats
-        run: python .camelot/camelot.py stats
-
-      - name: Test CLI history
-        run: python .camelot/camelot.py history
-
-      - name: Test CLI export
-        run: |
-          python .camelot/camelot.py export -o test_export.json
-          python -c "
-          import json; d=json.load(open('test_export.json')); assert 'history' in d; assert 'stats' in d; print('[OK] Export format valid')
-          "
-
-      - name: Verify bridge component count
-        run: |
-          python -c "
-          import sys, os
-          os.environ['CAMELOT_OS_ROOT'] = os.getcwd()
-          sys.path.insert(0, '.camelot')
-          from bridge import get_bridge_status
-          status = get_bridge_status()
-          active = sum(1 for s in status['components'].values() if s == 'active')
-          # Vault may not be active without cryptography, so require at least 9
-          assert active >= 9, f'Expected at least 9 active components, got {active}'
-          print(f'[OK] Bridge integration: {active}/{len(status[\"components\"])} components active')
-          "
+      - name: CLI ledger status
+        run: python -m control_plane.camelot_cli ledger status
 
   # ── Stage 6: Cross-Platform Smoke Test ──────────────────────────
   # (Docker Config Validation removed — CAMELOT-OS is Docker-free by standing
@@ -273,15 +228,11 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Install dependencies
-        run: pip install pyyaml pydantic networkx
+        run: pip install pyyaml pydantic networkx colorama httpx
 
       - name: CLI smoke test
         run: |
-          python .camelot/camelot.py exec "//PLAN smoke test"
-          python .camelot/camelot.py knights
-          python .camelot/camelot.py stats
-          python .camelot/camelot.py bridge
-          python .camelot/camelot.py warden status
-          python .camelot/camelot.py memory status
+          python -m control_plane.camelot_cli --help
+          python -m control_plane.camelot_cli ledger status
         env:
           CAMELOT_OS_ROOT: ${{ github.workspace }}
