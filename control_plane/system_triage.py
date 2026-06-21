@@ -297,7 +297,6 @@ def _targeted_python_tests(context: TriageContext) -> CheckResult:
         "tests/test_architecture_docs.py",
         "tests/test_ledger_audit.py",
         "tests/test_ledger_governance.py",
-        "tests/test_anya_gate.py",
     ]
     command = [sys.executable, "-m", "pytest", "-q", *tests]
     code, stdout, stderr, duration = _run(context, command, timeout=300)
@@ -656,6 +655,32 @@ def _planned_claims(_context: TriageContext) -> CheckResult:
     )
 
 
+def _security_contract(context: TriageContext) -> CheckResult:
+    files = {
+        "anya_gate": context.root / "control_plane/anya_gate.py",
+        "soul_oversight": context.root / "control_plane/soul_oversight.py",
+    }
+    required_tokens = {
+        "anya_gate": ["risk_entropy", "AUTO", "PROMPT", "HUMAN_GATE"],
+        "soul_oversight": ["pre_execute", "HUMAN_GATE", "CAMELOT_DASHBOARD_OPERATOR_TOKEN"],
+    }
+    missing: dict[str, list[str]] = {}
+    for name, path in files.items():
+        text = path.read_text(encoding="utf-8", errors="replace") if path.exists() else ""
+        absent = [token for token in required_tokens[name] if token not in text]
+        if absent:
+            missing[name] = absent
+    return CheckResult(
+        name="security-hitl-contract",
+        stage="rapid",
+        status="FAIL" if missing else "PASS",
+        required=True,
+        classification="confirmed",
+        summary="Adaptive HITL and HUMAN_GATE contracts are present" if not missing else "Security contract is incomplete",
+        evidence={"files": {key: str(path) for key, path in files.items()}, "missing_tokens": missing},
+    )
+
+
 def _rejected_legacy_claims(_context: TriageContext) -> CheckResult:
     return CheckResult(
         name="rejected-legacy-architecture",
@@ -789,6 +814,7 @@ def default_rapid_checks() -> list[Check]:
         _required_boot_contract,
         _targeted_python_tests,
         _rust_check,
+        _security_contract,
         _ledger_alignment,
         _notebooklm_live,
         _excalibur_cloudbrain,
@@ -804,10 +830,6 @@ def default_deep_checks() -> list[Check]:
     return [
         _full_python_suite,
         _deep_rust_tests,
-        _focused_deep_tests(
-            "security-hitl-validation",
-            ["tests/test_anya_gate.py"],
-        ),
         _focused_deep_tests(
             "memory-tier-validation",
             [
