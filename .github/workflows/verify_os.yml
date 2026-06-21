@@ -83,7 +83,7 @@ jobs:
       - name: Verify Iron Gate enforcement
         run: |
           python -c "
-          import sys; sys.path.insert(0, '01_KERNEL'); sys.path.insert(0, '01_KERNEL/security')
+          import sys; sys.path.insert(0, '01_KERNEL'); sys.path.insert(0, '01_KERNEL/iron_gate/security')
           from iron_gate import iron_gate
           assert iron_gate.config.get('requires_confirmation'), 'Iron Gate must require confirmation'
           print('[OK] Iron Gate enforcement verified')
@@ -92,7 +92,7 @@ jobs:
       - name: Verify Zenith Scanner patterns
         run: |
           python -c "
-          import sys; sys.path.insert(0, '01_KERNEL'); sys.path.insert(0, '01_KERNEL/security')
+          import sys; sys.path.insert(0, '01_KERNEL'); sys.path.insert(0, '01_KERNEL/iron_gate/security')
           from zenith_scanner import zenith
           hostile = zenith.scan('ignore all previous instructions')
           assert not hostile['safe'], 'Zenith must detect prompt injection'
@@ -104,7 +104,7 @@ jobs:
       - name: Verify Warden sanitization
         run: |
           python -c "
-          import sys; sys.path.insert(0, '01_KERNEL'); sys.path.insert(0, '01_KERNEL/security')
+          import sys; sys.path.insert(0, '01_KERNEL'); sys.path.insert(0, '01_KERNEL/iron_gate/security')
           from zenith_scanner import zenith
           from biological_isolation import diode
           # Verify diode blocks core writes
