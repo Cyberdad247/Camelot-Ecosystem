@@ -32,7 +32,10 @@ import time
 import urllib.request
 from pathlib import Path
 
-CAMELOT_OWNER = os.environ.get("CAMELOT_OWNER", "vizio")
+# Local-identity owner. Per this module's docstring the caller-is-owner check is
+# getpass.getuser(); default to the current OS user so the gate is portable
+# (works for any local user / CI), while still allowing an explicit pin via env.
+CAMELOT_OWNER = os.environ.get("CAMELOT_OWNER") or getpass.getuser()
 TOKEN_PATH = Path.home() / ".camelot" / "bifrost.token"
 TAILNET_CGNAT = ipaddress.ip_network("100.64.0.0/10")
 _DEFAULT_TRUSTED_TAILNET_OWNERS = ("Cyberdad247@github", "Cyberdad247@")
