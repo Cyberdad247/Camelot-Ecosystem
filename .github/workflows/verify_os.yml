@@ -201,6 +201,14 @@ jobs:
           echo "CAMELOT_OS_ROOT=${{ github.workspace }}" >> $env:GITHUB_ENV
         shell: pwsh
 
+      # The Bifrost gate (bin/bifrost.py) requires the OS user to equal
+      # CAMELOT_OWNER (default "vizio"). On CI the runner is its own owner, so
+      # align CAMELOT_OWNER with the actual user — matches getpass.getuser()
+      # exactly, no product-code change.
+      - name: Align Bifrost owner with CI runner
+        shell: bash
+        run: echo "CAMELOT_OWNER=$(python -c 'import getpass; print(getpass.getuser())')" >> "$GITHUB_ENV"
+
       # Exercise the shipped entrypoint (control_plane.camelot_cli, the `camelot`
       # console script). The previous suite invoked .camelot/camelot.py — a file
       # never committed to the repo — so it could never pass on a clean checkout.
@@ -229,6 +237,11 @@ jobs:
 
       - name: Install dependencies
         run: pip install pyyaml pydantic networkx colorama httpx psutil
+
+      # Bifrost gate: align CAMELOT_OWNER with the runner's OS user (see CLI job).
+      - name: Align Bifrost owner with CI runner
+        shell: bash
+        run: echo "CAMELOT_OWNER=$(python -c 'import getpass; print(getpass.getuser())')" >> "$GITHUB_ENV"
 
       - name: CLI smoke test
         run: |
