@@ -1,6 +1,12 @@
 import { expect, test, vi } from 'vitest';
 import { swarmMatrix, SwarmTask } from '../src/swarm/MicrocubicSwarm';
 
+// Stub the DB boundary so the test exercises swarm orchestration in isolation
+// (no live Prisma/network dependency).
+vi.mock('../src/db/SovereignDB', () => ({
+  SovereignDB: { logMessage: vi.fn().mockResolvedValue({}) },
+}));
+
 // Improved mocking of GoogleGenerativeAI
 vi.mock('@google/generative-ai', () => {
   class MockGoogleGenerativeAI {
