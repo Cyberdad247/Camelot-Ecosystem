@@ -1,306 +1,43 @@
 {
-  "name": "Camelot OmniRoute Gateway",
-  "version": "3.0.0",
-  "port": 20128,
-  "description": "LATTICE_SIGNAL — Google-Priority Smart AI Router. Gemini is the initiator. Claude/Codex are specialized fallbacks.",
-
-  "engines": {
-    "gemini_frontier": {
-      "tier": "google_free",
-      "status": "active",
-      "provider": "google",
-      "channel": "gemini-cli-oauth",
-      "weight": 0.92,
-      "weight_type": "W_frontier",
-      "function": "G3 Apex — Architecture, complex reasoning, 13-agent critique",
-      "model": "gemini-3-pro-preview",
-      "execution_path": "http://127.0.0.1:8080/v1",
-      "knights": ["SIR_BORIS", "SIR_ALEX", "SIR_SENTINEL", "SIR_VALERIAN"]
-    },
-    "gemini_pro": {
-      "tier": "google_free",
-      "status": "active",
-      "provider": "google",
-      "channel": "gemini-cli-oauth",
-      "weight": 0.90,
-      "weight_type": "W_context",
-      "function": "G2 Pro — 1M context, research, memory, synthesis",
-      "model": "gemini-3.1-pro-preview",
-      "execution_path": "http://127.0.0.1:8080/v1",
-      "knights": ["SIR_HELIO", "LADY_APIS", "LADY_MNEMOSYNE"]
-    },
-    "gemini_flash": {
-      "tier": "google_free",
-      "status": "active",
-      "provider": "google",
-      "channel": "gemini-cli-oauth",
-      "weight": 0.78,
-      "weight_type": "W_bridge",
-      "function": "G1 Bridge — ATC, routing, PIV self-healing, low-latency tasks",
-      "model": "gemini-3-flash-preview",
-      "execution_path": "http://127.0.0.1:8080/v1",
-      "knights": ["SIR_LINK", "SIR_DEBUG", "SIR_LIBERTE"]
-    },
-    "gemini_initiator": {
-      "tier": "google_free",
-      "status": "active",
-      "provider": "google",
-      "channel": "gemini-cli-oauth",
-      "weight": 0.65,
-      "weight_type": "W_initiator",
-      "function": "G0 Initiator — ultra-fast intent classification, trivial answers",
-      "model": "gemini-3.1-flash-lite-preview",
-      "execution_path": "http://127.0.0.1:8080/v1",
-      "latency_target_ms": 200
-    },
-    "claude_apex": {
-      "tier": "claude_oauth_free",
-      "status": "active",
-      "provider": "anthropic",
-      "channel": "claude-code-oauth",
-      "weight": 0.85,
-      "weight_type": "W_orchestration",
-      "function": "C2 Fallback — Deep critique, Constitutional AI, SIR_BORIS heavy tasks",
-      "model": "claude-opus-4-6",
-      "execution_path": "http://127.0.0.1:8080/v1",
-      "role": "fallback_only"
-    },
-    "claude_standard": {
-      "tier": "claude_oauth_free",
-      "status": "active",
-      "provider": "anthropic",
-      "channel": "claude-code-oauth",
-      "weight": 0.75,
-      "weight_type": "W_standard",
-      "function": "C1 Fallback — Security analysis edge, mid-tier reasoning fallback",
-      "model": "claude-sonnet-4-6",
-      "execution_path": "http://127.0.0.1:8080/v1",
-      "role": "fallback_only"
-    },
-    "codex_velocity": {
-      "tier": "codex_oauth_free",
-      "status": "active",
-      "provider": "openai",
-      "channel": "codex-oauth",
-      "weight": 0.75,
-      "weight_type": "W_velocity",
-      "function": "X1 Velocity — High-velocity code generation, rapid prototyping",
-      "model": "gpt-5.4",
-      "execution_path": "http://127.0.0.1:8080/v1",
-      "knights": ["SIR_CODEX"]
-    },
-    "open_coder": {
-      "tier": "free",
-      "status": "active",
-      "provider": "local",
-      "weight": 0.70,
-      "weight_type": "W_kinetic",
-      "function": "L2 Kinetic — Local open-weight code execution (SIR_FORGE harness)",
-      "model": "qwen3:1.7b",
-      "execution_path": "http://127.0.0.1:11434/v1",
-      "fallback_models": ["qwen3:0.6b", "qwen2.5-coder:1.5b"],
-      "prompt_template": "sir_forge_opencoder_strict",
-      "knights": ["SIR_FORGE"],
-      "harness_locked": true
-    },
-    "local_qwen": {
-      "tier": "free",
-      "status": "active",
-      "provider": "local",
-      "weight": 1.00,
-      "weight_type": "W_privacy",
-      "function": "L0 Zero-Trust — Air-gapped execution (SIR_GHOST harness)",
-      "model": "qwen3:8b",
-      "execution_path": "http://127.0.0.1:11434/v1",
-      "fallback_models": ["qwen3:4b", "qwen2.5-coder:3b"],
-      "knights": ["SIR_GHOST"],
-      "harness_locked": true,
-      "bypass_cloud": true
-    },
-    "ouroboros_ssm": {
-      "tier": "free",
-      "status": "active",
-      "provider": "local",
-      "weight": 0.95,
-      "weight_type": "W_linear",
-      "function": "L1 Linear — O(N) linear reasoning for infinite context (Mamba-3)",
-      "model": "mamba-3:8b-1.58b",
-      "execution_path": "http://127.0.0.1:11434/v1",
-      "knights": ["SIR_OUROBOROS"],
-      "linear_tier": true,
-      "harness_locked": true
-    }
-  },
-
-  "knight_model_map": {
-    "sir_boris":         { "primary": "gemini-3-pro-preview",      "provider": "google",    "fallback": "claude-opus-4-6",           "fallback_provider": "anthropic", "tier": "G3" },
-    "sir_helio":         { "primary": "gemini-3.1-pro-preview",    "provider": "google",    "fallback": "gemini-3-pro-preview",      "fallback_provider": "google",    "tier": "G2" },
-    "sir_alex":          { "primary": "gemini-3-pro-preview",      "provider": "google",    "fallback": "claude-sonnet-4-6",         "fallback_provider": "anthropic", "tier": "G3" },
-    "sir_sentinel":      { "primary": "gemini-3-pro-preview",      "provider": "google",    "fallback": "claude-sonnet-4-6",         "fallback_provider": "anthropic", "tier": "G3" },
-    "sir_codex":         { "primary": "gpt-5.4",                   "provider": "openai",    "fallback": "gpt-5.3-codex-spark",       "fallback_provider": "openai",    "tier": "X1" },
-    "sir_link":          { "primary": "gemini-3-flash-preview",    "provider": "google",    "fallback": "gemini-2.5-flash",          "fallback_provider": "google",    "tier": "G1" },
-    "sir_debug":         { "primary": "gemini-3-flash-preview",    "provider": "google",    "fallback": "claude-haiku-4-5-20251001", "fallback_provider": "anthropic", "tier": "G1" },
-    "lady_apis":         { "primary": "gemini-3.1-pro-preview",    "provider": "google",    "fallback": "claude-sonnet-4-6",         "fallback_provider": "anthropic", "tier": "G2" },
-    "sir_mnemo":         { "primary": "gemini-3.1-pro-preview",    "provider": "google",    "fallback": "claude-sonnet-4-6",         "fallback_provider": "anthropic", "tier": "G2" },
-    "lady_mnemosyne":    { "primary": "gemini-3.1-pro-preview",    "provider": "google",    "fallback": "claude-sonnet-4-6",         "fallback_provider": "anthropic", "tier": "G2" },
-    "sir_liberte":       { "primary": "gemini-2.5-flash",          "provider": "google",    "fallback": "gemini-3-flash-preview",    "fallback_provider": "google",    "tier": "G1" },
-    "sir_valerian":      { "primary": "gemini-3-pro-preview",      "provider": "google",    "fallback": "claude-sonnet-4-6",         "fallback_provider": "anthropic", "tier": "G3" },
-    "sir_forge":         { "primary": "qwen3:1.7b",                "provider": "ollama",    "fallback": "qwen3:0.6b",               "fallback_provider": "ollama",    "tier": "L0", "harness_locked": true },
-    "sir_ghost":         { "primary": "qwen3:8b",                  "provider": "ollama",    "fallback": "qwen3:4b",                 "fallback_provider": "ollama",    "tier": "L0", "harness_locked": true, "bypass_cloud": true },
-    "sir_ouroboros":     { "primary": "mamba-3:8b-1.58b",          "provider": "ollama",    "fallback": "qwen3:1.7b",               "fallback_provider": "ollama",    "tier": "L1", "harness_locked": true }
-  },
-
-  "upstream": {
-    "gemini": {
-      "base_url": "http://127.0.0.1:8080/v1",
-      "api_key": "proxy-admin-key",
-      "description": "Gemini CLI OAuth via CLIProxy — Google free tier, priority initiator",
-      "priority": 1,
-      "provider": "google"
-    },
-    "cliproxy_claude": {
-      "base_url": "http://127.0.0.1:8080/v1",
-      "api_key": "proxy-admin-key",
-      "description": "Claude Code OAuth via CLIProxy — specialized fallback",
-      "priority": 2,
-      "provider": "anthropic"
-    },
-    "codex": {
-      "base_url": "http://127.0.0.1:8080/v1",
-      "api_key": "proxy-admin-key",
-      "description": "Codex OAuth via CLIProxy — velocity code generation",
-      "priority": 3,
-      "provider": "openai"
-    },
-    "ollama": {
-      "base_url": "http://127.0.0.1:11434/v1",
-      "api_key": null,
-      "description": "Local Ollama — SIR_FORGE (qwen3:1.7b) + SIR_GHOST (qwen3:8b)",
-      "priority": 4,
-      "provider": "local"
-    }
-  },
-
   "routing_matrix": {
-    "strategy": "google_priority_mfoe",
-    "description": "Google Gemini is the priority initiator. Claude/Codex are specialized fallbacks.",
-    "initiator_model": "gemini-3.1-flash-lite-preview",
-
-    "soul_equation": "S_omega = alpha*V + beta*M + gamma*P + delta*E",
-    "coefficients": {
-      "alpha": 0.20,
-      "beta": 0.35,
-      "gamma": 0.30,
-      "delta": 0.15
-    },
-
-    "tiers": {
-      "G0_initiator": {
-        "label": "G0",
-        "description": "Ultra-fast intent classification and trivial answers",
-        "models": ["gemini-3.1-flash-lite-preview"],
-        "provider": "google",
-        "latency_ms": 200,
-        "local_eligible": false
-      },
-      "G1_bridge": {
-        "label": "G1",
-        "description": "Bridge coordination, ATC, PIV self-healing, OSS tasks",
-        "models": ["gemini-3-flash-preview", "gemini-2.5-flash"],
-        "provider": "google",
-        "latency_ms": 400,
-        "intents": ["bridge", "routing", "debug", "test"]
-      },
-      "G2_pro": {
-        "label": "G2",
-        "description": "1M context, research, memory synthesis, standard reasoning",
-        "models": ["gemini-3.1-pro-preview", "gemini-2.5-pro"],
-        "provider": "google",
-        "latency_ms": 800,
-        "intents": ["research", "memory", "synthesis", "context"]
-      },
-      "G3_frontier": {
-        "label": "G3",
-        "description": "Apex reasoning, architecture, complex critique, orchestration",
-        "models": ["gemini-3-pro-preview"],
-        "provider": "google",
-        "latency_ms": 1200,
-        "intents": ["architecture", "orchestration", "critique", "complex"]
-      },
-      "C1_claude_standard": {
-        "label": "C1",
-        "description": "Claude standard — specialized fallback, Constitutional AI edge",
-        "models": ["claude-sonnet-4-6"],
-        "provider": "anthropic",
-        "role": "fallback_only"
-      },
-      "C2_claude_apex": {
-        "label": "C2",
-        "description": "Claude Opus apex — maximum intelligence, deep critique fallback",
-        "models": ["claude-opus-4-6"],
-        "provider": "anthropic",
-        "role": "fallback_only"
-      },
-      "X1_codex_velocity": {
-        "label": "X1",
-        "description": "Codex velocity — pure high-speed code generation",
-        "models": ["gpt-5.4", "gpt-5.3-codex-spark"],
-        "provider": "openai",
-        "intents": ["code_gen", "scaffold", "rapid_proto", "velocity"]
-      },
-      "L0_local": {
-        "label": "L0",
-        "description": "Air-gapped local execution — privacy override + harness-locked",
-        "models": ["qwen3:1.7b", "qwen3:8b"],
-        "provider": "ollama",
-        "local_eligible": true,
-        "complexity_max": 0.5
-      },
-      "L1_linear": {
-        "label": "L1",
-        "description": "Linear Reasoning Tier — O(N) scaling for infinite context (Mamba-3)",
-        "models": ["mamba-3:8b-1.58b"],
-        "provider": "ollama",
-        "linear_tier": true
-      }
-    },
-
-    "privacy_override": {
-      "trigger_keywords": ["secret", "local", "private", "credential", "key", "password"],
-      "forced_engine": "local_qwen",
-      "forced_knight": "SIR_GHOST",
-      "forced_tier": "L0",
-      "bypass_cloud": true,
-      "description": "Privacy keywords always route to air-gapped SIR_GHOST — never Gemini or Claude"
-    },
-
-    "complexity_routing": {
-      "low":    { "threshold": 0.3,  "tier": "G1", "engine": "gemini_flash",    "knight": "SIR_LINK" },
-      "medium": { "threshold": 0.6,  "tier": "G3", "engine": "gemini_frontier", "knight": "SIR_BORIS" },
-      "high":   { "threshold": 0.8,  "tier": "G3", "engine": "gemini_frontier", "knight": "SIR_BORIS",
-                  "escalate_to": "C2_claude_apex", "force_plan_mode": true },
-      "linear": { "threshold": 0.8,  "tier": "L1", "engine": "ouroboros_ssm",   "knight": "SIR_OUROBOROS",
-                  "trigger": "linear_need >= 0.8" }
-    },
-
-    "fallback_chain": ["gemini", "cliproxy_claude", "codex", "ollama"]
+    "strategy": "cost-optimized",
+    "fallback_chain": ["local", "free", "paid"]
   },
-
-  "security": {
-    "prompt_injection_block": true,
-    "agent_armor_pdg": true,
-    "wasm_guardrails_required": true,
-    "no_hardcoded_secrets": true,
-    "vault_auth_only": true,
-    "harness_locked_bypass": "sir_forge,sir_ghost"
-  },
-
-  "constraints": {
-    "ram_ceiling_mb": 8192,
-    "max_concurrent_requests": 10,
-    "request_timeout_ms": 30000,
-    "local_model_max_tokens": 4096,
-    "google_priority": true,
-    "initiator_always_google": true
+  "engines": {
+    "qwen2.5-coder:7b": {
+      "provider": "local",
+      "status": "active",
+      "tier": "free",
+      "priority": 1,
+      "roles": ["forge", "debug", "architect"]
+    },
+    "qwen2.5:7b": {
+      "provider": "local",
+      "status": "active",
+      "tier": "free",
+      "priority": 2,
+      "roles": ["reasoning", "merlin"]
+    },
+    "qwen2.5:3b": {
+      "provider": "local",
+      "status": "active",
+      "tier": "free",
+      "priority": 3,
+      "roles": ["planning", "audit", "default"]
+    },
+    "qwen2.5:1.5b": {
+      "provider": "local",
+      "status": "active",
+      "tier": "free",
+      "priority": 4,
+      "roles": ["security", "ghost"]
+    },
+    "qwen2.5:0.5b": {
+      "provider": "local",
+      "status": "active",
+      "tier": "free",
+      "priority": 5,
+      "roles": ["colony", "scan"]
+    }
   }
 }

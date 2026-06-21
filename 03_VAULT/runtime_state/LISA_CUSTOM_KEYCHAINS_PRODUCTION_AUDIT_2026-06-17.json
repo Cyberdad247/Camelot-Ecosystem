@@ -1,0 +1,330 @@
+{
+  "@context": {
+    "type": "https://schema.org/additionalType",
+    "dependsOn": "https://schema.org/isBasedOn",
+    "evidence": "https://schema.org/citation"
+  },
+  "@type": "nUKGProductionAudit",
+  "id": "lisa-custom-keychains-production-audit-2026-06-17",
+  "target": {
+    "repository": "https://github.com/Cyberdad247/LisaCustomKeychains.com.git",
+    "commit": "788b8a2",
+    "branch": "main",
+    "auditClone": "C:\\tmp\\LisaCustomKeychains.com-audit"
+  },
+  "verdict": "BLOCKED",
+  "releaseWindow": "Do not promote until every P0 gate is closed.",
+  "verification": {
+    "npmCi": "PASS: 571 packages installed from lockfile",
+    "tests": "PASS: 13/13",
+    "build": "PASS: Next.js 16.2.6 production build",
+    "lint": "FAIL: next lint is invalid and ESLint 9 has no flat config",
+    "productionAudit": "FAIL: 4 production advisories (2 high, 2 moderate)",
+    "runtimeProbe": [
+      "GET /api/content-queue returned 200 without authentication",
+      "PATCH /api/content-queue reached the handler without authentication",
+      "POST /api/design-ai returned 200 without authentication after spawning Python",
+      "GET /editor returned 307 to /client-editor/login"
+    ]
+  },
+  "issues": [
+    {
+      "id": "P0-AUTH-001",
+      "priority": "P0",
+      "owner": "ARACHNE",
+      "title": "Unauthenticated content queue read and mutation",
+      "evidence": [
+        "src/app/api/content-queue/route.ts:25",
+        "src/app/api/content-queue/route.ts:30",
+        "src/app/api/content-queue/route.ts:43"
+      ],
+      "impact": "Any visitor can read editorial content and approve, reject, or rewrite queued content.",
+      "fix": "Apply requireOwnerSession to GET and PATCH and validate the PATCH body with Zod."
+    },
+    {
+      "id": "P0-DOS-002",
+      "priority": "P0",
+      "owner": "SIMIAN",
+      "title": "Unauthenticated child-process endpoint",
+      "evidence": [
+        "src/app/api/design-ai/route.ts:14",
+        "src/app/api/design-ai/route.ts:33",
+        "src/app/api/design-ai/route.ts:45"
+      ],
+      "impact": "Remote callers can repeatedly spawn Python processes and exhaust function duration or host resources.",
+      "fix": "Require owner auth, cap request duration, kill the child on timeout, and rate-limit at Vercel Firewall."
+    },
+    {
+      "id": "P0-DATA-003",
+      "priority": "P0",
+      "owner": "FORMICA",
+      "title": "Editor persistence writes to deployment filesystem",
+      "evidence": [
+        "src/lib/storefront-config.ts:157",
+        "src/lib/storefront-config.ts:173",
+        "src/app/api/blog/route.ts:47",
+        "src/app/api/social/route.ts:35",
+        "src/lib/calendar.server.ts:96"
+      ],
+      "impact": "Vercel editor writes are non-durable and uploads cannot become stable public assets.",
+      "fix": "Move JSON documents to Supabase and images to Supabase Storage or Vercel Blob before the presentation."
+    },
+    {
+      "id": "P0-XSS-004",
+      "priority": "P0",
+      "owner": "ARACHNE",
+      "title": "Stored HTML injection in published blog content",
+      "evidence": [
+        "src/app/blog/[slug]/page.tsx:49",
+        "src/app/blog/[slug]/page.tsx:137"
+      ],
+      "impact": "Raw editor content is converted with regex and inserted as HTML without sanitization.",
+      "fix": "Escape raw HTML before markdown conversion and allow only http/https affiliate links."
+    },
+    {
+      "id": "P0-CI-005",
+      "priority": "P0",
+      "owner": "STRIGIFORM",
+      "title": "No functioning lint or CI release gate",
+      "evidence": [
+        "package.json:9",
+        ".eslintrc.json:2",
+        "missing:.github/workflows",
+        "missing:Dockerfile"
+      ],
+      "impact": "The repository can merge and deploy without lint, tests, audit, or preview verification.",
+      "fix": "Migrate to ESLint flat config and install the workflow below."
+    },
+    {
+      "id": "P0-DEPS-006",
+      "priority": "P0",
+      "owner": "ARACHNE",
+      "title": "High-severity production dependency advisories",
+      "evidence": [
+        "form-data 4.0.5: GHSA-hmw2-7cc7-3qxx",
+        "ws 8.19.0: GHSA-58qx-3vcg-4xpx and GHSA-96hv-2xvq-fx4p"
+      ],
+      "impact": "CRLF injection, memory disclosure, and memory-exhaustion advisories remain in the production tree.",
+      "fix": "Remove unused axios/form-data, update Supabase to a ws-fixed release, regenerate the lockfile, and rerun npm audit --omit=dev."
+    },
+    {
+      "id": "P1-SEC-007",
+      "priority": "P1",
+      "owner": "ARACHNE",
+      "title": "Draft blog records are publicly returned",
+      "evidence": [
+        "src/app/api/blog/route.ts:64"
+      ],
+      "fix": "Return only published posts to anonymous callers; require owner auth for draft access."
+    },
+    {
+      "id": "P1-OAUTH-008",
+      "priority": "P1",
+      "owner": "ARACHNE",
+      "title": "Meta OAuth state is static",
+      "evidence": [
+        "src/app/api/auth/meta/start/route.ts:18"
+      ],
+      "fix": "Generate a random state value, store it in an HttpOnly SameSite cookie, and verify it in callback."
+    },
+    {
+      "id": "P1-CRON-009",
+      "priority": "P1",
+      "owner": "SIMIAN",
+      "title": "Cron endpoint becomes public when CRON_SECRET is absent",
+      "evidence": [
+        "src/app/api/cron/generate-content/route.ts:6"
+      ],
+      "fix": "Fail closed when CRON_SECRET is missing."
+    },
+    {
+      "id": "P1-ENV-010",
+      "priority": "P1",
+      "owner": "STRIGIFORM",
+      "title": "Storefront-token placeholder can be mistaken for an Admin token",
+      "evidence": [
+        ".env.example:3",
+        ".env.example:6"
+      ],
+      "fix": "Use a Storefront API token placeholder for NEXT_PUBLIC_* and never place an Admin shpat token in a public variable."
+    }
+  ],
+  "patches": {
+    "ownerAuthHelper": [
+      "import { cookies } from \"next/headers\";",
+      "import { isOwnerSessionValid } from \"@/lib/storefront-config\";",
+      "export async function requireOwnerSession(): Promise<boolean> {",
+      "  const store = await cookies();",
+      "  return isOwnerSessionValid(store.get(\"lisa_owner_session\")?.value);",
+      "}"
+    ],
+    "contentQueueGate": [
+      "const PatchSchema = z.object({",
+      "  id: z.string().min(1),",
+      "  status: z.enum([\"pending\", \"approved\", \"rejected\"]),",
+      "  body: z.string().max(5000).optional()",
+      "});",
+      "if (!(await requireOwnerSession()))",
+      "  return NextResponse.json({ error: \"Unauthorized\" }, { status: 401 });",
+      "const parsed = PatchSchema.safeParse(await req.json());",
+      "if (!parsed.success)",
+      "  return NextResponse.json({ error: \"Invalid request\" }, { status: 400 });"
+    ],
+    "designAiTimeout": [
+      "if (!(await requireOwnerSession()))",
+      "  return NextResponse.json({ error: \"Unauthorized\" }, { status: 401 });",
+      "const timer = setTimeout(() => child.kill(), 8000);",
+      "child.once(\"close\", () => clearTimeout(timer));",
+      "child.once(\"error\", () => clearTimeout(timer));"
+    ],
+    "blogSanitization": [
+      "function escapeHtml(value: string) {",
+      "  return value.replaceAll(\"&\", \"&amp;\").replaceAll(\"<\", \"&lt;\")",
+      "    .replaceAll(\">\", \"&gt;\").replaceAll('\"', \"&quot;\").replaceAll(\"'\", \"&#39;\");",
+      "}",
+      "function safeExternalUrl(value: string) {",
+      "  try { const url = new URL(value); return [\"http:\", \"https:\"].includes(url.protocol) ? url.href : \"#\"; }",
+      "  catch { return \"#\"; }",
+      "}",
+      "const html = renderMarkdown(escapeHtml(post.content ?? \"\"));"
+    ],
+    "linearSlugAllocation": [
+      "const usedSlugs = new Set(posts.map((post) => post.slug));",
+      "let slug = baseSlug;",
+      "for (let suffix = 1; usedSlugs.has(slug); suffix += 1) slug = `${baseSlug}-${suffix}`;"
+    ],
+    "eslintFlatConfig": [
+      "import { FlatCompat } from \"@eslint/eslintrc\";",
+      "import { defineConfig } from \"eslint/config\";",
+      "const compat = new FlatCompat({ baseDirectory: import.meta.dirname });",
+      "export default defineConfig([...compat.extends(\"next/core-web-vitals\", \"next/typescript\")]);"
+    ]
+  },
+  "containerBlueprint": {
+    "nextConfigAddition": "output: \"standalone\"",
+    "Dockerfile": [
+      "FROM node:24-alpine AS deps",
+      "WORKDIR /app",
+      "COPY package*.json ./",
+      "RUN npm ci --omit=dev",
+      "FROM node:24-alpine AS build",
+      "WORKDIR /app",
+      "COPY --from=deps /app/node_modules ./node_modules",
+      "COPY . .",
+      "RUN npm run build",
+      "FROM gcr.io/distroless/nodejs24-debian12:nonroot AS runtime",
+      "WORKDIR /app",
+      "ENV NODE_ENV=production PORT=3000 HOSTNAME=0.0.0.0",
+      "COPY --from=build /app/public ./public",
+      "COPY --from=build --chown=nonroot:nonroot /app/.next/standalone ./",
+      "COPY --from=build --chown=nonroot:nonroot /app/.next/static ./.next/static",
+      "EXPOSE 3000",
+      "CMD [\"server.js\"]"
+    ],
+    "gVisorRun": "docker run --rm --runtime=runsc --read-only --tmpfs /tmp:rw,noexec,nosuid,size=64m -p 3000:3000 --env-file .env.production lisa-keychains:release"
+  },
+  "githubActions": [
+    "name: production",
+    "on:",
+    "  pull_request:",
+    "  push:",
+    "    branches: [main]",
+    "permissions:",
+    "  contents: read",
+    "jobs:",
+    "  verify:",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - uses: actions/checkout@v4",
+    "      - uses: actions/setup-node@v4",
+    "        with: { node-version: 24, cache: npm }",
+    "      - run: npm ci",
+    "      - run: npm run lint",
+    "      - run: npm test",
+    "      - run: npm audit --omit=dev --audit-level=high",
+    "      - run: npm run build",
+    "  deploy:",
+    "    if: github.ref == 'refs/heads/main' && github.event_name == 'push'",
+    "    needs: verify",
+    "    runs-on: ubuntu-latest",
+    "    steps:",
+    "      - uses: actions/checkout@v4",
+    "      - uses: actions/setup-node@v4",
+    "        with: { node-version: 24, cache: npm }",
+    "      - run: npm ci",
+    "      - run: npm install --global vercel@latest",
+    "      - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}",
+    "      - run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}",
+    "      - run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}"
+  ],
+  "environmentContract": {
+    "githubSecrets": [
+      "VERCEL_TOKEN",
+      "VERCEL_ORG_ID",
+      "VERCEL_PROJECT_ID"
+    ],
+    "vercelServerOnly": [
+      "OWNER_DASHBOARD_PASSWORD",
+      "OWNER_DASHBOARD_SECRET",
+      "CRON_SECRET",
+      "SUPABASE_SERVICE_ROLE_KEY",
+      "SHOPIFY_ADMIN_API_ACCESS_TOKEN",
+      "GOOGLE_AI_API_KEY",
+      "ANTHROPIC_API_KEY",
+      "META_ACCESS_TOKEN"
+    ],
+    "vercelPublic": [
+      "NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN",
+      "NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN",
+      "NEXT_PUBLIC_SUPABASE_URL",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY"
+    ],
+    "rule": "Never place Admin API, service-role, OAuth secret, or AI-provider credentials in NEXT_PUBLIC variables."
+  },
+  "dag": [
+    {
+      "id": "A",
+      "dependsOn": [],
+      "command": "git checkout -b hardening/presentation-p0"
+    },
+    {
+      "id": "B",
+      "dependsOn": ["A"],
+      "command": "npm uninstall axios form-data && npm update @supabase/supabase-js"
+    },
+    {
+      "id": "C",
+      "dependsOn": ["A"],
+      "command": "Apply P0-AUTH-001, P0-DOS-002, P0-DATA-003, and P0-XSS-004 patches"
+    },
+    {
+      "id": "D",
+      "dependsOn": ["A"],
+      "command": "Replace next lint with eslint . --max-warnings=0 and add eslint.config.mjs"
+    },
+    {
+      "id": "E",
+      "dependsOn": ["B", "C", "D"],
+      "command": "npm ci && npm run lint && npm test && npm audit --omit=dev --audit-level=high && npm run build"
+    },
+    {
+      "id": "F",
+      "dependsOn": ["E"],
+      "command": "vercel pull --yes --environment=production && vercel build --prod"
+    },
+    {
+      "id": "G",
+      "dependsOn": ["F"],
+      "command": "vercel deploy --prebuilt --prod"
+    },
+    {
+      "id": "H",
+      "dependsOn": ["G"],
+      "command": "vercel curl / --deployment <production-url> && vercel logs --environment production --level error --since 5m"
+    }
+  ],
+  "documentation": [
+    "https://vercel.com/docs/projects/deploy-from-cli",
+    "https://vercel.com/docs/git/vercel-for-github"
+  ]
+}

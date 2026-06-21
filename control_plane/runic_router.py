@@ -180,6 +180,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_status",
     },
+    "//TRIAGE": {
+        "knight": "sir_codex",
+        "description": "Evidence-gated read-only system architecture triage",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_triage",
+        "hydrate": False,
+    },
     "//THINK": {
         "knight": "merlin_omega",
         "description": "Deep reasoning via GoT/ToT chain",
@@ -400,6 +408,20 @@ def _handle_scan(param: str, context: dict) -> dict:
 def _handle_status(param: str, context: dict) -> dict:
     return {"action": "system_status", "detail": "run: python -m control_plane.harness --status"}
 
+def _handle_triage(param: str, context: dict) -> dict:
+    tokens = shlex.split(param, posix=False) if param else []
+    allowed = {"--rapid", "--deep", "--force-deep", "--json"}
+    normalized = [token for token in tokens if token in allowed]
+    command = "camelot triage"
+    if normalized:
+        command += " " + " ".join(normalized)
+    return {
+        "action": "system_triage",
+        "canonical_command": command,
+        "read_only": True,
+        "requested_options": normalized,
+    }
+
 def _handle_think(param: str, context: dict) -> dict:
     return {"action": "got_reasoning", "param": param, "knight": "merlin_omega"}
 
@@ -567,6 +589,7 @@ _HANDLERS = {
     "_handle_vocal": _handle_vocal,
     "_handle_scan": _handle_scan,
     "_handle_status": _handle_status,
+    "_handle_triage": _handle_triage,
     "_handle_think": _handle_think,
     "_handle_bifrost_lock": _handle_bifrost_lock,
     "_handle_scan_vectors": _handle_scan_vectors,

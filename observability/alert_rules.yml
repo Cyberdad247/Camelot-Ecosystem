@@ -1,0 +1,265 @@
+# Prometheus Alert Rules for CAMELOT-OS
+# Critical alerts for production monitoring
+
+groups:
+  - name: camelot_critical
+    interval: 15s
+    rules:
+
+      # ── Consensus Alerts ────────────────────────────────────────────
+
+      - alert: ConsensusLatencyHigh
+        expr: histogram_quantile(0.95, camelot_consensus_latency_seconds) > 0.5
+        for: 5m
+        labels:
+          severity: critical
+          component: consensus
+        annotations:
+          summary: "High consensus latency on {{ $labels.node_id }}"
+          description: "P95 consensus latency is {{ $value | humanize }}s (threshold: 0.5s)"
+          runbook: "https://internal/runbooks/consensus-latency"
+
+      - alert: ConsensusProposalFailures
+        expr: rate(camelot_consensus_proposals_total{status="failed"}[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+          component: consensus
+        annotations:
+          summary: "Consensus proposal failures on {{ $labels.node_id }}"
+          description: "Failure rate is {{ $value | humanize }}/s"
+          runbook: "https://internal/runbooks/consensus-failures"
+
+      - alert: ConsensusLeaderElectionStorm
+        expr: rate(camelot_consensus_leader_changes_total[5m]) > 0.5
+        for: 1m
+        labels:
+          severity: critical
+          component: consensus
+        annotations:
+          summary: "Leader election storm detected"
+          description: "Leader changes at {{ $value | humanize }}/s (normal: < 0.1/s)"
+          runbook: "https://internal/runbooks/leader-election-storm"
+
+      # ── Knowledge Sync Alerts ───────────────────────────────────────
+
+      - alert: SyncLatencyHigh
+        expr: histogram_quantile(0.95, camelot_sync_latency_seconds) > 1.0
+        for: 5m
+        labels:
+          severity: warning
+          component: sync
+        annotations:
+          summary: "High knowledge sync latency on {{ $labels.node_id }}"
+          description: "P95 sync latency is {{ $value | humanize }}s (threshold: 1.0s)"
+
+      - alert: ReplicationLagHigh
+        expr: camelot_sync_replication_lag_seconds > 5.0
+        for: 3m
+        labels:
+          severity: warning
+          component: sync
+        annotations:
+          summary: "High replication lag between {{ $labels.source_node }} and {{ $labels.target_node }}"
+          description: "Replication lag is {{ $value | humanize }}s (threshold: 5.0s)"
+
+      - alert: SyncConflictRate
+        expr: rate(camelot_sync_conflicts_total[5m]) > 1.0
+        for: 5m
+        labels:
+          severity: warning
+          component: sync
+        annotations:
+          summary: "High conflict rate on {{ $labels.node_id }}"
+          description: "Conflict rate is {{ $value | humanize }}/s"
+
+      - alert: DataLossDetected
+        expr: increase(camelot_data_loss_events_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: sync
+        annotations:
+          summary: "DATA LOSS DETECTED in {{ $labels.component }}"
+          description: "Data loss events detected. Immediate escalation required."
+          runbook: "https://internal/runbooks/data-loss-emergency"
+
+      # ── Agent Network Alerts ────────────────────────────────────────
+
+      - alert: AgentNetworkDegraded
+        expr: count(camelot_agent_health_status == 2) < 6
+        for: 2m
+        labels:
+          severity: critical
+          component: agents
+        annotations:
+          summary: "Agent network degraded: only {{ $value }} healthy agents"
+          description: "Need at least 6 healthy agents, have {{ $value }}"
+          runbook: "https://internal/runbooks/agent-network-degraded"
+
+      - alert: AgentLatencyHigh
+        expr: histogram_quantile(0.95, camelot_agent_latency_seconds) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          component: agents
+        annotations:
+          summary: "High agent latency on {{ $labels.agent_id }}"
+          description: "P95 latency is {{ $value | humanize }}s (threshold: 0.1s)"
+
+      - alert: AgentDark
+        expr: camelot_agent_health_status == 0
+        for: 5m
+        labels:
+          severity: critical
+          component: agents
+        annotations:
+          summary: "Agent {{ $labels.agent_id }} is dark (offline)"
+          description: "Agent has been offline for 5+ minutes"
+          runbook: "https://internal/runbooks/agent-offline"
+
+      - alert: AgentHighLoad
+        expr: camelot_agent_load > 0.9
+        for: 10m
+        labels:
+          severity: warning
+          component: agents
+        annotations:
+          summary: "Agent {{ $labels.agent_id }} is overloaded"
+          description: "Load is {{ $value | humanize }} (threshold: 0.9)"
+
+      # ── System Resource Alerts ──────────────────────────────────────
+
+      - alert: MemoryExhaustion
+        expr: camelot_system_memory_bytes{type="used"} / camelot_system_memory_bytes{type="total"} > 0.9
+        for: 5m
+        labels:
+          severity: critical
+          component: system
+        annotations:
+          summary: "Memory exhaustion on {{ $labels.instance }}"
+          description: "Memory usage is {{ $value | humanizePercentage }} (threshold: 90%)"
+          runbook: "https://internal/runbooks/memory-exhaustion"
+
+      - alert: CPUOverutilization
+        expr: camelot_system_cpu_percent > 80
+        for: 5m
+        labels:
+          severity: warning
+          component: system
+        annotations:
+          summary: "High CPU utilization on {{ $labels.instance }}"
+          description: "CPU is {{ $value | humanize }}% (threshold: 80%)"
+
+      # ── Error Rate Alerts ───────────────────────────────────────────
+
+      - alert: ErrorRateHigh
+        expr: rate(camelot_errors_total{severity="error"}[5m]) > 1.0
+        for: 5m
+        labels:
+          severity: warning
+          component: "{{ $labels.component }}"
+        annotations:
+          summary: "High error rate in {{ $labels.component }}"
+          description: "Error rate is {{ $value | humanize }}/s"
+
+      - alert: CriticalErrorDetected
+        expr: increase(camelot_errors_total{severity="critical"}[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: "{{ $labels.component }}"
+        annotations:
+          summary: "Critical error in {{ $labels.component }}"
+          description: "Critical errors detected in {{ $labels.component }}"
+          runbook: "https://internal/runbooks/critical-error"
+
+      # ── Failure & Recovery Alerts ───────────────────────────────────
+
+      - alert: HighFailureRate
+        expr: rate(camelot_failures_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          component: "{{ $labels.component }}"
+        annotations:
+          summary: "High failure rate in {{ $labels.component }}"
+          description: "Failure rate is {{ $value | humanize }}/s"
+
+      - alert: SlowRecovery
+        expr: histogram_quantile(0.95, camelot_recovery_time_seconds) > 30
+        for: 5m
+        labels:
+          severity: warning
+          component: "{{ $labels.component }}"
+        annotations:
+          summary: "Slow recovery in {{ $labels.component }}"
+          description: "P95 recovery time is {{ $value | humanize }}s (threshold: 30s)"
+
+      # ── Data Consistency Alerts ─────────────────────────────────────
+
+      - alert: DataDivergenceDetected
+        expr: increase(camelot_data_divergence_detected[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: sync
+        annotations:
+          summary: "Data divergence between {{ $labels.node_id_a }} and {{ $labels.node_id_b }}"
+          description: "Inconsistent data detected between nodes. Immediate investigation required."
+          runbook: "https://internal/runbooks/data-divergence"
+
+  - name: camelot_warnings
+    interval: 15s
+    rules:
+
+      # ── Timeout Alerts ──────────────────────────────────────────────
+
+      - alert: TimeoutRateIncreasing
+        expr: rate(camelot_timeouts_total[5m]) > 0.05
+        for: 10m
+        labels:
+          severity: warning
+          component: "{{ $labels.component }}"
+        annotations:
+          summary: "Increasing timeout rate in {{ $labels.component }}"
+          description: "Timeout rate is {{ $value | humanize }}/s"
+
+  - name: camelot_slo
+    interval: 1m
+    rules:
+
+      # ── SLO Tracking ────────────────────────────────────────────────
+
+      - alert: ConsensusLatencySLOBreach
+        # P95 latency > 100ms violates SLO
+        expr: histogram_quantile(0.95, rate(camelot_consensus_latency_seconds[5m])) > 0.1
+        for: 10m
+        labels:
+          severity: warning
+          slo: 'consensus_latency'
+        annotations:
+          summary: "Consensus latency SLO breach"
+          description: "P95 latency {{ $value | humanize }}s exceeds SLO of 0.1s"
+
+      - alert: AgentLatencySLOBreach
+        # P95 latency > 50ms violates SLO
+        expr: histogram_quantile(0.95, rate(camelot_agent_latency_seconds[5m])) > 0.05
+        for: 10m
+        labels:
+          severity: warning
+          slo: 'agent_latency'
+        annotations:
+          summary: "Agent latency SLO breach"
+          description: "P95 latency {{ $value | humanize }}s exceeds SLO of 0.05s"
+
+      - alert: AvailabilitySLOBreach
+        # Less than 6 healthy agents violates 99.9% availability SLO
+        expr: count(camelot_agent_health_status == 2) < 6
+        for: 15m
+        labels:
+          severity: critical
+          slo: 'availability'
+        annotations:
+          summary: "Availability SLO breach"
+          description: "Only {{ $value }} healthy agents (need 6+ for 99.9% SLO)"

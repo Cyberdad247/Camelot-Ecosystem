@@ -1,137 +1,130 @@
 {
   "engine": "SYMBIOTIC_MAINTENANCE",
-  "generated_utc": "2026-06-16T19:39:05.329126+00:00",
+  "generated_utc": "2026-06-18T03:38:07.982895+00:00",
   "strict_mode": false,
-  "quick_mode": true,
+  "quick_mode": false,
   "status": "OK",
-  "duration_ms": 39812,
+  "duration_ms": 45818,
   "audit": {
     "summary": {
-      "scanned_files": 4500,
-      "total_size_mb": 164.98,
-      "max_files_budget": 4500
+      "scanned_files": 12000,
+      "total_size_mb": 951.37,
+      "max_files_budget": 12000
     },
     "top_extensions": [
       {
         "extension": ".py",
-        "count": 1289
-      },
-      {
-        "extension": ".md",
-        "count": 501
+        "count": 2375
       },
       {
         "extension": ".o",
-        "count": 449
+        "count": 1440
+      },
+      {
+        "extension": ".md",
+        "count": 1082
       },
       {
         "extension": ".json",
-        "count": 327
-      },
-      {
-        "extension": ".js",
-        "count": 277
+        "count": 1071
       },
       {
         "extension": "<none>",
-        "count": 247
+        "count": 786
       },
       {
-        "extension": ".tsx",
-        "count": 128
+        "extension": ".js",
+        "count": 632
       },
       {
         "extension": ".html",
-        "count": 99
+        "count": 397
+      },
+      {
+        "extension": ".tsx",
+        "count": 376
       }
     ],
     "largest_files": [
+      {
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\libcriterion-07dfc716ea4d20d5.rlib",
+        "size_mb": 41.51
+      },
+      {
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\libregex_automata-28e9b237ace48c85.rlib",
+        "size_mb": 20.2
+      },
+      {
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\excalibur_aegis-5996ec486c7e029e.pdb",
+        "size_mb": 18.63
+      },
+      {
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\libclap_builder-f8757d72acb89d9e.rlib",
+        "size_mb": 17.18
+      },
       {
         "path": ".colony\\index.json",
         "size_mb": 17.01
       },
       {
-        "path": "01_KERNEL\\core\\aegis_shield\\target\\debug\\deps\\libzerocopy-d4322fd0e77937d9.rmeta",
-        "size_mb": 12.03
+        "path": ".worktrees\\kickbox-sovereign-integration\\.colony\\index.json",
+        "size_mb": 17.01
       },
       {
-        "path": "01_KERNEL\\senses\\morgana_bridge\\target\\debug\\morgana_bridge.exe",
-        "size_mb": 8.78
+        "path": ".worktrees\\kickbox-sovereign-integration\\99_HISTORY\\harness_queue_archive\\harness_queue.20260520-100450.jsonl",
+        "size_mb": 16.58
       },
       {
-        "path": "01_KERNEL\\core\\aegis_shield\\target\\debug\\deps\\libsyn-8a4330ce428d6121.rlib",
-        "size_mb": 6.3
+        "path": "02_FORGE\\generated\\ukg_omega_glyph_v1000\\Node_B_Bifrost\\target\\debug\\deps\\libtokio-852fdaced0e0ef2c.rlib",
+        "size_mb": 16.34
       },
       {
-        "path": "01_KERNEL\\senses\\vizion-telemetry\\vizion-telemetry.exe",
-        "size_mb": 3.58
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\libregex_syntax-c07366a2d989a387.rlib",
+        "size_mb": 15.35
       },
       {
-        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\ouroboros_engine-966958f362efb595.pdb",
-        "size_mb": 3.37
-      },
-      {
-        "path": ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_quantization-1fee373f9b77d72e.pdb",
-        "size_mb": 3.33
-      },
-      {
-        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_quantization-7ea4c5606af1f50c.pdb",
-        "size_mb": 3.32
-      },
-      {
-        "path": ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_inference-30bfc45542de911f.pdb",
-        "size_mb": 3.32
-      },
-      {
-        "path": "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\deps\\test_inference-0a4c13dc52e01778.pdb",
-        "size_mb": 3.31
+        "path": "02_FORGE\\excalibur-dev\\target\\debug\\deps\\libzerocopy-ec2cc23a10551246.rlib",
+        "size_mb": 13.86
       }
     ],
     "stale_logs": [],
     "duplicate_groups": [
       [
+        ".camelot-config.yaml",
+        ".worktrees\\kickbox-sovereign-integration\\.camelot-config.yaml"
+      ],
+      [
         ".camelot-config.yaml.example",
+        ".worktrees\\kickbox-sovereign-integration\\.camelot-config.yaml.example",
         ".worktrees\\omega-patch\\.camelot-config.yaml.example"
       ],
       [
+        ".worktrees\\kickbox-sovereign-integration\\01_KERNEL\\tests\\test_ouroboros_bridge.py",
+        "01_KERNEL\\tests\\test_ouroboros_bridge.py"
+      ],
+      [
+        "01_KERNEL\\core\\aegis_shield\\target\\debug\\.fingerprint\\serde-447d73f5c6251dfa\\build-script-build-script-build.json",
+        "02_FORGE\\generated\\ukg_omega_glyph_v1000\\Node_B_Bifrost\\target\\debug\\.fingerprint\\serde-447d73f5c6251dfa\\build-script-build-script-build.json"
+      ],
+      [
+        ".worktrees\\kickbox-sovereign-integration\\01_KERNEL\\protocols\\assimilation_v3.md",
+        ".worktrees\\kickbox-sovereign-integration\\docs\\protocols\\assimilation_v3.md",
         ".worktrees\\omega-patch\\01_KERNEL\\protocols\\assimilation_v3.md",
         ".worktrees\\omega-patch\\docs\\protocols\\assimilation_v3.md",
         "01_KERNEL\\protocols\\assimilation_v3.md"
       ],
       [
         ".prettierrc",
+        ".worktrees\\kickbox-sovereign-integration\\.prettierrc",
         ".worktrees\\omega-patch\\.prettierrc"
-      ],
-      [
-        ".qdrant-initialized",
-        ".runtime_logssaltare.out.log",
-        "boot_results.json",
-        ".runtime_logs\\morgana_bridge.err.log",
-        ".runtime_logs\\morgana_bridge.out.log",
-        ".worktrees\\omega-patch\\01_KERNEL\\agora\\Squires\\data\\sqlite-db\\checkpoints.sqlite",
-        ".worktrees\\omega-patch\\01_KERNEL\\forge\\nano_forge\\extension\\content\\_content.css",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\.cargo-lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\ouroboros_engine-1xwta6fmf1657\\s-hit425tcj4-1ym1dpi.lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\ouroboros_engine-1xwta6fmf1657\\s-hit42n6see-0wlf4sn.lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\ouroboros_engine-3d58d43w73hp5\\s-hit3tuzm0w-0k6jr2w.lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\ouroboros_engine-3d58d43w73hp5\\s-hit42n6q18-12uzwz6.lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-04djjmycvw2j5\\s-hit3ubnnvh-0kgl75d.lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-04djjmycvw2j5\\s-hit42nhmz9-0ltzr20.lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_quantization-39j2aejj3yync\\s-hit425tcga-04n8myl.lock",
-        ".worktrees\\omega-patch\\01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_quantization-39j2aejj3yync\\s-hit42nhmvn-0e9dm9s.lock"
-      ],
-      [
-        ".worktrees\\omega-patch\\01_KERNEL\\forge\\nano_forge\\extension\\tests\\test_self_healing.js",
-        ".worktrees\\omega-patch\\03_VAULT\\Nano-Knights\\tests\\test_self_healing.js",
-        "01_KERNEL\\forge\\nano_forge\\extension\\tests\\test_self_healing.js"
-      ],
-      [
-        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x34n4t7-17l9fu2-9gnvmpr6h2lbgppj4rz76fj1t\\work-products.bin",
-        "01_KERNEL\\reasoning\\ouroboros_engine\\target\\debug\\incremental\\test_inference-3ia24xezzfkjb\\s-hj2x4s0hjo-1gu7ytp-ben78q6nvpqvebvdybviu2838\\work-products.bin"
       ]
     ],
-    "cache_sizes_mb": {},
+    "cache_sizes_mb": {
+      "data/.pytest_cache": 0.001,
+      "data/.pytest_tmp": 0.812
+    },
     "recommendations": [
+      "Purge cache footprints on boot to reclaim ephemeral storage.",
       "Review duplicate binary/text assets for dedupe opportunities."
     ]
   },
@@ -148,11 +141,12 @@
           "compileall",
           "-q",
           "control_plane",
-          "bin"
+          "bin",
+          "squires"
         ],
         "ok": true,
         "returncode": 0,
-        "duration_ms": 2919,
+        "duration_ms": 3247,
         "stdout_tail": "",
         "stderr_tail": ""
       },
@@ -164,40 +158,42 @@
           "ruff",
           "check",
           "control_plane",
-          "bin"
+          "bin",
+          "squires"
         ],
         "ok": false,
         "returncode": 1,
-        "duration_ms": 378,
-        "stdout_tail": "1061 | |         import json\n     | |___________________^\n1062 |           try:\n1063 |               req = urllib.request.Request(\n     |\nhelp: Organize imports\nFound 292 errors.\n[*] 183 fixable with the `--fix` option (23 hidden fixes can be enabled with the `--unsafe-fixes` option).",
+        "duration_ms": 531,
+        "stdout_tail": "\u001b[1m\u001b[94m6 |\u001b[0m from dataclasses import dataclass\n\u001b[1m\u001b[94m7 |\u001b[0m from pathlib import Path\n  \u001b[1m\u001b[94m|\u001b[0m                     \u001b[1m\u001b[91m^^^^\u001b[0m\n\u001b[1m\u001b[94m8 |\u001b[0m from typing import Iterable\n  \u001b[1m\u001b[94m|\u001b[0m\n\u001b[1m\u001b[96mhelp\u001b[0m: \u001b[1mRemove unused import: `pathlib.Path`\u001b[0m\nFound 326 errors.\n[\u001b[36m*\u001b[0m] 212 fixable with the `--fix` option (24 hidden fixes can be enabled with the `--unsafe-fixes` option).",
         "stderr_tail": ""
       }
     ]
   },
   "purge": {
     "enabled": true,
-    "removed_entries": 19,
-    "reclaimed_mb": 2.036,
+    "removed_entries": 60,
+    "reclaimed_mb": 5.001,
     "removed_paths": [
+      "data\\.pytest_cache",
+      "data\\.pytest_tmp",
+      "__pycache__",
+      "01_KERNEL\\__pycache__",
       "01_KERNEL\\agora\\__pycache__",
       "01_KERNEL\\agora\\cloud_orchestrator_shim\\__pycache__",
       "01_KERNEL\\agora\\orchestration\\__pycache__",
+      "01_KERNEL\\EXCALIBUR\\__pycache__",
       "01_KERNEL\\EXCALIBUR\\core\\__pycache__",
+      "01_KERNEL\\EXCALIBUR\\system\\__pycache__",
       "01_KERNEL\\forge\\assimilation\\__pycache__",
       "01_KERNEL\\forge\\assimilation\\core\\__pycache__",
+      "01_KERNEL\\forge\\assimilation\\tests\\__pycache__",
+      "01_KERNEL\\forge\\exp\\__pycache__",
+      "01_KERNEL\\forge\\scripts\\__pycache__",
+      "01_KERNEL\\forge\\tools\\__pycache__",
       "01_KERNEL\\iron_gate\\__pycache__",
-      "01_KERNEL\\iron_gate\\judge\\__pycache__",
-      "01_KERNEL\\iron_gate\\security\\__pycache__",
-      "01_KERNEL\\merlin\\Engines\\__pycache__",
-      "01_KERNEL\\merlin\\Engines\\symbolect_transpiler\\__pycache__",
-      "01_KERNEL\\merlin\\fusion\\__pycache__",
-      "01_KERNEL\\merlin\\reasoning\\__pycache__",
-      "01_KERNEL\\titan\\__pycache__",
-      "01_KERNEL\\titan\\memory\\__pycache__",
-      "03_VAULT\\__pycache__",
-      "03_VAULT\\training\\configs\\__pycache__",
-      "bin\\__pycache__",
-      "control_plane\\__pycache__"
+      "01_KERNEL\\iron_gate\\DEFENSE_GRID\\__pycache__",
+      "01_KERNEL\\iron_gate\\DEFENSE_GRID\\knights\\__pycache__",
+      "01_KERNEL\\iron_gate\\DEFENSE_GRID\\shadow_veil\\__pycache__"
     ],
     "errors": []
   },
@@ -213,9 +209,9 @@
     "cpu_count": 12,
     "recommended_workers": 4,
     "memory_total_mb": 7895.9,
-    "memory_available_mb": 277.3,
-    "memory_pressure": 0.965,
-    "disk_free_pct": 38.55,
+    "memory_available_mb": 941.8,
+    "memory_pressure": 0.881,
+    "disk_free_pct": 37.3,
     "platform": "win32"
   },
   "artifacts": {

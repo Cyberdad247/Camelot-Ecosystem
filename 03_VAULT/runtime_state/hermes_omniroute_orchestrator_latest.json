@@ -5,16 +5,11 @@
   "orchestrator": "sir_hermes",
   "omniroute_endpoint": "http://127.0.0.1:20128/v1",
   "zero_cost_engines": [
-    "claude_apex",
-    "claude_standard",
-    "codex_velocity",
-    "gemini_flash",
-    "gemini_frontier",
-    "gemini_initiator",
-    "gemini_pro",
-    "local_qwen",
-    "open_coder",
-    "ouroboros_ssm"
+    "qwen2.5-coder:7b",
+    "qwen2.5:0.5b",
+    "qwen2.5:1.5b",
+    "qwen2.5:3b",
+    "qwen2.5:7b"
   ],
   "free_terminals": [
     "lady_nanobot",
@@ -32,12 +27,12 @@
     "sir_sonus",
     "sir_zeroclaw"
   ],
-  "timestamp_utc": "2026-06-16T19:38:12.425445+00:00",
+  "timestamp_utc": "2026-06-18T03:37:16.211377+00:00",
   "hermes_terminal": {
     "present": true,
     "engine": "hermes_cli",
     "cost_tier": "free",
     "cli_present": true
   },
-  "routing_strategy": "google_priority_mfoe"
+  "routing_strategy": "cost-optimized"
 }

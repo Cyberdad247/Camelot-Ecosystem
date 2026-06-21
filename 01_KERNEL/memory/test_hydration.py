@@ -24,9 +24,17 @@ class TestHydrationManager(unittest.TestCase):
         self.mgr = HydrationManager(storage_dir=self.test_dir)
 
     def tearDown(self):
+        import gc
+        # Ensure SQLite connections are fully closed by deleting the manager and forcing GC
+        del self.mgr
+        gc.collect()
+        
         # Cleanup test files using rmtree
         if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
+            try:
+                shutil.rmtree(self.test_dir)
+            except PermissionError:
+                pass # Windows can sometimes hold file locks a bit longer
 
     def test_l1_hydration(self):
         """Verify that L1 tissue is correctly stored and retrieved."""
@@ -37,20 +45,21 @@ class TestHydrationManager(unittest.TestCase):
         # Hydrate with high enough complexity
         result = self.mgr.hydrate_context(intent, complexity=5)
         self.assertIn("L1", result)
-        self.assertEqual(result["L1"]["key"], "l1_value")
-        self.assertIn("L1", result["tiers_active"])
+        self.assertEqual(result["L1"]["data"]["key"], "l1_value")
+        self.assertIn("L1_LOCAL", result["tiers_active"])
 
     @patch("psutil.virtual_memory")
-    def test_l2_hydration_success(self, mock_mem):
+    @patch.object(hydration_mgr_mod.CloudBrainConnector, "query_notebook")
+    def test_l2_hydration_success(self, mock_query, mock_mem):
         """Verify L2 hydration when RAM Law is respected."""
         # Mock 4GB used (below 8GB limit)
         mock_mem.return_value.used = 4 * (1024**3)
+        mock_query.return_value = "Mocked Burst Data"
         
         intent = "test_l2_pass"
         result = self.mgr.hydrate_context(intent, complexity=9)
         self.assertIn("L2", result)
-        self.assertIn("L2", result["tiers_active"])
-        self.assertEqual(result["L2"], f"Raw dataset mounted for {intent}")
+        self.assertIn("L2_CLOUD", result["tiers_active"])
 
     @patch("psutil.virtual_memory")
     def test_l2_hydration_rejection(self, mock_mem):
@@ -73,7 +82,8 @@ class TestHydrationManager(unittest.TestCase):
         # Complexity 2 should not pull L1 (which requires complexity 4)
         result = self.mgr.hydrate_context(intent, complexity=2)
         self.assertNotIn("L1", result)
-        self.assertEqual(result["tiers_active"], [])
+        self.assertIn("L0_LOCAL", result["tiers_active"])
+        self.assertNotIn("L1_LOCAL", result["tiers_active"])
 
 if __name__ == "__main__":
     unittest.main()

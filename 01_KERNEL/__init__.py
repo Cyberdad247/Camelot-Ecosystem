@@ -12,9 +12,9 @@ import os  # noqa: F401
 try:
     from .forge.tools import antigravity_safe  # noqa: F401
     # Antigravity safe already patches builtins.open upon import
-    print("[KERNEL] Antigravity Safe I/O Active.")
+    print("[KERNEL] Antigravity Safe I/O Active.", file=sys.stderr)
 except ImportError:
-    print("[KERNEL WARNING] Antigravity Safe I/O not found. Proceeding with caution.")
+    print("[KERNEL WARNING] Antigravity Safe I/O not found. Proceeding with caution.", file=sys.stderr)
 
 KERNEL_ROOT = Path(__file__).parent
 STORAGE_ROOT = KERNEL_ROOT.parent / "Titan_Omega_Hypergraph"

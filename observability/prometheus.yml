@@ -1,0 +1,78 @@
+# Prometheus Configuration for CAMELOT-OS
+# Scrapes metrics from all components every 15 seconds
+
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'camelot-distributed'
+    environment: 'production'
+
+# Alerting configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - 'alertmanager:9093'
+
+# Alert rules
+rule_files:
+  - '/etc/prometheus/alert_rules.yml'
+
+scrape_configs:
+  # ── CAMELOT-OS Instances ────────────────────────────────────────────
+
+  - job_name: 'camelot-node-1'
+    static_configs:
+      - targets: ['camelot-node-1:8000']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'node_1'
+
+  - job_name: 'camelot-node-2'
+    static_configs:
+      - targets: ['camelot-node-2:8000']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'node_2'
+
+  - job_name: 'camelot-node-3'
+    static_configs:
+      - targets: ['camelot-node-3:8000']
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+        replacement: 'node_3'
+
+  # ── Redis Instances ─────────────────────────────────────────────────
+
+  - job_name: 'redis-cluster'
+    static_configs:
+      - targets:
+          - 'redis-1:6379'
+          - 'redis-2:6379'
+          - 'redis-3:6379'
+    metrics_path: '/metrics'
+
+  # ── Qdrant Instances ────────────────────────────────────────────────
+
+  - job_name: 'qdrant-cluster'
+    static_configs:
+      - targets:
+          - 'qdrant-1:6333'
+          - 'qdrant-2:6333'
+          - 'qdrant-3:6333'
+
+  # ── Jaeger (Tracing) ────────────────────────────────────────────────
+
+  - job_name: 'jaeger'
+    static_configs:
+      - targets: ['jaeger:14269']
+
+  # ── Prometheus Self-Monitoring ──────────────────────────────────────
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']

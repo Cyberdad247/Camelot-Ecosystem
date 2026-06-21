@@ -1,0 +1,27 @@
+services:
+  voice-assistant-omega:
+    build:
+      context: .
+    image: camelot/voice-assistant-omega:latest
+    ports:
+      - "8088:8088"
+    environment:
+      OMEGA_WS_TOKEN: "${OMEGA_WS_TOKEN:-change-me}"
+      OMEGA_MODEL_PROVIDER: "${OMEGA_MODEL_PROVIDER:-local}"
+      OMEGA_STT_PROVIDER: "${OMEGA_STT_PROVIDER:-stub}"
+      OMEGA_TTS_PROVIDER: "${OMEGA_TTS_PROVIDER:-stub}"
+      OMEGA_MEMORY_LIMIT_MB: "${OMEGA_MEMORY_LIMIT_MB:-768}"
+      OMEGA_QUANTIZATION_MODE: "${OMEGA_QUANTIZATION_MODE:-ternary_1_58b}"
+      OPENAI_API_KEY: "${OPENAI_API_KEY:-}"
+      OPENROUTER_API_KEY: "${OPENROUTER_API_KEY:-}"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=128m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 256
+    mem_limit: 1024m
+    restart: unless-stopped
+
