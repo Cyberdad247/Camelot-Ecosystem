@@ -185,14 +185,27 @@ class KittenService:
                     yield word + " "
                     await asyncio.sleep(0)
 
+            from vad_interrupt import vad_controller
+            vad_controller.reset()
+
             async for chunk in self.synthesize_chunked_async(_token_stream()):
+                if vad_controller.is_interrupted:
+                    print("[KITTEN] Synthesize stream interrupted early")
+                    break
                 await response.write(chunk)
 
             await response.write_eof()
             return response
 
+        async def handle_flush(request: web.Request) -> web.Response:
+            from vad_interrupt import vad_controller
+            vad_controller.interrupt()
+            print("[KITTEN] FLUSH signal: set vad_controller interrupt")
+            return web.Response(status=200, text="FLUSHED")
+
         app = web.Application()
         app.router.add_post("/synthesize", handle_synthesize)
+        app.router.add_post("/flush", handle_flush)
         runner = web.AppRunner(app)
         await runner.setup()
         site = web.TCPSite(runner, host, port)

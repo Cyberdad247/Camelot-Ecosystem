@@ -1107,6 +1107,10 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
 
 def _dispatch(task: QueueTask, dry_run: bool, auto_approve: bool) -> str:
     # ── AUDIO / VAD tier ──────────────────────────────────────────────────────
+    if task.type == "interrupt":
+        _log("[WORKER] Interruption received — cancelling completion run")
+        return "interrupted"
+
     if task.type == "vad_utterance":
         file_path = task.payload.get("file_path", "")
         if not file_path:

@@ -16,6 +16,7 @@ import * as crypto from "crypto";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
+import * as http from "http";
 
 const PORT = 3002;
 const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), "CAMELOT_OS");
@@ -109,6 +110,43 @@ function processFrame(state: PeerState, samples: number[]): void {
       state.speaking = true;
       state.speechStartMs = now;
       state.silenceStartMs = null;
+
+      console.log(`[OMNIVOICE] VAD Speech Started for ${state.id} — dispatching interruption`);
+
+      // 1. Send socket clear-signal to clients to immediately halt local audio playback
+      for (const [ws, peer] of peers) {
+        if (ws.readyState === ws.OPEN) {
+          ws.send(JSON.stringify({ type: "clear" }));
+          console.log(`[OMNIVOICE] Broadcast clear-signal to ${peer.id}`);
+        }
+      }
+
+      // 2. Flush current outgoing audio streams in kitten_service.py
+      const req = http.request({
+        hostname: "127.0.0.1",
+        port: 8300,
+        path: "/flush",
+        method: "POST",
+        headers: {
+          "Content-Length": 0,
+        },
+      }, (res) => {
+        console.log(`[OMNIVOICE] Kitten flush response status: ${res.statusCode}`);
+      });
+      req.on("error", (err) => {
+        console.error(`[OMNIVOICE] Kitten flush HTTP request error: ${err.message}`);
+      });
+      req.end();
+
+      // 3. Cancel current LLM completion run on the control plane
+      enqueue({
+        id: mkId("interrupt"),
+        type: "interrupt",
+        source: "omnivoice-router",
+        queued_at: new Date().toISOString(),
+        priority: 1,
+      });
+
     } else {
       state.silenceStartMs = null; // reset silence timer on new energy
     }
@@ -150,7 +188,6 @@ function processFrame(state: PeerState, samples: number[]): void {
 }
 
 // ── Server ────────────────────────────────────────────────────────────────────
-import * as http from "http";
 
 const server = http.createServer((req, res) => {
   if (req.method === 'POST' && req.url === '/broadcast_audio') {
