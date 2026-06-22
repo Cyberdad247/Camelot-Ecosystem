@@ -165,6 +165,15 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         ],
         probe_port=0, notes="SIE qwen3:4b — zero-trust sentry; HUMAN_GATE for fraud and fingerprint actions",
     ),
+    "bifrost_gateway": Terminal(
+        id="bifrost_gateway", engine="bifrost_gateway", weight=0.80,
+        cost_tier="free", capability=[
+            "gateway","websocket","webhook","ingress","swarm","pwa","voice",
+        ],
+        probe_url=os.environ.get("BIFROST_GATEWAY_URL", "http://127.0.0.1:3001") + "/health",
+        probe_port=0,
+        notes="Bifrost TS gateway — voice/webhook ingress + Microcubic swarm (:3001); bridge via control_plane.bifrost_gateway",
+    ),
 }
 
 
@@ -183,10 +192,29 @@ async def _probe_tcp(port: int, host: str = "127.0.0.1") -> tuple[bool, float]:
         return False, (time.perf_counter() - t0) * 1000
 
 
+async def _probe_http_health(url: str) -> tuple[bool, float]:
+    """HTTP GET health probe (stdlib, off-thread). 200 == live."""
+    import urllib.request
+
+    def _get() -> tuple[bool, float]:
+        t0 = time.perf_counter()
+        try:
+            with urllib.request.urlopen(url, timeout=PROBE_TIMEOUT) as resp:
+                return resp.status == 200, (time.perf_counter() - t0) * 1000
+        except Exception:
+            return False, (time.perf_counter() - t0) * 1000
+
+    return await asyncio.to_thread(_get)
+
+
 async def _probe_terminal(t: Terminal) -> None:
     """Update terminal status in-place."""
     t.last_probe = time.time()
-    if t.probe_port:
+    if t.engine == "bifrost_gateway" and t.probe_url:
+        ok, ms = await _probe_http_health(t.probe_url)
+        t.status     = "live" if ok else "dark"
+        t.latency_ms = ms
+    elif t.probe_port:
         ok, ms = await _probe_tcp(t.probe_port)
         t.status     = "live" if ok else "dark"
         t.latency_ms = ms

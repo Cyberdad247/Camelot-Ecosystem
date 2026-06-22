@@ -3,6 +3,7 @@ import express, { type Request } from 'express';
 import rateLimit from 'express-rate-limit';
 import { WebSocket, WebSocketServer } from 'ws';
 import { SovereignDB } from './db/SovereignDB';
+import { SWARM_EVENTS, publishHermes } from './hermes';
 import { type Command, parseCommand } from './nlp';
 import { verifyWebhookSignature } from './security';
 import { applyCommand, snapshot, state } from './state';
@@ -84,6 +85,11 @@ async function getSwarm() {
       if (state.swarm.completed >= state.swarm.tasks) {
         state.swarm.active = false;
       }
+      publishHermes(SWARM_EVENTS, {
+        event: 'cube_collapsed',
+        completed: state.swarm.completed,
+        total: state.swarm.tasks,
+      });
       broadcastState();
     });
     swarmListenerAttached = true;
@@ -121,6 +127,7 @@ async function runHeliosCommand(textCommand: string, ws: WebSocket): Promise<voi
     state.swarm.completed = 0;
 
     swarmMatrix.unleash(tasksToSpawn);
+    publishHermes(SWARM_EVENTS, { event: 'swarm_unleashed', tasks: tasksToSpawn.length });
     ws.send(
       JSON.stringify({
         type: 'VOICE_FEEDBACK',
@@ -158,6 +165,7 @@ app.post('/webhook/sms', webhookLimiter, async (req: RawBodyRequest, res) => {
   const cmd = parseCommand(message);
   applyCommand(cmd);
   await persistCommand(cmd);
+  publishHermes(SWARM_EVENTS, { event: 'command', source: 'webhook', action: cmd.action });
   broadcastState();
 
   res.status(200).json({ status: 'received', command: cmd.action });
@@ -202,6 +210,7 @@ wss.on('connection', (ws: LiveSocket) => {
     const cmd = parseCommand(payloadText);
     applyCommand(cmd);
     await persistCommand(cmd);
+    publishHermes(SWARM_EVENTS, { event: 'command', source: 'ws', action: cmd.action });
     broadcastState();
   });
 
