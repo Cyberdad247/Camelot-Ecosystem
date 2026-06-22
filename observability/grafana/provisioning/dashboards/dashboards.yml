@@ -1,0 +1,18 @@
+# Grafana dashboard provider — loads JSON dashboards from disk (dashboards-as-code).
+# Set `options.path` to the absolute path of observability/grafana/dashboards on
+# the host running Grafana (see OBSERVABILITY_SETUP.md). No Docker.
+apiVersion: 1
+
+providers:
+  - name: 'CAMELOT-OS'
+    orgId: 1
+    folder: 'CAMELOT-OS'
+    type: file
+    disableDeletion: false
+    allowUiUpdates: true
+    updateIntervalSeconds: 30
+    options:
+      # Absolute path on the Grafana host. Example (Windows dev):
+      #   C:/Users/vizio/CAMELOT_OS/observability/grafana/dashboards
+      path: ./observability/grafana/dashboards
+      foldersFromFilesStructure: false

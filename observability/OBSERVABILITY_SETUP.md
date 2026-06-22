@@ -48,9 +48,43 @@ with tracer.start_active_span("consensus_proposal") as scope:
 Spans land in `~/.camelot/traces/<service>.jsonl` (override with `CAMELOT_TRACE_DIR`).
 Set `OTEL_EXPORTER_OTLP_ENDPOINT` to also POST spans to an OTLP/HTTP collector.
 
-### 4. Grafana (optional)
+### 4. AlertManager (native, optional)
 
-Install Grafana natively and add Prometheus (`http://127.0.0.1:9090`) as a data source.
+`alert_rules.yml` fires alerts labelled `severity=critical|warning`; `alertmanager.yml`
+routes them to per-severity receivers. Run it natively (no Docker):
+
+```bash
+# install: scoop install alertmanager | brew install alertmanager | prometheus.io/download
+cd observability && alertmanager --config.file=alertmanager.yml   # serves :9093
+```
+
+Prometheus already targets `127.0.0.1:9093`. Point the receiver webhook URLs at
+your sink — a small webhook→Hermes bridge can forward firing alerts onto the
+`iron_gate.alerts` channel (`control_plane/hermes_bridge.py`) for in-band knight
+response.
+
+### 5. Grafana (dashboards-as-code, native)
+
+Provisioning lives under `observability/grafana/` — a Prometheus datasource and a
+file-based dashboard provider that loads `dashboards/camelot-observability.json`
+(operation rate/errors/p95, consensus log size, system CPU/mem, agent count).
+
+```bash
+# install Grafana natively (scoop/brew/grafana.com), then point it at our provisioning:
+export GF_PATHS_PROVISIONING="$PWD/observability/grafana/provisioning"
+# set the dashboard provider path (grafana/provisioning/dashboards/dashboards.yml →
+#   options.path) to the ABSOLUTE path of observability/grafana/dashboards
+grafana server   # or: grafana-server --homepath <grafana_home>
+```
+
+Grafana loads the CAMELOT-Prometheus datasource (`uid: camelot-prometheus`,
+`http://127.0.0.1:9090`) and the "CAMELOT-OS Observability" dashboard on startup.
+
+### Helper
+
+`python observability/run_observability.py --check` reports which native binaries
+(Prometheus / AlertManager / Grafana) are present and prints the exact launch
+commands. No containers anywhere.
 
 ### 2. Instrument Your CAMELOT-OS Instances
 

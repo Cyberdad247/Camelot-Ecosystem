@@ -1,0 +1,48 @@
+# AlertManager configuration for CAMELOT-OS — NO-DOCKER / native.
+#
+# Run natively (no container):  alertmanager --config.file=alertmanager.yml
+# Prometheus is already pointed at 127.0.0.1:9093 (see prometheus.yml).
+# Alert rules in alert_rules.yml label alerts severity=critical|warning; routing
+# below fans those to distinct receivers. Wire the webhook URLs to your sink —
+# a small webhook→Hermes bridge can forward onto the iron_gate.alerts channel
+# (control_plane/hermes_bridge.py) so knights react in-band.
+
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: 'camelot-default'
+  group_by: ['alertname', 'severity']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  routes:
+    - matchers:
+        - 'severity = "critical"'
+      receiver: 'camelot-critical'
+      repeat_interval: 1h
+    - matchers:
+        - 'severity = "warning"'
+      receiver: 'camelot-warning'
+
+receivers:
+  - name: 'camelot-default'
+    webhook_configs:
+      - url: 'http://127.0.0.1:9099/alerts'          # configure: local sink / Hermes bridge
+        send_resolved: true
+  - name: 'camelot-critical'
+    webhook_configs:
+      - url: 'http://127.0.0.1:9099/alerts/critical'  # page / immediate
+        send_resolved: true
+  - name: 'camelot-warning'
+    webhook_configs:
+      - url: 'http://127.0.0.1:9099/alerts/warning'   # notify
+        send_resolved: true
+
+# A firing critical mutes the matching warning to cut noise.
+inhibit_rules:
+  - source_matchers:
+      - 'severity = "critical"'
+    target_matchers:
+      - 'severity = "warning"'
+    equal: ['alertname']

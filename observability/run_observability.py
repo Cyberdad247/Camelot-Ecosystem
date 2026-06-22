@@ -51,10 +51,18 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
 
     prom = find_prometheus()
+    alertmgr = os.environ.get("ALERTMANAGER_BIN") or shutil.which("alertmanager")
+    grafana = os.environ.get("GRAFANA_BIN") or shutil.which("grafana-server") or shutil.which("grafana")
     print("CAMELOT-OS Observability (native / no-Docker)")
-    print(f"  config         : {CONFIG}")
-    print(f"  metrics target : http://127.0.0.1:{METRICS_PORT}/metrics")
-    print(f"  prometheus bin : {prom or 'NOT FOUND'}")
+    print(f"  config          : {CONFIG}")
+    print(f"  metrics target  : http://127.0.0.1:{METRICS_PORT}/metrics")
+    print(f"  prometheus bin  : {prom or 'NOT FOUND'}")
+    print(f"  alertmanager bin: {alertmgr or 'not found (optional)'}")
+    print(f"  grafana bin     : {grafana or 'not found (optional)'}")
+    if alertmgr:
+        print(f"  alertmanager    : {alertmgr} --config.file={HERE / 'alertmanager.yml'}")
+    if grafana:
+        print(f"  grafana         : set GF_PATHS_PROVISIONING={HERE / 'grafana' / 'provisioning'}")
     print()
     print("Start the metrics daemon first (separate terminal):")
     print(f"  python -m control_plane.cluster.metrics_daemon --port {METRICS_PORT} \\")
