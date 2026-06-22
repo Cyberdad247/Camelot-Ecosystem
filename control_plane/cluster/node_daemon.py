@@ -107,7 +107,8 @@ def main() -> None:
     if start_metrics_server(metrics_port):
         print(f"[{args.node_id}] /metrics on http://{args.host}:{metrics_port}", flush=True)
 
-    # Start gossip on the loop, then run forever.
+    # Exchange Ed25519 public keys with peers, then gossip — both on the loop.
+    loop.call_soon(lambda: loop.create_task(consensus.bootstrap_keys()))
     loop.call_soon(lambda: loop.create_task(agents.gossip_loop(interval=2.0)))
     try:
         loop.run_forever()
