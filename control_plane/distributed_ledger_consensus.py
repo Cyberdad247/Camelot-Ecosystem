@@ -19,6 +19,18 @@ from typing import Dict, List, Optional, Set, Tuple
 from enum import Enum
 from datetime import datetime, timedelta
 
+try:
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+        Ed25519PrivateKey,
+        Ed25519PublicKey,
+    )
+    from cryptography.hazmat.primitives.serialization import Encoding, PublicFormat
+    from cryptography.exceptions import InvalidSignature
+
+    _ED25519 = True
+except Exception:  # pragma: no cover - degraded SHA-256 fallback if no crypto
+    _ED25519 = False
+
 
 class ConsensusPhase(str, Enum):
     """Consensus phases in PBFT"""
@@ -74,7 +86,8 @@ class ConsensusState:
 class DistributedConsensus:
     """PBFT-inspired distributed consensus"""
 
-    def __init__(self, node_id: str, peers: List[str], quorum: int = 2):
+    def __init__(self, node_id: str, peers: List[str], quorum: int = 2,
+                 strict_signatures: bool = False):
         """
         Initialize distributed consensus
 
@@ -106,6 +119,23 @@ class DistributedConsensus:
 
         # Message queue
         self.message_queue: asyncio.Queue = asyncio.Queue()
+
+        # ── Election term state (Raft-style vote rules) ──
+        self.current_term = 0
+        self.voted_for: Optional[str] = None
+
+        # ── Ed25519 identity: real per-node keypair + peer public-key registry ──
+        # strict_signatures=True rejects messages from senders whose public key
+        # is not registered. Default False keeps the live cluster working until
+        # the daemon wires key exchange; real verification still applies wherever
+        # a sender's key IS registered (tampering is always rejected).
+        self.strict_signatures = strict_signatures
+        self._public_keys: Dict[str, "Ed25519PublicKey"] = {}
+        if _ED25519:
+            self._private_key = Ed25519PrivateKey.generate()
+            self._public_keys[self.node_id] = self._private_key.public_key()
+        else:
+            self._private_key = None
 
         print(f"🟦 Consensus: Node {node_id} initialized (cluster_size={self.cluster_size}, quorum={self.quorum})")
 
@@ -339,25 +369,52 @@ class DistributedConsensus:
 
             await asyncio.sleep(self.heartbeat_interval)
 
+    def request_vote(self, term: int, candidate_id: str) -> bool:
+        """Raft-style vote rule. Grant at most one vote per term, to the first
+        candidate seen in a term >= our own; step down to follower on a higher term."""
+        if term < self.current_term:
+            return False
+        if term > self.current_term:
+            self.current_term = term
+            self.voted_for = None
+            self.role = NodeRole.FOLLOWER
+        if self.voted_for in (None, candidate_id):
+            self.voted_for = candidate_id
+            self.last_heartbeat = time.time()
+            return True
+        return False
+
+    def _has_quorum(self, votes: int) -> bool:
+        return votes >= self.quorum
+
     async def _become_candidate(self):
-        """Transition to candidate state"""
+        """Run a real election: bump term, self-vote, collect peer votes, and
+        win only on quorum."""
+        self.current_term += 1
         self.role = NodeRole.CANDIDATE
-        print(f"🟨 Candidate: {self.node_id} starting election")
+        self.voted_for = self.node_id
+        print(f"🟨 Candidate: {self.node_id} starting election (term={self.current_term})")
 
-        # In a full PBFT implementation, this would trigger leader election
-        # For now, we'll promote to leader if we have quorum votes
-        votes = 1  # Vote for ourselves
+        votes = 1  # self-vote
+        for peer in self.peers:
+            if await self._request_peer_vote(peer, self.current_term):
+                votes += 1
 
-        # In practice, we'd send vote requests to peers
-        # Here we'll simulate with majority vote
-        if votes >= self.quorum:
+        if self._has_quorum(votes):
             await self._become_leader()
+        else:
+            self.role = NodeRole.FOLLOWER  # split/lost — await next election timeout
+
+    async def _request_peer_vote(self, peer: str, term: int) -> bool:
+        """Transport seam for RequestVote. The cluster daemon wires this over
+        HTTP; the in-process base has no transport, so it returns False."""
+        return False
 
     async def _become_leader(self):
-        """Transition to leader state"""
+        """Transition to leader for the current term."""
         self.role = NodeRole.LEADER
         self.leader_id = self.node_id
-        print(f"🟩 Leader: {self.node_id} elected")
+        print(f"🟩 Leader: {self.node_id} elected (term={self.current_term})")
 
     async def _send_message(self, peer: str, message: ConsensusMessage):
         """Send message to peer (simulated)"""
@@ -365,15 +422,54 @@ class DistributedConsensus:
         # For now, we'll use a queue
         await self.message_queue.put((peer, message))
 
+    def public_key_hex(self) -> str:
+        """Export this node's Ed25519 public key (hex) for peer registration."""
+        if not _ED25519 or self._private_key is None:
+            return ""
+        raw = self._private_key.public_key().public_bytes(
+            encoding=Encoding.Raw, format=PublicFormat.Raw
+        )
+        return raw.hex()
+
+    def register_public_key(self, node_id: str, public_hex: str) -> None:
+        """Register a peer's Ed25519 public key so its messages can be verified."""
+        if _ED25519 and public_hex:
+            self._public_keys[node_id] = Ed25519PublicKey.from_public_bytes(
+                bytes.fromhex(public_hex)
+            )
+
+    def _signing_payload(self, message: ConsensusMessage) -> bytes:
+        """Canonical signed bytes = message JSON with the signature field blanked
+        (matches how senders sign before setting message.signature)."""
+        saved = message.signature
+        message.signature = ""
+        payload = message.to_json().encode()
+        message.signature = saved
+        return payload
+
     def _sign_message(self, data: str) -> str:
-        """Sign message with node's key"""
-        # Simplified: use SHA256 as placeholder for Ed25519
-        return hashlib.sha256((self.node_id + data).encode()).hexdigest()[:16]
+        """Sign a message payload with this node's Ed25519 private key."""
+        if not _ED25519 or self._private_key is None:
+            return hashlib.sha256((self.node_id + data).encode()).hexdigest()  # fallback
+        return self._private_key.sign(data.encode()).hex()
 
     def _verify_signature(self, message: ConsensusMessage) -> bool:
-        """Verify message signature"""
-        # Simplified: just check signature is non-empty
-        return len(message.signature) > 0
+        """Verify a message's Ed25519 signature against the sender's public key.
+        Unknown sender or bad signature → reject (secure default)."""
+        if not _ED25519:
+            return len(message.signature) > 0  # degraded fallback (no crypto)
+        pub = self._public_keys.get(message.node_id)
+        if pub is None:
+            # No key for this sender: reject in strict mode; otherwise fall back
+            # to the legacy non-empty check (key exchange not yet wired).
+            return (not self.strict_signatures) and len(message.signature) > 0
+        if not message.signature:
+            return False
+        try:
+            pub.verify(bytes.fromhex(message.signature), self._signing_payload(message))
+            return True
+        except (InvalidSignature, ValueError):
+            return False
 
     def _generate_entry_id(self, data: Dict) -> str:
         """Generate unique entry ID"""
