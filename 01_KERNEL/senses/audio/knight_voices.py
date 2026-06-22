@@ -196,9 +196,6 @@ KNIGHT_PROFILES: dict[str, KnightVocalProfile] = {
     "sir_pi": _profile(
         "en_US-lessac-medium", weight=0.82, privacy=0.50,
         tts_engine="piper", stt_engine="faster_whisper", knight_id="sir_pi"),
-    "sir_qdrant": _profile(
-        "en_US-lessac-medium", weight=0.90, privacy=0.40,
-        tts_engine="piper", stt_engine="faster_whisper", knight_id="sir_qdrant"),
     "sir_saltare": _profile(
         "en_US-lessac-medium", weight=0.80, privacy=0.40,
         tts_engine="piper", stt_engine="faster_whisper", knight_id="sir_saltare"),

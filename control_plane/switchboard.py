@@ -70,14 +70,14 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         probe_port=0, notes="Sir Link — handshake coordinator, switchboard ATC",
     ),
     "sir_ghost": Terminal(
-        id="sir_ghost", engine="local_qwen", weight=1.00,
+        id="sir_ghost", engine="sovereign", weight=1.00,
         cost_tier="free", capability=["privacy","air_gapped","zero_trust"],
-        probe_port=11434, notes="Local Qwen 3.5 — air-gapped, zero trust",
+        probe_port=0, notes="SIE qwen3:4b — air-gapped sovereign inference",
     ),
     "sir_forge": Terminal(
-        id="sir_forge", engine="open_coder", weight=0.70,
+        id="sir_forge", engine="sovereign", weight=0.70,
         cost_tier="free", capability=["code_gen","scaffold","technical","kinetic"],
-        probe_port=11434, notes="Open Coder local — kinetic code gen",
+        probe_port=0, notes="SIE qwen2.5-coder:3b — sovereign code gen",
     ),
     "sir_codex": Terminal(
         id="sir_codex", engine="openai_codex", weight=0.75,
@@ -159,11 +159,11 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         probe_port=0, notes="Claw Suite edge component swarm contract",
     ),
     "sir_zeroclaw": Terminal(
-        id="sir_zeroclaw", engine="local_qwen", weight=1.00,
+        id="sir_zeroclaw", engine="sovereign", weight=1.00,
         cost_tier="free", capability=[
             "zero_trust","ip_trademark_guard","affiliate_abuse_guard","checkout_risk_gate",
         ],
-        probe_port=11434, notes="Claw Suite zero-trust sentry; HUMAN_GATE for fraud and fingerprint actions",
+        probe_port=0, notes="SIE qwen3:4b — zero-trust sentry; HUMAN_GATE for fraud and fingerprint actions",
     ),
 }
 
@@ -205,7 +205,18 @@ async def _probe_terminal(t: Terminal) -> None:
         gideon_py = CAMELOT_HOME / "03_VAULT" / "training" / "configs" / "knights" / "sir_gideon.py"
         t.status     = "live" if gideon_py.exists() else "dark"
         t.latency_ms = 0.0
-    elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli", "openclaw", "rustclaw", "next_edge"):
+    elif t.engine == "sovereign":
+        # Module probe: SIE is live if importable and its Ollama backend responds
+        t0 = time.perf_counter()
+        try:
+            from control_plane.sovereign_inference import SIE
+            healthy = SIE.health()
+            ollama_ok = healthy.get("backends", {}).get("ollama", False)
+            t.status     = "live" if ollama_ok else "degraded"
+        except Exception:
+            t.status = "dark"
+        t.latency_ms = (time.perf_counter() - t0) * 1000
+    elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli", "openclaw", "rustclaw", "next_edge", "pydantic_ai"):
         t.status     = "assumed_live"
         t.latency_ms = 0.0
     elif t.engine == "hermes_cli":

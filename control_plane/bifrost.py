@@ -57,13 +57,14 @@ _ENGINE_DISPATCH: dict[str, tuple[str, str, str]] = {
     "claude_code":       ("cliproxy",    CLIPROXY_BASE, "claude-sonnet-4-6"),
     "antigravity.cli":   ("cliproxy",    CLIPROXY_BASE, "gemini-2.5-flash"),
     "openai_codex":      ("cliproxy",    CLIPROXY_BASE, "gpt-4o"),
-    "local_qwen":        ("ollama",      OLLAMA_BASE,   "qwen3:4b"),
-    "open_coder":        ("ollama",      OLLAMA_BASE,   "qwen2.5-coder:3b"),
+    "sovereign":         ("sovereign",   "",             ""),          # SIE — model resolved via manifest
+    "local_qwen":        ("sovereign",   "",             "qwen3:4b"),
+    "open_coder":        ("sovereign",   "",             "qwen2.5-coder:3b"),
     "integration_brain": ("cloudbrain",  "",             ""),
-    "local_audit":       ("ollama",      OLLAMA_BASE,   "qwen3:4b"),
+    "local_audit":       ("sovereign",   "",             "qwen3:4b"),
     "local_ops":         ("noop",        "",             ""),
     "kitten_tts":        ("noop",        "",             ""),
-    "open_source":       ("ollama",      OLLAMA_BASE,   "qwen3:4b"),
+    "open_source":       ("sovereign",   "",             "qwen3:4b"),
     "antigravity":       ("cliproxy",    CLIPROXY_BASE, "gemini-2.5-pro"),
     "kimi_cli":          ("cliproxy",    CLIPROXY_BASE, "kimi-k2"),
     "hermes_cli":        ("cliproxy",    CLIPROXY_BASE, "claude-sonnet-4-6"),
@@ -76,7 +77,7 @@ _TERMINAL_MODEL: dict[str, str] = {
     "sir_helio":    "gemini-2.5-flash",
     "sir_link":     "gemini-2.5-pro",
     "sir_codex":    "gpt-4o",
-    "sir_ghost":    "qwen3:1.7b",
+    "sir_ghost":    "qwen3:4b",
     "sir_forge":    "qwen2.5-coder:3b",
     "sir_sentinel": "claude-haiku-4-5-20251001",
     "sir_gideon":   "qwen3:4b",
@@ -138,6 +139,10 @@ class Bifrost:
 
         if strategy == "cliproxy":
             async for chunk in self._stream_openai(base, model, prompt, enriched_system, max_tokens):
+                response_chunks.append(chunk)
+                yield chunk
+        elif strategy == "sovereign":
+            async for chunk in self._stream_sovereign(terminal_id, model, prompt, enriched_system, max_tokens):
                 response_chunks.append(chunk)
                 yield chunk
         elif strategy == "ollama":
@@ -353,6 +358,29 @@ class Bifrost:
             yield f"\n[BIFROST] HTTP {e.response.status_code} from {model}: {body}"
         except Exception as e:
             yield f"\n[BIFROST] {type(e).__name__}: {e}"
+
+    async def _stream_sovereign(
+        self,
+        terminal_id: str,
+        model: str,
+        prompt: str,
+        system: str,
+        max_tokens: int,
+    ) -> AsyncIterator[str]:
+        """Dispatch via the Sovereign Inference Engine (in-process, no HTTP)."""
+        try:
+            from control_plane.sovereign_inference import SIE, SIEHooks, HITLBlock
+        except ImportError as e:
+            yield f"[BIFROST] SIE import failed: {e}"
+            return
+
+        async for chunk in SIE.generate_stream(
+            model_id=terminal_id,
+            prompt=prompt,
+            system=system,
+            max_tokens=max_tokens,
+        ):
+            yield chunk
 
     async def _stream_ollama(
         self,

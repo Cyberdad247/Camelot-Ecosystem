@@ -174,7 +174,7 @@ def ping() -> tuple[bool, int, str]:
 
 
 # ---------------------------------------------------------------------------
-# Module-level singleton (mirrors qdrant_store usage pattern)
+# Module-level singleton (mirrors local_store usage pattern)
 # ---------------------------------------------------------------------------
 
 class AgentMemoryClient:

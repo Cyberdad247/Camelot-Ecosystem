@@ -52,6 +52,7 @@ from .nano_swarm_runtime import (
     write_runtime_status as write_nano_swarm_runtime_status,
 )
 from .provenance import ProvenanceManager, VerificationRun
+from .system_triage import TriageOptions, run_system_triage
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
@@ -1490,6 +1491,28 @@ def _build_parser() -> argparse.ArgumentParser:
     route_parser = sub.add_parser("route", help="Show routing decision for an intent")
     route_parser.add_argument("intent", nargs="+")
 
+    triage = sub.add_parser("triage", help="Run evidence-gated read-only system validation")
+    triage_mode = triage.add_mutually_exclusive_group()
+    triage_mode.add_argument("--rapid", action="store_true", help="Run only the fail-fast validation stage")
+    triage_mode.add_argument("--deep", action="store_true", help="Run rapid and deep validation stages")
+    triage.add_argument(
+        "--force-deep",
+        action="store_true",
+        help="Run deep checks even when the rapid stage is blocked",
+    )
+    triage.add_argument("--json", dest="triage_json", action="store_true", help="Emit JSON output")
+    triage.add_argument(
+        "--no-reports",
+        action="store_true",
+        help="Do not write JSON and Markdown evidence reports",
+    )
+    triage.add_argument(
+        "--timeout",
+        type=int,
+        default=900,
+        help="Default per-command timeout in seconds",
+    )
+
     orchestrator = sub.add_parser("orchestrator", help="Run the Rust orchestration CLI")
     orchestrator.add_argument(
         "--mode",
@@ -1856,6 +1879,7 @@ def main() -> int:
     known_commands = {
         "chat",
         "route",
+        "triage",
         "cloudbrain",
         "orchestrator",
         "sarda",
@@ -1971,6 +1995,20 @@ def main() -> int:
         else:
             _stream_print(intercept.format_route_log(result), tone="info")
         return 0
+
+    if args.command == "triage":
+        mode = "rapid" if args.rapid else ("deep" if args.deep else "auto")
+        result = run_system_triage(
+            CAMELOT_HOME,
+            options=TriageOptions(
+                mode=mode,
+                force_deep=args.force_deep,
+                write_reports=not args.no_reports,
+                command_timeout_s=max(1, args.timeout),
+            ),
+        )
+        _emit(result.to_dict(), json_mode=args.triage_json or args.json, title="System Triage")
+        return result.exit_code
 
     if args.command == "orchestrator":
         output = _run_orchestrator_cli(

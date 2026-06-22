@@ -1,4 +1,7 @@
-"""Reusable boot sequence logic for Camelot-OS."""
+"""Reusable boot sequence logic for Camelot-OS.
+
+# HITL: file-ops pre-approved — writes bounded to boot state files and logs
+"""
 
 from __future__ import annotations
 
@@ -43,6 +46,7 @@ _C = {
 _STRIP_RICH = re.compile(r"\[/?[a-zA-Z_ ]*\]")
 _MORGANA_TASK_NAME = "Camelot Morgana Bridge"
 _BIFROST_SIDECAR_TASK_NAME = "Camelot Bifrost Go Sidecar"
+_OMNIROUTE_PORT = 20128
 
 
 def _strip(msg: str) -> str:
@@ -727,6 +731,156 @@ def boot_sir_pi(home: Path) -> tuple[bool, str]:
     )
 
 
+def boot_omniroute_gateway(home: Path) -> tuple[bool, str]:
+    """OmniRoute gateway - cost-tier smart router on :20128."""
+    if _probe_port("127.0.0.1", _OMNIROUTE_PORT):
+        return True, f"OmniRoute already running on :{_OMNIROUTE_PORT}"
+
+    binary = Path.home() / ".omniroute" / "omniroute.exe"
+    launch_cmd: list[str]
+    cwd = str(home)
+    if binary.exists():
+        launch_cmd = [str(binary)]
+        label = "OmniRoute"
+    else:
+        node_c = home / "02_FORGE" / "generated" / "ukg_omega_glyph_v1000" / "Node_C_Omni_Router"
+        node_c_binary = node_c / "node_c_omni_router.exe"
+        if not node_c_binary.exists():
+            return False, (
+                "OmniRoute binary not found and Node_C_Omni_Router fallback is not built; "
+                "run: go build -o node_c_omni_router.exe ."
+            )
+        launch_cmd = [
+            str(node_c_binary),
+            "-serve",
+            "-host",
+            "127.0.0.1",
+            "-port",
+            str(_OMNIROUTE_PORT),
+        ]
+        cwd = str(node_c)
+        label = "Node C Omni Router fallback"
+
+    log_dir = home / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        if platform.system() == "Windows" and label == "Node C Omni Router fallback":
+            ps_cmd = (
+                "$p = Start-Process "
+                f"-FilePath '{launch_cmd[0]}' "
+                f"-ArgumentList @('{launch_cmd[1]}','{launch_cmd[2]}','{launch_cmd[3]}','{launch_cmd[4]}','{launch_cmd[5]}') "
+                f"-WorkingDirectory '{cwd}' "
+                "-WindowStyle Hidden -PassThru; $p.Id"
+            )
+            completed = subprocess.run(
+                ["powershell", "-NoProfile", "-Command", ps_cmd],
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                timeout=10,
+            )
+            if completed.returncode != 0:
+                detail = completed.stderr.strip() or completed.stdout.strip()
+                return False, f"{label} launch failed: {detail}"
+            pid = completed.stdout.strip() or "unknown"
+            for _ in range(20):
+                time.sleep(0.5)
+                if _probe_port("127.0.0.1", _OMNIROUTE_PORT):
+                    return True, f"{label} PID={pid} on :{_OMNIROUTE_PORT}"
+            return True, f"{label} spawned PID={pid}; port :{_OMNIROUTE_PORT} still warming"
+
+        kwargs = _child_spawn_kwargs(cwd=cwd)
+        with (log_dir / "omniroute.out.log").open("ab") as out, (
+            log_dir / "omniroute.err.log"
+        ).open("ab") as err:
+            proc = subprocess.Popen(launch_cmd, stdout=out, stderr=err, **kwargs)
+        for _ in range(20):
+            time.sleep(0.5)
+            if _probe_port("127.0.0.1", _OMNIROUTE_PORT):
+                return True, f"{label} PID={proc.pid} on :{_OMNIROUTE_PORT}"
+            if proc.poll() is not None:
+                return False, f"{label} exited early with code {proc.returncode}"
+        return True, f"{label} spawned PID={proc.pid}; port :{_OMNIROUTE_PORT} still warming"
+    except Exception as exc:
+        return False, f"OmniRoute launch failed: {type(exc).__name__}: {exc}"
+
+
+def boot_hermes_omniroute_orchestrator(home: Path) -> tuple[bool, str]:
+    """Assign Hermes as the zero-cost OmniRoute orchestrator for booted engines."""
+    artifact_path = home / "03_VAULT" / "runtime_state" / "hermes_omniroute_orchestrator_latest.json"
+    config_path = home / "03_VAULT" / "training" / "configs" / "config" / "omniroute.json"
+    hermes_cli = home / "02_FORGE" / "KINETIC_ARMORY" / "hermes-agent" / "cli.py"
+    payload: dict[str, Any] = {
+        "status": "WARN",
+        "global_startup_command": "awaken",
+        "rune": "//BOOT",
+        "orchestrator": "sir_hermes",
+        "omniroute_endpoint": f"http://127.0.0.1:{_OMNIROUTE_PORT}/v1",
+        "zero_cost_engines": [],
+        "free_terminals": [],
+        "timestamp_utc": datetime_utc_iso(),
+    }
+
+    try:
+        from control_plane.switchboard import TERMINAL_REGISTRY
+
+        hermes = TERMINAL_REGISTRY.get("sir_hermes")
+        free_terminals = sorted(
+            terminal.id
+            for terminal in TERMINAL_REGISTRY.values()
+            if terminal.cost_tier == "free"
+        )
+        payload["free_terminals"] = free_terminals
+        payload["hermes_terminal"] = {
+            "present": hermes is not None,
+            "engine": hermes.engine if hermes else None,
+            "cost_tier": hermes.cost_tier if hermes else None,
+            "cli_present": hermes_cli.exists(),
+        }
+
+        if config_path.exists():
+            config = json.loads(config_path.read_text(encoding="utf-8"))
+            engines = config.get("engines", {})
+            payload["zero_cost_engines"] = sorted(
+                name
+                for name, engine in engines.items()
+                if engine.get("status") == "active"
+                and (
+                    engine.get("provider") == "local"
+                    or "free" in str(engine.get("tier", "")).lower()
+                )
+            )
+            payload["routing_strategy"] = (
+                config.get("routing_matrix", {}).get("strategy")
+            )
+        else:
+            payload["error"] = "omniroute.json not found"
+
+        ok = bool(
+            payload["zero_cost_engines"]
+            and hermes
+            and hermes.cost_tier == "free"
+            and hermes.engine == "hermes_cli"
+            and hermes_cli.exists()
+        )
+        payload["status"] = "OK" if ok else "WARN"
+        artifact_path.parent.mkdir(parents=True, exist_ok=True)
+        artifact_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        if not ok:
+            return False, "Hermes OmniRoute assignment incomplete; see runtime_state artifact"
+        return True, (
+            "Hermes orchestrator assigned through OmniRoute "
+            f"({len(payload['zero_cost_engines'])} zero-cost engines, "
+            f"{len(free_terminals)} free terminals)"
+        )
+    except Exception as exc:
+        payload["error"] = f"{type(exc).__name__}: {exc}"
+        artifact_path.parent.mkdir(parents=True, exist_ok=True)
+        artifact_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+        return False, f"Hermes OmniRoute assignment failed: {type(exc).__name__}: {exc}"
+
+
 def start_local_lt_memory(home: Path) -> tuple[bool, str]:
     """Local Sovereign LT Memory — FastAPI server at :8200, SQLite backend."""
     if _probe_port("127.0.0.1", 8200):
@@ -1028,6 +1182,8 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Sir Octavian  :8400", "required": False, "fn": lambda: boot_sir_octavian(home)},
         {"name": "Morgana Bridge :8001", "required": True, "fn": lambda: boot_morgana_bridge(home)},
         {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},
+        {"name": "OmniRoute    :20128", "required": False, "fn": lambda: boot_omniroute_gateway(home)},
+        {"name": "Hermes OmniRoute", "required": False, "fn": lambda: boot_hermes_omniroute_orchestrator(home)},
         {"name": "Local LT Memory:8200","required": False, "fn": lambda: start_local_lt_memory(home)},
         {"name": "Cloud Brain  Auth",  "required": False, "fn": lambda: boot_cloud_brain_auth(home)},
         {"name": "Cloud Brain   (RPC)", "required": True,  "fn": lambda: boot_cloud_brain(home)},

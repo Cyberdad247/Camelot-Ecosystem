@@ -273,3 +273,19 @@ try:
 except Exception as _init_err:
     print(f"[VOX] Deferred init — VoxService will initialize on first call: {_init_err}")
     vox_service = None  # type: ignore[assignment]
+
+if __name__ == "__main__":
+    import argparse
+    import json
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--synthesize", type=str, help="Text to synthesize")
+    args = parser.parse_args()
+    if args.synthesize:
+        vs = get_vox_service()
+        class DummyVoiceState:
+            style = "default"
+            speed = 1.0
+            texture = "neutral"
+        res = vs.synthesize(args.synthesize, "tasha", DummyVoiceState())
+        print(f"[VOX_SERVICE] Synthesize result: {json.dumps(res, default=str)}")
+

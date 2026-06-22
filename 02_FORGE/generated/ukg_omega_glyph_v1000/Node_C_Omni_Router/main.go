@@ -5,8 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
-
-	"tailscale.com/tsnet"
 )
 
 type MCPRoute struct {
@@ -21,8 +19,12 @@ type NanoSwarmStatus struct {
 	Routes []MCPRoute `json:"routes"`
 }
 
-func NewTsnetServer(hostname string) *tsnet.Server {
-	return &tsnet.Server{Hostname: hostname}
+type OmniRouterServer struct {
+	Hostname string
+}
+
+func NewTsnetServer(hostname string) *OmniRouterServer {
+	return &OmniRouterServer{Hostname: hostname}
 }
 
 func EncodeRoute(route MCPRoute) (string, error) {
@@ -33,7 +35,7 @@ func EncodeRoute(route MCPRoute) (string, error) {
 	return string(encoded), nil
 }
 
-func NewNanoSwarmStatus(server *tsnet.Server) NanoSwarmStatus {
+func NewNanoSwarmStatus(server *OmniRouterServer) NanoSwarmStatus {
 	return NanoSwarmStatus{
 		Status: "ok",
 		Node:   "Node_C_Omni_Router",
@@ -45,7 +47,7 @@ func NewNanoSwarmStatus(server *tsnet.Server) NanoSwarmStatus {
 	}
 }
 
-func BuildHTTPHandler(server *tsnet.Server) http.Handler {
+func BuildHTTPHandler(server *OmniRouterServer) http.Handler {
 	mux := http.NewServeMux()
 	writeJSON := func(w http.ResponseWriter, payload any) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")

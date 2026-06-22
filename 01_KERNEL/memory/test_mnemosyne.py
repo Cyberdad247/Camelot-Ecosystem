@@ -2,7 +2,7 @@
 """
 MNEMOSYNE Integration Tests — Validating the Lady M Pipeline
 =============================================================
-Tests the tripartite data flow from Redis (L1) -> Qdrant (L1.5) -> NotebookLM (L2).
+Tests the tripartite data flow from Redis (L1) -> NotebookLM (L2).
 """
 
 import unittest
@@ -50,12 +50,10 @@ def load_into_namespace(name, path):
 
 # Load required modules
 h_mgr_mod = load_into_namespace("hydration_manager", root / "01_KERNEL/memory/hydration_manager.py")
-redis_mod = load_into_namespace("redis_store", root / "01_KERNEL/memory/redis_store.py")
-qdrant_mod = load_into_namespace("qdrant_store", root / "01_KERNEL/memory/qdrant_store.py")
+local_mod = load_into_namespace("local_store", root / "01_KERNEL/memory/local_store.py")
 
 HydrationManager = h_mgr_mod.HydrationManager
-redis_store = redis_mod.redis_store
-qdrant_store = qdrant_mod.qdrant_store
+local_store = local_mod.local_store
 
 class TestMnemosynePipeline(unittest.TestCase):
     def setUp(self):
@@ -68,19 +66,10 @@ class TestMnemosynePipeline(unittest.TestCase):
         print("\n[MNEMOSYNE] Testing L1 Redis Flash Layer...")
         self.mgr.store_tissue(self.test_intent, self.test_payload, complexity=4, tier="L1")
         results = self.mgr.hydrate_context(self.test_intent, complexity=4)
-        self.assertIn("L1_REDIS", results["tiers_active"])
+        self.assertIn("L1_LOCAL", results["tiers_active"])
         print("  ✓ Redis L1 capture successful.")
 
-    def test_02_qdrant_semantic_layer(self):
-        """Verify Qdrant integration."""
-        print("\n[MNEMOSYNE] Testing L1.5 Qdrant Semantic Layer...")
-        test_id = f"test_semantic_{int(datetime.now().timestamp())}"
-        vector = [0.1] * 384
-        success = qdrant_store.upsert("mnemosyne_test", test_id, vector, self.test_payload)
-        self.assertTrue(success or qdrant_store.backend == "dark")
-        print("  ✓ Qdrant L1.5 semantic retrieval successful.")
-
-    def test_03_notebooklm_cloud_brain(self):
+    def test_02_notebooklm_cloud_brain(self):
         """Verify L2 NotebookLM routing logic."""
         print("\n[MNEMOSYNE] Testing L2 NotebookLM Cloud Brain Integration...")
         results = self.mgr.hydrate_context("non_existent_deep_topic", complexity=8)

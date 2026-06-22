@@ -7,7 +7,7 @@ Enforces the 8GB RAM Law and maintains Kinetic Purity.
 
 Pipeline Mapping:
 - Flash (L0):      Local Storage (SQLite)
-- Short-Term (L1): Local Redis (dark-store fallback)
+- Short-Term (L1): Local Store (SQLite)
 - Agent (L1.5):    Redis Agent Memory — session + semantic long-term (cloud, MP2P7SN8)
 - Long-Term (L2):  NotebookLM (Cloud Brain)
 """
@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any, Optional, Dict
 
 from .cloudbrain_connector import CloudBrainConnector
-from .redis_store import redis_store
+from .local_store import local_store
 
 try:
     from .agent_memory import agent_memory as _agent_memory
@@ -105,12 +105,12 @@ class HydrationManager:
             finally:
                 conn.close()
 
-        # L1: Short-Term (local Redis)
+        # L1: Short-Term (local SQLite store)
         if complexity >= 4:
-            hits = redis_store.search(collection=f"intent:{intent}", vector=[1.0], limit=1)
+            hits = local_store.search(collection=f"intent:{intent}", vector=[1.0], limit=1)
             if hits:
                 results["L1"] = hits[0].get("payload")
-                results["tiers_active"].append("L1_REDIS")
+                results["tiers_active"].append("L1_LOCAL")
 
         # L1.5: Redis Agent Memory — semantic long-term recall (cloud, MP2P7SN8)
         if complexity >= 4 and _agent_memory and _agent_memory.is_configured():
@@ -155,16 +155,16 @@ class HydrationManager:
             finally:
                 conn.close()
                 
-        # L1: Short-Term (local Redis)
+        # L1: Short-Term (local SQLite)
         if tier == "L1" or complexity >= 4:
-            success = redis_store.upsert(
+            success = local_store.upsert(
                 collection=f"intent:{intent}",
                 id=f"{intent}_{int(datetime.now().timestamp())}",
                 vector=[1.0],
                 payload={"data": content}
             )
             if not success:
-                self._log_provenance("L1_REDIS_WARN", f"Redis upsert failed, fell back to dark store for '{intent}'")
+                self._log_provenance("L1_STORE_WARN", f"Store upsert failed, fell back to dark store for '{intent}'")
 
         # L1.5: Redis Agent Memory — persist as long-term semantic fact
         if (tier in ("L1", "L1.5", "L2") or complexity >= 6) and _agent_memory and _agent_memory.is_configured():

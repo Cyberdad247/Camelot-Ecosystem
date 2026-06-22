@@ -75,27 +75,30 @@ def _get_redis_store():
     try:
         import importlib.util as _ilu
         _spec = _ilu.spec_from_file_location(
-            "redis_store", HOME / "01_KERNEL" / "memory" / "redis_store.py"
+            "local_store", HOME / "01_KERNEL" / "memory" / "local_store.py"
         )
         _mod = _ilu.module_from_spec(_spec)
         _spec.loader.exec_module(_mod)  # type: ignore[union-attr]
-        _redis_store = _mod.redis_store
+        _redis_store = _mod.local_store
     except Exception:
         _redis_store = None
     return _redis_store
 
 # Knight → Ollama model
-# qwen3:0.6b is the confirmed-working baseline (fits in VRAM on RTX 2050 4GB).
-# Set OLLAMA_MODEL env var to override globally, e.g. qwen3:4b if you have spare VRAM.
+# Enterprise Factory Fleet (Qwen 2.5 Architecture)
+# Set OLLAMA_MODEL env var to override globally, e.g. qwen2.5:7b.
 _KNIGHT_OLLAMA_MODEL: dict[str, str] = {
-    "sir_forge":    "qwen3:0.6b",
-    "sir_debug":    "qwen3:0.6b",
-    "sir_ghost":    "qwen3:0.6b",
-    "merlin_omega": "qwen3:0.6b",
-    "sir_alex":     "qwen3:0.6b",
-    "sir_boris":    "qwen3:0.6b",
+    "sir_forge":    "qwen2.5-coder:7b",
+    "sir_debug":    "qwen2.5-coder:7b",
+    "sir_boris":    "qwen2.5-coder:7b",
+    "merlin_omega": "qwen2.5:7b",
+    "sir_alex":     "qwen2.5:3b",
+    "lady_apis":    "qwen2.5:3b",
+    "sir_sentinel": "qwen2.5:3b",
+    "sir_ghost":    "qwen2.5:1.5b",
+    "squire_colony":"qwen2.5:0.5b",
 }
-_DEFAULT_OLLAMA_MODEL = "qwen3:0.6b"
+_DEFAULT_OLLAMA_MODEL = "qwen2.5:3b"
 
 # ── Knight personas for LLM dispatch ──────────────────────────────────────────
 
@@ -162,13 +165,13 @@ class QueueTask:
     submitted: str = ""
     retries: int = 0
     source: str = ""
-
+    type: str = ""
+    payload: dict = None
 
 # ── Utilities ─────────────────────────────────────────────────────────────────
 
 def _now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-
 
 def _log(msg: str) -> None:
     ts = datetime.now().strftime("%H:%M:%S")
@@ -181,18 +184,15 @@ def _log(msg: str) -> None:
     except Exception:
         pass
 
-
 def _load_done() -> set[str]:
     if not DONE_FILE.exists():
         return set()
     return set(DONE_FILE.read_text(encoding="utf-8").splitlines())
 
-
 def _mark_done(task_id: str) -> None:
     DONE_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(DONE_FILE, "a", encoding="utf-8") as f:
         f.write(task_id + "\n")
-
 
 def _read_queue(done: set[str]) -> list[QueueTask]:
     if not QUEUE_FILE.exists():
@@ -218,6 +218,8 @@ def _read_queue(done: set[str]) -> list[QueueTask]:
                     submitted=data.get("submitted", ""),
                     retries=int(data.get("retries", 0)),
                     source=data.get("source", ""),
+                    type=data.get("type", ""),
+                    payload=data,
                 ))
         except Exception:
             pass
@@ -935,6 +937,36 @@ def _exec_ollama(task: QueueTask, dry_run: bool, auto_approve: bool = False) -> 
     print()
     print(f"{'─' * 60}")
     full = "".join(collected)
+
+    if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
+        _log("[VOX] Intercepting cognitive response for TTS synthesis...")
+        import urllib.request
+        import urllib.error
+        import json
+        try:
+            req = urllib.request.Request(
+                "http://127.0.0.1:8300/synthesize",
+                data=json.dumps({"text": full}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                pcm_data = resp.read()
+                
+                breq = urllib.request.Request(
+                    "http://127.0.0.1:3002/broadcast_audio",
+                    data=pcm_data,
+                    headers={"Content-Type": "application/octet-stream"},
+                    method="POST"
+                )
+                urllib.request.urlopen(breq, timeout=5)
+                _log("[VOX] Audio broadcast successful.")
+        except urllib.error.URLError as e:
+            _log(f"[VOX] Audio broadcast failed (service offline): {e}")
+            _exec_shell([str(PYTHON), "-m", "01_KERNEL.senses.audio.vox_service", "--synthesize", full], "vox_service synthesize fallback")
+        except Exception as e:
+            _log(f"[VOX] Audio broadcast failed: {e}")
+
     written = _apply_output(task.id, full, auto_approve)
     written, s_blocked = _sentinel_gate(written)
     piv = _piv_run(written, task, dry_run, auto_approve)
@@ -1024,6 +1056,36 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
     print()
     print(f"{'─' * 60}")
     full = "".join(collected)
+
+    if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
+        _log("[VOX] Intercepting cognitive response for TTS synthesis...")
+        import urllib.request
+        import urllib.error
+        import json
+        try:
+            req = urllib.request.Request(
+                "http://127.0.0.1:8300/synthesize",
+                data=json.dumps({"text": full}).encode("utf-8"),
+                headers={"Content-Type": "application/json"},
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                pcm_data = resp.read()
+                
+                breq = urllib.request.Request(
+                    "http://127.0.0.1:3002/broadcast_audio",
+                    data=pcm_data,
+                    headers={"Content-Type": "application/octet-stream"},
+                    method="POST"
+                )
+                urllib.request.urlopen(breq, timeout=5)
+                _log("[VOX] Audio broadcast successful.")
+        except urllib.error.URLError as e:
+            _log(f"[VOX] Audio broadcast failed (service offline): {e}")
+            _exec_shell([str(PYTHON), "-m", "01_KERNEL.senses.audio.vox_service", "--synthesize", full], "vox_service synthesize fallback")
+        except Exception as e:
+            _log(f"[VOX] Audio broadcast failed: {e}")
+
     written = _apply_output(task.id, full, auto_approve)
     written, s_blocked = _sentinel_gate(written)
     piv = _piv_run(written, task, dry_run, auto_approve)
@@ -1044,6 +1106,16 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
 
 
 def _dispatch(task: QueueTask, dry_run: bool, auto_approve: bool) -> str:
+    # ── AUDIO / VAD tier ──────────────────────────────────────────────────────
+    if task.type == "vad_utterance":
+        file_path = task.payload.get("file_path", "")
+        if not file_path:
+            return "error: missing file_path in vad_utterance"
+        return _exec_shell(
+            [str(PYTHON), "-m", "01_KERNEL.senses.audio.sir_sonus", "--transcribe", file_path],
+            f"sir_sonus transcribe {file_path}",
+        )
+
     d = task.directive
     # Strip "UNKNOWN_RUNE: " prefix that the router emits for unrecognised runes
     if d.upper().startswith("UNKNOWN_RUNE:"):

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "models": {
+    "sir_ghost": {
+      "backend": "ollama",
+      "tag": "qwen3:4b",
+      "air_gapped": true,
+      "notes": "Air-gapped privacy knight — zero cloud egress"
+    },
+    "sir_forge": {
+      "backend": "ollama",
+      "tag": "qwen2.5-coder:3b",
+      "air_gapped": true,
+      "notes": "Local code generation — kinetic scaffold tasks"
+    },
+    "sir_zeroclaw": {
+      "backend": "ollama",
+      "tag": "qwen3:4b",
+      "air_gapped": true,
+      "notes": "Zero-trust fraud sentry — HUMAN_GATE enforced"
+    },
+    "sir_gideon": {
+      "backend": "ollama",
+      "tag": "qwen3:4b",
+      "air_gapped": false,
+      "notes": "Forensic auditor — SCORPION shatterpoint scanner"
+    },
+    "qwen3:4b": {
+      "backend": "ollama",
+      "tag": "qwen3:4b",
+      "air_gapped": false
+    },
+    "qwen3.5:4b": {
+      "backend": "ollama",
+      "tag": "qwen3.5:4b",
+      "air_gapped": false
+    },
+    "qwen2.5-coder:3b": {
+      "backend": "ollama",
+      "tag": "qwen2.5-coder:3b",
+      "air_gapped": false
+    },
+    "gemma3:4b": {
+      "backend": "ollama",
+      "tag": "gemma3:4b",
+      "air_gapped": false
+    }
+  }
+}

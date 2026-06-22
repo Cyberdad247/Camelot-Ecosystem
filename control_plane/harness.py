@@ -68,6 +68,17 @@ WATCHDOG_RESTART_MAX_COOLDOWN_S = 600  # cap at 10 min per service
 # Services the watchdog can auto-restart (soft, non-critical)
 _SOFT_SERVICE_CMDS: dict[str, list] = {}  # populated lazily after HOME is resolved
 
+# Port held by each restartable service — used to kill stale processes before re-bind
+_SERVICE_PORT: dict[str, int] = {
+    "KittenTTS":  8300,
+    "SirOctavian": 8400,
+    "Saltare":    8090,
+    "OmniVoice":  3002,
+    "Holotable":  3000,
+    "KineticEdge": 3001,
+    "Qdrant":     6333,
+}
+
 # ── Boot phase probes (mirrors hud.py logic without Rich) ────────────────────
 
 BOOT_PROBES: list[tuple[str, str, int]] = [
@@ -204,6 +215,25 @@ class SovereignHarness:
         cmd, cwd = entry
         try:
             import platform as _pl
+            # Kill any stale process still holding the service port before re-binding
+            port = _SERVICE_PORT.get(name, 0)
+            if port and _pl.system() == "Windows":
+                try:
+                    ns = subprocess.run(
+                        ["netstat", "-ano"], capture_output=True, text=True, timeout=5
+                    )
+                    for ln in ns.stdout.splitlines():
+                        if f":{port} " in ln and "LISTENING" in ln:
+                            parts = ln.split()
+                            pid = parts[-1]
+                            if pid.isdigit() and int(pid) != os.getpid():
+                                subprocess.run(
+                                    ["taskkill", "/F", "/PID", pid],
+                                    capture_output=True, timeout=5,
+                                )
+                                _log(f"[WATCHDOG] Killed stale {name} PID={pid} (port {port})")
+                except Exception:
+                    pass
             kwargs: dict = {"cwd": cwd}
             if _pl.system() == "Windows":
                 kwargs["creationflags"] = (
