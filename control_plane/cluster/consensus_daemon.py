@@ -20,6 +20,7 @@ from control_plane.distributed_ledger_consensus import (
 )
 
 from .http_daemon import HttpDaemon, call_async, fire_async, post_json
+from control_plane.observability import traced_op
 
 
 class HttpConsensusNode(DistributedConsensus):
@@ -89,6 +90,6 @@ def register_routes(daemon: HttpDaemon, node: HttpConsensusNode) -> None:
     def consensus_status(body: dict, loop):
         return 200, node.get_status()
 
-    daemon.route("POST", "/consensus/message", consensus_message)
-    daemon.route("POST", "/consensus/propose", consensus_propose)
+    daemon.route("POST", "/consensus/message", traced_op("consensus.message")(consensus_message))
+    daemon.route("POST", "/consensus/propose", traced_op("consensus.propose")(consensus_propose))
     daemon.route("GET", "/consensus/status", consensus_status)

@@ -33,6 +33,16 @@ scrape_configs:
     static_configs:
       - targets: ['127.0.0.1:8000']
 
+  # ── Per-node operation metrics (node_daemon exposes on node_port + 300) ──
+  - job_name: 'camelot-nodes'
+    static_configs:
+      - targets: ['127.0.0.1:8743']
+        labels: {instance: 'node_1'}
+      - targets: ['127.0.0.1:8744']
+        labels: {instance: 'node_2'}
+      - targets: ['127.0.0.1:8745']
+        labels: {instance: 'node_3'}
+
   # ── Prometheus self-monitoring ──────────────────────────────────────────
   - job_name: 'prometheus'
     static_configs:
