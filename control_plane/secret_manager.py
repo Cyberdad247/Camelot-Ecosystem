@@ -160,3 +160,76 @@ def get_secret_manager() -> SecretManager:
 
 def get_secret(name: str, default: Optional[str] = None) -> Optional[str]:
     return get_secret_manager().get(name, default)
+
+
+# ── credential validators ────────────────────────────────────────────────────
+
+def looks_like_gemini_key(value: Optional[str]) -> bool:
+    """True if `value` matches the Google AI Studio / Gemini key shape (AIza…).
+
+    Catches the common mistake of pasting an OAuth/ephemeral token (AQ.…, ya29.…)
+    where a long-lived GEMINI_API_KEY is expected.
+    """
+    if not value:
+        return False
+    import re
+
+    return bool(re.fullmatch(r"AIza[0-9A-Za-z_\-]{35}", value.strip()))
+
+
+# ── CLI: store/inspect secrets without echoing values ─────────────────────────
+
+def _main(argv: Optional[list[str]] = None) -> int:
+    import argparse
+    import getpass
+
+    parser = argparse.ArgumentParser(description="CAMELOT-OS secret manager (local, encrypted)")
+    sub = parser.add_subparsers(dest="cmd")
+
+    p_set = sub.add_parser("set", help="Store a secret (value read via hidden prompt — never echoed)")
+    p_set.add_argument("name")
+
+    sub.add_parser("status", help="List stored secret names (never values)")
+
+    p_check = sub.add_parser("check", help="Report whether a secret is present (+ format hint)")
+    p_check.add_argument("name")
+
+    p_del = sub.add_parser("delete", help="Delete a stored secret")
+    p_del.add_argument("name")
+
+    sub.add_parser("rotate", help="Rotate the master key (re-encrypt the store)")
+
+    args = parser.parse_args(argv)
+    sm = get_secret_manager()
+
+    if args.cmd == "set":
+        value = getpass.getpass(f"{args.name} (hidden): ")
+        if not value:
+            print("[abort] empty value")
+            return 1
+        if args.name == "GEMINI_API_KEY" and not looks_like_gemini_key(value):
+            print("[warn] value does not look like a Gemini key (expected 'AIza…', 39 chars).")
+        sm.set(args.name, value)
+        print(f"[ok] stored {args.name} (encrypted; value not displayed)")
+    elif args.cmd == "status":
+        names = sm.list_names()
+        print(f"{len(names)} secret(s): {', '.join(names) if names else '(none)'}")
+    elif args.cmd == "check":
+        present = sm.get(args.name) is not None
+        print(f"{args.name}: {'present' if present else 'MISSING'}")
+        if args.name == "GEMINI_API_KEY" and present:
+            ok = looks_like_gemini_key(sm.get(args.name))
+            print(f"  format: {'looks valid (AIza…)' if ok else 'WARNING — not an AIza… Gemini key'}")
+        return 0 if present else 1
+    elif args.cmd == "delete":
+        print("[ok] deleted" if sm.delete(args.name) else "[noop] not found")
+    elif args.cmd == "rotate":
+        sm.rotate_key()
+        print("[ok] master key rotated; store re-encrypted")
+    else:
+        parser.print_help()
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(_main())

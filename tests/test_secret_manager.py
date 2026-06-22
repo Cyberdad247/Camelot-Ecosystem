@@ -60,3 +60,15 @@ def test_rotate_key_preserves_secrets(tmp_path):
 def test_default_returned_for_missing(tmp_path):
     sm = _mk(tmp_path)
     assert sm.get("NOPE", "fallback") == "fallback"
+
+
+def test_looks_like_gemini_key():
+    from control_plane.secret_manager import looks_like_gemini_key
+
+    # Real Gemini keys: AIza + 35 url-safe chars.
+    assert looks_like_gemini_key("AIza" + "B" * 35) is True
+    # OAuth/ephemeral tokens (the common paste mistake) are rejected.
+    assert looks_like_gemini_key("AQ.Ab8RfakeTokenValueNotAGeminiKey") is False
+    assert looks_like_gemini_key("ya29.fake-oauth-access-token") is False
+    assert looks_like_gemini_key("") is False
+    assert looks_like_gemini_key(None) is False
