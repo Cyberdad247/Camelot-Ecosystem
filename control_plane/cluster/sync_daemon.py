@@ -20,6 +20,7 @@ from control_plane.distributed_knowledge_sync import (
 )
 
 from .http_daemon import HttpDaemon, call_async, post_json
+from control_plane.observability import traced_op
 
 
 def _event_to_payload(event: SyncEvent) -> dict:
@@ -97,6 +98,6 @@ def register_routes(daemon: HttpDaemon, node: HttpSyncNode) -> None:
     def sync_status(body: dict, loop):
         return 200, call_async(loop, node.get_sync_status())
 
-    daemon.route("POST", "/sync/write", sync_write)
-    daemon.route("POST", "/sync/replicate", sync_replicate)
+    daemon.route("POST", "/sync/write", traced_op("sync.write")(sync_write))
+    daemon.route("POST", "/sync/replicate", traced_op("sync.replicate")(sync_replicate))
     daemon.route("GET", "/sync/status", sync_status)

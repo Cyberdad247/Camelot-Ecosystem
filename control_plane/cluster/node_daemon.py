@@ -24,6 +24,7 @@ from .agents_daemon import HttpAgentsNode, register_routes as register_agents
 from .consensus_daemon import HttpConsensusNode, register_routes as register_consensus
 from .http_daemon import HttpDaemon, call_async
 from .sync_daemon import HttpSyncNode, register_routes as register_sync
+from control_plane.observability import start_metrics_server
 
 
 def parse_peers(spec: str) -> Tuple[List[str], Dict[str, str]]:
@@ -100,6 +101,11 @@ def main() -> None:
     daemon.start()
     print(f"[{args.node_id}] listening on http://{args.host}:{args.port} "
           f"(role={consensus.role.value}, peers={list(consensus.peers)})", flush=True)
+
+    # Native Prometheus exposition of this node's operation metrics (no Docker).
+    metrics_port = args.port + 300
+    if start_metrics_server(metrics_port):
+        print(f"[{args.node_id}] /metrics on http://{args.host}:{metrics_port}", flush=True)
 
     # Start gossip on the loop, then run forever.
     loop.call_soon(lambda: loop.create_task(agents.gossip_loop(interval=2.0)))
