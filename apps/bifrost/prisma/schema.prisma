@@ -5,8 +5,11 @@ generator client {
   provider = "prisma-client-js"
 }
 
+// Zero-Cost + sovereign default: local SQLite file (no managed Postgres, no
+// Docker). Set DATABASE_URL="file:./vault.db" (see .env.example). For a heavier
+// local setup, switch provider to "postgresql" against a native install.
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
@@ -34,6 +37,6 @@ model Contact {
   id        String   @id @default(uuid())
   email     String   @unique
   name      String?
-  tags      String[]
+  tags      String   @default("[]") // JSON-encoded string list (SQLite has no scalar arrays)
   createdAt DateTime @default(now())
 }
