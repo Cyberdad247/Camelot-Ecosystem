@@ -1,0 +1,11 @@
+{
+  "@context": "https://schema.camelot-os.org/v1000",
+  "@type": "WasmOrchestratorConfig",
+  "engine": "wasmtime",
+  "isolation": "Firecracker_COW_MicroVM",
+  "warm_boot_ms": 12,
+  "memory_bound_mb": 150,
+  "entropy_source": "/dev/urandom",
+  "telemetry_filter": "Aegis_eBPF",
+  "provenance_tag": "CYBERTRON_ASCENSION_v1000"
+}
