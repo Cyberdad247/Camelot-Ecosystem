@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
 ARTIFACT_RELATIVE_PATH = Path("03_VAULT") / "runtime_state" / "knight_configuration_latest.json"
 
 

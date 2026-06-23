@@ -12,7 +12,7 @@ For critical pill state transmission: guarantees zero data loss.
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Tuple, Optional
+from typing import List, Optional
 
 
 @dataclass

@@ -4,13 +4,13 @@ Phase H Week 4 Day 1: Optimization Executor Tests
 Test safe execution, locking, rollback, and result tracking
 """
 
-import unittest
+import sys
 import tempfile
 import time
-from pathlib import Path
+import unittest
 from datetime import datetime
+from pathlib import Path
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent))
 
 from phase_h_executor import OptimizationExecutor, SystemStateSnapshot

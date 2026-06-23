@@ -4,12 +4,11 @@ Phase H Week 4 Day 3: Rollback System
 Emergency revert of failed optimizations to pre-execution state
 """
 
-import sqlite3
 import json
-from datetime import datetime
-from typing import Dict, Optional, Tuple
-from pathlib import Path
+import sqlite3
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, Optional
 
 
 @dataclass
@@ -355,7 +354,7 @@ if __name__ == '__main__':
 
     # Get statistics
     stats = rollback_mgr.get_rollback_statistics()
-    print(f"\nRollback Statistics:")
+    print("\nRollback Statistics:")
     print(f"  Total: {stats['total_rollbacks']}")
     print(f"  Successful: {stats['successful']}")
     print(f"  Success Rate: {stats['success_rate']}%")

@@ -4,17 +4,17 @@ Phase H Week 2 Day 4: Full Pipeline Integration Tests
 Validate Pattern Learner → Optimizer Engine → Learning Dashboard
 """
 
-import unittest
-import tempfile
 import sqlite3
-import time
-import json
-from pathlib import Path
-from datetime import datetime, timedelta
-
-from control_plane.phase_h_pattern_learner import PatternLearner
-from control_plane.phase_h_optimizer import OptimizerEngine
 import sys
+import tempfile
+import time
+import unittest
+from datetime import datetime, timedelta
+from pathlib import Path
+
+from control_plane.phase_h_optimizer import OptimizerEngine
+from control_plane.phase_h_pattern_learner import PatternLearner
+
 sys.path.insert(0, str(Path(__file__).parent.parent / 'dashboards'))
 from phase_h_learning_dashboard import LearningDashboard
 

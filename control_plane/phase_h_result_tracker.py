@@ -4,12 +4,11 @@ Phase H Week 4 Day 2: Result Tracker
 Measure actual vs predicted impact and validate optimization outcomes
 """
 
-import sqlite3
 import json
+import sqlite3
+from dataclasses import asdict, dataclass
 from datetime import datetime
-from typing import Dict, List, Optional, Tuple
-from pathlib import Path
-from dataclasses import dataclass, asdict
+from typing import Dict, List, Optional
 
 
 @dataclass
@@ -425,7 +424,7 @@ if __name__ == '__main__':
     print(f"  Should Rollback: {validation.should_rollback}")
 
     if validation.latency_impact:
-        print(f"\nLatency Impact:")
+        print("\nLatency Impact:")
         print(f"  Predicted: {validation.latency_impact.predicted_pct:+.1f}%")
         print(f"  Actual: {validation.latency_impact.actual_pct:+.1f}%")
         print(f"  Delta: {validation.latency_impact.delta_pct:+.1f}%")
@@ -433,7 +432,7 @@ if __name__ == '__main__':
 
     # Get statistics
     stats = tracker.get_validation_statistics()
-    print(f"\nValidation Statistics:")
+    print("\nValidation Statistics:")
     print(f"  Total: {stats['total_validations']}")
     print(f"  Passed: {stats['passed']}")
     print(f"  SLA Compliance Rate: {stats['sla_compliance_rate']}%")

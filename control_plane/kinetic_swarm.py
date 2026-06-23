@@ -30,10 +30,10 @@ from __future__ import annotations
 import asyncio
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, List, Dict, Any
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
-from control_plane.agent_registry import get_agent_registry, AgentDefinition
+from control_plane.agent_registry import AgentDefinition, get_agent_registry
 
 
 class SwarmRole(str, Enum):

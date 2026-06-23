@@ -10,7 +10,6 @@ from typing import Any
 from .ledger_sync import append_provenance_entry
 from .provenance import ProvenanceManager, VerificationRun
 
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CONFIG_ROOT = REPO_ROOT / "03_VAULT" / "training" / "configs"
 LEARNINGS_PATH = CONFIG_ROOT / "learnings.md"

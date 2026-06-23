@@ -369,7 +369,7 @@ class Bifrost:
     ) -> AsyncIterator[str]:
         """Dispatch via the Sovereign Inference Engine (in-process, no HTTP)."""
         try:
-            from control_plane.sovereign_inference import SIE, SIEHooks, HITLBlock
+            from control_plane.sovereign_inference import SIE, HITLBlock, SIEHooks
         except ImportError as e:
             yield f"[BIFROST] SIE import failed: {e}"
             return

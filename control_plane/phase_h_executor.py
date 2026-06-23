@@ -4,12 +4,12 @@ Phase H Week 4 Day 1: Optimization Executor
 Apply approved optimization candidates safely with execution tracking
 """
 
-import sqlite3
 import json
+import sqlite3
+import time
+from dataclasses import asdict, dataclass
 from datetime import datetime
 from typing import Dict, List
-from dataclasses import dataclass, asdict
-import time
 
 
 @dataclass
@@ -414,7 +414,7 @@ if __name__ == '__main__':
 
     # Get statistics
     stats = executor.get_execution_statistics()
-    print(f"\nExecution Statistics:")
+    print("\nExecution Statistics:")
     print(f"  Total: {stats['total_executions']}")
     print(f"  Successful: {stats['successful']}")
     print(f"  Avg Time: {stats['avg_execution_time_seconds']:.3f}s")

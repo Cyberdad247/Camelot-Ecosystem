@@ -23,7 +23,6 @@ Iron Gate tiers:
 """
 from __future__ import annotations
 
-import json
 import logging
 import time
 from dataclasses import dataclass, field
@@ -329,8 +328,8 @@ class OrganizeEngine:
         approved=True only when risk_label not CRITICAL.
         """
         try:
-            import sys
             import importlib.util as _ilu
+            import sys
             spec = _ilu.spec_from_file_location(
                 "org_colony_nexus",
                 self._root / "01_KERNEL/iron_gate/DEFENSE_GRID/colony_nexus.py",
@@ -393,8 +392,8 @@ class OrganizeEngine:
         branch = f"organize/tier-{tier_n}"
         try:
             if galahad_exec:
-                import sys
                 import importlib.util as _ilu
+                import sys
                 spec = _ilu.spec_from_file_location(
                     "org_galahad",
                     self._root / "01_KERNEL/iron_gate/DEFENSE_GRID/knights/galahad.py",

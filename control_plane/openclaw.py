@@ -159,7 +159,8 @@ def _check_switchboard() -> tuple[bool, str]:
 
 
 def _check_ollama() -> tuple[bool, str]:
-    import urllib.request, urllib.error
+    import urllib.error
+    import urllib.request
     try:
         with urllib.request.urlopen("http://127.0.0.1:11434/api/tags", timeout=2) as resp:
             payload = json.loads(resp.read().decode("utf-8", errors="replace"))

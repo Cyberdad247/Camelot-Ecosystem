@@ -4,14 +4,14 @@ Phase H Day 4: Production Hardening Tests
 Verify system resilience, error handling, and resource stability
 """
 
-import time
-import threading
-import unittest
 import tempfile
+import threading
+import time
+import unittest
 from pathlib import Path
 
-from control_plane.phase_h_integration import MetricsMiddleware
 from control_plane.orchestrator import Orchestrator
+from control_plane.phase_h_integration import MetricsMiddleware
 
 
 class TestErrorHandling(unittest.TestCase):

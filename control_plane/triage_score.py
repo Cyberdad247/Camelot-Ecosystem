@@ -16,11 +16,10 @@ Scores based on:
 """
 from __future__ import annotations
 
-import math
 from dataclasses import dataclass, field
-from datetime import datetime, timedelta
-from typing import Optional, List, Dict
+from datetime import datetime
 from enum import Enum
+from typing import Dict, List, Optional
 
 
 class ConfidenceLevel(str, Enum):
@@ -209,7 +208,7 @@ class TriageScorer:
         # Top risk factors
         components_sorted = sorted(components, key=lambda c: c.value)
         if components_sorted:
-            lines.append(f"\nLowest scoring factors:")
+            lines.append("\nLowest scoring factors:")
             for comp in components_sorted[:3]:
                 lines.append(f"  • {comp.name}: {comp.value*100:.0f}% ({comp.reason})")
 

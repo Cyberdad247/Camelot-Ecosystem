@@ -4,13 +4,13 @@ Phase H Week 1 Final: Complete System Validation
 Comprehensive tests for production sign-off
 """
 
-import time
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
-from control_plane.phase_h_integration import get_metrics, init_metrics
 from control_plane.orchestrator import Orchestrator
+from control_plane.phase_h_integration import get_metrics, init_metrics
 
 
 class TestFullIntegration(unittest.TestCase):

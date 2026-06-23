@@ -4,20 +4,14 @@ Phase H Week 3 Day 2: Business Metrics Tests
 Test SLA/KPI management, constraints, and business weighting
 """
 
-import unittest
+import sys
 import tempfile
-import sqlite3
+import unittest
 from pathlib import Path
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent))
 
-from phase_h_business_metrics import (
-    BusinessMetrics,
-    SLAThreshold,
-    KPITarget,
-    Constraint
-)
+from phase_h_business_metrics import BusinessMetrics, KPITarget, SLAThreshold
 
 
 class TestSLAManagement(unittest.TestCase):

@@ -684,7 +684,7 @@ def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> Ru
             complexity = 9 if cfg.get("priority", 2) <= 1 else 5
             mgr.store_tissue(intent=directive, content=metadata, complexity=complexity, tier="L2" if complexity >= 8 else "L1")
             hydration = mgr.hydrate_context(intent=directive, complexity=complexity)
-            if hydration.get("L2") and not "yielded no results" in str(hydration.get("L2")):
+            if hydration.get("L2") and "yielded no results" not in str(hydration.get("L2")):
                 directive += f"\n\n[CLOUD_BRAIN_CONTEXT]: {hydration.get('L2')}"
 
         if is_privacy_override:
@@ -714,7 +714,7 @@ def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> Ru
             mgr = HydrationManager(knight_id=knight)
             mgr.store_tissue(intent=directive, content=cfg["description"], complexity=9, tier="L2")
             hydration = mgr.hydrate_context(intent=directive, complexity=9)
-            if hydration.get("L2") and not "yielded no results" in str(hydration.get("L2")):
+            if hydration.get("L2") and "yielded no results" not in str(hydration.get("L2")):
                 directive += f"\n\n[CLOUD_BRAIN_CONTEXT]: {hydration.get('L2')}"
 
         if is_privacy_override:

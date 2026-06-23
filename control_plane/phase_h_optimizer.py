@@ -4,13 +4,11 @@ Phase H Week 2: Optimizer Engine
 Generates and ranks optimization candidates from detected patterns
 """
 
-import sqlite3
 import json
-import time
-from datetime import datetime
-from dataclasses import dataclass, asdict
-from typing import List, Dict, Optional, Tuple
+import sqlite3
+from dataclasses import asdict, dataclass
 from pathlib import Path
+from typing import Dict, List, Optional
 
 
 @dataclass

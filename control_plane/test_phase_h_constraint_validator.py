@@ -4,21 +4,16 @@ Phase H Week 3 Day 4: Constraint Validator & Feedback Integration Tests
 Test constraint validation and feedback confidence boosting
 """
 
-import unittest
-import tempfile
 import sqlite3
+import sys
+import tempfile
+import unittest
 from pathlib import Path
 
-import sys
 sys.path.insert(0, str(Path(__file__).parent))
 
-from phase_h_constraint_validator import (
-    ConstraintValidator,
-    FeedbackIntegration,
-    ConstraintViolation,
-    FeedbackValidation
-)
 from phase_h_business_metrics import BusinessMetrics
+from phase_h_constraint_validator import ConstraintValidator, FeedbackIntegration
 
 
 class TestConstraintValidator(unittest.TestCase):

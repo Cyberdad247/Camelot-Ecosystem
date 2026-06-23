@@ -20,10 +20,13 @@ import asyncio
 import time
 from typing import Dict, List, Tuple
 
-from .agents_daemon import HttpAgentsNode, register_routes as register_agents
-from .consensus_daemon import HttpConsensusNode, register_routes as register_consensus
-from .http_daemon import HttpDaemon, call_async
-from .sync_daemon import HttpSyncNode, register_routes as register_sync
+from .agents_daemon import HttpAgentsNode
+from .agents_daemon import register_routes as register_agents
+from .consensus_daemon import HttpConsensusNode
+from .consensus_daemon import register_routes as register_consensus
+from .http_daemon import HttpDaemon
+from .sync_daemon import HttpSyncNode
+from .sync_daemon import register_routes as register_sync
 
 
 def parse_peers(spec: str) -> Tuple[List[str], Dict[str, str]]:

@@ -18,7 +18,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATE_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "microcubed"
 QUEUE_FILE = REPO_ROOT / "logs" / "harness_queue.jsonl"

@@ -23,12 +23,11 @@ Usage (in Bifrost):
 """
 from __future__ import annotations
 
-import asyncio
 import json
 import logging
 import os
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import AsyncIterator, Callable, Protocol, runtime_checkable
 
@@ -164,13 +163,11 @@ class OllamaBackend:
             return False
 
     async def pull(self, model: str) -> None:
-        import ollama
         client = self._get_client()
         await client.pull(model)
 
     async def unload(self, model: str) -> None:
         """Ask Ollama to unload a model from VRAM/RAM."""
-        import ollama
         client = self._get_client()
         try:
             # keepalive=0 forces immediate unload

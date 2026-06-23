@@ -11,16 +11,17 @@ QR Pill encodes:
 Deployment modes: systemd, bare-metal, custom orchestration
 """
 
-import json
+import asyncio
 import base64
 import hashlib
-import time
-import subprocess
-import asyncio
-from dataclasses import dataclass, field, asdict
-from typing import Dict, List, Optional, Set
-from enum import Enum
+import json
 import logging
+import os
+import subprocess
+import time
+from dataclasses import asdict, dataclass, field
+from enum import Enum
+from typing import Dict, List, Optional
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("QRPill")

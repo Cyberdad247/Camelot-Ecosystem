@@ -24,7 +24,6 @@ import json
 import logging
 import re
 import subprocess
-import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional

@@ -51,7 +51,7 @@ class MemorySyncer:
             redis_url = os.environ.get("REDIS_URL", "redis://localhost:6379")
             self.redis_client = redis.from_url(redis_url, decode_responses=True)
             self.redis_client.ping()
-            print(f"[SYNC] Connected to Redis", file=sys.stderr)
+            print("[SYNC] Connected to Redis", file=sys.stderr)
         except Exception as e:
             print(f"[SYNC] Redis init failed: {e}", file=sys.stderr)
 

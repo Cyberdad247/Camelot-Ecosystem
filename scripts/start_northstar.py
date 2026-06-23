@@ -140,7 +140,6 @@ def stop_all() -> None:
 
 async def run_test_suite_async() -> bool:
     import websockets
-    import aiohttp
 
     print("\n[NORTHSTAR TEST] Beginning system verification test suite...")
 

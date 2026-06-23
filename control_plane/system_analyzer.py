@@ -14,13 +14,13 @@ Outputs optimization profile for Bifrost to use.
 """
 from __future__ import annotations
 
-import asyncio
 import platform
-import psutil
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, Dict, List
 from enum import Enum
+from typing import Dict, List, Optional
+
+import psutil
 
 
 class CPUArchitecture(str, Enum):

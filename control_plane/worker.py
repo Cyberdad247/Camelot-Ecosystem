@@ -28,12 +28,14 @@ Usage:
 from __future__ import annotations
 
 import sys
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import argparse
+import asyncio
 import json
 import os
 import re
@@ -45,7 +47,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
-import asyncio
 
 # Set by main() from --backend arg; read by _dispatch
 _BACKEND: str = "auto"
@@ -345,8 +346,8 @@ def _sentinel_gate(written_paths: list[str]) -> tuple[list[str], int]:
         import sys as _sys
         if str(HOME) not in _sys.path:
             _sys.path.insert(0, str(HOME))
-        from squires.scan import FileRecord
         from squires.ghost import triage as _ghost_triage
+        from squires.scan import FileRecord
     except Exception as _e:
         _log(f"[SENTINEL] Ghost scanner unavailable ({_e}) — gate skipped")
         return written_paths, 0
@@ -940,9 +941,9 @@ def _exec_ollama(task: QueueTask, dry_run: bool, auto_approve: bool = False) -> 
 
     if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
         _log("[VOX] Intercepting cognitive response for TTS synthesis...")
-        import urllib.request
-        import urllib.error
         import json
+        import urllib.error
+        import urllib.request
         try:
             req = urllib.request.Request(
                 "http://127.0.0.1:8300/synthesize",
@@ -1005,15 +1006,15 @@ def _exec_llm(task: QueueTask, dry_run: bool, backend: str = "auto", auto_approv
 
     # Auto: Anthropic first, then Ollama, then dry
     if api_key:
-        _log(f"[LLM] Using Anthropic (API key set)")
+        _log("[LLM] Using Anthropic (API key set)")
         return _exec_anthropic(task, dry_run, auto_approve)
 
     if _probe_ollama():
         _log(f"[LLM] No Anthropic key — using Ollama at {OLLAMA_HOST}")
         return _exec_ollama(task, dry_run, auto_approve)
 
-    _log(f"[LLM] No Anthropic key and Ollama not reachable — task marked NEEDS_LLM")
-    _log(f"[LLM] To fix: set ANTHROPIC_API_KEY  OR  start Ollama (ollama serve)")
+    _log("[LLM] No Anthropic key and Ollama not reachable — task marked NEEDS_LLM")
+    _log("[LLM] To fix: set ANTHROPIC_API_KEY  OR  start Ollama (ollama serve)")
     return "NEEDS_LLM"
 
 
@@ -1059,9 +1060,9 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
 
     if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
         _log("[VOX] Intercepting cognitive response for TTS synthesis...")
-        import urllib.request
-        import urllib.error
         import json
+        import urllib.error
+        import urllib.request
         try:
             req = urllib.request.Request(
                 "http://127.0.0.1:8300/synthesize",

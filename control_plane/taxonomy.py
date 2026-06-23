@@ -7,6 +7,7 @@ privacy configurations for both semantic and runic dispatchers.
 """
 from enum import Enum
 
+
 class IntentCategory(Enum):
     FORGE        = "forge"        # implement, build, scaffold
     CODE         = "code"         # debug, fix, refactor, review

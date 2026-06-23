@@ -4,12 +4,11 @@ Phase H Week 3 Day 1: Feedback Signal Collection Infrastructure
 Collect and store user, business, and operational feedback signals
 """
 
-import sqlite3
 import json
+import sqlite3
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
-from pathlib import Path
-from dataclasses import dataclass, asdict
 
 
 @dataclass
@@ -383,7 +382,7 @@ if __name__ == '__main__':
 
     # Show stats
     stats = collector.get_signal_stats()
-    print(f"\n📊 Signal Stats:")
+    print("\n📊 Signal Stats:")
     print(f"  Total: {stats['total_signals']}")
     print(f"  By type: {stats['by_type']}")
     print(f"  By source: {stats['by_source']}")

@@ -6,9 +6,9 @@ Routes intents to the optimal Knight engine based on weighted tensor scoring.
 
 from __future__ import annotations
 
+import importlib.util
 import os
 import sys
-import importlib.util
 from dataclasses import dataclass
 from enum import Enum
 from typing import Optional
@@ -18,7 +18,7 @@ try:
 except ImportError:
     requests = None
 
-from control_plane.taxonomy import PRIVACY_KEYWORDS, KEYWORD_ROUTES
+from control_plane.taxonomy import KEYWORD_ROUTES, PRIVACY_KEYWORDS
 
 try:
     from importlib import import_module

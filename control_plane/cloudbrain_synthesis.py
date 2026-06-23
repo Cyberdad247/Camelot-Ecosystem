@@ -17,7 +17,6 @@ import asyncio
 import json
 import sys
 import time
-from typing import Optional
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

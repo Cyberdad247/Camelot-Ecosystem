@@ -4,15 +4,14 @@ Phase H Week 2: Optimizer Engine Tests
 Verify candidate generation and ranking
 """
 
-import unittest
-import tempfile
-import sqlite3
-import time
-from pathlib import Path
-from datetime import datetime
 import json
+import sqlite3
+import tempfile
+import time
+import unittest
+from pathlib import Path
 
-from control_plane.phase_h_optimizer import OptimizerEngine, OptimizationCandidate
+from control_plane.phase_h_optimizer import OptimizationCandidate, OptimizerEngine
 
 
 class TestOptimizerEngine(unittest.TestCase):

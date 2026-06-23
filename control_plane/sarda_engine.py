@@ -19,14 +19,13 @@ import json
 import os
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 from typing import Any, Optional
 from uuid import uuid4
-
-from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Add KERNEL to path for telemetry import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -49,10 +48,9 @@ except Exception:
         def info(self, *args, **kwargs): pass
     logger = DummyLogger()
 
-from .soul_router import SoulRouter
-from .omc_team import OMCTeam
 from .deerflow_sandbox import DeerFlowSandbox
-
+from .omc_team import OMCTeam
+from .soul_router import SoulRouter
 
 # ---------------------------------------------------------------------------
 # SARDA Phase Definitions

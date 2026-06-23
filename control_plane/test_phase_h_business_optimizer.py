@@ -4,15 +4,14 @@ Phase H Week 3 Day 3: Business Optimizer Tests
 Test business-weighted ranking and approval thresholds
 """
 
-import unittest
-import tempfile
-from pathlib import Path
-from dataclasses import dataclass
-
 import sys
+import tempfile
+import unittest
+from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent))
 
-from phase_h_business_optimizer import BusinessOptimizer, RankedCandidate
+from phase_h_business_optimizer import BusinessOptimizer
 from phase_h_optimizer import OptimizationCandidate
 
 

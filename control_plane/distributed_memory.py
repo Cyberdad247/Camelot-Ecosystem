@@ -20,7 +20,7 @@ import os
 import sys
 import time
 from dataclasses import dataclass
-from typing import Optional, Callable, Any
+from typing import Callable, Optional
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

@@ -284,7 +284,7 @@ def _print_report(t: dict[str, Any], a: dict[str, Any]) -> None:
             print(f"   x {v}")
         if a["missing"]:
             print(" REMEDIATION:")
-            print(f"   winget install -e --id Rustlang.Rustup   # rustc+cargo" if any(
+            print("   winget install -e --id Rustlang.Rustup   # rustc+cargo" if any(
                 m in ("rustc", "cargo") for m in a["missing"]) else "")
     print("===================================================================")
 

@@ -4,17 +4,17 @@ Phase H Week 4 Day 2: Result Tracker Tests
 Test validation of optimization results against predictions
 """
 
-import unittest
-import tempfile
 import json
 import sqlite3
-from pathlib import Path
-from datetime import datetime
-
 import sys
+import tempfile
+import unittest
+from datetime import datetime
+from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent))
 
-from phase_h_result_tracker import ResultTracker, ImpactDelta, ImpactValidation
+from phase_h_result_tracker import ImpactDelta, ImpactValidation, ResultTracker
 
 
 class TestResultTracker(unittest.TestCase):

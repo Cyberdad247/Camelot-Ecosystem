@@ -11,7 +11,7 @@ import asyncio
 import sys
 from dataclasses import dataclass, field
 
-from main import ControlPlane, TaskPayload, MessageType
+from main import ControlPlane, MessageType, TaskPayload
 
 
 @dataclass

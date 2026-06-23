@@ -5,12 +5,10 @@ Detects deviations from healthy baseline
 Generates alerts on anomalies
 """
 
-import json
 import sqlite3
 import time
 from dataclasses import dataclass
-from datetime import datetime
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional
 
 
 @dataclass

@@ -3,11 +3,12 @@
 Unit tests for Phase H AnomalyDetector
 """
 
-import unittest
 import tempfile
 import time
+import unittest
 from pathlib import Path
-from phase_h_anomaly_detector import AnomalyDetector, Anomaly
+
+from phase_h_anomaly_detector import AnomalyDetector
 
 
 class TestAnomalyDetector(unittest.TestCase):

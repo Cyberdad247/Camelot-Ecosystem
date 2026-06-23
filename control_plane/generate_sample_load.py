@@ -4,8 +4,9 @@ Phase H Day 3: Generate Sample Load
 Populates metrics database with realistic operation data for dashboard display
 """
 
-import time
 import random
+import time
+
 from control_plane.phase_h_integration import get_metrics
 
 

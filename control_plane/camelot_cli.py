@@ -16,11 +16,13 @@ from typing import Any
 
 from colorama import Fore, Style, just_fix_windows_console
 
-from .cockpit import cockpit_exec, prompt_payload, refresh_snapshot
-from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
 from .cli_intercept import CLIIntercept
+from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
+from .cockpit import cockpit_exec, prompt_payload, refresh_snapshot
 from .codex_integration import (
     DEFAULT_ACTOR as CODEX_DEFAULT_ACTOR,
+)
+from .codex_integration import (
     read_codex_status,
     write_codex_integration,
 )
@@ -44,11 +46,15 @@ from .microcubed import (
     forge_house,
     inspect_house,
     plan_house,
-    status as microcubed_status,
     teardown_house,
+)
+from .microcubed import (
+    status as microcubed_status,
 )
 from .nano_swarm_runtime import (
     supervise_nodes as supervise_nano_swarm_nodes,
+)
+from .nano_swarm_runtime import (
     write_runtime_status as write_nano_swarm_runtime_status,
 )
 from .provenance import ProvenanceManager, VerificationRun
@@ -270,12 +276,12 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
                     _stream_print("[TRIAGE] Simulated 'trivy' scan initiated... 100% CLEAN.", tone="info")
             
             f_engine.log_check("CLI_CONTEXT", intent, analysis)
-        except Exception as fe:
+        except Exception:
             # Don't block the whole process if forensic engine fails
             pass
 
         # Import warden here to maintain lazy loading
-        from security.warden import warden, SecurityException  # noqa: F401
+        from security.warden import SecurityException, warden  # noqa: F401
         
         # Verify permission via the unified security warden
         warden.verify_permission(
@@ -1322,24 +1328,41 @@ def _interactive_shell(
             if raw == "/status":
                 if not json_mode:
                     _stream_print("Probing Septem Regna Layer health…", tone="title")
-                    boot_sequence.run_boot(CAMELOT_HOME)
+                    try:
+                        from . import boot_sequence as _bs
+                        _bs.run_boot(CAMELOT_HOME)
+                    except ImportError:
+                        _stream_print("boot_sequence module unavailable", tone="warn")
                     output = asyncio.run(_run_task("cloudbrain status"))
                     _emit(output, json_mode=json_mode, title="Cloudbrain Internals")
                 else:
-                    output = boot_sequence.run_boot(CAMELOT_HOME, quick=True)
+                    try:
+                        from . import boot_sequence as _bs
+                        output = _bs.run_boot(CAMELOT_HOME, quick=True)
+                    except ImportError:
+                        output = {"status": "UNAVAILABLE", "error": "boot_sequence module not found"}
                     _print_json(output)
                 continue
 
             if raw == "/boot":
                 _stream_print("Initiating full 6-phase bootstrap sequence…", tone="warn")
-                boot_sequence.run_boot(CAMELOT_HOME)
+                try:
+                    from . import boot_sequence as _bs
+                    _bs.run_boot(CAMELOT_HOME)
+                except ImportError:
+                    _stream_print("boot_sequence module unavailable", tone="err")
                 continue
 
             if raw == "/sync":
                 _stream_print("Triggering OMEGA SYNC PROTOCOL (UKG + Ledger + Kinetic)…", tone="accent")
-                sync_script = CAMELOT_HOME / "01_KERNEL" / "system" / "SYNC_PROTOCOL.py"
-                venv_py = boot_sequence._detect_venv_python(CAMELOT_HOME)
-                smolvm.run([str(venv_py), str(sync_script)], cwd=str(CAMELOT_HOME))
+                try:
+                    from . import boot_sequence as _bs
+                    sync_script = CAMELOT_HOME / "01_KERNEL" / "system" / "SYNC_PROTOCOL.py"
+                    venv_py = _bs._detect_venv_python(CAMELOT_HOME)
+                    import subprocess
+                    subprocess.run([str(venv_py), str(sync_script)], cwd=str(CAMELOT_HOME), check=False)
+                except ImportError:
+                    _stream_print("boot_sequence module unavailable for sync", tone="err")
                 continue
 
             if raw.startswith("/log"):
@@ -2135,10 +2158,15 @@ def main() -> int:
         return 0
 
     if args.command == "glyph":
+        try:
+            from .glyph_registry import list_glyphs, load_stack, expand_atom, audit_atom, execute_atom
+        except ImportError:
+            list_glyphs = load_stack = expand_atom = audit_atom = execute_atom = None
+            _stream_print("glyph_registry module unavailable", tone="err")
         if args.glyph_command == "list":
-            output = list_glyphs()
+            output = list_glyphs() if list_glyphs else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
         elif args.glyph_command in {"load", "activate"}:
-            output = load_stack(args.stack)
+            output = load_stack(args.stack) if load_stack is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
             if output.get("status") == "LOADED":
                 output["ledger"] = append_provenance_entry(
                     title=f"Glyph stack activated: {args.stack}",
@@ -2155,9 +2183,9 @@ def main() -> int:
                     tag="[Omega_GLYPH]",
                 )
         elif args.glyph_command == "expand":
-            output = expand_atom(args.atom_id)
+            output = expand_atom(args.atom_id) if expand_atom is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
         elif args.glyph_command == "audit":
-            output = audit_atom(args.atom_id)
+            output = audit_atom(args.atom_id) if audit_atom is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
             if output.get("status") == "AUDITED":
                 target = args.atom_id or "all"
                 output["ledger"] = append_provenance_entry(
@@ -2168,7 +2196,7 @@ def main() -> int:
                     tag="[Omega_GLYPH_AUDIT]",
                 )
         else:
-            output = execute_atom(args.atom_id, approved=args.approve)
+            output = execute_atom(args.atom_id, approved=args.approve) if execute_atom is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
             if output.get("status") in {"STAGED", "GUARD_REQUIRED"}:
                 output["ledger"] = append_provenance_entry(
                     title=f"Glyph execute staged: {args.atom_id}",
@@ -2201,8 +2229,13 @@ def main() -> int:
         return 0 if output.get("status") not in {"NOT_FOUND", "MISSING_ARTIFACT"} else 1
 
     if args.command == "forge-unify":
+        try:
+            from .forge_unify import activate_forge_unify, forge_unify_status, select_topology, sentinel_forensic_check
+        except ImportError:
+            activate_forge_unify = forge_unify_status = select_topology = sentinel_forensic_check = None
+            _stream_print("forge_unify module unavailable", tone="err")
         if args.forge_unify_command == "activate":
-            output = activate_forge_unify()
+            output = activate_forge_unify() if activate_forge_unify else {"status": "UNAVAILABLE", "error": "forge_unify module not found"}
             output["ledger"] = append_provenance_entry(
                 title="Forge Unify v400.2 activated",
                 actor="SIR_CODEX (Lead Engineer) with Sir Alex and Sir Link",
@@ -2223,11 +2256,11 @@ def main() -> int:
                 tag="[Omega_FORGE_UNIFY]",
             )
         elif args.forge_unify_command == "status":
-            output = forge_unify_status()
+            output = forge_unify_status() if forge_unify_status is not None else {"status": "UNAVAILABLE", "error": "forge_unify module not found"} if forge_unify_status is not None else {"status": "UNAVAILABLE"}
         elif args.forge_unify_command == "route":
-            output = select_topology(" ".join(args.intent))
+            output = select_topology(" ".join(args.intent)) if select_topology is not None else {"status": "UNAVAILABLE", "error": "forge_unify module not found"} if select_topology is not None else {"status": "UNAVAILABLE"}
         else:
-            output = sentinel_forensic_check(refresh_baseline=args.refresh_baseline)
+            output = sentinel_forensic_check(refresh_baseline=args.refresh_baseline) if sentinel_forensic_check is not None else {"status": "UNAVAILABLE", "error": "forge_unify module not found"} if sentinel_forensic_check is not None else {"status": "UNAVAILABLE"}
             if output.get("status") in {"TRIGGERED", "BASELINE_CREATED"}:
                 output["ledger"] = append_provenance_entry(
                     title=f"Sentinel forensic check: {output.get('status')}",

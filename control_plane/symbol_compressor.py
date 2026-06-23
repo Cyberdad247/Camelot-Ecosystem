@@ -30,7 +30,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 try:
     from qdrant_client import QdrantClient
-    from qdrant_client.models import Distance, VectorParams, PointStruct
+    from qdrant_client.models import Distance, PointStruct, VectorParams
     _QDRANT = True
 except ImportError:
     _QDRANT = False

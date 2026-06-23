@@ -16,12 +16,12 @@ TOON Crystal Structure:
 """
 from __future__ import annotations
 
-import json
 import hashlib
-from dataclasses import dataclass, asdict, field
+import json
+from dataclasses import asdict, dataclass, field
 from datetime import datetime
-from typing import Optional, Dict, List, Any
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 
 class TOONVersion(str, Enum):
@@ -181,47 +181,47 @@ class TOONEncoder:
 
         # SYS block
         if crystal.sys:
-            lines.append(f'  "SYS": {{')
+            lines.append('  "SYS": {')
             lines.append(f'    "ID": "{crystal.sys.id}",')
             lines.append(f'    "HW": "{crystal.sys.hw}",')
             lines.append(f'    "VMM": "{crystal.sys.vmm}"')
-            lines.append(f'  }},')
+            lines.append('  },')
 
         # COG block
         if crystal.cog:
-            lines.append(f'  "COG": {{')
+            lines.append('  "COG": {')
             lines.append(f'    "INF": "{crystal.cog.inf}",')
             lines.append(f'    "CTX": "{crystal.cog.ctx}",')
             lines.append(f'    "MEM": "{crystal.cog.mem}",')
             lines.append(f'    "IPC": "{crystal.cog.ipc}"')
-            lines.append(f'  }},')
+            lines.append('  },')
 
         # GOV block
         if crystal.gov:
-            lines.append(f'  "GOV": {{')
+            lines.append('  "GOV": {')
             lines.append(f'    "GATE": "{crystal.gov.gate}",')
             lines.append(f'    "ROUTE": "{crystal.gov.route}",')
             lines.append(f'    "SAFE": "{crystal.gov.safe}",')
             lines.append(f'    "Z3": "{crystal.gov.z3}"')
-            lines.append(f'  }},')
+            lines.append('  },')
 
         # KINETIC block
         if crystal.kinetic:
             agents_str = ", ".join(f'"{a}"' for a in crystal.kinetic.swarm)
-            lines.append(f'  "KINETIC": {{')
+            lines.append('  "KINETIC": {')
             lines.append(f'    "SWARM": [{agents_str}],')
             lines.append(f'    "DOM_IN": "{crystal.kinetic.dom_in}",')
             lines.append(f'    "DOM_OUT": "{crystal.kinetic.dom_out}",')
             lines.append(f'    "NET": "{crystal.kinetic.net}"')
-            lines.append(f'  }},')
+            lines.append('  },')
 
         # MATH block
         if crystal.math:
-            lines.append(f'  "MATH": {{')
+            lines.append('  "MATH": {')
             lines.append(f'    "PACK": "{crystal.math.pack}",')
             lines.append(f'    "DENS": "{crystal.math.dens}",')
             lines.append(f'    "ERR": "{crystal.math.err}"')
-            lines.append(f'  }},')
+            lines.append('  },')
 
         # SYM array
         if crystal.sym:

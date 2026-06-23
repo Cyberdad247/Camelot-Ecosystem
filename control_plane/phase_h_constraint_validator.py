@@ -5,11 +5,9 @@ Validate constraints and integrate user feedback into pattern confidence
 """
 
 import sqlite3
-import json
-from datetime import datetime
-from typing import Dict, List, Optional, Tuple
-from pathlib import Path
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, List, Tuple
 
 
 @dataclass

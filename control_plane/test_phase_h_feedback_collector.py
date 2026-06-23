@@ -4,21 +4,16 @@ Phase H Week 3 Day 1: Feedback Collector Tests
 Test signal collection, validation, storage, and deduplication
 """
 
-import unittest
-import tempfile
 import sqlite3
-from pathlib import Path
-from datetime import datetime, timedelta
-
 import sys
+import tempfile
+import unittest
+from datetime import datetime, timedelta
 from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent))
 
-from phase_h_feedback_collector import (
-    FeedbackCollector,
-    FeedbackValidator,
-    FeedbackSignal
-)
+from phase_h_feedback_collector import FeedbackCollector, FeedbackValidator
 
 
 class TestFeedbackValidator(unittest.TestCase):

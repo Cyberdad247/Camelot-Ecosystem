@@ -5,12 +5,10 @@ Orchestrate continuous autonomous optimization with learning feedback
 """
 
 import sqlite3
-import json
-from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple
-from pathlib import Path
 from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
+from typing import Dict, List, Optional
 
 
 class LoopStatus(Enum):
@@ -204,7 +202,7 @@ class AutonomousOptimizationLoop:
 
             return iteration
 
-        except Exception as e:
+        except Exception:
             iteration.status = LoopStatus.ERROR
             iteration.completed_at = datetime.now().isoformat()
             self._store_iteration(iteration)
@@ -567,7 +565,7 @@ if __name__ == '__main__':
 
     # Get metrics
     metrics = loop.get_loop_metrics()
-    print(f"\nAutonomous Loop Metrics:")
+    print("\nAutonomous Loop Metrics:")
     print(f"  Total Iterations: {metrics.total_iterations}")
     print(f"  Successful: {metrics.successful_executions}")
     print(f"  Rollbacks: {metrics.rollbacks_triggered}")

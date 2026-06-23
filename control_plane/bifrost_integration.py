@@ -15,18 +15,16 @@ Result: CAMELOT-OS optimized and forged for the specific hardware/OS.
 """
 from __future__ import annotations
 
-import asyncio
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, Dict, List
 from pathlib import Path
+from typing import List, Optional
 
 from control_plane.system_analyzer import (
-    SystemProfile,
-    SystemAnalyzer,
     GPUType,
     StorageType,
-    CPUArchitecture,
+    SystemAnalyzer,
+    SystemProfile,
 )
 
 
@@ -368,7 +366,7 @@ class BifrostIntegration:
     async def _forge_distance_travel(self, opt: OptimizationProfile) -> bool:
         """Customize distance travel for system."""
         self.optimization_ledger.append(f"  → Agent pool: {opt.async_workers} workers")
-        self.optimization_ledger.append(f"  → Consensus voting optimized")
+        self.optimization_ledger.append("  → Consensus voting optimized")
         self.optimization_ledger.append(f"  → Memory sync tuned for {opt.storage_type}")
         return True
 

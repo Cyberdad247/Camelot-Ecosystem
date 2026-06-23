@@ -9,7 +9,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_ACTOR = "SIR_BORIS (Codex / GPT-5)"
 ARTIFACT_RELATIVE_PATH = Path("03_VAULT") / "runtime_state" / "codex_integration_latest.json"
 

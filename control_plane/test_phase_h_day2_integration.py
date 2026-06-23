@@ -5,9 +5,10 @@ Verify metrics wiring in orchestrator.py and main.py works correctly
 """
 
 import tempfile
-import unittest
 import time
+import unittest
 from pathlib import Path
+
 
 # Test orchestrator integration
 class TestOrchestratorMetrics(unittest.TestCase):
@@ -139,8 +140,9 @@ class TestPerformanceRegression(unittest.TestCase):
 
     def test_orchestrator_performance(self):
         """Test orchestrator operations stay fast"""
-        from control_plane.orchestrator import Orchestrator
         import tempfile
+
+        from control_plane.orchestrator import Orchestrator
 
         temp_dir = tempfile.TemporaryDirectory()
         try:

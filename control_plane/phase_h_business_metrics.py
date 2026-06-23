@@ -5,11 +5,9 @@ Define and manage SLA/KPI/cost metrics and business weighting
 """
 
 import sqlite3
-import json
-from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple
-from pathlib import Path
 from dataclasses import dataclass
+from datetime import datetime
+from typing import Dict, List, Optional, Tuple
 
 
 @dataclass
@@ -448,7 +446,7 @@ if __name__ == '__main__':
 
     # Get SLA
     read_sla = metrics.get_sla_threshold('read')
-    print(f"\n📋 Read SLA:")
+    print("\n📋 Read SLA:")
     print(f"  p95: {read_sla.p95_latency_ms}ms")
     print(f"  p99: {read_sla.p99_latency_ms}ms")
     print(f"  Availability: {read_sla.availability_pct}%")

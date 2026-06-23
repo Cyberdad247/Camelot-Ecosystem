@@ -5,14 +5,13 @@ Captures latency, throughput, errors from all operations
 Stores in SQLite event log (append-only)
 """
 
-import sqlite3
-import time
 import random
+import sqlite3
 import statistics
+import time
 from dataclasses import dataclass
 from pathlib import Path
-from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, Optional
 
 
 @dataclass
@@ -240,7 +239,7 @@ class MetricsCollector:
             count = cursor.fetchone()[0]
             conn.close()
             return count
-        except Exception as e:
+        except Exception:
             return 0
 
     def export_csv(self, filepath: str, time_window_sec: int = 3600):

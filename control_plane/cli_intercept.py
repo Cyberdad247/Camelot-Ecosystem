@@ -14,19 +14,18 @@ Usage:
 
 from __future__ import annotations
 
+import argparse
+import asyncio
+import hashlib
 import json
 import os
 import re
-import asyncio
-import argparse
-import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .soul_router import SoulRouter, RouteDecision, PRIVACY_KEYWORDS
 from .main import ControlPlane, TaskPayload
-
+from .soul_router import PRIVACY_KEYWORDS, RouteDecision, SoulRouter
 
 CAMELOT_OS = Path(os.environ.get("CAMELOT_OS", Path.home() / "CAMELOT_OS"))
 OMNIROUTE_CONFIG = CAMELOT_OS / "03_VAULT" / "training" / "configs" / "config" / "omniroute.json"

@@ -11,11 +11,9 @@ Comprehensive metrics collection for:
 Integrates with Prometheus for scraping every 15 seconds.
 """
 
-from prometheus_client import (
-    Counter, Histogram, Gauge, Summary, start_http_server
-)
 from typing import Optional
-import time
+
+from prometheus_client import Counter, Gauge, Histogram, Summary, start_http_server
 
 
 class MetricsCollector:

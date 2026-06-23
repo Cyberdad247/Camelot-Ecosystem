@@ -4,15 +4,15 @@ Phase H Week 4 Day 4: Autonomous Loop Tests
 Test continuous autonomous optimization orchestration
 """
 
-import unittest
-import tempfile
-from pathlib import Path
-from datetime import datetime
-
 import sys
+import tempfile
+import unittest
+from datetime import datetime
+from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent))
 
-from phase_h_autonomous_loop import AutonomousOptimizationLoop, LoopIteration, LoopStatus, LoopMetrics
+from phase_h_autonomous_loop import AutonomousOptimizationLoop, LoopIteration, LoopMetrics, LoopStatus
 
 
 class TestAutonomousLoop(unittest.TestCase):

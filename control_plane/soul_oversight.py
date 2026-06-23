@@ -13,11 +13,12 @@ EXCALIBUR_A_QNF Phase 4 adds the three-tier Iron Gate (pre_execute):
 Z3 symbolic verification gates any job that mutates git/state-machines.
 """
 
-from typing import Any, Dict, Optional
-from pathlib import Path
+import json
 import os
 import sys
-import json
+from pathlib import Path
+from typing import Any, Dict, Optional
+
 
 class SoulOversight:
     """The Governance gate for Metacognitive Self-Modification."""

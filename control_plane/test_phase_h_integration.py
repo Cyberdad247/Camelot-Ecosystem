@@ -4,19 +4,19 @@ Phase H Week 3 Day 5: End-to-End Integration Tests
 Test complete flow: signals → metrics → ranking → constraints → decisions
 """
 
-import unittest
-import tempfile
 import sqlite3
-from pathlib import Path
-import time
-
 import sys
+import tempfile
+import time
+import unittest
+from pathlib import Path
+
 sys.path.insert(0, str(Path(__file__).parent))
 
-from phase_h_feedback_collector import FeedbackCollector
 from phase_h_business_metrics import BusinessMetrics
 from phase_h_business_optimizer import BusinessOptimizer
 from phase_h_constraint_validator import ConstraintValidator, FeedbackIntegration
+from phase_h_feedback_collector import FeedbackCollector
 from phase_h_optimizer import OptimizationCandidate
 
 

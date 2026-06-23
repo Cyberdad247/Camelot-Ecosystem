@@ -31,7 +31,7 @@ import signal
 import subprocess
 import sys
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -459,7 +459,7 @@ class SovereignHarness:
                     )
                     _, stderr = await asyncio.wait_for(proc.communicate(), timeout=120)
                     if proc.returncode == 0:
-                        _log(f"[TOON_V2] Delta sync OK (exit=0)")
+                        _log("[TOON_V2] Delta sync OK (exit=0)")
                     else:
                         err = (stderr or b"").decode(errors="replace").strip()[-200:]
                         _log(f"[TOON_V2] Delta sync exit={proc.returncode}: {err}")
@@ -753,7 +753,8 @@ def _log(msg: str) -> None:
 
 def boot_harness(home: Path | None = None) -> tuple[bool, str]:
     """Called by awaken Phase 6. Spawns harness as detached background process."""
-    import subprocess, platform
+    import platform
+    import subprocess
     home = home or CAMELOT_HOME
     script = home / "control_plane" / "harness.py"
     if not script.exists():

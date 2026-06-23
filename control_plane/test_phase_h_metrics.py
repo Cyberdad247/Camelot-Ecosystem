@@ -3,11 +3,12 @@
 Unit tests for Phase H MetricsCollector
 """
 
-import unittest
 import tempfile
 import time
+import unittest
 from pathlib import Path
-from phase_h_metrics import MetricsCollector, OperationRecord
+
+from phase_h_metrics import MetricsCollector
 
 
 class TestMetricsCollector(unittest.TestCase):

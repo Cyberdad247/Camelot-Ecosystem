@@ -21,7 +21,6 @@ import platform
 import shutil
 import subprocess
 import sys
-import urllib.request
 from pathlib import Path
 
 CAMELOT_VERSION = "400.1.0"

@@ -5,12 +5,12 @@ Wires metrics collection and anomaly detection into main system
 Minimal overhead (< 0.1ms per operation)
 """
 
-import time
 import threading
-from pathlib import Path
-from typing import Optional, Dict, Callable
-from .phase_h_metrics import MetricsCollector
+import time
+from typing import Dict, Optional
+
 from .phase_h_anomaly_detector import AnomalyDetector
+from .phase_h_metrics import MetricsCollector
 
 
 class MetricsMiddleware:

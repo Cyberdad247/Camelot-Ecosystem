@@ -25,10 +25,9 @@ Usage:
 from __future__ import annotations
 
 import asyncio
-import json
 import sys
 import time
-from typing import Optional, AsyncIterator
+from typing import AsyncIterator, Optional
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -40,8 +39,8 @@ class DistanceTravel:
     def __init__(self) -> None:
         from control_plane.agent_gateway import get_agent_gateway
         from control_plane.consensus_layer import get_consensus_layer
-        from control_plane.memory_sync import get_memory_syncer
         from control_plane.distributed_memory import get_distributed_memory
+        from control_plane.memory_sync import get_memory_syncer
 
         self.gateway = get_agent_gateway()
         self.consensus = get_consensus_layer()
