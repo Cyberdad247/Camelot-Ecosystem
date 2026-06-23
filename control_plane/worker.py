@@ -946,7 +946,7 @@ def _exec_ollama(task: QueueTask, dry_run: bool, auto_approve: bool = False) -> 
         try:
             req = urllib.request.Request(
                 "http://127.0.0.1:8300/synthesize",
-                data=json.dumps({"text": full}).encode("utf-8"),
+                data=json.dumps({"text": full, "knight_id": task.knight}).encode("utf-8"),
                 headers={"Content-Type": "application/json"},
                 method="POST"
             )
@@ -1065,7 +1065,7 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
         try:
             req = urllib.request.Request(
                 "http://127.0.0.1:8300/synthesize",
-                data=json.dumps({"text": full}).encode("utf-8"),
+                data=json.dumps({"text": full, "knight_id": task.knight}).encode("utf-8"),
                 headers={"Content-Type": "application/json"},
                 method="POST"
             )

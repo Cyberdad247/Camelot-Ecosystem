@@ -1,6 +1,6 @@
 # CAMELOT-OS: Enterprise-Grade Distributed Intelligence System
 
-**Version**: 2.0.0 (Phase G Complete)  
+**Version**: 1.0.0 (Phase G Complete)  
 **Status**: 🟢 Production Ready  
 **Architecture**: Distributed consensus + Knowledge pyramid + Agent network  
 **Deployment**: Bare-metal QR Pill orchestration (Docker-free)

@@ -12,6 +12,7 @@
     "qwen2.5:7b"
   ],
   "free_terminals": [
+    "bifrost_gateway",
     "lady_nanobot",
     "sir_codex",
     "sir_forge",
@@ -27,7 +28,7 @@
     "sir_sonus",
     "sir_zeroclaw"
   ],
-  "timestamp_utc": "2026-06-18T03:37:16.211377+00:00",
+  "timestamp_utc": "2026-06-22T05:53:35.360810+00:00",
   "hermes_terminal": {
     "present": true,
     "engine": "hermes_cli",

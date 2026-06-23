@@ -216,6 +216,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_scan_vectors",
     },
+    "//EVOLVE_AND_FORGE": {
+        "knight": "sir_boris",
+        "description": "GEP-driven shadow forge and evolution cycle",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_evolve_and_forge",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -431,6 +438,14 @@ def _handle_bifrost_lock(param: str, context: dict) -> dict:
 def _handle_scan_vectors(param: str, context: dict) -> dict:
     return {"action": "4_vector_scan", "target": param or "project_root"}
 
+def _handle_evolve_and_forge(param: str, context: dict) -> dict:
+    objective = param or "default objective"
+    return {
+        "action": "evolve_and_forge",
+        "objective": objective,
+        "detail": f"run: python scripts/evolve_and_forge.py --task {shlex.quote(objective)}",
+    }
+
 def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
     """Execute the 6-phase NANO_SWARM_EXPAND protocol via importlib."""
     import importlib.util
@@ -594,6 +609,7 @@ _HANDLERS = {
     "_handle_bifrost_lock": _handle_bifrost_lock,
     "_handle_scan_vectors": _handle_scan_vectors,
     "_handle_nano_swarm_expand": _handle_nano_swarm_expand,
+    "_handle_evolve_and_forge": _handle_evolve_and_forge,
 }
 
 

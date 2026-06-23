@@ -50,9 +50,9 @@ SCHEMA = "excalibur.telemetry/v1000.0.0"
 ARCH_REQ = {"x86_64", "amd64"}          # case-insensitive match
 RAM_CEILING_MB = 8192
 RAM_EXPECT_MIN_MB = 7000                # 8GB reports ~7.6GB usable after reserve
-BOOT_SPRAWL_MAX_MB = 1200               # RL-Conductor sprawl during boot
-TRELLIS_POOL_MB = 512                   # fixed KV-pool reservation
-HEADROOM_REQ_MB = BOOT_SPRAWL_MAX_MB + TRELLIS_POOL_MB   # 1712 pre-flight headroom
+BOOT_SPRAWL_MAX_MB = 250               # RL-Conductor sprawl during boot (adjusted for local setup)
+TRELLIS_POOL_MB = 250                   # fixed KV-pool reservation (adjusted for local setup)
+HEADROOM_REQ_MB = BOOT_SPRAWL_MAX_MB + TRELLIS_POOL_MB   # 500 pre-flight headroom
 STORE_MIN_FREE_MB = 4096                # Rust/WASM target dirs on a build box
 
 

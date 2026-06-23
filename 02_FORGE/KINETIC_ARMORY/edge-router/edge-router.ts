@@ -12,6 +12,7 @@ import * as crypto from "crypto";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
+import * as zlib from "zlib";
 
 const PORT = 3001;
 const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), "CAMELOT_OS");
@@ -31,6 +32,7 @@ interface EdgeMessage {
   id?: string;
   directive?: string;
   payload?: unknown;
+  compress?: boolean;
 }
 
 const clients = new Map<WebSocket, ClientMeta>();
@@ -75,8 +77,24 @@ function mkId(): string {
 
 // ── Server ────────────────────────────────────────────────────────────────────
 
-const wss = new WebSocketServer({ port: PORT });
-console.log(`[EDGE-ROUTER] Kinetic Edge :${PORT} ONLINE`);
+const wss = new WebSocketServer({
+  port: PORT,
+  perMessageDeflate: {
+    zlibDeflateOptions: {
+      chunkSize: 1024,
+      memLevel: 7,
+      level: 3
+    },
+    zlibInflateOptions: {
+      chunkSize: 10 * 1024
+    },
+    clientNoContextTakeover: true,
+    serverNoContextTakeover: true,
+    concurrencyLimit: 10,
+    threshold: 1024
+  }
+});
+console.log(`[EDGE-ROUTER] Kinetic Edge :${PORT} ONLINE (gzip compression enabled)`);
 
 wss.on("connection", (ws: WebSocket, req) => {
   const remoteAddr = req.socket.remoteAddress ?? "";
@@ -89,19 +107,55 @@ wss.on("connection", (ws: WebSocket, req) => {
   clients.set(ws, meta);
   console.log(`[EDGE-ROUTER] CONNECT ${meta.id} ${remoteAddr}`);
 
+  function sendResponse(obj: object, compress: boolean = false): void {
+    const payloadStr = JSON.stringify(obj);
+    if (compress) {
+      zlib.gzip(Buffer.from(payloadStr, "utf8"), (err, compressed) => {
+        if (err) {
+          ws.send(payloadStr);
+        } else {
+          ws.send(compressed, { binary: true });
+        }
+      });
+    } else {
+      ws.send(payloadStr);
+    }
+  }
+
   ws.on("message", (raw) => {
+    let data: Buffer;
+    if (Buffer.isBuffer(raw)) {
+      data = raw;
+    } else if (Array.isArray(raw)) {
+      data = Buffer.concat(raw);
+    } else if (raw instanceof ArrayBuffer) {
+      data = Buffer.from(raw);
+    } else {
+      data = Buffer.from(raw as any);
+    }
+
+    // Check for gzip signature (0x1f 0x8b)
+    if (data.length > 2 && data[0] === 0x1f && data[1] === 0x8b) {
+      try {
+        data = zlib.gunzipSync(data);
+      } catch (e) {
+        sendResponse({ status: "error", reason: `gunzip failed: ${e}` });
+        return;
+      }
+    }
+
     let msg: EdgeMessage;
     try {
-      msg = JSON.parse(raw.toString()) as EdgeMessage;
+      msg = JSON.parse(data.toString("utf8")) as EdgeMessage;
     } catch {
-      ws.send(JSON.stringify({ status: "error", reason: "invalid JSON" }));
+      sendResponse({ status: "error", reason: "invalid JSON" });
       return;
     }
 
     // Gate non-loopback on first message
     if (!meta.authenticated) {
       if (!verifyToken(msg.token ?? "")) {
-        ws.send(JSON.stringify({ status: "denied", reason: "invalid bifrost token" }));
+        sendResponse({ status: "denied", reason: "invalid bifrost token" });
         ws.close(1008, "unauthorized");
         return;
       }
@@ -109,24 +163,25 @@ wss.on("connection", (ws: WebSocket, req) => {
     }
 
     const msgId = msg.id ?? mkId();
+    const shouldCompress = !!msg.compress;
 
     switch (msg.type) {
       case "ping":
-        ws.send(JSON.stringify({ status: "pong", ts: Date.now() }));
+        sendResponse({ status: "pong", ts: Date.now() }, shouldCompress);
         break;
 
       case "status":
-        ws.send(JSON.stringify({
+        sendResponse({
           status: "ok",
           clients: clients.size,
           uptime_s: Math.floor(process.uptime()),
           queue: QUEUE_PATH,
-        }));
+        }, shouldCompress);
         break;
 
       case "forge":
         if (!msg.directive) {
-          ws.send(JSON.stringify({ status: "error", reason: "missing directive" }));
+          sendResponse({ status: "error", reason: "missing directive" }, shouldCompress);
           break;
         }
         enqueue({
@@ -139,7 +194,7 @@ wss.on("connection", (ws: WebSocket, req) => {
           priority: 2,
         });
         console.log(`[EDGE-ROUTER] FORGE queued ${msgId}`);
-        ws.send(JSON.stringify({ status: "queued", id: msgId }));
+        sendResponse({ status: "queued", id: msgId }, shouldCompress);
         break;
 
       case "query":
@@ -151,11 +206,11 @@ wss.on("connection", (ws: WebSocket, req) => {
           queued_at: new Date().toISOString(),
           priority: 3,
         });
-        ws.send(JSON.stringify({ status: "queued", id: msgId }));
+        sendResponse({ status: "queued", id: msgId }, shouldCompress);
         break;
 
       default:
-        ws.send(JSON.stringify({ status: "error", reason: `unknown type: ${(msg as { type: string }).type}` }));
+        sendResponse({ status: "error", reason: `unknown type: ${(msg as { type: string }).type}` }, shouldCompress);
     }
   });
 

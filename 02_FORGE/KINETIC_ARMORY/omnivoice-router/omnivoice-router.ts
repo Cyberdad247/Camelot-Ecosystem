@@ -33,14 +33,16 @@ interface PeerState {
   speechStartMs: number | null;
   silenceStartMs: number | null;
   utteranceBuffer: number[];
+  knight_id?: string;
 }
 
 interface OmniMessage {
-  type: "offer" | "answer" | "candidate" | "data_frame" | "transcript" | "ping";
+  type: "offer" | "answer" | "candidate" | "data_frame" | "transcript" | "ping" | "set_knight";
   sdp?: string;
   candidate?: unknown;
   samples?: number[];
   text?: string;
+  knight_id?: string;
 }
 
 const peers = new Map<WebSocket, PeerState>();
@@ -273,6 +275,7 @@ wss.on("connection", (ws: WebSocket, req) => {
         const text = (msg.text ?? "").trim();
         if (text) {
           const tId = mkId("transcript");
+          const targetKnight = msg.knight_id ?? state.knight_id;
           enqueue({
             id: tId,
             type: "forge",
@@ -280,9 +283,19 @@ wss.on("connection", (ws: WebSocket, req) => {
             source: "omnivoice-router",
             queued_at: new Date().toISOString(),
             priority: 1,
+            knight_id: targetKnight ?? null,
           });
-          console.log(`[OMNIVOICE] TRANSCRIPT queued ${tId}: ${text.slice(0, 60)}`);
-          ws.send(JSON.stringify({ type: "transcript_queued", id: tId }));
+          console.log(`[OMNIVOICE] TRANSCRIPT queued ${tId} (knight_id: ${targetKnight ?? 'default'}): ${text.slice(0, 60)}`);
+          ws.send(JSON.stringify({ type: "transcript_queued", id: tId, knight_id: targetKnight }));
+        }
+        break;
+      }
+
+      case "set_knight": {
+        if (msg.knight_id) {
+          state.knight_id = msg.knight_id;
+          console.log(`[OMNIVOICE] Set active knight for ${state.id} to ${msg.knight_id}`);
+          ws.send(JSON.stringify({ type: "knight_updated", knight_id: msg.knight_id }));
         }
         break;
       }

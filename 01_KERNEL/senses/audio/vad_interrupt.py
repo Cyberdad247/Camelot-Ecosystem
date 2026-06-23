@@ -58,6 +58,7 @@ class VadInterruptController:
         kitten: "KittenService",
         mode: str = "efficiency",
         drain_on_interrupt: bool = True,
+        knight_id: str = "tasha",
     ) -> AsyncGenerator[bytes, None]:
         """Wrap kitten.synthesize_chunked_async() with interrupt support.
 
@@ -68,11 +69,12 @@ class VadInterruptController:
         Args:
             drain_on_interrupt: if True, consume remaining tokens from generator
                                  after interrupt (prevents upstream coroutine hang).
+            knight_id: the active Knight ID for synthesis
         """
         self.reset()
 
         async def _guarded_stream() -> AsyncGenerator[bytes, None]:
-            async for chunk in kitten.synthesize_chunked_async(token_stream, mode=mode):
+            async for chunk in kitten.synthesize_chunked_async(token_stream, mode=mode, knight_id=knight_id):
                 if self._interrupt.is_set():
                     break
                 yield chunk

@@ -22,6 +22,12 @@ try:
 except Exception:
     _KOKORO_PIPELINE = None
 
+# Import Knight Voices registry
+try:
+    from . import knight_voices
+except ImportError:
+    import knight_voices
+
 class KittenService:
     """Standalone high-velocity phonetic synthesis node."""
     
@@ -105,6 +111,7 @@ class KittenService:
         self,
         token_stream: AsyncGenerator[str, None],
         mode: str = "efficiency",
+        knight_id: str = "tasha",
     ) -> AsyncGenerator[bytes, None]:
         """Async Token-to-Audio streaming synthesis with Kokoro TTS support.
 
@@ -121,34 +128,65 @@ class KittenService:
                 if not chunk_text:
                     continue
 
-                chunk_hash = hashlib.sha256(chunk_text.encode()).hexdigest()[:12]
+                chunk_hash = hashlib.sha256(f"{knight_id}:{chunk_text}".encode()).hexdigest()[:12]
                 cached = self.get_cached_chunk(chunk_hash)
                 if cached:
                     yield cached
                     continue
 
                 audio_data = await asyncio.to_thread(
-                    self._synthesize_chunk_sync, chunk_text, chunk_hash
+                    self._synthesize_chunk_sync, chunk_text, chunk_hash, knight_id
                 )
                 yield audio_data
 
         # Flush remainder
         if buffer.strip():
             chunk_text = buffer.strip()
-            chunk_hash = hashlib.sha256(chunk_text.encode()).hexdigest()[:12]
+            chunk_hash = hashlib.sha256(f"{knight_id}:{chunk_text}".encode()).hexdigest()[:12]
             cached = self.get_cached_chunk(chunk_hash)
             if cached:
                 yield cached
             else:
-                yield await asyncio.to_thread(self._synthesize_chunk_sync, chunk_text, chunk_hash)
+                yield await asyncio.to_thread(self._synthesize_chunk_sync, chunk_text, chunk_hash, knight_id)
 
-    def _synthesize_chunk_sync(self, chunk_text: str, chunk_hash: str) -> bytes:
+    def _synthesize_chunk_sync(self, chunk_text: str, chunk_hash: str, knight_id: str = "tasha") -> bytes:
         """Blocking TTS call — run via asyncio.to_thread."""
+        voice = "af_heart"
+        speed = 1.0
+        try:
+            profile = knight_voices.get_profile(knight_id)
+            if profile:
+                # Map knight_id or profile to Kokoro voice name
+                voice_map = {
+                    "anya": "af_bella",
+                    "tasha": "af_heart",
+                    "oracle": "af_sarah",
+                    "dame_sparkle": "af_nicole",
+                    "lady_apis": "af_bella",
+                    "sir_alex": "am_adam",
+                    "sir_boris": "am_michael",
+                    "sir_sentinel": "am_adam",
+                    "sir_forge": "am_michael",
+                    "sir_ghost": "am_adam",
+                    "sir_gideon": "am_michael",
+                    "sir_octavian": "am_adam",
+                    "sir_mnemo": "am_michael",
+                    "merlin": "am_adam",
+                    "merlin_omega": "am_adam",
+                    "king_arthur": "am_adam",
+                    "sir_sonus": "am_michael",
+                }
+                k = knight_id.lower().replace("sir_", "").replace("_omega", "")
+                voice = voice_map.get(knight_id.lower(), voice_map.get(k, "af_heart"))
+                speed = max(0.5, min(2.0, profile.wpm / 150.0))
+        except Exception as e:
+            print(f"[KITTEN] Voice mapping error for {knight_id}: {e}")
+
         if _KOKORO_PIPELINE is not None:
             try:
                 # KPipeline returns (gs, ps, audio_np) tuples; concat all segments
                 import numpy as np  # type: ignore
-                segments = list(_KOKORO_PIPELINE(chunk_text, voice="af_heart"))
+                segments = list(_KOKORO_PIPELINE(chunk_text, voice=voice, speed=speed))
                 if segments:
                     audio_np = np.concatenate([seg[2] for seg in segments])
                     # Convert float32 → int16 PCM bytes
@@ -170,6 +208,7 @@ class KittenService:
         async def handle_synthesize(request: web.Request) -> web.StreamResponse:
             body = await request.json()
             text: str = body.get("text", "")
+            knight_id: str = body.get("knight_id", "tasha")
             if not text:
                 return web.Response(status=400, text="missing text")
 
@@ -188,7 +227,7 @@ class KittenService:
             from vad_interrupt import vad_controller
             vad_controller.reset()
 
-            async for chunk in self.synthesize_chunked_async(_token_stream()):
+            async for chunk in self.synthesize_chunked_async(_token_stream(), knight_id=knight_id):
                 if vad_controller.is_interrupted:
                     print("[KITTEN] Synthesize stream interrupted early")
                     break

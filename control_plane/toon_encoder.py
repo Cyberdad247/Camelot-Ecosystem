@@ -327,3 +327,34 @@ async def decode_from_toon(symbolect_str: str) -> Dict[str, Any]:
     encoder = get_toon_encoder()
     crystal = await encoder.expand_from_symbolect(symbolect_str)
     return await encoder.decode_toon_crystal(crystal)
+
+
+def compute_dict_diff(current: dict, previous: dict) -> dict:
+    """Recursively find differences between two dictionaries."""
+    diff = {}
+    for k, v in current.items():
+        if k not in previous:
+            diff[k] = v
+        elif isinstance(v, dict) and isinstance(previous[k], dict):
+            sub_diff = compute_dict_diff(v, previous[k])
+            if sub_diff:
+                diff[k] = sub_diff
+        elif v != previous[k]:
+            diff[k] = v
+    return diff
+
+
+class TOONv2Diff:
+    """State-differential serializer for TOON_v2_diff."""
+    @staticmethod
+    def serialize_diff(current: dict, previous: dict) -> str:
+        """Create a TOON_v2_diff payload showing only changes from previous state."""
+        diff = compute_dict_diff(current, previous)
+        payload = {
+            "type": "TOON_v2_diff",
+            "diff": diff,
+            "timestamp": datetime.utcnow().isoformat(),
+            "checksum": hashlib.sha256(json.dumps(diff, sort_keys=True).encode()).hexdigest()[:8]
+        }
+        return json.dumps(payload)
+

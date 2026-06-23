@@ -42,8 +42,19 @@ async def bifrost_security_gate(request: Request, call_next):
     if not token and auth_header and auth_header.startswith("Bearer "):
         token = auth_header[7:]
     
+    # Extract client cert from ASGI scope (mTLS)
+    client_cert_der = None
+    tls_info = request.scope.get("extensions", {}).get("tls", {})
+    if tls_info:
+        client_cert_der = tls_info.get("client_cert_der")
+    
     try:
-        bifrost.enforce(remote_addr=request.client.host, presented_token=token)
+        # bifrost.enforce handles loopback, mTLS client certs, OIDC tokens, and tailnet
+        bifrost.enforce(
+            remote_addr=request.client.host,
+            presented_token=token,
+            client_cert_der=client_cert_der
+        )
     except bifrost.AccessDenied as e:
         return JSONResponse(status_code=403, content={"error": "Access Denied", "detail": str(e)})
     except Exception as e:

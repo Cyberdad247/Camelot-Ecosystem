@@ -54,6 +54,8 @@ from .nano_swarm_runtime import (
 from .provenance import ProvenanceManager, VerificationRun
 from .system_triage import TriageOptions, run_system_triage
 
+VERBOSE_TELEMETRY = False
+
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
     if env and Path(env).is_dir():
@@ -726,16 +728,19 @@ async def _run_task(
     raw_intent = intent
     preserve_cartridge_directive = raw_intent.lstrip().upper().startswith("LOAD:")
     if not preserve_cartridge_directive and compiler.pedagogy(intent):
-        _stream_print("Anya [PEDAGOGY]: Intent is ambiguous. Renormalizing...", tone="warn")
+        if VERBOSE_TELEMETRY:
+            _stream_print("Anya [PEDAGOGY]: Intent is ambiguous. Renormalizing...", tone="warn")
 
     if preserve_cartridge_directive:
         titan_prompt, confidence = raw_intent, 1.0
     else:
         titan_prompt, confidence = compiler.compile(intent)
-    _stream_print(f"Anya [COMPILE]: {titan_prompt} | ⚡ Confidence: {confidence*100:.0f}%", tone="dim")
+    if VERBOSE_TELEMETRY:
+        _stream_print(f"Anya [COMPILE]: {titan_prompt} | ⚡ Confidence: {confidence*100:.0f}%", tone="dim")
 
     if confidence < 0.5:
-        _stream_print("Anya [PEDAGOGY]: Intent clarity is low. Scaling to 1M token context for verification.", tone="warn")
+        if VERBOSE_TELEMETRY:
+            _stream_print("Anya [PEDAGOGY]: Intent clarity is low. Scaling to 1M token context for verification.", tone="warn")
 
     # Preserve explicit cartridge directives; otherwise use renormalized intent for routing logic.
     intent = raw_intent if preserve_cartridge_directive else compiler.renormalize(intent)
@@ -1145,8 +1150,14 @@ def _stream_sarda_progress(
 
 
 def _interactive_shell(
-    json_mode: bool = False, provider: str | None = None, llm: str | None = None
+    json_mode: bool = False,
+    provider: str | None = None,
+    llm: str | None = None,
+    verbose: bool = False,
 ) -> int:
+    global VERBOSE_TELEMETRY
+    VERBOSE_TELEMETRY = verbose
+
     banner = [
         "Camelot-OS",
         "Prompt-first interface for routing, cloudbrain, and SARDA workflows.",
@@ -1164,6 +1175,14 @@ def _interactive_shell(
     current_knight = os.getenv("CAMELOT_ACTIVE_KNIGHT", "sir_codex")
     last_route: dict[str, Any] | None = None
 
+    # Initialize stateful conversation history
+    conversation_history = [
+        {
+            "role": "system",
+            "content": "You are the Camelot-OS Knight session conversational partner. Be concise, direct, and help the user execute commands and explore the repository. Format code blocks with language hints."
+        }
+    ]
+
     while True:
         try:
             raw = input(_color(_prompt_text(current_knight, current_provider, current_llm), "accent")).strip()
@@ -1174,6 +1193,20 @@ def _interactive_shell(
             return 0
 
         if not raw:
+            continue
+        if raw == "/clear":
+            conversation_history = [conversation_history[0]]
+            if not json_mode:
+                _stream_print("Conversation history cleared.", tone="ok")
+            continue
+        if raw == "/history":
+            if not json_mode:
+                _stream_print(f"Conversation History: {len(conversation_history) - 1} turns", tone="info")
+                for msg in conversation_history[1:]:
+                    role = msg["role"].upper()
+                    _stream_print(f"[{role}]: {msg['content']}", tone="dim" if role == "SYSTEM" else "normal")
+            else:
+                _print_json(conversation_history)
             continue
         if raw in {"/exit", "exit", "quit"}:
             return 0
@@ -1447,7 +1480,10 @@ def _interactive_shell(
                 _emit(output, json_mode=json_mode, title="Ledger Status")
                 continue
 
-            # Omni-Routing Intercept
+            # Conversational Stateful Mode
+            conversation_history.append({"role": "user", "content": raw})
+            
+            # Omni-Routing Intercept for Knight detection
             intercept = CLIIntercept()
             result = intercept.intercept(raw)
             current_knight = result.route.knight_id
@@ -1460,12 +1496,40 @@ def _interactive_shell(
                 "reason": result.route.reason,
             }
             
-            if not json_mode:
-                _stream_print(intercept.format_route_log(result), tone="info")
-                _stream_task_progress(raw)
+            chat_dir = CAMELOT_HOME / "03_VAULT" / "training" / "configs"
+            if str(chat_dir) not in sys.path:
+                sys.path.insert(0, str(chat_dir))
+            
+            try:
+                import llm_router
+                if not json_mode:
+                    if VERBOSE_TELEMETRY:
+                        _stream_print(intercept.format_route_log(result), tone="info")
+                    _stream_print(f"[{result.route.knight_id.upper()}] thinking...", tone="accent")
                 
-            output = asyncio.run(_run_task(raw))
-            _emit(output, json_mode=json_mode, title=f"Camelot-OS | {result.route.knight_id}")
+                # Default fallback model mapping
+                target_provider = current_provider or "cliproxy"
+                target_llm = current_llm or result.model
+                
+                res = llm_router.chat(
+                    messages=conversation_history,
+                    provider=target_provider,
+                    model=target_llm,
+                )
+                
+                if res.get("error"):
+                    _stream_print(f"error: {res['error']}", tone="err")
+                    conversation_history.pop()  # drop user turn on error
+                else:
+                    content = res.get("content", "")
+                    conversation_history.append({"role": "assistant", "content": content})
+                    if json_mode:
+                        _print_json(res)
+                    else:
+                        _stream_print(content, tone="normal")
+            except Exception as e:
+                _stream_print(f"error: failed to execute chat completion: {e}", tone="err")
+                conversation_history.pop()
         except Exception as exc:
             if json_mode:
                 _print_json({"success": False, "error": str(exc)})
@@ -1487,6 +1551,7 @@ def _build_parser() -> argparse.ArgumentParser:
     chat_parser.add_argument("--json", action="store_true", help="Emit JSON output")
     chat_parser.add_argument("--provider", help="Pin provider for session")
     chat_parser.add_argument("--llm", "--model", dest="llm", help="Pin model for session")
+    chat_parser.add_argument("--verbose", "-v", action="store_true", help="Show full telemetry routing output")
 
     route_parser = sub.add_parser("route", help="Show routing decision for an intent")
     route_parser.add_argument("intent", nargs="+")
@@ -1900,7 +1965,10 @@ def main() -> int:
     argv = sys.argv[1:]
     for index, part in enumerate(argv):
         if not part.startswith("-"):
-            if part.lower() == "glyth":
+            lowered = part.lower()
+            if lowered in known_commands:
+                argv[index] = lowered
+            elif lowered == "glyth":
                 argv[index] = "glyph"
             break
 
@@ -1977,7 +2045,12 @@ def main() -> int:
                 results.setdefault("cloudbrain_sync", event)
 
     if args.command == "chat":
-        return _interactive_shell(json_mode=args.json, provider=args.provider, llm=args.llm)
+        return _interactive_shell(
+            json_mode=args.json,
+            provider=args.provider,
+            llm=args.llm,
+            verbose=args.verbose,
+        )
 
     if args.command == "route":
         intercept = CLIIntercept()

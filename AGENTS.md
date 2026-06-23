@@ -267,6 +267,8 @@ dispatch directly to the runic router.
 | `//PLAN <task>` | SIR_ALEX | Enter AST Plan Mode + Task DAG |
 | `//HEAL` | SIR_DEBUG | PIV self-healing loop on last error |
 | `//STATUS` | SIR_SENTINEL | Live service status + port probes |
+| `//EVOLVE_AND_FORGE <task>` | SIR_BORIS | GEP-driven shadow forge and evolution cycle |
+| `//CYBERTRON_ASCENSION_THINK_TANK` | SIR_BORIS | 3-phase autonomous Cybertron v1000 directory audit and think-tank debate |
 
 ### Omega Dispatch
 
