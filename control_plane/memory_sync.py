@@ -34,22 +34,24 @@ class MemorySyncer:
 
     def _init_clients(self) -> None:
         """Initialize Qdrant and Redis clients."""
+        import os
         try:
             from qdrant_client import QdrantClient
 
-            self.qdrant_client = QdrantClient("http://127.0.0.1:6333")
-            print("[SYNC] Connected to Qdrant", file=sys.stderr)
+            qdrant_url = os.environ.get("QDRANT_URL", "http://127.0.0.1:6333")
+            qdrant_key = os.environ.get("QDRANT_API_KEY")
+            self.qdrant_client = QdrantClient(qdrant_url, api_key=qdrant_key)
+            print(f"[SYNC] Connected to Qdrant @ {qdrant_url}", file=sys.stderr)
         except Exception as e:
             print(f"[SYNC] Qdrant init failed: {e}", file=sys.stderr)
 
         try:
             import redis
 
-            self.redis_client = redis.Redis(
-                host="localhost", port=6379, decode_responses=True
-            )
+            redis_url = os.environ.get("REDIS_URL", "redis://localhost:6379")
+            self.redis_client = redis.from_url(redis_url, decode_responses=True)
             self.redis_client.ping()
-            print("[SYNC] Connected to Redis", file=sys.stderr)
+            print(f"[SYNC] Connected to Redis", file=sys.stderr)
         except Exception as e:
             print(f"[SYNC] Redis init failed: {e}", file=sys.stderr)
 

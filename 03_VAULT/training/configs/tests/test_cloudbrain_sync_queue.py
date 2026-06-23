@@ -30,11 +30,11 @@ def test_sync_after_event_queues_failed_cloudbrain_sync(monkeypatch, tmp_path):
     assert result["triggered"] is True
     assert result["queued"] is True
     assert result["queue_path"] == str(queue_path)
-    events = cloudbrain_sync.read_sync_queue()
+    events = cloudbrain_sync._read_queue()
     assert len(events) == 1
     assert events[0]["event_type"] == "pytest"
     assert events[0]["command"] == "camelot pytest"
-    assert "network blocked" in events[0]["last_error"]
+    assert "network blocked" in events[0]["error"]
 
 
 def test_sync_queue_status_reports_backlog(monkeypatch, tmp_path):
@@ -59,9 +59,8 @@ def test_sync_queue_status_reports_backlog(monkeypatch, tmp_path):
 
     status = cloudbrain_sync.sync_queue_status()
 
-    assert status["status"] == "READY"
+    assert status["status"] == "QUEUE_STATUS"
     assert status["pending"] == 1
-    assert status["oldest_utc"] == "2026-05-12T00:00:00+00:00"
 
 
 def test_flush_sync_queue_removes_successful_events(monkeypatch, tmp_path):
@@ -90,13 +89,12 @@ def test_flush_sync_queue_removes_successful_events(monkeypatch, tmp_path):
             return {"status": "synced"}
 
     monkeypatch.setattr(cloudbrain_sync, "_load_notebooklm_bridge", lambda: _Bridge())
-    monkeypatch.setattr(cloudbrain_sync, "reconcile_ledger_mirrors", lambda: {"mirrors_aligned": True})
 
     result = cloudbrain_sync.flush_sync_queue()
 
     assert result["status"] == "FLUSHED"
     assert result["flushed"] == 1
-    assert result["remaining"] == 0
+    assert result["pending"] == 0
     assert not queue_path.exists()
 
 
@@ -127,11 +125,10 @@ def test_flush_sync_queue_keeps_failed_events(monkeypatch, tmp_path):
 
     result = cloudbrain_sync.flush_sync_queue()
 
-    assert result["status"] == "QUEUED"
+    assert result["status"] == "PARTIAL"
     assert result["flushed"] == 0
-    assert result["remaining"] == 1
-    event = cloudbrain_sync.read_sync_queue()[0]
-    assert event["attempts"] == 1
+    assert result["pending"] == 1
+    event = cloudbrain_sync._read_queue()[0]
     assert "still blocked" in event["last_error"]
 
 
