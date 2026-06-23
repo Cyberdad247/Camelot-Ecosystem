@@ -1,0 +1,45 @@
+# Pre-commit hooks for CAMELOT-OS
+#
+# Install the framework once per developer:
+#     pip install pre-commit
+#     pre-commit install
+#
+# Run all hooks on the entire repo:
+#     pre-commit run --all-files
+#
+# Run only this hook:
+#     pre-commit run infra-purge-rollback-verify
+#
+# The infra-purge-rollback-verify hook enforces the verification contract
+# declared in docs/plans/IMPLEMENTATION_INFRA_PURGE.md, Section 6.1.
+# It refuses any commit that touches purge-affected paths unless:
+#   * the rollback files exist on disk,
+#   * the rollback files are git-tracked (not just working-tree-only),
+#   * the unreachable-blob reachability check passes advisably,
+#   * a clean PASS message is printed on success.
+
+repos:
+  - repo: local
+    hooks:
+      - id: infra-purge-rollback-verify
+        name: Verify infra_purge rollback contract (Redis/Qdrant removal)
+        description: >-
+          Enforces docs/plans/IMPLEMENTATION_INFRA_PURGE.md Section 6.1.
+          Block any commit touching purge-affected paths unless the rollback
+          safety net is intact (local backup files exist on disk, are
+          git-tracked, and are recoverable against a future 'git gc').
+          Delegates to scripts/check_infra_purge_rollback.sh.
+        entry: scripts/check_infra_purge_rollback.sh
+        language: system
+        pass_filenames: false
+        files: |
+          (?x)^(
+              99_ARCHIVE/infra_purge_backup/.*\.py
+            | 01_KERNEL/memory/(redis_store|qdrant_store|local_store|local_sovereign_store|agent_memory)\.py
+            | 01_KERNEL/merlin/(merlin_omega|rag/chronos_haystack)\.py
+            | 01_KERNEL/config/registry/chimera_unified_kernel\.json
+            | control_plane/boot_sequence\.py
+            | bin/awaken\.py
+            | (requirements\.txt|pyproject\.toml)
+            | docs/plans/IMPLEMENTATION_INFRA_PURGE\.md
+          )$

@@ -43,6 +43,11 @@ jobs:
           "
         shell: bash
 
+      - name: Enforce pre-commit / dorny paths-filter parity
+        run: |
+          python -m pip install --quiet pyyaml
+          python scripts/check_filter_parity.py
+
   # ── Stage 2: Lint & Type Check ──────────────────────────────────
   lint:
     name: Lint & Format
@@ -302,3 +307,64 @@ jobs:
           python .camelot/camelot.py memory status
         env:
           CAMELOT_OS_ROOT: ${{ github.workspace }}
+
+  # ── Stage 8: Infra-Purge Rollback Verification ──────────────────
+  # Server-side mirror of the local pre-commit hook
+  # `infra-purge-rollback-verify` declared in `.pre-commit-config.yaml`.
+  # Paths mirror the `files:` regex in `.pre-commit-config.yaml` one-for-one
+  # (Option-b alignment, 2026-06-22). Translation rules from the regex:
+  #   - Python regex `99_ARCHIVE/infra_purge_backup/.*\.py`
+  #     -> dorny recursive glob `99_ARCHIVE/infra_purge_backup/**/*.py`
+  #   - Python regex `01_KERNEL/memory/(...|...)\.py`
+  #     -> one dorny line per matched filename (dorny lacks OR-alternation)
+  # Sync assumption: future changes to either the pre-commit regex below
+  # OR this dorny filter MUST update the other in lock-step within the
+  # same PR; break this only by rewriting both filters together.
+  infra-purge-rollback:
+    name: Infra-Purge Rollback Verification
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history required: Check 3 of check_infra_purge_rollback.sh
+          # runs `git fsck --unreachable --no-reflogs`, which is meaningless
+          # against a depth-1 (shallow) clone.
+          fetch-depth: 0
+
+      - name: Detect changes to purge-affected paths
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            infra-purge:
+              # Strict 1:1 mirror of .pre-commit-config.yaml hook
+              # `infra-purge-rollback-verify` `files:` regex.
+              - '99_ARCHIVE/infra_purge_backup/**/*.py'
+              - '01_KERNEL/memory/redis_store.py'
+              - '01_KERNEL/memory/qdrant_store.py'
+              - '01_KERNEL/memory/local_store.py'
+              - '01_KERNEL/memory/local_sovereign_store.py'
+              - '01_KERNEL/memory/agent_memory.py'
+              - '01_KERNEL/merlin/merlin_omega.py'
+              - '01_KERNEL/merlin/rag/chronos_haystack.py'
+              - '01_KERNEL/config/registry/chimera_unified_kernel.json'
+              - 'control_plane/boot_sequence.py'
+              - 'bin/awaken.py'
+              - 'requirements.txt'
+              - 'pyproject.toml'
+              - 'docs/plans/IMPLEMENTATION_INFRA_PURGE.md'
+
+      - name: Run rollback contract check
+        if: steps.filter.outputs.infra-purge == 'true'
+        run: |
+          chmod +x scripts/check_infra_purge_rollback.sh
+          bash scripts/check_infra_purge_rollback.sh
+
+      - name: Skipped (no purge-affected paths changed)
+        if: steps.filter.outputs.infra-purge != 'true'
+        run: |
+          echo "::notice::No infra-purge-affected paths changed in this PR."
+          echo "Skipping rollback verification gate (matches local pre-commit hook)."
+          echo "Filter source of truth: .pre-commit-config.yaml hook 'infra-purge-rollback-verify'."
