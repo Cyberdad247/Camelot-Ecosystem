@@ -7,7 +7,7 @@ on:
     branches: [main, master]
 
 env:
-  PYTHON_VERSION: "3.11"
+  PYTHON_VERSION: "3.13"
   PYTHONIOENCODING: utf-8
 
 jobs:
@@ -368,3 +368,17 @@ jobs:
           echo "::notice::No infra-purge-affected paths changed in this PR."
           echo "Skipping rollback verification gate (matches local pre-commit hook)."
           echo "Filter source of truth: .pre-commit-config.yaml hook 'infra-purge-rollback-verify'."
+
+  # ── Stage 9: Excalibur Pre-flight Adjudication ──────────────────
+  excalibur-preflight:
+    name: Excalibur Pre-flight Adjudication
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run pre-flight check
+        run: |
+          cd 02_FORGE/excalibur-dev
+          chmod +x core/excalibur_audit.sh core/excalibur_adjudicate.sh
+          make preflight
+        continue-on-error: true

@@ -7,11 +7,22 @@ from .pii import redact, scan, dispatch_integrated_route
 CORE = os.path.join(os.path.dirname(__file__), "..", "..", "core")
 
 def _preflight(_a) -> int:
-    root = os.environ.get("EXCALIBUR_ROOT", os.path.dirname(os.path.abspath(CORE)))
+    root = os.environ.get("EXCALIBUR_ROOT")
+    if not root:
+        root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+    
+    # Ensure forward slashes to prevent escape character stripping when running under bash
+    root = root.replace("\\", "/")
+    core_dir = f"{root}/core"
     env = {**os.environ, "EXCALIBUR_ROOT": root}
-    subprocess.run(["bash", os.path.join(CORE, "excalibur_audit.sh")],
+    
+    # Use relative paths to remain compatible with both WSL (/mnt/c) and Git Bash (/c)
+    audit_script = os.path.relpath(f"{core_dir}/excalibur_audit.sh").replace("\\", "/")
+    adjudicate_script = os.path.relpath(f"{core_dir}/excalibur_adjudicate.sh").replace("\\", "/")
+    
+    subprocess.run(["bash", audit_script],
                    env=env, stdout=subprocess.DEVNULL)
-    return subprocess.run(["bash", os.path.join(CORE, "excalibur_adjudicate.sh")], env=env).returncode
+    return subprocess.run(["bash", adjudicate_script], env=env).returncode
 
 def _redact(a) -> int:
     print(redact(sys.stdin.read() if a.text == "-" else a.text)); return 0
