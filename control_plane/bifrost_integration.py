@@ -16,7 +16,7 @@ Result: CAMELOT-OS optimized and forged for the specific hardware/OS.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 
@@ -31,7 +31,7 @@ from control_plane.system_analyzer import (
 @dataclass
 class OptimizationProfile:
     """Optimization configuration for this system."""
-    timestamp: datetime = field(default_factory=datetime.utcnow)
+    timestamp: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
     system_profile: Optional[SystemProfile] = None
 
     # CPU optimizations
@@ -307,32 +307,32 @@ class BifrostIntegration:
             # Step 1: Customize main.py
             forge_steps.append("Forging main.py...")
             await self._forge_main_py(opt)
-            self.optimization_ledger.append("✓ Forged: main.py")
+            self.optimization_ledger.append("↪ planned (no-op): main.py")
 
             # Step 2: Customize bifrost.py
             forge_steps.append("Forging bifrost.py...")
             await self._forge_bifrost_py(opt)
-            self.optimization_ledger.append("✓ Forged: bifrost.py")
+            self.optimization_ledger.append("↪ planned (no-op): bifrost.py")
 
             # Step 3: Customize knight_knowledgebase.py
             forge_steps.append("Forging knight_knowledgebase.py...")
             await self._forge_knight_brain(opt)
-            self.optimization_ledger.append("✓ Forged: knight_knowledgebase.py")
+            self.optimization_ledger.append("↪ planned (no-op): knight_knowledgebase.py")
 
             # Step 4: Customize memory pyramid
             forge_steps.append("Forging memory pyramid...")
             await self._forge_memory_pyramid(opt)
-            self.optimization_ledger.append("✓ Forged: memory pyramid")
+            self.optimization_ledger.append("↪ planned (no-op): memory pyramid")
 
             # Step 5: Customize distance travel
             forge_steps.append("Forging distance travel...")
             await self._forge_distance_travel(opt)
-            self.optimization_ledger.append("✓ Forged: distance travel")
+            self.optimization_ledger.append("↪ planned (no-op): distance travel")
 
             # Step 6: Generate system-specific startup scripts
             forge_steps.append("Generating startup scripts...")
             await self._forge_startup_scripts(opt)
-            self.optimization_ledger.append("✓ Forged: startup scripts")
+            self.optimization_ledger.append("✓ Generated: startup scripts")
 
             return True
         except Exception as e:
@@ -412,7 +412,7 @@ python -m control_plane.main \\
         """Log integration to ledger."""
         ledger_path = Path("BIFROST_INTEGRATION_LEDGER.md")
 
-        timestamp = datetime.utcnow().isoformat()
+        timestamp = datetime.now(timezone.utc).isoformat()
         entry = f"""
 ## QR Pill Integration: {pill_id}
 **Timestamp**: {timestamp}
