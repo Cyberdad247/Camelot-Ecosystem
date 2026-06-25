@@ -308,7 +308,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
                     "No deprecated packages (e.g., pycrypto -> cryptography)",
                     "httpx, pydantic, cryptography at latest stable",
                 ],
-                "commands": ["pip audit"],
+                "commands": ["python -m pip_audit"],
             },
             {
                 "name": "Rust Dependencies",

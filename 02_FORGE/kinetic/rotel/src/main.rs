@@ -6,7 +6,7 @@ use std::fs::OpenOptions;
 use std::io::Write;
 use std::path::PathBuf;
 use uuid::Uuid;
-use chrono::{DateTime, Local, Utc};
+use chrono::{Local, Utc};
 use anyhow::{Context, Result};
 
 #[derive(Parser)]
