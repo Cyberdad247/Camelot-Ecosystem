@@ -1326,3 +1326,12 @@
   - `Remote build 52s, bundle matched local (/ at 92kB < 150kB budget)`
   - `OPEN: Bifrost gateway not hosted (HUD shows Disconnected, baseline state by design); set NEXT_PUBLIC_BIFROST_URL when deployed. Redeploys manual via vercel CLI (git integration not wired).`
 - **Tag**: [KICKBOX_LIVE]
+---
+## [2026-06-25] Security vulnerability mitigation and dependency updates
+- **Actor**: SIR_CODEX (Codex / Antigravity)
+- **Scope**:
+  - .venv (Python libraries)
+  - library_audit_report.md
+- **Verification performed**:
+  - `pip-audit confirms 48 of 51 vulnerabilities resolved across 12 packages; 3 packages remain as zero-day`
+- **Tag**: [SECURITY_AUDIT_UPGRADE]
