@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = [
+    "01_KERNEL/core/aegis_shield",
+    "01_KERNEL/reasoning/ouroboros_engine",
+    "01_KERNEL/senses/morgana_bridge",
+    "01_KERNEL/EXCALIBUR/kernel_api_bridge",
+    "02_FORGE/kinetic/cribo",
+    "02_FORGE/kinetic/rotel",
+    "04_KINETIC/squires_rs",
+    "control_plane/runners/rust",
+    "kinetic_edge/pqcrypto",
+    "kinetic_edge/swarm_spawner"
+]
