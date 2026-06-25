@@ -1285,3 +1285,44 @@
 | 2026-06-24T00:33:56.874905+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'test_l2_burst' to Cloud Brain] | HYDRATED |
 | 2026-06-24T00:33:56.875276+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: test_l2_burst] | HYDRATED |
 | 2026-06-24T00:33:56.879649+00:00 | HYDRATION_MGR | HYDRATE [Intent: test_l2_burst, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+---
+## [2026-06-25] KICKBOX_AUDIO Sovereign PWA — Overview gild + Lakisha voice HUD
+- **Actor**: SIR_BORIS (Claude Opus 4.8)
+- **Scope**:
+  - Kickbox-audio/apps/pwa/src/components/Dashboard.tsx (Navigation Spire)
+  - Kickbox-audio/apps/pwa/src/components/tabs/OverviewTab.tsx (royal-gold hero + KPI sparklines)
+  - Kickbox-audio/apps/pwa/src/components/LakishaHUD.tsx (Web Speech API voice + violet pulse)
+  - Kickbox-audio/apps/pwa/src/components/Sparkline.tsx + app/layout.tsx (next/font) + tailwind.config.js
+  - Kickbox-audio/vercel.json (fixed outputDirectory deploy-blocker)
+- **Verification performed**:
+  - `tsc --noEmit clean (0 errors)`
+  - `next build 4/4 pages, / at 92kB First Load JS`
+  - `git push origin feat/sovereign-gild (commit ea2a38d) -> Vercel preview auto-build`
+- **Tag**: [KICKBOX_SOVEREIGN_GILD]
+---
+## [2026-06-25] KICKBOX_AUDIO Sovereign PWA — PRODUCTION CUT (PR #8 merged to main)
+- **Actor**: SIR_BORIS (Claude Opus 4.8)
+- **Scope**:
+  - Cyberdad247/Kickbox-audio @ main (squash commit 9204063)
+  - PWA: installable manifest+icon, prod metadata (themeColor/OG/robots noindex), gilded Overview + Lakisha voice HUD
+  - Bifrost: WS maxPayload 16KB + json 64KB hardening
+  - Iron Gate executable: server.test.ts (WS Test B) + test:vault/bifrost/voice scripts
+- **Verification performed**:
+  - `biome clean 45 files; 14/14 vitest; typecheck 4/4; build 3/3; / at 92kB (<150kB budget)`
+  - `GitHub Actions CI 'verify' PASSED on PR #8`
+  - `PR #8 squash-merged to main 2026-06-25T20:29Z`
+  - `PENDING: Vercel project not yet linked — live deploy gated on interactive vercel link/login (Root Directory apps/pwa)`
+- **Tag**: [KICKBOX_PROD_CUT]
+---
+## [2026-06-25] KICKBOX_AUDIO Sovereign PWA — LIVE IN PRODUCTION on Vercel
+- **Actor**: SIR_BORIS (Claude Opus 4.8)
+- **Scope**:
+  - Live URL: https://kickbox-audio.vercel.app (alias)
+  - Deployment: https://kickbox-audio-iq6f1gy1k-invisionedmarketing.vercel.app (dpl_A8eJ1SVGmrgqTHa2pptZ2Lc4dX3y, target=production, READY)
+  - Vercel project kickbox-audio (prj_VhkLdfphdOiRMrh3HrFGxx33YVfA) on team invisionedmarketing, root apps/pwa
+  - Supersedes [KICKBOX_PROD_CUT] PENDING-deploy note — now LIVE
+- **Verification performed**:
+  - `Live HTTP 200: / (92kB), /manifest.webmanifest (installable PWA), /icon.svg`
+  - `Remote build 52s, bundle matched local (/ at 92kB < 150kB budget)`
+  - `OPEN: Bifrost gateway not hosted (HUD shows Disconnected, baseline state by design); set NEXT_PUBLIC_BIFROST_URL when deployed. Redeploys manual via vercel CLI (git integration not wired).`
+- **Tag**: [KICKBOX_LIVE]
