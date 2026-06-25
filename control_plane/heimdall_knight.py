@@ -22,7 +22,7 @@ from pydantic_ai import Agent, RunContext
 sys.path.append(str(Path(__file__).resolve().parent))
 
 try:
-    from .knight_agent import KnightCapability, get_capability
+    from .knight_agent import KnightCapability, get_capability  # noqa: F401
 except ImportError:
     pass
 

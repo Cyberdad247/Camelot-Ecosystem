@@ -100,7 +100,7 @@ class TestLoadPerformance(unittest.TestCase):
 
         start = time.time()
 
-        for i in range(50):
+        for _i in range(50):
             self.tracker.validate_execution_result(1, actual_state)
 
         elapsed = time.time() - start
@@ -115,7 +115,7 @@ class TestLoadPerformance(unittest.TestCase):
 
         start = time.time()
 
-        for i in range(20):
+        for _i in range(20):
             self.rollback.execute_rollback(1, "Test rollback")
 
         elapsed = time.time() - start
@@ -193,7 +193,7 @@ class TestLoadPerformance(unittest.TestCase):
         start = time.time()
 
         # Execute
-        exec_result = self.executor.execute_candidate(
+        _exec_result = self.executor.execute_candidate(
             candidate_id=1,
             candidate_name='Test',
             state_before=self.state_before
@@ -204,7 +204,7 @@ class TestLoadPerformance(unittest.TestCase):
 
         # Rollback (if needed)
         if not val_result.validation_success:
-            rb_result = self.rollback.execute_rollback(1, "Test")
+            _rb_result = self.rollback.execute_rollback(1, "Test")
 
         elapsed = time.time() - start
 

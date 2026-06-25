@@ -65,7 +65,7 @@ async def handle_event(event: ClawEvent, authorization: str = Header(None)):
     
     if event.type == "message_received":
         content = event.payload.get("content", "")
-        sender = event.payload.get("from", "unknown")
+        _sender = event.payload.get("from", "unknown")
         
         if content:
             # Trigger Omni-Routing for the incoming message

@@ -146,7 +146,6 @@ class QRPillTestSuite:
         """Test bootstrap task execution."""
         try:
             from control_plane.qr_pill import get_qr_pill
-            from pathlib import Path
 
             pill = get_qr_pill("test_bootstrap")
 
@@ -302,7 +301,6 @@ class QRPillTestSuite:
                 get_sovereign_commander,
                 ApprovalRequest,
                 OperationType,
-                ApprovalLevel,
             )
 
             commander = get_sovereign_commander()

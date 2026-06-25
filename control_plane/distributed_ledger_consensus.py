@@ -300,7 +300,7 @@ class DistributedConsensus:
 
         while time.time() - start < timeout:
             # Check if any entry has been decided
-            for seq, state in self.log.items():
+            for _seq, state in self.log.items():
                 if state.phase == ConsensusPhase.DECIDED:
                     if entry_id is None or state.entry_id == entry_id:
                         return state.decided_value

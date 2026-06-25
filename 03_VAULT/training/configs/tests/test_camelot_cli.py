@@ -2,7 +2,6 @@
 import os
 import sys
 import subprocess
-import pytest
 
 CAMELOT_PY = os.path.join(os.path.dirname(__file__), "..", "camelot.py")
 

@@ -225,9 +225,11 @@ def adjudicate(telemetry: dict[str, Any]) -> dict[str, Any]:
     if str(cpu["arch"]).lower() not in ARCH_REQ:
         violations.append(f"CPU arch '{cpu['arch']}' not in required {sorted(ARCH_REQ)}")
     if not tools["rustc"]["present"]:
-        violations.append("missing toolchain: rustc"); missing.append("rustc")
+        violations.append("missing toolchain: rustc")
+        missing.append("rustc")
     if not tools["cargo"]["present"]:
-        violations.append("missing toolchain: cargo"); missing.append("cargo")
+        violations.append("missing toolchain: cargo")
+        missing.append("cargo")
     if not tools["sandbox"]["present"]:
         violations.append("missing sandbox primitive (need WSL | Docker | Windows Sandbox)")
         missing.append("wsl|docker|windows-sandbox")

@@ -1,12 +1,9 @@
-import os
 import sys
 
 # Add root to sys.path so we can import 01_KERNEL
 sys.path.insert(0, r"C:\Users\vizio\CAMELOT_OS")
 
-from typing import Dict, Any
 import json
-from pathlib import Path
 
 try:
     from notebooklmpy import NotebookLM

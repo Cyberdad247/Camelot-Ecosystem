@@ -233,12 +233,12 @@ def _queue_depth() -> tuple[int, int]:
     if not QUEUE_FILE.exists():
         return 0, 0
     try:
-        lines = [l for l in QUEUE_FILE.read_text(encoding="utf-8").splitlines() if l.strip()]
+        lines = [line for line in QUEUE_FILE.read_text(encoding="utf-8").splitlines() if line.strip()]
     except Exception:
         return 0, 0
     pending = sum(
-        1 for l in lines
-        if (lambda d: d.get("id", "") not in done)(json.loads(l) if l else {})
+        1 for line in lines
+        if (lambda d: d.get("id", "") not in done)(json.loads(line) if line else {})
     )
     return len(lines), pending
 
@@ -299,13 +299,13 @@ def _apply_output(task_id: str, response: str, auto_approve: bool) -> list[str]:
         _log("[APPLY] No fenced code blocks in response")
         return []
 
-    named = [(l, f, c) for l, f, c in blocks if f]
+    named = [(lang, fname, code) for lang, fname, code in blocks if fname]
     if not named:
         _log(f"[APPLY] {len(blocks)} block(s) found — none have filename hints (```lang:path)")
         return []
 
     written: list[str] = []
-    for lang, filename, code in named:
+    for _lang, filename, code in named:
         target = (HOME / filename).resolve()
         try:
             target.relative_to(HOME)
@@ -941,7 +941,6 @@ def _exec_ollama(task: QueueTask, dry_run: bool, auto_approve: bool = False) -> 
 
     if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
         _log("[VOX] Intercepting cognitive response for TTS synthesis...")
-        import json
         import urllib.error
         import urllib.request
         try:
@@ -1060,7 +1059,6 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
 
     if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
         _log("[VOX] Intercepting cognitive response for TTS synthesis...")
-        import json
         import urllib.error
         import urllib.request
         try:

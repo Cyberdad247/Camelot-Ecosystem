@@ -13,7 +13,6 @@ load_dotenv()
 logger.info("Loaded environment variables")
 
 logger.info("Loading agents")
-from agents.flight import flight_search_agent
 from agents.hotel import hotel_search_agent
 logger.info("Loaded agents")
 

@@ -1,10 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — Gradio Spire v3.0 (SINGULARITY OVERLORD EDITION)
 import gradio as gr
-import requests, psutil, os, subprocess, time, json
+import requests, psutil, os, subprocess
 from datetime import datetime
-from notebooklm import NotebookLMClient
-from notebooklm.auth import load_auth_from_storage
 
 # ─────────────────────────────────────────────
 # OVERLORD CONFIG

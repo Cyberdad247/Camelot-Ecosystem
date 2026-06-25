@@ -342,7 +342,7 @@ class QRPill:
 
         # Check artifacts
         missing_artifacts = 0
-        for artifact_id, artifact_path in self.artifacts.items():
+        for _artifact_id, artifact_path in self.artifacts.items():
             if not artifact_path.exists():
                 missing_artifacts += 1
 

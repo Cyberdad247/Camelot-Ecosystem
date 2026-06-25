@@ -228,7 +228,7 @@ class OptimizerEngine:
         """Generate candidates for error patterns"""
         candidates = []
 
-        error_rate = metrics.get('current_error_rate', 0)
+        _error_rate = metrics.get('current_error_rate', 0)
         elevation = metrics.get('elevation_factor', 1.0)
 
         if elevation > 3:  # 3x+ error rate increase

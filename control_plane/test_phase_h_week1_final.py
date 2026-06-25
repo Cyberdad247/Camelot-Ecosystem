@@ -117,7 +117,7 @@ class TestLoadCapacity(unittest.TestCase):
 
         while time.perf_counter() - start < duration:
             # Generate ~1000 operations per second
-            for i in range(1000):
+            for _i in range(1000):
                 metrics.record('read', 1.0, success=True)
                 operations += 1
 
@@ -142,7 +142,7 @@ class TestAnomalyDetection(unittest.TestCase):
         metrics = init_metrics(sample_rate=1.0)
 
         # Record normal operations
-        for i in range(50):
+        for _i in range(50):
             metrics.record('read', 1.0, success=True)
 
         # Inject slow operation (10x baseline = critical)
@@ -184,7 +184,7 @@ class TestAnomalyDetection(unittest.TestCase):
         metrics = init_metrics(sample_rate=1.0)
 
         # Healthy state
-        for i in range(100):
+        for _i in range(100):
             metrics.record('read', 1.0, success=True)
 
         health = metrics.get_health_status()

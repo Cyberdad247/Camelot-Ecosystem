@@ -96,7 +96,7 @@ class KineticSwarm:
         for role_name, agent_id in self.role_assignments.items():
             agent_def = self.registry.get(agent_id)
             if agent_def:
-                role = SwarmRole[role_name.upper()] if role_name in [r.name.lower() for r in SwarmRole] else SwarmRole.COORDINATOR
+                _role = SwarmRole[role_name.upper()] if role_name in [r.name.lower() for r in SwarmRole] else SwarmRole.COORDINATOR
                 self.members[agent_id] = SwarmMember(
                     agent_id=agent_id,
                     swarm_role=SwarmRole(role_name),
@@ -225,7 +225,7 @@ class KineticSwarm:
             "",
         ]
 
-        for agent_id, member in self.members.items():
+        for _agent_id, member in self.members.items():
             role = member.swarm_role.value.upper()
             status = member.status.upper()
             lines.append(f"  {member.agent_def.name:12} [{role:10}] {status:8} ✓")

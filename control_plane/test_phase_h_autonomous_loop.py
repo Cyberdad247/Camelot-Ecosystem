@@ -121,7 +121,7 @@ class TestAutonomousLoop(unittest.TestCase):
     def test_loop_can_run_iteration(self):
         """Test loop can execute an iteration"""
         self.loop.enable_autonomous_loop()
-        iteration = self.loop.run_autonomous_loop_iteration()
+        _iteration = self.loop.run_autonomous_loop_iteration()
 
         # Should return an iteration (or None if not ready)
         # The important thing is that it doesn't crash
@@ -228,7 +228,7 @@ class TestLoopIntegration(unittest.TestCase):
     def test_loop_handles_disabled_state(self):
         """Test loop respects disabled state"""
         self.loop.disable_autonomous_loop()
-        iteration = self.loop.run_autonomous_loop_iteration()
+        _iteration = self.loop.run_autonomous_loop_iteration()
 
         # Should not run iteration when disabled
         # Either returns None or has appropriate status

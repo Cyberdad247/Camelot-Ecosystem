@@ -10,7 +10,7 @@ Uses template-driven synthesis to compile Just-in-Time (JIT) cartridges.
 import os
 import json
 import hashlib
-from typing import Dict, List, Any, Optional
+from typing import Dict, Any
 from datetime import datetime
 
 from .cartridge_schemas import (

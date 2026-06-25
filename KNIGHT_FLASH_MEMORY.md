@@ -24,7 +24,7 @@ pip install redis-iris
 # Redis Agent Memory API credentials
 export AGENT_MEMORY_URL="https://gcp-us-east4.memory.redis.io"
 export AGENT_MEMORY_STORE_ID="9554270fe8574d1ea5f5fb40140b4b7b"
-export AGENT_MEMORY_API_KEY="<your-api-key>"
+export AGENT_MEMORY_API_KEY="REDACT"
 ```
 
 Or in `.env` file at `CAMELOT_OS/.env`:
@@ -32,7 +32,7 @@ Or in `.env` file at `CAMELOT_OS/.env`:
 ```
 AGENT_MEMORY_URL=https://gcp-us-east4.memory.redis.io
 AGENT_MEMORY_STORE_ID=9554270fe8574d1ea5f5fb40140b4b7b
-AGENT_MEMORY_API_KEY=<your-api-key>
+AGENT_MEMORY_API_KEY=REDACT
 ```
 
 ### 3. Verify Connection

@@ -4,7 +4,6 @@ Handles the Omega_EVOLVE rune to continuously monitor, critique,
 and upgrade internal prompts, MPI vectors, and reasoning graphs.
 """
 
-from typing import Dict, Any
 from .base import BaseKnight
 
 class Agenteer(BaseKnight):

@@ -1,8 +1,8 @@
 """GHOST squire — air-gapped file triage. Finds secrets, TODOs, large files. Zero cloud."""
 from __future__ import annotations
+
 import re
 from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Iterable
 
 from .scan import FileRecord

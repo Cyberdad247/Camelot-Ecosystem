@@ -373,10 +373,10 @@ coordinate Defense Grid responses.  No subprocess — pure in-process handlers.
   swarm.dependency  — dependency.updates channel → creates shadow-branch proposals
 """
 
-import logging as _logging
-import time as _time
-from dataclasses import dataclass
-from typing import Callable, Optional
+import logging as _logging  # noqa: E402
+import time as _time  # noqa: E402
+from dataclasses import dataclass  # noqa: E402
+from typing import Callable, Optional  # noqa: E402
 
 _swarm_log = _logging.getLogger("OMEGA_SWARM")
 

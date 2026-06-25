@@ -347,7 +347,7 @@ print('✅ Semantic search enabled')
 python -c "
 from control_plane.cloudbrain_sync import CloudBrainSync
 sync = CloudBrainSync()
-sync.configure(api_key='YOUR_KEY')
+sync.configure(api_key='REDACT')
 sync.test_connection()
 print('✅ Cloud Brain connected')
 "

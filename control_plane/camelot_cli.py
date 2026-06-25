@@ -1266,13 +1266,16 @@ def _interactive_shell(
                 target_llm = current_llm
                 if "--provider" in parts:
                     idx = parts.index("--provider")
-                    if idx + 1 < len(parts): target_provider = parts[idx+1]
+                    if idx + 1 < len(parts):
+                        target_provider = parts[idx+1]
                 if "--llm" in parts:
                     idx = parts.index("--llm")
-                    if idx + 1 < len(parts): target_llm = parts[idx+1]
+                    if idx + 1 < len(parts):
+                        target_llm = parts[idx+1]
                 elif "--model" in parts:
                     idx = parts.index("--model")
-                    if idx + 1 < len(parts): target_llm = parts[idx+1]
+                    if idx + 1 < len(parts):
+                        target_llm = parts[idx+1]
 
                 spec = importlib.util.spec_from_file_location("chat", chat_path)
                 chat_mod = importlib.util.module_from_spec(spec)
@@ -2159,7 +2162,7 @@ def main() -> int:
 
     if args.command == "glyph":
         try:
-            from .glyph_registry import list_glyphs, load_stack, expand_atom, audit_atom, execute_atom
+            from .glyph_registry import list_glyphs, load_stack, expand_atom, audit_atom, execute_atom  # noqa: I001
         except ImportError:
             list_glyphs = load_stack = expand_atom = audit_atom = execute_atom = None
             _stream_print("glyph_registry module unavailable", tone="err")

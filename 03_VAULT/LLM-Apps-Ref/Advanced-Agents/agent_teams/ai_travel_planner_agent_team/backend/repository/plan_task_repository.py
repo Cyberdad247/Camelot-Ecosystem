@@ -4,7 +4,6 @@ from datetime import datetime, timezone
 from typing import Optional, List
 
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
 
 from models.plan_task import PlanTask, TaskStatus
 from services.db_service import get_db_session

@@ -239,7 +239,8 @@ class DependencyEngine:
         for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
             stripped = line.strip()
             if stripped == "[dependencies]" or stripped == "[dev-dependencies]":
-                in_deps = True; continue
+                in_deps = True
+                continue
             if stripped.startswith("[") and "dependencies" not in stripped.lower():
                 in_deps = False
             if in_deps and "=" in stripped and not stripped.startswith("#"):

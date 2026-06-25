@@ -67,7 +67,7 @@ class TestOrchestratorMetrics(unittest.TestCase):
         self.orch = Orchestrator(db_path=self.db_path)
 
         # Create a job
-        job_id = self.orch.create_job("test_task")
+        self.orch.create_job("test_task")
 
         # List jobs
         jobs = self.orch.list_jobs()

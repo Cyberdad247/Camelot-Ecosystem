@@ -5,9 +5,7 @@ Specializes in infrastructure hardening, delivery velocity, CI/CD pipeline
 design, containerization, and deployment automation.
 """
 
-import os
 import re
-from pathlib import Path
 from .base import BaseKnight
 
 

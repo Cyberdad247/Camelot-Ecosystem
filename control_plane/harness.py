@@ -266,7 +266,7 @@ class SovereignHarness:
                 for _, host, port in BOOT_PROBES
             ])
             self._probe_cache = {
-                name: ok for (name, _, _), ok in zip(BOOT_PROBES, results)
+                name: ok for (name, _, _), ok in zip(BOOT_PROBES, results, strict=True)
             }
             dark = {n for n, ok in self._probe_cache.items() if not ok}
 
@@ -688,7 +688,7 @@ class SovereignHarness:
             await asyncio.gather(self._watchdog_loop.__wrapped__(self) if hasattr(self._watchdog_loop, '__wrapped__') else asyncio.sleep(0))
             # single watchdog cycle
             results = await asyncio.gather(*[_probe_port(h, p) for _, h, p in BOOT_PROBES])
-            self._probe_cache = {n: ok for (n, _, _), ok in zip(BOOT_PROBES, results)}
+            self._probe_cache = {n: ok for (n, _, _), ok in zip(BOOT_PROBES, results, strict=False)}
             print(json.dumps(asdict(self.status()), indent=2))
             return
 

@@ -24,7 +24,6 @@ def test_opensre_mcp_integration():
         @property
         def status_code(self): return 200
         
-    import unittest.mock as mock
     with unittest.mock.patch("requests.post", return_value=MockResponse()):
         result = link.query_cluster("list pods")
         assert result["status"] == "HEALTHY"

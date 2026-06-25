@@ -257,7 +257,7 @@ class QRPillOrchestrator:
             return True
 
         try:
-            endpoint = service_def.health_check.endpoint
+            _endpoint = service_def.health_check.endpoint
             # Simple HTTP/TCP check (simplified)
             if service_def.health_check.type == "http":
                 # In production, use requests library

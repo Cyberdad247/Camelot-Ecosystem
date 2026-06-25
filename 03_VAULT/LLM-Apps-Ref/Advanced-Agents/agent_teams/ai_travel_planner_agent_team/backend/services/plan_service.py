@@ -1,16 +1,12 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from datetime import datetime, timezone
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
-from models.trip_db import TripPlanStatus, TripPlanOutput
 from models.travel_plan import (
     TravelPlanAgentRequest,
     TravelPlanRequest,
     TravelPlanTeamResponse,
 )
 from loguru import logger
-from agents.team import trip_planning_team
 import json
 import time
 from agents.structured_output import convert_to_model

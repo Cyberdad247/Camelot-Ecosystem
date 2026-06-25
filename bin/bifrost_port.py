@@ -8,13 +8,14 @@ Usage:
     uv run --with fastapi --with uvicorn --with python-multipart python bifrost_port.py
 """
 
+import json
 import os
 import time
-import json
 from pathlib import Path
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse
+
 import uvicorn
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
+from fastapi.responses import FileResponse, JSONResponse
 
 # Import the sovereign gate logic
 try:
@@ -103,7 +104,7 @@ async def send_message(sender: str = Form(...), content: str = Form(...)):
     """Alex's Cognitive Link - Send a message across the mesh."""
     try:
         messages = json.loads(MESSAGES_FILE.read_text(encoding="utf-8"))
-    except:
+    except (json.JSONDecodeError, OSError):
         messages = []
     
     msg = {
@@ -122,7 +123,7 @@ async def get_messages(limit: int = 50):
     try:
         messages = json.loads(MESSAGES_FILE.read_text(encoding="utf-8"))
         return JSONResponse(content=messages[-limit:])
-    except:
+    except (json.JSONDecodeError, OSError):
         return JSONResponse(content=[])
 
 if __name__ == "__main__":

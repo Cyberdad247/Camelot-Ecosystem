@@ -200,8 +200,8 @@ def _score_knight_xp() -> list[XPEntry]:
     except Exception:
         return []
 
-    done_re = re.compile(r"\[DONE\]\s+\S+\s+.*knight['\"]?\s*[:\=]\s*['\"]?(\w+)", re.IGNORECASE)
-    fail_re = re.compile(r"\[FAIL\]\s+(\S+)\s+")
+    _done_re = re.compile(r"\[DONE\]\s+\S+\s+.*knight['\"]?\s*[:\=]\s*['\"]?(\w+)", re.IGNORECASE)
+    re.compile(r"\[FAIL\]\s+(\S+)\s+")
     dispatch_re = re.compile(r"\[DISPATCH\]\s+(\w+)\s+")
 
     knight_done: dict[str, int] = defaultdict(int)

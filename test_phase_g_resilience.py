@@ -12,18 +12,16 @@ Status: 15 chaos tests covering:
 """
 
 import asyncio
-import json
 import sys
 import time
-from typing import Dict, List, Tuple
 from control_plane.distributed_ledger_consensus import (
-    DistributedConsensus, ConsensusPhase, NodeRole, ConsensusMessage
+    DistributedConsensus, NodeRole, ConsensusMessage
 )
 from control_plane.distributed_knowledge_sync import (
-    DistributedKnowledgeSync, SyncPhase, SyncEvent, AgentScope
+    DistributedKnowledgeSync, SyncPhase, SyncEvent
 )
 from control_plane.distributed_agent_registry import (
-    DistributedAgentRegistry, AgentInfo, AgentStatus, AgentHeartbeat
+    DistributedAgentRegistry, AgentStatus
 )
 
 

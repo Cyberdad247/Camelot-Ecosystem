@@ -12,7 +12,6 @@ from appwrite.id import ID
 from circuitbreaker import circuit
 import structlog
 from functools import lru_cache
-import redis
 from typing import Optional
 
 # Configure logging

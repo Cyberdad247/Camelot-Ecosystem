@@ -76,14 +76,14 @@ class RBACMatrix:
             )
 
         # Deny rule evaluation
-        tier = knight.get("tier", "KNIGHT")
-        role = knight.get("role", "")
+        _tier = knight.get("tier", "KNIGHT")
+        _role = knight.get("role", "")
         cost_ceiling = knight.get("cost_ceiling", "low")
-        can_spawn = knight.get("can_spawn_swarm", False)
+        _can_spawn = knight.get("can_spawn_swarm", False)
 
         for rule in self._deny_rules:
             rid = rule.get("id", "?")
-            action = rule.get("action", "BLOCKED")
+            _action = rule.get("action", "BLOCKED")
 
             if rid == "DENY-04" and complexity < 0.5 and cost_ceiling == "high":
                 issues.append(f"RBAC [{rid}]: cost ceiling violation — reroute to cheaper terminal")

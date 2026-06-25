@@ -4,7 +4,7 @@ import json
 from typing import List, Optional, Dict, Any
 from fastapi import HTTPException
 from services.db_service import social_media_db
-from models.social_media_schemas import PaginatedPosts, Post
+from models.social_media_schemas import PaginatedPosts
 from datetime import datetime, timedelta
 
 

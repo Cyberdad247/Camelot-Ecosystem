@@ -6,8 +6,8 @@ Visualize pattern discovery and optimization candidates
 
 import sqlite3
 import json
-from datetime import datetime, timedelta
-from typing import Dict, List, Optional
+from datetime import datetime
+from typing import Dict, List
 from pathlib import Path
 from dataclasses import dataclass
 

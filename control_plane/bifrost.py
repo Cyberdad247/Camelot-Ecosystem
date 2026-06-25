@@ -369,7 +369,7 @@ class Bifrost:
     ) -> AsyncIterator[str]:
         """Dispatch via the Sovereign Inference Engine (in-process, no HTTP)."""
         try:
-            from control_plane.sovereign_inference import SIE, HITLBlock, SIEHooks
+            from control_plane.sovereign_inference import SIE, HITLBlock, SIEHooks  # noqa: F401
         except ImportError as e:
             yield f"[BIFROST] SIE import failed: {e}"
             return
@@ -504,7 +504,7 @@ async def _main() -> None:
         return
 
     if args.route or args.terminal is None:
-        async for tid, chunk in bifrost.route_and_stream(args.prompt, args.system):
+        async for _tid, chunk in bifrost.route_and_stream(args.prompt, args.system):
             print(chunk, end="", flush=True)
     else:
         print(f"[BIFROST] → {args.terminal}", flush=True)

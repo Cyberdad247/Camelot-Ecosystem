@@ -1,10 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from agno.agent import Agent, RunResponse
+from agno.agent import Agent
 from agno.agent import Agent
 from agno.models.together import Together
 from agents.tools.voice_analysis_tool import analyze_voice_attributes as voice_analysis_tool
-from agno.utils.pprint import pprint_run_response
 from dotenv import load_dotenv
 import os
 

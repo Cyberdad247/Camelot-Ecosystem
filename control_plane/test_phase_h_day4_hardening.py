@@ -234,7 +234,7 @@ class TestPerformanceUnderStress(unittest.TestCase):
 
         def worker(worker_id, count):
             try:
-                for i in range(count):
+                for _i in range(count):
                     metrics.record(f'worker_{worker_id}', 1.0, success=True)
             except Exception as e:
                 errors.append(e)
@@ -263,7 +263,7 @@ class TestPerformanceUnderStress(unittest.TestCase):
 
             def worker(worker_id):
                 try:
-                    for i in range(50):
+                    for _i in range(50):
                         orch.set_fact(f"worker_{worker_id}_key_{i}", f"value_{i}")
                 except Exception as e:
                     errors.append(e)
@@ -279,7 +279,7 @@ class TestPerformanceUnderStress(unittest.TestCase):
                 t.join()
 
             # Check if data was written
-            jobs = orch.list_jobs()
+            _jobs = orch.list_jobs()
             # May fail due to concurrent writes on shared connection
             # but system should not crash
 
@@ -292,7 +292,7 @@ class TestResourceManagement(unittest.TestCase):
         metrics = MetricsMiddleware()
 
         # Add records
-        for i in range(50):
+        for _i in range(50):
             metrics.record('test', 1.0, success=True)
 
         # Get count before cleanup

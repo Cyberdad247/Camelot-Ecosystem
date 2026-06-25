@@ -246,7 +246,7 @@ class CLIIntercept:
         engines = self._omniroute.get("engines", {})
         upstream = self._omniroute.get("upstream", {})
 
-        knight = decision.knight_id
+        _knight = decision.knight_id
         engine_name = decision.engine
 
         # Local engines (Open Coder / Sir Ghost / Ouroboros) -> Ollama or local path

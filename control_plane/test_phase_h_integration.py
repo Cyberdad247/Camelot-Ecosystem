@@ -281,7 +281,7 @@ class TestEndToEndWorkflow(unittest.TestCase):
 
         # Benchmark retrieval
         start = time.time()
-        signals = self.feedback_collector.get_signals(hours_back=24)
+        self.feedback_collector.get_signals(hours_back=24)
         retrieval_time = time.time() - start
 
         # Should retrieve in < 100ms
@@ -330,7 +330,7 @@ class TestEndToEndWorkflow(unittest.TestCase):
             for i in range(10)
         ]
 
-        ranked = self.optimizer.rank_candidates_with_business_impact(candidates)
+        self.optimizer.rank_candidates_with_business_impact(candidates)
 
         # Get summary
         summary = self.optimizer.get_ranking_summary()
@@ -434,7 +434,7 @@ class TestDataIntegrity(unittest.TestCase):
         """Test constraint data is consistent"""
 
         # Add constraint
-        constraint = self.metrics.add_constraint(
+        _constraint = self.metrics.add_constraint(
             'memory', 'Min Cache', is_hard=True, minimum_value=2.0
         )
 

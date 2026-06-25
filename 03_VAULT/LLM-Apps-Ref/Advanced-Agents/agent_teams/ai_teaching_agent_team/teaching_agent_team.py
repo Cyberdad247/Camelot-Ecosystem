@@ -5,7 +5,6 @@ from agno.agent import Agent, RunResponse
 from agno.models.openai import OpenAIChat
 from composio_phidata import Action, ComposioToolSet
 import os
-from agno.tools.arxiv import ArxivTools
 from agno.utils.pprint import pprint_run_response
 from agno.tools.serpapi import SerpApiTools
 

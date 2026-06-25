@@ -1,4 +1,3 @@
-import pytest
 import shutil
 import importlib.util
 from pathlib import Path

@@ -16,7 +16,6 @@ import shlex
 import subprocess
 import threading
 import atexit
-import signal
 
 # Fix Windows encoding before anything else
 if sys.platform == "win32":

@@ -7,7 +7,6 @@ Act as: Sir Judge.
 """
 import os
 import json
-import sys
 
 TELEMETRY_LOG = r"C:\Users\vizio\CAMELOT_OS\03_VAULT\99_SCRATCHPAD\efficiency_metrics.json"
 

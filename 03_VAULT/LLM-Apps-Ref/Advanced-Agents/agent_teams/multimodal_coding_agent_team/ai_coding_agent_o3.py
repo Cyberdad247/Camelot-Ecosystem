@@ -1,15 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 import streamlit as st
-from agno.agent import Agent, RunResponse
+from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from agno.models.google import Gemini
 from e2b_code_interpreter import Sandbox
 import os
 from PIL import Image
-from io import BytesIO
-import base64
 
 def initialize_session_state() -> None:
     if 'openai_key' not in st.session_state:

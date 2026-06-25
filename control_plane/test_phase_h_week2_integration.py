@@ -288,7 +288,7 @@ class TestPipelineDataFlow(unittest.TestCase):
     def test_pattern_pattern_id_flow(self):
         """Test pattern IDs flow correctly to candidates"""
         # Learn patterns
-        patterns = self.learner.learn_all_patterns()
+        self.learner.learn_all_patterns()
 
         # Generate candidates
         candidates = self.optimizer.generate_candidates_from_patterns()
@@ -300,7 +300,7 @@ class TestPipelineDataFlow(unittest.TestCase):
     def test_metrics_preserved_through_pipeline(self):
         """Test metrics are preserved through each stage"""
         # Get baseline metrics
-        baseline = self.learner.extract_metrics()
+        _baseline = self.learner.extract_metrics()
 
         # Learn patterns
         patterns = self.learner.learn_all_patterns()
@@ -424,7 +424,7 @@ class TestPipelineWithLoad(unittest.TestCase):
         start = time.perf_counter()
         metrics = self.dashboard.get_pattern_metrics()
         candidates = self.dashboard.get_candidate_metrics()
-        health = self.dashboard.get_learning_health_status()
+        self.dashboard.get_learning_health_status()
         elapsed = time.perf_counter() - start
 
         # Should be fast

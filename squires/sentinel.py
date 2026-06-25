@@ -1,7 +1,5 @@
 """SENTINEL squire — HITL gate. Blocks destructive operations pending human approval."""
 from __future__ import annotations
-import sys
-from typing import Callable
 
 from .judge import Verdict
 

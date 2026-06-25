@@ -1,4 +1,4 @@
-﻿# CAMELOT OS Review Remediation Verification
+# CAMELOT OS Review Remediation Verification
 
 **Compiler:** Anya Gate / Prompt Engineering Cartridge  
 **Date:** 2026-05-14
@@ -46,8 +46,8 @@ Pass:
 With token configured:
 
 ```powershell
-$env:CAMELOT_DASHBOARD_OPERATOR_TOKEN="local-test-token"
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:5173/api/camelot-os/support/activate -Headers @{"X-Camelot-Operator-Token"="local-test-token"} -Body '{"reason":"verification"}' -ContentType "application/json"
+$env:CAMELOT_DASHBOARD_OPERATOR_TOKEN="REDACT"
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:5173/api/camelot-os/support/activate -Headers @{"X-Camelot-Operator-Token"="REDACT"} -Body '{"reason":"verification"}' -ContentType "application/json"
 ```
 
 Pass:

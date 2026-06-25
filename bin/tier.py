@@ -7,6 +7,7 @@ Usage:
     python tier.py <edge|local|cloud|all> <up|down|status>
 """
 from __future__ import annotations
+
 import socket
 import subprocess
 import sys

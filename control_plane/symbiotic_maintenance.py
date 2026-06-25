@@ -163,7 +163,7 @@ def _directory_audit(root: Path, *, quick: bool) -> dict[str, Any]:
             duplicate_candidates[stat.st_size].append(path)
 
     duplicate_groups: list[list[str]] = []
-    for size, paths in duplicate_candidates.items():
+    for _size, paths in duplicate_candidates.items():
         if len(paths) < 2:
             continue
         digests: dict[str, list[Path]] = defaultdict(list)
@@ -171,7 +171,7 @@ def _directory_audit(root: Path, *, quick: bool) -> dict[str, Any]:
             digest = _sha1(path)
             if digest:
                 digests[digest].append(path)
-        for digest, dupes in digests.items():
+        for _digest, dupes in digests.items():
             if len(dupes) > 1:
                 duplicate_groups.append([str(path.relative_to(root)) for path in dupes])
             if len(duplicate_groups) >= 8:

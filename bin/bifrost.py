@@ -29,7 +29,6 @@ import socket
 import subprocess
 import sys
 import time
-import urllib.request
 from pathlib import Path
 
 CAMELOT_OWNER = os.environ.get("CAMELOT_OWNER", "vizio")
@@ -203,8 +202,8 @@ def verify_client_cert(cert_der: bytes | None) -> tuple[bool, str]:
         return True, f"mtls:fingerprint={fingerprint[:16]}"
         
     try:
-        import ssl
         import re
+        import ssl
         pem = ssl.DER_cert_to_PEM_cert(cert_der)
         match = re.search(r"CN\s*=\s*([^,\n/]+)", pem)
         if match:

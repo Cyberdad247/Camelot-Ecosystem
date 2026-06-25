@@ -189,7 +189,7 @@ class TestResultTracker(unittest.TestCase):
             'availability_pct': 99.9,
         }
 
-        validation = self.tracker.validate_execution_result(1, actual_state)
+        self.tracker.validate_execution_result(1, actual_state)
 
         history = self.tracker.get_validation_history(limit=10)
         self.assertEqual(len(history), 1)

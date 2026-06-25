@@ -6,7 +6,6 @@ Lazy synthesis: health probe at //BOOT, full Oracle query deferred until //PLAN.
 from __future__ import annotations
 
 import asyncio
-import json
 import os
 import time
 from datetime import datetime, timezone

@@ -8,15 +8,16 @@ Usage:
     uv run --with fastapi --with uvicorn --with psutil python bifrost_port_dynamic.py
 """
 
-import os
-import time
 import json
-import psutil
+import os
 import subprocess
+import time
 from pathlib import Path
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse
+
+import psutil
 import uvicorn
+from fastapi import FastAPI, File, Form, Request, UploadFile
+from fastapi.responses import JSONResponse
 
 # Import the sovereign gate logic
 try:
@@ -67,7 +68,7 @@ def get_rustdesk_id():
     try:
         # Checking local config if available, otherwise just returning host
         return subprocess.check_output(["hostname"]).decode().strip()
-    except:
+    except Exception:
         return "Unknown-Spire"
 
 def get_active_relays():
@@ -96,7 +97,7 @@ async def send_message(sender: str = Form(...), content: str = Form(...)):
     """Sir Alex's Dynamic Link - Anchoring thoughts with Relay context."""
     try:
         messages = json.loads(MESSAGES_FILE.read_text(encoding="utf-8"))
-    except:
+    except (json.JSONDecodeError, OSError):
         messages = []
     
     msg = {
@@ -125,12 +126,12 @@ async def upload_file(file: UploadFile = File(...)):
 async def get_messages():
     try:
         return JSONResponse(content=json.loads(MESSAGES_FILE.read_text(encoding="utf-8")))
-    except:
+    except (json.JSONDecodeError, OSError):
         return JSONResponse(content=[])
 
 if __name__ == "__main__":
     print("========================================================")
     print("🛡️ SIR HEIMDALL: The DYNAMIC BIFROST PORT is Opening...")
-    print(f"🚀 Transport: RustDesk (hbbs/hbbr) + SSH Tunnel")
+    print("🚀 Transport: RustDesk (hbbs/hbbr) + SSH Tunnel")
     print("========================================================")
     uvicorn.run(app, host="0.0.0.0", port=8888, log_level="warning")

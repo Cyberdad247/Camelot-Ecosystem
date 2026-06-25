@@ -18,13 +18,11 @@ Enforces: Agent-Armor v2.0, Titanium Laws, rust-kinetic.yaml cartridge.
 Pipeline: Anya APEE v6.5 -> Sentinel audit DAG -> Iron Gate HITL.
 """
 
-import json
 import os
 import re
 import subprocess
 import shutil
 from pathlib import Path
-from typing import Any
 
 from .base import BaseKnight
 

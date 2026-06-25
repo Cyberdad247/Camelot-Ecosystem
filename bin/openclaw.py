@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "control_plane"))
 sys.path.insert(0, str(ROOT / "03_VAULT" / "training" / "configs"))
 
-from control_plane.openclaw import run_openclaw_triage, _run_checks, _classify
+from control_plane.openclaw import _classify, _run_checks, run_openclaw_triage
 
 _C = {
     "g": "\033[92m", "y": "\033[93m", "r": "\033[91m", "c": "\033[96m",

@@ -120,14 +120,14 @@ def snapshot(print_output: bool = True) -> dict:
 def _print_metrics(m: dict) -> None:
     t = m["terminals"]
     q = m["queue"]
-    l = m["ledger"]
+    ledger = m["ledger"]
     health_icon = {"green": "✅", "yellow": "⚠️", "red": "❌"}.get(m["health"], "?")
     print(f"\n[OCTAVIAN] Factory Metrics  {m['ts']}")
     print(f"  Health      : {health_icon} {m['health'].upper()}")
     print(f"  Throughput  : {m['throughput_tasks_per_hr']} tasks/hr")
     print(f"  Queue       : {q['pending']} pending / {q['total_lines']} total")
     print(f"  Terminals   : {t['live']} live  {t['dark']} dark  {t['total']} total")
-    print(f"  Ledger      : {l['total_entries']} entries  max_id={l['max_id']}")
+    print(f"  Ledger      : {ledger['total_entries']} entries  max_id={ledger['max_id']}")
     if t["dark"] > 0:
         dark_names = [k for k, v in t["terminals"].items() if v == "dark"]
         print(f"  Dark nodes  : {', '.join(dark_names)}")
@@ -202,8 +202,8 @@ Additional engine registry: Groq, Together, Mistral, Ollama multi-model,
 OpenRouter, Perplexity — all registered with cost/latency/privacy scores.
 """
 
-from enum import Enum as _Enum
-from typing import Optional as _Optional
+from enum import Enum as _Enum  # noqa: E402
+from typing import Optional as _Optional  # noqa: E402
 
 
 class AudioPipeline(_Enum):

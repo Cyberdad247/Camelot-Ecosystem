@@ -1,10 +1,10 @@
 """VECTOR squire — TF-IDF semantic search over indexed files. Zero ML deps."""
 from __future__ import annotations
+
 import math
 import re
 from collections import Counter
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Iterable
 
 from .scan import FileRecord

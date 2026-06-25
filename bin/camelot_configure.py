@@ -43,8 +43,8 @@ except ImportError:
 
 try:
     from rich.console import Console
-    from rich.table import Table
     from rich.panel import Panel
+    from rich.table import Table
     _RICH = True
 except ImportError:
     _RICH = False
@@ -393,8 +393,8 @@ def run_configure(verbose: bool = False) -> dict:
         t.add_row("Mode", "[yellow]PORTABLE[/yellow]" if portable else "standard")
         console.print(t)
         console.print(
-            f"\n[bold green]⚔  Camelot is configured.[/bold green]  "
-            f"Type [bold]camelot[/bold] or [bold]ks[/bold] to warp in.\n"
+            "\n[bold green]⚔  Camelot is configured.[/bold green]  "
+            "Type [bold]camelot[/bold] or [bold]ks[/bold] to warp in.\n"
         )
     else:
         print(f"\nTier: {tier}  Knight: {knight}  Config: {config_path}")

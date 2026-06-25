@@ -16,10 +16,9 @@ import time
 import statistics
 from datetime import datetime
 from dataclasses import dataclass, asdict
-from typing import List, Optional
+from typing import List
 import aiohttp
 import numpy as np
-from collections import defaultdict
 
 # Configuration
 NODES = ["192.168.1.10", "192.168.1.11", "192.168.1.12"]

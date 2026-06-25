@@ -12,7 +12,6 @@ Status: Complete validation suite for production readiness
 """
 
 import asyncio
-import json
 import sys
 import time
 from control_plane.distributed_ledger_consensus import DistributedConsensus, NodeRole
@@ -237,7 +236,7 @@ class Phase_G_SystemValidation:
     async def test_cross_instance_agent_routing(self):
         """Test: Agent routing across instances"""
         try:
-            from control_plane.distributed_agent_registry import DistributedAgentRouter, AgentInfo, AgentScope
+            from control_plane.distributed_agent_registry import AgentInfo, AgentScope
 
             registry = DistributedAgentRegistry("node_1", ["node_2"])
 

@@ -7,7 +7,6 @@ Act as: Sir Architect.
 """
 import argparse
 import os
-from datetime import datetime
 
 TEMPLATE = """# Implementation Plan - {title}
 

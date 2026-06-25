@@ -117,7 +117,7 @@ class TestMetricsCollector(unittest.TestCase):
         """Test filtering by time window"""
         # Record old operation
         self.collector.record_operation('read', 1.0, True)
-        old_time = time.time()
+        _old_time = time.time()
 
         # Wait a bit and record new operation
         time.sleep(0.1)
@@ -180,7 +180,7 @@ class TestMetricsCollector(unittest.TestCase):
         )
 
         # Record 100 operations, expect ~10 to be captured
-        for i in range(100):
+        for _i in range(100):
             sampler.record_operation('read', 1.0, True)
 
         # Count should be less than 100 due to sampling

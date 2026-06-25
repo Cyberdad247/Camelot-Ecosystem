@@ -1036,7 +1036,7 @@ def boot_kitten_tts(home: Path) -> tuple[bool, str]:
     log_dir.mkdir(parents=True, exist_ok=True)
 
     # Launch: python -c "from kitten_service import kitten_service; import asyncio; asyncio.run(kitten_service.run_streaming_server())"
-    launch_cmd = (
+    _launch_cmd = (
         "import sys, asyncio; sys.path.insert(0, r'" + str(home) + "'); "
         "from 01_KERNEL.senses.audio.kitten_service import kitten_service; "
         "asyncio.run(kitten_service.run_streaming_server())"

@@ -5,7 +5,6 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 NOTEBOOK_ID = "5ffaf13c-4db5-4619-9d6d-4bb1f660e91a"
 

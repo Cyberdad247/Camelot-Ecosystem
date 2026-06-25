@@ -186,7 +186,7 @@ def _check_watchdog_errors() -> tuple[bool, str]:
         return True, "no harness.log"
     try:
         lines = log_path.read_text(encoding="utf-8", errors="replace").splitlines()[-200:]
-        io_errors = [l for l in lines if "I/O operation on closed file" in l]
+        io_errors = [line for line in lines if "I/O operation on closed file" in line]
         if len(io_errors) >= 5:
             return False, f"{len(io_errors)} I/O closed-file errors in last 200 lines"
         return True, f"{len(io_errors)} I/O errors (below threshold)"
