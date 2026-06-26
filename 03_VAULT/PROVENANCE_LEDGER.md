@@ -1335,3 +1335,32 @@
 - **Verification performed**:
   - `pip-audit confirms 48 of 51 vulnerabilities resolved across 12 packages; 3 packages remain as zero-day`
 - **Tag**: [SECURITY_AUDIT_UPGRADE]
+---
+## [2026-06-25] KICKBOX_AUDIO — Lakisha HYBRID_VOICE_ASSISTANT_vMAX (Phases 1+2) LIVE
+- **Actor**: SIR_BORIS (Claude Opus 4.8)
+- **Scope**:
+  - PR #10 (voice loop) + #11 (routing) merged to main @ 9006ac4; PWA prod redeployed
+  - Phase 1 //INGEST (useVad.ts Web Audio RMS VAD) + //IGNITE (lib/voice.ts on-device SpeechSynthesis, sub-500ms TTFA)
+  - Phase 2 //ROUTE (router.ts LOCAL_TOOLS vs REMOTE_MCP) + //REZERO + ZERO_TRUST_MESH (mcp.ts: Tailscale-only 100.64/10 or *.ts.net, else CompilationError)
+  - Bifrost laptop-hosted (node dist on :3001) via cloudflared tunnel; SovereignState.lastResponse spoken by Lakisha
+- **Verification performed**:
+  - `35/35 vitest (mcp 9, router 7, voice 5); biome clean 52 files; typecheck 5/5; build 4/4`
+  - `LIVE wss proof: add transaction -> LOCAL_TOOLS val 14,215,000; unknown -> //REZERO local; lastResponse field present`
+  - `Live at https://kickbox-audio.vercel.app`
+  - `OPEN: REMOTE_MCP_URL unset (remote bypass dormant); processes session-bound (use scripts/laptop-server supervisor for persistence)`
+- **Tag**: [LAKISHA_VOICE_vMAX]
+| 2026-06-26T02:05:45.835897+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-26T02:05:45.836331+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-26T02:05:45.840547+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-26T02:05:45.933820+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-26T02:05:45.934126+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-26T02:05:45.937492+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+---
+## [2026-06-25] Implement v1000 DTCG Design Tokens and hover tooltips for Swarm Monitor
+- **Actor**: SIR_CODEX (Codex / Antigravity)
+- **Scope**:
+  - 02_FORGE/PORTAL_CORE/Anya_Dashboard/src/
+  - DESIGN.md
+- **Verification performed**:
+  - `npm run lint compiles clean; tooltips display DTCG YAML schemas for active knights`
+- **Tag**: [DESIGN_SYSTEM_UPGRADE]
