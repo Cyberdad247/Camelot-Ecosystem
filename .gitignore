@@ -19,11 +19,6 @@ secrets.json
 *.pem
 .modal.toml
 **/.modal.toml
-
-# Gemini chat sessions (may contain leaked tokens from conversations)
-**/.gemini/tmp/
-**/.gemini/history/
-**/.gemini/antigravity-browser-profile/
 auth.json
 cap_sid
 
@@ -36,6 +31,8 @@ cap_sid
 temp/
 tmp/
 tmp_awesome_repo/
+data/.pytest_tmp/
+data/.pytest_temp/
 
 # 4. Python / Node Runtime
 __pycache__/
@@ -44,6 +41,7 @@ node_modules/
 .next/
 dist/
 build/
+data/go-build/
 .pytest_cache/
 .venv/
 *.egg-info/

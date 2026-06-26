@@ -1364,3 +1364,33 @@
 - **Verification performed**:
   - `npm run lint compiles clean; tooltips display DTCG YAML schemas for active knights`
 - **Tag**: [DESIGN_SYSTEM_UPGRADE]
+---
+## [2026-06-25] Verification-ledger chain repair and compute_entry_hash centralization
+- **Actor**: SIR_CODEX (Codex / Antigravity)
+- **Scope**:
+  - 03_VAULT/Missions/verification_ledger.jsonl
+  - scripts/repair_verification_ledger_chain.py
+  - control_plane/ledger_sync.py
+  - control_plane/system_triage.py
+- **Verification performed**:
+  - `python scripts/repair_verification_ledger_chain.py --selftest -> 8/8 true (incl. non-tautological second_run_byte_identical)`
+  - `python scripts/repair_verification_ledger_chain.py -> no_op=true, 446 entries, post_validate_error=null`
+  - `python -c "from control_plane.ledger_sync import compute_entry_hash; from control_plane.system_triage import _verification_ledger_integrity, _ledger_alignment" -> imports OK`
+  - `python -m pytest tests/test_ledger_audit.py tests/test_provenance_crypto.py tests/test_ledger_governance.py -q -> all passed`
+  - `python -m control_plane.system_triage rapid -> verification-ledger-integrity PASS (446 entries), provenance-ledger-alignment PASS`
+- **Tag**: [LEDGER_INTEGRITY_FIX]
+| 2026-06-26T04:04:09.011350+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-26T00:04:30.035450 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-26T04:37:20.857415+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-26T00:37:59.902860 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+---
+## [2026-06-26] KICKBOX_AUDIO — Full vMAX stack LIVE (voice + routing + telemetry + Tailscale MCP)
+- **Actor**: SIR_BORIS (Claude Opus 4.8)
+- **Scope**:
+  - PRs #12 (Phase 3 telemetry) + #13 (apps/mcp-query MCP server) merged to main @ 1f53765; git prod deploy READY
+  - Real Tailscale MCP server live: REMOTE_MCP_URL=http://100.118.224.52:7800; unknown utterances route REMOTE_MCP and return real answers
+  - Live laptop stack: mcp-query :7800, Bifrost :3001, cloudflared tunnel (district-competitive-seventh-exists)
+- **Verification performed**:
+  - `LIVE on kickbox-audio.vercel.app: add transaction -> LOCAL_TOOLS 2ms; '9 x 9' -> REMOTE_MCP 110ms -> '9 × 9 is 81.'; lastLane/lastLatencyMs/lastRezeroed flowing`
+  - `48/48 vitest across all phases; git auto-deploy fixed (rootDirectory=apps/pwa)`
+- **Tag**: [MCP_MESH_LIVE]
