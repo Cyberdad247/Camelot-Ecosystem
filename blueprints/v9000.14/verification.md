@@ -1,0 +1,480 @@
+# Camelot-OS v9000.14-CYBERTRONIA — Verification & Acceptance Criteria
+
+> **Document Version**: 1.0.0
+> **Classification**: OPERATIONAL — SIR_SENTINEL reviewed
+> **Date**: 2026-06-27
+> **Owner**: SIR_BORIS (Architect) · SIR_SENTINEL (Verification Gate)
+
+---
+
+## 1. Verification Philosophy
+
+### 1.1 Core Principles
+
+| Principle | Enforcement |
+|---|---|
+| **Evidence-Grounded** | Every claim MUST have a reproducible CLI command that produces verifiable output. No aspirational assertions accepted as passing. |
+| **Three-Tier Testing** | Unit → Integration → System. No phase gate opens without all three tiers green at that phase's scope. |
+| **Adversarial Crucible** | Red-Green-Refactor cycle: write a failing test first, implement to pass, then refactor. ColMAD 3-persona vote required for CRITICAL-risk changes. |
+| **HITL Gates** | Destructive operations (git force-push, schema migration, secret rotation) require explicit human approval. Never auto-approve `HUMAN_GATE` tier. |
+| **Evidence Classification** | All claims tagged: `confirmed` (backed by live artifact), `planned` (implementation steps named), `aspirational` (narrative only), `rejected` (conflicts with verified state). |
+
+### 1.2 Test Execution Environment
+
+```powershell
+# Required environment
+$env:CAMELOT_ROOT = "C:\Users\vizio\CAMELOT_OS"
+$env:VIRTUAL_ENV  = "$env:CAMELOT_ROOT\.venv"
+$env:PATH         = "$env:VIRTUAL_ENV\Scripts;$env:PATH"
+
+# Rust toolchain (1.96+)
+rustup default stable
+
+# Verify baseline
+python --version   # 3.11+
+cargo --version    # 1.96+
+node --version     # 20+
+```
+
+### 1.3 Evidence Classification Legend
+
+| Tag | Meaning | Gate Eligibility |
+|---|---|---|
+| ✅ `confirmed` | Backed by live command output, test log, or manifest | May pass gate |
+| 🔨 `planned` | Implementation steps exist, not yet executed | Blocks gate until confirmed |
+| 💭 `aspirational` | Narrative/design claim, no repo artifact | Cannot pass gate |
+| ❌ `rejected` | Conflicts with verified runtime state | Must be resolved or removed |
+
+---
+
+## 2. Phase 1 (IRON) — Foundation Verification Matrix
+
+> **Objective**: Unified control plane, single-class modules, clean imports, no orphan references.
+
+| Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
+|---|---|---|---|---|
+| P1-T01 | `python -c "from control_plane.anya_gate import __version__; print(__version__)"` | `9000.14` | All 13 control_plane modules report `9000.14` | ⬜ |
+| P1-T02 | `python -m pytest tests/test_colmad_wiring.py -v` | `PASSED` | CRITICAL intent triggers 3-persona vote; consensus requires 2/3 | ⬜ |
+| P1-T03 | `python -m control_plane.knight_agent --test` | All V5.x checks pass | Unified roster count matches `FOUNDRY_COUNCIL`; no duplicate spark IDs | ⬜ |
+| P1-T04 | `python -c "import control_plane.triage_score"` | `ImportError` or integrated | No orphan `triage_score` module; functionality merged into `anya_gate.py` | ⬜ |
+| P1-T05 | `python -m control_plane.soul_oversight --test` | `PASSED` | Single coherent `IronGateV2` class; AUTO/PROMPT/HUMAN_GATE tiers verified | ⬜ |
+| P1-T06 | `python -c "import re, pathlib; c=pathlib.Path('control_plane/anya_gate.py').read_text(); print(len(re.findall(r'class\s+AnyaCompiler', c)))"` | `0` | No duplicate `AnyaCompiler` class definition | ⬜ |
+| P1-T07 | `python -c "from control_plane.soul_oversight import pre_execute"` | No warnings/errors | Clean import path; no deprecation shims | ⬜ |
+| P1-T08 | `python -m control_plane.inspira_metrics --test` | Non-zero metrics dict | `mamba_compression_ratio > 0` when ouroboros engine available | ⬜ |
+| P1-T09 | `cargo build -p rtk --release` | Compiles without error | `rtk.dll` produced in `target/release/`; no linker warnings | ⬜ |
+| P1-T10 | `python -m squires.colony triage . --auto-approve` | Exit code `0` | No CRITICAL findings; risk score < 50 | ⬜ |
+
+### P1 Batch Verification Script
+
+```powershell
+# Run all Phase 1 checks in sequence
+$results = @()
+$checks = @(
+    @{id="P1-T01"; cmd='python -c "from control_plane.anya_gate import __version__; print(__version__)"'; expect="9000.14"},
+    @{id="P1-T03"; cmd='python -m control_plane.knight_agent --test'; expect="PASSED"},
+    @{id="P1-T05"; cmd='python -m control_plane.soul_oversight --test'; expect="PASSED"},
+    @{id="P1-T08"; cmd='python -m control_plane.inspira_metrics --test'; expect="Non-zero"},
+    @{id="P1-T10"; cmd='python -m squires.colony triage . --auto-approve'; expect="Exit 0"}
+)
+foreach ($c in $checks) {
+    Write-Host "[$($c.id)] Running: $($c.cmd)" -ForegroundColor Cyan
+    $output = Invoke-Expression $c.cmd 2>&1
+    $results += @{id=$c.id; output=$output; expect=$c.expect}
+}
+$results | ForEach-Object { Write-Host "[$($_.id)] $($_.expect) → $($_.output)" }
+```
+
+---
+
+## 3. Phase 2 (SOUL) — Orchestration Verification Matrix
+
+> **Objective**: Kinetic loop fires 6 stages, Z3 verification real, 11 Obsidian Pillars validated, provenance atomic.
+
+| Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
+|---|---|---|---|---|
+| P2-T01 | `python -m pytest tests/test_kinetic_loop.py -v` | `PASSED` | 6 stages fire in order: `TRIAGE → PLAN → APPROVE → EXECUTE → VERIFY → RECORD` | ⬜ |
+| P2-T02 | `python -m pytest tests/test_z3_verification.py -v` | `Z3_BLOCK` for dangerous patch | Real PDDL encoding works; Z3 rejects state-violating mutations | ⬜ |
+| P2-T03 | `python -m control_plane.obsidian_pillars --test` | `11/11 pillars validated` | Each pillar has both positive AND negative test case | ⬜ |
+| P2-T04 | `python -c "from control_plane.soul_router import SoulRouter; r=SoulRouter(); print(r.route('SIR_HELIOS'))"` | `sir_helio` | All v9000.14 knight aliases resolve correctly (including legacy spellings) | ⬜ |
+| P2-T05 | `python -m control_plane.firnflow --test` | V3.x checks pass | Directory-scoped context loads; L1/L2/L3 tiering functional | ⬜ |
+| P2-T06 | `python -m pytest tests/test_crucible.py -v` | `PASSED` | Ephemeral execution runs in isolation; temp artifacts cleaned on exit | ⬜ |
+| P2-T07 | `python -m pytest tests/test_provenance_sqlite.py -v` | `PASSED` | Atomic commit + rollback verified; `.shadow` file restored on failure | ⬜ |
+
+### P2 Integration Smoke Test
+
+```powershell
+# End-to-end kinetic loop with mock intent
+python -c @"
+from control_plane.anya_gate import AnyaGate
+from control_plane.factory_lane import FactoryJob
+
+gate = AnyaGate()
+score = gate.triage('Add retry logic to api.py')
+print(f'Risk: {score.risk_entropy:.2f}, HITL: {score.hitl_tier}, Lane: {score.lane}')
+assert score.hitl_tier in ('AUTO', 'PROMPT', 'HUMAN_GATE'), 'Invalid HITL tier'
+print('P2 integration smoke: PASSED')
+"@
+```
+
+---
+
+## 4. Phase 3 (BRAIN) — Dashboard & Visualization Verification Matrix
+
+> **Objective**: HTMX dashboard renders, MDX schema validates, SSE telemetry flows live.
+
+| Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
+|---|---|---|---|---|
+| P3-T01 | `python -m pytest tests/test_mdx_schema.py -v` | `PASSED` | Valid MDX passes validation; malformed MDX rejected with clear error | ⬜ |
+| P3-T02 | `curl -s http://127.0.0.1:8080/bifrost \| Select-String 'hx-'` | HTML containing `hx-get`, `hx-swap`, `hx-trigger` | Board renders with htmx reactive attributes | ⬜ |
+| P3-T03 | `python -m pytest tests/test_visual_plan.py -v` | `PASSED` | Sample intent produces valid MDX plan output with mermaid diagram | ⬜ |
+| P3-T04 | `python -m pytest tests/test_visual_recap.py -v` | `PASSED` | Post-execution `/visual-recap` produces valid MDX with embedded test results | ⬜ |
+| P3-T05 | `python -m pytest tests/test_sse_telemetry.py -v` | `PASSED` | EventSource events received; `data:` frames parse as valid JSON | ⬜ |
+| P3-T06 | `python -m pytest tests/test_approval_button.py -v` | `PASSED` | HITL gate pauses kinetic loop; resumes on simulated click event | ⬜ |
+
+### P3 Manual Verification Checklist
+
+- [ ] Start Bifrost server: `python -m control_plane.bifrost_server`
+- [ ] Open `http://127.0.0.1:8080/bifrost` in browser
+- [ ] Verify knight cards render with status indicators
+- [ ] Verify SSE telemetry updates without page refresh
+- [ ] Verify approval button pauses and resumes a mock job
+- [ ] Verify MDX plan renders as formatted mermaid diagram
+- [ ] Verify dark mode / Luxora Gold (`#D4AF37`) theming applied
+
+---
+
+## 5. Phase 4 (MESH) — Distributed Communication Verification Matrix
+
+> **Objective**: tsnet mesh established, post-quantum crypto verified, zero-copy IPC measured.
+
+| Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
+|---|---|---|---|---|
+| P4-T01 | `cd 01_KERNEL/mesh/node_c && go test -v -run TestTwoNodeMesh` | `PASS` | Two-node communication over tsnet mesh established and verified | ⬜ |
+| P4-T02 | `cargo test -p camelot-pqcrypto -v` | `PASSED` | ML-KEM-768 (Kyber) handshake completes; key encapsulation round-trips | ⬜ |
+| P4-T03 | `python -m pytest tests/test_drone_discovery.py -v` | `PASSED` | New Empire Drone auto-registers on mesh join; roster reflects the joined node | ⬜ |
+| P4-T04 | `cargo audit` | `0 vulnerabilities found` | Post `ml-kem` migration: clean security audit; no known advisories in dependency tree | ⬜ |
+| P4-T05 | `python benchmarks/ipc_latency.py` | Latency report | `memfd_create` zero-copy IPC latency < 10µs (Linux/WSL2 only) | ⬜ |
+
+### P4 Platform Notes
+
+> [!WARNING]
+> P4-T01 (tsnet) and P4-T05 (memfd_create) require **Linux or WSL2**. On native Windows, these tests
+> should be marked as `planned` with a WSL2 execution path documented. Do not mark as `rejected`.
+
+```powershell
+# WSL2 execution path for Linux-dependent tests
+wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && cargo test -p camelot-pqcrypto"
+wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS/01_KERNEL/mesh/node_c && go test -v"
+```
+
+---
+
+## 6. Phase 5 (EDGE) — Edge Runtime Verification Matrix
+
+> **Objective**: WASM pipeline produces artifact, MicroVM boots, Swarm storage pins, memory budget holds.
+
+| Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
+|---|---|---|---|---|
+| P5-T01 | `cargo build --target wasm32-wasip1 -p camelot-edge` | WASM artifact in `target/` | `.wasm` file produced; executes in `wasmtime run` without traps | ⬜ |
+| P5-T02 | `python scripts/microvm_boot.py --health-check` | HTTP 200 from health endpoint | 5MB pill image boots in < 12ms; health endpoint responds | ⬜ |
+| P5-T03 | `python scripts/swarm_pin.py --test` | BZZ hash returned | Content retrievable by hash; hash matches pinned content | ⬜ |
+| P5-T04 | `python benchmarks/memory_budget.py` | Memory report | 3GB main + 1GB ZRAM budget; `MADV_DONTNEED` lease reclaims memory | ⬜ |
+| P5-T05 | `python -m pytest tests/test_voice_ingress.py -v` | `PASSED` | Hermes-Jarvis voice command transcribes to a valid kinetic loop intent | ⬜ |
+| P5-T06 | `python scripts/preview_drone.py --local-deploy --health-check` | HTTP 200 from preview drone | Sovereign Preview Drone deploys locally before any Swarm pin; health endpoint responds | ⬜ |
+
+### P5 Platform Notes
+
+> [!IMPORTANT]
+> Phase 5 tests require specialized infrastructure:
+> - **P5-T01**: Requires `rustup target add wasm32-wasip1` and `wasmtime` installed
+> - **P5-T02**: Requires WSL2 + KVM for MicroVM (Firecracker/Cloud Hypervisor)
+> - **P5-T03**: Requires Swarm node or mock endpoint
+> - **P5-T04**: Requires Linux for `MADV_DONTNEED` / ZRAM; Windows uses simulated budget
+
+```powershell
+# Pre-flight: install WASM target
+rustup target add wasm32-wasip1
+
+# Pre-flight: verify wasmtime
+wasmtime --version
+
+# Pre-flight: verify WSL2 + KVM (for MicroVM)
+wsl -d Ubuntu -- bash -c "ls /dev/kvm && echo 'KVM available' || echo 'KVM not available'"
+```
+
+---
+
+## 7. Regression Test Battery
+
+All existing test suites MUST remain green throughout the upgrade. Run before and after each phase.
+
+### 7.1 Python Test Suite
+
+```powershell
+# Full Python test suite
+.venv\Scripts\python.exe -m pytest -v --tb=short 2>&1 | Tee-Object -FilePath regression_python.log
+```
+
+### 7.2 Rust Test Suite
+
+```powershell
+# All Rust workspace crates
+cargo test --workspace 2>&1 | Tee-Object -FilePath regression_rust.log
+
+# Static analysis
+cargo check 2>&1  # All 8 workspace crates
+cargo clippy --workspace -- -D warnings 2>&1
+```
+
+### 7.3 Node.js Test Suite
+
+```powershell
+npm test 2>&1 | Tee-Object -FilePath regression_node.log
+```
+
+### 7.4 Control Plane Module Self-Tests
+
+```powershell
+$modules = @(
+    "control_plane.knight_agent",
+    "control_plane.factory_lane",
+    "control_plane.colmad",
+    "control_plane.firnflow",
+    "control_plane.cartridge_manager",
+    "control_plane.inspira_metrics",
+    "control_plane.anya_gate",
+    "control_plane.soul_oversight"
+)
+foreach ($mod in $modules) {
+    Write-Host "`n=== Testing $mod ===" -ForegroundColor Yellow
+    python -m $mod --test 2>&1
+    if ($LASTEXITCODE -ne 0) { Write-Host "FAIL: $mod" -ForegroundColor Red }
+    else { Write-Host "PASS: $mod" -ForegroundColor Green }
+}
+```
+
+### 7.5 Squire Colony Triage
+
+```powershell
+# Non-interactive full triage
+python -m squires.colony triage . --auto-approve 2>&1 | Tee-Object -FilePath regression_colony.log
+```
+
+---
+
+## 8. System-Level Acceptance Tests
+
+### 8.1 Full Boot Sequence
+
+```powershell
+# Full boot must complete all 6 phases without error
+python bin/awaken.py 2>&1 | Tee-Object -FilePath boot_log.txt
+
+# Verify boot phases
+Select-String -Path boot_log.txt -Pattern "Phase \d" | ForEach-Object { $_.Line }
+```
+
+- [ ] Boot completes 6 phases without error
+- [ ] All knights register in roster
+- [ ] Port probes return expected services
+
+### 8.2 Version Consistency
+
+```powershell
+# All version surfaces must report v9000.14
+$surfaces = @(
+    'python -c "from control_plane.anya_gate import __version__; print(__version__)"',
+    'python -c "from control_plane.soul_oversight import __version__; print(__version__)"',
+    'python -c "from control_plane.knight_agent import __version__; print(__version__)"',
+    'python -c "from control_plane.factory_lane import __version__; print(__version__)"',
+    'python -c "from control_plane.colmad import __version__; print(__version__)"',
+    'python -c "from control_plane.firnflow import __version__; print(__version__)"'
+)
+foreach ($s in $surfaces) {
+    $ver = Invoke-Expression $s 2>&1
+    if ($ver -ne "9000.14") {
+        Write-Host "VERSION MISMATCH: $s → $ver" -ForegroundColor Red
+    } else {
+        Write-Host "OK: $ver" -ForegroundColor Green
+    }
+}
+```
+
+- [ ] All control_plane modules report `9000.14`
+- [ ] `dist/camelot.exe --version` reports `9000.14`
+- [ ] `//STATUS` displays `v9000.14-CYBERTRONIA`
+
+### 8.3 Provenance Integrity
+
+```powershell
+# Verify provenance ledger has entries for this upgrade
+Select-String -Path PROVENANCE_LEDGER.md -Pattern "9000.14" | Measure-Object | Select-Object Count
+```
+
+- [ ] `PROVENANCE_LEDGER.md` contains entries tagged with `9000.14`
+- [ ] Entries are append-only (no prior entries modified)
+- [ ] Each phase gate records a provenance entry
+
+### 8.4 Security Sweep
+
+```powershell
+# Ghost squire — no secrets in repo
+python -m squires.colony ghost . 2>&1 | Tee-Object -FilePath security_sweep.log
+
+# Verify clean
+Select-String -Path security_sweep.log -Pattern "SECRET|CRITICAL" | Measure-Object | Select-Object Count
+```
+
+- [ ] No secrets detected by GHOST squire
+- [ ] No CRITICAL findings in colony triage
+- [ ] API keys remain boolean-only in `config.json`
+
+### 8.5 Portable Binary
+
+```powershell
+# Portable binary version check
+dist\camelot.exe --version 2>&1
+
+# Basic REPL smoke test
+echo "//STATUS" | dist\camelot.exe --batch 2>&1
+```
+
+- [ ] `dist/camelot.exe` launches without error
+- [ ] Reports `v9000.14`
+- [ ] `//STATUS` command executes successfully
+
+---
+
+## 9. Evidence Artifact Requirements
+
+Each phase MUST produce the following evidence artifacts before its gate can open:
+
+### 9.1 Per-Phase Evidence Files
+
+| Phase | Evidence Path | Contents |
+|---|---|---|
+| IRON (P1) | `03_VAULT/runtime_state/nano_swarm_evidence/v9000_phase_1_evidence.json` | P1-T01 through P1-T10 results, timestamps, command outputs |
+| SOUL (P2) | `03_VAULT/runtime_state/nano_swarm_evidence/v9000_phase_2_evidence.json` | P2-T01 through P2-T07 results, Z3 proof artifacts |
+| BRAIN (P3) | `03_VAULT/runtime_state/nano_swarm_evidence/v9000_phase_3_evidence.json` | P3-T01 through P3-T06 results, screenshot of Bifrost board |
+| MESH (P4) | `03_VAULT/runtime_state/nano_swarm_evidence/v9000_phase_4_evidence.json` | P4-T01 through P4-T05 results, Kyber handshake log |
+| EDGE (P5) | `03_VAULT/runtime_state/nano_swarm_evidence/v9000_phase_5_evidence.json` | P5-T01 through P5-T06 results, WASM artifact hash |
+
+### 9.2 Evidence JSON Schema
+
+```json
+{
+  "phase": "P1-IRON",
+  "version": "9000.14",
+  "timestamp": "2026-06-27T00:00:00Z",
+  "tests": [
+    {
+      "id": "P1-T01",
+      "command": "python -c \"from control_plane.anya_gate import __version__; print(__version__)\"",
+      "expected": "9000.14",
+      "actual": "",
+      "status": "pending",
+      "evidence_class": "planned",
+      "executor": "SIR_FORGE",
+      "duration_ms": 0
+    }
+  ],
+  "gate_recommendation": "BLOCK|PASS",
+  "reviewer": "SIR_SENTINEL"
+}
+```
+
+### 9.3 Supporting Artifacts
+
+- [ ] `colony_report.md` updated after each phase's colony triage
+- [ ] `PROVENANCE_LEDGER.md` entries for each file created/modified
+- [ ] Regression test logs archived: `regression_python.log`, `regression_rust.log`, `regression_node.log`
+- [ ] Boot log archived: `boot_log.txt`
+- [ ] Security sweep log archived: `security_sweep.log`
+
+---
+
+## 10. Acceptance Gates
+
+### Gate Summary Table
+
+| Gate | Phase | Criteria | Blocking? | Status |
+|---|---|---|---|---|
+| **Gate 1 — IRON** | P1 | All P1-T01…T10 pass; no CRITICAL colony findings; version `9000.14` on all modules | ✅ Yes | ⬜ PENDING |
+| **Gate 2 — SOUL** | P2 | Kinetic loop end-to-end (6 stages); Z3 real verification blocks dangerous patch; 11/11 Obsidian Pillars validated; provenance atomic | ✅ Yes | ⬜ PENDING |
+| **Gate 3 — BRAIN** | P3 | HTMX board renders at `/bifrost`; MDX schema validates; SSE telemetry flows; approval button resumes loop | ✅ Yes | ⬜ PENDING |
+| **Gate 4 — MESH** | P4 | tsnet 2-node mesh + ML-KEM-768 mTLS working; `cargo audit` clean; IPC latency < 10µs (Linux/WSL2 — may defer to `planned` on native Windows) | ⚠️ Partial | ⬜ PENDING |
+| **Gate 5 — EDGE** | P5 | WASM pipeline produces artifact; MicroVM boot < 12ms; Swarm pin round-trips (blocked on WSL2+KVM for MicroVM — may defer to `planned`) | ⚠️ Partial | ⬜ PENDING |
+| **FINAL** | ALL | `//STATUS` returns `v9000.14-CYBERTRONIA` across all surfaces; all evidence JSONs committed; no `rejected` claims outstanding | ✅ Yes | ⬜ PENDING |
+
+### Gate Escalation Protocol
+
+```
+IF gate fails:
+  1. SIR_DEBUG runs //HEAL on failing test
+  2. Up to 3 PIV iterations (Plan → Implement → Validate)
+  3. If still failing after 3 iterations → HUMAN_GATE escalation
+  4. Failing evidence logged with class "rejected" and remediation plan
+
+IF gate passes:
+  1. Evidence JSON updated with "confirmed" class
+  2. PROVENANCE_LEDGER.md entry appended
+  3. SIR_SENTINEL signs off
+  4. Next phase unlocked
+```
+
+### Final Acceptance Command
+
+```powershell
+# This command validates the complete upgrade
+python -m control_plane.runic_router --rune STATUS --task "" 2>&1
+
+# Expected output must contain:
+# - Version: v9000.14-CYBERTRONIA
+# - All knights: ONLINE or IDLE
+# - Colony: HEALTHY
+# - Evidence: 5/5 phases confirmed
+```
+
+---
+
+## Appendix A: Quick-Reference Test Commands
+
+```powershell
+# === ONE-LINER FULL VERIFICATION ===
+# Run this after all phases complete to verify the entire upgrade
+
+$ErrorActionPreference = "Continue"
+
+Write-Host "=== CAMELOT-OS v9000.14 FULL VERIFICATION ===" -ForegroundColor Magenta
+
+# 1. Python tests
+Write-Host "`n[1/6] Python tests..." -ForegroundColor Cyan
+.venv\Scripts\python.exe -m pytest --tb=line -q
+
+# 2. Rust tests
+Write-Host "`n[2/6] Rust tests..." -ForegroundColor Cyan
+cargo test --workspace --quiet
+
+# 3. Control plane self-tests
+Write-Host "`n[3/6] Control plane..." -ForegroundColor Cyan
+@("knight_agent","factory_lane","colmad","firnflow","cartridge_manager","inspira_metrics") |
+    ForEach-Object { python -m "control_plane.$_" --test 2>&1 | Select-Object -Last 1 }
+
+# 4. Colony triage
+Write-Host "`n[4/6] Colony triage..." -ForegroundColor Cyan
+python -m squires.colony triage . --auto-approve 2>&1 | Select-Object -Last 3
+
+# 5. Security sweep
+Write-Host "`n[5/6] Ghost sweep..." -ForegroundColor Cyan
+python -m squires.colony ghost . 2>&1 | Select-Object -Last 3
+
+# 6. Version check
+Write-Host "`n[6/6] Version check..." -ForegroundColor Cyan
+python -c "from control_plane.anya_gate import __version__; print(f'v{__version__}')"
+
+Write-Host "`n=== VERIFICATION COMPLETE ===" -ForegroundColor Magenta
+```
+
+---
+
+> **Sign-Off Chain**: SIR_FORGE (executor) → SIR_SENTINEL (verifier) → SIR_BORIS (architect) → KING_ARTHUR (final authority)
