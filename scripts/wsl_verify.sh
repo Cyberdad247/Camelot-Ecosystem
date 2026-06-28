@@ -167,14 +167,43 @@ fi
 
 # ── Cross-platform suites re-confirmed under Linux ───────────────────────────
 hdr "Linux re-confirmation: Python edge selftests"
-for m in scarcity_protocol swarm_pin voice_ingress preview_drone empire_drone \
-         kinetic_loop z3_verify obsidian_pillars; do
+
+# Stdlib-only modules — always runnable on a bare python3.
+for m in scarcity_protocol swarm_pin preview_drone empire_drone \
+         shadow_provenance obsidian_pillars z3_verify; do
   if "$PYBIN" -m "control_plane.$m" --test >/dev/null 2>&1; then
-    pass "control_plane.$m --test (Linux)"
+    pass "control_plane.$m --test (Linux, stdlib)"
   else
-    fail "control_plane.$m --test (Linux)"
+    fail "control_plane.$m --test (Linux, stdlib)"
   fi
 done
+
+# crucible_runner's selftest runs pytest-in-isolation — gate on pytest presence.
+if "$PYBIN" -c "import pytest" >/dev/null 2>&1; then
+  "$PYBIN" -m control_plane.crucible_runner --test >/dev/null 2>&1 \
+    && pass "control_plane.crucible_runner --test (Linux, pytest)" \
+    || fail "control_plane.crucible_runner --test (Linux, pytest)"
+else
+  skip "pytest absent — crucible_runner (pytest-in-isolation) not re-run on Linux"
+fi
+
+# Pydantic-dependent modules — SKIP (not FAIL) if the dep stack is absent. A bare
+# WSL python3 has no pydantic/fastapi; install the project deps for full coverage.
+HAVE_PYD=0; "$PYBIN" -c "import pydantic" >/dev/null 2>&1 && HAVE_PYD=1
+if [ "$HAVE_PYD" = 1 ]; then
+  for m in kinetic_loop voice_ingress mdx_renderers inspira_metrics; do
+    if "$PYBIN" -m "control_plane.$m" --test >/dev/null 2>&1; then
+      pass "control_plane.$m --test (Linux, pydantic)"
+    else
+      fail "control_plane.$m --test (Linux, pydantic)"
+    fi
+  done
+else
+  skip "pydantic stack absent — kinetic_loop/voice_ingress/mdx_renderers/inspira_metrics not re-run on Linux"
+  printf "       install deps for full Linux coverage, e.g.:\n"
+  printf "         sudo apt-get install -y python3-pip && %s -m pip install pydantic fastapi jsonschema z3-solver\n" "$PYBIN"
+  printf "       (these modules already pass on the dev host with the full stack)\n"
+fi
 
 # ── Summary ──────────────────────────────────────────────────────────────────
 hdr "Summary"

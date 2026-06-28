@@ -153,7 +153,7 @@ print('P2 integration smoke: PASSED')
 | P4-T02 | `cargo test -p camelot-pqcrypto --release` | `3 passed` | ML-KEM-768 handshake round-trips (shared secrets match); wrong-key diverges; ML-DSA-65 sign/verify + tamper-detect | ✅ |
 | P4-T03 | `python -m control_plane.empire_drone --test` / `pytest tests/test_phase45_edge.py -k drone` | `ALL PASS` | New drone auto-registers on join; idempotent re-announce; stale drones reaped | ✅ |
 | P4-T04 | `cargo audit` | `0 vulnerabilities` | Migrate pqcrypto→ml-kem 0.3.x — crate notes defer this (pqcrypto family works, P4-T02 green); migration not undertaken | 🔨 planned |
-| P4-T05 | `python benchmarks/ipc_latency.py` | Latency report | `memfd_create` zero-copy — **Linux-only**; native Windows has no memfd | 🔴 blocked (Linux/WSL2) |
+| P4-T05 | `bash scripts/wsl_verify.sh` (memfd section) | zero-copy across fork + latency | **Verified on WSL2**: `memfd_create` page visible across `fork`; ~0.126µs/page round-trip (target <10µs) | ✅ (WSL2) |
 
 ### P4 Platform Notes
 
