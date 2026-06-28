@@ -1627,3 +1627,18 @@
   - `go build/vet/test ./...` (01_KERNEL/mesh/node_c) — compiles clean, test skips w/o TS_AUTHKEY
   - `python -m squires.colony triage control_plane` — LOW 2.0/100, 0 CRITICAL
 - **Tag**: V9000_14_CYBERTRONIA_PHASES_1_5
+
+---
+## [2026-06-28] v9000.14-CYBERTRONIA Split into Dedicated PR #49
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Isolated the v9000.14 implementation from the broad Phase-H bundle (PR #46) into a clean, review-ready PR off current `main`. Cherry-picked 16 commits (blueprint base + 15 impl) via worktree; resolved one 3-way conflict (soul_oversight.py import refactor on main) and verified the resolution before push. Closed the redundant docs-only PR #48 as superseded.
+- **Scope**:
+  - Branch: feat/v9000.14-cybertronia (off origin/main, 16 commits)
+  - PR #49 opened (base main) — supersedes PR #48 (closed)
+  - Conflict resolved: control_plane/soul_oversight.py (main imports + P1-T01 version line; later commits layered cleanly)
+- **Verification performed**:
+  - `git cherry-pick` 16 commits — completed, 1 conflict resolved
+  - `python -m control_plane.{soul_oversight,kinetic_loop,z3_verify} --test` — ALL PASS in worktree
+  - `pytest tests/test_soul_oversight.py tests/test_z3_verification.py` — 9 passed
+  - `gh pr create` → #49; `gh pr close 48` (superseded)
+- **Tag**: V9000_14_CYBERTRONIA_PR49_SPLIT
