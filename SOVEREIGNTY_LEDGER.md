@@ -2,6 +2,19 @@
 
 > **Note on ordering**: File order represents **insertion order** (chronological by when entries were added to this ledger), NOT timestamp order. Each entry's `Timestamp` field is the actual time the work occurred, which may be earlier than insertion order if entries were backfilled.
 
+> **Last Updated**: 2026-06-28T05:30:00Z (11 entries, v1.0.0 baseline recovery complete on `feat/kba-cartridge-v1000` and `feat/knight-console` mirrors).
+
+## Type Legend
+
+- `task_execution` — routine task that was executed
+- `qr_pill_activation` — QR-pill activation (a sovereign operation)
+- `ci_fail_loop_resolution` — resolution of a CI fail-loop iteration
+- `architecture_reorg` — repository architecture reorganization
+- `pr_merge` — pull request merge (or direct-push equivalent)
+- `audit_correction` — correction of a prior audit entry
+- `mirror_sync` — synchronization of a mirror repo
+- `mirror_wip_recovery` — recovery of a misapplied work-in-progress on a mirror
+
 
 ### Approval Request: test_op_1
 - **Type**: task_execution
