@@ -124,12 +124,12 @@ print('P2 integration smoke: PASSED')
 
 | Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
 |---|---|---|---|---|
-| P3-T01 | `python -m pytest tests/test_mdx_schema.py -v` | `PASSED` | Valid MDX passes validation; malformed MDX rejected with clear error | ⬜ |
-| P3-T02 | `curl -s http://127.0.0.1:8080/bifrost \| Select-String 'hx-'` | HTML containing `hx-get`, `hx-swap`, `hx-trigger` | Board renders with htmx reactive attributes | ⬜ |
-| P3-T03 | `python -m pytest tests/test_visual_plan.py -v` | `PASSED` | Sample intent produces valid MDX plan output with mermaid diagram | ⬜ |
-| P3-T04 | `python -m pytest tests/test_visual_recap.py -v` | `PASSED` | Post-execution `/visual-recap` produces valid MDX with embedded test results | ⬜ |
-| P3-T05 | `python -m pytest tests/test_sse_telemetry.py -v` | `PASSED` | EventSource events received; `data:` frames parse as valid JSON | ⬜ |
-| P3-T06 | `python -m pytest tests/test_approval_button.py -v` | `PASSED` | HITL gate pauses kinetic loop; resumes on simulated click event | ⬜ |
+| P3-T01 | `python -m control_plane.mdx_schema --test` / `pytest tests/test_phase3_brain.py -k mdx_schema` | `ALL PASS` | Valid MDX passes; malformed MDX (bad version/kind/component/risk) rejected | ✅ |
+| P3-T02 | `python -m control_plane.bifrost_server --test` (TestClient) | board 200 w/ `hx-get`, `hx-swap`, `hx-trigger` + Luxora Gold `#D4AF37` | Board renders with htmx reactive attributes | ✅ |
+| P3-T03 | `python -m control_plane.mdx_renderers --test` / `pytest -k visual_plan` | `ALL PASS` | Intent → valid MDX plan with mermaid diagram + ApprovalButton | ✅ |
+| P3-T04 | `python -m control_plane.mdx_renderers --test` / `pytest -k visual_recap` | `ALL PASS` | Post-execution `/visual-recap` valid MDX with outcome/verify results | ✅ |
+| P3-T05 | `pytest tests/test_phase3_brain.py -k sse` | `PASSED` | SSE `event: metrics` + `data:` frames parse as valid JSON | ✅ |
+| P3-T06 | `pytest tests/test_phase3_brain.py -k approval` | `PASSED` | ApprovalButton registers HITL gate; click resumes kinetic loop into EXECUTE | ✅ |
 
 ### P3 Manual Verification Checklist
 
