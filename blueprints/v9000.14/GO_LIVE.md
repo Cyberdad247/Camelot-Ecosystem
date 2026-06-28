@@ -60,6 +60,27 @@ admin console (Access controls), then:
 
 > Treat auth keys like passwords — store them in a secrets manager, not the repo.
 
+### Kubernetes deployment (Empire drones at scale)
+
+For drones running in Kubernetes, use the **Tailscale sidecar** — a tailscale
+container alongside the drone pod that joins the mesh with an ephemeral, tagged
+key. See `01_KERNEL/mesh/node_c/k8s/empire-drone-sidecar.example.yaml`:
+
+```bash
+# 1. Put a real ephemeral+tagged key in the tailscale-auth Secret (or inject
+#    from your secrets manager), then:
+kubectl apply -f 01_KERNEL/mesh/node_c/k8s/empire-drone-sidecar.example.yaml
+# 2. Confirm the drone joined (and grab a login URL if you skipped the key):
+kubectl logs deploy/empire-drone -c ts-sidecar
+```
+
+The manifest runs the sidecar in **userspace mode** (no `NET_ADMIN`/`/dev/net/tun`),
+stores node state in a Kubernetes Secret (with the RBAC Role included), and
+advertises `tag:empire-drone` so the tailnet grants apply automatically. Each
+pod gets its own tailnet identity and is auto-removed on shutdown (ephemeral).
+For larger fleets, the **Tailscale Kubernetes Operator** can manage ingress/
+egress and the API-server proxy instead of per-pod sidecars.
+
 ---
 
 ## P5-T02 — Unikraft MicroVM (needs /dev/kvm access + a hypervisor)
