@@ -80,7 +80,7 @@ def _boot_command(hv_name: str, hv_path: str, image: Path, port: int) -> list[st
                 "-device", "virtio-net,netdev=n0", "-append", "console=ttyS0"]
     if hv_name == "cloud-hypervisor":
         return [hv_path, "--kernel", str(image), "--memory", "size=64M",
-                "--net", f"tap=,mac=,ip=,mask=", "--cmdline", "console=ttyS0"]
+                "--net", "tap=,mac=,ip=,mask=", "--cmdline", "console=ttyS0"]
     # krunvm
     return [hv_path, "start", "--mem", "64", str(image)]
 
