@@ -8,6 +8,7 @@ members = [
     "02_FORGE/kinetic/rotel",
     "04_KINETIC/squires_rs",
     "control_plane/rtk",
+    "kinetic_edge/camelot_edge",
     "kinetic_edge/pqcrypto",
     "kinetic_edge/swarm_spawner"
 ]

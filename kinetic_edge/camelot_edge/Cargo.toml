@@ -1,0 +1,9 @@
+[package]
+name = "camelot-edge"
+version = "9000.14.0"
+edition = "2021"
+description = "CAMELOT edge WASM pill (P5-T01) — wasm32-wasip1 boot + health"
+
+[[bin]]
+name = "camelot-edge"
+path = "src/main.rs"
