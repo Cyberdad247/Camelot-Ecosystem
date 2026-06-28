@@ -158,13 +158,20 @@ print('P2 integration smoke: PASSED')
 ### P4 Platform Notes
 
 > [!WARNING]
-> P4-T01 (tsnet) and P4-T05 (memfd_create) require **Linux or WSL2**. On native Windows, these tests
-> should be marked as `planned` with a WSL2 execution path documented. Do not mark as `rejected`.
+> P4-T01 (tsnet), P4-T05 (memfd_create), and P5-T02 (MicroVM) require **Linux or WSL2**.
+> On native Windows they are marked `planned`/`blocked` with a WSL2 execution path. Do not mark as `rejected`.
+
+All four environment-gated tasks (P4-T01, P4-T04, P4-T05, P5-T02) plus the P5-T01
+`wasmtime` run-check are driven by **`scripts/wsl_verify.sh`**, which preflights the
+toolchain, exercises the real Linux primitives (e.g. `memfd_create` zero-copy across
+`fork`), and reports PASS/FAIL/SKIP per task:
 
 ```powershell
-# WSL2 execution path for Linux-dependent tests
-wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && cargo test -p camelot-pqcrypto"
-wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS/01_KERNEL/mesh/node_c && go test -v"
+# From Windows, launch the driver inside WSL2 Ubuntu:
+wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && bash scripts/wsl_verify.sh"
+
+# With a Tailscale auth key to attempt the live tsnet mesh (P4-T01):
+wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && TS_AUTHKEY=tskey-... bash scripts/wsl_verify.sh"
 ```
 
 ---
