@@ -11,6 +11,8 @@ Pipeline: PARSE -> ENRICH -> COMPILE -> ROUTE -> VALIDATE
 """
 
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import re
 import time
@@ -82,6 +84,7 @@ class APEEResult:
     route_reason: str
     validation: ValidationResult
     pipeline_ms: float
+    colmad_verdict: "object | None" = None  # CrucibleVerdict for CRITICAL/HIGH intents (P1-T02)
 
     def render(self) -> str:
         """Returns the visible Anya pipeline block for display in responses."""
@@ -106,6 +109,12 @@ class APEEResult:
         ]
         if self.validation.issues:
             lines.append(f"         | issues={self.validation.issues}")
+        if self.colmad_verdict is not None:
+            cv = self.colmad_verdict
+            lines.append(
+                f"COLMAD   | {getattr(cv, 'verdict', '?')} "
+                f"({getattr(cv, 'approvals', 0)}/3 approve)"
+            )
         lines += [sep, f"         pipeline: {self.pipeline_ms:.0f}ms", ""]
         return "\n".join(lines)
 
@@ -556,6 +565,23 @@ def _stage_triage(parse: "ParseResult", enrich: "EnrichResult", knight_id: str):
     )
 
 
+def _stage_colmad(raw_intent: str, triage) -> "object | None":
+    """Stage 6.5 (P1-T02): for CRITICAL-lane or HUMAN_GATE intents, run the
+    ColMAD 3-persona adversarial crucible before the proposal is allowed to
+    proceed. Returns a CrucibleVerdict (or None for low-risk intents that do
+    not warrant a debate). Failure to import/run ColMAD is non-fatal — the
+    pipeline degrades gracefully to None.
+    """
+    is_high = triage.priority == "CRITICAL" or triage.hitl_tier == "HUMAN_GATE"
+    if not is_high:
+        return None
+    try:
+        from .colmad import ColMAD
+        return ColMAD().crucible(raw_intent)
+    except Exception:  # pragma: no cover - defensive: never break the gate
+        return None
+
+
 # ---------------------------------------------------------------------------
 # AnyaGate — the sovereign entry/exit point
 # ---------------------------------------------------------------------------
@@ -583,6 +609,9 @@ class AnyaGate:
         triage_for_socrates = _stage_triage(parse, enrich, knight)
         validation = _stage_validate(parse, titan, enrich, knight_id=knight)
 
+        # Stage 6.5 (P1-T02): ColMAD adversarial crucible for CRITICAL/HIGH intents
+        colmad_verdict = _stage_colmad(raw_intent, triage_for_socrates)
+
         # Stage 7 (post-triage): SirSocrates Northstar examination for HIGH/CRITICAL
         _stage_socrates_full(raw_intent, triage_for_socrates.hitl_tier)
 
@@ -599,6 +628,7 @@ class AnyaGate:
             route_reason=reason,
             validation=validation,
             pipeline_ms=ms,
+            colmad_verdict=colmad_verdict,
         )
 
     def triage(self, raw_intent: str):
@@ -626,7 +656,15 @@ class AnyaGate:
 
 
 class AnyaCompiler:
-    """Ethereal Compiler (Layer 7) implementing Triple-QFT Protocol."""
+    """Ethereal Compiler (Layer 7) implementing Triple-QFT Protocol.
+
+    P1-T06 note: this is NOT a duplicate of the APEE ``_stage_*`` pipeline. It is
+    a deliberately lightweight compiler (renormalize/quantize/pedagogy/compile →
+    Titan_Prompt glyph + confidence scalar) consumed by ``camelot_cli._run_task``
+    for fast intent shaping. The APEE pipeline (AnyaGate.process) is the heavy
+    governance path. The only true name collision is the unrelated
+    ``01_KERNEL/titan/memory/compiler.AnyaCompiler`` in a different subsystem.
+    """
 
     def __init__(self):
         self.anchor_tokens = {

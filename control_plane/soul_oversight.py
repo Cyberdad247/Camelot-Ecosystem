@@ -13,6 +13,9 @@ EXCALIBUR_A_QNF Phase 4 adds the three-tier Iron Gate (pre_execute):
 Z3 symbolic verification gates any job that mutates git/state-machines.
 """
 
+
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 import json
 import os
 import sys
@@ -55,6 +58,16 @@ class SoulOversight:
         # In a real CLI, this would call the shared _check_iron_gate
         return False # Default to locked for safety
 
+    async def gate(self, job: Any) -> "GateDecision":
+        """Unified governance entry (P1-T05): run the Iron Gate v2 three-tier
+        pre-execution check. This is the single coherent API surface — the v1
+        soul-rewrite audit (audit_proposal/trigger_iron_gate) and the v2 job
+        gate (pre_execute) are both reachable from one SoulOversight instance.
+        Delegates to the module-level ``pre_execute`` (kept for back-compat with
+        existing imports).
+        """
+        return await pre_execute(job)
+
 # ---------------------------------------------------------------------------
 # Iron Gate v2 — three-tier HITL governance (EXCALIBUR_A_QNF Phase 4)
 # ---------------------------------------------------------------------------
@@ -94,40 +107,53 @@ def _z3_verify_patch(job: Any) -> tuple[bool, str]:
         return True, f"Z3 error ({exc}) — passed through"
 
 
+def _load_colony_nexus():
+    """Lazily load the ColonyNexus class via explicit file-path import (P1-T07).
+
+    ``01_KERNEL`` is not an importable package (leading digit), so colony_nexus
+    is loaded by path — a single, explicit pattern that replaces the previous
+    try/except cascade (whose first branch, ``from _01_KERNEL...``, could never
+    succeed). Returns the ColonyNexus class, or None when the module is
+    unavailable. Never raises — colony state must not crash the gate.
+    """
+    from pathlib import Path as _Path
+    import importlib.util as _ilu
+
+    path = (_Path(__file__).resolve().parents[1]
+            / "01_KERNEL" / "iron_gate" / "DEFENSE_GRID" / "colony_nexus.py")
+    if not path.exists():
+        return None
+    try:
+        spec = _ilu.spec_from_file_location("colony_nexus", path)
+        if not (spec and spec.loader):
+            return None
+        mod = sys.modules.get("colony_nexus")
+        if mod is None:
+            mod = _ilu.module_from_spec(spec)
+            sys.modules["colony_nexus"] = mod
+            spec.loader.exec_module(mod)
+        return getattr(mod, "ColonyNexus", None)
+    except Exception:
+        return None
+
+
 def _colony_escalate(tier: str) -> str:
     """Escalate `tier` to HUMAN_GATE when colony risk is CRITICAL.
 
-    Reads colony_report.md lazily; silently no-ops if the file is absent
-    or the import fails (non-blocking — colony state should not crash the gate).
+    Non-blocking: if the colony module is absent or its scan fails, the original
+    tier is returned unchanged (the gate must degrade gracefully).
     """
     if tier == "HUMAN_GATE":
-        return tier   # already at max — no need to parse report
+        return tier   # already at max — no need to scan
+    ColonyNexus = _load_colony_nexus()
+    if ColonyNexus is None:
+        return tier   # colony module unavailable — proceed with original tier
     try:
-        from pathlib import Path as _Path
-        sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))
-        from _01_KERNEL.iron_gate.DEFENSE_GRID.colony_nexus import ColonyNexus  # type: ignore
         state = ColonyNexus(hermes_enabled=False).scan()
-        if state.is_critical:
+        if getattr(state, "is_critical", False):
             return "HUMAN_GATE"
     except Exception:
-        try:
-            # fallback: direct path load without package import
-            import importlib.util as _ilu
-            _p = _Path(__file__).resolve().parents[1]
-            _spec = _ilu.spec_from_file_location(
-                "colony_nexus",
-                _p / "01_KERNEL" / "iron_gate" / "DEFENSE_GRID" / "colony_nexus.py",
-            )
-            if _spec and _spec.loader:
-                _mod = _ilu.module_from_spec(_spec)
-                import sys as _sys
-                _sys.modules["colony_nexus"] = _mod
-                _spec.loader.exec_module(_mod)
-                state = _mod.ColonyNexus(hermes_enabled=False).scan()
-                if state.is_critical:
-                    return "HUMAN_GATE"
-        except Exception:
-            pass   # colony data unavailable — proceed with original tier
+        pass   # colony data unavailable — proceed with original tier
     return tier
 
 
@@ -202,7 +228,86 @@ def _append_hitl(job: Any, note: str) -> None:
         f.write(json.dumps(entry) + "\n")
 
 
+def _selftest() -> int:
+    """P1-T05 acceptance: verify the consolidated SoulOversight + Iron Gate v2
+    API behaves coherently across all three HITL tiers and the soul-rewrite
+    audit path. Returns the failure count.
+    """
+    import asyncio
+    from .factory_lane import FactoryJob, TriageScore
+
+    failures = 0
+
+    def check(name: str, cond: bool) -> None:
+        nonlocal failures
+        if not cond:
+            failures += 1
+        print(f"  [{'PASS' if cond else 'FAIL'}] {name}")
+
+    def _job(tier: str, z3: bool = False) -> FactoryJob:
+        ts = TriageScore(
+            auto_dispatchable=(tier == "AUTO"),
+            priority="NORMAL" if tier == "AUTO" else "HIGH",
+            hitl_tier=tier,
+            risk_entropy=0.05 if tier == "AUTO" else 0.7,
+            risk_reason=f"selftest tier={tier}",
+            assigned_knight="sir_boris",
+            estimated_tokens=1000,
+            cost_ceiling_usd=0.0,
+            shatterpoints_detected=[],
+            requires_z3_verification=z3,
+            cartridge_hint="DEFAULT",
+        )
+        return FactoryJob(job_id=f"selftest-{tier.lower()}", intent="selftest",
+                          lane="NORMAL", triage=ts, assigned_knight="sir_boris")
+
+    print("SoulOversight self-test (P1-T05 consolidated gate)")
+    oversight = SoulOversight(None)
+
+    # Tier-dispatch logic is tested in isolation from live colony state by
+    # neutralizing the colony escalator (which legitimately forces HUMAN_GATE
+    # when colony_report.md is CRITICAL). The escalator itself is checked below.
+    global _colony_escalate
+    _real_escalate = _colony_escalate
+    _colony_escalate = lambda tier: tier  # noqa: E731 — identity for isolation
+    os.environ.pop("CAMELOT_ALLOW_TIMEOUT_AUTO", None)
+    os.environ.pop("CAMELOT_DASHBOARD_OPERATOR_TOKEN", None)
+    try:
+        # Unified class API delegates to Iron Gate v2
+        auto = asyncio.run(oversight.gate(_job("AUTO")))
+        check("AUTO tier approved via SoulOversight.gate", auto.approved and auto.method == "AUTO")
+
+        prompt = asyncio.run(oversight.gate(_job("PROMPT")))
+        check("PROMPT tier requires confirmation", (not prompt.approved) and prompt.method == "PROMPT")
+
+        # HUMAN_GATE with no operator token -> suspended with checkpoint
+        hg = asyncio.run(oversight.gate(_job("HUMAN_GATE")))
+        check("HUMAN_GATE without token -> SUSPENDED", hg.method == "SUSPENDED" and not hg.approved)
+    finally:
+        _colony_escalate = _real_escalate
+
+    # Colony escalator is idempotent at the ceiling tier (deterministic).
+    check("colony escalate idempotent at HUMAN_GATE", _colony_escalate("HUMAN_GATE") == "HUMAN_GATE")
+
+    # GateDecision schema
+    check("GateDecision has coherent fields",
+          all(hasattr(auto, f) for f in ("approved", "method", "reason", "checkpoint")))
+
+    # Module-level entry remains (back-compat)
+    direct = asyncio.run(pre_execute(_job("AUTO")))
+    check("module-level pre_execute back-compat", isinstance(direct, GateDecision))
+
+    # Soul-rewrite audit path (v1) still coherent
+    audit = asyncio.run(oversight.audit_proposal("sir_boris", "old soul", "new Lattice NDR+S soul"))
+    check("audit_proposal returns aligned verdict", audit["verdict"] == "RADIANT")
+
+    print(f"\n{'ALL PASS' if failures == 0 else f'{failures} FAILURE(S)'} — soul_oversight")
+    return failures
+
+
 if __name__ == "__main__":
+    if "--test" in sys.argv:
+        raise SystemExit(1 if _selftest() else 0)
     # Smoke test
     oversight = SoulOversight(None)
     print("Soul Oversight [shield]: Active and guarding the Knight Roster.")

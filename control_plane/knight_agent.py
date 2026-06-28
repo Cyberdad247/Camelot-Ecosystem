@@ -23,6 +23,8 @@ Run as module:
     python -m control_plane.knight_agent --roster
 """
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import sys
 
@@ -41,10 +43,16 @@ SkillTier = Literal["S1", "S2", "S3", "S4", "S5"]
 # VIDENEPTUS SkillGraph tier per knight (Merlin NLM):
 #   S1 atomic tools | S2 composite workflows | S3 contextual domain
 #   S4 strategic orchestration | S5 quantum meta-logic / self-modification
+# Invariant (P1-T03): every knight in soul_router.FOUNDRY_COUNCIL MUST have an
+# explicit tier here — no reliance on a silent default. Entries for knights NOT
+# in FOUNDRY_COUNCIL (merlin_omega the Grand Orchestrator, lady_apis the
+# archivist, sir_debug) are meta-knights: valid tiers, but outside the routable
+# council. The _selftest enforces council ⊆ _SKILLGRAPH_TIER.
 _SKILLGRAPH_TIER: dict[str, SkillTier] = {
     "sir_ghost": "S1", "sir_debug": "S1",
     "sir_forge": "S2", "sir_codex": "S2", "sir_valerian": "S2",
     "sir_boris": "S3", "sir_sentinel": "S3", "sir_liberte": "S3",
+    "sir_sonus": "S3",                       # Voice & Resonance (was missing — P1-T03)
     "sir_alex": "S4", "lady_apis": "S4", "sir_link": "S4", "sir_mnemo": "S4",
     "merlin_omega": "S5", "sir_helio": "S5", "sir_ouroboros": "S5",
     "sir_heimdall": "S4",
@@ -216,6 +224,12 @@ def _selftest() -> int:
     # V5.6 every knight has a SkillGraph tier
     check("V5.6 all knights have S1-S5 tier",
           all(k.skillgraph_tier in ("S1", "S2", "S3", "S4", "S5") for k in roster.values()))
+
+    # V5.6b (P1-T03) unified roster: every FOUNDRY_COUNCIL knight has an EXPLICIT
+    # tier entry — no silent default. Catches roster/tier drift like sir_sonus.
+    from .soul_router import FOUNDRY_COUNCIL
+    missing_tier = [e.knight_id for e in FOUNDRY_COUNCIL if e.knight_id not in _SKILLGRAPH_TIER]
+    check(f"V5.6b council⊆tier (missing={missing_tier})", not missing_tier)
 
     # V5.9 air-gap enforcement
     ghost = roster.get("sir_ghost")

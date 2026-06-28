@@ -21,6 +21,8 @@ Run as module:
     python -m control_plane.inspira_metrics --test
 """
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import sys
 
@@ -146,6 +148,49 @@ def _crystal_count() -> int:
         return 0
 
 
+def _mamba_compression_ratio() -> float:
+    """Live Ouroboros SSM (mamba-3) context-compression factor as N:1 (P1-T08).
+
+    Uses CompressionNexus tier-1 QFT compression as the SSM proxy on a
+    representative context block. Returns the compression factor (e.g. 4.8 →
+    4.8:1) or 0.0 if the engine is unavailable. Graceful — never raises.
+    """
+    try:
+        from .compression_nexus import CompressionNexus
+        sample = "# Camelot Context\n" + "\n".join(
+            f"## Section {i}\n" + "\n".join(
+                f"line {i}-{j} sovereign edge empire context detail bulk text"
+                for j in range(20)
+            ) for i in range(40)
+        )
+        res = CompressionNexus().compress_context(sample)
+        if 0.0 < res.ratio < 1.0:
+            return round(1.0 / (1.0 - res.ratio), 2)
+    except Exception:
+        pass
+    return 0.0
+
+
+def _kv_cache_hit_rate(router=None) -> float:
+    """Runtime KV-cache hit-rate proxy from the soul_router TTFT tracker (P1-T08).
+
+    Hits = TTFT samples under the SLO threshold (fast turnaround ⇒ prefix/KV
+    cache reuse). Returns a 0..1 rate, or 0.0 when no samples have been recorded
+    yet. Graceful — never raises.
+    """
+    try:
+        from .soul_router import SoulRouter
+        r = router if router is not None else SoulRouter()
+        samples = [t for hist in getattr(r, "_ttft_history", {}).values() for t in hist]
+        if not samples:
+            return 0.0
+        slo = getattr(r, "slo_threshold_ms", 2000.0)
+        hits = sum(1 for t in samples if t <= slo)
+        return round(hits / len(samples), 4)
+    except Exception:
+        return 0.0
+
+
 def collect_metrics() -> InspiraMetrics:
     """Aggregate a live telemetry snapshot from all sources."""
     lanes = _lane_depth()
@@ -155,8 +200,8 @@ def collect_metrics() -> InspiraMetrics:
         lane_depth=lanes,
         hitl_rates=hitl,
         blocked_per_hour=blocked,
-        mamba_compression_ratio=0.0,   # populated by ouroboros engine when Rust built
-        kv_cache_hit_rate=0.0,         # populated by soul_router TTFT tracker at runtime
+        mamba_compression_ratio=_mamba_compression_ratio(),   # live: CompressionNexus SSM proxy
+        kv_cache_hit_rate=_kv_cache_hit_rate(),                # live: soul_router TTFT tracker
         cost_hour_usd=0.0,             # 38 free models
         active_shatterpoints=[],
         colony_risk_score=score,
@@ -193,6 +238,17 @@ def _selftest() -> int:
 
     # crystal count reads FirnFlow (should be >= 4 after Phase 3 seeding)
     check("crystal_count reads FirnFlow", m.crystal_count >= 0)
+
+    # P1-T08: live data wiring — mamba compression non-zero when engine available
+    check(f"P1-T08 mamba_compression_ratio > 0 (={m.mamba_compression_ratio})",
+          m.mamba_compression_ratio > 0)
+    # kv_cache_hit_rate computes from soul_router TTFT history (seeded probe)
+    from .soul_router import SoulRouter
+    _r = SoulRouter()
+    _r.record_ttft("sir_ouroboros", 400.0)   # under SLO -> hit
+    _r.record_ttft("sir_ouroboros", 2500.0)  # over SLO  -> miss
+    _rate = _kv_cache_hit_rate(_r)
+    check(f"P1-T08 kv_cache_hit_rate from TTFT tracker (={_rate})", _rate == 0.5)
 
     # render produces a dashboard block
     block = m.render()

@@ -47,6 +47,10 @@ data/go-build/
 *.egg-info/
 target/
 
+# Built RTK bridge DLL (P1-T09) — crate source is tracked, the binary is not
+control_plane/rtk/rtk.dll
+*.dll
+
 # 5. OS / IDE / Tool artifacts
 *.log
 .cursor/
