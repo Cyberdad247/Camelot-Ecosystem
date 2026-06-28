@@ -26,6 +26,8 @@ Run as module:
     python -m control_plane.firnflow --test
 """
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import sys
 
@@ -201,6 +203,61 @@ class FirnFlow:
             budget -= c.tokens
         return out
 
+    # ── World Tree directory-scoped hydration (P2-T05) ───────────────────────
+
+    def _resolve_wing(self, scope: str) -> str:
+        """Resolve a Wing name or directory path to a canonical Wing key."""
+        s = (scope or "").strip()
+        up = s.upper()
+        if up in WINGS:
+            return up
+        norm = s.replace("\\", "/").strip("/").lower()
+        for wing, directory in WINGS.items():
+            if norm == directory.lower() or norm.startswith(directory.lower() + "/"):
+                return wing
+        return up  # fall back to the raw token (still usable as a namespace)
+
+    def hydrate_scope(self, scope: str, query: str = "",
+                      tiers: tuple[Tier, ...] = ("L1", "L2", "L3")) -> list[Chunk]:
+        """World Tree context hydration — load only the context namespaced to a
+        directory/Wing (Wing→Room→Drawer), instead of the whole flat store.
+
+        `scope` is a Wing name (KERNEL/CONTROL/FORGE/VAULT/HIVE) or a directory
+        path that maps to a Wing. Keys are namespaced as ``WING:room/drawer``.
+        Optional `query` further filters within the scope. Returns the scoped
+        chunks ordered L1→L2→L3.
+        """
+        wing = self._resolve_wing(scope)
+        prefix = f"{wing}:".upper()
+        l3_prefix = re.sub(r"[^a-zA-Z0-9_.-]", "_", f"{wing}:")[:120].upper()
+        q_terms = {t for t in query.lower().split()}
+
+        def _match(key: str, val: str, l3: bool = False) -> bool:
+            ku = key.upper()
+            if not (ku.startswith(prefix) or (l3 and ku.startswith(l3_prefix))):
+                return False
+            if q_terms:
+                hay = (key + " " + val).lower()
+                return any(t in hay for t in q_terms)
+            return True
+
+        results: list[Chunk] = []
+        if "L1" in tiers:
+            for c in self._l1.values():
+                if _match(c.key, c.value):
+                    results.append(Chunk(c.key, c.value, "L1", c.tokens))
+        if "L2" in tiers:
+            for key, rec in self._l2_load().items():
+                val = rec.get("value", "") if isinstance(rec, dict) else str(rec)
+                if _match(key, val):
+                    results.append(Chunk(key, val, "L2", _est_tokens(val)))
+        if "L3" in tiers:
+            for f in L3_DIR.glob("*.txt"):
+                val = f.read_text(encoding="utf-8", errors="replace")
+                if _match(f.stem, val, l3=True):
+                    results.append(Chunk(f.stem, val, "L3", _est_tokens(val)))
+        return results
+
     # ── νKG_Crystals ─────────────────────────────────────────────────────────
 
     def crystallize(self, skill_id: str, pattern: dict[str, Any]) -> NuKGCrystal:
@@ -307,6 +364,21 @@ def _selftest() -> int:
     # seed crystals (AC-20: >= 4)
     init_seed_crystals(ff)
     check("AC-20 >= 4 seed crystals initialized", len(ff.list_crystals()) >= 4)
+
+    # P2-T05: World Tree directory-scoped hydration
+    ff.anchor("KERNEL:reasoning/ouroboros", "ouroboros ssm linear reasoning core", "L1")
+    ff.anchor("CONTROL:gate/anya", "anya gate APEE triage pipeline", "L1")
+    ff.anchor("KERNEL:senses/telemetry", "rotel telemetry client", "L2")
+    kernel_ctx = ff.hydrate_scope("KERNEL")
+    control_ctx = ff.hydrate_scope("control_plane")  # dir path -> CONTROL wing
+    check("P2-T05 scoped hydration returns only KERNEL keys",
+          len(kernel_ctx) >= 2 and all(c.key.upper().startswith("KERNEL:") for c in kernel_ctx))
+    check("P2-T05 directory path resolves to CONTROL wing",
+          len(control_ctx) >= 1 and all(c.key.upper().startswith("CONTROL:") for c in control_ctx))
+    check("P2-T05 scope isolation (no cross-wing leakage)",
+          not any(c.key.upper().startswith("CONTROL:") for c in kernel_ctx))
+    check("P2-T05 query filter within scope",
+          len(ff.hydrate_scope("KERNEL", query="telemetry")) == 1)
 
     # status
     st = ff.status()

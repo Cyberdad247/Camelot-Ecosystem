@@ -15,6 +15,8 @@ Integration: appends to harness_queue.jsonl for async execution.
 """
 
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import json
 import os

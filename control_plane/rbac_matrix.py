@@ -11,6 +11,8 @@ Usage (called from anya_gate._stage_validate):
 """
 
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import json
 from functools import lru_cache

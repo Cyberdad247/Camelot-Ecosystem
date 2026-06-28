@@ -27,6 +27,8 @@ Run as module:
     python -m control_plane.cartridge_manager switch ANT
 """
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import sys
 
