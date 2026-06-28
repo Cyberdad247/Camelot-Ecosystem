@@ -1,6 +1,14 @@
 """
 TriageScore — Dynamic Confidence-Based Decision Making.
 
+NOTE (P1-T04 disambiguation): this is the *confidence scorer* — exported via
+`get_triage_scorer()` / `calculate_triage_score()` and consumed by
+test_validation.py and test_phase_f.py. It is distinct from
+`factory_lane.TriageScore`, the APEE v7.0 risk-entropy dataclass used by
+`anya_gate._stage_triage`. Not orphaned: this module has live test consumers and
+imports cleanly. Keep the two separate — they answer different questions
+(confidence-to-proceed vs. risk-entropy / HITL-tier).
+
 Replaces static thresholds with intelligent confidence scoring:
   < 0.15: HIGH confidence → AUTO mode (no human approval needed)
   0.15-0.55: MEDIUM confidence → Proceed with monitoring

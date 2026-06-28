@@ -1,6 +1,8 @@
 """Evidence-gated, read-only CAMELOT-OS system triage."""
 
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import asyncio
 import hashlib

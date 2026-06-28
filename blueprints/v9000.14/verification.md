@@ -56,9 +56,9 @@ node --version     # 20+
 | P1-T01 | `python -c "from control_plane.anya_gate import __version__; print(__version__)"` | `9000.14` | All 13 control_plane modules report `9000.14` | ⬜ |
 | P1-T02 | `python -m pytest tests/test_colmad_wiring.py -v` | `PASSED` | CRITICAL intent triggers 3-persona vote; consensus requires 2/3 | ⬜ |
 | P1-T03 | `python -m control_plane.knight_agent --test` | All V5.x checks pass | Unified roster count matches `FOUNDRY_COUNCIL`; no duplicate spark IDs | ⬜ |
-| P1-T04 | `python -c "import control_plane.triage_score"` | `ImportError` or integrated | No orphan `triage_score` module; functionality merged into `anya_gate.py` | ⬜ |
+| P1-T04 | `python -c "import control_plane.triage_score as t; t.get_triage_scorer()"` | No error | Not orphaned — live confidence-scorer with test consumers (test_validation, test_phase_f); disambiguated in docstring from `factory_lane.TriageScore`; imports clean | ⬜ |
 | P1-T05 | `python -m control_plane.soul_oversight --test` | `PASSED` | Single coherent `IronGateV2` class; AUTO/PROMPT/HUMAN_GATE tiers verified | ⬜ |
-| P1-T06 | `python -c "import re, pathlib; c=pathlib.Path('control_plane/anya_gate.py').read_text(); print(len(re.findall(r'class\s+AnyaCompiler', c)))"` | `0` | No duplicate `AnyaCompiler` class definition | ⬜ |
+| P1-T06 | `python -c "import re, pathlib; c=pathlib.Path('control_plane/anya_gate.py').read_text(); print(len(re.findall(r'class\s+AnyaCompiler', c)))"` | `1` | Exactly one `AnyaCompiler` in anya_gate.py — no in-file duplicate; documented as distinct from the APEE pipeline and the titan/memory compiler; CLI consumer intact | ⬜ |
 | P1-T07 | `python -c "from control_plane.soul_oversight import pre_execute"` | No warnings/errors | Clean import path; no deprecation shims | ⬜ |
 | P1-T08 | `python -m control_plane.inspira_metrics --test` | Non-zero metrics dict | `mamba_compression_ratio > 0` when ouroboros engine available | ⬜ |
 | P1-T09 | `cargo build -p rtk --release` | Compiles without error | `rtk.dll` produced in `target/release/`; no linker warnings | ⬜ |

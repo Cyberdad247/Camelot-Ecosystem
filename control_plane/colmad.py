@@ -21,6 +21,8 @@ Run as module:
     python -m control_plane.colmad "Add a Rust kernel shell"
 """
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import re
 import sys

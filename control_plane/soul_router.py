@@ -5,6 +5,8 @@ Routes intents to the optimal Knight engine based on weighted tensor scoring.
 """
 
 from __future__ import annotations
+__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+
 
 import os
 import sys
