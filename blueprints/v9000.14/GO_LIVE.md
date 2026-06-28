@@ -38,6 +38,28 @@ exact remediation for anything still missing. Re-run it after each step below.
 
 > 🔒 Never commit a real key. `.env` is gitignored; `.env.example` holds only a placeholder.
 
+### Production hardening — tagged keys + grants (recommended)
+
+A bare reusable key is fine for the smoke test, but production Empire nodes
+should join with **tags** and be governed by **grants** (deny-by-default), so a
+leaked key can't impersonate an operator and drones can't reach each other.
+Apply `01_KERNEL/mesh/node_c/tailnet-policy.example.hujson` in the Tailscale
+admin console (Access controls), then:
+
+1. **Tag the nodes.** The policy defines `tag:omni-router` and `tag:empire-drone`.
+   Generate the auth key with the matching **tag selected** — the tsnet node
+   inherits that identity from the key (tagged devices also have key-expiry
+   disabled, so long-running nodes never need re-auth).
+2. **Scope reachability with grants.** The example grants let operators hit the
+   Omni-Router on `:80`, let the Omni-Router dispatch to all drones, and isolate
+   drones from each other (no drone→drone path) — the same isolation pattern the
+   Tailscale reference uses for multi-tenant GPU separation.
+3. **Ephemeral keys for short-lived drones.** Containerized wasm/voice/preview
+   drones should use an **ephemeral, tagged** key (passed as `TS_AUTHKEY` env)
+   so Tailscale auto-removes them from the tailnet on shutdown.
+
+> Treat auth keys like passwords — store them in a secrets manager, not the repo.
+
 ---
 
 ## P5-T02 — Unikraft MicroVM (needs /dev/kvm access + a hypervisor)
