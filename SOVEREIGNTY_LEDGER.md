@@ -2,7 +2,7 @@
 
 > **Note on ordering**: File order represents **insertion order** (chronological by when entries were added to this ledger), NOT timestamp order. Each entry's `Timestamp` field is the actual time the work occurred, which may be earlier than insertion order if entries were backfilled.
 
-> **Last Updated**: 2026-06-28T05:30:00Z (11 entries, v1.0.0 baseline recovery complete on `feat/kba-cartridge-v1000` and `feat/knight-console` mirrors).
+> **Last Updated**: 2026-06-28T05:45:00Z (12 entries, v1.0.0 baseline recovery + branch cleanup + WIP commit + ledger polish complete).
 
 ## Type Legend
 
@@ -14,6 +14,7 @@
 - `audit_correction` — correction of a prior audit entry
 - `mirror_sync` — synchronization of a mirror repo
 - `mirror_wip_recovery` — recovery of a misapplied work-in-progress on a mirror
+- `branch_cleanup` — deletion of a no-longer-needed branch (local or remote)
 
 
 ### Approval Request: test_op_1
@@ -130,3 +131,13 @@
 - **Description**: Mirror WIP was misapplied to `main` instead of a `feat/knight-console` branch during followup #3. The original `git checkout -b feat/knight-console` failed with "a branch named 'feat/knight-console' already exists" (the branch existed as a stale local ref pointing to pre-merge main 9b07d8c, which had no unique work). The subsequent `git stash pop` ran on `main` (the current branch) and applied the WIP (`KnightsTab.tsx` 17+/15-) to main's working tree as uncommitted changes. Recovery executed per thinker's Option B: (1) `git stash push -u -m "WIP: misapplied to main, moving to fresh feat/knight-console"` captured both the modified `apps/pwa/src/components/tabs/KnightsTab.tsx` and the untracked `apps/pwa/src/components/KnightConsole.tsx` (4946 bytes, 144 lines) atomically; (2) `git branch -D feat/knight-console` deleted the stale branch at 9b07d8c (it had no unique work, just pointed to pre-merge main); (3) `git checkout -b feat/knight-console` created a fresh branch from the current main (1e753da, post-merge); (4) `git stash pop` applied the WIP cleanly with no conflicts (the PWA UI files on 1e753da are identical to those on 9b07d8c because the v1.0.0 merge resolved 5 PWA UI files with `--ours` = main's version). Post-recovery state: branch = `feat/knight-console`, HEAD = `1e753da`, working tree = 1 modified (`KnightsTab.tsx` 17+/15-) + 1 untracked (`KnightConsole.tsx` 144 lines), stash list = empty. No data was lost; the WIP is preserved on the correct branch. The expanded `SOVEREIGNTY_LEDGER.md` branch-recreation command (added in commit `4b92e47` polish) now correctly reflects this scenario.
 - **Required Level**: review
 - **Status**: Complete. WIP on feat/knight-console branch at 1e753da. Ready for the user to `git add` + `git commit` the WIP changes (or leave uncommitted for further iteration).
+
+
+### Branch Cleanup: feat/kba-cartridge-v1000
+- **Type**: branch_cleanup
+- **Timestamp**: 2026-06-28T05:45:00Z
+- **Requester**: knight_automation
+- **Risk Level**: low
+- **Description**: Cleanup of the `feat/kba-cartridge-v1000` branch (whose purpose was to deliver the v1.0.0 architecture baseline to main, completed by merge commit 1e753da). Local deletion: SUCCESS via `git branch -d feat/kba-cartridge-v1000` (the branch was already merged into main, so no `-D` force needed). Remote deletion: FAILED with `[remote rejected] feat/kba-cartridge-v1000 (protected branch hook declined)` — a GitHub branch protection rule on the Cyberdad247/Kickbox-audio repository blocks the deletion of this branch. Safety verification: all 4 ledger-referenced SHAs (c1461e9, 3ceb0e1, 8ca4b6a, 1803c52) confirmed as ancestors of main HEAD 1e753da BEFORE the local deletion attempt; no data was lost. PR #22 state preserved (closed-merged). Recovery path for the remote branch (user action required): (1) visit GitHub repository Settings > Branches > Branch protection rules; (2) either disable the protection rule for `feat/kba-cartridge-v1000` or add Cyberdad247 as an exception; (3) delete via web UI or re-run `git push origin --delete feat/kba-cartridge-v1000`. The remote branch being preserved is likely intentional — it serves as a historical marker for the v1.0.0 baseline delivery, and the protection rule may be a deliberate governance choice to prevent accidental deletion of the shipped-baseline branch.
+- **Required Level**: review
+- **Status**: Partial cleanup. Local branch deleted; remote branch preserved (protected). 4 SHAs safely on main. Remote deletion deferred to user via GitHub UI.
