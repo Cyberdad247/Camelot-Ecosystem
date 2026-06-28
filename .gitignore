@@ -129,3 +129,7 @@ docs/reference/EXTERNAL/
 
 # Git Worktrees
 .worktrees/
+
+# Go build binaries (tsnet node_c etc.) — source is tracked, binaries are not
+*.exe
+01_KERNEL/mesh/node_c/node_c
