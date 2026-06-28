@@ -1,19 +1,20 @@
 //! CAMELOT Post-Quantum Cryptography — A2A Channel Security
 //! ML-KEM-768 (Kyber768, FIPS 203) + ML-DSA-65 (Dilithium3, FIPS 204)
 //!
-//! Runtime-functional via the pqcrypto family. Migration to actively-maintained
-//! RustCrypto `ml-kem` 0.3.x + `ml-dsa` 0.1.x is tracked under tag
-//! `[OUROBOROS_BINDING_PHASE1_AUDIT_PQCRYPTO_MIGRATION_DEFERRED]` in the
-//! Codex provenance ledger. The follow-up PR will swap the inner `use`
-//! statements + call sites once trait surfaces are verified against docs.rs
-//! in a dedicated docs-research-and-test cycle with Windows CI.
+//! P4-T04 (2026-06-28): migrated from the unmaintained `pqcrypto`/PQClean family
+//! to the maintained RustCrypto `ml-kem` 0.3.x + `ml-dsa` 0.1.x. Keys/ciphertexts
+//! serialize via the crypto-common `KeyExport`/`KeyInit`/`TryKeyInit` byte forms;
+//! the public hex-string API and on-the-wire shapes are unchanged.
 
 use anyhow::{anyhow, Result};
-use pqcrypto::kem::kyber768;
-use pqcrypto::sign::dilithium3;
-use pqcrypto_traits::kem::{Ciphertext as _, PublicKey as _, SecretKey as _, SharedSecret as _};
-use pqcrypto_traits::sign::{PublicKey as _, SecretKey as _, SignedMessage as _};
 use serde::{Deserialize, Serialize};
+
+use crypto_common::{Key, KeyExport, KeyInit};
+use ml_kem::{Ciphertext, Decapsulate, Encapsulate, EncapsulationKey, DecapsulationKey, Kem, MlKem768};
+use ml_dsa::{
+    EncodedSignature, Generate, Keypair, MlDsa65, Signature, SigningKey, Signer, VerifyingKey,
+    Verifier,
+};
 
 pub type SharedSecret = Vec<u8>;
 
@@ -50,53 +51,59 @@ pub struct SignedPayload {
 // ── ML-KEM-768 ────────────────────────────────────────────────────────────────
 
 pub fn kem_keygen() -> Result<KemKeyPair> {
-    let (pk, sk) = kyber768::keypair();
-    let ek = pk.as_bytes().to_vec();
+    let (dk, ek) = MlKem768::generate_keypair();
+    let ek_bytes = ek.to_bytes();
+    let dk_bytes = dk.to_bytes();
     Ok(KemKeyPair {
-        key_size_bytes: ek.len(),
-        encap_key: hex::encode(&ek),
-        decap_key: hex::encode(sk.as_bytes()),
+        key_size_bytes: ek_bytes.len(),
+        encap_key: hex::encode(ek_bytes.as_slice()),
+        decap_key: hex::encode(dk_bytes.as_slice()),
         algorithm: "ML-KEM-768".to_string(),
     })
 }
 
 pub fn kem_encapsulate(peer_ek_hex: &str) -> Result<KemEncapResult> {
     let ek_bytes = hex::decode(peer_ek_hex)?;
-    let pk = kyber768::PublicKey::from_bytes(&ek_bytes)
-        .map_err(|e| anyhow!("ML-KEM-768: bad encap key: {:?}", e))?;
-    let (ss, ct) = kyber768::encapsulate(&pk);
+    let key = Key::<EncapsulationKey<MlKem768>>::try_from(ek_bytes.as_slice())
+        .map_err(|_| anyhow!("ML-KEM-768: bad encap key length"))?;
+    let ek = EncapsulationKey::<MlKem768>::new(&key)
+        .map_err(|_| anyhow!("ML-KEM-768: invalid encap key"))?;
+    let (ct, ss) = ek.encapsulate();
     Ok(KemEncapResult {
-        ciphertext: hex::encode(ct.as_bytes()),
-        shared_secret: hex::encode(ss.as_bytes()),
+        ciphertext: hex::encode(ct.as_slice()),
+        shared_secret: hex::encode(ss.as_slice()),
     })
 }
 
 pub fn kem_decapsulate(ciphertext_hex: &str, dk_hex: &str) -> Result<SharedSecret> {
     let ct_bytes = hex::decode(ciphertext_hex)?;
     let dk_bytes = hex::decode(dk_hex)?;
-    let ct = kyber768::Ciphertext::from_bytes(&ct_bytes)
-        .map_err(|e| anyhow!("ML-KEM-768: bad ciphertext: {:?}", e))?;
-    let sk = kyber768::SecretKey::from_bytes(&dk_bytes)
-        .map_err(|e| anyhow!("ML-KEM-768: bad decap key: {:?}", e))?;
-    let ss = kyber768::decapsulate(&ct, &sk);
-    Ok(ss.as_bytes().to_vec())
+    let dk_key = Key::<DecapsulationKey<MlKem768>>::try_from(dk_bytes.as_slice())
+        .map_err(|_| anyhow!("ML-KEM-768: bad decap key length"))?;
+    let dk = DecapsulationKey::<MlKem768>::new(&dk_key);
+    let ct = Ciphertext::<MlKem768>::try_from(ct_bytes.as_slice())
+        .map_err(|_| anyhow!("ML-KEM-768: bad ciphertext length"))?;
+    let ss = dk.decapsulate(&ct);
+    Ok(ss.as_slice().to_vec())
 }
 
 // ── ML-DSA-65 ─────────────────────────────────────────────────────────────────
 
 pub fn dsa_keygen() -> Result<DsaKeyPair> {
-    let (pk, sk) = dilithium3::keypair();
-    let vk = pk.as_bytes().to_vec();
+    let sk = SigningKey::<MlDsa65>::generate();
+    let vk = sk.verifying_key();
+    let sk_bytes = sk.to_bytes();
+    let vk_bytes = vk.to_bytes();
     Ok(DsaKeyPair {
-        key_size_bytes: vk.len(),
-        sign_key: hex::encode(sk.as_bytes()),
-        verify_key: hex::encode(&vk),
+        key_size_bytes: vk_bytes.len(),
+        sign_key: hex::encode(sk_bytes.as_slice()),
+        verify_key: hex::encode(vk_bytes.as_slice()),
         algorithm: "ML-DSA-65".to_string(),
     })
 }
 
-/// Sign message. Requires verify_key_hex alongside sign_key_hex (pqcrypto
-/// does not derive pk from sk — caller always has both from dsa_keygen).
+/// Sign a message. verify_key_hex is carried into the SignedPayload so the
+/// verifier has the public key (ML-DSA does not derive pk from sk).
 pub fn dsa_sign(
     message: &[u8],
     sign_key_hex: &str,
@@ -104,15 +111,14 @@ pub fn dsa_sign(
     knight_id: &str,
 ) -> Result<SignedPayload> {
     let sk_bytes = hex::decode(sign_key_hex)?;
-    let sk = dilithium3::SecretKey::from_bytes(&sk_bytes)
-        .map_err(|e| anyhow!("ML-DSA-65: bad signing key: {:?}", e))?;
-    let signed_msg = dilithium3::sign(message, &sk);
-    // signed_msg bytes = signature || message; signature is the first sig_len bytes
-    let sig_len = dilithium3::signature_bytes();
-    let sig_hex = hex::encode(&signed_msg.as_bytes()[..sig_len]);
+    let key = Key::<SigningKey<MlDsa65>>::try_from(sk_bytes.as_slice())
+        .map_err(|_| anyhow!("ML-DSA-65: bad signing key length"))?;
+    let sk = SigningKey::<MlDsa65>::new(&key);
+    let sig: Signature<MlDsa65> = sk.sign(message);
+    let sig_enc = sig.encode();
     Ok(SignedPayload {
         payload: hex::encode(message),
-        signature: sig_hex,
+        signature: hex::encode(sig_enc.as_slice()),
         verify_key: verify_key_hex.to_string(),
         knight_id: knight_id.to_string(),
     })
@@ -122,14 +128,14 @@ pub fn dsa_verify(signed: &SignedPayload) -> Result<bool> {
     let vk_bytes = hex::decode(&signed.verify_key)?;
     let sig_bytes = hex::decode(&signed.signature)?;
     let msg_bytes = hex::decode(&signed.payload)?;
-    let pk = dilithium3::PublicKey::from_bytes(&vk_bytes)
-        .map_err(|e| anyhow!("ML-DSA-65: bad verify key: {:?}", e))?;
-    // Reconstruct signed message as sig || msg (pqcrypto format)
-    let mut sm_bytes = sig_bytes;
-    sm_bytes.extend_from_slice(&msg_bytes);
-    let sm = dilithium3::SignedMessage::from_bytes(&sm_bytes)
-        .map_err(|e| anyhow!("ML-DSA-65: bad signed message: {:?}", e))?;
-    Ok(dilithium3::open(&sm, &pk).is_ok())
+    let vk_key = Key::<VerifyingKey<MlDsa65>>::try_from(vk_bytes.as_slice())
+        .map_err(|_| anyhow!("ML-DSA-65: bad verify key length"))?;
+    let vk = VerifyingKey::<MlDsa65>::new(&vk_key);
+    let sig_enc = EncodedSignature::<MlDsa65>::try_from(sig_bytes.as_slice())
+        .map_err(|_| anyhow!("ML-DSA-65: bad signature length"))?;
+    let sig = Signature::<MlDsa65>::decode(&sig_enc)
+        .ok_or_else(|| anyhow!("ML-DSA-65: invalid signature encoding"))?;
+    Ok(vk.verify(&msg_bytes, &sig).is_ok())
 }
 
 // ── Key size constants ────────────────────────────────────────────────────────

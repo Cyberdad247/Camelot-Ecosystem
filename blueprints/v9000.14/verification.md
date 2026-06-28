@@ -152,7 +152,7 @@ print('P2 integration smoke: PASSED')
 | P4-T01 | `cd 01_KERNEL/mesh/node_c && TS_AUTHKEY=... go test -v -run TestTwoNodeMesh` | `PASS` (or SKIP w/o key) | tsnet node scaffolded — **compiles clean** (`go build`/`go vet` exit 0); test runs + skips w/o key. Live 2-node mesh needs a tailnet auth key | 🔨 scaffolded |
 | P4-T02 | `cargo test -p camelot-pqcrypto --release` | `3 passed` | ML-KEM-768 handshake round-trips (shared secrets match); wrong-key diverges; ML-DSA-65 sign/verify + tamper-detect | ✅ |
 | P4-T03 | `python -m control_plane.empire_drone --test` / `pytest tests/test_phase45_edge.py -k drone` | `ALL PASS` | New drone auto-registers on join; idempotent re-announce; stale drones reaped | ✅ |
-| P4-T04 | `cargo audit` | `0 vulnerabilities` | Migrate pqcrypto→ml-kem 0.3.x — crate notes defer this (pqcrypto family works, P4-T02 green); migration not undertaken | 🔨 planned |
+| P4-T04 | `cargo audit` / `cargo test -p camelot-pqcrypto` | `exit 0` / `3 passed` | **Migrated** pqcrypto→RustCrypto ml-kem 0.3.2 + ml-dsa 0.1.1; pqcrypto/pqclean removed from lockfile; `cargo audit` clean (172 deps, 0 advisories); round-trip tests pass | ✅ |
 | P4-T05 | `bash scripts/wsl_verify.sh` (memfd section) | zero-copy across fork + latency | **Verified on WSL2**: `memfd_create` page visible across `fork`; ~0.126µs/page round-trip (target <10µs) | ✅ (WSL2) |
 
 ### P4 Platform Notes
