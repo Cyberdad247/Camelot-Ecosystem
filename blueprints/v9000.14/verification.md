@@ -149,7 +149,7 @@ print('P2 integration smoke: PASSED')
 
 | Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
 |---|---|---|---|---|
-| P4-T01 | `cd 01_KERNEL/mesh/node_c && go test -v -run TestTwoNodeMesh` | `PASS` | tsnet 2-node mesh — requires a live tailnet + auth key; not verifiable in this env | 🔨 planned |
+| P4-T01 | `cd 01_KERNEL/mesh/node_c && TS_AUTHKEY=... go test -v -run TestTwoNodeMesh` | `PASS` (or SKIP w/o key) | tsnet node scaffolded — **compiles clean** (`go build`/`go vet` exit 0); test runs + skips w/o key. Live 2-node mesh needs a tailnet auth key | 🔨 scaffolded |
 | P4-T02 | `cargo test -p camelot-pqcrypto --release` | `3 passed` | ML-KEM-768 handshake round-trips (shared secrets match); wrong-key diverges; ML-DSA-65 sign/verify + tamper-detect | ✅ |
 | P4-T03 | `python -m control_plane.empire_drone --test` / `pytest tests/test_phase45_edge.py -k drone` | `ALL PASS` | New drone auto-registers on join; idempotent re-announce; stale drones reaped | ✅ |
 | P4-T04 | `cargo audit` | `0 vulnerabilities` | Migrate pqcrypto→ml-kem 0.3.x — crate notes defer this (pqcrypto family works, P4-T02 green); migration not undertaken | 🔨 planned |
@@ -183,7 +183,7 @@ wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && TS_AUTHKEY=tskey-.
 | Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
 |---|---|---|---|---|
 | P5-T01 | `cargo build --target wasm32-wasip1 -p camelot-edge --release` | `camelot-edge.wasm` produced | Valid WASM binary built (`\0asm` MVP magic, 65KB); `wasmtime run` pending a wasmtime install on this host | ✅ build |
-| P5-T02 | `python scripts/microvm_boot.py --health-check` | HTTP 200 from health endpoint | Unikraft MicroVM — requires **WSL2 + /dev/kvm** (confirmed absent on this host) | 🔴 blocked (KVM) |
+| P5-T02 | `python scripts/microvm_boot.py --self-test` (machinery) / `--health-check` (real boot) | `ALL PASS` / health 200 | Launcher **scaffolded + self-test verified** (mock VM, cross-platform); real boot needs WSL2 `/dev/kvm` + hypervisor + pill image (exit 3 → SKIP until present) | 🔨 scaffolded |
 | P5-T03 | `python -m control_plane.swarm_pin --test` | `ALL PASS` | BZZ content address round-trips; idempotent pin; tamper-evident fetch | ✅ |
 | P5-T04 | `python -m control_plane.scarcity_protocol --test` | `ALL PASS` | 3GiB main + 1GiB ZRAM envelope enforced; breach refused; reclaim frees budget (real `MADV_DONTNEED` on Linux) | ✅ |
 | P5-T05 | `python -m control_plane.voice_ingress --test` / `pytest -k voice` | `ALL PASS` | Wake-word + filler stripped; command → kinetic intent dispatched; chatter ignored | ✅ |
