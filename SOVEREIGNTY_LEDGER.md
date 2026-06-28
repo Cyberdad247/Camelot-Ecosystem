@@ -2,7 +2,7 @@
 
 > **Note on ordering**: File order represents **insertion order** (chronological by when entries were added to this ledger), NOT timestamp order. Each entry's `Timestamp` field is the actual time the work occurred, which may be earlier than insertion order if entries were backfilled.
 
-> **Last Updated**: 2026-06-28T05:50:00Z (12 entries, v1.0.0 baseline recovery + branch cleanup + WIP commit + ledger polish + Q5 speculation fix complete).
+> **Last Updated**: 2026-06-28T06:00:00Z (13 entries, v1.0.0 baseline recovery + branch cleanup + WIP commit + ledger polish + Q5 speculation fix + v1.1.0 production-readiness hardening complete on `feat/production-readiness-v1.1.0`).
 
 ## Type Legend
 
@@ -15,6 +15,7 @@
 - `mirror_sync` — synchronization of a mirror repo
 - `mirror_wip_recovery` — recovery of a misapplied work-in-progress on a mirror
 - `branch_cleanup` — deletion of a no-longer-needed branch (local or remote)
+- `production_hardening` — production-readiness hardening (security headers, liveness probes, error boundaries, coverage config, etc.)
 
 
 ### Approval Request: test_op_1
@@ -141,3 +142,13 @@
 - **Description**: Cleanup of the `feat/kba-cartridge-v1000` branch (whose purpose was to deliver the v1.0.0 architecture baseline to main, completed by merge commit 1e753da). Local deletion: SUCCESS via `git branch -d feat/kba-cartridge-v1000` (the branch was already merged into main, so no `-D` force needed). Remote deletion: FAILED with `[remote rejected] feat/kba-cartridge-v1000 (protected branch hook declined)` — a GitHub branch protection rule on the Cyberdad247/Kickbox-audio repository blocks the deletion of this branch. Safety verification: all 4 ledger-referenced SHAs (c1461e9, 3ceb0e1, 8ca4b6a, 1803c52) confirmed as ancestors of main HEAD 1e753da BEFORE the local deletion attempt; no data was lost. PR #22 state preserved (closed-merged). Recovery path for the remote branch (user action required): (1) visit GitHub repository Settings > Branches > Branch protection rules; (2) either disable the protection rule for `feat/kba-cartridge-v1000` or add Cyberdad247 as an exception; (3) delete via web UI or re-run `git push origin --delete feat/kba-cartridge-v1000`. **Interpretation**: the branch protection applied to a merged branch suggests the repo admin may want to retain it as a historical marker; alternatively, this may be a default rule not customized for this branch. **Verify intent with the repo owner.**
 - **Required Level**: review
 - **Status**: Partial cleanup. Local branch deleted; remote branch preserved (protected). 4 SHAs safely on main. Remote deletion deferred to user via GitHub UI.
+
+
+### v1.1.0 Production-Readiness Hardening: feat/production-readiness-v1.1.0
+- **Type**: production_hardening
+- **Timestamp**: 2026-06-28T06:00:00Z
+- **Requester**: knight_automation
+- **Risk Level**: low
+- **Description**: v1.1.0 production-readiness hardening — 18 items across Tier 1 (release-blocking production gaps) + Tier 2 (defense-in-depth) on branch `feat/production-readiness-v1.1.0` (not yet merged to main). Tier 1 (9 items): (1) `.nvmrc` pins Node 22 LTS; (2) `LICENSE` (MIT) closes the GitHub "no license detected" warning; (3) `SECURITY.md` documents the vuln disclosure policy + security posture (HMAC envelopes, rate limiting, secrets handling); (4) `.dockerignore` excludes build artifacts + secrets from container builds; (5) `.env.example` documents 14 env vars (DATABASE_URL, WEBHOOK_SECRET, ACTION_SECRET, PORT, HOST, ACTION_ID, REMOTE_MCP_URL, ROUTE_BUDGET_MS, LOG_LEVEL, 4 rate-limit vars, NEXT_PUBLIC_SITE_URL, ENABLE_* flags); (6) `apps/pwa/src/app/api/health/route.ts` is the Next.js App Router `GET /api/health` liveness probe; (7) `apps/bifrost/src/logger.ts` is the Pino structured logger (JSON output, level via LOG_LEVEL); (8) `apps/pwa/src/components/ErrorBoundary.tsx` is the class error boundary wrapping the PWA subtree (React 18 has no functional equivalent for `getDerivedStateFromError`); (9) `apps/pwa/e2e/axe-smoke.spec.ts` is the axe-core WCAG 2.0/2.1 A+AA smoke test. Tier 1 edits (5): (10) `vercel.json` adds 6 security headers (HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy with `microphone=(self)`, CSP with `frame-ancestors 'none'` + `base-uri 'self'` + `form-action 'self'`); (11) `biome.json` raises `noExplicitAny` from `off` to `warn` (per AGENTS.md Rule 2); (12) `ci.yml` Node 20 → 22 + new `npm audit --omit=dev --audit-level=high` step; (13) `vitest.config.ts` adds v8 coverage config (reporter list includes text + HTML + LCOV, no threshold yet); (14) `turbo.json` adds `bundle-size` task placeholder. Tier 2 edits (4): (15) `tailwind.config.ts` adds 5 semantic tokens (obsidian/foreground/background/muted/font-display) for the ErrorBoundary fallback UI; (16) `packages/db/src/ledgerValidator.ts` moves the `// biome-ignore` directly above the function declaration (was on a continuation line, treated as unused suppression); (17) `apps/bifrost/src/server.ts` externalizes 3 rate limiters to env vars with safe defaults + replaces 9 `console.*` calls with structured `logger.*` calls; (18) `apps/pwa/src/app/layout.tsx` wraps the app in `<ErrorBoundary>`. 3 new deps: `pino@^10.3.1` (apps/bifrost), `@vitest/coverage-v8` (root dev), `@axe-core/playwright` (root dev). Local gates verified: `npx turbo run typecheck` exit 0, `npx vitest run` (full) exit 0 (83 tests across 12 files, +45 from v1.0.0 baseline of 38), `npx next build` (pwa) exit 0, `npx biome check .` exit 0 with 77 pre-existing errors (all in `core/knights/rent.jsonld`, `packages/db/src/index.ts`, `apps/bifrost/src/server.ts` — none in the 9 new files). pino resolved to v10.3.1 via npm hoisting to root `node_modules/pino`. Working tree: 12 modified + 9 untracked. PR open: pending — see `feat/production-readiness-v1.1.0` for review.
+- **Required Level**: review
+- **Status**: Complete on `feat/production-readiness-v1.1.0`. Local gates green. Branch ready for PR review + merge to main. The remote `feat/kba-cartridge-v1000` deletion (from the prior entry) is still pending user action (GitHub branch protection).
