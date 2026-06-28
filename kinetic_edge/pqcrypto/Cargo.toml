@@ -14,10 +14,16 @@ name = "camelot_pqcrypto"
 path = "src/lib.rs"
 
 [dependencies]
-# NIST PQC standards (FIPS 203 / FIPS 204) via stable pqcrypto bindings
-# Kyber768 = ML-KEM-768, Dilithium3 = ML-DSA-65
-pqcrypto        = { version = "0.17", features = ["pqcrypto-kyber", "pqcrypto-dilithium"] }
-pqcrypto-traits = "0.3"
+# NIST PQC standards (FIPS 203 / FIPS 204) via the maintained RustCrypto crates.
+# Kyber768 = ML-KEM-768 (ml-kem), Dilithium3 = ML-DSA-65 (ml-dsa).
+#
+# P4-T04 (2026-06-28): migrated off the unmaintained `pqcrypto`/PQClean family
+# to RustCrypto `ml-kem` 0.3.x + `ml-dsa` 0.1.x. Serialization uses the
+# `EncodedSizeUser`/`EncodePrivateKey`/`EncodePublicKey` byte forms; RNG via
+# `rand`. This clears the 9 ignored RustSec `unmaintained` advisories.
+ml-kem        = { version = "0.3", features = ["getrandom"] }
+ml-dsa        = { version = "0.1", features = ["getrandom"] }
+crypto-common = "0.2"   # Key / KeyExport / KeyInit byte-serialization traits
 hex       = "0.4"
 serde     = { version = "1", features = ["derive"] }
 serde_json = "1"
