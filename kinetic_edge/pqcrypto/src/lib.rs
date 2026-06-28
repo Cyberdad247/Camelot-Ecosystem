@@ -1,5 +1,12 @@
 //! CAMELOT Post-Quantum Cryptography — A2A Channel Security
 //! ML-KEM-768 (Kyber768, FIPS 203) + ML-DSA-65 (Dilithium3, FIPS 204)
+//!
+//! Runtime-functional via the pqcrypto family. Migration to actively-maintained
+//! RustCrypto `ml-kem` 0.3.x + `ml-dsa` 0.1.x is tracked under tag
+//! `[OUROBOROS_BINDING_PHASE1_AUDIT_PQCRYPTO_MIGRATION_DEFERRED]` in the
+//! Codex provenance ledger. The follow-up PR will swap the inner `use`
+//! statements + call sites once trait surfaces are verified against docs.rs
+//! in a dedicated docs-research-and-test cycle with Windows CI.
 
 use anyhow::{anyhow, Result};
 use pqcrypto::kem::kyber768;
@@ -134,3 +141,50 @@ pub const ML_KEM_768_SS_BYTES: usize = 32;
 pub const ML_DSA_65_SK_BYTES: usize = 4000;
 pub const ML_DSA_65_VK_BYTES: usize = 1952;
 pub const ML_DSA_65_SIG_BYTES: usize = 3293;
+
+// ── Tests (P4-T02): ML-KEM-768 handshake round-trip + ML-DSA-65 sign/verify ──
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn ml_kem_768_handshake_round_trips() {
+        // Bob generates a keypair; Alice encapsulates to Bob's encap key.
+        let bob = kem_keygen().expect("keygen");
+        assert_eq!(bob.algorithm, "ML-KEM-768");
+        assert_eq!(bob.key_size_bytes, ML_KEM_768_EK_BYTES);
+
+        let enc = kem_encapsulate(&bob.encap_key).expect("encapsulate");
+        // Bob decapsulates with his decap key and recovers the same shared secret.
+        let ss_bob = kem_decapsulate(&enc.ciphertext, &bob.decap_key).expect("decapsulate");
+
+        let ss_alice = hex::decode(&enc.shared_secret).expect("hex");
+        assert_eq!(ss_alice, ss_bob, "ML-KEM-768 shared secrets must match");
+        assert_eq!(ss_bob.len(), ML_KEM_768_SS_BYTES);
+    }
+
+    #[test]
+    fn ml_kem_768_wrong_key_yields_different_secret() {
+        let bob = kem_keygen().unwrap();
+        let mallory = kem_keygen().unwrap();
+        let enc = kem_encapsulate(&bob.encap_key).unwrap();
+        // Decapsulating with the wrong decap key must NOT recover Alice's secret.
+        let ss_wrong = kem_decapsulate(&enc.ciphertext, &mallory.decap_key).unwrap();
+        let ss_alice = hex::decode(&enc.shared_secret).unwrap();
+        assert_ne!(ss_alice, ss_wrong, "wrong decap key must not recover the secret");
+    }
+
+    #[test]
+    fn ml_dsa_65_sign_verify_round_trips() {
+        let kp = dsa_keygen().unwrap();
+        assert_eq!(kp.algorithm, "ML-DSA-65");
+        let msg = b"CAMELOT-OS v9000.14 A2A channel attest";
+        let signed = dsa_sign(msg, &kp.sign_key, &kp.verify_key, "sir_sentinel").unwrap();
+        assert!(dsa_verify(&signed).unwrap(), "valid signature must verify");
+
+        // Tamper the payload -> verification fails.
+        let mut tampered = signed;
+        tampered.payload = hex::encode(b"tampered message");
+        assert!(!dsa_verify(&tampered).unwrap(), "tampered payload must not verify");
+    }
+}
