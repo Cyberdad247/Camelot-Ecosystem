@@ -210,3 +210,89 @@ class SoulRouter:
     def verify_weight_lock(self) -> bool:
         boris = self._engines.get("sir_boris")
         return boris is not None and float(boris.weight) == 0.85
+
+    def resolve_knight(self, name: str) -> Optional[str]:
+        """Resolve a v9000.14 Pantheon name (or legacy spelling) to a canonical
+        v1000 knight_id (P2-T04). Case/separator-insensitive. Returns None for an
+        unknown name."""
+        return resolve_knight(name)
+
+
+# ── Knight Pantheon alias resolution (P2-T04) ────────────────────────────────
+# Maps v9000.14-CYBERTRONIA pantheon names to canonical v1000 knight_ids, per the
+# blueprint Knight Pantheon Alignment table. Keys are normalized (lowercase,
+# separators collapsed to "_") before lookup.
+KNIGHT_ALIASES: dict[str, str] = {
+    "merlin_omega": "merlin_omega", "merlin": "merlin_omega",
+    "anya_omega": "anya", "anya": "anya",
+    "sir_helios": "sir_helio",                 # v9000.14 SIR_HELIOS -> sir_helio
+    "sir_codex": "sir_codex",
+    "lady_alexandria": "lady_apis",            # World Tree Archivist
+    "sir_hashimoto": "sir_sentinel",           # Cyber Aegis
+    "sir_watchdog": "sir_debug",               # Execution Auditor
+    "sir_bard": "sir_sonus",                   # TEN Voice Matrix
+}
+
+
+def _normalize_knight_name(name: str) -> str:
+    n = (name or "").strip().lower()
+    # Collapse common separators (space, hyphen, the Ω/omega glyph) to underscore.
+    n = n.replace("Ω", "_omega").replace("ω", "_omega")
+    for sep in (" ", "-", ".", "/"):
+        n = n.replace(sep, "_")
+    while "__" in n:
+        n = n.replace("__", "_")
+    return n.strip("_")
+
+
+def resolve_knight(name: str) -> Optional[str]:
+    """Resolve a v9000.14 Pantheon name / legacy spelling to a canonical
+    knight_id. Checks the alias table first, then the live FOUNDRY_COUNCIL
+    roster. Returns None for an unknown name."""
+    norm = _normalize_knight_name(name)
+    if norm in KNIGHT_ALIASES:
+        return KNIGHT_ALIASES[norm]
+    council_ids = {e.knight_id for e in FOUNDRY_COUNCIL}
+    if norm in council_ids:
+        return norm
+    return None
+
+
+def _selftest() -> int:
+    failures = 0
+
+    def check(name: str, cond: bool) -> None:
+        nonlocal failures
+        if not cond:
+            failures += 1
+        print(f"  [{'PASS' if cond else 'FAIL'}] {name}")
+
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    print("SoulRouter self-test (P2-T04 Pantheon alias resolution)")
+    r = SoulRouter()
+
+    # Every v9000.14 Pantheon name resolves.
+    pantheon = {
+        "MERLIN_Ω": "merlin_omega", "ANYA_Ω": "anya", "SIR_HELIOS": "sir_helio",
+        "SIR_CODEX": "sir_codex", "LADY_ALEXANDRIA": "lady_apis",
+        "SIR_HASHIMOTO": "sir_sentinel", "SIR_WATCHDOG": "sir_debug",
+        "SIR_BARD": "sir_sonus",
+    }
+    for name, expected in pantheon.items():
+        got = r.resolve_knight(name)
+        check(f"{name} -> {expected} (got {got})", got == expected)
+
+    # Canonical ids pass through; unknown -> None.
+    check("canonical sir_boris passes through", r.resolve_knight("sir_boris") == "sir_boris")
+    check("separator-insensitive 'Sir Helios'", r.resolve_knight("Sir Helios") == "sir_helio")
+    check("unknown name -> None", r.resolve_knight("sir_nonexistent") is None)
+
+    print(f"\n{'ALL PASS' if failures == 0 else f'{failures} FAILURE(S)'} — soul_router")
+    return failures
+
+
+if __name__ == "__main__":
+    if "--test" in sys.argv:
+        raise SystemExit(1 if _selftest() else 0)
+    print("SoulRouter — use --test to run the Pantheon resolution self-test.")

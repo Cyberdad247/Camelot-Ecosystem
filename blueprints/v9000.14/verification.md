@@ -95,7 +95,7 @@ $results | ForEach-Object { Write-Host "[$($_.id)] $($_.expect) → $($_.output)
 | P2-T01 | `python -m pytest tests/test_kinetic_loop.py -v` | `PASSED` | 6 stages fire in order: `TRIAGE → PLAN → APPROVE → EXECUTE → VERIFY → RECORD` | ⬜ |
 | P2-T02 | `python -m pytest tests/test_z3_verification.py -v` | `Z3_BLOCK` for dangerous patch | Real PDDL encoding works; Z3 rejects state-violating mutations | ⬜ |
 | P2-T03 | `python -m control_plane.obsidian_pillars --test` | `11/11 pillars validated` | Each pillar has both positive AND negative test case | ⬜ |
-| P2-T04 | `python -c "from control_plane.soul_router import SoulRouter; r=SoulRouter(); print(r.route('SIR_HELIOS'))"` | `sir_helio` | All v9000.14 knight aliases resolve correctly (including legacy spellings) | ⬜ |
+| P2-T04 | `python -c "from control_plane.soul_router import SoulRouter; print(SoulRouter().resolve_knight('SIR_HELIOS'))"` | `sir_helio` | All 8 v9000.14 Pantheon aliases resolve to canonical knight_ids (separator/case-insensitive); `route()` remains the intent router | ⬜ |
 | P2-T05 | `python -m control_plane.firnflow --test` | V3.x checks pass | Directory-scoped context loads; L1/L2/L3 tiering functional | ⬜ |
 | P2-T06 | `python -m pytest tests/test_crucible.py -v` | `PASSED` | Ephemeral execution runs in isolation; temp artifacts cleaned on exit | ⬜ |
 | P2-T07 | `python -m pytest tests/test_provenance_sqlite.py -v` | `PASSED` | Atomic commit + rollback verified; `.shadow` file restored on failure | ⬜ |
