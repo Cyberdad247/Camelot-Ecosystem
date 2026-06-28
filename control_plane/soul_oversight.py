@@ -83,27 +83,24 @@ class GateDecision:
 
 
 def _z3_verify_patch(job: Any) -> tuple[bool, str]:
-    """Mathematically verify a patch/state-machine intent (v999 NLM).
+    """Mathematically verify a patch/state-machine intent (P2-T02).
 
-    Uses the z3-solver if installed; otherwise degrades gracefully (logs and
-    passes through, since absence of the prover must not silently approve
-    something dangerous — the shatterpoint check still applies upstream).
+    Delegates to the real PDDL-style Z3 encoder in ``control_plane.z3_verify``:
+    safety invariants are modelled as fluents, the patch is grounded into action
+    effects, and a patch that makes the safety goal unsatisfiable is BLOCKED.
+    Degrades gracefully (pass-through) if the encoder/solver is unavailable —
+    the upstream shatterpoint guard still applies.
     """
     try:
-        import z3  # noqa: F401
-    except ImportError:
-        return True, "Z3 UNAVAILABLE — solver not installed, skipped (shatterpoint guard still active)"
-    # Minimal solvability sanity check: ensure the directive doesn't assert an
-    # unsatisfiable constraint set. Real PDDL/patch encoding is a v1001 task;
-    # here we confirm the prover is wired and returns a decision.
-    try:
-        s = z3.Solver()
-        x = z3.Int("x")
-        s.add(x > 0)
-        ok = s.check() == z3.sat
-        return ok, "Z3 PASS — no logic breach detected" if ok else "Z3 FAIL — unsatisfiable"
-    except Exception as exc:  # pragma: no cover
-        return True, f"Z3 error ({exc}) — passed through"
+        from .z3_verify import PatchIntent, verify_patch
+    except Exception as exc:  # pragma: no cover - defensive import guard
+        return True, f"Z3 encoder unavailable ({exc}) — passed through"
+
+    intent = getattr(job, "intent", "") or ""
+    reason = getattr(getattr(job, "triage", None), "risk_reason", "") or ""
+    diff = getattr(job, "diff", "") or ""
+    verdict = verify_patch(PatchIntent(description=f"{intent} {reason}", diff=diff))
+    return verdict.safe, verdict.render()
 
 
 def _load_colony_nexus():
