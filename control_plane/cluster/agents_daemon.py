@@ -21,6 +21,7 @@ from control_plane.distributed_agent_registry import (
 )
 
 from .http_daemon import HttpDaemon, call_async, post_json
+from control_plane.observability import traced_op
 
 
 def _agent_to_payload(agent: AgentInfo) -> dict:
@@ -106,6 +107,6 @@ def register_routes(daemon: HttpDaemon, node: HttpAgentsNode) -> None:
         )
         return 200, {"registered": agent.agent_id}
 
-    daemon.route("POST", "/agents/gossip", agents_gossip)
+    daemon.route("POST", "/agents/gossip", traced_op("agents.gossip")(agents_gossip))
     daemon.route("GET", "/agents/status", agents_status)
-    daemon.route("POST", "/agents/register", agents_register)
+    daemon.route("POST", "/agents/register", traced_op("agents.register")(agents_register))

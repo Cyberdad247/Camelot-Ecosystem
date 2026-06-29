@@ -65,11 +65,19 @@ export class SovereignDB {
     const contact = await prisma.contact.findUnique({ where: { email } });
     if (!contact) return null;
 
-    const updatedTags = Array.from(new Set([...contact.tags, newTag]));
-    
+    // tags is a JSON-encoded string list (SQLite has no scalar arrays).
+    let current: string[] = [];
+    try {
+      const parsed = JSON.parse(contact.tags || '[]');
+      if (Array.isArray(parsed)) current = parsed;
+    } catch {
+      current = [];
+    }
+    const updatedTags = Array.from(new Set([...current, newTag]));
+
     return await prisma.contact.update({
       where: { email },
-      data: { tags: updatedTags }
+      data: { tags: JSON.stringify(updatedTags) }
     });
   }
 }

@@ -1,0 +1,13 @@
+# Grafana datasource provisioning — CAMELOT-OS (native Grafana, no Docker).
+# Point GF_PATHS_PROVISIONING at observability/grafana/provisioning (see
+# OBSERVABILITY_SETUP.md → Grafana). Grafana loads this on startup.
+apiVersion: 1
+
+datasources:
+  - name: CAMELOT-Prometheus
+    uid: camelot-prometheus
+    type: prometheus
+    access: proxy
+    url: http://127.0.0.1:9090
+    isDefault: true
+    editable: true

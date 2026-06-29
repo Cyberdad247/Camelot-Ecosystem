@@ -16,12 +16,11 @@ Z3 symbolic verification gates any job that mutates git/state-machines.
 
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
-import json
+from typing import Any, Dict, Optional
+from pathlib import Path
 import os
 import sys
-from pathlib import Path
-from typing import Any, Dict, Optional
-
+import json
 
 class SoulOversight:
     """The Governance gate for Metacognitive Self-Modification."""
@@ -72,7 +71,7 @@ class SoulOversight:
 # Iron Gate v2 — three-tier HITL governance (EXCALIBUR_A_QNF Phase 4)
 # ---------------------------------------------------------------------------
 
-from dataclasses import dataclass  # noqa: E402
+from dataclasses import dataclass
 
 
 @dataclass

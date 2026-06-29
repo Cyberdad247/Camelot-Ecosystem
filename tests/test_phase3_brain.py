@@ -87,3 +87,27 @@ def test_approval_button_resumes_loop(client):
     assert r.status_code == 200 and "approved" in r.text
     pa = client.app.state.approvals.get(pending[0])
     assert pa.approved and pa.result is not None
+
+
+# ── Aperture LLM-usage panel (Bifrost dashboard visibility) ───────────────────
+
+def test_aperture_panel_renders_on_board(client):
+    html = client.get("/bifrost").text
+    assert 'hx-get="/bifrost/aperture"' in html
+
+
+def test_aperture_panel_endpoint(client):
+    r = client.get("/bifrost/aperture")
+    assert r.status_code == 200
+    assert "LLM GATEWAY" in r.text and "open dashboard" in r.text
+
+
+def test_aperture_parse_and_graceful_degradation():
+    from control_plane.aperture_bridge import parse_usage, ApertureBridge, render_panel
+    s = parse_usage({"models": [
+        {"model": "anthropic/claude-opus-4-5", "tokens": 1000, "cost_usd": 0.03, "requests": 1}],
+        "sessions": 1})
+    assert s.connected and s.total_cost_usd == 0.03 and s.top_model.model.startswith("anthropic/")
+    # unreachable Aperture -> disconnected, never raises
+    bad = ApertureBridge(base_url="http://127.0.0.1:1", timeout_s=0.3).fetch_usage()
+    assert bad.connected is False and "not connected" in render_panel(bad)

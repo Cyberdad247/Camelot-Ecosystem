@@ -1,36 +1,90 @@
 # CAMELOT-OS Observability Stack Setup Guide
 
-**Status**: Production-ready observability stack  
-**Date**: 2026-06-18  
-**Components**: Prometheus, Grafana, Jaeger, AlertManager
+**Status**: Production-ready observability stack (no-Docker / native)
+**Components**: Prometheus (metrics), `control_plane.tracing` (traces), Grafana (optional dashboards)
+
+> **No Docker.** Per the Microcubic VM Law, CAMELOT-OS does not use containers.
+> Metrics are exposed by a native Python Prometheus endpoint; tracing is a
+> stdlib JSONL tracer (`control_plane/tracing.py`); Prometheus/Grafana run as
+> native binaries. The former `docker-compose.yml` / Jaeger stack was removed.
 
 ---
 
-## Quick Start (5 minutes)
+## No-Docker Quick Start (5 minutes)
 
-### 1. Start the Observability Stack
+### 1. Expose CAMELOT-OS metrics (native /metrics on :8000)
 
 ```bash
-cd observability/
-docker-compose up -d
+python -m control_plane.cluster.metrics_daemon --port 8000 \
+    --nodes "node_1=http://127.0.0.1:8443,node_2=http://127.0.0.1:8444,node_3=http://127.0.0.1:8445"
 ```
 
-**Verify all services are running:**
+`MetricsCollector` (via `prometheus_client.start_http_server`) serves
+`http://127.0.0.1:8000/metrics` — pure Python, no container.
+
+### 2. Run native Prometheus against it
+
+Install once (no Docker): `scoop install prometheus` (Windows) ·
+`brew install prometheus` (macOS) · download from prometheus.io (Linux). Then:
+
 ```bash
-docker-compose ps
+python observability/run_observability.py        # launches Prometheus on :9090
+# or directly:  cd observability && prometheus --config.file=prometheus.yml
 ```
 
-Expected output (all healthy):
+Prometheus UI: <http://127.0.0.1:9090> (scrapes `127.0.0.1:8000`, loads `alert_rules.yml`).
+
+### 3. Tracing (no Jaeger/Docker)
+
+```python
+from control_plane.tracing import get_tracer
+tracer = get_tracer("camelot-node-1")
+with tracer.start_active_span("consensus_proposal") as scope:
+    scope.span.set_tag("entry_id", entry_id)
+    scope.span.set_tag("phase", "commit")
+    ...  # operation
 ```
-NAME                     STATUS
-camelot-prometheus       healthy
-camelot-grafana          healthy
-camelot-alertmanager     healthy
-camelot-jaeger           healthy
-camelot-redis-exporter   healthy
-redis-1, redis-2, redis-3   healthy
-qdrant-1, qdrant-2, qdrant-3 healthy
+
+Spans land in `~/.camelot/traces/<service>.jsonl` (override with `CAMELOT_TRACE_DIR`).
+Set `OTEL_EXPORTER_OTLP_ENDPOINT` to also POST spans to an OTLP/HTTP collector.
+
+### 4. AlertManager (native, optional)
+
+`alert_rules.yml` fires alerts labelled `severity=critical|warning`; `alertmanager.yml`
+routes them to per-severity receivers. Run it natively (no Docker):
+
+```bash
+# install: scoop install alertmanager | brew install alertmanager | prometheus.io/download
+cd observability && alertmanager --config.file=alertmanager.yml   # serves :9093
 ```
+
+Prometheus already targets `127.0.0.1:9093`. Point the receiver webhook URLs at
+your sink — a small webhook→Hermes bridge can forward firing alerts onto the
+`iron_gate.alerts` channel (`control_plane/hermes_bridge.py`) for in-band knight
+response.
+
+### 5. Grafana (dashboards-as-code, native)
+
+Provisioning lives under `observability/grafana/` — a Prometheus datasource and a
+file-based dashboard provider that loads `dashboards/camelot-observability.json`
+(operation rate/errors/p95, consensus log size, system CPU/mem, agent count).
+
+```bash
+# install Grafana natively (scoop/brew/grafana.com), then point it at our provisioning:
+export GF_PATHS_PROVISIONING="$PWD/observability/grafana/provisioning"
+# set the dashboard provider path (grafana/provisioning/dashboards/dashboards.yml →
+#   options.path) to the ABSOLUTE path of observability/grafana/dashboards
+grafana server   # or: grafana-server --homepath <grafana_home>
+```
+
+Grafana loads the CAMELOT-Prometheus datasource (`uid: camelot-prometheus`,
+`http://127.0.0.1:9090`) and the "CAMELOT-OS Observability" dashboard on startup.
+
+### Helper
+
+`python observability/run_observability.py --check` reports which native binaries
+(Prometheus / AlertManager / Grafana) are present and prints the exact launch
+commands. No containers anywhere.
 
 ### 2. Instrument Your CAMELOT-OS Instances
 

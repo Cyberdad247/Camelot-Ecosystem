@@ -1,0 +1,116 @@
+{
+  "uid": "camelot-observability",
+  "title": "CAMELOT-OS Observability",
+  "tags": ["camelot", "observability"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-1h", "to": "now" },
+  "templating": { "list": [] },
+  "annotations": { "list": [] },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Operation rate (ops/s by operation)",
+      "type": "timeseries",
+      "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+          "expr": "sum(rate(camelot_operation_total[5m])) by (operation)",
+          "legendFormat": "{{operation}}"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Operation errors (errors/s by operation)",
+      "type": "timeseries",
+      "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+          "expr": "sum(rate(camelot_operation_total{status=\"error\"}[5m])) by (operation)",
+          "legendFormat": "{{operation}}"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Operation latency p95 (s)",
+      "type": "timeseries",
+      "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+          "expr": "histogram_quantile(0.95, sum(rate(camelot_operation_duration_seconds_bucket[5m])) by (le, operation))",
+          "legendFormat": "{{operation}}"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Consensus log size by node",
+      "type": "timeseries",
+      "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+          "expr": "camelot_consensus_log_size",
+          "legendFormat": "{{node_id}}"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "System CPU %",
+      "type": "timeseries",
+      "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+      "gridPos": { "h": 8, "w": 8, "x": 0, "y": 16 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+          "expr": "camelot_system_cpu_percent"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "System memory (bytes)",
+      "type": "timeseries",
+      "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+      "gridPos": { "h": 8, "w": 8, "x": 8, "y": 16 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+          "expr": "camelot_system_memory_bytes"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Agents registered",
+      "type": "stat",
+      "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+      "gridPos": { "h": 8, "w": 8, "x": 16, "y": 16 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "prometheus", "uid": "camelot-prometheus" },
+          "expr": "sum(camelot_agent_count)"
+        }
+      ]
+    }
+  ]
+}

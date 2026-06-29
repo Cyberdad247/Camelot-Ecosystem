@@ -76,11 +76,11 @@ def _get_redis_store():
     try:
         import importlib.util as _ilu
         _spec = _ilu.spec_from_file_location(
-            "redis_store", HOME / "01_KERNEL" / "memory" / "redis_store.py"
+            "local_store", HOME / "01_KERNEL" / "memory" / "local_store.py"
         )
         _mod = _ilu.module_from_spec(_spec)
         _spec.loader.exec_module(_mod)  # type: ignore[union-attr]
-        _redis_store = _mod.redis_store
+        _redis_store = _mod.local_store
     except Exception:
         _redis_store = None
     return _redis_store

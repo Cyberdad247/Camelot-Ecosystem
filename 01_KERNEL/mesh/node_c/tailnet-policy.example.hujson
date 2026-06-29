@@ -1,0 +1,46 @@
+// Camelot-OS Empire Mesh — tailnet policy template (P4-T01)
+// ============================================================================
+// Apply in the Tailscale admin console → Access controls (or via the visual
+// policy editor). Adapted from the Tailscale reference "Connect inference and
+// training servers": tags give mesh nodes a machine identity, tagged auth keys
+// automate how they join, and grants (deny-by-default) control who reaches them.
+//
+// Replace the placeholder emails/domains with your own.
+{
+  // ── Tags: machine identities for non-user devices ─────────────────────────
+  // Owners = who may mint auth keys for the tag. autogroup:admin = tailnet admins.
+  "tagOwners": {
+    "tag:omni-router":  ["autogroup:admin"], // Node_C_Omni_Router (control plane)
+    "tag:empire-drone": ["autogroup:admin"], // edge worker drones (wasm/voice/preview)
+  },
+
+  // ── Groups: who may reach the mesh ────────────────────────────────────────
+  "groups": {
+    "group:operators": ["you@example.com"], // humans running HITL approvals
+    "group:knights":   ["you@example.com"], // agent accounts dispatching work
+  },
+
+  // ── Grants: deny-by-default; only listed src→dst pairs may connect ─────────
+  "grants": [
+    // Operators reach the Omni-Router health/control endpoint on :80.
+    {
+      "src": ["group:operators"],
+      "dst": ["tag:omni-router"],
+      "ip":  ["80"],
+    },
+    // The Omni-Router dispatches to every drone. Drones CANNOT reach each other
+    // (no drone→drone grant) — the same isolation pattern the reference uses for
+    // multi-tenant GPU separation.
+    {
+      "src": ["tag:omni-router"],
+      "dst": ["tag:empire-drone"],
+      "ip":  ["*"],
+    },
+    // Knights reach drones on the worker port range only.
+    {
+      "src": ["group:knights"],
+      "dst": ["tag:empire-drone"],
+      "ip":  ["9000-9100"],
+    },
+  ],
+}

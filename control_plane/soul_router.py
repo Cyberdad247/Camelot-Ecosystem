@@ -8,9 +8,9 @@ from __future__ import annotations
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 
-import importlib.util
 import os
 import sys
+import importlib.util
 from dataclasses import dataclass
 from enum import Enum
 from typing import Optional
@@ -20,7 +20,7 @@ try:
 except ImportError:
     requests = None
 
-from control_plane.taxonomy import KEYWORD_ROUTES, PRIVACY_KEYWORDS
+from control_plane.taxonomy import PRIVACY_KEYWORDS, KEYWORD_ROUTES
 
 try:
     from importlib import import_module
@@ -105,8 +105,7 @@ class IntentTensor:
     environment: float = 0.0
     def __post_init__(self):
         for attr in ("velocity", "magnitude", "privacy", "environment"):
-            if not 0.0 <= getattr(self, attr) <= 1.0:
-                raise ValueError(f"{attr} invalid")
+            if not 0.0 <= getattr(self, attr) <= 1.0: raise ValueError(f"{attr} invalid")
 
 _ALPHA, _BETA, _GAMMA, _DELTA = 0.20, 0.35, 0.30, 0.15
 def soul_equation(t: IntentTensor) -> float:
@@ -137,8 +136,7 @@ class SoulRouter:
     def record_ttft(self, knight_id: str, ttft_ms: float):
         history = self._ttft_history.setdefault(knight_id, [])
         history.append(ttft_ms)
-        if len(history) > 10:
-            history.pop(0)
+        if len(history) > 10: history.pop(0)
 
     def _sync_to_cloudbrain(self, knight_id: str, intent: str, reason: str):
         if HydrationManager:
@@ -182,10 +180,8 @@ class SoulRouter:
         for kw, kn in self._routes.items():
             if kw in intent_lower:
                 if self.get_average_ttft(kn) > self.slo_threshold_ms:
-                    slo_escaped = True
-                    continue
-                matched_knight = kn
-                break
+                    slo_escaped = True; continue
+                matched_knight = kn; break
 
         # 4. Final selection
         if matched_knight:
@@ -196,19 +192,15 @@ class SoulRouter:
         else:
             best_score, best_engine, best_tensor = -1.0, self._engines["sir_boris"], None
             for engine in FOUNDRY_COUNCIL:
-                if engine.privacy_level >= 0.8 and privacy < 0.3:
-                    continue
-                if self.get_average_ttft(engine.knight_id) > self.slo_threshold_ms:
-                    continue
+                if engine.privacy_level >= 0.8 and privacy < 0.3: continue
+                if self.get_average_ttft(engine.knight_id) > self.slo_threshold_ms: continue
                 t = IntentTensor(velocity, magnitude, privacy, float(engine.weight))
                 s = soul_equation(t)
-                if s > best_score:
-                    best_score, best_engine, best_tensor = s, engine, t
+                if s > best_score: best_score, best_engine, best_tensor = s, engine, t
             matched_knight, engine, tensor, score = best_engine.knight_id, best_engine, best_tensor, best_score
             reason = f"TENSOR_SCORED: {matched_knight}"
 
-        if slo_escaped:
-            reason += " [DUALMAP_ESCAPE]"
+        if slo_escaped: reason += " [DUALMAP_ESCAPE]"
         self._sync_to_cloudbrain(matched_knight, intent, reason)
         return RouteDecision(matched_knight, engine.engine, float(engine.weight), score, tensor, reason)
 
