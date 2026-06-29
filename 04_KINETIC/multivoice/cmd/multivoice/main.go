@@ -20,6 +20,7 @@ import (
 	"syscall"
 
 	"camelot-os/orchestration"
+	"camelot-os/providers"
 	"camelot-os/vault"
 	"camelot-os/zeroclaw"
 )
@@ -29,6 +30,21 @@ func env(key, def string) string {
 		return v
 	}
 	return def
+}
+
+// buildPolyglot wires live providers where credentials exist, falling back to
+// the offline stubs otherwise. SIR_CODEX awakens on OpenAI when
+// CAMELOT_OPENAI_KEY is set (Sentinel Shield — secrets from env only).
+func buildPolyglot() *orchestration.APEEv6Router {
+	provs := map[string]orchestration.Provider{}
+	if oa, err := providers.NewOpenAIProvider(); err == nil {
+		provs["openai"] = oa
+		log.Printf("[CYBERTRONIA] SIR_CODEX awakened — live OpenAI provider (%s).", oa.Model)
+	} else {
+		log.Printf("[CYBERTRONIA] SIR_CODEX dormant — %v (using stub).", err)
+	}
+	// gemini/claude not yet wired -> router falls back to deterministic stubs.
+	return orchestration.NewAPEEv6RouterWith(provs)
 }
 
 func main() {
@@ -49,8 +65,8 @@ func main() {
 	}
 	defer zeroclaw.PurgeAll()
 
-	// 3. Boot the Polyglot Matrix (APEE v6) — swap in real providers here.
-	polyglot := orchestration.NewAPEEv6Router()
+	// 3. Boot the Polyglot Matrix (APEE v6) — live providers where keys exist.
+	polyglot := buildPolyglot()
 
 	// 4. Ignite the Multivoice-Router.
 	mvr := &orchestration.MultivoiceRouter{
