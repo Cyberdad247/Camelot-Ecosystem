@@ -52,6 +52,42 @@ type AffinityRouter struct {
 	ttft   map[string][]float64 // knight -> recent TTFT samples (ms)
 	SLOms  float64
 	window int
+	// cumulative routing counters (telemetry)
+	cacheHits  int
+	escapes    int
+	freshPicks int
+}
+
+// AffinityStats is a telemetry snapshot of the OmniRoute layer.
+type AffinityStats struct {
+	Pins        int                `json:"pins"`
+	CacheHits   int                `json:"cache_hits"`
+	Escapes     int                `json:"escapes"`
+	FreshPicks  int                `json:"fresh_picks"`
+	Routes      int                `json:"routes"`
+	CacheHitPct float64            `json:"cache_hit_pct"`
+	SLOms       float64            `json:"slo_ms"`
+	AvgTTFT     map[string]float64 `json:"avg_ttft_ms"`
+}
+
+// Stats returns a thread-safe telemetry snapshot for the Bifrost board.
+func (a *AffinityRouter) Stats() AffinityStats {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+	routes := a.cacheHits + a.escapes + a.freshPicks
+	pct := 0.0
+	if routes > 0 {
+		pct = 100.0 * float64(a.cacheHits) / float64(routes)
+	}
+	avg := make(map[string]float64, len(a.ttft))
+	for k := range a.ttft {
+		avg[k] = a.avgLocked(k)
+	}
+	return AffinityStats{
+		Pins: len(a.pins), CacheHits: a.cacheHits, Escapes: a.escapes,
+		FreshPicks: a.freshPicks, Routes: routes, CacheHitPct: pct,
+		SLOms: a.SLOms, AvgTTFT: avg,
+	}
 }
 
 // NewAffinityRouter builds the layer with a TTFT SLO (ms); <=0 defaults to 2000.
@@ -77,6 +113,7 @@ func (a *AffinityRouter) SelectKnight(intent string, fresh func() string) Affini
 
 	if pinned, ok := a.pins[key]; ok {
 		if a.healthyLocked(pinned) {
+			a.cacheHits++
 			return AffinityDecision{Knight: pinned, Key: key, CacheHit: true}
 		}
 		// Hotspot — DualMap-lite escape to the coolest alternate engine.
@@ -85,11 +122,13 @@ func (a *AffinityRouter) SelectKnight(intent string, fresh func() string) Affini
 			alt = fresh()
 		}
 		a.pins[key] = alt
+		a.escapes++
 		return AffinityDecision{Knight: alt, Key: key, Escaped: true}
 	}
 
 	k := fresh()
 	a.pins[key] = k
+	a.freshPicks++
 	return AffinityDecision{Knight: k, Key: key}
 }
 

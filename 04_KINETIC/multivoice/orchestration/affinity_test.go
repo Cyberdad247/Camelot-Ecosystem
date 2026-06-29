@@ -104,3 +104,28 @@ func TestRouteIntent_WithAffinityLayer(t *testing.T) {
 		t.Fatalf("equivalent intent should reuse the pin, got %d pins", mvr.Affinity.PinCount())
 	}
 }
+
+func TestAffinity_StatsCounters(t *testing.T) {
+	a := NewAffinityRouter(2000)
+	fresh := func() string { return "sir_codex" }
+
+	a.SelectKnight("compile a.rs", fresh) // fresh pick (pin)
+	a.SelectKnight("compile b.rs", fresh) // cache hit (same <FILE> key)
+	a.RecordTTFT("sir_codex", 3500)       // make it a hotspot
+	a.RecordTTFT("sir_helios", 100)       // cool alternate
+	a.SelectKnight("compile c.rs", fresh) // escape -> sir_helios
+
+	s := a.Stats()
+	if s.FreshPicks != 1 || s.CacheHits != 1 || s.Escapes != 1 {
+		t.Fatalf("counters = fresh%d hit%d esc%d, want 1/1/1", s.FreshPicks, s.CacheHits, s.Escapes)
+	}
+	if s.Routes != 3 {
+		t.Fatalf("routes = %d, want 3", s.Routes)
+	}
+	if s.CacheHitPct < 33.0 || s.CacheHitPct > 34.0 {
+		t.Fatalf("cache hit pct = %.1f, want ~33.3", s.CacheHitPct)
+	}
+	if s.AvgTTFT["sir_codex"] != 3500 {
+		t.Fatalf("avg ttft codex = %v", s.AvgTTFT["sir_codex"])
+	}
+}

@@ -165,6 +165,13 @@ def _board_html() -> str:
   </section>
 
   <section class="mt-6">
+    <h2 class="text-sm" style="color:{LUXORA_GOLD}">OMNIROUTE AFFINITY (KV-cache routing)</h2>
+    <div hx-get="/bifrost/omniroute" hx-trigger="load, every 5s" hx-swap="innerHTML">
+      <div id="omniroute">connecting…</div>
+    </div>
+  </section>
+
+  <section class="mt-6">
     <h2 class="text-sm" style="color:{LUXORA_GOLD}">FOUNDRY COUNCIL</h2>
     <div>{cards}</div>
   </section>
@@ -203,6 +210,12 @@ def create_app():
         """LLM access + spend panel from Aperture (graceful if not connected)."""
         from .aperture_bridge import ApertureBridge, render_panel
         return render_panel(ApertureBridge().fetch_usage(), gold=LUXORA_GOLD)
+
+    @app.get("/bifrost/omniroute", response_class=HTMLResponse)
+    def omniroute() -> str:
+        """OmniRoute affinity telemetry from the Multivoice-Router /metrics."""
+        from .multivoice_bridge import MultivoiceBridge, render_panel
+        return render_panel(MultivoiceBridge().fetch_affinity(), gold=LUXORA_GOLD)
 
     @app.get("/bifrost/metrics/stream")
     async def metrics_stream(frames: int = 0):
@@ -285,6 +298,10 @@ def _selftest() -> int:
     check("board uses Luxora Gold #D4AF37", LUXORA_GOLD in html)
     check("board wires SSE", "sse-connect=\"/bifrost/metrics/stream\"" in html)
     check("board wires Aperture panel", "hx-get=\"/bifrost/aperture\"" in html)
+    check("board wires OmniRoute panel", "hx-get=\"/bifrost/omniroute\"" in html)
+    ro = client.get("/bifrost/omniroute")
+    check("omniroute panel 200", ro.status_code == 200)
+    check("omniroute panel has label", "OMNIROUTE AFFINITY" in ro.text)
 
     # Aperture panel renders (disconnected here — no `ai` device — but must 200)
     ra = client.get("/bifrost/aperture")
