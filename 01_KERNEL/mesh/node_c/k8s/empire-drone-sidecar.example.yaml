@@ -1,0 +1,88 @@
+# Camelot-OS Empire Drone — Kubernetes deployment with a Tailscale sidecar (P4-T01)
+# =============================================================================
+# Containerized edge drones (wasm / voice / preview) join the Empire mesh via a
+# Tailscale sidecar, using an EPHEMERAL + TAGGED auth key so Tailscale removes
+# the device automatically when the pod stops. Reachability is then governed by
+# the grants in ../tailnet-policy.example.hujson (deny-by-default).
+#
+# Adapted from the Tailscale "Tailscale on Kubernetes" reference (sidecar mode).
+# Apply with:  kubectl apply -f empire-drone-sidecar.example.yaml
+---
+# Auth key — inject from a secrets manager in production; never commit a real key.
+apiVersion: v1
+kind: Secret
+metadata:
+  name: tailscale-auth
+stringData:
+  # Ephemeral + Reusable key with tag:empire-drone selected (see GO_LIVE.md).
+  TS_AUTHKEY: tskey-auth-REPLACE_ME
+---
+# RBAC so the sidecar can read/write its own state Secret (Tailscale >= v1.16).
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: tailscale
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: tailscale-state
+rules:
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["tailscale-state-empire-drone"]
+    verbs: ["get", "update", "patch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["create"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: tailscale-state
+subjects:
+  - kind: ServiceAccount
+    name: tailscale
+roleRef:
+  kind: Role
+  name: tailscale-state
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: empire-drone
+  labels: { app: empire-drone }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: empire-drone }
+  template:
+    metadata:
+      labels: { app: empire-drone }
+    spec:
+      serviceAccountName: tailscale
+      containers:
+        # Your edge worker (wasm / voice / preview drone).
+        - name: drone
+          image: camelot/empire-drone:latest
+          ports:
+            - containerPort: 9000   # worker port range governed by the knights grant
+        # Tailscale sidecar — userspace mode (minimal privileges).
+        - name: ts-sidecar
+          image: tailscale/tailscale:stable
+          env:
+            - name: TS_AUTHKEY
+              valueFrom:
+                secretKeyRef: { name: tailscale-auth, key: TS_AUTHKEY }
+            - name: TS_KUBE_SECRET           # store node state in a k8s Secret
+              value: tailscale-state-empire-drone
+            - name: TS_USERSPACE             # no NET_ADMIN / /dev/net/tun needed
+              value: "true"
+            - name: TS_EXTRA_ARGS            # join tagged (identity from the policy)
+              value: "--advertise-tags=tag:empire-drone"
+            - name: TS_AUTH_ONCE
+              value: "true"
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000

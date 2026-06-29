@@ -1,0 +1,125 @@
+# v9000.14-CYBERTRONIA — Go-Live Checklist
+
+The upgrade is merged and **32/34 tasks are fully verified**. The last two
+(`P4-T01` tsnet mesh, `P5-T02` MicroVM) are **coded, compiled, and self-tested**
+— they only need a real network identity / hardware permission that must be
+supplied by a human, not committed to the repo.
+
+The single driver for everything below is:
+
+```powershell
+wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && bash scripts/wsl_verify.sh"
+```
+
+It preflights the toolchain and prints **PASS / FAIL / SKIP** per task with the
+exact remediation for anything still missing. Re-run it after each step below.
+
+---
+
+## P4-T01 — tsnet 2-node mesh (needs a Tailscale auth key)
+
+| | |
+|---|---|
+| **What's missing** | A Tailscale **auth key** (`tskey-auth-…`) — your private-network credential |
+| **Why a human** | Tied to *your* Tailscale account; cannot be generated from the repo |
+| **Code status** | ✅ compiles (`go build`/`go vet` exit 0); test skips cleanly without a key |
+
+**Steps**
+1. Create a free account at <https://tailscale.com> (Google/Microsoft/GitHub login).
+2. Admin console → **Settings → Keys → Generate auth key**. Enable **Reusable** + **Ephemeral**.
+3. Copy `01_KERNEL/mesh/node_c/.env.example` → `01_KERNEL/mesh/node_c/.env` (gitignored) and paste the key, **or** pass it inline.
+4. Run the live test:
+   ```bash
+   cd 01_KERNEL/mesh/node_c
+   go mod tidy                                   # first time only (fetches tailscale.com)
+   TS_AUTHKEY=tskey-auth-xxxx go test -v -run TestTwoNodeMesh
+   ```
+5. Green `--- PASS: TestTwoNodeMesh` ⇒ node B reached node A over the mesh.
+
+> 🔒 Never commit a real key. `.env` is gitignored; `.env.example` holds only a placeholder.
+
+### Production hardening — tagged keys + grants (recommended)
+
+A bare reusable key is fine for the smoke test, but production Empire nodes
+should join with **tags** and be governed by **grants** (deny-by-default), so a
+leaked key can't impersonate an operator and drones can't reach each other.
+Apply `01_KERNEL/mesh/node_c/tailnet-policy.example.hujson` in the Tailscale
+admin console (Access controls), then:
+
+1. **Tag the nodes.** The policy defines `tag:omni-router` and `tag:empire-drone`.
+   Generate the auth key with the matching **tag selected** — the tsnet node
+   inherits that identity from the key (tagged devices also have key-expiry
+   disabled, so long-running nodes never need re-auth).
+2. **Scope reachability with grants.** The example grants let operators hit the
+   Omni-Router on `:80`, let the Omni-Router dispatch to all drones, and isolate
+   drones from each other (no drone→drone path) — the same isolation pattern the
+   Tailscale reference uses for multi-tenant GPU separation.
+3. **Ephemeral keys for short-lived drones.** Containerized wasm/voice/preview
+   drones should use an **ephemeral, tagged** key (passed as `TS_AUTHKEY` env)
+   so Tailscale auto-removes them from the tailnet on shutdown.
+
+> Treat auth keys like passwords — store them in a secrets manager, not the repo.
+
+### Kubernetes deployment (Empire drones at scale)
+
+For drones running in Kubernetes, use the **Tailscale sidecar** — a tailscale
+container alongside the drone pod that joins the mesh with an ephemeral, tagged
+key. See `01_KERNEL/mesh/node_c/k8s/empire-drone-sidecar.example.yaml`:
+
+```bash
+# 1. Put a real ephemeral+tagged key in the tailscale-auth Secret (or inject
+#    from your secrets manager), then:
+kubectl apply -f 01_KERNEL/mesh/node_c/k8s/empire-drone-sidecar.example.yaml
+# 2. Confirm the drone joined (and grab a login URL if you skipped the key):
+kubectl logs deploy/empire-drone -c ts-sidecar
+```
+
+The manifest runs the sidecar in **userspace mode** (no `NET_ADMIN`/`/dev/net/tun`),
+stores node state in a Kubernetes Secret (with the RBAC Role included), and
+advertises `tag:empire-drone` so the tailnet grants apply automatically. Each
+pod gets its own tailnet identity and is auto-removed on shutdown (ephemeral).
+For larger fleets, the **Tailscale Kubernetes Operator** can manage ingress/
+egress and the API-server proxy instead of per-pod sidecars.
+
+---
+
+## P5-T02 — Unikraft MicroVM (needs /dev/kvm access + a hypervisor)
+
+| | |
+|---|---|
+| **What's missing** | Permission to use `/dev/kvm`, a hypervisor, and a pill image |
+| **Why a human** | KVM is hardware/OS-level access; can't be granted from application code |
+| **Code status** | ✅ launcher `--self-test` PASS (mock VM); real boot gated on the below |
+
+**On this host:** `/dev/kvm` *exists* but is *"present but not readable"* — your
+user isn't in the `kvm` group yet.
+
+**Steps (inside WSL2 Ubuntu)**
+1. Grant KVM permission (one-time), then restart WSL so the group takes effect:
+   ```bash
+   sudo usermod -aG kvm "$USER"
+   # close ALL WSL terminals, then reopen (group changes need a fresh session)
+   ls -l /dev/kvm        # you should now have rw access
+   ```
+2. Install a hypervisor (one of):
+   ```bash
+   sudo apt-get update && sudo apt-get install -y qemu-system-x86   # or cloud-hypervisor / krunvm
+   ```
+3. Provide a pill image — set `CAMELOT_PILL_IMAGE=/path/to/pill.img` or pass `--image`.
+   (Building a 5 MB Unikraft/libkrun unikernel is the remaining engineering step;
+   the launcher reports exactly what it needs until then.)
+4. Boot + health-check:
+   ```bash
+   python3 scripts/microvm_boot.py --health-check
+   # exit 0 = booted + health 200 ; exit 3 = a prereq still missing (it tells you which)
+   ```
+
+---
+
+## What's already green (no action needed)
+
+- **P4-T05** memfd zero-copy — verified on WSL2 (~0.126 µs/page, target <10 µs)
+- **P4-T02 / P4-T04** — ML-KEM-768 / ML-DSA-65 round-trip tests pass; `cargo audit` clean (0 advisories)
+- **P5-T01** — `camelot-edge.wasm` builds (65 KB). To run it: `cargo install wasmtime` then
+  `wasmtime run target/wasm32-wasip1/release/camelot-edge.wasm`
+- Phases 1–3 and the rest of 4–5: 52 pytest + 19 selftests + 7 Rust tests, all green.
