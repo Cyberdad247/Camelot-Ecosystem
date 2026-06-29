@@ -52,10 +52,28 @@ paid credential.
 - **ZeroClaw** uses lease accounting identical across platforms; the Linux `memfd_create` region is a build-tagged drop-in (same approach as `control_plane/scarcity_protocol.py`).
 - **World Tree** ships an in-memory starter registry; the SQLite CRIU ledger backend slots behind `vault.Ledger`.
 
+## OmniRoute affinity layer (routing on top of the Polyglot Matrix)
+An optional `AffinityRouter` (`MultivoiceRouter.Affinity`) adds the OmniRoute
+policy on top of keyword routing — ported from
+`docs/plans/2026-05-23-omniroute-affinity-v1000.md`:
+
+1. **Stateful affinity pinning** — `GenerateAffinityKey` abstracts dynamic values
+   (file paths→`<FILE>`, UUIDs→`<UUID>`, numbers→`<NUM>`) and hashes the structural
+   template, so cache-equivalent prompts (e.g. `audit a.py` / `audit b.py`) **stick
+   to the same engine** → KV-cache prefix hits. Mirrors the Python
+   `cli_intercept.generate_affinity_key`.
+2. **DualMap-lite SLO escape** — per-engine **TTFT** is tracked; when a pinned
+   engine's rolling avg breaches the SLO (`CAMELOT_SLO_MS`, default 2000ms) the
+   layer **escapes to the coolest alternate engine** and re-pins, instead of
+   honoring a hotspot.
+
+On by default in `cmd/multivoice` (set `Affinity = nil` to route purely by the
+Polyglot keyword match).
+
 ## Build & test
 ```bash
 cd 04_KINETIC/multivoice
-go test ./...          # orchestration: routing + arena tests
+go test ./...          # orchestration: routing + affinity + arena tests
 go build ./...         # builds the multivoice binary
 CAMELOT_ARENA_MB=128 go run ./cmd/multivoice   # ignite (Unix sock + :7680 SSE)
 ```

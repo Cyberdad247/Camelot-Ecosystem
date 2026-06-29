@@ -7,6 +7,7 @@ import (
 	"net"
 	"net/http"
 	"strings"
+	"time"
 
 	"camelot-os/vault"
 	"camelot-os/zeroclaw"
@@ -18,6 +19,9 @@ import (
 type MultivoiceRouter struct {
 	PolyglotEngine *APEEv6Router
 	EcosystemDB    *vault.Ledger
+	// Affinity, if set, is the OmniRoute layer: sticky KV-cache pinning +
+	// DualMap-lite SLO escape. Nil = route purely by the Polyglot keyword match.
+	Affinity *AffinityRouter
 	// Emit, if set, receives each response (e.g. forward to the Bifrost board).
 	Emit func(string)
 }
@@ -34,13 +38,24 @@ func (mvr *MultivoiceRouter) RouteIntent(ctx context.Context, intent, source str
 	}
 	defer zeroclaw.Purge(fd) // MADV_DONTNEED on exit
 
-	// 3. Polyglot routing — the right Knight + the right engine.
-	knight := mvr.PolyglotEngine.DetermineKnight(intent, skills)
+	// 3. Routing — OmniRoute affinity layer (if present) over the Polyglot pick.
+	fresh := func() string { return mvr.PolyglotEngine.DetermineKnight(intent, skills) }
+	knight := ""
+	if mvr.Affinity != nil {
+		dec := mvr.Affinity.SelectKnight(intent, fresh)
+		knight = dec.Knight
+	} else {
+		knight = fresh()
+	}
 
-	// 4. Dispatch.
+	// 4. Dispatch (timed — feeds the affinity TTFT/SLO tracker).
+	t0 := time.Now()
 	resp, err := mvr.PolyglotEngine.InvokeKnightWithSkills(ctx, knight, intent, fd)
 	if err != nil {
 		return "", err
+	}
+	if mvr.Affinity != nil {
+		mvr.Affinity.RecordTTFT(knight, float64(time.Since(t0).Microseconds())/1000.0)
 	}
 	if mvr.Emit != nil {
 		mvr.Emit(resp)

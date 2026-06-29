@@ -86,12 +86,16 @@ func main() {
 	// 3. Boot the Polyglot Matrix (APEE v6) — live providers where keys exist.
 	polyglot := buildPolyglot()
 
-	// 4. Ignite the Multivoice-Router.
+	// 4. Ignite the Multivoice-Router with the OmniRoute affinity layer
+	//    (sticky KV-cache pinning + DualMap-lite SLO escape; CAMELOT_SLO_MS).
+	sloMs, _ := strconv.ParseFloat(env("CAMELOT_SLO_MS", "2000"), 64)
 	mvr := &orchestration.MultivoiceRouter{
 		PolyglotEngine: polyglot,
 		EcosystemDB:    ledger,
+		Affinity:       orchestration.NewAffinityRouter(sloMs),
 		Emit:           func(resp string) { log.Printf("[BIFROST] %s", resp) },
 	}
+	log.Printf("[CYBERTRONIA] OmniRoute affinity layer active (SLO %.0fms).", sloMs)
 
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()

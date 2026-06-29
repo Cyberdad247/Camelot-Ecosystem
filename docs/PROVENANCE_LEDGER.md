@@ -1688,3 +1688,16 @@
   - `go build ./... && go vet ./...` — exit 0; gofmt clean
   - `go test ./...` — orchestration + providers PASS (mock CLIProxy round-trip, loopback auth, /models probe, unreachable→stub degradation, structural interface proofs)
 - **Tag**: CYBERTRONIA_POLYGLOT_ZEROCOST_SYNC
+## [2026-06-29] OmniRoute Affinity Layer wired onto the Multivoice Polyglot Matrix
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Ported the OmniRoute affinity policy (docs/plans/2026-05-23-omniroute-affinity-v1000.md) into the Go Multivoice-Router as a routing layer ON TOP of the Polyglot Matrix. (1) Stateful affinity pinning — GenerateAffinityKey abstracts files/UUIDs/numbers so cache-equivalent prompts stick to the same engine (KV-cache prefix hits), mirroring the Python cli_intercept.generate_affinity_key. (2) DualMap-lite SLO escape — per-engine TTFT tracked; a pinned engine breaching the SLO (CAMELOT_SLO_MS, default 2000ms) escapes to the coolest alternate engine and re-pins.
+- **Scope**:
+  - 04_KINETIC/multivoice/orchestration/affinity.go: GenerateAffinityKey + AffinityRouter (pins, TTFT, SLO escape, coolest-alternate)
+  - 04_KINETIC/multivoice/orchestration/router.go: MultivoiceRouter.Affinity field; RouteIntent consults affinity + records TTFT
+  - 04_KINETIC/multivoice/cmd/multivoice/main.go: affinity layer active by default (CAMELOT_SLO_MS)
+  - 04_KINETIC/multivoice/orchestration/affinity_test.go: key consistency (plan test), sticky cache hit, SLO escape to coolest, end-to-end
+  - 04_KINETIC/multivoice/README.md: OmniRoute affinity section
+- **Verification performed**:
+  - `go build ./... && go vet ./...` — exit 0
+  - `go test ./...` — orchestration + providers PASS (affinity key, sticky pin, SLO escape, e2e router; provider round-trips)
+- **Tag**: CYBERTRONIA_OMNIROUTE_AFFINITY_LAYER
