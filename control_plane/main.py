@@ -43,12 +43,20 @@ except Exception:
         def info(self, *args, **kwargs): pass
     logger = DummyLogger()
 
-from .soul_router import SoulRouter, RouteDecision
+from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
+from .deerflow_sandbox import DeerFlowSandbox
 from .omc_team import OMCTeam
 from .sarda_engine import SARDAEngine, SARDAResult
-from .deerflow_sandbox import DeerFlowSandbox
-from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
+from .soul_router import RouteDecision, SoulRouter
 
+# Phase H: Metrics collection
+try:
+    from .phase_h_integration import get_metrics
+    _METRICS = get_metrics()
+except Exception:
+    _METRICS = None  # Graceful degradation if metrics unavailable
+
+import time
 
 # ---------------------------------------------------------------------------
 # A2A Message Schema (Typed Agent-to-Agent Protocol)
@@ -552,25 +560,41 @@ class ControlPlane:
         Privacy >= 0.8 forces Sir Ghost (air-gapped).
         Complexity >= 0.8 forces multi-agent plan output.
         """
-        privacy = 0.0
-        magnitude = 0.5
-        velocity = 0.5
+        # Phase H: Track routing operation
+        start = time.perf_counter()
+        try:
+            privacy = 0.0
+            magnitude = 0.5
+            velocity = 0.5
 
-        # Extract routing hints from constraints
-        for c in task.constraints:
-            if c.startswith("privacy="):
-                privacy = float(c.split("=", 1)[1])
-            elif c.startswith("complexity="):
-                magnitude = float(c.split("=", 1)[1])
-            elif c.startswith("velocity="):
-                velocity = float(c.split("=", 1)[1])
+            # Extract routing hints from constraints
+            for c in task.constraints:
+                if c.startswith("privacy="):
+                    privacy = float(c.split("=", 1)[1])
+                elif c.startswith("complexity="):
+                    magnitude = float(c.split("=", 1)[1])
+                elif c.startswith("velocity="):
+                    velocity = float(c.split("=", 1)[1])
 
-        return self.soul_router.route(
-            task.intent,
-            velocity=velocity,
-            magnitude=magnitude,
-            privacy=privacy,
-        )
+            result = self.soul_router.route(
+                task.intent,
+                velocity=velocity,
+                magnitude=magnitude,
+                privacy=privacy,
+            )
+
+            if _METRICS:
+                duration_ms = (time.perf_counter() - start) * 1000
+                _METRICS.record('route', duration_ms, success=True,
+                               tags={'intent': task.intent, 'knight': result.knight_id})
+
+            return result
+        except Exception as e:
+            if _METRICS:
+                duration_ms = (time.perf_counter() - start) * 1000
+                _METRICS.record('route', duration_ms, success=False, error_message=str(e),
+                               tags={'intent': task.intent})
+            raise
 
     def _plan_tool_call(self, task: TaskPayload) -> Optional[ToolRequest]:
         """Map task intent to an MCP tool call. Returns None for pure reasoning."""

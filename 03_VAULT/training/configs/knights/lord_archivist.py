@@ -1,4 +1,4 @@
-<!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
+# <!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
 """
 Lord Archivist v1.0 — The Skill & Memory Evolver
 ===============================================
@@ -7,8 +7,6 @@ Implements the SkillClaw framework for system-wide optimization.
 """
 
 from typing import Any, Dict
-import os
-import json
 from pathlib import Path
 
 class LordArchivist:

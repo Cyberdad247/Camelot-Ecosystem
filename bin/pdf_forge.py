@@ -7,13 +7,13 @@ Converts the Master System Spec to a high-status PDF artifact.
 Utilizes reportlab for sovereign document generation.
 """
 
-import os
-import sys
-from reportlab.lib.pagesizes import letter
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak, Image
-from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
-from reportlab.lib.enums import TA_CENTER
 from pathlib import Path
+
+from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.pagesizes import letter
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer
+
 
 def forge_pdf(source_md: str, output_pdf: str):
     doc = SimpleDocTemplate(output_pdf, pagesize=letter)

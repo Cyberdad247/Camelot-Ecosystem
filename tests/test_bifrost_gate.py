@@ -37,3 +37,58 @@ def test_loopback_owner_can_require_token(monkeypatch):
     assert not ok
     assert reason == "local-owner-token-required"
 
+
+def test_client_certificate_roaming_verification(monkeypatch):
+    monkeypatch.setenv("BIFROST_ALLOW_ANY_VALID_CERT", "1")
+    mod = _load_bifrost_module("cert_roaming")
+
+    # Present a dummy cert DER from a non-tailnet IP
+    ok, reason = mod.verify_caller(
+        remote_addr="198.51.100.42",
+        client_cert_der=b"dummy_cert_der"
+    )
+    assert ok
+    assert "mtls" in reason
+
+
+def test_client_certificate_invalid(monkeypatch):
+    monkeypatch.setenv("BIFROST_ALLOW_ANY_VALID_CERT", "0")
+    monkeypatch.setenv("BIFROST_TRUSTED_CERT_CNS", "valid-client")
+    mod = _load_bifrost_module("cert_invalid")
+
+    # Present an untrusted cert
+    ok, reason = mod.verify_caller(
+        remote_addr="198.51.100.42",
+        client_cert_der=b"invalid_cert_der"
+    )
+    assert not ok
+    assert "untrusted client certificate" in reason
+
+
+def test_oidc_roaming_verification(monkeypatch):
+    monkeypatch.setenv("BIFROST_OIDC_ISSUERS", "https://accounts.google.com")
+    mod = _load_bifrost_module("oidc_roaming")
+
+    # Mock token decoding
+    # JWT with iss matching the trusted list, and not expired
+    import time
+    import json
+    import base64
+    header = base64.urlsafe_b64encode(b'{"alg":"HS256"}').decode().rstrip("=")
+    payload_data = {
+        "iss": "https://accounts.google.com",
+        "exp": time.time() + 1000,
+        "aud": "camelot-os",
+        "sub": "user_123"
+    }
+    payload = base64.urlsafe_b64encode(json.dumps(payload_data).encode()).decode().rstrip("=")
+    token = f"{header}.{payload}.signature"
+
+    ok, reason = mod.verify_caller(
+        remote_addr="198.51.100.42",
+        oidc_token=token
+    )
+    assert ok
+    assert "oidc-jwt" in reason
+
+

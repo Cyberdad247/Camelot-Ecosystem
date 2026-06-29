@@ -3,6 +3,7 @@ CLARITY_CORE v1.0.0 — Squire Colony CLI
 Usage: python -m squires.colony [scan|index|ghost|vector|triage|status] [path] [options]
 """
 from __future__ import annotations
+
 import argparse
 import json
 import sys
@@ -18,9 +19,9 @@ if hasattr(sys.stderr, "reconfigure"):
 # ── Rich (optional — graceful fallback) ──────────────────────────────────────
 try:
     from rich.console import Console
-    from rich.table import Table
-    from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
     from rich.panel import Panel
+    from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
+    from rich.table import Table
     _RICH = True
 except ImportError:
     _RICH = False
@@ -72,8 +73,8 @@ def cmd_scan(root: Path, args: argparse.Namespace) -> None:
 
 
 def cmd_index(root: Path, args: argparse.Namespace) -> None:
-    from .scan import scan
     from .index import build_index
+    from .scan import scan
 
     t0 = time.perf_counter()
     _print("🔍 Scanning...", "dim")
@@ -102,8 +103,8 @@ def cmd_index(root: Path, args: argparse.Namespace) -> None:
 
 
 def cmd_ghost(root: Path, args: argparse.Namespace) -> None:
-    from .scan import scan
     from .ghost import triage
+    from .scan import scan
 
     _print("👻 GHOST scanning for secrets/TODOs...", "dim")
     records = list(scan(root))
@@ -169,13 +170,13 @@ def cmd_vector(root: Path, args: argparse.Namespace) -> None:
 
 
 def cmd_triage(root: Path, args: argparse.Namespace) -> None:
-    from .scan import scan
-    from .index import build_index
     from .ghost import triage as ghost_triage
-    from .sweep import sweep
+    from .index import build_index
     from .judge import judge
-    from .sentinel import gate, soft_gate, HITLBlocked
     from .mason import build_report
+    from .scan import scan
+    from .sentinel import HITLBlocked, gate, soft_gate
+    from .sweep import sweep
 
     _print("\n⚔️  CLARITY_CORE — Full Pipeline Triage", "bold")
     _print("Pipeline: SCAN → INDEX → GHOST → SWEEP → JUDGE → SENTINEL → MASON\n", "dim")
@@ -313,11 +314,11 @@ def _inject_forge_directives(root: Path, ghost_report, verdict) -> int:
 
 def _cron_scan_and_inject(root: Path, auto_approve: bool) -> dict:
     """Full triage pipeline for cron mode; injects CRITICAL findings into harness queue."""
-    from .scan import scan
-    from .index import build_index
     from .ghost import triage as ghost_triage
-    from .sweep import sweep
+    from .index import build_index
     from .judge import judge
+    from .scan import scan
+    from .sweep import sweep
 
     records = list(scan(root))
     idx = build_index(iter(records))

@@ -1,10 +1,10 @@
 {
   "schema": "camelot.system-triage/v1",
-  "generated_utc": "2026-06-21T00:30:04.598070+00:00",
+  "generated_utc": "2026-06-21T07:57:05.860476+00:00",
   "root": "C:\\Users\\vizio\\CAMELOT_OS",
   "mode": "rapid",
-  "verdict": "BLOCKED",
-  "exit_code": 2,
+  "verdict": "DEGRADED",
+  "exit_code": 1,
   "checks": [
     {
       "name": "repository-fingerprint",
@@ -12,45 +12,42 @@
       "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "Git state captured; 95 changed or untracked entries",
+      "summary": "Git state captured; 58 changed or untracked entries",
       "command": "git status --short --branch",
-      "duration_ms": 441,
+      "duration_ms": 523,
       "evidence": {
-        "output": "## feat/global-boot-omniroute-hermes...origin/feat/global-boot-omniroute-hermes\n M 01_KERNEL/__init__.py\n M 01_KERNEL/memory/agent_memory.py\n M 01_KERNEL/memory/hydration_manager.py\n D 01_KERNEL/memory/qdrant_store.py\n D 01_KERNEL/memory/redis_store.py\n M 01_KERNEL/memory/test_hydration.py\n M 01_KERNEL/memory/test_mnemosyne.py\n M 01_KERNEL/memory/tissue/flash_context.toon\n M 01_KERNEL/senses/audio/knight_voices.py\n m 02_FORGE/tools/pi-mono\n M 03_VAULT/Knights/learnings.md\n M 03_VAULT/Missions/verification_ledger.jsonl\n m 03_VAULT/Reference_Architectures/openclaw\n M 03_VAULT/firnflow/nukg_crystals.json\n M 03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/data_level0.bin\n M 03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/length.bin\n M 03_VAULT/memory/l2_index/578f48ef-60bf-4283-9b64-fb03bfcd7b07/data_level0.bin\n M 03_VAULT/memory/l2_index/578f48ef-60bf-4283-9b64-fb03bfcd7b07/length.bin\n M 03_VAULT/runtime_state/excalibur_telemetry.json\n M 03_VAULT/runtime_state/forensic_checks.jsonl\n M 03_VAULT/runtime_state/hermes_omniroute_orchestrator_latest.json\n M 03_VAULT/runtime_state/knight_configuration_latest.json\n M 03_VAULT/runtime_state/nano_swarm_runtime_latest.json\n M 03_VAULT/runtime_state/symbiotic_maintenance_latest.json\n M 03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M 03_VAULT/training/configs/config/omniroute.json\n M PROVENANCE_LEDGER.md\n M control_plane/camelot_cli.py\n M control_plane/runic_router.py\n M data/pytest-boot-sequence/warp-copy/CAMELOT_OS/03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M data/pytest-boot-sequence/warp-missing/03_VAULT/runtime_state/warp_workflow_sync_latest.json\n?? 01_KERNEL/memory/local_store.py\n?? 02_FORGE/assimilation/\n?? 03_VAULT/memory/l2_index/7249b10b-e775-4cf0-88bb-275a2cd5f5ce/\n?? 03_VAULT/runtime_state/LISA_CUSTOM_KEYCHAINS_PRODUCTION_AUDIT_2026-06-17.json\n?? 03_VAULT/runtime_state/assimilation_7/\n?? 03_VAULT/runtime_state/lisa_custom_keychains_hardening/\n?? ARCHITECTURE.md\n?? ARCHITECTURE_USAGE_GUIDE.md\n?? BARE_METAL_DEPLOYMENT.md\n?? DEPLOYMENT_GUIDE.md\n?? DEPLOYMENT_LIVE_2026-06-18.md\n?? DEPLOYMENT_QUICK_START.md\n?? DEPLOYMENT_SUMMARY.md\n?? DEPLOYMENT_VERIFICATION.md\n?? EMERGENCY_DIAGNOSTIC.sh\n?? EPIC_UI_DESIGN.md\n?? EXECUTION_COMPLETE.md\n?? HARDENING_REPORT.md\n?? HELP.md\n?? INFRASTRUCTURE_COMPLETE.md\n?? KNIGHT_INTERACTION_GUIDE.md\n?? LIVE_MONITORING_DASHBOARD.md\n?? LOAD_TESTING_PLAN.md\n?? MONITORING_LIVE.md\n?? OPERATIONS_MANUAL.md\n?? PHASE_G_PLAN.md\n?? PRODUCTION_READINESS_GUIDE.md\n?? README.md\n?? RUN_NOW.md\n?? START_TESTING.md\n?? SYSTEM_LIVE_STATUS.md\n?? TESTING_QUICKSTART.md\n?? UI_UX_ARCHITECTURE.md\n?? apps/bifrost/.gitignore\n?? apps/bifrost/src/types/\n?? audit-kickbox-audio/\n?? boot_results.json\n?? boot_status.json\n?? chaos_engineer.py\n?? cluster_health_check.sh\n?? control_plane/distributed_agent_registry.py\n?? control_plane/distributed_knowledge_sync.py\n?? control_plane/distributed_ledger_consensus.py\n?? control_plane/metrics_collector.py\n?? control_plane/qr_pill_orchestrator.py\n?? control_plane/system_triage.py\n?? data/qdrant/storage/\n?? deploy.sh\n?? deploy_cluster.sh\n?? docs/plans/IMPLEMENTATION_INFRA_PURGE.md\n?? load_testing_suite.py\n?? observability/\n?? package-lock.json\n?? package.json\n?? run_tests.sh\n?? temp-kickbox-audio/\n?? terraform/\n?? test_hardening.py\n?? test_phase_g_resilience.py\n?? test_phase_g_validation.py\n?? test_phase_g_week1.py\n?? test_phase_g_week2.py\n?? test_validation.py\n?? tests/test_system_triage.py",
+        "output": "## feat/bifrost-control-plane-link...origin/feat/bifrost-control-plane-link\n M 01_KERNEL/memory/tissue/flash_context.toon\n m 02_FORGE/tools/pi-mono\n M 03_VAULT/Missions/verification_ledger.jsonl\n M 03_VAULT/PROVENANCE_LEDGER.md\n m 03_VAULT/Reference_Architectures/openclaw\n M 03_VAULT/firnflow/nukg_crystals.json\n M 03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/data_level0.bin\n M 03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/length.bin\n M 03_VAULT/memory/l2_index/578f48ef-60bf-4283-9b64-fb03bfcd7b07/data_level0.bin\n M 03_VAULT/memory/l2_index/578f48ef-60bf-4283-9b64-fb03bfcd7b07/length.bin\n D 03_VAULT/runtime_state/cloudbrain_sync_queue.jsonl\n M 03_VAULT/runtime_state/excalibur_telemetry.json\n M 03_VAULT/runtime_state/hermes_omniroute_orchestrator_latest.json\n M 03_VAULT/runtime_state/knight_configuration_latest.json\n M 03_VAULT/runtime_state/nano_swarm_runtime_latest.json\n M 03_VAULT/runtime_state/symbiotic_maintenance_latest.json\n M 03_VAULT/runtime_state/system_triage/latest.json\n M 03_VAULT/runtime_state/system_triage/latest.md\n M 03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M 03_VAULT/training/configs/PROVENANCE_LEDGER.md\n M 03_VAULT/training/configs/notebooklm_bridge.py\n M PROVENANCE_LEDGER.md\n M README.md\n M control_plane/camelot_cli.py\n M control_plane/excalibur_preflight.py\n M control_plane/runic_router.py\n M control_plane/system_triage.py\n M data/pytest-boot-sequence/warp-copy/CAMELOT_OS/03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M data/pytest-boot-sequence/warp-missing/03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M docs/PROVENANCE_LEDGER.md\n?? .qdrant-initialized\n?? 03_VAULT/runtime_state/assimilation_7/\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T004356Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T004356Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T052535Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T052535Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062647Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062647Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062848Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062848Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065711Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065711Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065738Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065738Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070420Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070420Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070446Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070446Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070610Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070610Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075106Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075106Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075336Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075336Z.md\n?? audit-kickbox-audio/\n?? data/qdrant/storage/\n?? scripts/evolve_and_forge.py\n?? temp-kickbox-audio/",
         "stderr": "warning: could not open directory 'data/.pytest_tmp/': Permission denied",
-        "dirty_count": 95
+        "dirty_count": 58
       },
       "remediation": []
     },
     {
       "name": "source-of-truth",
       "stage": "rapid",
-      "status": "WARN",
+      "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "Canonical files present with version/title drift",
+      "summary": "Canonical files present",
       "command": null,
       "duration_ms": 1,
       "evidence": {
         "missing": [],
-        "bridge_notebook_title": "Camelot-OS v.999.3",
+        "bridge_notebook_title": "Camelot-OS v.1000",
         "expected_live_title": "Camelot-OS v.1000",
-        "readme_version_2_claim": true
+        "readme_version_2_claim": false
       },
-      "remediation": [
-        "Align CANONICAL_NOTEBOOK_TITLE with the live notebook after review.",
-        "Classify or remove untracked README production/version claims."
-      ]
+      "remediation": []
     },
     {
       "name": "excalibur-preflight",
       "stage": "rapid",
-      "status": "FAIL",
+      "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "EXCALIBUR substrate verdict: NO-GO",
+      "summary": "EXCALIBUR substrate verdict: GO",
       "command": null,
-      "duration_ms": 21,
+      "duration_ms": 18,
       "evidence": {
         "telemetry": {
           "cpu": {
@@ -58,10 +55,10 @@
           },
           "memory_mb": {
             "total": 7895,
-            "available": 1134
+            "available": 932
           },
           "storage_mb": {
-            "free": 180326
+            "free": 176801
           },
           "toolchain": {
             "rustc": {
@@ -82,20 +79,16 @@
           }
         },
         "adjudication": {
-          "verdict": "NO-GO",
-          "violations": [
-            "RAM headroom 1134MB < required 1712MB (1.2GB sprawl + 512MB Trellis) \u2014 close apps/browser"
-          ],
+          "verdict": "GO",
+          "violations": [],
           "warns": [
             "kernel BTF/eBPF N/A on Windows \u2014 Aegis Shield falls back to regex-only PII redaction"
           ],
           "missing": [],
-          "sprawl_gate": "FAIL"
+          "sprawl_gate": "PASS"
         }
       },
-      "remediation": [
-        "RAM headroom 1134MB < required 1712MB (1.2GB sprawl + 512MB Trellis) \u2014 close apps/browser"
-      ]
+      "remediation": []
     },
     {
       "name": "required-boot-contract",
@@ -105,7 +98,7 @@
       "classification": "confirmed",
       "summary": "Required boot phases are declared",
       "command": null,
-      "duration_ms": 1,
+      "duration_ms": 18,
       "evidence": {
         "required_phases": [
           "CLIProxyAPI   :8080",
@@ -125,10 +118,10 @@
       "required": true,
       "classification": "confirmed",
       "summary": "Targeted architecture tests passed",
-      "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe -m pytest -q tests/test_architecture_docs.py tests/test_ledger_audit.py tests/test_ledger_governance.py tests/test_soul_oversight.py tests/test_firnflow.py",
-      "duration_ms": 6240,
+      "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe -m pytest -q tests/test_architecture_docs.py tests/test_ledger_governance.py",
+      "duration_ms": 3090,
       "evidence": {
-        "stdout": "............                                                             [100%]\n12 passed in 3.37s",
+        "stdout": "...                                                                      [100%]\n3 passed in 0.13s",
         "stderr": "",
         "returncode": 0
       },
@@ -142,7 +135,7 @@
       "classification": "confirmed",
       "summary": "Aegis and Ouroboros compile",
       "command": "cargo check --quiet",
-      "duration_ms": 581,
+      "duration_ms": 5787,
       "evidence": {
         "crates": [
           {
@@ -162,57 +155,93 @@
       "remediation": []
     },
     {
-      "name": "provenance-ledger-alignment",
+      "name": "security-hitl-contract",
       "stage": "rapid",
-      "status": "FAIL",
+      "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "Ledger mirrors are not aligned",
+      "summary": "Adaptive HITL and HUMAN_GATE contracts are present",
       "command": null,
-      "duration_ms": 20,
+      "duration_ms": 66,
+      "evidence": {
+        "files": {
+          "anya_gate": "C:\\Users\\vizio\\CAMELOT_OS\\control_plane\\anya_gate.py",
+          "soul_oversight": "C:\\Users\\vizio\\CAMELOT_OS\\control_plane\\soul_oversight.py"
+        },
+        "missing_tokens": {}
+      },
+      "remediation": []
+    },
+    {
+      "name": "verification-ledger-integrity",
+      "stage": "rapid",
+      "status": "PASS",
+      "required": true,
+      "classification": "confirmed",
+      "summary": "Verification ledger chain valid (380 entries)",
+      "command": null,
+      "duration_ms": 27,
+      "evidence": {
+        "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\Missions\\verification_ledger.jsonl",
+        "entries_checked": 380,
+        "error": ""
+      },
+      "remediation": []
+    },
+    {
+      "name": "provenance-ledger-alignment",
+      "stage": "rapid",
+      "status": "PASS",
+      "required": true,
+      "classification": "confirmed",
+      "summary": "Ledger mirrors aligned",
+      "command": null,
+      "duration_ms": 5,
       "evidence": {
         "ledger_path": "C:\\Users\\vizio\\CAMELOT_OS\\PROVENANCE_LEDGER.md",
         "exists": true,
-        "size_bytes": 158657,
-        "tail": "| 2026-06-21T00:17:38.367233+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: mnemosyne_test_v1] | HYDRATED |\n| 2026-06-21T00:17:38.372115+00:00 | HYDRATION_MGR | HYDRATE [Intent: mnemosyne_test_v1, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |\n| 2026-06-21T00:17:38.379311+00:00 | HYDRATION_MGR | HYDRATE [Intent: non_existent_deep_topic, Tiers: L2_CLOUD_EMPTY] | HYDRATED |\n| 2026-06-21T00:22:29.623030+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |\n| 2026-06-21T00:22:29.623433+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |\n| 2026-06-21T00:22:29.629497+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\n| 2026-06-21T00:24:25.199301+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |\n| 2026-06-21T00:24:25.199826+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |\n| 2026-06-21T00:24:25.203985+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\n| 2026-06-21T00:26:44.927613+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |\n| 2026-06-21T00:26:44.928216+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |\n| 2026-06-21T00:26:44.933051+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |",
+        "size_bytes": 160203,
+        "tail": "- **Scope**:\n  - control_plane/runic_router.py\n  - scripts/evolve_and_forge.py\n- **Verification performed**:\n  - `Verify registered command is listed in runic_router list`\n  - `Verify scripts/evolve_and_forge.py compiles and runs --help`\n- **Tag**: [//EVOLVE_AND_FORGE]\n| 2026-06-21T07:02:29.131986+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |\n| 2026-06-21T07:02:42.538790+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS status' to Cloud Brain] | HYDRATED |\n| 2026-06-21T07:02:42.539725+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS status] | HYDRATED |\n| 2026-06-21T07:02:42.546222+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\n| 2026-06-21T03:02:56.730257 | CLI/Sir Forge | CREATE: build a test | SUCCESS |",
         "mirrors": [
           {
             "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\PROVENANCE_LEDGER.md",
             "exists": true,
-            "aligned": false
+            "aligned": true
           },
           {
             "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\training\\configs\\PROVENANCE_LEDGER.md",
             "exists": true,
-            "aligned": false
+            "aligned": true
           },
           {
             "path": "C:\\Users\\vizio\\CAMELOT_OS\\docs\\PROVENANCE_LEDGER.md",
             "exists": true,
-            "aligned": false
+            "aligned": true
           }
         ],
-        "mirrors_aligned": false
+        "mirrors_aligned": true
       },
-      "remediation": [
-        "Review differences, then run `camelot ledger reconcile` under an approved change window."
-      ]
+      "remediation": []
     },
     {
       "name": "notebooklm-live",
       "stage": "rapid",
-      "status": "UNVERIFIED",
+      "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "NotebookLM live check failed: ValueError",
+      "summary": "NotebookLM reachable: Camelot-OS v.1000 (0 sources)",
       "command": null,
-      "duration_ms": 1691,
+      "duration_ms": 2091,
       "evidence": {
-        "error": "Authentication expired or invalid. Redirected to: https://accounts.google.com/v3/signin/identifier?continue=https%3A%2F%2Fnotebooklm.google.com%2Flogin%3Fcontinue%3Dhttps%3A%2F%2Fnotebooklm.google.com%2F&dsh=S-2011614442%3A1782001801209150&followup=https%3A%2F%2Fnotebooklm.google.com%2Flogin%3Fcontinue%3Dhttps%3A%2F%2Fnotebooklm.google.com%2F&osid=1&passive=1209600&flowName=WebLiteSignIn&flowEntry=ServiceLogin&ifkv=AcDsRvzDYvHTemXcY5aleUl3834mfpP4NH0Jua-zyN19yXHwx2I9kZ9Qb2RMNTZvQMt8yly-QwT_iQ\nRun 'notebooklm login' to re-authenticate."
+        "notebook_count": 185,
+        "found": true,
+        "id": "8c656cfa-a189-409e-a72d-07692a47f17e",
+        "title": "Camelot-OS v.1000",
+        "source_count": 0,
+        "configured_title": "Camelot-OS v.1000",
+        "title_drift": false
       },
-      "remediation": [
-        "Run `nlm login`, then rerun `camelot triage --rapid`."
-      ]
+      "remediation": []
     },
     {
       "name": "excalibur-cloudbrain-health",
@@ -222,7 +251,7 @@
       "classification": "confirmed",
       "summary": "Long-term Excalibur Cloud Brain is alive",
       "command": "GET https://cyberdad247--excalibur-brain-health.modal.run",
-      "duration_ms": 4029,
+      "duration_ms": 3957,
       "evidence": {
         "url": "https://cyberdad247--excalibur-brain-health.modal.run",
         "http_status": 200,
@@ -237,26 +266,18 @@
     {
       "name": "cloudbrain-sync-queue",
       "stage": "rapid",
-      "status": "WARN",
+      "status": "PASS",
       "required": false,
       "classification": "confirmed",
-      "summary": "10 queued Cloud Brain event(s)",
+      "summary": "0 queued Cloud Brain event(s)",
       "command": null,
-      "duration_ms": 1,
+      "duration_ms": 0,
       "evidence": {
         "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\cloudbrain_sync_queue.jsonl",
-        "pending": 10,
-        "tail": [
-          "{\"command\": \"//DAWNING\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"DAWNING_SYNC\", \"queued_utc\": \"2026-06-10T06:05:24.403099+00:00\", \"results\": {\"audit\": {\"event_type\": \"OS_MAP_AUDIT\", \"nodes\": [{\"exists\": true, \"file_count\": 3139, \"kind\": \"directory\", \"node\": \"01_KERNEL\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"02_FORGE\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"03_VAULT\"}, {\"exists\": true, \"file_count\": 1756, \"kind\": \"directory\", \"node\": \"control_plane\"}, {\"exists\": true, \"file_count\": 42, \"kind\": \"directory\", \"node\": \"scripts\"}, {\"exists\": true, \"file_count\": 6, \"kind\": \"directory\", \"node\": \".agent\"}], \"protocol\": \"CYBERTRON_DAWNING\", \"repo_root\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\", \"timestamp\": \"2026-06-10T06:05:23.019976+00:00\"}, \"project\": \"review_project\", \"status\": \"CYBERTRON_CLOUD_BRAIN_SYNC_AND_DAWNING_COMPLETE\"}}",
-          "{\"command\": \"//DAWNING\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"DAWNING_SYNC\", \"queued_utc\": \"2026-06-10T06:07:04.498764+00:00\", \"results\": {\"audit\": {\"event_type\": \"OS_MAP_AUDIT\", \"nodes\": [{\"exists\": true, \"file_count\": 3139, \"kind\": \"directory\", \"node\": \"01_KERNEL\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"02_FORGE\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"03_VAULT\"}, {\"exists\": true, \"file_count\": 1756, \"kind\": \"directory\", \"node\": \"control_plane\"}, {\"exists\": true, \"file_count\": 42, \"kind\": \"directory\", \"node\": \"scripts\"}, {\"exists\": true, \"file_count\": 6, \"kind\": \"directory\", \"node\": \".agent\"}], \"protocol\": \"CYBERTRON_DAWNING\", \"repo_root\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\", \"timestamp\": \"2026-06-10T06:07:01.640613+00:00\"}, \"project\": \"review_project\", \"status\": \"CYBERTRON_CLOUD_BRAIN_SYNC_AND_DAWNING_COMPLETE\"}}",
-          "{\"command\": \"//DAWNING\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"DAWNING_SYNC\", \"queued_utc\": \"2026-06-10T06:08:04.945375+00:00\", \"results\": {\"audit\": {\"event_type\": \"OS_MAP_AUDIT\", \"nodes\": [{\"exists\": true, \"file_count\": 3139, \"kind\": \"directory\", \"node\": \"01_KERNEL\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"02_FORGE\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"03_VAULT\"}, {\"exists\": true, \"file_count\": 1756, \"kind\": \"directory\", \"node\": \"control_plane\"}, {\"exists\": true, \"file_count\": 42, \"kind\": \"directory\", \"node\": \"scripts\"}, {\"exists\": true, \"file_count\": 6, \"kind\": \"directory\", \"node\": \".agent\"}], \"protocol\": \"CYBERTRON_DAWNING\", \"repo_root\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\", \"timestamp\": \"2026-06-10T06:07:55.233034+00:00\"}, \"project\": \"review_harness\", \"status\": \"CYBERTRON_CLOUD_BRAIN_SYNC_AND_DAWNING_COMPLETE\"}}",
-          "{\"command\": \"//DAWNING\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"DAWNING_SYNC\", \"queued_utc\": \"2026-06-10T06:11:32.780414+00:00\", \"results\": {\"audit\": {\"event_type\": \"OS_MAP_AUDIT\", \"nodes\": [{\"exists\": true, \"file_count\": 3139, \"kind\": \"directory\", \"node\": \"01_KERNEL\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"02_FORGE\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"03_VAULT\"}, {\"exists\": true, \"file_count\": 1756, \"kind\": \"directory\", \"node\": \"control_plane\"}, {\"exists\": true, \"file_count\": 42, \"kind\": \"directory\", \"node\": \"scripts\"}, {\"exists\": true, \"file_count\": 6, \"kind\": \"directory\", \"node\": \".agent\"}], \"protocol\": \"CYBERTRON_DAWNING\", \"repo_root\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\", \"timestamp\": \"2026-06-10T06:11:31.387615+00:00\"}, \"project\": \"Mixed_Case_Project\", \"status\": \"CYBERTRON_CLOUD_BRAIN_SYNC_AND_DAWNING_COMPLETE\"}}",
-          "{\"command\": \"//DAWNING\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"DAWNING_SYNC\", \"queued_utc\": \"2026-06-10T06:13:09.671708+00:00\", \"results\": {\"audit\": {\"event_type\": \"OS_MAP_AUDIT\", \"nodes\": [{\"exists\": true, \"file_count\": 3139, \"kind\": \"directory\", \"node\": \"01_KERNEL\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"02_FORGE\"}, {\"exists\": true, \"file_count\": 5000, \"kind\": \"directory\", \"node\": \"03_VAULT\"}, {\"exists\": true, \"file_count\": 1756, \"kind\": \"directory\", \"node\": \"control_plane\"}, {\"exists\": true, \"file_count\": 42, \"kind\": \"directory\", \"node\": \"scripts\"}, {\"exists\": true, \"file_count\": 6, \"kind\": \"directory\", \"node\": \".agent\"}], \"protocol\": \"CYBERTRON_DAWNING\", \"repo_root\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\", \"timestamp\": \"2026-06-10T06:13:04.804151+00:00\"}, \"project\": \"Mixed_Case_Project\", \"status\": \"CYBERTRON_CLOUD_BRAIN_SYNC_AND_DAWNING_COMPLETE\"}}"
-        ]
+        "pending": 0,
+        "tail": []
       },
-      "remediation": [
-        "Inspect with `camelot cloudbrain queue status`; flush only after authentication and review."
-      ]
+      "remediation": []
     },
     {
       "name": "aspirational-v1000-claims",
@@ -316,29 +337,25 @@
     {
       "name": "tracked-source-read-only-guard",
       "stage": "guard",
-      "status": "FAIL",
+      "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "Validation changed tracked files",
+      "summary": "No pre-existing tracked changes were altered",
       "command": null,
-      "duration_ms": 764,
+      "duration_ms": 488,
       "evidence": {
-        "changed_during_triage": [
-          "03_VAULT/firnflow/nukg_crystals.json",
-          "03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/data_level0.bin",
-          "03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/length.bin"
-        ]
+        "changed_during_triage": []
       },
       "remediation": []
     }
   ],
   "deep_skipped": false,
   "architecture_summary": {
-    "confirmed": 11,
+    "confirmed": 13,
     "planned": 1,
     "aspirational": 1,
     "rejected": 1
   },
-  "json_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260621T003004Z.json",
-  "markdown_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260621T003004Z.md"
+  "json_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260621T075705Z.json",
+  "markdown_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260621T075705Z.md"
 }

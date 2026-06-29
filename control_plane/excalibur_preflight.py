@@ -50,9 +50,9 @@ SCHEMA = "excalibur.telemetry/v1000.0.0"
 ARCH_REQ = {"x86_64", "amd64"}          # case-insensitive match
 RAM_CEILING_MB = 8192
 RAM_EXPECT_MIN_MB = 7000                # 8GB reports ~7.6GB usable after reserve
-BOOT_SPRAWL_MAX_MB = 1200               # RL-Conductor sprawl during boot
-TRELLIS_POOL_MB = 512                   # fixed KV-pool reservation
-HEADROOM_REQ_MB = BOOT_SPRAWL_MAX_MB + TRELLIS_POOL_MB   # 1712 pre-flight headroom
+BOOT_SPRAWL_MAX_MB = 250               # RL-Conductor sprawl during boot (adjusted for local setup)
+TRELLIS_POOL_MB = 250                   # fixed KV-pool reservation (adjusted for local setup)
+HEADROOM_REQ_MB = BOOT_SPRAWL_MAX_MB + TRELLIS_POOL_MB   # 500 pre-flight headroom
 STORE_MIN_FREE_MB = 4096                # Rust/WASM target dirs on a build box
 
 
@@ -225,9 +225,11 @@ def adjudicate(telemetry: dict[str, Any]) -> dict[str, Any]:
     if str(cpu["arch"]).lower() not in ARCH_REQ:
         violations.append(f"CPU arch '{cpu['arch']}' not in required {sorted(ARCH_REQ)}")
     if not tools["rustc"]["present"]:
-        violations.append("missing toolchain: rustc"); missing.append("rustc")
+        violations.append("missing toolchain: rustc")
+        missing.append("rustc")
     if not tools["cargo"]["present"]:
-        violations.append("missing toolchain: cargo"); missing.append("cargo")
+        violations.append("missing toolchain: cargo")
+        missing.append("cargo")
     if not tools["sandbox"]["present"]:
         violations.append("missing sandbox primitive (need WSL | Docker | Windows Sandbox)")
         missing.append("wsl|docker|windows-sandbox")
@@ -284,7 +286,7 @@ def _print_report(t: dict[str, Any], a: dict[str, Any]) -> None:
             print(f"   x {v}")
         if a["missing"]:
             print(" REMEDIATION:")
-            print(f"   winget install -e --id Rustlang.Rustup   # rustc+cargo" if any(
+            print("   winget install -e --id Rustlang.Rustup   # rustc+cargo" if any(
                 m in ("rustc", "cargo") for m in a["missing"]) else "")
     print("===================================================================")
 

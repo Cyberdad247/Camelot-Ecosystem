@@ -1,12 +1,13 @@
 """JUDGE squire — synthesizes SCAN/GHOST/SWEEP/INDEX results into a risk verdict."""
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .ghost import GhostReport
-    from .sweep import SweepReport
     from .index import ColonyIndex
+    from .sweep import SweepReport
 
 
 @dataclass

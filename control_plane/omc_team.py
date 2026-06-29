@@ -15,7 +15,6 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-
 TMUX_SESSION = "camelot-foundry"
 CAMELOT_OS = Path.home() / "CAMELOT_OS"
 

@@ -24,7 +24,6 @@ does not exist. Edit it directly to customize the restart policy, then run
 from __future__ import annotations
 
 import argparse
-import os
 import platform
 import subprocess
 import sys
@@ -152,7 +151,7 @@ def cmd_status(args: argparse.Namespace) -> int:
         if pid and pid in alive.stdout:
             print(f"  Launcher process: ALIVE (pid {pid})")
         else:
-            print(f"  Launcher process: not running (stale pid file)")
+            print("  Launcher process: not running (stale pid file)")
     else:
         print("  Launcher PID file: absent")
     if LAUNCHER_LOG.exists():

@@ -1,5 +1,4 @@
 import shutil
-import json
 import importlib.util
 from pathlib import Path
 from control_plane.provenance import ProvenanceManager, VerificationRun

@@ -16,7 +16,6 @@ import shlex
 import subprocess
 import threading
 import atexit
-import signal
 
 # Fix Windows encoding before anything else
 if sys.platform == "win32":
@@ -45,8 +44,14 @@ _kinetic_edge_proc = None
 HEARTBEAT_GO = os.path.join(HOME_DIR, "cmd", "pulse", "heartbeat.go")
 CLIPROXY_BIN = os.path.join(HOME_DIR, "CLIProxyAPI", "cli-proxy-api.exe")
 CLIPROXY_DIR = os.path.join(HOME_DIR, "CLIProxyAPI")
-KINETIC_EDGE_BIN = os.path.join(HOME_DIR, "CAMELOT_OS", "bin",
-                                "camelot-mcp-edge.exe")
+# Phase 1 RIP_AND_REPLACE (HiveIDE_Apex_v1000) — see
+# 03_VAULT/runtime_state/node_mcp_cutlist.json + phase3_pending_prerequisite.md
+# Default flipped camelot-mcp-edge.exe -> pmcp-server.exe.
+# Override with CAMELOT_KINETIC_EDGE_BIN env var to restore legacy binary.
+# Revert: git checkout HEAD -- 03_VAULT/training/configs/hud.py
+# or restore from 03_VAULT/runtime_state/backups/hiveide_cut_*/
+_KINETIC_EDGE_BIN_NAME = os.environ.get("CAMELOT_KINETIC_EDGE_BIN") or "pmcp-server.exe"  # was: camelot-mcp-edge.exe
+KINETIC_EDGE_BIN = os.path.join(HOME_DIR, "CAMELOT_OS", "bin", _KINETIC_EDGE_BIN_NAME)
 KINETIC_EDGE_URL = "http://127.0.0.1:3001"
 SALTARE_URL = "http://localhost:8080/route"
 ROTEL_STATUS_URL = "http://localhost:4317/status"
@@ -117,15 +122,10 @@ def _boot_kinetic_edge():
     global _kinetic_edge_proc
     if not os.path.isfile(KINETIC_EDGE_BIN):
         return None, "[yellow]camelot-mcp-edge.exe not found — Kinetic Edge skipped[/]"
-    try:
-        import httpx
-        resp = httpx.post(f"{KINETIC_EDGE_URL}/tool/stat_file",
-                          json={"tool": "stat_file", "payload": {"path": "."}},
-                          timeout=1.5)
-        if resp.status_code in (200, 400, 403):
-            return None, "[green]Kinetic Edge already running[/] on :3001"
-    except Exception:
-        pass
+    # v6 review fix: dropped the legacy httpx /tool/stat_file probe — that endpoint
+    # was camelot-mcp-edge specific. pmcp-server-v0.1 is stdio-MCP only; the probe
+    # would silently time out and trigger a retry loop. The RustClaw lineage now
+    # supervises the Kinetic Edge service via process-alive (port=None).
     detach = os.environ.get("AWAKEN_DETACH_CHILDREN") == "1"
     try:
         flags = getattr(subprocess, "CREATE_NO_WINDOW", 0)

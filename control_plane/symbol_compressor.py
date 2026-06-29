@@ -30,7 +30,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 try:
     from qdrant_client import QdrantClient
-    from qdrant_client.models import Distance, VectorParams, PointStruct
+    from qdrant_client.models import Distance, PointStruct, VectorParams
     _QDRANT = True
 except ImportError:
     _QDRANT = False
@@ -74,7 +74,8 @@ class SymbolCompressor:
             return
 
         try:
-            self.client = QdrantClient(QDRANT_URL)
+            api_key = os.environ.get("QDRANT_API_KEY")
+            self.client = QdrantClient(QDRANT_URL, api_key=api_key)
             # Create collection if not exists
             try:
                 self.client.get_collection(QDRANT_COLLECTION)
@@ -203,7 +204,8 @@ class SymbolCompressor:
         # Store in Redis (L1) for fast retrieval
         try:
             import redis
-            r = redis.Redis(host="localhost", port=6379, decode_responses=True)
+            redis_url = os.environ.get("REDIS_URL", "redis://localhost:6379")
+            r = redis.from_url(redis_url, decode_responses=True)
             r.setex(
                 f"dispatch:{dispatch_id}:compressed",
                 86400,  # 24h TTL

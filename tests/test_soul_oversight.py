@@ -1,6 +1,5 @@
 """EXCALIBUR Phase 4 acceptance tests — Iron Gate v2 pre_execute."""
 import asyncio
-import pytest
 from control_plane.factory_lane import FactoryJob, TriageScore
 from control_plane.soul_oversight import pre_execute, GateDecision
 

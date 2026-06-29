@@ -14,8 +14,8 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from typing import List, Tuple, Optional
 from enum import Enum
+from typing import Dict, List, Optional, Tuple
 
 
 class PackingDimension(int, Enum):
@@ -65,7 +65,7 @@ class LeechLattice:
         if len(coord1) != len(coord2):
             raise ValueError("Coordinates must have same dimension")
 
-        sum_squares = sum((c1 - c2) ** 2 for c1, c2 in zip(coord1, coord2))
+        sum_squares = sum((c1 - c2) ** 2 for c1, c2 in zip(coord1, coord2, strict=True))
         return math.sqrt(sum_squares)
 
     def find_nearest_lattice_point(self, coordinates: List[int]) -> List[int]:

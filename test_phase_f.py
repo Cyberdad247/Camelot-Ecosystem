@@ -128,7 +128,6 @@ class PhaseF_TestSuite:
         try:
             from control_plane.triage_score import (
                 get_triage_scorer,
-                ConfidenceLevel,
                 TriageAction,
             )
 

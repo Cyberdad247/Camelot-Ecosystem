@@ -1,6 +1,4 @@
-import pytest
 import json
-import hashlib
 from pathlib import Path
 from control_plane.provenance import ProvenanceManager, VerificationRun
 

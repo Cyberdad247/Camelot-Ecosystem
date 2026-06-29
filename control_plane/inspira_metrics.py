@@ -60,7 +60,7 @@ class InspiraMetrics(BaseModel):
     uptime_seconds: int = 0
 
     def render(self) -> str:
-        sep = "─" * 60
+        _sep = "─" * 60
         lanes = "  ".join(f"{k}:{v}" for k, v in sorted(self.lane_depth.items()))
         hitl = "  ".join(f"{k}:{v}" for k, v in self.hitl_rates.items())
         return "\n".join([

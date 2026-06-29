@@ -1,5 +1,4 @@
 import json
-import hashlib
 from control_plane.provenance import VerificationRun
 
 def debug():

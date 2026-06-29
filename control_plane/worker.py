@@ -28,12 +28,14 @@ Usage:
 from __future__ import annotations
 
 import sys
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 if hasattr(sys.stderr, "reconfigure"):
     sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 import argparse
+import asyncio
 import json
 import os
 import re
@@ -45,7 +47,6 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
-import asyncio
 
 # Set by main() from --backend arg; read by _dispatch
 _BACKEND: str = "auto"
@@ -232,12 +233,12 @@ def _queue_depth() -> tuple[int, int]:
     if not QUEUE_FILE.exists():
         return 0, 0
     try:
-        lines = [l for l in QUEUE_FILE.read_text(encoding="utf-8").splitlines() if l.strip()]
+        lines = [line for line in QUEUE_FILE.read_text(encoding="utf-8").splitlines() if line.strip()]
     except Exception:
         return 0, 0
     pending = sum(
-        1 for l in lines
-        if (lambda d: d.get("id", "") not in done)(json.loads(l) if l else {})
+        1 for line in lines
+        if (lambda d: d.get("id", "") not in done)(json.loads(line) if line else {})
     )
     return len(lines), pending
 
@@ -298,13 +299,13 @@ def _apply_output(task_id: str, response: str, auto_approve: bool) -> list[str]:
         _log("[APPLY] No fenced code blocks in response")
         return []
 
-    named = [(l, f, c) for l, f, c in blocks if f]
+    named = [(lang, fname, code) for lang, fname, code in blocks if fname]
     if not named:
         _log(f"[APPLY] {len(blocks)} block(s) found — none have filename hints (```lang:path)")
         return []
 
     written: list[str] = []
-    for lang, filename, code in named:
+    for _lang, filename, code in named:
         target = (HOME / filename).resolve()
         try:
             target.relative_to(HOME)
@@ -345,8 +346,8 @@ def _sentinel_gate(written_paths: list[str]) -> tuple[list[str], int]:
         import sys as _sys
         if str(HOME) not in _sys.path:
             _sys.path.insert(0, str(HOME))
-        from squires.scan import FileRecord
         from squires.ghost import triage as _ghost_triage
+        from squires.scan import FileRecord
     except Exception as _e:
         _log(f"[SENTINEL] Ghost scanner unavailable ({_e}) — gate skipped")
         return written_paths, 0
@@ -940,13 +941,12 @@ def _exec_ollama(task: QueueTask, dry_run: bool, auto_approve: bool = False) -> 
 
     if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
         _log("[VOX] Intercepting cognitive response for TTS synthesis...")
-        import urllib.request
         import urllib.error
-        import json
+        import urllib.request
         try:
             req = urllib.request.Request(
                 "http://127.0.0.1:8300/synthesize",
-                data=json.dumps({"text": full}).encode("utf-8"),
+                data=json.dumps({"text": full, "knight_id": task.knight}).encode("utf-8"),
                 headers={"Content-Type": "application/json"},
                 method="POST"
             )
@@ -1005,15 +1005,15 @@ def _exec_llm(task: QueueTask, dry_run: bool, backend: str = "auto", auto_approv
 
     # Auto: Anthropic first, then Ollama, then dry
     if api_key:
-        _log(f"[LLM] Using Anthropic (API key set)")
+        _log("[LLM] Using Anthropic (API key set)")
         return _exec_anthropic(task, dry_run, auto_approve)
 
     if _probe_ollama():
         _log(f"[LLM] No Anthropic key — using Ollama at {OLLAMA_HOST}")
         return _exec_ollama(task, dry_run, auto_approve)
 
-    _log(f"[LLM] No Anthropic key and Ollama not reachable — task marked NEEDS_LLM")
-    _log(f"[LLM] To fix: set ANTHROPIC_API_KEY  OR  start Ollama (ollama serve)")
+    _log("[LLM] No Anthropic key and Ollama not reachable — task marked NEEDS_LLM")
+    _log("[LLM] To fix: set ANTHROPIC_API_KEY  OR  start Ollama (ollama serve)")
     return "NEEDS_LLM"
 
 
@@ -1059,13 +1059,12 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
 
     if task.directive.upper().startswith("//VOCAL") or task.directive.upper().startswith("UNKNOWN_RUNE: //VOCAL"):
         _log("[VOX] Intercepting cognitive response for TTS synthesis...")
-        import urllib.request
         import urllib.error
-        import json
+        import urllib.request
         try:
             req = urllib.request.Request(
                 "http://127.0.0.1:8300/synthesize",
-                data=json.dumps({"text": full}).encode("utf-8"),
+                data=json.dumps({"text": full, "knight_id": task.knight}).encode("utf-8"),
                 headers={"Content-Type": "application/json"},
                 method="POST"
             )
@@ -1107,6 +1106,10 @@ def _exec_anthropic(task: QueueTask, dry_run: bool, auto_approve: bool = False) 
 
 def _dispatch(task: QueueTask, dry_run: bool, auto_approve: bool) -> str:
     # ── AUDIO / VAD tier ──────────────────────────────────────────────────────
+    if task.type == "interrupt":
+        _log("[WORKER] Interruption received — cancelling completion run")
+        return "interrupted"
+
     if task.type == "vad_utterance":
         file_path = task.payload.get("file_path", "")
         if not file_path:

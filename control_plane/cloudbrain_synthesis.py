@@ -17,7 +17,6 @@ import asyncio
 import json
 import sys
 import time
-from typing import Optional
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -251,7 +250,7 @@ class WeeklySynthesisJob:
                     blueprint = await kb.load_blueprint(knight_id)
 
                     # Append insight to blueprint
-                    updated_blueprint = f"""{blueprint}
+                    _updated_blueprint = f"""{blueprint}
 
 ## Synthesis: {category}
 **Updated: {time.strftime('%Y-%m-%d')}**
@@ -262,7 +261,7 @@ class WeeklySynthesisJob:
 """
 
                     # Write back
-                    path = kb._cache[f"{knight_id}:blueprint"].content if f"{knight_id}:blueprint" in kb._cache else ""
+                    _path = kb._cache[f"{knight_id}:blueprint"].content if f"{knight_id}:blueprint" in kb._cache else ""
                     # Note: blueprint.md file update would happen here
                     print(f"[SYNTHESIS] Updated blueprint for {knight_id} ({category})", file=sys.stderr)
         except Exception as e:

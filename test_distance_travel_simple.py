@@ -65,7 +65,6 @@ class SimpleDistanceTravelTest:
         try:
             from control_plane.agent_registry import (
                 get_agent_registry,
-                get_agent,
                 list_agents,
             )
 

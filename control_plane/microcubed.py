@@ -18,7 +18,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
 REPO_ROOT = Path(__file__).resolve().parent.parent
 STATE_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "microcubed"
 QUEUE_FILE = REPO_ROOT / "logs" / "harness_queue.jsonl"
@@ -527,7 +526,7 @@ def inspect_house(house_id: str) -> dict[str, Any]:
 
 
 def teardown_house(house_id: str, *, archive: bool = True) -> dict[str, Any]:
-    safe_house = _safe_house_id(house_id)
+    _safe_house_id(house_id)
 
     house_dir = STATE_DIR / "houses" / house_id
     if not house_dir.exists():

@@ -6,7 +6,6 @@ bundle analysis, query optimization, and algorithmic improvement.
 """
 
 import ast
-import os
 import re
 from pathlib import Path
 from .base import BaseKnight

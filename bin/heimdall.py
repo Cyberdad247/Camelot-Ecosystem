@@ -7,24 +7,25 @@ Usage:
     uv run --with rich --with psutil --with requests python heimdall.py
 """
 
-import os
-import sys
 import json
-import time
+import os
 import subprocess
-import psutil
+import sys
+import time
 from datetime import datetime
 from pathlib import Path
 
+import psutil
+
 # Try importing Rich components
 try:
+    from rich import box
     from rich.console import Console
+    from rich.layout import Layout
+    from rich.live import Live
     from rich.panel import Panel
     from rich.table import Table
-    from rich.layout import Layout
     from rich.text import Text
-    from rich.live import Live
-    from rich import box
 except ImportError:
     print("Rich library required: pip install rich")
     sys.exit(1)

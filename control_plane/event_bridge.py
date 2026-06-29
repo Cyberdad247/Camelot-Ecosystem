@@ -3,14 +3,15 @@
 # HITL: file-ops pre-approved — writes bounded to event queue and runtime logs
 """
 
-from fastapi import FastAPI, HTTPException, Header
-from pydantic import BaseModel
+import json
 import os
 import sys
-import json
-from pathlib import Path
-from datetime import datetime, timezone
 import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+
+from fastapi import FastAPI, Header, HTTPException
+from pydantic import BaseModel
 
 # Add control_plane to path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
@@ -64,7 +65,7 @@ async def handle_event(event: ClawEvent, authorization: str = Header(None)):
     
     if event.type == "message_received":
         content = event.payload.get("content", "")
-        sender = event.payload.get("from", "unknown")
+        _sender = event.payload.get("from", "unknown")
         
         if content:
             # Trigger Omni-Routing for the incoming message

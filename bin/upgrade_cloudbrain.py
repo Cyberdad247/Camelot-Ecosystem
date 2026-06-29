@@ -1,10 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — Cloudbrain Upgrade Utility
-import os
-import sys
 import importlib.util
+import sys
 from pathlib import Path
-from datetime import datetime
 
 # Setup paths
 REPO_ROOT = Path(__file__).resolve().parent.parent

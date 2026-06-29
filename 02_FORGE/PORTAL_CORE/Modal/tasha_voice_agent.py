@@ -7,7 +7,6 @@ lead capture, and scheduling via Supabase.
 """
 import modal
 import os
-import json
 from datetime import datetime, timezone
 
 app = modal.App("tasha-voice-agent")
@@ -124,8 +123,8 @@ def _save_call_log(room_name: str, caller_identity: str, duration_seconds: int,
 )
 async def tasha_entrypoint():
     """Main entrypoint — connects to LiveKit and runs the voice agent."""
-    from livekit.agents import AutoSubscribe, JobContext, WorkerOptions, cli, llm
-    from livekit.agents.voice import Agent, AgentSession
+    from livekit.agents import AutoSubscribe, JobContext, WorkerOptions, cli
+    from livekit.agents.voice import Agent
     from livekit.plugins import deepgram, openai, silero
 
     class TashaAgent:

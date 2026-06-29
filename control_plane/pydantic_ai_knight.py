@@ -7,21 +7,22 @@ Uses the pydantic-ai library pattern for type-safe reasoning and tool use.
 """
 from __future__ import annotations
 
-from typing import List
-from pydantic import BaseModel, Field
-from pydantic_ai import Agent, RunContext
-from dataclasses import dataclass
-
 # Ensure local imports work
 import sys
+from dataclasses import dataclass
 from pathlib import Path
+from typing import List
+
+from pydantic import BaseModel, Field
+from pydantic_ai import Agent, RunContext
+
 sys.path.append(str(Path(__file__).resolve().parent))
 
 try:
-    from .knight_agent import get_capability, KnightCapability
+    from .knight_agent import KnightCapability, get_capability
 except ImportError:
     # Fallback for direct execution
-    from knight_agent import get_capability, KnightCapability
+    from knight_agent import KnightCapability, get_capability
 
 @dataclass
 class KnightDeps:

@@ -8,7 +8,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
 PERSONA_RULES = [
     ("Anya", ("compile", "route", "clarify", "workflow", "prompt", "system")),
     ("Merlin", ("architecture", "blueprint", "engine", "kernel", "design")),

@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form
 import tempfile, os, json
 from app.models.schemas import SynergyAnalysisResponse
 from app.services import analysis

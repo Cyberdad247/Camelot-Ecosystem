@@ -31,7 +31,7 @@ import signal
 import subprocess
 import sys
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -266,7 +266,7 @@ class SovereignHarness:
                 for _, host, port in BOOT_PROBES
             ])
             self._probe_cache = {
-                name: ok for (name, _, _), ok in zip(BOOT_PROBES, results)
+                name: ok for (name, _, _), ok in zip(BOOT_PROBES, results, strict=True)
             }
             dark = {n for n, ok in self._probe_cache.items() if not ok}
 
@@ -459,7 +459,7 @@ class SovereignHarness:
                     )
                     _, stderr = await asyncio.wait_for(proc.communicate(), timeout=120)
                     if proc.returncode == 0:
-                        _log(f"[TOON_V2] Delta sync OK (exit=0)")
+                        _log("[TOON_V2] Delta sync OK (exit=0)")
                     else:
                         err = (stderr or b"").decode(errors="replace").strip()[-200:]
                         _log(f"[TOON_V2] Delta sync exit={proc.returncode}: {err}")
@@ -688,7 +688,7 @@ class SovereignHarness:
             await asyncio.gather(self._watchdog_loop.__wrapped__(self) if hasattr(self._watchdog_loop, '__wrapped__') else asyncio.sleep(0))
             # single watchdog cycle
             results = await asyncio.gather(*[_probe_port(h, p) for _, h, p in BOOT_PROBES])
-            self._probe_cache = {n: ok for (n, _, _), ok in zip(BOOT_PROBES, results)}
+            self._probe_cache = {n: ok for (n, _, _), ok in zip(BOOT_PROBES, results, strict=False)}
             print(json.dumps(asdict(self.status()), indent=2))
             return
 
@@ -753,7 +753,8 @@ def _log(msg: str) -> None:
 
 def boot_harness(home: Path | None = None) -> tuple[bool, str]:
     """Called by awaken Phase 6. Spawns harness as detached background process."""
-    import subprocess, platform
+    import platform
+    import subprocess
     home = home or CAMELOT_HOME
     script = home / "control_plane" / "harness.py"
     if not script.exists():

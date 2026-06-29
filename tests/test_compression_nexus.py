@@ -2,8 +2,6 @@
 import sys
 import gzip
 import json
-import tempfile
-import shutil
 import importlib.util as _ilu
 from pathlib import Path
 import pytest

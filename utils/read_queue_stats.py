@@ -1,4 +1,3 @@
-import json
 
 def read_queue_stats():
     """Read harness_queue.jsonl and return a dict with total, pending, and done counts."""

@@ -9,12 +9,10 @@ Supports streaming, model selection, and automatic failover.
 """
 
 import os
-import sys
-import json
 import time
 import logging
 import httpx
-from typing import Optional, Generator
+from typing import Optional
 from dataclasses import dataclass, field
 
 __version__ = "1.0.0"

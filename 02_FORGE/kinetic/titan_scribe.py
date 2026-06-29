@@ -8,7 +8,6 @@ Act as: Sir Scribe.
 import sys
 import os
 import datetime
-import traceback
 
 LEARNING_LOG = r"C:\Users\vizio\CAMELOT_OS\03_VAULT\99_SCRATCHPAD\Learning_Log.md"
 

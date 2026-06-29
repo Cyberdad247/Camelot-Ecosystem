@@ -1,5 +1,5 @@
 # CLARITY_CORE Colony Report
-**Generated:** 2026-06-01 04:02 UTC
+**Generated:** 2026-06-22 06:00 UTC
 **Root:** `C:\Users\vizio\CAMELOT_OS\01_KERNEL`
 
 ---
@@ -8,65 +8,48 @@
 
 | Metric | Value |
 |--------|-------|
-| Files scanned | 923 |
-| Total lines | 136,090 |
-| Symbols indexed | 2,317 |
+| Files scanned | 932 |
+| Total lines | 136,944 |
+| Symbols indexed | 2,333 |
 | Risk Score | 100.0 / 100 |
 | Risk Label | **CRITICAL** |
 | HITL Required | Yes ⚠️ |
 
 ## Findings
 
-- 8 potential secret(s) detected — CRITICAL
-- 1 large file(s) (>500 KB) found
-- 45 TODO/FIXME markers — technical debt accumulation
-- 300 duplicate file(s) detected
-- 32 unused imports (dead code)
-- Large codebase: 136,090 lines — context management critical
+- 44 TODO/FIXME markers — technical debt accumulation
+- 301 duplicate file(s) detected
+- Large codebase: 136,944 lines — context management critical
 
 ## Recommendations
 
-- Remove secrets from source, rotate credentials, use `camelot keys set`
-- Consider moving large files to .gitignore or media storage
 - Triage TODOs: assign to squires or create PROVENANCE_LEDGER entries
 - Run MASON to generate dedup report
-- Run `ruff check --select F401` or equivalent linter
 - Enable //ELEPHAS mode for memory-first execution
 
 ## GHOST Triage
 
 | Category | Count |
 |----------|-------|
-| Secrets (critical) | 8 |
-| Warnings | 1 |
-| Info | 47 |
-
-### Critical Flags
-
-- `EXCALIBUR/config/.modal.toml:3` — secret: generic_token: secr...RET"
-- `forge/nano_forge/extension/background.iife.js:842` — secret: generic_token: ApiK...KEY"
-- `forge/nano_forge/extension/background.iife.js:870` — secret: generic_token: ApiK...KEY"
-- `forge/nano_forge/extension/background.iife.js:870` — secret: generic_token: apiK...KEY"
-- `forge/nano_forge/extension/background.iife.js:1093` — secret: generic_token: apiK...KEY"
-- `forge/nano_forge/extension/background.iife.js:1093` — secret: generic_token: apiK...KEY"
-- `forge/nano_forge/extension/background.iife.js:1096` — secret: generic_token: apiK...KEY"
-- `forge/nano_forge/extension/options.js:142` — secret: generic_token: Toke...emo"
+| Secrets (critical) | 0 |
+| Warnings | 0 |
+| Info | 46 |
 
 ## SWEEP Report
 
 | Category | Count |
 |----------|-------|
-| Duplicate Content | 300 |
-| Unused Import | 32 |
-| Unreferenced File | 50 |
+| Duplicate Content | 301 |
+| Unused Import | 1 |
+| Unreferenced File | 48 |
 
 ## Language Breakdown
 
 | Extension | Files |
 |-----------|-------|
-| `.py` | 519 |
-| `.js` | 108 |
-| `.md` | 81 |
+| `.py` | 527 |
+| `.js` | 107 |
+| `.md` | 83 |
 | `.json` | 69 |
 | `.ts` | 66 |
 | `.rs` | 24 |
@@ -83,9 +66,9 @@
 
 | Symbol | Kind | File | Line |
 |--------|------|------|------|
-| `health` | function | `agora/brain_worker.py` | 22 |
-| `process_intent` | function | `agora/brain_worker.py` | 26 |
-| `query_memory` | function | `agora/brain_worker.py` | 41 |
+| `health` | function | `agora/brain_worker.py` | 20 |
+| `process_intent` | function | `agora/brain_worker.py` | 24 |
+| `query_memory` | function | `agora/brain_worker.py` | 39 |
 | `ExcaliburBridge` | class | `agora/bridge.py` | 7 |
 | `SovereignContext` | class | `agora/context.py` | 10 |
 | `HUDNode` | class | `agora/hud_bridge.py` | 12 |
@@ -95,7 +78,7 @@
 | `AgoraRouter` | class | `agora/router.py` | 9 |
 | `test_swarm` | function | `agora/swarm_controller.py` | 56 |
 | `SwarmController` | class | `agora/swarm_controller.py` | 10 |
-| `Videneptus` | class | `agora/videneptus.py` | 11 |
+| `Videneptus` | class | `agora/videneptus.py` | 9 |
 | `watchtower_pulse` | function | `agora/war_room_protocol.py` | 12 |
 | `forge_file` | function | `agora/agents/armory.py` | 53 |
 | `refactor_file` | function | `agora/agents/armory.py` | 64 |
@@ -114,7 +97,7 @@
 | `SecurityLevel` | class | `agora/agents/knight_base.py` | 30 |
 | `ToolDefinition` | class | `agora/agents/knight_base.py` | 39 |
 
-*...and 2287 more symbols in full index.*
+*...and 2303 more symbols in full index.*
 
 ---
 

@@ -1,541 +1,165 @@
-# CAMELOT-OS: Enterprise-Grade Distributed Intelligence System
+# CAMELOT-OS: Sovereign Distributed Intelligence & Agent Swarm
 
-**Version**: 2.0.0 (Phase G Complete)  
-**Status**: 🟢 Production Ready  
-**Architecture**: Distributed consensus + Knowledge pyramid + Agent network  
-**Deployment**: Bare-metal QR Pill orchestration (Docker-free)
-
----
-
-## What Is CAMELOT-OS?
-
-CAMELOT-OS is an **enterprise-grade, autonomous intelligence system** designed for private, low-resource environments. It combines:
-
-- **Distributed consensus** (Byzantine fault tolerance, PBFT 3-phase commit)
-- **Knowledge pyramid** (L1 Redis → L1.5 Qdrant → L2 CloudBrain)
-- **Multi-agent orchestration** (24 autonomous agents, cross-instance routing)
-- **Advanced compression** (TOON protocol: 416x reduction)
-- **Dynamic triage scoring** (real-time confidence adjustment)
-- **Self-healing infrastructure** (auto-restart, fault recovery, observability)
-
-**Use Cases**:
-- Private enterprise knowledge systems
-- Low-latency distributed decision-making
-- Autonomous agent coordination
-- Real-time data synthesis across clusters
-- Byzantine fault-tolerant consensus systems
+**Version**: 1000-EXCALIBUR-A (Phase H Active)  
+**Status**: 🟢 Production Ready & Verified  
+**Core Technologies**: Python 3.11+, Rust 1.96, Go 1.23.4, Redis, Qdrant, SQLite (WAL)  
+**Security Posture**: Zero-Trust, HITL-gated, Air-gapped Privacy Isolation (Sir Ghost)
 
 ---
 
-## Architecture at a Glance
+## 📖 Introduction
+
+CAMELOT-OS is a sovereign, self-improving, distributed AI operating system designed to run on private, memory-constrained hosts (8GB RAM ceiling). It combines a layered multi-agent roundtable (Agentic Knights), a three-tier hierarchical memory model (Knowledge Pyramid), and a robust codebase intelligence pipeline (Squire Colony) to orchestrate tasks securely and autonomously.
+
+Unlike typical agent frameworks, CAMELOT-OS features **direct compile-to-binary kinetic execution**, a typed control plane with real-time biometric and intent triage, and a mathematical state compression engine that compresses 500KB systems states down to a 1.2KB "TOON Crystal".
+
+---
+
+## 🏛️ System Architecture
 
 ```
-┌─────────────────────────────────────────────────┐
-│           CAMELOT-OS 3-Node Cluster            │
-├─────────────────────────────────────────────────┤
-│  Node 1 (Leader)  │  Node 2 (Follower)  │  Node 3 (Follower)
-│  ├─ Consensus     │  ├─ Consensus       │  ├─ Consensus
-│  ├─ Sync          │  ├─ Sync            │  ├─ Sync
-│  ├─ Agents (8)    │  ├─ Agents (8)      │  ├─ Agents (8)
-│  └─ Metrics       │  └─ Metrics         │  └─ Metrics
-└─────────────────────────────────────────────────┘
-         ↓ PBFT Agreement (3-phase commit)
-┌─────────────────────────────────────────────────┐
-│           Knowledge Pyramid                      │
-├─────────────────────────────────────────────────┤
-│  L1: Redis (L0)              — Session state    │
-│  L1.5: Qdrant (L0.5)         — Vector memory    │
-│  L2: CloudBrain (persistent) — Source of truth  │
-└─────────────────────────────────────────────────┘
-         ↓ Agent discovery + routing
-┌─────────────────────────────────────────────────┐
-│       24 Autonomous Agents                       │
-├─────────────────────────────────────────────────┤
-│  ├─ Consensus Agents (6)     — Agreement logic │
-│  ├─ Sync Agents (6)          — Replication     │
-│  ├─ Routing Agents (6)       — Load-aware      │
-│  └─ Inference Agents (6)     — Decision-making │
-└─────────────────────────────────────────────────┘
+                       ┌────────────────────────────────────────┐
+                       │           RUNIC ROUTER CLI             │
+                       │   //FORGE, //SWARM, //STATUS, //SCAN   │
+                       └───────────────────┬────────────────────┘
+                                           │
+                                           ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│                           01_KERNEL (Reasoning & Memory)                         │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│  ┌────────────────────────┐  ┌─────────────────────────┐  ┌────────────────────┐  │
+│  │   APEE v7.0 Triage     │  │   ROUNDTABLE KNIGHTS    │  │  3-TIER MEMORY     │  │
+│  │  • Anya Triage score   │  │  • 8 specialized agents │  │  • L1 Redis        │  │
+│  │  • Human HITL Gate     │  │  • Parallel consensus   │  │  • L1.5 Qdrant     │  │
+│  │  • Z3 formal check     │  │  • Switchboard router   │  │  • L2 CloudBrain   │  │
+│  └────────────────────────┘  └─────────────────────────┘  └────────────────────┘  │
+└──────────────────────────────────────────┬────────────────────────────────────────┘
+                                           │
+                                           ▼
+┌───────────────────────────────────────────────────────────────────────────────────┐
+│                           02_FORGE (Kinetic Capabilities)                         │
+├───────────────────────────────────────────────────────────────────────────────────┤
+│  ┌────────────────────────┐  ┌─────────────────────────┐  ┌────────────────────┐  │
+│  │     KINETIC ARMORY     │  │   ANYA DASHBOARD API    │  │   SQUIRE COLONY    │  │
+│  │  • saltare / rotel     │  │  • FastAPI controller   │  │  • 8-stage pipeline│  │
+│  │  • cribo / ledger      │  │  • Live telemetry dashboard│ • SCAN -> MASON  │  │
+│  └────────────────────────┘  └─────────────────────────┘  └────────────────────┘  │
+└───────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## Quick Start (10 minutes)
+## 🛠️ Realworld Implements
 
-### 1. Deploy the Cluster
+The repository is built around several concrete modules and pipelines:
 
-```bash
-cd CAMELOT_OS
+### 1. Runic Command & Routing Engine (`control_plane/`)
+Runic commands (prefixed by `//` or `Omega_`) bypass LLM routing entirely and are dispatched through `runic_router.py` to target specialized agent execution loops:
+*   **`//FORGE <task>`**: Launches SIR_FORGE to generate, lint, and run kinetic code changes.
+*   **`//SWARM <task>`**: Deploys the roundtable agents concurrently to reach a consensus.
+*   **`//SCAN [path]`**: Runs CLARITY_CORE triage over the target path (secrets, dead code, duplicates).
+*   **`//BOOT`**: Triggers `bin/awaken.py` to warm boot all systemd services and sidecars.
+*   **`//PLAN <task>`**: Enters AST Plan Mode to output a task DAG before code modification.
+*   **`//HEAL`**: Initiates SIR_DEBUG in a Plan-Implement-Validate (PIV) healing loop on the last error.
+*   **`//STATUS`**: Dispatches SIR_SENTINEL to execute active host port probes and mesh checks.
+*   **`Omega_<Knight> <task>`**: Routes intent to a specific knight harness (e.g. `Omega_Merlin`).
 
-chmod +x deploy_cluster.sh
+### 2. The Roundtable Knights (`01_KERNEL/EXCALIBUR/`)
+The agent framework maps model capabilities to typed structures (`KnightCapability`):
+*   **`SIR_BORIS`**: Lead architect. Conducts 13-agent critique pipeline, checking AST structures, nested loops, and type safety.
+*   **`SIR_ALEX`**: Task planner. Generates validated execution DAGs.
+*   **`SIR_FORGE`**: Kinetic executor. Writes, compiles, and formats code locally.
+*   **`SIR_CODEX`**: Direct code-generation pipeline (OpenAI Codex).
+*   **`SIR_SENTINEL`**: Security warden. Enforces the **Iron Gate** HITL validation and secret scans.
+*   **`SIR_DEBUG`**: Self-healing agent. Runs test suites and recovers failing processes.
+*   **`SIR_GHOST`**: Air-gapped secrets handler. Runs local-only (Ollama Qwen3) to scan logs and config files without cloud leaks.
+*   **`LADY_APIS`**: Research and context agent.
+*   **`MERLIN_OMEGA`**: Deep reasoning. Uses Tree-of-Thought (ToT) / Graph-of-Thought (GoT) logic.
+*   **`SIR_HELIO`**: Voice pipeline interface.
 
-./deploy_cluster.sh \
-  --nodes 192.168.1.10,192.168.1.11,192.168.1.12 \
-  --environment production
+### 3. Squire Colony (`squires/` - CLARITY_CORE v1.0.0)
+An 8-squire codebase intelligence pipeline that analyzes code health and verifies policy adherence:
+```
+SCAN (File walk/hash) ──> INDEX (Symbol graph) ──> GHOST (Privacy/secrets scan) 
+  ──> VECTOR (TF-IDF index) ──> SWEEP (Pruning/duplicates) ──> JUDGE (Severity scoring)
+    ──> SENTINEL (HITL lock threshold >= 50) ──> MASON (Markdown report builder)
+```
+Run triage with:
+```powershell
+python -m squires.colony triage .
 ```
 
-### 2. Verify Cluster Formation
+### 4. Knowledge Pyramid (`03_VAULT/`)
+A hierarchical three-tier memory architecture designed for private contexts:
+*   **L1 (Redis)**: Volatile, high-speed session state (24-hour TTL).
+*   **L1.5 (Qdrant)**: Semantic memory storing 384D vector embeddings (30-day TTL).
+*   **L2 (CloudBrain)**: Persistent consolidated knowledge base, hydrated from L1/L1.5.
 
-```bash
-# Check all nodes
-for node in 192.168.1.{10,11,12}; do
-    ssh root@$node "systemctl status camelot-consensus | grep Active"
-done
+### 5. Kinetic Armory (`02_FORGE/KINETIC_ARMORY/`)
+Contains source-compiled binary utilities that run as low-level sidecars:
+*   **`saltare.exe`**: Tailscale mesh proxy and coordinator (Go, 35.9 MB).
+*   **`saltare-mcp.exe`**: MCP server-to-agent wiring middleware (Go, 8.0 MB).
+*   **`cribo` / `rotel`**: High-performance Rust-based IPC and named-pipe media bridges.
+*   **`ledger.exe`**: Append-only log validator for governance checks (Go, 2.4 MB).
+*   **`cli-proxy-api.exe`**: Zero-burn local API proxy (Go, 49.4 MB).
 
-# Verify leader election
-ssh root@192.168.1.10 "curl -s http://localhost:8443/health" | jq .
-# Expected: {"status": "healthy", "role": "leader"}
+### 6. Adaptive Learning Infrastructure (Phase H)
+Self-monitoring framework that tracks metrics (`control_plane/metrics.db`) with `< 0.1ms overhead`:
+*   **Pattern Recognition**: Automatically parses log streams to extract recurring performance behaviors.
+*   **Anomaly Detection**: Flags metrics deviating by more than `1.5x (warning)` or `3.0x (critical)` from the historical baseline.
+*   **Auto-Tuning Engine**: Dynamically shifts operations between Performance Tiers (T1/T2/T3) depending on resource utilization.
+
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Booting the Environment
+Initiate all sidecars, databases, and agent layers:
+```powershell
+# Full boot (Redis, Qdrant, FastAPI core, sidecars)
+python bin/awaken.py
+
+# Quick boot (skips heavy vector models)
+python bin/awaken.py --quick
+
+# Start the interactive agent console REPL
+python bin/knight_session.py
 ```
 
-### 3. Setup Observability
+### 2. Performing a Security & Triage Scan
+Verify that the codebase contains no exposed secrets, that the three mirrors of `PROVENANCE_LEDGER.md` are in sync, and that all kinetic binaries are present:
+```powershell
+# Run the automated Sentinel check
+python scripts/run_sentinel_audit.py
+```
+View the results in `logs/sentinel_audit_latest.md`.
 
-```bash
-cd observability/
-docker-compose up -d
-
-# Access dashboards
-# Prometheus:  http://localhost:9090
-# Grafana:     http://localhost:3000 (admin/admin123)
-# Jaeger:      http://localhost:16686
+### 3. Syncing the Provenance Ledger
+If a ledger drift warning occurs between the root, vault, and docs mirrors, run the reconciliation script:
+```powershell
+python scripts/sync_provenance.py
 ```
 
-### 4. Chat with Knights
+### 4. Running the Test Suite
+Validate the system across low-level and high-level integration parameters:
+```powershell
+# Run standard tests
+.venv\Scripts\python.exe -m pytest
 
-```bash
-# SSH to node 1
-ssh root@192.168.1.10
-
-# Send a decision request to Knights
-curl -X POST http://localhost:8400/knight/decide \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "What is the optimal routing strategy for high-latency networks?",
-    "confidence_threshold": 0.85,
-    "consensus_required": true
-  }'
+# Run resilience and chaos simulation tests
+python test_phase_g_resilience.py
 ```
 
 ---
 
-## Core Concepts
+## 📜 Repository Constraints
 
-### Phase F: Single-Instance Intelligence
-- TOON compression (416x reduction: 500KB → 1.2KB)
-- Triage scoring (6-component dynamic confidence)
-- Kinetic swarm (6-agent orchestration)
-- Leech Lattice (24D packing)
-- Symbolect protocol (3 transmission modes)
-
-### Phase G: Distributed Autonomy
-- **Week 1**: Consensus + Knowledge sync
-  - PBFT consensus (pre-prepare → prepare → commit)
-  - L1→L1.5→L2 knowledge synchronization
-  - Fault tolerance: f < n/3 (tolerates 1 node failure in 3-node cluster)
-
-- **Week 2**: Cross-instance agents
-  - Agent registry (local + global scope)
-  - Geographic + capability-based routing
-  - Consensus routing (quorum-based decisions)
-
-- **Week 3**: Hardening + validation
-  - 15 chaos tests (network partitions, Byzantine detection)
-  - 13 integration tests (cross-instance operations)
-  - Zero data loss guarantee
-
-### Observability
-- **Prometheus**: 40+ metrics (consensus, sync, agents, system)
-- **Grafana**: 6 dashboards (performance, health, SLO)
-- **Jaeger**: Distributed tracing (request flow analysis)
-- **AlertManager**: 20+ production alert rules (critical/warning/info)
+To maintain sovereign compliance, all developers and agentic sessions must adhere to:
+1.  **API Key Management**: Private API keys **must never** be written to disk in plain text. Use environment variables (e.g. `AGENT_MEMORY_API_KEY`) or the vault manager. `config.json` must contain boolean flags only (`"has_key": true`).
+2.  **Sovereign Gate Limits (Titanium Law III)**: Any file edit modifying more than `10 net lines` or proposing more than `50MB` of deletions requires explicit Sovereign Commander confirmation (`Make it so`).
+3.  **Provenance Ledger**: All kinetic file changes must be appended to the root `PROVENANCE_LEDGER.md` via the automated hooks. Manual modifications to this ledger are strictly prohibited.
+4.  **Unicode Sanitization**: Windows Console runs under `CP1252` encoding by default. Avoid printing raw emoji glyphs (e.g. `✅`, `❌`) in script outputs; use text markers (e.g. `[OK]`, `[MISSING]`) to prevent encoder crashes.
 
 ---
 
-## Interacting with Knights
-
-Knights are the **autonomous agent operators** in CAMELOT-OS. They make decisions, route traffic, and coordinate consensus across the cluster.
-
-### Knight Roles
-
-| Role | Purpose | Ports |
-|------|---------|-------|
-| **Consensus Knight** | Proposes and validates proposals in PBFT consensus | 8443 |
-| **Routing Knight** | Discovers agents, selects best route (least-loaded, geo-aware) | 8400-8410 |
-| **Sync Knight** | Manages L1→L1.5→L2 replication, detects conflicts | 6379 |
-| **Inference Knight** | Analyzes queries, generates decisions with confidence scores | 8500 |
-
-### Chat with Knights API
-
-#### 1. Query a Knight for Decision
-
-```bash
-# Send decision request to Routing Knights
-curl -X POST http://192.168.1.10:8400/knight/decide \
-  -H "Content-Type: application/json" \
-  -d '{
-    "query": "Which agent should handle this high-priority request?",
-    "context": {
-      "request_type": "data_synthesis",
-      "priority": "high",
-      "latency_threshold_ms": 100
-    },
-    "confidence_threshold": 0.85,
-    "consensus_required": true
-  }' | jq .
-```
-
-**Response**:
-```json
-{
-  "decision": "agent_7 (least-loaded routing)",
-  "confidence": 0.92,
-  "reasoning": [
-    "Agent 7 currently at 25% load (others 60-80%)",
-    "Located on same node (0ms latency)",
-    "Has handled 145 similar requests (expertise match)"
-  ],
-  "consensus": {
-    "agreed_by": [3, 3],
-    "disagreed_by": [0],
-    "final": true
-  }
-}
-```
-
-#### 2. Get Agent Network Status
-
-```bash
-# Check all agents across cluster
-curl -s http://192.168.1.10:8400/agents/status | jq .
-
-# Response: List of all 24 agents with health, load, capabilities
-```
-
-#### 3. Route with Consensus
-
-```bash
-# Request requires multi-agent agreement
-curl -X POST http://192.168.1.10:8400/knight/consensus-route \
-  -H "Content-Type: application/json" \
-  -d '{
-    "target_role": "inference",
-    "decision_type": "critical_system_change",
-    "quorum_size": 2
-  }' | jq .
-```
-
-#### 4. Check Knowledge Sync Status
-
-```bash
-# Monitor L1→L2 replication
-curl -s http://192.168.1.10:6379/sync/status | jq .
-
-# Response: Replication lag, conflict count, last sync time
-```
-
-#### 5. Triage a Request
-
-```bash
-# Get dynamic confidence score for a decision
-curl -X POST http://192.168.1.10:8500/knight/triage \
-  -H "Content-Type: application/json" \
-  -d '{
-    "request": "Should we expand to 5 nodes?",
-    "factors": {
-      "current_load": 0.75,
-      "consensus_latency_ms": 45,
-      "agent_network_health": 0.98,
-      "memory_utilization": 0.65
-    }
-  }' | jq .
-```
-
----
-
-## Maximize the Architecture
-
-### 1. Leverage Distributed Consensus
-
-**Best For**: Critical decisions that must be agreed upon
-```bash
-# Use consensus for:
-# - Cluster membership changes
-# - Knowledge sync conflicts
-# - System configuration updates
-# - Security policy decisions
-
-curl -X POST http://192.168.1.10:8443/consensus/propose \
-  -d '{"proposal": "expand cluster to 5 nodes"}'
-```
-
-### 2. Use Knowledge Pyramid for Context
-
-**L1 (Redis)**: Fast, ephemeral, session-based
-```bash
-# Store temporary decisions, session state
-redis-cli -h 192.168.1.10 SET "session:user:123" '{"context": "..."}'
-```
-
-**L1.5 (Qdrant)**: Semantic understanding
-```bash
-# Store vectorized knowledge for RAG + similarity search
-curl -X POST http://192.168.1.30:6333/collections/knowledge/points \
-  -d '{"vector": [...], "payload": {"decision": "..."}}'
-```
-
-**L2 (CloudBrain)**: Single source of truth
-```bash
-# Persist critical decisions, audit trail
-curl -X POST http://cloudbrain/decisions \
-  -d '{"decision": "...", "timestamp": "...", "consensus": true}'
-```
-
-### 3. Route Intelligently with Agents
-
-**Least-Loaded**: For high-throughput
-```bash
-# Agents automatically balance load
-curl -X POST http://192.168.1.10:8400/route \
-  -d '{"strategy": "least-loaded", "load_threshold": 0.8}'
-```
-
-**Geographic**: For low-latency
-```bash
-# Route to agents on same node/zone
-curl -X POST http://192.168.1.10:8400/route \
-  -d '{"strategy": "geographic", "target_zone": "same-node"}'
-```
-
-**Capability-Based**: For expertise matching
-```bash
-# Route to agents experienced in this domain
-curl -X POST http://192.168.1.10:8400/route \
-  -d '{"strategy": "capability", "required_skills": ["data_synthesis", "triage"]}'
-```
-
-### 4. Monitor with Observability
-
-**Real-Time Metrics**:
-```bash
-# Watch consensus performance
-curl -s http://192.168.1.10:8000/metrics | grep camelot_consensus
-
-# Expected: < 100ms p95 latency, < 0.1% errors
-```
-
-**Grafana Dashboards**:
-- System Overview: CPU, memory, disk, network
-- Consensus Performance: Latency, agreement rate, leader stability
-- Knowledge Sync: Replication lag, conflict detection
-- Agent Network: Load distribution, routing decisions
-- Error Rates: By service, by agent, by node
-- SLO Dashboard: Availability, latency, error budgets
-
-### 5. Autonomous Decision-Making
-
-**Enable Knight Auto-Decisions**:
-```bash
-# Knights can make decisions without human intervention
-curl -X POST http://192.168.1.10:8500/knight/auto-decide \
-  -d '{
-    "rule": "If consensus_latency > 200ms, reduce cluster load",
-    "action": "increase_cache_ttl",
-    "confidence_threshold": 0.90,
-    "require_approval": false
-  }'
-```
-
-**Review Decisions Later**:
-```bash
-# Audit trail of all knight decisions
-curl -s http://192.168.1.10:8500/knight/decisions/history | jq '.decisions | last'
-```
-
----
-
-## Example: Intelligent Request Routing
-
-**Scenario**: Handle 1000 RPS with dynamic load balancing
-
-```bash
-# 1. Knight receives request batch
-curl -X POST http://192.168.1.10:8400/route/batch \
-  -H "Content-Type: application/json" \
-  -d '{
-    "requests": [
-      {"id": 1, "priority": "high", "type": "data_synthesis"},
-      {"id": 2, "priority": "low", "type": "cache_lookup"},
-      {"id": 3, "priority": "critical", "type": "consensus_decision"}
-    ]
-  }'
-
-# 2. Knights analyze load on all 24 agents
-# 3. Route based on:
-#    - Current agent load (25% vs 80%)
-#    - Geographic proximity (same node = 0ms)
-#    - Capability match (experienced agents first)
-#    - Priority level (critical → least-loaded)
-# 4. Result: Decisions with 92%+ confidence scores
-
-# Response: Routing decisions + confidence scores + reasoning
-```
-
----
-
-## Day-2 Operations
-
-### Monitor Cluster Health
-
-```bash
-# Daily check
-ssh root@192.168.1.10
-systemctl status camelot-* | grep Active
-
-# Watch consensus
-journalctl -u camelot-consensus -f
-
-# Check agent network
-curl -s http://localhost:8400/agents/status | jq '.agents | length'
-# Expected: 24 agents across 3 nodes
-```
-
-### Scale Cluster
-
-```bash
-# Add 4th node
-./deploy_cluster.sh --nodes 192.168.1.10,192.168.1.11,192.168.1.12,192.168.1.13
-
-# Consensus automatically handles new node joining
-```
-
-### Disaster Recovery
-
-```bash
-# Daily backups (automatic via cron)
-ls -la /opt/camelot/backups/
-
-# Manual backup
-/opt/camelot/bin/backup.sh
-
-# Restore from backup (< 15 min recovery)
-/opt/camelot/bin/restore.sh backup_20260618_030000/
-```
-
----
-
-## Advanced: Building on CAMELOT-OS
-
-### Phase H: Adaptive Learning (Coming Soon)
-
-Knights will:
-- Learn from decisions (improve confidence scores)
-- Detect patterns in high-load scenarios
-- Auto-tune consensus parameters
-- Forecast capacity needs
-- Suggest scaling before bottlenecks
-
-### Custom Knight Agents
-
-Create specialized Knights for your domain:
-
-```python
-# control_plane/custom_knights/fraud_detection_knight.py
-from control_plane.distributed_agent_registry import Agent
-
-class FraudDetectionKnight(Agent):
-    def decide(self, transaction):
-        # Consensus-based fraud detection
-        # Use L1.5 vectors for pattern matching
-        # Route to other fraud agents for agreement
-        pass
-```
-
----
-
-## Troubleshooting
-
-### Consensus Not Forming
-```bash
-# Check network connectivity
-for node in 192.168.1.{10,11,12}; do
-    ping -c 1 $node
-done
-
-# Verify consensus logs
-journalctl -u camelot-consensus -p err
-```
-
-### Agent Network Degraded
-```bash
-# Check agent health
-curl -s http://192.168.1.10:8400/agents/status | jq '.agents[] | select(.healthy==false)'
-
-# Restart unhealthy agents
-systemctl restart camelot-agents
-```
-
-### Knowledge Sync Lag
-```bash
-# Monitor replication
-curl -s http://192.168.1.10:6379/sync/status | jq '.replication_lag_ms'
-
-# If > 5s, check Redis cluster health
-redis-cli -h 192.168.1.10 CLUSTER INFO
-```
-
----
-
-## Performance Baselines
-
-| Metric | Target | Baseline |
-|--------|--------|----------|
-| Consensus latency (p95) | < 100ms | 45ms |
-| Agent routing latency | < 50ms | 12ms |
-| Knowledge sync lag | < 200ms | 85ms |
-| Agent network health | > 95% | 98% |
-| Cluster availability | 99.9% | 100% |
-
----
-
-## Resources
-
-- **BARE_METAL_DEPLOYMENT.md** — Complete deployment guide
-- **DEPLOYMENT_QUICK_START.md** — Quick reference
-- **terraform/INFRASTRUCTURE_GUIDE.md** — Operational manual
-- **observability/OBSERVABILITY_SETUP.md** — Monitoring guide
-- **PRODUCTION_READINESS_GUIDE.md** — Pre-deployment checklist
-
----
-
-## Support
-
-**Issues during deployment?**
-```bash
-# Check logs
-tail -f deployment_logs/deployment_*.log
-
-# Run with verbose output
-./deploy_cluster.sh --nodes ... --verbose
-
-# SSH to node for manual diagnosis
-ssh root@192.168.1.10
-journalctl -u camelot-consensus -p err -n 50
-```
-
----
-
-## License & Attribution
-
-**CAMELOT-OS** — Enterprise Distributed Intelligence System  
-Built with Byzantine consensus (PBFT), knowledge pyramids, and autonomous agent orchestration.
-
-**Technology Stack**:
-- Python 3.10+
-- Redis (L1 cache)
-- Qdrant (L1.5 vectors)
-- Prometheus/Grafana (observability)
-- Systemd (orchestration)
-
----
-
-**Status**: 🟢 Production Ready | **Version**: 2.0.0 | **Date**: 2026-06-18
-
+* Sir Sentinel stands watch. The Round Table protects the kingdom. *

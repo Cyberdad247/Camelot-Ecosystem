@@ -2,7 +2,7 @@
   "node_id": "UKG_NANO_SWARM_V1000",
   "entry_point": "//NANO_SWARM_EXPAND",
   "layer_bindings": {
-    "L7_Ethereal": "ANYA_\u03a9 \u2014 Meta Compiler Soul",
+    "L7_Ethereal": "ANYA_Omega \u2014 Meta Compiler Soul",
     "L6_Governance": "Aegis eBPF O(1) Redaction \u2192 Iron Gate",
     "L5_Agentic": "Z3 SAT-Gated Routing \u2192 Paladin HTN",
     "L4_Semantic": "Myrddin CvRDT Mesh Sync \u2192 UKG GraphRAG",
@@ -10,6 +10,6 @@
     "L2_Kinetic": "SIR_BORRIS AST Auditor \u2192 Saltare / Cribo / Rotel",
     "L1_Substrate": "eBPF syscall intercept \u2192 Modal / Docker"
   },
-  "synced_at": "2026-06-03T16:22:17.788788+00:00",
+  "synced_at": "2026-06-21T10:47:31.573395+00:00",
   "merge_strategy": "least_upper_bound"
 }

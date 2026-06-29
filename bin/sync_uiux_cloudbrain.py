@@ -7,7 +7,6 @@ import os
 import sys
 from pathlib import Path
 
-
 REPO_ROOT = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 CONFIG_ROOT = REPO_ROOT / "03_VAULT" / "training" / "configs"
 UIUX_NOTEBOOK_ID = os.environ.get("CAMELOT_UIUX_NOTEBOOK_ID", "5ffaf13c-4db5-4619-9d6d-4bb1f660e91a")

@@ -18,13 +18,11 @@ Enforces: Agent-Armor v2.0, Titanium Laws, rust-kinetic.yaml cartridge.
 Pipeline: Anya APEE v6.5 -> Sentinel audit DAG -> Iron Gate HITL.
 """
 
-import json
 import os
 import re
 import subprocess
 import shutil
 from pathlib import Path
-from typing import Any
 
 from .base import BaseKnight
 
@@ -310,7 +308,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
                     "No deprecated packages (e.g., pycrypto -> cryptography)",
                     "httpx, pydantic, cryptography at latest stable",
                 ],
-                "commands": ["pip audit"],
+                "commands": ["python -m pip_audit"],
             },
             {
                 "name": "Rust Dependencies",

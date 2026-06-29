@@ -218,6 +218,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_scan_vectors",
     },
+    "//EVOLVE_AND_FORGE": {
+        "knight": "sir_boris",
+        "description": "GEP-driven shadow forge and evolution cycle",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_evolve_and_forge",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -433,6 +440,14 @@ def _handle_bifrost_lock(param: str, context: dict) -> dict:
 def _handle_scan_vectors(param: str, context: dict) -> dict:
     return {"action": "4_vector_scan", "target": param or "project_root"}
 
+def _handle_evolve_and_forge(param: str, context: dict) -> dict:
+    objective = param or "default objective"
+    return {
+        "action": "evolve_and_forge",
+        "objective": objective,
+        "detail": f"run: python scripts/evolve_and_forge.py --task {shlex.quote(objective)}",
+    }
+
 def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
     """Execute the 6-phase NANO_SWARM_EXPAND protocol via importlib."""
     import importlib.util
@@ -596,6 +611,7 @@ _HANDLERS = {
     "_handle_bifrost_lock": _handle_bifrost_lock,
     "_handle_scan_vectors": _handle_scan_vectors,
     "_handle_nano_swarm_expand": _handle_nano_swarm_expand,
+    "_handle_evolve_and_forge": _handle_evolve_and_forge,
 }
 
 
@@ -670,7 +686,7 @@ def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> Ru
             complexity = 9 if cfg.get("priority", 2) <= 1 else 5
             mgr.store_tissue(intent=directive, content=metadata, complexity=complexity, tier="L2" if complexity >= 8 else "L1")
             hydration = mgr.hydrate_context(intent=directive, complexity=complexity)
-            if hydration.get("L2") and not "yielded no results" in str(hydration.get("L2")):
+            if hydration.get("L2") and "yielded no results" not in str(hydration.get("L2")):
                 directive += f"\n\n[CLOUD_BRAIN_CONTEXT]: {hydration.get('L2')}"
 
         if is_privacy_override:
@@ -700,7 +716,7 @@ def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> Ru
             mgr = HydrationManager(knight_id=knight)
             mgr.store_tissue(intent=directive, content=cfg["description"], complexity=9, tier="L2")
             hydration = mgr.hydrate_context(intent=directive, complexity=9)
-            if hydration.get("L2") and not "yielded no results" in str(hydration.get("L2")):
+            if hydration.get("L2") and "yielded no results" not in str(hydration.get("L2")):
                 directive += f"\n\n[CLOUD_BRAIN_CONTEXT]: {hydration.get('L2')}"
 
         if is_privacy_override:

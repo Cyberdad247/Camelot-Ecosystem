@@ -8,23 +8,23 @@ Guards the perimeter of the Obsidian Spire and manages zero-trust mesh networks.
 """
 from __future__ import annotations
 
-import os
-import json
 import asyncio
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, Field
-from pydantic_ai import Agent, RunContext
-from dataclasses import dataclass
-from pathlib import Path
 
 # Ensure local imports work
 import sys
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any, Dict, List
+
+from pydantic import BaseModel, Field
+from pydantic_ai import Agent, RunContext
+
 sys.path.append(str(Path(__file__).resolve().parent))
 
 try:
-    from .knight_agent import get_capability, KnightCapability
+    from .knight_agent import KnightCapability, get_capability  # noqa: F401
 except ImportError:
-    from knight_agent import get_capability, KnightCapability
+    pass
 
 @dataclass
 class HeimdallDeps:

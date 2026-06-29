@@ -1,44 +1,44 @@
 {
   "engine": "SYMBIOTIC_MAINTENANCE",
-  "generated_utc": "2026-06-18T03:38:07.982895+00:00",
+  "generated_utc": "2026-06-22T05:54:06.084781+00:00",
   "strict_mode": false,
   "quick_mode": false,
   "status": "OK",
-  "duration_ms": 45818,
+  "duration_ms": 26127,
   "audit": {
     "summary": {
       "scanned_files": 12000,
-      "total_size_mb": 951.37,
+      "total_size_mb": 1004.37,
       "max_files_budget": 12000
     },
     "top_extensions": [
       {
         "extension": ".py",
-        "count": 2375
+        "count": 2382
       },
       {
         "extension": ".o",
-        "count": 1440
+        "count": 1506
       },
       {
         "extension": ".md",
-        "count": 1082
+        "count": 1108
       },
       {
         "extension": ".json",
-        "count": 1071
+        "count": 1050
       },
       {
         "extension": "<none>",
-        "count": 786
+        "count": 822
       },
       {
         "extension": ".js",
-        "count": 632
+        "count": 575
       },
       {
         "extension": ".html",
-        "count": 397
+        "count": 392
       },
       {
         "extension": ".tsx",
@@ -120,8 +120,7 @@
       ]
     ],
     "cache_sizes_mb": {
-      "data/.pytest_cache": 0.001,
-      "data/.pytest_tmp": 0.812
+      "data/.pytest_tmp": 0.0
     },
     "recommendations": [
       "Purge cache footprints on boot to reclaim ephemeral storage.",
@@ -146,7 +145,7 @@
         ],
         "ok": true,
         "returncode": 0,
-        "duration_ms": 3247,
+        "duration_ms": 1581,
         "stdout_tail": "",
         "stderr_tail": ""
       },
@@ -163,39 +162,41 @@
         ],
         "ok": false,
         "returncode": 1,
-        "duration_ms": 531,
-        "stdout_tail": "\u001b[1m\u001b[94m6 |\u001b[0m from dataclasses import dataclass\n\u001b[1m\u001b[94m7 |\u001b[0m from pathlib import Path\n  \u001b[1m\u001b[94m|\u001b[0m                     \u001b[1m\u001b[91m^^^^\u001b[0m\n\u001b[1m\u001b[94m8 |\u001b[0m from typing import Iterable\n  \u001b[1m\u001b[94m|\u001b[0m\n\u001b[1m\u001b[96mhelp\u001b[0m: \u001b[1mRemove unused import: `pathlib.Path`\u001b[0m\nFound 326 errors.\n[\u001b[36m*\u001b[0m] 212 fixable with the `--fix` option (24 hidden fixes can be enabled with the `--unsafe-fixes` option).",
+        "duration_ms": 538,
+        "stdout_tail": "6 | from dataclasses import dataclass\n7 | from pathlib import Path\n  |                     ^^^^\n8 | from typing import Iterable\n  |\nhelp: Remove unused import: `pathlib.Path`\nFound 350 errors.\n[*] 230 fixable with the `--fix` option (26 hidden fixes can be enabled with the `--unsafe-fixes` option).",
         "stderr_tail": ""
       }
     ]
   },
   "purge": {
     "enabled": true,
-    "removed_entries": 60,
-    "reclaimed_mb": 5.001,
+    "removed_entries": 21,
+    "reclaimed_mb": 2.308,
     "removed_paths": [
-      "data\\.pytest_cache",
-      "data\\.pytest_tmp",
-      "__pycache__",
-      "01_KERNEL\\__pycache__",
       "01_KERNEL\\agora\\__pycache__",
       "01_KERNEL\\agora\\cloud_orchestrator_shim\\__pycache__",
       "01_KERNEL\\agora\\orchestration\\__pycache__",
-      "01_KERNEL\\EXCALIBUR\\__pycache__",
       "01_KERNEL\\EXCALIBUR\\core\\__pycache__",
-      "01_KERNEL\\EXCALIBUR\\system\\__pycache__",
       "01_KERNEL\\forge\\assimilation\\__pycache__",
       "01_KERNEL\\forge\\assimilation\\core\\__pycache__",
-      "01_KERNEL\\forge\\assimilation\\tests\\__pycache__",
-      "01_KERNEL\\forge\\exp\\__pycache__",
-      "01_KERNEL\\forge\\scripts\\__pycache__",
-      "01_KERNEL\\forge\\tools\\__pycache__",
       "01_KERNEL\\iron_gate\\__pycache__",
-      "01_KERNEL\\iron_gate\\DEFENSE_GRID\\__pycache__",
-      "01_KERNEL\\iron_gate\\DEFENSE_GRID\\knights\\__pycache__",
-      "01_KERNEL\\iron_gate\\DEFENSE_GRID\\shadow_veil\\__pycache__"
+      "01_KERNEL\\iron_gate\\judge\\__pycache__",
+      "01_KERNEL\\iron_gate\\security\\__pycache__",
+      "01_KERNEL\\merlin\\Engines\\__pycache__",
+      "01_KERNEL\\merlin\\Engines\\symbolect_transpiler\\__pycache__",
+      "01_KERNEL\\merlin\\fusion\\__pycache__",
+      "01_KERNEL\\merlin\\reasoning\\__pycache__",
+      "01_KERNEL\\titan\\__pycache__",
+      "01_KERNEL\\titan\\memory\\__pycache__",
+      "03_VAULT\\__pycache__",
+      "03_VAULT\\training\\configs\\__pycache__",
+      "bin\\__pycache__",
+      "control_plane\\__pycache__",
+      "control_plane\\cluster\\__pycache__"
     ],
-    "errors": []
+    "errors": [
+      "C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_tmp: PermissionError: [WinError 5] Access is denied: 'C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_tmp'"
+    ]
   },
   "compression": {
     "enabled": true,
@@ -209,9 +210,9 @@
     "cpu_count": 12,
     "recommended_workers": 4,
     "memory_total_mb": 7895.9,
-    "memory_available_mb": 941.8,
-    "memory_pressure": 0.881,
-    "disk_free_pct": 37.3,
+    "memory_available_mb": 534.2,
+    "memory_pressure": 0.932,
+    "disk_free_pct": 35.91,
     "platform": "win32"
   },
   "artifacts": {

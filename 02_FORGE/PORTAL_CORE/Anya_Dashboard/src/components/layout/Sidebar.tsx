@@ -54,12 +54,21 @@ export default function Sidebar({ collapsed }: SidebarProps) {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-0.5">
-        {/* Core */}
-        <SideLink to="/" icon={LayoutDashboard} label="System Hub" end />
-        <SideLink to="/camelot-os" icon={Layers3} label="Camelot OS" />
-        <SideLink to="/alex" icon={BrainCircuit} label="SIR_ALEX — Tasks" />
-        <SideLink to="/research" icon={FlaskConical} label="Research Dept." />
+      <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-0.5 select-none">
+        {/* 5 Core Architectural Layers */}
+        <div className="pb-1 px-3">
+          <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#00FFC2] flex items-center gap-1">
+            <Layers3 className="h-3 w-3 text-[#00FFC2]" /> Core Layers
+          </p>
+        </div>
+        <SideLink to="/camelot-os" icon={Layers3} label="L1 — Swarm Kernel" />
+        <SideLink to="/dev" icon={Sword} label="L2 — Kinetic Forge" />
+        <SideLink to="/alex" icon={BrainCircuit} label="L3 — Memory Vault" />
+        <SideLink to="/" icon={LayoutDashboard} label="L4 — Control Plane" end />
+        <SideLink to="/defense-grid" icon={ShieldCheck} label="L5 — Defense Grid" />
+
+        <div className="pt-2"></div>
+        <SideLink to="/research" icon={FlaskConical} label="Research Lab" />
 
         {/* Cartridges */}
         <div className="pt-3 pb-1 px-3">

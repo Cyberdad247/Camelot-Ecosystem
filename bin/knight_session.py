@@ -64,12 +64,13 @@ from control_plane.cli_intercept import CLIIntercept
 from control_plane.soul_router import CLIPROXY_URL
 
 try:
-    from bin.camelot_context import build_system_prompt as _ctx_build_system_prompt
     from bin.camelot_context import KNIGHT_PERSONAS as _ctx_KNIGHT_PERSONAS
+    from bin.camelot_context import build_system_prompt as _ctx_build_system_prompt
     _CONTEXT_MODULE = True
 except ImportError:
     try:
-        import importlib.util, sys as _sys
+        import importlib.util
+        import sys as _sys
         _spec = importlib.util.spec_from_file_location(
             "camelot_context", Path(__file__).resolve().parent / "camelot_context.py"
         )
@@ -505,7 +506,8 @@ def _route_table(console: Console) -> None:
 
 def _status(console: Console) -> None:
     import asyncio
-    from control_plane.switchboard import probe_all, get_manifest
+
+    from control_plane.switchboard import get_manifest, probe_all
     asyncio.run(probe_all())
     manifest   = get_manifest()
     terminals  = manifest.get("terminals", {})

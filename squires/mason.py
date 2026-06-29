@@ -1,15 +1,15 @@
 """MASON squire — report writer. Produces colony_report.md from all squire outputs."""
 from __future__ import annotations
+
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from .index import ColonyIndex
     from .ghost import GhostReport
-    from .sweep import SweepReport
+    from .index import ColonyIndex
     from .judge import Verdict
-    from .vector import TFIDFCorpus
+    from .sweep import SweepReport
 
 
 def _ts() -> str:
@@ -37,8 +37,8 @@ def build_report(
         "",
         "## Executive Summary",
         "",
-        f"| Metric | Value |",
-        f"|--------|-------|",
+        "| Metric | Value |",
+        "|--------|-------|",
         f"| Files scanned | {index.stats.get('total_files', 0):,} |",
         f"| Total lines | {index.stats.get('total_lines', 0):,} |",
         f"| Symbols indexed | {index.stats.get('total_symbols', 0):,} |",
@@ -66,8 +66,8 @@ def build_report(
     lines += [
         "## GHOST Triage",
         "",
-        f"| Category | Count |",
-        f"|----------|-------|",
+        "| Category | Count |",
+        "|----------|-------|",
         f"| Secrets (critical) | {ghost_summary.get('critical', 0)} |",
         f"| Warnings | {ghost_summary.get('warnings', 0)} |",
         f"| Info | {ghost_summary.get('info', 0)} |",
@@ -88,8 +88,8 @@ def build_report(
     lines += [
         "## SWEEP Report",
         "",
-        f"| Category | Count |",
-        f"|----------|-------|",
+        "| Category | Count |",
+        "|----------|-------|",
     ]
     for k, v in sw_summary.items():
         if k != "total":

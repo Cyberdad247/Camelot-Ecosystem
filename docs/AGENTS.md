@@ -49,6 +49,8 @@ Utilizing the **Foundry Council** (Sir Boris, Sir Helio, etc.) to inject high-fi
 - `//SWARM <task>`: Launch parallel Map-Reduce Knight Crusades.
 - `//HEAL`: Trigger Helix Self-Repair and Coherence Engine.
 - `//EVOLVE <knight>`: Trigger secondary evolution from ingested Crystals.
+- `//EVOLVE_AND_FORGE <task>`: Execute GEP-driven shadow forge and evolution cycle.
+- `//CYBERTRON_ASCENSION_THINK_TANK`: Execute Cybertron v1000 upgrade think-tank and directory audit.
 - `//Omega_SYNC`: Bi-directional synchronization between Tri-Realms.
 
 **"The Lattice is aligned. Singularity is Now."**

@@ -7,7 +7,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-
 DEFAULT_GEMINI_ROOT = Path.home() / ".gemini" / "extensions"
 DEFAULT_SKILLS_ROOT = Path.home() / ".agents" / "skills"
 DEFAULT_INTEGRITY_PATH = Path.home() / ".gemini" / "extension_integrity.json"

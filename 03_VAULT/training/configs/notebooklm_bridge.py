@@ -6,7 +6,6 @@ Lazy synthesis: health probe at //BOOT, full Oracle query deferred until //PLAN.
 from __future__ import annotations
 
 import asyncio
-import json
 import os
 import time
 from datetime import datetime, timezone
@@ -14,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 CANONICAL_NOTEBOOK_ID = "8c656cfa-a189-409e-a72d-07692a47f17e"
-CANONICAL_NOTEBOOK_TITLE = "Camelot-OS v.999.3"
+CANONICAL_NOTEBOOK_TITLE = "Camelot-OS v.1000"
 SYNC_NOTE_TITLE = "Camelot-OS Canonical Sync Snapshot"
 # Client ceiling. Health probe (notebooks.list) resolves in ~2s; chat.ask can
 # take 30-60s depending on notebook size and Gemini backend load. Keep the

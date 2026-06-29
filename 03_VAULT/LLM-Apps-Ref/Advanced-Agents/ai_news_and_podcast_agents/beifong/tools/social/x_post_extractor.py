@@ -1,9 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import os
 from bs4 import BeautifulSoup
 import re
-import json
 
 
 def check_ad(soup):

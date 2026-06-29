@@ -1,18 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
-import json
 import os
-import sys
 import uuid
-from typing import List, Optional
 from textwrap import dedent
 from agno.agent import Agent 
 from agno.models.openai import OpenAIChat
 from agno.tools.mcp import MultiMCPTools
 from agno.memory.v2 import Memory
-from mcp import StdioServerParameters
-from agno.utils.pprint import apprint_run_response
 from dotenv import load_dotenv
 
 # Load environment variables

@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.camelot-os.org/v1000",
+  "@type": "OuroborosConfig",
+  "engine": "Mamba-3",
+  "kv_mode": "Zero-KV_Streaming",
+  "state_vector_size": 4096,
+  "max_ram_mb": 150,
+  "provenance_tag": "CYBERTRON_ASCENSION_v1000"
+}

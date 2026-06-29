@@ -6,7 +6,6 @@ enforcement. Generates system diagrams, dependency maps, and module contracts.
 """
 
 import ast
-import os
 import re
 from pathlib import Path
 from .base import BaseKnight

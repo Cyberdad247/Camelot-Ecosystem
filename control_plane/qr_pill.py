@@ -19,20 +19,19 @@ QR Pill lifecycle:
 """
 from __future__ import annotations
 
-import asyncio
 import json
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from enum import Enum
 from pathlib import Path
-from typing import Optional, Callable
+from typing import Optional
 
 from control_plane.sovereign_commander import (
-    get_sovereign_commander,
-    ApprovalRequest,
     ApprovalLevel,
+    ApprovalRequest,
     OperationType,
+    get_sovereign_commander,
 )
 
 
@@ -152,7 +151,7 @@ class QRPill:
             self.state = PillState.LIVE
             return True
 
-        except Exception as e:
+        except Exception:
             self.state = PillState.ERROR
             return False
 
@@ -343,7 +342,7 @@ class QRPill:
 
         # Check artifacts
         missing_artifacts = 0
-        for artifact_id, artifact_path in self.artifacts.items():
+        for _artifact_id, artifact_path in self.artifacts.items():
             if not artifact_path.exists():
                 missing_artifacts += 1
 

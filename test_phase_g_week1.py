@@ -10,7 +10,6 @@ Status: 18 tests total (14 consensus + 4 sync)
 """
 
 import asyncio
-import json
 import sys
 from control_plane.distributed_ledger_consensus import (
     DistributedConsensus, ConsensusPhase, NodeRole, get_distributed_consensus

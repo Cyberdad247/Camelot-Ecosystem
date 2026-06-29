@@ -8,8 +8,6 @@ Act as: The Magician.
 import sys
 import os
 import subprocess
-import argparse
-from datetime import datetime
 
 # Tool Registry
 # Maps keywords to scripts

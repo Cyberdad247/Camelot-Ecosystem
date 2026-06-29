@@ -13,10 +13,10 @@ Usage:
 from __future__ import annotations
 
 import os
-import sys
 import platform
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 
@@ -255,7 +255,7 @@ def run_shell_setup(shell: str | None = None, print_only: bool = False) -> None:
     console.print(
         f"\n  [bold yellow]CAMELOT-OS Shell Setup[/bold yellow] — "
         f"shell: [cyan]{active_shell}[/cyan]"
-        + ("" if shell else f" [dim](auto-detected)[/dim]")
+        + ("" if shell else " [dim](auto-detected)[/dim]")
     )
 
     script = _completion_script(active_shell)

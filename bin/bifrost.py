@@ -29,7 +29,6 @@ import socket
 import subprocess
 import sys
 import time
-import urllib.request
 from pathlib import Path
 
 # Local-identity owner. Per this module's docstring the caller-is-owner check is
@@ -194,10 +193,41 @@ def _tailscale_whois(ip: str) -> str | None:
     return None
 
 
+def verify_client_cert(cert_der: bytes | None) -> tuple[bool, str]:
+    """Verify ASGI client certificate (DER format)."""
+    if not cert_der:
+        return False, "no client certificate presented"
+    
+    # Calculate sha256 fingerprint of DER bytes
+    fingerprint = hashlib.sha256(cert_der).hexdigest()
+    trusted_fingerprints = _parse_csv_env("BIFROST_TRUSTED_CERT_FINGERPRINTS", ())
+    if fingerprint in trusted_fingerprints:
+        return True, f"mtls:fingerprint={fingerprint[:16]}"
+        
+    try:
+        import re
+        import ssl
+        pem = ssl.DER_cert_to_PEM_cert(cert_der)
+        match = re.search(r"CN\s*=\s*([^,\n/]+)", pem)
+        if match:
+            cn = match.group(1).strip()
+            trusted_cns = _parse_csv_env("BIFROST_TRUSTED_CERT_CNS", ("camelot-client",))
+            if cn in trusted_cns:
+                return True, f"mtls:cn={cn}"
+    except Exception:
+        pass
+        
+    if _env_flag("BIFROST_ALLOW_ANY_VALID_CERT", default=False):
+        return True, "mtls:any-valid-cert"
+        
+    return False, f"untrusted client certificate (fingerprint: {fingerprint[:16]})"
+
+
 def verify_caller(remote_addr: str | None = None,
                   presented_token: str | None = None,
                   strict: bool = True,
-                  oidc_token: str | None = None) -> tuple[bool, str]:
+                  oidc_token: str | None = None,
+                  client_cert_der: bytes | None = None) -> tuple[bool, str]:
     """
     Decide whether the caller may awaken Camelot-OS.
 
@@ -206,14 +236,16 @@ def verify_caller(remote_addr: str | None = None,
         presented_token: bifrost token header from remote caller
         strict: if False, warnings are returned but not raised
         oidc_token: JWT bearer token for Rule C (mobile/OIDC clients)
+        client_cert_der: client certificate bytes from mTLS handshake
 
     Returns:
         (allowed, reason)
 
     Rules (first match wins):
         A) loopback + local owner
-        B) tailnet peer + valid bifrost token + trusted whois owner
+        D) valid mTLS client certificate (any network location)
         C) valid OIDC JWT from a trusted issuer (any network location)
+        B) tailnet peer + valid bifrost token + trusted whois owner
     """
     local_user = getpass.getuser()
 
@@ -225,18 +257,26 @@ def verify_caller(remote_addr: str | None = None,
             return True, f"local-owner:{local_user}"
         return False, f"local-user-mismatch: {local_user!r} != {CAMELOT_OWNER!r}"
 
+    # Rule D: mTLS client certificate gate (roaming bypass)
+    cert_reason = None
+    if client_cert_der:
+        cert_ok, cert_reason = verify_client_cert(client_cert_der)
+        if cert_ok:
+            return True, cert_reason
+
     # Rule C: OIDC mobile gate (checked before Rule B so mobile clients skip tailnet check)
+    oidc_reason = None
     if oidc_token:
-        ok, reason = mobile_gate(oidc_token, remote_addr)
-        if ok:
-            return True, reason
-        # Fall through to Rule B if OIDC fails — allow bifrost-token fallback
+        oidc_ok, oidc_reason = mobile_gate(oidc_token, remote_addr)
+        if oidc_ok:
+            return True, oidc_reason
 
     # Rule B: Tailnet peer with valid bifrost token
     if not _is_tailnet(remote_addr):
-        if oidc_token:
-            # Already failed Rule C above; give the OIDC failure reason
-            _, oidc_reason = mobile_gate(oidc_token, remote_addr)
+        # Roaming/Public IP. If they presented certificate or token that failed, report that.
+        if cert_reason:
+            return False, cert_reason
+        if oidc_reason:
             return False, oidc_reason
         return False, f"non-tailnet-source: {remote_addr}"
 
@@ -253,9 +293,9 @@ def verify_caller(remote_addr: str | None = None,
 
 
 def enforce(remote_addr: str | None = None, presented_token: str | None = None,
-            oidc_token: str | None = None):
+            oidc_token: str | None = None, client_cert_der: bytes | None = None):
     """Raise AccessDenied if the caller is not authorized."""
-    ok, reason = verify_caller(remote_addr, presented_token, oidc_token=oidc_token)
+    ok, reason = verify_caller(remote_addr, presented_token, oidc_token=oidc_token, client_cert_der=client_cert_der)
     if not ok:
         raise AccessDenied(f"Bifrost gate: {reason}")
     return reason

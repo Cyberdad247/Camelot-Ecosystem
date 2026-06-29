@@ -18,7 +18,6 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional, Dict, Any
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
-from cryptography.hazmat.backends import default_backend
 
 
 class VaultManager:

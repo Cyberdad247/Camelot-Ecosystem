@@ -94,6 +94,7 @@ class AudioSession:
             token_stream=text_stream,
             kitten=self.kitten,
             mode=mode,
+            knight_id=terminal_id,
         ):
             yield audio_chunk
 
@@ -163,11 +164,50 @@ class AudioSession:
 
     async def _classify(self, text: str):
         """Classify intent, lazy-loading switchboard if not injected."""
-        from control_plane.intent_router import route_by_intent
+        import re
+        from control_plane.intent_router import route_by_intent, IntentCategory
 
         if self.board is None:
             from control_plane.switchboard import get_board
             self.board = get_board()
+
+        # Dynamic Knight swapping keywords/triggers
+        text_lower = text.lower()
+        triggers = {
+            "sir_sentinel": ["sentinel", "sir sentinel", "security"],
+            "sir_forge": ["forge", "sir forge", "execute"],
+            "sir_boris": ["boris", "sir boris", "architect"],
+            "sir_alex": ["alex", "sir alex", "planner"],
+            "sir_ghost": ["ghost", "sir ghost", "privacy"],
+            "sir_gideon": ["gideon", "sir gideon", "forensic"],
+            "sir_octavian": ["octavian", "sir octavian", "ops"],
+            "sir_mnemo": ["mnemo", "sir mnemo", "memory"],
+            "sir_link": ["link", "sir link"],
+            "lady_apis": ["apis", "lady apis", "research"],
+            "sir_sonus": ["sonus", "sir sonus", "voice", "speech"],
+            "sir_gravity": ["gravity", "antigravity", "sir gravity"],
+            "sir_kimi": ["kimi", "sir kimi"],
+            "sir_hermes": ["hermes", "sir hermes"],
+        }
+        for knight_id, keywords in triggers.items():
+            for kw in keywords:
+                if re.search(r"\b" + re.escape(kw) + r"\b", text_lower):
+                    term = await self.board.probe_one(knight_id)
+                    if term and term.status in ("live", "assumed_live"):
+                        # Map to appropriate category
+                        cat_map = {
+                            "sir_sentinel": IntentCategory.SECURITY,
+                            "sir_forge": IntentCategory.CODE,
+                            "sir_boris": IntentCategory.FORGE,
+                            "sir_alex": IntentCategory.GENERAL,
+                            "sir_ghost": IntentCategory.SECURITY,
+                            "sir_gideon": IntentCategory.SECURITY,
+                            "sir_octavian": IntentCategory.OPS,
+                            "sir_mnemo": IntentCategory.MEMORY,
+                            "lady_apis": IntentCategory.RESEARCH,
+                        }
+                        category = cat_map.get(knight_id, IntentCategory.GENERAL)
+                        return term, category, 1.0
 
         return await route_by_intent(text, self.board)
 

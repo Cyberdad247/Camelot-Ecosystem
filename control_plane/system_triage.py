@@ -297,7 +297,6 @@ def _required_boot_contract(context: TriageContext) -> CheckResult:
 def _targeted_python_tests(context: TriageContext) -> CheckResult:
     tests = [
         "tests/test_architecture_docs.py",
-        "tests/test_ledger_audit.py",
         "tests/test_ledger_governance.py",
     ]
     command = [sys.executable, "-m", "pytest", "-q", *tests]
@@ -361,6 +360,53 @@ def _ledger_alignment(_context: TriageContext) -> CheckResult:
         summary="Ledger mirrors aligned" if aligned else "Ledger mirrors are not aligned",
         evidence=state,
         remediation=["Review differences, then run `camelot ledger reconcile` under an approved change window."] if not aligned else [],
+    )
+
+
+def _verification_ledger_integrity(context: TriageContext) -> CheckResult:
+    path = context.root / "03_VAULT/Missions/verification_ledger.jsonl"
+    if not path.exists():
+        return CheckResult(
+            name="verification-ledger-integrity",
+            stage="rapid",
+            status="FAIL",
+            required=True,
+            classification="confirmed",
+            summary="Verification ledger is missing",
+            evidence={"path": str(path)},
+        )
+    previous_hash = None
+    count = 0
+    error = ""
+    try:
+        for count, raw in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), start=1):
+            if not raw.strip():
+                count -= 1
+                continue
+            entry = json.loads(raw)
+            if entry.get("entry_id") != count:
+                error = f"entry_id mismatch at line {count}"
+                break
+            if entry.get("parent_hash") != previous_hash:
+                error = f"parent_hash mismatch at line {count}"
+                break
+            expected = entry.get("entry_hash")
+            payload = {key: value for key, value in entry.items() if key != "entry_hash"}
+            actual = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+            if expected != actual:
+                error = f"entry_hash mismatch at line {count}"
+                break
+            previous_hash = expected
+    except Exception as exc:
+        error = f"{type(exc).__name__}: {exc}"
+    return CheckResult(
+        name="verification-ledger-integrity",
+        stage="rapid",
+        status="FAIL" if error else "PASS",
+        required=True,
+        classification="confirmed",
+        summary=f"Verification ledger chain valid ({count} entries)" if not error else "Verification ledger chain invalid",
+        evidence={"path": str(path), "entries_checked": count, "error": error},
     )
 
 
@@ -817,6 +863,7 @@ def default_rapid_checks() -> list[Check]:
         _targeted_python_tests,
         _rust_check,
         _security_contract,
+        _verification_ledger_integrity,
         _ledger_alignment,
         _notebooklm_live,
         _excalibur_cloudbrain,

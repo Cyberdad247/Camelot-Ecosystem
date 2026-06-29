@@ -7,7 +7,6 @@ Provides an isolated execution environment for agent cartridges.
 Enforces resource budgets, tool whitelisting, and governance policies.
 """
 
-import os
 import time
 import json
 from typing import Dict, List, Any, Optional

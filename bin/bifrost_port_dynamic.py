@@ -8,15 +8,16 @@ Usage:
     uv run --with fastapi --with uvicorn --with psutil python bifrost_port_dynamic.py
 """
 
-import os
-import time
 import json
-import psutil
+import os
 import subprocess
+import time
 from pathlib import Path
-from fastapi import FastAPI, UploadFile, File, Form, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse
+
+import psutil
 import uvicorn
+from fastapi import FastAPI, File, Form, Request, UploadFile
+from fastapi.responses import JSONResponse
 
 # Import the sovereign gate logic
 try:
@@ -42,8 +43,19 @@ async def bifrost_security_gate(request: Request, call_next):
     if not token and auth_header and auth_header.startswith("Bearer "):
         token = auth_header[7:]
     
+    # Extract client cert from ASGI scope (mTLS)
+    client_cert_der = None
+    tls_info = request.scope.get("extensions", {}).get("tls", {})
+    if tls_info:
+        client_cert_der = tls_info.get("client_cert_der")
+    
     try:
-        bifrost.enforce(remote_addr=request.client.host, presented_token=token)
+        # bifrost.enforce handles loopback, mTLS client certs, OIDC tokens, and tailnet
+        bifrost.enforce(
+            remote_addr=request.client.host,
+            presented_token=token,
+            client_cert_der=client_cert_der
+        )
     except bifrost.AccessDenied as e:
         return JSONResponse(status_code=403, content={"error": "Access Denied", "detail": str(e)})
     except Exception as e:
@@ -56,7 +68,7 @@ def get_rustdesk_id():
     try:
         # Checking local config if available, otherwise just returning host
         return subprocess.check_output(["hostname"]).decode().strip()
-    except:
+    except Exception:
         return "Unknown-Spire"
 
 def get_active_relays():
@@ -85,7 +97,7 @@ async def send_message(sender: str = Form(...), content: str = Form(...)):
     """Sir Alex's Dynamic Link - Anchoring thoughts with Relay context."""
     try:
         messages = json.loads(MESSAGES_FILE.read_text(encoding="utf-8"))
-    except:
+    except (json.JSONDecodeError, OSError):
         messages = []
     
     msg = {
@@ -114,12 +126,12 @@ async def upload_file(file: UploadFile = File(...)):
 async def get_messages():
     try:
         return JSONResponse(content=json.loads(MESSAGES_FILE.read_text(encoding="utf-8")))
-    except:
+    except (json.JSONDecodeError, OSError):
         return JSONResponse(content=[])
 
 if __name__ == "__main__":
     print("========================================================")
     print("🛡️ SIR HEIMDALL: The DYNAMIC BIFROST PORT is Opening...")
-    print(f"🚀 Transport: RustDesk (hbbs/hbbr) + SSH Tunnel")
+    print("🚀 Transport: RustDesk (hbbs/hbbr) + SSH Tunnel")
     print("========================================================")
     uvicorn.run(app, host="0.0.0.0", port=8888, log_level="warning")

@@ -6,19 +6,14 @@ The Comprehensive Master Command Center.
 Integrates 22-Knight Swarm, OmniRoute Telemetry, and Workflow Navigation.
 """
 
-import asyncio
-from datetime import datetime
-from typing import Iterable
 
-from rich.text import Text
 from rich.panel import Panel
-from rich.table import Table
-
+from rich.text import Text
 from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, Static, TabbedContent, TabPane, Markdown, Log, Input, ProgressBar, DataTable, Tree, Label
-from textual.containers import Container, Horizontal, Vertical, Grid
+from textual.containers import Grid, Vertical
 from textual.reactive import reactive
-from textual.command import Command, Provider, HitResult
+from textual.widgets import DataTable, Footer, Header, Input, Label, Log, Markdown, Static, TabbedContent, TabPane, Tree
+
 
 class KnightMatrix(DataTable):
     """Real-time grid showing 22 Knights and their OmniRoute providers."""

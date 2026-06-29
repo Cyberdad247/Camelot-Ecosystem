@@ -5,26 +5,26 @@
 
 from __future__ import annotations
 
-import json
 import asyncio
 import importlib.util
+import json
 import os
 import platform
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import time
-import socket
 import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any
 
-from .config_manager import ConfigManager
-from .codex_integration import boot_codex_integration
-from .excalibur_preflight import boot_excalibur_preflight
 from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
+from .codex_integration import boot_codex_integration
+from .config_manager import ConfigManager
+from .excalibur_preflight import boot_excalibur_preflight
 from .knight_configuration import write_knight_configuration
 from .nano_swarm_runtime import boot_nano_swarm_runtime
 from .orchestration_state import summarize_boot_results
@@ -1036,7 +1036,7 @@ def boot_kitten_tts(home: Path) -> tuple[bool, str]:
     log_dir.mkdir(parents=True, exist_ok=True)
 
     # Launch: python -c "from kitten_service import kitten_service; import asyncio; asyncio.run(kitten_service.run_streaming_server())"
-    launch_cmd = (
+    _launch_cmd = (
         "import sys, asyncio; sys.path.insert(0, r'" + str(home) + "'); "
         "from 01_KERNEL.senses.audio.kitten_service import kitten_service; "
         "asyncio.run(kitten_service.run_streaming_server())"
@@ -1068,8 +1068,8 @@ def boot_kitten_tts(home: Path) -> tuple[bool, str]:
 
 def boot_titan_omega(home: Path) -> tuple[bool, str]:
     """Titan Omega — graft all three memory tiers (Omega-Graph + Omega-Vault + Omega-Flux) in production mode."""
-    import sys
     import importlib
+    import sys
     kernel_dir = home / "01_KERNEL"
     if not kernel_dir.exists():
         return False, "01_KERNEL not found — Titan memory unavailable"

@@ -8,8 +8,6 @@ from agno.team import Team
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.hackernews import HackerNewsTools
 from agno.tools.newspaper4k import Newspaper4kTools
-from pydantic import BaseModel
-from typing import List         
 import os
 
 # Set up the Streamlit app

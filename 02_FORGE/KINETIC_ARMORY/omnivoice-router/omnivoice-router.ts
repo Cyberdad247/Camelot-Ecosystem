@@ -16,6 +16,7 @@ import * as crypto from "crypto";
 import * as fs from "fs";
 import * as os from "os";
 import * as path from "path";
+import * as http from "http";
 
 const PORT = 3002;
 const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), "CAMELOT_OS");
@@ -32,14 +33,16 @@ interface PeerState {
   speechStartMs: number | null;
   silenceStartMs: number | null;
   utteranceBuffer: number[];
+  knight_id?: string;
 }
 
 interface OmniMessage {
-  type: "offer" | "answer" | "candidate" | "data_frame" | "transcript" | "ping";
+  type: "offer" | "answer" | "candidate" | "data_frame" | "transcript" | "ping" | "set_knight";
   sdp?: string;
   candidate?: unknown;
   samples?: number[];
   text?: string;
+  knight_id?: string;
 }
 
 const peers = new Map<WebSocket, PeerState>();
@@ -109,6 +112,43 @@ function processFrame(state: PeerState, samples: number[]): void {
       state.speaking = true;
       state.speechStartMs = now;
       state.silenceStartMs = null;
+
+      console.log(`[OMNIVOICE] VAD Speech Started for ${state.id} — dispatching interruption`);
+
+      // 1. Send socket clear-signal to clients to immediately halt local audio playback
+      for (const [ws, peer] of peers) {
+        if (ws.readyState === ws.OPEN) {
+          ws.send(JSON.stringify({ type: "clear" }));
+          console.log(`[OMNIVOICE] Broadcast clear-signal to ${peer.id}`);
+        }
+      }
+
+      // 2. Flush current outgoing audio streams in kitten_service.py
+      const req = http.request({
+        hostname: "127.0.0.1",
+        port: 8300,
+        path: "/flush",
+        method: "POST",
+        headers: {
+          "Content-Length": 0,
+        },
+      }, (res) => {
+        console.log(`[OMNIVOICE] Kitten flush response status: ${res.statusCode}`);
+      });
+      req.on("error", (err) => {
+        console.error(`[OMNIVOICE] Kitten flush HTTP request error: ${err.message}`);
+      });
+      req.end();
+
+      // 3. Cancel current LLM completion run on the control plane
+      enqueue({
+        id: mkId("interrupt"),
+        type: "interrupt",
+        source: "omnivoice-router",
+        queued_at: new Date().toISOString(),
+        priority: 1,
+      });
+
     } else {
       state.silenceStartMs = null; // reset silence timer on new energy
     }
@@ -150,7 +190,6 @@ function processFrame(state: PeerState, samples: number[]): void {
 }
 
 // ── Server ────────────────────────────────────────────────────────────────────
-import * as http from "http";
 
 const server = http.createServer((req, res) => {
   if (req.method === 'POST' && req.url === '/broadcast_audio') {
@@ -236,6 +275,7 @@ wss.on("connection", (ws: WebSocket, req) => {
         const text = (msg.text ?? "").trim();
         if (text) {
           const tId = mkId("transcript");
+          const targetKnight = msg.knight_id ?? state.knight_id;
           enqueue({
             id: tId,
             type: "forge",
@@ -243,9 +283,19 @@ wss.on("connection", (ws: WebSocket, req) => {
             source: "omnivoice-router",
             queued_at: new Date().toISOString(),
             priority: 1,
+            knight_id: targetKnight ?? null,
           });
-          console.log(`[OMNIVOICE] TRANSCRIPT queued ${tId}: ${text.slice(0, 60)}`);
-          ws.send(JSON.stringify({ type: "transcript_queued", id: tId }));
+          console.log(`[OMNIVOICE] TRANSCRIPT queued ${tId} (knight_id: ${targetKnight ?? 'default'}): ${text.slice(0, 60)}`);
+          ws.send(JSON.stringify({ type: "transcript_queued", id: tId, knight_id: targetKnight }));
+        }
+        break;
+      }
+
+      case "set_knight": {
+        if (msg.knight_id) {
+          state.knight_id = msg.knight_id;
+          console.log(`[OMNIVOICE] Set active knight for ${state.id} to ${msg.knight_id}`);
+          ws.send(JSON.stringify({ type: "knight_updated", knight_id: msg.knight_id }));
         }
         break;
       }

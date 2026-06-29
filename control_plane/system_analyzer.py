@@ -14,13 +14,13 @@ Outputs optimization profile for Bifrost to use.
 """
 from __future__ import annotations
 
-import asyncio
 import platform
-import psutil
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import Optional, Dict, List
 from enum import Enum
+from typing import Dict, List, Optional
+
+import psutil
 
 
 class CPUArchitecture(str, Enum):
@@ -339,37 +339,37 @@ class SystemAnalyzer:
 
             # Check installed packages
             try:
-                import numpy
+                import numpy  # noqa: F401
                 python.has_numpy = True
             except ImportError:
                 pass
 
             try:
-                import torch
+                import torch  # noqa: F401
                 python.has_torch = True
             except ImportError:
                 pass
 
             try:
-                import tensorflow
+                import tensorflow  # noqa: F401
                 python.has_tensorflow = True
             except ImportError:
                 pass
 
             try:
-                import onnx
+                import onnx  # noqa: F401
                 python.has_onnx = True
             except ImportError:
                 pass
 
             try:
-                import redis
+                import redis  # noqa: F401
                 python.has_redis = True
             except ImportError:
                 pass
 
             try:
-                import qdrant_client
+                import qdrant_client  # noqa: F401
                 python.has_qdrant = True
             except ImportError:
                 pass

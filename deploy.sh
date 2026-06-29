@@ -310,19 +310,10 @@ echo ""
 echo "🔗 PHASE 7: GIT COMMIT"
 echo "════════════════════════════════════════"
 
-git add -A
-git commit -m "deploy(phase-f): production deployment - all tests passed, SLA 100%
-
-- Phase F production deployment completed
-- All 11 integration tests PASSED (100% success)
-- Hardening suite: 14/14 PASS (security, performance, resilience)
-- Validation: 0 critical vulnerabilities, 100% SLA compliance
-- Backup created, pre-flight checks complete
-- Ledger entry 1704 added
-
-Status: PRODUCTION_READY" || true
-
-echo "  ✅ Changes committed"
+echo "  ⚠️  Auto-commit disabled for production safety."
+echo "  📝 Review changes manually before committing."
+echo "  📋 Staged changes:"
+git status --short
 
 # ────────────────────────────────────────────────────────────────
 # FINAL SUMMARY

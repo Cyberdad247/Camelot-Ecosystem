@@ -19,7 +19,6 @@ Reference: microsoft/bitnet (github) — bitnet.cpp inference engine
 from __future__ import annotations
 
 import json
-import os
 import subprocess
 import time
 from dataclasses import dataclass

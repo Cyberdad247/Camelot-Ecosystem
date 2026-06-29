@@ -6,12 +6,10 @@ Test Suite for Cartridge Fabrication Engine
 
 import os
 import sys
-import json
 import shutil
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from cartridge.fabrication_engine import CartridgeFabricator
-from cartridge.cartridge_schemas import CartridgeManifest, JITToolAdapter
 
 def test_cartridge_fabrication():
     print("\n=== Testing Cartridge Fabrication ===")

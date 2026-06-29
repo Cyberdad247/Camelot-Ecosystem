@@ -15,7 +15,7 @@ import asyncio
 import importlib.util
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime
 from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):

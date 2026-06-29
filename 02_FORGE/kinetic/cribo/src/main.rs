@@ -2,9 +2,7 @@
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 use clap::Parser;
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
 use std::fs;
-use std::path::PathBuf;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]

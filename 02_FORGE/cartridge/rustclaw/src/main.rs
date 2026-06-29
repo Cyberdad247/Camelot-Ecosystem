@@ -42,13 +42,22 @@ impl ServiceManager {
                     port: Some(8080),
                 },
                 ServiceConfig {
+                    // Phase 1 RIP_AND_REPLACE (HiveIDE_Apex_v1000) — see
+                    // 03_VAULT/runtime_state/node_mcp_cutlist.json + phase3_pending_prerequisite.md
+                    // Binary swapped: camelot-mcp-edge.exe -> pmcp-server.exe.
+                    // Service name preserved for backward-compat.
+                    // port dropped to None: pmcp-server v0.1 is stdio-MCP only;
+                    // the http feature in 02_FORGE/kinetic/pmcp/Cargo.toml will
+                    // restore Some(3001) once it lands.
+                    // Revert: git checkout HEAD -- 02_FORGE/cartridge/rustclaw/src/main.rs
+                    // or restore from 03_VAULT/runtime_state/backups/hiveide_cut_*/
                     name: "Kinetic Edge".to_string(),
                     tier: BootTier::Core,
-                    command: format!("{}\\bin\\camelot-mcp-edge.exe", camelot_home),
+                    command: format!("{}\\bin\\pmcp-server.exe", camelot_home),
                     args: vec![],
                     required: true,
                     max_retries: 3,
-                    port: Some(3001),
+                    port: None,
                 },
                 ServiceConfig {
                     name: "Defense Grid".to_string(),

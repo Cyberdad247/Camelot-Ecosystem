@@ -22,7 +22,7 @@ import json
 import sys
 import time
 import uuid
-from typing import Optional, AsyncIterator
+from typing import AsyncIterator, Optional
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -224,7 +224,7 @@ Provide your best analysis and be explicit about reasoning.
             return []
 
         try:
-            pattern = f"dispatch:*:request"
+            pattern = "dispatch:*:request"
             keys = self.redis_client.keys(pattern)
 
             pending = []

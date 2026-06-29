@@ -16,11 +16,13 @@ from typing import Any
 
 from colorama import Fore, Style, just_fix_windows_console
 
-from .cockpit import cockpit_exec, prompt_payload, refresh_snapshot
-from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
 from .cli_intercept import CLIIntercept
+from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
+from .cockpit import cockpit_exec, prompt_payload, refresh_snapshot
 from .codex_integration import (
     DEFAULT_ACTOR as CODEX_DEFAULT_ACTOR,
+)
+from .codex_integration import (
     read_codex_status,
     write_codex_integration,
 )
@@ -44,15 +46,21 @@ from .microcubed import (
     forge_house,
     inspect_house,
     plan_house,
-    status as microcubed_status,
     teardown_house,
+)
+from .microcubed import (
+    status as microcubed_status,
 )
 from .nano_swarm_runtime import (
     supervise_nodes as supervise_nano_swarm_nodes,
+)
+from .nano_swarm_runtime import (
     write_runtime_status as write_nano_swarm_runtime_status,
 )
 from .provenance import ProvenanceManager, VerificationRun
 from .system_triage import TriageOptions, run_system_triage
+
+VERBOSE_TELEMETRY = False
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
@@ -268,12 +276,12 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
                     _stream_print("[TRIAGE] Simulated 'trivy' scan initiated... 100% CLEAN.", tone="info")
             
             f_engine.log_check("CLI_CONTEXT", intent, analysis)
-        except Exception as fe:
+        except Exception:
             # Don't block the whole process if forensic engine fails
             pass
 
         # Import warden here to maintain lazy loading
-        from security.warden import warden, SecurityException  # noqa: F401
+        from security.warden import SecurityException, warden  # noqa: F401
         
         # Verify permission via the unified security warden
         warden.verify_permission(
@@ -726,16 +734,19 @@ async def _run_task(
     raw_intent = intent
     preserve_cartridge_directive = raw_intent.lstrip().upper().startswith("LOAD:")
     if not preserve_cartridge_directive and compiler.pedagogy(intent):
-        _stream_print("Anya [PEDAGOGY]: Intent is ambiguous. Renormalizing...", tone="warn")
+        if VERBOSE_TELEMETRY:
+            _stream_print("Anya [PEDAGOGY]: Intent is ambiguous. Renormalizing...", tone="warn")
 
     if preserve_cartridge_directive:
         titan_prompt, confidence = raw_intent, 1.0
     else:
         titan_prompt, confidence = compiler.compile(intent)
-    _stream_print(f"Anya [COMPILE]: {titan_prompt} | ⚡ Confidence: {confidence*100:.0f}%", tone="dim")
+    if VERBOSE_TELEMETRY:
+        _stream_print(f"Anya [COMPILE]: {titan_prompt} | ⚡ Confidence: {confidence*100:.0f}%", tone="dim")
 
     if confidence < 0.5:
-        _stream_print("Anya [PEDAGOGY]: Intent clarity is low. Scaling to 1M token context for verification.", tone="warn")
+        if VERBOSE_TELEMETRY:
+            _stream_print("Anya [PEDAGOGY]: Intent clarity is low. Scaling to 1M token context for verification.", tone="warn")
 
     # Preserve explicit cartridge directives; otherwise use renormalized intent for routing logic.
     intent = raw_intent if preserve_cartridge_directive else compiler.renormalize(intent)
@@ -1145,8 +1156,14 @@ def _stream_sarda_progress(
 
 
 def _interactive_shell(
-    json_mode: bool = False, provider: str | None = None, llm: str | None = None
+    json_mode: bool = False,
+    provider: str | None = None,
+    llm: str | None = None,
+    verbose: bool = False,
 ) -> int:
+    global VERBOSE_TELEMETRY
+    VERBOSE_TELEMETRY = verbose
+
     banner = [
         "Camelot-OS",
         "Prompt-first interface for routing, cloudbrain, and SARDA workflows.",
@@ -1164,6 +1181,14 @@ def _interactive_shell(
     current_knight = os.getenv("CAMELOT_ACTIVE_KNIGHT", "sir_codex")
     last_route: dict[str, Any] | None = None
 
+    # Initialize stateful conversation history
+    conversation_history = [
+        {
+            "role": "system",
+            "content": "You are the Camelot-OS Knight session conversational partner. Be concise, direct, and help the user execute commands and explore the repository. Format code blocks with language hints."
+        }
+    ]
+
     while True:
         try:
             raw = input(_color(_prompt_text(current_knight, current_provider, current_llm), "accent")).strip()
@@ -1174,6 +1199,20 @@ def _interactive_shell(
             return 0
 
         if not raw:
+            continue
+        if raw == "/clear":
+            conversation_history = [conversation_history[0]]
+            if not json_mode:
+                _stream_print("Conversation history cleared.", tone="ok")
+            continue
+        if raw == "/history":
+            if not json_mode:
+                _stream_print(f"Conversation History: {len(conversation_history) - 1} turns", tone="info")
+                for msg in conversation_history[1:]:
+                    role = msg["role"].upper()
+                    _stream_print(f"[{role}]: {msg['content']}", tone="dim" if role == "SYSTEM" else "normal")
+            else:
+                _print_json(conversation_history)
             continue
         if raw in {"/exit", "exit", "quit"}:
             return 0
@@ -1227,13 +1266,16 @@ def _interactive_shell(
                 target_llm = current_llm
                 if "--provider" in parts:
                     idx = parts.index("--provider")
-                    if idx + 1 < len(parts): target_provider = parts[idx+1]
+                    if idx + 1 < len(parts):
+                        target_provider = parts[idx+1]
                 if "--llm" in parts:
                     idx = parts.index("--llm")
-                    if idx + 1 < len(parts): target_llm = parts[idx+1]
+                    if idx + 1 < len(parts):
+                        target_llm = parts[idx+1]
                 elif "--model" in parts:
                     idx = parts.index("--model")
-                    if idx + 1 < len(parts): target_llm = parts[idx+1]
+                    if idx + 1 < len(parts):
+                        target_llm = parts[idx+1]
 
                 spec = importlib.util.spec_from_file_location("chat", chat_path)
                 chat_mod = importlib.util.module_from_spec(spec)
@@ -1289,24 +1331,41 @@ def _interactive_shell(
             if raw == "/status":
                 if not json_mode:
                     _stream_print("Probing Septem Regna Layer health…", tone="title")
-                    boot_sequence.run_boot(CAMELOT_HOME)
+                    try:
+                        from . import boot_sequence as _bs
+                        _bs.run_boot(CAMELOT_HOME)
+                    except ImportError:
+                        _stream_print("boot_sequence module unavailable", tone="warn")
                     output = asyncio.run(_run_task("cloudbrain status"))
                     _emit(output, json_mode=json_mode, title="Cloudbrain Internals")
                 else:
-                    output = boot_sequence.run_boot(CAMELOT_HOME, quick=True)
+                    try:
+                        from . import boot_sequence as _bs
+                        output = _bs.run_boot(CAMELOT_HOME, quick=True)
+                    except ImportError:
+                        output = {"status": "UNAVAILABLE", "error": "boot_sequence module not found"}
                     _print_json(output)
                 continue
 
             if raw == "/boot":
                 _stream_print("Initiating full 6-phase bootstrap sequence…", tone="warn")
-                boot_sequence.run_boot(CAMELOT_HOME)
+                try:
+                    from . import boot_sequence as _bs
+                    _bs.run_boot(CAMELOT_HOME)
+                except ImportError:
+                    _stream_print("boot_sequence module unavailable", tone="err")
                 continue
 
             if raw == "/sync":
                 _stream_print("Triggering OMEGA SYNC PROTOCOL (UKG + Ledger + Kinetic)…", tone="accent")
-                sync_script = CAMELOT_HOME / "01_KERNEL" / "system" / "SYNC_PROTOCOL.py"
-                venv_py = boot_sequence._detect_venv_python(CAMELOT_HOME)
-                smolvm.run([str(venv_py), str(sync_script)], cwd=str(CAMELOT_HOME))
+                try:
+                    from . import boot_sequence as _bs
+                    sync_script = CAMELOT_HOME / "01_KERNEL" / "system" / "SYNC_PROTOCOL.py"
+                    venv_py = _bs._detect_venv_python(CAMELOT_HOME)
+                    import subprocess
+                    subprocess.run([str(venv_py), str(sync_script)], cwd=str(CAMELOT_HOME), check=False)
+                except ImportError:
+                    _stream_print("boot_sequence module unavailable for sync", tone="err")
                 continue
 
             if raw.startswith("/log"):
@@ -1447,7 +1506,10 @@ def _interactive_shell(
                 _emit(output, json_mode=json_mode, title="Ledger Status")
                 continue
 
-            # Omni-Routing Intercept
+            # Conversational Stateful Mode
+            conversation_history.append({"role": "user", "content": raw})
+            
+            # Omni-Routing Intercept for Knight detection
             intercept = CLIIntercept()
             result = intercept.intercept(raw)
             current_knight = result.route.knight_id
@@ -1460,12 +1522,40 @@ def _interactive_shell(
                 "reason": result.route.reason,
             }
             
-            if not json_mode:
-                _stream_print(intercept.format_route_log(result), tone="info")
-                _stream_task_progress(raw)
+            chat_dir = CAMELOT_HOME / "03_VAULT" / "training" / "configs"
+            if str(chat_dir) not in sys.path:
+                sys.path.insert(0, str(chat_dir))
+            
+            try:
+                import llm_router
+                if not json_mode:
+                    if VERBOSE_TELEMETRY:
+                        _stream_print(intercept.format_route_log(result), tone="info")
+                    _stream_print(f"[{result.route.knight_id.upper()}] thinking...", tone="accent")
                 
-            output = asyncio.run(_run_task(raw))
-            _emit(output, json_mode=json_mode, title=f"Camelot-OS | {result.route.knight_id}")
+                # Default fallback model mapping
+                target_provider = current_provider or "cliproxy"
+                target_llm = current_llm or result.model
+                
+                res = llm_router.chat(
+                    messages=conversation_history,
+                    provider=target_provider,
+                    model=target_llm,
+                )
+                
+                if res.get("error"):
+                    _stream_print(f"error: {res['error']}", tone="err")
+                    conversation_history.pop()  # drop user turn on error
+                else:
+                    content = res.get("content", "")
+                    conversation_history.append({"role": "assistant", "content": content})
+                    if json_mode:
+                        _print_json(res)
+                    else:
+                        _stream_print(content, tone="normal")
+            except Exception as e:
+                _stream_print(f"error: failed to execute chat completion: {e}", tone="err")
+                conversation_history.pop()
         except Exception as exc:
             if json_mode:
                 _print_json({"success": False, "error": str(exc)})
@@ -1487,6 +1577,7 @@ def _build_parser() -> argparse.ArgumentParser:
     chat_parser.add_argument("--json", action="store_true", help="Emit JSON output")
     chat_parser.add_argument("--provider", help="Pin provider for session")
     chat_parser.add_argument("--llm", "--model", dest="llm", help="Pin model for session")
+    chat_parser.add_argument("--verbose", "-v", action="store_true", help="Show full telemetry routing output")
 
     route_parser = sub.add_parser("route", help="Show routing decision for an intent")
     route_parser.add_argument("intent", nargs="+")
@@ -1900,7 +1991,10 @@ def main() -> int:
     argv = sys.argv[1:]
     for index, part in enumerate(argv):
         if not part.startswith("-"):
-            if part.lower() == "glyth":
+            lowered = part.lower()
+            if lowered in known_commands:
+                argv[index] = lowered
+            elif lowered == "glyth":
                 argv[index] = "glyph"
             break
 
@@ -1977,7 +2071,12 @@ def main() -> int:
                 results.setdefault("cloudbrain_sync", event)
 
     if args.command == "chat":
-        return _interactive_shell(json_mode=args.json, provider=args.provider, llm=args.llm)
+        return _interactive_shell(
+            json_mode=args.json,
+            provider=args.provider,
+            llm=args.llm,
+            verbose=args.verbose,
+        )
 
     if args.command == "route":
         intercept = CLIIntercept()
@@ -2062,10 +2161,15 @@ def main() -> int:
         return 0
 
     if args.command == "glyph":
+        try:
+            from .glyph_registry import list_glyphs, load_stack, expand_atom, audit_atom, execute_atom  # noqa: I001
+        except ImportError:
+            list_glyphs = load_stack = expand_atom = audit_atom = execute_atom = None
+            _stream_print("glyph_registry module unavailable", tone="err")
         if args.glyph_command == "list":
-            output = list_glyphs()
+            output = list_glyphs() if list_glyphs else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
         elif args.glyph_command in {"load", "activate"}:
-            output = load_stack(args.stack)
+            output = load_stack(args.stack) if load_stack is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
             if output.get("status") == "LOADED":
                 output["ledger"] = append_provenance_entry(
                     title=f"Glyph stack activated: {args.stack}",
@@ -2082,9 +2186,9 @@ def main() -> int:
                     tag="[Omega_GLYPH]",
                 )
         elif args.glyph_command == "expand":
-            output = expand_atom(args.atom_id)
+            output = expand_atom(args.atom_id) if expand_atom is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
         elif args.glyph_command == "audit":
-            output = audit_atom(args.atom_id)
+            output = audit_atom(args.atom_id) if audit_atom is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
             if output.get("status") == "AUDITED":
                 target = args.atom_id or "all"
                 output["ledger"] = append_provenance_entry(
@@ -2095,7 +2199,7 @@ def main() -> int:
                     tag="[Omega_GLYPH_AUDIT]",
                 )
         else:
-            output = execute_atom(args.atom_id, approved=args.approve)
+            output = execute_atom(args.atom_id, approved=args.approve) if execute_atom is not None else {"status": "UNAVAILABLE", "error": "glyph_registry module not found"}
             if output.get("status") in {"STAGED", "GUARD_REQUIRED"}:
                 output["ledger"] = append_provenance_entry(
                     title=f"Glyph execute staged: {args.atom_id}",
@@ -2128,8 +2232,13 @@ def main() -> int:
         return 0 if output.get("status") not in {"NOT_FOUND", "MISSING_ARTIFACT"} else 1
 
     if args.command == "forge-unify":
+        try:
+            from .forge_unify import activate_forge_unify, forge_unify_status, select_topology, sentinel_forensic_check
+        except ImportError:
+            activate_forge_unify = forge_unify_status = select_topology = sentinel_forensic_check = None
+            _stream_print("forge_unify module unavailable", tone="err")
         if args.forge_unify_command == "activate":
-            output = activate_forge_unify()
+            output = activate_forge_unify() if activate_forge_unify else {"status": "UNAVAILABLE", "error": "forge_unify module not found"}
             output["ledger"] = append_provenance_entry(
                 title="Forge Unify v400.2 activated",
                 actor="SIR_CODEX (Lead Engineer) with Sir Alex and Sir Link",
@@ -2150,11 +2259,11 @@ def main() -> int:
                 tag="[Omega_FORGE_UNIFY]",
             )
         elif args.forge_unify_command == "status":
-            output = forge_unify_status()
+            output = forge_unify_status() if forge_unify_status is not None else {"status": "UNAVAILABLE", "error": "forge_unify module not found"} if forge_unify_status is not None else {"status": "UNAVAILABLE"}
         elif args.forge_unify_command == "route":
-            output = select_topology(" ".join(args.intent))
+            output = select_topology(" ".join(args.intent)) if select_topology is not None else {"status": "UNAVAILABLE", "error": "forge_unify module not found"} if select_topology is not None else {"status": "UNAVAILABLE"}
         else:
-            output = sentinel_forensic_check(refresh_baseline=args.refresh_baseline)
+            output = sentinel_forensic_check(refresh_baseline=args.refresh_baseline) if sentinel_forensic_check is not None else {"status": "UNAVAILABLE", "error": "forge_unify module not found"} if sentinel_forensic_check is not None else {"status": "UNAVAILABLE"}
             if output.get("status") in {"TRIGGERED", "BASELINE_CREATED"}:
                 output["ledger"] = append_provenance_entry(
                     title=f"Sentinel forensic check: {output.get('status')}",

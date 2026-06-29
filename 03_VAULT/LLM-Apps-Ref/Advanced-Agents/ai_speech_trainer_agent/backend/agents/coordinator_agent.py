@@ -1,7 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from agno.team.team import Team
-from agno.agent import Agent, RunResponse
 from agno.models.together import Together
 from agents.facial_expression_agent import facial_expression_agent
 from agents.voice_analysis_agent import voice_analysis_agent

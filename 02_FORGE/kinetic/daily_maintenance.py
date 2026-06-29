@@ -5,7 +5,6 @@
 Frequency: DAILY (Recommendation: Startup)
 """
 import os
-import sys
 
 LOG_DIR = r"C:\Users\vizio\CAMELOT_OS\03_VAULT\99_SCRATCHPAD"
 LEDGER = r"C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md"

@@ -2,9 +2,9 @@
 Bifrost — Universal Dispatch Core for CAMELOT-OS Hive IDE.
 
 Routes prompts to any registered terminal via the appropriate backend:
-  - CLIProxyAPI (:8080) — Claude, Gemini, Codex, Kimi, Qwen via OpenAI-compat
-  - Ollama (:11434)     — local_qwen, open_coder (air-gapped)
-  - Subprocess          — Hermes, Goose (kinetic stdio agents)
+  - CLIProxyAPI (:8080) — Claude, Gemini, Codex, Kimi via OpenAI-compat
+  - Sovereign (SIE)     — local_qwen, open_coder, local_audit (in-process, air-gapped)
+  - CloudBrain          — integration_brain (NotebookLM synthesis)
   - HTTP                — custom port services (sir_octavian :8400, sir_sonus :8300)
 
 The Switchboard probes health; Bifrost dispatches real payloads.
@@ -85,6 +85,21 @@ _TERMINAL_MODEL: dict[str, str] = {
     "sir_gravity":  "gemini-2.5-pro",   # Antigravity OAuth via CLIProxy
     "sir_kimi":     "kimi-k2.5",         # Moonshot Kimi K2.5 via CLIProxy kimi channel
     "sir_hermes":   "claude-sonnet-4-6",
+    # Reconciled against switchboard.TERMINAL_REGISTRY (T3):
+    "sir_openclaw": "openclaw-local",
+    "sir_rustclaw": "rustclaw-local",
+    "sir_liberte":  "gemini-2.5-flash",
+    "sir_zeroclaw": "qwen3:8b",
+    "sir_heimdall": "gemini-2.5-pro",
+    # fallback: sir_octavian  -> http strategy (port 8400, no LLM model)
+    # fallback: sir_sonus     -> http strategy (port 8300, no LLM model)
+}
+
+# Custom-port HTTP services (no OpenAI-compat; raw prompt POST + streamed lines).
+# Resolved ahead of the engine table so these never fall through to cliproxy.
+_HTTP_TERMINALS: dict[str, str] = {
+    "sir_octavian": os.environ.get("SIR_OCTAVIAN_BASE", "http://127.0.0.1:8400"),
+    "sir_sonus":    os.environ.get("SIR_SONUS_BASE", "http://127.0.0.1:8300"),
 }
 
 
@@ -145,12 +160,8 @@ class Bifrost:
             async for chunk in self._stream_sovereign(terminal_id, model, prompt, enriched_system, max_tokens):
                 response_chunks.append(chunk)
                 yield chunk
-        elif strategy == "ollama":
-            async for chunk in self._stream_ollama(base, model, prompt, enriched_system):
-                response_chunks.append(chunk)
-                yield chunk
-        elif strategy == "hermes":
-            async for chunk in self._stream_hermes(prompt, enriched_system, model):
+        elif strategy == "http":
+            async for chunk in self._stream_http(base, prompt, enriched_system, max_tokens):
                 response_chunks.append(chunk)
                 yield chunk
         elif strategy == "cloudbrain":
@@ -293,6 +304,8 @@ class Bifrost:
         if not t:
             raise ValueError(f"Unknown terminal: {terminal_id!r}. "
                              f"Valid: {list(self._reg)}")
+        if terminal_id in _HTTP_TERMINALS:
+            return ("http", _HTTP_TERMINALS[terminal_id], "")
         strategy, base, model = _ENGINE_DISPATCH.get(
             t.engine, ("cliproxy", CLIPROXY_BASE, "claude-sonnet-4-6")
         )
@@ -369,7 +382,7 @@ class Bifrost:
     ) -> AsyncIterator[str]:
         """Dispatch via the Sovereign Inference Engine (in-process, no HTTP)."""
         try:
-            from control_plane.sovereign_inference import SIE, SIEHooks, HITLBlock
+            from control_plane.sovereign_inference import SIE, HITLBlock, SIEHooks  # noqa: F401
         except ImportError as e:
             yield f"[BIFROST] SIE import failed: {e}"
             return
@@ -382,93 +395,47 @@ class Bifrost:
         ):
             yield chunk
 
-    async def _stream_ollama(
+    async def _stream_http(
         self,
         base: str,
-        model: str,
         prompt: str,
         system: str,
+        max_tokens: int,
     ) -> AsyncIterator[str]:
+        """Dispatch to a custom-port HTTP service (sir_octavian :8400, sir_sonus :8300).
+
+        Streams newline-delimited JSON (``{"response"|"text": ..., "done": bool}``) and
+        falls back to plain-text streaming when a line is not JSON.
+        """
         if not _HTTPX:
             yield "[BIFROST] httpx missing — run: uv add httpx"
             return
 
-        payload = {"model": model, "prompt": prompt, "system": system or "", "stream": True}
+        payload = {
+            "prompt": prompt,
+            "system": system or "",
+            "max_tokens": max_tokens,
+            "stream": True,
+        }
 
         try:
             async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=3.0)) as client:
-                async with client.stream("POST", f"{base}/api/generate", json=payload) as resp:
+                async with client.stream("POST", f"{base}/generate", json=payload) as resp:
                     resp.raise_for_status()
                     async for raw in resp.aiter_lines():
                         if not raw:
                             continue
                         try:
                             obj = json.loads(raw)
-                            text = obj.get("response", "")
+                            text = obj.get("response") or obj.get("text") or ""
                             if text:
                                 yield text
                             if obj.get("done"):
                                 break
                         except json.JSONDecodeError:
-                            continue
+                            yield raw  # plain-text streaming service
         except Exception as e:
-            yield f"\n[BIFROST] Ollama/{model}: {type(e).__name__}: {e}"
-
-    async def _stream_hermes(
-        self,
-        prompt: str,
-        system: str,
-        model: str,
-    ) -> AsyncIterator[str]:
-        """Run Hermes agent in single-query (-q) mode via subprocess, stream stdout."""
-        hermes_dir = (
-            CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "hermes-agent"
-        )
-        hermes_python = hermes_dir / ".venv" / "Scripts" / "python.exe"
-        hermes_cli    = hermes_dir / "cli.py"
-
-        if not hermes_python.exists() or not hermes_cli.exists():
-            yield "[HERMES] hermes-agent not found. Check KINETIC_ARMORY/hermes-agent."
-            return
-
-        full_prompt = f"{system}\n\n{prompt}".strip() if system else prompt
-
-        env = os.environ.copy()
-        env["PYTHONIOENCODING"] = "utf-8"
-        env["PYTHONUNBUFFERED"] = "1"
-        # Route Hermes through CLIProxy so it uses existing auth
-        env["OPENAI_BASE_URL"] = CLIPROXY_BASE
-        env["OPENAI_API_KEY"]  = CLIPROXY_KEY
-
-        hermes_shim = hermes_dir / "bifrost_query.py"
-        if not hermes_shim.exists():
-            # Fallback: use cli.py -q (output includes banner noise)
-            hermes_shim = hermes_cli
-
-        cmd = [
-            str(hermes_python), str(hermes_shim),
-            full_prompt, model, CLIPROXY_BASE, CLIPROXY_KEY,
-        ]
-
-        try:
-            proc = await asyncio.create_subprocess_exec(
-                *cmd,
-                stdout=asyncio.subprocess.PIPE,
-                stderr=asyncio.subprocess.DEVNULL,
-                cwd=str(hermes_dir),
-                env=env,
-            )
-            assert proc.stdout is not None
-            try:
-                async for line in proc.stdout:
-                    decoded = line.decode("utf-8", errors="replace")
-                    yield decoded
-            except GeneratorExit:
-                proc.terminate()
-                return
-            await proc.wait()
-        except Exception as e:
-            yield f"\n[HERMES ERROR] {type(e).__name__}: {e}"
+            yield f"\n[BIFROST] HTTP/{base}: {type(e).__name__}: {e}"
 
     async def _query_cloudbrain(self, prompt: str) -> str:
         try:
@@ -504,7 +471,7 @@ async def _main() -> None:
         return
 
     if args.route or args.terminal is None:
-        async for tid, chunk in bifrost.route_and_stream(args.prompt, args.system):
+        async for _tid, chunk in bifrost.route_and_stream(args.prompt, args.system):
             print(chunk, end="", flush=True)
     else:
         print(f"[BIFROST] → {args.terminal}", flush=True)

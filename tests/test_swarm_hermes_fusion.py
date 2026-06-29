@@ -2,7 +2,6 @@
 import sys
 import importlib.util as _ilu
 from pathlib import Path
-import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CAMELOT))
@@ -77,7 +76,6 @@ def test_shadow_node_processes_threat():
 
 
 def test_singleton_swarm_is_same_instance():
-    import importlib
     # Reset singleton for test isolation
     _mod._SINGLETON_SWARM = None
     s1 = get_omega_swarm()

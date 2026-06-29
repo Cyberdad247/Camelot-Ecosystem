@@ -23,12 +23,9 @@ from __future__ import annotations
 import gzip
 import json
 import logging
-import os
-import re
-import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 log = logging.getLogger("COMPRESSION_NEXUS")
 

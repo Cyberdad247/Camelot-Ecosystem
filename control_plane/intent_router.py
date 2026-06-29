@@ -13,9 +13,9 @@ terminals are dark.
 from __future__ import annotations
 
 import re
-from typing import Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Optional
 
-from control_plane.taxonomy import IntentCategory, INTENT_KEYWORDS, INTENT_TERMINAL_MAP
+from control_plane.taxonomy import INTENT_KEYWORDS, INTENT_TERMINAL_MAP, IntentCategory
 
 try:
     from importlib import import_module

@@ -38,14 +38,20 @@ from pathlib import Path
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
+from rich.text import Text
 from textual.app import App, ComposeResult
 from textual.binding import Binding
 from textual.containers import Container, Horizontal, Vertical
 from textual.reactive import reactive
 from textual.widgets import (
-    DataTable, Footer, Header, Input, Label, RichLog, Static,
+    DataTable,
+    Footer,
+    Header,
+    Input,
+    Label,
+    RichLog,
+    Static,
 )
-from rich.text import Text
 
 CAMELOT_HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 

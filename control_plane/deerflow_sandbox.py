@@ -31,7 +31,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
-
 COMPOSE_FILE = Path(__file__).parent.parent / "docker-compose.yml"
 SANDBOX_SERVICE = "deerflow-sandbox"
 OUTPUT_DIR = Path(__file__).parent.parent / "logs" / "deerflow"

@@ -2,7 +2,6 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import modal
 from pydantic import BaseModel
-from typing import List, Dict
 
 # 1. Define the Forge Environment
 app = modal.App("camelot-recursive-refiner")

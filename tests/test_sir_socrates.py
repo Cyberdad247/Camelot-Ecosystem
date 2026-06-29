@@ -2,8 +2,6 @@
 import sys
 import importlib.util as _ilu
 from pathlib import Path
-import tempfile
-import shutil
 import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]

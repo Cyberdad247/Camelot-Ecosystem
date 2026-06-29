@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Debug boot hang — runs all phases with live timestamps."""
-import os, sys, time
+import os
+import sys
+import time
 from pathlib import Path
 
 os.environ["CAMELOT_BRIDGE_PRELOAD_TIMEOUT"] = "0"
@@ -10,12 +12,12 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from control_plane import boot_sequence
-from control_plane.boot_sequence import _C
 
 home = boot_sequence._detect_home()
 os.environ["CAMELOT_OS_HOME"] = str(home)
 
 import importlib.util
+
 hud_path = home / "03_VAULT" / "training" / "configs" / "hud.py"
 spec = importlib.util.spec_from_file_location("hud", hud_path)
 hud_mod = importlib.util.module_from_spec(spec)

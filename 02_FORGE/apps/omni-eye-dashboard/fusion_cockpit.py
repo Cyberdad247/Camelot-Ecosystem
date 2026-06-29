@@ -8,27 +8,22 @@ Copyright (c) 2026 Invisioned Marketing inc. All Rights Reserved.
 
 import sys
 import os
-import asyncio
-import json
 import time
 import random
-from datetime import datetime
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 # Add CAMELOT_OS to path to import control_plane.st_brain
 CAMELOT_ROOT = "C:\\Users\\vizio\\CAMELOT_OS"
 if CAMELOT_ROOT not in sys.path:
     sys.path.append(CAMELOT_ROOT)
 
-from rich.text import Text
 from rich.panel import Panel
 from rich.table import Table
 
 from textual.app import App, ComposeResult
-from textual.widgets import Header, Footer, Static, Log, Input, Label, DataTable, Tree, ProgressBar, TabbedContent, TabPane
-from textual.containers import Container, Horizontal, Vertical, Grid, ScrollableContainer
+from textual.widgets import Header, Footer, Static, Log, Input, Tree
+from textual.containers import Container, Vertical
 from textual.reactive import reactive
-from textual.message import Message
 
 # Import Short-Term Brain (ST-Memory)
 try:

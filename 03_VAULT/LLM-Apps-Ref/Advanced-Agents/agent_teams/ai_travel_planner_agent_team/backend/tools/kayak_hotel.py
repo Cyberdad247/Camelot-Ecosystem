@@ -1,7 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from config.logger import logger_hook
-from typing import Optional
 from agno.tools import tool
 from models.hotel import HotelSearchRequest
 from loguru import logger

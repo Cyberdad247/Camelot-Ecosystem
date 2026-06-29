@@ -8,17 +8,13 @@ verified structurally only.
 from __future__ import annotations
 
 import importlib.util as _ilu
-import json
 import shutil
 import sys
 import tempfile
-import threading
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional
 
-import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]
 KNIGHTS_DIR = CAMELOT / "01_KERNEL/iron_gate/DEFENSE_GRID/knights"

@@ -16,6 +16,7 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 from control_plane import boot_sequence
 from control_plane.boot_sequence import _C
 
+
 def _banner():
     print(f"{_C['m']}{_C['B']}")
     print("+------------------------------------------------------------+")

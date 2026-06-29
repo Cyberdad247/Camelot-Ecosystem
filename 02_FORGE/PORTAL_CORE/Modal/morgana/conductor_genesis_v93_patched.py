@@ -4,11 +4,8 @@ import os
 import sys
 import subprocess
 import shutil
-import json
-import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Optional
 
 # 🛡️ CRITICAL: LOAD ENVIRONMENT VARIABLES FIRST
 try:

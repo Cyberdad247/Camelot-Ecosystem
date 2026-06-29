@@ -11,13 +11,12 @@ Leader Election: Raft-style heartbeat + timeout
 """
 
 import asyncio
-import json
 import hashlib
+import json
 import time
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, Tuple
 from enum import Enum
-from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Set
 
 try:
     from cryptography.hazmat.primitives.asymmetric.ed25519 import (
@@ -331,7 +330,7 @@ class DistributedConsensus:
 
         while time.time() - start < timeout:
             # Check if any entry has been decided
-            for seq, state in self.log.items():
+            for _seq, state in self.log.items():
                 if state.phase == ConsensusPhase.DECIDED:
                     if entry_id is None or state.entry_id == entry_id:
                         return state.decided_value

@@ -30,6 +30,7 @@ def _asset_root() -> Path:
     return Path(__file__).resolve().parent.parent
 
 ASSETS = _asset_root()
+_REPO = Path(__file__).resolve().parent.parent
 
 import httpx
 from rich.console import Console

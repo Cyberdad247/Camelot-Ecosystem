@@ -1,8 +1,9 @@
 """SCAN squire — codebase walker. Emits file metadata for downstream squires."""
 from __future__ import annotations
-import os
+
 import hashlib
-from dataclasses import dataclass, field
+import os
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterator
 

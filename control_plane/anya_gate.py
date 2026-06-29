@@ -176,7 +176,8 @@ def _load_rtk():
     """Try to load the RTK shared library (control_plane/rtk/rtk.dll).
     Returns ctypes CDLL or None if unavailable (Rust Phase 7 not yet built).
     """
-    import ctypes, logging
+    import ctypes
+    import logging
     for candidate in (
         Path(__file__).parent / "rtk" / "rtk.dll",
         Path(__file__).parent / "rtk.dll",

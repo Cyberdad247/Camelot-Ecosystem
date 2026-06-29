@@ -6,7 +6,6 @@ Run after `notebooklm login`:
 """
 import asyncio
 import sys
-import io
 from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):

@@ -1,5 +1,4 @@
 import importlib.util
-import pytest
 from pathlib import Path
 
 _spec = importlib.util.spec_from_file_location(

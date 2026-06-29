@@ -6,11 +6,8 @@ Tests the tripartite data flow from Redis (L1) -> NotebookLM (L2).
 """
 
 import unittest
-import json
-import os
 import sys
 from pathlib import Path
-from datetime import datetime, timezone
 
 # Ensure the root is in sys.path
 root = Path("C:/Users/vizio/CAMELOT_OS")

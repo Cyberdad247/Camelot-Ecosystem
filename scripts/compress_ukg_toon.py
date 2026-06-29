@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import json
-import os
 from pathlib import Path
 
 UKG_DIR = Path("C:/Users/vizio/CAMELOT_OS/03_VAULT/UKG/nodes")

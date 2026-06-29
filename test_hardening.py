@@ -8,10 +8,8 @@ Status: COMPREHENSIVE (80+ tests across 5 domains)
 
 import asyncio
 import time
-import json
 import sys
-from dataclasses import dataclass
-from typing import List, Dict, Tuple, Optional
+from typing import Dict
 
 
 # ── Security Tests ────────────────────────────────────────────────────────
@@ -56,7 +54,6 @@ class SecurityAuditor:
     async def test_input_validation(self):
         """Verify input validation on all entry points"""
         from control_plane.agent_gateway import AgentGateway
-        from control_plane.soul_router import SoulRouter
 
         # Test with malicious inputs
         test_payloads = [
@@ -427,7 +424,6 @@ class ResilienceTester:
         dt = DistanceTravel()
 
         # Simulate high latency
-        import time
         original_timeout = dt.timeout
         dt.timeout = 0.1  # 100ms timeout
 

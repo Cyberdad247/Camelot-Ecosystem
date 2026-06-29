@@ -33,6 +33,83 @@ interface SwitchboardTerminal {
 
 type LoadState = 'idle' | 'loading' | 'ok' | 'error';
 
+const getKnightDtcgYaml = (id: string, name?: string) => {
+  const cleanId = (id || name || '').toLowerCase();
+  
+  if (cleanId.includes('merlin')) {
+    return `merlin_omega:
+  role: "ORCHESTRATOR"
+  capability: "GoT/ToT Deep Reasoning"
+  model: "gemini-3-pro-preview"
+  model_tier: "high"
+  ocean_profile: "conscientious_open"`;
+  }
+  if (cleanId.includes('boris')) {
+    return `sir_boris:
+  role: "EXECUTOR / ARCHITECT"
+  capability: "Crucible Conductor"
+  model: "gemini-3-pro-preview"
+  model_tier: "high"
+  ocean_profile: "architect_critic"`;
+  }
+  if (cleanId.includes('alex')) {
+    return `sir_alex:
+  role: "PLANNER"
+  capability: "Task DAG Planner"
+  model: "gemini-3-pro-preview"
+  model_tier: "medium"
+  ocean_profile: "organized_planner"`;
+  }
+  if (cleanId.includes('sentinel')) {
+    return `sir_sentinel:
+  role: "SECURITY"
+  capability: "AgentArmor HITL Gate"
+  model: "gemini-3-pro-preview"
+  model_tier: "medium"
+  ocean_profile: "zero_trust_guardian"`;
+  }
+  if (cleanId.includes('apis') || cleanId.includes('alexandria')) {
+    return `lady_apis:
+  role: "RESEARCH"
+  capability: "BASHR Forager"
+  model: "gemini-3.1-pro-preview"
+  model_tier: "high"
+  ocean_profile: "curious_researcher"`;
+  }
+  if (cleanId.includes('mnemosyne') || cleanId.includes('lady_m') || cleanId.includes('lady m')) {
+    return `lady_mnemosyne:
+  role: "ARCHIVIST"
+  capability: "Memory Crystallizer"
+  model: "gemini-3.1-pro-preview"
+  model_tier: "high"
+  ocean_profile: "system_memory_guardian"`;
+  }
+  if (cleanId.includes('forge')) {
+    return `sir_forge:
+  role: "EXECUTION"
+  capability: "Kinetic Code Gen"
+  model: "qwen2.5-coder:3b (local)"
+  model_tier: "low"
+  ocean_profile: "bare_metal_builder"`;
+  }
+  if (cleanId.includes('ghost')) {
+    return `sir_ghost:
+  role: "PRIVACY"
+  capability: "Air-gapped Secrets Scan"
+  model: "qwen3:8b (local)"
+  model_tier: "low"
+  ocean_profile: "silent_sentinel"`;
+  }
+  
+  // Generic fallback
+  return `${cleanId.replace(/[^a-z0-9]/g, '_')}:
+  role: "NANO_KNIGHT"
+  capability: "Swarm Node"
+  model: "local_llm"
+  model_tier: "low"
+  ocean_profile: "worker"`;
+};
+
 function statusDot(s?: string) {
   const l = (s ?? '').toLowerCase();
   if (l === 'live' || l === 'active' || l === 'assumed_live') return 'bg-emerald-400 animate-pulse';
@@ -177,12 +254,12 @@ export default function SwarmMonitor() {
           {terminals.map((t) => (
             <div
               key={t.id}
-              className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/50 px-4 py-3 hover:border-slate-600 transition-colors"
+              className="relative group flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/50 px-4 py-3 hover:border-[#00FFC2]/50 hover:bg-[#0D0E12] transition-all duration-200"
             >
               <span className={cn('h-2 w-2 shrink-0 rounded-full', statusDot(t.status))} />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold truncate">{t.name ?? t.id}</p>
-                <p className="text-[10px] text-slate-500 font-mono truncate">
+                <p className="text-sm font-semibold truncate text-white group-hover:text-[#00FFC2] transition-colors">{t.name ?? t.id}</p>
+                <p className="text-[10px] text-[#8E95A5] font-mono truncate">
                   {t.role ?? 'knight'}{t.engine ? ` · ${t.engine}` : ''}
                 </p>
               </div>
@@ -198,6 +275,20 @@ export default function SwarmMonitor() {
                 )}>
                   {t.status ?? 'unknown'}
                 </span>
+              </div>
+
+              {/* DTCG Agentic Schema Tooltip */}
+              <div className="absolute bottom-full left-0 mb-2.5 hidden group-hover:flex flex-col w-80 bg-[#08080A] border border-[#1A1D26] rounded-lg shadow-2xl p-3 z-50 pointer-events-none font-mono text-[10px] text-[#8E95A5] border-l-2 border-l-[#00FFC2]">
+                <div className="flex items-center justify-between border-b border-[#1A1D26] pb-1.5 mb-2">
+                  <span className="text-white font-bold text-xs">{t.name ?? t.id}</span>
+                  <span className="text-[#00FFC2] font-semibold tracking-wider text-[8px] uppercase">DTCG YAML SPEC</span>
+                </div>
+                <pre className="bg-[#0D0E12] p-2 rounded border border-[#1A1D26] text-emerald-400 overflow-x-auto leading-relaxed text-[9px]">
+                  {getKnightDtcgYaml(t.id, t.name)}
+                </pre>
+                <div className="mt-2 text-[8px] text-slate-500 italic">
+                  Visual Engineering / Singularity Lattice Genome v1000
+                </div>
               </div>
             </div>
           ))}
