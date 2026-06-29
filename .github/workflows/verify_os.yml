@@ -339,3 +339,48 @@ jobs:
           chmod +x core/excalibur_audit.sh core/excalibur_adjudicate.sh
           make preflight
         continue-on-error: true
+
+  # ── Stage 10: Bifrost Dispatch Audit Verification ──────────────────
+  # Server-side mirror of the local pre-commit hook
+  # `bifrost-audit-verify` declared in `.pre-commit-config.yaml`.
+  # Re-runs the verify_cmd strings from bifrost_triage_swarm.TASK_PLAN
+  # so the 2026-06-24 audit findings (T1-T5) cannot silently re-open.
+  # Sync assumption: future changes to either the pre-commit regex
+  # below OR this dorny filter MUST update the other in lock-step
+  # within the same PR; break this only by rewriting both filters together.
+  bifrost-audit:
+    name: Bifrost Dispatch Audit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Detect changes to bifrost dispatch paths
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            bifrost-audit:
+              # Strict 1:1 mirror of .pre-commit-config.yaml hook
+              # `bifrost-audit-verify` `files:` regex.
+              - 'control_plane/bifrost.py'
+              - 'control_plane/bifrost_integration.py'
+              - 'control_plane/bifrost_triage_swarm.py'
+              - 'docs/reports/bifrost_triage_*/verification.md'
+              - 'scripts/check_bifrost_audit.py'
+
+      - name: Run bifrost audit check
+        if: steps.filter.outputs.bifrost-audit == 'true'
+        run: python scripts/check_bifrost_audit.py
+
+      - name: Skipped (no bifrost dispatch paths changed)
+        if: steps.filter.outputs.bifrost-audit != 'true'
+        run: |
+          echo "::notice::No bifrost dispatch paths changed in this PR."
+          echo "Skipping audit verification gate (matches local pre-commit hook)."
+          echo "Filter source of truth: .pre-commit-config.yaml hook 'bifrost-audit-verify'."
