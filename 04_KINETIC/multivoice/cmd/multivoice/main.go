@@ -18,6 +18,7 @@ import (
 	"os/signal"
 	"strconv"
 	"syscall"
+	"time"
 
 	"camelot-os/orchestration"
 	"camelot-os/providers"
@@ -32,18 +33,35 @@ func env(key, def string) string {
 	return def
 }
 
-// buildPolyglot wires live providers where credentials exist, falling back to
-// the offline stubs otherwise. SIR_CODEX awakens on OpenAI when
-// CAMELOT_OPENAI_KEY is set (Sentinel Shield — secrets from env only).
+// buildPolyglot synchronizes the Knight Pantheon with ZERO-COST LLM engines via
+// the Bifrost / CLIProxy gateway (free models over CLI OAuth — no paid keys, no
+// per-token billing). Each Knight binds to a free model; if the gateway is down
+// the Knight degrades gracefully to the local TinyLM stub (Kinetic Resilience).
+//
+//	SIR_CODEX  -> openai slot -> gpt-4o            (CAMELOT_MODEL_CODEX)
+//	SIR_HELIOS -> gemini slot -> gemini-2.5-flash  (CAMELOT_MODEL_HELIOS)
+//	SIR_BORIS  -> claude slot -> claude-sonnet-4-6 (CAMELOT_MODEL_BORIS)
 func buildPolyglot() *orchestration.APEEv6Router {
-	provs := map[string]orchestration.Provider{}
-	if oa, err := providers.NewOpenAIProvider(); err == nil {
-		provs["openai"] = oa
-		log.Printf("[CYBERTRONIA] SIR_CODEX awakened — live OpenAI provider (%s).", oa.Model)
+	live := providers.GatewayReachable(800 * time.Millisecond)
+	if live {
+		log.Printf("[CYBERTRONIA] Bifrost/CLIProxy gateway online (%s) — zero-cost routing.", providers.GatewayBase())
 	} else {
-		log.Printf("[CYBERTRONIA] SIR_CODEX dormant — %v (using stub).", err)
+		log.Printf("[CYBERTRONIA] gateway offline — Knights degrade to local TinyLM stubs.")
 	}
-	// gemini/claude not yet wired -> router falls back to deterministic stubs.
+
+	bind := func(label, modelEnv, modelDefault, knight string) orchestration.Provider {
+		if live {
+			return providers.NewGatewayProvider(label, env(modelEnv, modelDefault))
+		}
+		return providers.NewLocalStubProvider(knight)
+	}
+
+	provs := map[string]orchestration.Provider{
+		"openai": bind("Bifrost:codex", "CAMELOT_MODEL_CODEX", "gpt-4o", "SIR_CODEX"),
+		"gemini": bind("Bifrost:helios", "CAMELOT_MODEL_HELIOS", "gemini-2.5-flash", "SIR_HELIOS"),
+		"claude": bind("Bifrost:boris", "CAMELOT_MODEL_BORIS", "claude-sonnet-4-6", "SIR_BORIS"),
+	}
+	log.Printf("[CYBERTRONIA] Polyglot Matrix synchronized: SIR_CODEX, SIR_HELIOS, SIR_BORIS.")
 	return orchestration.NewAPEEv6RouterWith(provs)
 }
 

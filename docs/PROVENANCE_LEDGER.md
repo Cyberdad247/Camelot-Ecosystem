@@ -1673,3 +1673,18 @@
   - `go build ./... && go vet ./...` — exit 0; gofmt clean (new files)
   - `go test ./...` — orchestration + providers PASS (httptest round-trip, auth header, model, HTTP-error path, key-required guard, structural interface proof)
 - **Tag**: CYBERTRONIA_SIR_CODEX_OPENAI_AWAKENED
+
+---
+## [2026-06-29] Polyglot Matrix — Zero-Cost Knight Sync via Bifrost/CLIProxy
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Synchronized the 3 Polyglot Knights to ZERO-COST LLM engines via the Bifrost/CLIProxy gateway (OpenAI-compatible local endpoint, free models over CLI OAuth — no paid keys, no per-token billing). SIR_CODEX→gpt-4o, SIR_HELIOS→gemini-2.5-flash, SIR_BORIS→claude-sonnet-4-6, all routed through CLIPROXY_BASE. Graceful degradation to local TinyLM stub when the gateway is offline (Kinetic Resilience). Honors "utilize bifrost bridge + omnirouter zero-cost options" — chose the free CLIProxy path over the persona's proposed paid OpenAI/Gemini/Anthropic API clients.
+- **Scope**:
+  - 04_KINETIC/multivoice/providers/gateway.go: NewGatewayProvider (CLIProxy zero-cost) + NewLocalStubProvider + GatewayReachable probe
+  - 04_KINETIC/multivoice/providers/openai.go: + Label field (per-Knight engine name)
+  - 04_KINETIC/multivoice/cmd/multivoice/main.go: buildPolyglot() binds all 3 Knights to the gateway, stub fallback
+  - 04_KINETIC/multivoice/providers/gateway_test.go: mock CLIProxy round-trip + degradation
+  - 04_KINETIC/multivoice/README.md: zero-cost routing section
+- **Verification performed**:
+  - `go build ./... && go vet ./...` — exit 0; gofmt clean
+  - `go test ./...` — orchestration + providers PASS (mock CLIProxy round-trip, loopback auth, /models probe, unreachable→stub degradation, structural interface proofs)
+- **Tag**: CYBERTRONIA_POLYGLOT_ZEROCOST_SYNC

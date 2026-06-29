@@ -34,6 +34,9 @@ type OpenAIProvider struct {
 	Model   string
 	BaseURL string
 	Client  *http.Client
+	// Label overrides the engine name reported by Name() (e.g. "Bifrost:gpt-4o");
+	// empty defaults to "OpenAI".
+	Label string
 }
 
 // NewOpenAIProvider builds the provider, pulling the key from CAMELOT_OPENAI_KEY.
@@ -61,7 +64,12 @@ func NewOpenAIProvider() (*OpenAIProvider, error) {
 }
 
 // Name identifies the engine (satisfies orchestration.Provider).
-func (p *OpenAIProvider) Name() string { return "OpenAI" }
+func (p *OpenAIProvider) Name() string {
+	if p.Label != "" {
+		return p.Label
+	}
+	return "OpenAI"
+}
 
 type chatMessage struct {
 	Role    string `json:"role"`
