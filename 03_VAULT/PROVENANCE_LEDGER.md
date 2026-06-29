@@ -1658,3 +1658,18 @@
   - `python -c yaml.safe_load_all(k8s manifest)` — 5 objects valid
   - tags/grants policy + .env.example: no real secrets committed (.env gitignored)
 - **Tag**: V9000_14_CYBERTRONIA_MERGED_PLUS_APERTURE
+
+---
+## [2026-06-29] Merge #53/#54 + Awaken SIR_CODEX (live OpenAI Provider)
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Merged the infomercial README (#53) and the Cybertronia Multivoice-Router Go module (#54) to main. Wired the first live Polyglot Matrix Provider — SIR_CODEX → OpenAI (gpt-4o) — into the multivoice module, adapted to the real `Provider` interface and tested against an httptest mock (no live key/network needed). Secrets via CAMELOT_OPENAI_KEY env only (Sentinel Shield).
+- **Scope**:
+  - main ← #53: README.md infomercial rewrite (5-layer architecture overview)
+  - main ← #54: 04_KINETIC/multivoice/ Go module (vault/zeroclaw/orchestration/cmd)
+  - 04_KINETIC/multivoice/providers/openai.go: live OpenAIProvider (lean net/http)
+  - cmd/multivoice/main.go: buildPolyglot() wires live provider when key present, stub fallback
+- **Verification performed**:
+  - `gh pr merge 53 54` — MERGED
+  - `go build ./... && go vet ./...` — exit 0; gofmt clean (new files)
+  - `go test ./...` — orchestration + providers PASS (httptest round-trip, auth header, model, HTTP-error path, key-required guard, structural interface proof)
+- **Tag**: CYBERTRONIA_SIR_CODEX_OPENAI_AWAKENED
