@@ -158,6 +158,13 @@ def _board_html() -> str:
   </section>
 
   <section class="mt-6">
+    <h2 class="text-sm" style="color:{LUXORA_GOLD}">LLM ACCESS & SPEND (Aperture)</h2>
+    <div hx-get="/bifrost/aperture" hx-trigger="load, every 10s" hx-swap="innerHTML">
+      <div id="aperture">connecting…</div>
+    </div>
+  </section>
+
+  <section class="mt-6">
     <h2 class="text-sm" style="color:{LUXORA_GOLD}">FOUNDRY COUNCIL</h2>
     <div>{cards}</div>
   </section>
@@ -190,6 +197,12 @@ def create_app():
     @app.get("/bifrost/metrics", response_class=HTMLResponse)
     def metrics() -> str:
         return _metrics_fragment(_metrics_snapshot())
+
+    @app.get("/bifrost/aperture", response_class=HTMLResponse)
+    def aperture() -> str:
+        """LLM access + spend panel from Aperture (graceful if not connected)."""
+        from .aperture_bridge import ApertureBridge, render_panel
+        return render_panel(ApertureBridge().fetch_usage(), gold=LUXORA_GOLD)
 
     @app.get("/bifrost/metrics/stream")
     async def metrics_stream(frames: int = 0):
@@ -271,6 +284,13 @@ def _selftest() -> int:
     check("board has hx-swap", "hx-swap" in html)
     check("board uses Luxora Gold #D4AF37", LUXORA_GOLD in html)
     check("board wires SSE", "sse-connect=\"/bifrost/metrics/stream\"" in html)
+    check("board wires Aperture panel", "hx-get=\"/bifrost/aperture\"" in html)
+
+    # Aperture panel renders (disconnected here — no `ai` device — but must 200)
+    ra = client.get("/bifrost/aperture")
+    check("aperture panel 200", ra.status_code == 200)
+    check("aperture panel has gateway label", "LLM GATEWAY" in ra.text)
+    check("aperture panel links dashboard", "open dashboard" in ra.text)
 
     # metrics fragment
     rm = client.get("/bifrost/metrics")
