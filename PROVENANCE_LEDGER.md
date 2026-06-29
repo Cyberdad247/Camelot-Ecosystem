@@ -1642,3 +1642,19 @@
   - `pytest tests/test_soul_oversight.py tests/test_z3_verification.py` — 9 passed
   - `gh pr create` → #49; `gh pr close 48` (superseded)
 - **Tag**: V9000_14_CYBERTRONIA_PR49_SPLIT
+
+---
+## [2026-06-28] v9000.14 Merged to main (#49) + Go-Live Docs (#50) + Aperture Panel (#51)
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Merged the v9000.14-CYBERTRONIA upgrade and its production follow-ups into `main`. PR #49 (Phases 1–5) merged; #48 closed as superseded. PR #50 added the go-live checklist + Tailscale production mesh wiring (tags/grants policy, k8s sidecar). PR #51 added an Aperture LLM access+spend panel to the Bifrost board. CI "UNSTABLE" reflects pre-existing repo lint/governance debt (01_KERNEL/EXCALIBUR copyright/ruff), not these PRs.
+- **Scope**:
+  - main ← #49 (merge 19ac4c8): full v9000.14 implementation (16 commits)
+  - main ← #50: blueprints/v9000.14/GO_LIVE.md; 01_KERNEL/mesh/node_c/{.env.example,tailnet-policy.example.hujson,k8s/empire-drone-sidecar.example.yaml}
+  - main ← #51: control_plane/aperture_bridge.py; control_plane/bifrost_server.py (+/bifrost/aperture panel); blueprints/v9000.14/APERTURE.md; tests/test_phase3_brain.py (+3)
+- **Verification performed**:
+  - `gh pr merge 49 50 51 --merge` — all MERGED
+  - `python -m control_plane.aperture_bridge --test` — 9/9 PASS (incl. live mock fetch)
+  - `pytest tests/test_phase3_brain.py` — 13 passed
+  - `python -c yaml.safe_load_all(k8s manifest)` — 5 objects valid
+  - tags/grants policy + .env.example: no real secrets committed (.env gitignored)
+- **Tag**: V9000_14_CYBERTRONIA_MERGED_PLUS_APERTURE
