@@ -8,8 +8,11 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 	"os"
 	"os/exec"
+	"strings"
 	"sync"
 	"time"
 )
@@ -187,6 +190,24 @@ func runServer(addr string) error {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.Write(harnessHTML)
 	})
+
+	// /cognitive/* — reverse-proxy to the local Cognitive Service (:8090) so the
+	// Graphify/MemCastle/sync stack is reachable through the same public endpoint
+	// as go_router (e.g. via Tailscale Funnel). CORS is applied by withCORS below.
+	cogTarget := os.Getenv("CAMELOT_COGNITIVE_URL")
+	if cogTarget == "" {
+		cogTarget = "http://127.0.0.1:8092"
+	}
+	if cogURL, err := url.Parse(cogTarget); err == nil {
+		proxy := httputil.NewSingleHostReverseProxy(cogURL)
+		mux.HandleFunc("/cognitive/", func(w http.ResponseWriter, r *http.Request) {
+			r.URL.Path = strings.TrimPrefix(r.URL.Path, "/cognitive")
+			if r.URL.Path == "" {
+				r.URL.Path = "/"
+			}
+			proxy.ServeHTTP(w, r)
+		})
+	}
 
 	// GET /healthz — node identity + liveness for the cluster.
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {

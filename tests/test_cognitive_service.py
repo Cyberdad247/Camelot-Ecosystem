@@ -74,3 +74,35 @@ def test_cors_preflight(server):
     req = urllib.request.Request(f"{base}/ingest", method="OPTIONS")
     resp = urllib.request.urlopen(req, timeout=5)
     assert resp.headers.get("Access-Control-Allow-Origin") == "*"
+
+
+def test_html_to_text(server):
+    _, svc = server
+    txt = svc.html_to_text("<html><body><p>Hi <b>there</b></p><script>x=1</script></body></html>")
+    assert txt == "Hi there"
+
+
+def test_forage_function_ingests(server):
+    _, svc = server
+    fake = lambda url: "<p>go_router uses the rust rtk engine</p>"
+    r = svc.forage(svc.GF, "http://example.test/page", fetcher=fake)
+    assert r["status"] == "ok" and r["triplets"] >= 1
+    hits = svc.GF.mc.search("rust engine", k=2)
+    assert any("rtk" in h["text"].lower() or "rust" in h["text"].lower() for h in hits)
+    assert hits[0]["source"] == "http://example.test/page"
+
+
+def test_forage_endpoint(server, monkeypatch):
+    base, svc = server
+    monkeypatch.setattr(svc, "fetch_url", lambda url, timeout=15.0: "<div>memcastle stores vectors</div>")
+    r = _post(f"{base}/forage", {"url": "http://x.test"})
+    assert r["status"] == "ok"
+    assert r["triplets"] >= 1
+
+
+def test_forage_fetch_error(server):
+    _, svc = server
+    def boom(url):
+        raise ConnectionError("dns fail")
+    r = svc.forage(svc.GF, "http://nope.test", fetcher=boom)
+    assert r["status"] == "error" and "dns fail" in r["reason"]

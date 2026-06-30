@@ -14,8 +14,11 @@ New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $env:CAMELOT_NODE = "cybertronia"
 # Path to the compiled Rust RTK engine (Go -> Rust rune dispatch).
 $env:CAMELOT_RTK_BIN = "$root\target\release\rtk_cli.exe"
-# Cognitive service (Graphify/MemCastle/sync over HTTP) port.
-$env:COGNITIVE_PORT = "8090"
+# Cognitive service (Graphify/MemCastle/sync over HTTP) port + scheduled //sync.
+# :8090 is taken by saltare_gateway, so use :8092.
+$env:COGNITIVE_PORT = "8092"
+$env:CAMELOT_COGNITIVE_URL = "http://127.0.0.1:8092"  # go_router /cognitive proxy target
+$env:COGNITIVE_SYNC_INTERVAL = "1800"  # auto //sync every 30 min (edge-first; skips if cloud down)
 
 $daemons = @(
   @{ Name = "go_router";       Exe = "$root\control_plane\go_router\go_router.exe";              Args = @("serve", ":8077") },
