@@ -14,10 +14,13 @@ New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $env:CAMELOT_NODE = "cybertronia"
 # Path to the compiled Rust RTK engine (Go -> Rust rune dispatch).
 $env:CAMELOT_RTK_BIN = "$root\target\release\rtk_cli.exe"
+# Cognitive service (Graphify/MemCastle/sync over HTTP) port.
+$env:COGNITIVE_PORT = "8090"
 
 $daemons = @(
   @{ Name = "go_router";       Exe = "$root\control_plane\go_router\go_router.exe";              Args = @("serve", ":8077") },
-  @{ Name = "bifrost_sidecar"; Exe = "$root\01_KERNEL\senses\bifrost_go_sidecar\bifrost_sidecar.exe"; Args = @() }
+  @{ Name = "bifrost_sidecar"; Exe = "$root\01_KERNEL\senses\bifrost_go_sidecar\bifrost_sidecar.exe"; Args = @() },
+  @{ Name = "cognitive_service"; Exe = "python"; Args = @("$root\control_plane\cognitive_service.py") }
 )
 
 $procs = @{}

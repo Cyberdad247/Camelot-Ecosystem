@@ -66,7 +66,10 @@ class MemCastle:
         self.dim = dim
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.db = sqlite3.connect(str(self.db_path))
+        # check_same_thread=False lets the connection back a single-threaded HTTP
+        # service (cognitive_service) whose handler runs in a different thread than
+        # construction. Requests are serialized, so there is no concurrent access.
+        self.db = sqlite3.connect(str(self.db_path), check_same_thread=False)
         self.db.enable_load_extension(True)
         sqlite_vec.load(self.db)
         self.db.enable_load_extension(False)
