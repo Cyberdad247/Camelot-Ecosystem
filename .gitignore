@@ -148,3 +148,8 @@ docs/reference/EXTERNAL/
 # Ephemeral boot logs (regenerated each boot)
 boot_results.json
 boot_status.json
+
+# Cybertronia server runtime
+01_KERNEL/senses/bifrost_go_sidecar/bifrost_sidecar.exe
+logs/cybertronia/
+control_plane/cybertronia.node.env
