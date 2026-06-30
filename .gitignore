@@ -153,3 +153,6 @@ boot_status.json
 01_KERNEL/senses/bifrost_go_sidecar/bifrost_sidecar.exe
 logs/cybertronia/
 control_plane/cybertronia.node.env
+
+# MemCastle local vector store (runtime data)
+03_VAULT/memory/memcastle.db*
