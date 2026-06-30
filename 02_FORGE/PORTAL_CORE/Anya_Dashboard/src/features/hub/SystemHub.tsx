@@ -9,6 +9,8 @@ import { CARTRIDGES } from '@/features/cartridges/registry';
 import { SERVICES, StatusDot } from '@/components/ui/StatusDot';
 import EventFeed from '@/components/ui/EventFeed';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
+import KnightStreamBanner from '@/features/knights/KnightStreamBanner';
+import KnightAvatarScene from '@/features/knights/KnightAvatarScene';
 
 const STAT_CARDS = [
   { label: 'Active Knights', value: '7', icon: Zap, color: 'text-fuchsia-400' },
@@ -34,6 +36,14 @@ export default function SystemHub() {
             <p className="text-xs text-slate-300 truncate">{latestEvent.event}</p>
           </div>
         )}
+      </div>
+
+      {/* Live knight stream from go_router SSE */}
+      <KnightStreamBanner />
+
+      {/* Live 3D knight avatar, driven by the same SSE stream */}
+      <div className="h-72">
+        <KnightAvatarScene />
       </div>
 
       {/* Stat row */}
