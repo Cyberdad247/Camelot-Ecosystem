@@ -10,6 +10,12 @@ create autonomous workers unless the active harness and user approval allow it.
 - Do not spawn broad scans when a named live command or entrypoint should be checked first.
 - Stop before any HITL, secret, destructive, or credential-sensitive action.
 
+## Project Packets
+
+- Kickbox Audio: use `.camelot/projects/kickbox-audio/` as the active design,
+  task, validation, and agent-routing packet. The local implementation checkout
+  is `audit-kickbox-audio`.
+
 ## Paladin Review Gate
 
 Before treating a change as ready, review it through these four lenses:
