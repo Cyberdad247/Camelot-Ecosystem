@@ -11,6 +11,9 @@ import EventFeed from '@/components/ui/EventFeed';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
 import KnightStreamBanner from '@/features/knights/KnightStreamBanner';
 import KnightAvatarScene from '@/features/knights/KnightAvatarScene';
+import FleetPanel from '@/features/hub/FleetPanel';
+import VisualPlanOverlay from '@/features/knights/VisualPlanOverlay';
+import { useKnightStream } from '@/features/knights/useKnightStream';
 
 const STAT_CARDS = [
   { label: 'Active Knights', value: '7', icon: Zap, color: 'text-fuchsia-400' },
@@ -21,6 +24,7 @@ const STAT_CARDS = [
 
 export default function SystemHub() {
   const { events, isConnected, latestEvent } = useAnyaSocket();
+  const { latestPlan } = useKnightStream();
 
   return (
     <div className="min-h-full p-6 space-y-6">
@@ -45,6 +49,9 @@ export default function SystemHub() {
       <div className="h-72">
         <KnightAvatarScene />
       </div>
+
+      {/* Visual plan overlay — renders `mdx` events from go_router /plan */}
+      <VisualPlanOverlay plan={latestPlan} />
 
       {/* Stat row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
@@ -135,6 +142,9 @@ export default function SystemHub() {
           </div>
         </div>
       </div>
+
+      {/* Live Fleet panel — daemon health + tailnet nodes via /cognitive/fleet */}
+      <FleetPanel />
 
       {/* Quick actions */}
       <div>

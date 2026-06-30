@@ -13,6 +13,18 @@ export interface ActiveKnightEvent {
   ts: string;
 }
 
+/**
+ * Payload of an `mdx` SSE event emitted by go_router's /plan handler — a
+ * markdown "visual plan" to render in the overlay.
+ */
+export interface PlanEvent {
+  title: string;
+  knight: string;
+  content: string;
+  node: string;
+  ts: string;
+}
+
 const DEFAULT_EVENTS_URL = runtimeConfig.goRouter.eventsUrl;
 
 function parseKnight(raw: string): ActiveKnightEvent | null {
@@ -38,6 +50,7 @@ export function useKnightStream(url: string = DEFAULT_EVENTS_URL) {
   const [node, setNode] = useState<string | null>(null);
   const [activeKnight, setActiveKnight] = useState<ActiveKnightEvent | null>(null);
   const [history, setHistory] = useState<ActiveKnightEvent[]>([]);
+  const [latestPlan, setLatestPlan] = useState<PlanEvent | null>(null);
 
   useEffect(() => {
     const source = new EventSource(url);
@@ -62,16 +75,27 @@ export function useKnightStream(url: string = DEFAULT_EVENTS_URL) {
       setHistory((current) => [...current.slice(-39), next]);
     };
 
+    const onPlan = (event: MessageEvent) => {
+      try {
+        const data = JSON.parse(event.data) as PlanEvent;
+        if (data && typeof data.content === 'string') setLatestPlan(data);
+      } catch {
+        /* ignore malformed plan */
+      }
+    };
+
     source.addEventListener('node', onNode as EventListener);
     source.addEventListener('active_knight', onKnight as EventListener);
+    source.addEventListener('mdx', onPlan as EventListener);
 
     return () => {
       source.removeEventListener('node', onNode as EventListener);
       source.removeEventListener('active_knight', onKnight as EventListener);
+      source.removeEventListener('mdx', onPlan as EventListener);
       source.close();
       sourceRef.current = null;
     };
   }, [url]);
 
-  return { isConnected, node, activeKnight, history };
+  return { isConnected, node, activeKnight, history, latestPlan };
 }
