@@ -144,3 +144,7 @@ docs/reference/EXTERNAL/
 03_VAULT/memory/l2_index/
 .qdrant-initialized
 *.exe~
+
+# Ephemeral boot logs (regenerated each boot)
+boot_results.json
+boot_status.json
