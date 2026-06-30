@@ -1,1 +1,0 @@
-{"claims": [{"claim": "absolute z3 proof", "status": "UNPROVEN"}], "production_release_gate": {"status": "READY", "checks": [{"claim": "builds pass", "status": "EVIDENCED"}, {"claim": "runtime services start", "status": "EVIDENCED"}]}}
