@@ -131,3 +131,14 @@ docs/reference/EXTERNAL/
 # Go build binaries (tsnet node_c etc.) — source is tracked, binaries are not
 *.exe
 01_KERNEL/mesh/node_c/node_c
+
+# --- KOR audit hardening: stop tracking regenerable runtime/memory state ---
+03_VAULT/runtime_state/*_latest.json
+03_VAULT/runtime_state/**/*_latest.json
+03_VAULT/runtime_state/system_triage/
+03_VAULT/runtime_state/camelot*.toon*
+03_VAULT/runtime_state/cloudbrain_sync_queue.jsonl
+03_VAULT/firnflow/*.json
+03_VAULT/memory/l2_index/
+.qdrant-initialized
+*.exe~
