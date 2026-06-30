@@ -460,10 +460,14 @@ def boot_telemetry(home: Path):
 
 def boot_bioswarm(home: Path):
     """Phase 7 - SRDL Bio-Swarm (Nano-Knights)."""
-    binary = home / "bin" / "swarm-spawner.exe"
-    if not binary.exists():
-        binary = home / "kinetic_edge" / "swarm_spawner" / "target" / "release" / "swarm_spawner.exe"
-    if not binary.exists():
+    candidates = [
+        home / "bin" / "swarm-spawner.exe",
+        home / "kinetic_edge" / "swarm_spawner" / "target" / "release" / "swarm-spawner.exe",
+        home / "kinetic_edge" / "swarm_spawner" / "target" / "release" / "swarm_spawner.exe",
+        home / "target" / "release" / "swarm-spawner.exe",
+    ]
+    binary = next((candidate for candidate in candidates if candidate.exists()), None)
+    if binary is None:
         return False, "swarm-spawner.exe not found - requires cargo build --release in kinetic_edge/swarm_spawner"
 
     kwargs = _child_spawn_kwargs(cwd=str(home))
@@ -473,7 +477,15 @@ def boot_bioswarm(home: Path):
         time.sleep(0.5)
         if proc.poll() is not None:
             return False, f"exited immediately (code {proc.returncode})"
-        return True, f"PID {proc.pid} - Bio-Swarm Cells Active"
+        try:
+            from .bio_swarm_runtime import read_bio_swarm_status
+
+            evidence = read_bio_swarm_status(home)
+            release = evidence.get("release") if isinstance(evidence.get("release"), dict) else {}
+            verdict = release.get("verdict") or "NO_RELEASE_EVIDENCE"
+        except Exception:
+            verdict = "EVIDENCE_UNAVAILABLE"
+        return True, f"PID {proc.pid} - Bio-Swarm Cells Active - release={verdict}"
     except Exception as exc:
         return False, f"launch failed: {exc}"
 

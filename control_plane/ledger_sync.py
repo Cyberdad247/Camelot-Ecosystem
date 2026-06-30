@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -15,6 +17,24 @@ MIRROR_LEDGER_PATHS = [
     REPO_ROOT / "03_VAULT" / "training" / "configs" / "PROVENANCE_LEDGER.md",
     REPO_ROOT / "docs" / "PROVENANCE_LEDGER.md",
 ]
+
+
+def compute_entry_hash(entry: dict[str, Any]) -> str:
+    """SHA256 over the entry's payload (everything except `entry_hash`).
+
+    Single source of truth for the verification-ledger chain algorithm.
+
+    MUST stay byte-for-byte identical to the inline algorithm previously
+    embedded in:
+      - ``control_plane.system_triage._verification_ledger_integrity``
+        (the rapid triage validator)
+      - ``scripts.repair_verification_ledger_chain.compute_entry_hash``
+        (the deterministic atomic repair tool)
+
+    If you change one, change all callers by re-importing this function.
+    """
+    payload = {key: value for key, value in entry.items() if key != "entry_hash"}
+    return hashlib.sha256(json.dumps(payload, sort_keys=True).encode("utf-8")).hexdigest()
 
 
 def _read_bifrost_token() -> str | None:
