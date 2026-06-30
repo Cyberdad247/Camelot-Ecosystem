@@ -128,6 +128,16 @@ class MemCastle:
     def count(self) -> int:
         return self.db.execute("select count(*) from mc_items").fetchone()[0]
 
+    def recent(self, limit: int = 200) -> list[dict]:
+        """Most-recent items, newest first — used to build the NotebookLM push snapshot."""
+        rows = self.db.execute(
+            "select id, text, source, knight, ts from mc_items order by id desc limit ?",
+            (limit,),
+        ).fetchall()
+        return [
+            {"id": r[0], "text": r[1], "source": r[2], "knight": r[3], "ts": r[4]} for r in rows
+        ]
+
     def close(self) -> None:
         self.db.close()
 
