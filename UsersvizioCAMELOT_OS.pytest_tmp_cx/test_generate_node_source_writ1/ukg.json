@@ -1,1 +1,0 @@
-{"artifact": "OMEGA-GLYPH-V1000-OMNI-CODEX", "artifact_type": "UKG_Nano_Crystal_Proposal", "version": "1000.3.0", "evidence_status": "planned", "physical_nodes": {"Node_B_Bifrost": {"stack": ["Rust", "Tokio", "Serde"], "claimed_core_logic": "4-Byte_Length_Prefixed_IO + Tailscale_TCP_Forwarding", "evidence_class": "planned"}}}

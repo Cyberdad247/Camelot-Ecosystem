@@ -16,6 +16,7 @@ function websocketFromHttp(origin: string) {
 }
 
 const bridgeOrigin = trimTrailingSlash(withDefault(env.VITE_BIFROST_HTTP_URL, 'http://127.0.0.1:8001'));
+const goRouterOrigin = trimTrailingSlash(withDefault(env.VITE_GO_ROUTER_URL, 'http://127.0.0.1:8077'));
 
 export const runtimeConfig = {
   appHomeRoute: withDefault(env.VITE_APP_HOME_ROUTE, '/openviking'),
@@ -31,6 +32,12 @@ export const runtimeConfig = {
     openVikingMapUrl: `${bridgeOrigin}/openviking/map`,
     websocketUrl: withDefault(env.VITE_BIFROST_WS_URL, websocketFromHttp(bridgeOrigin)),
     token: withDefault(env.VITE_BIFROST_TOKEN, ''),
+  },
+  goRouter: {
+    origin: goRouterOrigin,
+    eventsUrl: `${goRouterOrigin}/events`,
+    runeUrl: `${goRouterOrigin}/rune`,
+    healthUrl: `${goRouterOrigin}/healthz`,
   },
   gradioUrl: withDefault(env.VITE_GRADIO_URL, 'http://localhost:7860/'),
   saltare: {

@@ -68,6 +68,7 @@ _ENGINE_DISPATCH: dict[str, tuple[str, str, str]] = {
     "antigravity":       ("cliproxy",    CLIPROXY_BASE, "gemini-2.5-pro"),
     "kimi_cli":          ("cliproxy",    CLIPROXY_BASE, "kimi-k2"),
     "hermes_cli":        ("cliproxy",    CLIPROXY_BASE, "claude-sonnet-4-6"),
+    "next_edge":         ("noop",        "",             ""),          # edge component swarm contract (no LLM)
 }
 
 # Terminal-level model overrides (take precedence over engine defaults)
@@ -91,15 +92,18 @@ _TERMINAL_MODEL: dict[str, str] = {
     "sir_liberte":  "gemini-2.5-flash",
     "sir_zeroclaw": "qwen3:8b",
     "sir_heimdall": "gemini-2.5-pro",
-    # fallback: sir_octavian  -> http strategy (port 8400, no LLM model)
-    # fallback: sir_sonus     -> http strategy (port 8300, no LLM model)
+    "lady_nanobot": "",   # handled by next_edge engine / noop strategy (edge component swarm contract)
+    # fallback: sir_octavian    -> http strategy (port 8400, no LLM model)
+    # fallback: sir_sonus       -> http strategy (port 8300, no LLM model)
+    # fallback: bifrost_gateway -> http strategy (port 3001, no LLM model)
 }
 
 # Custom-port HTTP services (no OpenAI-compat; raw prompt POST + streamed lines).
 # Resolved ahead of the engine table so these never fall through to cliproxy.
 _HTTP_TERMINALS: dict[str, str] = {
-    "sir_octavian": os.environ.get("SIR_OCTAVIAN_BASE", "http://127.0.0.1:8400"),
-    "sir_sonus":    os.environ.get("SIR_SONUS_BASE", "http://127.0.0.1:8300"),
+    "sir_octavian":    os.environ.get("SIR_OCTAVIAN_BASE",    "http://127.0.0.1:8400"),
+    "sir_sonus":       os.environ.get("SIR_SONUS_BASE",       "http://127.0.0.1:8300"),
+    "bifrost_gateway": os.environ.get("BIFROST_GATEWAY_BASE", "http://127.0.0.1:3001"),
 }
 
 

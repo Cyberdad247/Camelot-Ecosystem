@@ -16,6 +16,12 @@ from typing import Any
 
 from colorama import Fore, Style, just_fix_windows_console
 
+from .bio_swarm_runtime import (
+    preflight_bio_swarm,
+    read_bio_swarm_status,
+    run_bio_swarm_once,
+    write_bio_swarm_runtime_status,
+)
 from .cli_intercept import CLIIntercept
 from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
 from .cockpit import cockpit_exec, prompt_payload, refresh_snapshot
@@ -59,6 +65,7 @@ from .nano_swarm_runtime import (
 )
 from .provenance import ProvenanceManager, VerificationRun
 from .system_triage import TriageOptions, run_system_triage
+from .toon_manifest import default_manifest_paths, write_compiled_manifest, write_scarcity_core_artifacts
 
 VERBOSE_TELEMETRY = False
 
@@ -141,6 +148,9 @@ FULL_HELP_LINES = [
     "codex status",
     "codex integrate [--actor <name>]",
     "codex sync",
+    "bio-swarm status",
+    "bio-swarm preflight",
+    "bio-swarm once --fixture",
     "nano-swarm status",
     "nano-swarm supervise <status|start|stop|restart> [--node <name>]",
     "microcubed status",
@@ -821,6 +831,24 @@ def _run_team_self_test(
     prompt: str,
     timeout: int,
 ) -> dict[str, Any]:
+    if worker_id.lower() in {"bio-swarm", "bioswarm", "swarm-spawner"}:
+        preflight = preflight_bio_swarm()
+        if preflight.get("status") != "PREFLIGHT_PASS":
+            return {
+                "status": "FAILED",
+                "target": worker_id,
+                "runtime": "bio-swarm",
+                "preflight": preflight,
+            }
+        release = run_bio_swarm_once(fixture=True, timeout=timeout)
+        return {
+            "status": "PASSED" if release.get("verdict") == "PASS" else "FAILED",
+            "target": worker_id,
+            "runtime": "bio-swarm",
+            "preflight": preflight,
+            "release": release,
+        }
+
     from .main import ControlPlane
 
     cp = ControlPlane()
@@ -1638,6 +1666,17 @@ def _build_parser() -> argparse.ArgumentParser:
     ledger_update.add_argument("--scope", action="append", required=True)
     ledger_update.add_argument("--verification", action="append", required=True)
 
+    toon = sub.add_parser("toon", help="Compile Camelot manifests into TOON payloads")
+    toon_sub = toon.add_subparsers(dest="toon_command", required=True)
+    toon_compile = toon_sub.add_parser("compile", help="Compile JSON/YAML manifests into one redacted TOON artifact")
+    toon_compile.add_argument("paths", nargs="*", help="Manifest paths to compile. Defaults to core Camelot manifests.")
+    toon_compile.add_argument(
+        "--output",
+        default=str(CAMELOT_HOME / "03_VAULT" / "runtime_state" / "camelot_compiled.toon"),
+        help="TOON output path",
+    )
+    toon_sub.add_parser("sample", help="Write the proposed 4GB scarcity-core camelot.toon artifact")
+
     glyph = sub.add_parser("glyph", help="Manage guarded UKG glyph stacks")
     glyph_sub = glyph.add_subparsers(dest="glyph_command", required=True)
     glyph_sub.add_parser("list", help="List registered glyph atoms")
@@ -1873,6 +1912,19 @@ def _build_parser() -> argparse.ArgumentParser:
     nano_supervise.add_argument("supervise_action", choices=("status", "start", "stop", "restart"))
     nano_supervise.add_argument("--node", default=None, help="Limit action to one node")
 
+    bio_swarm = sub.add_parser("bio-swarm", help="Inspect and verify the Bio-Swarm Rust spawner")
+    bio_swarm_sub = bio_swarm.add_subparsers(dest="bio_swarm_action", required=True)
+    bio_status = bio_swarm_sub.add_parser("status", help="Persist and show Bio-Swarm runtime status")
+    bio_status.add_argument("--json", dest="json_output", action="store_true", help="Emit JSON output")
+    bio_preflight = bio_swarm_sub.add_parser("preflight", help="Check Bio-Swarm binary and evidence paths")
+    bio_preflight.add_argument("--json", dest="json_output", action="store_true", help="Emit JSON output")
+    bio_once = bio_swarm_sub.add_parser("once", help="Run one deterministic Bio-Swarm queue pass")
+    bio_once.add_argument("--queue", default=None, help="Queue JSONL path")
+    bio_once.add_argument("--state", default=None, help="Runtime state JSON path")
+    bio_once.add_argument("--fixture", action="store_true", help="Write a deterministic queue fixture before running")
+    bio_once.add_argument("--timeout", type=int, default=30, help="Spawner timeout in seconds")
+    bio_once.add_argument("--json", dest="json_output", action="store_true", help="Emit JSON output")
+
     microcubed = sub.add_parser("microcubed", help="Manage Microcubed SmolVM knight task houses")
     microcubed_sub = microcubed.add_subparsers(dest="microcubed_command", required=True)
     microcubed_sub.add_parser("status", help="Show Microcubed houses and latest contract")
@@ -1975,6 +2027,7 @@ def main() -> int:
         "orchestrator",
         "sarda",
         "ledger",
+        "toon",
         "glyph",
         "glyth",
         "forge-unify",
@@ -1982,6 +2035,7 @@ def main() -> int:
         "evolve",
         "team",
         "codex",
+        "bio-swarm",
         "nano-swarm",
         "microcubed",
         "gemini-ext",
@@ -2159,6 +2213,20 @@ def main() -> int:
         _log_run(output)
         _emit(output, json_mode=args.json, title="Ledger")
         return 0
+
+    if args.command == "toon":
+        if args.toon_command == "sample":
+            output = write_scarcity_core_artifacts(CAMELOT_HOME)
+        else:
+            manifest_paths = [Path(path) for path in args.paths] if args.paths else default_manifest_paths(CAMELOT_HOME)
+            output = write_compiled_manifest(
+                manifest_paths,
+                root=CAMELOT_HOME,
+                output_path=Path(args.output),
+            )
+        _log_run({"payload": output})
+        _emit(output, json_mode=args.json, title="TOON")
+        return 0 if output.get("status") in {"COMPILED", "WROTE"} else 1
 
     if args.command == "glyph":
         try:
@@ -2671,6 +2739,25 @@ excalibur_health_url: "https://replace-me.modal.run"
         }
         _emit(output, json_mode=args.json, title="Shadow Veil Status")
         return 0
+
+    if args.command == "bio-swarm":
+        json_mode = args.json or getattr(args, "json_output", False)
+        if args.bio_swarm_action == "status":
+            output = write_bio_swarm_runtime_status()
+            success = output.get("status") in {"READY", "READY_NO_STATE"}
+        elif args.bio_swarm_action == "preflight":
+            output = preflight_bio_swarm()
+            success = output.get("status") == "PREFLIGHT_PASS"
+        else:
+            output = run_bio_swarm_once(
+                queue_path=args.queue,
+                state_path=args.state,
+                fixture=args.fixture,
+                timeout=args.timeout,
+            )
+            success = output.get("verdict") == "PASS"
+        _emit(output, json_mode=json_mode, title="Bio-Swarm Runtime")
+        return 0 if success else 2
 
     if args.command == "nano-swarm":
         if args.nano_swarm_command == "status":

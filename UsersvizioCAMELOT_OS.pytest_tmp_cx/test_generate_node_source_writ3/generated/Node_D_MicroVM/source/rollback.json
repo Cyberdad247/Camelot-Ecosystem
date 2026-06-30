@@ -1,6 +1,0 @@
-{
-  "node": "Node_D_MicroVM",
-  "rollback_action": "delete_generated_node_dir",
-  "target": "C:\\Users\\vizio\\CAMELOT_OS\\UsersvizioCAMELOT_OS.pytest_tmp_cx\\test_generate_node_source_writ3\\generated\\Node_D_MicroVM\\source",
-  "safe_to_delete": true
-}

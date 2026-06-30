@@ -1,1 +1,0 @@
-{"artifact": "OMEGA-GLYPH-V1000-OMNI-CODEX", "artifact_type": "UKG_Nano_Crystal_Proposal", "version": "1000.3.0", "evidence_status": "planned", "physical_nodes": {"Node_C_Omni_Router": {"stack": ["Go", "tsnet"], "claimed_core_logic": "Embedded_Zero_Trust_VPN + MCP_Multiplexing", "evidence_class": "planned"}}}

@@ -8,6 +8,16 @@ Lightweight Go bridge that proxies a stable transport surface to the Rust Morgan
 - `GET /v1/bifrost/status` -> `GET /bifrost/status`
 - `POST /v1/agent/dispatch` -> `POST /agent/dispatch`
 
+`GET /health` includes a `toon` object when the compiled TOON evidence file is
+available. Proxied upstream requests then include these compact envelope
+headers:
+
+- `x-camelot-toon-spec`
+- `x-camelot-toon-evidence`
+- `x-camelot-toon-sha256`
+- `x-camelot-toon-bytes`
+- `x-camelot-toon-reduction-pct`
+
 ## Auth behavior
 
 - Accepts inbound `Authorization`, `x-camelot-token`, or `x-bifrost-token`.
@@ -24,6 +34,7 @@ Lightweight Go bridge that proxies a stable transport surface to the Rust Morgan
 - `BIFROST_SIDECAR_TIMEOUT_MS` (default `10000`)
 - `CAMELOT_GATEWAY_TOKEN` (optional fallback token for upstream auth)
 - `BIFROST_SIDECAR_ALLOW_ENV_TOKEN_FALLBACK` (default `false`)
+- `BIFROST_TOON_EVIDENCE_PATH` (default `03_VAULT/runtime_state/camelot_compiled.toon.evidence.json`, resolved from the repo root when possible)
 
 ## Run
 
@@ -31,6 +42,15 @@ Lightweight Go bridge that proxies a stable transport surface to the Rust Morgan
 cd C:\Users\vizio\CAMELOT_OS\01_KERNEL\senses\bifrost_go_sidecar
 go test ./...
 go run .
+```
+
+If the default Go build cache is ACL-blocked on Windows, keep the cache inside
+the repo for the current shell:
+
+```powershell
+$env:GOCACHE='C:\Users\vizio\CAMELOT_OS\data\go-build'
+$env:GOTMPDIR='C:\Users\vizio\CAMELOT_OS\data'
+go test ./...
 ```
 
 ## Persist on Windows logon

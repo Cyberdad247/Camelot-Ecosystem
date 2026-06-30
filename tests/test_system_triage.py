@@ -7,6 +7,7 @@ from pathlib import Path
 
 from control_plane import runic_router
 from control_plane import camelot_cli
+from control_plane import system_triage
 from control_plane.system_triage import (
     CheckResult,
     TriageOptions,
@@ -123,6 +124,33 @@ def test_cli_parser_accepts_triage_modes() -> None:
     assert args.deep is True
     assert args.force_deep is True
     assert args.triage_json is True
+
+
+def test_bio_swarm_runtime_check_passes_with_release_evidence(tmp_path: Path, monkeypatch) -> None:
+    def fake_status(_root):
+        return {
+            "status": "READY",
+            "binary_exists": True,
+            "binary_path": str(tmp_path / "bin" / "swarm-spawner.exe"),
+            "binary_sha256": "a" * 64,
+            "state_path": str(tmp_path / "03_VAULT" / "runtime_state" / "bio_swarm_runtime_latest.json"),
+            "release_path": str(tmp_path / "03_VAULT" / "runtime_state" / "bio_swarm_release_latest.json"),
+            "release": {"verdict": "PASS"},
+        }
+
+    import control_plane.bio_swarm_runtime as bio_swarm_runtime
+
+    monkeypatch.setattr(bio_swarm_runtime, "read_bio_swarm_status", fake_status)
+    context = system_triage.TriageContext(
+        root=tmp_path,
+        options=TriageOptions(write_reports=False),
+        initial_tracked_state={},
+    )
+
+    result = system_triage._bio_swarm_runtime(context)
+
+    assert result.status == "PASS"
+    assert result.evidence["release_verdict"] == "PASS"
 
 
 def test_cli_returns_triage_exit_code_and_json(

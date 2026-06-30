@@ -1,0 +1,4 @@
+# Append-only provenance ledgers: union concurrent appends instead of conflicting.
+# Both branches only ever append rows to the tail, so a textual union is correct
+# and avoids the recurring "two branches wrote to the bottom of the log" conflict.
+**/PROVENANCE_LEDGER.md merge=union

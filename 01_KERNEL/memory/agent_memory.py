@@ -142,6 +142,24 @@ def search_long_term_memory(text: str, limit: int = 5) -> list[dict]:
     return resp.get("items", resp.get("results", []))
 
 
+def bulk_delete_long_term_memories(ids: list[str]) -> dict:
+    """Bulk delete long-term memories by ID."""
+    url = f"{_prefix()}/long-term-memory"
+    for attempt in range(_RETRY_MAX):
+        try:
+            resp = httpx.request("DELETE", url, json={"ids": ids}, headers=_headers(), timeout=_TIMEOUT)
+            resp.raise_for_status()
+            return resp.json() if resp.content else {}
+        except httpx.HTTPStatusError as e:
+            if e.response.status_code < 500 or attempt == _RETRY_MAX - 1:
+                raise
+        except (httpx.ConnectError, httpx.TimeoutException):
+            if attempt == _RETRY_MAX - 1:
+                raise
+        time.sleep(_RETRY_BACKOFF * (attempt + 1))
+    return {}
+
+
 # ---------------------------------------------------------------------------
 # Health probe
 # ---------------------------------------------------------------------------
@@ -209,6 +227,16 @@ class AgentMemoryClient:
             return search_long_term_memory(query, top_k)
         except Exception:
             return []
+
+    def purge_all(self) -> bool:
+        try:
+            recalled = search_long_term_memory("*", limit=100)
+            ids = [item["id"] for item in recalled if "id" in item]
+            if ids:
+                bulk_delete_long_term_memories(ids)
+            return True
+        except Exception:
+            return False
 
     def ping(self) -> tuple[bool, int, str]:
         return ping()

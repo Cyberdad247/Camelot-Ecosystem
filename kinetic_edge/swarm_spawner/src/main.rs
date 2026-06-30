@@ -15,7 +15,7 @@
 //!   Simian (Chaos)   — resilience/entropy injection       budget=150 tokens
 //!   Strigiform (Owl) — swarm oversight, conflict detect   budget=100 tokens
 
-use anyhow::Result;
+use anyhow::{bail, Result};
 use chrono::Utc;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -35,6 +35,51 @@ const APOPTOSIS_MIN_TASKS: u32 = 10;
 const APOPTOSIS_IDLE_SECS: u64 = 7 * 24 * 3600; // 7 days
 const MAX_FORMICA_INSTANCES: usize = 50;          // 8GB RAM ceiling
 const RAM_CEILING_MB: usize = 7_800;
+
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+struct CliOptions {
+    status: bool,
+    once: bool,
+    json: bool,
+    queue_path: Option<PathBuf>,
+    state_path: Option<PathBuf>,
+}
+
+impl CliOptions {
+    fn parse_from<I, S>(args: I) -> Result<Self>
+    where
+        I: IntoIterator<Item = S>,
+        S: Into<String>,
+    {
+        let mut options = CliOptions::default();
+        let mut iter = args.into_iter().map(Into::into);
+        let _program = iter.next();
+        while let Some(arg) = iter.next() {
+            match arg.as_str() {
+                "--status" => options.status = true,
+                "--once" => options.once = true,
+                "--json" => options.json = true,
+                "--queue" => {
+                    let Some(value) = iter.next() else {
+                        bail!("--queue requires a path");
+                    };
+                    options.queue_path = Some(PathBuf::from(value));
+                }
+                "--state" => {
+                    let Some(value) = iter.next() else {
+                        bail!("--state requires a path");
+                    };
+                    options.state_path = Some(PathBuf::from(value));
+                }
+                "--help" | "-h" => {
+                    bail!("usage: swarm-spawner [--status|--once] [--queue PATH] [--state PATH] [--json]");
+                }
+                other => bail!("unknown argument: {}", other),
+            }
+        }
+        Ok(options)
+    }
+}
 
 // ── Nano-Knight species ───────────────────────────────────────────────────────
 
@@ -95,11 +140,47 @@ impl Species {
 #[derive(Debug, Deserialize, Clone)]
 struct HarnessTask {
     id: String,
+    #[serde(default = "default_knight")]
     knight: String,
     directive: String,
+    #[serde(default)]
     priority: u8,
     #[serde(default)]
     submitted: String,
+}
+
+fn default_knight() -> String {
+    "sir_codex".to_string()
+}
+
+#[derive(Debug, Serialize, Clone)]
+struct RuntimeEvent {
+    task_id: String,
+    knight: String,
+    species: Species,
+    status: String,
+    submitted: String,
+    directive_len: usize,
+    output: String,
+    duration_ms: u128,
+}
+
+#[derive(Debug, Serialize, Clone)]
+struct RuntimeState {
+    spawner: String,
+    version: String,
+    mode: String,
+    status: String,
+    queue_path: String,
+    state_path: String,
+    cells_active: usize,
+    tasks_done: u32,
+    tasks_fail: u32,
+    processed_count: usize,
+    events: Vec<RuntimeEvent>,
+    ram_ceiling_mb: usize,
+    formica_ceiling: usize,
+    ts: String,
 }
 
 #[derive(Debug, Clone)]
@@ -265,7 +346,16 @@ impl SwarmSpawner {
         if *species == Species::Strigiform {
             let cells = self.cells.lock().unwrap();
             let summary: Vec<String> = cells.values()
-                .map(|c| format!("{}:{:?}(e={:.1}%)", c.id, c.species, c.error_rate() * 100.0))
+                .map(|c| {
+                    format!(
+                        "{}:{:?}:task={}:age={}s(e={:.1}%)",
+                        c.id,
+                        c.species,
+                        c.task.id,
+                        c.spawned_at.elapsed().as_secs(),
+                        c.error_rate() * 100.0,
+                    )
+                })
                 .collect();
             return Ok(format!("[OWL_OVERSIGHT] cells={} | {}", cells.len(), summary.join(",")));
         }
@@ -273,6 +363,55 @@ impl SwarmSpawner {
     }
 
     // ── Status ────────────────────────────────────────────────────────────────
+
+    async fn process_task_once(&self, task: HarnessTask) -> RuntimeEvent {
+        let started = Instant::now();
+        let species = self.assign_species(&task);
+        let cell_id = format!("{}-{}", task.knight, &task.id[..8.min(task.id.len())]);
+        {
+            let mut processed = self.processed.lock().unwrap();
+            processed.insert(task.id.clone());
+        }
+
+        let result = self.execute_task(&task, &species).await;
+        let (status, output) = {
+            let mut cells = self.cells.lock().unwrap();
+            let cell = cells.entry(cell_id.clone()).or_insert_with(|| NanoKnight {
+                id: cell_id,
+                species: species.clone(),
+                task: task.clone(),
+                spawned_at: Instant::now(),
+                task_count: 0,
+                error_count: 0,
+                last_active: Instant::now(),
+            });
+            cell.task_count += 1;
+            cell.last_active = Instant::now();
+
+            match result {
+                Ok(output) => {
+                    *self.tasks_done.lock().unwrap() += 1;
+                    ("PASS".to_string(), output)
+                }
+                Err(error) => {
+                    cell.error_count += 1;
+                    *self.tasks_fail.lock().unwrap() += 1;
+                    ("FAIL".to_string(), error.to_string())
+                }
+            }
+        };
+
+        RuntimeEvent {
+            task_id: task.id,
+            knight: task.knight,
+            species,
+            status,
+            submitted: task.submitted,
+            directive_len: task.directive.len(),
+            output,
+            duration_ms: started.elapsed().as_millis(),
+        }
+    }
 
     fn print_status(&self) {
         let cells = self.cells.lock().unwrap();
@@ -292,6 +431,45 @@ impl SwarmSpawner {
     }
 
     // ── Main SRDL loop ────────────────────────────────────────────────────────
+
+    fn runtime_state(&self, mode: &str, state_path: &Path, events: Vec<RuntimeEvent>) -> RuntimeState {
+        let cells = self.cells.lock().unwrap();
+        let done = *self.tasks_done.lock().unwrap();
+        let fail = *self.tasks_fail.lock().unwrap();
+        let processed = self.processed.lock().unwrap();
+        RuntimeState {
+            spawner: "swarm-spawner".to_string(),
+            version: "400.1.0".to_string(),
+            mode: mode.to_string(),
+            status: if fail == 0 { "PASS".to_string() } else { "FAIL".to_string() },
+            queue_path: self.queue_path.display().to_string(),
+            state_path: state_path.display().to_string(),
+            cells_active: cells.len(),
+            tasks_done: done,
+            tasks_fail: fail,
+            processed_count: processed.len(),
+            events,
+            ram_ceiling_mb: RAM_CEILING_MB,
+            formica_ceiling: MAX_FORMICA_INSTANCES,
+            ts: Utc::now().to_rfc3339(),
+        }
+    }
+
+    async fn run_once(&self, state_path: &Path) -> Result<RuntimeState> {
+        let raw_tasks = self.read_queue().await;
+        let mut approved = self.iron_gate_check(&raw_tasks);
+        approved.sort_by_key(|task| task.priority);
+        let mut events = Vec::new();
+        for task in approved {
+            events.push(self.process_task_once(task).await);
+        }
+        let state = self.runtime_state("once", state_path, events);
+        if let Some(parent) = state_path.parent() {
+            fs::create_dir_all(parent).await?;
+        }
+        fs::write(state_path, serde_json::to_string_pretty(&state)?).await?;
+        Ok(state)
+    }
 
     async fn run(&self) -> Result<()> {
         info!("[SWARM_SPAWNER] SRDL Bio-Swarm online — queue={}", self.queue_path.display());
@@ -353,16 +531,39 @@ async fn main() -> Result<()> {
         .map(PathBuf::from)
         .unwrap_or_else(|_| dirs_or_home());
 
-    let queue_path = camelot_home.join("logs").join("harness_queue.jsonl");
+    let options = CliOptions::parse_from(std::env::args())?;
+    let queue_path = options
+        .queue_path
+        .clone()
+        .unwrap_or_else(|| camelot_home.join("logs").join("harness_queue.jsonl"));
+    let state_path = options
+        .state_path
+        .clone()
+        .unwrap_or_else(|| {
+            camelot_home
+                .join("03_VAULT")
+                .join("runtime_state")
+                .join("bio_swarm_runtime_latest.json")
+        });
 
-    // --status flag
-    if std::env::args().any(|a| a == "--status") {
+    if options.status {
         let spawner = SwarmSpawner::new(queue_path);
         spawner.print_status();
         return Ok(());
     }
 
     let spawner = SwarmSpawner::new(queue_path);
+    if options.once {
+        let state = spawner.run_once(&state_path).await?;
+        let encoded = if options.json {
+            serde_json::to_string(&state)?
+        } else {
+            serde_json::to_string_pretty(&state)?
+        };
+        println!("{}", encoded);
+        return Ok(());
+    }
+
     spawner.run().await
 }
 
@@ -371,4 +572,52 @@ fn dirs_or_home() -> PathBuf {
         .or_else(|_| std::env::var("HOME"))
         .map(|h| PathBuf::from(h).join("CAMELOT_OS"))
         .unwrap_or_else(|_| PathBuf::from("C:/Users/vizio/CAMELOT_OS"))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+    use uuid::Uuid;
+
+    #[test]
+    fn cli_options_parse_once_json_paths() {
+        let options = CliOptions::parse_from([
+            "swarm-spawner",
+            "--once",
+            "--queue",
+            "logs/harness_queue.jsonl",
+            "--state",
+            "03_VAULT/runtime_state/bio.json",
+            "--json",
+        ]).expect("parse options");
+
+        assert!(options.once);
+        assert!(options.json);
+        assert_eq!(options.queue_path, Some(PathBuf::from("logs/harness_queue.jsonl")));
+        assert_eq!(options.state_path, Some(PathBuf::from("03_VAULT/runtime_state/bio.json")));
+    }
+
+    #[tokio::test]
+    async fn run_once_processes_queue_and_writes_state() {
+        let root = std::env::temp_dir().join(format!("camelot-bio-swarm-test-{}", Uuid::new_v4()));
+        let queue_path = root.join("logs").join("harness_queue.jsonl");
+        let state_path = root.join("03_VAULT").join("runtime_state").join("bio_swarm_runtime_latest.json");
+        fs::create_dir_all(queue_path.parent().unwrap()).expect("queue dir");
+        fs::write(
+            &queue_path,
+            r#"{"id":"BIO_TEST_01","type":"FORGE","directive":"write deterministic fixture","priority":1}"#,
+        ).expect("queue write");
+
+        let spawner = SwarmSpawner::new(queue_path.clone());
+        let state = spawner.run_once(&state_path).await.expect("run once");
+
+        assert_eq!(state.status, "PASS");
+        assert_eq!(state.mode, "once");
+        assert_eq!(state.processed_count, 1);
+        assert!(state_path.exists());
+        let persisted = fs::read_to_string(&state_path).expect("state read");
+        assert!(persisted.contains("\"BIO_TEST_01\""));
+        let _ = fs::remove_dir_all(root);
+    }
 }

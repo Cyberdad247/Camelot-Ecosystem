@@ -43,3 +43,24 @@ repos:
             | (requirements\.txt|pyproject\.toml)
             | docs/plans/IMPLEMENTATION_INFRA_PURGE\.md
           )$
+      - id: bifrost-audit-verify
+        name: Verify Bifrost dispatch audit (T1-T5 regression gate)
+        description: >-
+          Re-runs the verify_cmd strings from
+          control_plane/bifrost_triage_swarm.TASK_PLAN against the
+          current code. Enforces the 2026-06-24 audit: dead ollama/hermes
+          branches stay dead, http strategy stays implemented, terminal
+          model stays reconciled, ledger stays honest, security
+          verification.md stays present. Mirrors the GitHub Actions
+          `bifrost-audit` job in .github/workflows/verify_os.yml.
+        entry: python scripts/check_bifrost_audit.py
+        language: system
+        pass_filenames: false
+        files: |
+          (?x)^(
+              control_plane/bifrost\.py
+            | control_plane/bifrost_integration\.py
+            | control_plane/bifrost_triage_swarm\.py
+            | docs/reports/bifrost_triage_.*/verification\.md
+            | scripts/check_bifrost_audit\.py
+          )$

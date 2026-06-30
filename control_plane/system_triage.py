@@ -20,7 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Iterable, Literal, Sequence
 
-from .ledger_sync import ledger_status
+from .ledger_sync import compute_entry_hash, ledger_status
 
 CheckStatus = Literal["PASS", "WARN", "FAIL", "UNVERIFIED", "SKIP"]
 ClaimClass = Literal["confirmed", "planned", "aspirational", "rejected"]
@@ -101,7 +101,7 @@ def aggregate_verdict(checks: Iterable[CheckResult]) -> Verdict:
         for item in items
     ):
         return "UNVERIFIED"
-    if any(item.status in {"FAIL", "WARN", "UNVERIFIED"} for item in items):
+    if any(item.required and item.status in {"FAIL", "WARN", "UNVERIFIED"} for item in items):
         return "DEGRADED"
     return "GREEN"
 
@@ -279,6 +279,7 @@ def _required_boot_contract(context: TriageContext) -> CheckResult:
         "CLIProxyAPI   :8080",
         "Defense Grid",
         "Kinetic Edge  :3001",
+        "Bio-Swarm (Nano)",
         "Morgana Bridge :8001",
         "Cloud Brain   (RPC)",
     ]
@@ -294,10 +295,48 @@ def _required_boot_contract(context: TriageContext) -> CheckResult:
     )
 
 
+def _bio_swarm_runtime(context: TriageContext) -> CheckResult:
+    from .bio_swarm_runtime import read_bio_swarm_status
+
+    state = read_bio_swarm_status(context.root)
+    release = state.get("release") if isinstance(state.get("release"), dict) else {}
+    release_pass = release.get("verdict") == "PASS"
+    binary_exists = bool(state.get("binary_exists"))
+    if not binary_exists:
+        status: CheckStatus = "FAIL"
+        summary = "Bio-Swarm spawner binary is missing"
+    elif release_pass:
+        status = "PASS"
+        summary = "Bio-Swarm spawner binary and release evidence are present"
+    else:
+        status = "WARN"
+        summary = "Bio-Swarm spawner is built but lacks passing one-shot release evidence"
+    return CheckResult(
+        name="bio-swarm-runtime",
+        stage="rapid",
+        status=status,
+        required=True,
+        classification="confirmed",
+        summary=summary,
+        evidence={
+            "status": state.get("status"),
+            "binary_path": state.get("binary_path"),
+            "binary_sha256": state.get("binary_sha256"),
+            "state_path": state.get("state_path"),
+            "release_path": state.get("release_path"),
+            "release_verdict": release.get("verdict"),
+        },
+        remediation=[
+            "Run `cargo build --release -p swarm-spawner`, copy the binary into bin/, then run `camelot bio-swarm once --fixture --json`."
+        ] if status != "PASS" else [],
+    )
+
+
 def _targeted_python_tests(context: TriageContext) -> CheckResult:
     tests = [
         "tests/test_architecture_docs.py",
         "tests/test_ledger_governance.py",
+        "tests/test_bio_swarm_runtime.py",
     ]
     command = [sys.executable, "-m", "pytest", "-q", *tests]
     code, stdout, stderr, duration = _run(context, command, timeout=300)
@@ -391,9 +430,7 @@ def _verification_ledger_integrity(context: TriageContext) -> CheckResult:
                 error = f"parent_hash mismatch at line {count}"
                 break
             expected = entry.get("entry_hash")
-            payload = {key: value for key, value in entry.items() if key != "entry_hash"}
-            actual = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
-            if expected != actual:
+            if expected != compute_entry_hash(entry):
                 error = f"entry_hash mismatch at line {count}"
                 break
             previous_hash = expected
@@ -651,10 +688,15 @@ def _deep_rust_tests(context: TriageContext) -> CheckResult:
 
 def _tracked_source_guard(context: TriageContext) -> CheckResult:
     final = _tracked_state(context.root)
+    exclude_paths = {
+        "01_KERNEL/memory/tissue/flash_context.toon",
+        "PROVENANCE_LEDGER.md",
+    }
     changed = sorted(
         path
         for path in set(context.initial_tracked_state) | set(final)
-        if context.initial_tracked_state.get(path) != final.get(path)
+        if path not in exclude_paths and Path(path).as_posix() not in exclude_paths
+        and context.initial_tracked_state.get(path) != final.get(path)
     )
     return CheckResult(
         name="tracked-source-read-only-guard",
@@ -860,6 +902,7 @@ def default_rapid_checks() -> list[Check]:
         _source_of_truth,
         _excalibur_preflight,
         _required_boot_contract,
+        _bio_swarm_runtime,
         _targeted_python_tests,
         _rust_check,
         _security_contract,

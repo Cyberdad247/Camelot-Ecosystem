@@ -76,7 +76,9 @@ control_plane/st_brain.py
 
 # 5b. High-risk local state and secret archives
 00_SECURE_ARCHIVE/
-99_ARCHIVE/
+99_ARCHIVE/*
+# Exception: infra_purge rollback backups MUST stay tracked (IMPLEMENTATION_INFRA_PURGE.md §6.1)
+!99_ARCHIVE/infra_purge_backup/
 03_VAULT/00_SECURE_ARCHIVE/
 03_VAULT/credentials/
 03_VAULT/UKG/UKG_MEMORY.jsonld
@@ -131,3 +133,18 @@ docs/reference/EXTERNAL/
 # Go build binaries (tsnet node_c etc.) — source is tracked, binaries are not
 *.exe
 01_KERNEL/mesh/node_c/node_c
+
+# --- KOR audit hardening: stop tracking regenerable runtime/memory state ---
+03_VAULT/runtime_state/*_latest.json
+03_VAULT/runtime_state/**/*_latest.json
+03_VAULT/runtime_state/system_triage/
+03_VAULT/runtime_state/camelot*.toon*
+03_VAULT/runtime_state/cloudbrain_sync_queue.jsonl
+03_VAULT/firnflow/*.json
+03_VAULT/memory/l2_index/
+.qdrant-initialized
+*.exe~
+
+# Ephemeral boot logs (regenerated each boot)
+boot_results.json
+boot_status.json

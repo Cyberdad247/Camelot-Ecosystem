@@ -225,6 +225,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_evolve_and_forge",
     },
+    "//PURGE_MEMORY": {
+        "knight": "sir_forge",
+        "description": "Zero-out local and remote vector indices + JSON-LD memories",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_purge_memory",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -448,6 +455,13 @@ def _handle_evolve_and_forge(param: str, context: dict) -> dict:
         "detail": f"run: python scripts/evolve_and_forge.py --task {shlex.quote(objective)}",
     }
 
+def _handle_purge_memory(param: str, context: dict) -> dict:
+    return {
+        "action": "purge_memory",
+        "detail": "run: python scripts/purge_memory.py",
+        "canonical_command": "python scripts/purge_memory.py",
+    }
+
 def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
     """Execute the 6-phase NANO_SWARM_EXPAND protocol via importlib."""
     import importlib.util
@@ -612,6 +626,7 @@ _HANDLERS = {
     "_handle_scan_vectors": _handle_scan_vectors,
     "_handle_nano_swarm_expand": _handle_nano_swarm_expand,
     "_handle_evolve_and_forge": _handle_evolve_and_forge,
+    "_handle_purge_memory": _handle_purge_memory,
 }
 
 

@@ -3,5 +3,14 @@ name = "ouroboros_engine"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "ouroboros_engine"
+crate-type = ["cdylib", "rlib"]
+
 [dependencies]
-# Future: pyo3, torch-sys
+# Future: torch-sys
+pyo3 = { version = "0.23", features = ["extension-module", "abi3-py39"], optional = true }
+
+[features]
+default = []
+pyo3 = ["dep:pyo3"]
