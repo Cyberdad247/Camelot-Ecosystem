@@ -1752,3 +1752,46 @@
 | 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21665s tasks=75 fail=0 probes=8/9 cells=2 || 2026-06-29T21:50:38-04:00 | SIR_CODEX | go_router elevated to SSE daemon: serve mode + /events,/rune,/healthz + embedded harness.html | VERIFIED (go build + smoke tests) |
 | 2026-06-29T21:50:40-04:00 | SIR_CODEX | Anya_Dashboard SSE wiring: useKnightStream + KnightStreamBanner + KnightAvatarScene + VideoAvatar (procedural fallback) | VERIFIED (tsc 0 + vite build 0) |
 | 2026-06-29T21:50:41-04:00 | SIR_HASHIMOTO | Repo hygiene: purged 3 malformed path artifacts; entiremap.md full rewrite (paths verified) | DONE |
+
+---
+## [2026-06-29] Merge #53/#54 + Awaken SIR_CODEX (live OpenAI Provider)
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Merged the infomercial README (#53) and the Cybertronia Multivoice-Router Go module (#54) to main. Wired the first live Polyglot Matrix Provider — SIR_CODEX → OpenAI (gpt-4o) — into the multivoice module, adapted to the real `Provider` interface and tested against an httptest mock (no live key/network needed). Secrets via CAMELOT_OPENAI_KEY env only (Sentinel Shield).
+- **Scope**:
+  - main ← #53: README.md infomercial rewrite (5-layer architecture overview)
+  - main ← #54: 04_KINETIC/multivoice/ Go module (vault/zeroclaw/orchestration/cmd)
+  - 04_KINETIC/multivoice/providers/openai.go: live OpenAIProvider (lean net/http)
+  - cmd/multivoice/main.go: buildPolyglot() wires live provider when key present, stub fallback
+- **Verification performed**:
+  - `gh pr merge 53 54` — MERGED
+  - `go build ./... && go vet ./...` — exit 0; gofmt clean (new files)
+  - `go test ./...` — orchestration + providers PASS (httptest round-trip, auth header, model, HTTP-error path, key-required guard, structural interface proof)
+- **Tag**: CYBERTRONIA_SIR_CODEX_OPENAI_AWAKENED
+
+---
+## [2026-06-29] Polyglot Matrix — Zero-Cost Knight Sync via Bifrost/CLIProxy
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Synchronized the 3 Polyglot Knights to ZERO-COST LLM engines via the Bifrost/CLIProxy gateway (OpenAI-compatible local endpoint, free models over CLI OAuth — no paid keys, no per-token billing). SIR_CODEX→gpt-4o, SIR_HELIOS→gemini-2.5-flash, SIR_BORIS→claude-sonnet-4-6, all routed through CLIPROXY_BASE. Graceful degradation to local TinyLM stub when the gateway is offline (Kinetic Resilience). Honors "utilize bifrost bridge + omnirouter zero-cost options" — chose the free CLIProxy path over the persona's proposed paid OpenAI/Gemini/Anthropic API clients.
+- **Scope**:
+  - 04_KINETIC/multivoice/providers/gateway.go: NewGatewayProvider (CLIProxy zero-cost) + NewLocalStubProvider + GatewayReachable probe
+  - 04_KINETIC/multivoice/providers/openai.go: + Label field (per-Knight engine name)
+  - 04_KINETIC/multivoice/cmd/multivoice/main.go: buildPolyglot() binds all 3 Knights to the gateway, stub fallback
+  - 04_KINETIC/multivoice/providers/gateway_test.go: mock CLIProxy round-trip + degradation
+  - 04_KINETIC/multivoice/README.md: zero-cost routing section
+- **Verification performed**:
+  - `go build ./... && go vet ./...` — exit 0; gofmt clean
+  - `go test ./...` — orchestration + providers PASS (mock CLIProxy round-trip, loopback auth, /models probe, unreachable→stub degradation, structural interface proofs)
+- **Tag**: CYBERTRONIA_POLYGLOT_ZEROCOST_SYNC
+## [2026-06-29] OmniRoute Affinity Layer wired onto the Multivoice Polyglot Matrix
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Ported the OmniRoute affinity policy (docs/plans/2026-05-23-omniroute-affinity-v1000.md) into the Go Multivoice-Router as a routing layer ON TOP of the Polyglot Matrix. (1) Stateful affinity pinning — GenerateAffinityKey abstracts files/UUIDs/numbers so cache-equivalent prompts stick to the same engine (KV-cache prefix hits), mirroring the Python cli_intercept.generate_affinity_key. (2) DualMap-lite SLO escape — per-engine TTFT tracked; a pinned engine breaching the SLO (CAMELOT_SLO_MS, default 2000ms) escapes to the coolest alternate engine and re-pins.
+- **Scope**:
+  - 04_KINETIC/multivoice/orchestration/affinity.go: GenerateAffinityKey + AffinityRouter (pins, TTFT, SLO escape, coolest-alternate)
+  - 04_KINETIC/multivoice/orchestration/router.go: MultivoiceRouter.Affinity field; RouteIntent consults affinity + records TTFT
+  - 04_KINETIC/multivoice/cmd/multivoice/main.go: affinity layer active by default (CAMELOT_SLO_MS)
+  - 04_KINETIC/multivoice/orchestration/affinity_test.go: key consistency (plan test), sticky cache hit, SLO escape to coolest, end-to-end
+  - 04_KINETIC/multivoice/README.md: OmniRoute affinity section
+- **Verification performed**:
+  - `go build ./... && go vet ./...` — exit 0
+  - `go test ./...` — orchestration + providers PASS (affinity key, sticky pin, SLO escape, e2e router; provider round-trips)
+- **Tag**: CYBERTRONIA_OMNIROUTE_AFFINITY_LAYER
