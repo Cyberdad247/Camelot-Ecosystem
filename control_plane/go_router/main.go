@@ -256,17 +256,36 @@ func runServer(addr string) error {
 		}
 	})
 
+	// Permissive CORS so a browser on another origin (e.g. the deployed
+	// dashboard) can open the SSE stream. EventSource sends no custom headers,
+	// so Access-Control-Allow-Origin alone is sufficient for the GET stream.
+	withCORS := func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Access-Control-Allow-Headers", "*")
+			if r.Method == http.MethodOptions {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
+
 	log.Printf("[go_router] node=%s serving on %s (SSE: /events, rune: /rune)", node, addr)
-	return http.ListenAndServe(addr, mux)
+	return http.ListenAndServe(addr, withCORS(mux))
 }
 
 func main() {
 	// Daemon mode: `go_router serve [addr]`. Preserves the original one-shot CLI
 	// for every other invocation so existing callers are unaffected.
 	if len(os.Args) >= 2 && os.Args[1] == "serve" {
+		// Address precedence: explicit arg > $PORT (injected by Fly/Railway/
+		// Render/etc.) > :8077 default.
 		addr := ":8077"
 		if len(os.Args) > 2 {
 			addr = os.Args[2]
+		} else if p := os.Getenv("PORT"); p != "" {
+			addr = ":" + p
 		}
 		if err := runServer(addr); err != nil {
 			log.Fatalf("[go_router] server error: %v", err)
