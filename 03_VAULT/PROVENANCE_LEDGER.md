@@ -1803,3 +1803,6 @@
   - `go build ./... && go vet ./...` — exit 0
   - `go test ./...` — orchestration + providers PASS (affinity key, sticky pin, SLO escape, e2e router; provider round-trips)
 - **Tag**: CYBERTRONIA_OMNIROUTE_AFFINITY_LAYER
+| 2026-06-30T05:00:23-04:00 | MERLIN | PR #59 MERGED to main (merge 7c759ff): go_router SSE knight loop + dashboard avatars + repo alignment, 14 commits | MERGED |
+| 2026-06-30T05:00:25-04:00 | SIR_HASHIMOTO | Deleted merged remote branch feat/bifrost-control-plane-link (0 commits unmerged) | DONE |
+| 2026-06-30T05:00:27-04:00 | SIR_WATCHDOG | CI red root-caused: GitHub Actions billing/spending-limit blocks runner provisioning (not code); merge locally-verified | FLAGGED |
