@@ -12,6 +12,8 @@ New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 
 # go_router reports this as its node name in SSE events.
 $env:CAMELOT_NODE = "cybertronia"
+# Path to the compiled Rust RTK engine (Go -> Rust rune dispatch).
+$env:CAMELOT_RTK_BIN = "$root\target\release\rtk_cli.exe"
 
 $daemons = @(
   @{ Name = "go_router";       Exe = "$root\control_plane\go_router\go_router.exe";              Args = @("serve", ":8077") },

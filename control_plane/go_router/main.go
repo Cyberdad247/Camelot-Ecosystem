@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	_ "embed"
 	"encoding/json"
 	"fmt"
@@ -8,6 +9,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/exec"
 	"sync"
 	"time"
 )
@@ -56,6 +58,39 @@ func evaluateRune(runeName, taskName string) RuneResult {
 			"z3_verification_ms": 12,
 		},
 	}
+}
+
+// rtkBinPath locates the compiled Rust rtk_cli engine binary. CAMELOT_RTK_BIN
+// wins (set by the cybertronia supervisor); otherwise we fall back to PATH.
+func rtkBinPath() string {
+	if p := os.Getenv("CAMELOT_RTK_BIN"); p != "" {
+		return p
+	}
+	return "rtk_cli"
+}
+
+// kineticStrip dispatches a rune's task text through the real Rust RTK engine
+// (control_plane/rtk) via subprocess — the Go->Rust wire. Best-effort: any
+// failure (missing binary, timeout, bad output) returns ok=false and the
+// router proceeds without it, so the Rust layer is an enhancement, not a
+// hard dependency.
+func kineticStrip(text string) (string, bool) {
+	if text == "" {
+		return "", false
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	out, err := exec.CommandContext(ctx, rtkBinPath(), text).Output()
+	if err != nil {
+		return "", false
+	}
+	var res struct {
+		Stripped string `json:"stripped"`
+	}
+	if json.Unmarshal(out, &res) != nil {
+		return "", false
+	}
+	return res.Stripped, true
 }
 
 // detectNode resolves which node this daemon is running on. CAMELOT_NODE wins;
@@ -173,6 +208,11 @@ func runServer(addr string) error {
 			return
 		}
 		result := evaluateRune(runeName, taskName)
+		// Wire the task through the real Rust RTK engine (Go -> Rust subprocess).
+		if stripped, ok := kineticStrip(taskName); ok {
+			result.Metadata["kinetic_engine"] = "rtk"
+			result.Metadata["rtk_stripped"] = stripped
+		}
 		knight := activeKnightFor(runeName)
 		h.broadcast(sseEvent{
 			name: "active_knight",

@@ -33,7 +33,7 @@ pub unsafe extern "C" fn strip_context_noise(input: *const c_char) -> *const c_c
     }
 }
 
-fn strip(text: &str) -> String {
+pub fn strip(text: &str) -> String {
     let no_fences = remove_fences(text);
     let no_tags = remove_tags(&no_fences);
     no_tags.split_whitespace().collect::<Vec<_>>().join(" ")
