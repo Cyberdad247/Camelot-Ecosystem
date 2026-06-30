@@ -106,3 +106,29 @@ class MemPalaceL2:
         else:
             # Corpus-wide search in Chroma is harder (requires listing collections)
             return []
+
+    def purge_collection(self, wing: str, room: str, tenant_id: str = "default") -> bool:
+        """Drop a specific collection to zero-out its vector index."""
+        if not self.client:
+            return False
+        try:
+            coll_name = self._get_collection_name(wing, room, tenant_id)
+            self.client.delete_collection(name=coll_name)
+            return True
+        except Exception as e:
+            print(f"Failed to purge collection {coll_name}: {e}")
+            return False
+
+    def delete_drawer(self, wing: str, room: str, drawer_id: str, tenant_id: str = "default") -> bool:
+        """Delete a single memory record by ID (drawer)."""
+        if not self.client:
+            return False
+        try:
+            coll_name = self._get_collection_name(wing, room, tenant_id)
+            collection = self.client.get_collection(name=coll_name)
+            collection.delete(ids=[str(drawer_id)])
+            return True
+        except Exception as e:
+            print(f"Failed to delete drawer {drawer_id} in {coll_name}: {e}")
+            return False
+

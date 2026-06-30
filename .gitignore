@@ -76,7 +76,9 @@ control_plane/st_brain.py
 
 # 5b. High-risk local state and secret archives
 00_SECURE_ARCHIVE/
-99_ARCHIVE/
+99_ARCHIVE/*
+# Exception: infra_purge rollback backups MUST stay tracked (IMPLEMENTATION_INFRA_PURGE.md §6.1)
+!99_ARCHIVE/infra_purge_backup/
 03_VAULT/00_SECURE_ARCHIVE/
 03_VAULT/credentials/
 03_VAULT/UKG/UKG_MEMORY.jsonld
