@@ -4,6 +4,7 @@ import (
 	_ "embed"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -185,6 +186,38 @@ func runServer(addr string) error {
 		})
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(mustJSON(result))
+	})
+
+	// POST /plan — broadcast an `mdx` event carrying a markdown visual plan.
+	// content comes from the `content` query param or the raw request body;
+	// optional `title`/`knight`. This is the real source the UI overlay renders.
+	mux.HandleFunc("/plan", func(w http.ResponseWriter, r *http.Request) {
+		content := r.URL.Query().Get("content")
+		if content == "" {
+			body, _ := io.ReadAll(io.LimitReader(r.Body, 1<<20)) // cap at 1 MiB
+			content = string(body)
+		}
+		if content == "" {
+			http.Error(w, `{"error":"missing content"}`, http.StatusBadRequest)
+			return
+		}
+		title := r.URL.Query().Get("title")
+		knight := r.URL.Query().Get("knight")
+		if knight == "" {
+			knight = "merlin"
+		}
+		h.broadcast(sseEvent{
+			name: "mdx",
+			data: mustJSON(map[string]interface{}{
+				"title":   title,
+				"knight":  knight,
+				"content": content,
+				"node":    node,
+				"ts":      time.Now().UTC().Format(time.RFC3339),
+			}),
+		})
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(mustJSON(map[string]interface{}{"status": "broadcast", "bytes": len(content)}))
 	})
 
 	// GET /events — SSE stream the 3D avatars subscribe to.
