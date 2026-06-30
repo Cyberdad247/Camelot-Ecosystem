@@ -28,11 +28,13 @@ if (-not (Test-Path $GatewayCmd)) {
 # form caused cmd.exe to exit immediately without ever starting node (empty log,
 # dead PID). Separate stdout/stderr files are required by Start-Process.
 $ErrFile = "$env:USERPROFILE\CAMELOT_OS\logs\clawdbot_gateway.err"
-$proc = Start-Process -FilePath $GatewayCmd `
+$proc = Start-Process -FilePath "cmd.exe" `
+    -ArgumentList "/c", $GatewayCmd `
     -WindowStyle Hidden `
     -RedirectStandardOutput $LogFile `
     -RedirectStandardError $ErrFile `
     -PassThru
+
 
 
 $proc.Id | Out-File -FilePath $PidFile -Encoding ascii

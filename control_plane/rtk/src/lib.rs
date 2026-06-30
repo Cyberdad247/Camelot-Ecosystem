@@ -17,7 +17,7 @@ use std::os::raw::c_char;
 /// # Safety
 /// `input` must be a valid, NUL-terminated C string pointer or NULL.
 #[no_mangle]
-pub extern "C" fn strip_context_noise(input: *const c_char) -> *const c_char {
+pub unsafe extern "C" fn strip_context_noise(input: *const c_char) -> *const c_char {
     if input.is_null() {
         return std::ptr::null();
     }
