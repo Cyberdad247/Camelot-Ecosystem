@@ -44,6 +44,7 @@ export const runtimeConfig = {
   cognitive: {
     fleetUrl: withDefault(env.VITE_COGNITIVE_FLEET_URL, `${goRouterOrigin}/cognitive/fleet`),
     healthUrl: withDefault(env.VITE_COGNITIVE_HEALTH_URL, `${goRouterOrigin}/cognitive/healthz`),
+    configUrl: withDefault(env.VITE_COGNITIVE_CONFIG_URL, `${goRouterOrigin}/cognitive/config`),
   },
   gradioUrl: withDefault(env.VITE_GRADIO_URL, 'http://localhost:7860/'),
   saltare: {
