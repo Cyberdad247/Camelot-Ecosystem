@@ -1,3 +1,4 @@
+| 1738 | **Home-dir credential exposure remediation (CodexSandboxUsers)** | Claude Opus 4.8 | ✅ SECURED (partial) | ROOT CAUSE: `C:\Users\vizio` grants `Cybertronia\CodexSandboxUsers` (= the `CodexSandboxOnline`/`CodexSandboxOffline` accounts that Codex agent sandboxes run as) Modify+inherit `(OI)(CI)(M,DC)` over the ENTIRE home dir — inherited into every secret store. Something in the sandbox infra RE-APPLIES this grant periodically (observed reappearing ~1min after removal; NOT from CAMELOT_OS code — zero repo refs; NOT the `Camelot-Ledger-Guardian-5min` task, whose script `squires/ledger_guardian.py` is missing so it fails every 5min — now DISABLED). SECURED as non-elevated `vizio` by breaking ACL inheritance + owner/SYSTEM/Admin-only on each sensitive store (immune to the re-ACLer since inheritance is off): `.notebooklm` (2× `storage_state.json` = full Google account session cookies, `.google.com`-wide, exp 2027; + `browser_profile/` 2110 files), `.ssh`, `.aws`, `.azure`, `.kube`, `.docker` (301 files), `.git-credentials` (plaintext git tokens). Also gitignored `.notebooklm/` in the home-dir git repo (was un-ignored; no remote so unpushable). BLOCKED: removing the home-root grant itself needs Administrator (Set-Acl: SeSecurityPrivilege not held; icacls ran away on the AppData junction loops) — elevated `Set-Acl`+`PurgeAccessRules` command handed to the Sovereign. EXPOSURE NOTE: lockdown stops FUTURE access only; these creds were group-readable while the long-standing grant was live → recommended rotation (Google sign-out-all, GitHub token, SSH keys) + admin removal of the root grant. Sealed: 2026-07-02T17:30:00Z |
 | 1737 | **QERE MV3 side-panel extension + injected-CLAUDE.md quarantine** | Claude Opus 4.8 | ✅ COMPLETE | Built `04_KINETIC/qere_extension/` (Chrome MV3: context-menu text extraction → chrome.storage → side panel → QERE-formatted intent → real `fetch` POST to the multivoice-router `/intent` endpoint). Grounded against the ACTUAL router contract (`04_KINETIC/multivoice/orchestration/router.go`: raw-text body → SSE `event: response\ndata:` reply), NOT the fictional `api.cybertronia.internal` endpoint from the draft. Dropped HTMX (form-encoded POST doesn't match the raw-text contract); added `host_permissions` for CORS. Verified as a real unpacked extension in Chromium (Playwright): context-menu→storage→panel pickup→QERE wrap→fetch→error-render all confirmed against a live local router; SSE parser unit-tested against the router's exact format. Router `/intent` reached the real backend (returned 502: unrelated pre-existing Anthropic billing block — not an extension defect). Noted: `:7680` collides with a Windows `svchost` service on this host (documented in the extension README). Security: quarantined `03_VAULT/training/configs/CLAUDE.md` (a long-standing Jun-7 auto-loading agent-directive file that instructed overwriting root config + creating a shell shim; it loaded into agent context on read of neighboring `hud.py`) by renaming to `CLAUDE.md.disabled` — content preserved, reversible, nothing references it by path. Sealed: 2026-07-02T14:00:00Z |
 | 1736 | **//NANO_SWARM_EXPAND — 6-phase protocol COMPLETE** | ANYA_Omega + SIR_BORRIS | ✅ CRYSTALLIZED | Phases: P0:PASS | P1:WARN | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 646ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-06-30T18:11:41Z |
 | 1735 | **//NANO_SWARM_EXPAND — 6-phase protocol COMPLETE** | ANYA_Omega + SIR_BORRIS | ✅ CRYSTALLIZED | Phases: P0:PASS | P1:WARN | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 1333ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-06-30T18:11:31Z |
@@ -2351,3 +2352,128 @@
 | 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15061s tasks=17 fail=0 probes=9/9 cells=1 |
 | 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15661s tasks=17 fail=0 probes=9/9 cells=1 |
 | 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16261s tasks=17 fail=0 probes=9/9 cells=1 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16861s tasks=17 fail=0 probes=9/9 cells=1 || 2026-07-02T18:11:25.822001+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-07-02T18:11:25.823534+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-07-02T18:11:25.833418+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+| 2026-07-02T18:12:54.906115+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX activate and integrate with camelot-OS] | HYDRATED |
+| 2026-07-02T18:12:54.912897+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX activate and integrate with camelot-OS, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17461s tasks=19 fail=0 probes=9/9 cells=3 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18061s tasks=19 fail=0 probes=9/9 cells=3 |
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18661s tasks=19 fail=0 probes=9/9 cells=3 |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19261s tasks=19 fail=0 probes=9/9 cells=3 || 2026-07-02T18:45:55.166967+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX scaffold Excalibur Cybertronia bridge UI] | HYDRATED |
+| 2026-07-02T18:45:55.171774+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX scaffold Excalibur Cybertronia bridge UI, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-02T18:49:13.229048+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN Inference Filtration Layer: create filtration packages, add audit logging schema, and recompile camelotd] | HYDRATED |
+| 2026-07-02T18:49:13.237595+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN Inference Filtration Layer: create filtration packages, add audit logging schema, and recompile camelotd, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19861s tasks=21 fail=0 probes=9/9 cells=4 |
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20461s tasks=21 fail=0 probes=9/9 cells=4 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21061s tasks=21 fail=0 probes=9/9 cells=4 |
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21661s tasks=21 fail=0 probes=9/9 cells=4 |
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22261s tasks=21 fail=0 probes=9/9 cells=4 |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22861s tasks=21 fail=0 probes=9/9 cells=4 |
+| 939 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=23461s tasks=21 fail=0 probes=9/9 cells=4 |
+| 940 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24061s tasks=21 fail=0 probes=9/9 cells=4 |
+| 941 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24661s tasks=21 fail=0 probes=9/9 cells=4 |
+| 942 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25261s tasks=21 fail=0 probes=9/9 cells=4 |
+| 943 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25861s tasks=21 fail=0 probes=9/9 cells=4 |
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26461s tasks=21 fail=0 probes=9/9 cells=4 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27061s tasks=21 fail=0 probes=9/9 cells=4 || 2026-07-02T20:55:03.094010+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE Compile updated multivoice router and test] | HYDRATED |
+| 2026-07-02T20:55:03.099519+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE Compile updated multivoice router and test, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-02T20:58:56.389904+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:58:56.390921+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-02T20:58:56.407513+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:20.542698+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:20.544700+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-02T20:59:20.566272+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:20.616144+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:20.616571+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-02T20:59:20.629230+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:42.767900+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:42.769927+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-02T20:59:42.792620+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:43.695849+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:43.697412+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-02T20:59:43.712878+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:44.381540+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:44.381940+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-02T20:59:44.396316+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:44.617252+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:44.617747+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-02T20:59:44.630698+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27661s tasks=22 fail=0 probes=9/9 cells=4 || 2026-07-02T21:03:59.364887+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-02T17:05:06.367017 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28263s tasks=22 fail=0 probes=9/9 cells=4 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28863s tasks=22 fail=0 probes=9/9 cells=4 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29464s tasks=22 fail=0 probes=9/9 cells=4 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30064s tasks=22 fail=0 probes=9/9 cells=4 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30665s tasks=22 fail=0 probes=9/9 cells=4 || 2026-07-02T22:02:14.412752+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//TITAN_AUDIT .' to Cloud Brain] | HYDRATED |
+| 2026-07-02T22:02:14.414348+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //TITAN_AUDIT .] | HYDRATED |
+| 2026-07-02T22:02:14.424278+00:00 | HYDRATION_MGR | HYDRATE [Intent: //TITAN_AUDIT ., Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 952 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31265s tasks=23 fail=0 probes=9/9 cells=5 |
+| 953 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31865s tasks=23 fail=0 probes=9/9 cells=5 |
+| 954 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=32465s tasks=23 fail=0 probes=9/9 cells=5 |
+| 955 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33065s tasks=23 fail=0 probes=9/9 cells=5 |
+| 956 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33665s tasks=23 fail=0 probes=9/9 cells=5 |
+| 957 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34265s tasks=23 fail=0 probes=7/9 cells=5 |
