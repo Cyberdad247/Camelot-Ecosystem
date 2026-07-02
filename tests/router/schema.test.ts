@@ -132,4 +132,61 @@ describe('A2A Schema Validation', () => {
         };
         expect(validateA2ARequest(payload)).toBe(false);
     });
+
+    it('should validate successfully with optional BitRouter, Persona, and Template parameters', () => {
+        const payload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin_Ω",
+                target_engine: "Goose",
+                context_payload: "{}",
+                mcp_tools_allowed: ["read_file"],
+                virtual_key: "brvk_token_abc123",
+                spend_cap: 15.0,
+                current_spend: 2.5,
+                loop_count: 1,
+                max_loops: 10,
+                persona: "architect",
+                template_params: {
+                    user: "vizio",
+                    env: "production"
+                }
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest(payload)).toBe(true);
+    });
+
+    it('should reject a payload with an invalid virtual key', () => {
+        const payload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin_Ω",
+                target_engine: "Goose",
+                context_payload: "{}",
+                mcp_tools_allowed: ["read_file"],
+                virtual_key: "invalid_prefix_abc123"
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest(payload)).toBe(false);
+    });
+
+    it('should reject a payload where spend_cap or current_spend are not numbers', () => {
+        const payload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin_Ω",
+                target_engine: "Goose",
+                context_payload: "{}",
+                mcp_tools_allowed: ["read_file"],
+                spend_cap: "ten dollars"
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest(payload)).toBe(false);
+    });
 });
