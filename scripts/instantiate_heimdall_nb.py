@@ -19,7 +19,7 @@ async def main():
         
         # Correct pattern: using context manager
         async with NotebookLMClient(auth=tokens) as client:
-            title = "CAMELOT-OS: Sir Heimdall (The Bifrost Guardian)"
+            title = "The Heimdall UKG Nano Sovereign"
             print(f"Resolving notebook: {title}")
             
             notebooks = await client.notebooks.list()
