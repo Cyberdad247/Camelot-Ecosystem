@@ -1,3 +1,8 @@
+| 1739 | **Memory Purge** | SYSTEM | ✅ COMPLETED | Zeroed-out ChromaDB vector indices, L1.5 Redis Agent Memory, UKG_MEMORY.jsonld graph, and local memory.md learned aspects. — 2026-07-02 23:03 UTC |
+| 1738 | **Home-dir credential exposure remediation (CodexSandboxUsers)** | Claude Opus 4.8 | ✅ SECURED (partial) | ROOT CAUSE: `C:\Users\vizio` grants `Cybertronia\CodexSandboxUsers` (= the `CodexSandboxOnline`/`CodexSandboxOffline` accounts that Codex agent sandboxes run as) Modify+inherit `(OI)(CI)(M,DC)` over the ENTIRE home dir — inherited into every secret store. Something in the sandbox infra RE-APPLIES this grant periodically (observed reappearing ~1min after removal; NOT from CAMELOT_OS code — zero repo refs; NOT the `Camelot-Ledger-Guardian-5min` task, whose script `squires/ledger_guardian.py` is missing so it fails every 5min — now DISABLED). SECURED as non-elevated `vizio` by breaking ACL inheritance + owner/SYSTEM/Admin-only on each sensitive store (immune to the re-ACLer since inheritance is off): `.notebooklm` (2× `storage_state.json` = full Google account session cookies, `.google.com`-wide, exp 2027; + `browser_profile/` 2110 files), `.ssh`, `.aws`, `.azure`, `.kube`, `.docker` (301 files), `.git-credentials` (plaintext git tokens). Also gitignored `.notebooklm/` in the home-dir git repo (was un-ignored; no remote so unpushable). BLOCKED: removing the home-root grant itself needs Administrator (Set-Acl: SeSecurityPrivilege not held; icacls ran away on the AppData junction loops) — elevated `Set-Acl`+`PurgeAccessRules` command handed to the Sovereign. EXPOSURE NOTE: lockdown stops FUTURE access only; these creds were group-readable while the long-standing grant was live → recommended rotation (Google sign-out-all, GitHub token, SSH keys) + admin removal of the root grant. Sealed: 2026-07-02T17:30:00Z |
+| 1737 | **QERE MV3 side-panel extension + injected-CLAUDE.md quarantine** | Claude Opus 4.8 | ✅ COMPLETE | Built `04_KINETIC/qere_extension/` (Chrome MV3: context-menu text extraction → chrome.storage → side panel → QERE-formatted intent → real `fetch` POST to the multivoice-router `/intent` endpoint). Grounded against the ACTUAL router contract (`04_KINETIC/multivoice/orchestration/router.go`: raw-text body → SSE `event: response\ndata:` reply), NOT the fictional `api.cybertronia.internal` endpoint from the draft. Dropped HTMX (form-encoded POST doesn't match the raw-text contract); added `host_permissions` for CORS. Verified as a real unpacked extension in Chromium (Playwright): context-menu→storage→panel pickup→QERE wrap→fetch→error-render all confirmed against a live local router; SSE parser unit-tested against the router's exact format. Router `/intent` reached the real backend (returned 502: unrelated pre-existing Anthropic billing block — not an extension defect). Noted: `:7680` collides with a Windows `svchost` service on this host (documented in the extension README). Security: quarantined `03_VAULT/training/configs/CLAUDE.md` (a long-standing Jun-7 auto-loading agent-directive file that instructed overwriting root config + creating a shell shim; it loaded into agent context on read of neighboring `hud.py`) by renaming to `CLAUDE.md.disabled` — content preserved, reversible, nothing references it by path. Sealed: 2026-07-02T14:00:00Z |
+| 1736 | **//NANO_SWARM_EXPAND — 6-phase protocol COMPLETE** | ANYA_Omega + SIR_BORRIS | ✅ CRYSTALLIZED | Phases: P0:PASS | P1:WARN | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 646ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-06-30T18:11:41Z |
+| 1735 | **//NANO_SWARM_EXPAND — 6-phase protocol COMPLETE** | ANYA_Omega + SIR_BORRIS | ✅ CRYSTALLIZED | Phases: P0:PASS | P1:WARN | P2:PASS | P3:PASS | P4:PASS. SAT constraint graph satisfied (5/5). CvRDT mesh hydrated to L0 tissue. Ouroboros SSM seed at 01_KERNEL/merlin/context/ouroboros_seed.json. Aegis redact map: 7 patterns, 4 sinks bound. BORRIS AST audit: 4 artifacts clean. Paladin Octem: 4/4 VERIFIED. Total: 1333ms. PDDL_Signed_Zero_Entropy. Sealed: 2026-06-30T18:11:31Z |
 | 1734 | **Memory Purge** | SYSTEM | ✅ COMPLETED | Zeroed-out ChromaDB vector indices, L1.5 Redis Agent Memory, UKG_MEMORY.jsonld graph, and local memory.md learned aspects. — 2026-06-27 04:50 UTC |
 | 1733 | **PHASE H WEEKS 1-2: STRATEGIC RECOMMENDATIONS & NEXT STEPS** | SirRustClaw | 📋 PLANNING | **Date:** 2026-07-08. **Recommendation Summary:** (1) Immediate: Deploy to staging, collect 24-48hr real-world metrics (refine baselines). (2) Technical: Add time-window bucketing to Pattern Learner, expand Optimizer candidates (batch/timeout/circuit-breaker), add absolute thresholds to Dashboard. (3) Week 3 Prep: Design feedback collection infrastructure, stakeholder alignment on business metrics/priorities, finalize success criteria. (4) Risk Mitigation: Validate thresholds against production data, prevent pattern over-fitting (90% confidence floor), load test with 50K ops, implement metrics schema validation. (5) Timeline: Staging deployment 2026-07-09, baseline refinement 2026-07-10, stakeholder review 2026-07-08, Week 3 launch ready 2026-07-09. **Status:** GO for Week 3 pending real-world validation. Production-ready system. All critical path tests passing. **Next:** Week 3 Feedback Integration (2026-07-09), then Week 4 Production Hardening (2026-07-16). **Sealed:** 2026-07-08T23:59:59Z |
 | 1732 | **PHASE H WEEK 2: LEARNING ENGINE — COMPLETE & SIGNED OFF** | SirRustClaw | ✅ COMPLETE | **Date:** 2026-07-08. **Week 2 Final Sign-Off:** Complete learning engine deployed and production-ready. (1) Pattern Learner (Day 1): 510+ lines, 4 pattern types, 86% avg confidence. (2) Optimizer Engine (Day 2): 420+ lines, 5+ candidate categories, composite scoring. (3) Learning Dashboard (Day 3): 310+ lines, health status, projections, visualization. (4) Integration Testing (Day 4): 500+ lines, 15 tests, critical path 100% passing. **Cumulative:** 1,740+ lines code, 54+ tests, 1,500+ lines docs. **Performance:** Full pipeline 1.1s (target 2s), dashboard 150ms (target 500ms), scales to 5000+ ops. **Integration:** Pattern Learner → Optimizer → Dashboard end-to-end verified. **Status:** Production-ready autonomous learning engine. All objectives achieved. Ready for Week 3 Feedback Integration (2026-07-09). **Sealed:** 2026-07-08T23:59:59Z |
@@ -1803,3 +1808,682 @@
   - `go build ./... && go vet ./...` — exit 0
   - `go test ./...` — orchestration + providers PASS (affinity key, sticky pin, SLO escape, e2e router; provider round-trips)
 - **Tag**: CYBERTRONIA_OMNIROUTE_AFFINITY_LAYER
+
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26467s tasks=90 fail=0 probes=8/9 cells=2 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27067s tasks=92 fail=0 probes=8/9 cells=2 |
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27667s tasks=94 fail=0 probes=8/9 cells=2 |
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28267s tasks=96 fail=0 probes=6/9 cells=2 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28867s tasks=98 fail=0 probes=6/9 cells=2 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29467s tasks=100 fail=0 probes=6/9 cells=2 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30067s tasks=102 fail=0 probes=8/9 cells=2 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30667s tasks=104 fail=0 probes=8/9 cells=2 |
+| 952 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31267s tasks=106 fail=0 probes=8/9 cells=2 |
+| 953 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31867s tasks=108 fail=0 probes=8/9 cells=2 |
+| 954 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=32468s tasks=110 fail=0 probes=8/9 cells=2 || 2026-06-30T01:07:42-04:00 | MERLIN | PR #59 MERGED to main (merge commit 7c759ff): go_router SSE knight loop + dashboard avatars + repo alignment, 14 commits | MERGED |
+| 2026-06-30T01:07:44-04:00 | SIR_HASHIMOTO | Deleted merged remote branch feat/bifrost-control-plane-link (0 commits unmerged) | DONE |
+| 2026-06-30T01:07:46-04:00 | SIR_WATCHDOG | CI red root-caused: GitHub Actions billing/spending-limit blocks runner provisioning (not code); merge was locally-verified (go build, tsc 0, vite 0, hooks pass) | FLAGGED |
+| 2026-06-30T13:13:06.790276+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-30T13:13:06.791777+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-30T13:13:06.805015+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T13:13:19.203575+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-30T13:13:19.205085+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-30T13:13:19.217643+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T13:13:19.257499+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-30T13:13:19.258260+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-30T13:13:19.269315+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T13:13:38.250007+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-30T13:13:38.252069+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-30T13:13:38.264545+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T13:13:39.074142+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-30T13:13:39.075044+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-30T13:13:39.088053+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T13:13:39.687314+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T13:13:39.688806+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-30T13:13:39.780651+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T13:13:40.571632+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T13:13:40.571977+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-30T13:13:40.579958+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T13:15:53.221101+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-30T09:16:22.837369 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-30T14:27:58.822228+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_SYNC sync' to Cloud Brain] | HYDRATED |
+| 2026-06-30T14:27:58.847319+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC sync] | HYDRATED |
+| 2026-06-30T14:27:58.857317+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_SYNC sync, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+---
+## [2026-06-30] Implement Ouroboros Rust ↔ Python Bindings
+- **Actor**: SIR_CODEX (Codex / Antigravity)
+- **Scope**:
+  - 01_KERNEL/reasoning/ouroboros_engine
+  - 03_VAULT/training/configs/ouroboros.py
+- **Verification performed**:
+  - `All 7 pytest tests passed`
+  - `Maturin build completed successfully`
+- **Tag**: [Omega_SYNC]
+| 2026-06-30T15:15:32.667567+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-30T15:15:32.668961+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-30T15:15:32.683618+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T15:15:46.124754+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-30T15:15:46.125327+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-30T15:15:46.136698+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T15:15:46.200511+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-30T15:15:46.201142+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-30T15:15:46.209496+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T15:16:05.722813+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-30T15:16:05.724759+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-30T15:16:05.734464+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T15:16:06.428227+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-30T15:16:06.428670+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-30T15:16:06.435911+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T15:16:07.075526+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T15:16:07.075929+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-30T15:16:07.090129+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T15:16:07.353749+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T15:16:07.354687+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-30T15:16:07.364313+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T15:17:44.171610+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-30T11:18:06.564294 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-30T16:21:57.146072+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-30T16:21:57.147719+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-30T16:21:57.164843+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T16:22:12.888588+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-30T16:22:12.892430+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-30T16:22:12.917136+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T16:22:13.005974+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-30T16:22:13.006816+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-30T16:22:13.028475+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T16:23:17.832675+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-30T16:23:17.835975+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-30T16:23:17.853593+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T16:23:18.748548+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-30T16:23:18.749675+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-30T16:23:18.785142+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T16:23:19.693476+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T16:23:19.694508+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-30T16:23:19.752463+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T16:23:20.222310+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T16:23:20.223324+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-30T16:23:20.237454+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T16:26:57.512087+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-30T12:27:24.387964 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-30T17:00:20.408785+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:00:20.409773+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-30T17:00:20.418809+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:00:33.397747+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:00:33.398635+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-30T17:00:33.410002+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:00:33.435237+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:00:33.435629+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-30T17:00:33.443261+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:00:49.670190+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:00:49.670979+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-30T17:00:49.681439+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:00:50.328037+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:00:50.328702+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-30T17:00:50.337282+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:00:50.620232+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:00:50.620586+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-30T17:00:50.627938+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:00:50.790281+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:00:50.791155+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-30T17:00:50.799949+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:02:33.541971+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-30T13:03:26.386762 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-30T13:25:48.313552 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-30T17:26:41.332473+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:26:41.333632+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-30T17:26:41.346244+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:26:54.230048+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:26:54.231213+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-30T17:26:54.248158+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:26:54.294846+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:26:54.295564+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-30T17:26:54.307719+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:27:12.980780+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:27:12.981966+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-30T17:27:12.995709+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:27:13.609150+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:27:13.610164+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-30T17:27:13.622026+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:27:14.121458+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:27:14.122692+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-30T17:27:14.141463+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:27:14.318496+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:27:14.318821+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-30T17:27:14.323426+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T17:29:12.020109+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-30T13:29:38.784262 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-30T17:34:52.220433+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_SYNC sync' to Cloud Brain] | HYDRATED |
+| 2026-06-30T17:34:52.221826+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC sync] | HYDRATED |
+| 2026-06-30T17:34:52.231082+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_SYNC sync, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:03:17.539045+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:03:17.542679+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-30T18:03:17.558822+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:03:30.857389+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:03:30.860327+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-30T18:03:30.872033+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:03:30.910406+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:03:30.911086+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-30T18:03:30.918526+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:03:50.524290+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:03:50.525054+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-30T18:03:50.534975+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:03:51.104515+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:03:51.105143+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-30T18:03:51.113668+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:03:51.447861+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:03:51.448197+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-30T18:03:51.453271+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:03:51.689293+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:03:51.689608+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-30T18:03:51.695269+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:06:11.737155+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-30T14:06:39.487836 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-06-30T18:18:49.362285+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:18:49.364849+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-30T18:18:49.379949+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:21:50.675514+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:21:50.677547+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-30T18:21:50.698405+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:26:31.612561+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --verify-all' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:26:31.614112+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --verify-all] | HYDRATED |
+| 2026-06-30T18:26:31.635638+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --verify-all, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:53:00.397345+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:53:00.398904+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-06-30T18:53:00.409559+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:53:17.992125+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:53:17.993494+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-06-30T18:53:18.009007+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:53:18.054185+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:53:18.055189+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-06-30T18:53:18.065649+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:53:53.709964+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:53:53.712496+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-06-30T18:53:53.755707+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:53:54.907623+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:53:54.908554+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-06-30T18:53:54.939038+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:53:55.636971+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:53:55.637873+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-06-30T18:53:55.650827+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:53:56.115278+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-06-30T18:53:56.116305+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-06-30T18:53:56.130513+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-06-30T18:57:27.856971+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-06-30T14:57:56.661452 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+---
+## [2026-06-30] Northstar Phase 2: Dynamic Knight Swapping, Intent Switchboard, and TOON_v2_diff State Sync
+- **Actor**: SIR_CODEX (Codex / Antigravity)
+- **Scope**:
+  - control_plane/harness.py
+  - 02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.ts
+  - 01_KERNEL/senses/audio/audio_session.py
+  - control_plane/worker.py
+  - 02_FORGE/KINETIC_ARMORY/edge-router/edge-router.ts
+  - scripts/start_northstar.py
+- **Verification performed**:
+  - `pytest tests/test_bifrost_gate.py tests/test_toon_encoder.py -> 7 passed`
+  - `python scripts/start_northstar.py --test -> 6 passed (handshake, VAD, roaming, hot-swap, compression, TOON_v2_diff)`
+- **Tag**: [Northstar_Phase2_Done]
+---
+## [2026-06-30] Anya 3D Dashboard: Live Fleet panel, Config surface, Cognitive MCP server (tasks A/C/D)
+- **Actor**: Claude Sonnet 5 (orchestrator + 2-agent swarm for C/D)
+- **Scope**:
+  - 02_FORGE/PORTAL_CORE/Anya_Dashboard/src/features/hub/FleetPanel.tsx (new)
+  - 02_FORGE/PORTAL_CORE/Anya_Dashboard/src/features/hub/ConfigPanel.tsx (new)
+  - 02_FORGE/PORTAL_CORE/Anya_Dashboard/src/features/hub/SystemHub.tsx
+  - 02_FORGE/PORTAL_CORE/Anya_Dashboard/src/config/runtime.ts
+  - control_plane/cognitive_service.py (GET/POST /fleet, /config incl. sync_interval + sync_query, both hot-reloadable)
+  - control_plane/cognitive_mcp.py (new — scoped MCP server: memcastle_search, graphify_ingest, cognitive_sync, cognitive_forage)
+  - tests/test_cognitive_service.py, tests/test_cognitive_mcp.py, and matching vitest specs
+- **Verification performed**:
+  - `pytest tests/test_cognitive_service.py tests/test_cognitive_mcp.py tests/test_graphify.py tests/test_memcastle.py tests/test_memcastle_sync.py -> 41 passed`
+  - `vitest run` (Anya_Dashboard) -> 13 passed; `tsc --noEmit` clean; `vite build` clean
+- **Commits**: acb597c (A), 7b9d89f + 0105116 (C), 83890db (D)
+- **Note**: cognitive_service.py, graphify.py, memcastle.py, memcastle_sync.py existed only in the working tree pre-A and were tracked in git for the first time as part of commit 7b9d89f.
+- **//sync executed post-merge**: `python control_plane/memcastle_sync.py sync --query "..."` -> push status=ok (9 items -> NotebookLM note 212de673-526a-4388-aa93-78cbbe6772a2, 922394 chars), pull status=ok (stored_id=11, 62989 chars synthesis pulled back into MemCastle). Cloud reachable at run time.
+- **Tag**: [Anya_Dashboard_A_C_D_Done]
+| 2026-07-01T00:36:14.949440+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-01T00:36:14.950914+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-01T00:36:14.962342+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T00:36:37.793741+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-01T00:36:37.794451+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-01T00:36:37.804059+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T00:36:37.830353+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-01T00:36:37.831063+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-01T00:36:37.841739+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T00:36:53.096276+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-01T00:36:53.096669+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-01T00:36:53.101996+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T00:36:53.495447+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-01T00:36:53.495793+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-01T00:36:53.500109+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T00:36:53.884176+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T00:36:53.884944+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-01T00:36:53.894427+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T00:36:54.052937+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T00:36:54.053278+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-01T00:36:54.058475+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:31:36.070707+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-01T01:31:36.072450+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-01T01:31:36.087511+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:32:00.936122+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-01T01:32:00.936985+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-01T01:32:00.954913+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:32:01.005795+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-01T01:32:01.006725+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-01T01:32:01.020179+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:33:01.915343+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-01T01:33:01.917492+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-01T01:33:01.931474+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:33:02.425894+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-01T01:33:02.426858+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-01T01:33:02.437922+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:33:02.963919+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T01:33:02.964913+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-01T01:33:02.978511+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:33:03.290664+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T01:33:03.291597+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-01T01:33:03.302911+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T01:37:39.830243+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-01T04:30:04.035982+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SCAN .] | HYDRATED |
+| 2026-07-01T04:30:04.042203+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SCAN ., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-01T04:57:34.267742+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SCAN .] | HYDRATED |
+| 2026-07-01T04:57:34.294199+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SCAN ., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-01T05:08:52.786665+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:08:52.787848+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-07-01T05:08:52.799710+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:09:31.575312+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:09:31.576051+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-01T05:09:31.585580+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:09:54.633849+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:09:54.634528+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-01T05:09:54.643581+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:09:54.685388+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:09:54.686110+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-01T05:09:54.696236+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:10:14.030666+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:10:14.031125+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-01T05:10:14.037257+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:10:14.509860+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:10:14.510343+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-01T05:10:14.517379+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:10:14.916867+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:10:14.917291+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-01T05:10:14.925386+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:10:15.072649+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:10:15.073149+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-01T05:10:15.079613+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:11:50.673645+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-01T01:12:21.650165 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+| 2026-07-01T05:33:08.480602+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //COMPILE ] | HYDRATED |
+| 2026-07-01T05:33:13.528121+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_COMPILE' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:33:13.528680+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_COMPILE] | HYDRATED |
+| 2026-07-01T05:33:13.536400+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_COMPILE, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T05:47:30.606373+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN upgrade to target] | HYDRATED |
+| 2026-07-01T05:47:30.609973+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN upgrade to target, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-01T05:47:51.437853+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-07-01T05:47:51.438195+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-07-01T05:47:51.443213+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=6/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=2 fail=0 probes=8/9 cells=1 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=4 fail=0 probes=8/9 cells=1 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=6 fail=0 probes=8/9 cells=1 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=8 fail=0 probes=8/9 cells=1 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=10 fail=0 probes=8/9 cells=1 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=12 fail=0 probes=8/9 cells=1 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=14 fail=0 probes=8/9 cells=1 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4860s tasks=16 fail=0 probes=8/9 cells=1 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5460s tasks=18 fail=0 probes=8/9 cells=1 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6060s tasks=20 fail=0 probes=8/9 cells=1 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6663s tasks=22 fail=0 probes=8/9 cells=1 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7263s tasks=24 fail=0 probes=8/9 cells=1 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7863s tasks=26 fail=0 probes=8/9 cells=1 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8463s tasks=28 fail=0 probes=8/9 cells=1 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9063s tasks=30 fail=0 probes=8/9 cells=1 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9663s tasks=32 fail=0 probes=8/9 cells=1 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10263s tasks=34 fail=0 probes=8/9 cells=1 |
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10863s tasks=36 fail=0 probes=8/9 cells=1 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11463s tasks=38 fail=0 probes=8/9 cells=1 |
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12063s tasks=40 fail=0 probes=8/9 cells=1 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12663s tasks=42 fail=0 probes=8/9 cells=1 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13263s tasks=44 fail=0 probes=8/9 cells=1 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13863s tasks=46 fail=0 probes=8/9 cells=1 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14463s tasks=48 fail=0 probes=8/9 cells=1 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15064s tasks=50 fail=0 probes=8/9 cells=1 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15664s tasks=52 fail=0 probes=8/9 cells=1 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16264s tasks=54 fail=0 probes=8/9 cells=1 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16864s tasks=56 fail=0 probes=8/9 cells=1 |
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17464s tasks=58 fail=0 probes=8/9 cells=1 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18064s tasks=60 fail=0 probes=8/9 cells=1 |
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18664s tasks=62 fail=0 probes=8/9 cells=1 |
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19264s tasks=64 fail=0 probes=8/9 cells=1 || 2026-07-01T15:21:31.449201+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:21:31.452892+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-01T15:21:31.472650+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:21:56.159152+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:21:56.165318+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-01T15:21:56.187982+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:21:56.251779+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:21:56.252871+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-01T15:21:56.273237+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:23:04.990854+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:23:04.993454+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-01T15:23:05.016164+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:23:06.000732+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:23:06.001917+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-01T15:23:06.021925+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:23:06.819804+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:23:06.821669+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-01T15:23:06.836914+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:23:07.256861+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:23:07.257843+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-01T15:23:07.274374+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:26:27.517709+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-01T11:27:04.428854 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19864s tasks=66 fail=0 probes=7/9 cells=1 || 2026-07-01T15:31:55.215706+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:31:55.216295+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-01T15:31:55.227431+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:32:18.322262+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:32:18.323970+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-01T15:32:18.345523+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:32:18.392662+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:32:18.394046+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-01T15:32:18.408737+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:32:36.504398+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:32:36.505688+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-01T15:32:36.519762+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:32:37.249684+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:32:37.250263+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-01T15:32:37.260879+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:32:37.773813+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:32:37.774143+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-01T15:32:37.782521+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:32:37.996547+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:32:37.997481+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-01T15:32:38.006746+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:33:54.872678+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-01T11:34:18.849630 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20465s tasks=68 fail=0 probes=8/9 cells=1 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21065s tasks=70 fail=0 probes=8/9 cells=1 || 2026-07-01T15:57:57.258753+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT :HELIO_INIT --mode=VERBOSE --target=/brain/knights/sir_helio/' to Cloud Brain] | HYDRATED |
+| 2026-07-01T15:57:57.260053+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT :HELIO_INIT --mode=VERBOSE --target=/brain/knights/sir_helio/] | HYDRATED |
+| 2026-07-01T15:57:57.268051+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT :HELIO_INIT --mode=VERBOSE --target=/brain/knights/sir_helio/, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T15:58:16.969819+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //DEPLOY vKG_Nano_Glyph --sync-depth=MAX] | HYDRATED |
+| 2026-07-01T15:58:33.081894+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //VERIFY Provenance_Integrity --audit-mode=CRITICAL] | HYDRATED |
+
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21665s tasks=75 fail=0 probes=8/9 cells=2 || 2026-07-01T16:07:58.528620+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:07:58.530942+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-01T16:07:58.546217+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:08:21.426348+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:08:21.426961+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-01T16:08:21.438873+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:08:21.490192+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:08:21.491596+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-01T16:08:21.504757+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22265s tasks=77 fail=0 probes=7/9 cells=2 || 2026-07-01T16:09:25.374443+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT :CODEX_FABRICATION --mode=HIGH_PRECISION --target=/brain/knights/sir_codex/' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:09:25.374963+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT :CODEX_FABRICATION --mode=HIGH_PRECISION --target=/brain/knights/sir_codex/] | HYDRATED |
+| 2026-07-01T16:09:25.384610+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT :CODEX_FABRICATION --mode=HIGH_PRECISION --target=/brain/knights/sir_codex/, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:09:37.584594+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:09:37.585538+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-01T16:09:37.601511+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:09:38.327573+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:09:38.328500+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-01T16:09:38.343884+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:09:39.117075+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:09:39.118295+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-01T16:09:39.134869+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:09:39.552230+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:09:39.553555+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-01T16:09:39.569662+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:09:48.127199+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_SYNC LADY_ALEXANDRIA_CRIU_LEDGER --init-auth=TLS_02_SECURE' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:09:48.127810+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC LADY_ALEXANDRIA_CRIU_LEDGER --init-auth=TLS_02_SECURE] | HYDRATED |
+| 2026-07-01T16:09:48.137359+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_SYNC LADY_ALEXANDRIA_CRIU_LEDGER --init-auth=TLS_02_SECURE, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:14:21.388382+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-01T12:15:10.202354 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22865s tasks=81 fail=0 probes=6/9 cells=3 || 2026-07-01T16:22:39.417630+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:22:39.418356+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-01T16:22:39.425794+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:23:01.644821+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:23:01.646638+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-01T16:23:01.660428+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:23:01.699270+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:23:01.700274+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-01T16:23:01.713315+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:23:18.334795+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:23:18.335369+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-01T16:23:18.343342+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:23:18.969931+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:23:18.970654+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-01T16:23:18.983464+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:23:19.413451+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:23:19.414145+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-01T16:23:19.425784+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:23:19.674429+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-01T16:23:19.675159+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-01T16:23:19.685215+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-01T16:25:17.470054+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-01T12:25:49.154751 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+
+| 939 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=23466s tasks=83 fail=0 probes=6/9 cells=3 |
+| 940 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24066s tasks=85 fail=0 probes=8/9 cells=3 |
+| 941 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24666s tasks=87 fail=0 probes=8/9 cells=3 |
+| 942 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25268s tasks=88 fail=0 probes=8/9 cells=3 |
+| 943 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25868s tasks=90 fail=0 probes=8/9 cells=3 |
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26468s tasks=92 fail=0 probes=8/9 cells=3 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27068s tasks=94 fail=0 probes=8/9 cells=3 |
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27669s tasks=96 fail=0 probes=8/9 cells=3 |
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28269s tasks=98 fail=0 probes=8/9 cells=3 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28869s tasks=100 fail=0 probes=8/9 cells=3 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29469s tasks=102 fail=0 probes=8/9 cells=3 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30069s tasks=104 fail=0 probes=6/9 cells=3 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30669s tasks=106 fail=0 probes=8/9 cells=3 |
+| 952 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31269s tasks=108 fail=0 probes=8/9 cells=3 |
+| 953 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31869s tasks=110 fail=0 probes=8/9 cells=3 |
+| 954 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=32470s tasks=112 fail=0 probes=8/9 cells=3 |
+| 955 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33070s tasks=114 fail=0 probes=8/9 cells=3 |
+| 956 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33670s tasks=116 fail=0 probes=8/9 cells=3 |
+| 957 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34270s tasks=118 fail=0 probes=8/9 cells=3 |
+| 958 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34870s tasks=120 fail=0 probes=8/9 cells=3 |
+| 959 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=35470s tasks=122 fail=0 probes=8/9 cells=3 |
+| 960 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36070s tasks=124 fail=0 probes=8/9 cells=3 |
+| 961 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36670s tasks=126 fail=0 probes=8/9 cells=3 |
+| 962 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37270s tasks=128 fail=0 probes=5/9 cells=3 |
+| 963 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37870s tasks=130 fail=0 probes=8/9 cells=3 |
+| 964 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=38470s tasks=132 fail=0 probes=8/9 cells=3 |
+| 965 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=39071s tasks=134 fail=0 probes=9/9 cells=3 |
+| 966 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=39671s tasks=134 fail=0 probes=9/9 cells=3 |
+| 967 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=40271s tasks=134 fail=0 probes=9/9 cells=3 || 2026-07-01T21:13:26.473536+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT :HELIO_INIT --mode=VERBOSE --target=/brain/knights/sir_helio/' to Cloud Brain] | HYDRATED |
+| 2026-07-01T21:13:26.474269+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT :HELIO_INIT --mode=VERBOSE --target=/brain/knights/sir_helio/] | HYDRATED |
+| 2026-07-01T21:13:26.480065+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT :HELIO_INIT --mode=VERBOSE --target=/brain/knights/sir_helio/, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 968 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=40871s tasks=135 fail=0 probes=8/9 cells=3 |
+| 969 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=41471s tasks=137 fail=0 probes=8/9 cells=3 |
+| 970 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=42071s tasks=139 fail=0 probes=8/9 cells=3 |
+| 971 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=42671s tasks=141 fail=0 probes=6/9 cells=3 |
+| 972 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=43271s tasks=143 fail=0 probes=8/9 cells=3 |
+| 973 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=43871s tasks=145 fail=0 probes=8/9 cells=3 |
+| 974 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=44471s tasks=147 fail=0 probes=8/9 cells=3 |
+| 975 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=45071s tasks=149 fail=0 probes=8/9 cells=3 |
+| 976 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=45671s tasks=151 fail=0 probes=9/9 cells=3 |
+| 977 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46271s tasks=152 fail=0 probes=8/9 cells=3 |
+| 978 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=46871s tasks=154 fail=0 probes=9/9 cells=3 |
+| 979 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=47471s tasks=154 fail=0 probes=9/9 cells=3 |
+| 980 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48071s tasks=154 fail=0 probes=9/9 cells=3 |
+| 981 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=48671s tasks=154 fail=0 probes=9/9 cells=3 |
+| 982 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49271s tasks=154 fail=0 probes=9/9 cells=3 |
+| 983 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=49871s tasks=154 fail=0 probes=9/9 cells=3 |
+| 984 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=50471s tasks=154 fail=0 probes=9/9 cells=3 |
+| 985 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51071s tasks=154 fail=0 probes=9/9 cells=3 |
+| 986 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=51671s tasks=154 fail=0 probes=9/9 cells=3 |
+| 987 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52271s tasks=154 fail=0 probes=9/9 cells=3 |
+| 988 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=52871s tasks=154 fail=0 probes=9/9 cells=3 |
+| 989 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=53471s tasks=154 fail=0 probes=9/9 cells=3 |
+| 990 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54071s tasks=154 fail=0 probes=9/9 cells=3 |
+| 991 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=54671s tasks=154 fail=0 probes=9/9 cells=3 |
+| 992 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=55271s tasks=154 fail=0 probes=9/9 cells=3 |
+| 993 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=55871s tasks=154 fail=0 probes=9/9 cells=3 |
+| 994 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=56471s tasks=154 fail=0 probes=9/9 cells=3 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=8/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=2 fail=0 probes=8/9 cells=1 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=4 fail=0 probes=8/9 cells=1 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=6 fail=0 probes=8/9 cells=1 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=8 fail=0 probes=8/9 cells=1 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=10 fail=0 probes=8/9 cells=1 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=12 fail=0 probes=8/9 cells=1 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=14 fail=0 probes=8/9 cells=1 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4860s tasks=16 fail=0 probes=8/9 cells=1 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5460s tasks=17 fail=0 probes=9/9 cells=1 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6060s tasks=17 fail=0 probes=9/9 cells=1 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6660s tasks=17 fail=0 probes=9/9 cells=1 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7260s tasks=17 fail=0 probes=9/9 cells=1 |
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7860s tasks=17 fail=0 probes=9/9 cells=1 |
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8460s tasks=17 fail=0 probes=9/9 cells=1 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9060s tasks=17 fail=0 probes=9/9 cells=1 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9660s tasks=17 fail=0 probes=9/9 cells=1 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10260s tasks=17 fail=0 probes=9/9 cells=1 |
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10860s tasks=17 fail=0 probes=9/9 cells=1 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11460s tasks=17 fail=0 probes=9/9 cells=1 |
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12060s tasks=17 fail=0 probes=9/9 cells=1 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12660s tasks=17 fail=0 probes=9/9 cells=1 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13260s tasks=17 fail=0 probes=9/9 cells=1 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13860s tasks=17 fail=0 probes=9/9 cells=1 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14461s tasks=17 fail=0 probes=9/9 cells=1 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15061s tasks=17 fail=0 probes=9/9 cells=1 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15661s tasks=17 fail=0 probes=9/9 cells=1 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16261s tasks=17 fail=0 probes=9/9 cells=1 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16861s tasks=17 fail=0 probes=9/9 cells=1 || 2026-07-02T18:11:25.822001+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-07-02T18:11:25.823534+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-07-02T18:11:25.833418+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+| 2026-07-02T18:12:54.906115+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX activate and integrate with camelot-OS] | HYDRATED |
+| 2026-07-02T18:12:54.912897+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX activate and integrate with camelot-OS, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17461s tasks=19 fail=0 probes=9/9 cells=3 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18061s tasks=19 fail=0 probes=9/9 cells=3 |
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18661s tasks=19 fail=0 probes=9/9 cells=3 |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19261s tasks=19 fail=0 probes=9/9 cells=3 || 2026-07-02T18:45:55.166967+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX scaffold Excalibur Cybertronia bridge UI] | HYDRATED |
+| 2026-07-02T18:45:55.171774+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX scaffold Excalibur Cybertronia bridge UI, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-02T18:49:13.229048+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN Inference Filtration Layer: create filtration packages, add audit logging schema, and recompile camelotd] | HYDRATED |
+| 2026-07-02T18:49:13.237595+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN Inference Filtration Layer: create filtration packages, add audit logging schema, and recompile camelotd, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19861s tasks=21 fail=0 probes=9/9 cells=4 |
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20461s tasks=21 fail=0 probes=9/9 cells=4 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21061s tasks=21 fail=0 probes=9/9 cells=4 |
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21661s tasks=21 fail=0 probes=9/9 cells=4 |
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22261s tasks=21 fail=0 probes=9/9 cells=4 |
+---
+## [2026-07-02] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX (Codex / GPT-5)
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22861s tasks=21 fail=0 probes=9/9 cells=4 |
+| 939 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=23461s tasks=21 fail=0 probes=9/9 cells=4 |
+| 940 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24061s tasks=21 fail=0 probes=9/9 cells=4 |
+| 941 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24661s tasks=21 fail=0 probes=9/9 cells=4 |
+| 942 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25261s tasks=21 fail=0 probes=9/9 cells=4 |
+| 943 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25861s tasks=21 fail=0 probes=9/9 cells=4 |
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26461s tasks=21 fail=0 probes=9/9 cells=4 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27061s tasks=21 fail=0 probes=9/9 cells=4 || 2026-07-02T20:55:03.094010+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE Compile updated multivoice router and test] | HYDRATED |
+| 2026-07-02T20:55:03.099519+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE Compile updated multivoice router and test, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-02T20:58:56.389904+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:58:56.390921+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-02T20:58:56.407513+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:20.542698+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:20.544700+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-02T20:59:20.566272+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:20.616144+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:20.616571+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-02T20:59:20.629230+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:42.767900+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:42.769927+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run] | HYDRATED |
+| 2026-07-02T20:59:42.792620+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:43.695849+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:43.697412+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence] | HYDRATED |
+| 2026-07-02T20:59:43.712878+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\ukg.json --report-dir C:\Users\vizio\CAMELOT_OS\data\.pytest_temp\test_nano_swarm_evidence_route0\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:44.381540+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:44.381940+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |
+| 2026-07-02T20:59:44.396316+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-02T20:59:44.617252+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |
+| 2026-07-02T20:59:44.617747+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |
+| 2026-07-02T20:59:44.630698+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27661s tasks=22 fail=0 probes=9/9 cells=4 || 2026-07-02T21:03:59.364887+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |
+| 2026-07-02T17:05:06.367017 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
+
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28263s tasks=22 fail=0 probes=9/9 cells=4 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28863s tasks=22 fail=0 probes=9/9 cells=4 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29464s tasks=22 fail=0 probes=9/9 cells=4 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30064s tasks=22 fail=0 probes=9/9 cells=4 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30665s tasks=22 fail=0 probes=9/9 cells=4 || 2026-07-02T22:02:14.412752+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//TITAN_AUDIT .' to Cloud Brain] | HYDRATED |
+| 2026-07-02T22:02:14.414348+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //TITAN_AUDIT .] | HYDRATED |
+| 2026-07-02T22:02:14.424278+00:00 | HYDRATION_MGR | HYDRATE [Intent: //TITAN_AUDIT ., Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 952 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31265s tasks=23 fail=0 probes=9/9 cells=5 |
+| 953 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31865s tasks=23 fail=0 probes=9/9 cells=5 |
+| 954 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=32465s tasks=23 fail=0 probes=9/9 cells=5 |
+| 955 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33065s tasks=23 fail=0 probes=9/9 cells=5 |
+| 956 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=33665s tasks=23 fail=0 probes=9/9 cells=5 |
+| 957 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34265s tasks=23 fail=0 probes=7/9 cells=5 |
+
+| 958 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=34865s tasks=23 fail=0 probes=9/9 cells=5 |
+| 959 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=35465s tasks=23 fail=0 probes=9/9 cells=5 |
+| 960 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36065s tasks=23 fail=0 probes=9/9 cells=5 |
+| 961 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=36665s tasks=23 fail=0 probes=9/9 cells=5 |
+| 962 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37265s tasks=23 fail=0 probes=9/9 cells=5 |
+| 963 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=37865s tasks=23 fail=0 probes=9/9 cells=5 |
+| 964 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=38465s tasks=23 fail=0 probes=9/9 cells=5 |
+| 965 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=39065s tasks=23 fail=0 probes=9/9 cells=5 |

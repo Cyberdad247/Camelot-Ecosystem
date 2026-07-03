@@ -1,12 +1,18 @@
 package main
 
 import (
+	"context"
 	_ "embed"
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
+	"net/http/httputil"
+	"net/url"
 	"os"
+	"os/exec"
+	"strings"
 	"sync"
 	"time"
 )
@@ -33,6 +39,10 @@ type RuneResult struct {
 // These names line up with the avatar slots the 3D hub expects.
 var knightRoster = []string{
 	"anya", "merlin", "codex", "hashimoto", "boris", "helios",
+	"alex", "forge", "ghost", "liberte", "mnemo", "ouroboros", "sentinel",
+	"valerian", "heimdall", "openclaw", "rustclaw", "hermes", "nanobot", "zeroclaw",
+	"arthur", "aurelius", "proxy", "veritas", "octavian", "lancelot", "stitch",
+	"alchemist", "vaelen", "sonus", "visage", "apis", "sparkle", "galahad", "scavenger",
 }
 
 // evaluateRune holds the original CLI logic in one place so both the CLI path
@@ -55,6 +65,39 @@ func evaluateRune(runeName, taskName string) RuneResult {
 			"z3_verification_ms": 12,
 		},
 	}
+}
+
+// rtkBinPath locates the compiled Rust rtk_cli engine binary. CAMELOT_RTK_BIN
+// wins (set by the cybertronia supervisor); otherwise we fall back to PATH.
+func rtkBinPath() string {
+	if p := os.Getenv("CAMELOT_RTK_BIN"); p != "" {
+		return p
+	}
+	return "rtk_cli"
+}
+
+// kineticStrip dispatches a rune's task text through the real Rust RTK engine
+// (control_plane/rtk) via subprocess — the Go->Rust wire. Best-effort: any
+// failure (missing binary, timeout, bad output) returns ok=false and the
+// router proceeds without it, so the Rust layer is an enhancement, not a
+// hard dependency.
+func kineticStrip(text string) (string, bool) {
+	if text == "" {
+		return "", false
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	out, err := exec.CommandContext(ctx, rtkBinPath(), text).Output()
+	if err != nil {
+		return "", false
+	}
+	var res struct {
+		Stripped string `json:"stripped"`
+	}
+	if json.Unmarshal(out, &res) != nil {
+		return "", false
+	}
+	return res.Stripped, true
 }
 
 // detectNode resolves which node this daemon is running on. CAMELOT_NODE wins;
@@ -152,6 +195,24 @@ func runServer(addr string) error {
 		w.Write(harnessHTML)
 	})
 
+	// /cognitive/* — reverse-proxy to the local Cognitive Service (:8090) so the
+	// Graphify/MemCastle/sync stack is reachable through the same public endpoint
+	// as go_router (e.g. via Tailscale Funnel). CORS is applied by withCORS below.
+	cogTarget := os.Getenv("CAMELOT_COGNITIVE_URL")
+	if cogTarget == "" {
+		cogTarget = "http://127.0.0.1:8092"
+	}
+	if cogURL, err := url.Parse(cogTarget); err == nil {
+		proxy := httputil.NewSingleHostReverseProxy(cogURL)
+		mux.HandleFunc("/cognitive/", func(w http.ResponseWriter, r *http.Request) {
+			r.URL.Path = strings.TrimPrefix(r.URL.Path, "/cognitive")
+			if r.URL.Path == "" {
+				r.URL.Path = "/"
+			}
+			proxy.ServeHTTP(w, r)
+		})
+	}
+
 	// GET /healthz — node identity + liveness for the cluster.
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -172,6 +233,11 @@ func runServer(addr string) error {
 			return
 		}
 		result := evaluateRune(runeName, taskName)
+		// Wire the task through the real Rust RTK engine (Go -> Rust subprocess).
+		if stripped, ok := kineticStrip(taskName); ok {
+			result.Metadata["kinetic_engine"] = "rtk"
+			result.Metadata["rtk_stripped"] = stripped
+		}
 		knight := activeKnightFor(runeName)
 		h.broadcast(sseEvent{
 			name: "active_knight",
@@ -185,6 +251,38 @@ func runServer(addr string) error {
 		})
 		w.Header().Set("Content-Type", "application/json")
 		w.Write(mustJSON(result))
+	})
+
+	// POST /plan — broadcast an `mdx` event carrying a markdown visual plan.
+	// content comes from the `content` query param or the raw request body;
+	// optional `title`/`knight`. This is the real source the UI overlay renders.
+	mux.HandleFunc("/plan", func(w http.ResponseWriter, r *http.Request) {
+		content := r.URL.Query().Get("content")
+		if content == "" {
+			body, _ := io.ReadAll(io.LimitReader(r.Body, 1<<20)) // cap at 1 MiB
+			content = string(body)
+		}
+		if content == "" {
+			http.Error(w, `{"error":"missing content"}`, http.StatusBadRequest)
+			return
+		}
+		title := r.URL.Query().Get("title")
+		knight := r.URL.Query().Get("knight")
+		if knight == "" {
+			knight = "merlin"
+		}
+		h.broadcast(sseEvent{
+			name: "mdx",
+			data: mustJSON(map[string]interface{}{
+				"title":   title,
+				"knight":  knight,
+				"content": content,
+				"node":    node,
+				"ts":      time.Now().UTC().Format(time.RFC3339),
+			}),
+		})
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(mustJSON(map[string]interface{}{"status": "broadcast", "bytes": len(content)}))
 	})
 
 	// GET /events — SSE stream the 3D avatars subscribe to.
@@ -223,17 +321,36 @@ func runServer(addr string) error {
 		}
 	})
 
+	// Permissive CORS so a browser on another origin (e.g. the deployed
+	// dashboard) can open the SSE stream. EventSource sends no custom headers,
+	// so Access-Control-Allow-Origin alone is sufficient for the GET stream.
+	withCORS := func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Access-Control-Allow-Headers", "*")
+			if r.Method == http.MethodOptions {
+				w.WriteHeader(http.StatusNoContent)
+				return
+			}
+			next.ServeHTTP(w, r)
+		})
+	}
+
 	log.Printf("[go_router] node=%s serving on %s (SSE: /events, rune: /rune)", node, addr)
-	return http.ListenAndServe(addr, mux)
+	return http.ListenAndServe(addr, withCORS(mux))
 }
 
 func main() {
 	// Daemon mode: `go_router serve [addr]`. Preserves the original one-shot CLI
 	// for every other invocation so existing callers are unaffected.
 	if len(os.Args) >= 2 && os.Args[1] == "serve" {
+		// Address precedence: explicit arg > $PORT (injected by Fly/Railway/
+		// Render/etc.) > :8077 default.
 		addr := ":8077"
 		if len(os.Args) > 2 {
 			addr = os.Args[2]
+		} else if p := os.Getenv("PORT"); p != "" {
+			addr = ":" + p
 		}
 		if err := runServer(addr); err != nil {
 			log.Fatalf("[go_router] server error: %v", err)
