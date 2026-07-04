@@ -1531,3 +1531,223 @@ SIR_ALEX (Cognitive) and SIR_BORIS (Orchestration) review weekly for persona evo
 ## Archivist Scan — 2026-06-30T02:44:51.081326+00:00 (124ms)
 
 ### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-30T03:44:51.222976+00:00 (490ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-06-30T04:44:52.712747+00:00 (129ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T09:59:42.085456+00:00 (354ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T10:59:42.463039+00:00 (323ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T11:59:42.818323+00:00 (214ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T12:59:43.170780+00:00 (526ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T13:59:43.714273+00:00 (545ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T14:59:44.284500+00:00 (120ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T15:59:44.426802+00:00 (460ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T16:59:45.185932+00:00 (627ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T17:59:45.829838+00:00 (464ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T18:59:46.314129+00:00 (118ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T19:59:46.464498+00:00 (762ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T20:59:47.243554+00:00 (252ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T21:59:47.507438+00:00 (477ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T22:59:48.036393+00:00 (403ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-01T23:59:48.450504+00:00 (195ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T00:59:48.663222+00:00 (131ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T13:24:57.103382+00:00 (340ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T14:24:57.481591+00:00 (303ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T15:24:57.804207+00:00 (534ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T16:24:58.361722+00:00 (110ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T17:25:00.060410+00:00 (385ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T18:25:00.469664+00:00 (220ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T19:25:00.721921+00:00 (576ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T20:25:01.363427+00:00 (577ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T21:25:01.955206+00:00 (723ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T22:25:02.716794+00:00 (270ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-02T23:25:03.024343+00:00 (409ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T00:25:03.460687+00:00 (1084ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T01:25:04.587081+00:00 (264ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T02:25:04.870916+00:00 (334ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T03:25:05.228781+00:00 (321ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T04:25:05.573989+00:00 (491ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T05:25:06.082108+00:00 (786ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T06:25:06.884414+00:00 (339ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T07:25:07.236599+00:00 (339ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T08:25:07.593788+00:00 (466ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T09:25:08.084609+00:00 (215ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T10:25:08.316313+00:00 (315ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T11:25:08.639983+00:00 (262ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T12:25:08.908645+00:00 (267ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T13:25:09.192017+00:00 (354ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T14:25:09.553718+00:00 (299ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T15:25:09.873496+00:00 (295ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T16:25:10.185962+00:00 (293ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T17:25:10.492957+00:00 (298ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T18:25:10.802346+00:00 (419ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T19:25:11.233791+00:00 (491ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T20:25:11.746958+00:00 (231ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T21:25:11.995668+00:00 (367ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T22:25:12.380641+00:00 (313ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-03T23:25:12.565386+00:00 (507ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-04T01:11:28.028805+00:00 (615ms)
+
+### Skills: 8/8 @ v400.1.0 OK
+
+## Archivist Scan — 2026-07-04T02:11:28.710915+00:00 (263ms)
+
+### Skills: 8/8 @ v400.1.0 OK

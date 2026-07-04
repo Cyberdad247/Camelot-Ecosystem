@@ -213,6 +213,47 @@ func runServer(addr string) error {
 		})
 	}
 
+	// /vector/* — reverse-proxy to the memory_palace Rust binary (:8093).
+	// Provides sub-1ms cosine vector search across all 35 knight embeddings.
+	mpTarget := os.Getenv("CAMELOT_MEMORY_PALACE_URL")
+	if mpTarget == "" {
+		mpTarget = "http://127.0.0.1:8093"
+	}
+	if mpURL, err := url.Parse(mpTarget); err == nil {
+		mpProxy := httputil.NewSingleHostReverseProxy(mpURL)
+		mux.HandleFunc("/vector/", func(w http.ResponseWriter, r *http.Request) {
+			r.URL.Path = strings.TrimPrefix(r.URL.Path, "/vector")
+			if r.URL.Path == "" {
+				r.URL.Path = "/"
+			}
+			mpProxy.ServeHTTP(w, r)
+		})
+	}
+
+	// POST /sweep — trigger Lady M full sovereign sweep (TRIAGE→PURGE→MERGE→BRIEF).
+	mux.HandleFunc("/sweep", func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost {
+			http.Error(w, `{"error":"POST only"}`, http.StatusMethodNotAllowed)
+			return
+		}
+		dryRun := r.URL.Query().Get("dry_run") == "true"
+		args := []string{"-m", "control_plane.lady_m"}
+		if dryRun {
+			args = append(args, "--dry-run")
+		}
+		ctx, cancel := context.WithTimeout(r.Context(), 60*time.Second)
+		defer cancel()
+		out, err := exec.CommandContext(ctx, "python", args...).CombinedOutput()
+		if err != nil {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusInternalServerError)
+			w.Write(mustJSON(map[string]interface{}{"error": err.Error(), "output": string(out)}))
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(out)
+	})
+
 	// GET /healthz — node identity + liveness for the cluster.
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
