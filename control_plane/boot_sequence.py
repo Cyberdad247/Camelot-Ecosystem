@@ -25,6 +25,7 @@ from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceR
 from .codex_integration import boot_codex_integration
 from .config_manager import ConfigManager
 from .excalibur_preflight import boot_excalibur_preflight
+from .heimdall_bifrost_governance import boot_heimdall_bifrost_governance
 from .knight_configuration import write_knight_configuration
 from .nano_swarm_runtime import boot_nano_swarm_runtime
 from .orchestration_state import summarize_boot_results
@@ -529,146 +530,7 @@ def boot_cloud_brain(home: Path):
     return True, f"Cloud Brain {str(status).upper()} via {source}"
 
 
-def _warp_workflows_target() -> Path:
-    configured = ConfigManager().config.warp_local_workflows_path
-    if configured:
-        return Path(configured).expanduser()
-    if platform.system() == "Windows":
-        appdata = os.environ.get("APPDATA")
-        if appdata:
-            return Path(appdata) / "warp" / "Warp" / "data" / "workflows"
-        return Path.home() / "AppData" / "Roaming" / "warp" / "Warp" / "data" / "workflows"
-    if platform.system() == "Darwin":
-        return Path.home() / ".warp" / "workflows"
-    xdg = os.environ.get("XDG_DATA_HOME")
-    base = Path(xdg) if xdg else Path.home() / ".local" / "share"
-    return base / "warp-terminal" / "workflows"
 
-
-def _warp_workflows_source(home: Path) -> Path:
-    configured = ConfigManager().config.warp_repo_workflows_path
-    if configured:
-        path = Path(configured).expanduser()
-        if not path.is_absolute():
-            path = home / path
-        return path
-    return home / ".warp" / "workflows"
-
-
-def sync_warp_workflows(home: Path):
-    """Sync repo-scoped Warp workflows into the local Warp workflow directory."""
-    source = _warp_workflows_source(home)
-    artifact_path = home / "03_VAULT" / "runtime_state" / "warp_workflow_sync_latest.json"
-
-    def _write_artifact(payload: dict[str, Any]) -> None:
-        artifact_path.parent.mkdir(parents=True, exist_ok=True)
-        artifact_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
-
-    if not source.exists():
-        _write_artifact(
-            {
-                "status": "WARN",
-                "source": str(source),
-                "target": str(_warp_workflows_target()),
-                "error": ".warp/workflows not found",
-                "timestamp_utc": datetime_utc_iso(),
-            }
-        )
-        return False, ".warp/workflows not found"
-
-    workflows = sorted(source.glob("*.yaml")) + sorted(source.glob("*.yml"))
-    if not workflows:
-        _write_artifact(
-            {
-                "status": "WARN",
-                "source": str(source),
-                "target": str(_warp_workflows_target()),
-                "workflow_count": 0,
-                "error": ".warp/workflows contains no YAML workflows",
-                "timestamp_utc": datetime_utc_iso(),
-            }
-        )
-        return False, ".warp/workflows contains no YAML workflows"
-
-    target = _warp_workflows_target()
-    try:
-        target.mkdir(parents=True, exist_ok=True)
-        copied = 0
-        updated_files: list[str] = []
-        for workflow in workflows:
-            destination = target / workflow.name
-            if destination.exists() and destination.read_bytes() == workflow.read_bytes():
-                continue
-            shutil.copy2(workflow, destination)
-            copied += 1
-            updated_files.append(workflow.name)
-        _write_artifact(
-            {
-                "status": "OK",
-                "source": str(source),
-                "target": str(target),
-                "workflow_count": len(workflows),
-                "updated_count": copied,
-                "updated_files": updated_files,
-                "timestamp_utc": datetime_utc_iso(),
-            }
-        )
-        return True, f"{len(workflows)} Warp workflows synced to {target} ({copied} updated)"
-    except Exception as exc:
-        _write_artifact(
-            {
-                "status": "WARN",
-                "source": str(source),
-                "target": str(target),
-                "error": f"{type(exc).__name__}: {exc}",
-                "timestamp_utc": datetime_utc_iso(),
-            }
-        )
-        return False, f"Warp workflow sync failed: {type(exc).__name__}: {exc}"
-
-
-def _warp_exe_path() -> Path | None:
-    if platform.system() != "Windows":
-        return None
-    localappdata = os.environ.get("LOCALAPPDATA")
-    if localappdata:
-        candidate = Path(localappdata) / "Programs" / "Warp" / "warp.exe"
-        if candidate.exists():
-            return candidate
-    return None
-
-
-def launch_warp() -> tuple[bool, str]:
-    """Launch Warp terminal fused with Camelot-OS boot — Warp is the mission platform."""
-    exe = _warp_exe_path()
-    if exe is None:
-        return True, "Warp launch skipped (exe not found or non-Windows)"
-
-    # Skip if already running
-    try:
-        check = subprocess.run(
-            ["tasklist", "/FI", "IMAGENAME eq warp.exe", "/NH"],
-            capture_output=True, text=True,
-            encoding="utf-8",
-            errors="replace",
-            timeout=5,
-        )
-        if "warp.exe" in check.stdout.lower():
-            return True, "Warp already running"
-    except Exception:
-        pass
-
-    try:
-        DETACHED_PROCESS = 0x00000008
-        CREATE_NEW_PROCESS_GROUP = 0x00000200
-        proc = subprocess.Popen(
-            [str(exe)],
-            creationflags=DETACHED_PROCESS | CREATE_NEW_PROCESS_GROUP,
-            close_fds=True,
-        )
-        return True, f"Warp terminal launched (PID {proc.pid})"
-    except Exception as exc:
-        return False, f"Warp launch failed: {type(exc).__name__}: {exc}"
 
 
 def sync_knight_configuration(home: Path):
@@ -1079,24 +941,51 @@ def boot_kitten_tts(home: Path) -> tuple[bool, str]:
 
 
 def boot_titan_omega(home: Path) -> tuple[bool, str]:
-    """Titan Omega — graft all three memory tiers (Omega-Graph + Omega-Vault + Omega-Flux) in production mode."""
-    import importlib
-    import sys
+    """Titan Omega — graft all three memory tiers via isolated subprocess with hard timeout.
+
+    The original synchronous importlib.import_module("titan.memory.titan_omega") call
+    blocks the boot loop for 45s per attempt because the titan package performs heavy
+    I/O at import time. We now run the graft check in a child process limited to 8s
+    so the boot sequence is never stalled and the worker queue stays drained.
+    """
     kernel_dir = home / "01_KERNEL"
     if not kernel_dir.exists():
         return False, "01_KERNEL not found — Titan memory unavailable"
+
+    probe_script = (
+        "import sys; sys.path.insert(0, sys.argv[1]);"
+        "from titan.memory.titan_omega import TitanOmega;"
+        "s = TitanOmega.graft(tier='alpha_omega', mode='production', persist='all');"
+        "g = len(s.graph.graph.nodes()) if s.graph else 0;"
+        "v = len(s.vault.embeddings) if s.vault else 0;"
+        "print(f'{s.config.tier}/{s.config.mode} graph={g} vault={v}')"
+    )
+
+    venv_py = _detect_venv_python(home)
+    py = str(venv_py) if venv_py.exists() else sys.executable
+
+    _TITAN_TIMEOUT = int(os.getenv("CAMELOT_TITAN_TIMEOUT", "8"))
+
     try:
-        # Add 01_KERNEL to sys.path so `titan` package resolves
-        kernel_str = str(kernel_dir)
-        if kernel_str not in sys.path:
-            sys.path.insert(0, kernel_str)
-        mod = importlib.import_module("titan.memory.titan_omega")
-        stack = mod.TitanOmega.graft(tier="alpha_omega", mode="production", persist="all")
-        tier = stack.config.tier
-        mode = stack.config.mode
-        graph_nodes = len(stack.graph.graph.nodes()) if stack.graph else 0
-        vault_size = len(stack.vault.embeddings) if stack.vault else 0
-        return True, f"TitanOmega grafted ({tier}/{mode}) — graph={graph_nodes} nodes, vault={vault_size} embeddings"
+        result = subprocess.run(
+            [py, "-c", probe_script, str(kernel_dir)],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            timeout=_TITAN_TIMEOUT,
+            cwd=str(home),
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return True, f"TitanOmega grafted — {result.stdout.strip()}"
+        err = (result.stderr.strip() or result.stdout.strip())[:200]
+        return False, f"Titan graft failed (rc={result.returncode}): {err}"
+    except subprocess.TimeoutExpired:
+        return False, (
+            f"Import of titan_omega timed out after {_TITAN_TIMEOUT}s — "
+            "set CAMELOT_TITAN_TIMEOUT env var to extend, or ensure titan package "
+            "does not perform blocking I/O at import time."
+        )
     except Exception as exc:
         return False, f"Titan graft failed: {type(exc).__name__}: {exc}"
 
@@ -1196,16 +1085,15 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},
         {"name": "OmniRoute    :20128", "required": False, "fn": lambda: boot_omniroute_gateway(home)},
         {"name": "Hermes OmniRoute", "required": False, "fn": lambda: boot_hermes_omniroute_orchestrator(home)},
+        {"name": "Heimdall Bifrost Governance", "required": False, "fn": lambda: boot_heimdall_bifrost_governance(home)},
         {"name": "Local LT Memory:8200","required": False, "fn": lambda: start_local_lt_memory(home)},
         {"name": "Cloud Brain  Auth",  "required": False, "fn": lambda: boot_cloud_brain_auth(home)},
         {"name": "Cloud Brain   (RPC)", "required": True,  "fn": lambda: boot_cloud_brain(home)},
-        {"name": "Warp Workflow Sync", "required": False, "fn": lambda: sync_warp_workflows(home)},
         {"name": "Symbiotic Maintenance", "required": False, "fn": lambda: boot_symbiotic_maintenance(home, quick=quick)},
         {"name": "Codex Integration", "required": False, "fn": lambda: boot_codex_integration(home)},
         {"name": "Nano Swarm Runtime", "required": False, "fn": lambda: boot_nano_swarm_runtime(home)},
         {"name": "Clawdbot  :18789",   "required": False, "fn": lambda: boot_clawdbot_gateway(home)},
         {"name": "Sir Pi   [PI_AGENT]", "required": False, "fn": lambda: boot_sir_pi(home)},
-        {"name": "Warp Terminal", "required": False, "fn": launch_warp},
         {"name": "Knight Config Sync", "required": False, "fn": lambda: sync_knight_configuration(home)},
         {"name": "Vizion Telemetry", "required": False, "fn": lambda: boot_telemetry(home)},
         {"name": "Sovereign Harness", "required": False, "fn": lambda: boot_harness(home)},
