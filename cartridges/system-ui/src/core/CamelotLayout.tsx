@@ -172,13 +172,41 @@ export default function CamelotLayout() {
           </div>
           <input
             type="text"
-            placeholder="Execute system rune..."
+            placeholder="Build section (e.g. 'add pricing list') or run rune..."
             className="w-full bg-black border border-[#00E5FF]/30 rounded px-3 py-2 text-xs text-[#00E5FF] focus:outline-none focus:border-[#FFD700] placeholder:text-[#00E5FF]/30"
-            onKeyDown={(e) => {
+            onKeyDown={async (e) => {
               if (e.key === 'Enter' && e.currentTarget.value) {
                 const val = e.currentTarget.value;
-                setMessages((prev) => [...prev, val]);
                 e.currentTarget.value = '';
+                setMessages((prev) => [...prev, `[USER] ${val}`]);
+                
+                // If it looks like a design/build intent, run on-device Ouroboros SSM inference
+                if (!val.startsWith('/') && !val.startsWith('//')) {
+                  try {
+                    setMessages((prev) => [...prev, `[SSM] Querying Ouroboros engine...`]);
+                    const response = await fetch('/api/infer', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ intent: val, state_dim: 256 })
+                    });
+                    const data = await response.json();
+                    if (data.error) {
+                      setMessages((prev) => [...prev, `[SSM_ERROR] ${data.error}`]);
+                    } else {
+                      const ast = JSON.parse(data.ast_json);
+                      setMessages((prev) => [
+                        ...prev,
+                        `[SSM_AST] Tag matched: "${ast.tag}"`,
+                        `[SSM_LATENCY] Engine: ${data.engine_latency.toFixed(2)}ms | Wall: ${data.latency_ms.toFixed(2)}ms`
+                      ]);
+                    }
+                  } catch (err: any) {
+                    setMessages((prev) => [...prev, `[SSM_FETCH_FAILED] ${err.message}`]);
+                  }
+                } else {
+                  // Direct rune command (OmniRoute mock)
+                  setMessages((prev) => [...prev, `[OMNIRUTE] Dispatched command: ${val}`]);
+                }
               }
             }}
           />

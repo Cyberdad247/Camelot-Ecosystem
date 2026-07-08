@@ -53,7 +53,23 @@ export default defineConfig({
     }),
   ],
   server: {
-    port: 3000,
+    port: 3004,
     host: true,
+    proxy: {
+      '/bifrost': {
+        target: 'http://127.0.0.1:8001',
+        changeOrigin: true,
+        ws: true,
+      },
+      '/goRouter': {
+        target: 'http://127.0.0.1:8077',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/goRouter/, ''),
+      },
+      '/api': {
+        target: 'http://127.0.0.1:3000',
+        changeOrigin: true,
+      },
+    },
   },
 });
