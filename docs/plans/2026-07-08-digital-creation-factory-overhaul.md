@@ -268,7 +268,175 @@ git commit -m "feat(system-ui): implement Persona.js active state configuration 
 
 ---
 
-### Task 4: Complete Multi-Tab PWA Overhaul Layout
+### Task 4: Aion UI Temporal State Timeline
+
+**Files:**
+*   Create: `cartridges/system-ui/src/core/aionTimeline.ts`
+*   Create: `cartridges/system-ui/src/core/aionTimeline.test.ts`
+
+**Step 1: Write the failing test**
+
+Create `cartridges/system-ui/src/core/aionTimeline.test.ts`:
+```typescript
+import { describe, it, expect } from 'vitest';
+import { AionTimelineCache } from './aionTimeline';
+
+describe('AionTimelineCache', () => {
+  it('should cache state frames and recall state at specific timeline timestamp', () => {
+    const timeline = new AionTimelineCache(3);
+    timeline.push({ cpu: 15, ram: 42 });
+    timeline.push({ cpu: 25, ram: 43 });
+    
+    expect(timeline.getHistory().length).toBe(2);
+    expect(timeline.getFrame(0)?.cpu).toBe(15);
+  });
+});
+```
+
+**Step 2: Run test to verify it fails**
+
+Run:
+```powershell
+npx vitest run cartridges/system-ui/src/core/aionTimeline.test.ts
+```
+Expected output:
+`FAIL: AionTimelineCache not defined`
+
+**Step 3: Write minimal implementation**
+
+Create `cartridges/system-ui/src/core/aionTimeline.ts`:
+```typescript
+export class AionTimelineCache {
+  private frames: any[] = [];
+  private limit: number;
+
+  constructor(limit: number = 20) {
+    this.limit = limit;
+  }
+
+  public push(state: any) {
+    this.frames.push({
+      ...state,
+      timestamp: Date.now(),
+    });
+    if (this.frames.length > this.limit) {
+      this.frames.shift();
+    }
+  }
+
+  public getHistory() {
+    return this.frames;
+  }
+
+  public getFrame(index: number) {
+    if (index >= 0 && index < this.frames.length) {
+      return this.frames[index];
+    }
+    return null;
+  }
+}
+```
+
+**Step 4: Run test to verify it passes**
+
+Run:
+```powershell
+npx vitest run cartridges/system-ui/src/core/aionTimeline.test.ts
+```
+Expected output:
+`PASS: 1 test passed`
+
+**Step 5: Commit**
+
+Run:
+```bash
+git add cartridges/system-ui/src/core/aionTimeline.ts cartridges/system-ui/src/core/aionTimeline.test.ts
+git commit -m "feat(system-ui): implement Aion UI timeline state caching engine"
+```
+
+---
+
+### Task 5: Herdr Swarm Mesh Topology Mapper
+
+**Files:**
+*   Create: `cartridges/system-ui/src/core/herdrMesh.ts`
+*   Create: `cartridges/system-ui/src/core/herdrMesh.test.ts`
+
+**Step 1: Write the failing test**
+
+Create `cartridges/system-ui/src/core/herdrMesh.test.ts`:
+```typescript
+import { describe, it, expect } from 'vitest';
+import { HerdrMeshRouter } from './herdrMesh';
+
+describe('HerdrMeshRouter', () => {
+  it('should track active nodes and link connections', () => {
+    const mesh = new HerdrMeshRouter();
+    mesh.registerNode('s26', 'EDGE');
+    mesh.registerNode('nC', 'ROUTER');
+    mesh.connectNodes('s26', 'nC');
+    
+    expect(mesh.isConnected('s26', 'nC')).toBe(true);
+    expect(mesh.isConnected('s26', 'nonexistent')).toBe(false);
+  });
+});
+```
+
+**Step 2: Run test to verify it fails**
+
+Run:
+```powershell
+npx vitest run cartridges/system-ui/src/core/herdrMesh.test.ts
+```
+Expected output:
+`FAIL: HerdrMeshRouter not defined`
+
+**Step 3: Write minimal implementation**
+
+Create `cartridges/system-ui/src/core/herdrMesh.ts`:
+```typescript
+export class HerdrMeshRouter {
+  private nodes: Map<string, string> = new Map();
+  private edges: Set<string> = new Set();
+
+  public registerNode(id: string, type: string) {
+    this.nodes.set(id, type);
+  }
+
+  public connectNodes(source: string, target: string) {
+    this.edges.add(`${source}->${target}`);
+  }
+
+  public isConnected(source: string, target: string): boolean {
+    return this.edges.has(`${source}->${target}`) || this.edges.has(`${target}->${source}`);
+  }
+
+  public getNodes() {
+    return Array.from(this.nodes.entries()).map(([id, type]) => ({ id, type }));
+  }
+}
+```
+
+**Step 4: Run test to verify it passes**
+
+Run:
+```powershell
+npx vitest run cartridges/system-ui/src/core/herdrMesh.test.ts
+```
+Expected output:
+`PASS: 1 test passed`
+
+**Step 5: Commit**
+
+Run:
+```bash
+git add cartridges/system-ui/src/core/herdrMesh.ts cartridges/system-ui/src/core/herdrMesh.test.ts
+git commit -m "feat(system-ui): implement Herdr mesh node routing tracker"
+```
+
+---
+
+### Task 6: Complete Multi-Tab PWA Overhaul Layout
 
 **Files:**
 *   Modify: `cartridges/system-ui/src/core/CamelotLayout.tsx`
@@ -303,7 +471,7 @@ Expected output:
 
 **Step 3: Write minimal implementation**
 
-Overhaul `cartridges/system-ui/src/core/CamelotLayout.tsx` to read dynamic states from `audioContext.ts` and `personaState.ts`, construct the 4-column retro dashboard layout, configure approval gate actions, and link all bridge endpoints. Ensure WebGL buffers are deallocated properly on unmount via the `VramGovernor` component.
+Overhaul `cartridges/system-ui/src/core/CamelotLayout.tsx` to read dynamic states from `audioContext.ts`, `personaState.ts`, `aionTimeline.ts`, and `herdrMesh.ts`, construct the 4-column retro dashboard layout, configure approval gate actions, and link all bridge endpoints. Ensure WebGL buffers are deallocated properly on unmount via the `VramGovernor` component.
 
 **Step 4: Run test to verify it passes**
 
