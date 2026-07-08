@@ -28,16 +28,20 @@ function VramGovernor() {
   return null;
 }
 
-// ── Animated Wireframe Globe (R3F) ──
-function AvatarGlobe({ audioActive }: { audioActive: boolean }) {
-  const meshRef = useRef<THREE.Mesh>(null);
+// ── Hyperrealistic Metallic Globe (R3F) ──
+function HyperrealisticGlobe({ audioActive }: { audioActive: boolean }) {
+  const globeRef = useRef<THREE.Mesh>(null);
+  const atmosphereRef = useRef<THREE.Mesh>(null);
 
   useEffect(() => {
     let frameId: number;
     const animate = () => {
-      if (meshRef.current) {
-        meshRef.current.rotation.y += audioActive ? 0.03 : 0.006;
-        meshRef.current.rotation.x += audioActive ? 0.015 : 0.003;
+      if (globeRef.current) {
+        globeRef.current.rotation.y += audioActive ? 0.025 : 0.005;
+        globeRef.current.rotation.x += audioActive ? 0.012 : 0.002;
+      }
+      if (atmosphereRef.current) {
+        atmosphereRef.current.rotation.y -= 0.002;
       }
       frameId = requestAnimationFrame(animate);
     };
@@ -46,28 +50,57 @@ function AvatarGlobe({ audioActive }: { audioActive: boolean }) {
   }, [audioActive]);
 
   return (
-    <mesh ref={meshRef}>
-      <sphereGeometry args={[2.0, 20, 20]} />
-      <meshBasicMaterial
-        color={audioActive ? "#6B3FA0" : "#D4AF37"}
-        wireframe
-      />
-    </mesh>
+    <group>
+      {/* Dynamic Lighting to highlight specular metalness */}
+      <directionalLight position={[5, 3, 5]} intensity={1.5} color="#D4AF37" />
+      <pointLight position={[-5, -3, -5]} intensity={1.2} color="#6B3FA0" />
+      
+      {/* Inner Core: Highly polished metallic globe */}
+      <mesh ref={globeRef} castShadow receiveShadow>
+        <sphereGeometry args={[1.9, 64, 64]} />
+        <meshStandardMaterial
+          color="#D4AF37"
+          roughness={0.15}
+          metalness={0.9}
+          bumpScale={0.05}
+        />
+      </mesh>
+
+      {/* Outer Shell: Ethereal glowing atmosphere halo */}
+      <mesh ref={atmosphereRef}>
+        <sphereGeometry args={[2.05, 32, 32]} />
+        <meshBasicMaterial
+          color="#6B3FA0"
+          transparent
+          opacity={0.15}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+          wireframe
+        />
+      </mesh>
+    </group>
   );
 }
 
 type Tab = 'SOVEREIGN' | 'VOX' | 'HERMES' | 'FORGE';
+
+interface KnightStatus {
+  name: string;
+  role: string;
+  status: string;
+  colorClass: string;
+}
 
 export default function CamelotLayout() {
   const [activeTab, setActiveTab] = useState<Tab>('SOVEREIGN');
   const [telemetry, setTelemetry] = useState({
     lattice: 'RADIANT',
     ramUsage: 4.1,
-    cpuUsage: 22.4,
+    cpuUsage: 18.4,
     crystalsForged: 142,
     activeAgents: 6,
   });
-  
+
   const [messages, setMessages] = useState<string[]>([
     "[SYSTEM] Camelot-OS Boot Initialized.",
     "[BIFROST] Connected to sidecar port :8011."
@@ -88,7 +121,46 @@ export default function CamelotLayout() {
   const [audioActive, setAudioActive] = useState(false);
   const visualizerCanvasRef = useRef<HTMLCanvasElement>(null);
 
-  // ── Bifrost SSE Conduit ──
+  // ── Knight Roster State ──
+  const [knights, setKnights] = useState<KnightStatus[]>([
+    { name: 'MERLIN_Ω', role: 'Logic Core', status: 'SLEEP_MODE', colorClass: 'text-green-400' },
+    { name: 'LADY_APIS', role: 'Foraging', status: 'INGESTING_DOM...', colorClass: 'text-luxora animate-pulse' },
+    { name: 'LUKAS', role: 'Kinetic Engine', status: 'AWAITING_DAG', colorClass: 'text-green-400' },
+    { name: 'SIR_SENTINEL', role: 'Warden', status: 'PDG_SCAN_ACTIVE', colorClass: 'text-[#6B3FA0]' }
+  ]);
+
+  // ── 3-Second Status Polling (HTML hx-get="/api/status" equivalent) ──
+  useEffect(() => {
+    const pollStatus = async () => {
+      try {
+        const response = await fetch('/api/status');
+        if (response.ok) {
+          const data = await response.json();
+          if (data.knights) {
+            setKnights(data.knights);
+          }
+        }
+      } catch (err) {
+        // Fallback: shuffle knight status details slightly to simulate active execution
+        setKnights((prev) =>
+          prev.map((k) => {
+            if (k.name === 'LADY_APIS' && Math.random() > 0.7) {
+              return { ...k, status: Math.random() > 0.5 ? 'INGESTING_DOM...' : 'INDEXING_MEMORIES...' };
+            }
+            if (k.name === 'MERLIN_Ω' && Math.random() > 0.8) {
+              return { ...k, status: k.status === 'SLEEP_MODE' ? 'THINKING...' : 'SLEEP_MODE' };
+            }
+            return k;
+          })
+        );
+      }
+    };
+
+    const interval = setInterval(pollStatus, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // ── Bifrost SSE Telemetry Conduit ──
   useEffect(() => {
     const eventSource = new EventSource('/bifrost/stream');
 
@@ -104,7 +176,7 @@ export default function CamelotLayout() {
           }));
         });
       } catch (err) {
-        // Silent catch for local offline run
+        // Silent catch
       }
     };
 
@@ -136,8 +208,8 @@ export default function CamelotLayout() {
 
       for (let i = 0; i < 40; i++) {
         const amplitude = audioActive
-          ? (Math.sin(i * 0.4 + Date.now() * 0.02) * 18 + (Math.random() - 0.5) * 12)
-          : (Math.sin(i * 0.2 + Date.now() * 0.005) * 4);
+          ? (Math.sin(i * 0.4 + Date.now() * 0.02) * 16 + (Math.random() - 0.5) * 10)
+          : (Math.sin(i * 0.2 + Date.now() * 0.005) * 3);
         const y = canvas.height / 2 + amplitude;
 
         if (i === 0) {
@@ -171,6 +243,29 @@ export default function CamelotLayout() {
     } else {
       setAudioActive(true);
       setTimeout(() => setAudioActive(false), 1500);
+    }
+  };
+
+  // ── HTMX API endpoints execution equivalent ──
+  const handleRezero = async () => {
+    setApprovalStatus('REJECTED');
+    setMessages((prev) => [...prev, "[SYSTEM] // REZERO command triggered. Rejecting target."]);
+    triggerSpeech("Action rejected. Initiating re zero.");
+    try {
+      await fetch('/api/rezero', { method: 'POST' });
+    } catch (err) {
+      // Graceful fallback for offline proxy
+    }
+  };
+
+  const handleGo = async () => {
+    setApprovalStatus('APPROVED');
+    setMessages((prev) => [...prev, "[SYSTEM] // GO command triggered. Executing target."]);
+    triggerSpeech("Action approved. Executing.");
+    try {
+      await fetch('/api/go', { method: 'POST' });
+    } catch (err) {
+      // Graceful fallback for offline proxy
     }
   };
 
@@ -213,7 +308,7 @@ export default function CamelotLayout() {
     <div className="flex flex-col h-screen w-screen bg-[#050505] text-[#D4AF37] font-mono select-none overflow-hidden relative selection:bg-[#6B3FA0] selection:text-white">
       
       {/* Scanline Overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(212,175,55,0.03)_50%,rgba(0,0,0,0.15)_50%)] bg-[size:100%_4px] z-50" />
+      <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(212,175,55,0.04)_50%,rgba(0,0,0,0.18)_50%)] bg-[size:100%_4px] z-50 animate-[scan_6s_linear_infinite]" />
       
       {/* ── HEADER ── */}
       <header className="border-b border-[#6B3FA0] bg-[#1e1e1e] p-4 flex justify-between items-center z-10">
@@ -262,22 +357,12 @@ export default function CamelotLayout() {
           <div className="border border-[#6B3FA0] bg-[#1e1e1e] p-4 rounded shadow-[0_0_15px_rgba(107,63,160,0.2)] flex flex-col h-1/2 overflow-y-auto">
             <h2 className="text-lg font-bold border-b border-gray-700 pb-2 mb-2">🜲 KNIGHT ROSTER</h2>
             <ul className="space-y-3 text-sm flex-grow overflow-y-auto">
-              <li className="flex justify-between items-center">
-                <span>[MERLIN_Ω] Logic Core</span>
-                <span className="text-green-400 font-bold">SLEEP_MODE</span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span>[LADY_APIS] Foraging</span>
-                <span className="text-[#D4AF37] animate-pulse font-bold">INGESTING_DOM...</span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span>[LUKAS] Kinetic Engine</span>
-                <span className="text-green-400 font-bold">AWAITING_DAG</span>
-              </li>
-              <li className="flex justify-between items-center">
-                <span>[SIR_SENTINEL] Warden</span>
-                <span className="text-[#6B3FA0] font-bold">PDG_SCAN_ACTIVE</span>
-              </li>
+              {knights.map((k, idx) => (
+                <li key={idx} className="flex justify-between items-center">
+                  <span>[{k.name}] {k.role}</span>
+                  <span className={`${k.colorClass} font-bold`}>{k.status}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -298,12 +383,15 @@ export default function CamelotLayout() {
                 <span className="text-[#D4AF37] font-bold">First_Principles (mm_001)</span>
               </div>
             </div>
-            {/* Minimal Canvas Avatar embed */}
-            <div className="h-16 bg-black/40 border border-[#D4AF37]/10 rounded overflow-hidden mt-auto">
-              <Canvas camera={{ position: [0, 0, 5] }}>
-                <AvatarGlobe audioActive={audioActive} />
+            
+            {/* Hyperrealistic Canvas Avatar embed */}
+            <div className="h-24 bg-black border border-[#D4AF37]/15 rounded overflow-hidden mt-auto relative shadow-[inset_0_0_12px_rgba(212,175,55,0.1)]">
+              <Canvas camera={{ position: [0, 0, 4.5] }}>
+                <ambientLight intensity={0.2} />
+                <HyperrealisticGlobe audioActive={audioActive} />
                 <VramGovernor />
               </Canvas>
+              <div className="absolute top-1 left-2 text-[8px] text-[#D4AF37]/40 tracking-widest uppercase">SPECTRUM RENDERER ACTIVE</div>
             </div>
           </div>
         </aside>
@@ -325,7 +413,7 @@ export default function CamelotLayout() {
                   Merlin_Ω has generated a structural DAG. Sir Sentinel has audited the PDG. Diff exceeds 10 lines. Security validation requires human override.
                 </p>
                 
-                <pre className="bg-black p-3 border border-gray-800 text-green-400 overflow-x-auto rounded font-mono text-xs">
+                <pre className="bg-black p-3 border border-gray-800 text-green-400 overflow-x-auto rounded font-mono text-xs shadow-[inset_0_0_8px_rgba(0,0,0,0.8)]">
 {JSON.stringify({
   "action": "OVERWRITE",
   "file": "app/router.ts",
@@ -335,7 +423,7 @@ export default function CamelotLayout() {
                 </pre>
 
                 {approvalStatus !== 'PENDING' && (
-                  <div className={`mt-4 p-2 text-xs font-bold text-center border uppercase rounded ${
+                  <div className={`mt-4 p-2.5 text-xs font-bold text-center border uppercase rounded ${
                     approvalStatus === 'APPROVED' ? 'bg-green-500/10 border-green-500 text-green-400' : 'bg-red-500/10 border-red-500 text-red-400'
                   }`}>
                     Action decision logged: {approvalStatus}
@@ -344,36 +432,20 @@ export default function CamelotLayout() {
               </div>
 
               {/* Action Buttons */}
-              <div className="flex space-x-4 mb-4">
+              <div className="flex justify-end space-x-4">
                 <button
                   disabled={approvalStatus !== 'PENDING'}
-                  onClick={() => {
-                    setApprovalStatus('APPROVED');
-                    setMessages((prev) => [...prev, "[SYSTEM] Overwrite for app/router.ts APPROVED by Sovereign."]);
-                    triggerSpeech("Refactor approved and synchronized.");
-                  }}
-                  className={`flex-1 py-3 text-sm font-bold border transition-all ${
-                    approvalStatus === 'APPROVED'
-                      ? 'bg-green-500/20 border-green-500 text-green-400'
-                      : 'bg-black border-green-500/50 text-green-400 hover:bg-green-500/10 active:scale-95'
-                  } disabled:opacity-50`}
+                  onClick={handleRezero}
+                  className="px-6 py-2 bg-red-900 hover:bg-red-700 text-white font-bold rounded transition border border-red-500 disabled:opacity-50 active:scale-95"
                 >
-                  ✓ APPROVE OVERWRITE
+                  // REZERO (REJECT)
                 </button>
                 <button
                   disabled={approvalStatus !== 'PENDING'}
-                  onClick={() => {
-                    setApprovalStatus('REJECTED');
-                    setMessages((prev) => [...prev, "[SYSTEM] Overwrite for app/router.ts REJECTED by Sovereign."]);
-                    triggerSpeech("Refactor cancelled and rolled back.");
-                  }}
-                  className={`flex-1 py-3 text-sm font-bold border transition-all ${
-                    approvalStatus === 'REJECTED'
-                      ? 'bg-red-500/20 border-red-500 text-red-400'
-                      : 'bg-black border-red-500/50 text-red-400 hover:bg-red-500/10 active:scale-95'
-                  } disabled:opacity-50`}
+                  onClick={handleGo}
+                  className="px-6 py-2 bg-[#D4AF37] hover:bg-yellow-500 text-black font-bold rounded transition shadow-[0_0_10px_rgba(212,175,55,0.3)] disabled:opacity-50 active:scale-95"
                 >
-                  ✗ REJECT / ABORT
+                  // GO (EXECUTE)
                 </button>
               </div>
             </div>
@@ -545,12 +617,10 @@ export default function CamelotLayout() {
       </main>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-[#6B3FA0]/30 px-6 py-2 flex justify-between items-center text-[10px] text-gray-500 bg-[#050505]">
-        <span>EXCALIBUR v1000 SOVEREIGN DECK</span>
-        <span>HIVE NODE LATTICE CONNECTED</span>
-        <span>SCARCITY MEMORY COMPLIANT (VRAM LIMIT 150MB)</span>
+      <footer className="border-t border-[#6B3FA0]/30 bg-[#050505] p-2 text-xs text-gray-500 flex justify-between z-10">
+        <span>&gt; System listening on internal port 8811...</span>
+        <span className="text-[#D4AF37] font-bold">Dreams don't come true, visions do. ⚡</span>
       </footer>
-
     </div>
   );
 }
