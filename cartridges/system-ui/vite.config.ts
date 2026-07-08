@@ -66,6 +66,14 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/goRouter/, ''),
       },
+      '/api/chatterbox': {
+        target: 'http://127.0.0.1:8300',
+        changeOrigin: true,
+      },
+      '/api/multivoice': {
+        target: 'http://127.0.0.1:8001',
+        changeOrigin: true,
+      },
       '/api': {
         target: 'http://127.0.0.1:3000',
         changeOrigin: true,
