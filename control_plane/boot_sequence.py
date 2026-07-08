@@ -515,19 +515,25 @@ def boot_edge_interface(home: Path):
 def boot_cloud_brain(home: Path):
     """Phase 4 - Cloud Brain status through the typed CloudServiceRouter."""
     os.environ.setdefault("CAMELOT_OS_HOME", str(home))
-    result = asyncio.run(
-        CloudServiceRouter().invoke(
-            CloudServiceRequest(service=CloudServiceName.CLOUDBRAIN_STATUS)
+    try:
+        result = asyncio.run(
+            CloudServiceRouter().invoke(
+                CloudServiceRequest(service=CloudServiceName.CLOUDBRAIN_STATUS)
+            )
         )
-    )
-    if not result.success:
-        return False, result.error or "Cloud Brain status failed"
-    remote = result.result.get("remote_runtime", {})
-    status = remote.get("status") or result.result.get("status") or "unknown"
-    source = result.source
-    if result.error:
-        return True, f"Cloud Brain LOCAL READY via {source}; remote check blocked in this shell"
-    return True, f"Cloud Brain {str(status).upper()} via {source}"
+        if not result.success:
+            err_str = str(result.error or "Cloud Brain status failed")
+            if any(term in err_str.lower() for term in ("auth", "expire", "unreachable", "connect", "blocked")):
+                return True, f"Cloud Brain DEGRADED: {err_str}"
+            return False, err_str
+        remote = result.result.get("remote_runtime", {})
+        status = remote.get("status") or result.result.get("status") or "unknown"
+        source = result.source
+        if result.error:
+            return True, f"Cloud Brain LOCAL READY via {source}; remote check blocked in this shell"
+        return True, f"Cloud Brain {str(status).upper()} via {source}"
+    except Exception as exc:
+        return True, f"Cloud Brain DEGRADED (error loading): {exc}"
 
 
 
@@ -1088,7 +1094,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Heimdall Bifrost Governance", "required": False, "fn": lambda: boot_heimdall_bifrost_governance(home)},
         {"name": "Local LT Memory:8200","required": False, "fn": lambda: start_local_lt_memory(home)},
         {"name": "Cloud Brain  Auth",  "required": False, "fn": lambda: boot_cloud_brain_auth(home)},
-        {"name": "Cloud Brain   (RPC)", "required": True,  "fn": lambda: boot_cloud_brain(home)},
+        {"name": "Cloud Brain   (RPC)", "required": False, "fn": lambda: boot_cloud_brain(home)},
         {"name": "Symbiotic Maintenance", "required": False, "fn": lambda: boot_symbiotic_maintenance(home, quick=quick)},
         {"name": "Codex Integration", "required": False, "fn": lambda: boot_codex_integration(home)},
         {"name": "Nano Swarm Runtime", "required": False, "fn": lambda: boot_nano_swarm_runtime(home)},
