@@ -10,10 +10,25 @@ $LogFile     = "$env:USERPROFILE\CAMELOT_OS\logs\clawdbot_gateway.log"
 # Ensure logs dir exists
 New-Item -ItemType Directory -Force -Path (Split-Path $PidFile) | Out-Null
 
-# Check if already running on port
-$existing = Get-NetTCPConnection -LocalPort $GatewayPort -ErrorAction SilentlyContinue
-if ($existing) {
-    $pid_running = ($existing | Select-Object -First 1).OwningProcess
+# Check if already running on port. Get-NetTCPConnection depends on the CIM
+# service, which can be broken shell-wide ("Cannot connect to CIM server");
+# a plain TCP connect is the authoritative check, CIM is only used to report PID.
+$portOpen = $false
+$tcp = New-Object System.Net.Sockets.TcpClient
+try {
+    $connect = $tcp.BeginConnect("127.0.0.1", $GatewayPort, $null, $null)
+    if ($connect.AsyncWaitHandle.WaitOne(1500) -and $tcp.Connected) {
+        $tcp.EndConnect($connect)
+        $portOpen = $true
+    }
+} catch {} finally { $tcp.Close() }
+
+if ($portOpen) {
+    $pid_running = "unknown"
+    try {
+        $existing = Get-NetTCPConnection -LocalPort $GatewayPort -ErrorAction Stop | Select-Object -First 1
+        if ($existing) { $pid_running = $existing.OwningProcess }
+    } catch {}
     Write-Host "[CLAWDBOT] Gateway already running on :$GatewayPort (PID $pid_running)"
     exit 0
 }
@@ -28,11 +43,13 @@ if (-not (Test-Path $GatewayCmd)) {
 # form caused cmd.exe to exit immediately without ever starting node (empty log,
 # dead PID). Separate stdout/stderr files are required by Start-Process.
 $ErrFile = "$env:USERPROFILE\CAMELOT_OS\logs\clawdbot_gateway.err"
-$proc = Start-Process -FilePath $GatewayCmd `
+$proc = Start-Process -FilePath "cmd.exe" `
+    -ArgumentList "/c", $GatewayCmd `
     -WindowStyle Hidden `
     -RedirectStandardOutput $LogFile `
     -RedirectStandardError $ErrFile `
     -PassThru
+
 
 
 $proc.Id | Out-File -FilePath $PidFile -Encoding ascii
