@@ -1,6 +1,10 @@
 import { useEffect, useState, useRef, useTransition } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
+import { KickboxAudioController } from './audioContext';
+import { PersonaStateManager } from './personaState';
+import { AionTimelineCache } from './aionTimeline';
+import { HerdrMeshRouter } from './herdrMesh';
 
 // ── VRAM Protection Governor (SIR_BORIS Protocol) ────────────────────────────
 function VramGovernor() {
@@ -104,6 +108,52 @@ export default function CamelotLayout() {
   const [inputVal, setInputVal] = useState('');
   const [, startTransition] = useTransition();
 
+  // Core Controllers (Refs ensure single instance across renders)
+  const audioController = useRef(new KickboxAudioController());
+  const personaManager = useRef(new PersonaStateManager());
+  const timelineCache = useRef(new AionTimelineCache(30));
+  const meshRouter = useRef(new HerdrMeshRouter());
+
+  const [personaName, setPersonaName] = useState('Anya');
+  const [masterVolume, setMasterVolume] = useState(1.0);
+  const [timelineHistory, setTimelineHistory] = useState<any[]>([]);
+
+  // Setup Herdr Mesh Router nodes on mount
+  useEffect(() => {
+    meshRouter.current.registerNode('s26', 'EDGE');
+    meshRouter.current.registerNode('nC', 'ROUTER');
+    meshRouter.current.registerNode('bifrost', 'BRIDGE');
+    meshRouter.current.registerNode('multivoice', 'VOX');
+    meshRouter.current.registerNode('chatterbox', 'TTS');
+    meshRouter.current.registerNode('omniroute', 'GATEWAY');
+
+    meshRouter.current.connectNodes('s26', 'nC');
+    meshRouter.current.connectNodes('nC', 'bifrost');
+    meshRouter.current.connectNodes('bifrost', 'multivoice');
+    meshRouter.current.connectNodes('bifrost', 'chatterbox');
+    meshRouter.current.connectNodes('bifrost', 'omniroute');
+  }, []);
+
+  // Dispose audio controller on unmount
+  useEffect(() => {
+    return () => {
+      audioController.current.dispose();
+    };
+  }, []);
+
+  const handlePersonaChange = (name: string) => {
+    personaManager.current.setPersona(name);
+    setPersonaName(name);
+    setMessages((prev) => [...prev, `[SYSTEM] Switched active persona to ${name}`]);
+    triggerSpeech(`Active persona updated to ${name}.`);
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = parseFloat(e.target.value);
+    setMasterVolume(val);
+    audioController.current.setVolume(val);
+  };
+
   // ── Bifrost SSE Conduit ──
   useEffect(() => {
     const eventSource = new EventSource('/bifrost/stream');
@@ -111,13 +161,18 @@ export default function CamelotLayout() {
       try {
         const data = JSON.parse(event.data);
         startTransition(() => {
-          setTelemetry((prev) => ({
-            ...prev,
-            cpuUsage: data.cpuUsage ?? prev.cpuUsage,
-            ramUsage: data.ramUsage ? parseFloat((data.ramUsage / 10).toFixed(1)) : prev.ramUsage,
-            lattice: data.lattice ?? prev.lattice,
-            networkLag: data.networkLag ?? prev.networkLag,
-          }));
+          setTelemetry((prev) => {
+            const next = {
+              ...prev,
+              cpuUsage: data.cpuUsage ?? prev.cpuUsage,
+              ramUsage: data.ramUsage ? parseFloat((data.ramUsage / 10).toFixed(1)) : prev.ramUsage,
+              lattice: data.lattice ?? prev.lattice,
+              networkLag: data.networkLag ?? prev.networkLag,
+            };
+            timelineCache.current.push(next);
+            setTimelineHistory([...timelineCache.current.getHistory()]);
+            return next;
+          });
         });
       } catch (err) {
         // Silent catch
@@ -136,12 +191,15 @@ export default function CamelotLayout() {
         const nextCpu = Math.max(5, Math.min(95, prev.cpuUsage + (Math.random() - 0.5) * 6));
         const nextRam = Math.max(1.0, Math.min(8.0, prev.ramUsage + (Math.random() - 0.5) * 0.2));
         const nextLag = Math.max(2, Math.min(25, prev.networkLag + Math.floor((Math.random() - 0.5) * 4)));
-        return {
+        const next = {
           ...prev,
           cpuUsage: parseFloat(nextCpu.toFixed(1)),
           ramUsage: parseFloat(nextRam.toFixed(1)),
           networkLag: nextLag,
         };
+        timelineCache.current.push(next);
+        setTimelineHistory([...timelineCache.current.getHistory()]);
+        return next;
       });
     }, 4000);
     return () => clearInterval(interval);
@@ -163,15 +221,15 @@ export default function CamelotLayout() {
   const [mouthHeight, setMouthHeight] = useState(4);
   const [speechConsoleLog, setSpeechConsoleLog] = useState('> Awaiting streaming hypermedia voice packets...');
   const [audioActive, setAudioActive] = useState(false);
-  const audioCtxRef = useRef<AudioContext | null>(null);
 
   // ── Speech Synthesis Trigger ──
   const triggerSpeech = (text: string) => {
+    const attrs = personaManager.current.getAttributes();
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.pitch = 1.0;
-      utterance.rate = 1.0;
+      utterance.pitch = attrs.voicePitch;
+      utterance.rate = attrs.voiceSpeed;
       utterance.onstart = () => {
         setAudioActive(true);
       };
@@ -196,13 +254,14 @@ export default function CamelotLayout() {
   // ── Live Lip Sync Simulation (HTML programmatic script equivalent) ──
   useEffect(() => {
     let interval: number;
+    const attrs = personaManager.current.getAttributes();
 
     if (audioActive) {
       interval = window.setInterval(() => {
         const amplitude = Math.random();
         const heightVal = 4 + (amplitude * 16);
         setMouthHeight(heightVal);
-        setSpeechConsoleLog(`> SSE Packet: [EMOTION: MERLIN_LOGIC_STRICT] // AMPLITUDE: ${amplitude.toFixed(2)}`);
+        setSpeechConsoleLog(`> SSE Packet: [EMOTION: ${attrs.emotion}] // AMPLITUDE: ${amplitude.toFixed(2)}`);
       }, 120);
     } else {
       setMouthHeight(4);
@@ -210,16 +269,14 @@ export default function CamelotLayout() {
     }
 
     return () => clearInterval(interval);
-  }, [audioActive]);
+  }, [audioActive, personaName]);
 
   // ── Capture Toggle Logic ──
   const handleCaptureToggle = () => {
     if (!voiceCapturing) {
-      if (!audioCtxRef.current) {
-        audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
-      }
+      audioController.current.init();
       setVoiceCapturing(true);
-      setMessages((prev) => [...prev, "[SYSTEM] Audio capture context initialized."]);
+      setMessages((prev) => [...prev, "[SYSTEM] Audio capture context initialized via Kickbox Controller."]);
       triggerSpeech("Audio capture matrix enabled.");
     }
   };
@@ -348,9 +405,26 @@ export default function CamelotLayout() {
           <div className="border border-[#D4AF37] bg-[#1e1e1e] p-4 rounded shadow-[0_0_10px_rgba(212,175,55,0.2)] h-1/3 text-xs flex flex-col justify-between">
             <div>
               <h2 className="font-bold text-[#D4AF37] mb-1">🧪 OPENPERSONA STATE</h2>
-              <p className="mt-1">AUDIO CORE: <span className="text-white">Audex 2B (Local)</span></p>
+              <p className="mt-1">ACTIVE: <span className="text-white font-bold">{personaName}</span></p>
+              <p className="mt-1">EMOTION: <span className="text-[#6B3FA0] font-bold">{personaManager.current.getAttributes().emotion}</span></p>
+              <p className="mt-1">PITCH: <span className="text-white">{personaManager.current.getAttributes().voicePitch}x</span></p>
+              <p className="mt-1">SPEED: <span className="text-white">{personaManager.current.getAttributes().voiceSpeed}x</span></p>
               <p className="mt-1">LATENCY: <span className="text-green-400 font-bold">&lt;{telemetry.networkLag}ms</span></p>
-              <p className="mt-1">UPV SAMPLE: <span className="text-white">Loyalty_1.0_True</span></p>
+              <div className="mt-2 flex gap-1">
+                {(['Anya', 'Merlin', 'Boris'] as const).map((p) => (
+                  <button
+                    key={p}
+                    onClick={() => handlePersonaChange(p)}
+                    className={`px-1.5 py-0.5 rounded border text-[9px] font-bold transition-all ${
+                      personaName === p
+                        ? 'bg-[#6B3FA0] border-[#6B3FA0] text-white'
+                        : 'bg-black/35 border-gray-700 text-gray-400 hover:text-white hover:border-gray-500'
+                    }`}
+                  >
+                    {p.toUpperCase()}
+                  </button>
+                ))}
+              </div>
             </div>
             
             {/* Hyperrealistic Canvas Avatar embed */}
@@ -473,34 +547,64 @@ export default function CamelotLayout() {
 
             {/* TAB 3: HERMES */}
             {activeTab === 'HERMES' && (
-              <div className="flex-grow flex flex-col gap-3 min-h-0">
+              <div className="flex-grow flex flex-col gap-3 min-h-0 text-[10px]">
                 <h2 className="text-xl font-bold border-b border-gray-800 pb-2">💻 HERMES DAEMONS & CMUX</h2>
-                <div className="flex-grow grid grid-cols-2 gap-3 overflow-y-auto">
-                  <div className="border border-gray-700 bg-black/60 p-2 rounded flex flex-col overflow-hidden text-[10px]">
-                    <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1">CMUX 1: BIFROST_WS</span>
-                    <div className="flex-grow font-mono text-[9px] text-gray-400 whitespace-pre-wrap overflow-y-auto mt-1">
-                      {"[INFO] ws server started on :8011\n[INFO] payload verified\n[OK] handshake complete"}
+                
+                {/* 4-column CMUX / Topology Layout */}
+                <div className="flex-grow grid grid-cols-2 gap-3 overflow-y-auto min-h-0">
+                  {/* Left inner column: Daemons */}
+                  <div className="flex flex-col gap-3 min-h-0">
+                    <div className="border border-gray-700 bg-black/60 p-2 rounded flex flex-col overflow-hidden h-1/2 text-[10px]">
+                      <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1">CMUX 1: BIFROST_WS</span>
+                      <div className="flex-grow font-mono text-[9px] text-gray-400 whitespace-pre-wrap overflow-y-auto mt-1">
+                        {"[INFO] ws server started on :8011\n[INFO] payload verified\n[OK] handshake complete"}
+                      </div>
+                    </div>
+
+                    <div className="border border-gray-700 bg-black/60 p-2 rounded flex flex-col overflow-hidden h-1/2 text-[10px]">
+                      <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1">CMUX 2: WATCHDOG_SERVICE</span>
+                      <div className="flex-grow font-mono text-[9px] text-gray-400 whitespace-pre-wrap overflow-y-auto mt-1">
+                        {"[OK] checking soft process loops\n[OK] memory safe\n[OK] CPU throttle inactive"}
+                      </div>
                     </div>
                   </div>
 
-                  <div className="border border-gray-700 bg-black/60 p-2 rounded flex flex-col overflow-hidden text-[10px]">
-                    <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1">CMUX 2: WATCHDOG_SERVICE</span>
-                    <div className="flex-grow font-mono text-[9px] text-gray-400 whitespace-pre-wrap overflow-y-auto mt-1">
-                      {"[OK] checking soft process loops\n[OK] memory safe\n[OK] CPU throttle inactive"}
+                  {/* Right inner column: Dynamic Topology & Timeline */}
+                  <div className="flex flex-col gap-3 min-h-0">
+                    {/* Herdr Swarm Topology */}
+                    <div className="border border-gray-700 bg-black/60 p-2.5 rounded flex flex-col overflow-hidden h-1/2 text-[10px]">
+                      <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1 mb-1">🌐 HERDR SWARM TOPOLOGY (multiplexed)</span>
+                      <div className="flex-grow font-mono text-[9px] text-gray-400 overflow-y-auto space-y-0.5">
+                        {meshRouter.current.getNodes().map((node) => {
+                          const connections = meshRouter.current.getNodes()
+                            .filter((other) => other.id !== node.id && meshRouter.current.isConnected(node.id, other.id))
+                            .map((other) => other.id);
+                          return (
+                            <div key={node.id} className="flex justify-between items-center py-0.5 border-b border-gray-900/40">
+                              <span className="text-[#6B3FA0] font-bold">[{node.id.toUpperCase()}] ({node.type})</span>
+                              <span className="text-gray-500">➜ {connections.join(', ') || 'STANDALONE'}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="border border-gray-700 bg-black/60 p-2 rounded flex flex-col overflow-hidden text-[10px]">
-                    <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1">CMUX 3: OMNIROUTE_POLICIES</span>
-                    <div className="flex-grow font-mono text-[9px] text-gray-400 whitespace-pre-wrap overflow-y-auto mt-1">
-                      {"[POLICY] forward /bifrost -> :8001\n[POLICY] forward /goRouter -> :8077\n[POLICY] forward /api -> :3000"}
-                    </div>
-                  </div>
-
-                  <div className="border border-gray-700 bg-black/60 p-2 rounded flex flex-col overflow-hidden text-[10px]">
-                    <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1">CMUX 4: INF_ENGINE</span>
-                    <div className="flex-grow font-mono text-[9px] text-gray-400 whitespace-pre-wrap overflow-y-auto mt-1">
-                      {"[SSM] warm engine active\n[SSM] state dims loaded (256)\n[SSM] awaiting intents"}
+                    {/* Aion Timeline Cache */}
+                    <div className="border border-gray-700 bg-black/60 p-2.5 rounded flex flex-col overflow-hidden h-1/2 text-[10px]">
+                      <span className="text-[#D4AF37] font-bold border-b border-gray-800 pb-1 mb-1">⏳ AION TEMPORAL STATE CACHE</span>
+                      <div className="flex-grow font-mono text-[8px] text-gray-400 overflow-y-auto space-y-0.5">
+                        {timelineHistory.slice(-5).reverse().map((frame, idx) => (
+                          <div key={idx} className="flex justify-between items-center text-[8px]">
+                            <span>{new Date(frame.timestamp).toLocaleTimeString()}</span>
+                            <span className="text-green-400">CPU: {frame.cpuUsage}%</span>
+                            <span className="text-luxora">RAM: {frame.ramUsage}GB</span>
+                            <span className="text-blue-400">LAG: {frame.networkLag}ms</span>
+                          </div>
+                        ))}
+                        {timelineHistory.length === 0 && (
+                          <div className="text-gray-600 italic">Awaiting telemetry frames...</div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -574,6 +678,23 @@ export default function CamelotLayout() {
               >
                 <span>🔴</span> {voiceCapturing ? 'CAPTURE STANDBY' : 'INITIALIZE CAPTURE'}
               </button>
+
+              {/* Master Volume Slider (Kickbox-audio) */}
+              <div className="mt-6">
+                <div className="flex justify-between items-center text-xs mb-1">
+                  <span className="text-[#D4AF37] font-bold">KICKBOX MASTER VOL</span>
+                  <span className="text-white font-bold">{Math.round(masterVolume * 100)}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={masterVolume}
+                  onChange={handleVolumeChange}
+                  className="w-full h-1 bg-black border border-gray-800 rounded-lg appearance-none cursor-pointer accent-[#D4AF37]"
+                />
+              </div>
             </div>
             
             <div className="bg-[#050505] border border-gray-800 p-3 rounded text-[10px] text-gray-400 font-mono">

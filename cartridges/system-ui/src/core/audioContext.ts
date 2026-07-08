@@ -15,9 +15,13 @@ export class KickboxAudioController {
     const AudioContextClass =
       (globalThis as any).AudioContext || (globalThis as any).webkitAudioContext;
     this.ctx = new AudioContextClass();
-    this.gainNode = this.ctx.createGain();
-    this.gainNode.gain.setValueAtTime(this.volume, this.ctx.currentTime);
-    this.gainNode.connect(this.ctx.destination);
+    if (this.ctx) {
+      this.gainNode = this.ctx.createGain();
+      if (this.gainNode) {
+        this.gainNode.gain.setValueAtTime(this.volume, this.ctx.currentTime);
+        this.gainNode.connect(this.ctx.destination);
+      }
+    }
   }
 
   /** Set the master volume (clamped 0.0–1.0). */
