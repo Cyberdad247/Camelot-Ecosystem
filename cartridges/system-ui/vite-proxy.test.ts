@@ -8,6 +8,7 @@ describe('Vite Proxy Configuration', () => {
     expect(rule?.target).toBe('http://127.0.0.1:8300');
     expect(typeof rule?.rewrite).toBe('function');
     expect(rule.rewrite('/api/chatterbox/synthesize')).toBe('/synthesize');
+    expect(rule.rewrite('/api/chatterbox')).toBe('/');
   });
 
   it('should map Multivoice router to port 8001 and rewrite prefix', () => {
@@ -16,6 +17,7 @@ describe('Vite Proxy Configuration', () => {
     expect(rule?.target).toBe('http://127.0.0.1:8001');
     expect(typeof rule?.rewrite).toBe('function');
     expect(rule.rewrite('/api/multivoice/intent')).toBe('/intent');
+    expect(rule.rewrite('/api/multivoice')).toBe('/');
   });
 
   it('should list specific endpoints before catch-all /api', () => {
