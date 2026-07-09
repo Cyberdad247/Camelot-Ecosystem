@@ -80,7 +80,7 @@ def _find_step(job: dict, *, name: str | None = None, id_: str | None = None) ->
     fail(f"step {label} not found in job `{JOB_ID}`")
 
 
-def _extract_watched_strings(run: str) -> list[str]:
+def _extract_watched_strings(run_no_comments: str) -> list[str]:
     """Extract single- AND double-quoted strings inside the watched literal.
 
     Accepts BOTH `watched = (...)` (tuple) and `watched = [...]` (list)
@@ -88,13 +88,11 @@ def _extract_watched_strings(run: str) -> list[str]:
     contributors reasonably refactor between them. The close delimiter
     matches whichever opening brace the regex hit. The current heredoc
     has no nested parens/brackets, so non-greedy matching is safe.
+
+    Caveat: paths containing `#` would lose trailing characters when
+    the caller pre-strips Python comments; Windows paths reject `#`
+    so this is benign in practice for this repo's file names.
     """
-    # Strip Python `# ...` comments before regex extraction so a path
-    # literal containing `]` (e.g., `data/output/2026]`) cannot confuse
-    # the close-delimiter match, AND so a `# 'phantom'` comment near the
-    # tuple doesn't get slurped as a real entry. This mirrors the
-    # pre-commit regex strip in scripts/check_filter_parity.py.
-    run_no_comments = re.sub(r"#.*", "", run)
     # The char class `[\(\[]` opens with either `(` or `[`; the closing
     # class `[\])]` likewise closes with the matching brace.
     tuple_match = re.search(r"watched\s*=\s*[[\(](.*?)[\])]", run_no_comments, re.DOTALL)
@@ -118,7 +116,12 @@ def _extract_watched_tuple(crlf_step: dict) -> list[str]:
     run = crlf_step.get("run")
     if not isinstance(run, str):
         fail("CRLF step `run:` is not a string")
-    return _extract_watched_strings(run)
+    # Pre-strip Python `# ...` comments so a path literal containing
+    # `]` (e.g., `data/output/2026]`) cannot confuse the close-delimiter
+    # match, AND so a `# 'phantom'` comment near the tuple doesn't get
+    # slurped as a real entry. Mirrors check_filter_parity.py.
+    run_no_comments = re.sub(r"#.*", "", run)
+    return _extract_watched_strings(run_no_comments)
 
 
 def _extract_dorny_paths(job: dict) -> list[str]:

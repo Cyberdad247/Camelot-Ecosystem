@@ -427,13 +427,13 @@ jobs:
         # uvicorn imports. Scope is intentionally tight (only the 8 files
         # the build consumes) — repo-wide hygiene belongs in
         # `.gitattributes`, not in this gate.
-        # SYNC ASSUMPTION (now ENFORCED): this `watched` tuple and the
-        # dorny/paths-filter `excalibur-paths` list below MUST match. The
+        # SYNC: keep this `watched` literal in lock-step with the
+        # dorny filter `excalibur-paths` block BELOW. The
         # `excalibur-pyinstaller-filter-parity` pre-commit hook +
-        # `excalibur-filter-parity` CI job (Stage 12 below) gate any drift.
-        # If you add a path, add it in BOTH places — the gate hard-fails
-        # until they match.
+        # `excalibur-filter-parity` CI job (verify_os.yml Stage 12)
+        # gate any drift. If you add a path, add it in BOTH places.
         run: |
+
 
           python -c "
           import os, sys
@@ -472,12 +472,11 @@ jobs:
         with:
           filters: |
             excalibur-paths:
-              # SYNC ASSUMPTION (now ENFORCED): this list MUST match the
-              # `watched` literal in the CRLF step ABOVE. The
+              # SYNC: keep this list in lock-step with the `watched`
+              # literal in the CRLF step ABOVE. The
               # `excalibur-pyinstaller-filter-parity` pre-commit hook +
-              # `excalibur-filter-parity` CI job (Stage 12 below) gate
-              # any drift. If you add a build-affecting path, add it in
-              # BOTH places — the gate hard-fails until they match.
+              # `excalibur-filter-parity` CI job (verify_os.yml Stage 12)
+              # gate any drift. If you add a path, add it in BOTH places.
               - 'excalibur.spec'
               - 'excalibur.py'
               - 'excalibur_controller.py'
