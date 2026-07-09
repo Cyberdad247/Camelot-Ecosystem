@@ -427,12 +427,13 @@ jobs:
         # uvicorn imports. Scope is intentionally tight (only the 8 files
         # the build consumes) — repo-wide hygiene belongs in
         # `.gitattributes`, not in this gate.
-        # SYNC: keep this `watched` literal in lock-step with the
-        # dorny filter `excalibur-paths` block BELOW. The
+        # SYNC: keep this in lock-step with the sibling block in
+        # `Detect changes to excalibur-affected paths`. The
         # `excalibur-pyinstaller-filter-parity` pre-commit hook +
         # `excalibur-filter-parity` CI job (verify_os.yml Stage 12)
         # gate any drift. If you add a path, add it in BOTH places.
         run: |
+
 
 
           python -c "
@@ -472,8 +473,8 @@ jobs:
         with:
           filters: |
             excalibur-paths:
-              # SYNC: keep this list in lock-step with the `watched`
-              # literal in the CRLF step ABOVE. The
+              # SYNC: keep this in lock-step with the sibling block in
+              # `Enforce LF line endings on smoke-affected files`. The
               # `excalibur-pyinstaller-filter-parity` pre-commit hook +
               # `excalibur-filter-parity` CI job (verify_os.yml Stage 12)
               # gate any drift. If you add a path, add it in BOTH places.

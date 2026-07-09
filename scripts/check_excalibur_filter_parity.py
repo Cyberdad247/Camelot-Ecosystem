@@ -89,9 +89,9 @@ def _extract_watched_strings(run_no_comments: str) -> list[str]:
     matches whichever opening brace the regex hit. The current heredoc
     has no nested parens/brackets, so non-greedy matching is safe.
 
-    Caveat: paths containing `#` would lose trailing characters when
-    the caller pre-strips Python comments; Windows paths reject `#`
-    so this is benign in practice for this repo's file names.
+    Caveat: a path containing `#` would lose trailing characters
+    when the caller pre-strips Python comments; this repo's actual
+    paths don't include `#`.
     """
     # The char class `[\(\[]` opens with either `(` or `[`; the closing
     # class `[\])]` likewise closes with the matching brace.
