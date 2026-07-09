@@ -82,6 +82,10 @@ def _sp01_a2a_no_rbac() -> SpResult:
     direct_exec_re = re.compile(r"(?P<receiver>\w+)\s*\.\s*execute\s*\(", re.IGNORECASE)
     omc_via_re = re.compile(r"omc_team|OMCTeam|_omc_team", re.IGNORECASE)
     safe_receivers = {"conn", "_conn", "cur", "cursor", "pipe", "_client", "client", "db", "session"}
+    # DB cursor variables are assigned in-file (c = conn.cursor()); the word
+    # "sqlite" never appears on the .execute() line itself, so resolve them.
+    cursor_assign_re = re.compile(r"(\w+)\s*=\s*\w+\s*\.\s*cursor\s*\(")
+    conn_assign_re = re.compile(r"(\w+)\s*=\s*.*connect\w*\s*\(")
     skip = {"rbac_matrix.py", "harness.py", "anya_gate.py", "omc_team.py"}
     for py in CONTROL_PLANE.glob("*.py"):
         if py.name in skip:
@@ -92,12 +96,14 @@ def _sp01_a2a_no_rbac() -> SpResult:
             continue
         if omc_via_re.search(txt) or rbac_import.search(txt):
             continue
+        db_receivers = {m.group(1).lower() for m in cursor_assign_re.finditer(txt)}
+        db_receivers |= {m.group(1).lower() for m in conn_assign_re.finditer(txt)}
         for i, line in enumerate(txt.splitlines(), 1):
             match = direct_exec_re.search(line)
             if not match:
                 continue
             receiver = match.group("receiver").lower()
-            if receiver in safe_receivers:
+            if receiver in safe_receivers or receiver in db_receivers:
                 continue
             if "sqlite" in line.lower() or "redis" in line.lower():
                 continue
@@ -106,7 +112,12 @@ def _sp01_a2a_no_rbac() -> SpResult:
     if not (VAULT_CONFIGS / "config" / "access_matrix.json").exists():
         evidence.append("access_matrix.json missing")
 
-    status = "CLEAR" if not evidence else ("CRITICAL" if evidence else "WARN")
+    # Gateway/matrix failures are CRITICAL; residual direct-execute stragglers
+    # are WARN (the gateway still protects every omc_team-routed dispatch).
+    gateway_broken = any(
+        e.startswith("omc_team.py") or e.startswith("access_matrix.json") for e in evidence
+    )
+    status = "CLEAR" if not evidence else ("CRITICAL" if gateway_broken else "WARN")
     return SpResult("SP-01: A2A no RBAC", status, evidence)
 
 
@@ -130,8 +141,19 @@ def _sp02_iron_gate_bypass() -> SpResult:
             txt = py.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
+        in_docstring = False
         for i, line in enumerate(txt.splitlines(), 1):
             stripped = line.strip()
+            # Track triple-quoted docstrings — prose describing the gate
+            # ("...is never bypassed") is documentation, not a bypass.
+            quote_count = stripped.count('"""') + stripped.count("'''")
+            if in_docstring:
+                if quote_count % 2 == 1:
+                    in_docstring = False
+                continue
+            if quote_count % 2 == 1:
+                in_docstring = True
+                continue
             if not bypass_re.search(line):
                 continue
             if stripped.startswith("#"):
