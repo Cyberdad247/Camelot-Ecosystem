@@ -90,7 +90,7 @@ BOOT_PROBES: list[tuple[str, str, int]] = [
     ("OmniVoice",       "127.0.0.1", 3002),
     ("KittenTTS",       "127.0.0.1", 8300),
     ("SirOctavian",     "127.0.0.1", 8400),
-    ("Redis",           "redis-13278.c228.us-central1-1.gce.cloud.redislabs.com", 13278),
+    ("Redis",           "127.0.0.1", 6379),  # local agent-memory store — matches REDIS_URL default in memory_sync/symbol_compressor (old redislabs cloud host no longer resolves)
 ]
 
 
@@ -192,6 +192,8 @@ class SovereignHarness:
         js = CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "omnivoice-router" / "omnivoice-router.js"
         runner = LOGS_DIR / "_kitten_runner.py"
         oct_py = CAMELOT_HOME / "control_plane" / "sir_octavian.py"
+        bundled_redis = CAMELOT_HOME / "bin" / "redis" / "redis-server.exe"
+        bundled_redis_conf = CAMELOT_HOME / "bin" / "redis" / "redis.windows.conf"
         home = str(CAMELOT_HOME)
         cmds: dict[str, tuple[list[str], str] | None] = {
             "Qdrant":      ([str(qdrant_exe), "--config-path", str(qdrant_cfg)], home)
@@ -201,7 +203,9 @@ class SovereignHarness:
             "OmniVoice":   (["node", str(js)], home) if js.exists() else None,
             "KittenTTS":   ([py, str(runner)], home) if runner.exists() else None,
             "SirOctavian": ([py, str(oct_py), "--serve"], home) if oct_py.exists() else None,
-            "Redis":        (["redis-server.exe"], home)
+            "Redis":        ([str(bundled_redis), str(bundled_redis_conf)], home)
+                            if bundled_redis.exists() and bundled_redis_conf.exists()
+                            else (["redis-server.exe"], home)
                             if Path(r"C:\Program Files\Redis\redis-server.exe").exists()
                             else (["redis-server"], home) if shutil.which("redis-server") else None,
         }
