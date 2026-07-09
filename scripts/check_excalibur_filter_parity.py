@@ -80,6 +80,25 @@ def _find_step(job: dict, *, name: str | None = None, id_: str | None = None) ->
     fail(f"step {label} not found in job `{JOB_ID}`")
 
 
+def _strip_python_comments(text: str) -> str:
+    """Strip Python-style `# ...` line comments from heredoc text.
+
+    Canonical source-of-truth for the comment-handling rule. Every
+    extractor that operates on the EXCALIBUR smoke `run: |` heredoc
+    MUST call this BEFORE applying regex extraction so that:
+
+      * Path literals containing `]` (e.g., `data/output/2026]`)
+        cannot confuse a close-delimiter match.
+      * A `# 'phantom'` comment near a tuple does not get slurped
+        as a real entry.
+
+    Caveat: a path containing `#` would lose trailing characters
+    after this strip; the EXCALIBUR smoke's actual paths don't
+    include `#`.
+    """
+    return re.sub(r"#.*", "", text)
+
+
 def _extract_watched_strings(run_no_comments: str) -> list[str]:
     """Extract single- AND double-quoted strings inside the watched literal.
 
@@ -89,9 +108,9 @@ def _extract_watched_strings(run_no_comments: str) -> list[str]:
     matches whichever opening brace the regex hit. The current heredoc
     has no nested parens/brackets, so non-greedy matching is safe.
 
-    Caveat: a path containing `#` would lose trailing characters
-    when the caller pre-strips Python comments; this repo's actual
-    paths don't include `#`.
+    Caller MUST pre-strip comments via ``_strip_python_comments(run)``
+    before invoking this function. Single source of truth lives in the
+    helper to keep both present and future extractors aligned.
     """
     # The char class `[\(\[]` opens with either `(` or `[`; the closing
     # class `[\])]` likewise closes with the matching brace.
@@ -116,12 +135,10 @@ def _extract_watched_tuple(crlf_step: dict) -> list[str]:
     run = crlf_step.get("run")
     if not isinstance(run, str):
         fail("CRLF step `run:` is not a string")
-    # Pre-strip Python `# ...` comments so a path literal containing
-    # `]` (e.g., `data/output/2026]`) cannot confuse the close-delimiter
-    # match, AND so a `# 'phantom'` comment near the tuple doesn't get
-    # slurped as a real entry. Mirrors check_filter_parity.py.
-    run_no_comments = re.sub(r"#.*", "", run)
-    return _extract_watched_strings(run_no_comments)
+    # Use the canonical comment-strip helper so any future extractor
+    # operating on the same heredoc reuses the same rule via a single
+    # module-level reference.
+    return _extract_watched_strings(_strip_python_comments(run))
 
 
 def _extract_dorny_paths(job: dict) -> list[str]:
