@@ -64,3 +64,23 @@ repos:
             | docs/reports/bifrost_triage_.*/verification\.md
             | scripts/check_bifrost_audit\.py
           )$
+      - id: excalibur-pyinstaller-filter-parity
+        name: Verify EXCALIBUR PyInstaller CRLF tuple ↔ dorny filter parity
+        description: >-
+          Enforces that the EXCALIBUR PyInstaller smoke's CRLF pre-check
+          `watched = (...)` tuple and the dorny/paths-filter
+          `excalibur-paths` list inside .github/workflows/verify_os.yml
+          describe the SAME set of files. Catches the case where a
+          contributor updates one block and forgets the other, which
+          would silently let CRLF contamination slip past the pre-build
+          gate (when only dorny grew) OR let build changes slip past CI
+          (when only the CRLF tuple grew). Mirrors the GitHub Actions
+          `excalibur-filter-parity` job in verify_os.yml Stage 12.
+        entry: python scripts/check_excalibur_filter_parity.py
+        language: system
+        pass_filenames: false
+        files: |
+          (?x)^(
+              \.github/workflows/verify_os\.yml
+            | scripts/check_excalibur_filter_parity\.py
+          )$
