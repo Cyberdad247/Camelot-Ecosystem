@@ -10,6 +10,6 @@
     "L2_Kinetic": "SIR_BORRIS AST Auditor \u2192 Saltare / Cribo / Rotel",
     "L1_Substrate": "eBPF syscall intercept \u2192 Modal / Docker"
   },
-  "synced_at": "2026-06-21T10:47:31.573395+00:00",
+  "synced_at": "2026-06-30T18:11:40.844320+00:00",
   "merge_strategy": "least_upper_bound"
 }

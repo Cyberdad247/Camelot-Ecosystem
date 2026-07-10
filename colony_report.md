@@ -1,5 +1,5 @@
 # CLARITY_CORE Colony Report
-**Generated:** 2026-06-05 15:01 UTC
+**Generated:** 2026-07-10 01:36 UTC
 **Root:** `C:\Users\vizio\CAMELOT_OS`
 
 ---
@@ -8,21 +8,21 @@
 
 | Metric | Value |
 |--------|-------|
-| Files scanned | 20,489 |
-| Total lines | 5,136,881 |
-| Symbols indexed | 71,862 |
+| Files scanned | 27,431 |
+| Total lines | 5,987,347 |
+| Symbols indexed | 94,992 |
 | Risk Score | 100.0 / 100 |
 | Risk Label | **CRITICAL** |
 | HITL Required | Yes ⚠️ |
 
 ## Findings
 
-- 797 potential secret(s) detected — CRITICAL
-- 34 large file(s) (>500 KB) found
-- 206 TODO/FIXME markers — technical debt accumulation
-- 4283 duplicate file(s) detected
-- 209 unused imports (dead code)
-- Large codebase: 5,136,881 lines — context management critical
+- 997 potential secret(s) detected — CRITICAL
+- 29 large file(s) (>500 KB) found
+- 211 TODO/FIXME markers — technical debt accumulation
+- 5487 duplicate file(s) detected
+- 14 unused imports (dead code)
+- Large codebase: 5,987,347 lines — context management critical
 
 ## Recommendations
 
@@ -37,17 +37,17 @@
 
 | Category | Count |
 |----------|-------|
-| Secrets (critical) | 797 |
-| Warnings | 34 |
-| Info | 209 |
+| Secrets (critical) | 997 |
+| Warnings | 29 |
+| Info | 220 |
 
 ### Critical Flags
 
-- `.modal.toml:3` — secret: generic_token: secr...RET"
-- `verification.md:49` — secret: generic_token: TOKE...ken"
+- `02_FORGE/apps/lux11/src/tests/smoke.test.ts:7` — secret: generic_token: secr...ugh'
+- `02_FORGE/cartridge/bifrost_bridge.py:169` — secret: generic_token: secr...ook"
+- `02_FORGE/cartridge/test_bifrost_bridge.py:31` — secret: generic_token: SECR...ret"
 - `02_FORGE/KINETIC_ARMORY/goose/crates/goose/src/providers/gcpauth.rs:608` — secret: private_key: ----...----
 - `02_FORGE/KINETIC_ARMORY/goose/crates/goose/src/providers/gcpauth.rs:879` — secret: private_key: ----...----
-- `02_FORGE/KINETIC_ARMORY/goose/crates/goose-mcp/src/developer/editor_models/EDITOR_API_EXAMPLE.md:10` — secret: generic_token: API_...ere"
 - `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/enhanced-code-editing.md:23` — secret: generic_token: API_...ere"
 - `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/environment-variables.md:55` — secret: generic_token: API_...ere"
 - `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/security/prompt-injection-detection.md:84` — secret: generic_token: TOKE...KEN"
@@ -63,72 +63,72 @@
 - `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mlops/inference/guidance/references/backends.md:28` — secret: generic_token: api_...ere"
 - `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mlops/inference/guidance/references/backends.md:95` — secret: generic_token: api_...ere"
 - `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mlops/inference/guidance/references/backends.md:155` — secret: generic_token: api_...key"
-- ... and 777 more
+- ... and 977 more
 
 ## SWEEP Report
 
 | Category | Count |
 |----------|-------|
-| Duplicate Content | 4283 |
-| Unused Import | 209 |
-| Unreferenced File | 284 |
+| Duplicate Content | 5487 |
+| Unused Import | 14 |
+| Unreferenced File | 295 |
 
 ## Language Breakdown
 
 | Extension | Files |
 |-----------|-------|
-| `.ts` | 9652 |
-| `.md` | 2378 |
-| `.rs` | 1909 |
-| `.py` | 1809 |
-| `.json` | 1037 |
+| `.ts` | 14979 |
+| `.md` | 2814 |
+| `.py` | 2043 |
+| `.rs` | 1913 |
+| `.json` | 1854 |
 | `.h` | 816 |
-| `.tsx` | 639 |
-| `.go` | 472 |
-| `.js` | 344 |
-| `.sh` | 259 |
-| `.txt` | 248 |
+| `.tsx` | 661 |
+| `.go` | 488 |
+| `.js` | 381 |
+| `.sh` | 280 |
+| `.txt` | 258 |
 | `.cpp` | 238 |
-| `.toml` | 225 |
-| `.yml` | 169 |
-| `.yaml` | 164 |
+| `.toml` | 226 |
+| `.yml` | 173 |
+| `.yaml` | 168 |
 
 ## Symbol Index (Top 30)
 
 | Symbol | Kind | File | Line |
 |--------|------|------|------|
-| `test_pipeline` | function | `test_cloudbrain.py` | 21 |
-| `health` | function | `01_KERNEL/agora/brain_worker.py` | 20 |
-| `process_intent` | function | `01_KERNEL/agora/brain_worker.py` | 24 |
-| `query_memory` | function | `01_KERNEL/agora/brain_worker.py` | 39 |
-| `ExcaliburBridge` | class | `01_KERNEL/agora/bridge.py` | 7 |
-| `SovereignContext` | class | `01_KERNEL/agora/context.py` | 10 |
-| `HUDNode` | class | `01_KERNEL/agora/hud_bridge.py` | 12 |
-| `AgentNode` | class | `01_KERNEL/agora/node.py` | 9 |
-| `ANPEnvelope` | class | `01_KERNEL/agora/protocol.py` | 13 |
-| `ProtocolDocument` | class | `01_KERNEL/agora/protocol.py` | 33 |
-| `AgoraRouter` | class | `01_KERNEL/agora/router.py` | 9 |
-| `test_swarm` | function | `01_KERNEL/agora/swarm_controller.py` | 56 |
-| `SwarmController` | class | `01_KERNEL/agora/swarm_controller.py` | 10 |
-| `Videneptus` | class | `01_KERNEL/agora/videneptus.py` | 9 |
-| `watchtower_pulse` | function | `01_KERNEL/agora/war_room_protocol.py` | 12 |
-| `forge_file` | function | `01_KERNEL/agora/agents/armory.py` | 53 |
-| `refactor_file` | function | `01_KERNEL/agora/agents/armory.py` | 64 |
-| `create_blueprint` | function | `01_KERNEL/agora/agents/armory.py` | 81 |
-| `deploy_system` | function | `01_KERNEL/agora/agents/armory.py` | 93 |
-| `execute_test_cycle` | function | `01_KERNEL/agora/agents/armory.py` | 104 |
-| `web_search` | function | `01_KERNEL/agora/agents/armory.py` | 110 |
-| `forge_svg` | function | `01_KERNEL/agora/agents/armory.py` | 123 |
-| `audit_perf` | function | `01_KERNEL/agora/agents/armory.py` | 134 |
-| `get_security_constraints` | function | `01_KERNEL/agora/agents/armory.py` | 139 |
-| `reconcile_state` | function | `01_KERNEL/agora/agents/armory.py` | 144 |
-| `canary_deploy` | function | `01_KERNEL/agora/agents/armory.py` | 149 |
-| `clean_system` | function | `01_KERNEL/agora/agents/armory.py` | 155 |
-| `symbolect_tool` | function | `01_KERNEL/agora/agents/armory.py` | 164 |
-| `TemplateLibrary` | class | `01_KERNEL/agora/agents/armory.py` | 40 |
-| `SecurityLevel` | class | `01_KERNEL/agora/agents/knight_base.py` | 30 |
+| `main` | function | `chaos_engineer.py` | 450 |
+| `ChaosTest` | class | `chaos_engineer.py` | 31 |
+| `ChaosEngineer` | class | `chaos_engineer.py` | 39 |
+| `_bootstrap_sys_path` | function | `excalibur.py` | 27 |
+| `_parse_int_env` | function | `excalibur.py` | 42 |
+| `main` | function | `excalibur.py` | 57 |
+| `_parse_allowed_origins` | function | `excalibur_controller.py` | 72 |
+| `_parse_allowed_origin_regex` | function | `excalibur_controller.py` | 79 |
+| `_bundle_root` | function | `excalibur_controller.py` | 125 |
+| `_data_root` | function | `excalibur_controller.py` | 134 |
+| `_load_state` | function | `excalibur_controller.py` | 218 |
+| `_save_state` | function | `excalibur_controller.py` | 237 |
+| `_derive_client_ip` | function | `excalibur_controller.py` | 278 |
+| `_emit_event` | function | `excalibur_controller.py` | 292 |
+| `_require_token` | function | `excalibur_controller.py` | 329 |
+| `get_telemetry_status` | function | `excalibur_controller.py` | 345 |
+| `_commit_state` | function | `excalibur_controller.py` | 376 |
+| `iron_gate_release` | function | `excalibur_controller.py` | 382 |
+| `iron_gate_rollback` | function | `excalibur_controller.py` | 413 |
+| `_detect_tts_engine` | function | `excalibur_controller.py` | 477 |
+| `_synth_chunk` | function | `excalibur_controller.py` | 511 |
+| `_resample_wav_to_8k_mono` | function | `excalibur_controller.py` | 546 |
+| `_real_tts_chunk_amplitude` | function | `excalibur_controller.py` | 606 |
+| `_real_tts_chunks` | function | `excalibur_controller.py` | 611 |
+| `_chunks_for_phrase` | function | `excalibur_controller.py` | 644 |
+| `_build_audio_packet` | function | `excalibur_controller.py` | 654 |
+| `event_generator` | function | `excalibur_controller.py` | 680 |
+| `stream_avatar_faculty` | function | `excalibur_controller.py` | 743 |
+| `health` | function | `excalibur_controller.py` | 754 |
+| `version` | function | `excalibur_controller.py` | 759 |
 
-*...and 71832 more symbols in full index.*
+*...and 94962 more symbols in full index.*
 
 ---
 

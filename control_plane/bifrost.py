@@ -69,6 +69,7 @@ _ENGINE_DISPATCH: dict[str, tuple[str, str, str]] = {
     "kimi_cli":          ("cliproxy",    CLIPROXY_BASE, "kimi-k2"),
     "hermes_cli":        ("cliproxy",    CLIPROXY_BASE, "claude-sonnet-4-6"),
     "next_edge":         ("noop",        "",             ""),          # edge component swarm contract (no LLM)
+    "huggingface":       ("sovereign",   "",             "meta-llama/Llama-3-8B-Instruct"),
 }
 
 # Terminal-level model overrides (take precedence over engine defaults)
@@ -92,6 +93,7 @@ _TERMINAL_MODEL: dict[str, str] = {
     "sir_liberte":  "gemini-2.5-flash",
     "sir_zeroclaw": "qwen3:8b",
     "sir_heimdall": "gemini-2.5-pro",
+    "sir_transformers": "meta-llama/Llama-3-8B-Instruct",
     "lady_nanobot": "",   # handled by next_edge engine / noop strategy (edge component swarm contract)
     # fallback: sir_octavian    -> http strategy (port 8400, no LLM model)
     # fallback: sir_sonus       -> http strategy (port 8300, no LLM model)

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+﻿import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { KeyRound, ShieldCheck } from 'lucide-react';
 
@@ -50,6 +50,10 @@ export default function SupportPortal() {
             <h1 className="text-xl font-black">Break-Glass Support</h1>
             <p className="mt-1 font-mono text-xs text-slate-500">{displaySession}</p>
           </div>
+        </div>
+
+        <div className="mt-4 rounded-lg border border-amber-500/20 bg-amber-950/20 p-3 text-xs leading-5 text-amber-100/85">
+          Operator gate only. Use a local trusted session with the temporary token configured by the release operator.
         </div>
 
         <div className="mt-6 space-y-3">

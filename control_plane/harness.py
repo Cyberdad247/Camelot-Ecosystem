@@ -90,7 +90,7 @@ BOOT_PROBES: list[tuple[str, str, int]] = [
     ("OmniVoice",       "127.0.0.1", 3002),
     ("KittenTTS",       "127.0.0.1", 8300),
     ("SirOctavian",     "127.0.0.1", 8400),
-    ("Redis",           "redis-13278.c228.us-central1-1.gce.cloud.redislabs.com", 13278),
+    ("Redis",           "127.0.0.1", 6379),  # local agent-memory store — matches REDIS_URL default in memory_sync/symbol_compressor (old redislabs cloud host no longer resolves)
 ]
 
 
@@ -192,6 +192,8 @@ class SovereignHarness:
         js = CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "omnivoice-router" / "omnivoice-router.js"
         runner = LOGS_DIR / "_kitten_runner.py"
         oct_py = CAMELOT_HOME / "control_plane" / "sir_octavian.py"
+        bundled_redis = CAMELOT_HOME / "bin" / "redis" / "redis-server.exe"
+        bundled_redis_conf = CAMELOT_HOME / "bin" / "redis" / "redis.windows.conf"
         home = str(CAMELOT_HOME)
         cmds: dict[str, tuple[list[str], str] | None] = {
             "Qdrant":      ([str(qdrant_exe), "--config-path", str(qdrant_cfg)], home)
@@ -201,7 +203,9 @@ class SovereignHarness:
             "OmniVoice":   (["node", str(js)], home) if js.exists() else None,
             "KittenTTS":   ([py, str(runner)], home) if runner.exists() else None,
             "SirOctavian": ([py, str(oct_py), "--serve"], home) if oct_py.exists() else None,
-            "Redis":        (["redis-server.exe"], home)
+            "Redis":        ([str(bundled_redis), str(bundled_redis_conf)], home)
+                            if bundled_redis.exists() and bundled_redis_conf.exists()
+                            else (["redis-server.exe"], home)
                             if Path(r"C:\Program Files\Redis\redis-server.exe").exists()
                             else (["redis-server"], home) if shutil.which("redis-server") else None,
         }
@@ -239,7 +243,6 @@ class SovereignHarness:
                 kwargs["creationflags"] = (
                     getattr(subprocess, "DETACHED_PROCESS", 0x08)
                     | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0x200)
-                    | getattr(subprocess, "CREATE_NO_WINDOW", 0x08000000)
                 )
                 kwargs["close_fds"] = True
             else:
@@ -539,18 +542,7 @@ class SovereignHarness:
                 data = json.loads(line)
                 tid = data.get("id", "")
                 if tid and tid not in processed:
-                    # Robust resolution of knight name
-                    knight = data.get("knight") or data.get("terminal") or data.get("knight_id") or "sir_boris"
-                    task_data = {
-                        "id": tid,
-                        "knight": knight,
-                        "directive": data.get("directive") or data.get("file_path") or data.get("text") or "",
-                    }
-                    if "priority" in data:
-                        task_data["priority"] = data["priority"]
-                    if "submitted" in data:
-                        task_data["submitted"] = data["submitted"]
-                    tasks.append(HarnessTask(**task_data))
+                    tasks.append(HarnessTask(**{k: data[k] for k in HarnessTask.__dataclass_fields__ if k in data}))
             except Exception:
                 pass
         return tasks
@@ -660,6 +652,30 @@ class SovereignHarness:
                 "project": project_name or "default_nexus",
                 "state": str(CAMELOT_HOME / "03_VAULT" / "runtime_state" / "cybertron_dawning_latest.json"),
                 "summary": output[-800:],
+            }
+
+        # Sir Hermes — autonomous tool-calling agent
+        if knight_id == "hermes":
+            script = CAMELOT_HOME / "02_FORGE" / "KINETIC_ARMORY" / "hermes-agent" / "cli.py"
+            if not script.exists():
+                return {"status": "failed", "error": f"missing hermes cli script: {script}"}
+            env = os.environ.copy()
+            env.setdefault("PYTHONIOENCODING", "utf-8")
+            # Run in single-query mode (-q)
+            proc = await asyncio.to_thread(
+                subprocess.run,
+                [sys.executable, str(script), "-q", task.directive],
+                cwd=str(script.parent),
+                env=env,
+                capture_output=True,
+                text=True,
+                timeout=300,
+            )
+            output = (proc.stdout or "") + (proc.stderr or "")
+            return {
+                "status": "completed" if proc.returncode == 0 else "failed",
+                "returncode": proc.returncode,
+                "summary": output[-1000:],
             }
 
         # Runic command dispatch

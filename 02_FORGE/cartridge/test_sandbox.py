@@ -1,95 +1,176 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """
-Test Suite for Cartridge Sandbox
+Test Suite for Cartridge Sandbox — signed supply chain + governance enforcement.
+
+Run:  python 02_FORGE/cartridge/test_sandbox.py
+      (or)  pytest 02_FORGE/cartridge/test_sandbox.py
 """
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from cartridge.sandbox import CartridgeSandbox
+# Deterministic HMAC signing for tests — no keygen / filesystem needed.
+os.environ["CAMELOT_CARTRIDGE_HMAC_KEY"] = "unit-test-signing-secret"
+
+from cartridge.sandbox import CartridgeSandbox, TrustMode
 from cartridge.cartridge_schemas import CartridgeManifest, GovernancePolicy, ResourceBudget
+from cartridge import cartridge_crypto
 
-def test_sandbox_governance():
-    print("\n=== Testing Sandbox Governance ===")
-    sb = CartridgeSandbox()
-    
-    # Manifest with restricted whitelist
-    manifest = CartridgeManifest(
-        cartridge_id="GOV_TEST",
-        description="Testing governance",
-        signature="sha256:gov",
-        governance=GovernancePolicy(allowed_tools=["SecurityScan", "Ruff"])
-    )
-    
-    # Case: Allowed tool
-    res_allow = sb.run_cartridge_tool(manifest, "SecurityScan", {})
-    assert res_allow["status"] == "success"
-    print("✅ Authorized tool execution passed")
-    
-    # Case: Blocked tool
-    res_deny = sb.run_cartridge_tool(manifest, "WebCrawler", {})
-    assert res_deny["status"] == "error"
-    assert "Security Violation" in res_deny["error"]
-    print("✅ Unauthorized tool execution blocked correctly")
 
-def test_sandbox_resource_limits():
-    print("\n=== Testing Sandbox Resource Limits ===")
-    sb = CartridgeSandbox()
-    
-    # Manifest with very small token budget
-    manifest = CartridgeManifest(
-        cartridge_id="BUDGET_TEST",
-        description="Testing limits",
-        signature="sha256:budget",
-        resource_budget=ResourceBudget(max_tokens=100)
-    )
-    
-    # First call uses 250 tokens (mock cost)
-    res = sb.run_cartridge_tool(manifest, "Ruff", {})
-    
-    # Second call should fail immediately on the pre-check
-    # Note: In our current simple mock, we check usage *before* execution
-    # but the session object would need to persist across multiple calls to the same manifest instance.
-    # For this unit test, let's simulate multiple calls by using a persistent session tracking in the sandbox.
-    
-    # Wait, our sandbox currently creates a *new* session ID every time in run_cartridge_tool.
-    # To test actual budget exhaustion across a workflow, we need session persistence.
-    # Let's verify the current single-call overhead rejection if we start with high baseline.
-    
-    # Actually, let's test the Latency warning which we implemented.
-    manifest_fast = CartridgeManifest(
-        cartridge_id="PERF_TEST",
-        description="Testing latency",
-        signature="sha256:perf",
-        resource_budget=ResourceBudget(max_latency_ms=1), # impossible to meet
-        governance=GovernancePolicy(allowed_tools=["*"])
-    )
-    
-    res_perf = sb.run_cartridge_tool(manifest_fast, "Black", {})
-    assert res_perf["status"] == "success"
-    # Session report should exist
-    session_id = None
-    for sid in sb.active_sessions:
-        if "PERF_TEST" in sid:
-            session_id = sid
-            break
-            
-    report = sb.get_session_report(session_id)
-    print(f"✅ Telemetry: tokens={report['token_usage']}, latency_ms={res_perf['telemetry']['latency_ms']:.2f}")
-    
-    found_warning = any("Performance Warning" in log for log in report["logs"])
-    assert found_warning, "Should have triggered a latency warning"
-    print("✅ Latency performance warning captured in logs")
+def _signed_manifest(**overrides) -> CartridgeManifest:
+    """Build a manifest, then sign the fully-resolved model (real signature)."""
+    data = {
+        "cartridge_id": "T",
+        "description": "test",
+        "governance": {},
+        "resource_budget": {},
+        "signature": "pending",
+    }
+    data.update(overrides)
+    m = CartridgeManifest(**data)
+    m.signature = cartridge_crypto.sign(m)
+    return m
+
+
+def test_signed_manifest_verifies_and_runs():
+    print("\n=== Signature: valid signed manifest runs ===")
+    sb = CartridgeSandbox(trust_mode=TrustMode.STRICT)
+    m = _signed_manifest(cartridge_id="GOOD",
+                         governance={"allowed_tools": ["SecurityScan"]})
+    res = sb.run_cartridge_tool(m, "SecurityScan", {})
+    assert res["status"] == "success", res
+    assert res["simulated"] is True  # default executor is an explicit simulation
+    print("✅ signed manifest verified and executed")
+
+
+def test_unsigned_manifest_rejected_in_strict():
+    print("\n=== Signature: legacy/unsigned manifest rejected (STRICT) ===")
+    sb = CartridgeSandbox(trust_mode=TrustMode.STRICT)
+    m = CartridgeManifest(cartridge_id="LEGACY", description="d",
+                          signature="sha256:deadbeef",
+                          governance=GovernancePolicy(allowed_tools=["*"]))
+    res = sb.run_cartridge_tool(m, "SecurityScan", {})
+    assert res["status"] == "error" and res["violation"] == "SignatureViolation", res
+    print("✅ unsigned/legacy manifest blocked before governance is even consulted")
+
+
+def test_tampered_manifest_rejected():
+    print("\n=== Signature: tampering after signing is detected ===")
+    sb = CartridgeSandbox(trust_mode=TrustMode.STRICT)
+    m = _signed_manifest(cartridge_id="TAMPER",
+                         governance={"allowed_tools": ["CodeGen"]})
+    # Attacker widens the whitelist AFTER signing.
+    m.governance.allowed_tools.append("NetworkStrike")
+    res = sb.run_cartridge_tool(m, "NetworkStrike", {})
+    assert res["status"] == "error" and res["violation"] == "SignatureViolation", res
+    print("✅ post-signing tamper invalidates the signature → blocked")
+
+
+def test_deny_list_wins_over_allow():
+    print("\n=== Governance: deny-list beats allow-list ===")
+    sb = CartridgeSandbox(trust_mode=TrustMode.STRICT)
+    m = _signed_manifest(cartridge_id="DENY",
+                         governance={"allowed_tools": ["*"],
+                                     "denied_operations": ["NetworkStrike"]})
+    ok = sb.run_cartridge_tool(m, "CodeGen", {})
+    assert ok["status"] == "success", ok
+    blocked = sb.run_cartridge_tool(m, "NetworkStrike", {})
+    assert blocked["status"] == "error" and blocked["violation"] == "GovernanceViolation", blocked
+    print("✅ denied_operations blocks even under wildcard allow")
+
+
+def test_hitl_required_gate():
+    print("\n=== Governance: HITL_required needs approval ===")
+    # No approval callback → blocked.
+    sb_block = CartridgeSandbox(trust_mode=TrustMode.STRICT)
+    m = _signed_manifest(cartridge_id="HITL",
+                         governance={"allowed_tools": ["*"], "HITL_required": True})
+    res = sb_block.run_cartridge_tool(m, "CodeGen", {})
+    assert res["status"] == "error" and res["violation"] == "HITLRequired", res
+
+    # Approval callback returns True → allowed.
+    approvals = []
+
+    def approve(cid, tool, params):
+        approvals.append((cid, tool))
+        return True
+
+    sb_ok = CartridgeSandbox(trust_mode=TrustMode.STRICT, approval_callback=approve)
+    res2 = sb_ok.run_cartridge_tool(m, "CodeGen", {})
+    assert res2["status"] == "success", res2
+    assert approvals == [("HITL", "CodeGen")]
+    print("✅ HITL blocks without approval, proceeds with approval")
+
+
+def test_not_whitelisted_blocked():
+    print("\n=== Governance: allow-list still enforced ===")
+    sb = CartridgeSandbox(trust_mode=TrustMode.STRICT)
+    m = _signed_manifest(cartridge_id="WL",
+                         governance={"allowed_tools": ["SecurityScan", "Ruff"]})
+    res = sb.run_cartridge_tool(m, "WebCrawler", {})
+    assert res["status"] == "error" and res["violation"] == "SecurityViolation", res
+    print("✅ non-whitelisted tool blocked")
+
+
+def test_real_executor_injection():
+    print("\n=== Execution: injected executor replaces the simulation ===")
+    calls = {}
+
+    def real_exec(tool_id, params):
+        calls["tool"] = tool_id
+        return {"data": {"ran": tool_id}, "token_cost": 5}
+
+    sb = CartridgeSandbox(trust_mode=TrustMode.STRICT, tool_executor=real_exec)
+    m = _signed_manifest(cartridge_id="EXEC",
+                         governance={"allowed_tools": ["*"]})
+    res = sb.run_cartridge_tool(m, "Build", {})
+    assert res["status"] == "success"
+    assert res["simulated"] is False
+    assert res["result"] == {"ran": "Build"}
+    assert calls["tool"] == "Build"
+    print("✅ production executor invoked; not a mock")
+
+
+def test_warn_mode_allows_unsigned():
+    print("\n=== Migration: WARN mode allows unsigned but logs ===")
+    sb = CartridgeSandbox(trust_mode=TrustMode.WARN)
+    m = CartridgeManifest(cartridge_id="MIG", description="d",
+                          signature="sha256:legacy",
+                          governance=GovernancePolicy(allowed_tools=["*"]))
+    res = sb.run_cartridge_tool(m, "CodeGen", {})
+    assert res["status"] == "success", res
+    print("✅ WARN mode permits legacy cartridges during migration")
+
+
+ALL_TESTS = [
+    test_signed_manifest_verifies_and_runs,
+    test_unsigned_manifest_rejected_in_strict,
+    test_tampered_manifest_rejected,
+    test_deny_list_wins_over_allow,
+    test_hitl_required_gate,
+    test_not_whitelisted_blocked,
+    test_real_executor_injection,
+    test_warn_mode_allows_unsigned,
+]
+
 
 if __name__ == "__main__":
-    print("🧪 Starting Cartridge Sandbox Test Suite...")
-    try:
-        test_sandbox_governance()
-        test_sandbox_resource_limits()
-        print("\n🏆 ALL SANDBOX TESTS PASSED!")
-    except Exception as e:
-        print(f"\n❌ TEST FAILED: {e}")
-        import traceback
-        traceback.print_exc()
+    print("🧪 Cartridge Sandbox — signed supply chain + governance")
+    failures = 0
+    for t in ALL_TESTS:
+        try:
+            t()
+        except AssertionError as e:
+            failures += 1
+            print(f"❌ {t.__name__} FAILED: {e}")
+        except Exception as e:  # noqa: BLE001
+            failures += 1
+            print(f"❌ {t.__name__} ERROR: {e}")
+            import traceback
+            traceback.print_exc()
+    print(f"\n{'🏆 ALL PASSED' if failures == 0 else f'❌ {failures} FAILURE(S)'} "
+          f"({len(ALL_TESTS) - failures}/{len(ALL_TESTS)})")
+    raise SystemExit(1 if failures else 0)

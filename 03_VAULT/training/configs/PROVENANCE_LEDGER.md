@@ -3118,3 +3118,88 @@
 | 2026-07-08T20:40:40.470784+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_SYNC syncing ledger' to Cloud Brain] | HYDRATED |
 | 2026-07-08T20:40:40.471952+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC syncing ledger] | HYDRATED |
 | 2026-07-08T20:40:40.478477+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_SYNC syncing ledger, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-09T02:58:34.323034+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SWARM utilize bio-kinetic swarm for rapid development] | HYDRATED |
+| 2026-07-09T02:58:34.326278+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SWARM utilize bio-kinetic swarm for rapid development, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-09T03:00:36.758677+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS active' to Cloud Brain] | HYDRATED |
+| 2026-07-09T03:00:36.762587+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS active] | HYDRATED |
+| 2026-07-09T03:00:36.767862+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS active, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=8/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=0 fail=0 probes=8/9 cells=0 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=0 fail=0 probes=8/9 cells=0 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=0 fail=0 probes=8/9 cells=0 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=9/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=0 fail=0 probes=9/9 cells=0 |
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=9/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=0 fail=0 probes=9/9 cells=0 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=0 fail=0 probes=9/9 cells=0 || 2026-07-09T07:48:58.041039+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS status' to Cloud Brain] | HYDRATED |
+| 2026-07-09T07:48:58.042088+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS status] | HYDRATED |
+| 2026-07-09T07:48:58.052419+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=1 fail=0 probes=9/9 cells=1 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=1 fail=0 probes=9/9 cells=1 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=1 fail=0 probes=9/9 cells=1 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=1 fail=0 probes=9/9 cells=1 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=1 fail=0 probes=9/9 cells=1 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4860s tasks=1 fail=0 probes=9/9 cells=1 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5460s tasks=1 fail=0 probes=9/9 cells=1 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6060s tasks=1 fail=0 probes=9/9 cells=1 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6660s tasks=1 fail=0 probes=9/9 cells=1 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7260s tasks=1 fail=0 probes=9/9 cells=1 || 2026-07-09T13:35:56.625045+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS check' to Cloud Brain] | HYDRATED |
+| 2026-07-09T13:35:56.625420+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS check] | HYDRATED |
+| 2026-07-09T13:35:56.628691+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS check, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-09T22:46:21.914154+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-09T22:46:21.915804+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-09T22:46:21.928806+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-09T22:46:45.845529+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-09T22:46:45.847008+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-09T22:46:45.859862+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-09T22:46:45.913244+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-09T22:46:45.914396+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-09T22:46:45.924541+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-09T23:05:08.269706+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN Initiate Merlin DAG across the Cloudbrain] | HYDRATED |
+| 2026-07-09T23:05:08.275037+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN Initiate Merlin DAG across the Cloudbrain, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-09T23:23:18.141179+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //ENGAGE_BIFROST Route frontier models through the CoS token reduction bridge] | HYDRATED |
+| 2026-07-09T23:23:18.148777+00:00 | HYDRATION_MGR | HYDRATE [Intent: //ENGAGE_BIFROST Route frontier models through the CoS token reduction bridge, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-09T23:23:32.099298+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //IGNITE_KNIGHTS Bind Knight Persona Vectors for multi-agent orchestration] | HYDRATED |
+| 2026-07-09T23:23:32.105680+00:00 | HYDRATION_MGR | HYDRATE [Intent: //IGNITE_KNIGHTS Bind Knight Persona Vectors for multi-agent orchestration, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-09T23:23:40.977233+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//EXECUTE_UNIVERSAL Lock state via S(k) = sum(Vi * Ai) and deploy' to Cloud Brain] | HYDRATED |
+| 2026-07-09T23:23:40.977786+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //EXECUTE_UNIVERSAL Lock state via S(k) = sum(Vi * Ai) and deploy] | HYDRATED |
+| 2026-07-09T23:23:40.983094+00:00 | HYDRATION_MGR | HYDRATE [Intent: //EXECUTE_UNIVERSAL Lock state via S(k) = sum(Vi * Ai) and deploy, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-09T23:25:11.776076+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN Execute CAMELOT_OS publication tasks from root tasks.md: map the GUI/CLI/cloudbrain surface, formalize Hermes-mediated autonomy boundaries, and prepare the release gate for publication.] | HYDRATED |
+| 2026-07-09T23:25:11.779180+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN Execute CAMELOT_OS publication tasks from root tasks.md: map the GUI/CLI/cloudbrain surface, formalize Hermes-mediated autonomy boundaries, and prepare the release gate for publication., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-09T23:25:58.364926+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX Execute the first P0 tranche from tasks.md: map the GUI surface, CLI surface, cloudbrain config/env surface, and release-critical subprocess entrypoints in CAMELOT_OS, then report the gaps that block publication.] | HYDRATED |
+| 2026-07-09T23:25:58.370326+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX Execute the first P0 tranche from tasks.md: map the GUI surface, CLI surface, cloudbrain config/env surface, and release-critical subprocess entrypoints in CAMELOT_OS, then report the gaps that block publication., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-10T00:33:40.560565+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_boris] | HYDRATED |
+---
+## [2026-07-09] Camelot-OS Full Infrastructure Map (Reforged)
+- **Actor**: sir_boris
+- **Scope**:
+  - control_plane/runic_router.py
+  - control_plane/bifrost.py
+  - control_plane/switchboard.py
+- **Verification performed**:
+  - `pytest passed 430/430`
+  - `vitest passed 30/30`
+- **Tag**: CLOUDBRAIN_REFORGED_MAP
+| 2026-07-10T01:33:09.277436+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //ENGAGE_BIFROST active] | HYDRATED |
+| 2026-07-10T01:33:09.281186+00:00 | HYDRATION_MGR | HYDRATE [Intent: //ENGAGE_BIFROST active, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-10T01:37:12.607414+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-07-10T01:37:12.608392+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-07-10T01:37:12.618031+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-10T01:37:35.242621+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-07-10T01:37:35.243077+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-07-10T01:37:35.251063+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-10T01:37:35.298430+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-07-10T01:37:35.299643+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-07-10T01:37:35.307480+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-07-10T02:18:29.728829+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN Cognitive council plan: integrate PAUL, xhd2015 skills, Portkey Python SDK, Portkey Node SDK, Terraform provider, and Gateway into Camelot OS as universal critical-thinking, routing, observability, governance, and assimilation protocols.] | HYDRATED |
+| 2026-07-10T02:18:29.734763+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN Cognitive council plan: integrate PAUL, xhd2015 skills, Portkey Python SDK, Portkey Node SDK, Terraform provider, and Gateway into Camelot OS as universal critical-thinking, routing, observability, governance, and assimilation protocols., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-10T02:41:25.643481+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SWARM Bio-kinetic swarm review: validate Understand-Anything assimilation graph, Cloudbrain artifact selection, and NotebookLM metadata boundary.] | HYDRATED |
+| 2026-07-10T02:41:25.648998+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SWARM Bio-kinetic swarm review: validate Understand-Anything assimilation graph, Cloudbrain artifact selection, and NotebookLM metadata boundary., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-10T02:41:26.239716+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX Sir Codex implement Understand-Anything assimilation adapter with Cloudbrain artifact metadata and Bio-Kinetic Swarm status integration.] | HYDRATED |
+| 2026-07-10T02:41:26.249101+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX Sir Codex implement Understand-Anything assimilation adapter with Cloudbrain artifact metadata and Bio-Kinetic Swarm status integration., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-10T02:47:48.345671+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //SWARM Bio-kinetic swarm final check for Understand-Anything assimilation graph artifacts.] | HYDRATED |
+| 2026-07-10T02:47:48.350672+00:00 | HYDRATION_MGR | HYDRATE [Intent: //SWARM Bio-kinetic swarm final check for Understand-Anything assimilation graph artifacts., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-07-10T02:47:49.619984+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX Verify SIR_CODEX Cloudbrain mapping after Understand-Anything assimilation integration.] | HYDRATED |
+| 2026-07-10T02:47:49.624123+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX Verify SIR_CODEX Cloudbrain mapping after Understand-Anything assimilation integration., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |

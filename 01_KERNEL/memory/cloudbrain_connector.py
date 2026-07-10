@@ -1,4 +1,4 @@
-import json
+﻿import json
 import logging
 from typing import Optional, Any
 
@@ -18,6 +18,7 @@ KNIGHT_NOTEBOOKS = {
     "SIR_GHOST": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
     "LADY_APIS": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
     "MERLIN_OMEGA": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
+    "SIR_CODEX": "8c656cfa-a189-409e-a72d-07692a47f17e",
     "SIR_HELIO": "56820318-bb91-451f-aac4-4b46424898cf",
     "SIR_SONUS": "b8a1c3d5-e2f4-4687-9a01-234567890abc",
 }
@@ -72,3 +73,6 @@ class CloudBrainConnector:
         except Exception as e:
             logging.error(f"[CLOUD_BRAIN] Query failed for {self.knight_id}: {str(e)}")
             return None
+
+
+

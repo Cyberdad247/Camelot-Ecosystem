@@ -44,6 +44,12 @@
       "backend": "ollama",
       "tag": "gemma3:4b",
       "air_gapped": false
+    },
+    "sir_transformers": {
+      "backend": "transformers",
+      "tag": "meta-llama/Llama-3-8B-Instruct",
+      "air_gapped": true,
+      "notes": "Hugging Face local transformers execution"
     }
   }
 }

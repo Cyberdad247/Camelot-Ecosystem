@@ -1,10 +1,11 @@
-"""Execute the UI/UX cloudbrain workflow JSON."""
+﻿"""Execute the UI/UX cloudbrain workflow JSON."""
 
 from __future__ import annotations
 
 import argparse
 import json
 import os
+import shlex
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -28,13 +29,39 @@ class WorkflowRunner:
         if task_type == "SIMPLE":
             cmd = str(task["command"])
             cwd = str(task.get("cwd", "."))
-            # WARNING: shell=True is required here because cmd is a shell-style
-            # string from the workflow JSON. Only run workflow files from trusted,
-            # access-controlled paths — never from user-supplied input.
+            if self._has_shell_metacharacters(cmd):
+                self.results[name] = {
+                    "status": "FAILURE",
+                    "output": "Rejected unsafe workflow command: shell metacharacters are not allowed",
+                    "duration": f"{(datetime.now() - start_time).total_seconds():.2f}",
+                }
+                print("  [FAIL] unsafe shell syntax rejected")
+                return False
+
+            try:
+                argv = shlex.split(cmd, posix=False)
+            except ValueError as exc:
+                self.results[name] = {
+                    "status": "FAILURE",
+                    "output": f"Command parse failed: {exc}",
+                    "duration": f"{(datetime.now() - start_time).total_seconds():.2f}",
+                }
+                print("  [FAIL] command parse failed")
+                return False
+
+            if not argv:
+                self.results[name] = {
+                    "status": "FAILURE",
+                    "output": "Command parse failed: empty command",
+                    "duration": f"{(datetime.now() - start_time).total_seconds():.2f}",
+                }
+                print("  [FAIL] empty command rejected")
+                return False
+
             process = subprocess.run(
-                cmd,
+                argv,
                 cwd=cwd,
-                shell=True,
+                shell=False,
                 capture_output=True,
                 text=True,
             )
@@ -64,6 +91,10 @@ class WorkflowRunner:
 
         self.results[name] = {"status": "SKIPPED", "output": f"Unsupported task type: {task_type}"}
         return True
+
+    @staticmethod
+    def _has_shell_metacharacters(command: str) -> bool:
+        return any(ch in command for ch in ("|", "&", ";", "<", ">", "\n", "\r"))
 
     def _analyze(self, prompt: str, input_data: str) -> str:
         try:

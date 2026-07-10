@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import {
   ArrowRight,
   Circle,
@@ -121,7 +121,7 @@ function formatEvent(event: AnyaSocketEvent) {
   const pieces = [event.event];
   if (event.source) pieces.push(event.source);
   if (event.detail) pieces.push(event.detail);
-  return pieces.join(' • ');
+  return pieces.join(' â€¢ ');
 }
 
 async function probeRoute(
@@ -139,13 +139,13 @@ async function probeRoute(
       signal: controller.signal,
     });
     const latencyMs = Math.round(performance.now() - started);
-    const detail = `${response.status} ${response.statusText || 'OK'} • ${latencyMs}ms`;
+    const detail = `${response.status} ${response.statusText || 'OK'} â€¢ ${latencyMs}ms`;
 
     if (response.ok) {
       return { ...target, state: 'online', detail, latencyMs };
     }
     if (response.status === 401 || response.status === 403) {
-      return { ...target, state: 'degraded', detail: `${detail} • auth required`, latencyMs };
+      return { ...target, state: 'degraded', detail: `${detail} â€¢ auth required`, latencyMs };
     }
     if (response.status < 500) {
       return { ...target, state: 'degraded', detail, latencyMs };
@@ -154,7 +154,7 @@ async function probeRoute(
   } catch (error) {
     const latencyMs = Math.round(performance.now() - started);
     const detail = error instanceof Error ? error.message : 'probe failed';
-    return { ...target, state: 'offline', detail: `${detail} • ${latencyMs}ms`, latencyMs };
+    return { ...target, state: 'offline', detail: `${detail} â€¢ ${latencyMs}ms`, latencyMs };
   } finally {
     window.clearTimeout(timeout);
   }
@@ -381,7 +381,7 @@ export default function FactoryDashboard() {
   const onlineRoutes = routeHealth.filter((route) => route.state === 'online').length;
   const bridgeState = bridgeStatus ? 'online' : 'offline';
   const buildState = 'ready';
-  const buildDetail = `${import.meta.env.MODE} bundle mounted • ${navigator.onLine ? 'browser online' : 'browser offline'}`;
+  const buildDetail = `${import.meta.env.MODE} bundle mounted â€¢ ${navigator.onLine ? 'browser online' : 'browser offline'}`;
   const recentEvents = events.slice(-6).reverse();
 
   return (
@@ -389,7 +389,18 @@ export default function FactoryDashboard() {
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(34,211,238,0.18),transparent_28%),radial-gradient(circle_at_80%_12%,rgba(168,85,247,0.16),transparent_30%),linear-gradient(135deg,rgba(15,23,42,0.72),rgba(2,6,23,0.98))]" />
 
       <main className="relative mx-auto flex min-h-screen max-w-7xl flex-col gap-6 px-4 pb-28 pt-5 lg:px-8">
-        <header className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
+        <section className="rounded-[1.75rem] border border-cyan-300/15 bg-cyan-300/[0.06] p-4 backdrop-blur">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <p className="text-xs uppercase tracking-[0.34em] text-cyan-200">Publication Surface</p>
+            <h2 className="text-lg font-black text-white">Read-only telemetry on the left, operator actions on the right</h2>
+          </div>
+          <div className="rounded-full border border-amber-300/20 bg-amber-300/10 px-3 py-1 text-[10px] font-black uppercase tracking-[0.24em] text-amber-100">
+            Write paths stay gated
+          </div>
+        </div>
+      </section>
+      <header className="grid gap-4 lg:grid-cols-[1.3fr_0.7fr]">
           <section className="rounded-[2rem] border border-white/10 bg-black/35 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur">
             <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
@@ -450,7 +461,10 @@ export default function FactoryDashboard() {
           </section>
 
           <aside className="rounded-[2rem] border border-emerald-300/20 bg-emerald-300/[0.06] p-6 backdrop-blur">
-            <p className="text-xs uppercase tracking-[0.34em] text-emerald-200">Operator View</p>
+            <p className="text-xs uppercase tracking-[0.34em] text-emerald-200">Operator Actions</p>
+            <p className="mt-2 text-sm leading-6 text-emerald-50/80">
+              This column is for write-capable controls and release-sensitive actions. Telemetry stays on the left.
+            </p>
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl bg-black/30 p-4">
                 <p className="text-sm text-slate-400">Surface</p>
@@ -679,3 +693,6 @@ export default function FactoryDashboard() {
     </div>
   );
 }
+
+
+

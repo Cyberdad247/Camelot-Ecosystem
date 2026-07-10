@@ -1,7 +1,7 @@
 {
   "schema": "excalibur.telemetry/v1000.0.0",
   "profile": "cybertronia-win",
-  "timestamp_utc": "2026-06-23T06:34:48.606651+00:00",
+  "timestamp_utc": "2026-07-10T01:34:04.534764+00:00",
   "platform": {
     "vendor": "Windows",
     "product": "Cybertronia",
@@ -16,14 +16,14 @@
   },
   "memory_mb": {
     "total": 7895,
-    "used": 7375,
-    "available": 520
+    "used": 6898,
+    "available": 997
   },
   "storage_mb": {
     "mount": "C:\\",
     "total": 487084,
-    "used": 338861,
-    "free": 148223
+    "used": 347124,
+    "free": 139960
   },
   "kernel_features": {
     "btf_ebpf": false
@@ -31,11 +31,11 @@
   "toolchain": {
     "rustc": {
       "present": true,
-      "version": "rustc 1.96.0 (ac68faa20 2026-05-25)"
+      "version": "rustc 1.85.0 (4d91de4e4 2025-02-17)"
     },
     "cargo": {
       "present": true,
-      "version": "cargo 1.96.0 (30a34c682 2026-05-25)"
+      "version": "cargo 1.85.0 (d73d2caf9 2024-12-31)"
     },
     "python3": {
       "present": true,

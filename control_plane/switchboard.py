@@ -137,6 +137,11 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         ],
         probe_port=0, notes="Nous Hermes Agent — autonomous tool-calling via subprocess (-q mode)",
     ),
+    "sir_transformers": Terminal(
+        id="sir_transformers", engine="huggingface", weight=0.90,
+        cost_tier="free", capability=["transformers", "local_inference", "embeddings", "classification"],
+        probe_port=0, notes="Hugging Face Transformers local pipeline dispatcher",
+    ),
     "sir_openclaw": Terminal(
         id="sir_openclaw", engine="openclaw", weight=0.90,
         cost_tier="free", capability=[
@@ -234,15 +239,22 @@ async def _probe_terminal(t: Terminal) -> None:
         t.status     = "live" if gideon_py.exists() else "dark"
         t.latency_ms = 0.0
     elif t.engine == "sovereign":
-        # Module probe: SIE is live if importable and its Ollama backend responds
+        # Module probe: SIE is live if importable and its Ollama backend responds.
+        # Import + backend health() do blocking socket I/O — run off-thread, or a
+        # dark Ollama stalls the event loop and times out every concurrent TCP
+        # probe in probe_all()'s gather (sir_boris/sir_alex false-dark).
         t0 = time.perf_counter()
-        try:
-            from control_plane.sovereign_inference import SIE
-            healthy = SIE.health()
-            ollama_ok = healthy.get("backends", {}).get("ollama", False)
-            t.status     = "live" if ollama_ok else "degraded"
-        except Exception:
-            t.status = "dark"
+
+        def _sie_status() -> str:
+            try:
+                from control_plane.sovereign_inference import SIE
+                healthy = SIE.health()
+                ollama_ok = healthy.get("backends", {}).get("ollama", False)
+                return "live" if ollama_ok else "degraded"
+            except Exception:
+                return "dark"
+
+        t.status     = await asyncio.to_thread(_sie_status)
         t.latency_ms = (time.perf_counter() - t0) * 1000
     elif t.engine in ("antigravity.cli", "openai_codex", "open_source", "antigravity", "kimi_cli", "openclaw", "rustclaw", "next_edge", "pydantic_ai"):
         t.status     = "assumed_live"

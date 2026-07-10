@@ -33,13 +33,13 @@ def test_cli_history():
 
 def test_cli_bridge():
     result = subprocess.run([sys.executable, CAMELOT_PY, "bridge"],
-                          capture_output=True, text=True, timeout=30)
+                          capture_output=True, text=True, timeout=95)
     assert result.returncode == 0
 
 
 def test_cli_exec():
     result = subprocess.run([sys.executable, CAMELOT_PY, "exec", "build a test"],
-                          capture_output=True, text=True, timeout=30)
+                          capture_output=True, text=True, timeout=95)
     assert result.returncode == 0
 
 

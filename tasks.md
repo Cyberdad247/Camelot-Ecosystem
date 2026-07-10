@@ -1,65 +1,61 @@
-﻿# CAMELOT OS Review Remediation Tasks
+﻿# CAMELOT OS Publication Tasks
 
-**Compiler:** Anya Gate / Prompt Engineering Cartridge  
-**Date:** 2026-05-14
+**Compiler:** Anya Gate / Cognitive Council / Forge Titan Bootstrap  
+**Date:** 2026-07-09
 
-## P0 - Command Surface
+## P0 - Surface Inventory
 
-- [x] Restore `camelot` and `Camelot-OS` entrypoints to `control_plane.camelot_cli:main`.
-- [x] Keep `ks` and `knight-session` pointed at `bin.knight_session:main`.
-- [x] Decide whether `ai` should stay with the knight wrapper or control plane; prefer no regression for existing Camelot control-plane commands.
-- [x] Verify `camelot --json ledger status`.
-- [x] Verify `ks --list`.
+- [ ] Map the full GUI surface and list the production entry pages.
+- [ ] Map the CLI surface and list the shipped commands.
+- [ ] Inventory control-plane entrypoints that can execute subprocesses or shell commands.
+- [ ] Inventory env vars used by the GUI, CLI, cloudbrain, and deploy paths.
+- [ ] Confirm which paths are live, historical, or generated.
 
-## P0 - Ledger Safety
+## P0 - Cloudbrain Synchronization
 
-- [x] Change `ForensicEngine.log_check()` to append JSONL runtime events to `03_VAULT/runtime_state/forensic_checks.jsonl`.
-- [x] Stop passive forensic checks from writing to `PROVENANCE_LEDGER.md`.
-- [x] Reconcile provenance mirrors after the write-path fix.
-- [x] Verify `mirrors_aligned: true`.
+- [ ] Refresh cloudbrain source selection from the current repo state.
+- [ ] Align cloudbrain config docs with the current provider and endpoint names.
+- [ ] Confirm the GUI and CLI read the same source-of-truth for cloudbrain options.
+- [ ] Add explicit failure behavior when cloudbrain config is missing or stale.
 
-## P0 - Support Mutation Auth
+## P0 - GUI and CLI Publication Wiring
 
-- [x] Add `X-Camelot-Operator-Token` validation in `scripts/serve_anya_dashboard.py`.
-- [x] Require `CAMELOT_DASHBOARD_OPERATOR_TOKEN` for support activate/revoke and node registration.
-- [x] Return `403` when mutation is attempted without a configured token or with a bad token.
-- [x] Update dashboard client to send the token only when provided by local operator environment/session storage.
+- [ ] Keep the GUI focused on the Digital Factory operator experience.
+- [ ] Keep the CLI focused on status, routing, cloudbrain, and verification.
+- [ ] Make operator-only actions visually and programmatically distinct.
+- [ ] Ensure both surfaces expose the same readiness and health concepts.
 
-## P1 - Vox Fallback
+## P0 - Autonomous Workflow Design
 
-- [x] Wrap Kitten/Redis cache lookup in `VoxService.synthesize()`.
-- [x] Ignore malformed cache hits and continue fallback.
-- [x] Verify the fallback path with a forced failing Kitten import/cache call.
+- [ ] Define Sir Hermes handoff points for knight-to-knight workflow coordination.
+- [ ] Define which actions require human approval even when automation is available.
+- [ ] Log autonomous workflow transitions in a durable audit surface.
+- [ ] Prevent autonomous routing from silently invoking destructive commands.
 
-## P1 - Regression Verification
+## P1 - Verification Coverage
 
-- [x] Run Python compile checks for touched Python files.
-- [x] Run Anya Dashboard `npm run verify`.
-- [x] Run CLI smoke checks for `camelot`, `ks`, and `knight-session`.
-- [x] Record remaining known risks, especially deleted Kinetic Edge MCP source, without broad cleanup.
+- [ ] Add or update tests for GUI readiness, CLI help, and cloudbrain config paths.
+- [ ] Add negative tests for invalid env vars and unauthorized execution paths.
+- [ ] Verify the clean-checkout startup path.
+- [ ] Verify the release gate blocks publication until human approval.
 
-## P1 - Architecture Source Of Truth
+## P1 - Release Packaging
 
-- [x] Rebuild root `entiremap.md` from live runtime surfaces.
-- [x] Sync `docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md` to the root map.
-- [x] Replace broken manifest mirrors with source-of-truth redirect docs.
-- [x] Mark historical architecture docs as historical where they still contain stale path references.
-- [x] Add a repo-local architecture doc validator and pytest check.
+- [ ] Produce publication notes that list risk, status, and rollback steps.
+- [ ] Ensure the root docs point to the current shipped surfaces.
+- [ ] Add a compact operator checklist for launch and rollback.
+- [ ] Confirm the engineer cartridge has a clear path from plan to verification.
 
-## P0 - OmniVoice Integration
-**Date:** 2026-06-07
-**Objective:** Bridge Sir Sonus and VoxService to the Edge PWA WebRTC interface.
+## P2 - Cleanup and Drift Control
 
-- [x] **Phase 1: Audio Ingestion & VAD Extraction**
-  - [x] Modify `omnivoice-router.ts` to persist `utteranceBuffer` (PCM frames) to an ephemeral `.wav` file in `03_VAULT/runtime_state/audio/`.
-  - [x] Update `vad_utterance` queue event to include the `file_path`.
-- [x] **Phase 2: Runic STT & Cognitive Routing**
-  - [x] Expand `control_plane/worker.py` to route `vad_utterance` tasks to Sir Sonus.
-  - [x] Implement `faster_whisper` STT in Sir Sonus to transcribe the `.wav` file.
-  - [x] Inject the transcript into the `L1_REDIS` hydration manager for `sir_boris`.
-- [x] **Phase 3: TTS Synthesis**
-  - [x] Intercept cognitive response via `//vocal` rune.
-  - [x] Route text to `01_KERNEL/senses/audio/vox_service.py` for synthesis.
-- [x] **Phase 4: WebRTC Audio Egestion**
-  - [x] Bind `vox_service` output to Kitten TTS (`:8300`) or WebRTC `answer` channel.
-  - [x] Broadcast PCM stream back to Edge PWA.
+- [ ] Remove stale references that conflict with the live surface.
+- [ ] Separate historical docs from current operator guidance.
+- [ ] Keep generated or archival material out of the publication path.
+
+## Definition of Done
+
+- [ ] GUI and CLI both work from the live checkout.
+- [ ] Cloudbrain options are synchronized and validated.
+- [ ] Sir Hermes-mediated workflows are bounded and auditable.
+- [ ] Tests cover the release-critical paths.
+- [ ] Publication remains blocked until `//GO`.

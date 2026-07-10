@@ -281,14 +281,16 @@ def _parse_schedule(s: str) -> int:
     return int(s)
 
 
-def _inject_forge_directives(root: Path, ghost_report, verdict) -> int:
-    """Write CRITICAL ghost findings as forge directives into the harness queue."""
+def _inject_forge_directives(root: Path, ghost_report, sweep_report, verdict) -> int:
+    """Write CRITICAL ghost findings and sweep/todo recommendations into the harness queue."""
     import uuid
     from datetime import datetime, timezone
 
     queue_file = root / "logs" / "harness_queue.jsonl"
     queue_file.parent.mkdir(parents=True, exist_ok=True)
     injected = 0
+
+    # 1. Critical GHOST findings (secrets) -> sir_sentinel (high priority)
     for flag in ghost_report.flags:
         if flag.severity != "critical":
             continue
@@ -309,11 +311,74 @@ def _inject_forge_directives(root: Path, ghost_report, verdict) -> int:
         with open(queue_file, "a", encoding="utf-8") as f:
             f.write(entry + "\n")
         injected += 1
+
+    # 2. Sweep & GHOST recommendations -> sir_hermes for automated remediation (lint, refactor, optimize, purge)
+    # Unused imports (lint)
+    for flag in sweep_report.flags:
+        if flag.kind == "unused_import":
+            task_id = f"colony-hermes-{uuid.uuid4().hex[:8]}"
+            directive = (
+                f"HERMES AUTOLINT: Remove unused import in {flag.file} line {flag.line}. "
+                f"Detail: {flag.detail}. Autofix and verify using tests."
+            )
+            entry = json.dumps({
+                "id": task_id,
+                "knight": "sir_hermes",
+                "directive": directive,
+                "priority": 3,
+                "submitted": datetime.now(timezone.utc).isoformat(),
+                "source": "colony_cron_hermes",
+            })
+            with open(queue_file, "a", encoding="utf-8") as f:
+                f.write(entry + "\n")
+            injected += 1
+
+    # Duplicate content or unreferenced files (purge)
+    for flag in sweep_report.flags:
+        if flag.kind in ("duplicate_content", "unreferenced_file"):
+            task_id = f"colony-hermes-{uuid.uuid4().hex[:8]}"
+            directive = (
+                f"HERMES PURGE: Unnecessary file finding in {flag.file}. "
+                f"Kind: {flag.kind}. Detail: {flag.detail}. "
+                f"Evaluate if this file can be purged safely. If so, delete it and ensure tests still pass."
+            )
+            entry = json.dumps({
+                "id": task_id,
+                "knight": "sir_hermes",
+                "directive": directive,
+                "priority": 3,
+                "submitted": datetime.now(timezone.utc).isoformat(),
+                "source": "colony_cron_hermes",
+            })
+            with open(queue_file, "a", encoding="utf-8") as f:
+                f.write(entry + "\n")
+            injected += 1
+
+    # TODOs/FIXMEs (refactoring/optimizing)
+    for flag in ghost_report.flags:
+        if flag.kind == "todo":
+            task_id = f"colony-hermes-{uuid.uuid4().hex[:8]}"
+            directive = (
+                f"HERMES REFACTOR: Address TODO/FIXME in {flag.file} line {flag.line}. "
+                f"Detail: {flag.detail}. Optimize code path or complete implementation."
+            )
+            entry = json.dumps({
+                "id": task_id,
+                "knight": "sir_hermes",
+                "directive": directive,
+                "priority": 3,
+                "submitted": datetime.now(timezone.utc).isoformat(),
+                "source": "colony_cron_hermes",
+            })
+            with open(queue_file, "a", encoding="utf-8") as f:
+                f.write(entry + "\n")
+            injected += 1
+
     return injected
 
 
 def _cron_scan_and_inject(root: Path, auto_approve: bool) -> dict:
-    """Full triage pipeline for cron mode; injects CRITICAL findings into harness queue."""
+    """Full triage pipeline for cron mode; injects findings into harness queue."""
     from .ghost import triage as ghost_triage
     from .index import build_index
     from .judge import judge
@@ -325,7 +390,7 @@ def _cron_scan_and_inject(root: Path, auto_approve: bool) -> dict:
     ghost_report = ghost_triage(iter(records))
     sweep_report = sweep(iter(records))
     verdict = judge(ghost_report, sweep_report, idx)
-    injected = _inject_forge_directives(root, ghost_report, verdict)
+    injected = _inject_forge_directives(root, ghost_report, sweep_report, verdict)
     return {
         "files": len(records),
         "risk_label": verdict.risk_label,

@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
-Runic Router — CAMELOT Command Dispatch
+Runic Router â€” CAMELOT Command Dispatch
 =========================================
 P1-C. Routes all 11 runic commands + 29 Omega runes.
 
@@ -8,14 +8,14 @@ Entry point: route_rune(rune_str, context) -> RuneResult
 Called by: anya_gate._stage_compile (detects // prefix) + camelot_cli
 
 Rune parsing:
-  //FORGE param  → intent_type=FORGE, dispatch to sir_boris with param
-  Omega_SYNC     → omega dispatch table
+  //FORGE param  â†’ intent_type=FORGE, dispatch to sir_boris with param
+  Omega_SYNC     â†’ omega dispatch table
 
 Integration: appends to harness_queue.jsonl for async execution.
 """
 
 from __future__ import annotations
-__version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
+__version__ = "9000.14"  # CYBERTRONIA â€” set by P1-T01
 
 
 import json
@@ -44,11 +44,11 @@ except ImportError:
 CAMELOT_HOME = Path(__file__).parent.parent
 QUEUE_FILE   = CAMELOT_HOME / "logs" / "harness_queue.jsonl"
 
-# Rate-limit guard for _queue_task — kills runaway producers that fire the same
+# Rate-limit guard for _queue_task â€” kills runaway producers that fire the same
 # (knight, directive) thousands of times per second. Tunable via env:
-#   CAMELOT_ROUTER_DEDUP_WINDOW_SEC (default 10) — sliding window in seconds
-#   CAMELOT_ROUTER_DEDUP_MAX        (default 5)  — max identical submits per window
-#   CAMELOT_ROUTER_DEDUP_DISABLE=1               — bypass the guard entirely
+#   CAMELOT_ROUTER_DEDUP_WINDOW_SEC (default 10) â€” sliding window in seconds
+#   CAMELOT_ROUTER_DEDUP_MAX        (default 5)  â€” max identical submits per window
+#   CAMELOT_ROUTER_DEDUP_DISABLE=1               â€” bypass the guard entirely
 _DEDUP_WINDOW_SEC = float(os.environ.get("CAMELOT_ROUTER_DEDUP_WINDOW_SEC", "10"))
 _DEDUP_MAX        = int(os.environ.get("CAMELOT_ROUTER_DEDUP_MAX", "5"))
 _DEDUP_DISABLED   = os.environ.get("CAMELOT_ROUTER_DEDUP_DISABLE") == "1"
@@ -59,7 +59,7 @@ _dedup_state: dict[tuple[str, str], deque[float]] = defaultdict(deque)
 # Rune tables
 # ---------------------------------------------------------------------------
 
-# 11 Runic Commands — sovereign execution runes
+# 11 Runic Commands â€” sovereign execution runes
 
 RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     "//FLEET": {
@@ -121,14 +121,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     },
     "//PLAN": {
         "knight": "merlin_omega",
-        "description": "ToT strategic planning — outputs Plan.json",
+        "description": "ToT strategic planning â€” outputs Plan.json",
         "mode": "ORACLE",
         "priority": 3,
         "handler": "_handle_plan",
     },
     "//HEAL": {
         "knight": "sir_debug",
-        "description": "PIV self-healing — diagnose and repair",
+        "description": "PIV self-healing â€” diagnose and repair",
         "mode": "FORGE",
         "priority": 2,
         "handler": "_handle_heal",
@@ -163,7 +163,7 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     },
     "//vocal": {
         "knight": "sir_sonus",
-        "description": "Voice AI pipeline — 3-phase Oracle/Veritas/Lazarus",
+        "description": "Voice AI pipeline â€” 3-phase Oracle/Veritas/Lazarus",
         "mode": "ORACLE",
         "priority": 2,
         "handler": "_handle_vocal",
@@ -199,7 +199,7 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     },
     "//NANO_SWARM_EXPAND": {
         "knight": "sir_boris",
-        "description": "6-phase UKG_NANO_SWARM_V1000 expansion: SAT-gate → CvRDT mesh → Ouroboros seed → Aegis bind → AST audit → Anya seal",
+        "description": "6-phase UKG_NANO_SWARM_V1000 expansion: SAT-gate â†’ CvRDT mesh â†’ Ouroboros seed â†’ Aegis bind â†’ AST audit â†’ Anya seal",
         "mode": "SWARM",
         "priority": 1,
         "handler": "_handle_nano_swarm_expand",
@@ -232,11 +232,32 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_purge_memory",
     },
+    "//ENGAGE_BIFROST": {
+        "knight": "sir_heimdall",
+        "description": "Route frontier models through the CoS token reduction bridge",
+        "mode": "FORGE",
+        "priority": 2,
+        "handler": "_handle_engage_bifrost",
+    },
+    "//IGNITE_KNIGHTS": {
+        "knight": "sir_alex",
+        "description": "Bind Knight Persona Vectors for multi-agent orchestration",
+        "mode": "FORGE",
+        "priority": 2,
+        "handler": "_handle_ignite_knights",
+    },
+    "//EXECUTE_UNIVERSAL": {
+        "knight": "sir_boris",
+        "description": "Lock state via S(k) = sum(Vi * Ai) and deploy",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_execute_universal",
+    },
 }
 
-# 29 Omega Runes — system-level operations
+# 29 Omega Runes â€” system-level operations
 OMEGA_RUNES: dict[str, dict[str, Any]] = {
-    "Omega_SYNC":       {"knight": "sir_mnemo",    "description": "Dual-tier memory sync (ST+LT)"},
+    "Omega_SYNC":       {"knight": "hermes",       "description": "Hermes relay for dual-tier memory sync (ST+LT)"},
     "Omega_PURGE":      {"knight": "sir_forge",    "description": "Targeted purge with Iron Gate"},
     "Omega_STATUS":     {"knight": "sir_boris",    "description": "Full system status report"},
     "Omega_KINETIC":    {"knight": "lukas_omega",  "description": "Kinetic Edge binary operations"},
@@ -600,6 +621,43 @@ def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
             except Exception as e:
                 return {"action": "nano_swarm_expand", "error": str(e)}
     return {"action": "nano_swarm_expand", "detail": "script not found", "path": str(script)}
+def _handle_engage_bifrost(param: str, context: dict) -> dict:
+    try:
+        from control_plane.switchboard import Switchboard
+        board = Switchboard()
+        if not board._reg:
+            raise ValueError("Switchboard registry empty")
+    except Exception as e:
+        return {
+            "action": "trigger_grille_gate",
+            "status": "UNSTABLE",
+            "error": f"Bifrost parameters mathematically unstable: {e}",
+            "directive": "//ASK_SOVEREIGN"
+        }
+    return {
+        "action": "engage_bifrost_cos",
+        "cos_mapping": "Chain-of-Symbol Spatial Grid",
+        "reduction": "BitNet_1.58b_Ternary_Plane",
+        "status": "COMPRESSED",
+        "param": param
+    }
+
+def _handle_ignite_knights(param: str, context: dict) -> dict:
+    return {
+        "action": "knight_persona_vector_binding",
+        "overhead_kb": 18,
+        "persona_status": "LOADED_IN_RAM",
+        "loop_mode": "Loop_of_Loops",
+        "param": param
+    }
+
+def _handle_execute_universal(param: str, context: dict) -> dict:
+    return {
+        "action": "lock_state_universal",
+        "state_equation": "S(k) = sum(Vi * Ai)",
+        "deployment": "OMEGA_PRODUCTION_KERNEL",
+        "param": param
+    }
 
 
 _HANDLERS = {
@@ -627,6 +685,9 @@ _HANDLERS = {
     "_handle_nano_swarm_expand": _handle_nano_swarm_expand,
     "_handle_evolve_and_forge": _handle_evolve_and_forge,
     "_handle_purge_memory": _handle_purge_memory,
+    "_handle_engage_bifrost": _handle_engage_bifrost,
+    "_handle_ignite_knights": _handle_ignite_knights,
+    "_handle_execute_universal": _handle_execute_universal,
 }
 
 
@@ -750,10 +811,10 @@ def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> Ru
             metadata=metadata,
         )
 
-    # Unknown rune — escalate to sir_boris or sir_ghost
+    # Unknown rune â€” escalate to sir_boris or sir_ghost
     knight = "sir_ghost" if is_privacy_override else "sir_boris"
     directive = f"UNKNOWN_RUNE: {rune} {param}"
-    metadata = {"warning": f"Rune '{rune}' not in dispatch table — escalated"}
+    metadata = {"warning": f"Rune '{rune}' not in dispatch table â€” escalated"}
     
     if is_privacy_override:
         metadata["privacy_override"] = True
@@ -845,3 +906,4 @@ def _cli_main() -> None:
 
 if __name__ == "__main__":
     _cli_main()
+

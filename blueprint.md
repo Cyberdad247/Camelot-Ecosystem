@@ -1,89 +1,98 @@
-# CAMELOT OS Review Remediation Blueprint
+﻿# CAMELOT OS Publication Blueprint
 
-**Compiler:** Anya Gate / Prompt Engineering Cartridge  
-**Date:** 2026-05-14  
-**Objective:** Convert the `/review` recommendations into a guarded implementation that preserves day-to-day Camelot commands, prevents passive checks from mutating canonical ledgers, gates break-glass support mutations, and keeps voice synthesis fallback resilient.
+**Compiler:** Anya Gate / Cognitive Council / Forge Titan Bootstrap  
+**Date:** 2026-07-09  
+**Objective:** Make Camelot-OS publication-ready as a real Digital Factory with a full UI/UX GUI, a usable CLI, synchronized cloudbrain sources, guarded autonomy, and a human release gate.
 
-## Intent
+## Council
 
-The review found four live-risk surfaces:
+The implementation will be coordinated through a cognitive council with explicit lanes:
 
-1. `camelot` was redirected away from the full control-plane CLI.
-2. forensic checks appended to `PROVENANCE_LEDGER.md` during read-only commands.
-3. dashboard support mutation APIs could mint or revoke support sessions without an operator token.
-4. Vox synthesis could fail before fallback if the Redis/Kitten cache path is unavailable.
+- **Anya Gate**: intake, routing, operator UX, and release gating.
+- **Merlin Omega**: DAG-level orchestration and dependency ordering.
+- **Sir Hermes**: cross-knight workflow relay, handoff normalization, and task fan-out.
+- **Sir Codex**: implementation of code paths, tests, and CLI/UI wiring.
+- **Sir Helios**: cloudbrain/source refresh and research synchronization.
+- **Sir Boris**: architecture review and production boundary validation.
+- **Sir Ghost**: isolated execution and unsafe-path containment.
+- **Sir Hashimoto**: security, trust boundaries, and secret handling.
+- **Lady Alexandria**: documentation, provenance, and knowledge capture.
 
-The implementation must repair these without broad refactors or unrelated cleanup.
+## Publication Standard
 
-## Target Architecture
+Publication means the repo must do all of the following:
 
-### 1. Command Surface Split
+- boot predictably from a clean checkout,
+- expose the same product through GUI and CLI,
+- validate cloudbrain-backed options before selecting them,
+- keep autonomous workflow actions within a controlled boundary,
+- fail loudly when an unsafe or missing dependency appears,
+- ship with test and verification commands that map to the real surfaces.
 
-`camelot` remains the sovereign control-plane command:
+## Target Surface
 
-- `camelot ledger status`
-- `camelot codex status`
-- `camelot team roster`
-- `camelot cloudbrain ...`
+### GUI
 
-`ks` and `knight-session` own the interactive OmniRoute knight router:
+- The main UI must present the Digital Factory state clearly.
+- Primary flows must be visible without digging through implementation files.
+- The UI must expose status, queue state, cloudbrain sync state, and release readiness.
+- Operator-only actions must be visually separated from read-only telemetry.
 
-- `ks --list`
-- `knight-session --route`
-- `ks --knight sir_helio`
+### CLI
 
-The lightweight `bin.camelot` wrapper may remain available for direct use, but it must not replace the control-plane CLI entrypoint.
+- The CLI must remain the production control plane.
+- Help, status, cloudbrain, routing, and verification commands must be discoverable.
+- CLI output must be deterministic enough to support automation and release checks.
 
-### 2. Forensic Runtime Logging
+### Cloudbrain
 
-Forensic checks are allowed during command intake, but read-only checks must write to runtime state:
+- Cloudbrain sources must be synchronized before option selection.
+- Provider and endpoint selection must be driven by current repo state and env config.
+- The plan should prefer live configuration over hard-coded defaults.
 
-`03_VAULT/runtime_state/forensic_checks.jsonl`
+### Autonomy
 
-`PROVENANCE_LEDGER.md` is reserved for durable operator-significant events such as deployments, repairs, support activation, and ledger syncs.
+- Sir Hermes may coordinate and normalize workflows across knights.
+- Sir Hermes may not bypass operator approval for destructive or publication actions.
+- Autonomous paths must remain observable, logged, and recoverable.
 
-### 3. Support Mutation Gate
+## Implementation Phases
 
-Dashboard read APIs stay open to localhost users. Mutation APIs require an operator token:
+### Phase 1 - Surface Mapping
 
-- `/api/camelot-os/frontier-nodes/register`
-- `/api/camelot-os/support/activate`
-- `/api/camelot-os/support/revoke`
+- Inventory the current GUI, CLI, control-plane, cloudbrain, and ledger entrypoints.
+- Identify missing env vars, missing scripts, and missing verification steps.
+- Map which modules are shipped, which are historical, and which are optional.
 
-Accepted token source:
+### Phase 2 - Publication Wiring
 
-- environment variable `CAMELOT_DASHBOARD_OPERATOR_TOKEN`
+- Align the GUI and CLI with the same source-of-truth state.
+- Wire cloudbrain configuration refresh into the option-selection flow.
+- Add or repair operator-safe boundaries around executable surfaces.
 
-Accepted header:
+### Phase 3 - Verification Hardening
 
-- `X-Camelot-Operator-Token`
+- Add repeatable verification for GUI, CLI, and control-plane flows.
+- Add negative tests for missing env vars, invalid tokens, and unsafe commands.
+- Make the publication gate explicit and human-approved.
 
-If no token is configured, mutation APIs are disabled and return `403`.
+### Phase 4 - Release Readiness
 
-### 4. Voice Fallback Contract
+- Produce a concise release briefing with risks, blockers, and rollback steps.
+- Confirm that the repo can be run and validated from a clean checkout.
+- Stop at the Iron Gate until `//GO` is received.
 
-Kitten/Redis cache is an optimization, not a dependency. `VoxService.synthesize()` must continue to Kokoro/Piper/SIMULATED fallback if:
+## Non-Negotiables
 
-- `kitten_service` import fails
-- Redis is unreachable
-- cache payload is malformed
-- cache lookup raises any exception
+- No silent pass-through from operator prompts to shell execution.
+- No release without a visible verification path.
+- No autonomous publication.
+- No hidden dependency on stale cloudbrain values.
 
-## Non-Goals
+## Success Criteria
 
-- Do not rewrite the dashboard UX.
-- Do not delete or reorganize unrelated files.
-- Do not repair the deleted Kinetic Edge MCP source in this pass unless explicitly requested.
-- Do not add secrets to frontend code.
-
-## Acceptance Criteria
-
-- `camelot --json ledger status` succeeds.
-- `camelot ledger status` succeeds.
-- `camelot codex status` reaches the control-plane parser.
-- `ks --list` succeeds.
-- `knight-session --route` succeeds.
-- read-only ledger status does not append a new root provenance row.
-- dashboard verify passes.
-- support activation without `CAMELOT_DASHBOARD_OPERATOR_TOKEN` returns `403`.
-- Vox synthesis survives an unavailable Kitten/Redis path and reaches fallback.
+- A human can run the Digital Factory from GUI or CLI.
+- Cloudbrain options are current and synchronized.
+- Autonomy is useful but bounded.
+- Verification is explicit, repeatable, and tied to the actual shipped surface.
+- The repo is ready for publication only after a manual gate.

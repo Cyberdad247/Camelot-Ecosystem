@@ -175,6 +175,89 @@ class OllamaBackend:
         except Exception:
             pass
 
+# ── Hugging Face Transformers backend ─────────────────────────────────────────
+
+class HFTransformersBackend:
+    """Async wrapper over the Hugging Face transformers pipeline.
+
+    Loads and caches model pipelines in-process, running generation on CPU or CUDA.
+    """
+
+    name = "transformers"
+
+    def __init__(self) -> None:
+        self._pipelines = {}
+        self._device = None
+
+    def _get_pipeline(self, model: str):
+        if model not in self._pipelines:
+            try:
+                import torch
+                from transformers import pipeline
+            except ImportError as e:
+                raise ImportError("Hugging Face transformers and torch are required for the transformers backend. Run: pip install transformers torch") from e
+            if self._device is None:
+                self._device = 0 if torch.cuda.is_available() else -1
+            self._pipelines[model] = pipeline(
+                "text-generation",
+                model=model,
+                device=self._device,
+                torch_dtype=torch.float16 if self._device == 0 else torch.float32,
+            )
+        return self._pipelines[model]
+
+    async def stream(
+        self,
+        model: str,
+        prompt: str,
+        system: str,
+        max_tokens: int,
+    ) -> AsyncIterator[str]:
+        try:
+            try:
+                import torch
+                from transformers import TextIteratorStreamer
+                from threading import Thread
+            except ImportError as e:
+                yield f"\n[SIE/Transformers] Missing dependencies: {e}. Please run: pip install transformers torch"
+                return
+
+            pipe = await asyncio.to_thread(self._get_pipeline, model)
+            streamer = TextIteratorStreamer(pipe.tokenizer, skip_prompt=True, skip_special_tokens=True)
+            
+            full_prompt = prompt
+            if system:
+                full_prompt = f"System: {system}\nUser: {prompt}\nAssistant:"
+
+            generation_kwargs = dict(
+                text_inputs=full_prompt,
+                max_new_tokens=max_tokens,
+                streamer=streamer,
+            )
+            
+            # Start generation in a separate thread
+            thread = Thread(target=pipe, kwargs=generation_kwargs)
+            thread.start()
+            
+            # Yield chunks asynchronously
+            for chunk in streamer:
+                if chunk:
+                    yield chunk
+                    await asyncio.sleep(0.005)
+        except Exception as e:
+            yield f"\n[SIE/Transformers] {type(e).__name__}: {e}"
+
+    def list_models(self) -> list[str]:
+        return list(self._pipelines.keys())
+
+    def health(self) -> bool:
+        try:
+            import torch
+            import transformers
+            return True
+        except ImportError:
+            return False
+
 
 # ── Null backend (testing / offline stub) ────────────────────────────────────
 
@@ -219,8 +302,9 @@ class SovereignInferenceEngine:
     def __init__(self) -> None:
         self._manifest: dict = {}
         self._backends: dict[str, SIEBackend] = {
-            "ollama": OllamaBackend(),
-            "null":   NullBackend(),
+            "ollama":       OllamaBackend(),
+            "transformers": HFTransformersBackend(),
+            "null":         NullBackend(),
         }
         self._default_backend = "ollama"
         self._air_gapped = False

@@ -11,10 +11,14 @@ import ouroboros
 @pytest.fixture(autouse=True)
 def temp_db(tmp_path, monkeypatch):
     """Use a temp database for every test."""
+    monkeypatch.setenv("CAMELOT_OS_HOME", str(tmp_path))
+    if hasattr(ouroboros, "clear_ledger"):
+        ouroboros.clear_ledger()
     db_path = str(tmp_path / "test_ouroboros.db")
     monkeypatch.setattr(ouroboros, "DB_PATH", db_path)
     monkeypatch.setattr(ouroboros, "_initialized", False)
     yield db_path
+
 
 
 def test_init_creates_tables():

@@ -20,6 +20,7 @@ from .agenteer import Agenteer
 from .mnemo import SirMnemo
 from .link import SirLink
 from .sir_gideon import SirGideon
+from .sir_helio import SirHelio
 from .browser_nano_knight import (
     BrowserNanoKnight, NanoApis, NanoSentinel, NanoSyntax, NanoDebug, BrowserSquad,
 )
@@ -46,6 +47,7 @@ __all__ = [
     "SirMnemo",
     "SirLink",
     "SirGideon",
+    "SirHelio",
     "BrowserNanoKnight",
     "NanoApis",
     "NanoSentinel",
@@ -75,6 +77,7 @@ KNIGHT_REGISTRY: dict[str, type[BaseKnight]] = {
     "sir_link":       SirLink,
     "sir_gideon":     SirGideon,
     "gideon":         SirGideon,
+    "sir_helio":      SirHelio,
     # Browser Nano-Knights
     "nano_apis":      NanoApis,
     "nano_sentinel":  NanoSentinel,

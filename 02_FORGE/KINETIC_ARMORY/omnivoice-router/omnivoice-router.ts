@@ -178,6 +178,7 @@ function processFrame(state: PeerState, samples: number[]): void {
         file_path: audioPath,
         queued_at: new Date().toISOString(),
         priority: 1,
+        knight_id: state.knight_id ?? null,
       });
       console.log(`[OMNIVOICE] VAD utterance ${state.id} ${speechDuration}ms -> ${audioPath}`);
       // reset state

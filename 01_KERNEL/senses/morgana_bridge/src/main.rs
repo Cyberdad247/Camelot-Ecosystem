@@ -2,18 +2,22 @@
 // Camelot Apex OS - CONFIDENTIAL AND PROPRIETARY
 use axum::{
     extract::{
-        ConnectInfo, Query, State,
+        ConnectInfo, Query, Request, State,
         ws::{Message, WebSocketUpgrade},
     },
-    http::{header, HeaderMap, Method, StatusCode},
+    http::{header, HeaderMap, HeaderValue, Method, StatusCode},
     middleware::{self, Next},
-    response::IntoResponse,
+    response::{IntoResponse, Response},
     routing::{get, post},
     Json, Router,
 };
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::fs::OpenOptions;
+use std::io::Write;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
+use std::path::Path;
+use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::SystemTime;
 use tokio::sync::broadcast;
@@ -22,6 +26,11 @@ use tower_http::cors::{Any, CorsLayer};
 
 const TAILNET_CGNAT: Ipv4Addr = Ipv4Addr::new(100, 64, 0, 0);
 const DEFAULT_TRUSTED_TAILNET_OWNERS: &str = "Cyberdad247@github,Cyberdad247@";
+const DEFAULT_ALLOWED_SOVEREIGN_IDENTITIES: &str =
+    "SIR_BORIS,SIR_CODEX,SIR_ALEX,SIR_FORGE,SIR_SENTINEL,SIR_DEBUG,LADY_APIS,MERLIN_OMEGA,SIR_HELIO";
+const SOVEREIGN_TRACE_HEADER: &str = "x-sovereign-trace-id";
+const SOVEREIGN_IDENTITY_HEADER: &str = "x-sovereign-identity";
+static TRACE_COUNTER: AtomicU64 = AtomicU64::new(1);
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 struct VideneptusPhase {
@@ -86,6 +95,10 @@ struct BifrostStatus {
     cartridges: Vec<String>,
     cognitive_helm: String,
     bridge_knight: String,
+    nervous_system_log: String,
+    immune_response_log: String,
+    metabolic_mailbox: String,
+    sovereign_identity_required: bool,
 }
 
 #[derive(Debug, Serialize)]
@@ -124,6 +137,20 @@ struct GatewayConfig {
     camelot_root: String,
     openviking_map_path: String,
     cors_origin: Option<String>,
+    nervous_system_log_path: String,
+    immune_response_log_path: String,
+    metabolic_mailbox_path: String,
+    staging_reclamation_dir: String,
+    sovereign_identity_required: bool,
+    allowed_sovereign_identities: Vec<String>,
+    fatigue_threshold_ms: u128,
+}
+
+#[derive(Debug, Serialize)]
+struct MutationStaging {
+    knight_id: String,
+    payload: String,
+    timestamp_ms: u128,
 }
 
 fn now_ms() -> u128 {
@@ -191,6 +218,13 @@ fn env_u64(key: &str, default: u64) -> u64 {
         .unwrap_or(default)
 }
 
+fn env_u128(key: &str, default: u128) -> u128 {
+    std::env::var(key)
+        .ok()
+        .and_then(|value| value.trim().parse::<u128>().ok())
+        .unwrap_or(default)
+}
+
 fn load_gateway_config() -> GatewayConfig {
     let bind_raw = env_or("BIFROST_BIND_ADDR", "0.0.0.0:8001");
     let bind_addr = bind_raw
@@ -202,6 +236,10 @@ fn load_gateway_config() -> GatewayConfig {
     let openviking_map_path = env_or(
         "OPENVIKING_MAP_PATH",
         &format!(r"{}\entiremap.md", camelot_root),
+    );
+    let bio_root = format!(
+        r"{}\03_VAULT\runtime_state\bio_agentic_hive",
+        camelot_root
     );
 
     GatewayConfig {
@@ -225,7 +263,164 @@ fn load_gateway_config() -> GatewayConfig {
         camelot_root,
         openviking_map_path,
         cors_origin: env_opt("BIFROST_CORS_ORIGIN"),
+        nervous_system_log_path: env_or(
+            "BIFROST_NERVOUS_SYSTEM_LOG",
+            &format!(r"{}\logs\nervous_system.jsonl", bio_root),
+        ),
+        immune_response_log_path: env_or(
+            "BIFROST_IMMUNE_RESPONSE_LOG",
+            &format!(r"{}\logs\immune_response.jsonl", bio_root),
+        ),
+        metabolic_mailbox_path: env_or(
+            "BIFROST_METABOLIC_MAILBOX",
+            &format!(r"{}\staging\reclamation\harness_queue.jsonl", bio_root),
+        ),
+        staging_reclamation_dir: env_or(
+            "BIFROST_STAGING_RECLAMATION_DIR",
+            &format!(r"{}\staging\reclamation", bio_root),
+        ),
+        sovereign_identity_required: env_flag("BIFROST_REQUIRE_SOVEREIGN_IDENTITY", false),
+        allowed_sovereign_identities: env_csv(
+            "BIFROST_ALLOWED_SOVEREIGN_IDENTITIES",
+            DEFAULT_ALLOWED_SOVEREIGN_IDENTITIES,
+        ),
+        fatigue_threshold_ms: env_u128("BIFROST_FATIGUE_THRESHOLD_MS", 200),
     }
+}
+
+fn append_jsonl(path: &str, value: &serde_json::Value) -> std::io::Result<()> {
+    if let Some(parent) = Path::new(path).parent() {
+        std::fs::create_dir_all(parent)?;
+    }
+    let mut file = OpenOptions::new().create(true).append(true).open(path)?;
+    writeln!(file, "{}", value)
+}
+
+fn generate_trace_id() -> String {
+    let counter = TRACE_COUNTER.fetch_add(1, Ordering::Relaxed);
+    format!("{:x}-{:x}-{:x}", now_ms(), std::process::id(), counter)
+}
+
+fn sovereign_identity(headers: &HeaderMap) -> Option<String> {
+    headers
+        .get(SOVEREIGN_IDENTITY_HEADER)
+        .and_then(|value| value.to_str().ok())
+        .map(str::trim)
+        .filter(|value| !value.is_empty())
+        .map(|value| value.to_ascii_uppercase())
+}
+
+fn sovereign_identity_allowed(identity: &str, gateway: &GatewayConfig) -> bool {
+    gateway
+        .allowed_sovereign_identities
+        .iter()
+        .any(|allowed| allowed.eq_ignore_ascii_case(identity))
+}
+
+fn stage_forage_mutation(
+    gateway: &GatewayConfig,
+    knight_id: &str,
+    data: &str,
+) -> std::io::Result<()> {
+    std::fs::create_dir_all(&gateway.staging_reclamation_dir)?;
+    let mutation = MutationStaging {
+        knight_id: knight_id.to_ascii_uppercase(),
+        payload: data.to_string(),
+        timestamp_ms: now_ms(),
+    };
+    append_jsonl(
+        &gateway.metabolic_mailbox_path,
+        &serde_json::to_value(mutation)
+            .unwrap_or_else(|_| serde_json::json!({ "error": "mutation serialization failed" })),
+    )
+}
+
+fn should_stage_forage(payload: &DispatchRequest) -> bool {
+    let intent = payload.intent.to_ascii_lowercase();
+    payload.execution_target.eq_ignore_ascii_case("squire_foraging")
+        || intent.contains("forage")
+        || intent.contains("discover")
+        || intent.contains("reclaim")
+}
+
+async fn nervous_system_middleware(
+    State(state): State<Arc<AppState>>,
+    request: Request,
+    next: Next,
+) -> Response {
+    let trace_id = generate_trace_id();
+    let method = request.method().clone();
+    let path = request.uri().path().to_string();
+    let request_start = std::time::Instant::now();
+    let mut response = next.run(request).await;
+    let latency_ms = request_start.elapsed().as_millis();
+    let fatigue = latency_ms > state.gateway.fatigue_threshold_ms;
+
+    if let Ok(value) = HeaderValue::from_str(&trace_id) {
+        response.headers_mut().insert(SOVEREIGN_TRACE_HEADER, value);
+    }
+
+    let entry = serde_json::json!({
+        "event": if fatigue { "system_fatigue" } else { "request_observed" },
+        "trace_id": trace_id,
+        "method": method.as_str(),
+        "path": path,
+        "status": response.status().as_u16(),
+        "latency_ms": latency_ms,
+        "threshold_ms": state.gateway.fatigue_threshold_ms,
+        "timestamp_ms": now_ms(),
+    });
+    if let Err(error) = append_jsonl(&state.gateway.nervous_system_log_path, &entry) {
+        eprintln!("[NERVOUS_SYSTEM]: log write failed: {}", error);
+    }
+    if fatigue {
+        eprintln!(
+            "[NERVOUS_SYSTEM]: System Fatigue trace={} latency={}ms threshold={}ms",
+            entry["trace_id"], latency_ms, state.gateway.fatigue_threshold_ms
+        );
+    }
+
+    response
+}
+
+async fn immune_shield(
+    State(state): State<Arc<AppState>>,
+    headers: HeaderMap,
+    request: Request,
+    next: Next,
+) -> impl IntoResponse {
+    if !state.gateway.sovereign_identity_required {
+        return next.run(request).await.into_response();
+    }
+
+    let path = request.uri().path().to_string();
+    let identity = sovereign_identity(&headers);
+    if identity
+        .as_deref()
+        .is_some_and(|value| sovereign_identity_allowed(value, &state.gateway))
+    {
+        return next.run(request).await.into_response();
+    }
+
+    let entry = serde_json::json!({
+        "event": "identity_rejected",
+        "path": path,
+        "identity": identity.unwrap_or_else(|| "missing".to_string()),
+        "allowed": state.gateway.allowed_sovereign_identities,
+        "timestamp_ms": now_ms(),
+    });
+    if let Err(error) = append_jsonl(&state.gateway.immune_response_log_path, &entry) {
+        eprintln!("[IMMUNE_SYSTEM]: log write failed: {}", error);
+    }
+
+    (
+        StatusCode::FORBIDDEN,
+        Json(serde_json::json!({
+            "error": "Bifrost immune shield closed",
+            "detail": "sovereign identity is not authorized"
+        })),
+    )
+        .into_response()
 }
 
 /// Constant-time byte comparison to prevent timing attacks.
@@ -392,19 +587,43 @@ async fn require_gateway_auth(
 ) -> impl IntoResponse {
     match authorized(addr.ip(), &headers, None, &state.gateway).await {
         Ok(()) => next.run(request).await,
-        Err(AuthFailure::Unauthorized(reason)) => (
-            StatusCode::UNAUTHORIZED,
-            Json(serde_json::json!({ "error": "unauthorized", "detail": reason })),
-        )
-            .into_response(),
-        Err(AuthFailure::Forbidden(reason)) => (
-            StatusCode::FORBIDDEN,
-            Json(serde_json::json!({ 
-                "error": "Bifrost gate closed",
-                "detail": reason 
-            })),
-        )
-            .into_response(),
+        Err(AuthFailure::Unauthorized(reason)) => {
+            let entry = serde_json::json!({
+                "event": "auth_rejected",
+                "class": "unauthorized",
+                "origin": addr.ip().to_string(),
+                "detail": reason,
+                "timestamp_ms": now_ms(),
+            });
+            if let Err(error) = append_jsonl(&state.gateway.immune_response_log_path, &entry) {
+                eprintln!("[IMMUNE_SYSTEM]: log write failed: {}", error);
+            }
+            (
+                StatusCode::UNAUTHORIZED,
+                Json(serde_json::json!({ "error": "unauthorized", "detail": entry["detail"] })),
+            )
+                .into_response()
+        }
+        Err(AuthFailure::Forbidden(reason)) => {
+            let entry = serde_json::json!({
+                "event": "auth_rejected",
+                "class": "forbidden",
+                "origin": addr.ip().to_string(),
+                "detail": reason,
+                "timestamp_ms": now_ms(),
+            });
+            if let Err(error) = append_jsonl(&state.gateway.immune_response_log_path, &entry) {
+                eprintln!("[IMMUNE_SYSTEM]: log write failed: {}", error);
+            }
+            (
+                StatusCode::FORBIDDEN,
+                Json(serde_json::json!({
+                    "error": "Bifrost gate closed",
+                    "detail": entry["detail"]
+                })),
+            )
+                .into_response()
+        }
     }
 }
 
@@ -446,6 +665,10 @@ async fn main() {
         .route_layer(middleware::from_fn_with_state(
             state.clone(),
             require_gateway_auth,
+        ))
+        .route_layer(middleware::from_fn_with_state(
+            state.clone(),
+            immune_shield,
         ));
 
     let bind_addr = state.gateway.bind_addr;
@@ -454,6 +677,10 @@ async fn main() {
         .route("/ping", get(ping))
         .route("/ws", get(ws_handler))
         .merge(protected_routes)
+        .layer(middleware::from_fn_with_state(
+            state.clone(),
+            nervous_system_middleware,
+        ))
         .layer(cors)
         .with_state(state);
 
@@ -529,6 +756,10 @@ async fn bifrost_status(State(state): State<Arc<AppState>>) -> Json<BifrostStatu
         ],
         cognitive_helm: "sir_alex".to_string(),
         bridge_knight: "sir_link".to_string(),
+        nervous_system_log: state.gateway.nervous_system_log_path.clone(),
+        immune_response_log: state.gateway.immune_response_log_path.clone(),
+        metabolic_mailbox: state.gateway.metabolic_mailbox_path.clone(),
+        sovereign_identity_required: state.gateway.sovereign_identity_required,
     })
 }
 
@@ -671,6 +902,13 @@ async fn dispatch(
         "MORGANA ROUTER (RUST): Processing Intent: [{}]",
         payload.intent
     );
+
+    if should_stage_forage(&payload) {
+        let knight_id = empty_as(&payload.preferred_knight, "SQUIRE_FORAGER");
+        if let Err(error) = stage_forage_mutation(&state.gateway, knight_id, &payload.intent) {
+            eprintln!("[METABOLIC_LOOP]: mutation staging failed: {}", error);
+        }
+    }
 
     let (source, response, cost) = if query_lower.contains("audit") && query_lower.contains("trivy")
     {
@@ -869,6 +1107,26 @@ mod tests {
             camelot_root: r"C:\Users\vizio\CAMELOT_OS".to_string(),
             openviking_map_path: r"C:\Users\vizio\CAMELOT_OS\entiremap.md".to_string(),
             cors_origin: None,
+            nervous_system_log_path: r"C:\tmp\morgana_bridge\nervous_system.jsonl".to_string(),
+            immune_response_log_path: r"C:\tmp\morgana_bridge\immune_response.jsonl".to_string(),
+            metabolic_mailbox_path: r"C:\tmp\morgana_bridge\harness_queue.jsonl".to_string(),
+            staging_reclamation_dir: r"C:\tmp\morgana_bridge".to_string(),
+            sovereign_identity_required: false,
+            allowed_sovereign_identities: vec![
+                "SIR_BORIS".to_string(),
+                "SIR_CODEX".to_string(),
+            ],
+            fatigue_threshold_ms: 200,
+        }
+    }
+
+    fn test_dispatch(intent: &str, execution_target: &str) -> DispatchRequest {
+        DispatchRequest {
+            intent: intent.to_string(),
+            target: String::new(),
+            cartridge: String::new(),
+            preferred_knight: "sir_codex".to_string(),
+            execution_target: execution_target.to_string(),
         }
     }
 
@@ -908,5 +1166,49 @@ mod tests {
         let cfg = test_gateway_config();
         let result = authorized(IpAddr::V4(Ipv4Addr::LOCALHOST), &headers, None, &cfg).await;
         assert!(result.is_ok());
+    }
+
+    #[test]
+    fn sovereign_identity_is_case_insensitive() {
+        let cfg = test_gateway_config();
+        assert!(sovereign_identity_allowed("sir_codex", &cfg));
+        assert!(!sovereign_identity_allowed("SIR_UNKNOWN", &cfg));
+    }
+
+    #[test]
+    fn forage_detection_catches_metabolic_intents() {
+        assert!(should_stage_forage(&test_dispatch(
+            "forage a new tool manifest",
+            ""
+        )));
+        assert!(should_stage_forage(&test_dispatch(
+            "normal request",
+            "squire_foraging"
+        )));
+        assert!(!should_stage_forage(&test_dispatch("normal request", "")));
+    }
+
+    #[test]
+    fn stage_forage_mutation_writes_jsonl_mailbox() {
+        let unique = format!("morgana_bridge_test_{}", generate_trace_id());
+        let root = std::env::temp_dir().join(unique);
+        let mailbox = root.join("staging").join("reclamation").join("harness_queue.jsonl");
+        let mut cfg = test_gateway_config();
+        cfg.staging_reclamation_dir = root
+            .join("staging")
+            .join("reclamation")
+            .to_string_lossy()
+            .to_string();
+        cfg.metabolic_mailbox_path = mailbox.to_string_lossy().to_string();
+
+        stage_forage_mutation(&cfg, "sir_codex", "discover local tool")
+            .expect("mutation staging succeeds");
+
+        let content = std::fs::read_to_string(&cfg.metabolic_mailbox_path)
+            .expect("mailbox was written");
+        assert!(content.contains("\"knight_id\":\"SIR_CODEX\""));
+        assert!(content.contains("\"payload\":\"discover local tool\""));
+
+        let _ = std::fs::remove_dir_all(root);
     }
 }

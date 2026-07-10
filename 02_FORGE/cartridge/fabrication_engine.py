@@ -10,7 +10,7 @@ Uses template-driven synthesis to compile Just-in-Time (JIT) cartridges.
 import os
 import json
 import hashlib
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from datetime import datetime
 
 from .cartridge_schemas import (
@@ -37,16 +37,29 @@ class CartridgeFabricator:
         "operations": OPERATIONS_CARTRIDGE_TEMPLATE
     }
 
-    def __init__(self, output_dir: str = "packages"):
+    def __init__(self, output_dir: str = "packages", *, rbac: Any = None,
+                 principal: Optional[str] = None):
         self.output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), output_dir))
         os.makedirs(self.output_dir, exist_ok=True)
+        # Optional lifecycle authorization. When set, fabricating a trusted (signed)
+        # cartridge requires the principal to hold cartridge:fabricate + cartridge:sign.
+        self.rbac = rbac
+        self.principal = principal
         print(f"[Fabricator] Factory online. Output: {self.output_dir}")
 
-    def fabricate(self, spec: Dict[str, Any]) -> CartridgeManifest:
+    def fabricate(self, spec: Dict[str, Any], *, principal: Optional[str] = None) -> CartridgeManifest:
         """
         Synthesize a cartridge manifest from a partial specification.
         Uses templates to fill in defaults and enforces security constraints.
+        If an RBAC policy is configured, the acting principal must be authorized to
+        fabricate and sign before a trusted signature is produced.
         """
+        acting = principal or self.principal
+        if self.rbac is not None:
+            from .cartridge_rbac import CAP_FABRICATE, CAP_SIGN
+            self.rbac.require(acting, CAP_FABRICATE)
+            self.rbac.require(acting, CAP_SIGN)
+
         template_key = spec.get("type", "engineering")
         template = self.TEMPLATES.get(template_key, ENGINEERING_CARTRIDGE_TEMPLATE).copy()
         
@@ -65,17 +78,16 @@ class CartridgeFabricator:
             "governance": spec.get("governance", {}),
             "hooks": spec.get("hooks", {}),
             "embeddings": spec.get("embeddings", {}),
-            "signature": "pending_calc",  # Will be updated
+            "signature": "pending_calc",  # Will be updated after construction
             "created_at": datetime.utcnow().isoformat(),
             "created_by": "CartridgeFabricator_v1"
         }
 
-        # Calculate Signatures
-        manifest_data["signature"] = self._calculate_signature(manifest_data)
-        
-        # Instantiate Pydantic model
+        # Instantiate first so the signature covers the FULLY-resolved manifest
+        # (with all schema defaults expanded) — the exact form the sandbox verifies.
         manifest = CartridgeManifest(**manifest_data)
-        
+        manifest.signature = self._calculate_signature(manifest)
+
         # Persist to disk
         self._persist_cartridge(manifest)
         
@@ -110,15 +122,23 @@ class CartridgeFabricator:
         print(f"[Fabricator] JIT Tool Compiled: {adapter_id}")
         return adapter
 
-    def _calculate_signature(self, data: Dict[str, Any]) -> str:
-        """Compute SHA-256 signature of the manifest content."""
-        # Remove volatile fields before hash
-        stable_data = data.copy()
-        stable_data.pop("signature", None)
-        stable_data.pop("created_at", None)
-        
-        content = json.dumps(stable_data, sort_keys=True)
-        return hashlib.sha256(content.encode()).hexdigest()
+    def _calculate_signature(self, manifest: "CartridgeManifest") -> str:
+        """
+        Produce a real cryptographic signature (Ed25519, or HMAC fallback) over the
+        fully-resolved manifest content. If no signing key is configured, degrade
+        LOUDLY to a legacy SHA-256 checksum tagged ``sha256:`` — which the sandbox
+        treats as UNSIGNED and will reject in STRICT mode. Fabrication should never
+        silently ship trusted-looking-but-forgeable manifests.
+        """
+        from . import cartridge_crypto
+        try:
+            return cartridge_crypto.sign(manifest)
+        except cartridge_crypto.SigningError as e:
+            checksum = hashlib.sha256(cartridge_crypto.canonical_bytes(manifest)).hexdigest()
+            print(f"[Fabricator][WARN] No signing key ({e}). Emitting UNSIGNED checksum "
+                  f"— sandbox STRICT mode will reject this cartridge. "
+                  f"Run `python -m cartridge.cartridge_crypto keygen` to enable signing.")
+            return f"sha256:{checksum}"
 
     def _persist_cartridge(self, manifest: CartridgeManifest):
         """Save fabricated cartridge to the local packages directory."""

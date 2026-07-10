@@ -10,7 +10,15 @@ crate-type = ["cdylib", "rlib"]
 [dependencies]
 # Future: torch-sys
 pyo3 = { version = "0.23", features = ["extension-module", "abi3-py39"], optional = true }
+serde = { version = "1.0", features = ["derive"], optional = true }
+serde_json = { version = "1.0", optional = true }
+chrono = { version = "0.4", features = ["clock"], optional = true }
+# Reuse-before-reimplement scope PR: WASM actor -> msgpack wire -> PyO3 -> control_plane.
+# Only needed when pyo3 feature is enabled (pyfunctions triage_intent_v1 / switch_cartridge_v1 use it).
+contracts = { path = "../../../02_FORGE/kinetic/contracts", optional = true }
 
 [features]
 default = []
-pyo3 = ["dep:pyo3"]
+pyo3 = ["dep:pyo3", "dep:serde", "dep:serde_json", "dep:chrono", "dep:contracts"]
+
+

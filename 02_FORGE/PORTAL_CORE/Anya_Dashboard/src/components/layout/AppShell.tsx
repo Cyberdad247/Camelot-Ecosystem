@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import Sidebar from './Sidebar';
@@ -11,49 +11,51 @@ export default function AppShell() {
 
   return (
     <div className="flex h-dvh w-full overflow-hidden bg-[#050208] text-slate-100">
-      {/* Sidebar — desktop only */}
+      {/* Sidebar â€” desktop only */}
       {!compact && <Sidebar collapsed={!sidebarOpen} />}
 
       <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         {/* Top bar */}
         {!compact && (
-          <header className="flex h-10 shrink-0 items-center gap-2 border-b border-slate-800/50 px-3 bg-[#08080A]">
+          <header className="flex h-10 shrink-0 items-center gap-2 border-b border-slate-800/50 bg-[#08080A] px-3">
             <button
               onClick={() => setSidebarOpen((s) => !s)}
-              className="rounded p-1 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors"
+              className="rounded p-1 text-slate-500 transition-colors hover:bg-slate-800/50 hover:text-slate-300"
             >
-              {sidebarOpen
-                ? <PanelLeftClose className="h-4 w-4" />
-                : <PanelLeftOpen className="h-4 w-4" />
-              }
+              {sidebarOpen ? <PanelLeftClose className="h-4 w-4" /> : <PanelLeftOpen className="h-4 w-4" />}
             </button>
-            <div className="flex items-center gap-4 text-[10px] font-mono text-slate-500 w-full justify-between select-none">
-              <span className="uppercase tracking-widest text-slate-600 font-bold">
-                [TELEMETRY_HUD]
-              </span>
+            <div className="flex w-full items-center justify-between gap-4 font-mono text-[10px] text-slate-500 select-none">
+              <div className="flex items-center gap-3">
+                <span className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2 py-1 font-bold uppercase tracking-widest text-cyan-200">
+                  [READ_ONLY_TELEMETRY]
+                </span>
+                <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-2 py-1 font-bold uppercase tracking-widest text-amber-200">
+                  [OPERATOR_SURFACE]
+                </span>
+              </div>
               <div className="flex items-center gap-3 pr-2">
                 <span className="flex items-center gap-1">
                   <span className="text-[#8E95A5]">CPU:</span>
-                  <span className="text-[#00FFC2] font-bold animate-pulse">100%</span>
+                  <span className="animate-pulse font-bold text-[#00FFC2]">100%</span>
                 </span>
                 <span className="text-slate-800">|</span>
                 <span className="flex items-center gap-1">
                   <span className="text-[#8E95A5]">RAM:</span>
-                  <span className="text-[#00FFC2] font-bold">4.1GB/8.0GB</span>
+                  <span className="font-bold text-[#00FFC2]">4.1GB/8.0GB</span>
                 </span>
                 <span className="text-slate-800">|</span>
                 <span className="flex items-center gap-1">
                   <span className="text-[#8E95A5]">LATTICE:</span>
-                  <span className="text-[#00FFC2] font-bold relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00FFC2] opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00FFC2]"></span>
+                  <span className="relative flex h-2 w-2 text-[#00FFC2] font-bold">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#00FFC2] opacity-75"></span>
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-[#00FFC2]"></span>
                   </span>
-                  <span className="text-[#00FFC2] font-bold uppercase ml-1">ACTIVE</span>
+                  <span className="ml-1 font-bold uppercase text-[#00FFC2]">ACTIVE</span>
                 </span>
                 <span className="text-slate-800">|</span>
                 <span className="flex items-center gap-1">
                   <span className="text-[#8E95A5]">MTP:</span>
-                  <span className="text-[#00FFC2] font-bold uppercase">COHERENT</span>
+                  <span className="font-bold uppercase text-[#00FFC2]">COHERENT</span>
                 </span>
               </div>
             </div>

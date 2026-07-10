@@ -55,3 +55,17 @@ job — surface it for operator review. The Rust decompression kernels
 (`01_KERNEL/core/aegis_shield`, `01_KERNEL/reasoning/ouroboros_engine`) build via
 `cargo check` / `cargo test` (Rust 1.96 installed; real BitNet b1.58 + selective-
 scan SSM, 12/12 tests). Cloud Brain state: NotebookLM `Camelot-OS v.1000.0-EXCALIBUR-A`.
+
+## v9000.30 - OMEGA Titan Bootstrap Integration (Planned)
+
+The OMEGA Titan Bootstrap (v9000.30) defines the multi-engine swarm activation protocol (Helio ➔ Codex ➔ Boris). When these instructions are referenced, they are mapped to the active Camelot environment:
+
+- **Stage 1 (Helio Hydration):** Scan `/brain/` corresponds to the [03_VAULT/](file:///C:/Users/vizio/CAMELOT_OS/03_VAULT) path. Provenance is checked via [PROVENANCE_LEDGER.md](file:///C:/Users/vizio/CAMELOT_OS/PROVENANCE_LEDGER.md).
+- **Stage 2 (Codex Fabrication):** Scaffolding tasks map to the [04_KINETIC/](file:///C:/Users/vizio/CAMELOT_OS/04_KINETIC) (Rust) and [control_plane/go_router/](file:///C:/Users/vizio/CAMELOT_OS/control_plane/go_router) (Go) directories.
+- **Stage 3 (Boris Presentation):** Presentation and UI layout tasks map to [02_FORGE/PORTAL_CORE/Anya_Dashboard/](file:///C:/Users/vizio/CAMELOT_OS/02_FORGE/PORTAL_CORE/Anya_Dashboard) and [02_FORGE/apps/omni-eye-dashboard/](file:///C:/Users/vizio/CAMELOT_OS/02_FORGE/apps/omni-eye-dashboard) using custom CSS-native minimalist designs.
+
+### Operational Guardrails Adaptation:
+- **Scarcity Protocol:** The 8GB RAM ceiling and 1200MB boot sprawl ceiling are defined in [.camelot-config.yaml](file:///C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml). Under 4GB scarcity, use context sweep tools (`//SCAVENGE` or `Omega_CLEAN`) and memory sync (`Omega_SYNC`).
+- **HITL Mandate:** No autonomous write access to [03_VAULT/Knights/](file:///C:/Users/vizio/CAMELOT_OS/03_VAULT/Knights). Stage mutations under `03_VAULT/runtime_state/` or `03_VAULT/runtime_state/nano_swarm_generated/`. Await explicit user/operator review via `soul_oversight.py`.
+- **Audit Trail:** Log all system decisions and activities to the root [logs/](file:///C:/Users/vizio/CAMELOT_OS/logs) directory.
+

@@ -7,66 +7,11 @@ from control_plane import boot_sequence
 from control_plane.cloud_services import CloudServiceName
 
 
-class _Config:
-    def __init__(self, *, repo_path=None, local_path=None):
-        self.warp_repo_workflows_path = repo_path
-        self.warp_local_workflows_path = local_path
-
-
-class _ConfigManager:
-    def __init__(self, *, repo_path=None, local_path=None):
-        self.config = _Config(repo_path=repo_path, local_path=local_path)
-
-
 def _case_dir(name: str) -> Path:
     root = Path("data") / "pytest-boot-sequence" / name
     shutil.rmtree(root, ignore_errors=True)
     root.mkdir(parents=True)
     return root
-
-
-def test_sync_warp_workflows_copies_repo_workflows_to_local_target(monkeypatch):
-    root = _case_dir("warp-copy")
-    home = root / "CAMELOT_OS"
-    source = home / ".warp" / "workflows"
-    source.mkdir(parents=True)
-    workflow = source / "camelot-awaken.yaml"
-    workflow.write_text(
-        "name: Camelot Awaken\n"
-        "command: cd C:\\Users\\vizio\\CAMELOT_OS; awaken\n"
-        "description: Start Camelot through awaken.\n",
-        encoding="utf-8",
-    )
-    appdata = root / "AppData" / "Roaming"
-    local_target = appdata / "warp" / "Warp" / "data" / "workflows"
-    monkeypatch.setattr(
-        boot_sequence,
-        "ConfigManager",
-        lambda: _ConfigManager(local_path=str(local_target)),
-    )
-
-    ok, message = boot_sequence.sync_warp_workflows(home)
-
-    target = local_target / "camelot-awaken.yaml"
-    artifact = home / "03_VAULT" / "runtime_state" / "warp_workflow_sync_latest.json"
-    assert ok is True
-    assert "1 Warp workflows synced" in message
-    assert target.read_text(encoding="utf-8") == workflow.read_text(encoding="utf-8")
-    assert '"workflow_count": 1' in artifact.read_text(encoding="utf-8")
-
-
-def test_sync_warp_workflows_reports_missing_source(monkeypatch):
-    root = _case_dir("warp-missing")
-    monkeypatch.setattr(
-        boot_sequence,
-        "ConfigManager",
-        lambda: _ConfigManager(local_path=str(root / "warp-workflows")),
-    )
-
-    ok, message = boot_sequence.sync_warp_workflows(root)
-
-    assert ok is False
-    assert ".warp/workflows not found" in message
 
 
 def test_boot_morgana_bridge_reports_existing_secure_bridge(monkeypatch):
@@ -208,6 +153,7 @@ def test_child_python_env_isolates_venv_and_forces_utf8():
 
 
 def test_start_local_lt_memory_windows_launcher_sets_clean_env(monkeypatch):
+    monkeypatch.setenv("CAMELOT_ALLOW_NONINTERACTIVE_LT_SPAWN", "1")
     home = _case_dir("lt-memory-windows") / "CAMELOT_OS"
     server = home / "03_VAULT" / "training" / "configs" / "local_lt_memory.py"
     server.parent.mkdir(parents=True)

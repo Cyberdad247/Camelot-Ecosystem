@@ -1,10 +1,10 @@
 {
   "schema": "camelot.system-triage/v1",
-  "generated_utc": "2026-06-21T07:57:05.860476+00:00",
+  "generated_utc": "2026-07-02T18:12:43.920197+00:00",
   "root": "C:\\Users\\vizio\\CAMELOT_OS",
   "mode": "rapid",
-  "verdict": "DEGRADED",
-  "exit_code": 1,
+  "verdict": "BLOCKED",
+  "exit_code": 2,
   "checks": [
     {
       "name": "repository-fingerprint",
@@ -12,13 +12,13 @@
       "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "Git state captured; 58 changed or untracked entries",
+      "summary": "Git state captured; 192 changed or untracked entries",
       "command": "git status --short --branch",
-      "duration_ms": 523,
+      "duration_ms": 726,
       "evidence": {
-        "output": "## feat/bifrost-control-plane-link...origin/feat/bifrost-control-plane-link\n M 01_KERNEL/memory/tissue/flash_context.toon\n m 02_FORGE/tools/pi-mono\n M 03_VAULT/Missions/verification_ledger.jsonl\n M 03_VAULT/PROVENANCE_LEDGER.md\n m 03_VAULT/Reference_Architectures/openclaw\n M 03_VAULT/firnflow/nukg_crystals.json\n M 03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/data_level0.bin\n M 03_VAULT/memory/l2_index/5158d104-4b92-449b-acfd-7ff36edf32cb/length.bin\n M 03_VAULT/memory/l2_index/578f48ef-60bf-4283-9b64-fb03bfcd7b07/data_level0.bin\n M 03_VAULT/memory/l2_index/578f48ef-60bf-4283-9b64-fb03bfcd7b07/length.bin\n D 03_VAULT/runtime_state/cloudbrain_sync_queue.jsonl\n M 03_VAULT/runtime_state/excalibur_telemetry.json\n M 03_VAULT/runtime_state/hermes_omniroute_orchestrator_latest.json\n M 03_VAULT/runtime_state/knight_configuration_latest.json\n M 03_VAULT/runtime_state/nano_swarm_runtime_latest.json\n M 03_VAULT/runtime_state/symbiotic_maintenance_latest.json\n M 03_VAULT/runtime_state/system_triage/latest.json\n M 03_VAULT/runtime_state/system_triage/latest.md\n M 03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M 03_VAULT/training/configs/PROVENANCE_LEDGER.md\n M 03_VAULT/training/configs/notebooklm_bridge.py\n M PROVENANCE_LEDGER.md\n M README.md\n M control_plane/camelot_cli.py\n M control_plane/excalibur_preflight.py\n M control_plane/runic_router.py\n M control_plane/system_triage.py\n M data/pytest-boot-sequence/warp-copy/CAMELOT_OS/03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M data/pytest-boot-sequence/warp-missing/03_VAULT/runtime_state/warp_workflow_sync_latest.json\n M docs/PROVENANCE_LEDGER.md\n?? .qdrant-initialized\n?? 03_VAULT/runtime_state/assimilation_7/\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T004356Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T004356Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T052535Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T052535Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062647Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062647Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062848Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T062848Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065711Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065711Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065738Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T065738Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070420Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070420Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070446Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070446Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070610Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T070610Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075106Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075106Z.md\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075336Z.json\n?? 03_VAULT/runtime_state/system_triage/triage_20260621T075336Z.md\n?? audit-kickbox-audio/\n?? data/qdrant/storage/\n?? scripts/evolve_and_forge.py\n?? temp-kickbox-audio/",
-        "stderr": "warning: could not open directory 'data/.pytest_tmp/': Permission denied",
-        "dirty_count": 58
+        "output": "## feat/bifrost-control-plane-link...origin/feat/bifrost-control-plane-link\n M .agent/system_instructions.md\n D .camelot/projects/Mixed_Case_Project/blueprint.md\n D .camelot/projects/Mixed_Case_Project/manifest.json\n D .camelot/projects/Mixed_Case_Project/task.md\n D .camelot/projects/Mixed_Case_Project/verification.md\n D .camelot/projects/harness_smoke/blueprint.md\n D .camelot/projects/harness_smoke/manifest.json\n D .camelot/projects/harness_smoke/task.md\n D .camelot/projects/harness_smoke/verification.md\n D .camelot/projects/review_harness/blueprint.md\n D .camelot/projects/review_harness/manifest.json\n D .camelot/projects/review_harness/task.md\n D .camelot/projects/review_harness/verification.md\n D .camelot/projects/review_project/blueprint.md\n D .camelot/projects/review_project/manifest.json\n D .camelot/projects/review_project/task.md\n D .camelot/projects/review_project/verification.md\n D .camelot/projects/test_project/blueprint.md\n D .camelot/projects/test_project/manifest.json\n D .camelot/projects/test_project/task.md\n D .camelot/projects/test_project/verification.md\n M .colony/index.json\n M .gitignore\n D .warp/workflows/camelot-cloudbrain-v701-sync.yaml\n D .warp/workflows/camelot-cockpit.yaml\n M 01_KERNEL/memory/tissue/flash_context.toon\n M 01_KERNEL/memory/tissue/nano_swarm_crdt.json\n M 01_KERNEL/merlin/context/ouroboros_seed.json\n M 01_KERNEL/mesh/node_c/tailnet-policy.example.hujson\n M 01_KERNEL/reasoning/ouroboros_engine/Cargo.toml\n M 01_KERNEL/reasoning/ouroboros_engine/src/lib.rs\n M 01_KERNEL/security/aegis_redact_map.json\n M 01_KERNEL/senses/audio/audio_session.py\n M 01_KERNEL/senses/boris_interface.py\n M 01_KERNEL/senses/morgana_bridge/src/main.rs\n M 02_FORGE/KINETIC_ARMORY/edge-router/edge-router.ts\n M 02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.ts\n M 03_VAULT/Knights/learnings.md\n M 03_VAULT/Missions/verification_ledger.jsonl\n M 03_VAULT/PROVENANCE_LEDGER.md\n m 03_VAULT/Reference_Architectures/openclaw\n M 03_VAULT/runtime_state/excalibur_telemetry.json\n M 03_VAULT/runtime_state/forensic_checks.jsonl\n M 03_VAULT/runtime_state/nano_swarm_evidence/ukg_nano_omega_glyph_v1000_omni_codex.evidence.json\n M 03_VAULT/runtime_state/system_triage/latest.json\n M 03_VAULT/runtime_state/system_triage/latest.md\n M 03_VAULT/training/configs/PROVENANCE_LEDGER.md\n D 03_VAULT/training/configs/claude.md\n M 03_VAULT/training/configs/knights/__init__.py\n M 03_VAULT/training/configs/notebooklm_bridge.py\n M 03_VAULT/training/configs/ouroboros.py\n M 03_VAULT/training/configs/tests/test_boot_sequence.py\n M 03_VAULT/training/configs/tests/test_camelot_cli.py\n M 03_VAULT/training/configs/tests/test_ouroboros.py\n M 05_INFRASTRUCTURE/gateways/start_clawdbot_gateway.ps1\n M AGENTS.md\n M BARE_METAL_DEPLOYMENT.md\n M Cargo.lock\n M Cargo.toml\n M DEPLOYMENT_QUICK_START.md\n M DEPLOYMENT_VERIFICATION.md\n M HELP.md\n M KNIGHT_INTERACTION_GUIDE.md\n M LIVE_MONITORING_DASHBOARD.md\n M MONITORING_LIVE.md\n M PROVENANCE_LEDGER.md\n M RUN_NOW.md\n M START_TESTING.md\n M SYSTEM_LIVE_STATUS.md\n M TESTING_QUICKSTART.md\n M bin/bifrost_port.py\n M bin/bifrost_port_dynamic.py\n M bin/boot_debug.py\n M bin/camelot_portable.py\n M colony_report.md\n M control_plane/bifrost.py\n M control_plane/boot_sequence.py\n M control_plane/colony_report.md\n M control_plane/go_router/main.go\n M control_plane/harness.py\n M control_plane/rtk/Cargo.toml\n M control_plane/rtk/src/lib.rs\n M control_plane/soul_oversight.py\n M control_plane/system_triage.py\n M control_plane/worker.py\n M docs/INDEX.md\n M docs/PROVENANCE_LEDGER.md\n M docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md\n M entiremap.md\n M scripts/start_northstar.py\n M tests/test_provenance_mempalace.py\n M tests/test_review_remediation.py\n D tests/tmp_l2_integration/fe4500b1-617a-4238-8c39-03091fae65fd/data_level0.bin\n D tests/tmp_l2_integration/fe4500b1-617a-4238-8c39-03091fae65fd/header.bin\n D tests/tmp_l2_integration/fe4500b1-617a-4238-8c39-03091fae65fd/length.bin\n D tests/tmp_l2_integration/fe4500b1-617a-4238-8c39-03091fae65fd/link_lists.bin\n?? .camelot/projects/default_nexus/\n?? .cargo/\n?? .hive/design_lint_waivers.jsonl\n?? .omp/\n?? .vscode/\n?? 01_KERNEL/core/mesh/\n?? 01_KERNEL/reasoning/ouroboros_engine/PYTHON_BINDING_PLAN.md\n?? 01_KERNEL/reasoning/ouroboros_engine/pyproject.toml\n?? 01_KERNEL/reasoning/ouroboros_engine/src/ledger.rs\n?? 01_KERNEL/reasoning/ouroboros_loop_config.json\n?? 01_KERNEL/reasoning/ouroboros_loop_starter.py\n?? 01_KERNEL/senses/helio_distiller.py\n?? 02_FORGE/PORTAL_CORE/Anya_Dashboard/_smoke_drive.mjs\n?? 02_FORGE/cartridge/digital_factory_v4000_ascended/\n?? 02_FORGE/kinetic/actor/\n?? 02_FORGE/kinetic/contracts/\n?? 02_FORGE/kinetic/omni_nexus_ide/\n?? 02_FORGE/kinetic/pmcp/\n?? 03_VAULT/Knights/sir_forge/\n?? 03_VAULT/Knights/sir_openclaw/\n?? 03_VAULT/Knights/sir_sentinel/\n?? 03_VAULT/Missions/verification_ledger.jsonl.recovery-backup\n?? 03_VAULT/memory/ouroboros/\n?? 03_VAULT/runtime_state/CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000.evidence.json\n?? 03_VAULT/runtime_state/assimilation_7/\n?? 03_VAULT/runtime_state/backups/\n?? 03_VAULT/runtime_state/bifrost_triage/\n?? 03_VAULT/runtime_state/bio_agentic_hive/\n?? 03_VAULT/runtime_state/hive_ide_apex_v1000/\n?? 03_VAULT/runtime_state/knowledge_crystal/\n?? 03_VAULT/runtime_state/node_mcp_cutlist.json\n?? 03_VAULT/runtime_state/notes/\n?? 03_VAULT/runtime_state/phase3_pending_prerequisite.md\n?? 03_VAULT/runtime_state/sir_codex_directory_purge/INDEX.md\n?? 03_VAULT/runtime_state/ukg_nano_omega_titan_bootstrap_v9000_30.json\n?? 03_VAULT/runtime_state/ukg_nano_omega_titan_expansion_v9000_72.json\n?? 03_VAULT/runtime_state/universal_vkg_crystal.toon\n?? 03_VAULT/runtime_state/universal_vkg_crystal.toon.evidence.json\n?? 03_VAULT/training/configs/CLAUDE.md.disabled\n?? 03_VAULT/training/configs/knights/sir_helio.py\n?? 04_KINETIC/multivoice/camelot_multivoice.sock\n?? bin/camelot_ide_mcp.py\n?? bin/install_libkrun.sh\n?? blueprints/v9000.5/\n?? cartridges/\n?? control_plane/bio_swarm_runtime.py\n?? control_plane/cybertronia_boot.ps1\n?? control_plane/go_router/DEPLOY.md\n?? control_plane/go_router/fly.toml\n?? control_plane/omniroute_policies.py\n?? control_plane/rtk/src/bin/\n?? control_plane/toon_manifest.py\n?? data/pytest-boot-sequence/warp-copy/CAMELOT_OS/03_VAULT/\n?? data/pytest-boot-sequence/warp-missing/\n?? data/qdrant/storage/\n?? docs/architecture/CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000.deposit_note.md\n?? docs/architecture/OMEGA_TITAN_BOOTSTRAP_FEEDBACK.md\n?? docs/architecture/camelot_v1000_paper/\n?? docs/architecture/scope-review-cybertron-ascension-2026-06-25.md\n?? \"docs/catridges/TS KEY=tskey-auth-kF6KJ19Jey11CNTRL.txt\"\n?? docs/plans/LOCAL_LOAD_TESTING_PLAN.md\n?? docs/plans/LOCAL_TESTING_QUICKSTART.md\n?? docs/plans/PLAN.md\n?? docs/reports/elder_god_directory_audit_ingest_2026-07-01.md\n?? docs/reports/package_ownership_map_2026-07-01.md\n?? docs/reports/scorpion_sting_plan_2026-07-01.md\n?? docs/security/\n?? extensions/\n?? local_load_testing_suite.py\n?? ouroboros.py\n?? projects/\n?? scripts/cartridge_smoke.sh\n?? scripts/ci_smoke.sh\n?? scripts/design_lint.py\n?? scripts/fix_f821_and_e701.py\n?? scripts/fix_lint_warnings.py\n?? scripts/lightning_drone.sh\n?? scripts/purge_memory.py\n?? scripts/repair_verification_ledger_chain.py\n?? scripts/verify_frozen_bundle.py\n?? scripts/wsl2_preflight.sh\n?? tasks/\n?? tests/_fixtures.py\n?? tests/conftest.py\n?? tests/test_bio_swarm_runtime.py\n?? tests/test_camelot_ide_mcp_server.py\n?? tests/test_camelot_portable_subcommands.py\n?? tests/test_cartridges_v4000_trio.py\n?? tests/test_omniroute_policies.py\n?? tests/test_ouroboros_parity.py\n?? tests/test_toon_manifest.py\n?? tests/tmp_l2_integration/631ba685-dace-4585-ab10-04ae661a1097/\n?? tests/tmp_mempalace_integrity/\n?? tests/tmp_mempalace_isolation/\n?? tests/tmp_mempalace_l2_scoped/\n?? verification/",
+        "stderr": "",
+        "dirty_count": 192
       },
       "remediation": []
     },
@@ -30,11 +30,11 @@
       "classification": "confirmed",
       "summary": "Canonical files present",
       "command": null,
-      "duration_ms": 1,
+      "duration_ms": 28,
       "evidence": {
         "missing": [],
-        "bridge_notebook_title": "Camelot-OS v.1000",
-        "expected_live_title": "Camelot-OS v.1000",
+        "bridge_notebook_title": "Camelot-OS: The Alpha Omega Distillation Protocol",
+        "expected_live_title": "Camelot-OS: The Alpha Omega Distillation Protocol",
         "readme_version_2_claim": false
       },
       "remediation": []
@@ -47,7 +47,7 @@
       "classification": "confirmed",
       "summary": "EXCALIBUR substrate verdict: GO",
       "command": null,
-      "duration_ms": 18,
+      "duration_ms": 61,
       "evidence": {
         "telemetry": {
           "cpu": {
@@ -55,10 +55,10 @@
           },
           "memory_mb": {
             "total": 7895,
-            "available": 932
+            "available": 935
           },
           "storage_mb": {
-            "free": 176801
+            "free": 148745
           },
           "toolchain": {
             "rustc": {
@@ -98,12 +98,13 @@
       "classification": "confirmed",
       "summary": "Required boot phases are declared",
       "command": null,
-      "duration_ms": 18,
+      "duration_ms": 1,
       "evidence": {
         "required_phases": [
           "CLIProxyAPI   :8080",
           "Defense Grid",
           "Kinetic Edge  :3001",
+          "Bio-Swarm (Nano)",
           "Morgana Bridge :8001",
           "Cloud Brain   (RPC)"
         ],
@@ -112,20 +113,41 @@
       "remediation": []
     },
     {
-      "name": "targeted-control-plane-tests",
+      "name": "bio-swarm-runtime",
       "stage": "rapid",
       "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "Targeted architecture tests passed",
-      "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe -m pytest -q tests/test_architecture_docs.py tests/test_ledger_governance.py",
-      "duration_ms": 3090,
+      "summary": "Bio-Swarm spawner binary and release evidence are present",
+      "command": null,
+      "duration_ms": 43,
       "evidence": {
-        "stdout": "...                                                                      [100%]\n3 passed in 0.13s",
-        "stderr": "",
-        "returncode": 0
+        "status": "READY",
+        "binary_path": "C:\\Users\\vizio\\CAMELOT_OS\\bin\\swarm-spawner.exe",
+        "binary_sha256": "c9fdfea9137e06d5a49598efa31c84bbfad5fb17355d6d40fe26b72087f774a2",
+        "state_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\bio_swarm_runtime_latest.json",
+        "release_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\bio_swarm_release_latest.json",
+        "release_verdict": "PASS"
       },
       "remediation": []
+    },
+    {
+      "name": "targeted-control-plane-tests",
+      "stage": "rapid",
+      "status": "FAIL",
+      "required": true,
+      "classification": "confirmed",
+      "summary": "Targeted architecture tests failed",
+      "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\python.exe -m pytest -q tests/test_architecture_docs.py tests/test_ledger_governance.py tests/test_bio_swarm_runtime.py",
+      "duration_ms": 7479,
+      "evidence": {
+        "stdout": "  \"\"\"\n    \n        sys.audit(\"shutil.rmtree\", path, dir_fd)\n        if ignore_errors:\n            def onexc(*args):\n                pass\n        elif onerror is None and onexc is None:\n            def onexc(*args):\n                raise\n        elif onexc is None:\n            if onerror is None:\n                def onexc(*args):\n                    raise\n            else:\n                # delegate to onerror\n                def onexc(*args):\n                    func, path, exc = args\n                    if exc is None:\n                        exc_info = None, None, None\n                    else:\n                        exc_info = type(exc), exc, exc.__traceback__\n                    return onerror(func, path, exc_info)\n    \n        if _use_fd_functions:\n            # While the unsafe rmtree works fine on bytes, the fd based does not.\n            if isinstance(path, bytes):\n                path = os.fsdecode(path)\n            stack = [(os.lstat, dir_fd, path, None)]\n            try:\n                while stack:\n                    _rmtree_safe_fd(stack, onexc)\n            finally:\n                # Close any file descriptors still on the stack.\n                while stack:\n                    func, fd, path, entry = stack.pop()\n                    if func is not os.close:\n                        continue\n                    try:\n                        os.close(fd)\n                    except OSError as err:\n                        onexc(os.close, path, err)\n        else:\n            if dir_fd is not None:\n                raise NotImplementedError(\"dir_fd unavailable on this platform\")\n            try:\n                st = os.lstat(path)\n            except OSError as err:\n                onexc(os.lstat, path, err)\n                return\n            try:\n                if _rmtree_islink(st):\n                    # symlinks to directories are forbidden, see bug #1669\n                    raise OSError(\"Cannot call rmtree on a symbolic link\")\n            except OSError as err:\n                onexc(os.path.islink, path, err)\n                # can't continue even if onexc hook returns\n                return\n>           return _rmtree_unsafe(path, onexc)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n..\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\Lib\\shutil.py:790: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\npath = '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\nonexc = functools.partial(<function on_rm_rf_error at 0x000001C6DB0360C0>, start_path=WindowsPath('//?/C:/Users/vizio/CAMELOT_OS/data/.pytest_temp'))\n\n    def _rmtree_unsafe(path, onexc):\n        def onerror(err):\n            if not isinstance(err, FileNotFoundError):\n                onexc(os.scandir, err.filename, err)\n        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)\n        for dirpath, dirnames, filenames in results:\n            for name in dirnames:\n                fullname = os.path.join(dirpath, name)\n                try:\n                    os.rmdir(fullname)\n                except FileNotFoundError:\n                    continue\n                except OSError as err:\n                    onexc(os.rmdir, fullname, err)\n            for name in filenames:\n                fullname = os.path.join(dirpath, name)\n                try:\n                    os.unlink(fullname)\n                except FileNotFoundError:\n                    continue\n                except OSError as err:\n                    onexc(os.unlink, fullname, err)\n        try:\n            os.rmdir(path)\n        except FileNotFoundError:\n            pass\n        except OSError as err:\n>           onexc(os.rmdir, path, err)\nE           PermissionError: [WinError 5] Access is denied: '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\n\n..\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\Lib\\shutil.py:635: PermissionError\n_____ ERROR at setup of test_once_runs_binary_and_writes_release_artifact _____\n\npath = '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\nonexc = functools.partial(<function on_rm_rf_error at 0x000001C6DB0360C0>, start_path=WindowsPath('//?/C:/Users/vizio/CAMELOT_OS/data/.pytest_temp'))\n\n    def _rmtree_unsafe(path, onexc):\n        def onerror(err):\n            if not isinstance(err, FileNotFoundError):\n                onexc(os.scandir, err.filename, err)\n        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)\n        for dirpath, dirnames, filenames in results:\n            for name in dirnames:\n                fullname = os.path.join(dirpath, name)\n                try:\n                    os.rmdir(fullname)\n                except FileNotFoundError:\n                    continue\n                except OSError as err:\n                    onexc(os.rmdir, fullname, err)\n            for name in filenames:\n                fullname = os.path.join(dirpath, name)\n                try:\n                    os.unlink(fullname)\n                except FileNotFoundError:\n                    continue\n                except OSError as err:\n                    onexc(os.unlink, fullname, err)\n        try:\n>           os.rmdir(path)\nE           PermissionError: [WinError 5] Access is denied: '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\n\n..\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\Lib\\shutil.py:631: PermissionError\n\nDuring handling of the above exception, another exception occurred:\n\npath = '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\nignore_errors = False, onerror = None\n\n    def rmtree(path, ignore_errors=False, onerror=None, *, onexc=None, dir_fd=None):\n        \"\"\"Recursively delete a directory tree.\n    \n        If dir_fd is not None, it should be a file descriptor open to a directory;\n        path will then be relative to that directory.\n        dir_fd may not be implemented on your platform.\n        If it is unavailable, using it will raise a NotImplementedError.\n    \n        If ignore_errors is set, errors are ignored; otherwise, if onexc or\n        onerror is set, it is called to handle the error with arguments (func,\n        path, exc_info) where func is platform and implementation dependent;\n        path is the argument to that function that caused it to fail; and\n        the value of exc_info describes the exception. For onexc it is the\n        exception instance, and for onerror it is a tuple as returned by\n        sys.exc_info().  If ignore_errors is false and both onexc and\n        onerror are None, the exception is reraised.\n    \n        onerror is deprecated and only remains for backwards compatibility.\n        If both onerror and onexc are set, onerror is ignored and onexc is used.\n        \"\"\"\n    \n        sys.audit(\"shutil.rmtree\", path, dir_fd)\n        if ignore_errors:\n            def onexc(*args):\n                pass\n        elif onerror is None and onexc is None:\n            def onexc(*args):\n                raise\n        elif onexc is None:\n            if onerror is None:\n                def onexc(*args):\n                    raise\n            else:\n                # delegate to onerror\n                def onexc(*args):\n                    func, path, exc = args\n                    if exc is None:\n                        exc_info = None, None, None\n                    else:\n                        exc_info = type(exc), exc, exc.__traceback__\n                    return onerror(func, path, exc_info)\n    \n        if _use_fd_functions:\n            # While the unsafe rmtree works fine on bytes, the fd based does not.\n            if isinstance(path, bytes):\n                path = os.fsdecode(path)\n            stack = [(os.lstat, dir_fd, path, None)]\n            try:\n                while stack:\n                    _rmtree_safe_fd(stack, onexc)\n            finally:\n                # Close any file descriptors still on the stack.\n                while stack:\n                    func, fd, path, entry = stack.pop()\n                    if func is not os.close:\n                        continue\n                    try:\n                        os.close(fd)\n                    except OSError as err:\n                        onexc(os.close, path, err)\n        else:\n            if dir_fd is not None:\n                raise NotImplementedError(\"dir_fd unavailable on this platform\")\n            try:\n                st = os.lstat(path)\n            except OSError as err:\n                onexc(os.lstat, path, err)\n                return\n            try:\n                if _rmtree_islink(st):\n                    # symlinks to directories are forbidden, see bug #1669\n                    raise OSError(\"Cannot call rmtree on a symbolic link\")\n            except OSError as err:\n                onexc(os.path.islink, path, err)\n                # can't continue even if onexc hook returns\n                return\n>           return _rmtree_unsafe(path, onexc)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\n..\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\Lib\\shutil.py:790: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\npath = '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\nonexc = functools.partial(<function on_rm_rf_error at 0x000001C6DB0360C0>, start_path=WindowsPath('//?/C:/Users/vizio/CAMELOT_OS/data/.pytest_temp'))\n\n    def _rmtree_unsafe(path, onexc):\n        def onerror(err):\n            if not isinstance(err, FileNotFoundError):\n                onexc(os.scandir, err.filename, err)\n        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)\n        for dirpath, dirnames, filenames in results:\n            for name in dirnames:\n                fullname = os.path.join(dirpath, name)\n                try:\n                    os.rmdir(fullname)\n                except FileNotFoundError:\n                    continue\n                except OSError as err:\n                    onexc(os.rmdir, fullname, err)\n            for name in filenames:\n                fullname = os.path.join(dirpath, name)\n                try:\n                    os.unlink(fullname)\n                except FileNotFoundError:\n                    continue\n                except OSError as err:\n                    onexc(os.unlink, fullname, err)\n        try:\n            os.rmdir(path)\n        except FileNotFoundError:\n            pass\n        except OSError as err:\n>           onexc(os.rmdir, path, err)\nE           PermissionError: [WinError 5] Access is denied: '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\n\n..\\AppData\\Roaming\\uv\\python\\cpython-3.13-windows-x86_64-none\\Lib\\shutil.py:635: PermissionError\n============================== warnings summary ===============================\ntests/test_bio_swarm_runtime.py::test_status_reports_missing_binary_as_blocked\ntests/test_bio_swarm_runtime.py::test_preflight_passes_with_binary_and_writable_state\ntests/test_bio_swarm_runtime.py::test_runtime_status_artifact_is_persisted\ntests/test_bio_swarm_runtime.py::test_once_runs_binary_and_writes_release_artifact\n  C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Lib\\site-packages\\_pytest\\pathlib.py:103: PytestWarning: (rm_rf) unknown function <built-in function scandir> when removing \\\\?\\C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_temp:\n  <class 'PermissionError'>: [WinError 5] Access is denied: '\\\\\\\\?\\\\C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp'\n    warnings.warn(\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nERROR tests/test_bio_swarm_runtime.py::test_status_reports_missing_binary_as_blocked\nERROR tests/test_bio_swarm_runtime.py::test_preflight_passes_with_binary_and_writable_state\nERROR tests/test_bio_swarm_runtime.py::test_runtime_status_artifact_is_persisted\nERROR tests/test_bio_swarm_runtime.py::test_once_runs_binary_and_writes_release_artifact\n4 passed, 4 warnings, 4 errors in 2.69s",
+        "stderr": "",
+        "returncode": 1
+      },
+      "remediation": [
+        "Run the failing test nodes individually and repair before deep validation."
+      ]
     },
     {
       "name": "rust-kernel-compile",
@@ -135,7 +157,7 @@
       "classification": "confirmed",
       "summary": "Aegis and Ouroboros compile",
       "command": "cargo check --quiet",
-      "duration_ms": 5787,
+      "duration_ms": 10569,
       "evidence": {
         "crates": [
           {
@@ -162,7 +184,7 @@
       "classification": "confirmed",
       "summary": "Adaptive HITL and HUMAN_GATE contracts are present",
       "command": null,
-      "duration_ms": 66,
+      "duration_ms": 2,
       "evidence": {
         "files": {
           "anya_gate": "C:\\Users\\vizio\\CAMELOT_OS\\control_plane\\anya_gate.py",
@@ -178,12 +200,12 @@
       "status": "PASS",
       "required": true,
       "classification": "confirmed",
-      "summary": "Verification ledger chain valid (380 entries)",
+      "summary": "Verification ledger chain valid (688 entries)",
       "command": null,
-      "duration_ms": 27,
+      "duration_ms": 32,
       "evidence": {
         "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\Missions\\verification_ledger.jsonl",
-        "entries_checked": 380,
+        "entries_checked": 688,
         "error": ""
       },
       "remediation": []
@@ -191,93 +213,94 @@
     {
       "name": "provenance-ledger-alignment",
       "stage": "rapid",
-      "status": "PASS",
+      "status": "FAIL",
       "required": true,
       "classification": "confirmed",
-      "summary": "Ledger mirrors aligned",
+      "summary": "Ledger mirrors are not aligned",
       "command": null,
-      "duration_ms": 5,
+      "duration_ms": 9,
       "evidence": {
         "ledger_path": "C:\\Users\\vizio\\CAMELOT_OS\\PROVENANCE_LEDGER.md",
         "exists": true,
-        "size_bytes": 160203,
-        "tail": "- **Scope**:\n  - control_plane/runic_router.py\n  - scripts/evolve_and_forge.py\n- **Verification performed**:\n  - `Verify registered command is listed in runic_router list`\n  - `Verify scripts/evolve_and_forge.py compiles and runs --help`\n- **Tag**: [//EVOLVE_AND_FORGE]\n| 2026-06-21T07:02:29.131986+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |\n| 2026-06-21T07:02:42.538790+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS status' to Cloud Brain] | HYDRATED |\n| 2026-06-21T07:02:42.539725+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS status] | HYDRATED |\n| 2026-06-21T07:02:42.546222+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\n| 2026-06-21T03:02:56.730257 | CLI/Sir Forge | CREATE: build a test | SUCCESS |",
+        "size_bytes": 319601,
+        "tail": "- **Actor**: SIR_CODEX (Codex / GPT-5)\n- **Scope**:\n  - control_plane/codex_integration.py\n  - control_plane/camelot_cli.py\n  - control_plane/boot_sequence.py\n  - 02_FORGE/apps/omni-eye-dashboard\n  - 03_VAULT/runtime_state/codex_integration_latest.json\n- **Verification performed**:\n  - `camelot codex status`\n  - `camelot codex integrate`\n  - `awaken --quick surfaces Codex Integration`\n- **Tag**: [Omega_CODEX]",
         "mirrors": [
           {
             "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\PROVENANCE_LEDGER.md",
             "exists": true,
-            "aligned": true
+            "aligned": false
           },
           {
             "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\training\\configs\\PROVENANCE_LEDGER.md",
             "exists": true,
-            "aligned": true
+            "aligned": false
           },
           {
             "path": "C:\\Users\\vizio\\CAMELOT_OS\\docs\\PROVENANCE_LEDGER.md",
             "exists": true,
-            "aligned": true
+            "aligned": false
           }
         ],
-        "mirrors_aligned": true
+        "mirrors_aligned": false
       },
-      "remediation": []
+      "remediation": [
+        "Review differences, then run `camelot ledger reconcile` under an approved change window."
+      ]
     },
     {
       "name": "notebooklm-live",
       "stage": "rapid",
-      "status": "PASS",
+      "status": "UNVERIFIED",
       "required": true,
       "classification": "confirmed",
-      "summary": "NotebookLM reachable: Camelot-OS v.1000 (0 sources)",
+      "summary": "NotebookLM live check failed: ConnectError",
       "command": null,
-      "duration_ms": 2091,
+      "duration_ms": 492,
       "evidence": {
-        "notebook_count": 185,
-        "found": true,
-        "id": "8c656cfa-a189-409e-a72d-07692a47f17e",
-        "title": "Camelot-OS v.1000",
-        "source_count": 0,
-        "configured_title": "Camelot-OS v.1000",
-        "title_drift": false
+        "error": "All connection attempts failed"
       },
-      "remediation": []
+      "remediation": [
+        "Run `nlm login`, then rerun `camelot triage --rapid`."
+      ]
     },
     {
       "name": "excalibur-cloudbrain-health",
       "stage": "rapid",
-      "status": "PASS",
+      "status": "UNVERIFIED",
       "required": true,
       "classification": "confirmed",
-      "summary": "Long-term Excalibur Cloud Brain is alive",
-      "command": "GET https://cyberdad247--excalibur-brain-health.modal.run",
-      "duration_ms": 3957,
+      "summary": "Cloud Brain health check failed: URLError",
+      "command": null,
+      "duration_ms": 235,
       "evidence": {
         "url": "https://cyberdad247--excalibur-brain-health.modal.run",
-        "http_status": 200,
-        "payload": {
-          "status": "alive",
-          "service": "excalibur-brain",
-          "version": "1.0.0"
-        }
+        "error": "<urlopen error [WinError 10013] An attempt was made to access a socket in a way forbidden by its access permissions>"
       },
       "remediation": []
     },
     {
       "name": "cloudbrain-sync-queue",
       "stage": "rapid",
-      "status": "PASS",
+      "status": "WARN",
       "required": false,
       "classification": "confirmed",
-      "summary": "0 queued Cloud Brain event(s)",
+      "summary": "5 queued Cloud Brain event(s)",
       "command": null,
-      "duration_ms": 0,
+      "duration_ms": 17,
       "evidence": {
         "path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\cloudbrain_sync_queue.jsonl",
-        "pending": 0,
-        "tail": []
+        "pending": 5,
+        "tail": [
+          "{\"command\": \"ledger update KOA Realm v2 Spatial Root Reforge\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"ledger_update\", \"last_attempt_utc\": \"2026-06-26T19:59:26.084918+00:00\", \"last_error\": \"ConnectError: All connection attempts failed\", \"queued_utc\": \"2026-06-26T19:58:28.720756+00:00\", \"results\": {\"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"status\": \"UPDATED\", \"tag\": \"KOA_REALM_REFORGE\", \"title\": \"KOA Realm v2 Spatial Root Reforge\"}}",
+          "{\"command\": \"ledger update --title KOA Realm v2 Spatial Root Reforge --actor Sir Codex --tag KOA_REALM_REFORGE --scope audit-kickbox-audio/apps/pwa root KoARealmProvider, Lakeisha video HUD, R3F SpatialBackground, glass Property/Streaming/Coffee tabs, KOA v2 docs --verification npm run typecheck --workspace=pwa; npm run build --workspace=pwa\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"verification_run\", \"last_attempt_utc\": \"2026-06-26T19:59:26.117175+00:00\", \"last_error\": \"ConnectError: All connection attempts failed\", \"queued_utc\": \"2026-06-26T19:58:29.832694+00:00\", \"results\": {\"cloudbrain_sync\": {\"error\": \"ConnectError: All connection attempts failed\", \"pending\": 1, \"queue_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\cloudbrain_sync_queue.jsonl\", \"queued\": true, \"triggered\": true}, \"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"status\": \"UPDATED\", \"tag\": \"KOA_REALM_REFORGE\", \"title\": \"KOA Realm v2 Spatial Root Reforge\"}}",
+          "{\"command\": \"ledger update KOA Realm v2 Continuity Gate Verified\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"ledger_update\", \"queued_utc\": \"2026-06-26T20:07:32.355577+00:00\", \"results\": {\"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"status\": \"UPDATED\", \"tag\": \"KOA_REALM_SYNC\", \"title\": \"KOA Realm v2 Continuity Gate Verified\"}}",
+          "{\"command\": \"ledger update --title KOA Realm v2 Continuity Gate Verified --actor Sir Codex --tag KOA_REALM_SYNC --scope audit-kickbox-audio/apps/pwa KoARealmProvider, LakeishaVideoHUD, SpatialBackground, KOA v2 docs, Playwright continuity gate --verification npm run typecheck --workspace=pwa; npm run build --workspace=pwa; npm run test:e2e --workspace=pwa (test passed, wrapper timed out after pass)\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"verification_run\", \"queued_utc\": \"2026-06-26T20:07:33.353241+00:00\", \"results\": {\"cloudbrain_sync\": {\"error\": \"ConnectError: All connection attempts failed\", \"pending\": 3, \"queue_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\cloudbrain_sync_queue.jsonl\", \"queued\": true, \"triggered\": true}, \"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"status\": \"UPDATED\", \"tag\": \"KOA_REALM_SYNC\", \"title\": \"KOA Realm v2 Continuity Gate Verified\"}}",
+          "{\"command\": \"codex integrate\", \"error\": \"ConnectError: All connection attempts failed\", \"event_type\": \"codex_integration\", \"queued_utc\": \"2026-07-02T18:12:09.303190+00:00\", \"results\": {\"actor\": \"SIR_CODEX (Codex / GPT-5)\", \"artifact_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\codex_integration_latest.json\", \"generated_utc\": \"2026-07-02T18:12:07.829611+00:00\", \"pid\": 157240, \"python\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.venv\\\\Scripts\\\\python.exe\", \"repo_root\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\", \"repo_version\": \"unknown\", \"status\": \"CODEX_INTEGRATED\", \"surfaces\": {\"boot\": true, \"cli\": true, \"cloudbrain\": true, \"dashboard\": true, \"ledger\": true}, \"trigger\": \"integrate\"}}"
+        ]
       },
-      "remediation": []
+      "remediation": [
+        "Inspect with `camelot cloudbrain queue status`; flush only after authentication and review."
+      ]
     },
     {
       "name": "aspirational-v1000-claims",
@@ -342,7 +365,7 @@
       "classification": "confirmed",
       "summary": "No pre-existing tracked changes were altered",
       "command": null,
-      "duration_ms": 488,
+      "duration_ms": 982,
       "evidence": {
         "changed_during_triage": []
       },
@@ -351,11 +374,11 @@
   ],
   "deep_skipped": false,
   "architecture_summary": {
-    "confirmed": 13,
+    "confirmed": 14,
     "planned": 1,
     "aspirational": 1,
     "rejected": 1
   },
-  "json_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260621T075705Z.json",
-  "markdown_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260621T075705Z.md"
+  "json_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260702T181243Z.json",
+  "markdown_report": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\system_triage\\triage_20260702T181243Z.md"
 }

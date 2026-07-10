@@ -1,4 +1,8 @@
 {
+  "scripts": {
+    "typecheck": "npx tsc --ignoreConfig --noEmit --module nodenext --moduleResolution nodenext --target esnext --strict src/router/*.ts tests/router/*.test.ts",
+    "test:router": "npx vitest run tests/router"
+  },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
     "dotenv": "^17.4.2",

@@ -1,5 +1,7 @@
 import { useAnyaCodecStore } from './store';
 import { encodeNativeMessage, fetchNanoSwarmStatus } from './nativeBridge';
+import { OpenHumanAvatar } from './OpenHumanAvatar';
+import './style.css';
 
 export function App() {
   const { bridgeStatus, lastMessage, setBridgeStatus, setLastMessage } = useAnyaCodecStore();
@@ -25,10 +27,24 @@ export function App() {
 
   return (
     <main>
-      <h1>Camelot Node A Frontend</h1>
-      <p>Bridge status: {bridgeStatus}</p>
-      <button type="button" onClick={() => void prepareStatusProbe()}>Prepare status probe</button>
-      <pre>{lastMessage}</pre>
+      <section className="hero">
+        <div>
+          <p className="eyebrow">Cybertronia Node A</p>
+          <h1>OpenHuman persona bridge</h1>
+          <p>
+            Frontend cartridge for status probes, kinematic persona frames, and
+            HITL-gated Aaliyah comms intent previews.
+          </p>
+          <button type="button" onClick={() => void prepareStatusProbe()}>
+            Prepare status probe
+          </button>
+        </div>
+        <OpenHumanAvatar />
+      </section>
+      <section className="panel">
+        <p>Bridge status: <strong>{bridgeStatus}</strong></p>
+        <pre>{lastMessage || 'Awaiting Bifrost / nano-swarm router response.'}</pre>
+      </section>
     </main>
   );
 }

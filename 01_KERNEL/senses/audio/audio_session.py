@@ -55,6 +55,7 @@ class AudioSession:
         self.vad = vad_controller
         self._turn_count = 0
         self._session_start = time.monotonic()
+        self.active_knight_id = "sir_boris"
 
     # ── Public API ────────────────────────────────────────────────────────────
 
@@ -66,6 +67,7 @@ class AudioSession:
         self,
         transcript: str,
         mode: str = "efficiency",
+        knight_id: str | None = None,
     ) -> AsyncGenerator[bytes, None]:
         """Run one full voice turn: classify → enqueue → poll response → TTS stream.
 
@@ -74,9 +76,21 @@ class AudioSession:
         self._turn_count += 1
         turn_id = f"turn-{self._turn_count}-{datetime.now(timezone.utc).strftime('%H%M%S')}"
 
-        # Step 1: classify intent
-        terminal, category, confidence = await self._classify(transcript)
-        terminal_id = terminal.id if terminal else "unknown"
+        from control_plane.intent_router import IntentCategory
+
+        if knight_id:
+            self.active_knight_id = knight_id
+            if self.board is None:
+                from control_plane.switchboard import get_board
+                self.board = get_board()
+            terminal = await self.board.probe_one(knight_id)
+            category = IntentCategory.GENERAL
+            confidence = 1.0
+        else:
+            # Step 1: classify intent (this also updates self.active_knight_id if trigger matched)
+            terminal, category, confidence = await self._classify(transcript)
+
+        terminal_id = terminal.id if terminal else self.active_knight_id
 
         # Step 2: enqueue directive to harness queue
         enqueue_ok = await self._enqueue_task(transcript, terminal_id, turn_id, category.value)
@@ -206,10 +220,14 @@ class AudioSession:
                             "sir_mnemo": IntentCategory.MEMORY,
                             "lady_apis": IntentCategory.RESEARCH,
                         }
+                        self.active_knight_id = knight_id
                         category = cat_map.get(knight_id, IntentCategory.GENERAL)
                         return term, category, 1.0
 
-        return await route_by_intent(text, self.board)
+        term, category, confidence = await route_by_intent(text, self.board)
+        if term:
+            self.active_knight_id = term.id
+        return term, category, confidence
 
     async def _enqueue_task(
         self,

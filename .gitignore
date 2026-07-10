@@ -148,3 +148,9 @@ docs/reference/EXTERNAL/
 # Ephemeral boot logs (regenerated each boot)
 boot_results.json
 boot_status.json
+
+# Cybertronia Tailscale node identity (contains node key)
+control_plane/cybertronia.node.env
+
+# Firebase Applet configurations containing credentials
+firebase-applet-config.json

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+﻿import React, { useCallback, useEffect, useState } from 'react';
 import { Check, Loader2, Settings2, ShieldAlert } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { bifrostFetch } from '@/lib/bifrostClient';
@@ -13,7 +13,7 @@ type LoadState = 'idle' | 'loading' | 'ok' | 'error';
 type SaveState = 'idle' | 'saving' | 'saved' | 'error';
 
 /**
- * Config surface — reads/writes cognitive_service's /config (proxied through
+ * Config surface â€” reads/writes cognitive_service's /config (proxied through
  * go_router at /cognitive/config). Exposes the //sync cadence and the query
  * text used for periodic syncs; the backend persists whatever it's given to
  * disk and the scheduler picks up changes live.
@@ -42,7 +42,9 @@ export default function ConfigPanel() {
     }
   }, []);
 
-  useEffect(() => { fetchConfig(); }, [fetchConfig]);
+  useEffect(() => {
+    fetchConfig();
+  }, [fetchConfig]);
 
   const save = useCallback(async () => {
     const parsed = Number(draftInterval);
@@ -76,18 +78,26 @@ export default function ConfigPanel() {
 
   return (
     <div className="rounded-xl border border-slate-800/60 bg-slate-900/60 p-4">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3 flex items-center gap-2">
-        <Settings2 className="h-3.5 w-3.5" /> Config
-      </h2>
+      <div className="mb-3 flex items-center justify-between gap-2">
+        <h2 className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-500">
+          <Settings2 className="h-3.5 w-3.5" /> Operator Config
+        </h2>
+        <span className="rounded-full border border-amber-400/20 bg-amber-400/10 px-2 py-1 text-[10px] font-black uppercase tracking-[0.22em] text-amber-200">
+          Write path
+        </span>
+      </div>
+      <p className="mb-4 text-[11px] leading-5 text-slate-500">
+        This panel controls live cloudbrain cadence. Treat it as operator-only state, not public telemetry.
+      </p>
 
       {loadState === 'loading' && !config && (
         <div className="flex items-center justify-center py-8 text-slate-600">
-          <Loader2 className="h-4 w-4 animate-spin mr-2" /> Loading config…
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Loading configâ€¦
         </div>
       )}
 
       {loadState === 'error' && !config && (
-        <div className="flex items-center gap-2 rounded-lg border border-red-900/50 bg-red-950/20 p-3 text-red-400 text-xs">
+        <div className="flex items-center gap-2 rounded-lg border border-red-900/50 bg-red-950/20 p-3 text-xs text-red-400">
           <ShieldAlert className="h-4 w-4 shrink-0" />
           Cognitive Service unreachable via /cognitive/config
         </div>
@@ -96,7 +106,7 @@ export default function ConfigPanel() {
       {config && (
         <div className="space-y-3">
           <label className="block">
-            <span className="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 block">
+            <span className="mb-1.5 block text-[10px] uppercase tracking-widest text-slate-600">
               //sync interval (seconds, 0 = off)
             </span>
             <input
@@ -104,20 +114,26 @@ export default function ConfigPanel() {
               min={0}
               step="any"
               value={draftInterval}
-              onChange={(e) => { setDraftInterval(e.target.value); setSaveState('idle'); }}
-              className="w-32 rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 text-sm text-slate-200 font-mono focus:outline-none focus:border-fuchsia-500/60"
+              onChange={(e) => {
+                setDraftInterval(e.target.value);
+                setSaveState('idle');
+              }}
+              className="w-32 rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 font-mono text-sm text-slate-200 focus:border-fuchsia-500/60 focus:outline-none"
             />
           </label>
 
           <label className="block">
-            <span className="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 block">
+            <span className="mb-1.5 block text-[10px] uppercase tracking-widest text-slate-600">
               //sync query
             </span>
             <input
               type="text"
               value={draftQuery}
-              onChange={(e) => { setDraftQuery(e.target.value); setSaveState('idle'); }}
-              className="w-full rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 text-sm text-slate-200 focus:outline-none focus:border-fuchsia-500/60"
+              onChange={(e) => {
+                setDraftQuery(e.target.value);
+                setSaveState('idle');
+              }}
+              className="w-full rounded-lg border border-slate-700 bg-slate-950/60 px-2.5 py-1.5 text-sm text-slate-200 focus:border-fuchsia-500/60 focus:outline-none"
             />
           </label>
 
@@ -132,13 +148,11 @@ export default function ConfigPanel() {
             >
               {saveState === 'saving' ? <Loader2 className="h-3 w-3 animate-spin" /> : 'Save'}
             </button>
-            {saveState === 'saved' && !dirty && (
-              <Check className="h-4 w-4 text-emerald-400" aria-label="Saved" />
-            )}
+            {saveState === 'saved' && !dirty && <Check className="h-4 w-4 text-emerald-400" aria-label="Saved" />}
           </div>
 
           {saveState === 'error' && (
-            <p className="text-[10px] text-red-400">Failed to save — check the values and try again.</p>
+            <p className="text-[10px] text-red-400">Failed to save â€” check the values and try again.</p>
           )}
         </div>
       )}

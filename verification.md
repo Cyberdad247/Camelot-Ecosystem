@@ -1,91 +1,99 @@
-# CAMELOT OS Review Remediation Verification
+﻿# CAMELOT OS Publication Verification
 
-**Compiler:** Anya Gate / Prompt Engineering Cartridge  
-**Date:** 2026-05-14
+**Compiler:** Anya Gate / Cognitive Council / Forge Titan Bootstrap  
+**Date:** 2026-07-09
 
-## V1 - Command Surface
+## V1 - Repo Health
 
 ```powershell
 cd C:\Users\vizio\CAMELOT_OS
-cmd /c camelot --json ledger status
-cmd /c camelot ledger status
-cmd /c camelot codex status
-cmd /c ks --list
-cmd /c knight-session --route
+Get-Location
+Get-ChildItem -Name
 ```
 
 Pass:
 
-- control-plane commands parse through `control_plane.camelot_cli`.
-- `ks` and `knight-session` still render OmniRoute tables.
+- the repo root is correct,
+- the expected GUI, CLI, control-plane, docs, and workflow directories exist,
+- no publication work starts from the wrong checkout.
 
-## V2 - Ledger Safety
+## V2 - CLI Surface
 
 ```powershell
-cmd /c camelot --json ledger status
-Get-Content .\03_VAULT\runtime_state\forensic_checks.jsonl -Tail 3
+cd C:\Users\vizio\CAMELOT_OS
+python -m control_plane.camelot_cli --help
+python -m control_plane.camelot_cli cloudbrain config show
+python -m control_plane.camelot_cli cloudbrain status
+python -m control_plane.camelot_cli ledger status
 ```
 
 Pass:
 
-- forensic check events appear in runtime JSONL, not as passive rows in `PROVENANCE_LEDGER.md`.
-- `mirrors_aligned` is `true` after reconciliation.
+- the CLI parses and prints the shipped command surface,
+- cloudbrain commands resolve through the current control plane,
+- status commands complete without requiring manual code edits.
 
-## V3 - Support Auth Gate
-
-No token configured:
-
-```powershell
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:5173/api/camelot-os/support/activate -Body "{}" -ContentType "application/json"
-```
-
-Pass:
-
-- returns `403` with `operator token required`.
-
-With token configured:
-
-```powershell
-$env:CAMELOT_DASHBOARD_OPERATOR_TOKEN="REDACT"
-Invoke-RestMethod -Method Post -Uri http://127.0.0.1:5173/api/camelot-os/support/activate -Headers @{"X-Camelot-Operator-Token"="REDACT"} -Body '{"reason":"verification"}' -ContentType "application/json"
-```
-
-Pass:
-
-- returns active support session and one-time token.
-
-## V4 - Vox Fallback
-
-```powershell
-.\.venv\Scripts\python.exe -c "import sys; sys.path.insert(0, '01_KERNEL'); from senses.audio.vox_service import VoxService; print(VoxService().synthesize('hello', 'tasha', type('S', (), {'style':'neutral','speed':1,'texture':'clean'})())['engine'])"
-```
-
-Pass:
-
-- command returns `KOKORO`, `PIPER`, or `SIMULATED`.
-- Redis or Kitten cache failure does not abort synthesis.
-
-## V5 - Dashboard
+## V3 - GUI Surface
 
 ```powershell
 cd C:\Users\vizio\CAMELOT_OS\02_FORGE\PORTAL_CORE\Anya_Dashboard
-cmd /c npm run verify
+npm run verify
 ```
 
 Pass:
 
-- TypeScript lint, Vitest, and Vite build pass.
+- the UI builds and verifies cleanly,
+- the operator surface renders without runtime errors,
+- dashboard changes do not break the publication path.
 
-## V6 - Architecture Docs
+## V4 - Cloudbrain Sync
 
 ```powershell
 cd C:\Users\vizio\CAMELOT_OS
-.\.venv\Scripts\python.exe scripts\verify_architecture_docs.py
-.\.venv\Scripts\python.exe -m pytest tests\test_architecture_docs.py
+python -m control_plane.camelot_cli cloudbrain config diagnose
+python -m control_plane.camelot_cli cloudbrain sync
 ```
 
 Pass:
 
-- root `entiremap.md` and the L7 mirror hash to the same content.
-- canonical architecture docs only point at live paths that exist in this checkout.
-- the source-of-truth chain still records the banned stale anchors as stale, not as current truth.
+- cloudbrain source selection is current,
+- stale or missing config fails explicitly,
+- the repo does not rely on hidden defaults for publication options.
+
+## V5 - Autonomous Workflow Boundaries
+
+```powershell
+cd C:\Users\vizio\CAMELOT_OS
+python -m control_plane.camelot_cli cockpit exec "//STATUS"
+python -m control_plane.camelot_cli cockpit exec "plain shell text"
+```
+
+Pass:
+
+- runic input routes through the approved workflow layer,
+- non-runic input is treated as shell passthrough only when that behavior is intentional,
+- Sir Hermes-style relays remain observable and bounded.
+
+## V6 - Verification Gates
+
+```powershell
+cd C:\Users\vizio\CAMELOT_OS
+npx tsc --ignoreConfig --noEmit --module nodenext --moduleResolution nodenext --target esnext --strict src/router/*.ts tests/router/*.test.ts
+npx vitest run tests/router
+```
+
+Pass:
+
+- the root TypeScript router workspace type-checks,
+- router tests pass,
+- publication-critical changes do not land without test evidence.
+
+## V7 - Publication Block
+
+Pass only if all of the following are true:
+
+- GUI, CLI, and cloudbrain checks pass,
+- autonomous workflow boundaries are explicit,
+- missing or stale config fails cleanly,
+- the human release gate is still required,
+- `//GO` has been issued before any publication action.

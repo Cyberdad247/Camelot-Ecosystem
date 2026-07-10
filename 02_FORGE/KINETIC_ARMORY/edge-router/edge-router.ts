@@ -24,6 +24,7 @@ interface ClientMeta {
   remoteAddr: string;
   connectedAt: number;
   authenticated: boolean;
+  lastState?: any;
 }
 
 interface EdgeMessage {
@@ -170,14 +171,34 @@ wss.on("connection", (ws: WebSocket, req) => {
         sendResponse({ status: "pong", ts: Date.now() }, shouldCompress);
         break;
 
-      case "status":
-        sendResponse({
+      case "status": {
+        const currentState = {
           status: "ok",
           clients: clients.size,
           uptime_s: Math.floor(process.uptime()),
           queue: QUEUE_PATH,
-        }, shouldCompress);
+        };
+        const prev = meta.lastState;
+        meta.lastState = currentState;
+
+        const isDiffRequested = msg.payload && typeof msg.payload === "object" && (msg.payload as any).diff;
+        if (prev && isDiffRequested) {
+          const diff: any = {};
+          for (const [k, v] of Object.entries(currentState)) {
+            if (prev[k] !== v) {
+              diff[k] = v;
+            }
+          }
+          sendResponse({
+            type: "TOON_v2_diff",
+            diff: diff,
+            timestamp: new Date().toISOString(),
+          }, shouldCompress);
+        } else {
+          sendResponse(currentState, shouldCompress);
+        }
         break;
+      }
 
       case "forge":
         if (!msg.directive) {
