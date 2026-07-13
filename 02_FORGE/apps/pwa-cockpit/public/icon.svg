@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Anya Camelot Cockpit">
+  <rect width="128" height="128" rx="22" fill="#070a0b"/>
+  <path d="M23 82c8 17 22 26 41 26s33-9 41-26" fill="none" stroke="#294844" stroke-width="4" stroke-linecap="round"/>
+  <path d="M31 51c9-20 20-31 33-31s24 11 33 31" fill="none" stroke="#63dcc5" stroke-width="5" stroke-linecap="round"/>
+  <path d="M64 32 91 94H80l-7-17H55l-7 17H37L64 32Zm0 23-6 14h12l-6-14Z" fill="#e8efed"/>
+  <circle cx="99" cy="31" r="7" fill="#f0c76a"/>
+</svg>
