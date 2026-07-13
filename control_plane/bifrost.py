@@ -47,6 +47,11 @@ CAMELOT_HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS"
 CLIPROXY_BASE = os.environ.get("CLIPROXY_BASE", "http://127.0.0.1:8080/v1")
 CLIPROXY_KEY  = os.environ.get("CLIPROXY_KEY", "proxy-admin-key")
 OLLAMA_BASE   = os.environ.get("OLLAMA_BASE", "http://127.0.0.1:11434")
+# Agents-A1 (35B MoE agentic LLM, served locally via vLLM or SGLang
+# with an OpenAI-compatible API). API key is empty for local vLLM
+# defaults; the dispatch skips the Authorization header in that case.
+AGENTS_A1_BASE = os.environ.get("AGENTS_A1_BASE", "http://127.0.0.1:8000/v1")
+AGENTS_A1_KEY  = os.environ.get("AGENTS_A1_KEY", "")
 
 # Engine → (strategy, endpoint_base, default_model)
 # "cliproxy" = OpenAI-compat call through CLIProxyAPI
@@ -65,10 +70,16 @@ _ENGINE_DISPATCH: dict[str, tuple[str, str, str]] = {
     "local_ops":         ("noop",        "",             ""),
     "kitten_tts":        ("noop",        "",             ""),
     "open_source":       ("sovereign",   "",             "qwen3:4b"),
-    "antigravity":       ("cliproxy",    CLIPROXY_BASE, "gemini-2.5-pro"),
-    "kimi_cli":          ("cliproxy",    CLIPROXY_BASE, "kimi-k2"),
+    "antigravity":       ("cliproxy",    CLIPROXY_BASE, "gemini-2.5-pro"),    "kimi_cli":          ("cliproxy",    CLIPROXY_BASE, "kimi-k2"),
     "hermes_cli":        ("cliproxy",    CLIPROXY_BASE, "claude-sonnet-4-6"),
-    "next_edge":         ("noop",        "",             ""),          # edge component swarm contract (no LLM)
+    "next_edge":         ("noop",        "",            ""),          # edge component swarm contract (no LLM)
+    # Agents-A1 — 35B MoE agentic LLM, served locally via vLLM or SGLang
+    # with an OpenAI-compatible API. Reuses the cliproxy streaming path
+    # with a custom baseURL + empty key (the dispatcher skips the
+    # Authorization header when the key is unset). Operators set
+    # AGENTS_A1_BASE to the public tunnel URL when running on a remote
+    # homelab box (Vercel Edge can't reach 127.0.0.1).
+    "agents_a1":         ("cliproxy",    AGENTS_A1_BASE, "InternScience/Agents-A1"),
 }
 
 # Terminal-level model overrides (take precedence over engine defaults)
@@ -96,6 +107,7 @@ _TERMINAL_MODEL: dict[str, str] = {
     # fallback: sir_octavian    -> http strategy (port 8400, no LLM model)
     # fallback: sir_sonus       -> http strategy (port 8300, no LLM model)
     # fallback: bifrost_gateway -> http strategy (port 3001, no LLM model)
+    "sir_agentis":  "InternScience/Agents-A1",
 }
 
 # Custom-port HTTP services (no OpenAI-compat; raw prompt POST + streamed lines).
@@ -151,13 +163,13 @@ class Bifrost:
         except Exception:
             pass  # Knowledge base enrichment is optional
 
-        strategy, base, model = self._resolve(terminal_id)
+        strategy, base, model, api_key = self._resolve(terminal_id)
 
         # Collect response for post-dispatch analysis
         response_chunks = []
 
         if strategy == "cliproxy":
-            async for chunk in self._stream_openai(base, model, prompt, enriched_system, max_tokens):
+            async for chunk in self._stream_openai(base, model, prompt, enriched_system, max_tokens, api_key):
                 response_chunks.append(chunk)
                 yield chunk
         elif strategy == "sovereign":
@@ -303,18 +315,27 @@ class Bifrost:
 
     # ── Internal ──────────────────────────────────────────────────────────────
 
-    def _resolve(self, terminal_id: str) -> tuple[str, str, str]:
+    def _resolve(self, terminal_id: str) -> tuple[str, str, str, str]:
+        """Resolve terminal to (strategy, base, model, api_key).
+
+        The 4-tuple includes ``api_key`` so the cliproxy stream path can
+        skip the ``Authorization`` header when the engine doesn't require
+        auth (e.g. local vLLM serving Agents-A1 with AGENTS_A1_KEY="").
+        """
         t = self._reg.get(terminal_id)
         if not t:
             raise ValueError(f"Unknown terminal: {terminal_id!r}. "
                              f"Valid: {list(self._reg)}")
         if terminal_id in _HTTP_TERMINALS:
-            return ("http", _HTTP_TERMINALS[terminal_id], "")
+            return ("http", _HTTP_TERMINALS[terminal_id], "", "")
         strategy, base, model = _ENGINE_DISPATCH.get(
             t.engine, ("cliproxy", CLIPROXY_BASE, "claude-sonnet-4-6")
         )
         model = _TERMINAL_MODEL.get(terminal_id) or model
-        return strategy, base, model
+        # Per-engine API key: agents_a1 uses its own env (often empty);
+        # everything else falls back to the shared CLIPROXY_KEY.
+        api_key = AGENTS_A1_KEY if t.engine == "agents_a1" else CLIPROXY_KEY
+        return strategy, base, model, api_key
 
     async def _stream_openai(
         self,
@@ -323,6 +344,7 @@ class Bifrost:
         prompt: str,
         system: str,
         max_tokens: int,
+        api_key: str = CLIPROXY_KEY,
     ) -> AsyncIterator[str]:
         if not _HTTPX:
             yield "[BIFROST] httpx missing — run: uv add httpx"
@@ -339,10 +361,13 @@ class Bifrost:
             "max_tokens": max_tokens,
             "stream": True,
         }
-        headers = {
-            "Authorization": f"Bearer {CLIPROXY_KEY}",
-            "Content-Type": "application/json",
-        }
+        # Some inference servers (e.g. local vLLM with AGENTS_A1_KEY="")
+        # reject requests with an empty Bearer token. Skip the
+        # Authorization header entirely when the key is empty so the
+        # default no-auth vLLM config works out of the box.
+        headers = {"Content-Type": "application/json"}
+        if api_key:
+            headers["Authorization"] = f"Bearer {api_key}"
 
         try:
             async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=5.0)) as client:
