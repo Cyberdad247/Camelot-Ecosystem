@@ -260,3 +260,70 @@ test("Edge-runtime health variant at /api/health/edge is minimal and React-free"
   // Must probe the telemetry buffer (the only edge-safe check).
   assert.match(file, /getRecentEvents/);
 });
+
+test("Phase 4 orchestrator splits no_action into no_action + depth_mismatch and bounds current growth", async () => {
+  const orchestrator = await source("src/lib/agents/orchestrator.ts");
+  // parseAction + ParseResult are now exported so the /api/agent/run
+  // route and downstream consumers can use the parser directly.
+  assert.match(orchestrator, /export function parseAction\b/);
+  assert.match(orchestrator, /export type ParseResult\b/);
+  // The discriminated union now distinguishes a final answer (no
+  // `Action:` header) from malformed LLM output (header matched but
+  // braces didn't close). The two cases must be enumerated together
+  // so the dispatch loop's switch stays exhaustive.
+  assert.match(orchestrator, /kind: "no_action"/);
+  assert.match(orchestrator, /kind: "depth_mismatch"/);
+  // The scanner must cap the snippet to keep parseError bounded when
+  // the LLM emits a huge unclosed blob.
+  assert.match(orchestrator, /SNIPPET_MAX/);
+  // Prompt growth is bounded by digesting older observations past a
+  // threshold so long-running agents don't hit token limits.
+  assert.match(orchestrator, /DIGEST_THRESHOLD/);
+  assert.match(orchestrator, /\[digest: \$\{digestCount\}/);
+  assert.match(orchestrator, /buildCurrent/);
+  // Dispatch must handle the new depth_mismatch case (hard failure,
+  // mirrors the json_error shape).
+  assert.match(orchestrator, /parsed\.kind === "depth_mismatch"/);
+  assert.match(orchestrator, /action parse error: depth_mismatch/);
+});
+
+test("Phase 4 barrel exports getAgentById and re-exports the orchestrator", async () => {
+  const index = await source("src/lib/agents/index.ts");
+  // The orchestrator surface (AgentOrchestrator, parseAction, ParseResult)
+  // is re-exported from the barrel so consumers can
+  // `import { AgentOrchestrator, parseAction, ParseResult } from "@/lib/agents"`.
+  assert.match(index, /export \* from "\.\/orchestrator"/);
+  // The three named agents are re-exported for direct access.
+  assert.match(index, /export \{ routingAgent, voiceAgent, cartridgeAgent \}/);
+  // getAgentById resolves short ids ("routing" | "voice" | "cartridge")
+  // against the AGENT_REGISTRY map. Lookup must be case-insensitive
+  // so clients sending "Routing" or "VOICE" still resolve.
+  assert.match(index, /export function getAgentById\b/);
+  assert.match(index, /const AGENT_REGISTRY: Record<string, Agent>/);
+  assert.match(index, /routing: routingAgent/);
+  assert.match(index, /voice: voiceAgent/);
+  assert.match(index, /cartridge: cartridgeAgent/);
+  assert.match(index, /id\.toLowerCase\(\)/);
+});
+
+test("Phase 4 /api/agent/run edge route is edge-safe and wires the shared gate", async () => {
+  const route = await source("src/app/api/agent/run/route.ts");
+  // Edge runtime declaration matches the health/edge route style.
+  assert.match(route, /export const runtime = "edge"/);
+  assert.match(route, /export const dynamic = "force-dynamic"/);
+  // Bearer validation reuses the shared gate so this handler stays
+  // in lockstep with middleware.ts.
+  assert.match(route, /import \{ isValidBearerToken \} from "@\/lib\/security\/gate"/);
+  assert.match(route, /isValidBearerToken\(authHeader\)/);
+  // Agent lookup + dispatch through the shared orchestrator.
+  assert.match(route, /getAgentById/);
+  assert.match(route, /AgentOrchestrator/);
+  // POST handler shape.
+  assert.match(route, /export async function POST\(/);
+  // No Node primitives (edge-safe).
+  const code = stripComments(route);
+  assert.doesNotMatch(code, /from "react"/);
+  assert.doesNotMatch(code, /process\./);
+  assert.doesNotMatch(code, /require\(/);
+  assert.doesNotMatch(code, /fs\.|child_process|powershell/);
+});
