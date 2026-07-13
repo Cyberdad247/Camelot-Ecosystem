@@ -35,6 +35,17 @@ export type ParseResult =
   | { kind: "json_error"; error: string }
   | { kind: "depth_mismatch"; snippet: string };
 
+// Thrown by withTimeout when a promise doesn't resolve within the
+// allotted window. The orchestrator catches this and converts it to
+// a proper AgentResult with ok: false so the route handler doesn't
+// 500 on a hung LLM or tool.
+export class TimeoutError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "TimeoutError";
+  }
+}
+
 const SNIPPET_MAX = 256;
 
 export function parseAction(thought: string): ParseResult {
@@ -102,6 +113,29 @@ export function parseAction(thought: string): ParseResult {
   }
 }
 
+// Races a promise against a timer. If the timer wins, throws a
+// TimeoutError. The underlying promise is NOT cancelled (JS has no
+// general-purpose cancellation), but its result is discarded. The
+// timer is always cleared in the finally block to prevent leaks.
+async function withTimeout<T>(
+  p: Promise<T>,
+  ms: number,
+  label: string,
+): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(
+      () => reject(new TimeoutError(`timeout after ${ms}ms: ${label}`)),
+      ms,
+    );
+  });
+  try {
+    return await Promise.race([p, timeout]);
+  } finally {
+    if (timer !== undefined) clearTimeout(timer);
+  }
+}
+
 // After more than DIGEST_THRESHOLD observations, the prompt is rebuilt
 // from the original input + a digest line + the latest observation only.
 // Older observations are summarized away to keep `current` bounded as
@@ -143,10 +177,29 @@ export class AgentOrchestrator {
           reason: "budget exceeded: maxMs",
         };
       }
-      const thought = await this.llm.generateThinking(
-        `[${agent.name} GOAL: ${agent.goal}] Input: ${current}\n` +
-          `Available tools: ${Object.keys(agent.tools).join(", ")}`,
-      );
+      // Floor at 1ms (not 100ms) so a small `maxMs` is respected.
+      // A 100ms floor would let a single call exceed the total budget
+      // when `maxMs < 100`.
+      const remainingMs = Math.max(1, maxMs - (Date.now() - startTime));
+      let thought: string;
+      try {
+        thought = await withTimeout(
+          this.llm.generateThinking(
+            `[${agent.name} GOAL: ${agent.goal}] Input: ${current}\n` +
+              `Available tools: ${Object.keys(agent.tools).join(", ")}`,
+          ),
+          remainingMs,
+          "llm.generateThinking",
+        );
+      } catch (e) {
+        // LLM call failed (timeout or other error). Hard-fail so the
+        // caller gets a proper AgentResult with ok: false instead of
+        // a rejected promise that would 500 the route handler.
+        const reason = e instanceof TimeoutError
+          ? `budget exceeded: timeout in llm.generateThinking after ${remainingMs}ms`
+          : `llm error: ${e instanceof Error ? e.message : String(e)}`;
+        return { ok: false, output: "", steps, reason };
+      }
       const parsed = parseAction(thought);
       if (parsed.kind === "no_action") {
         // No `Action: tool(` header → treat as final answer.
@@ -198,10 +251,17 @@ export class AgentOrchestrator {
       if (!tool) {
         observation = `error: tool '${parsed.name}' not found`;
       } else {
+        const toolRemainingMs = Math.max(1, maxMs - (Date.now() - startTime));
         try {
-          observation = await tool.execute(parsed.args);
+          observation = await withTimeout(
+            tool.execute(parsed.args),
+            toolRemainingMs,
+            `tool.${parsed.name}`,
+          );
         } catch (e) {
-          observation = `error: ${e instanceof Error ? e.message : String(e)}`;
+          observation = `error: ${e instanceof TimeoutError
+            ? `timeout after ${toolRemainingMs}ms`
+            : e instanceof Error ? e.message : String(e)}`;
         }
       }
       steps.push({
