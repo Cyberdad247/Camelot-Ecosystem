@@ -17,7 +17,7 @@ import {
   AgentOrchestrator,
   getAgentById,
 } from "@/lib/agents";
-import { createLLMAdapter } from "@/lib/agents/llm-adapter";
+import { createLLMAdapter, withRetry } from "@/lib/agents/llm-adapter";
 import type { AgentResult } from "@/lib/agents/types";
 
 export const runtime = "edge";
@@ -119,8 +119,21 @@ export async function POST(req: Request): Promise<NextResponse<AgentResult>> {
     );
   }
 
-  // 5. Dispatch.
-  const orchestrator = new AgentOrchestrator(createLLMAdapter());
+  // 5. Dispatch. Phase 8: wrap the LLM adapter with retry/backoff so
+  // transient 429/5xx/network errors are retried with exponential
+  // backoff instead of failing the whole request. See
+  // src/lib/agents/llm-adapter.ts for the retry semantics. The stub
+  // adapter has no network I/O so it short-circuits on the first
+  // attempt; the real providers (gemini/openai/anthropic) benefit
+  // from the retry.
+  //
+  // Note: retries consume the parent orchestrator's withTimeout
+  // budget. With maxMs=5000 and 3 retry attempts (500ms + 1000ms of
+  // backoff alone, not counting fetch time), a hung provider can eat
+  // up to ~1500ms before the first real call lands. Operators should
+  // size maxMs accordingly. (Phase 9 candidate: make maxAttempts
+  // env-driven via LLM_MAX_RETRIES for tighter SLOs.)
+  const orchestrator = new AgentOrchestrator(withRetry(createLLMAdapter()));
   const result = await orchestrator.dispatch(agent, input, maxSteps, maxMs);
 
   // 6. Response: always the AgentResult body, status reflects ok.

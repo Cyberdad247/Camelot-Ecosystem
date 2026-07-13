@@ -10,6 +10,8 @@
 
 import { NextResponse } from "next/server";
 import { getRecentEvents } from "@/lib/telemetry";
+import { VERSION } from "@/lib/version";
+import { checkCartridgeRegistry } from "@/cartridges/registry-check";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -27,7 +29,6 @@ type HealthStatus = {
 };
 
 const START_TS = Date.now();
-const VERSION = "1.0.0-phase2";
 
 export async function GET(): Promise<NextResponse<HealthStatus>> {
   const checks: HealthStatus["checks"] = {};
@@ -54,13 +55,19 @@ export async function GET(): Promise<NextResponse<HealthStatus>> {
   // Count via getCartridgeIds() so a new cartridge added to
   // trustedLoaders automatically extends the list — no more silently
   // underreporting when a cartridge id is missing from a hardcoded
-  // probe list.
+  // probe list. Phase 8: also runs checkCartridgeRegistry() (static
+  // import — the check is edge-safe) to surface manifest-side issues
+  // (duplicates, missing required fields, invalid accent) on the same
+  // line.
   try {
     const reg = await import("@/cartridges/registry");
     const ids = reg.getCartridgeIds();
+    const result = checkCartridgeRegistry();
     checks.v1_registry = {
-      ok: typeof reg.getCartridgeIds === "function" && ids.length > 0,
-      detail: `cartridges: ${ids.length}`,
+      ok: ids.length > 0 && result.ok,
+      detail: `cartridges: ${ids.length}${
+        result.issues.length > 0 ? `, issues: ${result.issues.join("; ")}` : ""
+      }`,
     };
   } catch (e) {
     checks.v1_registry = { ok: false, detail: (e as Error).message };
