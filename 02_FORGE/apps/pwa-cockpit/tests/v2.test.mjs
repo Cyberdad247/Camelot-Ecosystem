@@ -320,6 +320,11 @@ test("Phase 4 /api/agent/run edge route is edge-safe and wires the shared gate",
   assert.match(route, /AgentOrchestrator/);
   // POST handler shape.
   assert.match(route, /export async function POST\(/);
+  // Phase 5: the route must use the env-configurable factory from
+  // llm-adapter.ts (not the old inline StubIntelligenceAdapter class).
+  assert.match(route, /createLLMAdapter/);
+  assert.match(route, /from "@\/lib\/agents\/llm-adapter"/);
+  assert.doesNotMatch(route, /class StubIntelligenceAdapter/);
   // No Node primitives (edge-safe).
   const code = stripComments(route);
   assert.doesNotMatch(code, /from "react"/);

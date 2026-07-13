@@ -17,23 +17,16 @@ import {
   AgentOrchestrator,
   getAgentById,
 } from "@/lib/agents";
-import type {
-  AgentResult,
-  IntelligenceAdapter,
-} from "@/lib/agents/types";
+import { createLLMAdapter } from "@/lib/agents/llm-adapter";
+import type { AgentResult } from "@/lib/agents/types";
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
-// MUST be replaced in prod: deterministic stub that returns a final
-// answer (no `Action:` header) so the orchestrator's no_action branch
-// fires and the route returns ok: true. This proves the round-trip
-// wiring without requiring an LLM upstream.
-class StubIntelligenceAdapter implements IntelligenceAdapter {
-  async generateThinking(_prompt: string): Promise<string> {
-    return "Final deterministic answer from StubIntelligenceAdapter (replace in prod).";
-  }
-}
+// The LLM adapter is env-configurable. Set LLM_PROVIDER=gemini|openai|anthropic
+// in the deploy env to use a real model; the default ("stub") returns a
+// deterministic final answer so the round-trip is exercisable without an
+// upstream call. See src/lib/agents/llm-adapter.ts.
 
 interface RunBody {
   agentId?: unknown;
@@ -127,7 +120,7 @@ export async function POST(req: Request): Promise<NextResponse<AgentResult>> {
   }
 
   // 5. Dispatch.
-  const orchestrator = new AgentOrchestrator(new StubIntelligenceAdapter());
+  const orchestrator = new AgentOrchestrator(createLLMAdapter());
   const result = await orchestrator.dispatch(agent, input, maxSteps, maxMs);
 
   // 6. Response: always the AgentResult body, status reflects ok.
