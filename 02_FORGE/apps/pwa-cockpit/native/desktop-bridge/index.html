@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <link rel="stylesheet" href="/src/styles.css" />
+    <title>Camelot Device Bridge</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body>
+    <main>
+      <header><span>A</span><div><p>ANYA COMPANION</p><h1>Device Bridge</h1></div><i id="state-dot"></i></header>
+      <section class="identity">
+        <p>DEVICE IDENTITY</p>
+        <strong id="fingerprint">Generating Ed25519 identity...</strong>
+        <textarea id="public-key" readonly aria-label="Device public key"></textarea>
+        <button id="copy-key" type="button">Copy enrollment key</button>
+      </section>
+      <section class="connection">
+        <label for="endpoint">Cockpit endpoint</label>
+        <input id="endpoint" type="url" value="https://cybertronia.tailcd0c29.ts.net" />
+        <label for="device-id">Enrolled device ID</label>
+        <input id="device-id" placeholder="dev-..." />
+        <div><button id="connect" type="button">Check signed queue</button><label class="toggle"><input id="continuous" type="checkbox" /> Poll every 10 seconds</label></div>
+      </section>
+      <section class="capabilities"><p>ALLOWLIST</p><div><span>System status</span><span>Notification</span><span>Window focus</span></div></section>
+      <output id="result" aria-live="polite">Enroll this public key in Device Hall, then enter the returned device ID.</output>
+    </main>
+  </body>
+</html>

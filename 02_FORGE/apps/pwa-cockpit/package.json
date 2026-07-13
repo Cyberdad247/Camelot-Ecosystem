@@ -1,0 +1,47 @@
+{
+    "name": "pwa-cockpit",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --port 3005",
+        "icons": "node scripts/generate-icons.mjs",
+        "service-worker": "node scripts/generate-service-worker.mjs",
+        "prebuild": "npm run icons && npm run service-worker",
+        "build": "next build",
+        "start": "next start --port 3005",
+        "host:run": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-PwaCockpit.ps1",
+        "host:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Install-PwaCockpitHost.ps1",
+        "host:remove": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Remove-PwaCockpitHost.ps1",
+        "test": "node --test tests/*.test.mjs",
+        "typecheck": "tsc --noEmit",
+        "verify": "npm run service-worker && npm test && npm run typecheck && npm run build"
+    },
+    "dependencies": {
+        "@mediapipe/tasks-vision": "^0.10.35",
+        "@noble/ed25519": "^2.3.0",
+        "@noble/hashes": "^1.8.0",
+        "@pixiv/three-vrm": "^3.5.5",
+        "@simplewebauthn/browser": "^13.3.0",
+        "@simplewebauthn/server": "^13.3.0",
+        "lucide-react": "^0.469.0",
+        "next": "^16.2.6",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "three": "^0.185.1"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "^4.0.0",
+        "@types/node": "^20.11.0",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "@types/three": "^0.185.1",
+        "postcss": "^8.4.0",
+        "tailwindcss": "^4.0.0",
+        "typescript": "^5.0.0"
+    },
+    "overrides": {
+        "next": {
+            "postcss": "8.5.18"
+        }
+    }
+}
