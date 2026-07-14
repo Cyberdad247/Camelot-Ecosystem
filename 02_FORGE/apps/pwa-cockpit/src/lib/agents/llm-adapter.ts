@@ -63,6 +63,30 @@ export class OpenAIAdapter implements IntelligenceAdapter {
   }
 }
 
+export class AgentsA1Adapter implements IntelligenceAdapter {
+  async generateThinking(prompt: string): Promise<string> {
+    // Agents-A1 is a 35B MoE agentic LLM served locally via vLLM or
+    // SGLang with an OpenAI-compatible API. We reuse the openai SDK
+    // pointed at a custom baseURL. AGENTS_A1_BASE_URL is REQUIRED
+    // (unlike the cloud providers, where only the API key is required)
+    // because the inference host is operator-supplied and varies per
+    // deploy — see DEPLOYMENT.md §4 edge runtime caveats.
+    const baseURL = process.env.AGENTS_A1_BASE_URL;
+    if (!baseURL) throw new Error("missing AGENTS_A1_BASE_URL");
+
+    const apiKey = process.env.AGENTS_A1_API_KEY ?? "";
+    // Lazy import keeps the edge bundle small when LLM_PROVIDER=stub.
+    const { OpenAI } = await import("openai");
+    const openai = new OpenAI({ apiKey, baseURL, fetch: globalThis.fetch });
+    const modelName = process.env.AGENTS_A1_MODEL ?? "InternScience/Agents-A1";
+    const response = await openai.chat.completions.create({
+      model: modelName,
+      messages: [{ role: "user", content: prompt }],
+    });
+    return response.choices[0]?.message?.content ?? "";
+  }
+}
+
 export class AnthropicAdapter implements IntelligenceAdapter {
   async generateThinking(prompt: string): Promise<string> {
     const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -81,7 +105,7 @@ export class AnthropicAdapter implements IntelligenceAdapter {
   }
 }
 
-export type LLMProvider = "stub" | "gemini" | "openai" | "anthropic";
+export type LLMProvider = "stub" | "gemini" | "openai" | "anthropic" | "agents_a1";
 
 export function createLLMAdapter(): IntelligenceAdapter {
   const provider = (process.env.LLM_PROVIDER ?? "stub") as LLMProvider;
@@ -94,6 +118,8 @@ export function createLLMAdapter(): IntelligenceAdapter {
       return new OpenAIAdapter();
     case "anthropic":
       return new AnthropicAdapter();
+    case "agents_a1":
+      return new AgentsA1Adapter();
     default:
       throw new Error(`unknown LLM_PROVIDER: ${String(provider)}`);
   }

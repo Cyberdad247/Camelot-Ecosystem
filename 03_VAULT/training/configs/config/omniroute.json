@@ -38,6 +38,15 @@
       "tier": "free",
       "priority": 5,
       "roles": ["colony", "scan"]
+    },
+    "agents_a1": {
+      "provider": "local",
+      "status": "active",
+      "tier": "free",
+      "priority": 1,
+      "roles": ["agentic", "architect", "planning", "reasoning"],
+      "execution_path": "127.0.0.1:8000",
+      "model": "InternScience/Agents-A1"
     }
   }
 }

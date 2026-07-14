@@ -20,6 +20,24 @@ import { NextResponse } from "next/server";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
+// CORS: this endpoint is intentionally consumable from any origin so that
+// any operator console (Goose desktop UI, monitoring dashboards, the CAMELOT
+// CLI) can poll it without an explicit pre-allowlist. Read-only by design,
+// so the attack surface is a single env-var read.
+const CORS_HEADERS: HeadersInit = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+  // Do NOT let any intermediate cache shoulder the response across endpoints;
+  // the Vercel Edge can otherwise briefly serve a stale provider when the
+  // cockpit redeploys mid-session.
+  "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+};
+
+export async function OPTIONS(): Promise<NextResponse> {
+  return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
+}
+
 type ProviderId =
   | "stub"
   | "gemini"
@@ -27,7 +45,11 @@ type ProviderId =
   | "anthropic"
   | "agents_a1";
 
-interface AgentConfig {
+// `export` so the symmetric drift test
+// (tests/agent-config-drift.test.ts) and the contract-pinning
+// `as const satisfies` anchors can `import type { AgentConfig }`
+// from this module without tsc TS2459.
+export interface AgentConfig {
   /** Active LLM provider id (matches the LLMProvider union in src/lib/agents/llm-adapter.ts). */
   active_provider: ProviderId;
   /** Human-readable provider label for the OmniRoute UI to display. */
@@ -112,11 +134,14 @@ function resolveModel(provider: ProviderId): string {
 
 export function GET(): NextResponse<AgentConfig> {
   const provider = detectProvider();
-  return NextResponse.json<AgentConfig>({
-    active_provider: provider,
-    provider_label: LABELS[provider],
-    model: resolveModel(provider),
-    config: buildConfig(provider),
-    read_only: true,
-  });
+  return NextResponse.json<AgentConfig>(
+    {
+      active_provider: provider,
+      provider_label: LABELS[provider],
+      model: resolveModel(provider),
+      config: buildConfig(provider),
+      read_only: true,
+    },
+    { headers: CORS_HEADERS }
+  );
 }
