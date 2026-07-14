@@ -11,6 +11,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  AgentsA1Adapter,
   AnthropicAdapter,
   GeminiAdapter,
   OpenAIAdapter,
@@ -23,6 +24,9 @@ const ENV_KEYS = [
   "GEMINI_API_KEY",
   "OPENAI_API_KEY",
   "ANTHROPIC_API_KEY",
+  "AGENTS_A1_BASE_URL",
+  "AGENTS_A1_API_KEY",
+  "AGENTS_A1_MODEL",
 ] as const;
 
 test("createLLMAdapter factory", async (t) => {
@@ -93,5 +97,23 @@ test("createLLMAdapter factory", async (t) => {
   await t.test("LLM_PROVIDER=invalid → throws on create", () => {
     process.env.LLM_PROVIDER = "invalid";
     assert.throws(() => createLLMAdapter(), /unknown LLM_PROVIDER: invalid/);
+  });
+
+  await t.test("LLM_PROVIDER=agents_a1 → returns AgentsA1Adapter; missing BASE_URL throws", async () => {
+    process.env.LLM_PROVIDER = "agents_a1";
+    delete process.env.AGENTS_A1_BASE_URL;
+    const adapter = createLLMAdapter();
+    assert.ok(adapter instanceof AgentsA1Adapter);
+    await assert.rejects(
+      () => adapter.generateThinking("hi"),
+      /missing AGENTS_A1_BASE_URL/,
+    );
+  });
+
+  await t.test("LLM_PROVIDER=agents_a1 with BASE_URL → returns AgentsA1Adapter (no throw on create)", () => {
+    process.env.LLM_PROVIDER = "agents_a1";
+    process.env.AGENTS_A1_BASE_URL = "http://127.0.0.1:8000/v1";
+    const adapter = createLLMAdapter();
+    assert.ok(adapter instanceof AgentsA1Adapter);
   });
 });

@@ -174,6 +174,20 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         probe_port=0,
         notes="Bifrost TS gateway — voice/webhook ingress + Microcubic swarm (:3001); bridge via control_plane.bifrost_gateway",
     ),
+    # Agents-A1 — 35B MoE agentic LLM, served locally via vLLM or SGLang
+    # with an OpenAI-compatible API. Probed via HTTP /health endpoint
+    # (vLLM and SGLang both expose this). weight mirrors the
+    # soul_router.W_AGENTIC constant; cost_tier=free because it runs
+    # on the operator's box with no per-token billing.
+    "sir_agentis": Terminal(
+        id="sir_agentis", engine="agents_a1", weight=0.87,
+        cost_tier="free", capability=[
+            "agentic","tool_use","planning","local","openai_compat",
+        ],
+        probe_url=os.environ.get("AGENTS_A1_BASE", "http://127.0.0.1:8000").rstrip("/") + "/health",
+        probe_port=0,
+        notes="Agents-A1 35B MoE — local vLLM/SGLang, OpenAI-compat (35B MoE agentic LLM; Cyberdad247/Agents-A1)",
+    ),
 }
 
 
@@ -211,6 +225,12 @@ async def _probe_terminal(t: Terminal) -> None:
     """Update terminal status in-place."""
     t.last_probe = time.time()
     if t.engine == "bifrost_gateway" and t.probe_url:
+        ok, ms = await _probe_http_health(t.probe_url)
+        t.status     = "live" if ok else "dark"
+        t.latency_ms = ms
+    elif t.engine == "agents_a1" and t.probe_url:
+        # Agents-A1 (vLLM/SGLang) exposes a JSON /health endpoint. Probe
+        # via HTTP GET and mark dark if it 5xx/times-out.
         ok, ms = await _probe_http_health(t.probe_url)
         t.status     = "live" if ok else "dark"
         t.latency_ms = ms
