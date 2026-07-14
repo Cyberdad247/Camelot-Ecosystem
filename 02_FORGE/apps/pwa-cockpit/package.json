@@ -12,7 +12,8 @@
         "host:run": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-PwaCockpit.ps1",
         "host:install": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Install-PwaCockpitHost.ps1",
         "host:remove": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Remove-PwaCockpitHost.ps1",
-        "test": "node --import tsx --test tests/*.test.mjs tests/*.test.ts",
+        "test": "node scripts/test.mjs",
+        "test:node": "node scripts/test.mjs --node-only",
         "typecheck": "tsc --noEmit",
         "verify": "npm run service-worker && npm test && npm run typecheck && npm run build"
     },
