@@ -18,9 +18,9 @@ from control_plane.distributed_knowledge_sync import (
     SyncEvent,
     SyncPhase,
 )
+from control_plane.observability import traced_op
 
 from .http_daemon import HttpDaemon, call_async, post_json
-from control_plane.observability import traced_op
 
 
 def _event_to_payload(event: SyncEvent) -> dict:

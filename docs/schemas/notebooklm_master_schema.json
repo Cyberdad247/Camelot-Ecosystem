@@ -1,0 +1,130 @@
+{
+  "schema_version": "camelot.mnemosyne.pre-flight/v1",
+  "tier": "notebooklm-master-v1",
+  "generated_at": "2026-07-14T13:45:00Z",
+  "owner": "sir_boris",
+  "description": "Master schema for the pre-flight gate (PR #5 gate-of-gates). Compares the live repo tree against this contract before any other agent action. Anchored to 9 durable artifacts from prior sessions (PR #1-#4 + SYSTEM_PROMPT_v2 + TITAN_TIER + NOTES_MNEMOSYNE_WIRING + LIVE_VERIFY_RUNBOOK) plus 6 canonical control_plane modules referenced from bifrost_gateway.py / soul_oversight.py / heimdall_bifrost_governance.py.",
+  "repo_root_marker": "CAMELOT_OS",
+  "required_paths": [
+    "^control_plane/appwrite_client\\.py$",
+    "^control_plane/bifrost_appwrite_dispatch\\.py$",
+    "^control_plane/bifrost_gateway\\.py$",
+    "^control_plane/heimdall_bifrost_governance\\.py$",
+    "^control_plane/soul_oversight\\.py$",
+    "^control_plane/notebooklm_graphify_bridge\\.py$",
+    "^bin/appwrite_bootstrap\\.sh$",
+    "^bin/notebooklm_mcp_server\\.py$",
+    "^bin/pre_flight\\.sh$",
+    "^docs/architecture/TITAN_TIER_EXECUTION_PROMPT_2026-07-14\\.md$",
+    "^docs/architecture/SYSTEM_PROMPT_v2_2026-07-14\\.md$",
+    "^docs/architecture/NOTES_MNEMOSYNE_WIRING\\.md$",
+    "^docs/architecture/LIVE_VERIFY_RUNBOOK_2026-07-14\\.md$",
+    "^docs/schemas/notebooklm_master_schema\\.json$",
+    "^pyproject\\.toml$",
+    "^docker-compose\\.appwrite\\.yml$"
+  ],
+  "required_files": [
+    {
+      "path": "control_plane/appwrite_client.py",
+      "kind": "python-module",
+      "reason": "PR #2 typed Appwrite wrapper; `AppwriteClient` class with retry semantics + Z3 hand-off"
+    },
+    {
+      "path": "control_plane/bifrost_appwrite_dispatch.py",
+      "kind": "python-module",
+      "reason": "PR #3 Bifrost→Appwrite signed-RPC dispatcher; HMAC envelope + intent dispatch table"
+    },
+    {
+      "path": "control_plane/bifrost_gateway.py",
+      "kind": "python-module",
+      "reason": "Canonical HMAC-SHA256 envelope (`_sign` at line 62); `health` + `send_command` + `tail_swarm_events`"
+    },
+    {
+      "path": "control_plane/heimdall_bifrost_governance.py",
+      "kind": "python-module",
+      "reason": "Sir Heimdall zero-trust roster; `HEIMDALL_NANO_KNIGHTS` must be >=6 (PR #3 added `heimdall.appwrite_egress`)"
+    },
+    {
+      "path": "control_plane/soul_oversight.py",
+      "kind": "python-module",
+      "reason": "Iron Gate v2 `pre_execute` (AUTO / PROMPT / HUMAN_GATE); `__version__ == '9000.14'` policy surface"
+    },
+    {
+      "path": "control_plane/notebooklm_graphify_bridge.py",
+      "kind": "python-module",
+      "reason": "PR #7A prior art — `notebooklm_state_to_graph_context` reused for cloudbrain sync"
+    },
+    {
+      "path": "bin/appwrite_bootstrap.sh",
+      "kind": "bash-script",
+      "reason": "PR #1 operator-bound Appwrite spin-up; idempotent self-host bootstrap"
+    },
+    {
+      "path": "bin/notebooklm_mcp_server.py",
+      "kind": "python-script",
+      "reason": "PR #4 stdio MCP server (file-system pivot, NOT Bifrost); 3 tools + TTL eviction"
+    },
+    {
+      "path": "bin/pre_flight.sh",
+      "kind": "bash-script",
+      "reason": "PR #5 gate-of-gates; tree-walk + schema diff + exit-code classifier"
+    },
+    {
+      "path": "docs/architecture/TITAN_TIER_EXECUTION_PROMPT_2026-07-14.md",
+      "kind": "markdoc",
+      "reason": "USER-tier execution prompt; 11 phases 0-10 with HITL schedule"
+    },
+    {
+      "path": "docs/architecture/SYSTEM_PROMPT_v2_2026-07-14.md",
+      "kind": "markdoc",
+      "reason": "SYSTEM-tier framing prompt; §0-§7 invariants + Phase 1.7-1.11"
+    },
+    {
+      "path": "docs/architecture/NOTES_MNEMOSYNE_WIRING.md",
+      "kind": "markdoc",
+      "reason": "Durable blueprint; §7 RESOLVED + decision matrix for the wiring"
+    },
+    {
+      "path": "docs/architecture/LIVE_VERIFY_RUNBOOK_2026-07-14.md",
+      "kind": "markdoc",
+      "reason": "§8 LIVE VERIFY runbook; 8 sections + 14-row fail-recovery matrix"
+    },
+    {
+      "path": "docs/schemas/notebooklm_master_schema.json",
+      "kind": "json-schema",
+      "reason": "Self-reference; the pre-flight gate requires its own schema to exist"
+    },
+    {
+      "path": "pyproject.toml",
+      "kind": "toml-doc",
+      "reason": "Core configs; `appwrite>=2.0.0,<3.0.0` pin per §7.1 RESOLVED"
+    },
+    {
+      "path": "docker-compose.appwrite.yml",
+      "kind": "yaml-doc",
+      "reason": "PR #1 self-hostable Appwrite 5-service compose (appwrite + mariadb + redis + minio + traefik)"
+    }
+  ],
+  "forbidden_paths": [
+    "\\.env$"
+  ],
+  "allowed_paths_regex": [
+    "^docs/.*\\.(md|json)$",
+    "^tests/.*",
+    "^docker-compose\\..*\\.yml$",
+    "^pyproject\\.toml$"
+  ],
+  "min_python_files": 5,
+  "_meta": {
+    "min_python_files_rationale": "Floor for operator-visible quality guard; the canonical module presence is enforced by required_files (which fires critical_drift on missing modules). This threshold exists as a quality floor — not a hard fail — so slim test/build fixtures can pass while still catching structural truncation on the real repo baseline.",
+    "rationale_audience": "operator + downstream validator authors; safe to ignore top-level _meta fields by strict JSON-Schema parsers (nesting convention per draft-07)",
+    "path_a_allowlist_rationale": "Path A (thinker round 8 verdict): narrow allowlist to ONLY docs/tests/configs. Canonical control_plane/ and bin/ files remain enforced strictly via required_paths anchors (which fire critical_drift). Wildcards ^control_plane/.*\\.py$ and ^bin/.*\\.(py|sh)$ were removed to prevent silently suppressing unexpected additions (e.g. malicious_override.py inserted into a canonical dir) — the gate must surface that as general_drift for operator review."
+  },
+  "min_total_files": 300,
+  "thresholds": {
+    "exit_code_0": "no_drift",
+    "exit_code_1": "general_drift (operator block; supernumerary files not in schema OR min_python_files below threshold OR forbidden paths detected)",
+    "exit_code_2": "critical_drift (Heimdall veto; missing core control_plane / pyproject)",
+    "exit_code_3": "bootstrap_drift (.env.appwrite.example present but .env.appwrite missing; manual re-bootstrap required)"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "_schema_note": "machine-readable companion to docs/taxonomy/kba_disambiguation.md. Mirrors the markdown so an operator or runic_router driver can resolve KBA-prefixed inputs deterministically. `ratified: true` (operator HITL 2026-07-15T05:30:00Z; cleared Gate G4_kba_taxonomy via activation ADR operator_signoff cascade)",
+  "schema_version": "camelot-os.system/taxonomy/disambiguation/v1",
+  "namespace": "KBA_DISAMBIGUATION",
+  "ratified": true,
+  "ratified_at": "2026-07-15T05:30:00Z",
+  "ratified_by": "operator=vizio (chat-message authorization); activation_owner_knight=sir_sentinel; degraded_witness=CAMELOT_OPS_EMERGENCY=1 (env-var bearer; activation ADR §8)",
+  "operator_signoff_ledger_ref": "PROVENANCE_LEDGER.md entry 1735 (HITL_RATIFIED)",
+  "decision_proposed": "strict_separation_with_carveout",
+  "captured_at": "2026-07-15T04:30:00Z",
+  "family_root": "DIVERGENT",
+  "audit_links": {
+    "plan_id": "gcmn_vmax_nano_seed_plan_2026_07_15",
+    "hitl_gate_id": "G4_kba_taxonomy",
+    "source_doc_markdown": "./kba_disambiguation.md",
+    "triggering_seed": "docs/seeds/gcmn_vmax_nano_seed/Plan.json"
+  },
+  "members": [
+    {
+      "surface_id": "KBA_DRONE_NODE",
+      "short_name": "KBA_DRONE",
+      "kind": "deployed",
+      "parent_root": "CAMELOT_CORE",
+      "scope": {
+        "description": "KickBox Audio empire-drone on the tailnet",
+        "instance_examples": ["kba-drone-1", "kba-drone-lakesha", "kba-drone-test"],
+        "port_range": "9000-9100",
+        "action_prefix": "kba.",
+        "allowed_tools": ["kba.status", "kba.echo", "kba.tts", "kba.transcribe", "kba.voices"],
+        "always_routed_to": "kba-drone-1 (default) unless KBA_DRONE_HOST env override"
+      },
+      "source_files": [
+        "control_plane/drone_node.py",
+        "control_plane/KBA_DRONE_RUNBOOK.md",
+        "02_FORGE/cartridge/kba_tools.py",
+        "control_plane/test_drone_node.py"
+      ],
+      "immutable": true,
+      "immutable_reason": "Tailnet-cached; renaming requires coordinated cutover"
+    },
+    {
+      "surface_id": "KBA_CARTRIDGE",
+      "short_name": "KBA_CORE",
+      "kind": "deployed",
+      "parent_root": "CAMELOT_CORE",
+      "parent_surface": "KBA_DRONE_NODE",
+      "scope": {
+        "description": "Signed cartridge manifest installed on every KBA_DRONE_NODE",
+        "signature_required": true,
+        "hmac_key_env": "CAMELOT_CARTRIDGE_HMAC_KEY"
+      }
+    },
+    {
+      "surface_id": "AALIYAH_COMMS_CARTRIDGE",
+      "short_name": "AALIYAH",
+      "kind": "deployed",
+      "parent_root": "CAMELOT_CORE",
+      "scope": {
+        "description": "WASM comms cartridge for outbound communications workflows",
+        "runtime": "wasmtime >= 46.0.1",
+        "remote_path": "/opt/camelot/cartridges/pills/aaliyah_comms.wasm",
+        "sha256": "9D8CF6B5F8E13622B1087FB596B722A30E58CABF953F4A4B7A55AA24C72F1095"
+      },
+      "collision_with_seed": true,
+      "collision_severity": "HARD"
+    },
+    {
+      "surface_id": "AEGIS_EBPF_REDACT",
+      "short_name": "AEGIS",
+      "kind": "deployed",
+      "parent_root": "CAMELOT_CORE",
+      "scope": {
+        "description": "O(1) eBPF telemetry redaction; bind-to-sink node in swarm",
+        "integration_path": "01_KERNEL/security/aegis_ebpf_redact()"
+      },
+      "collision_with_seed": true,
+      "collision_severity": "HARD"
+    },
+    {
+      "surface_id": "KBA_SERVICES_NODE_PRIME",
+      "short_name": "KBA_SERVICES",
+      "kind": "proposed_inert",
+      "parent_root": "GCMN_SEED",
+      "parent_owner": "untrusted_external_seed",
+      "scope": {
+        "description": "Aspirational 8GB-edge hypervisor with 6 business cartridges",
+        "status": "STUB_INERT",
+        "feature_gate": "CAMELOT_GCMN_STUBS_ENABLED=1",
+        "subordinated_to_root": "GCMN_*"
+      }
+    }
+  ],
+  "conflicts": [
+    {
+      "seed_name": "AALIYAH",
+      "seed_asserted_domain": "Email_SaaS",
+      "seed_vendor_stack": ["Listmonk", "Mautic"],
+      "deployed_surface_id": "AALIYAH_COMMS_CARTRIDGE",
+      "severity": "HARD",
+      "kind": "name_collision",
+      "resolution_required": "rename seed cartridge from AALIYAH to AMANI (Email SaaS)",
+      "post_rename_id": "AMANI"
+    },
+    {
+      "seed_name": "AEGIS",
+      "seed_asserted_domain": "Streaming_Support",
+      "seed_vendor_stack": ["Chatwoot", "KillBill"],
+      "deployed_surface_id": "AEGIS_EBPF_REDACT",
+      "severity": "HARD",
+      "kind": "subsystem_collision",
+      "resolution_required": "rename seed cartridge from AEGIS to ARGUS (Streaming Support)",
+      "post_rename_id": "ARGUS"
+    },
+    {
+      "seed_name": "KBA_SERVICES_NODE_PRIME",
+      "seed_asserted_role": "edge_hypervisor",
+      "deployed_surface_id_family": "KBA_DRONE_NODE",
+      "severity": "HARD",
+      "kind": "prefix_overlap",
+      "resolution_required": "renamespace to GCMN_SERVICES_NODE_PRIME (or otherwise accept as a sibling — not a rename)",
+      "post_rename_id": "GCMN_SERVICES_NODE_PRIME"
+    },
+    {
+      "seed_name": "//LOCK_BIFROST_mTLS_KYBER768",
+      "seed_asserted_role": "stub_rune",
+      "deployed_implementation": ["bin/bifrost.py", "control_plane/pqcrypto_bridge.py"],
+      "severity": "MEDIUM",
+      "kind": "semantic_duplicate",
+      "resolution_required": "approve stub as documentation-only; never ship as alternate stack",
+      "post_rename_id": null,
+      "comment": "The seed stub metadata already surfaces this collision; the seed author is partially aware."
+    }
+  ],
+  "disambiguation_aliases": {
+    "KBA_DRONE": "kickbox_audio_empire_drone",
+    "KBA_CORE": "kickbox_audio_signed_cartridge",
+    "AALIYAH": "kickbox_comms_wasm_cartridge (deployed) | AMANI_email (seed renames proposed)",
+    "AEGIS": "ebpf_telemetry_redact (deployed) | ARGUS_streaming (seed renames proposed)",
+    "KBA_SERVICES": "gcmn_seed_orchestrator (proposed, INERT)",
+    "KBA_SERVICES_NODE_PRIME": "gcmn_seed_orchestrator",
+    "GCMN_SERVICES_NODE_PRIME": "gcmn_seed_orchestrator (post-rename canonical)"
+  },
+  "routing_policy": {
+    "default_kba_route": "KBA_DRONE_NODE",
+    "gcmn_seed_route": "KBA_SERVICES_NODE_PRIME_or_renamed",
+    "reject_mixed_context": true,
+    "rule_set": [
+      "If input starts with `KBA_` and NOT in the seed list, route to KBA_DRONE_NODE (deployed).",
+      "If input starts with `AALIYAH` or `AEGIS`, ALWAYS REFUSE unless the calling surface is explicitly one of the deployed contexts `[KBA_DRONE_NODE, AALIYAH_COMMS_CARTRIDGE, AEGIS_EBPF_REDACT]`; otherwise the call is treated as the seed's collision and quarantines to SIR_SENTINEL for HITL.",
+      "If input starts with `GCMN_`, route to the seed stub dispatcher (requires CAMELOT_GCMN_STUBS_ENABLED=1).",
+      "If input is a bare `//LOCK_BIFROST_mTLS_KYBER768`, route to the seed stub dispatcher; never call `pqcrypto_bridge.py` directly from the rune path.",
+      "If input matches `kba.<tool>` (strictly lowercase period-delimited — e.g. `kba.status`, `kba.tts`, `kba.transcribe`, `kba.voices`), always route LIVE to KBA_DRONE_NODE — the drone's tool surface; never treat as seed even if the seed author intended it. Casing variants such as `KBA.STATUS`, `KBA_Status`, or `kba_STATUS` are SUSPECT and route to SIR_SENTINEL for HITL adjudication.",
+      "If input is unrecognized KBA-prefixed, route to SIR_SENTINEL for HITL adjudication."
+    ]
+  },
+  "related_artifacts": {
+    "taxonomy_doc_markdown": "docs/taxonomy/kba_disambiguation.md",
+    "taxonomy_doc_json": "docs/taxonomy/kba_disambiguation.json",
+    "plan_json": "docs/seeds/gcmn_vmax_nano_seed/Plan.json",
+    "seed_markdown": "docs/seeds/gcmn_vmax_nano_seed/seed.md",
+    "stub_dispatch_module": "control_plane/runic_router.py",
+    "stub_tests": "tests/control_plane/test_runic_router_gcmn_stubs.py",
+    "kba_drone_runbook": "control_plane/KBA_DRONE_RUNBOOK.md",
+    "aaliyah_wasm_audit": "blueprints/v9000.96/wasmtime_sentinel_audit.md"
+  },
+  "notes": [
+    "This taxonomy entry is HITL-ratified=G1 until the operator signs off — see ADR Gate G4 in seed.md.",
+    "Hard collisions (AALIYAH, AEGIS) are blockers; without rename, the seed cannot advance past Cartridge Ignition (Step 4).",
+    "KBA_DRONE_NODE family is immutable without coordinated tailnet cutover; do not rename in place."
+  ]
+}

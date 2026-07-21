@@ -10,11 +10,20 @@ import ouroboros
 
 @pytest.fixture(autouse=True)
 def temp_db(tmp_path, monkeypatch):
-    """Use a temp database for every test."""
+    """Use a temp database for every test, cleanly isolated."""
     db_path = str(tmp_path / "test_ouroboros.db")
     monkeypatch.setattr(ouroboros, "DB_PATH", db_path)
+    # Force re-init and clear any cached state
     monkeypatch.setattr(ouroboros, "_initialized", False)
+    # Also ensure the Rust engine path is skipped
+    monkeypatch.setattr(ouroboros, "_rust_engine", None)
     yield db_path
+    # Clean up: remove the db file so next test starts fresh
+    import os
+    try:
+        os.remove(db_path)
+    except OSError:
+        pass
 
 
 def test_init_creates_tables():

@@ -1114,10 +1114,21 @@ def _dispatch(task: QueueTask, dry_run: bool, auto_approve: bool) -> str:
         file_path = task.payload.get("file_path", "")
         if not file_path:
             return "error: missing file_path in vad_utterance"
-        return _exec_shell(
-            [str(PYTHON), "-m", "01_KERNEL.senses.audio.sir_sonus", "--transcribe", file_path],
-            f"sir_sonus transcribe {file_path}",
-        )
+        audio_path = Path(file_path).resolve()
+        audio_root = (HOME / "03_VAULT" / "runtime_state" / "audio").resolve()
+        try:
+            audio_path.relative_to(audio_root)
+        except ValueError:
+            return "error: vad_utterance path is outside transient audio custody"
+        if audio_path.suffix.lower() != ".wav":
+            return "error: vad_utterance requires a WAV file"
+        try:
+            return _exec_shell(
+                [str(PYTHON), "-m", "01_KERNEL.senses.audio.sir_sonus", "--transcribe", str(audio_path)],
+                f"sir_sonus transcribe {audio_path}",
+            )
+        finally:
+            audio_path.unlink(missing_ok=True)
 
     d = task.directive
     # Strip "UNKNOWN_RUNE: " prefix that the router emits for unrecognised runes

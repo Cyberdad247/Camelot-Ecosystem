@@ -50,13 +50,12 @@ test("MicArbiter exposes the cross-cartridge arbitration contract", async () => 
   assert.match(file, /export function micState\(\): MicState/);
   assert.match(file, /export function onMicChange/);
   assert.match(file, /export function clearMicArbiter/);
-  // Rejects a second concurrent holder.
-  assert.match(file, /state\.holderId !== null && state\.holderId !== holderId/);
-  assert.match(file, /ok: false, currentHolder: state\.holderId/);
-  // Lets the same holder re-acquire.
-  assert.match(file, /return \{[\s\S]+ok: true,[\s\S]+revoke/);
-  // Notifies subscribers on every transition.
-  assert.match(file, /subscribers\.forEach|for \(const callback of subscribers\)/);
+  // The compatibility surface delegates to the one shared runtime arbiter.
+  assert.match(file, /from "@camelot\/voice-first-runtime"/);
+  assert.match(file, /microphoneArbiter\.acquire\(holderId, reason\)/);
+  assert.match(file, /microphoneArbiter\.release\(holderId\)/);
+  assert.match(file, /microphoneArbiter\.subscribe\(callback\)/);
+  assert.match(file, /return \{ ok: true, revoke: lease\.release \}/);
   // Phase 5 scope: no shell exec, no PowerShell, no cmd.exe.
   assert.doesNotMatch(file, /child_process|powershell|cmd\.exe|exec\(/i);
 });

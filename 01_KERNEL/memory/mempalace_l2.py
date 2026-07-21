@@ -7,7 +7,13 @@ try:
 except ImportError:
     chromadb = None
 
-from .cloudbrain_connector import CloudBrainConnector
+try:
+    from .cloudbrain_connector import CloudBrainConnector
+except ImportError:
+    try:
+        from cloudbrain_connector import CloudBrainConnector  # noqa: F811
+    except ImportError:
+        CloudBrainConnector = None  # type: ignore[assignment]
 
 class MemPalaceL2:
     """Persistent local vector index manager (Layer 2 Memory)."""

@@ -11,7 +11,7 @@ sys.path.insert(0, str(CAMELOT))
 
 spec = _ilu.spec_from_file_location(
     "compression_nexus",
-    CAMELOT / "control_plane" / "compression_nexus.py",
+    CAMELOT / "control_plane" / "infra" / "compression_nexus.py",
 )
 _mod = _ilu.module_from_spec(spec)
 sys.modules["compression_nexus"] = _mod

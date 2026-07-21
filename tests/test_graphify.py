@@ -8,8 +8,8 @@ import pytest
 _CP = Path(__file__).resolve().parent.parent / "control_plane"
 
 
-def _load(name):
-    spec = importlib.util.spec_from_file_location(name, _CP / f"{name}.py")
+def _load(name, subdir="infra"):
+    spec = importlib.util.spec_from_file_location(name, _CP / subdir / f"{name}.py")
     mod = importlib.util.module_from_spec(spec)
     sys.modules[name] = mod
     spec.loader.exec_module(mod)

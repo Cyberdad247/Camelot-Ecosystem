@@ -238,6 +238,7 @@ def test_start_local_lt_memory_windows_launcher_sets_clean_env(monkeypatch):
     monkeypatch.setattr(boot_sequence, "_probe_port", _probe)
     monkeypatch.setattr(boot_sequence.subprocess, "run", _run)
     monkeypatch.setattr(boot_sequence.time, "sleep", lambda _: None)
+    monkeypatch.setenv("CAMELOT_ALLOW_NONINTERACTIVE_LT_SPAWN", "1")
 
     ok, message = boot_sequence.start_local_lt_memory(home)
 

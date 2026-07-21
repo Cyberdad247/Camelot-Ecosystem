@@ -7,8 +7,10 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
+# Note: entiremap.md was consolidated into docs/architecture/ in July 2026
+# as part of the root-level documentation cleanup.
 CANONICAL_DOCS = [
-    REPO_ROOT / "entiremap.md",
+    REPO_ROOT / "docs" / "architecture" / "entiremap.md",
     REPO_ROOT / "docs" / "architecture" / "SOURCE_OF_TRUTH_MAP.md",
     REPO_ROOT / "docs" / "OS_MANIFEST.md",
     REPO_ROOT / "docs" / "SEPTEM_REGNA" / "L7_ETHEREAL" / "OS_MANIFEST.md",
@@ -18,9 +20,9 @@ ENTIREMAP_MIRROR = REPO_ROOT / "docs" / "SEPTEM_REGNA" / "L7_ETHEREAL" / "entire
 
 EXPECTED_PATHS = [
     "bin/awaken.py",
-    "control_plane/boot_sequence.py",
-    "control_plane/runic_router.py",
-    "control_plane/cloud_services.py",
+    "control_plane/infra/boot_sequence.py",
+    "control_plane/runes/runic_router.py",
+    "control_plane/infra/cloud_services.py",
     "03_VAULT/training/configs/notebooklm_bridge.py",
     ".camelot-config.yaml",
     "02_FORGE/PORTAL_CORE/Anya_Dashboard",
@@ -63,8 +65,10 @@ def validate_architecture_docs() -> list[str]:
     if errors:
         return errors
 
-    if _sha256(REPO_ROOT / "entiremap.md") != _sha256(ENTIREMAP_MIRROR):
-        errors.append("entiremap mirror is not synced with root entiremap.md")
+    canonical_map = REPO_ROOT / "docs" / "architecture" / "entiremap.md"
+    if canonical_map.exists() and ENTIREMAP_MIRROR.exists():
+        if _sha256(canonical_map) != _sha256(ENTIREMAP_MIRROR):
+            errors.append("entiremap mirror is not synced with docs/architecture/entiremap.md")
 
     for rel_path in EXPECTED_PATHS:
         if not (REPO_ROOT / rel_path).exists():
@@ -73,7 +77,7 @@ def validate_architecture_docs() -> list[str]:
     source_map_text = (REPO_ROOT / "docs" / "architecture" / "SOURCE_OF_TRUTH_MAP.md").read_text(
         encoding="utf-8"
     )
-    entiremap_text = (REPO_ROOT / "entiremap.md").read_text(encoding="utf-8")
+    entiremap_text = (REPO_ROOT / "docs" / "architecture" / "entiremap.md").read_text(encoding="utf-8")
 
     source_map_lower = source_map_text.lower()
     entiremap_lower = entiremap_text.lower()

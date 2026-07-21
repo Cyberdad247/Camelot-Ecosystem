@@ -6,13 +6,14 @@ const securityHeaders = [
   { key: "X-Frame-Options", value: "DENY" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+  { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
   { key: "Permissions-Policy", value: "camera=(self), microphone=(self), display-capture=(self), geolocation=(), payment=(), usb=()" },
 ];
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   turbopack: {
-    root: path.resolve(__dirname),
+    root: path.resolve(__dirname, "../.."),
   },
   async headers() {
     return [

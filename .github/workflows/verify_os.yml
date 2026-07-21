@@ -140,7 +140,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest pyyaml pydantic
+          pip install pytest pytest-rerunfailures pyyaml pydantic
 
       - name: Test MGV Engine
         run: |

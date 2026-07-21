@@ -18,9 +18,9 @@ from control_plane.distributed_ledger_consensus import (
     DistributedConsensus,
     NodeRole,
 )
+from control_plane.observability import traced_op
 
 from .http_daemon import HttpDaemon, call_async, fire_async, get_json, post_json
-from control_plane.observability import traced_op
 
 
 class HttpConsensusNode(DistributedConsensus):

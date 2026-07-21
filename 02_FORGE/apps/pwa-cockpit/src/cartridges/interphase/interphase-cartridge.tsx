@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Camera, CircleStop, Eye, Mic, MonitorUp, RefreshCcw, RotateCcw, Volume2 } from "lucide-react";
+import { AudioLines, Camera, CircleStop, Eye, Mic, MicOff, MonitorUp, RefreshCcw, RotateCcw, Volume2 } from "lucide-react";
+import { useVoiceFirstRuntime } from "@/hooks/use-voice-first-runtime";
 import { browserInterphaseRuntime, type InterphaseRuntimeProfile } from "@/lib/interphase-runtime";
 import type { CartridgeProps } from "../types";
 
@@ -19,6 +20,7 @@ export default function InterphaseCartridge({ onInterrupt, transport, status }: 
   const [capturedAt, setCapturedAt] = useState<string | null>(null);
   const visionBusy = useRef(false);
   const lastCaptureAt = useRef(0);
+  const voice = useVoiceFirstRuntime(status);
 
   useEffect(() => {
     const refresh = () => {
@@ -75,6 +77,7 @@ export default function InterphaseCartridge({ onInterrupt, transport, status }: 
   }
 
   function resetSession() {
+    voice.interrupt();
     onInterrupt();
     setPreview(null);
     setCapturedAt(null);
@@ -83,7 +86,9 @@ export default function InterphaseCartridge({ onInterrupt, transport, status }: 
     lastCaptureAt.current = 0;
   }
 
-  const recognition = typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
+  const recognition = typeof window !== "undefined"
+    && !!navigator.mediaDevices?.getUserMedia
+    && "AudioWorkletNode" in window;
   const speech = typeof window !== "undefined" && "speechSynthesis" in window;
   const vision = typeof window !== "undefined" && !!navigator.mediaDevices?.getDisplayMedia;
   const retryLabel = transport.nextRetryMs ? `${Math.round(transport.nextRetryMs / 1000)}s` : "--";
@@ -104,6 +109,33 @@ export default function InterphaseCartridge({ onInterrupt, transport, status }: 
       </section>
 
       <div className="interphase-grid">
+        <section className="surface vfc-surface" aria-labelledby="vfc-title">
+          <div className="surface-heading">
+            <div><p className="eyebrow">Voice-first cartridge</p><h2 id="vfc-title">Local 16 kHz capture</h2></div>
+            <span className={`phase-badge ${voice.active ? "phase-live" : ""}`}>[{voice.state.toUpperCase()}]</span>
+          </div>
+          <div className="voice-runtime-layout">
+            <div className="voice-pulse" data-active={voice.active} aria-hidden="true">
+              <AudioLines />
+              <span style={{ transform: `scaleX(${Math.max(0.08, Math.min(1, voice.metrics.lastRms * 12))})` }} />
+            </div>
+            <div className="voice-runtime-lanes">
+              <div><span>TRANSPORT</span><strong>{voice.metrics.transport ?? "standby"}</strong></div>
+              <div><span>FRAMES</span><strong>{voice.metrics.frames.toLocaleString()}</strong></div>
+              <div><span>DROPPED</span><strong>{voice.metrics.droppedSamples.toLocaleString()}</strong></div>
+              <div><span>UTTERANCES</span><strong>{voice.metrics.utterances.toLocaleString()}</strong></div>
+            </div>
+          </div>
+          <div className="voice-runtime-footer">
+            <p>{voice.active ? "Microphone audio is framed locally and forwarded only through the authenticated loopback bridge." : "Microphone access begins only after an operator action."}</p>
+            <button type="button" onClick={() => voice.active ? void voice.stop() : void voice.start()} disabled={!recognition || hostConstrained}>
+              {voice.active ? <MicOff aria-hidden="true" /> : <Mic aria-hidden="true" />}
+              {voice.active ? "Stop capture" : "Start capture"}
+            </button>
+          </div>
+          {voice.error ? <p className="voice-runtime-error" role="alert">{voice.error}</p> : null}
+        </section>
+
         <section className="surface live-session-surface" aria-labelledby="live-session-title">
           <div className="surface-heading">
             <div><p className="eyebrow">Session isolation</p><h2 id="live-session-title">Anya live loop</h2></div>
@@ -115,7 +147,7 @@ export default function InterphaseCartridge({ onInterrupt, transport, status }: 
             <div><span>RETRY</span><strong>{transport.attempt}</strong><small>next {retryLabel}</small></div>
           </div>
           <div className="interphase-actions">
-            <button type="button" onClick={onInterrupt}><CircleStop aria-hidden="true" /> Interrupt output</button>
+            <button type="button" onClick={() => { voice.interrupt(); onInterrupt(); }}><CircleStop aria-hidden="true" /> Interrupt output</button>
             <button type="button" onClick={resetSession}><RotateCcw aria-hidden="true" /> Reset transient state</button>
           </div>
           <p className="runtime-reasons">Runtime guard: {runtimeReasons.length ? runtimeReasons.join(" / ") : "full local capability"}</p>

@@ -32,7 +32,7 @@ When files disagree, use this precedence:
 
 ### 1. Boot contract
 
-File: [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/boot_sequence.py:845)
+File: [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/boot_sequence.py:845)
 
 Why it is canonical:
 
@@ -63,7 +63,7 @@ Why it is canonical:
 
 ### 3. Runic command surface
 
-File: [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runic_router.py:1)
+File: [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runes/runic_router.py:1)
 
 Why it is canonical:
 
@@ -73,7 +73,7 @@ Why it is canonical:
 
 ### 4. Cloud and NotebookLM routing
 
-File: [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/cloud_services.py:1)
+File: [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/cloud_services.py:1)
 
 Why it is canonical:
 
@@ -123,7 +123,7 @@ Current configured notebook URL:
 
 ### 7. Verification matrix
 
-File: [verification.md](C:/Users/vizio/CAMELOT_OS/verification.md:1)
+File: [verification.md](C:/Users/vizio/CAMELOT_OS/docs/reports/bifrost_triage_2026-06-24/verification.md:1)
 
 Why it matters:
 
@@ -152,7 +152,7 @@ Why it matters:
 
 ### 10. Canonical live map
 
-File: [entiremap.md](C:/Users/vizio/CAMELOT_OS/entiremap.md:1)
+File: [entiremap.md](C:/Users/vizio/CAMELOT_OS/docs/architecture/entiremap.md:1)
 
 Usage rule:
 
@@ -193,9 +193,9 @@ as historical or stale until corrected.
 Use these files together:
 
 - [bin/awaken.py](C:/Users/vizio/CAMELOT_OS/bin/awaken.py:1)
-- [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/boot_sequence.py:845)
-- [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runic_router.py:1)
-- [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/cloud_services.py:1)
+- [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/boot_sequence.py:845)
+- [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runes/runic_router.py:1)
+- [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/cloud_services.py:1)
 
 ### NotebookLM identity
 

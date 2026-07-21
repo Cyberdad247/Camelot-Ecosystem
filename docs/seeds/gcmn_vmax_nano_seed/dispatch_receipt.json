@@ -1,0 +1,37 @@
+{
+  "_schema_note": "this file is an audit receipt, NOT Plan.json content. The CLI command below returns a JSON envelope on stdout. We persist both the raw string and the parsed object so an auditor can re-run the parse step deterministically. See Plan.json for canonical content.",
+  "command_invoked": "python -m control_plane.runic_router --rune PLAN --task \"GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed\"",
+  "command_exit_code": 0,
+  "command_stdout_raw": "{\n  \"rune\": \"//PLAN\",\n  \"knight\": \"merlin_omega\",\n  \"directive\": \"//PLAN GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed\",\n  \"mode\": \"ORACLE\",\n  \"task_id\": \"rune-54eb616a\",\n  \"queued\": true,\n  \"metadata\": {\n    \"action\": \"tot_planning\",\n    \"output\": \"Plan.json\",\n    \"param\": \"GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed\"\n  }\n}",
+  "command_stdout_parsed": {
+    "rune": "//PLAN",
+    "knight": "merlin_omega",
+    "directive": "//PLAN GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed",
+    "mode": "ORACLE",
+    "task_id": "rune-54eb616a",
+    "queued": true,
+    "metadata": {
+      "action": "tot_planning",
+      "output": "Plan.json",
+      "param": "GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed"
+    }
+  },
+  "cli_artifact_path": null,
+  "important_disclosure": [
+    "The //PLAN CLI's _handle_plan function returns the metadata above ({action: tot_planning, output: Plan.json, param: ...}) but does NOT write a Plan.json file on disk.",
+    "The actual Plan.json under docs/seeds/gcmn_vmax_nano_seed/Plan.json is hand-authored and is audit-linked to this dispatch via plan_id + task_id.",
+    "Treat the CLI output as a routing contract confirmation (knight=merlin_omega, mode=ORACLE, queue-status=QUEUED), not as a generator of file content."
+  ],
+  "audit_links": {
+    "plan_id": "gcmn_vmax_nano_seed_plan_2026_07_15",
+    "scheduled_knight": "merlin_omega",
+    "rune_canonical": "//PLAN"
+  },
+  "related_artifacts": {
+    "Plan.json": "docs/seeds/gcmn_vmax_nano_seed/Plan.json",
+    "seed_markdown": "docs/seeds/gcmn_vmax_nano_seed/seed.md",
+    "stub_dispatch_module": "control_plane/runic_router.py",
+    "stub_tests": "tests/control_plane/test_runic_router_gcmn_stubs.py"
+  },
+  "captured_at": "2026-07-15T04:30:00Z"
+}
