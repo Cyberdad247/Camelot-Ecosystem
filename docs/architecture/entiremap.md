@@ -19,9 +19,9 @@ below was verified to exist in this checkout on the review date.
 The current map is derived from these live surfaces (all verified present):
 
 - [bin/awaken.py](C:/Users/vizio/CAMELOT_OS/bin/awaken.py:1)
-- [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/boot_sequence.py:845)
-- [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runic_router.py:1)
-- [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/cloud_services.py:1)
+- [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/boot_sequence.py:845)
+- [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runes/runic_router.py:1)
+- [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/cloud_services.py:1)
 - [control_plane/go_router/main.go](C:/Users/vizio/CAMELOT_OS/control_plane/go_router/main.go:1)
 - [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:16)
 - [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1)
@@ -137,7 +137,7 @@ supporting trees:
 ## Boot architecture
 
 The current boot contract is defined by `run_boot(...)` in
-[control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/boot_sequence.py:845).
+[control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/boot_sequence.py:845).
 
 ### Required phases
 
@@ -163,7 +163,7 @@ The current boot contract is defined by `run_boot(...)` in
 ### Runic routing
 
 Live rune routing is defined in
-[control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runic_router.py:1)
+[control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runes/runic_router.py:1)
 (Python) with a Rust counterpart under `04_KINETIC/cmd/runic_router/` and a Go
 edge at `control_plane/go_router/`. The `//MALICIOUS` SAT-gate returns
 `UNSATISFIED` across the CLI and the Go `/rune` endpoint.
@@ -177,7 +177,7 @@ The live Cloud Brain path is split across:
 - operator configuration:
   [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1)
 - typed router and local/remote fallback behavior:
-  [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/cloud_services.py:1)
+  [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/cloud_services.py:1)
 
 Important current rule:
 

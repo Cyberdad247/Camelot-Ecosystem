@@ -19,10 +19,17 @@ def test_build_phial_assignments_maps_research_experts(tmp_path: Path) -> None:
     assert by_phial["main"]["research_expert"] == "SIR_HERMES"
 
 
-def test_mnemosyne_chimera_report_first_contract(tmp_path: Path) -> None:
+def test_mnemosyne_chimera_report_first_contract(tmp_path: Path, monkeypatch) -> None:
     scan_root = tmp_path / "scan"
     scan_root.mkdir()
     (scan_root / "module.py").write_text("print('safe')\n", encoding="utf-8")
+
+    # Create phial files in a temp dir so build_phial_assignments finds them
+    phial_root = tmp_path / "phials"
+    phial_root.mkdir()
+    (phial_root / "tree_sitter_phial.py").write_text("# phial\n", encoding="utf-8")
+    (phial_root / "memory_decay.py").write_text("# phial\n", encoding="utf-8")
+    monkeypatch.setattr("control_plane.mnemosyne_chimera.PHIAL_ROOT", phial_root)
 
     payload = run_mnemosyne_chimera(scan_path=scan_root, max_files=25, emit_hermes=False, write=False)
 

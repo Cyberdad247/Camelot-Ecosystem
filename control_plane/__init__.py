@@ -30,14 +30,18 @@ class _ControlPlaneModuleFinder:
     def find_spec(self, fullname: str, path: Any, target: Any = None) -> Any:
         if not fullname.startswith("control_plane."):
             return None
-        if fullname.count(".") != 1:
+        # Skip the package itself and dunder modules
+        if fullname == "control_plane":
             return None
-        name = fullname.split(".", 1)[1]
-        if name.startswith("_"):
+        if fullname.split(".")[-1].startswith("_"):
             return None
 
+        # Extract the leaf module name (last component after control_plane.)
+        parts = fullname.split(".")
+        leaf = parts[-1]
+
         for subdir in _SUBDIRS:
-            candidate = _PACKAGE_DIR / subdir / f"{name}.py"
+            candidate = _PACKAGE_DIR / subdir / f"{leaf}.py"
             if candidate.is_file():
                 # Use fullname (the name being imported) so the module is
                 # cached under the correct key in sys.modules and its

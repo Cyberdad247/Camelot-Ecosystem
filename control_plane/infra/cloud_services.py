@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 
 from .config_manager import ConfigManager
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 
 

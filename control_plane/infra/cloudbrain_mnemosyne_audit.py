@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 RUNTIME_DIR = REPO_ROOT / "03_VAULT" / "runtime_state"
 QUEUE_PATH = RUNTIME_DIR / "cloudbrain_sync_queue.jsonl"
 REPORT_PATH = REPO_ROOT / "docs" / "reports" / "lady_mnemosyne_cloudbrain_audit.md"

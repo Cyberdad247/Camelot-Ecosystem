@@ -26,7 +26,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-_REPO = Path(__file__).resolve().parent.parent
+_REPO = Path(__file__).resolve().parent.parent.parent
 _FORGE = _REPO / "02_FORGE"
 if str(_FORGE) not in sys.path:
     sys.path.insert(0, str(_FORGE))

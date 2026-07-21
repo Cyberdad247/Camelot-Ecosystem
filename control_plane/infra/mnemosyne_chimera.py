@@ -19,7 +19,7 @@ from typing import Any
 from control_plane.cloudbrain_mnemosyne_audit import run_lady_mnemosyne_cloudbrain_audit
 from control_plane.hermes_bridge import HermesBus
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 RUNTIME_DIR = REPO_ROOT / "03_VAULT" / "runtime_state"
 PHIAL_ROOT = REPO_ROOT / "01_KERNEL" / "titan" / "phials"
 ARTIFACT_PATH = RUNTIME_DIR / "lady_mnemosyne_chimera_latest.json"

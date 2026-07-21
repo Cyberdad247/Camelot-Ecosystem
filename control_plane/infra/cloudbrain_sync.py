@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 QUEUE_PATH = REPO_ROOT / "03_VAULT" / "runtime_state" / "cloudbrain_sync_queue.jsonl"
 
 

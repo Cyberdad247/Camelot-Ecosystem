@@ -43,7 +43,7 @@ try:
 except ImportError:
     HydrationManager = None
 
-CAMELOT_HOME = Path(__file__).parent.parent
+CAMELOT_HOME = Path(__file__).parent.parent.parent
 QUEUE_FILE = CAMELOT_HOME / "logs" / "harness_queue.jsonl"
 
 # Rate-limit guard for _queue_task — kills runaway producers that fire the same

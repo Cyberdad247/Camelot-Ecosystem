@@ -10,7 +10,7 @@ from typing import Any
 
 import httpx
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 LEDGER_PATH = REPO_ROOT / "PROVENANCE_LEDGER.md"
 MIRROR_LEDGER_PATHS = [
     REPO_ROOT / "03_VAULT" / "PROVENANCE_LEDGER.md",

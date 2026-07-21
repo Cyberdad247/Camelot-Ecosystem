@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-CAMELOT_HOME = Path(__file__).resolve().parent.parent
+CAMELOT_HOME = Path(__file__).resolve().parent.parent.parent
 PROMOTED_ROOT = CAMELOT_HOME / "02_FORGE" / "generated" / "ukg_omega_glyph_v1000"
 EVIDENCE_DIR = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "nano_swarm_evidence"
 RUNTIME_STATE_DIR = CAMELOT_HOME / "03_VAULT" / "runtime_state"

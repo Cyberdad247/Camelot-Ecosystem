@@ -13,7 +13,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 RUNTIME_STATE = REPO_ROOT / "03_VAULT" / "runtime_state"
 FRONTIER_STATE_PATH = RUNTIME_STATE / "frontier_nodes_latest.json"
 VERIFICATION_LEDGER = REPO_ROOT / "03_VAULT" / "Missions" / "verification_ledger.jsonl"

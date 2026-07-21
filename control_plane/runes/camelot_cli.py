@@ -75,7 +75,7 @@ def _detect_home() -> Path:
     candidates = [
         Path.home() / "CAMELOT_OS",
         Path("C:/Users/vizio/CAMELOT_OS"),
-        Path(__file__).resolve().parent.parent,
+        Path(__file__).resolve().parent.parent.parent,
     ]
     for candidate in candidates:
         if (candidate / "03_VAULT" / "training" / "configs" / "hud.py").exists():

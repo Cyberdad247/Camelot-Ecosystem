@@ -20,9 +20,9 @@ ENTIREMAP_MIRROR = REPO_ROOT / "docs" / "SEPTEM_REGNA" / "L7_ETHEREAL" / "entire
 
 EXPECTED_PATHS = [
     "bin/awaken.py",
-    "control_plane/boot_sequence.py",
-    "control_plane/runic_router.py",
-    "control_plane/cloud_services.py",
+    "control_plane/infra/boot_sequence.py",
+    "control_plane/runes/runic_router.py",
+    "control_plane/infra/cloud_services.py",
     "03_VAULT/training/configs/notebooklm_bridge.py",
     ".camelot-config.yaml",
     "02_FORGE/PORTAL_CORE/Anya_Dashboard",
