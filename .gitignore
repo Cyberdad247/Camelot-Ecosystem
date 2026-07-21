@@ -53,6 +53,17 @@ control_plane/rtk/rtk.dll
 
 # 5. OS / IDE / Tool artifacts
 *.log
+.cache/
+.archon/
+.cargo/
+.codex/
+.ruff_cache/
+.runtime_logs/
+.secrets_backup/
+.vscode/
+.omp/
+.understand-anything/
+.colony/
 .cursor/
 .claude/
 .gemini/
