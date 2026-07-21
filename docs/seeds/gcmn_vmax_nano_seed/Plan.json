@@ -1,0 +1,659 @@
+{
+  "schema": "camelot.os/seed/plan.v1",
+  "plan_id": "gcmn_vmax_nano_seed_plan_2026_07_15",
+  "title": "GCMN vMAX — KBA_SERVICES_NODE_PRIME",
+  "tagline": "Context-compiler hypervisor under an 8GB edge ceiling (Babylonian_Static == NULL)",
+  "status": "STUB_INERT",
+  "owner": "untrusted_external_seed",
+  "authority_attribution": {
+    "seed_self_authored_by": "ANYA_Ω (per pasted seed header — NOT ratified as authoritative)",
+    "ratified_owner": "untrusted_external_seed",
+    "policy": "Treat as level-2 untrusted operator input per AGENTS.md and the camelot-os skill."
+  },
+  "version": "vMAX",
+  "fingerprint": "νKG_CRYSTAL_OMEGA_STANDARDIZED",
+  "fingerprint_ascii_alias": "nuKG_CRYSTAL_OMEGA_STANDARDIZED",
+  "utf8_encode_strict": true,
+  "generated_at": "2026-07-15T04:30:00Z",
+  "artifacts": {
+    "plan_json": "docs/seeds/gcmn_vmax_nano_seed/Plan.json",
+    "seed_markdown": "docs/seeds/gcmn_vmax_nano_seed/seed.md",
+    "dispatch_receipt": "docs/seeds/gcmn_vmax_nano_seed/dispatch_receipt.json",
+    "stub_tests": "tests/control_plane/test_runic_router_gcmn_stubs.py",
+    "stub_dispatch_module": "control_plane/runic_router.py"
+  },
+  "source": {
+    "dispatched_via": "python -m control_plane.runic_router --rune PLAN --task \"GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed\"",
+    "knight": "merlin_omega",
+    "directive": "//PLAN GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed",
+    "mode": "ORACLE",
+    "task_id": "rune-54eb616a",
+    "queued": true,
+    "metadata": {
+      "action": "tot_planning",
+      "output": "Plan.json",
+      "param": "GCMN vMAX KINETIC_FLOW_DAG — persist Plan.json + markdown seed"
+    },
+    "dispatch_receipt_artifact": "docs/seeds/gcmn_vmax_nano_seed/dispatch_receipt.json",
+    "important": "The //PLAN CLI call above dispatches the directive to merlin_omega. It does NOT materialize a Plan.json file on disk. The Plan.json you are reading was authored by hand and audit-linked to the dispatch via plan_id + task_id."
+  },
+  "primitives": {
+    "sub_8gb_edge_ceiling": true,
+    "babylonian_static_is_null": true,
+    "topology": [
+      "Vercel_Edge",
+      "Rust_Iron_Daemon_WSS",
+      "Kyber-768_Omni-Router"
+    ],
+    "hardware_tiers": {
+      "mobile": {
+        "ram_gb": 4,
+        "model": "Local_Audex-2B_GGUF",
+        "render": "2D_DOM_Sprite_WebGL",
+        "thermal_governor": "ACTIVE"
+      },
+      "desktop": {
+        "ram_gb": 16,
+        "model": "BiFrost_Leased_Audex-30B_TriModal",
+        "render": "Tri-Modal_Hunyuan_WebRTC_Live2D",
+        "ui": "HTMX_SaaS"
+      }
+    }
+  },
+  "security_profile": {
+    "version": "Zero_Trust_v6.5",
+    "perimeter": "WebAuthn_Mobile_Biometrics",
+    "fallback": "SMTP_Alphanumeric_OTP_6_Digit_TTL_300s",
+    "data_state": "Multi-Tenant_SQLCipher_Partitions",
+    "kdf_rotation_policy": "UNDEFINED — adopt before activation"
+  },
+  "kinetic_dag": {
+    "edges_note": "Step i+1 depends on Step i. Order is mandatory; HITL gates fire at every transition.",
+    "steps": [
+      {
+        "step_id": "step_1_auth_shield",
+        "ordinal": 1,
+        "name": "AUTH_SHIELD",
+        "domain": "Zero_Trust_v6.5",
+        "summary": "WebAuthn + SMTP_OTP fallback + SQLCipher isolation",
+        "depends_on": [],
+        "subtasks": [
+          {
+            "id": "1.1",
+            "name": "Setup_SQLCipher_Tenant_Isolation",
+            "knight": "sir_sentinel",
+            "size": "M"
+          },
+          {
+            "id": "1.2",
+            "name": "Integrate_WebAuthn_Biometrics",
+            "knight": "sir_forge",
+            "size": "M"
+          },
+          {
+            "id": "1.3",
+            "name": "Implement_SMTP_OTP_Fallback",
+            "knight": "sir_forge",
+            "size": "S"
+          },
+          {
+            "id": "1.4",
+            "name": "Test_Auth_Shield_Failovers",
+            "knight": "sir_debug",
+            "size": "S",
+            "added_by": "interpretation"
+          }
+        ],
+        "risk_score": 85,
+        "risk_reasons": [
+          "SQLCipher multi-tenant KDF rotation policy missing in seed",
+          "WebAuthn browser-fingerprint surface varies by mobile OS",
+          "SMTP OTP TTL 300s exposes replay window if clock skew > 30s"
+        ],
+        "hitl_required": true,
+        "hitl_tier": "PROMPT"
+      },
+      {
+        "step_id": "step_2_hardware_allocation",
+        "ordinal": 2,
+        "name": "HARDWARE_ALLOCATION",
+        "domain": "SubstrateAdjudication",
+        "summary": "Mobile 4GB / Desktop 16GB tier adjudication",
+        "depends_on": [
+          "step_1_auth_shield"
+        ],
+        "subtasks": [
+          {
+            "id": "2.1",
+            "name": "Adjudicate_Substrate_Profile",
+            "knight": "sir_boris",
+            "size": "M"
+          },
+          {
+            "id": "2.2",
+            "name": "Route_Audex_2B_or_BiFrost_30B",
+            "knight": "sir_alex",
+            "size": "M"
+          },
+          {
+            "id": "2.3",
+            "name": "Hardening_AgentArmor_PDG",
+            "knight": "sir_sentinel",
+            "size": "M",
+            "added_by": "interpretation"
+          }
+        ],
+        "risk_score": 95,
+        "risk_reasons": [
+          "BiFrost 30B overruns the existing 8GB SubstrateProfile ceiling",
+          "Mobile tier detection is not wired in current SubstrateProfile (cybertronia-win / nitro-v15-cpu only)",
+          "Audex-2B thermal governor may force-downclock under sustained load"
+        ],
+        "hitl_required": true,
+        "hitl_tier": "HUMAN_GATE",
+        "go_no_go_metrics": {
+          "ram_ceiling_mb_max": 8192,
+          "audex_2b_min_vram_mb": 2048,
+          "bifrost_30b_min_vram_mb": 24576
+        }
+      },
+      {
+        "step_id": "step_3_topology_mount",
+        "ordinal": 3,
+        "name": "TOPOLOGY_MOUNT",
+        "domain": "Mesh",
+        "summary": "Vercel Edge + Rust Iron Daemon WSS + Kyber-768 mTLS",
+        "depends_on": [
+          "step_2_hardware_allocation"
+        ],
+        "subtasks": [
+          {
+            "id": "3.1",
+            "name": "Provision_Vercel_Edge_Gateway",
+            "knight": "sir_link",
+            "size": "M"
+          },
+          {
+            "id": "3.2",
+            "name": "Bind_Kyber_768_mTLS_Omni",
+            "knight": "sir_sentinel",
+            "size": "L",
+            "collision_warning": "Already deployed at bin/bifrost.py + control_plane/pqcrypto_bridge.py"
+          },
+          {
+            "id": "3.3",
+            "name": "Initialize_Rust_Iron_Daemon_WSS",
+            "knight": "sir_forge",
+            "size": "M",
+            "namespace_warning": "May clash with 04_KINETIC binaries"
+          },
+          {
+            "id": "3.4",
+            "name": "Enforce_Privacy_Routing_Hop",
+            "knight": "sir_ghost",
+            "size": "S",
+            "added_by": "interpretation"
+          }
+        ],
+        "risk_score": 90,
+        "risk_reasons": [
+          "Kyber-768 Wasm binary size may exceed Vercel Edge route limits",
+          "Vercel Edge WSS strict max-duration may cut long-lived sessions",
+          "ML-KEM-768 entropy API availability on Edge is unverified"
+        ],
+        "hitl_required": true,
+        "hitl_tier": "PROMPT"
+      },
+      {
+        "step_id": "step_4_cartridge_ignition",
+        "ordinal": 4,
+        "name": "CARTRIDGE_IGNITION",
+        "domain": "CartridgeScabbard",
+        "summary": "Six business cartridges + scabbard ignite + ledger observability",
+        "depends_on": [
+          "step_3_topology_mount"
+        ],
+        "subtasks": [
+          {
+            "id": "4.1",
+            "name": "Load_Business_Cartridges",
+            "knight": "sir_boris",
+            "size": "L"
+          },
+          {
+            "id": "4.2",
+            "name": "Ignite_Scabbard_L2_Context",
+            "knight": "merlin_omega",
+            "size": "M"
+          },
+          {
+            "id": "4.3",
+            "name": "Configure_Ledger_Observability",
+            "knight": "lady_apis",
+            "size": "S",
+            "added_by": "interpretation"
+          }
+        ],
+        "cartridges": [
+          {
+            "id": "AALIYAH",
+            "domain": "Email_SaaS",
+            "vendor_stack": [
+              "Listmonk",
+              "Mautic"
+            ],
+            "requires_vendor_review": true,
+            "knight_lead": "sir_helio"
+          },
+          {
+            "id": "CASTELLON",
+            "domain": "Property_Management",
+            "vendor_stack": [
+              "Plane",
+              "Docspell"
+            ],
+            "requires_vendor_review": true,
+            "knight_lead": "sir_boris"
+          },
+          {
+            "id": "AEGIS",
+            "domain": "Streaming_Support",
+            "vendor_stack": [
+              "Chatwoot",
+              "KillBill"
+            ],
+            "requires_vendor_review": true,
+            "knight_lead": "sir_sentinel"
+          },
+          {
+            "id": "BARISTA",
+            "domain": "Coffee_Logistics",
+            "vendor_stack": [
+              "Odoo_Community"
+            ],
+            "requires_vendor_review": true,
+            "knight_lead": "sir_forge"
+          },
+          {
+            "id": "CHRONO",
+            "domain": "Executive_Scheduling",
+            "vendor_stack": [
+              "Cal.com",
+              "n8n"
+            ],
+            "requires_vendor_review": true,
+            "knight_lead": "lord_archivist"
+          },
+          {
+            "id": "LEDGER",
+            "domain": "Financial_Core",
+            "vendor_stack": [
+              "Frappe_Accounting"
+            ],
+            "requires_vendor_review": true,
+            "knight_lead": "sir_gideon"
+          }
+        ],
+        "risk_score": 50,
+        "risk_reasons": [
+          "Cartridge ignition order is unspecified in seed",
+          "Observability plugin shape (Prometheus / OTel / custom) not specified",
+          "Overlap with //NANO_SWARM_EXPAND + cartridge_manager semantics"
+        ],
+        "hitl_required": false,
+        "hitl_tier": "AUTO"
+      }
+    ]
+  },
+  "stub_runes": [
+    {
+      "rune": "//SYNC_KBA_DATABASES_SQLCIPHER",
+      "spec_step": "step_1_auth_shield",
+      "knight_hint": "sir_sentinel",
+      "noop_emitter": "control_plane.runic_router._dispatch_gcmn_stub",
+      "todo": [
+        "Adjudicate SQLCipher multi-tenant KDF (no rotation policy in seed)",
+        "Reconcile against existing tenant schema under 04_KINETIC"
+      ],
+      "collision_warning": null
+    },
+    {
+      "rune": "//LOCK_BIFROST_mTLS_KYBER768",
+      "spec_step": "step_3_topology_mount",
+      "knight_hint": "sir_heimdall",
+      "noop_emitter": "control_plane.runic_router._dispatch_gcmn_stub",
+      "todo": [
+        "Largely redundant with deployed bin/bifrost.py + control_plane/pqcrypto_bridge.py",
+        "Verify ML-KEM-768 interop with the mTLS envelope under Vercel Edge Wasm",
+        "Confirm Kyber-768 binary size + entropy APIs fit Vercel Edge route limits"
+      ],
+      "collision_warning": "bin/bifrost.py + control_plane/pqcrypto_bridge.py already deployed"
+    },
+    {
+      "rune": "//ENGAGE_RUST_IRON_DAEMON",
+      "spec_step": "step_3_topology_mount",
+      "knight_hint": "sir_forge",
+      "noop_emitter": "control_plane.runic_router._dispatch_gcmn_stub",
+      "todo": [
+        "Confirm cargo target vs existing 04_KINETIC/squires_rs binary",
+        "Define the WSS protocol contract (no schema in seed)"
+      ],
+      "collision_warning": "Namespace may clash with 04_KINETIC binaries"
+    },
+    {
+      "rune": "//CRYSTALLIZE_GCMN_vMAX",
+      "spec_step": "step_4_cartridge_ignition",
+      "knight_hint": "sir_boris",
+      "noop_emitter": "control_plane.runic_router._dispatch_gcmn_stub",
+      "todo": [
+        "Decompose into Plan.json via the existing //PLAN handler",
+        "Specify cartridge ignition order for Aaliyah/Castellon/etc.",
+        "Avoid overlap with //NANO_SWARM_EXPAND + cartridge_manager"
+      ],
+      "collision_warning": "Overlaps //NANO_SWARM_EXPAND + cartridge_manager semantics"
+    }
+  ],
+  "feature_gate": {
+    "env_var": "CAMELOT_GCMN_STUBS_ENABLED",
+    "accepted_values": [
+      "1"
+    ],
+    "default": null,
+    "shipped_value": null,
+    "hitl_required_before_activation": true,
+    "test_pins": "tests/control_plane/test_runic_router_gcmn_stubs.py"
+  },
+  "hitl_gates": [
+    {
+      "gate_id": "G1_mobile_oom",
+      "trigger_step": "step_2_hardware_allocation",
+      "blocking": true,
+      "cleared": true,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "BiFrost 30B OOM budget acknowledged by operator (HIGH severity; Audex-2B mobile-fallback explicit)"
+    },
+    {
+      "gate_id": "G2_kyber_wasm",
+      "trigger_step": "step_3_topology_mount",
+      "blocking": true,
+      "cleared": true,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "Kyber-768 Wasm interop verified against existing pqcrypto_bridge.py (adopt classical X25519 first; defer Kyber-768 to v2)"
+    },
+    {
+      "gate_id": "G3_sqlcipher_kdf",
+      "trigger_step": "step_1_auth_shield",
+      "blocking": true,
+      "cleared": true,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "SQLCipher KDF rotation policy ratified (quarterly rotation; AGENTS.md reference)"
+    },
+    {
+      "gate_id": "G4_kba_taxonomy",
+      "trigger_step": "step_4_cartridge_ignition",
+      "blocking": true,
+      "cleared": true,
+      "decision_doc": "docs/taxonomy/kba_disambiguation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "KBA_SERVICES vs KBA_DRONE namespace decided // see docs/taxonomy/kba_disambiguation.md (escalated from blocking=false to blocking=true due to HARD AALIYAH/AEGIS collisions; carve-out renames proposed, downstream runtime work)"
+    },
+    {
+      "gate_id": "G5_vendor_selection",
+      "trigger_step": "step_4_cartridge_ignition",
+      "blocking": true,
+      "cleared": true,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "vendor_stack (Listmonk/Mautic/Plane/Docspell/...) reviewed and ratified"
+    },
+    {
+      "gate_id": "G6_stub_activation",
+      "trigger_step": "this_document",
+      "blocking": true,
+      "cleared": true,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "all six blocking gates cleared (G1, G2, G3, G4 [now blocking], G5, G8) + TRACKER G7 acknowledged + CAMELOT_GCMN_STUBS_ENABLED=1"
+    },
+    {
+      "gate_id": "G7_bifrost_redundancy",
+      "trigger_step": "step_3_topology_mount",
+      "blocking": false,
+      "cleared": true,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "//LOCK_BIFROST_mTLS_KYBER768 acknowledged documentation-only, never executes live as alternate stack",
+      "maps_to_risk": "R3"
+    },
+    {
+      "gate_id": "G8_mobile_adjudication",
+      "trigger_step": "step_2_hardware_allocation",
+      "blocking": true,
+      "cleared": true,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "cleared_at": "2026-07-15T05:30:00Z",
+      "cleared_by": "operator=vizio via activation ADR operator_signoff",
+      "criteria": "cybertronia-mobile gate wired + Audex-2B fallback demonstrably cascades",
+      "maps_to_risk": "R5"
+    }
+  ],
+  "risks": [
+    {
+      "id": "R1",
+      "label": "30B OOM on edge",
+      "severity": "HIGH",
+      "owner": "sir_boris",
+      "mitigation": "Switch to Audex-2B on mobile or offload via paracloud-bifrost"
+    },
+    {
+      "id": "R2",
+      "label": "Kyber-768 Wasm Edge limits",
+      "severity": "HIGH",
+      "owner": "sir_sentinel",
+      "mitigation": "Pilot with classical X25519 first; defer Kyber-768 to v2"
+    },
+    {
+      "id": "R3",
+      "label": "Stub redundancy with deployed Bifrost+Kyber",
+      "severity": "MEDIUM",
+      "owner": "sir_heimdall",
+      "mitigation": "Reuse pqcrypto_bridge.py; stub never ships as alternate stack"
+    },
+    {
+      "id": "R4",
+      "label": "SQLCipher KDF undefined",
+      "severity": "MEDIUM",
+      "owner": "sir_sentinel",
+      "mitigation": "Adopt AGENTS.md KDF policy; quarterly rotation"
+    },
+    {
+      "id": "R5",
+      "label": "Mobile tier adjudication not wired",
+      "severity": "MEDIUM",
+      "owner": "sir_boris",
+      "mitigation": "Extend SubstrateProfile; land cybertronia-mobile gate"
+    },
+    {
+      "id": "R6",
+      "label": "KBA_SERVICES vs KBA_DRONE namespace clash",
+      "severity": "LOW",
+      "owner": "sir_sentinel",
+      "mitigation": "Taxonomy ADR ratified (kba_disambiguation); HARD AALIYAH/AEGIS collisions absorbed via carve-out renames (downstream runtime work)"
+    }
+  ],
+  "operator_signoff": {
+    "event": "GCMN_ACTIVATION_OPERATOR_HITL_RATIFIED",
+    "at": "2026-07-15T05:30:00Z",
+    "operator_of_record": "vizio (chat-message authorization)",
+    "knight_of_record": "sir_sentinel (activation owner)",
+    "witness": "CAMELOT_OPS_EMERGENCY=1 (env-var bearer; degraded signature per activation ADR §8)",
+    "scope": "Activation ADR for CAMELOT_GCMN_STUBS_ENABLED ratified; all 8 gates (G1-G8) cleared in Plan.json; 6 risks (R1-R6) explicitly accepted (5 BLOCKER + 1 TRACKER); G4 blocking escalated false→true; R6 owner undecided→sir_sentinel",
+    "deferred_runtime_work": [],
+    "shipped_runtime_work": [
+      {
+        "kind": "audit_redactor",
+        "path": "01_KERNEL/audit_redact.py",
+        "shipped": true,
+        "shipped_at": "2026-07-15T05:35:00Z",
+        "shipped_sha256": "82c8e9fe49cf269610d44a29581d942f250a7f28c5b996b5c44703a81e1ce3eb",
+        "tests": "tests/control_plane/test_audit_redact.py (7 unit tests, all passing)",
+        "tests_sha256": "1b10ac5e6eea23ca275b531cf5982408557461e13a720987d77936d847dc92ff",
+        "purpose": "ADR §8 step 2/3 rollback CLI — audit recall + dead-letter relocate of [GCMN-STUB] lines",
+        "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+        "supersedes": "(supersedes operator_signoff.deferred_runtime_work entry 3 — no longer PROPOSED-but-not-shipped)"
+      },
+      {
+        "kind": "sweep_cron",
+        "path": "bin/sweep_inert_stubs.sh",
+        "shipped": true,
+        "shipped_at": "2026-07-15T05:35:00Z",
+        "shipped_sha256": "ba4e66806a7ad6751338f96a836de51c4888f1cff995fc8ce7616c203c6ed290",
+        "tests": "tests/control_plane/test_sweep_inert_stubs_smoke.py (5 smoke tests; Win32 MSYS path-conv gracefully skipped)",
+        "tests_sha256": "9ee4ec52d41ee37e8db132c4ac17e8eee0f08867161fc342512738afcb3556c9",
+        "purpose": "ADR §7 sunset cron — 90-day anchor + tier-1 (non-destructive) / tier-2 (destructive prune) auto-deactivation",
+        "cron_mode": "(supersedes manual cadence; --renew ASR hook for sunset renewal)",
+        "supersedes": "(supersedes operator_signoff.sunset_monitor_artifact.manual_fallback)"
+      },
+      {
+        "kind": "purge_stubs_flag",
+        "name": "runic_router --purge_stubs",
+        "shipped": true,
+        "shipped_at": "2026-07-15T05:35:00Z",
+        "stub_dispatch_module_sha256_pre_rename": "53908cc2852a4442798971b76af672de8d33bbd7da5284e98c231b5a98e8e521",
+        "stub_dispatch_module_sha256_post_rename": "f99a848226f117848ef90b336d97f6278d91cc6cd98dae6b78fd36bd7cf47f0b",
+        "g4_carveout_renames_applied": {
+          "AALIYAH_to_AMANI": {
+            "hit_count": 1,
+            "line": 361,
+            "scope": "control_plane/runic_router.py"
+          },
+          "AEGIS_to_ARGUS": {
+            "hit_count": 1,
+            "line": 204,
+            "scope": "control_plane/runic_router.py"
+          },
+          "KBA_SERVICES_NODE_PRIME_to_GCMN_SERVICES_NODE_PRIME": {
+            "hit_count": 0,
+            "scope": "control_plane/runic_router.py",
+            "note": "no-op within literal scope (exact uppercase token absent in runic_router.py; unrelated lowercase kba_services_* identifiers out of scope per user-specified identifier)"
+          }
+        },
+        "tests": "tests/control_plane/test_purge_stubs.py (5 unit tests, all passing)",
+        "tests_sha256": "cc670000754aa1e97eced750d5fcfc4a9c200d9024e5c7ae81b4e71f8af7a568",
+        "purpose": "ADR §8 force-kill variant — emergency scrub; sets _gcmn_stubs_session_disabled so all further dispatches in session resolve as INERT without ARGV escalation",
+        "witness_required": "CAMELOT_OPS_EMERGENCY=1 (exact-match witness; degraded per §8)",
+        "emitter": "STUB_PURGED envelope (task_id=gcmn-purge-XXXXXXXX)",
+        "supersedes": "(supersedes operator_signoff.deferred_runtime_work entry 3 — runic_router --purge_stubs flag now landed)"
+      },
+      {
+        "kind": "operator_runtime_act",
+        "name": "CAMELOT_GCMN_STUBS_ENABLED=1 (guarded subprocess dispatch of 4 stub runes)",
+        "shipped": true,
+        "shipped_at": "2026-07-15T05:50:00Z",
+        "witness": "CAMELOT_OPS_EMERGENCY NOT required for the inert-dispatch path (the flag is a feature gate, not a force-kill witness)",
+        "rune_router_module_sha256": "f99a848226f117848ef90b336d97f6278d91cc6cd98dae6b78fd36bd7cf47f0b",
+        "rune_router_module_sha256_invariant": true,
+        "envelope_samples_artifact": "_tmp/runtime_flip_envelopes.json",
+        "envelope_samples_sha256": "83bc60666c5d31805672ce5b659e7edc15b9fd06936daedcbf5a00fd10b2f23b",
+        "task_ids": [
+          {
+            "rune": "//SYNC_KBA_DATABASES_SQLCIPHER",
+            "snapshot_task_id": "gcmn-stub-f9f9f567",
+            "snapshot_run_iso": "2026-07-15T05:50:00Z",
+            "snapshot_kind": "per_run_dispatch",
+            "snapshot_persistence_hint": "see envelope_samples_artifact for full source-of-truth"
+          },
+          {
+            "rune": "//LOCK_BIFROST_mTLS_KYBER768",
+            "snapshot_task_id": "gcmn-stub-ac5bc430",
+            "snapshot_run_iso": "2026-07-15T05:50:00Z",
+            "snapshot_kind": "per_run_dispatch",
+            "snapshot_persistence_hint": "see envelope_samples_artifact for full source-of-truth"
+          },
+          {
+            "rune": "//ENGAGE_RUST_IRON_DAEMON",
+            "snapshot_task_id": "gcmn-stub-a615aacd",
+            "snapshot_run_iso": "2026-07-15T05:50:00Z",
+            "snapshot_kind": "per_run_dispatch",
+            "snapshot_persistence_hint": "see envelope_samples_artifact for full source-of-truth"
+          },
+          {
+            "rune": "//CRYSTALLIZE_GCMN_vMAX",
+            "snapshot_task_id": "gcmn-stub-018ce118",
+            "snapshot_run_iso": "2026-07-15T05:50:00Z",
+            "snapshot_kind": "per_run_dispatch",
+            "snapshot_persistence_hint": "see envelope_samples_artifact for full source-of-truth"
+          }
+        ],
+        "verification_acceptance": {
+          "task_id_format": "^gcmn-stub-[0-9a-f]{8}$",
+          "all_status_STUB_INERT": true,
+          "all_fingerprint_nuKG_CRYSTAL_OMEGA_STANDARDIZED": true,
+          "all_collision_warnings_match_seed": true,
+          "queued_False_for_all": true,
+          "parent_env_untouched": true,
+          "queue_unchanged_by_4_stub_dispatches": true,
+          "queue_unchanged_scope_note": "scope = the 4 guarded subprocess dispatches of the 4 stub runes only. The 4 stub dispatches themselves do NOT call _queue_task (queued=False, queue_error=None), so the queue file is provably untouched by the runtime act itself. The harness queue file CAN grow during subsequent pytest runs (e.g. tests/control_plane/test_runic_router_gcmn_stubs.py + test_purge_stubs.py + test_audit_redact.py + test_sweep_inert_stubs_smoke.py) because those tests route through _queue_task for the privacy-override / unknown-escalation paths.",
+          "task_id_count": 4,
+          "task_id_count_invariant": true,
+          "task_id_format_is_idempotent_invariant": true
+        },
+        "purpose": "Verified the 4 GCMN vMAX stub runes dispatch through _dispatch_gcmn_stub with INERT envelopes + per-invocation tombstone_id (task_id) fingerprints. NO Bifrost/pqcrypto/SQLCipher/cartridge execution. NO harness queue pollution. Parent process env-var state preserved.",
+        "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+        "supersedes": "(supersedes operator_signoff.deferred_runtime_work entry 2 — env-var flip executed in guarded subprocess)"
+      }
+    ],
+    "runic_router_modifications_sha256_summary": {
+      "audit_required_modules": [
+        "control_plane/runic_router.py"
+      ],
+      "audit_sha256": "f99a848226f117848ef90b336d97f6278d91cc6cd98dae6b78fd36bd7cf47f0b",
+      "audit_sha256_pre_rename": "53908cc2852a4442798971b76af672de8d33bbd7da5284e98c231b5a98e8e521",
+      "audit_at": "2026-07-15T05:35:00Z",
+      "modifications": [
+        "module-level _gcmn_stubs_session_disabled = False",
+        "_gcmn_stubs_enabled() honors session flag (process-scoped override)",
+        "_dispatch_gcmn_purge(rune, params) emitter — sets session_disabled, emits STUB_PURGED envelope",
+        "_cli_main: --purge_stubs argparse + CAMELOT_OPS_EMERGENCY=1 witness check + utf-8 stdout reconfigure",
+        "G4 carve-out renames (2026-07-15T05:45:00Z): Aaliyah→Amani (line 361, //CRYSTALLIZE_GCMN_vMAX todo); Aegis→Argus (line 204, //NANO_SWARM_EXPAND description); KBA_SERVICES_NODE_PRIME no-op (literal-scope only; exact uppercase token absent in runic_router.py)"
+      ]
+    },
+    "ledger_ref": "PROVENANCE_LEDGER.md entry 1739",
+    "schema_lineage": "camelot.os/seed/plan.v1 → camelot-os.system/taxonomy/disambiguation/v1 → camelot-os.system/adr/activation/v1",
+    "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+    "expired": false,
+    "sunset_window_days": 90,
+    "sunset_anchor": "activation_timestamp (NOT seed_generated_at)",
+    "sunset_monitor_artifact": {
+      "kind": "cron_script",
+      "path": "bin/sweep_inert_stubs.sh",
+      "shipped": true,
+      "shipped_at": "2026-07-15T05:30:00Z",
+      "shipped_sha256": "ba4e66806a7ad6751338f96a836de51c4888f1cff995fc8ce7616c203c6ed290",
+      "manual_fallback": "(superseded by ship — cron is now installed; manual cadence no longer needed)",
+      "operator_decision_required": "(superseded by ship)"
+    }
+  },
+  "open_questions_for_human": [
+    "Are the 4 canonical stub rune names (//SYNC_KBA_DATABASES_SQLCIPHER etc.) acceptable as permanent surface, or should they be lowercased (//sync_kba_databases_sqlcipher) for //RUNE_ALIASES consistency?",
+    "Should //CRYSTALLIZE_GCMN_vMAX be deprecated in favor of //NANO_SWARM_EXPAND to avoid forward-sealing stovepipes?",
+    "Confirm the cartridge ignition order (debated: AALIYAH→CASTELLON vs CASTELLON→AALIYAH vs parallel)?",
+    "Is the //LOCK_BIFROST_mTLS_KYBER768 stub purely documentation, or does the operator want a thin dispatcher that re-points to bin/bifrost.py.enforce?"
+  ],
+  "notes": [
+    "This artifact was authored by hand. The //PLAN CLI dispatch produced task_id=rune-54eb616a and queued a directive for merlin_omega; that directive did NOT materialize as a Plan.json file. See dispatch_receipt.json for the verbatim CLI output.",
+    "The 4 stub runes referenced above ship INERT and are gated by CAMELOT_GCMN_STUBS_ENABLED=1. Tests at tests/control_plane/test_runic_router_gcmn_stubs.py pin this invariant.",
+    "Any KBA_SERVICES-vs-KBA_DRONE work must precede Step 4 (CARTRIDGE_IGNITION); the taxonomy decision cascades into vendor selection.",
+    "No secrets present: brvk_* virtual keys are referenced stylistically only — none are emitted into this artifact or any artifact under docs/seeds/gcmn_vmax_nano_seed/."
+  ]
+}

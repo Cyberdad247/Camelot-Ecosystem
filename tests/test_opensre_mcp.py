@@ -5,7 +5,7 @@ from pathlib import Path
 
 def test_opensre_mcp_integration():
     repo_root = Path(__file__).resolve().parent.parent
-    module_path = repo_root / "control_plane" / "symbiotic_maintenance.py"
+    module_path = repo_root / "control_plane" / "infra" / "symbiotic_maintenance.py"
     spec = importlib.util.spec_from_file_location("symbiotic_maintenance", module_path)
     sm = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(sm)

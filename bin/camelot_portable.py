@@ -37,6 +37,17 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
+from cartridges.v4000_trio import (
+    TRIO_FNAMES,
+    default_scaffold_body as _default_scaffold_body_func,
+    is_default_scaffold_unmodified as _is_default_scaffold_unmodified_func,
+)
+
+# Backward-compat aliases for test coverage
+_TRIO_FNAMES = TRIO_FNAMES
+_default_scaffold_body = _default_scaffold_body_func
+_is_default_scaffold_unmodified = _is_default_scaffold_unmodified_func
+
 __version__ = "1000-EXCALIBUR-A"
 _WARP_VER   = "1.0.0"
 
@@ -540,6 +551,14 @@ def main() -> None:
     parser.add_argument("--no-context", "-n", action="store_true", help="Skip constitution injection")
     parser.add_argument("--list", "-l", action="store_true", help="Print model map and exit")
     parser.add_argument("--version", "-V", action="store_true", help="Print version")
+    
+    # cartridge subcommand
+    sub = parser.add_subparsers(dest="subcommand")
+    cart_parser = sub.add_parser("cartridge", help="V4000 trio cartridge operations")
+    cart_parser.add_argument("--emit", metavar="STAGE", help="Emit trio scaffold for stage")
+    cart_parser.add_argument("--target", metavar="DIR", default=".", help="Target directory")
+    cart_parser.add_argument("--force", action="store_true", dest="cartridge_force", help="Force overwrite user-modified files")
+    
     args = parser.parse_args()
 
     if args.version:
@@ -547,6 +566,10 @@ def main() -> None:
         return
 
     console = Console()
+
+    if args.subcommand == "cartridge":
+        rc = cmd_cartridge(args, console)
+        sys.exit(rc)
 
     if args.list:
         _models_table(console)
@@ -565,3 +588,27 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+# ── Cartridge trio command ──────────────────────────────────────────────────
+
+def cmd_cartridge(args, console) -> int:
+    """Emit V4000 trio scaffold (blueprint.md, task.md, verification.md).
+
+    Called both from the CLI subcommand (sys.exit(rc)) and from test fixtures
+    that pass a CapturingConsole-compatible object.
+    """
+    target = Path(args.target).resolve()
+    stage = args.emit or target.name
+
+    for fname in _TRIO_FNAMES:
+        fp = target / fname
+        if not _is_default_scaffold_unmodified_func(fp, fname, stage):
+            if not args.cartridge_force:
+                console.print(f"[red]Refusing to overwrite user-modified {fname}[/red]")
+                return 1
+        body = _default_scaffold_body_func(fname, stage)
+        fp.parent.mkdir(parents=True, exist_ok=True)
+        fp.write_text(body, encoding="utf-8")
+
+    return 0

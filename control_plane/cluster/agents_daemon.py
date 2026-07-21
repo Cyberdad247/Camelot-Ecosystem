@@ -19,9 +19,9 @@ from control_plane.distributed_agent_registry import (
     AgentStatus,
     DistributedAgentRegistry,
 )
+from control_plane.observability import traced_op
 
 from .http_daemon import HttpDaemon, call_async, post_json
-from control_plane.observability import traced_op
 
 
 def _agent_to_payload(agent: AgentInfo) -> dict:

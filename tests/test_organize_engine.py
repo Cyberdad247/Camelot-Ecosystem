@@ -18,7 +18,7 @@ sys.path.insert(0, str(CAMELOT))
 
 
 def _load_engine():
-    spec = _ilu.spec_from_file_location("organize_engine", CAMELOT / "control_plane/organize_engine.py")
+    spec = _ilu.spec_from_file_location("organize_engine", CAMELOT / "control_plane" / "infra" / "organize_engine.py")
     mod = _ilu.module_from_spec(spec)
     sys.modules["organize_engine"] = mod
     spec.loader.exec_module(mod)

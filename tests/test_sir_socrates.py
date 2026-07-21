@@ -9,7 +9,7 @@ sys.path.insert(0, str(CAMELOT))
 
 spec = _ilu.spec_from_file_location(
     "sir_socrates",
-    CAMELOT / "control_plane" / "sir_socrates.py",
+    CAMELOT / "control_plane" / "core" / "sir_socrates.py",
 )
 _mod = _ilu.module_from_spec(spec)
 sys.modules["sir_socrates"] = _mod

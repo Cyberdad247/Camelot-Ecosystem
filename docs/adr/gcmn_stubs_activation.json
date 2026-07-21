@@ -1,0 +1,358 @@
+{
+  "_schema_note": "machine-readable companion to docs/adr/gcmn_stubs_activation.md. Mirrors the markdown so an operator or runic_router driver can resolve the activation-criteria state of CAMELOT_GCMN_STUBS_ENABLED deterministically. Set `ratified: true` once Gate G6_stub_activation clears and the ADR signs off.",
+  "schema_version": "camelot-os.system/adr/activation/v1",
+  "namespace": "GCMN_STUB_ACTIVATION",
+  "feature_gate": "CAMELOT_GCMN_STUBS_ENABLED",
+  "feature_gate_accepted_values": [
+    "1"
+  ],
+  "feature_gate_default": null,
+  "feature_gate_shipped_value": null,
+  "ratified": true,
+  "ratified_at": "2026-07-15T05:30:00Z",
+  "operator_signoff": {
+    "event": "GCMN_ACTIVATION_OPERATOR_HITL_RATIFIED",
+    "at": "2026-07-15T05:30:00Z",
+    "operator_of_record": "vizio (chat-message authorization)",
+    "activation_owner_knight": "sir_sentinel",
+    "cleared_gates": [
+      {
+        "gate_id": "G1_mobile_oom",
+        "verdict": "BLOCKER",
+        "cleared": true,
+        "evidence": "BiFrost-30B OOM budget acknowledged; Audex-2B mobile-fallback explicitly named"
+      },
+      {
+        "gate_id": "G2_kyber_wasm",
+        "verdict": "BLOCKER",
+        "cleared": true,
+        "evidence": "Pilot X25519 first; defer Kyber-768 to v2"
+      },
+      {
+        "gate_id": "G3_sqlcipher_kdf",
+        "verdict": "BLOCKER",
+        "cleared": true,
+        "evidence": "AGENTS.md KDF rotation policy; quarterly rotation"
+      },
+      {
+        "gate_id": "G4_kba_taxonomy",
+        "verdict": "BLOCKER",
+        "cleared": true,
+        "blocking_escalated_from": false,
+        "evidence": "kba_disambiguation ADR ratified; HARD AALIYAH/AEGIS collisions absorbed via carve-out renames (downstream runtime work)"
+      },
+      {
+        "gate_id": "G5_vendor_selection",
+        "verdict": "BLOCKER",
+        "cleared": true,
+        "evidence": "vendor_stack reviewed (Listmonk, Mautic, Plane, Docspell, Chatwoot, KillBill, Odoo_Community, Cal.com, n8n, Frappe_Accounting)"
+      },
+      {
+        "gate_id": "G6_stub_activation",
+        "verdict": "BLOCKER",
+        "cleared": true,
+        "evidence": "all six blocking gates cleared (G1, G2, G3, G4 [now blocking], G5, G8) + 1 TRACKER (G7) via this operator_signoff — matches Plan.json G6_stub_activation.criteria"
+      },
+      {
+        "gate_id": "G7_bifrost_redundancy",
+        "verdict": "TRACKER",
+        "cleared": true,
+        "evidence": "//LOCK_BIFROST_mTLS_KYBER768 acknowledged as documentation-only; never promoted to alternate stack"
+      },
+      {
+        "gate_id": "G8_mobile_adjudication",
+        "verdict": "BLOCKER",
+        "cleared": true,
+        "evidence": "cybertronia-mobile gate wired for Audex-2B cascade (downstream runtime verification)"
+      }
+    ],
+    "deferred_prereqs": [
+      "control_plane/runic_router.py renames — AALIYAH→AMANI, AEGIS→ARGUS, KBA_SERVICES_NODE_PRIME→GCMN_SERVICES_NODE_PRIME (operator-authorized as part of this ratification; unsigned as code work, deferred to operator's runtime discretion)",
+      "Actual env var flip — `export CAMELOT_GCMN_STUBS_ENABLED=1` (operator runtime act; deferred to next session, NOT applied by this ratification)",
+      "PROPOSED-but-not-shipped scripts: 01_KERNEL/audit_redact.py, bin/sweep_inert_stubs.sh, runic_router --purge_stubs (operator accepts manual-fallback workflows at this activation, per ADR §7+§8 PROPOSED-but-not-shipped disclosure)"
+    ],
+    "ceremony_witness": "CAMELOT_OPS_EMERGENCY=1 (env-var bearer; degrades from cryptographic signature to env-var bearer per activation ADR §8)",
+    "r6_owner_reclaimed": "Plan.json risks[R6].owner: undecided → sir_sentinel (per activation ADR §6)",
+    "g4_escalation": "Plan.json hitl_gates[G4_kba_taxonomy].blocking: false → true (per activation ADR §4)",
+    "ledger_entry_ref": "PROVENANCE_LEDGER.md entry 1735 (HITL_RATIFIED)",
+    "actor_chain": "operator=vizio (chat-message authorization) → Buffy AI acted → knight_of_record=sir_sentinel (activation owner)",
+    "deferred_runtime_work_mirror": "Mirrors Plan.json operator_signoff.deferred_runtime_work to keep this JSON sibling self-contained: (1) control_plane/runic_router.py renames (AALIYAH→AMANI, AEGIS→ARGUS, KBA_SERVICES_NODE_PRIME→GCMN_SERVICES_NODE_PRIME); (2) actual env-var flip `export CAMELOT_GCMN_STUBS_ENABLED=1`; (3) PROPOSED-but-not-shipped scripts (01_KERNEL/audit_redact.py, bin/sweep_inert_stubs.sh, runic_router --purge_stubs). See Plan.json operator_signoff.deferred_runtime_work for canonical source.",
+    "upstream_decision_docs_pending_field": "Markdown MD attestation + back-link from activation JSON to taxonomy JSON are PROVENANCE_LEDGER entry 1735 followups (cosmetic; deferred per thinker triage)."
+  },
+  "expired": false,
+  "decision_proposed": "activate_under_strict_hitl_with_90d_sunset",
+  "captured_at": "2026-07-15T04:30:00Z",
+  "owner_knight": "sir_sentinel",
+  "audit_links": {
+    "plan_id": "gcmn_vmax_nano_seed_plan_2026_07_15",
+    "seed_doc": "docs/seeds/gcmn_vmax_nano_seed/Plan.json",
+    "source_doc_markdown": "./gcmn_stubs_activation.md",
+    "hitl_gate_id": "G6_stub_activation",
+    "taxonomy_doc": "docs/taxonomy/kba_disambiguation.md",
+    "stub_dispatch_module": "control_plane/runic_router.py",
+    "stub_tests": "tests/control_plane/test_runic_router_gcmn_stubs.py",
+    "audit_redactor": {
+      "path": "01_KERNEL/audit_redact.py",
+      "shipped": false
+    },
+    "sweep_cron": {
+      "path": "bin/sweep_inert_stubs.sh",
+      "shipped": false
+    },
+    "ledger": "PROVENANCE_LEDGER.md",
+    "purge_stubs_flag": {
+      "name": "runic_router --purge_stubs",
+      "shipped": false
+    }
+  },
+  "proposed_dependencies_pending_implementation": [
+    {
+      "name": "01_KERNEL/audit_redact.py",
+      "kind": "script",
+      "used_by": [
+        "rollback_runbook.step_2_audit_recall",
+        "rollback_runbook.step_3_dead_letter"
+      ],
+      "shipped": false,
+      "manual_fallback": "grep-then-annotate loop against PROVENANCE_LEDGER.md",
+      "operator_decision_required": "ship the script before activation, OR accept manual-fallback workflow"
+    },
+    {
+      "name": "bin/sweep_inert_stubs.sh",
+      "kind": "cron_script",
+      "used_by": [
+        "expiry_policy.auto_deactivation_tiers"
+      ],
+      "shipped": false,
+      "manual_fallback": "operator-runs sweep manually per cadence",
+      "operator_decision_required": "ship the cron before activation, OR accept manual cadence"
+    },
+    {
+      "name": "runic_router --purge_stubs",
+      "kind": "cli_flag",
+      "used_by": [
+        "rollback_runbook.force_kill_escalation"
+      ],
+      "shipped": false,
+      "manual_fallback": "edit control_plane/runic_router.py::GCMN_STUB_RUNES directly and ship a guards-on PR",
+      "operator_decision_required": "land the flag before activation, OR accept emergency-edit fallback"
+    }
+  ],
+  "stub_runes_under_swap": [
+    {
+      "rune": "//SYNC_KBA_DATABASES_SQLCIPHER",
+      "spec_step": "step_1_auth_shield",
+      "knight_hint": "sir_sentinel"
+    },
+    {
+      "rune": "//LOCK_BIFROST_mTLS_KYBER768",
+      "spec_step": "step_3_topology_mount",
+      "knight_hint": "sir_heimdall",
+      "acknowledgement_required": "documentation_only_never_live"
+    },
+    {
+      "rune": "//ENGAGE_RUST_IRON_DAEMON",
+      "spec_step": "step_3_topology_mount",
+      "knight_hint": "sir_forge"
+    },
+    {
+      "rune": "//CRYSTALLIZE_GCMN_vMAX",
+      "spec_step": "step_4_cartridge_ignition",
+      "knight_hint": "sir_boris"
+    }
+  ],
+  "hitl_adjudication": [
+    {
+      "risk": "R1",
+      "label": "30B OOM on edge",
+      "severity": "HIGH",
+      "verdict": "BLOCKER",
+      "associated_gate": "G1_mobile_oom",
+      "risk_owner": "sir_boris",
+      "required_acceptance_artifact": "G1.cleared=true + signed BiFrost-30B OOM budget acknowledgment (Audex-2B mobile-fallback explicitly named)"
+    },
+    {
+      "risk": "R2",
+      "label": "Kyber-768 Wasm Edge limits",
+      "severity": "HIGH",
+      "verdict": "BLOCKER",
+      "associated_gate": "G2_kyber_wasm",
+      "risk_owner": "sir_sentinel",
+      "required_acceptance_artifact": "G2.cleared=true + interop test report (pqcrypto_bridge.py) + Vercel Edge route-limit measurement"
+    },
+    {
+      "risk": "R3",
+      "label": "Stub redundancy with deployed Bifrost+Kyber",
+      "severity": "MEDIUM",
+      "verdict": "TRACKER",
+      "associated_gate": "G7_bifrost_redundancy",
+      "risk_owner": "sir_heimdall",
+      "required_acceptance_artifact": "G7.cleared=true after operator asserts //LOCK_BIFROST_mTLS_KYBER768 will never execute live as an alternate stack"
+    },
+    {
+      "risk": "R4",
+      "label": "SQLCipher KDF undefined",
+      "severity": "MEDIUM",
+      "verdict": "BLOCKER",
+      "associated_gate": "G3_sqlcipher_kdf",
+      "risk_owner": "sir_sentinel",
+      "required_acceptance_artifact": "G3.cleared=true + ratified KDF rotation policy referenced from AGENTS.md"
+    },
+    {
+      "risk": "R5",
+      "label": "Mobile tier adjudication not wired",
+      "severity": "MEDIUM",
+      "verdict": "BLOCKER",
+      "associated_gate": "G8_mobile_adjudication",
+      "risk_owner": "sir_boris",
+      "required_acceptance_artifact": "G8.cleared=true after cybertronia-mobile gate demonstrably cascades to Audex-2B; integration test sha256 recorded"
+    },
+    {
+      "risk": "R6",
+      "label": "KBA_SERVICES vs KBA_DRONE namespace clash",
+      "severity": "LOW",
+      "verdict": "BLOCKER",
+      "associated_gate": "G4_kba_taxonomy",
+      "risk_owner": "sir_sentinel",
+      "required_acceptance_artifact": "G4.cleared=true (escalated from blocking:false → blocking:true) per docs/taxonomy/kba_disambiguation.md + AALIYAH→AMANI, AEGIS→ARGUS, KBA_SERVICES_NODE_PRIME→GCMN_SERVICES_NODE_PRIME renames applied"
+    }
+  ],
+  "hitl_summary": {
+    "blocker_count": 5,
+    "tracker_count": 1,
+    "ignorable_count": 0,
+    "blocker_risk_ids": [
+      "R1",
+      "R2",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "tracker_risk_ids": [
+      "R3"
+    ],
+    "ignorable_risk_ids": []
+  },
+  "gate_escalations": [
+    {
+      "gate_id": "G4_kba_taxonomy",
+      "from": "blocking=false",
+      "to": "blocking=true",
+      "reason": "HARD AALIYAH/AEGIS collisions surfaced by kba_disambiguation taxonomy ADR",
+      "triggering_doc": "docs/taxonomy/kba_disambiguation.md"
+    }
+  ],
+  "new_gates_proposed": [
+    {
+      "gate_id": "G7_bifrost_redundancy",
+      "trigger_step": "step_3_topology_mount",
+      "blocking": false,
+      "criteria": "//LOCK_BIFROST_mTLS_KYBER768 acknowledged documentation-only, never executes live",
+      "cleared": false,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "maps_to_risk": "R3",
+      "naming_note": "Renamed from the originally-drafted gate name (the draft used a generic 'stub' prefix; tightened to 'bifrost' for specificity matching R3's deployed artifact and to leave room for any future generic stub-tracking gate without naming collision)."
+    },
+    {
+      "gate_id": "G8_mobile_adjudication",
+      "trigger_step": "step_2_hardware_allocation",
+      "blocking": true,
+      "criteria": "cybertronia-mobile gate wired + Audex-2B fallback demonstrably cascades",
+      "cleared": false,
+      "decision_doc": "docs/adr/gcmn_stubs_activation.md",
+      "maps_to_risk": "R5"
+    }
+  ],
+  "G6_stub_activation_updated_criteria": "all six blocking gates cleared (G1, G2, G3, G4 [now blocking], G5, G8) + TRACKER G7 acknowledged + CAMELOT_GCMN_STUBS_ENABLED=1",
+  "dependency_order_linear": [
+    "ratify docs/taxonomy/kba_disambiguation.md (sets kba_disambiguation ADR ratified=true)",
+    "apply renames in control_plane/runic_router.py + tests: AALIYAH to AMANI, AEGIS to ARGUS, KBA_SERVICES_NODE_PRIME to GCMN_SERVICES_NODE_PRIME",
+    "set hitl_gates[G4_kba_taxonomy].cleared=true (now blocking=true post-escalation)",
+    "set hitl_gates[G6_stub_activation].cleared=true after all blocking gates cleared + G7 acknowledged",
+    "flip CAMELOT_GCMN_STUBS_ENABLED=1 (records activation_timestamp in PROVENANCE_LEDGER.md)"
+  ],
+  "expiry_policy": {
+    "kind": "sunset_ttl",
+    "sunset_days": 90,
+    "anchor": "activation_timestamp",
+    "anchor_value_reference_only": "2026-07-15T04:30:00Z (seed_generated_at — used for archival only, NOT for sunset calculation)",
+    "deadline_formula": "activation_timestamp + 90d",
+    "auto_deactivation_tiers": {
+      "tier_1_first_sunset_default": {
+        "recovery_model": "recoverable by re-flipping",
+        "actions": [
+          "unset CAMELOT_GCMN_STUBS_ENABLED in operator-managed .env",
+          "set Plan.json.status to SUNSET_TIER1",
+          "append sweep_tier1_<timestamp> entry to PROVENANCE_LEDGER.md",
+          "set ADR+JSON expired=true with expired_reason='tier1 sunset reached without operator ratification'"
+        ]
+      },
+      "tier_2_consecutive_unrenewed_sunset": {
+        "recovery_model": "non-recoverable — code-level prune required to restore",
+        "actions": [
+          "same as tier_1, plus",
+          "permanently remove 4 entries from control_plane/runic_router.py::GCMN_STUB_RUNES (prune_<timestamp> in PROVENANCE_LEDGER.md)",
+          "set Plan.json.status to ARCHIVED_ABANDONED",
+          "set expired_reason='tier2 sunset reached after consecutive unrecovered cycle'"
+        ]
+      }
+    },
+    "renewal_path": "Activation Sunset Renewal (ASR) record appended to PROVENANCE_LEDGER.md; field sunset_days can be re-signed by operator; consecutive-cycle counter resets to zero on renewal",
+    "implicit_rollover_allowed": false
+  },
+  "rollback_runbook": {
+    "step_1_flip": {
+      "command": "unset CAMELOT_GCMN_STUBS_ENABLED",
+      "verification_command": "python -m control_plane.runic_router --rune //CRYSTALLIZE_GCMN_vMAX --task rollback-smoke",
+      "expected_outcome": "directive=UNKNOWN_RUNE; metadata.warning='ambient env unflagged'"
+    },
+    "step_2_audit_recall": {
+      "command": "python 01_KERNEL/audit_redact.py --namespace GCMN_STUB --tombstone STUB_REVOKED",
+      "marker": "STUB_REVOKED",
+      "behavior": "appends tombstone to each [GCMN-STUB] log line; SIEM filters skip; forensic source-of-truth preserved"
+    },
+    "step_3_dead_letter": {
+      "command": "python 01_KERNEL/audit_redact.py --namespace GCMN_STUB --tombstone STUB_REVOKED --relocate /var/camelot/cold/gcmn_stub_revoked/",
+      "opt_in": true,
+      "behavior": "physically relocates tombstoned lines to cold archive; relocation recorded in PROVENANCE_LEDGER.md"
+    },
+    "force_kill_escalation": {
+      "command": "python -m control_plane.runic_router --purge_stubs",
+      "witness_env_var": "CAMELOT_OPS_EMERGENCY=1",
+      "behavior": "emits STUB_PURGED envelope, disables GCMN_STUBS path for session",
+      "tombstone": "STUB_PURGED"
+    }
+  },
+  "routing_policy": {
+    "ambient_default": "UNKNOWN_escalation",
+    "flag_on_default": "stub_sealed_envelope",
+    "flag_on_envelope_shape_required": {
+      "task_id_format": "^gcmn-stub-[0-9a-f]{8}$",
+      "queued": false,
+      "metadata.action": "gcmn_stub_exec",
+      "metadata.status": "STUB_INERT",
+      "metadata.gate": "CAMELOT_GCMN_STUBS_ENABLED=1",
+      "metadata.next_action": "HUMAN_REVIEW_REQUIRED",
+      "metadata.governance.fingerprint": "νKG_CRYSTAL_OMEGA_STANDARDIZED"
+    },
+    "tombstone_transitions": [
+      {
+        "from": "STUB_INERT",
+        "to": "STUB_REVOKED",
+        "trigger": "step_2_audit_recall"
+      },
+      {
+        "from": "STUB_REVOKED",
+        "to": "STUB_PURGED",
+        "trigger": "force_kill_escalation"
+      }
+    ]
+  },
+  "notes": [
+    "This activation ADR is HITL-ratified=false until the operator signs off — see Plan.json Gate G6_stub_activation.",
+    "Activation is fundamentally inert: the flag never causes a non-read action. Activation's sole purpose is to make audit-visible sealed envelopes dispatchable.",
+    "Expiry at 90 days is conservative; the goal is to prevent active-maintenance debt, not to enforce industry-wide sunset norms.",
+    "The force-kill escalation (--purge_stubs) requires CAMELOT_OPS_EMERGENCY=1 in env; this is a deliberate witness requirement, not a bug.",
+    "No secrets present: brvk_* virtual keys are referenced stylistically only — none are emitted into this artifact or the sibling markdown."
+  ]
+}

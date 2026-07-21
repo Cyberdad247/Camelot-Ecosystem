@@ -43,7 +43,7 @@ dependencies = [
 
     # ── Cloud / Infra ──────────────────────────────────────────────────────
     "modal",
-    "appwrite",
+    "appwrite>=2.0.0,<3.0.0",
     "replicate",
     "cryptography>=41.0",
     "PyJWT[crypto]",
@@ -151,7 +151,7 @@ target-version = ["py313"]
 
 [tool.pytest.ini_options]
 cache_dir = "data/.pytest_cache"
-addopts   = "--basetemp=data/.pytest_temp --import-mode=importlib"
+addopts   = "--basetemp=data/.pytest_temp --import-mode=importlib --override-ini=tmp_path_retention_policy=none"
 # Canonical CAMELOT test suites only. Without these, pytest sweeps 464 test_*.py
 # across vendored references, git worktrees, and build output, producing 65
 # collection errors from basename collisions and missing 3rd-party deps.

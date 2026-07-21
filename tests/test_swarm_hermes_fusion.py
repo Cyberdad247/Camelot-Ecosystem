@@ -8,7 +8,7 @@ sys.path.insert(0, str(CAMELOT))
 
 spec = _ilu.spec_from_file_location(
     "nano_swarm_runtime",
-    CAMELOT / "control_plane" / "nano_swarm_runtime.py",
+    CAMELOT / "control_plane" / "infra" / "nano_swarm_runtime.py",
 )
 _mod = _ilu.module_from_spec(spec)
 sys.modules["nano_swarm_runtime"] = _mod

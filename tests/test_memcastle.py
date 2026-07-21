@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-_MC_PATH = Path(__file__).resolve().parent.parent / "control_plane" / "memcastle.py"
+_MC_PATH = Path(__file__).resolve().parent.parent / "control_plane" / "infra" / "memcastle.py"
 _spec = importlib.util.spec_from_file_location("memcastle", _MC_PATH)
 memcastle = importlib.util.module_from_spec(_spec)
 sys.modules["memcastle"] = memcastle

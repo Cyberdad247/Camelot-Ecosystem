@@ -53,7 +53,7 @@ def test_p1_colony_escalates_critical():
 # ── Pillar 2: Hermes Bus ──────────────────────────────────────────────────────
 
 def test_p2_hermes_bus_channels():
-    spec = _ilu.spec_from_file_location("hermes_bridge", CAMELOT / "control_plane" / "hermes_bridge.py")
+    spec = _ilu.spec_from_file_location("hermes_bridge", CAMELOT / "control_plane" / "infra" / "hermes_bridge.py")
     mod = _ilu.module_from_spec(spec)
     sys.modules["hermes_bridge"] = mod
     spec.loader.exec_module(mod)
@@ -82,7 +82,7 @@ def test_p3_galahad_api():
 # ── Pillar 4: Dependency Engine ───────────────────────────────────────────────
 
 def test_p4_dependency_engine_audits_repo():
-    dep_mod = _load("control_plane/dependency_engine.py", "p8_dep_engine")
+    dep_mod = _load("control_plane/infra/dependency_engine.py", "p8_dep_engine")
     eng = dep_mod.DependencyEngine(repo_root=CAMELOT, hermes_enabled=False)
     result = eng.audit()
     assert result.total_count > 0
@@ -92,7 +92,7 @@ def test_p4_dependency_engine_audits_repo():
 # ── Pillar 5: Compression Nexus ───────────────────────────────────────────────
 
 def test_p5_compression_nexus_context():
-    cx_mod = _load("control_plane/compression_nexus.py", "p8_cx")
+    cx_mod = _load("control_plane/infra/compression_nexus.py", "p8_cx")
     cn = cx_mod.CompressionNexus(hermes_enabled=False)
     # Multi-section text: IDENTITY (priority) + NOISE (non-priority, many lines)
     big_ctx = "\n".join(
@@ -105,7 +105,7 @@ def test_p5_compression_nexus_context():
 
 
 def test_p5_compression_nexus_memory_roundtrip():
-    cx_mod = sys.modules.get("p8_cx") or _load("control_plane/compression_nexus.py", "p8_cx2")
+    cx_mod = sys.modules.get("p8_cx") or _load("control_plane/infra/compression_nexus.py", "p8_cx2")
     cn = cx_mod.CompressionNexus(hermes_enabled=False)
     data = {"sovereign": True, "items": list(range(50))}
     r = cn.compress_memory(data)
@@ -127,7 +127,7 @@ def test_p6_file_organization_human_gate():
 # ── Pillar 7: SWARM + Hermes Fusion ──────────────────────────────────────────
 
 def test_p7_omega_swarm_all_nodes():
-    ns_mod = _load("control_plane/nano_swarm_runtime.py", "p8_nsw")
+    ns_mod = _load("control_plane/infra/nano_swarm_runtime.py", "p8_nsw")
     swarm = ns_mod.OmegaSwarm()
     assert len(swarm.nodes) == 5
     swarm.dispatch("colony.risk", {"risk_score": 100.0, "delta": 20.0})
@@ -141,7 +141,7 @@ def test_p7_omega_swarm_all_nodes():
 def test_p8_sir_socrates_northstar_gate():
     d = tempfile.mkdtemp()
     try:
-        ss_mod = _load("control_plane/sir_socrates.py", "p8_socrates")
+        ss_mod = _load("control_plane/core/sir_socrates.py", "p8_socrates")
         sc = ss_mod.SirSocrates(
             verdicts_path=Path(d) / "verdicts.jsonl",
             log_verdicts=True,

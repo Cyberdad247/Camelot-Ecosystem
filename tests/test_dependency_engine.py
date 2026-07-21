@@ -12,7 +12,7 @@ sys.path.insert(0, str(CAMELOT))
 
 spec = _ilu.spec_from_file_location(
     "dependency_engine",
-    CAMELOT / "control_plane" / "dependency_engine.py",
+    CAMELOT / "control_plane" / "infra" / "dependency_engine.py",
 )
 _dep_mod = _ilu.module_from_spec(spec)
 sys.modules["dependency_engine"] = _dep_mod

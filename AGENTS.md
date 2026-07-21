@@ -9,7 +9,7 @@ Claude Code harness. Read this file completely before taking any action.
 ## Universal Bootstrap Adapter
 
 The grounded OMEGA Ancestral bootstrap for this repository is
-`UNIVERSAL_BOOTSTRAP_UKG_NANO.md`. Its shared local backplane lives under
+[`docs/reference/UNIVERSAL_BOOTSTRAP_UKG_NANO.md`](docs/reference/UNIVERSAL_BOOTSTRAP_UKG_NANO.md). Its shared local backplane lives under
 `.agent/`:
 
 - `.agent/local_env.md`

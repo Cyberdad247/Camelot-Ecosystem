@@ -7,7 +7,7 @@ _CP = Path(__file__).resolve().parent.parent / "control_plane"
 
 
 def _load(name):
-    spec = importlib.util.spec_from_file_location(name, _CP / f"{name}.py")
+    spec = importlib.util.spec_from_file_location(name, _CP / "infra" / f"{name}.py")
     mod = importlib.util.module_from_spec(spec)
     sys.modules[name] = mod
     spec.loader.exec_module(mod)
