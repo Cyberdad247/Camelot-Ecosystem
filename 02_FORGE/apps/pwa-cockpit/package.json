@@ -5,8 +5,9 @@
     "scripts": {
         "dev": "next dev --port 3005",
         "icons": "node scripts/generate-icons.mjs",
+        "voice-worklet": "node scripts/sync-voice-worklet.mjs",
         "service-worker": "node scripts/generate-service-worker.mjs",
-        "prebuild": "npm run icons && npm run service-worker",
+        "prebuild": "npm run voice-worklet && npm run icons && npm run service-worker",
         "build": "next build",
         "start": "next start --port 3005",
         "host:run": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Run-PwaCockpit.ps1",

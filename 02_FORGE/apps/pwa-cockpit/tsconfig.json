@@ -25,6 +25,9 @@
     "paths": {
       "@/*": [
         "./src/*"
+      ],
+      "@camelot/voice-first-runtime": [
+        "../../packages/voice-first-runtime/src/index.ts"
       ]
     }
   },

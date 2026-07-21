@@ -334,6 +334,50 @@ test("Phase 5 voice pipeline is governed by MicArbiter, TTS router, and the 7-st
   assert.match(shell, /source\.stop\(\)/);
 });
 
+test("Voice-first cartridge uses bounded PCM frames and a loopback-only OmniVoice bridge", async () => {
+  const hook = await source("src/hooks/use-voice-first-runtime.ts");
+  const route = await source("src/app/api/voice/frames/route.ts");
+  const cartridge = await source("src/cartridges/interphase/interphase-cartridge.tsx");
+  const config = await source("next.config.ts");
+  const runtime = await source("../../packages/voice-first-runtime/src/voice-first-runtime.ts");
+  const ring = await source("../../packages/voice-first-runtime/src/shared-pcm-ring.ts");
+  const worklet = await source("public/voice-capture.worklet.js");
+  const omniVoice = await source("../../KINETIC_ARMORY/omnivoice-router/omnivoice-router.ts");
+  const worker = await source("../../../control_plane/worker.py");
+
+  assert.match(hook, /new VoiceFirstRuntime/);
+  assert.match(hook, /memory exceeds the 7\.2 GB voice gate/);
+  assert.match(hook, /at least 800 MB free RAM/);
+  assert.match(hook, /pendingDiscontinuityRef/);
+  assert.match(route, /MAX_FRAME_BYTES = 3_200/);
+  assert.match(route, /operatorCapabilities\(request\)\.includes\("voice\.use"\)/);
+  assert.match(route, /127\.0\.0\.1/);
+  assert.match(route, /AbortSignal\.timeout\(750\)/);
+  assert.match(route, /isCrossSiteRequest/);
+  assert.match(runtime, /AudioWorkletNode/);
+  assert.match(runtime, /shared-ring/);
+  assert.match(runtime, /message-port/);
+  assert.match(runtime, /maxUtteranceMs \?\? 30_000/);
+  assert.match(ring, /SharedArrayBuffer/);
+  assert.match(worklet, /camelot-voice-capture/);
+  assert.match(omniVoice, /req\.url === "\/ingest_pcm"/);
+  assert.match(omniVoice, /isLoopback\(remoteAddr\)/);
+  assert.match(omniVoice, /MAX_HTTP_SESSIONS = 16/);
+  assert.match(omniVoice, /server\.listen\(PORT, "127\.0\.0\.1"/);
+  assert.match(omniVoice, /AUDIO_RETENTION_MS = 5 \* 60_000/);
+  assert.match(omniVoice, /purgeExpiredAudio\(audioDir, now\)/);
+  assert.match(worker, /audio_path\.relative_to\(audio_root\)/);
+  assert.match(worker, /audio_path\.unlink\(missing_ok=True\)/);
+  assert.match(config, /Cross-Origin-Embedder-Policy/);
+  assert.match(config, /require-corp/);
+  assert.match(cartridge, /useVoiceFirstRuntime\(status\)/);
+  assert.match(cartridge, /Start capture/);
+  assert.match(cartridge, /voice\.interrupt\(\)/);
+  for (const file of [hook, route, runtime, ring]) {
+    assert.doesNotMatch(file, /child_process|powershell|cmd\.exe|exec\(/i);
+  }
+});
+
 test("Anya recommends an explainable qualified council and keeps convening governed", async () => {
   const recommendations = await source("src/lib/knight-recommendations.ts");
   const intelligence = await source("src/cartridges/intelligence/intelligence-cartridge.tsx");
