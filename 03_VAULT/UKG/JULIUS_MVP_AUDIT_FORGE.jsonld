@@ -1,0 +1,39 @@
+{
+    "@context": "https://camelot.os/ukg/v1",
+    "@type": "KnowledgeCrystal",
+    "id": "JULIUS_MVP_AUDIT_FORGE",
+    "status": "EXECUTABLE",
+    "version": "v1.0",
+    "mantra": "Zero entropy. Merciless audit.",
+    "execution_manifest": {
+        "P0": [
+            {
+                "issue": "Dead code / unused imports (F401)",
+                "remediation": "uv tool run ruff check . --select F401 --fix",
+                "dag_node": "T1"
+            },
+            {
+                "issue": "Vulnerabilities in package.json",
+                "remediation": "npm audit fix --force",
+                "dag_node": "T2"
+            },
+            {
+                "issue": "O(N^2) Loop Optimization in Ouroboros",
+                "remediation": "sed -i 's/\"02_FORGE\\/kinetic\\/pmcp\",//g' Cargo.toml && cd 01_KERNEL/reasoning/ouroboros_engine && cargo build --release",
+                "dag_node": "T3"
+            }
+        ],
+        "P1": [
+            {
+                "issue": "Technical Debt - 3000+ TODO markers",
+                "remediation": "grep -rn 'TODO' . > todo_manifest.txt",
+                "dag_node": "T4"
+            }
+        ],
+        "production_ready_hardening": {
+            "docker": "docker build -t camelot-os:mvp -f Dockerfile .",
+            "ci_cd": "Created .github/workflows/deploy.yml"
+        }
+    },
+    "commands_dag": "uv tool run ruff check . --select F401 --fix && npm audit fix --force && sed -i 's/\"02_FORGE\\/kinetic\\/pmcp\",//g' Cargo.toml && cd 01_KERNEL/reasoning/ouroboros_engine && cargo build --release"
+}
