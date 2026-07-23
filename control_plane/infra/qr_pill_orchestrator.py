@@ -17,6 +17,7 @@ import hashlib
 import json
 import logging
 import os
+import shlex
 import subprocess
 import time
 from dataclasses import asdict, dataclass, field
@@ -210,10 +211,11 @@ class QRPillOrchestrator:
             env["CAMELOT_NODE_ID"] = self.crystal.node_id
             env["CAMELOT_SERVICE_NAME"] = name
 
-            # Start process
+            # Start process safely using shlex and without shell
+            cmd_list = shlex.split(service_def.command)
             proc = subprocess.Popen(
-                service_def.command,
-                shell=True,
+                cmd_list,
+                shell=False,
                 env=env,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
