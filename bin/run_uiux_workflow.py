@@ -5,7 +5,9 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import shlex
 import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -28,13 +30,16 @@ class WorkflowRunner:
         if task_type == "SIMPLE":
             cmd = str(task["command"])
             cwd = str(task.get("cwd", "."))
-            # WARNING: shell=True is required here because cmd is a shell-style
-            # string from the workflow JSON. Only run workflow files from trusted,
-            # access-controlled paths — never from user-supplied input.
+
+            # Avoid shell=True to prevent command injection vulnerabilities.
+            # Parse the shell-style string into a list of arguments.
+            is_posix = sys.platform != "win32"
+            cmd_args = shlex.split(cmd, posix=is_posix)
+
             process = subprocess.run(
-                cmd,
+                cmd_args,
                 cwd=cwd,
-                shell=True,
+                shell=False,
                 capture_output=True,
                 text=True,
             )
