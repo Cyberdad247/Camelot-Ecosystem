@@ -7,19 +7,23 @@ Implements the Recursive Search & Reflection Engine for Chronos.
 Allows the system to critique its own retrieval results and generate follow-up queries.
 """
 
+import json
 import logging
-from typing import List, Dict, Any
+import re
+from typing import Any, Dict, List
+
 from integrations.merlin_haystack_generator import MerlinGenerator
 
 logger = logging.getLogger(__name__)
+
 
 class ReflectionEngine:
     """
     Analyzes RAG results and determines if further searching is needed.
     """
-    
+
     def __init__(self):
-        self.evaluator = MerlinGenerator(mode="Reasoning") # Use reasoning mode for critique
+        self.evaluator = MerlinGenerator(mode="Reasoning")  # Use reasoning mode for critique
 
     def evaluate_coverage(self, query: str, documents: List[Dict[str, Any]]) -> Dict[str, Any]:
         """
@@ -33,9 +37,9 @@ class ReflectionEngine:
         # Helper to get content from dict or object
         def get_content(d):
             return d.get("content", "") if isinstance(d, dict) else getattr(d, "content", str(d))
-            
+
         context_preview = "\n".join([get_content(d)[:200] + "..." for d in documents[:3]])
-        
+
         prompt = f"""
         [SYSTEM: REFLECTION_AGENT]
         Analyze if the provided documents are sufficient to answer the user query.
@@ -57,30 +61,42 @@ class ReflectionEngine:
             "needs_recursion": <bool>
         }}
         """
-        
+
         try:
-            # In a real implementation, we would parse the JSON output from the LLM.
-            # For this MVP, we will simulate a "Check" or use a structured parser if available.
-            # Since MerlinGenerator returns string, we'll do a simple heuristic or mock.
-            
-            # TODO: Connect to actual LLM for critique. 
-            # For Phase 3 MVP, we assume if docs < 2 or content is short, we recurse.
-            
-            score = 10
-            missing = "None"
-            needs_recursion = False
-            
-            if len(documents) < 2:
-                score = 5
-                missing = "Low document count"
-                needs_recursion = True
-            
-            return {
-                "score": score,
-                "missing": missing,
-                "needs_recursion": needs_recursion
-            }
-            
+            # Call actual LLM for critique
+            response = self.evaluator.run(prompt=prompt)
+            reply = response.get("replies", [""])[0]
+
+            # Attempt to extract JSON from the reply
+            json_match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", reply, re.DOTALL)
+            if json_match:
+                reply_json_str = json_match.group(1)
+            else:
+                # Fallback to finding any dictionary-like structure
+                dict_match = re.search(r"(\{.*?\})", reply, re.DOTALL)
+                reply_json_str = dict_match.group(1) if dict_match else reply
+
+            try:
+                result = json.loads(reply_json_str)
+                return {
+                    "score": int(result.get("score", 0)),
+                    "missing": str(result.get("missing", "Parse Error")),
+                    "needs_recursion": bool(result.get("needs_recursion", False)),
+                }
+            except json.JSONDecodeError:
+                logger.error(f"Failed to parse LLM response as JSON: {reply}")
+                # Fallback heuristic if JSON parsing fails
+                score = 10
+                missing = "None"
+                needs_recursion = False
+
+                if len(documents) < 2:
+                    score = 5
+                    missing = "Low document count"
+                    needs_recursion = True
+
+                return {"score": score, "missing": missing, "needs_recursion": needs_recursion}
+
         except Exception as e:
             logger.error(f"Reflection failed: {e}")
             return {"score": 0, "missing": "Error", "needs_recursion": False}
