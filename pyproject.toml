@@ -13,7 +13,6 @@ dependencies = [
     "requests>=2.28.0",
     "aiohttp>=3.8.0",
     "aiofiles>=23.0.0",
-
     # ── LLM / AI ───────────────────────────────────────────────────────────
     "openai>=1.0.0",
     "google-generativeai",
@@ -22,46 +21,39 @@ dependencies = [
     "langgraph>=1.2.0",
     "litellm>=1.75.5",
     "browser-use>=0.1",
-
     # ── MCP / Agent tooling ────────────────────────────────────────────────
     "mcp>=1.26.0",
     "typer",
     "tenacity",
     "jinja2",
-
     # ── Memory / Graph ─────────────────────────────────────────────────────
     "faiss-cpu>=1.7.4",
     "networkx>=3.0",
     "numpy>=1.24.0",
-
     # ── Data / Config ──────────────────────────────────────────────────────
     "pydantic>=2.0",
     "pyyaml>=6.0",
     "python-dotenv>=1.2.2",
     "redis",
     "supabase>=2.28.3",
-
     # ── Cloud / Infra ──────────────────────────────────────────────────────
     "modal",
     "appwrite>=2.0.0,<3.0.0",
     "replicate",
     "cryptography>=41.0",
     "PyJWT[crypto]",
-
     # ── Scraping / Web ─────────────────────────────────────────────────────
     "playwright>=1.40.0",
     "beautifulsoup4>=4.12.0",
     "trafilatura>=1.0.0",
     "html2text>=2020.1.16",
     "crawl4ai>=0.8.0",
-
     # ── CLI / TUI ──────────────────────────────────────────────────────────
     "rich>=13.0",
     "colorama",
     "textual",
     "prompt_toolkit",
     "platformdirs",
-
     # ── Utilities ──────────────────────────────────────────────────────────
     "psutil>=5.9.0",
     "prometheus-client>=0.19.0",
@@ -70,6 +62,7 @@ dependencies = [
     "gradio",
     "pytest",
     "pytest-rerunfailures>=15.0",
+    "langchain-text-splitters>=1.1.2",
 ]
 
 [project.optional-dependencies]

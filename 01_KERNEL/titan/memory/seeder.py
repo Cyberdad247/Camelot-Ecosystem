@@ -9,13 +9,16 @@ ETL (Extract, Transform, Load) pipelines to hydrate the memory stack:
 - Code Analysis: Index repositories into specialized graph sub-structures
 """
 
-import os
 import hashlib
-from typing import Dict, Any, Optional
+import os
 from datetime import datetime
+from typing import Any, Dict, Optional
 
-from .titan_schemas import GraphNode, GraphNodeProvenance, GraphEdge
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 from .titan_omega import TitanOmega
+from .titan_schemas import GraphEdge, GraphNode, GraphNodeProvenance
+
 
 class TitanSeeder:
     """
@@ -34,9 +37,13 @@ class TitanSeeder:
         """
         print(f"[Titan-Seeder] Seeding document: {source_id}")
         
-        # 1. Chunking for Omega-Vault (Simple paragraph-based for now)
-        # TODO: Implement semantic chunking
-        chunks = [c.strip() for c in content.split("\n\n") if len(c.strip()) > 50]
+        # 1. Chunking for Omega-Vault (Semantic chunking via RecursiveCharacterTextSplitter)
+        splitter = RecursiveCharacterTextSplitter(
+            chunk_size=1000,
+            chunk_overlap=150,
+        )
+        raw_chunks = splitter.split_text(content)
+        chunks = [c.strip() for c in raw_chunks if len(c.strip()) > 50]
         
         for i, chunk in enumerate(chunks):
             chunk_metadata = (metadata or {}).copy()
