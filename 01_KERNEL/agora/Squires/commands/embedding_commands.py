@@ -270,9 +270,10 @@ async def rebuild_embeddings_command(
 
         # Process sources
         logger.info(f"\nProcessing {len(items['sources'])} sources...")
+        sources_by_id = {str(s.id): s for s in await Source.get_many(items["sources"])} if items["sources"] else {}
         for idx, source_id in enumerate(items["sources"], 1):
             try:
-                source = await Source.get(source_id)
+                source = sources_by_id.get(source_id)
                 if not source:
                     logger.warning(f"Source {source_id} not found, skipping")
                     failed_items += 1
@@ -290,9 +291,10 @@ async def rebuild_embeddings_command(
 
         # Process notes
         logger.info(f"\nProcessing {len(items['notes'])} notes...")
+        notes_by_id = {str(n.id): n for n in await Note.get_many(items["notes"])} if items["notes"] else {}
         for idx, note_id in enumerate(items["notes"], 1):
             try:
-                note = await Note.get(note_id)
+                note = notes_by_id.get(note_id)
                 if not note:
                     logger.warning(f"Note {note_id} not found, skipping")
                     failed_items += 1
@@ -310,9 +312,12 @@ async def rebuild_embeddings_command(
 
         # Process insights
         logger.info(f"\nProcessing {len(items['insights'])} insights...")
+        insights_by_id = (
+            {str(i.id): i for i in await SourceInsight.get_many(items["insights"])} if items["insights"] else {}
+        )
         for idx, insight_id in enumerate(items["insights"], 1):
             try:
-                insight = await SourceInsight.get(insight_id)
+                insight = insights_by_id.get(insight_id)
                 if not insight:
                     logger.warning(f"Insight {insight_id} not found, skipping")
                     failed_items += 1

@@ -91,6 +91,39 @@ class ObjectModel(BaseModel):
             raise NotFoundError(f"Object with id {id} not found - {str(e)}")
 
     @classmethod
+    async def get_many(cls: Type[T], ids: List[str]) -> List[T]:
+        if not ids:
+            return []
+
+        try:
+            # If we're calling from a specific subclass and IDs match, use that class
+            target_class: Type[T] = cls
+            if not cls.table_name:
+                # Otherwise, find the appropriate subclass based on table_name
+                table_name = ids[0].split(":")[0] if ":" in ids[0] else ids[0]
+                found_class = cls._get_class_by_table_name(table_name)
+                if not found_class:
+                    raise InvalidInputError(f"No class found for table {table_name}")
+                target_class = cast(Type[T], found_class)
+
+            ensure_ids = [ensure_record_id(id_val) for id_val in ids]
+            result = await repo_query("SELECT * FROM $ids", {"ids": ensure_ids})
+
+            objects = []
+            if result:
+                for obj in result:
+                    try:
+                        objects.append(target_class(**obj))
+                    except Exception as e:
+                        logger.critical(f"Error creating object: {str(e)}")
+
+            return objects
+        except Exception as e:
+            logger.error(f"Error fetching objects: {str(e)}")
+            logger.exception(e)
+            raise DatabaseOperationError(e)
+
+    @classmethod
     def _get_class_by_table_name(cls, table_name: str) -> Optional[Type["ObjectModel"]]:
         """Find the appropriate subclass based on table_name."""
 
