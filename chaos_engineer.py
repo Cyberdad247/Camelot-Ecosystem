@@ -351,9 +351,8 @@ class ChaosEngineer:
 
     async def _ssh_exec(self, host: str, command: str) -> str:
         """Execute command on remote host via SSH"""
-        full_cmd = f"ssh root@{host} {command}"
-        process = await asyncio.create_subprocess_shell(
-            full_cmd,
+        process = await asyncio.create_subprocess_exec(
+            "ssh", f"root@{host}", command,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE
         )
