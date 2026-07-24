@@ -490,9 +490,7 @@ def iter_metadata(root: Path, stats: WalkStats) -> Iterator[FileMeta]:
         raise FileNotFoundError(f"scan root does not exist: {root}")
     root = root.resolve()
 
-    def _emit(p: Path) -> Iterator[FileMeta]:
-        name = p.name
-        rel  = str(p.relative_to(root)).replace("\\", "/")
+    def _emit(p: Path, rel: str, name: str) -> Iterator[FileMeta]:
         if is_excluded(rel, name):
             stats.excl_hits += 1
             return
@@ -506,29 +504,33 @@ def iter_metadata(root: Path, stats: WalkStats) -> Iterator[FileMeta]:
             memory_recheck(stats, label=f"after {stats.files_seen} files")
         yield meta
 
-    stack: list[Path] = [root]
+    stack: list[tuple[Path, str]] = [(root, "")]
     while stack:
-        here = stack.pop()
+        here, rel_here = stack.pop()
         try:
-            entries = list(os.scandir(here))
+            it = os.scandir(here)
         except (OSError, PermissionError):
             continue
-        for entry in entries:
-            p = Path(entry.path)
-            if entry.is_dir(follow_symlinks=False):
-                # FIX-1: pre-check exclusion BEFORE descending so node_modules,
-                # target, __pycache__, .git, dist, build, venv, .venv, etc. are
-                # not enumerated at all. This is the difference between an
-                # 800 MiB safe run and a floor-trip on the first monorepo hit.
-                rel_self = str(p.relative_to(root)).replace("\\", "/")
-                if is_excluded(rel_self, p.name):
-                    stats.excl_hits += 1
-                    continue
-                yield from _emit(p)
-                if entry.is_dir(follow_symlinks=True):
-                    stack.append(p)
-            else:
-                yield from _emit(p)
+
+        with it:
+            for entry in it:
+                p = Path(entry.path)
+                name = entry.name
+                rel_self = f"{rel_here}/{name}" if rel_here else name
+
+                if entry.is_dir(follow_symlinks=False):
+                    # FIX-1: pre-check exclusion BEFORE descending so node_modules,
+                    # target, __pycache__, .git, dist, build, venv, .venv, etc. are
+                    # not enumerated at all. This is the difference between an
+                    # 800 MiB safe run and a floor-trip on the first monorepo hit.
+                    if is_excluded(rel_self, name):
+                        stats.excl_hits += 1
+                        continue
+                    yield from _emit(p, rel_self, name)
+                    if entry.is_dir(follow_symlinks=True):
+                        stack.append((p, rel_self))
+                else:
+                    yield from _emit(p, rel_self, name)
 
 
 # ---------------------------------------------------------------------------
