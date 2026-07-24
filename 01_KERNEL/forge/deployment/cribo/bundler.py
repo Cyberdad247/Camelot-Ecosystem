@@ -71,10 +71,7 @@ class CriboBundler:
 
     def _is_within_search_paths(self, resolved: Path) -> bool:
         """Reject any path that escapes all declared search roots."""
-        return any(
-            str(resolved).startswith(str(p.resolve()))
-            for p in self.search_paths
-        )
+        return any(str(resolved).startswith(str(p.resolve())) for p in self.search_paths)
 
     def _check_local_import(self, module_name: str, local_modules: List[str]):
         """Check if import is local and add to list"""
@@ -144,32 +141,42 @@ class CriboBundler:
         bundled_content.append(
             """
 import hashlib as _hashlib
+import importlib.abc as _abc
+import importlib.machinery as _machinery
 
-class CriboLoader:
+class CriboLoader(_abc.SourceLoader):
     def __init__(self, registry, hashes):
         self.registry = registry
         self._hashes = hashes
 
-    def find_module(self, fullname, path=None):
-        if fullname in self.registry:
-            return self
-        return None
+    def get_filename(self, fullname):
+        return f"<cribo:{fullname}>"
 
-    def load_module(self, fullname):
-        if fullname in sys.modules:
-            return sys.modules[fullname]
-        code = self.registry[fullname]
-        expected = self._hashes.get(fullname, "")
-        actual = _hashlib.sha256(code.encode()).hexdigest()
-        if actual != expected:
-            raise ImportError(
-                f"[Cribo] Integrity check failed for '{fullname}': "
-                f"bundle may have been tampered with"
-            )
-        module = ModuleType(fullname)
-        sys.modules[fullname] = module
-        exec(compile(code, fullname, "exec"), module.__dict__)
-        return module
+    def get_data(self, path):
+        fullname = path.replace("<cribo:", "").replace(">", "")
+        if fullname in self.registry:
+            return self.registry[fullname].encode("utf-8")
+        raise ImportError(f"Cannot load data for {fullname}")
+
+class CriboFinder(_abc.MetaPathFinder):
+    def __init__(self, registry, hashes):
+        self.registry = registry
+        self._hashes = hashes
+        self.loader = CriboLoader(registry, hashes)
+
+    def find_spec(self, fullname, path, target=None):
+        if fullname in self.registry:
+            code = self.registry[fullname]
+            expected = self._hashes.get(fullname, "")
+            actual = _hashlib.sha256(code.encode()).hexdigest()
+            if actual != expected:
+                raise ImportError(
+                    f"[Cribo] Integrity check failed for '{fullname}': "
+                    f"bundle may have been tampered with"
+                )
+            is_package = any(k.startswith(fullname + ".") for k in self.registry.keys())
+            return _machinery.ModuleSpec(fullname, self.loader, is_package=is_package)
+        return None
 
 # Registry of bundled code
 _cribo_registry = {}
@@ -187,7 +194,7 @@ _cribo_hashes = {}
         # Register loader with both registry and hash manifest
         bundled_content.append(
             """
-sys.meta_path.append(CriboLoader(_cribo_registry, _cribo_hashes))
+sys.meta_path.append(CriboFinder(_cribo_registry, _cribo_hashes))
 """
         )
 
