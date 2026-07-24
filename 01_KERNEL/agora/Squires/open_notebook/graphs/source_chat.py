@@ -2,6 +2,7 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
 import sqlite3
+from datetime import datetime
 from typing import Annotated, Dict, List, Optional
 
 from ai_prompter import Prompter
@@ -101,6 +102,7 @@ def call_model_with_source_context(state: SourceChatState, config: RunnableConfi
         "insights": [insight.model_dump() for insight in insights] if insights else [],
         "context": formatted_context,
         "context_indicators": context_indicators,
+        "current_timestamp": datetime.now().strftime("%Y%m%d%H%M%S"),
     }
 
     # Apply the source_chat prompt template

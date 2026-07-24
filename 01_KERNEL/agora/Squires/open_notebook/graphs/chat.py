@@ -2,6 +2,7 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
 import sqlite3
+from datetime import datetime
 from typing import Annotated, Optional
 
 from ai_prompter import Prompter
@@ -25,7 +26,9 @@ class ThreadState(TypedDict):
 
 
 def call_model_with_messages(state: ThreadState, config: RunnableConfig) -> dict:
-    system_prompt = Prompter(prompt_template="chat").render(data=state)  # type: ignore[arg-type]
+    prompt_data = dict(state)
+    prompt_data["current_timestamp"] = datetime.now().strftime("%Y%m%d%H%M%S")
+    system_prompt = Prompter(prompt_template="chat").render(data=prompt_data)  # type: ignore[arg-type]
     payload = [SystemMessage(content=system_prompt)] + state.get("messages", [])
     model_id = config.get("configurable", {}).get("model_id") or state.get("model_override")
 

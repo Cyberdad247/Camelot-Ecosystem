@@ -1,6 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import operator
+from datetime import datetime
 from typing import Annotated, List
 
 from ai_prompter import Prompter
@@ -46,8 +47,10 @@ class ThreadState(TypedDict):
 
 async def call_model_with_messages(state: ThreadState, config: RunnableConfig) -> dict:
     parser = PydanticOutputParser(pydantic_object=Strategy)
+    prompt_data = dict(state)
+    prompt_data["current_timestamp"] = datetime.now().strftime("%Y%m%d%H%M%S")
     system_prompt = Prompter(prompt_template="ask/entry", parser=parser).render(  # type: ignore[arg-type]
-        data=state  # type: ignore[arg-type]
+        data=prompt_data  # type: ignore[arg-type]
     )
     model = await provision_langchain_model(
         system_prompt,
@@ -56,7 +59,7 @@ async def call_model_with_messages(state: ThreadState, config: RunnableConfig) -
         max_tokens=2000,
         structured=dict(type="json"),
     )
-    # model = model.bind_tools(tools)
+
     # First get the raw response from the model
     ai_message = await model.ainvoke(system_prompt)
 
@@ -86,7 +89,7 @@ async def trigger_queries(state: ThreadState, config: RunnableConfig):
 
 
 async def provide_answer(state: SubGraphState, config: RunnableConfig) -> dict:
-    payload = state
+    payload = dict(state)
     # if state["type"] == "text":
     #     results = text_search(state["term"], 10, True, True)
     # else:
@@ -96,6 +99,7 @@ async def provide_answer(state: SubGraphState, config: RunnableConfig) -> dict:
     payload["results"] = results
     ids = [r["id"] for r in results]
     payload["ids"] = ids
+    payload["current_timestamp"] = datetime.now().strftime("%Y%m%d%H%M%S")
     system_prompt = Prompter(prompt_template="ask/query_process").render(data=payload)  # type: ignore[arg-type]
     model = await provision_langchain_model(
         system_prompt,
@@ -109,7 +113,9 @@ async def provide_answer(state: SubGraphState, config: RunnableConfig) -> dict:
 
 
 async def write_final_answer(state: ThreadState, config: RunnableConfig) -> dict:
-    system_prompt = Prompter(prompt_template="ask/final_answer").render(data=state)  # type: ignore[arg-type]
+    prompt_data = dict(state)
+    prompt_data["current_timestamp"] = datetime.now().strftime("%Y%m%d%H%M%S")
+    system_prompt = Prompter(prompt_template="ask/final_answer").render(data=prompt_data)  # type: ignore[arg-type]
     model = await provision_langchain_model(
         system_prompt,
         config.get("configurable", {}).get("final_answer_model"),

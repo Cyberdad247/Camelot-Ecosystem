@@ -1,5 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+from datetime import datetime
 from typing import Any, Optional
 
 from ai_prompter import Prompter
@@ -19,7 +20,9 @@ class PatternChainState(TypedDict):
 
 async def call_model(state: dict, config: RunnableConfig) -> dict:
     content = state["input_text"]
-    system_prompt = Prompter(template_text=state["prompt"], parser=state.get("parser")).render(data=state)
+    prompt_data = dict(state)
+    prompt_data["current_timestamp"] = datetime.now().strftime("%Y%m%d%H%M%S")
+    system_prompt = Prompter(template_text=state["prompt"], parser=state.get("parser")).render(data=prompt_data)
     payload = [SystemMessage(content=system_prompt)] + [HumanMessage(content=content)]
     chain = await provision_langchain_model(
         str(payload),

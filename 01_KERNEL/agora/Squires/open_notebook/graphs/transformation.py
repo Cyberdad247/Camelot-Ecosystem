@@ -1,5 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+from datetime import datetime
+
 from ai_prompter import Prompter
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_core.runnables import RunnableConfig
@@ -35,7 +37,9 @@ async def run_transformation(state: dict, config: RunnableConfig) -> dict:
 
     transformation_template_text = f"{transformation_template_text}\n\n# INPUT"
 
-    system_prompt = Prompter(template_text=transformation_template_text).render(data=state)
+    prompt_data = dict(state)
+    prompt_data["current_timestamp"] = datetime.now().strftime("%Y%m%d%H%M%S")
+    system_prompt = Prompter(template_text=transformation_template_text).render(data=prompt_data)
     content_str = str(content) if content else ""
     payload = [SystemMessage(content=system_prompt), HumanMessage(content=content_str)]
     chain = await provision_langchain_model(
