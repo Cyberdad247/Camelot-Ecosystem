@@ -20,8 +20,9 @@ Pipeline: Anya APEE v6.5 -> Sentinel audit DAG -> Iron Gate HITL.
 
 import os
 import re
-import subprocess
+import shlex
 import shutil
+import subprocess
 from pathlib import Path
 
 from .base import BaseKnight
@@ -36,9 +37,7 @@ CAMELOT_OS = Path(os.environ.get("CAMELOT_OS", Path.home() / "CAMELOT_OS"))
 # ══════════════════════════════════════════════════════════════════════
 
 AUDIT_DOMAINS: dict[str, dict] = {
-
     # ── NETWORK ───────────────────────────────────────────────────────
-
     "tailscale": {
         "label": "Tailscale Mesh Overlay",
         "knight": "Sir Sentinel",
@@ -76,7 +75,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "rustdesk": {
         "label": "RustDesk Remote Desktop Relay",
         "knight": "Sir Sentinel",
@@ -103,9 +101,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── KINETIC ───────────────────────────────────────────────────────
-
     "rust_bridge": {
         "label": "Rust IPC / Media Bridge",
         "knight": "Sir Sentinel + Lukas Edge",
@@ -153,7 +149,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "kinetic_binaries": {
         "label": "Kinetic Armory Binaries",
         "knight": "Lukas Edge",
@@ -190,9 +185,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── SECURITY ──────────────────────────────────────────────────────
-
     "secrets": {
         "label": "Secrets & Credential Exposure",
         "knight": "Sir Sentinel",
@@ -230,7 +223,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "iron_gate": {
         "label": "Iron Gate HITL Enforcement",
         "knight": "Sir Sentinel",
@@ -257,7 +249,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "zenith_warden": {
         "label": "Zenith Scanner & Warden Zero-Trust",
         "knight": "Sir Sentinel",
@@ -285,7 +276,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "dependencies": {
         "label": "Dependency Vulnerability Scan",
         "knight": "Sir Sentinel",
@@ -330,9 +320,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── INFRASTRUCTURE ────────────────────────────────────────────────
-
     "ci_cd": {
         "label": "CI/CD Pipeline (GitHub Actions)",
         "knight": "Sir Sentinel",
@@ -369,7 +357,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "cliproxy": {
         "label": "CLIProxyAPI (Zero-Burn Proxy)",
         "knight": "Sir Sentinel",
@@ -406,7 +393,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "modal_cloud": {
         "label": "Modal Cloud Deployment",
         "knight": "Sir Sentinel + Morgana",
@@ -432,7 +418,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "docker": {
         "label": "Docker & Container Security",
         "knight": "Sir Sentinel",
@@ -460,9 +445,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── KERNEL ────────────────────────────────────────────────────────
-
     "excalibur": {
         "label": "EXCALIBUR Core API",
         "knight": "Sir Sentinel",
@@ -499,7 +482,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "agora": {
         "label": "Agora Orchestration Layer",
         "knight": "Sir Sentinel",
@@ -526,7 +508,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "titan_memory": {
         "label": "Titan Memory & UKG Graph",
         "knight": "Sir Sentinel + Chronos",
@@ -555,7 +536,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "control_plane": {
         "label": "Control Plane (Pydantic AI / A2A)",
         "knight": "Sir Sentinel",
@@ -592,7 +572,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "mgv_engine": {
         "label": "MGV Reasoning Engine",
         "knight": "Sir Sentinel + Merlin",
@@ -609,9 +588,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── CLI ────────────────────────────────────────────────────────────
-
     "cli_pipeline": {
         "label": "Camelot CLI Pipeline",
         "knight": "Sir Sentinel",
@@ -669,9 +646,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── AGENTS ────────────────────────────────────────────────────────
-
     "squire_colony": {
         "label": "Squire Colony (8 Sub-Agents)",
         "knight": "Sir Sentinel + Sir Boris",
@@ -702,7 +677,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "boris_critique": {
         "label": "Sir Boris 13-Agent Critique Pipeline",
         "knight": "Sir Boris",
@@ -737,9 +711,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── MCP ────────────────────────────────────────────────────────────
-
     "mcp_config": {
         "label": "MCP Server Configuration",
         "knight": "Sir Sentinel",
@@ -777,9 +749,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── VOICE ─────────────────────────────────────────────────────────
-
     "voice_pipeline": {
         "label": "Voice AI Pipeline (Piper / Kokoro / VoxService)",
         "knight": "Sir Sentinel + Sir Sonus",
@@ -807,9 +777,7 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     # ── GOVERNANCE ────────────────────────────────────────────────────
-
     "provenance": {
         "label": "Provenance Ledger & Audit Trail",
         "knight": "Sir Sentinel + Sir Glyph",
@@ -837,7 +805,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "aiexclude": {
         "label": "Token Shield (.aiexclude)",
         "knight": "Sir Sentinel",
@@ -868,7 +835,6 @@ AUDIT_DOMAINS: dict[str, dict] = {
             },
         ],
     },
-
     "git_hygiene": {
         "label": "Git Repository Hygiene",
         "knight": "Sir Sentinel",
@@ -923,58 +889,116 @@ AUDIT_PRESETS: dict[str, list[str]] = {
 
 _KEYWORD_MAP: dict[str, str] = {
     # Network
-    "tailscale": "tailscale", "tailscape": "tailscale", "mesh": "tailscale",
-    "rustdesk": "rustdesk", "remote desktop": "rustdesk", "relay": "rustdesk",
+    "tailscale": "tailscale",
+    "tailscape": "tailscale",
+    "mesh": "tailscale",
+    "rustdesk": "rustdesk",
+    "remote desktop": "rustdesk",
+    "relay": "rustdesk",
     # Kinetic
-    "rust": "rust_bridge", "bridge": "rust_bridge", "media": "rust_bridge",
-    "ipc": "rust_bridge", "named pipe": "rust_bridge",
-    "binary": "kinetic_binaries", "binaries": "kinetic_binaries",
-    "armory": "kinetic_binaries", "saltare": "kinetic_binaries",
-    "cribo": "kinetic_binaries", "rotel": "kinetic_binaries",
+    "rust": "rust_bridge",
+    "bridge": "rust_bridge",
+    "media": "rust_bridge",
+    "ipc": "rust_bridge",
+    "named pipe": "rust_bridge",
+    "binary": "kinetic_binaries",
+    "binaries": "kinetic_binaries",
+    "armory": "kinetic_binaries",
+    "saltare": "kinetic_binaries",
+    "cribo": "kinetic_binaries",
+    "rotel": "kinetic_binaries",
     "ledger.exe": "kinetic_binaries",
     # Security
-    "secret": "secrets", "credential": "secrets", "vault": "secrets",
-    "token": "secrets", "password": "secrets",
-    "iron gate": "iron_gate", "hitl": "iron_gate", "approval": "iron_gate",
-    "zenith": "zenith_warden", "warden": "zenith_warden", "injection": "zenith_warden",
+    "secret": "secrets",
+    "credential": "secrets",
+    "vault": "secrets",
+    "token": "secrets",
+    "password": "secrets",
+    "iron gate": "iron_gate",
+    "hitl": "iron_gate",
+    "approval": "iron_gate",
+    "zenith": "zenith_warden",
+    "warden": "zenith_warden",
+    "injection": "zenith_warden",
     "diode": "zenith_warden",
-    "depend": "dependencies", "cve": "dependencies", "vuln": "dependencies",
-    "trivy": "dependencies", "npm audit": "dependencies", "pip audit": "dependencies",
+    "depend": "dependencies",
+    "cve": "dependencies",
+    "vuln": "dependencies",
+    "trivy": "dependencies",
+    "npm audit": "dependencies",
+    "pip audit": "dependencies",
     "cargo audit": "dependencies",
     # Infrastructure
-    "ci": "ci_cd", "cd": "ci_cd", "pipeline": "ci_cd", "github action": "ci_cd",
+    "ci": "ci_cd",
+    "cd": "ci_cd",
+    "pipeline": "ci_cd",
+    "github action": "ci_cd",
     "workflow": "ci_cd",
-    "proxy": "cliproxy", "cliproxy": "cliproxy", "cli-proxy": "cliproxy",
-    "modal": "modal_cloud", "cloud": "modal_cloud", "morgana": "modal_cloud",
-    "docker": "docker", "container": "docker", "dockerfile": "docker",
+    "proxy": "cliproxy",
+    "cliproxy": "cliproxy",
+    "cli-proxy": "cliproxy",
+    "modal": "modal_cloud",
+    "cloud": "modal_cloud",
+    "morgana": "modal_cloud",
+    "docker": "docker",
+    "container": "docker",
+    "dockerfile": "docker",
     # Kernel
-    "excalibur": "excalibur", "fastapi": "excalibur", "api": "excalibur",
+    "excalibur": "excalibur",
+    "fastapi": "excalibur",
+    "api": "excalibur",
     "roster": "excalibur",
-    "agora": "agora", "orchestrat": "agora", "swarm": "agora",
-    "titan": "titan_memory", "memory": "titan_memory", "ukg": "titan_memory",
-    "toon": "titan_memory", "ouroboros": "titan_memory",
-    "control plane": "control_plane", "pydantic": "control_plane",
-    "a2a": "control_plane", "sarda": "control_plane", "deerflow": "control_plane",
-    "mgv": "mgv_engine", "reasoning": "mgv_engine",
+    "agora": "agora",
+    "orchestrat": "agora",
+    "swarm": "agora",
+    "titan": "titan_memory",
+    "memory": "titan_memory",
+    "ukg": "titan_memory",
+    "toon": "titan_memory",
+    "ouroboros": "titan_memory",
+    "control plane": "control_plane",
+    "pydantic": "control_plane",
+    "a2a": "control_plane",
+    "sarda": "control_plane",
+    "deerflow": "control_plane",
+    "mgv": "mgv_engine",
+    "reasoning": "mgv_engine",
     # CLI
-    "cli": "cli_pipeline", "anya": "cli_pipeline", "merlin": "cli_pipeline",
-    "router": "cli_pipeline", "cartridge": "cli_pipeline",
-    "llm router": "cli_pipeline", "llm_router": "cli_pipeline",
-    "squire": "squire_colony", "colony": "squire_colony",
-    "boris": "boris_critique", "critique": "boris_critique",
-    "13-agent": "boris_critique", "ast": "boris_critique",
+    "cli": "cli_pipeline",
+    "anya": "cli_pipeline",
+    "merlin": "cli_pipeline",
+    "router": "cli_pipeline",
+    "cartridge": "cli_pipeline",
+    "llm router": "cli_pipeline",
+    "llm_router": "cli_pipeline",
+    "squire": "squire_colony",
+    "colony": "squire_colony",
+    "boris": "boris_critique",
+    "critique": "boris_critique",
+    "13-agent": "boris_critique",
+    "ast": "boris_critique",
     # MCP
-    "mcp": "mcp_config", "config drift": "mcp_config",
-    "notebooklm": "mcp_config", "gemini-cli": "mcp_config",
+    "mcp": "mcp_config",
+    "config drift": "mcp_config",
+    "notebooklm": "mcp_config",
+    "gemini-cli": "mcp_config",
     # Voice
-    "voice": "voice_pipeline", "piper": "voice_pipeline",
-    "kokoro": "voice_pipeline", "tts": "voice_pipeline",
-    "vox": "voice_pipeline", "audio": "voice_pipeline",
+    "voice": "voice_pipeline",
+    "piper": "voice_pipeline",
+    "kokoro": "voice_pipeline",
+    "tts": "voice_pipeline",
+    "vox": "voice_pipeline",
+    "audio": "voice_pipeline",
     # Governance
-    "provenance": "provenance", "copyright": "provenance",
-    "aiexclude": "aiexclude", "token shield": "aiexclude", "ram": "aiexclude",
+    "provenance": "provenance",
+    "copyright": "provenance",
+    "aiexclude": "aiexclude",
+    "token shield": "aiexclude",
+    "ram": "aiexclude",
     "heartbeat": "aiexclude",
-    "git": "git_hygiene", "branch": "git_hygiene", "gitignore": "git_hygiene",
+    "git": "git_hygiene",
+    "branch": "git_hygiene",
+    "gitignore": "git_hygiene",
 }
 
 
@@ -1001,8 +1025,13 @@ def _run_check(cmd: str, timeout: int = 30) -> dict:
     """Run an audit command and capture output. Never raises."""
     try:
         result = subprocess.run(
-            cmd, shell=True, capture_output=True, text=True,
-            timeout=timeout, encoding="utf-8", errors="replace",
+            shlex.split(cmd),
+            shell=False,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            encoding="utf-8",
+            errors="replace",
         )
         return {
             "command": cmd,
@@ -1020,10 +1049,25 @@ def _scan_secrets(path: Path, max_files: int = 500) -> list[dict]:
     """Scan tracked files for secret patterns."""
     hits = []
     count = 0
-    skip_dirs = {"node_modules", ".venv", ".git", "__pycache__", "99_ARCHIVE",
-                 ".secure", ".cli-proxy-api", "auths"}
-    scan_ext = {".py", ".ts", ".js", ".json", ".yaml", ".yml", ".toml", ".env",
-                ".md", ".sh", ".ps1", ".rs", ".go", ".cfg", ".ini", ".conf"}
+    skip_dirs = {"node_modules", ".venv", ".git", "__pycache__", "99_ARCHIVE", ".secure", ".cli-proxy-api", "auths"}
+    scan_ext = {
+        ".py",
+        ".ts",
+        ".js",
+        ".json",
+        ".yaml",
+        ".yml",
+        ".toml",
+        ".env",
+        ".md",
+        ".sh",
+        ".ps1",
+        ".rs",
+        ".go",
+        ".cfg",
+        ".ini",
+        ".conf",
+    }
     for root, dirs, files in os.walk(path):
         # Prune heavy/sensitive directories
         dirs[:] = [d for d in dirs if d not in skip_dirs]
@@ -1042,11 +1086,13 @@ def _scan_secrets(path: Path, max_files: int = 500) -> list[dict]:
                             continue  # skip minified/binary-ish lines
                         for pat in _SECRET_PATTERNS:
                             if pat.search(line):
-                                hits.append({
-                                    "file": os.path.relpath(fpath, path),
-                                    "line": i,
-                                    "pattern": pat.pattern[:40],
-                                })
+                                hits.append(
+                                    {
+                                        "file": os.path.relpath(fpath, path),
+                                        "line": i,
+                                        "pattern": pat.pattern[:40],
+                                    }
+                                )
             except (OSError, PermissionError):
                 continue
     return hits
@@ -1077,6 +1123,7 @@ def _check_ledger_sync() -> list[str]:
 # ══════════════════════════════════════════════════════════════════════
 # THE KNIGHT
 # ══════════════════════════════════════════════════════════════════════
+
 
 class SirSentinel(BaseKnight):
     name = "Sir Sentinel"
@@ -1112,10 +1159,10 @@ class SirSentinel(BaseKnight):
         # Build report
         lines = [
             "# SENTINEL AUDIT REPORT",
-            f"## Camelot Apex OS v300.4 -- Agent-Armor v2.0",
+            "## Camelot Apex OS v300.4 -- Agent-Armor v2.0",
             f"**Domains ({len(domain_keys)}):** {', '.join(domain_keys)}",
-            f"**Compiled by:** Anya APEE v6.5 (PARSE -> ENRICH -> COMPILE -> ROUTE -> VALIDATE)",
-            f"**Dispatched to:** Sir Sentinel (L6) + Lukas Edge (L2)",
+            "**Compiled by:** Anya APEE v6.5 (PARSE -> ENRICH -> COMPILE -> ROUTE -> VALIDATE)",
+            "**Dispatched to:** Sir Sentinel (L6) + Lukas Edge (L2)",
             f"**Total audit domains available:** {len(AUDIT_DOMAINS)}",
             "",
         ]
