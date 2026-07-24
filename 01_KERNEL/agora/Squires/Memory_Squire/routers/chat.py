@@ -97,7 +97,7 @@ async def get_sessions(notebook_id: str = Query(..., description="Notebook ID"))
                 notebook_id=notebook_id,
                 created=str(session.created),
                 updated=str(session.updated),
-                message_count=0,  # TODO: Add message count if needed
+                message_count=getattr(session, "message_count", 0) or 0,
                 model_override=getattr(session, "model_override", None),
             )
             for session in sessions
@@ -238,7 +238,7 @@ async def update_session(session_id: str, request: UpdateSessionRequest):
             notebook_id=notebook_id,
             created=str(session.created),
             updated=str(session.updated),
-            message_count=0,
+            message_count=getattr(session, "message_count", 0) or 0,
             model_override=session.model_override,
         )
     except NotFoundError:
@@ -314,7 +314,9 @@ async def execute_chat(request: ExecuteChatRequest):
             ),
         )
 
-        # Update session timestamp
+        # Update session timestamp and message count
+        if "messages" in result:
+            session.message_count = len(result["messages"])
         await session.save()
 
         # Convert messages to response format
