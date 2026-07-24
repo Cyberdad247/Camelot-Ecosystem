@@ -90,18 +90,29 @@ async def get_sessions(notebook_id: str = Query(..., description="Notebook ID"))
         # Get sessions for this notebook
         sessions = await notebook.get_chat_sessions()
 
-        return [
-            ChatSessionResponse(
-                id=session.id or "",
-                title=session.title or "Untitled Session",
-                notebook_id=notebook_id,
-                created=str(session.created),
-                updated=str(session.updated),
-                message_count=0,  # TODO: Add message count if needed
-                model_override=getattr(session, "model_override", None),
+        session_responses = []
+        for session in sessions:
+            message_count = 0
+            if session.id:
+                # Strip chat_session: prefix if present for thread_id
+                thread_id = session.id.split(":")[-1] if ":" in session.id else session.id
+                thread_state = await chat_graph.aget_state(config=RunnableConfig(configurable={"thread_id": thread_id}))
+                if thread_state and thread_state.values and "messages" in thread_state.values:
+                    message_count = len(thread_state.values["messages"])
+
+            session_responses.append(
+                ChatSessionResponse(
+                    id=session.id or "",
+                    title=session.title or "Untitled Session",
+                    notebook_id=notebook_id,
+                    created=str(session.created),
+                    updated=str(session.updated),
+                    message_count=message_count,
+                    model_override=getattr(session, "model_override", None),
+                )
             )
-            for session in sessions
-        ]
+
+        return session_responses
     except NotFoundError:
         raise HTTPException(status_code=404, detail="Notebook not found")
     except Exception as e:
