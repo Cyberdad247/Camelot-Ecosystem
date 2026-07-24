@@ -642,9 +642,14 @@ class HTML2Text(html.parser.HTMLParser):
                     # https://spec.commonmark.org/0.28/#motivation
                     # TODO: line up <ol><li>s > 9 correctly.
                     parent_list = None
-                    for list in self.list:
-                        self.o("   " if parent_list == "ol" and list.name == "ul" else "  ")
-                        parent_list = list.name
+                    for list_item in self.list:
+                        if parent_list and parent_list.name == "ol":
+                            self.o("   " if list_item.name == "ul" else "  ")
+                            # Add extra spaces for double/triple digit numbers
+                            self.o(" " * max(0, len(str(parent_list.num)) - 1))
+                        else:
+                            self.o("  ")
+                        parent_list = list_item
 
                 if li.name == "ul":
                     self.o(self.ul_item_mark + " ")
