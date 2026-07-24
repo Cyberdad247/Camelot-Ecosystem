@@ -120,6 +120,7 @@ class HTML2Text(html.parser.HTMLParser):
         self.pre = False
         self.startpre = False
         self.code = False
+        self.code_start_index = -1
         self.quote = False
         self.br_toggle = ""
         self.lastWasNL = False
@@ -468,8 +469,24 @@ class HTML2Text(html.parser.HTMLParser):
                 self.handle_emphasis(start, tag_style, parent_style)
 
         if tag in ["kbd", "code", "tt"] and not self.pre:
-            self.o("`")  # TODO: `` `this` ``
-            self.code = not self.code
+            if start:
+                self.code = True
+                self.o("`")
+                self.code_start_index = len(self.outtextlist) - 1
+            else:
+                self.code = False
+                if self.code_start_index >= 0 and self.code_start_index < len(self.outtextlist):
+                    inner_text = "".join(self.outtextlist[self.code_start_index + 1:])
+                    if "`" in inner_text:
+                        start_backticks = "`` " if inner_text.startswith("`") or inner_text.startswith(" ") else "``"
+                        end_backticks = " ``" if inner_text.endswith("`") or inner_text.endswith(" ") else "``"
+                        self.outtextlist[self.code_start_index] = start_backticks
+                        self.o(end_backticks)
+                    else:
+                        self.o("`")
+                else:
+                    self.o("`")
+                self.code_start_index = -1
 
         if tag == "abbr":
             if start:
