@@ -318,10 +318,18 @@ async def create_source(
 
     try:
         # Verify all specified notebooks exist (backward compatibility support)
-        for notebook_id in source_data.notebooks or []:
-            notebook = await Notebook.get(notebook_id)
-            if not notebook:
-                raise HTTPException(status_code=404, detail=f"Notebook {notebook_id} not found")
+        notebook_ids = source_data.notebooks or []
+        if notebook_ids:
+            formatted_ids = [ensure_record_id(nid) for nid in notebook_ids]
+            query = "SELECT id FROM notebook WHERE id IN $notebook_ids"
+            results = await repo_query(query, {"notebook_ids": formatted_ids})
+
+            found_ids = {str(r.get("id")) for r in results} if results else set()
+
+            for nid in notebook_ids:
+                formatted_nid = str(ensure_record_id(nid))
+                if formatted_nid not in found_ids:
+                    raise HTTPException(status_code=404, detail=f"Notebook {nid} not found")
 
         # Handle file upload if provided
         file_path = None
