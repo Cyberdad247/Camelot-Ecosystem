@@ -1,7 +1,7 @@
 // AGENCY WAR ROOM CONTROLLER [Omega_RECON v1.0]
 // //THINK PROTOCOL FIX: All DOM access wrapped in DOMContentLoaded
 
-document.addEventListener("DOMContentLoaded", () => {
+const initPopup = () => {
 
     // 1. Command Palette Logic
     const btnDeploy = document.getElementById("btn-deploy");
@@ -155,4 +155,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     console.log("[AGENCY] War Room initialized.");
-});
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPopup);
+} else {
+    initPopup();
+}
