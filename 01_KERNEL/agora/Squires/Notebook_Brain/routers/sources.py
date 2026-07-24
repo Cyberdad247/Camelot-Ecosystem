@@ -318,10 +318,13 @@ async def create_source(
 
     try:
         # Verify all specified notebooks exist (backward compatibility support)
-        for notebook_id in source_data.notebooks or []:
-            notebook = await Notebook.get(notebook_id)
-            if not notebook:
-                raise HTTPException(status_code=404, detail=f"Notebook {notebook_id} not found")
+        notebook_ids = source_data.notebooks or []
+        if notebook_ids:
+            notebooks = await Notebook.get_many(notebook_ids)
+            found_ids = {str(nb.id) for nb in notebooks}
+            for notebook_id in notebook_ids:
+                if notebook_id not in found_ids and f"notebook:{notebook_id}" not in found_ids:
+                    raise HTTPException(status_code=404, detail=f"Notebook {notebook_id} not found")
 
         # Handle file upload if provided
         file_path = None
