@@ -79,6 +79,9 @@ async def upload_file(file: UploadFile = File(...)):
     """Anya's Kinetic Drop - Securely receive files into the Vault."""
     # Sanitize filename to prevent directory traversal on upload
     safe_name = os.path.basename(file.filename)
+    if not safe_name or safe_name in {".", ".."}:
+        raise HTTPException(status_code=400, detail="Invalid filename")
+
     file_path = BIFROST_DIR / safe_name
     content = await file.read()
     file_path.write_bytes(content)
@@ -90,6 +93,9 @@ async def download_file(filename: str):
     """Merlin's Retrieval - Securely fetch files from the Vault."""
     # CRITICAL FIX: Sanitize filename to prevent path traversal
     safe_name = os.path.basename(filename)
+    if not safe_name or safe_name in {".", ".."}:
+        raise HTTPException(status_code=400, detail="Invalid filename")
+
     file_path = BIFROST_DIR / safe_name
     
     if not file_path.exists():
