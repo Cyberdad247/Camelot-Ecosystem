@@ -133,15 +133,28 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
                 session_result = await repo_query(f"SELECT * FROM {session_id}")
                 if session_result and len(session_result) > 0:
                     session_data = session_result[0]
+                    response_id = str(session_data.get("id") or "")
+
+                    # Get session state from LangGraph to retrieve message count
+                    # The frontend might use the full ID or just the UUID part, we check both just in case
+                    thread_state = await source_chat_graph.aget_state({"configurable": {"thread_id": response_id}})
+                    if not thread_state or not thread_state.values:
+                        raw_id = response_id.split(":")[-1] if ":" in response_id else response_id
+                        thread_state = await source_chat_graph.aget_state({"configurable": {"thread_id": raw_id}})
+
+                    msg_count = 0
+                    if thread_state and thread_state.values and "messages" in thread_state.values:
+                        msg_count = len(thread_state.values["messages"])
+
                     sessions.append(
                         SourceChatSessionResponse(
-                            id=session_data.get("id") or "",
+                            id=response_id,
                             title=session_data.get("title") or "Untitled Session",
                             source_id=source_id,
                             model_override=session_data.get("model_override"),
                             created=str(session_data.get("created")),
                             updated=str(session_data.get("updated")),
-                            message_count=0,  # TODO: Add message count if needed
+                            message_count=msg_count,
                         )
                     )
 
