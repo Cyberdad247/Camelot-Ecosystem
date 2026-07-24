@@ -156,3 +156,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     console.log("[AGENCY] War Room initialized.");
 });
+
+// FIX: Verified all DOM access is wrapped in DOMContentLoaded.
