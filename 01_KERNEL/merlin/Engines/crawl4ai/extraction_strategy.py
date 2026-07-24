@@ -1002,12 +1002,115 @@ class JsonElementExtractionStrategy(ExtractionStrategy):
     )
 
     def _safe_eval(self, expr: str, context: dict):
+        class SafeEvaluator:
+            def __init__(self, ctx):
+                self.ctx = ctx
+
+            def eval(self, node):
+                if isinstance(node, ast.Expression):
+                    return self.eval(node.body)
+                elif isinstance(node, ast.Constant):
+                    return node.value
+                elif isinstance(node, ast.Name):
+                    if node.id in self.ctx:
+                        return self.ctx[node.id]
+                    raise ValueError(f"Unknown name: {node.id}")
+                elif isinstance(node, ast.BinOp):
+                    left = self.eval(node.left)
+                    right = self.eval(node.right)
+                    if isinstance(node.op, ast.Add): return left + right
+                    if isinstance(node.op, ast.Sub): return left - right
+                    if isinstance(node.op, ast.Mult): return left * right
+                    if isinstance(node.op, ast.Div): return left / right
+                    if isinstance(node.op, ast.FloorDiv): return left // right
+                    if isinstance(node.op, ast.Mod): return left % right
+                    raise ValueError(f"Unsupported BinOp: {type(node.op).__name__}")
+                elif isinstance(node, ast.UnaryOp):
+                    operand = self.eval(node.operand)
+                    if isinstance(node.op, ast.USub): return -operand
+                    if isinstance(node.op, ast.UAdd): return +operand
+                    if isinstance(node.op, ast.Not): return not operand
+                    raise ValueError(f"Unsupported UnaryOp: {type(node.op).__name__}")
+                elif isinstance(node, ast.Compare):
+                    left = self.eval(node.left)
+                    for op, comparator in zip(node.ops, node.comparators, strict=False):
+                        right = self.eval(comparator)
+                        if isinstance(op, ast.Eq): res = left == right
+                        elif isinstance(op, ast.NotEq): res = left != right
+                        elif isinstance(op, ast.Lt): res = left < right
+                        elif isinstance(op, ast.LtE): res = left <= right
+                        elif isinstance(op, ast.Gt): res = left > right
+                        elif isinstance(op, ast.GtE): res = left >= right
+                        else: raise ValueError(f"Unsupported Compare op: {type(op).__name__}")
+                        if not res:
+                            return False
+                        left = right
+                    return True
+                elif isinstance(node, ast.BoolOp):
+                    if isinstance(node.op, ast.And):
+                        for val in node.values:
+                            res = self.eval(val)
+                            if not res: return res
+                        return res
+                    if isinstance(node.op, ast.Or):
+                        for val in node.values:
+                            res = self.eval(val)
+                            if res: return res
+                        return res
+                    raise ValueError(f"Unsupported BoolOp: {type(node.op).__name__}")
+                elif isinstance(node, ast.IfExp):
+                    if self.eval(node.test):
+                        return self.eval(node.body)
+                    else:
+                        return self.eval(node.orelse)
+                elif isinstance(node, ast.List):
+                    return [self.eval(elt) for elt in node.elts]
+                elif isinstance(node, ast.Tuple):
+                    return tuple(self.eval(elt) for elt in node.elts)
+                elif isinstance(node, ast.Dict):
+                    return {self.eval(k): self.eval(v) for k, v in zip(node.keys, node.values, strict=False) if k is not None}
+                elif isinstance(node, ast.Subscript):
+                    val = self.eval(node.value)
+                    if hasattr(ast, "Slice") and isinstance(node.slice, ast.Slice):
+                        slc = self.eval(node.slice)
+                        return val[slc]
+                    elif hasattr(ast, "Index") and isinstance(node.slice, ast.Index):
+                        idx = self.eval(node.slice.value)
+                        return val[idx]
+                    else:
+                        idx = self.eval(node.slice)
+                        return val[idx]
+                elif isinstance(node, ast.Slice):
+                    lower = self.eval(node.lower) if node.lower else None
+                    upper = self.eval(node.upper) if node.upper else None
+                    step = self.eval(node.step) if node.step else None
+                    return slice(lower, upper, step)
+                elif hasattr(ast, "Index") and isinstance(node, ast.Index):
+                    return self.eval(node.value)
+                elif isinstance(node, ast.Attribute):
+                    val = self.eval(node.value)
+                    if node.attr.startswith('_'):
+                        raise ValueError(f"Access to private attribute '{node.attr}' is not allowed")
+                    if isinstance(val, dict):
+                        if hasattr(val, node.attr):
+                            return getattr(val, node.attr)
+                        raise ValueError(f"Unknown attribute: {node.attr}")
+                    if hasattr(val, node.attr):
+                        return getattr(val, node.attr)
+                    raise ValueError(f"Unknown attribute: {node.attr}")
+                elif isinstance(node, ast.Load):
+                    return None
+                else:
+                    raise ValueError(f"Unsupported node: {type(node).__name__}")
+
         try:
             tree = ast.parse(expr, mode="eval")
             for node in ast.walk(tree):
                 if not isinstance(node, self._SAFE_EXPR_NODES):
                     raise ValueError(f"Disallowed expression node: {type(node).__name__}")
-            return eval(compile(tree, "<expr>", "eval"), {"__builtins__": {}}, context)
+
+            evaluator = SafeEvaluator(context)
+            return evaluator.eval(tree.body)
         except Exception:
             return None
 
