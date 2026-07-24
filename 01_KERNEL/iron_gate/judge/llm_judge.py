@@ -12,23 +12,29 @@ Deterministic scoring engine using low-temperature LLM for evaluating:
 Integrates with rubric.py scoring dimensions and existing LLMManager.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from typing import List, Dict, Any, Optional
-from dataclasses import dataclass
-from datetime import datetime
+import concurrent.futures
 import json
 import logging
+import threading
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
-from .rubric import (
-    JudgeOutput, JudgeVerdict,
-    AccuracyDimension, FidelityDimension, SafetyDimension,
-    StyleDimension, ProvenanceDimension,
-    EVALUATION_PROMPT_TEMPLATE
+from rubric import (
+    EVALUATION_PROMPT_TEMPLATE,
+    AccuracyDimension,
+    FidelityDimension,
+    JudgeOutput,
+    JudgeVerdict,
+    ProvenanceDimension,
+    SafetyDimension,
+    StyleDimension,
 )
-
 
 logger = logging.getLogger(__name__)
 
@@ -90,6 +96,7 @@ class LLMJudge:
         
         # Cache for deterministic results
         self.cache: Dict[str, JudgeOutput] = {}
+        self._cache_lock = threading.Lock()
 
         logger.info("[Judge] Initialized with model=%s, temp=%s", model_name, temperature)
     
@@ -111,9 +118,11 @@ class LLMJudge:
         
         # Check cache
         cache_key = self._generate_cache_key(request)
-        if self.enable_cache and cache_key in self.cache:
-            logger.info("[Judge] Cache HIT for %s", request.artifact_id)
-            return self.cache[cache_key]
+        if self.enable_cache:
+            with self._cache_lock:
+                if cache_key in self.cache:
+                    logger.info("[Judge] Cache HIT for %s", request.artifact_id)
+                    return self.cache[cache_key]
         
         # Build evaluation prompt
         prompt = self._build_evaluation_prompt(request)
@@ -133,7 +142,8 @@ class LLMJudge:
         
         # Cache result
         if self.enable_cache:
-            self.cache[cache_key] = output
+            with self._cache_lock:
+                self.cache[cache_key] = output
         
         logger.info(
             "[Judge] Result: score=%.2f, verdict=%s",
@@ -159,14 +169,14 @@ class LLMJudge:
         )
         
         if batch.parallel:
-            # TODO: Implement parallel evaluation using ThreadPoolExecutor
-            # For now, fallback to sequential
-            logger.info("[Judge] Parallel mode not yet implemented, using sequential")
-        
-        results = []
-        for request in batch.requests:
-            output = self.evaluate(request)
-            results.append(output)
+            logger.info("[Judge] Using parallel evaluation")
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                results = list(executor.map(self.evaluate, batch.requests))
+        else:
+            results = []
+            for request in batch.requests:
+                output = self.evaluate(request)
+                results.append(output)
         
         return results
     
@@ -312,13 +322,16 @@ class LLMJudge:
     
     def clear_cache(self):
         """Clear evaluation cache."""
-        self.cache.clear()
+        with self._cache_lock:
+            self.cache.clear()
         logger.info("[Judge] Cache cleared")
     
     def get_stats(self) -> Dict[str, Any]:
         """Get judge engine statistics."""
+        with self._cache_lock:
+            cache_size = len(self.cache)
         return {
-            "cache_size": len(self.cache),
+            "cache_size": cache_size,
             "model": self.model_name,
             "temperature": self.temperature,
             "dimensions": list(self.dimensions.keys())

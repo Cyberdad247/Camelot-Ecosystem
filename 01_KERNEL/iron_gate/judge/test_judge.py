@@ -6,11 +6,12 @@ Test Suite for LLM-as-a-Judge Engine
 Validates judge scoring, batch evaluation, caching, and rubric integration.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from llm_judge import LLMJudge, JudgeRequest, BatchJudgeRequest
+from llm_judge import BatchJudgeRequest, JudgeRequest, LLMJudge
 from rubric import JudgeVerdict
 
 
@@ -77,6 +78,44 @@ def test_batch_evaluation():
     for i, result in enumerate(results):
         print(f"  - Artifact {i+1}: score={result.judge_score:.2f}, verdict={result.verdict}")
     
+    assert len(results) == 3, "Should return all batch results"
+
+
+def test_parallel_batch_evaluation():
+    """Test parallel batch evaluation mode."""
+    print("\n=== Testing Parallel Batch Evaluation ===")
+
+    judge = LLMJudge()
+
+    requests = [
+        JudgeRequest(
+            artifact_id="parallel_batch_001",
+            artifact_type="fusion_result",
+            content="Successful fusion of Strategy + Engineering agents",
+            context={"agents": ["Lord Nexus", "Sir Lukas"]}
+        ),
+        JudgeRequest(
+            artifact_id="parallel_batch_002",
+            artifact_type="optimization_hypothesis",
+            content="Cache resize from 50 to 100 entries improves hit rate by 15%",
+            context={"metric": "cache_hit_rate"}
+        ),
+        JudgeRequest(
+            artifact_id="parallel_batch_003",
+            artifact_type="cartridge",
+            content="New cartridge: DataScienceCore with pandas/numpy tools",
+            context={"template": "ENGINEERING_CORE"}
+        )
+    ]
+
+    batch = BatchJudgeRequest(requests=requests, parallel=True)
+    results = judge.evaluate_batch(batch)
+
+    print(f"✅ Parallel Batch evaluated {len(results)} artifacts")
+
+    for i, result in enumerate(results):
+        print(f"  - Artifact {i+1}: score={result.judge_score:.2f}, verdict={result.verdict}")
+
     assert len(results) == 3, "Should return all batch results"
 
 
@@ -208,6 +247,7 @@ if __name__ == "__main__":
     
     test_single_evaluation()
     test_batch_evaluation()
+    test_parallel_batch_evaluation()
     test_cache_behavior()
     test_verdict_thresholds()
     test_dimension_scoring()
