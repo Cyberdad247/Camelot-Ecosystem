@@ -130,6 +130,23 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
                 session_result = await repo_query(f"SELECT * FROM {session_id}")
                 if session_result and len(session_result) > 0:
                     session_data = session_result[0]
+
+                    # Extract the raw session id to fetch thread state
+                    raw_session_id = (
+                        session_id.replace("chat_session:", "")
+                        if isinstance(session_id, str) and session_id.startswith("chat_session:")
+                        else session_id
+                    )
+
+                    # Get session state from LangGraph to retrieve message count
+                    message_count = 0
+                    try:
+                        thread_state = await source_chat_graph.aget_state({"configurable": {"thread_id": raw_session_id}})
+                        if thread_state and thread_state.values and "messages" in thread_state.values:
+                            message_count = len(thread_state.values["messages"])
+                    except Exception as e:
+                        logger.warning(f"Failed to fetch state for thread {raw_session_id}: {e}")
+
                     sessions.append(
                         SourceChatSessionResponse(
                             id=session_data.get("id") or "",
@@ -138,7 +155,7 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
                             model_override=session_data.get("model_override"),
                             created=str(session_data.get("created")),
                             updated=str(session_data.get("updated")),
-                            message_count=0,  # TODO: Add message count if needed
+                            message_count=message_count,
                         )
                     )
 
