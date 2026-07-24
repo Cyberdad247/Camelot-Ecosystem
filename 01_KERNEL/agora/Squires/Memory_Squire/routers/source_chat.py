@@ -20,6 +20,21 @@ from pydantic import BaseModel, Field
 router = APIRouter()
 
 
+def _get_message_count(graph, session_id: str) -> int:
+    """Helper to safely fetch message count from the chat graph state."""
+    if not session_id:
+        return 0
+    try:
+        # Strip table prefix if present, as LangGraph thread IDs usually don't have it
+        thread_id = session_id.replace("chat_session:", "") if session_id.startswith("chat_session:") else session_id
+        thread_state = graph.get_state(config=RunnableConfig(configurable={"thread_id": thread_id}))
+        if thread_state and thread_state.values and "messages" in thread_state.values:
+            return len(thread_state.values["messages"])
+    except Exception as e:
+        logger.debug(f"Could not get message count for session {session_id}: {str(e)}")
+    return 0
+
+
 # Request/Response models
 class CreateSourceChatSessionRequest(BaseModel):
     source_id: str = Field(..., description="Source ID to create chat session for")
@@ -138,7 +153,7 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
                             model_override=session_data.get("model_override"),
                             created=str(session_data.get("created")),
                             updated=str(session_data.get("updated")),
-                            message_count=0,  # TODO: Add message count if needed
+                            message_count=_get_message_count(source_chat_graph, session_data.get("id")),
                         )
                     )
 
@@ -270,7 +285,7 @@ async def update_source_chat_session(
             model_override=getattr(session, "model_override", None),
             created=str(session.created),
             updated=str(session.updated),
-            message_count=0,
+            message_count=_get_message_count(source_chat_graph, session.id),
         )
     except NotFoundError:
         raise HTTPException(status_code=404, detail="Source or session not found")
