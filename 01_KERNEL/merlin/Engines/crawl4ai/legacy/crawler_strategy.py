@@ -235,21 +235,17 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
 
             self.driver = self.execute_hook("after_get_url", self.driver)
             html = sanitize_input_encode(self._ensure_page_load())  # self.driver.page_source
-            can_not_be_done_headless = False  # Look at my creativity for naming variables
 
-            # TODO: Very ugly approach, but promise to change it!
             if kwargs.get("bypass_headless", False) or html == "<html><head></head><body></body></html>":
                 print("[LOG] 🙌 Page could not be loaded in headless mode. Trying non-headless mode...")
-                can_not_be_done_headless = True
+                self.driver.quit()
                 options = Options()
-                options.headless = False
                 # set window size very small
                 options.add_argument("--window-size=5,5")
-                driver = webdriver.Chrome(service=self.service, options=options)
-                driver.get(url)
-                self.driver = self.execute_hook("after_get_url", driver)
-                html = sanitize_input_encode(driver.page_source)
-                driver.quit()
+                self.driver = webdriver.Chrome(service=self.service, options=options)
+                self.driver.get(url)
+                self.driver = self.execute_hook("after_get_url", self.driver)
+                html = sanitize_input_encode(self._ensure_page_load())
 
             # Execute JS code if provided
             self.js_code = kwargs.get("js_code", self.js_code)
@@ -276,8 +272,7 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
                     print("[LOG] 🔄 Waiting for condition...")
                     WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, wait_for)))
 
-            if not can_not_be_done_headless:
-                html = sanitize_input_encode(self.driver.page_source)
+            html = sanitize_input_encode(self.driver.page_source)
             self.driver = self.execute_hook("before_return_html", self.driver, html)
 
             # Store in cache
