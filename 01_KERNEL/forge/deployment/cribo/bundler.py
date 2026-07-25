@@ -5,11 +5,23 @@ Cribo Bundler: The Kinetic Python Module Linker
 Bundles Python packages into single standalone .py files for zero-dependency deployment.
 """
 
+import argparse
 import ast
-import hashlib
+import logging
+import shutil
 import sys
+import tempfile
+import zipapp
 from pathlib import Path
-from typing import Dict, List, Set
+from typing import List, Set
+
+try:
+    import tomllib
+except ImportError:
+    import tomli as tomllib  # For Python < 3.11
+
+
+logger = logging.getLogger(__name__)
 
 
 class CriboBundler:
@@ -18,10 +30,14 @@ class CriboBundler:
     Bundles Python code by sifting through imports and inlining dependencies.
     """
 
-    def __init__(self, entry_point: str, output_path: str = None, search_paths: List[str] = None):
+    def __init__(
+        self, entry_point: str, output_path: str = None, search_paths: List[str] = None, config_path: str = None
+    ):
         self.entry_point = Path(entry_point).resolve()
         if not self.entry_point.exists():
             raise FileNotFoundError(f"Entry point {self.entry_point} not found")
+
+        self.config = self._load_config(config_path)
 
         self.project_root = self.entry_point.parent
         self.output_path = (
@@ -39,8 +55,19 @@ class CriboBundler:
         self.search_paths.append(repo_root / "src")  # CAMELOT_OS/src
 
         self.processed_files: Set[Path] = set()
-        self.module_registry: Dict[str, str] = {}  # module_name -> code
         self.stdlib_modules = self._get_stdlib_modules()
+        self.external_deps = set(self.config.get("bundler", {}).get("external", []))
+
+    def _load_config(self, config_path: str) -> dict:
+        """Load configuration from cribo.toml"""
+        cfg_path = Path(config_path) if config_path else self.entry_point.parent / "cribo.toml"
+        if cfg_path.exists():
+            try:
+                with open(cfg_path, "rb") as f:
+                    return tomllib.load(f)
+            except Exception as e:
+                logger.warning("Failed to load config at %s: %s", cfg_path, e)
+        return {}
 
     def _get_stdlib_modules(self) -> Set[str]:
         """Get set of standard library module names"""
@@ -73,9 +100,14 @@ class CriboBundler:
         """Reject any path that escapes all declared search roots."""
         return any(str(resolved).startswith(str(p.resolve())) for p in self.search_paths)
 
-    def _check_local_import(self, module_name: str, local_modules: List[str]):
+    def _check_local_import(self, module_name: str, local_modules: List[Path]):
         """Check if import is local and add to list"""
         if module_name in self.stdlib_modules:
+            return
+
+        # Check if the base package is marked as external
+        base_module = module_name.split(".")[0]
+        if base_module in self.external_deps:
             return
 
         for path in self.search_paths:
@@ -93,131 +125,70 @@ class CriboBundler:
 
     def bundle(self):
         """
-        Execute the bundling process.
+        Execute the bundling process via zipapp.
         """
-        print(f"📦 [Cribo] Bundling {self.entry_point.name}...")
+        logger.info("📦 [Cribo] Bundling %s...", self.entry_point.name)
 
-        # 1. Recursive analysis
         files_to_process = [self.entry_point]
-        main_code = ""
 
-        while files_to_process:
-            current_file = files_to_process.pop(0)
-            if current_file in self.processed_files:
-                continue
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_dir_path = Path(temp_dir)
 
-            self.processed_files.add(current_file)
+            while files_to_process:
+                current_file = files_to_process.pop(0)
+                if current_file in self.processed_files:
+                    continue
 
-            # Read code
-            with open(current_file, "r", encoding="utf-8") as f:
-                code = f.read()
+                self.processed_files.add(current_file)
 
-            if current_file == self.entry_point:
-                main_code = code
-            else:
-                # Store module code in registry
-                module_name = current_file.stem
-                if current_file.name == "__init__.py":
-                    module_name = current_file.parent.name
-                self.module_registry[module_name] = code
+                # Determine relative structure for zipapp inclusion
+                if current_file == self.entry_point:
+                    target_path = temp_dir_path / "__main__.py"
+                else:
+                    rel_path = None
+                    for sp in self.search_paths:
+                        try:
+                            rel_path = current_file.relative_to(sp)
+                            break
+                        except ValueError:
+                            pass
 
-            # Find dependencies
-            deps = self.analyze_imports(current_file)
-            files_to_process.extend(deps)
+                    if not rel_path:
+                        rel_path = current_file.name
 
-        # 2. Construct bundle
-        bundled_content = [
-            f"# 🏗️ CRIBO BUNDLE: {self.entry_point.name}",
-            "# Generated by Camelot OS Cribo Bundler",
-            "# ------------------------------------------------",
-            "import sys",
-            "from types import ModuleType",
-            "",
-            "# --- BUNDLED MODULES ---",
-            "",
-        ]
+                    target_path = temp_dir_path / rel_path
 
-        # In-memory module loader shim
-        bundled_content.append(
-            """
-import hashlib as _hashlib
-import importlib.abc as _abc
-import importlib.machinery as _machinery
+                target_path.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(current_file, target_path)
 
-class CriboLoader(_abc.SourceLoader):
-    def __init__(self, registry, hashes):
-        self.registry = registry
-        self._hashes = hashes
+                # Find dependencies
+                deps = self.analyze_imports(current_file)
+                files_to_process.extend(deps)
 
-    def get_filename(self, fullname):
-        return f"<cribo:{fullname}>"
+            # Construct zero-dependency zip archive (.pyz)
+            zipapp.create_archive(temp_dir_path, target=self.output_path, interpreter="/usr/bin/env python3")
 
-    def get_data(self, path):
-        fullname = path.replace("<cribo:", "").replace(">", "")
-        if fullname in self.registry:
-            return self.registry[fullname].encode("utf-8")
-        raise ImportError(f"Cannot load data for {fullname}")
+        logger.info("✅ [Cribo] Bundle created at: %s", self.output_path)
+        logger.info("   - Files packed: %d", len(self.processed_files))
+        logger.info("   - Total size: %d bytes", self.output_path.stat().st_size)
 
-class CriboFinder(_abc.MetaPathFinder):
-    def __init__(self, registry, hashes):
-        self.registry = registry
-        self._hashes = hashes
-        self.loader = CriboLoader(registry, hashes)
 
-    def find_spec(self, fullname, path, target=None):
-        if fullname in self.registry:
-            code = self.registry[fullname]
-            expected = self._hashes.get(fullname, "")
-            actual = _hashlib.sha256(code.encode()).hexdigest()
-            if actual != expected:
-                raise ImportError(
-                    f"[Cribo] Integrity check failed for '{fullname}': "
-                    f"bundle may have been tampered with"
-                )
-            is_package = any(k.startswith(fullname + ".") for k in self.registry.keys())
-            return _machinery.ModuleSpec(fullname, self.loader, is_package=is_package)
-        return None
+def main():
+    logging.basicConfig(level=logging.INFO, format="%(message)s")
 
-# Registry of bundled code
-_cribo_registry = {}
-_cribo_hashes = {}
-"""
-        )
+    parser = argparse.ArgumentParser(description="Cribo Bundler: The Kinetic Python Module Linker")
+    parser.add_argument("entry", help="Path to the main entry point Python script.")
+    parser.add_argument("out", nargs="?", help="Path to output the bundled executable (.pyz).")
+    parser.add_argument("--search-paths", nargs="*", help="Additional paths to search for local modules.")
+    parser.add_argument("--config", help="Path to cribo.toml configuration file.")
 
-        # Add modules to registry with SHA-256 integrity hashes
-        for name, code in self.module_registry.items():
-            safe_code = code.replace('"""', '\\"\\"\\"')
-            code_hash = hashlib.sha256(code.encode()).hexdigest()
-            bundled_content.append(f'_cribo_registry["{name}"] = """{safe_code}"""')
-            bundled_content.append(f'_cribo_hashes["{name}"] = "{code_hash}"')
+    args = parser.parse_args()
 
-        # Register loader with both registry and hash manifest
-        bundled_content.append(
-            """
-sys.meta_path.append(CriboFinder(_cribo_registry, _cribo_hashes))
-"""
-        )
-
-        # Add main entry point code
-        bundled_content.append("# --- MAIN ENTRY POINT ---")
-        bundled_content.append(main_code)
-
-        # 3. Write output
-        with open(self.output_path, "w", encoding="utf-8") as f:
-            f.write("\n".join(bundled_content))
-
-        print(f"✅ [Cribo] Bundle created at: {self.output_path}")
-        print(f"   - Modules packed: {len(self.module_registry)}")
-        print(f"   - Total size: {self.output_path.stat().st_size} bytes")
+    bundler = CriboBundler(
+        entry_point=args.entry, output_path=args.out, search_paths=args.search_paths, config_path=args.config
+    )
+    bundler.bundle()
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python cribo.py <entry_point.py> [output.py]")
-        sys.exit(1)
-
-    entry = sys.argv[1]
-    out = sys.argv[2] if len(sys.argv) > 2 else None
-
-    bundler = CriboBundler(entry, out)
-    bundler.bundle()
+    main()
