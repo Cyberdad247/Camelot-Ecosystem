@@ -5,12 +5,13 @@ Clears ChromaDB L2 indices, Redis Agent Memory (L1.5), JSON-LD (L4), and project
 """
 
 import sys
+
 # Reconfigure stdout to use UTF-8 to prevent encoding crashes on Windows console output
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8')
 
-import shutil
 import json
+import shutil
 import sqlite3
 from pathlib import Path
 
@@ -18,8 +19,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 
-from memory.mempalace_l2 import MemPalaceL2
 from memory.agent_memory import agent_memory
+from memory.mempalace_l2 import MemPalaceL2
 
 PROVENANCE_LEDGER = REPO_ROOT / "PROVENANCE_LEDGER.md"
 
@@ -65,7 +66,7 @@ def log_to_ledger(notes: str):
         else:
             new_lines = [entry] + lines
         PROVENANCE_LEDGER.write_text("\n".join(new_lines) + "\n", encoding="utf-8")
-    except Exception as e:
+    except Exception:
         with open(PROVENANCE_LEDGER, "a", encoding="utf-8") as f:
             f.write(entry + "\n")
 

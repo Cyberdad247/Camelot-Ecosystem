@@ -1,5 +1,7 @@
 import json
+
 from control_plane.provenance import VerificationRun
+
 
 def debug():
     data = {
@@ -15,7 +17,7 @@ def debug():
     }
     
     run = VerificationRun(**data)
-    computed = run.compute_hash()
+    run.compute_hash()
     
     print(f"Data in: {data}")
     

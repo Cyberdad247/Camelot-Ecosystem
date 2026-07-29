@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT-OS. All rights reserved.
 # [SYSTEM] :: EXCALIBUR_AUTOPILOT_v87.0
 # [ARCHITECT] :: SIR SYSTÉMA & SIR KINETIC
 # [CONTEXT] :: Invisioned Marketing inc. (S-Corp) // Camelot-OS

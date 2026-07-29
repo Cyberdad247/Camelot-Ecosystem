@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT-OS. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 [KITTEN] KITTEN_SERVICE (L2 Kinetic)

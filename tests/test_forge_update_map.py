@@ -1,9 +1,9 @@
+import importlib.util
 import os
 import sys
-import importlib.util
 import tempfile
-import pytest
 from unittest.mock import patch
+
 
 def import_from_path(module_name, file_path):
     spec = importlib.util.spec_from_file_location(module_name, file_path)
@@ -75,7 +75,7 @@ def test_generate_tree_non_core_no_recursion():
 def test_generate_tree_depth_cap():
     with tempfile.TemporaryDirectory() as tmpdir:
         current = tmpdir
-        for i in range(15):
+        for _i in range(15):
             current = os.path.join(current, "src")
             os.makedirs(current, exist_ok=True)
 

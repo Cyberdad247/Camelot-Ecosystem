@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT-OS. All rights reserved.
 import sys
 import argparse
 from pathlib import Path
