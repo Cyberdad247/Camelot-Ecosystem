@@ -447,7 +447,7 @@ class KnowledgeGraphEngine:
         visited_relations = set()
         current_ids = set(entity_ids)
 
-        for hop in range(hops):
+        for _hop in range(hops):
             next_ids = set()
             for eid in current_ids:
                 for rel in self._adjacency_list.get(eid, []):
@@ -526,7 +526,7 @@ class KnowledgeGraphEngine:
 
         current_ids = {target_entity.id}
 
-        for hop in range(hops):
+        for _hop in range(hops):
             next_ids = set()
             for eid in current_ids:
                 for rel in self._adjacency_list.get(eid, []):
