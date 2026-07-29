@@ -1,7 +1,6 @@
-import sys
 import importlib.util
+import sys
 from unittest.mock import MagicMock, patch
-import pytest
 
 # The `01_KERNEL/merlin/Engines/crawl4ai` module has a known, pre-existing circular import dependency involving `async_configs`, `ExtractionStrategy`, `types`, and `LLMConfig` that causes `ImportError` in isolated test scripts but is an expected baseline.
 # To work around this circular import dependency while testing, we can use `importlib` carefully.
