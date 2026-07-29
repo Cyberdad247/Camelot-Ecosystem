@@ -4,7 +4,6 @@ import hashlib
 import re
 from pathlib import Path
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 
 # Note: entiremap.md was consolidated into docs/architecture/ in July 2026

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import hashlib
 import json
-import os
 import shutil
 from datetime import datetime, timezone
 from pathlib import Path
+
 
 def get_sha256(path: Path) -> str:
     if not path.exists():

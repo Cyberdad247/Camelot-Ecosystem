@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT OS. All rights reserved.
 import hashlib
 from pathlib import Path
 from typing import Any, Optional

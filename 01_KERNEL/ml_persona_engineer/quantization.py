@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT OS. All rights reserved.
 import numpy as np
 
 class BitLinearQuantizer:

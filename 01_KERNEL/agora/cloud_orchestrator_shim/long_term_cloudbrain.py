@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT OS. All rights reserved.
 """Canonical long-term cloudbrain bootstrap for Camelot-OS.
 
 This module turns the existing Open Notebook stack into a reusable service

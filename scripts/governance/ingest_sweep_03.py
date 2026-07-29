@@ -1,7 +1,7 @@
+import importlib.util
 from pathlib import Path
 
 repo_root = Path(__file__).resolve().parent.parent.parent
-import importlib.util
 
 repo_root = Path(__file__).resolve().parent.parent.parent
 _MEM_PATH = repo_root / "01_KERNEL" / "memory" / "mempalace_l2.py"

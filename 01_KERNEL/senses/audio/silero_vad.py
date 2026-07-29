@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT OS. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 [S6-02] SileroVadDetector — ML-based VAD with energy-VAD fallback

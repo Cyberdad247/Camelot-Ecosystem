@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pathlib import Path
 
+
 def purify_ledger(path: Path):
     print(f"Purifying {path}...")
     try:

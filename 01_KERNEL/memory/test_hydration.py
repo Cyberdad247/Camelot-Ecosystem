@@ -1,3 +1,4 @@
+# Copyright (c) 2026 CAMELOT OS. All rights reserved.
 # -*- coding: utf-8 -*-
 import unittest
 from unittest.mock import patch
