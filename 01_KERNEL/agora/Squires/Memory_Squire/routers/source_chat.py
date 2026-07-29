@@ -99,7 +99,7 @@ async def create_source_chat_session(
             model_override=session.model_override,
             created=str(session.created),
             updated=str(session.updated),
-            message_count=0,
+            message_count=getattr(session, "message_count", 0),
         )
     except NotFoundError:
         raise HTTPException(status_code=404, detail="Source not found")
@@ -138,7 +138,7 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
                             model_override=session_data.get("model_override"),
                             created=str(session_data.get("created")),
                             updated=str(session_data.get("updated")),
-                            message_count=0,  # TODO: Add message count if needed
+                            message_count=session_data.get("message_count", 0),
                         )
                     )
 
@@ -270,7 +270,7 @@ async def update_source_chat_session(
             model_override=getattr(session, "model_override", None),
             created=str(session.created),
             updated=str(session.updated),
-            message_count=0,
+            message_count=getattr(session, "message_count", 0),
         )
     except NotFoundError:
         raise HTTPException(status_code=404, detail="Source or session not found")
