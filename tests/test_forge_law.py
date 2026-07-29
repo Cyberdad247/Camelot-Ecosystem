@@ -169,3 +169,26 @@ def test_verified_event_triggers_automatic_crystallization(monkeypatch, tmp_path
         )
     )
     assert calls == [("blueprints/test", manager.verification_ledger)]
+
+
+def test_cartridge_id_from_command():
+    # Happy path
+    assert forge_law.cartridge_id_from_command("//EXECUTE_PROMPT forge-0123456789abcdef") == "forge-0123456789abcdef"
+
+    # Varying whitespace
+    assert forge_law.cartridge_id_from_command("  //EXECUTE_PROMPT   forge-0123456789abcdef  ") == "forge-0123456789abcdef"
+
+    # Case-insensitivity (hex and command)
+    assert forge_law.cartridge_id_from_command("//execute_prompt FORGE-0123456789ABCDEF") == "forge-0123456789abcdef"
+    assert forge_law.cartridge_id_from_command("//Execute_Prompt FoRgE-0123456789aBcDeF") == "forge-0123456789abcdef"
+
+    # Invalid length
+    assert forge_law.cartridge_id_from_command("//EXECUTE_PROMPT forge-0123456789abcde") is None
+    assert forge_law.cartridge_id_from_command("//EXECUTE_PROMPT forge-0123456789abcdef0") is None
+
+    # Missing prefix
+    assert forge_law.cartridge_id_from_command("//EXECUTE_PROMPT 0123456789abcdef") is None
+
+    # No match
+    assert forge_law.cartridge_id_from_command("some random text") is None
+    assert forge_law.cartridge_id_from_command("//EXECUTE_PROMPT") is None
