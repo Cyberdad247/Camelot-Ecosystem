@@ -267,8 +267,8 @@ class Cursor:
         # FIX-3: reject empty identifiers — two empty scan_ids would collide
         # in Phase 2's compiler dedup-by-scan_id, and an empty last_path means
         # the scan hasn't progressed far enough to resume safely.
-        scan_id   = str(raw["scan_id"]).strip()
-        last_path = str(raw["last_path"]).strip()
+        scan_id   = str(raw.get("scan_id") or "").strip()
+        last_path = str(raw.get("last_path") or "").strip()
         if not scan_id:
             raise CursorInvalid(
                 "cursor.scan_id is empty; refusing auto-resume"
