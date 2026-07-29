@@ -117,10 +117,11 @@ class SubGraph:
 
     def to_triplets(self) -> list[Triplet]:
         """Convert to list of triplets."""
+        entity_map = {e.id: e for e in self.entities}
         triplets = []
         for r in self.relations:
-            src = next((e for e in self.entities if e.id == r.source_id), None)
-            tgt = next((e for e in self.entities if e.id == r.target_id), None)
+            src = entity_map.get(r.source_id)
+            tgt = entity_map.get(r.target_id)
             triplets.append(
                 Triplet(
                     head=src.name if src else r.source_id,
