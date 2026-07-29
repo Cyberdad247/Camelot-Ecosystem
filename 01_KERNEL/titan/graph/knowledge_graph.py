@@ -167,6 +167,7 @@ class KnowledgeGraphEngine:
         self._initialized = False
         self._entity_cache: dict[str, Entity] = {}
         self._relation_cache: list[Relation] = []
+        self._adjacency_list: dict[str, list[Relation]] = {}
 
     def initialize(self, llm_model: str = "local") -> None:
         """
@@ -287,6 +288,9 @@ class KnowledgeGraphEngine:
         for e in entities:
             self._entity_cache[e.id] = e
         self._relation_cache.extend(relations)
+        for r in relations:
+            self._adjacency_list.setdefault(r.source_id, []).append(r)
+            self._adjacency_list.setdefault(r.target_id, []).append(r)
 
         latency = (time.time() - start_time) * 1000
         return {
@@ -440,15 +444,23 @@ class KnowledgeGraphEngine:
         # Get neighbors (relations)
         entity_ids = {e.id for e in matching_entities}
         matching_relations = []
+        visited_relations = set()
+        current_ids = set(entity_ids)
 
         for hop in range(hops):
-            new_ids = set()
-            for rel in self._relation_cache:
-                if rel.source_id in entity_ids or rel.target_id in entity_ids:
-                    matching_relations.append(rel)
-                    new_ids.add(rel.source_id)
-                    new_ids.add(rel.target_id)
-            entity_ids.update(new_ids)
+            next_ids = set()
+            for eid in current_ids:
+                for rel in self._adjacency_list.get(eid, []):
+                    rel_id = id(rel)
+                    if rel_id not in visited_relations:
+                        visited_relations.add(rel_id)
+                        matching_relations.append(rel)
+                        if rel.source_id not in entity_ids:
+                            next_ids.add(rel.source_id)
+                        if rel.target_id not in entity_ids:
+                            next_ids.add(rel.target_id)
+            current_ids = next_ids
+            entity_ids.update(next_ids)
 
         # Expand entities with neighbors
         for eid in entity_ids:
@@ -516,15 +528,16 @@ class KnowledgeGraphEngine:
 
         for hop in range(hops):
             next_ids = set()
-            for rel in self._relation_cache:
-                if rel.source_id in current_ids and rel.target_id not in visited_ids:
-                    next_ids.add(rel.target_id)
-                    relations.append(rel)
-                    visited_ids.add(rel.target_id)
-                elif rel.target_id in current_ids and rel.source_id not in visited_ids:
-                    next_ids.add(rel.source_id)
-                    relations.append(rel)
-                    visited_ids.add(rel.source_id)
+            for eid in current_ids:
+                for rel in self._adjacency_list.get(eid, []):
+                    if rel.source_id == eid and rel.target_id not in visited_ids:
+                        next_ids.add(rel.target_id)
+                        relations.append(rel)
+                        visited_ids.add(rel.target_id)
+                    elif rel.target_id == eid and rel.source_id not in visited_ids:
+                        next_ids.add(rel.source_id)
+                        relations.append(rel)
+                        visited_ids.add(rel.source_id)
 
             # Add new entities
             for eid in next_ids:
