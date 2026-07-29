@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "control_plane"))
-from switchboard import probe_all, get_manifest
+from switchboard import get_manifest, probe_all
 
 asyncio.run(probe_all())
 manifest = get_manifest()

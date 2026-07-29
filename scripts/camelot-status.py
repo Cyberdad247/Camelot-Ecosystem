@@ -140,7 +140,7 @@ check("swarm_spawner/",      (ROOT / "kinetic_edge" / "swarm_spawner" / "Cargo.t
 check("swarm-spawner binary",(ROOT / "bin" / "swarm-spawner.exe").exists(), warn_only=True)
 # Runic router smoke test
 try:
-    from runic_router import parse_rune, list_runes
+    from runic_router import list_runes, parse_rune
     runes = list_runes()
     required_runic = {
         "//BOOT",
@@ -165,7 +165,7 @@ except Exception as e:
     check("Runic Router", False, str(e))
 # Lord Archivist GEP smoke
 try:
-    from lord_archivist import _scan_skill_versions, _detect_skill_gaps
+    from lord_archivist import _detect_skill_gaps, _scan_skill_versions
     skills = _scan_skill_versions()
     gaps = _detect_skill_gaps()
     check("GEP scan skills", len(skills) >= 7, f"{len(skills)} skills scanned")

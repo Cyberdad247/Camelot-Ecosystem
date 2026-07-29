@@ -1297,7 +1297,7 @@ def _phase1_crdt_mesh(node: dict) -> PhaseResult:
     tissue_dir.mkdir(parents=True, exist_ok=True)
     crdt_file = tissue_dir / "nano_swarm_crdt.json"
     crdt_file.write_text(json.dumps(crdt_payload, indent=2), encoding="utf-8")
-    findings.append(f"L0 tissue — nano_swarm_crdt.json written ✓")
+    findings.append("L0 tissue — nano_swarm_crdt.json written ✓")
 
     # L1.5: Redis Agent Memory (MP2P7SN8) — load env and invoke
     try:

@@ -1,8 +1,9 @@
+import json
 import os
 import sys
-import json
 from datetime import datetime, timezone
 from pathlib import Path
+
 
 def finalize_codex():
     home = Path("C:/Users/vizio/CAMELOT_OS")
