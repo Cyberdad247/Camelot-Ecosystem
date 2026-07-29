@@ -1364,6 +1364,11 @@ window.buildDomTree = (
       children: [],
     };
 
+    // Always store the Grounding ID if present
+    if (node.hasAttribute && node.hasAttribute('data-nano-id')) {
+      nodeData.attributes['data-nano-id'] = node.getAttribute('data-nano-id');
+    }
+
     // Get attributes for interactive elements or potential text containers
     if (
       isInteractiveCandidate(node) ||
@@ -1496,11 +1501,6 @@ window.buildDomTree = (
           else if (node.attributes && node.attributes['aria-label']) text = limitText(node.attributes['aria-label']);
           
           // Get the Real Grounding ID (injected earlier)
-          // Note: map[id] is the nodeData. We need the original element to get the attribute? 
-          // Wait, buildDomTree returns an ID to map, but doesn't store the Grounding ID in nodeData.
-          // FIX: We need to store the Grounding ID in nodeData during traversal.
-          
-          // Fallback if not stored (will fix in next step if needed, but for now assuming logic flow)
           const groundingId = node.attributes && node.attributes['data-nano-id'] ? node.attributes['data-nano-id'] : "_";
 
           // Format: Indent | ID | Tag | Vis | Text | GroundingID
