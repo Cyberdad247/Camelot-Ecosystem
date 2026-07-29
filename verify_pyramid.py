@@ -5,9 +5,11 @@ Knowledge Pyramid Verification — End-to-end system test.
 Usage:
     python verify_pyramid.py [--verbose] [--knight sir_boris]
 """
+
 import asyncio
-import sys
+import importlib.util
 import json
+import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -55,24 +57,26 @@ class PyramidVerifier:
 
     async def check_dependencies(self) -> bool:
         """Verify required packages are installed."""
-        try:
-            import aiofiles
-            import yaml
-            from sentence_transformers import SentenceTransformer
-            from qdrant_client import QdrantClient
-            import redis
+        required = [
+            ("aiofiles", "aiofiles"),
+            ("yaml", "pyyaml"),
+            ("sentence_transformers", "sentence-transformers"),
+            ("qdrant_client", "qdrant-client"),
+            ("redis", "redis"),
+        ]
 
+        missing = []
+        for mod_name, pkg_name in required:
+            if importlib.util.find_spec(mod_name) is None:
+                missing.append(pkg_name)
+            elif self.verbose:
+                print(f"  ✓ {pkg_name}")
+
+        if missing:
             if self.verbose:
-                print("  ✓ aiofiles")
-                print("  ✓ pyyaml")
-                print("  ✓ sentence-transformers")
-                print("  ✓ qdrant-client")
-                print("  ✓ redis")
-            return True
-        except ImportError as e:
-            if self.verbose:
-                print(f"  Missing: {e}")
+                print(f"  Missing: {', '.join(missing)}")
             return False
+        return True
 
     async def check_qdrant(self) -> bool:
         """Verify Qdrant connectivity."""
@@ -122,11 +126,7 @@ class PyramidVerifier:
                 print(f"  Tasks: {len(str(docs['tasks']))} chars")
                 print(f"  Verification: {len(str(docs['verification']))} chars")
 
-            return (
-                len(docs["blueprint"]) > 0
-                and docs["agent"] is not None
-                and docs["tasks"] is not None
-            )
+            return len(docs["blueprint"]) > 0 and docs["agent"] is not None and docs["tasks"] is not None
         except Exception as e:
             if self.verbose:
                 print(f"  Error: {e}")
@@ -158,9 +158,7 @@ class PyramidVerifier:
                 print(f"  Keywords: {compressed.keywords}")
 
             # Test search
-            similar = await compressor.find_similar(
-                "Test query", "sir_boris", limit=1
-            )
+            similar = await compressor.find_similar("Test query", "sir_boris", limit=1)
             if self.verbose:
                 print(f"  Similar found: {len(similar)}")
 
@@ -199,11 +197,10 @@ class PyramidVerifier:
             # Quick dispatch test (with timeout)
             chunks = []
             try:
-                async for chunk in asyncio.wait_for(
+                await asyncio.wait_for(
                     self._collect_dispatch(bf, chunks),
                     timeout=5.0,
-                ):
-                    pass
+                )
             except asyncio.TimeoutError:
                 if self.verbose:
                     print("  Dispatch timeout (expected in test)")
