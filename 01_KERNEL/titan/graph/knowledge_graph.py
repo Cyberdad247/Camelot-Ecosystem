@@ -106,9 +106,10 @@ class SubGraph:
 
         # Relation chains
         lines.append("\n### Relationships:")
+        entities_by_id = {e.id: e for e in self.entities}
         for r in self.relations:
-            src = next((e for e in self.entities if e.id == r.source_id), None)
-            tgt = next((e for e in self.entities if e.id == r.target_id), None)
+            src = entities_by_id.get(r.source_id)
+            tgt = entities_by_id.get(r.target_id)
             src_name = src.name if src else r.source_id
             tgt_name = tgt.name if tgt else r.target_id
             lines.append(f"- {src_name} --[{r.relation_type}]--> {tgt_name}")
