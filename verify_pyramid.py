@@ -6,8 +6,8 @@ Usage:
     python verify_pyramid.py [--verbose] [--knight sir_boris]
 """
 import asyncio
-import sys
 import json
+import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -55,24 +55,23 @@ class PyramidVerifier:
 
     async def check_dependencies(self) -> bool:
         """Verify required packages are installed."""
-        try:
-            import aiofiles
-            import yaml
-            from sentence_transformers import SentenceTransformer
-            from qdrant_client import QdrantClient
-            import redis
+        import importlib.util
 
-            if self.verbose:
-                print("  ✓ aiofiles")
-                print("  ✓ pyyaml")
-                print("  ✓ sentence-transformers")
-                print("  ✓ qdrant-client")
-                print("  ✓ redis")
-            return True
-        except ImportError as e:
-            if self.verbose:
-                print(f"  Missing: {e}")
-            return False
+        required_modules = ["aiofiles", "yaml", "sentence_transformers", "qdrant_client", "redis"]
+
+        for module in required_modules:
+            if importlib.util.find_spec(module) is None:
+                if self.verbose:
+                    print(f"  Missing: No module named '{module}'")
+                return False
+
+        if self.verbose:
+            print("  ✓ aiofiles")
+            print("  ✓ pyyaml")
+            print("  ✓ sentence-transformers")
+            print("  ✓ qdrant-client")
+            print("  ✓ redis")
+        return True
 
     async def check_qdrant(self) -> bool:
         """Verify Qdrant connectivity."""
@@ -199,7 +198,7 @@ class PyramidVerifier:
             # Quick dispatch test (with timeout)
             chunks = []
             try:
-                async for chunk in asyncio.wait_for(
+                async for _chunk in asyncio.wait_for(
                     self._collect_dispatch(bf, chunks),
                     timeout=5.0,
                 ):
