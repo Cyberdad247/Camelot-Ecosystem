@@ -49,7 +49,8 @@ def update_ledger():
                 header_index = i
                 break
         
-        if header_index == -1: return
+        if header_index == -1:
+            return
 
         separator_index = header_index + 1
         new_rows = [f"| {e['id']} | **{e['task']}** | {e['author']} | {e['status']} | {e['notes']} |" for e in v702_entries]

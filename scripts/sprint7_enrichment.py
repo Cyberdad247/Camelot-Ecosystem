@@ -24,7 +24,7 @@ if hasattr(sys.stderr, "reconfigure"):
 HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 sys.path.insert(0, str(HOME))
 
-from control_plane.ledger_sync import append_provenance_entry
+from control_plane.ledger_sync import append_provenance_entry  # noqa: E402
 
 _BRIDGE = HOME / "03_VAULT" / "training" / "configs" / "notebooklm_bridge.py"
 _spec = importlib.util.spec_from_file_location("notebooklm_bridge", _BRIDGE)

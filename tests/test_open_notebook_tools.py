@@ -1,7 +1,7 @@
-import sys
 import importlib.util as _ilu
-from pathlib import Path
+import sys
 from datetime import datetime
+from pathlib import Path
 
 CAMELOT = Path(__file__).resolve().parents[1]
 
@@ -34,7 +34,7 @@ def test_get_current_timestamp_format():
         parsed_time = datetime.strptime(result, "%Y%m%d%H%M%S")
         assert parsed_time is not None
     except ValueError as e:
-        assert False, f"Timestamp format invalid: {e}"
+        raise AssertionError(f"Timestamp format invalid: {e}") from e
 
 def test_get_current_timestamp_freshness():
     """Verify get_current_timestamp generates a fresh, reasonably accurate timestamp."""

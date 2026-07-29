@@ -1,5 +1,7 @@
 import json
-from control_plane.provenance import VerificationRun, ProvenanceManager
+
+from control_plane.provenance import ProvenanceManager, VerificationRun
+
 
 def backfill():
     mgr = ProvenanceManager()
