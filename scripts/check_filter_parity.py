@@ -26,7 +26,6 @@ import sys
 
 import yaml
 
-
 PRE_COMMIT = ".pre-commit-config.yaml"
 WORKFLOW = ".github/workflows/verify_os.yml"
 HOOK_ID = "infra-purge-rollback-verify"

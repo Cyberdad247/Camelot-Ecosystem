@@ -281,7 +281,7 @@ def _ast_eval_literal(node: ast.AST):
     if isinstance(node, ast.Dict):
         return {
             _ast_eval_literal(k): _ast_eval_literal(v)
-            for k, v in zip(node.keys, node.values)
+            for k, v in zip(node.keys, node.values, strict=False)
         }
     raise ValueError(f"unsupported literal node: {type(node).__name__}")
 
@@ -701,7 +701,7 @@ def _diff_message(
                 f"invariant=\"{name}\" unordered path={a_path} only={only_in_a} "
                 f"path={b_path} only={only_in_b}"
             )
-        for i, (x, y) in enumerate(zip(a_val, b_val)):
+        for i, (x, y) in enumerate(zip(a_val, b_val, strict=False)):
             if x != y:
                 return (
                     f"invariant=\"{name}\" ordered path={a_path} "

@@ -285,4 +285,4 @@ def health():
 @modal.fastapi_endpoint(method="POST")
 def morgana_brain_v2(req: MorganaRequest):
     """Alternative endpoint with same logic"""
-    return morgana_brain(req)  # Reuse the same function logic
+    return morgana_brain.local(req)  # Reuse the same function logic

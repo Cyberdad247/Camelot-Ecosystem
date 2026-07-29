@@ -9,7 +9,6 @@ import os
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 MIN_FREE_MB = 800.0
 MAX_USED_MB = 7.2 * 1024

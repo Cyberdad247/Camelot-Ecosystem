@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+
 # -*- coding: utf-8 -*-
 """
 [KITTEN] KITTEN_SERVICE (L2 Kinetic)

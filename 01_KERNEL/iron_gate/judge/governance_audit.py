@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+
 from __future__ import annotations
 
 import json

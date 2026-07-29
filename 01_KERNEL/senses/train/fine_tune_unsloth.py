@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+
 """
 Fine-tuning template using Unsloth.
 Standardizing according to Phase 7 Recommendation 1.
