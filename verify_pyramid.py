@@ -6,8 +6,9 @@ Usage:
     python verify_pyramid.py [--verbose] [--knight sir_boris]
 """
 import asyncio
-import sys
+import importlib.util
 import json
+import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -56,11 +57,10 @@ class PyramidVerifier:
     async def check_dependencies(self) -> bool:
         """Verify required packages are installed."""
         try:
-            import aiofiles
-            import yaml
-            from sentence_transformers import SentenceTransformer
-            from qdrant_client import QdrantClient
-            import redis
+            deps = ["aiofiles", "yaml", "sentence_transformers", "qdrant_client", "redis"]
+            for d in deps:
+                if importlib.util.find_spec(d) is None:
+                    raise ImportError(f"No module named '{d}'")
 
             if self.verbose:
                 print("  ✓ aiofiles")
@@ -199,11 +199,18 @@ class PyramidVerifier:
             # Quick dispatch test (with timeout)
             chunks = []
             try:
-                async for chunk in asyncio.wait_for(
-                    self._collect_dispatch(bf, chunks),
-                    timeout=5.0,
-                ):
-                    pass
+                # wait_for cannot take an async generator directly
+                # we wrap the generator consumption in an async function
+                async def _collect_with_timeout():
+                    gen = self._collect_dispatch(bf, chunks)
+                    try:
+                        # Since it's not a true async generator but an async function
+                        # that iterates over an async generator, we just await it
+                        await gen
+                    finally:
+                        pass # No aclose needed
+
+                await asyncio.wait_for(_collect_with_timeout(), timeout=5.0)
             except asyncio.TimeoutError:
                 if self.verbose:
                     print("  Dispatch timeout (expected in test)")
@@ -221,8 +228,8 @@ class PyramidVerifier:
 
     async def _collect_dispatch(self, bf, chunks):
         """Helper to collect dispatch chunks."""
-        async for chunk in bf.stream("sir_boris", "Quick test"):
-            chunks.append(chunk)
+        async for _chunk in bf.stream("sir_boris", "Quick test"):
+            chunks.append(_chunk)
             if len("".join(chunks)) > 50:  # Early exit after some content
                 break
 
