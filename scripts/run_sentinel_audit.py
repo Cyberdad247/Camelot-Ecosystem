@@ -5,6 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "03_VAULT" / "training" / "configs"))
 from knights.sentinel import SirSentinel
 
+
 def main():
     sentinel = SirSentinel()
     # Runs the full security audit and writes to logs/sentinel_audit_latest.md

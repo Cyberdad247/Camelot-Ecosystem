@@ -5,9 +5,14 @@ LADY_MNEMOSYNE -> SIR_SOCRATES -> OCTAVIAN -> LADY_ALEXANDRIA
 -> SIR_GIDEON -> MERLIN_OMEGA -> ALEX_LINK -> ANYA_OMEGA
 Output: νKG_CRYSTAL NANO to 03_VAULT/UKG/nodes/
 """
-import os, sys, json, hashlib, time, re
-from pathlib import Path
+import hashlib
+import json
+import os
+import re
+import sys
+import time
 from datetime import datetime, timezone
+from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -18,7 +23,8 @@ now = time.time()
 # ── env ──────────────────────────────────────────────────────────────────────
 def _load_env():
     env = CAMELOT_HOME / ".env"
-    if not env.exists(): return
+    if not env.exists():
+        return
     for line in env.read_text(encoding="utf-8", errors="replace").splitlines():
         if "=" in line and not line.startswith("#"):
             k, _, v = line.partition("=")
@@ -47,15 +53,18 @@ print("[ LADY_MNEMOSYNE ] Scanning entropy fields...")
 candidates = []
 for d in DISTILL_DIRS:
     p = CAMELOT_HOME / d
-    if not p.exists(): continue
+    if not p.exists():
+        continue
     for f in p.rglob("*"):
-        if not f.is_file() or protected(str(f)): continue
+        if not f.is_file() or protected(str(f)):
+            continue
         try:
             st = f.stat()
             age_h = (now - max(st.st_atime, st.st_mtime)) / 3600
             candidates.append({"path": str(f.relative_to(CAMELOT_HOME)),
                                 "size": st.st_size, "age_h": round(age_h, 1)})
-        except Exception: pass
+        except Exception:
+            pass
 
 print(f"           {len(candidates)} candidates identified")
 
@@ -75,9 +84,12 @@ print("[ SIR_GIDEON    ] Running dependency isolation tests...")
 prod_src = ""
 for f in CAMELOT_HOME.rglob("*.py"):
     rel = str(f.relative_to(CAMELOT_HOME))
-    if any(x in rel for x in ["tests/tmp", "data/", "scripts/sync_lattice"]): continue
-    try: prod_src += f.read_text(encoding="utf-8", errors="replace")[:300]
-    except Exception: pass
+    if any(x in rel for x in ["tests/tmp", "data/", "scripts/sync_lattice"]):
+        continue
+    try:
+        prod_src += f.read_text(encoding="utf-8", errors="replace")[:300]
+    except Exception:
+            pass
 
 gideon_clean = True
 gideon_flags = []

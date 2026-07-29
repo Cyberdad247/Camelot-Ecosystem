@@ -1,7 +1,7 @@
-from pathlib import Path
+from pathlib import Path  # noqa: E402
 
 repo_root = Path(__file__).resolve().parent.parent.parent
-import importlib.util
+import importlib.util  # noqa: E402
 
 repo_root = Path(__file__).resolve().parent.parent.parent
 _MEM_PATH = repo_root / "01_KERNEL" / "memory" / "mempalace_l2.py"

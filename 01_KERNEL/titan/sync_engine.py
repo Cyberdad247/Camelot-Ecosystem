@@ -49,7 +49,7 @@ def sync_ukg():
 
     # Simulate scanning 03_VAULT
     if os.path.exists(VAULT_PATH):
-        for root, dirs, files in os.walk(VAULT_PATH):
+        for root, _dirs, files in os.walk(VAULT_PATH):
             for file in files:
                 path = os.path.join(root, file)
                 if path not in bf:

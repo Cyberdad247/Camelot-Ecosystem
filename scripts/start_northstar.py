@@ -389,7 +389,7 @@ async def run_test_suite_async() -> bool:
             print(f"  [FAIL] Gzip compression ratio {ratio:.2f}% is less than 60%")
             passed = False
         else:
-            print(f"  [PASS] Gzip compression ratio meets >= 60% requirement")
+            print("  [PASS] Gzip compression ratio meets >= 60% requirement")
 
         # 2. E2E binary gzip WS transmission with edge-router
         async with websockets.connect("ws://127.0.0.1:3001") as ws:

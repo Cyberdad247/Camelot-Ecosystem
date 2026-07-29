@@ -6,15 +6,15 @@ S8-01: Qdrant vector DB docs (qdrant_store.py semantic memory)
 S8-02: sentence-transformers docs (embedding ref for qdrant_store)
 S8-03: UKG_SPRINT8_DELTA_V706 delta note (S8 state)
 """
-from __future__ import annotations
+from __future__ import annotations  # noqa: E402
 
-import asyncio
-import importlib.util
+import asyncio  # noqa: E402
+import importlib.util  # noqa: E402
 import json
 import os
 import sys
-from datetime import datetime, timezone
-from pathlib import Path
+from datetime import datetime, timezone  # noqa: E402
+from pathlib import Path  # noqa: E402
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -24,7 +24,7 @@ if hasattr(sys.stderr, "reconfigure"):
 HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 sys.path.insert(0, str(HOME))
 
-from control_plane.ledger_sync import append_provenance_entry
+from control_plane.ledger_sync import append_provenance_entry  # noqa: E402
 
 _BRIDGE = HOME / "03_VAULT" / "training" / "configs" / "notebooklm_bridge.py"
 _spec = importlib.util.spec_from_file_location("notebooklm_bridge", _BRIDGE)

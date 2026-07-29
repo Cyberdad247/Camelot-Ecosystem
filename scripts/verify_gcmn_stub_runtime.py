@@ -399,7 +399,7 @@ def write_md_report(md_path: Path, manifest: dict[str, Any], results: list[dict[
                    acceptance: dict[str, Any], artifact_sha256: str, artifact_path: Path) -> None:
     md_path.parent.mkdir(parents=True, exist_ok=True)
     out = _io.StringIO()
-    out.write(f"# GCMN Stub Runtime Flip + Acceptance Report\n\n")
+    out.write("# GCMN Stub Runtime Flip + Acceptance Report\n\n")
     out.write(f"**Run ISO:** `{manifest['run_iso']}`\n\n")
     out.write(f"**Schema:** `{manifest['schema']}`\n\n")
     out.write(f"**Runic router module sha256:** `{manifest['runic_router_module_sha256']}`\n\n")
@@ -630,7 +630,7 @@ def main(argv: list[str] | None = None) -> int:
     queue_pre, queue_post = _queue_file_pre_post_guard()
 
     results: list[dict[str, Any]] = []
-    for i, (rune, param) in enumerate(zip(runes, params), 1):
+    for i, (rune, param) in enumerate(zip(runes, params, strict=False), 1):
         if args.strict and results and not results[-1]["all_pass"]:
             print(
                 f"--strict mode: stopping after first acceptance violation ({runes[-1]}).",
@@ -654,7 +654,7 @@ def main(argv: list[str] | None = None) -> int:
         # + _queue_task never called). Adjacent pytest runs (e.g. test rigs that
         # spawn this harness from a pytest pytestcache context) CAN grow the
         # queue via _queue_task privacy/escalation paths; --keep-queue-file opts out.
-        queue_unchanged = actual_post == queue_pre
+        _queue_unchanged = actual_post == queue_pre
 
     manifest = build_manifest(runes)
     overall_pass = all(r["all_pass"] for r in results)
