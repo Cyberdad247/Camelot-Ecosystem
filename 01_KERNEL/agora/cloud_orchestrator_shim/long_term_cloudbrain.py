@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+
 """Canonical long-term cloudbrain bootstrap for Camelot-OS.
 
 This module turns the existing Open Notebook stack into a reusable service
