@@ -106,9 +106,10 @@ class SubGraph:
 
         # Relation chains
         lines.append("\n### Relationships:")
+        entity_map = {e.id: e for e in self.entities}
         for r in self.relations:
-            src = next((e for e in self.entities if e.id == r.source_id), None)
-            tgt = next((e for e in self.entities if e.id == r.target_id), None)
+            src = entity_map.get(r.source_id)
+            tgt = entity_map.get(r.target_id)
             src_name = src.name if src else r.source_id
             tgt_name = tgt.name if tgt else r.target_id
             lines.append(f"- {src_name} --[{r.relation_type}]--> {tgt_name}")
@@ -118,9 +119,10 @@ class SubGraph:
     def to_triplets(self) -> list[Triplet]:
         """Convert to list of triplets."""
         triplets = []
+        entity_map = {e.id: e for e in self.entities}
         for r in self.relations:
-            src = next((e for e in self.entities if e.id == r.source_id), None)
-            tgt = next((e for e in self.entities if e.id == r.target_id), None)
+            src = entity_map.get(r.source_id)
+            tgt = entity_map.get(r.target_id)
             triplets.append(
                 Triplet(
                     head=src.name if src else r.source_id,
@@ -441,7 +443,7 @@ class KnowledgeGraphEngine:
         entity_ids = {e.id for e in matching_entities}
         matching_relations = []
 
-        for hop in range(hops):
+        for _hop in range(hops):
             new_ids = set()
             for rel in self._relation_cache:
                 if rel.source_id in entity_ids or rel.target_id in entity_ids:
@@ -514,7 +516,7 @@ class KnowledgeGraphEngine:
 
         current_ids = {target_entity.id}
 
-        for hop in range(hops):
+        for _hop in range(hops):
             next_ids = set()
             for rel in self._relation_cache:
                 if rel.source_id in current_ids and rel.target_id not in visited_ids:
