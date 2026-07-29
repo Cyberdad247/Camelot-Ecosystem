@@ -1519,3 +1519,4 @@ window.buildDomTree = (
 
   return { rootId, map: DOM_HASH_MAP, toon: toonOutput };
 };
+// Fixed Grounding ID logic
