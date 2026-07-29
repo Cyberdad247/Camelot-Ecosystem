@@ -4,9 +4,8 @@
 Kernel package initialization.
 """
 
+import sys
 from pathlib import Path
-import sys  # noqa: F401
-import os  # noqa: F401
 
 # --- LAW OF ANTIGRAVITY: SAFE I/O INJECTION ---
 try:
