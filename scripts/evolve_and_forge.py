@@ -23,9 +23,11 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from control_plane.hyper_evolve import promote_mutation
-from control_plane.runic_router import route_rune
-from control_plane.worker import _call_llm_raw, QueueTask
+from control_plane.hyper_evolve import promote_mutation  # noqa: E402
+from control_plane.runic_router import route_rune  # noqa: E402
+
+from control_plane.worker import QueueTask, _call_llm_raw  # noqa: E402
+
 
 def run_cmd(cmd: list[str], cwd: Path = REPO_ROOT, capture: bool = True) -> tuple[int, str, str]:
     """Run a shell command safely."""
@@ -45,7 +47,7 @@ def main(argv: list[str] | None = None) -> int:
     task_desc = args.task
     timestamp = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
 
-    print(f"=== OMEGA TRANSMISSION :: //EVOLVE_AND_FORGE ===")
+    print("=== OMEGA TRANSMISSION :: //EVOLVE_AND_FORGE ===")
     print(f"Objective: {task_desc}")
     print(f"Timestamp: {timestamp}\n")
 
@@ -70,7 +72,7 @@ def main(argv: list[str] | None = None) -> int:
     success = False
     try:
         # 3. Queue the implementation task for the knight sir_forge
-        print(f"[SHADOW_FORGE] Queuing target objective implementation task...")
+        print("[SHADOW_FORGE] Queuing target objective implementation task...")
         # We append the Obsidian and Luxora Gold highlight style constraint to the task
         enriched_task = (
             f"{task_desc}\n\n"
@@ -85,7 +87,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"[SHADOW_FORGE] Task queued with ID: {rune_res.task_id}")
 
         # 4. Invoke the queue worker to process the task on this branch
-        print(f"[SHADOW_FORGE] Dispatching harness worker to implement code...")
+        print("[SHADOW_FORGE] Dispatching harness worker to implement code...")
         # Run worker once, automatically approving the queued task
         code, out, err = run_cmd([sys.executable, "-m", "control_plane.worker", "--once", "--auto-approve"])
         print(out)
@@ -93,17 +95,17 @@ def main(argv: list[str] | None = None) -> int:
             print(f"[WARN] Worker logs: {err}")
 
         # 5. Crucible Verification (Colony Triage & Tests)
-        print(f"[CRUCIBLE] Running codebase triage via Squire Colony...")
+        print("[CRUCIBLE] Running codebase triage via Squire Colony...")
         colony_code, colony_out, colony_err = run_cmd([sys.executable, "-m", "squires.colony", "triage", ".", "--auto-approve"])
         print(colony_out)
 
         # Run unit tests if any pytest files exist
-        print(f"[CRUCIBLE] Running automated test suite...")
+        print("[CRUCIBLE] Running automated test suite...")
         test_code, test_out, test_err = run_cmd([sys.executable, "-m", "pytest"])
         print(test_out)
 
         if test_code != 0:
-            print(f"[CRUCIBLE] Automated tests failed. Initiating self-healing loop...")
+            print("[CRUCIBLE] Automated tests failed. Initiating self-healing loop...")
             # Run self-heal loop up to 3 times
             for iteration in range(1, 4):
                 print(f"[CRUCIBLE] Self-healing iteration {iteration}/3...")
@@ -120,11 +122,11 @@ def main(argv: list[str] | None = None) -> int:
                     break
 
         if test_code != 0:
-            print(f"[ALERT] Crucible failed: Unit tests are still failing after self-healing.")
+            print("[ALERT] Crucible failed: Unit tests are still failing after self-healing.")
             return 1
 
         # 6. GEP (Genome Evolution Protocol)
-        print(f"[GEP] Extracting Success Gene from diff...")
+        print("[GEP] Extracting Success Gene from diff...")
         diff_code, diff_out, diff_err = run_cmd(["git", "diff", base_branch])
         files_code, files_out, files_err = run_cmd(["git", "diff", "--name-only", base_branch])
         modified_files = [f.strip() for f in files_out.splitlines() if f.strip()]
@@ -171,7 +173,7 @@ def main(argv: list[str] | None = None) -> int:
             }
 
         # Promote mutation via hyper_evolve governance gate
-        print(f"[GEP] Vetting and promoting mutation rule...")
+        print("[GEP] Vetting and promoting mutation rule...")
         res = promote_mutation(
             agent="sir_boris",
             objective=task_desc,
@@ -185,16 +187,16 @@ def main(argv: list[str] | None = None) -> int:
         if res["status"] == "REJECTED":
             # GEP review failed — GEP REVIEW REJECTED alert!
             failures_str = ", ".join(res["review"]["failures"])
-            print(f"\n[ALERT] GEP REVIEW REJECTED: Rule mutation failed security/governance validation.")
+            print("\n[ALERT] GEP REVIEW REJECTED: Rule mutation failed security/governance validation.")
             print(f"Reason(s): {failures_str}")
             return 1
 
-        print(f"\n[GEP] Rule Mutation APPROVED & Promoted to skills.md.")
+        print("\n[GEP] Rule Mutation APPROVED & Promoted to skills.md.")
         print(f"New Rule: {learning_json.get('proposal')}")
 
         # 7. Sovereign Approval & Automatic Merge
-        print(f"\n[SOVEREIGN_GATE] GEP check and Crucible tests passed.")
-        print(f"[SOVEREIGN_GATE] Sovereign approved. Proceeding with automatic merge...")
+        print("\n[SOVEREIGN_GATE] GEP check and Crucible tests passed.")
+        print("[SOVEREIGN_GATE] Sovereign approved. Proceeding with automatic merge...")
 
         # Switch back to base branch and merge
         code, out, err = run_cmd(["git", "checkout", base_branch])
@@ -219,7 +221,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"[SHADOW_FORGE] Cleaning up: returning to base branch {base_branch}")
             run_cmd(["git", "checkout", base_branch])
 
-    print(f"\n=== //EVOLVE_AND_FORGE COMPLETED SUCCESSFULLY ===")
+    print("\n=== //EVOLVE_AND_FORGE COMPLETED SUCCESSFULLY ===")
     return 0
 
 if __name__ == "__main__":

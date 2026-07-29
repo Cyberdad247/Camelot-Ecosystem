@@ -1,7 +1,7 @@
 import asyncio
+import json
 import os
 import sys
-import json
 from pathlib import Path
 
 # Add configs to path for notebooklm_bridge
@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "0
 
 async def main():
     from notebooklm import NotebookLMClient
-    from notebooklm.auth import load_auth_from_storage, fetch_tokens, AuthTokens
+    from notebooklm.auth import AuthTokens, fetch_tokens, load_auth_from_storage
     
     print("Authenticating for Heimdall hydration...")
     try:

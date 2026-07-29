@@ -25,7 +25,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterable
 
-
 DEFAULT_EXCLUDES = {
     ".git",
     ".hg",

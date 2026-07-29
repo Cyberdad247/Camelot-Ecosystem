@@ -3,8 +3,10 @@ Headed Playwright re-auth using the notebooklm browser_profile.
 The profile has DPAPI-encrypted Google cookies that Playwright can use in headed mode.
 Auto-detects login completion and saves session.
 """
-import asyncio, time
+import asyncio
+import time
 from pathlib import Path
+
 from playwright.async_api import async_playwright
 
 STORAGE = Path.home() / ".notebooklm" / "storage_state.json"

@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 def patch_router():
     path = Path("control_plane/runic_router.py")
     content = path.read_text(encoding="utf-8")

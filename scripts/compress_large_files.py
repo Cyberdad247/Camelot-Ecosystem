@@ -1,7 +1,7 @@
 """One-shot compression script — dedup saltare, gzip archival text, archive assimilation_7."""
-import os
 import gzip
 import hashlib
+import os
 import shutil
 import tarfile
 from pathlib import Path
@@ -33,7 +33,7 @@ if canon.exists() and dupe.exists():
         except OSError:
             # Restore from canon if hard link fails
             shutil.copy2(str(canon), str(dupe))
-            print(f"  WARNING: hard link failed, restored via copy")
+            print("  WARNING: hard link failed, restored via copy")
         saved_total += dupe_size
         print(f"  HARDLINK created: {dupe} -> {canon}")
         print(f"  SAVED: {dupe_size/(1024*1024):.1f}MB (double-counting eliminated)")
@@ -79,7 +79,7 @@ assim_dir = Path("03_VAULT/runtime_state/assimilation_7")
 if assim_dir.exists():
     # Measure total size
     total = 0
-    for root, dirs, files in os.walk(assim_dir):
+    for root, _dirs, files in os.walk(assim_dir):
         for f in files:
             try:
                 total += (Path(root) / f).stat().st_size
