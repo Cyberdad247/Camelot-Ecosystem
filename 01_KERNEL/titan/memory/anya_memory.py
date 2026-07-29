@@ -41,8 +41,6 @@ class AnyaMemoryEngine(AgentMemoryEngine):
         Heuristic extraction tailored for Anya's street-smart scrying.
         """
         lowered = user_input.lower()
-        extracted = []
-
         # Anya's Specific Extraction Heuristics
         rules = [
             (["from now on", "remember", "i prefer"], "preference", 0.9),

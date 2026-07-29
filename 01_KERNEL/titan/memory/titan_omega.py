@@ -11,14 +11,15 @@ Three-tier memory system for Project Chimera:
 This is the foundation for Context Expansion Protocol (CEP) and RAG.
 """
 
-import os
-import json
-import time
 import hashlib
+import json
+import os
+import time
 import warnings
-from pathlib import Path
-from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
+
 import networkx as nx
 
 try:
@@ -46,11 +47,7 @@ try:
 except ImportError:
     VECTOR_AVAILABLE = False
 
-from .titan_schemas import (
-    GraphNode, GraphEdge, GraphNodeProvenance,
-    VaultEmbedding, FluxNode, TitanOmegaConfig
-)
-
+from .titan_schemas import FluxNode, GraphEdge, GraphNode, GraphNodeProvenance, TitanOmegaConfig, VaultEmbedding
 
 # =========================================
 # Omega-GRAPH: Knowledge Graph Engine
@@ -192,10 +189,10 @@ class OmegaGraph:
                 print(f"[Omega-Graph] Loaded {len(self.graph.nodes())} nodes from {self.persist_path}")
             except (json.JSONDecodeError, KeyError, ValueError) as e:
                 print(f"[Omega-Graph] Warning: Could not load graph from {self.persist_path}: {e}")
-                print(f"[Omega-Graph] Starting with empty graph")
+                print("[Omega-Graph] Starting with empty graph")
                 self.graph = nx.DiGraph()
         else:
-            print(f"[Omega-Graph] No existing graph found, starting fresh")
+            print("[Omega-Graph] No existing graph found, starting fresh")
 
 
 # =========================================
@@ -256,7 +253,7 @@ class OmegaVault:
         Returns: List of (VaultEmbedding, distance) tuples.
         """
         if not self.embeddings:
-            print(f"[Omega-Vault] No embeddings in vault, returning empty results")
+            print("[Omega-Vault] No embeddings in vault, returning empty results")
             return []
         
         query_vector = self.encoder.encode([query])[0].reshape(1, -1)
@@ -267,7 +264,7 @@ class OmegaVault:
         
         # Check if search returned any results
         if len(indices) > 0 and len(indices[0]) > 0:
-            for idx, distance in zip(indices[0], distances[0]):
+            for idx, distance in zip(indices[0], distances[0], strict=False):
                 if idx < len(embedding_list) and idx >= 0:
                     results.append((embedding_list[idx], float(distance)))
         
@@ -422,7 +419,7 @@ class TitanOmega:
         node.provenance.created_by = signed_by
         node.provenance.hash = node.compute_hash()
 
-        node_id = self.graph.add_node(node)
+        self.graph.add_node(node)
         if self._auto_persist:
             self.graph.save()
 

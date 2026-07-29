@@ -6,13 +6,15 @@ Test suite for Titan Omega Memory Stack
 Validates Omega-Graph, Omega-Vault, and Omega-Flux functionality.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from titan_schemas import GraphNode, GraphEdge, GraphNodeProvenance
-from titan_omega import TitanOmega
 from datetime import datetime
+
+from titan_omega import TitanOmega
+from titan_schemas import GraphEdge, GraphNode, GraphNodeProvenance
 
 
 def test_omega_graph():
@@ -87,7 +89,7 @@ def test_omega_vault():
         
         # Save to disk
         titan.vault.save()
-        print(f"✅ Persisted Omega-Vault to disk")
+        print("✅ Persisted Omega-Vault to disk")
         
     except ImportError as e:
         print(f"⚠️  Omega-Vault test skipped: {e}")
@@ -101,8 +103,8 @@ def test_omega_flux():
     session_id = "test_session_001"
     
     # Store reasoning events
-    flux_id_1 = titan.flux.store_event(session_id, "Step 1: Analyzing user intent", priority="high", ttl=120)
-    flux_id_2 = titan.flux.store_event(session_id, "Step 2: Retrieving context from Omega-Graph", priority="medium", ttl=90)
+    titan.flux.store_event(session_id, "Step 1: Analyzing user intent", priority="high", ttl=120)
+    titan.flux.store_event(session_id, "Step 2: Retrieving context from Omega-Graph", priority="medium", ttl=90)
     flux_id_3 = titan.flux.store_event(session_id, "Step 3: Generating response draft", priority="low", ttl=60)
     
     print(f"✅ Stored 3 flux events for session {session_id}")
@@ -146,7 +148,7 @@ def test_hybrid_search():
     # Perform hybrid search
     results = titan.hybrid_search("Python web framework", k=3)
     
-    print(f"✅ Hybrid search results:")
+    print("✅ Hybrid search results:")
     print(f"  - Vector results: {len(results['vector_results'])}")
     print(f"  - Graph results: {len(results['graph_results'])}")
     

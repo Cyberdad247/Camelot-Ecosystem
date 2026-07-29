@@ -8,13 +8,13 @@ Outputs:
     dist/camelot.exe   (Windows)
     dist/camelot       (Linux/macOS)
 """
+import argparse
 import os
-import sys
+import platform
 import shutil
 import subprocess
-import platform
+import sys
 import tempfile
-import argparse
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent

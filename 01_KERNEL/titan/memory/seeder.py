@@ -9,13 +9,14 @@ ETL (Extract, Transform, Load) pipelines to hydrate the memory stack:
 - Code Analysis: Index repositories into specialized graph sub-structures
 """
 
-import os
 import hashlib
-from typing import Dict, Any, Optional
+import os
 from datetime import datetime
+from typing import Any, Dict, Optional
 
-from .titan_schemas import GraphNode, GraphNodeProvenance, GraphEdge
 from .titan_omega import TitanOmega
+from .titan_schemas import GraphEdge, GraphNode, GraphNodeProvenance
+
 
 class TitanSeeder:
     """

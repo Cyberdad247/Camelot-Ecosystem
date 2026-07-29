@@ -8,9 +8,9 @@ USAGE:
     python migrate_code_to_vault.py --migrate   # Migrate to vault.get()
 """
 import re
-from pathlib import Path
-from typing import List, Tuple, Dict
 from datetime import datetime
+from pathlib import Path
+from typing import Dict, List, Tuple
 
 
 class CodeMigrator:
@@ -115,7 +115,7 @@ class CodeMigrator:
                 
                 if matches:
                     results[py_file] = matches
-                    for line_num, line, cred in matches:
+                    for line_num, _line, cred in matches:
                         self.matches_found.append((py_file, line_num, cred))
         except Exception as e:
             print(f"[ERROR] Directory scan failed: {e}")
@@ -210,9 +210,9 @@ class CodeMigrator:
             for file_path, matches in results.items():
                 rel_path = file_path.relative_to(self.ROOT_DIR)
                 print(f"\n  {rel_path}:")
-                for line_num, line, cred in matches:
+                for line_num, _line, cred in matches:
                     print(f"    Line {line_num}: {cred}")
-                    print(f"      {line}")
+                    print(f"      {_line}")
         
         print("="*60)
     
