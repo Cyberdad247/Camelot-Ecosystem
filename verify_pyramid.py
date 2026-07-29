@@ -58,14 +58,12 @@ class PyramidVerifier:
         try:
             import aiofiles
             import yaml
-            from sentence_transformers import SentenceTransformer
             from qdrant_client import QdrantClient
             import redis
 
             if self.verbose:
                 print("  ✓ aiofiles")
                 print("  ✓ pyyaml")
-                print("  ✓ sentence-transformers")
                 print("  ✓ qdrant-client")
                 print("  ✓ redis")
             return True
