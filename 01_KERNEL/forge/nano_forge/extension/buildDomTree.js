@@ -1268,6 +1268,7 @@ window.buildDomTree = (
         attributes: {},
         xpath: '/body',
         children: [],
+        groundingId: node.getAttribute ? node.getAttribute('data-nano-id') : null,
       };
 
       // Process children of body
@@ -1362,6 +1363,7 @@ window.buildDomTree = (
       attributes: {},
       xpath: getXPathTree(node, true),
       children: [],
+      groundingId: node.getAttribute ? node.getAttribute('data-nano-id') : null,
     };
 
     // Get attributes for interactive elements or potential text containers
@@ -1501,7 +1503,7 @@ window.buildDomTree = (
           // FIX: We need to store the Grounding ID in nodeData during traversal.
           
           // Fallback if not stored (will fix in next step if needed, but for now assuming logic flow)
-          const groundingId = node.attributes && node.attributes['data-nano-id'] ? node.attributes['data-nano-id'] : "_";
+          const groundingId = node.groundingId || (node.attributes && node.attributes['data-nano-id'] ? node.attributes['data-nano-id'] : "_");
 
           // Format: Indent | ID | Tag | Vis | Text | GroundingID
           output.push(`${indent}|${id}|${tag}|${vis}|${text}|${groundingId}`);
