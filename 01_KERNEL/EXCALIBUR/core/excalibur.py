@@ -8,8 +8,8 @@ Integrates: TitanLink, RustDesk, Handoffs, and Iron Gate.
 
 import os
 import sys
-from datetime import datetime
 from contextlib import asynccontextmanager
+from datetime import datetime
 
 import uvicorn
 from fastapi import BackgroundTasks, FastAPI
@@ -30,14 +30,6 @@ telemetry = None
 async def lifespan(app: FastAPI):
     # Startup: Ignite Background Threads
     print("[🔥] MERLIN_Omega: Neural Link Ignited (Test Mode)")
-
-    # def monitor_loop():
-    #     while True:
-    #         telemetry.poll_rotel()
-    #         time.sleep(5)
-
-    # t = threading.Thread(target=monitor_loop, daemon=True)
-    # t.start()
 
     yield
     # Shutdown logic if needed
@@ -64,6 +56,7 @@ async def sir_helio_endpoint(query: str, session_id: str = "session_001"):
         sys.path.insert(0, _camelot_root)
     try:
         from control_plane.pydantic_ai_knight import run_sir_helio
+
         result = await run_sir_helio(query, session_id)
         return {"status": "SUCCESS", "result": result}
     except ImportError:
@@ -80,15 +73,14 @@ def execute_command(intent: str, background_tasks: BackgroundTasks):
     decision = process_intent(intent)
 
     # Log to background tasks (Simulation of async processing)
-    background_tasks.add_task(
-        print, f"[⚡] BACKGROUND: Executing {decision['action']}..."
-    )
+    background_tasks.add_task(print, f"[⚡] BACKGROUND: Executing {decision['action']}...")
 
     return {
         "status": "ACCEPTED",
         "decision": decision,
         "mode": os.getenv("MODE", "SIMULATION"),
     }
+
 
 def process_intent(intent: str):
     """
