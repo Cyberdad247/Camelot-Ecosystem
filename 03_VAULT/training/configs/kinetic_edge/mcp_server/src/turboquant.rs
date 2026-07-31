@@ -29,19 +29,21 @@ pub struct TurboQuantConfig {
 
 impl Default for TurboQuantConfig {
     fn default() -> Self {
-        let weights_path = std::env::var("CAMELOT_OS_HOME")
-            .unwrap_or_else(|_| {
-                let home = std::env::var("USERPROFILE")
-                    .or_else(|_| std::env::var("HOME"))
-                    .unwrap_or_else(|_| ".".to_string());
-                format!("{}/CAMELOT_OS", home)
-            });
+        let weights_path = std::env::var("CAMELOT_OS_HOME").unwrap_or_else(|_| {
+            let home = std::env::var("USERPROFILE")
+                .or_else(|_| std::env::var("HOME"))
+                .unwrap_or_else(|_| ".".to_string());
+            format!("{}/CAMELOT_OS", home)
+        });
         Self {
-            context_limit: 32768,    // 32K context
-            compression_ratio: 4.0,  // 4:1 KV cache compression
-            ram_budget_mb: 2048,     // 2GB for model (of 8GB total)
-            weights_path: format!("{}/05_INFRASTRUCTURE/secrets/ternary158_3b.bin", weights_path),
-            quant_bits: 1.58,        // Ternary158 quantization
+            context_limit: 32768,   // 32K context
+            compression_ratio: 4.0, // 4:1 KV cache compression
+            ram_budget_mb: 2048,    // 2GB for model (of 8GB total)
+            weights_path: format!(
+                "{}/05_INFRASTRUCTURE/secrets/ternary158_3b.bin",
+                weights_path
+            ),
+            quant_bits: 1.58, // Ternary158 quantization
         }
     }
 }
@@ -60,6 +62,7 @@ pub struct TurboQuantStatus {
 pub struct TurboQuantLoader {
     config: TurboQuantConfig,
     loaded: bool,
+    pub graph: Option<crate::wasi_nn::NNGraph>,
 }
 
 impl TurboQuantLoader {
@@ -67,6 +70,7 @@ impl TurboQuantLoader {
         Self {
             config,
             loaded: false,
+            graph: None,
         }
     }
 
@@ -132,7 +136,12 @@ impl TurboQuantLoader {
             ));
         }
 
-        // TODO: Actual model loading via WASI-NN bindings (T2.3)
+        let mut graph = crate::wasi_nn::NNGraph::new(
+            crate::wasi_nn::NNBackend::Ternary158,
+            &self.config.weights_path,
+        );
+        graph.load()?;
+        self.graph = Some(graph);
         self.loaded = true;
         Ok(self.status())
     }
