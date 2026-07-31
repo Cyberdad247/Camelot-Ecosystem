@@ -59,10 +59,9 @@ pub struct InferenceResult {
 }
 
 /// WASI-NN graph handle (opaque reference to a loaded model).
-#[derive(Debug, Clone)]
 pub struct NNGraph {
     pub backend: NNBackend,
-    pub loaded: bool,
+    pub graph: Option<wasi_nn::Graph>,
     pub model_path: String,
 }
 
@@ -71,7 +70,7 @@ impl NNGraph {
     pub fn new(backend: NNBackend, model_path: &str) -> Self {
         Self {
             backend,
-            loaded: false,
+            graph: None,
             model_path: model_path.to_string(),
         }
     }
@@ -82,9 +81,6 @@ impl NNGraph {
     }
 
     /// Load the model graph into the WASI-NN runtime.
-    ///
-    /// Scaffold: Returns Ok if weights exist, Err otherwise.
-    /// Full implementation will call wasi_nn::load_by_name() or load().
     pub fn load(&mut self) -> Result<(), String> {
         if !self.weights_exist() {
             return Err(format!(
@@ -93,38 +89,53 @@ impl NNGraph {
             ));
         }
 
-        // TODO: Actual WASI-NN ABI calls:
-        // let graph = unsafe {
-        //     wasi_nn::load(
-        //         &[&model_bytes],
-        //         wasi_nn::GRAPH_ENCODING_ONNX, // or custom Ternary158
-        //         wasi_nn::EXECUTION_TARGET_CPU,
-        //     )
-        // };
+        let encoding = match self.backend {
+            // For custom Ternary158 backend we can use Pytorch or TensorflowLite for now as a placeholder
+            // in WASI-NN mapping, or ideally there would be a custom encoding.
+            NNBackend::Ternary158 => wasi_nn::GraphEncoding::Pytorch,
+            NNBackend::Onnx => wasi_nn::GraphEncoding::Onnx,
+            NNBackend::OpenVino => wasi_nn::GraphEncoding::Openvino,
+        };
 
-        self.loaded = true;
+        let graph = wasi_nn::GraphBuilder::new(encoding, wasi_nn::ExecutionTarget::CPU)
+            .build_from_files([&self.model_path])
+            .map_err(|e| format!("WASI-NN build error: {}", e))?;
+
+        self.graph = Some(graph);
         Ok(())
     }
 
     /// Run inference on the loaded graph.
-    ///
-    /// Scaffold: Returns dummy output. Full implementation calls
-    /// wasi_nn::init_execution_context() + compute().
     pub fn infer(&self, request: &InferenceRequest) -> Result<InferenceResult, String> {
-        if !self.loaded {
-            return Err("WASI-NN: graph not loaded — call load() first".into());
-        }
+        let graph = self
+            .graph
+            .as_ref()
+            .ok_or_else(|| "WASI-NN: graph not loaded — call load() first".to_string())?;
 
-        // TODO: Actual WASI-NN inference:
-        // let ctx = unsafe { wasi_nn::init_execution_context(self.handle) };
-        // unsafe { wasi_nn::set_input(ctx, 0, tensor) };
-        // unsafe { wasi_nn::compute(ctx) };
-        // let output = unsafe { wasi_nn::get_output(ctx, 0) };
+        let mut ctx = graph
+            .init_execution_context()
+            .map_err(|e| format!("WASI-NN init context error: {}", e))?;
 
-        // Scaffold: return appropriately shaped zeros
+        ctx.set_input(
+            0,
+            wasi_nn::TensorType::F32,
+            &request.input_shape,
+            &request.input_data,
+        )
+        .map_err(|e| format!("WASI-NN set input error: {}", e))?;
+
+        ctx.compute()
+            .map_err(|e| format!("WASI-NN compute error: {}", e))?;
+
         let output_size: usize = request.input_shape.iter().product();
+        let max_out_len = output_size.min(request.max_tokens);
+        let mut output_data = vec![0.0; max_out_len];
+
+        ctx.get_output(0, &mut output_data)
+            .map_err(|e| format!("WASI-NN get output error: {}", e))?;
+
         Ok(InferenceResult {
-            output_data: vec![0.0; output_size.min(request.max_tokens)],
+            output_data,
             output_shape: request.input_shape.clone(),
             latency_ms: 0.0,
             backend: self.backend,
@@ -140,7 +151,7 @@ mod tests {
     #[test]
     fn test_graph_creation() {
         let graph = NNGraph::new(NNBackend::Ternary158, "/path/to/model.bin");
-        assert!(!graph.loaded);
+        assert!(graph.graph.is_none());
         assert_eq!(graph.backend, NNBackend::Ternary158);
     }
 
@@ -148,7 +159,7 @@ mod tests {
     fn test_load_fails_without_weights() {
         let mut graph = NNGraph::new(NNBackend::Ternary158, "/nonexistent/model.bin");
         assert!(graph.load().is_err());
-        assert!(!graph.loaded);
+        assert!(graph.graph.is_none());
     }
 
     #[test]

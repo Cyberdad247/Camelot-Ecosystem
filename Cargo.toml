@@ -1,5 +1,6 @@
 [workspace]
 resolver = "2"
+exclude = ["03_VAULT/training/configs/kinetic_edge/mcp_server"]
 members = [
     "01_KERNEL/core/aegis_shield",
     "01_KERNEL/reasoning/ouroboros_engine",

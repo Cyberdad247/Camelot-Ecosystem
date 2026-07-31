@@ -128,7 +128,7 @@ async fn tailscale_whois(ip: IpAddr) -> Option<String> {
 }
 
 fn is_trusted_owner(owner: &str) -> bool {
-    TRUSTED_TAILNET_OWNERS.iter().any(|t| *t == owner)
+    TRUSTED_TAILNET_OWNERS.contains(&owner)
 }
 
 fn verify_token(presented: Option<&str>) -> bool {

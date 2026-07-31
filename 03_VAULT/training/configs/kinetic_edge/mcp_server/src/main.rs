@@ -12,16 +12,15 @@ mod wasi_nn;
 use axum::{
     extract::Json,
     http::StatusCode,
-    middleware::{self, Next},
-    response::{IntoResponse, Response},
+    middleware::{self},
+    response::IntoResponse,
     routing::post,
     Router,
 };
 use serde::{Deserialize, Serialize};
-use std::collections::HashSet;
 use std::fs;
 use std::net::SocketAddr;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::sync::LazyLock;
 
 // ---------------------------------------------------------------------------
@@ -270,7 +269,7 @@ fn list_directory(path: &str) -> Result<Vec<DirEntry>, String> {
         }
         result.push(DirEntry {
             name,
-            is_dir: meta.as_ref().map_or(false, |m| m.is_dir()),
+            is_dir: meta.as_ref().is_some_and(|m| m.is_dir()),
             size: meta.as_ref().map_or(0, |m| m.len()),
         });
     }
@@ -439,7 +438,7 @@ async fn handle_tool(Json(msg): Json<A2AMessage>) -> impl IntoResponse {
 
             // Load persistent identity from vault; fall back to ephemeral if not found
             let identity = ap2_settlement::load_vault_identity()
-                .unwrap_or_else(|| ap2_settlement::AgentIdentity::generate());
+                .unwrap_or_else(ap2_settlement::AgentIdentity::generate);
             let tx = ap2_settlement::Transaction {
                 tx_id: format!("tx_{}", uuid::Uuid::new_v4().simple()),
                 source_agent: source_agent.into(),
