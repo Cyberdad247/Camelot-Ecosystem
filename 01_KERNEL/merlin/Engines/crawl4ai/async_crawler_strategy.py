@@ -920,9 +920,15 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
 
             # Handle wait_for condition
             # Todo: Decide how to handle this
-            if not config.wait_for and config.css_selector and False:
-                # if not config.wait_for and config.css_selector:
-                config.wait_for = f"css:{config.css_selector}"
+            if not config.wait_for and config.css_selector:
+                try:
+                    await self.smart_wait(page, f"css:{config.css_selector}", timeout=config.page_timeout)
+                except Exception as e:
+                    self.logger.warning(
+                        message="Timeout waiting for css_selector: {error}",
+                        tag="WAIT",
+                        params={"error": str(e)},
+                    )
 
             if config.wait_for:
                 try:
