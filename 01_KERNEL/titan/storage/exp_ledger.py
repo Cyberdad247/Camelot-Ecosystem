@@ -286,21 +286,23 @@ class EXPLedger:
         Query for entries matching complication type and at least N tags.
         """
         with self._get_connection() as conn:
-            cursor = conn.execute(
-                """
-                SELECT * FROM exp_ledger 
-                WHERE complication_type = ? AND archived = 0
-                ORDER BY timestamp DESC
-                """,
-                (complication_type,),
-            )
+            query = """
+            SELECT e.*
+            FROM exp_ledger e
+            WHERE e.complication_type = ? AND e.archived = 0
+              AND (
+                  SELECT count(*)
+                  FROM json_each(e.tags) j
+                  JOIN json_each(?) input_tags ON j.value = input_tags.value
+              ) >= ?
+            ORDER BY e.timestamp DESC
+            """
+            params = [complication_type, json.dumps(tags), min_matching_tags]
+            cursor = conn.execute(query, params)
 
             results = []
-            for row in cursor.fetchall():
-                entry_tags = json.loads(row["tags"] or "[]")
-                matching = len(set(tags) & set(entry_tags))
-                if matching >= min_matching_tags:
-                    results.append(EXPEntry.from_row(row))
+            for row in cursor:
+                results.append(EXPEntry.from_row(row))
 
             return results
 
