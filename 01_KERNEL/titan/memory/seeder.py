@@ -9,16 +9,13 @@ ETL (Extract, Transform, Load) pipelines to hydrate the memory stack:
 - Code Analysis: Index repositories into specialized graph sub-structures
 """
 
-import hashlib
 import os
+import hashlib
+from typing import Dict, Any, Optional
 from datetime import datetime
-from typing import Any, Dict, Optional
 
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-
+from .titan_schemas import GraphNode, GraphNodeProvenance, GraphEdge
 from .titan_omega import TitanOmega
-from .titan_schemas import GraphEdge, GraphNode, GraphNodeProvenance
-
 
 class TitanSeeder:
     """
@@ -37,16 +34,20 @@ class TitanSeeder:
         """
         print(f"[Titan-Seeder] Seeding document: {source_id}")
 
-        # 1. Chunking for Omega-Vault (Semantic chunking using RecursiveCharacterTextSplitter)
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-        chunks = text_splitter.split_text(content)
+        # 1. Chunking for Omega-Vault (Simple paragraph-based for now)
+        # TODO: Implement semantic chunking
+        chunks = [c.strip() for c in content.split("\n\n") if len(c.strip()) > 50]
 
         for i, chunk in enumerate(chunks):
             chunk_metadata = (metadata or {}).copy()
             chunk_metadata.update({"chunk_index": i, "total_chunks": len(chunks)})
 
             # Add to Vector Vault
-            self.titan.vault.add_text(text=chunk, source_id=source_id, metadata=chunk_metadata)
+            self.titan.vault.add_text(
+                text=chunk,
+                source_id=source_id,
+                metadata=chunk_metadata
+            )
 
         # 2. Extract and Add a Fact node to Omega-Graph
         # This is a high-level anchor for the document
@@ -55,7 +56,7 @@ class TitanSeeder:
         provenance = GraphNodeProvenance(
             created_by="TitanSeeder",
             created_at=datetime.utcnow(),
-            hash="",  # Will be computed
+            hash="" # Will be computed
         )
 
         node = GraphNode(
@@ -64,14 +65,14 @@ class TitanSeeder:
             attributes={
                 "title": source_id,
                 "summary": chunks[0][:200] if chunks else "No summary available",
-                "metadata": metadata or {},
+                "metadata": metadata or {}
             },
             edges=[
-                GraphEdge(to="STRATEGY_CORE", relationship="informs", weight=0.8)  # Default link
+                GraphEdge(to="STRATEGY_CORE", relationship="informs", weight=0.8) # Default link
             ],
             provenance=provenance,
             trust_score=1.0,
-            updated_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
         )
 
         self.titan.commit(node, signed_by="TitanSeeder")
@@ -84,7 +85,11 @@ class TitanSeeder:
         cartridge_id = manifest.get("cartridge_id")
         print(f"[Titan-Seeder] Seeding cartridge: {cartridge_id}")
 
-        provenance = GraphNodeProvenance(created_by="TitanSeeder", created_at=datetime.utcnow(), hash="")
+        provenance = GraphNodeProvenance(
+            created_by="TitanSeeder",
+            created_at=datetime.utcnow(),
+            hash=""
+        )
 
         # Add Cartridge Node
         node = GraphNode(
@@ -93,12 +98,12 @@ class TitanSeeder:
             attributes={
                 "description": manifest.get("description"),
                 "version": manifest.get("version"),
-                "capabilities": manifest.get("capabilities", []),
+                "capabilities": manifest.get("capabilities", [])
             },
             edges=[],
             provenance=provenance,
             trust_score=1.0,
-            updated_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
         )
 
         self.titan.commit(node, signed_by="TitanSeeder")
@@ -109,13 +114,15 @@ class TitanSeeder:
                 node_id=agent_id,
                 type="Agent",
                 attributes={
-                    "role": "Consultant",  # Default
-                    "status": "Ready",
+                    "role": "Consultant", # Default
+                    "status": "Ready"
                 },
-                edges=[GraphEdge(to=cartridge_id, relationship="assigned_to", weight=1.0)],
+                edges=[
+                    GraphEdge(to=cartridge_id, relationship="assigned_to", weight=1.0)
+                ],
                 provenance=provenance,
                 trust_score=1.0,
-                updated_at=datetime.utcnow(),
+                updated_at=datetime.utcnow()
             )
             self.titan.commit(agent_node, signed_by="TitanSeeder")
 
@@ -134,8 +141,11 @@ class TitanSeeder:
                     file_path = os.path.join(root, file)
                     with open(file_path, "r", encoding="utf-8") as f:
                         content = f.read()
-                        self.seed_text_document(content=content, source_id=file, metadata={"path": file_path})
-
+                        self.seed_text_document(
+                            content=content,
+                            source_id=file,
+                            metadata={"path": file_path}
+                        )
 
 if __name__ == "__main__":
     # Quick sanity test
