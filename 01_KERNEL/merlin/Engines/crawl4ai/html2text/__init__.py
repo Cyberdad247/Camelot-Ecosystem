@@ -640,11 +640,19 @@ class HTML2Text(html.parser.HTMLParser):
                     # Indent two spaces per list, except use three spaces for an
                     # unordered list inside an ordered list.
                     # https://spec.commonmark.org/0.28/#motivation
-                    # TODO: line up <ol><li>s > 9 correctly.
                     parent_list = None
-                    for list in self.list:
-                        self.o("   " if parent_list == "ol" and list.name == "ul" else "  ")
-                        parent_list = list.name
+                    for i, list_element in enumerate(self.list):
+                        indent = "   " if parent_list == "ol" and list_element.name == "ul" else "  "
+                        if i == len(self.list) - 1 and list_element.name == "ol":
+                            num_len = len(str(list_element.num + 1))
+                            if num_len > 1:
+                                extra_digits = num_len - 1
+                                if extra_digits < len(indent):
+                                    indent = indent[:-extra_digits]
+                                else:
+                                    indent = ""
+                        self.o(indent)
+                        parent_list = list_element.name
 
                 if li.name == "ul":
                     self.o(self.ul_item_mark + " ")
