@@ -75,6 +75,10 @@ Thumbs.db
 .venv_camelot/
 logs/
 
+# Unix socket and Windows special files (git-add blockers)
+04_KINETIC/multivoice/camelot_multivoice.sock
+nul
+
 # Camelot generated runtime state
 .hive/context/
 03_VAULT/runtime_state/nano_swarm_dry_runs/

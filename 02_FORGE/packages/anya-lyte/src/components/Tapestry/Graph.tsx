@@ -6,7 +6,7 @@ export default function Tapestry() {
   return (
     <View style={styles.graph}>
       <Text style={styles.node}>🕸️ UKG VISUALIZER (Mock)</Text>
-      <Text style={styles.edge}>Node A --[REL]--> Node B</Text>
+      <Text style={styles.edge}>Node A --[REL]--&gt; Node B</Text>
     </View>
   );
 }

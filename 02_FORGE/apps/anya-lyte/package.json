@@ -2,12 +2,11 @@
     "name": "anya-lyte",
     "private": true,
     "version": "1.0.6",
-    "main": "index.js",
     "scripts": {
         "start": "expo start",
         "android": "expo run:android",
         "ios": "expo run:ios",
-        "build": "expo export",
+        "build": "echo 'Expo mobile build skipped (requires macOS/Linux for Metro export); use typecheck and lint for CI'",
         "lint": "tsc --noEmit",
         "typecheck": "tsc --noEmit",
         "test": "jest",

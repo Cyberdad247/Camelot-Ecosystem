@@ -33,6 +33,25 @@ export const IronGateResponseSchema = z.object({
   nonce: z.string(),
 });
 
+// Exported for titanLink.ts discriminated unions
+export const IronGateApprovalRequestSchema = z.object({
+  kind: z.literal('iron_gate_approval_request'),
+  actionId: z.string(),
+  reason: z.string(),
+  timestamp: z.number(),
+  nonce: z.string(),
+  riskLevel: IronGateRiskLevelSchema,
+});
+
+export const IronGateApprovalResponseSchema = z.object({
+  kind: z.literal('iron_gate_approval_response'),
+  actionId: z.string(),
+  approved: z.boolean(),
+  signature: z.string().optional(),
+  timestamp: z.number(),
+  nonce: z.string(),
+});
+
 // MOLTBOT GATEWAY LOGIC [Assimilated Gateway Guardian]
 export class MoltbotGateway {
   static assessRisk(intent: string): IronGateRiskLevel {
