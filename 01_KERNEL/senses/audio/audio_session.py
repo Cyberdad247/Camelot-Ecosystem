@@ -136,7 +136,7 @@ class AudioSession:
             ], mode="simultaneous"):
                 play_audio(kid, pcm, sr)
         """
-        from senses.audio.lyricus_v4 import lyricus, VocalMode, VocalSegment
+        from senses.audio.lyricus_v4 import VocalMode, VocalSegment, lyricus
 
         mode_map = {
             "sequential":   VocalMode.SEQUENTIAL,
@@ -165,7 +165,8 @@ class AudioSession:
     async def _classify(self, text: str):
         """Classify intent, lazy-loading switchboard if not injected."""
         import re
-        from control_plane.intent_router import route_by_intent, IntentCategory
+
+        from control_plane.intent_router import IntentCategory, route_by_intent
 
         if self.board is None:
             from control_plane.switchboard import get_board
@@ -233,7 +234,7 @@ class AudioSession:
             with QUEUE_PATH.open("a", encoding="utf-8") as f:
                 f.write(json.dumps(task) + "\n")
             return True
-        except Exception as e:
+        except Exception:
             return False
 
     async def _response_stream_from_harness(

@@ -1,0 +1,18 @@
+{
+  "publishers": {
+    "acme": {
+      "publisher_id": "acme",
+      "kids": [
+        "kid-2025",
+        "kid-2026"
+      ],
+      "public_keys": {
+        "kid-2025": "AbC==",
+        "kid-2026": "DeF=="
+      },
+      "active": true,
+      "added_at": "2026-07-13T17:12:03.874031+00:00",
+      "note": "Acme Cartridge Works"
+    }
+  }
+}

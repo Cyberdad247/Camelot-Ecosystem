@@ -1,0 +1,47 @@
+# ── GitHub Repository Settings ──────────────────────────────────────────
+# Applied by: https://github.com/probot/settings (if installed)
+# Manual:   Settings → Branches → Add branch protection rule → "main"
+#
+# NOTE: Branch protection requires GitHub Pro/Team/Enterprise for private
+# repos. This file serves as version-controlled documentation of the
+# desired rules. Apply manually or via probot/settings once the repo
+# qualifies.
+# ────────────────────────────────────────────────────────────────────────
+
+repository:
+  default_branch: main
+
+branches:
+  - name: main
+    protection:
+      # ── Status checks (all forge-ci.yml jobs) ──────────────────────
+      required_status_checks:
+        strict: true   # Require branches to be up-to-date before merging
+        contexts:
+          - Forge Lint
+          - Forge Typecheck
+          - Forge Test
+          - Cartridge Tests
+          - Pocket Squire Build
+          - Kinetic Build & Test
+          - Holotable Build
+          - PORTAL_CORE Build
+          - Invoice Generator Build
+          - I2L Phygital Build
+
+      # ── Review requirements ────────────────────────────────────────
+      required_pull_request_reviews:
+        required_approving_review_count: 1
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: false
+
+      # ── Restrictions ───────────────────────────────────────────────
+      enforce_admins: false
+      restrictions: null
+
+      # ── History / push rules ───────────────────────────────────────
+      required_linear_history: false
+      allow_force_pushes: false
+      allow_deletions: false
+      block_creations: false
+      required_conversation_resolution: false

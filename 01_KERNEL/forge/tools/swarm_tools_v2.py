@@ -8,9 +8,9 @@ Implements safe wrappers for file I/O, search, and execution.
 Follows the Iron Gate protocol.
 """
 
-import os
 import logging
-from typing import Dict, Any, List
+import os
+from typing import Any, Dict, List
 
 logger = logging.getLogger(__name__)
 

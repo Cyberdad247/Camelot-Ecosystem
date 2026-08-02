@@ -1,0 +1,33 @@
+[package]
+name = "pmcp"
+version = "0.1.0"
+edition = "2021"
+description = "Pure-Rust MCP (Model Context Protocol) bindings — additive scaffold for Phase 1 of HiveIDE_Apex_v1000 ExecutionDAG"
+license = "Invisioned Marketing inc. — All Rights Reserved"
+readme = "README.md"
+publish = false
+
+[lib]
+name = "pmcp"
+path = "src/lib.rs"
+
+[[bin]]
+name = "pmcp-server"
+path = "src/bin/pmcp-server.rs"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "io-util", "io-std", "time", "sync"] }
+async-trait = "0.1"
+anyhow = "1.0"
+thiserror = "1.0"
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "test-util"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = "symbols"

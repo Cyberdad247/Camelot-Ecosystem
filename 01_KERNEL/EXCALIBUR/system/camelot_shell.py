@@ -9,10 +9,9 @@ import traceback
 sys.path.append(os.path.join(os.getcwd(), "01_ACTIVE_CORE"))
 sys.path.append(os.getcwd())
 
+from merlin_omega import Merlin_Omega
 from src.camelot_cli.core.handlers import CommandHandlers
 from src.camelot_cli.core.parser import CommandParser
-
-from merlin_omega import Merlin_Omega
 
 
 # ==========================================

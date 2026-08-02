@@ -1,13 +1,14 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import time
-import subprocess
 import os
+import subprocess
 import sys
+import time
 
 # Ensure kernel path for tools import
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from tools import antigravity_safe as antigravity
+
 
 def watchtower_pulse():
     print("🛡️ [AEGIS]: Initiating Watchtower Scan...")

@@ -117,7 +117,7 @@ class PhantomGrid:
 
     def get_proxy_for_profile(self, profile_id: str) -> Optional[Dict]:
         """Retrieve the assigned proxy for a profile."""
-        for proxy_id, config in self.proxy_pool.items():
+        for _proxy_id, config in self.proxy_pool.items():
             if profile_id in config.get("profile_ids", []):
                 return {
                     "server": config["server"],
@@ -262,7 +262,7 @@ if __name__ == "__main__":
         grid.assign_proxy_to_profile("demo_phantom_01", "us_residential_01")
 
         # Spawn session
-        session = await grid.spawn_session("demo_phantom_01", RiskTier.BLUE)
+        await grid.spawn_session("demo_phantom_01", RiskTier.BLUE)
 
         # Check Iron Gate
         allowed = grid.iron_gate_check("demo_phantom_01", "facebook.com", ["google.com", "example.com"])

@@ -1,7 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import subprocess
 import logging
+import subprocess
+
 
 class SirCastor:
     """🦫 Sir Castor (Isolation): Executes repairs inside sandboxes."""

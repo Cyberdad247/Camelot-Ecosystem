@@ -14,10 +14,10 @@ Usage:
     persona = extractor.analyze_trace(log_content)
 """
 
-import re
 import json
 import logging
-from typing import Dict, List, Any
+import re
+from typing import Any, Dict, List
 
 # Configure logger
 logging.basicConfig(level=logging.INFO)

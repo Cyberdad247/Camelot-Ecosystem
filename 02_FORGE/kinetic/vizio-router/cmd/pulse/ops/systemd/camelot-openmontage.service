@@ -1,0 +1,30 @@
+# camelot-openmontage.service — Camelot-OS OpenMontage Video Synthesis (cgroups v2 capped)
+# Written on a Windows dev host as a TEMPLATE. Operator copies this verbatim to
+# /etc/systemd/system/camelot-openmontage.service on the Linux client node.
+# Runtime paths (/opt/camelot/...) here match the production layout on that node.
+
+[Unit]
+Description=Camelot-OS OpenMontage Video Synthesis
+After=network.target
+
+[Service]
+Type=simple
+User=camelot
+WorkingDirectory=/opt/camelot/system/openmontage
+Environment="PORT=8002"
+# Secrets (operator tokens, API keys) are sourced from /etc/camelot/secrets.env
+# (mode 0600, owner camelot). The leading '-' makes the file optional at boot;
+# systemd starts even if it's missing and the operator can populate it later.
+EnvironmentFile=-/etc/camelot/secrets.env
+ExecStart=/opt/camelot/system/openmontage/.venv/bin/python server.py
+
+# 4GB Scarcity Protocol Enforcement via cgroups v2
+MemoryMax=1G
+MemorySwapMax=256M
+CPUWeight=50
+
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

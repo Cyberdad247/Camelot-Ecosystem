@@ -1,0 +1,17 @@
+{
+  "cartridgeId": "forge-7f397ff17f18d2c6",
+  "history": [
+    {
+      "sourceHashes": {
+        "blueprint.md": "7530402ca195da416bb65d1b7b3d19db3e9d2b78212b3265f30bffa609424d1d",
+        "forge.json": "2c419a274dcabdce96819d33bf65fb5e04f66cee8ac65e8606da6154ea7d2db5",
+        "tasks.md": "661a8c72f0d5ac744687e94dacdf501371976e56f7a5c76bee9ce17ec99f677c",
+        "verification.md": "2519959c13952b5dca5879a9842f2bac37924b946e8ff0cc183ccb8253d470e7"
+      },
+      "state": "validated",
+      "timestampUtc": "2026-07-13T11:26:20.588543+00:00"
+    }
+  ],
+  "state": "validated",
+  "updatedAt": "2026-07-13T11:26:20.588543+00:00"
+}

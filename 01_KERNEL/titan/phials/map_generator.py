@@ -7,8 +7,8 @@ Ignores noise, annotates structure, and establishes Ground Truth.
 """
 
 import os
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 # CONFIGURATION
 # Resolve Repo Root

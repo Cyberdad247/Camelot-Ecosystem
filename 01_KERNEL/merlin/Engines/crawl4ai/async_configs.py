@@ -386,13 +386,15 @@ class BrowserConfig:
             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/116.0.0.0 Safari/537.36"
         ),
         user_agent_mode: str = "",
-        user_agent_generator_config: dict = {},
+        user_agent_generator_config: dict = None,
         text_mode: bool = False,
         light_mode: bool = False,
         extra_args: list = None,
         debugging_port: int = 9222,
         host: str = "localhost",
     ):
+        if user_agent_generator_config is None:
+            user_agent_generator_config = {}
         self.browser_type = browser_type
         self.headless = headless
         self.browser_mode = browser_mode
@@ -915,13 +917,15 @@ class CrawlerRunConfig:
         check_robots_txt: bool = False,
         user_agent: str = None,
         user_agent_mode: str = None,
-        user_agent_generator_config: dict = {},
+        user_agent_generator_config: dict = None,
         # Deep Crawl Parameters
         deep_crawl_strategy: Optional[DeepCrawlStrategy] = None,
         # Experimental Parameters
         experimental: Dict[str, Any] = None,
     ):
         # TODO: Planning to set properties dynamically based on the __init__ signature
+        if user_agent_generator_config is None:
+            user_agent_generator_config = {}
         self.url = url
 
         # Content Processing Parameters

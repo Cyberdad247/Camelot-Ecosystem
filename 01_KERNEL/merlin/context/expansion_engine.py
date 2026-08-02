@@ -7,17 +7,19 @@ Orchestrates RAG, GoT, and caching to provide optimized context bundles
 for agent tasks with token budget management and governance.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../memory')))
 
-from typing import Dict, List, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime
-from titan_omega import TitanOmega
-from rag_backbone import RAGBackbone, RetrievalResult
-from got_expander import GoTExpander, ThoughtNode
+from typing import Any, Dict, List, Optional
+
 from cache_manager import CacheManager
+from got_expander import GoTExpander, ThoughtNode
+from rag_backbone import RAGBackbone, RetrievalResult
+from titan_omega import TitanOmega
 
 
 @dataclass
@@ -97,7 +99,7 @@ class ExpansionEngine:
         
         # 1. King Arthur Policy Gate
         if not self._policy_check(intent):
-            raise ValueError(f"Policy violation: Intent contains restricted content")
+            raise ValueError("Policy violation: Intent contains restricted content")
         
         # 2. Check cache
         cached_context = None
@@ -105,11 +107,11 @@ class ExpansionEngine:
             cached_context = self.cache.get(intent, filters)
             if cached_context:
                 cache_hit = True
-                print(f"[CEP] Cache HIT")
+                print("[CEP] Cache HIT")
         
         # 3. If cache miss: perform RAG retrieval
         if not cached_context:
-            print(f"[CEP] Cache MISS - performing RAG retrieval")
+            print("[CEP] Cache MISS - performing RAG retrieval")
             
             # Calculate how many results we can fit in budget
             # Rough estimate: 100 tokens per result
@@ -127,7 +129,7 @@ class ExpansionEngine:
         # 4. Optional GoT reasoning expansion
         reasoning_trace = None
         if use_got and self.enable_got and session_id:
-            print(f"[CEP] Expanding reasoning with GoT")
+            print("[CEP] Expanding reasoning with GoT")
             reasoning_trace = self._expand_reasoning(intent, session_id, retrieved)
         
         # 5. Token budget management

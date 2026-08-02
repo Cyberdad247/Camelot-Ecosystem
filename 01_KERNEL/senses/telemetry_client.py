@@ -5,12 +5,13 @@ Rotel Python Client — Kinetic Telemetry Bridge.
 Binds Python reasoning nodes to the Rust-based Rotel collector on :4317.
 """
 
-import os
-import json
-import socket
-import requests
 import datetime
+import json
+import os
+import socket
 from typing import Optional
+
+import requests
 
 ROTEL_URL = "http://127.0.0.1:4317/v1/logs"
 

@@ -146,9 +146,11 @@ class Merlin_Omega(AgentNode):
             await self.send(router, sender, "Result", {"response": response})
 
     async def _update_hud(
-        self, intent: Optional[str] = None, stage: str = "P0_GATEKEEP", metrics: List[Dict] = []
+        self, intent: Optional[str] = None, stage: str = "P0_GATEKEEP", metrics: List[Dict] = None
     ) -> None:
         """Broadcasts state to the OMEGA HUD via Agora."""
+        if metrics is None:
+            metrics = []
         try:
             payload = {
                 "session_id": self.session_id,
@@ -199,10 +201,9 @@ class Merlin_Omega(AgentNode):
         # 0. Omega_GENESIS (Scenario Generation)
         if "Omega_GENESIS" in cmd:
             try:
-                scenario_prompt = gravity.read("01_KERNEL/prompts/oracle/SCENARIO_GENERATOR.md")
+                gravity.read("01_KERNEL/prompts/oracle/SCENARIO_GENERATOR.md")
                 instructions = cmd.split("Omega_GENESIS")[-1].strip()
                 # Fuse system prompt with user instructions
-                final_input = f"{scenario_prompt}\n\nUSER INPUT: {instructions}"
                 # In a real system, we'd send this to the LLM.
                 # For now, we simulate the 'Call' to the Genesis Engine
                 return f"🌌 [ORACLE] GENESIS ENGINE INITIALIZED.\n   Loading Pattern: {instructions}...\n   [SYSTEM] Scenario generated based on 'SCENARIO_GENERATOR.md'"
@@ -235,7 +236,6 @@ class Merlin_Omega(AgentNode):
 
                 instructions = cmd.split("Omega_OPEN")[-1].strip()
                 # Determine if it's a plan or final execution
-                plan_only = "--execute" not in instructions
                 clean_instr = instructions.replace("--execute", "").strip()
 
                 res = await bridge.fast_refactor(clean_instr, context_details="Sovereign Context Hydrated.")

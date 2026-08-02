@@ -485,7 +485,7 @@ class BM25ContentFilter(RelevantContentFilter):
 
         # Adjust scores with tag weights
         adjusted_candidates = []
-        for score, (index, chunk, tag_type, tag) in zip(scores, candidates):
+        for score, (index, chunk, _tag_type, tag) in zip(scores, candidates, strict=False):
             tag_weight = self.priority_tags.get(tag.name, 1.0)
             adjusted_score = score * tag_weight
             adjusted_candidates.append((adjusted_score, index, chunk, tag))
@@ -935,8 +935,10 @@ class LLMContentFilter(RelevantContentFilter):
                     prompt: str,
                     api_token: str,
                     base_url: Optional[str] = None,
-                    extra_args: Dict = {},
+                    extra_args: Dict = None,
                 ) -> List[str]:
+                    if extra_args is None:
+                        extra_args = {}
                     if self.logger:
                         self.logger.info(
                             "LLM Markdown: Processing chunk {chunk_num}",

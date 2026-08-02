@@ -16,6 +16,7 @@ def check_harmony(request: AssimilationRequest) -> Dict[str, Any]:
     3. Auto-Repair: Merges duplicates, prunes orphans (UKG_TESTING_AUTONOMY)
     """
     import os
+
     from Engines.ukg_runtime import UKGRuntime
     
     messages = []

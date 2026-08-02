@@ -1,0 +1,40 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# IRON GATE AUTHORIZATION — Fold-in scope PR for omni-nexus-ide daughter project
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Authorized by: User directive in conversation context (2026-06-30).
+# Confirmation: User explicitly chose "Fold into monorepo" over "Separate
+# workspace". The prior Iron-Gate header in `02_FORGE/kinetic/actor/Cargo.toml`
+# ("NOT AN omni-nexus-ide SUBPROJECT") is hereby superseded — the constraint
+# is relaxed to: omni-nexus-ide MUST be folded into the existing root
+# workspace, NOT a separate top-level workspace.
+#
+# This crate:
+#   * Lives at 02_FORGE/kinetic/omni_nexus_ide/ (sibling of actor/contracts/cribo/pmcp/rotel).
+#   * Joins the existing root Cargo.toml workspace, NOT a parallel workspace.
+#   * Implements only a tree-marker stub — real implementation awaits the
+#     first committed artifact (forge_nexus.sh deliberately NOT created per
+#     user Q2 confirmation; any future mention is ASPIRATIONAL until backed
+#     by a real script + tests).
+#   * Is recognized by AGENTS.md "Recognized Forge Subtrees" section.
+#   * Is gated by `control_plane.soul_oversight.pre_execute` via a
+#     conservative path-filter that escalates any job touching
+#     `omni_nexus_ide` one HITL tier stricter (AUTO→PROMPT, PROMPT→HUMAN_GATE).
+#
+# NOT a separate workspace anywhere else. The blender rule stands:
+# all forge subtrees live under 02_FORGE/ in the existing root workspace.
+# ══════════════════════════════════════════════════════════════════════════════
+
+[package]
+name = "omni_nexus_ide"
+version = "0.1.0"
+edition = "2021"
+description = "Camelot-OS-recognized forge subtree for the omni-nexus-ide daughter project. Fold-in scope PR — sibling of actor/contracts/cribo/pmcp/rotel; NOT a parallel workspace. Stub state; awaits forge_nexus.sh."
+license = "Invisioned Marketing inc. — All Rights Reserved"
+publish = false
+
+[lib]
+name = "omni_nexus_ide"
+path = "src/lib.rs"
+
+[dependencies]

@@ -12,6 +12,7 @@ def load_base_memory():
     path = REPO_ROOT / "01_KERNEL" / "titan" / "memory" / "base_memory.py"
     spec = importlib.util.spec_from_file_location("base_memory", path)
     module = importlib.util.module_from_spec(spec)
+    sys.modules["base_memory"] = module
     spec.loader.exec_module(module)
     return module
 
@@ -19,14 +20,26 @@ def load_cloudbrain():
     path = REPO_ROOT / "01_KERNEL" / "agora" / "cloud_orchestrator_shim" / "long_term_cloudbrain.py"
     spec = importlib.util.spec_from_file_location("long_term_cloudbrain", path)
     module = importlib.util.module_from_spec(spec)
+    sys.modules["long_term_cloudbrain"] = module
     spec.loader.exec_module(module)
     return module
+
 
 
 
 def upgrade_roster():
     print("[SYSTEM_BOOT] :: Upgrading Cloudbrain in Appwrite...")
     
+    import os
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except ImportError:
+        pass
+    os.environ.setdefault("APPWRITE_ENDPOINT", "https://appwrite.local/v1")
+    os.environ.setdefault("APPWRITE_PROJECT_ID", "sovereign_db")
+    os.environ.setdefault("APPWRITE_API_KEY", "local-dev-placeholder-key")
+
     base_memory = load_base_memory()
     MemoryNode = base_memory.MemoryNode
 
@@ -34,6 +47,7 @@ def upgrade_roster():
     try:
         cloudbrain = load_cloudbrain()
         bridge = cloudbrain.build_appwrite_memory_bridge()
+
     except Exception as e:
         print(f"[ERROR] Failed to initialize Appwrite bridge: {e}")
         return

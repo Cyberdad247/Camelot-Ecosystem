@@ -1,8 +1,9 @@
-import os
-import json
 import argparse
 import datetime
-from typing import Dict, Any
+import json
+import os
+from typing import Any, Dict
+
 
 class NanoRepoAuditor:
     def __init__(self, root_path: str):
@@ -105,7 +106,7 @@ class NanoRepoAuditor:
         test_files = 0
         source_files = 0
         
-        for root, dirs, files in os.walk(self.root_path):
+        for _root, dirs, files in os.walk(self.root_path):
             dirs[:] = [d for d in dirs if d not in [".git", "node_modules", "__pycache__", ".venv", "dist", "build"]]
 
             for f in files:

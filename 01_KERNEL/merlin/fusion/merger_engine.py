@@ -7,18 +7,20 @@ The high-level orchestrator for Project Chimera's fusion protocol.
 Links Capability Graph, Fusion Strategies, and LLM-as-a-Judge.
 """
 
-import time
-import uuid
-from typing import List, Dict, Any
-
 import os
 import sys
+import time
+import uuid
+from typing import Any, Dict, List
+
 # Add parent directory (01_KERNEL) to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from iron_gate.judge.llm_judge import JudgeRequest, LLMJudge
+
 from fusion.capability_graph import CapabilityGraph
-from fusion.strategies import SerialStrategy, EnsembleStrategy, HybridStrategy, FusionType
-from iron_gate.judge.llm_judge import LLMJudge, JudgeRequest
+from fusion.strategies import EnsembleStrategy, FusionType, HybridStrategy, SerialStrategy
+
 
 class MergerEngine:
     """

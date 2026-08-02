@@ -1,0 +1,18 @@
+{
+  "_comment": "HiveIDE_Apex_v1000 Phase 2 — Ouroboros Loop v1000 threshold config. v6 review fix: token-gate fields removed because the operator's [y] already cleared the Iron Gate for the destructive batch. 6.0 GB override is honored unconditionally via CAMELOT_OUROBOROS_THRESHOLD_MB env var, but capped by max_threshold_cap_factor below.",
+  "default_threshold_mb": 7168,
+  "operator_override_threshold_mb": 6144,
+  "operator_override_env_var": "CAMELOT_OUROBOROS_THRESHOLD_MB",
+  "max_threshold_cap_factor": 0.90,
+  "max_threshold_margin_mb": 512,
+  "cooldown_seconds": 300,
+  "poll_interval_seconds": 5,
+  "compression_strategy": "semantic_anchor_v1000",
+  "engine_target": "01_KERNEL/reasoning/ouroboros_engine",
+  "evidence_class": "confirmed",
+  "rationale": "6.0 GB at 8 GB ceiling leaves 2 GB headroom which causes semantic-anchor <-> decompression thrashing. 7.2 GB (90%) gives 0.8 GB safety margin. The sovereign's 6.0 GB authority is honored via the operator_override_threshold_mb field which clamps to host_physical_mb * max_threshold_cap_factor - max_threshold_margin_mb.",
+  "revert_instructions": "Set CAMELOT_OUROBOROS_THRESHOLD_MB=6144 in the calling environment to lower the threshold back to 6.0 GB on a host with >6.5 GB free RAM. To permanently revert, edit default_threshold_mb to 6144 and delete operator_override_threshold_mb.",
+  "promotion_gate": "Move evidence_class from 'confirmed' to 'confirmed_live' once cargo test --manifest-path 01_KERNEL/reasoning/ouroboros_engine passes with the threshold firing under synthetic load.",
+  "created_at": "2026-06-25T17:38:00Z",
+  "last_updated": "2026-06-25T17:46:00Z"
+}

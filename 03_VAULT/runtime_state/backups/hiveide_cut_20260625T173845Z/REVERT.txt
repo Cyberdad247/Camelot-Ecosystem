@@ -1,0 +1,26 @@
+{
+  "backup_of": "Phase1_RIP_AND_REPLACE",
+  "created_at": "20260625T173845Z",
+  "iron_gate_state": "CLEARED — operator [y] authorized the destructive batch",
+  "modified_by_cutlist": [
+    "02_FORGE/cartridge/rustclaw/src/main.rs",
+    "03_VAULT/training/configs/hud.py"
+  ],
+  "reference_only_evidence": [
+    "03_VAULT/runtime_state/node_mcp_cutlist.json (preserved at cut-time as audit evidence; not modified by the cutlist)"
+  ],
+  "revert_command_soft": "git checkout HEAD -- 02_FORGE/cartridge/rustclaw/src/main.rs 03_VAULT/training/configs/hud.py",
+  "revert_command_hard": "cp 03_VAULT/runtime_state/backups/hiveide_cut_20260625T173845Z/main.rs 02_FORGE/cartridge/rustclaw/src/main.rs && cp 03_VAULT/runtime_state/backups/hiveide_cut_20260625T173845Z/hud.py 03_VAULT/training/configs/hud.py",
+  "v6_review_fixes_applied": [
+    "main.rs port dropped to None (pmcp-server is stdio-MCP only today)",
+    "hud.py env-gate empty-string handling (`or \"pmcp-server.exe\"`)",
+    "hud.py deprecated httpx /tool/stat_file probe removed",
+    "install_libkrun.sh flag set -euo pipefail (was -uo)",
+    "ouroboros_loop_starter.py: dropped residual token-gate on the 6.0 GB override",
+    "ouroboros_loop_starter.py: catches (ValueError, KeyError) on race-condition env reads",
+    "ouroboros_loop_starter.py: poll interval clamped >= 1",
+    "ouroboros_loop_starter.py + ouroboros_loop_config.json: max_threshold_cap_factor=0.90 + margin=512MB",
+    "REVERT.txt: this clarification note (#7)"
+  ],
+  "phase3_NO_GO_handling": "phase3_pending_prerequisite.md documents the WSL2 / libkrun / UFFD rollout. The destructive batch leaves the Windows host untouched; Phase 3 stays gated until bash scripts/wsl2_preflight.sh returns verdict=GO."
+}

@@ -2,7 +2,7 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import sys
 import unittest
-from unittest.mock import MagicMock, AsyncMock
+from unittest.mock import AsyncMock, MagicMock
 
 # 1. SETUP MOCKS SYSTEM-WIDE
 # We mock the dependencies that videneptus.py imports

@@ -1,6 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
+
 import requests
 
 BASE_URL = os.getenv("CAMELOT_TEST_BASE_URL", "http://localhost:8001")

@@ -5,8 +5,8 @@ MNEMOSYNE Integration Tests — Validating the Lady M Pipeline
 Tests the tripartite data flow from Redis (L1) -> NotebookLM (L2).
 """
 
-import unittest
 import sys
+import unittest
 from pathlib import Path
 
 # Ensure the root is in sys.path
@@ -16,6 +16,7 @@ if str(root) not in sys.path:
 
 # Rename the numeric package for importability
 import importlib.util
+
 
 def force_import_kernel():
     """Forces the kernel package into sys.modules to handle numeric prefix."""

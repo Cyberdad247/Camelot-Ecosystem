@@ -243,7 +243,7 @@ def reformat_table(lines: List[str], right_margin: int) -> List[str]:
             max_width += [len(x) + right_margin for x in cols[-(num_cols - max_cols) :]]
             max_cols = num_cols
 
-        max_width = [max(len(x) + right_margin, old_len) for x, old_len in zip(cols, max_width)]
+        max_width = [max(len(x) + right_margin, old_len) for x, old_len in zip(cols, max_width, strict=False)]
 
     # reformat
     new_lines = []
@@ -251,11 +251,11 @@ def reformat_table(lines: List[str], right_margin: int) -> List[str]:
         cols = [x.rstrip() for x in line.split("|")]
         if set(line.strip()) == set("-|"):
             filler = "-"
-            new_cols = [x.rstrip() + (filler * (M - len(x.rstrip()))) for x, M in zip(cols, max_width)]
+            new_cols = [x.rstrip() + (filler * (M - len(x.rstrip()))) for x, M in zip(cols, max_width, strict=False)]
             new_lines.append("|-" + "|".join(new_cols) + "|")
         else:
             filler = " "
-            new_cols = [x.rstrip() + (filler * (M - len(x.rstrip()))) for x, M in zip(cols, max_width)]
+            new_cols = [x.rstrip() + (filler * (M - len(x.rstrip()))) for x, M in zip(cols, max_width, strict=False)]
             new_lines.append("| " + "|".join(new_cols) + "|")
     return new_lines
 

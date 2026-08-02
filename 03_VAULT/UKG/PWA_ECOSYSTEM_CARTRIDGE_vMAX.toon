@@ -1,0 +1,25 @@
+﻿[UKG_CRYSTAL: PWA_ECOSYSTEM_CARTRIDGE_vMAX]
+
+u0 | ID | Component | {Name:PwaCockpit, Tech:Next.js_16_Turbopack, DefaultPort:3005, PWA:Implemented}
+u1 | ID | Component | {Name:ControlPlaneApi, Routes:[/api/status,/api/events,/api/commands,/api/approvals], State:Implemented}
+u2 | ID | Component | {Name:TitanLinkAdapter, Transport:WebSocket, State:Degraded_Until_Bound}
+u3 | ID | Component | {Name:KickboxAudioAdapter, Source:C:/Users/vizio/Kickbox-audio, State:Degraded_Until_Bifrost_Bound}
+u4 | ID | Component | {Name:CloudbrainAdapter, Source:control_plane/cloudbrain_sync.py, State:Planned}
+u5 | ID | Component | {Name:UIUXSwarm, Source:uiux-cloudbrain-sync.yaml, Notebook:Mastering_Professional_UIUX, State:Planned}
+
+a0 | ARCH | UI_Mapping | {Shell:Kickbox_Navigation_Spire, AnyaChat:Right_Drawer, Systems:Status_Grid, Swarm:Optimization_Panel, Logs:Event_Stream}
+a1 | ARCH | Visual_Language | {Base:Obsidian, Panels:Smoke_Glass, AccentPrimary:Gold, AccentSecondary:Violet, Tone:Executive_Intelligence}
+a2 | ARCH | Storage | {Server:L1_InMemory_v1, Browser:IndexedDB_Planned, Ledger:Approval_Receipts_Planned}
+a3 | ARCH | Cartridge_Model | {Pattern:Adapter_Boundary, RenderMode:Declarative_UI, Execution:HITL_Gated}
+
+c0 | LAW | Truth_Labeling | {Rule:Never_Claim_Live_Without_API_Event_File_Proof}
+c1 | LAW | Approval_Gate | {Constraint:Force_HITL_On_Dangerous_Command, Endpoint:/api/approvals}
+c2 | LAW | Cloudbrain_Sync | {Constraint:Sync_After_Verification_Only, Fallback:Queue_Status_Degraded}
+c3 | LAW | UIUX_Source | {Protocol:Assimilation_Protocol_Prime, No:Silent_Stubs}
+c4 | LAW | Kickbox_Integration | {Constraint:Extract_Vibe_Not_Whole_App, Pattern:Service_Adapter_First}
+
+w0 | WORKFLOW | Swarm_Optimize | {Anya[Compress]->Knights[Critique]->Cloudbrain[Recall]->Cockpit[Render_Recommendations]}
+w1 | WORKFLOW | Command_Execute | {Command[/api/commands]->Classify[Dangerous]->Approve[/api/approvals]->Receipt[Event_Log]}
+w2 | WORKFLOW | Bifrost_Orchestration | {TitanLink[Connect]->Events[Validate]->Cockpit[Render_Status]->HITL[Before_Mutation]}
+w3 | WORKFLOW | Kickbox_Audio | {Kickbox_Bifrost[Health]->Voice_Audio_Status[Render]->Commands[HITL_Gated]}
+w4 | WORKFLOW | UIUX_Release | {Build[Test]->Visual_Check[Responsive_A11y]->Cloudbrain_Sync[Approved]}

@@ -8,10 +8,11 @@ USAGE:
     client = OllamaClient()
     response = client.generate("llama3.2", "Explain quantum computing")
 """
-import requests
-from typing import Dict, Any, Optional, List
-from pathlib import Path
 import sys
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+import requests
 
 # Add vault directory to path for vault_manager import
 sys.path.append(str(Path(__file__).parents[3] / "03_VAULT"))

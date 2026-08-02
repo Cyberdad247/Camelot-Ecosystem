@@ -38,6 +38,7 @@ data/.pytest_temp/
 __pycache__/
 *.pyc
 node_modules/
+**/node_modules/
 .next/
 dist/
 build/
@@ -167,3 +168,10 @@ control_plane/cybertronia.node.env
 
 # MemCastle local vector store (runtime data)
 03_VAULT/memory/memcastle.db*
+
+# Gradio headless viewer staged uploads / diagnostic artifacts
+staged_uploads/
+verify_photo_viewer_*.html
+verify_photo_viewer_*.png
+spv_diag*.py
+test_browser_upload_failure.html

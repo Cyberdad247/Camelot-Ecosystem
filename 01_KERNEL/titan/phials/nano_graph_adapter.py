@@ -174,7 +174,6 @@ Respond in JSON:
         Splits on double newlines, single newlines, and then spaces.
         """
         separators = ["\n\n", "\n", " ", ""]
-        final_chunks = []
 
         def _recursive_split(current_text: str, seps: List[str]) -> List[str]:
             if len(current_text) <= chunk_size:

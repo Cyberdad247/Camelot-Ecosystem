@@ -11,8 +11,9 @@ Simulates multiple concurrent high-intensity fusion requests to validate:
 """
 
 import time
-import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+import requests
 
 # Configuration
 BASE_URL = "http://127.0.0.1:8000/v2/fusion"
@@ -82,7 +83,7 @@ def run_fusion_request(request_id: int):
 
 def run_stress_test():
     """Orchestrates the multi-threaded stress test."""
-    print(f"🚀 Initializing Chimera Stress Test...")
+    print("🚀 Initializing Chimera Stress Test...")
     print(f"[*] Target: {MERGE_URL}")
     print(f"[*] Load: {TOTAL_REQUESTS} total requests, {CONCURRENCY} concurrent threads")
     

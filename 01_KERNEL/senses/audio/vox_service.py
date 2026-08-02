@@ -16,7 +16,8 @@ from typing import Any, Dict, Optional
 
 # Universal Knight voice registry (single source of truth)
 try:
-    from senses.audio.knight_voices import get_voice, DEFAULT_VOICE as _DEFAULT_PIPER_VOICE
+    from senses.audio.knight_voices import DEFAULT_VOICE as _DEFAULT_PIPER_VOICE
+    from senses.audio.knight_voices import get_voice
 except ImportError:
     # Fallback if imported outside kernel package context
     import importlib.util as _ilu

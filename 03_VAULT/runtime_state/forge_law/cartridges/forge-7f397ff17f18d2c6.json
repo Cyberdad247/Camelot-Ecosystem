@@ -1,0 +1,61 @@
+{
+  "createdAt": "2026-07-13T11:26:20.578966+00:00",
+  "digest": "7f397ff17f18d2c6ca4e88a22168c1d71775db5f3ca40a733a62d36e44cf90e6",
+  "id": "forge-7f397ff17f18d2c6",
+  "operations": [
+    {
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_forge_law.py",
+        "tests/test_approval_grants.py",
+        "-q"
+      ],
+      "cwd": ".",
+      "dependsOn": [],
+      "id": "core-tests",
+      "timeoutSeconds": 300,
+      "type": "run_check"
+    },
+    {
+      "argv": [
+        "npm",
+        "run",
+        "verify"
+      ],
+      "cwd": "02_FORGE/apps/pwa-cockpit",
+      "dependsOn": [
+        "core-tests"
+      ],
+      "id": "pwa-verify",
+      "timeoutSeconds": 900,
+      "type": "build"
+    }
+  ],
+  "protocolVersion": "forge-law/v1",
+  "risk": {
+    "level": "medium",
+    "requiresOperatorApproval": true,
+    "serviceRestartApproval": "separate"
+  },
+  "sourceDir": "blueprints/v10000.1",
+  "sourceHashes": {
+    "blueprint.md": "7530402ca195da416bb65d1b7b3d19db3e9d2b78212b3265f30bffa609424d1d",
+    "forge.json": "2c419a274dcabdce96819d33bf65fb5e04f66cee8ac65e8606da6154ea7d2db5",
+    "tasks.md": "661a8c72f0d5ac744687e94dacdf501371976e56f7a5c76bee9ce17ec99f677c",
+    "verification.md": "2519959c13952b5dca5879a9842f2bac37924b946e8ff0cc183ccb8253d470e7"
+  },
+  "targetRoot": ".",
+  "title": "Forge Law R&D Command Center Integration v10000.1",
+  "verification": [
+    "core-tests",
+    "pwa-verify"
+  ],
+  "verificationEvidence": {
+    "entryHash": "e9caf9b1623f3477f891e1490ce48e4b57c515e58320d41031ff6eb0b17a44e4",
+    "entryId": 137,
+    "runId": "forge_law_v10000_1_verified",
+    "timestampUtc": "2026-07-13T11:26:03.371986+00:00"
+  }
+}

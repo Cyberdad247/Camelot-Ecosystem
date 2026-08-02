@@ -1,6 +1,7 @@
 import importlib.util
 from pathlib import Path
 
+
 def test_kernel_ouroboros_handshake():
     repo_root = Path(__file__).resolve().parent.parent.parent
     bridge_path = repo_root / "01_KERNEL" / "reasoning" / "ouroboros_bridge.py"
@@ -10,4 +11,4 @@ def test_kernel_ouroboros_handshake():
     spec.loader.exec_module(bridge)
     
     client = bridge.OuroborosClient()
-    assert client.health_check() == True
+    assert client.health_check()

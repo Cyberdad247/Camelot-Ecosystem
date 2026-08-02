@@ -1,0 +1,5 @@
+{"ts": "2026-06-25T11:35:36.753383+00:00", "task": "T1", "event": "proposed", "terminal": "sir_forge", "bytes": 58, "latency_ms": 100636, "diff_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\bifrost_triage\\T1.diff"}
+{"ts": "2026-06-25T11:35:42.677342+00:00", "task": "T5", "event": "proposed", "terminal": "sir_sentinel", "bytes": 64, "latency_ms": 5921, "diff_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\bifrost_triage\\T5.diff"}
+{"ts": "2026-06-25T11:35:49.007261+00:00", "task": "T3", "event": "proposed", "terminal": "sir_forge", "bytes": 58, "latency_ms": 6327, "diff_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\bifrost_triage\\T3.diff"}
+{"ts": "2026-06-25T11:35:54.128223+00:00", "task": "T4", "event": "proposed", "terminal": "sir_openclaw", "bytes": 56, "latency_ms": 5105, "diff_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\bifrost_triage\\T4.diff"}
+{"ts": "2026-06-25T11:35:58.784476+00:00", "task": "T2", "event": "proposed", "terminal": "sir_openclaw", "bytes": 56, "latency_ms": 4648, "diff_path": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\bifrost_triage\\T2.diff"}

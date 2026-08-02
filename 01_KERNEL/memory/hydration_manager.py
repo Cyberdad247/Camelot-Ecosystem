@@ -12,12 +12,13 @@ Pipeline Mapping:
 - Long-Term (L2):  NotebookLM (Cloud Brain)
 """
 
-import sqlite3
 import json
-import psutil
+import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional, Dict
+from typing import Any, Dict, Optional
+
+import psutil
 
 from .cloudbrain_connector import CloudBrainConnector
 from .local_store import local_store

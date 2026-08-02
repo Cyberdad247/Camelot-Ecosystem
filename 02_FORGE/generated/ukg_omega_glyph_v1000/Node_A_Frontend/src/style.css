@@ -1,0 +1,129 @@
+:root {
+  color: #f6ecd0;
+  background: #0b100f;
+  font-family: "Aptos Display", "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  min-height: 100vh;
+  padding: 48px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.22), transparent 28rem),
+    linear-gradient(135deg, #0b100f 0%, #13221f 48%, #2a220d 100%);
+}
+
+button {
+  border: 1px solid #d4af37;
+  border-radius: 999px;
+  padding: 12px 18px;
+  color: #14120a;
+  background: #d4af37;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 36px;
+  align-items: center;
+}
+
+.eyebrow {
+  color: #d4af37;
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 760px;
+  margin: 0 0 16px;
+  font-size: clamp(3rem, 8vw, 6.8rem);
+  line-height: 0.86;
+}
+
+.hero p {
+  max-width: 680px;
+  font-size: 1.08rem;
+  color: #d9cfaf;
+}
+
+.avatar-card,
+.panel {
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-radius: 28px;
+  background: rgba(8, 12, 11, 0.72);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34);
+}
+
+.avatar-card {
+  display: grid;
+  justify-items: center;
+  padding: 28px;
+}
+
+.avatar-head {
+  position: relative;
+  width: 190px;
+  height: 230px;
+  border-radius: 48% 48% 42% 42%;
+  background: linear-gradient(150deg, #d4af37, #7c5e19 55%, #17120a);
+  transition: transform 120ms linear;
+}
+
+.avatar-eye,
+.avatar-mouth {
+  position: absolute;
+  background: #07100e;
+}
+
+.avatar-eye {
+  top: 86px;
+  width: 34px;
+  height: 18px;
+  border-radius: 999px;
+}
+
+.avatar-eye.left {
+  left: 45px;
+}
+
+.avatar-eye.right {
+  right: 45px;
+}
+
+.avatar-mouth {
+  left: 70px;
+  bottom: 54px;
+  width: 50px;
+}
+
+.panel {
+  margin-top: 36px;
+  padding: 24px;
+}
+
+pre {
+  overflow: auto;
+  min-height: 120px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #050807;
+  color: #a9f2c6;
+}
+
+@media (max-width: 760px) {
+  main {
+    padding: 24px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+  }
+}

@@ -24,7 +24,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from typing import AsyncGenerator, TYPE_CHECKING
+from typing import TYPE_CHECKING, AsyncGenerator
 
 if TYPE_CHECKING:
     from kitten_service import KittenService

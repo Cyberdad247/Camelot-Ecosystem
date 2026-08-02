@@ -1,14 +1,14 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import time
 import logging
 import os
 import sys
+import time
 
 # Ensure kernel path for imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from DEFENSE_GRID.knights import SirKronos, SirSentinel, SirOctavian, SirCastor
+from DEFENSE_GRID.knights import SirCastor, SirKronos, SirOctavian, SirSentinel
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | AEGIS | %(message)s")
 

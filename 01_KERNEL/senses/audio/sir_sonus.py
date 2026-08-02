@@ -1,10 +1,10 @@
-import sys
 import argparse
-from pathlib import Path
 
 # Need to ensure we can import from CAMELOT_OS
 import os
 import sys
+from pathlib import Path
+
 # Ensure the root directory is in sys.path
 HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 if str(HOME) not in sys.path:
@@ -17,6 +17,7 @@ except ImportError:
     sys.exit(1)
 
 import importlib.util
+
 _spec = importlib.util.spec_from_file_location(
     "hydration_manager", HOME / "01_KERNEL" / "memory" / "hydration_manager.py"
 )
@@ -25,7 +26,7 @@ _spec.loader.exec_module(_mod)
 HydrationManager = _mod.HydrationManager
 
 def transcribe(file_path: str):
-    print(f"[SIR_SONUS] Loading faster_whisper model...")
+    print("[SIR_SONUS] Loading faster_whisper model...")
     # Load model. "base" for speed vs accuracy tradeoff.
     model = WhisperModel("base", device="cpu", compute_type="int8")
     print(f"[SIR_SONUS] Transcribing {file_path}...")
@@ -52,7 +53,7 @@ def transcribe(file_path: str):
         complexity=5,
         tier="L1"
     )
-    print(f"[SIR_SONUS] Transcript injected into L1_REDIS.")
+    print("[SIR_SONUS] Transcript injected into L1_REDIS.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

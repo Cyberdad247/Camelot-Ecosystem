@@ -1,9 +1,10 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+from kernel.Engines.prism_gateway import PrismAdapter
+
 from .node import AgentNode
 from .protocol import ANPEnvelope
 from .router import AgoraRouter
-from kernel.Engines.prism_gateway import PrismAdapter
 
 
 class Videneptus(AgentNode):

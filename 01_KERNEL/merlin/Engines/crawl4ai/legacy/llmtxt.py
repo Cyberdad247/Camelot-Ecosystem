@@ -99,7 +99,7 @@ Wrap your response in <index>...</index> tags.
             )
 
             # Process responses and save index files
-            for response, file_path in zip(responses, doc_batch):
+            for response, file_path in zip(responses, doc_batch, strict=False):
                 try:
                     index_content_match = re.search(
                         r"<index>(.*?)</index>",

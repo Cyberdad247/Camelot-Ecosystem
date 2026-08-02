@@ -12,8 +12,9 @@ import sys
 # Ensure memory modules are reachable
 sys.path.insert(0, os.path.dirname(__file__))
 
-from memory.titan_omega import TitanOmega
 from memory.seeder import TitanSeeder
+from memory.titan_omega import TitanOmega
+
 
 def main():
     parser = argparse.ArgumentParser(description="Seed knowledge into Camelot-OS Titan Omega memory stack.")

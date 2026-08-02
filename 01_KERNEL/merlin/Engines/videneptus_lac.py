@@ -46,7 +46,7 @@ def lac_loop(problem_statement):
     model, reasoning = ModelRouter.select_model(problem_statement)
     print(f"🤖 [ROUTER] Selected: {model}")
     print(f"   > Reason: {reasoning}")
-    print(f"   > Context Check: RADIANT\n")
+    print("   > Context Check: RADIANT\n")
 
     # PHASE 1: DIVERGENCE (Temp = 1.2)
     print("🔥 [PHASE 1] DIVERGENCE (T=1.2)")

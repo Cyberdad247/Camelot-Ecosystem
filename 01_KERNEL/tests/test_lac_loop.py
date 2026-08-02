@@ -1,8 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import unittest
-import sys
 import os
+import sys
+import unittest
 from unittest.mock import MagicMock, patch
 
 # Add KERNEL to path
@@ -26,6 +26,7 @@ sys.modules['kernel.Engines.coherence_engine'] = MagicMock()
 
 from unittest.mock import AsyncMock
 
+
 class TestVideneptusLaC(unittest.IsolatedAsyncioTestCase):
 
     async def test_execute_lac_loop(self):
@@ -47,7 +48,7 @@ class TestVideneptusLaC(unittest.IsolatedAsyncioTestCase):
             # We will read the 'execute_lac_loop' method CODE from the real file and bind it to a class.
             
             with open(os.path.join(os.path.dirname(__file__), '../agora/videneptus.py'), 'r') as f:
-                content = f.read()
+                f.read()
             
             # Extract method code (hacky but effective for isolation)
             # Or better, just fix the path and imports. 

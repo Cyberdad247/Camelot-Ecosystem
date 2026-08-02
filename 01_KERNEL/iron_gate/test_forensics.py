@@ -1,6 +1,6 @@
-import unittest
 import os
 import sys
+import unittest
 from pathlib import Path
 
 # Add project root to sys.path
@@ -8,6 +8,7 @@ PROJECT_ROOT = Path("C:/Users/vizio/CAMELOT_OS")
 sys.path.insert(0, str(PROJECT_ROOT))
 
 import importlib.util
+
 spec = importlib.util.spec_from_file_location("forensic_engine", str(PROJECT_ROOT / "01_KERNEL/iron_gate/forensic_engine.py"))
 forensic_engine = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(forensic_engine)

@@ -1,0 +1,9 @@
+[package]
+name = "aaliyah-comms"
+version = "9000.95.0"
+edition = "2021"
+description = "Camelot Aaliyah communications WASM pill for HITL-gated CMS intent drafting"
+
+[[bin]]
+name = "aaliyah_comms"
+path = "src/main.rs"

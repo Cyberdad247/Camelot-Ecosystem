@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import os
 import shutil
 import subprocess
 from pathlib import Path
+
 
 def main():
     root_dir = Path(__file__).resolve().parent.parent

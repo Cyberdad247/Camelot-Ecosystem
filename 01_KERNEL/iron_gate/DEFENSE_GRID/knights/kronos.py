@@ -1,8 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import subprocess
 import logging
 import os
+import subprocess
+
 
 class SirKronos:
     """📊 Sir Kronos (Metrics): Uses rotel to generate resource heatmaps."""

@@ -1,7 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import requests
 import json
+
+import requests
 
 url = "http://127.0.0.1:8000/v2/fusion/merge"
 data = {

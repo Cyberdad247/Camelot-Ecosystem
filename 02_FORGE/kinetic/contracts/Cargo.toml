@@ -1,0 +1,49 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# IRON GATE AUTHORIZATION — Reuse-before-reimplement scope PR
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Authorized by: User directive (reuse before reimplement; route WASM actor
+# through AnyaGate.triage + CartridgeManager.switch; expose via PyO3 from
+# ouroboros_engine). Verified against AGENTS.md "Iron Gate" clause (user
+# authorization for >10 net line change) and harness.md evidence gates.
+#
+# ROLE:  Standalone MsgPack wire-format boundary between the Rust
+#        WASM actor host (02_FORGE/kinetic/actor) and the Python
+#        control_plane (AnyaGate, CartridgeManager).
+#        Concretely used by ouroboros_engine's new
+#        `triage_intent_v1` and `switch_cartridge_v1` PyO3 functions
+#        to round-trip intent + score / switch + ack payloads.
+#
+# DEP DIRECTION (one-way):  ouroboros_engine --> contracts.
+#        contracts has NO dependency on ouroboros_engine, on the actor crate,
+#        or on PyO3 — it is intentionally embeddable from any WASM/Rust/etc.
+#        caller that wants a stable wire format.
+#
+# WIRE FORMAT:  MessagePack via rmp-serde 1.x. Confirmed by Camelot convention
+#        (~/Cartridges/contracts and prior //CODEX tasks). Default-features =
+#        true → enables `std` and `with-bytes` derivations we use here.
+#
+# WHY THIS LIVES AT 02_FORGE/kinetic/contracts/ (and not 01_KERNEL/):
+#   The wire formats are SHARED by the forge-side WASM actor host and the
+#   kernel-side ouroboros_engine PyO3 surface. They sit at the forge/kinetic
+#   layer because both dependents are forge-side binaries.
+#
+# NOT AN "omni-nexus-ide" SUBPROJECT: per user constraint, this crate joins
+# the existing root `Cargo.toml` workspace, NOT a parallel workspace.
+# ══════════════════════════════════════════════════════════════════════════════
+
+[package]
+name = "contracts"
+version = "0.1.0"
+edition = "2021"
+description = "Camelot-OS MsgPack wire-format boundary for WASM actor <-> ouroboros_engine <-> control_plane. Reuses AnyaGate.triage + CartridgeManager.switch via msgpack pack/unpack."
+license = "Invisioned Marketing inc. — All Rights Reserved"
+publish = false
+
+[lib]
+name = "contracts"
+path = "src/lib.rs"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+rmp-serde = "1"

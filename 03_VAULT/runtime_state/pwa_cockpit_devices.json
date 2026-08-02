@@ -1,0 +1,32 @@
+{
+  "devices": [
+    {
+      "id": "dev-3c544a8a-0508-4bf4-b25c-33f592acd30c",
+      "name": "ULTRAPLAN verification device",
+      "platform": "desktop",
+      "capabilities": [
+        "system.status",
+        "desktop.notification",
+        "desktop.window.focus"
+      ],
+      "fingerprint": "f23ceb3589e7bd69c359e5d2",
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAeWTVbp4Nys5yxpsUQKlNbY6efexUb+7rbB6jU/XbVIM=\n-----END PUBLIC KEY-----\n",
+      "createdAt": "2026-07-13T03:04:30.096Z",
+      "lastSeenAt": "2026-07-13T03:04:30.298Z",
+      "revokedAt": "2026-07-13T03:04:30.354Z"
+    }
+  ],
+  "actions": [
+    {
+      "id": "act-2d7b09e4-a8c5-46e9-b280-72c25459b26f",
+      "deviceId": "dev-3c544a8a-0508-4bf4-b25c-33f592acd30c",
+      "capability": "system.status",
+      "arguments": {},
+      "status": "completed",
+      "createdAt": "2026-07-13T03:04:30.164Z",
+      "updatedAt": "2026-07-13T03:04:30.306Z",
+      "attempts": 1,
+      "result": "windows x86_64 verification"
+    }
+  ]
+}

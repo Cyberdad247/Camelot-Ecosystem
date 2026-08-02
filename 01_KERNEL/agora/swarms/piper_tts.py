@@ -23,7 +23,7 @@ PIPER_MODELS_DIR = os.path.join(
 
 # Import universal voice registry (single source of truth)
 try:
-    from senses.audio.knight_voices import VOICE_PRESETS, get_voice, get_model
+    from senses.audio.knight_voices import VOICE_PRESETS, get_model, get_voice
 except ImportError:
     try:
         import importlib.util as _ilu
@@ -185,7 +185,7 @@ def create_podcast(
 
     entries = script if isinstance(script, list) else script.entries
     audio_segments: List[np.ndarray] = []
-    silence = create_silence(silence_duration, sampling_rate)
+    create_silence(silence_duration, sampling_rate)
     actual_rate = sampling_rate
 
     for entry in entries:

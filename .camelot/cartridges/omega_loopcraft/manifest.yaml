@@ -1,0 +1,17 @@
+cartridge_id: "omega_loopcraft"
+version: "1.0.0"
+description: "Omega Loopcraft Cartridge V1 - Self-contained Next.js + FastAPI + Supabase environment"
+entry_points:
+  ui_shell: "ui_shell/out/index.html"
+  mcp_engine: "mcp_engine/main.py"
+routing_permissions:
+  mcp_stdio: true
+  supabase_external: true
+  allow_local_network: false
+governance:
+  HITL_required: true
+  allowed_domains:
+    - "*.supabase.co"
+  denied_operations:
+    - "local_port_binding"
+    - "raw_socket_listening"

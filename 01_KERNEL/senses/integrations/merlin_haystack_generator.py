@@ -11,13 +11,13 @@ Architecture:
     Haystack Pipeline → MerlinGenerator → MerlinLLM.generate_response()
 """
 
-from typing import List, Dict, Any, Optional
 import asyncio
 import logging
+from typing import Any, Dict, List, Optional
 
 # Haystack imports
 try:
-    from haystack import component, Document
+    from haystack import Document, component
     from haystack.dataclasses import StreamingChunk  # noqa: F401
     HAYSTACK_AVAILABLE = True
 except ImportError:
@@ -230,7 +230,7 @@ def test_merlin_generator():
     print("=" * 60)
     print("MERLIN GENERATOR TEST")
     print("=" * 60)
-    print(f"\nQuery: What is the Septem Regna?")
+    print("\nQuery: What is the Septem Regna?")
     print(f"\nMerlin Response:\n{result['replies'][0]}")
     print(f"\nMetadata: {result['meta'][0]}")
 

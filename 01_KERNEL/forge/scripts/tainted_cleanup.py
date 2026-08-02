@@ -31,7 +31,6 @@ def cleanup_file(filepath):
         with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
             content = f.read()
 
-        original_content = content
         found = False
 
         for pattern in PATTERNS:

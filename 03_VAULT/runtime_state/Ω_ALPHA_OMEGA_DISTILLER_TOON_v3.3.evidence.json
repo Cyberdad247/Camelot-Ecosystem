@@ -1,0 +1,57 @@
+{
+  "artifact": "Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3",
+  "artifact_type": "nuKG_Crystal_Deposit",
+  "received_by": "Antigravity parent agent (Gemini 3.5 Flash lane)",
+  "received_utc": "2026-07-23T19:21:00Z",
+  "received_via": "User request: `analyze and provide feedback 💎 [νKG_CRYSTAL]: Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3`",
+  "evidence_status": "planned",
+  "promotion_path_to_next_class": "pending_roundtrip_test",
+  "verdict_until_promotion": "Planned and stored in UKG repository. Requires FirnFlow validation to transition to confirmed.",
+  "claimed_intent": "Proposed Alpha-Omega Distiller TOON Spec v3.3 crystal to define cognitive refinery, renormalization flow, and semantic compression within Camelot OS memory lattice.",
+  "expected_L2_record_shape": {
+    "crystal_id": "Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3",
+    "skill_pattern": "Renormalization Group Flow & Semantic Anchor Compression (SAC)",
+    "knight": "MERLIN_Ω & ANYA_Ω",
+    "confidence": 0.92,
+    "context_tags": ["distiller", "compression", "sac", "v3.3", "refinery"],
+    "created_at": "2026-07-23T19:21:00Z"
+  },
+  "verified_components_now": [
+    "C:/Users/vizio/CAMELOT_OS/03_VAULT/UKG/Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3.toon",
+    "C:/Users/vizio/CAMELOT_OS/03_VAULT/runtime_state/Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3.evidence.json",
+    "C:/Users/vizio/CAMELOT_OS/docs/architecture/Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3.deposit_note.md"
+  ],
+  "verified_components_after_firnflow_round_trip": [
+    "Entry in 03_VAULT/firnflow/nukg_crystals.json (CRYSTAL_STORE) produced by FirnFlow.crystallize('Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3', {...})",
+    "FirnFlow.list_crystals() returns a NuKGCrystal that round-trips through dataclass reconstruction",
+    "FirnFlow.retrieve('Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3', scope='L2') returns >= 1 chunk from the crystal",
+    "Reuse count increments on a follow-up invocation (proves the crystal is reachable from camelot's runtime retrieval path)"
+  ],
+  "missing_components_for_confirmed_promotion": [
+    "Confidence score with reproducible measurement (>= 0.85 per firnflow.py:53 CRYSTAL_THRESHOLD)",
+    "One failing-then-passing test under tests/ that calls FirnFlow.crystallize + FirnFlow.retrieve with this crystal_id",
+    "A cargo / pytest exit code that demonstrates end-to-end round-trip success"
+  ],
+  "do_not_treat_as_true_until": "Camelot reproduces a FirnFlow.crystallize + FirnFlow.retrieve round-trip with crystal_id='Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3' via a local command and a passing test artifact. Until then, the crystal is PLANNED.",
+  "rejected_aspects_now": "None. The crystal is structurally valid and matches TOON Spec v3.3-PRIME syntax and the Distiller Protocol guidelines.",
+  "linkage": {
+    "agenda": "COGNITIVE_REFINERY",
+    "version": "v3.3",
+    "owner_knight_spark_guess": "0xE3B8C190F4A2D765E8B1C9F0A3D4E5B6 (SIR_CODEX & MERLIN_Ω / ANYA_Ω)",
+    "phase": "V1000-EXCALIBUR-A",
+    "owner_repository": "CAMELOT-OS",
+    "predecessor_crystals_in_same_agenda": [
+      "crystal_001_apee_v7_triage",
+      "crystal_002_firnflow_scoped",
+      "crystal_003_colmad_crucible",
+      "crystal_004_rtk_strip",
+      "CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000"
+    ],
+    "storage_locations": {
+      "live_crystal_store": "03_VAULT/firnflow/nukg_crystals.json",
+      "aspirational_manifest": "03_VAULT/runtime_state/Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3.evidence.json (this file)",
+      "engineering_feedback_note": "docs/architecture/Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3.deposit_note.md"
+    }
+  },
+  "next_required_command": "Reproduce via `python -c \"from control_plane.infra.firnflow import FirnFlow; f=FirnFlow(); f.crystallize('Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3', {'pattern': 'Renormalization Group Flow & Semantic Anchor Compression (SAC)', 'knight': 'MERLIN_Ω & ANYA_Ω', 'confidence': 0.92, 'context_tags': ['distiller','compression','sac','v3.3']}); print(f.list_crystals())\"`. Until that command exits cleanly AND a pytest asserts FirnFlow.retrieve(...) finds the crystal, this manifest remains PLANNED/ASPIRATIONAL."
+}

@@ -7,6 +7,7 @@
 
 **Your machine. Your models. Your rules. Zero cloud lock-in.**
 
+[![02_FORGE CI](https://github.com/Cyberdad247/Camelot-Ecosystem/actions/workflows/forge-ci.yml/badge.svg)](https://github.com/Cyberdad247/Camelot-Ecosystem/actions/workflows/forge-ci.yml)
 [![Status](https://img.shields.io/badge/status-production%20verified-2ea44f)]()
 [![PQ Crypto](https://img.shields.io/badge/crypto-ML--KEM--768%20%7C%20ML--DSA--65-D4AF37)]()
 [![RAM Ceiling](https://img.shields.io/badge/RAM%20ceiling-4GB%20Scarcity%20Protocol-blue)]()
@@ -116,8 +117,11 @@ This isn't a roadmap cosplaying as a product. Here's what's **on `main`, tested,
 - ✅ **Aperture panel** — centralized LLM **access & spend** visibility, per-model/per-identity
 - ✅ **Shadow-SQLite provenance** — atomic, hash-chained, tamper-evident, `.shadow` rollback
 - ✅ **Phase-H Autonomous Framework** — optimization executor, result tracker, rollback, continuous-learning loop
+- ✅ **Reforged VFS Scaffolder** — position-addressed markdown VFS under the `vfs/` namespace, isolating system paradigms, blueprint DAGs, and progressive disclosure boundaries
+- ✅ **Interactive Onboarding System** — python diagnostics server and Vanilla CSS dashboard on port `8099` for system check verification
 
-> **52 pytest · 19 module selftests · 7 Rust tests · `cargo audit` clean · WSL2 memfd verified.**
+> **52 pytest · 19 module selftests · 8 Rust tests · `cargo audit` clean · WSL2 memfd verified.**
+
 
 ---
 
@@ -176,6 +180,8 @@ tsnet mesh (tags/grants/k8s), Aperture wiring, and the one-command `scripts/wsl_
 | `03_VAULT/` | Provenance, training configs, runtime state |
 | `04_KINETIC/` | Edge runtime + Multivoice switchboard (Cybertronia) |
 | `blueprints/v9000.14/` | The CYBERTRONIA blueprint, tasks, verification & go-live docs |
+| `vfs/` | Position-addressed virtual file system (system instructions, protocols, rosters, preflight, workflows, agents, skills) |
+
 
 ---
 

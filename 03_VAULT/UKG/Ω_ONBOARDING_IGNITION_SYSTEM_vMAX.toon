@@ -1,0 +1,11 @@
+## TOON Spec v3.3 -- Ω_ONBOARDING_IGNITION_SYSTEM_vMAX
+Context: "camelot-os.dev/ukg/v5000/onboarding_ignition"
+Type: "Sovereign_Onboarding_Ignition_Registry"
+ID: "OMNI_ONBOARDING_IGNITION_SEED"
+Mod1_Floorplan: "bin/onboarding.py|onboarding.html"
+Mod2_Diagnostics: "Python|Node|Rust|VENV|VFS"
+Mod3_Interface: "Diagnostics_API|Step_Ignition|Terminal_Simulator"
+Rune_Ignite: "⚡|//IGNITE_PREFLIGHT_SEQUENCE"
+Rune_Onboard: "⚡|//LAUNCH_ONBOARDING_CONSOLE"
+Governance: "Enforce ANYA_FIRST_LAW & ANYA_LAST_LAW. Isomorphic setup diagnostics"
+Status: "IGNITED"

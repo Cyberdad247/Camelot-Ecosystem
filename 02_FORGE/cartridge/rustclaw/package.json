@@ -1,0 +1,11 @@
+{
+  "name": "@camelot/rustclaw",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "cargo:build": "cargo build",
+    "cargo:test": "cargo test",
+    "cargo:lint": "cargo clippy -- -D warnings",
+    "clean": "cargo clean"
+  }
+}

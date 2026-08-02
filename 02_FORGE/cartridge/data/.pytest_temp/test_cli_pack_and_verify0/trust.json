@@ -1,0 +1,14 @@
+{
+  "keys": {
+    "default": {
+      "kid": "default",
+      "scheme": "ed25519",
+      "public_key_b64": "/jAmOX+Ton3GI4JoVMR2SjvBqEUhVO+GnsZf6arI/4k=",
+      "status": "active",
+      "not_before": null,
+      "not_after": null,
+      "added_at": "2026-07-13T17:12:04.027187+00:00",
+      "note": ""
+    }
+  }
+}

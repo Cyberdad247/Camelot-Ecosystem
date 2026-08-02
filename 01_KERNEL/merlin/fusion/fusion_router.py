@@ -9,14 +9,15 @@ Integrates Capability Discovery, Multi-Strategy Fusion, and LLM-as-a-Judge adjud
 
 import os
 import sys
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 # Ensure internal modules are reachable
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from fusion.merger_engine import MergerEngine, FusionType
+from fusion.merger_engine import FusionType, MergerEngine
 
 router = APIRouter(prefix="/v2/fusion", tags=["fusion"])
 

@@ -169,7 +169,7 @@ class OmegaAuditPrime:
 
             # Find README
             content = ""
-            for root, dirs, files in os.walk(temp_dir):
+            for root, _dirs, files in os.walk(temp_dir):
                 for file in files:
                     if file.lower().startswith("readme"):
                         readme_path = os.path.join(root, file)

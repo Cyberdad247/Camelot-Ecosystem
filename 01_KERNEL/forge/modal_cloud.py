@@ -1,11 +1,11 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import logging
+
+import modal
 import torch
 import torch.nn as nn
 import torch.optim as optim
-
-import modal
-import logging
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("camelot_modal_sky")

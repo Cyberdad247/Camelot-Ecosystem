@@ -18,8 +18,8 @@ Usage:
     --full: Test with full 38,742-node UKG (default: 100-node subset)
 """
 
-import sys
 import logging
+import sys
 from pathlib import Path
 
 # Force UTF-8 encoding on Windows
@@ -53,7 +53,7 @@ def test_1_haystack_available():
         import haystack
         logger.info(f"✅ Haystack version: {haystack.__version__}")
         
-        from haystack import Pipeline, Document  # noqa: F401
+        from haystack import Document, Pipeline  # noqa: F401
         from haystack.components.retrievers.in_memory import InMemoryBM25Retriever  # noqa: F401
         from haystack.document_stores.in_memory import InMemoryDocumentStore  # noqa: F401
         
@@ -156,8 +156,8 @@ def test_4_merlin_generator():
     logger.info("=" * 60)
     
     try:
-        from integrations.merlin_haystack_generator import MerlinGenerator
         from haystack import Document
+        from integrations.merlin_haystack_generator import MerlinGenerator
         
         # Create test documents
         docs = [
@@ -214,8 +214,9 @@ def test_5_chronos_integration():
     
     try:
         import asyncio
-        from kernel.rag.chronos_haystack import ChronosHaystackNode
+
         from kernel.agora.protocol import ANPEnvelope
+        from kernel.rag.chronos_haystack import ChronosHaystackNode
         
         async def test_chronos():
             # Initialize with Haystack only (skip LightRAG for this test)

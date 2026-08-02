@@ -15,11 +15,11 @@ docs_manager = DocsManager(logger)
 
 def print_table(headers: List[str], rows: List[List[str]], padding: int = 2):
     """Print formatted table with headers and rows"""
-    widths = [max(len(str(cell)) for cell in col) for col in zip(headers, *rows)]
+    widths = [max(len(str(cell)) for cell in col) for col in zip(headers, *rows, strict=False)]
     border = "+" + "+".join("-" * (w + 2 * padding) for w in widths) + "+"
 
     def format_row(row):
-        return "|" + "|".join(f"{' ' * padding}{str(cell):<{w}}{' ' * padding}" for cell, w in zip(row, widths)) + "|"
+        return "|" + "|".join(f"{' ' * padding}{str(cell):<{w}}{' ' * padding}" for cell, w in zip(row, widths, strict=False)) + "|"
 
     click.echo(border)
     click.echo(format_row(headers))

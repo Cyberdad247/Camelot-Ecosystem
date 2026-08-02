@@ -6,10 +6,11 @@ Subscribes to 'camelot-nexus' room, processes speech, and routes to Multi-Knight
 """
 
 import asyncio
-import os
 import logging
-from livekit import rtc
+import os
+
 from agora.swarms.piper_tts import synthesize_stream
+from livekit import rtc
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("voice_bridge")
@@ -63,7 +64,7 @@ class AnyaVoiceAgent:
     async def speak(self, text: str, knight: str = "tasha"):
         """Stream synthesis back to the room"""
         source = rtc.AudioSource(22050, 1)
-        track = await self.room.local_participant.publish_track(source)
+        await self.room.local_participant.publish_track(source)
         
         for chunk, _ in synthesize_stream(text, voice_preset=knight):
             await source.capture_frame(rtc.AudioFrame(chunk, 22050, 1))

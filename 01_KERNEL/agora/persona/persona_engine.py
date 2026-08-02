@@ -19,16 +19,16 @@ Usage:
 import json
 import logging
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 
 # Local imports
 try:
-    from .persona_extractor import PersonaPatternExtractor
     from .claude_pattern_miner import GoldenPatternAnalyzer
+    from .persona_extractor import PersonaPatternExtractor
 except ImportError:
     # Handle direct execution
-    from persona_extractor import PersonaPatternExtractor
     from claude_pattern_miner import GoldenPatternAnalyzer
+    from persona_extractor import PersonaPatternExtractor
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

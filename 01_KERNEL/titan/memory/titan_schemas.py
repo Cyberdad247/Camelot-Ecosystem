@@ -9,10 +9,11 @@ This module defines the data structures for the three-tier memory system:
 - Omega-Flux: Ephemeral working memory (GoT reasoning fragments)
 """
 
-from typing import Dict, List, Any, Optional
-from pydantic import BaseModel, Field
-from datetime import UTC, datetime
 import hashlib
+from datetime import UTC, datetime
+from typing import Any, Dict, List, Optional
+
+from pydantic import BaseModel, Field
 
 
 def utc_now() -> datetime:

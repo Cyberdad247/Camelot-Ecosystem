@@ -17,7 +17,7 @@ def analyze_docs():
     # Map of file references to check (simplified)
     references = {"antigravity.py": False, "merlin_omega.py": False, "kernel.py": False, "PROVENANCE_LEDGER.md": False}
 
-    for root, dirs, files in os.walk(r"C:\Users\vizio\CAMELOT_OS"):
+    for root, _dirs, files in os.walk(r"C:\Users\vizio\CAMELOT_OS"):
         for file in files:
             if file in references:
                 references[file] = True
@@ -38,7 +38,7 @@ def analyze_docs():
     for src_dir in SRC_DIRS:
         if not os.path.exists(src_dir):
             continue
-        for root, dirs, files in os.walk(src_dir):
+        for root, _dirs, files in os.walk(src_dir):
             for file in files:
                 if file.endswith(".py"):
                     try:
@@ -60,7 +60,6 @@ def analyze_docs():
     # Scan docs for [File](./path) links
     link_pattern = re.compile(r"\[.*?\]\(.*?\)")
 
-    missing_links = []
 
     if os.path.exists(DOCS_DIR):
         for doc_file in os.listdir(DOCS_DIR):

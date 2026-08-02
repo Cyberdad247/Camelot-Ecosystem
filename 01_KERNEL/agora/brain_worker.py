@@ -2,14 +2,15 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
 import sys
-from fastapi import FastAPI, Request, HTTPException
+
 import uvicorn
+from fastapi import FastAPI, HTTPException, Request
 
 # PATH CONFIGURATION
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from merlin_omega import Merlin_Omega
 from kernel.rag.lightrag_engine import get_lightrag_engine
+from merlin_omega import Merlin_Omega
 
 app = FastAPI(title="Camelot Internal Brain")
 

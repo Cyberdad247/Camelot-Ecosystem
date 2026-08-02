@@ -1,0 +1,463 @@
+diff --git a/components/GenesisTerminal.tsx b/components/GenesisTerminal.tsx
+index 98b940d..b90ea3f 100644
+--- a/components/GenesisTerminal.tsx
++++ b/components/GenesisTerminal.tsx
+@@ -1,9 +1,9 @@
+ 'use client';
+ 
+ import React, { useState, useEffect } from 'react';
+-import { Press_Start_2P } from 'next/font/google';
+-
+-const pressStart2P = Press_Start_2P({ weight: '400', subsets: ['latin'] });
++// Vite-safe font token (next/font is Next.js-only). Load 'Press Start 2P' via
++// <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"> in index.html.
++const pressStart2P = { className: 'font-press-start' };
+ 
+ export const GenesisTerminal: React.FC = () => {
+   const [bootText, setBootText] = useState('');
+diff --git a/index.html b/index.html
+index 21dfe69..a7b824c 100644
+--- a/index.html
++++ b/index.html
+@@ -4,7 +4,9 @@
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>My Google AI Studio App</title>
+-  </head>
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
++</head>
+   <body>
+     <div id="root"></div>
+     <script type="module" src="/src/main.tsx"></script>
+diff --git a/src/bifrost/bifrost-envelope.ts b/src/bifrost/bifrost-envelope.ts
+new file mode 100644
+index 0000000..dd25341
+--- /dev/null
++++ b/src/bifrost/bifrost-envelope.ts
+@@ -0,0 +1,162 @@
++import { createHmac, createHash, randomUUID } from 'node:crypto';
++
++/**
++ * Bifrost signed message envelope — Camelot-OS trust plane.
++ * Header fields per Ω_TITAN_BIFROST spec: ver, msg_id, trace_id, parent_id,
++ * type, src, dst, realm, session, node, cartridge, operator, ts, nonce,
++ * expires, seq, priority, trust_band, policy_decision, sig_alg, sig,
++ * checksum_alg, checksum, provenance_ref.
++ */
++
++export type TrustBand = 'allow' | 'warn' | 'review' | 'block' | 'quarantine';
++export type QueuePriority = 'critical' | 'high' | 'normal' | 'low';
++
++export interface BifrostHeader {
++  ver: string;
++  msg_id: string;
++  trace_id: string;
++  parent_id?: string;
++  type: string;
++  src: string;
++  dst: string;
++  realm: string;
++  session?: string;
++  node: string;
++  cartridge?: string;
++  operator?: string;
++  ts: string;
++  nonce: string;
++  expires: string;
++  seq: number;
++  priority: QueuePriority;
++  trust_band: TrustBand;
++  policy_decision?: string;
++  sig_alg: 'hmac-sha256';
++  sig?: string;
++  checksum_alg: 'sha256';
++  checksum?: string;
++  provenance_ref?: string;
++}
++
++export interface BifrostEnvelope<T = unknown> {
++  header: BifrostHeader;
++  payload: T;
++}
++
++export interface EnvelopeVerification {
++  valid: boolean;
++  reasons: string[];
++  trust_band: TrustBand;
++}
++
++const BIFROST_VER = '1.0';
++
++function canonicalPayload(payload: unknown): string {
++  return JSON.stringify(payload ?? null);
++}
++
++function headerSigningString(h: BifrostHeader): string {
++  // Deterministic field order; sig and checksum excluded from their own inputs.
++  return [
++    h.ver, h.msg_id, h.trace_id, h.parent_id ?? '', h.type, h.src, h.dst,
++    h.realm, h.session ?? '', h.node, h.cartridge ?? '', h.operator ?? '',
++    h.ts, h.nonce, h.expires, String(h.seq), h.priority, h.trust_band,
++    h.policy_decision ?? '', h.sig_alg, h.checksum_alg, h.checksum ?? '',
++    h.provenance_ref ?? ''
++  ].join('|');
++}
++
++export interface SealOptions {
++  type: string;
++  src: string;
++  dst: string;
++  realm: string;
++  node: string;
++  seq: number;
++  secret: string;
++  ttlMs?: number;
++  session?: string;
++  cartridge?: string;
++  operator?: string;
++  parentId?: string;
++  traceId?: string;
++  priority?: QueuePriority;
++  trustBand?: TrustBand;
++  policyDecision?: string;
++  provenanceRef?: string;
++}
++
++export function sealEnvelope<T>(payload: T, opts: SealOptions): BifrostEnvelope<T> {
++  const now = Date.now();
++  const header: BifrostHeader = {
++    ver: BIFROST_VER,
++    msg_id: randomUUID(),
++    trace_id: opts.traceId ?? randomUUID(),
++    parent_id: opts.parentId,
++    type: opts.type,
++    src: opts.src,
++    dst: opts.dst,
++    realm: opts.realm,
++    session: opts.session,
++    node: opts.node,
++    cartridge: opts.cartridge,
++    operator: opts.operator,
++    ts: new Date(now).toISOString(),
++    nonce: randomUUID(),
++    expires: new Date(now + (opts.ttlMs ?? 30_000)).toISOString(),
++    seq: opts.seq,
++    priority: opts.priority ?? 'normal',
++    trust_band: opts.trustBand ?? 'allow',
++    policy_decision: opts.policyDecision,
++    sig_alg: 'hmac-sha256',
++    checksum_alg: 'sha256',
++    provenance_ref: opts.provenanceRef
++  };
++
++  header.checksum = createHash('sha256').update(canonicalPayload(payload)).digest('hex');
++  header.sig = createHmac('sha256', opts.secret).update(headerSigningString(header)).digest('hex');
++
++  return { header, payload };
++}
++
++export interface VerifyOptions {
++  secret: string;
++  expectedVer?: string;
++  seenNonces?: Set<string>;
++  now?: number;
++}
++
++export function verifyEnvelope(env: BifrostEnvelope, opts: VerifyOptions): EnvelopeVerification {
++  const reasons: string[] = [];
++  const h = env.header;
++  const now = opts.now ?? Date.now();
++
++  // Version mismatch → fail closed (crystal: ffi.version_mismatch)
++  if ((opts.expectedVer ?? BIFROST_VER) !== h.ver) {
++    return { valid: false, reasons: ['version_mismatch: fail closed'], trust_band: 'block' };
++  }
++
++  // Expiry
++  if (now > new Date(h.expires).getTime()) reasons.push('envelope expired');
++
++  // Nonce replay
++  if (opts.seenNonces) {
++    if (opts.seenNonces.has(h.nonce)) reasons.push('nonce replay detected');
++    else opts.seenNonces.add(h.nonce);
++  }
++
++  // Checksum (payload integrity)
++  const checksum = createHash('sha256').update(canonicalPayload(env.payload)).digest('hex');
++  if (checksum !== h.checksum) reasons.push('payload checksum mismatch');
++
++  // Signature (header integrity + provenance)
++  const expectedSig = createHmac('sha256', opts.secret).update(headerSigningString(h)).digest('hex');
++  if (expectedSig !== h.sig) reasons.push('invalid signature');
++
++  const valid = reasons.length === 0;
++  return {
++    valid,
++    reasons: valid ? ['signed envelope verified'] : reasons,
++    trust_band: valid ? h.trust_band : 'quarantine'
++  };
++}
+diff --git a/src/bifrost/bifrost-gateway.ts b/src/bifrost/bifrost-gateway.ts
+new file mode 100644
+index 0000000..61849b6
+--- /dev/null
++++ b/src/bifrost/bifrost-gateway.ts
+@@ -0,0 +1,65 @@
++import { IntentRoute } from '../router/intent-router';
++import { evaluatePolicy } from '../policy/policy-engine';
++import { BifrostEnvelope, TrustBand, verifyEnvelope, VerifyOptions } from './bifrost-envelope';
++import { HeimdallFsm } from './heimdall-fsm';
++
++/**
++ * Bifrost gateway — reconciles envelope verification, Heimdall node health,
++ * and the intent policy engine into a single trust decision.
++ * Reconciliation lattice per spec: quarantine > block > review > warn > allow;
++ * unanimous allow → allow.
++ */
++
++const SEVERITY: Record<TrustBand, number> = {
++  quarantine: 4,
++  block: 3,
++  review: 2,
++  warn: 1,
++  allow: 0
++};
++
++export function reconcileTrust(verdicts: TrustBand[]): TrustBand {
++  if (verdicts.length === 0) return 'review';
++  return verdicts.reduce((worst, v) => (SEVERITY[v] > SEVERITY[worst] ? v : worst), 'allow' as TrustBand);
++}
++
++export interface GatewayDecision {
++  trust_band: TrustBand;
++  proceed: boolean;
++  requiresApproval: boolean;
++  verdicts: { source: string; band: TrustBand; reason: string }[];
++  route: IntentRoute;
++}
++
++export function gateIntent(
++  route: IntentRoute,
++  envelope: BifrostEnvelope,
++  verifyOpts: VerifyOptions,
++  heimdall: HeimdallFsm
++): GatewayDecision {
++  const verdicts: GatewayDecision['verdicts'] = [];
++
++  // 1. Signed envelope verification
++  const env = verifyEnvelope(envelope, verifyOpts);
++  verdicts.push({ source: 'bifrost_envelope', band: env.valid ? env.trust_band : 'quarantine', reason: env.reasons.join('; ') });
++
++  // 2. Heimdall node health
++  const advisory = heimdall.sidecarAdvisory();
++  const heimdallBand: TrustBand = advisory === 'proceed' ? 'allow' : advisory === 'review_only' ? 'review' : 'block';
++  verdicts.push({ source: 'heimdall_fsm', band: heimdallBand, reason: `node=${heimdall.nodeId} state=${heimdall.state} advisory=${advisory}` });
++
++  // 3. Intent policy engine
++  const policy = evaluatePolicy(route);
++  const policyBand: TrustBand = !policy.allowed ? 'block' : policy.route.requiresApproval ? 'review' : 'allow';
++  verdicts.push({ source: 'policy_engine', band: policyBand, reason: policy.reason });
++
++  const trust_band = reconcileTrust(verdicts.map(v => v.band));
++
++  return {
++    trust_band,
++    proceed: trust_band === 'allow' || trust_band === 'warn',
++    requiresApproval: trust_band === 'review',
++    verdicts,
++    route: policy.route
++  };
++}
+diff --git a/src/bifrost/heimdall-fsm.ts b/src/bifrost/heimdall-fsm.ts
+new file mode 100644
+index 0000000..470385e
+--- /dev/null
++++ b/src/bifrost/heimdall-fsm.ts
+@@ -0,0 +1,100 @@
++/**
++ * Heimdall node-health FSM — Bifrost quarantine/policy guardian.
++ * States and guarantees per Ω_TITAN_BIFROST spec:
++ *   healthy → observed → suspect → soft_quarantine → hard_quarantine → ragnarok → recovered
++ * Ragnarok guarantee: no sessions, no commits, no upgrades, no forwarding — recovery traffic only.
++ */
++
++export type HeimdallState =
++  | 'healthy'
++  | 'observed'
++  | 'suspect'
++  | 'soft_quarantine'
++  | 'hard_quarantine'
++  | 'ragnarok'
++  | 'recovered';
++
++export type HeimdallEvent =
++  | 'anomaly'
++  | 'anomaly_confirmed'
++  | 'threshold_breach'
++  | 'critical_breach'
++  | 'clear'
++  | 'recovery_verified';
++
++export interface HeimdallCapabilities {
++  sessions: boolean;
++  commits: boolean;
++  upgrades: boolean;
++  forward: boolean;
++  recoveryOnly: boolean;
++}
++
++const TRANSITIONS: Record<HeimdallState, Partial<Record<HeimdallEvent, HeimdallState>>> = {
++  healthy:          { anomaly: 'observed', critical_breach: 'ragnarok' },
++  observed:         { anomaly_confirmed: 'suspect', clear: 'healthy', critical_breach: 'ragnarok' },
++  suspect:          { threshold_breach: 'soft_quarantine', clear: 'observed', critical_breach: 'ragnarok' },
++  soft_quarantine:  { threshold_breach: 'hard_quarantine', clear: 'suspect', critical_breach: 'ragnarok' },
++  hard_quarantine:  { critical_breach: 'ragnarok', recovery_verified: 'recovered' },
++  ragnarok:         { recovery_verified: 'recovered' },
++  recovered:        { clear: 'healthy', anomaly: 'observed' }
++};
++
++export function capabilitiesFor(state: HeimdallState): HeimdallCapabilities {
++  switch (state) {
++    case 'healthy':
++    case 'recovered':
++      return { sessions: true, commits: true, upgrades: true, forward: true, recoveryOnly: false };
++    case 'observed':
++      return { sessions: true, commits: true, upgrades: false, forward: true, recoveryOnly: false };
++    case 'suspect':
++      return { sessions: true, commits: false, upgrades: false, forward: true, recoveryOnly: false };
++    case 'soft_quarantine':
++      return { sessions: false, commits: false, upgrades: false, forward: true, recoveryOnly: false };
++    case 'hard_quarantine':
++      return { sessions: false, commits: false, upgrades: false, forward: false, recoveryOnly: false };
++    case 'ragnarok':
++      // Guarantee: no sessions/commits/upgrades/forward except recovery.
++      return { sessions: false, commits: false, upgrades: false, forward: false, recoveryOnly: true };
++  }
++}
++
++export interface TransitionRecord {
++  from: HeimdallState;
++  event: HeimdallEvent;
++  to: HeimdallState;
++  ts: string;
++}
++
++export class HeimdallFsm {
++  private _state: HeimdallState;
++  readonly history: TransitionRecord[] = [];
++
++  constructor(readonly nodeId: string, initial: HeimdallState = 'healthy') {
++    this._state = initial;
++  }
++
++  get state(): HeimdallState {
++    return this._state;
++  }
++
++  get capabilities(): HeimdallCapabilities {
++    return capabilitiesFor(this._state);
++  }
++
++  dispatch(event: HeimdallEvent): HeimdallState {
++    const next = TRANSITIONS[this._state][event];
++    if (next) {
++      this.history.push({ from: this._state, event, to: next, ts: new Date().toISOString() });
++      this._state = next;
++    }
++    return this._state;
++  }
++
++  /** Sidecar advisory per crystal: ok→proceed, degraded→review_only, failed→no_grant */
++  sidecarAdvisory(): 'proceed' | 'review_only' | 'no_grant' {
++    if (this._state === 'healthy' || this._state === 'recovered') return 'proceed';
++    if (this._state === 'observed' || this._state === 'suspect') return 'review_only';
++    return 'no_grant';
++  }
++}
+diff --git a/src/index.css b/src/index.css
+index 3840164..044859a 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -240,4 +240,5 @@
+   html {
+     @apply font-sans;
+     }
+-}
+\ No newline at end of file
++}
++.font-press-start { font-family: 'Press Start 2P', monospace; }
+diff --git a/src/tests/smoke.test.ts b/src/tests/smoke.test.ts
+index c2e102c..eeb3c38 100644
+--- a/src/tests/smoke.test.ts
++++ b/src/tests/smoke.test.ts
+@@ -35,4 +35,68 @@ await queue.updateStatus(cmd.commandId, 'complete');
+ const done = await queue.get(cmd.commandId);
+ assert.equal(done?.status, 'complete');
+ 
+-console.log('Camelot smoke tests passed.');
++// ── Bifrost trust plane ──────────────────────────────────────────
++import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope }) => {
++  const { HeimdallFsm } = await import('../bifrost/heimdall-fsm');
++  const { reconcileTrust, gateIntent } = await import('../bifrost/bifrost-gateway');
++
++  const bsecret = 'bifrost-mesh-secret';
++  const env = sealEnvelope({ intent: 'status_check' }, {
++    type: 'intent', src: 'excalibur', dst: 'cybertronia', realm: 'camelot',
++    node: 'console', seq: 1, secret: bsecret
++  });
++
++  // Valid envelope verifies
++  assert.equal(verifyEnvelope(env, { secret: bsecret }).valid, true);
++
++  // Tampered payload → quarantine
++  const tampered = { ...env, payload: { intent: 'rm -rf /' } };
++  const tv = verifyEnvelope(tampered, { secret: bsecret });
++  assert.equal(tv.valid, false);
++  assert.equal(tv.trust_band, 'quarantine');
++
++  // Version mismatch → fail closed
++  const vm = verifyEnvelope({ ...env, header: { ...env.header, ver: '0.9' } }, { secret: bsecret });
++  assert.equal(vm.valid, false);
++  assert.equal(vm.trust_band, 'block');
++
++  // Nonce replay
++  const seen = new Set<string>();
++  verifyEnvelope(env, { secret: bsecret, seenNonces: seen });
++  const replay = verifyEnvelope(env, { secret: bsecret, seenNonces: seen });
++  assert.equal(replay.valid, false);
++
++  // Heimdall FSM: ragnarok guarantees
++  const fsm = new HeimdallFsm('cybertronia');
++  fsm.dispatch('critical_breach');
++  assert.equal(fsm.state, 'ragnarok');
++  const caps = fsm.capabilities;
++  assert.deepEqual(
++    [caps.sessions, caps.commits, caps.upgrades, caps.forward, caps.recoveryOnly],
++    [false, false, false, false, true]
++  );
++  fsm.dispatch('recovery_verified');
++  assert.equal(fsm.state, 'recovered');
++
++  // Trust reconciliation lattice
++  assert.equal(reconcileTrust(['allow', 'allow', 'allow']), 'allow');
++  assert.equal(reconcileTrust(['allow', 'review', 'warn']), 'review');
++  assert.equal(reconcileTrust(['allow', 'quarantine', 'block']), 'quarantine');
++
++  // End-to-end gate: healthy node + signed envelope + benign intent → allow
++  const healthy = new HeimdallFsm('console');
++  const decision = gateIntent(
++    { intent: 'status', payload: { text: 'show system status' }, requiresApproval: false, riskLevel: 'low' } as any,
++    env2(), { secret: bsecret }, healthy
++  );
++  assert.equal(decision.proceed, true);
++
++  function env2() {
++    return sealEnvelope({ intent: 'status' }, {
++      type: 'intent', src: 'excalibur', dst: 'console', realm: 'camelot',
++      node: 'console', seq: 2, secret: bsecret
++    });
++  }
++
++  console.log('Camelot smoke tests passed (incl. Bifrost trust plane).');
++});

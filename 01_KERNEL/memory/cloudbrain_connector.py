@@ -1,6 +1,6 @@
 import json
 import logging
-from typing import Optional, Any
+from typing import Any, Optional
 
 # Fallback or hypothetical notebooklm wrapper based on previous code
 try:

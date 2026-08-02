@@ -1,0 +1,14 @@
+{
+  "publishers": {
+    "acme": {
+      "publisher_id": "acme",
+      "kids": [
+        "kid-2025"
+      ],
+      "public_keys": {},
+      "active": true,
+      "added_at": "2026-07-13T17:12:03.861967+00:00",
+      "note": ""
+    }
+  }
+}

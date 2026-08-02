@@ -1,0 +1,17 @@
+{
+  "bytes_original": 1690,
+  "bytes_toon": 1812,
+  "created_at_utc": "2026-07-01T05:12:41.451108+00:00",
+  "evidence_class": "planned",
+  "evidence_path": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\universal_vkg_crystal.toon.evidence.json",
+  "format": "TOON",
+  "input_paths": [
+    "user_proposed_vkg_crystal_spec"
+  ],
+  "note": "Universal VKG Crystal Spec v9000.50 compiled and cached into secure vault runtime state.",
+  "output_path": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\universal_vkg_crystal.toon",
+  "reduction_pct": -7.22,
+  "sha256": "de87ecf1e6c9ae0c4647ab0f566942ce3d815e7f2e5781686cc06d1025614b3f",
+  "spec": "v3.3-PRIME",
+  "status": "CRYSTALLIZED"
+}

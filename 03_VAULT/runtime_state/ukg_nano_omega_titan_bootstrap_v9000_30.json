@@ -1,0 +1,58 @@
+{
+  "artifact": "OMEGA_TITAN_BOOTSTRAP",
+  "artifact_type": "UKG_Nano_Crystal_Proposal",
+  "integrated_by": "SIR_CODEX",
+  "integrated_utc": "2026-07-01T15:31:00Z",
+  "source_prompt_status": "user_provided_system_instructions",
+  "evidence_status": "planned",
+  "version": "9000.30",
+  "claimed_status": "SYSTEM_INSTRUCTIONS_INTEGRATED_ACTIVATION_PENDING",
+  "physical_nodes": {
+    "Helio_Hydration": {
+      "stack": [
+        "Frontier Gemini"
+      ],
+      "claimed_core_logic": "deep-context ingestion, scan /brain/ for provenance, construct UKG foundation",
+      "evidence_class": "planned"
+    },
+    "Codex_Fabrication": {
+      "stack": [
+        "Frontier Codex"
+      ],
+      "claimed_core_logic": "parse UKG, verify environment dependencies, build atomic Rust/Go scaffolding, wire mTLS zero-trust proxies",
+      "evidence_class": "planned"
+    },
+    "Boris_Presentation": {
+      "stack": [
+        "Claude"
+      ],
+      "claimed_core_logic": "render Luxury Minimalist Brutalist Dashboard shell, 12-column grid",
+      "evidence_class": "planned"
+    }
+  },
+  "active_vectors": [
+    {
+      "agent": "Sir_Helio",
+      "domain": "Context_Hydration_and_Documentation",
+      "evidence_class": "planned"
+    },
+    {
+      "agent": "Sir_Codex",
+      "domain": "Zero_Copy_Execution_and_Scaffolding",
+      "evidence_class": "planned"
+    },
+    {
+      "agent": "Sir_Boris",
+      "domain": "Brutalist_Minimalist_UX_Conduits",
+      "evidence_class": "planned"
+    }
+  ],
+  "claims_requiring_verification": [
+    "Sequential swarm activation order (Helio -> Codex -> Boris)",
+    "Scarcity protocol enforcing 4GB RAM limits and emergency /compact command execution",
+    "Zero-Copy Execution with Rust no_std, WASM32, and atomic compilation",
+    "Context condensation and graph-database relationship mapping",
+    "HITL mandate restricting write access to /brain/knights/*/phial/skill.md via /brain/staging/reclamation/"
+  ],
+  "next_required_command": "Run validation checks to confirm workspace paths and create docs/architecture/OMEGA_TITAN_BOOTSTRAP_FEEDBACK.md to review activation gates."
+}

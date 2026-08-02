@@ -14,10 +14,10 @@ Usage:
     template = miner.extract_template(prompt, response)
 """
 
-import re
 import json
 import logging
-from typing import Dict, Any
+import re
+from typing import Any, Dict
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

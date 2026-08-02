@@ -7,14 +7,16 @@ Creates intermediate reasoning nodes as ephemeral graph fragments stored in Omeg
 These fragments help track multi-step reasoning chains and enable trace reconstruction.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../memory')))
 
-from typing import List, Dict, Any, Optional
+import hashlib
 from dataclasses import dataclass
 from datetime import datetime
-import hashlib
+from typing import Any, Dict, List, Optional
+
 from titan_omega import TitanOmega
 
 

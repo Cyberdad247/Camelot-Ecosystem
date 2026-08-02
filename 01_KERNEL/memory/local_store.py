@@ -24,15 +24,14 @@ import json
 import math
 import sqlite3
 import time
-from typing import Any
 from pathlib import Path
-
+from typing import Any
 
 DB_PATH = Path("data/memory_store.sqlite3")
 
 
 def _cosine(a: list[float], b: list[float]) -> float:
-    dot = sum(x * y for x, y in zip(a, b))
+    dot = sum(x * y for x, y in zip(a, b, strict=False))
     na  = math.sqrt(sum(x * x for x in a))
     nb  = math.sqrt(sum(x * x for x in b))
     return dot / (na * nb) if na and nb else 0.0

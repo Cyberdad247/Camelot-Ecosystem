@@ -12,8 +12,8 @@ Implements:
 """
 
 import json
-from typing import Dict, List, Any, Optional
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 try:
     from .symbolect_transpiler.symbolect import SymbolectTranspiler
@@ -22,8 +22,8 @@ except (ImportError, ValueError):
         from Engines.symbolect_transpiler.symbolect import SymbolectTranspiler
     except ImportError:
         # Final fallback for direct execution / importlib
-        import sys
         import os
+        import sys
         sys.path.append(os.path.join(os.path.dirname(__file__), "symbolect_transpiler"))
         from symbolect import SymbolectTranspiler
 

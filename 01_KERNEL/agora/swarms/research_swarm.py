@@ -21,7 +21,9 @@ class ResearchState(TypedDict):
 
 
 import asyncio
+
 from playwright.async_api import async_playwright
+
 
 def agent_recon(state: ResearchState) -> ResearchState:
     """🕵️ AGENT_RECON (Lady Apis): Scrape target using Lightpanda CDP"""

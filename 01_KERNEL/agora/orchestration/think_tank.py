@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import sys
 import os
+import sys
 from pathlib import Path
 
 # Add 01_KERNEL to sys.path
@@ -10,12 +10,14 @@ if str(kernel_path) not in sys.path:
     sys.path.insert(0, str(kernel_path))
 
 import asyncio
-from typing import Dict, Any
-from Engines.ukg_runtime import UKGRuntime
-from Engines.merlin_llm import MerlinLLM
-from Engines.mcp_adapter import MCPAdapter
-from swarm_controller import swarm
+from typing import Any, Dict
+
 from assimilation.core.verification import check_harmony
+from Engines.mcp_adapter import MCPAdapter
+from Engines.merlin_llm import MerlinLLM
+from Engines.ukg_runtime import UKGRuntime
+from swarm_controller import swarm
+
 
 class ThinkTankOrchestrator:
     """
@@ -68,7 +70,7 @@ class ThinkTankOrchestrator:
         )
         
         # PHASE 2: PERSONA ASSEMBLY (Merlin Forge)
-        print(f"🧙‍♂️ [PHASE 2] Merlin Forging 5-Panel Experts...")
+        print("🧙‍♂️ [PHASE 2] Merlin Forging 5-Panel Experts...")
         expert_ids = ["sec_expert", "lukas", "merlin"] # Core personas
         
         # Hydrate full prompts for debate
@@ -82,7 +84,7 @@ class ThinkTankOrchestrator:
         results["experts"] = [m["name"] for m in experts_manifests]
         
         # PHASE 3: THE DEBATE (Resource-Optimized Specialized Reasoning)
-        print(f"📖 [PHASE 3] Agno Coordinating 5-Panel Debate...")
+        print("📖 [PHASE 3] Agno Coordinating 5-Panel Debate...")
         debate_model = self.merlin.select_model("REASONING: deep debate", priority, low_resource=low_resource_mode)
         
         # [DYNAMIC_DISCOVERY] Capture live API capabilities
@@ -104,7 +106,7 @@ class ThinkTankOrchestrator:
         results["debate_summary"] = debate_summary
 
         # PHASE 4: KINETIC EXECUTION (MCP Tool Usage & Distilled Execution)
-        print(f"🔨 [PHASE 4] MCP Kinetic Execution Ignition...")
+        print("🔨 [PHASE 4] MCP Kinetic Execution Ignition...")
         # Check if debate requires external tools
         if "external" in debate_summary.lower():
             # Standard search if required
@@ -115,7 +117,7 @@ class ThinkTankOrchestrator:
         results["kinetic_result"] = await swarm.execute_crusade(objective, swarm_phases)
 
         # PHASE 5: HARMONY GATE
-        print(f"👑 [PHASE 5] Harmony Gate Verification...")
+        print("👑 [PHASE 5] Harmony Gate Verification...")
         # Final safety check on results using the standard AssimilationRequest model
         from assimilation.core.types import AssimilationRequest
         harmony_req = AssimilationRequest(repo_path=repo_path, origin="local", description=f"Verification for {objective}")
@@ -137,7 +139,7 @@ class ThinkTankOrchestrator:
 
 async def test_agno_orchestrator():
     agno = ThinkTankOrchestrator()
-    res = await agno.execute_session("Develop a secure multi-API adapter for WolframAlpha and Google Search.", "C:/Users/vizio/CAMELOT_OS", priority="high")
+    await agno.execute_session("Develop a secure multi-API adapter for WolframAlpha and Google Search.", "C:/Users/vizio/CAMELOT_OS", priority="high")
     print("\n🚀 [AGNO] Versatile Session Complete.")
 
 if __name__ == "__main__":

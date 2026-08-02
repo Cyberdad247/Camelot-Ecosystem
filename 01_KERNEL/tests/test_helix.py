@@ -1,13 +1,14 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
-import sys
 import os
+import sys
 
 # Add parent directory to path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from Engines.coherence_engine import coherence
+
 
 async def test_helix_logic():
     print("🧬 [HELIX TEST] Igniting...")

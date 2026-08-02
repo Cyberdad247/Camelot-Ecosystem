@@ -54,7 +54,7 @@ class NotebookKnight(OmniKnight):
             except Exception:
                 graph_result = "[GRAPH OFFLINE]"
 
-            combined_discovery = f"Notebook: {notebook_result.get('answer', '')}\nGraph: {graph_result}"
+            f"Notebook: {notebook_result.get('answer', '')}\nGraph: {graph_result}"
 
             print("✅ [RESEARCH] Discovery Complete.")
             # (In production, we'd send a response envelope)
@@ -66,7 +66,7 @@ class NotebookKnight(OmniKnight):
             print(f"🗡️ [FORAGE] Research Gap Detected: '{query[:50]}'")
             print("🗡️ [FORAGE] Summoning Nano-Knights for kinetic foraging...")
 
-            forage_result = await self._delegate_to_nanoknights(query)
+            await self._delegate_to_nanoknights(query)
 
             print("✅ [FORAGE] Foraging Complete. 3 new sources added to Notebook Brain.")
             # (In production, these would be POSTed to /sources endpoint)
@@ -112,10 +112,8 @@ class NotebookKnight(OmniKnight):
         """
         # Note: In simulation mode, we mock the result if API is down
         try:
-            async with httpx.AsyncClient() as client:
+            async with httpx.AsyncClient():
                 # We assume we search across ALL notebooks if notebook_id is None
-                endpoint = f"{self.api_base}/search"
-                params = {"query": query, "notebook_id": notebook_id}
                 # res = await client.get(endpoint, params=params)
                 # return res.json()
                 return {"status": "MOCK", "answer": f"Research result for: {query[:20]}"}

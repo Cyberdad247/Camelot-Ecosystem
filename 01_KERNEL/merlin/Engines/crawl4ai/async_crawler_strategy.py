@@ -568,7 +568,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                         # json_body = await response.json()
                         text_body = await response.text()
                     except Exception:
-                        body = None
+                        pass
                         # json_body = None
                         # text_body = None
                     captured_requests.append(
@@ -1591,7 +1591,7 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                             result = {"success": False, "error": str(e)}
 
                     # If we made it this far with no repeated error, do post-load waits
-                    t1 = time.time()
+                    time.time()
                     try:
                         await page.wait_for_load_state("domcontentloaded", timeout=5000)
                     except Error as e:
@@ -1696,10 +1696,10 @@ class AsyncPlaywrightCrawlerStrategy(AsyncCrawlerStrategy):
                     )
 
                     # Wait for network idle after script execution
-                    t1 = time.time()
+                    time.time()
                     await page.wait_for_load_state("domcontentloaded", timeout=5000)
 
-                    t1 = time.time()
+                    time.time()
                     await page.wait_for_load_state("networkidle", timeout=5000)
 
                     results.append(result if result else {"success": True})

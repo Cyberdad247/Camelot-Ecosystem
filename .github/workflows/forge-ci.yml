@@ -1,0 +1,303 @@
+name: 02_FORGE CI
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '02_FORGE/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - '02_FORGE/**'
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: "3.13"
+  NODE_VERSION: "20"
+
+jobs:
+  # ── Detect which subsystems changed ──────────────────────────────
+  changes:
+    name: Detect changes
+    runs-on: ubuntu-latest
+    outputs:
+      cartridge: ${{ steps.filter.outputs.cartridge }}
+      pocket-squire: ${{ steps.filter.outputs.pocket-squire }}
+      kinetic: ${{ steps.filter.outputs.kinetic }}
+      holotable: ${{ steps.filter.outputs.holotable }}
+      portal-core: ${{ steps.filter.outputs.portal-core }}
+      workspace-lint: ${{ steps.filter.outputs.workspace-lint }}
+      invoice-generator: ${{ steps.filter.outputs.invoice-generator }}
+      i2l-phygital: ${{ steps.filter.outputs.i2l-phygital }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            cartridge:
+              - '02_FORGE/cartridge/**'
+              - 'pyproject.toml'
+            pocket-squire:
+              - '02_FORGE/packages/pocket-squire/**'
+              - '02_FORGE/package.json'
+              - '02_FORGE/pnpm-workspace.yaml'
+              - '02_FORGE/pnpm-lock.yaml'
+              - '02_FORGE/tsconfig.base.json'
+              - '02_FORGE/turbo.json'
+            kinetic:
+              - '02_FORGE/kinetic/**'
+              - '02_FORGE/kinetic/rust-toolchain.toml'
+            holotable:
+              - '02_FORGE/holotable/**'
+            portal-core:
+              - '02_FORGE/PORTAL_CORE/**'
+            invoice-generator:
+              - '02_FORGE/dyad-apps/invoice-generator/**'
+            i2l-phygital:
+              - '02_FORGE/apps/i2l-phygital/**'
+            workspace-lint:
+              - '02_FORGE/apps/**'
+              - '!02_FORGE/apps/i2l-phygital/**'
+              - '02_FORGE/packages/**'
+              - '02_FORGE/package.json'
+              - '02_FORGE/pnpm-workspace.yaml'
+              - '02_FORGE/pnpm-lock.yaml'
+              - '02_FORGE/tsconfig.base.json'
+              - '02_FORGE/turbo.json'
+
+  # ── Forge Lint: Turborepo lint across workspace ─────────────────
+  forge-lint:
+    name: Forge Lint
+    needs: changes
+    if: needs.changes.outputs.workspace-lint == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02_FORGE
+    env:
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/pnpm-install
+        with:
+          working-directory: 02_FORGE
+          pnpm-lock-path: 02_FORGE/pnpm-lock.yaml
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run lint
+        run: pnpm lint
+
+  # ── Forge Typecheck: TS type-check across workspace ─────────────
+  forge-typecheck:
+    name: Forge Typecheck
+    needs: changes
+    if: needs.changes.outputs.workspace-lint == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02_FORGE
+    env:
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/pnpm-install
+        with:
+          working-directory: 02_FORGE
+          pnpm-lock-path: 02_FORGE/pnpm-lock.yaml
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run typecheck
+        run: pnpm typecheck
+
+  # ── Forge Test: Unit tests across workspace ─────────────────────
+  forge-test:
+    name: Forge Test
+    needs: changes
+    if: needs.changes.outputs.workspace-lint == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02_FORGE
+    env:
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/pnpm-install
+        with:
+          working-directory: 02_FORGE
+          pnpm-lock-path: 02_FORGE/pnpm-lock.yaml
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Run tests
+        run: pnpm test
+
+  # ── Cartridge: Python Tests ─────────────────────────────────────
+  cartridge-tests:
+    name: Cartridge Tests
+    needs: changes
+    if: needs.changes.outputs.cartridge == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 02_FORGE
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pydantic
+
+      - name: Run cartridge tests
+        run: |
+          python -m pytest cartridge/test_*.py -v --tb=short
+
+  # ── Pocket Squire: Next.js Build ────────────────────────────────
+  pocket-squire-build:
+    name: Pocket Squire Build
+    needs: changes
+    if: needs.changes.outputs.pocket-squire == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+      TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/pnpm-install
+        with:
+          working-directory: 02_FORGE
+          pnpm-lock-path: 02_FORGE/pnpm-lock.yaml
+          node-version: ${{ env.NODE_VERSION }}
+          install-args: '--filter pocket-squire...'
+
+      - name: Build Pocket Squire
+        working-directory: 02_FORGE
+        run: pnpm exec turbo run build --filter=pocket-squire
+
+  # ── Kinetic: Rust Build + Test ─────────────────────────────────
+  kinetic-build:
+    name: Kinetic Build & Test
+    needs: changes
+    if: needs.changes.outputs.kinetic == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        crate:
+          - cribo
+          - rotel
+          - hephaestus
+          - pmcp
+          - actor
+          - contracts
+      fail-fast: false
+    defaults:
+      run:
+        working-directory: 02_FORGE/kinetic/${{ matrix.crate }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache Rust dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            02_FORGE/kinetic/${{ matrix.crate }}/target
+          key: ${{ runner.os }}-cargo-${{ matrix.crate }}-${{ hashFiles(format('02_FORGE/kinetic/{0}/Cargo.toml', matrix.crate)) }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-${{ matrix.crate }}-
+
+      - name: Build ${{ matrix.crate }}
+        run: cargo build
+
+      - name: Test ${{ matrix.crate }}
+        run: cargo test
+
+  # ── Holotable: Next.js Build ───────────────────────────────────
+  holotable-build:
+    name: Holotable Build
+    needs: changes
+    if: needs.changes.outputs.holotable == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/npm-install
+        with:
+          working-directory: 02_FORGE/holotable
+          package-json-path: 02_FORGE/holotable/package.json
+          cache-key-prefix: holotable
+          node-version: ${{ env.NODE_VERSION }}
+
+  # ── PORTAL_CORE: Vite Build ────────────────────────────────────
+  portal-core-build:
+    name: PORTAL_CORE Build
+    needs: changes
+    if: needs.changes.outputs.portal-core == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/npm-install
+        with:
+          working-directory: 02_FORGE/PORTAL_CORE
+          package-json-path: 02_FORGE/PORTAL_CORE/package.json
+          cache-key-prefix: portal-core
+          node-version: ${{ env.NODE_VERSION }}
+
+  # ── Invoice Generator: Next.js Build ────────────────────────────
+  invoice-generator-build:
+    name: Invoice Generator Build
+    needs: changes
+    if: needs.changes.outputs.invoice-generator == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/npm-install
+        with:
+          working-directory: 02_FORGE/dyad-apps/invoice-generator
+          package-json-path: 02_FORGE/dyad-apps/invoice-generator/package.json
+          cache-key-prefix: invoice-gen
+          node-version: ${{ env.NODE_VERSION }}
+          build-command: ''
+
+      - name: Generate Prisma client
+        working-directory: 02_FORGE/dyad-apps/invoice-generator
+        run: npx prisma generate
+
+      - name: Build Invoice Generator
+        working-directory: 02_FORGE/dyad-apps/invoice-generator
+        run: npx next build
+
+  # ── I2L Phygital: Next.js Build ───────────────────────────────
+  i2l-phygital-build:
+    name: I2L Phygital Build
+    needs: changes
+    if: needs.changes.outputs.i2l-phygital == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/actions/npm-install
+        with:
+          working-directory: 02_FORGE/apps/i2l-phygital
+          package-json-path: 02_FORGE/apps/i2l-phygital/package.json
+          cache-key-prefix: i2l-phygital
+          node-version: ${{ env.NODE_VERSION }}

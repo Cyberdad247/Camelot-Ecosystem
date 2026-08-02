@@ -18,7 +18,7 @@ class AuditContext:
 class Architect:
     def audit(self, context):
         topology = {"type": "Unknown", "stack": []}
-        for root, dirs, files in os.walk(context.path):
+        for _root, dirs, files in os.walk(context.path):
             if "node_modules" in dirs:
                 dirs.remove("node_modules")
             if ".git" in dirs:
@@ -53,7 +53,7 @@ class QualityCtrl:
     def audit(self, context):
         quality = {"score": 100, "style": "Foundational"}
         configs = []
-        for root, dirs, files in os.walk(context.path):
+        for _root, dirs, files in os.walk(context.path):
             if "node_modules" in dirs:
                 dirs.remove("node_modules")
             if ".git" in dirs:
@@ -76,7 +76,7 @@ class TestScout:
         testing = {"frameworks": [], "test_count": 0}
         patterns = {"Pytest": r"test_.*\.py$", "Jest": r".*\.test\.(js|ts|tsx)$", "Vitest": r".*\.spec\.(js|ts|tsx)$"}
 
-        for root, dirs, files in os.walk(context.path):
+        for _root, dirs, files in os.walk(context.path):
             if "node_modules" in dirs:
                 dirs.remove("node_modules")
             if ".git" in dirs:

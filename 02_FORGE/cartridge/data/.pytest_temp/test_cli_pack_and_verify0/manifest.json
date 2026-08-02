@@ -1,0 +1,46 @@
+{
+  "cartridge_id": "TEST_CART",
+  "version": "1.0.0",
+  "description": "Phase 2 test cartridge",
+  "agents": [
+    "Sir_Test"
+  ],
+  "tools": [],
+  "protocols": [],
+  "capabilities": [
+    "test.capability"
+  ],
+  "resource_budget": {
+    "max_tokens": 8000,
+    "max_memory_mb": 256,
+    "max_latency_ms": 300
+  },
+  "risk_profile": "low",
+  "governance": {
+    "HITL_required": false,
+    "allowed_tools": [],
+    "denied_operations": []
+  },
+  "hooks": {
+    "on_load": [],
+    "on_unload": [],
+    "health_check": []
+  },
+  "embeddings": {
+    "static_docs": [],
+    "symbolic_snippets": []
+  },
+  "signature": "ed25519:default:8GT0hLpYqfE5DUMWOO7NareNaLsO6W0yPeo6p9iIQV4aKndFESZMJct1wLJdtbNgXGt7WqT9dfB/jtRWJcPEDg==",
+  "created_at": "2026-07-10T00:00:00",
+  "created_by": "test_suite",
+  "hostApiVersion": "2",
+  "publisher_id": "acme-test",
+  "entry": "./index.js",
+  "sha256": "cdf6261c989a989d6f0b5403569c79621de459cf3ecc19a591882078e1fc4a60",
+  "routes": [],
+  "resourceBudget": {
+    "maxTokens": 25000,
+    "maxMemoryMb": 512,
+    "maxLatencyMs": 600
+  }
+}

@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 
+
 def generate_tree(startpath):
     output = []
     output.append("# 🗺️ CAMELOT APEX: ENTIRE MAP (Territory)")

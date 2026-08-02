@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "userId": "R05ldwOuSGZfg2okZhvTXE6bgDqhrdMg0CTy5Aa7zhU",
+  "credentials": [
+    {
+      "id": "XreLeXgtGDUqSkeD6u5P0w",
+      "publicKey": "pQECAyYgASFYICrJ7vKq0crh2pVwCwCo0DnG8RiPWnc4aS4Or0UqD0bmIlggRxl2kz2xwWuQEjxm2KJ-Z2HEUPeK90M8kPl_J7uiQQk",
+      "counter": 0,
+      "transports": [
+        "hybrid",
+        "internal"
+      ],
+      "deviceType": "multiDevice",
+      "backedUp": true,
+      "createdAt": "2026-07-12T19:23:44.345Z",
+      "lastUsedAt": "2026-07-13T12:21:50.019Z"
+    }
+  ]
+}

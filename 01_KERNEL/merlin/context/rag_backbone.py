@@ -7,12 +7,14 @@ Combines vector search (Omega-Vault) and graph pattern matching (Omega-Graph)
 for comprehensive context retrieval in the Context Expansion Protocol.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../memory')))
 
-from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
+from typing import Any, Dict, List, Optional
+
 from titan_omega import TitanOmega
 from titan_schemas import GraphNode
 

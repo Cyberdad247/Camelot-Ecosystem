@@ -11,12 +11,6 @@ import anyio
 import click
 import humanize
 import yaml
-from litellm import completion
-from rich.console import Console
-from rich.panel import Panel
-from rich.prompt import Confirm, Prompt
-from rich.table import Table
-
 from crawl4ai import (
     AsyncWebCrawler,
     BM25ContentFilter,
@@ -34,6 +28,11 @@ from crawl4ai import (
     PruningContentFilter,
 )
 from crawl4ai.config import USER_SETTINGS
+from litellm import completion
+from rich.console import Console
+from rich.panel import Panel
+from rich.prompt import Confirm, Prompt
+from rich.table import Table
 
 # Initialize rich console
 console = Console()

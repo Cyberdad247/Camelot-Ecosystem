@@ -6,10 +6,10 @@ The Realized Brain: Bridging TAL Manifests to Live LLM Integration.
 Supports Ollama, Meta-Llama (via local weights), and OpenAI.
 """
 
-import os
 import json
-from typing import Dict, Any, Optional
+import os
 from pathlib import Path
+from typing import Any, Dict, Optional
 
 # Use litellm for universal provider support
 try:
@@ -295,7 +295,7 @@ if __name__ == "__main__":
             "leaf": ["Optimize for latency", "No boilerplate"]
         }
         prompt = merlin.generate_system_prompt(tal)
-        print(f"--- TESTING DYNAMIC MODEL SELECTION ---")
+        print("--- TESTING DYNAMIC MODEL SELECTION ---")
         print(f"Assign task 'complex architecture': {merlin.select_model('complex architecture', 'high')}")
         
         print("\n--- TEST GENERATION ---")

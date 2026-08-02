@@ -7,19 +7,19 @@ FastAPI endpoints for the Context Expansion Protocol.
 Integrates with existing agno_app.py infrastructure.
 """
 
+import os
+import sys
+from typing import Any, Dict, List, Optional
+
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
-from typing import Optional, Dict, Any, List
-import sys
-import os
 
 # Add context module to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../memory')))
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../context')))
 
-from titan_omega import TitanOmega
 from expansion_engine import ExpansionEngine
-
+from titan_omega import TitanOmega
 
 # =========================================
 # REQUEST/RESPONSE MODELS

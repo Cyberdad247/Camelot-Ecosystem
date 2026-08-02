@@ -21,16 +21,16 @@ Usage:
     >>> print(result['answer'])
 """
 
-from typing import Dict, List, Optional, Any
 import json
-from pathlib import Path
 import logging
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 # Haystack imports (conditional - graceful degradation if not installed)
 try:
-    from haystack import Pipeline, Document
-    from haystack.components.retrievers.in_memory import InMemoryBM25Retriever
+    from haystack import Document, Pipeline
     from haystack.components.generators import OpenAIGenerator
+    from haystack.components.retrievers.in_memory import InMemoryBM25Retriever
     from haystack.document_stores.in_memory import InMemoryDocumentStore
     HAYSTACK_AVAILABLE = True
 except ImportError:
@@ -80,7 +80,7 @@ class HaystackUKGBridge:
         self.max_nodes = max_nodes
         self.use_vector_search = use_vector_search
         
-        logger.info(f"🔮 Initializing Haystack-UKG Bridge...")
+        logger.info("🔮 Initializing Haystack-UKG Bridge...")
         logger.info(f"   UKG Path: {self.ukg_path}")
         logger.info(f"   Max Nodes: {max_nodes or 'ALL'}")
         

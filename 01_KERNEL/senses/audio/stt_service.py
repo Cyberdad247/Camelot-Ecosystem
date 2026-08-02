@@ -192,8 +192,8 @@ class STTService:
         if self._vad is None:
             return True  # assume speech if VAD unavailable
         try:
-            import torch  # type: ignore
             import numpy as np  # type: ignore
+            import torch  # type: ignore
             audio_np = np.frombuffer(audio, dtype=np.int16).astype(np.float32) / 32768.0
             audio_t = torch.from_numpy(audio_np)
             prob = self._vad["model"](audio_t, sample_rate).item()
@@ -227,7 +227,8 @@ class STTService:
         return result["text"].strip(), "en", 0.85
 
     def _transcribe_wav2vec2(self, audio: bytes) -> tuple[str, str, float]:
-        import torch, numpy as np  # type: ignore
+        import numpy as np  # type: ignore
+        import torch
         audio_np = np.frombuffer(audio, dtype=np.int16).astype(np.float32) / 32768.0
         proc = self._wav2vec2["processor"]
         model = self._wav2vec2["model"]

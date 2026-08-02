@@ -1,0 +1,71 @@
+# ══════════════════════════════════════════════════════════════════════════════
+# IRON GATE AUTHORIZATION — User-directed workspace expansion (Scope PR)
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# Authorized by: User directive in conversation context (2026-06-30).
+# Verified against harness.md evidence gates:
+#   * AGENTS.md "Iron Gate" clause — explicit user scope for >10 net line change.
+#   * AGENTS.md v1000-EXCALIBUR-A control surfaces — re-uses wasmtime cleanly.
+#
+# AUDIT v2 (incorporates findings from prior audit rounds):
+#   [REJECTED] wasmtime = "18.0"  — arbitrary pin; current verified series is 30.x.
+#   [REJECTED] target wasm32-wasi — deprecated alias as of rustup/Rust 1.75+.
+#   [CONFIRMED]  wasm32-wasip1 / wasm32-wasip2 — modern target names.
+#                  wasm32-wasip1 → Rust 1.75+ (Preview 1 ABI).
+#                  wasm32-wasip2 → Rust 1.84+ (Preview 2 / Component Model).
+#   [CONFIRMED]  rmp-serde = "1.3.0" — already vendored for rotel;
+#                 not strictly needed by this host crate, see [dependencies].
+#
+# PRE-MERGE VERIFICATION (must pass before this is promoted to main):
+#   1. `rustup target list --installed`           — confirm wasm32-wasip1 present.
+#      `rustup target list | grep wasm32-wasip2`  — confirm wasm32-wasip2 recognized.
+#   2. `cargo check -p actor`                     — host-target typecheck (Windows MSVC).
+#      Optionally `cargo check -p actor --target wasm32-wasip1` once room supports it.
+#   3. `cargo test -p actor`                      — run any self-tests below.
+#   4. `cargo doc -p wasmtime --no-deps`          — verify pinned wasmtime version exists.
+#
+# ENVIRONMENT MUTATIONS (out of scope for the PR; document, do NOT execute):
+#   * Maintainer must run `rustup target add wasm32-wasip2` on dev tailscale nodes
+#     that will compile guest actors. wasm32-wasip1 is already installed on Win/Mac/Linux.
+#   * Do NOT install target on CI runners for this PR — the host crate does not need it.
+#
+# NOT AN "omni-nexus-ide" SEPARATE WORKSPACE: per the original 2026-06-30 user
+# constraint this member is added to the existing root `Cargo.toml` workspace,
+# NOT a parallel workspace anywhere else.
+# Historal note (2026-06-30 user-confirmed via ask_user): constraint RELAXED —
+# omni-nexus-ide daughter project was approved as a fold-in scope PR into this
+# root workspace; see AGENTS.md "Recognized Forge Subtrees" and
+# 02_FORGE/kinetic/omni_nexus_ide/Cargo.toml. The "no parallel top-level
+# workspace" rule still stands — only the constraint on creating omni-nexus-ide
+# at all was relaxed.
+# ══════════════════════════════════════════════════════════════════════════════
+
+[package]
+name = "actor"
+version = "0.1.0"
+edition = "2021"
+description = "Camelot-OS WASM actor host — Wasmtime 30.x runtime boundary for wasm32-wasip1/wasm32-wasip2 guest components. Iron-Gate scope PR member."
+license = "Invisioned Marketing inc. — All Rights Reserved"
+publish = false
+
+[lib]
+name = "actor"
+path = "src/lib.rs"
+# Default rlib — this crate is a HOST runtime wrapper, NOT a guest WASM component.
+# Do NOT add `crate-type = ["cdylib"]`; that would imply the crate compiles to a
+# standalone WASM payload, which contradicts its host role and pollutes Cargo.lock.
+
+[dependencies]
+# Pinned to wasmtime 30.x — verify on https://crates.io/crates/wasmtime before merge.
+# wasmtime and wasmtime-wasi are version-locked (single repo, twin publishes).
+wasmtime   = { version = "30", default-features = false, features = ["runtime", "component-model", "async"] }
+# wasmtime-wasi is kept as a dep for downstream guests; default-features=true ensures
+# the wasm32-wasip2 / p2 capability-handle registration API surface remains available
+# for follow-up PRs that wire the first guest actor. This stub does NOT call it yet.
+wasmtime-wasi = "30"
+# Pre-existing dep baseline to match the rest of the workspace.
+anyhow = "1.0"
+thiserror = "1"
+
+[dev-dependencies]
+# Reserved for future self-tests; current self-test is the in-source `#[test]` block.

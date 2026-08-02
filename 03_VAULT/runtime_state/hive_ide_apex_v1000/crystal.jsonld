@@ -1,0 +1,47 @@
+{
+  "@context": "https://camelot-os.dev/ukg/v1000/cybertron_ascension",
+  "@type": "NuKGCrystal",
+  "@id": "hive_ide_apex_v1000",
+  "status": "ASPIRATIONAL",
+  "evidence_class": "aspirational",
+  "correlated_runtime_target": "HiveIDE_Apex_v1000",
+  "honoring_dag": {
+    "@type": "ExecutionDAG",
+    "received_at": "2026-06-25T00:00:00Z",
+    "phases_proposed": 4,
+    "phases_accepted": "see execution-DAG summary at docs/architecture/scope-review-cybertron-ascension-2026-06-25.md"
+  },
+  "workspace_memory_trace": [
+    "inspira/FInalized/HiveIDEProductRequirements.txt",
+    "inspira/FInalized/HiveIDE UX/UI Specifications v2.0 (Document ID UX-HIVE-2025-001, 2025-08-13)",
+    "inspira/FInalized/HiveIDE Final Synthesis Report",
+    "inspira/FInalized/HiveIDE Project Deployment Summary"
+  ],
+  "intent_anchors": [
+    "Single-host v1000-EXCALIBUR-A substrate (provenance entries 1717-1723)",
+    "Renaissance UI bonded to RustClaw orchestration",
+    "Tailwind v4 + Luxora Gold (#D4AF37) + Royal Purple aesthetic mandate (AGENTS.md Rule 1)",
+    "RustClaw (port 8403) via the additive pmcp crate at 02_FORGE/kinetic/pmcp/"
+  ],
+  "graduation_to": {
+    "planned": [
+      "cargo build -p pmcp compiles with stable Rust + tokio",
+      "scripts/wsl2_preflight.sh returns verdict=GO",
+      "Reversible cut shell script exists at 02_FORGE/kinetic/cut-node-mcps.sh (dry-run only)"
+    ],
+    "confirmed": [
+      "End-to-end runtime test from a control_plane FactoryJob to the new pmcp port succeeds",
+      "All archeology traces of Node.js MCPs cleared from bin/awaken.py and RustClaw main.rs",
+      "12 ms libkrun cold-boot measurement reproducible on WSL2 with the documented substrate"
+    ]
+  },
+  "iron_gate_state": {
+    "pre_execute_decision": "SUSPENDED",
+    "tier": "HUMAN_GATE",
+    "token_required": "CAMELOT_DASHBOARD_OPERATOR_TOKEN",
+    "blocked_phases": [1, 3],
+    "suspended_until": "wsl2 preflight=GO and operator token asserted for Phase 1 destructive cut"
+  },
+  "provenance_seal": "2026-06-25T00:00:00Z",
+  "crystal_maintained_by": "sir_boris + king_arthur cross-validation"
+}

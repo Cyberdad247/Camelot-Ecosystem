@@ -4,20 +4,20 @@
 # [MANDATE] :: Automate the SIT-Loop (Sense -> Think -> Persist)
 # "Made by Invisioned Marketing inc."
 
+import logging
 import os
 import sys
 import time
-import logging
 from datetime import datetime
-from dotenv import load_dotenv
 
 # --- PHASE I: INFRASTRUCTURE ---
 import google.generativeai as genai
 import replicate
 from appwrite.client import Client
-from appwrite.services.databases import Databases
-from appwrite.query import Query
 from appwrite.id import ID
+from appwrite.query import Query
+from appwrite.services.databases import Databases
+from dotenv import load_dotenv
 
 # Configure Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - [G.E.M.] - %(levelname)s - %(message)s')

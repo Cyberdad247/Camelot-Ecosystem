@@ -9,11 +9,12 @@ HTTP streaming endpoint at :8300 for edge-router consumers.
 """
 
 import asyncio
+import hashlib
 import socket
 import time
+from typing import Any, AsyncGenerator, Dict, Generator, Optional
+
 import redis
-import hashlib
-from typing import Any, AsyncGenerator, Dict, Optional, Generator
 
 # Optional Kokoro TTS — graceful fallback to placeholder if unavailable
 try:

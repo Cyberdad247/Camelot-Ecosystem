@@ -171,7 +171,9 @@ class ObjectModel(BaseModel):
             logger.error(f"Error deleting {self.__class__.table_name} with id {self.id}: {str(e)}")
             raise DatabaseOperationError(f"Failed to delete {self.__class__.table_name}")
 
-    async def relate(self, relationship: str, target_id: str, data: Optional[Dict] = {}) -> Any:
+    async def relate(self, relationship: str, target_id: str, data: Optional[Dict] = None) -> Any:
+        if data is None:
+            data = {}
         if not relationship or not target_id or not self.id:
             raise InvalidInputError("Relationship and target ID must be provided")
         try:

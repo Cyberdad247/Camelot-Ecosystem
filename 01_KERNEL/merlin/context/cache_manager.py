@@ -7,15 +7,16 @@ Implements hot/warm/cold cache tiers with LRU × relevance × trust scoring
 and TTL-based expiration for the Context Expansion Protocol.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../memory')))
 
-from typing import Dict, Any, Optional
+import hashlib
+from collections import OrderedDict
 from dataclasses import dataclass
 from datetime import datetime
-from collections import OrderedDict
-import hashlib
+from typing import Any, Dict, Optional
 
 
 @dataclass

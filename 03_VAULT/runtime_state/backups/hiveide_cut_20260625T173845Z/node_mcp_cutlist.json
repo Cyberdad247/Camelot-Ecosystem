@@ -1,0 +1,36 @@
+{
+  "dag_phase": "Phase 1 RIP_AND_REPLACE",
+  "issued_at": "2026-06-25T00:00:00Z",
+  "iron_gate_state": "HUMAN_GATE — held under CAMELOT_DASHBOARD_OPERATOR_TOKEN. NOT auto-applied in this scope review.",
+  "decision_rule": "include any file with a package.json referencing `mcp` or `@modelcontextprotocol` OR running `camelot-mcp-edge` OR invoking Node.js MCP boot in bin/awaken.py",
+  "cutlist": [
+    {
+      "file": "bin/awaken.py",
+      "reason": "boot sequencer spawns Node.js MCP services",
+      "decision": "BLOCKED_UNTIL_PHASE_1_CUT",
+      "replacement_target": "02_FORGE/kinetic/pmcp/src/bin/pmcp-server.rs",
+      "blast_radius": "no edit yet; held under HUMAN_GATE until CAMELOT_DASHBOARD_OPERATOR_TOKEN is asserted"
+    },
+    {
+      "file": "control_plane/boot_sequence.py",
+      "reason": "boot phases import a Node.js runtime",
+      "decision": "BLOCKED_UNTIL_PHASE_1_CUT",
+      "replacement_target": "02_FORGE/kinetic/pmcp",
+      "blast_radius": "no edit yet; held under HUMAN_GATE until CAMELOT_DASHBOARD_OPERATOR_TOKEN is asserted"
+    },
+    {
+      "file": "02_FORGE/cartridge/rustclaw/src/main.rs",
+      "reason": "RustClaw invokes camelot-mcp-edge.exe",
+      "decision": "BLOCKED_UNTIL_PHASE_1_CUT",
+      "replacement_target": "cargo deps += pmcp; replace exec line with pmcp_client::Client",
+      "blast_radius": "no edit yet; held under HUMAN_GATE until CAMELOT_DASHBOARD_OPERATOR_TOKEN is asserted"
+    }
+  ],
+  "replacement_targets": [
+    "02_FORGE/kinetic/pmcp/src/bin/pmcp-server.rs (port 3002, stdio scaffold)",
+    "02_FORGE/kinetic/goose/crates/goose-mcp (fallback during planned-stage dual-stack)"
+  ],
+  "rollback_path": "git revert <cut-sha> + bin/awaken.py --quick smoke test",
+  "hard_prerequisite": "WSL2 preflight verdict=GO captured at 03_VAULT/runtime_state/hive_ide_apex_v1000/wsl2_verdict.json",
+  "operator_prerequisite": "CAMELOT_DASHBOARD_OPERATOR_TOKEN exported in active shell + printed [y/N] confirm"
+}

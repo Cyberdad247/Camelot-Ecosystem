@@ -6,10 +6,14 @@
         "start": "expo start",
         "android": "expo start --android",
         "ios": "expo start --ios",
-        "web": "expo start --web"
+        "web": "expo start --web",
+        "build": "tsc --noEmit",
+        "lint": "tsc --noEmit",
+        "typecheck": "tsc --noEmit",
+        "clean": "rimraf dist"
     },
     "dependencies": {
-        "@camelot/anya-domain": "^1.0.0",
+        "@camelot/anya-domain": "workspace:*",
         "@tamagui/config": "latest",
         "drizzle-orm": "latest",
         "expo": "~50.0.21",

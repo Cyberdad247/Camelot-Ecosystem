@@ -1,0 +1,44 @@
+{
+  "protocolVersion": "forge-law/v1",
+  "title": "Forge Law R&D Command Center Integration v10000.1",
+  "targetRoot": ".",
+  "risk": {
+    "level": "medium"
+  },
+  "operations": [
+    {
+      "id": "core-tests",
+      "type": "run_check",
+      "dependsOn": [],
+      "argv": [
+        "python",
+        "-m",
+        "pytest",
+        "tests/test_forge_law.py",
+        "tests/test_approval_grants.py",
+        "-q"
+      ],
+      "cwd": ".",
+      "timeoutSeconds": 300
+    },
+    {
+      "id": "pwa-verify",
+      "type": "build",
+      "dependsOn": [
+        "core-tests"
+      ],
+      "argv": [
+        "npm",
+        "run",
+        "verify"
+      ],
+      "cwd": "02_FORGE/apps/pwa-cockpit",
+      "timeoutSeconds": 900
+    }
+  ],
+  "verification": [
+    "core-tests",
+    "pwa-verify"
+  ]
+}
+

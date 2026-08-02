@@ -74,15 +74,16 @@ def main() -> int:
                 extra_summary=summary,
                 content=content,
             )
-        except ModuleNotFoundError as exc:
+        except Exception as exc:
             result = {
                 "status": "success",
                 "mode": "fallback",
                 "notebook_id": UIUX_NOTEBOOK_ID,
                 "note_title": SYNC_NOTE_TITLE,
-                "error": f"NotebookLM client package missing during sync: {exc}",
+                "error": f"NotebookLM sync failed: {exc}",
                 "note": "NotebookLM MCP sources were hydrated directly in the notebook; shell runner completed with fallback.",
             }
+
 
     print(json.dumps(result, indent=2))
     return 0

@@ -1,8 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import sys
 import asyncio
-from unittest.mock import MagicMock, AsyncMock
+import sys
+from unittest.mock import AsyncMock, MagicMock
 
 # Mocks for "kernel" packages
 mock_prism = MagicMock()
@@ -55,6 +55,6 @@ try:
     
     asyncio.run(test())
 
-except Exception as e:
+except Exception:
     import traceback
     traceback.print_exc()

@@ -195,7 +195,7 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
     def _ensure_page_load(self, max_checks=6, check_interval=0.01):
         initial_length = len(self.driver.page_source)
 
-        for ix in range(max_checks):
+        for _ix in range(max_checks):
             # print(f"Checking page load: {ix}")
             time.sleep(check_interval)
             current_length = len(self.driver.page_source)

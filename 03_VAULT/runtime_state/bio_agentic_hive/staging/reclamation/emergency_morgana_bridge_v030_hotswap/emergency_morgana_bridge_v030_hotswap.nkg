@@ -1,0 +1,23 @@
+---
+mutation_id: emergency_morgana_bridge_v030_hotswap
+mutation_type: binary_hot_swap_request
+status: staged
+created_at: 2026-07-01T13:07:04.2052945-04:00
+sovereign_gate: HITL_REQUIRED
+target_surface: 01_KERNEL/senses/morgana_bridge
+live_gateway_url: http://127.0.0.1:8001/health
+observed_live_version: MORGANA_BIFROST_GATEWAY_v0.2.0
+required_minimum_version: MORGANA_BIFROST_GATEWAY_v0.3.0
+verification_baseline: cargo test in 01_KERNEL/senses/morgana_bridge passed 7/7 before staging
+execute_only_after: //GO
+purge_on: //REZERO
+---
+
+# Mutation Glyph
+
+The live `morgana_bridge` process is healthy, but it is still serving
+`MORGANA_BIFROST_GATEWAY_v0.2.0`. The repository source has the Bio-Agentic Hive
+gateway extensions staged in code and previously verified with 7/7 Rust tests.
+
+No binary replacement, restart, or production write has been performed.
+

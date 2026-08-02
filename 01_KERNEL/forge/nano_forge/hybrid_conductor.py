@@ -161,7 +161,7 @@ class HybridConductor:
         # In v1.0, we just trigger the session spawn.
         # In v1.1, we would pass the mission script to PhantomEngine.
         try:
-            session = await self.grid.spawn_session(profile_id)
+            await self.grid.spawn_session(profile_id)
             return {
                 "status": "SUCCESS",
                 "target": "PHANTOM",

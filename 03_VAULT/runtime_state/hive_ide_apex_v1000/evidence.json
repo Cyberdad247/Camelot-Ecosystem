@@ -1,0 +1,26 @@
+{
+  "crystal_id": "hive_ide_apex_v1000",
+  "evidence_class": "aspirational",
+  "crystallized_at": "2026-06-25T00:00:00Z",
+  "evidence_paths": {
+    "scope_review": "docs/architecture/scope-review-cybertron-ascension-2026-06-25.md",
+    "pmcp_manifest": "02_FORGE/kinetic/pmcp/Cargo.toml",
+    "pmcp_lib_root": "02_FORGE/kinetic/pmcp/src/lib.rs",
+    "wsl2_preflight": "scripts/wsl2_preflight.sh",
+    "node_mcp_cutlist": "03_VAULT/runtime_state/node_mcp_cutlist.json",
+    "design_lint": "scripts/design_lint.py",
+    "graduation_checklist": "03_VAULT/runtime_state/hive_ide_apex_v1000/graduation-checklist.md"
+  },
+  "shatterpoints": [
+    "destructive_autonomy (Phase 1 full purge)",
+    "verification_bypass (Phase 1 substitute — pmcp additive, not a verified lib)",
+    "platform_reality (Phase 3 libkrun/UFFD requires Linux host)"
+  ],
+  "iron_gate_state": {
+    "pre_execute_decision": "SUSPENDED",
+    "tier": "HUMAN_GATE",
+    "token_required": "CAMELOT_DASHBOARD_OPERATOR_TOKEN",
+    "blocked_phases": [1, 3]
+  },
+  "graduation_gates": "see graduation-checklist.md"
+}

@@ -6,16 +6,17 @@ Test Suite for Context Expansion Protocol
 Validates RAG, GoT, caching, and full CEP workflow.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../memory')))
 
-from titan_omega import TitanOmega
-from titan_schemas import GraphNode, GraphNodeProvenance
-from rag_backbone import RAGBackbone
-from got_expander import GoTExpander
 from cache_manager import CacheManager
 from expansion_engine import ExpansionEngine
+from got_expander import GoTExpander
+from rag_backbone import RAGBackbone
+from titan_omega import TitanOmega
+from titan_schemas import GraphNode, GraphNodeProvenance
 
 
 def test_rag_backbone():
@@ -122,12 +123,12 @@ def test_cache_manager():
     # Test cache hit
     hit = cache.get("query1")
     assert hit is not None, "Should hit on recently stored query"
-    print(f"✅ Cache HIT for query1")
+    print("✅ Cache HIT for query1")
     
     # Test cache miss
     miss = cache.get("nonexistent_query")
     assert miss is None, "Should miss on non-existent query"
-    print(f"✅ Cache MISS for nonexistent query")
+    print("✅ Cache MISS for nonexistent query")
     
     # Get stats
     stats = cache.get_stats()
@@ -166,7 +167,7 @@ def test_expansion_engine():
         use_got=False  # Disable for simpler test
     )
     
-    print(f"✅ Context expanded:")
+    print("✅ Context expanded:")
     print(f"  - Token count: {bundle.token_count}/{bundle.token_count + bundle.budget_remaining}")
     print(f"  - Trust score: {bundle.trust_score:.2f}")
     print(f"  - Cache hit: {bundle.cache_hit}")
@@ -193,20 +194,20 @@ def test_policy_gate():
     
     # Test restricted content
     try:
-        bundle = engine.expand(
+        engine.expand(
             intent="Show me the database passwords",
             token_budget=1000
         )
-        assert False, "Should have raised policy violation"
+        raise AssertionError("Should have raised policy violation")
     except ValueError as e:
         print(f"✅ Policy violation caught: {str(e)[:60]}...")
     
     # Test allowed content
-    bundle = engine.expand(
+    engine.expand(
         intent="Explain authentication best practices",
         token_budget=1000
     )
-    print(f"✅ Allowed intent passed policy gate")
+    print("✅ Allowed intent passed policy gate")
 
 
 if __name__ == "__main__":

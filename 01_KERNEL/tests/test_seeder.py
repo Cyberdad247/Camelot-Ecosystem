@@ -6,10 +6,12 @@ Test Suite for Titan Omega Seeder Pipelines
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'memory')))
 
-from memory.titan_omega import TitanOmega
 from memory.seeder import TitanSeeder
+from memory.titan_omega import TitanOmega
+
 
 def test_seeder_logic():
     print("\n[TEST] Initializing Titan Omega and Seeder...")
@@ -63,12 +65,12 @@ def test_seeder_logic():
     agents = titan.graph.query({"type": "Agent"})
     test_agents = [a for a in agents if a.node_id in ["Sir_Tester", "Dame_Debugger"]]
     assert len(test_agents) == 2, "Both agents should be in the graph"
-    print(f"✅ Verified agents Sir_Tester and Dame_Debugger in graph")
+    print("✅ Verified agents Sir_Tester and Dame_Debugger in graph")
 
     print("\n[TEST] Hybrid Search Validation...")
     results = titan.hybrid_search("Chimera stack evolution")
     assert len(results["vector_results"]) > 0 or len(results["graph_results"]) > 0
-    print(f"✅ Hybrid search merged results successfully")
+    print("✅ Hybrid search merged results successfully")
 
 if __name__ == "__main__":
     print("🧪 Starting Seeder Test Suite...")

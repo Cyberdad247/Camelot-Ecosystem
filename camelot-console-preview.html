@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050505">
+<title>Camelot Console</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --obsidian:#050505; --plate:#0b0b10; --edge:#16161e;
+    --gold:#D4AF37; --gold-dim:rgba(212,175,55,.32); --gold-faint:rgba(212,175,55,.08);
+    --purple:#2E0854; --neon:#7A3BD6; --glow:rgba(122,59,214,.5);
+    --ink:#E8E2D0; --dim:#8d8878;
+    --allow:#6dc26d; --review:#d9a23c; --deny:#c5484f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--obsidian);color:var(--ink);font-family:'IBM Plex Mono',monospace;min-height:100vh}
+
+  header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;
+    padding:22px clamp(16px,4vw,44px);border-bottom:1px solid var(--gold-faint)}
+  .mark{font-family:'Cinzel',serif;font-weight:700;font-size:15px;letter-spacing:.3em;color:var(--gold)}
+  header .r{display:flex;gap:14px;align-items:center;font-size:10px;letter-spacing:.16em;color:var(--dim)}
+  #net{color:var(--allow)} #net.off{color:var(--deny)}
+  #install{display:none;background:none;border:1px solid var(--gold-dim);color:var(--gold);
+    font:inherit;font-size:10px;letter-spacing:.16em;padding:6px 12px;border-radius:4px;cursor:pointer}
+  #install:hover{border-color:var(--gold)}
+
+  main{display:grid;grid-template-columns:280px 1fr 300px;gap:18px;
+    padding:22px clamp(16px,4vw,44px);max-width:1400px;margin:0 auto}
+  @media(max-width:1000px){main{grid-template-columns:1fr}}
+
+  h2{font-family:'Cinzel',serif;font-size:12px;letter-spacing:.24em;color:var(--gold);margin-bottom:12px}
+  .panel{background:var(--plate);border:1px solid var(--edge);border-radius:6px;padding:16px}
+
+  /* Nodes */
+  .node{border:1px solid var(--edge);border-radius:5px;padding:12px 14px;margin-bottom:10px;cursor:pointer;transition:.25s}
+  .node:hover{border-color:var(--gold-dim)}
+  .node.sel{border-color:var(--neon);box-shadow:0 0 18px var(--glow)}
+  .node h3{font-family:'Cinzel',serif;font-size:13px;letter-spacing:.14em}
+  .node .sub{font-size:10px;color:var(--dim);margin:4px 0 6px}
+  .node .carts{font-size:9.5px;color:var(--gold);opacity:.8;line-height:1.6}
+
+  /* Lifecycle rail */
+  #rail{display:flex;flex-direction:column;gap:0;position:relative}
+  .st{display:flex;align-items:center;gap:12px;padding:5px 0;font-size:10.5px;letter-spacing:.06em;color:var(--dim)}
+  .st .dot{width:10px;height:10px;border-radius:50%;border:1px solid var(--gold-dim);flex:none;transition:.3s}
+  .st.done{color:var(--ink)} .st.done .dot{background:var(--gold);border-color:var(--gold)}
+  .st.now{color:var(--gold)}
+  .st.now .dot{background:var(--purple);border-color:var(--neon);box-shadow:0 0 12px var(--glow)}
+  .st .auth{margin-left:auto;font-size:9px;color:var(--dim);text-align:right}
+  .st.now .auth{color:var(--neon)}
+
+  /* Session panel */
+  #band{display:inline-block;font-size:10px;letter-spacing:.2em;padding:5px 12px;border-radius:3px;
+    border:1px solid var(--gold-dim);margin-bottom:12px}
+  #band.allow{color:var(--allow);border-color:var(--allow)}
+  #band.review{color:var(--review);border-color:var(--review)}
+  #band.deny{color:var(--deny);border-color:var(--deny)}
+  #authline{font-size:11px;color:var(--dim);margin-bottom:16px;min-height:16px}
+  .btns{display:flex;flex-wrap:wrap;gap:8px}
+  button.op{background:none;border:1px solid var(--gold-dim);color:var(--ink);font:inherit;
+    font-size:10px;letter-spacing:.12em;padding:8px 12px;border-radius:4px;cursor:pointer;transition:.25s}
+  button.op:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+  button.op:disabled{opacity:.3;cursor:not-allowed}
+  button.op.danger:hover:not(:disabled){border-color:var(--deny);color:var(--deny)}
+
+  /* Heimdall log */
+  #log{font-size:9.5px;line-height:1.8;height:340px;overflow-y:auto;color:var(--dim)}
+  #log .ev{color:var(--ink)} #log .ok{color:var(--allow)} #log .warn{color:var(--review)}
+  #log .bad{color:var(--deny)} #log .sys{color:var(--neon)}
+  #log div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  footer{padding:18px clamp(16px,4vw,44px);font-size:9px;letter-spacing:.2em;color:var(--dim);
+    border-top:1px solid var(--gold-faint);display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<header>
+  <span class="mark">CAMELOT CONSOLE</span>
+  <span class="r">
+    <span id="net">MESH ONLINE</span>
+    <span id="swstate">SW —</span>
+    <button id="install">⚜ INSTALL</button>
+  </span>
+</header>
+
+<main>
+  <section>
+    <h2>REALM NODES</h2>
+    <div id="nodes"></div>
+  </section>
+
+  <section class="panel">
+    <h2>SESSION LIFECYCLE</h2>
+    <span id="band">TRUST —</span>
+    <div id="authline">Select a node to begin trust lookup.</div>
+    <div class="btns">
+      <button class="op" id="b-grant" disabled>REQUEST GRANT</button>
+      <button class="op" id="b-approve" disabled>SOVEREIGN APPROVE</button>
+      <button class="op danger" id="b-deny" disabled>DENY</button>
+      <button class="op danger" id="b-revoke" disabled>REVOKE</button>
+      <button class="op" id="b-reset" disabled>RESET</button>
+    </div>
+    <div style="height:16px"></div>
+    <div id="rail"></div>
+  </section>
+
+  <section class="panel">
+    <h2>HEIMDALL LOG</h2>
+    <div id="log"></div>
+  </section>
+</main>
+
+<footer>
+  <span>CAMELOT-OS · PWA_SHELL · BROKER EVENTS ONLY — NO LOCAL INFERENCE</span>
+  <span>⚜ SOVEREIGN TRUTH</span>
+</footer>
+
+<script type="module">
+/**
+ * Camelot Console — PWA session state machine.
+ * Bridge-chapter law: the PWA updates ONLY from broker events / API calls.
+ * It never infers trust or session state locally, so this is a strict
+ * transition table — unknown (state, event) pairs are rejected.
+ */
+
+const STATES = [
+  'idle', 'node_selected', 'trust_checking', 'trust_approved',
+  'trust_review_required', 'trust_denied', 'grant_requested', 'grant_issued',
+  'grant_denied', 'signaling_pending', 'offer_sent', 'answer_received',
+  'ice_exchange', 'connecting', 'active', 'revoke_requested', 'revoked', 'closed'
+];
+
+/** from-state → { broker event or API call → to-state } */
+const TRANSITIONS = {
+  idle:                  { 'POST /api/v1/trust/lookup': 'node_selected' },
+  node_selected:         { 'trust.lookup.started': 'trust_checking' },
+  trust_checking:        { 'trust.lookup.approved': 'trust_approved',
+                           'trust.lookup.review_required': 'trust_review_required',
+                           'trust.lookup.denied': 'trust_denied' },
+  trust_review_required: { 'trust.lookup.approved': 'trust_approved',
+                           'trust.lookup.denied': 'trust_denied' },
+  trust_approved:        { 'POST /api/v1/sessions': 'grant_requested' },
+  grant_requested:       { 'session.granted': 'grant_issued',
+                           'session.denied': 'grant_denied' },
+  grant_issued:          { 'session.signaling_opened': 'signaling_pending',
+                           'session.revoked': 'revoked' },
+  signaling_pending:     { 'signaling.offer.forwarded': 'offer_sent',
+                           'session.revoked': 'revoked' },
+  offer_sent:            { 'signaling.answer.forwarded': 'answer_received',
+                           'session.revoked': 'revoked' },
+  answer_received:       { 'signaling.ice.forwarded': 'ice_exchange',
+                           'session.revoked': 'revoked' },
+  ice_exchange:          { 'session.connecting': 'connecting',
+                           'session.revoked': 'revoked' },
+  connecting:            { 'session.active': 'active',
+                           'session.revoked': 'revoked' },
+  active:                { 'POST /api/v1/sessions/{id}/revoke': 'revoke_requested',
+                           'session.revoked': 'revoked' },
+  revoke_requested:      { 'session.revoked': 'revoked' },
+  revoked:               { 'session.closed': 'closed' },
+  trust_denied:          { reset: 'idle' },
+  grant_denied:          { reset: 'idle' },
+  closed:                { reset: 'idle' }
+};
+
+/** Authorization column of the spec table — display truth, still broker-derived. */
+const AUTHORIZATION = {
+  idle: 'No session', node_selected: 'Pending', trust_checking: 'Pending',
+  trust_approved: 'Session may proceed', trust_review_required: 'Human approval required',
+  trust_denied: 'Session denied', grant_requested: 'Pending',
+  grant_issued: 'Session authorized', grant_denied: 'Session denied',
+  signaling_pending: 'Authorization in progress', offer_sent: 'Transport setup in progress',
+  answer_received: 'Transport setup in progress', ice_exchange: 'Transport setup in progress',
+  connecting: 'Authorization active', active: 'Full operator access granted',
+  revoke_requested: 'Termination requested', revoked: 'Access removed',
+  closed: 'Terminal state'
+};
+
+class PwaSession {
+  constructor() {
+    this.state = 'idle';
+    this.history = [];
+  }
+
+  /** Apply a broker event. Returns {ok, state, rejected?}. Never infers. */
+  dispatch(event) {
+    const next = (TRANSITIONS[this.state] ?? {})[event];
+    if (!next) {
+      return { ok: false, state: this.state, rejected: event };
+    }
+    this.history.push({ from: this.state, event, to: next, ts: Date.now() });
+    this.state = next;
+    return { ok: true, state: next };
+  }
+
+  get authorization() {
+    return AUTHORIZATION[this.state];
+  }
+}
+
+
+
+/* ── Realm topology from the crystal ─────────────────────────── */
+const NODES = [
+  { id: 'excalibur',   name: 'EXCALIBUR',   sub: 'Android · 8GB',  carts: 'Cmd_CTRL · Cyb_Research · KBA · Crystal_Ball · phone_claw' },
+  { id: 'cybertronia', name: 'CYBERTRONIA', sub: 'VPS · 16GB',     carts: 'Bifrost_GW · Yggdrasil · Factory · Titan · CloudBrain' },
+  { id: 'kba_midgard', name: 'KBA MIDGARD', sub: 'iOS',            carts: 'Lakesha_Avatar · KBA_Pills ×6 · Fonoster' }
+];
+
+const session = new PwaSession();
+let selectedNode = null;
+let pendingTimers = [];
+
+/* ── DOM ─────────────────────────────────────────────────────── */
+const $ = id => document.getElementById(id);
+const nodesEl = $('nodes'), railEl = $('rail'), logEl = $('log');
+const bandEl = $('band'), authEl = $('authline');
+const btns = { grant: $('b-grant'), approve: $('b-approve'), deny: $('b-deny'), revoke: $('b-revoke'), reset: $('b-reset') };
+
+NODES.forEach(n => {
+  const el = document.createElement('div');
+  el.className = 'node';
+  el.innerHTML = `<h3>${n.name}</h3><div class="sub">${n.sub}</div><div class="carts">${n.carts}</div>`;
+  el.addEventListener('click', () => selectNode(n, el));
+  nodesEl.appendChild(el);
+});
+
+STATES.forEach(s => {
+  const el = document.createElement('div');
+  el.className = 'st';
+  el.dataset.state = s;
+  el.innerHTML = `<span class="dot"></span><span>${s}</span><span class="auth">${AUTHORIZATION[s]}</span>`;
+  railEl.appendChild(el);
+});
+
+/* ── Heimdall log voice: terse, network-log, trust_band ──────── */
+function log(line, cls = '') {
+  const el = document.createElement('div');
+  if (cls) el.className = cls;
+  const ts = new Date().toISOString().slice(11, 23);
+  el.textContent = `[${ts}] ${line}`;
+  logEl.prepend(el);
+}
+
+/* ── Broker simulation: the ONLY writer of session state ─────── */
+function broker(event, delay) {
+  const t = setTimeout(() => {
+    const r = session.dispatch(event);
+    if (!r.ok) { log(`REJECT evt=${event} state=${session.state} · no local inference`, 'bad'); return; }
+    log(`evt=${event} → state=${r.state}`, 'ev');
+    render();
+  }, delay);
+  pendingTimers.push(t);
+}
+
+function clearBroker() { pendingTimers.forEach(clearTimeout); pendingTimers = []; }
+
+function selectNode(n, el) {
+  if (session.state !== 'idle') return log(`REJECT node_select · session=${session.state}`, 'warn');
+  selectedNode = n;
+  document.querySelectorAll('.node').forEach(x => x.classList.remove('sel'));
+  el.classList.add('sel');
+  log(`GET /api/v1/nodes → 3 nodes · target=${n.id}`, 'sys');
+  session.dispatch('POST /api/v1/trust/lookup');
+  log(`POST /api/v1/trust/lookup node=${n.id}`, 'ev');
+  render();
+  broker('trust.lookup.started', 350);
+  // Cybertronia carries the Bifrost gateway: clean allow. Others: review path.
+  if (n.id === 'cybertronia') {
+    broker('trust.lookup.approved', 1100);
+  } else {
+    broker('trust.lookup.review_required', 1100);
+  }
+}
+
+btns.grant.addEventListener('click', () => {
+  session.dispatch('POST /api/v1/sessions');
+  log('POST /api/v1/sessions', 'ev'); render();
+  broker('session.granted', 500);
+  broker('session.signaling_opened', 1000);
+  broker('signaling.offer.forwarded', 1500);
+  broker('signaling.answer.forwarded', 2000);
+  broker('signaling.ice.forwarded', 2500);
+  broker('session.connecting', 3000);
+  broker('session.active', 3700);
+});
+btns.approve.addEventListener('click', () => { log('sovereign approval issued', 'sys'); broker('trust.lookup.approved', 250); });
+btns.deny.addEventListener('click', () => { log('sovereign denial issued', 'sys'); broker('trust.lookup.denied', 250); });
+btns.revoke.addEventListener('click', () => {
+  clearBroker();
+  session.dispatch('POST /api/v1/sessions/{id}/revoke');
+  log('POST /api/v1/sessions/{id}/revoke', 'warn'); render();
+  broker('session.revoked', 400);
+  broker('session.closed', 1000);
+});
+btns.reset.addEventListener('click', () => {
+  clearBroker();
+  session.dispatch('reset');
+  selectedNode = null;
+  document.querySelectorAll('.node').forEach(x => x.classList.remove('sel'));
+  log('reset → idle', 'sys'); render();
+});
+
+/* ── Render: state is read, never written, here ──────────────── */
+const BAND = s =>
+  s === 'active' || s === 'trust_approved' || s === 'grant_issued' ? ['allow', 'TRUST ALLOW']
+  : s === 'trust_review_required' ? ['review', 'TRUST REVIEW']
+  : s === 'trust_denied' || s === 'grant_denied' || s === 'revoked' ? ['deny', 'TRUST BLOCK']
+  : ['', `TRUST ${s === 'idle' ? '—' : 'PENDING'}`];
+
+function render() {
+  const s = session.state;
+  const idx = STATES.indexOf(s);
+  document.querySelectorAll('.st').forEach((el, i) => {
+    el.classList.toggle('now', i === idx);
+    el.classList.toggle('done', i < idx && session.history.some(h => h.to === el.dataset.state));
+  });
+  const [cls, label] = BAND(s);
+  bandEl.className = cls; bandEl.textContent = label;
+  authEl.textContent = session.authorization;
+
+  btns.grant.disabled = s !== 'trust_approved';
+  btns.approve.disabled = s !== 'trust_review_required';
+  btns.deny.disabled = !(s === 'trust_review_required' || s === 'trust_checking');
+  btns.revoke.disabled = !['grant_issued','signaling_pending','offer_sent','answer_received','ice_exchange','connecting','active'].includes(s);
+  btns.reset.disabled = !['trust_denied','grant_denied','closed'].includes(s);
+}
+
+/* ── PWA machinery ───────────────────────────────────────────── */
+if ('serviceWorker' in navigator) {
+  Promise.reject()
+    .then(() => { $('swstate').textContent = 'SW ACTIVE'; log('service worker registered · shell cached', 'ok'); })
+    .catch(() => { $('swstate').textContent = 'SW FAIL'; });
+}
+let deferredPrompt = null;
+addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); deferredPrompt = e; $('install').style.display = 'inline-block';
+});
+$('install').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null; $('install').style.display = 'none';
+});
+addEventListener('online',  () => { $('net').textContent = 'MESH ONLINE'; $('net').className = ''; log('route_ready · advertise', 'ok'); });
+addEventListener('offline', () => { $('net').textContent = 'MESH LOST'; $('net').className = 'off'; log('route_lost · block new grants', 'bad'); });
+
+log('console boot · pwa_shell · broker events only', 'sys');
+render();
+
+</script>
+</body>
+</html>

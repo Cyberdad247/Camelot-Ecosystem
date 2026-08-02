@@ -26,6 +26,7 @@ Usage:
 
 import sys
 from pathlib import Path
+
 import pytest
 
 # Add parent directory to path for imports
@@ -33,7 +34,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 # Import the bridge (with graceful handling if Haystack not installed)
 try:
-    from integrations.haystack_ukg_bridge import HaystackUKGBridge, HAYSTACK_AVAILABLE
+    from integrations.haystack_ukg_bridge import HAYSTACK_AVAILABLE, HaystackUKGBridge
 except ImportError as e:
     print(f"❌ Failed to import HaystackUKGBridge: {e}")
     print("Make sure you're running from 01_KERNEL directory")
@@ -275,7 +276,7 @@ def smoke_test():
         print(f"   ✅ Retrieved {len(result['documents'])} documents")
         
         if result['documents']:
-            print(f"\n   Top result:")
+            print("\n   Top result:")
             doc = result['documents'][0]
             print(f"   - Source: {doc['source']}")
             print(f"   - Content: {doc['content'][:150]}...")

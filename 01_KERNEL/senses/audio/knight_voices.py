@@ -18,9 +18,9 @@ Merlin Omega Mathematical Architecture for each Knight vocal weight:
 """
 
 from __future__ import annotations
+
 import hashlib
 from typing import NamedTuple
-
 
 # ── Vocal Profile Schema ──────────────────────────────────────────────────────
 

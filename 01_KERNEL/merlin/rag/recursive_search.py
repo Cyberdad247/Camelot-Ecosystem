@@ -8,7 +8,8 @@ Allows the system to critique its own retrieval results and generate follow-up q
 """
 
 import logging
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 from integrations.merlin_haystack_generator import MerlinGenerator
 
 logger = logging.getLogger(__name__)
@@ -34,29 +35,8 @@ class ReflectionEngine:
         def get_content(d):
             return d.get("content", "") if isinstance(d, dict) else getattr(d, "content", str(d))
             
-        context_preview = "\n".join([get_content(d)[:200] + "..." for d in documents[:3]])
+        "\n".join([get_content(d)[:200] + "..." for d in documents[:3]])
         
-        prompt = f"""
-        [SYSTEM: REFLECTION_AGENT]
-        Analyze if the provided documents are sufficient to answer the user query.
-        
-        Query: {query}
-        
-        Retrieved Documents (Preview):
-        {context_preview}
-        
-        Task:
-        1. Rate coverage (0-10).
-        2. Identify MISSING information.
-        3. Determine if we need more searches (True/False).
-        
-        Output JSON format:
-        {{
-            "score": <int>,
-            "missing": "<description>",
-            "needs_recursion": <bool>
-        }}
-        """
         
         try:
             # In a real implementation, we would parse the JSON output from the LLM.

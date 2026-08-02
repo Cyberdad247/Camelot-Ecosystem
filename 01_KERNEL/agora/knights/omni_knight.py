@@ -58,7 +58,7 @@ class OmniKnight(AgentNode):
         print(f"⚔️ [{self.agent_id}] Order Received: '{intent[:50]}...'")
 
         # Simulation of LLM reasoning based on the prompt
-        result = self._simulate_reasoning(intent)
+        self._simulate_reasoning(intent)
 
         # 3. REPORT BACK
         print(f"✅ [{self.agent_id}] Mission Complete.")

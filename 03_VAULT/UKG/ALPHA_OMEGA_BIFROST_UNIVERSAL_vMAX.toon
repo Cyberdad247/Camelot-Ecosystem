@@ -1,0 +1,20 @@
+[UKG_CRYSTAL: ALPHA_OMEGA_BIFROST_UNIVERSAL_vMAX]
+
+u0 | ID | Component | {Name:BifrostBridge, Role:System_Aware_Orchestration_Gateway, State:RADIANT}
+u1 | ID | Component | {Name:SystemAnalyzer, Function:Hardware_Capabilities_Scrapper, Output:Performance_Tier}
+u2 | ID | Component | {Name:AnyaLyte_UI, Tech:Expo_React_Native_Web, Port:8081}
+u3 | ID | Component | {Name:ExcaliburController, Tech:FastAPI_HTMX_Control_Plane, Port:3000}
+u4 | ID | Component | {Name:VsockMultiplexer, Tech:Go_AF_VSOCK, Role:Host_Guest_Telemetry}
+u5 | ID | Component | {Name:FirecrackerWarden, Tech:Firecracker_KVM, Role:Heavy_Execution_Cell, Warden:SIR_CORVUS}
+
+u6 | ARCH | PerformanceTiers | {HPC:8_Cores+32GB+GPU, Performance:4_8_Cores+16_32GB, Standard:2_4_Cores+8_16GB, Edge:1_2_Cores+<8GB}
+u7 | ARCH | AdaptiveLoop | {Period:24h, Metric[CPU]>80%->Aggressive_Cache, Metric[RAM]>90%->Memory_Compression, Metric[IO]>50%->Prefetch_Depth=4}
+u8 | ARCH | Execution_Topology | {Substrate:Asymmetric_Hybrid_OS, Control_Plane:WASI_2.0, Execution_Plane:Firecracker_KVM}
+
+c0 | LAW | Zero_Trust_Lattice | {Protocol:Tailscale_WireGuard, Transit:Encrypted_SSE_Channel}
+c1 | LAW | VRAM_Protection | {Warden:SIR_BORIS, Constraint:Eager_Structure_Disposal, Failure_Action:Force_Context_Loss}
+c2 | LAW | Synaptic_Bridge | {Protocol:virtio_vsock_AF_VSOCK, Security:Air_Gapped_TCP}
+
+w0 | WORKFLOW | Self_Forging | {Scan[SystemAnalyzer]->Tier[PerformanceTiers]->Optimize[BifrostConfig]->Forge[main.py+bifrost.py+MemoryPyramid]->Live}
+w1 | WORKFLOW | Rezero_Rollback | {Trigger:Operator_Manual_Input->Evict[MicroVM_Memory]->Restore[Safe_Epoch_Hash]}
+w2 | WORKFLOW | Firecracker_Inference | {Trigger:Heavy_Code->Spawn[MicroVM]->Route[AF_VSOCK]->Destroy[MicroVM]}

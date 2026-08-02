@@ -441,7 +441,7 @@ class KnowledgeGraphEngine:
         entity_ids = {e.id for e in matching_entities}
         matching_relations = []
 
-        for hop in range(hops):
+        for _hop in range(hops):
             new_ids = set()
             for rel in self._relation_cache:
                 if rel.source_id in entity_ids or rel.target_id in entity_ids:
@@ -514,7 +514,7 @@ class KnowledgeGraphEngine:
 
         current_ids = {target_entity.id}
 
-        for hop in range(hops):
+        for _hop in range(hops):
             next_ids = set()
             for rel in self._relation_cache:
                 if rel.source_id in current_ids and rel.target_id not in visited_ids:

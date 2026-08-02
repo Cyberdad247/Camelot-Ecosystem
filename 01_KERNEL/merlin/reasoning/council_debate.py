@@ -22,7 +22,7 @@ class _LocalFallback:
             return "[LOCAL] Acknowledged. No external reasoning available — deferring to Sovereign."
         if "synthesize" in prompt.lower() or "resolution" in prompt.lower():
             return "[LOCAL] Resolution requires LLM adjudication. Presenting raw debate for Sovereign review."
-        return f"[LOCAL] Perspective registered. Bias-driven heuristic applied."
+        return "[LOCAL] Perspective registered. Bias-driven heuristic applied."
 
 
 # Resolve config path relative to this file, not cwd

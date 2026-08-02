@@ -1,0 +1,95 @@
+terraform {
+  required_version = ">= 1.0"
+
+  required_providers {
+    portkey = {
+      source  = "portkey-ai/portkey"
+      version = "~> 0.1"
+    }
+  }
+}
+
+provider "portkey" {
+  # Read from PORTKEY_API_KEY.
+}
+
+variable "openai_api_key" {
+  type      = string
+  sensitive = true
+}
+
+resource "portkey_workspace" "camelot" {
+  name        = "Camelot OS"
+  description = "Camelot OS control-plane workspace"
+}
+
+resource "portkey_integration" "openai" {
+  name           = "Camelot OpenAI"
+  ai_provider_id = "openai"
+  key            = var.openai_api_key
+}
+
+resource "portkey_integration_workspace_access" "openai_camelot" {
+  integration_id = portkey_integration.openai.slug
+  workspace_id   = portkey_workspace.camelot.id
+}
+
+resource "portkey_provider" "camelot_openai" {
+  name           = "Camelot OpenAI Virtual Key"
+  workspace_id   = portkey_workspace.camelot.id
+  integration_id = portkey_integration.openai.slug
+
+  depends_on = [portkey_integration_workspace_access.openai_camelot]
+}
+
+resource "portkey_config" "camelot_default" {
+  name         = "Camelot Default Routing"
+  workspace_id = portkey_workspace.camelot.id
+
+  config = jsonencode({
+    retry = {
+      attempts        = 3
+      on_status_codes = [408, 409, 429, 500, 502, 503, 504]
+    }
+    cache = {
+      mode = "simple"
+    }
+    request_timeout = 90000
+    metadata = {
+      system   = "camelot-os"
+      protocol = "universal-critical-thinking"
+    }
+  })
+}
+
+resource "portkey_rate_limits_policy" "camelot_api_rate" {
+  name         = "Camelot API Rate Limit"
+  workspace_id = portkey_workspace.camelot.id
+  type         = "requests"
+  unit         = "rpm"
+  value        = 500
+
+  conditions = jsonencode([
+    { key = "workspace_id", value = portkey_workspace.camelot.id }
+  ])
+  group_by = jsonencode([
+    { key = "api_key" }
+  ])
+}
+
+resource "portkey_usage_limits_policy" "camelot_monthly_tokens" {
+  name            = "Camelot Monthly Token Limit"
+  workspace_id    = portkey_workspace.camelot.id
+  type            = "tokens"
+  credit_limit    = 1000000
+  alert_threshold = 800000
+  periodic_reset  = "monthly"
+
+  conditions = jsonencode([
+    { key = "workspace_id", value = portkey_workspace.camelot.id }
+  ])
+  group_by = jsonencode([
+    { key = "api_key" }
+  ])
+}
+

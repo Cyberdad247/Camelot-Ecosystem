@@ -1,12 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import sys
 import os
+import sys
 
 # Add kernel to path
 sys.path.append(os.path.abspath("C:/Users/vizio/CAMELOT_OS/01_KERNEL"))
 
 from assimilation.core import handlers
+
 
 def test_harmony_gate_failure():
     print("🧪 TEST 1: Harmony Gate Failure (Non-existent Path)")

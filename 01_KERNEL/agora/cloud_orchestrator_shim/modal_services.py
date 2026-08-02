@@ -6,14 +6,12 @@ from enum import Enum
 from typing import Any
 
 import modal
-from pydantic import BaseModel, Field
-
 from agora.cloud_orchestrator_shim.long_term_cloudbrain import (
     cloudbrain_status,
     create_open_notebook_app,
     pull_long_term_memory,
 )
-
+from pydantic import BaseModel, Field
 
 IMAGE = (
     modal.Image.debian_slim(python_version="3.13")

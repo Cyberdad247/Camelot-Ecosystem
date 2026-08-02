@@ -6,9 +6,9 @@ Purpose: System Hygiene & Sovereign Audit.
 Ensures the Titanium Laws are upheld and the Kinetic stack is clean.
 """
 
+import hashlib
 import os
 import shutil
-import hashlib
 from datetime import datetime
 
 ROOT = r"C:\Users\vizio\CAMELOT_OS"

@@ -62,9 +62,10 @@ from typing import AsyncGenerator, NamedTuple, Optional
 # ── Vocal subsystem imports ───────────────────────────────────────────────────
 
 try:
-    from senses.audio.knight_voices import get_profile, KnightVocalProfile
+    from senses.audio.knight_voices import KnightVocalProfile, get_profile
 except ImportError:
-    import importlib.util as _ilu, os as _os
+    import importlib.util as _ilu
+    import os as _os
     _kv = _ilu.spec_from_file_location(
         "knight_voices",
         _os.path.join(_os.path.dirname(__file__), "knight_voices.py"),
@@ -74,7 +75,8 @@ except ImportError:
     KnightVocalProfile = _mod.KnightVocalProfile
 
 try:
-    from senses.audio.tts_engines import synthesize as _synth_engine, TTSEngine
+    from senses.audio.tts_engines import TTSEngine
+    from senses.audio.tts_engines import synthesize as _synth_engine
 except ImportError:
     _synth_engine = None  # type: ignore
     TTSEngine = None  # type: ignore

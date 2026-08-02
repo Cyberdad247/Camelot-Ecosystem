@@ -1,9 +1,10 @@
-import os
-import json
 import hashlib
+import json
+import os
 import re
 import time
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 
 class OmegaAuditor:
     def __init__(self, root_path: str = "."):
@@ -134,7 +135,7 @@ class OmegaAuditor:
                 self.purge_list.append(filepath)
                 new_nodes_count += 1
                 
-            except Exception as e:
+            except Exception:
                 pass
 
         # Merge
@@ -149,21 +150,21 @@ class OmegaAuditor:
     def phase_c_report(self):
         """Phase C: The Purge (Optimize)"""
         print("----------------------------------------------------------------")
-        print(f" DEAD CODE DETECTED (Cribo Simulation)                         ")
+        print(" DEAD CODE DETECTED (Cribo Simulation)                         ")
         print(f" * {len(self.dead_code)} Unused Modules Detected                            ")
-        print(f" * Recommendation: PRUNE                                       ")
+        print(" * Recommendation: PRUNE                                       ")
         print("----------------------------------------------------------------")
-        print(f" KNOWLEDGE SIPHON (Sir Synth)                                  ")
+        print(" KNOWLEDGE SIPHON (Sir Synth)                                  ")
         print(f" * {len(self.ukg_nodes)} Files Transmuted to UKG Nodes                        ")
         md_count = sum(1 for n in self.ukg_nodes if n['source'].endswith('.md'))
         txt_count = sum(1 for n in self.ukg_nodes if n['source'].endswith('.txt'))
         print(f" * {md_count} Markdown Files (.md)                                     ")
         print(f" * {txt_count} Text Logs (.txt)                                        ")
-        print(f" * ACTION: Delete originals to reduce context noise?           ")
+        print(" * ACTION: Delete originals to reduce context noise?           ")
         print("----------------------------------------------------------------")
-        print(f" ACTIONS REQUIRED                                              ")
-        print(f" [ ] EXECUTE PURGE (Unused Code + Assimilated Docs)            ")
-        print(f"     > Requires HITL (Human In The Loop)                       ")
+        print(" ACTIONS REQUIRED                                              ")
+        print(" [ ] EXECUTE PURGE (Unused Code + Assimilated Docs)            ")
+        print("     > Requires HITL (Human In The Loop)                       ")
         print("================================================================")
 
     def execute_purge(self):
@@ -208,9 +209,9 @@ class OmegaAuditor:
                 except Exception as e:
                     print(f" [FAILED] {rel_path}: {e}")
         
-        print(f"----------------------------------------------------------------")
+        print("----------------------------------------------------------------")
         print(f" PURGE COMPLETE: {purged_count} artifacts relocated.")
-        print(f" Workspace Weight Reduced. Knowledge Preserved in 00_SECURE_ARCHIVE.")
+        print(" Workspace Weight Reduced. Knowledge Preserved in 00_SECURE_ARCHIVE.")
         print("================================================================")
 
 if __name__ == "__main__":

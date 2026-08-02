@@ -1,0 +1,10 @@
+node_modules/**
+out/**/*.map
+src/**
+tsconfig.json
+.git/**
+*.log
+__tests__/**
+.eslintrc.json
+.prettierrc
+**/*.test.ts

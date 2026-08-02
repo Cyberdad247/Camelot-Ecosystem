@@ -1,11 +1,10 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+# Add KERNEL to path to import UKGRuntime
+import importlib.util
 import json
 import os
 from pathlib import Path
-
-# Add KERNEL to path to import UKGRuntime
-import importlib.util
 
 # Dynamically import UKGRuntime to handle '01_KERNEL' directory name
 spec = importlib.util.spec_from_file_location(

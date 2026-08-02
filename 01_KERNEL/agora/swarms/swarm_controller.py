@@ -8,11 +8,12 @@ Acts as the client bridge to the Hivemind (Go Orchestrator).
 Dispatches tasks to the localized agent swarm via HTTP.
 """
 
-import requests
-import subprocess
-import time
 import os
+import subprocess
 import sys
+import time
+
+import requests
 
 # Add KERNEL to path for telemetry import
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
@@ -53,7 +54,7 @@ def dispatch_crusade(objective: str, phases: list):
     }
     
     try:
-        start_time = time.time()
+        time.time()
         print(f"🚀 [CONTROLLER] Dispatching Crusade: '{objective}'")
         response = requests.post(HIVEMIND_URL, json=payload)
         response.raise_for_status()
@@ -71,6 +72,7 @@ def dispatch_crusade(objective: str, phases: list):
 
 if __name__ == "__main__":
     import argparse
+
     from directive_queue import queue
     
     parser = argparse.ArgumentParser()

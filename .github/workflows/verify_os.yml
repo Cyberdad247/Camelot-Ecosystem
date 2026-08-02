@@ -55,8 +55,10 @@ jobs:
   lint:
     name: Lint & Format
     runs-on: windows-latest
-    # Pre-existing repo-wide lint debt (~893 Ruff findings) — report but do not
-    # block the suite. Burn this down separately; do not gate merges on it.
+    # Pre-existing repo-wide lint debt — report but do not block the suite.
+    # Auto-fixed 392 issues (921 → 534 remaining) as of 2026-07-28.
+    # Largest remaining category: B904 (raise-without-from, 329 issues) requires
+    # manual per-file review. Burn this down separately; do not gate merges on it.
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4

@@ -12,6 +12,7 @@ sys.path.insert(0, str(vault_path))
 
 from ollama_client import OllamaClient
 
+
 def main():
     """Test Ollama integration."""
     print("[TEST] Initializing Ollama Client...")
@@ -35,9 +36,9 @@ def main():
             max_tokens=50
         )
         
-        print(f"\n[SUCCESS] Response:")
+        print("\n[SUCCESS] Response:")
         print(response.get("response", "No response"))
-        print(f"\n[TEST] Integration test PASSED!")
+        print("\n[TEST] Integration test PASSED!")
         
     except Exception as e:
         print(f"\n[ERROR] Integration test FAILED: {e}")

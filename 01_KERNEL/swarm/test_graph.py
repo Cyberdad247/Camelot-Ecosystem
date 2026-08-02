@@ -14,6 +14,7 @@ if str(CAMELOT_ROOT) not in sys.path:
     sys.path.insert(0, str(CAMELOT_ROOT))
 
 import importlib.util
+
 import pytest
 
 _spec = importlib.util.spec_from_file_location(

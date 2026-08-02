@@ -10,7 +10,6 @@ import asyncio
 import os
 import time
 
-
 # Resolve ledger path relative to CAMELOT_OS root
 _KERNEL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _DEFAULT_LEDGER = os.path.join(_KERNEL_DIR, "PROVENANCE_LEDGER.md")

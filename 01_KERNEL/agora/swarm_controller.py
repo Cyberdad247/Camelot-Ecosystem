@@ -25,10 +25,12 @@ class SwarmController:
         except Exception:
             return False
 
-    async def execute_crusade(self, objective: str, phases: List[str] = ["build", "audit", "lint"]) -> Dict[str, Any]:
+    async def execute_crusade(self, objective: str, phases: List[str] = None) -> Dict[str, Any]:
         """
         Broadcast an objective to the Swarm for parallel execution.
         """
+        if phases is None:
+            phases = ["build", "audit", "lint"]
         print(f"⚔️  [SWARM] Broadcasting Objective: {objective}")
         print(f"📡 [SWARM] Activating Phases: {', '.join(phases)}")
 

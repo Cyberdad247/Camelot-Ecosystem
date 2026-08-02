@@ -1,0 +1,25 @@
+{
+  "crystal_id": "vKG-crystal-0x8f7e6d",
+  "timestamp": "2026-07-01T17:12:26.825202+00:00",
+  "schema_version": "vKG_Nano_Glyph v1.0",
+  "source_path": "/brain/data/",
+  "hydrated": true,
+  "nodes": [
+    {
+      "id": "sir_helio",
+      "role": "Context Lord",
+      "specialty": "1M+ Context Mapping & Voice Integration",
+      "status": "ACTIVE_REHYDRATED"
+    },
+    {
+      "id": "sovereign_harness",
+      "status": "LIVE",
+      "port_bindings": {
+        "kinetic_edge": 3001,
+        "clawdbot_gateway": 18789,
+        "bifrost_sidecar": 8011
+      }
+    }
+  ],
+  "state_signature": "0xABCDEF0123456789"
+}

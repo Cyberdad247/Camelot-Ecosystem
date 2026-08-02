@@ -1,0 +1,12 @@
+{
+  "name": "@camelot/kinetic-sovereign",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Camelot Go kinetic sovereign router",
+  "scripts": {
+    "go:build": "go build ./...",
+    "go:test": "go test ./...",
+    "go:lint": "go vet ./...",
+    "clean": "rm -rf bin/"
+  }
+}

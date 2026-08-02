@@ -7,9 +7,10 @@ Implementation of VX0-VX3 visual export and telemetry specs.
 
 import json
 import time
-from typing import List, Dict, Any
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from datetime import datetime
+from typing import Any, Dict, List
+
 
 @dataclass
 class ThoughtNode:

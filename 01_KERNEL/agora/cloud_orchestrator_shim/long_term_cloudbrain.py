@@ -16,7 +16,6 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
 KERNEL_ROOT = REPO_ROOT / "01_KERNEL"
 AGORA_ROOT = KERNEL_ROOT / "agora"

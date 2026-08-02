@@ -250,11 +250,11 @@ class CosineStrategy(ExtractionStrategy):
         similarities = cosine_similarity([query_embedding], document_embeddings).flatten()
 
         # Filter documents based on the similarity threshold
-        filtered_docs = [(doc, sim) for doc, sim in zip(documents, similarities) if sim >= self.sim_threshold]
+        filtered_docs = [(doc, sim) for doc, sim in zip(documents, similarities, strict=False) if sim >= self.sim_threshold]
 
         # If the number of filtered documents is less than at_least_k, sort remaining documents by similarity
         if len(filtered_docs) < at_least_k:
-            remaining_docs = [(doc, sim) for doc, sim in zip(documents, similarities) if sim < self.sim_threshold]
+            remaining_docs = [(doc, sim) for doc, sim in zip(documents, similarities, strict=False) if sim < self.sim_threshold]
             remaining_docs.sort(key=lambda x: x[1], reverse=True)
             filtered_docs.extend(remaining_docs[: at_least_k - len(filtered_docs)])
 
@@ -406,7 +406,7 @@ class CosineStrategy(ExtractionStrategy):
         if self.device.type in ["gpu", "cuda", "mps", "cpu"]:
             labels = self.nlp([cluster["content"] for cluster in cluster_list])
 
-            for cluster, label in zip(cluster_list, labels):
+            for cluster, label in zip(cluster_list, labels, strict=False):
                 cluster["tags"] = label
         # elif self.device.type == "cpu":
         #     # Process the text with the loaded model

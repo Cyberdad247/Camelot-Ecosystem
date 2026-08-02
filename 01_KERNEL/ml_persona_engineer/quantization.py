@@ -1,5 +1,6 @@
 import numpy as np
 
+
 class BitLinearQuantizer:
     def __init__(self, mode="mean"):
         """

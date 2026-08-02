@@ -1,12 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import logging
-import sys
 import os
+import sys
 
 # Ensure we can import from the kernel tools
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 from tools import antigravity_safe as antigravity
+
 
 class SirOctavian:
     """🔐 Sir Octavian (Governance): Enforces the Iron Gate laws."""

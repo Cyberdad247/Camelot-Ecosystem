@@ -1,0 +1,104 @@
+{
+  "name": "camelot",
+  "displayName": "Camelot-OS",
+  "description": "Camelot-OS portable CLI surface (knights + OmniRoute + MCP servers + V4000 cartridges) bound to VS Code commands + MCP client integration.",
+  "version": "1000.0.0",
+  "publisher": "camelot-os",
+  "license": "SEE LICENSE IN ../LICENSE",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "camelot",
+    "knights",
+    "omniroute",
+    "mcp",
+    "cartridge"
+  ],
+  "activationEvents": [
+    "onCommand:camelot.omniroute",
+    "onCommand:camelot.knight",
+    "onCommand:camelot.mcp",
+    "onCommand:camelot.cartridge",
+    "workspaceContains:CLAUDE.md",
+    "workspaceContains:omniroute.json"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "camelot.omniroute",
+        "title": "Camelot: OmniRoute lane (intake intent)",
+        "category": "Camelot"
+      },
+      {
+        "command": "camelot.knight",
+        "title": "Camelot: Knight invoke (one-shot frontier LLM)",
+        "category": "Camelot"
+      },
+      {
+        "command": "camelot.mcp",
+        "title": "Camelot: MCP server inventory",
+        "category": "Camelot"
+      },
+      {
+        "command": "camelot.cartridge",
+        "title": "Camelot: Cartridge emit (V4000 trio)",
+        "category": "Camelot"
+      }
+    ],
+    "configuration": {
+      "title": "Camelot-OS",
+      "properties": {
+        "camelot.pythonPath": {
+          "type": "string",
+          "default": "python",
+          "markdownDescription": "Python interpreter that runs `bin/camelot_portable.py` and `bin/camelot_ide_mcp.py`. Camelot requires Python 3.13+."
+        },
+        "camelot.defaultKnight": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": "sir_helio",
+          "enum": [
+            "sir_boris",
+            "sir_helio",
+            "sir_alex",
+            "sir_sentinel",
+            "sir_codex",
+            "sir_link",
+            "sir_debug",
+            "lady_apis",
+            "sir_mnemo",
+            "sir_forge",
+            "sir_ghost",
+            "lady_mnemosyne"
+          ],
+          "markdownDescription": "Default knight surfaced on the status bar (mirrors KNIGHT_MODEL_MAP ids in `bin/camelot_portable.py`)."
+        }
+      }
+    },
+    "mcpServerDefinitionProviders": [
+      {
+        "id": "camelot-ide",
+        "label": "Camelot-OS IDE/CLI"
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "watch": "tsc -w -p tsconfig.json",
+    "package": "vsce package --no-dependencies",
+    "clean": "rm -rf out"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.96.0",
+    "typescript": "^5.4.0",
+    "@vscode/vsce": "^2.22.0"
+  }
+}

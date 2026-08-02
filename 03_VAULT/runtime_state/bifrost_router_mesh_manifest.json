@@ -1,0 +1,60 @@
+{
+  "schema": "camelot.bifrost-router-mesh/v1",
+  "generated_utc": "2026-07-02T19:05:00Z",
+  "repo_remote": "https://github.com/Cyberdad247/Camelot-Ecosystem.git",
+  "scope": "repo-wide",
+  "bridge": {
+    "name": "Bifrost Bridge",
+    "module": "control_plane/bifrost.py",
+    "ui": "apps/bifrost/public/index.html",
+    "ecosystem_ui": "02_FORGE/apps/omni-eye-dashboard",
+    "components": [
+      "CLIProxyAPI",
+      "OmniRoute",
+      "BitRouter",
+      "9Router",
+      "MultivoiceRouter"
+    ]
+  },
+  "components": {
+    "CLIProxyAPI": {
+      "repo": "https://github.com/Cyberdad247/CLIProxyAPI.git",
+      "head": "f8334be82755113acce3f4a9fb03adc6c1313529",
+      "pushed_at": "2026-07-02T18:32:44Z",
+      "default_base_url": "http://127.0.0.1:8080/v1",
+      "camelot_surface": "control_plane/bifrost.py"
+    },
+    "OmniRoute": {
+      "repo": "https://github.com/Cyberdad247/OmniRoute.git",
+      "head": "b729a8f27364f072c87082e03bb8e122f3d76251",
+      "pushed_at": "2026-07-02T18:33:42Z",
+      "default_base_url": "http://127.0.0.1:20128/v1",
+      "camelot_surface": "control_plane/omniroute_policies.py"
+    },
+    "BitRouter": {
+      "repo": "https://github.com/Cyberdad247/bitrouter.git",
+      "head": "56b2634a94288ed5b9cfc4840e36877a70e82af4",
+      "pushed_at": "2026-07-02T07:53:20Z",
+      "default_base_url": "http://127.0.0.1:8078/v1",
+      "camelot_surface": "control_plane/codex_integration.py"
+    },
+    "9Router": {
+      "repo": "https://github.com/Cyberdad247/9router.git",
+      "head": "0b3c794075dd2f4148f01fbc9cd561c8d6bbdb4c",
+      "pushed_at": "2026-07-02T07:52:31Z",
+      "default_base_url": "http://127.0.0.1:8079/v1",
+      "camelot_surface": "control_plane/codex_integration.py"
+    },
+    "MultivoiceRouter": {
+      "repo": "https://github.com/Cyberdad247/Multivoice-router.git",
+      "head": "57c7c5030628b4630b1e5f0d4cc6ad3358eebe42",
+      "pushed_at": "2026-06-10T20:21:09Z",
+      "default_base_url": "http://127.0.0.1:7680",
+      "camelot_surface": "04_KINETIC/multivoice"
+    }
+  },
+  "cartridge_lanes": {
+    "excalibur": "control_plane/excalibur_preflight.py",
+    "cybertronia": "control_plane/cybertronia_boot.ps1"
+  }
+}

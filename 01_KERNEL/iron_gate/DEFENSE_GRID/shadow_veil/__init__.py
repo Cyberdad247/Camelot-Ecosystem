@@ -7,6 +7,6 @@ Fingerprint-less cyber-defense pipeline:
 
 HUMAN_GATE operations (hosts file amendment) always require approved=True.
 """
-from .shadow_pipeline import ShadowVeil, ShadowStatus, get_shadow_veil
+from .shadow_pipeline import ShadowStatus, ShadowVeil, get_shadow_veil
 
 __all__ = ["ShadowVeil", "ShadowStatus", "get_shadow_veil"]

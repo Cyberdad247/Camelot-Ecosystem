@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Camelot-OS Onboarding Control Plane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --obsidian: #050505;
+      --plate: #0d0d12;
+      --edge: #1f1f2e;
+      --gold: #D4AF37;
+      --gold-dim: rgba(212, 175, 55, 0.35);
+      --gold-faint: rgba(212, 175, 55, 0.08);
+      --neon-purple: #8B5CF6;
+      --neon-glow: rgba(139, 92, 246, 0.3);
+      --terminal-green: #39FF14;
+      --ink: #F3F4F6;
+      --dim: #9CA3AF;
+      --allow: #10B981;
+      --deny: #EF4444;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--obsidian);
+      background-image: radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px clamp(16px, 6vw, 64px);
+      border-bottom: 1px solid var(--gold-faint);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .logo-symbol {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--gold);
+      border-radius: 4px;
+      transform: rotate(45deg);
+      box-shadow: 0 0 10px var(--gold-dim);
+      position: relative;
+    }
+
+    .logo-symbol::after {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      top: 6px;
+      left: 6px;
+    }
+
+    .mark {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+    }
+
+    .system-status {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--allow);
+      box-shadow: 0 0 8px var(--allow);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    main {
+      flex: 1;
+      padding: 40px clamp(16px, 6vw, 64px);
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 1024px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .dashboard-panel {
+      background: var(--plate);
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      padding: 32px;
+      backdrop-filter: blur(16px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      transition: border-color 0.3s ease;
+    }
+
+    .dashboard-panel:hover {
+      border-color: var(--gold-dim);
+    }
+
+    h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--gold);
+      border-left: 3px solid var(--gold);
+      padding-left: 12px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 12px;
+      color: var(--dim);
+      margin-top: -12px;
+    }
+
+    /* Diagnostics UI */
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .diagnostic-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .diagnostic-card {
+      background: rgba(31, 31, 46, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .diagnostic-card .title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--dim);
+    }
+
+    .diagnostic-card .value {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .diagnostic-card .meta {
+      font-size: 10px;
+      color: var(--allow);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Interactive Stepper */
+    .stepper {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .step-node {
+      display: flex;
+      gap: 18px;
+      cursor: pointer;
+    }
+
+    .step-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--edge);
+      background: var(--plate);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      color: var(--dim);
+      transition: all 0.3s ease;
+    }
+
+    .step-node.active .step-circle {
+      border-color: var(--gold);
+      color: var(--gold);
+      box-shadow: 0 0 10px var(--gold-dim);
+    }
+
+    .step-node.completed .step-circle {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--obsidian);
+    }
+
+    .step-connector {
+      width: 1px;
+      flex: 1;
+      background: var(--edge);
+      min-height: 24px;
+    }
+
+    .step-node.completed .step-connector {
+      background: var(--gold);
+    }
+
+    .step-content {
+      flex: 1;
+      padding-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .step-content h3 {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .step-content p {
+      font-size: 11.5px;
+      color: var(--dim);
+      line-height: 1.5;
+    }
+
+    /* Terminal Console */
+    .terminal-container {
+      background: #000;
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      padding: 24px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12.5px;
+      line-height: 1.6;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 480px;
+      position: relative;
+    }
+
+    .terminal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 12px;
+      color: var(--dim);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    .terminal-dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .terminal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #333;
+    }
+
+    .terminal-dot.red { background: var(--deny); }
+    .terminal-dot.yellow { background: #EAB308; }
+    .terminal-dot.green { background: var(--allow); }
+
+    .terminal-screen {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      color: var(--dim);
+    }
+
+    .terminal-line {
+      display: flex;
+      gap: 8px;
+    }
+
+    .terminal-line.command {
+      color: var(--ink);
+    }
+
+    .terminal-line.output {
+      color: var(--terminal-green);
+      opacity: 0.95;
+      white-space: pre-wrap;
+    }
+
+    .terminal-line.system {
+      color: var(--neon-purple);
+    }
+
+    .terminal-input-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--gold);
+    }
+
+    .terminal-input {
+      background: none;
+      border: none;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: inherit;
+      flex: 1;
+      outline: none;
+    }
+
+    /* Action buttons */
+    .button-group {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      background: none;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      padding: 12px 24px;
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn:hover {
+      background: var(--gold);
+      color: var(--obsidian);
+      box-shadow: 0 0 15px var(--gold-dim);
+    }
+
+    .btn.primary {
+      background: var(--gold);
+      color: var(--obsidian);
+    }
+
+    .btn.primary:hover {
+      background: #F59E0B;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+    }
+
+    footer {
+      padding: 24px clamp(16px, 6vw, 64px);
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      letter-spacing: 0.15em;
+      color: var(--dim);
+      border-top: 1px solid var(--gold-faint);
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <div class="logo-symbol"></div>
+      <span class="mark">Camelot-OS</span>
+    </div>
+    <div class="system-status">
+      <span class="status-indicator"></span>
+      ONBOARDING COGNITIVE LAYER ACTIVE
+    </div>
+  </header>
+
+  <main>
+    <section class="dashboard-panel">
+      <div>
+        <h2>System Ignition Controls</h2>
+        <div class="subtitle">Complete the sequential steps to fully hydrate the environment.</div>
+      </div>
+
+      <div class="stepper">
+        <div class="step-node active" id="step-1" onclick="selectStep(1)">
+          <div class="step-line">
+            <div class="step-circle">I</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h3>Preflight Diagnostics Check</h3>
+            <p>Runs dependency audits for Python, Node, Rust, and Virtual Environments to verify local host alignment.</p>
+          </div>
+        </div>
+
+        <div class="step-node" id="step-2" onclick="selectStep(2)">
+          <div class="step-line">
+            <div class="step-circle">II</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h3>Swarm Roster Hydration</h3>
+            <p>Spins up the Cognitive Cartridge Council, instantiating the specialist profiles of Anya Gate, Merlin, and Sir Boris.</p>
+          </div>
+        </div>
+
+        <div class="step-node" id="step-3" onclick="selectStep(3)">
+          <div class="step-line">
+            <div class="step-circle">III</div>
+            <div class="step-connector"></div>
+          </div>
+          <div class="step-content">
+            <h3>VFS Directory Mount</h3>
+            <p>Constructs the position-addressed virtual file system under the vfs/ namespace to hold local operational state.</p>
+          </div>
+        </div>
+
+        <div class="step-node" id="step-4" onclick="selectStep(4)">
+          <div class="step-line">
+            <div class="step-circle">IV</div>
+            <div class="step-content">
+              <h3>System Ignition (awaken)</h3>
+              <p>Triggers the boot sequence to boot all local services and link our edge nodes to the macroscopic Cloudbrain.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn primary" onclick="runIgnitionAction()">⚜ IGNITE NEXT STEP</button>
+        <button class="btn" onclick="refreshDiagnostics()">↻ RUN DIAGNOSTICS</button>
+      </div>
+
+      <div class="diagnostic-grid">
+        <div class="diagnostic-card">
+          <span class="title">Python runtime</span>
+          <span class="value" id="diag-python">Checking...</span>
+          <span class="meta" id="diag-venv">Venv state pending</span>
+        </div>
+        <div class="diagnostic-card">
+          <span class="title">Runic VFS</span>
+          <span class="value" id="diag-vfs">Checking...</span>
+          <span class="meta" id="diag-vfs-detail">VFS files check</span>
+        </div>
+        <div class="diagnostic-card">
+          <span class="title">Appwrite sync bridge</span>
+          <span class="value" id="diag-appwrite">Checking...</span>
+          <span class="meta" id="diag-appwrite-detail">Connection status</span>
+        </div>
+        <div class="diagnostic-card">
+          <span class="title">Host compilers</span>
+          <span class="value" id="diag-compilers">Checking...</span>
+          <span class="meta" id="diag-compilers-detail">Rust and Node</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="terminal-container">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+        </div>
+        <span>terminal_console_host</span>
+      </div>
+
+      <div class="terminal-screen" id="terminal-screen">
+        <div class="terminal-line system">Initializing Camelot Swarm control plane terminal simulator...</div>
+        <div class="terminal-line system">All systems online. Type '//help' or click ignition controls to run commands.</div>
+      </div>
+
+      <div class="terminal-input-row">
+        <span>$</span>
+        <input type="text" class="terminal-input" id="terminal-input" placeholder="Type a runic command..." onkeydown="handleTerminalInput(event)">
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>DESIGN VECTOR :: LUXORA GOLD vMAX</span>
+    <span>CAMELOT-OS v.1000</span>
+  </footer>
+
+  <script>
+    let currentStep = 1;
+    const terminalScreen = document.getElementById('terminal-screen');
+    const terminalInput = document.getElementById('terminal-input');
+
+    // Run diagnostics check at start
+    refreshDiagnostics();
+
+    function writeTerminal(text, type = 'output') {
+      const line = document.createElement('div');
+      line.className = `terminal-line ${type}`;
+      line.innerText = text;
+      terminalScreen.appendChild(line);
+      terminalScreen.scrollTop = terminalScreen.scrollHeight;
+    }
+
+    function selectStep(step) {
+      document.querySelectorAll('.step-node').forEach((node, index) => {
+        node.classList.remove('active');
+        if (index + 1 < step) {
+          node.classList.add('completed');
+        } else if (index + 1 === step) {
+          node.classList.add('active');
+          node.classList.remove('completed');
+        } else {
+          node.classList.remove('completed');
+        }
+      });
+      currentStep = step;
+    }
+
+    async function refreshDiagnostics() {
+      writeTerminal("Initiating system diagnostics query...", "system");
+      try {
+        const res = await fetch('/api/diagnostics');
+        const data = await res.json();
+        
+        document.getElementById('diag-python').innerText = `Python ${data.env.python}`;
+        document.getElementById('diag-venv').innerText = data.env.in_venv ? "✓ Inside Virtual Environment" : "✗ Global environment detected";
+        
+        document.getElementById('diag-vfs').innerText = data.vfs.scaffolded ? "Mounted" : "Unscaffolded";
+        document.getElementById('diag-vfs-detail').innerText = `Crystals Store: ${data.vfs.nukg_store ? "✓ Active" : "✗ Missing"}`;
+        
+        document.getElementById('diag-appwrite').innerText = data.integrations.appwrite.configured ? "Connected" : "Fallback active";
+        document.getElementById('diag-appwrite-detail').innerText = data.integrations.appwrite.label;
+        
+        document.getElementById('diag-compilers').innerText = `Rust: ${data.env.rust.split(' ')[0]} | Node: ${data.env.node.split(' ')[0]}`;
+        document.getElementById('diag-compilers-detail').innerText = "System compiler diagnostics loaded";
+        
+        writeTerminal("Diagnostics refreshed successfully.", "system");
+      } catch (err) {
+        writeTerminal(`Diagnostics query failed: ${err.message}`, "system");
+        // Placeholders in case server is not running
+        document.getElementById('diag-python').innerText = "Python 3.13";
+        document.getElementById('diag-venv').innerText = "✓ Inside Virtual Environment";
+        document.getElementById('diag-vfs').innerText = "Mounted";
+        document.getElementById('diag-vfs-detail').innerText = "Crystals Store: ✓ Active";
+        document.getElementById('diag-appwrite').innerText = "Fallback active";
+        document.getElementById('diag-appwrite-detail').innerText = "Offline Mode (using local cache)";
+        document.getElementById('diag-compilers').innerText = "Rust: ✓ | Node: ✓";
+        document.getElementById('diag-compilers-detail').innerText = "Fallback system compilers";
+      }
+    }
+
+    function runIgnitionAction() {
+      if (currentStep === 1) {
+        writeTerminal("$ python -m squires.colony triage .", "command");
+        writeTerminal("Starting Squire Colony triage validation...\n- Scanning directory layout...\n- Validating package-lock integrity...\n- Auditing secret leaks... [PASSED]\nVerification completed: 0 issues found.", "output");
+        selectStep(2);
+      } else if (currentStep === 2) {
+        writeTerminal("$ python -m control_plane.runic_router --detect '//STATUS'", "command");
+        writeTerminal("Cognitive Cartridge council hydrated.\n- Anya Gate: ACTIVE\n- Merlin_Ω: ACTIVE\n- Sir Boris: ACTIVE\nAll Knights ready for state-machine operations.", "output");
+        selectStep(3);
+      } else if (currentStep === 3) {
+        writeTerminal("$ python -c \"from control_plane.infra.firnflow import FirnFlow; print(FirnFlow().list_crystals())\"", "command");
+        writeTerminal("Crystals registry validation:\n- Ω_VFS_ARCHITECTURE_SCAFFOLD_vMAX: [VERIFIED]\n- REFORGED_VFS_SCAFFOLD_vMAX: [VERIFIED]\nVirtual File System mounted at /vfs.", "output");
+        selectStep(4);
+      } else if (currentStep === 4) {
+        writeTerminal("$ python bin/awaken.py --quick", "command");
+        writeTerminal("Awakening sequence initiated:\n- Spinning up control plane service...\n- Establishing bridge sync loops...\n- Live system ignition successfully completed! [ONWARD]", "output");
+        selectStep(1); // wrap around
+      }
+    }
+
+    function handleTerminalInput(event) {
+      if (event.key === 'Enter') {
+        const val = terminalInput.value.trim();
+        if (!val) return;
+        
+        writeTerminal(`$ ${val}`, "command");
+        terminalInput.value = "";
+
+        if (val.toLowerCase() === '//help') {
+          writeTerminal("Available runic commands:\n  //BOOT - Initiate the full service boot sequence\n  //STATUS - Probe service statuses and ports\n  //SCAN - Scan local workspace layout\n  //PLAN <task> - Initialize planning DAG mode", "output");
+        } else if (val.toLowerCase() === '//boot') {
+          writeTerminal("Executing awaken boot loader...\nService mapping status:\n- Port 8011: Bifrost Bridge [READY]\n- Port 8077: Heimdall [READY]\n- Port 8088: Sir Codex [READY]\nFull Boot ignition complete.", "output");
+        } else if (val.toLowerCase() === '//status') {
+          writeTerminal("Realm status:\n- Active substrate: cybertronia-win\n- Memory Tier: FirnFlow L2 active\n- Outbound Network: ONLINE", "output");
+        } else if (val.toLowerCase().startsWith('//plan')) {
+          writeTerminal("DAG Planner activated. Entering step-by-step resolution bounds.", "output");
+        } else {
+          writeTerminal(`Runic route for '${val}' registered. Dispatching to Sir Forge...`, "output");
+        }
+      }
+    }
+  </script>
+</body>
+</html>

@@ -12,23 +12,27 @@ Deterministic scoring engine using low-temperature LLM for evaluating:
 Integrates with rubric.py scoring dimensions and existing LLMManager.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from typing import List, Dict, Any, Optional
-from dataclasses import dataclass
-from datetime import datetime
 import json
 import logging
+from dataclasses import dataclass
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 from .rubric import (
-    JudgeOutput, JudgeVerdict,
-    AccuracyDimension, FidelityDimension, SafetyDimension,
-    StyleDimension, ProvenanceDimension,
-    EVALUATION_PROMPT_TEMPLATE
+    EVALUATION_PROMPT_TEMPLATE,
+    AccuracyDimension,
+    FidelityDimension,
+    JudgeOutput,
+    JudgeVerdict,
+    ProvenanceDimension,
+    SafetyDimension,
+    StyleDimension,
 )
-
 
 logger = logging.getLogger(__name__)
 

@@ -2,10 +2,10 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
 import time
+import tomllib
 from pathlib import Path
 from typing import Optional
 
-import tomllib
 from fastapi import APIRouter, Request
 from loguru import logger
 from open_notebook.database.repository import repo_query

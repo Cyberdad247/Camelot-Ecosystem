@@ -24,7 +24,7 @@ class AetherEngine:
         registry_path: str = "01_KERNEL/config/mcp_registry.json",
     ):
         # Resolve absolute paths based on CWD
-        base_dir = os.getcwd()
+        os.getcwd()
         if not os.path.exists(config_path):
             # Try to find it if running from inside a subdir
             if os.path.exists(os.path.join("..", config_path)):

@@ -55,13 +55,13 @@ def demo_query(bridge, question: str, top_k: int = 3):
     
     # Display Merlin's generated answer
     if result['answer']:
-        print(f"\n🧙‍♂️ MERLIN'S ANSWER:")
+        print("\n🧙‍♂️ MERLIN'S ANSWER:")
         print("-" * 70)
         print(result['answer'])
         print("-" * 70)
         
         # Display metadata
-        print(f"\n📊 METADATA:")
+        print("\n📊 METADATA:")
         print(f"  - Generator: {result['metadata']['generator']}")
         print(f"  - Retriever: {result['metadata']['retriever']}")
         print(f"  - Total Results: {result['metadata']['total_results']}")

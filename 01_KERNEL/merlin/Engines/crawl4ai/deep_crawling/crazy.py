@@ -31,7 +31,6 @@ from urllib.parse import urlparse
 import mmh3
 import numpy as np
 from bitarray import bitarray
-
 from crawl4ai import CacheMode
 from crawl4ai.async_configs import CrawlerRunConfig
 from crawl4ai.async_webcrawler import AsyncWebCrawler
@@ -194,8 +193,8 @@ class DeepCrawlDecorator:
 
 
 async def collect_results(url, crawler, config):
-    if id(getattr(crawler, "arun")) != id(getattr(crawler, "original_arun")):
-        setattr(crawler, "arun", getattr(crawler, "original_arun"))
+    if id(crawler.arun) != id(crawler.original_arun):
+        crawler.arun = crawler.original_arun
 
     ret = crawler.arun(url, config=config)
     # If arun is an async generator, iterate over it
@@ -208,8 +207,8 @@ async def collect_results(url, crawler, config):
 
 async def collect_many_results(url, crawler, config):
     # Replace back arun to its original implementation
-    if id(getattr(crawler, "arun")) != id(getattr(crawler, "original_arun")):
-        setattr(crawler, "arun", getattr(crawler, "original_arun"))
+    if id(crawler.arun) != id(crawler.original_arun):
+        crawler.arun = crawler.original_arun
     ret = crawler.arun_many(url, config=config)
     # If arun is an async generator, iterate over it
     if inspect.isasyncgen(ret):
@@ -414,7 +413,7 @@ async def main():
 
     async with AsyncWebCrawler() as crawler:
         run_decorator = DeepCrawlDecorator(crawler)
-        setattr(crawler, "original_arun", crawler.arun)
+        crawler.original_arun = crawler.arun
         crawler.arun = run_decorator(crawler.arun)
         start_time = time.perf_counter()
         async for result in crawler.arun("https://docs.crawl4ai.com", config=config):

@@ -1,0 +1,86 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    "tsconfig.base.json",
+    ".npmrc"
+  ],
+  "globalEnv": [
+    "NODE_ENV",
+    "NEXT_PUBLIC_*",
+    "EXPO_PUBLIC_*",
+    "SUPABASE_URL",
+    "SUPABASE_ANON_KEY",
+    "GOOGLE_API_KEY",
+    "FIREBASE_*"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [
+        ".next/**",
+        "dist/**",
+        "build/**",
+        "!.next/cache/**"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "!*.test.*",
+        "!tests/**",
+        "!**/*.test.*",
+        "!**/*.spec.*"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "lint": {},
+    "test": {
+      "dependsOn": ["build"],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "*.test.*",
+        "tests/**",
+        "**/*.test.*",
+        "**/*.spec.*",
+        "vitest.config.*",
+        "jest.config.*"
+      ],
+      "outputs": ["coverage/**"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "clean": {
+      "cache": false
+    },
+    "cargo:build": {
+      "inputs": ["src/**", "Cargo.toml", "Cargo.lock"],
+      "cache": true
+    },
+    "cargo:test": {
+      "dependsOn": ["cargo:build"],
+      "inputs": ["src/**", "tests/**", "Cargo.toml", "Cargo.lock"],
+      "cache": true
+    },
+    "cargo:lint": {
+      "inputs": ["src/**", "Cargo.toml", "Cargo.lock"],
+      "cache": true
+    },
+    "go:build": {
+      "outputs": ["bin/**"],
+      "inputs": ["**/*.go", "go.mod", "go.sum"],
+      "cache": true
+    },
+    "go:test": {
+      "dependsOn": ["go:build"],
+      "inputs": ["**/*.go", "**/*_test.go", "go.mod", "go.sum"],
+      "cache": true
+    },
+    "go:lint": {
+      "inputs": ["**/*.go", "go.mod", "go.sum"],
+      "cache": true
+    }
+  }
+}

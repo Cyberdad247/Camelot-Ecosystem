@@ -7,12 +7,12 @@ Maps agents and cartridges into a queryable capability lattice.
 Used by the Merger Engine to identify the best agents for a specific goal.
 """
 
-import os
 import json
 import logging
-from typing import Dict, List, Any, Optional, Set
-from pydantic import BaseModel
+import os
+from typing import Any, Dict, List, Optional, Set
 
+from pydantic import BaseModel
 
 logger = logging.getLogger(__name__)
 

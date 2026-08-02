@@ -3,10 +3,9 @@
 import base64
 import os
 
+import modal
 import requests
 from pydantic import BaseModel
-
-import modal
 
 # 1. THE IMAGE (Must include GitPython)
 app = modal.App("excalibur-bridge")

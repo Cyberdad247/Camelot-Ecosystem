@@ -9,10 +9,10 @@ and self-optimization trials.
 Based on Project Chimera specifications.
 """
 
-from typing import List, Optional
-from pydantic import BaseModel, Field
 from enum import Enum
+from typing import List, Optional
 
+from pydantic import BaseModel, Field
 
 # =========================================
 # SCORING DIMENSIONS

@@ -1,0 +1,187 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+#
+# docker-compose.appwrite.yml
+#
+# PR #1 of NOTES_MNEMOSYNE_WIRING.md (2026-07-14, freebuff).
+# Self-host Appwrite 1.6.5 LTS for Lady Mnemosyne's long-term memory.
+# Bifrost Bridge egresses to Appwrite via `appwrite_net` (private bridge, no
+# host port collision with the Camelot-OS port map).
+#
+# Run:
+#   bin/appwrite_bootstrap.sh
+#
+# Tear-down (full reset, preserves /opt/appwrite_runtime/.env):
+#   docker compose -f docker-compose.appwrite.yml down -v
+#
+# Backups:
+#   docker exec camelot-appwrite-mariadb sh -c \
+#     'mysqldump --all-databases --single-transaction --quick' \
+#     > /opt/appwrite_runtime/backups/mariadb-$(date +%F).sql
+#
+# Rollback (if PR #1 breaks the existing Camelot-OS port map):
+#   docker compose -f docker-compose.appwrite.yml down -v
+#   # No .py files touched — zero blast radius.
+---
+
+name: camelot-appwrite-stack
+
+services:
+  # ── Main Appwrite API + scheduler + realtime ──────────────────────────
+  appwrite:
+    image: appwrite/appwrite:1.6.5
+    container_name: camelot-appwrite
+    restart: unless-stopped
+    networks:
+      - appwrite_net
+    environment:
+      _APP_ENV: ${_APP_ENV:-production}
+      _APP_OPENSSL_KEY_DIFFICULTY: ${_APP_OPENSSL_KEY_DIFFICULTY:-8}
+      _APP_REALTIME_HOST: ${_APP_REALTIME_HOST:-appwrite.local}
+      _APP_DOMAIN: ${APPWRITE_DOMAIN:-appwrite.local}
+      _APP_DOMAIN_TARGET: ${_APP_DOMAIN_TARGET:-appwrite}
+      _APP_FORCE_HTTPS: ${_APPWRITE_FORCE_HTTPS:-false}
+      _APP_OPTIONS_FORCE_HTTPS: ${APPWRITE_FORCE_HTTPS_OPTIONS:-}
+
+      _APP_DB_HOST: ${APPWRITE_DB_HOST:-mariadb}
+      _APP_DB_PORT: ${APPWRITE_DB_PORT:-3306}
+      _APP_DB_USER: ${APPWRITE_DB_USER:-appwrite}
+      _APP_DB_PASS: ${APPWRITE_DB_PASS}
+      _APP_DB_SCHEMA: ${APPWRITE_DB_SCHEMA:-appwrite}
+
+      _APP_REDIS_HOST: ${APPWRITE_REDIS_HOST:-redis}
+      _APP_REDIS_PORT: ${APPWRITE_REDIS_PORT:-6379}
+      _APP_REDIS_USER: ${APPWRITE_REDIS_USER:-}
+      _APP_REDIS_PASS: ${APPWRITE_REDIS_PASS:-}
+
+      _APP_STORAGE_DEVICE: ${APPWRITE_STORAGE_DEVICE:-MinIO}
+      _APP_STORAGE_MINIO_ENDPOINT: ${APPWRITE_STORAGE_MINIO_ENDPOINT:-minio}
+      _APP_STORAGE_MINIO_ACCESS_KEY: ${APPWRITE_STORAGE_MINIO_ACCESS_KEY}
+      _APP_STORAGE_MINIO_SECRET: ${APPWRITE_STORAGE_MINIO_SECRET}
+      _APP_STORAGE_MINIO_REGION: ${APPWRITE_STORAGE_MINIO_REGION:-us-east-1}
+      _APP_STORAGE_MINIO_BUCKET: ${APPWRITE_STORAGE_MINIO_BUCKET:-appwrite}
+
+      _APP_INFLUXDB_HOST: ${APPWRITE_INFLUXDB_HOST:-influxdb}
+      _APP_INFLUXDB_PORT: ${APPWRITE_INFLUXDB_PORT:-8086}
+
+      _APP_SMTP_HOST: ${APPWRITE_SMTP_HOST:-maildev}
+      _APP_SMTP_PORT: ${APPWRITE_SMTP_PORT:-1025}
+      _APP_SMTP_SECURE: ${APPWRITE_SMTP_SECURE:-}
+      _APP_SMTP_USERNAME: ${APPWRITE_SMTP_USERNAME:-}
+      _APP_SMTP_PASSWORD: ${APPWRITE_SMTP_PASSWORD:-}
+
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.appwrite-secure.entrypoints=https"
+      - "traefik.http.routers.appwrite-secure.rule=Host(`${APPWRITE_DOMAIN}`)"
+      - "traefik.http.routers.appwrite-secure.tls=true"
+      - "traefik.http.routers.appwrite-secure.tls.certresolver=letsencrypt"
+      - "traefik.http.services.appwrite-secure.loadbalancer.server.port=80"
+
+  # ── MariaDB 10.x — primary data store ─────────────────────────────────
+  mariadb:
+    image: mariadb:10.11
+    container_name: camelot-appwrite-mariadb
+    restart: unless-stopped
+    networks:
+      - appwrite_net
+    environment:
+      MYSQL_ROOT_PASSWORD: ${APPWRITE_DB_ROOT_PASS}
+      MYSQL_DATABASE: ${APPWRITE_DB_SCHEMA:-appwrite}
+      MYSQL_USER: ${APPWRITE_DB_USER:-appwrite}
+      MYSQL_PASSWORD: ${APPWRITE_DB_PASS}
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  # ── Redis 7 — cache + pubsub + rate-limit ─────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: camelot-appwrite-redis
+    restart: unless-stopped
+    networks:
+      - appwrite_net
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ── MinIO — S3-compatible storage bucket ─────────────────────────────
+  minio:
+    image: minio/minio:latest
+    container_name: camelot-appwrite-minio
+    restart: unless-stopped
+    networks:
+      - appwrite_net
+    environment:
+      MINIO_ACCESS_KEY: ${APPWRITE_STORAGE_MINIO_ACCESS_KEY}
+      MINIO_SECRET_KEY: ${APPWRITE_STORAGE_MINIO_SECRET}
+    command: ["server", "/data", "--console-address", ":9001"]
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  # ── Traefik — reverse-proxy with TLS termination ──────────────────────
+  traefik:
+    image: traefik:v3.1
+    container_name: camelot-appwrite-traefik
+    restart: unless-stopped
+    networks:
+      - appwrite_net
+    ports:
+      - "80:80"
+      - "443:443"
+    command:
+      - "--providers.docker=true"
+      - "--providers.docker.exposedby=false"
+      - "--entrypoints.http.address=:80"
+      - "--entrypoints.https.address=:443"
+      - "--entrypoints.http.http.redirections.entryPoint.to=https"
+      - "--entrypoints.http.http.redirections.entryPoint.scheme=https"
+      - "--certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL:-ops@camelot.local}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=http"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-acme:/letsencrypt
+
+networks:
+  appwrite_net:
+    driver: bridge
+    name: camelot_appwrite_net
+
+volumes:
+  mariadb-data:
+    name: camelot_appwrite_mariadb_data
+  redis-data:
+    name: camelot_appwrite_redis_data
+  minio-data:
+    name: camelot_appwrite_minio_data
+  traefik-acme:
+    name: camelot_appwrite_traefik_acme

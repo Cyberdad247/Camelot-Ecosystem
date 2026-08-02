@@ -1,0 +1,10 @@
+## TOON Spec v3.3 -- REFORGED_VFS_SCAFFOLD_vMAX
+Context: "camelot-os.dev/ukg/v4000/vfs_master_scaffold"
+Type: "Sovereign_MetaCompiler_VFS_Forge"
+ID: "REFORGED_VFS_SCAFFOLD_vMAX"
+Mod1_Floorplan: "systeminstructions.md|blueprint.md|PROVENANCE_LEDGER.md"
+Mod2_Execution: "preflight.md|workflows.md|protocols.md"
+Mod3_Disclosure: "rosters.md|.camelot/knights/|skills/"
+Rune_Ignite: "⚡|//IGNITE_PREFLIGHT_SEQUENCE"
+Governance: "Enforce ANYA_FIRST_LAW & ANYA_LAST_LAW. Isomorphic Active Data Distillation"
+Status: "REFORGED"

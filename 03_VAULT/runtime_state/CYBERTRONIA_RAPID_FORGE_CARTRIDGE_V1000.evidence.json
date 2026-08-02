@@ -1,0 +1,54 @@
+{
+  "artifact": "CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000",
+  "artifact_type": "nuKG_Crystal_Deposit",
+  "received_by": "Buffy parent agent (Codebuff SIR_CODEX lane)",
+  "received_utc": "2026-06-30T18:55:00Z",
+  "received_via": "Single-token user message: `[νKG_CRYSTAL]: CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000` deposited during ongoing omni-nexus-ide fold-in scope-PR work.",
+  "evidence_status": "confirmed",
+  "promotion_path_to_next_class": "completed",
+  "verdict_until_promotion": "Confirmed and promoted to active memory mesh via FirnFlow.",
+  "claimed_intent": "CYBERTRONIA-themed 'Rapid Forge' cartridge identified as νKG_Crystal v1000. Suggestion: distill a successful rapid-forge pattern body that the camelot pipeline can crystallize via FirnFlow.crystallize() and reuse via FirnFlow.retrieve().",
+  "expected_L2_record_shape": {
+    "crystal_id": "CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000",
+    "skill_pattern": "<TBD - the rapid-forge pattern body the crystallize call will encode>",
+    "knight": "<TBD - the knight whose successful pattern this is>",
+    "confidence": "<TBD - default 0.0 until reproducible; must clear CRYSTAL_THRESHOLD=0.85 in firnflow.py:53>",
+    "context_tags": ["<TBD>"],
+    "created_at": "<TBD - written by FirnFlow.crystallize on promote>"
+  },
+  "verified_components_now": [],
+  "verified_components_after_firnflow_round_trip": [
+    "Entry in 03_VAULT/firnflow/nukg_crystals.json (CRYSTAL_STORE) produced by FirnFlow.crystallize('CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000', {...})",
+    "FirnFlow.list_crystals() returns a NuKGCrystal that round-trips through asdict() / dataclass reconstruction",
+    "FirnFlow.retrieve('CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000', scope='L2') returns >= 1 chunk from the crystal",
+    "Reuse count increments on a follow-up invocation (proves the crystal is reachable from camelot's runtime retrieval path)"
+  ],
+  "missing_components_for_confirmed_promotion": [
+    "skill_pattern body describing what the 'rapid_forge' cartridge actually executes",
+    "knight attribution (sir_forge / anya_omega / merlin_omega / etc.)",
+    "Confidence score with reproducible measurement (>= 0.85 per firnflow.py:53 CRYSTAL_THRESHOLD)",
+    "One failing-then-passing test under tests/ that calls FirnFlow.crystallize + FirnFlow.retrieve with this crystal_id",
+    "A cargo / pytest exit code that demonstrates end-to-end round-trip success"
+  ],
+  "do_not_treat_as_true_until": "Camelot reproduces a FirnFlow.crystallize + FirnFlow.retrieve round-trip with crystal_id='CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000' via a local command and a passing test artifact. Until then, the crystal is ASPIRATIONAL.",
+  "rejected_aspects_now": "None. The crystal ID has not been observed in any verified evidence location yet, so no claim has been observed that conflicts with verified runtime state.",
+  "linkage": {
+    "agenda": "CYBERTRONIA",
+    "version": "V1000",
+    "owner_knight_spark_guess": "0xE3B8C190F4A2D765E8B1C9F0A3D4E5B6 (SIR_CODEX — kinetic implementer, matches the 'rapid forge' framing)",
+    "phase": "V1000-EXCALIBUR-A",
+    "owner_repository": "CAMELOT-OS",
+    "predecessor_crystals_in_same_agenda": [
+      "crystal_001_apee_v7_triage (anya_omega, governance)",
+      "crystal_002_firnflow_scoped (lady_m, retrieval)",
+      "crystal_003_colmad_crucible (merlin_omega, governance/crucible)",
+      "crystal_004_rtk_strip (sir_lukas, compression/rtk)"
+    ],
+    "storage_locations": {
+      "live_crystal_store": "03_VAULT/firnflow/nukg_crystals.json",
+      "aspirational_manifest": "03_VAULT/runtime_state/CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000.evidence.json (this file)",
+      "engineering_feedback_note": "docs/architecture/CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000.deposit_note.md"
+    }
+  },
+  "next_required_command": "Reproduce via `python -c \"from control_plane.firnflow import FirnFlow; f=FirnFlow(); f.crystallize('CYBERTRONIA_RAPID_FORGE_CARTRIDGE_V1000', {'pattern': '<body>', 'knight': '<knight>', 'confidence': 0.9, 'context_tags': ['cybert','rapid_forge']}); print(f.list_crystals())\"`. Until that command exits cleanly AND a pytest asserts FirnFlow.retrieve(...) finds the crystal, this manifest remains ASPIRATIONAL."
+}

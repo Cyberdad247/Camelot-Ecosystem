@@ -1,0 +1,49 @@
+name: 'PNPM Install'
+description: 'Setup Node.js, pnpm, cache, and install dependencies for a pnpm workspace project'
+
+inputs:
+  working-directory:
+    description: 'Path to the pnpm workspace root (e.g., 02_FORGE)'
+    required: true
+  pnpm-lock-path:
+    description: 'Literal path to pnpm-lock.yaml for cache hashing (e.g., 02_FORGE/pnpm-lock.yaml)'
+    required: true
+  node-version:
+    description: 'Node.js version'
+    default: '20'
+  pnpm-version:
+    description: 'pnpm version'
+    default: '9'
+  install-args:
+    description: 'Extra args for pnpm install (e.g., --filter pocket-squire...)'
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version }}
+
+    - name: Get pnpm store directory
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+    - uses: actions/cache@v4
+      name: Setup pnpm cache
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-${{ hashFiles(inputs.pnpm-lock-path) }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-
+
+    - name: Install dependencies
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: pnpm install ${{ inputs.install-args }}

@@ -6,11 +6,12 @@ Test Suite for LLM-as-a-Judge Engine
 Validates judge scoring, batch evaluation, caching, and rubric integration.
 """
 
-import sys
 import os
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from llm_judge import LLMJudge, JudgeRequest, BatchJudgeRequest
+from llm_judge import BatchJudgeRequest, JudgeRequest, LLMJudge
 from rubric import JudgeVerdict
 
 

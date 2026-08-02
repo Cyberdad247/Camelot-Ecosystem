@@ -71,8 +71,8 @@ def _load_speecht5() -> Optional[Any]:
     pip install transformers datasets
     """
     try:
-        from transformers import SpeechT5Processor, SpeechT5ForTextToSpeech, SpeechT5HifiGan  # type: ignore
         from datasets import load_dataset  # type: ignore
+        from transformers import SpeechT5ForTextToSpeech, SpeechT5HifiGan, SpeechT5Processor  # type: ignore
 
         processor = SpeechT5Processor.from_pretrained("microsoft/speecht5_tts")
         model     = SpeechT5ForTextToSpeech.from_pretrained("microsoft/speecht5_tts")
@@ -114,7 +114,7 @@ def _load_mms() -> Optional[Any]:
     pip install transformers
     """
     try:
-        from transformers import VitsModel, AutoTokenizer  # type: ignore
+        from transformers import AutoTokenizer, VitsModel  # type: ignore
         model_id = "facebook/mms-tts-eng"
         tokenizer = AutoTokenizer.from_pretrained(model_id)
         model = VitsModel.from_pretrained(model_id)

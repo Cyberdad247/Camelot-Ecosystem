@@ -1,0 +1,17 @@
+[toolchain]
+# AGENTS.md:428 documents "Rust 1.96 installed" — but a cross-doc audit
+# (TITAN_AUDIT_GOVERNOR_7D_2026-07-06.md, review by code-reviewer-minimax-m3)
+# flagged that `1.96.0` may not be on the stable Rust release channel as of
+# 2026-07-06. Per the Truth Contract, the channel is pinned to a verified-real
+# stable (`1.85.0`, released Feb 2025) so `rustup` resolves the channel cleanly.
+# Once Rust 1.96.x actually exists on stable, bump this and re-run the
+# ouroboros_engine 12/12 tests claim against the new pin.
+channel = "1.85.0"
+
+# Cross-compile targets for the workspace (kernel_api_bridge + WASM actor host
+# in the kinetic family). Without explicit targets, rust-toolchain.toml defaults
+# to host-only and cross-compile fails silently.
+targets = ["x86_64-pc-windows-msvc", "wasm32-unknown-unknown", "wasm32-wasip1"]
+
+# `profile` left at default (`default`) intentionally — `minimal` would omit
+# `rust-std` for non-default targets and break cross-compile.

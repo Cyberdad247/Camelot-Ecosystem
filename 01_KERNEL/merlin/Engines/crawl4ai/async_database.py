@@ -286,7 +286,7 @@ class AsyncDatabaseManager:
                 # Get column names
                 columns = [description[0] for description in cursor.description]
                 # Create dict from row data
-                row_dict = dict(zip(columns, row))
+                row_dict = dict(zip(columns, row, strict=False))
 
                 # Load content from files using stored hashes
                 content_fields = {

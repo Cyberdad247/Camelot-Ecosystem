@@ -1,0 +1,33 @@
+# camelot-kickbox.service — Camelot-OS Kickbox Audio Kernel (cgroups v2 capped)
+# Written on a Windows dev host as a TEMPLATE. Operator copies this verbatim to
+# /etc/systemd/system/camelot-kickbox.service on the Linux client node.
+# Runtime paths (/opt/camelot/...) here match the production layout on that node.
+
+[Unit]
+Description=Camelot-OS Kickbox Audio Kernel
+After=network.target
+
+[Service]
+Type=simple
+User=camelot
+WorkingDirectory=/opt/camelot/system/kickbox-audio
+Environment="KICKBOX_MODE=server"
+Environment="STT_MODEL=whisper-tiny"
+Environment="TTS_MODEL=coqui-kba-voice"
+Environment="PORT=8001"
+# Secrets (operator tokens, API keys) are sourced from /etc/camelot/secrets.env
+# (mode 0600, owner camelot). The leading '-' makes the file optional at boot;
+# systemd starts even if it's missing and the operator can populate it later.
+EnvironmentFile=-/etc/camelot/secrets.env
+ExecStart=/opt/camelot/system/kickbox-audio/.venv/bin/python main.py
+
+# 4GB Scarcity Protocol Enforcement via cgroups v2
+MemoryMax=2G
+MemorySwapMax=512M
+CPUWeight=80
+
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=multi-user.target

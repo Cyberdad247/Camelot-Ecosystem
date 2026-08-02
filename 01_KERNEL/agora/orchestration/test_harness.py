@@ -7,10 +7,12 @@ Simulates and scores multi-expert debates for objective validation.
 
 import asyncio
 import json
-from typing import List, Dict, Any
 from pathlib import Path
+from typing import Any, Dict, List
+
 from Engines.merlin_llm import MerlinLLM
 from Engines.ukg_runtime import UKGRuntime
+
 
 class PersonaTestHarness:
     """
@@ -90,7 +92,7 @@ class PersonaTestHarness:
         return min(1.0, score)
 
     def _save_report(self, report: Dict[str, Any]):
-        timestamp = Path("03_VAULT/99_HISTORY/last_test_run.txt")
+        Path("03_VAULT/99_HISTORY/last_test_run.txt")
         # Save detailed JSON report
         report_id = os.urandom(4).hex().upper()
         file_path = self.test_reports / f"PROMPT_WAR_{report_id}.json"

@@ -5,10 +5,11 @@ SOUL_BINDER: Phase 4 Neural Enrichment
 Generates and injects Proteus MPI vectors into Knight configurations.
 """
 
-import os
 import json
-import requests
 import logging
+import os
+
+import requests
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("soul_binder")

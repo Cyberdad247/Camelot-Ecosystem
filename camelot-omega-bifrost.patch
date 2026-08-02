@@ -1,0 +1,1150 @@
+diff --git a/components/GenesisTerminal.tsx b/components/GenesisTerminal.tsx
+index 98b940d..b90ea3f 100644
+--- a/components/GenesisTerminal.tsx
++++ b/components/GenesisTerminal.tsx
+@@ -1,9 +1,9 @@
+ 'use client';
+ 
+ import React, { useState, useEffect } from 'react';
+-import { Press_Start_2P } from 'next/font/google';
+-
+-const pressStart2P = Press_Start_2P({ weight: '400', subsets: ['latin'] });
++// Vite-safe font token (next/font is Next.js-only). Load 'Press Start 2P' via
++// <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"> in index.html.
++const pressStart2P = { className: 'font-press-start' };
+ 
+ export const GenesisTerminal: React.FC = () => {
+   const [bootText, setBootText] = useState('');
+diff --git a/index.html b/index.html
+index 21dfe69..a7b824c 100644
+--- a/index.html
++++ b/index.html
+@@ -4,7 +4,9 @@
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>My Google AI Studio App</title>
+-  </head>
++    <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
++</head>
+   <body>
+     <div id="root"></div>
+     <script type="module" src="/src/main.tsx"></script>
+diff --git a/src/bifrost/bifrost-envelope.ts b/src/bifrost/bifrost-envelope.ts
+new file mode 100644
+index 0000000..dd25341
+--- /dev/null
++++ b/src/bifrost/bifrost-envelope.ts
+@@ -0,0 +1,162 @@
++import { createHmac, createHash, randomUUID } from 'node:crypto';
++
++/**
++ * Bifrost signed message envelope — Camelot-OS trust plane.
++ * Header fields per Ω_TITAN_BIFROST spec: ver, msg_id, trace_id, parent_id,
++ * type, src, dst, realm, session, node, cartridge, operator, ts, nonce,
++ * expires, seq, priority, trust_band, policy_decision, sig_alg, sig,
++ * checksum_alg, checksum, provenance_ref.
++ */
++
++export type TrustBand = 'allow' | 'warn' | 'review' | 'block' | 'quarantine';
++export type QueuePriority = 'critical' | 'high' | 'normal' | 'low';
++
++export interface BifrostHeader {
++  ver: string;
++  msg_id: string;
++  trace_id: string;
++  parent_id?: string;
++  type: string;
++  src: string;
++  dst: string;
++  realm: string;
++  session?: string;
++  node: string;
++  cartridge?: string;
++  operator?: string;
++  ts: string;
++  nonce: string;
++  expires: string;
++  seq: number;
++  priority: QueuePriority;
++  trust_band: TrustBand;
++  policy_decision?: string;
++  sig_alg: 'hmac-sha256';
++  sig?: string;
++  checksum_alg: 'sha256';
++  checksum?: string;
++  provenance_ref?: string;
++}
++
++export interface BifrostEnvelope<T = unknown> {
++  header: BifrostHeader;
++  payload: T;
++}
++
++export interface EnvelopeVerification {
++  valid: boolean;
++  reasons: string[];
++  trust_band: TrustBand;
++}
++
++const BIFROST_VER = '1.0';
++
++function canonicalPayload(payload: unknown): string {
++  return JSON.stringify(payload ?? null);
++}
++
++function headerSigningString(h: BifrostHeader): string {
++  // Deterministic field order; sig and checksum excluded from their own inputs.
++  return [
++    h.ver, h.msg_id, h.trace_id, h.parent_id ?? '', h.type, h.src, h.dst,
++    h.realm, h.session ?? '', h.node, h.cartridge ?? '', h.operator ?? '',
++    h.ts, h.nonce, h.expires, String(h.seq), h.priority, h.trust_band,
++    h.policy_decision ?? '', h.sig_alg, h.checksum_alg, h.checksum ?? '',
++    h.provenance_ref ?? ''
++  ].join('|');
++}
++
++export interface SealOptions {
++  type: string;
++  src: string;
++  dst: string;
++  realm: string;
++  node: string;
++  seq: number;
++  secret: string;
++  ttlMs?: number;
++  session?: string;
++  cartridge?: string;
++  operator?: string;
++  parentId?: string;
++  traceId?: string;
++  priority?: QueuePriority;
++  trustBand?: TrustBand;
++  policyDecision?: string;
++  provenanceRef?: string;
++}
++
++export function sealEnvelope<T>(payload: T, opts: SealOptions): BifrostEnvelope<T> {
++  const now = Date.now();
++  const header: BifrostHeader = {
++    ver: BIFROST_VER,
++    msg_id: randomUUID(),
++    trace_id: opts.traceId ?? randomUUID(),
++    parent_id: opts.parentId,
++    type: opts.type,
++    src: opts.src,
++    dst: opts.dst,
++    realm: opts.realm,
++    session: opts.session,
++    node: opts.node,
++    cartridge: opts.cartridge,
++    operator: opts.operator,
++    ts: new Date(now).toISOString(),
++    nonce: randomUUID(),
++    expires: new Date(now + (opts.ttlMs ?? 30_000)).toISOString(),
++    seq: opts.seq,
++    priority: opts.priority ?? 'normal',
++    trust_band: opts.trustBand ?? 'allow',
++    policy_decision: opts.policyDecision,
++    sig_alg: 'hmac-sha256',
++    checksum_alg: 'sha256',
++    provenance_ref: opts.provenanceRef
++  };
++
++  header.checksum = createHash('sha256').update(canonicalPayload(payload)).digest('hex');
++  header.sig = createHmac('sha256', opts.secret).update(headerSigningString(header)).digest('hex');
++
++  return { header, payload };
++}
++
++export interface VerifyOptions {
++  secret: string;
++  expectedVer?: string;
++  seenNonces?: Set<string>;
++  now?: number;
++}
++
++export function verifyEnvelope(env: BifrostEnvelope, opts: VerifyOptions): EnvelopeVerification {
++  const reasons: string[] = [];
++  const h = env.header;
++  const now = opts.now ?? Date.now();
++
++  // Version mismatch → fail closed (crystal: ffi.version_mismatch)
++  if ((opts.expectedVer ?? BIFROST_VER) !== h.ver) {
++    return { valid: false, reasons: ['version_mismatch: fail closed'], trust_band: 'block' };
++  }
++
++  // Expiry
++  if (now > new Date(h.expires).getTime()) reasons.push('envelope expired');
++
++  // Nonce replay
++  if (opts.seenNonces) {
++    if (opts.seenNonces.has(h.nonce)) reasons.push('nonce replay detected');
++    else opts.seenNonces.add(h.nonce);
++  }
++
++  // Checksum (payload integrity)
++  const checksum = createHash('sha256').update(canonicalPayload(env.payload)).digest('hex');
++  if (checksum !== h.checksum) reasons.push('payload checksum mismatch');
++
++  // Signature (header integrity + provenance)
++  const expectedSig = createHmac('sha256', opts.secret).update(headerSigningString(h)).digest('hex');
++  if (expectedSig !== h.sig) reasons.push('invalid signature');
++
++  const valid = reasons.length === 0;
++  return {
++    valid,
++    reasons: valid ? ['signed envelope verified'] : reasons,
++    trust_band: valid ? h.trust_band : 'quarantine'
++  };
++}
+diff --git a/src/bifrost/bifrost-gateway.ts b/src/bifrost/bifrost-gateway.ts
+new file mode 100644
+index 0000000..61849b6
+--- /dev/null
++++ b/src/bifrost/bifrost-gateway.ts
+@@ -0,0 +1,65 @@
++import { IntentRoute } from '../router/intent-router';
++import { evaluatePolicy } from '../policy/policy-engine';
++import { BifrostEnvelope, TrustBand, verifyEnvelope, VerifyOptions } from './bifrost-envelope';
++import { HeimdallFsm } from './heimdall-fsm';
++
++/**
++ * Bifrost gateway — reconciles envelope verification, Heimdall node health,
++ * and the intent policy engine into a single trust decision.
++ * Reconciliation lattice per spec: quarantine > block > review > warn > allow;
++ * unanimous allow → allow.
++ */
++
++const SEVERITY: Record<TrustBand, number> = {
++  quarantine: 4,
++  block: 3,
++  review: 2,
++  warn: 1,
++  allow: 0
++};
++
++export function reconcileTrust(verdicts: TrustBand[]): TrustBand {
++  if (verdicts.length === 0) return 'review';
++  return verdicts.reduce((worst, v) => (SEVERITY[v] > SEVERITY[worst] ? v : worst), 'allow' as TrustBand);
++}
++
++export interface GatewayDecision {
++  trust_band: TrustBand;
++  proceed: boolean;
++  requiresApproval: boolean;
++  verdicts: { source: string; band: TrustBand; reason: string }[];
++  route: IntentRoute;
++}
++
++export function gateIntent(
++  route: IntentRoute,
++  envelope: BifrostEnvelope,
++  verifyOpts: VerifyOptions,
++  heimdall: HeimdallFsm
++): GatewayDecision {
++  const verdicts: GatewayDecision['verdicts'] = [];
++
++  // 1. Signed envelope verification
++  const env = verifyEnvelope(envelope, verifyOpts);
++  verdicts.push({ source: 'bifrost_envelope', band: env.valid ? env.trust_band : 'quarantine', reason: env.reasons.join('; ') });
++
++  // 2. Heimdall node health
++  const advisory = heimdall.sidecarAdvisory();
++  const heimdallBand: TrustBand = advisory === 'proceed' ? 'allow' : advisory === 'review_only' ? 'review' : 'block';
++  verdicts.push({ source: 'heimdall_fsm', band: heimdallBand, reason: `node=${heimdall.nodeId} state=${heimdall.state} advisory=${advisory}` });
++
++  // 3. Intent policy engine
++  const policy = evaluatePolicy(route);
++  const policyBand: TrustBand = !policy.allowed ? 'block' : policy.route.requiresApproval ? 'review' : 'allow';
++  verdicts.push({ source: 'policy_engine', band: policyBand, reason: policy.reason });
++
++  const trust_band = reconcileTrust(verdicts.map(v => v.band));
++
++  return {
++    trust_band,
++    proceed: trust_band === 'allow' || trust_band === 'warn',
++    requiresApproval: trust_band === 'review',
++    verdicts,
++    route: policy.route
++  };
++}
+diff --git a/src/bifrost/bifrost-queue.ts b/src/bifrost/bifrost-queue.ts
+new file mode 100644
+index 0000000..f58483e
+--- /dev/null
++++ b/src/bifrost/bifrost-queue.ts
+@@ -0,0 +1,145 @@
++import { BifrostEnvelope, QueuePriority, verifyEnvelope, VerifyOptions } from './bifrost-envelope';
++
++/**
++ * Bifrost bounded async queues — spec:
++ * critical bypasses batching only if signed+eligible; high blocks on full;
++ * normal delays; low sheds; sustained overflow degrades; persistent quarantines.
++ * Partitioned by session/node, ordering preserved within a partition,
++ * quarantine/revocation processed before ordinary telemetry.
++ */
++
++export type QueueAudit =
++  | 'queue.bypass_used'
++  | 'queue.backpressure_applied'
++  | 'queue.delayed'
++  | 'queue.shed'
++  | 'queue.dead_letter'
++  | 'queue_overflow'
++  | 'queue_overflow_critical';
++
++export interface QueueItem {
++  envelope: BifrostEnvelope;
++  partition: string;
++  enqueuedAt: number;
++}
++
++export interface EnqueueResult {
++  accepted: boolean;
++  bypass: boolean;
++  audit?: QueueAudit;
++  reason: string;
++}
++
++const PRIORITY_ORDER: QueuePriority[] = ['critical', 'high', 'normal', 'low'];
++const BYPASS_ELIGIBLE_TYPES = new Set(['quarantine', 'revoke', 'sovereign_interrupt']);
++
++export class BifrostQueue {
++  private partitions = new Map<string, QueueItem[]>();
++  readonly deadLetter: { envelope: BifrostEnvelope; reason: string }[] = [];
++  readonly auditLog: { audit: QueueAudit; msg_id: string; ts: string }[] = [];
++  private overflowStrikes = 0;
++
++  constructor(
++    private readonly capacity: number,
++    private readonly verifyOpts: VerifyOptions,
++    private readonly overflowStrikeLimit = 3
++  ) {}
++
++  get size(): number {
++    let n = 0;
++    for (const items of this.partitions.values()) n += items.length;
++    return n;
++  }
++
++  get degraded(): boolean {
++    return this.overflowStrikes >= 1;
++  }
++
++  get persistentOverflow(): boolean {
++    return this.overflowStrikes >= this.overflowStrikeLimit;
++  }
++
++  private audit(audit: QueueAudit, msg_id: string) {
++    this.auditLog.push({ audit, msg_id, ts: new Date().toISOString() });
++  }
++
++  /**
++   * Bypass eligibility — spec validation steps: verify signature+checksum
++   * (canonicalized header), nonce freshness, priority class, type eligibility,
++   * and a policy_decision that allows direct execution.
++   */
++  canBypass(envelope: BifrostEnvelope): { eligible: boolean; reason: string } {
++    const h = envelope.header;
++    if (h.priority !== 'critical') return { eligible: false, reason: 'not critical class' };
++    if (!BYPASS_ELIGIBLE_TYPES.has(h.type)) return { eligible: false, reason: `type ${h.type} not bypass-eligible` };
++    const v = verifyEnvelope(envelope, this.verifyOpts);
++    if (!v.valid) return { eligible: false, reason: v.reasons.join('; ') };
++    if (h.policy_decision !== 'allow_direct') return { eligible: false, reason: 'policy_decision does not allow direct execution' };
++    return { eligible: true, reason: 'signed critical event, bypass granted' };
++  }
++
++  enqueue(envelope: BifrostEnvelope, partition: string): EnqueueResult {
++    const h = envelope.header;
++    const atCapacity = this.size >= this.capacity;
++
++    if (atCapacity) {
++      // Critical: never dropped — bypass if signed+eligible, otherwise force-enqueue.
++      if (h.priority === 'critical') {
++        const bypass = this.canBypass(envelope);
++        if (bypass.eligible) {
++          this.audit('queue.bypass_used', h.msg_id);
++          return { accepted: true, bypass: true, audit: 'queue.bypass_used', reason: bypass.reason };
++        }
++        this.push(envelope, partition);
++        this.strike();
++        return { accepted: true, bypass: false, audit: 'queue_overflow', reason: 'critical force-enqueued at capacity' };
++      }
++      if (h.priority === 'high') {
++        this.audit('queue.backpressure_applied', h.msg_id);
++        this.strike();
++        return { accepted: false, bypass: false, audit: 'queue.backpressure_applied', reason: 'block until space available' };
++      }
++      if (h.priority === 'normal') {
++        this.audit('queue.delayed', h.msg_id);
++        return { accepted: false, bypass: false, audit: 'queue.delayed', reason: 'delayed / retry with backoff' };
++      }
++      // low: shed to dead-letter for audit
++      this.deadLetter.push({ envelope, reason: 'shed at capacity' });
++      this.audit('queue.shed', h.msg_id);
++      return { accepted: false, bypass: false, audit: 'queue.shed', reason: 'low priority shed' };
++    }
++
++    this.push(envelope, partition);
++    return { accepted: true, bypass: false, reason: 'enqueued' };
++  }
++
++  private push(envelope: BifrostEnvelope, partition: string) {
++    const items = this.partitions.get(partition) ?? [];
++    items.push({ envelope, partition, enqueuedAt: Date.now() });
++    this.partitions.set(partition, items);
++  }
++
++  private strike() {
++    this.overflowStrikes += 1;
++    this.audit(this.persistentOverflow ? 'queue_overflow_critical' : 'queue_overflow', 'system');
++  }
++
++  /**
++   * Drain in priority order (quarantine/revoke first via critical class),
++   * preserving FIFO ordering within each partition.
++   */
++  drain(max = Infinity): QueueItem[] {
++    const out: QueueItem[] = [];
++    for (const priority of PRIORITY_ORDER) {
++      for (const [partition, items] of this.partitions) {
++        const keep: QueueItem[] = [];
++        for (const item of items) {
++          if (item.envelope.header.priority === priority && out.length < max) out.push(item);
++          else keep.push(item);
++        }
++        this.partitions.set(partition, keep);
++      }
++    }
++    return out;
++  }
++}
+diff --git a/src/bifrost/ffi-policy.ts b/src/bifrost/ffi-policy.ts
+new file mode 100644
+index 0000000..13c42bd
+--- /dev/null
++++ b/src/bifrost/ffi-policy.ts
+@@ -0,0 +1,69 @@
++import { TrustBand } from './bifrost-envelope';
++
++/**
++ * FFI timeout/failure policy — Bifrost spec.
++ * Timeouts are transient (1 retry, degrade to review); compute failures are
++ * contract-level (no retry, review/block by risk); version mismatch fails closed.
++ */
++
++export type FfiError =
++  | 'ffi_timeout'
++  | 'ffi_compute_failed'
++  | 'ffi_transport_failed'
++  | 'ffi_invalid_input'
++  | 'ffi_version_mismatch'
++  | 'ffi_batch_too_large';
++
++export interface FfiPolicyOutcome {
++  retry: 'once' | 'none' | 'split_and_requeue';
++  fallback: 'review' | 'review_or_block' | 'reject' | 'fail_closed' | 'requeue';
++}
++
++export const FFI_POLICY: Record<FfiError, FfiPolicyOutcome> = {
++  ffi_timeout:          { retry: 'once', fallback: 'review' },
++  ffi_compute_failed:   { retry: 'none', fallback: 'review_or_block' },
++  ffi_transport_failed: { retry: 'once', fallback: 'review' },
++  ffi_invalid_input:    { retry: 'none', fallback: 'reject' },
++  ffi_version_mismatch: { retry: 'none', fallback: 'fail_closed' },
++  ffi_batch_too_large:  { retry: 'split_and_requeue', fallback: 'requeue' }
++};
++
++/**
++ * Conservative trust degradation on FFI failure:
++ * allow/warn + timeout → review; review stays review; block/quarantine unchanged.
++ */
++export function degradeTrustBand(current: TrustBand, error: FfiError, highRisk = false): TrustBand {
++  if (current === 'block' || current === 'quarantine') return current;
++  if (error === 'ffi_version_mismatch') return 'block'; // fail closed
++  if (error === 'ffi_invalid_input') return current;    // batch rejected, band untouched
++  if (error === 'ffi_compute_failed') return highRisk ? 'block' : 'review';
++  // timeout / transport / oversize after retry exhaustion
++  return 'review';
++}
++
++/**
++ * Tailscale sidecar health automation — spec:
++ * health_ok→proceed, health_degraded→review_only, health_failed→no_grant,
++ * route_ready→advertise, route_lost→block new grants + mark degraded.
++ */
++export type SidecarHealth = 'ok' | 'degraded' | 'failed';
++
++export interface SidecarStatus {
++  health: SidecarHealth;
++  routeReady: boolean;
++}
++
++export interface SidecarAdvisory {
++  scoring: 'proceed' | 'review_only' | 'no_grant';
++  advertise: boolean;
++  blockNewGrants: boolean;
++}
++
++export function evaluateSidecar(status: SidecarStatus): SidecarAdvisory {
++  const scoring = status.health === 'ok' ? 'proceed' : status.health === 'degraded' ? 'review_only' : 'no_grant';
++  return {
++    scoring,
++    advertise: status.routeReady && status.health !== 'failed',
++    blockNewGrants: !status.routeReady || status.health === 'failed'
++  };
++}
+diff --git a/src/bifrost/heimdall-fsm.ts b/src/bifrost/heimdall-fsm.ts
+new file mode 100644
+index 0000000..cf5d765
+--- /dev/null
++++ b/src/bifrost/heimdall-fsm.ts
+@@ -0,0 +1,100 @@
++/**
++ * Heimdall node-health FSM — Bifrost quarantine/policy guardian.
++ * States and guarantees per Ω_TITAN_BIFROST spec:
++ *   healthy → observed → suspect → soft_quarantine → hard_quarantine → ragnarok → recovered
++ * Ragnarok guarantee: no sessions, no commits, no upgrades, no forwarding — recovery traffic only.
++ */
++
++export type HeimdallState =
++  | 'healthy'
++  | 'observed'
++  | 'suspect'
++  | 'soft_quarantine'
++  | 'hard_quarantine'
++  | 'ragnarok'
++  | 'recovered';
++
++export type HeimdallEvent =
++  | 'anomaly'
++  | 'anomaly_confirmed'
++  | 'threshold_breach'
++  | 'critical_breach'
++  | 'clear'
++  | 'recovery_verified';
++
++export interface HeimdallCapabilities {
++  sessions: boolean;
++  commits: boolean;
++  upgrades: boolean;
++  forward: boolean;
++  recoveryOnly: boolean;
++}
++
++const TRANSITIONS: Record<HeimdallState, Partial<Record<HeimdallEvent, HeimdallState>>> = {
++  healthy:          { anomaly: 'observed', critical_breach: 'ragnarok' },
++  observed:         { anomaly_confirmed: 'suspect', clear: 'healthy', critical_breach: 'ragnarok' },
++  suspect:          { threshold_breach: 'soft_quarantine', clear: 'observed', critical_breach: 'ragnarok' },
++  soft_quarantine:  { threshold_breach: 'hard_quarantine', clear: 'suspect', critical_breach: 'ragnarok', recovery_verified: 'recovered' },
++  hard_quarantine:  { critical_breach: 'ragnarok', recovery_verified: 'recovered' },
++  ragnarok:         { recovery_verified: 'recovered' },
++  recovered:        { clear: 'healthy', anomaly: 'observed' }
++};
++
++export function capabilitiesFor(state: HeimdallState): HeimdallCapabilities {
++  switch (state) {
++    case 'healthy':
++    case 'recovered':
++      return { sessions: true, commits: true, upgrades: true, forward: true, recoveryOnly: false };
++    case 'observed':
++      return { sessions: true, commits: true, upgrades: false, forward: true, recoveryOnly: false };
++    case 'suspect':
++      return { sessions: true, commits: false, upgrades: false, forward: true, recoveryOnly: false };
++    case 'soft_quarantine':
++      return { sessions: false, commits: false, upgrades: false, forward: true, recoveryOnly: false };
++    case 'hard_quarantine':
++      return { sessions: false, commits: false, upgrades: false, forward: false, recoveryOnly: false };
++    case 'ragnarok':
++      // Guarantee: no sessions/commits/upgrades/forward except recovery.
++      return { sessions: false, commits: false, upgrades: false, forward: false, recoveryOnly: true };
++  }
++}
++
++export interface TransitionRecord {
++  from: HeimdallState;
++  event: HeimdallEvent;
++  to: HeimdallState;
++  ts: string;
++}
++
++export class HeimdallFsm {
++  private _state: HeimdallState;
++  readonly history: TransitionRecord[] = [];
++
++  constructor(readonly nodeId: string, initial: HeimdallState = 'healthy') {
++    this._state = initial;
++  }
++
++  get state(): HeimdallState {
++    return this._state;
++  }
++
++  get capabilities(): HeimdallCapabilities {
++    return capabilitiesFor(this._state);
++  }
++
++  dispatch(event: HeimdallEvent): HeimdallState {
++    const next = TRANSITIONS[this._state][event];
++    if (next) {
++      this.history.push({ from: this._state, event, to: next, ts: new Date().toISOString() });
++      this._state = next;
++    }
++    return this._state;
++  }
++
++  /** Sidecar advisory per crystal: ok→proceed, degraded→review_only, failed→no_grant */
++  sidecarAdvisory(): 'proceed' | 'review_only' | 'no_grant' {
++    if (this._state === 'healthy' || this._state === 'recovered') return 'proceed';
++    if (this._state === 'observed' || this._state === 'suspect') return 'review_only';
++    return 'no_grant';
++  }
++}
+diff --git a/src/bifrost/microfish.ts b/src/bifrost/microfish.ts
+new file mode 100644
+index 0000000..b99015d
+--- /dev/null
++++ b/src/bifrost/microfish.ts
+@@ -0,0 +1,91 @@
++import { HeimdallEvent, HeimdallFsm } from './heimdall-fsm';
++
++/**
++ * Microfish — predictive time-series engine (TS reference for the Rust cartridge).
++ * Crystal spec: trend / anomaly / capacity. Anomaly signals feed the Heimdall
++ * FSM so predictive detection drives containment instead of dashboards.
++ */
++
++export interface TrendReport {
++  slope: number;          // units per sample
++  direction: 'rising' | 'falling' | 'flat';
++}
++
++export interface AnomalyReport {
++  zScore: number;
++  severity: 'none' | 'minor' | 'major' | 'critical';
++}
++
++export interface CapacityReport {
++  utilization: number;    // 0..1
++  samplesToCapacity: number | null; // null when not trending toward limit
++}
++
++export class MicrofishSeries {
++  private values: number[] = [];
++
++  constructor(private readonly window = 32) {}
++
++  push(value: number) {
++    this.values.push(value);
++    if (this.values.length > this.window) this.values.shift();
++  }
++
++  get size(): number {
++    return this.values.length;
++  }
++
++  /** Least-squares slope over the window. */
++  trend(): TrendReport {
++    const n = this.values.length;
++    if (n < 2) return { slope: 0, direction: 'flat' };
++    const xMean = (n - 1) / 2;
++    const yMean = this.values.reduce((a, b) => a + b, 0) / n;
++    let num = 0, den = 0;
++    for (let i = 0; i < n; i++) {
++      num += (i - xMean) * (this.values[i] - yMean);
++      den += (i - xMean) ** 2;
++    }
++    const slope = den === 0 ? 0 : num / den;
++    const direction = Math.abs(slope) < 1e-9 ? 'flat' : slope > 0 ? 'rising' : 'falling';
++    return { slope, direction };
++  }
++
++  /** Z-score of the latest sample against the prior window. */
++  anomaly(): AnomalyReport {
++    const n = this.values.length;
++    if (n < 4) return { zScore: 0, severity: 'none' };
++    const prior = this.values.slice(0, n - 1);
++    const mean = prior.reduce((a, b) => a + b, 0) / prior.length;
++    const variance = prior.reduce((a, b) => a + (b - mean) ** 2, 0) / prior.length;
++    const std = Math.sqrt(variance);
++    const z = std === 0 ? 0 : Math.abs((this.values[n - 1] - mean) / std);
++    const severity = z >= 6 ? 'critical' : z >= 4 ? 'major' : z >= 2.5 ? 'minor' : 'none';
++    return { zScore: z, severity };
++  }
++
++  /** Samples until `limit` is reached at the current trend, from the latest value. */
++  capacity(limit: number): CapacityReport {
++    const latest = this.values[this.values.length - 1] ?? 0;
++    const utilization = limit === 0 ? 0 : Math.min(1, Math.max(0, latest / limit));
++    const { slope } = this.trend();
++    if (slope <= 0 || latest >= limit) {
++      return { utilization, samplesToCapacity: latest >= limit ? 0 : null };
++    }
++    return { utilization, samplesToCapacity: Math.ceil((limit - latest) / slope) };
++  }
++}
++
++const SEVERITY_EVENT: Record<Exclude<AnomalyReport['severity'], 'none'>, HeimdallEvent> = {
++  minor: 'anomaly',
++  major: 'anomaly_confirmed',
++  critical: 'critical_breach'
++};
++
++/** Predictive → containment: dispatch the anomaly severity into Heimdall. */
++export function feedHeimdall(report: AnomalyReport, fsm: HeimdallFsm): HeimdallEvent | null {
++  if (report.severity === 'none') return null;
++  const event = SEVERITY_EVENT[report.severity];
++  fsm.dispatch(event);
++  return event;
++}
+diff --git a/src/bifrost/provenance-chain.ts b/src/bifrost/provenance-chain.ts
+new file mode 100644
+index 0000000..066e427
+--- /dev/null
++++ b/src/bifrost/provenance-chain.ts
+@@ -0,0 +1,154 @@
++import { createHash, createHmac } from 'node:crypto';
++import { BifrostEnvelope, TrustBand } from './bifrost-envelope';
++
++/**
++ * Provenance ledger append protocol — spec:
++ * atomic append, prev_hash chained to latest committed record, never reorder,
++ * buffer+retry on failure without claiming commit, quarantine/revocation
++ * events appended before ordinary telemetry.
++ */
++
++export interface LedgerRecord {
++  ledger_version: '1.0';
++  event_id: string;
++  trace_id: string;
++  parent_event_id: string | null;
++  msg_id: string;
++  msg_type: string;
++  src: string;
++  dst: string;
++  session_id: string | null;
++  node_id: string | null;
++  cartridge_id: string | null;
++  operator_id: string | null;
++  timestamp: string;
++  trust_band: TrustBand;
++  policy_decision: string;
++  payload_hash: string;
++  prev_hash: string | null;
++  current_hash: string;
++  signature: string;
++  provenance_ref: string;
++}
++
++const PRIORITY_TYPES = new Set(['quarantine', 'revoke']);
++
++function sha256(s: string): string {
++  return createHash('sha256').update(s).digest('hex');
++}
++
++function recordHashInput(r: Omit<LedgerRecord, 'current_hash' | 'signature' | 'provenance_ref'>): string {
++  return [
++    r.ledger_version, r.event_id, r.trace_id, r.parent_event_id ?? '', r.msg_id,
++    r.msg_type, r.src, r.dst, r.session_id ?? '', r.node_id ?? '',
++    r.cartridge_id ?? '', r.operator_id ?? '', r.timestamp, r.trust_band,
++    r.policy_decision, r.payload_hash, r.prev_hash ?? ''
++  ].join('|');
++}
++
++export class ProvenanceChain {
++  private records: LedgerRecord[] = [];
++  private buffer: BifrostEnvelope[] = [];
++  private seq = 0;
++
++  constructor(private readonly signingSecret: string, private failNextAppend = false) {}
++
++  get head(): LedgerRecord | undefined {
++    return this.records[this.records.length - 1];
++  }
++
++  get length(): number {
++    return this.records.length;
++  }
++
++  get bufferedCount(): number {
++    return this.buffer.length;
++  }
++
++  /** Test hook: simulate a storage failure on the next append. */
++  simulateFailure() {
++    this.failNextAppend = true;
++  }
++
++  /**
++   * Atomic append. On failure the envelope is buffered — no commit is claimed.
++   * Returns provenance_ref on commit, null when buffered.
++   */
++  append(envelope: BifrostEnvelope): string | null {
++    if (this.failNextAppend) {
++      this.failNextAppend = false;
++      this.buffer.push(envelope);
++      return null;
++    }
++
++    const h = envelope.header;
++    this.seq += 1;
++    const base: Omit<LedgerRecord, 'current_hash' | 'signature' | 'provenance_ref'> = {
++      ledger_version: '1.0',
++      event_id: `evt_${this.seq.toString().padStart(8, '0')}`,
++      trace_id: h.trace_id,
++      parent_event_id: this.head?.event_id ?? null,
++      msg_id: h.msg_id,
++      msg_type: h.type,
++      src: h.src,
++      dst: h.dst,
++      session_id: h.session ?? null,
++      node_id: h.node ?? null,
++      cartridge_id: h.cartridge ?? null,
++      operator_id: h.operator ?? null,
++      timestamp: new Date().toISOString(),
++      trust_band: h.trust_band,
++      policy_decision: h.policy_decision ?? 'none',
++      payload_hash: sha256(JSON.stringify(envelope.payload ?? null)),
++      prev_hash: this.head?.current_hash ?? null
++    };
++
++    const current_hash = sha256(recordHashInput(base));
++    const signature = createHmac('sha256', this.signingSecret).update(current_hash).digest('base64');
++    const record: LedgerRecord = { ...base, current_hash, signature, provenance_ref: `ledger://camelot/${base.event_id}` };
++    this.records.push(record);
++    return record.provenance_ref;
++  }
++
++  /** Retry buffered appends — quarantine/revocation events first, then FIFO. */
++  retryBuffered(): number {
++    const pending = [...this.buffer];
++    this.buffer = [];
++    pending.sort((a, b) =>
++      Number(PRIORITY_TYPES.has(b.header.type)) - Number(PRIORITY_TYPES.has(a.header.type))
++    );
++    let committed = 0;
++    for (const env of pending) {
++      if (this.append(env) !== null) committed += 1;
++    }
++    return committed;
++  }
++
++  /** Yggdrasil Merkle root over all committed record hashes (crystal: prove.Yggdrasil_Merkle_root). */
++  merkleRoot(): string | null {
++    if (this.records.length === 0) return null;
++    let level = this.records.map(r => r.current_hash);
++    while (level.length > 1) {
++      const next: string[] = [];
++      for (let i = 0; i < level.length; i += 2) {
++        next.push(sha256(level[i] + (level[i + 1] ?? level[i])));
++      }
++      level = next;
++    }
++    return level[0];
++  }
++
++  /** provenance_audit spell: recompute every hash and verify the chain + HMACs. */
++  verifyChain(): { valid: boolean; brokenAt: string | null } {
++    let prev: string | null = null;
++    for (const r of this.records) {
++      if (r.prev_hash !== prev) return { valid: false, brokenAt: r.event_id };
++      const { current_hash, signature, provenance_ref, ...base } = r;
++      if (sha256(recordHashInput(base)) !== current_hash) return { valid: false, brokenAt: r.event_id };
++      const expectedSig = createHmac('sha256', this.signingSecret).update(current_hash).digest('base64');
++      if (expectedSig !== signature) return { valid: false, brokenAt: r.event_id };
++      prev = current_hash;
++    }
++    return { valid: true, brokenAt: null };
++  }
++}
+diff --git a/src/bifrost/registration-gate.ts b/src/bifrost/registration-gate.ts
+new file mode 100644
+index 0000000..fe556c0
+--- /dev/null
++++ b/src/bifrost/registration-gate.ts
+@@ -0,0 +1,78 @@
++import { TrustBand } from './bifrost-envelope';
++import { reconcileTrust } from './bifrost-gateway';
++import { degradeTrustBand, evaluateSidecar, FfiError, SidecarStatus } from './ffi-policy';
++
++/**
++ * Bifrost registration gate — spec workflow:
++ * Registration/trust lookup → sidecar health → preflight validation →
++ * scoring eligible? → scoring execution → FFI outcome → trust reconciliation →
++ * authorization → session grant or deny.
++ * Invalid nodes never consume scoring capacity.
++ */
++
++export interface RegistrationRequest {
++  nodeId: string;
++  identityValid: boolean;
++  schemaValid: boolean;
++  sidecar: SidecarStatus;
++  realmBands: TrustBand[];
++  highRisk?: boolean;
++}
++
++export type ScoringFn = (nodeId: string) => { band: TrustBand } | { error: FfiError };
++
++export interface GateResult {
++  granted: boolean;
++  finalBand: TrustBand;
++  stage: 'registration' | 'sidecar' | 'preflight' | 'scoring' | 'reconciliation' | 'granted';
++  scoringInvoked: boolean;
++  notes: string[];
++}
++
++export function runRegistrationGate(req: RegistrationRequest, score: ScoringFn): GateResult {
++  const notes: string[] = [];
++
++  // 1. Registration must pass before scoring.
++  if (!req.identityValid) {
++    return { granted: false, finalBand: 'block', stage: 'registration', scoringInvoked: false, notes: ['identity validation failed'] };
++  }
++
++  // 2. Sidecar health must be green or degraded-but-allowed.
++  const sidecar = evaluateSidecar(req.sidecar);
++  if (sidecar.scoring === 'no_grant') {
++    return { granted: false, finalBand: 'block', stage: 'sidecar', scoringInvoked: false, notes: ['sidecar failed: no scoring, no session grant'] };
++  }
++  if (sidecar.blockNewGrants) {
++    return { granted: false, finalBand: 'block', stage: 'sidecar', scoringInvoked: false, notes: ['route lost: new grants blocked, node degraded'] };
++  }
++  if (sidecar.scoring === 'review_only') notes.push('sidecar degraded: review mode');
++
++  // 3. Preflight validation must succeed before scoring is called.
++  if (!req.schemaValid) {
++    return { granted: false, finalBand: 'block', stage: 'preflight', scoringInvoked: false, notes: ['schema validation failed'] };
++  }
++
++  // 4–5. Scoring execution + FFI outcome (conservative degradation on failure).
++  const outcome = score(req.nodeId);
++  let scoringBand: TrustBand;
++  if ('error' in outcome) {
++    scoringBand = degradeTrustBand('allow', outcome.error, req.highRisk);
++    notes.push(`ffi ${outcome.error} → degraded to ${scoringBand}`);
++  } else {
++    scoringBand = outcome.band;
++  }
++
++  // 6. Cross-realm trust reconciliation — most conservative wins.
++  const sidecarBand: TrustBand = sidecar.scoring === 'review_only' ? 'review' : 'allow';
++  const finalBand = reconcileTrust([scoringBand, sidecarBand, ...req.realmBands]);
++
++  // 7. Authorization follows the reconciled band.
++  const granted = finalBand === 'allow' || finalBand === 'warn';
++  return {
++    granted,
++    finalBand,
++    stage: granted ? 'granted' : 'reconciliation',
++    scoringInvoked: true,
++    notes: [...notes, `reconciled band: ${finalBand}`]
++  };
++}
+diff --git a/src/index.css b/src/index.css
+index 3840164..044859a 100644
+--- a/src/index.css
++++ b/src/index.css
+@@ -240,4 +240,5 @@
+   html {
+     @apply font-sans;
+     }
+-}
+\ No newline at end of file
++}
++.font-press-start { font-family: 'Press Start 2P', monospace; }
+diff --git a/src/tests/smoke.test.ts b/src/tests/smoke.test.ts
+index c2e102c..11d5e6f 100644
+--- a/src/tests/smoke.test.ts
++++ b/src/tests/smoke.test.ts
+@@ -35,4 +35,188 @@ await queue.updateStatus(cmd.commandId, 'complete');
+ const done = await queue.get(cmd.commandId);
+ assert.equal(done?.status, 'complete');
+ 
+-console.log('Camelot smoke tests passed.');
++// ── Bifrost trust plane ──────────────────────────────────────────
++import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope }) => {
++  const { HeimdallFsm } = await import('../bifrost/heimdall-fsm');
++  const { reconcileTrust, gateIntent } = await import('../bifrost/bifrost-gateway');
++
++  const bsecret = 'bifrost-mesh-secret';
++  const env = sealEnvelope({ intent: 'status_check' }, {
++    type: 'intent', src: 'excalibur', dst: 'cybertronia', realm: 'camelot',
++    node: 'console', seq: 1, secret: bsecret
++  });
++
++  // Valid envelope verifies
++  assert.equal(verifyEnvelope(env, { secret: bsecret }).valid, true);
++
++  // Tampered payload → quarantine
++  const tampered = { ...env, payload: { intent: 'rm -rf /' } };
++  const tv = verifyEnvelope(tampered, { secret: bsecret });
++  assert.equal(tv.valid, false);
++  assert.equal(tv.trust_band, 'quarantine');
++
++  // Version mismatch → fail closed
++  const vm = verifyEnvelope({ ...env, header: { ...env.header, ver: '0.9' } }, { secret: bsecret });
++  assert.equal(vm.valid, false);
++  assert.equal(vm.trust_band, 'block');
++
++  // Nonce replay
++  const seen = new Set<string>();
++  verifyEnvelope(env, { secret: bsecret, seenNonces: seen });
++  const replay = verifyEnvelope(env, { secret: bsecret, seenNonces: seen });
++  assert.equal(replay.valid, false);
++
++  // Heimdall FSM: ragnarok guarantees
++  const fsm = new HeimdallFsm('cybertronia');
++  fsm.dispatch('critical_breach');
++  assert.equal(fsm.state, 'ragnarok');
++  const caps = fsm.capabilities;
++  assert.deepEqual(
++    [caps.sessions, caps.commits, caps.upgrades, caps.forward, caps.recoveryOnly],
++    [false, false, false, false, true]
++  );
++  fsm.dispatch('recovery_verified');
++  assert.equal(fsm.state, 'recovered');
++
++  // Trust reconciliation lattice
++  assert.equal(reconcileTrust(['allow', 'allow', 'allow']), 'allow');
++  assert.equal(reconcileTrust(['allow', 'review', 'warn']), 'review');
++  assert.equal(reconcileTrust(['allow', 'quarantine', 'block']), 'quarantine');
++
++  // End-to-end gate: healthy node + signed envelope + benign intent → allow
++  const healthy = new HeimdallFsm('console');
++  const decision = gateIntent(
++    { intent: 'status', payload: { text: 'show system status' }, requiresApproval: false, riskLevel: 'low' } as any,
++    env2(), { secret: bsecret }, healthy
++  );
++  assert.equal(decision.proceed, true);
++
++  function env2() {
++    return sealEnvelope({ intent: 'status' }, {
++      type: 'intent', src: 'excalibur', dst: 'console', realm: 'camelot',
++      node: 'console', seq: 2, secret: bsecret
++    });
++  }
++
++  // ── Bifrost phase 2: FFI policy, queues, ledger chain, registration gate ──
++  const { degradeTrustBand, evaluateSidecar } = await import('../bifrost/ffi-policy');
++  const { BifrostQueue } = await import('../bifrost/bifrost-queue');
++  const { ProvenanceChain } = await import('../bifrost/provenance-chain');
++  const { runRegistrationGate } = await import('../bifrost/registration-gate');
++
++  // FFI fallback logic: allow/warn+timeout→review, review stays, block/quarantine unchanged
++  assert.equal(degradeTrustBand('allow', 'ffi_timeout'), 'review');
++  assert.equal(degradeTrustBand('warn', 'ffi_timeout'), 'review');
++  assert.equal(degradeTrustBand('review', 'ffi_timeout'), 'review');
++  assert.equal(degradeTrustBand('block', 'ffi_timeout'), 'block');
++  assert.equal(degradeTrustBand('quarantine', 'ffi_compute_failed'), 'quarantine');
++  assert.equal(degradeTrustBand('allow', 'ffi_version_mismatch'), 'block');
++  assert.equal(degradeTrustBand('allow', 'ffi_compute_failed', true), 'block');
++
++  // Sidecar automation
++  assert.equal(evaluateSidecar({ health: 'ok', routeReady: true }).scoring, 'proceed');
++  assert.equal(evaluateSidecar({ health: 'degraded', routeReady: true }).scoring, 'review_only');
++  assert.equal(evaluateSidecar({ health: 'failed', routeReady: true }).scoring, 'no_grant');
++  assert.equal(evaluateSidecar({ health: 'ok', routeReady: false }).blockNewGrants, true);
++
++  // Queue: overflow policy per class
++  const q = new BifrostQueue(2, { secret: bsecret });
++  const mk = (priority: any, type = 'telemetry', policy?: string) => sealEnvelope({ t: type }, {
++    type, src: 'excalibur', dst: 'cybertronia', realm: 'camelot', node: 'console',
++    seq: 1, secret: bsecret, priority, policyDecision: policy
++  });
++  q.enqueue(mk('normal'), 'p1');
++  q.enqueue(mk('normal'), 'p1');
++  assert.equal(q.enqueue(mk('high'), 'p1').audit, 'queue.backpressure_applied');
++  assert.equal(q.enqueue(mk('normal'), 'p1').audit, 'queue.delayed');
++  assert.equal(q.enqueue(mk('low'), 'p1').audit, 'queue.shed');
++  assert.equal(q.deadLetter.length, 1);
++  // Signed critical quarantine event bypasses at capacity
++  const bypassed = q.enqueue(mk('critical', 'quarantine', 'allow_direct'), 'p1');
++  assert.equal(bypassed.bypass, true);
++  assert.equal(bypassed.audit, 'queue.bypass_used');
++  // Unsigned-ineligible critical (wrong type) is force-enqueued, never dropped
++  const forced = q.enqueue(mk('critical', 'telemetry'), 'p1');
++  assert.equal(forced.accepted, true);
++  assert.equal(forced.bypass, false);
++  // Drain: critical first, partition FIFO preserved
++  const drained = q.drain();
++  assert.equal(drained[0].envelope.header.priority, 'critical');
++
++  // Ledger chain: append, tamper detection, buffer+retry with quarantine-first
++  const chain = new ProvenanceChain(bsecret);
++  const ref1 = chain.append(mk('normal', 'telemetry'));
++  assert.ok(ref1?.startsWith('ledger://camelot/'));
++  chain.append(mk('normal', 'telemetry'));
++  assert.equal(chain.verifyChain().valid, true);
++  chain.simulateFailure();
++  assert.equal(chain.append(mk('normal', 'telemetry')), null); // no commit claimed
++  chain.append(mk('critical', 'quarantine', 'allow_direct'));
++  assert.equal(chain.bufferedCount, 1);
++  assert.equal(chain.retryBuffered(), 1);
++  assert.equal(chain.verifyChain().valid, true);
++  assert.equal(chain.length, 4);
++
++  // Registration gate: no scoring for invalid nodes; conservative reconciliation
++  const okScore = () => ({ band: 'allow' as const });
++  const badId = runRegistrationGate({ nodeId: 'n1', identityValid: false, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: [] }, okScore);
++  assert.equal(badId.scoringInvoked, false);
++  assert.equal(badId.stage, 'registration');
++  const granted = runRegistrationGate({ nodeId: 'n2', identityValid: true, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: ['allow'] }, okScore);
++  assert.equal(granted.granted, true);
++  const crossRealm = runRegistrationGate({ nodeId: 'n3', identityValid: true, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: ['allow', 'quarantine'] }, okScore);
++  assert.equal(crossRealm.finalBand, 'quarantine');
++  assert.equal(crossRealm.granted, false);
++  const ffiDown = runRegistrationGate({ nodeId: 'n4', identityValid: true, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: [] }, () => ({ error: 'ffi_timeout' as const }));
++  assert.equal(ffiDown.finalBand, 'review');
++
++  // Heimdall spec alignment: soft_quarantine → recovered via full revalidation
++  const fsm2 = new HeimdallFsm('n5');
++  fsm2.dispatch('anomaly'); fsm2.dispatch('anomaly_confirmed'); fsm2.dispatch('threshold_breach');
++  assert.equal(fsm2.state, 'soft_quarantine');
++  fsm2.dispatch('recovery_verified');
++  assert.equal(fsm2.state, 'recovered');
++
++  // ── Ω_NANO master crystal: microfish predictive + Yggdrasil Merkle root ──
++  const { MicrofishSeries, feedHeimdall } = await import('../bifrost/microfish');
++
++  // Trend: strictly rising series
++  const rising = new MicrofishSeries();
++  for (let i = 0; i < 10; i++) rising.push(i * 2);
++  assert.equal(rising.trend().direction, 'rising');
++
++  // Capacity forecast: at value 18, slope 2, limit 30 → 6 samples
++  assert.equal(rising.capacity(30).samplesToCapacity, 6);
++  assert.equal(rising.capacity(10).samplesToCapacity, 0); // already over
++
++  // Anomaly: stable baseline then a spike → Heimdall containment
++  const cpu = new MicrofishSeries();
++  for (let i = 0; i < 20; i++) cpu.push(50 + (i % 2)); // ~50±1
++  cpu.push(500); // spike
++  const report = cpu.anomaly();
++  assert.equal(report.severity, 'critical');
++  const nodeFsm = new HeimdallFsm('cybertronia');
++  const dispatched = feedHeimdall(report, nodeFsm);
++  assert.equal(dispatched, 'critical_breach');
++  assert.equal(nodeFsm.state, 'ragnarok');
++  assert.equal(nodeFsm.capabilities.recoveryOnly, true);
++
++  // No-op on clean signal
++  const calm = new MicrofishSeries();
++  for (let i = 0; i < 10; i++) calm.push(50);
++  assert.equal(feedHeimdall(calm.anomaly(), new HeimdallFsm('x')), null);
++
++  // Yggdrasil Merkle root: deterministic, and any tamper shifts it
++  const yg = new ProvenanceChain(bsecret);
++  yg.append(mk('normal', 'telemetry'));
++  yg.append(mk('normal', 'telemetry'));
++  yg.append(mk('normal', 'telemetry')); // odd leaf count exercises duplication
++  const root1 = yg.merkleRoot();
++  assert.ok(root1 && root1.length === 64);
++  yg.append(mk('critical', 'quarantine', 'allow_direct'));
++  const root2 = yg.merkleRoot();
++  assert.notEqual(root1, root2);
++  assert.equal(yg.verifyChain().valid, true);
++
++  console.log('Camelot smoke tests passed (trust plane + control plane + predictive + Yggdrasil).');
++});

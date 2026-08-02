@@ -89,7 +89,8 @@ class ScoutSonar:
     def _browser_forage(self, query: str) -> List[Dict[str, Any]]:
         """Fallback: BrowserScout nano-knights — free, live web research."""
         try:
-            import sys, os
+            import os
+            import sys
             from pathlib import Path
             _home = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS"))
             _kdir = str(_home / "03_VAULT" / "training" / "configs")

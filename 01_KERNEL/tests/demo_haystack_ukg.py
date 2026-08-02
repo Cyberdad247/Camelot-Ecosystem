@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from integrations.haystack_ukg_bridge import HaystackUKGBridge
 
+
 def main():
     print("=" * 60)
     print("CAMELOT OS - HAYSTACK-UKG BRIDGE DEMO")
@@ -61,12 +62,12 @@ def main():
     print("\n" + "=" * 60)
     print("PHASE 1 VALIDATION: COMPLETE")
     print("=" * 60)
-    print(f"\nSummary:")
-    print(f"  - UKG nodes available: 4,842 total")
+    print("\nSummary:")
+    print("  - UKG nodes available: 4,842 total")
     print(f"  - Documents indexed: {stats['total_documents']}")
-    print(f"  - Queries executed: 3")
-    print(f"  - Haystack version: 2.23.0")
-    print(f"\nStatus: RAG pipeline operational!")
+    print("  - Queries executed: 3")
+    print("  - Haystack version: 2.23.0")
+    print("\nStatus: RAG pipeline operational!")
 
 if __name__ == "__main__":
     main()
