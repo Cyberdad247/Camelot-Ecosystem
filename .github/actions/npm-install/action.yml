@@ -17,6 +17,9 @@ inputs:
   build-command:
     description: 'Build command to run after install. Pass an empty string to skip.'
     default: 'npm run build'
+  install-args:
+    description: 'Extra arguments passed to npm install (e.g., --no-workspaces)'
+    default: ''
 
 runs:
   using: 'composite'
@@ -38,7 +41,7 @@ runs:
     - name: Install dependencies
       shell: bash
       working-directory: ${{ inputs.working-directory }}
-      run: npm install
+      run: npm install ${{ inputs.install-args }}
 
     - name: Build
       if: inputs.build-command != ''

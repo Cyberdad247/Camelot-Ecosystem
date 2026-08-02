@@ -305,3 +305,4 @@ jobs:
           package-json-path: 02_FORGE/apps/i2l-phygital/package.json
           cache-key-prefix: i2l-phygital
           node-version: ${{ env.NODE_VERSION }}
+          install-args: '--no-workspaces'
