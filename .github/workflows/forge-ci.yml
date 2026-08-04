@@ -20,6 +20,8 @@ jobs:
   changes:
     name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     outputs:
       cartridge: ${{ steps.filter.outputs.cartridge }}
       pocket-squire: ${{ steps.filter.outputs.pocket-squire }}
@@ -73,6 +75,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.workspace-lint == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     defaults:
       run:
         working-directory: 02_FORGE
@@ -97,6 +101,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.workspace-lint == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     defaults:
       run:
         working-directory: 02_FORGE
@@ -121,6 +127,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.workspace-lint == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     defaults:
       run:
         working-directory: 02_FORGE
@@ -145,6 +153,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.cartridge == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     defaults:
       run:
         working-directory: 02_FORGE
@@ -170,6 +180,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.pocket-squire == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     env:
       TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
       TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
@@ -193,6 +205,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.kinetic == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     strategy:
       matrix:
         crate:
@@ -235,6 +249,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.holotable == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
 
@@ -251,6 +267,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.portal-core == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
 
@@ -267,6 +285,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.invoice-generator == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
 
@@ -292,6 +312,8 @@ jobs:
     needs: changes
     if: needs.changes.outputs.i2l-phygital == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
 
