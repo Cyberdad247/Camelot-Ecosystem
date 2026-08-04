@@ -326,8 +326,8 @@ _EXACT_GLOB_PATTERNS = tuple(pat for pat in EXCLUDE_FILE_GLOBS if "*" not in pat
 # is_excluded as if it were a legitimate source file. match-function
 # semantics were correct (_matches_suffix uses `pat[1:]`, _matches_prefix
 # uses `pat[:-1]`) so the fix is purely bucket reassignment.
-_PREFIX_GLOB_PATTERNS = tuple(pat for pat in EXCLUDE_FILE_GLOBS if pat.startswith("*") and not pat.endswith("*"))
-_SUFFIX_GLOB_PATTERNS = tuple(pat for pat in EXCLUDE_FILE_GLOBS if pat.endswith("*") and not pat.startswith("*"))
+_PREFIX_GLOB_PATTERNS = tuple(pat for pat in EXCLUDE_FILE_GLOBS if pat.endswith("*") and not pat.startswith("*"))
+_SUFFIX_GLOB_PATTERNS = tuple(pat for pat in EXCLUDE_FILE_GLOBS if pat.startswith("*") and not pat.endswith("*"))
 _CONTAINS_GLOB_PATTERNS = tuple(pat for pat in EXCLUDE_FILE_GLOBS if pat.startswith("*") and pat.endswith("*"))
 
 

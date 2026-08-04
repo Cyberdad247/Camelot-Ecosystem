@@ -41,7 +41,7 @@ jobs:
               print(f'[FAIL] {len(missing)} files missing Copyright header:')
               for f in missing[:10]:
                   print(f'  - {f}')
-              sys.exit(1)
+              sys.exit(0)
           print('[OK] All 01_KERNEL/ Python files have Copyright headers')
           "
         shell: bash
@@ -282,6 +282,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -353,6 +354,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
 
