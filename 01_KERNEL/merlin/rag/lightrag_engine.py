@@ -181,7 +181,7 @@ class LightRAGEngine:
             import chromadb
             from sentence_transformers import SentenceTransformer
         except ImportError as e:
-            raise ImportError(f"Missing dependency: {e}. " "Run: pip install chromadb sentence-transformers")
+            raise ImportError(f"Missing dependency: {e}. " "Run: pip install chromadb sentence-transformers") from None
 
         # Initialize ChromaDB
         persist_path = Path(self.config.persist_directory)

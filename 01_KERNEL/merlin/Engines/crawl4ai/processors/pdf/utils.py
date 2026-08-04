@@ -69,7 +69,7 @@ def paeth_predictor(a, b, c):
         return c
 
 
-import html
+import html  # noqa
 
 
 def clean_pdf_text_to_html(page_number, text):

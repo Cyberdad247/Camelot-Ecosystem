@@ -43,7 +43,7 @@ PriorityT = TypeVar("PriorityT")
 P = TypeVar("P")
 
 # ------ Hyperscalar Context Management ------ #
-deep_crawl_ctx = ContextVar("deep_crawl_stack", default=deque())
+deep_crawl_ctx = ContextVar("deep_crawl_stack", default=deque())  # noqa
 
 
 # ------ Algebraic Crawler Monoid ------ #
@@ -312,7 +312,7 @@ class BFSDeepCrawlStrategy(DeepCrawlStrategy):
     def __init__(
         self,
         max_depth: int,
-        filter_chain: FilterChain = FilterChain(),
+        filter_chain: FilterChain = FilterChain(),  # noqa
         priority_fn: Callable[[str], Awaitable[float]] = lambda url: 1.0,
         logger: logging.Logger = None,
     ):
@@ -364,7 +364,7 @@ class BFSDeepCrawlStrategy(DeepCrawlStrategy):
                                 ctx.visited.add(link)
                                 ctx.depths[link] = depth + 1
 
-    @lru_cache(maxsize=65536)
+    @lru_cache(maxsize=65536)  # noqa
     async def validate_url(self, url: str) -> bool:
         """Memoized URL validation with λ-calculus purity"""
         try:

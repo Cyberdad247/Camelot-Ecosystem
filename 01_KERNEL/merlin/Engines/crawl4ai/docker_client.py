@@ -63,7 +63,7 @@ class Crawl4aiDockerClient:
         except (httpx.RequestError, httpx.HTTPStatusError) as e:
             error_msg = f"Authentication failed: {str(e)}"
             self.logger.error(error_msg, tag="ERROR")
-            raise ConnectionError(error_msg)
+            raise ConnectionError(error_msg)  # noqa
 
     async def _check_server(self) -> None:
         """Check if server is reachable, raising an error if not."""
@@ -72,7 +72,7 @@ class Crawl4aiDockerClient:
             self.logger.success(f"Connected to {self.base_url}", tag="READY")
         except httpx.RequestError as e:
             self.logger.error(f"Server unreachable: {str(e)}", tag="ERROR")
-            raise ConnectionError(f"Cannot connect to server: {str(e)}")
+            raise ConnectionError(f"Cannot connect to server: {str(e)}")  # noqa
 
     def _prepare_request(
         self,
@@ -95,16 +95,16 @@ class Crawl4aiDockerClient:
             response.raise_for_status()
             return response
         except httpx.TimeoutException as e:
-            raise ConnectionError(f"Request timed out: {str(e)}")
+            raise ConnectionError(f"Request timed out: {str(e)}")  # noqa
         except httpx.RequestError as e:
-            raise ConnectionError(f"Failed to connect: {str(e)}")
+            raise ConnectionError(f"Failed to connect: {str(e)}")  # noqa
         except httpx.HTTPStatusError as e:
             error_msg = (
                 e.response.json().get("detail", str(e))
                 if "application/json" in e.response.headers.get("content-type", "")
                 else str(e)
             )
-            raise RequestError(f"Server error {e.response.status_code}: {error_msg}")
+            raise RequestError(f"Server error {e.response.status_code}: {error_msg}")  # noqa
 
     async def crawl(
         self,

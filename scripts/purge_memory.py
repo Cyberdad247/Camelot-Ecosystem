@@ -19,8 +19,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 
-from memory.agent_memory import agent_memory
-from memory.mempalace_l2 import MemPalaceL2
+from memory.agent_memory import agent_memory  # noqa: E402
+from memory.mempalace_l2 import MemPalaceL2  # noqa: E402
 
 PROVENANCE_LEDGER = REPO_ROOT / "PROVENANCE_LEDGER.md"
 
@@ -32,7 +32,7 @@ def log_to_ledger(notes: str):
     last_id = 2000
     try:
         content = PROVENANCE_LEDGER.read_text(encoding="utf-8")
-        lines = [l for l in content.splitlines() if l.startswith("|") and not l.startswith("| ID")]
+        lines = [line for line in content.splitlines() if line.startswith("|") and not line.startswith("| ID")]
         if lines:
             ids = []
             for line in lines:
@@ -166,7 +166,7 @@ def purge_learned_aspects():
             try:
                 lines = t.read_text(encoding="utf-8").splitlines()
                 # Keep comments/headers, remove lines starting with `- [`
-                cleaned_lines = [l for l in lines if not l.strip().startswith("- [")]
+                cleaned_lines = [line for line in lines if not line.strip().startswith("- [")]
                 t.write_text("\n".join(cleaned_lines) + "\n", encoding="utf-8")
                 print(f"  ✅ Cleaned learned aspects from {t.relative_to(REPO_ROOT)}")
             except Exception as e:

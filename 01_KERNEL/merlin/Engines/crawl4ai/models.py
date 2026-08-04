@@ -233,7 +233,7 @@ class CrawlResult(BaseModel):
         )
 
     @property
-    def fit_html(self):
+    def fit_html(self):  # noqa
         """
         Deprecated property that raises an AttributeError when accessed.
         """

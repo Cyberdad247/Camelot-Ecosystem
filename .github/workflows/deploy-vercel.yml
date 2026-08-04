@@ -17,6 +17,8 @@ permissions:
   pull-requests: write
 
 jobs:
+  permissions:
+    pull-requests: read
   # ── Detect which apps changed ────────────────────────────────────
   changes:
     name: Detect changes

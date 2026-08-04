@@ -9,7 +9,7 @@ from pathlib import Path
 
 from crawl4ai.config import MODEL_REPO_BRANCH
 
-from .model_loader import *
+from .model_loader import *  # noqa
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 

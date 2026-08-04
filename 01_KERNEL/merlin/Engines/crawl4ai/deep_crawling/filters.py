@@ -204,7 +204,7 @@ class URLPatternFilter(URLFilter):
                 pattern = fnmatch.translate(pattern)
             self._path_patterns.append(pattern if isinstance(pattern, Pattern) else re.compile(pattern))
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=10000)  # noqa
     def apply(self, url: str) -> bool:
         # Quick suffix check (*.html)
         if self._simple_suffixes:
@@ -376,7 +376,7 @@ class ContentTypeFilter(URLFilter):
             ext for ext, mime in self._MIME_MAP.items() if any(allowed in mime for allowed in self.allowed_types)
         )
 
-    @lru_cache(maxsize=1000)
+    @lru_cache(maxsize=1000)  # noqa
     def _check_url_cached(self, url: str) -> bool:
         """Cached URL checking"""
         if not self._check_extension:

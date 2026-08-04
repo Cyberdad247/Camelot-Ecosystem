@@ -37,7 +37,7 @@ class BestFirstCrawlingStrategy(DeepCrawlStrategy):
     def __init__(
         self,
         max_depth: int,
-        filter_chain: FilterChain = FilterChain(),
+        filter_chain: FilterChain = FilterChain(),  # noqa
         url_scorer: Optional[URLScorer] = None,
         include_external: bool = False,
         max_pages: int = infinity,

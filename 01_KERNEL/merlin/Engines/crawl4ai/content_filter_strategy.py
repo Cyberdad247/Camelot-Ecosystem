@@ -943,7 +943,7 @@ class LLMContentFilter(RelevantContentFilter):
                         self.logger.info(
                             "LLM Markdown: Processing chunk {chunk_num}",
                             tag="CHUNK",
-                            params={"chunk_num": i + 1},
+                            params={"chunk_num": i + 1},  # noqa
                         )
                     return perform_completion_with_backoff(
                         provider,

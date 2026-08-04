@@ -116,7 +116,7 @@ class CompositeScorer(URLScorer):
         self._weights_array = array("f", [s.weight for s in scorers])
         self._score_array = array("f", [0.0] * len(scorers))
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=10000)  # noqa
     def _calculate_score(self, url: str) -> float:
         """Calculate combined score from all scoring strategies.
 
@@ -171,7 +171,7 @@ class KeywordRelevanceScorer(URLScorer):
         # Pre-process keywords once
         self._keywords = [k if case_sensitive else k.lower() for k in keywords]
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=10000)  # noqa
     def _url_bytes(self, url: str) -> bytes:
         """Cache decoded URL bytes"""
         return url.encode("utf-8") if self._case_sensitive else url.lower().encode("utf-8")
@@ -232,7 +232,7 @@ class PathDepthScorer(URLScorer):
 
         return depth
 
-    @lru_cache(maxsize=10000)  # Cache the whole calculation
+    @lru_cache(maxsize=10000)  # Cache the whole calculation  # noqa
     def _calculate_score(self, url: str) -> float:
         pos = url.find("/", url.find("://") + 3)
         if pos == -1:
@@ -307,7 +307,7 @@ class ContentTypeScorer(URLScorer):
 
         return url[pos + 1 : end].lower()
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=10000)  # noqa
     def _calculate_score(self, url: str) -> float:
         """Calculate content type score for URL.
 
@@ -371,7 +371,7 @@ class FreshnessScorer(URLScorer):
             r")?"  # Month/day group is optional
         )
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=10000)  # noqa
     def _extract_year(self, url: str) -> Optional[int]:
         """Extract the most recent year from URL.
 
@@ -392,7 +392,7 @@ class FreshnessScorer(URLScorer):
 
         return latest_year
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=10000)  # noqa
     def _calculate_score(self, url: str) -> float:
         """Calculate freshness score based on URL date.
 
@@ -496,7 +496,7 @@ class DomainAuthorityScorer(URLScorer):
 
         return domain.lower()
 
-    @lru_cache(maxsize=10000)
+    @lru_cache(maxsize=10000)  # noqa
     def _calculate_score(self, url: str) -> float:
         """Calculate domain authority score.
 

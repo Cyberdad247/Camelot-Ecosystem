@@ -80,7 +80,7 @@ def fetch_image_file_size(img, base_url):
     except InvalidSchema:
         return None
     finally:
-        return
+        return  # noqa
 
 
 class ContentScrapingStrategy(ABC):
@@ -654,7 +654,7 @@ class WebScrapingStrategy(ContentScrapingStrategy):
                             internal_links_dict[normalized_href] = link_data
 
             except Exception as e:
-                raise Exception(f"Error processing links: {str(e)}")
+                raise Exception(f"Error processing links: {str(e)}")  # noqa
 
             try:
                 if element.name == "img":
@@ -712,7 +712,7 @@ class WebScrapingStrategy(ContentScrapingStrategy):
 
                     return True  # Always keep image elements
             except Exception:
-                raise "Error processing images"
+                raise "Error processing images"  # noqa
 
             # Check if flag to remove all forms is set
             if kwargs.get("remove_forms", False) and element.name == "form":

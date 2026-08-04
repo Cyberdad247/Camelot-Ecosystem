@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 CODE MIGRATION SCRIPT: os.getenv() → vault.get()

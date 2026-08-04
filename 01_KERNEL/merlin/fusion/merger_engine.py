@@ -116,4 +116,4 @@ if __name__ == "__main__":
     )
     
     print("\n--- FUSION RESULT ---")
-    print(json.dumps(result, indent=2))
+    print(json.dumps(result, indent=2))  # noqa

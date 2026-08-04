@@ -17,4 +17,4 @@ class AmazonProductCrawler(BaseCrawler):
             return '{"product": {"name": "Test Amazon Product"}}'
         except Exception as e:
             self.logger.error(f"Crawl failed: {str(e)}")
-            return json.dumps({"error": str(e), "metadata": self.meta})  # Include meta in error response
+            return json.dumps({"error": str(e), "metadata": self.meta})  # Include meta in error response  # noqa

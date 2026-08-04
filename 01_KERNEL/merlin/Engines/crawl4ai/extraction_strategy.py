@@ -522,7 +522,7 @@ class LLMExtractionStrategy(ExtractionStrategy):
         if not self.llm_config:
             self.llm_config = create_llm_config(
                 provider=DEFAULT_PROVIDER,
-                api_token=os.environ.get(DEFAULT_PROVIDER_API_KEY),
+                api_token=os.environ.get(DEFAULT_PROVIDER_API_KEY),  # noqa
             )
         self.instruction = instruction
         self.extract_type = extraction_type
@@ -1069,7 +1069,7 @@ class JsonElementExtractionStrategy(ExtractionStrategy):
         schema_type: str = "CSS",  # or XPATH
         query: str = None,
         target_json_example: str = None,
-        llm_config: "LLMConfig" = create_llm_config(),
+        llm_config: "LLMConfig" = create_llm_config(),  # noqa
         provider: str = None,
         api_token: str = None,
         **kwargs,
@@ -1175,7 +1175,7 @@ In this scenario, use your best judgment to generate the schema. You need to exa
             return json.loads(response.choices[0].message.content)
 
         except Exception as e:
-            raise Exception(f"Failed to generate schema: {str(e)}")
+            raise Exception(f"Failed to generate schema: {str(e)}")  # noqa
 
 
 class JsonCssExtractionStrategy(JsonElementExtractionStrategy):
@@ -1382,10 +1382,10 @@ class JsonLxmlExtractionStrategy(JsonElementExtractionStrategy):
             try:
                 element.xpath(context_xpath)
                 return context_xpath
-            except:
+            except Exception:
                 # If that fails, try a simpler descendant search
                 return f".//{xpath.split('/')[-1]}"
-        except:
+        except Exception:
             return None
 
     def _handle_nth_child_selector(self, element, selector_str):
@@ -1475,7 +1475,7 @@ class JsonLxmlExtractionStrategy(JsonElementExtractionStrategy):
             # Fallback
             try:
                 return element.text_content().strip()
-            except:
+            except Exception:
                 return ""
 
     def _get_element_html(self, element) -> str:

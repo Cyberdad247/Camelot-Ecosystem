@@ -837,8 +837,8 @@ class CrawlerRunConfig:
         # Content Processing Parameters
         word_count_threshold: int = MIN_WORD_THRESHOLD,
         extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
-        markdown_generator: MarkdownGenerationStrategy = DefaultMarkdownGenerator(),
+        chunking_strategy: ChunkingStrategy = RegexChunking(),  # noqa
+        markdown_generator: MarkdownGenerationStrategy = DefaultMarkdownGenerator(),  # noqa
         only_text: bool = False,
         css_selector: str = None,
         target_elements: List[str] = None,

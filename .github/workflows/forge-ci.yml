@@ -16,6 +16,8 @@ env:
   NODE_VERSION: "20"
 
 jobs:
+  permissions:
+    pull-requests: read
   # ── Detect which subsystems changed ──────────────────────────────
   changes:
     name: Detect changes

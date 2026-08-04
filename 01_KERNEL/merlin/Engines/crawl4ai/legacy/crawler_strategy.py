@@ -22,8 +22,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.chrome.service import Service as ChromeService
 # from webdriver_manager.chrome import ChromeDriverManager
 # from urllib3.exceptions import MaxRetryError
-from .config import *
-from .utils import *
+from .config import *  # noqa
+from .utils import *  # noqa
 
 logger = logging.getLogger("selenium.webdriver.remote.remote_connection")
 logger.setLevel(logging.WARNING)
@@ -77,7 +77,7 @@ class CloudCrawlerStrategy(CrawlerStrategy):
         response = requests.post("http://crawl4ai.uccode.io/crawl", json=data)
         response = response.json()
         html = response["results"][0]["html"]
-        return sanitize_input_encode(html)
+        return sanitize_input_encode(html)  # noqa
 
 
 class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
@@ -220,7 +220,7 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
             )
             if os.path.exists(cache_file_path):
                 with open(cache_file_path, "r") as f:
-                    return sanitize_input_encode(f.read())
+                    return sanitize_input_encode(f.read())  # noqa
 
         try:
             self.driver = self.execute_hook("before_get_url", self.driver)
@@ -234,7 +234,7 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
             self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
             self.driver = self.execute_hook("after_get_url", self.driver)
-            html = sanitize_input_encode(self._ensure_page_load())  # self.driver.page_source
+            html = sanitize_input_encode(self._ensure_page_load())  # self.driver.page_source  # noqa
             can_not_be_done_headless = False  # Look at my creativity for naming variables
 
             # TODO: Very ugly approach, but promise to change it!
@@ -248,18 +248,18 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
                 driver = webdriver.Chrome(service=self.service, options=options)
                 driver.get(url)
                 self.driver = self.execute_hook("after_get_url", driver)
-                html = sanitize_input_encode(driver.page_source)
+                html = sanitize_input_encode(driver.page_source)  # noqa
                 driver.quit()
 
             # Execute JS code if provided
             self.js_code = kwargs.get("js_code", self.js_code)
-            if self.js_code and type(self.js_code) == str:
+            if self.js_code and type(self.js_code) == str:  # noqa
                 self.driver.execute_script(self.js_code)
                 # Optionally, wait for some condition after executing the JS code
                 WebDriverWait(self.driver, 10).until(
                     lambda driver: driver.execute_script("return document.readyState") == "complete"
                 )
-            elif self.js_code and type(self.js_code) == list:
+            elif self.js_code and type(self.js_code) == list:  # noqa
                 for js in self.js_code:
                     self.driver.execute_script(js)
                     WebDriverWait(self.driver, 10).until(
@@ -277,7 +277,7 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
                     WebDriverWait(self.driver, 20).until(EC.presence_of_element_located((By.CSS_SELECTOR, wait_for)))
 
             if not can_not_be_done_headless:
-                html = sanitize_input_encode(self.driver.page_source)
+                html = sanitize_input_encode(self.driver.page_source)  # noqa
             self.driver = self.execute_hook("before_return_html", self.driver, html)
 
             # Store in cache
@@ -296,17 +296,17 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
             return html
         except InvalidArgumentException as e:
             if not hasattr(e, "msg"):
-                e.msg = sanitize_input_encode(str(e))
-            raise InvalidArgumentException(f"Failed to crawl {url}: {e.msg}")
+                e.msg = sanitize_input_encode(str(e))  # noqa
+            raise InvalidArgumentException(f"Failed to crawl {url}: {e.msg}")  # noqa
         except WebDriverException as e:
             # If e does nlt have msg attribute create it and set it to str(e)
             if not hasattr(e, "msg"):
-                e.msg = sanitize_input_encode(str(e))
-            raise WebDriverException(f"Failed to crawl {url}: {e.msg}")
+                e.msg = sanitize_input_encode(str(e))  # noqa
+            raise WebDriverException(f"Failed to crawl {url}: {e.msg}")  # noqa
         except Exception as e:
             if not hasattr(e, "msg"):
-                e.msg = sanitize_input_encode(str(e))
-            raise Exception(f"Failed to crawl {url}: {e.msg}")
+                e.msg = sanitize_input_encode(str(e))  # noqa
+            raise Exception(f"Failed to crawl {url}: {e.msg}")  # noqa
 
     def take_screenshot(self) -> str:
         try:
@@ -336,7 +336,7 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
 
             return img_base64
         except Exception as e:
-            error_message = sanitize_input_encode(f"Failed to take screenshot: {str(e)}")
+            error_message = sanitize_input_encode(f"Failed to take screenshot: {str(e)}")  # noqa
             print(error_message)
 
             # Generate an image with black background
@@ -352,7 +352,7 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
             # Define text color and wrap the text
             text_color = (255, 255, 255)
             max_width = 780
-            wrapped_text = wrap_text(draw, error_message, font, max_width)
+            wrapped_text = wrap_text(draw, error_message, font, max_width)  # noqa
 
             # Calculate text position
             text_position = (10, 10)

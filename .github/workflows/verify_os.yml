@@ -11,6 +11,8 @@ env:
   PYTHONIOENCODING: utf-8
 
 jobs:
+  permissions:
+    pull-requests: read
   # ── Stage 1: Governance & Structure ─────────────────────────────
   governance:
     name: Instruction Governance

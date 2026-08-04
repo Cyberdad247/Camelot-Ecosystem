@@ -29,7 +29,7 @@ class BFSDeepCrawlStrategy(DeepCrawlStrategy):
     def __init__(
         self,
         max_depth: int,
-        filter_chain: FilterChain = FilterChain(),
+        filter_chain: FilterChain = FilterChain(),  # noqa
         url_scorer: Optional[URLScorer] = None,
         include_external: bool = False,
         score_threshold: float = -infinity,

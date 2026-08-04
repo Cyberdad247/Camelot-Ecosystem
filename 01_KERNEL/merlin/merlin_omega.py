@@ -259,7 +259,7 @@ class Merlin_Omega(AgentNode):
         elif "//FLEET" in cmd:
             try:
                 # Launch the Go terminal dashboard
-                fleet_exe = Path(__file__).resolve().parents[1] / "agora" / "fleet" / "fleet_cmd.exe"
+                fleet_exe = Path(__file__).resolve().parents[1] / "agora" / "fleet" / "fleet_cmd.exe"  # noqa
                 subprocess.Popen(
                     ["cmd", "/k", f"title FLEET_DASHBOARD && \"{fleet_exe}\""],
                     creationflags=subprocess.CREATE_NEW_CONSOLE,

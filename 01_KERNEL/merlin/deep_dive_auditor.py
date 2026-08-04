@@ -42,10 +42,10 @@ class OmegaAuditor:
         
         for realm in scan_roots:
             realm_path = os.path.join(self.root_path, realm)
-            if realm == ".": realm_path = self.root_path
+            if realm == ".": realm_path = self.root_path  # noqa
             
             print(f"DEBUG: Checking realm: {realm_path} (Exists: {os.path.exists(realm_path)})")
-            if not os.path.exists(realm_path): continue
+            if not os.path.exists(realm_path): continue  # noqa
             
             for root, dirs, files in os.walk(realm_path):
                 # Prune directories in-place to avoid traversing them
@@ -106,7 +106,7 @@ class OmegaAuditor:
                 with open(output_path, "r", encoding="utf-8") as f:
                     data = json.load(f)
                     existing_nodes = data.get("nodes", [])
-            except:
+            except Exception:
                 pass
 
         # Create a set of existing hashes to avoid duplicates
@@ -192,7 +192,7 @@ class OmegaAuditor:
         purged_count = 0
         for node in nodes:
             rel_path = node.get('source')
-            if not rel_path: continue
+            if not rel_path: continue  # noqa
             
             src_path = os.path.join(self.root_path, rel_path)
             dest_path = os.path.join(archive_root, rel_path)

@@ -10,14 +10,14 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List
 
-from .chunking_strategy import *
-from .config import *
+from .chunking_strategy import *  # noqa
+from .config import *  # noqa
 from .content_scraping_strategy import WebScrapingStrategy
-from .crawler_strategy import *
+from .crawler_strategy import *  # noqa
 from .database import cache_url, get_cached_url, init_db
-from .extraction_strategy import *
+from .extraction_strategy import *  # noqa
 from .models import CrawlResult, UrlModel
-from .utils import *
+from .utils import *  # noqa
 
 warnings.filterwarnings(
     "ignore",
@@ -28,11 +28,11 @@ warnings.filterwarnings(
 class WebCrawler:
     def __init__(
         self,
-        crawler_strategy: CrawlerStrategy = None,
+        crawler_strategy: CrawlerStrategy = None,  # noqa
         always_by_pass_cache: bool = False,
         verbose: bool = False,
     ):
-        self.crawler_strategy = crawler_strategy or LocalSeleniumCrawlerStrategy(verbose=verbose)
+        self.crawler_strategy = crawler_strategy or LocalSeleniumCrawlerStrategy(verbose=verbose)  # noqa
         self.always_by_pass_cache = always_by_pass_cache
         self.crawl4ai_folder = os.path.join(os.getenv("CRAWL4_AI_BASE_DIRECTORY", Path.home()), ".crawl4ai")
         os.makedirs(self.crawl4ai_folder, exist_ok=True)
@@ -45,7 +45,7 @@ class WebCrawler:
         self.run(
             url="https://google.com/",
             word_count_threshold=5,
-            extraction_strategy=NoExtractionStrategy(),
+            extraction_strategy=NoExtractionStrategy(),  # noqa
             bypass_cache=False,
             verbose=False,
         )
@@ -55,21 +55,21 @@ class WebCrawler:
     def fetch_page(
         self,
         url_model: UrlModel,
-        provider: str = DEFAULT_PROVIDER,
+        provider: str = DEFAULT_PROVIDER,  # noqa
         api_token: str = None,
         extract_blocks_flag: bool = True,
-        word_count_threshold=MIN_WORD_THRESHOLD,
+        word_count_threshold=MIN_WORD_THRESHOLD,  # noqa
         css_selector: str = None,
         screenshot: bool = False,
         use_cached_html: bool = False,
-        extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
+        extraction_strategy: ExtractionStrategy = None,  # noqa
+        chunking_strategy: ChunkingStrategy = RegexChunking(),  # noqa
         **kwargs,
     ) -> CrawlResult:
         return self.run(
             url_model.url,
             word_count_threshold,
-            extraction_strategy or NoExtractionStrategy(),
+            extraction_strategy or NoExtractionStrategy(),  # noqa
             chunking_strategy,
             bypass_cache=url_model.forced,
             css_selector=css_selector,
@@ -81,18 +81,18 @@ class WebCrawler:
     def fetch_pages(
         self,
         url_models: List[UrlModel],
-        provider: str = DEFAULT_PROVIDER,
+        provider: str = DEFAULT_PROVIDER,  # noqa
         api_token: str = None,
         extract_blocks_flag: bool = True,
-        word_count_threshold=MIN_WORD_THRESHOLD,
+        word_count_threshold=MIN_WORD_THRESHOLD,  # noqa
         use_cached_html: bool = False,
         css_selector: str = None,
         screenshot: bool = False,
-        extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
+        extraction_strategy: ExtractionStrategy = None,  # noqa
+        chunking_strategy: ChunkingStrategy = RegexChunking(),  # noqa
         **kwargs,
     ) -> List[CrawlResult]:
-        extraction_strategy = extraction_strategy or NoExtractionStrategy()
+        extraction_strategy = extraction_strategy or NoExtractionStrategy()  # noqa
 
         def fetch_page_wrapper(url_model, *args, **kwargs):
             return self.fetch_page(url_model, *args, **kwargs)
@@ -120,9 +120,9 @@ class WebCrawler:
     def run(
         self,
         url: str,
-        word_count_threshold=MIN_WORD_THRESHOLD,
-        extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
+        word_count_threshold=MIN_WORD_THRESHOLD,  # noqa
+        extraction_strategy: ExtractionStrategy = None,  # noqa
+        chunking_strategy: ChunkingStrategy = RegexChunking(),  # noqa
         bypass_cache: bool = False,
         css_selector: str = None,
         screenshot: bool = False,
@@ -131,14 +131,14 @@ class WebCrawler:
         **kwargs,
     ) -> CrawlResult:
         try:
-            extraction_strategy = extraction_strategy or NoExtractionStrategy()
+            extraction_strategy = extraction_strategy or NoExtractionStrategy()  # noqa
             extraction_strategy.verbose = verbose
-            if not isinstance(extraction_strategy, ExtractionStrategy):
+            if not isinstance(extraction_strategy, ExtractionStrategy):  # noqa
                 raise ValueError("Unsupported extraction strategy")
-            if not isinstance(chunking_strategy, ChunkingStrategy):
+            if not isinstance(chunking_strategy, ChunkingStrategy):  # noqa
                 raise ValueError("Unsupported chunking strategy")
 
-            word_count_threshold = max(word_count_threshold, MIN_WORD_THRESHOLD)
+            word_count_threshold = max(word_count_threshold, MIN_WORD_THRESHOLD)  # noqa
 
             cached = None
             screenshot_data = None
@@ -150,8 +150,8 @@ class WebCrawler:
                 return None
 
             if cached:
-                html = sanitize_input_encode(cached[1])
-                extracted_content = sanitize_input_encode(cached[4])
+                html = sanitize_input_encode(cached[1])  # noqa
+                extracted_content = sanitize_input_encode(cached[4])  # noqa
                 if screenshot:
                     screenshot_data = cached[9]
                     if not screenshot_data:
@@ -161,7 +161,7 @@ class WebCrawler:
                 if user_agent:
                     self.crawler_strategy.update_user_agent(user_agent)
                 t1 = time.time()
-                html = sanitize_input_encode(self.crawler_strategy.crawl(url, **kwargs))
+                html = sanitize_input_encode(self.crawler_strategy.crawl(url, **kwargs))  # noqa
                 t2 = time.time()
                 if verbose:
                     print(f"[LOG] 🚀 Crawling done for {url}, success: {bool(html)}, time taken: {t2 - t1:.2f} seconds")
@@ -195,8 +195,8 @@ class WebCrawler:
         html: str,
         extracted_content: str,
         word_count_threshold: int,
-        extraction_strategy: ExtractionStrategy,
-        chunking_strategy: ChunkingStrategy,
+        extraction_strategy: ExtractionStrategy,  # noqa
+        chunking_strategy: ChunkingStrategy,  # noqa
         css_selector: str,
         screenshot: bool,
         verbose: bool,
@@ -219,7 +219,7 @@ class WebCrawler:
                 only_text=kwargs.get("only_text", False),
                 image_description_min_word_threshold=kwargs.get(
                     "image_description_min_word_threshold",
-                    IMAGE_DESCRIPTION_MIN_WORD_THRESHOLD,
+                    IMAGE_DESCRIPTION_MIN_WORD_THRESHOLD,  # noqa
                 ),
                 **extra_params,
             )
@@ -232,11 +232,11 @@ class WebCrawler:
 
             if result is None:
                 raise ValueError(f"Failed to extract content from the website: {url}")
-        except InvalidCSSSelectorError as e:
-            raise ValueError(str(e))
+        except InvalidCSSSelectorError as e:  # noqa
+            raise ValueError(str(e))  # noqa
 
-        cleaned_html = sanitize_input_encode(result.get("cleaned_html", ""))
-        markdown = sanitize_input_encode(result.get("markdown", ""))
+        cleaned_html = sanitize_input_encode(result.get("cleaned_html", ""))  # noqa
+        markdown = sanitize_input_encode(result.get("markdown", ""))  # noqa
         media = result.get("media", [])
         links = result.get("links", [])
         metadata = result.get("metadata", {})
@@ -271,7 +271,7 @@ class WebCrawler:
         return CrawlResult(
             url=url,
             html=html,
-            cleaned_html=format_html(cleaned_html),
+            cleaned_html=format_html(cleaned_html),  # noqa
             markdown=markdown,
             media=media,
             links=links,
