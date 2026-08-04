@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 # -*- coding: utf-8 -*-
 """
 Ω_CAMELOT_OS_DIRECTORY_DISTILLER — Active VFS Distiller & Ingestion Crawler
