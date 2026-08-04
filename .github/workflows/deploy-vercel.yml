@@ -21,6 +21,9 @@ jobs:
   changes:
     name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
     outputs:
       anya: ${{ steps.filter.outputs.anya }}
       omni: ${{ steps.filter.outputs.omni }}
@@ -42,6 +45,9 @@ jobs:
     needs: changes
     if: needs.changes.outputs.anya == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
     defaults:
       run:
         working-directory: 02_FORGE/PORTAL_CORE/Anya_Dashboard
@@ -86,6 +92,9 @@ jobs:
     needs: changes
     if: needs.changes.outputs.omni == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
     defaults:
       run:
         working-directory: 02_FORGE/apps/omni-eye-dashboard

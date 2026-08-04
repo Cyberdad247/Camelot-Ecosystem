@@ -17,6 +17,9 @@ jobs:
   changes:
     name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
     outputs:
       photo-viewer: ${{ steps.filter.outputs.photo-viewer }}
     steps:
@@ -40,6 +43,9 @@ jobs:
     needs: changes
     if: needs.changes.outputs.photo-viewer == 'true' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
     steps:
       - uses: actions/checkout@v4
 
@@ -66,6 +72,7 @@ jobs:
       (needs.changes.outputs.photo-viewer == 'true' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     permissions:
+      pull-requests: read
       contents: read
       packages: write
 
