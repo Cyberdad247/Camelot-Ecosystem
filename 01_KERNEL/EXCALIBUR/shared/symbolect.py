@@ -27,6 +27,8 @@ SYMBOL_MAP = {
 REVERSE_SYMBOL_MAP = {v: k for k, v in SYMBOL_MAP.items()}
 
 
+import re
+
 def encode_symbolect(text: str) -> str:
     """
     Encode text into Symbolect (symbol compression).
@@ -44,7 +46,7 @@ def encode_symbolect(text: str) -> str:
     encoded_text = text
     for word, symbol in SYMBOL_MAP.items():
         # Replace whole words only
-        encoded_text = encoded_text.replace(word, symbol)
+        encoded_text = re.sub(rf'\b{re.escape(word)}\b', symbol, encoded_text)
     return encoded_text
 
 
