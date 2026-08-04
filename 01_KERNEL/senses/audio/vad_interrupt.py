@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 [S4-03] VAD Interrupt Controller — interruptible TTS pipeline.

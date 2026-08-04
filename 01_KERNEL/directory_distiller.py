@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 Ω_CAMELOT_OS_DIRECTORY_DISTILLER — Active VFS Distiller & Ingestion Crawler

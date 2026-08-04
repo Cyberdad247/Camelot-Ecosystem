@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
