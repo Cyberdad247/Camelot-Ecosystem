@@ -453,12 +453,16 @@ class TitanOmega:
 
         if self.graph:
             graph_hits = []
-            for node in self.graph.query({"type": "Fact"}):
-                if query.lower() in str(node.attributes).lower():
-                    graph_hits.append(node)
-            results["graph_results"] = [
-                {"node_id": node.node_id, "attributes": node.attributes}
-                for node in graph_hits[:k]
-            ]
+            query_lower = query.lower()
+            for node_id, node_data in self.graph.graph.nodes(data=True):
+                if node_data.get("type") == "Fact":
+                    attrs = node_data.get("attributes", {})
+                    if query_lower in str(attrs).lower():
+                        graph_hits.append(
+                            {"node_id": node_id, "attributes": attrs}
+                        )
+                        if len(graph_hits) >= k:
+                            break
+            results["graph_results"] = graph_hits
 
         return results
