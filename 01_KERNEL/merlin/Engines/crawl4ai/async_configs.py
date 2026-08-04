@@ -21,7 +21,7 @@ from .config import (
 from .content_scraping_strategy import ContentScrapingStrategy, WebScrapingStrategy
 from .deep_crawling import DeepCrawlStrategy
 from .extraction_strategy import ExtractionStrategy
-from .markdown_generation_strategy import DefaultMarkdownGenerator, MarkdownGenerationStrategy
+from .markdown_generation_strategy import MarkdownGenerationStrategy
 from .proxy_strategy import ProxyRotationStrategy
 from .user_agent_generator import UAGen, ValidUAGenerator  # , OnlineUAGenerator
 
@@ -837,8 +837,8 @@ class CrawlerRunConfig:
         # Content Processing Parameters
         word_count_threshold: int = MIN_WORD_THRESHOLD,
         extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
-        markdown_generator: MarkdownGenerationStrategy = DefaultMarkdownGenerator(),
+        chunking_strategy: ChunkingStrategy = None,
+        markdown_generator: MarkdownGenerationStrategy = None,
         only_text: bool = False,
         css_selector: str = None,
         target_elements: List[str] = None,
@@ -1048,13 +1048,18 @@ class CrawlerRunConfig:
             raise AttributeError(f"Getting '{name}' is deprecated. {self._UNWANTED_PROPS[name]}")
         raise AttributeError(f"'{self.__class__.__name__}' has no attribute '{name}'")
 
+    _init_params = None
+
     def __setattr__(self, name, value):
         """Handle attribute setting."""
-        # TODO: Planning to set properties dynamically based on the __init__ signature
-        sig = inspect.signature(self.__init__)
-        all_params = sig.parameters  # Dictionary of parameter names and their details
+        cls = self.__class__
+        if cls._init_params is None:
+            cls._init_params = inspect.signature(cls.__init__).parameters
 
-        if name in self._UNWANTED_PROPS and value is not all_params[name].default:
+        if name not in cls._init_params and not name.startswith("_") and not hasattr(self, name):
+            raise AttributeError(f"'{cls.__name__}' has no attribute '{name}'")
+
+        if name in self._UNWANTED_PROPS and name in cls._init_params and value is not cls._init_params[name].default:
             raise AttributeError(f"Setting '{name}' is deprecated. {self._UNWANTED_PROPS[name]}")
 
         super().__setattr__(name, value)

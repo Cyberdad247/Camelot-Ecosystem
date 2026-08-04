@@ -3,6 +3,7 @@
 import ast
 import inspect
 import json
+import os
 import re
 import time
 from abc import ABC, abstractmethod
@@ -546,13 +547,18 @@ class LLMExtractionStrategy(ExtractionStrategy):
         self.base_url = base_url
         self.api_base = api_base
 
+    _init_params = None
+
     def __setattr__(self, name, value):
         """Handle attribute setting."""
-        # TODO: Planning to set properties dynamically based on the __init__ signature
-        sig = inspect.signature(self.__init__)
-        all_params = sig.parameters  # Dictionary of parameter names and their details
+        cls = self.__class__
+        if cls._init_params is None:
+            cls._init_params = inspect.signature(cls.__init__).parameters
 
-        if name in self._UNWANTED_PROPS and value is not all_params[name].default:
+        if name not in cls._init_params and not name.startswith("_") and not hasattr(self, name):
+            raise AttributeError(f"'{cls.__name__}' has no attribute '{name}'")
+
+        if name in self._UNWANTED_PROPS and name in cls._init_params and value is not cls._init_params[name].default:
             raise AttributeError(f"Setting '{name}' is deprecated. {self._UNWANTED_PROPS[name]}")
 
         super().__setattr__(name, value)
@@ -1069,7 +1075,7 @@ class JsonElementExtractionStrategy(ExtractionStrategy):
         schema_type: str = "CSS",  # or XPATH
         query: str = None,
         target_json_example: str = None,
-        llm_config: "LLMConfig" = create_llm_config(),
+        llm_config: "LLMConfig" = None,
         provider: str = None,
         api_token: str = None,
         **kwargs,
@@ -1175,7 +1181,7 @@ In this scenario, use your best judgment to generate the schema. You need to exa
             return json.loads(response.choices[0].message.content)
 
         except Exception as e:
-            raise Exception(f"Failed to generate schema: {str(e)}")
+            raise Exception(f"Failed to generate schema: {str(e)}") from e
 
 
 class JsonCssExtractionStrategy(JsonElementExtractionStrategy):
@@ -1382,10 +1388,10 @@ class JsonLxmlExtractionStrategy(JsonElementExtractionStrategy):
             try:
                 element.xpath(context_xpath)
                 return context_xpath
-            except:
+            except Exception:
                 # If that fails, try a simpler descendant search
                 return f".//{xpath.split('/')[-1]}"
-        except:
+        except Exception:
             return None
 
     def _handle_nth_child_selector(self, element, selector_str):
@@ -1475,7 +1481,7 @@ class JsonLxmlExtractionStrategy(JsonElementExtractionStrategy):
             # Fallback
             try:
                 return element.text_content().strip()
-            except:
+            except Exception:
                 return ""
 
     def _get_element_html(self, element) -> str:
