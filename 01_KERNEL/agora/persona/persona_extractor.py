@@ -17,7 +17,7 @@ Usage:
 import json
 import logging
 import re
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 # Configure logger
 logging.basicConfig(level=logging.INFO)
@@ -30,14 +30,16 @@ class PersonaPatternExtractor:
     """
     
     def __init__(self):
-        # Patterns to mine
-        self.PATTERNS = {
-            "reasoning_cot": re.compile(r"(Step Id:|Thinking Process:|Reasoning:)", re.IGNORECASE),
-            "decision_point": re.compile(r"(if|else|switch|match|case)\s+[\w_]+", re.IGNORECASE),
-            "temp_shift": re.compile(r"(Simulated Mode|Temperature|Mode: CoT)", re.IGNORECASE),
-            "error_handling": re.compile(r"(try|except|catch|raise|Error)", re.IGNORECASE),
-            "merlin_voice": re.compile(r"(🧙‍♂️|🔮|✅|⚠️|❌|🏰)", re.UNICODE)
-        }
+        # We combine all patterns into a single regex and use named capture groups
+        # to identify which pattern matched.
+        combined = (
+            r"(?P<reasoning_cot>Step Id:|Thinking Process:|Reasoning:)|"
+            r"(?P<decision_point>(?:if|else|switch|match|case)\s+[\w_]+)|"
+            r"(?P<temp_shift>Simulated Mode|Temperature|Mode: CoT)|"
+            r"(?P<error_handling>try|except|catch|raise|Error)|"
+            r"(?P<merlin_voice>🧙‍♂️|🔮|✅|⚠️|❌|🏰)"
+        )
+        self.COMBINED_PATTERN = re.compile(combined, re.IGNORECASE | re.UNICODE)
 
     def analyze_trace(self, trace_text: str) -> Dict[str, Any]:
         """
@@ -51,29 +53,46 @@ class PersonaPatternExtractor:
         """
         logger.info("🔍 Mining trace for persona patterns...")
         
+        cot_matches = 0
+        decision_frequency = 0
+        voice_markers = []
+        temperature_dynamics = []
+        error_resilience = False
+
+        for match in self.COMBINED_PATTERN.finditer(trace_text):
+            lastgroup = match.lastgroup
+            if lastgroup == "reasoning_cot":
+                cot_matches += 1
+            elif lastgroup == "decision_point":
+                decision_frequency += 1
+            elif lastgroup == "temp_shift":
+                temperature_dynamics.append(match.group("temp_shift"))
+            elif lastgroup == "error_handling":
+                error_resilience = True
+            elif lastgroup == "merlin_voice":
+                voice_markers.append(match.group("merlin_voice"))
+
+        # Evaluate reasoning style
+        if cot_matches > 2:
+            reasoning_style = "Chain-of-Thought (Deep)"
+        elif cot_matches > 0:
+            reasoning_style = "Chain-of-Thought (Light)"
+        elif "return" in trace_text and "def" in trace_text:
+            reasoning_style = "Procedural (Code-Based)"
+        else:
+            reasoning_style = "Reactive (Direct)"
+
         profile = {
-            "reasoning_style": self._detect_reasoning_style(trace_text),
-            "decision_frequency": len(self.PATTERNS["decision_point"].findall(trace_text)),
+            "reasoning_style": reasoning_style,
+            "decision_frequency": decision_frequency,
             "complexity_level": self._assess_complexity(trace_text),
-            "voice_markers": self.PATTERNS["merlin_voice"].findall(trace_text),
-            "temperature_dynamics": self._detect_temp_shifts(trace_text),
-            "error_resilience": len(self.PATTERNS["error_handling"].findall(trace_text)) > 0
+            "voice_markers": voice_markers,
+            "temperature_dynamics": temperature_dynamics,
+            "error_resilience": error_resilience
         }
         
         logger.info(f"✅ Persona profile mined: {profile['reasoning_style']} style, {profile['decision_frequency']} decisions.")
         return profile
-
-    def _detect_reasoning_style(self, text: str) -> str:
-        """Determines if the trace is Chain-of-Thought, Reactive, or Procedural."""
-        cot_matches = len(self.PATTERNS["reasoning_cot"].findall(text))
-        if cot_matches > 2:
-            return "Chain-of-Thought (Deep)"
-        elif cot_matches > 0:
-            return "Chain-of-Thought (Light)"
-        elif "return" in text and "def" in text:
-            return "Procedural (Code-Based)"
-        else:
-            return "Reactive (Direct)"
 
     def _assess_complexity(self, text: str) -> str:
         """Estimates complexity based on length and structure."""
@@ -84,10 +103,6 @@ class PersonaPatternExtractor:
             return "Medium (Component)"
         else:
             return "Low (Atomic)"
-
-    def _detect_temp_shifts(self, text: str) -> List[str]:
-        """Finds explicit mentions of mode or temperature changes."""
-        return self.PATTERNS["temp_shift"].findall(text)
 
 if __name__ == "__main__":
     # Self-Test Logic
