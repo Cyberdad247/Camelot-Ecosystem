@@ -518,41 +518,42 @@ class LLMExtractionStrategy(ExtractionStrategy):
             extra_args: Additional arguments for the API request, such as temprature, max_tokens, etc.
         """
         super().__init__(input_format=input_format, **kwargs)
-        self.llm_config = llm_config
+
+        args = locals()
+        kwargs_dict = args.get("kwargs", {})
+
+        # Dynamically set properties based on the __init__ signature
+        for param_name in inspect.signature(self.__init__).parameters:
+            if param_name in ("self", "kwargs"):
+                continue
+            if param_name in args:
+                setattr(self, param_name, args[param_name])
+            elif param_name in kwargs_dict:
+                setattr(self, param_name, kwargs_dict[param_name])
+
         if not self.llm_config:
             self.llm_config = create_llm_config(
                 provider=DEFAULT_PROVIDER,
                 api_token=os.environ.get(DEFAULT_PROVIDER_API_KEY),
             )
-        self.instruction = instruction
         self.extract_type = extraction_type
-        self.schema = schema
         if schema:
             self.extract_type = "schema"
-        self.force_json_response = force_json_response
+
         self.chunk_token_threshold = chunk_token_threshold or CHUNK_TOKEN_THRESHOLD
-        self.overlap_rate = overlap_rate
-        self.word_token_rate = word_token_rate
-        self.apply_chunking = apply_chunking
         self.extra_args = kwargs.get("extra_args", {})
         if not self.apply_chunking:
             self.chunk_token_threshold = 1e9
-        self.verbose = verbose
+
         self.usages = []  # Store individual usages
         self.total_usage = TokenUsage()  # Accumulated usage
 
-        self.provider = provider
-        self.api_token = api_token
-        self.base_url = base_url
-        self.api_base = api_base
-
     def __setattr__(self, name, value):
         """Handle attribute setting."""
-        # TODO: Planning to set properties dynamically based on the __init__ signature
         sig = inspect.signature(self.__init__)
         all_params = sig.parameters  # Dictionary of parameter names and their details
 
-        if name in self._UNWANTED_PROPS and value is not all_params[name].default:
+        if name in self._UNWANTED_PROPS and name in all_params and value is not all_params[name].default:
             raise AttributeError(f"Setting '{name}' is deprecated. {self._UNWANTED_PROPS[name]}")
 
         super().__setattr__(name, value)
