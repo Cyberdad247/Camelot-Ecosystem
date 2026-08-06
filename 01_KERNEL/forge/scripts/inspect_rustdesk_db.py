@@ -15,15 +15,18 @@ try:
 
     # List tables
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    tables = cursor.fetchall()
+
+    # Store table names in a list first, as we'll reuse the cursor for fetching rows
+    tables = [row[0] for row in cursor]
     print(f"Tables: {tables}")
 
-    for table in tables:
-        table_name = table[0]
+    for table_name in tables:
         print(f"\n--- Content of {table_name} ---")
-        cursor.execute(f"SELECT * FROM {table_name} LIMIT 10;")
-        rows = cursor.fetchall()
-        for row in rows:
+        # Securely quote the table name to prevent SQL injection
+        escaped_name = table_name.replace('"', '""')
+        safe_table_name = f'"{escaped_name}"'
+        cursor.execute(f"SELECT * FROM {safe_table_name} LIMIT 10;")
+        for row in cursor:
             print(row)
 
     conn.close()
