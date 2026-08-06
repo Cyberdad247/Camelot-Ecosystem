@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 import argparse
 
 # Need to ensure we can import from CAMELOT_OS
