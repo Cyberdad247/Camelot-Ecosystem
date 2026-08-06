@@ -68,6 +68,19 @@ def test_default_scaffold_body_for_verification():
     assert body.startswith("# Verification — knight_memory\n\n")
 
 
+def test_default_scaffold_body_exact_match():
+    body = default_scaffold_body("blueprint.md", "myproj")
+    expected = (
+        "# Blueprint — myproj\n\n"
+        "## Status\n\n"
+        "Scaffold emitted by `camelot_portable cartridge --emit` "
+        "via OmniRoute. Integrate with item-3 isolation namespacing "
+        "per `docs/architecture/camelot_v1000_paper/"
+        "items_2_3_decision_matrix.md`.\n"
+    )
+    assert body == expected
+
+
 # ── is_default_scaffold_unmodified ───────────────────────────────────────────
 
 
