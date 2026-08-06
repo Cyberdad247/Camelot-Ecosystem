@@ -44,7 +44,16 @@ def alter_db_add_screenshot(new_column: str = "media"):
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute(f'ALTER TABLE crawled_data ADD COLUMN {new_column} TEXT DEFAULT ""')
+
+        queries = {
+            "media": 'ALTER TABLE crawled_data ADD COLUMN media TEXT DEFAULT ""',
+            "links": 'ALTER TABLE crawled_data ADD COLUMN links TEXT DEFAULT ""',
+            "metadata": 'ALTER TABLE crawled_data ADD COLUMN metadata TEXT DEFAULT ""',
+            "screenshot": 'ALTER TABLE crawled_data ADD COLUMN screenshot TEXT DEFAULT ""',
+            "response_headers": 'ALTER TABLE crawled_data ADD COLUMN response_headers TEXT DEFAULT ""'
+        }
+        cursor.execute(queries[new_column])
+
         conn.commit()
         conn.close()
     except Exception as e:
@@ -170,7 +179,16 @@ def update_existing_records(new_column: str = "media", default_value: str = "{}"
     try:
         conn = sqlite3.connect(DB_PATH)
         cursor = conn.cursor()
-        cursor.execute(f"UPDATE crawled_data SET {new_column} = ? WHERE screenshot IS NULL", (default_value,))
+
+        queries = {
+            "media": "UPDATE crawled_data SET media = ? WHERE screenshot IS NULL",
+            "links": "UPDATE crawled_data SET links = ? WHERE screenshot IS NULL",
+            "metadata": "UPDATE crawled_data SET metadata = ? WHERE screenshot IS NULL",
+            "screenshot": "UPDATE crawled_data SET screenshot = ? WHERE screenshot IS NULL",
+            "response_headers": "UPDATE crawled_data SET response_headers = ? WHERE screenshot IS NULL"
+        }
+        cursor.execute(queries[new_column], (default_value,))
+
         conn.commit()
         conn.close()
     except Exception as e:

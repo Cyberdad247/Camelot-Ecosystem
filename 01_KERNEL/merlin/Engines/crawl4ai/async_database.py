@@ -264,10 +264,16 @@ class AsyncDatabaseManager:
         """Add new column to the database"""
         if new_column not in self._ALLOWED_COLUMNS:
             raise ValueError(f"Column '{new_column}' is not in the allowed column list")
-        if new_column == "response_headers":
-            await db.execute(f'ALTER TABLE crawled_data ADD COLUMN {new_column} TEXT DEFAULT "{{}}"')
-        else:
-            await db.execute(f'ALTER TABLE crawled_data ADD COLUMN {new_column} TEXT DEFAULT ""')
+
+        queries = {
+            "media": 'ALTER TABLE crawled_data ADD COLUMN media TEXT DEFAULT ""',
+            "links": 'ALTER TABLE crawled_data ADD COLUMN links TEXT DEFAULT ""',
+            "metadata": 'ALTER TABLE crawled_data ADD COLUMN metadata TEXT DEFAULT ""',
+            "screenshot": 'ALTER TABLE crawled_data ADD COLUMN screenshot TEXT DEFAULT ""',
+            "response_headers": 'ALTER TABLE crawled_data ADD COLUMN response_headers TEXT DEFAULT "{}"'
+        }
+        await db.execute(queries[new_column])
+
         self.logger.info(
             message="Added column '{column}' to the database",
             tag="INIT",
