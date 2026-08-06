@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 Graph Orchestrator — Swarm Graph Orchestration (L5 Agentic)
