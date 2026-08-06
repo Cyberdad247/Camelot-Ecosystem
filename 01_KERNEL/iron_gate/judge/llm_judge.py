@@ -19,6 +19,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 import json
 import logging
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, List, Optional
@@ -163,14 +164,16 @@ class LLMJudge:
         )
         
         if batch.parallel:
-            # TODO: Implement parallel evaluation using ThreadPoolExecutor
-            # For now, fallback to sequential
-            logger.info("[Judge] Parallel mode not yet implemented, using sequential")
-        
-        results = []
-        for request in batch.requests:
-            output = self.evaluate(request)
-            results.append(output)
+            logger.info("[Judge] Using parallel execution with ThreadPoolExecutor")
+            # Limit workers to avoid overwhelming the LLM service/system
+            max_workers = min(10, len(batch.requests)) or 1
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                results = list(executor.map(self.evaluate, batch.requests))
+        else:
+            results = []
+            for request in batch.requests:
+                output = self.evaluate(request)
+                results.append(output)
         
         return results
     
