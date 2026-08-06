@@ -17,6 +17,9 @@ jobs:
   changes:
     name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     outputs:
       photo-viewer: ${{ steps.filter.outputs.photo-viewer }}
     steps:
@@ -67,6 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: read
       packages: write
 
     steps:

@@ -20,6 +20,9 @@ jobs:
   changes:
     name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     outputs:
       cartridge: ${{ steps.filter.outputs.cartridge }}
       pocket-squire: ${{ steps.filter.outputs.pocket-squire }}

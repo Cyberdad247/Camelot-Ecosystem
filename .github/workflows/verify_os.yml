@@ -15,6 +15,9 @@ jobs:
   governance:
     name: Instruction Governance
     runs-on: windows-latest
+    permissions:
+      contents: read
+      pull-requests: read
     # Non-blocking: copyright-header coverage is tracked debt (~347 first-party
     # 01_KERNEL/*.py still lack headers). Reported, not gating. Burn down with a
     # deliberate pass that distinguishes first-party from any vendored code.
@@ -284,6 +287,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -355,6 +359,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
 
