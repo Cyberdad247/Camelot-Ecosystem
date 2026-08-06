@@ -283,6 +283,7 @@ jobs:
     name: Infra-Purge Rollback Verification
     runs-on: ubuntu-latest
     permissions:
+      pull-requests: read
       contents: read
     steps:
       - uses: actions/checkout@v4

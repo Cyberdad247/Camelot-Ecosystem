@@ -21,6 +21,8 @@ jobs:
   changes:
     name: Detect changes
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
     outputs:
       anya: ${{ steps.filter.outputs.anya }}
       omni: ${{ steps.filter.outputs.omni }}

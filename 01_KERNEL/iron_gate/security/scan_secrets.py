@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 """Secret Scanner -- Detects exposed credentials in the repository.
 
 Used by CI/CD (verify_os.yml) and can be run manually:
