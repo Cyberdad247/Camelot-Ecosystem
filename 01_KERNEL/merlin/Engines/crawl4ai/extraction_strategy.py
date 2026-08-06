@@ -3,6 +3,7 @@
 import ast
 import inspect
 import json
+import os
 import re
 import time
 from abc import ABC, abstractmethod
@@ -518,37 +519,35 @@ class LLMExtractionStrategy(ExtractionStrategy):
             extra_args: Additional arguments for the API request, such as temprature, max_tokens, etc.
         """
         super().__init__(input_format=input_format, **kwargs)
-        self.llm_config = llm_config
+
+        # Dynamically set properties based on the __init__ signature
+        sig = inspect.signature(self.__init__)
+        local_args = locals()
+        for name in sig.parameters:
+            if name != "self" and name != "kwargs":
+                setattr(self, name, local_args[name])
+
         if not self.llm_config:
             self.llm_config = create_llm_config(
                 provider=DEFAULT_PROVIDER,
                 api_token=os.environ.get(DEFAULT_PROVIDER_API_KEY),
             )
-        self.instruction = instruction
+
         self.extract_type = extraction_type
-        self.schema = schema
-        if schema:
+        if self.schema:
             self.extract_type = "schema"
-        self.force_json_response = force_json_response
-        self.chunk_token_threshold = chunk_token_threshold or CHUNK_TOKEN_THRESHOLD
-        self.overlap_rate = overlap_rate
-        self.word_token_rate = word_token_rate
-        self.apply_chunking = apply_chunking
+
+        self.chunk_token_threshold = self.chunk_token_threshold or CHUNK_TOKEN_THRESHOLD
         self.extra_args = kwargs.get("extra_args", {})
+
         if not self.apply_chunking:
             self.chunk_token_threshold = 1e9
-        self.verbose = verbose
+
         self.usages = []  # Store individual usages
         self.total_usage = TokenUsage()  # Accumulated usage
 
-        self.provider = provider
-        self.api_token = api_token
-        self.base_url = base_url
-        self.api_base = api_base
-
     def __setattr__(self, name, value):
         """Handle attribute setting."""
-        # TODO: Planning to set properties dynamically based on the __init__ signature
         sig = inspect.signature(self.__init__)
         all_params = sig.parameters  # Dictionary of parameter names and their details
 

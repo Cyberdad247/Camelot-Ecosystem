@@ -797,28 +797,25 @@ class LLMContentFilter(RelevantContentFilter):
         extra_args: Dict = None,
     ):
         super().__init__(None)
-        self.provider = provider
-        self.api_token = api_token
-        self.base_url = base_url or api_base
-        self.llm_config = llm_config
-        self.instruction = instruction
-        self.chunk_token_threshold = chunk_token_threshold
-        self.overlap_rate = overlap_rate
-        self.word_token_rate = word_token_rate or WORD_TOKEN_RATE
-        # self.chunk_mode: str = chunk_mode
-        # self.char_token_rate = char_token_rate or word_token_rate / 5
-        # self.token_rate = word_token_rate if chunk_mode == "word" else self.char_token_rate
-        self.token_rate = word_token_rate or WORD_TOKEN_RATE
-        self.extra_args = extra_args or {}
-        self.ignore_cache = ignore_cache
-        self.verbose = verbose
+
+        # Dynamically set properties based on the __init__ signature
+        sig = inspect.signature(self.__init__)
+        local_args = locals()
+        for name in sig.parameters:
+            if name != "self":
+                setattr(self, name, local_args[name])
+
+        self.base_url = self.base_url or self.api_base
+        self.word_token_rate = self.word_token_rate or WORD_TOKEN_RATE
+        self.token_rate = self.word_token_rate
+        self.extra_args = self.extra_args or {}
 
         # Setup logger with custom styling for LLM operations
-        if logger:
-            self.logger = logger
-        elif verbose:
+        if self.logger:
+            pass # Keep provided logger
+        elif self.verbose:
             self.logger = AsyncLogger(
-                verbose=verbose,
+                verbose=self.verbose,
                 icons={
                     **AsyncLogger.DEFAULT_ICONS,
                     "LLM": "★",  # Star for LLM operations
@@ -835,7 +832,6 @@ class LLMContentFilter(RelevantContentFilter):
 
     def __setattr__(self, name, value):
         """Handle attribute setting."""
-        # TODO: Planning to set properties dynamically based on the __init__ signature
         sig = inspect.signature(self.__init__)
         all_params = sig.parameters  # Dictionary of parameter names and their details
 
