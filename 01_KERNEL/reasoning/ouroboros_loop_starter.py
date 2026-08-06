@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 """ouroboros_loop_starter.py — Windows-portable Ouroboros Loop v1000 daemon starter.
 
 Honors AGENTS.md Rule 2 (independent reviewer) — emits a structured log line when the

@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # SPDX-FileCopyrightText: 2026 Invisioned Marketing Inc.
 # SPDX-License-Identifier: Apache-2.0
 

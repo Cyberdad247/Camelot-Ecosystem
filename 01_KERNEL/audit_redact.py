@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 01_KERNEL/audit_redact.py — CAMELOT-GCMN activation ADR §8 Step 2/3 CLI.
