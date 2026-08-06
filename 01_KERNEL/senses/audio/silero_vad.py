@@ -1,4 +1,3 @@
-# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # -*- coding: utf-8 -*-
 """
 [S6-02] SileroVadDetector — ML-based VAD with energy-VAD fallback

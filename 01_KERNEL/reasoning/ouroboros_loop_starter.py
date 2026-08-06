@@ -1,4 +1,3 @@
-# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 #!/usr/bin/env python3
 """ouroboros_loop_starter.py — Windows-portable Ouroboros Loop v1000 daemon starter.
 
