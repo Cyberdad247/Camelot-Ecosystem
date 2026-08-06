@@ -1,3 +1,5 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
