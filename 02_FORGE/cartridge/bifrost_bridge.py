@@ -35,10 +35,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 
+from . import cartridge_rbac
 from .cartridge_schemas import CartridgeManifest
 from .sandbox import CartridgeSandbox, TrustMode
 from .tool_registry import ToolRegistry
-from . import cartridge_rbac
 
 
 # ── Request schema ────────────────────────────────────────────────────────────
@@ -164,8 +164,14 @@ if __name__ == "__main__":
     # Minimal self-demo: sign → verify → dispatch through the real executor.
     from . import cartridge_crypto as cc
 
-    os.environ.setdefault("CAMELOT_CARTRIDGE_HMAC_KEY", "bridge-demo-cartridge-key")
-    secret = "bridge-demo-webhook"
+    cartridge_key = os.environ.get("CAMELOT_CARTRIDGE_HMAC_KEY")
+    if not cartridge_key:
+        raise ValueError("CAMELOT_CARTRIDGE_HMAC_KEY environment variable is required")
+    os.environ["CAMELOT_CARTRIDGE_HMAC_KEY"] = cartridge_key
+
+    secret = os.environ.get("WEBHOOK_SECRET")
+    if not secret:
+        raise ValueError("WEBHOOK_SECRET environment variable is required")
 
     # A signed manifest allowing the built-in echo tool.
     m = CartridgeManifest(cartridge_id="DEMO", description="d", signature="pending",
