@@ -4,6 +4,7 @@ import { buildPromptDependencyGraph, enforceAgentArmor } from '../security/agent
 import { runAntigravity } from '../execution/antigravity-engine';
 import { InMemoryCommandQueue } from '../runtime/command-queue';
 
+(async () => {
 const secret = 'test-secret-that-is-long-enough';
 
 const envelope = signDag({
@@ -79,9 +80,19 @@ import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope
   assert.equal(fsm.state, 'recovered');
 
   // Trust reconciliation lattice
-  assert.equal(reconcileTrust(['allow', 'allow', 'allow']), 'allow');
-  assert.equal(reconcileTrust(['allow', 'review', 'warn']), 'review');
-  assert.equal(reconcileTrust(['allow', 'quarantine', 'block']), 'quarantine');
+  assert.equal(reconcileTrust([]), 'review'); // Empty verdicts should default to review
+  assert.equal(reconcileTrust(['allow', 'allow', 'allow']), 'allow'); // Unanimous allow
+  assert.equal(reconcileTrust(['allow', 'warn', 'allow']), 'warn'); // Warn trumps allow
+  assert.equal(reconcileTrust(['allow', 'review', 'warn']), 'review'); // Review trumps warn, allow
+  assert.equal(reconcileTrust(['review', 'block', 'allow']), 'block'); // Block trumps review, warn, allow
+  assert.equal(reconcileTrust(['allow', 'quarantine', 'block']), 'quarantine'); // Quarantine trumps all
+
+  // Single element lattice tests
+  assert.equal(reconcileTrust(['allow']), 'allow');
+  assert.equal(reconcileTrust(['warn']), 'warn');
+  assert.equal(reconcileTrust(['review']), 'review');
+  assert.equal(reconcileTrust(['block']), 'block');
+  assert.equal(reconcileTrust(['quarantine']), 'quarantine');
 
   // End-to-end gate: healthy node + signed envelope + benign intent → allow
   const healthy = new HeimdallFsm('console');
@@ -220,3 +231,4 @@ import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope
 
   console.log('Camelot smoke tests passed (trust plane + control plane + predictive + Yggdrasil).');
 });
+})().catch(err => { console.error(err); process.exit(1); });
