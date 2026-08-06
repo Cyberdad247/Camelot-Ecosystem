@@ -123,19 +123,24 @@ class ThinkTankOrchestrator:
         harmony_req = AssimilationRequest(repo_path=repo_path, origin="local", description=f"Verification for {objective}")
         results["harmony"] = check_harmony(harmony_req)
         
-        self._log_agno_session(results)
+        await self._log_agno_session(results)
         return results
 
-    def _log_agno_session(self, results: Dict[str, Any]):
-        with open(self.session_log, "a", encoding="utf-8") as f:
-            f.write(f"\n# 🧠 AGNO SESSION v3.1: {results['session_id']}\n")
-            f.write(f"- **Objective:** {results['objective']}\n")
-            f.write(f"- **Models Used:** {results['orchestrator_config']['model']} (Low-Res: {results['orchestrator_config']['low_resource']})\n")
-            f.write(f"- **Experts Assembly:** {', '.join(results['experts'])}\n")
-            f.write(f"- **External API Interaction:** {results.get('external_data', 'NONE')}\n")
-            f.write(f"- **Kinetic Status:** {results['kinetic_result'].get('status', 'SIMULATED')}\n")
-            f.write(f"- **Harmony Status:** {results['harmony'].get('status', 'PENDING')}\n")
-            f.write("---\n")
+    async def _log_agno_session(self, results: Dict[str, Any]):
+        log_str = (
+            f"\n# 🧠 AGNO SESSION v3.1: {results['session_id']}\n"
+            f"- **Objective:** {results['objective']}\n"
+            f"- **Models Used:** {results['orchestrator_config']['model']} (Low-Res: {results['orchestrator_config']['low_resource']})\n"
+            f"- **Experts Assembly:** {', '.join(results['experts'])}\n"
+            f"- **External API Interaction:** {results.get('external_data', 'NONE')}\n"
+            f"- **Kinetic Status:** {results['kinetic_result'].get('status', 'SIMULATED')}\n"
+            f"- **Harmony Status:** {results['harmony'].get('status', 'PENDING')}\n"
+            f"---\n"
+        )
+        def _write():
+            with open(self.session_log, "a", encoding="utf-8") as f:
+                f.write(log_str)
+        await asyncio.to_thread(_write)
 
 async def test_agno_orchestrator():
     agno = ThinkTankOrchestrator()
