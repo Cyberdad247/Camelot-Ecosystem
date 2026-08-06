@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1785974752830" clover="3.2.0">
+  <project timestamp="1785974752831" name="All files">
+    <metrics statements="4" coveredstatements="4" conditionals="33" coveredconditionals="33" methods="1" coveredmethods="1" elements="38" coveredelements="38" complexity="0" loc="4" ncloc="4" packages="1" files="1" classes="1"/>
+    <file name="schema.ts" path="/app/src/router/schema.ts">
+      <metrics statements="4" coveredstatements="4" conditionals="33" coveredconditionals="33" methods="1" coveredmethods="1"/>
+      <line num="26" count="33" type="cond" truecount="4" falsecount="0"/>
+      <line num="27" count="5" type="stmt"/>
+      <line num="29" count="28" type="stmt"/>
+      <line num="30" count="28" type="cond" truecount="29" falsecount="0"/>
+    </file>
+  </project>
+</coverage>

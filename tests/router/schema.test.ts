@@ -221,4 +221,102 @@ describe('A2A Schema Validation', () => {
         };
         expect(validateA2ARequest(payload)).toBe(false);
     });
+
+    it('should reject a payload with missing or invalid source_agent', () => {
+        const basePayload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                target_engine: "Goose",
+                context_payload: "{}",
+                mcp_tools_allowed: []
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest(basePayload)).toBe(false);
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, source_agent: 123 } })).toBe(false);
+    });
+
+    it('should reject a payload with missing or invalid target_engine', () => {
+        const basePayload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin",
+                context_payload: "{}",
+                mcp_tools_allowed: []
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest(basePayload)).toBe(false);
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, target_engine: 123 } })).toBe(false);
+    });
+
+    it('should reject a payload with missing or invalid context_payload', () => {
+        const basePayload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin",
+                target_engine: "Goose",
+                mcp_tools_allowed: []
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest(basePayload)).toBe(false);
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, context_payload: 123 } })).toBe(false);
+    });
+
+    it('should reject a payload with incorrectly typed optional numeric parameters', () => {
+        const basePayload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin",
+                target_engine: "Goose",
+                context_payload: "{}",
+                mcp_tools_allowed: []
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, current_spend: "5.0" } })).toBe(false);
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, loop_count: "1" } })).toBe(false);
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, max_loops: "10" } })).toBe(false);
+    });
+
+    it('should reject a payload with incorrectly typed optional persona', () => {
+        const payload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin",
+                target_engine: "Goose",
+                context_payload: "{}",
+                mcp_tools_allowed: [],
+                persona: 123
+            },
+            id: "123"
+        };
+        expect(validateA2ARequest(payload)).toBe(false);
+    });
+
+    it('should reject a payload with incorrectly typed template_params', () => {
+        const basePayload = {
+            jsonrpc: "2.0",
+            method: "execute_task",
+            params: {
+                source_agent: "Merlin",
+                target_engine: "Goose",
+                context_payload: "{}",
+                mcp_tools_allowed: []
+            },
+            id: "123"
+        };
+        // Not an object
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, template_params: "not an object" } })).toBe(false);
+        // Null
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, template_params: null } })).toBe(false);
+        // Object with non-string values
+        expect(validateA2ARequest({ ...basePayload, params: { ...basePayload.params, template_params: { user: "vizio", count: 5 } } })).toBe(false);
+    });
 });
