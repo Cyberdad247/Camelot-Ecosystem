@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 """Modal deployment surfaces for the Camelot hybrid cloudbrain."""
 
 from __future__ import annotations

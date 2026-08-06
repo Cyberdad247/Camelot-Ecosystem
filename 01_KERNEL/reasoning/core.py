@@ -1,3 +1,4 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 class MGVEngine:
     """MGV Engine dummy for OS bootstrap."""
     def __init__(self, debug=False):
