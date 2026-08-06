@@ -724,18 +724,17 @@ class HTML2Text(html.parser.HTMLParser):
             else:
                 self.o("</{}>".format(tag))
 
-    # TODO: Add docstring for these one letter functions
     def pbr(self) -> None:
-        "Pretty print has a line break"
+        """Pretty print has a line break."""
         if self.p_p == 0:
             self.p_p = 1
 
     def p(self) -> None:
-        "Set pretty print to 1 or 2 lines"
+        """Set pretty print to 1 or 2 lines."""
         self.p_p = 1 if self.single_line_break else 2
 
     def soft_br(self) -> None:
-        "Soft breaks"
+        """Soft breaks."""
         self.pbr()
         self.br_toggle = "  "
 
