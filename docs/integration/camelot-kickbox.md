@@ -221,6 +221,23 @@ status, and the redacted policy/audit records — never raw audio, and never
 raw transcripts for tier ≥ 2. `MockVoiceProvider` remains the default test
 provider; Hermes runs only behind the flag.
 
+### Release gate: hardware run (Phase 3 prerequisite)
+
+Phase 3 (model routing) must not start until Phase 2 has been validated on
+the target hardware and recorded. One command does the recording:
+
+```bash
+cd integration
+./scripts/record-hardware-run.sh   # smoke + status + benchmark, voice on
+```
+
+It writes `docs/integration/hardware-runs/<date>-<host>.md` with the machine
+specs, smoke output, and benchmark figures, plus a manual browser checklist
+(mic denial, silence, quiet speech, normal speech, barge-in during TTS,
+tier-2 draft, tier-3 confirmation) to fill in by hand. Commit the file with
+a PASS verdict to clear the gate. A reference run from the dev container is
+already in that directory for comparison.
+
 ### Phase 2 test map
 
 | Guardrail | Test |
