@@ -5,12 +5,13 @@
   "type": "module",
   "description": "Governed Camelot x Kickbox voice vertical slice — self-contained npm root (deliberately NOT wired into the repository root package.json; see docs/architecture/bootstrap-plan.md)",
   "workspaces": [
-    "contracts"
+    "contracts",
+    "kickbox"
   ],
   "scripts": {
-    "build": "npm run build --workspace=@camelot/contracts",
+    "build": "npm run build --workspace=@camelot/contracts && npm run build --workspace=@kickbox/anya-console",
     "test": "vitest run",
-    "typecheck": "tsc -p contracts --noEmit"
+    "typecheck": "tsc -p contracts --noEmit && tsc -p kickbox --noEmit"
   },
   "devDependencies": {
     "typescript": "^5.9.3",

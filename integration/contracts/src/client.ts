@@ -53,7 +53,9 @@ export class CamelotClient {
 
   constructor(options: CamelotClientOptions) {
     this.#baseUrl = options.baseUrl.replace(/\/+$/, '');
-    this.#fetch = options.fetchImpl ?? fetch;
+    // Bind the global fetch: an unbound reference throws "Illegal invocation"
+    // in browsers when called with a non-window `this`.
+    this.#fetch = options.fetchImpl ?? ((...args: Parameters<typeof fetch>) => fetch(...args));
     this.#WebSocket =
       options.webSocketImpl ?? (typeof WebSocket !== 'undefined' ? WebSocket : undefined);
     Object.freeze(this);
