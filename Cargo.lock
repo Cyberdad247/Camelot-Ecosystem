@@ -156,6 +156,7 @@ name = "camelot-node-agent"
 version = "0.1.0"
 dependencies = [
  "hex",
+ "libc",
  "serde",
  "serde_json",
  "sha2",
