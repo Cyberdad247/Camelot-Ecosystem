@@ -1,3 +1,4 @@
+.run/
 .runtime/
 .demo/
 *.db

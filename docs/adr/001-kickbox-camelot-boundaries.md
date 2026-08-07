@@ -79,14 +79,14 @@ maintained in-repo to keep the gateway dependency-free.
 Accepted after the slice went live:
 
 1. **Native processes only.** The supported deployment is bare processes with
-   PID/log files in `integration/.runtime/`, health-gated startup, and the
-   `scripts/{build,dev-up,dev-down,status,logs,smoke}.sh` lifecycle. Docker
+   PID/log files in `integration/.run/`, health-gated startup, and the
+   `scripts/{build,dev-up,dev-down,status,logs,smoke,benchmark}.sh` lifecycle. Docker
    and Kubernetes are unsupported; the compose artifacts are archived under
    `integration/archive/docker/`. Optional supervision (systemd user unit,
    tmux, Termux) wraps the scripts; Tailscale only if a remote mesh is wanted.
 2. **Durable redacted audit.** The gateway persists the hash-chained audit
    into a local SQLite file (`GATEWAY_DB`, default
-   `.runtime/camelot-voice.db`) via the pure-Go `modernc.org/sqlite` driver —
+   `.run/camelot-voice.db`) via the pure-Go `modernc.org/sqlite` driver —
    the gateway's single external dependency (no CGO, no remote DB). A
    tampered store is refused at startup. Rule 3's persistence set is
    unchanged: hashes, decisions, redacted events — never raw transcripts

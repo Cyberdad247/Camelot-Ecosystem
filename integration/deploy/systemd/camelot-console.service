@@ -1,0 +1,12 @@
+# Optional example — see README.md. Adjust WorkingDirectory to your checkout.
+[Unit]
+Description=Anya Console dev server (Kickbox slice)
+After=camelot-node-agent.service
+
+[Service]
+WorkingDirectory=%h/Camelot-Ecosystem/integration
+ExecStart=/usr/bin/env python3 -m http.server 8080 --directory .
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

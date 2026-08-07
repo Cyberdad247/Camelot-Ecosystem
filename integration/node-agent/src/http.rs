@@ -7,9 +7,18 @@ use crate::compute::{run_job, ComputeJob};
 use crate::validate::{JobValidator, LeaseValidator, StrictValidator};
 use std::io::{BufRead, BufReader, Read, Write};
 use std::net::{TcpListener, TcpStream};
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
+use std::time::{Duration, Instant};
 
 const MAX_BODY: usize = 8 * 1024 * 1024;
+const DRAIN_TIMEOUT: Duration = Duration::from_secs(3);
+
+/// Set by the SIGINT/SIGTERM handlers (main.rs). The accept loop polls it and
+/// drains in-flight connections before returning — graceful shutdown without
+/// an async runtime.
+pub static SHUTDOWN: AtomicBool = AtomicBool::new(false);
+static ACTIVE_CONNECTIONS: AtomicUsize = AtomicUsize::new(0);
 
 pub struct Agent {
     pub backend: Box<dyn ComputeBackend>,
@@ -18,19 +27,36 @@ pub struct Agent {
 
 pub fn serve(addr: &str, agent: Agent) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr)?;
+    listener.set_nonblocking(true)?;
     eprintln!(
         "camelot-node-agent 0.1.0 listening on {addr} (backend: {}, lease_key: {})",
         agent.backend.name(),
         if agent.validator.lease_key.is_some() { "set" } else { "unset" },
     );
     let agent = Arc::new(agent);
-    for stream in listener.incoming() {
-        let Ok(stream) = stream else { continue };
-        let agent = Arc::clone(&agent);
-        std::thread::spawn(move || {
-            let _ = handle(stream, &agent);
-        });
+    while !SHUTDOWN.load(Ordering::SeqCst) {
+        match listener.accept() {
+            Ok((stream, _)) => {
+                let _ = stream.set_nonblocking(false);
+                let agent = Arc::clone(&agent);
+                ACTIVE_CONNECTIONS.fetch_add(1, Ordering::SeqCst);
+                std::thread::spawn(move || {
+                    let _ = handle(stream, &agent);
+                    ACTIVE_CONNECTIONS.fetch_sub(1, Ordering::SeqCst);
+                });
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::WouldBlock => {
+                std::thread::sleep(Duration::from_millis(50));
+            }
+            Err(_) => continue,
+        }
     }
+    // Drain: let in-flight requests finish, bounded.
+    let deadline = Instant::now() + DRAIN_TIMEOUT;
+    while ACTIVE_CONNECTIONS.load(Ordering::SeqCst) > 0 && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(25));
+    }
+    eprintln!("camelot-node-agent: graceful shutdown complete");
     Ok(())
 }
 

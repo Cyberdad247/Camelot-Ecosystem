@@ -1,0 +1,15 @@
+# Optional example — see README.md. Adjust WorkingDirectory to your checkout.
+[Unit]
+Description=Camelot node agent (leased compute)
+After=camelot-gateway.service
+Requires=camelot-gateway.service
+
+[Service]
+WorkingDirectory=%h/Camelot-Ecosystem/integration
+Environment=NODE_AGENT_ADDR=0.0.0.0:8789
+Environment=CAMELOT_NODE_LEASE_KEY=camelot-demo-key
+ExecStart=%h/Camelot-Ecosystem/integration/.run/bin/camelot-node-agent
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

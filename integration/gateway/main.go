@@ -1,9 +1,12 @@
 package main
 
 import (
+	"context"
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -22,9 +25,32 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer server.audit.Close()
+
+	httpServer := &http.Server{Addr: addr, Handler: server.Handler()}
+	errCh := make(chan error, 1)
+	go func() { errCh <- httpServer.ListenAndServe() }()
 	log.Printf("%s %s listening on %s (audit store: %s)", serviceName, serviceVersion, addr, dbPath)
-	if err := http.ListenAndServe(addr, server.Handler()); err != nil {
+
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, os.Interrupt, syscall.SIGTERM)
+
+	select {
+	case sig := <-sigCh:
+		log.Printf("received %s, shutting down", sig)
+	case err := <-errCh:
+		server.audit.Close()
 		log.Fatal(err)
 	}
+
+	// Graceful drain: stop accepting, give in-flight requests 3s. Hijacked
+	// WebSocket connections are closed by the context deadline expiring.
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+	if err := httpServer.Shutdown(ctx); err != nil {
+		log.Printf("shutdown: %v", err)
+	}
+	if err := server.audit.Close(); err != nil {
+		log.Printf("audit close: %v", err)
+	}
+	log.Printf("graceful shutdown complete")
 }

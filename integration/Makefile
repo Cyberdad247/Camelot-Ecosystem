@@ -5,7 +5,7 @@
 
 SHELL := /bin/bash
 
-.PHONY: build dev-up dev-down status logs smoke test test-ts test-go test-rust clean
+.PHONY: build dev-up dev-down status logs smoke benchmark test test-ts test-go test-rust clean
 
 build:
 	./scripts/build.sh
@@ -25,6 +25,9 @@ logs:
 smoke:
 	./scripts/smoke.sh
 
+benchmark:
+	./scripts/benchmark.sh
+
 ## test: full slice test suite (TS + Go + Rust, both Rust feature sets)
 test: test-ts test-go test-rust
 
@@ -39,4 +42,4 @@ test-rust:
 	cd .. && cargo test -p camelot-node-agent --features vulkan
 
 clean: dev-down
-	rm -rf .runtime contracts/dist kickbox/dist node_modules
+	rm -rf .run contracts/dist kickbox/dist node_modules

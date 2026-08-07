@@ -72,7 +72,7 @@ sequenceDiagram
 - **Audit**: hash-chained (`prevHash`/`hash`), redacted — tier ≥ 2 records
   carry `transcriptSha256`, never raw text. Raw audio never crosses the
   contract at all (`audioSha256` only). The chain is **persisted to a local
-  SQLite file** (`.runtime/camelot-voice.db`, pure-Go driver, no CGO, no
+  SQLite file** (`.run/camelot-voice.db`, pure-Go driver, no CGO, no
   remote DB): it survives gateway restarts, new events continue the chain,
   and a tampered store is refused at startup. Leases are deliberately NOT
   persisted — 30 s single-use grants die with the process.
@@ -80,7 +80,7 @@ sequenceDiagram
 ## Running the demo (native runtime — no Docker)
 
 The slice is a **native-process** deployment: three local processes, PID and
-log files under `integration/.runtime/`, health-gated startup. Docker and
+log files under `integration/.run/`, health-gated startup. Docker and
 Kubernetes are unsupported; the old compose artifacts are archived under
 `integration/archive/docker/`.
 
@@ -90,22 +90,51 @@ model is booted.
 
 ```bash
 cd integration
-make dev-up       # build + start gateway :8788, node-agent :8789, console :8080 (health-gated)
+make dev-up       # build + start gateway :8788, node-agent :8789, console :8080 (ordered, health-gated)
 make smoke        # 11-check end-to-end proof
 make status       # per-service pid + health + audit db size
 make logs         # tail logs (scripts/logs.sh gateway -f to follow one)
-make dev-down     # stop everything
+make benchmark    # RSS/CPU, cold-start, and request-latency report
+make dev-down     # stop everything (guarded; graceful SIGTERM first)
 ```
 
 Each Make target is a thin wrapper over
-`scripts/{build,dev-up,dev-down,status,logs,smoke}.sh` — the scripts are the
-canonical interface. `dev-up` refuses to double-start, waits for all three
-health checks, and tears everything down again if any service fails its gate.
+`scripts/{build,dev-up,dev-down,status,logs,smoke,benchmark}.sh` — the
+scripts are the canonical interface. Hardening guarantees:
 
-Optional supervision: wrap `scripts/dev-up.sh` in a systemd **user** unit,
-tmux session, or Termux job as you prefer — the PID files make any of them
-trivial. Tailscale is only relevant if you want the console reachable across
-a private mesh; nothing in the slice depends on it.
+- **Ordered startup**: gateway → node-agent → console, each `/healthz`
+  verified before the dependent service starts; per-service cold-start time
+  is printed.
+- **Foreign-listener refusal**: `dev-up` aborts if a slice port already
+  answers but was not started by these scripts, and refuses to double-start.
+- **Guarded teardown**: `dev-down` signals only PIDs whose `.run/` metadata
+  matches the live `/proc` cmdline — a recycled PID is never touched.
+  SIGTERM first (both services drain gracefully and log
+  `graceful shutdown complete`), SIGKILL only after 5 s.
+
+Optional supervision: example systemd **user** units live in
+`integration/deploy/systemd/` (examples only — never required for
+development); a tmux session or Termux job works just as well. Tailscale is
+only relevant if you want the console reachable across a private mesh;
+nothing in the slice depends on it.
+
+### Hardware budget (8 GB machine)
+
+`make benchmark` measures the running stack. Reference figures from a 4-vCPU
+x86_64 dev container (run it on the target hardware for real numbers):
+
+| Process | Budget | Measured |
+|---|---:|---:|
+| Kickbox PWA dev server | ≤ 250 MB | ~19 MB (python stand-in) |
+| Go gateway | ≤ 100 MB | ~13 MB |
+| Rust node-agent | ≤ 100 MB | ~3 MB |
+| SQLite + logs | ≤ 100 MB | < 1 MB |
+| **Control stack total (no model)** | **≤ 750 MB** | **~35 MB** |
+
+Cold starts: gateway ~13 ms, node-agent ~56 ms, console-ready ~330 ms.
+Tier-1 turn latency ~2 ms avg; 1024-sample compute job ~20 ms avg. A local
+LLM/TTS engine is **never** booted by the control stack — start one
+explicitly and cap it separately when Phase 3 arrives.
 
 **Demo URL:** `http://localhost:8080/kickbox/` — console UI with quick
 buttons for the three governed utterances, a free-text input, the barge-in

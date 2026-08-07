@@ -5,5 +5,5 @@
 supported path and these files are kept only as historical reference —
 they are not maintained, not tested, and `make` no longer references them.
 
-Supported lifecycle: `integration/scripts/{build,dev-up,dev-down,status,logs,smoke}.sh`
+Supported lifecycle: `integration/scripts/{build,dev-up,dev-down,status,logs,smoke,benchmark}.sh`
 (see `docs/integration/camelot-kickbox.md`).
