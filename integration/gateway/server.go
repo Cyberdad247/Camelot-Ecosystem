@@ -24,6 +24,7 @@ type Server struct {
 	broker   *ToolBroker
 	audit    *AuditLog
 	sessions *SessionHub
+	models   *ModelRouter
 	now      func() time.Time
 	decSeq   atomic.Int64
 }
@@ -35,6 +36,7 @@ func NewServer(chunkDelay time.Duration, now func() time.Time) *Server {
 		broker:   NewToolBroker(leases),
 		audit:    NewAuditLog(now),
 		sessions: NewSessionHub(chunkDelay),
+		models:   NewModelRouter(chunkDelay), // deterministic-only default
 		now:      now,
 	}
 }
@@ -52,6 +54,7 @@ func NewPersistentServer(chunkDelay time.Duration, now func() time.Time, auditDB
 		broker:   NewToolBroker(leases),
 		audit:    audit,
 		sessions: NewSessionHub(chunkDelay),
+		models:   NewModelRouter(chunkDelay),
 		now:      now,
 	}, nil
 }
@@ -64,6 +67,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("POST /v1/confirmations", s.handleConfirmation)
 	mux.HandleFunc("GET /v1/audit/{id}", s.handleAudit)
 	mux.HandleFunc("GET /v1/sessions/{id}/events", s.handleSessionEvents)
+	mux.HandleFunc("GET /v1/models/stats", s.handleModelStats)
 	return withCORS(mux)
 }
 
@@ -131,13 +135,12 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 			Decision:        &decision,
 		})
 		s.publishDecisionAndAudit(turn.SessionID, turn.TurnID, decision, auditEvent)
-		s.sessions.StreamReply(turn.SessionID, turn.TurnID, reply)
 		writeJSON(w, http.StatusOK, CamelotTurnResponse{
 			SessionID: turn.SessionID,
 			TurnID:    turn.TurnID,
 			UIState:   "speaking",
 			Decision:  decision,
-			Reply:     ReplyPayload{Text: reply, Final: false},
+			Reply:     s.narrate(turn.SessionID, turn.TurnID, turn.Transcript, reply),
 			AuditID:   auditEvent.AuditID,
 		})
 		return
@@ -164,13 +167,12 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 			Decision:        &decision,
 		})
 		s.publishDecisionAndAudit(turn.SessionID, turn.TurnID, decision, auditEvent)
-		s.sessions.StreamReply(turn.SessionID, turn.TurnID, reply)
 		writeJSON(w, http.StatusOK, CamelotTurnResponse{
 			SessionID: turn.SessionID,
 			TurnID:    turn.TurnID,
 			UIState:   "speaking",
 			Decision:  decision,
-			Reply:     ReplyPayload{Text: reply, Final: false},
+			Reply:     s.narrate(turn.SessionID, turn.TurnID, turn.Transcript, reply),
 			Artifact:  &artifact,
 			AuditID:   auditEvent.AuditID,
 		})
@@ -223,18 +225,35 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 			LeaseID:         lease.LeaseID,
 		})
 		s.publishDecisionAndAudit(turn.SessionID, turn.TurnID, decision, auditEvent)
-		s.sessions.StreamReply(turn.SessionID, turn.TurnID, reply)
 		writeJSON(w, http.StatusOK, CamelotTurnResponse{
 			SessionID: turn.SessionID,
 			TurnID:    turn.TurnID,
 			UIState:   "speaking",
 			Decision:  decision,
 			Lease:     &consumed,
-			Reply:     ReplyPayload{Text: reply, Final: false},
+			Reply:     s.narrate(turn.SessionID, turn.TurnID, turn.Transcript, reply),
 			Artifact:  &artifact,
 			AuditID:   auditEvent.AuditID,
 		})
 	}
+}
+
+// narrate routes the reply through the model router (deterministic by
+// default) and shapes the sync reply payload: full text when deterministic,
+// stream-only when a configured provider narrates. Narration always happens
+// AFTER skill execution — a generation failure can never undo or repeat a
+// tool action, and the deterministic fixture text is the guaranteed fallback.
+func (s *Server) narrate(sessionID, turnID, transcript, deterministicReply string) ReplyPayload {
+	s.models.RememberTranscript(sessionID, transcript)
+	s.models.Narrate(s.sessions, s.audit, sessionID, turnID, transcript, deterministicReply)
+	if s.models.PrimaryIsDeterministic() {
+		return ReplyPayload{Text: deterministicReply, Final: false}
+	}
+	return ReplyPayload{Text: "", Final: false}
+}
+
+func (s *Server) handleModelStats(w http.ResponseWriter, _ *http.Request) {
+	writeJSON(w, http.StatusOK, s.models.Stats())
 }
 
 func (s *Server) handleBargeIn(w http.ResponseWriter, r *http.Request) {
@@ -328,12 +347,12 @@ func (s *Server) handleConfirmation(w http.ResponseWriter, r *http.Request) {
 		LeaseID:         lease.LeaseID,
 	})
 	s.sessions.Publish(req.SessionID, SessionEvent{Type: "audit.appended", AuditID: auditEvent.AuditID, Kind: auditEvent.Kind})
-	s.sessions.StreamReply(req.SessionID, lease.TurnID, reply)
+	confirmedReply := s.narrate(req.SessionID, lease.TurnID, "confirmed: "+skillID, reply)
 
 	writeJSON(w, http.StatusOK, ConfirmationResponse{
 		Lease:    finalLease,
 		Artifact: &artifact,
-		Reply:    &ReplyPayload{Text: reply, Final: false},
+		Reply:    &confirmedReply,
 		AuditID:  auditEvent.AuditID,
 	})
 }

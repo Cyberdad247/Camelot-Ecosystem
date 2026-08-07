@@ -163,7 +163,8 @@ export type SessionEvent =
   | { type: 'reply.chunk'; turnId: string; seq: number; text: string }
   | { type: 'reply.done'; turnId: string }
   | { type: 'turn.cancelled'; turnId: string; reason: string }
-  | { type: 'audit.appended'; auditId: string; kind: string };
+  | { type: 'audit.appended'; auditId: string; kind: string }
+  | { type: 'model.route'; turnId: string; provider: string; fallback?: boolean; reason?: string };
 
 export interface HealthResponse {
   status: 'ok';

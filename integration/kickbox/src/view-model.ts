@@ -37,6 +37,15 @@ export function bargeInAvailable(view: SessionView): boolean {
   return view.streamingTurnId !== null;
 }
 
+/** One-line description of how the last reply was generated (Phase 3). */
+export function modelRouteLine(view: SessionView): string {
+  const route = view.lastModelRoute;
+  if (!route) return '';
+  return route.fallback
+    ? `model: ${route.provider} (deterministic fallback served)`
+    : `model: ${route.provider}`;
+}
+
 export function decisionCardModel(decision: PolicyDecision | null): {
   effectLabel: string;
   effectClass: 'effect-allow' | 'effect-deny' | 'effect-confirm' | 'effect-none';

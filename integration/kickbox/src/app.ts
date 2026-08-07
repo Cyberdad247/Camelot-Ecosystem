@@ -29,6 +29,7 @@ import {
   avatarBadge,
   bargeInAvailable,
   decisionCardModel,
+  modelRouteLine,
   pendingLease,
 } from './view-model.js';
 import { HermesVoiceProvider } from './hermes-provider.js';
@@ -94,11 +95,13 @@ function render(): void {
   stateBadgeEl.className = `badge ${badge.cssClass}`;
 
   const card = decisionCardModel(lastDecision);
+  const routeLine = modelRouteLine(view);
   decisionCardEl.innerHTML = `
     <div class="card-title">Policy decision</div>
     <div class="effect ${card.effectClass}">${card.effectLabel}</div>
     <div class="skill-line">${card.skillLine}</div>
-    <div class="reason">${card.reason}</div>`;
+    <div class="reason">${card.reason}</div>
+    ${routeLine ? `<div class="skill-line">${routeLine}</div>` : ''}`;
 
   const lease = pendingLease(view);
   if (approvalVisible(view) && lease) {
@@ -147,7 +150,10 @@ async function submitUtterance(
     }
     // Speak governed replies when voice is on. The transcript text stays
     // authoritative — TTS failure never hides it (controller guarantees).
+    // Deterministic replies carry sync text; model-streamed replies are
+    // spoken on reply.done instead.
     if (voiceEnabled && res.reply.text) {
+      spokenTurns.add(turn.turnId);
       void voiceSession.speakReply(res.reply.text, turn.turnId);
     }
     render();
@@ -265,6 +271,8 @@ stopSpeakingBtn.onclick = () => void voiceSession.stopSpeaking();
 
 // ── gateway wiring ──────────────────────────────────────────────────────
 
+const spokenTurns = new Set<string>();
+
 client.connectEvents(FIXTURE_SESSION_ID, (event) => {
   view = reduceSessionEvent(view, event);
   if (event.type === 'reply.chunk') {
@@ -274,6 +282,15 @@ client.connectEvents(FIXTURE_SESSION_ID, (event) => {
   if (event.type === 'turn.cancelled') {
     anyaBubbleFor(event.turnId).classList.add('cancelled');
     addBubble('system', `Turn ${event.turnId} interrupted — response cancelled, unused leases revoked.`);
+  }
+  if (event.type === 'reply.done') {
+    // Model-streamed replies have no sync text; speak the complete
+    // accumulated reply now (sentence-safe: whole utterance at once).
+    const text = view.replies[event.turnId];
+    if (voiceEnabled && text && !spokenTurns.has(event.turnId)) {
+      spokenTurns.add(event.turnId);
+      void voiceSession.speakReply(text, event.turnId);
+    }
   }
   render();
 });

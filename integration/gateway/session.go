@@ -53,22 +53,31 @@ func (h *SessionHub) Publish(sessionID string, event SessionEvent) {
 	}
 }
 
-// StreamReply emits the reply as word-chunks on the event stream. Returns
-// immediately; the goroutine stops early if CancelTurn is called (barge-in),
-// emitting turn.cancelled instead of reply.done.
-func (h *SessionHub) StreamReply(sessionID, turnID, reply string) {
+// RegisterStream creates a context that CancelTurn(turnID) cancels — the
+// single cancellation registry shared by deterministic reply streaming and
+// model-provider generation (barge-in must kill either the same way).
+func (h *SessionHub) RegisterStream(turnID string) (context.Context, func()) {
 	ctx, cancel := context.WithCancel(context.Background())
 	h.mu.Lock()
 	h.streams[turnID] = cancel
 	h.mu.Unlock()
+	return ctx, func() {
+		cancel()
+		h.mu.Lock()
+		delete(h.streams, turnID)
+		h.mu.Unlock()
+	}
+}
+
+// StreamReply emits the reply as word-chunks on the event stream. Returns
+// immediately; the goroutine stops early if CancelTurn is called (barge-in),
+// emitting turn.cancelled instead of reply.done.
+func (h *SessionHub) StreamReply(sessionID, turnID, reply string) {
+	ctx, cleanup := h.RegisterStream(turnID)
 
 	words := strings.Split(reply, " ")
 	go func() {
-		defer func() {
-			h.mu.Lock()
-			delete(h.streams, turnID)
-			h.mu.Unlock()
-		}()
+		defer cleanup()
 		for i, w := range words {
 			select {
 			case <-ctx.Done():

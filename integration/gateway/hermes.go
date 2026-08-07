@@ -16,12 +16,17 @@ type hermesProposal struct {
 
 func hermesMatchIntent(transcript string) hermesProposal {
 	t := strings.ToLower(transcript)
+	// Longest match wins: "prepare a staging deployment review" must resolve
+	// to deployment.review.prepare (tier 2), not ops.staging.read (tier 1).
+	best := hermesProposal{}
+	bestLen := 0
 	for _, s := range skillRegistry {
-		if strings.Contains(t, s.Match) {
-			return hermesProposal{SkillID: s.ID, Matched: true}
+		if strings.Contains(t, s.Match) && len(s.Match) > bestLen {
+			best = hermesProposal{SkillID: s.ID, Matched: true}
+			bestLen = len(s.Match)
 		}
 	}
-	return hermesProposal{}
+	return best
 }
 
 // hermesSmallTalkReply is the canned reply for unmatched transcripts.

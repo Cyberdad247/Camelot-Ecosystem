@@ -111,8 +111,22 @@ code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$NODE_AGENT/v1/compute" \
 [[ $code == 403 ]] || fail "forged compute token accepted (got $code)"
 ok "forged compute token rejected (403)"
 
+step "8. Model routing (deterministic default)"
+# Narrations count on completion — poll briefly while streams finish.
+requests=0
+for _ in $(seq 1 20); do
+  m=$(curl -sf "$GATEWAY/v1/models/stats")
+  requests=$(echo "$m" | json "['requests']")
+  [[ $requests -ge 1 ]] && break
+  sleep 0.5
+done
+[[ $requests -ge 1 ]] || fail "model stats requests never incremented"
+provider=$(echo "$m" | json "['provider']")
+fallbacks=$(echo "$m" | json "['fallbacks']")
+ok "replies narrated by '$provider' (requests=$requests, fallbacks=$fallbacks)"
+
 if [[ $ENABLE_HERMES_VOICE == true ]]; then
-  step "8. Hermes voice adapter (ENABLE_HERMES_VOICE=true)"
+  step "9. Hermes voice adapter (ENABLE_HERMES_VOICE=true)"
   [[ $(curl -sf "$HERMES/healthz" | json "['status']") == ok ]] || fail "hermes healthz"
   ok "hermes healthy (stt: $(curl -sf "$HERMES/healthz" | json "['stt']"))"
 

@@ -102,6 +102,11 @@ fi
   echo "audit db:    $db_size · logs: $log_size"
   echo "turn latency (POST /v1/voice/turns, tier-1):    $turn_latency"
   echo "compute latency (POST /v1/compute, 1024-sample batch): $job_latency"
+  curl -sf "http://localhost:$GATEWAY_PORT/v1/models/stats" | python3 -c "
+import json, sys
+d = json.load(sys.stdin)
+print(f\"model routing: provider={d['provider']} requests={d['requests']} fallbacks={d['fallbacks']} \"
+      f\"first-token={d['avgFirstTokenMs']:.0f}ms completion={d['avgCompletionMs']:.0f}ms\")"
 } | tee "$REPORT"
 
 "$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null

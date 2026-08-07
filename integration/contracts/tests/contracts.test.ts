@@ -22,6 +22,12 @@ describe('intent fixtures (deterministic, no API keys)', () => {
     expect(matchIntent('hello anya, how are you?')).toBeNull();
   });
 
+  it('the most specific match wins when keywords overlap', () => {
+    expect(matchIntent('prepare a staging deployment review and explain the risk')?.skillId).toBe(
+      'deployment.review.prepare',
+    );
+  });
+
   it('declares governance tiers exactly as ADR-001 specifies', () => {
     const byId = Object.fromEntries(INTENT_FIXTURES.map((f) => [f.skillId, f]));
     expect(byId['ops.staging.read']).toMatchObject({

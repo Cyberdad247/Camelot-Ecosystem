@@ -25,6 +25,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Phase 3: model routing. Deterministic unless ENABLE_MODEL_PROVIDER=true
+	// with an allow-listed, URL-configured provider (never auto-started).
+	modelCfg := ModelConfigFromEnv()
+	server.models = NewModelRouterFromConfig(60*time.Millisecond, modelCfg)
+	log.Printf("model routing: provider=%s (configured enabled=%t)", server.models.Stats().Provider, modelCfg.Enabled)
 
 	httpServer := &http.Server{Addr: addr, Handler: server.Handler()}
 	errCh := make(chan error, 1)

@@ -252,6 +252,85 @@ already in that directory for comparison.
 | Silence/quiet gating, WAV determinism | `hermes/tests/engines.test.ts` |
 | Live STT/TTS + silence rejection | `scripts/smoke.sh` step 8 |
 
+## Phase 3 — model routing behind the gateway
+
+Replies are narrated through a **model router** inside the gateway. Default:
+the `deterministic` provider (byte-identical to the fixture replies, zero
+config, zero processes). One configured provider can be enabled explicitly:
+
+```
+voice/text turn -> policy -> (skill executes under lease) -> model router
+  -> deterministic | configured provider (OpenAI-compatible SSE)
+  -> reply.chunk stream over the existing WebSocket -> Hermes TTS/console
+```
+
+```bash
+# Example: llama.cpp / ollama serving an OpenAI-compatible endpoint you
+# started yourself (the gateway NEVER starts or downloads a model):
+ENABLE_MODEL_PROVIDER=true \
+MODEL_PROVIDER_ALLOW=deterministic,local-llm \
+MODEL_PROVIDER_NAME=local-llm \
+MODEL_PROVIDER_URL=http://localhost:11434/v1/chat/completions \
+MODEL_PROVIDER_MODEL=llama3.2:1b \
+make dev-up
+```
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `ENABLE_MODEL_PROVIDER` | `false` | Allow a configured provider at all |
+| `MODEL_PROVIDER_ALLOW` | `deterministic` | Explicit provider allow-list |
+| `MODEL_PROVIDER_NAME` / `MODEL_PROVIDER_URL` / `MODEL_PROVIDER_MODEL` | — | The one configured provider |
+| `MODEL_PROVIDER_API_KEY` | — | Credential via env/keystore only; never source control, never audited |
+| `MODEL_TIMEOUT` | `10s` | Per-request generation timeout |
+
+Router rules (all enforced in `gateway/models.go`): allow-list, per-request
+timeout, request-context cap (session-local, memory-only, 8 turns / 4000
+chars), response cap (2000 chars), typed failure codes
+(`timeout | malformed_stream | provider_error | …`), **deterministic
+fallback on any provider failure — never a silent failure** — and zero
+retries (narration runs after skill execution, so no generation path can
+ever re-run a tool).
+
+**Security boundary.** The model may propose text and a bounded skill plan
+(a trailing `PLAN {"skillId": …}` line, stripped from the rendered/spoken
+reply). Proposals are validated against the skill registry: unknown skills
+are denied and audited (`model.plan.denied`); known skills are recorded as
+proposals only (`model.plan.proposed`) — **execution still requires the
+standard turn/confirmation flow, and only the policy kernel issues leases.**
+Tier-3 confirmation is unaffected by model routing. Audit records the route
+and fallback (`model.route`) without prompts or credentials.
+
+**Observability.** `GET /v1/models/stats` reports provider, request count,
+fallback count, plan proposals/denials, avg first-token and completion
+times; the model route also streams as a `model.route` session event and
+shows on the console's decision card. `make benchmark` includes the stats.
+
+Reference figures (dev container, live local SSE provider):
+first-token 33 ms · completion 820 ms · deterministic path avg first-token
+60 ms. RSS unchanged (the router is an HTTP client — no new process).
+
+### Phase 3 test map
+
+| Behavior | Test |
+|---|---|
+| Deterministic default, no config | `gateway/models_test.go` `TestDeterministicProviderIsDefault` |
+| Disabled/non-allow-listed provider never selected | `TestDisabledConfiguredProviderNotSelected` |
+| Timeout → typed failure → deterministic fallback | `TestProviderTimeoutFallsBack` |
+| Malformed stream fails safely + audited | `TestMalformedStreamFallsBack` |
+| Barge-in cancels active generation | `TestBargeInCancelsActiveGeneration` |
+| Unknown plan denied / known plan recorded-not-executed | `TestModelPlanProposals` |
+| Tier-3 still requires confirmation | `TestTier3StillRequiresConfirmationWithModel` |
+| Audit has route+fallback, no secrets | `TestAuditRecordsRouteWithoutSecrets` |
+| model.route events in the view | `contracts/tests/model-route.test.ts` |
+| Live deterministic routing | `scripts/smoke.sh` step 8 |
+
+### Phase 4 deferrals (explicit)
+
+Tailscale/WebRTC remote mesh (4A) · real local STT/TTS engines beyond the
+command hooks (4B) · multi-provider marketplace · executing model-proposed
+plans · long-term memory/RAG · wake word/VAD · voice cloning · GPU
+inference · Mojo kernels · autonomous Knight loops · production deploys.
+
 ## Adopting the contracts in the real Kickbox-audio repo
 
 `@camelot/contracts` is dependency-free ESM, so the Kickbox monorepo can

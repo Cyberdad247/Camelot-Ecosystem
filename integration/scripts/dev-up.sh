@@ -43,7 +43,14 @@ start_gated() { # name token seconds -- command...
   fi
 }
 
-env_gateway=(env GATEWAY_ADDR=":$GATEWAY_PORT" GATEWAY_DB="$GATEWAY_DB")
+env_gateway=(env GATEWAY_ADDR=":$GATEWAY_PORT" GATEWAY_DB="$GATEWAY_DB"
+  ENABLE_MODEL_PROVIDER="${ENABLE_MODEL_PROVIDER:-false}"
+  MODEL_PROVIDER_ALLOW="${MODEL_PROVIDER_ALLOW:-deterministic}"
+  MODEL_PROVIDER_NAME="${MODEL_PROVIDER_NAME:-configured}"
+  MODEL_PROVIDER_URL="${MODEL_PROVIDER_URL:-}"
+  MODEL_PROVIDER_MODEL="${MODEL_PROVIDER_MODEL:-default}"
+  MODEL_PROVIDER_API_KEY="${MODEL_PROVIDER_API_KEY:-}"
+  MODEL_TIMEOUT="${MODEL_TIMEOUT:-10s}")
 start_gated gateway "$BIN_DIR/gateway" 20 "${env_gateway[@]}" "$BIN_DIR/gateway"
 
 env_agent=(env CAMELOT_NODE_LEASE_KEY="$LEASE_KEY" NODE_AGENT_ADDR="0.0.0.0:$NODE_AGENT_PORT")

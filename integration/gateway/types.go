@@ -113,6 +113,9 @@ type SessionEvent struct {
 	Text     string           `json:"text,omitempty"`
 	AuditID  string           `json:"auditId,omitempty"`
 	Kind     string           `json:"kind,omitempty"`
+	// model.route events (Phase 3)
+	Provider string `json:"provider,omitempty"`
+	Fallback bool   `json:"fallback,omitempty"`
 }
 
 type HealthResponse struct {

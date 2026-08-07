@@ -49,13 +49,18 @@ export const FIXTURE_UTTERANCES = {
   changeRequest: 'create a change request to scale the api tier',
 } as const;
 
-/** Resolve a transcript to an intent fixture, or null for small talk. */
+/** Resolve a transcript to an intent fixture, or null for small talk.
+ *  Longest match wins (mirrors gateway hermes.go): "prepare a staging
+ *  deployment review" is the tier-2 review skill, not the staging read. */
 export function matchIntent(transcript: string): IntentFixture | null {
   const t = transcript.toLowerCase();
+  let best: IntentFixture | null = null;
   for (const f of INTENT_FIXTURES) {
-    if (t.includes(f.match)) return f;
+    if (t.includes(f.match) && (best === null || f.match.length > best.match.length)) {
+      best = f;
+    }
   }
-  return null;
+  return best;
 }
 
 /** Build a deterministic text-first turn. `n` numbers the turn within the session. */

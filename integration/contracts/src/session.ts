@@ -20,6 +20,9 @@ export interface SessionView {
   auditIds: string[];
   /** Turns cancelled by barge-in. */
   cancelledTurnIds: string[];
+  /** Latest model route (Phase 3): which provider narrated, and whether the
+   *  deterministic fallback was served. */
+  lastModelRoute: { turnId: string; provider: string; fallback: boolean } | null;
 }
 
 export function initialSessionView(): SessionView {
@@ -30,6 +33,7 @@ export function initialSessionView(): SessionView {
     leases: {},
     auditIds: [],
     cancelledTurnIds: [],
+    lastModelRoute: null,
   };
 }
 
@@ -98,5 +102,15 @@ export function reduceSessionEvent(view: SessionView, event: SessionEvent): Sess
 
     case 'audit.appended':
       return { ...view, auditIds: [...view.auditIds, event.auditId] };
+
+    case 'model.route':
+      return {
+        ...view,
+        lastModelRoute: {
+          turnId: event.turnId,
+          provider: event.provider,
+          fallback: event.fallback ?? false,
+        },
+      };
   }
 }
