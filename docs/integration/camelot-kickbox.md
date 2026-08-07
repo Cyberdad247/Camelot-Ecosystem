@@ -71,37 +71,41 @@ sequenceDiagram
   cancels the streaming reply and revokes all unused leases for the turn.
 - **Audit**: hash-chained (`prevHash`/`hash`), redacted — tier ≥ 2 records
   carry `transcriptSha256`, never raw text. Raw audio never crosses the
-  contract at all (`audioSha256` only).
+  contract at all (`audioSha256` only). The chain is **persisted to a local
+  SQLite file** (`.runtime/camelot-voice.db`, pure-Go driver, no CGO, no
+  remote DB): it survives gateway restarts, new events continue the chain,
+  and a tampered store is refused at startup. Leases are deliberately NOT
+  persisted — 30 s single-use grants die with the process.
 
-## Running the demo
+## Running the demo (native runtime — no Docker)
 
-Prereqs: Node ≥ 20, Go ≥ 1.22, Rust 1.85 (repo pin), Python 3 (dev static
-server + smoke helpers). Docker only for the compose path.
+The slice is a **native-process** deployment: three local processes, PID and
+log files under `integration/.runtime/`, health-gated startup. Docker and
+Kubernetes are unsupported; the old compose artifacts are archived under
+`integration/archive/docker/`.
 
-### Option A — bare processes (no Docker)
+Prereqs: Node ≥ 20, Go ≥ 1.24, Rust 1.85 (repo pin), Python 3 (dev static
+server + smoke helpers). Fits comfortably in an 8 GB RAM envelope; no local
+model is booted.
 
 ```bash
 cd integration
-make demo-dev     # builds contracts+console, gateway, node-agent; starts all three
+make dev-up       # build + start gateway :8788, node-agent :8789, console :8080 (health-gated)
 make smoke        # 11-check end-to-end proof
-# open http://localhost:8080/kickbox/
-make demo-dev-down
+make status       # per-service pid + health + audit db size
+make logs         # tail logs (scripts/logs.sh gateway -f to follow one)
+make dev-down     # stop everything
 ```
 
-### Option B — Docker Compose
+Each Make target is a thin wrapper over
+`scripts/{build,dev-up,dev-down,status,logs,smoke}.sh` — the scripts are the
+canonical interface. `dev-up` refuses to double-start, waits for all three
+health checks, and tears everything down again if any service fails its gate.
 
-```bash
-cd integration
-make demo-up      # docker compose up --build -d
-make smoke
-# open http://localhost:8080  (redirects to /kickbox/)
-make demo-down
-```
-
-> Note: the compose file validates (`docker compose config`) and Option A is
-> fully smoke-tested; the container build itself was authored in an
-> environment without a Docker daemon, so run `make demo-up` on a
-> Docker-enabled machine.
+Optional supervision: wrap `scripts/dev-up.sh` in a systemd **user** unit,
+tmux session, or Termux job as you prefer — the PID files make any of them
+trivial. Tailscale is only relevant if you want the console reachable across
+a private mesh; nothing in the slice depends on it.
 
 **Demo URL:** `http://localhost:8080/kickbox/` — console UI with quick
 buttons for the three governed utterances, a free-text input, the barge-in
@@ -126,6 +130,7 @@ cd integration && make test   # TS (vitest) + Go (go test -count=1) + Rust (both
 | T4 barge-in cancels stream + revokes lease | `gateway/bargein_test.go`, `contracts/tests/barge-in.test.ts` |
 | T5 CPU when Vulkan unavailable | `node-agent/tests/fallback.rs` (run with and without `--features vulkan`) |
 | T6 audit redaction + chain | `gateway/audit_test.go` |
+| Audit persistence across restart + tamper refusal | `gateway/store_test.go` |
 | T7 end-to-end smoke | `scripts/smoke.sh` (11 checks) |
 
 ## Adopting the contracts in the real Kickbox-audio repo
@@ -141,5 +146,6 @@ to any existing Kickbox route or hook are required (ADR-001).
 ## Out of scope (by design)
 
 Production deployment, unrestricted agents, global memory, custom LLM
-kernels. The gateway's CORS is demo-permissive; the compose lease key
-(`camelot-demo-key`) is for local demos only.
+kernels, Docker/Kubernetes, payments/secrets handling. The gateway's CORS is
+demo-permissive; the default lease key (`camelot-demo-key`) is for local
+demos only.

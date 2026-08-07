@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto/sha256"
+	"database/sql"
 	"encoding/hex"
 	"fmt"
 	"sync"
@@ -20,6 +21,9 @@ type AuditLog struct {
 	byID   map[string]int
 	seq    int
 	now    func() time.Time
+	// db, when non-nil, mirrors the chain into a local SQLite file
+	// (store.go). nil = in-memory only (tests, ephemeral runs).
+	db *sql.DB
 }
 
 func NewAuditLog(now func() time.Time) *AuditLog {
@@ -73,6 +77,7 @@ func (a *AuditLog) Append(e auditEntry) AuditEvent {
 
 	a.events = append(a.events, event)
 	a.byID[event.AuditID] = len(a.events) - 1
+	a.persist(event)
 	return event
 }
 

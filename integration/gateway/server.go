@@ -39,6 +39,23 @@ func NewServer(chunkDelay time.Duration, now func() time.Time) *Server {
 	}
 }
 
+// NewPersistentServer is NewServer with the audit chain mirrored into a
+// local SQLite file (νKG native runtime: durable redacted audit, no remote DB).
+func NewPersistentServer(chunkDelay time.Duration, now func() time.Time, auditDBPath string) (*Server, error) {
+	audit, err := openAuditStore(auditDBPath, now)
+	if err != nil {
+		return nil, err
+	}
+	leases := NewLeaseStore(now)
+	return &Server{
+		leases:   leases,
+		broker:   NewToolBroker(leases),
+		audit:    audit,
+		sessions: NewSessionHub(chunkDelay),
+		now:      now,
+	}, nil
+}
+
 func (s *Server) Handler() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /healthz", s.handleHealth)

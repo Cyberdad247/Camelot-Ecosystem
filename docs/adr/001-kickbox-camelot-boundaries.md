@@ -74,6 +74,25 @@ that the real Kickbox PWA already has (accepted: it is a reference client for
 the contract, not a product surface); minimal RFC 6455 WebSocket code is
 maintained in-repo to keep the gateway dependency-free.
 
+## Amendment 2026-08-07 — native runtime correction (νKG)
+
+Accepted after the slice went live:
+
+1. **Native processes only.** The supported deployment is bare processes with
+   PID/log files in `integration/.runtime/`, health-gated startup, and the
+   `scripts/{build,dev-up,dev-down,status,logs,smoke}.sh` lifecycle. Docker
+   and Kubernetes are unsupported; the compose artifacts are archived under
+   `integration/archive/docker/`. Optional supervision (systemd user unit,
+   tmux, Termux) wraps the scripts; Tailscale only if a remote mesh is wanted.
+2. **Durable redacted audit.** The gateway persists the hash-chained audit
+   into a local SQLite file (`GATEWAY_DB`, default
+   `.runtime/camelot-voice.db`) via the pure-Go `modernc.org/sqlite` driver —
+   the gateway's single external dependency (no CGO, no remote DB). A
+   tampered store is refused at startup. Rule 3's persistence set is
+   unchanged: hashes, decisions, redacted events — never raw transcripts
+   (tier ≥ 2) or raw audio. Leases remain memory-only by design.
+3. **Resource envelope.** 8 GB RAM target; no automatic local-model boot.
+
 **Rejected alternatives.**
 - *Merge Kickbox into Camelot* — destroys independent deploy/release, violates
   "do not merge blindly", and would drag Next.js/Vercel/Sentry into the
