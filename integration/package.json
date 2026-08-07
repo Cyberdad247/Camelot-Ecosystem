@@ -1,0 +1,22 @@
+{
+  "name": "@camelot/integration",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Governed Camelot x Kickbox voice vertical slice — self-contained npm root (deliberately NOT wired into the repository root package.json; see docs/architecture/bootstrap-plan.md)",
+  "workspaces": [
+    "contracts"
+  ],
+  "scripts": {
+    "build": "npm run build --workspace=@camelot/contracts",
+    "test": "vitest run",
+    "typecheck": "tsc -p contracts --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^2.1.9"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

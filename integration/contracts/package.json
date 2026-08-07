@@ -1,0 +1,21 @@
+{
+  "name": "@camelot/contracts",
+  "version": "0.1.0",
+  "description": "Shared governance contracts for the Camelot x Kickbox voice slice: turn/barge-in types, policy decisions, capability leases, audit events, session client. Zero runtime dependencies; browser-safe ESM.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc -p .",
+    "typecheck": "tsc -p . --noEmit"
+  },
+  "license": "UNLICENSED"
+}
