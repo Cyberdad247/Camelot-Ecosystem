@@ -49,6 +49,14 @@ start_gated gateway "$BIN_DIR/gateway" 20 "${env_gateway[@]}" "$BIN_DIR/gateway"
 env_agent=(env CAMELOT_NODE_LEASE_KEY="$LEASE_KEY" NODE_AGENT_ADDR="0.0.0.0:$NODE_AGENT_PORT")
 start_gated node-agent "$BIN_DIR/camelot-node-agent" 20 "${env_agent[@]}" "$BIN_DIR/camelot-node-agent"
 
+if [[ $ENABLE_HERMES_VOICE == true ]]; then
+  env_hermes=(env HERMES_PORT="$HERMES_PORT"
+    HERMES_STT_ENGINE="${HERMES_STT_ENGINE:-fixture}" HERMES_TTS_ENGINE="${HERMES_TTS_ENGINE:-fixture}"
+    HERMES_STT_CMD="${HERMES_STT_CMD:-}" HERMES_TTS_CMD="${HERMES_TTS_CMD:-}"
+    HERMES_STT_SCRIPT="${HERMES_STT_SCRIPT:-}")
+  start_gated hermes "hermes/src/server.mjs" 20 "${env_hermes[@]}" node hermes/src/server.mjs
+fi
+
 start_gated console "http.server $CONSOLE_PORT" 20 python3 -m http.server "$CONSOLE_PORT" --directory .
 
 echo

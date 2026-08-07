@@ -5,8 +5,10 @@ set -euo pipefail
 
 GATEWAY=${GATEWAY:-http://localhost:8788}
 NODE_AGENT=${NODE_AGENT:-http://localhost:8789}
+HERMES=${HERMES:-http://localhost:8790}
 CONSOLE=${CONSOLE:-http://localhost:8080}
 LEASE_KEY=${LEASE_KEY:-camelot-demo-key}
+ENABLE_HERMES_VOICE=${ENABLE_HERMES_VOICE:-false}
 SESSION=sess-anya-demo-001
 
 pass=0
@@ -108,5 +110,33 @@ code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$NODE_AGENT/v1/compute" \
   \"frames\":[{\"frameId\":\"f0\",\"samples\":[0]}]}")
 [[ $code == 403 ]] || fail "forged compute token accepted (got $code)"
 ok "forged compute token rejected (403)"
+
+if [[ $ENABLE_HERMES_VOICE == true ]]; then
+  step "8. Hermes voice adapter (ENABLE_HERMES_VOICE=true)"
+  [[ $(curl -sf "$HERMES/healthz" | json "['status']") == ok ]] || fail "hermes healthz"
+  ok "hermes healthy (stt: $(curl -sf "$HERMES/healthz" | json "['stt']"))"
+
+  # Loud 700ms sine -> scripted transcript; pure silence -> NO transcript.
+  loud=$(python3 -c "
+import base64, math, struct
+sr = 16000
+pcm = b''.join(struct.pack('<h', int(math.sin(2*math.pi*440*i/sr)*0.5*32767)) for i in range(int(sr*0.7)))
+print(base64.b64encode(pcm).decode())")
+  r=$(curl -sf -X POST "$HERMES/v1/stt" -H 'content-type: application/json' \
+    -d "{\"sampleRate\":16000,\"pcm16\":\"$loud\"}")
+  [[ $(echo "$r" | json "['transcript']") != None ]] || fail "hermes stt on speech-energy audio"
+  ok "stt transcribed speech-energy audio: $(echo "$r" | json "['transcript']")"
+
+  silence=$(python3 -c "import base64; print(base64.b64encode(b'\x00\x00'*8000).decode())")
+  r=$(curl -sf -X POST "$HERMES/v1/stt" -H 'content-type: application/json' \
+    -d "{\"sampleRate\":16000,\"pcm16\":\"$silence\"}")
+  [[ $(echo "$r" | json "['transcript']") == None ]] || fail "silence must yield no transcript"
+  ok "silence yields no transcript (nothing submittable)"
+
+  wav_header=$(curl -sf -X POST "$HERMES/v1/tts" -H 'content-type: application/json' \
+    -d '{"text":"Staging is green."}' | head -c 4)
+  [[ $wav_header == RIFF ]] || fail "hermes tts wav"
+  ok "tts produced a WAV stream"
+fi
 
 printf '\n✅ smoke passed (%d checks) — Anya Console: %s/kickbox/\n' "$pass" "$CONSOLE"

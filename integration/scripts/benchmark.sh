@@ -74,12 +74,31 @@ db_size="n/a"
 [[ -f $GATEWAY_DB ]] && db_size=$(du -h "$GATEWAY_DB" | cut -f1)
 log_size=$(du -ch "$RUN_DIR"/*.log 2>/dev/null | tail -1 | cut -f1)
 
+hermes_lines=()
+if [[ $ENABLE_HERMES_VOICE == true ]]; then
+  cold_hermes=$(grep -oP 'hermes healthy in \K[0-9]+' <<<"$up_out" | head -1)
+  stt_payload=$(python3 -c "
+import base64, json, math, struct
+sr = 16000
+pcm = b''.join(struct.pack('<h', int(math.sin(2*math.pi*440*i/sr)*0.5*32767)) for i in range(int(sr*0.7)))
+print(json.dumps({'sampleRate': sr, 'pcm16': base64.b64encode(pcm).decode()}))")
+  stt_t=$(curl -sf -o /dev/null -w '%{time_total}' -X POST "http://localhost:$HERMES_PORT/v1/stt" \
+    -H 'content-type: application/json' -d "$stt_payload")
+  tts_t=$(curl -sf -o /dev/null -w '%{time_total}' -X POST "http://localhost:$HERMES_PORT/v1/tts" \
+    -H 'content-type: application/json' -d '{"text":"Staging is green and holding."}')
+  stt_ms=$(python3 -c "print(f'{$stt_t*1000:.1f}')")
+  tts_ms=$(python3 -c "print(f'{$tts_t*1000:.1f}')")
+  hermes_lines+=("hermes:      $(proc_stats hermes)  cold-start=${cold_hermes}ms")
+  hermes_lines+=("hermes latency: stt(700ms audio)=${stt_ms}ms tts=${tts_ms}ms")
+fi
+
 {
   echo "── Camelot x Kickbox slice benchmark ($(date -u +%FT%TZ), host: $(uname -m), $(nproc) cpus)"
   echo "cold start:  gateway=${cold_gateway}ms  node-agent=${cold_agent}ms  console-ready=${cold_console}ms"
   echo "gateway:     $(proc_stats gateway)"
   echo "node-agent:  $(proc_stats node-agent)"
   echo "console:     $(proc_stats console)  (python http.server dev stand-in)"
+  for line in "${hermes_lines[@]+"${hermes_lines[@]}"}"; do echo "$line"; done
   echo "audit db:    $db_size · logs: $log_size"
   echo "turn latency (POST /v1/voice/turns, tier-1):    $turn_latency"
   echo "compute latency (POST /v1/compute, 1024-sample batch): $job_latency"

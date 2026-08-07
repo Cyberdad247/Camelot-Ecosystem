@@ -61,6 +61,22 @@
     #barge-in { border-color: var(--red); color: var(--red); font-weight: 600; }
     .quick-row { display: flex; gap: 8px; flex-wrap: wrap; }
     .quick-row button { font-size: 12.5px; color: var(--muted); }
+    .voice-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .chip {
+      font-size: 12px; padding: 3px 10px; border-radius: 999px;
+      background: var(--panel2); color: var(--muted); font-family: ui-monospace, monospace;
+    }
+    .chip.ok { color: var(--green); }
+    .chip.warn { color: var(--amber); }
+    .chip.err { color: var(--red); }
+    #mic-device { background: var(--panel2); color: var(--text); border: 1px solid #2c3550; border-radius: 8px; padding: 6px 8px; font-size: 12.5px; max-width: 180px; }
+    #ptt { border-color: var(--gold); font-weight: 700; }
+    #ptt.listening { background: #3d1620; border-color: var(--red); color: #ff9c9c; }
+    #stop-speaking { border-color: var(--amber); color: var(--amber); }
+    .voice-notice {
+      font-size: 12.5px; color: var(--amber); background: #241d10;
+      border: 1px solid #4a3a16; border-radius: 8px; padding: 8px 12px;
+    }
     .panel {
       background: var(--panel); border-radius: 10px; padding: 14px;
     }
@@ -104,8 +120,16 @@
       <div class="input-row">
         <input id="utterance" placeholder="Type an utterance for Anya…" autocomplete="off" />
         <button id="send">Send</button>
-        <button id="barge-in" disabled title="Interrupt Anya (mock barge-in event)">✋ Barge in</button>
+        <button id="barge-in" disabled title="Interrupt Anya (stops playback, cancels stream, revokes unused leases)">✋ Barge in</button>
       </div>
+      <div id="voice-bar" class="voice-bar" hidden>
+        <span id="mic-status" class="chip">mic: unknown</span>
+        <select id="mic-device" title="Microphone device"><option value="">default mic</option></select>
+        <button id="ptt" title="Hold to talk, release to transcribe">🎙 Hold to talk</button>
+        <button id="stop-speaking" disabled title="Stop Anya's voice immediately">🔇 Stop speaking</button>
+        <span id="voice-state" class="chip">voice: idle</span>
+      </div>
+      <div id="voice-notice" class="voice-notice" hidden></div>
     </div>
     <div class="col">
       <div id="decision-card" class="panel"></div>

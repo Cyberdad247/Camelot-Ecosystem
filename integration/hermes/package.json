@@ -1,0 +1,11 @@
+{
+  "name": "@camelot/hermes-voice",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hermes voice adapter service — STT/TTS only, no tool/lease/gateway access (ADR-001). Zero dependencies; fixture engines by default, external command engines by explicit configuration.",
+  "type": "module",
+  "main": "src/server.mjs",
+  "scripts": {
+    "start": "node src/server.mjs"
+  }
+}

@@ -6,7 +6,7 @@
 set -uo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
-for s in "${SERVICES[@]}"; do
+for s in "${ALL_SERVICES[@]}"; do
   pid=$(service_pid "$s")
   if [[ -z $pid ]]; then
     rm -f "$(pid_file "$s")" "$(meta_file "$s")"

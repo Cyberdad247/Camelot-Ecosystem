@@ -8,13 +8,23 @@ BIN_DIR="$RUN_DIR/bin"
 
 GATEWAY_PORT=${GATEWAY_PORT:-8788}
 NODE_AGENT_PORT=${NODE_AGENT_PORT:-8789}
+HERMES_PORT=${HERMES_PORT:-8790}
 CONSOLE_PORT=${CONSOLE_PORT:-8080}
 LEASE_KEY=${LEASE_KEY:-camelot-demo-key}
 GATEWAY_DB=${GATEWAY_DB:-$RUN_DIR/camelot-voice.db}
+# Phase 2: the Hermes voice adapter process starts ONLY when this is "true".
+ENABLE_HERMES_VOICE=${ENABLE_HERMES_VOICE:-false}
 
 # Startup order matters (dev-up): gateway first, then the node-agent, then
-# the PWA — each health-verified before its dependent starts.
-SERVICES=(gateway node-agent console)
+# (optionally) Hermes, then the PWA — each health-verified before its
+# dependent starts.
+SERVICES=(gateway node-agent)
+[[ $ENABLE_HERMES_VOICE == true ]] && SERVICES+=(hermes)
+SERVICES+=(console)
+
+# Every service that may ever have runtime state — used by dev-down/status so
+# a Hermes started earlier is still stopped even if the flag is now unset.
+ALL_SERVICES=(gateway node-agent hermes console)
 
 pid_file() { echo "$RUN_DIR/$1.pid"; }
 log_file() { echo "$RUN_DIR/$1.log"; }
@@ -47,6 +57,7 @@ health_url() {
   case "$1" in
     gateway) echo "http://localhost:$GATEWAY_PORT/healthz" ;;
     node-agent) echo "http://localhost:$NODE_AGENT_PORT/healthz" ;;
+    hermes) echo "http://localhost:$HERMES_PORT/healthz" ;;
     console) echo "http://localhost:$CONSOLE_PORT/kickbox/index.html" ;;
   esac
 }

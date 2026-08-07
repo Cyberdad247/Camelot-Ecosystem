@@ -1,6 +1,6 @@
 # Camelot × Kickbox — Governed Voice Vertical Slice
 
-Status: **live** (text-first). Companion documents:
+Status: **live** (text + push-to-talk voice). Companion documents:
 [current-state](../architecture/current-state.md) ·
 [bootstrap-plan](../architecture/bootstrap-plan.md) ·
 [ADR-001 boundaries](../adr/001-kickbox-camelot-boundaries.md)
@@ -161,6 +161,79 @@ cd integration && make test   # TS (vitest) + Go (go test -count=1) + Rust (both
 | T6 audit redaction + chain | `gateway/audit_test.go` |
 | Audit persistence across restart + tamper refusal | `gateway/store_test.go` |
 | T7 end-to-end smoke | `scripts/smoke.sh` (11 checks) |
+
+## Phase 2 — push-to-talk voice (Hermes adapter)
+
+Voice is **off by default**. Enable the Hermes adapter process:
+
+```bash
+cd integration
+ENABLE_HERMES_VOICE=true make dev-up   # adds hermes on :8790 (gateway -> node-agent -> hermes -> console)
+ENABLE_HERMES_VOICE=true make smoke    # 15 checks (11 base + 4 voice)
+```
+
+The console then shows the voice bar: mic permission status, device
+selector, **hold-to-talk** button, stop-speaking control, and a voice-state
+chip (`listening / transcribing / review / error / text-only`). Flow:
+
+```
+mic (hold PTT) -> PCM16 in memory -> Hermes /v1/stt -> confidence gate
+  -> existing POST /v1/voice/turns (modality "voice" + audioSha256)
+  -> existing policy/lease/audit chain, unchanged
+  -> reply text -> browser speechSynthesis (or Hermes /v1/tts WAV)
+```
+
+### Environment variables
+
+| Variable | Default | Meaning |
+|---|---|---|
+| `ENABLE_HERMES_VOICE` | `false` | Start the Hermes adapter process |
+| `HERMES_PORT` | `8790` | Adapter port |
+| `HERMES_STT_ENGINE` / `HERMES_TTS_ENGINE` | `fixture` | `fixture` (deterministic, model-free) or `command` |
+| `HERMES_STT_CMD` / `HERMES_TTS_CMD` | — | External binary for `command` engines (e.g. whisper.cpp, piper). User-configured; **never auto-started or downloaded** |
+| `HERMES_STT_SCRIPT` | 3 demo utterances | `"a\|b\|c"` fixture transcript rotation |
+
+The fixture STT gates on real audio energy: silence or sub-220 ms blips
+yield **no transcript** (nothing submittable); quiet audio yields **low
+confidence**, which forces the review gate.
+
+### Guardrails (all unit-tested)
+
+- **Confidence gate**: no/failed transcript → nothing reaches the gateway;
+  confidence < 0.75 → transcript is prefilled for review, the user must
+  press Send; accepted → submitted only through `POST /v1/voice/turns`.
+- **Barge-in**: stop-speaking (or pressing PTT while Anya talks) halts
+  playback *immediately*, then fires the existing barge-in event — stream
+  cancelled, unused leases revoked. Committed actions are untouched.
+- **Fallback**: mic denied, Hermes unreachable, or STT/TTS failure →
+  visible notice, text mode stays fully functional. TTS failure never
+  hides the text reply.
+- **Tier semantics unchanged**: a spoken tier-2 request drafts under an
+  auto-lease; a spoken tier-3 request blocks until the visible approval
+  control is used. Policy never knows or cares that the turn was spoken.
+
+### Audio privacy model
+
+Raw PCM exists only in browser memory and (for `command` engines) a temp
+WAV that is unlinked in a `finally` block. What persists: the audio's
+SHA-256 (`audioSha256` on the turn), transcript hash, timing, provider
+status, and the redacted policy/audit records — never raw audio, and never
+raw transcripts for tier ≥ 2. `MockVoiceProvider` remains the default test
+provider; Hermes runs only behind the flag.
+
+### Phase 2 test map
+
+| Guardrail | Test |
+|---|---|
+| Mic denied → text mode usable | `kickbox/tests/voice-session.test.ts` #1 |
+| STT failure → no policy/tool request | #2, #2b |
+| Low confidence → review before submit | #3 |
+| Accepted transcript → turn path only, audio hashed | #4 |
+| Spoken tier-2 draft / tier-3 confirmation | #4/5 (with gateway T2/T3) |
+| Barge-in stops TTS, cancels stream, revokes lease | #6, #6b (with gateway T4) |
+| TTS failure keeps text visible | #7 |
+| Silence/quiet gating, WAV determinism | `hermes/tests/engines.test.ts` |
+| Live STT/TTS + silence rejection | `scripts/smoke.sh` step 8 |
 
 ## Adopting the contracts in the real Kickbox-audio repo
 

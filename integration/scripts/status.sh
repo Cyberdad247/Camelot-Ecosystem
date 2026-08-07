@@ -4,7 +4,7 @@ set -uo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 
 rc=0
-for s in "${SERVICES[@]}"; do
+for s in "${ALL_SERVICES[@]}"; do
   pid=$(service_pid "$s")
   if service_alive "$s"; then
     if curl -sf -o /dev/null "$(health_url "$s")"; then
@@ -12,6 +12,8 @@ for s in "${SERVICES[@]}"; do
     else
       echo "⚠ $s  pid=$pid  running but unhealthy"; rc=1
     fi
+  elif [[ $s == hermes && $ENABLE_HERMES_VOICE != true ]]; then
+    echo "· hermes  disabled (set ENABLE_HERMES_VOICE=true to start the voice adapter)"
   else
     echo "✘ $s  not running"; rc=1
   fi

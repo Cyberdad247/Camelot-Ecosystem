@@ -11,7 +11,11 @@ export default defineConfig({
     },
   },
   test: {
-    include: ['contracts/tests/**/*.test.ts', 'kickbox/tests/**/*.test.ts'],
+    include: [
+      'contracts/tests/**/*.test.ts',
+      'kickbox/tests/**/*.test.ts',
+      'hermes/tests/**/*.test.ts',
+    ],
     exclude: ['**/node_modules/**', '**/dist/**'],
   },
 });
