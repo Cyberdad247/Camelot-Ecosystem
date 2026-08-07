@@ -152,6 +152,16 @@ name = "camelot-edge"
 version = "9000.14.0"
 
 [[package]]
+name = "camelot-node-agent"
+version = "0.1.0"
+dependencies = [
+ "hex",
+ "serde",
+ "serde_json",
+ "sha2",
+]
+
+[[package]]
 name = "camelot-pqcrypto"
 version = "400.1.0"
 dependencies = [
