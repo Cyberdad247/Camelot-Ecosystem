@@ -78,11 +78,24 @@ impl StrictValidator {
             .ok()
             .filter(|k| !k.is_empty())
             .map(|k| k.into_bytes());
+        // Node/tenant binding is required only when this agent is actually
+        // enrolled in a mesh. With the mesh off the agent behaves exactly as
+        // it did before Phase 4A — an unbound lease is fine — so local-only
+        // operation is unchanged even though dev-up always exports a node id.
+        let enrolled = std::env::var("ENABLE_TAILSCALE_MESH").as_deref() == Ok("true");
         Self {
             lease_key,
             now_unix: system_now_unix,
-            node_id: std::env::var("CAMELOT_NODE_ID").unwrap_or_default(),
-            tenant_id: std::env::var("CAMELOT_TENANT_ID").unwrap_or_default(),
+            node_id: if enrolled {
+                std::env::var("CAMELOT_NODE_ID").unwrap_or_default()
+            } else {
+                String::new()
+            },
+            tenant_id: if enrolled {
+                std::env::var("CAMELOT_TENANT_ID").unwrap_or_default()
+            } else {
+                String::new()
+            },
         }
     }
 }

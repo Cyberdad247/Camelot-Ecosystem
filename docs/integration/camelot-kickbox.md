@@ -228,15 +228,35 @@ the target hardware and recorded. One command does the recording:
 
 ```bash
 cd integration
-./scripts/record-hardware-run.sh   # smoke + status + benchmark, voice on
+ENABLE_HERMES_VOICE=true ENABLE_TAILSCALE_MESH=true ./scripts/record-hardware-run.sh
 ```
 
-It writes `docs/integration/hardware-runs/<date>-<host>.md` with the machine
-specs, smoke output, and benchmark figures, plus a manual browser checklist
-(mic denial, silence, quiet speech, normal speech, barge-in during TTS,
-tier-2 draft, tier-3 confirmation) to fill in by hand. Commit the file with
-a PASS verdict to clear the gate. A reference run from the dev container is
-already in that directory for comparison.
+It writes `docs/benchmarks/<date>-<host>.md` and automates six of the nine
+gate checks:
+
+| # | Check | How |
+|---|---|---|
+| 1 | Local-only startup unaffected (mesh flag absent) | automated — a full smoke pass with the mesh off, before the main run |
+| 3 | Pending node reachable but cannot receive a job | automated — `scripts/mesh-gate-probes.sh` |
+| 4 | Wrong tenant / node / capability / expired / replayed lease all fail | automated |
+| 5 | Remote read-only failure falls back locally | automated (synthetic node with a dead dispatch URL) |
+| 6 | Effectful remote failure: no retry, no local re-run | automated |
+| 7 | Revocation cuts new work immediately | automated |
+| 2 | A real remote node enrols, is promoted, and serves | **manual** — needs a second machine on your tailnet |
+| 8 | `tailscale down` degrades to local-only | **manual** — needs your tailnet |
+| 9 | PTT, policy, streaming, TTS, barge-in in the browser | **manual** — needs your ears |
+
+The record also captures CPU/RAM/GPU, idle **and** active RSS per process,
+cold starts, turn/compute/STT/TTS latency, model first-token/completion, and
+provider failure-to-fallback latency. Fill in the three manual sections and
+the verdict, then commit the file to clear the gate. Reference runs from the
+dev container are already in that directory for comparison.
+
+The mesh probes also run standalone against a live stack:
+
+```bash
+ENABLE_TAILSCALE_MESH=true ./scripts/mesh-gate-probes.sh
+```
 
 ### Phase 2 test map
 

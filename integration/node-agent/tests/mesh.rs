@@ -118,6 +118,44 @@ fn tailscale_observer_never_fails_and_never_operates() {
     }
 }
 
+/// Regression: with the mesh OFF, the agent must not demand node-bound
+/// leases even though the launcher exports CAMELOT_NODE_ID unconditionally.
+/// Binding follows enrolment, not an incidental environment variable —
+/// otherwise local-only operation silently breaks (caught by the
+/// local-only pass in record-hardware-run.sh).
+#[test]
+fn binding_is_required_only_when_enrolled() {
+    let enrolled = StrictValidator {
+        lease_key: Some(KEY.to_vec()),
+        now_unix: now_fixed,
+        node_id: "node-a".into(),
+        tenant_id: "tenant-1".into(),
+    };
+    let standalone = StrictValidator {
+        lease_key: Some(KEY.to_vec()),
+        now_unix: now_fixed,
+        node_id: String::new(),
+        tenant_id: String::new(),
+    };
+    let unbound_message = format!("nlease-1|compute:audio.features|{EXP}||");
+    let unbound = ComputeLease {
+        lease_id: "nlease-1".into(),
+        capability: "compute:audio.features".into(),
+        status: "approved".into(),
+        expires_at: EXP.into(),
+        token: hex::encode(hmac_sha256(KEY, unbound_message.as_bytes())),
+        node_id: String::new(),
+        tenant_id: String::new(),
+    };
+    // Enrolled: an unbound lease is refused.
+    assert!(matches!(
+        enrolled.validate_lease(&job(unbound.clone())).unwrap_err(),
+        ValidationError::NodeMismatch(_)
+    ));
+    // Standalone (mesh off): the same lease is fine — Phase 1-3 behavior.
+    standalone.validate_lease(&job(unbound)).unwrap();
+}
+
 #[test]
 fn mesh_is_disabled_without_explicit_configuration() {
     // Default environment: no ENABLE_TAILSCALE_MESH, no node id.

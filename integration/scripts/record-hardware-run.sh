@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-# Phase 2 release-gate recorder. Runs the full native voice validation on
-# THIS machine and writes the results into docs/integration/hardware-runs/
-# — the artifact the Phase 3 prerequisite requires. Review, fill in the
-# manual checklist, then commit the file.
+# Release-gate recorder (Phases 2-4A). Runs the full native validation on
+# THIS machine and writes the results into docs/benchmarks/ — the artifact
+# the merge/tag gate requires. Six of the nine checklist items are automated
+# here; the remaining three need a second machine, your tailnet, and your
+# ears, and are left as checkboxes.
 #
-# Usage:  ./scripts/record-hardware-run.sh          (voice on by default)
+# Usage:  ENABLE_TAILSCALE_MESH=true ./scripts/record-hardware-run.sh
 set -euo pipefail
 export ENABLE_HERMES_VOICE=${ENABLE_HERMES_VOICE:-true}
+export ENABLE_TAILSCALE_MESH=${ENABLE_TAILSCALE_MESH:-false}
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 cd "$INTEGRATION_DIR"
 
@@ -19,7 +21,7 @@ done
 
 STAMP=$(date -u +%F)
 HOST=$(hostname -s 2>/dev/null || echo host)
-OUT_DIR="$INTEGRATION_DIR/../docs/integration/hardware-runs"
+OUT_DIR="$INTEGRATION_DIR/../docs/benchmarks"
 OUT="$OUT_DIR/$STAMP-$HOST.md"
 mkdir -p "$OUT_DIR"
 
@@ -28,7 +30,21 @@ cpu_model=$(awk -F': ' '/model name/ {print $2; exit}' /proc/cpuinfo 2>/dev/null
 gpu_model=$( (lspci 2>/dev/null | grep -iE 'vga|3d|display' | head -1 | cut -d: -f3) || true )
 gpu_model=${gpu_model:-none detected}
 
-echo "── smoke (ENABLE_HERMES_VOICE=$ENABLE_HERMES_VOICE)"
+# Checklist item 1: local-only startup must be unaffected by everything the
+# later phases added. Prove it with a full smoke pass, mesh flag absent.
+echo "== pass A: local-only (mesh off)"
+local_rc=0
+(
+  export ENABLE_TAILSCALE_MESH=false
+  "$(dirname "${BASH_SOURCE[0]}")/dev-up.sh" >/dev/null
+) || local_rc=1
+if [[ $local_rc -eq 0 ]]; then
+  local_only_out=$(ENABLE_TAILSCALE_MESH=false "$(dirname "${BASH_SOURCE[0]}")/smoke.sh") || local_rc=$?
+fi
+local_only_out=${local_only_out:-"(local-only pass did not run)"}
+"$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null
+
+echo "== pass B: full stack (voice=$ENABLE_HERMES_VOICE mesh=$ENABLE_TAILSCALE_MESH)"
 "$(dirname "${BASH_SOURCE[0]}")/dev-up.sh" >/dev/null
 
 # Idle RSS: sampled after health gates, before any load.
@@ -41,6 +57,16 @@ for s in "${SERVICES[@]}"; do
 done
 
 smoke_out=$("$(dirname "${BASH_SOURCE[0]}")/smoke.sh") && smoke_rc=0 || smoke_rc=$?
+
+# Checklist items 3-7, automated (see scripts/mesh-gate-probes.sh).
+probes_rc=0
+if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
+  echo "== mesh gate probes"
+  probes_out=$("$(dirname "${BASH_SOURCE[0]}")/mesh-gate-probes.sh") || probes_rc=$?
+else
+  probes_out="(skipped -- ENABLE_TAILSCALE_MESH was not true)"
+fi
+
 status_out=$("$(dirname "${BASH_SOURCE[0]}")/status.sh" || true)
 "$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null
 
@@ -89,13 +115,26 @@ kill "$fb_pid" 2>/dev/null || true
   echo "| RAM | $mem_total |"
   echo "| GPU | $gpu_model |"
   echo "| Voice | ENABLE_HERMES_VOICE=$ENABLE_HERMES_VOICE |"
+  echo "| Mesh | ENABLE_TAILSCALE_MESH=$ENABLE_TAILSCALE_MESH |"
+  echo "| Local-only pass (item 1) | $([ "$local_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$local_rc)") |"
+  echo "| Mesh gate probes (items 3-7) | $([ "$probes_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$probes_rc)") |"
   echo "| Idle RSS | $idle_rss |"
   echo "| Fallback latency | $fallback_ms |"
   echo "| Smoke | $([ "$smoke_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$smoke_rc)") |"
   echo
-  echo '## Smoke output'
+  echo '## Item 1 -- local-only smoke (mesh flag absent)'
+  echo '```'
+  echo "$local_only_out"
+  echo '```'
+  echo
+  echo '## Full-stack smoke'
   echo '```'
   echo "$smoke_out"
+  echo '```'
+  echo
+  echo '## Items 3-7 -- mesh gate probes'
+  echo '```'
+  echo "$probes_out"
   echo '```'
   echo
   echo '## Status snapshot'
@@ -108,8 +147,19 @@ kill "$fb_pid" 2>/dev/null || true
   echo "$bench_out"
   echo '```'
   echo
-  echo '## Manual checklist (fill in by hand in the browser)'
+  echo '## Manual checklist — the three items no script can do'
   echo
+  echo '### Item 2 — a real remote node (needs a second machine on your tailnet)'
+  echo '- [ ] Second machine agent enrolled; appears in Node Status as *pending*'
+  echo '- [ ] After POST /v1/nodes/<id>/trust it shows *trusted · ready*'
+  echo '- [ ] A read-only job routed to it returns a result (the route line names it)'
+  echo
+  echo '### Item 8 — transport loss'
+  echo '- [ ] `tailscale down` on the remote → node degrades/offline within ~45s'
+  echo '- [ ] Work continues locally throughout; no errors surface to the user'
+  echo '- [ ] `tailscale up` → node returns (re-promote from limited if needed)'
+  echo
+  echo '### Item 9 — voice + model in the browser'
   echo '- [ ] Microphone permission DENIED → text mode remains usable, visible notice'
   echo '- [ ] Silence while holding PTT → "no speech" notice, nothing submitted'
   echo '- [ ] Quiet speech → low-confidence review prompt, must press Send'
