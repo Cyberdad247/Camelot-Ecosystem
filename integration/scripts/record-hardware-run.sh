@@ -30,6 +30,11 @@ cpu_model=$(awk -F': ' '/model name/ {print $2; exit}' /proc/cpuinfo 2>/dev/null
 gpu_model=$( (lspci 2>/dev/null | grep -iE 'vga|3d|display' | head -1 | cut -d: -f3) || true )
 gpu_model=${gpu_model:-none detected}
 
+mem_field() { awk -v k="$1:" '$1 == k {printf "%.0f", $2/1024}' /proc/meminfo 2>/dev/null || echo 0; }
+swap_total=$(mem_field SwapTotal)
+swap_free_before=$(mem_field SwapFree)
+avail_before=$(mem_field MemAvailable)
+
 # Checklist item 1: local-only startup must be unaffected by everything the
 # later phases added. Prove it with a full smoke pass, mesh flag absent.
 echo "== pass A: local-only (mesh off)"
@@ -103,10 +108,22 @@ for _ in $(seq 1 60); do
 done
 kill "$fb_pid" 2>/dev/null || true
 
+# Memory pressure across the whole run. A few MB of swap movement on a busy
+# desktop is normal; hundreds of MB against an 8 GB box is the thrashing the
+# PASS threshold rules out.
+swap_free_after=$(mem_field SwapFree)
+avail_after=$(mem_field MemAvailable)
+if [[ ${swap_total:-0} -gt 0 ]]; then
+  swap_line="swap ${swap_total}MB total; used +$(( swap_free_before - swap_free_after ))MB during the run"
+else
+  swap_line="no swap configured"
+fi
+mem_line="MemAvailable ${avail_before}MB -> ${avail_after}MB (delta $(( avail_before - avail_after ))MB); $swap_line"
+
 {
   echo "# Hardware run — $STAMP on $HOST"
   echo
-  echo "Phase 2+3 release-gate record (docs/architecture/bootstrap-plan.md; merge/tag gate for PR #200 and prerequisite for Phase 4A)."
+  echo "Phases 2-4A release-gate record — merge/tag gate for PR #200 (camelot-kickbox-voice-v0.2.0) and prerequisite for Phase 4B."
   echo
   echo "| Field | Value |"
   echo "|---|---|"
@@ -120,6 +137,7 @@ kill "$fb_pid" 2>/dev/null || true
   echo "| Mesh gate probes (items 3-7) | $([ "$probes_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$probes_rc)") |"
   echo "| Idle RSS | $idle_rss |"
   echo "| Fallback latency | $fallback_ms |"
+  echo "| Memory pressure | $mem_line |"
   echo "| Smoke | $([ "$smoke_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$smoke_rc)") |"
   echo
   echo '## Item 1 -- local-only smoke (mesh flag absent)'
@@ -170,6 +188,13 @@ kill "$fb_pid" 2>/dev/null || true
   echo '- [ ] TTS start latency after reply completes: ______ (perceived, browser)'
   echo '- [ ] Barge-in stop latency while speaking: ______ (perceived — must feel immediate)'
   echo '- [ ] Browser used: ______'
+  echo
+  echo '### Local-only invariant (must hold regardless of CAMELOT_NODE_ID)'
+  echo '```'
+  echo 'unset ENABLE_TAILSCALE_MESH'
+  echo 'CAMELOT_NODE_ID=anything ENABLE_HERMES_VOICE=true make dev-up && make smoke && make dev-down'
+  echo '```'
+  echo '- [ ] Passes with no node-bound lease required (agent healthz shows nodeId empty)'
   echo
   echo "_Verdict (fill in): PASS / FAIL — notes:_"
 } > "$OUT"
