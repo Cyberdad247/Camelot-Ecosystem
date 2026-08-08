@@ -5,7 +5,7 @@
 
 SHELL := /bin/bash
 
-.PHONY: build dev-up dev-down status logs smoke benchmark test test-ts test-go test-rust clean
+.PHONY: build dev-up dev-down status logs smoke benchmark verify-local-only test test-ts test-go test-rust clean
 
 build:
 	./scripts/build.sh
@@ -27,6 +27,10 @@ smoke:
 
 benchmark:
 	./scripts/benchmark.sh
+
+## verify-local-only: mesh-off invariant (forces the conditions; no false PASS)
+verify-local-only:
+	./scripts/verify-local-only.sh
 
 ## test: full slice test suite (TS + Go + Rust, both Rust feature sets)
 test: test-ts test-go test-rust

@@ -35,19 +35,13 @@ swap_total=$(mem_field SwapTotal)
 swap_free_before=$(mem_field SwapFree)
 avail_before=$(mem_field MemAvailable)
 
-# Checklist item 1: local-only startup must be unaffected by everything the
-# later phases added. Prove it with a full smoke pass, mesh flag absent.
-echo "== pass A: local-only (mesh off)"
+# Checklist item 1 + the local-only invariant: mesh off must mean local-only
+# authorization semantics even with a node id in the environment. The helper
+# FORCES those conditions itself, so an exported ENABLE_TAILSCALE_MESH cannot
+# produce a false PASS here.
+echo "== pass A: local-only invariant (mesh forced off, non-default node id)"
 local_rc=0
-(
-  export ENABLE_TAILSCALE_MESH=false
-  "$(dirname "${BASH_SOURCE[0]}")/dev-up.sh" >/dev/null
-) || local_rc=1
-if [[ $local_rc -eq 0 ]]; then
-  local_only_out=$(ENABLE_TAILSCALE_MESH=false "$(dirname "${BASH_SOURCE[0]}")/smoke.sh") || local_rc=$?
-fi
-local_only_out=${local_only_out:-"(local-only pass did not run)"}
-"$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null
+local_only_out=$("$(dirname "${BASH_SOURCE[0]}")/verify-local-only.sh" 2>&1) || local_rc=$?
 
 echo "== pass B: full stack (voice=$ENABLE_HERMES_VOICE mesh=$ENABLE_TAILSCALE_MESH)"
 "$(dirname "${BASH_SOURCE[0]}")/dev-up.sh" >/dev/null
@@ -133,14 +127,14 @@ mem_line="MemAvailable ${avail_before}MB -> ${avail_after}MB (delta $(( avail_be
   echo "| GPU | $gpu_model |"
   echo "| Voice | ENABLE_HERMES_VOICE=$ENABLE_HERMES_VOICE |"
   echo "| Mesh | ENABLE_TAILSCALE_MESH=$ENABLE_TAILSCALE_MESH |"
-  echo "| Local-only pass (item 1) | $([ "$local_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$local_rc)") |"
+  echo "| Local-only invariant (item 1) | $([ "$local_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$local_rc)") |"
   echo "| Mesh gate probes (items 3-7) | $([ "$probes_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$probes_rc)") |"
   echo "| Idle RSS | $idle_rss |"
   echo "| Fallback latency | $fallback_ms |"
   echo "| Memory pressure | $mem_line |"
   echo "| Smoke | $([ "$smoke_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$smoke_rc)") |"
   echo
-  echo '## Item 1 -- local-only smoke (mesh flag absent)'
+  echo '## Item 1 + invariant -- local-only (mesh forced off, CAMELOT_NODE_ID set)'
   echo '```'
   echo "$local_only_out"
   echo '```'
@@ -188,13 +182,7 @@ mem_line="MemAvailable ${avail_before}MB -> ${avail_after}MB (delta $(( avail_be
   echo '- [ ] TTS start latency after reply completes: ______ (perceived, browser)'
   echo '- [ ] Barge-in stop latency while speaking: ______ (perceived — must feel immediate)'
   echo '- [ ] Browser used: ______'
-  echo
-  echo '### Local-only invariant (must hold regardless of CAMELOT_NODE_ID)'
-  echo '```'
-  echo 'unset ENABLE_TAILSCALE_MESH'
-  echo 'CAMELOT_NODE_ID=anything ENABLE_HERMES_VOICE=true make dev-up && make smoke && make dev-down'
-  echo '```'
-  echo '- [ ] Passes with no node-bound lease required (agent healthz shows nodeId empty)'
+
   echo
   echo "_Verdict (fill in): PASS / FAIL — notes:_"
 } > "$OUT"

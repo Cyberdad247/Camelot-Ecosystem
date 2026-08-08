@@ -236,7 +236,7 @@ gate checks:
 
 | # | Check | How |
 |---|---|---|
-| 1 | Local-only startup unaffected (mesh flag absent) | automated — a full smoke pass with the mesh off, before the main run |
+| 1 | Local-only startup unaffected **regardless of `CAMELOT_NODE_ID`** | automated — `scripts/verify-local-only.sh` forces the mesh off and sets a non-default node id, then asserts an empty agent `nodeId`, an empty registry, and a full smoke pass |
 | 3 | Pending node reachable but cannot receive a job | automated — `scripts/mesh-gate-probes.sh` |
 | 4 | Wrong tenant / node / capability / expired / replayed lease all fail | automated |
 | 5 | Remote read-only failure falls back locally | automated (synthetic node with a dead dispatch URL) |
@@ -255,8 +255,14 @@ dev container are already in that directory for comparison.
 The mesh probes also run standalone against a live stack:
 
 ```bash
-ENABLE_TAILSCALE_MESH=true ./scripts/mesh-gate-probes.sh
+ENABLE_TAILSCALE_MESH=true ./scripts/mesh-gate-probes.sh   # items 3-7
+make verify-local-only                                      # item 1 + invariant
 ```
+
+`verify-local-only` deliberately *forces* the mesh off rather than trusting
+the caller's shell: an exported `ENABLE_TAILSCALE_MESH=true` cannot produce a
+false PASS. A transport variable must never switch on node-bound
+authorization — that is the invariant, and this is how it is proven.
 
 ### Phase 2 test map
 
