@@ -5,10 +5,22 @@
 # here; the remaining three need a second machine, your tailnet, and your
 # ears, and are left as checkboxes.
 #
-# Usage:  ENABLE_TAILSCALE_MESH=true ./scripts/record-hardware-run.sh
+# Usage:  ./scripts/record-hardware-run.sh
+#
+# Voice AND mesh default to ON: this is the Phase 4A gate recorder, and a run
+# with either switched off cannot clear the gate. Pass A forces the mesh off
+# by itself regardless, so the local-only invariant is always exercised too.
+# Turning a feature off here marks the record INCOMPLETE and exits non-zero,
+# so a partial run can never be mistaken for a clean one.
 set -euo pipefail
 export ENABLE_HERMES_VOICE=${ENABLE_HERMES_VOICE:-true}
-export ENABLE_TAILSCALE_MESH=${ENABLE_TAILSCALE_MESH:-false}
+export ENABLE_TAILSCALE_MESH=${ENABLE_TAILSCALE_MESH:-true}
+
+gate_complete=true
+if [[ $ENABLE_TAILSCALE_MESH != true || $ENABLE_HERMES_VOICE != true ]]; then
+  gate_complete=false
+  echo "WARNING: voice=$ENABLE_HERMES_VOICE mesh=$ENABLE_TAILSCALE_MESH — this record will be marked INCOMPLETE" >&2
+fi
 source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
 cd "$INTEGRATION_DIR"
 
@@ -63,7 +75,7 @@ if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
   echo "== mesh gate probes"
   probes_out=$("$(dirname "${BASH_SOURCE[0]}")/mesh-gate-probes.sh") || probes_rc=$?
 else
-  probes_out="(skipped -- ENABLE_TAILSCALE_MESH was not true)"
+  probes_out="(SKIPPED -- ENABLE_TAILSCALE_MESH was not true; this record cannot clear the gate)"
 fi
 
 status_out=$("$(dirname "${BASH_SOURCE[0]}")/status.sh" || true)
@@ -133,6 +145,7 @@ mem_line="MemAvailable ${avail_before}MB -> ${avail_after}MB (delta $(( avail_be
   echo "| Fallback latency | $fallback_ms |"
   echo "| Memory pressure | $mem_line |"
   echo "| Smoke | $([ "$smoke_rc" -eq 0 ] && echo PASSED || echo "FAILED (rc=$smoke_rc)") |"
+  echo "| Gate coverage | $([ "$gate_complete" == true ] && echo "COMPLETE (voice + mesh both exercised)" || echo "**INCOMPLETE — rerun with voice and mesh enabled**") |"
   echo
   echo '## Item 1 + invariant -- local-only (mesh forced off, CAMELOT_NODE_ID set)'
   echo '```'
@@ -190,4 +203,10 @@ mem_line="MemAvailable ${avail_before}MB -> ${avail_after}MB (delta $(( avail_be
 echo
 echo "recorded → $OUT"
 echo "Fill in the manual checklist + verdict, then commit the file."
+if [[ $gate_complete != true ]]; then
+  echo "INCOMPLETE: voice and/or mesh were disabled — this record cannot clear the gate." >&2
+  exit 2
+fi
+[[ $local_rc -eq 0 ]] || exit "$local_rc"
+[[ $probes_rc -eq 0 ]] || exit "$probes_rc"
 [[ $smoke_rc -eq 0 ]] || exit "$smoke_rc"
