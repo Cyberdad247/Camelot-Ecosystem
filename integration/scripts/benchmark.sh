@@ -20,7 +20,7 @@ TURNS=${TURNS:-20}
 JOBS=${JOBS:-20}
 
 # dev-up already prints per-service cold-start times; capture them.
-up_out=$("$(dirname "${BASH_SOURCE[0]}")/dev-up.sh")
+up_out=$("$SCRIPT_DIR/dev-up.sh")
 cold_gateway=$(grep -oP 'gateway healthy in \K[0-9]+' <<<"$up_out" | head -1)
 cold_agent=$(grep -oP 'node-agent healthy in \K[0-9]+' <<<"$up_out" | head -1)
 cold_console=$(grep -oP 'console healthy in \K[0-9]+' <<<"$up_out" | head -1)
@@ -123,5 +123,5 @@ print(f\"model routing: provider={d['provider']} requests={d['requests']} fallba
       f\"first-token={d['avgFirstTokenMs']:.0f}ms completion={d['avgCompletionMs']:.0f}ms\")"
 } | tee "$REPORT"
 
-"$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null
+"$SCRIPT_DIR/dev-down.sh" >/dev/null
 echo "── stack stopped; report saved to $REPORT"

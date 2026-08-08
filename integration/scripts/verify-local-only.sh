@@ -29,10 +29,10 @@ for s in "${ALL_SERVICES[@]}"; do
 done
 
 rc=0
-"$(dirname "${BASH_SOURCE[0]}")/dev-up.sh" >/dev/null || rc=1
+"$SCRIPT_DIR/dev-up.sh" >/dev/null || rc=1
 if [[ $rc -ne 0 ]]; then
   echo "   ✘ stack failed to start"
-  "$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null 2>&1
+  "$SCRIPT_DIR/dev-down.sh" >/dev/null 2>&1
   exit 1
 fi
 
@@ -58,7 +58,7 @@ else
 fi
 
 # The full smoke must pass using unbound leases only.
-if smoke_out=$("$(dirname "${BASH_SOURCE[0]}")/smoke.sh"); then
+if smoke_out=$("$SCRIPT_DIR/smoke.sh"); then
   echo "   ✔ $(echo "$smoke_out" | tail -1 | sed 's/^✅ //')"
 else
   echo "   ✘ local-only smoke FAILED:"
@@ -66,7 +66,7 @@ else
   rc=1
 fi
 
-"$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null
+"$SCRIPT_DIR/dev-down.sh" >/dev/null
 
 if [[ $rc -eq 0 ]]; then
   echo "── local-only invariant: PASS"

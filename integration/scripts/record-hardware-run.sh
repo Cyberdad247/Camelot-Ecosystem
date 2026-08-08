@@ -53,10 +53,10 @@ avail_before=$(mem_field MemAvailable)
 # produce a false PASS here.
 echo "== pass A: local-only invariant (mesh forced off, non-default node id)"
 local_rc=0
-local_only_out=$("$(dirname "${BASH_SOURCE[0]}")/verify-local-only.sh" 2>&1) || local_rc=$?
+local_only_out=$("$SCRIPT_DIR/verify-local-only.sh" 2>&1) || local_rc=$?
 
 echo "== pass B: full stack (voice=$ENABLE_HERMES_VOICE mesh=$ENABLE_TAILSCALE_MESH)"
-"$(dirname "${BASH_SOURCE[0]}")/dev-up.sh" >/dev/null
+"$SCRIPT_DIR/dev-up.sh" >/dev/null
 
 # Idle RSS: sampled after health gates, before any load.
 sleep 2
@@ -67,22 +67,22 @@ for s in "${SERVICES[@]}"; do
   idle_rss+="$s=$rss "
 done
 
-smoke_out=$("$(dirname "${BASH_SOURCE[0]}")/smoke.sh") && smoke_rc=0 || smoke_rc=$?
+smoke_out=$("$SCRIPT_DIR/smoke.sh") && smoke_rc=0 || smoke_rc=$?
 
 # Checklist items 3-7, automated (see scripts/mesh-gate-probes.sh).
 probes_rc=0
 if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
   echo "== mesh gate probes"
-  probes_out=$("$(dirname "${BASH_SOURCE[0]}")/mesh-gate-probes.sh") || probes_rc=$?
+  probes_out=$("$SCRIPT_DIR/mesh-gate-probes.sh") || probes_rc=$?
 else
   probes_out="(SKIPPED -- ENABLE_TAILSCALE_MESH was not true; this record cannot clear the gate)"
 fi
 
-status_out=$("$(dirname "${BASH_SOURCE[0]}")/status.sh" || true)
-"$(dirname "${BASH_SOURCE[0]}")/dev-down.sh" >/dev/null
+status_out=$("$SCRIPT_DIR/status.sh" || true)
+"$SCRIPT_DIR/dev-down.sh" >/dev/null
 
 echo "── benchmark (active RSS + latencies)"
-bench_out=$("$(dirname "${BASH_SOURCE[0]}")/benchmark.sh")
+bench_out=$("$SCRIPT_DIR/benchmark.sh")
 
 # Provider failure-to-fallback latency: a throwaway gateway on :8791 pointed
 # at a dead provider URL with a 1s timeout; measure POST-turn -> fallback

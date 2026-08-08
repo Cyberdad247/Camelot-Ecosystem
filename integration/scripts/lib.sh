@@ -3,6 +3,10 @@
 # All runtime state (PIDs, logs, sockets, db, temp) lives in integration/.run/.
 
 INTEGRATION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+# Absolute path to this scripts/ directory. Scripts `cd "$INTEGRATION_DIR"`
+# early, after which a relative $(dirname "${BASH_SOURCE[0]}") no longer
+# resolves — so every script-to-script call MUST use $SCRIPT_DIR.
+SCRIPT_DIR="$INTEGRATION_DIR/scripts"
 RUN_DIR="$INTEGRATION_DIR/.run"
 BIN_DIR="$RUN_DIR/bin"
 

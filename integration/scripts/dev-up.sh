@@ -19,7 +19,7 @@ for s in "${SERVICES[@]}"; do
   fi
 done
 
-"$(dirname "${BASH_SOURCE[0]}")/build.sh"
+"$SCRIPT_DIR/build.sh"
 mkdir -p "$RUN_DIR"
 
 teardown() {
