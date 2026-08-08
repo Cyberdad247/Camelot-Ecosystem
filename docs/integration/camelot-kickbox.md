@@ -331,6 +331,161 @@ command hooks (4B) · multi-provider marketplace · executing model-proposed
 plans · long-term memory/RAG · wake word/VAD · voice cloning · GPU
 inference · Mojo kernels · autonomous Knight loops · production deploys.
 
+## Phase 4A — private mesh: node enrolment, trust, and leased remote jobs
+
+**The rule: Tailscale makes a node reachable; it does not make it trusted or
+authorized.** Reachability is transport. Trust is a band the gateway assigns.
+Authorization is a short-lived lease the gateway mints *per node, per tenant,
+per capability, single-use* — and that the Rust agent re-validates from
+scratch before doing any work.
+
+### Offline / online operating model
+
+```
+Offline (default)
+  Kickbox -> Gateway -> deterministic or configured local provider
+                     -> local node agent (CPU compute)
+
+Online private mode (ENABLE_TAILSCALE_MESH=true)
+  Kickbox -> Gateway -> trust + lease -> your tailnet -> remote Rust node
+                     -> falls back to local the moment the mesh degrades
+```
+
+Nothing changes for offline users: mesh is opt-in, adds **no new process**
+(the existing node agent simply also enrols and heartbeats), and every voice,
+policy, and model path behaves identically when Tailscale is absent.
+
+### Manual prerequisite — you install and log in to Tailscale
+
+Camelot **never** touches your network. It does not install Tailscale, log
+in, run `tailscale up`, change ACLs, advertise routes, or enable exit nodes.
+The only command the agent may ever run is `tailscale status --json`, purely
+to observe. To connect two machines:
+
+```bash
+# On BOTH machines, once, by you:
+#   1. Install Tailscale (https://tailscale.com/download)
+#   2. tailscale up          # log in to your tailnet
+#   3. tailscale status      # note each machine's tailnet name/IP
+
+# Machine A — the gateway host:
+cd integration
+ENABLE_TAILSCALE_MESH=true make dev-up
+
+# Machine B — a remote compute node (agent only):
+CAMELOT_NODE_LEASE_KEY=<same key as machine A>   \
+ENABLE_TAILSCALE_MESH=true                       \
+CAMELOT_GATEWAY_URL=http://<machine-A-tailnet-name>:8788 \
+CAMELOT_NODE_ID=workshop-box                     \
+CAMELOT_TENANT_ID=<your tenant>                  \
+CAMELOT_NODE_ENROL_SECRET=<a secret you choose>  \
+CAMELOT_NODE_DISPATCH_URL=http://<machine-B-tailnet-name>:8789 \
+./.run/bin/camelot-node-agent
+
+# Back on machine A: the node appears as "pending" — approve it yourself.
+curl -X POST localhost:8788/v1/nodes/workshop-box/trust -d '{"band":"trusted"}'
+```
+
+`CAMELOT_NODE_LEASE_KEY` must match on the gateway and every agent: the
+gateway signs node leases with it and each agent verifies them. Keep it in
+your environment or OS key store, never in source control.
+
+### Trust-band state machine
+
+```
+           register                operator                operator
+   (none) ──────────▶ pending ──────────▶ limited ──────────▶ trusted
+                         │                   │                   │
+                         │  heartbeat stale (>45s)               │
+                         ▼                   ▼                   ▼
+                      degraded ◀─────────────┴───────────────────┘
+                         │  heartbeat resumes → limited (re-earn trust)
+                         ▼
+                      revoked   (terminal — re-enrolment required)
+```
+
+- **pending** — enrolled and nothing more. May do no work at all. Every
+  remote node starts here; only the operator-declared local node
+  (`CAMELOT_LOCAL_NODE_ID`, reachable over loopback) is auto-trusted.
+- **limited** — may serve **read-only** capabilities only.
+- **trusted** — may serve any capability it registered.
+- **degraded** — heartbeat stale; receives no new jobs until health returns.
+- **revoked** — terminal; cannot be re-trusted without re-enrolling.
+
+Identity is pinned at first registration by a SHA-256 fingerprint of the
+node's enrolment secret; a different key on the same node id is refused.
+
+### Node-job lease semantics
+
+Every remote job carries a lease that is **node-scoped, tenant-scoped,
+capability-scoped, ~30 s, single-use**, and HMAC-signed over
+`leaseId|capability|expiresAt|nodeId|tenantId`. Because node and tenant are
+inside the signature, a leaked lease is useless anywhere but its intended
+node, and rewriting those fields breaks the signature. The agent enforces
+single use itself (the gateway never sees the redemption).
+
+### Routing policy
+
+Local first, always. A remote node is considered only when the caller
+explicitly asks (`preferRemote`, or names a `nodeId`). Naming a node is a
+**requirement**, not a hint: if that node may not serve the job, the job
+fails rather than silently running elsewhere. A read-only job whose remote
+attempt fails falls back to the local node; an **effectful job is never
+retried and never re-run locally**, because the remote side may already have
+applied it — and the audit says exactly that.
+
+### Endpoints
+
+`POST /v1/nodes/register` · `POST /v1/nodes/{id}/heartbeat` ·
+`GET /v1/nodes` · `POST /v1/nodes/{id}/trust` · `POST /v1/nodes/{id}/revoke` ·
+`POST /v1/nodes/jobs`
+
+### What the UI and audit never see
+
+`GET /v1/nodes` and the Node Status panel return trust, health, capabilities,
+version, last-seen, and a 12-hex `addressHash` — never a dispatch address,
+key fingerprint, enrolment secret, or lease key. Audit records the same way:
+route decisions, dispatches, results, rejections, degradations, and
+revocations, addressed by node id and address hash only.
+
+### Phase 4A test map
+
+| Behavior | Test |
+|---|---|
+| Unregistered node rejected | `gateway/nodes_test.go` `TestUnregisteredNodeRejected` |
+| Pending / degraded / revoked cannot receive jobs | `TestNonTrustedBandsCannotReceiveJobs` |
+| Wrong tenant / wrong capability rejected | `TestWrongTenantAndCapabilityRejected` |
+| Limited trust is read-only | `TestLimitedTrustIsReadOnly` |
+| Lease expiry + reuse rejected | `TestNodeLeaseBindingAndReuse` |
+| Trusted healthy remote serves a read-only job | `TestTrustedRemoteNodeServesReadOnlyJob` |
+| Remote failure falls back safely | `TestRemoteFailureFallsBackToLocal` |
+| Effectful remote job not retried, not re-run locally | `TestEffectfulRemoteJobIsNotRetried` |
+| Mesh absence/outage preserves local operation | `TestLocalFirstAndMeshAbsenceIsHarmless` |
+| Audit has no addresses, keys, or secrets | `TestNodeAuditHasNoAddressesOrSecrets` |
+| Identity pinning | `TestIdentityPinning` |
+| Wrong-node / wrong-tenant lease refused at the agent | `node-agent/tests/mesh.rs` |
+| Node-side single-use redemption | `mesh.rs` `leases_are_single_use_at_the_node` |
+| Tailscale observer is total and read-only | `mesh.rs` `tailscale_observer_never_fails_and_never_operates` |
+| Panel shows standing/route, leaks nothing | `kickbox/tests/node-panel.test.ts` |
+| Live enrolment, local-first dispatch, refusals | `scripts/smoke.sh` step 10 |
+
+### Operational rollback
+
+Mesh is a flag. To disable it: drop `ENABLE_TAILSCALE_MESH=true` and
+`make dev-up` — the agent stops enrolling, the panel hides, and the slice is
+byte-for-byte the Phase 3 system. To cut off one node immediately without
+restarting anything: `POST /v1/nodes/{id}/revoke`. To cut off the mesh at the
+transport layer, `tailscale down` on your machines; Camelot degrades to local
+and keeps working.
+
+### Phase 4B deferrals (explicit)
+
+Real local STT/TTS engines (whisper.cpp, Piper) via the existing Hermes
+command hooks · remote desktop · WebRTC media · exit nodes / subnet routers ·
+public ingress · cross-tenant node sharing · autonomous repair · full Bifrost
+media bridge · multi-provider marketplace · executing model-proposed plans ·
+long-term memory/RAG · wake word · GPU inference · Mojo kernels.
+
 ## Adopting the contracts in the real Kickbox-audio repo
 
 `@camelot/contracts` is dependency-free ESM, so the Kickbox monorepo can

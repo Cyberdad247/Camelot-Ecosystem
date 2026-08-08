@@ -31,15 +31,22 @@ turn_payload() {
 }
 job_payload() {
   local exp="2030-01-01T00:00:00Z"
+  local node="" tenant=""
+  # An enrolled agent only accepts leases bound to itself (Phase 4A).
+  if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
+    node=$CAMELOT_NODE_ID
+    tenant=$CAMELOT_TENANT_ID
+  fi
   local token
-  token=$(python3 - "$LEASE_KEY" "$exp" <<'EOF'
+  token=$(python3 - "$LEASE_KEY" "$exp" "$node" "$tenant" <<'EOF'
 import hashlib, hmac, sys
-key, exp = sys.argv[1], sys.argv[2]
-print(hmac.new(key.encode(), f"bench-lease|compute:audio.features|{exp}".encode(), hashlib.sha256).hexdigest())
+key, exp, node, tenant = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+msg = f"bench-lease|compute:audio.features|{exp}|{node}|{tenant}".encode()
+print(hmac.new(key.encode(), msg, hashlib.sha256).hexdigest())
 EOF
 )
-  printf '{"jobId":"bench-%s","kind":"audio.features","lease":{"leaseId":"bench-lease","capability":"compute:audio.features","status":"approved","expiresAt":"%s","token":"%s"},"frames":[{"frameId":"f0","samples":[%s]}],"frameSize":256}' \
-    "$1" "$exp" "$token" "$(python3 -c 'print(",".join("0.1" for _ in range(1024)))')"
+  printf '{"jobId":"bench-%s","kind":"audio.features","lease":{"leaseId":"bench-lease","capability":"compute:audio.features","status":"approved","expiresAt":"%s","token":"%s","nodeId":"%s","tenantId":"%s"},"frames":[{"frameId":"f0","samples":[%s]}],"frameSize":256}' \
+    "$1" "$exp" "$token" "$node" "$tenant" "$(python3 -c 'print(",".join("0.1" for _ in range(1024)))')"
 }
 
 curl -sf -o /dev/null -X POST "http://localhost:$GATEWAY_PORT/v1/voice/turns" -H 'content-type: application/json' -d "$(turn_payload warm)"
@@ -102,6 +109,13 @@ fi
   echo "audit db:    $db_size · logs: $log_size"
   echo "turn latency (POST /v1/voice/turns, tier-1):    $turn_latency"
   echo "compute latency (POST /v1/compute, 1024-sample batch): $job_latency"
+  if [[ ${ENABLE_TAILSCALE_MESH:-false} == true ]]; then
+    node_t0=$(now_ms)
+    curl -sf -o /dev/null -X POST "http://localhost:$GATEWAY_PORT/v1/nodes/jobs" \
+      -H 'content-type: application/json' \
+      -d "{\"tenantId\":\"${CAMELOT_TENANT_ID}\",\"capability\":\"compute:audio.features\",\"payload\":{\"frames\":[{\"frameId\":\"f0\",\"samples\":[0.1,0.2,0.3,0.4]}],\"frameSize\":2}}" || true
+    echo "mesh: node-job round trip (enrol->lease->dispatch->result) = $(( $(now_ms) - node_t0 ))ms; nodes=$(curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)["nodes"]))')"
+  fi
   curl -sf "http://localhost:$GATEWAY_PORT/v1/models/stats" | python3 -c "
 import json, sys
 d = json.load(sys.stdin)

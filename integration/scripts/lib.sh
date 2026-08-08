@@ -14,6 +14,15 @@ LEASE_KEY=${LEASE_KEY:-camelot-demo-key}
 GATEWAY_DB=${GATEWAY_DB:-$RUN_DIR/camelot-voice.db}
 # Phase 2: the Hermes voice adapter process starts ONLY when this is "true".
 ENABLE_HERMES_VOICE=${ENABLE_HERMES_VOICE:-false}
+# Phase 4A: mesh enrolment is opt-in and adds NO new process — the existing
+# node agent simply also registers and heartbeats. Tailscale itself must be
+# installed and logged in BY YOU; these scripts never touch it.
+ENABLE_TAILSCALE_MESH=${ENABLE_TAILSCALE_MESH:-false}
+CAMELOT_LOCAL_NODE_ID=${CAMELOT_LOCAL_NODE_ID:-local-node}
+CAMELOT_NODE_ID=${CAMELOT_NODE_ID:-$CAMELOT_LOCAL_NODE_ID}
+CAMELOT_TENANT_ID=${CAMELOT_TENANT_ID:-local}
+CAMELOT_NODE_NAME=${CAMELOT_NODE_NAME:-$(hostname -s 2>/dev/null || echo camelot-node)}
+CAMELOT_NODE_ENROL_SECRET=${CAMELOT_NODE_ENROL_SECRET:-local-enrolment}
 
 # Startup order matters (dev-up): gateway first, then the node-agent, then
 # (optionally) Hermes, then the PWA — each health-verified before its

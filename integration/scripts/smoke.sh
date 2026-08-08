@@ -9,6 +9,9 @@ HERMES=${HERMES:-http://localhost:8790}
 CONSOLE=${CONSOLE:-http://localhost:8080}
 LEASE_KEY=${LEASE_KEY:-camelot-demo-key}
 ENABLE_HERMES_VOICE=${ENABLE_HERMES_VOICE:-false}
+ENABLE_TAILSCALE_MESH=${ENABLE_TAILSCALE_MESH:-false}
+CAMELOT_NODE_ID=${CAMELOT_NODE_ID:-local-node}
+CAMELOT_TENANT_ID=${CAMELOT_TENANT_ID:-local}
 SESSION=sess-anya-demo-001
 
 pass=0
@@ -84,17 +87,28 @@ ok "audit $audit_id fetched with hash chain"
 
 step "7. Node-agent compute under signed lease"
 exp="2030-01-01T00:00:00Z"
-token=$(python3 - "$LEASE_KEY" "$exp" <<'EOF'
+# An ENROLLED agent accepts only leases bound to itself, so the synthetic
+# lease must carry this node/tenant when the mesh is on (empty when it is off).
+if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
+  lease_node=$CAMELOT_NODE_ID
+  lease_tenant=$CAMELOT_TENANT_ID
+else
+  lease_node=""
+  lease_tenant=""
+fi
+token=$(python3 - "$LEASE_KEY" "$exp" "$lease_node" "$lease_tenant" <<'EOF'
 import hashlib, hmac, sys
-key, exp = sys.argv[1], sys.argv[2]
-msg = f"smoke-lease|compute:audio.features|{exp}".encode()
+key, exp, node, tenant = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+# Signature covers node and tenant too (Phase 4A binding).
+msg = f"smoke-lease|compute:audio.features|{exp}|{node}|{tenant}".encode()
 print(hmac.new(key.encode(), msg, hashlib.sha256).hexdigest())
 EOF
 )
 r=$(curl -sf -X POST "$NODE_AGENT/v1/compute" -H 'content-type: application/json' -d "{
   \"jobId\":\"smoke-job\",\"kind\":\"audio.features\",
   \"lease\":{\"leaseId\":\"smoke-lease\",\"capability\":\"compute:audio.features\",
-             \"status\":\"approved\",\"expiresAt\":\"$exp\",\"token\":\"$token\"},
+             \"status\":\"approved\",\"expiresAt\":\"$exp\",\"token\":\"$token\",
+             \"nodeId\":\"$lease_node\",\"tenantId\":\"$lease_tenant\"},
   \"frames\":[{\"frameId\":\"f0\",\"samples\":[0,0.5,-0.5,0.25]},
               {\"frameId\":\"f1\",\"samples\":[0.1,0.1,0.1,0.1]}],\"frameSize\":2}")
 [[ $(echo "$r" | json "['results'][0]['features']['peak']") == 0.5 ]] || fail "compute peak"
@@ -106,10 +120,31 @@ code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$NODE_AGENT/v1/compute" \
   -H 'content-type: application/json' -d "{
   \"jobId\":\"smoke-bad\",\"kind\":\"audio.features\",
   \"lease\":{\"leaseId\":\"smoke-lease\",\"capability\":\"compute:audio.features\",
-             \"status\":\"approved\",\"expiresAt\":\"$exp\",\"token\":\"forged\"},
+             \"status\":\"approved\",\"expiresAt\":\"$exp\",\"token\":\"forged\",
+             \"nodeId\":\"$lease_node\",\"tenantId\":\"$lease_tenant\"},
   \"frames\":[{\"frameId\":\"f0\",\"samples\":[0]}]}")
 [[ $code == 403 ]] || fail "forged compute token accepted (got $code)"
 ok "forged compute token rejected (403)"
+
+if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
+  # A perfectly signed lease minted for ANOTHER node is still refused.
+  other_token=$(python3 - "$LEASE_KEY" "$exp" "$CAMELOT_TENANT_ID" <<'EOF'
+import hashlib, hmac, sys
+key, exp, tenant = sys.argv[1], sys.argv[2], sys.argv[3]
+msg = f"smoke-lease-b|compute:audio.features|{exp}|someone-elses-node|{tenant}".encode()
+print(hmac.new(key.encode(), msg, hashlib.sha256).hexdigest())
+EOF
+)
+  code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$NODE_AGENT/v1/compute" \
+    -H 'content-type: application/json' -d "{
+    \"jobId\":\"smoke-other-node\",\"kind\":\"audio.features\",
+    \"lease\":{\"leaseId\":\"smoke-lease-b\",\"capability\":\"compute:audio.features\",
+               \"status\":\"approved\",\"expiresAt\":\"$exp\",\"token\":\"$other_token\",
+               \"nodeId\":\"someone-elses-node\",\"tenantId\":\"$CAMELOT_TENANT_ID\"},
+    \"frames\":[{\"frameId\":\"f0\",\"samples\":[0]}]}")
+  [[ $code == 403 ]] || fail "another node's valid lease was accepted (got $code)"
+  ok "another node's validly-signed lease rejected (403)"
+fi
 
 step "8. Model routing (deterministic default)"
 # Narrations count on completion — poll briefly while streams finish.
@@ -151,6 +186,54 @@ print(base64.b64encode(pcm).decode())")
     -d '{"text":"Staging is green."}' | head -c 4)
   [[ $wav_header == RIFF ]] || fail "hermes tts wav"
   ok "tts produced a WAV stream"
+fi
+
+if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
+  step "10. Mesh node registry (ENABLE_TAILSCALE_MESH=true)"
+  nodes=$(curl -sf "$GATEWAY/v1/nodes")
+  count=$(echo "$nodes" | python3 -c "import json,sys; print(len(json.load(sys.stdin)['nodes']))")
+  [[ $count -ge 1 ]] || fail "no node enrolled"
+  ok "$count node(s) enrolled"
+
+  # The local agent is auto-trusted; a node list must never leak an address.
+  local_trust=$(echo "$nodes" | python3 -c "
+import json,sys
+nodes = json.load(sys.stdin)['nodes']
+local = [n for n in nodes if n['local']]
+print(local[0]['trust'] if local else 'none')")
+  [[ $local_trust == trusted ]] || fail "local node band is $local_trust, expected trusted"
+  ok "local node trusted; mesh backend: $(echo "$nodes" | python3 -c "
+import json,sys
+nodes = json.load(sys.stdin)['nodes']
+print(nodes[0].get('meshBackend') or 'none')")"
+
+  echo "$nodes" | grep -qE 'https?://' && fail "node list leaked a dispatch address"
+  echo "$nodes" | grep -q 'dispatchUrl\|keyFingerprint' && fail "node list leaked identity material"
+  ok "node list carries no addresses or key material"
+
+  # Local-first routing actually reaches the agent and returns a result.
+  r=$(curl -sf -X POST "$GATEWAY/v1/nodes/jobs" -H 'content-type: application/json' -d "{
+    \"sessionId\":\"$SESSION\",\"turnId\":\"smoke-n1\",\"tenantId\":\"$CAMELOT_TENANT_ID\",
+    \"capability\":\"compute:audio.features\",
+    \"payload\":{\"frames\":[{\"frameId\":\"f0\",\"samples\":[0,0.5,-0.5,0.25]}],\"frameSize\":2}}")
+  [[ $(echo "$r" | json "['decision']['target']") == local ]] || fail "job did not route local-first"
+  [[ $(echo "$r" | json ".get('failure','')") == "" ]] || fail "local node job failed: $(echo "$r" | json "['failure']")"
+  ok "local-first job served under a node lease (audit $(echo "$r" | json "['auditId']"))"
+
+  # An unknown node is refused outright.
+  code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$GATEWAY/v1/nodes/jobs" \
+    -H 'content-type: application/json' -d "{
+    \"tenantId\":\"$CAMELOT_TENANT_ID\",\"capability\":\"compute:audio.features\",
+    \"nodeId\":\"ghost-node\",\"payload\":{\"frames\":[{\"frameId\":\"f0\",\"samples\":[0]}]}}")
+  [[ $code == 502 ]] || fail "unregistered node was not refused (got $code)"
+  ok "unregistered node refused"
+
+  # Cross-tenant request is refused even for a real, trusted node.
+  r=$(curl -s -X POST "$GATEWAY/v1/nodes/jobs" -H 'content-type: application/json' -d "{
+    \"tenantId\":\"other-tenant\",\"capability\":\"compute:audio.features\",
+    \"nodeId\":\"$CAMELOT_NODE_ID\",\"payload\":{\"frames\":[{\"frameId\":\"f0\",\"samples\":[0]}]}}")
+  [[ $(echo "$r" | json ".get('failure','')") != "" ]] || fail "cross-tenant job was served"
+  ok "cross-tenant job refused"
 fi
 
 printf '\n✅ smoke passed (%d checks) — Anya Console: %s/kickbox/\n' "$pass" "$CONSOLE"

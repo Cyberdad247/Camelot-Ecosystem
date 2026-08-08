@@ -25,8 +25,10 @@ type Server struct {
 	audit    *AuditLog
 	sessions *SessionHub
 	models   *ModelRouter
+	nodes    *NodeRegistry
 	now      func() time.Time
 	decSeq   atomic.Int64
+	nodeSeq  atomic.Int64
 }
 
 func NewServer(chunkDelay time.Duration, now func() time.Time) *Server {
@@ -37,6 +39,7 @@ func NewServer(chunkDelay time.Duration, now func() time.Time) *Server {
 		audit:    NewAuditLog(now),
 		sessions: NewSessionHub(chunkDelay),
 		models:   NewModelRouter(chunkDelay), // deterministic-only default
+		nodes:    NewNodeRegistry(now),
 		now:      now,
 	}
 }
@@ -55,6 +58,7 @@ func NewPersistentServer(chunkDelay time.Duration, now func() time.Time, auditDB
 		audit:    audit,
 		sessions: NewSessionHub(chunkDelay),
 		models:   NewModelRouter(chunkDelay),
+		nodes:    NewNodeRegistry(now),
 		now:      now,
 	}, nil
 }
@@ -68,6 +72,7 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /v1/audit/{id}", s.handleAudit)
 	mux.HandleFunc("GET /v1/sessions/{id}/events", s.handleSessionEvents)
 	mux.HandleFunc("GET /v1/models/stats", s.handleModelStats)
+	s.registerNodeRoutes(mux)
 	return withCORS(mux)
 }
 

@@ -17,6 +17,10 @@ pub enum ValidationError {
     CapabilityMismatch(String),
     BadToken,
     MalformedExpiry,
+    /// Phase 4A: the lease was minted for a different node or tenant. The
+    /// agent refuses even a perfectly signed lease that is not ITS lease.
+    NodeMismatch(String),
+    TenantMismatch(String),
 }
 
 impl std::fmt::Display for ValidationError {
@@ -30,6 +34,8 @@ impl std::fmt::Display for ValidationError {
             Self::CapabilityMismatch(c) => write!(f, "lease capability {c:?} does not cover this job"),
             Self::BadToken => write!(f, "lease token signature invalid"),
             Self::MalformedExpiry => write!(f, "lease expiresAt is not RFC3339 UTC"),
+            Self::NodeMismatch(n) => write!(f, "lease was issued for node {n:?}, not this node"),
+            Self::TenantMismatch(t) => write!(f, "lease was issued for tenant {t:?}, not this tenant"),
         }
     }
 }
@@ -53,6 +59,10 @@ pub struct StrictValidator {
     /// verify provenance; health reports "lease_key": "unset" so this is loud.
     pub lease_key: Option<Vec<u8>>,
     pub now_unix: fn() -> u64,
+    /// Phase 4A: when this agent is enrolled in a mesh, every lease it accepts
+    /// must name THIS node and THIS tenant. Empty = standalone local agent.
+    pub node_id: String,
+    pub tenant_id: String,
 }
 
 pub fn system_now_unix() -> u64 {
@@ -71,6 +81,8 @@ impl StrictValidator {
         Self {
             lease_key,
             now_unix: system_now_unix,
+            node_id: std::env::var("CAMELOT_NODE_ID").unwrap_or_default(),
+            tenant_id: std::env::var("CAMELOT_TENANT_ID").unwrap_or_default(),
         }
     }
 }
@@ -103,9 +115,23 @@ impl LeaseValidator for StrictValidator {
         if (self.now_unix)() > expires {
             return Err(ValidationError::LeaseExpired);
         }
+        // Node/tenant binding: an enrolled agent accepts only leases minted
+        // for itself. A perfectly signed lease for another node is refused —
+        // reachability is not authorization (Phase 4A rule).
+        if !self.node_id.is_empty() && lease.node_id != self.node_id {
+            return Err(ValidationError::NodeMismatch(lease.node_id.clone()));
+        }
+        if !self.tenant_id.is_empty() && lease.tenant_id != self.tenant_id {
+            return Err(ValidationError::TenantMismatch(lease.tenant_id.clone()));
+        }
         match &self.lease_key {
             Some(key) => {
-                let message = format!("{}|{}|{}", lease.lease_id, lease.capability, lease.expires_at);
+                // Signature covers node and tenant too, so those fields
+                // cannot be edited in flight.
+                let message = format!(
+                    "{}|{}|{}|{}|{}",
+                    lease.lease_id, lease.capability, lease.expires_at, lease.node_id, lease.tenant_id
+                );
                 let expected = hex::encode(hmac_sha256(key, message.as_bytes()));
                 if !constant_time_eq(expected.as_bytes(), lease.token.as_bytes()) {
                     return Err(ValidationError::BadToken);

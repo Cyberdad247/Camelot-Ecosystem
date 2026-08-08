@@ -92,6 +92,21 @@
     #approval .lease-line { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); margin: 8px 0; }
     #approval .approve { background: var(--green); color: #06170d; font-weight: 700; margin-right: 8px; }
     #approval .deny { border-color: var(--red); color: var(--red); }
+    .node-row {
+      display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+      border-bottom: 1px solid #222a3a; font-size: 13px;
+    }
+    .node-row:last-child { border-bottom: none; }
+    .node-name { font-weight: 600; }
+    .node-name .scope { color: var(--muted); font-weight: 400; font-size: 11.5px; }
+    .node-standing { margin-left: auto; font-size: 11.5px; font-family: ui-monospace, monospace; }
+    .band-trusted { color: var(--green); }
+    .band-limited { color: var(--blue); }
+    .band-pending { color: var(--amber); }
+    .band-degraded { color: var(--amber); }
+    .band-revoked { color: var(--red); }
+    .node-caps { font-size: 11px; color: var(--muted); font-family: ui-monospace, monospace; }
+    .route-line { margin-top: 8px; font-size: 12px; color: var(--muted); font-family: ui-monospace, monospace; }
     #audit-drawer { display: flex; flex-direction: column; min-height: 0; max-height: 40vh; }
     #audit-drawer .drawer-body { display: none; min-height: 0; overflow: auto; }
     #audit-drawer.open .drawer-body { display: block; }
@@ -138,6 +153,11 @@
         <div class="lease-line"></div>
         <button class="approve">Approve</button>
         <button class="deny">Deny</button>
+      </div>
+      <div id="node-panel" class="panel" hidden>
+        <div class="card-title">Node status</div>
+        <div id="node-list"></div>
+        <div id="node-route" class="route-line"></div>
       </div>
       <div id="audit-drawer" class="panel">
         <button id="audit-toggle">📜 Audit drawer</button>

@@ -18,17 +18,27 @@ fn validator() -> StrictValidator {
     StrictValidator {
         lease_key: Some(KEY.to_vec()),
         now_unix: now_fixed,
+        node_id: String::new(),
+        tenant_id: String::new(),
     }
 }
 
 fn signed_lease(expires_at: &str) -> ComputeLease {
-    let message = format!("lease-1|compute:audio.features|{expires_at}");
+    signed_lease_for(expires_at, "", "")
+}
+
+/// Signature covers node and tenant too (Phase 4A binding).
+fn signed_lease_for(expires_at: &str, node_id: &str, tenant_id: &str) -> ComputeLease {
+    let message =
+        format!("lease-1|compute:audio.features|{expires_at}|{node_id}|{tenant_id}");
     ComputeLease {
         lease_id: "lease-1".into(),
         capability: "compute:audio.features".into(),
         status: "approved".into(),
         expires_at: expires_at.into(),
         token: hex::encode(hmac_sha256(KEY, message.as_bytes())),
+        node_id: node_id.into(),
+        tenant_id: tenant_id.into(),
     }
 }
 

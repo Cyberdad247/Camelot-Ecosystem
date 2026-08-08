@@ -35,6 +35,9 @@ import {
 import { HermesVoiceProvider } from './hermes-provider.js';
 import { VoiceSessionController } from './voice-session.js';
 import type { VoiceUiState } from './voice-session.js';
+import { initialNodePanelState, renderNodePanel } from './node-panel.js';
+import type { NodePanelState } from './node-panel.js';
+import type { NodeView } from '@camelot/contracts';
 
 const params = new URLSearchParams(location.search);
 const GATEWAY_URL = params.get('gateway') ?? `http://${location.hostname}:8788`;
@@ -69,6 +72,9 @@ const micDeviceEl = $<HTMLSelectElement>('mic-device');
 const pttBtn = $<HTMLButtonElement>('ptt');
 const stopSpeakingBtn = $<HTMLButtonElement>('stop-speaking');
 const voiceStateEl = $('voice-state');
+const nodePanelEl = $('node-panel');
+const nodeListEl = $('node-list');
+const nodeRouteEl = $('node-route');
 
 // ── transcript rendering ────────────────────────────────────────────────
 
@@ -361,6 +367,27 @@ async function resolveLease(approve: boolean): Promise<void> {
 $('audit-toggle').onclick = () => {
   auditDrawerEl.classList.toggle('open');
 };
+
+// ── node status (Phase 4A) ──────────────────────────────────────────────
+
+let nodeState: NodePanelState = initialNodePanelState();
+
+async function refreshNodes(): Promise<void> {
+  try {
+    const res = await fetch(`${GATEWAY_URL}/v1/nodes`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const body = (await res.json()) as { nodes: NodeView[] };
+    nodeState = { ...nodeState, nodes: body.nodes ?? [], reachable: true };
+  } catch {
+    nodeState = { ...nodeState, nodes: [], reachable: false };
+  }
+  // The panel appears only once the mesh has something to say.
+  nodePanelEl.hidden = nodeState.nodes.length === 0;
+  renderNodePanel(nodeListEl, nodeRouteEl, nodeState);
+}
+
+void refreshNodes();
+setInterval(() => void refreshNodes(), 10_000);
 
 // ── health probes ───────────────────────────────────────────────────────
 

@@ -19,4 +19,18 @@ for s in "${ALL_SERVICES[@]}"; do
   fi
 done
 [[ -f $GATEWAY_DB ]] && echo "audit db: $GATEWAY_DB ($(du -h "$GATEWAY_DB" | cut -f1))"
+
+# Mesh view: trust bands and health as the gateway sees them.
+if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
+  nodes=$(curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" 2>/dev/null || true)
+  if [[ -n $nodes ]]; then
+    echo "$nodes" | python3 -c "
+import json, sys
+for n in json.load(sys.stdin)['nodes']:
+    scope = 'local' if n['local'] else 'remote'
+    print(f\"mesh node: {n['nodeId']} ({scope}) trust={n['trust']} health={n['health']} caps={len(n['capabilities'])} addr={n['addressHash']}\")" || true
+  else
+    echo "mesh: gateway unreachable"
+  fi
+fi
 exit $rc

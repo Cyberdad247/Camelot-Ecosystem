@@ -50,10 +50,18 @@ env_gateway=(env GATEWAY_ADDR=":$GATEWAY_PORT" GATEWAY_DB="$GATEWAY_DB"
   MODEL_PROVIDER_URL="${MODEL_PROVIDER_URL:-}"
   MODEL_PROVIDER_MODEL="${MODEL_PROVIDER_MODEL:-default}"
   MODEL_PROVIDER_API_KEY="${MODEL_PROVIDER_API_KEY:-}"
-  MODEL_TIMEOUT="${MODEL_TIMEOUT:-10s}")
+  MODEL_TIMEOUT="${MODEL_TIMEOUT:-10s}"
+  CAMELOT_LOCAL_NODE_ID="$CAMELOT_LOCAL_NODE_ID"
+  CAMELOT_NODE_LEASE_KEY="$LEASE_KEY")
 start_gated gateway "$BIN_DIR/gateway" 20 "${env_gateway[@]}" "$BIN_DIR/gateway"
 
-env_agent=(env CAMELOT_NODE_LEASE_KEY="$LEASE_KEY" NODE_AGENT_ADDR="0.0.0.0:$NODE_AGENT_PORT")
+env_agent=(env CAMELOT_NODE_LEASE_KEY="$LEASE_KEY" NODE_AGENT_ADDR="0.0.0.0:$NODE_AGENT_PORT"
+  ENABLE_TAILSCALE_MESH="$ENABLE_TAILSCALE_MESH"
+  CAMELOT_GATEWAY_URL="http://127.0.0.1:$GATEWAY_PORT"
+  CAMELOT_NODE_ID="$CAMELOT_NODE_ID" CAMELOT_TENANT_ID="$CAMELOT_TENANT_ID"
+  CAMELOT_NODE_NAME="$CAMELOT_NODE_NAME"
+  CAMELOT_NODE_ENROL_SECRET="$CAMELOT_NODE_ENROL_SECRET"
+  CAMELOT_NODE_DISPATCH_URL="${CAMELOT_NODE_DISPATCH_URL:-http://127.0.0.1:$NODE_AGENT_PORT}")
 start_gated node-agent "$BIN_DIR/camelot-node-agent" 20 "${env_agent[@]}" "$BIN_DIR/camelot-node-agent"
 
 if [[ $ENABLE_HERMES_VOICE == true ]]; then
@@ -70,4 +78,7 @@ echo
 echo "Anya Console: http://localhost:$CONSOLE_PORT/kickbox/"
 echo "Gateway:      http://localhost:$GATEWAY_PORT/healthz  (audit db: $GATEWAY_DB)"
 echo "Node agent:   http://localhost:$NODE_AGENT_PORT/healthz"
+if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
+  echo "Mesh:         enabled as node '$CAMELOT_NODE_ID' (tenant $CAMELOT_TENANT_ID) — GET /v1/nodes"
+fi
 echo "Stop:         scripts/dev-down.sh · Status: scripts/status.sh · Logs: scripts/logs.sh"

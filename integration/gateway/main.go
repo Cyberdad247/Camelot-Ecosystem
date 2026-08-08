@@ -25,6 +25,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Phase 4A: the node agent verifies gateway-minted node leases, so both
+	// sides must share the signing key. Without this the gateway would sign
+	// with a random per-process key and every node job would (correctly) be
+	// rejected as forged. Set it once, out of band, for both processes.
+	if key := os.Getenv("CAMELOT_NODE_LEASE_KEY"); key != "" {
+		server.leases.SetSigningKey([]byte(key))
+		log.Printf("lease signing key: loaded from CAMELOT_NODE_LEASE_KEY (shared with node agents)")
+	} else {
+		log.Printf("lease signing key: ephemeral (per-process); node-job dispatch requires CAMELOT_NODE_LEASE_KEY on both sides")
+	}
+
 	// Phase 3: model routing. Deterministic unless ENABLE_MODEL_PROVIDER=true
 	// with an allow-listed, URL-configured provider (never auto-started).
 	modelCfg := ModelConfigFromEnv()

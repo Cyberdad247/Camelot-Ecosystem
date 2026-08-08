@@ -93,6 +93,28 @@ Accepted after the slice went live:
    (tier ≥ 2) or raw audio. Leases remain memory-only by design.
 3. **Resource envelope.** 8 GB RAM target; no automatic local-model boot.
 
+## Amendment 2026-08-08 — private mesh boundary (Phase 4A)
+
+1. **Reachability is not authorization.** Tailscale (or any transport) may
+   make a node reachable. It confers no trust and no permission. The gateway
+   assigns a trust band (`pending → limited → trusted`, with `degraded` on
+   stale health and terminal `revoked`) and mints every authorization.
+2. **Every remote job needs a bound lease.** Node-job leases are node-scoped,
+   tenant-scoped, capability-scoped, ~30 s, single-use, and HMAC-signed over
+   `leaseId|capability|expiresAt|nodeId|tenantId`. The Rust agent
+   independently re-validates all of it and enforces single use locally.
+3. **No node self-declares locality or trust.** The operator names the local
+   node (`CAMELOT_LOCAL_NODE_ID`); it is auto-trusted only when also reachable
+   over loopback. Identity is pinned by an enrolment-secret fingerprint.
+4. **Camelot never operates the network.** No login, no `tailscale up`, no ACL
+   or route changes, no exit nodes, no public ingress. The only permitted
+   external command is `tailscale status --json`, for observation.
+5. **Local-first routing.** The mesh is used only when explicitly requested.
+   Naming a node is a requirement, not a hint. Read-only remote failures fall
+   back locally; effectful jobs are never retried and never re-run elsewhere.
+6. **No addresses or key material in the UI or audit.** Both see a truncated
+   address hash and nothing more.
+
 **Rejected alternatives.**
 - *Merge Kickbox into Camelot* — destroys independent deploy/release, violates
   "do not merge blindly", and would drag Next.js/Vercel/Sentry into the

@@ -3,8 +3,10 @@
 //! is plenty for a local compute node scaffold.
 
 use crate::backend::ComputeBackend;
-use crate::compute::{run_job, ComputeJob};
+use crate::compute::{run_job, ComputeJob, ComputeFrame, ComputeLease};
+use crate::mesh::SpentLeases;
 use crate::validate::{JobValidator, LeaseValidator, StrictValidator};
+use serde::Deserialize;
 use std::io::{BufRead, BufReader, Read, Write};
 use std::net::{TcpListener, TcpStream};
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
@@ -23,6 +25,39 @@ static ACTIVE_CONNECTIONS: AtomicUsize = AtomicUsize::new(0);
 pub struct Agent {
     pub backend: Box<dyn ComputeBackend>,
     pub validator: StrictValidator,
+    /// Node-side single-use enforcement for gateway-minted node leases.
+    pub spent: SpentLeases,
+}
+
+impl Agent {
+    pub fn new(backend: Box<dyn ComputeBackend>, validator: StrictValidator) -> Self {
+        Self { backend, validator, spent: SpentLeases::new() }
+    }
+}
+
+/// A mesh job envelope from the gateway. The payload is the same compute
+/// request the direct endpoint accepts — the difference is the lease, which
+/// is bound to this node and this tenant.
+#[derive(Debug, Deserialize)]
+struct NodeJobRequest {
+    #[serde(rename = "jobId")]
+    job_id: String,
+    #[serde(rename = "nodeId")]
+    node_id: String,
+    #[serde(rename = "tenantId")]
+    tenant_id: String,
+    capability: String,
+    lease: ComputeLease,
+    #[serde(default)]
+    payload: NodeJobPayload,
+}
+
+#[derive(Debug, Default, Deserialize)]
+struct NodeJobPayload {
+    #[serde(default)]
+    frames: Vec<ComputeFrame>,
+    #[serde(rename = "frameSize", default)]
+    frame_size: Option<usize>,
 }
 
 pub fn serve(addr: &str, agent: Agent) -> std::io::Result<()> {
@@ -88,12 +123,72 @@ fn handle(mut stream: TcpStream, agent: &Agent) -> std::io::Result<()> {
 
     match (method.as_str(), path.as_str()) {
         ("GET", "/healthz") => {
-            let body = format!(
-                "{{\"status\":\"ok\",\"service\":\"camelot-node-agent\",\"version\":\"0.1.0\",\"backend\":\"{}\",\"leaseKey\":\"{}\"}}",
-                agent.backend.name(),
-                if agent.validator.lease_key.is_some() { "set" } else { "unset" },
-            );
-            respond(&mut stream, 200, "OK", &body)
+            let mesh = crate::mesh::observe_tailscale();
+            let body = serde_json::json!({
+                "status": "ok",
+                "service": "camelot-node-agent",
+                "version": "0.1.0",
+                "backend": agent.backend.name(),
+                "leaseKey": if agent.validator.lease_key.is_some() { "set" } else { "unset" },
+                "nodeId": agent.validator.node_id,
+                "tenantId": agent.validator.tenant_id,
+                "meshReachable": mesh.reachable,
+                "meshBackend": mesh.backend,
+                "meshDetail": mesh.detail,
+            });
+            respond(&mut stream, 200, "OK", &body.to_string())
+        }
+        ("POST", "/v1/node/job") => {
+            // Mesh dispatch path. Trust nothing: the gateway's say-so is not
+            // enough — the lease must name this node, this tenant, this
+            // capability, be unexpired, correctly signed, and unspent.
+            if content_length == 0 || content_length > MAX_BODY {
+                return respond_error(&mut stream, 400, "missing or oversized body");
+            }
+            let mut body = vec![0u8; content_length];
+            reader.read_exact(&mut body)?;
+            let job: NodeJobRequest = match serde_json::from_slice(&body) {
+                Ok(j) => j,
+                Err(e) => return respond_error(&mut stream, 400, &format!("invalid NodeJobRequest: {e}")),
+            };
+
+            if !agent.validator.node_id.is_empty() && job.node_id != agent.validator.node_id {
+                return node_job_error(&mut stream, &job.job_id, 403, "job addressed to a different node");
+            }
+            if !agent.validator.tenant_id.is_empty() && job.tenant_id != agent.validator.tenant_id {
+                return node_job_error(&mut stream, &job.job_id, 403, "job addressed to a different tenant");
+            }
+            if job.lease.capability != job.capability {
+                return node_job_error(&mut stream, &job.job_id, 403, "lease capability does not match the job capability");
+            }
+
+            let compute_job = ComputeJob {
+                job_id: job.job_id.clone(),
+                kind: "audio.features".into(),
+                lease: job.lease.clone(),
+                frames: job.payload.frames,
+                frame_size: job.payload.frame_size,
+            };
+            if let Err(e) = agent.validator.validate_job(&compute_job) {
+                return node_job_error(&mut stream, &job.job_id, 400, &e.to_string());
+            }
+            if let Err(e) = agent.validator.validate_lease(&compute_job) {
+                return node_job_error(&mut stream, &job.job_id, 403, &e.to_string());
+            }
+            // Single use: a replayed lease is refused even though every other
+            // check passes.
+            if !agent.spent.claim(&job.lease.lease_id) {
+                return node_job_error(&mut stream, &job.job_id, 403, "lease already redeemed (single-use)");
+            }
+
+            let result = run_job(&compute_job, agent.backend.as_ref());
+            let payload = serde_json::json!({
+                "jobId": job.job_id,
+                "nodeId": job.node_id,
+                "ok": true,
+                "result": result,
+            });
+            respond(&mut stream, 200, "OK", &payload.to_string())
         }
         ("POST", "/v1/compute") => {
             if content_length == 0 || content_length > MAX_BODY {
@@ -125,6 +220,14 @@ fn respond(stream: &mut TcpStream, status: u16, reason: &str, body: &str) -> std
         "HTTP/1.1 {status} {reason}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
         body.len(),
     )
+}
+
+/// Node-job rejections answer in NodeJobResult shape so the gateway can
+/// audit the exact reason without guessing.
+fn node_job_error(stream: &mut TcpStream, job_id: &str, status: u16, message: &str) -> std::io::Result<()> {
+    let body = serde_json::json!({ "jobId": job_id, "ok": false, "failure": message }).to_string();
+    let reason = if status == 403 { "Forbidden" } else { "Bad Request" };
+    respond(stream, status, reason, &body)
 }
 
 fn respond_error(stream: &mut TcpStream, status: u16, message: &str) -> std::io::Result<()> {

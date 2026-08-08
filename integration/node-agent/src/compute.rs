@@ -19,6 +19,12 @@ pub struct ComputeLease {
     pub expires_at: String,
     #[serde(default)]
     pub token: String,
+    /// Phase 4A: node-job leases are bound to exactly one node and tenant.
+    /// Empty for a direct (non-mesh) compute call.
+    #[serde(rename = "nodeId", default)]
+    pub node_id: String,
+    #[serde(rename = "tenantId", default)]
+    pub tenant_id: String,
 }
 
 #[derive(Debug, Clone, Deserialize)]

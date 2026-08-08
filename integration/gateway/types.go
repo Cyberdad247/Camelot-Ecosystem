@@ -42,6 +42,10 @@ type CapabilityLease struct {
 	ExpiresAt  string `json:"expiresAt"`
 	SingleUse  bool   `json:"singleUse"`
 	Token      string `json:"token,omitempty"`
+	// Node-job leases (Phase 4A) additionally bind the exact node and tenant.
+	// Empty for ordinary skill leases. Both are covered by the signature.
+	NodeID   string `json:"nodeId,omitempty"`
+	TenantID string `json:"tenantId,omitempty"`
 }
 
 type AuditEvent struct {

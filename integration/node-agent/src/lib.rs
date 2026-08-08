@@ -5,4 +5,5 @@
 pub mod backend;
 pub mod compute;
 pub mod http;
+pub mod mesh;
 pub mod validate;

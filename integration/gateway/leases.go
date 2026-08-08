@@ -47,10 +47,30 @@ func NewLeaseStore(now func() time.Time) *LeaseStore {
 	}
 }
 
-func (s *LeaseStore) sign(leaseID, capability, expiresAt string) string {
+// sign binds a lease to its id, capability, expiry, and — for node jobs —
+// the exact node and tenant it was issued for. Binding node/tenant into the
+// signature is what makes a lease for node A unusable at node B, and a
+// tenant-A lease unusable by tenant B, even if the token leaks (Phase 4A).
+// Skill leases carry empty node/tenant, so the message shape is uniform.
+func (s *LeaseStore) sign(leaseID, capability, expiresAt, nodeID, tenantID string) string {
 	mac := hmac.New(sha256.New, s.signingKey)
-	fmt.Fprintf(mac, "%s|%s|%s", leaseID, capability, expiresAt)
+	fmt.Fprintf(mac, "%s|%s|%s|%s|%s", leaseID, capability, expiresAt, nodeID, tenantID)
 	return hex.EncodeToString(mac.Sum(nil))
+}
+
+// SigningKeyHex exposes the lease signing key so the operator can hand it to
+// a node agent out of band (CAMELOT_NODE_LEASE_KEY). Never audited, never
+// logged, never returned over the wire by any handler.
+func (s *LeaseStore) SigningKeyHex() string {
+	return hex.EncodeToString(s.signingKey)
+}
+
+// SetSigningKey pins the key to a operator-provided value so an already
+// running node agent and the gateway share it across gateway restarts.
+func (s *LeaseStore) SetSigningKey(key []byte) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.signingKey = key
 }
 
 // Issue creates a lease. Tier-2 skills get status "approved" immediately
@@ -73,8 +93,33 @@ func (s *LeaseStore) Issue(sessionID, turnID, capability string, approved bool) 
 	}
 	if approved {
 		lease.Status = "approved"
-		lease.Token = s.sign(lease.LeaseID, lease.Capability, lease.ExpiresAt)
+		lease.Token = s.sign(lease.LeaseID, lease.Capability, lease.ExpiresAt, "", "")
 	}
+	s.leases[lease.LeaseID] = lease
+	return *lease
+}
+
+// IssueNodeLease mints an approved, single-use, 30s lease bound to one node,
+// one tenant, and one capability. Only the gateway can mint these; the node
+// agent independently verifies every field before doing any work.
+func (s *LeaseStore) IssueNodeLease(sessionID, turnID, capability, nodeID, tenantID string) CapabilityLease {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.seq++
+	now := s.now()
+	lease := &CapabilityLease{
+		LeaseID:    fmt.Sprintf("nlease-%04d", s.seq),
+		SessionID:  sessionID,
+		TurnID:     turnID,
+		Capability: capability,
+		NodeID:     nodeID,
+		TenantID:   tenantID,
+		Status:     "approved",
+		IssuedAt:   now.UTC().Format(time.RFC3339),
+		ExpiresAt:  now.Add(leaseTTL).UTC().Format(time.RFC3339),
+		SingleUse:  true,
+	}
+	lease.Token = s.sign(lease.LeaseID, lease.Capability, lease.ExpiresAt, nodeID, tenantID)
 	s.leases[lease.LeaseID] = lease
 	return *lease
 }
@@ -102,7 +147,7 @@ func (s *LeaseStore) Approve(leaseID string) (CapabilityLease, error) {
 	switch l.Status {
 	case "pending":
 		l.Status = "approved"
-		l.Token = s.sign(l.LeaseID, l.Capability, l.ExpiresAt)
+		l.Token = s.sign(l.LeaseID, l.Capability, l.ExpiresAt, l.NodeID, l.TenantID)
 		return *l, nil
 	case "expired":
 		return *l, ErrLeaseExpired
@@ -166,7 +211,7 @@ func (s *LeaseStore) Consume(leaseID, capability, token string) (CapabilityLease
 	if l.Capability != capability {
 		return *l, ErrLeaseCapMatch
 	}
-	expected := s.sign(l.LeaseID, l.Capability, l.ExpiresAt)
+	expected := s.sign(l.LeaseID, l.Capability, l.ExpiresAt, l.NodeID, l.TenantID)
 	if !hmac.Equal([]byte(expected), []byte(token)) {
 		return *l, ErrLeaseBadToken
 	}
