@@ -506,8 +506,10 @@ and keeps working.
 
 ### Phase 4B deferrals (explicit)
 
-Real local STT/TTS engines (whisper.cpp, Piper) via the existing Hermes
-command hooks · remote desktop · WebRTC media · exit nodes / subnet routers ·
+Real local STT/TTS engines (whisper.cpp, Piper) — **wrappers, verification,
+and docs are prepped** in `integration/hermes/engines/` and inert until you
+point `HERMES_STT_CMD`/`HERMES_TTS_CMD` at them; enabling and benchmarking
+them on the target hardware is Phase 4B proper · remote desktop · WebRTC media · exit nodes / subnet routers ·
 public ingress · cross-tenant node sharing · autonomous repair · full Bifrost
 media bridge · multi-provider marketplace · executing model-proposed plans ·
 long-term memory/RAG · wake word · GPU inference · Mojo kernels.
