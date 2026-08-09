@@ -24,7 +24,7 @@
 # stay parser-safe across Python 3.13 (which rejects non-ASCII identifiers
 # though strings tolerate U+00A7); using ASCII avoids any locale-encoding
 # flake when the file is rewritten or linted.
-"""
+"""Module docstring."""
 from __future__ import annotations
 
 import os
@@ -199,8 +199,7 @@ def test_fail_case_length_mismatch(tmp_path: Path):
 
 
 def test_soft_skip_case_python_only_invariant(tmp_path: Path):
-    """Producer emits only its data-side invariants; the spec lacks the producer's
-    schema_version_snapshot marker -> SOFT-SKIP without migration mode."""
+    """Producer emits only its data-side invariants; the spec lacks the snapshot marker."""
     proc = _run_cli(
         tmp_path,
         _make_py_text(CORRECT_25),
@@ -318,8 +317,7 @@ def test_kinds_set_compare_passes_with_positional_divergence(tmp_path: Path):
 
 
 def test_fail_case_kinds_set_divergence(tmp_path: Path):
-    """spec.md has foo as a kind; pkg.md doesn't; set-compare detects
-    foo present in spec but absent from pkg."""
+    """spec.md has foo as a kind; pkg.md does not; set-compare detects foo present in spec."""
     py_text = PY_BASE.format(
         names=', '.join(f'"{n}"' for n in CORRECT_25),
         declared_len=25,
@@ -424,10 +422,6 @@ def test_exit2_on_zero_invariants_parsed(tmp_path: Path):
     reason="CAMELOT_OS root not found; skipping real-files integration test",
 )
 def test_real_files_integration(tmp_path: Path):
-    """Run the script against the live CAMELOT_OS sources.
-
-    If this test ever fails, the migration window has drifted (Concern F).
-    """
     proc = subprocess.run(
         [
             sys.executable, str(SCRIPT_PATH),
