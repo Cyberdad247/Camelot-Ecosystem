@@ -233,6 +233,23 @@ mic (hold PTT) -> PCM16 in memory -> Hermes /v1/stt -> confidence gate
   -> reply text -> browser speechSynthesis (or Hermes /v1/tts WAV)
 ```
 
+### Authentication (P1)
+
+Every gateway route except `/healthz` requires `Authorization: Bearer <token>`.
+`scripts/dev-up.sh` mints one per stack into `.run/gateway.token` (0600) and
+`kickbox/dev-token.txt` (fetched by the console from its own origin); both are
+gitignored. Pin `CAMELOT_API_TOKEN` to reuse a token across restarts.
+
+| Variable | Purpose |
+|---|---|
+| `CAMELOT_API_TOKEN` | Bearer credential. Unset ⇒ the gateway **mints** one; it never runs open. |
+| `CAMELOT_ALLOWED_ORIGINS` | CORS allow-list, comma-separated. Default: the console on `localhost`/`127.0.0.1`. |
+| `GATEWAY_BIND` | Bind address, default `127.0.0.1`. Widen only for genuinely remote mesh nodes. |
+
+Scripts use the shared `gw_curl` helper in `scripts/lib.sh`. The WebSocket takes
+`?token=` because browsers cannot set headers on a handshake — accepted on that
+route only.
+
 ### Environment variables
 
 | Variable | Default | Meaning |

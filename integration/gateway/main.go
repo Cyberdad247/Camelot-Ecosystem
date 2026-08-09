@@ -6,14 +6,20 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"path/filepath"
+	"strings"
 	"syscall"
 	"time"
 )
 
 func main() {
+	// LOOPBACK BY DEFAULT. ":8788" bound every interface, so on a
+	// Tailscale-connected host the governed surface — including the tier-3
+	// confirmation endpoint — was reachable from the whole tailnet. Widening
+	// the bind is now an explicit, deliberate act.
 	addr := os.Getenv("GATEWAY_ADDR")
 	if addr == "" {
-		addr = ":8788"
+		addr = "127.0.0.1:8788"
 	}
 	// Local SQLite audit store (redacted, hash-chained). Set GATEWAY_DB to
 	// relocate it, or GATEWAY_DB=:memory: for an ephemeral run.
@@ -34,6 +40,24 @@ func main() {
 		log.Printf("lease signing key: loaded from CAMELOT_NODE_LEASE_KEY (shared with node agents)")
 	} else {
 		log.Printf("lease signing key: ephemeral (per-process); node-job dispatch requires CAMELOT_NODE_LEASE_KEY on both sides")
+	}
+
+	// P1: authentication. resolveAuthFromEnv cannot return an empty token —
+	// an unset CAMELOT_API_TOKEN mints one rather than disabling the check, so
+	// the binary is never reachable unauthenticated.
+	authCfg, minted := resolveAuthFromEnv()
+	server.SetAuth(authCfg)
+	if minted {
+		if err := writeTokenFile(authCfg.token); err != nil {
+			log.Printf("api token: could not write token file: %v", err)
+		}
+		log.Printf("api token: MINTED for this process (set CAMELOT_API_TOKEN to pin one)")
+	} else {
+		log.Printf("api token: loaded from CAMELOT_API_TOKEN")
+	}
+	log.Printf("cors: allowed origins %v", authCfg.allowedOrigins)
+	if !strings.HasPrefix(addr, "127.0.0.1:") && !strings.HasPrefix(addr, "localhost:") {
+		log.Printf("WARNING: bound to %s — the governed surface is reachable beyond loopback", addr)
 	}
 
 	// Phase 3: model routing. Deterministic unless ENABLE_MODEL_PROVIDER=true
@@ -69,4 +93,18 @@ func main() {
 		log.Printf("audit close: %v", err)
 	}
 	log.Printf("graceful shutdown complete")
+}
+
+// writeTokenFile drops a minted token where local callers (smoke, the console
+// static server, the node agent) can pick it up. 0600: the token is only as
+// strong as the filesystem, and this at least keeps it off other users.
+func writeTokenFile(token string) error {
+	path := os.Getenv("CAMELOT_TOKEN_FILE")
+	if path == "" {
+		path = ".run/gateway.token"
+	}
+	if err := os.MkdirAll(filepath.Dir(path), 0o755); err != nil {
+		return err
+	}
+	return os.WriteFile(path, []byte(token+"\n"), 0o600)
 }

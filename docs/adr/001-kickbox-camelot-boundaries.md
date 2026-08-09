@@ -184,3 +184,40 @@ against a consequence. Two rules follow from giving it one.
    skill that means the relative path, byte count, and digest — enough to
    prove what changed, insufficient to reconstruct it. The transcript remains
    hashed for tier ≥ 2.
+
+## Amendment 2026-08-09 (P1) — the governed surface is authenticated
+
+A review of the agency blueprint found that every gateway route was
+unauthenticated behind `Access-Control-Allow-Origin: *`, and that
+`GATEWAY_ADDR` defaulted to `:8788` — every interface. On a Tailscale-connected
+host, `POST /v1/confirmations` — the tier-3 human gate this ADR rests on — was
+drivable by anything on the tailnet. The gate was decorative.
+
+1. **Every route but `/healthz` requires a bearer token.** `/healthz` stays open
+   because the startup gate polls it before a token could be plumbed, and it
+   carries no data. Protecting only the tier-3 endpoint would have been
+   incoherent: the approval would be guarded and the tier-2 durable write
+   beside it would not.
+2. **Absence of configuration is not absence of enforcement.** An unset
+   `CAMELOT_API_TOKEN` makes the binary *mint* one, not run open. This is the
+   explicit inverse of `control_plane/infra/z3_verify.py`, which returns
+   `safe=true` when its solver is missing — a guard that disappears with its
+   dependency is not a guard.
+3. **The origin allow-list replaces the wildcard.** A preflight from an
+   unlisted origin is refused outright rather than left to the browser to
+   infer, and `Vary: Origin` is always set so a shared cache cannot serve one
+   origin's response to another.
+4. **Loopback by default.** Widening the bind is now a deliberate act
+   (`GATEWAY_BIND`), required only for genuinely remote mesh nodes, and the
+   gateway logs a warning when bound beyond loopback.
+5. **The WebSocket accepts `?token=` — on that route only.** Browsers cannot set
+   headers on a handshake. Query strings leak into logs and referrers, so the
+   exception is scoped rather than general.
+
+**What this does not fix, stated plainly.** The console is served by a static
+file server rooted at `integration/`, so the token is readable over HTTP from
+the console's own origin. Same-origin policy is what stops a hostile page
+reading it; the origin allow-list is what stops one using it. A local process
+with filesystem access can read the token — but such a process could always
+read it from disk, so authentication was never the control at that boundary.
+What the token adds is that reaching the port is no longer sufficient.

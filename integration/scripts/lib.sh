@@ -18,6 +18,14 @@ NODE_AGENT_PORT=${NODE_AGENT_PORT:-8789}
 HERMES_PORT=${HERMES_PORT:-8790}
 CONSOLE_PORT=${CONSOLE_PORT:-8080}
 LEASE_KEY=${LEASE_KEY:-camelot-demo-key}
+# P1: bearer credential for the governed gateway surface. Minted per stack and
+# shared with the console, the node agent, and smoke. Pin CAMELOT_API_TOKEN to
+# reuse one across restarts.
+TOKEN_FILE="$RUN_DIR/gateway.token"
+CONSOLE_TOKEN_FILE="$INTEGRATION_DIR/kickbox/dev-token.txt"
+# GATEWAY_BIND defaults to loopback. Widen it deliberately (mesh) — never by
+# accident: an all-interfaces bind exposes the tier-3 confirmation endpoint.
+GATEWAY_BIND=${GATEWAY_BIND:-127.0.0.1}
 GATEWAY_DB=${GATEWAY_DB:-$RUN_DIR/camelot-voice.db}
 # Phase 2: the Hermes voice adapter process starts ONLY when this is "true".
 ENABLE_HERMES_VOICE=${ENABLE_HERMES_VOICE:-false}
@@ -88,5 +96,14 @@ wait_healthy() { # name, seconds
   done
   return 1
 }
+
+# P1: gateway calls carry the bearer token. Node-agent and Hermes are separate
+# surfaces with their own controls (lease verification / localhost) and are not
+# wrapped here.
+api_token() {
+  if [[ -n ${CAMELOT_API_TOKEN:-} ]]; then printf '%s' "$CAMELOT_API_TOKEN"
+  else tr -d '\n' <"$TOKEN_FILE" 2>/dev/null || true; fi
+}
+gw_curl() { curl -H "Authorization: Bearer $(api_token)" "$@"; }
 
 now_ms() { date +%s%3N; }

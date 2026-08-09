@@ -49,13 +49,13 @@ EOF
     "$1" "$exp" "$token" "$node" "$tenant" "$(python3 -c 'print(",".join("0.1" for _ in range(1024)))')"
 }
 
-curl -sf -o /dev/null -X POST "http://localhost:$GATEWAY_PORT/v1/voice/turns" -H 'content-type: application/json' -d "$(turn_payload warm)"
+gw_curl -sf -o /dev/null -X POST "http://localhost:$GATEWAY_PORT/v1/voice/turns" -H 'content-type: application/json' -d "$(turn_payload warm)"
 curl -sf -o /dev/null -X POST "http://localhost:$NODE_AGENT_PORT/v1/compute" -H 'content-type: application/json' -d "$(job_payload warm)"
 
 time_requests() { # url count payload_fn
   local url=$1 count=$2 payload_fn=$3 times=""
   for i in $(seq 1 "$count"); do
-    t=$(curl -sf -o /dev/null -w '%{time_total}' -X POST "$url" \
+    t=$(gw_curl -sf -o /dev/null -w '%{time_total}' -X POST "$url" \
       -H 'content-type: application/json' -d "$("$payload_fn" "$i")")
     times+="$t "
   done
@@ -111,12 +111,12 @@ fi
   echo "compute latency (POST /v1/compute, 1024-sample batch): $job_latency"
   if [[ ${ENABLE_TAILSCALE_MESH:-false} == true ]]; then
     node_t0=$(now_ms)
-    curl -sf -o /dev/null -X POST "http://localhost:$GATEWAY_PORT/v1/nodes/jobs" \
+    gw_curl -sf -o /dev/null -X POST "http://localhost:$GATEWAY_PORT/v1/nodes/jobs" \
       -H 'content-type: application/json' \
       -d "{\"tenantId\":\"${CAMELOT_TENANT_ID}\",\"capability\":\"compute:audio.features\",\"payload\":{\"frames\":[{\"frameId\":\"f0\",\"samples\":[0.1,0.2,0.3,0.4]}],\"frameSize\":2}}" || true
-    echo "mesh: node-job round trip (enrol->lease->dispatch->result) = $(( $(now_ms) - node_t0 ))ms; nodes=$(curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)["nodes"]))')"
+    echo "mesh: node-job round trip (enrol->lease->dispatch->result) = $(( $(now_ms) - node_t0 ))ms; nodes=$(gw_curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" | python3 -c 'import json,sys; print(len(json.load(sys.stdin)["nodes"]))')"
   fi
-  curl -sf "http://localhost:$GATEWAY_PORT/v1/models/stats" | python3 -c "
+  gw_curl -sf "http://localhost:$GATEWAY_PORT/v1/models/stats" | python3 -c "
 import json, sys
 d = json.load(sys.stdin)
 print(f\"model routing: provider={d['provider']} requests={d['requests']} fallbacks={d['fallbacks']} \"

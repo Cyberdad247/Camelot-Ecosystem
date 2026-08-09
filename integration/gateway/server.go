@@ -38,7 +38,14 @@ type Server struct {
 	// a wire type the client sees.
 	pendingMu      sync.Mutex
 	pendingContent map[string]pendingPayload
+
+	// nil in tests (handlers exercised directly); ALWAYS set by main, which
+	// mints a token rather than running open.
+	auth *authConfig
 }
+
+// SetAuth installs the credential + origin allow-list. Called by main only.
+func (s *Server) SetAuth(cfg *authConfig) { s.auth = cfg }
 
 type pendingPayload struct {
 	content string
@@ -138,22 +145,19 @@ func (s *Server) Handler() http.Handler {
 	mux.HandleFunc("GET /v1/sessions/{id}/events", s.handleSessionEvents)
 	mux.HandleFunc("GET /v1/models/stats", s.handleModelStats)
 	s.registerNodeRoutes(mux)
-	return withCORS(mux)
+	// Order matters: CORS answers (and screens) the preflight, auth guards the
+	// real request.
+	return withCORS(s.auth, withAuth2(s.auth, mux))
 }
 
-// withCORS allows the Anya Console (a different local origin) to call the
-// gateway. Demo-scope: permissive; production hardening is out of scope.
-func withCORS(next http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "content-type")
-		if r.Method == http.MethodOptions {
-			w.WriteHeader(http.StatusNoContent)
-			return
-		}
-		next.ServeHTTP(w, r)
-	})
+// withAuth2 is withAuth with the no-config case made explicit: an unconfigured
+// server is open, which is why main is required to configure one and is tested
+// for it (TestResolveAuthFromEnvNeverReturnsAnEmptyToken).
+func withAuth2(cfg *authConfig, next http.Handler) http.Handler {
+	if cfg == nil {
+		return next
+	}
+	return withAuth(cfg, next)
 }
 
 func (s *Server) handleHealth(w http.ResponseWriter, _ *http.Request) {
