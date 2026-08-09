@@ -7,7 +7,10 @@ INTEGRATION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 # early, after which a relative $(dirname "${BASH_SOURCE[0]}") no longer
 # resolves — so every script-to-script call MUST use $SCRIPT_DIR.
 SCRIPT_DIR="$INTEGRATION_DIR/scripts"
-RUN_DIR="$INTEGRATION_DIR/.run"
+# Overridable like every other knob below. Relocating runtime state matters
+# for two reasons: an operator can move it off the repo, and the teardown
+# guard becomes testable against a throwaway directory instead of the live one.
+RUN_DIR=${RUN_DIR:-$INTEGRATION_DIR/.run}
 BIN_DIR="$RUN_DIR/bin"
 
 GATEWAY_PORT=${GATEWAY_PORT:-8788}
