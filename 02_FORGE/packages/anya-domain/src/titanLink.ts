@@ -3,11 +3,11 @@
 import { z } from "zod";
 import {
   UKGDeltaSchema,
-} from "./types";
+} from "./types.js";
 import {
   IronGateApprovalRequestSchema,
   IronGateApprovalResponseSchema,
-} from "./ironGate";
+} from "./ironGate.js";
 
 export const ChatRoleSchema = z.enum(["user", "assistant", "system", "knight"]);
 export type ChatRole = z.infer<typeof ChatRoleSchema>;

@@ -7,7 +7,8 @@ const withPWA = require("next-pwa")({
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  // next-pwa adds a webpack config — use webpack bundler (via --webpack flag)
+  turbopack: {},
 };
 
 module.exports = withPWA(nextConfig);

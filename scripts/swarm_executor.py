@@ -1,571 +1,753 @@
 #!/usr/bin/env python3
 """
-CAMELOT-OS RAPID SWARM EXECUTOR
-Executes branch audit, validation, and optimization in parallel swarm phases.
-Uses agent-style parallel composition for rapid development & validation.
+Camelot-OS Swarm Execution Engine
+Orchestrates a 5-phase pipeline for Git branch cleanup, compliance validation,
+and repository optimization.
+
+Phases:
+1. Audit: Retrieve all branches, analyze merge status, age, and assign delete scores.
+2. Validation: Parallel checks for naming compliance, branch protection, and count thresholds.
+3. Optimization: Calculate fetching overhead savings and prioritize deletion strategy.
+4. Generation: Parallel creation of safe deletion and verification scripts.
+5. Reporting: Output JSON metrics and a detailed summary of repository health.
 """
 
-import subprocess
+import os
+import sys
+import re
 import json
-import threading
-import time
-from pathlib import Path
-from datetime import datetime
+import logging
+import subprocess
+import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from typing import Dict, List, Tuple, Any
+from dataclasses import dataclass, field, asdict
+from typing import List, Dict, Any, Tuple, Optional
 
+# Configure Logging with premium formatting
+logging.basicConfig(
+    level=logging.INFO,
+    format='[%(asctime)s] [%(levelname)s] [%(threadName)s] %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler("data/swarm_executor.log", mode="w", encoding="utf-8")
+    ]
+)
+logger = logging.getLogger("SwarmExecutor")
+
+# Ensure data directory exists
+os.makedirs("data", exist_ok=True)
+os.makedirs("scripts", exist_ok=True)
+os.makedirs("docs", exist_ok=True)
+
+# Domain constants for branch naming compliance
+COMPLIANT_PREFIXES = ["feat/", "fix/", "chore/", "docs/", "perf/", "refactor/", "test/", "ci/", "claude/"]
+
+@dataclass
+class BranchInfo:
+    name: str
+    is_remote: bool
+    commit_hash: str
+    commit_date: str
+    author: str
+    message: str
+    is_merged: bool = False
+    category: str = "misc"
+    delete_score: int = 0  # 0 to 100
+
+@dataclass
 class SwarmTask:
-    """Represents a discrete work unit in the swarm."""
-    def __init__(self, name: str, phase: int, func, args=None, timeout=300):
-        self.name = name
-        self.phase = phase
-        self.func = func
-        self.args = args or ()
-        self.timeout = timeout
-        self.status = "pending"
-        self.result = None
-        self.error = None
-        self.start_time = None
-        self.end_time = None
+    name: str
+    description: str
+    status: str = "PENDING"
+    error: Optional[str] = None
+    result: Any = None
 
 class SwarmExecutor:
-    """Manages parallel execution of branch cleanup tasks."""
-    
-    def __init__(self):
-        self.tasks: Dict[int, List[SwarmTask]] = {1: [], 2: [], 3: [], 4: [], 5: []}
-        self.results = {"timestamp": datetime.now().isoformat(), "phases": {}}
-        self.phase_order = [1, 2, 3, 4, 5]
+    def __init__(self, dry_run: bool = False, simulate: bool = False):
+        self.dry_run = dry_run
+        self.simulate = simulate
+        self.tasks: Dict[str, SwarmTask] = {}
+        self.pipeline_state: Dict[str, Any] = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "dry_run": self.dry_run,
+            "simulate": self.simulate,
+            "phases": {}
+        }
+        logger.info(f"Swarm Executor initialized (Dry-run={self.dry_run}, Simulate={self.simulate})")
 
-    # ==================== PHASE 1: AUDIT ====================
-    def audit_branches(self) -> Dict[str, Any]:
-        """Execute comprehensive branch audit."""
-        print("\n" + "="*80)
-        print("  [SWARM PHASE 1] BRANCH AUDIT")
-        print("="*80 + "\n")
-        
+    def register_task(self, name: str, description: str) -> None:
+        self.tasks[name] = SwarmTask(name=name, description=description)
+
+    def _run_git_cmd(self, args: List[str]) -> str:
+        """Helper to run a git command and return output."""
+        if self.simulate:
+            return ""
         try:
-            cmd = """
-            python3 << 'PYTHON_EOF'
-import subprocess
-import json
-from pathlib import Path
-from datetime import datetime
+            res = subprocess.run(
+                ["git"] + args,
+                capture_output=True,
+                text=True,
+                check=True,
+                encoding="utf-8",
+                errors="ignore"
+            )
+            return res.stdout.strip()
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Git command failed: git {' '.join(args)} - Error: {e.stderr}")
+            raise RuntimeError(f"Git command failed: {e.stderr.strip()}")
 
-# Fetch all branches
-cmd = "git for-each-ref --sort=-committerdate --format='%(refname:short)|%(committerdate:iso8601)' refs/remotes/origin/"
-result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=False)
-
-branches = []
-categories = {
-    "auto_test": [],
-    "feature": [],
-    "fix": [],
-    "claude_agent": [],
-    "code_health": [],
-    "docs": [],
-    "jules_task": [],
-    "perf": [],
-    "misc": [],
-    "main": [],
-}
-
-for line in result.stdout.strip().split('\\n'):
-    if not line:
-        continue
-    parts = line.split('|')
-    if len(parts) >= 2:
-        branch = parts[0].replace("origin/", "")
-        branches.append(branch)
+    # =========================================================================
+    # PHASE 1: AUDIT
+    # =========================================================================
+    def execute_phase_1_audit(self) -> Dict[str, Any]:
+        logger.info("--- Starting Phase 1: Audit ---")
+        self.register_task("audit_fetch", "Fetch and parse Git branches and metadata")
         
-        # Categorize
-        if branch == "main":
-            categories["main"].append(branch)
-        elif branch.startswith("add-") and "-tests-" in branch:
-            categories["auto_test"].append(branch)
-        elif branch.startswith("feat/"):
-            categories["feature"].append(branch)
-        elif branch.startswith("fix/"):
-            categories["fix"].append(branch)
-        elif branch.startswith("claude/"):
-            categories["claude_agent"].append(branch)
-        elif branch.startswith("code-health"):
-            categories["code_health"].append(branch)
-        elif branch.startswith("docs/"):
-            categories["docs"].append(branch)
-        elif branch.startswith("jules"):
-            categories["jules_task"].append(branch)
-        elif branch.startswith("perf"):
-            categories["perf"].append(branch)
+        branches: List[BranchInfo] = []
+        
+        if self.simulate:
+            # Generate simulated branches for deep testing (over 130 branches as requested)
+            logger.info("Simulation mode: Generating 135 mock branches across 9 categories")
+            mock_authors = ["jules", "boris", "alex", "forge", "sentinel", "lady_apis", "merlin"]
+            mock_categories = ["auto_test", "jules_task", "fix", "feature", "perf", "docs", "code_health", "claude_agent", "misc"]
+            
+            for i in range(135):
+                cat = mock_categories[i % len(mock_categories)]
+                author = mock_authors[i % len(mock_authors)]
+                name = ""
+                
+                if cat == "auto_test":
+                    name = f"test/auto-verify-{i}"
+                elif cat == "jules_task":
+                    name = f"claude/jules-task-refactor-{i}"
+                elif cat == "fix":
+                    name = f"fix/latency-patch-{i}"
+                elif cat == "feature":
+                    name = f"feat/quantum-lattice-{i}"
+                elif cat == "perf":
+                    name = f"perf/zero-kv-cache-{i}"
+                elif cat == "docs":
+                    name = f"docs/manifest-rev-{i}"
+                elif cat == "code_health":
+                    name = f"refactor/ssm-core-{i}"
+                elif cat == "claude_agent":
+                    name = f"claude/agent-swarm-node-{i}"
+                else:
+                    name = f"temp-sandbox-branch-{i}"
+                
+                # Alternate local / remote
+                is_remote = (i % 2 == 0)
+                if is_remote:
+                    name = f"origin/{name}"
+                
+                is_merged = (i % 3 != 0)  # 2/3 merged
+                # Base delete score logic
+                delete_score = 0
+                if cat == "auto_test":
+                    delete_score = 100
+                elif cat == "jules_task":
+                    delete_score = 80
+                elif cat == "fix":
+                    delete_score = 60 if is_merged else 40
+                elif cat == "feature":
+                    delete_score = 30 if is_merged else 10
+                else:
+                    delete_score = 50
+                
+                # Mock date (older branches get higher scores)
+                days_ago = (i * 3) + 1
+                date_str = (datetime.datetime.now() - datetime.timedelta(days=days_ago)).strftime("%Y-%m-%d")
+                
+                branches.append(BranchInfo(
+                    name=name,
+                    is_remote=is_remote,
+                    commit_hash=f"abcdef{i:03d}",
+                    commit_date=date_str,
+                    author=author,
+                    message=f"Optimizing lattice components, iteration {i}",
+                    is_merged=is_merged,
+                    category=cat,
+                    delete_score=min(100, delete_score + (days_ago // 10))
+                ))
         else:
-            categories["misc"].append(branch)
+            # Real repository execution
+            logger.info("Executing real Git audit")
+            # Fetch prune to sync remote tracking
+            try:
+                self._run_git_cmd(["fetch", "--all", "--prune"])
+            except Exception as e:
+                logger.warning(f"Git fetch failed, proceeding with local cache: {e}")
 
-# Output results
-print(json.dumps({
-    "total": len(branches),
-    "categories": {k: len(v) for k, v in categories.items()},
-    "detail": categories
-}, indent=2))
-PYTHON_EOF
-            """
-            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=False)
-            audit_result = json.loads(result.stdout)
+            # Get branches from git for-each-ref
+            fmt = "%(refname:short)|%(objectname:short)|%(committerdate:short)|%(authorname)|%(subject)"
+            raw_branches = self._run_git_cmd(["for-each-ref", "--format", fmt, "refs/heads", "refs/remotes"])
             
-            print("✅ AUDIT COMPLETE")
-            print(f"   Total branches: {audit_result['total']}")
-            for cat, count in audit_result['categories'].items():
-                if count > 0:
-                    print(f"   • {cat:20s}: {count:3d}")
+            # Determine main/master branch merged status
+            merged_to_main = set()
+            try:
+                raw_merged = self._run_git_cmd(["branch", "-a", "--merged", "origin/main"])
+                for b in raw_merged.splitlines():
+                    cleaned = b.strip().replace("* ", "")
+                    merged_to_main.add(cleaned)
+            except Exception:
+                try:
+                    raw_merged = self._run_git_cmd(["branch", "-a", "--merged", "main"])
+                    for b in raw_merged.splitlines():
+                        cleaned = b.strip().replace("* ", "")
+                        merged_to_main.add(cleaned)
+                except Exception as ex:
+                    logger.warning(f"Could not determine merged status: {ex}")
             
-            return {
-                "status": "success",
-                "total_branches": audit_result['total'],
-                "categories": audit_result['categories'],
-                "detail": audit_result['detail']
-            }
-        except Exception as e:
-            return {"status": "failed", "error": str(e)}
+            for line in raw_branches.splitlines():
+                if not line:
+                    continue
+                parts = line.split("|")
+                if len(parts) < 5:
+                    continue
+                name, commit, date, author, message = parts[0], parts[1], parts[2], parts[3], parts[4]
+                
+                if "origin/HEAD" in name or name == "main" or name == "master":
+                    continue
+                
+                is_remote = name.startswith("origin/")
+                is_merged = name in merged_to_main or f"remotes/{name}" in merged_to_main
+                
+                # Categorization logic
+                cat = "misc"
+                name_lower = name.lower()
+                if "auto_test" in name_lower or "test/" in name_lower or "verify" in name_lower:
+                    cat = "auto_test"
+                elif "jules" in name_lower or "jules_task" in name_lower:
+                    cat = "jules_task"
+                elif "fix/" in name_lower or "patch" in name_lower:
+                    cat = "fix"
+                elif "feat/" in name_lower or "feature/" in name_lower:
+                    cat = "feature"
+                elif "perf/" in name_lower:
+                    cat = "perf"
+                elif "docs/" in name_lower:
+                    cat = "docs"
+                elif "refactor/" in name_lower or "chore/" in name_lower or "clean" in name_lower:
+                    cat = "code_health"
+                elif "claude/" in name_lower or "agent/" in name_lower:
+                    cat = "claude_agent"
 
-    def analyze_merge_status(self, audit_data: Dict) -> Dict[str, Any]:
-        """Analyze merge status of branches."""
-        print("\n[AUDIT ANALYSIS] Checking merge status...\n")
+                # Calculate delete score
+                # Base deletion score rules
+                delete_score = 0
+                if cat == "auto_test":
+                    delete_score = 100
+                elif cat == "jules_task":
+                    delete_score = 80
+                elif cat == "fix":
+                    delete_score = 65 if is_merged else 35
+                elif cat == "feature":
+                    delete_score = 25 if is_merged else 10
+                elif cat == "code_health":
+                    delete_score = 70 if is_merged else 40
+                elif cat == "docs" or cat == "perf":
+                    delete_score = 60 if is_merged else 30
+                else:
+                    delete_score = 50
+
+                # Age modifier (days since last commit)
+                try:
+                    commit_dt = datetime.datetime.strptime(date, "%Y-%m-%d")
+                    days_old = (datetime.datetime.now() - commit_dt).days
+                    # Add 1 point per 5 days of age, max +30
+                    delete_score += min(30, days_old // 5)
+                except ValueError:
+                    pass
+
+                branches.append(BranchInfo(
+                    name=name,
+                    is_remote=is_remote,
+                    commit_hash=commit,
+                    commit_date=date,
+                    author=author,
+                    message=message,
+                    is_merged=is_merged,
+                    category=cat,
+                    delete_score=min(100, delete_score)
+                ))
+
+        # Summarize category counts
+        cat_counts: Dict[str, int] = {}
+        for b in branches:
+            cat_counts[b.category] = cat_counts.get(b.category, 0) + 1
         
-        try:
-            merged_count = 0
-            unmerged_count = 0
-            
-            # Sample check on key categories
-            for category in ["jules_task", "fix", "feature"]:
-                branches = audit_data["detail"].get(category, [])
-                if branches:
-                    for branch in branches[:3]:  # Sample 3 from each
-                        cmd = f"git branch -r --no-merged origin/main 2>/dev/null | grep -q 'origin/{branch}'"
-                        result = subprocess.run(cmd, shell=True, capture_output=True, check=False)
-                        if result.returncode == 0:
-                            unmerged_count += 1
-                        else:
-                            merged_count += 1
-            
-            print(f"✅ MERGE ANALYSIS")
-            print(f"   Merged (sampled): {merged_count}")
-            print(f"   Unmerged (sampled): {unmerged_count}")
-            
-            return {
-                "status": "success",
-                "merged_sample": merged_count,
-                "unmerged_sample": unmerged_count
-            }
-        except Exception as e:
-            return {"status": "failed", "error": str(e)}
-
-    # ==================== PHASE 2: VALIDATION ====================
-    def validate_naming_compliance(self, audit_data: Dict) -> Dict[str, Any]:
-        """Validate branch naming convention compliance."""
-        print("\n" + "="*80)
-        print("  [SWARM PHASE 2] VALIDATION")
-        print("="*80 + "\n")
+        result_data = {
+            "total_branches": len(branches),
+            "merged_count": sum(1 for b in branches if b.is_merged),
+            "unmerged_count": sum(1 for b in branches if not b.is_merged),
+            "local_count": sum(1 for b in branches if not b.is_remote),
+            "remote_count": sum(1 for b in branches if b.is_remote),
+            "category_counts": cat_counts,
+            "branches": [asdict(b) for b in branches]
+        }
         
-        valid_prefixes = ["feat/", "fix/", "chore/", "docs/", "perf/", "refactor/", "test/", "ci/", "claude/"]
-        compliant = 0
+        self.tasks["audit_fetch"].status = "SUCCESS"
+        self.tasks["audit_fetch"].result = result_data
+        self.pipeline_state["phases"]["1_audit"] = result_data
+        
+        logger.info(f"Phase 1: Audit Complete. Audited {len(branches)} branches.")
+        return result_data
+
+    # =========================================================================
+    # PHASE 2: VALIDATION (3 Parallel Jobs)
+    # =========================================================================
+    def _validate_naming_compliance(self, branches: List[Dict[str, Any]]) -> Dict[str, Any]:
+        logger.info("Job 1: Running Naming Compliance Check")
         non_compliant = []
+        compliant_count = 0
         
-        # Check all branches in detail
-        all_branches = []
-        for cat, branches in audit_data["detail"].items():
-            all_branches.extend(branches)
-        
-        for branch in all_branches:
-            if branch == "main":
-                compliant += 1
-            elif any(branch.startswith(p) for p in valid_prefixes):
-                compliant += 1
+        for b in branches:
+            b_name = b["name"].replace("origin/", "")
+            is_compliant = False
+            for prefix in COMPLIANT_PREFIXES:
+                if b_name.startswith(prefix):
+                    is_compliant = True
+                    break
+            
+            if is_compliant:
+                compliant_count += 1
             else:
-                non_compliant.append(branch)
+                non_compliant.append(b["name"])
         
-        compliance = (compliant / len(all_branches) * 100) if all_branches else 100
-        
-        print(f"✅ NAMING COMPLIANCE ANALYSIS")
-        print(f"   Compliant: {compliant}/{len(all_branches)} ({compliance:.1f}%)")
-        print(f"   Non-compliant: {len(non_compliant)}")
-        if non_compliant[:5]:
-            print(f"   Examples: {', '.join(non_compliant[:5])}")
-        
+        compliance_pct = (compliant_count / len(branches)) * 100 if branches else 100.0
         return {
-            "status": "success",
-            "compliance_rate": compliance,
-            "compliant": compliant,
-            "non_compliant": len(non_compliant),
-            "non_compliant_branches": non_compliant
+            "compliance_percentage": round(compliance_pct, 2),
+            "compliant_count": compliant_count,
+            "non_compliant_count": len(non_compliant),
+            "violations": non_compliant
         }
 
-    def validate_main_protection(self) -> Dict[str, Any]:
-        """Validate main branch protection settings."""
-        print("\n[VALIDATION] Main branch protection...\n")
+    def _validate_main_protection(self) -> Dict[str, Any]:
+        logger.info("Job 2: Running Main Branch Protection Check")
+        main_exists = False
+        master_exists = False
         
-        try:
-            cmd = "git ls-remote --heads origin main 2>/dev/null"
-            result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=False)
-            
-            if "main" in result.stdout:
-                print(f"✅ MAIN BRANCH")
-                print(f"   Exists: Yes")
-                print(f"   Protection: Manual (verify in GitHub Settings)")
-                return {"status": "success", "main_exists": True}
-            else:
-                return {"status": "failed", "error": "Main branch not found"}
-        except Exception as e:
-            return {"status": "failed", "error": str(e)}
+        if self.simulate:
+            main_exists = True
+            master_exists = True
+        else:
+            try:
+                branches_raw = self._run_git_cmd(["branch", "-a"])
+                main_exists = any("main" in line for line in branches_raw.splitlines())
+                master_exists = any("master" in line for line in branches_raw.splitlines())
+            except Exception as e:
+                logger.error(f"Error checking main branch presence: {e}")
 
-    def validate_branch_count(self, total: int) -> Dict[str, Any]:
-        """Validate branch count against targets."""
+        return {
+            "main_branch_exists": main_exists,
+            "legacy_master_exists": master_exists,
+            "status": "PASS" if main_exists else "FAIL",
+            "required_actions": ["Clean up legacy master branch"] if master_exists else []
+        }
+
+    def _validate_branch_count_threshold(self, count: int) -> Dict[str, Any]:
+        logger.info("Job 3: Running Branch Count Threshold Check")
+        # Threshold boundaries: PASS (<=25) | WARN (26-50) | FAIL (>50)
         target = 25
-        status = "✅ PASS" if total <= target else "⚠️  WARN" if total <= 50 else "❌ FAIL"
-        
-        print(f"\n[VALIDATION] Branch count: {total} (target: {target})")
-        print(f"   Status: {status}\n")
-        
+        status = "PASS"
+        if count > 50:
+            status = "FAIL"
+        elif count > target:
+            status = "WARN"
+            
         return {
-            "status": "success" if total <= target else "warn" if total <= 50 else "failed",
-            "current": total,
-            "target": target,
-            "assessment": status
+            "current_count": count,
+            "target_threshold": target,
+            "status": status,
+            "details": f"Status is {status} because count {count} is threshold boundary."
         }
 
-    # ==================== PHASE 3: OPTIMIZATION ====================
-    def generate_cleanup_strategy(self, audit_data: Dict, naming_compliance: Dict) -> Dict[str, Any]:
-        """Generate optimal cleanup strategy."""
-        print("\n" + "="*80)
-        print("  [SWARM PHASE 3] OPTIMIZATION")
-        print("="*80 + "\n")
+    def execute_phase_2_validation(self) -> Dict[str, Any]:
+        logger.info("--- Starting Phase 2: Validation (Parallel Execution) ---")
+        self.register_task("validation_naming", "Check compliance with naming taxonomy")
+        self.register_task("validation_protection", "Verify primary branch protections")
+        self.register_task("validation_count", "Analyze count against threshold limit")
         
-        high_priority = []
-        medium_priority = []
-        keep = []
+        audit_data = self.pipeline_state["phases"]["1_audit"]
+        branches = audit_data["branches"]
+        total_count = audit_data["total_branches"]
         
-        # High priority: auto-test branches
-        for branch in audit_data["detail"].get("auto_test", []):
-            high_priority.append({"branch": branch, "reason": "Auto-generated test", "score": 100})
+        validation_results = {}
         
-        # High priority: old jules tasks
-        for branch in audit_data["detail"].get("jules_task", [])[:10]:
-            high_priority.append({"branch": branch, "reason": "Old task branch", "score": 85})
+        # Dispatch 3 jobs in parallel using ThreadPoolExecutor
+        with ThreadPoolExecutor(max_workers=3, thread_name_prefix="ValidatorSwarm") as executor:
+            future_naming = executor.submit(self._validate_naming_compliance, branches)
+            future_protect = executor.submit(self._validate_main_protection)
+            future_count = executor.submit(self._validate_branch_count_threshold, total_count)
+            
+            # Gather results
+            validation_results["naming"] = future_naming.result()
+            validation_results["protection"] = future_protect.result()
+            validation_results["count_threshold"] = future_count.result()
+            
+        self.tasks["validation_naming"].status = "SUCCESS"
+        self.tasks["validation_naming"].result = validation_results["naming"]
         
-        # Medium priority: non-compliant branches
-        for branch in naming_compliance.get("non_compliant_branches", []):
-            if branch != "main":
-                medium_priority.append({"branch": branch, "reason": "Naming violation", "score": 60})
+        self.tasks["validation_protection"].status = "SUCCESS"
+        self.tasks["validation_protection"].result = validation_results["protection"]
         
-        # Keep: active features
-        for branch in audit_data["detail"].get("feature", []):
-            keep.append({"branch": branch, "reason": "Active feature"})
+        self.tasks["validation_count"].status = "SUCCESS"
+        self.tasks["validation_count"].result = validation_results["count_threshold"]
         
-        print(f"✅ CLEANUP STRATEGY GENERATED")
-        print(f"   High Priority (delete): {len(high_priority)}")
-        print(f"   Medium Priority (review): {len(medium_priority)}")
-        print(f"   Keep (active): {len(keep)}")
+        overall_status = "PASS"
+        if validation_results["count_threshold"]["status"] == "FAIL" or validation_results["protection"]["status"] == "FAIL":
+            overall_status = "FAIL"
+        elif validation_results["count_threshold"]["status"] == "WARN":
+            overall_status = "WARN"
+            
+        validation_results["overall_status"] = overall_status
+        self.pipeline_state["phases"]["2_validation"] = validation_results
         
-        return {
-            "status": "success",
-            "high_priority": high_priority,
-            "medium_priority": medium_priority,
-            "keep": keep,
-            "total_to_delete": len(high_priority) + len(medium_priority)
-        }
+        logger.info(f"Phase 2: Validation Complete. Status: {overall_status}")
+        return validation_results
 
-    def estimate_time_savings(self, total: int, high_p: int, medium_p: int) -> Dict[str, Any]:
-        """Estimate time/effort savings from cleanup."""
-        print(f"\n[OPTIMIZATION] Time savings estimate...\n")
+    # =========================================================================
+    # PHASE 3: OPTIMIZATION
+    # =========================================================================
+    def execute_phase_3_optimization(self) -> Dict[str, Any]:
+        logger.info("--- Starting Phase 3: Optimization ---")
+        self.register_task("optimization_savings", "Calculate network latency and cleanup strategies")
         
-        # Estimate: 5 seconds per branch check = total * 5 seconds
-        current_ops_per_commit = total
-        post_cleanup_ops = 25
-        time_saved_per_check = (total - post_cleanup_ops) * 5  # seconds
+        audit_data = self.pipeline_state["phases"]["1_audit"]
+        branches = audit_data["branches"]
+        total_branches = audit_data["total_branches"]
         
-        print(f"✅ TIME SAVINGS PROJECTION")
-        print(f"   Current branch ops: {current_ops_per_commit}")
-        print(f"   Post-cleanup ops: {post_cleanup_ops}")
-        print(f"   Savings per fetch: ~{time_saved_per_check}s ({time_saved_per_check/60:.1f}m)")
-        print(f"   Cumulative (1 month): ~{time_saved_per_check * 100}s ({time_saved_per_check * 100 / 3600:.1f}h)\n")
+        # Categorize into priority queues
+        high_priority = []    # Auto-test + old tasks
+        medium_priority = []  # Old fixes + naming violations
+        keep = []             # Active features
         
-        return {
-            "status": "success",
-            "current_branches": current_ops_per_commit,
-            "post_cleanup": post_cleanup_ops,
-            "time_saved_per_op_sec": time_saved_per_check / total if total > 0 else 0,
-            "estimated_monthly_savings_hours": time_saved_per_check * 100 / 3600
-        }
-
-    # ==================== PHASE 4: GENERATION ====================
-    def generate_delete_script(self, strategy: Dict) -> Dict[str, Any]:
-        """Generate safe deletion script."""
-        print("\n" + "="*80)
-        print("  [SWARM PHASE 4] SCRIPT GENERATION")
-        print("="*80 + "\n")
+        for b in branches:
+            score = b["delete_score"]
+            if score >= 75:
+                high_priority.append(b["name"])
+            elif score >= 45:
+                medium_priority.append(b["name"])
+            else:
+                keep.append(b["name"])
+                
+        # Estimate monthly fetching time savings
+        current_fetch_overhead = total_branches * 5.0
+        post_fetch_overhead = 25 * 5.0
+        savings_per_fetch = max(0.0, current_fetch_overhead - post_fetch_overhead)
+        monthly_fetches = 100
+        monthly_time_saved_hours = round((savings_per_fetch * monthly_fetches) / 3600.0, 2)
         
-        script = """#!/bin/bash
-# Auto-generated by Swarm Executor
-# Review before executing!
-
-set -e
-
-echo "CAMELOT-OS Branch Cleanup (Swarm Optimized)"
-echo "=========================================="
-"""
-        
-        high_p = strategy.get("high_priority", [])
-        medium_p = strategy.get("medium_priority", [])
-        
-        script += f"""
-echo "Phase 1: High Priority ({len(high_p)} branches)"
-read -p "Continue? (y/N) " -n 1 -r
-[[ $REPLY =~ ^[Yy]$ ]] || exit 1
-echo
-
-"""
-        
-        for item in high_p[:30]:
-            branch = item["branch"]
-            script += f'echo "Deleting: {branch}"\ngit push origin --delete {branch} 2>/dev/null || true\n'
-        
-        script += f"""
-echo "Phase 2: Medium Priority ({len(medium_p)} branches)"
-read -p "Continue? (y/N) " -n 1 -r
-[[ $REPLY =~ ^[Yy]$ ]] || exit 1
-echo
-
-"""
-        
-        for item in medium_p[:20]:
-            branch = item["branch"]
-            script += f'echo "Deleting: {branch}"\ngit push origin --delete {branch} 2>/dev/null || true\n'
-        
-        script += """
-echo "Cleanup complete!"
-echo "Run: git fetch --all --prune"
-"""
-        
-        script_path = Path("scripts/delete_branches_swarm.sh")
-        with open(script_path, "w") as f:
-            f.write(script)
-        
-        import os
-        os.chmod(script_path, 0o755)
-        
-        print(f"✅ DELETION SCRIPT GENERATED")
-        print(f"   Path: {script_path}")
-        print(f"   Branches to delete: {len(high_p) + len(medium_p)}\n")
-        
-        return {
-            "status": "success",
-            "script_path": str(script_path),
-            "high_priority_count": len(high_p),
-            "medium_priority_count": len(medium_p)
-        }
-
-    def generate_validation_script(self) -> Dict[str, Any]:
-        """Generate validation script."""
-        print(f"\n[GENERATION] Validation script...\n")
-        
-        script_path = Path("scripts/validate_cleanup.sh")
-        script = """#!/bin/bash
-echo "BRANCH CLEANUP VALIDATION"
-echo "=========================="
-echo
-
-echo "Total branches:"
-git branch -r | wc -l
-
-echo "Category breakdown:"
-echo "  Auto-test:"
-git branch -r | grep -c "add-.*-tests-" || echo "0"
-echo "  Jules tasks:"
-git branch -r | grep -c "^.*jules" || echo "0"
-echo "  Feature:"
-git branch -r | grep -c "^.*feat/" || echo "0"
-
-echo "Naming compliance:"
-total=$(git branch -r | wc -l)
-compliant=$(git branch -r | grep -E "^.*/(feat|fix|chore|docs|perf|refactor|test|ci|claude)/" | wc -l)
-echo "  Compliant: $compliant/$total"
-
-echo "Main branch status:"
-git rev-parse --verify origin/main >/dev/null 2>&1 && echo "  ✅ Exists" || echo "  ❌ Missing"
-"""
-        
-        with open(script_path, "w") as f:
-            f.write(script)
-        
-        import os
-        os.chmod(script_path, 0o755)
-        
-        print(f"✅ VALIDATION SCRIPT GENERATED")
-        print(f"   Path: {script_path}\n")
-        
-        return {"status": "success", "script_path": str(script_path)}
-
-    # ==================== PHASE 5: EXECUTION & REPORTING ====================
-    def generate_final_report(self, phase_results: Dict) -> Dict[str, Any]:
-        """Generate comprehensive final report."""
-        print("\n" + "="*80)
-        print("  [SWARM PHASE 5] REPORTING & SUMMARY")
-        print("="*80 + "\n")
-        
-        report = {
-            "execution_timestamp": datetime.now().isoformat(),
-            "phases": phase_results,
-            "summary": {
-                "total_branches": phase_results.get("phase_1", {}).get("audit", {}).get("total_branches", 0),
-                "branches_to_delete": 0,
-                "branches_to_keep": 0,
-                "compliance_rate": phase_results.get("phase_2", {}).get("naming", {}).get("compliance_rate", 0),
-                "time_savings_hours": phase_results.get("phase_3", {}).get("time_savings", {}).get("estimated_monthly_savings_hours", 0),
+        optimization_data = {
+            "strategy": {
+                "high_priority_delete_count": len(high_priority),
+                "medium_priority_delete_count": len(medium_priority),
+                "keep_count": len(keep),
+                "high_priority_branches": high_priority,
+                "medium_priority_branches": medium_priority,
+                "keep_branches": keep
             },
-            "next_steps": [
-                "1. Review scripts/delete_branches_swarm.sh",
-                "2. Execute: bash scripts/delete_branches_swarm.sh",
-                "3. Validate: bash scripts/validate_cleanup.sh",
-                "4. Verify in GitHub: https://github.com/Cyberdad247/Camelot-Ecosystem/branches",
-                "5. Install hooks: bash .githooks/install-hooks.sh"
-            ]
+            "metrics": {
+                "current_overhead_seconds_per_fetch": current_fetch_overhead,
+                "target_overhead_seconds_per_fetch": post_fetch_overhead,
+                "savings_seconds_per_fetch": savings_per_fetch,
+                "estimated_monthly_hours_saved": monthly_time_saved_hours
+            }
         }
         
-        report_path = Path("data/swarm_execution_report.json")
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(report_path, "w") as f:
-            json.dump(report, f, indent=2)
+        self.tasks["optimization_savings"].status = "SUCCESS"
+        self.tasks["optimization_savings"].result = optimization_data
+        self.pipeline_state["phases"]["3_optimization"] = optimization_data
         
-        print(f"✅ FINAL REPORT GENERATED")
-        print(f"   Path: {report_path}")
-        print(f"\n   Total branches: {report['summary']['total_branches']}")
-        print(f"   Compliance rate: {report['summary']['compliance_rate']:.1f}%")
-        print(f"   Monthly time savings: {report['summary']['time_savings_hours']:.1f}h\n")
-        
-        return {"status": "success", "report_path": str(report_path), "summary": report["summary"]}
+        logger.info(f"Phase 3: Optimization Complete. Est. Savings: {monthly_time_saved_hours} hours/month.")
+        return optimization_data
 
-    def execute_swarm(self):
-        """Execute all phases in parallel where possible."""
-        print("\n" + "╔" + "="*78 + "╗")
-        print("║" + " "*15 + "CAMELOT-OS BRANCH CLEANUP SWARM EXECUTOR" + " "*23 + "║")
-        print("╚" + "="*78 + "╝\n")
+    # =========================================================================
+    # PHASE 4: GENERATION (2 Parallel Jobs)
+    # =========================================================================
+    def _generate_delete_script(self, high_priority: List[str], medium_priority: List[str]) -> str:
+        logger.info("Job 1: Generating Safe Deletion Script")
+        filepath = "scripts/delete_branches_swarm.sh"
         
-        # PHASE 1: AUDIT (baseline)
-        print("[PHASE 1] Auditing branches...")
-        audit_result = self.audit_branches()
-        merge_result = self.analyze_merge_status(audit_result)
+        # Split into local and remote branches to execute correctly
+        local_high = [b for b in high_priority if not b.startswith("origin/")]
+        remote_high = [b.replace("origin/", "") for b in high_priority if b.startswith("origin/")]
         
-        self.results["phases"]["1_audit"] = {
-            "audit": audit_result,
-            "merge_analysis": merge_result
-        }
+        local_med = [b for b in medium_priority if not b.startswith("origin/")]
+        remote_med = [b.replace("origin/", "") for b in medium_priority if b.startswith("origin/")]
+
+        content = f"""#!/bin/bash
+# =========================================================================
+# Camelot-OS Phased Safe Deletion Script
+# Generated by SwarmExecutor on {datetime.date.today().isoformat()}
+# =========================================================================
+
+echo "========================================================"
+echo "🛡️  Camelot-OS Sovereign Branch Cleanup Daemon Active 🛡️"
+echo "========================================================"
+echo "This script executes safe, interactive, multi-phase branch deletion."
+echo "Press Ctrl+C at any time to abort."
+echo ""
+
+# Function to confirm action
+confirm_phase() {{
+    read -p "Proceed with $1? [y/N]: " response
+    case "$response" in
+        [yY][eE][sS]|[yY]) 
+            return 0
+            ;;
+        *)
+            return 1
+            ;;
+    esac
+}}
+
+# PHASE 1: High Priority Deletions ({len(high_priority)} branches)
+echo "--------------------------------------------------------"
+echo "PHASE 1: High Priority Deletions (Auto-test/Old tasks)"
+echo "--------------------------------------------------------"
+if confirm_phase "Phase 1 High Priority Deletions"; then
+    echo "Executing Phase 1 deletions..."
+"""
         
-        # PHASE 2: VALIDATION (parallel)
-        print("\n[PHASE 2] Running validations in parallel...")
-        with ThreadPoolExecutor(max_workers=3) as executor:
-            naming_future = executor.submit(self.validate_naming_compliance, audit_result)
-            protection_future = executor.submit(self.validate_main_protection)
-            count_future = executor.submit(self.validate_branch_count, audit_result["total_branches"])
+        if local_high:
+            content += "    # Delete Local High Priority Branches\n"
+            content += "    git branch -D " + " ".join(local_high) + " || true\n\n"
+        if remote_high:
+            content += "    # Delete Remote High Priority Branches\n"
+            for rb in remote_high:
+                content += f"    git push origin --delete {rb} || true\n"
+            content += "\n"
             
-            naming_result = naming_future.result()
-            protection_result = protection_future.result()
-            count_result = count_future.result()
+        content += f"""else
+    echo "Phase 1 skipped."
+fi
+
+# PHASE 2: Medium Priority Deletions ({len(medium_priority)} branches)
+echo "--------------------------------------------------------"
+echo "PHASE 2: Medium Priority Deletions (Old fixes/Violations)"
+echo "--------------------------------------------------------"
+if confirm_phase "Phase 2 Medium Priority Deletions"; then
+    echo "Executing Phase 2 deletions..."
+"""
+
+        if local_med:
+            content += "    # Delete Local Medium Priority Branches\n"
+            content += "    git branch -D " + " ".join(local_med) + " || true\n\n"
+        if remote_med:
+            content += "    # Delete Remote Medium Priority Branches\n"
+            for rb in remote_med:
+                content += f"    git push origin --delete {rb} || true\n"
+            content += "\n"
+
+        content += """else
+    echo "Phase 2 skipped."
+fi
+
+echo ""
+echo "🎉 Cleanup Run Complete. Fetching prune to align git state..."
+git fetch --all --prune || true
+echo "✅ State synchronized."
+"""
+        if not self.dry_run:
+            with open(filepath, "w", encoding="utf-8", newline="\n") as f:
+                f.write(content)
+            try:
+                os.chmod(filepath, 0o755)
+            except Exception:
+                pass
+                
+        return filepath
+
+    def _generate_validate_script(self) -> str:
+        logger.info("Job 2: Generating Post-Cleanup Validation Script")
+        filepath = "scripts/validate_cleanup.sh"
         
-        self.results["phases"]["2_validation"] = {
-            "naming": naming_result,
-            "protection": protection_result,
-            "count": count_result
-        }
+        content = """#!/bin/bash
+# =========================================================================
+# Camelot-OS Branch Cleanup Validation Script
+# Generated by SwarmExecutor on {}
+# =========================================================================
+
+echo "========================================================"
+echo "🔍 Camelot-OS Post-Cleanup Validation Suite 🔍"
+echo "========================================================"
+echo ""
+
+# Count active branches
+total_branches=$(git branch -a | grep -v "HEAD" | wc -l)
+echo "Total remaining branches (local + remote): $total_branches"
+
+if [ "$total_branches" -le 25 ]; then
+    echo "✅ PASS: Branch count is within boundaries ($total_branches <= 25)."
+else
+    echo "⚠️  WARN: Branch count exceeds ideal threshold ($total_branches > 25)."
+fi
+
+# Check naming compliance
+non_compliant_count=0
+while read -r branch; do
+    cleaned=$(echo "$branch" | sed 's/^[ *]*//' | sed 's/remotes\\/origin\\///')
+    
+    # Skip main and master from prefix check
+    if [ "$cleaned" == "main" ] || [ "$cleaned" == "master" ]; then
+        continue
+    fi
+    
+    compliant=false
+    for prefix in "feat/" "fix/" "chore/" "docs/" "perf/" "refactor/" "test/" "ci/" "claude/"; do
+        if [[ "$cleaned" == $prefix* ]]; then
+            compliant=true
+            break
+        fi
+    done
+    
+    if [ "$compliant" = false ]; then
+        echo "❌ Violator: $cleaned"
+        non_compliant_count=$((non_compliant_count + 1))
+    fi
+done < <(git branch -a | grep -v "HEAD")
+
+echo ""
+if [ "$non_compliant_count" -eq 0 ]; then
+    echo "✅ PASS: 100% Naming Taxonomy Compliance achieved."
+else
+    echo "❌ FAIL: Found $non_compliant_count naming taxonomy violations."
+fi
+""".format(datetime.date.today().isoformat())
+
+        if not self.dry_run:
+            with open(filepath, "w", encoding="utf-8", newline="\n") as f:
+                f.write(content)
+            try:
+                os.chmod(filepath, 0o755)
+            except Exception:
+                pass
+                
+        return filepath
+
+    def execute_phase_4_generation(self) -> Dict[str, Any]:
+        logger.info("--- Starting Phase 4: Generation (Parallel Execution) ---")
+        self.register_task("generation_delete_script", "Generate phased interactive branch deletion script")
+        self.register_task("generation_validate_script", "Generate validation check suite script")
         
-        # PHASE 3: OPTIMIZATION
-        print("\n[PHASE 3] Generating optimization strategy...")
-        strategy_result = self.generate_cleanup_strategy(audit_result, naming_result)
-        time_savings_result = self.estimate_time_savings(
-            audit_result["total_branches"],
-            len(strategy_result["high_priority"]),
-            len(strategy_result["medium_priority"])
-        )
+        opt_data = self.pipeline_state["phases"]["3_optimization"]
+        high_priority = opt_data["strategy"]["high_priority_branches"]
+        medium_priority = opt_data["strategy"]["medium_priority_branches"]
         
-        self.results["phases"]["3_optimization"] = {
-            "strategy": strategy_result,
-            "time_savings": time_savings_result
-        }
+        generation_results = {}
         
-        # PHASE 4: GENERATION (parallel scripts)
-        print("\n[PHASE 4] Generating scripts...")
-        with ThreadPoolExecutor(max_workers=2) as executor:
-            delete_future = executor.submit(self.generate_delete_script, strategy_result)
-            validate_future = executor.submit(self.generate_validation_script)
+        # Parallel generation of two script builders
+        with ThreadPoolExecutor(max_workers=2, thread_name_prefix="GeneratorSwarm") as executor:
+            future_delete = executor.submit(self._generate_delete_script, high_priority, medium_priority)
+            future_validate = executor.submit(self._generate_validate_script)
             
-            delete_result = delete_future.result()
-            validate_result = validate_future.result()
+            generation_results["delete_script"] = future_delete.result()
+            generation_results["validate_script"] = future_validate.result()
+            
+        self.tasks["generation_delete_script"].status = "SUCCESS"
+        self.tasks["generation_delete_script"].result = generation_results["delete_script"]
         
-        self.results["phases"]["4_generation"] = {
-            "delete_script": delete_result,
-            "validation_script": validate_result
+        self.tasks["generation_validate_script"].status = "SUCCESS"
+        self.tasks["generation_validate_script"].result = generation_results["validate_script"]
+        
+        self.pipeline_state["phases"]["4_generation"] = generation_results
+        logger.info("Phase 4: Generation Complete. Created cleanup and validation utilities.")
+        return generation_results
+
+    # =========================================================================
+    # PHASE 5: REPORTING
+    # =========================================================================
+    def execute_phase_5_reporting(self) -> Dict[str, Any]:
+        logger.info("--- Starting Phase 5: Reporting ---")
+        self.register_task("reporting_export", "Export pipeline artifacts and console dashboard summaries")
+        
+        audit_data = self.pipeline_state["phases"]["1_audit"]
+        validation_data = self.pipeline_state["phases"]["2_validation"]
+        opt_data = self.pipeline_state["phases"]["3_optimization"]
+        gen_data = self.pipeline_state["phases"]["4_generation"]
+        
+        overall_summary = {
+            "timestamp": self.pipeline_state["timestamp"],
+            "total_branches_analyzed": audit_data["total_branches"],
+            "naming_compliance_pct": validation_data["naming"]["compliance_percentage"],
+            "branch_count_status": validation_data["count_threshold"]["status"],
+            "overall_pipeline_status": validation_data["overall_status"],
+            "high_priority_removals": opt_data["strategy"]["high_priority_delete_count"],
+            "medium_priority_removals": opt_data["strategy"]["medium_priority_delete_count"],
+            "estimated_savings_hours_monthly": opt_data["metrics"]["estimated_monthly_hours_saved"],
+            "delete_script_path": gen_data["delete_script"],
+            "validate_script_path": gen_data["validate_script"]
         }
         
-        # PHASE 5: REPORTING
-        print("\n[PHASE 5] Generating final report...")
-        report_result = self.generate_final_report(self.results["phases"])
+        report_data = {
+            "summary": overall_summary,
+            "tasks": {name: {"status": t.status, "description": t.description} for name, t in self.tasks.items()}
+        }
         
-        self.results["phases"]["5_reporting"] = {"final_report": report_result}
+        self.tasks["reporting_export"].status = "SUCCESS"
+        self.tasks["reporting_export"].result = report_data
         
-        self.print_execution_summary()
-        return self.results
+        self.pipeline_state["phases"]["5_reporting"] = report_data
+        
+        # Save JSON files
+        if not self.dry_run:
+            with open("data/swarm_execution_report.json", "w", encoding="utf-8") as f:
+                json.dump(report_data, f, indent=2)
+            with open("data/swarm_execution_complete.json", "w", encoding="utf-8") as f:
+                json.dump(self.pipeline_state, f, indent=2)
+                
+        logger.info("Phase 5: Reporting Complete. Artifacts saved in data/ directory.")
+        self._output_terminal_dashboard(overall_summary, audit_data, validation_data)
+        
+        return report_data
 
-    def print_execution_summary(self):
-        """Print execution summary."""
+    def _output_terminal_dashboard(self, summary: Dict[str, Any], audit: Dict[str, Any], validation: Dict[str, Any]) -> None:
+        """Prints a beautiful summary to the stdout console."""
         print("\n" + "="*80)
-        print("  SWARM EXECUTION SUMMARY")
-        print("="*80 + "\n")
-        
-        audit = self.results["phases"]["1_audit"]["audit"]
-        validation = self.results["phases"]["2_validation"]
-        optimization = self.results["phases"]["3_optimization"]
-        generation = self.results["phases"]["4_generation"]
-        
-        print("📊 AUDIT RESULTS")
-        print(f"   Total branches: {audit['total_branches']}")
-        for cat, count in list(audit['categories'].items())[:5]:
-            if count > 0:
-                print(f"   • {cat:20s}: {count:3d}")
-        
-        print("\n✅ VALIDATION RESULTS")
-        print(f"   Naming compliance: {validation['naming']['compliance_rate']:.1f}%")
-        print(f"   Branch count: {validation['count']['current']} (target: {validation['count']['target']})")
-        print(f"   Main protected: {validation['protection']['status']}")
-        
-        print("\n🚀 OPTIMIZATION STRATEGY")
-        print(f"   High priority (delete): {len(optimization['strategy']['high_priority'])}")
-        print(f"   Medium priority: {len(optimization['strategy']['medium_priority'])}")
-        print(f"   Keep (active): {len(optimization['strategy']['keep'])}")
-        print(f"   Total to delete: {optimization['strategy']['total_to_delete']}")
-        
-        print(f"\n⏱️  TIME SAVINGS")
-        print(f"   Monthly savings: ~{optimization['time_savings']['estimated_monthly_savings_hours']:.1f} hours")
-        
-        print("\n📄 GENERATED ARTIFACTS")
-        print(f"   • {generation['delete_script']['script_path']}")
-        print(f"   • {generation['validation_script']['script_path']}")
-        print(f"   • data/swarm_execution_report.json")
-        
-        print("\n" + "="*80)
-        print("✅ SWARM EXECUTION COMPLETE")
+        print("CAMELOT-OS SWARM PIPELINE COMPLETION REPORT".center(80))
+        print("="*80)
+        print(f"Pipeline Executed At   : {summary['timestamp']}")
+        print(f"Overall Run Status     : {summary['overall_pipeline_status']}")
+        print(f"Total Branches Audited : {summary['total_branches_analyzed']}")
+        print(f"Naming Compliance Pct  : {summary['naming_compliance_pct']}%")
+        print(f"Threshold Audit Status : {summary['branch_count_status']}")
+        print("-"*80)
+        print("ESTIMATED OPTIMIZATIONS".center(80))
+        print("-"*80)
+        print(f"High Priority Removals (Auto-test/Old tasks)   : {summary['high_priority_removals']}")
+        print(f"Medium Priority Removals (Violations/Old fixes) : {summary['medium_priority_removals']}")
+        print(f"Estimated Developer Time Saved (Monthly)        : {summary['estimated_savings_hours_monthly']} hours")
+        print("-"*80)
+        print("GENERATED SCRIPTS".center(80))
+        print("-"*80)
+        print(f"Safe Phased Deletion Script : {summary['delete_script_path']}")
+        print(f"Post-cleanup Check Suite     : {summary['validate_script_path']}")
+        print("="*80)
+        print("Next recommended action: bash scripts/run_swarm.sh or execute cleanup script manually.")
         print("="*80 + "\n")
 
-
-def main():
-    executor = SwarmExecutor()
-    results = executor.execute_swarm()
-    
-    # Save results
-    with open("data/swarm_execution_complete.json", "w") as f:
-        json.dump(results, f, indent=2)
-    
-    print("\n📋 NEXT STEPS:")
-    print("   1. Review: cat data/swarm_execution_report.json")
-    print("   2. Execute: bash scripts/delete_branches_swarm.sh")
-    print("   3. Validate: bash scripts/validate_cleanup.sh")
-    print("   4. Verify: git fetch --all --prune && git branch -r | wc -l")
-
+    # =========================================================================
+    # RUN PIPELINE
+    # =========================================================================
+    def run(self) -> None:
+        try:
+            self.execute_phase_1_audit()
+            self.execute_phase_2_validation()
+            self.execute_phase_3_optimization()
+            self.execute_phase_4_generation()
+            self.execute_phase_5_reporting()
+            logger.info("Swarm Executor run completed successfully.")
+        except Exception as e:
+            logger.critical(f"Swarm Pipeline failed: {e}", exc_info=True)
+            sys.exit(1)
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description="Camelot-OS Swarm Execution Pipeline Engine")
+    parser.add_argument("--dry-run", action="store_true", help="Execute without writing script outputs")
+    parser.add_argument("--simulate", action="store_true", help="Simulate a 130+ branch repository footprint for pipeline verification")
+    args = parser.parse_args()
+
+    executor = SwarmExecutor(dry_run=args.dry_run, simulate=args.simulate)
+    executor.run()

@@ -11,6 +11,10 @@ on:
       - '02_FORGE/**'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  pull-requests: read
+
 env:
   PYTHON_VERSION: "3.13"
   NODE_VERSION: "20"
@@ -301,3 +305,4 @@ jobs:
           package-json-path: 02_FORGE/apps/i2l-phygital/package.json
           cache-key-prefix: i2l-phygital
           node-version: ${{ env.NODE_VERSION }}
+          install-args: '--no-workspaces'

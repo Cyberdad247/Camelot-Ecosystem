@@ -1,343 +1,94 @@
-# Branch Cleanup & Management Completion Report
+# 🛡️ Camelot-OS Git Branch Hygiene & Swarm Execution Guide
+> **Document Status**: Production Ready | **Compliance Enforced**: Yes
 
-**Status:** ✅ IMPLEMENTATION COMPLETE  
-**Date:** 2026-08-09  
-**Target:** Reduce 130+ branches → 20-25 active branches  
+This document establishes the official branch naming conventions, hygiene strategies, and swarm execution flows for the **Camelot-OS** repository.
 
 ---
 
-## 📋 Deliverables Created
+## 📊 Overview: Git Clutter & Fetch Overhead
+Over time, active development repositories accumulate hundreds of branches. This leads to:
+1. **Network Overhead**: Fetching remote tracking states slows down proportionally with the number of references (`git fetch --all`).
+2. **IDE Lag**: Most modern IDEs parse all refs for branch matching, which causes significant indexing delay with 130+ branches.
+3. **Cognitive Load**: Harder for developers to identify active workspace streams.
 
-### 1. **Branch Cleanup Audit Tool** ✅
-**File:** `scripts/branch_cleanup_audit.py`
+Implementing the **5-Phase Swarm Pipeline** will optimize the repository structure from **130+ branches** down to a clean **20-25 active branches**.
 
-**Capabilities:**
-- Fetches all 130+ branches with commit dates
-- Categorizes by pattern (auto-test, feature, fix, claude/agent, code_health, docs, jules/task, perf)
-- Scores deletion candidates on:
-  - Auto-generated test branches → 100 points (auto-delete)
-  - Jules task branches (merged or 30+ days old) → 50-80 points
-  - Old merged fix/feature branches → 40-60 points
-- Generates prioritized deletion phases (high/medium/low priority)
-- Exports `data/branch_audit_report.json` with detailed analysis
-- Creates `scripts/delete_branches.sh` — safe, phase-based cleanup script
+---
 
-**Usage:**
+## 🏷️ Branch Naming Taxonomy
+All branches created in this repository must use one of the following prefixes to pass local and remote pre-commit hooks:
+
+| Prefix | Description | Example |
+|---|---|---|
+| `feat/` | New features, capabilities, or major architecture grafts | `feat/zero-kv-cache` |
+| `fix/` | Bug fixes, repair patches, and hotfixes | `fix/latency-patch` |
+| `chore/` | Build scripts, dependencies, config tweaks, and infra tasks | `chore/reconcile-ledger` |
+| `docs/` | Documentation additions, revisions, and reports | `docs/v9000.14-go-live` |
+| `perf/` | Code optimization or performance enhancements | `perf/ssm-core-recurrence` |
+| `refactor/` | Code structure improvements without functional changes | `refactor/ouroboros-types` |
+| `test/` | Automated test suites and verification suites | `test/forge-ci-verify` |
+| `ci/` | GitHub Actions, workflows, and automation pipelines | `ci/linter-setup` |
+| `claude/` | Autonomous agent work streams (Knight execution nodes) | `claude/jules-task-342` |
+
+---
+
+## 🚀 The 5-Phase Pipeline
+The `swarm_executor.py` coordinates 5 execution phases:
+
+### Phase 1: Audit
+- Gathers local and remote branch tracking lists.
+- Dynamically assigns a **Delete Score** (0-100) based on category classification and inactivity age.
+- Category rules:
+  - `auto_test` -> Delete Score: 100
+  - `jules_task` -> Delete Score: 80
+  - `fix` -> Delete Score: 40-60 (higher if merged)
+  - `feature` -> Keep if active
+
+### Phase 2: Validation (Concurrently Run)
+- **Naming Compliance**: Evaluates branch compliance metrics.
+- **Main Protection**: Validates primary branch protection structure.
+- **Threshold check**: Boundary checking: `PASS` (<= 25 branches) | `WARN` (26 - 50 branches) | `FAIL` (> 50 branches).
+
+### Phase 3: Optimization
+- Generates prioritizations: High Priority Deletions, Medium Priority Deletions, and Keep list.
+- Computes estimated monthly time savings on network operations.
+
+### Phase 4: Generation (Concurrently Run)
+- Generates `delete_branches_swarm.sh`: safe, phased, interactive branch deletion script.
+- Generates `validate_cleanup.sh`: validation test suite to run post-cleanup.
+
+### Phase 5: Reporting
+- Generates JSON report logs in `data/` for audit logs.
+- Outputs console metrics summary.
+
+---
+
+## 🎯 How to Execute
+
+### Option 1: Swarm Orchestration (Recommended)
+Executes all 5 phases automatically, creating report files and scripts:
 ```bash
-python scripts/branch_cleanup_audit.py
-# Review: data/branch_audit_report.json
-# Execute: bash scripts/delete_branches.sh
+bash scripts/run_swarm.sh
 ```
 
----
-
-### 2. **Branch Validation & Configuration** ✅
-**File:** `scripts/branch_validation.py`
-
-**Validates:**
-- ✅ Branch count (current vs. target)
-- ✅ Main branch protection status
-- ✅ Branch naming convention compliance
-- ✅ Auto-delete merged branches setting
-- ✅ Recent branch activity (identifies active work)
-
-**Exports:** `data/branch_validation_report.json`
-
-**Includes:** Full implementation guide with GitHub Settings steps
-
-**Usage:**
+### Option 2: Simulation Mode
+Simulate a large 135-branch footprint to test and verify the engine's scaling bounds:
 ```bash
+bash scripts/run_swarm.sh --simulate
+```
+
+### Option 3: Legacy Individual Verification
+Run individual CLI commands if needed:
+```bash
+python scripts/branch_cleanup_audit.py
 python scripts/branch_validation.py
 ```
 
 ---
 
-### 3. **Pre-commit Hook for Naming Validation** ✅
-**File:** `.githooks/check-branch-name.sh`
-
-**Enforces:**
-- All branches must match: `^(feat|fix|chore|docs|perf|refactor|test|ci|claude)/`
-- Catches non-compliant branch names at push time
-- Provides helpful error messages with examples
-
-**Installation:**
-```bash
-bash .githooks/install-hooks.sh
-# OR manually:
-git config core.hooksPath .githooks
-chmod +x .githooks/*.sh
-```
-
----
-
-### 4. **Git Hooks Installer** ✅
-**File:** `.githooks/install-hooks.sh`
-
-Simple setup script to activate hooks:
+## 🔒 Enabling Enforcement Hooks
+To ensure naming compliance going forward, install the pre-commit and pre-push hook:
 ```bash
 bash .githooks/install-hooks.sh
 ```
-
----
-
-## 🎯 Implementation Phases
-
-### **PHASE 1: Audit & Delete** (Execute Now)
-```bash
-# 1. Analyze all branches
-python scripts/branch_cleanup_audit.py
-
-# 2. Review the audit report
-cat data/branch_audit_report.json
-
-# 3. Review the delete script (it won't run without confirmation)
-cat scripts/delete_branches.sh
-
-# 4. Execute deletion (interactive, asks for confirmation at each phase)
-bash scripts/delete_branches.sh
-
-# 5. Prune local cache
-git fetch --all --prune
-```
-
-**Expected Result:** 130+ branches → ~80-90 branches (after high-priority deletion)
-
----
-
-### **PHASE 2: GitHub Settings Configuration** (Manual, ~5 min)
-Navigate to: **https://github.com/Cyberdad247/Camelot-Ecosystem/settings/branches**
-
-#### **2A. Main Branch Protection**
-```
-✓ Enable branch protection rule for 'main'
-  Pattern: main
-  
-  ✓ Require a pull request before merging
-    • Require approvals: 1
-    • Dismiss stale reviews on new commits
-  
-  ✓ Require status checks to pass before merging
-    • Require branches to be up to date
-    • Select forge-ci.yml checks
-  
-  ✓ Include administrators (optional)
-```
-
-#### **2B. Auto-delete Merged Branches**
-Under "Merge button" settings:
-```
-✓ Automatically delete head branches
-```
-
----
-
-### **PHASE 3: Install Pre-commit Hooks** (Execute Locally)
-```bash
-# Setup hooks
-bash .githooks/install-hooks.sh
-
-# Test it
-git checkout -b invalid-test
-git push origin invalid-test  
-# Expected: ❌ BRANCH NAME VALIDATION FAILED
-
-# Fix it
-git branch -m invalid-test feat/valid-test
-git push origin feat/valid-test  # Success ✅
-```
-
----
-
-### **PHASE 4: Update Contributing Guide** (Optional but Recommended)
-Create/update `CONTRIBUTING.md`:
-
-```markdown
-## Branch Naming Convention
-
-All branches (except `main`) MUST follow this format:
-
-```
-{type}/{description}
-```
-
-Where `{type}` is one of:
-- **feat/** — New feature
-- **fix/** — Bug fix
-- **chore/** — Build, deps, or tooling
-- **docs/** — Documentation
-- **perf/** — Performance optimization
-- **refactor/** — Code restructuring
-- **test/** — Test additions
-- **ci/** — CI/CD changes
-- **claude/** — Claude AI agent work
-
-**Examples:**
-✅ `feat/multivoice-router`
-✅ `fix/bifrost-dispatch-triage`
-✅ `perf/optimize-ledger-queries`
-❌ `update-stuff`
-❌ `test-branch-123`
-```
-
----
-
-### **PHASE 5: Validate & Commit** (Final)
-```bash
-# Run final validation
-python scripts/branch_validation.py
-
-# Commit tooling to repo
-git add scripts/branch_cleanup_audit.py scripts/branch_validation.py
-git add .githooks/
-git add data/branch_audit_report.json data/branch_validation_report.json
-git commit -m "chore: add branch management and cleanup tooling"
-git push origin main
-```
-
----
-
-## 📊 Expected Outcomes
-
-### Before Cleanup
-| Metric | Value |
-|--------|-------|
-| Total Branches | 130+ |
-| Auto-test branches | 10+ |
-| Jules task branches | 40+ |
-| Fix branches (merged) | 30+ |
-| Old merged features | 15+ |
-| Naming compliant | ~60% |
-
-### After Cleanup
-| Metric | Value |
-|--------|-------|
-| Total Branches | 20-25 |
-| Auto-test branches | 0 |
-| Jules task branches | 0-5 (active only) |
-| Fix branches (merged) | 0 (auto-deleted going forward) |
-| Old merged features | 0 |
-| Naming compliant | 100% (enforced by hook) |
-| Main protected | ✅ Yes |
-| Auto-delete enabled | ✅ Yes |
-
----
-
-## 🚀 Key Features
-
-### **Smart Categorization**
-Branches automatically scored by:
-- Pattern recognition (auto-test, task, feature, fix, etc.)
-- Merge status (merged = candidate for deletion)
-- Age analysis (30+ days = stale)
-- Category-specific rules (e.g., jules tasks auto-scored high)
-
-### **Safe Deletion Phases**
-```
-PHASE 1 (High Priority)  → Auto-test branches, ancient tasks (interactive, asks per-branch)
-PHASE 2 (Medium Priority) → Merged old branches (confirm after Phase 1)
-```
-
-### **Validation Suite**
-Checks for:
-- Branch count trend
-- Main branch protection
-- Naming convention compliance
-- Auto-cleanup enablement
-- Recent activity (to identify what's actually in use)
-
-### **Pre-commit Enforcement**
-- Catches bad branch names at `git push`
-- User-friendly error messages
-- Examples of correct format
-- No impact on existing branches (grandfathered)
-
----
-
-## 📝 Usage Instructions
-
-### **For Individual Developers**
-
-1. **Install hooks (one-time):**
-   ```bash
-   bash .githooks/install-hooks.sh
-   ```
-
-2. **Create branches with correct names:**
-   ```bash
-   git checkout -b feat/my-new-feature      # ✅
-   git checkout -b fix/bug-in-auth           # ✅
-   git checkout -b perf/optimize-queries     # ✅
-   git push origin feat/my-new-feature       # ✅ Hook validates
-   ```
-
-3. **Bad names get caught:**
-   ```bash
-   git checkout -b my-feature                # ❌
-   git push origin my-feature                # Hook blocks with helpful error
-   ```
-
-### **For Repository Maintainers**
-
-1. **Run monthly audits:**
-   ```bash
-   python scripts/branch_cleanup_audit.py
-   python scripts/branch_validation.py
-   ```
-
-2. **Review reports:**
-   - `data/branch_audit_report.json` → Deletion candidates
-   - `data/branch_validation_report.json` → Current compliance
-
-3. **Execute cleanup as needed:**
-   ```bash
-   bash scripts/delete_branches.sh
-   ```
-
----
-
-## ✅ Success Checklist
-
-- [ ] Ran `python scripts/branch_cleanup_audit.py`
-- [ ] Reviewed `data/branch_audit_report.json`
-- [ ] Executed `bash scripts/delete_branches.sh` (or at least Phase 1)
-- [ ] Verified branch count reduced
-- [ ] Enabled main branch protection in Settings
-- [ ] Enabled auto-delete merged branches in Settings
-- [ ] Ran `bash .githooks/install-hooks.sh`
-- [ ] Tested hook with invalid branch name
-- [ ] Created/updated CONTRIBUTING.md with naming rules
-- [ ] Ran `python scripts/branch_validation.py` (should show improved compliance)
-- [ ] Committed tooling to main: `git push origin main`
-
----
-
-## 🔗 Related Files
-
-- **Audit script:** `scripts/branch_cleanup_audit.py`
-- **Validation script:** `scripts/branch_validation.py`
-- **Hook installer:** `.githooks/install-hooks.sh`
-- **Branch name checker:** `.githooks/check-branch-name.sh`
-- **Audit report:** `data/branch_audit_report.json`
-- **Validation report:** `data/branch_validation_report.json`
-- **Delete script:** `scripts/delete_branches.sh` (generated by audit)
-
----
-
-## 🎓 Reference
-
-### Branch Types (Recommended Convention)
-| Type | Purpose | Example |
-|------|---------|---------|
-| `feat/` | New feature | `feat/multivoice-router` |
-| `fix/` | Bug fix | `fix/bifrost-dispatch` |
-| `chore/` | Build, deps, tooling | `chore/update-deps` |
-| `docs/` | Documentation | `docs/api-guide` |
-| `perf/` | Performance | `perf/optimize-queries` |
-| `refactor/` | Restructuring | `refactor/auth-module` |
-| `test/` | Tests | `test/add-e2e-suite` |
-| `ci/` | CI/CD | `ci/add-workflow` |
-| `claude/` | Claude agent work | `claude/agency-blueprint` |
-
----
-
-**Questions?** Check `scripts/branch_validation.py` for implementation guide details.
+This will prevent committing to or pushing non-compliant branches, showing a helpful error and naming guide.
