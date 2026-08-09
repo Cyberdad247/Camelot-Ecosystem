@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"strings"
+	"sync"
 	"sync/atomic"
 	"time"
 )
@@ -29,13 +31,56 @@ type Server struct {
 	now      func() time.Time
 	decSeq   atomic.Int64
 	nodeSeq  atomic.Int64
+
+	// Material a tier-3 durable skill will act on, held between the turn and
+	// the human confirmation. Keyed by lease id, memory-only, and dropped the
+	// moment the lease resolves either way — a denied change must not leave
+	// its payload behind. Deliberately NOT on CapabilityLease, which is a wire
+	// type the client sees.
+	pendingMu      sync.Mutex
+	pendingContent map[string]string
+}
+
+func (s *Server) holdContent(leaseID, content string) {
+	s.pendingMu.Lock()
+	defer s.pendingMu.Unlock()
+	if s.pendingContent == nil {
+		s.pendingContent = map[string]string{}
+	}
+	s.pendingContent[leaseID] = content
+}
+
+func (s *Server) takeContent(leaseID string) string {
+	s.pendingMu.Lock()
+	defer s.pendingMu.Unlock()
+	content := s.pendingContent[leaseID]
+	delete(s.pendingContent, leaseID)
+	return content
+}
+
+// defaultEffectRoot is where durable local effects land. It sits under the
+// existing .run/ runtime root rather than introducing a second one, so the
+// teardown and .gitignore rules that already exist cover it.
+const defaultEffectRoot = ".run/artifacts"
+
+func effectRootFromEnv() string {
+	if root := os.Getenv("CAMELOT_EFFECT_ROOT"); root != "" {
+		return root
+	}
+	return defaultEffectRoot
 }
 
 func NewServer(chunkDelay time.Duration, now func() time.Time) *Server {
+	return NewServerWithEffectRoot(chunkDelay, now, effectRootFromEnv())
+}
+
+// NewServerWithEffectRoot pins where durable effects are written. Tests use a
+// temp dir so a governed write is observable without touching the repo.
+func NewServerWithEffectRoot(chunkDelay time.Duration, now func() time.Time, effectRoot string) *Server {
 	leases := NewLeaseStore(now)
 	return &Server{
 		leases:   leases,
-		broker:   NewToolBroker(leases),
+		broker:   NewToolBroker(leases, NewEffectStore(effectRoot)),
 		audit:    NewAuditLog(now),
 		sessions: NewSessionHub(chunkDelay),
 		models:   NewModelRouter(chunkDelay), // deterministic-only default
@@ -54,7 +99,7 @@ func NewPersistentServer(chunkDelay time.Duration, now func() time.Time, auditDB
 	leases := NewLeaseStore(now)
 	return &Server{
 		leases:   leases,
-		broker:   NewToolBroker(leases),
+		broker:   NewToolBroker(leases, NewEffectStore(effectRootFromEnv())),
 		audit:    audit,
 		sessions: NewSessionHub(chunkDelay),
 		models:   NewModelRouter(chunkDelay),
@@ -108,6 +153,31 @@ func (s *Server) nextDecision(effect, skillID string, tier int, reason string) P
 	}
 }
 
+// auditExecutionRefused records a refused or failed execution. A denial is a
+// governance event with exactly the same evidentiary weight as a success: if
+// only successes are recorded, the log answers "what happened" but not "what
+// was stopped". The skill's own redaction rule still applies.
+func (s *Server) auditExecutionRefused(sessionID, turnID string, skill Skill, leaseID string, cause error) AuditEvent {
+	decision := s.nextDecision("deny", skill.ID, skill.Tier, "execution refused: "+cause.Error())
+	event := s.audit.Append(auditEntry{
+		SessionID:       sessionID,
+		TurnID:          turnID,
+		Kind:            "tool.refused",
+		RedactedSummary: fmt.Sprintf("%s refused for %s: %v", skill.ID, leaseIDOrNone(leaseID), cause),
+		Decision:        &decision,
+		LeaseID:         leaseID,
+	})
+	s.publishDecisionAndAudit(sessionID, turnID, decision, event)
+	return event
+}
+
+func leaseIDOrNone(leaseID string) string {
+	if leaseID == "" {
+		return "no lease"
+	}
+	return "lease " + leaseID
+}
+
 func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 	var turn VoiceTurn
 	if err := json.NewDecoder(r.Body).Decode(&turn); err != nil {
@@ -158,8 +228,9 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 	case !skill.Effectful:
 		// Tier 1: read-only, no lease required (ADR-001 rule 1).
 		decision := s.nextDecision("allow", skill.ID, skill.Tier, "tier-1 read-only skill; no lease required")
-		artifact, reply, err := s.broker.Execute(skill.ID, turn.TurnID, nil)
+		artifact, reply, err := s.broker.Execute(skill.ID, turn.TurnID, turn.Transcript, nil)
 		if err != nil {
+			s.auditExecutionRefused(turn.SessionID, turn.TurnID, skill, "", err)
 			httpError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
@@ -186,6 +257,8 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 		// Tier 3: pending lease, human must confirm before anything executes.
 		decision := s.nextDecision("requires_confirmation", skill.ID, skill.Tier, "tier-3 skills require human confirmation")
 		lease := s.leases.Issue(turn.SessionID, turn.TurnID, capability, false)
+		// Hold what a durable skill would act on until the human decides.
+		s.holdContent(lease.LeaseID, turn.Transcript)
 		auditEvent := s.audit.Append(auditEntry{
 			SessionID:       turn.SessionID,
 			TurnID:          turn.TurnID,
@@ -213,8 +286,13 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 		decision := s.nextDecision("allow", skill.ID, skill.Tier, "tier-2 draft; short-lived lease auto-approved")
 		lease := s.leases.Issue(turn.SessionID, turn.TurnID, capability, true)
 		s.sessions.Publish(turn.SessionID, SessionEvent{Type: "lease.issued", Lease: &lease})
-		artifact, reply, err := s.broker.Execute(skill.ID, turn.TurnID, &lease)
+		artifact, reply, err := s.broker.Execute(skill.ID, turn.TurnID, turn.Transcript, &lease)
 		if err != nil {
+			// A refused or failed effectful execution is itself a governance
+			// event: it must leave a record, and the lease must not survive
+			// to be retried with.
+			s.leases.Revoke(lease.LeaseID)
+			s.auditExecutionRefused(turn.SessionID, turn.TurnID, skill, lease.LeaseID, err)
 			httpError(w, http.StatusForbidden, err.Error())
 			return
 		}
@@ -225,7 +303,11 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 			TurnID:          turn.TurnID,
 			Kind:            "tool.executed",
 			Transcript:      turn.Transcript, // hashed only — tier 2
-			RedactedSummary: fmt.Sprintf("tier-2 %s executed under lease %s; artifact %s", skill.ID, lease.LeaseID, artifact.ID),
+			// artifact.Summary carries the EFFECT RESULT for durable skills
+			// (path, size, digest) — never the material acted on. Recording
+			// only the artifact id would prove a turn happened but not what
+			// it did.
+			RedactedSummary: fmt.Sprintf("tier-2 %s executed under lease %s; artifact %s: %s", skill.ID, lease.LeaseID, artifact.ID, artifact.Summary),
 			Decision:        &decision,
 			LeaseID:         lease.LeaseID,
 		})
@@ -280,6 +362,7 @@ func (s *Server) handleBargeIn(w http.ResponseWriter, r *http.Request) {
 
 	revoked := s.leases.RevokeUnusedForTurn(event.TurnID)
 	for _, leaseID := range revoked {
+		s.takeContent(leaseID) // barge-in discards the pending payload too
 		s.sessions.Publish(event.SessionID, SessionEvent{Type: "lease.revoked", LeaseID: leaseID, Reason: "barge-in"})
 	}
 
@@ -318,6 +401,8 @@ func (s *Server) handleConfirmation(w http.ResponseWriter, r *http.Request) {
 			httpError(w, http.StatusConflict, "lease cannot be denied in its current state")
 			return
 		}
+		// A denied change leaves nothing of itself behind.
+		s.takeContent(req.LeaseID)
 		s.sessions.Publish(req.SessionID, SessionEvent{Type: "lease.revoked", LeaseID: lease.LeaseID, Reason: "denied by user"})
 		auditEvent := s.audit.Append(auditEntry{
 			SessionID:       req.SessionID,
@@ -337,8 +422,11 @@ func (s *Server) handleConfirmation(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	skillID := strings.TrimPrefix(lease.Capability, "skill:")
-	artifact, reply, err := s.broker.Execute(skillID, lease.TurnID, &lease)
+	skill, _ := skillByID(skillID)
+	artifact, reply, err := s.broker.Execute(skillID, lease.TurnID, s.takeContent(lease.LeaseID), &lease)
 	if err != nil {
+		s.leases.Revoke(lease.LeaseID)
+		s.auditExecutionRefused(req.SessionID, lease.TurnID, skill, lease.LeaseID, err)
 		httpError(w, http.StatusForbidden, err.Error())
 		return
 	}

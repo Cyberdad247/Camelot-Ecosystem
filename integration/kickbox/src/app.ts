@@ -316,6 +316,9 @@ for (const [id, text] of [
   ['quick-staging', FIXTURE_UTTERANCES.stagingRead],
   ['quick-review', FIXTURE_UTTERANCES.deploymentReview],
   ['quick-cr', FIXTURE_UTTERANCES.changeRequest],
+  // The only quick action with a real side effect: it writes a file under
+  // .run/artifacts/ through the same lease -> broker -> audit path.
+  ['quick-note', FIXTURE_UTTERANCES.localNote],
 ] as const) {
   $(id).onclick = () => void submitUtterance(text);
 }
