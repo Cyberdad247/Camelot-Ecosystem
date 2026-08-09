@@ -1,10 +1,15 @@
 // Deterministic fixtures for the no-API-key demo and for tests.
 //
-// The gateway's Hermes adapter (integration/gateway/hermes.go) mirrors
-// INTENT_FIXTURES exactly — if you change a phrase or skill mapping here,
-// change it there too (T-fixture parity is asserted in gateway tests).
+// The skill catalog itself is GENERATED from contracts/skills.manifest.json
+// into skills.gen.ts, and the Go gateway generates its registry from the same
+// manifest. The two can no longer drift, so the hand-maintained parity table
+// this file used to require is gone.
 
 import type { SkillTier, VoiceBargeIn, VoiceTurn } from './types.js';
+import { SKILLS, type SkillDefinition } from './skills.gen.js';
+
+export { SKILLS, skillById, MANIFEST_VERSION, MANIFEST_POLICY_VERSION } from './skills.gen.js';
+export type { SkillDefinition, SkillEffect } from './skills.gen.js';
 
 export const FIXTURE_SESSION_ID = 'sess-anya-demo-001';
 
@@ -17,50 +22,61 @@ export interface IntentFixture {
   confirmationRequired: boolean;
 }
 
-/** Bootstrap skills (ADR-001 / bootstrap-plan §3). Order matters: first match wins. */
-export const INTENT_FIXTURES: readonly IntentFixture[] = [
-  {
-    match: 'staging',
-    skillId: 'ops.staging.read',
-    tier: 1,
-    effectful: false,
-    confirmationRequired: false,
-  },
-  {
-    match: 'deployment review',
-    skillId: 'deployment.review.prepare',
-    tier: 2,
-    effectful: true,
-    confirmationRequired: false,
-  },
-  {
-    match: 'change request',
-    skillId: 'change_request.create',
-    tier: 3,
-    effectful: true,
-    confirmationRequired: true,
-  },
-] as const;
+/** Bootstrap skills, projected from the generated catalog. Kept for the
+ *  existing consumers; new code should read SKILLS directly. */
+export const INTENT_FIXTURES: readonly IntentFixture[] = SKILLS.map((s) => ({
+  match: s.phrases[0] as string,
+  skillId: s.id,
+  tier: s.tier,
+  effectful: s.effectful,
+  confirmationRequired: s.confirmationRequired,
+}));
 
-/** Demo utterances wired to the three bootstrap skills. */
+/** Demo utterances wired to the bootstrap skills. */
 export const FIXTURE_UTTERANCES = {
   stagingRead: 'read staging status',
   deploymentReview: 'prepare a deployment review for the voice slice',
   changeRequest: 'create a change request to scale the api tier',
+  localNote: 'save a note about the staging rollout',
 } as const;
 
-/** Resolve a transcript to an intent fixture, or null for small talk.
- *  Longest match wins (mirrors gateway hermes.go): "prepare a staging
- *  deployment review" is the tier-2 review skill, not the staging read. */
-export function matchIntent(transcript: string): IntentFixture | null {
+/** Resolve a transcript to a skill, or null for small talk.
+ *
+ *  Mirrors hermesMatchIntent in gateway/hermes.go exactly, including the
+ *  tie-breaks: longest matching phrase, then higher priority, then lexically
+ *  lower id. Both sides read the same generated catalog, so agreement is
+ *  structural rather than asserted. */
+export function matchSkill(transcript: string): SkillDefinition | null {
   const t = transcript.toLowerCase();
-  let best: IntentFixture | null = null;
-  for (const f of INTENT_FIXTURES) {
-    if (t.includes(f.match) && (best === null || f.match.length > best.match.length)) {
-      best = f;
+  let best: SkillDefinition | null = null;
+  let bestLen = 0;
+  for (const s of SKILLS) {
+    for (const phrase of s.phrases) {
+      if (!t.includes(phrase)) continue;
+      const better =
+        phrase.length > bestLen ||
+        (phrase.length === bestLen && best !== null && s.priority > best.priority) ||
+        (phrase.length === bestLen && best !== null && s.priority === best.priority && s.id < best.id);
+      if (best === null || better) {
+        best = s;
+        bestLen = phrase.length;
+      }
     }
   }
   return best;
+}
+
+/** Back-compat projection of matchSkill onto the older fixture shape. */
+export function matchIntent(transcript: string): IntentFixture | null {
+  const s = matchSkill(transcript);
+  if (s === null) return null;
+  return {
+    match: s.phrases[0] as string,
+    skillId: s.id,
+    tier: s.tier,
+    effectful: s.effectful,
+    confirmationRequired: s.confirmationRequired,
+  };
 }
 
 /** Build a deterministic text-first turn. `n` numbers the turn within the session. */
