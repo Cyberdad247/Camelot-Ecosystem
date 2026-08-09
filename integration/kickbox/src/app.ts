@@ -46,6 +46,13 @@ const HERMES_URL = params.get('hermes') ?? `http://${location.hostname}:8790`;
 const client = new CamelotClient({ baseUrl: GATEWAY_URL });
 
 let view: SessionView = initialSessionView();
+// One session per page load. The fixture id is a stable DEMO label, not an
+// identity: sharing it across reloads and browser tabs made concurrent
+// consoles interleave in one server-side session, and made every reload
+// restart the turn counter at the same ids. Suffixing keeps the fixture
+// recognisable while making each console distinct.
+const SESSION_ID = `${FIXTURE_SESSION_ID}-${Math.random().toString(36).slice(2, 8)}`;
+
 let turnCounter = 0;
 let lastDecision: PolicyDecision | null = null;
 
@@ -143,7 +150,7 @@ async function submitUtterance(
 ): Promise<CamelotTurnResponse | null> {
   if (!text.trim()) return null;
   turnCounter += 1;
-  const base = fixtureTurn(text, turnCounter);
+  const base = fixtureTurn(text, turnCounter, SESSION_ID);
   const turn: VoiceTurn = meta
     ? { ...base, modality: 'voice', audioSha256: meta.audioSha256 }
     : base;
@@ -279,7 +286,7 @@ stopSpeakingBtn.onclick = () => void voiceSession.stopSpeaking();
 
 const spokenTurns = new Set<string>();
 
-client.connectEvents(FIXTURE_SESSION_ID, (event) => {
+client.connectEvents(SESSION_ID, (event) => {
   view = reduceSessionEvent(view, event);
   if (event.type === 'reply.chunk') {
     anyaBubbleFor(event.turnId).textContent = view.replies[event.turnId] ?? '';
@@ -344,7 +351,7 @@ async function resolveLease(approve: boolean): Promise<void> {
   if (!lease) return;
   try {
     const res = await client.confirm({
-      sessionId: FIXTURE_SESSION_ID,
+      sessionId: SESSION_ID,
       leaseId: lease.leaseId,
       approve,
     });

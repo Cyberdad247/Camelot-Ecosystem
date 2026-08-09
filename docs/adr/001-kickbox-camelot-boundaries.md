@@ -146,25 +146,39 @@ against a consequence. Two rules follow from giving it one.
    `idempotency: lease_single_use`. The generator refuses a manifest that
    violates any of these, and the Go and TS suites assert them independently.
 
-3. **The path is never an input.** A durable skill cannot name a location. The
-   broker derives it from `skillId + turnId` beneath a fixed root under the
-   existing `.run/` runtime directory — no second runtime root, so the
-   teardown and ignore rules that already exist continue to apply. Size is
-   capped. An allow-list is a check that can be forgotten; an absent parameter
-   cannot be attacked.
+3. **The path is never an input, and it is named after the authorization.** A
+   durable skill cannot name a location. The broker derives it from the skill
+   id and the **lease id** beneath a fixed root under the existing `.run/`
+   runtime directory — no second runtime root, so the teardown and ignore
+   rules that already exist continue to apply. Size is capped.
 
-4. **Governed artifacts are write-once.** The single-use lease makes a
-   *lease* unreplayable, but it cannot stop a client re-submitting the same
-   turn id and being issued a fresh lease. Without a write-once rule the
-   second action would silently destroy the first one's evidence. The effect
-   store hard-links into place, which is atomic and refuses to replace; the
-   duplicate fails closed and is audited.
+   Naming it after the *turn* was wrong: a turn id is client-supplied, so two
+   tabs, a page reload, or a hostile caller can reuse one. Combined with a
+   write-once rule that meant a reload failed closed until someone wiped the
+   runtime directory, and any caller could pre-claim a name to block future
+   governed writes. A lease id is minted by the policy kernel, is unique per
+   authorized action, and cannot be chosen by the caller. One authorization,
+   one artifact.
+
+4. **No action may destroy another's evidence.** Artifacts are write-once:
+   the store hard-links into place, which is atomic and refuses to replace.
+   With lease-derived names this is unreachable in normal operation — it
+   remains because the failure it prevents leaves no trace of having happened.
+   A re-submitted turn is a *second* authorization and correctly produces a
+   second artifact; what must never occur is the first being overwritten.
 
 5. **A refusal is a record.** A refused or failed execution is a governance
-   event with the same evidentiary weight as a success, and it revokes the
-   lease it failed under. Previously such a path returned `403` and wrote
-   nothing to the audit log, so the log could answer "what happened" but not
-   "what was stopped".
+   event with the same evidentiary weight as a success — the same fields
+   included, so it carries the transcript hash and can be tied back to what
+   was asked — and it revokes the lease it failed under. Previously such a
+   path returned `403` and wrote nothing to the audit log, so the log could
+   answer "what happened" but not "what was stopped".
+
+7. **Held material cannot outlive its lease.** A tier-3 payload waiting on
+   human confirmation is kept in memory keyed by lease id. Approval, denial,
+   and barge-in all release it; a lease that merely *expires* releases nothing,
+   so the hold is swept against the lease TTL. Retention is bounded by the
+   authorization that justified it.
 
 6. **The audit records the effect result, never the material.** For a durable
    skill that means the relative path, byte count, and digest — enough to

@@ -15,10 +15,11 @@ CAMELOT_TENANT_ID=${CAMELOT_TENANT_ID:-local}
 SESSION=sess-anya-demo-001
 # smoke.sh stays standalone (no lib.sh) so it can run against any stack; the
 # artifact root follows the same override-with-default convention.
-ARTIFACTS=${ARTIFACTS:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/.run/artifacts}
-# Governed artifacts are write-once, so the durable check needs a fresh turn id
-# per run or a re-run would (correctly) be refused by the rule it is testing.
+# The gateway honours CAMELOT_EFFECT_ROOT, and dev-up passes the environment
+# through, so smoke must look where the gateway was actually told to write.
+ARTIFACTS=${ARTIFACTS:-${CAMELOT_EFFECT_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/.run/artifacts}}
 NOTE_TURN="smoke-note-$(date +%s%N)"
+NOTE_DIR="$ARTIFACTS/notes.local.write"
 
 pass=0
 step() { printf '── %s\n' "$1"; }
@@ -76,9 +77,11 @@ r=$(curl -sf -X POST "$GATEWAY/v1/voice/turns" -H 'content-type: application/jso
   \"transcript\":\"save a note about the smoke run\",\"startedAtMs\":1}")
 [[ $(echo "$r" | json "['decision']['skillId']") == notes.local.write ]] || fail "note turn did not resolve to the durable skill"
 [[ $(echo "$r" | json "['lease']['status']") == consumed ]] || fail "note lease not consumed"
-NOTE="$ARTIFACTS/notes.local.write/$NOTE_TURN.txt"
-[[ -s $NOTE ]] || fail "no file was written at $NOTE"
-ok "governed write produced $(wc -c <"$NOTE") bytes at notes.local.write/$NOTE_TURN.txt"
+# Artifacts are named from the LEASE (plus a per-process run id), not the
+# turn, so locate the new one rather than reconstructing a server-owned name.
+NOTE=$(ls -t "$NOTE_DIR"/*.txt 2>/dev/null | head -1)
+[[ -n $NOTE && -s $NOTE ]] || fail "no file was written under $NOTE_DIR"
+ok "governed write produced $(wc -c <"$NOTE") bytes at notes.local.write/$(basename "$NOTE")"
 
 # The audit records WHAT the effect did (size + digest), not the material.
 a=$(curl -sf "$GATEWAY/v1/audit/$(echo "$r" | json "['auditId']")")
@@ -88,18 +91,20 @@ summary=$(echo "$a" | json "['redactedSummary']")
 [[ $(echo "$a" | json "['transcriptSha256']") != "" ]] || fail "audit lacks the transcript hash"
 ok "audit carries size+digest, not the body"
 
-# Re-submit the same turn id with different content. A fresh lease is minted
-# (the single-use lease only stops LEASE replay), so the write-once artifact
-# rule is what has to hold here: refused, audited, original intact.
+# Re-submit the SAME turn id with different content. Policy mints a second
+# lease, so this is a second authorized action: it gets its own artifact and
+# must not disturb the first. Naming artifacts after the lease rather than the
+# turn is what makes that true - and is why a page reload no longer collides.
 before=$(sha256sum "$NOTE" | cut -d" " -f1)
-code=$(curl -s -o /dev/null -w '%{http_code}' -X POST "$GATEWAY/v1/voice/turns" \
-  -H 'content-type: application/json' -d "{
+count_before=$(ls "$NOTE_DIR"/*.txt | wc -l)
+curl -sf -X POST "$GATEWAY/v1/voice/turns" -H 'content-type: application/json' -d "{
   \"sessionId\":\"$SESSION\",\"turnId\":\"$NOTE_TURN\",\"modality\":\"text\",
-  \"transcript\":\"save a note REPLAYED with different content\",\"startedAtMs\":1}")
+  \"transcript\":\"save a note RESUBMITTED with different content\",\"startedAtMs\":1}" >/dev/null
 after=$(sha256sum "$NOTE" | cut -d" " -f1)
-[[ $before == $after ]] || fail "replay overwrote the governed artifact"
-[[ $code == 403 ]] || fail "duplicate governed write was not refused (got $code)"
-ok "re-submitted turn refused (403); original artifact intact"
+count_after=$(ls "$NOTE_DIR"/*.txt | wc -l)
+[[ $before == $after ]] || fail "re-submitted turn altered the earlier artifact"
+(( count_after == count_before + 1 )) || fail "second authorization did not produce its own artifact"
+ok "re-submitted turn wrote a separate artifact; the first is untouched"
 
 step "5. Barge-in revokes unused lease"
 r=$(curl -sf -X POST "$GATEWAY/v1/voice/turns" -H 'content-type: application/json' -d "{

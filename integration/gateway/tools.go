@@ -49,7 +49,8 @@ func (b *ToolBroker) Execute(skillID, turnID, content string, lease *CapabilityL
 	}
 
 	if skill.Durable {
-		return runDurableSkill(skill, turnID, content, b.effects)
+		// The lease id names the artifact: one authorization, one artifact.
+		return runDurableSkill(skill, turnID, lease.LeaseID, content, b.effects)
 	}
 	artifact, reply := runSkill(skill, turnID)
 	return artifact, reply, nil

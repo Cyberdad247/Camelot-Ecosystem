@@ -34,28 +34,48 @@ type Server struct {
 
 	// Material a tier-3 durable skill will act on, held between the turn and
 	// the human confirmation. Keyed by lease id, memory-only, and dropped the
-	// moment the lease resolves either way — a denied change must not leave
-	// its payload behind. Deliberately NOT on CapabilityLease, which is a wire
-	// type the client sees.
+	// moment the lease resolves. Deliberately NOT on CapabilityLease, which is
+	// a wire type the client sees.
 	pendingMu      sync.Mutex
-	pendingContent map[string]string
+	pendingContent map[string]pendingPayload
+}
+
+type pendingPayload struct {
+	content string
+	heldAt  time.Time
+}
+
+// A lease that is neither approved, denied, nor barged-in simply EXPIRES, and
+// nothing calls takeContent for it. Without a sweep the payload of every
+// abandoned tier-3 turn would sit in memory for the process lifetime — which
+// is exactly the retention the ADR says this map must not have. A held
+// payload cannot outlive the lease that justified it.
+func (s *Server) sweepPendingLocked() {
+	cutoff := s.now().Add(-leaseTTL)
+	for id, p := range s.pendingContent {
+		if p.heldAt.Before(cutoff) {
+			delete(s.pendingContent, id)
+		}
+	}
 }
 
 func (s *Server) holdContent(leaseID, content string) {
 	s.pendingMu.Lock()
 	defer s.pendingMu.Unlock()
 	if s.pendingContent == nil {
-		s.pendingContent = map[string]string{}
+		s.pendingContent = map[string]pendingPayload{}
 	}
-	s.pendingContent[leaseID] = content
+	s.sweepPendingLocked()
+	s.pendingContent[leaseID] = pendingPayload{content: content, heldAt: s.now()}
 }
 
 func (s *Server) takeContent(leaseID string) string {
 	s.pendingMu.Lock()
 	defer s.pendingMu.Unlock()
-	content := s.pendingContent[leaseID]
+	p := s.pendingContent[leaseID]
 	delete(s.pendingContent, leaseID)
-	return content
+	s.sweepPendingLocked()
+	return p.content
 }
 
 // defaultEffectRoot is where durable local effects land. It sits under the
@@ -157,12 +177,15 @@ func (s *Server) nextDecision(effect, skillID string, tier int, reason string) P
 // governance event with exactly the same evidentiary weight as a success: if
 // only successes are recorded, the log answers "what happened" but not "what
 // was stopped". The skill's own redaction rule still applies.
-func (s *Server) auditExecutionRefused(sessionID, turnID string, skill Skill, leaseID string, cause error) AuditEvent {
+func (s *Server) auditExecutionRefused(sessionID, turnID string, skill Skill, leaseID, transcript string, cause error) AuditEvent {
 	decision := s.nextDecision("deny", skill.ID, skill.Tier, "execution refused: "+cause.Error())
 	event := s.audit.Append(auditEntry{
-		SessionID:       sessionID,
-		TurnID:          turnID,
-		Kind:            "tool.refused",
+		SessionID: sessionID,
+		TurnID:    turnID,
+		Kind:      "tool.refused",
+		// Same evidentiary weight as a success means the same fields: without
+		// the transcript hash a refusal cannot be tied back to what was asked.
+		Transcript:      transcript,
 		RedactedSummary: fmt.Sprintf("%s refused for %s: %v", skill.ID, leaseIDOrNone(leaseID), cause),
 		Decision:        &decision,
 		LeaseID:         leaseID,
@@ -230,7 +253,7 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 		decision := s.nextDecision("allow", skill.ID, skill.Tier, "tier-1 read-only skill; no lease required")
 		artifact, reply, err := s.broker.Execute(skill.ID, turn.TurnID, turn.Transcript, nil)
 		if err != nil {
-			s.auditExecutionRefused(turn.SessionID, turn.TurnID, skill, "", err)
+			s.auditExecutionRefused(turn.SessionID, turn.TurnID, skill, "", turn.Transcript, err)
 			httpError(w, http.StatusInternalServerError, err.Error())
 			return
 		}
@@ -292,17 +315,17 @@ func (s *Server) handleTurn(w http.ResponseWriter, r *http.Request) {
 			// event: it must leave a record, and the lease must not survive
 			// to be retried with.
 			s.leases.Revoke(lease.LeaseID)
-			s.auditExecutionRefused(turn.SessionID, turn.TurnID, skill, lease.LeaseID, err)
+			s.auditExecutionRefused(turn.SessionID, turn.TurnID, skill, lease.LeaseID, turn.Transcript, err)
 			httpError(w, http.StatusForbidden, err.Error())
 			return
 		}
 		consumed, _ := s.leases.Get(lease.LeaseID)
 		s.sessions.Publish(turn.SessionID, SessionEvent{Type: "lease.consumed", LeaseID: lease.LeaseID})
 		auditEvent := s.audit.Append(auditEntry{
-			SessionID:       turn.SessionID,
-			TurnID:          turn.TurnID,
-			Kind:            "tool.executed",
-			Transcript:      turn.Transcript, // hashed only — tier 2
+			SessionID:  turn.SessionID,
+			TurnID:     turn.TurnID,
+			Kind:       "tool.executed",
+			Transcript: turn.Transcript, // hashed only — tier 2
 			// artifact.Summary carries the EFFECT RESULT for durable skills
 			// (path, size, digest) — never the material acted on. Recording
 			// only the artifact id would prove a turn happened but not what
@@ -423,10 +446,11 @@ func (s *Server) handleConfirmation(w http.ResponseWriter, r *http.Request) {
 	}
 	skillID := strings.TrimPrefix(lease.Capability, "skill:")
 	skill, _ := skillByID(skillID)
-	artifact, reply, err := s.broker.Execute(skillID, lease.TurnID, s.takeContent(lease.LeaseID), &lease)
+	content := s.takeContent(lease.LeaseID)
+	artifact, reply, err := s.broker.Execute(skillID, lease.TurnID, content, &lease)
 	if err != nil {
 		s.leases.Revoke(lease.LeaseID)
-		s.auditExecutionRefused(req.SessionID, lease.TurnID, skill, lease.LeaseID, err)
+		s.auditExecutionRefused(req.SessionID, lease.TurnID, skill, lease.LeaseID, content, err)
 		httpError(w, http.StatusForbidden, err.Error())
 		return
 	}

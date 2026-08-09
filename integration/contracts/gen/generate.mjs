@@ -19,7 +19,10 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
-const MANIFEST = `${here}../skills.manifest.json`;
+// CAMELOT_SKILLS_MANIFEST lets a caller validate a candidate manifest without
+// touching the committed one — tests need that, and mutating the real file
+// would race with any suite that reads it from a parallel worker.
+const MANIFEST = process.env.CAMELOT_SKILLS_MANIFEST || `${here}../skills.manifest.json`;
 
 const VALID_EFFECTS = new Set(['read_only', 'local_effect', 'remote_effect']);
 const VALID_IDEMPOTENCY = new Set(['natural', 'lease_single_use']);
@@ -55,6 +58,12 @@ function validate(m) {
     }
     // Tier 3 without confirmation would silently downgrade a human gate.
     if (s.tier === 3 && !s.confirmationRequired) errors.push(`${at}: tier 3 requires confirmationRequired:true`);
+    // THE ONE THAT MATTERS MOST. Tier is what the broker gates on, so a
+    // tier-1 durable skill would take the no-lease branch in handleTurn and
+    // produce a real side effect with no authorization at all.
+    if (s.effect !== 'read_only' && s.tier < 2) {
+      errors.push(`${at}: effect ${s.effect} requires tier >= 2 — tier 1 runs without a lease`);
+    }
     // A durable effect that is retryable would let one approval act twice.
     if (s.effect !== 'read_only' && s.retry !== 'never') {
       errors.push(`${at}: effect ${s.effect} must set retry:"never"`);

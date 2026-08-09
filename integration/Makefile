@@ -47,7 +47,10 @@ test-ts:
 	npx vitest run
 
 test-go:
-	cd gateway && gofmt -l . && go vet ./... && go test ./... -count=1
+	# gofmt -l prints offenders but exits 0 — the check has to be the emptiness
+	# of its output, or unformatted code sails through `make test`.
+	cd gateway && test -z "$$(gofmt -l .)" || { echo "gofmt: unformatted files:"; gofmt -l gateway; exit 1; }
+	cd gateway && go vet ./... && go test ./... -count=1
 
 test-rust:
 	cd .. && cargo test -p camelot-node-agent

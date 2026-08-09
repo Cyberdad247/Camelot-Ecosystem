@@ -150,7 +150,7 @@ func TestEveryDurableSkillHasAnImplementation(t *testing.T) {
 		if !s.Durable {
 			continue
 		}
-		_, _, err := runDurableSkill(s, "turn-impl", "probe content", NewEffectStore(t.TempDir()))
+		_, _, err := runDurableSkill(s, "turn-impl", "lease-impl", "probe content", NewEffectStore(t.TempDir()))
 		if err != nil {
 			t.Fatalf("%s: durable skill has no working implementation: %v", s.ID, err)
 		}

@@ -51,13 +51,13 @@ func runSkill(skill Skill, turnID string) (SkillArtifact, string) {
 // and only after the single-use lease has already been consumed — so a
 // failure here is terminal for this turn by design: there is no lease left to
 // retry with, and manufacturing one would let a single approval act twice.
-func runDurableSkill(skill Skill, turnID, content string, effects *EffectStore) (SkillArtifact, string, error) {
+func runDurableSkill(skill Skill, turnID, leaseID, content string, effects *EffectStore) (SkillArtifact, string, error) {
 	if effects == nil {
 		return SkillArtifact{}, "", fmt.Errorf("skill %s is durable but no effect store is configured", skill.ID)
 	}
 	switch skill.ID {
 	case "notes.local.write":
-		res, err := effects.WriteNote(skill.ID, turnID, content)
+		res, err := effects.WriteNote(skill.ID, leaseID, content)
 		if err != nil {
 			return SkillArtifact{}, "", err
 		}
