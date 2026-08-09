@@ -64,9 +64,24 @@ sequenceDiagram
 - **Leases**: 30 s TTL, single-use, HMAC-signed, `pending → approved →
   consumed | revoked | expired`. Every effectful action needs one; tier-1
   reads do not.
-- **Bootstrap skills**: `ops.staging.read` (tier 1, allow),
+- **Skill catalog**: declared once in `contracts/skills.manifest.json`; the Go
+  registry and the TS contract are generated from it and committed. Adding a
+  skill is one manifest edit plus, at most, one behavior case — no parity
+  table to maintain. `make test` fails if the generated files drift.
+  Current catalog: `ops.staging.read` (tier 1, allow),
   `deployment.review.prepare` (tier 2, auto-approved lease),
-  `change_request.create` (tier 3, human confirmation).
+  `change_request.create` (tier 3, human confirmation),
+  `notes.local.write` (tier 2, **durable** — writes a real file).
+- **Tier vs effect**: tier says *who must approve*; `effect`
+  (`read_only | local_effect | remote_effect`) says *how far the consequence
+  travels*. They are independent — a tier-2 draft is lease-gated but changes
+  nothing outside memory.
+- **Durable effects**: the path is never an input. The broker derives it from
+  `skillId + turnId` under `.run/artifacts/`, size-capped, and artifacts are
+  **write-once** (hard-link, refuses to replace). A re-submitted turn id is
+  refused and audited rather than silently overwriting the earlier action.
+- **Refusals are recorded**: a refused or failed execution appends a
+  `tool.refused` audit event and revokes the lease it failed under.
 - **Barge-in** (`POST /v1/voice/barge-in`, mock event in the console):
   cancels the streaming reply and revokes all unused leases for the turn.
 - **Audit**: hash-chained (`prevHash`/`hash`), redacted — tier ≥ 2 records
@@ -160,7 +175,42 @@ cd integration && make test   # TS (vitest) + Go (go test -count=1) + Rust (both
 | T5 CPU when Vulkan unavailable | `node-agent/tests/fallback.rs` (run with and without `--features vulkan`) |
 | T6 audit redaction + chain | `gateway/audit_test.go` |
 | Audit persistence across restart + tamper refusal | `gateway/store_test.go` |
-| T7 end-to-end smoke | `scripts/smoke.sh` (11 checks) |
+| Manifest drift / generated contracts | `scripts/check-generated.sh` (runs in `make test`) |
+| Catalog invariants (tier↔effectful, tier-3 gate, durable⇒lease+no-retry) | `gateway/broker_test.go` `TestSkillRegistryInvariants`, `contracts/tests/skills-manifest.test.ts` |
+| Intent precedence, no shadowing | `contracts/tests/skills-manifest.test.ts` |
+| Durable write: file + audit result, no body leak | `gateway/effects_test.go` `TestGovernedWriteProducesFileAndAudit` |
+| Refused write leaves no file, is audited | `gateway/effects_test.go` `TestRefusedLeaveNoFileAndAreAudited`, `TestRefusedExecutionIsAudited` |
+| Lease replay cannot write twice | `gateway/effects_test.go` `TestReplayedEffectfulRequestCannotWriteTwice` |
+| Artifacts are write-once (turn re-submit) | `gateway/effects_test.go` `TestGovernedArtifactsAreWriteOnce`, `TestResubmittedTurnCannotOverwriteTheArtifact` |
+| Derived path cannot traverse; size cap | `gateway/effects_test.go` |
+| Teardown kills only our PIDs | `scripts/tests/lifecycle.test.ts` |
+| T7 end-to-end smoke | `scripts/smoke.sh` (15 local-only · 26 with voice + mesh) |
+
+## Adding a skill
+
+One manifest edit, then regenerate. There is no parity table and no second
+place to remember.
+
+```bash
+# 1. Declare it in integration/contracts/skills.manifest.json
+# 2. Regenerate the Go registry and the TS catalog (both are committed)
+make generate
+# 3. Implement behavior in gateway/skills.go:
+#      read_only / non-durable -> add a case to runSkill
+#      local_effect            -> add a case to runDurableSkill
+make test
+```
+
+The generator refuses a manifest that would weaken policy — tier 3 without
+confirmation, a durable skill that is retryable or not lease-gated, a phrase
+claimed by two skills, a non-lower-cased phrase. Those same invariants are
+asserted independently by the Go and TypeScript suites, so a hand-edited
+generated file cannot smuggle them past either.
+
+**Intent precedence** is a total order, so a new phrase can never silently
+shadow an existing skill: longest matching phrase wins, then higher
+`intent.priority`, then lexically lower id. Adding a specific phrase is
+sufficient to claim an utterance — nobody has to reorder the catalog.
 
 ## Phase 2 — push-to-talk voice (Hermes adapter)
 

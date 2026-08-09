@@ -123,3 +123,50 @@ Accepted after the slice went live:
   a fork that must track upstream Kickbox; blast radius onto working code.
 - *Extend `control_plane/go_router`* — different concern (rune routing), and
   its CLI contract is frozen by existing consumers.
+
+## Amendment 2026-08-09 — durable effects and a canonical skill catalog
+
+The slice up to this point governed a pipe with nothing in it: every skill
+returned a fixture string, so the lease machinery had never been tested
+against a consequence. Two rules follow from giving it one.
+
+1. **The skill catalog is language-neutral and canonical.**
+   `integration/contracts/skills.manifest.json` is the single source of truth;
+   the Go registry and the TypeScript contract are generated from it and
+   committed. Go owns enforcement and TypeScript owns the UI contract, so
+   neither may own the product definition. Drift fails `make test` locally —
+   not only in CI, which is not a guarantee this repository can currently
+   lean on.
+
+2. **A skill's reach is declared, not inferred.** `effect` is one of
+   `read_only | local_effect | remote_effect`, and it is independent of tier.
+   Tier says who must approve; effect says how far the consequence travels. A
+   skill that is `durable` (effect ≠ `read_only`) must also be lease-gated,
+   must declare `retry: never`, and must declare
+   `idempotency: lease_single_use`. The generator refuses a manifest that
+   violates any of these, and the Go and TS suites assert them independently.
+
+3. **The path is never an input.** A durable skill cannot name a location. The
+   broker derives it from `skillId + turnId` beneath a fixed root under the
+   existing `.run/` runtime directory — no second runtime root, so the
+   teardown and ignore rules that already exist continue to apply. Size is
+   capped. An allow-list is a check that can be forgotten; an absent parameter
+   cannot be attacked.
+
+4. **Governed artifacts are write-once.** The single-use lease makes a
+   *lease* unreplayable, but it cannot stop a client re-submitting the same
+   turn id and being issued a fresh lease. Without a write-once rule the
+   second action would silently destroy the first one's evidence. The effect
+   store hard-links into place, which is atomic and refuses to replace; the
+   duplicate fails closed and is audited.
+
+5. **A refusal is a record.** A refused or failed execution is a governance
+   event with the same evidentiary weight as a success, and it revokes the
+   lease it failed under. Previously such a path returned `403` and wrote
+   nothing to the audit log, so the log could answer "what happened" but not
+   "what was stopped".
+
+6. **The audit records the effect result, never the material.** For a durable
+   skill that means the relative path, byte count, and digest — enough to
+   prove what changed, insufficient to reconstruct it. The transcript remains
+   hashed for tier ≥ 2.
