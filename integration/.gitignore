@@ -1,0 +1,6 @@
+.run/
+.runtime/
+.demo/
+*.db
+gateway/gateway
+camelot-node-agent

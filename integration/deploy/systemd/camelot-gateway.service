@@ -1,0 +1,14 @@
+# Optional example — see README.md. Adjust WorkingDirectory to your checkout.
+[Unit]
+Description=Camelot voice gateway (Kickbox slice)
+
+[Service]
+WorkingDirectory=%h/Camelot-Ecosystem/integration
+Environment=GATEWAY_ADDR=:8788
+Environment=GATEWAY_DB=%h/Camelot-Ecosystem/integration/.run/camelot-voice.db
+ExecStart=%h/Camelot-Ecosystem/integration/.run/bin/gateway
+Restart=on-failure
+# SIGTERM (default KillSignal) triggers the gateway's graceful drain.
+
+[Install]
+WantedBy=default.target

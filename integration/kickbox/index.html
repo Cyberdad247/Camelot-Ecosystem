@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anya Console — Camelot Voice Slice</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <style>
+    :root {
+      --bg: #0d1017; --panel: #161b26; --panel2: #1d2433; --text: #e6e9f0;
+      --muted: #8b93a7; --gold: #d4af37; --green: #37c877; --red: #e05555;
+      --amber: #e0a83c; --blue: #4d8de8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font: 15px/1.5 system-ui, -apple-system, Segoe UI, sans-serif;
+      display: grid; grid-template-rows: auto 1fr; height: 100vh;
+    }
+    header {
+      display: flex; align-items: center; gap: 12px; padding: 10px 16px;
+      background: var(--panel); border-bottom: 1px solid #262e40;
+    }
+    header h1 { font-size: 16px; margin: 0; color: var(--gold); }
+    #gateway-status { font-size: 12px; color: var(--muted); margin-left: auto; }
+    #gateway-status.ok { color: var(--green); }
+    #gateway-status.err { color: var(--red); }
+    .badge {
+      padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;
+    }
+    .state-idle { background: #262e40; color: var(--muted); }
+    .state-thinking { background: #2a3350; color: var(--blue); }
+    .state-speaking { background: #143627; color: var(--green); }
+    .state-blocked { background: #3d2f16; color: var(--amber); }
+    main {
+      display: grid; grid-template-columns: 1fr 320px; gap: 12px;
+      padding: 12px; min-height: 0;
+    }
+    .col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+    #transcript {
+      flex: 1; overflow-y: auto; background: var(--panel); border-radius: 10px;
+      padding: 14px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .bubble { max-width: 75%; padding: 8px 12px; border-radius: 12px; white-space: pre-wrap; }
+    .bubble-user { align-self: flex-end; background: #2a3350; }
+    .bubble-anya { align-self: flex-start; background: var(--panel2); }
+    .bubble-system { align-self: center; background: none; color: var(--muted); font-size: 12px; }
+    .bubble.cancelled { opacity: 0.55; text-decoration: line-through; }
+    .input-row { display: flex; gap: 8px; }
+    #utterance {
+      flex: 1; background: var(--panel2); color: var(--text); border: 1px solid #2c3550;
+      border-radius: 8px; padding: 10px 12px; font-size: 15px;
+    }
+    button {
+      background: var(--panel2); color: var(--text); border: 1px solid #2c3550;
+      border-radius: 8px; padding: 8px 14px; cursor: pointer; font-size: 14px;
+    }
+    button:hover:not(:disabled) { border-color: var(--gold); }
+    button:disabled { opacity: 0.4; cursor: not-allowed; }
+    #send { background: var(--gold); color: #14100a; font-weight: 700; }
+    #barge-in { border-color: var(--red); color: var(--red); font-weight: 600; }
+    .quick-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .quick-row button { font-size: 12.5px; color: var(--muted); }
+    .voice-bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .chip {
+      font-size: 12px; padding: 3px 10px; border-radius: 999px;
+      background: var(--panel2); color: var(--muted); font-family: ui-monospace, monospace;
+    }
+    .chip.ok { color: var(--green); }
+    .chip.warn { color: var(--amber); }
+    .chip.err { color: var(--red); }
+    #mic-device { background: var(--panel2); color: var(--text); border: 1px solid #2c3550; border-radius: 8px; padding: 6px 8px; font-size: 12.5px; max-width: 180px; }
+    #ptt { border-color: var(--gold); font-weight: 700; }
+    #ptt.listening { background: #3d1620; border-color: var(--red); color: #ff9c9c; }
+    #stop-speaking { border-color: var(--amber); color: var(--amber); }
+    .voice-notice {
+      font-size: 12.5px; color: var(--amber); background: #241d10;
+      border: 1px solid #4a3a16; border-radius: 8px; padding: 8px 12px;
+    }
+    .panel {
+      background: var(--panel); border-radius: 10px; padding: 14px;
+    }
+    .card-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+    .effect { font-weight: 800; font-size: 18px; margin-bottom: 6px; }
+    .effect-allow { color: var(--green); }
+    .effect-deny { color: var(--red); }
+    .effect-confirm { color: var(--amber); }
+    .effect-none { color: var(--muted); font-weight: 400; font-size: 14px; }
+    .skill-line { font-family: ui-monospace, monospace; font-size: 12.5px; color: var(--muted); margin-bottom: 6px; }
+    .reason { font-size: 13.5px; }
+    #approval { display: none; border: 1px solid var(--amber); }
+    #approval .lease-line { font-family: ui-monospace, monospace; font-size: 12px; color: var(--muted); margin: 8px 0; }
+    #approval .approve { background: var(--green); color: #06170d; font-weight: 700; margin-right: 8px; }
+    #approval .deny { border-color: var(--red); color: var(--red); }
+    .node-row {
+      display: flex; align-items: baseline; gap: 8px; padding: 6px 0;
+      border-bottom: 1px solid #222a3a; font-size: 13px;
+    }
+    .node-row:last-child { border-bottom: none; }
+    .node-name { font-weight: 600; }
+    .node-name .scope { color: var(--muted); font-weight: 400; font-size: 11.5px; }
+    .node-standing { margin-left: auto; font-size: 11.5px; font-family: ui-monospace, monospace; }
+    .band-trusted { color: var(--green); }
+    .band-limited { color: var(--blue); }
+    .band-pending { color: var(--amber); }
+    .band-degraded { color: var(--amber); }
+    .band-revoked { color: var(--red); }
+    .node-caps { font-size: 11px; color: var(--muted); font-family: ui-monospace, monospace; }
+    .route-line { margin-top: 8px; font-size: 12px; color: var(--muted); font-family: ui-monospace, monospace; }
+    #audit-drawer { display: flex; flex-direction: column; min-height: 0; max-height: 40vh; }
+    #audit-drawer .drawer-body { display: none; min-height: 0; overflow: auto; }
+    #audit-drawer.open .drawer-body { display: block; }
+    #audit-list { list-style: none; margin: 8px 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+    #audit-list button { width: 100%; text-align: left; font-family: ui-monospace, monospace; font-size: 12px; }
+    #audit-detail {
+      background: #0a0d13; border-radius: 8px; padding: 10px; font-size: 11.5px;
+      font-family: ui-monospace, monospace; white-space: pre-wrap; overflow: auto; margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⚔️ Anya Console</h1>
+    <span id="state-badge" class="badge state-idle">Idle</span>
+    <span id="gateway-status">connecting…</span>
+  </header>
+  <main>
+    <div class="col">
+      <div id="transcript"></div>
+      <div class="quick-row">
+        <button id="quick-staging">“read staging status” · tier 1</button>
+        <button id="quick-review">“prepare a deployment review” · tier 2</button>
+        <button id="quick-cr">“create a change request” · tier 3</button>
+      </div>
+      <div class="input-row">
+        <input id="utterance" placeholder="Type an utterance for Anya…" autocomplete="off" />
+        <button id="send">Send</button>
+        <button id="barge-in" disabled title="Interrupt Anya (stops playback, cancels stream, revokes unused leases)">✋ Barge in</button>
+      </div>
+      <div id="voice-bar" class="voice-bar" hidden>
+        <span id="mic-status" class="chip">mic: unknown</span>
+        <select id="mic-device" title="Microphone device"><option value="">default mic</option></select>
+        <button id="ptt" title="Hold to talk, release to transcribe">🎙 Hold to talk</button>
+        <button id="stop-speaking" disabled title="Stop Anya's voice immediately">🔇 Stop speaking</button>
+        <span id="voice-state" class="chip">voice: idle</span>
+      </div>
+      <div id="voice-notice" class="voice-notice" hidden></div>
+    </div>
+    <div class="col">
+      <div id="decision-card" class="panel"></div>
+      <div id="approval" class="panel">
+        <div class="card-title">Approval required</div>
+        <div class="lease-line"></div>
+        <button class="approve">Approve</button>
+        <button class="deny">Deny</button>
+      </div>
+      <div id="node-panel" class="panel" hidden>
+        <div class="card-title">Node status</div>
+        <div id="node-list"></div>
+        <div id="node-route" class="route-line"></div>
+      </div>
+      <div id="audit-drawer" class="panel">
+        <button id="audit-toggle">📜 Audit drawer</button>
+        <div class="drawer-body">
+          <ul id="audit-list"></ul>
+          <pre id="audit-detail">Select an audit event…</pre>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script type="importmap">
+    {
+      "imports": {
+        "@camelot/contracts": "/contracts/dist/index.js"
+      }
+    }
+  </script>
+  <script type="module" src="dist/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "Anya Console — Camelot Voice Slice",
+  "short_name": "Anya Console",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0d1017",
+  "theme_color": "#d4af37",
+  "description": "Text-first governed console for the Camelot x Kickbox voice vertical slice.",
+  "icons": []
+}

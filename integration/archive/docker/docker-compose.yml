@@ -1,0 +1,40 @@
+# Camelot x Kickbox voice vertical slice — local demo stack.
+# Deliberately separate from the repository-root docker-compose.yml (which
+# belongs to the secret-photo-viewer). Ports 8080/8788/8789 avoid every
+# existing claim in the repo (see docs/architecture/current-state.md).
+#
+#   docker compose up --build      (or: make demo-up from integration/)
+#   Console: http://localhost:8080
+
+services:
+  gateway:
+    build: ./gateway
+    container_name: camelot-voice-gateway
+    ports:
+      - "8788:8788"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8788/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  node-agent:
+    build: ./node-agent
+    container_name: camelot-node-agent
+    environment:
+      # Demo-only shared lease key; matches scripts/smoke.sh. Rotate for
+      # anything beyond a local demo.
+      - CAMELOT_NODE_LEASE_KEY=camelot-demo-key
+    ports:
+      - "8789:8789"
+
+  console:
+    build:
+      context: .
+      dockerfile: Dockerfile.console
+    container_name: anya-console
+    ports:
+      - "8080:8080"
+    depends_on:
+      gateway:
+        condition: service_healthy
