@@ -41,6 +41,12 @@ except ImportError:
     list_all_notebooks = None  # type: ignore
     LOG.error("[RUNE_ROUTER] Failed to import Worldtree Cloudbrain connector.")
 
+try:
+    from notebook_auditor import run_audit
+except ImportError:
+    run_audit = None  # type: ignore
+    LOG.warning("[RUNE_ROUTER] notebook_auditor not found — AUDIT rune disabled.")
+
 
 # ── Rune glyph → name mapping ──────────────────────────────────────────────────
 RUNE_NAMES: Dict[str, str] = {
@@ -52,6 +58,7 @@ RUNE_NAMES: Dict[str, str] = {
     "\u16A2": "VOICE",
     "\u16A8": "ARCHITECT",
     "\u16DF": "SOVEREIGN",
+    "\u16A6": "AUDIT",     # ᚦ AUDIT — notebook condensation
 }
 
 # ── Rune keyword triggers ───────────────────────────────────────────────────────
@@ -64,6 +71,7 @@ RUNE_KEYWORD_TRIGGERS: Dict[str, List[str]] = {
     "\u16A2": ["voice", "speak", "tts", "audio", "phonetic", "helio", "sonus"],
     "\u16A8": ["plan", "architect", "design", "strategy", "dag", "orchestrate", "review"],
     "\u16DF": ["broadcast", "all", "sovereign", "system", "excalibur", "os", "camelot"],
+    "\u16A6": ["audit", "condense", "merge", "assimilate", "purge", "deduplicate", "consolidate", "notebook"],
 }
 
 
@@ -148,9 +156,9 @@ class RuneRouter:
     def worldtree_report(self) -> str:
         """Generate a full Worldtree state report for Lady M's SQUIRE_BRIEF."""
         lines = [
-            "╔══════════════════════════════════════════╗",
-            "║     WORLDTREE RUNE SYMBOLECT REGISTRY    ║",
-            "╚══════════════════════════════════════════╝",
+            "\u256c" + "\u2550"*46 + "\u256c",
+            "\u2551     WORLDTREE RUNE SYMBOLECT REGISTRY        \u2551",
+            "\u256c" + "\u2550"*46 + "\u256c",
             "",
         ]
         if list_all_notebooks:
@@ -161,13 +169,32 @@ class RuneRouter:
                 lines.append(f"    Notebook  : {node['notebook_id']}")
                 lines.append("")
 
-        lines.append("── Rune Symbolect Dispatch Table ────────────")
+        lines.append("\u2500\u2500 Rune Symbolect Dispatch Table \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500")
         for rune, name in RUNE_NAMES.items():
             targets = RUNE_SYMBOLECT.get(rune, [])
-            lines.append(f"  {rune} {name:<12} → {', '.join(targets)}")
+            target_str = ', '.join(targets) if targets else 'notebook_auditor'
+            lines.append(f"  {rune} {name:<12} -> {target_str}")
         lines.append("")
-        lines.append("⚜️  Lady Mnemosyne | Worldtree Rune Router | Camelot v1000")
+        lines.append("Lady Mnemosyne | Worldtree Rune Router | Camelot v1000")
         return "\n".join(lines)
+
+    def audit_and_condense(self, dry_run: bool = True) -> Dict[str, Any]:
+        """
+        Trigger the Notebook Audit & Condensation Engine via the AUDIT rune (\u16A6).
+        Maps directly to vfs/notebook_auditor.py run_audit().
+
+        Args:
+            dry_run: If True, reports only. If False, executes full assimilation + purge.
+        Returns:
+            Condensation report dict.
+        """
+        if not run_audit:
+            LOG.error("[AUDIT] notebook_auditor module not available.")
+            return {"error": "notebook_auditor not found"}
+
+        mode = "DRY RUN" if dry_run else "EXECUTE"
+        LOG.info(f"[AUDIT RUNE] Engaging Notebook Condensation Engine [{mode}]...")
+        return run_audit(dry_run=dry_run)
 
 
 # Singleton for import
