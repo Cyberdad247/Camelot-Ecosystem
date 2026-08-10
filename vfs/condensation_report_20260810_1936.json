@@ -1,0 +1,135 @@
+{
+  "timestamp": "20260810_1936",
+  "mode": "EXECUTE",
+  "total_plans": 16,
+  "results": [
+    {
+      "donor": "living Camelot-OS: The v300.4.0 Universal Singularity Recompilation",
+      "target": "Camelot-OS v.1000",
+      "migrated": 131,
+      "failed": 0,
+      "purged": 131,
+      "dry_run": false
+    },
+    {
+      "donor": "Living Camelot-OS v.400",
+      "target": "Camelot-OS v.1000",
+      "migrated": 154,
+      "failed": 0,
+      "purged": 154,
+      "dry_run": false
+    },
+    {
+      "donor": "Camelot-OS v.700.0",
+      "target": "Camelot-OS v.1000",
+      "migrated": 171,
+      "failed": 0,
+      "purged": 171,
+      "dry_run": false
+    },
+    {
+      "donor": "Camelot-OS v.999.3",
+      "target": "Camelot-OS v.1000",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Living Camelot-OS",
+      "target": "Camelot-OS v.1000",
+      "migrated": 140,
+      "failed": 79,
+      "purged": 140,
+      "dry_run": false
+    },
+    {
+      "donor": "Camelot OS v57.0 Master Bootstrap Protocol",
+      "target": "Camelot-OS v.1000",
+      "migrated": 0,
+      "failed": 19,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: SIR ALEX",
+      "target": "Sovereign_Workspace: SIR_ALEX",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: SIR BORIS",
+      "target": "Sovereign_Workspace: SIR_BORIS",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: SIR FORGE",
+      "target": "Sovereign_Workspace: SIR_FORGE",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: SIR SENTINEL",
+      "target": "Sovereign_Workspace: SIR_SENTINEL",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: SIR GHOST",
+      "target": "Sovereign_Workspace: SIR_GHOST",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: SIR HELIOS",
+      "target": "Sovereign_Workspace: SIR_HELIO",
+      "migrated": 0,
+      "failed": 1,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: SIR CODEX",
+      "target": "Camelot-OS v.1000",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "HiveIDE-aka Inspira (Cleaned Copy)",
+      "target": "HiveIDE-aka Inspira",
+      "migrated": 0,
+      "failed": 12,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sovereign_Workspace: LADY APIS",
+      "target": "Sovereign_Workspace: LADY_APIS",
+      "migrated": 0,
+      "failed": 0,
+      "purged": 0,
+      "dry_run": false
+    },
+    {
+      "donor": "Sir Sonus: The Audio Physics of AI Record Labels",
+      "target": "Sovereign_Workspace: SIR SONUS",
+      "migrated": 0,
+      "failed": 5,
+      "purged": 0,
+      "dry_run": false
+    }
+  ]
+}

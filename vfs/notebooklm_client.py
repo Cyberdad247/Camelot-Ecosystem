@@ -65,8 +65,9 @@ async def _get_client() -> Optional[Any]:
     """Acquire authenticated NotebookLMClient from stored session."""
     if not NOTEBOOKLM_AVAILABLE:
         return None
+    auth_path = r"C:\Users\vizio\.notebooklm\storage_state.json"
     try:
-        client = await NotebookLMClient.from_storage()
+        client = await NotebookLMClient.from_storage(path=auth_path if os.path.exists(auth_path) else None)
         return client
     except AuthError:
         LOG.error(

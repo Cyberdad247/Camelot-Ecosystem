@@ -139,8 +139,9 @@ class NotebookAuditor:
         """Establish authenticated NotebookLMClient session."""
         if not _NLM_AVAILABLE:
             return False
+        auth_path = r"C:\Users\vizio\.notebooklm\storage_state.json"
         try:
-            self._cm = await NotebookLMClient.from_storage()
+            self._cm = await NotebookLMClient.from_storage(path=auth_path if os.path.exists(auth_path) else None)
             self.client = await self._cm.__aenter__()
             return True
         except AuthError:
@@ -248,15 +249,32 @@ class NotebookAuditor:
             assimilation_title = f"[ASSIMILATED from: {plan.donor_title}] {src.title}"
 
             if not self.dry_run:
+                migrated_ok = False
+                # Try 1: Add as source
                 try:
                     await self.client.sources.add_text(
                         plan.target_notebook_id,
                         content=content,
                         title=assimilation_title,
                     )
-                    result["migrated"] += 1
-                    LOG.info(f"    [MIGRATE] '{src.title[:50]}' → {plan.target_title[:30]}")
+                    migrated_ok = True
+                    LOG.info(f"    [MIGRATE SOURCE] '{src.title[:50]}' → {plan.target_title[:30]}")
+                except Exception as e:
+                    # Fallback 2: Add as Note if source limit (50) is reached
+                    try:
+                        await self.client.notes.create(
+                            plan.target_notebook_id,
+                            title=assimilation_title,
+                            content=content,
+                        )
+                        migrated_ok = True
+                        LOG.info(f"    [MIGRATE NOTE] '{src.title[:50]}' → {plan.target_title[:30]} (Fallback)")
+                    except Exception as ne:
+                        result["failed"] += 1
+                        LOG.error(f"    [MIGRATE FAILED] {src.title}: {ne}")
 
+                if migrated_ok:
+                    result["migrated"] += 1
                     # Purge from donor after successful migration
                     try:
                         await self.client.sources.delete(plan.donor_notebook_id, src.source_id)
@@ -264,10 +282,6 @@ class NotebookAuditor:
                         LOG.info(f"    [PURGE] Deleted '{src.title[:50]}' from {plan.donor_title[:30]}")
                     except Exception as e:
                         LOG.error(f"    [PURGE FAILED] {src.title}: {e}")
-
-                except Exception as e:
-                    result["failed"] += 1
-                    LOG.error(f"    [MIGRATE FAILED] {src.title}: {e}")
             else:
                 LOG.info(f"    [DRY] Would migrate '{src.title[:50]}' → {plan.target_title[:30]}")
                 result["migrated"] += 1
