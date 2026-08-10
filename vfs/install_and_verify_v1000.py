@@ -69,6 +69,14 @@ except ImportError:
         WorldtreeCartridgeKnightBridge = None
         CARTRIDGE_KNIGHT_MAP = {}
 
+try:
+    from vfs.hybrid_worldtree_architecture import HybridMemoryRouter
+except ImportError:
+    try:
+        from hybrid_worldtree_architecture import HybridMemoryRouter
+    except ImportError:
+        HybridMemoryRouter = None
+
 
 class SystemInstallVerifier:
     def __init__(self):
@@ -175,6 +183,7 @@ class SystemInstallVerifier:
             "AnyaConstrictSchema": _ANYA_SCHEMA,
             "KnightRPGSystem": KnightRPGSystem is not None,
             "WorldtreeCartridgeKnightBridge": WorldtreeCartridgeKnightBridge is not None,
+            "Hybrid4TierMemoryRouter": HybridMemoryRouter is not None,
             "BifrostBridgePort": "8011 (127.0.0.1)",
             "MultivoiceRouterPort": "3004 (127.0.0.1)",
             "SystemUIPort": "3000 (127.0.0.1)",

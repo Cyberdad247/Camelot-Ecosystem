@@ -1,6 +1,6 @@
 {
   "version": "v1000.54-EXCALIBUR-A",
-  "timestamp": "2026-08-10T20:17:08.489258+00:00",
+  "timestamp": "2026-08-10T20:20:03.681207+00:00",
   "glyph_installed": true,
   "system_instruction_installed": true,
   "engines": {
@@ -10,6 +10,7 @@
     "AnyaConstrictSchema": true,
     "KnightRPGSystem": true,
     "WorldtreeCartridgeKnightBridge": true,
+    "Hybrid4TierMemoryRouter": true,
     "BifrostBridgePort": "8011 (127.0.0.1)",
     "MultivoiceRouterPort": "3004 (127.0.0.1)",
     "SystemUIPort": "3000 (127.0.0.1)"
@@ -146,7 +147,7 @@
       "class": "Kinetic Paladin",
       "primary_stat": "Execution",
       "rune": "\u16a0",
-      "resolved_at": "2026-08-10T20:17:08.491066+00:00"
+      "resolved_at": "2026-08-10T20:20:03.688786+00:00"
     },
     "cartridge_mappings": {
       "ANT": [
