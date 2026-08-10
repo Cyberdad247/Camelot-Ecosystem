@@ -56,13 +56,13 @@ node --version     # 20+
 | P1-T01 | `python -c "from control_plane.anya_gate import __version__; print(__version__)"` | `9000.14` | All 13 control_plane modules report `9000.14` | ⬜ |
 | P1-T02 | `python -m pytest tests/test_colmad_wiring.py -v` | `PASSED` | CRITICAL intent triggers 3-persona vote; consensus requires 2/3 | ⬜ |
 | P1-T03 | `python -m control_plane.knight_agent --test` | All V5.x checks pass | Unified roster count matches `FOUNDRY_COUNCIL`; no duplicate spark IDs | ⬜ |
-| P1-T04 | `python -c "import control_plane.triage_score as t; t.get_triage_scorer()"` | No error | Not orphaned — live confidence-scorer with test consumers (test_validation, test_phase_f); disambiguated in docstring from `factory_lane.TriageScore`; imports clean | ⬜ |
+| P1-T04 | `python -c "import control_plane.triage_score"` | `ImportError` or integrated | No orphan `triage_score` module; functionality merged into `anya_gate.py` | ⬜ |
 | P1-T05 | `python -m control_plane.soul_oversight --test` | `PASSED` | Single coherent `IronGateV2` class; AUTO/PROMPT/HUMAN_GATE tiers verified | ⬜ |
-| P1-T06 | `python -c "import re, pathlib; c=pathlib.Path('control_plane/anya_gate.py').read_text(); print(len(re.findall(r'class\s+AnyaCompiler', c)))"` | `1` | Exactly one `AnyaCompiler` in anya_gate.py — no in-file duplicate; documented as distinct from the APEE pipeline and the titan/memory compiler; CLI consumer intact | ⬜ |
+| P1-T06 | `python -c "import re, pathlib; c=pathlib.Path('control_plane/anya_gate.py').read_text(); print(len(re.findall(r'class\s+AnyaCompiler', c)))"` | `0` | No duplicate `AnyaCompiler` class definition | ⬜ |
 | P1-T07 | `python -c "from control_plane.soul_oversight import pre_execute"` | No warnings/errors | Clean import path; no deprecation shims | ⬜ |
 | P1-T08 | `python -m control_plane.inspira_metrics --test` | Non-zero metrics dict | `mamba_compression_ratio > 0` when ouroboros engine available | ⬜ |
 | P1-T09 | `cargo build -p rtk --release` | Compiles without error | `rtk.dll` produced in `target/release/`; no linker warnings | ⬜ |
-| P1-T10 | `python -m squires.colony triage control_plane --auto-approve` | Exit code `0` | Active-source scope (full `.` tree of 40k+ vendored/archive files is impractical): LOW risk 2.0/100, zero CRITICAL findings | ✅ |
+| P1-T10 | `python -m squires.colony triage . --auto-approve` | Exit code `0` | No CRITICAL findings; risk score < 50 | ⬜ |
 
 ### P1 Batch Verification Script
 
@@ -95,7 +95,7 @@ $results | ForEach-Object { Write-Host "[$($_.id)] $($_.expect) → $($_.output)
 | P2-T01 | `python -m pytest tests/test_kinetic_loop.py -v` | `PASSED` | 6 stages fire in order: `TRIAGE → PLAN → APPROVE → EXECUTE → VERIFY → RECORD` | ⬜ |
 | P2-T02 | `python -m pytest tests/test_z3_verification.py -v` | `Z3_BLOCK` for dangerous patch | Real PDDL encoding works; Z3 rejects state-violating mutations | ⬜ |
 | P2-T03 | `python -m control_plane.obsidian_pillars --test` | `11/11 pillars validated` | Each pillar has both positive AND negative test case | ⬜ |
-| P2-T04 | `python -c "from control_plane.soul_router import SoulRouter; print(SoulRouter().resolve_knight('SIR_HELIOS'))"` | `sir_helio` | All 8 v9000.14 Pantheon aliases resolve to canonical knight_ids (separator/case-insensitive); `route()` remains the intent router | ⬜ |
+| P2-T04 | `python -c "from control_plane.soul_router import SoulRouter; r=SoulRouter(); print(r.route('SIR_HELIOS'))"` | `sir_helio` | All v9000.14 knight aliases resolve correctly (including legacy spellings) | ⬜ |
 | P2-T05 | `python -m control_plane.firnflow --test` | V3.x checks pass | Directory-scoped context loads; L1/L2/L3 tiering functional | ⬜ |
 | P2-T06 | `python -m pytest tests/test_crucible.py -v` | `PASSED` | Ephemeral execution runs in isolation; temp artifacts cleaned on exit | ⬜ |
 | P2-T07 | `python -m pytest tests/test_provenance_sqlite.py -v` | `PASSED` | Atomic commit + rollback verified; `.shadow` file restored on failure | ⬜ |
@@ -124,12 +124,12 @@ print('P2 integration smoke: PASSED')
 
 | Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
 |---|---|---|---|---|
-| P3-T01 | `python -m control_plane.mdx_schema --test` / `pytest tests/test_phase3_brain.py -k mdx_schema` | `ALL PASS` | Valid MDX passes; malformed MDX (bad version/kind/component/risk) rejected | ✅ |
-| P3-T02 | `python -m control_plane.bifrost_server --test` (TestClient) | board 200 w/ `hx-get`, `hx-swap`, `hx-trigger` + Luxora Gold `#D4AF37` | Board renders with htmx reactive attributes | ✅ |
-| P3-T03 | `python -m control_plane.mdx_renderers --test` / `pytest -k visual_plan` | `ALL PASS` | Intent → valid MDX plan with mermaid diagram + ApprovalButton | ✅ |
-| P3-T04 | `python -m control_plane.mdx_renderers --test` / `pytest -k visual_recap` | `ALL PASS` | Post-execution `/visual-recap` valid MDX with outcome/verify results | ✅ |
-| P3-T05 | `pytest tests/test_phase3_brain.py -k sse` | `PASSED` | SSE `event: metrics` + `data:` frames parse as valid JSON | ✅ |
-| P3-T06 | `pytest tests/test_phase3_brain.py -k approval` | `PASSED` | ApprovalButton registers HITL gate; click resumes kinetic loop into EXECUTE | ✅ |
+| P3-T01 | `python -m pytest tests/test_mdx_schema.py -v` | `PASSED` | Valid MDX passes validation; malformed MDX rejected with clear error | ⬜ |
+| P3-T02 | `curl -s http://127.0.0.1:8080/bifrost \| Select-String 'hx-'` | HTML containing `hx-get`, `hx-swap`, `hx-trigger` | Board renders with htmx reactive attributes | ⬜ |
+| P3-T03 | `python -m pytest tests/test_visual_plan.py -v` | `PASSED` | Sample intent produces valid MDX plan output with mermaid diagram | ⬜ |
+| P3-T04 | `python -m pytest tests/test_visual_recap.py -v` | `PASSED` | Post-execution `/visual-recap` produces valid MDX with embedded test results | ⬜ |
+| P3-T05 | `python -m pytest tests/test_sse_telemetry.py -v` | `PASSED` | EventSource events received; `data:` frames parse as valid JSON | ⬜ |
+| P3-T06 | `python -m pytest tests/test_approval_button.py -v` | `PASSED` | HITL gate pauses kinetic loop; resumes on simulated click event | ⬜ |
 
 ### P3 Manual Verification Checklist
 
@@ -149,29 +149,22 @@ print('P2 integration smoke: PASSED')
 
 | Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
 |---|---|---|---|---|
-| P4-T01 | `cd 01_KERNEL/mesh/node_c && TS_AUTHKEY=... go test -v -run TestTwoNodeMesh` | `PASS` (or SKIP w/o key) | tsnet node scaffolded — **compiles clean** (`go build`/`go vet` exit 0); test runs + skips w/o key. Live 2-node mesh needs a tailnet auth key | 🔨 scaffolded |
-| P4-T02 | `cargo test -p camelot-pqcrypto --release` | `3 passed` | ML-KEM-768 handshake round-trips (shared secrets match); wrong-key diverges; ML-DSA-65 sign/verify + tamper-detect | ✅ |
-| P4-T03 | `python -m control_plane.empire_drone --test` / `pytest tests/test_phase45_edge.py -k drone` | `ALL PASS` | New drone auto-registers on join; idempotent re-announce; stale drones reaped | ✅ |
-| P4-T04 | `cargo audit` / `cargo test -p camelot-pqcrypto` | `exit 0` / `3 passed` | **Migrated** pqcrypto→RustCrypto ml-kem 0.3.2 + ml-dsa 0.1.1; pqcrypto/pqclean removed from lockfile; `cargo audit` clean (172 deps, 0 advisories); round-trip tests pass | ✅ |
-| P4-T05 | `bash scripts/wsl_verify.sh` (memfd section) | zero-copy across fork + latency | **Verified on WSL2**: `memfd_create` page visible across `fork`; ~0.126µs/page round-trip (target <10µs) | ✅ (WSL2) |
+| P4-T01 | `cd 01_KERNEL/mesh/node_c && go test -v -run TestTwoNodeMesh` | `PASS` | Two-node communication over tsnet mesh established and verified | ⬜ |
+| P4-T02 | `cargo test -p camelot-pqcrypto -v` | `PASSED` | ML-KEM-768 (Kyber) handshake completes; key encapsulation round-trips | ⬜ |
+| P4-T03 | `python -m pytest tests/test_drone_discovery.py -v` | `PASSED` | New Empire Drone auto-registers on mesh join; roster reflects the joined node | ⬜ |
+| P4-T04 | `cargo audit` | `0 vulnerabilities found` | Post `ml-kem` migration: clean security audit; no known advisories in dependency tree | ⬜ |
+| P4-T05 | `python benchmarks/ipc_latency.py` | Latency report | `memfd_create` zero-copy IPC latency < 10µs (Linux/WSL2 only) | ⬜ |
 
 ### P4 Platform Notes
 
 > [!WARNING]
-> P4-T01 (tsnet), P4-T05 (memfd_create), and P5-T02 (MicroVM) require **Linux or WSL2**.
-> On native Windows they are marked `planned`/`blocked` with a WSL2 execution path. Do not mark as `rejected`.
-
-All four environment-gated tasks (P4-T01, P4-T04, P4-T05, P5-T02) plus the P5-T01
-`wasmtime` run-check are driven by **`scripts/wsl_verify.sh`**, which preflights the
-toolchain, exercises the real Linux primitives (e.g. `memfd_create` zero-copy across
-`fork`), and reports PASS/FAIL/SKIP per task:
+> P4-T01 (tsnet) and P4-T05 (memfd_create) require **Linux or WSL2**. On native Windows, these tests
+> should be marked as `planned` with a WSL2 execution path documented. Do not mark as `rejected`.
 
 ```powershell
-# From Windows, launch the driver inside WSL2 Ubuntu:
-wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && bash scripts/wsl_verify.sh"
-
-# With a Tailscale auth key to attempt the live tsnet mesh (P4-T01):
-wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && TS_AUTHKEY=tskey-... bash scripts/wsl_verify.sh"
+# WSL2 execution path for Linux-dependent tests
+wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && cargo test -p camelot-pqcrypto"
+wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS/01_KERNEL/mesh/node_c && go test -v"
 ```
 
 ---
@@ -182,12 +175,12 @@ wsl -d Ubuntu -- bash -c "cd /mnt/c/Users/vizio/CAMELOT_OS && TS_AUTHKEY=tskey-.
 
 | Task ID | Test Command | Expected Output | Pass/Fail Criteria | Status |
 |---|---|---|---|---|
-| P5-T01 | `cargo build --target wasm32-wasip1 -p camelot-edge --release` | `camelot-edge.wasm` produced | Valid WASM binary built (`\0asm` MVP magic, 65KB); `wasmtime run` pending a wasmtime install on this host | ✅ build |
-| P5-T02 | `python scripts/microvm_boot.py --self-test` (machinery) / `--health-check` (real boot) | `ALL PASS` / health 200 | Launcher **scaffolded + self-test verified** (mock VM, cross-platform); real boot needs WSL2 `/dev/kvm` + hypervisor + pill image (exit 3 → SKIP until present) | 🔨 scaffolded |
-| P5-T03 | `python -m control_plane.swarm_pin --test` | `ALL PASS` | BZZ content address round-trips; idempotent pin; tamper-evident fetch | ✅ |
-| P5-T04 | `python -m control_plane.scarcity_protocol --test` | `ALL PASS` | 3GiB main + 1GiB ZRAM envelope enforced; breach refused; reclaim frees budget (real `MADV_DONTNEED` on Linux) | ✅ |
-| P5-T05 | `python -m control_plane.voice_ingress --test` / `pytest -k voice` | `ALL PASS` | Wake-word + filler stripped; command → kinetic intent dispatched; chatter ignored | ✅ |
-| P5-T06 | `python -m control_plane.preview_drone --test` | `ALL PASS` | Local preview deploy + health-check gates Swarm pin; unhealthy artifact blocked | ✅ |
+| P5-T01 | `cargo build --target wasm32-wasip1 -p camelot-edge` | WASM artifact in `target/` | `.wasm` file produced; executes in `wasmtime run` without traps | ⬜ |
+| P5-T02 | `python scripts/microvm_boot.py --health-check` | HTTP 200 from health endpoint | 5MB pill image boots in < 12ms; health endpoint responds | ⬜ |
+| P5-T03 | `python scripts/swarm_pin.py --test` | BZZ hash returned | Content retrievable by hash; hash matches pinned content | ⬜ |
+| P5-T04 | `python benchmarks/memory_budget.py` | Memory report | 3GB main + 1GB ZRAM budget; `MADV_DONTNEED` lease reclaims memory | ⬜ |
+| P5-T05 | `python -m pytest tests/test_voice_ingress.py -v` | `PASSED` | Hermes-Jarvis voice command transcribes to a valid kinetic loop intent | ⬜ |
+| P5-T06 | `python scripts/preview_drone.py --local-deploy --health-check` | HTTP 200 from preview drone | Sovereign Preview Drone deploys locally before any Swarm pin; health endpoint responds | ⬜ |
 
 ### P5 Platform Notes
 
