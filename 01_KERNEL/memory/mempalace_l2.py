@@ -1,4 +1,7 @@
+import os
+import json
 import hashlib
+import hmac
 from pathlib import Path
 from typing import Any, Optional
 
@@ -19,6 +22,13 @@ class MemPalaceL2:
     """Persistent local vector index manager (Layer 2 Memory)."""
 
     def __init__(self, storage_path: Optional[Path] = None):
+        # System-level secret for HMAC salting
+        secret_env = os.environ.get("MEMPALACE_SECRET")
+        if not secret_env:
+            print("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
+            secret_env = "OMEGA_DEER_CORE_FIX_2026"
+            
+        self._secret = secret_env.encode()
         if storage_path:
             self.storage_path = storage_path
         else:
@@ -40,7 +50,14 @@ class MemPalaceL2:
         name = f"{tenant_id}_{wing}_{room}"
         return name.replace("/", "_").replace(".", "_").replace("-", "_")
 
-    def store(self, wing: str, room: str, content: str, metadata: Optional[dict[str, Any]] = None, tenant_id: str = "default", push_to_cloudbrain: bool = True):
+    def _generate_salted_id(self, content: str, tenant_id: str) -> str:
+        """Generate a salted HMAC-SHA256 ID for content and tenant."""
+        h = hmac.new(self._secret, digestmod=hashlib.sha256)
+        h.update(tenant_id.encode())
+        h.update(content.encode())
+        return h.hexdigest()
+
+    def store(self, wing: str, room: str, content: str, metadata: Optional[dict[str, Any]] = None, tenant_id: str = "default"):
         """Store a drawer (entry) in the specified wing/room with integrity checksum."""
         if not self.client:
             return
@@ -53,8 +70,8 @@ class MemPalaceL2:
         if "checksum" not in meta:
             meta["checksum"] = hashlib.sha256(content.encode()).hexdigest()
         
-        # Use a hash of the content or metadata ID as drawer_id
-        drawer_id = meta.get("id") or meta["checksum"][:16]
+        # Use a salted HMAC of the content + tenant_id as drawer_id
+        drawer_id = meta.get("id") or self._generate_salted_id(content, tenant_id)
         
         collection.upsert(
             documents=[content],
@@ -112,29 +129,3 @@ class MemPalaceL2:
         else:
             # Corpus-wide search in Chroma is harder (requires listing collections)
             return []
-
-    def purge_collection(self, wing: str, room: str, tenant_id: str = "default") -> bool:
-        """Drop a specific collection to zero-out its vector index."""
-        if not self.client:
-            return False
-        try:
-            coll_name = self._get_collection_name(wing, room, tenant_id)
-            self.client.delete_collection(name=coll_name)
-            return True
-        except Exception as e:
-            print(f"Failed to purge collection {coll_name}: {e}")
-            return False
-
-    def delete_drawer(self, wing: str, room: str, drawer_id: str, tenant_id: str = "default") -> bool:
-        """Delete a single memory record by ID (drawer)."""
-        if not self.client:
-            return False
-        try:
-            coll_name = self._get_collection_name(wing, room, tenant_id)
-            collection = self.client.get_collection(name=coll_name)
-            collection.delete(ids=[str(drawer_id)])
-            return True
-        except Exception as e:
-            print(f"Failed to delete drawer {drawer_id} in {coll_name}: {e}")
-            return False
-
