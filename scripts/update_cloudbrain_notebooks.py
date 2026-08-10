@@ -98,8 +98,11 @@ UPDATES = [
 
 
 async def main() -> int:
-    client = await NotebookLMClient.from_storage()
-    async with client:
+    from notebooklm.auth import load_auth_from_storage, fetch_tokens, AuthTokens
+    cookies = load_auth_from_storage()
+    csrf, session = await fetch_tokens(cookies)
+    tokens = AuthTokens(cookies=cookies, csrf_token=csrf, session_id=session)
+    async with NotebookLMClient(auth=tokens) as client:
         for nb_id, title, content in UPDATES:
             try:
                 src = await client.sources.add_text(nb_id, title, content,

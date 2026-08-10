@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>QERE</title>
+<style>
+  body {
+    margin: 0;
+    background: #000;
+    color: #34d399;
+    font-family: ui-monospace, "Cascadia Code", monospace;
+    font-size: 12px;
+    padding: 16px;
+  }
+  .panel {
+    border: 1px solid rgba(52, 211, 153, 0.3);
+    background: #0f172a;
+    border-radius: 4px;
+    padding: 16px;
+  }
+  h2 {
+    font-size: 14px;
+    margin: 0 0 12px;
+  }
+  textarea {
+    width: 100%;
+    height: 160px;
+    background: #000;
+    color: #6ee7b7;
+    border: 1px solid rgba(52, 211, 153, 0.5);
+    padding: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+  textarea:focus {
+    outline: none;
+    border-color: #34d399;
+  }
+  button {
+    width: 100%;
+    margin-top: 12px;
+    padding: 8px;
+    background: #047857;
+    color: #000;
+    border: none;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  button:hover:not(:disabled) {
+    background: #059669;
+  }
+  button:disabled {
+    background: #374151;
+    color: #6b7280;
+    cursor: not-allowed;
+  }
+  #loading-indicator {
+    display: none;
+    color: #fbbf24;
+    font-size: 10px;
+    margin-top: 8px;
+  }
+  #loading-indicator.active {
+    display: block;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid rgba(52, 211, 153, 0.2);
+    margin: 16px 0;
+  }
+  #terminal-output {
+    background: #000;
+    border: 1px solid #1c1917;
+    border-radius: 4px;
+    padding: 12px;
+    height: 220px;
+    overflow-y: auto;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .err { color: #f87171; }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <h2>&#9737; QERE — Cybertronia Extraction Pipeline</h2>
+    <textarea id="user-prompt-input" placeholder="Highlight text on a page, right-click, and choose 'Extract to QERE'…"></textarea>
+    <button id="execute-btn" type="button">Initiate QERE Pipeline</button>
+    <div id="loading-indicator">[TRANSMITTING TO MULTIVOICE-ROUTER…]</div>
+    <hr>
+    <div id="terminal-output">System idling. Highlight text in browser and right-click to extract…</div>
+  </div>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

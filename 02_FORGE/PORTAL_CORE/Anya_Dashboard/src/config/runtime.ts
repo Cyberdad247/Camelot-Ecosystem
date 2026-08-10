@@ -39,6 +39,13 @@ export const runtimeConfig = {
     runeUrl: `${goRouterOrigin}/rune`,
     healthUrl: `${goRouterOrigin}/healthz`,
   },
+  // Cognitive Service (Graphify/MemCastle/sync), reached through go_router's
+  // /cognitive/* reverse proxy so the dashboard only ever talks to one origin.
+  cognitive: {
+    fleetUrl: withDefault(env.VITE_COGNITIVE_FLEET_URL, `${goRouterOrigin}/cognitive/fleet`),
+    healthUrl: withDefault(env.VITE_COGNITIVE_HEALTH_URL, `${goRouterOrigin}/cognitive/healthz`),
+    configUrl: withDefault(env.VITE_COGNITIVE_CONFIG_URL, `${goRouterOrigin}/cognitive/config`),
+  },
   gradioUrl: withDefault(env.VITE_GRADIO_URL, 'http://localhost:7860/'),
   saltare: {
     routeUrl: withDefault(env.VITE_SALTARE_ROUTE_URL, 'http://localhost:8080/api/v1/route'),

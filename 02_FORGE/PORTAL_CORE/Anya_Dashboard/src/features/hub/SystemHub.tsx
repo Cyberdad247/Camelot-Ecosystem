@@ -11,6 +11,8 @@ import EventFeed from '@/components/ui/EventFeed';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
 import KnightStreamBanner from '@/features/knights/KnightStreamBanner';
 import KnightAvatarScene from '@/features/knights/KnightAvatarScene';
+import FleetPanel from '@/features/hub/FleetPanel';
+import ConfigPanel from '@/features/hub/ConfigPanel';
 import VisualPlanOverlay from '@/features/knights/VisualPlanOverlay';
 import { useKnightStream } from '@/features/knights/useKnightStream';
 
@@ -140,6 +142,12 @@ export default function SystemHub() {
             />
           </div>
         </div>
+      </div>
+
+      {/* Live Fleet panel — daemon health + tailnet nodes via /cognitive/fleet */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <FleetPanel />
+        <ConfigPanel />
       </div>
 
       {/* Quick actions */}

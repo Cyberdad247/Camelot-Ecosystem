@@ -244,6 +244,7 @@ class SovereignHarness:
                 kwargs["creationflags"] = (
                     getattr(subprocess, "DETACHED_PROCESS", 0x08)
                     | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0x200)
+                    | getattr(subprocess, "CREATE_NO_WINDOW", 0x08000000)
                 )
                 kwargs["close_fds"] = True
             else:
@@ -543,7 +544,18 @@ class SovereignHarness:
                 data = json.loads(line)
                 tid = data.get("id", "")
                 if tid and tid not in processed:
-                    tasks.append(HarnessTask(**{k: data[k] for k in HarnessTask.__dataclass_fields__ if k in data}))
+                    # Robust resolution of knight name
+                    knight = data.get("knight") or data.get("terminal") or data.get("knight_id") or "sir_boris"
+                    task_data = {
+                        "id": tid,
+                        "knight": knight,
+                        "directive": data.get("directive") or data.get("file_path") or data.get("text") or "",
+                    }
+                    if "priority" in data:
+                        task_data["priority"] = data["priority"]
+                    if "submitted" in data:
+                        task_data["submitted"] = data["submitted"]
+                    tasks.append(HarnessTask(**task_data))
             except Exception:
                 pass
         return tasks

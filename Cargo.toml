@@ -3,14 +3,26 @@ resolver = "2"
 members = [
     "01_KERNEL/core/aegis_shield",
     "01_KERNEL/reasoning/ouroboros_engine",
+    "01_KERNEL/EXCALIBUR/kernel_api_bridge",
+    "01_KERNEL/senses/morgana_bridge",
+    "02_FORGE/kinetic/actor",
+    "02_FORGE/kinetic/contracts",
     "02_FORGE/kinetic/cribo",
+    "02_FORGE/kinetic/omni_nexus_ide",
     "02_FORGE/kinetic/pmcp",
     "02_FORGE/kinetic/rotel",
     "04_KINETIC/squires_rs",
+    "04_KINETIC/memory_palace",
     "control_plane/rtk",
     "kinetic_edge/camelot_edge",
     "kinetic_edge/pqcrypto",
     "kinetic_edge/swarm_spawner"
+]
+exclude = [
+    "03_VAULT/runtime_state/nano_swarm_generated/Node_B_Bifrost/source",
+    "03_VAULT/runtime_state/nano_swarm_generated/Node_D_MicroVM/source",
+    "02_FORGE/generated/ukg_omega_glyph_v1000/Node_B_Bifrost",
+    "02_FORGE/generated/ukg_omega_glyph_v1000/Node_D_MicroVM"
 ]
 
 [workspace.lints.rust]

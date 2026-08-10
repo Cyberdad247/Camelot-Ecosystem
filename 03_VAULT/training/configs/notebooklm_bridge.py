@@ -13,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 CANONICAL_NOTEBOOK_ID = "8c656cfa-a189-409e-a72d-07692a47f17e"
-CANONICAL_NOTEBOOK_TITLE = "Camelot-OS v.1000"
+CANONICAL_NOTEBOOK_TITLE = "Camelot-OS: The Alpha Omega Distillation Protocol"
 SYNC_NOTE_TITLE = "Camelot-OS Canonical Sync Snapshot"
 # Client ceiling. Health probe (notebooks.list) resolves in ~2s; chat.ask can
 # take 30-60s depending on notebook size and Gemini backend load. Keep the
@@ -93,6 +93,9 @@ def _build_sync_snapshot(*, extra_summary: str = "") -> str:
     return "\n".join(sections)
 
 
+TOKEN_CACHE_FILE = Path.home() / ".notebooklm" / "token_cache.json"
+
+
 def _ensure_storage_state() -> Path:
     """Ensure notebooklm-py storage_state.json exists."""
     from notebooklm.auth import get_storage_path
@@ -106,14 +109,49 @@ def _ensure_storage_state() -> Path:
     )
 
 
+def _load_cached_tokens(storage_state_mtime: float) -> tuple[str, str] | None:
+    """Load cached tokens if storage_state.json hasn't changed and cache is fresh (TTL 4h)."""
+    import json
+    if TOKEN_CACHE_FILE.exists():
+        try:
+            cache_mtime = TOKEN_CACHE_FILE.stat().st_mtime
+            if cache_mtime > storage_state_mtime and (time.time() - cache_mtime) < 14400:
+                data = json.loads(TOKEN_CACHE_FILE.read_text(encoding="utf-8"))
+                return data["csrf_token"], data["session_id"]
+        except Exception:
+            pass
+    return None
+
+
+def _save_cached_tokens(csrf_token: str, session_id: str):
+    """Save tokens to cache."""
+    import json
+    try:
+        TOKEN_CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        TOKEN_CACHE_FILE.write_text(
+            json.dumps({"csrf_token": csrf_token, "session_id": session_id}),
+            encoding="utf-8"
+        )
+    except Exception:
+        pass
+
+
 async def _build_client():
     global _client
     if _client is None:
         from notebooklm import NotebookLMClient
         from notebooklm.auth import load_auth_from_storage, fetch_tokens, AuthTokens
-        _ensure_storage_state()
+        storage_path = _ensure_storage_state()
         cookies = load_auth_from_storage()
-        csrf, session = await fetch_tokens(cookies)
+        
+        # Check cache before doing a network request
+        cached = _load_cached_tokens(storage_path.stat().st_mtime)
+        if cached:
+            csrf, session = cached
+        else:
+            csrf, session = await fetch_tokens(cookies)
+            _save_cached_tokens(csrf, session)
+            
         tokens = AuthTokens(cookies=cookies, csrf_token=csrf, session_id=session)
         _client = NotebookLMClient(auth=tokens, timeout=CLIENT_TIMEOUT_S)
     return _client

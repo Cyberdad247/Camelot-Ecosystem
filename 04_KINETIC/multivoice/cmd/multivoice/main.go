@@ -21,6 +21,7 @@ import (
 	"time"
 
 	"camelot-os/orchestration"
+	"camelot-os/orchestration/filtration"
 	"camelot-os/providers"
 	"camelot-os/vault"
 	"camelot-os/zeroclaw"
@@ -75,6 +76,15 @@ func main() {
 	}
 	defer ledger.Seal()
 	log.Printf("[CYBERTRONIA] World Tree mounted (%d skills indexed).", ledger.Len())
+
+	// Initialize and verify Inference Filtration Layer DAG (Kinetic Grounding Mandate)
+	log.Println("[CYBERTRONIA] Initializing Inference Filtration Layer...")
+	plan, err := filtration.ExecuteFiltrationDAG("hf://meta-llama/Meta-Llama-3-8B-Instruct", 8192)
+	if err != nil {
+		log.Printf("[WARNING] Filtration DAG initial smoke check failed: %v", err)
+	} else {
+		log.Printf("[CYBERTRONIA] Filtration DAG active. Deployment plan generated: %+v", plan)
+	}
 
 	// 2. Initialize the ZeroClaw IPC arena.
 	arenaMB, _ := strconv.Atoi(env("CAMELOT_ARENA_MB", "128"))

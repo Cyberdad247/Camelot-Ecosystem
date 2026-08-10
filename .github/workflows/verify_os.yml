@@ -386,3 +386,177 @@ jobs:
           echo "::notice::No bifrost dispatch paths changed in this PR."
           echo "Skipping audit verification gate (matches local pre-commit hook)."
           echo "Filter source of truth: .pre-commit-config.yaml hook 'bifrost-audit-verify'."
+
+  # ── Stage 11: Excalibur PyInstaller Production Smoke ──────────────────
+  # End-to-end test of the SHIPPED frozen binary. Rebuilds
+  # `dist/excalibur/excalibur.exe` via `excalibur.spec`, boots it on an
+  # isolated port, and asserts:
+  #   * /health -> 200
+  #   * / (dashboard) -> 200 + inline rel="icon" favicon
+  #   * unauth POST /api/go -> 401
+  #   * auth POST /api/go / /api/rezero -> 200 + persistent state flip
+  #   * excalibur_state.json + logs/excalibur_events.jsonl land in
+  #     EXCALIBUR_DATA_DIR (per-user fallback is %APPDATA%\EXCALIBUR on
+  #     Windows + $XDG_DATA_HOME/excalibur on POSIX; see DEPLOYMENT_EXCALIBUR
+  #     §5.1).
+  # Skipped unless the change set touches excalibur.*, since the cold build
+  # costs ~60-90 s on Windows + UPX-disabled. Re-run on demand via the
+  # `workflow_dispatch` trigger below.
+  excalibur-pyinstaller-smoke:
+    name: Excalibur PyInstaller Production Smoke
+    runs-on: windows-latest
+    # Mirror of `verify_os.yml` Stage 8/10 dorny/paths-filter pattern: the
+    # cold build costs ~60-90 s on Windows + UPX-disabled, so we only run it
+    # when one of the files the binary depends on changes. `workflow_dispatch`
+    # is always honoured so an operator can force a rebuild from the Actions
+    # tab. The previous form matched on the PR title or branch name, which
+    # is fragile (PR titles are user-controlled and force-push can drop the
+    # branch keyword); dorny/paths-filter inspects the actual changed-file
+    # set under the standard `pull_request` event with read-only token.
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Enforce LF line endings on smoke-affected files
+        # Fail fast if a contributor pushed one of the build's source files
+        # with CRLF (a common Windows + WSL2 + macOS cross-platform mistake).
+        # `actions/checkout@v4` leaves autocrlf untouched, so a CRLF byte
+        # sequence in the working copy would otherwise die 60 s into the
+        # PyInstaller build with a confusing BOM/CRLF error in fastapi or
+        # uvicorn imports. Scope is intentionally tight (only the 8 files
+        # the build consumes) — repo-wide hygiene belongs in
+        # `.gitattributes`, not in this gate.
+        # SYNC: keep this in lock-step with the sibling block in
+        # `Detect changes to excalibur-affected paths`. The
+        # `excalibur-pyinstaller-filter-parity` pre-commit hook +
+        # `excalibur-filter-parity` CI job (verify_os.yml Stage 12)
+        # gate any drift. If you add a path, add it in BOTH places.
+        run: |
+
+
+
+          python -c "
+          import os, sys
+          watched = (
+            'excalibur.spec',
+            'excalibur.py',
+            'excalibur_controller.py',
+            'excalibur_dashboard.html',
+            'tests/test_excalibur_pyinstaller_smoke.py',
+            'scripts/excalibur_pyinstaller_smoke.sh',
+            'DEPLOYMENT_EXCALIBUR.md',
+            '.github/workflows/verify_os.yml',
+          )
+          # Distinguish 'file missing from checkout' from 'file has CRLF'.
+          # Both are hard fails, but the messages point operators at the
+          # right fix branch (file-restore vs dos2unix).
+          missing = [p for p in watched if not os.path.exists(p)]
+          if missing:
+              print(f'[FAIL] {len(missing)} smoke-affected file(s) missing from checkout:')
+              for p in missing:
+                  print(f'  - {p}')
+              sys.exit(1)
+          bad = [p for p in watched if b'\r\n' in open(p, 'rb').read()]
+          if bad:
+              print(f'[FAIL] {len(bad)} smoke-affected file(s) with CRLF line endings:')
+              for p in bad:
+                  print(f'  - {p}')
+              print('Run `dos2unix` on the offenders and force-push.')
+              sys.exit(1)
+          print(f'[OK] All {len(watched)} smoke-affected files use LF line endings.')
+          "
+
+      - name: Detect changes to excalibur-affected paths
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            excalibur-paths:
+              # SYNC: keep this in lock-step with the sibling block in
+              # `Enforce LF line endings on smoke-affected files`. The
+              # `excalibur-pyinstaller-filter-parity` pre-commit hook +
+              # `excalibur-filter-parity` CI job (verify_os.yml Stage 12)
+              # gate any drift. If you add a path, add it in BOTH places.
+              - 'excalibur.spec'
+              - 'excalibur.py'
+              - 'excalibur_controller.py'
+              - 'excalibur_dashboard.html'
+              - 'tests/test_excalibur_pyinstaller_smoke.py'
+              - 'scripts/excalibur_pyinstaller_smoke.sh'
+              - 'DEPLOYMENT_EXCALIBUR.md'
+              - '.github/workflows/verify_os.yml'
+
+      - name: Install dependencies
+        if: steps.filter.outputs.excalibur-paths == 'true' || github.event_name == 'workflow_dispatch'
+        run: |
+          python -m pip install --upgrade pip
+          pip install fastapi "uvicorn[standard]" pytest httpx pydantic pyttsx3 pyinstaller
+
+      - name: Excalibur PyInstaller smoke (production)
+        if: steps.filter.outputs.excalibur-paths == 'true' || github.event_name == 'workflow_dispatch'
+        run: bash scripts/excalibur_pyinstaller_smoke.sh
+        env:
+          PYTHON: python
+
+      - name: Skipped (no excalibur-affected paths changed)
+        if: steps.filter.outputs.excalibur-paths != 'true' && github.event_name != 'workflow_dispatch'
+        run: |
+          echo "::notice::No excalibur-affected paths changed in this PR."
+          echo "Skipping PyInstaller production smoke (cold build costs ~60-90 s on Windows)."
+          echo "Touch one of the watched files to retrigger, or run via workflow_dispatch:"
+          echo "  excalibur.spec, excalibur.py, excalibur_controller.py, excalibur_dashboard.html,"
+          echo "  tests/test_excalibur_pyinstaller_smoke.py, scripts/excalibur_pyinstaller_smoke.sh,"
+          echo "  DEPLOYMENT_EXCALIBUR.md, .github/workflows/verify_os.yml"
+
+  # ── Stage 12: EXCALIBUR PyInstaller Filter Parity ──────────────────
+  # Server-side mirror of the local pre-commit hook
+  # `excalibur-pyinstaller-filter-parity` declared in `.pre-commit-config.yaml`.
+  # Runs `scripts/check_excalibur_filter_parity.py` to assert the CRLF
+  # pre-check `watched = (...)` tuple and the dorny/paths-filter
+  # `excalibur-paths` list inside verify_os.yml describe the SAME set
+  # of files. The local pre-commit hook (`files:` regex) covers edits
+  # to verify_os.yml OR the parity script itself; this CI mirror covers
+  # the same files as a defence-in-depth gate.
+  # Sync assumption: future edits to either the pre-commit `files:`
+  # regex below OR this job's `uses:`/script invocation MUST be
+  # mirrored in the pre-commit config; break this only by rewriting
+  # both in lock-step within the same PR.
+  excalibur-filter-parity:
+    name: EXCALIBUR PyInstaller Filter Parity
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install pyyaml
+        run: pip install pyyaml
+
+      - name: Detect changes to parity-affected files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            excalibur-parity-paths:
+              # Strict 1:1 mirror of .pre-commit-config.yaml hook
+              # `excalibur-pyinstaller-filter-parity` `files:` regex.
+              - '.github/workflows/verify_os.yml'
+              - 'scripts/check_excalibur_filter_parity.py'
+
+      - name: Run excalibur filter parity check
+        if: steps.filter.outputs.excalibur-parity-paths == 'true' || github.event_name == 'workflow_dispatch'
+        run: python scripts/check_excalibur_filter_parity.py
+
+      - name: Skipped (no parity-affected paths changed)
+        if: steps.filter.outputs.excalibur-parity-paths != 'true' && github.event_name != 'workflow_dispatch'
+        run: |
+          echo "::notice::No excalibur filter-parity-affected paths changed."
+          echo "Skipping parity gate (matches local pre-commit hook for the same files)."
+          echo "Filter source of truth: .pre-commit-config.yaml hook 'excalibur-pyinstaller-filter-parity'."

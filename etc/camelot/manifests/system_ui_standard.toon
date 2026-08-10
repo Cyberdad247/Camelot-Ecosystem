@@ -1,0 +1,13 @@
+## TOON Spec v3.3-PRIME -- EXCALIBUR_STANDARD_PWA_CARTRIDGE
+UI_Identity: "Luxury_Minimalist_Brutalism_(SB-100-OMEGA)"
+Color_Palette: "Obsidian(#05050A)|Void(#12121A)|Trit-Cyan(#00E5FF)|Royal-Gold(#FFD700)"
+Architecture_Rules: items[4]{rule,enforcement,reasoning}:
+Offline_First,Vite_PWA_ServiceWorker,Instant_load_and_resilience
+Thin_Client,Zero_Local_LLM_Execution,Prevent_mobile_battery_and_RAM_drain
+VRAM_Scarcity,Strict_gl.dispose()_on_unmount,Prevent_WebGL_context_crashes
+Data_Conduit,Bifrost_Bridge_(SSE/WebRTC),Sub-500ms_latency_updates
+Z_Index_Topology: items[4]{layer,component,pointer_events}:
+0_Spatial,R3F_Canvas_(Globe/Avatar),None
+10_Telemetry,Bento_Box_Panels,Auto
+40_Hologram,Agent-Native_MDX_Overlay,Auto
+50_Command,OmniTerminal_&_VoiceOrb,Auto
