@@ -71,7 +71,7 @@ export class MoltbotGateway {
     return 'LOW';
   }
 
-  static async verifySignature(challenge: any, response: any, publicKey: string): Promise<boolean> {
+  static async verifySignature(challenge: z.infer<typeof IronGateChallengeSchema>, response: z.infer<typeof IronGateResponseSchema>, publicKey: string): Promise<boolean> {
     // [Arthur's Amendment]: 30s TTL Verification
     const now = Date.now() / 1000;
     if (now - challenge.timestamp > 30) {
@@ -91,7 +91,7 @@ export class MoltbotGateway {
   }
 }
 
-export async function enforceBiometricGate(intent: string, titanLink: any) {
+export async function enforceBiometricGate(intent: string, titanLink: { send: (payload: unknown) => Promise<unknown> }) {
   const risk = MoltbotGateway.assessRisk(intent);
 
   if (risk === 'HIGH' || risk === 'CRITICAL') {

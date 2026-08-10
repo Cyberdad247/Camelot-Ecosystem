@@ -119,6 +119,11 @@ This isn't a roadmap cosplaying as a product. Here's what's **on `main`, tested,
 - ✅ **Phase-H Autonomous Framework** — optimization executor, result tracker, rollback, continuous-learning loop
 - ✅ **Reforged VFS Scaffolder** — position-addressed markdown VFS under the `vfs/` namespace, isolating system paradigms, blueprint DAGs, and progressive disclosure boundaries
 - ✅ **Interactive Onboarding System** — python diagnostics server and Vanilla CSS dashboard on port `8099` for system check verification
+- [+] **Mamba-Firn SSM Recurrence** — Ternary quantizer logic and Mamba-Firn linear recurrence integrated into the Ouroboros reasoning engine (01_KERNEL/reasoning/ouroboros_engine).
+- [+] **HMAC Cache Salting** — Tenant-isolated cache safety and cryptographic verification in local cache lanes (tests/test_mempalace_security.py).
+- [+] **Multivoice Switchboard & Bridge** — Go-native goroutine-parallel router and local KV-cache affinity telemetry bridge (control_plane/multivoice_bridge.py).
+- [+] **Bifrost Triage Swarm** — Automated dispatch triage engine and service registry reconciliation loop (control_plane/bifrost_triage_swarm.py).
+- [+] **Anya Cockpit Bento Overhaul** — Excalibur PWA layout restructured as a brutalist dashboard with ChromeDevTools MCP assimilation and node mesh trackers (cartridges/system-ui).
 
 > **52 pytest · 19 module selftests · 8 Rust tests · `cargo audit` clean · WSL2 memfd verified.**
 

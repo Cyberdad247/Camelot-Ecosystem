@@ -1,4 +1,4 @@
-const VERSION = "anya-cockpit-4cce61e2cf9b";
+const VERSION = "anya-cockpit-7d36f5912917";
 const SHELL_CACHE = `${VERSION}-shell`;
 const ASSET_CACHE = `${VERSION}-assets`;
 const SHELL = ["/", "/offline.html", "/manifest.json", "/icon.svg", "/icon-192.png", "/icon-512.png", "/anya.png"];

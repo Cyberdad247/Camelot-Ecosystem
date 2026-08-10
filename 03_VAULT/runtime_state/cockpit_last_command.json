@@ -2,18 +2,19 @@
   "status": "ROUTED",
   "routed": true,
   "classification": "runic",
-  "input": "//STATUS",
-  "rune": "//STATUS",
-  "knight": "sir_boris",
+  "input": "//PLAN build cockpit",
+  "rune": "//PLAN",
+  "knight": "merlin_omega",
   "mode": "ORACLE",
-  "directive": "//STATUS",
-  "task_id": "rune-fdbe952d",
+  "directive": "//PLAN build cockpit",
+  "task_id": "rune-353d90ed",
   "queued": true,
   "queue_error": null,
   "metadata": {
-    "action": "system_status",
-    "detail": "run: python -m control_plane.harness --status"
+    "action": "tot_planning",
+    "output": "Plan.json",
+    "param": "build cockpit"
   },
-  "latency_ms": 0.6,
-  "timestamp_utc": "2026-05-21T18:01:40.520659+00:00"
+  "latency_ms": 66.01,
+  "timestamp_utc": "2026-08-09T20:43:52.835441+00:00"
 }
