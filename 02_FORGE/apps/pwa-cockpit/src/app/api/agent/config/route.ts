@@ -49,6 +49,7 @@ type ProviderId =
 // (tests/agent-config-drift.test.ts) and the contract-pinning
 // `as const satisfies` anchors can `import type { AgentConfig }`
 // from this module without tsc TS2459.
+// Mirror of CAMELOT_OS/02_FORGE/KINETIC_ARMORY/goose/ui/desktop/src/components/settings/providers/PWACockpitStatusBanner.tsx:51 -- same pattern, applied to the local-interface side of the same cross-worktree contract pin.
 export interface AgentConfig {
   /** Active LLM provider id (matches the LLMProvider union in src/lib/agents/llm-adapter.ts). */
   active_provider: ProviderId;
