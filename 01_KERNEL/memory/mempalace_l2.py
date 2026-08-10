@@ -4,6 +4,9 @@ import os
 import sys
 from pathlib import Path
 from typing import Any, Optional
+import logging
+
+logger = logging.getLogger("MemPalaceL2")
 
 try:
     import chromadb
@@ -25,7 +28,7 @@ class MemPalaceL2:
         # System-level secret for HMAC salting
         secret_env = os.environ.get("MEMPALACE_SECRET")
         if not secret_env:
-            sys.stderr.write("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.\n")
+            logger.warning("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
             secret_env = "OMEGA_DEER_CORE_FIX_2026"
             
         self._secret = secret_env.encode()
@@ -43,7 +46,7 @@ class MemPalaceL2:
         else:
             self.client = None
             # Log warning or handle gracefully
-            sys.stderr.write("WARNING: chromadb not installed. L2 Memory is in DARK mode.\n")
+            logger.warning("chromadb not installed. L2 Memory is in DARK mode.")
 
     def _get_collection_name(self, wing: str, room: str, tenant_id: str = "default") -> str:
         """Map wing/room/tenant to a valid ChromaDB collection name."""

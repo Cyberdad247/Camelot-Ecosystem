@@ -1,5 +1,5 @@
 # CAMELOT-OS ♜💠♜ WORLDTREE ENTIRE MAP ♜💠♜
-**Generated:** 2026-08-10 11:50:14
+**Generated:** 2026-08-10 12:14:37
 **Context:** Dynamic VFS Node Mapping (vMAX)
 
 This document is dynamically generated to represent the exact, real-time node structure of the Camelot-OS Worldtree.
@@ -15011,6 +15011,7 @@ CAMELOT_OS/
 ├── Dockerfile
 ├── dump.rdb
 ├── EMERGENCY_DIAGNOSTIC.sh
+├── entiremap.md
 ├── excalibur.py
 ├── excalibur.spec
 ├── excalibur_controller.py

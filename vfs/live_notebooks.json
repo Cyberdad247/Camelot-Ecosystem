@@ -1,5 +1,95 @@
 [
   {
+    "id": "8c656cfa-a189-409e-a72d-07692a47f17e",
+    "title": "Camelot-OS v.1000",
+    "source_count": 0
+  },
+  {
+    "id": "219e765a-0c8e-4b66-b356-f277cb441b14",
+    "title": "Anya Omega: Sovereign Compiler of Camelot-OS",
+    "source_count": 0
+  },
+  {
+    "id": "fe87c2d5-8e0e-4885-a510-05d2fa97cd6a",
+    "title": "Sir Sonus: The Audio Physics of AI Record Labels",
+    "source_count": 0
+  },
+  {
+    "id": "f6466e10-d1b1-4904-9f87-081d031b0595",
+    "title": "Sovereign_Workspace: LADY APIS",
+    "source_count": 0
+  },
+  {
+    "id": "e8dfbd26-c6ee-430a-a83e-94384f90d3cd",
+    "title": "HiveIDE-aka Inspira (Cleaned Copy)",
+    "source_count": 0
+  },
+  {
+    "id": "05f1985d-e356-45d9-85b8-d101013a90b8",
+    "title": "Sovereign_Workspace: SIR CODEX",
+    "source_count": 0
+  },
+  {
+    "id": "28d49148-28db-438d-a299-61456fdfdefc",
+    "title": "Sovereign_Workspace: SIR HELIOS",
+    "source_count": 0
+  },
+  {
+    "id": "b4cfc5af-1555-4f23-a131-1ec6d03c2787",
+    "title": "Sovereign_Workspace: SIR GHOST",
+    "source_count": 0
+  },
+  {
+    "id": "3a09997b-3d65-46c9-b9aa-fb8ebce927a9",
+    "title": "Sovereign_Workspace: SIR SENTINEL",
+    "source_count": 0
+  },
+  {
+    "id": "96f9233b-6efa-46a3-8242-98f0c463680c",
+    "title": "Sovereign_Workspace: SIR FORGE",
+    "source_count": 0
+  },
+  {
+    "id": "da2e51db-780a-48cf-a40a-4f0f65ff9295",
+    "title": "Sovereign_Workspace: SIR BORIS",
+    "source_count": 0
+  },
+  {
+    "id": "e9fcbbbc-cd43-4b2d-a437-b2570267a0a9",
+    "title": "Sovereign_Workspace: SIR ALEX",
+    "source_count": 0
+  },
+  {
+    "id": "19f90acf-6731-4ba3-bf87-1310b1c97564",
+    "title": "Camelot OS v57.0 Master Bootstrap Protocol",
+    "source_count": 0
+  },
+  {
+    "id": "eaff9959-4d7b-4761-8850-c0b2e25a2b45",
+    "title": "Living Camelot-OS",
+    "source_count": 0
+  },
+  {
+    "id": "28bca096-1ba2-4e47-8b92-aa88e90be210",
+    "title": "Camelot-OS v.999.3",
+    "source_count": 0
+  },
+  {
+    "id": "d02cc716-d235-4d34-9185-a07860ec5272",
+    "title": "Camelot-OS v.700.0",
+    "source_count": 0
+  },
+  {
+    "id": "bcaadfdd-1654-487d-9c4c-111f7dea120e",
+    "title": "Living Camelot-OS v.400",
+    "source_count": 0
+  },
+  {
+    "id": "a9cf586e-1971-4959-bb97-cdcd37257ebb",
+    "title": "living Camelot-OS: The v300.4.0 Universal Singularity Recompilation",
+    "source_count": 0
+  },
+  {
     "id": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
     "title": "Synergizing NotebookLM and Anti-Gravity for AI Automation Systems",
     "source_count": 0
@@ -20,11 +110,6 @@
     "source_count": 0
   },
   {
-    "id": "219e765a-0c8e-4b66-b356-f277cb441b14",
-    "title": "Anya Omega: Sovereign Compiler of Camelot-OS",
-    "source_count": 0
-  },
-  {
     "id": "ba124b29-11d0-4119-9f4f-f5b49d3ae828",
     "title": "CAMELOT-OS: Sir Heimdall (The Bifrost Guardian)",
     "source_count": 0
@@ -32,11 +117,6 @@
   {
     "id": "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",
     "title": "Bifrost Bridge: Camelot-OS Trust and Transport Architecture",
-    "source_count": 0
-  },
-  {
-    "id": "8c656cfa-a189-409e-a72d-07692a47f17e",
-    "title": "Camelot-OS v.1000",
     "source_count": 0
   },
   {
@@ -210,11 +290,6 @@
     "source_count": 0
   },
   {
-    "id": "fe87c2d5-8e0e-4885-a510-05d2fa97cd6a",
-    "title": "Sir Sonus: The Audio Physics of AI Record Labels",
-    "source_count": 0
-  },
-  {
     "id": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
     "title": "Sovereign_Workspace: SIR_ALEX",
     "source_count": 0
@@ -385,28 +460,8 @@
     "source_count": 0
   },
   {
-    "id": "a9cf586e-1971-4959-bb97-cdcd37257ebb",
-    "title": "living Camelot-OS: The v300.4.0 Universal Singularity Recompilation",
-    "source_count": 0
-  },
-  {
-    "id": "bcaadfdd-1654-487d-9c4c-111f7dea120e",
-    "title": "Living Camelot-OS v.400",
-    "source_count": 0
-  },
-  {
-    "id": "d02cc716-d235-4d34-9185-a07860ec5272",
-    "title": "Camelot-OS v.700.0",
-    "source_count": 0
-  },
-  {
     "id": "cab403c0-bb66-454d-a529-84f7e8ac5cff",
     "title": "Court of Camelot 3.0: Agentic Ecosystem Architecture",
-    "source_count": 0
-  },
-  {
-    "id": "eaff9959-4d7b-4761-8850-c0b2e25a2b45",
-    "title": "Living Camelot-OS",
     "source_count": 0
   },
   {
@@ -417,11 +472,6 @@
   {
     "id": "f7707daa-2d10-4db8-8fda-be4661a27793",
     "title": "Sovereign_Workspace: SIR_BORIS",
-    "source_count": 0
-  },
-  {
-    "id": "e9fcbbbc-cd43-4b2d-a437-b2570267a0a9",
-    "title": "Sovereign_Workspace: SIR ALEX",
     "source_count": 0
   },
   {
@@ -575,11 +625,6 @@
     "source_count": 0
   },
   {
-    "id": "19f90acf-6731-4ba3-bf87-1310b1c97564",
-    "title": "Camelot OS v57.0 Master Bootstrap Protocol",
-    "source_count": 0
-  },
-  {
     "id": "482222a1-f7e6-4a36-8f4f-cad872b9f511",
     "title": "G.E.M. Universal Blueprint: Nexus Core and Agent Orchestration",
     "source_count": 0
@@ -670,11 +715,6 @@
     "source_count": 0
   },
   {
-    "id": "e8dfbd26-c6ee-430a-a83e-94384f90d3cd",
-    "title": "HiveIDE-aka Inspira (Cleaned Copy)",
-    "source_count": 0
-  },
-  {
     "id": "dd7cc61f-3b4f-457b-b312-41838ac96c1c",
     "title": "Pi: The NeoVim of Coding Agents",
     "source_count": 0
@@ -697,11 +737,6 @@
   {
     "id": "b6ec57ed-e232-4b9b-9bcf-338b70bc5365",
     "title": "Sovereign_Workspace: LADY SPARKLE",
-    "source_count": 0
-  },
-  {
-    "id": "f6466e10-d1b1-4904-9f87-081d031b0595",
-    "title": "Sovereign_Workspace: LADY APIS",
     "source_count": 0
   },
   {
@@ -775,11 +810,6 @@
     "source_count": 0
   },
   {
-    "id": "3a09997b-3d65-46c9-b9aa-fb8ebce927a9",
-    "title": "Sovereign_Workspace: SIR SENTINEL",
-    "source_count": 0
-  },
-  {
     "id": "3e61cfb1-b62d-4e9b-893e-4735d1a55426",
     "title": "Sovereign_Workspace: SIR OUROBOROS",
     "source_count": 0
@@ -795,33 +825,8 @@
     "source_count": 0
   },
   {
-    "id": "b4cfc5af-1555-4f23-a131-1ec6d03c2787",
-    "title": "Sovereign_Workspace: SIR GHOST",
-    "source_count": 0
-  },
-  {
-    "id": "96f9233b-6efa-46a3-8242-98f0c463680c",
-    "title": "Sovereign_Workspace: SIR FORGE",
-    "source_count": 0
-  },
-  {
-    "id": "28d49148-28db-438d-a299-61456fdfdefc",
-    "title": "Sovereign_Workspace: SIR HELIOS",
-    "source_count": 0
-  },
-  {
-    "id": "da2e51db-780a-48cf-a40a-4f0f65ff9295",
-    "title": "Sovereign_Workspace: SIR BORIS",
-    "source_count": 0
-  },
-  {
     "id": "71399d4d-fabd-4897-a877-bf7e26cb9e96",
     "title": "Sovereign_Workspace: SIR HASHIMOTO",
-    "source_count": 0
-  },
-  {
-    "id": "05f1985d-e356-45d9-85b8-d101013a90b8",
-    "title": "Sovereign_Workspace: SIR CODEX",
     "source_count": 0
   },
   {
@@ -872,11 +877,6 @@
   {
     "id": "b90d1d33-09f6-4ed3-891b-47adba94e199",
     "title": "Kickbox Audio (KBA) Services Node",
-    "source_count": 0
-  },
-  {
-    "id": "28bca096-1ba2-4e47-8b92-aa88e90be210",
-    "title": "Camelot-OS v.999.3",
     "source_count": 0
   },
   {

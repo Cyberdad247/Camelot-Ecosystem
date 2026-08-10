@@ -1,0 +1,420 @@
+{
+  "KING_ARTHUR": {
+    "knight_id": "KING_ARTHUR",
+    "title": "Sovereign Lord",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Authority",
+    "rune": "ᛟ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880868+00:00"
+  },
+  "SIR_BORIS": {
+    "knight_id": "SIR_BORIS",
+    "title": "Crucible Master",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Architecture",
+    "rune": "ᚨ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880884+00:00"
+  },
+  "SIR_ALEX": {
+    "knight_id": "SIR_ALEX",
+    "title": "DAG Tactician",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Planning",
+    "rune": "ᚨ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880887+00:00"
+  },
+  "SIR_FORGE": {
+    "knight_id": "SIR_FORGE",
+    "title": "Kinetic Paladin",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Execution",
+    "rune": "ᚠ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880889+00:00"
+  },
+  "SIR_CODEX": {
+    "knight_id": "SIR_CODEX",
+    "title": "Cybernetic Knight",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Velocity",
+    "rune": "ᚠ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880892+00:00"
+  },
+  "SIR_SENTINEL": {
+    "knight_id": "SIR_SENTINEL",
+    "title": "Iron Shield",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Security",
+    "rune": "ᛜ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880894+00:00"
+  },
+  "SIR_DEBUG": {
+    "knight_id": "SIR_DEBUG",
+    "title": "Alchemical Doctor",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Self-Healing",
+    "rune": "ᛞ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880896+00:00"
+  },
+  "SIR_GHOST": {
+    "knight_id": "SIR_GHOST",
+    "title": "Shadow Spectre",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Air-Gap Privacy",
+    "rune": "ᛜ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880898+00:00"
+  },
+  "LADY_APIS": {
+    "knight_id": "LADY_APIS",
+    "title": "Knowledge Scout",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Research",
+    "rune": "ᚱ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880900+00:00"
+  },
+  "MERLIN_OMEGA": {
+    "knight_id": "MERLIN_OMEGA",
+    "title": "Archmage Reasoner",
+    "level": 10,
+    "xp": 1150,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Deep Thinking",
+    "rune": "ᚱ",
+    "skill_graph_tier": "S2 Composite",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 1,
+    "last_active": "2026-08-10T20:23:34.207715+00:00"
+  },
+  "SIR_HELIO": {
+    "knight_id": "SIR_HELIO",
+    "title": "Vocal Bard",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Realtime Audio",
+    "rune": "ᚢ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880904+00:00"
+  },
+  "SIR_SONUS": {
+    "knight_id": "SIR_SONUS",
+    "title": "Harmonic Weaver",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Phonetics",
+    "rune": "ᚢ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880906+00:00"
+  },
+  "LADY_MNEMOSYNE": {
+    "knight_id": "LADY_MNEMOSYNE",
+    "title": "Memory Chronicler",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Swarm Governance",
+    "rune": "ᛗ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880908+00:00"
+  },
+  "ANYA_QUANTUM_MANTRA": {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "title": "Quantum Alchemist",
+    "level": 10,
+    "xp": 1150,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Token Compression",
+    "rune": "ᛗ",
+    "skill_graph_tier": "S2 Composite",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 1,
+    "last_active": "2026-08-10T20:23:36.674520+00:00"
+  },
+  "SIR_HEIMDALL": {
+    "knight_id": "SIR_HEIMDALL",
+    "title": "Bifrost Guardian",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "mTLS Transport",
+    "rune": "ᛜ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880914+00:00"
+  },
+  "SIR_GALAHAD": {
+    "knight_id": "SIR_GALAHAD",
+    "title": "Pure Verifier",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Integrity",
+    "rune": "ᚨ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880916+00:00"
+  },
+  "SIR_ALCHEMIST": {
+    "knight_id": "SIR_ALCHEMIST",
+    "title": "Code Optimizer",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Refactoring",
+    "rune": "ᚠ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880930+00:00"
+  },
+  "SIR_HERMES": {
+    "knight_id": "SIR_HERMES",
+    "title": "Swift Messenger",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Telemetry",
+    "rune": "ᚱ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880933+00:00"
+  },
+  "SIR_RUSTCLAW": {
+    "knight_id": "SIR_RUSTCLAW",
+    "title": "Kernel Specialist",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Bare-Metal Rust",
+    "rune": "ᚠ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880936+00:00"
+  },
+  "SIR_STITCH": {
+    "knight_id": "SIR_STITCH",
+    "title": "Cartridge Weaver",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Hot-Swap Packages",
+    "rune": "ᚨ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880938+00:00"
+  },
+  "LADY_SPARKLE": {
+    "knight_id": "LADY_SPARKLE",
+    "title": "UI Virtuoso",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Aesthetics",
+    "rune": "ᚠ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880940+00:00"
+  },
+  "SIR_SCAVENGER": {
+    "knight_id": "SIR_SCAVENGER",
+    "title": "Orphan Purger",
+    "level": 10,
+    "xp": 1000,
+    "xp_to_next_level": 1500,
+    "primary_stat": "Garbage Collection",
+    "rune": "ᚦ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.85,
+      "conscientiousness": 0.95,
+      "extraversion": 0.3,
+      "agreeableness": 0.6,
+      "neuroticism": 0.05
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-10T20:23:31.880943+00:00"
+  }
+}

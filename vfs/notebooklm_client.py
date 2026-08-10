@@ -39,11 +39,7 @@ except ImportError:
     NOTEBOOKLM_AVAILABLE = False
     LOG.warning("[NLM] notebooklm-py not installed. Run: pip install notebooklm-py[browser]")
 
-try:
-    from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
-except ImportError:
-    KNIGHT_NOTEBOOKS = {}
-
+# KNIGHT_NOTEBOOKS is imported lazily inside functions to prevent circular imports with cloudbrain_connector.py
 
 def _run_async(coro):
     """Run an async coroutine synchronously — safe for non-async callers."""
@@ -102,6 +98,10 @@ async def _push_note_async(knight_id: str, title: str, content: str) -> bool:
     async with await _get_client() as client:
         if not client:
             return False
+        try:
+            from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
+        except ImportError:
+            KNIGHT_NOTEBOOKS = {}
         notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
         if not notebook_id:
             LOG.warning(f"[NLM] No notebook mapped for {knight_id}")
@@ -126,6 +126,10 @@ async def _push_source_async(knight_id: str, title: str, content: str) -> bool:
     async with await _get_client() as client:
         if not client:
             return False
+        try:
+            from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
+        except ImportError:
+            KNIGHT_NOTEBOOKS = {}
         notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
         if not notebook_id:
             return False
@@ -189,6 +193,10 @@ def query_notebook(knight_id: str, question: str) -> Optional[str]:
         async with await _get_client() as client:
             if not client:
                 return None
+            try:
+                from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
+            except ImportError:
+                KNIGHT_NOTEBOOKS = {}
             notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
             if not notebook_id:
                 return None
