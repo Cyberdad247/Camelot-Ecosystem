@@ -121,6 +121,7 @@ def register_kba_tools(registry: Any) -> list[str]:
 
 if __name__ == "__main__":
     import json
+
     from cartridge.tool_registry import ToolRegistry
     r = ToolRegistry()
     register_kba_tools(r)

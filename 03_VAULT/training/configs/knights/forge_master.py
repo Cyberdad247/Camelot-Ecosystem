@@ -10,6 +10,7 @@ Runes: //FORGE_SWARM, //SYNC_PHIAL
 
 import hashlib
 import time
+
 from .base import BaseKnight
 
 
@@ -75,10 +76,10 @@ class SirForgeMaster(BaseKnight):
         blueprint_hash = hashlib.sha256(directive.encode()).hexdigest()[:12]
 
         output_lines = [
-            f"[FORGE_MASTER] //FORGE_SWARM activated",
+            "[FORGE_MASTER] //FORGE_SWARM activated",
             f"  Blueprint hash: {blueprint_hash}",
             f"  Lanes: {lane_count} | PIV loop: ACTIVE",
-            f"  Titanium Law T1: COMPLIANT (no raw exec)",
+            "  Titanium Law T1: COMPLIANT (no raw exec)",
             f"  Directive: {directive[:120]}{'...' if len(directive) > 120 else ''}",
             "",
             "  Agent lane topology: parallel, dependency-resolved",
@@ -106,11 +107,11 @@ class SirForgeMaster(BaseKnight):
             self._phial_history.pop(0)
 
         output_lines = [
-            f"[FORGE_MASTER] //SYNC_PHIAL activated",
+            "[FORGE_MASTER] //SYNC_PHIAL activated",
             f"  Tick: {tick} | History depth: {len(self._phial_history)}/{self._PHIAL_HISTORY_MAX}",
-            f"  Mutex: LOCKED (500ms timeout)",
-            f"  Coherence diff: running...",
-            f"  Conflicts: escalated to MERLIN_Omega if detected",
+            "  Mutex: LOCKED (500ms timeout)",
+            "  Coherence diff: running...",
+            "  Conflicts: escalated to MERLIN_Omega if detected",
             f"  Rollback available to tick: {self._phial_history[0]['tick'] if self._phial_history else 'N/A'}",
         ]
 

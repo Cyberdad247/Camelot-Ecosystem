@@ -32,7 +32,6 @@ from __future__ import annotations
 
 from pathlib import Path
 
-
 # Canonical V4000 trio filenames, in display order. Single source of
 # truth across portable CLI + any future consumer (MCP tool description,
 # IDE extension, etc.).

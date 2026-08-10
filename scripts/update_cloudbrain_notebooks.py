@@ -98,7 +98,7 @@ UPDATES = [
 
 
 async def main() -> int:
-    from notebooklm.auth import load_auth_from_storage, fetch_tokens, AuthTokens
+    from notebooklm.auth import AuthTokens, fetch_tokens, load_auth_from_storage
     cookies = load_auth_from_storage()
     csrf, session = await fetch_tokens(cookies)
     tokens = AuthTokens(cookies=cookies, csrf_token=csrf, session_id=session)

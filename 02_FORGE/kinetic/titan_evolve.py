@@ -5,9 +5,9 @@
 Purpose: Skill Unlocking & Evolution. 
 Act as: The Shaper.
 """
-import sys
 import os
 import re
+import sys
 
 VAULT_ROOT = r"C:\Users\vizio\CAMELOT_OS\03_VAULT"
 

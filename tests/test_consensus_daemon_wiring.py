@@ -9,15 +9,16 @@ import pytest
 pytest.importorskip("cryptography")
 pytest.importorskip("prometheus_client")
 
+from control_plane.distributed_ledger_consensus import (  # noqa: E402
+    ConsensusMessage,
+    ConsensusPhase,
+)
+
 from control_plane.cluster.consensus_daemon import (  # noqa: E402
     HttpConsensusNode,
     register_routes,
 )
 from control_plane.cluster.http_daemon import HttpDaemon  # noqa: E402
-from control_plane.distributed_ledger_consensus import (  # noqa: E402
-    ConsensusMessage,
-    ConsensusPhase,
-)
 
 
 def _free_port() -> int:

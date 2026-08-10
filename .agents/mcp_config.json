@@ -1,0 +1,20 @@
+{
+  "mcpServers": {
+    "NotebookLM_Worldtree_Node": {
+      "command": "python",
+      "args": [
+        "-m",
+        "control_plane.worldtree_mcp_bridge"
+      ],
+      "env": {
+        "TARGET_NOTEBOOK_ID": "Worldtree",
+        "AUTH_MODE": "Session_Cookie_Bridge_OAuth2_Hard_Token",
+        "TIMEOUT_CEILING_MS": "150",
+        "LOCAL_SYNC_DIR": "~/open-notebook/",
+        "CLOUD_SYNC_DIR": "Worldtree_NotebookLM",
+        "SYNC_RULE": "CRDT_Conflict_Free_Replication",
+        "PRIME_DIRECTIVE": "SIR_ALEX_LINK_BIFROST_NETWORK_ROUTER"
+      }
+    }
+  }
+}

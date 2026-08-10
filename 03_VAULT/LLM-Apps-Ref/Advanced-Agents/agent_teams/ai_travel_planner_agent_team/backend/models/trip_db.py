@@ -1,9 +1,10 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from sqlalchemy import Column, String, Text, DateTime
 from datetime import datetime, timezone
 from typing import Optional
+
 from cuid2 import Cuid
+from sqlalchemy import Column, DateTime, String, Text
 
 CUID_GENERATOR: Cuid = Cuid()
 

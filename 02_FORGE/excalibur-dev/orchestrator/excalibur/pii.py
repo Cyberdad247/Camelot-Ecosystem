@@ -4,6 +4,7 @@ The eBPF layer lives in crates/aegis (STUB); this is the userspace regex
 fallback that runs today and gates all I/O when BTF/eBPF is unavailable.
 """
 from __future__ import annotations
+
 import re
 
 _PATTERNS = {

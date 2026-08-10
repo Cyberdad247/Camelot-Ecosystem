@@ -1,17 +1,18 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import re
 import asyncio
-from textwrap import dedent
-from agno.agent import Agent
-from agno.tools.mcp import MultiMCPTools
-from agno.tools.googlesearch import GoogleSearchTools
-from agno.models.openai import OpenAIChat
-from icalendar import Calendar, Event
-from datetime import datetime, timedelta
-import streamlit as st
-from datetime import date
 import os
+import re
+from datetime import date, datetime, timedelta
+from textwrap import dedent
+
+import streamlit as st
+from agno.agent import Agent
+from agno.models.openai import OpenAIChat
+from agno.tools.googlesearch import GoogleSearchTools
+from agno.tools.mcp import MultiMCPTools
+from icalendar import Calendar, Event
+
 
 def generate_ics_content(plan_text: str, start_date: datetime = None) -> bytes:
     """

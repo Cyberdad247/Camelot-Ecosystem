@@ -12,16 +12,15 @@ Phases:
 5. Reporting: Output JSON metrics and a detailed summary of repository health.
 """
 
-import os
-import sys
-import re
+import datetime
 import json
 import logging
+import os
 import subprocess
-import datetime
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass, field, asdict
-from typing import List, Dict, Any, Tuple, Optional
+import sys
+from concurrent.futures import ThreadPoolExecutor
+from dataclasses import asdict, dataclass
+from typing import Any, Dict, List, Optional
 
 # Configure Logging with premium formatting
 logging.basicConfig(

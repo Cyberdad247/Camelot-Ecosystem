@@ -4,7 +4,6 @@ import importlib.util
 import sys
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[1]
 BIFROST_PATH = ROOT / "bin" / "bifrost.py"
 
@@ -71,9 +70,9 @@ def test_oidc_roaming_verification(monkeypatch):
 
     # Mock token decoding
     # JWT with iss matching the trusted list, and not expired
-    import time
-    import json
     import base64
+    import json
+    import time
     header = base64.urlsafe_b64encode(b'{"alg":"HS256"}').decode().rstrip("=")
     payload_data = {
         "iss": "https://accounts.google.com",

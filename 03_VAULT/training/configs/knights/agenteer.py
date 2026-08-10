@@ -6,6 +6,7 @@ and upgrade internal prompts, MPI vectors, and reasoning graphs.
 
 from .base import BaseKnight
 
+
 class Agenteer(BaseKnight):
     """The self-improvement meta-agent."""
     

@@ -176,7 +176,7 @@ def _next_steps(brief: ResearchBrief) -> list[str]:
     if not brief.ancestor_synced:
         steps.append("Manually sync results to NotebookLM: //BROWSE apis: sync research")
     if brief.tier != "apex":
-        steps.append(f"Escalate to apex tier for deeper fact verification.")
+        steps.append("Escalate to apex tier for deeper fact verification.")
     steps.append("Generate NotebookLM audio/slides artifact from synthesis.")
     steps.append("Review Integration Brain LT for persisted findings.")
     return steps[:4]
@@ -361,7 +361,7 @@ async def _chimera_round_3(
         )
         output = await async_synthesize(query)
         output = output or "[no compression output]"
-    except Exception as e:
+    except Exception:
         # Fallback to LLM if NLM unavailable
         output = await _llm_round(
             f"Compress this research on '{objective}' into a dense brief:\n\n"
@@ -430,7 +430,7 @@ async def _sync_ancestor(
     synced = False
     added = 0
     try:
-        from notebooklm_bridge import async_sync_state, async_sources_add, CANONICAL_NOTEBOOK_ID
+        from notebooklm_bridge import CANONICAL_NOTEBOOK_ID, async_sources_add, async_sync_state
         note_content = (
             f"# Research: {objective}\n\n"
             f"**Tier:** {brief.tier} | "

@@ -1,8 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import modal
 import os
 from datetime import datetime
+
+import modal
 
 # 1. FORGE DEFINITION
 app = modal.App("camelot-kinetic-fortress")
@@ -19,10 +20,10 @@ image = modal.Image.debian_slim().pip_install(
 @app.function(image=image, secrets=[modal.Secret.from_name("my-sovereign-secrets")])
 @modal.web_endpoint()
 def anya_viewport(task: str):
-    from appwrite.client import Client
-    from appwrite.services.databases import Databases
-    from appwrite.id import ID
     import google.generativeai as genai
+    from appwrite.client import Client
+    from appwrite.id import ID
+    from appwrite.services.databases import Databases
 
     # 🛡️ GATE I: ANCHOR THE HANDSHAKE
     client = Client()

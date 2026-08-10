@@ -3,6 +3,7 @@
 # Sidebar with About section
 import streamlit as st
 
+
 def render_sidebar():
     st.sidebar.header("About")
     st.sidebar.info(

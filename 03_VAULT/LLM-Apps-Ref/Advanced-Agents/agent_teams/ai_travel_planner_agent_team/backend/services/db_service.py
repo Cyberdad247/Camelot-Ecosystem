@@ -9,17 +9,12 @@ and context managers for proper resource management.
 """
 
 import os
-from typing import Any, AsyncGenerator, Dict, Optional
 from contextlib import asynccontextmanager
+from typing import Any, AsyncGenerator, Dict, Optional
 
-from sqlalchemy import text
-from sqlalchemy.ext.asyncio import (
-    AsyncSession,
-    create_async_engine,
-    async_sessionmaker,
-    AsyncEngine
-)
 from loguru import logger
+from sqlalchemy import text
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
 
 # Database connection string from environment variable
 # Convert psycopg to SQLAlchemy format if needed

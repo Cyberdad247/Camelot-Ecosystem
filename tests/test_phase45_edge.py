@@ -7,12 +7,11 @@ ml-kem migration P4-T04, memfd P4-T05, MicroVM P5-T02) are tracked separately.
 """
 from __future__ import annotations
 
-from control_plane.empire_drone import EmpireMesh, DroneAnnounce
-from control_plane.swarm_pin import SwarmPinner
-from control_plane.scarcity_protocol import ScarcityManager, ScarcityBreach, GiB
-from control_plane.voice_ingress import VoiceIngress, parse_transcript
+from control_plane.empire_drone import DroneAnnounce, EmpireMesh
 from control_plane.preview_drone import PreviewDrone
-
+from control_plane.scarcity_protocol import GiB, ScarcityBreach, ScarcityManager
+from control_plane.swarm_pin import SwarmPinner
+from control_plane.voice_ingress import VoiceIngress, parse_transcript
 
 # ── P4-T03 Empire Drone discovery/registration ───────────────────────────────
 

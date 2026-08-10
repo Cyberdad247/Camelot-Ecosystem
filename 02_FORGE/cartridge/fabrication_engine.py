@@ -7,22 +7,23 @@ The assembly line for Project Chimera's dynamic agents.
 Uses template-driven synthesis to compile Just-in-Time (JIT) cartridges.
 """
 
-import os
-import json
 import hashlib
-from typing import Dict, Any
+import json
+import os
 from datetime import datetime
+from typing import Any, Dict
 
 from .cartridge_schemas import (
-    CartridgeManifest, 
-    JITToolAdapter, 
-    APIMethod, 
-    SandboxConstraints,
-    STRATEGY_CARTRIDGE_TEMPLATE,
-    ENGINEERING_CARTRIDGE_TEMPLATE,
     CREATIVE_CARTRIDGE_TEMPLATE,
-    OPERATIONS_CARTRIDGE_TEMPLATE
+    ENGINEERING_CARTRIDGE_TEMPLATE,
+    OPERATIONS_CARTRIDGE_TEMPLATE,
+    STRATEGY_CARTRIDGE_TEMPLATE,
+    APIMethod,
+    CartridgeManifest,
+    JITToolAdapter,
+    SandboxConstraints,
 )
+
 
 class CartridgeFabricator:
     """

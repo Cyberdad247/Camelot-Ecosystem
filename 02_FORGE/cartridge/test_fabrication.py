@@ -5,11 +5,13 @@ Test Suite for Cartridge Fabrication Engine
 """
 
 import os
-import sys
 import shutil
+import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from cartridge.fabrication_engine import CartridgeFabricator
+
 
 def test_cartridge_fabrication():
     print("\n=== Testing Cartridge Fabrication ===")
@@ -48,7 +50,7 @@ def test_cartridge_fabrication():
     
     # Cleanup
     shutil.rmtree(fab.output_dir)
-    print(f"✅ Cleanup successful")
+    print("✅ Cleanup successful")
 
 def test_jit_tool_compilation():
     print("\n=== Testing JIT Tool Compilation ===")

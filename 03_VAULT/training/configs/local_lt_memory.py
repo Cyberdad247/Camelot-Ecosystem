@@ -16,7 +16,6 @@ from pathlib import Path
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "memory" / "lt_local"
 MEMORY_LOG = DATA_DIR / "memories.jsonl"

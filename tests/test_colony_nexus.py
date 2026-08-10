@@ -1,7 +1,8 @@
 """OMEGA Defense Nexus Phase 1 acceptance tests — ColonyNexus."""
-import sys
 import importlib.util as _ilu
+import sys
 from pathlib import Path
+
 import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]
@@ -137,7 +138,7 @@ def test_colony_nexus_hermes_delta_fires(critical_report, monkeypatch):
     )
     # Patch import inside colony_nexus module
     colony_mod = sys.modules["colony_nexus"]
-    original = getattr(colony_mod.ColonyNexus, "_emit_hermes")
+    original = colony_mod.ColonyNexus._emit_hermes
 
     emit_calls = []
 

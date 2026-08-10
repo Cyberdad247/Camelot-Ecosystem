@@ -31,12 +31,13 @@ Usage:
     camelot vault list
 """
 
-import sys
-import os
-import json
-import time
 import argparse
 import importlib
+import json
+import os
+import sys
+import time
+
 
 def _read_version():
     """Read version from VERSION file, fallback to 400.1.0."""
@@ -61,7 +62,8 @@ sys.path.insert(0, CAMELOT_DIR)
 
 from anya import compile_intent
 from merlin import route, verify_registry
-from ouroboros import log_execution, get_history, get_stats, export_all
+
+from ouroboros import export_all, get_history, get_stats, log_execution
 
 # Bridge (optional — graceful if CAMELOT_OS not present)
 try:
@@ -432,7 +434,7 @@ def cmd_export(output_path):
     abs_out = os.path.realpath(os.path.abspath(output_path))
     safe_bases = [os.path.realpath(os.getcwd()), os.path.realpath(os.path.expanduser("~"))]
     if not any(abs_out.startswith(b + os.sep) or abs_out == b for b in safe_bases):
-        print(f"ERR Export path must be within home directory or CWD.")
+        print("ERR Export path must be within home directory or CWD.")
         return
     if not output_path.endswith(".json"):
         print("ERR Export path must end with .json")

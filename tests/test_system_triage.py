@@ -5,15 +5,14 @@ import subprocess
 import sys
 from pathlib import Path
 
-from control_plane import runic_router
-from control_plane import camelot_cli
-from control_plane import system_triage
 from control_plane.system_triage import (
     CheckResult,
     TriageOptions,
     aggregate_verdict,
     run_system_triage,
 )
+
+from control_plane import camelot_cli, runic_router, system_triage
 
 
 def _check(

@@ -13,9 +13,13 @@ Status: 12 tests total
 import asyncio
 import sys
 import time
+
 from control_plane.distributed_agent_registry import (
-    DistributedAgentRegistry, DistributedAgentRouter, AgentInfo, AgentStatus,
-    AgentScope
+    AgentInfo,
+    AgentScope,
+    AgentStatus,
+    DistributedAgentRegistry,
+    DistributedAgentRouter,
 )
 
 

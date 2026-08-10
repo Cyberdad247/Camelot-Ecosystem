@@ -1,9 +1,10 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import sys
-import logging
 import inspect
-from typing import Dict, Any, Callable
+import logging
+import sys
+from typing import Any, Callable, Dict
+
 from loguru import logger
 
 # Create logs directory if it doesn't exist

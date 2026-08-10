@@ -21,6 +21,7 @@ import sys
 # ModuleNotFoundError before uvicorn can even bind a port. Keep this as the
 # FIRST executable statement after the `from __future__` import.
 import excalibur_controller  # noqa: E402  — intentional top-level side effect
+
 _APP = excalibur_controller.app
 
 

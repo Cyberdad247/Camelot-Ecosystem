@@ -5,9 +5,10 @@
 Purpose: Scans for 'Lead' (ineificiencies) to transmute into 'Gold' (Optimization).
 Act as: Sir Alchemist.
 """
-import os
-import ast
 import argparse
+import ast
+import os
+
 
 def analyze_file(file_path):
     issues = []

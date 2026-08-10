@@ -7,12 +7,13 @@ Provides an isolated execution environment for agent cartridges.
 Enforces resource budgets, tool whitelisting, and governance policies.
 """
 
-import time
 import json
-from typing import Dict, List, Any, Optional
-from dataclasses import dataclass, field, asdict
+import time
+from dataclasses import asdict, dataclass, field
+from typing import Any, Dict, List, Optional
 
 from .cartridge_schemas import CartridgeManifest, GovernancePolicy, ResourceBudget
+
 
 @dataclass
 class SandboxSession:

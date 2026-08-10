@@ -1,6 +1,8 @@
 import json
 from pathlib import Path
+
 from control_plane.provenance import ProvenanceManager, VerificationRun
+
 
 def test_ledger_hash_chain_integrity():
     # Use a local temporary directory for testing

@@ -11,12 +11,13 @@ USAGE:
     vault.set("GITHUB_TOKEN", "ghp_...")
     token = vault.get("GITHUB_TOKEN")
 """
-import os
-import json
 import base64
+import json
+import os
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
+
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 
@@ -125,7 +126,7 @@ class VaultManager:
         self._log_to_ledger("INIT", "VAULT", "SUCCESS")
         print(f"[OK] Vault initialized at {self.VAULT_DIR}")
         print(f"[KEY] Master key: {self.KEY_FILE}")
-        print(f"[WARNING] NEVER commit the master key to git!")
+        print("[WARNING] NEVER commit the master key to git!")
     
     def set(self, name: str, value: str):
         """Store a credential in the vault."""
@@ -197,7 +198,7 @@ class VaultManager:
         self._save_vault(vault)
         
         self._log_to_ledger("ROTATE_KEY", "VAULT", "SUCCESS")
-        print(f"[OK] Master key rotated. Vault re-encrypted.")
+        print("[OK] Master key rotated. Vault re-encrypted.")
 
 
 def main():

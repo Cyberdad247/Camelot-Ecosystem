@@ -2,14 +2,14 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
 
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel
 from agents.coordinator_agent import coordinator_agent
 from agno.agent import RunResponse
 from dotenv import load_dotenv
+from fastapi import FastAPI
+from fastapi.encoders import jsonable_encoder
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
 
 # Load environment variables
 load_dotenv()

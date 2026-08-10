@@ -1,13 +1,19 @@
 """Tests for the LLM router module."""
 import os
 import sys
+
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from llm_router import (
-    PROVIDERS, FALLBACK_CHAIN, ProviderConfig,
-    _validate_response, list_available, chat, __version__,
+    FALLBACK_CHAIN,
+    PROVIDERS,
+    ProviderConfig,
+    __version__,
+    _validate_response,
+    chat,
+    list_available,
 )
 
 
@@ -67,8 +73,9 @@ def test_list_available_returns_list():
 
 def test_gemini_no_key_in_url():
     """HIGH: Verify Gemini API key is NOT passed as URL parameter."""
-    import llm_router
     import inspect
+
+    import llm_router
     source = inspect.getsource(llm_router._gemini_chat)
     assert "?key=" not in source
 

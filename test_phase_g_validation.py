@@ -14,9 +14,10 @@ Status: Complete validation suite for production readiness
 import asyncio
 import sys
 import time
-from control_plane.distributed_ledger_consensus import DistributedConsensus, NodeRole
+
+from control_plane.distributed_agent_registry import AgentStatus, DistributedAgentRegistry
 from control_plane.distributed_knowledge_sync import DistributedKnowledgeSync, SyncPhase
-from control_plane.distributed_agent_registry import DistributedAgentRegistry, AgentStatus
+from control_plane.distributed_ledger_consensus import DistributedConsensus, NodeRole
 
 
 class Phase_G_SystemValidation:
@@ -415,7 +416,7 @@ class Phase_G_SystemValidation:
             assert len(sync.events) == 10
 
             for i, event in enumerate(sync.events.values()):
-                assert f"value_" in event.value
+                assert "value_" in event.value
 
             print("✅ test_zero_data_loss_full_system")
             self.passed += 1

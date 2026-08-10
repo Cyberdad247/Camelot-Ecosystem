@@ -9,7 +9,6 @@ import argparse
 import shutil
 from pathlib import Path
 
-
 BACKUP_DIR = Path(__file__).parent / "backups"
 DEFAULT_KEEP = 3
 

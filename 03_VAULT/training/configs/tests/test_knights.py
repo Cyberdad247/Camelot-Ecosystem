@@ -41,8 +41,9 @@ def test_coder_clean_name():
 
 def test_all_knights_load():
     """Verify all knight modules can be imported."""
-    from knights.base import BaseKnight
     import importlib
+
+    from knights.base import BaseKnight
     knights_dir = os.path.join(os.path.dirname(__file__), "..", "knights")
     loaded = 0
     for f in os.listdir(knights_dir):

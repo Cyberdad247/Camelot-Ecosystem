@@ -1,15 +1,17 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import os
+import tempfile
+
 import streamlit as st
 from agno.agent import Agent
-from agno.knowledge.pdf import PDFKnowledgeBase, PDFReader
-from agno.vectordb.qdrant import Qdrant
-from agno.tools.duckduckgo import DuckDuckGoTools
-from agno.models.openai import OpenAIChat
-from agno.embedder.openai import OpenAIEmbedder
-import tempfile
-import os
 from agno.document.chunking.document import DocumentChunking
+from agno.embedder.openai import OpenAIEmbedder
+from agno.knowledge.pdf import PDFKnowledgeBase, PDFReader
+from agno.models.openai import OpenAIChat
+from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.vectordb.qdrant import Qdrant
+
 
 def init_session_state():
     """Initialize session state variables"""

@@ -5,9 +5,10 @@ Tasha Voice Agent — LiveKit-powered AI receptionist for Invisioned Marketing.
 Runs on Modal serverless. Handles real-time voice conversations,
 lead capture, and scheduling via Supabase.
 """
-import modal
 import os
 from datetime import datetime, timezone
+
+import modal
 
 app = modal.App("tasha-voice-agent")
 

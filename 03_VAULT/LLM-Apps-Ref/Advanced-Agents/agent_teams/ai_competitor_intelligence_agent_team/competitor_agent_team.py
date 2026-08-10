@@ -1,17 +1,19 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import streamlit as st
-# from exa_py import Exa
-from agno.agent import Agent
-from agno.tools.firecrawl import FirecrawlTools
-from agno.models.openai import OpenAIChat
-from agno.tools.duckduckgo import DuckDuckGoTools
+import json
+from typing import List, Optional
+
 import pandas as pd
 import requests
+import streamlit as st
+
+# from exa_py import Exa
+from agno.agent import Agent
+from agno.models.openai import OpenAIChat
+from agno.tools.duckduckgo import DuckDuckGoTools
+from agno.tools.firecrawl import FirecrawlTools
 from firecrawl import FirecrawlApp
 from pydantic import BaseModel, Field
-from typing import List, Optional
-import json
 
 # Streamlit UI
 st.set_page_config(page_title="AI Competitor Intelligence Agent Team", layout="wide")
@@ -224,10 +226,10 @@ if "openai_api_key" in st.session_state and "firecrawl_api_key" in st.session_st
                     else:
                         return None
                         
-                except Exception as response_error:
+                except Exception:
                     return None
                     
-            except Exception as e:
+            except Exception:
                 return None
 
         def generate_comparison_report(competitor_data: list) -> None:

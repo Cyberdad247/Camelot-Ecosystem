@@ -1,4 +1,5 @@
 import z3
+
 solver = z3.Solver()
 # Variables
 agent_authenticated = z3.Bool('agent_authenticated')

@@ -27,13 +27,13 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from control_plane import cli_intercept  # noqa: E402
 from control_plane.soul_router import (  # noqa: E402
     IntentTensor,
     RouteDecision,
     SoulRouter,
 )
 
+from control_plane import cli_intercept  # noqa: E402
 
 # ── Helpers ────────────────────────────────────────────────────────────────
 

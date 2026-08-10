@@ -1,8 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+from agno.agent import Agent
 from agno.tools.exa import ExaTools
 from config.llm import model
-from agno.agent import Agent
 
 dining_agent = Agent(
     name="Culinary Guide",

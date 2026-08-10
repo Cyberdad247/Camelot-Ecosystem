@@ -4,12 +4,12 @@ Phase H Week 2: Learning Dashboard Tests
 Verify visualization and metrics accuracy
 """
 
-import unittest
-import tempfile
-import sqlite3
 import json
-from pathlib import Path
+import sqlite3
+import tempfile
+import unittest
 from datetime import datetime
+from pathlib import Path
 
 from phase_h_learning_dashboard import LearningDashboard
 

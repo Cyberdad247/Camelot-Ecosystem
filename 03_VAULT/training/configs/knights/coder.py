@@ -9,8 +9,8 @@ DeerFlow sandbox validation before disk writes when Docker is available.
 import os
 import re
 import time
-from .base import BaseKnight
 
+from .base import BaseKnight
 
 # Sovereign copyright headers per file extension
 COPYRIGHT_HEADERS = {

@@ -1,10 +1,11 @@
 """OMEGA Defense Nexus Phase 3 acceptance tests — DependencyEngine (offline/mocked)."""
-import sys
-import json
 import importlib.util as _ilu
-from pathlib import Path
-import tempfile
+import json
 import shutil
+import sys
+import tempfile
+from pathlib import Path
+
 import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]

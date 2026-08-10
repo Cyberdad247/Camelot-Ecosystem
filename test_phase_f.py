@@ -76,8 +76,8 @@ class PhaseF_TestSuite:
     async def test_toon_encoder(self) -> bool:
         """Test TOON encoder."""
         try:
+            from control_plane.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
             from control_plane.toon_encoder import get_toon_encoder
-            from control_plane.system_analyzer import SystemProfile, MemoryProfile, CPUProfile, CPUArchitecture
 
             encoder = get_toon_encoder()
 
@@ -127,8 +127,8 @@ class PhaseF_TestSuite:
         """Test TriageScore confidence scoring."""
         try:
             from control_plane.triage_score import (
-                get_triage_scorer,
                 TriageAction,
+                get_triage_scorer,
             )
 
             scorer = get_triage_scorer()
@@ -198,7 +198,7 @@ class PhaseF_TestSuite:
     async def test_kinetic_swarm(self) -> bool:
         """Test 6-agent kinetic swarm."""
         try:
-            from control_plane.kinetic_swarm import get_kinetic_swarm, SwarmRole
+            from control_plane.kinetic_swarm import SwarmRole, get_kinetic_swarm
 
             swarm = get_kinetic_swarm()
 
@@ -288,7 +288,7 @@ class PhaseF_TestSuite:
             # Test 4: Verify properties
             props = lattice.verify_packing_density()
             if props["dimension"] != 24:
-                print(f"  ERROR: Wrong dimension in properties")
+                print("  ERROR: Wrong dimension in properties")
                 return False
 
             if props["kissing_number"] != 196560:
@@ -365,11 +365,11 @@ class PhaseF_TestSuite:
         """Test Symbolect transmission protocol."""
         try:
             from control_plane.symbolect_protocol import (
-                get_symbolect_protocol,
                 TransmissionMode,
+                get_symbolect_protocol,
             )
+            from control_plane.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
             from control_plane.toon_encoder import get_toon_encoder
-            from control_plane.system_analyzer import SystemProfile, MemoryProfile, CPUProfile, CPUArchitecture
 
             encoder = get_toon_encoder()
             protocol = get_symbolect_protocol()
@@ -424,11 +424,11 @@ class PhaseF_TestSuite:
     async def test_integration(self) -> bool:
         """Test Phase F integration with previous phases."""
         try:
-            from control_plane.toon_encoder import get_toon_encoder
-            from control_plane.triage_score import get_triage_scorer
             from control_plane.kinetic_swarm import get_kinetic_swarm
             from control_plane.symbolect_protocol import get_symbolect_protocol
-            from control_plane.system_analyzer import SystemProfile, MemoryProfile, CPUProfile, CPUArchitecture
+            from control_plane.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
+            from control_plane.toon_encoder import get_toon_encoder
+            from control_plane.triage_score import get_triage_scorer
 
             # Test 1: Full pipeline
             encoder = get_toon_encoder()

@@ -1,8 +1,12 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — Gradio Spire v3.0 (SINGULARITY OVERLORD EDITION)
-import gradio as gr
-import requests, psutil, os, subprocess
+import os
+import subprocess
 from datetime import datetime
+
+import gradio as gr
+import psutil
+import requests
 
 # ─────────────────────────────────────────────
 # OVERLORD CONFIG
@@ -67,7 +71,7 @@ body { background-color: #020202; color: #00ffff; font-family: 'Orbitron', 'Sego
 
 def build_spire_v3():
     with gr.Blocks(title="CAMELOT OVERLORD") as deck:
-        gr.Markdown(f"# ⚡ CAMELOT-OS: THE SPIRE v3.0\n**SINGULARITY OVERLORD EDITION** | COMMAND THE SWARM")
+        gr.Markdown("# ⚡ CAMELOT-OS: THE SPIRE v3.0\n**SINGULARITY OVERLORD EDITION** | COMMAND THE SWARM")
         
         with gr.Row():
             with gr.Column(scale=3):

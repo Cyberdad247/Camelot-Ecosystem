@@ -16,7 +16,6 @@ import modal
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
 
-
 APP_NAME = "camelot-rustdesk-server"
 web_app = FastAPI(title=APP_NAME)
 app = modal.App(APP_NAME)

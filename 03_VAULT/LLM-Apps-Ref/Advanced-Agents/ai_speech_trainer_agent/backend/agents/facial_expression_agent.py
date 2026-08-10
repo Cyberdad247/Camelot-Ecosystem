@@ -1,10 +1,11 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import os
+
+from agents.tools.facial_expression_tool import analyze_facial_expressions as facial_expression_tool
 from agno.agent import Agent
 from agno.models.together import Together
-from agents.tools.facial_expression_tool import analyze_facial_expressions as facial_expression_tool
 from dotenv import load_dotenv
-import os
 
 load_dotenv()
 

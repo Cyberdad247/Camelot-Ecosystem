@@ -54,7 +54,7 @@ import json
 import re
 import sys
 import time
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -799,7 +799,7 @@ def _score_crucible(
     metrics.append(DxMetric(
         "hitl_gate_coverage",
         f"{hitl_pct:.1f}%",
-        f"100.0%",
+        "100.0%",
         "pass" if met == total else ("warn" if met >= total - 1 else "fail"),
         f"{met}/{total} security/HITL primitives present and tested (anya_gate, soul_oversight, factory_lane, ghost_squire + their tests)",
     ))

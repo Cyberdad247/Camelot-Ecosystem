@@ -41,15 +41,15 @@ upgrades to a real archive.
 """
 from __future__ import annotations
 
-from typing import Any, Optional, Union
+from typing import Union
 
 from .cartridge_schemas import (
-    CartridgeManifest,
-    CartridgeManifestV2,
     V1_HOST_API_VERSION,
     V1_LEGACY_SHA256,
-    V2RouteEntry,
+    CartridgeManifest,
+    CartridgeManifestV2,
     V2ResourceBudget,
+    V2RouteEntry,
 )
 
 

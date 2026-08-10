@@ -1,24 +1,24 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import streamlit as st
+import asyncio
+import csv
+import json
+import logging
+import os
+from datetime import datetime
+from io import StringIO
+from typing import Any, Dict, List, Optional
+
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-from typing import Dict, List, Optional, Any
-import os
-import asyncio
-from datetime import datetime
+import streamlit as st
 from dotenv import load_dotenv
-import json
-import logging
-from pydantic import BaseModel, Field
-import csv
-from io import StringIO
-
 from google.adk.agents import LlmAgent, SequentialAgent
-from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
 from google.genai import types
+from pydantic import BaseModel, Field
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -399,7 +399,7 @@ def display_budget_analysis(analysis: Dict[str, Any]):
         for rec in analysis["recommendations"]:
             st.markdown(f"**{rec['category']}**: {rec['recommendation']}")
             if "potential_savings" in rec:
-                st.metric(f"Potential Monthly Savings", f"${rec['potential_savings']:.2f}")
+                st.metric("Potential Monthly Savings", f"${rec['potential_savings']:.2f}")
 
 def display_savings_strategy(strategy: Dict[str, Any]):
     if isinstance(strategy, str):
@@ -417,7 +417,7 @@ def display_savings_strategy(strategy: Dict[str, Any]):
     
     if "emergency_fund" in strategy:
         ef = strategy["emergency_fund"]
-        st.markdown(f"### Emergency Fund")
+        st.markdown("### Emergency Fund")
         st.markdown(f"**Recommended Size**: ${ef['recommended_amount']:.2f}")
         st.markdown(f"**Current Status**: {ef['current_status']}")
         

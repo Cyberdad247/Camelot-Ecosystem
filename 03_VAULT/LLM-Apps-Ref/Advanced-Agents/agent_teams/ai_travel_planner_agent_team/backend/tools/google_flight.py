@@ -1,10 +1,11 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from fast_flights import FlightData, Passengers, Result, get_flights
 from typing import Literal
-from loguru import logger
+
 from agno.tools import tool
 from config.logger import logger_hook
+from fast_flights import FlightData, Passengers, Result, get_flights
+from loguru import logger
 
 
 @tool(name="get_flights", show_result=True, tool_hooks=[logger_hook])

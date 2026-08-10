@@ -211,7 +211,7 @@ class PodcastService:
                 if engine not in tts_engines:
                     tts_engines.append(engine)
             return sorted(tts_engines)
-        except Exception as e:
+        except Exception:
             return ["elevenlabs", "openai", "kokoro"]
 
     async def create_podcast(

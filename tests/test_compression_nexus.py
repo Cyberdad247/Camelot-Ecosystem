@@ -1,9 +1,10 @@
 """OMEGA Defense Nexus Phase 4 acceptance tests — CompressionNexus."""
-import sys
 import gzip
-import json
 import importlib.util as _ilu
+import json
+import sys
 from pathlib import Path
+
 import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]

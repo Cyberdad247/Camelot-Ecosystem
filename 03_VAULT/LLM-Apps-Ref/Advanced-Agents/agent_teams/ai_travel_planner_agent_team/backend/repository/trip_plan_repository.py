@@ -1,12 +1,11 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from datetime import datetime, timezone
-from typing import Optional, List
+from typing import List, Optional
 
-from sqlalchemy import select, delete
-
-from models.trip_db import TripPlanStatus, TripPlanOutput
+from models.trip_db import TripPlanOutput, TripPlanStatus
 from services.db_service import get_db_session
+from sqlalchemy import delete, select
 
 
 async def create_trip_plan_status(

@@ -15,7 +15,6 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 
-
 CAMELOT = Path(__file__).resolve().parents[1]
 KNIGHTS_DIR = CAMELOT / "01_KERNEL/iron_gate/DEFENSE_GRID/knights"
 SHADOW_VEIL_DIR = CAMELOT / "01_KERNEL/iron_gate/DEFENSE_GRID/shadow_veil"

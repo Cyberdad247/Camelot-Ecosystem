@@ -9,10 +9,9 @@ from __future__ import annotations
 import asyncio
 
 import pytest
-
-from control_plane.z3_verify import PatchIntent, verify_patch
 from control_plane.factory_lane import FactoryJob, TriageScore
-from control_plane.soul_oversight import pre_execute, GateDecision
+from control_plane.soul_oversight import GateDecision, pre_execute
+from control_plane.z3_verify import PatchIntent, verify_patch
 
 z3 = pytest.importorskip("z3")
 

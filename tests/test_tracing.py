@@ -4,7 +4,6 @@
 import json
 
 import pytest
-
 from control_plane.tracing import Tracer, get_tracer
 
 

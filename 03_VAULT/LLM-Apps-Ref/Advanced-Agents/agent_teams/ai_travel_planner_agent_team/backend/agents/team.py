@@ -1,15 +1,14 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from agno.team.team import Team
-from config.llm import model
-
-from agents.destination import destination_agent
-from agents.hotel import hotel_search_agent
-from agents.food import dining_agent
 from agents.budget import budget_agent
+from agents.destination import destination_agent
 from agents.flight import flight_search_agent
+from agents.food import dining_agent
+from agents.hotel import hotel_search_agent
 from agents.itinerary import itinerary_agent
+from agno.team.team import Team
 from agno.tools.reasoning import ReasoningTools
+from config.llm import model
 
 # def update_team_current_state(team: Team, state: str) -> str:
 #     """

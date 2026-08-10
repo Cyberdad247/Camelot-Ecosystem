@@ -189,7 +189,7 @@ class SquireBrief:
             for rec in triage.recommendations:
                 body += f"  - {rec}\n"
 
-        body += textwrap.dedent(f"""\
+        body += textwrap.dedent("""\
 
             ── MISSIONS DIRECTORY ───────────────────
         """)

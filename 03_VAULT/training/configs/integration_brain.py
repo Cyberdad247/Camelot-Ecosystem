@@ -68,10 +68,11 @@ async def _st_store(title: str, content: str) -> dict[str, Any]:
 
 async def _lt_synthesize(query: str) -> str:
     if LONG_TERM_BACKEND == "stub":
-        return f"[LT-stub: Modal not yet deployed]"
+        return "[LT-stub: Modal not yet deployed]"
     try:
-        import websockets
         import json
+
+        import websockets
         ws_url = MODAL_SYNTHESIZE_URL.replace('https://', 'wss://').replace('http://', 'ws://')
         async with websockets.connect(ws_url, open_timeout=5.0) as ws:
             await ws.send(json.dumps({"query": query}))

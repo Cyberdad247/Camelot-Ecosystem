@@ -27,12 +27,13 @@ from datetime import datetime
 from pathlib import Path
 
 from rich.console import Console
+from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.prompt import Prompt
-from rich.markdown import Markdown
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from llm_router import chat as llm_chat, list_available
+from llm_router import chat as llm_chat
+from llm_router import list_available
 
 console = Console()
 

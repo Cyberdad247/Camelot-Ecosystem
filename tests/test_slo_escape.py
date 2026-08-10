@@ -38,4 +38,4 @@ def test_linear_tier_slo_escape():
     # Should escape sir_ouroboros
     assert decision.knight_id != "sir_ouroboros"
     assert "DUALMAP_ESCAPE" in decision.reason
-    print(f"Linear Tier SLO Escape Verified.")
+    print("Linear Tier SLO Escape Verified.")

@@ -56,12 +56,11 @@ _REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_REPO))
 
 import httpx
+from control_plane.cli_intercept import CLIIntercept
+from control_plane.soul_router import CLIPROXY_URL
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
-
-from control_plane.cli_intercept import CLIIntercept
-from control_plane.soul_router import CLIPROXY_URL
 
 try:
     from bin.camelot_context import KNIGHT_PERSONAS as _ctx_KNIGHT_PERSONAS

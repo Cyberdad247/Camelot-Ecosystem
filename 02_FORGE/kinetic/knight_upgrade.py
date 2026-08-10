@@ -22,6 +22,7 @@ def log_event(message):
 import argparse
 import re
 
+
 def get_knight_stats(filepath):
     """Parses existing XP and Level from a knight file."""
     if not os.path.exists(filepath):
@@ -101,7 +102,7 @@ def upgrade_knights(dry_run=False):
         with open(full_path, "w", encoding="utf-8") as f:
             role_glyph = '🛡️' if role == 'KNIGHT' else '🧹' if role == 'SQUIRE' else '📜'
             f.write(f"# {role_glyph} {name}\n")
-            f.write(f"> Status: ACTIVE\n")
+            f.write("> Status: ACTIVE\n")
             f.write(f"> Role: {role}\n")
             f.write(f"> XP: {xp}\n")
             f.write(f"> Level: {lvl}\n")
@@ -111,8 +112,8 @@ def upgrade_knights(dry_run=False):
             else:
                 f.write(f"> Directive: {DIRECTIVES.get(name, 'Assist the Knights.')}\n")
                 
-            f.write(f"> Protocol: Omega (Connected)\n\n")
-            f.write(f"## Directives\n")
+            f.write("> Protocol: Omega (Connected)\n\n")
+            f.write("## Directives\n")
             f.write(f"1. Follow [Assimilation Omega]({PROTOCOL_PATH})\n")
             f.write(f"2. Obey [Collaboration Rules]({COLLAB_PATH})\n")
             

@@ -6,6 +6,7 @@ layout systems, accessibility, and design system consistency.
 """
 
 import re
+
 from .base import BaseKnight
 
 
@@ -145,7 +146,7 @@ export default function {name}Layout({{ children, sidebar }}: {name}LayoutProps)
         output = f"[STITCH] {kind.title()}: {name}\n"
         output += f"Target: `{path}`\n\n```tsx\n{content}```\n"
         if not write:
-            output += f"\nAdd --write to create file on disk."
+            output += "\nAdd --write to create file on disk."
         return {"status": "success", "output": output, "files_created": [path] if write else []}
 
     def _a11y_checklist(self) -> dict:

@@ -6,10 +6,10 @@ Cartridge Manifest Schema and Templates
 Based on Project Chimera specifications for the Dynamic Cartridge Fabrication Engine.
 """
 
-from typing import Dict, List
-from pydantic import BaseModel, Field
 from datetime import datetime
+from typing import Dict, List
 
+from pydantic import BaseModel, Field
 
 # =========================================
 # CARTRIDGE MANIFEST SCHEMA

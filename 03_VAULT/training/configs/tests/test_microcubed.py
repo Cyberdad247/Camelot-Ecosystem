@@ -4,8 +4,9 @@ import json
 import sys
 from pathlib import Path
 
-from control_plane import microcubed
 from control_plane.microcubed import MicrocubedRequest
+
+from control_plane import microcubed
 
 
 def test_forge_house_writes_contract_and_manifest(monkeypatch, tmp_path: Path):

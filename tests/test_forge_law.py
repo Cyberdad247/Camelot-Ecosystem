@@ -6,10 +6,10 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-
-from control_plane import forge_law, runic_router
 from control_plane.ledger_sync import compute_entry_hash
 from control_plane.provenance import ProvenanceManager, VerificationRun
+
+from control_plane import forge_law, runic_router
 
 
 def _write_source(root: Path, operations: list[dict] | None = None) -> Path:

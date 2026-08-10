@@ -8,6 +8,7 @@ bundle analysis, query optimization, and algorithmic improvement.
 import ast
 import re
 from pathlib import Path
+
 from .base import BaseKnight
 
 
@@ -95,7 +96,7 @@ class SirAlchemist(BaseKnight):
                     func_count = sum(1 for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)))
                     class_count = sum(1 for n in ast.walk(tree) if isinstance(n, ast.ClassDef))
                     loc = len(source.splitlines())
-                    lines.append(f"### Metrics")
+                    lines.append("### Metrics")
                     lines.append(f"- Lines: {loc}")
                     lines.append(f"- Functions: {func_count}")
                     lines.append(f"- Classes: {class_count}")

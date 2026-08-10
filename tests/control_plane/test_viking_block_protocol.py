@@ -7,11 +7,9 @@ Run with: pytest CAMELOT_OS/tests/control_plane/test_viking_block_protocol.py
 """
 from __future__ import annotations
 
-import os
 from datetime import datetime, timedelta, timezone
 
 import pytest
-
 from control_plane.viking_block_protocol import (
     DEFAULT_MAX_SKEW_SECONDS,
     DEFAULT_SECRET_KEY_ENV,
@@ -25,6 +23,7 @@ from control_plane.viking_block_protocol import (
     to_json,
     verify_block,
 )
+
 
 # ── Test fixtures ──────────────────────────────────────────────────────────────
 @pytest.fixture()

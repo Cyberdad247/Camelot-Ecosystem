@@ -1,8 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import streamlit as st
-from autogen import (SwarmAgent, SwarmResult, initiate_swarm_chat, OpenAIWrapper,AFTER_WORK,UPDATE_SYSTEM_MESSAGE)
 import os
+
+import streamlit as st
+from autogen import AFTER_WORK, UPDATE_SYSTEM_MESSAGE, OpenAIWrapper, SwarmAgent, SwarmResult, initiate_swarm_chat
 
 os.environ["AUTOGEN_USE_DOCKER"] = "0"
 
@@ -164,7 +165,7 @@ if st.button("Get Support Plan"):
                         k = list(agent._oai_messages.keys())[-1]
                         agent._oai_messages[k] = agent._oai_messages[k][:1]
 
-                    system_prompt += f"\n\n\nBelow are some context for you to refer to:"
+                    system_prompt += "\n\n\nBelow are some context for you to refer to:"
                     for k, v in agent._context_variables.items():
                         if v is not None:
                             system_prompt += f"\n{k.capitalize()} Summary:\n{v}"

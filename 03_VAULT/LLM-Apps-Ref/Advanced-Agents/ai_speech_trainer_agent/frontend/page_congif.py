@@ -3,6 +3,7 @@
 import streamlit as st
 from sidebar import render_sidebar
 
+
 def render_page_config():
     # Set page configuration
     st.set_page_config(

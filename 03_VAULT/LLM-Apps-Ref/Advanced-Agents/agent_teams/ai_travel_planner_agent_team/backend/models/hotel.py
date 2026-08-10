@@ -1,7 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from pydantic import BaseModel, Field
 from typing import List
+
+from pydantic import BaseModel, Field
+
 
 class HotelResult(BaseModel):
     hotel_name: str = Field(description="The name of the hotel")

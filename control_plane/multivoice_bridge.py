@@ -127,7 +127,9 @@ def _selftest() -> int:
     check("offline panel renders", "router offline" in render_panel(bad))
 
     # live round-trip against a mock /metrics
-    import http.server, socketserver, threading
+    import http.server
+    import socketserver
+    import threading
     body = json.dumps({"routes": 4, "cache_hits": 2, "escapes": 0, "pins": 2,
                        "cache_hit_pct": 50.0, "slo_ms": 2000, "avg_ttft_ms": {}}).encode()
 

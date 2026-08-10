@@ -16,13 +16,19 @@ os.environ["CAMELOT_CARTRIDGE_HMAC_KEY"] = "rbac-test-secret"
 
 from cartridge import cartridge_crypto as cc
 from cartridge.cartridge_rbac import (
-    RBACPolicy, AuthorizationError, make_rbac_approval,
-    CAP_FABRICATE, CAP_SIGN, CAP_APPROVE, CAP_CARTRIDGE_REVOKE, CAP_KEY_REVOKE,
+    CAP_APPROVE,
+    CAP_CARTRIDGE_REVOKE,
+    CAP_FABRICATE,
+    CAP_KEY_REVOKE,
+    CAP_SIGN,
+    AuthorizationError,
+    RBACPolicy,
+    make_rbac_approval,
 )
-from cartridge.cartridge_trust import TrustStore, RevocationList, AuditLog, TrustManager
 from cartridge.cartridge_schemas import CartridgeManifest
-from cartridge.sandbox import CartridgeSandbox, TrustMode
+from cartridge.cartridge_trust import AuditLog, RevocationList, TrustManager, TrustStore
 from cartridge.fabrication_engine import CartridgeFabricator
+from cartridge.sandbox import CartridgeSandbox, TrustMode
 
 
 def _tmp(name):

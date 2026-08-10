@@ -1,13 +1,15 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from typing import Dict, Optional
+import json
 from dataclasses import dataclass
-from pydantic import BaseModel, Field
+from typing import Dict, Optional
+
+import gradio as gr
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
 from firecrawl import FirecrawlApp
-import gradio as gr
-import json
+from pydantic import BaseModel, Field
+
 
 class AQIResponse(BaseModel):
     success: bool

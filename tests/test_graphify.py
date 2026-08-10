@@ -3,8 +3,6 @@ import importlib.util
 import sys
 from pathlib import Path
 
-import pytest
-
 _CP = Path(__file__).resolve().parent.parent / "control_plane"
 
 

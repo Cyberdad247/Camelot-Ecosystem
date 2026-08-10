@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+
 from control_plane.toon_encoder import TOONv2Diff, compute_dict_diff
 
 

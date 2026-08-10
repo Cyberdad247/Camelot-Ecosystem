@@ -1,8 +1,8 @@
-import pytest
-import os
-import shutil
 import importlib.util
 from pathlib import Path
+
+import pytest
+
 
 def test_cache_salting_collision_resistance(tmp_path):
     """

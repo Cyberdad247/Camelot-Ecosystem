@@ -1,7 +1,8 @@
 import socket
-import unittest
 import threading
 import time
+import unittest
+
 
 class TestVsockTelemetry(unittest.TestCase):
     def test_mock_vsock_telemetry_flow(self):
@@ -20,7 +21,7 @@ class TestVsockTelemetry(unittest.TestCase):
                 received_data.append(data)
                 conn.sendall(b"ACK")
                 conn.close()
-            except Exception as e:
+            except Exception:
                 pass
 
         t = threading.Thread(target=serve)

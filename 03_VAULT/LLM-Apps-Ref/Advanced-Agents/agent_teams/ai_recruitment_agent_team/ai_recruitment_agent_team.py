@@ -1,13 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from typing import Literal, Tuple, Dict, Optional
-import time
 import json
-import requests
-import PyPDF2
+import time
 from datetime import datetime, timedelta
-import pytz
+from typing import Dict, Literal, Optional, Tuple
 
+import PyPDF2
+import pytz
+import requests
 import streamlit as st
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
@@ -15,7 +15,6 @@ from agno.tools.email import EmailTools
 from phi.tools.zoom import ZoomTool
 from phi.utils.log import logger
 from streamlit_pdf_viewer import pdf_viewer
-
 
 
 class CustomZoomTool(ZoomTool):
@@ -383,7 +382,8 @@ def main() -> None:
         col1, col2 = st.columns([4, 1])
         
         with col1:
-            import tempfile, os
+            import os
+            import tempfile
             with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as tmp_file:
                 tmp_file.write(resume_file.read())
                 tmp_file_path = tmp_file.name

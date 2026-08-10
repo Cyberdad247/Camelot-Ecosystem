@@ -1,18 +1,19 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import modal
 import os
 import random
 import time
 from datetime import datetime
-from pydantic import BaseModel, field_validator
-from appwrite.client import Client
-from appwrite.services.databases import Databases
-from appwrite.id import ID
-from circuitbreaker import circuit
-import structlog
 from functools import lru_cache
 from typing import Optional
+
+import modal
+import structlog
+from appwrite.client import Client
+from appwrite.id import ID
+from appwrite.services.databases import Databases
+from circuitbreaker import circuit
+from pydantic import BaseModel, field_validator
 
 # Configure logging
 logger = structlog.get_logger()

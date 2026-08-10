@@ -8,12 +8,13 @@ Routes requests through a fallback chain of LLM providers:
 Supports streaming, model selection, and automatic failover.
 """
 
+import logging
 import os
 import time
-import logging
-import httpx
-from typing import Optional
 from dataclasses import dataclass, field
+from typing import Optional
+
+import httpx
 
 __version__ = "1.0.0"
 

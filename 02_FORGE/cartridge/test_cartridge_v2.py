@@ -19,12 +19,8 @@ read-only for the duration of the suite.
 """
 from __future__ import annotations
 
-import hashlib
 import io
-import json
-import os
 import sys
-import tempfile
 import zipfile
 from pathlib import Path
 
@@ -33,30 +29,25 @@ import pytest
 # Make the package importable when running from the repo root.
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from cartridge.cartridge_schemas import (
-    CartridgeManifest,
-    CartridgeManifestV2,
-    ResourceBudget,
-    V1_HOST_API_VERSION,
-    V1_LEGACY_SHA256,
-    V2_HOST_API_VERSION,
-    V2ResourceBudget,
-    V2RouteEntry,
-)
 from cartridge import cartridge_archive as ca
 from cartridge import cartridge_cli
 from cartridge import cartridge_crypto as cc
-from cartridge.cartridge_v2_adapter import (
-    is_legacy_v1,
-    upgrade_v1_manifest,
+from cartridge.cartridge_schemas import (
+    V1_HOST_API_VERSION,
+    V1_LEGACY_SHA256,
+    V2_HOST_API_VERSION,
+    CartridgeManifest,
+    CartridgeManifestV2,
 )
 from cartridge.cartridge_trust import (
-    PublisherEntry,
     PublisherRegistry,
-    RevocationList,
     TrustManager,
     TrustStore,
     install_publisher_registry,
+)
+from cartridge.cartridge_v2_adapter import (
+    is_legacy_v1,
+    upgrade_v1_manifest,
 )
 
 

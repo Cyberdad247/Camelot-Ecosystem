@@ -7,6 +7,7 @@ Applies NDR+S (Neurosymbolic Deep Reasoning + Synthesis) protocol.
 """
 
 import re
+
 from .base import BaseKnight
 
 
@@ -123,7 +124,7 @@ class SirSynthesis(BaseKnight):
             lines.append(f"### Stage: {stage}")
             lines.append(f"*{description}*")
             lines.append(f"- [ ] Apply {stage} lens to: {topic}")
-            lines.append(f"- [ ] Document findings")
+            lines.append("- [ ] Document findings")
             lines.append("")
 
         lines.extend([
@@ -169,7 +170,7 @@ Proposed
         safe_name = re.sub(r'[^a-z0-9]+', '-', topic.lower()).strip('-')
         path = f"docs/adr/{safe_name}.md"
 
-        output = f"[SYNTHESIS] Architecture Decision Record\n"
+        output = "[SYNTHESIS] Architecture Decision Record\n"
         output += f"Target: `{path}`\n\n```markdown\n{content}```\n"
         if not write:
             output += "\nAdd --write to create file on disk."

@@ -1,12 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
+
 from fastapi import APIRouter, HTTPException, status
 from loguru import logger
-from models.travel_plan import TravelPlanAgentRequest, TravelPlanResponse
 from models.plan_task import TaskStatus
-from services.plan_service import generate_travel_plan
+from models.travel_plan import TravelPlanAgentRequest, TravelPlanResponse
 from repository.plan_task_repository import create_plan_task, update_task_status
+from services.plan_service import generate_travel_plan
 
 router = APIRouter(prefix="/api/plan", tags=["Travel Plan"])
 

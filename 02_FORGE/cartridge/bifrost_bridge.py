@@ -35,10 +35,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
 
+from . import cartridge_rbac
 from .cartridge_schemas import CartridgeManifest
 from .sandbox import CartridgeSandbox, TrustMode
 from .tool_registry import ToolRegistry
-from . import cartridge_rbac
 
 
 # ── Request schema ────────────────────────────────────────────────────────────

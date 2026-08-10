@@ -1,14 +1,15 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from agno.agent import Agent
-from agno.models.google import Gemini
-from agno.media import Image as AgnoImage
-from agno.tools.duckduckgo import DuckDuckGoTools
-import streamlit as st
 import logging
-from pathlib import Path
-import tempfile
 import os
+import tempfile
+from pathlib import Path
+
+import streamlit as st
+from agno.agent import Agent
+from agno.media import Image as AgnoImage
+from agno.models.google import Gemini
+from agno.tools.duckduckgo import DuckDuckGoTools
 
 # Configure logging for errors only
 logging.basicConfig(level=logging.ERROR)

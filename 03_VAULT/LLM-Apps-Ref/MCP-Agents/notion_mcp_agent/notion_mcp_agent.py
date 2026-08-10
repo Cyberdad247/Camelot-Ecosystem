@@ -6,12 +6,13 @@ import os
 import sys
 import uuid
 from textwrap import dedent
-from agno.agent import Agent 
-from agno.models.openai import OpenAIChat
-from agno.tools.mcp import MCPTools 
+
+from agno.agent import Agent
 from agno.memory.v2 import Memory
-from mcp import StdioServerParameters
+from agno.models.openai import OpenAIChat
+from agno.tools.mcp import MCPTools
 from dotenv import load_dotenv
+from mcp import StdioServerParameters
 
 # Load environment variables
 load_dotenv()

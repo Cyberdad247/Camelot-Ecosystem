@@ -1,7 +1,8 @@
 """OMEGA Defense Nexus Phase 7 acceptance tests — SirSocrates Northstar Gate."""
-import sys
 import importlib.util as _ilu
+import sys
 from pathlib import Path
+
 import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]

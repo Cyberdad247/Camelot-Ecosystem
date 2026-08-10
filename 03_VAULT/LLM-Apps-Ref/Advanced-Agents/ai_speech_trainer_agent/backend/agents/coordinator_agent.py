@@ -1,13 +1,15 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from agno.team.team import Team
-from agno.models.together import Together
-from agents.facial_expression_agent import facial_expression_agent
-from agents.voice_analysis_agent import voice_analysis_agent
-from agents.content_analysis_agent import content_analysis_agent
-from agents.feedback_agent import feedback_agent
 import os
+
+from agents.content_analysis_agent import content_analysis_agent
+from agents.facial_expression_agent import facial_expression_agent
+from agents.feedback_agent import feedback_agent
+from agents.voice_analysis_agent import voice_analysis_agent
+from agno.models.together import Together
+from agno.team.team import Team
 from pydantic import BaseModel, Field
+
 
 # Structured response
 class CoordinatorResponse(BaseModel):

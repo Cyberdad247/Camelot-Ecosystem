@@ -1,13 +1,14 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import os
+from textwrap import dedent
+
 import streamlit as st
 from agno.agent import Agent
-from agno.team import Team
 from agno.models.openai import OpenAIChat
+from agno.team import Team
 from agno.tools.firecrawl import FirecrawlTools
 from dotenv import load_dotenv
-from textwrap import dedent
-import os
 
 # ---------------- Page Config ----------------
 st.set_page_config(

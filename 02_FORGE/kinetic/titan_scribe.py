@@ -5,9 +5,9 @@
 Purpose: The Historian & Teacher. Records errors to Learning Log.
 Act as: Sir Scribe.
 """
-import sys
-import os
 import datetime
+import os
+import sys
 
 LEARNING_LOG = r"C:\Users\vizio\CAMELOT_OS\03_VAULT\99_SCRATCHPAD\Learning_Log.md"
 
@@ -43,6 +43,8 @@ def scribe_error(error_msg, context="General"):
     print(f"📜 Scribe has recorded this failure in the Scroll of Wisdom: {LEARNING_LOG}")
 
 import re
+
+
 def calculate_level(xp):
     """
     Calculates level based on XP thresholds.
@@ -55,6 +57,7 @@ def calculate_level(xp):
     return 5 + (xp - 1000) // 1000 # Scaling after L5
 
 import json
+
 PERFORMANCE_LEDGER_JSON = r"C:\Users\vizio\CAMELOT_OS\03_VAULT\99_SCRATCHPAD\performance_metrics.json"
 
 def record_performance(agent_name, task_id, duration, efficiency):

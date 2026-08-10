@@ -54,7 +54,7 @@ from typing import Optional, Tuple
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
-from .cartridge_schemas import CartridgeManifestV2, V1_LEGACY_SHA256
+from .cartridge_schemas import V1_LEGACY_SHA256, CartridgeManifestV2
 
 MANIFEST_NAME = "manifest.json"
 PAYLOAD_NAME = "payload.zip"

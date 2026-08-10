@@ -1,6 +1,6 @@
 """OMEGA Defense Nexus Phase 6 acceptance tests — SWARM + Hermes Fusion."""
-import sys
 import importlib.util as _ilu
+import sys
 from pathlib import Path
 
 CAMELOT = Path(__file__).resolve().parents[1]

@@ -1,13 +1,14 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import os 
-from dotenv import load_dotenv 
-from evoagentx.models import OpenAILLMConfig, OpenAILLM, LiteLLMConfig, LiteLLM
-from evoagentx.workflow import WorkFlowGenerator, WorkFlowGraph, WorkFlow
-from evoagentx.agents import AgentManager
+import os
+
+from dotenv import load_dotenv
 from evoagentx.actions.code_extraction import CodeExtraction
-from evoagentx.actions.code_verification import CodeVerification 
+from evoagentx.actions.code_verification import CodeVerification
+from evoagentx.agents import AgentManager
 from evoagentx.core.module_utils import extract_code_blocks
+from evoagentx.models import LiteLLM, LiteLLMConfig, OpenAILLM, OpenAILLMConfig
+from evoagentx.workflow import WorkFlow, WorkFlowGenerator, WorkFlowGraph
 
 load_dotenv() # Loads environment variables from .env file
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -79,9 +80,9 @@ def main():
         print(f"\nMain file: {results.main_file}")
         file_type = os.path.splitext(results.main_file)[1].lower()
         if file_type == '.html':
-            print(f"You can open this HTML file in a browser to play the Tetris game")
+            print("You can open this HTML file in a browser to play the Tetris game")
         else:
-            print(f"This is the main entry point for your application")
+            print("This is the main entry point for your application")
     
 
 if __name__ == "__main__":

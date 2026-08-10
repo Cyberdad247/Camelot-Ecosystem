@@ -5,10 +5,10 @@
 Purpose: Targeted data extraction and simple actions.
 Protocol: Cellular Protocol (Apoptosis on error)
 """
-import sys
-import os
 import json
 import logging
+import os
+import sys
 
 # Configure Pheromone Logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - [🐜] - %(message)s')

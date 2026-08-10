@@ -6,10 +6,12 @@ Test Suite for Cartridge Sandbox
 
 import os
 import sys
+
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from cartridge.sandbox import CartridgeSandbox
 from cartridge.cartridge_schemas import CartridgeManifest, GovernancePolicy, ResourceBudget
+from cartridge.sandbox import CartridgeSandbox
+
 
 def test_sandbox_governance():
     print("\n=== Testing Sandbox Governance ===")

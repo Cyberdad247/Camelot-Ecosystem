@@ -42,7 +42,6 @@ from pathlib import Path
 
 import yaml
 
-
 WORKFLOW = Path(__file__).resolve().parent.parent / ".github" / "workflows" / "verify_os.yml"
 JOB_ID = "excalibur-pyinstaller-smoke"
 CRLF_STEP_NAME = "Enforce LF line endings on smoke-affected files"

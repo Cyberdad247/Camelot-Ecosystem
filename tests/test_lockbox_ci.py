@@ -27,7 +27,6 @@
 """Module docstring."""
 from __future__ import annotations
 
-import os
 import subprocess
 import sys
 from pathlib import Path
@@ -41,7 +40,6 @@ SCRIPT_PATH = REPO_ROOT / "scripts" / "cybertronia_lockbox_ci.py"
 # main(). Same pattern as tests/conftest.py boot.
 sys.path.insert(0, str(REPO_ROOT / "scripts"))
 import cybertronia_lockbox_ci as lbx  # type: ignore  # noqa: E402
-
 
 # -----------------------------------------------------------------------------
 #  helper builders for fixture sources

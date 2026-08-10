@@ -3,11 +3,11 @@
 # Import the required libraries
 import streamlit as st
 from agno.agent import Agent
+from agno.models.ollama import Ollama
 from agno.team import Team
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.hackernews import HackerNewsTools
 from agno.tools.newspaper4k import Newspaper4kTools
-from agno.models.ollama import Ollama
 
 # Set up the Streamlit app
 st.title("Multi-Agent AI Researcher using Llama-3 🔍🤖")

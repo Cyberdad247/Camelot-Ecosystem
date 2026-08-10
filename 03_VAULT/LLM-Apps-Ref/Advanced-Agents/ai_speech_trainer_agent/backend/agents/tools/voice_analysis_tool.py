@@ -1,14 +1,15 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import os
 import json
+import os
 import tempfile
-import numpy as np
+
 import librosa
-from moviepy import VideoFileClip
-from faster_whisper import WhisperModel
+import numpy as np
 from agno.tools import tool
 from dotenv import load_dotenv
+from faster_whisper import WhisperModel
+from moviepy import VideoFileClip
 
 load_dotenv()
 

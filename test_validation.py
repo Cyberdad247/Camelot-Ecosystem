@@ -9,9 +9,8 @@ Status: COMPREHENSIVE (50+ integration tests)
 import asyncio
 import json
 import sys
-from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
-
+from typing import Dict, List, Optional, Tuple
 
 # ── Test Data Classes ─────────────────────────────────────────────────────
 
@@ -67,9 +66,9 @@ class ValidationSuite:
         """Test Phase B: Knowledge Pyramid"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.distributed_memory import DistributedMemory
             from control_plane.agent_memory import AgentMemory
             from control_plane.cloudbrain_sync import CloudBrainSync
+            from control_plane.distributed_memory import DistributedMemory
 
             # L1: Redis
             mem = DistributedMemory()
@@ -190,8 +189,8 @@ class ValidationSuite:
         start = asyncio.get_event_loop().time()
         try:
             from control_plane.bifrost_integration import BifrostIntegration
-            from control_plane.system_analyzer import SystemAnalyzer
             from control_plane.excalibur_preflight import ExcaliburPreflight
+            from control_plane.system_analyzer import SystemAnalyzer
 
             # Analyze system
             analyzer = SystemAnalyzer()
@@ -227,10 +226,10 @@ class ValidationSuite:
         """Test Phase F: TOON Encoder + Kinetic Swarm"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.toon_encoder import get_toon_encoder
-            from control_plane.triage_score import get_triage_scorer
             from control_plane.kinetic_swarm import get_kinetic_swarm
             from control_plane.symbolect_protocol import get_symbolect_protocol
+            from control_plane.toon_encoder import get_toon_encoder
+            from control_plane.triage_score import get_triage_scorer
 
             # TOON encoder
             encoder = get_toon_encoder()
@@ -471,8 +470,8 @@ class ValidationSuite:
         """Test HITL approval gates"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.soul_oversight import SoulOversight
             from control_plane.sir_socrates import SirSocrates
+            from control_plane.soul_oversight import SoulOversight
 
             oversight = SoulOversight()
             socrates = SirSocrates()
@@ -544,7 +543,7 @@ class ValidationSuite:
         success_rate = (passed / len(results)) * 100
 
         print("\n" + "=" * 70)
-        print(f"VALIDATION SUMMARY")
+        print("VALIDATION SUMMARY")
         print("=" * 70)
         print(f"Total Tests:      {len(results)}")
         print(f"Passed:           {passed}/{len(results)} ({success_rate:.1f}%)")

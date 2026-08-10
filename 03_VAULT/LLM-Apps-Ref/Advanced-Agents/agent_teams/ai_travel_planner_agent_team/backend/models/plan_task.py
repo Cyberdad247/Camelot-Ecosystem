@@ -4,7 +4,8 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional
 
-from sqlalchemy import String, DateTime, Enum as SQLEnum, JSON
+from sqlalchemy import JSON, DateTime, String
+from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 

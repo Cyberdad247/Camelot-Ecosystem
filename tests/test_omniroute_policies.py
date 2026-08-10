@@ -8,17 +8,15 @@ DOWNSTREAM of soul_oversight.pre_execute — never pre-empt it.
 from __future__ import annotations
 
 import pytest
-
 from control_plane.omniroute_policies import (
-    LaneSignal,
     LANE_CLIPROXY_HEAVY_REASONING,
     LANE_DEFAULT,
     LANE_OMNI_ROUTE_CODEX,
     SCAFFOLD_KEYWORDS,
     VALID_LANES,
+    LaneSignal,
     select_lane,
 )
-
 
 # ── Item 1a: scaffold → OmniRoute Codex lane ────────────────────────────────
 

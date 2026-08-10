@@ -81,7 +81,7 @@ class SimpleDistanceTravelTest:
             actual_ids = [a.agent_id for a in agents]
 
             if set(expected_ids) != set(actual_ids):
-                print(f"  ERROR: Agent mismatch")
+                print("  ERROR: Agent mismatch")
                 return False
 
             # Print summary
@@ -195,8 +195,8 @@ class SimpleDistanceTravelTest:
     async def test_network_orchestration(self) -> bool:
         """Verify distance travel orchestration logic."""
         try:
-            from control_plane.distance_travel import get_distance_travel
             from control_plane.agent_registry import get_agent_registry
+            from control_plane.distance_travel import get_distance_travel
 
             # Initialize
             dt = get_distance_travel()
@@ -225,11 +225,11 @@ class SimpleDistanceTravelTest:
                 print(f"  ERROR: Expected 5 agents, got {len(agents)}")
                 return False
 
-            print(f"  Distance Travel initialized:")
-            print(f"    - Gateway: ✓")
-            print(f"    - Consensus: ✓")
-            print(f"    - Memory Syncer: ✓")
-            print(f"    - Distributed Memory: ✓ (Redis optional)")
+            print("  Distance Travel initialized:")
+            print("    - Gateway: ✓")
+            print("    - Consensus: ✓")
+            print("    - Memory Syncer: ✓")
+            print("    - Distributed Memory: ✓ (Redis optional)")
             print(f"    - Agent Registry: ✓ ({len(agents)} agents)")
 
             return True

@@ -6,12 +6,11 @@ those pillars are verified at the API level only (not live ops).
 """
 from __future__ import annotations
 
+import importlib.util as _ilu
+import shutil
 import sys
 import tempfile
-import shutil
-import importlib.util as _ilu
 from pathlib import Path
-
 
 CAMELOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CAMELOT))

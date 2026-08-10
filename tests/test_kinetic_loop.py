@@ -6,7 +6,7 @@ halt at APPROVE for a CRITICAL intent when auto_approve is off.
 """
 from __future__ import annotations
 
-from control_plane.kinetic_loop import KineticLoop, Stage, STAGE_ORDER, run_sync
+from control_plane.kinetic_loop import STAGE_ORDER, KineticLoop, Stage, run_sync
 
 
 def test_six_stages_fire_in_order():

@@ -71,7 +71,7 @@ def build_bridge(
         elif hasattr(active_registry, "bind"):
             active_registry.bind("appwrite_egress", dispatch_to_appwrite)
         else:
-            setattr(active_registry, "appwrite_egress", dispatch_to_appwrite)
+            active_registry.appwrite_egress = dispatch_to_appwrite
     except Exception:
         # Graceful degradation if PR #3 module not yet materialized
         # (e.g., during a partial checkout / CI smoke before PR #3 lands).

@@ -12,6 +12,7 @@ except ImportError:
     print("NotebookLM not available directly in Python script. Please check MCP instead.")
     
 from importlib import import_module
+
 hydration = import_module("01_KERNEL.memory.hydration_manager")
 HydrationManager = hydration.HydrationManager
 

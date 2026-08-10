@@ -1,6 +1,8 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 # Import the required libraries
+import os
+
 import streamlit as st
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
@@ -8,7 +10,6 @@ from agno.team import Team
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.hackernews import HackerNewsTools
 from agno.tools.newspaper4k import Newspaper4kTools
-import os
 
 # Set up the Streamlit app
 st.title("Multi-Agent AI Researcher 🔍🤖")

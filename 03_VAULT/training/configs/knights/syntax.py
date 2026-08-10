@@ -6,6 +6,7 @@ and enforcing the nextjs.yaml cartridge conventions.
 """
 
 import re
+
 from .base import BaseKnight
 
 

@@ -24,7 +24,6 @@ from pathlib import Path
 
 import pytest
 
-
 MCP_TOOL_NAME_RE = re.compile(r"^[a-zA-Z0-9_-]+$")
 
 
@@ -143,6 +142,7 @@ def test_invoke_portable_uses_argv_list_mode(monkeypatch):
     doesn't smuggle a shell=True through ``**kwargs`` either.
     """
     import asyncio
+
     import bin.camelot_ide_mcp as mod
 
     captured: dict = {}
@@ -173,6 +173,7 @@ def test_invoke_portable_uses_argv_list_mode(monkeypatch):
 def test_invoke_portable_sets_no_rich_env(monkeypatch):
     """Subprocess env must include NO_RICH=1 + PYTHONUTF8=1."""
     import asyncio
+
     import bin.camelot_ide_mcp as mod
 
     captured: dict = {}

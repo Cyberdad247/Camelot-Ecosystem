@@ -1,7 +1,7 @@
-from control_plane import runic_router
 from control_plane.knight_agent import load_roster
 from control_plane.switchboard import TERMINAL_REGISTRY
 
+from control_plane import runic_router
 
 CLAW_KNIGHTS = {
     "sir_openclaw",

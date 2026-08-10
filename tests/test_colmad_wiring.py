@@ -8,7 +8,6 @@ from __future__ import annotations
 from control_plane.anya_gate import AnyaGate, _stage_colmad
 from control_plane.colmad import CrucibleVerdict
 
-
 CRITICAL_INTENT = "delete all production databases and drop every table"
 BENIGN_INTENT = "build a small helper to add two numbers"
 

@@ -1,10 +1,10 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import importlib.util
+import json
 import os
 import sys
-import json
-import importlib.util
-from typing import Dict, Any
+from typing import Any, Dict
 
 print("CWD:", os.getcwd(), file=sys.stderr)
 print("FILES IN CWD:", os.listdir(), file=sys.stderr)

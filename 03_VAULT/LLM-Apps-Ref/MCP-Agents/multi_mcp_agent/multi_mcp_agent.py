@@ -4,10 +4,11 @@ import asyncio
 import os
 import uuid
 from textwrap import dedent
-from agno.agent import Agent 
+
+from agno.agent import Agent
+from agno.memory.v2 import Memory
 from agno.models.openai import OpenAIChat
 from agno.tools.mcp import MultiMCPTools
-from agno.memory.v2 import Memory
 from dotenv import load_dotenv
 
 # Load environment variables

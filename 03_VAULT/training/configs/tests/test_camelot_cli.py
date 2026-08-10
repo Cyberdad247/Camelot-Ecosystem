@@ -1,7 +1,7 @@
 """Tests for the main camelot CLI module."""
 import os
-import sys
 import subprocess
+import sys
 
 CAMELOT_PY = os.path.join(os.path.dirname(__file__), "..", "camelot.py")
 

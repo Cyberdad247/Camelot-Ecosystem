@@ -14,7 +14,6 @@ import modal
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
-
 APP_NAME = "camelot-tts-pipeline"
 web_app = FastAPI(title=APP_NAME)
 app = modal.App(APP_NAME)

@@ -18,14 +18,16 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 os.environ["CAMELOT_CARTRIDGE_HMAC_KEY"] = "bridge-test-cartridge-secret"
 
 from cartridge import cartridge_crypto as cc
-from cartridge.cartridge_schemas import CartridgeManifest
-from cartridge.tool_registry import ToolRegistry
 from cartridge.bifrost_bridge import (
-    BifrostCartridgeBridge, sign_body, packages_manifest_loader,
+    BifrostCartridgeBridge,
+    packages_manifest_loader,
+    sign_body,
 )
-from cartridge.cartridge_trust import TrustStore, RevocationList, AuditLog, TrustManager
 from cartridge.cartridge_rbac import RBACPolicy
+from cartridge.cartridge_schemas import CartridgeManifest
+from cartridge.cartridge_trust import AuditLog, RevocationList, TrustManager, TrustStore
 from cartridge.fabrication_engine import CartridgeFabricator
+from cartridge.tool_registry import ToolRegistry
 
 SECRET = "test-webhook-secret"
 

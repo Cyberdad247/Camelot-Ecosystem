@@ -3,30 +3,35 @@
 All knight classes registered here for control plane dispatch.
 """
 
+from .agenteer import Agenteer
+from .alchemist import SirAlchemist
+from .architect import SirSystema
 from .base import BaseKnight
 from .boris import SirBoris
-from .coder import SirForge
-from .architect import SirSystema
-from .debug import SirDebug
-from .sentinel import SirSentinel
-from .syntax import SirSyntax
-from .forgemaster import SirForgeMaster
-from .stitch import SirStitch
-from .alchemist import SirAlchemist
-from .vaelen import BaronVaelen
-from .synthesis import SirSynthesis
-from .lancelot import SirLancelot
-from .agenteer import Agenteer
-from .mnemo import SirMnemo
-from .link import SirLink
-from .sir_gideon import SirGideon
-from .sir_helio import SirHelio
 from .browser_nano_knight import (
-    BrowserNanoKnight, NanoApis, NanoSentinel, NanoSyntax, NanoDebug, BrowserSquad,
+    BrowserNanoKnight,
+    BrowserSquad,
+    NanoApis,
+    NanoDebug,
+    NanoSentinel,
+    NanoSyntax,
 )
 from .browser_research_agency import BrowserResearchAgency, BrowserScout
-from .researcher import *  # noqa: F401,F403
+from .coder import SirForge
 from .creative import *  # noqa: F401,F403
+from .debug import SirDebug
+from .forgemaster import SirForgeMaster
+from .lancelot import SirLancelot
+from .link import SirLink
+from .mnemo import SirMnemo
+from .researcher import *  # noqa: F401,F403
+from .sentinel import SirSentinel
+from .sir_gideon import SirGideon
+from .sir_helio import SirHelio
+from .stitch import SirStitch
+from .syntax import SirSyntax
+from .synthesis import SirSynthesis
+from .vaelen import BaronVaelen
 from .warden import *  # noqa: F401,F403
 
 __all__ = [

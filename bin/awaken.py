@@ -13,8 +13,9 @@ from pathlib import Path
 
 # Add control_plane to path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from control_plane import boot_sequence
 from control_plane.boot_sequence import _C
+
+from control_plane import boot_sequence
 
 
 def _banner():

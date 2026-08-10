@@ -270,7 +270,7 @@ def forge_knight(knight: dict) -> tuple[str, str]:
 
 async def forge_cloud_brains():
     from notebooklm import NotebookLMClient
-    from notebooklm.auth import load_auth_from_storage, fetch_tokens, AuthTokens
+    from notebooklm.auth import AuthTokens, fetch_tokens, load_auth_from_storage
 
     print("\nConnecting to NotebookLM CloudBrain...")
     try:

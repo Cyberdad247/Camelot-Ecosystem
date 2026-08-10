@@ -61,7 +61,6 @@ from pathlib import Path
 
 import pytest
 
-
 # Skip the entire module unless explicitly opted in.
 pytestmark = pytest.mark.skipif(
     os.environ.get("EXCALIBUR_BUILD_ON_TEST") != "1",

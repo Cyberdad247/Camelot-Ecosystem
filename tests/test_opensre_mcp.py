@@ -1,7 +1,9 @@
-import pytest
 import importlib.util
 import unittest.mock
 from pathlib import Path
+
+import pytest
+
 
 def test_opensre_mcp_integration():
     repo_root = Path(__file__).resolve().parent.parent

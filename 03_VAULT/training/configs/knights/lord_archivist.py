@@ -6,8 +6,9 @@ Autonomous Knight responsible for context condensation and collective skill evol
 Implements the SkillClaw framework for system-wide optimization.
 """
 
-from typing import Any, Dict
 from pathlib import Path
+from typing import Any, Dict
+
 
 class LordArchivist:
     """The Archivist who distills raw trajectories into system-wide skills."""

@@ -1,9 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from agno.agent import Agent
+from config.llm import model
 from tools.kayak_hotel import kayak_hotel_url_generator
 from tools.scrape import scrape_website
-from config.llm import model
 
 hotel_search_agent = Agent(
     name="Hotel Search Assistant",

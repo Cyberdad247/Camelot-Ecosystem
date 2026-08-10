@@ -1,6 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — Sovereign CLI (GOD MODE EDITION)
-import subprocess, requests, psutil
+import subprocess
+
+import psutil
+import requests
 
 # ─────────────────────────────────────────────
 # NEON GLOW COLORS

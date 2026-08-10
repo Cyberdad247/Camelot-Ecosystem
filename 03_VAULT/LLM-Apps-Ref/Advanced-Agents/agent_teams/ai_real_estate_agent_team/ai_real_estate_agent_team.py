@@ -1,16 +1,17 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import os
-import streamlit as st
 import json
-import time
+import os
 import re
+import time
+from typing import List, Optional
+
+import streamlit as st
 from agno.agent import Agent
 from agno.models.google import Gemini
 from dotenv import load_dotenv
 from firecrawl import FirecrawlApp
 from pydantic import BaseModel, Field
-from typing import List, Optional
 
 # Load environment variables
 load_dotenv()

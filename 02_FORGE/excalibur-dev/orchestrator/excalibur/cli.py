@@ -1,8 +1,13 @@
 """EXCALIBUR CLI :: LUKAS_FORGE entrypoint. [STATUS: WIRED skeleton]"""
 from __future__ import annotations
-import argparse, os, subprocess, sys
+
+import argparse
+import os
+import subprocess
+import sys
+
 from . import __version__
-from .pii import redact, scan, dispatch_integrated_route
+from .pii import dispatch_integrated_route, redact, scan
 
 CORE = os.path.join(os.path.dirname(__file__), "..", "..", "core")
 

@@ -30,6 +30,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
+
 # Stderr-only logging; stdout is the JSON-RPC stream.
 def _log(msg: str) -> None:
     sys.stderr.write(f"[camelot-ide-mcp] {msg}\n")

@@ -9,16 +9,19 @@ Run:  python 02_FORGE/cartridge/test_trust.py
 import os
 import sys
 import tempfile
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta, timezone
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from cartridge import cartridge_crypto as cc
-from cartridge.cartridge_trust import (
-    TrustStore, RevocationList, AuditLog, TrustManager,
-    STATUS_ROTATED,
-)
 from cartridge.cartridge_schemas import CartridgeManifest
+from cartridge.cartridge_trust import (
+    STATUS_ROTATED,
+    AuditLog,
+    RevocationList,
+    TrustManager,
+    TrustStore,
+)
 from cartridge.sandbox import CartridgeSandbox, TrustMode
 
 

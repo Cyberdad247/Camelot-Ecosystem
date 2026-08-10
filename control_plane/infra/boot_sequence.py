@@ -23,7 +23,6 @@ from typing import Any
 
 from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
 from .codex_integration import boot_codex_integration
-from .config_manager import ConfigManager
 from .excalibur_preflight import boot_excalibur_preflight
 from .heimdall_bifrost_governance import boot_heimdall_bifrost_governance
 from .knight_configuration import write_knight_configuration

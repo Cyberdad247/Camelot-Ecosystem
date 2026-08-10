@@ -1,13 +1,15 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import os
+import tempfile
+
 import streamlit as st
 from agno.agent import Agent
-from agno.knowledge.pdf import PDFKnowledgeBase, PDFReader
-from agno.vectordb.qdrant import Qdrant
-from agno.models.ollama import Ollama
 from agno.embedder.ollama import OllamaEmbedder
-import tempfile
-import os
+from agno.knowledge.pdf import PDFKnowledgeBase, PDFReader
+from agno.models.ollama import Ollama
+from agno.vectordb.qdrant import Qdrant
+
 
 def init_session_state():
     if 'vector_db' not in st.session_state:

@@ -19,8 +19,8 @@ from control_plane.agent_memory import (
     get_memory,
     log_dispatch,
     log_response,
-    store_fact,
     search,
+    store_fact,
 )
 
 

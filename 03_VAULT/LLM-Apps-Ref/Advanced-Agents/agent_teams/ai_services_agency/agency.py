@@ -1,9 +1,11 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from typing import Literal
-from agency_swarm import Agent, Agency, set_openai_key, BaseTool
-from pydantic import Field
+
 import streamlit as st
+from agency_swarm import Agency, Agent, BaseTool, set_openai_key
+from pydantic import Field
+
 
 class AnalyzeProjectRequirements(BaseTool):
     project_name: str = Field(..., description="Name of the project")
@@ -281,7 +283,7 @@ def main() -> None:
                         )
                         
                         cto_response = agency.get_completion(
-                            message=f"""Review the project analysis and create technical specifications using the CreateTechnicalSpecification tool.
+                            message="""Review the project analysis and create technical specifications using the CreateTechnicalSpecification tool.
                             Choose the most appropriate:
                             - architecture_type (monolithic/microservices/serverless/hybrid)
                             - core_technologies (comma-separated list)

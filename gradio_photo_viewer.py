@@ -22,38 +22,33 @@ security headers, rate limiting, and Pillow-based image validation.
 from __future__ import annotations
 
 import argparse
+import asyncio
 import base64
 import getpass
 import io
-
-import bcrypt
 import logging
-import mimetypes
 import os
 import re
-import shutil
 import secrets
 import sys
 import time
 import uuid
 from collections import defaultdict, deque
-from dataclasses import dataclass, field
-from datetime import datetime, timedelta, timezone
-from pathlib import Path
-from typing import Any, Callable, Protocol
-
-import asyncio
 from contextlib import asynccontextmanager
+from dataclasses import dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Protocol
 
+import bcrypt
 import gradio as gr
 import httpx
 import uvicorn
-from fastapi import Body, Depends, FastAPI, File, HTTPException, Request, Response, UploadFile
+from fastapi import Depends, FastAPI, File, HTTPException, Request, Response, UploadFile
 from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse, StreamingResponse
-from pydantic import BaseModel
 from PIL import Image
 from prometheus_client import Counter, Gauge, Histogram, generate_latest
-
+from pydantic import BaseModel
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -629,8 +624,8 @@ class _GoogleStageRequest(BaseModel):
 
 def _verify_google_id_token(token: str, client_id: str) -> dict:
     """Verify a Google ID token and return its decoded claims."""
-    from google.oauth2 import id_token as google_id_token
     from google.auth.transport import requests as google_requests
+    from google.oauth2 import id_token as google_id_token
 
     id_info = google_id_token.verify_oauth2_token(token, google_requests.Request(), client_id)
     # verify_oauth2_token already checks issuer/audience; this is a defensive
@@ -645,8 +640,8 @@ def _google_available(config: AppConfig) -> bool:
     if not config.google_client_id:
         return False
     try:
-        from google.oauth2 import id_token  # noqa: F401
         from google.auth.transport import requests  # noqa: F401
+        from google.oauth2 import id_token  # noqa: F401
         return True
     except ImportError:
         return False

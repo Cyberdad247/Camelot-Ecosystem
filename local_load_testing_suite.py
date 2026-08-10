@@ -7,15 +7,16 @@ No distributed consensus — just local throughput + stability
 
 import asyncio
 import json
-import time
-import psutil
+import random
 import sqlite3
 import statistics
+import time
 from dataclasses import dataclass
-from pathlib import Path
 from datetime import datetime
-from typing import List, Dict, Any
-import random
+from pathlib import Path
+from typing import Any, Dict, List
+
+import psutil
 
 
 @dataclass
@@ -280,7 +281,7 @@ class LoadGenerator:
             if errors:
                 print(f"  ⚠️  {len(errors)} errors ({len(errors)*100/request_count:.1f}%)", flush=True)
         else:
-            print(f"  ❌ No successful requests", flush=True)
+            print("  ❌ No successful requests", flush=True)
 
 
 class GracefulDegradationTester:
@@ -341,7 +342,7 @@ class GracefulDegradationTester:
             return True
 
         result = await producer()
-        print(f"  Queue filled (expected behavior: backpressure applied)", flush=True)
+        print("  Queue filled (expected behavior: backpressure applied)", flush=True)
         return True
 
 

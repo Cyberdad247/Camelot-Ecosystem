@@ -1,9 +1,9 @@
 """Verification & Stress Test for Camelot Apex OS v400.0.0."""
 
 import os
+import random
 import sys
 import time
-import random
 from pathlib import Path
 
 # Add the current directory to sys.path to import local modules
@@ -13,6 +13,7 @@ sys.path.append(current_dir)
 import anya
 import merlin
 from knights import KNIGHT_REGISTRY
+
 
 def run_verification():
     print("✨ [V400_VERIFICATION] Starting System Audit...")
@@ -76,7 +77,7 @@ def run_stress_test():
     ]
 
     # Stress Anya (Intent Compiler)
-    print(f"⚡ [ANYA] Compiling 100 directives...")
+    print("⚡ [ANYA] Compiling 100 directives...")
     start_time = time.time()
     for _ in range(100):
         directive = random.choice(test_directives)
@@ -86,7 +87,7 @@ def run_stress_test():
     print(f"✅ [ANYA] Completed. Avg Latency: {anya_latency:.4f}s")
 
     # Stress Merlin (Router)
-    print(f"⚡ [MERLIN] Routing 50 intents...")
+    print("⚡ [MERLIN] Routing 50 intents...")
     start_time = time.time()
     for _ in range(50):
         directive = random.choice(test_directives)
@@ -97,9 +98,9 @@ def run_stress_test():
     print(f"✅ [MERLIN] Completed. Avg Latency: {merlin_latency:.4f}s")
 
     print("\n🏆 [RESULTS] Stress Test Successful.")
-    print(f"  - Total Operations: 150")
+    print("  - Total Operations: 150")
     print(f"  - Throughput: {150 / (end_time - start_time):.2f} ops/sec")
-    print(f"  - Error Rate: 0.00%")
+    print("  - Error Rate: 0.00%")
 
 if __name__ == "__main__":
     run_verification()

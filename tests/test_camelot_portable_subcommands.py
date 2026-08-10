@@ -12,15 +12,13 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-
 from bin.camelot_portable import (
-    cmd_omniroute,
+    cmd_cartridge,
     cmd_knight,
     cmd_mcp,
-    cmd_cartridge,
+    cmd_omniroute,
 )
 from tests._fixtures import CapturingConsole, make_args
-
 
 # ── omniroute ─────────────────────────────────────────────────────────────────
 
@@ -395,8 +393,9 @@ def test_mcp_chain_returns_0_with_table_when_saltare_declared(tmp_path, monkeypa
     """
     import io
 
-    import bin.camelot_portable as mod
     from rich.console import Console
+
+    import bin.camelot_portable as mod
 
     # Three providers given in non-priority order to prove the table
     # sorts by the ``priority`` field (not insertion order).

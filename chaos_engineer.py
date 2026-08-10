@@ -13,11 +13,12 @@ Measures recovery time, data consistency, and system resilience.
 """
 
 import asyncio
-import time
 import json
-from datetime import datetime
+import time
 from dataclasses import dataclass
+from datetime import datetime
 from typing import List
+
 import aiohttp
 
 # Configuration
@@ -184,10 +185,10 @@ class ChaosEngineer:
             })
 
             if health_recovered.get("nodes_in_agreement", 0) == 3:
-                print(f"      ✅ Recovery successful: 3/3 agreement")
+                print("      ✅ Recovery successful: 3/3 agreement")
                 result["verdict"] = "PASS"
             else:
-                print(f"      ❌ Recovery failed")
+                print("      ❌ Recovery failed")
                 result["verdict"] = "FAIL"
 
             return result
@@ -434,7 +435,7 @@ class ChaosEngineer:
         failed = sum(1 for r in results if r.get("verdict") == "FAIL")
         errors = sum(1 for r in results if r.get("verdict") == "ERROR")
 
-        print(f"\nSummary:")
+        print("\nSummary:")
         print(f"  ✅ Passed: {passed}")
         print(f"  ❌ Failed: {failed}")
         print(f"  ⚠️  Errors: {errors}")

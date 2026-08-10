@@ -73,9 +73,9 @@ class QRPillTestSuite:
         """Test Sovereign Commander initialization."""
         try:
             from control_plane.sovereign_commander import (
-                get_sovereign_commander,
-                OperationType,
                 ApprovalLevel,
+                OperationType,
+                get_sovereign_commander,
             )
 
             commander = get_sovereign_commander()
@@ -110,7 +110,7 @@ class QRPillTestSuite:
     async def test_pill_initialization(self) -> bool:
         """Test QR Pill initialization."""
         try:
-            from control_plane.qr_pill import get_qr_pill, PillState
+            from control_plane.qr_pill import PillState, get_qr_pill
 
             pill = get_qr_pill("test_pill")
 
@@ -184,7 +184,7 @@ class QRPillTestSuite:
     async def test_health_checks(self) -> bool:
         """Test health check system."""
         try:
-            from control_plane.qr_pill import get_qr_pill, HealthStatus
+            from control_plane.qr_pill import HealthStatus, get_qr_pill
 
             pill = get_qr_pill("test_health")
 
@@ -224,7 +224,7 @@ class QRPillTestSuite:
     async def test_self_healing(self) -> bool:
         """Test self-healing capability."""
         try:
-            from control_plane.qr_pill import get_qr_pill, PillState
+            from control_plane.qr_pill import PillState, get_qr_pill
 
             pill = get_qr_pill("test_healing")
 
@@ -298,9 +298,9 @@ class QRPillTestSuite:
         """Test approval gate system."""
         try:
             from control_plane.sovereign_commander import (
-                get_sovereign_commander,
                 ApprovalRequest,
                 OperationType,
+                get_sovereign_commander,
             )
 
             commander = get_sovereign_commander()
@@ -337,8 +337,8 @@ class QRPillTestSuite:
                 print("  ERROR: Critical operation approval failed")
                 return False
 
-            print(f"  Low-risk auto-approved: ✓")
-            print(f"  Critical approved: ✓")
+            print("  Low-risk auto-approved: ✓")
+            print("  Critical approved: ✓")
             print(f"  Total approvals: {len(history)}")
             return True
         except Exception as e:

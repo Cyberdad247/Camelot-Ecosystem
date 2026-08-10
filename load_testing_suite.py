@@ -12,11 +12,12 @@ Produces detailed metrics, graphs, and reports.
 
 import asyncio
 import json
-import time
 import statistics
+import time
+from dataclasses import asdict, dataclass
 from datetime import datetime
-from dataclasses import dataclass, asdict
 from typing import List
+
 import aiohttp
 import numpy as np
 
@@ -83,7 +84,7 @@ class LoadTestingFramework:
                         return False
 
                 # Check sync
-                async with session.get(f"http://192.168.1.10:6379/knight/sync-status") as resp:
+                async with session.get("http://192.168.1.10:6379/knight/sync-status") as resp:
                     if resp.status != 200:
                         print("❌ Sync unavailable")
                         return False
@@ -239,7 +240,7 @@ class LoadTestingFramework:
         """Send single sync request and measure latency"""
         start = time.time()
         try:
-            async with session.post(f"http://192.168.1.10:6379/knight/write",
+            async with session.post("http://192.168.1.10:6379/knight/write",
                                    json=payload,
                                    timeout=aiohttp.ClientTimeout(total=10)) as resp:
                 await resp.json()
@@ -337,7 +338,7 @@ class LoadTestingFramework:
 
     def _print_result(self, result: TestResult):
         """Pretty-print test result"""
-        print(f"\n   ✅ Results:")
+        print("\n   ✅ Results:")
         print(f"      RPS: {result.rps_actual:.0f} (target: {result.rps_target})")
         print(f"      Latency: p95={result.latency_p95_ms:.1f}ms, p99={result.latency_p99_ms:.1f}ms")
         print(f"      Success Rate: {100 - result.error_rate:.1f}%")
@@ -371,9 +372,9 @@ class LoadTestingFramework:
 
             # Check for breaking points
             if result.error_rate > 5:
-                print(f"⚠️  Error rate exceeded 5% threshold")
+                print("⚠️  Error rate exceeded 5% threshold")
             if result.latency_p95_ms > 200:
-                print(f"⚠️  p95 latency exceeded 200ms threshold")
+                print("⚠️  p95 latency exceeded 200ms threshold")
 
         # Generate report
         self.generate_report()

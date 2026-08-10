@@ -22,18 +22,17 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-
 from cartridges.v4000_trio import (
     TRIO_FNAMES,
     default_scaffold_body,
     is_default_scaffold_unmodified,
 )
+
 # Shared Rich-Console replacement — canonical home is ``tests/_fixtures.py``
 # so the trio tests don't have to reach across sibling test files. A future
 # refusal in ``_preflight_emit_overwrite`` surfaces as a captured-output
 # diff (and a useful pytest failure output) rather than going to /dev/null.
 from tests._fixtures import CapturingConsole
-
 
 # ── TRIO_FNAMES ───────────────────────────────────────────────────────────────
 

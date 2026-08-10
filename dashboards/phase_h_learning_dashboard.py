@@ -4,12 +4,12 @@ Phase H Week 2: Learning Dashboard
 Visualize pattern discovery and optimization candidates
 """
 
-import sqlite3
 import json
-from datetime import datetime
-from typing import Dict, List
-from pathlib import Path
+import sqlite3
 from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List
 
 
 @dataclass
@@ -305,7 +305,7 @@ class LearningDashboard:
 
         # Patterns section
         patterns = self.get_pattern_metrics()
-        output.append(f"\n📊 PATTERN DISCOVERY")
+        output.append("\n📊 PATTERN DISCOVERY")
         output.append(f"  Total patterns: {patterns['total']}")
         output.append(f"  Average confidence: {patterns['average_confidence']:.0%}")
         for ptype, count in patterns['by_type'].items():
@@ -313,7 +313,7 @@ class LearningDashboard:
 
         # Candidates section
         candidates = self.get_candidate_metrics()
-        output.append(f"\n🎯 OPTIMIZATION CANDIDATES")
+        output.append("\n🎯 OPTIMIZATION CANDIDATES")
         output.append(f"  Total candidates: {candidates['total']}")
         output.append(f"  Average impact: {candidates['average_impact']:.1f}%")
         output.append(f"  Average score: {candidates['average_score']:.0%}")
@@ -329,21 +329,21 @@ class LearningDashboard:
 
         # Projections
         projections = self.get_improvement_projections()
-        output.append(f"\n📈 IMPROVEMENT PROJECTIONS")
+        output.append("\n📈 IMPROVEMENT PROJECTIONS")
         output.append(f"  Total potential: {projections['total_potential_improvement']:.1f}%")
         output.append(f"  High confidence: {projections['high_confidence_improvement']:.1f}%")
         output.append(f"  Timeline: {projections['timeline']}")
 
         # Top candidates
         if candidates['top_candidates']:
-            output.append(f"\n⭐ TOP CANDIDATES")
+            output.append("\n⭐ TOP CANDIDATES")
             for i, c in enumerate(candidates['top_candidates'], 1):
                 output.append(f"  {i}. {c['name']}")
                 output.append(f"     Impact: {c['impact']:.0f}% | Score: {c['score']:.0%} | Effort: {c['effort']}")
 
         # Recommendations
         if health['recommendations']:
-            output.append(f"\n💡 RECOMMENDATIONS")
+            output.append("\n💡 RECOMMENDATIONS")
             for rec in health['recommendations']:
                 output.append(f"  {rec}")
 

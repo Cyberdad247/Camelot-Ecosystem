@@ -9,6 +9,7 @@ Generates comprehensive PDF documents for copyright protection.
 
 import os
 import re
+
 from fpdf import FPDF
 
 OUTPUT_DIR = os.path.dirname(os.path.abspath(__file__))

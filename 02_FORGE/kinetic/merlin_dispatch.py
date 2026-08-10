@@ -5,9 +5,9 @@
 Purpose: Central Command Router. Unifies the Titan System under one CLI.
 Act as: The Magician.
 """
-import sys
 import os
 import subprocess
+import sys
 
 # Tool Registry
 # Maps keywords to scripts
@@ -74,7 +74,7 @@ def run_tool(tool_name, args):
     except subprocess.CalledProcessError as e:
         print(f"💥 [MERLIN] The spell backfired: {e}")
     except KeyboardInterrupt:
-        print(f"\n🛑 [MERLIN] Spell interrupted.")
+        print("\n🛑 [MERLIN] Spell interrupted.")
 
 def interactive_mode():
     print("🏰 [MERLIN] The Tower of Camelot is Open. Command me. (Type 'exit' to leave)")

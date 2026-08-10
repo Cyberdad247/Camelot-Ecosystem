@@ -1,12 +1,12 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+from textwrap import dedent
+
 from agno.agent import Agent
 from agno.tools.exa import ExaTools
 from agno.tools.firecrawl import FirecrawlTools
 from agno.tools.reasoning import ReasoningTools
 from config.llm import model
-from textwrap import dedent
-
 
 itinerary_agent = Agent(
     name="Itinerary Specialist",

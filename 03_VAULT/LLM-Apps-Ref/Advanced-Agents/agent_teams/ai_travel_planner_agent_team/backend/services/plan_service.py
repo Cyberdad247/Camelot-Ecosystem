@@ -1,28 +1,29 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import json
+import time
 from datetime import datetime, timezone
+
+from agents.budget import budget_agent
+from agents.destination import destination_agent
+from agents.flight import flight_search_agent
+from agents.food import dining_agent
+from agents.hotel import hotel_search_agent
+from agents.itinerary import itinerary_agent
+from agents.structured_output import convert_to_model
+from loguru import logger
 from models.travel_plan import (
     TravelPlanAgentRequest,
     TravelPlanRequest,
     TravelPlanTeamResponse,
 )
-from loguru import logger
-import json
-import time
-from agents.structured_output import convert_to_model
 from repository.trip_plan_repository import (
-    create_trip_plan_status,
-    update_trip_plan_status,
-    get_trip_plan_status,
     create_trip_plan_output,
+    create_trip_plan_status,
     delete_trip_plan_outputs,
+    get_trip_plan_status,
+    update_trip_plan_status,
 )
-from agents.destination import destination_agent
-from agents.itinerary import itinerary_agent
-from agents.flight import flight_search_agent
-from agents.hotel import hotel_search_agent
-from agents.food import dining_agent
-from agents.budget import budget_agent
 
 
 def travel_request_to_markdown(data: TravelPlanRequest) -> str:
@@ -80,7 +81,7 @@ def travel_request_to_markdown(data: TravelPlanRequest) -> str:
     vibes_descriptions = [travel_vibes.get(v, v) for v in vibes]
 
     lines = [
-        f"# 🧳 Travel Plan Request",
+        "# 🧳 Travel Plan Request",
         "",
         "## 📍 Trip Overview",
         f"- **Traveler:** {data.name.title() if data.name else 'Unnamed Traveler'}",

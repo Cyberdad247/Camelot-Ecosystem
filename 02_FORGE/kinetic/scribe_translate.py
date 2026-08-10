@@ -5,10 +5,10 @@
 Purpose: Auto-translate documentation/localization files using LLM APIs.
 Source: Adapted from cherry-studio/scripts/auto-translate-i18n.ts
 """
-import os
-import json
-import asyncio
 import argparse
+import asyncio
+import json
+import os
 
 # --- CONFIGURATION ---
 MAX_CONCURRENT = 5

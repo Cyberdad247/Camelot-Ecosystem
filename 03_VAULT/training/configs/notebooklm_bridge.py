@@ -140,7 +140,7 @@ async def _build_client():
     global _client
     if _client is None:
         from notebooklm import NotebookLMClient
-        from notebooklm.auth import load_auth_from_storage, fetch_tokens, AuthTokens
+        from notebooklm.auth import AuthTokens, fetch_tokens, load_auth_from_storage
         storage_path = _ensure_storage_state()
         cookies = load_auth_from_storage()
         

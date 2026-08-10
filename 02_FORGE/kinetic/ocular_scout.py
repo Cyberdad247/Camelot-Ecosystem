@@ -5,9 +5,9 @@
 Purpose: The Eyes of the Swarm. Traverses the web and extracts AI-ready Markdown.
 Powered by: crawl4ai
 """
+import argparse
 import asyncio
 import os
-import argparse
 from datetime import datetime
 from urllib.parse import urlparse
 

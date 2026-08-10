@@ -1,9 +1,12 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from fastapi import FastAPI, UploadFile, File, Form
-import tempfile, os, json
+import json
+import os
+import tempfile
+
 from app.models.schemas import SynergyAnalysisResponse
 from app.services import analysis
+from fastapi import FastAPI, File, Form, UploadFile
 
 app = FastAPI(title="Sonic Blueprint: Synergy_Analyzer")
 

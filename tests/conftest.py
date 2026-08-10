@@ -109,7 +109,7 @@ def _bootstrap_meml2() -> ModuleType:
     # (`from .cloudbrain_connector import CloudBrainConnector`) resolve
     # through the parent's __path__.
     parent = sys.modules[PKG_NAME]
-    setattr(parent, "mempalace_l2", sub_module)
+    parent.mempalace_l2 = sub_module
     sys.modules[full_name] = sub_module
     sub_spec.loader.exec_module(sub_module)
     return sub_module

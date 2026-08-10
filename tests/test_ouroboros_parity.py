@@ -1,5 +1,6 @@
 import ouroboros
 
+
 def test_ouroboros_parity(monkeypatch, tmp_path):
     # Isolate path
     monkeypatch.setenv("CAMELOT_OS_HOME", str(tmp_path))

@@ -1,12 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from fastapi import FastAPI, APIRouter
+from contextlib import asynccontextmanager
+from datetime import datetime, timezone
+
+from fastapi import APIRouter, FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
-from datetime import datetime, timezone
-from contextlib import asynccontextmanager
-from services.db_service import initialize_db_pool, close_db_pool
 from router.plan import router as plan_router
+from services.db_service import close_db_pool, initialize_db_pool
 
 router = APIRouter(prefix="/api")
 
@@ -45,6 +46,7 @@ app = FastAPI(
 )
 
 import os as _os
+
 _ALLOWED_ORIGINS = [
     o.strip() for o in _os.getenv(
         "ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:5173"

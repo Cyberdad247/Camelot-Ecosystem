@@ -2,7 +2,6 @@ from pathlib import Path
 
 from control_plane import worker
 
-
 REPO_ROOT = Path(__file__).resolve().parents[1]
 SPRINT_ENRICHMENT_SCRIPTS = [
     REPO_ROOT / "scripts" / "sprint5_enrichment.py",

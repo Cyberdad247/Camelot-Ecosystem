@@ -1,9 +1,10 @@
 """OMEGA Defense Nexus Phase 0 acceptance tests — new knight imports + personas."""
 import importlib.util
+import shutil
 import sys
 import tempfile
-import shutil
 from pathlib import Path
+
 import pytest
 
 CAMELOT = Path(__file__).resolve().parents[1]

@@ -6,7 +6,7 @@ Performs basic, synchronous scanning of Git branches and outputs a status report
 
 import subprocess
 import sys
-from datetime import datetime
+
 
 def run_git(args):
     try:

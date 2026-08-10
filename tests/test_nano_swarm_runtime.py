@@ -1,9 +1,9 @@
 import json
 from pathlib import Path
 
-from control_plane import runic_router
-from control_plane import nano_swarm_runtime
 from control_plane.camelot_cli import _build_parser
+
+from control_plane import nano_swarm_runtime, runic_router
 
 
 def _write_node(root: Path, node: str) -> None:

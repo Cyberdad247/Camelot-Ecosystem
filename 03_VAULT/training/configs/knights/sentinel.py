@@ -20,8 +20,8 @@ Pipeline: Anya APEE v6.5 -> Sentinel audit DAG -> Iron Gate HITL.
 
 import os
 import re
-import subprocess
 import shutil
+import subprocess
 from pathlib import Path
 
 from .base import BaseKnight
@@ -1112,10 +1112,10 @@ class SirSentinel(BaseKnight):
         # Build report
         lines = [
             "# SENTINEL AUDIT REPORT",
-            f"## Camelot Apex OS v300.4 -- Agent-Armor v2.0",
+            "## Camelot Apex OS v300.4 -- Agent-Armor v2.0",
             f"**Domains ({len(domain_keys)}):** {', '.join(domain_keys)}",
-            f"**Compiled by:** Anya APEE v6.5 (PARSE -> ENRICH -> COMPILE -> ROUTE -> VALIDATE)",
-            f"**Dispatched to:** Sir Sentinel (L6) + Lukas Edge (L2)",
+            "**Compiled by:** Anya APEE v6.5 (PARSE -> ENRICH -> COMPILE -> ROUTE -> VALIDATE)",
+            "**Dispatched to:** Sir Sentinel (L6) + Lukas Edge (L2)",
             f"**Total audit domains available:** {len(AUDIT_DOMAINS)}",
             "",
         ]

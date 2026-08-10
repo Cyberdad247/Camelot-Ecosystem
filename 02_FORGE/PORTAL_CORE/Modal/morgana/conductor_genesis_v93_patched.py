@@ -1,9 +1,9 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
-import sys
-import subprocess
 import shutil
+import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 

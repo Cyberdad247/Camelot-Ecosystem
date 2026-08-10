@@ -1,6 +1,7 @@
 import importlib.util
 from pathlib import Path
 
+
 @pytest.fixture
 def bridge_client():
     repo_root = Path(__file__).resolve().parent.parent.parent

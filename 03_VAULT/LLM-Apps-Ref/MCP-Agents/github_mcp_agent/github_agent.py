@@ -2,8 +2,9 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import asyncio
 import os
-import streamlit as st
 from textwrap import dedent
+
+import streamlit as st
 from agno.agent import Agent
 from agno.tools.mcp import MCPTools
 from mcp import ClientSession, StdioServerParameters

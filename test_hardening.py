@@ -7,10 +7,9 @@ Status: COMPREHENSIVE (80+ tests across 5 domains)
 """
 
 import asyncio
-import time
 import sys
+import time
 from typing import Dict
-
 
 # ── Security Tests ────────────────────────────────────────────────────────
 
@@ -86,8 +85,8 @@ class SecurityAuditor:
 
     async def test_authentication_gates(self):
         """Verify all sovereignty gates are armed"""
-        from control_plane.soul_oversight import SoulOversight
         from control_plane.sir_socrates import SirSocrates
+        from control_plane.soul_oversight import SoulOversight
 
         oversight = SoulOversight()
         socrates = SirSocrates()
@@ -109,8 +108,9 @@ class SecurityAuditor:
 
     async def test_encryption_at_rest(self):
         """Verify sensitive data encryption"""
-        from control_plane.pqcrypto_bridge import PQCryptoBridge
         import os
+
+        from control_plane.pqcrypto_bridge import PQCryptoBridge
 
         crypto = PQCryptoBridge()
 
@@ -274,8 +274,9 @@ class PerformanceProfiler:
 
     async def profile_memory(self):
         """Profile memory usage"""
-        import psutil
         import gc
+
+        import psutil
 
         process = psutil.Process()
 
@@ -454,7 +455,7 @@ class ResilienceTester:
             try:
                 # Each agent failure should not cascade
                 await gateway.probe_agent(8401 + i)
-            except Exception as e:
+            except Exception:
                 failed_agents += 1
 
         # Should isolate failures

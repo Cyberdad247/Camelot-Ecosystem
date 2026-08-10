@@ -2,10 +2,10 @@
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from agno.agent import Agent
 from agno.models.openai import OpenAIChat
+from agno.playground import Playground, serve_playground_app
 from agno.storage.agent.sqlite import SqliteAgentStorage
 from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.yfinance import YFinanceTools
-from agno.playground import Playground, serve_playground_app
 
 web_agent = Agent(
     name="Web Agent",

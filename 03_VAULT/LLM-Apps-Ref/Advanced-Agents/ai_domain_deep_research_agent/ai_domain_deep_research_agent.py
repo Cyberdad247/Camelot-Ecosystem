@@ -1,11 +1,12 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
+
 import streamlit as st
-from dotenv import load_dotenv
 from agno.agent import Agent
-from composio_agno import ComposioToolSet, Action
 from agno.models.together import Together
+from composio_agno import Action, ComposioToolSet
+from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()

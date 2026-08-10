@@ -6,8 +6,8 @@ Usage:
     python verify_pyramid.py [--verbose] [--knight sir_boris]
 """
 import asyncio
-import sys
 import json
+import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -57,10 +57,10 @@ class PyramidVerifier:
         """Verify required packages are installed."""
         try:
             import aiofiles
-            import yaml
-            from sentence_transformers import SentenceTransformer
-            from qdrant_client import QdrantClient
             import redis
+            import yaml
+            from qdrant_client import QdrantClient
+            from sentence_transformers import SentenceTransformer
 
             if self.verbose:
                 print("  ✓ aiofiles")

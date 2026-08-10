@@ -5,7 +5,6 @@ Queries the active NotebookLM list and creates any missing brain instances.
 import asyncio
 import os
 import sys
-from pathlib import Path
 
 # Add configs to path for notebooklm_bridge
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "03_VAULT", "training", "configs")))
@@ -14,7 +13,7 @@ async def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     from notebooklm import NotebookLMClient
-    from notebooklm.auth import load_auth_from_storage, fetch_tokens, AuthTokens
+    from notebooklm.auth import AuthTokens, fetch_tokens, load_auth_from_storage
     
     print("Connecting to NotebookLM...")
     try:

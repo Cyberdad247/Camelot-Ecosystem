@@ -7,8 +7,8 @@ validates output structure, and reports integrity violations.
 from __future__ import annotations
 
 import asyncio
-import uuid
 import sys
+import uuid
 
 from control_plane.main import (
     A2AMessage,
@@ -17,7 +17,6 @@ from control_plane.main import (
     TaskMessage,
     process_task,
 )
-
 
 # --- Test Cases ---
 

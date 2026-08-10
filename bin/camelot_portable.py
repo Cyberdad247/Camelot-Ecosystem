@@ -52,7 +52,11 @@ from rich.table import Table
 
 from cartridges.v4000_trio import (
     TRIO_FNAMES,
+)
+from cartridges.v4000_trio import (
     default_scaffold_body as _default_scaffold_body_func,
+)
+from cartridges.v4000_trio import (
     is_default_scaffold_unmodified as _is_default_scaffold_unmodified_func,
 )
 

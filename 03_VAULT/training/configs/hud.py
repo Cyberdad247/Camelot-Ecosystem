@@ -8,14 +8,14 @@ Provides a full-screen heads-up display showing:
   - Interactive command prompt
 """
 
-import os
-import sys
-import time
+import atexit
 import json
+import os
 import shlex
 import subprocess
+import sys
 import threading
-import atexit
+import time
 
 # Fix Windows encoding before anything else
 if sys.platform == "win32":
@@ -25,8 +25,9 @@ if sys.platform == "win32":
     except Exception:
         pass
 
-import logging
 import io
+import logging
+
 import requests
 
 __version__ = "1.0.0"
@@ -238,9 +239,9 @@ def _handle_research(command: str, console) -> None:
     try:
         sys.path.insert(0, CAMELOT_DIR)
         from knights.browser_research_agency import BrowserResearchAgency
+        from rich.panel import Panel
         from rich.progress import Progress, SpinnerColumn, TextColumn
         from rich.table import Table
-        from rich.panel import Panel
 
         agency = BrowserResearchAgency(tier=tier)
 
@@ -404,13 +405,13 @@ def _handle_rune(rune: str) -> str:
             from lord_archivist import run_gep_scan
             rpt = run_gep_scan()
             lines = [
-                f"[cyan]Omega_SYNC — Lord Archivist GEP Scan[/]",
+                "[cyan]Omega_SYNC — Lord Archivist GEP Scan[/]",
                 f"  Skills scanned: [green]{len(rpt.skill_audits)}[/]",
                 f"  Skill gaps:     [{'red' if rpt.skill_gaps else 'green'}]{rpt.skill_gaps or 'none'}[/]",
                 f"  Fail patterns:  {len(rpt.fail_patterns)}",
                 f"  XP entries:     {len(rpt.xp_entries)}",
                 f"  Duration:       {rpt.duration_ms:.0f}ms",
-                f"[dim]Learnings written to 03_VAULT/Knights/learnings.md[/]",
+                "[dim]Learnings written to 03_VAULT/Knights/learnings.md[/]",
             ]
             return "\n".join(lines)
         except Exception as e:
@@ -545,12 +546,12 @@ def _handle_rune(rune: str) -> str:
         pqc     = os.path.isfile(os.path.join(bin_dir, "camelot-pqcrypto.exe"))
         viz     = os.path.isfile(os.path.join(bin_dir, "vizion-telemetry.exe"))
         lines = [
-            f"[cyan]Omega_KINETIC — Kinetic Edge[/]",
+            "[cyan]Omega_KINETIC — Kinetic Edge[/]",
             f"  MCP Axum :3001  [{'green' if ok else 'red'}]{'live' if ok else 'dark'}[/]",
             f"  swarm-spawner   [{'green' if spawner else 'yellow'}]{'built' if spawner else 'pending build'}[/]",
             f"  pqcrypto        [{'green' if pqc else 'yellow'}]{'built' if pqc else 'pending build'}[/]",
             f"  vizion-telem    [{'green' if viz else 'yellow'}]{'built' if viz else 'pending build'}[/]",
-            f"  [dim]Run: bash scripts/build_kinetic.sh[/]",
+            "  [dim]Run: bash scripts/build_kinetic.sh[/]",
         ]
         return "\n".join(lines)
 
@@ -656,6 +657,7 @@ def _silence_kernel(func):
 
 # Pre-load bridge silently — suppress ALL output channels
 import builtins
+
 _real_print = builtins.print
 _real_stdout, _real_stderr = sys.stdout, sys.stderr
 builtins.print = lambda *a, **k: None
@@ -692,15 +694,15 @@ if sys.platform == "win32":
         pass
 
 try:
-    from rich.console import Console
-    from rich.panel import Panel
-    from rich.table import Table
-    from rich.layout import Layout
-    from rich.text import Text
-    from rich.live import Live
-    from rich.columns import Columns
-    from rich.prompt import Prompt
     from rich import box
+    from rich.columns import Columns
+    from rich.console import Console
+    from rich.layout import Layout
+    from rich.live import Live
+    from rich.panel import Panel
+    from rich.prompt import Prompt
+    from rich.table import Table
+    from rich.text import Text
     HAS_RICH = True
 except ImportError:
     HAS_RICH = False
@@ -843,7 +845,7 @@ def _build_knights_panel():
 def _build_stats_panel():
     """Build execution statistics panel."""
     try:
-        from ouroboros import get_stats, get_history
+        from ouroboros import get_history, get_stats
         stats = get_stats()
         history = get_history(5)
     except Exception:
@@ -869,7 +871,7 @@ def _build_stats_panel():
 def _build_fleet_panel():
     """Build the FLEET panel — live agent telemetry from Ouroboros."""
     try:
-        from ouroboros import get_stats, get_history
+        from ouroboros import get_history, get_stats
         stats = get_stats()
         history = get_history(20)
     except Exception:
@@ -1002,7 +1004,7 @@ def _build_env_panel():
     # Check Ollama
     try:
         import httpx
-        resp = httpx.get(f"http://127.0.0.1:11434/api/tags", timeout=2)
+        resp = httpx.get("http://127.0.0.1:11434/api/tags", timeout=2)
         models = resp.json().get("models", [])
         lines.append(f"[cyan]Ollama:[/]  [green]online[/] ({len(models)} models)")
     except Exception:
@@ -1026,8 +1028,8 @@ def _build_env_panel():
 
 def _build_sir_link_panel():
     """Anya Dashboard — Sir Link section. Shows full LLM terminal manifest."""
-    from rich.table import Table
     from rich.panel import Panel
+    from rich.table import Table
 
     manifest_path = os.path.join(HOME_DIR, "CAMELOT_OS", "logs", "switchboard_manifest.json")
     try:
@@ -1113,7 +1115,7 @@ def _build_anya_panel():
         _col = "green" if _rpt.passed else "red"
         scorpion_str = f"[{_col}]SCORE={_rpt.gideon_risk_score} {'PASS' if _rpt.passed else 'FAIL'}[/]"
     except Exception as _e:
-        scorpion_str = f"[yellow]unavailable[/]"
+        scorpion_str = "[yellow]unavailable[/]"
 
     # Switchboard live count
     sw_str = "[dim]no manifest[/]"
@@ -1128,7 +1130,7 @@ def _build_anya_panel():
         pass
 
     lines = [
-        f"[bold bright_magenta]APEE v6.5[/] — [bold]ANYA_IS_THE_GATE[/]",
+        "[bold bright_magenta]APEE v6.5[/] — [bold]ANYA_IS_THE_GATE[/]",
         "",
     ]
     for label, ok in stages:
@@ -1140,7 +1142,7 @@ def _build_anya_panel():
         f"  //SCORPION   {scorpion_str}",
         f"  Switchboard  {sw_str}",
         "",
-        f"  [dim]Law #11: All intent enters APEE. All output validated.[/]",
+        "  [dim]Law #11: All intent enters APEE. All output validated.[/]",
     ]
 
     all_ok = all(ok for _, ok in stages)
@@ -1286,7 +1288,7 @@ def render_compact_status():
 
     parts = _suppress_kernel_noise(_collect)
     if parts:
-        formatted = f"  [dim]|[/] ".join(f"[{c}]{t}[/]" for c, t in parts)
+        formatted = "  [dim]|[/] ".join(f"[{c}]{t}[/]" for c, t in parts)
         console.print(formatted)
 
 

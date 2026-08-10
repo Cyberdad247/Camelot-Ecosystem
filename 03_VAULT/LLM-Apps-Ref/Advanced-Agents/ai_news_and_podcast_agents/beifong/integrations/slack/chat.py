@@ -518,7 +518,7 @@ async def send_audio_confirmation_blocks(thread_key: str, state_data: dict, resp
         }
     )
     blocks.append({"type": "actions", "elements": action_elements})
-    await send_slack_blocks(thread_key, blocks, f"🎵 Audio Review")
+    await send_slack_blocks(thread_key, blocks, "🎵 Audio Review")
 
 
 async def send_final_presentation_blocks(thread_key: str, state_data: dict, response_text: str):

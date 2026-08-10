@@ -1,11 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import cv2
-import numpy as np
-import mediapipe as mp
-from deepface import DeepFace
-from agno.tools import tool
 import json
+
+import cv2
+import mediapipe as mp
+import numpy as np
+from agno.tools import tool
+from deepface import DeepFace
+
 
 def log_before_call(fc):
     """Pre-hook function that runs before the tool execution"""

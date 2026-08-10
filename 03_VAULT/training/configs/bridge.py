@@ -6,13 +6,13 @@ planning, orchestration). Falls back to local implementations when
 kernel is unavailable.
 """
 
-import os
-import sys
+import contextlib
+import io
 import json
 import logging
+import os
+import sys
 import threading
-import io
-import contextlib
 from pathlib import Path
 from typing import Optional
 

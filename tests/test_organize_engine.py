@@ -7,11 +7,10 @@ Colony re-scan (merge_check) hits live colony_report.md — verifies CRITICAL bl
 from __future__ import annotations
 
 import importlib.util as _ilu
+import shutil
 import sys
 import tempfile
-import shutil
 from pathlib import Path
-
 
 CAMELOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(CAMELOT))

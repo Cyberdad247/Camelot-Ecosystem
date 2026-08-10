@@ -1,7 +1,9 @@
-import shutil
 import importlib.util
+import shutil
 from pathlib import Path
+
 from control_plane.provenance import ProvenanceManager, VerificationRun
+
 
 def test_provenance_mempalace_integration():
     repo_root = Path(__file__).resolve().parent.parent

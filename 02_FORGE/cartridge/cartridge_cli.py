@@ -24,7 +24,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
 from typing import Optional
@@ -32,21 +31,24 @@ from typing import Optional
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
+from . import cartridge_crypto as cc
 from .cartridge_archive import (
     ArchiveError,
-    pack as archive_pack,
-    sha256_bytes,
-    unpack as archive_unpack,
     format_archive_report,
 )
+from .cartridge_archive import (
+    pack as archive_pack,
+)
+from .cartridge_archive import (
+    unpack as archive_unpack,
+)
 from .cartridge_schemas import CartridgeManifestV2
-from . import cartridge_crypto as cc
 from .cartridge_trust import (
+    AuditLog,
     PublisherRegistry,
+    RevocationList,
     TrustManager,
     TrustStore,
-    RevocationList,
-    AuditLog,
     install_publisher_registry,
 )
 
@@ -226,8 +228,8 @@ def cmd_keygen(args: argparse.Namespace) -> int:
     print(f"[keygen] ed25519 keypair written to {cc.KEY_DIR}")
     print(f"         private: {cc.PRIV_PATH}")
     print(f"         public : {cc.PUB_PATH}")
-    print(f"")
-    print(f"  Set CAMELOT_CARTRIDGE_PUBLIC_KEY on the verifier to:")
+    print("")
+    print("  Set CAMELOT_CARTRIDGE_PUBLIC_KEY on the verifier to:")
     print(f"  {pub_b64}")
     return 0
 

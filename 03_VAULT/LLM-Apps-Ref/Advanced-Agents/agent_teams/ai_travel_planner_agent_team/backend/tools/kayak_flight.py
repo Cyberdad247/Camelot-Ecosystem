@@ -1,10 +1,12 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-from config.logger import logger_hook
 from typing import Optional
+
 from agno.tools import tool
-from models.flight import FlightSearchRequest
+from config.logger import logger_hook
 from loguru import logger
+from models.flight import FlightSearchRequest
+
 
 @tool(
     name="kayak_flight_url_generator",
@@ -47,7 +49,7 @@ def kayak_flight_url_generator(
         URL += f"/{cabin_class.lower()}"
     URL += f"/{adults}adults"
     if children > 0:
-        URL += f"/children"
+        URL += "/children"
         for _ in range(children):
             URL += "-11"
 

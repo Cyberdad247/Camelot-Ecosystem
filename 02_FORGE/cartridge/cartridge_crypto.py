@@ -48,11 +48,12 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 try:
-    from cryptography.hazmat.primitives.asymmetric.ed25519 import (
-        Ed25519PrivateKey, Ed25519PublicKey,
-    )
-    from cryptography.hazmat.primitives import serialization
     from cryptography.exceptions import InvalidSignature
+    from cryptography.hazmat.primitives import serialization
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+        Ed25519PrivateKey,
+        Ed25519PublicKey,
+    )
     _HAVE_ED25519 = True
 except Exception:  # pragma: no cover - environment dependent
     _HAVE_ED25519 = False

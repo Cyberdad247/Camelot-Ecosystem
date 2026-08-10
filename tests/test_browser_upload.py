@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import io
 import random
-import shutil
 import socket
 import subprocess
 import sys
@@ -25,8 +24,8 @@ import urllib.request
 from pathlib import Path
 
 from PIL import Image as PILImage
-from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
-
+from playwright.sync_api import TimeoutError as PlaywrightTimeout
+from playwright.sync_api import sync_playwright
 
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 STAGING_DIR = PROJECT_ROOT / "staged_uploads"

@@ -9,7 +9,6 @@ from dataclasses import dataclass, field
 
 from .base import BaseKnight
 
-
 # ── Routing signals ──────────────────────────────────────────────────────────
 
 _LT_STRONG = frozenset({

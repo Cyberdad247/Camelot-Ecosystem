@@ -1,12 +1,13 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import os
+
 import streamlit as st
 from agno.agent import Agent, RunResponse
 from agno.models.openai import OpenAIChat
-from composio_phidata import Action, ComposioToolSet
-import os
-from agno.utils.pprint import pprint_run_response
 from agno.tools.serpapi import SerpApiTools
+from agno.utils.pprint import pprint_run_response
+from composio_phidata import Action, ComposioToolSet
 
 # Set page configuration
 st.set_page_config(page_title="👨‍🏫 AI Teaching Agent Team", layout="centered")

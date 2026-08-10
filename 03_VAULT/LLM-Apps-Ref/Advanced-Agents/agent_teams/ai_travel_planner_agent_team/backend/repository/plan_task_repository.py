@@ -1,12 +1,11 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 from datetime import datetime, timezone
-from typing import Optional, List
-
-from sqlalchemy import select
+from typing import List, Optional
 
 from models.plan_task import PlanTask, TaskStatus
 from services.db_service import get_db_session
+from sqlalchemy import select
 
 
 async def create_plan_task(

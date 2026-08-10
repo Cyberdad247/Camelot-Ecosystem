@@ -1,6 +1,6 @@
 module camelot/integration/gateway
 
-go 1.25.0
+go 1.21
 
 require modernc.org/sqlite v1.56.0
 
