@@ -1,4 +1,4 @@
-"""Lady M (Morgana Omega) — Squire Swarm Governance Engine
+"""Lady M (Lady Mnemosyne) — Squire Swarm Governance Engine
 Implements SQUIRE_MERGE, SQUIRE_PURGE, SQUIRE_TRIAGE, SQUIRE_BRIEF.
 Lady M commands all 35 knights and dispatches research briefings.
 """
@@ -17,6 +17,20 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from pathlib import Path
 from typing import Any
+import sys
+
+# Connect to KERNEL for Cloudbrain
+sys.path.append(str(CAMELOT_ROOT / "01_KERNEL"))
+try:
+    from memory.cloudbrain_connector import CloudBrainConnector
+except ImportError:
+    CloudBrainConnector = None
+
+try:
+    from vfs.lady_m_rune_router import RuneRouter as _RuneRouter
+    _rune_router = _RuneRouter()
+except ImportError:
+    _rune_router = None
 
 LOG = logging.getLogger("lady_m")
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent
@@ -63,11 +77,12 @@ class SquireTriage:
         dead:   list[str]        = []
         recs:   list[str]        = []
 
-        for fp in scan_path.rglob("*"):
-            if not fp.is_file():
-                continue
-            if any(p in str(fp) for p in [".git", "__pycache__", ".venv", "node_modules"]):
-                continue
+        ignore_dirs = {".git", "__pycache__", ".venv", "node_modules", ".pytest_cache", ".ruff_cache", "target"}
+        
+        for root, dirs, files in os.walk(scan_path):
+            dirs[:] = [d for d in dirs if d not in ignore_dirs]
+            for file in files:
+                fp = Path(root) / file
 
             # Secret scan
             try:
@@ -109,11 +124,11 @@ class SquirePurge:
 
     def run(self, dry_run: bool = False) -> list[str]:
         purged: list[str] = []
-        for fp in CAMELOT_ROOT.rglob("*"):
-            if not fp.is_file():
-                continue
-            if any(p in str(fp) for p in [".git", ".venv"]):
-                continue
+        ignore_dirs = {".git", ".venv", "node_modules", "target"}
+        for root, dirs, files in os.walk(CAMELOT_ROOT):
+            dirs[:] = [d for d in dirs if d not in ignore_dirs]
+            for file in files:
+                fp = Path(root) / file
             if fp.suffix in self.PURGE_EXTENSIONS or fp.parent.name in self.PURGE_DIRS:
                 if not dry_run:
                     fp.unlink(missing_ok=True)
@@ -197,7 +212,7 @@ class SquireBrief:
             for f in sorted(MISSIONS.iterdir())[:5]:
                 body += f"  {f.name}\n"
 
-        body += "\n⚜️  Lady M | Morgana Omega | Camelot Sovereign Swarm"
+        body += "\n⚜️  Lady M | Lady Mnemosyne | Camelot Sovereign Swarm"
         return body
 
     def send(self, body: str) -> bool:
@@ -220,16 +235,30 @@ class SquireBrief:
                 srv.login(SMTP_USER, SMTP_PASS)
                 srv.sendmail(SMTP_USER, SENTINEL_EMAIL, msg.as_string())
             LOG.info("[BRIEF] Sent to %s", SENTINEL_EMAIL)
-            return True
         except Exception as exc:
             LOG.error("[BRIEF] Send failed: %s", exc)
-            return False
+
+        # ── Worldtree Cloudbrain Sync ──
+        if CloudBrainConnector:
+            try:
+                cb = CloudBrainConnector(knight_id="LADY_MNEMOSYNE")
+                cb.push_to_notebook(
+                    artifact_type="note",
+                    content=body,
+                    title=f"Sovereign Brief - {datetime.utcnow().strftime('%Y-%m-%d')}"
+                )
+                LOG.info("[BRIEF] Synced Sovereign Brief to Lady Mnemosyne's Cloudbrain")
+                return True
+            except Exception as exc:
+                LOG.error("[BRIEF] Cloudbrain Sync failed: %s", exc)
+                return False
+        return True
 
 
 # ── Lady M Orchestrator ───────────────────────────────────────────────────────
 class LadyM:
     """
-    Morgana Omega — Sovereign Swarm Commander.
+    Lady Mnemosyne — Sovereign Swarm Commander.
     Dispatches TRIAGE → PURGE → MERGE → BRIEF in sequence.
     """
     def __init__(self):
@@ -257,6 +286,15 @@ class LadyM:
         # 4. Brief
         body    = self.brief.compile(triage=report)
         sent    = self.brief.send(body)
+
+        # 5. Rune Router dispatch — route brief to best-fit Worldtree notebooks
+        if _rune_router:
+            LOG.info("[LADY_M] ᛟ Engaging Rune Router for SQUIRE_BRIEF dispatch...")
+            _rune_router.route(
+                task="sovereign daily brief triage memory sweep",
+                content=body,
+                artifact_type="note",
+            )
 
         return {
             "triage":   {"risk": report.risk_score, "secrets": len(report.secrets)},

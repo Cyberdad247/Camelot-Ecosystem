@@ -1,0 +1,137 @@
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — Worldtree VFS Manifest
+{
+  "schema_version": "1000.54",
+  "generated": "2026-08-10T13:15:00Z",
+  "worldtree_root": "vfs://camelot_os/",
+  "sync_protocol": "Viking Block HMAC-SHA256 + Anya Quantum Mantra Glyph",
+  "batch_method": "cloudbrain_connector.batch_push()",
+  "token_reduction_engine": "vfs/anya_glyph_engine.py",
+  "rune_router": "vfs/lady_m_rune_router.py",
+  "janitor": "vfs/cloudbrain_janitor.py",
+  "system_instructions": "vfs/notebook_system_instructions.py",
+  "rune_symbolect": {
+    "\u16B1": {"name": "RESEARCH",   "targets": ["LADY_APIS", "MERLIN_OMEGA"]},
+    "\u16A0": {"name": "FORGE",      "targets": ["SIR_FORGE", "SIR_CODEX", "CAMELOT_V1000"]},
+    "\u16D7": {"name": "MEMORY",     "targets": ["LADY_MNEMOSYNE", "ANYA_QUANTUM_MANTRA"]},
+    "\u16DC": {"name": "GUARD",      "targets": ["SIR_SENTINEL", "SIR_GHOST"]},
+    "\u16DE": {"name": "DEBUG",      "targets": ["SIR_DEBUG"]},
+    "\u16A2": {"name": "VOICE",      "targets": ["SIR_HELIO", "SIR_SONUS"]},
+    "\u16A8": {"name": "ARCHITECT",  "targets": ["SIR_BORIS", "SIR_ALEX"]},
+    "\u16DF": {"name": "SOVEREIGN",  "targets": "ALL"}
+  },
+  "nodes": [
+    {
+      "knight_id": "SIR_BORIS",
+      "notebook_id": "f7707daa-2d10-4db8-8fda-be4661a27793",
+      "vfs_path": "vfs://sir_boris/",
+      "domain_tags": ["architecture", "crucible", "design", "review"],
+      "rune": "\u16A8",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_ALEX",
+      "notebook_id": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
+      "vfs_path": "vfs://sir_alex/",
+      "domain_tags": ["planning", "dag", "orchestration", "tasks"],
+      "rune": "\u16A8",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_FORGE",
+      "notebook_id": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
+      "vfs_path": "vfs://sir_forge/",
+      "domain_tags": ["kinetic", "build", "execution", "code"],
+      "rune": "\u16A0",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_SENTINEL",
+      "notebook_id": "07cbb441-f008-424c-820a-85676210be39",
+      "vfs_path": "vfs://sir_sentinel/",
+      "domain_tags": ["security", "audit", "iron_gate", "guard"],
+      "rune": "\u16DC",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_DEBUG",
+      "notebook_id": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
+      "vfs_path": "vfs://sir_debug/",
+      "domain_tags": ["debug", "heal", "piv", "repair"],
+      "rune": "\u16DE",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_GHOST",
+      "notebook_id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+      "vfs_path": "vfs://sir_ghost/",
+      "domain_tags": ["privacy", "secrets", "air_gap", "scan"],
+      "rune": "\u16DC",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "LADY_APIS",
+      "notebook_id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+      "vfs_path": "vfs://lady_apis/",
+      "domain_tags": ["research", "bashr", "foraging", "context"],
+      "rune": "\u16B1",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "MERLIN_OMEGA",
+      "notebook_id": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
+      "vfs_path": "vfs://merlin_omega/",
+      "domain_tags": ["reasoning", "got", "tot", "deep_think", "math"],
+      "rune": "\u16B1",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_HELIO",
+      "notebook_id": "56820318-bb91-451f-aac4-4b46424898cf",
+      "vfs_path": "vfs://sir_helio/",
+      "domain_tags": ["voice", "tts", "audio", "realtime"],
+      "rune": "\u16A2",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_SONUS",
+      "notebook_id": "b8a1c3d5-e2f4-4687-9a01-234567890abc",
+      "vfs_path": "vfs://sir_sonus/",
+      "domain_tags": ["voice", "audio", "multivoice", "phonetic"],
+      "rune": "\u16A2",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_CODEX",
+      "notebook_id": "8c656cfa-a189-409e-a72d-07692a47f17e",
+      "vfs_path": "vfs://sir_codex/",
+      "domain_tags": ["kinetic", "rapid", "prototype", "openai"],
+      "rune": "\u16A0",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "LADY_MNEMOSYNE",
+      "notebook_id": "mnemosyne-cloudbrain-vfs-1100",
+      "vfs_path": "vfs://lady_mnemosyne/",
+      "domain_tags": ["memory", "vfs", "mnemosyne", "sweep", "brief"],
+      "rune": "\u16D7",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "ANYA_QUANTUM_MANTRA",
+      "notebook_id": "anya-glyph-engine-vfs-1200",
+      "vfs_path": "vfs://anya_quantum_mantra/",
+      "domain_tags": ["glyph", "quantum", "vfs", "token", "compression"],
+      "rune": "\u16D7",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "CAMELOT_V1000",
+      "notebook_id": "camelot-os-v1000-excalibur-a",
+      "vfs_path": "vfs://camelot_v1000/",
+      "domain_tags": ["sovereign", "os", "broadcast", "excalibur", "system"],
+      "rune": "\u16DF",
+      "active_last_3_months": true
+    }
+  ]
+}

@@ -9,3 +9,4 @@ Strict rules of engagement for Camelot-OS:
 1. Enforces the 4GB Scarcity Protocol limits.
 2. Directs Zero-Trust mTLS routing via the Bifrost Bridge.
 3. Implements Z3 SMT-LIB constraints validation before staging prod mutations.
+4. Orchestrates all VFS intents strictly through Anya's Quantum Mantra Glyph Engine (`vfs/anya_glyph_engine.py`).
