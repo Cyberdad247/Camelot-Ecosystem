@@ -1,6 +1,6 @@
 {
   "version": "v1000.54-EXCALIBUR-A",
-  "timestamp": "2026-08-10T20:14:10.087352+00:00",
+  "timestamp": "2026-08-10T20:17:08.489258+00:00",
   "glyph_installed": true,
   "system_instruction_installed": true,
   "engines": {
@@ -8,6 +8,8 @@
     "RuneRouter": true,
     "CloudbrainConnector": true,
     "AnyaConstrictSchema": true,
+    "KnightRPGSystem": true,
+    "WorldtreeCartridgeKnightBridge": true,
     "BifrostBridgePort": "8011 (127.0.0.1)",
     "MultivoiceRouterPort": "3004 (127.0.0.1)",
     "SystemUIPort": "3000 (127.0.0.1)"
@@ -115,6 +117,59 @@
       "HUMAN_GATE"
     ],
     "verification_status": "PASSED_STABLE"
+  },
+  "knight_rpg_roster": {
+    "total_knights_registered": 22,
+    "classes_count": 22,
+    "sample_roster": {
+      "KING_ARTHUR": "Sovereign Lord",
+      "SIR_BORIS": "Crucible Master",
+      "SIR_ALEX": "DAG Tactician",
+      "SIR_FORGE": "Kinetic Paladin",
+      "SIR_CODEX": "Cybernetic Knight",
+      "SIR_SENTINEL": "Iron Shield",
+      "SIR_DEBUG": "Alchemical Doctor",
+      "SIR_GHOST": "Shadow Spectre"
+    }
+  },
+  "vfs_cartridge_bridge": {
+    "sample_resolution": {
+      "vfs_uri": "vfs://worldtree/knights/SIR_FORGE/brain",
+      "knight_id": "SIR_FORGE",
+      "target": "brain",
+      "notebook_id": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
+      "bound_cartridges": [
+        "BEAVER"
+      ],
+      "level": 10,
+      "tier": "S3 Contextual",
+      "class": "Kinetic Paladin",
+      "primary_stat": "Execution",
+      "rune": "\u16a0",
+      "resolved_at": "2026-08-10T20:17:08.491066+00:00"
+    },
+    "cartridge_mappings": {
+      "ANT": [
+        "LADY_APIS",
+        "SIR_SCAVENGER"
+      ],
+      "BEAVER": [
+        "SIR_FORGE",
+        "SIR_CODEX",
+        "SIR_ALCHEMIST"
+      ],
+      "SPIDER": [
+        "MERLIN_OMEGA",
+        "LADY_APIS",
+        "SIR_HERMES"
+      ],
+      "OCTOPUS": [
+        "SIR_BORIS",
+        "SIR_ALEX",
+        "LADY_MNEMOSYNE"
+      ]
+    },
+    "active_vfs_endpoints": 22
   },
   "task_types": [
     "KINETIC",

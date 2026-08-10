@@ -52,9 +52,22 @@ except ImportError:
         RUNE_NAMES = {}
 
 try:
-    from cartridge_manager import CartridgeManager
+    from vfs.knight_rpg_system import KnightRPGSystem, KNIGHT_CLASSES
 except ImportError:
-    CartridgeManager = None
+    try:
+        from knight_rpg_system import KnightRPGSystem, KNIGHT_CLASSES
+    except ImportError:
+        KnightRPGSystem = None
+        KNIGHT_CLASSES = {}
+
+try:
+    from vfs.worldtree_cartridge_knight_bridge import WorldtreeCartridgeKnightBridge, CARTRIDGE_KNIGHT_MAP
+except ImportError:
+    try:
+        from worldtree_cartridge_knight_bridge import WorldtreeCartridgeKnightBridge, CARTRIDGE_KNIGHT_MAP
+    except ImportError:
+        WorldtreeCartridgeKnightBridge = None
+        CARTRIDGE_KNIGHT_MAP = {}
 
 
 class SystemInstallVerifier:
@@ -160,12 +173,33 @@ class SystemInstallVerifier:
             "RuneRouter": RuneRouter is not None,
             "CloudbrainConnector": len(KNIGHT_NOTEBOOKS) > 0,
             "AnyaConstrictSchema": _ANYA_SCHEMA,
+            "KnightRPGSystem": KnightRPGSystem is not None,
+            "WorldtreeCartridgeKnightBridge": WorldtreeCartridgeKnightBridge is not None,
             "BifrostBridgePort": "8011 (127.0.0.1)",
             "MultivoiceRouterPort": "3004 (127.0.0.1)",
             "SystemUIPort": "3000 (127.0.0.1)",
         }
 
-        # 2. Verify Symbolect Tree Legend
+        # 2. Verify RPG & Knight Roster
+        if KnightRPGSystem:
+            rpg = KnightRPGSystem()
+            self.report["knight_rpg_roster"] = {
+                "total_knights_registered": len(rpg.roster),
+                "classes_count": len(KNIGHT_CLASSES),
+                "sample_roster": {k: data["title"] for k, data in list(rpg.roster.items())[:8]}
+            }
+
+        # 3. Verify Worldtree-Cartridge-Knight VFS Bridge
+        if WorldtreeCartridgeKnightBridge:
+            bridge = WorldtreeCartridgeKnightBridge()
+            sample_uri = "vfs://worldtree/knights/SIR_FORGE/brain"
+            self.report["vfs_cartridge_bridge"] = {
+                "sample_resolution": bridge.resolve_vfs_uri(sample_uri),
+                "cartridge_mappings": CARTRIDGE_KNIGHT_MAP,
+                "active_vfs_endpoints": len(bridge.list_all_vfs_knights())
+            }
+
+        # 4. Verify Symbolect Tree Legend
         if RuneRouter:
             rr = RuneRouter()
             self.report["symbolect_tree"] = {
@@ -174,7 +208,7 @@ class SystemInstallVerifier:
                 "dispatch_mappings": RUNE_SYMBOLECT
             }
 
-        # 3. Verify Cartridges (Scabbard Protocol)
+        # 5. Verify Cartridges (Scabbard Protocol)
         self.report["cartridges"] = {
             "ANT": "Web scraping & document extraction",
             "BEAVER": "AST parsing & code formatting",
@@ -182,12 +216,12 @@ class SystemInstallVerifier:
             "OCTOPUS": "Parallel multi-agent swarm dispatch"
         }
 
-        # 4. Verify Modes & Task Types
+        # 6. Verify Modes & Task Types
         self.report["inversion_modes"] = ["SCAFFOLD", "SCULPT", "SCHEMA"]
         self.report["task_types"] = ["KINETIC", "STRATEGY"]
         self.report["model_tiers"] = ["HIGH", "MID", "TOOL"]
 
-        # 5. Verify Scalability & Worldtree Node Count
+        # 7. Verify Scalability & Worldtree Node Count
         self.report["scalability"] = {
             "version": "v1000.54-EXCALIBUR-A",
             "scarcity_ram_limit": "4GB Profile",
