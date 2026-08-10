@@ -2121,11 +2121,7 @@ dependencies = [
 name = "ouroboros_engine"
 version = "0.1.0"
 dependencies = [
- "chrono",
- "contracts",
  "pyo3",
- "serde",
- "serde_json",
 ]
 
 [[package]]

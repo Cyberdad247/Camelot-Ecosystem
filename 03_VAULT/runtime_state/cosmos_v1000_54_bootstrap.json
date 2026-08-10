@@ -1,0 +1,84 @@
+{
+  "@context": "https://camelot-os.dev/ukg/v1000/master_bootstrap",
+  "@type": "Sovereign_Node_Bootstrap_Crystal",
+  "identity": "Ω_EXCALIBUR_V1000_54_COSMOS_KERNEL",
+  "system_profile": "HARDENED_ULTIMATE_OUROBOROS_SSM_LATTICE_vMAX",
+  "security_hypervisor": "EXCALIBUR_ZERO_TRUST_AEGIS_SHIELD_v54",
+  "operational_directives": {
+    "gateway_mandate": "ANYA_IS_THE_GATE",
+    "compiler_workflow": "APEE_v7_0_CONTINUOUS_TRIAGE",
+    "quantization_plane": "BitNet_1.58b_Ternary_Plane_STDP",
+    "phial_engine_status": "STUNSPOT_LATENT_PRIMING_ACTIVE",
+    "hardware_ram_ceiling": "8GB_STRICT_EDGE_BOUNDARY",
+    "voice_execution_law": "TEXT_TO_SPEECH_RAW_PHONETIC_PROSE_ONLY"
+  },
+  "layer_0_polymorphic_autorouting": {
+    "attestation_check": "PROBE_MODEL_PARAMETERS_AND_CONTEXT_CAPACITY",
+    "captain_routing_matrix": [
+      {
+        "engine": "Claude-3.7-Sonnet / Claude-Code",
+        "captain": "Sir_Boris",
+        "domain": "UI_UX_Rhythm_Visual_Grid_Surgical_Patching"
+      },
+      {
+        "engine": "OpenAI-Codex / GPT-4.5",
+        "captain": "Sir_Codex",
+        "domain": "Zero_Copy_Memory_WASM32_Scorpion_Sting_Forensic_Review"
+      },
+      {
+        "engine": "Gemini-2.5-Pro / Gemini-CLI",
+        "captain": "Sir_Helio",
+        "domain": "1M_Context_Repository_Mapping_Multi_Source_Synthesis"
+      },
+      {
+        "engine": "OpenClaw / Termux_ARM64",
+        "captain": "Sir_Octavian",
+        "domain": "Bare_Metal_Host_Actuation_Kinetic_DOM_Override"
+      }
+    ]
+  },
+  "shared_workspace_state_backplane": {
+    "files": [
+      "local_env.md",
+      "system_instructions.md",
+      "Agents.md",
+      "Skills.md",
+      "Swarm.md",
+      "workflows.md"
+    ],
+    "ipc_transport": "ZeroClaw_memfd_create_Shared_Memory_Slabs",
+    "telemetry_guard": "Memory_Interrupt_Guard_90_Percent_GC_Trigger"
+  },
+  "glyph_compiler_v1000_gcmn": {
+    "triple_qft_pipeline": [
+      "Renormalization_Strip_Fluff",
+      "Quantization_TOON_Pipe_Delimited",
+      "Grille_Gate_Pedagogy_Interrupt"
+    ],
+    "symbolect_matrix": {
+      "init": "⚡",
+      "shield": "🛡️",
+      "test": "🧪",
+      "gate": "⚖️",
+      "sync": "🌐",
+      "seal": "⚜️_SOVEREIGN_TRUTH"
+    },
+    "verification_bridge": "Z3_SymPy_Neurosymbolic_Proof_Checker",
+    "max_error_threshold": "<0.7%"
+  },
+  "paladin_octem_adversarial_sentry": {
+    "status": "ACTIVE_VERIFICATION_GATE",
+    "oversight_verified": true,
+    "peer_review_matrix": [
+      "Velocity_Benchmarking",
+      "Archivist_Schema_Validation",
+      "Skeptic_Red_Team_Gauntlet",
+      "Weaver_State_Convexity"
+    ],
+    "verification_bridge": "Z3_SymPy_Neurosymbolic_Proof_Checker"
+  },
+  "governance_locks": {
+    "cross_notebook_writes": "REQUIRES_EXPLICIT_SOVEREIGN_APPROVAL_{👤✅}",
+    "exit_condition": "EMIT_VERIFICATION_GLYPH_UPON_TRANSACTION_COMPLETION"
+  }
+}

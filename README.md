@@ -3,7 +3,7 @@
 # ⚔️ CAMELOT-OS
 
 ### The Sovereign Distributed Intelligence & Agent Swarm
-#### *v9000.14-CYBERTRONIA*
+#### *v1000.54-COSMOS*
 
 **Your machine. Your models. Your rules. Zero cloud lock-in.**
 
@@ -12,6 +12,8 @@
 [![PQ Crypto](https://img.shields.io/badge/crypto-ML--KEM--768%20%7C%20ML--DSA--65-D4AF37)]()
 [![RAM Ceiling](https://img.shields.io/badge/RAM%20ceiling-4GB%20Scarcity%20Protocol-blue)]()
 [![Languages](https://img.shields.io/badge/Python%203.11%20%7C%20Rust%201.96%20%7C%20Go%201.23-informational)]()
+[![Architecture](https://img.shields.io/badge/OxiBonsai_v2-Ternary_STDP-FF4500)]()
+[![Engine](https://img.shields.io/badge/AntVortex-1M_Context_Engine-9370DB)]()
 
 </div>
 
@@ -124,6 +126,9 @@ This isn't a roadmap cosplaying as a product. Here's what's **on `main`, tested,
 - [+] **Multivoice Switchboard & Bridge** — Go-native goroutine-parallel router and local KV-cache affinity telemetry bridge (control_plane/multivoice_bridge.py).
 - [+] **Bifrost Triage Swarm** — Automated dispatch triage engine and service registry reconciliation loop (control_plane/bifrost_triage_swarm.py).
 - [+] **Anya Cockpit Bento Overhaul** — Excalibur PWA layout restructured as a brutalist dashboard with ChromeDevTools MCP assimilation and node mesh trackers (cartridges/system-ui).
+- [+] **OxiBonsai_v2 Ternary-STDP Recurrence** — Quantization mechanics scaling to a ternary weight constraint space using integrated Hebbian Spike-Timing-Dependent Plasticity (STDP) sliding update rule on constrained 8GB ARM64 edge hardware.
+- [+] **AntVortex (1M) Leech-Lattice Shell-Unions (Λ24)** — Similarity mapping coordinates indexed using 24-Dimensional Leech-Lattice shell-unions for sub-millisecond retrieval of 171 specialized agents.
+- [+] **Ouroboros Adaptive Governance (APEE v7.0)** — Anya's gate determining autonomous execution dispatch thresholds based on a continuous risk-entropy triage function.
 
 > **52 pytest · 19 module selftests · 8 Rust tests · `cargo audit` clean · WSL2 memfd verified.**
 

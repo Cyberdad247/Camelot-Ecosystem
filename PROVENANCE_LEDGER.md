@@ -4279,3 +4279,4 @@
 | 2026-08-10T00:28:27.561064 | CLI/Sir Forge | CREATE: build a test | SUCCESS |
 | 2026-08-10T04:33:26.255145+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN build cockpit] | HYDRATED |
 | 2026-08-10T04:33:26.261893+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN build cockpit, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-08-10T13:36:00.000000+00:00 | SYS_OP | V1000.54_COSMOS_UPGRADE [Upgraded base layers to OxiBonsai_v2 / AntVortex; created cosmos_v1000_54_bootstrap.json; purged deprecated PWAs] | SUCCESS |
