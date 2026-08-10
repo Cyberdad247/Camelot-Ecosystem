@@ -4171,3 +4171,19 @@
 | 2026-07-08T20:40:40.470784+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_SYNC syncing ledger' to Cloud Brain] | HYDRATED |
 | 2026-07-08T20:40:40.471952+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC syncing ledger] | HYDRATED |
 | 2026-07-08T20:40:40.478477+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_SYNC syncing ledger, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+
+---
+## [2026-06-29] OmniRoute Affinity Telemetry on the Bifrost Board
+- **Actor**: Claude Code (SIR_FORGE executor)
+- **Summary**: Wired live OmniRoute affinity metrics (KV-cache-hit rate, SLO escapes, active pins, per-engine TTFT) into the Bifrost Intelligence Board — REAL telemetry, not fabricated. Go AffinityRouter exposes cumulative counters + a /metrics endpoint; a Python multivoice_bridge reads it (graceful) and renders an "OMNIROUTE AFFINITY" panel on the board (same cross-language pattern as the Aperture panel).
+- **Scope**:
+  - 04_KINETIC/multivoice/orchestration/affinity.go: cacheHits/escapes/freshPicks counters + Stats() snapshot
+  - 04_KINETIC/multivoice/orchestration/router.go: /metrics JSON endpoint on the SSE server
+  - 04_KINETIC/multivoice/orchestration/affinity_test.go: Stats counter test
+  - control_plane/multivoice_bridge.py: fetch /metrics + render panel (graceful offline)
+  - control_plane/bifrost_server.py: /bifrost/omniroute endpoint + board panel
+- **Verification performed**:
+  - `go build ./... && go test ./orchestration/...` — PASS (Stats counters: fresh/hit/escape, cache-hit pct, per-engine TTFT)
+  - `python -m control_plane.multivoice_bridge --test` — ALL PASS (parse, offline degrade, live mock fetch)
+  - `python -m control_plane.bifrost_server --test` — ALL PASS (omniroute panel wired + 200 + label)
+- **Tag**: CYBERTRONIA_OMNIROUTE_AFFINITY_TELEMETRY

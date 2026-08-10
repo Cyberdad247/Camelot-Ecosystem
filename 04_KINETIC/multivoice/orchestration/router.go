@@ -3,6 +3,7 @@ package orchestration
 import (
 	"bufio"
 	"context"
+	"encoding/json"
 	"fmt"
 	"net"
 	"net/http"
@@ -104,6 +105,17 @@ func (mvr *MultivoiceRouter) ListenSSE(ctx context.Context, addr string) error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) {
 		fmt.Fprintln(w, "MULTIVOICE OK")
+	})
+	// /metrics exposes the OmniRoute affinity telemetry (cache-hit rate, escapes,
+	// pins, per-engine TTFT) for the Bifrost board to render.
+	mux.HandleFunc("/metrics", func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if mvr.Affinity == nil {
+			_, _ = w.Write([]byte(`{"affinity":false}`))
+			return
+		}
+		b, _ := json.Marshal(mvr.Affinity.Stats())
+		_, _ = w.Write(b)
 	})
 	mux.HandleFunc("/intent", func(w http.ResponseWriter, req *http.Request) {
 		buf := new(strings.Builder)
