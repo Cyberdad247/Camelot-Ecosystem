@@ -1,0 +1,13 @@
+{
+  "_comment": "Camelot-OS NotebookLM MCP Integration — v1000.54",
+  "_docs": "Run '.venv\\Scripts\\notebooklm login' ONCE to authenticate your Google session before use.",
+  "mcpServers": {
+    "notebooklm": {
+      "command": "C:\\Users\\vizio\\CAMELOT_OS\\.venv\\Scripts\\notebooklm.exe",
+      "args": ["mcp"],
+      "env": {
+        "NOTEBOOKLM_PROFILE": "default"
+      }
+    }
+  }
+}
