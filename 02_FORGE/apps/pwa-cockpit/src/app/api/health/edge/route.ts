@@ -11,6 +11,7 @@
 
 import { NextResponse } from "next/server";
 import { getRecentEvents } from "@/lib/telemetry";
+import { VERSION } from "@/lib/version";
 
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
@@ -26,7 +27,6 @@ type EdgeHealthStatus = {
 };
 
 const START_TS = Date.now();
-const VERSION = "1.0.0-phase3";
 
 export function GET(): NextResponse<EdgeHealthStatus> {
   let telemetryOk = true;
