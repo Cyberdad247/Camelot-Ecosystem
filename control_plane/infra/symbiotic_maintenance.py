@@ -431,6 +431,66 @@ def _write_artifacts(root: Path, payload: dict[str, Any]) -> dict[str, str]:
     }
 
 
+def _prune_git_worktrees(root: Path) -> dict[str, Any]:
+    import subprocess
+    pruned_count = 0
+    removed_branches = []
+    errors = []
+    
+    try:
+        subprocess.run(["git", "worktree", "prune"], cwd=str(root), capture_output=True)
+        res = subprocess.run(["git", "worktree", "list", "--porcelain"], cwd=str(root), capture_output=True, text=True)
+        if res.returncode == 0:
+            current_wt = {}
+            worktrees = []
+            for line in res.stdout.splitlines():
+                line = line.strip()
+                if not line:
+                    if current_wt:
+                        worktrees.append(current_wt)
+                        current_wt = {}
+                elif line.startswith("worktree "):
+                    current_wt["path"] = line[9:]
+                elif line.startswith("branch "):
+                    current_wt["branch"] = line[7:].replace("refs/heads/", "")
+            if current_wt:
+                worktrees.append(current_wt)
+                
+            for wt in worktrees:
+                wt_path_str = wt.get("path", "")
+                if not wt_path_str:
+                    continue
+                wt_path = Path(wt_path_str)
+                if wt_path.resolve() == root.resolve():
+                    continue
+                
+                path_lower = wt_path_str.lower()
+                is_transient = (
+                    ".claude/worktrees" in path_lower or
+                    "/.worktrees" in path_lower or
+                    ("phase" in path_lower and path_lower.endswith("-wt"))
+                )
+                if is_transient:
+                    rm_res = subprocess.run(["git", "worktree", "remove", "--force", wt_path_str], cwd=str(root), capture_output=True, text=True)
+                    if rm_res.returncode == 0:
+                        pruned_count += 1
+                        branch = wt.get("branch", "")
+                        if branch and branch not in ("main", "master"):
+                            del_res = subprocess.run(["git", "branch", "-D", branch], cwd=str(root), capture_output=True, text=True)
+                            if del_res.returncode == 0:
+                                removed_branches.append(branch)
+                    else:
+                        errors.append(f"Failed to remove worktree {wt_path_str}: {rm_res.stderr.strip()}")
+    except Exception as e:
+        errors.append(f"Worktree pruner exception: {e}")
+        
+    return {
+        "pruned_worktrees": pruned_count,
+        "removed_branches": removed_branches,
+        "errors": errors
+    }
+
+
 def boot_symbiotic_maintenance(home: Path, *, quick: bool = False) -> tuple[bool, str]:
     if _truthy(os.environ.get("CAMELOT_SYMBIOTIC_DISABLE")):
         return True, "symbiotic maintenance disabled via CAMELOT_SYMBIOTIC_DISABLE=1"
@@ -444,6 +504,7 @@ def boot_symbiotic_maintenance(home: Path, *, quick: bool = False) -> tuple[bool
         purge = _purge_ephemeral(home)
         compression = _compress_stale_logs(home)
         resources = _resource_profile(home)
+        worktree_prune = _prune_git_worktrees(home)
         duration_ms = round((time.perf_counter() - started_at) * 1000)
 
         lint_ok = checks["ok"]
@@ -460,6 +521,7 @@ def boot_symbiotic_maintenance(home: Path, *, quick: bool = False) -> tuple[bool
             "purge": purge,
             "compression": compression,
             "resources": resources,
+            "worktree_prune": worktree_prune,
         }
         artifact_paths = _write_artifacts(home, payload)
         payload["artifacts"] = artifact_paths
@@ -473,6 +535,7 @@ def boot_symbiotic_maintenance(home: Path, *, quick: bool = False) -> tuple[bool
             f"scan={audit['summary']['scanned_files']} "
             f"lint={checks['passed_checks']}/{checks['total_checks']} "
             f"purged={purge['removed_entries']} "
+            f"pruned_worktrees={worktree_prune['pruned_worktrees']} "
             f"compressed={compression['compressed_files']} "
             f"profile={resources['profile']} "
             f"({duration_ms}ms)"

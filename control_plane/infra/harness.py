@@ -555,6 +555,8 @@ class SovereignHarness:
                         task_data["priority"] = data["priority"]
                     if "submitted" in data:
                         task_data["submitted"] = data["submitted"]
+                    if "approval_grant" in data:
+                        task_data["approval_grant"] = data["approval_grant"]
                     tasks.append(HarnessTask(**task_data))
             except Exception:
                 pass

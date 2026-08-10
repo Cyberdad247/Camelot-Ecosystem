@@ -14,7 +14,7 @@ import asyncio
 import os
 import sys
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock, patch, AsyncMock
 
 import pytest
 
@@ -33,7 +33,7 @@ from control_plane.appwrite_client import AppwriteClient  # noqa: E402
 
 
 @pytest.fixture
-def client() -> AppwriteClient:
+def client(mock_databases) -> AppwriteClient:
     return AppwriteClient()
 
 
@@ -111,8 +111,9 @@ def test_retry_on_appwrite_exception(client: AppwriteClient, mock_databases: Mag
 
     # We've configured retry=3 with reraise=True; on the 3rd attempt the call succeeds.
     # Wrap in a tight overall wait to keep CI fast.
-    result = asyncio.run(
-        asyncio.wait_for(client.list_databases(), timeout=2.0)
-    )
+    with patch("asyncio.sleep", new_callable=AsyncMock):
+        result = asyncio.run(
+            asyncio.wait_for(client.list_databases(), timeout=2.0)
+        )
     assert result == []
     assert call_count["n"] == 3

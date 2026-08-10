@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import hashlib
 import hmac
@@ -25,7 +26,7 @@ class MemPalaceL2:
         # System-level secret for HMAC salting
         secret_env = os.environ.get("MEMPALACE_SECRET")
         if not secret_env:
-            print("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
+            sys.stderr.write("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.\n")
             secret_env = "OMEGA_DEER_CORE_FIX_2026"
             
         self._secret = secret_env.encode()
@@ -43,7 +44,7 @@ class MemPalaceL2:
         else:
             self.client = None
             # Log warning or handle gracefully
-            print("WARNING: chromadb not installed. L2 Memory is in DARK mode.")
+            sys.stderr.write("WARNING: chromadb not installed. L2 Memory is in DARK mode.\n")
 
     def _get_collection_name(self, wing: str, room: str, tenant_id: str = "default") -> str:
         """Map wing/room/tenant to a valid ChromaDB collection name."""
@@ -57,7 +58,7 @@ class MemPalaceL2:
         h.update(content.encode())
         return h.hexdigest()
 
-    def store(self, wing: str, room: str, content: str, metadata: Optional[dict[str, Any]] = None, tenant_id: str = "default"):
+    def store(self, wing: str, room: str, content: str, metadata: Optional[dict[str, Any]] = None, tenant_id: str = "default", push_to_cloudbrain: bool = True):
         """Store a drawer (entry) in the specified wing/room with integrity checksum."""
         if not self.client:
             return

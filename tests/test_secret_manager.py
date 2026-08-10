@@ -18,6 +18,7 @@ def _mk(tmp_path) -> SecretManager:
 
 def test_set_get_roundtrip_and_encrypted_at_rest(tmp_path, monkeypatch):
     monkeypatch.delenv("CAMELOT_SECRET_KEY", raising=False)
+    monkeypatch.delenv("WEBHOOK_SECRET", raising=False)
     sm = _mk(tmp_path)
     sm.set("WEBHOOK_SECRET", "s3cr3t-value")
     assert sm.get("WEBHOOK_SECRET") == "s3cr3t-value"

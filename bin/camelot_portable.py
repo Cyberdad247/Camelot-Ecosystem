@@ -31,12 +31,19 @@ def _asset_root() -> Path:
 
 ASSETS = _asset_root()
 _REPO = Path(__file__).resolve().parent.parent
-_MCP_CONFIG_PATHS = [
-    ASSETS / "mcp_servers.json",
-    ASSETS / "mcp_config.json",
-    Path("C:/Users/vizio/AppData/Roaming/Code/User/globalStorage/saoudrizwan.claude-dev/settings/mcp_servers.json"),
-    Path("C:/Users/vizio/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/mcp_servers.json"),
-]
+def _get_mcp_config_paths() -> list[Path]:
+    paths = [ASSETS / "mcp_servers.json", ASSETS / "mcp_config.json"]
+    appdata = os.environ.get("APPDATA")
+    if appdata:
+        paths.append(Path(appdata) / "Code" / "User" / "globalStorage" / "saoudrizwan.claude-dev" / "settings" / "mcp_servers.json")
+    try:
+        home = Path.home()
+        paths.append(home / ".config" / "Code" / "User" / "globalStorage" / "saoudrizwan.claude-dev" / "settings" / "mcp_servers.json")
+    except Exception:
+        pass
+    return paths
+
+_MCP_CONFIG_PATHS = _get_mcp_config_paths()
 
 import httpx
 from rich.console import Console
