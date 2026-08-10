@@ -1,0 +1,128 @@
+{
+  "version": "v1000.54-EXCALIBUR-A",
+  "timestamp": "2026-08-10T20:14:10.087352+00:00",
+  "glyph_installed": true,
+  "system_instruction_installed": true,
+  "engines": {
+    "AnyaQuantumMantraGlyphEngine": false,
+    "RuneRouter": true,
+    "CloudbrainConnector": true,
+    "AnyaConstrictSchema": true,
+    "BifrostBridgePort": "8011 (127.0.0.1)",
+    "MultivoiceRouterPort": "3004 (127.0.0.1)",
+    "SystemUIPort": "3000 (127.0.0.1)"
+  },
+  "symbolect_tree": {
+    "total_runes": 9,
+    "rune_legend": {
+      "\u16b1": "RESEARCH",
+      "\u16a0": "FORGE",
+      "\u16d7": "MEMORY",
+      "\u16dc": "GUARD",
+      "\u16de": "DEBUG",
+      "\u16a2": "VOICE",
+      "\u16a8": "ARCHITECT",
+      "\u16df": "SOVEREIGN",
+      "\u16a6": "AUDIT"
+    },
+    "dispatch_mappings": {
+      "\u16b1": [
+        "LADY_APIS",
+        "MERLIN_OMEGA"
+      ],
+      "\u16a0": [
+        "SIR_FORGE",
+        "SIR_CODEX",
+        "CAMELOT_V1000"
+      ],
+      "\u16d7": [
+        "LADY_MNEMOSYNE",
+        "ANYA_QUANTUM_MANTRA"
+      ],
+      "\u16dc": [
+        "SIR_SENTINEL",
+        "SIR_GHOST"
+      ],
+      "\u16de": [
+        "SIR_DEBUG"
+      ],
+      "\u16a2": [
+        "SIR_HELIO",
+        "SIR_SONUS"
+      ],
+      "\u16a8": [
+        "SIR_BORIS",
+        "SIR_ALEX"
+      ],
+      "\u16df": [
+        "SIR_BORIS",
+        "SIR_ALEX",
+        "SIR_FORGE",
+        "SIR_SENTINEL",
+        "SIR_DEBUG",
+        "SIR_GHOST",
+        "LADY_APIS",
+        "MERLIN_OMEGA",
+        "SIR_HELIO",
+        "SIR_SONUS",
+        "SIR_CODEX",
+        "SIR_HEIMDALL",
+        "SIR_GALAHAD",
+        "ARTHUR_OMEGA",
+        "SIR_STITCH",
+        "SIR_ALCHEMIST",
+        "SIR_RUSTCLAW",
+        "ANYA_OMEGA",
+        "SIR_HERMES",
+        "SIR_LANCELOT",
+        "LADY_GUINEVERE",
+        "SIR_MNEMO",
+        "LADY_MNEMOSYNE",
+        "ANYA_QUANTUM_MANTRA",
+        "CAMELOT_V1000",
+        "CAMELOT_MASTER",
+        "BIFROST",
+        "FATHER_CAMELOT",
+        "WORLD_TREE",
+        "ALPHA_OMEGA",
+        "ANTIGRAVITY",
+        "KICKBOX",
+        "INSPIRA"
+      ]
+    }
+  },
+  "cartridges": {
+    "ANT": "Web scraping & document extraction",
+    "BEAVER": "AST parsing & code formatting",
+    "SPIDER": "Web search & BASHR research loop",
+    "OCTOPUS": "Parallel multi-agent swarm dispatch"
+  },
+  "inversion_modes": [
+    "SCAFFOLD",
+    "SCULPT",
+    "SCHEMA"
+  ],
+  "scalability": {
+    "version": "v1000.54-EXCALIBUR-A",
+    "scarcity_ram_limit": "4GB Profile",
+    "live_google_notebooks_discovered": 275,
+    "camelot_affiliated_notebooks": 88,
+    "worldtree_mapped_knight_nodes": 33,
+    "max_concurrent_batch_threads": 6,
+    "hitl_security_tiers": [
+      "AUTO",
+      "PROMPT",
+      "HUMAN_GATE"
+    ],
+    "verification_status": "PASSED_STABLE"
+  },
+  "task_types": [
+    "KINETIC",
+    "STRATEGY"
+  ],
+  "model_tiers": [
+    "HIGH",
+    "MID",
+    "TOOL"
+  ]
+}

@@ -1,3 +1,11 @@
+<!-- LIVING CAMELOT-OS v1000.54 SYSTEM INSTRUCTION HEADER -->
+## Living System Instruction v1000.54-EXCALIBUR-A Active
+- **Northstar Mission:** Hybrid Autonomous Multi-Agentic Ecosystem with HITL Guardrails.
+- **Co-Evolution:** AGI dedicated to building a better world with humanity.
+- **Engine Stack:** Anya Quantum Mantra Glyph Engine + Ouroboros Rust Kernel + Bifrost mTLS.
+- **Master Notebook Node:** `Camelot-OS v.1000` (`8c656cfa-a189-409e-a72d-07692a47f17e`).
+<!-- END LIVING HEADER -->
+
 # System Instruction Backplane
 
 These rules ground the OMEGA Ancestral bootstrap in behavior that a Camelot-OS
