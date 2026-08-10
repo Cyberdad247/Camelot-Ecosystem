@@ -44,8 +44,9 @@ try:
 except ImportError:
     _LegacyNLM = None
 
-# ── Worldtree Notebook Registry ───────────────────────────────────────────────
+# ── Worldtree Notebook Registry — VERIFIED LIVE UUIDs 2026-08-10 ─────────────
 KNIGHT_NOTEBOOKS: Dict[str, str] = {
+    # Core Knights (Sovereign_Workspace verified)
     "SIR_BORIS":           "f7707daa-2d10-4db8-8fda-be4661a27793",
     "SIR_ALEX":            "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
     "SIR_FORGE":           "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
@@ -55,11 +56,32 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "LADY_APIS":           "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
     "MERLIN_OMEGA":        "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
     "SIR_HELIO":           "56820318-bb91-451f-aac4-4b46424898cf",
-    "SIR_SONUS":           "b8a1c3d5-e2f4-4687-9a01-234567890abc",
-    "SIR_CODEX":           "8c656cfa-a189-409e-a72d-07692a47f17e",
-    "LADY_MNEMOSYNE":      "mnemosyne-cloudbrain-vfs-1100",
-    "ANYA_QUANTUM_MANTRA": "anya-glyph-engine-vfs-1200",
-    "CAMELOT_V1000":       "camelot-os-v1000-excalibur-a",
+    "SIR_SONUS":           "6272aa35-c285-4edc-81bc-2824ab519edf",   # Sovereign_Workspace: SIR SONUS
+    "SIR_CODEX":           "8c656cfa-a189-409e-a72d-07692a47f17e",   # Camelot-OS v.1000
+    # Extended Knights (discovered from live account)
+    "SIR_HEIMDALL":        "3205f189-91da-4272-96a9-3641fd642763",
+    "SIR_GALAHAD":         "e0110853-14ef-403f-8def-bf3a5123986f",
+    "ARTHUR_OMEGA":        "cbb310bd-987e-4b84-bf45-12d37d090bec",
+    "SIR_STITCH":          "0fdccdc1-a1d2-48c2-8948-187398bfbeb5",
+    "SIR_ALCHEMIST":       "d6bdd57c-84d2-4e24-bb10-ad1fd179fb04",
+    "SIR_RUSTCLAW":        "2b3b6ec3-e020-484d-914d-92241a97ea55",
+    "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+    "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
+    "SIR_LANCELOT":        "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
+    "LADY_GUINEVERE":      "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
+    "SIR_MNEMO":           "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
+    # Living System / Project Notebooks
+    "LADY_MNEMOSYNE":      "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # World Tree
+    "ANYA_QUANTUM_MANTRA": "219e765a-0c8e-4b66-b356-f277cb441b14",   # Anya Omega: Sovereign Compiler
+    "CAMELOT_V1000":       "8c656cfa-a189-409e-a72d-07692a47f17e",   # Camelot-OS v.1000
+    "CAMELOT_MASTER":      "c5544902-cfb4-4864-b28e-1838b69b9814",   # The Camelot-OS Master Construction Codex
+    "BIFROST":             "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",   # Bifrost Bridge Architecture
+    "FATHER_CAMELOT":      "39299131-0ade-4f48-8ad4-a68878a6d3d9",   # Father's Camelot
+    "WORLD_TREE":          "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # World Tree
+    "ALPHA_OMEGA":         "2536aefb-937f-4a04-9142-d1a2f029d8a7",   # Camelot-OS Alpha-Omega artifacts
+    "ANTIGRAVITY":         "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Synergizing NotebookLM + AntiGravity
+    "KICKBOX":             "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",   # KickBox Audio
+    "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
