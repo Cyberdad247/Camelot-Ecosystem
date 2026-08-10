@@ -1,38 +1,23 @@
 # syntax=docker/dockerfile:1
 
-FROM python:3.13-slim
+FROM alpine:3.20 AS builder
+
+RUN apk add --no-cache curl tar
+
+WORKDIR /app
+RUN curl -L https://github.com/bytecodealliance/wasmtime/releases/download/v23.0.0/wasmtime-v23.0.0-x86_64-linux.tar.xz | tar -xJ --strip-components=1
+
+FROM alpine:3.20
 
 WORKDIR /app
 
-# Install system dependencies required by Pillow and for serving static files.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libjpeg62-turbo \
-    libpng16-16 \
-    && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /app/wasmtime /usr/local/bin/wasmtime
+COPY target/wasm32-wasip1/release/camelot-edge.wasm ./
 
-# Copy dependency manifest first for better layer caching.
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code.
-COPY gradio_photo_viewer.py ./
-COPY secret-photo-viewer.html ./
-
-# Create the staging directory and a non-root user, then hand ownership over.
-# The staging directory is made world-writable with the sticky bit so that a
-# runtime volume mount (e.g., docker compose) remains writable for the spv user.
-RUN mkdir -p /app/staged_uploads && \
-    useradd -m -u 1000 spv && \
-    chown -R spv:spv /app && \
-    chmod 1777 /app/staged_uploads
+# Configure non-root user
+RUN adduser -D -u 1000 spv && \
+    chown -R spv:spv /app
 USER spv
 
-# The port the app listens on.
-EXPOSE 7860
+CMD ["wasmtime", "run", "camelot-edge.wasm"]
 
-# Health check against the /health endpoint.
-HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:7860/health').close()" || exit 1
-
-# Run the production server.
-CMD ["python", "gradio_photo_viewer.py", "--server_name", "0.0.0.0", "--server_port", "7860"]
