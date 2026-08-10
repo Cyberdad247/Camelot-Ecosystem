@@ -249,6 +249,39 @@ class CLIIntercept:
         _knight = decision.knight_id
         engine_name = decision.engine
 
+        # Agentic OpenAI-compatible engines (Agents-A1, etc.).
+        # Agents-A1 is a 35B MoE agentic LLM served locally via vLLM or
+        # SGLang; it speaks the OpenAI wire format over HTTP (not Ollama's
+        # API). Distinguished from the open_coder/local_qwen/ouroboros_ssm
+        # cluster by its agentic-first design (tool use, planning,
+        # multi-step). Resolve order:
+        #   1. AGENTS_A1_BASE_URL env var (operators set this when the
+        #      inference server is exposed via a public tunnel because
+        #      Vercel Edge cannot reach localhost).
+        #   2. omniroute.json agents_a1.execution_path.
+        #   3. http://127.0.0.1:8000/v1 (local vLLM default).
+        if engine_name == "agents_a1":
+            engine_cfg = engines.get("agents_a1", {})
+            model = engine_cfg.get("model", "InternScience/Agents-A1")
+            # `.strip()` defends against `AGENTS_A1_BASE_URL="  https://...  "`
+            # which would otherwise pass the falsy check but fail the
+            # `startswith("http")` check downstream. Empty string (env
+            # explicitly cleared) is correctly treated as unset via `or`.
+            base = (
+                (os.environ.get("AGENTS_A1_BASE_URL") or "").strip()
+                or engine_cfg.get("execution_path", "http://127.0.0.1:8000/v1")
+            )
+            url = base if base.startswith(("http://", "https://")) else f"http://{base}"
+            # `openai_compat` signals to the downstream execution layer
+            # that this endpoint speaks OpenAI's chat-completions API
+            # (so it can be driven with the openai SDK + custom baseURL).
+            # NOTE: no executor currently handles this cmd value; the
+            # Camelot CLI side is dispatch-only here, and the pwa-cockpit
+            # has its own adapter (`AgentsA1Adapter` in TypeScript). A
+            # future bifrost/runner must add a handler to actually invoke
+            # the endpoint from camelot-cli.
+            return ("openai_compat", model, url)
+
         # Local engines (Open Coder / Sir Ghost / Ouroboros) -> Ollama or local path
         if engine_name in ("open_coder", "local_qwen", "ouroboros_ssm"):
             engine_cfg = engines.get(engine_name, engines.get("open_coder", {}))

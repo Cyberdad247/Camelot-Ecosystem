@@ -65,6 +65,13 @@ class EngineWeight(float, Enum):
     W_FINANCE       = 0.82
     W_BIFROST       = 0.91
     W_VOICE         = 0.86
+    # Agents-A1 is a 35B local MoE that targets tool use + multi-step
+    # planning. Sits one notch above W_VOICE (0.86, single-modal,
+    # conversation-tuned) and one below W_COGNITIVE (0.88, SIR_ALEX's
+    # general-purpose orchestration weight) because it is single-purpose
+    # (agentic) but a strong default for tool-driven tasks. Calibrate up
+    # if future eval data shows it outperforms SIR_ALEX on those tasks.
+    W_AGENTIC       = 0.87  # Agentic MoE — Agents-A1 (35B MoE, tool use)
 
 @dataclass(frozen=True)
 class KnightEngine:
@@ -94,6 +101,10 @@ FOUNDRY_COUNCIL: tuple[KnightEngine, ...] = (
     KnightEngine("sir_hermes", "hermes_cli", EngineWeight.W_BRIDGE, "Shopify GraphQL/Webhook Courier", privacy_level=0.6),
     KnightEngine("lady_nanobot", "next_edge", EngineWeight.W_VELOCITY, "Edge Component Swarm", privacy_level=0.6),
     KnightEngine("sir_zeroclaw", "local_qwen", EngineWeight.W_PRIVACY, "Zero-Trust Commerce Sentry", privacy_level=1.0),
+    # Agents-A1 — 35B MoE agentic LLM, served locally via vLLM or SGLang
+    # with an OpenAI-compatible API. Local-first (privacy_level=0.9), so
+    # it never leaks prompts to a third-party cloud.
+    KnightEngine("sir_agentis", "agents_a1", EngineWeight.W_AGENTIC, "Agentic MoE Orchestrator", privacy_level=0.9),
 )
 
 _ENGINE_MAP = {e.knight_id: e for e in FOUNDRY_COUNCIL}
