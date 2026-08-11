@@ -156,6 +156,8 @@ docs/reference/EXTERNAL/
 03_VAULT/runtime_state/system_triage/
 03_VAULT/runtime_state/camelot*.toon*
 03_VAULT/runtime_state/cloudbrain_sync_queue.jsonl
+03_VAULT/runtime_state/hermes_prime_phial.json
+03_VAULT/runtime_state/hermes_prime_deployments/
 03_VAULT/firnflow/*.json
 03_VAULT/memory/l2_index/
 .qdrant-initialized
