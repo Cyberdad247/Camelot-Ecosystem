@@ -341,6 +341,25 @@
     "tasks_completed": 0,
     "last_active": "2026-08-10T20:23:31.880933+00:00"
   },
+  "HERMES_PRIME": {
+    "knight_id": "HERMES_PRIME",
+    "title": "MetaCompiler Forager",
+    "level": 1,
+    "xp": 0,
+    "xp_to_next_level": 100,
+    "primary_stat": "Information Synthesis",
+    "rune": "ᚱ",
+    "skill_graph_tier": "S3 Contextual",
+    "ocean_vector": {
+      "openness": 0.98,
+      "conscientiousness": 0.99,
+      "extraversion": 0.85,
+      "agreeableness": 0.2,
+      "neuroticism": 0.02
+    },
+    "tasks_completed": 0,
+    "last_active": "2026-08-11T00:40:06.986892+00:00"
+  },
   "SIR_RUSTCLAW": {
     "knight_id": "SIR_RUSTCLAW",
     "title": "Kernel Specialist",

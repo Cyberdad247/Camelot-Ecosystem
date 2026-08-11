@@ -11,3 +11,4 @@ Acts as the Omni-Router, targeting specialists by domain:
 - `Anya_Ω`: Compiler & Gatekeeper
 - `Sir Boris`: Command Execution
 - `Lady Mnemosyne`: Tiered Memory & Sync
+- `Hermes_Prime`: High-Velocity Research & Multi-Agent Synthesis (MGV R&D Forager)

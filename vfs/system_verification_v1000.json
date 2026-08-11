@@ -18,46 +18,46 @@
   "symbolect_tree": {
     "total_runes": 9,
     "rune_legend": {
-      "\u16b1": "RESEARCH",
-      "\u16a0": "FORGE",
-      "\u16d7": "MEMORY",
-      "\u16dc": "GUARD",
-      "\u16de": "DEBUG",
-      "\u16a2": "VOICE",
-      "\u16a8": "ARCHITECT",
-      "\u16df": "SOVEREIGN",
-      "\u16a6": "AUDIT"
+      "ᚱ": "RESEARCH",
+      "ᚠ": "FORGE",
+      "ᛗ": "MEMORY",
+      "ᛜ": "GUARD",
+      "ᛞ": "DEBUG",
+      "ᚢ": "VOICE",
+      "ᚨ": "ARCHITECT",
+      "ᛟ": "SOVEREIGN",
+      "ᚦ": "AUDIT"
     },
     "dispatch_mappings": {
-      "\u16b1": [
+      "ᚱ": [
         "LADY_APIS",
         "MERLIN_OMEGA"
       ],
-      "\u16a0": [
+      "ᚠ": [
         "SIR_FORGE",
         "SIR_CODEX",
         "CAMELOT_V1000"
       ],
-      "\u16d7": [
+      "ᛗ": [
         "LADY_MNEMOSYNE",
         "ANYA_QUANTUM_MANTRA"
       ],
-      "\u16dc": [
+      "ᛜ": [
         "SIR_SENTINEL",
         "SIR_GHOST"
       ],
-      "\u16de": [
+      "ᛞ": [
         "SIR_DEBUG"
       ],
-      "\u16a2": [
+      "ᚢ": [
         "SIR_HELIO",
         "SIR_SONUS"
       ],
-      "\u16a8": [
+      "ᚨ": [
         "SIR_BORIS",
         "SIR_ALEX"
       ],
-      "\u16df": [
+      "ᛟ": [
         "SIR_BORIS",
         "SIR_ALEX",
         "SIR_FORGE",
@@ -120,8 +120,8 @@
     "verification_status": "PASSED_STABLE"
   },
   "knight_rpg_roster": {
-    "total_knights_registered": 22,
-    "classes_count": 22,
+    "total_knights_registered": 23,
+    "classes_count": 23,
     "sample_roster": {
       "KING_ARTHUR": "Sovereign Lord",
       "SIR_BORIS": "Crucible Master",
@@ -130,7 +130,8 @@
       "SIR_CODEX": "Cybernetic Knight",
       "SIR_SENTINEL": "Iron Shield",
       "SIR_DEBUG": "Alchemical Doctor",
-      "SIR_GHOST": "Shadow Spectre"
+      "SIR_GHOST": "Shadow Spectre",
+      "HERMES_PRIME": "MetaCompiler Forager"
     }
   },
   "vfs_cartridge_bridge": {
@@ -146,7 +147,7 @@
       "tier": "S3 Contextual",
       "class": "Kinetic Paladin",
       "primary_stat": "Execution",
-      "rune": "\u16a0",
+      "rune": "ᚠ",
       "resolved_at": "2026-08-10T20:20:03.688786+00:00"
     },
     "cartridge_mappings": {

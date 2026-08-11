@@ -67,6 +67,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "SIR_RUSTCLAW":        "2b3b6ec3-e020-484d-914d-92241a97ea55",
     "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
     "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
+    "HERMES_PRIME":        "hermes_prime_vfs_forge",   # PENDING NotebookLM workspace — create + swap UUID (blueprint ctx: camelot-os.dev/ukg/v1000/hermes_prime_vfs_forge)
     "SIR_LANCELOT":        "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "LADY_GUINEVERE":      "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
     "SIR_MNEMO":           "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
@@ -96,13 +97,14 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "SIR_HELIO":           ["voice", "tts", "audio", "realtime"],
     "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic"],
     "SIR_CODEX":           ["kinetic", "rapid", "prototype", "openai"],
+    "HERMES_PRIME":        ["research", "synthesis", "vfs", "forage", "rnd", "multi_agent"],
     "LADY_MNEMOSYNE":      ["memory", "vfs", "mnemosyne", "sweep", "brief"],
     "ANYA_QUANTUM_MANTRA": ["glyph", "quantum", "vfs", "token", "compression"],
     "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system"],
 }
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {
-    "\u16B1": ["LADY_APIS", "MERLIN_OMEGA"],                              # ᚱ RESEARCH
+    "\u16B1": ["LADY_APIS", "MERLIN_OMEGA", "HERMES_PRIME"],             # ᚱ RESEARCH
     "\u16A0": ["SIR_FORGE", "SIR_CODEX", "CAMELOT_V1000"],               # ᚠ FORGE
     "\u16D7": ["LADY_MNEMOSYNE", "ANYA_QUANTUM_MANTRA"],                  # ᛗ MEMORY
     "\u16DC": ["SIR_SENTINEL", "SIR_GHOST"],                              # ᛜ GUARD

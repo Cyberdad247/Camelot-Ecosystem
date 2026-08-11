@@ -241,6 +241,28 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_execute_prompt",
     },
+    # HERMES_PRIME_NEXUS — Sovereign MetaCompiler Knight Forge (VFS-integrated 2026-08-10)
+    "//SYNC_VFS_WORKSPACE": {
+        "knight": "hermes_prime",
+        "description": "Realign Knights/Hermes_Prime VFS state with distributed research nodes",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_sync_vfs_workspace",
+    },
+    "//FORGE_HERMES_PRIME_FILES": {
+        "knight": "hermes_prime",
+        "description": "Scaffold soul.md / spark.md / harness.md / skills.md under Knights/Hermes_Prime",
+        "mode": "FORGE",
+        "priority": 2,
+        "handler": "_handle_forge_hermes_prime_files",
+    },
+    "//IGNITE_SELF_EVOLUTION_LOOP": {
+        "knight": "hermes_prime",
+        "description": "MGV + AlphaEvolve self-evolution: feed Ouroboros memory banks and re-weight Phial parameters",
+        "mode": "SWARM",
+        "priority": 2,
+        "handler": "_handle_ignite_self_evolution_loop",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -276,6 +298,7 @@ OMEGA_RUNES: dict[str, dict[str, Any]] = {
     "Omega_SCORPION": {"knight": "sir_gideon", "description": "Forensic GIDEON_RISK_MATRIX audit"},
     "Omega_CODEX": {"knight": "sir_codex", "description": "Direct SIR_CODEX execution lane"},
     "Omega_BIFROST": {"knight": "sir_heimdall", "description": "Bifrost Sentinel operations"},
+    "Omega_HermesPrime": {"knight": "hermes_prime", "description": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)"},
 }
 
 
@@ -691,6 +714,36 @@ def _handle_purge_memory(param: str, context: dict) -> dict:
     }
 
 
+def _handle_sync_vfs_workspace(param: str, context: dict) -> dict:
+    """//SYNC_VFS_WORKSPACE — realign Hermes_Prime VFS state with nodes."""
+    return {
+        "action": "sync_vfs_workspace",
+        "detail": "Realign Knights/Hermes_Prime VFS state with distributed research nodes",
+        "vfs_target": "Knights/Hermes_Prime",
+        "param": param or "full workspace sync",
+    }
+
+
+def _handle_forge_hermes_prime_files(param: str, context: dict) -> dict:
+    """//FORGE_HERMES_PRIME_FILES — scaffold/refresh the Hermes_Prime VFS soul files."""
+    return {
+        "action": "forge_hermes_prime_files",
+        "detail": "Scaffold soul.md / spark.md / harness.md / skills.md under Knights/Hermes_Prime",
+        "vfs_target": "Knights/Hermes_Prime",
+        "param": param or "full scaffold",
+    }
+
+
+def _handle_ignite_self_evolution_loop(param: str, context: dict) -> dict:
+    """//IGNITE_SELF_EVOLUTION_LOOP — MGV + AlphaEvolve self-evolution trigger."""
+    return {
+        "action": "ignite_self_evolution_loop",
+        "framework": "MGV + AlphaEvolve",
+        "detail": "Feed Ouroboros memory banks from prior research yields and re-weight Phial parameters",
+        "param": param or "default evolution cycle",
+    }
+
+
 def _handle_execute_prompt(param: str, context: dict) -> dict:
     """Handle //EXECUTE_PROMPT with approval grant requirement."""
     from control_plane import forge_law
@@ -880,6 +933,9 @@ _HANDLERS = {
     "_handle_evolve_and_forge": _handle_evolve_and_forge,
     "_handle_purge_memory": _handle_purge_memory,
     "_handle_execute_prompt": _handle_execute_prompt,
+    "_handle_sync_vfs_workspace": _handle_sync_vfs_workspace,
+    "_handle_forge_hermes_prime_files": _handle_forge_hermes_prime_files,
+    "_handle_ignite_self_evolution_loop": _handle_ignite_self_evolution_loop,
 }
 
 
