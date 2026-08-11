@@ -15,10 +15,13 @@ from __future__ import annotations
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 
+import logging
 import re
 import time
 from dataclasses import dataclass
 from pathlib import Path
+
+logger = logging.getLogger(__name__)
 
 ROOT = Path(__file__).parent.parent.parent
 
@@ -550,10 +553,16 @@ def _is_air_gapped_knight(knight_id: str) -> bool:
             engine.knight_id == canonical and engine.privacy_level >= 1.0
             for engine in FOUNDRY_COUNCIL
         )
-    except Exception:
-        # Cannot determine the lane -> assume it is not air-gapped rather than
-        # blocking every intent. The RBAC check above is the load-bearing gate.
-        return False
+    except Exception as err:
+        # Fail closed. Returning False here would mean "not air-gapped", which
+        # silently skips the isolation requirement for exactly the lane that
+        # exists to guarantee it. Assuming air-gapped costs nothing on a host
+        # that can isolate, and blocks on one that cannot — the safe direction.
+        logger.error(
+            "cannot determine the privacy lane for %s (%s) — assuming air-gapped "
+            "so the isolation requirement is not skipped", knight_id, err,
+        )
+        return True
 
 
 def _stage_triage(parse: "ParseResult", enrich: "EnrichResult", knight_id: str):
@@ -644,7 +653,14 @@ def _stage_colmad(raw_intent: str, triage) -> "object | None":
     try:
         from .colmad import ColMAD
         return ColMAD().crucible(raw_intent)
-    except Exception:  # pragma: no cover - defensive: never break the gate
+    except Exception as err:  # pragma: no cover - defensive: never break the gate
+        # The crucible is advisory, so a failure does not block. But this is the
+        # advertised "adversarial debate before any CRITICAL commit" — losing it
+        # silently would make the claim unfalsifiable.
+        logger.error(
+            "ColMAD crucible unavailable for a %s intent (%s) — proceeding "
+            "WITHOUT adversarial review", triage.priority, err,
+        )
         return None
 
 

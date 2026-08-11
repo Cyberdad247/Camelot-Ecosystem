@@ -17,12 +17,15 @@ Z3 symbolic verification gates any job that mutates git/state-machines.
 __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 import json
+import logging
 import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
 from control_plane._paths import REPO_ROOT
+
+logger = logging.getLogger(__name__)
 
 
 class SoulOversight:
@@ -153,8 +156,15 @@ def _colony_escalate(tier: str) -> str:
         state = ColonyNexus(hermes_enabled=False).scan()
         if getattr(state, "is_critical", False):
             return "HUMAN_GATE"
-    except Exception:
-        pass   # colony data unavailable — proceed with original tier
+    except Exception as err:
+        # Colony scanning only ever *raises* the tier, so a failure cannot grant
+        # anything beyond the baseline the caller already computed — it is safe
+        # to proceed. Logged rather than swallowed so a permanently broken scan
+        # does not quietly disable escalation forever.
+        logger.warning(
+            "colony risk scan failed (%s) — proceeding at tier %s without "
+            "colony escalation", err, tier,
+        )
     return tier
 
 
