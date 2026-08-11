@@ -669,6 +669,10 @@ class SovereignHarness:
                 "summary": output[-800:],
             }
 
+        # Hermes_Prime — PhialEngine (MGV + Ouroboros + re-weighting)
+        if self._is_hermes_prime_directive(task.directive) or knight_id in ("hermes_prime", "hermesprime"):
+            return await self._run_hermes_prime(task, knight_id)
+
         # Runic command dispatch
         if task.directive.startswith("//") or task.directive.startswith("Omega_"):
             try:
@@ -682,6 +686,82 @@ class SovereignHarness:
 
         # Generic — log and return
         return {"status": "dispatched", "knight": task.knight, "directive": task.directive}
+
+    # ── Hermes_Prime (PhialEngine) ───────────────────────────────────────────
+
+    # Keep in sync with runic_router registries: RUNIC_COMMANDS
+    # //SYNC_VFS_WORKSPACE / //FORGE_HERMES_PRIME_FILES / //IGNITE_SELF_EVOLUTION_LOOP
+    # and OMEGA_RUNES Omega_HermesPrime (all knight=hermes_prime).
+    _HERMES_PRIME_RUNE_TOKENS = frozenset({
+        "//SYNC_VFS_WORKSPACE",
+        "//FORGE_HERMES_PRIME_FILES",
+        "//IGNITE_SELF_EVOLUTION_LOOP",
+        "OMEGA_HERMESPRIME",
+    })
+
+    @staticmethod
+    def _is_hermes_prime_directive(directive: str) -> bool:
+        """True when the directive is one of the Hermes_Prime runes/Omega lane."""
+        head = directive.strip().split(None, 1)[0].upper() if directive.strip() else ""
+        return head in SovereignHarness._HERMES_PRIME_RUNE_TOKENS
+
+    async def _run_hermes_prime(self, task: HarnessTask, knight_id: str) -> Any:
+        """Execute a queued Hermes_Prime task against the real PhialEngine.
+
+        Mirrors the //DAWNING contract: tasks queued to any knight other than
+        hermes_prime (e.g. privacy override → sir_ghost) are acknowledged but
+        never executed here; hermes_prime tasks drive the engine via
+        asyncio.to_thread so the sync loop never blocks.
+        """
+        head = task.directive.strip().split(None, 1)[0].upper() if task.directive.strip() else ""
+        try:
+            from .runic_router import parse_rune
+        except ImportError:
+            from control_plane.runic_router import parse_rune
+        parsed = parse_rune(task.directive)
+        rune = parsed[0] if parsed else head
+
+        if knight_id != "hermes_prime":
+            return {
+                "rune": rune,
+                "status": "accepted_no_requeue",
+                "reason": f"routed to {task.knight}; direct hermes_prime execution skipped",
+            }
+
+        try:
+            from .runic_router import _load_hermes_prime_engine
+        except ImportError:
+            from control_plane.runic_router import _load_hermes_prime_engine
+        try:
+            _, engine = _load_hermes_prime_engine()
+            if engine is None:
+                return {
+                    "rune": rune,
+                    "action": "hermes_prime_phial",
+                    "status": "UNAVAILABLE",
+                    "detail": "Hermes_Prime PhialEngine unavailable — queued execution deferred",
+                }
+            if head == "//SYNC_VFS_WORKSPACE":
+                result = await asyncio.to_thread(engine.sync_vfs)
+                action = "sync_vfs_workspace"
+            elif head == "//FORGE_HERMES_PRIME_FILES":
+                result = await asyncio.to_thread(engine.forge_scaffold)
+                action = "forge_hermes_prime_files"
+            else:
+                stripped = task.directive.strip()
+                if head in SovereignHarness._HERMES_PRIME_RUNE_TOKENS:
+                    # Run the MGV cycle on the text after the rune token
+                    seed = stripped.split(None, 1)[1] if " " in stripped else "default research cycle"
+                else:
+                    # Plain directive routed to the hermes_prime knight — whole text is the seed
+                    seed = stripped or "default research cycle"
+                action = "ignite_self_evolution_loop"
+                result = await asyncio.to_thread(engine.run_cycle, seed=seed)
+            # Engine results (sync/forge) carry their own 'action' key — spread
+            # first so our dispatch action wins (same fix as the router handlers).
+            return {"rune": rune, **result, "action": action}
+        except Exception as e:
+            return {"rune": rune, "action": "hermes_prime_phial", "status": "ERROR", "error": str(e)}
 
     # ── Status ───────────────────────────────────────────────────────────────
 
