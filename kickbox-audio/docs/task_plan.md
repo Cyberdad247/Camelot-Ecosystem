@@ -1,35 +1,28 @@
-# 🏗️ TASK PLAN: SOVEREIGN WASM LEDGER PILL (QuickBooks Replacement)
+# 🏛️ TASK PLAN: SOVEREIGN WASM LEDGER PILL
 
-**[MODE]:** ANTI-GRAVITY_2.0_MASTERY (SOVEREIGN_EMPIRE_PRIVATIZATION)
-**[TARGET]:** KBA_ENTERPRISE_LEDGER_PILL
+**VERSION:** 1.0.0-OFFLINE_FIRST
+**REPLACES:** QuickBooks, Xero
+**TARGET:** Kickbox Audio (KBA) Enterprise PWA Cartridge
 
-## 1. 📋 [B]LUEPRINT (Protocol Zero)
-- [x] **Goal:** Replace QuickBooks with an offline-first, double-entry accounting WASM module.
-- [x] **Constraints:** Boot in `<12ms`, operate fully offline, `<8GB RAM` system threshold.
-- [ ] **Data Structure:** Define SQLite-backed double-entry schema (Accounts, Transactions, Entries).
-- [ ] **State Sync:** Implement CRDT (Conflict-free Replicated Data Type) rules for eventual consistency upon network restoration.
+## 1. ARCHITECTURAL OVERVIEW
+The Ledger Pill is a localized, double-entry accounting engine compiled to WebAssembly (`wasm32-wasip1`). It bypasses cloud-dependent databases by leveraging the browser's OPFS (Origin Private File System) for instant, durable, offline storage.
 
-## 2. 🌉 [L]INK (The Bridge)
-- [ ] Map the MCP universal remote server to local Ledger SQLite files.
-- [ ] Configure `ZERO_COPY_JSON_RPC_OVER_mTLS` to isolate financial data from open web access.
+## 2. KINETIC EXECUTION DAG (The Build Sequence)
 
-## 3. 🏛️ [A]RCHITECT (The Self-Healing Core)
-- [ ] **Golden Rule:** Write financial transaction SOPs into `AGENT_FLOW.md` *before* generating Rust/WASM code.
-- [ ] Engineer the `WASM32-WASI` execution cages for isolated ledger math.
-- [ ] Pre-flight Z3 logic verification on all double-entry credit/debit validation logic.
+### Phase 1: Local Storage Engine (The Vault)
+- [ ] **TASK_01:** Instantiate SQLite-WASM binding to operate locally inside the PWA.
+- [ ] **TASK_02:** Establish the Double-Entry Schema (Accounts, Transactions, Journal Entries).
+- [ ] **TASK_03:** Implement Conflict-Free Replicated Data Types (CRDTs) for seamless offline-to-online synchronization.
 
-## 4. 🎨 [S]TYLIZE
-- [ ] Design the Ledger PWA frontend interface.
-- [ ] Apply **Luxury Minimalist Brutalism** palette:
-  - **Backgrounds/Surfaces:** Obsidian Void (`#0D0D11`)
-  - **Accents/Typographic Highlights:** Burnished Gold (`#D4AF37`)
-  - **Interactive Elements/Hover States:** Electric Violet (`#9D4EDD`)
-- [ ] Render a professional-grade executive dashboard for profit/loss tracking.
+### Phase 2: Core Financial Logic (The Math)
+- [ ] **TASK_04:** Compile Rust-based double-entry validation engine (Assets = Liabilities + Equity).
+- [ ] **TASK_05:** Build the Offline Transaction Queue (capturing offline invoices/payments and hashing them cryptographically).
+- [ ] **TASK_06:** Bind logic to Web Workers to ensure complex financial calculations do not block the main UI thread.
 
-## 5. ⚡ [T]RIGGER
-- [ ] Establish Background Processing via Managed Agents.
-- [ ] Define asynchronous event loops for ledger processing (batch invoice crunching) while the PWA is closed.
-- [ ] Inject self-refreshing authentication logic to ensure Swarm agents do not drop authorization during multi-hour audit jobs.
+### Phase 3: MCP & Anti-Gravity Integration
+- [ ] **TASK_07:** Utilize the Model Context Protocol (MCP) as the "universal remote control" to allow the Anti-Gravity IDE to safely inject the WASM logic into the PWA ecosystem without external web calls.
+- [ ] **TASK_08:** Establish the Background Processing loop via Managed Agents. The agents will reconcile ledgers silently while the PWA is closed.
 
----
-*Awaiting Sovereign `//GO` cryptographic signature to initiate the B.L.A.S.T pipeline for the Ledger Pill.*
+### Phase 4: UI/UX (The Glass)
+- [ ] **TASK_09:** Design the Financial Dashboard utilizing the "Luxury Minimalist Brutalism" aesthetic (Obsidian Void `#0D0D11`, Burnished Gold `#D4AF37`, Electric Violet `#9D4EDD`).
+- [ ] **TASK_10:** Wire the React/Next.js frontend to instantly reflect WASM ledger state changes.
