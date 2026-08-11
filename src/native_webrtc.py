@@ -25,7 +25,10 @@ ffi.cdef("""
 SEARCH_PATHS = [
     "/usr/local/lib/libmerlin_webrtc_native.so",
     os.path.join(os.getcwd(), "build/native/libmerlin_webrtc_native.so"),
-    "libmerlin_webrtc_native.so"
+    os.path.join(os.getcwd(), "build/native/merlin_webrtc_native.dll"),
+    os.path.join(os.getcwd(), "build/native/Release/merlin_webrtc_native.dll"),
+    "libmerlin_webrtc_native.so",
+    "merlin_webrtc_native.dll"
 ]
 
 _c_lib = None
