@@ -231,6 +231,7 @@ CAMELOT_OS/
 | LADY_APIS | BASHR research loop, context forager | Gemini |
 | MERLIN_OMEGA | GoT/ToT deep reasoning, System 2 | Gemini |
 | SIR_HELIO | Voice OS, //vocal, real-time pipeline | Gemini |
+| HERMES_PRIME | High-velocity research & multi-agent synthesis (MGV R&D forager) | Gemini |
 
 ---
 
@@ -269,6 +270,9 @@ dispatch directly to the runic router.
 | `//STATUS` | SIR_SENTINEL | Live service status + port probes |
 | `//EVOLVE_AND_FORGE <task>` | SIR_BORIS | GEP-driven shadow forge and evolution cycle |
 | `//CYBERTRON_ASCENSION_THINK_TANK` | SIR_BORIS | 3-phase autonomous Cybertron v1000 directory audit and think-tank debate |
+| `//SYNC_VFS_WORKSPACE` | HERMES_PRIME | Realign `Knights/Hermes_Prime/` VFS state with research nodes |
+| `//FORGE_HERMES_PRIME_FILES` | HERMES_PRIME | Scaffold the Hermes_Prime VFS soul files (idempotent) |
+| `//IGNITE_SELF_EVOLUTION_LOOP <seed>` | HERMES_PRIME | Run a real MGV research cycle — Ouroboros memory + Phial weight re-weighting |
 
 ### Omega Dispatch
 
@@ -283,7 +287,19 @@ Omega_Debug   → SIR_DEBUG     (heal loop)
 Omega_Ghost   → SIR_GHOST     (privacy scan, local only)
 Omega_Apis    → LADY_APIS     (research burst)
 Omega_Merlin  → MERLIN_OMEGA  (deep reasoning)
+Omega_HermesPrime → HERMES_PRIME (high-velocity R&D + VFS synthesis)
 ```
+
+### Hermes_Prime PhialEngine
+
+Executable MGV research loop (Monitor → Generate → Verify → Evolve):
+`python 01_KERNEL/titan/phials/hermes_prime_phial.py --cycle "<seed>"`
+State persists to `03_VAULT/runtime_state/hermes_prime_phial.json` · CloudBrain
+node: `hermes_prime_vfs_forge` (NotebookLM, live UUID in
+`01_KERNEL/memory/cloudbrain_connector.py`) · side-effect-free self-test: `--test`.
+The three Harmony runes above execute this engine directly; rune/parse/route
+coverage lives in `tests/test_hermes_prime_runes.py` and
+`tests/test_hermes_prime_phial.py`.
 
 ### CLI invocation (from project root)
 
