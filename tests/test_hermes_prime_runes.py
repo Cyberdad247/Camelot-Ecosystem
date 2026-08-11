@@ -195,3 +195,70 @@ def test_unknown_rune_still_escalates_to_sir_boris(tmp_path, monkeypatch):
     result = runic_router.route_rune("//NOPE")
     assert result.knight == "sir_boris"
     assert result.directive == "UNKNOWN_RUNE: //NOPE"
+
+
+# ---------------------------------------------------------------------------
+# privacy shield override — a privacy keyword in the directive re-routes the
+# Hermes_Prime task to sir_ghost (SENTINEL) regardless of the rune's owner
+# ---------------------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "//SYNC_VFS_WORKSPACE audit the password",
+        "//FORGE_HERMES_PRIME_FILES rotate the credential",
+        "//IGNITE_SELF_EVOLUTION_LOOP scan for the secret key",
+    ],
+)
+def test_privacy_override_routes_harmony_runes_to_sir_ghost(tmp_path, monkeypatch, text):
+    monkeypatch.setattr(runic_router, "QUEUE_FILE", tmp_path / "harness_queue.jsonl")
+    monkeypatch.setattr(runic_router, "HydrationManager", None)
+    monkeypatch.setattr(runic_router, "_load_hermes_prime_engine", lambda: _real_engine(tmp_path))
+
+    result = runic_router.detect_and_route(text)
+
+    assert result is not None
+    assert result.knight == "sir_ghost"
+    assert result.mode == "SENTINEL"
+    assert result.queued is True
+    assert result.metadata["privacy_override"] is True
+    assert result.metadata["original_knight"] == "hermes_prime"
+
+    queued = json.loads((tmp_path / "harness_queue.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert queued["knight"] == "sir_ghost"
+
+
+def test_privacy_override_omega_hermes_prime(tmp_path, monkeypatch):
+    monkeypatch.setattr(runic_router, "QUEUE_FILE", tmp_path / "harness_queue.jsonl")
+    monkeypatch.setattr(runic_router, "HydrationManager", None)
+
+    result = runic_router.detect_and_route("Omega_HermesPrime inspect local token")
+
+    assert result is not None
+    assert result.rune == "Omega_HermesPrime"
+    assert result.knight == "sir_ghost"
+    assert result.mode == "SENTINEL"
+    assert result.queued is True
+    assert result.metadata["privacy_override"] is True
+    assert result.metadata["original_knight"] == "hermes_prime"
+
+    queued = json.loads((tmp_path / "harness_queue.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert queued["knight"] == "sir_ghost"
+
+
+def test_privacy_override_only_triggers_on_keyword(tmp_path, monkeypatch):
+    """Same rune without a privacy keyword still routes to hermes_prime."""
+    monkeypatch.setattr(runic_router, "QUEUE_FILE", tmp_path / "harness_queue.jsonl")
+    monkeypatch.setattr(runic_router, "HydrationManager", None)
+    monkeypatch.setattr(runic_router, "_load_hermes_prime_engine", lambda: _real_engine(tmp_path))
+
+    clean = runic_router.detect_and_route("//IGNITE_SELF_EVOLUTION_LOOP forage nexus")
+    guarded = runic_router.detect_and_route("//IGNITE_SELF_EVOLUTION_LOOP forage the secret")
+
+    assert clean.knight == "hermes_prime"
+    assert clean.mode == "SWARM"
+    assert guarded.knight == "sir_ghost"
+    assert guarded.mode == "SENTINEL"
+    assert "privacy_override" not in clean.metadata
+    assert guarded.metadata["privacy_override"] is True
