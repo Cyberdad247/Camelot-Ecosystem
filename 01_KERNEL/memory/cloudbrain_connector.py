@@ -76,7 +76,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "SIR_RUSTCLAW":        "2b3b6ec3-e020-484d-914d-92241a97ea55",
     "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
     "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
-    "HERMES_PRIME":        "hermes_prime_vfs_forge",   # PENDING NotebookLM workspace — create + swap UUID (blueprint ctx: camelot-os.dev/ukg/v1000/hermes_prime_vfs_forge)
+    "HERMES_PRIME":        "28f89cb6-5048-4b5d-9e94-376082d24744",   # hermes_prime_vfs_forge (verified 2026-08-10)
     "SIR_LANCELOT":        "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "LADY_GUINEVERE":      "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
     "SIR_MNEMO":           "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
