@@ -1,0 +1,49 @@
+---
+- name: Deploy HA Redis Sentinel Cluster
+  hosts: redis_cluster
+  become: true
+  vars:
+    redis_password: "MERLIN_SUPER_SECRET_REDIS_AUTH_9981"
+    master_node_ip: "{{ hostvars[groups['redis_master'][0]]['ansible_host'] }}"
+
+  tasks:
+    - name: Install Redis & Sentinel
+      ansible.builtin.apt:
+        name: [redis-server, redis-sentinel]
+        state: present
+        update_cache: true
+
+    - name: Configure redis.conf
+      ansible.builtin.copy:
+        dest: /etc/redis/redis.conf
+        content: |
+          bind 0.0.0.0
+          port 6379
+          protected-mode yes
+          requirepass {{ redis_password }}
+          masterauth {{ redis_password }}
+          {% if inventory_hostname not in groups['redis_master'] %}
+          replicaof {{ master_node_ip }} 6379
+          {% endif %}
+          maxmemory 512mb
+          maxmemory-policy volatile-lru
+          appendonly yes
+
+    - name: Configure sentinel.conf
+      ansible.builtin.copy:
+        dest: /etc/redis/sentinel.conf
+        content: |
+          port 26379
+          dir "/var/lib/redis"
+          sentinel monitor mymaster {{ master_node_ip }} 6379 2
+          sentinel auth-pass mymaster {{ redis_password }}
+          sentinel down-after-milliseconds mymaster 3000
+          sentinel failover-timeout mymaster 10000
+          protected-mode no
+
+    - name: Start Services
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        state: restarted
+        enabled: true
+      loop: [redis-server, redis-sentinel]
