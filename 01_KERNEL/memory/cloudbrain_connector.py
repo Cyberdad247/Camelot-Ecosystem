@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
@@ -45,6 +46,14 @@ except ImportError:
     _LegacyNLM = None
 
 # ── Worldtree Notebook Registry — VERIFIED LIVE UUIDs 2026-08-10 ─────────────
+# Placeholder (non-UUID) notebook ids are permitted for pending knights: they
+# register the knight for symbolect/domain routing but never touch a real
+# NotebookLM node (see _NOTEBOOK_UUID_RE guard below).
+_NOTEBOOK_UUID_RE = re.compile(
+    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+    re.IGNORECASE,
+)
+
 KNIGHT_NOTEBOOKS: Dict[str, str] = {
     # Core Knights (Sovereign_Workspace verified)
     "SIR_BORIS":           "f7707daa-2d10-4db8-8fda-be4661a27793",
@@ -121,6 +130,14 @@ class CloudBrainConnector:
     def __init__(self, knight_id: str = "DEFAULT"):
         self.knight_id = knight_id.upper()
         self.notebook_id = KNIGHT_NOTEBOOKS.get(self.knight_id)
+        # Non-UUID ids are placeholders (pending workspace). Treat them as
+        # unmapped so no backend call is ever attempted against a fake id.
+        if self.notebook_id and not _NOTEBOOK_UUID_RE.match(self.notebook_id):
+            logging.info(
+                f"[CLOUD_BRAIN] Knight {self.knight_id} has placeholder notebook "
+                f"'{self.notebook_id}' — pending real workspace, skipping backend."
+            )
+            self.notebook_id = None
         if not self.notebook_id:
             logging.warning(f"[CLOUD_BRAIN] Unmapped Knight ID: {knight_id}.")
 
@@ -262,5 +279,8 @@ def list_all_notebooks() -> List[Dict[str, Any]]:
             "vfs_path": f"vfs://{kid.lower()}/",
             "last_checked": now,
         }
+        # Only surface nodes backed by a real notebook UUID — placeholders stay
+        # registered for routing but are never presented as live workspaces.
         for kid, nid in KNIGHT_NOTEBOOKS.items()
+        if _NOTEBOOK_UUID_RE.match(nid)
     ]

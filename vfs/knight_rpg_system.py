@@ -39,7 +39,7 @@ KNIGHT_CLASSES: Dict[str, Dict[str, Any]] = {
     "SIR_GALAHAD":     {"class": "Pure Verifier",     "primary_stat": "Integrity",    "base_rune": "ᚨ"},
     "SIR_ALCHEMIST":   {"class": "Code Optimizer",    "primary_stat": "Refactoring",  "base_rune": "ᚠ"},
     "SIR_HERMES":      {"class": "Swift Messenger",   "primary_stat": "Telemetry",    "base_rune": "ᚱ"},
-    "HERMES_PRIME":    {"class": "MetaCompiler Forager","primary_stat": "Information Synthesis","base_rune": "ᚱ"},
+    "HERMES_PRIME":    {"class": "MetaCompiler Forager", "primary_stat": "Information Synthesis", "base_rune": "ᚱ"},
     "SIR_RUSTCLAW":    {"class": "Kernel Specialist", "primary_stat": "Bare-Metal Rust","base_rune": "ᚠ"},
     "SIR_STITCH":      {"class": "Cartridge Weaver",  "primary_stat": "Hot-Swap Packages","base_rune": "ᚨ"},
     "LADY_SPARKLE":    {"class": "UI Virtuoso",       "primary_stat": "Aesthetics",   "base_rune": "ᚠ"},
