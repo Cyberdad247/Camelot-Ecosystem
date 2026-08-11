@@ -56,8 +56,8 @@ _REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_REPO))
 
 import httpx
-from control_plane.cli_intercept import CLIIntercept
-from control_plane.soul_router import CLIPROXY_URL
+from control_plane.infra.cli_intercept import CLIIntercept
+from control_plane.core.soul_router import CLIPROXY_URL
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
@@ -506,7 +506,7 @@ def _route_table(console: Console) -> None:
 def _status(console: Console) -> None:
     import asyncio
 
-    from control_plane.switchboard import get_manifest, probe_all
+    from control_plane.dispatch.switchboard import get_manifest, probe_all
     asyncio.run(probe_all())
     manifest   = get_manifest()
     terminals  = manifest.get("terminals", {})
@@ -584,7 +584,7 @@ def _handle_runic(user_input: str, console: "Console") -> bool:
     # Generic runic / Omega dispatch
     if stripped.startswith("//") or stripped.startswith("Omega_"):
         try:
-            from control_plane.runic_router import detect_and_route
+            from control_plane.runes.runic_router import detect_and_route
             result = detect_and_route(stripped)
             if result is None:
                 return False
@@ -756,7 +756,7 @@ def _repl(
                     console.print("[yellow]Context: CLAUDE.md not found[/yellow]")
             elif cmd == "/runes":
                 try:
-                    from control_plane.runic_router import list_runes
+                    from control_plane.runes.runic_router import list_runes
                     runes = list_runes()
                     console.print("[bold yellow]Runic Commands:[/bold yellow] " + "  ".join(runes["runic_commands"]))
                     console.print("[bold yellow]Omega Runes:[/bold yellow] " + "  ".join(runes["omega_runes"]))

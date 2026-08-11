@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from control_plane import runic_router
+from control_plane.runes import runic_router
 from scripts import nano_swarm_expand
 
 

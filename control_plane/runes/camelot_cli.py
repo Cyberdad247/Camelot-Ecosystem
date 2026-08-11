@@ -16,36 +16,36 @@ from typing import Any
 
 from colorama import Fore, Style, just_fix_windows_console
 
-from .bio_swarm_runtime import (
+from control_plane.infra.bio_swarm_runtime import (
     preflight_bio_swarm,
     run_bio_swarm_once,
     write_bio_swarm_runtime_status,
 )
-from .cli_intercept import CLIIntercept
-from .cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
-from .cockpit import cockpit_exec, prompt_payload, refresh_snapshot
-from .codex_integration import (
+from control_plane.infra.cli_intercept import CLIIntercept
+from control_plane.infra.cloudbrain_sync import flush_sync_queue, sync_after_event, sync_queue_status
+from control_plane.infra.cockpit import cockpit_exec, prompt_payload, refresh_snapshot
+from control_plane.infra.codex_integration import (
     DEFAULT_ACTOR as CODEX_DEFAULT_ACTOR,
 )
-from .codex_integration import (
+from control_plane.infra.codex_integration import (
     read_codex_status,
     write_codex_integration,
 )
-from .config_manager import ConfigManager
-from .gemini_extension_registry import (
+from control_plane.infra.config_manager import ConfigManager
+from control_plane.infra.gemini_extension_registry import (
     inspect_gemini_extension,
     list_gemini_extensions,
     summarize_gemini_extensions,
 )
-from .hyper_evolve import append_learning, promote_mutation
-from .knight_configuration import write_knight_configuration
-from .ledger_sync import (
+from control_plane.infra.hyper_evolve import append_learning, promote_mutation
+from control_plane.core.knight_configuration import write_knight_configuration
+from control_plane.infra.ledger_sync import (
     append_provenance_entry,
     ledger_status,
     reconcile_ledger_mirrors,
     sync_to_kernel,
 )
-from .microcubed import (
+from control_plane.infra.microcubed import (
     MicrocubedRequest,
     execute_house,
     forge_house,
@@ -53,16 +53,16 @@ from .microcubed import (
     plan_house,
     teardown_house,
 )
-from .microcubed import (
+from control_plane.infra.microcubed import (
     status as microcubed_status,
 )
-from .nano_swarm_runtime import (
+from control_plane.infra.nano_swarm_runtime import (
     supervise_nodes as supervise_nano_swarm_nodes,
 )
-from .nano_swarm_runtime import (
+from control_plane.infra.nano_swarm_runtime import (
     write_runtime_status as write_nano_swarm_runtime_status,
 )
-from .provenance import ProvenanceManager, VerificationRun
+from control_plane.infra.provenance import ProvenanceManager, VerificationRun
 from .system_triage import TriageOptions, run_system_triage
 from .toon_manifest import default_manifest_paths, write_compiled_manifest, write_scarcity_core_artifacts
 from control_plane._paths import REPO_ROOT
@@ -482,7 +482,7 @@ def _run_orchestrator_cli(
     kind: str = "startup",
     status: str = "green",
 ) -> dict[str, Any]:
-    from .orchestration_state import (
+    from control_plane.infra.orchestration_state import (
         build_notification_bundle,
         build_orchestration_snapshot,
         go_autonomous_workflow_report,
@@ -620,7 +620,7 @@ def _diagnose_cloud_endpoints(config_mgr: Any) -> dict[str, Any]:
 
 
 def _audit_cloudbrain_configuration(config_mgr: Any) -> dict[str, Any]:
-    from .ledger_sync import ledger_status
+    from control_plane.infra.ledger_sync import ledger_status
 
     ledger = ledger_status()
     warp_artifact = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "warp_workflow_sync_latest.json"
@@ -735,9 +735,9 @@ async def _run_task(
     objective: str | None = None,
     extra_parameters: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    from .anya_gate import AnyaCompiler
-    from .main import ControlPlane, TaskPayload
-    from .orchestration_state import route_persona
+    from control_plane.core.anya_gate import AnyaCompiler
+    from control_plane.main import ControlPlane, TaskPayload
+    from control_plane.infra.orchestration_state import route_persona
 
     # Phase 1: Anya's Ethereal Compilation (Triple-QFT)
     compiler = AnyaCompiler()
@@ -810,7 +810,7 @@ async def _run_sarda(
     privacy: float = 0.0,
     timeout: int = 120,
 ) -> dict[str, Any]:
-    from .main import ControlPlane
+    from control_plane.main import ControlPlane
 
     if execute:
         # Phase 4: Iron Gate (High-risk check)
@@ -849,7 +849,7 @@ def _run_team_self_test(
             "release": release,
         }
 
-    from .main import ControlPlane
+    from control_plane.main import ControlPlane
 
     cp = ControlPlane()
     return cp.team_self_test(
@@ -1314,7 +1314,7 @@ def _interactive_shell(
             if raw.startswith("/gui") or raw.upper() == "//GUI":
                 # Launch the Textual TUI
                 _stream_print("Launching Obsidian Spire Cockpit v2.0...", tone="ok")
-                from .tui_app import SovereignApp
+                from control_plane.infra.tui_app import SovereignApp
                 app = SovereignApp()
                 app.run()
                 continue

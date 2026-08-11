@@ -23,13 +23,13 @@ from __future__ import annotations
 from pathlib import Path
 
 import pytest
-from control_plane.taxonomy import PRIVACY_KEYWORDS
+from control_plane.runes.taxonomy import PRIVACY_KEYWORDS
 
 # Importing `runic_router` directly works because pyproject.toml lists the
 # project package roots under setuptools `include = ["control_plane*", "bin*"]`
 # and pytest runs from `CAMELOT_OS/` (the pyproject root) — so
 # `control_plane.runic_router` is importable in the active interpreter.
-from control_plane import runic_router as rr
+from control_plane.runes import runic_router as rr
 
 # Canonical seed keys mirrored from the pasted spec block.
 GCMN_RUNE_KEYS = (

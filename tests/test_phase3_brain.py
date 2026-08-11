@@ -6,9 +6,9 @@ the HTMX Bifrost board, SSE telemetry, and the ApprovalButton HITL flow.
 from __future__ import annotations
 
 import pytest
-from control_plane.kinetic_loop import run_sync
-from control_plane.mdx_renderers import visual_plan, visual_recap
-from control_plane.mdx_schema import render_mdx, validate_mdx
+from control_plane.infra.kinetic_loop import run_sync
+from control_plane.infra.mdx_renderers import visual_plan, visual_recap
+from control_plane.infra.mdx_schema import render_mdx, validate_mdx
 
 # ── P3-T01 MDX schema ─────────────────────────────────────────────────────────
 
@@ -60,7 +60,7 @@ def test_visual_recap_reports_outcome():
 @pytest.fixture()
 def client():
     fastapi = pytest.importorskip("fastapi")
-    from control_plane.bifrost_server import create_app
+    from control_plane.dispatch.bifrost_server import create_app
     from fastapi.testclient import TestClient
     return TestClient(create_app())
 
@@ -101,7 +101,7 @@ def test_aperture_panel_endpoint(client):
 
 
 def test_aperture_parse_and_graceful_degradation():
-    from control_plane.aperture_bridge import ApertureBridge, parse_usage, render_panel
+    from control_plane.infra.aperture_bridge import ApertureBridge, parse_usage, render_panel
     s = parse_usage({"models": [
         {"model": "anthropic/claude-opus-4-5", "tokens": 1000, "cost_usd": 0.03, "requests": 1}],
         "sessions": 1})

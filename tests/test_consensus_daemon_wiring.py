@@ -9,7 +9,7 @@ import pytest
 pytest.importorskip("cryptography")
 pytest.importorskip("prometheus_client")
 
-from control_plane.distributed_ledger_consensus import (  # noqa: E402
+from control_plane.infra.distributed_ledger_consensus import (  # noqa: E402
     ConsensusMessage,
     ConsensusPhase,
 )

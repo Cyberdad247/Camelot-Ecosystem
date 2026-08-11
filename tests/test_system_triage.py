@@ -5,14 +5,14 @@ import subprocess
 import sys
 from pathlib import Path
 
-from control_plane.system_triage import (
+from control_plane.runes.system_triage import (
     CheckResult,
     TriageOptions,
     aggregate_verdict,
     run_system_triage,
 )
 
-from control_plane import camelot_cli, runic_router, system_triage
+from control_plane.runes import camelot_cli, runic_router, system_triage
 
 
 def _check(
@@ -137,7 +137,7 @@ def test_bio_swarm_runtime_check_passes_with_release_evidence(tmp_path: Path, mo
             "release": {"verdict": "PASS"},
         }
 
-    import control_plane.bio_swarm_runtime as bio_swarm_runtime
+    import control_plane.infra.bio_swarm_runtime as bio_swarm_runtime
 
     monkeypatch.setattr(bio_swarm_runtime, "read_bio_swarm_status", fake_status)
     context = system_triage.TriageContext(

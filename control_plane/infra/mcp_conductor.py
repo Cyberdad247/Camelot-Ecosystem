@@ -15,7 +15,7 @@ Add to ~/.claude/settings.json (or CAMELOT_OS/.claude/settings.json):
       "mcpServers": {
         "hive": {
           "command": "python",
-          "args": ["-m", "control_plane.mcp_conductor"],
+          "args": ["-m", "control_plane.infra.mcp_conductor"],
           "cwd": "C:/Users/vizio/CAMELOT_OS"
         }
       }
@@ -165,7 +165,7 @@ def _tools() -> list[dict]:
 # ── Tool handlers ─────────────────────────────────────────────────────────────
 
 async def _call(name: str, args: dict) -> str:
-    from control_plane.bifrost import Bifrost
+    from control_plane.dispatch.bifrost import Bifrost
     bf = Bifrost()
 
     if name == "route_to_agent":

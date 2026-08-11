@@ -189,7 +189,7 @@ def dispatch_rune_subprocess(rune: str, param: str) -> tuple[int, str, str]:
     cmd = [
         sys.executable,
         "-m",
-        "control_plane.runic_router",
+        "control_plane.runes.runic_router",
         "--rune",
         rune,
         "--task",

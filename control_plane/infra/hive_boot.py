@@ -57,7 +57,7 @@ def _print_mcp_config() -> None:
         "mcpServers": {
             "hive": {
                 "command": PYTHON,
-                "args": ["-m", "control_plane.mcp_conductor"],
+                "args": ["-m", "control_plane.infra.mcp_conductor"],
                 "cwd": str(CAMELOT_HOME),
             }
         }
@@ -131,7 +131,7 @@ def _is_port_open(port: int, host: str = "127.0.0.1") -> bool:
 async def _status_report() -> None:
     print("[STATUS] Probing all terminals...\n", flush=True)
     try:
-        from control_plane.bifrost import Bifrost
+        from control_plane.dispatch.bifrost import Bifrost
         rows = await Bifrost().status()
         print(f"{'TERMINAL':20s} {'ENGINE':20s} {'STATUS':12s} {'LATENCY':>8s}  COST")
         print("-" * 72)
@@ -150,7 +150,7 @@ def _launch_tui() -> None:
     os.chdir(str(CAMELOT_HOME))
     # Import and run directly in-process (Textual manages its own event loop)
     try:
-        from control_plane.hive_stream_tui import main
+        from control_plane.infra.hive_stream_tui import main
         main()
     except ImportError as e:
         print(f"[BOOT] TUI import error: {e}", flush=True)
@@ -189,7 +189,7 @@ def main() -> None:
     if args.mcp_only:
         # Run MCP conductor directly (stdio — for IDE integration testing)
         print("[BOOT] MCP Conductor mode — connect your IDE client now", flush=True)
-        import control_plane.mcp_conductor as conductor
+        import control_plane.infra.mcp_conductor as conductor
         asyncio.run(conductor._serve_stdio())
         return
 

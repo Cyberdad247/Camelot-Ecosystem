@@ -15,9 +15,9 @@ import asyncio
 import sys
 import time
 
-from control_plane.distributed_agent_registry import AgentStatus, DistributedAgentRegistry
-from control_plane.distributed_knowledge_sync import DistributedKnowledgeSync, SyncEvent, SyncPhase
-from control_plane.distributed_ledger_consensus import ConsensusMessage, DistributedConsensus, NodeRole
+from control_plane.infra.distributed_agent_registry import AgentStatus, DistributedAgentRegistry
+from control_plane.infra.distributed_knowledge_sync import DistributedKnowledgeSync, SyncEvent, SyncPhase
+from control_plane.infra.distributed_ledger_consensus import ConsensusMessage, DistributedConsensus, NodeRole
 
 
 class Phase_G_Week3_ResilienceTests:

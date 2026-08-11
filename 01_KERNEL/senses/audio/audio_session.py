@@ -166,10 +166,10 @@ class AudioSession:
         """Classify intent, lazy-loading switchboard if not injected."""
         import re
 
-        from control_plane.intent_router import IntentCategory, route_by_intent
+        from control_plane.dispatch.intent_router import IntentCategory, route_by_intent
 
         if self.board is None:
-            from control_plane.switchboard import get_board
+            from control_plane.dispatch.switchboard import get_board
             self.board = get_board()
 
         # Dynamic Knight swapping keywords/triggers

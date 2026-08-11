@@ -25,7 +25,7 @@ os.environ.setdefault("APPWRITE_API_KEY", "test-key-1234567890")
 os.environ.setdefault("APPWRITE_PROJECT_ID", "sovereign_db")
 
 
-from control_plane.bifrost_appwrite_dispatch import (  # noqa: E402
+from control_plane.dispatch.bifrost_appwrite_dispatch import (  # noqa: E402
     _sign,
     dispatch_to_appwrite,
 )
@@ -70,7 +70,7 @@ def test_dispatch_rejects_unknown_intent() -> None:
 def test_dispatch_list_databases_returns_ok() -> None:
     payload: dict = {"intent": "list_databases"}
     sig = _sign_payload(payload)
-    with patch("control_plane.bifrost_appwrite_dispatch.AppwriteClient") as cls:
+    with patch("control_plane.dispatch.bifrost_appwrite_dispatch.AppwriteClient") as cls:
         instance = MagicMock()
         cls.return_value = instance
 
@@ -102,7 +102,7 @@ def test_dispatch_upsert_document_with_z3_succeeds() -> None:
         "z3_pass": True,
     }
     sig = _sign_payload(payload)
-    with patch("control_plane.bifrost_appwrite_dispatch.AppwriteClient") as cls:
+    with patch("control_plane.dispatch.bifrost_appwrite_dispatch.AppwriteClient") as cls:
         instance = MagicMock()
         cls.return_value = instance
 

@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 def test_dualmap_slo_escape():
-    from control_plane.soul_router import SoulRouter
+    from control_plane.core.soul_router import SoulRouter
     router = SoulRouter()
     router.slo_threshold_ms = 100.0 # Aggressive SLO for test
 
@@ -23,7 +23,7 @@ def test_dualmap_slo_escape():
     assert "DUALMAP_ESCAPE" in decision.reason
     print(f"SLO Escape Verified: {decision.knight_id} selected instead of slow knights.")
 def test_linear_tier_slo_escape():
-    from control_plane.soul_router import SoulRouter
+    from control_plane.core.soul_router import SoulRouter
     router = SoulRouter()
     router.slo_threshold_ms = 100.0
     

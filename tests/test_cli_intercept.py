@@ -27,13 +27,13 @@ ROOT = Path(__file__).resolve().parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from control_plane.soul_router import (  # noqa: E402
+from control_plane.core.soul_router import (  # noqa: E402
     IntentTensor,
     RouteDecision,
     SoulRouter,
 )
 
-from control_plane import cli_intercept  # noqa: E402
+from control_plane.infra import cli_intercept  # noqa: E402
 
 # ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -229,7 +229,7 @@ def test_agents_a1_in_bifrost_engine_dispatch() -> None:
     strategy with AGENTS_A1_BASE as the base URL. Without this, the
     Bifrost dispatcher (the actual LLM call path) silently falls through
     to the default claude-sonnet-4-6 dispatch."""
-    from control_plane import bifrost
+    from control_plane.dispatch import bifrost
     assert "agents_a1" in bifrost._ENGINE_DISPATCH, (
         "agents_a1 missing from bifrost._ENGINE_DISPATCH; the real "
         "dispatcher would fall through to claude-sonnet-4-6 by default"
@@ -248,7 +248,7 @@ def test_agents_a1_in_bifrost_engine_dispatch() -> None:
 def test_sir_agentis_in_switchboard_terminal_registry() -> None:
     """switchboard.TERMINAL_REGISTRY must register sir_agentis so the
     cockpit's HUD (and any operator console) can probe its health."""
-    from control_plane import switchboard
+    from control_plane.dispatch import switchboard
     terminal = switchboard.TERMINAL_REGISTRY.get("sir_agentis")
     assert terminal is not None, (
         "sir_agentis missing from switchboard.TERMINAL_REGISTRY; the "

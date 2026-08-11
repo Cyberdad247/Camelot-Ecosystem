@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from control_plane.heimdall_bifrost_governance import (
+from control_plane.infra.heimdall_bifrost_governance import (
     REQUIRED_BRIDGE_COMPONENTS,
     boot_heimdall_bifrost_governance,
     dispatch_to_nano_knight,

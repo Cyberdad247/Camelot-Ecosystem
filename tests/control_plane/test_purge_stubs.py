@@ -35,7 +35,7 @@ GCMN_RUNE_KEYS = (
 def _subprocess_purge(env_extra: dict | None = None) -> subprocess.CompletedProcess:
     proc_env = {**os.environ, **(env_extra or {})}
     return subprocess.run(
-        [PY, "-m", "control_plane.runic_router", "--purge_stubs"],
+        [PY, "-m", "control_plane.runes.runic_router", "--purge_stubs"],
         capture_output=True,
         text=True,
         encoding="utf-8",  # ν (U+03BD) in νKG_CRYSTAL_OMEGA_STANDARDIZED
@@ -156,7 +156,7 @@ def test_session_disable_short_circuits_subsequent_stub_dispatch(
     session. The 4 stub runes fall through to the unknown/escalation path
     (knight = sir_boris), exactly as if the operator had unset the env var.
     """
-    from control_plane import runic_router as rr
+    from control_plane.runes import runic_router as rr
 
     monkeypatch.setattr(rr, "_gcmn_stubs_session_disabled", False)
     monkeypatch.setenv("CAMELOT_GCMN_STUBS_ENABLED", "1")
@@ -185,7 +185,7 @@ def test_session_flag_resets_when_imported_fresh(monkeypatch: pytest.MonkeyPatch
     """
     import importlib
 
-    from control_plane import runic_router as rr
+    from control_plane.runes import runic_router as rr
 
     monkeypatch.setattr(rr, "_gcmn_stubs_session_disabled", True)
     reloaded = importlib.reload(rr)

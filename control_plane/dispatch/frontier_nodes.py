@@ -132,7 +132,7 @@ def _ledger(event: dict[str, Any], *, provenance: bool = False) -> None:
     with VERIFICATION_LEDGER.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(entry, ensure_ascii=False, sort_keys=True) + "\n")
     if provenance:
-        from control_plane.ledger_sync import append_provenance_entry
+        from control_plane.infra.ledger_sync import append_provenance_entry
 
         summary = str(event.get("summary") or event.get("action") or "frontier node event")
         append_provenance_entry(

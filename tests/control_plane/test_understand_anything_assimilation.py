@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from control_plane.understand_anything_assimilation import write_understand_anything_artifacts
+from control_plane.infra.understand_anything_assimilation import write_understand_anything_artifacts
 
 
 def test_write_understand_anything_artifacts_creates_graph(tmp_path: Path) -> None:

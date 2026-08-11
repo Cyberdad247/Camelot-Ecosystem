@@ -8,13 +8,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Iterable
 
-from control_plane.bio_swarm_runtime import read_bio_swarm_status
-from control_plane.notebooklm_graphify_bridge import (
+from control_plane.infra.bio_swarm_runtime import read_bio_swarm_status
+from control_plane.infra.notebooklm_graphify_bridge import (
     DEFAULT_NOTEBOOKLM_STATE,
     load_storage_state,
     notebooklm_state_to_graph_context,
 )
-from control_plane.versioning import get_dynamic_version
+from control_plane.infra.versioning import get_dynamic_version
 
 SCHEMA = "camelot.understand-anything-assimilation/v1"
 DEFAULT_OUTPUT_ROOT = Path(".understand-anything")

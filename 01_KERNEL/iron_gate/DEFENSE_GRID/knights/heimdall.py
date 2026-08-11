@@ -219,7 +219,7 @@ class SirHeimdall:
     def emit_hermes_alert(self, report: WatchReport) -> None:
         """Publish threat report to Hermes shadow.threats channel."""
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             HermesBus().publish(self._hermes_channel, {
                 "source": "SIR_HEIMDALL",
                 "vectors": len(report.vectors),

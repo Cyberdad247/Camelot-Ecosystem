@@ -33,7 +33,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 
-from control_plane.taxonomy import PRIVACY_KEYWORDS
+from control_plane.runes.taxonomy import PRIVACY_KEYWORDS
 from control_plane._paths import REPO_ROOT
 
 try:
@@ -577,7 +577,7 @@ def _handle_contract(param: str, context: dict) -> dict:
 
 
 def _handle_claw(param: str, context: dict) -> dict:
-    from control_plane.claw_suite import route_claw_suite
+    from control_plane.dispatch.claw_suite import route_claw_suite
 
     return route_claw_suite(param, context)
 
@@ -694,7 +694,7 @@ def _handle_purge_memory(param: str, context: dict) -> dict:
 
 def _handle_execute_prompt(param: str, context: dict) -> dict:
     """Handle //EXECUTE_PROMPT with approval grant requirement."""
-    from control_plane import forge_law
+    from control_plane.core import forge_law
 
     cartridge_id = param.strip() if param else ""
     approval = context.get("approval_grant") if context else None
@@ -731,7 +731,7 @@ def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
                     for idx, token in enumerate(tokens):
                         if token == "--node" and idx + 1 < len(tokens):
                             node_arg = tokens[idx + 1]
-                    from control_plane.nano_swarm_runtime import supervise_nodes
+                    from control_plane.infra.nano_swarm_runtime import supervise_nodes
 
                     result = supervise_nodes(action, node_name=node_arg)
                     return {
@@ -788,7 +788,7 @@ def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
                         **result,
                     }
                 if "--runtime-status" in tokens:
-                    from control_plane.nano_swarm_runtime import write_runtime_status
+                    from control_plane.infra.nano_swarm_runtime import write_runtime_status
 
                     result = write_runtime_status()
                     return {

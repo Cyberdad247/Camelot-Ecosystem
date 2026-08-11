@@ -134,7 +134,7 @@ def test_colony_nexus_hermes_delta_fires(critical_report, monkeypatch):
             published.append((channel, payload))
 
     monkeypatch.setattr(
-        "control_plane.hermes_bridge.HermesBus", _FakeBus, raising=False
+        "control_plane.infra.hermes_bridge.HermesBus", _FakeBus, raising=False
     )
     # Patch import inside colony_nexus module
     colony_mod = sys.modules["colony_nexus"]

@@ -15,7 +15,7 @@ Backends (pluggable):
   NullBackend    — stub for testing / air-gapped stubs
 
 Usage (in Bifrost):
-    from control_plane.sovereign_inference import SIE
+    from control_plane.dispatch.sovereign_inference import SIE
     async for chunk in SIE.generate_stream("sir_ghost", prompt, system):
         yield chunk
 

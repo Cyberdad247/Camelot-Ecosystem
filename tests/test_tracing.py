@@ -4,7 +4,7 @@
 import json
 
 import pytest
-from control_plane.tracing import Tracer, get_tracer
+from control_plane.infra.tracing import Tracer, get_tracer
 
 
 def _read(path):

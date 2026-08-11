@@ -29,7 +29,7 @@ os.environ.setdefault("APPWRITE_PROJECT_ID", "sovereign_db")
 os.environ.setdefault("APPWRITE_DB_ID", "sovereign_db")
 os.environ.setdefault("APPWRITE_COLLECTION_ID", "memory_spine")
 
-from control_plane.appwrite_client import AppwriteClient  # noqa: E402
+from control_plane.infra.appwrite_client import AppwriteClient  # noqa: E402
 
 
 @pytest.fixture
@@ -39,7 +39,7 @@ def client(mock_databases) -> AppwriteClient:
 
 @pytest.fixture
 def mock_databases() -> MagicMock:
-    with patch("control_plane.appwrite_client.Databases") as cls:
+    with patch("control_plane.infra.appwrite_client.Databases") as cls:
         instance = MagicMock()
         cls.return_value = instance
         yield instance

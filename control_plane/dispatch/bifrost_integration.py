@@ -20,7 +20,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional
 
-from control_plane.system_analyzer import (
+from control_plane.runes.system_analyzer import (
     GPUType,
     StorageType,
     SystemAnalyzer,

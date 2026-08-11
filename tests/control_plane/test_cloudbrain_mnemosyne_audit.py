@@ -1,6 +1,6 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
-from control_plane.cloudbrain_mnemosyne_audit import (
+from control_plane.infra.cloudbrain_mnemosyne_audit import (
     _classify_queue_event,
     render_markdown,
     run_lady_mnemosyne_cloudbrain_audit,

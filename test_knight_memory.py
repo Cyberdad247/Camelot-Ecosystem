@@ -15,7 +15,7 @@ from pathlib import Path
 # Add CAMELOT_OS to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from control_plane.agent_memory import (
+from control_plane.infra.agent_memory import (
     get_memory,
     log_dispatch,
     log_response,

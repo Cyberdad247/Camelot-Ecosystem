@@ -179,7 +179,7 @@ def print_plan() -> None:
     print()
     # roster cross-check against the kinetic swarm role model (best-effort, offline-safe)
     try:
-        from control_plane.kinetic_swarm import get_kinetic_swarm
+        from control_plane.dispatch.kinetic_swarm import get_kinetic_swarm
         swarm = get_kinetic_swarm()
         print(f"  KineticSwarm roster: {len(swarm.members)} members "
               f"({', '.join(sorted(swarm.role_assignments))})")
@@ -221,7 +221,7 @@ async def dispatch_task(task: TriageTask) -> str:
         print(f"  [{task.id}] role={task.role} → local (no dispatch)")
         return ""
 
-    from control_plane.bifrost import Bifrost  # lazy: avoids heavy import for --plan
+    from control_plane.dispatch.bifrost import Bifrost  # lazy: avoids heavy import for --plan
 
     print(f"  [{task.id}] → {terminal} ({task.role}) dispatching…")
     t0 = time.time()

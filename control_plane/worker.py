@@ -798,7 +798,7 @@ def _git_commit(written_paths: list[str], task: QueueTask, piv_summary: str) -> 
 def _ledger_entry(task: QueueTask, written: list[str], piv: str, git: str = "") -> None:
     """Record a provenance entry after a successful forge."""
     try:
-        from control_plane.ledger_sync import append_provenance_entry
+        from control_plane.infra.ledger_sync import append_provenance_entry
 
         file_names = [Path(p).name for p in written[:3]]
         files_note = f"{len(written)} file(s): {', '.join(file_names)}"
@@ -1155,7 +1155,7 @@ def _dispatch(task: QueueTask, dry_run: bool, auto_approve: bool) -> str:
         if not auto_approve and not _hitl_prompt(task):
             return "skipped"
         shell_result = _exec_shell(
-            [str(PYTHON), "-m", "control_plane.harness", "--status"],
+            [str(PYTHON), "-m", "control_plane.infra.harness", "--status"],
             "harness status",
         )
 

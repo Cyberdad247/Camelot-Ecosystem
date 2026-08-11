@@ -25,7 +25,7 @@ import json
 import os
 from typing import Any
 
-from control_plane.appwrite_client import AppwriteClient
+from control_plane.infra.appwrite_client import AppwriteClient
 
 
 def _sign(raw: str, secret: str) -> str:

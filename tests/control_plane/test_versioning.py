@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from control_plane.versioning import VersionInfo, get_dynamic_version
+from control_plane.infra.versioning import VersionInfo, get_dynamic_version
 
 
 def test_get_dynamic_version_returns_version_info() -> None:

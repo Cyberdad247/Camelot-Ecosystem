@@ -262,7 +262,7 @@ async def _probe_terminal(t: Terminal) -> None:
 
         def _sie_status() -> str:
             try:
-                from control_plane.sovereign_inference import SIE
+                from control_plane.dispatch.sovereign_inference import SIE
                 healthy = SIE.health()
                 ollama_ok = healthy.get("backends", {}).get("ollama", False)
                 return "live" if ollama_ok else "degraded"

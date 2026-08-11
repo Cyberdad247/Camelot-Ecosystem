@@ -33,7 +33,7 @@ from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional
 
-from control_plane.agent_registry import AgentDefinition, get_agent_registry
+from control_plane.dispatch.agent_registry import AgentDefinition, get_agent_registry
 
 
 class SwarmRole(str, Enum):

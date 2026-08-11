@@ -7,7 +7,7 @@ import json
 
 import pytest
 
-from control_plane import approval_grants
+from control_plane.core import approval_grants
 
 
 def _encode(value: bytes) -> str:
@@ -107,7 +107,8 @@ def test_v2_grant_binds_cartridge_digest_and_target(tmp_path):
 
 
 def test_cockpit_requires_grant_before_queueing(monkeypatch, tmp_path):
-    from control_plane import cockpit, harness, runic_router
+    from control_plane.infra import cockpit, harness
+    from control_plane.runes import runic_router
 
     monkeypatch.setenv("CAMELOT_COCKPIT_REQUIRE_APPROVAL_GRANT", "true")
     monkeypatch.setattr(approval_grants, "_CONSUMED_DIR", tmp_path / "consumed")

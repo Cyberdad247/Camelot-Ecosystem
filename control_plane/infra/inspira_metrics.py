@@ -180,7 +180,7 @@ def _kv_cache_hit_rate(router=None) -> float:
     yet. Graceful — never raises.
     """
     try:
-        from .soul_router import SoulRouter
+        from control_plane.core.soul_router import SoulRouter
         r = router if router is not None else SoulRouter()
         samples = [t for hist in getattr(r, "_ttft_history", {}).values() for t in hist]
         if not samples:
@@ -244,7 +244,7 @@ def _selftest() -> int:
     check(f"P1-T08 mamba_compression_ratio > 0 (={m.mamba_compression_ratio})",
           m.mamba_compression_ratio > 0)
     # kv_cache_hit_rate computes from soul_router TTFT history (seeded probe)
-    from .soul_router import SoulRouter
+    from control_plane.core.soul_router import SoulRouter
     _r = SoulRouter()
     _r.record_ttft("sir_ouroboros", 400.0)   # under SLO -> hit
     _r.record_ttft("sir_ouroboros", 2500.0)  # over SLO  -> miss

@@ -20,7 +20,7 @@ import asyncio
 import time
 from typing import Dict, List, Tuple
 
-from control_plane.observability import start_metrics_server
+from control_plane.infra.observability import start_metrics_server
 
 from .agents_daemon import HttpAgentsNode
 from .agents_daemon import register_routes as register_agents

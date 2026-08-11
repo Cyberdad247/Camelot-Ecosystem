@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from control_plane.toon_manifest import (
+from control_plane.runes.toon_manifest import (
     build_scarcity_core_manifest,
     compile_manifest_documents,
     encode_toon_document,

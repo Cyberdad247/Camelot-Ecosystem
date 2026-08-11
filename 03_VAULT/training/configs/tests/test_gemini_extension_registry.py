@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from control_plane.gemini_extension_registry import (
+from control_plane.infra.gemini_extension_registry import (
     inspect_gemini_extension,
     list_gemini_extensions,
     summarize_gemini_extensions,

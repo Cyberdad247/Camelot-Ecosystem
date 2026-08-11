@@ -44,7 +44,7 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-from control_plane.ledger_sync import compute_entry_hash
+from control_plane.infra.ledger_sync import compute_entry_hash
 
 DEFAULT_PATH = Path("03_VAULT/Missions/verification_ledger.jsonl")
 

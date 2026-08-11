@@ -131,7 +131,7 @@ class ProbeServer:
         )
         env["CAMELOT_HOME"] = str(camelot_home)
 
-        cmd = [sys.executable, "-m", "control_plane.cognitive_service"]
+        cmd = [sys.executable, "-m", "control_plane.infra.cognitive_service"]
         self._proc = subprocess.Popen(
             cmd, cwd=str(_PROJECT_ROOT), env=env,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE,

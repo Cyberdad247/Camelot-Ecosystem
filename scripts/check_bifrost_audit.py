@@ -71,7 +71,7 @@ def main() -> int:
 
     sys.path.insert(0, str(root))
     try:
-        from control_plane.bifrost_triage_swarm import TASK_PLAN
+        from control_plane.dispatch.bifrost_triage_swarm import TASK_PLAN
     except Exception as e:
         print(f"[FATAL] could not import control_plane.bifrost_triage_swarm: "
               f"{type(e).__name__}: {e}", file=sys.stderr)

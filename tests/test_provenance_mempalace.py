@@ -2,7 +2,7 @@ import importlib.util
 import shutil
 from pathlib import Path
 
-from control_plane.provenance import ProvenanceManager, VerificationRun
+from control_plane.infra.provenance import ProvenanceManager, VerificationRun
 
 
 def test_provenance_mempalace_integration():

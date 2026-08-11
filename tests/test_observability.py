@@ -6,10 +6,10 @@ import json
 import pytest
 
 pytest.importorskip("prometheus_client")
-from control_plane.tracing import get_tracer  # noqa: E402
+from control_plane.infra.tracing import get_tracer  # noqa: E402
 from prometheus_client import REGISTRY  # noqa: E402
 
-from control_plane import observability  # noqa: E402
+from control_plane.infra import observability  # noqa: E402
 
 
 def _count(op: str, status: str) -> float:

@@ -149,7 +149,7 @@ func main() {{
             return self._sandbox if self._sandbox != "UNAVAILABLE" else None
 
         try:
-            from control_plane.deerflow_sandbox import DeerFlowSandbox
+            from control_plane.infra.deerflow_sandbox import DeerFlowSandbox
             sandbox = DeerFlowSandbox()
             if sandbox.check_docker():
                 self.__class__._sandbox = sandbox
@@ -193,7 +193,7 @@ func main() {{
             elif lang:
                 # No sandbox instance but language is validatable — use native directly
                 try:
-                    from control_plane.deerflow_sandbox import DeerFlowSandbox
+                    from control_plane.infra.deerflow_sandbox import DeerFlowSandbox
                     if lang == "python":
                         val_result = DeerFlowSandbox.validate_python_native(content)
                     elif lang == "rust":

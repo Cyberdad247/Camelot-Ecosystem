@@ -144,7 +144,7 @@ and **unverified** are marked as such rather than rounded up.
 - [+] **Mamba-Firn SSM Recurrence** — Ternary quantizer logic and Mamba-Firn linear recurrence integrated into the Ouroboros reasoning engine (01_KERNEL/reasoning/ouroboros_engine).
 - [+] **HMAC Cache Salting** — Tenant-isolated cache IDs over length-prefixed inputs, keyed by a required `MEMPALACE_SECRET` (tests/test_mempalace_security.py).
 - [+] **Multivoice Switchboard & Bridge** — Go-native goroutine-parallel router and local KV-cache affinity telemetry bridge (control_plane/multivoice_bridge.py).
-- [+] **Bifrost Triage Swarm** — Automated dispatch triage engine and service registry reconciliation loop (control_plane/bifrost_triage_swarm.py).
+- [+] **Bifrost Triage Swarm** — Automated dispatch triage engine and service registry reconciliation loop (control_plane/dispatch/bifrost_triage_swarm.py).
 - [+] **Anya Cockpit Bento Overhaul** — Excalibur PWA layout restructured as a brutalist dashboard with ChromeDevTools MCP assimilation and node mesh trackers (cartridges/system-ui).
 - [+] **OxiBonsai_v2 Ternary-STDP Recurrence** — Quantization mechanics scaling to a ternary weight constraint space using integrated Hebbian Spike-Timing-Dependent Plasticity (STDP) sliding update rule on constrained 8GB ARM64 edge hardware.
 - [+] **AntVortex (1M) Leech-Lattice Shell-Unions (Λ24)** — Similarity mapping coordinates indexed using 24-Dimensional Leech-Lattice shell-unions for sub-millisecond retrieval of 171 specialized agents.
@@ -237,22 +237,24 @@ export MEMPALACE_SECRET="$(python -c 'import secrets; print(secrets.token_urlsaf
 python bin/awaken.py
 
 # Drive an intent through the Kinetic Loop
-python -m control_plane.kinetic_loop "build a status dashboard"
+python -m control_plane.infra.kinetic_loop "build a status dashboard"
 
 # Launch the Bifrost Intelligence Board (HTMX + SSE)
-python -m control_plane.bifrost_server --serve   # http://127.0.0.1:8080/bifrost
+python -m control_plane.dispatch.bifrost_server --serve   # http://127.0.0.1:8080/bifrost
 
 # See the safety gate refuse a modelled hazard — all four are Z3_BLOCK'd
-python -m control_plane.z3_verify "git push --force origin main"
-python -m control_plane.z3_verify "git push -f origin main"
-python -m control_plane.z3_verify "git push origin +main"
-python -m control_plane.z3_verify "truncate -s 0 PROVENANCE_LEDGER.md"
+python -m control_plane.infra.z3_verify "git push --force origin main"
+python -m control_plane.infra.z3_verify "git push -f origin main"
+python -m control_plane.infra.z3_verify "git push origin +main"
+python -m control_plane.infra.z3_verify "truncate -s 0 PROVENANCE_LEDGER.md"
 ```
 
-> The `python -m control_plane.<module>` form works for every module even though
-> the files live in `core/`, `dispatch/`, `runes/` and `infra/` subdirectories —
-> a compatibility finder in `control_plane/__init__.py` redirects the bare names.
-> The [repository map](#-repository-map) gives the real locations.
+> **Module paths name their real location.** Earlier versions accepted a bare
+> `control_plane.<module>` via an import redirect in `control_plane/__init__.py`.
+> That redirect was removed: it decoupled import paths from filesystem paths
+> (which is how governance code came to read and write phantom directories) and
+> loaded every module twice under two names. See the
+> [repository map](#-repository-map) for where each module lives.
 
 **Going to production?** See [`blueprints/v9000.14/GO_LIVE.md`](blueprints/v9000.14/GO_LIVE.md) for the
 tsnet mesh (tags/grants/k8s), Aperture wiring, and the one-command `scripts/wsl_verify.sh` driver.

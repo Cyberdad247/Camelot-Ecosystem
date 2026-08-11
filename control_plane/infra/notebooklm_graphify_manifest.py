@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from control_plane.versioning import get_dynamic_version
+from control_plane.infra.versioning import get_dynamic_version
 
 
 def load_manifest(storage_state_path: Path, notebook_count: int, source_count: int) -> dict[str, Any]:

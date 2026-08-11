@@ -17,7 +17,7 @@ is preserved across `with` blocks via a contextvar stack. Safe by default:
 emission never raises into the caller.
 
 Usage:
-    from control_plane.tracing import get_tracer
+    from control_plane.infra.tracing import get_tracer
     tracer = get_tracer("camelot-node-1")
     with tracer.start_active_span("consensus_proposal") as scope:
         scope.span.set_tag("entry_id", entry_id)

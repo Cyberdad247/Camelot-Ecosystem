@@ -27,7 +27,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Optional
 
-from control_plane.sovereign_commander import (
+from control_plane.infra.sovereign_commander import (
     ApprovalLevel,
     ApprovalRequest,
     OperationType,
@@ -397,7 +397,7 @@ class QRPill:
     async def _integrate_bifrost(self) -> bool:
         """Integrate with Bifrost bridge, analyze, optimize, and forge CAMELOT-OS."""
         try:
-            from control_plane.bifrost_integration import get_bifrost_integration
+            from control_plane.dispatch.bifrost_integration import get_bifrost_integration
 
             bifrost = get_bifrost_integration()
             return await bifrost.integrate(self.pill_id)

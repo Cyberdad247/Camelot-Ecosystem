@@ -13,10 +13,8 @@ from pathlib import Path
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel
 
-# Add the repo root to sys.path so `control_plane.*` is importable.
-sys.path.append(str(REPO_ROOT))
-from control_plane.soul_router import SoulRouter
 from control_plane._paths import REPO_ROOT
+from control_plane.core.soul_router import SoulRouter
 
 app = FastAPI(title="Camelot Event Bridge")
 router = SoulRouter()

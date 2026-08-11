@@ -506,7 +506,7 @@ def _repl(
             elif cmd == "/runes":
                 try:
                     sys.path.insert(0, str(_REPO))
-                    from control_plane.runic_router import list_runes
+                    from control_plane.runes.runic_router import list_runes
                     runes = list_runes()
                     console.print("[bold yellow]Runic:[/bold yellow] " + "  ".join(runes["runic_commands"]))
                     console.print("[bold yellow]Omega:[/bold yellow] " + "  ".join(runes["omega_runes"]))
@@ -520,7 +520,7 @@ def _repl(
         if user_input.startswith("//") or (user_input.startswith("Omega_") and "_" in user_input[6:]):
             try:
                 sys.path.insert(0, str(_REPO))
-                from control_plane.runic_router import detect_and_route
+                from control_plane.runes.runic_router import detect_and_route
                 result = detect_and_route(user_input)
                 if result is not None:
                     from rich.panel import Panel
@@ -669,7 +669,7 @@ def cmd_omniroute(args, console) -> int:
             # Re-root sys.path defensively just in case control_plane isn't in path
             if str(_REPO) not in sys.path:
                 sys.path.insert(0, str(_REPO))
-            import control_plane.omniroute_policies as mod
+            import control_plane.dispatch.omniroute_policies as mod
             # Run check or just return success
             return 0
         except (ModuleNotFoundError, ImportError):

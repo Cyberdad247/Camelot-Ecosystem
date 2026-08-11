@@ -1,7 +1,7 @@
-from control_plane.knight_agent import load_roster
-from control_plane.switchboard import TERMINAL_REGISTRY
+from control_plane.core.knight_agent import load_roster
+from control_plane.dispatch.switchboard import TERMINAL_REGISTRY
 
-from control_plane import runic_router
+from control_plane.runes import runic_router
 
 CLAW_KNIGHTS = {
     "sir_openclaw",
@@ -13,7 +13,7 @@ CLAW_KNIGHTS = {
 
 
 def test_claw_suite_manifest_is_guarded_and_shopify_lanes_are_split():
-    from control_plane.claw_suite import build_claw_suite_manifest, is_forbidden_openclaw_intent
+    from control_plane.dispatch.claw_suite import build_claw_suite_manifest, is_forbidden_openclaw_intent
 
     manifest = build_claw_suite_manifest()
 

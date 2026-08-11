@@ -19,7 +19,7 @@ from pydantic_ai import Agent, RunContext
 sys.path.append(str(Path(__file__).resolve().parent))
 
 try:
-    from .knight_agent import KnightCapability, get_capability
+    from control_plane.core.knight_agent import KnightCapability, get_capability
 except ImportError:
     # Fallback for direct execution
     from knight_agent import KnightCapability, get_capability

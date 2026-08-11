@@ -143,7 +143,7 @@ class ColonyNexus:
 
     def _emit_hermes(self, state: ColonyState, delta: float) -> None:
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             bus = HermesBus()
             bus.publish("colony.risk", {
                 "risk_score":   state.risk_score,

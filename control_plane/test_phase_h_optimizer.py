@@ -11,7 +11,7 @@ import time
 import unittest
 from pathlib import Path
 
-from control_plane.phase_h_optimizer import OptimizationCandidate, OptimizerEngine
+from control_plane.infra.phase_h_optimizer import OptimizationCandidate, OptimizerEngine
 
 
 class TestOptimizerEngine(unittest.TestCase):

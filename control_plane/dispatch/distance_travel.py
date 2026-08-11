@@ -37,10 +37,10 @@ class DistanceTravel:
     """Complete distance-travel orchestrator."""
 
     def __init__(self) -> None:
-        from control_plane.agent_gateway import get_agent_gateway
-        from control_plane.consensus_layer import get_consensus_layer
-        from control_plane.distributed_memory import get_distributed_memory
-        from control_plane.memory_sync import get_memory_syncer
+        from control_plane.dispatch.agent_gateway import get_agent_gateway
+        from control_plane.dispatch.consensus_layer import get_consensus_layer
+        from control_plane.infra.distributed_memory import get_distributed_memory
+        from control_plane.infra.memory_sync import get_memory_syncer
 
         self.gateway = get_agent_gateway()
         self.consensus = get_consensus_layer()
@@ -142,7 +142,7 @@ class DistanceTravel:
 
         Returns (selected_agent_id, response_stream)
         """
-        from control_plane.agent_registry import get_agent_registry
+        from control_plane.dispatch.agent_registry import get_agent_registry
 
         registry = get_agent_registry()
         candidates = registry.get_agents_with_capability(capability)
@@ -202,7 +202,7 @@ class DistanceTravel:
     ) -> None:
         """Index dispatch in knowledge pyramid."""
         try:
-            from control_plane.symbol_compressor import get_compressor
+            from control_plane.infra.symbol_compressor import get_compressor
 
             compressor = get_compressor()
 
@@ -223,7 +223,7 @@ class DistanceTravel:
 
     async def network_status(self) -> dict:
         """Get status of entire agent network."""
-        from control_plane.agent_registry import get_agent_registry
+        from control_plane.dispatch.agent_registry import get_agent_registry
 
         registry = get_agent_registry()
         dist_mem = self.distributed_memory

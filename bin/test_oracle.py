@@ -26,7 +26,7 @@ except Exception:
 # Make control_plane importable regardless of cwd.
 sys.path.insert(0, str(HOME))
 
-from control_plane.cloud_services import (  # noqa: E402
+from control_plane.infra.cloud_services import (  # noqa: E402
     CloudServiceName,
     CloudServiceRequest,
     CloudServiceRouter,

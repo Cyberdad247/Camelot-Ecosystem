@@ -77,7 +77,7 @@ class PyramidVerifier:
     async def check_qdrant(self) -> bool:
         """Verify Qdrant connectivity."""
         try:
-            from control_plane.symbol_compressor import get_compressor
+            from control_plane.infra.symbol_compressor import get_compressor
 
             compressor = get_compressor()
             if not compressor.client:
@@ -111,7 +111,7 @@ class PyramidVerifier:
     async def check_knight_kb(self) -> bool:
         """Verify Knight Knowledge Base."""
         try:
-            from control_plane.knight_knowledgebase import get_knowledgebase
+            from control_plane.core.knight_knowledgebase import get_knowledgebase
 
             kb = get_knowledgebase()
             docs = await kb.load_all("sir_boris")
@@ -135,7 +135,7 @@ class PyramidVerifier:
     async def check_symbol_compressor(self) -> bool:
         """Verify Symbol Compressor (Qdrant indexing)."""
         try:
-            from control_plane.symbol_compressor import get_compressor
+            from control_plane.infra.symbol_compressor import get_compressor
 
             compressor = get_compressor()
 
@@ -173,7 +173,7 @@ class PyramidVerifier:
     async def check_self_enhancer(self) -> bool:
         """Verify Knight Self-Enhancer."""
         try:
-            from control_plane.knight_self_enhancer import get_enhancer
+            from control_plane.core.knight_self_enhancer import get_enhancer
 
             enhancer = get_enhancer()
             insights = await enhancer.get_knight_insights("sir_boris")
@@ -192,7 +192,7 @@ class PyramidVerifier:
     async def check_bifrost_integration(self) -> bool:
         """Verify Bifrost dispatch enrichment integration."""
         try:
-            from control_plane.bifrost import Bifrost
+            from control_plane.dispatch.bifrost import Bifrost
 
             bf = Bifrost()
 

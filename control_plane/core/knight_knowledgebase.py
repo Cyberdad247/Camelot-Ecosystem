@@ -62,7 +62,7 @@ class KnightKnowledgeBase:
         self._cache: dict[str, KnightDocument] = {}
         self._redis_enabled = False
         try:
-            from control_plane.agent_memory import get_memory
+            from control_plane.infra.agent_memory import get_memory
             mem = get_memory()
             self._redis_enabled = mem.client is not None
         except Exception:

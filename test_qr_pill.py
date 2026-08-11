@@ -72,7 +72,7 @@ class QRPillTestSuite:
     async def test_sovereign_commander(self) -> bool:
         """Test Sovereign Commander initialization."""
         try:
-            from control_plane.sovereign_commander import (
+            from control_plane.infra.sovereign_commander import (
                 ApprovalLevel,
                 OperationType,
                 get_sovereign_commander,
@@ -110,7 +110,7 @@ class QRPillTestSuite:
     async def test_pill_initialization(self) -> bool:
         """Test QR Pill initialization."""
         try:
-            from control_plane.qr_pill import PillState, get_qr_pill
+            from control_plane.infra.qr_pill import PillState, get_qr_pill
 
             pill = get_qr_pill("test_pill")
 
@@ -145,7 +145,7 @@ class QRPillTestSuite:
     async def test_bootstrap_tasks(self) -> bool:
         """Test bootstrap task execution."""
         try:
-            from control_plane.qr_pill import get_qr_pill
+            from control_plane.infra.qr_pill import get_qr_pill
 
             pill = get_qr_pill("test_bootstrap")
 
@@ -184,7 +184,7 @@ class QRPillTestSuite:
     async def test_health_checks(self) -> bool:
         """Test health check system."""
         try:
-            from control_plane.qr_pill import HealthStatus, get_qr_pill
+            from control_plane.infra.qr_pill import HealthStatus, get_qr_pill
 
             pill = get_qr_pill("test_health")
 
@@ -224,7 +224,7 @@ class QRPillTestSuite:
     async def test_self_healing(self) -> bool:
         """Test self-healing capability."""
         try:
-            from control_plane.qr_pill import PillState, get_qr_pill
+            from control_plane.infra.qr_pill import PillState, get_qr_pill
 
             pill = get_qr_pill("test_healing")
 
@@ -261,7 +261,7 @@ class QRPillTestSuite:
     async def test_ledger_audit(self) -> bool:
         """Test ledger audit trail."""
         try:
-            from control_plane.sovereign_commander import get_sovereign_commander
+            from control_plane.infra.sovereign_commander import get_sovereign_commander
 
             commander = get_sovereign_commander()
 
@@ -297,7 +297,7 @@ class QRPillTestSuite:
     async def test_approval_gates(self) -> bool:
         """Test approval gate system."""
         try:
-            from control_plane.sovereign_commander import (
+            from control_plane.infra.sovereign_commander import (
                 ApprovalRequest,
                 OperationType,
                 get_sovereign_commander,

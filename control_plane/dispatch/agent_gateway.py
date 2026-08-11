@@ -81,7 +81,7 @@ class AgentGateway:
                 )
 
             # Route via Bifrost to target agent's knight
-            from control_plane.bifrost import Bifrost
+            from control_plane.dispatch.bifrost import Bifrost
 
             bf = Bifrost()
 
@@ -134,12 +134,12 @@ Provide your best analysis and be explicit about reasoning.
 
         Returns (selected_agent_id, response_stream)
         """
-        from control_plane.consensus_layer import get_consensus_layer
+        from control_plane.dispatch.consensus_layer import get_consensus_layer
 
         consensus = get_consensus_layer()
 
         # Find candidates
-        from control_plane.agent_registry import get_agent_registry
+        from control_plane.dispatch.agent_registry import get_agent_registry
 
         registry = get_agent_registry()
         candidates = registry.get_agents_with_capability(capability)

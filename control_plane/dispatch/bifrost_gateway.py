@@ -30,7 +30,7 @@ import urllib.error
 import urllib.request
 from typing import Any
 
-from control_plane.hermes_bridge import HermesBus
+from control_plane.infra.hermes_bridge import HermesBus
 
 GATEWAY_URL = os.environ.get("BIFROST_GATEWAY_URL", "http://127.0.0.1:3001")
 WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")

@@ -7,7 +7,7 @@ Populates metrics database with realistic operation data for dashboard display
 import random
 import time
 
-from control_plane.phase_h_integration import get_metrics
+from control_plane.infra.phase_h_integration import get_metrics
 
 
 def generate_reads(count: int = 100):

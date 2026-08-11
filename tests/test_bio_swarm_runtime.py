@@ -4,7 +4,7 @@ import json
 import subprocess
 from pathlib import Path
 
-from control_plane.bio_swarm_runtime import (
+from control_plane.infra.bio_swarm_runtime import (
     BioSwarmPaths,
     preflight_bio_swarm,
     read_bio_swarm_status,
@@ -12,7 +12,7 @@ from control_plane.bio_swarm_runtime import (
     write_bio_swarm_runtime_status,
 )
 
-from control_plane import camelot_cli
+from control_plane.runes import camelot_cli
 
 
 def test_status_reports_missing_binary_as_blocked(tmp_path: Path) -> None:

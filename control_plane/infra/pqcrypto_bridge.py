@@ -11,7 +11,7 @@ Build (requires cargo):
     # binary: target/release/camelot-pqcrypto.exe (Windows) or camelot-pqcrypto (Linux)
 
 Usage:
-    from control_plane.pqcrypto_bridge import PQCrypto
+    from control_plane.infra.pqcrypto_bridge import PQCrypto
     pq = PQCrypto()
     kem_kp = pq.kem_keygen()          # generate key pair
     enc    = pq.kem_encapsulate(peer_ek)

@@ -76,8 +76,8 @@ class PhaseF_TestSuite:
     async def test_toon_encoder(self) -> bool:
         """Test TOON encoder."""
         try:
-            from control_plane.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
-            from control_plane.toon_encoder import get_toon_encoder
+            from control_plane.runes.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
+            from control_plane.runes.toon_encoder import get_toon_encoder
 
             encoder = get_toon_encoder()
 
@@ -126,7 +126,7 @@ class PhaseF_TestSuite:
     async def test_triage_score(self) -> bool:
         """Test TriageScore confidence scoring."""
         try:
-            from control_plane.triage_score import (
+            from control_plane.core.triage_score import (
                 TriageAction,
                 get_triage_scorer,
             )
@@ -198,7 +198,7 @@ class PhaseF_TestSuite:
     async def test_kinetic_swarm(self) -> bool:
         """Test 6-agent kinetic swarm."""
         try:
-            from control_plane.kinetic_swarm import SwarmRole, get_kinetic_swarm
+            from control_plane.dispatch.kinetic_swarm import SwarmRole, get_kinetic_swarm
 
             swarm = get_kinetic_swarm()
 
@@ -256,7 +256,7 @@ class PhaseF_TestSuite:
     async def test_leech_lattice(self) -> bool:
         """Test 24D Leech Lattice packing."""
         try:
-            from control_plane.leech_lattice_packing import get_leech_lattice
+            from control_plane.infra.leech_lattice_packing import get_leech_lattice
 
             lattice = get_leech_lattice()
 
@@ -306,7 +306,7 @@ class PhaseF_TestSuite:
     async def test_golay_codes(self) -> bool:
         """Test Golay[24,12] error correction."""
         try:
-            from control_plane.golay_error_correction import get_golay_codec
+            from control_plane.infra.golay_error_correction import get_golay_codec
 
             codec = get_golay_codec()
 
@@ -364,12 +364,12 @@ class PhaseF_TestSuite:
     async def test_symbolect_protocol(self) -> bool:
         """Test Symbolect transmission protocol."""
         try:
-            from control_plane.symbolect_protocol import (
+            from control_plane.runes.symbolect_protocol import (
                 TransmissionMode,
                 get_symbolect_protocol,
             )
-            from control_plane.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
-            from control_plane.toon_encoder import get_toon_encoder
+            from control_plane.runes.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
+            from control_plane.runes.toon_encoder import get_toon_encoder
 
             encoder = get_toon_encoder()
             protocol = get_symbolect_protocol()
@@ -424,11 +424,11 @@ class PhaseF_TestSuite:
     async def test_integration(self) -> bool:
         """Test Phase F integration with previous phases."""
         try:
-            from control_plane.kinetic_swarm import get_kinetic_swarm
-            from control_plane.symbolect_protocol import get_symbolect_protocol
-            from control_plane.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
-            from control_plane.toon_encoder import get_toon_encoder
-            from control_plane.triage_score import get_triage_scorer
+            from control_plane.dispatch.kinetic_swarm import get_kinetic_swarm
+            from control_plane.runes.symbolect_protocol import get_symbolect_protocol
+            from control_plane.runes.system_analyzer import CPUArchitecture, CPUProfile, MemoryProfile, SystemProfile
+            from control_plane.runes.toon_encoder import get_toon_encoder
+            from control_plane.core.triage_score import get_triage_scorer
 
             # Test 1: Full pipeline
             encoder = get_toon_encoder()
@@ -460,7 +460,7 @@ class PhaseF_TestSuite:
             print(f"  Step 2: TriageScore calculated: {score_result.overall_score:.3f}")
 
             # Step 3: Transmit via Symbolect
-            from control_plane.symbolect_protocol import TransmissionMode
+            from control_plane.runes.symbolect_protocol import TransmissionMode
             packet = await protocol.transmit_toon_crystal(crystal, TransmissionMode.COMPRESSED)
             print(f"  Step 3: Transmitted ({len(packet.data)} bytes): ✓")
 

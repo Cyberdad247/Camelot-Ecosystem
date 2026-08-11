@@ -33,7 +33,7 @@ class ValidationSuite:
         """Test Phase A: Hive IDE boot"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.hive_boot import HiveBoot
+            from control_plane.infra.hive_boot import HiveBoot
             boot = HiveBoot()
             await boot.initialize()
 
@@ -42,7 +42,7 @@ class ValidationSuite:
             assert terminals == 14, f"Expected 14 terminals, got {terminals}"
 
             # Verify Hermes bus online
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             hermes = HermesBus()
             channels = hermes.get_channels()
             assert len(channels) == 7, f"Expected 7 channels, got {len(channels)}"
@@ -66,9 +66,9 @@ class ValidationSuite:
         """Test Phase B: Knowledge Pyramid"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.agent_memory import AgentMemory
-            from control_plane.cloudbrain_sync import CloudBrainSync
-            from control_plane.distributed_memory import DistributedMemory
+            from control_plane.infra.agent_memory import AgentMemory
+            from control_plane.infra.cloudbrain_sync import CloudBrainSync
+            from control_plane.infra.distributed_memory import DistributedMemory
 
             # L1: Redis
             mem = DistributedMemory()
@@ -108,9 +108,9 @@ class ValidationSuite:
         """Test Phase C: Distance Travel (5-agent network)"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.agent_registry import AgentRegistry
-            from control_plane.distance_travel import DistanceTravel
-            from control_plane.switchboard import Switchboard
+            from control_plane.dispatch.agent_registry import AgentRegistry
+            from control_plane.dispatch.distance_travel import DistanceTravel
+            from control_plane.dispatch.switchboard import Switchboard
 
             # Register agents
             registry = AgentRegistry()
@@ -151,9 +151,9 @@ class ValidationSuite:
         """Test Phase D: QR Pill Bootstrap"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.qr_pill import QRPill
-            from control_plane.soul_oversight import SoulOversight
-            from control_plane.sovereign_commander import SovereignCommander
+            from control_plane.infra.qr_pill import QRPill
+            from control_plane.core.soul_oversight import SoulOversight
+            from control_plane.infra.sovereign_commander import SovereignCommander
 
             # Generate QR pill
             pill = QRPill()
@@ -188,9 +188,9 @@ class ValidationSuite:
         """Test Phase E: Bifrost Integration"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.bifrost_integration import BifrostIntegration
-            from control_plane.excalibur_preflight import ExcaliburPreflight
-            from control_plane.system_analyzer import SystemAnalyzer
+            from control_plane.dispatch.bifrost_integration import BifrostIntegration
+            from control_plane.infra.excalibur_preflight import ExcaliburPreflight
+            from control_plane.runes.system_analyzer import SystemAnalyzer
 
             # Analyze system
             analyzer = SystemAnalyzer()
@@ -226,10 +226,10 @@ class ValidationSuite:
         """Test Phase F: TOON Encoder + Kinetic Swarm"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.kinetic_swarm import get_kinetic_swarm
-            from control_plane.symbolect_protocol import get_symbolect_protocol
-            from control_plane.toon_encoder import get_toon_encoder
-            from control_plane.triage_score import get_triage_scorer
+            from control_plane.dispatch.kinetic_swarm import get_kinetic_swarm
+            from control_plane.runes.symbolect_protocol import get_symbolect_protocol
+            from control_plane.runes.toon_encoder import get_toon_encoder
+            from control_plane.core.triage_score import get_triage_scorer
 
             # TOON encoder
             encoder = get_toon_encoder()
@@ -280,11 +280,11 @@ class ValidationSuite:
         start = asyncio.get_event_loop().time()
         try:
             # Request enters Hive IDE (Phase A)
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             hermes = HermesBus()
 
             # Passes through soul router (Phase D)
-            from control_plane.soul_router import SoulRouter
+            from control_plane.core.soul_router import SoulRouter
             router = SoulRouter()
             intent = await router.parse_intent({
                 'command': 'test_dispatch'
@@ -292,19 +292,19 @@ class ValidationSuite:
             assert intent is not None, "Intent parsing failed"
 
             # Routed through Distance Travel (Phase C)
-            from control_plane.switchboard import Switchboard
+            from control_plane.dispatch.switchboard import Switchboard
             switchboard = Switchboard()
             result = await switchboard.route_request(intent)
             assert result is not None, "Switchboard routing failed"
 
             # Tier selected by Bifrost (Phase E)
-            from control_plane.bifrost_integration import BifrostIntegration
+            from control_plane.dispatch.bifrost_integration import BifrostIntegration
             bi = BifrostIntegration()
             tier = bi.get_current_tier()
             assert tier in [1, 2, 3], f"Invalid tier: {tier}"
 
             # Executed by Kinetic Swarm (Phase F)
-            from control_plane.kinetic_swarm import get_kinetic_swarm
+            from control_plane.dispatch.kinetic_swarm import get_kinetic_swarm
             swarm = get_kinetic_swarm()
             execution = await swarm.submit_task(
                 task_id="dispatch_test",
@@ -314,7 +314,7 @@ class ValidationSuite:
             assert execution is not None, "Swarm execution failed"
 
             # Result cached (Phase B)
-            from control_plane.distributed_memory import DistributedMemory
+            from control_plane.infra.distributed_memory import DistributedMemory
             mem = DistributedMemory()
             await mem.set(f"result:{intent.id}", json.dumps(result))
             cached = await mem.get(f"result:{intent.id}")
@@ -339,7 +339,7 @@ class ValidationSuite:
         """Test ledger immutability and consistency"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.provenance import Provenance
+            from control_plane.infra.provenance import Provenance
 
             prov = Provenance()
 
@@ -389,7 +389,7 @@ class ValidationSuite:
         """Test 3-tier memory hierarchy (L1→L1.5→L2)"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.memory_sync import MemorySync
+            from control_plane.infra.memory_sync import MemorySync
 
             sync = MemorySync()
 
@@ -398,7 +398,7 @@ class ValidationSuite:
             value = {"data": "test_value", "timestamp": "2026-06-18"}
 
             # Write to L1
-            from control_plane.distributed_memory import DistributedMemory
+            from control_plane.infra.distributed_memory import DistributedMemory
             l1 = DistributedMemory()
             await l1.set(key, json.dumps(value))
 
@@ -407,13 +407,13 @@ class ValidationSuite:
             assert cached_l1 is not None, "L1 write failed"
 
             # Test L1.5 (Qdrant) semantic store
-            from control_plane.agent_memory import AgentMemory
+            from control_plane.infra.agent_memory import AgentMemory
             l15 = AgentMemory()
             vec_id = await l15.store_vector("test_semantic", [0.1] * 384)
             assert vec_id is not None, "L1.5 write failed"
 
             # Test L2 (CloudBrain) sync
-            from control_plane.cloudbrain_sync import CloudBrainSync
+            from control_plane.infra.cloudbrain_sync import CloudBrainSync
             l2 = CloudBrainSync()
             status = l2.get_status()
             assert status in ['connected', 'offline'], "L2 status check failed"
@@ -437,7 +437,7 @@ class ValidationSuite:
         """Test error handling and recovery"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.agent_gateway import AgentGateway
+            from control_plane.dispatch.agent_gateway import AgentGateway
 
             gateway = AgentGateway()
 
@@ -470,8 +470,8 @@ class ValidationSuite:
         """Test HITL approval gates"""
         start = asyncio.get_event_loop().time()
         try:
-            from control_plane.sir_socrates import SirSocrates
-            from control_plane.soul_oversight import SoulOversight
+            from control_plane.core.sir_socrates import SirSocrates
+            from control_plane.core.soul_oversight import SoulOversight
 
             oversight = SoulOversight()
             socrates = SirSocrates()

@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 
-from control_plane.provenance import ProvenanceManager, VerificationRun
+from control_plane.infra.provenance import ProvenanceManager, VerificationRun
 
 
 def test_ledger_tamper_detection():

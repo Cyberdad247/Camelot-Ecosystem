@@ -96,7 +96,7 @@ class ConsensusLayer:
 
     async def _compute_match_score(self, agent_id: str, prompt: str) -> float:
         """Compute capability match score (simple heuristic)."""
-        from control_plane.agent_registry import get_agent
+        from control_plane.dispatch.agent_registry import get_agent
 
         agent = get_agent(agent_id)
         if not agent:
@@ -136,7 +136,7 @@ class ConsensusLayer:
         # Otherwise, try synthesis
         if use_synthesis:
             try:
-                from control_plane.cloudbrain_sync import query_cloud_brain
+                from control_plane.infra.cloudbrain_sync import query_cloud_brain
 
                 query = f"""
 Multiple agents proposed different solutions:
@@ -160,7 +160,7 @@ Focus on: correctness, efficiency, clarity.
         fallback_agents: Optional[list[str]] = None,
     ) -> Optional[str]:
         """Select best agent for specific capability."""
-        from control_plane.agent_registry import get_agent_registry
+        from control_plane.dispatch.agent_registry import get_agent_registry
 
         registry = get_agent_registry()
         candidates = registry.get_agents_with_capability(capability)
@@ -183,7 +183,7 @@ Focus on: correctness, efficiency, clarity.
         original_task: dict,
     ) -> Optional[str]:
         """Route task to alternate agent on primary failure."""
-        from control_plane.agent_registry import get_agent_registry
+        from control_plane.dispatch.agent_registry import get_agent_registry
 
         registry = get_agent_registry()
 

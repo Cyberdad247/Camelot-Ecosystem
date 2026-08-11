@@ -5,7 +5,7 @@ from datetime import timedelta
 from pathlib import Path
 
 from bin import camelot_shell_setup
-from control_plane import cockpit
+from control_plane.infra import cockpit
 
 
 def _bind_runtime(monkeypatch, tmp_path: Path) -> None:
@@ -135,7 +135,7 @@ def test_powershell_shell_setup_contains_cockpit_helpers():
 
 
 def test_camelot_parser_accepts_cockpit_commands():
-    from control_plane.camelot_cli import _build_parser
+    from control_plane.runes.camelot_cli import _build_parser
 
     parser = _build_parser()
     args = parser.parse_args(["cockpit", "exec", "//STATUS"])
@@ -147,7 +147,7 @@ def test_camelot_parser_accepts_cockpit_commands():
 
 def test_camelot_main_cockpit_refresh_json(monkeypatch, capsys):
     from bin import bifrost
-    from control_plane import camelot_cli
+    from control_plane.runes import camelot_cli
 
     class _Config:
         config_path = "test-config"

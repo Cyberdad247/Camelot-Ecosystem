@@ -21,7 +21,7 @@ try:
 except ImportError:
     requests = None
 
-from control_plane.taxonomy import KEYWORD_ROUTES, PRIVACY_KEYWORDS
+from control_plane.runes.taxonomy import KEYWORD_ROUTES, PRIVACY_KEYWORDS
 
 try:
     from importlib import import_module

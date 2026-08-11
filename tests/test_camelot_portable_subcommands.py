@@ -49,7 +49,7 @@ def test_omniroute_select_degrades_when_control_plane_unavailable(monkeypatch):
     # ``from name import x`` to raise ``ModuleNotFoundError`` immediately,
     # which simulates frozen-binary unavailability without poisoning
     # ``sys.path`` (the handler defensively re-roots via ``sys.path.insert``).
-    monkeypatch.setitem(sys.modules, "control_plane.omniroute_policies", None)
+    monkeypatch.setitem(sys.modules, "control_plane.dispatch.omniroute_policies", None)
     console = CapturingConsole()
     rc = cmd_omniroute(
         make_args(select="scaffold a hello-world Rust project"), console

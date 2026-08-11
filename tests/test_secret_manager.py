@@ -5,7 +5,7 @@ import pytest
 
 pytest.importorskip("cryptography")
 
-from control_plane.secret_manager import SecretManager  # noqa: E402
+from control_plane.infra.secret_manager import SecretManager  # noqa: E402
 
 
 def _mk(tmp_path) -> SecretManager:
@@ -65,7 +65,7 @@ def test_default_returned_for_missing(tmp_path):
 
 
 def test_looks_like_gemini_key():
-    from control_plane.secret_manager import looks_like_gemini_key
+    from control_plane.infra.secret_manager import looks_like_gemini_key
 
     # Real Gemini keys: AIza + 35 url-safe chars.
     assert looks_like_gemini_key("AIza" + "B" * 35) is True

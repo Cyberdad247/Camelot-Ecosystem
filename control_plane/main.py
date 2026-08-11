@@ -43,15 +43,15 @@ except Exception:
         def info(self, *args, **kwargs): pass
     logger = DummyLogger()
 
-from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
-from .deerflow_sandbox import DeerFlowSandbox
-from .omc_team import OMCTeam
-from .sarda_engine import SARDAEngine, SARDAResult
-from .soul_router import RouteDecision, SoulRouter
+from control_plane.infra.cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
+from control_plane.infra.deerflow_sandbox import DeerFlowSandbox
+from control_plane.infra.omc_team import OMCTeam
+from control_plane.infra.sarda_engine import SARDAEngine, SARDAResult
+from control_plane.core.soul_router import RouteDecision, SoulRouter
 
 # Phase H: Metrics collection
 try:
-    from .phase_h_integration import get_metrics
+    from control_plane.infra.phase_h_integration import get_metrics
     _METRICS = get_metrics()
 except Exception:
     _METRICS = None  # Graceful degradation if metrics unavailable

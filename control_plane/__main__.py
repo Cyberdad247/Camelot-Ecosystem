@@ -3,7 +3,7 @@ import argparse
 import json
 import sys
 
-from .runic_router import detect_and_route, list_runes, route_rune
+from control_plane.runes.runic_router import detect_and_route, list_runes, route_rune
 
 
 def main() -> None:

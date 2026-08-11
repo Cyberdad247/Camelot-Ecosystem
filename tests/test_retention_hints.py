@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 def test_intent_retention_classification():
-    from control_plane.cli_intercept import estimate_retention_class
+    from control_plane.infra.cli_intercept import estimate_retention_class
     
     # SCHEMA_STATIC: System-level, high recompute cost, high frequency
     assert estimate_retention_class("//BOOT") == "SCHEMA_STATIC"

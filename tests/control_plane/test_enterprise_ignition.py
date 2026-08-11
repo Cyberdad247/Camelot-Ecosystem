@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from control_plane.enterprise_ignition import render_markdown, run_enterprise_ignition
+from control_plane.infra.enterprise_ignition import render_markdown, run_enterprise_ignition
 
 
 def test_enterprise_ignition_payload_has_operator_surfaces() -> None:

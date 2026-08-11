@@ -1,5 +1,5 @@
 
-from control_plane import hyper_evolve
+from control_plane.infra import hyper_evolve
 
 
 def test_promote_mutation_approves_safe_rule(tmp_path, monkeypatch):

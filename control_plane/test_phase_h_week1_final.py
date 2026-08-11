@@ -9,8 +9,8 @@ import time
 import unittest
 from pathlib import Path
 
-from control_plane.orchestrator import Orchestrator
-from control_plane.phase_h_integration import get_metrics, init_metrics
+from control_plane.infra.orchestrator import Orchestrator
+from control_plane.infra.phase_h_integration import get_metrics, init_metrics
 
 
 class TestFullIntegration(unittest.TestCase):

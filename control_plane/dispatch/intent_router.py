@@ -15,7 +15,7 @@ from __future__ import annotations
 import re
 from typing import TYPE_CHECKING, Optional
 
-from control_plane.taxonomy import INTENT_KEYWORDS, INTENT_TERMINAL_MAP, IntentCategory
+from control_plane.runes.taxonomy import INTENT_KEYWORDS, INTENT_TERMINAL_MAP, IntentCategory
 
 try:
     from importlib import import_module
@@ -25,7 +25,7 @@ except ImportError:
     HydrationManager = None
 
 if TYPE_CHECKING:
-    from control_plane.switchboard import Switchboard, Terminal
+    from control_plane.dispatch.switchboard import Switchboard, Terminal
 
 
 def classify_intent(text: str) -> tuple[IntentCategory, float]:

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from control_plane.starship_assimilation import powershell_snippet, run_starship_assimilation, starship_config_text
+from control_plane.infra.starship_assimilation import powershell_snippet, run_starship_assimilation, starship_config_text
 
 
 def test_starship_config_uses_camelot_custom_module() -> None:

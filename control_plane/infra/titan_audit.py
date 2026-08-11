@@ -323,7 +323,7 @@ class TitanAudit:
 
         # Dependency audit
         try:
-            from control_plane.dependency_engine import DependencyEngine
+            from control_plane.infra.dependency_engine import DependencyEngine
             dep_engine = DependencyEngine(repo_root=self.target, hermes_enabled=False)
             dep_audit = dep_engine.audit()
             data["dependencies"] = {
@@ -348,8 +348,8 @@ class TitanAudit:
         # Excalibur preflight (hardware readiness)
         adjudication = {}  # safe default if except fires
         try:
-            from control_plane.excalibur_preflight import adjudicate
-            from control_plane.excalibur_preflight import audit as excalibur_audit
+            from control_plane.infra.excalibur_preflight import adjudicate
+            from control_plane.infra.excalibur_preflight import audit as excalibur_audit
             telemetry = excalibur_audit(self.target)
             adjudication = adjudicate(telemetry)
             data["excalibur"] = {
@@ -502,8 +502,8 @@ class TitanAudit:
 
         # Excalibur telemetry
         try:
-            from control_plane.excalibur_preflight import adjudicate
-            from control_plane.excalibur_preflight import audit as excalibur_audit
+            from control_plane.infra.excalibur_preflight import adjudicate
+            from control_plane.infra.excalibur_preflight import audit as excalibur_audit
             telemetry = excalibur_audit(self.target)
             adjudication = adjudicate(telemetry)
             data["telemetry"] = telemetry
@@ -530,7 +530,7 @@ class TitanAudit:
         # Compression nexus disk audit (skip in quick mode — too slow on large repos)
         if not self.quick:
             try:
-                from control_plane.compression_nexus import CompressionNexus
+                from control_plane.infra.compression_nexus import CompressionNexus
                 cn = CompressionNexus(repo_root=self.target, hermes_enabled=False)
                 disk_audit = cn.audit_disk(self.target)
                 data["compression"] = {
@@ -757,7 +757,7 @@ class TitanAudit:
     def _run_socrates(self) -> dict[str, Any]:
         """Run Sir Socrates on the audit target to verify Northstar alignment."""
         try:
-            from control_plane.sir_socrates import SirSocrates
+            from control_plane.core.sir_socrates import SirSocrates
             intent = f"Titan Audit v9000.50 on target: {self.target}"
             exam = SirSocrates().examine_all(intent)
             return {

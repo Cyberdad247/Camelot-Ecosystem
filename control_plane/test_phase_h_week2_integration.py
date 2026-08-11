@@ -12,8 +12,8 @@ import unittest
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from control_plane.phase_h_optimizer import OptimizerEngine
-from control_plane.phase_h_pattern_learner import PatternLearner
+from control_plane.infra.phase_h_optimizer import OptimizerEngine
+from control_plane.infra.phase_h_pattern_learner import PatternLearner
 
 sys.path.insert(0, str(Path(__file__).parent.parent / 'dashboards'))
 from phase_h_learning_dashboard import LearningDashboard

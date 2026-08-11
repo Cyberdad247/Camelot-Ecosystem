@@ -130,14 +130,14 @@ def test_gate_clears_a_benign_intent():
     With an empty or contradictory matrix every intent was BLOCKED, which looked
     like zero-trust but was really a broken policy load.
     """
-    from control_plane.anya_gate import AnyaGate
+    from control_plane.core.anya_gate import AnyaGate
 
     result = AnyaGate().process("what is 2+2")
     assert result.validation.iron_gate == "CLEARED", result.validation.issues
 
 
 def test_gate_still_escalates_a_destructive_intent():
-    from control_plane.anya_gate import AnyaGate
+    from control_plane.core.anya_gate import AnyaGate
 
     result = AnyaGate().process("delete the production database and drop the ledger")
     assert result.validation.iron_gate in ("BLOCKED", "HITL_REQUIRED"), (

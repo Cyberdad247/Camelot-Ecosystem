@@ -97,7 +97,7 @@ def _z3_verify_patch(job: Any) -> tuple[bool, str]:
     verifier silently disabled the safety gate for every patch.
     """
     try:
-        from .z3_verify import PatchIntent, verify_patch
+        from control_plane.infra.z3_verify import PatchIntent, verify_patch
     except Exception as exc:  # pragma: no cover - defensive import guard
         return False, (f"Z3 encoder unavailable ({exc}) — cannot verify patch "
                        f"safety; blocking. Install z3-solver or escalate to HITL.")

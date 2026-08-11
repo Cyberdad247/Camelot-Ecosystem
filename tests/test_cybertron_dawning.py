@@ -4,9 +4,9 @@ import subprocess
 import sys
 from types import SimpleNamespace
 
-from control_plane.harness import HarnessTask, SovereignHarness
+from control_plane.infra.harness import HarnessTask, SovereignHarness
 
-from control_plane import runic_router
+from control_plane.runes import runic_router
 from scripts import cybertron_dawning
 
 
@@ -118,7 +118,7 @@ def test_harness_executes_dawning_for_forge(monkeypatch):
         calls.append((args, kwargs))
         return SimpleNamespace(returncode=0, stdout="dawning ok", stderr="")
 
-    monkeypatch.setattr("control_plane.harness.subprocess.run", fake_run)
+    monkeypatch.setattr("control_plane.infra.harness.subprocess.run", fake_run)
 
     task = HarnessTask(
         id="forge-dawning",

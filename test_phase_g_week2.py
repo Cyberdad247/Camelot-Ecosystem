@@ -14,7 +14,7 @@ import asyncio
 import sys
 import time
 
-from control_plane.distributed_agent_registry import (
+from control_plane.infra.distributed_agent_registry import (
     AgentInfo,
     AgentScope,
     AgentStatus,

@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from control_plane.lady_m import SquireTriage
-from control_plane.versioning import get_dynamic_version
+from control_plane.infra.versioning import get_dynamic_version
 
 SCHEMA = "camelot.ascension-mode/v1"
 DEFAULT_RUNTIME_DIR = Path("03_VAULT/runtime_state")

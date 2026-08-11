@@ -15,7 +15,7 @@ from urllib.parse import urlparse
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
-from control_plane import frontier_nodes  # noqa: E402
+from control_plane.dispatch import frontier_nodes  # noqa: E402
 
 DEFAULT_DIST = REPO_ROOT / "02_FORGE" / "PORTAL_CORE" / "Anya_Dashboard" / "dist"
 RUNTIME_STATE = REPO_ROOT / "03_VAULT" / "runtime_state"

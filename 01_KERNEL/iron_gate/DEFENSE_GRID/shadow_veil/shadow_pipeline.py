@@ -240,7 +240,7 @@ class ShadowVeil:
         if not self._hermes_enabled:
             return
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             bus = HermesBus()
             bus.publish("shadow.threats", {
                 "source": "SHADOW_VEIL",

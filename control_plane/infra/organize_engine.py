@@ -524,7 +524,7 @@ class OrganizeEngine:
         if not self._hermes_enabled:
             return
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             HermesBus().publish(channel, {"source": "ORGANIZE_ENGINE", **payload})
         except Exception as exc:
             log.debug("[ORGANIZE] hermes emit failed: %s", exc)

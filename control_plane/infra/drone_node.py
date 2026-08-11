@@ -25,7 +25,7 @@ Run (on the drone, after `tailscale up --advertise-tags=tag:empire-drone`):
         --host 100.125.205.66 --port 9000
 
 Dispatch to it from the control plane:
-    from control_plane.drone_node import dispatch_to_drone
+    from control_plane.infra.drone_node import dispatch_to_drone
     dispatch_to_drone("http://100.125.205.66:9000", "KBA_CORE", "kba.status", {},
                       principal="sir_boris", secret=WEBHOOK_SECRET)
 """
@@ -46,18 +46,18 @@ from cartridge.tool_registry import ToolRegistry  # noqa: E402
 
 # Bridge core lives in 02_FORGE/cartridge (excluded from packaging); the adapter
 # path-inserts it. Import the adapter first so `cartridge.*` resolves afterwards.
-from control_plane.bifrost_sandbox_adapter import build_bridge, sign_body  # noqa: E402
+from control_plane.dispatch.bifrost_sandbox_adapter import build_bridge, sign_body  # noqa: E402
 from control_plane.cluster.http_daemon import HttpDaemon, post_json  # noqa: E402
 from control_plane._paths import REPO_ROOT
 
 # Sir Heimdall (perimeter guardian) + CloudBrain L2 (NotebookLM) — both optional,
 # both degrade gracefully so the drone runs even if they're unavailable.
 try:
-    from control_plane import heimdall_watch  # noqa: E402
+    from control_plane.infra import heimdall_watch  # noqa: E402
 except Exception:  # noqa: BLE001
     heimdall_watch = None
 try:
-    from control_plane import cloudbrain_sync  # noqa: E402
+    from control_plane.infra import cloudbrain_sync  # noqa: E402
 except Exception:  # noqa: BLE001
     cloudbrain_sync = None
 

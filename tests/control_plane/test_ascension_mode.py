@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from control_plane.ascension_mode import build_ascension_report, write_ascension_report
+from control_plane.runes.ascension_mode import build_ascension_report, write_ascension_report
 
 
 def test_build_ascension_report_scores_runtime_artifacts(tmp_path: Path) -> None:

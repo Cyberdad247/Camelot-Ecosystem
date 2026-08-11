@@ -63,7 +63,7 @@ class SimpleDistanceTravelTest:
     async def test_agent_registry(self) -> bool:
         """Verify agent registry and definitions."""
         try:
-            from control_plane.agent_registry import (
+            from control_plane.dispatch.agent_registry import (
                 get_agent_registry,
                 list_agents,
             )
@@ -100,7 +100,7 @@ class SimpleDistanceTravelTest:
     async def test_agent_capabilities(self) -> bool:
         """Verify agent capabilities mapping."""
         try:
-            from control_plane.agent_registry import get_agent_registry
+            from control_plane.dispatch.agent_registry import get_agent_registry
 
             registry = get_agent_registry()
 
@@ -132,7 +132,7 @@ class SimpleDistanceTravelTest:
     async def test_consensus_selection(self) -> bool:
         """Verify consensus layer agent selection."""
         try:
-            from control_plane.consensus_layer import get_consensus_layer
+            from control_plane.dispatch.consensus_layer import get_consensus_layer
 
             consensus = get_consensus_layer()
 
@@ -173,7 +173,7 @@ class SimpleDistanceTravelTest:
                 "rustclaw": "sir_ghost",
             }
 
-            from control_plane.agent_registry import list_agents
+            from control_plane.dispatch.agent_registry import list_agents
 
             all_agents = [a.agent_id for a in list_agents()]
 
@@ -195,8 +195,8 @@ class SimpleDistanceTravelTest:
     async def test_network_orchestration(self) -> bool:
         """Verify distance travel orchestration logic."""
         try:
-            from control_plane.agent_registry import get_agent_registry
-            from control_plane.distance_travel import get_distance_travel
+            from control_plane.dispatch.agent_registry import get_agent_registry
+            from control_plane.dispatch.distance_travel import get_distance_travel
 
             # Initialize
             dt = get_distance_travel()

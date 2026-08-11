@@ -52,7 +52,7 @@ class SecurityAuditor:
 
     async def test_input_validation(self):
         """Verify input validation on all entry points"""
-        from control_plane.agent_gateway import AgentGateway
+        from control_plane.dispatch.agent_gateway import AgentGateway
 
         # Test with malicious inputs
         test_payloads = [
@@ -85,8 +85,8 @@ class SecurityAuditor:
 
     async def test_authentication_gates(self):
         """Verify all sovereignty gates are armed"""
-        from control_plane.sir_socrates import SirSocrates
-        from control_plane.soul_oversight import SoulOversight
+        from control_plane.core.sir_socrates import SirSocrates
+        from control_plane.core.soul_oversight import SoulOversight
 
         oversight = SoulOversight()
         socrates = SirSocrates()
@@ -110,7 +110,7 @@ class SecurityAuditor:
         """Verify sensitive data encryption"""
         import os
 
-        from control_plane.pqcrypto_bridge import PQCryptoBridge
+        from control_plane.infra.pqcrypto_bridge import PQCryptoBridge
 
         crypto = PQCryptoBridge()
 
@@ -143,7 +143,7 @@ class SecurityAuditor:
 
     async def test_audit_logging(self):
         """Verify all critical actions are logged"""
-        from control_plane.provenance import Provenance
+        from control_plane.infra.provenance import Provenance
 
         prov = Provenance()
 
@@ -216,7 +216,7 @@ class PerformanceProfiler:
 
     async def profile_boot_sequence(self):
         """Profile system boot time"""
-        from control_plane.boot_sequence import BootSequence
+        from control_plane.infra.boot_sequence import BootSequence
 
         boot = BootSequence()
         start = time.time()
@@ -238,7 +238,7 @@ class PerformanceProfiler:
 
     async def profile_dispatch_latency(self):
         """Profile request dispatch latency"""
-        from control_plane.switchboard import Switchboard
+        from control_plane.dispatch.switchboard import Switchboard
 
         switchboard = Switchboard()
         latencies = []
@@ -285,7 +285,7 @@ class PerformanceProfiler:
         baseline_mem = process.memory_info().rss / 1024 / 1024  # MB
 
         # Simulate workload
-        from control_plane.kinetic_swarm import get_kinetic_swarm
+        from control_plane.dispatch.kinetic_swarm import get_kinetic_swarm
         swarm = get_kinetic_swarm()
 
         for i in range(50):
@@ -305,7 +305,7 @@ class PerformanceProfiler:
 
     async def profile_throughput(self):
         """Profile request throughput"""
-        from control_plane.agent_gateway import AgentGateway
+        from control_plane.dispatch.agent_gateway import AgentGateway
 
         gateway = AgentGateway()
 
@@ -359,8 +359,8 @@ class ResilienceTester:
 
     async def test_agent_failure_recovery(self):
         """Simulate agent failure and verify recovery"""
-        from control_plane.agent_registry import AgentRegistry
-        from control_plane.distance_travel import DistanceTravel
+        from control_plane.dispatch.agent_registry import AgentRegistry
+        from control_plane.dispatch.distance_travel import DistanceTravel
 
         registry = AgentRegistry()
         dt = DistanceTravel()
@@ -390,7 +390,7 @@ class ResilienceTester:
 
     async def test_memory_pressure(self):
         """Test system behavior under memory pressure"""
-        from control_plane.bifrost_integration import BifrostIntegration
+        from control_plane.dispatch.bifrost_integration import BifrostIntegration
 
         bi = BifrostIntegration()
 
@@ -420,7 +420,7 @@ class ResilienceTester:
 
     async def test_network_latency(self):
         """Test system behavior under network latency"""
-        from control_plane.distance_travel import DistanceTravel
+        from control_plane.dispatch.distance_travel import DistanceTravel
 
         dt = DistanceTravel()
 
@@ -444,7 +444,7 @@ class ResilienceTester:
 
     async def test_cascade_failure_prevention(self):
         """Verify cascade failure prevention (circuit breaker)"""
-        from control_plane.agent_gateway import AgentGateway
+        from control_plane.dispatch.agent_gateway import AgentGateway
 
         gateway = AgentGateway()
 
@@ -468,7 +468,7 @@ class ResilienceTester:
 
     async def test_data_consistency(self):
         """Verify data consistency under concurrent operations"""
-        from control_plane.distributed_memory import DistributedMemory
+        from control_plane.infra.distributed_memory import DistributedMemory
 
         mem = DistributedMemory()
 

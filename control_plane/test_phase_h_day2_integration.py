@@ -36,7 +36,7 @@ class TestOrchestratorMetrics(unittest.TestCase):
 
     def test_orchestrator_write_metrics(self):
         """Test that orchestrator records write operations"""
-        from control_plane.orchestrator import Orchestrator
+        from control_plane.infra.orchestrator import Orchestrator
 
         self.orch = Orchestrator(db_path=self.db_path)
 
@@ -49,7 +49,7 @@ class TestOrchestratorMetrics(unittest.TestCase):
 
     def test_orchestrator_create_job(self):
         """Test that orchestrator records job creation"""
-        from control_plane.orchestrator import Orchestrator
+        from control_plane.infra.orchestrator import Orchestrator
 
         self.orch = Orchestrator(db_path=self.db_path)
 
@@ -62,7 +62,7 @@ class TestOrchestratorMetrics(unittest.TestCase):
 
     def test_orchestrator_list_jobs(self):
         """Test that orchestrator records read operations"""
-        from control_plane.orchestrator import Orchestrator
+        from control_plane.infra.orchestrator import Orchestrator
 
         self.orch = Orchestrator(db_path=self.db_path)
 
@@ -142,7 +142,7 @@ class TestPerformanceRegression(unittest.TestCase):
         """Test orchestrator operations stay fast"""
         import tempfile
 
-        from control_plane.orchestrator import Orchestrator
+        from control_plane.infra.orchestrator import Orchestrator
 
         temp_dir = tempfile.TemporaryDirectory()
         try:

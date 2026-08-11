@@ -12,13 +12,13 @@ from __future__ import annotations
 import asyncio
 from typing import Dict, List
 
-from control_plane.distributed_ledger_consensus import (
+from control_plane.infra.distributed_ledger_consensus import (
     ConsensusMessage,
     ConsensusPhase,
     DistributedConsensus,
     NodeRole,
 )
-from control_plane.observability import traced_op
+from control_plane.infra.observability import traced_op
 
 from .http_daemon import HttpDaemon, call_async, fire_async, get_json, post_json
 

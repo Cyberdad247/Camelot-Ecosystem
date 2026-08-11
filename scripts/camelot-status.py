@@ -96,7 +96,7 @@ if token:
     sidecar_status = _http_status("http://127.0.0.1:8011/v1/bifrost/status", token=token)
     check("Bifrost Sidecar auth", sidecar_status == 200, f"/v1/bifrost/status={sidecar_status}", warn_only=True)
 try:
-    from control_plane.nano_swarm_runtime import write_runtime_status
+    from control_plane.infra.nano_swarm_runtime import write_runtime_status
 
     nano_swarm_status = write_runtime_status()
     check(

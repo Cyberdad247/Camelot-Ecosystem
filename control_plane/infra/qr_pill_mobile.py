@@ -521,7 +521,7 @@ class MobileQRPillActivation:
             session.activation_status = "in_progress"
 
             # Send activation to CAMELOT-OS backend
-            from control_plane.qr_pill import get_qr_pill
+            from control_plane.infra.qr_pill import get_qr_pill
 
             pill = get_qr_pill(pill_id)
             activation_success = await pill.activate()

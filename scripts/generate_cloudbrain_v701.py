@@ -48,7 +48,7 @@ def rel(path: Path) -> str:
 
 
 def load_terminals() -> list[dict[str, Any]]:
-    from control_plane.switchboard import TERMINAL_REGISTRY
+    from control_plane.dispatch.switchboard import TERMINAL_REGISTRY
 
     terminals: list[dict[str, Any]] = []
     for terminal in TERMINAL_REGISTRY.values():
@@ -59,7 +59,7 @@ def load_terminals() -> list[dict[str, Any]]:
 
 
 def load_soul_router() -> dict[str, Any]:
-    from control_plane import soul_router
+    from control_plane.core import soul_router
 
     return {
         "equation": "S_omega = 0.20*V + 0.35*M + 0.30*P + 0.15*E",

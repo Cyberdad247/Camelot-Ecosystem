@@ -16,8 +16,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from control_plane.cloudbrain_mnemosyne_audit import run_lady_mnemosyne_cloudbrain_audit
-from control_plane.hermes_bridge import HermesBus
+from control_plane.infra.cloudbrain_mnemosyne_audit import run_lady_mnemosyne_cloudbrain_audit
+from control_plane.infra.hermes_bridge import HermesBus
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 RUNTIME_DIR = REPO_ROOT / "03_VAULT" / "runtime_state"

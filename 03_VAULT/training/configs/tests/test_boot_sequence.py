@@ -3,9 +3,9 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
-from control_plane.cloud_services import CloudServiceName
+from control_plane.infra.cloud_services import CloudServiceName
 
-from control_plane import boot_sequence
+from control_plane.infra import boot_sequence
 
 
 class _Config:

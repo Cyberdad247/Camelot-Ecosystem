@@ -4,8 +4,8 @@ import argparse
 import json
 from pathlib import Path
 
-from control_plane.notebooklm_graphify_bridge import mirror_notebooklm_to_graphify
-from control_plane.notebooklm_graphify_manifest import write_manifest
+from control_plane.infra.notebooklm_graphify_bridge import mirror_notebooklm_to_graphify
+from control_plane.infra.notebooklm_graphify_manifest import write_manifest
 
 
 def _build_parser() -> argparse.ArgumentParser:

@@ -11,7 +11,7 @@ import unittest
 from datetime import datetime, timedelta
 from pathlib import Path
 
-from control_plane.phase_h_pattern_learner import Pattern, PatternLearner
+from control_plane.infra.phase_h_pattern_learner import Pattern, PatternLearner
 
 
 class TestPatternLearner(unittest.TestCase):

@@ -1,6 +1,6 @@
 """EXCALIBUR Phase 3 acceptance tests — FirnFlow L1/L2 memory."""
 import pytest
-from control_plane.firnflow import FirnFlow
+from control_plane.infra.firnflow import FirnFlow
 
 
 @pytest.fixture

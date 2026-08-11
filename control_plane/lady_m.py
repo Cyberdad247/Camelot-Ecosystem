@@ -19,8 +19,11 @@ from pathlib import Path
 from typing import Any
 import sys
 
-# Connect to KERNEL for Cloudbrain
-sys.path.append(str(CAMELOT_ROOT / "01_KERNEL"))
+# Connect to KERNEL for Cloudbrain. CAMELOT_ROOT was referenced here but never
+# defined — the module raised NameError on import for anyone who touched it.
+from control_plane._paths import REPO_ROOT
+
+sys.path.append(str(REPO_ROOT / "01_KERNEL"))
 try:
     from memory.cloudbrain_connector import CloudBrainConnector
 except ImportError:
@@ -81,23 +84,28 @@ class SquireTriage:
         
         for root, dirs, files in os.walk(scan_path):
             dirs[:] = [d for d in dirs if d not in ignore_dirs]
+            # The body below was de-indented out of this loop, so it ran once per
+            # *directory* against whichever `fp` the loop happened to leave bound
+            # — and raised UnboundLocalError outright when a directory was empty.
+            # Latent because the module could not be imported at all (CAMELOT_ROOT
+            # NameError above).
             for file in files:
                 fp = Path(root) / file
 
-            # Secret scan
-            try:
-                text = fp.read_text(encoding="utf-8", errors="replace")
-            except OSError:
-                continue
-            for pat in self.SECRET_PATTERNS:
-                if pat.lower() in text.lower() and "boolean" not in text.lower()[:200]:
-                    found_secrets.append(f"{fp.name}:{pat}")
-                    risk += 30
+                # Secret scan
+                try:
+                    text = fp.read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    continue
+                for pat in self.SECRET_PATTERNS:
+                    if pat.lower() in text.lower() and "boolean" not in text.lower()[:200]:
+                        found_secrets.append(f"{fp.name}:{pat}")
+                        risk += 30
 
-            # Dead asset detection
-            if fp.suffix in (".pyc", ".cache", ".bak", ".tmp") and fp.stat().st_size == 0:
-                dead.append(str(fp))
-                risk += 5
+                # Dead asset detection
+                if fp.suffix in (".pyc", ".cache", ".bak", ".tmp") and fp.stat().st_size == 0:
+                    dead.append(str(fp))
+                    risk += 5
 
         if risk >= RISK_THRESHOLD:
             recs.append("HITL gate triggered: review secret disclosures before proceeding.")

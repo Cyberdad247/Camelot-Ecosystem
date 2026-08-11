@@ -12,13 +12,13 @@ import asyncio
 import time
 from typing import Dict, List
 
-from control_plane.distributed_knowledge_sync import (
+from control_plane.infra.distributed_knowledge_sync import (
     DistributedKnowledgeSync,
     ReplicationAck,
     SyncEvent,
     SyncPhase,
 )
-from control_plane.observability import traced_op
+from control_plane.infra.observability import traced_op
 
 from .http_daemon import HttpDaemon, call_async, post_json
 

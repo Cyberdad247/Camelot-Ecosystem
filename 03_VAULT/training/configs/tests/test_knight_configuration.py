@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from control_plane.knight_configuration import write_knight_configuration
+from control_plane.core.knight_configuration import write_knight_configuration
 
 
 def test_write_knight_configuration_writes_runtime_artifact(tmp_path: Path):

@@ -10,7 +10,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 
 import pytest
-from control_plane.viking_block_protocol import (
+from control_plane.infra.viking_block_protocol import (
     DEFAULT_MAX_SKEW_SECONDS,
     DEFAULT_SECRET_KEY_ENV,
     VIKING_SCHEME,

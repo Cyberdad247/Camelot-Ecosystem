@@ -63,7 +63,7 @@ async def sir_helio_endpoint(query: str, session_id: str = "session_001"):
     if _camelot_root not in sys.path:
         sys.path.insert(0, _camelot_root)
     try:
-        from control_plane.pydantic_ai_knight import run_sir_helio
+        from control_plane.infra.pydantic_ai_knight import run_sir_helio
         result = await run_sir_helio(query, session_id)
         return {"status": "SUCCESS", "result": result}
     except ImportError:

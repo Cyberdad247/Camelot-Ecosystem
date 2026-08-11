@@ -21,7 +21,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Iterable, Literal, Sequence
 
-from .ledger_sync import compute_entry_hash, ledger_status
+from control_plane.infra.ledger_sync import compute_entry_hash, ledger_status
 
 CheckStatus = Literal["PASS", "WARN", "FAIL", "UNVERIFIED", "SKIP"]
 ClaimClass = Literal["confirmed", "planned", "aspirational", "rejected"]
@@ -297,7 +297,7 @@ def _required_boot_contract(context: TriageContext) -> CheckResult:
 
 
 def _bio_swarm_runtime(context: TriageContext) -> CheckResult:
-    from .bio_swarm_runtime import read_bio_swarm_status
+    from control_plane.infra.bio_swarm_runtime import read_bio_swarm_status
 
     state = read_bio_swarm_status(context.root)
     release = state.get("release") if isinstance(state.get("release"), dict) else {}

@@ -25,7 +25,7 @@ from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceR
 from .codex_integration import boot_codex_integration
 from .excalibur_preflight import boot_excalibur_preflight
 from .heimdall_bifrost_governance import boot_heimdall_bifrost_governance
-from .knight_configuration import write_knight_configuration
+from control_plane.core.knight_configuration import write_knight_configuration
 from .nano_swarm_runtime import boot_nano_swarm_runtime
 from .orchestration_state import summarize_boot_results
 from .symbiotic_maintenance import boot_symbiotic_maintenance
@@ -703,7 +703,7 @@ def boot_hermes_omniroute_orchestrator(home: Path) -> tuple[bool, str]:
     }
 
     try:
-        from control_plane.switchboard import TERMINAL_REGISTRY
+        from control_plane.dispatch.switchboard import TERMINAL_REGISTRY
 
         hermes = TERMINAL_REGISTRY.get("sir_hermes")
         free_terminals = sorted(

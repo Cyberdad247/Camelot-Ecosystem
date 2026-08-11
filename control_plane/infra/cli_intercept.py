@@ -7,7 +7,7 @@ Every camelot-cli command passes through this intercept layer which:
 4. Dispatches execution to the appropriate backend (CLIProxyAPI, Ollama, or direct)
 
 Usage:
-    from control_plane.cli_intercept import CLIIntercept
+    from control_plane.infra.cli_intercept import CLIIntercept
     intercept = CLIIntercept()
     result = intercept.process("critique this architecture")
 """
@@ -24,8 +24,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .main import ControlPlane, TaskPayload
-from .soul_router import PRIVACY_KEYWORDS, RouteDecision, SoulRouter
+from control_plane.main import ControlPlane, TaskPayload
+from control_plane.core.soul_router import PRIVACY_KEYWORDS, RouteDecision, SoulRouter
 
 CAMELOT_OS = Path(os.environ.get("CAMELOT_OS", Path.home() / "CAMELOT_OS"))
 OMNIROUTE_CONFIG = CAMELOT_OS / "03_VAULT" / "training" / "configs" / "config" / "omniroute.json"

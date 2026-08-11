@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from control_plane.notebooklm_graphify_bridge import (
+from control_plane.infra.notebooklm_graphify_bridge import (
     build_graphify_command,
     materialize_graphify_corpus,
     notebooklm_state_to_graph_context,

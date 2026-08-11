@@ -20,8 +20,8 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import List, Optional
 
-from control_plane.golay_error_correction import get_golay_codec
-from control_plane.toon_encoder import TOONCrystal, get_toon_encoder
+from control_plane.infra.golay_error_correction import get_golay_codec
+from control_plane.runes.toon_encoder import TOONCrystal, get_toon_encoder
 
 
 class TransmissionMode(str, Enum):
@@ -72,7 +72,7 @@ class SymbolectProtocol:
         crystal: TOONCrystal,
     ) -> TransmissionPacket:
         """Direct JSON transmission (full size)."""
-        from control_plane.toon_encoder import asdict
+        from control_plane.runes.toon_encoder import asdict
         data = json.dumps(asdict(crystal)).encode()
         checksum = self._calculate_checksum(data)
 

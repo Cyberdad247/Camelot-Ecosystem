@@ -152,7 +152,7 @@ def _cmd_update() -> None:
 
 
 def _cmd_cockpit() -> None:
-    from control_plane.camelot_cli import main as control_main
+    from control_plane.runes.camelot_cli import main as control_main
 
     raise SystemExit(control_main())
 
@@ -308,7 +308,7 @@ def main() -> None:
 
     # Anything else (flags, --knight, etc.) → forward to warp
     if first and not first.startswith("-"):
-        from control_plane.camelot_cli import main as control_main
+        from control_plane.runes.camelot_cli import main as control_main
         raise SystemExit(control_main())
 
     _cmd_warp()

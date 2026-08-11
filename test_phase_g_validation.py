@@ -15,9 +15,9 @@ import asyncio
 import sys
 import time
 
-from control_plane.distributed_agent_registry import AgentStatus, DistributedAgentRegistry
-from control_plane.distributed_knowledge_sync import DistributedKnowledgeSync, SyncPhase
-from control_plane.distributed_ledger_consensus import DistributedConsensus, NodeRole
+from control_plane.infra.distributed_agent_registry import AgentStatus, DistributedAgentRegistry
+from control_plane.infra.distributed_knowledge_sync import DistributedKnowledgeSync, SyncPhase
+from control_plane.infra.distributed_ledger_consensus import DistributedConsensus, NodeRole
 
 
 class Phase_G_SystemValidation:
@@ -128,7 +128,7 @@ class Phase_G_SystemValidation:
             registry.register_local_agent("coord_1", 8403, "coordinator", {"routing"})
 
             # Simulate agents on node_2
-            from control_plane.distributed_agent_registry import AgentInfo, AgentScope
+            from control_plane.infra.distributed_agent_registry import AgentInfo, AgentScope
 
             agent2 = AgentInfo(
                 agent_id="forge_2",
@@ -237,7 +237,7 @@ class Phase_G_SystemValidation:
     async def test_cross_instance_agent_routing(self):
         """Test: Agent routing across instances"""
         try:
-            from control_plane.distributed_agent_registry import AgentInfo, AgentScope
+            from control_plane.infra.distributed_agent_registry import AgentInfo, AgentScope
 
             registry = DistributedAgentRegistry("node_1", ["node_2"])
 

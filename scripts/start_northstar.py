@@ -304,7 +304,7 @@ async def run_test_suite_async() -> bool:
             sys.path.insert(0, str(HOME))
             
         from audio_session import AudioSession
-        from control_plane.switchboard import Terminal
+        from control_plane.dispatch.switchboard import Terminal
         
         session = AudioSession()
         

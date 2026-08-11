@@ -116,7 +116,7 @@ class KnightSelfEnhancer:
     async def _update_tasks(self, dispatch_event: DispatchEvent, quality: dict) -> None:
         """Update tasks.md with completed task."""
         try:
-            from control_plane.knight_knowledgebase import get_knowledgebase
+            from control_plane.core.knight_knowledgebase import get_knowledgebase
 
             kb = get_knowledgebase()
             tasks = await kb.load_tasks(dispatch_event.knight_id)
@@ -151,7 +151,7 @@ class KnightSelfEnhancer:
     ) -> None:
         """Update verification.md with quality results."""
         try:
-            from control_plane.knight_knowledgebase import get_knowledgebase
+            from control_plane.core.knight_knowledgebase import get_knowledgebase
 
             kb = get_knowledgebase()
             verification = await kb.load_verification(dispatch_event.knight_id)
@@ -201,7 +201,7 @@ class KnightSelfEnhancer:
     ) -> None:
         """Store insights in CloudBrain."""
         try:
-            from control_plane.cloudbrain_sync import query_cloud_brain
+            from control_plane.infra.cloudbrain_sync import query_cloud_brain
 
             # Extract key insight
             insight = {
@@ -231,7 +231,7 @@ class KnightSelfEnhancer:
     ) -> None:
         """Index dispatch in Qdrant (symbol compression)."""
         try:
-            from control_plane.symbol_compressor import compress_dispatch
+            from control_plane.infra.symbol_compressor import compress_dispatch
 
             await compress_dispatch(
                 dispatch_id=dispatch_event.dispatch_id,
@@ -250,7 +250,7 @@ class KnightSelfEnhancer:
     async def get_knight_insights(self, knight_id: str) -> dict:
         """Get self-enhancement insights for a knight."""
         try:
-            from control_plane.knight_knowledgebase import get_knowledgebase
+            from control_plane.core.knight_knowledgebase import get_knowledgebase
 
             kb = get_knowledgebase()
             verification = await kb.load_verification(knight_id)

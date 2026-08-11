@@ -66,7 +66,7 @@ class DistanceTravelTester:
     async def test_agent_registry(self) -> bool:
         """Verify agent registry."""
         try:
-            from control_plane.agent_registry import get_agent_registry
+            from control_plane.dispatch.agent_registry import get_agent_registry
 
             registry = get_agent_registry()
             agents = registry.list_agents()
@@ -88,7 +88,7 @@ class DistanceTravelTester:
     async def test_distributed_memory(self) -> bool:
         """Verify distributed memory (Redis)."""
         try:
-            from control_plane.distributed_memory import get_distributed_memory
+            from control_plane.infra.distributed_memory import get_distributed_memory
 
             dm = get_distributed_memory()
 
@@ -111,7 +111,7 @@ class DistanceTravelTester:
     async def test_consensus_layer(self) -> bool:
         """Verify consensus layer."""
         try:
-            from control_plane.consensus_layer import get_consensus_layer
+            from control_plane.dispatch.consensus_layer import get_consensus_layer
 
             consensus = get_consensus_layer()
 
@@ -127,7 +127,7 @@ class DistanceTravelTester:
     async def test_memory_sync(self) -> bool:
         """Verify memory sync."""
         try:
-            from control_plane.memory_sync import get_memory_syncer
+            from control_plane.infra.memory_sync import get_memory_syncer
 
             syncer = get_memory_syncer()
 
@@ -143,7 +143,7 @@ class DistanceTravelTester:
     async def test_agent_gateway(self) -> bool:
         """Verify agent gateway."""
         try:
-            from control_plane.agent_gateway import get_agent_gateway
+            from control_plane.dispatch.agent_gateway import get_agent_gateway
 
             gateway = get_agent_gateway()
 
@@ -161,7 +161,7 @@ class DistanceTravelTester:
         print("  Testing Hermes → OpenClaw dispatch...")
 
         try:
-            from control_plane.distance_travel import ask_agent
+            from control_plane.dispatch.distance_travel import ask_agent
 
             # Simple dispatch with short timeout
             chunks = []
@@ -195,7 +195,7 @@ class DistanceTravelTester:
         print("  Testing parallel dispatch (Hermes → 3 agents)...")
 
         try:
-            from control_plane.distance_travel import ask_agents
+            from control_plane.dispatch.distance_travel import ask_agents
 
             # Parallel dispatch with timeout per agent
             try:
@@ -223,7 +223,7 @@ class DistanceTravelTester:
         print("  Testing consensus routing...")
 
         try:
-            from control_plane.consensus_layer import get_consensus_layer
+            from control_plane.dispatch.consensus_layer import get_consensus_layer
 
             consensus = get_consensus_layer()
 
@@ -244,7 +244,7 @@ class DistanceTravelTester:
     async def test_network_status(self) -> bool:
         """Test network status."""
         try:
-            from control_plane.distance_travel import get_distance_travel
+            from control_plane.dispatch.distance_travel import get_distance_travel
 
             dt = get_distance_travel()
 

@@ -366,7 +366,7 @@ class SovereignHarness:
                 try:
                     from .lord_archivist import run_gep_scan
                 except ImportError:
-                    from control_plane.lord_archivist import run_gep_scan
+                    from control_plane.infra.lord_archivist import run_gep_scan
                 report = run_gep_scan()
                 gaps = len(report.skill_gaps)
                 patterns = len(report.fail_patterns)
@@ -433,7 +433,7 @@ class SovereignHarness:
                 try:
                     from .openclaw import run_openclaw_triage
                 except ImportError:
-                    from control_plane.openclaw import run_openclaw_triage
+                    from control_plane.infra.openclaw import run_openclaw_triage
                 report = run_openclaw_triage(probe_cache=self._probe_cache)
                 _log(
                     f"[OPENCLAW] {report['status']} — "
@@ -485,9 +485,9 @@ class SovereignHarness:
         while self._running:
             try:
                 try:
-                    from .switchboard import probe_all, summary
+                    from control_plane.dispatch.switchboard import probe_all, summary
                 except ImportError:
-                    from control_plane.switchboard import probe_all, summary
+                    from control_plane.dispatch.switchboard import probe_all, summary
                 await probe_all()
                 s = summary()
                 dark = [k for k, v in s.items() if v == "dark"]
@@ -599,7 +599,7 @@ class SovereignHarness:
             try:
                 from .lord_archivist import run_gep_scan
             except ImportError:
-                from control_plane.lord_archivist import run_gep_scan
+                from control_plane.infra.lord_archivist import run_gep_scan
             report = run_gep_scan()
             return {"gaps": report.skill_gaps, "patterns": len(report.fail_patterns), "xp": len(report.xp_entries)}
 
@@ -644,9 +644,9 @@ class SovereignHarness:
             if not script.exists():
                 return {"status": "failed", "error": f"missing dawning script: {script}"}
             try:
-                from .runic_router import parse_rune
+                from control_plane.runes.runic_router import parse_rune
             except ImportError:
-                from control_plane.runic_router import parse_rune
+                from control_plane.runes.runic_router import parse_rune
             parsed = parse_rune(task.directive)
             project_name = parsed[1] if parsed else "default_nexus"
             env = os.environ.copy()
@@ -672,9 +672,9 @@ class SovereignHarness:
         # Runic command dispatch
         if task.directive.startswith("//") or task.directive.startswith("Omega_"):
             try:
-                from .runic_router import parse_rune
+                from control_plane.runes.runic_router import parse_rune
             except ImportError:
-                from control_plane.runic_router import parse_rune
+                from control_plane.runes.runic_router import parse_rune
             parsed = parse_rune(task.directive)
             if parsed:
                 rune, param = parsed

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from control_plane.critical_thinking import Evidence, universal_knight_protocol
+from control_plane.runes.critical_thinking import Evidence, universal_knight_protocol
 
 
 def test_universal_knight_protocol_returns_qualified_frame() -> None:

@@ -13,13 +13,13 @@ import asyncio
 import time
 from typing import Dict, List
 
-from control_plane.distributed_agent_registry import (
+from control_plane.infra.distributed_agent_registry import (
     AgentInfo,
     AgentScope,
     AgentStatus,
     DistributedAgentRegistry,
 )
-from control_plane.observability import traced_op
+from control_plane.infra.observability import traced_op
 
 from .http_daemon import HttpDaemon, call_async, post_json
 

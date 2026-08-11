@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 
-from control_plane.toon_encoder import TOONv2Diff, compute_dict_diff
+from control_plane.runes.toon_encoder import TOONv2Diff, compute_dict_diff
 
 
 def test_compute_dict_diff():

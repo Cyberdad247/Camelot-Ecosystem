@@ -1,7 +1,9 @@
 import json
 import subprocess
 
-from control_plane import boot_sequence, runic_router
+from control_plane.infra import boot_sequence
+
+from control_plane.runes import runic_router
 
 
 def test_boot_rune_points_to_single_awaken_command(tmp_path, monkeypatch):

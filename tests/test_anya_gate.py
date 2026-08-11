@@ -1,7 +1,7 @@
 """EXCALIBUR Phase 2 acceptance tests — AnyaGate triage + risk_entropy."""
 import pytest
-from control_plane.anya_gate import AnyaGate
-from control_plane.factory_lane import TriageScore
+from control_plane.core.anya_gate import AnyaGate
+from control_plane.core.factory_lane import TriageScore
 
 
 @pytest.fixture

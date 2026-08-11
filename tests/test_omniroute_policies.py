@@ -8,7 +8,7 @@ DOWNSTREAM of soul_oversight.pre_execute — never pre-empt it.
 from __future__ import annotations
 
 import pytest
-from control_plane.omniroute_policies import (
+from control_plane.dispatch.omniroute_policies import (
     LANE_CLIPROXY_HEAVY_REASONING,
     LANE_DEFAULT,
     LANE_OMNI_ROUTE_CODEX,
@@ -85,7 +85,7 @@ def test_lane_signal_is_label_not_gate():
             f"LaneSignal must not be gate-shaped; got forbidden attr {forbidden_attr!r}"
         )
     # The module itself must not export any gate-shaped symbol.
-    import control_plane.omniroute_policies as mod
+    import control_plane.dispatch.omniroute_policies as mod
     for forbidden_export in ("GateDecision", "pre_execute", "approve", "deny", "block"):
         assert not hasattr(mod, forbidden_export), (
             f"omniroute_policies must not export gate-shaped {forbidden_export!r}"
@@ -131,7 +131,7 @@ def test_lane_module_is_self_contained_no_upstream_dependencies():
     asserts none of them originate from an upstream `control_plane.*`
     module.  Stdlib-only is enforced via the `__module__` tag.
     """
-    import control_plane.omniroute_policies as mod
+    import control_plane.dispatch.omniroute_policies as mod
 
     # Upstream modules lane signals must NEVER couple to.
     upstream_modules = {
@@ -187,7 +187,7 @@ def test_lane_module_source_ast_forbids_upstream_control_plane_imports():
     import ast
     import inspect
 
-    import control_plane.omniroute_policies as mod
+    import control_plane.dispatch.omniroute_policies as mod
 
     upstream_substrings = {
         "soul_oversight",

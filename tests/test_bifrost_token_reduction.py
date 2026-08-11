@@ -3,7 +3,7 @@ from __future__ import annotations
 import asyncio
 from unittest.mock import patch
 
-from control_plane.bifrost import Bifrost
+from control_plane.dispatch.bifrost import Bifrost
 
 
 def test_bifrost_token_reduction_enrichment():
@@ -25,7 +25,7 @@ def test_bifrost_token_reduction_enrichment():
         # Bind the mock method instance
         bifrost._stream_openai = lambda *args, **kwargs: mock_stream_openai(bifrost, *args, **kwargs)
 
-        with patch("control_plane.symbol_compressor.find_similar_dispatches", return_value=mock_similar) as mock_find:
+        with patch("control_plane.infra.symbol_compressor.find_similar_dispatches", return_value=mock_similar) as mock_find:
             results = []
             async for chunk in bifrost.stream(
                 terminal_id="sir_boris",

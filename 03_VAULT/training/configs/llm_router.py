@@ -377,7 +377,7 @@ def _soul_route_provider(messages: list) -> Optional[tuple[str, str]]:
     then routes through the MFOE matrix to select the optimal engine.
     """
     try:
-        from control_plane.cli_intercept import CLIIntercept
+        from control_plane.infra.cli_intercept import CLIIntercept
         intercept = CLIIntercept()
 
         # Extract the latest user message as the intent

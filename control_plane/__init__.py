@@ -7,60 +7,30 @@
 #   infra/    — infrastructure, memory, sync, observability, bridges, phase_h, ...
 #   cluster/  — swarm daemons (agents_daemon, consensus_daemon, ...)
 #
-# A meta-path finder intercepts ``control_plane.<module>`` imports and
-# redirects them to the correct subdirectory, so legacy code like
-# ``from control_plane.anya_gate import AnyaGate`` continues to work.
-
-from __future__ import annotations
-
-import importlib.util
-import sys
-from pathlib import Path
-from typing import Any
-
-_PACKAGE_DIR = Path(__file__).resolve().parent
-_SUBDIRS = ("core", "dispatch", "runes", "infra", "cluster")
-
-
-class _ControlPlaneModuleFinder:
-    """Meta-path finder that redirects ``control_plane.<name>`` imports
-    to ``control_plane.<subdir>.<name>`` when the bare module has been
-    moved into a subdirectory."""
-
-    def find_spec(self, fullname: str, path: Any, target: Any = None) -> Any:
-        if not fullname.startswith("control_plane."):
-            return None
-        # Skip the package itself and dunder modules
-        if fullname == "control_plane":
-            return None
-        if fullname.split(".")[-1].startswith("_"):
-            return None
-
-        # Extract the leaf module name (last component after control_plane.)
-        parts = fullname.split(".")
-        leaf = parts[-1]
-
-        for subdir in _SUBDIRS:
-            candidate = _PACKAGE_DIR / subdir / f"{leaf}.py"
-            if candidate.is_file():
-                # Use fullname (the name being imported) so the module is
-                # cached under the correct key in sys.modules and its
-                # __package__ is derived from the top-level package, not
-                # from the subdirectory it physically lives in.
-                spec = importlib.util.spec_from_file_location(fullname, str(candidate))
-                if spec is not None:
-                    spec.submodule_search_locations = None
-                    return spec
-
-        return None
-
-
-def _install() -> None:
-    """Insert the redirecting finder into sys.meta_path once."""
-    for entry in sys.meta_path:
-        if isinstance(entry, _ControlPlaneModuleFinder):
-            return
-    sys.meta_path.insert(0, _ControlPlaneModuleFinder())
-
-
-_install()
+# Import modules by their real path:
+#
+#     from control_plane.core.anya_gate import AnyaGate
+#     from control_plane.infra.kinetic_loop import KineticLoop
+#
+# ─────────────────────────────────────────────────────────────────────────────
+# HISTORY: this file used to install a sys.meta_path finder that redirected
+# ``control_plane.<name>`` to ``control_plane.<subdir>.<name>``, so that code
+# written before the reorganisation kept working. It was removed on 2026-08-11
+# because it caused two classes of silent bug:
+#
+#   1. It decoupled import paths from filesystem paths. Modules kept importing
+#      after the move while every hand-counted ``Path(__file__).parent.parent``
+#      chain silently began resolving one level short — governance code read and
+#      wrote phantom directories under control_plane/03_VAULT for weeks, and a
+#      second divergent provenance ledger accumulated there.
+#
+#   2. It loaded each module TWICE, under both names. Module-level state was
+#      duplicated (an lru_cache populated via one name was invisible via the
+#      other) and identity comparisons failed: a TriageScore built from
+#      ``control_plane.core.factory_lane`` was rejected by a pydantic model that
+#      referenced ``control_plane.factory_lane``, because those were genuinely
+#      different classes.
+#
+# Import errors are noisier than a redirect, but they point at the truth.
+# Do not reintroduce the finder. If a module moves, update its importers.
+# ─────────────────────────────────────────────────────────────────────────────

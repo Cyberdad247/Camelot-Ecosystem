@@ -15,7 +15,7 @@ def _ensure_repo_on_path() -> None:
 
 def build_segment() -> str:
     _ensure_repo_on_path()
-    from control_plane.cockpit import prompt_payload
+    from control_plane.infra.cockpit import prompt_payload
 
     payload = prompt_payload(spawn_refresh=False)
     state = "STALE" if payload.get("stale") else payload.get("services", {}).get("state", "WARN")

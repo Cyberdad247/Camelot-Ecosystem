@@ -15,7 +15,7 @@ from __future__ import annotations
 import argparse
 import time
 
-from control_plane.metrics_collector import MetricsCollector
+from control_plane.infra.metrics_collector import MetricsCollector
 
 from .http_daemon import get_json
 from .node_daemon import parse_peers

@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from control_plane import cloudbrain_sync
+from control_plane.infra import cloudbrain_sync
 
 
 def _patch_queue(monkeypatch, tmp_path: Path) -> Path:
@@ -133,7 +133,7 @@ def test_flush_sync_queue_keeps_failed_events(monkeypatch, tmp_path):
 
 
 def test_camelot_parser_accepts_cloudbrain_queue_commands():
-    from control_plane.camelot_cli import _build_parser
+    from control_plane.runes.camelot_cli import _build_parser
 
     parser = _build_parser()
 
@@ -149,7 +149,7 @@ def test_camelot_parser_accepts_cloudbrain_queue_commands():
 
 def test_camelot_main_cloudbrain_queue_status_passes_bifrost_gate(monkeypatch, capsys):
     from bin import bifrost
-    from control_plane import camelot_cli
+    from control_plane.runes import camelot_cli
 
     class _Config:
         config_path = "test-config"

@@ -11,7 +11,7 @@ os.environ["PYTHONIOENCODING"] = "utf-8"
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from control_plane import boot_sequence
+from control_plane.infra import boot_sequence
 
 home = boot_sequence._detect_home()
 os.environ["CAMELOT_OS_HOME"] = str(home)

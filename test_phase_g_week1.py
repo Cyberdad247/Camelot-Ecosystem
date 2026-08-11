@@ -12,8 +12,8 @@ Status: 18 tests total (14 consensus + 4 sync)
 import asyncio
 import sys
 
-from control_plane.distributed_knowledge_sync import DistributedKnowledgeSync, SyncPhase, get_distributed_knowledge_sync
-from control_plane.distributed_ledger_consensus import (
+from control_plane.infra.distributed_knowledge_sync import DistributedKnowledgeSync, SyncPhase, get_distributed_knowledge_sync
+from control_plane.infra.distributed_ledger_consensus import (
     ConsensusPhase,
     DistributedConsensus,
     NodeRole,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from control_plane.mnemosyne_chimera import build_phial_assignments, run_mnemosyne_chimera
+from control_plane.infra.mnemosyne_chimera import build_phial_assignments, run_mnemosyne_chimera
 
 
 def test_build_phial_assignments_maps_research_experts(tmp_path: Path) -> None:
@@ -29,7 +29,7 @@ def test_mnemosyne_chimera_report_first_contract(tmp_path: Path, monkeypatch) ->
     phial_root.mkdir()
     (phial_root / "tree_sitter_phial.py").write_text("# phial\n", encoding="utf-8")
     (phial_root / "memory_decay.py").write_text("# phial\n", encoding="utf-8")
-    monkeypatch.setattr("control_plane.mnemosyne_chimera.PHIAL_ROOT", phial_root)
+    monkeypatch.setattr("control_plane.infra.mnemosyne_chimera.PHIAL_ROOT", phial_root)
 
     payload = run_mnemosyne_chimera(scan_path=scan_root, max_files=25, emit_hermes=False, write=False)
 

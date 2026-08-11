@@ -68,7 +68,7 @@ class CloudBrainSynthesizer:
     async def synthesize(pattern: dict) -> str:
         """Synthesize insights from a cluster of dispatches."""
         try:
-            from control_plane.cloudbrain_sync import query_cloud_brain
+            from control_plane.infra.cloudbrain_sync import query_cloud_brain
 
             # Build query
             category = pattern["category"]
@@ -161,7 +161,7 @@ class WeeklySynthesisJob:
     async def _query_recent_dispatches(self, days: int = 7) -> list[dict]:
         """Query Qdrant for recent dispatches."""
         try:
-            from control_plane.symbol_compressor import get_compressor
+            from control_plane.infra.symbol_compressor import get_compressor
 
             compressor = get_compressor()
             if not compressor.client:
@@ -199,7 +199,7 @@ class WeeklySynthesisJob:
     async def _store_syntheses(self, syntheses: list[dict]) -> None:
         """Store synthesis insights in Qdrant."""
         try:
-            from control_plane.symbol_compressor import get_compressor
+            from control_plane.infra.symbol_compressor import get_compressor
 
             compressor = get_compressor()
             if not compressor.client:
@@ -234,7 +234,7 @@ class WeeklySynthesisJob:
     async def _update_blueprints(self, syntheses: list[dict]) -> None:
         """Update blueprint.md with synthesis insights."""
         try:
-            from control_plane.knight_knowledgebase import get_knowledgebase
+            from control_plane.core.knight_knowledgebase import get_knowledgebase
 
             kb = get_knowledgebase()
 
@@ -271,7 +271,7 @@ class WeeklySynthesisJob:
     async def _get_knights_for_category(category: str) -> list[str]:
         """Get list of knights that specialize in a category."""
         try:
-            from control_plane.intent_router import INTENT_TERMINAL_MAP, IntentCategory
+            from control_plane.dispatch.intent_router import INTENT_TERMINAL_MAP, IntentCategory
 
             # Map category to intent enum
             category_map = {

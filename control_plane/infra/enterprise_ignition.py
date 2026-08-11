@@ -10,9 +10,9 @@ from pathlib import Path
 from typing import Any
 
 from .cockpit import refresh_snapshot
-from .knight_configuration import write_knight_configuration
+from control_plane.core.knight_configuration import write_knight_configuration
 from .ledger_sync import ledger_status, reconcile_ledger_mirrors
-from .switchboard import get_board
+from control_plane.dispatch.switchboard import get_board
 
 CAMELOT_HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 RUNTIME_ARTIFACT = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "enterprise_ignition_latest.json"

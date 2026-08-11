@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from control_plane.portkey_assimilation import LOCAL_GATEWAY_URL, load_portkey_runtime_config
+from control_plane.infra.portkey_assimilation import LOCAL_GATEWAY_URL, load_portkey_runtime_config
 
 
 def test_portkey_runtime_config_defaults_to_hosted_gateway() -> None:

@@ -159,7 +159,7 @@ class ProvenanceManager:
             source_dir = run.results.get("source_dir")
             if source_dir:
                 try:
-                    from control_plane import forge_law
+                    from control_plane.core import forge_law
                     forge_law.crystallize_source(source_dir, ledger=self.verification_ledger)
                 except Exception:
                     pass  # crystallization is a side effect; don't block ledger write

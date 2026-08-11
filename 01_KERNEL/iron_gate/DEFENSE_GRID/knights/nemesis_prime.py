@@ -233,7 +233,7 @@ class SirNemesisPrime:
 
     def _emit_hermes(self, result: NeutralizeResult) -> None:
         try:
-            from control_plane.hermes_bridge import HermesBus
+            from control_plane.infra.hermes_bridge import HermesBus
             HermesBus().publish("iron_gate.alerts", {
                 "source": "SIR_NEMESIS_PRIME",
                 "action": result.action,

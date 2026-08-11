@@ -77,7 +77,7 @@ class KnightHealthTable(DataTable):
 
     def _refresh_data_sync(self) -> None:
         try:
-            from control_plane.switchboard import TERMINAL_REGISTRY
+            from control_plane.dispatch.switchboard import TERMINAL_REGISTRY
             self.clear()
             for t in TERMINAL_REGISTRY.values():
                 status_style = {
@@ -99,7 +99,7 @@ class KnightHealthTable(DataTable):
     async def refresh_health(self) -> None:
         """Probe all terminals and update the table."""
         try:
-            from control_plane.switchboard import Switchboard
+            from control_plane.dispatch.switchboard import Switchboard
             board = Switchboard()
             await board.probe_all()
         except Exception:
@@ -297,7 +297,7 @@ class HiveStreamTUI(App):
 
     async def _stream_routed(self, prompt: str, panel: StreamPanel) -> None:
         try:
-            from control_plane.bifrost import Bifrost
+            from control_plane.dispatch.bifrost import Bifrost
             bf = Bifrost()
             terminal_id = "?"
             async for tid, chunk in bf.route_and_stream(prompt):
@@ -315,7 +315,7 @@ class HiveStreamTUI(App):
 
     async def _stream_direct(self, prompt: str, terminal_id: str, panel: StreamPanel) -> None:
         try:
-            from control_plane.bifrost import Bifrost
+            from control_plane.dispatch.bifrost import Bifrost
             bf = Bifrost()
             panel.write_header(terminal_id, "direct")
             async for chunk in bf.stream(terminal_id, prompt):
@@ -335,7 +335,7 @@ class HiveStreamTUI(App):
             panels[i].write_header(tid, "parallel")
 
         try:
-            from control_plane.bifrost import Bifrost
+            from control_plane.dispatch.bifrost import Bifrost
             bf = Bifrost()
             panel_map: dict[str, StreamPanel] = {
                 terminal_ids[0]: panel_a,

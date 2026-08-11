@@ -26,7 +26,7 @@ def test_worker_ledger_entry_delegates_to_shared_helper(monkeypatch):
         return {"status": "UPDATED"}
 
     monkeypatch.setattr(
-        "control_plane.ledger_sync.append_provenance_entry",
+        "control_plane.infra.ledger_sync.append_provenance_entry",
         fake_append_provenance_entry,
     )
     monkeypatch.setattr(worker, "_log", lambda message: None)

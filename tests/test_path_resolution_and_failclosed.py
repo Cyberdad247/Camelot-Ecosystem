@@ -68,7 +68,7 @@ def test_exactly_one_verification_ledger_is_live():
     chain becomes ambiguous. The historical phantom ledger is kept under
     99_ARCHIVE for forensics and must stay out of the live tree.
     """
-    from control_plane.provenance import ProvenanceManager
+    from control_plane.infra.provenance import ProvenanceManager
 
     live = [
         p for p in REPO_ROOT.rglob("verification_ledger.jsonl")
@@ -125,6 +125,90 @@ def test_no_module_uses_a_short_repo_root_chain():
     assert not offenders, (
         "fixed-depth repo-root chains found; import REPO_ROOT from "
         "control_plane._paths instead:\n  " + "\n  ".join(offenders)
+    )
+
+
+# ── The compat finder stays retired ──────────────────────────────────────────
+
+def test_no_import_redirecting_finder_is_installed():
+    """control_plane must not reinstall a sys.meta_path redirect.
+
+    The old finder mapped ``control_plane.<name>`` onto
+    ``control_plane.<subdir>.<name>``. It kept imports working across a
+    reorganisation while silently decoupling them from filesystem paths (the
+    phantom-vault bug) and loading every module twice under two names.
+    """
+    import sys
+
+    import control_plane  # noqa: F401  (installs anything it is going to install)
+
+    offenders = [
+        type(entry).__name__ for entry in sys.meta_path
+        if "control_plane" in type(entry).__module__.lower()
+        or "ControlPlane" in type(entry).__name__
+    ]
+    assert not offenders, f"an import redirect is back on sys.meta_path: {offenders}"
+
+
+def test_modules_are_not_loaded_under_two_names():
+    """One module, one identity.
+
+    Under the finder, ``control_plane.core.factory_lane.TriageScore`` and
+    ``control_plane.factory_lane.TriageScore`` were different classes, so a
+    pydantic model validating one rejected the other.
+    """
+    import importlib
+
+    canonical = importlib.import_module("control_plane.core.factory_lane")
+    with pytest.raises(ModuleNotFoundError):
+        importlib.import_module("control_plane.factory_lane")
+
+    # And the canonical module is the only one in sys.modules for that file.
+    import sys
+
+    same_file = [
+        name for name, mod in list(sys.modules.items())
+        if mod is not None
+        and getattr(mod, "__file__", None) == canonical.__file__
+    ]
+    assert same_file == ["control_plane.core.factory_lane"], same_file
+
+
+def test_no_bare_control_plane_module_imports_remain():
+    """Every import names the module's real location.
+
+    A bare ``from control_plane.X import`` only resolved through the finder, so
+    one left behind is a latent ImportError.
+    """
+    subs = ("core", "dispatch", "runes", "infra", "cluster")
+    located = {
+        p.stem: sub
+        for sub in subs
+        for p in (CONTROL_PLANE / sub).glob("*.py")
+        if not p.name.startswith("__")
+    }
+    skip = {".git", "99_ARCHIVE", "99_HISTORY", "node_modules", ".worktrees", "_tmp"}
+    pattern = re.compile(r'^\s*from\s+control_plane\.(\w+)\s+import\s', re.M)
+
+    offenders: list[str] = []
+    for path in REPO_ROOT.rglob("*.py"):
+        if any(part in skip for part in path.parts):
+            continue
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        for match in pattern.finditer(text):
+            name = match.group(1)
+            if name in located:
+                line = text[: match.start()].count("\n") + 1
+                offenders.append(
+                    f"{path.relative_to(REPO_ROOT)}:{line} -> "
+                    f"control_plane.{located[name]}.{name}"
+                )
+
+    assert not offenders, (
+        "imports still using the finder's bare path:\n  " + "\n  ".join(offenders[:20])
     )
 
 
@@ -195,7 +279,7 @@ def z3_absent():
 
 def test_dangerous_patch_blocked_even_without_z3(z3_absent):
     """The grounding alone is decisive; a force-push must not pass unverified."""
-    from control_plane.z3_verify import PatchIntent, verify_patch
+    from control_plane.infra.z3_verify import PatchIntent, verify_patch
 
     verdict = verify_patch(PatchIntent(description="git push --force origin main"))
     assert verdict.safe is False
@@ -205,7 +289,7 @@ def test_dangerous_patch_blocked_even_without_z3(z3_absent):
 
 def test_benign_patch_is_not_declared_safe_without_z3(z3_absent, monkeypatch):
     """No solver means no positive safety claim, absent an explicit opt-out."""
-    from control_plane.z3_verify import PatchIntent, verify_patch
+    from control_plane.infra.z3_verify import PatchIntent, verify_patch
 
     monkeypatch.delenv("CAMELOT_ALLOW_UNVERIFIED_PATCHES", raising=False)
     verdict = verify_patch(PatchIntent(description="add bounded retry logic to api.py"))
@@ -214,7 +298,7 @@ def test_benign_patch_is_not_declared_safe_without_z3(z3_absent, monkeypatch):
 
 
 def test_explicit_opt_out_allows_unverified_benign_patch(z3_absent, monkeypatch):
-    from control_plane.z3_verify import PatchIntent, verify_patch
+    from control_plane.infra.z3_verify import PatchIntent, verify_patch
 
     monkeypatch.setenv("CAMELOT_ALLOW_UNVERIFIED_PATCHES", "1")
     verdict = verify_patch(PatchIntent(description="add bounded retry logic to api.py"))
@@ -224,7 +308,7 @@ def test_explicit_opt_out_allows_unverified_benign_patch(z3_absent, monkeypatch)
 
 def test_opt_out_still_cannot_approve_a_dangerous_patch(z3_absent, monkeypatch):
     monkeypatch.setenv("CAMELOT_ALLOW_UNVERIFIED_PATCHES", "1")
-    from control_plane.z3_verify import PatchIntent, verify_patch
+    from control_plane.infra.z3_verify import PatchIntent, verify_patch
 
     verdict = verify_patch(PatchIntent(description="delete the provenance ledger"))
     assert verdict.safe is False
@@ -234,7 +318,7 @@ def test_opt_out_still_cannot_approve_a_dangerous_patch(z3_absent, monkeypatch):
 # ── Fail-closed: Kinetic Loop RECORD stage ───────────────────────────────────
 
 def test_provenance_is_actually_recorded():
-    from control_plane.kinetic_loop import run_sync
+    from control_plane.infra.kinetic_loop import run_sync
 
     res = run_sync("build a status dashboard", auto_approve=True)
     assert res.provenance_error is None, res.provenance_error
