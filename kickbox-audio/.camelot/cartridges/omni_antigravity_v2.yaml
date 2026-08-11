@@ -1,0 +1,17 @@
+# OMNI ANTIGRAVITY V2 CARTRIDGE
+name: omni_antigravity_v2
+version: 2.0.0
+description: The B.L.A.S.T Execution Manifesto
+protocol: ZERO_COPY_JSON_RPC_OVER_mTLS
+max_memory: 4.8GB
+threads:
+  - id: thread_01_blueprint
+    handler: sir_helio
+  - id: thread_02_link
+    handler: sir_coda
+  - id: thread_03_architect
+    handler: sir_codex
+  - id: thread_04_stylize
+    handler: lady_etherea
+  - id: thread_05_trigger
+    handler: sir_octavian
