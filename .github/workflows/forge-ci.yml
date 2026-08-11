@@ -233,6 +233,46 @@ jobs:
       - name: Test ${{ matrix.crate }}
         run: cargo test
 
+  # ── Security: dependency advisories ────────────────────────────
+  # The README claimed "cargo audit clean · 0 advisories" while no workflow ran
+  # it, so nothing enforced the claim. This job is that enforcement.
+  security-audit:
+    name: Dependency Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo-audit
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-audit
+          key: ${{ runner.os }}-cargo-audit-v1
+
+      - name: Install cargo-audit
+        run: command -v cargo-audit || cargo install cargo-audit --locked
+
+      # Blocking. The currently-known advisories are enumerated in
+      # .cargo/audit.toml with rationale, so this fails on anything NEW.
+      # Do not add entries there to make a red build green without triage.
+      - name: cargo audit
+        run: cargo audit
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pip-audit
+        run: python -m pip install --quiet pip-audit
+
+      # Non-blocking for now: the dependency set carries known advisories that
+      # need triage before this can gate merges. Flip to blocking once clean.
+      - name: pip-audit (informational)
+        continue-on-error: true
+        run: pip-audit --requirement requirements.txt --strict || true
+
   # ── Holotable: Next.js Build ───────────────────────────────────
   holotable-build:
     name: Holotable Build

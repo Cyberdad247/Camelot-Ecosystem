@@ -1,0 +1,69 @@
+# cargo-audit configuration
+#
+# WHY THIS FILE EXISTS
+# --------------------
+# The README claimed "cargo audit clean · 0 advisories" while no CI workflow ran
+# cargo audit. A first run found 24 advisories. This file makes the real state
+# explicit and lets CI block on anything NEW, rather than the previous situation
+# where nothing was checked at all.
+#
+# An entry here is tracked debt, not an assessment that the advisory is harmless.
+# Removing an entry must mean the advisory is actually fixed.
+#
+# TOP SECURITY PRIORITY: upgrade wasmtime
+# ---------------------------------------
+# 21 of the 23 entries are wasmtime / wasmtime-wasi 30.0.2, pinned in
+# 02_FORGE/kinetic/actor/Cargo.toml. Several are sandbox-escape class:
+#
+#   RUSTSEC-2026-0095  Winch backend may allow a sandbox escape
+#   RUSTSEC-2026-0096  Miscompiled guest heap access — sandbox escape on aarch64
+#   RUSTSEC-2026-0088  Data leakage between pooling allocator instances
+#   RUSTSEC-2026-0149  WASI path_open(TRUNCATE) bypasses FilePerms::WRITE
+#   RUSTSEC-2026-0188  WASI hard links / renames bypass FilePerms
+#
+# These matter more here than in a typical dependency: the WASM runtime *is* the
+# isolation boundary for the SOULS layer (threat model §5.2, boundary D). A
+# sandbox-escape advisory in wasmtime is a hole in the containment story, not a
+# peripheral CVE.
+#
+# Remediation is a wasmtime 30 -> 47 major upgrade (17 majors, with documented
+# API renames in the actor crate's own header comments). It needs its own change,
+# not a drive-by bump: `cargo update` within semver fixed only crossbeam-epoch.
+#
+# Until then, treat WASM execution as NOT security-isolating and do not run
+# untrusted guest modules.
+
+[advisories]
+ignore = [
+    # ── wasmtime / wasmtime-wasi 30.0.2 (see note above) ──────────────────
+    "RUSTSEC-2025-0046",  # host panic, fd_renumber WASIp1
+    "RUSTSEC-2025-0118",  # unsound API access to shared linear memory
+    "RUSTSEC-2026-0006",  # segfault / out-of-sandbox load, f64.const
+    "RUSTSEC-2026-0020",  # guest-controlled resource exhaustion in WASI
+    "RUSTSEC-2026-0021",  # panic on excessive wasi:http/types.fields
+    "RUSTSEC-2026-0085",  # panic lifting `flags` component value
+    "RUSTSEC-2026-0086",  # host data leakage, 64-bit tables + Winch
+    "RUSTSEC-2026-0087",  # segfault / out-of-sandbox load, f64x2
+    "RUSTSEC-2026-0088",  # data leakage between pooling allocator instances
+    "RUSTSEC-2026-0089",  # host panic, Winch table.fill
+    "RUSTSEC-2026-0091",  # OOB write transcoding component model strings
+    "RUSTSEC-2026-0092",  # panic transcoding misaligned UTF-16
+    "RUSTSEC-2026-0093",  # heap OOB read, UTF-16 to latin1+utf16
+    "RUSTSEC-2026-0094",  # improperly masked table.grow return, Winch
+    "RUSTSEC-2026-0095",  # SANDBOX ESCAPE (Winch backend)
+    "RUSTSEC-2026-0096",  # SANDBOX ESCAPE (aarch64 miscompile)
+    "RUSTSEC-2026-0114",  # panic allocating oversized table
+    "RUSTSEC-2026-0149",  # WASI TRUNCATE bypasses FilePerms::WRITE
+    "RUSTSEC-2026-0182",  # leak in WASIp1 fd_renumber
+    "RUSTSEC-2026-0188",  # WASI hard links / renames bypass FilePerms
+    "RUSTSEC-2026-0222",  # stores mix up type indices between engines
+
+    # ── pyo3 (transitive; needs a major bump) ─────────────────────────────
+    "RUSTSEC-2025-0020",  # buffer overflow risk, PyString::from_object
+    "RUSTSEC-2026-0177",  # missing Sync bound, PyCFunction::new_closure
+]
+
+# `unmaintained` warnings are surfaced but do not fail the build: paste (via
+# wasmtime) and rustls-pemfile (via reqwest) are both transitive and clear with
+# their parents' upgrades.
+informational_warnings = ["unmaintained"]
