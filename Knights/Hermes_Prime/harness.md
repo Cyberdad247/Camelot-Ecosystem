@@ -6,6 +6,7 @@
 - `PUT /prime/nexus/phial`: Update Phial Engine weights dynamically.
 
 ## CLI Interfaces & Tool Bindings
+- **PhialEngine (executable)**: `python 01_KERNEL/titan/phials/hermes_prime_phial.py --cycle "<seed>"` — MGV loop + Ouroboros memory + Phial weight re-weighting. State persists to `03_VAULT/runtime_state/hermes_prime_phial.json`. Self-test: `--test`.
 - **Cross-Agent Communication**: Bind to `runic_router.py` for direct Omega dispatch (`Omega_HermesPrime`).
 - **Distributed Compute Allocation**: Connect to underlying infrastructure (Docker/Kubernetes/Bifrost) to assign task-specific hardware constraints.
 - **VFS Scaffold Commands**: Tools for writing directly to Virtual File System.

@@ -714,34 +714,98 @@ def _handle_purge_memory(param: str, context: dict) -> dict:
     }
 
 
+# Lazy PhialEngine loader (importlib — mirrors _handle_fleet / _handle_nano_swarm_expand
+# so the 01_KERNEL module is only touched when a Hermes_Prime rune actually fires).
+_HP_ENGINE_CACHE: dict[str, Any] = {}
+
+
+def _load_hermes_prime_engine() -> tuple[Any, Any]:
+    """Return (module, PhialEngine) for 01_KERNEL/titan/phials/hermes_prime_phial.py.
+
+    Cached per process; returns (None, None) if the engine is unavailable so
+    callers degrade gracefully instead of crashing the router.
+    """
+    key = "hermes_prime_phial"
+    if key in _HP_ENGINE_CACHE:
+        return _HP_ENGINE_CACHE[key]
+
+    import importlib.util
+
+    module_path = CAMELOT_HOME / "01_KERNEL" / "titan" / "phials" / "hermes_prime_phial.py"
+    if not module_path.exists():
+        _HP_ENGINE_CACHE[key] = (None, None)
+        return (None, None)
+    spec = importlib.util.spec_from_file_location(key, module_path)
+    if not spec or not spec.loader:
+        _HP_ENGINE_CACHE[key] = (None, None)
+        return (None, None)
+    mod = importlib.util.module_from_spec(spec)
+    try:
+        # Namespaced sys.modules key avoids colliding with any future normal
+        # import of the phial module under its bare filename.
+        sys.modules["camelot_phials_hermes_prime"] = mod
+        spec.loader.exec_module(mod)
+    except Exception:
+        _HP_ENGINE_CACHE[key] = (None, None)
+        return (None, None)
+    try:
+        engine = mod.PhialEngine()
+    except Exception:
+        engine = None
+    _HP_ENGINE_CACHE[key] = (mod, engine)
+    return _HP_ENGINE_CACHE[key]
+
+
 def _handle_sync_vfs_workspace(param: str, context: dict) -> dict:
-    """//SYNC_VFS_WORKSPACE — realign Hermes_Prime VFS state with nodes."""
-    return {
-        "action": "sync_vfs_workspace",
-        "detail": "Realign Knights/Hermes_Prime VFS state with distributed research nodes",
-        "vfs_target": "Knights/Hermes_Prime",
-        "param": param or "full workspace sync",
-    }
+    """//SYNC_VFS_WORKSPACE — realign Hermes_Prime VFS state via the PhialEngine."""
+    _, engine = _load_hermes_prime_engine()
+    if engine is None:
+        return {
+            "action": "sync_vfs_workspace",
+            "detail": "Hermes_Prime PhialEngine unavailable — VFS sync deferred",
+            "status": "UNAVAILABLE",
+            "vfs_target": "Knights/Hermes_Prime",
+        }
+    try:
+        result = engine.sync_vfs()
+        return {"detail": "VFS state realigned with PhialEngine", **result, "action": "sync_vfs_workspace"}
+    except Exception as e:
+        return {"action": "sync_vfs_workspace", "error": str(e), "status": "ERROR"}
 
 
 def _handle_forge_hermes_prime_files(param: str, context: dict) -> dict:
-    """//FORGE_HERMES_PRIME_FILES — scaffold/refresh the Hermes_Prime VFS soul files."""
-    return {
-        "action": "forge_hermes_prime_files",
-        "detail": "Scaffold soul.md / spark.md / harness.md / skills.md under Knights/Hermes_Prime",
-        "vfs_target": "Knights/Hermes_Prime",
-        "param": param or "full scaffold",
-    }
+    """//FORGE_HERMES_PRIME_FILES — scaffold the Hermes_Prime VFS via the PhialEngine."""
+    _, engine = _load_hermes_prime_engine()
+    if engine is None:
+        return {
+            "action": "forge_hermes_prime_files",
+            "detail": "Hermes_Prime PhialEngine unavailable — forge deferred",
+            "status": "UNAVAILABLE",
+            "vfs_target": "Knights/Hermes_Prime",
+        }
+    try:
+        result = engine.forge_scaffold()
+        return {"detail": "VFS scaffold reconciled", **result, "action": "forge_hermes_prime_files"}
+    except Exception as e:
+        return {"action": "forge_hermes_prime_files", "error": str(e), "status": "ERROR"}
 
 
 def _handle_ignite_self_evolution_loop(param: str, context: dict) -> dict:
-    """//IGNITE_SELF_EVOLUTION_LOOP — MGV + AlphaEvolve self-evolution trigger."""
-    return {
-        "action": "ignite_self_evolution_loop",
-        "framework": "MGV + AlphaEvolve",
-        "detail": "Feed Ouroboros memory banks from prior research yields and re-weight Phial parameters",
-        "param": param or "default evolution cycle",
-    }
+    """//IGNITE_SELF_EVOLUTION_LOOP — run a real MGV cycle with Ouroboros + re-weighting."""
+    _, engine = _load_hermes_prime_engine()
+    if engine is None:
+        return {
+            "action": "ignite_self_evolution_loop",
+            "detail": "Hermes_Prime PhialEngine unavailable — evolution loop deferred",
+            "framework": "MGV + AlphaEvolve",
+            "status": "UNAVAILABLE",
+        }
+    seed = param or "default research cycle"
+    try:
+        result = engine.run_cycle(seed=seed)
+        return {"framework": "MGV + AlphaEvolve", "seed": seed, **result, "action": "ignite_self_evolution_loop"}
+    except Exception as e:
+        return {"action": "ignite_self_evolution_loop", "framework": "MGV + AlphaEvolve", "error": str(e), "status": "ERROR"}
 
 
 def _handle_execute_prompt(param: str, context: dict) -> dict:
