@@ -36,6 +36,7 @@ Why a synthetic package alias instead of mutating ``sys.path``?
 from __future__ import annotations
 
 import importlib.util
+import os
 import sys
 from pathlib import Path
 from types import ModuleType
@@ -43,6 +44,12 @@ from types import ModuleType
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+
+# MemPalaceL2 refuses to start without MEMPALACE_SECRET rather than silently
+# falling back to the public default key that used to ship in the repo. The
+# suite opts into the insecure development key explicitly — a test index needs a
+# stable key, and making the opt-in visible here keeps it out of library code.
+os.environ.setdefault("MEMPALACE_ALLOW_INSECURE_SECRET", "1")
 KG_MEM_DIR = REPO_ROOT / "01_KERNEL" / "memory"
 KG_MEM_INIT = KG_MEM_DIR / "__init__.py"
 

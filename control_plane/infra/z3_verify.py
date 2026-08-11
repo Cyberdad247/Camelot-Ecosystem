@@ -47,13 +47,38 @@ INVARIANTS: tuple[str, ...] = (
 )
 
 # Dangerous-effect grounding: pattern → fluent it negates (PDDL action effects).
+#
+# These patterns are the *whole* safety decision — z3 only confirms that the
+# grounded effects are consistent with the goal, so anything the patterns miss is
+# accepted. They are therefore written to catch equivalent spellings, not just
+# the canonical one: `git push -f`, `push origin +main` and `truncate -s 0` all
+# previously slipped through while `git push --force origin main` was blocked.
+#
+# This is still recognition, not proof. Treat a Z3_PASS as "no modelled hazard
+# matched", never as "proven safe" — see the module docstring.
 _DANGER: list[tuple[re.Pattern, str]] = [
-    (re.compile(r"\b(provenance|ledger)\b.*\b(delete|remove|rm|drop|truncate|wipe|purge)\b"
-                r"|\b(delete|remove|rm|drop|truncate|wipe|purge)\b.*\b(provenance|ledger)\b", re.I),
+    # The ledger nouns are matched WITHOUT \b on either side: they routinely
+    # appear inside identifiers and filenames (PROVENANCE_LEDGER.md,
+    # verification_ledger.jsonl) where "_" is a word character, so \bledger\b
+    # would not match. The destructive verb supplies the specificity instead —
+    # "write tests for the ledger reader" stays benign.
+    (re.compile(r"(?:provenance|ledger|\.shadow)"
+                r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
+                r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
+                r".*(?:provenance|ledger|\.shadow)"
+                # `: > X`, `cat /dev/null > X` truncation via redirect
+                r"|>\s*\S*(?:provenance|ledger)\S*", re.I),
      "provenance_intact"),
-    (re.compile(r"\b(force[-\s]?push|push\s+--force|--force-with-lease|reset\s+--hard)\b"
-                r".*\b(main|master|origin)\b"
-                r"|\b(main|master|origin)\b.*\b(force[-\s]?push|reset\s+--hard)\b", re.I),
+    (re.compile(
+        # force-push spellings: --force, -f, --force-with-lease, and the `+ref`
+        # refspec form (`git push origin +main`), plus hard resets.
+        r"\bgit\s+push\b[^\n]*?(--force(?:-with-lease)?|(?<!\w)-f(?!\w))"
+        r"|\bgit\s+push\b[^\n]*?\+\s*(?:refs/heads/)?(?:main|master)\b"
+        r"|\bforce[-\s]?push\b"
+        r"|\breset\s+--hard\b"
+        # disabling the server-side guard is equivalent to forcing
+        r"|\bdenyNonFastForwards\s*(?:=|\s+)\s*false\b"
+        r"|\breceive\.denyDeletes\s*(?:=|\s+)\s*false\b", re.I),
      "main_branch_protected"),
     (re.compile(r"\b(bypass|disable|skip|remove|drop)\b\s*(the\s+)?"
                 r"(hitl|iron[-\s]?gate|approval|human[-\s]?gate|verification\s+gate)", re.I),

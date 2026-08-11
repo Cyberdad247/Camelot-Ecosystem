@@ -1,12 +1,39 @@
 import hashlib
 import hmac
 import os
+import re
 import sys
 from pathlib import Path
 from typing import Any, Optional
 import logging
 
 logger = logging.getLogger("MemPalaceL2")
+
+# Shipped in the repository for a long time as the fallback HMAC key. A secret
+# that is public is not a secret: anyone with the source could compute any
+# tenant's salted IDs. Kept here only so it can be recognised and refused.
+_INSECURE_DEFAULT_SECRET = "OMEGA_DEER_CORE_FIX_2026"
+
+
+class MemPalaceSecretError(RuntimeError):
+    """MEMPALACE_SECRET is missing, or set to the known-public default."""
+
+
+def _canonical(*parts: str) -> bytes:
+    """Length-prefixed framing for a tuple of strings.
+
+    Concatenating fields directly makes the boundary between them ambiguous, so
+    distinct tuples can share one encoding — ``("a", "bc")`` and ``("ab", "c")``
+    both become ``b"abc"``. That produced genuine cross-tenant collisions in both
+    the salted-ID HMAC and the collection name. A 4-byte big-endian length before
+    each field makes the encoding injective.
+    """
+    out = bytearray()
+    for part in parts:
+        raw = part.encode("utf-8")
+        out += len(raw).to_bytes(4, "big")
+        out += raw
+    return bytes(out)
 
 try:
     import chromadb
@@ -25,13 +52,7 @@ class MemPalaceL2:
     """Persistent local vector index manager (Layer 2 Memory)."""
 
     def __init__(self, storage_path: Optional[Path] = None):
-        # System-level secret for HMAC salting
-        secret_env = os.environ.get("MEMPALACE_SECRET")
-        if not secret_env:
-            logger.warning("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
-            secret_env = "OMEGA_DEER_CORE_FIX_2026"
-            
-        self._secret = secret_env.encode()
+        self._secret = self._resolve_secret()
         if storage_path:
             self.storage_path = storage_path
         else:
@@ -48,17 +69,66 @@ class MemPalaceL2:
             # Log warning or handle gracefully
             logger.warning("chromadb not installed. L2 Memory is in DARK mode.")
 
+    @staticmethod
+    def _resolve_secret() -> bytes:
+        """Return the HMAC key, refusing to fall back to a public value.
+
+        Set ``MEMPALACE_SECRET``. For local development and tests, set
+        ``MEMPALACE_ALLOW_INSECURE_SECRET=1`` to accept the historical default
+        explicitly — the index is keyed by this value, so it must be stable
+        across restarts and cannot simply be randomised per process.
+        """
+        secret = os.environ.get("MEMPALACE_SECRET")
+
+        if secret and secret != _INSECURE_DEFAULT_SECRET:
+            return secret.encode()
+
+        if secret == _INSECURE_DEFAULT_SECRET:
+            raise MemPalaceSecretError(
+                "MEMPALACE_SECRET is set to the historical default that ships in "
+                "this repository, so it provides no tenant isolation. Generate a "
+                "fresh secret (e.g. `python -c \"import secrets;"
+                "print(secrets.token_urlsafe(32))\"`)."
+            )
+
+        if os.environ.get("MEMPALACE_ALLOW_INSECURE_SECRET") == "1":
+            logger.warning(
+                "MEMPALACE_SECRET unset and MEMPALACE_ALLOW_INSECURE_SECRET=1 — "
+                "using the public default key. Cache IDs are forgeable by anyone "
+                "with the source. Never do this outside development."
+            )
+            return _INSECURE_DEFAULT_SECRET.encode()
+
+        raise MemPalaceSecretError(
+            "MEMPALACE_SECRET is not set. L2 memory keys tenant-scoped cache IDs "
+            "with it, so starting without one would silently remove tenant "
+            "isolation. Set MEMPALACE_SECRET, or set "
+            "MEMPALACE_ALLOW_INSECURE_SECRET=1 for local development."
+        )
+
     def _get_collection_name(self, wing: str, room: str, tenant_id: str = "default") -> str:
-        """Map wing/room/tenant to a valid ChromaDB collection name."""
-        name = f"{tenant_id}_{wing}_{room}"
-        return name.replace("/", "_").replace(".", "_").replace("-", "_")
+        """Map wing/room/tenant to a unique, valid ChromaDB collection name.
+
+        The readable slug is advisory only; uniqueness comes from the digest over
+        the length-prefixed triple. The previous scheme joined the fields with
+        ``_`` and then rewrote separators, so ``tenant="acme", wing="sec_ops"``
+        and ``tenant="acme_sec", wing="ops"`` mapped to the *same* collection —
+        two tenants sharing one index.
+
+        Note: this changes collection names, so an index built by an earlier
+        version is not read by this one and must be re-ingested.
+        """
+        digest = hashlib.sha256(_canonical(tenant_id, wing, room)).hexdigest()[:16]
+        slug = re.sub(r"[^0-9A-Za-z]+", "_", f"{tenant_id}_{wing}_{room}").strip("_")[:40]
+        slug = slug.rstrip("_")
+        # ChromaDB requires 3-63 chars, starting and ending alphanumeric.
+        return f"{slug}_{digest}" if slug else f"mp_{digest}"
 
     def _generate_salted_id(self, content: str, tenant_id: str) -> str:
-        """Generate a salted HMAC-SHA256 ID for content and tenant."""
-        h = hmac.new(self._secret, digestmod=hashlib.sha256)
-        h.update(tenant_id.encode())
-        h.update(content.encode())
-        return h.hexdigest()
+        """Generate a salted HMAC-SHA256 ID over the length-prefixed inputs."""
+        return hmac.new(
+            self._secret, _canonical(tenant_id, content), hashlib.sha256
+        ).hexdigest()
 
     def store(self, wing: str, room: str, content: str, metadata: Optional[dict[str, Any]] = None, tenant_id: str = "default", push_to_cloudbrain: bool = True):
         """Store a drawer (entry) in the specified wing/room with integrity checksum."""

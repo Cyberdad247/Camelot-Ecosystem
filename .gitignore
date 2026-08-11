@@ -95,6 +95,9 @@ control_plane/st_brain.py
 99_ARCHIVE/*
 # Exception: infra_purge rollback backups MUST stay tracked (IMPLEMENTATION_INFRA_PURGE.md §6.1)
 !99_ARCHIVE/infra_purge_backup/
+# Exception: 83 real audit entries written to a phantom vault path by the
+# repo-root path regression. Tracked so the provenance record stays auditable.
+!99_ARCHIVE/phantom_vault_2026-08-11/
 03_VAULT/00_SECURE_ARCHIVE/
 03_VAULT/credentials/
 03_VAULT/UKG/UKG_MEMORY.jsonld

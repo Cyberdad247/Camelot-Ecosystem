@@ -12,6 +12,7 @@ import hashlib
 import importlib
 import importlib.util
 import json
+import logging
 import os
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +21,8 @@ from typing import Any, Optional
 from pydantic import BaseModel, Field
 
 from control_plane._paths import KERNEL, VAULT
+
+logger = logging.getLogger(__name__)
 
 # Dynamic import for MemPalaceL2 due to 01_KERNEL naming restriction.
 # Import as a package so mempalace_l2.py can resolve its own relative imports.
@@ -111,7 +114,19 @@ class ProvenanceManager:
 
         self.vault_path.mkdir(parents=True, exist_ok=True)
         self.verification_ledger = self.vault_path / "verification_ledger.jsonl"
-        self.mempalace = MemPalaceL2()
+
+        # The L2 vector index is a search convenience layered on top of the
+        # ledger; the ledger is the audit record. Keep them independent so a
+        # missing MEMPALACE_SECRET cannot stop audit entries from being written.
+        # Degradation is logged at WARNING — never silent.
+        try:
+            self.mempalace = MemPalaceL2()
+        except Exception as err:
+            self.mempalace = None
+            logger.warning(
+                "MemPalace L2 unavailable (%s) — verification ledger writes will "
+                "continue, but runs will not be indexed for semantic search.", err,
+            )
 
     def log_mission(self, record: MissionRecord):
         """Save a complete mission record to the vault."""
@@ -149,7 +164,10 @@ class ProvenanceManager:
                 except Exception:
                     pass  # crystallization is a side effect; don't block ledger write
 
-        # Automatic feed into MemPalace L2
+        # Automatic feed into MemPalace L2 (auxiliary — the ledger is already
+        # durable at this point).
+        if self.mempalace is None:
+            return self.verification_ledger
         content = f"Verification Run {run.run_id}: {run.command}\nOperator: {run.operator}\nSuccess: {run.success}\nResults: {json.dumps(run.results)}"
         self.mempalace.store(
             wing="camelot",

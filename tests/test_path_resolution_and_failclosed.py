@@ -61,6 +61,27 @@ def test_no_phantom_vault_or_kernel_inside_control_plane():
     )
 
 
+def test_exactly_one_verification_ledger_is_live():
+    """One resolution path for the provenance chain, not two.
+
+    A hash chain with two divergent copies is not tamper-evident, because "the"
+    chain becomes ambiguous. The historical phantom ledger is kept under
+    99_ARCHIVE for forensics and must stay out of the live tree.
+    """
+    from control_plane.provenance import ProvenanceManager
+
+    live = [
+        p for p in REPO_ROOT.rglob("verification_ledger.jsonl")
+        if "99_ARCHIVE" not in p.parts
+        and "99_HISTORY" not in p.parts
+        and not any(part.startswith(("tmp_", ".", "data")) for part in p.parts)
+    ]
+    assert len(live) == 1, f"expected one live ledger, found: {live}"
+
+    assert ProvenanceManager().verification_ledger.resolve() == live[0].resolve()
+    assert live[0].resolve() == (VAULT / "Missions" / "verification_ledger.jsonl").resolve()
+
+
 def test_no_module_uses_a_short_repo_root_chain():
     """Guard the whole class of bug, not just the sites that were fixed.
 

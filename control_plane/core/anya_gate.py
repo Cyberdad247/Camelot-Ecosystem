@@ -471,17 +471,40 @@ def _stage_validate(
 
 # Destructive / shatterpoint signals (Ouroboros Adaptive Governance, v999 NLM).
 _SHATTERPOINT_PATTERNS: list[tuple[re.Pattern, str]] = [
-    (re.compile(r"\b(rm\s+-rf|rmdir|del\s+/|format|drop\s+(table|database))\b", re.I), "destructive_autonomy"),
-    (re.compile(r"\b(force\s*push|--force|reset\s+--hard)\b", re.I), "destructive_git"),
+    (re.compile(r"\b(rm\s+-rf|rmdir|del\s+/|format|drop\s+(table|database)|truncate\s+-s)\b", re.I), "destructive_autonomy"),
+    # Force-push spellings must stay in step with z3_verify._DANGER: `-f`,
+    # `+refspec` and `denyNonFastForwards=false` are all equivalent to --force,
+    # and `git push -f origin main` previously matched none of them.
+    (re.compile(r"\bgit\s+push\b[^\n]*?(--force(?:-with-lease)?|(?<!\w)-f(?!\w))"
+                r"|\bgit\s+push\b[^\n]*?\+\s*(?:refs/heads/)?(?:main|master)\b"
+                r"|\bforce\s*push\b|--force\b|\breset\s+--hard\b"
+                r"|\bdenyNonFastForwards\s*(?:=|\s+)\s*false\b", re.I), "destructive_git"),
     (re.compile(r"\b(secret|credential|password|api[_\s-]?key|exfiltrat)\b", re.I), "secret_leakage"),
     (re.compile(r"\b(bypass|disable|skip)\s+(hitl|verification|ledger|security)\b", re.I), "verification_bypass"),
     (re.compile(r"\b(prod|production)\b.*\b(deploy|mutate|delete|drop)\b", re.I), "prod_mutation"),
+    # Tampering with the audit trail is itself a shatterpoint. Nouns are matched
+    # without \b because they appear inside filenames (PROVENANCE_LEDGER.md).
+    (re.compile(r"(?:provenance|ledger|\.shadow)"
+                r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+                r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+                r".*(?:provenance|ledger|\.shadow)", re.I), "provenance_tampering"),
 ]
 
 # Intents that must be mathematically verified before execution (Z3, v999 NLM).
+#
+# History-rewriting and ledger-mutating operations are included: the invariants
+# z3_verify models are main_branch_protected and provenance_intact, so a
+# force-push or a ledger truncation is precisely what the verifier exists to
+# catch. Without them listed here, `requires_z3_verification` stayed False for
+# those intents and the verifier was never consulted by the pipeline at all —
+# only by direct module invocation, as in the README example.
 _Z3_PATTERNS = re.compile(
-    r"\b(git\s+(patch|apply|merge|commit)|state\s+machine|pddl|workflow\s+merge|"
-    r"\.shadow|rebase)\b", re.I,
+    r"\b(git\s+(patch|apply|merge|commit|push)|state\s+machine|pddl|workflow\s+merge|"
+    r"\.shadow|rebase|force[-\s]?push|reset\s+--hard)\b"
+    r"|(?:provenance|ledger)"
+    r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+    r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|rewrite)\b"
+    r".*(?:provenance|ledger)", re.I,
 )
 
 # Lane assignment by intent_type + velocity.
