@@ -48,10 +48,11 @@ It fuses four ideas most frameworks keep apart:
 | Markdown logs | **Tamper-evident, hash-chained ledger.** Mutate a row and `verify_chain()` returns `False`; a run whose ledger entry fails is not reported complete |
 | Unbounded RAM | **4GB target** for the control plane, with `memfd` zero-copy leasing |
 
-**What this is not.** The air-gapped lane is a routing preference today, not a
-kernel-enforced boundary — there is no seccomp, netns, or egress rule in the tree.
-Z3's guarantee is "no modelled hazard matched", not "proven safe". Both are
-documented in the [threat model](docs/threat-model.md) rather than glossed here.
+**What this is not.** The air-gapped lane enforces *network* isolation, not
+filesystem confinement — no Landlock, cgroups quota, or seccomp allowlist yet, so
+it is containment for private work rather than for hostile code. Z3's guarantee is
+"no modelled hazard matched", not "proven safe". Both are documented in the
+[threat model](docs/threat-model.md) rather than glossed here.
 
 ---
 
@@ -109,13 +110,21 @@ CAMELOT-OS dispatches work across a **Foundry Council** of typed AI Knights — 
 *…and 17 more in the live roster* (25 knights hold access records; the alias table
 in `soul_router.py` maps pantheon names like `SIR_HELIOS` onto canonical ids).
 
-> ⚠️ **On "air-gapped".** Sir Ghost's `privacy_level = 1.0` is a **routing score
-> weight** — it makes the router *prefer* him for private work and binds him to a
-> local model. It is **not** a network control: no seccomp filter, network
-> namespace, or egress rule exists in this tree yet. A local-only intent routed to
-> Sir Ghost can still open a socket. See
-> [threat model §5.2](docs/threat-model.md#52-sandbox-isolation--not-enforced) —
-> this is the largest gap between the architecture and the implementation.
+> **On "air-gapped".** This is now enforced, not implied. Work routed to a knight
+> with `privacy_level >= 1.0` runs inside a network namespace with no route out
+> (`control_plane/core/airgap.py`), and the gate **BLOCKS** if the host cannot
+> establish that isolation — the lane never silently downgrades.
+>
+> `tests/test_airgap_enforcement.py` proves it: no DNS, no outbound TCP, no
+> `169.254.169.254`, no inherited proxy variables. Each assertion is paired with a
+> control run *without* isolation, so a host with no egress cannot make a broken
+> air-gap look perfect.
+>
+> ⚠️ It is network containment, **not** a full sandbox — filesystem confinement,
+> cgroups quotas, and a seccomp allowlist are still missing, so an air-gapped
+> process can read and write anything the invoking user can. Safe for *private*
+> work; not for *hostile* code. See
+> [threat model §5.2](docs/threat-model.md#52-sandbox-isolation-network-enforced-filesystem-not).
 
 ---
 
@@ -128,6 +137,7 @@ and **unverified** are marked as such rather than rounded up.
 - ✅ **Z3 invariant checking** — 5 declared safety invariants; `git push --force origin main`, `git push -f origin main`, `push origin +main` and ledger truncation all return `Z3_BLOCK`, end to end through `pre_execute`. Fails **closed** when the solver is absent
 - ✅ **11 Obsidian Pillars** — the `Pillar` enum has exactly 11 members, audited positive & negative
 - ✅ **Deny-by-default RBAC** — 25 knights with explicit mode/domain grants; an unknown knight is BLOCKED, and a missing grant table raises rather than silently denying everything
+- ✅ **Enforced air-gap (network)** — `privacy_level >= 1.0` work runs in a network namespace with no route out; no DNS, no outbound TCP, no metadata endpoint, no inherited proxy vars. Gate BLOCKS when the host cannot isolate
 - ✅ **RTK Rust DLL** — a cdylib noise-stripper loaded into Python via ctypes (4 Rust tests)
 - ✅ **Post-quantum crypto** — **ML-KEM-768 + ML-DSA-65** (RustCrypto `ml-kem` 0.3 / `ml-dsa` 0.1), 3 tests incl. a real handshake round-trip. (Key establishment and signing only — key custody, rotation, and revocation are undefined)
 - ✅ **Tenant-isolated L2 cache** — length-prefixed HMAC keys and per-tenant collections; refuses to start without `MEMPALACE_SECRET`
@@ -291,15 +301,17 @@ guarantee with fuzzy scope is not a guarantee.
 |---|---|---|
 | **Zero-Trust by default** | A knight with no access record is BLOCKED. A missing or empty grant table raises — it never degrades to "deny everything" silently, which is indistinguishable from a real denial | `core/rbac_matrix.py` · `tests/test_rbac_roster.py` |
 | **HITL-gated** | Shatterpoint intents reach `HUMAN_GATE` and require `CAMELOT_DASHBOARD_OPERATOR_TOKEN`; without it the job suspends rather than proceeding | `core/soul_oversight.py` |
-| **Fails closed, not open** | Missing solver, unreadable policy, or unwritable ledger all deny or halt. None of them return "safe" | `tests/test_path_resolution_and_failclosed.py` |
+| **Fails closed, not open** | Missing solver, unreadable policy, unwritable ledger, or unavailable network isolation all deny or halt. None return "safe" | `tests/test_path_resolution_and_failclosed.py` |
+| **Air-gapped lane blocks egress** | `privacy_level >= 1.0` work runs in a network namespace with no route out; no DNS, no outbound TCP, no metadata endpoint, no inherited proxy vars. The gate BLOCKS if the host cannot isolate | `core/airgap.py` · `tests/test_airgap_enforcement.py` |
 | **Tamper-evident** | Mutating any ledger row makes `verify_chain()` return `False`. Exactly one ledger path resolves | `infra/shadow_provenance.py` |
 | **Post-quantum key establishment** | ML-KEM-768 encapsulation + ML-DSA-65 signatures, real round-trips under test | `kinetic_edge/pqcrypto` |
 | **Machine-checked invariants** | Z3 blocks any action whose grounded effects violate one of 5 declared invariants | `infra/z3_verify.py` |
 
 **And what is *not* guaranteed** — stated here rather than buried:
 
-- **Air-gap is not enforced.** `privacy_level` is a routing weight, not a network
-  boundary. No seccomp, netns, or egress rule exists yet.
+- **The air-gap is network-only.** Egress is genuinely blocked and gate-enforced,
+  but there is no filesystem confinement, cgroups quota, or seccomp allowlist — an
+  air-gapped process can still read and write whatever the invoking user can.
 - **Z3 does not prove safety.** It proves that *modelled* hazards are absent. An
   unmodelled destructive operation yields `Z3_PASS`.
 - **Prompt injection is not mitigated.** Retrieved content is not structurally

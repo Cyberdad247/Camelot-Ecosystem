@@ -425,6 +425,22 @@ def _stage_validate(
     if parse.privacy >= 0.8 and titan.execution_mode != "KINETIC":
         issues.append("privacy flag raised — verify air-gapped routing")
 
+    # Air-gap lane: if the routed knight claims privacy_level 1.0, the host must
+    # actually be able to enforce network isolation. Previously privacy_level was
+    # only a routing score, so "air-gapped" was a preference that nothing checked.
+    # An unenforceable claim is worse than no claim, so this BLOCKS.
+    if _is_air_gapped_knight(knight_id):
+        try:
+            from .airgap import require_airgap
+            require_airgap()
+        except Exception as airgap_err:
+            iron_gate = "BLOCKED"
+            issues.append(
+                f"RBAC: {knight_id} is an air-gapped knight but this host cannot "
+                f"enforce network isolation ({type(airgap_err).__name__}) — BLOCKED "
+                f"rather than run without the guarantee"
+            )
+
     if not titan.directive.strip():
         issues.append("directive is empty after compilation")
         iron_gate = "BLOCKED"
@@ -518,6 +534,26 @@ _CARTRIDGE_HINT_BY_DOMAIN: dict[str, str] = {
     "go/binary": "BEAVER", "python/api": "SPIDER", "web/ui": "SPIDER",
     "security": "OCTOPUS",
 }
+
+
+def _is_air_gapped_knight(knight_id: str) -> bool:
+    """True when the routed knight is bound to the zero-trust local-only lane.
+
+    Sourced from the router roster rather than a second hardcoded list, so the
+    two cannot drift apart.
+    """
+    try:
+        from .soul_router import FOUNDRY_COUNCIL, resolve_knight
+
+        canonical = resolve_knight(knight_id) or knight_id
+        return any(
+            engine.knight_id == canonical and engine.privacy_level >= 1.0
+            for engine in FOUNDRY_COUNCIL
+        )
+    except Exception:
+        # Cannot determine the lane -> assume it is not air-gapped rather than
+        # blocking every intent. The RBAC check above is the load-bearing gate.
+        return False
 
 
 def _stage_triage(parse: "ParseResult", enrich: "EnrichResult", knight_id: str):

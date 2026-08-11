@@ -96,29 +96,46 @@ output), a rule that only operator-tagged spans can raise privilege or approve,
 and adversarial tests proving injected content cannot add a capability or
 self-approve.
 
-### 5.2 Sandbox isolation — NOT ENFORCED
+### 5.2 Sandbox isolation — network ENFORCED, filesystem NOT
 
-**The air-gapped lane is not enforced.** `SIR_GHOST` and `SIR_ZEROCLAW` have
-`privacy_level = 1.0` in `core/soul_router.py`, but that value is a *routing
-score weight* — one term in a weighted sum used to prefer a knight. It is not a
-network control.
+**Network isolation is now enforced and tested.** `control_plane/core/airgap.py`
+runs air-gapped work inside a fresh network namespace (`CLONE_NEWNET`, with
+`CLONE_NEWUSER` when unprivileged) whose only interface is a down loopback, plus
+`PR_SET_NO_NEW_PRIVS` and CPU/address-space `rlimit`s. It **refuses to execute**
+when isolation cannot be established, so the lane cannot silently degrade.
 
-There is no `seccomp` filter, no network namespace, no Landlock or AppArmor
-profile, no cgroup limit, and no egress deny rule anywhere in the tree. The
-strings `bwrap`, `proot` and `unshare` appear only as values in a
-`sandbox_primitives` config list; nothing invokes them.
+`core/anya_gate.py` enforces the policy: an intent routed to a knight with
+`privacy_level >= 1.0` is BLOCKED if the host cannot isolate. The lane is derived
+from the router roster, not a second hardcoded list, so the two cannot drift.
 
-Concretely: a local-only intent routed to Sir Ghost can open a socket. Treat
-"air-gapped" as *intent*, not *guarantee*, until this section says otherwise.
+Proven by `tests/test_airgap_enforcement.py`: an air-gapped process cannot resolve
+DNS, cannot open outbound TCP, cannot reach `169.254.169.254`, and does not
+inherit ambient proxy variables or tokens. Each network assertion is paired with a
+control that runs the same probe *without* isolation and skips if the control
+cannot reach the network either — a host with no egress must not make a broken
+air-gap look perfect.
 
-The WASM layer does not compensate for this. Its runtime is now advisory-clean
-(§5.6), but a clean runtime still only enforces *WASI capability* limits on guest
-modules — it does nothing for host-side subprocess execution, which is where the
-Ghost lane actually runs.
+**What is still missing.** This is network containment, not a full sandbox:
 
-*Needed:* a real containment layer (user namespace + seccomp + Landlock + cgroups
-v2 + read-only rootfs + default-deny egress), and integration tests proving the
-Ghost lane cannot resolve DNS, open a socket, or reach a cloud metadata endpoint.
+| Layer | State |
+|---|---|
+| Network namespace, default-deny egress | **enforced** |
+| `no_new_privs`, CPU + address-space rlimits | **enforced** |
+| Filesystem confinement (Landlock / AppArmor / bind-mount) | **not enforced** |
+| cgroups v2 quotas, read-only rootfs, ephemeral disk | **not enforced** |
+| seccomp syscall filter | **not enforced** (`no_new_privs` only) |
+
+So an air-gapped process cannot phone home, but it can still read and write any
+path the invoking user can. Do not treat the lane as safe for hostile code — it is
+containment for *private* work, not for *untrusted* work.
+
+Historical note: `privacy_level` used to be only a routing score weight — one term
+in a weighted sum — while the README described it as a guarantee. The strings
+`bwrap`, `proot` and `unshare` appeared solely as values in a `sandbox_primitives`
+config list, with nothing invoking them.
+
+*Needed next:* Landlock or a bind-mount jail for filesystem scope, cgroups v2 for
+quota, and a seccomp allowlist.
 
 ### 5.3 Modelling gap in Z3 verification
 
