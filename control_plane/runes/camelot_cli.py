@@ -65,6 +65,7 @@ from .nano_swarm_runtime import (
 from .provenance import ProvenanceManager, VerificationRun
 from .system_triage import TriageOptions, run_system_triage
 from .toon_manifest import default_manifest_paths, write_compiled_manifest, write_scarcity_core_artifacts
+from control_plane._paths import REPO_ROOT
 
 VERBOSE_TELEMETRY = False
 
@@ -80,7 +81,7 @@ def _detect_home() -> Path:
     for candidate in candidates:
         if (candidate / "03_VAULT" / "training" / "configs" / "hud.py").exists():
             return candidate
-    return Path(__file__).resolve().parent.parent
+    return REPO_ROOT
 
 
 CAMELOT_HOME = _detect_home()
@@ -262,7 +263,7 @@ def _check_iron_gate(intent: str, *, file_count: int = 0, size_delta_mb: float =
         try:
             import importlib.util
             from pathlib import Path
-            repo_root = Path(__file__).resolve().parent.parent
+            repo_root = REPO_ROOT
             module_path = repo_root / "01_KERNEL" / "iron_gate" / "forensic_engine.py"
             spec = importlib.util.spec_from_file_location("forensic_engine", module_path)
             if spec and spec.loader:

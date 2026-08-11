@@ -24,6 +24,7 @@ import struct
 import time
 from pathlib import Path
 from typing import Optional
+from control_plane._paths import REPO_ROOT
 
 try:
     import sqlite_vec
@@ -34,7 +35,7 @@ DEFAULT_DIM = 256
 DEFAULT_DB = Path(
     os.environ.get(
         "MEMCASTLE_DB",
-        str(Path(__file__).resolve().parent.parent / "03_VAULT" / "memory" / "memcastle.db"),
+        str(REPO_ROOT / "03_VAULT" / "memory" / "memcastle.db"),
     )
 )
 

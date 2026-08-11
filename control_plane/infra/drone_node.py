@@ -48,6 +48,7 @@ from cartridge.tool_registry import ToolRegistry  # noqa: E402
 # path-inserts it. Import the adapter first so `cartridge.*` resolves afterwards.
 from control_plane.bifrost_sandbox_adapter import build_bridge, sign_body  # noqa: E402
 from control_plane.cluster.http_daemon import HttpDaemon, post_json  # noqa: E402
+from control_plane._paths import REPO_ROOT
 
 # Sir Heimdall (perimeter guardian) + CloudBrain L2 (NotebookLM) — both optional,
 # both degrade gracefully so the drone runs even if they're unavailable.
@@ -102,7 +103,7 @@ class KbaDroneNode:
         self.started = time.time()
 
         self.packages_dir = packages_dir or os.getenv("CAMELOT_CARTRIDGE_PACKAGES") \
-            or str(Path(__file__).resolve().parent.parent / "02_FORGE" / "cartridge" / "packages")
+            or str(REPO_ROOT / "02_FORGE" / "cartridge" / "packages")
         ensure_kba_cartridge(self.packages_dir)
 
         # Registry = safe built-ins + KBA services (+ Sir Heimdall if present).

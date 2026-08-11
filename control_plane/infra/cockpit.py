@@ -18,13 +18,14 @@ except Exception:  # pragma: no cover - optional dependency fallback
     psutil = None
 
 from .runic_router import route_rune
+from control_plane._paths import REPO_ROOT
 
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
     if env and Path(env).is_dir():
         return Path(env)
-    return Path(__file__).resolve().parent.parent
+    return REPO_ROOT
 
 
 CAMELOT_HOME = _detect_home()

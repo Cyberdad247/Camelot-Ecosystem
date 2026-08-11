@@ -11,6 +11,7 @@ import re
 import time
 from pathlib import Path
 from typing import Any
+from control_plane._paths import REPO_ROOT
 
 GRANT_CONTEXT = b"camelot-pwa-cockpit/approval-grant/v1:"
 GRANT_CONTEXT_V2 = b"camelot-pwa-cockpit/approval-grant/v2:"
@@ -18,7 +19,7 @@ GRANT_VERSION = 1
 GRANT_VERSION_V2 = 2
 MAX_GRANT_LIFETIME_SECONDS = 90
 _GRANT_ID = re.compile(r"^[0-9a-f]{8}-[0-9a-f-]{27}$")
-_CONSUMED_DIR = Path(__file__).resolve().parents[1] / "03_VAULT" / "runtime_state" / "cockpit_consumed_grants"
+_CONSUMED_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "cockpit_consumed_grants"
 
 
 class ApprovalGrantError(ValueError):

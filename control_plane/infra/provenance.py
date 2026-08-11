@@ -19,12 +19,19 @@ from typing import Any, Optional
 
 from pydantic import BaseModel, Field
 
+from control_plane._paths import KERNEL, VAULT
+
 # Dynamic import for MemPalaceL2 due to 01_KERNEL naming restriction.
 # Import as a package so mempalace_l2.py can resolve its own relative imports.
 try:
     MemPalaceL2 = importlib.import_module("01_KERNEL.memory.mempalace_l2").MemPalaceL2
 except Exception:
-    _MEM_PATH = Path(__file__).resolve().parent.parent / "01_KERNEL" / "memory" / "mempalace_l2.py"
+    _MEM_PATH = KERNEL / "memory" / "mempalace_l2.py"
+    if not _MEM_PATH.is_file():
+        raise ImportError(
+            f"MemPalaceL2 source not found at {_MEM_PATH}; provenance cannot "
+            f"initialise its L2 memory backing store."
+        )
     _MEM_SPEC = importlib.util.spec_from_file_location("01_KERNEL.memory.mempalace_l2", _MEM_PATH)
     _MEM_MOD = importlib.util.module_from_spec(_MEM_SPEC)
     assert _MEM_SPEC and _MEM_SPEC.loader
@@ -97,10 +104,11 @@ class ProvenanceManager:
         if vault_path:
             self.vault_path = vault_path
         else:
-            # Default to 03_VAULT/Missions
-            repo_root = Path(__file__).resolve().parent.parent
-            self.vault_path = repo_root / "03_VAULT" / "Missions"
-        
+            # Default to 03_VAULT/Missions at the repository root. Resolved via
+            # _paths rather than a fixed .parent chain: a short chain here wrote
+            # a second, divergent ledger into control_plane/03_VAULT/Missions.
+            self.vault_path = VAULT / "Missions"
+
         self.vault_path.mkdir(parents=True, exist_ok=True)
         self.verification_ledger = self.vault_path / "verification_ledger.jsonl"
         self.mempalace = MemPalaceL2()

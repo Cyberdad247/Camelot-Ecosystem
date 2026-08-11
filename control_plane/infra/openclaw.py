@@ -15,8 +15,9 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
+from control_plane._paths import REPO_ROOT
 
-CAMELOT_HOME = Path(__file__).resolve().parent.parent
+CAMELOT_HOME = REPO_ROOT
 LOGS_DIR     = CAMELOT_HOME / "logs"
 SKILLS_DIR   = CAMELOT_HOME / ".hive" / "skills"
 QUEUE_FILE   = LOGS_DIR / "harness_queue.jsonl"

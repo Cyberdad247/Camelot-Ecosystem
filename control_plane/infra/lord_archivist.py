@@ -22,8 +22,9 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
+from control_plane._paths import REPO_ROOT
 
-CAMELOT_HOME  = Path(__file__).parent.parent
+CAMELOT_HOME  = REPO_ROOT
 SKILLS_DIR    = CAMELOT_HOME / ".hive" / "skills"
 KNIGHTS_DIR   = CAMELOT_HOME / "03_VAULT" / "Knights"
 LEARNINGS_FILE = KNIGHTS_DIR / "learnings.md"

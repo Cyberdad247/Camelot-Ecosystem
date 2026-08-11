@@ -16,31 +16,67 @@ __version__ = "9000.14"  # CYBERTRONIA — set by P1-T01
 
 
 import json
+import logging
 from functools import lru_cache
-from pathlib import Path
 from typing import Optional
 
-_MATRIX_PATH = (
-    Path(__file__).parent.parent
-    / "03_VAULT" / "training" / "configs" / "config" / "access_matrix.json"
-)
+from control_plane._paths import VAULT
+
+logger = logging.getLogger(__name__)
+
+_MATRIX_PATH = VAULT / "training" / "configs" / "config" / "access_matrix.json"
+
+
+class RBACUnavailableError(RuntimeError):
+    """The access matrix could not be loaded, so no grant can be evaluated.
+
+    Raised instead of degrading to an empty matrix: an empty matrix denies every
+    knight, which reads as a deliberate zero-trust decision but is really a
+    missing or malformed file. Callers must distinguish "denied by policy" from
+    "policy could not be read".
+    """
 
 
 @lru_cache(maxsize=1)
 def _load_matrix() -> dict:
+    """Load access_matrix.json, raising rather than returning a silent {}."""
     if not _MATRIX_PATH.exists():
-        return {}
-    with _MATRIX_PATH.open("r", encoding="utf-8") as f:
-        return json.load(f)
+        raise RBACUnavailableError(
+            f"access matrix not found at {_MATRIX_PATH} — RBAC cannot authorize "
+            f"any knight. Restore the file or set CAMELOT_HOME to the repo root."
+        )
+    try:
+        with _MATRIX_PATH.open("r", encoding="utf-8") as f:
+            matrix = json.load(f)
+    except (OSError, json.JSONDecodeError) as err:
+        raise RBACUnavailableError(
+            f"access matrix at {_MATRIX_PATH} could not be parsed: {err}"
+        ) from err
+
+    if not isinstance(matrix, dict) or not matrix.get("knights"):
+        raise RBACUnavailableError(
+            f"access matrix at {_MATRIX_PATH} declares no knights — every intent "
+            f"would be blocked. Refusing to start with an empty grant table."
+        )
+    return matrix
 
 
 class RBACMatrix:
-    """Lightweight RBAC enforcer — loaded once, cached."""
+    """Lightweight RBAC enforcer — loaded once, cached.
+
+    Raises :class:`RBACUnavailableError` if the matrix is missing, unparseable,
+    or empty. ``anya_gate`` already treats an RBAC exception as BLOCKED, so the
+    failure stays fail-closed while becoming diagnosable.
+    """
 
     def __init__(self) -> None:
         self._matrix = _load_matrix()
         self._knights: dict = self._matrix.get("knights", {})
         self._deny_rules: list = self._matrix.get("deny_rules", [])
+        logger.debug(
+            "RBAC matrix loaded from %s (%d knights, %d deny rules)",
+            _MATRIX_PATH, len(self._knights), len(self._deny_rules),
+        )
 
     def _get_knight(self, knight_id: str) -> Optional[dict]:
         key = knight_id.lower().replace("-", "_").replace(" ", "_")

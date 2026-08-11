@@ -53,11 +53,12 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
+from control_plane._paths import REPO_ROOT
 
 # ── Path contract (mirror cybertronia_audit.py) ──────────────────────────────
 
 CAMELOT_HOME = Path(
-    os.environ.get("CAMELOT_HOME", str(Path(__file__).resolve().parent.parent))
+    os.environ.get("CAMELOT_HOME", str(REPO_ROOT))
 )
 
 PHASE1_ROOT         = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "cybertronia_graph"

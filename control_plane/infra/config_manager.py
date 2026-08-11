@@ -9,6 +9,7 @@ from typing import Optional
 from urllib.parse import urlparse
 
 from pydantic import BaseModel, Field
+from control_plane._paths import REPO_ROOT
 
 try:
     import yaml
@@ -88,7 +89,7 @@ class ConfigManager:
             self.config_path = config_path
         else:
             # Default to project root or home directory
-            project_root = Path(__file__).parent.parent
+            project_root = REPO_ROOT
             self.config_path = project_root / ".camelot-config.yaml"
             if not self.config_path.exists():
                 self.config_path = Path.home() / ".camelot-config.yaml"
@@ -235,7 +236,7 @@ class ConfigManager:
         return normalized
 
     def _load_repo_env_defaults(self) -> dict[str, str]:
-        project_root = Path(__file__).parent.parent
+        project_root = REPO_ROOT
         env_path = project_root / ".env"
         if not env_path.exists():
             return {}
@@ -259,7 +260,7 @@ class ConfigManager:
         if yaml is None:
             return {}
 
-        project_root = Path(__file__).parent.parent
+        project_root = REPO_ROOT
         tiers_path = project_root / "01_KERNEL" / "config_shim" / "tiers.yaml"
         if not tiers_path.exists():
             return {}

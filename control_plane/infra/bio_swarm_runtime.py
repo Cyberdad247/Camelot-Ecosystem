@@ -10,6 +10,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Sequence
+from control_plane._paths import REPO_ROOT
 
 RUNTIME_SCHEMA = "camelot.bio-swarm-runtime/v1"
 RELEASE_SCHEMA = "camelot.bio-swarm-release/v1"
@@ -25,7 +26,7 @@ class BioSwarmPaths:
 
     @classmethod
     def for_root(cls, root: Path | str | None = None) -> "BioSwarmPaths":
-        repo_root = Path(root or Path(__file__).resolve().parent.parent).resolve()
+        repo_root = Path(root or REPO_ROOT).resolve()
         runtime_dir = repo_root / "03_VAULT" / "runtime_state"
         return cls(
             root=repo_root,

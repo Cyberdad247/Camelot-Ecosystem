@@ -23,13 +23,14 @@ from typing import Any, Optional
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from memcastle import MemCastle  # noqa: E402
+from control_plane._paths import REPO_ROOT
 
 SYNC_NOTE_TITLE = "Camelot-OS MemCastle Vault Snapshot"
 
 
 def _load_bridge() -> Optional[Any]:
     """Import the real NotebookLM bridge; return None if unavailable (deps/auth)."""
-    repo = Path(os.environ.get("CAMELOT_OS_HOME", Path(__file__).resolve().parent.parent))
+    repo = Path(os.environ.get("CAMELOT_OS_HOME", REPO_ROOT))
     path = repo / "03_VAULT" / "training" / "configs" / "notebooklm_bridge.py"
     if not path.exists():
         return None

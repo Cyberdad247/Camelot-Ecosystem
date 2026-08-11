@@ -30,10 +30,11 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
+from control_plane._paths import REPO_ROOT
 
-COMPOSE_FILE = Path(__file__).parent.parent / "docker-compose.yml"
+COMPOSE_FILE = REPO_ROOT / "docker-compose.yml"
 SANDBOX_SERVICE = "deerflow-sandbox"
-OUTPUT_DIR = Path(__file__).parent.parent / "logs" / "deerflow"
+OUTPUT_DIR = REPO_ROOT / "logs" / "deerflow"
 
 # Titanium Law: 8GB ceiling. Max 3 containers x 2GB = 6GB, leaving 2GB for host.
 MAX_CONTAINERS = 3

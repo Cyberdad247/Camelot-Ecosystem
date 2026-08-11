@@ -431,7 +431,7 @@ def _stage_validate(
 
     # SP-01 RBAC ACL check (Shatterpoint remediation)
     try:
-        from .rbac_matrix import RBACMatrix
+        from .rbac_matrix import RBACMatrix, RBACUnavailableError
         rbac = RBACMatrix()
         rbac_ok, rbac_issues = rbac.check(
             knight_id, titan.execution_mode, enrich.domain, parse.complexity
@@ -443,6 +443,12 @@ def _stage_validate(
             issues.extend(rbac_issues)
             if iron_gate == "CLEARED":
                 iron_gate = "HITL_REQUIRED"
+    except RBACUnavailableError as rbac_err:
+        # The policy engine itself is broken (matrix missing/unparseable/empty).
+        # No human approval can substitute for an absent grant table, so this is
+        # BLOCKED rather than HITL_REQUIRED.
+        iron_gate = "BLOCKED"
+        issues.append(f"RBAC policy engine unavailable ({rbac_err}) — BLOCKED")
     except Exception as rbac_err:
         issues.append(f"RBAC matrix unavailable ({rbac_err}) — defaulting to HITL_REQUIRED")
         if iron_gate == "CLEARED":

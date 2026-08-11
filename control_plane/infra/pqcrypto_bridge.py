@@ -27,8 +27,9 @@ import json
 import subprocess
 from pathlib import Path
 from typing import Optional
+from control_plane._paths import REPO_ROOT
 
-CAMELOT_HOME = Path(__file__).parent.parent
+CAMELOT_HOME = REPO_ROOT
 _BINARY_CANDIDATES = [
     CAMELOT_HOME / "kinetic_edge" / "pqcrypto" / "target" / "release" / "camelot-pqcrypto.exe",
     CAMELOT_HOME / "kinetic_edge" / "pqcrypto" / "target" / "release" / "camelot-pqcrypto",

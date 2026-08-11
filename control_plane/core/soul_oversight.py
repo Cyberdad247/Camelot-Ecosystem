@@ -22,6 +22,8 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from control_plane._paths import REPO_ROOT
+
 
 class SoulOversight:
     """The Governance gate for Metacognitive Self-Modification."""
@@ -89,13 +91,16 @@ def _z3_verify_patch(job: Any) -> tuple[bool, str]:
     Delegates to the real PDDL-style Z3 encoder in ``control_plane.z3_verify``:
     safety invariants are modelled as fluents, the patch is grounded into action
     effects, and a patch that makes the safety goal unsatisfiable is BLOCKED.
-    Degrades gracefully (pass-through) if the encoder/solver is unavailable —
-    the upstream shatterpoint guard still applies.
+
+    Fails closed if the encoder cannot be imported. This previously returned
+    ``True`` ("passed through"), which meant an import error anywhere in the
+    verifier silently disabled the safety gate for every patch.
     """
     try:
         from .z3_verify import PatchIntent, verify_patch
     except Exception as exc:  # pragma: no cover - defensive import guard
-        return True, f"Z3 encoder unavailable ({exc}) — passed through"
+        return False, (f"Z3 encoder unavailable ({exc}) — cannot verify patch "
+                       f"safety; blocking. Install z3-solver or escalate to HITL.")
 
     intent = getattr(job, "intent", "") or ""
     reason = getattr(getattr(job, "triage", None), "risk_reason", "") or ""
@@ -114,9 +119,8 @@ def _load_colony_nexus():
     unavailable. Never raises — colony state must not crash the gate.
     """
     import importlib.util as _ilu
-    from pathlib import Path as _Path
 
-    path = (_Path(__file__).resolve().parents[1]
+    path = (REPO_ROOT
             / "01_KERNEL" / "iron_gate" / "DEFENSE_GRID" / "colony_nexus.py")
     if not path.exists():
         return None

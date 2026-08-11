@@ -29,14 +29,25 @@ from __future__ import annotations
 __version__ = "9000.14"  # CYBERTRONIA
 
 import asyncio
+import logging
 import sys
 import time
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Awaitable, Callable, Optional, Union
 
+logger = logging.getLogger(__name__)
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+
+class ProvenanceUnavailableError(RuntimeError):
+    """The RECORD stage could not persist its ledger entry.
+
+    Raised only when the loop is built with ``strict_provenance=True``; the
+    default path records the failure on the result instead of raising.
+    """
 
 
 class Stage(str, Enum):
@@ -71,20 +82,37 @@ class KineticResult:
     validated: bool = False
     validation_issues: list[str] = field(default_factory=list)
     provenance_ref: Optional[str] = None
+    provenance_error: Optional[str] = None
     halted_at: Optional[Stage] = None
     elapsed_ms: float = 0.0
 
     @property
     def complete(self) -> bool:
-        """True iff all six stages fired in order."""
-        return self.stages_fired == list(STAGE_ORDER)
+        """True iff all six stages fired in order *and* RECORD persisted.
+
+        The provenance reference is part of the completion contract: a run whose
+        ledger entry was never written is not auditable, so it must not report as
+        complete no matter how far the pipeline got.
+        """
+        return (
+            self.stages_fired == list(STAGE_ORDER)
+            and self.provenance_ref is not None
+        )
 
     def render(self) -> str:
         chain = " → ".join(s.value for s in self.stages_fired)
-        tail = f"  HALTED@{self.halted_at.value}" if self.halted_at else "  ✓ complete"
+        if self.provenance_error:
+            # Names the cause explicitly: a halt at RECORD means the run executed
+            # but left no audit trail, which is not the same as halting earlier.
+            tail = "  ✗ PROVENANCE FAILED — run is NOT auditable"
+        elif self.halted_at:
+            tail = f"  HALTED@{self.halted_at.value}"
+        else:
+            tail = "  ✓ complete"
+        prov = self.provenance_ref or f"FAILED({self.provenance_error})"
         return (f"KineticLoop[{self.intent[:48]}]\n  {chain}{tail}\n"
                 f"  approved={self.approved} validated={self.validated} "
-                f"prov={self.provenance_ref} {self.elapsed_ms:.0f}ms")
+                f"prov={prov} {self.elapsed_ms:.0f}ms")
 
 
 def _default_executor(job: Any, apee: Any) -> str:
@@ -97,8 +125,16 @@ def _default_executor(job: Any, apee: Any) -> str:
 class KineticLoop:
     """The six-stage sovereign execution loop (Pillar 10)."""
 
-    def __init__(self, executor: Optional[Executor] = None):
+    def __init__(self, executor: Optional[Executor] = None, *,
+                 strict_provenance: bool = False):
+        """
+        strict_provenance=True raises :class:`ProvenanceUnavailableError` when the
+        RECORD stage cannot write its ledger entry. Off by default so existing
+        callers keep their control flow; either way the failure is logged at
+        ERROR, recorded on the result, and excluded from ``complete``.
+        """
         self.executor: Executor = executor or _default_executor
+        self.strict_provenance = strict_provenance
 
     async def run(self, intent: str, *, auto_approve: bool = False) -> KineticResult:
         """Drive one intent through all six stages.
@@ -107,6 +143,9 @@ class KineticLoop:
         still fire the APPROVE stage and RECORD the real GateDecision, so the run
         remains auditable. With auto_approve=False the loop halts at APPROVE when
         the Iron Gate does not approve.
+
+        Raises ProvenanceUnavailableError if the ledger write fails and this loop
+        was constructed with strict_provenance=True.
         """
         from .anya_gate import AnyaGate
         from .factory_lane import FactoryJob
@@ -157,14 +196,30 @@ class KineticLoop:
 
         # 6. RECORD — append-only provenance entry
         res.stages_fired.append(Stage.RECORD)
-        res.provenance_ref = self._record(job, res)
+        self._record(job, res)
+        if res.provenance_error is not None:
+            # The run happened but is unauditable. Surface it as a halt at RECORD
+            # rather than letting `complete` and render() report success.
+            res.halted_at = Stage.RECORD
+            if self.strict_provenance:
+                res.elapsed_ms = (time.perf_counter() - t0) * 1000
+                raise ProvenanceUnavailableError(
+                    f"kinetic run {job.job_id} could not be recorded: "
+                    f"{res.provenance_error}"
+                )
         job.advance("DONE")
 
         res.elapsed_ms = (time.perf_counter() - t0) * 1000
         return res
 
     def _record(self, job: Any, res: KineticResult) -> Optional[str]:
-        """Append a provenance ledger entry; graceful if the ledger is absent."""
+        """Append a provenance ledger entry.
+
+        Sets ``res.provenance_ref`` on success, or ``res.provenance_error`` on
+        failure. A failure is logged at ERROR and never silently discarded — an
+        unwritten ledger entry means the run left no audit trail, which is a
+        Pillar 3 (IMMUTABLE_PROVENANCE) violation rather than a cosmetic issue.
+        """
         try:
             from .provenance import ProvenanceManager, VerificationRun
             pm = ProvenanceManager()
@@ -182,8 +237,17 @@ class KineticLoop:
                 success=res.validated,
             )
             pm.log_verification(run)
+            res.provenance_ref = job.job_id
+            res.provenance_error = None
             return job.job_id
-        except Exception:
+        except Exception as err:
+            res.provenance_error = f"{type(err).__name__}: {err}"
+            res.provenance_ref = None
+            logger.error(
+                "RECORD stage failed for job %s — provenance ledger not written: %s",
+                getattr(job, "job_id", "<unknown>"), res.provenance_error,
+                exc_info=True,
+            )
             return None
 
 

@@ -13,13 +13,14 @@ import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from control_plane._paths import REPO_ROOT
 
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
     if env and Path(env).is_dir():
         return Path(env)
-    return Path(__file__).resolve().parent.parent
+    return REPO_ROOT
 
 
 CAMELOT_HOME = _detect_home()

@@ -34,6 +34,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from control_plane.taxonomy import PRIVACY_KEYWORDS
+from control_plane._paths import REPO_ROOT
 
 try:
     from importlib import import_module
@@ -597,7 +598,7 @@ def _handle_fleet(param: str, context: dict) -> dict:
     """Route //FLEET via importlib to avoid 01_KERNEL naming restriction."""
     import importlib.util
 
-    repo_root = Path(__file__).resolve().parent.parent
+    repo_root = REPO_ROOT
     module_path = repo_root / "01_KERNEL" / "swarm" / "graph_orchestrator.py"
     if module_path.exists():
         spec = importlib.util.spec_from_file_location("graph_orchestrator", module_path)

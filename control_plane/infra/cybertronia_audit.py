@@ -53,6 +53,7 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Iterator, Optional
+from control_plane._paths import REPO_ROOT
 
 try:
     import psutil  # type: ignore[import-not-found]
@@ -67,7 +68,7 @@ except ImportError:                      # pragma: no cover - capability gate
 # ---------------------------------------------------------------------------
 
 CAMELOT_HOME = Path(
-    os.environ.get("CAMELOT_HOME", str(Path(__file__).resolve().parent.parent))
+    os.environ.get("CAMELOT_HOME", str(REPO_ROOT))
 )
 RUNTIME_ROOT = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "cybertronia_graph"
 TELEMETRY_FILE = RUNTIME_ROOT / "node_telemetry.json"

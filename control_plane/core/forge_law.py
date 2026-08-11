@@ -17,8 +17,9 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from control_plane._paths import REPO_ROOT
 
-CAMELOT_HOME = Path(__file__).resolve().parents[1]
+CAMELOT_HOME = REPO_ROOT
 DEFAULT_STORE = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "forge_law"
 DEFAULT_LEDGER = CAMELOT_HOME / "03_VAULT" / "Missions" / "verification_ledger.jsonl"
 PROTOCOL_VERSION = "forge-law/v1"

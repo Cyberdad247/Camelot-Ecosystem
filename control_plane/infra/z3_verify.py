@@ -29,6 +29,7 @@ from __future__ import annotations
 
 __version__ = "9000.14"  # CYBERTRONIA
 
+import os
 import re
 import sys
 from dataclasses import dataclass, field
@@ -104,16 +105,36 @@ def ground_effects(patch: PatchIntent) -> dict[str, bool]:
 def verify_patch(patch: PatchIntent) -> Z3Verdict:
     """Symbolically verify a patch. Dangerous patches return Z3_BLOCK.
 
-    If z3 is not installed, returns Z3_UNAVAILABLE (safe pass-through — the
-    upstream shatterpoint guard in anya_gate still applies).
+    Fail-closed when the solver is missing. The safety decision is fully
+    determined by ``ground_effects`` — the solver only confirms that the grounded
+    effects are consistent with the goal — so a negated invariant is decisive
+    with or without z3 installed, and is blocked either way.
+
+    When z3 is absent *and* nothing was flagged, no positive safety claim can be
+    made, so the verdict is unsafe (Z3_UNAVAILABLE) unless the operator opts out
+    explicitly via ``CAMELOT_ALLOW_UNVERIFIED_PATCHES=1``. Previously this path
+    returned ``safe=True`` for every patch, including force-pushes to main.
     """
+    effects = ground_effects(patch)
+    violated = [inv for inv, preserved in effects.items() if not preserved]
+
     try:
         import z3
     except ImportError:
-        return Z3Verdict(True, "Z3_UNAVAILABLE",
-                         "z3-solver not installed; shatterpoint guard still active")
+        if violated:
+            return Z3Verdict(False, "Z3_BLOCK",
+                             "z3-solver absent; patch grounding negates a safety "
+                             "invariant, which is decisive without the solver",
+                             violated=violated)
+        if os.environ.get("CAMELOT_ALLOW_UNVERIFIED_PATCHES") == "1":
+            return Z3Verdict(True, "Z3_UNAVAILABLE",
+                             "z3-solver not installed; no danger pattern matched and "
+                             "CAMELOT_ALLOW_UNVERIFIED_PATCHES=1 permits the run")
+        return Z3Verdict(False, "Z3_UNAVAILABLE",
+                         "z3-solver not installed; cannot verify safety invariants. "
+                         "Install z3-solver, or set CAMELOT_ALLOW_UNVERIFIED_PATCHES=1 "
+                         "to accept unverified patches")
 
-    effects = ground_effects(patch)
     fluents = {inv: z3.Bool(inv) for inv in INVARIANTS}
 
     solver = z3.Solver()
@@ -131,7 +152,6 @@ def verify_patch(patch: PatchIntent) -> Z3Verdict:
     if satisfiable:
         return Z3Verdict(True, "Z3_PASS",
                          "no safety invariant violated (goal SAT under patch effects)")
-    violated = [inv for inv, preserved in effects.items() if not preserved]
     return Z3Verdict(False, "Z3_BLOCK",
                      "patch effects make the safety goal unsatisfiable",
                      violated=violated)

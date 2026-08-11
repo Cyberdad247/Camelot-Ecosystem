@@ -49,6 +49,12 @@ dependencies = [
     "cryptography>=41.0",
     "PyJWT[crypto]",
 
+    # ── Formal verification ────────────────────────────────────────────────
+    # Required, not optional: control_plane.z3_verify is the patch-safety gate.
+    # Without it verify_patch cannot confirm invariants and fails closed, which
+    # blocks otherwise-benign patches.
+    "z3-solver>=4.12",
+
     # ── Scraping / Web ─────────────────────────────────────────────────────
     "playwright>=1.40.0",
     "beautifulsoup4>=4.12.0",

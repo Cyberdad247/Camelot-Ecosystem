@@ -29,6 +29,7 @@ from .knight_configuration import write_knight_configuration
 from .nano_swarm_runtime import boot_nano_swarm_runtime
 from .orchestration_state import summarize_boot_results
 from .symbiotic_maintenance import boot_symbiotic_maintenance
+from control_plane._paths import REPO_ROOT
 
 _C = {
     "g": "\033[92m",
@@ -60,12 +61,12 @@ def _detect_home() -> Path:
     candidates = [
         Path.home() / "CAMELOT_OS",
         Path("C:/Users/vizio/CAMELOT_OS"),
-        Path(__file__).resolve().parent.parent,
+        REPO_ROOT,
     ]
     for candidate in candidates:
         if (candidate / "03_VAULT" / "training" / "configs" / "hud.py").exists():
             return candidate
-    return Path(__file__).resolve().parent.parent
+    return REPO_ROOT
 
 
 def _detect_venv_python(home: Path) -> Path:

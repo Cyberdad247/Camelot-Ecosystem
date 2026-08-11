@@ -9,7 +9,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+from control_plane._paths import REPO_ROOT
 STAGING_ROOT = REPO_ROOT / ".camelot" / "vault" / "staging" / "starship"
 RUNTIME_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "starship"
 CONFIG_PATH = RUNTIME_DIR / "camelot-starship.toml"
