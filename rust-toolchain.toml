@@ -6,7 +6,10 @@
 # stable (`1.85.0`, released Feb 2025) so `rustup` resolves the channel cleanly.
 # Once Rust 1.96.x actually exists on stable, bump this and re-run the
 # ouroboros_engine 12/12 tests claim against the new pin.
-channel = "1.85.0"
+# Bumped 1.85.0 -> 1.94.0 (2026-08-11): required by wasmtime 47.x, which is the
+# security fix for 21 RUSTSEC advisories in the WASM sandbox (see
+# 02_FORGE/kinetic/actor/src/lib.rs header and .cargo/audit.toml).
+channel = "1.94.0"
 
 # Cross-compile targets for the workspace (kernel_api_bridge + WASM actor host
 # in the kinetic family). Without explicit targets, rust-toolchain.toml defaults

@@ -1,6 +1,14 @@
 // =============================================================================
 // 02_FORGE/kinetic/actor/src/lib.rs
-// Camelot-OS WASM Actor Host — Wasmtime 30.x boundary.
+// Camelot-OS WASM Actor Host — Wasmtime 47.x boundary.
+//
+// SECURITY: upgraded 30.0.2 -> 47.x (2026-08-11). The 30.x pin carried 21 open
+// RUSTSEC advisories, five of them sandbox-escape or WASI permission-bypass
+// class (RUSTSEC-2026-0095/-0096/-0088/-0149/-0188). Because this runtime *is*
+// the isolation boundary for the SOULS layer, those were holes in containment
+// rather than peripheral CVEs. 47.x also drops the Winch backend entirely,
+// which retires the Winch-specific escape advisories by construction.
+// Requires Rust >= 1.94 (see rust-toolchain.toml).
 //
 // IRON-GATE-authorized Scope PR (see ../Cargo.toml header for full audit trail).
 //
@@ -21,13 +29,12 @@
 //     point for downstream callers.
 //   - Policy M2 review: removed the empty cfg-gated target block.
 //
-// Verified Wasmtime ≥30 APIs only (all still public in 30.0.2):
+// Verified Wasmtime APIs used here (all public in 47.0.3):
 //   * wasmtime::Engine                       solo / multi-thread setups
 //   * wasmtime::Config::new                  builder
-//   * wasmtime::Store                        per-instance state
 //   * wasmtime::component::Linker::<T>::new  component-model linker (no host fns yet)
-//   * wasmtime::component::Component::deserialize(bytes) — RENAMED in 30.x
-//   * wasmtime::component::bindgen!          typed guest bindings (planned)
+//   * wasmtime::component::Component::deserialize(bytes)  — unsafe, see below
+//   * Config::async_support                  DEPRECATED in 47.x (no effect); removed
 // =============================================================================
 
 use anyhow::{Context, Result};
@@ -74,7 +81,9 @@ impl ActorHost {
     /// `Linker::instantiate_with_memories` or `Instance::new_with_limiter`.
     pub fn new() -> Result<Self, ActorHostError> {
         let mut config = Config::new();
-        config.wasm_component_model(true).async_support(true);
+        // `async_support` was deprecated in the 47.x series ("no longer has any
+        // effect") — async is driven by the call site now, not engine config.
+        config.wasm_component_model(true);
         let engine =
             Engine::new(&config).map_err(|e| ActorHostError::WasmtimeConfig(e.to_string()))?;
         Ok(Self { engine })

@@ -111,8 +111,10 @@ strings `bwrap`, `proot` and `unshare` appear only as values in a
 Concretely: a local-only intent routed to Sir Ghost can open a socket. Treat
 "air-gapped" as *intent*, not *guarantee*, until this section says otherwise.
 
-The WASM layer does not compensate for this: it carries known sandbox-escape
-advisories of its own (§5.6).
+The WASM layer does not compensate for this. Its runtime is now advisory-clean
+(§5.6), but a clean runtime still only enforces *WASI capability* limits on guest
+modules — it does nothing for host-side subprocess execution, which is where the
+Ghost lane actually runs.
 
 *Needed:* a real containment layer (user namespace + seccomp + Landlock + cgroups
 v2 + read-only rootfs + default-deny egress), and integration tests proving the
@@ -151,35 +153,26 @@ is not full isolation: tenant scoping is **not** systematically enforced in
 queries, queue names, object paths, log fields, or metrics labels. Only the L2
 paths have been audited.
 
-### 5.6 Supply chain — 23 known advisories, 21 in the sandbox runtime
+### 5.6 Supply chain — advisories resolved, provenance still unverified
 
-`cargo audit` now runs as a blocking CI job (`forge-ci.yml`), with the known set
-enumerated in `.cargo/audit.toml`. It had never run before; the first run found
-24 advisories, of which one was fixable within semver.
+`cargo audit` now runs as a blocking CI job (`forge-ci.yml`) and reports **zero
+vulnerabilities with an empty allowlist**. It had never run before this audit;
+the first run found 24, of which 21 were in `wasmtime` / `wasmtime-wasi` 30.0.2 —
+the sandbox runtime itself — including five sandbox-escape and WASI
+permission-bypass advisories (RUSTSEC-2026-0095, -0096, -0088, -0149, -0188).
 
-**This compounds §5.2.** 21 of the 23 are in `wasmtime` / `wasmtime-wasi` 30.0.2,
-pinned in `02_FORGE/kinetic/actor/Cargo.toml`, and five are sandbox-escape or
-permission-bypass class:
+Resolved by upgrading wasmtime 30 → 47 (which also removes the Winch backend
+entirely, retiring the Winch-specific escapes by construction), pyo3 0.23 → 0.29,
+and crossbeam-epoch. This removes the *known-breachable* qualifier from boundary
+D; it does **not** make boundary D enforced — see §5.2, which is unchanged and
+remains the larger gap.
 
-| Advisory | Effect |
-|---|---|
-| RUSTSEC-2026-0095 | Winch backend may allow a sandbox escape |
-| RUSTSEC-2026-0096 | Miscompiled guest heap access — sandbox escape on aarch64 |
-| RUSTSEC-2026-0088 | Data leakage between pooling allocator instances |
-| RUSTSEC-2026-0149 | WASI `path_open(TRUNCATE)` bypasses `FilePerms::WRITE` |
-| RUSTSEC-2026-0188 | WASI hard links and renames bypass `FilePerms` |
+Still missing: no SBOM, no artifact signing, no signature verification before
+loading a WASM pill, and `pip-audit` runs non-blocking pending triage. A pill is
+still loaded on trust.
 
-Boundary D is therefore not merely weak (§5.2) but **known-breachable by a
-malicious guest module**. Until wasmtime is upgraded, WASM execution provides
-process convenience, not a security boundary — **do not run untrusted guest
-modules**.
-
-*Needed, in priority order:* (1) wasmtime 30 → 47 upgrade — the single highest
-value security change in the tree; (2) artifact signing and signature
-verification before loading a pill; (3) SBOM generation and lockfile verification.
-
-Still missing regardless: no SBOM, no artifact signing, no signature check before
-loading a WASM pill, and `pip-audit` runs non-blocking pending triage.
+*Needed, in priority order:* (1) real containment (§5.2); (2) artifact signing and
+signature verification before load; (3) SBOM generation and lockfile verification.
 
 ### 5.7 Key custody — UNDEFINED
 

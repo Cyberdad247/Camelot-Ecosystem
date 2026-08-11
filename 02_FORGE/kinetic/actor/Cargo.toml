@@ -58,11 +58,11 @@ path = "src/lib.rs"
 [dependencies]
 # Pinned to wasmtime 30.x — verify on https://crates.io/crates/wasmtime before merge.
 # wasmtime and wasmtime-wasi are version-locked (single repo, twin publishes).
-wasmtime   = { version = "30", default-features = false, features = ["runtime", "component-model", "async"] }
+wasmtime   = { version = "47", default-features = false, features = ["runtime", "component-model", "async"] }
 # wasmtime-wasi is kept as a dep for downstream guests; default-features=true ensures
 # the wasm32-wasip2 / p2 capability-handle registration API surface remains available
 # for follow-up PRs that wire the first guest actor. This stub does NOT call it yet.
-wasmtime-wasi = "30"
+wasmtime-wasi = "47"
 # Pre-existing dep baseline to match the rest of the workspace.
 anyhow = "1.0"
 thiserror = "1"

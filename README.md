@@ -163,23 +163,32 @@ under `continue-on-error: true`. The 19 failures and 15 errors are tracked debt 
 mostly uninstalled optional dependencies (`chromadb`, `python-multipart`,
 `appwrite`), plus lockbox fixtures and a taxonomy scan cap.
 
-### ⚠️ Dependency advisories — the "0 advisories" claim was wrong
+### Dependency advisories — now actually zero
 
-`cargo audit` had never been run by any workflow. The first run found **24
-advisories**; one was fixable within semver, leaving **23**.
+`cargo audit` had never been run by any workflow, so "0 advisories" was an
+unchecked assertion. The first run found **24**, of which 21 were in
+`wasmtime` / `wasmtime-wasi` 30.0.2 — **the WASM sandbox itself** — including
+five sandbox-escape and WASI permission-bypass advisories.
 
-**21 of them are in `wasmtime` / `wasmtime-wasi` 30.0.2 — the WASM sandbox
-itself** — and several are sandbox-escape class (`RUSTSEC-2026-0095`,
-`RUSTSEC-2026-0096`, `RUSTSEC-2026-0088`, `RUSTSEC-2026-0149`,
-`RUSTSEC-2026-0188`). That matters more here than a typical CVE, because the WASM
-runtime *is* the isolation boundary for the SOULS layer.
+They were fixed rather than ignored:
 
-**Do not run untrusted guest modules until wasmtime is upgraded** (30 → 47; it
-needs its own migration, and `cargo update` within semver does not fix it).
+| Change | Effect |
+|---|---|
+| wasmtime & wasmtime-wasi 30.0.2 → 47.x | clears 21 advisories; also drops the Winch backend, retiring the Winch-specific escapes by construction |
+| pyo3 0.23 → 0.29 | clears `RUSTSEC-2025-0020`, `RUSTSEC-2026-0177` |
+| crossbeam-epoch 0.9.18 → 0.9.20 | clears `RUSTSEC-2026-0204` |
 
-Every known advisory is enumerated with rationale in
-[`.cargo/audit.toml`](.cargo/audit.toml), and `cargo audit` now runs in CI as a
-**blocking** job — so new advisories fail the build even while these are triaged.
+```
+cargo audit    # 0 vulnerabilities, empty ignore list
+```
+
+`cargo audit` runs as a **blocking** CI job, and
+[`.cargo/audit.toml`](.cargo/audit.toml) carries an empty allowlist with a policy
+note: fix the dependency, don't silence the advisory.
+
+> This required bumping the pinned toolchain to **Rust 1.94** (wasmtime 47's
+> MSRV) — see `rust-toolchain.toml`. The full workspace builds and its 14 tests
+> pass on it.
 
 Reproduce any of it yourself:
 
@@ -293,8 +302,9 @@ guarantee with fuzzy scope is not a guarantee.
   unmodelled destructive operation yields `Z3_PASS`.
 - **Prompt injection is not mitigated.** Retrieved content is not structurally
   separated from operator instructions.
-- **Supply chain is unverified.** No SBOM, no artifact signing, no signature check
-  before loading a WASM pill; `cargo audit` runs in no workflow.
+- **Artifact provenance is unverified.** Dependency advisories are clean and
+  gated, but there is still no SBOM, no artifact signing, and no signature check
+  before a WASM pill is loaded.
 - **Cross-tenant isolation is partial.** Audited for L2 cache keys and collections
   only — not for queues, object paths, logs, or metrics labels.
 
