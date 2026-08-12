@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "LADY_APIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//BIO_SWARM Lady Apis command sequence audit",
+    "content": "{\"action\": \"//BIO_SWARM\"}",
+    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
+    "open_viking_tether": "open_viking://worldtree/lady_apis",
+    "updated_at": "2026-08-12T14:40:35.122610+00:00"
+  }
+]

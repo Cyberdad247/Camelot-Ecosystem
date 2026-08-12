@@ -1,6 +1,6 @@
 # Camelot-OS v701 Engine Architecture
 
-Generated: 2026-05-12T15:09:37.054474+00:00
+Generated: 2026-08-12T16:40:01.129458+00:00
 
 ## Source Contract
 
@@ -42,49 +42,70 @@ This v701 package treats the live repository as the source of truth. It pulls th
 | W_KINETIC | 0.7 |
 | W_BRIDGE | 0.78 |
 | W_MEMORY | 0.92 |
+| W_LINEAR | 0.95 |
+| W_WARDEN | 0.93 |
+| W_FINANCE | 0.82 |
+| W_BIFROST | 0.91 |
+| W_VOICE | 0.86 |
+| W_AGENTIC | 0.87 |
 
 ## Foundry Council
 
 | Knight | Engine | Weight | Value | Privacy | Function |
 | --- | --- | --- | --- | --- | --- |
-| sir_boris | claude_code | W_ORCHESTRATION | 0.85 | 0.3 | Architecture, Colony Command, 13-Agent Critique |
-| sir_alex | claude_code | W_COGNITIVE | 0.88 | 0.3 | Cognitive cartridge orchestration, decision framing, bridge governance |
-| sir_helio | gemini_cli | W_CONTEXT | 0.9 | 0.2 | 1M+ token context mapping |
-| sir_codex | openai_codex | W_VELOCITY | 0.75 | 0.2 | High-velocity code generation |
-| sir_forge | open_coder | W_KINETIC | 0.7 | 0.7 | L2 Kinetic Code Generation â€” local open-weight |
-| sir_link | gemini_cli | W_BRIDGE | 0.78 | 0.2 | Bridge coordination across UI, cloud brain, and local terminal |
-| sir_ghost | local_qwen | W_PRIVACY | 1.0 | 1.0 | Zero-Trust, air-gapped execution |
-| sir_liberte | open_source | W_SOVEREIGNTY | 0.8 | 0.5 | Anti-vendor lock-in, sovereign execution, HuggingFace Hub integration |
-| sir_mnemo | integration_brain | W_MEMORY | 0.92 | 0.4 | Memory routing Ã¢â‚¬â€ ST/LT/both tier scoring for Integration Brain |
-| sir_sentinel | claude_code | W_ORCHESTRATION | 0.85 | 0.4 | Security audit, Agent-Armor PDG review, and governance escalation |
-| sir_midas | meta_optimizer | W_ORCHESTRATION | 0.85 | 0.5 | Autonomous self-enhancement, performance optimization, and slop removal |
-| sir_syntax | open_coder | W_KINETIC | 0.7 | 0.6 | DeepSeek-R1 / Llama-3 open-weight kinetic generation |
+| sir_boris | claude_code | W_ORCHESTRATION | 0.85 | 0.3 | Architecture & Lead |
+| sir_alex | claude_code | W_COGNITIVE | 0.88 | 0.3 | Cognitive Orchestration |
+| sir_helio | antigravity.cli | W_CONTEXT | 0.9 | 0.2 | 1M+ Context Mapping |
+| sir_codex | openai_codex | W_VELOCITY | 0.75 | 0.2 | High-Velocity Code |
+| sir_forge | open_coder | W_KINETIC | 0.7 | 0.7 | Local Code Gen |
+| sir_sonus | vox_anima | W_VOICE | 0.86 | 0.3 | Voice & Resonance |
+| sir_link | antigravity.cli | W_BRIDGE | 0.78 | 0.2 | Cross-UI Handoff |
+| sir_ghost | local_qwen | W_PRIVACY | 1.0 | 1.0 | Zero-Trust Execution |
+| sir_liberte | open_source | W_SOVEREIGNTY | 0.8 | 0.5 | Anti-Vendor Sovereign |
+| sir_mnemo | integration_brain | W_MEMORY | 0.92 | 0.4 | Memory Routing |
+| sir_ouroboros | ouroboros_ssm | W_LINEAR | 0.95 | 0.1 | Linear Reasoning |
+| sir_sentinel | gemini_flash | W_WARDEN | 0.93 | 0.8 | Security Warden |
+| sir_valerian | gemini_flash | W_FINANCE | 0.82 | 0.4 | Financial/ROI |
+| sir_heimdall | pydantic_ai | W_BIFROST | 0.91 | 0.9 | Bifrost Guardian |
+| sir_openclaw | openclaw | W_CONTEXT | 0.9 | 0.6 | Compliant Trend Harvester |
+| sir_rustclaw | rustclaw | W_KINETIC | 0.7 | 0.5 | Rust Image Pipeline Executor |
+| sir_hermes | hermes_cli | W_BRIDGE | 0.78 | 0.6 | Shopify GraphQL/Webhook Courier |
+| lady_nanobot | next_edge | W_VELOCITY | 0.75 | 0.6 | Edge Component Swarm |
+| sir_zeroclaw | local_qwen | W_PRIVACY | 1.0 | 1.0 | Zero-Trust Commerce Sentry |
+| sir_agentis | agents_a1 | W_AGENTIC | 0.87 | 0.9 | Agentic MoE Orchestrator |
 
 ## Switchboard Terminals
 
 | Terminal | Engine | Weight | Cost | Capability | Port | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
+| bifrost_gateway | bifrost_gateway | 0.8 | free | gateway, websocket, webhook, ingress, swarm, pwa, voice | 0 | Bifrost TS gateway — voice/webhook ingress + Microcubic swarm (:3001); bridge via control_plane.bifrost_gateway |
+| lady_nanobot | next_edge | 0.84 | free | edge_component_agents, webgl_mockup_contract, nfc_route_contract, telemetry_event_contract | 0 | Claw Suite edge component swarm contract |
+| sir_agentis | agents_a1 | 0.87 | free | agentic, tool_use, planning, local, openai_compat | 0 | Agents-A1 35B MoE — local vLLM/SGLang, OpenAI-compat (35B MoE agentic LLM; Cyberdad247/Agents-A1) |
 | sir_alex | claude_code | 0.88 | medium | cognitive, reasoning, critical, decision | 8080 | Claude Code — cognitive cartridge orchestration |
 | sir_boris | claude_code | 0.85 | medium | orchestration, architecture, critique, forge | 8080 | Claude Code — CLIProxy gateway |
-| sir_codex | openai_codex | 0.75 | high | velocity, rapid_proto, openai | 0 | OpenAI Codex — high-velocity generation |
-| sir_forge | open_coder | 0.7 | free | code_gen, scaffold, technical, kinetic | 11434 | Open Coder local — kinetic code gen |
-| sir_ghost | local_qwen | 1.0 | free | privacy, air_gapped, zero_trust | 11434 | Local Qwen 3.5 — air-gapped, zero trust |
+| sir_codex | openai_codex | 0.75 | free | velocity, rapid_proto, openai | 8080 | OpenAI Codex via CLIProxyAPI :8080 — free provider pool |
+| sir_forge | sovereign | 0.7 | free | code_gen, scaffold, technical, kinetic | 0 | SIE qwen2.5-coder:3b — sovereign code gen |
+| sir_ghost | sovereign | 1.0 | free | privacy, air_gapped, zero_trust | 0 | SIE qwen3:4b — air-gapped sovereign inference |
 | sir_gideon | local_audit | 0.85 | free | security, audit, scorpion, gideon, forensic | 0 | Forensic auditor — GIDEON_RISK_MATRIX //SCORPION pass |
-| sir_helio | gemini_cli | 0.9 | low | context, research, burst, 1m_token | 0 | Gemini CLI — 1M+ context mapping |
-| sir_jcode | jcode_harness | 0.87 | free | harness, cli, mcp, swarm, multi_agent, microsecond, self_dev | 0 | jcode v0.11.6 — Rust harness, 14ms latency, swarm coord, routes via CLIProxy :8080 |
+| sir_gravity | antigravity | 0.88 | free | code_gen, ide_native, gemini, google, antigravity, kinetic | 8080 | Google Antigravity — Gemini models via CLIProxyAPI antigravity OAuth channel |
+| sir_heimdall | pydantic_ai | 0.99 | low | security, mesh, bifrost, zero_trust, network, sentinel | 0 | Sir Heimdall — Bifrost Guardian & Mesh Network Sentinel |
+| sir_helio | pydantic_ai | 0.95 | low | context, research, burst, 1m_token, pydantic_ai | 0 | Sir Helio v400 — Pydantic AI Context Lord |
+| sir_hermes | hermes_cli | 0.78 | free | agent, tool_use, nous, openrouter, kinetic, autonomous, shopify_admin, shopify_storefront, graphql_orchestration, webhook_choreography | 0 | Nous Hermes Agent — autonomous tool-calling via subprocess (-q mode) |
+| sir_kimi | kimi_cli | 0.82 | free | long_context, research, chinese, moonshot, kimi, k2 | 8080 | Moonshot Kimi K2.5 — 1M context via CLIProxyAPI kimi OAuth channel |
 | sir_liberte | open_source | 0.8 | free | sovereignty, oss, anti_lock | 0 | Open Source — anti-vendor lock-in |
-| sir_link | gemini_cli | 0.78 | low | bridge, handoff, terminal, ui, switchboard | 0 | Sir Link — handshake coordinator, switchboard ATC |
-| sir_merlin | excalibur_kernel | 0.82 | free | kernel, a2a, handoff, orchestration, fusion | 8000 | Excalibur Merlin_Omega kernel — A2A orchestration, fusion router |
+| sir_link | antigravity.cli | 0.78 | low | bridge, handoff, terminal, ui, switchboard | 0 | Sir Link — handshake coordinator, switchboard ATC |
 | sir_mnemo | integration_brain | 0.92 | low | memory, archive, recall, synthesize, route | 0 | Integration Brain router — ST/LT memory (module probe) |
-| sir_pi | pi_agent | 0.82 | low | coding_agent, agentic, read, write, edit, bash, session | 8080 | pi-mono v0.73.0 — agentic coding, LLM routed via CLIProxy :8080 |
-| sir_qdrant | qdrant_vector | 0.9 | free | vector, search, embed, semantic, mnemo_store | 6333 | Qdrant v1.17.1 — vector store for SIR_MNEMO, ~/bin/qdrant.exe |
-| sir_saltare | saltare_gateway | 0.8 | free | mcp, gateway, routing, tool_dispatch, kinetic | 8085 | Saltare MCP Gateway v3.0.0-beta.3 — 24 handlers, port 8085 |
+| sir_octavian | local_ops | 0.82 | free | ops, metrics, monitoring, telemetry, status, alerts, factory | 8400 | Ops & metrics sentinel — factory throughput, health dashboard (:8400) |
+| sir_openclaw | openclaw | 0.9 | free | compliant_trend_research, source_attribution, robots_policy, rate_limit_respect | 0 | Claw Suite harvester: compliant public-source research only |
+| sir_rustclaw | rustclaw | 0.86 | free | rust_image_pipeline, cmyk_contrast_check, halftone_underbase_plan, avif_transcode_contract | 0 | Claw Suite Rust image pipeline contract |
 | sir_sentinel | claude_code | 0.85 | medium | security, audit, armor, pdg | 3001 | Security warden — Agent-Armor PDG |
+| sir_sonus | kitten_tts | 0.88 | free | tts, audio, voice, speak, synthesize, kitten, streaming | 8300 | Kitten TTS streaming node — chunked audio synthesis HTTP :8300 |
+| sir_zeroclaw | sovereign | 1.0 | free | zero_trust, ip_trademark_guard, affiliate_abuse_guard, checkout_risk_gate | 0 | SIE qwen3:4b — zero-trust sentry; HUMAN_GATE for fraud and fingerprint actions |
 
 ## DKS Memory Law
 
-- Assembly count from the Excalibur roster: `31`.
-- Agora roster count: `31`.
+- Assembly count from the Excalibur roster: `9`.
+- Agora roster count: `43`.
 - Hot-pool rule: at most 5 active Knight contexts in RAM.
 - RAM ceiling: 8 GB local Titanium Law.
 

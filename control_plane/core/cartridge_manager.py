@@ -41,7 +41,7 @@ import time
 from dataclasses import asdict, dataclass, field
 from typing import Any, Literal, Optional
 
-CartridgeName = Literal["ANT", "BEAVER", "SPIDER", "OCTOPUS", "DEFAULT"]
+CartridgeName = Literal["ANT", "BEAVER", "SPIDER", "EAGLE", "OCTOPUS", "BIO_SWARM", "DEFAULT"]
 
 CARTRIDGES: dict[str, dict[str, Any]] = {
     "ANT": {
@@ -65,12 +65,27 @@ CARTRIDGES: dict[str, dict[str, Any]] = {
         "skills": ["mcp", "a2a-bridge", "api-glue"],
         "preferred_models": ["gemini-3-flash-preview"],
     },
+    "EAGLE": {
+        "title": "Sky Watcher",
+        "domain": "high-altitude context audit / speculative sampling / aerial reconnaissance",
+        "lead_knight": "lady_apis",
+        "skills": ["eagle-sampling", "aerial-audit", "macro-context-foraging"],
+        "preferred_models": ["gemini-3.1-pro-preview", "gemini-3.6-flash"],
+    },
     "OCTOPUS": {
         "title": "Lazarus Pit",
         "domain": "debugging / piv self-healing",
         "lead_knight": "sir_debug",
         "skills": ["piv-loop", "test-repair", "regression-hunt"],
         "preferred_models": ["gemini-3-flash-preview", "claude-haiku-4-5-20251001"],
+    },
+    "BIO_SWARM": {
+        "title": "Bio-Kinetic Matrix",
+        "domain": "biological isolation / cellular swarm / neural pulse",
+        "lead_knight": "lady_apis",
+        "co_lead": "sir_boris",
+        "skills": ["cellular-isolation", "mitosis-scaling", "neural-pulse", "bio-swarm", "hive-orchestration"],
+        "preferred_models": ["gemini-3.6-flash", "gpt-5.5-codex"],
     },
     "DEFAULT": {
         "title": "Round Table Baseline",
@@ -176,9 +191,9 @@ def _selftest() -> int:
     st = cm.switch("ANT")
     check("V5.1 switch ANT activates", cm.active == "ANT" and st.lead_knight == "lady_apis")
 
-    # V5.3 all 4 cartridges valid
-    check("V5.3 all 4 cartridges + DEFAULT defined",
-          all(c in CARTRIDGES for c in ("ANT", "BEAVER", "SPIDER", "OCTOPUS", "DEFAULT")))
+    # V5.3 all cartridges valid
+    check("V5.3 all cartridges + DEFAULT defined",
+          all(c in CARTRIDGES for c in ("ANT", "BEAVER", "SPIDER", "EAGLE", "OCTOPUS", "BIO_SWARM", "DEFAULT")))
 
     # V5.2 state persistence across swap
     cm.switch("ANT")

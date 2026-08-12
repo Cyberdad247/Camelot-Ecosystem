@@ -93,6 +93,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "ANTIGRAVITY":         "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Synergizing NotebookLM + AntiGravity
     "KICKBOX":             "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",   # KickBox Audio
     "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
+    "BIO_KINETIC_SWARM":   "93b21c40-10ff-4e89-a212-08f37b1297e1",   # Bio-Kinetic Swarm Node
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
@@ -102,7 +103,7 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "SIR_SENTINEL":        ["security", "audit", "iron_gate", "guard"],
     "SIR_DEBUG":           ["debug", "heal", "piv", "repair"],
     "SIR_GHOST":           ["privacy", "secrets", "air_gap", "scan"],
-    "LADY_APIS":           ["research", "bashr", "foraging", "context"],
+    "LADY_APIS":           ["research", "bashr", "foraging", "context", "bio_swarm", "eagle_audit"],
     "MERLIN_OMEGA":        ["reasoning", "got", "tot", "deep_think", "math"],
     "SIR_HELIO":           ["voice", "tts", "audio", "realtime"],
     "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic"],
@@ -111,6 +112,7 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "LADY_MNEMOSYNE":      ["memory", "vfs", "mnemosyne", "sweep", "brief"],
     "ANYA_QUANTUM_MANTRA": ["glyph", "quantum", "vfs", "token", "compression"],
     "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system"],
+    "BIO_KINETIC_SWARM":   ["bio_kinetic", "cellular_swarm", "tissue_isolation", "neural_pulse", "mitosis", "lady_apis"],
 }
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {
@@ -121,6 +123,7 @@ RUNE_SYMBOLECT: Dict[str, List[str]] = {
     "\u16DE": ["SIR_DEBUG"],                                              # ᛞ DEBUG
     "\u16A2": ["SIR_HELIO", "SIR_SONUS"],                                 # ᚢ VOICE
     "\u16A8": ["SIR_BORIS", "SIR_ALEX"],                                  # ᚨ ARCHITECT
+    "\u16D2": ["LADY_APIS", "BIO_KINETIC_SWARM", "SIR_BORIS", "SIR_FORGE"],# ᛒ BIO_KINETIC_SWARM
     "\u16DF": list(KNIGHT_NOTEBOOKS.keys()),                               # ᛟ SOVEREIGN
 }
 

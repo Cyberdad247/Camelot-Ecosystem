@@ -1,6 +1,6 @@
 # v701 Assimilation Protocol Journal
 
-Generated: 2026-05-12T15:09:37.054474+00:00
+Generated: 2026-08-12T16:40:01.129458+00:00
 
 ## Protocol
 
@@ -15,7 +15,6 @@ Generated: 2026-05-12T15:09:37.054474+00:00
 | Project | Type | Owner | Path | Status | Verification | Risk / Caveat |
 | --- | --- | --- | --- | --- | --- | --- |
 | anya-lyte | app | Sir Gareth / Sir Syntax | 02_FORGE/apps/anya-lyte | assimilated | Test-Path 02_FORGE/apps/anya-lyte | Validate upstream license and active runtime need before deeper coupling. |
-| luxora-prestige | app | Sir Gareth / Sir Syntax | 02_FORGE/apps/luxora-prestige | assimilated | Test-Path 02_FORGE/apps/luxora-prestige | Validate upstream license and active runtime need before deeper coupling. |
 | lightpanda | browser | Lady Apis / Sir Castor | 02_FORGE/KINETIC_ARMORY/lightpanda | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/lightpanda | Validate upstream license and active runtime need before deeper coupling. |
 | lightpanda-browser | browser | Lady Apis / Sir Castor | 02_FORGE/KINETIC_ARMORY/lightpanda-browser | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/lightpanda-browser | Validate upstream license and active runtime need before deeper coupling. |
 | DEFENSE_GRID | defense | Sir Sentinel | 01_KERNEL/iron_gate/DEFENSE_GRID | assimilated | Test-Path 01_KERNEL/iron_gate/DEFENSE_GRID | Validate upstream license and active runtime need before deeper coupling. |
@@ -30,16 +29,16 @@ Generated: 2026-05-12T15:09:37.054474+00:00
 | rag | memory | Sir Mnemo | 01_KERNEL/merlin/rag | assimilated | Test-Path 01_KERNEL/merlin/rag | Validate upstream license and active runtime need before deeper coupling. |
 | titan | memory | Anya | 01_KERNEL/titan | assimilated | Test-Path 01_KERNEL/titan | Validate upstream license and active runtime need before deeper coupling. |
 | awesome-cli | reference | Sir Liberte | 02_FORGE/tools/awesome-cli | assimilated | Test-Path 02_FORGE/tools/awesome-cli | Validate upstream license and active runtime need before deeper coupling. |
+| edge-router | reference | Sir Liberte | 02_FORGE/KINETIC_ARMORY/edge-router | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/edge-router | Validate upstream license and active runtime need before deeper coupling. |
 | headartworks | reference | Sir Liberte | 02_FORGE/apps/headartworks | assimilated | Test-Path 02_FORGE/apps/headartworks | Validate upstream license and active runtime need before deeper coupling. |
-| headartworks-live-pull | reference | Sir Liberte | 02_FORGE/apps/headartworks-live-pull | assimilated | Test-Path 02_FORGE/apps/headartworks-live-pull | Validate upstream license and active runtime need before deeper coupling. |
+| i2l-phygital | reference | Sir Liberte | 02_FORGE/apps/i2l-phygital | assimilated | Test-Path 02_FORGE/apps/i2l-phygital | Validate upstream license and active runtime need before deeper coupling. |
 | lux11 | reference | Sir Liberte | 02_FORGE/apps/lux11 | assimilated | Test-Path 02_FORGE/apps/lux11 | Validate upstream license and active runtime need before deeper coupling. |
-| lux3 | reference | Sir Liberte | 02_FORGE/apps/lux3 | assimilated | Test-Path 02_FORGE/apps/lux3 | Validate upstream license and active runtime need before deeper coupling. |
-| omni-edge-pwa | reference | Sir Liberte | 02_FORGE/apps/omni-edge-pwa | assimilated | Test-Path 02_FORGE/apps/omni-edge-pwa | Validate upstream license and active runtime need before deeper coupling. |
+| omnivoice-router | reference | Sir Liberte | 02_FORGE/KINETIC_ARMORY/omnivoice-router | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/omnivoice-router | Validate upstream license and active runtime need before deeper coupling. |
+| Rotel | reference | Sir Liberte | 02_FORGE/KINETIC_ARMORY/Rotel | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/Rotel | Validate upstream license and active runtime need before deeper coupling. |
+| Saltare | reference | Sir Liberte | 02_FORGE/KINETIC_ARMORY/Saltare | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/Saltare | Validate upstream license and active runtime need before deeper coupling. |
 | SpacetimeDB | substrate | Morgana / Sir Link | 02_FORGE/KINETIC_ARMORY/SpacetimeDB | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/SpacetimeDB | Validate upstream license and active runtime need before deeper coupling. |
 | swarms | swarm | Merlin / Lady Apis | 01_KERNEL/agora/swarms | assimilated | Test-Path 01_KERNEL/agora/swarms | Validate upstream license and active runtime need before deeper coupling. |
-| obsidian-spire-hud | ui | Anya / Sir Stitch | 02_FORGE/apps/obsidian-spire-hud | assimilated | npm run verify | Validate upstream license and active runtime need before deeper coupling. |
 | omni-eye-dashboard | ui | Anya / Sir Stitch | 02_FORGE/apps/omni-eye-dashboard | assimilated | npm run verify | Validate upstream license and active runtime need before deeper coupling. |
-| openclaw | ui | Anya / Sir Stitch | 02_FORGE/apps/openclaw | assimilated | npm run verify | Validate upstream license and active runtime need before deeper coupling. |
 | livekit | voice | Sir Sonus / Tasha Prime | 02_FORGE/KINETIC_ARMORY/livekit | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/livekit | Validate upstream license and active runtime need before deeper coupling. |
 | tiny-tts | voice | Sir Sonus | 02_FORGE/KINETIC_ARMORY/tiny-tts | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/tiny-tts | Validate upstream license and active runtime need before deeper coupling. |
 | VibeVoice | voice | Sir Sonus | 02_FORGE/KINETIC_ARMORY/VibeVoice | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/VibeVoice | Validate upstream license and active runtime need before deeper coupling. |

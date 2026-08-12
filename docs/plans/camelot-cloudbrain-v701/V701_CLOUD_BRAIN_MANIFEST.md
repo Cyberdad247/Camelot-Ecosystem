@@ -1,6 +1,6 @@
 # Camelot-OS v701 Cloud Brain Manifest
 
-Generated: 2026-05-12T15:09:37.054474+00:00
+Generated: 2026-08-12T16:40:01.129458+00:00
 
 ## Package Contents
 
@@ -14,10 +14,10 @@ Generated: 2026-05-12T15:09:37.054474+00:00
 ## Counts
 
 - Architecture layers: `7`
-- Switchboard terminals: `16`
-- Foundry Council engines: `12`
+- Switchboard terminals: `23`
+- Foundry Council engines: `20`
 - Symbolact dictionary entries: `18`
-- Assimilation journal entries: `29`
+- Assimilation journal entries: `28`
 
 ## Cloud Brain Sync Prompt
 

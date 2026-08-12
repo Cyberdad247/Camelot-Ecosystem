@@ -1,6 +1,6 @@
 # Camelot-OS v701 Schematics
 
-Generated: 2026-05-12T15:09:37.054474+00:00
+Generated: 2026-08-12T16:40:01.129458+00:00
 
 ## Control Flow Schematic
 

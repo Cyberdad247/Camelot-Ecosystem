@@ -121,6 +121,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_swarm",
     },
+    "//BIO_SWARM": {
+        "knight": "lady_apis",
+        "description": "Lady Apis command & bio-kinetic cellular isolation hive orchestration",
+        "mode": "BIO_KINETIC",
+        "priority": 1,
+        "handler": "_handle_bio_swarm",
+    },
     "//PLAN": {
         "knight": "merlin_omega",
         "description": "ToT strategic planning — outputs Plan.json",
@@ -711,6 +718,18 @@ def _handle_purge_memory(param: str, context: dict) -> dict:
         "action": "purge_memory",
         "detail": "run: python scripts/purge_memory.py",
         "canonical_command": "python scripts/purge_memory.py",
+    }
+
+
+def _handle_bio_swarm(param: str, context: dict) -> dict:
+    directive = param or "autonomous bio-kinetic cellular audit"
+    return {
+        "action": "bio_kinetic_swarm",
+        "commander": "lady_apis",
+        "directive": directive,
+        "mode": "BIO_KINETIC",
+        "isolation": "CELLULAR_BIOLOGICAL",
+        "detail": "run: python -m control_plane.core.cartridge_manager switch BIO_SWARM",
     }
 
 

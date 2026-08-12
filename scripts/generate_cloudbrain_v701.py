@@ -81,7 +81,7 @@ def load_soul_router() -> dict[str, Any]:
             }
             for engine in soul_router.FOUNDRY_COUNCIL
         ],
-        "omni_provider_map": soul_router.OMNI_PROVIDER_MAP,
+        "omni_provider_map": getattr(soul_router, "OMNI_PROVIDER_MAP", {}),
         "privacy_keywords": sorted(soul_router.PRIVACY_KEYWORDS),
     }
 
