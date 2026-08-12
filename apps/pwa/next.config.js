@@ -3,6 +3,7 @@ const webpack = require('webpack');
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  turbopack: {},
   webpack: (config, { isServer }) => {
     config.plugins.push(
       new webpack.IgnorePlugin({
