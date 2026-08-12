@@ -21,6 +21,8 @@ const SWARM_ROSTER_AGENTS: SwarmAgentMember[] = [
   { id: 'agent_nia', name: 'Nia', role: 'Rent', domain: 'Finance', status: 'ACTIVE', task: 'Rent roll reconciled · 96% collected' },
   { id: 'agent_isaiah', name: 'Isaiah', role: 'Streaming', domain: 'Streaming', status: 'ACTIVE', task: 'Edge nodes nominal · 2.1k live' },
   { id: 'agent_chloe', name: 'Chloe', role: 'Billing', domain: 'Finance', status: 'IDLE', task: 'Next invoice run in 4 days' },
+  { id: 'agent_elijah', name: 'Elijah', role: 'Media & Audio', domain: 'Production', status: 'ACTIVE', task: 'Processing Kickbox-Audio spatial stream & VAD telemetry' },
+  { id: 'agent_maya', name: 'Maya', role: 'Security & Vault', domain: 'Governance', status: 'ACTIVE', task: 'Encrypted UKG backup & air-gap verification' },
 ];
 
 export function SwarmRosterPanel() {
