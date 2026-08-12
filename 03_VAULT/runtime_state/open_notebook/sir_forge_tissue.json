@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "SIR_FORGE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_CLEAN",
+    "content": "Cache + orphan cleanup",
+    "vfs_path": "vfs://worldtree/knights/sir_forge/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_FORGE",
+    "open_viking_tether": "open_viking://worldtree/sir_forge",
+    "updated_at": "2026-08-12T18:06:05.775537+00:00"
+  }
+]

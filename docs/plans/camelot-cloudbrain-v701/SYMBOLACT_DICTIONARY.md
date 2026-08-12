@@ -1,6 +1,6 @@
 # Symbolact Dictionary for Camelot-OS v701
 
-Generated: 2026-08-12T16:40:01.129458+00:00
+Generated: 2026-08-12T17:36:02.237472+00:00
 
 `Symbolact` is the v701 operator-facing name for an action-bearing Symbolect token. In plain terms: a Symbolact is a short symbol, word, or command that carries both meaning and an expected action.
 

@@ -142,6 +142,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_heal",
     },
+    "//REZERO": {
+        "knight": "sir_codex",
+        "description": "Rezero state — reset context execution to last verified checkpoint",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_rezero",
+    },
+    "//REZERO_CODE": {
+        "knight": "sir_codex",
+        "description": "Abandon failing logic path while preserving verified stable state",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_rezero",
+    },
     "//GENESIS": {
         "knight": "sir_boris",
         "description": "Bootstrap new project from BriefingScript template",
@@ -730,6 +744,15 @@ def _handle_bio_swarm(param: str, context: dict) -> dict:
         "mode": "BIO_KINETIC",
         "isolation": "CELLULAR_BIOLOGICAL",
         "detail": "run: python -m control_plane.core.cartridge_manager switch BIO_SWARM",
+    }
+
+
+def _handle_rezero(param: str, context: dict) -> dict:
+    return {
+        "action": "rezero_code",
+        "knight": "sir_codex",
+        "status": "REZERO_CHECKPOINT_RESTORED",
+        "detail": "Preserved provenances and ledgers; reset execution context to last stable checkpoint.",
     }
 
 

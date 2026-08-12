@@ -3,6 +3,17 @@
     "knight_id": "SIR_BORIS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
+    "title": "L2_Artifact_//BOOT",
+    "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-08-12T18:16:41.894563+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
     "title": "L2_Artifact_//BIO_SWARM audit memory and biological isolation boundaries",
     "content": "{\"action\": \"//BIO_SWARM\"}",
     "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",

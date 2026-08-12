@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//REZERO",
+    "content": "{\"action\": \"//REZERO\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-08-12T18:06:29.887941+00:00"
+  }
+]

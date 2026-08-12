@@ -113,6 +113,18 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "ANYA_QUANTUM_MANTRA": ["glyph", "quantum", "vfs", "token", "compression"],
     "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system"],
     "BIO_KINETIC_SWARM":   ["bio_kinetic", "cellular_swarm", "tissue_isolation", "neural_pulse", "mitosis", "lady_apis"],
+    "SIR_HEIMDALL":        ["bifrost", "guardian", "mTLS", "boundary"],
+    "SIR_GALAHAD":         ["chivalry", "purity", "verification", "truth"],
+    "ARTHUR_OMEGA":        ["sovereign", "king", "governance", "authority"],
+    "SIR_STITCH":          ["kinematics", "micro_interactions", "ui", "patch"],
+    "SIR_ALCHEMIST":       ["transmutation", "compression", "quantization", "optimization"],
+    "SIR_RUSTCLAW":        ["rust", "image_pipeline", "kinetic", "aegis"],
+    "ANYA_OMEGA":          ["helm", "gate", "quality", "first_law", "router"],
+    "SIR_HERMES":          ["graphql", "webhooks", "courier", "dispatch"],
+    "SIR_LANCELOT":        ["champion", "kinetic_edge", "frontline", "defense"],
+    "LADY_GUINEVERE":      ["harmony", "aesthetic", "interface", "design"],
+    "SIR_HUGGINGFACE":     ["hub", "spaces", "models", "embeddings"],
+    "SIR_MNEMO":           ["memory", "dual_tier", "sync", "indexing"],
 }
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {

@@ -1,0 +1,135 @@
+{
+  "timestamp_utc": "2026-08-12T17:06:05.814392+00:00",
+  "elapsed_ms": 2951.96,
+  "summary": {
+    "knights_total": 11,
+    "knights_passed": 7,
+    "saas_total": 6,
+    "saas_passed": 6,
+    "overall_status": "PASSED"
+  },
+  "knights": [
+    {
+      "knight_id": "SIR_BORIS",
+      "role": "Lead Architect & Crucible Conductor",
+      "status": "PASSED",
+      "foundry_council": true
+    },
+    {
+      "knight_id": "SIR_ALEX",
+      "role": "Task Planner & DAG Orchestrator",
+      "status": "PASSED",
+      "foundry_council": true
+    },
+    {
+      "knight_id": "SIR_FORGE",
+      "role": "Kinetic Code Execution",
+      "status": "PASSED",
+      "foundry_council": true
+    },
+    {
+      "knight_id": "SIR_CODEX",
+      "role": "High-Velocity Implementation",
+      "status": "PASSED",
+      "foundry_council": true
+    },
+    {
+      "knight_id": "SIR_SENTINEL",
+      "role": "AgentArmor Security Audit",
+      "status": "PASSED",
+      "foundry_council": true
+    },
+    {
+      "knight_id": "SIR_DEBUG",
+      "role": "PIV Self-Healing Loop",
+      "status": "REGISTERED (Vault Active)",
+      "foundry_council": false
+    },
+    {
+      "knight_id": "SIR_GHOST",
+      "role": "Air-Gapped Privacy Sentry",
+      "status": "PASSED",
+      "foundry_council": true
+    },
+    {
+      "knight_id": "LADY_APIS",
+      "role": "Queen of the Hive & Swarm Commander",
+      "status": "REGISTERED (Vault Active)",
+      "foundry_council": false
+    },
+    {
+      "knight_id": "MERLIN_OMEGA",
+      "role": "Grand Orchestrator & System 2 Reasoner",
+      "status": "REGISTERED (Vault Active)",
+      "foundry_council": false
+    },
+    {
+      "knight_id": "SIR_HELIO",
+      "role": "Voice OS & Pydantic AI",
+      "status": "PASSED",
+      "foundry_council": true
+    },
+    {
+      "knight_id": "HERMES_PRIME",
+      "role": "MGV Synthesis & VFS Forge",
+      "status": "REGISTERED (Vault Active)",
+      "foundry_council": false
+    }
+  ],
+  "saas_services": [
+    {
+      "id": "WASM_LEDGER",
+      "name": "WASM Ledger Engine",
+      "category": "FINANCE",
+      "lead": "SIR_BORIS",
+      "runtime": "RUST_WASM",
+      "status": "PASSED",
+      "detail": "Rust CRDT ledger state machine verified"
+    },
+    {
+      "id": "TENANT_POLICY",
+      "name": "Tenant Policy Engine",
+      "category": "GOVERNANCE",
+      "lead": "SIR_SENTINEL",
+      "runtime": "YAML_Z3",
+      "status": "PASSED",
+      "detail": "AnyaGate APEE v7.0 governance gate online"
+    },
+    {
+      "id": "EAGLE_DRAFT",
+      "name": "EAGLE Speculative Draft",
+      "category": "TELEMETRY",
+      "lead": "LADY_APIS",
+      "runtime": "RUST_WASM",
+      "status": "PASSED",
+      "detail": "Internal verification nominal"
+    },
+    {
+      "id": "BIO_SWARM",
+      "name": "Bio-Kinetic Cellular Matrix",
+      "category": "GOVERNANCE",
+      "lead": "LADY_APIS",
+      "runtime": "GO_NATIVE",
+      "status": "PASSED",
+      "detail": "Diode biological cell isolation diode nominal"
+    },
+    {
+      "id": "BIFROST_MESH",
+      "name": "Bifrost Polyglot Mesh",
+      "category": "TELEMETRY",
+      "lead": "SIR_FORGE",
+      "runtime": "GO_NATIVE",
+      "status": "PASSED",
+      "detail": "WS :4433 (STANDBY), gRPC :4434 (STANDBY)"
+    },
+    {
+      "id": "LAKESHA_VOICE",
+      "name": "LaKesha Voice Hypervisor",
+      "category": "VOICE",
+      "lead": "SIR_HELIO",
+      "runtime": "WEBRTC_VAD",
+      "status": "PASSED",
+      "detail": "Internal verification nominal"
+    }
+  ]
+}

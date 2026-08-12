@@ -8,6 +8,17 @@
     "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
     "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-08-12T17:36:09.347608+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_SYNC",
+    "content": "Dual-tier memory sync (ST+LT)",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
     "updated_at": "2026-08-12T16:39:41.214161+00:00"
   }
 ]
