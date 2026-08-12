@@ -1,0 +1,37 @@
+{
+  "timestamp_utc": "2026-08-12T22:00:15.952105+00:00",
+  "ollama_online": false,
+  "elapsed_ms": 1549.89,
+  "models": [
+    {
+      "model_name": "qwen2.5:1.5b",
+      "bound_knights": "SIR_BORIS / LADY_APIS / SIR_DEBUG / LADY_MNEMOSYNE",
+      "status": "STANDBY (Install: ollama pull qwen2.5:1.5b)",
+      "installed": false
+    },
+    {
+      "model_name": "qwen2.5-coder:1.5b",
+      "bound_knights": "SIR_FORGE / SIR_CODEX",
+      "status": "STANDBY (Install: ollama pull qwen2.5-coder:1.5b)",
+      "installed": false
+    },
+    {
+      "model_name": "llama3.2:1b",
+      "bound_knights": "SIR_ALEX / MERLIN_OMEGA",
+      "status": "STANDBY (Install: ollama pull llama3.2:1b)",
+      "installed": false
+    },
+    {
+      "model_name": "phi3:mini",
+      "bound_knights": "SIR_SENTINEL",
+      "status": "STANDBY (Install: ollama pull phi3:mini)",
+      "installed": false
+    },
+    {
+      "model_name": "qwen3:1.7b",
+      "bound_knights": "SIR_GHOST (Air-Gapped Sentry)",
+      "status": "STANDBY (Install: ollama pull qwen3:1.7b)",
+      "installed": false
+    }
+  ]
+}
