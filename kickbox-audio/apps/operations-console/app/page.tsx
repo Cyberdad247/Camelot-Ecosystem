@@ -7,6 +7,8 @@ import { useBifrost } from '../src/hooks/useBifrost';
 import { useLedgerStore } from '../src/store/ledgerStore';
 import { CartridgeSlot } from '../src/components/CartridgeSlot';
 import { HighContrastButton } from '../src/components/HighContrastButton';
+import { ExecutiveMetricsPanel } from '../src/components/ExecutiveMetricsPanel';
+import { LakeshaVoiceEnclave } from '../src/components/LakeshaVoiceEnclave';
 
 // --- 3D Hover Physics Wrapper (Design Judge Heuristics) ---
 const TiltCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
@@ -164,6 +166,16 @@ export default function KBASovereignInterphase() {
           </p>
         </div>
       </header>
+
+      {/* SYSTEMATIC EXECUTIVE METRICS PANEL */}
+      <section className="relative z-10 mb-8">
+        <ExecutiveMetricsPanel />
+      </section>
+
+      {/* LAKESHA VOICE ENCLAVE SECTION */}
+      <section className="relative z-10 mb-8">
+        <LakeshaVoiceEnclave />
+      </section>
 
       {/* ASYMMETRICAL BENTO GRID ARCHITECTURE */}
       <main className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min mb-8">
