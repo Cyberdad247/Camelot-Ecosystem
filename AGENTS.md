@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # CAMELOT-OS — Codex Agent Constitution
 ## Working directory: C:\Users\vizio\CAMELOT_OS
 
@@ -214,9 +213,8 @@ CAMELOT_OS/
 ├── PROVENANCE_LEDGER.md                 # Immutable change log
 ├── dist/camelot.exe    # Portable binary (PyInstaller, 15.4 MB)
 └── config.json         # Runtime config — boolean API key presence flags only
-=======
 # KICKBOX_AUDIO — Project Agent Constitution
-## Working directory: `C:\Users\vizio\CAMELOT_OS\audit-kickbox-audio`
+## Working directory: `C:\Users\vizio\CAMELOT_OS\apps\pwa`
 
 This file is the **project-local** constitution for the kickbox-audio worktree.
 It does **not** override the parent CAMELOT-OS `AGENTS.md` (repo root) — for
@@ -311,12 +309,10 @@ audit-kickbox-audio/
 ├── .gitattributes
 ├── HELIO_PATCH.json             # auto-generated perf audit artifact
 └── AGENTS.md                    # THIS FILE
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 ```
 
 ---
 
-<<<<<<< HEAD
 ## Knight Roster
 
 | Knight | Role | Primary model |
@@ -483,7 +479,6 @@ dist\camelot.exe
 # Full colony triage (CI mode, no HITL)
 python -m squires.colony triage . --auto-approve
 ```
-=======
 ## Project Roster
 
 Inherits the CAMELOT-OS canonical Knight Roster (`AGENTS.md` repo root:
@@ -530,13 +525,11 @@ _Deliberately narrow at this commit's HEAD: re-mounting `<Dashboard />` or
   and `letterSpacing.executive/display`. New CSS classes MUST resolve here.
 - `apps/pwa/tsconfig.json` — `"@/*"` → `./src/*` alias; `KineticCanvas` is
   imported via this alias and breaks if the mapping is removed.
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 
 ---
 
 ## Provenance
 
-<<<<<<< HEAD
 Every file write is logged to `PROVENANCE_LEDGER.md` via the PostToolUse hook.
 Format: `| ID | Task | Author | Status | Notes |`
 Do not edit the ledger manually.
@@ -564,7 +557,6 @@ Rust kernels: `01_KERNEL/core/aegis_shield` (`cargo check`) and
 `01_KERNEL/reasoning/ouroboros_engine` (`cargo test` — real BitNet b1.58 +
 selective-scan SSM). Rust 1.96 installed. **Never auto-approve a HUMAN_GATE job.**
 Cloud Brain of record: NotebookLM `Camelot-OS v.1000.0-EXCALIBUR-A`.
-=======
 Every file write under `audit-kickbox-audio/` is logged to
 `C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md` via the parent CAMELOT-OS
 PostToolUse hook. Do not edit the ledger directly.
@@ -615,4 +607,3 @@ code quality round-over-round while continuing to fabricate completion logs.
 This rule does not block pasted snippets as draft material — it only
 declares that pasted pseudo-dispatch DOES NOT authorize file writes or
 state mutations absent live verifiable artifacts.
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
