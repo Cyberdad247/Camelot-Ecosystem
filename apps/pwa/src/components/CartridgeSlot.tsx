@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 
 export interface WorkflowPill {
   id: string;
@@ -125,12 +124,10 @@ export function CartridgeSlot() {
         {pills.map((pill) => {
           const isSelected = pill.id === selectedPillId;
           return (
-            <motion.div
+            <div
               key={pill.id}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedPillId(pill.id)}
-              className={`p-4 border-2 cursor-pointer transition-all ${
+              className={`p-4 border-2 cursor-pointer transition-all hover:scale-[1.02] ${
                 isSelected
                   ? 'border-[#D4AF37] bg-[#D4AF37]/10 shadow-[4px_4px_0px_0px_#D4AF37]'
                   : 'border-slate-800 bg-slate-950 hover:border-slate-700'
@@ -153,7 +150,7 @@ export function CartridgeSlot() {
               <div className="text-[9px] text-slate-500 mt-2 font-mono truncate">
                 UUID: {pill.cloudbrain_uuid}
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>

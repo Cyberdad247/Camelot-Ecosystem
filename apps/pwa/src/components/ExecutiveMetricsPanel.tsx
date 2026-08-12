@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { motion } from 'framer-motion';
 
 export interface MetricCardData {
   title: string;
@@ -46,10 +45,9 @@ export function ExecutiveMetricsPanel() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono mb-8">
       {METRICS.map((metric, idx) => (
-        <motion.div
+        <div
           key={idx}
-          whileHover={{ scale: 1.02 }}
-          className="border-2 border-[#D4AF37]/40 bg-[#0B0B0E] p-5 shadow-[4px_4px_0px_0px_#D4AF37] relative group"
+          className="border-2 border-[#D4AF37]/40 bg-[#0B0B0E] p-5 shadow-[4px_4px_0px_0px_#D4AF37] relative group hover:scale-[1.02] transition-transform"
         >
           <div className="flex justify-between items-center mb-2">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
@@ -77,7 +75,7 @@ export function ExecutiveMetricsPanel() {
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
             <span>{metric.subtext}</span>
           </div>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

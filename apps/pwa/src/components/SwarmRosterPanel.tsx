@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 
 export interface SwarmAgentMember {
   id: string;
@@ -61,12 +60,10 @@ export function SwarmRosterPanel() {
         {agents.map((agent) => {
           const isSelected = agent.id === selectedAgentId;
           return (
-            <motion.div
+            <div
               key={agent.id}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
               onClick={() => setSelectedAgentId(agent.id)}
-              className={`p-4 border-2 cursor-pointer transition-all ${
+              className={`p-4 border-2 cursor-pointer transition-all hover:scale-[1.02] ${
                 isSelected
                   ? 'border-[#9D4EDD] bg-[#9D4EDD]/10 shadow-[4px_4px_0px_0px_#9D4EDD]'
                   : 'border-slate-800 bg-slate-950 hover:border-[#D4AF37]/60'
@@ -86,7 +83,7 @@ export function SwarmRosterPanel() {
               <div className="text-[10px] text-slate-400 mt-2 line-clamp-2 italic">
                 "{agent.task}"
               </div>
-            </motion.div>
+            </div>
           );
         })}
       </div>
