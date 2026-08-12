@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — NotebookLM Real Client Layer
-"""
+r"""
 Wraps the notebooklm-py async client into a synchronous/async bridge
 for use across the entire Camelot Worldtree Cloudbrain system.
 

@@ -27,10 +27,9 @@ except ImportError:
     CloudBrainConnector = None
 
 try:
-    from vfs.lady_m_rune_router import RuneRouter as _RuneRouter
-    _rune_router = _RuneRouter()
+    from infra.knight_registry import LIBRARIAN_REGISTRY
 except ImportError:
-    _rune_router = None
+    LIBRARIAN_REGISTRY = None
 
 LOG = logging.getLogger("lady_m")
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent

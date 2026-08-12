@@ -1,6 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — Worldtree Cloudbrain Connector
-"""
+r"""
 Connects Camelot OS memory tiers to external NotebookLM (Gemini Notebook) Cloudbrain nodes.
 
 Backend priority:
@@ -79,6 +79,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "HERMES_PRIME":        "28f89cb6-5048-4b5d-9e94-376082d24744",   # hermes_prime_vfs_forge (verified 2026-08-10)
     "SIR_LANCELOT":        "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "LADY_GUINEVERE":      "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
+    "SIR_HUGGINGFACE":     "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # HuggingFace Hub & Spaces Conductor (WorldTree Tethered)
     "SIR_MNEMO":           "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
     # Living System / Project Notebooks
     "LADY_MNEMOSYNE":      "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # World Tree
@@ -124,12 +125,17 @@ RUNE_SYMBOLECT: Dict[str, List[str]] = {
 }
 
 
+WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
+
+
 class CloudBrainConnector:
-    """Connects Camelot OS memory tiers to the external NotebookLM Cloudbrain."""
+    """Connects Camelot OS memory tiers to the external NotebookLM Cloudbrain via World Tree home anchoring."""
 
     def __init__(self, knight_id: str = "DEFAULT"):
         self.knight_id = knight_id.upper()
+        self.worldtree_home_id = WORLDTREE_HOME_ID
         self.notebook_id = KNIGHT_NOTEBOOKS.get(self.knight_id)
+        
         # Non-UUID ids are placeholders (pending workspace). Treat them as
         # unmapped so no backend call is ever attempted against a fake id.
         if self.notebook_id and not _NOTEBOOK_UUID_RE.match(self.notebook_id):
@@ -138,11 +144,61 @@ class CloudBrainConnector:
                 f"'{self.notebook_id}' — pending real workspace, skipping backend."
             )
             self.notebook_id = None
+            
+        # Every Knight summoned or active is anchored to World Tree home node
         if not self.notebook_id:
-            logging.warning(f"[CLOUD_BRAIN] Unmapped Knight ID: {knight_id}.")
+            logging.info(f"[CLOUD_BRAIN] Knight {self.knight_id} tethered to World Tree Home ({WORLDTREE_HOME_ID}).")
+            self.notebook_id = WORLDTREE_HOME_ID
+
+        # Tether architecture metadata: VFS, MemPalace, Open Viking, Open-Notebook
+        self.vfs_path = f"vfs://worldtree/knights/{self.knight_id.lower()}/tether.json"
+        self.mempalace_wing = f"WING_WORLDTREE_{self.knight_id.upper()}"
+        self.open_viking_tether = f"open_viking://worldtree/{self.knight_id.lower()}"
+        self.open_notebook_dir = _CAMELOT_ROOT / "03_VAULT" / "runtime_state" / "open_notebook"
+        self.open_notebook_dir.mkdir(parents=True, exist_ok=True)
+        self.open_notebook_path = self.open_notebook_dir / f"{self.knight_id.lower()}_tissue.json"
+
+    def get_tether_status(self) -> Dict[str, Any]:
+        """Returns the dynamic tether status connecting the Knight to World Tree & CloudBrain."""
+        return {
+            "knight_id": self.knight_id,
+            "worldtree_home_id": self.worldtree_home_id,
+            "personal_notebook_id": self.notebook_id,
+            "vfs_path": self.vfs_path,
+            "mempalace_wing": self.mempalace_wing,
+            "open_viking_node": self.open_viking_tether,
+            "open_notebook_local": str(self.open_notebook_path),
+            "tether_active": True,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+
+    def _sync_open_notebook_local(self, artifact_type: str, title: str, content_str: str) -> None:
+        """Dynamically mirrors local tissue updates to the Open-Notebook local counterpart."""
+        try:
+            entry = {
+                "knight_id": self.knight_id,
+                "worldtree_home": self.worldtree_home_id,
+                "artifact_type": artifact_type,
+                "title": title,
+                "content": content_str,
+                "vfs_path": self.vfs_path,
+                "mempalace_wing": self.mempalace_wing,
+                "open_viking_tether": self.open_viking_tether,
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+            }
+            history: List[Dict[str, Any]] = []
+            if self.open_notebook_path.exists():
+                try:
+                    history = json.loads(self.open_notebook_path.read_text(encoding="utf-8"))
+                except Exception:
+                    history = []
+            history.insert(0, entry)
+            self.open_notebook_path.write_text(json.dumps(history[:50], indent=2), encoding="utf-8")
+        except Exception as exc:
+            logging.warning(f"[OPEN_NOTEBOOK] Local sync failed for {self.knight_id}: {exc}")
 
     def push_to_notebook(self, artifact_type: str, content: Any, title: str) -> bool:
-        """Push artifact to the Knight's NotebookLM node via SDK priority chain."""
+        """Push artifact to the Knight's NotebookLM node via SDK priority chain with World Tree tethering."""
         if not self.notebook_id:
             return False
 
@@ -152,6 +208,9 @@ class CloudBrainConnector:
             else str(content)
         )
 
+        # Mirror artifact dynamically to local Open-Notebook counterpart
+        self._sync_open_notebook_local(artifact_type, title, content_str)
+
         # Priority 1: Real notebooklm-py SDK
         if _NLM_REAL:
             try:
@@ -160,7 +219,7 @@ class CloudBrainConnector:
                 else:
                     ok = _nlm_push_source(self.knight_id, title, content_str)
                 if ok:
-                    logging.info(f"[SDK] Pushed '{title}' -> {self.knight_id}")
+                    logging.info(f"[SDK] Pushed '{title}' -> {self.knight_id} (WorldTree Tether Active)")
                 return ok
             except Exception as e:
                 logging.error(f"[SDK] Push failed for {self.knight_id}: {e}")
@@ -173,22 +232,26 @@ class CloudBrainConnector:
                     ws.create_note(title=title, content=content_str)
                 else:
                     ws.add_source(text=content_str, title=title)
-                logging.info(f"[STUB] Pushed '{title}' -> {self.knight_id}")
+                logging.info(f"[STUB] Pushed '{title}' -> {self.knight_id} (WorldTree Tether Active)")
                 return True
             except Exception as e:
                 logging.error(f"[STUB] Push failed: {e}")
 
-        logging.warning(f"[CLOUD_BRAIN] No active backend for {self.knight_id}. Auth required.")
+        logging.warning(f"[CLOUD_BRAIN] No active backend for {self.knight_id}. Local Open-Notebook saved.")
         return False
 
     def query_notebook(self, query: str) -> Optional[str]:
-        """Query the Knight's NotebookLM node via SDK priority chain."""
+        """Query the Knight's NotebookLM node via SDK priority chain, falling back to World Tree Home."""
         if not self.notebook_id:
             return None
 
         if _NLM_REAL and _nlm_query:
             try:
-                return _nlm_query(self.knight_id, query)
+                res = _nlm_query(self.knight_id, query)
+                if res:
+                    return res
+                if self.notebook_id != self.worldtree_home_id:
+                    return _nlm_query("WORLD_TREE", query)
             except Exception as e:
                 logging.error(f"[SDK] Query failed for {self.knight_id}: {e}")
 

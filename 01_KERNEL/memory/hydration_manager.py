@@ -34,7 +34,7 @@ PROVENANCE_LEDGER = Path("C:/Users/vizio/CAMELOT_OS/PROVENANCE_LEDGER.md")
 class HydrationManager:
     """Tiered Context Manager for Camelot OS."""
 
-    def __init__(self, storage_dir: Optional[Path] = None, knight_id: str = "SIR_BORIS"):
+    def __init__(self, storage_dir: Optional[Path] = None, knight_id: str = "ANYA_OMEGA"):
         self.root = Path("C:/Users/vizio/CAMELOT_OS")
         self.storage_dir = storage_dir or self.root / "01_KERNEL" / "memory" / "tissue"
         self.storage_dir.mkdir(parents=True, exist_ok=True)

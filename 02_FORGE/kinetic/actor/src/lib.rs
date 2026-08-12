@@ -30,7 +30,7 @@
 //   * wasmtime::component::bindgen!          typed guest bindings (planned)
 // =============================================================================
 
-use anyhow::{Context, Result};
+use anyhow::Result;
 use wasmtime::component::{Component, Linker};
 use wasmtime::{Config, Engine};
 

@@ -22,7 +22,7 @@ def _banner():
     print(f"{_C['m']}{_C['B']}")
     print("+------------------------------------------------------------+")
     print("|  AWAKEN - Camelot Apex OS v.999.3 (Sovereign Lattice)     |")
-    print("|  SIR_BORIS v3.0 - One word. Any shell. Any platform.      |")
+    print("|  ANYA_OMEGA - Anya First & Anya Last. Knight at the Helm. |")
     print("|  Global Boot: engines -> OmniRoute -> Hermes -> Cloud ->  |")
     print("|               Vizion Telemetry -> Sovereign Harness       |")
     print("|                (24/7)                                     |")

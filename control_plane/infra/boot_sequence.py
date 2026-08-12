@@ -969,7 +969,7 @@ def boot_titan_omega(home: Path) -> tuple[bool, str]:
     venv_py = _detect_venv_python(home)
     py = str(venv_py) if venv_py.exists() else sys.executable
 
-    _TITAN_TIMEOUT = int(os.getenv("CAMELOT_TITAN_TIMEOUT", "8"))
+    _TITAN_TIMEOUT = int(os.getenv("CAMELOT_TITAN_TIMEOUT", "15"))
 
     try:
         result = subprocess.run(

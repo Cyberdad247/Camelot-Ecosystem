@@ -84,8 +84,8 @@ class MemPalaceL2:
 
         if push_to_cloudbrain:
             try:
-                # We map tenant_id to knight_id conceptually. Default to SIR_BORIS if "default"
-                knight_id = tenant_id if tenant_id != "default" else "SIR_BORIS"
+                # We map tenant_id to knight_id conceptually. Default to ANYA_OMEGA if "default"
+                knight_id = tenant_id if tenant_id != "default" else "ANYA_OMEGA"
                 cloudbrain = CloudBrainConnector(knight_id=knight_id)
                 cloudbrain.push_to_notebook(
                     artifact_type="source",

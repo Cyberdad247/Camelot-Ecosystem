@@ -273,8 +273,8 @@ def get_sovereign_commander() -> SovereignCommander:
     global _commander
     if _commander is None:
         _commander = SovereignCommander(
-            commander_name="Vizion",
-            commander_id="vizion_vashawn_o_head"
+            commander_name="Arch-Sovereign",
+            commander_id="arch_sovereign"
         )
     return _commander
 
