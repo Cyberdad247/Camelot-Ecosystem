@@ -10,6 +10,7 @@ import { HighContrastButton } from '../src/components/HighContrastButton';
 import { ExecutiveMetricsPanel } from '../src/components/ExecutiveMetricsPanel';
 import { LakeshaVoiceEnclave } from '../src/components/LakeshaVoiceEnclave';
 import { OpenDesignStatusPills } from '../src/components/OpenDesignStatusPills';
+import { SwarmRosterPanel } from '../src/components/SwarmRosterPanel';
 
 // --- 3D Hover Physics Wrapper (Design Judge Heuristics) ---
 const TiltCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
@@ -346,6 +347,11 @@ export default function KBASovereignInterphase() {
       {/* CARTRIDGE SLOT SYSTEM (SaaS Workflow Pills) */}
       <section className="relative z-10 mb-8">
         <CartridgeSlot />
+      </section>
+
+      {/* OPERATIONAL SWARM ROSTER PANEL */}
+      <section className="relative z-10 mb-8">
+        <SwarmRosterPanel />
       </section>
 
       {/* KINETIC ACTION AUDIT LOG */}
