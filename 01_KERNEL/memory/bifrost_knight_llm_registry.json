@@ -1,0 +1,124 @@
+{
+  "version": "v1.0.0-EXCALIBUR",
+  "generated_utc": "2026-08-12T21:16:30Z",
+  "bifrost_bridge": {
+    "ws_endpoint": "ws://100.71.218.75:4433/ws",
+    "grpc_endpoint": "100.71.218.75:4434",
+    "mTLS": true,
+    "fallback_proxy": "http://127.0.0.1:11434"
+  },
+  "knight_pill_allocations": [
+    {
+      "knight_id": "SIR_BORIS",
+      "pill_name": "WASM Ledger Engine",
+      "assigned_tiny_llm": "ollama/qwen2.5:1.5b",
+      "bifrost_route": "/bifrost/knights/sir_boris",
+      "cloudbrain_uuid": "f7707daa-2d10-4db8-8fda-be4661a27793",
+      "vram_mb": 1100
+    },
+    {
+      "knight_id": "SIR_ALEX",
+      "pill_name": "DAG Task Orchestrator",
+      "assigned_tiny_llm": "ollama/llama3.2:1b",
+      "bifrost_route": "/bifrost/knights/sir_alex",
+      "cloudbrain_uuid": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
+      "vram_mb": 950
+    },
+    {
+      "knight_id": "SIR_FORGE",
+      "pill_name": "Kinetic Code Engine",
+      "assigned_tiny_llm": "ollama/qwen2.5-coder:1.5b",
+      "bifrost_route": "/bifrost/knights/sir_forge",
+      "cloudbrain_uuid": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
+      "vram_mb": 1150
+    },
+    {
+      "knight_id": "SIR_CODEX",
+      "pill_name": "High-Velocity Prototype",
+      "assigned_tiny_llm": "ollama/qwen2.5-coder:1.5b",
+      "bifrost_route": "/bifrost/knights/sir_codex",
+      "cloudbrain_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
+      "vram_mb": 1150
+    },
+    {
+      "knight_id": "SIR_SENTINEL",
+      "pill_name": "Tenant 001 Policy Engine",
+      "assigned_tiny_llm": "ollama/phi3:mini",
+      "bifrost_route": "/bifrost/knights/sir_sentinel",
+      "cloudbrain_uuid": "07cbb441-f008-424c-820a-85676210be39",
+      "vram_mb": 1050
+    },
+    {
+      "knight_id": "SIR_DEBUG",
+      "pill_name": "PIV Self-Healing Engine",
+      "assigned_tiny_llm": "ollama/qwen2.5:1.5b",
+      "bifrost_route": "/bifrost/knights/sir_debug",
+      "cloudbrain_uuid": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
+      "vram_mb": 1100
+    },
+    {
+      "knight_id": "SIR_GHOST",
+      "pill_name": "Air-Gapped Zero-Trust Sentry",
+      "assigned_tiny_llm": "ollama/qwen3:1.7b",
+      "bifrost_route": "/bifrost/knights/sir_ghost",
+      "cloudbrain_uuid": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+      "vram_mb": 1200
+    },
+    {
+      "knight_id": "LADY_APIS",
+      "pill_name": "EAGLE Speculative Draft",
+      "assigned_tiny_llm": "ollama/qwen2.5:1.5b",
+      "bifrost_route": "/bifrost/knights/lady_apis",
+      "cloudbrain_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+      "vram_mb": 1100
+    },
+    {
+      "knight_id": "MERLIN_OMEGA",
+      "pill_name": "System 2 Deep Reasoner",
+      "assigned_tiny_llm": "ollama/llama3.2:1b",
+      "bifrost_route": "/bifrost/knights/merlin_omega",
+      "cloudbrain_uuid": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
+      "vram_mb": 950
+    },
+    {
+      "knight_id": "SIR_HELIO",
+      "pill_name": "Voice OS & Resonance",
+      "assigned_tiny_llm": "wasm/tiny-tts-v2",
+      "bifrost_route": "/bifrost/knights/sir_helio",
+      "cloudbrain_uuid": "56820318-bb91-451f-aac4-4b46424898cf",
+      "vram_mb": 180
+    },
+    {
+      "knight_id": "LADY_MNEMOSYNE",
+      "pill_name": "Memory Palace WorldTree",
+      "assigned_tiny_llm": "ollama/qwen2.5:1.5b",
+      "bifrost_route": "/bifrost/knights/lady_mnemosyne",
+      "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vram_mb": 1100
+    },
+    {
+      "knight_id": "SIR_BIFROST",
+      "pill_name": "Bifrost Polyglot Mesh",
+      "assigned_tiny_llm": "ollama/qwen2.5:1.5b",
+      "bifrost_route": "/bifrost/knights/sir_bifrost",
+      "cloudbrain_uuid": "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",
+      "vram_mb": 1100
+    },
+    {
+      "knight_id": "SIR_BIO_SWARM",
+      "pill_name": "Bio-Kinetic Cellular Matrix",
+      "assigned_tiny_llm": "ollama/qwen2.5:1.5b",
+      "bifrost_route": "/bifrost/knights/sir_bio_swarm",
+      "cloudbrain_uuid": "93b21c40-10ff-4e89-a212-08f37b1297e1",
+      "vram_mb": 1100
+    },
+    {
+      "knight_id": "LAKISHA_HYPERVISOR",
+      "pill_name": "LaKesha Voice Hypervisor",
+      "assigned_tiny_llm": "wasm/webrtc-vad-pcm",
+      "bifrost_route": "/bifrost/knights/lakisha_hypervisor",
+      "cloudbrain_uuid": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
+      "vram_mb": 120
+    }
+  ]
+}
