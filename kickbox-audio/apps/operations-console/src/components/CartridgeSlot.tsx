@@ -127,10 +127,10 @@ export function CartridgeSlot() {
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-[#D4AF37]/30 pb-4 gap-3">
         <div>
           <div className="text-[10px] text-[#9D4EDD] font-bold tracking-widest uppercase">
-            SCABBARD PROTOCOL // SAAS CARTRIDGE SLOT
+            SCABBARD PROTOCOL // SOVEREIGN EXECUTIVE INTELLIGENCE PILLS
           </div>
           <h2 className="text-xl font-black text-slate-100 uppercase mt-1">
-            Hot-Swappable Workflow Pills
+            Sovereign Executive Intelligence Pills
           </h2>
         </div>
         <div className="px-3 py-1 bg-slate-900 border border-[#D4AF37] text-[#D4AF37] text-xs font-bold uppercase">
