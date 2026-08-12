@@ -254,40 +254,46 @@ def boot_morgana_bridge(home: Path) -> tuple[bool, str]:
                 return False, f"Morgana Bridge task launch failed: {completed.stderr.strip() or completed.stdout.strip()}"
             pid = _MORGANA_TASK_NAME
         elif platform.system() == "Windows":
-            launcher_env = env.copy()
-            launcher_env.update(
-                {
-                    "MORGANA_BINARY": str(binary),
-                    "MORGANA_CWD": cwd,
-                }
-            )
-            completed = subprocess.run(
-                [
-                    "powershell.exe",
-                    "-NoProfile",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-WindowStyle",
-                    "Hidden",
-                    "-Command",
-                    (
-                        "$proc = Start-Process -FilePath $env:MORGANA_BINARY "
-                        "-WorkingDirectory $env:MORGANA_CWD "
-                        "-WindowStyle Hidden "
-                        "-PassThru; $proc.Id"
-                    ),
-                ],
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                timeout=10,
-                env=launcher_env,
-            )
-            if completed.returncode != 0:
-                return False, f"Morgana Bridge launch failed: {completed.stderr.strip() or completed.stdout.strip()}"
-            pid_text = completed.stdout.strip().splitlines()[-1]
-            pid = pid_text
+            try:
+                kwargs = _child_spawn_kwargs(cwd=cwd)
+                kwargs["env"] = env
+                proc = subprocess.Popen([str(binary)], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **kwargs)
+                pid = str(proc.pid)
+            except Exception as popen_err:
+                launcher_env = env.copy()
+                launcher_env.update(
+                    {
+                        "MORGANA_BINARY": str(binary),
+                        "MORGANA_CWD": cwd,
+                    }
+                )
+                completed = subprocess.run(
+                    [
+                        "powershell.exe",
+                        "-NoProfile",
+                        "-ExecutionPolicy",
+                        "Bypass",
+                        "-WindowStyle",
+                        "Hidden",
+                        "-Command",
+                        (
+                            "$proc = Start-Process -FilePath $env:MORGANA_BINARY "
+                            "-WorkingDirectory $env:MORGANA_CWD "
+                            "-WindowStyle Hidden "
+                            "-PassThru; $proc.Id"
+                        ),
+                    ],
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                    errors="replace",
+                    timeout=10,
+                    env=launcher_env,
+                )
+                if completed.returncode != 0:
+                    return False, f"Morgana Bridge launch failed: {completed.stderr.strip() or completed.stdout.strip()} (Popen err: {popen_err})"
+                pid_text = completed.stdout.strip().splitlines()[-1]
+                pid = pid_text
         else:
             kwargs = _child_spawn_kwargs(cwd=cwd)
             kwargs["env"] = env
@@ -644,25 +650,30 @@ def boot_omniroute_gateway(home: Path) -> tuple[bool, str]:
     log_dir.mkdir(parents=True, exist_ok=True)
     try:
         if platform.system() == "Windows" and label == "Node C Omni Router fallback":
-            ps_cmd = (
-                "$p = Start-Process "
-                f"-FilePath '{launch_cmd[0]}' "
-                f"-ArgumentList @('{launch_cmd[1]}','{launch_cmd[2]}','{launch_cmd[3]}','{launch_cmd[4]}','{launch_cmd[5]}') "
-                f"-WorkingDirectory '{cwd}' "
-                "-WindowStyle Hidden -PassThru; $p.Id"
-            )
-            completed = subprocess.run(
-                ["powershell", "-NoProfile", "-Command", ps_cmd],
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                timeout=10,
-            )
-            if completed.returncode != 0:
-                detail = completed.stderr.strip() or completed.stdout.strip()
-                return False, f"{label} launch failed: {detail}"
-            pid = completed.stdout.strip() or "unknown"
+            try:
+                kwargs = _child_spawn_kwargs(cwd=cwd)
+                proc = subprocess.Popen(launch_cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, **kwargs)
+                pid = str(proc.pid)
+            except Exception as popen_err:
+                ps_cmd = (
+                    "$p = Start-Process "
+                    f"-FilePath '{launch_cmd[0]}' "
+                    f"-ArgumentList @('{launch_cmd[1]}','{launch_cmd[2]}','{launch_cmd[3]}','{launch_cmd[4]}','{launch_cmd[5]}') "
+                    f"-WorkingDirectory '{cwd}' "
+                    "-WindowStyle Hidden -PassThru; $p.Id"
+                )
+                completed = subprocess.run(
+                    ["powershell", "-NoProfile", "-Command", ps_cmd],
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                    errors="replace",
+                    timeout=10,
+                )
+                if completed.returncode != 0:
+                    detail = completed.stderr.strip() or completed.stdout.strip()
+                    return False, f"{label} launch failed: {detail} (Popen err: {popen_err})"
+                pid = completed.stdout.strip() or "unknown"
             for _ in range(20):
                 time.sleep(0.5)
                 if _probe_port("127.0.0.1", _OMNIROUTE_PORT):
@@ -792,49 +803,60 @@ def start_local_lt_memory(home: Path) -> tuple[bool, str]:
         return True, "Local LT Memory shim present; spawn skipped in non-interactive shell"
     try:
         if platform.system() == "Windows":
-            launcher_env = dict(kwargs["env"])
-            launcher_env.update(
-                {
-                    "LT_MEMORY_PYTHON": py,
-                    "LT_MEMORY_CWD": cwd,
-                    "LT_MEMORY_STDOUT": str(stdout_log),
-                    "LT_MEMORY_STDERR": str(stderr_log),
-                }
-            )
-            completed = subprocess.run(
-                [
-                    "powershell",
-                    "-NoProfile",
-                    "-ExecutionPolicy",
-                    "Bypass",
-                    "-WindowStyle",
-                    "Hidden",
-                    "-Command",
-                    (
-                        "$args = @('-m','uvicorn','local_lt_memory:app',"
-                        "'--host','127.0.0.1','--port','8200','--no-access-log'); "
-                        "$proc = Start-Process -FilePath $env:LT_MEMORY_PYTHON "
-                        "-ArgumentList $args "
-                        "-WorkingDirectory $env:LT_MEMORY_CWD "
-                        "-RedirectStandardOutput $env:LT_MEMORY_STDOUT "
-                        "-RedirectStandardError $env:LT_MEMORY_STDERR "
-                        "-WindowStyle Hidden "
-                        "-PassThru; $proc.Id"
-                    ),
-                ],
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                timeout=10,
-                env=launcher_env,
-            )
-            if completed.returncode != 0:
-                detail = completed.stderr.strip() or completed.stdout.strip()
-                return False, f"LT Memory launch failed: {detail}"
-            pid = completed.stdout.strip().splitlines()[-1]
+            try:
+                with stdout_log.open("ab") as stdout, stderr_log.open("ab") as stderr:
+                    proc = subprocess.Popen(
+                        [py, "-m", "uvicorn", "local_lt_memory:app",
+                         "--host", "127.0.0.1", "--port", "8200", "--no-access-log"],
+                        stdout=stdout,
+                        stderr=stderr,
+                        **kwargs,
+                    )
+                pid = str(proc.poll() or proc.pid)
+            except Exception as popen_err:
+                launcher_env = dict(kwargs["env"])
+                launcher_env.update(
+                    {
+                        "LT_MEMORY_PYTHON": py,
+                        "LT_MEMORY_CWD": cwd,
+                        "LT_MEMORY_STDOUT": str(stdout_log),
+                        "LT_MEMORY_STDERR": str(stderr_log),
+                    }
+                )
+                completed = subprocess.run(
+                    [
+                        "powershell",
+                        "-NoProfile",
+                        "-ExecutionPolicy",
+                        "Bypass",
+                        "-WindowStyle",
+                        "Hidden",
+                        "-Command",
+                        (
+                            "$args = @('-m','uvicorn','local_lt_memory:app',"
+                            "'--host','127.0.0.1','--port','8200','--no-access-log'); "
+                            "$proc = Start-Process -FilePath $env:LT_MEMORY_PYTHON "
+                            "-ArgumentList $args "
+                            "-WorkingDirectory $env:LT_MEMORY_CWD "
+                            "-RedirectStandardOutput $env:LT_MEMORY_STDOUT "
+                            "-RedirectStandardError $env:LT_MEMORY_STDERR "
+                            "-WindowStyle Hidden "
+                            "-PassThru; $proc.Id"
+                        ),
+                    ],
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                    errors="replace",
+                    timeout=10,
+                    env=launcher_env,
+                )
+                if completed.returncode != 0:
+                    detail = completed.stderr.strip() or completed.stdout.strip()
+                    return False, f"LT Memory launch failed: {detail} (Popen err: {popen_err})"
+                pid = completed.stdout.strip().splitlines()[-1]
+                proc = None
             pid_file.write_text(str(pid), encoding="utf-8")
-            proc = None
         else:
             with stdout_log.open("ab") as stdout, stderr_log.open("ab") as stderr:
                 proc = subprocess.Popen(

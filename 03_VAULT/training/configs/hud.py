@@ -42,7 +42,7 @@ _heartbeat_proc = None
 _cliproxy_proc = None
 _kinetic_edge_proc = None
 
-HEARTBEAT_GO = os.path.join(HOME_DIR, "cmd", "pulse", "heartbeat.go")
+HEARTBEAT_GO = os.path.join(os.path.abspath(os.path.join(CAMELOT_DIR, "..", "..", "..")), "cmd", "pulse", "heartbeat.go")
 CLIPROXY_BIN = os.path.join(HOME_DIR, "CLIProxyAPI", "cli-proxy-api.exe")
 CLIPROXY_DIR = os.path.join(HOME_DIR, "CLIProxyAPI")
 # Phase 1 RIP_AND_REPLACE (HiveIDE_Apex_v1000) — see
