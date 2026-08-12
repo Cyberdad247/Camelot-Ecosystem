@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { ThemeToggle } from '../src/components/ThemeToggle';
 
 export const metadata: Metadata = {
   title: 'Camelot-OS | Sovereign Executive Intelligence HUD',
@@ -51,7 +52,7 @@ export default function RootLayout({
             </span>
           </div>
 
-          <div className="flex items-center gap-6 text-xs text-slate-400">
+          <div className="flex items-center gap-4 text-xs text-slate-400">
             <div className="hidden md:flex items-center gap-2">
               <span className="text-slate-500">TAILSCALE EDGE:</span>
               <span className="px-2 py-0.5 bg-slate-900 border border-[#D4AF37]/40 text-[#D4AF37] font-bold">
@@ -62,6 +63,7 @@ export default function RootLayout({
               <span className="text-slate-500">BIFROST:</span>
               <span className="text-emerald-400 font-bold">mTLS ACTIVE</span>
             </div>
+            <ThemeToggle />
           </div>
         </header>
 

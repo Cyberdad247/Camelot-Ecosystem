@@ -24,6 +24,35 @@
     color: #f8fafc;
     font-family: 'Plus Jakarta Sans', 'JetBrains Mono', system-ui, sans-serif;
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* --- WHITE SCREEN / LIGHT MODE STYLES --- */
+  html.light-mode body {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+  }
+
+  html.light-mode header {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-color: rgba(212, 175, 55, 0.6) !important;
+  }
+
+  html.light-mode div.bg-\[\#0B0B0E\] {
+    background-color: #FFFFFF !important;
+    color: #0F172A !important;
+    border-color: rgba(212, 175, 55, 0.6) !important;
+  }
+
+  html.light-mode div.bg-slate-950 {
+    background-color: #F8FAFC !important;
+    color: #0F172A !important;
+  }
+
+  html.light-mode h1,
+  html.light-mode h2,
+  html.light-mode h3 {
+    color: #0F172A !important;
   }
 
   /* High Contrast Focus State for Design Judge Heuristics */
