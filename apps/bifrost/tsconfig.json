@@ -7,9 +7,16 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "dist",
+<<<<<<< HEAD
     "resolveJsonModule": true,
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "dist", "**/*.test.ts"]
+=======
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+>>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 }

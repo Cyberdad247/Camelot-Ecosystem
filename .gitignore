@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CAMELOT OS: GLOBAL ROOT GITIGNORE
 
 # 1. Credentials & Keys
@@ -181,3 +182,29 @@ verify_photo_viewer_*.html
 verify_photo_viewer_*.png
 spv_diag*.py
 test_browser_upload_failure.html
+=======
+node_modules/
+dist/
+.next/
+.turbo/
+out/
+
+# Environment / secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.tsbuildinfo
+benchmark-report.json
+
+# Vercel local link state (machine-specific)
+.vercel/
+
+# Claude Code local state (agent worktrees, etc.)
+.claude/
+
+# OS / editor
+.DS_Store
+*.log
+>>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
