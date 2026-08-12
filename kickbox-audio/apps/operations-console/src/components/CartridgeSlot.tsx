@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 export interface SaaSWorkflowPill {
   id: string;
   name: string;
+  knight: string;
+  cloudbrain_uuid: string;
   category: 'FINANCE' | 'GOVERNANCE' | 'TELEMETRY' | 'VOICE';
   status: 'ACTIVE' | 'HOT_SWAPPABLE' | 'STANDBY';
   runtime: 'RUST_WASM' | 'GO_NATIVE' | 'YAML_Z3' | 'WEBRTC_VAD';
@@ -16,6 +18,8 @@ const DEFAULT_PILLS: SaaSWorkflowPill[] = [
   {
     id: 'pill_crdt_ledger',
     name: 'WASM Ledger Engine',
+    knight: 'SIR_BORIS / SIR_CRDT_LEDGER',
+    cloudbrain_uuid: '8531e6d4-6fc4-428f-a754-b9e9592ac7ff',
     category: 'FINANCE',
     status: 'ACTIVE',
     runtime: 'RUST_WASM',
@@ -24,6 +28,8 @@ const DEFAULT_PILLS: SaaSWorkflowPill[] = [
   {
     id: 'pill_hitl_policy',
     name: 'Tenant 001 Policy Engine',
+    knight: 'SIR_SENTINEL',
+    cloudbrain_uuid: '07cbb441-f008-424c-820a-85676210be39',
     category: 'GOVERNANCE',
     status: 'ACTIVE',
     runtime: 'YAML_Z3',
@@ -32,6 +38,8 @@ const DEFAULT_PILLS: SaaSWorkflowPill[] = [
   {
     id: 'pill_eagle_audit',
     name: 'EAGLE Speculative Draft',
+    knight: 'LADY_APIS',
+    cloudbrain_uuid: '378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f',
     category: 'TELEMETRY',
     status: 'ACTIVE',
     runtime: 'RUST_WASM',
@@ -40,6 +48,8 @@ const DEFAULT_PILLS: SaaSWorkflowPill[] = [
   {
     id: 'pill_bio_swarm',
     name: 'Bio-Kinetic Cellular Matrix',
+    knight: 'LADY_APIS / SIR_BIO_SWARM',
+    cloudbrain_uuid: '93b21c40-10ff-4e89-a212-08f37b1297e1',
     category: 'GOVERNANCE',
     status: 'ACTIVE',
     runtime: 'GO_NATIVE',
@@ -48,6 +58,8 @@ const DEFAULT_PILLS: SaaSWorkflowPill[] = [
   {
     id: 'pill_bifrost_mesh',
     name: 'Bifrost Polyglot Mesh',
+    knight: 'SIR_FORGE / SIR_BIFROST',
+    cloudbrain_uuid: 'cbbb0c32-3919-4b77-9158-1d9f9ebf359f',
     category: 'TELEMETRY',
     status: 'ACTIVE',
     runtime: 'GO_NATIVE',
@@ -56,10 +68,32 @@ const DEFAULT_PILLS: SaaSWorkflowPill[] = [
   {
     id: 'pill_vocal_hypervisor',
     name: 'LaKesha Voice Hypervisor',
+    knight: 'SIR_HELIO / LAKISHA_HYPERVISOR',
+    cloudbrain_uuid: '8531e6d4-6fc4-428f-a754-b9e9592ac7ff',
     category: 'VOICE',
     status: 'HOT_SWAPPABLE',
     runtime: 'WEBRTC_VAD',
     version: 'v1.2.0-PCM',
+  },
+  {
+    id: 'pill_mnemosyne_sync',
+    name: 'Memory Palace WorldTree',
+    knight: 'LADY_MNEMOSYNE (Lady M)',
+    cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795',
+    category: 'GOVERNANCE',
+    status: 'ACTIVE',
+    runtime: 'RUST_WASM',
+    version: 'v1.0.0-MNEMO',
+  },
+  {
+    id: 'pill_ghost_sentry',
+    name: 'Air-Gapped Zero-Trust Sentry',
+    knight: 'SIR_GHOST',
+    cloudbrain_uuid: '422a184b-93e7-4dfd-8a12-75d2268b6c60',
+    category: 'GOVERNANCE',
+    status: 'ACTIVE',
+    runtime: 'YAML_Z3',
+    version: 'v1.0.0-AIRGAP',
   },
 ];
 
@@ -146,12 +180,15 @@ export function CartridgeSlot() {
       {/* Selected Pill Inspector Panel */}
       <div className="p-4 border border-slate-800 bg-slate-950 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <div className="text-[10px] text-slate-500 uppercase">ACTIVE CARTRIDGE DETAILS:</div>
+          <div className="text-[10px] text-slate-500 uppercase">ACTIVE CARTRIDGE & KNIGHT DETAILS:</div>
           <div className="text-sm font-bold text-[#D4AF37] mt-0.5">
             {selectedPill.name} <span className="text-slate-400 text-xs">({selectedPill.version})</span>
           </div>
-          <div className="text-xs text-slate-400 mt-1">
-            Execution Mode: <span className="text-emerald-400 font-bold">{selectedPill.runtime}</span> | Target Edge: 100.71.218.75
+          <div className="text-xs text-slate-300 mt-1">
+            Bound Knight: <span className="text-[#9D4EDD] font-bold">{selectedPill.knight}</span> | Runtime: <span className="text-emerald-400 font-bold">{selectedPill.runtime}</span>
+          </div>
+          <div className="text-[10px] text-slate-500 mt-0.5 font-mono">
+            CloudBrain Node: <span className="text-slate-400">{selectedPill.cloudbrain_uuid}</span>
           </div>
         </div>
 
