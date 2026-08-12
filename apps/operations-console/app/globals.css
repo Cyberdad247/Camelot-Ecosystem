@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --gold-primary: #D4AF37;
+    --gold-dim: rgba(212, 175, 55, 0.2);
+    --surface-dark: #020617;
+  }
+  
+  body {
+    background-color: var(--surface-dark);
+    color: #f8fafc;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}

@@ -1,0 +1,33 @@
+node_modules/
+dist/
+.next/
+.turbo/
+out/
+
+# Environment / secrets — never commit
+.env
+.env.local
+.env.*.local
+
+# Build artifacts
+*.tsbuildinfo
+benchmark-report.json
+
+# Rust / WASM build artifacts
+packages/wasm-pills/target/
+packages/wasm-pills/pkg/
+
+# Audit worktree (ops scripts only, not project source)
+audit-kickbox-audio/
+
+# Vercel local link state (machine-specific)
+.vercel/
+
+# Claude Code local state (agent worktrees, etc.)
+.claude/
+
+# OS / editor
+.DS_Store
+*.log
+
+.vercel

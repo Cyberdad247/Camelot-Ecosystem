@@ -16,7 +16,8 @@ members = [
     "control_plane/rtk",
     "kinetic_edge/camelot_edge",
     "kinetic_edge/pqcrypto",
-    "kinetic_edge/swarm_spawner"
+    "kinetic_edge/swarm_spawner",
+    "wasm/ledger-engine"
 ]
 exclude = [
     "03_VAULT/runtime_state/nano_swarm_generated/Node_B_Bifrost/source",
