@@ -9,6 +9,7 @@ import { CartridgeSlot } from '../src/components/CartridgeSlot';
 import { HighContrastButton } from '../src/components/HighContrastButton';
 import { ExecutiveMetricsPanel } from '../src/components/ExecutiveMetricsPanel';
 import { LakeshaVoiceEnclave } from '../src/components/LakeshaVoiceEnclave';
+import { OpenDesignStatusPills } from '../src/components/OpenDesignStatusPills';
 
 // --- 3D Hover Physics Wrapper (Design Judge Heuristics) ---
 const TiltCard = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => {
@@ -166,6 +167,11 @@ export default function KBASovereignInterphase() {
           </p>
         </div>
       </header>
+
+      {/* OPEN DESIGN STATUS PILL BAR */}
+      <section className="relative z-10 mb-6">
+        <OpenDesignStatusPills />
+      </section>
 
       {/* SYSTEMATIC EXECUTIVE METRICS PANEL */}
       <section className="relative z-10 mb-8">
