@@ -11,6 +11,7 @@ import { PropertiesTab } from './tabs/PropertiesTab';
 import { SettingsTab } from './tabs/SettingsTab';
 import { StreamingTab } from './tabs/StreamingTab';
 import { VentureTab } from './tabs/VentureTab';
+import { ThemeToggle } from './ThemeToggle';
 
 const TABS = [
   'Overview',
@@ -81,13 +82,14 @@ export function Dashboard() {
 
       {/* ── Workspace ──────────────────────────────────────────── */}
       <div className="ml-60 flex-1 pb-32">
-        <header className="flex items-baseline justify-between px-10 py-8">
+        <header className="flex items-center justify-between px-10 py-8">
           <div>
             <p className="text-[11px] text-white/30 uppercase tracking-[0.2em]">{active}</p>
             <h1 className="mt-1 font-display text-3xl text-white tracking-minted">
               Sovereign Executive Intelligence
             </h1>
           </div>
+          <ThemeToggle />
         </header>
 
         <main className="px-10">

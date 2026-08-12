@@ -19,11 +19,43 @@ body {
   min-height: 100%;
   margin: 0;
   background: #050505;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
   color: #ffffff;
   font-family: var(--font-inter), Inter, system-ui, sans-serif;
+}
+
+/* --- WHITE SCREEN LIGHT MODE STYLES --- */
+html.light-mode,
+html.light-mode body {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+html.light-mode aside {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+html.light-mode aside p,
+html.light-mode aside span {
+  color: #0f172a !important;
+}
+
+html.light-mode div.bg-smoke-800\/80,
+html.light-mode div.bg-smoke-900\/60,
+html.light-mode div.bg-\[\#0B0B0E\] {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border-color: rgba(212, 175, 55, 0.4) !important;
+}
+
+html.light-mode h1,
+html.light-mode h2,
+html.light-mode h3 {
+  color: #0f172a !important;
 }
 
 button,

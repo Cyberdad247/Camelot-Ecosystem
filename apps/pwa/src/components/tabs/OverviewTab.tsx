@@ -2,6 +2,10 @@
 
 import { useBifrost } from '../../context/BifrostContext';
 import { Sparkline } from '../Sparkline';
+import { OpenDesignStatusPills } from '../OpenDesignStatusPills';
+import { ExecutiveMetricsPanel } from '../ExecutiveMetricsPanel';
+import { SwarmRosterPanel } from '../SwarmRosterPanel';
+import { CartridgeSlot } from '../CartridgeSlot';
 
 // Seed baseline (task.md §1.4) — used until Bifrost broadcasts live state.
 const BASELINE_VALUATION = 14_200_000;
@@ -63,7 +67,13 @@ export function OverviewTab() {
   const lastCommand = state?.lastCommand ?? '—';
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
+      {/* ── Open Design Status Pills ─────────────────────────── */}
+      <OpenDesignStatusPills />
+
+      {/* ── Executive Metrics Panel ───────────────────────────── */}
+      <ExecutiveMetricsPanel />
+
       {/* ── Hero valuation — the victory metric ──────────────── */}
       <div className="border border-gold/20 bg-smoke-800/80 p-8 backdrop-blur-sm">
         <div className="flex flex-wrap items-end justify-between gap-6">
@@ -105,6 +115,12 @@ export function OverviewTab() {
           trend={[1.9, 2.2, 2.6, 2.9, 3.1, 3.4, 3.6, 3.8]}
         />
       </div>
+
+      {/* ── Scabbard Cartridge Slot System ────────────────────── */}
+      <CartridgeSlot />
+
+      {/* ── Active Swarm Roster Matrix ────────────────────────── */}
+      <SwarmRosterPanel />
 
       {/* ── Last command relay ───────────────────────────────── */}
       <div className="border border-gold/20 bg-smoke-900/60 px-6 py-4 backdrop-blur-sm">
