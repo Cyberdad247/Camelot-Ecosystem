@@ -30,6 +30,22 @@ const DEFAULT_PILLS: SaaSWorkflowPill[] = [
     version: 'v1.0.0-EXCALIBUR',
   },
   {
+    id: 'pill_eagle_audit',
+    name: 'EAGLE Speculative Draft',
+    category: 'TELEMETRY',
+    status: 'ACTIVE',
+    runtime: 'RUST_WASM',
+    version: 'v999.3-EAGLE',
+  },
+  {
+    id: 'pill_bio_swarm',
+    name: 'Bio-Kinetic Cellular Matrix',
+    category: 'GOVERNANCE',
+    status: 'ACTIVE',
+    runtime: 'GO_NATIVE',
+    version: 'v1000-EXCALIBUR-A',
+  },
+  {
     id: 'pill_bifrost_mesh',
     name: 'Bifrost Polyglot Mesh',
     category: 'TELEMETRY',
@@ -84,7 +100,7 @@ export function CartridgeSlot() {
           </h2>
         </div>
         <div className="px-3 py-1 bg-slate-900 border border-[#D4AF37] text-[#D4AF37] text-xs font-bold uppercase">
-          SLOT 01: LOADED ({pills.filter((p) => p.status === 'ACTIVE').length}/4 ACTIVE)
+          SLOT 01: LOADED ({pills.filter((p) => p.status === 'ACTIVE').length}/{pills.length} ACTIVE)
         </div>
       </div>
 
