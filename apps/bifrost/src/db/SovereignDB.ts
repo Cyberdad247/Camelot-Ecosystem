@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/client';
 
 // Initialize Prisma Client with connection pooling optimized for Edge
 const prisma = new PrismaClient({

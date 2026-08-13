@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma } from './generated/client';
 
 // Pure validation helper — unit-testable without a Prisma context.
 // Splits Responsibility: Extension glue lives in `ledgerValidator` below;

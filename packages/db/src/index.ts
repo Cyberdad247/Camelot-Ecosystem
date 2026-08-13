@@ -1,4 +1,4 @@
-import { PrismaClient, Prisma } from '@prisma/client';
+import { PrismaClient, Prisma } from './generated/client';
 import { ledgerValidator } from './ledgerValidator';
 
 // Reuse a single client across hot-reloads in dev to avoid connection exhaustion.
@@ -12,4 +12,4 @@ export const prisma = basePrisma.$extends(ledgerValidator);
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = basePrisma;
 
 export { ledgerValidator };
-export * from '@prisma/client';
+export * from './generated/client';
