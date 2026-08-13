@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # CAMELOT OS: GLOBAL ROOT GITIGNORE
 
 # 1. Credentials & Keys
@@ -12,6 +11,8 @@ mcp-oauth-tokens*.json
 .gitconfig
 .env
 .env.*
+.env.local
+.env.*.local
 !.env.example
 *.env
 .env.enc
@@ -43,6 +44,8 @@ node_modules/
 .next/
 dist/
 build/
+.turbo/
+out/
 data/go-build/
 .pytest_cache/
 .venv/
@@ -121,6 +124,8 @@ installation_id
 # 6a. Build outputs / compiled binaries
 *.exe
 *.pdb
+*.tsbuildinfo
+benchmark-report.json
 
 # 6b. Oversized local/vendor binaries not suitable for GitHub
 02_FORGE/kinetic/bin/
@@ -182,29 +187,3 @@ verify_photo_viewer_*.html
 verify_photo_viewer_*.png
 spv_diag*.py
 test_browser_upload_failure.html
-=======
-node_modules/
-dist/
-.next/
-.turbo/
-out/
-
-# Environment / secrets — never commit
-.env
-.env.local
-.env.*.local
-
-# Build artifacts
-*.tsbuildinfo
-benchmark-report.json
-
-# Vercel local link state (machine-specific)
-.vercel/
-
-# Claude Code local state (agent worktrees, etc.)
-.claude/
-
-# OS / editor
-.DS_Store
-*.log
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
