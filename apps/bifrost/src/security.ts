@@ -19,8 +19,6 @@ export function verifyWebhookSignature(
   if (sigBuf.length !== expBuf.length) return false;
   return crypto.timingSafeEqual(sigBuf, expBuf);
 }
-<<<<<<< HEAD
-=======
 
 export class SignatureError extends Error {
   readonly code: 'INVALID' | 'EXPIRED' | 'MALFORMED';
@@ -109,4 +107,3 @@ export function verifyActionSignature(args: {
   }
   assertFresh({ timestamp, expiresAt });
 }
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629

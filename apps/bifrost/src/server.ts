@@ -1,25 +1,17 @@
-<<<<<<< HEAD
-=======
 import { randomUUID } from 'node:crypto';
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 import http from 'node:http';
 import express, { type Request } from 'express';
 import rateLimit from 'express-rate-limit';
 import { WebSocket, WebSocketServer } from 'ws';
-<<<<<<< HEAD
 import { SovereignDB } from './db/SovereignDB';
 import { SWARM_EVENTS, publishHermes } from './hermes';
 import { type Command, parseCommand } from './nlp';
-import { verifyWebhookSignature } from './security';
-import { applyCommand, snapshot, state } from './state';
-=======
 import { MicrocubicMatrix } from './microcubic';
 import { type RouteOutcome, route } from './router';
 import { z } from 'zod';
 import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
-import { applyCommand, setRouteTelemetry, snapshot } from './state';
+import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
 import { issueSignedAction } from './issuance';
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 
 // WebSocket carrying the heartbeat flag used by the reaper loop below.
 interface LiveSocket extends WebSocket {
@@ -34,20 +26,12 @@ interface RawBodyRequest extends Request {
 const PORT = Number(process.env.PORT) || 3001;
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET ?? '';
 
-<<<<<<< HEAD
 // The Helios/Swarm AI path is opt-in: it needs a Gemini key and makes live
 // model calls. When disabled, the gateway runs purely on the deterministic NLP
 // parser so it stays bootable and testable without any secrets.
 const ENABLE_HELIOS =
   process.env.ENABLE_HELIOS === '1' || Boolean(process.env.GEMINI_API_KEY);
 
-const app = express();
-const server = http.createServer(app);
-const wss = new WebSocketServer({ server });
-
-app.use(
-  express.json({
-=======
 // Cap inbound frame size (16 KB) — commands are tiny; reject oversized payloads
 // at the protocol layer to avoid unbounded JSON.parse work.
 const MAX_WS_PAYLOAD = 16 * 1024;
@@ -70,7 +54,6 @@ matrix.on('cube_collapsed', (event) => {
 app.use(
   express.json({
     limit: '64kb',
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
     verify: (req, _res, buf) => {
       (req as RawBodyRequest).rawBody = buf.toString('utf8');
     },
@@ -79,11 +62,7 @@ app.use(
 
 // ── Health check (graceful deploys / load balancers) ──
 app.get('/health', (_req, res) => {
-<<<<<<< HEAD
   res.status(200).json({ status: 'ok', clients: wss.clients.size, helios: ENABLE_HELIOS });
-=======
-  res.status(200).json({ status: 'ok', clients: wss.clients.size });
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 });
 
 // ── Broadcast helper: push unified state to every open client ──
@@ -96,7 +75,6 @@ function broadcastState(): void {
   }
 }
 
-<<<<<<< HEAD
 // Persist a command's side effects via SovereignDB (best-effort; broadcast
 // already reflects state, so DB failures never block the live update).
 async function persistCommand(cmd: Command): Promise<void> {
@@ -108,7 +86,7 @@ async function persistCommand(cmd: Command): Promise<void> {
     } else if (cmd.action === 'order') {
       await SovereignDB.logMessage('default-thread', 'SYSTEM', `Order placed: ${cmd.item}`, 'LOGGED');
     } else {
-      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Unrecognized command: ${cmd.raw}`, 'LOGGED');
+      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Unrecognized command: ${cmd.raw ?? cmd.action}`, 'LOGGED');
     }
   } catch (error) {
     console.error('persistCommand failed:', error);
@@ -184,7 +162,8 @@ async function runHeliosCommand(textCommand: string, ws: WebSocket): Promise<voi
   state.lastCommand = 'voice_command';
   state.updatedAt = new Date().toISOString();
   broadcastState();
-=======
+}
+
 // vMAX //ROUTE + //REZERO — remote MCP endpoint must be a Tailscale URL.
 const REMOTE_MCP_URL = process.env.REMOTE_MCP_URL;
 const ROUTE_BUDGET_MS = Number(process.env.ROUTE_BUDGET_MS) || 900;
@@ -199,6 +178,7 @@ async function handleUtterance(raw: string): Promise<RouteOutcome> {
   if (outcome.lane === 'LOCAL_TOOLS' && outcome.command.action !== 'unknown') {
     try {
       await matrix.executeCube({ id: randomUUID(), command: outcome.command });
+      await persistCommand(outcome.command);
     } catch (error) {
       console.error('microcube execution failed:', error);
     }
@@ -216,14 +196,11 @@ async function handleUtterance(raw: string): Promise<RouteOutcome> {
   );
   broadcastState();
   return outcome;
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 }
 
 // ── Task 2.4 — SMS/webhook ingress (Telnyx/Bandwidth), HMAC-signed + rate-limited ──
 const webhookLimiter = rateLimit({ windowMs: 60_000, max: 60, standardHeaders: true });
 
-<<<<<<< HEAD
-=======
 // ── KBA Cartridge: HMAC issuance + HITL dispatch ──
 const issueLimiter = rateLimit({
   windowMs: 60_000,
@@ -321,7 +298,6 @@ app.post('/api/bifrost/hitl', hitlLimiter, async (req, res) => {
   });
 });
 
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 app.post('/webhook/sms', webhookLimiter, async (req: RawBodyRequest, res) => {
   const signature = req.header('x-webhook-signature');
   if (!verifyWebhookSignature(req.rawBody ?? '', signature, WEBHOOK_SECRET)) {
@@ -333,20 +309,10 @@ app.post('/webhook/sms', webhookLimiter, async (req: RawBodyRequest, res) => {
     return res.status(400).send('Message is required');
   }
 
-<<<<<<< HEAD
   await SovereignDB.logMessage('default-thread', 'SMS', `SMS webhook: ${message}`, 'RECEIVED').catch(
     (error) => console.error('webhook persist failed:', error),
   );
 
-  // Route the inbound text through the command parser, then broadcast new state.
-  const cmd = parseCommand(message);
-  applyCommand(cmd);
-  await persistCommand(cmd);
-  publishHermes(SWARM_EVENTS, { event: 'command', source: 'webhook', action: cmd.action });
-  broadcastState();
-
-  res.status(200).json({ status: 'received', command: cmd.action });
-=======
   const outcome = await handleUtterance(message);
   res.status(200).json({
     status: 'received',
@@ -354,7 +320,6 @@ app.post('/webhook/sms', webhookLimiter, async (req: RawBodyRequest, res) => {
     command: outcome.command.action,
     rezeroed: outcome.rezeroed,
   });
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 });
 
 // ── WebSocket: command intake + heartbeat ──
@@ -368,7 +333,6 @@ wss.on('connection', (ws: LiveSocket) => {
   ws.send(JSON.stringify({ type: 'STATE_UPDATE', payload: snapshot() }));
 
   ws.on('message', async (data) => {
-<<<<<<< HEAD
     const raw = data.toString();
     let frameType: string | undefined;
     let payloadText = raw;
@@ -394,21 +358,7 @@ wss.on('connection', (ws: LiveSocket) => {
       return;
     }
 
-    const cmd = parseCommand(payloadText);
-    applyCommand(cmd);
-    await persistCommand(cmd);
-    publishHermes(SWARM_EVENTS, { event: 'command', source: 'ws', action: cmd.action });
-    broadcastState();
-=======
-    let raw: string;
-    try {
-      const parsed = JSON.parse(data.toString());
-      raw = typeof parsed?.payload === 'string' ? parsed.payload : data.toString();
-    } catch {
-      raw = data.toString();
-    }
-    await handleUtterance(raw);
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
+    await handleUtterance(payloadText);
   });
 
   ws.on('error', (error) => {
@@ -432,36 +382,20 @@ const interval = setInterval(() => {
 wss.on('close', () => clearInterval(interval));
 
 server.listen(PORT, () => {
-<<<<<<< HEAD
   console.log(`Bifrost gateway listening on port ${PORT} (helios=${ENABLE_HELIOS})`);
 });
 
 // ── Graceful shutdown: drain sockets, close server, disconnect Prisma ──
 async function shutdown(signal: string): Promise<void> {
-=======
-  console.log(`Bifrost gateway listening on port ${PORT}`);
-});
-
-// ── Graceful shutdown: drain sockets, close server ──
-function shutdown(signal: string): void {
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
   console.log(`${signal} received — shutting down...`);
   clearInterval(interval);
   for (const client of wss.clients) client.terminate();
   wss.close();
-<<<<<<< HEAD
   server.close();
   process.exit(0);
 }
 
 process.on('SIGTERM', () => void shutdown('SIGTERM'));
 process.on('SIGINT', () => void shutdown('SIGINT'));
-=======
-  server.close(() => process.exit(0));
-}
-
-process.on('SIGTERM', () => shutdown('SIGTERM'));
-process.on('SIGINT', () => shutdown('SIGINT'));
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 
 export { app, server, wss };

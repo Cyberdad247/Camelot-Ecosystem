@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-import type { Command } from './nlp';
+import type { Command, KbaDomain } from './nlp';
 
 // Microcubic swarm lifecycle, surfaced to the PWA alongside business metrics.
 export interface SwarmStatus {
@@ -7,19 +6,11 @@ export interface SwarmStatus {
   tasks: number;
   completed: number;
 }
-=======
-import type { Command, KbaDomain } from './nlp';
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
 
 // Unified, in-memory business metrics broadcast to the PWA as STATE_UPDATE.
 export interface SovereignState {
   portfolioValuation: number;
   transactionsCount: number;
-<<<<<<< HEAD
-  lastCommand: string | null;
-  updatedAt: string;
-  swarm: SwarmStatus;
-=======
   // KBA Cartridge counters — incremented on every /api/bifrost/hitl dispatch
   // whose `route("kba KBA_<DOMAIN>_<id>")` parses to `action: 'kba'`.
   kbaActionsCount: number;
@@ -33,7 +24,7 @@ export interface SovereignState {
   lastLatencyMs: number | null;
   lastRezeroed: boolean;
   updatedAt: string;
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
+  swarm: SwarmStatus;
 }
 
 // Placeholder baseline ($14.2M) — demo only, NOT real financial data.
@@ -42,11 +33,6 @@ export const BASELINE_VALUATION = 14_200_000;
 export const state: SovereignState = {
   portfolioValuation: BASELINE_VALUATION,
   transactionsCount: 0,
-<<<<<<< HEAD
-  lastCommand: null,
-  updatedAt: new Date().toISOString(),
-  swarm: { active: false, tasks: 0, completed: 0 },
-=======
   kbaActionsCount: 0,
   kbaActionsByDomain: {
     sync: 0,
@@ -65,7 +51,7 @@ export const state: SovereignState = {
   lastLatencyMs: null,
   lastRezeroed: false,
   updatedAt: new Date().toISOString(),
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
+  swarm: { active: false, tasks: 0, completed: 0 },
 };
 
 /**
@@ -76,21 +62,14 @@ export function applyCommand(cmd: Command, s: SovereignState = state): Sovereign
   if (cmd.action === 'add_transaction') {
     s.portfolioValuation += cmd.amount;
     s.transactionsCount += 1;
-<<<<<<< HEAD
-=======
   } else if (cmd.action === 'kba') {
     return applyKbaAction(cmd, s);
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
   }
   s.lastCommand = cmd.action;
   s.updatedAt = new Date().toISOString();
   return s;
 }
 
-<<<<<<< HEAD
-export function snapshot(s: SovereignState = state): SovereignState {
-  return { ...s, swarm: { ...s.swarm } };
-=======
 /**
  * Apply a KBA-domain action. Increments the universal counter plus the
  * per-domain counter, and stamps lastKbaDomain. Pulled out of applyCommand
@@ -123,6 +102,6 @@ export function setRouteTelemetry(
 }
 
 export function snapshot(s: SovereignState = state): SovereignState {
-  return { ...s };
->>>>>>> 1e753daa6bbb3d6433608f2343c4fa3710e49629
+  return { ...s, swarm: { ...s.swarm } };
 }
+
