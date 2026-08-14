@@ -40,11 +40,22 @@ export function OperatorConsole({ taskId }: { taskId: string }) {
   }, [taskId]);
 
   const integrity = snapshot?.integrity ?? 'unavailable';
+  const integrityFailed = integrity === 'integrity_failed';
 
   return (
     <main className="min-h-screen bg-obsidian px-6 py-8 font-mono">
       <OperatorConsoleHeader taskId={taskId} integrity={integrity} />
       {bifrostDown && <StaleEvidenceNotice ageLabel={lastVerifiedAt ? ageLabel(lastVerifiedAt) : 'never'} />}
+      {integrityFailed && (
+        <div role="alert" className="mt-4 border border-red-400/60 bg-red-400/5 p-3">
+          <p className="font-mono text-[11px] uppercase tracking-widest text-red-300">
+            INTEGRITY FAILED — evidence cannot satisfy any promotion gate.
+          </p>
+          <p className="mt-1 text-[11px] text-white/50">
+            The affected record is preserved for investigation. Approval and promotion paths are disabled.
+          </p>
+        </div>
+      )}
       <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         <section className="rounded-sm border border-white/10 p-4" aria-label="Intent">
           <h2 className="mb-3 text-xs uppercase tracking-widest text-gold-light">Intent</h2>
@@ -52,7 +63,15 @@ export function OperatorConsole({ taskId }: { taskId: string }) {
         </section>
         <section className="rounded-sm border border-white/10 p-4" aria-label="Approval">
           <h2 className="mb-3 text-xs uppercase tracking-widest text-gold-light">Approval</h2>
-          {snapshot ? <ApprovalPanel taskId={taskId} approval={snapshot.approval} /> : <EmptyEvidenceState panel="Approval" />}
+          {snapshot ? (
+            <ApprovalPanel
+              taskId={taskId}
+              approval={snapshot.approval}
+              forceDisabled={bifrostDown || integrityFailed}
+            />
+          ) : (
+            <EmptyEvidenceState panel="Approval" />
+          )}
         </section>
         <section className="rounded-sm border border-white/10 p-4" aria-label="Task Graph">
           <h2 className="mb-3 text-xs uppercase tracking-widest text-gold-light">Task Graph</h2>

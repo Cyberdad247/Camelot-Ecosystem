@@ -8,9 +8,10 @@ import type { EffectManifest } from '../../lib/operator_console/schemas';
 import { EffectManifestDialog } from './EffectManifestDialog';
 import { ApprovalConfirmationDialog } from './ApprovalConfirmationDialog';
 
-export function ApprovalPanel({ approval, taskId }: {
+export function ApprovalPanel({ approval, taskId, forceDisabled = false }: {
   approval: Record<string, unknown>;
   taskId: string;
+  forceDisabled?: boolean;
 }) {
   const [pendingDecision, setPendingDecision] = useState<'approve' | 'deny' | null>(null);
   const [outcome, setOutcome] = useState<DecisionResponse | null>(null);
@@ -18,7 +19,7 @@ export function ApprovalPanel({ approval, taskId }: {
   const state = String(approval.state ?? 'APPROVAL_REQUIRED');
   const suspended = state === 'APPROVAL_SUSPENDED' || state === 'AUDIT_SUSPENDED';
   const policyBlocked = state === 'POLICY_BLOCKED';
-  const disabled = suspended || policyBlocked;
+  const disabled = suspended || policyBlocked || forceDisabled;
 
   // Fixture manifest surfaced by the BFF (Task 5) — slice #2 renders the
   // immutable manifest for the fixture task.
