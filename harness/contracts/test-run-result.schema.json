@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "harness/contracts/test-run-result.schema.json",
+  "title": "Test Run Result (test-run-result/1)",
+  "type": "object",
+  "required": ["schemaVersion", "runId", "taskId", "correlationId", "runner", "status", "startedAt", "outputHash"],
+  "properties": {
+    "schemaVersion": { "const": "test-run-result/1" },
+    "runId": { "type": "string" },
+    "taskId": { "type": "string" },
+    "correlationId": { "type": "string" },
+    "runner": { "const": "boris-gideon-adapter" },
+    "status": { "enum": ["passed", "failed", "cancelled", "timed_out"] },
+    "startedAt": { "type": "string" },
+    "completedAt": { "type": "string" },
+    "suites": { "type": "array" },
+    "summary": { "type": "object" },
+    "outputHash": { "type": "string" },
+    "receiptRef": { "type": "string" }
+  }
+}

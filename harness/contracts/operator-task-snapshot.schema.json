@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "harness/contracts/operator-task-snapshot.schema.json",
+  "title": "Operator Task Snapshot (operator-task-snapshot/1)",
+  "type": "object",
+  "required": ["schemaVersion", "taskId", "correlationId", "generatedAt", "integrity"],
+  "properties": {
+    "schemaVersion": { "const": "operator-task-snapshot/1" },
+    "taskId": { "type": "string" },
+    "correlationId": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "integrity": { "enum": ["verified", "pending_anchor", "unavailable", "integrity_failed"] },
+    "intent": { "type": "object" },
+    "approval": { "type": "object" },
+    "taskGraph": { "type": "array" },
+    "diffs": { "type": "array" },
+    "tests": { "type": "array" },
+    "receipts": { "type": "array" }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "harness/contracts/diff-evidence.schema.json",
+  "title": "Diff Evidence",
+  "type": "object",
+  "required": ["baseRevision", "candidateRevision", "diffSha256", "changedPaths", "addedLines", "removedLines", "generatedAt", "gideonVerdict"],
+  "properties": {
+    "baseRevision": { "type": "string" },
+    "candidateRevision": { "type": "string" },
+    "diffSha256": { "type": "string" },
+    "changedPaths": { "type": "array", "items": { "type": "string" } },
+    "addedLines": { "type": "integer", "minimum": 0 },
+    "removedLines": { "type": "integer", "minimum": 0 },
+    "generatedAt": { "type": "string" },
+    "gideonVerdict": { "enum": ["pass", "fail", "pending", "unavailable"] },
+    "receiptRef": { "type": "string" }
+  }
+}

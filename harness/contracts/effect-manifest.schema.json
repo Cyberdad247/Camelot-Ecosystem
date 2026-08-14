@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "harness/contracts/effect-manifest.schema.json",
+  "title": "Effect Manifest (effect-manifest/1)",
+  "type": "object",
+  "required": ["schemaVersion", "manifestId", "taskId", "correlationId", "kind", "baseRevision", "candidateRevision", "diffSha256", "policyClass", "expiresAt", "oneTimeNonce"],
+  "properties": {
+    "schemaVersion": { "const": "effect-manifest/1" },
+    "manifestId": { "type": "string" },
+    "taskId": { "type": "string" },
+    "correlationId": { "type": "string" },
+    "kind": { "type": "string" },
+    "baseRevision": { "type": "string" },
+    "candidateRevision": { "type": "string" },
+    "diffSha256": { "type": "string" },
+    "allowedPaths": { "type": "array", "items": { "type": "string" } },
+    "requiredEvidence": { "type": "array", "items": { "type": "string" } },
+    "policyClass": { "type": "string" },
+    "expiresAt": { "type": "string" },
+    "oneTimeNonce": { "type": "string" }
+  }
+}

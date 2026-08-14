@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "harness/contracts/receipt-summary.schema.json",
+  "title": "Receipt Summary",
+  "type": "object",
+  "required": ["receiptId", "eventId", "taskId", "correlationId", "kind", "timestamp", "actor", "payloadHash", "integrity"],
+  "properties": {
+    "receiptId": { "type": "string" },
+    "eventId": { "type": "string" },
+    "taskId": { "type": "string" },
+    "correlationId": { "type": "string" },
+    "kind": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "actor": { "type": "object" },
+    "payloadHash": { "type": "string" },
+    "parentHash": { "type": "string" },
+    "integrity": { "enum": ["verified", "pending_anchor", "unavailable", "integrity_failed"] }
+  }
+}

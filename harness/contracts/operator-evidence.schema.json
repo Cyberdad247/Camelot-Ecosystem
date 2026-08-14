@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "harness/contracts/operator-evidence.schema.json",
+  "title": "Operator Evidence Envelope (operator-evidence/1)",
+  "type": "object",
+  "required": ["schemaVersion", "eventId", "taskId", "correlationId", "timestamp", "actor", "kind", "payloadHash", "integrity"],
+  "properties": {
+    "schemaVersion": { "const": "operator-evidence/1" },
+    "eventId": { "type": "string", "minLength": 1 },
+    "taskId": { "type": "string", "minLength": 1 },
+    "correlationId": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "actor": {
+      "type": "object",
+      "required": ["id", "role"],
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "enum": ["operator", "anya", "merlin", "hiveide", "nano_knight", "sentinel", "gideon", "boris", "herald", "system"] }
+      }
+    },
+    "kind": { "type": "string", "minLength": 1 },
+    "payload": { "type": "object" },
+    "payloadHash": { "type": "string", "minLength": 1 },
+    "integrity": { "enum": ["verified", "pending_anchor", "unavailable", "integrity_failed"] }
+  }
+}
