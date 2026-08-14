@@ -9,6 +9,7 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "pretest:e2e": "next build",
+    "test": "node ../../node_modules/vitest/vitest.mjs run",
     "test:e2e": "playwright test"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "@types/react-dom": "^18.2.18",
     "@types/three": "0.185.0",
     "autoprefixer": "^10.4.16",
+    "vitest": "^2.1.8",
     "postcss": "^8.4.32",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.3.3"
