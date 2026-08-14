@@ -43,3 +43,24 @@ model Contact {
   tags      String   @default("[]") // JSON-encoded string list (SQLite has no scalar arrays)
   createdAt DateTime @default(now())
 }
+
+// Append-only operator evidence chain (slice #2 Operator Console).
+// Rows are never updated or deleted; parentHash links the previous event
+// for the same task, forming the integrity chain (design §4).
+model OperatorEvent {
+  id            String   @id @default(uuid())
+  eventId       String   @unique
+  taskId        String
+  correlationId String
+  timestamp     String
+  actorId       String
+  actorRole     String
+  kind          String
+  payload       String // canonical JSON
+  payloadHash   String
+  parentHash    String?
+  integrity     String
+  createdAt     DateTime @default(now())
+
+  @@index([taskId, createdAt])
+}
