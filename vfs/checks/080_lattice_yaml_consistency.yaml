@@ -1,0 +1,11 @@
+sequence: "080"
+id: lattice_yaml_consistency
+display_name: Lattice YAML Consistency
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.lattice_run",
+         "--path", "docs/architecture/lattice.yaml"]
+timeout_s: 5
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: false
+remediation_hint: "Re-run lattice_purge_orchestrator.py :: phase e or update lattice.yaml manually."

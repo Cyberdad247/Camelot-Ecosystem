@@ -1,0 +1,11 @@
+sequence: "050"
+id: provenance_ledger_writable
+display_name: Provenance Ledger Writable
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.ledger_writable_run",
+         "--path", "PROVENANCE_LEDGER.md"]
+timeout_s: 5
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: false
+remediation_hint: "PROVENANCE_LEDGER.md is read-only or missing. Restore from CAMELOT-OS PROVENANCE_LEDGER.md hook (the post-write hook owns the file)."

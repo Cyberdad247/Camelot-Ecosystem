@@ -1,0 +1,12 @@
+sequence: "030"
+id: northstar_brief_currency
+display_name: NORTHSTAR Brief Currency (≤60 days)
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.file_age_run",
+         "--path", "docs/architecture/NORTHSTAR_ARCHITECTURE_BRIEF.md",
+         "--max-age-days", "60"]
+timeout_s: 5
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: true
+remediation_hint: "Refresh or formally supersede NORTHSTAR_ARCHITECTURE_BRIEF.md (current draft may exceed 60 days; first run will surface this as advisor)."

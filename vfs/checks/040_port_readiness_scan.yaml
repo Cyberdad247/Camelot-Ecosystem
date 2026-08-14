@@ -1,0 +1,11 @@
+sequence: "040"
+id: port_readiness_scan
+display_name: Port Readiness Scan
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.ports_run",
+         "--ports", "8080,8011,11434,4433,4434"]
+timeout_s: 5
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: true
+remediation_hint: "Run scripts/ops/start-bifrost.sh; expected open: 8080 (CLIProxy), 8011 (Bifrost prefight), 11434 (Ollama), 4433 (Bifrost WS), 4434 (Bifrost gRPC). Tolerate missing subgraph ports during first-run advisor mode."

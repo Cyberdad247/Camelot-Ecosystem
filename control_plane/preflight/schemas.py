@@ -52,10 +52,27 @@ class CheckSpec:
                     f"missing required field '{required}'"
                 )
 
-        seq = raw["sequence"]
-        if not isinstance(seq, int) or isinstance(seq, bool) or seq <= 0:
+        seq_raw = raw["sequence"]
+        # YAML's leading-zero-style sequence values (010, 020, ...)
+        # are parsed as strings because PyYAML refuses the octal
+        # interpretation (octal digits 0-7 only). The spec mandates
+        # stride-10 readability, so accept strings here and coerce.
+        if isinstance(seq_raw, bool) or not isinstance(
+            seq_raw, (int, str)
+        ):
             raise CatalogParseError(
-                f"sequence must be a positive int, got {seq!r}"
+                f"sequence must be a positive int (or numeric string), "
+                f"got {seq_raw!r}"
+            )
+        try:
+            seq = int(seq_raw)
+        except (TypeError, ValueError) as e:
+            raise CatalogParseError(
+                f"sequence must be coercible to int, got {seq_raw!r}"
+            ) from e
+        if seq <= 0:
+            raise CatalogParseError(
+                f"sequence must be positive, got {seq}"
             )
 
         cmd_type = raw["command_type"]

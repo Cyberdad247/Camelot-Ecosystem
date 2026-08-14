@@ -1,0 +1,11 @@
+sequence: "060"
+id: tool_registry_presence
+display_name: Tool Registry Presence
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.import_smoke_run",
+         "--modules", "pathlib,json,yaml,subprocess,hashlib"]
+timeout_s: 10
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: false
+remediation_hint: "Required: Python 3.11+, PyYAML. Audit pip-freeze and re-install missing stdlib or PyYAML."

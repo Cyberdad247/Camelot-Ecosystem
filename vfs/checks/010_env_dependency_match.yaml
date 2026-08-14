@@ -1,0 +1,10 @@
+sequence: "010"
+id: env_dependency_match
+display_name: Environment Dependency Match
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.env_dep_run"]
+timeout_s: 10
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: false
+remediation_hint: "Install Python 3.11+, Rust 1.96, Node 20; start Ollama on :11434."

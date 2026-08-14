@@ -1,0 +1,11 @@
+sequence: "020"
+id: foss_validation_constraints
+display_name: FOSS License Header Scan
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.license_header_run",
+         "--roots", "01_KERNEL", "02_FORGE", "vfs"]
+timeout_s: 15
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: false
+remediation_hint: "Add '# SPDX-License-Identifier: MIT' (or chosen) at the top of files flagged in the run log."

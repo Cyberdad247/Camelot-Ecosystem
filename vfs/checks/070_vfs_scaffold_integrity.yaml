@@ -1,0 +1,12 @@
+sequence: "070"
+id: vfs_scaffold_integrity
+display_name: VFS Scaffold Integrity
+command_type: python_module
+command: ["python", "-m", "control_plane.preflight.probes.vfs_present_run",
+         "--required", "vfs/preflight.md", "vfs/systeminstructions.md",
+         "vfs/skills.md", "vfs/rosters.md", "vfs/protocols.md"]
+timeout_s: 5
+retry: 0
+expected_evidence_class: CONFIRMED
+hitl_on_fail: true
+remediation_hint: "Restore missing vfs/*.md files from the Ω_VFS_ARCHITECTURE_SCAFFOLD_vMAX deposit artifacts."
