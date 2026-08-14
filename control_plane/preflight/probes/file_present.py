@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Static file presence probe for required-on-disk artifacts.
 
 Per VFS_PREFLIGHT_DESIGN.md §4 `vfs_scaffold_integrity` (sequence 070)

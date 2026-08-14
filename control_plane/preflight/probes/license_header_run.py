@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 020 foss_validation_constraints.
 
 Pattern: thin CLI wrapper. --roots takes positional roots; calls

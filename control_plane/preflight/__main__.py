@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """CLI entry point for control_plane.preflight (slice #1 Task 7).
 
 Subcommands:
@@ -164,10 +166,19 @@ def _self_test_catalog(tmp: Path) -> Path:
 
 
 def cmd_test(args: argparse.Namespace) -> int:
-    """Self-test: synthetic 8-pass catalog -> execute_catalog."""
-    repo_root, _, run_root = _resolve_paths()
+    """Self-test: synthetic 8-pass catalog -> execute_catalog.
+
+    Uses an isolated tmp run_root so the self-test can never write
+    artifacts into the live 03_VAULT/runtime_state tree and can never
+    accidentally graduate the real system (the bug that wrote
+    _graduated.flag before any real all-CONFIRMED run).
+    """
+    repo_root, _, _ = _resolve_paths()
     with tempfile.TemporaryDirectory(prefix="preflight_selftest_") as td:
-        checks_dir = _self_test_catalog(Path(td))
+        tmp = Path(td)
+        checks_dir = _self_test_catalog(tmp)
+        run_root = tmp / "run_root"
+        run_root.mkdir(parents=True, exist_ok=True)
         try:
             specs = load_catalog(checks_dir)
         except CatalogError as e:

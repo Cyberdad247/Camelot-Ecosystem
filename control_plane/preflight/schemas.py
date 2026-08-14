@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Dataclasses + YAML parser for preflight catalog and run artifacts.
 
 Per docs/architecture/VFS_PREFLIGHT_DESIGN.md §5.3 (per-check JSON) and §5.4
@@ -178,6 +180,7 @@ class RunManifest:
     catalog_hash: str = ""
     first_run: bool = True
     graduated_to_strict: bool = False
+    checks: list = field(default_factory=list)  # List[CheckResult] (forward ref)
 
     def to_json_dict(self) -> dict:
         return asdict(self)

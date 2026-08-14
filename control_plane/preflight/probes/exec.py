@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Subprocess wrapper: bounded timeouts, sized excerpts, cross-platform safe.
 
 Used by the runner (Task 3+). Never raises on non-zero exit; only

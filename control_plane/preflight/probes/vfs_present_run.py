@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 070 vfs_scaffold_integrity.
 
 --required takes positional paths.

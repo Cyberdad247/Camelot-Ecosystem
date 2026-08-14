@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Reusable preflight probes (per-check execution primitives).
 
 Per the plan these primitives live alongside the runner; each task in

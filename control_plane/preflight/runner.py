@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """VFS Preflight runner: load catalog, execute checks, emit evidence.
 
 Slice #1 Task 6: implement the orchestrator (`execute_check` and
@@ -174,11 +176,29 @@ def execute_check(
     else:
         if "all_ok" in payload:
             if not payload["all_ok"]:
+                # Aggregate every signal the probe emitted alongside
+                # the failed `all_ok`. If the probe only showed
+                # `all_ok = false` without any False-valued sibling
+                # (e.g. vfs_present_run emits `missing_count`, not a
+                # False boolean), we still record a generic reason
+                # so the rejection is detectable downstream.
+                specific_reasons = 0
                 for k, v in payload.items():
                     if k == "all_ok":
                         continue
                     if v is False:
                         rejection_reasons.append(f"{k} = {v!r}")
+                        specific_reasons += 1
+                    elif isinstance(v, dict):
+                        # Flatten nested bool leaves (e.g. ports probe's
+                        # {"results": {"8080": false, ...}}) into
+                        # operator-readable reasons.
+                        for sub, sv in v.items():
+                            if sv is False:
+                                rejection_reasons.append(f"{k}.{sub} = False")
+                                specific_reasons += 1
+                if not specific_reasons:
+                    rejection_reasons.append("all_ok = False (no False-sibling detail)")
         else:
             # Non-JSON output (e.g. shell check) -> trust exit code.
             if res.exit_code != 0:
@@ -277,14 +297,18 @@ def execute_catalog(
         pass
     run_root.mkdir(parents=True, exist_ok=True)
 
-    # Per-run timestamp directory: <run_root>/<UTC>/.
+    # Per-run timestamp directory: <run_root>/preflight/<UTC>/ per
+    # VFS_PREFLIGHT_DESIGN §3.1. The `preflight/` subdir keeps artifacts
+    # distinct from other runtime_state consumers AND aligns with
+    # GraduationFlag(run_root).path() == <run_root>/preflight/_graduated.flag,
+    # so first_run / strict_mode / graduation all read one flag location.
     ts = utc_now_iso_for_id()
-    run_dir = run_root / ts
+    run_dir = run_root / "preflight" / ts
     # Idempotency: a re-run within the same second gets a counter suffix.
     suffix_counter = 0
     while run_dir.exists():
         suffix_counter += 1
-        run_dir = run_root / f"{ts}_{suffix_counter:02d}"
+        run_dir = run_root / "preflight" / f"{ts}_{suffix_counter:02d}"
     run_dir.mkdir(parents=True, exist_ok=True)
 
     started_at = utc_now_iso()
@@ -373,6 +397,7 @@ def execute_catalog(
     manifest.ended_at = ended_at
     manifest.total_ms = total_ms
     manifest.first_run = not GraduationFlag(run_root).is_strict()
+    manifest.checks = list(results)  # populate per-check evidence for callers
 
     # Graduation (advisor -> strict transition) on first all-CONFIRMED.
     if (

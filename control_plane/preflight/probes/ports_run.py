@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 040 port_readiness_scan.
 
 Pattern: --ports comma-separated list of ints.

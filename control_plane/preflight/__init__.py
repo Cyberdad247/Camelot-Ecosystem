@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """VFS Preflight vertical slice (slice #1 of 5).
 
 Companion docs:

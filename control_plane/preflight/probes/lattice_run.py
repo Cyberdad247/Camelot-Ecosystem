@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 080 lattice_yaml_consistency.
 
 Verifies docs/architecture/lattice.yaml parses and subproject paths

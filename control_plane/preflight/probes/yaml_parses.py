@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """YAML parses probe — verifies a YAML file is a valid mapping.
 
 Per VFS_PREFLIGHT_DESIGN.md §4 `lattice_yaml_consistency` (sequence 080).

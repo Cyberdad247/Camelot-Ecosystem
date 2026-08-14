@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Graduation flag — first-run advisor to strict-mode state.
 
 Per docs/architecture/VFS_PREFLIGHT_DESIGN.md §3.2 and §6.2:

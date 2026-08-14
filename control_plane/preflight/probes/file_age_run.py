@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 030 northstar_brief_currency.
 
 Pattern: thin CLI wrapper. --path, --max-age-days; returns JSON.

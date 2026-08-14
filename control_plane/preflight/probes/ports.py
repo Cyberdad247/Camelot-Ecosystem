@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TCP port probe — short-lived connect attempts on 127.0.0.1.
 
 Per VFS_PREFLIGHT_DESIGN.md §4 check `port_readiness_scan` (sequence 040).

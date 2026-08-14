@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Compute file age in days.
 
 Per VFS_PREFLIGHT_DESIGN.md §4 check `northstar_brief_currency`

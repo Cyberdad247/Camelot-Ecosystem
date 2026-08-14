@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 050 provenance_ledger_writable.
 
 Verifies PROVENANCE_LEDGER.md is present and writable. Does NOT modify

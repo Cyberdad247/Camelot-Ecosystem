@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Importable modules check — ensures required Python imports succeed.
 
 Per VFS_PREFLIGHT_DESIGN.md §4 `tool_registry_presence` (sequence 060).

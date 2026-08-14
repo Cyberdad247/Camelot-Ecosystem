@@ -24,6 +24,7 @@ from typing import Any
 from .cloud_services import CloudServiceName, CloudServiceRequest, CloudServiceRouter
 from .codex_integration import boot_codex_integration
 from .excalibur_preflight import boot_excalibur_preflight
+from control_plane.preflight.boot_integration import boot_vfs_preflight
 from .heimdall_bifrost_governance import boot_heimdall_bifrost_governance
 from .knight_configuration import write_knight_configuration
 from .nano_swarm_runtime import boot_nano_swarm_runtime
@@ -1082,6 +1083,22 @@ def boot_pydantic_ai_knight(home: Path) -> tuple[bool, str]:
         return False, f"Pydantic AI init failed: {exc}"
 
 
+def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
+    """Stage-0 VFS preflight gate (hard halt on strict REJECT).
+
+    boot_vfs_preflight returns (ok, msg) for the summary row. In strict
+    mode a REJECTED check must HARD HALT the boot BEFORE any later stage
+    starts services (ADR 0006 — no sovereign escape hatch). SystemExit
+    is a BaseException, so run_boot's `except Exception` does not swallow
+    it: the boot aborts immediately and awaken exits 1.
+    """
+    ok, msg = boot_vfs_preflight(home)
+    if not ok:
+        sys.stderr.write(f"[VFS_PREFLIGHT] BOOT HALTED: {msg}\n")
+        raise SystemExit(1)
+    return ok, msg
+
+
 def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
     # Load local LT env overrides before integration_brain is imported so module-level
     # constants pick up localhost:8200 URLs instead of the Modal cloud endpoints
@@ -1100,6 +1117,8 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
     spec.loader.exec_module(hud)
 
     phases = [
+        {"name": "VFS Preflight    :stage-0", "required": False,
+         "fn": lambda: _boot_vfs_preflight_stage0(home)},
         {"name": "EXCALIBUR Pre-Flight", "required": False, "fn": lambda: boot_excalibur_preflight(home)},
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},

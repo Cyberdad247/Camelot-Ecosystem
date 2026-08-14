@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 010 env_dependency_match.
 
 Pattern: thin CLI wrapper. Args parsed from sys.argv; reads --pipeline/extras;

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Probe-runner for catalog check 060 tool_registry_presence.
 
 --modules takes comma-separated module names.
