@@ -20,6 +20,7 @@ from typing import Any
 import sys
 
 # Connect to KERNEL for Cloudbrain
+CAMELOT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(CAMELOT_ROOT / "01_KERNEL"))
 try:
     from memory.cloudbrain_connector import CloudBrainConnector
@@ -32,7 +33,6 @@ except ImportError:
     LIBRARIAN_REGISTRY = None
 
 LOG = logging.getLogger("lady_m")
-CAMELOT_ROOT = Path(__file__).resolve().parent.parent
 LEDGER       = CAMELOT_ROOT / "PROVENANCE_LEDGER.md"
 HARNESS_Q    = CAMELOT_ROOT / "logs" / "harness_queue.jsonl"
 MISSIONS     = CAMELOT_ROOT / "03_VAULT" / "Missions"
@@ -83,20 +83,20 @@ class SquireTriage:
             for file in files:
                 fp = Path(root) / file
 
-            # Secret scan
-            try:
-                text = fp.read_text(encoding="utf-8", errors="replace")
-            except OSError:
-                continue
-            for pat in self.SECRET_PATTERNS:
-                if pat.lower() in text.lower() and "boolean" not in text.lower()[:200]:
-                    found_secrets.append(f"{fp.name}:{pat}")
-                    risk += 30
+                # Secret scan
+                try:
+                    text = fp.read_text(encoding="utf-8", errors="replace")
+                except OSError:
+                    continue
+                for pat in self.SECRET_PATTERNS:
+                    if pat.lower() in text.lower() and "boolean" not in text.lower()[:200]:
+                        found_secrets.append(f"{fp.name}:{pat}")
+                        risk += 30
 
-            # Dead asset detection
-            if fp.suffix in (".pyc", ".cache", ".bak", ".tmp") and fp.stat().st_size == 0:
-                dead.append(str(fp))
-                risk += 5
+                # Dead asset detection
+                if fp.suffix in (".pyc", ".cache", ".bak", ".tmp") and fp.stat().st_size == 0:
+                    dead.append(str(fp))
+                    risk += 5
 
         if risk >= RISK_THRESHOLD:
             recs.append("HITL gate triggered: review secret disclosures before proceeding.")
@@ -128,10 +128,10 @@ class SquirePurge:
             dirs[:] = [d for d in dirs if d not in ignore_dirs]
             for file in files:
                 fp = Path(root) / file
-            if fp.suffix in self.PURGE_EXTENSIONS or fp.parent.name in self.PURGE_DIRS:
-                if not dry_run:
-                    fp.unlink(missing_ok=True)
-                purged.append(str(fp))
+                if fp.suffix in self.PURGE_EXTENSIONS or fp.parent.name in self.PURGE_DIRS:
+                    if not dry_run:
+                        fp.unlink(missing_ok=True)
+                    purged.append(str(fp))
 
         LOG.info("[PURGE] %s %d artifacts", "DRY" if dry_run else "DELETED", len(purged))
         return purged
