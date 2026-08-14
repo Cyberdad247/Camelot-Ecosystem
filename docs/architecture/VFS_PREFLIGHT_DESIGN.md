@@ -1,16 +1,21 @@
 # VFS_PREFLIGHT_DESIGN.md
 
 **Status:** Draft for sovereign review
-**Date:** 2026-08-13
+**Date:** 2026-08-13 (PEER-aligned substrate retargeted per sovereign directive)
 **Tier:** APEX (Architectural Augmentation)
-**Vertical Slice:** #1 of N (sequence below in §6)
-**Substrate:** `v1000-EXCALIBUR-A` (augmentation layer, no replacement)
-**Home:** This document. Companion manifests live under `vfs/checks/`.
+**Vertical Slice:** #1 of N (sequence below in §9)
+**Substrate:** PEER-aligned (`docs/architecture/PEER_ARCHITECTURE.md`). v1000 Iron Gate = legacy fallback until Sentinel-v2 ships.
+**Home:** This document. Companion manifests live under `vfs/checks/`. PEER substrate map at `docs/architecture/PEER_ARCHITECTURE.md`.
 
 > **Co-equal contract:** This spec defines a vertical slice. It does **not**
 > replace `v1000-EXCALIBUR-A` modules (`anya_gate`, `soul_oversight`,
 > `factory_lane`, `firnflow`, `knight_agent`, `cartridge_manager`,
-> `inspira_metrics`). The preflight reuses `anya_gate.triage()` directly.
+> `inspira_metrics`). The preflight **does not** depend on any of these
+> modules; it borrows `AnyaGate.triage()` as advisory only and falls back
+> to a graceful-degradation sentinel if substrate is unavailable. The
+> canonical PEER authorizer is **Sentinel+Gideon**, with `IronGateV2`
+> demoted to a v1000-EXCALIBUR-A legacy fallback (see
+> `docs/architecture/PEER_ARCHITECTURE.md`).
 
 ---
 
@@ -66,6 +71,27 @@ bin/awaken.py
   └── runic_router, anya_gate, soul_oversight (unchanged)
 ```
 
+### 3.4 PEER substrate mapping (slice #1, this commit)
+
+Canonical: Sentinel (gate) + Gideon (audit) per PEER_ARCHITECTURE §2.6
+and §2.7.
+
+| PEER role | Entity | Slice #1 binding | Failure path |
+|-----------|--------|-----------------|--------------|
+| Authorize | Camelot | Symbolic; preflight boot-gate **is** Camelot's authorization | n/a |
+| Plan + Express | Anya | Advisory block in per-check JSON; operator summary printed at end | Sentinel `advisory_unavailable` |
+| Coordinator | HiVeiDe (Hive IDE) | NOT invoked (slice #1 is in-process at boot) | n/a |
+| Adapter | Merlin | NOT invoked (slice #1 has fixed preflight schema) | n/a |
+| Execute | Nano-Knights | (slice #1 itself is the boot-time gate; Nano-Knights reserved for slices #2-3) | n/a |
+| Review (gate) | Sentinel | PEER binding: `Sentinel-v2.if_available() → hitl_tier`; v1000 legacy fallback: `soul_oversight.IronGateV2(GateKeys.PREFLIGHT).pre_execute(...)` | Sentinel sentinel fallback (`advisory_unavailable`) |
+| Review (audit) | Gideon | PEER binding: `//SCORPION` rune via `sir_gideon` adapter + `GIDEON_RISK_MATRIX` against each REJECTED check; deferred to slices #2-3 for full enforcement | Gideon sentinel fallback (`audit_unavailable`) |
+
+A fully-baked PEER-mode future (slices #2-3) reads the rows above
+non-trivially. Slice #1 keeps the explicit fallback semantics so a
+PREFLIGHT runner can launch today even without Sentinel-v2 or
+Gideon-v2 compiled, while still emitting advisory blocks structured for
+canonical PEER consumption.
+
 ### 3.2 New artifacts
 
 | Path | Purpose |
@@ -88,35 +114,70 @@ bin/awaken.py
 ### 3.3 Reuse, not replacement
 
 **Substrate reference (verified 2026-08-13 against
-`control_plane/core/anya_gate.py`):**
+`control_plane/core/anya_gate.py`, `control_plane/core/soul_oversight.py`,
+`.hive/TITANIUM_LAWS.md`, `docs/architecture/HIVE_BRIDGE_FINAL.md`,
+`01_KERNEL/protocols/agno_orchestrator.md`):**
 
-- `AnyaGate.triage(raw_intent: str) -> TriageScore` is a risk-based routing
-  helper. It takes a `str` and returns the `TriageScore` Pydantic model
-  (defined in `control_plane/core/factory_lane.py:63`) with fields
+- **`AnyaGate.triage(raw_intent: str) -> TriageScore`** — Plan/Express role
+  helper (per PEER_ARCHITECTURE §2). Takes a `str` and returns the
+  `TriageScore` Pydantic model (defined in
+  `control_plane/core/factory_lane.py:63`) with fields
   `auto_dispatchable, priority, hitl_tier, risk_entropy, risk_reason,
   assigned_knight, estimated_tokens, cost_ceiling_usd,
   shatterpoints_detected, requires_z3_verification, cartridge_hint`.
-  **It does not assert evidence class.**
-- Preflight therefore **owns** `evidence_class` itself based on check
-  outcome, and uses `AnyaGate.triage()` **advisory** — passing a small
-  `raw_intent` string describing the check (e.g.
+  **It does not assert evidence class.** Preflight therefore **owns**
+  `evidence_class` itself, and uses `AnyaGate.triage()` **advisory** —
+  passing a small `raw_intent` string describing the check (e.g.
   `"preflight_check rejected: <id> reason <…>"`) and reading
   `triage_score.priority`, `triage_score.hitl_tier`,
-  `triage_score.shatterpoints_detected` to populate the `evidence_assertion`
-  advisory block in the per-check JSON. Lane values are restricted to
+  `triage_score.shatterpoints_detected` to populate the
+  `evidence_assertion` advisory block. Lane values are restricted to
   `Literal["CRITICAL", "HIGH", "NORMAL", "BACKGROUND"]` — `LOW` is not a
-  valid lane value and should never appear.
-- `soul_oversight.IronGateV2(GateKeys.PREFLIGHT).pre_execute(...)` is
-  called only when a check has `hitl_on_fail: true` AND a non-AUTO tier is
-  generated. (Not exercised in slice #1; reserved for Task 6 wiring.)
-- No new file is created under `cartridges/`, `01_KERNEL/`, `04_KINETIC/`, or
-  within the runic router.
-- Failure to import or call `AnyaGate` does **not** crash the gate — it is
-  replaced with an inline sentinel `{"method": "advisory_unavailable", "lane":
-  "NORMAL", "hitl_tier": "AUTO", "shatterpoints_detected": []}` so the
-  preflight still produces evidence even when anya_gate is unavailable.
-  This keeps preflight independent of substrate availability — correct
-  augmentation posture.
+  valid lane value.
+
+  Per TITANIUM_LAW #05, Anya also wraps **Express** — all
+  Knight-to-User output runs through Anya. Plan + Express double-cover
+  is intentional; this is consistent with the PEER_ARCHITECTURE §2 role
+  map.
+
+- **Sentinel / Gideon (PEER Review pair, canonical Review authorizer).**
+  Per PEER_ARCHITECTURE, every REJECTED check that triggers a halt
+  decision is the **Review** role's responsibility, populated by
+  - **Sentinel** (gate). SIR_SENTINEL is the canonical HITL gatekeeper.
+  - **Gideon** (audit). SIR_GIDEON runs Scorpion Sting (`//SCORPION`
+    rune) on each REJECTED check before promotion, against the
+    GIDEON_RISK_MATRIX 10 Shatterpoints.
+  Slice #1 references Sentinel+Gideon **as the canonical PEER substrate**
+  and falls back gracefully when neither is built yet.
+
+- **`soul_oversight.IronGateV2(GateKeys.PREFLIGHT).pre_execute(...)` —
+  legacy fallback.** This is the v1000-EXCALIBUR-A incarnation of the
+  PEER Sentinel role. It is reached only when Sentinel-v2 isn't built,
+  via "if Sentinel unavailable → use Iron Gate as legacy sentinel"
+  branch in plan Task 6.
+
+- **HIveIDE / Hive IDE / `Bifrost` / `Switchboard`** — Coordinator
+  layer. NOT invoked by slice #1 (gate happens in-process at boot).
+  Reserved for slices #2-3.
+
+- **Merlin / MERLIN_OMEGA** — Runtime adapter selector (PEER
+  Plan-to-Execute bridge). NOT invoked by slice #1 (gate is bounded by
+  preflight's own catalog). Reserved for slices #2-3.
+
+- **No new file is created** under `cartridges/`, `01_KERNEL/`,
+  `04_KINETIC/`, or within the runic router. Slice #1 is a pre-existing
+  augmentation in this respect.
+
+- **Graceful-degradation semantics.**
+  Failure to import or call AnyaGate does **not** crash the gate — it is
+  replaced with an inline sentinel
+  `{"method": "advisory_unavailable", "lane": "NORMAL", "hitl_tier":
+  "AUTO", "shatterpoints_detected": []}` so preflight still produces
+  evidence even when anya_gate is unavailable. Same strategy applies to
+  Sentinel and Gideon: each pair leaves a documented sentinel when the
+  canonical PEER substrate is unavailable. Hard halt requires the
+  iron-gate or sentinel OR a HALT_DECISION comes from preflight itself
+  (no dual-fail dependency).
 
 ---
 
@@ -386,6 +447,7 @@ Before any preflight code is merged:
 | 7 | Catalog ordering | Lexicographic (default) | Explicit `sequence` field, stride 10 |
 | 8 | Anti-correlation principle | Preflight writes JSON evidence | No direct `PROVENANCE_LEDGER.md` writes from preflight itself; hook chain handles ledger entries |
 | 9 | Evidence-class origin | `AnyaGate.triage()` would be the source | Preflight owns CONFIRMED/REJECTED; `AnyaGate.triage()` is **advisory only**; graceful-degradation sentinel when substrate unavailable; `lane` constrained to `CRITICAL/HIGH/NORMAL/BACKGROUND` |
+| 10 | Slice #1 authorizer | `soul_oversight.IronGateV2(GateKeys.PREFLIGHT).pre_execute(...)` (v1000-EXCALIBUR-A) | Sentinel (PEER Review-gate) canonical; **IronGateV2 demoted to legacy fallback** until Sentinel-v2 ships; same graceful-degradation treatment for Gideon. Companion `docs/architecture/PEER_ARCHITECTURE.md` defines the 7-entity role map. |
 
 A paired ADR is at `docs/adr/0006-vfs-preflight-strict-mode.md`.
 
@@ -400,6 +462,13 @@ A paired ADR is at `docs/adr/0006-vfs-preflight-strict-mode.md`.
 > constrained to the four valid priority values. Plan Task 6 step 2 also
 > shifts `anya_triage_fn` signature from `(payload: dict, expected_class)`
 > to `(raw_intent: str)` and adds an inline sentinel fallback.
+
+**PEER-substrate re-target (2026-08-13, immediate follow-up):** Sovereign
+directive instructed PEER-aligned substrate with Sentinel/Gideon as
+canonical Review pair. Spec §3.3, §3.4 (new), §10, and Decisions Log
+row 10 are updated: Sentinel+Gideon canonical; Iron Gate `soul_oversight.IronGateV2(GateKeys.PREFLIGHT)`
+demoted to **legacy fallback** for v1000-EXCALIBUR-A hosts. PEER-architecture
+companion at `docs/architecture/PEER_ARCHITECTURE.md`.
 
 ---
 
@@ -420,12 +489,16 @@ brainstorm cycles.
 
 ## 10. Cross-References
 
+- **PEER substrate:** `docs/architecture/PEER_ARCHITECTURE.md` (canonical PEER-aligned substrate map; slice #1 is in PEER's Review role)
 - **Substrate:** `docs/architecture/Ω_VFS_ARCHITECTURE_SCAFFOLD_vMAX.deposit_note.md` (confirmed evidence class, 2026-07-23)
 - **Lattice:** `docs/architecture/lattice.yaml` (frozen 2026-07-10; `surface.sot: docs/architecture/lattice_map.md`)
 - **Earlier audit:** `docs/architecture/NORTHSTAR_ARCHITECTURE_BRIEF.md` (2026-05-13; 5 blockers unrelated to this slice)
 - **Existing scaffolding:** `vfs/{preflight,systeminstructions,skills,rosters,protocols}.md`
-- **Augmentation partner:** `control_plane/anya_gate.py` (provides `triage()`)
-- **HITL partner:** `control_plane/soul_oversight.py` (provides `IronGateV2`)
+- **Augmentation partner (Plan + Express):** `control_plane/core/anya_gate.py::AnyaGate` + `AnyaCompiler` (advisory only; preflight owns evidence_class)
+- **Review-gate partner (canonical):** SIR_SENTINEL = PEER Review role; runtime substrate at `control_plane/core/soul_oversight.py` (legacy v1000 = `IronGateV2`); PEER v2 module path TBD in `docs/architecture/PEER_ARCHITECTURE.md` §7 Q1
+- **Review-audit partner (canonical):** SIR_GIDEON = PEER Review-audit role; runtime at `//SCORPION` rune + `03_VAULT/training/configs/GIDEON_RISK_MATRIX.md`; PEER v2 adapter path TBD in `docs/architecture/PEER_ARCHITECTURE.md` §7 Q2
+- **Hive IDE (future slice #2-3 coordinator):** `docs/architecture/HIVE_BRIDGE_FINAL.md`, `.hive/TITANIUM_LAWS.md`, `Bifrost`, `Switchboard`
+- **AGNO/PEER protocol reference:** `01_KERNEL/protocols/agno_orchestrator.md` (`PEER Pattern: Plan, Execute, Express, Review.`)
 - **Source-of-truth map:** `docs/architecture/SOURCE_OF_TRUTH_MAP.md`
 
 ---
