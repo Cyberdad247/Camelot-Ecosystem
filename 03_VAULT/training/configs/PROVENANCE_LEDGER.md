@@ -1,3 +1,7 @@
+| 1760 | **Repo-Wide SPDX Roll-Out + Check 020 Widened** | BUFFY | ✅ ROLLED OUT | Widened vfs/checks/020_foss_validation_constraints.yaml to scan all authored roots (01_KERNEL, control_plane, bin, vfs, apps, packages, scripts, tests, docs); hardened license_header.py probe with gitlink-aware pruning (29 unmapped submodules via git ls-files mode 160000), binary NUL-sniff, and dotfile/data/config skips; added idempotent scripts/ops/add-spdx-headers.py codemod (comment syntax per file type, shebang-first, CRLF/BOM preserved) that reuses the probe's scan() so tool and gate agree; 714 files updated, 0 flagged on rescan; strict preflight 8/8 CONFIRMED exit 0; 164 passed / 6 skipped. Commits 5552afe0, 64e48f1b. — 2026-08-14 UTC |
+| 1759 | **lady_m CAMELOT_ROOT NameError + Scan-Loop Indentation Fix** | BUFFY | ✅ FIXED | Defined CAMELOT_ROOT before first use in control_plane/lady_m.py (was used at sys.path.append, defined later -> NameError blocked test_ascension_mode collection); fixed per-file secret-scan/purge logic that sat outside the file loop in SquireTriage.run and SquirePurge.run (UnboundLocalError on empty dirs, only last file inspected). tests/control_plane + tests/preflight: 162 passed / 6 skipped, zero collection errors. Commit 6c89c1a7. — 2026-08-14 UTC |
+| 1758 | **Substrate Bring-Up + Strict Preflight 8/8 CONFIRMED (AC1)** | BUFFY | ✅ CONFIRMED | Started all 5 substrate services (CLIProxyAPI :8080, Bifrost Go sidecar :8011, Ollama :11434, Bifrost WS/gRPC :4433/:4434 via scripts/ctl.sh); fixed hermetic probe interpreter (runner rewrites leading python/python3 to sys.executable so probes run under the venv interpreter - uv base python lacked PyYAML, failing check 060); fixed lattice_run.py root resolution (.resolve() before parent arithmetic) and moved stale worldmonitor entry to dormant_archive in docs/architecture/lattice.yaml; strict preflight run: 8/8 CONFIRMED, exit 0, 1352ms; AC1-AC9 9/9 PASS. Commit 93a88bcc. — 2026-08-14 UTC |
+| 1757 | **VFS Preflight Slice #1 Audit + Stage-0 Boot Integration** | BUFFY | ✅ COMPLETED | Audited control_plane/preflight against docs/superpowers/plans/2026-08-13-vfs-preflight.md; fixed boot-path root mismatch (single state root at <runtime_state>/preflight/, graduation flag read by CLI and boot); isolated --test to a tmp run_root (was polluting live state and writing _graduated.flag); re-scoped check 020 to slice-owned trees with SPDX headers on 35 files (green in 0.2s, was unbounded rglob killing boot); enforced stage-0 hard halt on strict REJECT in boot_sequence (SystemExit(1) per ADR 0006); added Task 9 E2E tests (66 passing) + scripts/ops/check_preflight_ac.sh (AC1-AC9) + evidence doc. Commits a197acbe, 0bef5d4e. — 2026-08-14 UTC |
 | 1756 | **Memory Purge** | SYSTEM | ✅ COMPLETED | Zeroed-out ChromaDB vector indices, L1.5 Redis Agent Memory, UKG_MEMORY.jsonld graph, and local memory.md learned aspects. — 2026-08-12 17:00 UTC |
 | 1755 | **Hermes_Prime PhialEngine - Executable MGV Research Knight, CloudBrain Workspace, Harness Queue-Consumer** | BUFFY | ✅ PUSHED | Built executable PhialEngine (Monitor-Generate-Verify loop + Ouroboros memory + Phial weight re-weighting) at 01_KERNEL/titan/phials/hermes_prime_phial.py; wired Harmony runes //SYNC_VFS_WORKSPACE, //FORGE_HERMES_PRIME_FILES, //IGNITE_SELF_EVOLUTION_LOOP and Omega_HermesPrime via lazy importlib; created live NotebookLM workspace hermes_prime_vfs_forge (28f89cb6-5048-4b5d-9e94-376082d24744) seeded with 5 VFS sources and swapped the placeholder UUID in cloudbrain_connector.py; closed the SovereignHarness queue-consumer gap so queued Hermes_Prime tasks execute the real engine (asyncio.to_thread, privacy-override guard, UNAVAILABLE/ERROR degradation); added 46 tests (22 runes incl. privacy shield, 15 phial, 9 harness) - 74/74 regression green; documented in AGENTS.md + vfs/skills.md; gitignored runtime artifacts. 9 commits feaf1793..ac231b0e pushed to origin/main. - 2026-08-11 01:53 UTC |
 | 1754 | **Multivoice Router v1.3.0 Enterprise Production Update** | Antigravity | ✅ UPDATED | Implemented Sir Helios and Merlin DAG: added Redis QR Pill token validation, Prometheus /metrics endpoint, TTL memory eviction for idle TokenBucketRateLimiter, and /dev/shm cleanup trap in deploy_update.sh. Tagged release v1.3.0. — 2026-08-10 16:35 UTC |
@@ -4379,3 +4383,72 @@
 | 2026-08-12T18:16:43.326557+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
 | 2026-08-12T18:16:43.327398+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
 | 2026-08-12T18:16:44.497166+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-08-14T15:34:36.667410+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER post-purge-probe] | HYDRATED |
+| 2026-08-14T15:34:36.855776+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 post-purge-probe] | HYDRATED |
+| 2026-08-14T15:34:37.001787+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON post-purge-probe] | HYDRATED |
+| 2026-08-14T15:34:37.125633+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX post-purge-probe] | HYDRATED |
+| 2026-08-14T15:34:37.263533+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T15:34:37.471328+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 probe] | HYDRATED |
+| 2026-08-14T15:34:37.615939+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON probe] | HYDRATED |
+| 2026-08-14T15:34:37.767178+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX probe] | HYDRATED |
+| 2026-08-14T15:34:37.915708+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T15:34:38.046672+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T15:34:38.190203+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T15:34:38.314719+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T15:34:38.445543+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T15:34:38.618410+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T15:34:38.821087+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER file containing a local token] | HYDRATED |
+| 2026-08-14T15:34:40.832294+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |
+| 2026-08-14T15:34:40.833266+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |
+| 2026-08-14T15:34:44.345969+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-08-14T15:59:07.168875+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING alpha-nexus' to Cloud Brain] | HYDRATED |
+| 2026-08-14T15:59:07.169592+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING alpha-nexus] | HYDRATED |
+| 2026-08-14T15:59:10.308410+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING alpha-nexus, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-08-14T15:59:11.705203+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//DAWNING Mixed Case Project' to Cloud Brain] | HYDRATED |
+| 2026-08-14T15:59:11.705835+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //DAWNING Mixed Case Project] | HYDRATED |
+| 2026-08-14T15:59:14.834824+00:00 | HYDRATION_MGR | HYDRATE [Intent: //DAWNING Mixed Case Project, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |
+| 2026-08-14T16:10:17.922052+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER post-purge-probe] | HYDRATED |
+| 2026-08-14T16:10:18.142916+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 post-purge-probe] | HYDRATED |
+| 2026-08-14T16:10:18.345900+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON post-purge-probe] | HYDRATED |
+| 2026-08-14T16:10:18.499498+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX post-purge-probe] | HYDRATED |
+| 2026-08-14T16:10:18.643161+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:10:18.807936+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 probe] | HYDRATED |
+| 2026-08-14T16:10:18.989592+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON probe] | HYDRATED |
+| 2026-08-14T16:10:19.147163+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX probe] | HYDRATED |
+| 2026-08-14T16:10:19.334348+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:10:19.514538+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:10:19.708192+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:10:19.876707+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:10:20.017957+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:10:20.167100+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:10:20.383817+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER file containing a password token] | HYDRATED |
+| 2026-08-14T16:49:10.472312+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER post-purge-probe] | HYDRATED |
+| 2026-08-14T16:49:10.628320+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 post-purge-probe] | HYDRATED |
+| 2026-08-14T16:49:10.828409+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON post-purge-probe] | HYDRATED |
+| 2026-08-14T16:49:10.967261+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX post-purge-probe] | HYDRATED |
+| 2026-08-14T16:49:11.126520+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:49:11.281399+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 probe] | HYDRATED |
+| 2026-08-14T16:49:11.504858+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON probe] | HYDRATED |
+| 2026-08-14T16:49:11.677904+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX probe] | HYDRATED |
+| 2026-08-14T16:49:11.850313+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:49:11.996834+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:49:12.145356+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:49:12.297956+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:49:12.457178+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:49:12.587159+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:49:12.738222+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER file containing a key token] | HYDRATED |
+| 2026-08-14T16:53:47.079110+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER post-purge-probe] | HYDRATED |
+| 2026-08-14T16:53:47.298390+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 post-purge-probe] | HYDRATED |
+| 2026-08-14T16:53:47.435718+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON post-purge-probe] | HYDRATED |
+| 2026-08-14T16:53:47.622382+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX post-purge-probe] | HYDRATED |
+| 2026-08-14T16:53:47.787473+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:53:47.958930+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //LOCK_BIFROST_mTLS_KYBER768 probe] | HYDRATED |
+| 2026-08-14T16:53:48.128117+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //ENGAGE_RUST_IRON_DAEMON probe] | HYDRATED |
+| 2026-08-14T16:53:48.282927+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //CRYSTALLIZE_GCMN_vMAX probe] | HYDRATED |
+| 2026-08-14T16:53:48.423443+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:53:48.595915+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:53:48.719984+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:53:48.866259+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:53:49.011313+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:53:49.164873+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER probe] | HYDRATED |
+| 2026-08-14T16:53:49.323339+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: UNKNOWN_RUNE: //SYNC_KBA_DATABASES_SQLCIPHER file containing a local token] | HYDRATED |
