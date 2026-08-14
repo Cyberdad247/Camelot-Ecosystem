@@ -370,8 +370,9 @@ jobs:
             bifrost-audit:
               # Strict 1:1 mirror of .pre-commit-config.yaml hook
               # `bifrost-audit-verify` `files:` regex.
-              - 'control_plane/bifrost.py'
-              - 'control_plane/bifrost_integration.py'
+              - 'control_plane/dispatch/bifrost.py'
+              - 'control_plane/dispatch/bifrost_integration.py'
+              - 'control_plane/dispatch/bifrost_triage_swarm.py'
               - 'control_plane/bifrost_triage_swarm.py'
               - 'docs/reports/bifrost_triage_*/verification.md'
               - 'scripts/check_bifrost_audit.py'

@@ -55,7 +55,7 @@ ROLE_TO_TERMINAL: dict[str, str] = {
 
 AUDIT_CONTEXT = (
     "You are remediating the CAMELOT-OS Bifrost dispatch core "
-    "(control_plane/bifrost.py). A 2026-06-24 audit found dead dispatch branches, a "
+    "(control_plane/dispatch/bifrost.py). A 2026-06-24 audit found dead dispatch branches, a "
     "docstring promising a non-existent `http` strategy, registry/model drift, a "
     "misleading integration ledger, and an unaudited security surface. Produce a MINIMAL, "
     "surgical change — no broad refactors. OUTPUT A SINGLE UNIFIED DIFF (git apply format) "
@@ -79,57 +79,57 @@ TASK_PLAN: list[TriageTask] = [
         id="T1",
         title="Remove dead ollama + hermes dispatch branches",
         role="forge",
-        files=["control_plane/bifrost.py"],
+        files=["control_plane/dispatch/bifrost.py"],
         depends_on=[],
         acceptance="No `ollama`/`hermes` strategy branch or `_stream_ollama`/`_stream_hermes` "
                    "method remains; docstring lists only live strategies.",
         verify_cmd=(
-            "! grep -qE 'strategy == \"(ollama|hermes)\"' control_plane/bifrost.py "
-            "&& ! grep -qE 'def _stream_(ollama|hermes)\\b' control_plane/bifrost.py"
+            "! grep -qE 'strategy == \"(ollama|hermes)\"' control_plane/dispatch/bifrost.py "
+            "&& ! grep -qE 'def _stream_(ollama|hermes)\\b' control_plane/dispatch/bifrost.py"
         ),
     ),
     TriageTask(
         id="T3",
         title="Reconcile _TERMINAL_MODEL with the switchboard registry",
         role="forge",
-        files=["control_plane/bifrost.py"],
+        files=["control_plane/dispatch/bifrost.py"],
         depends_on=["T1"],
         acceptance="Every terminal in switchboard.TERMINAL_REGISTRY is mapped in "
                    "_TERMINAL_MODEL or documented as `# fallback: <id>`.",
-        verify_cmd="python -m py_compile control_plane/bifrost.py",
+        verify_cmd="python -m py_compile control_plane/dispatch/bifrost.py",
     ),
     TriageTask(
         id="T2",
         title="Implement the documented http strategy",
         role="architect",
-        files=["control_plane/bifrost.py"],
+        files=["control_plane/dispatch/bifrost.py"],
         depends_on=["T3"],
         acceptance="`http` strategy declared in _ENGINE_DISPATCH, handled in stream(), and "
                    "served by _stream_http(); octavian/sonus no longer fall through to cliproxy.",
         verify_cmd=(
-            "grep -qE '\"http\"' control_plane/bifrost.py "
-            "&& grep -qE 'strategy == \"http\"' control_plane/bifrost.py "
-            "&& grep -qE 'def _stream_http\\b' control_plane/bifrost.py"
+            "grep -qE '\"http\"' control_plane/dispatch/bifrost.py "
+            "&& grep -qE 'strategy == \"http\"' control_plane/dispatch/bifrost.py "
+            "&& grep -qE 'def _stream_http\\b' control_plane/dispatch/bifrost.py"
         ),
     ),
     TriageTask(
         id="T4",
         title="Make bifrost_integration ledger honest",
         role="architect",
-        files=["control_plane/bifrost_integration.py"],
+        files=["control_plane/dispatch/bifrost_integration.py"],
         depends_on=["T1"],
         acceptance="No `✓ Forged` line emitted by a no-op `_forge_*`; datetime.utcnow() replaced "
                    "with datetime.now(timezone.utc).",
         verify_cmd=(
-            "! grep -q '✓ Forged' control_plane/bifrost_integration.py "
-            "&& ! grep -qE 'datetime\\.utcnow\\(\\)' control_plane/bifrost_integration.py"
+            "! grep -q '✓ Forged' control_plane/dispatch/bifrost_integration.py "
+            "&& ! grep -qE 'datetime\\.utcnow\\(\\)' control_plane/dispatch/bifrost_integration.py"
         ),
     ),
     TriageTask(
         id="T5",
         title="Security pass on the dispatch core (audit-only)",
         role="verifier",
-        files=["control_plane/bifrost.py"],
+        files=["control_plane/dispatch/bifrost.py"],
         depends_on=[],
         acceptance="Findings appendix V5 in verification.md filled with severity + recommendation "
                    "for CLIPROXY_KEY default, SSRF, prompt injection, and caller auth.",
