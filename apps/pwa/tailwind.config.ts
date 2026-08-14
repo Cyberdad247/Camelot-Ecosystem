@@ -31,6 +31,7 @@ const config: Config = {
           light: '#FFD700',
           royal: '#FFD700',
         },
+        obsidian: '#050505',
         violet: {
           DEFAULT: '#9D4EDD',
           light: '#e0b6ff',
@@ -42,6 +43,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
         serif: ['var(--font-source-serif)', 'Source Serif 4', 'Georgia', 'serif'],
+        display: ['var(--font-source-serif)', 'Source Serif 4', 'Georgia', 'serif'],
       },
       boxShadow: {
         kinetic: '0 0 12px rgba(157, 78, 221, 0.9)',
@@ -58,6 +60,7 @@ const config: Config = {
       letterSpacing: {
         executive: '0.1em',
         display: '0',
+        minted: '0.08em',
       },
     },
   },
