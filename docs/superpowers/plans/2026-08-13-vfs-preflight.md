@@ -107,7 +107,7 @@ dataclasses in `schemas.py`. Tests live next to the code they cover.
 - `schemas.CheckResult` — `@dataclass` with fields per spec §5.3, including `evidence_class`, `halt_decision`, `advisor_finding`, `rejection_reasons`
 - `state.GraduationFlag` — class with `path() → Path`, `is_strict() → bool`, `graduate() → None`, `revoke() → None`
 
-- [ ] **Step 1: Write failing test for `state.GraduationFlag` first-time behavior**
+- [x] **Step 1: Write failing test for `state.GraduationFlag` first-time behavior**
 
 Create `tests/preflight/test_state.py`:
 
@@ -187,12 +187,12 @@ def tmp_preflight_root(tmp_path: Path) -> Path:
     return root
 ```
 
-- [ ] **Step 2: Run test_state.py and confirm 4 FAIL with ImportError**
+- [x] **Step 2: Run test_state.py and confirm 4 FAIL with ImportError**
 
 Run: `pytest tests/preflight/test_state.py -v`
 Expected: 4 errors of the form `ImportError: No module named 'control_plane.preflight'`.
 
-- [ ] **Step 3: Implement `state.py`**
+- [x] **Step 3: Implement `state.py`**
 
 Create `control_plane/preflight/__init__.py`:
 
@@ -260,12 +260,12 @@ class GraduationFlag:
             pass
 ```
 
-- [ ] **Step 4: Run test_state.py → expect PASS**
+- [x] **Step 4: Run test_state.py → expect PASS**
 
 Run: `pytest tests/preflight/test_state.py -v`
 Expected: 4 passed.
 
-- [ ] **Step 5: Write failing test for `schemas.py`**
+- [x] **Step 5: Write failing test for `schemas.py`**
 
 Create `tests/preflight/test_schemas.py`:
 
@@ -323,12 +323,12 @@ def test_checkspec_command_must_be_list_of_str_for_shell():
         schemas.CheckSpec.from_yaml_text(bad)
 ```
 
-- [ ] **Step 6: Run test_schemas.py → expect FAIL with ImportError on schemas**
+- [x] **Step 6: Run test_schemas.py → expect FAIL with ImportError on schemas**
 
 Run: `pytest tests/preflight/test_schemas.py -v`
 Expected: ImportError on `control_plane.preflight.schemas`.
 
-- [ ] **Step 7: Implement `schemas.py`**
+- [x] **Step 7: Implement `schemas.py`**
 
 Create `control_plane/preflight/schemas.py`:
 
@@ -481,12 +481,12 @@ def compute_catalog_hash(checks_root: Path) -> str:
     return h.hexdigest()
 ```
 
-- [ ] **Step 8: Run test_schemas.py → expect PASS (5 tests, 4 parametrized)**
+- [x] **Step 8: Run test_schemas.py → expect PASS (5 tests, 4 parametrized)**
 
 Run: `pytest tests/preflight/test_schemas.py -v`
 Expected: 6 passed.
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add control_plane/preflight/__init__.py \
@@ -519,7 +519,7 @@ First-run advisor → strict-mode flag, JSON-shaped dataclasses per spec §5."
   (capped at 4 KiB), `stderr_excerpt: str` (capped at 4 KiB), `duration_ms: int`,
   `timed_out: bool`.
 
-- [ ] **Step 1: Write failing test**
+- [x] **Step 1: Write failing test**
 
 Create `tests/preflight/test_exec_probe.py`:
 
@@ -554,12 +554,12 @@ def test_run_caps_excerpts_at_4kib():
     assert len(r.stdout_excerpt.encode("utf-8")) <= 4096
 ```
 
-- [ ] **Step 2: Run → expect ImportError**
+- [x] **Step 2: Run → expect ImportError**
 
 Run: `pytest tests/preflight/test_exec_probe.py -v`
 Expected: `ModuleNotFoundError: No module named 'control_plane.preflight.probes'`.
 
-- [ ] **Step 3: Implement exec.py**
+- [x] **Step 3: Implement exec.py**
 
 Create `control_plane/preflight/probes/__init__.py`:
 
@@ -629,12 +629,12 @@ def run(command: list[str], timeout_s: int) -> ExecResult:
     )
 ```
 
-- [ ] **Step 4: Run → expect PASS (4 tests)**
+- [x] **Step 4: Run → expect PASS (4 tests)**
 
 Run: `pytest tests/preflight/test_exec_probe.py -v`
 Expected: 4 passed.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add control_plane/preflight/probes/__init__.py \
@@ -661,7 +661,7 @@ For Task 3 the implementation is intentionally minimal: load + sort + a stub `ex
 
 Actually — better: in Task 3, implement `load_catalog` for real, then leave `execute_check` to Task 6 once per-check probes exist. The runner's order/structural tests run with synthetic specs and a stub recorder.
 
-- [ ] **Step 1: Write failing tests**
+- [x] **Step 1: Write failing tests**
 
 Create `tests/preflight/test_runner_foundation.py`:
 
@@ -724,11 +724,11 @@ def test_load_catalog_empty_dir_returns_empty_list(tmp_path: Path):
     assert runner.load_catalog(tmp_path) == []
 ```
 
-- [ ] **Step 2: Run → expect ImportError**
+- [x] **Step 2: Run → expect ImportError**
 
 Run: `pytest tests/preflight/test_runner_foundation.py -v`
 
-- [ ] **Step 3: Implement runner.py minimal version (Task 6 will extend)**
+- [x] **Step 3: Implement runner.py minimal version (Task 6 will extend)**
 
 Create `control_plane/preflight/runner.py`:
 
@@ -792,12 +792,12 @@ def execute_catalog(*, specs: list[CheckSpec], run_root, scene_text: str, strict
     raise NotImplementedError("Task 6 will implement execute_catalog")
 ```
 
-- [ ] **Step 4: Run → expect PASS**
+- [x] **Step 4: Run → expect PASS**
 
 Run: `pytest tests/preflight/test_runner_foundation.py -v`
 Expected: 4 passed.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add control_plane/preflight/runner.py tests/preflight/test_runner_foundation.py
@@ -832,7 +832,7 @@ Each probe returns a tuple `(passed: bool, details: Any)`. The runner glues chec
 
 To stay bite-sized, this task is split into 3 logical sub-steps but executed as ONE commit at the end. Each probe gets:
 
-- [ ] **Step 1: Probes + their tests**
+- [x] **Step 1: Probes + their tests**
 
 Create `control_plane/preflight/probes/ports.py`:
 
@@ -961,7 +961,7 @@ def check(path: Path) -> tuple[bool, str]:
     return True, ""
 ```
 
-- [ ] **Step 2: Tests for each probe**
+- [x] **Step 2: Tests for each probe**
 
 Create `tests/preflight/test_checks_simple.py` (covers env_dependency_match, foss_validation_constraints, provenance_ledger_writable, tool_registry_presence):
 
@@ -1161,13 +1161,13 @@ def test_lattice_subprojects_present(tmp_path: Path):
     assert "CAMELOT_OS" in on_disk
 ```
 
-- [ ] **Step 3: Run tests → expect ALL PASS**
+- [x] **Step 3: Run tests → expect ALL PASS**
 
 Run: `pytest tests/preflight/test_checks_simple.py tests/preflight/test_checks_hitl.py tests/preflight/test_check_lattice.py tests/preflight/test_runner_foundation.py tests/preflight/test_schemas.py tests/preflight/test_state.py tests/preflight/test_exec_probe.py -v`
 
 Expected: every test passing.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add control_plane/preflight/probes/ tests/preflight/test_checks_simple.py \
@@ -1191,7 +1191,7 @@ git commit -m "feat(preflight): per-check probe primitives (7 of 8 checks wired)
 - Create: `vfs/checks/080_lattice_yaml_consistency.yaml`
 - Create: `tests/preflight/test_catalog_authored_matches_schema.py`
 
-- [ ] **Step 1: Write _README.md**
+- [x] **Step 1: Write _README.md**
 
 Create `vfs/checks/_README.md`:
 
@@ -1226,7 +1226,7 @@ loaded by `python -m control_plane.preflight` at boot (`bin/awaken.py` stage 0).
 6. Maintain idempotency: re-running this check N times produces no side effects past version drift.
 ```
 
-- [ ] **Step 2: Write the 8 catalog YAMLs**
+- [x] **Step 2: Write the 8 catalog YAMLs**
 
 Create `vfs/checks/010_env_dependency_match.yaml`:
 
@@ -1359,7 +1359,7 @@ remediation_hint: "Re-run lattice_purge_orchestrator.py :: phase e or update lat
 
 > **Note**: Tasks 6+ implement the probe runners (`env_dep_run`, `license_header_run`, `file_age_run`, `ports_run`, `ledger_writable_run`, `import_smoke_run`, `vfs_present_run`, `lattice_run`) as thin CLI wrappers that call into the probe Python modules from Task 4. Each runner is `<15` LOC. See Task 6 step 1 for the wrapper pattern.
 
-- [ ] **Step 3: Write a test that catalog parses**
+- [x] **Step 3: Write a test that catalog parses**
 
 Create `tests/preflight/test_catalog_authored_matches_schema.py`:
 
@@ -1402,14 +1402,14 @@ def test_catalog_hitl_subset_matches_spec():
     }
 ```
 
-- [ ] **Step 4: Run → expect FAIL (probes referenced in YAML don't exist)**
+- [x] **Step 4: Run → expect FAIL (probes referenced in YAML don't exist)**
 
 Run: `pytest tests/preflight/test_catalog_authored_matches_schema.py -v`
 Expected: catalog loads OK (schema is pure YAML); runner.execute_catalog() would fail later when probes don't exist.
 
 The schema test passes after Task 4. It does NOT execute runner.execute_catalog() yet — that's Task 6.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add vfs/checks/_README.md vfs/checks/*.yaml tests/preflight/test_catalog_authored_matches_schema.py
@@ -1438,7 +1438,7 @@ git commit -m "feat(preflight): 8-check catalog YAMLs + author README"
   - `anya_triage_fn(raw_intent: str) -> dict | TriageScore` — injected so tests can stub a sentinel triager; prod uses `AnyaGate().triage`. On any import/signature failure, runner falls back to inline sentinel `{"method": "advisory_unavailable", "lane": "NORMAL", "hitl_tier": "AUTO", "shatterpoints_detected": []}`. The prod injection occurs in `__main__.py` (Task 7).
 - Each `probes.<name>_run.py` is a thin CLI that takes `--<flag> value`, returns a JSON-shaped blob on stdout that the runner parses. Pattern shown in Step 1.
 
-- [ ] **Step 1: Implement 8 probe runners (one CLI each, ~15 LOC each)**
+- [x] **Step 1: Implement 8 probe runners (one CLI each, ~15 LOC each)**
 
 Pattern (exemplar: `env_dep_run.py`):
 
@@ -1467,7 +1467,7 @@ Implement analogous runners for `license_header_run` (delegating to `probes.lice
 
 Each runner outputs `{"all_ok": bool, ...details}` on stdout, sets exit 0 iff `all_ok` is True. The runner parses stdout to compute `rejection_reasons`.
 
-- [ ] **Step 2: Replace NotImplementedError stubs in `runner.execute_catalog` + `runner.execute_check`**
+- [x] **Step 2: Replace NotImplementedError stubs in `runner.execute_catalog` + `runner.execute_check`**
 
 The full orchestrator. Pseudocode (full code is mandatory in this step):
 
@@ -1552,7 +1552,7 @@ def execute_catalog(*, specs: list[CheckSpec], run_root: Path, scene_text: str,
 9. Use `subprocess` ONLY inside `probes.exec.run`; **never** spawn Python from inside the runner itself.
 )
 
-- [ ] **Step 3: Failing test for `run()` orchestrator with stubs**
+- [x] **Step 3: Failing test for `run()` orchestrator with stubs**
 
 Create `tests/preflight/test_runner_integration.py`:
 
@@ -1631,11 +1631,11 @@ def test_runs_are_idempotent(tmp_path: Path):
 
 (This test enforces the signature `execute_catalog(specs, run_root, scene_text, strict_mode, anya_triage_fn)`, NOT `run()`. The `execute_catalog` form is more testable. The public CLI in `__main__.py` imports it.)
 
-- [ ] **Step 4: Run tests → after implementation, expect PASS**
+- [x] **Step 4: Run tests → after implementation, expect PASS**
 
 Run: `pytest tests/preflight/test_runner_integration.py -v`
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add control_plane/preflight/probes/env_dep_run.py \
@@ -1666,7 +1666,7 @@ git commit -m "feat(preflight): probe-runner CLIs + runner.execute_catalog orche
 - `python -m control_plane.preflight --graduate` → explicit operator graduation (Q1 in spec §11).
 - Rejects `--skip-sovereign`, `--force`, env `CAMELOT_SKIP_PREFLIGHT`, `CAMELOT_BYPASS_PREFLIGHT` with exit 2 + stderr message.
 
-- [ ] **Step 1: Write failing CLI tests**
+- [x] **Step 1: Write failing CLI tests**
 
 Create `tests/preflight/test_cli.py`:
 
@@ -1717,7 +1717,7 @@ def test_cli_self_test_returns_0():
     assert "all checks passing" in r.stdout
 ```
 
-- [ ] **Step 2: Replace `__main__.py` stub**
+- [x] **Step 2: Replace `__main__.py` stub**
 
 The CLI is the orchestrator public entry point:
 
@@ -1736,11 +1736,11 @@ _FORBIDDEN_FLAGS = ("--skip-sovereign", "--force", "--no-preflight", "--bypass")
 # wire to runner.execute_catalog and GraduationFlag methods.
 ```
 
-- [ ] **Step 3: Run tests → expect PASS**
+- [x] **Step 3: Run tests → expect PASS**
 
 Run: `pytest tests/preflight/test_cli.py -v`
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 git add control_plane/preflight/__main__.py tests/preflight/test_cli.py
@@ -1811,26 +1811,27 @@ if _MANIFEST.halt_decision == "block_boot":
 
 (The implementer fills in the summary printing exactly per spec §6.4; this snippet is structural, not final. NEVER add a CAMELOT_SKIP_PREFLIGHT / --skip-sovereign escape hatch — Task 7 already enforces rejection at the CLI level, and the awaken wiring has no override path.)
 
-- [ ] **Step 3: Smoke-test on a clean venv**
+- [x] **Step 3: Smoke-test on a clean venv**
+
+DONE 2026-08-14 — `bin/awaken.py` has no `--stage` flag, so the
+specified fallback was used:
 
 ```bash
-.venv\Scripts\python.exe bin\awaken.py --stage 0
+.venv\Scripts\python.exe -m control_plane.preflight --run
 ```
 
-Expected: prints `[VFS_PREFLIGHT]` lines; if all CONFIRMED, exits 0 and creates `_graduated.flag`; if any REJECTED on first run, exits 0 with advisor summary.
+Result: `[VFS_PREFLIGHT] 8/8 CONFIRMED … 35741ms` (exit 0; 020
+repo-wide SPDX scan dominated the wall time on cold cache, per AC
+evidence doc) and `03_VAULT/runtime_state/preflight/_graduated.flag`
+was created. `--test` also green: `self-test all checks passing (8/8)`.
 
-If `--stage 0` is not supported, fall back to running the bare preflight invocation directly (see Task 7's CLI):
+- [x] **Step 4: Commit**
 
-```bash
-python -m control_plane.preflight --run
-```
-
-- [ ] **Step 4: Commit**
-
-```bash
-git add bin/awaken.py
-git commit -m "feat(boot): awaken.py stage 0 wires VFS preflight before all other stages"
-```
+DONE 2026-08-14 — the stage-0 wiring landed in commit
+`a197acbe fix(preflight): stage-0 boot integration — unified run
+root, --test isolation, bounded 020 scan` (`boot_sequence.py` +
+`boot_integration.py`); SPDX headers for the touched files landed in
+`64e48f1b`.
 
 ---
 
@@ -1907,14 +1908,12 @@ DONE 2026-08-14 — evidence at `docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDE
 
 DONE 2026-08-14 — `VFS_PREFLIGHT_DESIGN.md` §12 now links the AC evidence doc.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
-```bash
-git add tests/test_awaken.py scripts/ops/check_preflight_ac.sh \
-        docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md \
-        docs/architecture/VFS_PREFLIGHT_DESIGN.md
-git commit -m "test(awaken): preflight E2E folded in + AC verification evidence + script"
-```
+DONE 2026-08-14 — landed in commit
+`0bef5d4e test+docs(preflight): slice #1 Task 9 — E2E tests + AC
+verification evidence` (E2E folded into `tests/preflight/test_awaken.py`
+instead of `tests/test_awaken.py`, per the Step 1 note).
 
 ---
 
