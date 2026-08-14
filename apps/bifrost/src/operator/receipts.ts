@@ -12,6 +12,8 @@ export interface NewOperatorEvent {
   kind: string;
   payload: Record<string, unknown>;
   integrity: 'verified' | 'pending_anchor' | 'unavailable' | 'integrity_failed';
+  /** Optional explicit link (used by the tamper test); defaults to the task's last hash. */
+  parentHash?: string;
 }
 
 export interface StoredEvent extends NewOperatorEvent {

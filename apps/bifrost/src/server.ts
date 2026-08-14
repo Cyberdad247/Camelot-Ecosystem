@@ -14,6 +14,9 @@ import { z } from 'zod';
 import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
 import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
 import { issueSignedAction } from './issuance';
+import { createOperatorBff } from './operator/bff';
+import { InMemoryEventStore } from './operator/receipts';
+import { verifyManifest, issueLease } from './operator/sentinel';
 
 // WebSocket carrying the heartbeat flag used by the reaper loop below.
 interface LiveSocket extends WebSocket {
@@ -61,6 +64,22 @@ app.use(
     },
   }),
 );
+
+// ── Slice #2 Operator Console BFF ─────────────────────────────────────────
+// Native, local-first decision service. Fixture mode (OPERATOR_FIXTURE_TASK)
+// serves deterministic task data for the operator console; production data
+// binding is additive (see docs/architecture/OPERATOR_CONSOLE_DESIGN.md §8).
+const operatorStore = new InMemoryEventStore();
+const operatorBff = createOperatorBff({
+  store: operatorStore,
+  verifyManifest,
+  issueLease,
+  now: () => new Date(),
+  requiredEvidencePresent: (ref: string) => ref.startsWith('receipt://'),
+  gideonVerdict: () => 'pass' as const,
+  vfsEvidenceOk: () => true,
+});
+app.use('/v1/operator', operatorBff);
 
 // ── Health check (graceful deploys / load balancers) ──
 app.get('/health', (_req, res) => {
