@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first tests for the 'simple' per-check probes.
 
 Covers:
@@ -95,6 +97,15 @@ def test_license_header_passes_with_spdx(tmp_path):
     )
     out = license_header.scan([tmp_path])
     assert not any(p.resolve() == good.resolve() for p in out)
+
+
+def test_license_header_skips_vendored_dirs(tmp_path):
+    """node_modules/generated/dist trees are never authored code (SKIP_DIRS)."""
+    vendored = tmp_path / "node_modules" / "pkg" / "index.js"
+    vendored.parent.mkdir(parents=True)
+    vendored.write_text("export const x = 1;\n")  # no SPDX, but vendored
+    out = license_header.scan([tmp_path])
+    assert all("node_modules" not in str(p) for p in out)
 
 
 def test_license_header_skips_md_and_yaml(tmp_path):

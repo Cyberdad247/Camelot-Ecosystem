@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first tests for `probes.exec.run` (slice #1 Task 2)."""
 from control_plane.preflight.probes import exec as probe
 

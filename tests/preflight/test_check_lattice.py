@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first tests for the lattice consistency check (sequence 080).
 
 The check verifies both:

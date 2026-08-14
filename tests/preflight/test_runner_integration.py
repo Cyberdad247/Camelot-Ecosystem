@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first tests for `runner.execute_catalog` (slice #1 Task 6).
 
 Three end-to-end behaviors:

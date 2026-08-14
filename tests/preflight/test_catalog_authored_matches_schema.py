@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first test: the authored vfs/checks/*.yaml catalog parses cleanly.
 
 Per plan §Task 5 Step 3: this test asserts the catalog as-written

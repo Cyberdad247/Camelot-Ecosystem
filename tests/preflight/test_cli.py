@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first tests for the control_plane.preflight CLI (slice #1 Task 7)."""
 import os
 import subprocess

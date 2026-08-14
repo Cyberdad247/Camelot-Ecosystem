@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first tests for runner.load_catalog (slice #1 Task 3).
 
 Validates:

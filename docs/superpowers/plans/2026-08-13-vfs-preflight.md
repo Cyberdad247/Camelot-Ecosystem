@@ -1754,16 +1754,21 @@ git commit -m "feat(preflight): CLI surface + reject sovereign escape hatch"
 **Files:**
 - Modify: `bin/awaken.py:0-N` (insert preflight stage at the start)
 
-- [ ] **Step 1: Read `bin/awaken.py` and locate the dispatch point**
+- [x] **Step 1: Read `bin/awaken.py` and locate the dispatch point**
 
-Use the project's `Read` tool. Identify the first executable stage.
-If the script is Python, the insertion goes at the top of `main()`.
-If it's PowerShell, insert at the top of the main pipeline.
-If it is neither, **stop** and surface to the sovereign that the wiring cannot be done by code — they must perform the wiring manually and document it in the spec under §6.4.
+DONE 2026-08-14: `bin/awaken.py` delegates to `control_plane.boot_sequence.run_boot`
+(meta-path finder → `control_plane/infra/boot_sequence.py`), so the wiring
+lives there as the first phase (see note under Step 2).
 
-(Implementer: use `code_search` to find existing stage wiring patterns; do not assume one shape. The implementer MUST read `bin/awaken.py` start-to-finish before editing, and MUST NOT use `cat > file` to overwrite the file. Edits are made via the project's `Edit` tool on the existing file.)
+- [x] **Step 2: Insert stage 0 as the first executable action**
 
-- [ ] **Step 2: Insert stage 0 as the first executable action**
+DONE 2026-08-14 — implementation detail: the stage-0 wiring lives in
+`control_plane/infra/boot_sequence.py` (first phase in `run_boot`), backed
+by a new `control_plane/preflight/boot_integration.py::boot_vfs_preflight`
+module, because `bin/awaken.py` imports `run_boot` from there. The
+phase wrapper `_boot_vfs_preflight_stage0` raises `SystemExit(1)` on a
+strict REJECT so the boot hard-halts before any later stage starts
+services (ADR 0006).
 
 Insert before the first existing stage. The shape below is exemplar; adapt imports and constants to whatever pattern `bin/awaken.py` already uses.
 
@@ -1836,7 +1841,12 @@ git commit -m "feat(boot): awaken.py stage 0 wires VFS preflight before all othe
 - Create: `scripts/ops/check_preflight_ac.sh` (operator-runnable AC verification)
 - Modify: `docs/architecture/VFS_PREFLIGHT_DESIGN.md` (final crosslink from §12)
 
-- [ ] **Step 1: Add preflight E2E to `tests/test_awaken.py`**
+- [x] **Step 1: Add preflight E2E to `tests/test_awaken.py`**
+
+DONE 2026-08-14 — folded into `tests/preflight/test_awaken.py` (repo
+layout keeps the preflight suite under `tests/preflight/`): advisor→strict
+graduation + flag-location regression test, AC7 two-runs-distinct-dirs
+test, plus the existing wrapper contract tests.
 
 Locate the existing file. Append two tests:
 
@@ -1860,7 +1870,7 @@ def test_preflight_strict_halt_on_rejected(tmp_path):
 
 Use `pytest`-style with `_fake_anya_triage` for test isolation — do not inadvertently require `anya_gate.py` to be importable in tests.
 
-- [ ] **Step 2: Write `scripts/ops/check_preflight_ac.sh`**
+- [x] **Step 2: Write `scripts/ops/check_preflight_ac.sh`**
 
 The script runs all 9 AC's manually:
 
@@ -1877,9 +1887,10 @@ python -m control_plane.preflight --run || { echo "AC1 FAIL"; exit 1; }
 
 (Each AC is a section. Implementer writes all 9 with explicit assertion lines.)
 
-- [ ] **Step 3: AC walkthrough — run each AC and capture evidence**
+- [x] **Step 3: AC walkthrough — run each AC and capture evidence**
 
-Run `bash scripts/ops/check_preflight_ac.sh` and capture output to `docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md` (new evidence file):
+DONE 2026-08-14 — evidence at `docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md`
+(8/8 mechanism ACs PASS; AC1 BLOCKED until substrate ports are listening):
 
 ```markdown
 # AC Verification Evidence 2026-08-13
@@ -1892,9 +1903,9 @@ Run `bash scripts/ops/check_preflight_ac.sh` and capture output to `docs/archite
 … | … | … |
 ```
 
-- [ ] **Step 4: Update spec §12 link**
+- [x] **Step 4: Update spec §12 link**
 
-In `docs/architecture/VFS_PREFLIGHT_DESIGN.md` §12, replace "Implement Slice #1 against this spec" with: "AC evidence at docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md (2026-08-13)."
+DONE 2026-08-14 — `VFS_PREFLIGHT_DESIGN.md` §12 now links the AC evidence doc.
 
 - [ ] **Step 5: Commit**
 

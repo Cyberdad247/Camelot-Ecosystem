@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TDD-first tests for CheckSpec + helpers (slice #1 Task 1, Step 5)."""
 from textwrap import dedent
 

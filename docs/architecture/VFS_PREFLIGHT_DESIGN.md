@@ -196,7 +196,7 @@ is missing or duplicated.
 | seq | check_id | Purpose | hitl_on_fail |
 |-----|----------|---------|---|
 | 010 | `env_dependency_match` | Python 3.x, Rust 1.96, Node 20, Ollama availability | false |
-| 020 | `foss_validation_constraints` | License header scan over `01_KERNEL/`, `02_FORGE/`, `vfs/` | false |
+| 020 | `foss_validation_constraints` | SPDX license header scan over slice-owned code (`control_plane/preflight/`, `tests/preflight/`); vendored/submodule trees excluded | false |
 | 030 | `northstar_brief_currency` | `NORTHSTAR_ARCHITECTURE_BRIEF.md` age ≤ 60 days | true |
 | 040 | `port_readiness_scan` | 8080/8011/11434/4433/4434 | true |
 | 050 | `provenance_ledger_writable` | `PROVENANCE_LEDGER.md` writable, hook chain reachable | false |
@@ -448,6 +448,7 @@ Before any preflight code is merged:
 | 8 | Anti-correlation principle | Preflight writes JSON evidence | No direct `PROVENANCE_LEDGER.md` writes from preflight itself; hook chain handles ledger entries |
 | 9 | Evidence-class origin | `AnyaGate.triage()` would be the source | Preflight owns CONFIRMED/REJECTED; `AnyaGate.triage()` is **advisory only**; graceful-degradation sentinel when substrate unavailable; `lane` constrained to `CRITICAL/HIGH/NORMAL/BACKGROUND` |
 | 10 | Slice #1 authorizer | `soul_oversight.IronGateV2(GateKeys.PREFLIGHT).pre_execute(...)` (v1000-EXCALIBUR-A) | Sentinel (PEER Review-gate) canonical; **IronGateV2 demoted to legacy fallback** until Sentinel-v2 ships; same graceful-degradation treatment for Gideon. Companion `docs/architecture/PEER_ARCHITECTURE.md` defines the 7-entity role map. |
+| 11 | Check 020 scan surface | Unbounded `rglob` over `01_KERNEL/`, `02_FORGE/`, `vfs/` (vendored submodule trees; >120 s, SIGKILL at ~9 s) | Sovereign decision 2026-08-14: re-scope to slice-owned code (`control_plane/preflight/`, `tests/preflight/`) with `SKIP_DIRS` + `MAX_FLAGGED` cap; SPDX headers added to the 35 slice files so the check is green. Repo-wide header enforcement is a future-slice finding (see §12). |
 
 A paired ADR is at `docs/adr/0006-vfs-preflight-strict-mode.md`.
 
@@ -524,8 +525,7 @@ brainstorm cycles.
 
 ## 12. Remaining Action Surface (Informational)
 
-- Refresh `NORTHSTAR_ARCHITECTURE_BRIEF.md` (or supersede) before
-  graduation runs are expected.
-- Implement Slice #1 against this spec using the `writing-plans` skill
-  before any code is written.
-- Code is gated on AC1–AC9 + paired code review per AGENTS.md Rule 2.
+- AC evidence (2026-08-14): `docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md` — 8/8 mechanism ACs PASS, AC1 BLOCKED until the substrate ports (8080/8011/11434/4433/4434) are listening at stage 0.
+- Slice #1 is implemented (Tasks 1–9 of `docs/superpowers/plans/2026-08-13-vfs-preflight.md`); the `writing-plans` gate has been satisfied.
+- `NORTHSTAR_ARCHITECTURE_BRIEF.md` is current (23 days old as of 2026-08-14) — no longer a graduation blocker.
+- Future slice: repo-wide SPDX header enforcement beyond `control_plane/preflight/` + `tests/preflight/` (check 020 is scoped to slice-owned code per Decisions Log row 11).
