@@ -29,10 +29,6 @@ subprojects:
     type: sovereign
     path: CAMELOT_OS/
     mb: 26800
-  - id: worldmonitor
-    type: surface
-    path: worldmonitor/
-    mb: 1970
   - id: kickbox-audio
     type: surface
     path: Kickbox-audio/
@@ -46,10 +42,14 @@ subprojects:
     path: CLIProxyAPI/
     mb: 56
 
+# worldmonitor (surface, 1970MB) was purged 2026-07-10 and is absent
+# from disk, lattice_map.md, and all code references. Moved to the
+# dormant archive on 2026-08-14 so the VFS preflight check 080
+# (lattice_yaml_consistency) reflects on-disk reality.
 dormant_archive:
   staging: 99_ARCHIVE/_lattice_pre_purge_<UTC>/
   items: [CrossDevice, .gemini, .codegeex, .genkit, .cursor, .docker,
           .gradle, .android, .copilot, .jcode, .codegpt, .crush,
           .context7, .haystack, .securecoder, .wecode-client,
           .lmstudio, .lmstudio-home-pointer, .redhat, ansel, CAMELOS,
-          CodeGeeXProjects, "go/", "lib/"]
+          CodeGeeXProjects, "go/", "lib/", worldmonitor]

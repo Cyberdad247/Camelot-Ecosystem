@@ -124,3 +124,28 @@ def test_runs_are_idempotent_across_runs(tmp_path):
         for manifest_dir in rc.iterdir()
         if manifest_dir.is_dir()
     )
+
+
+def test_runner_runs_probes_with_own_interpreter(tmp_path):
+    """Regression: `python` in a catalog command is rewritten to
+    sys.executable, so PyYAML-dependent probes (060 tool_registry,
+    080 lattice) pass even when the CreateProcess search path resolves
+    `python` to a uv-managed base interpreter lacking PyYAML."""
+    _write_yaml(
+        tmp_path / "c1.yaml",
+        'sequence: 10\nid: tool_registry\ndisplay_name: Tool Registry\n'
+        'command_type: python_module\n'
+        'command: ["python", "-m", '
+        '"control_plane.preflight.probes.import_smoke_run", '
+        '"--modules", "pathlib,json,yaml,subprocess,hashlib"]\n'
+        'timeout_s: 10\nretry: 0\n'
+        'expected_evidence_class: CONFIRMED\nhitl_on_fail: false\n',
+    )
+    specs = runner.load_catalog(tmp_path)
+    rc = tmp_path / "run_root"
+    manifest = runner.execute_catalog(
+        specs=specs, run_root=rc, scene_text="x",
+        strict_mode=True, anya_triage_fn=_fake_anya_triage,
+    )
+    assert manifest.checks_failed == 0
+    assert manifest.halt_decision == "continue"

@@ -525,7 +525,7 @@ brainstorm cycles.
 
 ## 12. Remaining Action Surface (Informational)
 
-- AC evidence (2026-08-14): `docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md` — 8/8 mechanism ACs PASS, AC1 BLOCKED until the substrate ports (8080/8011/11434/4433/4434) are listening at stage 0.
+- AC evidence (2026-08-14): `docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md` — **9/9 ACs PASS** with the substrate up (CLIProxy 8080, Bifrost sidecar 8011, Ollama 11434, Bifrost WS 4433, Bifrost gRPC 4434); see the evidence doc for the start commands and teardown.
 - Slice #1 is implemented (Tasks 1–9 of `docs/superpowers/plans/2026-08-13-vfs-preflight.md`); the `writing-plans` gate has been satisfied.
 - `NORTHSTAR_ARCHITECTURE_BRIEF.md` is current (23 days old as of 2026-08-14) — no longer a graduation blocker.
 - Future slice: repo-wide SPDX header enforcement beyond `control_plane/preflight/` + `tests/preflight/` (check 020 is scoped to slice-owned code per Decisions Log row 11).

@@ -36,15 +36,23 @@ def main() -> int:
         sys.stdout.write(json.dumps(payload, sort_keys=True) + "\n")
         return 1
 
-    # Step 2: each subproject path must exist relative to lattice parent.
+    # Step 2: each subproject path must exist relative to the lattice
+    # root. The lattice is a *home-directory* lattice (see the file's
+    # own header: "Camelot-OS home-directory lattice"): paths like
+    # CAMELOT_OS/ or CLIProxyAPI/ are siblings under the home dir, not
+    # children of the repo root. Resolve against repo root, the home
+    # dir, and cwd.
     data = yaml.safe_load(lattice_path.read_text())
     subprojects = data.get("subprojects", [])
-    lattice_root = lattice_path.parent.parent  # docs/architecture/lattice.yaml -> repo root
-    # Try multiple candidate roots (the lattice lives next to docs/architecture).
+    # Resolve absolute first so parent arithmetic works even when the
+    # CLI is given a relative path (Path('.').parent would otherwise
+    # land one level above cwd instead of the home dir).
+    lattice_abs = lattice_path.resolve()  # <root>/docs/architecture/lattice.yaml
+    repo_root = lattice_abs.parent.parent.parent
     candidate_bases = [
-        lattice_root,                       # running from repo root
-        lattice_root.parent,                # running from docs/architecture/..
-        Path.cwd(),                         # cwd
+        repo_root,
+        repo_root.parent,  # home-directory lattice root
+        Path.cwd(),        # cwd
     ]
     missing: list[str] = []
     for sp in subprojects:

@@ -15,6 +15,7 @@ Substrate references verified 2026-08-13:
 from __future__ import annotations
 import json
 import os
+import sys
 import tempfile
 import time
 from collections import Counter
@@ -262,9 +263,19 @@ def execute_check(
 def _run_subprocess(spec: CheckSpec):
     """Internal: dispatch to probes.exec.run with cross-platform
     safety. Imports locally to keep import-time side effects off the
-    runner module's surface."""
+    runner module's surface.
+
+    A bare `python` command token is rewritten to `sys.executable` so
+    probes always run under the SAME interpreter as preflight itself.
+    On this host `python` on the Windows CreateProcess search path
+    resolves to a uv-managed base interpreter without PyYAML, which
+    made check 060 `tool_registry_presence` reject while the shell
+    (and the venv) resolved it correctly."""
     from .probes import exec as probe_exec
-    return probe_exec.run(list(spec.command), spec.timeout_s)
+    command = list(spec.command)
+    if command and command[0] in ("python", "python3"):
+        command[0] = sys.executable
+    return probe_exec.run(command, spec.timeout_s)
 
 
 # ============================================================================
