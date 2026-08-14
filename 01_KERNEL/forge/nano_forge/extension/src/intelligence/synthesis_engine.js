@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Synthesis Engine: The Sense-Maker
  * Aggregates fragmented research into coherent intelligence.

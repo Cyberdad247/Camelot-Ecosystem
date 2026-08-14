@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Unit Tests for Token Efficiency (TOON Format)
  * Validates token reduction and compression ratios

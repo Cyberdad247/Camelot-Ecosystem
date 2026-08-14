@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Factory Lane — CAMELOT-OS Digital Factory Control Plane

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 [S4-04] SIR_OCTAVIAN — Factory Metrics & Telemetry Node

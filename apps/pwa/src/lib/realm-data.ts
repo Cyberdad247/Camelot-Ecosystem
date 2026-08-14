@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // KOA Realm seeded data — realistic placeholders for the three business domains
 // (Property / Streaming / Coffee) plus the 10-Knight agent roster. Demo data,
 // not live financials; structured so a real source can replace it later.

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // mcp-query · the "query" tool's answer engine.
 // Backends, in priority order: Multivoice-router (Camelot Anya_Ω governed
 // compiler) -> Ollama (LLM) -> fast local heuristics. Each falls back to the

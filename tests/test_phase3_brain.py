@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Phase 3 BRAIN acceptance tests (P3-T01..T06).
 
 Covers the Agent-Native MDX schema, /visual-plan and /visual-recap renderers,

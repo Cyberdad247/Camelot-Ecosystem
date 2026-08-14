@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 2 Day 4: Full Pipeline Integration Tests
 Validate Pattern Learner → Optimizer Engine → Learning Dashboard

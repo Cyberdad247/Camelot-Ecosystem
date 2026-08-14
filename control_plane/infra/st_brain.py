@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Short-Term Brain (ST-Memory) — Redis Integration

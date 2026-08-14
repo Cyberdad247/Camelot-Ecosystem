@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Graphify — the butcher: unstructured text -> (subject, predicate, object)
 triplets, fed into MemCastle (the vault).
 

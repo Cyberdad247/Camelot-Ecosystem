@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Sentinel: Context Compression Engine
  * JS Port for Nano-Knights

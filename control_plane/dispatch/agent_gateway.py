@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Agent Gateway — Bifrost bridge for cross-agent distance travel.
 

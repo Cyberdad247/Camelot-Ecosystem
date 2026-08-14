@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 4 acceptance tests — CompressionNexus."""
 import gzip
 import importlib.util as _ilu

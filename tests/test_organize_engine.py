@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 5 — File Organization Engine tests.
 
 ALL tests use dry_run=True — zero live file moves.

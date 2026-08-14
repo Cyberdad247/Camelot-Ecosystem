@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/test_cartridges_v4000_trio.py — coverage for the shared
 V4000 trio template module :mod:`cartridges.v4000_trio`.
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 QR Pill Mobile Activation — Web interface for mobile device QR scanning.
 

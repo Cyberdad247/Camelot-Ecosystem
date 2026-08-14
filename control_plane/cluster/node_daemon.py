@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 CAMELOT-OS node daemon — one process hosting all services for a single node.
 

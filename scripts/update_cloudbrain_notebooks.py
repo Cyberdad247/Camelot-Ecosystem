@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Add tailored v1000-EXCALIBUR-A delta sources to the relevant existing
 NotebookLM notebooks. Each source connects that notebook's documented concepts
 to their concrete implementation in this release — grounded, not duplicated.

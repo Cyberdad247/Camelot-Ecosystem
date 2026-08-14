@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Sync the UI/UX workflow cartridge and knight bench into NotebookLM Cloud Brain."""
 
 from __future__ import annotations

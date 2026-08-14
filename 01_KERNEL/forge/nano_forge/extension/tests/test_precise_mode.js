@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * PRECISE MODE TEST SUITE (Task D9)
  * Automated verification of Lane Transcripts, Retry Policies, and Success Criteria.

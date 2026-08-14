@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """PostToolUse hook — writes AUTO entries to PROVENANCE_LEDGER.md."""
 import json
 import os

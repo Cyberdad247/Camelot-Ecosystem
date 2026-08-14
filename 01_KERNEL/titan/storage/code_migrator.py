@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 CODE MIGRATION SCRIPT: os.getenv() → vault.get()

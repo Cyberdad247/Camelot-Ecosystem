@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 class MGVEngine:
     """MGV Engine dummy for OS bootstrap."""
     def __init__(self, debug=False):

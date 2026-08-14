@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 <#
 .SYNOPSIS
   Install (or remove) the Bifrost laptop server as a per-user logon auto-start.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Sovereign Inference Engine (SIE) — CAMELOT-OS native local inference layer.
 

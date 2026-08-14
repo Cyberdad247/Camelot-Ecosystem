@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Reusable boot sequence logic for Camelot-OS.
 
 # HITL: file-ops pre-approved — writes bounded to boot state files and logs

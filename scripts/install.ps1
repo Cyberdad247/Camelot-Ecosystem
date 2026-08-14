@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # ============================================================
 # CAMELOT-OS Installer - Windows PowerShell
 # WARP_GATE v1.0.0

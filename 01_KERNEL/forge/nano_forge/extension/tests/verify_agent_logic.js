@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // VERIFICATION SCRIPT: AGENT LOGIC & KINETIC HAND
 // Mocks the DOM and Browser environment to test execute_navigator
 

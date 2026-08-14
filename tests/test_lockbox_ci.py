@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 # test_lockbox_ci.py -- pytest suite for scripts/cybertronia_lockbox_ci.py.
 #
 # Tests exercise the script as a CLI subprocess (mimics how CI invokes it)

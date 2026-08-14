@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Guarded hyper-evolution workflow for the Camelot control plane."""
 
 from __future__ import annotations

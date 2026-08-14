@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for the Cognitive MCP server (scoped: memcastle_search, graphify_ingest,
 cognitive_sync, cognitive_forage). Mirrors tests/test_cognitive_service.py's
 fresh-module-per-test fixture so SQLite state never leaks between tests."""

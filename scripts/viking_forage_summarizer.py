@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Squire Foraging Loop - OpenViking Tiered Context Generator
 Automatically scans codebase files and compiles L0 (scout), L1 (orient),
 and L2 (deep dive) files to feed the local OpenViking and MemCastle systems.

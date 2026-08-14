@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { TranscriptManager } from './transcript_manager.js';
 import { MissionEvaluator } from './mission_evaluator.js';
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: MIT
+
 // sync-memory-md.mjs — CI gate for the memory.md dual-copy.
 //
 // The project-root `audit-kickbox-audio/memory.md` is the doc-as-source; the

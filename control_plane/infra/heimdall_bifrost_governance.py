@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Sir Heimdall governance harness for the Bifrost bridge.
 
 The module is intentionally deterministic: it does not launch agents or call

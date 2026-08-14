@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for AppwriteClient typed wrapper.
 
 PR #2 of NOTES_MNEMOSYNE_WIRING.md.

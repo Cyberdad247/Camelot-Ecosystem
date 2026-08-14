@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 'use client';
 
 // Ambassador Lakisha — an animated living-presence avatar. No video asset yet, so

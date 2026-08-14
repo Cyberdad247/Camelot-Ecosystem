@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMC Team CLI worker for Knight and Harness dispatch.
 
 This module keeps the existing Knight-based API while adding interchangeable

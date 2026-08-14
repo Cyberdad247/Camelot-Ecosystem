@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 pub fn quantize_1_58b(weights: &[f32]) -> Vec<f32> {
     if weights.is_empty() {
         return Vec::new();

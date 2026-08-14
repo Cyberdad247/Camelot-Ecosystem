@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/test_camelot_portable_subcommands.py — coverage for the v1000 IDE/CLI
 subcommands added to ``bin/camelot_portable.py``.
 

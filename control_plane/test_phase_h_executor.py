@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 4 Day 1: Optimization Executor Tests
 Test safe execution, locking, rollback, and result tracking

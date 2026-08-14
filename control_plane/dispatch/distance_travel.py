@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Distance Travel — Cross-agent dispatch orchestrator.
 

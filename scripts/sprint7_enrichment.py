@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 SPRINT 7 — Cloud Brain Enrichment (NORTHSTAR Close-Out)
 Protocol: URL source injection + UKG delta for S6+S7 state

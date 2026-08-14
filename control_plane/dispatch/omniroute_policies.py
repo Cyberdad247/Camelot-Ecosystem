@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """control_plane/omniroute_policies.py — SELECT_OPTIMAL_FRAMEWORK_O1 lane signals.
 
 Implements the Omni-Router Matrix lane-selection policy from the Camelot-OS

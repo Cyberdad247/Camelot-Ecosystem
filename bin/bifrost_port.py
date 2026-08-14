@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 🌈 BIFROST PORT — 24/7 Sovereign Communication & Transfer Node
 Forged by the Triumvirate: Merlin_Omega (Logic), Anya_Omega (Kinetic), Sir Alex (Cognitive)

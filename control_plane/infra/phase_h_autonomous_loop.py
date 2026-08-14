@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 4 Day 4: Autonomous Optimization Loop
 Orchestrate continuous autonomous optimization with learning feedback

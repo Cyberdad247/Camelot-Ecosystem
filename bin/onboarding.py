@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Camelot-OS Interactive Onboarding and Ignition System.
 
 Serves the onboarding dashboard web app and runs local CLI diagnostic checks.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/test_cli_intercept.py — engine dispatch regression for Agents-A1.
 
 The cli_intercept._resolve_engine() function maps a RouteDecision.engine

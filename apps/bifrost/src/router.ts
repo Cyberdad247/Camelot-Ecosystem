@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // HYBRID_VOICE_ASSISTANT_vMAX · //ROUTE + //REZERO
 // Local-first router. Known commands run on LOCAL_TOOLS (fast path); unknown /
 // complex utterances bypass to REMOTE_MCP over Tailscale. If the remote path

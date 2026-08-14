@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 use ouroboros_engine::quantizer::quantize_1_58b;
 
 #[test]

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for Bifrost→Appwrite signed-RPC dispatcher.
 
 PR #3 of NOTES_MNEMOSYNE_WIRING.md.

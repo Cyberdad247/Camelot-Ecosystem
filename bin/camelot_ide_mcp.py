@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 camelot_ide_mcp — CAMELOT-OS IDE/CLI MCP server.
 

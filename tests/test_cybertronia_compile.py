@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/test_cybertronia_compile.py
 
 Phase 2 compiler regression battery — pins the contract with cybertronia-graph-ui-spec.md

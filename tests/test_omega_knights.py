@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 0 acceptance tests — new knight imports + personas."""
 import importlib.util
 import shutil

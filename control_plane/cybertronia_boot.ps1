@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Cybertronia server supervisor.
 # Keeps the Go daemons alive (restart-on-crash) so cybertronia is an always-on
 # server. Launched at logon by the "CybertroniaServer" scheduled task.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 SIR_SONUS — Morning Briefing Generator
 Queries Cloud Brain for northstar state, generates audio briefing via NotebookLM Studio.

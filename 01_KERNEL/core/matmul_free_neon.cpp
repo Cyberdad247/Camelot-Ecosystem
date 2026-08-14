@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // core/matmul_free_neon.cpp
 // Implements highly optimized addition-only accumulation using 128-bit ARM Neon registers
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: MIT
+
 // scripts/ci/live-anya-probe.mjs
 //
 // Live voice-avatar assistant shape probe for the CAMELOT-OS runtime.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Best-effort Living Notebook sync hooks for local Camelot state changes."""
 
 from __future__ import annotations

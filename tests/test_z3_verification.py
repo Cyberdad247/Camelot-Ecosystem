@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """P2-T02 — real Z3 patch verification acceptance tests.
 
 A known-dangerous patch must be Z3_BLOCK'd; a benign patch must pass. The

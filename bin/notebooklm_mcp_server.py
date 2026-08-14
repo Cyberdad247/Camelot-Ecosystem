@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """NotebookLM MCP server — LOCAL FILE SYSTEM pivot.
 
 PR #4 of NOTES_MNEMOSYNE_WIRING.md (2026-07-14, freebuff).

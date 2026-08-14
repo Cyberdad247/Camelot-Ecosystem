@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Fix all remaining lint issues after ruff --unsafe-fixes regression."""
 from pathlib import Path
 

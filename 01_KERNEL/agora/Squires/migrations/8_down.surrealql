@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: MIT
+
 
 -- Rollback Migration 8: Revert to notebook-only chat sessions
 

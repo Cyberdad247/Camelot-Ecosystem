@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from __future__ import annotations
 
 from control_plane.critical_thinking import Evidence, universal_knight_protocol

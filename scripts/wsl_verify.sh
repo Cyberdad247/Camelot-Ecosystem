@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # =============================================================================
 # wsl_verify.sh — CAMELOT-OS v9000.14-CYBERTRONIA Linux/WSL2 verification driver
 # =============================================================================

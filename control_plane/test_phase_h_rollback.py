@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 4 Day 3: Rollback System Tests
 Test emergency revert of failed optimizations

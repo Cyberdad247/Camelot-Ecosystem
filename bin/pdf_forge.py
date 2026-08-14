@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 # Copyright © 2026 Invisioned Marketing inc. All Rights Reserved.
 """

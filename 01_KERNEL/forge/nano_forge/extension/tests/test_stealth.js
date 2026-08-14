@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Unit Tests for Stealth Fingerprinting
  * Tests canvas, audio, WebGL, and UA spoofing logic

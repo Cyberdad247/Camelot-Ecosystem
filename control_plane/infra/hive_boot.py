@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Hive Boot — Single-command launcher for the CAMELOT-OS Universal Bridge.
 

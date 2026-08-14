@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 6 acceptance tests — SWARM + Hermes Fusion."""
 import importlib.util as _ilu
 import sys

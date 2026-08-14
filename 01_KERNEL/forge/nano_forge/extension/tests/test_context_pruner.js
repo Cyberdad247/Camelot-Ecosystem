@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Unit Tests for ContextPruner
  * Tests memory management and pruning logic

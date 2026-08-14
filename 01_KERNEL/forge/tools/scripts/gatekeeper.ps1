@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 param (
     [Parameter(Mandatory=$false)][string]$Path = $PWD,
     [string]$TrashRoot = "$HOME\.project-clean-trash",

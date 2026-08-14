@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for the ``--purge_stubs`` flag + ``STUB_PURGED`` envelope in
 ``control_plane/runic_router.py`` (CAMELOT-GCMN activation ADR §8 force-kill
 escalation).

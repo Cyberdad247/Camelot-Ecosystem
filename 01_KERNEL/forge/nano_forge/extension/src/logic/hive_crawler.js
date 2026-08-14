@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // HIVE CRAWLER (Sub-Agent)
 // Injected into background tabs by Lady Apis (Hive Protocol)
 

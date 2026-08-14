@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H: Anomaly Detection Engine
 Detects deviations from healthy baseline

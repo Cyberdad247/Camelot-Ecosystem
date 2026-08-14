@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/cartridge_smoke.sh — verify the PyInstaller bundle end-to-end.
 #
 # Runs the six frozen-binary smokes for the cartridge subcommand:

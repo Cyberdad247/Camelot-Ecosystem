@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Provenance and Audit Ledger Manager — Structured Mission Traceability.
 
 # HITL: file-ops pre-approved — all writes are append-only audit ledger entries

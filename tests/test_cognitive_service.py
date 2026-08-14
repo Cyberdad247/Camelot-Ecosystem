@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Integration tests for the Cognitive Service HTTP front."""
 import importlib.util
 import json

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // OPTIONS LOGIC
 import { LLMClient } from './llm_client.js';
 import { DiagnosticCore } from './src/diagnostics/diagnostic_core.js';

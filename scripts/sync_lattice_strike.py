@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 //INITIATE_SYNCHRONIZATION_STRIKE — 7-agent consensus bridge

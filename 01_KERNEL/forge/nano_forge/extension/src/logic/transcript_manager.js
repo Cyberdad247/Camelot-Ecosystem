@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Transcript Manager: Structured Lane Replayability (Task D6)
  * Captures and persists the exact sequence of actions and results for a mission lane.

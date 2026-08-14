@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { Prisma } from './generated/client';
 
 // Pure validation helper — unit-testable without a Prisma context.

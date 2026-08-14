@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """camelot-status.py — CAMELOT Apex OS v400.1.0 Full Health Check
 ==================================================================
 Runs after awaken to verify all P0/P1/P2 components are operational.

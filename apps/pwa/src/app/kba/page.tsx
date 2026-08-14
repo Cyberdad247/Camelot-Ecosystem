@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { KBASwarmCommand } from '@/components/kba/KBASwarmCommand';
 
 export const metadata = {

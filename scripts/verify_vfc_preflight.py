@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Fail-closed preflight for the Camelot Voice-First Cartridge."""
 
 from __future__ import annotations

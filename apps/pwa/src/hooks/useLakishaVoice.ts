@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 'use client';
 
 // Shared Lakisha voice core with a built-in failsafe chain, consumed by BOTH

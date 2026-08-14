@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 [S4-02] TOON_v2 Automated Delta Sync
 =====================================

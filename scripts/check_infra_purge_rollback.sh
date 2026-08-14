@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/check_infra_purge_rollback.sh
 #
 # Implementation of the verification contract defined in

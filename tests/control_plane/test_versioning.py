@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from __future__ import annotations
 
 from control_plane.versioning import VersionInfo, get_dynamic_version

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Codex integration state helpers for Camelot-OS."""
 
 from __future__ import annotations

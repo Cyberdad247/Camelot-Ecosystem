@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """camelot keys — Secure API key management via system keyring.
 
 Keys are stored in the OS keyring (Windows Credential Manager, macOS Keychain,

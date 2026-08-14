@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import fs from 'node:fs';
 
 const benchmark = () => {

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 mod qdrant_memory;
 
 use serde::Serialize;

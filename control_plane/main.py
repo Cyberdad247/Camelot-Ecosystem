@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Camelot Split-Brain OS — Pydantic AI Control Plane
 ===================================================

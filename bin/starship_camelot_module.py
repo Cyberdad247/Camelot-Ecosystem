@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Starship custom module for Camelot cockpit state."""
 
 from __future__ import annotations

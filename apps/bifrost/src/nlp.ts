@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Task 2.3 — Natural-language command parser.
 // Maps keyword sequences (e.g. "add transaction 15000", "remind Andre",
 // "order espresso") into structured commands for the agent router.

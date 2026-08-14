@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * CognitiveParser: Extracts and separates cognitive metadata from LLM output.
  * Targeted at the [AttentionFocus] protocol.

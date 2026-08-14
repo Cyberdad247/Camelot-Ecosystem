@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Observer: A lightweight reactive state container.
  * Inspired by @playcanvas/observer.

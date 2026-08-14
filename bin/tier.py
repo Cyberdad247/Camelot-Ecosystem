@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Camelot-OS Universal Tier Controller.
 Single CLI invoked by Claude Code, Gemini CLI, and Codex.

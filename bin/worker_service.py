@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Worker Service — Windows Scheduled Task manager for control_plane.worker.
 

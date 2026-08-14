@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: MIT
+
 REMOVE TABLE IF EXISTS chat_session;
 
 REMOVE TABLE IF EXISTS refers_to;

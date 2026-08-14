@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Verify all knight roster has cloud brains, including KBA services node.
 Queries the active NotebookLM list and creates any missing brain instances.
 """

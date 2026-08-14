@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 2: Optimizer Engine Tests
 Verify candidate generation and ranking

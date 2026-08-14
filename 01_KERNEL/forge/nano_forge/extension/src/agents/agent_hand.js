@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Omega_HAND: KINETIC ACTION MODULE
 // Capabilities: Click, Type, Scroll
 

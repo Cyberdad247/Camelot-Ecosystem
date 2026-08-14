@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 MERLIN_Ω LOCAL TINY LLM WARMUP & OFFLINE READINESS SUITE
 =========================================================

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { CryptoVault } from '../security/crypto_vault.js';
 
 export class GraphRAG {

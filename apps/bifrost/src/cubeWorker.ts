@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { parentPort, workerData } from 'node:worker_threads';
 import { prisma } from '@sovereign/db';
 import type { CubeResult, CubeTask } from './microcubic';

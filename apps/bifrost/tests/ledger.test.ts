@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { expect, test, vi } from 'vitest';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 

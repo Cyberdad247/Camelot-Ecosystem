@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """//sync — bidirectional bridge between MemCastle (edge vault) and NotebookLM
 (cloud oracle). Closes the Tier-2 <-> Tier-3 loop of the cognitive stack.
 

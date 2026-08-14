@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # CAMELOT_OS/bin/pre_flight.sh — PR #5 (gate-of-gates) for Mnemosyne wiring.
 #
 # Operator-invariant from 2026-07-14 directive (Phase 2):

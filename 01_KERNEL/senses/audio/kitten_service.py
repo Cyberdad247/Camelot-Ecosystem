@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 [KITTEN] KITTEN_SERVICE (L2 Kinetic)

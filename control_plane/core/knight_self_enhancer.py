@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Knight Self-Enhancer — Post-dispatch learning & knowledge updates.
 

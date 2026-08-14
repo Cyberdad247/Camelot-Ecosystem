@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 MNEMOSYNE Integration Tests — Validating the Lady M Pipeline

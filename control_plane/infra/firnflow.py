@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 FirnFlow — CAMELOT-OS Tiered Semantic Memory Mesh

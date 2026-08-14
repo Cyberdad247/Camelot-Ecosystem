@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // 🧠 SKILLS REGISTRY (LLM ASPECTS)
 // Defines the "Cognitive Aspects" assignable to agents.
 import { CAMELOT_APEX_SYSTEM_PROMPT } from './src/config/system_prompt.js';

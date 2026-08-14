@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * MEMORY EXPORTER (OUROBOROS BRIDGE)
  * Serializes internal GraphRAG knowledge into OS-compatible JSON-LD.

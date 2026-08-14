@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // 🛡️ CRYPTO UTILS (AES-GCM)
 // Provides secure Export/Import capabilities for Profile Data
 

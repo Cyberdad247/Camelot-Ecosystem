@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: MIT
+
 -- ==============================================================================
 -- EXP_LEDGER SCHEMA v1.0
 -- Camelot OS - Pure Experience Tracking (NO Ejection/Incentives)

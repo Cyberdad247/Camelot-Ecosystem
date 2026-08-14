@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Legacy Branch Cleanup Audit Tool (Option 3)
 Performs basic, synchronous scanning of Git branches and outputs a status report.

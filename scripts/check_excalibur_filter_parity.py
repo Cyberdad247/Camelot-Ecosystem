@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """CI sanity check: enforce parity between the EXCALIBUR PyInstaller
 smoke's CRLF pre-check `watched` literal and the dorny/paths-filter
 `excalibur-paths` list inside `.github/workflows/verify_os.yml`.

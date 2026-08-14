@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/test_excalibur_pyinstaller_smoke.py
 
 End-to-end PyInstaller smoke test for the EXCALIBUR Sovereign Command Deck.

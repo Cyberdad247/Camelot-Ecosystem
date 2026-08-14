@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 import json
 
 from control_plane.provenance import ProvenanceManager, VerificationRun

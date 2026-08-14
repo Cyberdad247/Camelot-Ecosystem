@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 3 Day 1: Feedback Collector Tests
 Test signal collection, validation, storage, and deduplication

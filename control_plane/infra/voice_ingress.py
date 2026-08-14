@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Hermes-Jarvis Voice Ingress — voice → kinetic intent (v9000.14, P5-T05).

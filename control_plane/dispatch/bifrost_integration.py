@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Bifrost Integration — Deep system integration during QR Pill bootstrap.
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Durable go_router image — single persistent process (the SSE hub is in-memory,
 # so it must NOT be split across serverless instances; one long-running
 # container is required).

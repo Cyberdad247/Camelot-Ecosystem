@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 export function defineAction<TInput, TOutput>(options: {
   description: string;
   schema: any;

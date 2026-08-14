@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from __future__ import annotations
 
 from control_plane.enterprise_ignition import render_markdown, run_enterprise_ignition

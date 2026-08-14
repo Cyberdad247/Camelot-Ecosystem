@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Knight configuration snapshot for cartridges, Excalibur, and switchboard."""
 
 from __future__ import annotations

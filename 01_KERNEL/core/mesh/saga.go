@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Package saga: SCAFFOLD PLACEHOLDER.
 //
 // Reversibility is state-dependent:

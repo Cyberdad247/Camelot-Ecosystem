@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Evidence-gated, read-only CAMELOT-OS system triage."""
 
 from __future__ import annotations

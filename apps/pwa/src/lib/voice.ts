@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // HYBRID_VOICE_ASSISTANT_vMAX · //IGNITE
 // On-device speech synthesis (browser SpeechSynthesis API). Local-first, zero
 // network, sub-500ms time-to-first-audio. Responses are renormalized to pure

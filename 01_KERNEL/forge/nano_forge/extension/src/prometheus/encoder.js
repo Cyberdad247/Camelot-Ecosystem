@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * TOON (Token-Optimized Object Notation) Encoder
  * JS Port for Nano-Knights

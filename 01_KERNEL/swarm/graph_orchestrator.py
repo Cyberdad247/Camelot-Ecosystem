@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Graph Orchestrator — Swarm Graph Orchestration (L5 Agentic)

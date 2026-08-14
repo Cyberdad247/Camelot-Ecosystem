@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // HYBRID_VOICE_ASSISTANT_vMAX · ZERO_TRUST_MESH
 // Remote MCP client. Security mandate: remote executions MUST route exclusively
 // through the encrypted Tailscale mesh. Any non-Tailscale endpoint throws a

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 1 acceptance tests — ColonyNexus."""
 import importlib.util as _ilu
 import sys

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Harness Queue Worker — reads logs/harness_queue.jsonl and executes tasks.
 

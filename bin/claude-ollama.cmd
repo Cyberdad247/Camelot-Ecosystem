@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 @echo off
 REM ============================================================
 REM  Camelot Apex OS — Local Ollama Launcher (Cybertron Iron)

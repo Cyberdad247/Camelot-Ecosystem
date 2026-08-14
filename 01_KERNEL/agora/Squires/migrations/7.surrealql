@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: MIT
+
 DEFINE TABLE IF NOT EXISTS episode_profile SCHEMAFULL;
 DEFINE FIELD IF NOT EXISTS name ON TABLE episode_profile TYPE string;
 DEFINE FIELD IF NOT EXISTS description ON TABLE episode_profile TYPE option<string>;

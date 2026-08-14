@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Camelot-OS Swarm Execution Engine
 Orchestrates a 5-phase pipeline for Git branch cleanup, compliance validation,

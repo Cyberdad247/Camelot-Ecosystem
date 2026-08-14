@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Headed Playwright re-auth using the notebooklm browser_profile.
 The profile has DPAPI-encrypted Google cookies that Playwright can use in headed mode.

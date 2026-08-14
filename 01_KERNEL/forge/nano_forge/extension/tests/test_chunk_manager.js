@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Unit Tests for ChunkManager
  * Tests text chunking and result merging logic

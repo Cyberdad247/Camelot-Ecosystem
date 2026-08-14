@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Frontier chat node registry and break-glass support sessions.
 
 This module intentionally stores only token hashes for support access. The

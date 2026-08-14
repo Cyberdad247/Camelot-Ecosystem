@@ -1,3 +1,5 @@
+/* SPDX-License-Identifier: MIT */
+
 /* Fonts are loaded via next/font in app/layout.tsx (self-hosted, no render-blocking request). */
 
 @tailwind base;

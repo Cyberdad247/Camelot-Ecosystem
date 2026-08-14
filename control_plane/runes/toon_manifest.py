@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """TOON manifest compiler for Camelot configuration payloads.
 
 The compiler is intentionally conservative: it redacts sensitive keys before

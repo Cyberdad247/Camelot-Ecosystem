@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Omega₃ Oracle dispatch test — routes a synth request through CloudServiceRouter.
 
 Exercises the full path:

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { SPECIALIZED_SKILLS } from './specialized_skills.js';
 import { SOCIAL_SKILLS } from '../skills/social_skills.js';
 import { VisionHealer } from './vision_healer.js';

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { describe, expect, it } from 'vitest';
 import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs } from './telemetry';
 

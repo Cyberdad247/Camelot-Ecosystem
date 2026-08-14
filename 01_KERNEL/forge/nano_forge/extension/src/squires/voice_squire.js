@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * VoiceSquire: Anya's Voice Interface
  * Provides speech recognition (input) and text-to-speech (output) for hands-free operation.

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Pass the Permissions Test.
 const originalQuery = window.navigator.permissions.query;
 window.navigator.permissions.query = (parameters) =>

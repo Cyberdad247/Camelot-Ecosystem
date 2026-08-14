@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
 

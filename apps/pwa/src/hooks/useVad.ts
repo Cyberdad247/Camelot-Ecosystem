@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 'use client';
 
 // HYBRID_VOICE_ASSISTANT_vMAX · //INGEST

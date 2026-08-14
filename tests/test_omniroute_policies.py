@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/test_omniroute_policies.py — lane-signal regression for spec items 1a + 1b.
 
 The Iron Gate invariant (test_lane_signal_is_label_not_gate) is the single

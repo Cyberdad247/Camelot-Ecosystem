@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 microvm_boot.py — Unikraft/libkrun MicroVM pill launcher (v9000.14, P5-T02).

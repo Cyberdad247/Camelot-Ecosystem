@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Legacy Branch Validation Tool (Option 3)
 Synchronously checks naming compliance of Git branches.

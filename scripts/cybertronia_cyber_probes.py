@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """scripts/cybertronia_cyber_probes.py — Spectate the Phase 4 cybertronia-graph stubs.
 
 Boots a real `cognitive_service.py` (subprocess or in-process) and hits all

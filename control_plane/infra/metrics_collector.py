@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Metrics Collector — Prometheus Instrumentation for CAMELOT-OS
 

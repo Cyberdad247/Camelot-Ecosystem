@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Package main runs a CAMELOT Empire mesh node over Tailscale tsnet (P4-T01).
 //
 // Node_C_Omni_Router joins the tailnet with zero open ports and serves a

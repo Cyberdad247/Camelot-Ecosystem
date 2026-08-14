@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 () => {
     return new Promise((resolve) => {
         const filterImage = (img) => {

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """AWAKEN — Universal Camelot-OS Bootstrap Entry Point
 
 One word, one command, any platform, any shell, any IDE.

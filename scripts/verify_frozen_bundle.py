@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """scripts/verify_frozen_bundle.py — forensic check of ``dist/camelot.exe``.
 
 Verifies that the PyInstaller bundle correctly carries:

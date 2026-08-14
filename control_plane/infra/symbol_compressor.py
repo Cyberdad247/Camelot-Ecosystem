@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Symbol Compressor — Dispatch compression & semantic indexing.
 

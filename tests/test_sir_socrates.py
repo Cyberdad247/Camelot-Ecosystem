@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 7 acceptance tests — SirSocrates Northstar Gate."""
 import importlib.util as _ilu
 import sys

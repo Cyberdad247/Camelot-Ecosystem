@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from __future__ import annotations
 
 from control_plane.starship_assimilation import powershell_snippet, run_starship_assimilation, starship_config_text

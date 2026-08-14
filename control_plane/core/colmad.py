@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 ColMAD — Collaborative Multi-Agent Debate (Think Tank Omega)

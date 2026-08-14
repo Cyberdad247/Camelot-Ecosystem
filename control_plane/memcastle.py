@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """MemCastle — local vector fortress for Camelot-OS (the edge brain, Tier 2).
 
 A real, dependency-light vector store backed by SQLite + sqlite-vec (vec0).

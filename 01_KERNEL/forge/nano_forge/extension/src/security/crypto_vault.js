@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * CRYPTO VAULT
  * AES-GCM Encryption for Sovereign Data

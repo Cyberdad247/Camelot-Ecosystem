@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 MDX Renderers — /visual-plan and /visual-recap (v9000.14, P3-T03 / P3-T04).

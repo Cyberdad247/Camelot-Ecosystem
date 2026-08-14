@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Camelot Apex OS — Control Plane Package
 #
 # Modules are organized into subdirectories:

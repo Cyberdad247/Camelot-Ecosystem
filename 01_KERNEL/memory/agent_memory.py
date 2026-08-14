@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Redis Agent Memory — Python client for @redis-iris/agent-memory v0.0.5

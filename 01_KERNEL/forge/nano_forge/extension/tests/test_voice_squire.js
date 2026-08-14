@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Unit Tests for VoiceSquire
  * Tests wake word detection and command extraction

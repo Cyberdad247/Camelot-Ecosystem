@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Debug boot hang — runs all phases with live timestamps."""
 import os
 import sys

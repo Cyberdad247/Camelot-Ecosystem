@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 3 Day 5: End-to-End Integration Tests
 Test complete flow: signals → metrics → ranking → constraints → decisions

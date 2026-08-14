@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 //VERIFY_GCMN_STUB_RUNTIME — guarded subprocess dispatch + acceptance (v1)

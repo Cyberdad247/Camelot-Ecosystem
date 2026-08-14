@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 CloudBrain Synthesis — Weekly pattern extraction & learning.
 

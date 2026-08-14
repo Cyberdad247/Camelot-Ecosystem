@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 [S4-03] VAD Interrupt Controller — interruptible TTS pipeline.

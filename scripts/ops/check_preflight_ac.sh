@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # check_preflight_ac.sh — manual acceptance verification per
 # VFS_PREFLIGHT_DESIGN.md §7.2 (AC1-AC9).
 #

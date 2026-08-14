@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Truthful cockpit snapshot and runic exec helpers for Warp/PowerShell."""
 
 from __future__ import annotations

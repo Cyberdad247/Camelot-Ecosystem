@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 3 Day 2: Business Metrics Tests
 Test SLA/KPI management, constraints, and business weighting

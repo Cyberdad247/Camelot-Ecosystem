@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // 🔐 AUTH MANAGER (Sovereign Identity)
 // Manages: Login, 2FA, Session State, and GitHub Identity
 

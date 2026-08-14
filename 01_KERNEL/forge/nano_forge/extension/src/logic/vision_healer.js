@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * VISION HEALER
  * Self-Correction Module using Multimodal Analysis

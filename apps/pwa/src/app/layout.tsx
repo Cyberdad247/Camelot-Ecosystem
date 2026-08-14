@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import type { Metadata, Viewport } from 'next';
 import { Inter, Source_Serif_4 } from 'next/font/google';
 import { KoARealmProvider } from '../context/KoARealmProvider';

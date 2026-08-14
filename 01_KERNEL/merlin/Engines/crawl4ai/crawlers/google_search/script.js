@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 (() => {
     // Function to extract image data from Google Images page
     function extractImageData() {

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * MESH MANAGER (Phase 48: P2P Swarm Cluster)
  * Enables WebRTC-based communication between Knights for decentralized intelligence.

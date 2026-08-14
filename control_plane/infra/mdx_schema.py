@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Agent-Native MDX — schema, validation, rendering (v9000.14, Pillar BRAIN, P3-T01).

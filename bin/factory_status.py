@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 [S6-04] factory_status — One-shot factory health dashboard

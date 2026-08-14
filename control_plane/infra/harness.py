@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Sovereign Harness — 24/7 Agentic Daemon
 CAMELOT Apex OS persistent background runtime.
 

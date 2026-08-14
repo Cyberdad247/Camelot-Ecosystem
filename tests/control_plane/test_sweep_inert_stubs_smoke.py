@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for bin/sweep_inert_stubs.sh — CAMELOT-GCMN activation ADR §7 sunset cron.
 
 Subprocess-based smoke tests. We patch the cron script to point at a

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Verification Suite: Ouroboros Integration
  */

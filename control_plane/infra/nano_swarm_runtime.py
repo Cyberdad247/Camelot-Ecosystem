@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Runtime status surface for promoted UKG nano-swarm nodes."""
 
 from __future__ import annotations

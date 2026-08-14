@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Distributed Knowledge Synchronization — Multi-Instance L1→L1.5→L2
 

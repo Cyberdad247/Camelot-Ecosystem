@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from __future__ import annotations
 
 from scripts.verify_architecture_docs import validate_architecture_docs

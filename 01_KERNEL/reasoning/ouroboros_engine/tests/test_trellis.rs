@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 use ouroboros_engine::trellis::TrellisPool;
 
 #[test]

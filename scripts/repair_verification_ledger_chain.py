@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Deterministic, atomic, idempotent repair for the verification-ledger hash chain.
 
 The control-plane triage script `control_plane/system_triage.py` validates

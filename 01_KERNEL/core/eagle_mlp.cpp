@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // core/eagle_mlp.cpp
 // Adapts EAGLE-block's feature-level speculator for mobile half-precision CPU vector paths
 

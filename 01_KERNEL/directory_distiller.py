@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Ω_CAMELOT_OS_DIRECTORY_DISTILLER — Active VFS Distiller & Ingestion Crawler

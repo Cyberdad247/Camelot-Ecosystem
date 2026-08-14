@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Distributed Memory Protocol — Shared memory across agent network.
 

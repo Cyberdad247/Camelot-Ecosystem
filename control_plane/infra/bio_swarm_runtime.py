@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Production evidence wrapper for the Bio-Swarm Rust spawner."""
 
 from __future__ import annotations

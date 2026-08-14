@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 'use client';
 
 import { Float, Sparkles } from '@react-three/drei';

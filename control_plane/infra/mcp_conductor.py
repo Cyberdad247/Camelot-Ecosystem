@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 MCP Conductor — CAMELOT-OS Universal Bridge as an MCP Server.
 

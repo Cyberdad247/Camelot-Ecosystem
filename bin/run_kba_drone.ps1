@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Camelot-OS KBA Drone launcher — loads secrets from ~/.camelot/kba_drone.env and
 # starts the governed drone (Heimdall + CloudBrain). Used by the CamelotKBADrone
 # scheduled task so the drone survives logout/reboot, independent of any session.

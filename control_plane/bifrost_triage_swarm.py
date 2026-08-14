@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Bifrost Triage Swarm — runnable swarm-knight orchestrator for the 5 audit fixes.

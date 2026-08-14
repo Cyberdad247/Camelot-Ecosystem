@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Z3 Patch Verification — CAMELOT-OS v9000.14-CYBERTRONIA (Pillar 1/4, P2-T02).

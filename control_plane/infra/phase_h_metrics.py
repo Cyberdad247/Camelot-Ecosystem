@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H: Metrics Collection Engine
 Captures latency, throughput, errors from all operations

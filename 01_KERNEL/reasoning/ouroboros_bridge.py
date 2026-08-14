@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 class OuroborosClient:
     def health_check(self):
         # In a real implementation, this would call the Rust library via PyO3 or subprocess.

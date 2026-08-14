@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """cybertronia_compile.py -- Phase 2 compiler for the Cybertronia 3D Graph Sync Forge.
 
 Reads Phase 1 telemetry (``control_plane/cybertronia_audit.py``) and emits

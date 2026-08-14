@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: MIT
+
 
 DEFINE TABLE IF NOT EXISTS source SCHEMAFULL;
 

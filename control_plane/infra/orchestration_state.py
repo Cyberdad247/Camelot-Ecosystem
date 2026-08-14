@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Lightweight orchestration-state helpers used by Camelot CLI and boot."""
 
 from __future__ import annotations

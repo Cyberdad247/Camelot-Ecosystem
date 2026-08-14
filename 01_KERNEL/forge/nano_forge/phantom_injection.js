@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * PHANTOM INJECTION: Rich Fingerprint Spoofing (v2.0)
  * Injected into every page context to override 20-50+ browser APIs

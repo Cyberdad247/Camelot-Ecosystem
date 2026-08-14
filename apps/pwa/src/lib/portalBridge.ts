@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 'use client';
 
 // Forward-compatibility bridge for the Lakisha portal stack.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """CAMELOT_OS/tests/control_plane/test_viking_block_protocol.py.
 
 PR #6A test suite — verify the viking_block_protocol module.

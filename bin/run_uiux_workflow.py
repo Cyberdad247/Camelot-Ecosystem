@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Execute the UI/UX cloudbrain workflow JSON."""
 
 from __future__ import annotations

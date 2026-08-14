@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 2 — Shadow Veil tests.
 
 Tests the Heimdall→Hermes→Nemesis AUTO response pipeline.

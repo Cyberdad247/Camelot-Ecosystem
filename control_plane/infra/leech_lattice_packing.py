@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Leech Lattice Packing — 24D Optimal Sphere Packing.
 

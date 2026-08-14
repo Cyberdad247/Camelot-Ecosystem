@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Ouroboros Hybrid Prefetcher (io_uring + Speculative Gating)
 // Integrates with Aegis Speculator to dynamically adjust prefetch depth.
 

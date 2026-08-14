@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Swarm Pinning — content-addressed artifact distribution (v9000.14, P5-T03).

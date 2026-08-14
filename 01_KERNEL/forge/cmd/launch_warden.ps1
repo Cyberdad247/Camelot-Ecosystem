@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # 🚀 Omega_CHROME_WARDEN_LAUNCHER (v1.0)
 # Guardian: Sir Chrome Warden
 

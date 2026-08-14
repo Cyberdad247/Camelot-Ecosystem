@@ -1,4 +1,6 @@
-﻿from __future__ import annotations
+﻿# SPDX-License-Identifier: MIT
+
+from __future__ import annotations
 
 from control_plane.cloudbrain_mnemosyne_audit import (
     _classify_queue_event,

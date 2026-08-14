@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Typed Appwrite SDK wrapper for Lady Mnemosyne's long-term memory.
 
 PR #2 of NOTES_MNEMOSYNE_WIRING.md (2026-07-14, freebuff).

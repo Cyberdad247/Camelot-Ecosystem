@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Minimal Web Speech API declarations — not present in the default TS DOM lib.
 
 interface SpeechRecognitionAlternative {

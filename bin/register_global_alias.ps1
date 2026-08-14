@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Camelot-OS Global Alias Registration Script (Windows PowerShell)
 
 function Register-CamelotAlias {

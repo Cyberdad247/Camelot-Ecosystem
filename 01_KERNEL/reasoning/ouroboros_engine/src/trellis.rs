@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Trellis Recursive Compressor logic
 pub struct TrellisPool {
     limit: usize,

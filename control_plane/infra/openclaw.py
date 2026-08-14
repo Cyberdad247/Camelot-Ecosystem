@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OpenClaw — Dynamic Health Monitor + Auto-Triage Engine
 ==========================================================
 CAMELOT-OS Loop 9: runs every 300s, checks system health, classifies

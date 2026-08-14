@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 [S4-01] Intent Router — dynamic knight hot-swap via semantic intent classification.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Knight Flash Memory — Redis Agent Memory with 24-hour Purge System.
 

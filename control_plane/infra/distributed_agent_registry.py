@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Distributed Agent Registry — Cross-Instance Agent Discovery & Routing
 

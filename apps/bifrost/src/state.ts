@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import type { Command, KbaDomain } from './nlp';
 
 // Microcubic swarm lifecycle, surfaced to the PWA alongside business metrics.

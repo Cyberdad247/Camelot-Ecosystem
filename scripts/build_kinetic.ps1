@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # build_kinetic.ps1 — CAMELOT Kinetic Binary Build Harness (Windows PowerShell)
 # =================================================================================
 # Run from CAMELOT_OS root: powershell -ExecutionPolicy Bypass -File scripts\build_kinetic.ps1

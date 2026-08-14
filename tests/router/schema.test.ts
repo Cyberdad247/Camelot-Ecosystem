@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { validateA2ARequest } from '../../src/router/schema';
 import { describe, it, expect } from 'vitest';
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # AEGIS: Background Activation Script
 # Starts the Eternal Heartbeat daemon in a hidden window.
 

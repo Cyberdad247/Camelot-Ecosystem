@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 $ErrorActionPreference = "Stop"
 $LEDGER_PATH = "C:\Users\vizio\CAMELOT_OS\PROVENANCE_LEDGER.md"
 

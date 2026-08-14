@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 MERLIN_Ω FORGED DUAL-MODE DYNAMIC & OFFLINE MINIMUM ORCHESTRATOR
 =================================================================

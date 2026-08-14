@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Read-only Gemini CLI extension registry for Camelot control-plane synapses."""
 
 from __future__ import annotations

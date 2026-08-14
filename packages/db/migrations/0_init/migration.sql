@@ -1,3 +1,5 @@
+-- SPDX-License-Identifier: MIT
+
 -- CreateTable
 CREATE TABLE "JournalEntry" (
     "id" TEXT NOT NULL,

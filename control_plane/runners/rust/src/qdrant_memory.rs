@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // qdrant_memory.rs — Qdrant Cloud REST client for CAMELOT harness runner
 //
 // Cluster:  2b135578-55c5-43d0-b82a-f5061f4ff6ee (GCP us-east4)

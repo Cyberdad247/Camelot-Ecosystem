@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/wsl2_preflight.sh — Phase 3 substrate preflight (stdout-emit v3)
 # Read-only on host. Emits JSON describing current libkrun + UFFD readiness
 # directly to stdout. Callers may redirect with `bash scripts/wsl2_preflight.sh

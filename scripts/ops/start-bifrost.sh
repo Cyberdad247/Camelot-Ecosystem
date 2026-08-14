@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/ci/start-bifrost.sh
 #
 # Boots Bifrost in the background for the KBA Smoke CI workflow, then

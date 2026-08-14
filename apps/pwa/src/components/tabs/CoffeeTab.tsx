@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 'use client';
 
 import { COFFEE, type CoffeeShipment } from '../../lib/realm-data';

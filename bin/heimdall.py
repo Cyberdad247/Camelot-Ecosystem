@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 🛡️ SIR HEIMDALL — Guardian of the Bifrost Bridge
 CAMELOT Apex OS v400 | Universal Network Dashboard

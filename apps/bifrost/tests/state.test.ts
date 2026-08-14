@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { describe, expect, it } from 'vitest';
 import { parseCommand } from '../src/nlp';
 import { BASELINE_VALUATION, type SovereignState, applyCommand } from '../src/state';

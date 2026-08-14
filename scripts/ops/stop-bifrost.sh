@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/ci/stop-bifrost.sh
 #
 # Tears down Bifrost cleanly: SIGTERM then SIGKILL on the captured PID,

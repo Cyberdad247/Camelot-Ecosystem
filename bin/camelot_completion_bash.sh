@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # CAMELOT-OS bash/zsh completion
 # Source in ~/.bashrc:   eval "$(camelot completion bash)"
 # Source in ~/.zshrc:    eval "$(camelot completion zsh)"

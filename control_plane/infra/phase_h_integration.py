@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H: Integration Helper
 Wires metrics collection and anomaly detection into main system

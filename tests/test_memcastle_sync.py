@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for //sync — MemCastle <-> NotebookLM orchestration (mocked bridge)."""
 import importlib.util
 import sys

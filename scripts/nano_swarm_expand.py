@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 //NANO_SWARM_EXPAND — 6-Phase Expansion Protocol

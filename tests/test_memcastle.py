@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for MemCastle — the sqlite-vec local vector store."""
 import importlib.util
 import sys

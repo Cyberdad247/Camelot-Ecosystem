@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Event Bridge — Ingests OpenClaw events and routes to Omni-Router.
 
 # HITL: file-ops pre-approved — writes bounded to event queue and runtime logs

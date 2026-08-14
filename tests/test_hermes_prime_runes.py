@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """Runic router tests for the Hermes_Prime runes — parse / normalize / route.
 

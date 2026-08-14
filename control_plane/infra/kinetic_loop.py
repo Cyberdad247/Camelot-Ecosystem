@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Kinetic Execution Loop — CAMELOT-OS v9000.14-CYBERTRONIA (Pillar 10, P2-T01).

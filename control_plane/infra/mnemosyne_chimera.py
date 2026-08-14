@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Lady Mnemosyne Chimera harness.
 
 Coordinates Cloudbrain custody, Hermes automation signals, Squire triage, and

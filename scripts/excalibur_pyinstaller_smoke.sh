@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/excalibur_pyinstaller_smoke.sh — CI entry for the EXCALIBUR PyInstaller
 # distribution.
 #

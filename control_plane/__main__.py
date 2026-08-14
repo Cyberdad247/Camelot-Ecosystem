@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """CLI entry for `python -m control_plane.runic_router --rune X --task Y`."""
 import argparse
 import json

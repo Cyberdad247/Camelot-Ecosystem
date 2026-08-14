@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Repository-side ledger update and sync utilities for Camelot-OS."""
 
 from __future__ import annotations

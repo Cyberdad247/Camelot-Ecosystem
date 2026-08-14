@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 camelot_context — Layered system-prompt assembler for CAMELOT-OS
 ================================================================

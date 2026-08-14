@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Day 3: Generate Sample Load
 Populates metrics database with realistic operation data for dashboard display

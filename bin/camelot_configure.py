@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 camelot configure — Auto-Configuration Engine (WARP_GATE v1.0.0)
 =================================================================

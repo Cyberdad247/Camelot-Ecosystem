@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 System Analyzer — Scan host system capabilities and constraints.
 

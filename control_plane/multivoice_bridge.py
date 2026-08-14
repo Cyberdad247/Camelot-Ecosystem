@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Multivoice Bridge — OmniRoute affinity telemetry for the Bifrost Board (v9000.14).

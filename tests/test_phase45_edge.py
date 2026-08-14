@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Phase 4 MESH + Phase 5 EDGE acceptance tests (feasible tasks).
 
 Covers the platform-agnostic mesh/edge modules: drone discovery (P4-T03),

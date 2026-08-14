@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 3 acceptance tests — DependencyEngine (offline/mocked)."""
 import importlib.util as _ilu
 import json

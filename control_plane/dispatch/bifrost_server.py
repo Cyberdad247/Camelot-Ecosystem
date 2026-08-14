@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Bifrost Intelligence Board — HTMX + SSE dashboard (v9000.14, P3-T02/T05/T06).

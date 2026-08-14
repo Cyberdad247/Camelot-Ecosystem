@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // 🕵️ STEALTH INJECTOR (Content Script - Isolated World)
 // Reads config and injects anti-detect script into Main World.
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Day 2 Integration Test
 Verify metrics wiring in orchestrator.py and main.py works correctly

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 4GB Scarcity Protocol — sovereign memory budget manager (v9000.14, P5-T04).

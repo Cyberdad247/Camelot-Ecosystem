@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Bifrost — Camelot-OS Sovereign Identity & Network Gate.
 
 Three-layer access control for any Camelot entry point:

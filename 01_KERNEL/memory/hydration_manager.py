@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Hydration Manager — Tiered Context Protocol (L4 Semantic)

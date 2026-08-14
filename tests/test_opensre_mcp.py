@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 import importlib.util
 import unittest.mock
 from pathlib import Path

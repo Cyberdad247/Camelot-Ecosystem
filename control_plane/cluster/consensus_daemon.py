@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 HTTP daemon wrapper for DistributedConsensus.
 

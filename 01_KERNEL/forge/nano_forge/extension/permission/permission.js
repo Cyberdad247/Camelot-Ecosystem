@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 document.addEventListener('DOMContentLoaded', () => {
   // Set up i18n text content
   document.getElementById('title').textContent = chrome.i18n.getMessage('permissions_microphone_title');

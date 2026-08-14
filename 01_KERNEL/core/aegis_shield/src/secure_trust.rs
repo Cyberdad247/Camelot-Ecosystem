@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 use rand::{rngs::StdRng, Rng, SeedableRng};
 use sha2::{Digest, Sha256};
 

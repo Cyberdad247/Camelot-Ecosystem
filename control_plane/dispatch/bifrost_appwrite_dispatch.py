@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Bifrost → Appwrite signed-RPC dispatcher.
 
 PR #3 of NOTES_MNEMOSYNE_WIRING.md (2026-07-14, freebuff).

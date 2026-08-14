@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Kinetic Swarm Orchestration — 6-Agent Distributed Execution.
 

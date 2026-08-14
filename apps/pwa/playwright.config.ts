@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 3100;

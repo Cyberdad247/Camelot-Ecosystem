@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Backend unit tests for the Secret Photo Viewer staging API.
 
 These tests exercise the ``/api/staged`` endpoints and the Gradio

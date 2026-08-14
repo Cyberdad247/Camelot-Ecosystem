@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 //! rtk_cli — thin CLI over the real `rtk::strip` engine so non-Rust callers
 //! (e.g. the Go omni-router) can invoke RTK noise-stripping via subprocess.
 //!

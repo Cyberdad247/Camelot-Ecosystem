@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Sovereign Preview Drone — local deploy before Swarm pin (v9000.14, P5-T06).

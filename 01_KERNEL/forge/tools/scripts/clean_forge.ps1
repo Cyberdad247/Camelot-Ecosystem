@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 param(
     [string]$TargetDir = "$HOME\workspace",
     [switch]$Force

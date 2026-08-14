@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 NORTHSTAR Phase 1 — Service Launcher
 

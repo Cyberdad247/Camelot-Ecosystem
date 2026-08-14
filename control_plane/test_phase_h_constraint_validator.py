@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 3 Day 4: Constraint Validator & Feedback Integration Tests
 Test constraint validation and feedback confidence boosting

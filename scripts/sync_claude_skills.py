@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Sync Claude Code skills and harnesses to the CAMELOT-OS Cloud Brain (NotebookLM).
 

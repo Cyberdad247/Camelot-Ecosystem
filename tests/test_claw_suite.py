@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 from control_plane.knight_agent import load_roster
 from control_plane.switchboard import TERMINAL_REGISTRY
 

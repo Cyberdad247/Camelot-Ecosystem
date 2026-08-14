@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Fix all 86 ruff lint warnings in control_plane/."""
 import re
 from pathlib import Path

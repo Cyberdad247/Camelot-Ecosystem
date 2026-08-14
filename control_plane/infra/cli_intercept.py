@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """CLI Intercept — Bridges camelot-cli to the MFOE Soul Router.
 
 Every camelot-cli command passes through this intercept layer which:

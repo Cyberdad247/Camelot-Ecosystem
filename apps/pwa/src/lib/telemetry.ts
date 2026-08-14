@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // HYBRID_VOICE_ASSISTANT_vMAX · KINETIC_THROUGHPUT telemetry
 // Budget thresholds from the execution directives:
 //   TTFA (time-to-first-audio)      < 500ms

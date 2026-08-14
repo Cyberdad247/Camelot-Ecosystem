@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """cybertronia_audit.py -- Metadata-only resource-guarded audit for Cybertronia.
 
 P1.CYB-1. Reads ONLY file metadata (path, size, mtime, kind); file content

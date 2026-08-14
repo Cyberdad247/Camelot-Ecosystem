@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Verify the UI/UX cloudbrain sync artifacts without depending on notebooklm package imports."""
 
 from __future__ import annotations

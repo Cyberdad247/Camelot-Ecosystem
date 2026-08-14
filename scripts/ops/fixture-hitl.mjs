@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: MIT
+
 // scripts/ci/fixture-hitl.mjs
 //
 // Mints HMAC-signed KBA bundles and POSTs each to /api/bifrost/hitl, then

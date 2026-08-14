@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # bin/phase3_one_shot.sh
 # ---------------------------------------------------------------------------
 # Single-shot Phase 3 (MICROVM_LATCH) operator wrapper for HiveIDE_Apex_v1000.

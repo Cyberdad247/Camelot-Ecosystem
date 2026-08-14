@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for NotebookLM MCP server (file-system pivot).
 
 PR #4 of NOTES_MNEMOSYNE_WIRING.md.

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Cognitive Service — HTTP front for the Tier-2/3 stack on cybertronia.
 
 Endpoints (CORS-open for the deployed dashboard):

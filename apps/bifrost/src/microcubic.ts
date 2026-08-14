@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { EventEmitter } from 'node:events';
 import path from 'node:path';
 import { Worker } from 'node:worker_threads';

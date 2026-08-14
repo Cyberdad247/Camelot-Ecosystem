@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """Tests for the Hermes_Prime PhialEngine (MGV + Ouroboros + re-weighting)."""
 import importlib.util

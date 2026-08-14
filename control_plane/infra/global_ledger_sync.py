@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Global Ledger Synchronization — Replicates the root PROVENANCE_LEDGER.md across the Spire.
 
 # HITL: file-ops pre-approved — shutil.copy writes are read-only replication of the provenance ledger

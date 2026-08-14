@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 SPRINT 8 — Cloud Brain Enrichment (Full Pipeline Closure + Qdrant)
 Protocol: URL source injection + UKG delta for S8 state

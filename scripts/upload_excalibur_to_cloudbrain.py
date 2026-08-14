@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Upload the v1000-EXCALIBUR-A architecture source to NotebookLM Cloud Brain.
 
 Run after `notebooklm login`:

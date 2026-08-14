@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { expect, test, vi } from 'vitest';
 import { swarmMatrix, SwarmTask } from '../src/swarm/MicrocubicSwarm';
 

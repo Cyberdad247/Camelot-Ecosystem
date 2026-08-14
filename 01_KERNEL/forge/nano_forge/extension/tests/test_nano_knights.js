@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // TEST: SIR ZENITH LOGIC
 // Run with Node.js to verify regex filtering.
 

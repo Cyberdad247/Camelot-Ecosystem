@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Browser test for the upload -> unlock -> import flow.
 
 This script:

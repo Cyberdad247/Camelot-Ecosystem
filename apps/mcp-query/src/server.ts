@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // mcp-query · a minimal real MCP server (JSON-RPC tools/list + tools/call).
 // Bound to 0.0.0.0 so it is reachable on the laptop's Tailscale IP — the
 // Bifrost router calls it over the mesh (zero-trust gate permits 100.64/10).

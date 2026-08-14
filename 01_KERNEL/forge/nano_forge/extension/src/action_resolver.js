@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * ACTION RESOLVER (Heuristic Element Resolver - HER)
  * Decouples Intent ("Click Login") from Execution ("#btn-123")

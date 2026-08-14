@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // 🚀 RESEARCH PANEL LOGIC - Sovereign IDE Enhancement
 // Features: Observer Pattern, Cognitive Cortex display, Mission Queue integration
 

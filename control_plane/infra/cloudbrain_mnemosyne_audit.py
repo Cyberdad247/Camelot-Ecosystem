@@ -1,4 +1,6 @@
-﻿"""Lady Mnemosyne Cloudbrain custody audit.
+﻿# SPDX-License-Identifier: MIT
+
+"""Lady Mnemosyne Cloudbrain custody audit.
 
 Report-only audit for Camelot's memory surfaces: NotebookLM short-term brain,
 long-term Cloudbrain, source/library operations, sync queue, and ledger mirrors.

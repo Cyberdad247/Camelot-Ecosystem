@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 $ErrorActionPreference = "Stop"
 
 $scriptPath = Join-Path $PSScriptRoot "start_sidecar.ps1"

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Shadow Provenance — atomic SQLite ledger with .shadow rollback (P2-T07).

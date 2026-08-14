@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 EXCALIBUR v1000.0.0 — Pre-Flight Substrate Gate (Windows-native port)

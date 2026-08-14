@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # Khoj Startup Script
 Write-Host "🧠 Starting Khoj AI - Your Second Brain..." -ForegroundColor Green
 Write-Host ""

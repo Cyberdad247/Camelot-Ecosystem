@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Taxonomy Ledger — Unified Semantic Maps for Omni-Router

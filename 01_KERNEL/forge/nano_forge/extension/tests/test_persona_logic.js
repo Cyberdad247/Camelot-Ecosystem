@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Verification Suite: The Round Table (Personas)
  * Validates: Persona Registry, Knight Spawner Persona Injection

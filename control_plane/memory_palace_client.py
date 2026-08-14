@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """memory_palace_client.py — Python shim for the Rust memory_palace binary.
 Replaces local_store.py call sites with zero-overhead Rust vector ops.
 Usage:

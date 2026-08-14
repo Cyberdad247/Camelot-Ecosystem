@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 4 Day 2: Result Tracker
 Measure actual vs predicted impact and validate optimization outcomes

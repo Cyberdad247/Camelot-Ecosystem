@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 knight-session — Interactive Camelot-OS Knight Router via CLIProxyAPI + OmniRoute
 ==================================================================================

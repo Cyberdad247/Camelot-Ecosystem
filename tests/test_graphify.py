@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for Graphify — NL triplet extraction + MemCastle ingestion."""
 import importlib.util
 import sys

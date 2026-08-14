@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Obsidian Pillars — 11-Pillar enforcement layer (v9000.14, Pillar mesh, P2-T03).

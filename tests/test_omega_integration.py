@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """OMEGA Defense Nexus Phase 8 — Full Integration Suite.
 
 8-pillar acceptance criteria verified against the live CAMELOT-OS repo.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Microcubed SmolVM task housing for Camelot-OS.
 
 Microcubed creates small, traceable task houses for knights and Nano-Knights.

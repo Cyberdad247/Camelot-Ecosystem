@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Starship assimilation for Camelot shell/cockpit prompt surfaces."""
 
 from __future__ import annotations

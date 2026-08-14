@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Secret Scanner -- Detects exposed credentials in the repository.
 
 Used by CI/CD (verify_os.yml) and can be run manually:

@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Verification Suite: Sovereign Mode Data Privacy
  * Validates: CryptoVault, PII Scrubbing, GraphRAG Persistence

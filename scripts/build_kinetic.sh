@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # build_kinetic.sh — CAMELOT Kinetic Binary Build Harness
 # =========================================================
 # Compiles all 3 pending Rust binaries + Go TUI, copies to bin/.

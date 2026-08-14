@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 SPRINT 5 — Cloud Brain Enrichment (NORTHSTAR Phase 3 sources)
 Protocol: URL source injection for Sprint 3+4 technical references

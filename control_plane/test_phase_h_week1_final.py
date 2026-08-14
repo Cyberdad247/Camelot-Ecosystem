@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 1 Final: Complete System Validation
 Comprehensive tests for production sign-off

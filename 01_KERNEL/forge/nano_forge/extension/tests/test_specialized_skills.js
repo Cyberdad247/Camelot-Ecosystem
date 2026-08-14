@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Verification Suite: Specialized Skills
  * Validates: Skill Registry, Executor Routing

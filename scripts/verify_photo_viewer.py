@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """End-to-end verification script for the Secret Photo Viewer.
 
 Starts the Gradio/FastAPI server on an ephemeral port, uses Playwright to:

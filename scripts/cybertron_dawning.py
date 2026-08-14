@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """Cybertron Dawning Harness for Camelot-OS.
 

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """OpenClaw CLI — CAMELOT-OS Dynamic Health Triage
 ===================================================
 Usage:

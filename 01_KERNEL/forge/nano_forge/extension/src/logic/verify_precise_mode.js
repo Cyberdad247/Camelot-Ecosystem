@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * PRECISE MODE VERIFICATION HARNESS (Track G3)
  * Deterministic simulation of Nano-Knight swarm logic.

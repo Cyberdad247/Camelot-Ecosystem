@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Sovereign Commander — Human-in-the-loop oversight for QR Pill and Knight automation.
 

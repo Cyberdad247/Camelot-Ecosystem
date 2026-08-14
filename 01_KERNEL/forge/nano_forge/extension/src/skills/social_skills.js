@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * SOCIAL OPERATIONS SKILLS
  * Techniques for identity management and access negotiation.

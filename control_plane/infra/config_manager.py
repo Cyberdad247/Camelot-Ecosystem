@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Camelot-OS Configuration Manager — Persisted Operator Profiles."""
 
 from __future__ import annotations

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Empire Drone Mesh — discovery + registration protocol (v9000.14, P4-T03).

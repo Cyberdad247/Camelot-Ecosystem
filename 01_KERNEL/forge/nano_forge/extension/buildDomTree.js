@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 window.buildDomTree = (
   args = {
     showHighlightElements: true,

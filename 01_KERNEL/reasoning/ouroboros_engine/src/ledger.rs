@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Phase 3: Rust in-memory ring of executions + WAL persistence.
 // Path: 03_VAULT/memory/ouroboros/ouroboros.wal
 

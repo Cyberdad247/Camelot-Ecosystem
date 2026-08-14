@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """CAMELOT_OS/control_plane/viking_block_protocol.py.
 
 PR #6A of NOTES_MNEMOSYNE_WIRING.md (2026-07-14, freebuff).

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # ============================================================
 # CAMELOT-OS Installer — Linux / macOS / WSL
 # WARP_GATE v1.0.0

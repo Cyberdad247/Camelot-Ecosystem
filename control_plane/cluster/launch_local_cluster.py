@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Launch a real 3-node CAMELOT-OS cluster on loopback and validate it.
 

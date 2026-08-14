@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-License-Identifier: MIT
+
 # =========================================================================
 # Camelot-OS Swarm Execution Orchestrator
 # Executes the 5-phase pipeline and handles pre/post configurations.

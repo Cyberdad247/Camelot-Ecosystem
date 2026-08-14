@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 CAMELOT-OS Portable Installer — Zero Dependencies
 WARP_GATE v1.0.0

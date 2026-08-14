@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """design_lint.py — Phase 4 build-fail lint for the HiveIDE_Apex_v1000 DAG.
 
 Scans staged TSX/JSX/CSS in scoped repositories for AGENTS.md Rule 1 violations:

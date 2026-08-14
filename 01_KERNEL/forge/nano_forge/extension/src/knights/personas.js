@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * THE ROUND TABLE
  * Registry of Specialized Knight Personas

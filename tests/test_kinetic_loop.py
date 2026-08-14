@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """P2-T01 — Kinetic Execution Loop acceptance tests.
 
 The loop must fire all six stages in canonical order

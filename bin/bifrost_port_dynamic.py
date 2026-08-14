@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 🌈 DYNAMIC BIFROST PORT — RustDesk Integrated Mesh
 Forged by the Triumvirate: Merlin_Omega (Logic), Anya_Omega (Kinetic), Sir Alex (Cognitive)

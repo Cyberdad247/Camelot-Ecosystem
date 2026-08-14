@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Knight Knowledge Base — Per-knight document management.
 

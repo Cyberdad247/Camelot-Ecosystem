@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // 🌐 PROXY MANAGER (Residential & Rotating)
 // Manages: Proxy Settings, Auth, IP Rotation, Header Spoofing
 

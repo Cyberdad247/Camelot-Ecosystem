@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Cartridge Manager — CAMELOT-OS Scabbard Protocol

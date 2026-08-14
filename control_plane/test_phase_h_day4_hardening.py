@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Day 4: Production Hardening Tests
 Verify system resilience, error handling, and resource stability

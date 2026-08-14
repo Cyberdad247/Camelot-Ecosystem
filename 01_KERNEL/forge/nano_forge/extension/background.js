@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import './vault_bridge.js';
 import './src/security/profile_manager.js';
 import './src/security/proxy_manager.js';

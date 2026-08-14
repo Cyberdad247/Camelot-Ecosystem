@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Unit tests for the Secret Photo Viewer FastAPI app.
 
 Run with:

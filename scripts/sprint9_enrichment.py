@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 SPRINT 9 — Cloud Brain Enrichment (Redis Live + 7/8 Green)
 Protocol: URL source injection + UKG delta for S9 state

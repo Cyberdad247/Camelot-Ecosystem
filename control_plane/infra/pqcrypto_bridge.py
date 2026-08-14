@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 pqcrypto_bridge.py — Python bridge to camelot-pqcrypto Rust binary

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Camelot Split-Brain OS — TestRunnerAgent (PIV Self-Healing Loop)
 ================================================================

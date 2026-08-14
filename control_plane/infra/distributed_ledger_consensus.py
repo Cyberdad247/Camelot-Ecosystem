@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Distributed Ledger Consensus — PBFT-Inspired Byzantine Agreement
 

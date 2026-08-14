@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Genesis Character Forge — Full 35-Knight Roster Edition
 Forges all 35 knights with souls, sparks, full character sheets,
 and registers their CloudBrains in NotebookLM.

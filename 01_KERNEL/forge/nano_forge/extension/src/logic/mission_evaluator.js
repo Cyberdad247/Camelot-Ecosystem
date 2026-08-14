@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Mission Evaluator: Success Criteria Verification (Task D8)
  * Analyzes mission outcomes against high-level objectives using LLM reasoning.

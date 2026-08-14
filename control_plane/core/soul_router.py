@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Soul Router — MFOE Routing Matrix for Camelot Foundry Council.
 
 Implements the Soul Equation: S_omega = alpha*V + beta*M + gamma*P + delta*E

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/ci/check-helio-dry.sh
 #
 # Runs scripts/regen-helio-patch.mjs in dry-run mode and verifies the

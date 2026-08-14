@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Unit Tests for CognitiveParser
  * Tests tag extraction and content separation

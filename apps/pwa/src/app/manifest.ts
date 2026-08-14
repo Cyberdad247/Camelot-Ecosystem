@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import type { MetadataRoute } from 'next';
 
 // PWA manifest — installable "Sovereign Universal Dashboard".

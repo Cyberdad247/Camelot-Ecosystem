@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Bifrost — Universal Dispatch Core for CAMELOT-OS Hive IDE.
 

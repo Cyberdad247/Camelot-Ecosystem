@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Memory Sync — Cross-agent knowledge pyramid synchronization.
 

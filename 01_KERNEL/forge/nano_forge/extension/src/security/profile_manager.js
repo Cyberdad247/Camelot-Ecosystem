@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // 🕵️ PROFILE MANAGER (Antidetect Engine)
 // Manages: Identity Isolation, Fingerprint Spoofing, Device Emulation
 

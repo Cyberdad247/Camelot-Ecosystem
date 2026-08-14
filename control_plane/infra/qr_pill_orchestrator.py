@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 QR Pill Orchestrator — Docker-Free Deployment System for CAMELOT-OS
 

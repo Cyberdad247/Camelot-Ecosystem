@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Adversarial Crucible Runner — v9000.14-CYBERTRONIA (Pillar 4, P2-T06).

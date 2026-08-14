@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Hermes_Prime harness execution — queued Harmony runes / Omega_HermesPrime
 tasks must actually execute against the PhialEngine (closes the queue-consumer
 gap), and must be skipped when privacy-overridden to sir_ghost.

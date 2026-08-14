@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 3 Day 2: Business Metric Integration
 Define and manage SLA/KPI/cost metrics and business weighting

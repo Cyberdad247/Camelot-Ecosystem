@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # Camelot-OS // Kinetic Local Engine Control Script (scripts/ctl.sh)
 # Target Node: Bare-metal Laptop Server (Tailscale IP: 100.71.218.75)
 

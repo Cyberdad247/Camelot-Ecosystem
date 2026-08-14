@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # bin/sweep_inert_stubs.sh — CAMELOT-GCMN activation ADR §7 sunset cron.
 #
 # What this script does:

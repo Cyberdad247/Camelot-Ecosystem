@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 [S5-03] AudioSession — Full-Duplex Audio Session Orchestrator

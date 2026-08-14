@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { randomUUID } from 'node:crypto';
 import http from 'node:http';
 import express, { type Request } from 'express';

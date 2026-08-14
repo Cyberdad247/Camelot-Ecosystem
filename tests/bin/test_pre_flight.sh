@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # tests/bin/test_pre_flight.sh — PR #5 (gate-of-gates) test suite.
 #
 # Verifies the pre-flight script's exit-code classifier against 7 scenarios:

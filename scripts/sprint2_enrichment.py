@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 SPRINT 2 — Cloud Brain Enrichment
 Knights: LADY_APIS · SIR_MNEMO · SIR_SONUS

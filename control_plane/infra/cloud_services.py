@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Typed routing for Camelot cloudbrain and research services."""
 
 from __future__ import annotations

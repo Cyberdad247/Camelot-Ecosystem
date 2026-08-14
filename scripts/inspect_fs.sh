@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-License-Identifier: MIT
+
 # inspect_fs.sh — READ-ONLY audit of the Camelot-OS layout BEFORE any reorg.
 # Deletes nothing, creates nothing, changes no permissions. Run this on the
 # real node first; only after reviewing its output should any move/purge happen.

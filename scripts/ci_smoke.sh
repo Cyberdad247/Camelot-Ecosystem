@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/ci_smoke.sh — single CI entry for the portable-CLI tests.
 #
 # Orchestrates the three checks that together prove the cartridge

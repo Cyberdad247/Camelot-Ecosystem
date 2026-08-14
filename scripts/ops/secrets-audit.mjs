@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: MIT
+
 // scripts/ci/secrets-audit.mjs
 //
 // READ-ONLY secrets scanner for /audit-kickbox-audio.

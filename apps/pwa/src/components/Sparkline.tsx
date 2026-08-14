@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Dependency-free SVG sparkline. Renders a normalized polyline + soft area fill.
 interface SparklineProps {
   data: number[];

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Minimal stdlib HTTP daemon framework for CAMELOT-OS cluster services.
 

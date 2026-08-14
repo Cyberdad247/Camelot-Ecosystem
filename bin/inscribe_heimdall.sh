@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-License-Identifier: MIT
+
 # 🛡️ SIR HEIMDALL — Universal Inscription for Linux/Termux
 # This script installs the "Heimdall-Open the Bifrost" command.
 

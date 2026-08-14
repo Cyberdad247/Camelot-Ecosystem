@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * Verification Suite: Prometheus-Knights Integration
  * Validates: TOON Encoding, GraphRAG Indexing, Sentinel Compression, Knight Spawner

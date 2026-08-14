@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 'use client';
 
 import { STREAM_NODES } from '../../lib/realm-data';

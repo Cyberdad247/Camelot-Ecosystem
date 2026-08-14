@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 TriageScore — Dynamic Confidence-Based Decision Making.
 

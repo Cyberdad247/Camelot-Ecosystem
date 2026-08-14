@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { PrismaClient } from '../generated/client';
 
 // Initialize Prisma Client with connection pooling optimized for Edge

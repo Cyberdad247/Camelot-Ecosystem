@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-License-Identifier: MIT
+
 ################################################################################
 # CAMELOT-OS Cartridge Public Key Distribution
 #

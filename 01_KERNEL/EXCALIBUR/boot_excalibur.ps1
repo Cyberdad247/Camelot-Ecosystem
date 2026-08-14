@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 $ErrorActionPreference = "Stop"
 
 Write-Host "EXCALIBUR OS: SYSTEM BOOT SEQUENCE" -ForegroundColor Yellow

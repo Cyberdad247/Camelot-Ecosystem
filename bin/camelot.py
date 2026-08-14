@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 camelot — CAMELOT-OS Global Command (WARP_GATE v1.0.0)
 =======================================================

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Consensus Layer — Multi-agent coordination and conflict resolution.
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Pytest fixtures for in-package loading of Camelot kernel modules.
 
 The mempalace tests under ``tests/`` originally loaded

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Symbolect Protocol — TOON Transmission and 1-Bit Encoding.
 

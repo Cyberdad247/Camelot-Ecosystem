@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Omega_NANO_COUNCIL (v1.2.0)
 // Runs in the context of the web page.
 

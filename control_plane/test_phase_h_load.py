@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 4 Day 5: Load Testing & Performance Validation
 Comprehensive load testing of complete autonomous system

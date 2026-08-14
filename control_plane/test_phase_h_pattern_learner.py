@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 2: Pattern Learner Tests
 Verify pattern extraction accuracy and performance

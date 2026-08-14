@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Forge Law bootstrap cartridge compiler and guarded kinetic executor.
 
 The source documents remain human-readable. Execution is driven exclusively by

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 # ruff: noqa: E501
 """cybertronia_lockbox_ci.py -- 3-way cross-check anchor for the Draft 0.3.1 (section 6.3)
 migration window (v3: post-second-review corrections).

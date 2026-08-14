@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Hive Stream TUI — Live multi-agent streaming display for CAMELOT-OS.
 

@@ -1,4 +1,6 @@
 #!/bin/bash
+# SPDX-License-Identifier: MIT
+
 set -e
 # 1. Enforce Scarcity Protocol (1GB ZRAM LZ4)
 if ! lsmod | grep -q zram; then modprobe zram num_devices=1; fi

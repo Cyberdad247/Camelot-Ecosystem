@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for the GCMN vMAX stub dispatch table in `runic_router`.
 
 The GCMN vMAX nano-seed is treated as UNTRUSTED external input. These tests

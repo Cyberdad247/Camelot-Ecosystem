@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 //! RTK — Real-Time Kontext noise stripper (CYBERTRONIA P1-T09).
 //!
 //! C ABI consumed by `control_plane/anya_gate.py::_load_rtk`:

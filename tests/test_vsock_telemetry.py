@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 import socket
 import threading
 import time

@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 3 Day 1: Feedback Signal Collection Infrastructure
 Collect and store user, business, and operational feedback signals

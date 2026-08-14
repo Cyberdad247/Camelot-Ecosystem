@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 [S6-02] SileroVadDetector — ML-based VAD with energy-VAD fallback

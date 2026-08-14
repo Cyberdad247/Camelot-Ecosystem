@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 use crate::kv_event_gate::KVEvent;
 use std::collections::VecDeque;
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Golay Error Correction — Perfect Single and Double Error Detection/Correction.
 

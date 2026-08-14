@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 QR Pill — Self-bootstrapping, self-maintaining system for CAMELOT OS.
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 import argparse
 
 # Need to ensure we can import from CAMELOT_OS

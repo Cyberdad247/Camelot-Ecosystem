@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { ResourceSquire } from './src/squires/resource_squire.js';
 import { ChunkManager } from './src/logic/chunk_manager.js';
 

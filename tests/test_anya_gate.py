@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """EXCALIBUR Phase 2 acceptance tests — AnyaGate triage + risk_entropy."""
 import pytest
 from control_plane.anya_gate import AnyaGate

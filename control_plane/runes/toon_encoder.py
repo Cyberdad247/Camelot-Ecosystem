@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 TOON Encoder/Decoder — Token-Oriented Object Notation (Symbolect Protocol).
 

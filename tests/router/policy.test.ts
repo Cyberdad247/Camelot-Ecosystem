@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // tests/router/policy.test.ts
 import { determineRoute, resolveRoute, PERSONA_PROMPTS } from '../../src/router/policy';
 import { describe, it, expect } from 'vitest';

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """P1-T02 — verify ColMAD 3-persona crucible is wired into the AnyaGate pipeline.
 
 A CRITICAL-lane / HUMAN_GATE intent must trigger a ColMAD debate (3 persona

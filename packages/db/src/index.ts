@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { PrismaClient, Prisma } from './generated/client';
 import { ledgerValidator } from './ledgerValidator';
 

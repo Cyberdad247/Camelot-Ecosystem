@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Verify and atomically consume PWA Cockpit approval grants."""
 
 from __future__ import annotations

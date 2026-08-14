@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """Verify all knights route through CLIProxyAPI in OmniRoute."""
 import sys
 from pathlib import Path

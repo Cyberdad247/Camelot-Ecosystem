@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Cognitive MCP — the Graphify/MemCastle/sync cognitive stack as a scoped MCP server.
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """EXCALIBUR Phase 4 acceptance tests — Iron Gate v2 pre_execute."""
 import asyncio
 

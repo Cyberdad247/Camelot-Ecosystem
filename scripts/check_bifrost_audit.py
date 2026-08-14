@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 check_bifrost_audit.py — Re-runs the audit verify_cmd strings from
 control_plane/bifrost_triage_swarm.TASK_PLAN against the current code,

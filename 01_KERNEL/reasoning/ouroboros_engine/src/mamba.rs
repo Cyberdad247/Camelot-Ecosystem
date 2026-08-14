@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // Mamba-2 Selective State Space Model (OMEGA-PATCH / EXCALIBUR_A_QNF Phase 7)
 //
 // Replaces the identity-passthrough placeholder with a real selective-scan

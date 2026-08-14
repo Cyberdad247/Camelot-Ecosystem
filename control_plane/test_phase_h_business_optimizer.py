@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 """
 Phase H Week 3 Day 3: Business Optimizer Tests
 Test business-weighted ranking and approval thresholds

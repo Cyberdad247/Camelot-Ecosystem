@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// SPDX-License-Identifier: MIT
+
 // scripts/regen-helio-patch.mjs
 // Regenerates HELIO_PATCH.json from current audit-kickbox-audio source state.
 //

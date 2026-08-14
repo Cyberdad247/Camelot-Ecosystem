@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # bin/install_libkrun.sh — HiveIDE_Apex_v1000 Phase 3 substrate installer.
 # Run ONLY inside a WSL2 distribution with nested virt.
 # Idempotent: re-running re-checks before each install step.

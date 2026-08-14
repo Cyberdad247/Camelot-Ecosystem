@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 use serde_json::{Map, Value};
 use unicode_normalization::UnicodeNormalization;
 

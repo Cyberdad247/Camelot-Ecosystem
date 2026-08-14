@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * SEMANTIC ANCHOR ENGINE (Phase 52)
  * Moves beyond brittle selectors to semantic element mapping.

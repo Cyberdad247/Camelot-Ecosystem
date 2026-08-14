@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 async () => {
     // Function to check if element is visible
     const isVisible = (elem) => {

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # bin/cold_boot_bench.sh
 # ---------------------------------------------------------------------------
 # Phase 3 cold-boot benchmark hand-off stub.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/_fixtures.py — shared test helpers for the portable CLI + V4000 suite.
 
 Cross-test-file feature parity:

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for 01_KERNEL/audit_redact.py — CAMELOT-GCMN activation ADR §8 Step 2/3 CLI.
 
 Subprocess-based black-box tests. Each test uses ``tmp_path`` to keep the

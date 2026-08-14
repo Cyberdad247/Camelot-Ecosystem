@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { NextResponse } from 'next/server';
 
 // KINETIC SUBSTRATE — server-side weather proxy for Cleveland, OH (Eastern).

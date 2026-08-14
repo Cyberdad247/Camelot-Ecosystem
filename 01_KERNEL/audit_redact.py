@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 01_KERNEL/audit_redact.py — CAMELOT-GCMN activation ADR §8 Step 2/3 CLI.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Modal deployment surfaces for the Camelot hybrid cloudbrain."""
 
 from __future__ import annotations

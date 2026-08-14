@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { expect, test } from '@playwright/test';
 
 test('KOA tabs swap without reload and keep Lakeisha video mounted', async ({ page }) => {

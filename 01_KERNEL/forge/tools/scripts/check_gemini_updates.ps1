@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 #Requires -Version 5.1
 
 <#

@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # Sync CLI source from ~/.camelot/ -> CAMELOT_OS/.camelot/
 # Excludes runtime data (DB, logs, __pycache__, config secrets)
 

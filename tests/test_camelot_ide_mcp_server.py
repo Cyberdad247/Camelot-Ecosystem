@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """tests/test_camelot_ide_mcp_server.py — Iron-Gate-friendly tests for the
 VS Code-targeted MCP server at ``bin/camelot_ide_mcp.py``.
 

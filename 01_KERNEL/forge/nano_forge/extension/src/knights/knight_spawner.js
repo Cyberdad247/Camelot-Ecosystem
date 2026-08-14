@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { ROUND_TABLE } from './personas.js';
 
 /**

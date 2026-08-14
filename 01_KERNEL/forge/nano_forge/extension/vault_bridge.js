@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 // VAULT BRIDGE (Connectivity to Camelot Kernel)
 
 const KERNEL_API = "http://localhost:8001";

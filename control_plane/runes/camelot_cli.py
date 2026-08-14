@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """User-facing Camelot-OS CLI modeled after prompt-first AI CLIs."""
 
 from __future__ import annotations

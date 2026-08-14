@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """One-shot compression script — dedup saltare, gzip archival text, archive assimilation_7."""
 import gzip
 import hashlib

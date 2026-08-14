@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Lady M (Lady Mnemosyne) — Squire Swarm Governance Engine
 Implements SQUIRE_MERGE, SQUIRE_PURGE, SQUIRE_TRIAGE, SQUIRE_BRIEF.
 Lady M commands all 35 knights and dispatches research briefings.

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 CAMELOT-OS cluster daemon layer.
 

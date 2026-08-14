@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 export const CAMELOT_APEX_SYSTEM_PROMPT = `
 # [GLOBAL_SYSTEM_SETTINGS]: CAMELOT_APEX_v200.0
 # [MANDATE]: "Context is the Compiler. Kinetic Purity is Law." [3]

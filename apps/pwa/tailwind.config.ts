@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import type { Config } from 'tailwindcss';
 
 const config: Config = {

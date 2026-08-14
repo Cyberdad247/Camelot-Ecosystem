@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 use indradb::{Datastore, Edge, EdgeKey, MemoryDatastore, Type, Vertex, VertexProperties};
 use std::sync::{Arc, RwLock};
 use uuid::Uuid;

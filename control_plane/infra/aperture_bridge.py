@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Aperture Bridge — centralized LLM usage + spend for the Bifrost Board (v9000.14).

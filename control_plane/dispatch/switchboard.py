@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 Switchboard — LLM Flight Control Terminal
 CAMELOT Apex OS v400 | Sovereign Terminal Registry

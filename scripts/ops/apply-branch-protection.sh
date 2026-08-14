@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+
 # scripts/ci/apply-branch-protection.sh
 #
 # Apply the production-grade branch protection payload in

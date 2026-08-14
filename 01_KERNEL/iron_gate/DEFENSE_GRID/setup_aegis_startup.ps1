@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # AEGIS: User-Level Startup Registration
 # Purpose: Ensures DEFENSE_GRID starts on logon without requiring Admin.
 

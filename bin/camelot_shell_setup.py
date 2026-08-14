@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """camelot shell-setup — Install tab completion for the current shell.
 
 Detects the active shell and installs the appropriate completion script.

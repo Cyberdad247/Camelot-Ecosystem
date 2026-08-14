@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """
 camelot_portable — CAMELOT-OS Portable Binary Entry Point
 ==========================================================

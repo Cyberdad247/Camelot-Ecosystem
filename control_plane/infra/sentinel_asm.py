@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 # -*- coding: utf-8 -*-
 """
 Sentinel ASM — CAMELOT-OS Attack Surface Management & Continuous Scanner

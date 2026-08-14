@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /**
  * SPECIALIZED SKILLS REGISTRY
  * Advanced logic for Round Table Personas

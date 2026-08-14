@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 import { defineAction } from '@agent-native/core';
 import { z } from 'zod';
 
