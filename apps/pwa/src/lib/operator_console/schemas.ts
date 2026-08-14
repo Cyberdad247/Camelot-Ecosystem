@@ -63,6 +63,16 @@ export const ReceiptSummarySchema = z.object({
 });
 export type ReceiptSummary = z.infer<typeof ReceiptSummarySchema>;
 
+export const EffectManifestSchema = z.object({
+  schemaVersion: z.literal('effect-manifest/1'),
+  manifestId: z.string(), taskId: z.string(), correlationId: z.string(),
+  kind: z.string(), baseRevision: z.string(), candidateRevision: z.string(),
+  diffSha256: z.string(), allowedPaths: z.array(z.string()),
+  requiredEvidence: z.array(z.string()), policyClass: z.string(),
+  expiresAt: z.string(), oneTimeNonce: z.string(),
+});
+export type EffectManifest = z.infer<typeof EffectManifestSchema>;
+
 export const OperatorTaskSnapshotSchema = z.object({
   schemaVersion: z.literal('operator-task-snapshot/1'),
   taskId: z.string(), correlationId: z.string(), generatedAt: z.string(),
