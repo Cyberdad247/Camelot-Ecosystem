@@ -34,11 +34,11 @@ discipline without re-deriving the architecture.
 |---|--------|------|----------------|-------------------|-------------------|
 | 1 | **Camelot** | Authorize effects (above PEER) | (above PEER) | OS-level gate; symbolic, not a code module | Slice #1 falls under Camelot's authority to authorize the gate |
 | 2 | **Anya** | Scope intent; wrap user-visible output | **Plan** + **Express** | `control_plane/core/anya_gate.py::{AnyaGate,AnyaCompiler}`, Symbolect Gateway, TITANIUM_LAW #05 (`ANYA FIRST, ANYA LAST`) | Slice #1 uses AnyaGate.triage() as advisory (advisory only; preflight owns CONFIRMED/REJECTED) |
-| 3 | **HiVeiDe** (Hive IDE) | Map + coordinate repository work / prompt routing / multi-agent switching | (Coordinator; between Plan and Execute) | `docs/architecture/HIVE_BRIDGE_FINAL.md`, `Bifrost`, `Switchboard`, `.hive/agents/`, `.hive/skills/`, `.hive/TITANIUM_LAWS.md` | (slice #1 does not invoke Hive IDE; reserved for slices #2-3) |
-| 4 | **Merlin** | Select bounded runtime adapters per Plan; instantiate domain experts with TAL (per AGNO Fountain) | (Adapter-selector; Plan→Execute bridge) | `MERLIN_OMEGA` deep reasoning, AGNO Fountain phase | (reserved for slices #2-3) |
+| 3 | **HiVeiDe** (Hive IDE) | Map + coordinate repository work / prompt routing / multi-agent switching | (Coordinator; between Plan and Execute) | `docs/architecture/HIVE_BRIDGE_FINAL.md`, `Bifrost`, `Switchboard`, `.hive/agents/`, `.hive/skills/`, `.hive/TITANIUM_LAWS.md` | (slice #1 does not invoke Hive IDE; reserved for slices #3-4) |
+| 4 | **Merlin** | Select bounded runtime adapters per Plan; instantiate domain experts with TAL (per AGNO Fountain) | (Adapter-selector; Plan→Execute bridge) | `MERLIN_OMEGA` deep reasoning, AGNO Fountain phase | (reserved for slices #3-4) |
 | 5 | **Nano-Knights** | Perform discrete tasks in isolated worktrees | **Execute** | AGENTS.md Codex v5.5 (mini-agents, `🧠.memory=store:false` semantics) | Slices #2-3 will spin up Nano-Knights for gate verification |
 | 6 | **Sentinel** | Gate every effect (HITL) | **Review (gate)** | `SIR_SENTINEL` (AgentArmor); v1000 incarnation = `soul_oversight.IronGateV2` (legacy fallback) | Slice #1's HALT authorizer; Iron Gate is legacy fallback when Sentinel-v2 not yet built |
-| 7 | **Gideon** | Audit every effect against 10 Shatterpoints | **Review (audit)** | `SIR_GIDEON` (Forensic Sting); GIDEON_RISK_MATRIX; Boris-Gideon TDD Lock pattern | Slice #1 advisory; full enforcement at slices #2-3 |
+| 7 | **Gideon** | Audit every effect against 10 Shatterpoints | **Review (audit)** | `SIR_GIDEON` (Forensic Sting); GIDEON_RISK_MATRIX; Boris-Gideon TDD Lock pattern | Slice #1 advisory; full enforcement at slices #3-4 |
 
 **Why 7 entities but only 4 PEER roles:** Anya covers both Plan and
 Express per TITANIUM_LAW #05 (Anya wraps all Knight→User communication).
@@ -56,10 +56,11 @@ schema — names itself in three coordinates:
 1. **PEER role(s)** it primarily exercises (Plan / Execute / Express /
    Review).
 2. **Authorizer**: which top-level gate has jurisdiction? (Slice #1
-   pretends this is "Camelot" symbolically; future slices #2-3 likely
+   pretends this is "Camelot" symbolically; future slices #3-4 likely
    model it as SIR_SENTINEL with Iron Gate as fallback.)
 3. **Coordinator**: do Hive IDE / Bifrost get involved? (Slice #1 does
-   not invoke them; slices #2-3 do.)
+   not invoke them; slices #3-4 do. Slice #2 reads slice #1's
+   evidence but invokes Bifrost only through the Approval panel.)
 
 The discipline: a task does not run if any of the three coordinates is
 undefined. Defining them is the AGNO **Deliberation** phase done by
@@ -129,10 +130,11 @@ invoked for sentinel-cardinality warnings. Each slice's spec will say.
 | Slice | PEER roles exercised | Authorizer | Coordinator | Gates from Sentinel | Audit by Gideon |
 |-------|----------------------|------------|-------------|---------------------|-----------------|
 | #1 VFS Preflight | mostly Review (Sentinel emits halt decision; Gideon advective); touches Express for operator summary | Camelot | not invoked | boots up; Iron Gate fallback OK | Scorpion Sting on each REJECTED (advisory in slice #1) |
-| #2 Cartridge Load Gate | Plan (Anya scopes cartridge load) + Review (Sentinel denies malformed load) + Express (Anya summary) | Sentinel | Hive IDE | gates cartridge binding on MISSING_TOOL/MISSING_CARTRIDGE | Scorpion Sting on every new cartridge |
-| #3 Nano-Knight Promotion Gate | Plan (Merlin selects bounded adapter) + Execute (Nano-Knights in worktree) + Review (Gideon forensically) | Sentinel | Hive IDE | denies promotion unless EVP/UKG-crystal evidence class is CONFIRMED | Boris-Gideon TDD Lock + Scorpion Sting on every promotion |
-| #4 Bio-Kinetic Swarm Harness | Plan + Execute + Express (full PEER sweep) | Sentinel | Hive IDE + AGNO LangGraph | every swarm-event REJECT requires Sentinel sign-off | Gideon GIDEON_RISK_MATRIX full + Anya cybernetics guard |
-| #5 Cartridge ↔ Knight Reforge | Plan + Express primarily | Camelot | Hive IDE | (read-only reforge; no Sentinel gate beyond MISSING_CARTRIDGE on rollback) | (read-only; advisory only) |
+| #2 Operator Console | **Express** primarily (Anya wraps panel output); Plan (Anya's intent in the Intent panel); Review (Approval panel to Sentinel + Diffs to Gideon); reads slice #1 Receipts | Sentinel | (Approval + Receipts panels gated to Sentinel's halt) | Sentinel signs each panel's halt-decision submission via the Approval panel (halt is the **only** path that commits effects) | Gideon audits every approval-bearing diff via the Diffs + Tests panels (per Boris-Gideon TDD Lock) |
+| #3 Cartridge Load Gate | Plan (Anya scopes cartridge load) + Review (Sentinel denies malformed load) + Express (Anya summary) | Sentinel | Hive IDE | gates cartridge binding on MISSING_TOOL/MISSING_CARTRIDGE | Scorpion Sting on every new cartridge |
+| #4 Nano-Knight Promotion Gate | Plan (Merlin selects bounded adapter) + Execute (Nano-Knights in worktree) + Review (Gideon forensically) | Sentinel | Hive IDE | denies promotion unless EVP/UKG-crystal evidence class is CONFIRMED | Boris-Gideon TDD Lock + Scorpion Sting on every promotion |
+| #5 Bio-Kinetic Swarm Harness | Plan + Execute + Express (full PEER sweep) | Sentinel | Hive IDE + AGNO LangGraph | every swarm-event REJECT requires Sentinel sign-off | Gideon GIDEON_RISK_MATRIX full + Anya cybernetics guard |
+| #6 Cartridge ↔ Knight Reforge | Plan + Express primarily | Camelot | Hive IDE | (read-only reforge; no Sentinel gate beyond MISSING_CARTRIDGE on rollback) | (read-only; advisory only) |
 
 ---
 
@@ -141,7 +143,7 @@ invoked for sentinel-cardinality warnings. Each slice's spec will say.
 1. **Sentinel-v2 module path:** When Sentinel-v2 is built, where should
    it live? Likely `control_plane/core/sentinel_v2/` (parallel to
    `anya_gate.py`, `soul_oversight.py`); alternative: `control_plane/security/sentinel_v2/`.
-   Slice #1 does not require a decision but slices #2-3 do.
+   Slice #1 does not require a decision but slices #3-4 do.
 
 2. **Gideon forensic-adapter:**
    `SIR_GIDEON` is currently a forensic auditor via `//SCORPION` rune
@@ -161,7 +163,9 @@ invoked for sentinel-cardinality warnings. Each slice's spec will say.
    (`KICKBOX_GENESIS_KNIGHTS_MANIFEST.md`, `OMEGA_SIR_CODEX_BLUEPRINT_v1.0.nkg.md`).
    Is HiVeiDe a surfacing IDE-only (read-only), or does it also gate
    agent profile writes via Bifrost/SDJ? Slice #2 will need a write
-   path; sovereign DNA on this affects how slice #2 plans.
+   path; sovereign DNA on this affects how slice #3 plans (slice #2
+   = Operator Console, design at `docs/architecture/OPERATOR_CONSOLE_DESIGN.md`,
+   does not require agent profile writes).
 
 5. **Slice #1's pre-existing `203c11f0`** commit.
    This PEER_ARCHITECTURE document is a NEW governing document.
