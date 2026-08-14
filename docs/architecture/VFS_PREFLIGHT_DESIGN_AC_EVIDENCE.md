@@ -46,7 +46,7 @@ when reached. See the newest run manifest under
 
 | Finding | Fix | Evidence |
 |---|---|---|
-| Check 020 license scan unbounded (>120 s over vendored `02_FORGE`; SIGKILL exit 143 every run) | Re-scoped to slice-owned code (`control_plane/preflight`, `tests/preflight`), skip-dirs + `MAX_FLAGGED` cap, SPDX headers added to the 35 slice files | 020 now CONFIRMED in ~0.1–0.2 s; total run 1.3 s (AC2 PASS) |
+| Check 020 license scan unbounded (>120 s over vendored `02_FORGE`; SIGKILL exit 143 every run) | Re-scoped to slice-owned code, then widened repo-wide (sovereign request) over the authored roots with gitlink/binary/data skips; SPDX headers rolled out to ~727 authored files via `scripts/ops/add-spdx-headers.py` | 020 now CONFIRMED repo-wide in ~0.5 s warm (AC2 PASS at 1.7 s total); `timeout_s: 120` accommodates cold-cache first scans |
 | Boot-path root mismatch (`first_run: True` while halting strict; graduation wrote to nested unread path) | Single state root: artifacts at `<runtime_state>/preflight/<UTC>/`, flag at `<runtime_state>/preflight/_graduated.flag` for CLI and boot paths | manifests now show `first_run: False` under strict; graduation flag lands on the path strict detection reads (AC6) |
 | `--test` wrote self-test artifacts + `_graduated.flag` into live runtime state | `--test` uses an isolated tmp run_root | no new artifacts at `runtime_state/` root; live flag untouched (AC8 still green) |
 | Strict REJECT only surfaced as a WARN row (boot continued, exit 1 at end) | Stage-0 wrapper raises `SystemExit(1)` on strict REJECT — hard halt before later stages | AC4 (strict REJECT surfaces + halts) |

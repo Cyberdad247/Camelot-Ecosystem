@@ -1,11 +1,12 @@
 sequence: "020"
 id: foss_validation_constraints
-display_name: FOSS License Header Scan (slice-owned code)
+display_name: FOSS License Header Scan (repo-wide)
 command_type: python_module
 command: ["python", "-m", "control_plane.preflight.probes.license_header_run",
-         "--roots", "control_plane/preflight", "tests/preflight"]
-timeout_s: 15
+         "--roots", "01_KERNEL", "control_plane", "bin", "vfs",
+         "apps", "packages", "scripts", "tests", "docs"]
+timeout_s: 120
 retry: 0
 expected_evidence_class: CONFIRMED
 hitl_on_fail: false
-remediation_hint: "Add '# SPDX-License-Identifier: MIT' (or chosen) to flagged slice-owned files. Scoped to control_plane/preflight + tests/preflight (vendored/submodule trees are excluded); repo-wide header enforcement is a future-slice finding (VFS_PREFLIGHT_DESIGN §8)."
+remediation_hint: "Run 'python scripts/ops/add-spdx-headers.py' to prepend '# SPDX-License-Identifier: MIT' (in each file's comment syntax) to every flagged file. Submodule/gitlink, vendored, generated, build, binary, and data/config trees are auto-skipped by the probe."

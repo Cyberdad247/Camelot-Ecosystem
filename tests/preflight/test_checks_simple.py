@@ -108,6 +108,25 @@ def test_license_header_skips_vendored_dirs(tmp_path):
     assert all("node_modules" not in str(p) for p in out)
 
 
+def test_license_header_skips_binary_content_and_env_files(tmp_path):
+    """Binary content (NUL sniff) and .env files are never 'licensed'."""
+    (tmp_path / "bogus.py").write_bytes(b"\x00\x01\x02binary\x00")
+    (tmp_path / ".env").write_text("SECRET=x\n", encoding="utf-8")
+    (tmp_path / "node.env").write_text("NODE_ENV=prod\n", encoding="utf-8")
+    out = license_header.scan([tmp_path])
+    assert out == []
+
+
+def test_license_header_skips_gitlink_boundary(tmp_path):
+    """A directory carrying a .git marker is a separate repo — not descended."""
+    nested = tmp_path / "vendored_project"
+    (nested / "src").mkdir(parents=True)
+    (nested / ".git").mkdir()  # nested repo boundary marker
+    (nested / "src" / "main.py").write_text("print('x')\n")
+    out = license_header.scan([tmp_path])
+    assert out == []
+
+
 def test_license_header_skips_md_and_yaml(tmp_path):
     from pathlib import Path
     md = tmp_path / "README.md"

@@ -196,7 +196,7 @@ is missing or duplicated.
 | seq | check_id | Purpose | hitl_on_fail |
 |-----|----------|---------|---|
 | 010 | `env_dependency_match` | Python 3.x, Rust 1.96, Node 20, Ollama availability | false |
-| 020 | `foss_validation_constraints` | SPDX license header scan over slice-owned code (`control_plane/preflight/`, `tests/preflight/`); vendored/submodule trees excluded | false |
+| 020 | `foss_validation_constraints` | SPDX license header scan over all authored source roots (`01_KERNEL/`, `control_plane/`, `bin/`, `vfs/`, `apps/`, `packages/`, `scripts/`, `tests/`, `docs/`); gitlink/vendored/generated/binary/data trees excluded | false |
 | 030 | `northstar_brief_currency` | `NORTHSTAR_ARCHITECTURE_BRIEF.md` age ≤ 60 days | true |
 | 040 | `port_readiness_scan` | 8080/8011/11434/4433/4434 | true |
 | 050 | `provenance_ledger_writable` | `PROVENANCE_LEDGER.md` writable, hook chain reachable | false |
@@ -448,7 +448,8 @@ Before any preflight code is merged:
 | 8 | Anti-correlation principle | Preflight writes JSON evidence | No direct `PROVENANCE_LEDGER.md` writes from preflight itself; hook chain handles ledger entries |
 | 9 | Evidence-class origin | `AnyaGate.triage()` would be the source | Preflight owns CONFIRMED/REJECTED; `AnyaGate.triage()` is **advisory only**; graceful-degradation sentinel when substrate unavailable; `lane` constrained to `CRITICAL/HIGH/NORMAL/BACKGROUND` |
 | 10 | Slice #1 authorizer | `soul_oversight.IronGateV2(GateKeys.PREFLIGHT).pre_execute(...)` (v1000-EXCALIBUR-A) | Sentinel (PEER Review-gate) canonical; **IronGateV2 demoted to legacy fallback** until Sentinel-v2 ships; same graceful-degradation treatment for Gideon. Companion `docs/architecture/PEER_ARCHITECTURE.md` defines the 7-entity role map. |
-| 11 | Check 020 scan surface | Unbounded `rglob` over `01_KERNEL/`, `02_FORGE/`, `vfs/` (vendored submodule trees; >120 s, SIGKILL at ~9 s) | Sovereign decision 2026-08-14: re-scope to slice-owned code (`control_plane/preflight/`, `tests/preflight/`) with `SKIP_DIRS` + `MAX_FLAGGED` cap; SPDX headers added to the 35 slice files so the check is green. Repo-wide header enforcement is a future-slice finding (see §12). |
+| 11 | Check 020 scan surface | Unbounded `rglob` over `01_KERNEL/`, `02_FORGE/`, `vfs/` (vendored submodule trees; >120 s, SIGKILL at ~9 s) | Sovereign decision 2026-08-14: re-scope to slice-owned code (`control_plane/preflight/`, `tests/preflight/`) with `SKIP_DIRS` + `MAX_FLAGGED` cap; SPDX headers added to the 35 slice files so the check is green. |
+| 12 | Check 020 scan surface (round 2) | Slice-owned only | Sovereign request 2026-08-14: widen repo-wide over the authored roots. The probe gained gitlink-aware pruning (reads `git ls-files -s` mode 160000 — the repo carries 29 *unmapped* gitlinks whose worktrees have no `.git` marker), binary NUL-sniffing, dotfile/env name skips, and data/config/archive extension skips. `scripts/ops/add-spdx-headers.py` reuses the probe's `scan()` so the roll-out tool and the boot gate always agree on the target set; ~727 authored files received headers. |
 
 A paired ADR is at `docs/adr/0006-vfs-preflight-strict-mode.md`.
 
@@ -528,4 +529,4 @@ brainstorm cycles.
 - AC evidence (2026-08-14): `docs/architecture/VFS_PREFLIGHT_DESIGN_AC_EVIDENCE.md` — **9/9 ACs PASS** with the substrate up (CLIProxy 8080, Bifrost sidecar 8011, Ollama 11434, Bifrost WS 4433, Bifrost gRPC 4434); see the evidence doc for the start commands and teardown.
 - Slice #1 is implemented (Tasks 1–9 of `docs/superpowers/plans/2026-08-13-vfs-preflight.md`); the `writing-plans` gate has been satisfied.
 - `NORTHSTAR_ARCHITECTURE_BRIEF.md` is current (23 days old as of 2026-08-14) — no longer a graduation blocker.
-- Future slice: repo-wide SPDX header enforcement beyond `control_plane/preflight/` + `tests/preflight/` (check 020 is scoped to slice-owned code per Decisions Log row 11).
+- Check 020 is repo-wide (Decisions Log row 12): authored roots only; submodule/vendored/generated/binary/data trees auto-skipped; new files must carry an SPDX (or Copyright) header or the strict gate rejects. `python scripts/ops/add-spdx-headers.py` re-rolls headers onto any new files.
