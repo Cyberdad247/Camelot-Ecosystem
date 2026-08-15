@@ -5,11 +5,11 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "npx prisma generate && tsc",
+    "build": "npx --no-install prisma generate && node ../../node_modules/typescript/lib/tsc.js",
     "start": "node dist/server.js",
-    "typecheck": "npx prisma generate && tsc --noEmit",
-    "test": "npx vitest run",
-    "prisma:generate": "npx prisma generate"
+    "typecheck": "npx --no-install prisma generate && node ../../node_modules/typescript/lib/tsc.js --noEmit",
+    "test": "node ../../node_modules/vitest/vitest.mjs run",
+    "prisma:generate": "npx --no-install prisma generate"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
