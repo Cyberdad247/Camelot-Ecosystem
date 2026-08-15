@@ -50,7 +50,7 @@ except Exception:
 
 from .deerflow_sandbox import DeerFlowSandbox
 from .omc_team import OMCTeam
-from .soul_router import SoulRouter
+from control_plane.core.soul_router import SoulRouter
 
 # ---------------------------------------------------------------------------
 # SARDA Phase Definitions

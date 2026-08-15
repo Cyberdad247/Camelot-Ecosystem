@@ -487,7 +487,7 @@ class SovereignHarness:
         while self._running:
             try:
                 try:
-                    from .switchboard import probe_all, summary
+                    from control_plane.dispatch.switchboard import probe_all, summary
                 except ImportError:
                     from control_plane.switchboard import probe_all, summary
                 await probe_all()
@@ -646,7 +646,7 @@ class SovereignHarness:
             if not script.exists():
                 return {"status": "failed", "error": f"missing dawning script: {script}"}
             try:
-                from .runic_router import parse_rune
+                from control_plane.runes.runic_router import parse_rune
             except ImportError:
                 from control_plane.runic_router import parse_rune
             parsed = parse_rune(task.directive)
@@ -678,7 +678,7 @@ class SovereignHarness:
         # Runic command dispatch
         if task.directive.startswith("//") or task.directive.startswith("Omega_"):
             try:
-                from .runic_router import parse_rune
+                from control_plane.runes.runic_router import parse_rune
             except ImportError:
                 from control_plane.runic_router import parse_rune
             parsed = parse_rune(task.directive)
@@ -717,7 +717,7 @@ class SovereignHarness:
         """
         head = task.directive.strip().split(None, 1)[0].upper() if task.directive.strip() else ""
         try:
-            from .runic_router import parse_rune
+            from control_plane.runes.runic_router import parse_rune
         except ImportError:
             from control_plane.runic_router import parse_rune
         parsed = parse_rune(task.directive)
@@ -731,7 +731,7 @@ class SovereignHarness:
             }
 
         try:
-            from .runic_router import _load_hermes_prime_engine
+            from control_plane.runes.runic_router import _load_hermes_prime_engine
         except ImportError:
             from control_plane.runic_router import _load_hermes_prime_engine
         try:

@@ -73,7 +73,7 @@ class PendingApprovals:
         pa.approved = True
         pa.resolved_at = time.time()
         try:
-            from .kinetic_loop import run_sync
+            from control_plane.infra.kinetic_loop import run_sync
             pa.result = run_sync(pa.intent, auto_approve=True)
         except Exception as exc:  # pragma: no cover - resume must not crash the board
             pa.result = f"resume error: {exc}"
@@ -82,7 +82,7 @@ class PendingApprovals:
 
 def _metrics_snapshot() -> dict[str, Any]:
     try:
-        from .inspira_metrics import collect_metrics
+        from control_plane.infra.inspira_metrics import collect_metrics
         m = collect_metrics()
         return {
             "uptime_s": getattr(m, "uptime_seconds", 0),
@@ -119,7 +119,7 @@ def _metrics_fragment(snap: dict[str, Any]) -> str:
 def _board_html() -> str:
     knights = []
     try:
-        from .soul_router import FOUNDRY_COUNCIL
+        from control_plane.core.soul_router import FOUNDRY_COUNCIL
         knights = [e.knight_id for e in FOUNDRY_COUNCIL]
     except Exception:
         knights = []
@@ -210,13 +210,13 @@ def create_app():
     @app.get("/bifrost/aperture", response_class=HTMLResponse)
     def aperture() -> str:
         """LLM access + spend panel from Aperture (graceful if not connected)."""
-        from .aperture_bridge import ApertureBridge, render_panel
+        from control_plane.infra.aperture_bridge import ApertureBridge, render_panel
         return render_panel(ApertureBridge().fetch_usage(), gold=LUXORA_GOLD)
 
     @app.get("/bifrost/omniroute", response_class=HTMLResponse)
     def omniroute() -> str:
         """OmniRoute affinity telemetry from the Multivoice-Router /metrics."""
-        from .multivoice_bridge import MultivoiceBridge, render_panel
+        from control_plane.multivoice_bridge import MultivoiceBridge, render_panel
         return render_panel(MultivoiceBridge().fetch_affinity(), gold=LUXORA_GOLD)
 
     @app.get("/bifrost/metrics/stream")
@@ -241,9 +241,9 @@ def create_app():
         # that halts at APPROVE — we only need the plan doc.
         import asyncio as _a
 
-        from .kinetic_loop import KineticLoop
-        from .mdx_renderers import visual_plan
-        from .mdx_schema import render_mdx
+        from control_plane.infra.kinetic_loop import KineticLoop
+        from control_plane.infra.mdx_renderers import visual_plan
+        from control_plane.infra.mdx_schema import render_mdx
         res = _a.run(KineticLoop().run(intent, auto_approve=False))
         doc = visual_plan(res)
         # register the HITL approval for the ApprovalButton flow

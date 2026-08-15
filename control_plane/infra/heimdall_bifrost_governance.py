@@ -138,7 +138,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
     missing_components = [name for name in REQUIRED_BRIDGE_COMPONENTS if name not in components]
 
     try:
-        from .switchboard import TERMINAL_REGISTRY
+        from control_plane.dispatch.switchboard import TERMINAL_REGISTRY
 
         heimdall_terminal = TERMINAL_REGISTRY.get("sir_heimdall")
     except Exception:

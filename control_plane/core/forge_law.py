@@ -263,7 +263,7 @@ def validate_source(source: str | Path, *, root: Path = CAMELOT_HOME) -> dict[st
 def _matching_verification(hashes: dict[str, str], ledger: Path) -> dict[str, Any]:
     if not ledger.is_file():
         raise ForgeLawError("verification ledger is unavailable")
-    from .ledger_sync import compute_entry_hash
+    from control_plane.infra.ledger_sync import compute_entry_hash
 
     match: dict[str, Any] | None = None
     previous_hash: str | None = None

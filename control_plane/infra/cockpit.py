@@ -19,7 +19,7 @@ try:
 except Exception:  # pragma: no cover - optional dependency fallback
     psutil = None
 
-from .runic_router import route_rune
+from control_plane.runes.runic_router import route_rune
 
 
 def _detect_home() -> Path:

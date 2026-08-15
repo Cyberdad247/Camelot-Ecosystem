@@ -167,7 +167,7 @@ class CrystallineSleepManager:
         self._ff = firnflow
         if self._ff is None:
             try:
-                from .firnflow import FirnFlow
+                from control_plane.infra.firnflow import FirnFlow
                 self._ff = FirnFlow()
             except Exception:
                 self._ff = None

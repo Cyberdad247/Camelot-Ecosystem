@@ -110,9 +110,9 @@ class KineticLoop:
         remains auditable. With auto_approve=False the loop halts at APPROVE when
         the Iron Gate does not approve.
         """
-        from .anya_gate import AnyaGate
-        from .factory_lane import FactoryJob
-        from .soul_oversight import pre_execute
+        from control_plane.core.anya_gate import AnyaGate
+        from control_plane.core.factory_lane import FactoryJob
+        from control_plane.core.soul_oversight import pre_execute
 
         res = KineticResult(intent=intent)
         t0 = time.perf_counter()
