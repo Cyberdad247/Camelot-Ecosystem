@@ -46,22 +46,26 @@ paid credential.
 
 ## Local-first inference policy
 
-### Local OpenAI-compatible tier (openai-oauth / LiteRT-LM)
+### Local OpenAI-compatible tier (freellmapi / openai-oauth / LiteRT-LM)
 
 Phase 1 integration: when the Bifrost/CLIProxy gateway is unreachable, the
 router probes a **local OpenAI-compatible endpoint** before degrading to the
-TinyLM stub. One protocol, two sources:
+TinyLM stub. One protocol, three sources:
 
+- **freellmapi** (recommended, `02_FORGE/KINETIC_ARMORY/freellmapi`) —
+  OpenAI-compatible aggregator over 18 free providers / 161 models with
+  per-key usage caps and failover, on `127.0.0.1:3001/v1`. See
+  `docs/architecture/freellmapi-deployment.md` for the deploy.
 - **openai-oauth** (`02_FORGE/KINETIC_ARMORY/openai-oauth`) — turns a ChatGPT
   account into an OpenAI-compatible dev proxy on `127.0.0.1:10531/v1`.
 - **LiteRT-LM** (`02_FORGE/KINETIC_ARMORY/LiteRT-LM`) — Google's on-device LLM
   orchestration layer (SADD Inference Node); its CLI serves the same
   OpenAI-compatible protocol.
 
-Configure with:
+Configure with (freellmapi example):
 
 ```bash
-OPENAI_COMPAT_BASE=http://127.0.0.1:10531/v1   # default; point at any local endpoint
+OPENAI_COMPAT_BASE=http://127.0.0.1:3001/v1   # freellmapi; any OpenAI-compatible endpoint works
 OPENAI_COMPAT_KEY=local                          # loopback credential, never a paid key
 ```
 
