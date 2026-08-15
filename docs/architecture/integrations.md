@@ -1,6 +1,6 @@
 # Camelot-Ecosystem Constellation — Integration Map
 
-**Status:** Phase 0 complete (vendored + mapped) · Phases 1–3 in progress
+**Status:** Phase 0 + Phase 1 (contracts, OAuth/LiteRT tier, ADR-0002) complete · Phases 2–3 in progress
 **Date:** 2026-08-15
 **Decision record:** [`docs/architecture/adr/0001-vendor-ecosystem-repos-untracked.md`](adr/0001-vendor-ecosystem-repos-untracked.md)
 **Architecture anchor:** `Camelot-OS SADD + LLDD v1.2` (§s cited below) — canonical copy lives in the `Camelot-OS v.100000.15` reference directory; the v1.2 contracts and STRIDE threat model are assimilated into this repo (`packages/contracts/`, `docs/threat-models/stride.md`).
@@ -49,18 +49,24 @@ integration work is reproducible. No submodules (the 2026-08-15 audit unlinked
 - **Phase 0 (done):** clone ×9 + gitignore + pin SHAs + assimilate v1.2 contracts
   (`packages/contracts/`: receipt, capability-lease, cartridge, index) and
   `docs/threat-models/stride.md`.
-- **Phase 1 (architecture-critical):** contract validation harness (JSON Schema
-  Draft 2020-12, §11); openai-oauth → CLIProxy bridge; LiteRT-LM inference
-  adapter stub (Inference Node profile); grpc/abseil consumer decision (ADR-0002).
-- **Phase 2 (agent/runtime):** huginn + openinterpreter as bounded cartridge
-  runtimes under the §8 manifest/lease model; ansible version pin + twin
-  provisioning playbooks.
+- **Phase 1 (done):** contract validation harness
+  (`tests/test_contracts.py`, JSON Schema Draft 2020-12 meta-check + §11.3
+  receipt valid/tamper + §5.5 taxonomy — 20 tests); openai-oauth + LiteRT-LM
+  wired as ONE local OpenAI-compatible tier in the Go router
+  (`providers/gateway.go`: `OpenAICompatBase/NewOpenAICompatProvider/Reachable`,
+  slotting between CLIProxy gateway and the TinyLM stub); grpc/abseil consumer
+  decision recorded (ADR-0002).
+- **Phase 2 (next):** huginn + openinterpreter as bounded cartridge runtimes
+  under the §8 manifest/lease model; ansible version pin + twin provisioning
+  playbooks.
 - **Phase 3 (alignment):** reconcile Multivoice-router vs `04_KINETIC/multivoice`;
   align `apps/pwa` (Kickbox) with the §19 Operator Console panel spec; update the
   SADD-v1.2 fixture → production-gate matrix (§22.2) with the new components.
 
 ## 5. Verification gates
 
-- `packages/contracts/*.json` parse and validate against JSON Schema Draft 2020-12.
-- Phase 1 bridges have unit tests wired into the bifrost/pwa suites.
-- No vendored repo content is tracked (verify via `git status` after Phase 0).
+- `packages/contracts/*.json` parse and validate against JSON Schema Draft 2020-12
+  — enforced by `tests/test_contracts.py` (20 tests).
+- Phase 1 bridges have unit tests: `providers/gateway_test.go` covers the local
+  OpenAI-compatible tier round-trip and unreachable cases.
+- No vendored repo content is tracked (verify via `git status`).
