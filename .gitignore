@@ -255,6 +255,9 @@ test_browser_upload_failure.html
 02_FORGE/KINETIC_ARMORY/huginn
 02_FORGE/KINETIC_ARMORY/openai-oauth
 02_FORGE/KINETIC_ARMORY/openinterpreter
+02_FORGE/KINETIC_ARMORY/Keys-Setup-Autonomous-Self-Improving-Local-Inference-Stack
+02_FORGE/KINETIC_ARMORY/NeuralCompanion
+02_FORGE/KINETIC_ARMORY/freellmapi
 02_FORGE/PORTAL_CORE/Modal/excalibur-resonance/v0-quantum-cinematic-engine
 02_FORGE/apps/lux11
 02_FORGE/dyad-apps/happy-owl-dart

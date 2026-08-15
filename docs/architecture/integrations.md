@@ -27,6 +27,9 @@ integration work is reproducible. No submodules (the 2026-08-15 audit unlinked
 | 8 | **openai-oauth** `ec7dab2f` | Control — CLIProxy OAuth upstream (matches multivoice `CLIPROXY_KEY` flow) | — | Phase 1 |
 | 9 | **abseil-cpp** `8e9069fd` | Build dependency for grpc / LiteRT-LM C++ | — | Phase 1 (dep only) |
 | 10 | **grpc** `6f707fa9` | Control — Bifrost gRPC transport (`:4434`), §12; Northstar kernel candidate | — | Phase 1 |
+| 11 | **NeuralCompanion** `37cb5f43` | Experience — optional persona/avatar surface (§9.2) | — | reference only |
+| 12 | **freellmapi** `f419a89c` | Control — zero-cost gateway aggregation (18 providers, per-key caps) | `OPENAI_COMPAT_BASE` tier | adopt as gateway layer |
+| 13 | **Keys-Setup…** `3fda3e85` | Inference/Research node pattern — MoA + LoRA loop (DGX Spark hardware) | — | pattern-harvest only |
 
 ### 3. Discoveries that shape integration
 
