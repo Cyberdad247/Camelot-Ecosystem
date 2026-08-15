@@ -44,18 +44,30 @@ func env(key, def string) string {
 //	SIR_BORIS  -> claude slot -> claude-sonnet-4-6 (CAMELOT_MODEL_BORIS)
 func buildPolyglot() *orchestration.APEEv6Router {
 	live := providers.GatewayReachable(800 * time.Millisecond)
+	// Local OpenAI-compatible tier (Phase 1 integration): openai-oauth dev
+	// proxy (127.0.0.1:10531/v1) or a LiteRT-LM OpenAI server. Gateway offline
+	// + local endpoint up → route locally instead of degrading to the stub.
+	local := false
 	if live {
 		log.Printf("[CYBERTRONIA] Bifrost/CLIProxy gateway online (%s) — zero-cost routing.", providers.GatewayBase())
 	} else {
 		if env("CAMELOT_REQUIRE_GATEWAY", "0") == "1" {
 			log.Fatalf("[FATAL] gateway unavailable and CAMELOT_REQUIRE_GATEWAY=1")
 		}
-		log.Printf("[CYBERTRONIA] gateway offline — Knights degrade to local TinyLM stubs.")
+		local = providers.OpenAICompatReachable(800 * time.Millisecond)
+		if local {
+			log.Printf("[CYBERTRONIA] gateway offline — local OpenAI-compatible endpoint online (%s).", providers.OpenAICompatBase())
+		} else {
+			log.Printf("[CYBERTRONIA] gateway offline — Knights degrade to local TinyLM stubs.")
+		}
 	}
 
 	bind := func(label, modelEnv, modelDefault, knight string) orchestration.Provider {
 		if live {
 			return providers.NewGatewayProvider(label, env(modelEnv, modelDefault))
+		}
+		if local {
+			return providers.NewOpenAICompatProvider(label+":local", env(modelEnv, modelDefault))
 		}
 		return providers.NewLocalStubProvider(knight)
 	}

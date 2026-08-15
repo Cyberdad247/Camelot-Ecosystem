@@ -46,6 +46,30 @@ paid credential.
 
 ## Local-first inference policy
 
+### Local OpenAI-compatible tier (openai-oauth / LiteRT-LM)
+
+Phase 1 integration: when the Bifrost/CLIProxy gateway is unreachable, the
+router probes a **local OpenAI-compatible endpoint** before degrading to the
+TinyLM stub. One protocol, two sources:
+
+- **openai-oauth** (`02_FORGE/KINETIC_ARMORY/openai-oauth`) — turns a ChatGPT
+  account into an OpenAI-compatible dev proxy on `127.0.0.1:10531/v1`.
+- **LiteRT-LM** (`02_FORGE/KINETIC_ARMORY/LiteRT-LM`) — Google's on-device LLM
+  orchestration layer (SADD Inference Node); its CLI serves the same
+  OpenAI-compatible protocol.
+
+Configure with:
+
+```bash
+OPENAI_COMPAT_BASE=http://127.0.0.1:10531/v1   # default; point at any local endpoint
+OPENAI_COMPAT_KEY=local                          # loopback credential, never a paid key
+```
+
+The tier is enabled automatically when the gateway probe fails and the local
+endpoint answers `/models`. `CAMELOT_REQUIRE_GATEWAY=1` still fails closed when
+the CLIProxy gateway is down — the local tier is a degradation path, not a
+bypass. See `docs/architecture/integrations.md` and ADR-0002.
+
 The CAMELOT Python LLM router now prefers Ollama before Bifrost/CLIProxy or any
 remote provider. To make the policy fail closed and guarantee no remote egress
 from that router, set the process environment variable:

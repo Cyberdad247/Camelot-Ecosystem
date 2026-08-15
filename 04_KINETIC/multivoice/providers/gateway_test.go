@@ -68,6 +68,50 @@ func TestGateway_UnreachableDegrades(t *testing.T) {
 	}
 }
 
+// mockOpenAICompat stands in for the local OpenAI-compatible tier — the same
+// shape as openai-oauth's dev proxy (127.0.0.1:10531/v1) or a LiteRT-LM OpenAI
+// server. It answers /models and /chat/completions with no real credential.
+func mockOpenAICompat(t *testing.T) *httptest.Server {
+	t.Helper()
+	mux := http.NewServeMux()
+	mux.HandleFunc("/v1/models", func(w http.ResponseWriter, _ *http.Request) {
+		_, _ = w.Write([]byte(`{"data":[{"id":"gpt-4o"},{"id":"gemma-4-E4B"}]}`))
+	})
+	mux.HandleFunc("/v1/chat/completions", func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		_, _ = w.Write([]byte(`{"choices":[{"message":{"role":"assistant","content":"LOCAL_OK"}}]}`))
+	})
+	return httptest.NewServer(mux)
+}
+
+func TestOpenAICompat_RoundTrip(t *testing.T) {
+	srv := mockOpenAICompat(t)
+	defer srv.Close()
+	t.Setenv("OPENAI_COMPAT_BASE", srv.URL+"/v1")
+
+	if !OpenAICompatReachable(2 * time.Second) {
+		t.Fatal("expected local OpenAI-compatible endpoint reachable via /models")
+	}
+	p := NewOpenAICompatProvider("Bifrost:codex:local", "gpt-4o")
+	if !strings.HasPrefix(p.BaseURL, srv.URL) {
+		t.Fatalf("provider base = %q, want local endpoint", p.BaseURL)
+	}
+	out, err := p.Invoke(context.Background(), "sir_codex", "run local", "")
+	if err != nil {
+		t.Fatalf("invoke: %v", err)
+	}
+	if out != "LOCAL_OK" {
+		t.Fatalf("content = %q", out)
+	}
+}
+
+func TestOpenAICompat_Unreachable(t *testing.T) {
+	t.Setenv("OPENAI_COMPAT_BASE", "http://127.0.0.1:1/v1") // nothing listens here
+	if OpenAICompatReachable(300 * time.Millisecond) {
+		t.Fatal("expected local endpoint unreachable")
+	}
+}
+
 // The gateway provider and the local stub both satisfy the structural Provider
 // contract that orchestration.NewAPEEv6RouterWith expects.
 var (

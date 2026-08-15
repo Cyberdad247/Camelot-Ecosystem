@@ -79,3 +79,48 @@ func GatewayReachable(timeout time.Duration) bool {
 	_ = resp.Body.Close()
 	return true
 }
+
+// ── Local OpenAI-compatible tier (openai-oauth / LiteRT-LM) ──────────────────
+//
+// Phase 1 integration (docs/architecture/integrations.md): openai-oauth
+// (vendor 02_FORGE/KINETIC_ARMORY/openai-oauth) turns a ChatGPT account into an
+// OpenAI-compatible dev proxy at http://127.0.0.1:10531/v1, and LiteRT-LM
+// (02_FORGE/KINETIC_ARMORY/LiteRT-LM) ships an OpenAI-compatible server for
+// on-device inference. Both speak the Chat Completions protocol, so ONE
+// endpoint tier serves both — the SADD Inference Node adapter needs no custom
+// protocol. This tier slots between the CLIProxy gateway and the offline stub:
+// gateway offline + local endpoint up → route through the local endpoint.
+const openAICompatDefaultBase = "http://127.0.0.1:10531/v1" // openai-oauth dev proxy
+
+// OpenAICompatBase returns the local OpenAI-compatible chat endpoint. Override
+// with OPENAI_COMPAT_BASE (e.g. a LiteRT-LM server on another port).
+func OpenAICompatBase() string {
+	base := strings.TrimRight(env("OPENAI_COMPAT_BASE", openAICompatDefaultBase), "/")
+	return base + "/chat/completions"
+}
+
+// NewOpenAICompatProvider builds a provider bound to the local OpenAI-compatible
+// endpoint. OPENAI_COMPAT_KEY is a loopback credential (default "local"), never
+// a paid API key; some proxies require a non-empty bearer, most ignore it.
+func NewOpenAICompatProvider(label, model string) *OpenAIProvider {
+	return &OpenAIProvider{
+		APIKey:  env("OPENAI_COMPAT_KEY", "local"),
+		Model:   model,
+		BaseURL: OpenAICompatBase(),
+		Client:  &http.Client{Timeout: 60 * time.Second},
+		Label:   label,
+	}
+}
+
+// OpenAICompatReachable probes the local OpenAI-compatible endpoint (same
+// /models liveness convention as the gateway).
+func OpenAICompatReachable(timeout time.Duration) bool {
+	base := strings.TrimRight(env("OPENAI_COMPAT_BASE", openAICompatDefaultBase), "/")
+	c := &http.Client{Timeout: timeout}
+	resp, err := c.Get(base + "/models")
+	if err != nil {
+		return false
+	}
+	_ = resp.Body.Close()
+	return true
+}
