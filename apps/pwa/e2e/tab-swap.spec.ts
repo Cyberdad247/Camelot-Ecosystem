@@ -58,10 +58,10 @@ test('KOA tabs swap without reload and keep Lakeisha video mounted', async ({ pa
   const urlBefore = page.url();
 
   await page.getByRole('button', { name: 'Streaming' }).click();
-  await expect(page.getByText('Edge - NA-East')).toBeVisible();
+  await expect(page.getByText('Edge · NA-East')).toBeVisible();
 
   await page.getByRole('button', { name: 'Coffee' }).click();
-  await expect(page.getByText('Cleveland Roast Reserve')).toBeVisible();
+  await expect(page.getByText('Ethiopia · Yirgacheffe')).toBeVisible();
 
   const noReload = await page.evaluate(
     () => (window as unknown as { __koaNoReload?: boolean }).__koaNoReload === true,
