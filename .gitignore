@@ -242,6 +242,19 @@ test_browser_upload_failure.html
 02_FORGE/KINETIC_ARMORY/livekit
 02_FORGE/KINETIC_ARMORY/mcp_web_search
 02_FORGE/KINETIC_ARMORY/tiny-tts
+
+# Camelot-Ecosystem constellation — Cyberdad247 org repos vendored 2026-08-15
+# (Phase 0 integration; see docs/architecture/integrations.md). Camelot-Ecosystem
+# itself is this repo (origin); not re-cloned.
+02_FORGE/KINETIC_ARMORY/Kickbox-audio
+02_FORGE/KINETIC_ARMORY/LiteRT-LM
+02_FORGE/KINETIC_ARMORY/Multivoice-router
+02_FORGE/KINETIC_ARMORY/abseil-cpp
+02_FORGE/KINETIC_ARMORY/ansible
+02_FORGE/KINETIC_ARMORY/grpc
+02_FORGE/KINETIC_ARMORY/huginn
+02_FORGE/KINETIC_ARMORY/openai-oauth
+02_FORGE/KINETIC_ARMORY/openinterpreter
 02_FORGE/PORTAL_CORE/Modal/excalibur-resonance/v0-quantum-cinematic-engine
 02_FORGE/apps/lux11
 02_FORGE/dyad-apps/happy-owl-dart

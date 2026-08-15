@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/cartridge.schema.json",
+  "title": "Camelot Cartridge Manifest",
+  "description": "v1.2 signed, versioned, registered, admitted bounded behavior. Cartridges are portable bounded behavior, not authorities; risk_tier_invariant_cap (§8.2) hard-caps what the cartridge may be leased for, and signer_trust_band (§8.3) gates the cartridge's authority footprint. See Camelot-OS SADD+LLDD v1.2 §8.2 + §8.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "cartridge_id",
+    "version",
+    "signer",
+    "signer_trust_band",
+    "artifact_hash",
+    "hash_algorithm",
+    "signature_algorithm",
+    "signature",
+    "entrypoints",
+    "supported_node_profiles",
+    "requested_capabilities",
+    "denied_capabilities",
+    "resource_profile",
+    "verification",
+    "risk_tier_invariant_cap",
+    "rollback"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-cartridge/1"
+    },
+    "cartridge_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "signer": {
+      "description": "Cartridge-registry signer principal id, e.g. 'camelot-commercial'. The signer public key is checked at admission.",
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]+$"
+    },
+    "signer_trust_band": {
+      "description": "Per §8.3: 'customer-controlled' cartridges cannot exceed their declared risk_tier_invariant_cap.",
+      "type": "string",
+      "enum": [
+        "camelot-commercial",
+        "camelot-community",
+        "customer-controlled"
+      ]
+    },
+    "artifact_hash": {
+      "description": "SHA-256 of the cartridge binary or compiled artifact.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "hash_algorithm": {
+      "type": "string",
+      "const": "sha256"
+    },
+    "signature_algorithm": {
+      "type": "string",
+      "const": "ed25519"
+    },
+    "signature": {
+      "description": "ed25519 signature over the canonical JSON serialization of the manifest (excluding this 'signature' field itself).",
+      "type": "string",
+      "pattern": "^ed25519:[A-Za-z0-9_-]+$"
+    },
+    "entrypoints": {
+      "description": "Call surface exposed by the cartridge runtime.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": ["map", "plan", "audit", "forge", "test", "summarize", "fetch", "execute"]
+      }
+    },
+    "supported_node_profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "hub",
+          "engineering",
+          "experience",
+          "marketing",
+          "commerce",
+          "wellness",
+          "research",
+          "inference",
+          "mobile"
+        ]
+      }
+    },
+    "requested_capabilities": {
+      "description": "Capabilities the cartridge needs under its declared entrypoints. Sentinel intersects this list with policy_allowlist per §13.3.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "vfs.read",
+          "vfs.worktree_write",
+          "vfs.source_admission",
+          "process.allowlisted",
+          "network.scoped",
+          "secret.handle_request",
+          "memory.read_l1",
+          "memory.read_l2",
+          "memory.write_l4_quarantine"
+        ]
+      }
+    },
+    "denied_capabilities": {
+      "description": "Hard-deny by construction. Capability derivation §13.3 subtracts this set before issuance.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "lease.issue",
+          "policy.admin",
+          "secret.export",
+          "unrestricted.network",
+          "direct_main_branch_write",
+          "auto_merge",
+          "auto_deploy",
+          "promotion.issue",
+          "epoch.increment"
+        ]
+      }
+    },
+    "resource_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["memory_mb", "timeout_s", "max_workers"],
+      "properties": {
+        "memory_mb": {
+          "type": "integer",
+          "minimum": 64
+        },
+        "timeout_s": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_workers": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_cpu_quota": {
+          "type": "string"
+        },
+        "max_disk_quota_mb": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "verification": {
+      "description": "Verifications that must pass before this cartridge's outputs are promoted. v1.2 adds Boris contract tests and Scribe summary.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "contract_test",
+          "VFS_attestation",
+          "Gideon_verdict",
+          "Boris_contract_tests",
+          "Scribe_summary",
+          "receipt_issued"
+        ]
+      }
+    },
+    "risk_tier_invariant_cap": {
+      "description": "Per §8.2: cartridges cannot be leased for effects above this tier. Sentinel rejects at §13.3 step 6 if effect_manifest.declared_risk_tier > risk_tier_invariant_cap. customer-controlled cartridges are also capped externally by §8.3.",
+      "type": "string",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "rollback": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strategy"],
+      "properties": {
+        "strategy": {
+          "type": "string",
+          "enum": [
+            "destroy_ephemeral_worktree",
+            "compensating_action",
+            "manual_compensation_required"
+          ]
+        },
+        "compensation_ref": {
+          "type": "string"
+        }
+      }
+    },
+    "compat": {
+      "description": "Binding compatibility metadata. Optional; defaults are conservative.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_node_runtime_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "supported_knight_classes": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

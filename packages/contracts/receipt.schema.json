@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/receipt.schema.json",
+  "title": "Camelot Receipt",
+  "description": "v1.2 receipt. Every consequential state transition emits a receipt; receipts are hash-linked into a per-tenant chain whose head is written to the ledger anchor every N entries (default N=1000). See Camelot-OS SADD+LLDD v1.2 §11.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "receipt_id",
+    "parent_hash",
+    "chain_height",
+    "tenant_id",
+    "correlation_id",
+    "task_id",
+    "authority_epoch",
+    "effect_class",
+    "declared_risk_tier",
+    "timestamp",
+    "actor",
+    "event",
+    "proof"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-receipt/1"
+    },
+    "receipt_id": {
+      "type": "string",
+      "pattern": "^rcp_[A-Za-z0-9_-]+$"
+    },
+    "parent_hash": {
+      "description": "SHA-256 of the immediately preceding receipt in the tenant chain. The genesis receipt MUST use the literal value 'sha256:' followed by 64 zero hex characters.",
+      "type": "string",
+      "pattern": "^sha256:0{64}$|^sha256:[0-9a-fA-F]{64}$"
+    },
+    "self_hash": {
+      "description": "Recommended. SHA-256 over the canonical serialization of this receipt with self_hash and signature fields stripped. Servers may recompute and reject on mismatch.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "chain_height": {
+      "description": "Monotonic, per-tenant. The genesis receipt has chain_height=0.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "authority_epoch": {
+      "description": "Monotonic epoch under which this receipt was issued; receivers REJECT receipts whose epoch is below trusted epoch (§6.3).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "effect_class": {
+      "$ref": "#/$defs/effect_class"
+    },
+    "declared_risk_tier": {
+      "$ref": "#/$defs/risk_tier"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "actor": {
+      "type": "object",
+      "description": "Who produced the receipt. node_trust_band is the band under which this receipt was emitted and is required for downstream verification of dual-write safety.",
+      "additionalProperties": false,
+      "required": ["id", "role", "node_id", "trust_band"],
+      "properties": {
+        "id": { "type": "string" },
+        "role": { "type": "string" },
+        "node_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "trust_band": {
+          "$ref": "#/$defs/trust_band"
+        }
+      }
+    },
+    "event": {
+      "description": "Stable verb describing what this receipt attests to (e.g. 'lease.issued', 'patch.applied', 'cache.write', 'cache.evict', 'gideon.pass').",
+      "type": "string",
+      "minLength": 1
+    },
+    "refs": {
+      "type": "object",
+      "description": "Cross-references to other receipts and identifiers relevant to this event.",
+      "additionalProperties": true,
+      "properties": {
+        "manifest_hash": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-fA-F]{64}$"
+        },
+        "lease_id": {
+          "type": "string",
+          "pattern": "^lease_[A-Za-z0-9_-]+$"
+        },
+        "parent_receipt_id": {
+          "type": "string",
+          "pattern": "^rcp_[A-Za-z0-9_-]+$"
+        },
+        "scribe_summary": {
+          "type": "string",
+          "pattern": "^scribe-summary@sha256:[0-9a-fA-F]{64}$"
+        }
+      }
+    },
+    "payload_redacted": {
+      "type": "object",
+      "description": "Role-scoped projection of the underlying event payload. Receivers see only what their role permits. Schema is open within reason; downstream policy decides which fields are surfaced.",
+      "additionalProperties": true
+    },
+    "proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hash_algorithm", "signature_algorithm", "signer", "signature"],
+      "properties": {
+        "hash_algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "signature_algorithm": {
+          "type": "string",
+          "const": "ed25519"
+        },
+        "signer": {
+          "description": "Principal id of the signer (e.g. 'sentinel', 'sir-forge', 'boris').",
+          "type": "string"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^ed25519:[A-Za-z0-9_-]+$"
+        }
+      }
+    },
+    "ledger_anchor_eligible": {
+      "description": "True when this receipt's chain_height mod default_anchor_interval == 0 (default 1000), making it eligible for the next ledger anchor write.",
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "effect_class": {
+      "type": "string",
+      "description": "Closed set per §5.5 of Camelot-OS SADD+LLDD v1.2.",
+      "enum": [
+        "ro.fetch",
+        "ro.audit",
+        "internal.synth",
+        "workspace.test",
+        "workspace.patch",
+        "promote.worktree.merge",
+        "promote.deploy",
+        "external.publish.draft",
+        "external.publish.publish",
+        "external.email.send",
+        "payment.invoice.draft",
+        "payment.invoice.issue",
+        "payment.capture",
+        "payment.refund",
+        "device.calendar.write",
+        "device.sms.send",
+        "device.call.initiate",
+        "promote.failover"
+      ]
+    },
+    "risk_tier": {
+      "type": "string",
+      "description": "Risk tier per §5.5 of Camelot-OS SADD+LLDD v1.2. Required quorum rises with tier; T3+ requires two distinct operator approvals; T4 additionally requires witness promotion lock or external-confirmation token.",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "trust_band": {
+      "type": "string",
+      "description": "Node trust band per §7.3 of Camelot-OS SADD+LLDD v1.2.",
+      "enum": [
+        "attested",
+        "attested-witness",
+        "enrolled",
+        "probationary",
+        "quarantined",
+        "revoked"
+      ]
+    }
+  }
+}

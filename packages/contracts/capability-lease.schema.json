@@ -1,0 +1,327 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/capability-lease.schema.json",
+  "title": "Camelot Capability Lease",
+  "description": "v1.2 manifest-bound short-lived signed permission. Capabilities are derived per §13.3 (camelot-derive-capabilities/1) and the derivation inputs are recorded under derived_capabilities_provenance so the lease can be re-derived deterministically in audit. See Camelot-OS SADD+LLDD v1.2 §11.2 + §13.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "lease_id",
+    "authority_epoch",
+    "manifest_hash",
+    "task_id",
+    "correlation_id",
+    "tenant_id",
+    "effect_class",
+    "declared_risk_tier",
+    "subject",
+    "permissions",
+    "limits",
+    "properties",
+    "derived_capabilities_provenance"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-lease/1"
+    },
+    "lease_id": {
+      "type": "string",
+      "pattern": "^lease_[A-Za-z0-9_-]+$"
+    },
+    "authority_epoch": {
+      "description": "Monotonic epoch under which this lease was issued. Receivers reject leases whose epoch is below the trusted epoch (§6.3).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "effect_class": {
+      "description": "Effect class declared on the bound effect_manifest (§11.1).",
+      "type": "string",
+      "enum": [
+        "ro.fetch",
+        "ro.audit",
+        "internal.synth",
+        "workspace.test",
+        "workspace.patch",
+        "promote.worktree.merge",
+        "promote.deploy",
+        "external.publish.draft",
+        "external.publish.publish",
+        "external.email.send",
+        "payment.invoice.draft",
+        "payment.invoice.issue",
+        "payment.capture",
+        "payment.refund",
+        "device.calendar.write",
+        "device.sms.send",
+        "device.call.initiate",
+        "promote.failover"
+      ]
+    },
+    "declared_risk_tier": {
+      "type": "string",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "subject": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "workload_id", "cartridge_id", "node_trust_band"],
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "workload_id": {
+          "type": "string"
+        },
+        "cartridge_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]+$"
+        },
+        "node_trust_band": {
+          "description": "Trust band of the node executing this lease. Leases whose band is below the requirement for the declared risk tier are invalid.",
+          "type": "string",
+          "enum": [
+            "attested",
+            "attested-witness",
+            "enrolled",
+            "probationary",
+            "quarantined",
+            "revoked"
+          ]
+        }
+      }
+    },
+    "permissions": {
+      "type": "object",
+      "description": "Permissions derived per §13.3. Each sub-permission object lists paths/identifiers explicitly so audit can verify they are subsets of the effect_manifest.immutable_inputs.",
+      "additionalProperties": false,
+      "required": ["vfs", "process", "network", "secrets"],
+      "properties": {
+        "vfs": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["read", "write"],
+          "properties": {
+            "read": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\x00-\\x1F]+$"
+              }
+            },
+            "write": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "^[^\\x00-\\x1F]+$"
+              }
+            }
+          }
+        },
+        "process": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["allowlist"],
+          "properties": {
+            "allowlist": {
+              "type": "array",
+              "minItems": 0,
+              "items": { "type": "string" }
+            }
+          }
+        },
+        "network": {
+          "description": "'scoped' is allowed only with an explicit retrieval/network lease upgrade; v1.2 default is 'disabled'.",
+          "type": "string",
+          "enum": ["disabled", "scoped"]
+        },
+        "secrets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["handle"],
+            "properties": {
+              "handle": { "type": "string" },
+              "scope": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expires_at", "max_actions", "max_memory_mb", "timeout_s"],
+      "properties": {
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_actions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "minimum": 64
+        },
+        "timeout_s": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_cpu_quota": {
+          "type": "string"
+        },
+        "max_disk_quota_mb": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["transferable", "renewable", "revocable"],
+      "properties": {
+        "transferable": {
+          "type": "boolean",
+          "const": false
+        },
+        "renewable": {
+          "type": "boolean",
+          "const": false
+        },
+        "revocable": {
+          "type": "boolean",
+          "const": true
+        }
+      }
+    },
+    "derived_capabilities_provenance": {
+      "description": "Pointer to the derivation record (algorithm + version + checksums of inputs + the epoch at derivation) that produced this lease. Required so audit can re-derive `permissions` deterministically from the bound effect_manifest, policy_decision, cartridge_manifest, and persona class.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "algorithm_version",
+        "input_checksums",
+        "derived_at_authority_epoch"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "const": "camelot-derive-capabilities/1"
+        },
+        "algorithm_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "spec_section": {
+          "description": "Human-readable pointer, e.g. '§13.3'.",
+          "type": "string"
+        },
+        "input_checksums": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "effect_manifest_hash",
+            "policy_decision_hash",
+            "cartridge_manifest_hash",
+            "persona_class_hash"
+          ],
+          "properties": {
+            "effect_manifest_hash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-fA-F]{64}$"
+            },
+            "policy_decision_hash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-fA-F]{64}$"
+            },
+            "cartridge_manifest_hash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-fA-F]{64}$"
+            },
+            "persona_class_hash": {
+              "type": "string",
+              "pattern": "^sha256:[0-9a-fA-F]{64}$"
+            }
+          }
+        },
+        "derived_at_authority_epoch": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "vfs_preflight_receipt_id": {
+          "type": "string",
+          "pattern": "^rcp_[A-Za-z0-9_-]+$"
+        }
+      }
+    },
+    "approvals": {
+      "description": "Operator approvals gated by quorum from §5.5. T3+ requires ≥ 2 distinct approvers. Approver identity must match a real, attested operator principal.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["approver_id", "approver_trust_band", "approved_at", "manifest_hash_at_approval"],
+        "properties": {
+          "approver_id": { "type": "string" },
+          "approver_trust_band": {
+            "type": "string",
+            "enum": ["operator", "operator-mfa", "witness", "external-confirmation"]
+          },
+          "approved_at": { "type": "string", "format": "date-time" },
+          "manifest_hash_at_approval": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-fA-F]{64}$"
+          }
+        }
+      }
+    },
+    "revocation": {
+      "description": "Revocation hints. Revocable leases may be revoked by Sentinel at any time; this field records any explicit revocation metadata at issuance (e.g. planned TTL, default revoke triggers from §13.2).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "revoke_on": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "completion",
+              "timeout",
+              "cancellation",
+              "epoch_change",
+              "policy_change",
+              "trust_band_downgrade",
+              "incident"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

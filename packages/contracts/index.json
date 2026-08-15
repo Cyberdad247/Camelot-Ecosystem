@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "name": "camelot-contracts",
+  "version": "1.2.0",
+  "description": "Camelot-OS v1.2 contract schemas (JSON Schema Draft 2020-12). Backward compatibility is guaranteed within the camelot-contracts/1 family. Bumping a schema's schema_version is a breaking change; non-breaking additions land in the same family.",
+  "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
+  "schemas": [
+    {
+      "file": "receipt.schema.json",
+      "$id": "https://camelot-os/schemas/receipt.schema.json",
+      "schema_version": "camelot-receipt/1",
+      "purpose": "Per-tenant hash-linked receipt chain (§11.3).",
+      "key_fields_v12": ["parent_hash", "chain_height", "actor.trust_band", "proof"]
+    },
+    {
+      "file": "capability-lease.schema.json",
+      "$id": "https://camelot-os/schemas/capability-lease.schema.json",
+      "schema_version": "camelot-lease/1",
+      "purpose": "Manifest-bound lease issued by Sentinel (§11.2, §13.3).",
+      "key_fields_v12": [
+        "effect_class",
+        "declared_risk_tier",
+        "subject.node_trust_band",
+        "derived_capabilities_provenance",
+        "approvals"
+      ]
+    },
+    {
+      "file": "cartridge.schema.json",
+      "$id": "https://camelot-os/schemas/cartridge.schema.json",
+      "schema_version": "camelot-cartridge/1",
+      "purpose": "Signed, versioned, registered bounded behavior declaration (§8.2, §8.3).",
+      "key_fields_v12": [
+        "signer_trust_band",
+        "risk_tier_invariant_cap",
+        "verification"
+      ]
+    }
+  ]
+}
