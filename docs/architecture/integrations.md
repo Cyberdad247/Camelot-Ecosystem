@@ -1,6 +1,6 @@
 # Camelot-Ecosystem Constellation — Integration Map
 
-**Status:** Phase 0 + Phase 1 (contracts, OAuth/LiteRT tier, ADR-0002) complete · Phases 2–3 in progress
+**Status:** Phases 0–2 (contracts, OAuth/LiteRT tier, cartridges, assimilation) complete · Phase 2 ansible + Phase 3 pending
 **Date:** 2026-08-15
 **Decision record:** [`docs/architecture/adr/0001-vendor-ecosystem-repos-untracked.md`](adr/0001-vendor-ecosystem-repos-untracked.md)
 **Architecture anchor:** `Camelot-OS SADD + LLDD v1.2` (§s cited below) — canonical copy lives in the `Camelot-OS v.100000.15` reference directory; the v1.2 contracts and STRIDE threat model are assimilated into this repo (`packages/contracts/`, `docs/threat-models/stride.md`).
@@ -56,9 +56,13 @@ integration work is reproducible. No submodules (the 2026-08-15 audit unlinked
   (`providers/gateway.go`: `OpenAICompatBase/NewOpenAICompatProvider/Reachable`,
   slotting between CLIProxy gateway and the TinyLM stub); grpc/abseil consumer
   decision recorded (ADR-0002).
-- **Phase 2 (next):** huginn + openinterpreter as bounded cartridge runtimes
-  under the §8 manifest/lease model; ansible version pin + twin provisioning
-  playbooks.
+- **Phase 2 (mostly done):** huginn + openinterpreter + litert-lm +
+  openai-oauth registered as signed §8.2/§8.3 cartridge manifests in
+  `cartridges/` (validated + signature-verified by
+  `tests/test_cartridge_manifests.py`, 25 tests; signing tool
+  `scripts/sign_cartridge.py`); Nano-Knights assimilation reports written for
+  all four vendored runtimes. Remaining: ansible version pin + twin
+  provisioning playbooks.
 - **Phase 3 (alignment):** reconcile Multivoice-router vs `04_KINETIC/multivoice`;
   align `apps/pwa` (Kickbox) with the §19 Operator Console panel spec; update the
   SADD-v1.2 fixture → production-gate matrix (§22.2) with the new components.
@@ -69,4 +73,6 @@ integration work is reproducible. No submodules (the 2026-08-15 audit unlinked
   — enforced by `tests/test_contracts.py` (20 tests).
 - Phase 1 bridges have unit tests: `providers/gateway_test.go` covers the local
   OpenAI-compatible tier round-trip and unreachable cases.
+- Cartridge manifests are schema-valid AND signature-verified
+  (`tests/test_cartridge_manifests.py`); tampering is rejected.
 - No vendored repo content is tracked (verify via `git status`).
