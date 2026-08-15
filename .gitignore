@@ -159,6 +159,22 @@ docs/reference/EXTERNAL/
 # Git Worktrees
 .worktrees/
 
+# Superpowers SDD session state (briefs/reports/review diffs — tool state)
+.superpowers/
+
+# _tmp/ scratch — one-off scripts are tracked; runtime data and checkouts are not
+_tmp/omniroute/
+_tmp/omniroute-data/
+_tmp/omniroute-data-debug/
+_tmp/open-claude-cowork-upstream/
+
+# Regenerable scratchpad downloads, backups, and generated maps (final pass)
+03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/
+03_VAULT/Missions/*.recovery-backup
+/entiremap.md
+03_VAULT/runtime_state/squire_index_scan.json
+03_VAULT/runtime_state/squire_index_scan.json.gz
+
 # Historical harness queue dumps — keep only the compressed archive (.gz)
 99_HISTORY/harness_queue_archive/*.jsonl
 
