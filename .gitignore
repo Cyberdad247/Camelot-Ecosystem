@@ -131,6 +131,9 @@ installation_id
 *.tsbuildinfo
 benchmark-report.json
 
+# Prisma generated clients (regenerate via `prisma generate`; never commit)
+**/src/generated/
+
 # 6b. Oversized local/vendor binaries not suitable for GitHub
 02_FORGE/kinetic/bin/
 docs/EXTERNAL/piper/models/
@@ -156,11 +159,18 @@ docs/reference/EXTERNAL/
 # Git Worktrees
 .worktrees/
 
+# Historical harness queue dumps — keep only the compressed archive (.gz)
+99_HISTORY/harness_queue_archive/*.jsonl
+
 # Go build binaries (tsnet node_c etc.) — source is tracked, binaries are not
 *.exe
 01_KERNEL/mesh/node_c/node_c
 
+# Qdrant vector store (runtime data — rebuilt at boot, never commit)
+data/qdrant/
+
 # --- KOR audit hardening: stop tracking regenerable runtime/memory state ---
+03_VAULT/runtime_state/*.json-ld
 03_VAULT/runtime_state/*_latest.json
 03_VAULT/runtime_state/**/*_latest.json
 03_VAULT/runtime_state/system_triage/
@@ -199,3 +209,35 @@ verify_photo_viewer_*.html
 verify_photo_viewer_*.png
 spv_diag*.py
 test_browser_upload_failure.html
+
+# Orphaned submodule gitlinks (no .gitmodules was ever maintained) —
+# vendored reference copies, kept on disk but untracked. See audit 2026-08-15.
+.camelot/vault/staging/agency-agents
+.camelot/vault/staging/openclaude
+.camelot/vault/staging/starship
+01_KERNEL/system/omniroute_sandbox/mcp_repo/browser
+01_KERNEL/system/omniroute_sandbox/mcp_repo/servers
+02_FORGE/KINETIC_ARMORY/SpacetimeDB
+02_FORGE/KINETIC_ARMORY/VibeVoice
+02_FORGE/KINETIC_ARMORY/claw-code-agent
+02_FORGE/KINETIC_ARMORY/goose
+02_FORGE/KINETIC_ARMORY/hermes-agent
+02_FORGE/KINETIC_ARMORY/lightpanda-browser
+02_FORGE/KINETIC_ARMORY/livekit
+02_FORGE/KINETIC_ARMORY/mcp_web_search
+02_FORGE/KINETIC_ARMORY/tiny-tts
+02_FORGE/PORTAL_CORE/Modal/excalibur-resonance/v0-quantum-cinematic-engine
+02_FORGE/apps/lux11
+02_FORGE/dyad-apps/happy-owl-dart
+02_FORGE/dyad-apps/invoice-generator
+02_FORGE/kinetic/rustdesk-server
+02_FORGE/scrcpy
+02_FORGE/tools/pi-mono
+03_VAULT/KINETIC_REFERENCES/CrIBo
+03_VAULT/KINETIC_REFERENCES/rotel
+03_VAULT/Reference_Architectures/openclaw
+03_VAULT/Reference_Architectures/skills/goal-video-resources
+03_VAULT/Reference_Architectures/skills/mattpocock-skills
+03_VAULT/Reference_Architectures/skills/nemanjadotcom-skills
+04_KINETIC/tiny-tts
+camelot-fable-25
