@@ -8,7 +8,7 @@
     "build": "npx --no-install prisma generate && node ../../node_modules/typescript/lib/tsc.js",
     "start": "node dist/server.js",
     "typecheck": "npx --no-install prisma generate && node ../../node_modules/typescript/lib/tsc.js --noEmit",
-    "test": "node ../../node_modules/vitest/vitest.mjs run",
+    "test": "npx --no-install prisma generate && node ../../node_modules/vitest/vitest.mjs run",
     "prisma:generate": "npx --no-install prisma generate"
   },
   "dependencies": {
