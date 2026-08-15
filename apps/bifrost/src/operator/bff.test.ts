@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Server } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import express from 'express';
-import { createOperatorBff } from './bff';
+import { createOperatorBff, redactSensitive } from './bff';
 import { InMemoryEventStore } from './receipts';
 import { verifyManifest, issueLease } from './sentinel';
 import type { EffectManifest } from './contracts';
@@ -60,6 +60,21 @@ describe('operator BFF', () => {
     });
     const text = await res.text();
     expect(text).not.toContain('super-secret');
+  });
+
+  it('redactSensitive masks secret/token/password/apiKey/authorization keys at any depth', () => {
+    const out = redactSensitive({
+      apiKey: 'k',
+      visible: 1,
+      nested: { token: 't', ok: true },
+      list: [{ password: 'p' }, { authorization: 'bearer x' }],
+    });
+    expect(out).toEqual({
+      apiKey: '[REDACTED]',
+      visible: 1,
+      nested: { token: '[REDACTED]', ok: true },
+      list: [{ password: '[REDACTED]' }, { authorization: '[REDACTED]' }],
+    });
   });
 
   it('accepts a manifest-scoped approve decision and returns a lease', async () => {

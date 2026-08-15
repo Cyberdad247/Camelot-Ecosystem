@@ -5,6 +5,7 @@ import { z } from 'zod';
 import type { EventStore } from './receipts';
 import type { EffectManifest, OperatorTaskSnapshot } from './contracts';
 import type { VerifyContext, VerifyResult } from './sentinel';
+import { FIXTURES, snapshotFor, type FixtureName } from './fixtures';
 
 // Keys are stored lowercase so the case-insensitive match (`k.toLowerCase()`)
 // actually hits camelCase keys like `apiKey` (design §8.3 redact_sensitive_fields).
@@ -51,33 +52,13 @@ function auth(res: Response): void {
   res.status(401).json({ error: 'UNAUTHORIZED' });
 }
 
-/** Minimal inline fixture so the BFF is testable end-to-end before Task 11
- * swaps in the full harness fixture generators. */
+/** Deterministic fixture snapshots driven by OPERATOR_FIXTURE_TASK
+ * (defaults to the approval fixture). Fall back to the default fixture for
+ * unknown task names rather than fabricating new state (design §18). */
 function fixtureSnapshot(taskId: string): OperatorTaskSnapshot {
-  const secretsProbe = { name: 'auth_probe', apiKey: 'super-secret-value' };
-  return {
-    schemaVersion: 'operator-task-snapshot/1',
-    taskId,
-    correlationId: `cor_${taskId}`,
-    generatedAt: new Date().toISOString(),
-    integrity: 'verified',
-    intent: { raw: 'Verify scoped patch promote', secrets: secretsProbe },
-    approval: { state: 'APPROVAL_REQUIRED' },
-    taskGraph: [
-      { nodeId: 'n1', name: 'ant-mapper', status: 'done' },
-      { nodeId: 'n2', name: 'owl-auditor', status: 'running' },
-    ],
-    diffs: [
-      {
-        baseRevision: 'base', candidateRevision: 'cand', diffSha256: 'sha256:abc',
-        changedPaths: ['apps/pwa/src/app/console/page.tsx'],
-        addedLines: 12, removedLines: 3, generatedAt: new Date().toISOString(),
-        gideonVerdict: 'pass',
-      },
-    ],
-    tests: [],
-    receipts: [],
-  };
+  const fixture = (process.env.OPERATOR_FIXTURE_TASK ?? 'operator-console-approval') as FixtureName;
+  if (!FIXTURES.includes(fixture)) return snapshotFor(taskId, 'operator-console-approval');
+  return snapshotFor(taskId, fixture);
 }
 
 export function createOperatorBff(deps: OperatorBffDeps): Router {
