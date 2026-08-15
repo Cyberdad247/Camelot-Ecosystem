@@ -9,6 +9,16 @@
 - **License:** MIT
 - **Role in SADD:** Control-plane transport / zero-cost gateway aggregation (§12 Bifrost; §13.1 rate/spend limits)
 
+## 🔒 Secrets audit (2026-08-15, GHOST squire)
+- **No real key values shipped.** `.env`/`.env.local` gitignored; only
+  `.env.example` tracked, and it holds placeholders (`ENCRYPTION_KEY=your-64-char-hex-key-here` —
+  the code fail-fasts on this literal).
+- GHOST's 3 CRITICAL `generic_token` flags are all benign: two README example
+  tokens (`freellmapi-your-unified-key`) and one crypto round-trip test fixture
+  (`sk-legacy-secret` in `crypto-keyfile.test.ts`).
+- Real-format sweep (`sk-`, `AIza`, `ghp_`, `AKIA`, `xox`, private keys,
+  `api_key=` assignments): **zero matches**.
+
 ## 📝 Integration notes (inspected)
 - OpenAI-compatible `/v1` aggregator across 18 free providers / 161 models with
   per-key usage caps and rate-limit failover — a superset of the role the
