@@ -172,6 +172,14 @@ docs/reference/EXTERNAL/
 03_VAULT/memory/l2_index/
 .qdrant-initialized
 *.exe~
+03_VAULT/runtime_state/manifest.json-ld
+03_VAULT/runtime_state/sir_codex_directory_purge/
+
+# Qdrant vector DB on-disk state (live data, not source — config.yaml stays tracked)
+data/qdrant/storage/
+
+# Prisma generated client (regenerate via `prisma generate`)
+**/generated/client/
 
 # Ephemeral boot logs (regenerated each boot)
 boot_results.json

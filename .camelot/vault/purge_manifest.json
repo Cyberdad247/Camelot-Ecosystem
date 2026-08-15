@@ -1,0 +1,1556 @@
+{
+  "generated_by": "squires.colony SCAN + full-content-hash SWEEP (v2, patched duplicate detection)",
+  "root": "C:\\Users\\vizio\\CAMELOT_OS\\.claude\\worktrees\\purge-manifest",
+  "files_scanned": 3762,
+  "scan_seconds": 513.76,
+  "summary": {
+    "total": 220,
+    "duplicate_content": 176,
+    "unused_import": 15,
+    "unreferenced_file": 29
+  },
+  "caveat": "duplicate_content now requires byte-identical full file content (SHA256 match), fixing the v1 false-positive rate from 128-byte header matching. unused_import and unreferenced_file are still regex/name-presence heuristics, not real AST/import-graph analysis, and can still misfire (e.g. dynamic imports, __all__ re-exports, string-based reflection). Human review required before deleting anything \u2014 do not incinerate on this list alone.",
+  "total_flagged": 220,
+  "paths": [
+    "01_KERNEL/agora/Squires/Memory_Squire/__init__.py",
+    "01_KERNEL/agora/Squires/Memory_Squire/routers/__init__.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/__init__.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/auth.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/chat_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/client.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/command_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/context_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/embedding_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/episode_profiles_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/insights_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/models.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/models_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/notebook_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/notes_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/podcast_api_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/podcast_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/__init__.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/auth.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/chat.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/commands.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/config.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/context.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/embedding.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/embedding_rebuild.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/episode_profiles.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/insights.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/models.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/notebooks.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/notes.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/podcasts.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/search.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/settings.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/sources.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/speaker_profiles.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/routers/transformations.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/search_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/settings_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/sources_service.py",
+    "01_KERNEL/agora/Squires/Notebook_Brain/transformations_service.py",
+    "01_KERNEL/agora/Squires/open_notebook/domain/__init__.py",
+    "01_KERNEL/forge/assimilation/__init__.py",
+    "01_KERNEL/forge/assimilation/core/__init__.py",
+    "01_KERNEL/forge/forge_v2.py",
+    "01_KERNEL/forge/scripts/culture_bias.py",
+    "01_KERNEL/iron_gate/watchtower.py",
+    "01_KERNEL/memory/mempalace_l2.py",
+    "01_KERNEL/merlin/Engines/crawl4ai/crawlers/__init__.py",
+    "01_KERNEL/merlin/Engines/crawl4ai/crawlers/amazon_product/__init__.py",
+    "01_KERNEL/merlin/Engines/crawl4ai/crawlers/google_search/__init__.py",
+    "01_KERNEL/merlin/Engines/crawl4ai/legacy/__init__.py",
+    "01_KERNEL/titan/phials/huggingface_phial.py",
+    "02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_180343/MorganaAvatar.tsx",
+    "02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_183443/MorganaAvatar.tsx",
+    "02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_183443/morgana_core.py",
+    "02_FORGE/PORTAL_CORE/Modal/morgana/components/3d/MorganaAvatar.tsx",
+    "02_FORGE/PORTAL_CORE/Modal/morgana/conductor_v94_remote.py",
+    "02_FORGE/PORTAL_CORE/web/components/scene/RoundTable.tsx",
+    "02_FORGE/PORTAL_CORE/web/components/scene/ThroneRoom.tsx",
+    "02_FORGE/PORTAL_CORE/web/components/ui/GlassOverlay.tsx",
+    "02_FORGE/PORTAL_CORE/web/components/ui/KnightSprites.tsx",
+    "02_FORGE/PORTAL_CORE/web/hooks/use-socket.ts",
+    "03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/ai_studio_code (1).py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_competitor_intelligence_agent_team/competitor_agent_team.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_game_design_agent_team/game_design_agent_team.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_legal_agent_team/legal_agent_team.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_legal_agent_team/local_ai_legal_agent_team/local_legal_agent.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_real_estate_agent_team/local_ai_real_estate_agent_team.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_teaching_agent_team/teaching_agent_team.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/backend/broswer.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/backend/tools/kayak_flight.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/backend/travel_planning_team.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/multimodal_coding_agent_team/ai_coding_agent_o3.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/multimodal_design_agent_team/design_agent_team.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/bootstrap_demo.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/celery_worker.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/db/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/models/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/models/schemas.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/pack_demo.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/processors/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/routers/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/services/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/agent_agno_test.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/embedding_search_test.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/index_faiss_test.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/tool_browseruse_test.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tools/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tools/social/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tools/social/session_setup.py",
+    "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/utils/__init__.py",
+    "03_VAULT/LLM-Apps-Ref/MCP-Agents/react_native_agent/native.py",
+    "03_VAULT/Nano-Knights/_locales/en/messages.json",
+    "03_VAULT/Nano-Knights/_locales/zh_TW/messages.json",
+    "03_VAULT/PROVENANCE_LEDGER.md",
+    "03_VAULT/UKG/SCHEMAS/ukg_persona_schema.json",
+    "03_VAULT/khoj-docker-compose.yml",
+    "03_VAULT/runtime_state/backups/hiveide_cut_20260625T173845Z/node_mcp_cutlist.json",
+    "03_VAULT/temp_mcp/mcp_server.py",
+    "03_VAULT/training/configs/PROVENANCE_LEDGER.md",
+    "Next development/CLAUDE.md",
+    "Next development/excalibur_adjudicate.sh",
+    "Next development/excalibur_audit.sh",
+    "Next development/excalibur_topology.md",
+    "Next development/tasks.md",
+    "_tmp/create_hermes_prime_notebook.py",
+    "_tmp/integrate_hermes_rpg.py",
+    "_tmp/nlm_login_driver.py",
+    "_tmp/seed_hermes_prime.py",
+    "apps/bifrost/src/generated/client/wasm.js",
+    "cmd/pulse/detached_unix.go",
+    "cmd/pulse/detached_windows.go",
+    "cmd/pulse/heartbeat.go",
+    "cmd/pulse/ops/BARE-METAL-DEPLOY.md",
+    "cmd/pulse/ops/camelotd.sh",
+    "control_plane/dispatch/bifrost_triage_swarm.py",
+    "control_plane/infra/graphify.py",
+    "control_plane/infra/huggingface_config.py",
+    "control_plane/infra/knight_registry.py",
+    "control_plane/infra/memcastle.py",
+    "control_plane/infra/memcastle_sync.py",
+    "control_plane/preflight/probes/env_dep_run.py",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/2e423919-1082-4bbe-a2f6-2064efdecc42/payload_storage/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/2e423919-1082-4bbe-a2f6-2064efdecc42/segment.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/2e423919-1082-4bbe-a2f6-2064efdecc42/vector_storage/vectors/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/4c7b5b99-0c2b-4374-a01c-bb073a719e55/payload_storage/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/4c7b5b99-0c2b-4374-a01c-bb073a719e55/segment.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/4c7b5b99-0c2b-4374-a01c-bb073a719e55/vector_storage/vectors/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/8c6bbcbd-c141-48f9-97fe-0329cbe7d320/payload_storage/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/8c6bbcbd-c141-48f9-97fe-0329cbe7d320/segment.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/8c6bbcbd-c141-48f9-97fe-0329cbe7d320/vector_storage/vectors/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/a7cbdbad-b83f-4d65-b7c4-189d894b3b66/payload_storage/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/a7cbdbad-b83f-4d65-b7c4-189d894b3b66/segment.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/a7cbdbad-b83f-4d65-b7c4-189d894b3b66/vector_storage/vectors/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/fce9e3a0-ab52-49de-97ce-0f60915cd579/payload_storage/config.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/fce9e3a0-ab52-49de-97ce-0f60915cd579/segment.json",
+    "data/qdrant/storage/collections/hive_dispatches/0/segments/fce9e3a0-ab52-49de-97ce-0f60915cd579/vector_storage/vectors/config.json",
+    "docs/CAMELOT_BIBLE.md",
+    "docs/PROVENANCE_LEDGER.md",
+    "docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md",
+    "docs/architecture/ARCH/FORGE_ARCHITECTURE.md",
+    "docs/architecture/ARCH/VAULT_ARCHITECTURE.md",
+    "docs/protocols/LAWS/CONSTITUTION.md",
+    "docs/protocols/PERSONA/ukg_persona_schema.json",
+    "docs/protocols/agno_orchestrator.md",
+    "docs/protocols/assimilation_v2.md",
+    "docs/protocols/assimilation_v3.md",
+    "docs/protocols/assimilation_v4_omega.md",
+    "docs/protocols/assimilation_v5_evolution.md",
+    "docs/protocols/cellular_protocol.md",
+    "docs/protocols/hive_forge_v1.md",
+    "docs/protocols/iron_gate_protocol.md",
+    "docs/protocols/lukas_architect.md",
+    "docs/protocols/merlin_identity_forge.md",
+    "docs/protocols/paladin_htn_protocol.md",
+    "docs/protocols/persona_evolution_protocol.md",
+    "docs/protocols/squire_protocol.md",
+    "docs/protocols/ukg_integration_v206.md",
+    "docs/protocols/xp_economy_protocol.md",
+    "docs/reference/INTEGRATIONS/README_HAYSTACK_UKG.md",
+    "docs/reference/MANIFESTS/AUDIT_REPORT_20260131.md",
+    "docs/reference/MANIFESTS/AUDIT_REPORT_20260131_2215.md",
+    "docs/reference/MANIFESTS/CAMELOT_TRIAD_INTEGRATION.md",
+    "docs/reference/MANIFESTS/PHASE_8_KINETIC_ASCENSION.md",
+    "docs/reference/MANIFESTS/PHASE_9_ETHEREAL_RESONANCE.md",
+    "docs/reference/MANIFESTS/ledger_tool.blueprint.md",
+    "kickbox-audio/apps/bifrost/DEPLOY_ZEROCOST.md",
+    "kickbox-audio/apps/bifrost/package-lock.json",
+    "kickbox-audio/apps/bifrost/tsconfig.json",
+    "kickbox-audio/drone_bundle/01_KERNEL/iron_gate/DEFENSE_GRID/knights/heimdall.py",
+    "kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py",
+    "kickbox-audio/drone_bundle/02_FORGE/cartridge/cartridge_rbac.py",
+    "kickbox-audio/drone_bundle/Kickbox-audio/HELIO_PATCH.json",
+    "kickbox-audio/drone_bundle/Kickbox-audio/turbo.json",
+    "kickbox-audio/drone_bundle/control_plane/drone_node.py",
+    "kickbox-audio/drone_bundle/control_plane/heimdall_watch.py",
+    "kickbox-audio/drone_bundle/control_plane/hermes_bridge.py",
+    "kickbox-audio/wasm/ledger-engine/Cargo.toml",
+    "packages/db/migrations/migration_lock.toml",
+    "packages/db/src/generated/client/runtime/edge-esm.js",
+    "packages/db/src/generated/client/runtime/edge.js",
+    "packages/db/src/generated/client/runtime/index-browser.d.ts",
+    "packages/db/src/generated/client/runtime/index-browser.js",
+    "packages/db/src/generated/client/runtime/library.d.ts",
+    "packages/db/src/generated/client/runtime/library.js",
+    "packages/db/src/generated/client/runtime/react-native.js",
+    "packages/db/src/generated/client/runtime/wasm.js",
+    "packages/db/src/generated/client/wasm.js",
+    "packages/policy-engine/package.json",
+    "packages/policy-engine/schemas/approval-states.yaml",
+    "scripts/kickbox_stability_test_suite.py",
+    "scripts/warmup_tiny_llms.py",
+    "src/router/schema.ts",
+    "tasks/northstar-phase-2/PLAN.md",
+    "tests/preflight/test_awaken.py",
+    "tests/preflight/test_catalog_authored_matches_schema.py",
+    "tests/preflight/test_cli.py",
+    "tests/preflight/test_state.py",
+    "tests/test_harness_hermes_prime.py",
+    "tower-r3f/package-lock.json",
+    "tower-r3f/package.json",
+    "tower-r3f/src/App.tsx",
+    "tower-r3f/src/TowerController.tsx",
+    "tower-r3f/src/TowerScene.tsx",
+    "tower-r3f/src/camera-layout.ts",
+    "tower-r3f/src/main.tsx",
+    "tower-r3f/src/tower-data.ts",
+    "tower-r3f/tests/camera-layout.test.ts",
+    "tower-r3f/tsconfig.json",
+    "tower-r3f/vite.config.ts",
+    "vfs/assimilate_v1000_sources.py",
+    "vfs/forge_v1000_system_instruction.py",
+    "vfs/install_and_verify_v1000.py",
+    "vfs/knight_rpg_system.py",
+    "wasm/ledger-engine/Cargo.toml",
+    "wasm/ledger-engine/src/lib.rs"
+  ],
+  "flags": [
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Memory_Squire/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Memory_Squire/routers/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/auth.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/auth.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/chat_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/chat_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/client.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/client.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/command_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/command_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/context_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/context_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/embedding_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/embedding_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/episode_profiles_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/episode_profiles_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/insights_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/insights_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/models.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/models.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/models_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/models_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/notebook_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/notebook_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/notes_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/notes_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/podcast_api_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/podcast_api_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/podcast_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/podcast_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/search_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/search_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/settings_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/settings_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/sources_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/sources_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/transformations_service.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/transformations_service.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/auth.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/auth.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/chat.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/chat.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/commands.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/commands.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/config.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/config.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/context.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/context.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/embedding.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/embedding.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/embedding_rebuild.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/embedding_rebuild.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/episode_profiles.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/episode_profiles.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/insights.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/insights.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/models.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/models.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/notebooks.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/notebooks.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/notes.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/notes.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/podcasts.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/podcasts.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/search.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/search.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/settings.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/settings.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/sources.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/sources.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/speaker_profiles.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/speaker_profiles.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/transformations.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/Squires/Memory_Squire/routers/transformations.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/Notebook_Brain/routers/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/agora/Squires/open_notebook/domain/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/forge/forge_v2.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/EXCALIBUR/system/forge_v2.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/forge/assimilation/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/forge/assimilation/core/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/forge/scripts/culture_bias.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/EXCALIBUR/system/culture_bias.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/iron_gate/watchtower.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/EXCALIBUR/system/watchtower.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/merlin/Engines/crawl4ai/crawlers/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/merlin/Engines/crawl4ai/crawlers/amazon_product/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/merlin/Engines/crawl4ai/crawlers/google_search/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "01_KERNEL/merlin/Engines/crawl4ai/legacy/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/Modal/morgana/conductor_v94_remote.py",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/Modal/morgana/conductor_v94_fastapi.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_180343/MorganaAvatar.tsx",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_172005/components_3d_MorganaAvatar.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_183443/MorganaAvatar.tsx",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_172005/components_3d_MorganaAvatar.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_183443/morgana_core.py",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_180343/morgana_core.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/Modal/morgana/components/3d/MorganaAvatar.tsx",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/Modal/morgana/backups/deployment_20260114_172005/components_3d_MorganaAvatar.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/web/components/scene/RoundTable.tsx",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/components/scene/RoundTable.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/web/components/scene/ThroneRoom.tsx",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/components/scene/ThroneRoom.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/web/components/ui/GlassOverlay.tsx",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/components/ui/GlassOverlay.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/web/components/ui/KnightSprites.tsx",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/PORTAL_CORE/components/ui/KnightSprites.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "02_FORGE/PORTAL_CORE/web/hooks/use-socket.ts",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/hooks/use-socket.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/khoj-docker-compose.yml",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/forge/deployment/khoj-docker-compose.yml"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/PROVENANCE_LEDGER.md",
+      "line": 0,
+      "detail": "identical content to PROVENANCE_LEDGER.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/db/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/models/schemas.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/models/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/processors/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/routers/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/services/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tools/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tools/social/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/utils/__init__.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/LLM-Apps-Ref/MCP-Agents/react_native_agent/native.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/Nano-Knights/_locales/en/messages.json",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/forge/nano_forge/extension/_locales/en/messages.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/Nano-Knights/_locales/zh_TW/messages.json",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/forge/nano_forge/extension/_locales/zh_TW/messages.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/runtime_state/backups/hiveide_cut_20260625T173845Z/node_mcp_cutlist.json",
+      "line": 0,
+      "detail": "identical content to 03_VAULT/runtime_state/node_mcp_cutlist.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/temp_mcp/mcp_server.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/__init__.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/training/configs/PROVENANCE_LEDGER.md",
+      "line": 0,
+      "detail": "identical content to PROVENANCE_LEDGER.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "03_VAULT/UKG/SCHEMAS/ukg_persona_schema.json",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/ukg_persona_schema.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "apps/bifrost/src/generated/client/wasm.js",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/index-browser.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "cmd/pulse/detached_unix.go",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/kinetic/vizio-router/cmd/pulse/detached_unix.go"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "cmd/pulse/detached_windows.go",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/kinetic/vizio-router/cmd/pulse/detached_windows.go"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "cmd/pulse/heartbeat.go",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/kinetic/vizio-router/cmd/pulse/heartbeat.go"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "cmd/pulse/ops/BARE-METAL-DEPLOY.md",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/kinetic/vizio-router/cmd/pulse/ops/BARE-METAL-DEPLOY.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "cmd/pulse/ops/camelotd.sh",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/kinetic/vizio-router/cmd/pulse/ops/camelotd.sh"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "control_plane/dispatch/bifrost_triage_swarm.py",
+      "line": 0,
+      "detail": "identical content to control_plane/bifrost_triage_swarm.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "control_plane/infra/graphify.py",
+      "line": 0,
+      "detail": "identical content to control_plane/graphify.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "control_plane/infra/memcastle.py",
+      "line": 0,
+      "detail": "identical content to control_plane/memcastle.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "control_plane/infra/memcastle_sync.py",
+      "line": 0,
+      "detail": "identical content to control_plane/memcastle_sync.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/2e423919-1082-4bbe-a2f6-2064efdecc42/segment.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/segment.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/2e423919-1082-4bbe-a2f6-2064efdecc42/payload_storage/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/payload_storage/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/2e423919-1082-4bbe-a2f6-2064efdecc42/vector_storage/vectors/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/vector_storage/vectors/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/4c7b5b99-0c2b-4374-a01c-bb073a719e55/segment.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/segment.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/4c7b5b99-0c2b-4374-a01c-bb073a719e55/payload_storage/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/payload_storage/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/4c7b5b99-0c2b-4374-a01c-bb073a719e55/vector_storage/vectors/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/vector_storage/vectors/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/8c6bbcbd-c141-48f9-97fe-0329cbe7d320/segment.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/segment.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/8c6bbcbd-c141-48f9-97fe-0329cbe7d320/payload_storage/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/payload_storage/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/8c6bbcbd-c141-48f9-97fe-0329cbe7d320/vector_storage/vectors/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/vector_storage/vectors/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/a7cbdbad-b83f-4d65-b7c4-189d894b3b66/segment.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/segment.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/a7cbdbad-b83f-4d65-b7c4-189d894b3b66/payload_storage/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/payload_storage/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/a7cbdbad-b83f-4d65-b7c4-189d894b3b66/vector_storage/vectors/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/vector_storage/vectors/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/fce9e3a0-ab52-49de-97ce-0f60915cd579/segment.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/segment.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/fce9e3a0-ab52-49de-97ce-0f60915cd579/payload_storage/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/payload_storage/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "data/qdrant/storage/collections/hive_dispatches/0/segments/fce9e3a0-ab52-49de-97ce-0f60915cd579/vector_storage/vectors/config.json",
+      "line": 0,
+      "detail": "identical content to data/qdrant/storage/collections/hive_dispatches/0/segments/217fb880-83e0-4add-b754-7af3a151be26/vector_storage/vectors/config.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/CAMELOT_BIBLE.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/docs/CAMELOT_BIBLE.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/PROVENANCE_LEDGER.md",
+      "line": 0,
+      "detail": "identical content to PROVENANCE_LEDGER.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/architecture/ARCH/FORGE_ARCHITECTURE.md",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/ARCHITECTURE.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/architecture/ARCH/VAULT_ARCHITECTURE.md",
+      "line": 0,
+      "detail": "identical content to 03_VAULT/ARCHITECTURE.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/agno_orchestrator.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/agno_orchestrator.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/assimilation_v2.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/assimilation_v2.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/assimilation_v3.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/assimilation_v3.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/assimilation_v4_omega.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/assimilation_v4_omega.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/assimilation_v5_evolution.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/assimilation_v5_evolution.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/cellular_protocol.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/cellular_protocol.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/hive_forge_v1.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/hive_forge_v1.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/iron_gate_protocol.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/iron_gate_protocol.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/lukas_architect.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/lukas_architect.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/merlin_identity_forge.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/merlin_identity_forge.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/paladin_htn_protocol.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/paladin_htn_protocol.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/persona_evolution_protocol.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/persona_evolution_protocol.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/squire_protocol.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/squire_protocol.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/ukg_integration_v206.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/ukg_integration_v206.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/xp_economy_protocol.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/protocols/xp_economy_protocol.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/LAWS/CONSTITUTION.md",
+      "line": 0,
+      "detail": "identical content to 03_VAULT/LEGAL/CONSTITUTION.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/protocols/PERSONA/ukg_persona_schema.json",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/agora/persona/ukg_persona_schema.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/reference/INTEGRATIONS/README_HAYSTACK_UKG.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/senses/integrations/README_HAYSTACK_UKG.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/reference/MANIFESTS/AUDIT_REPORT_20260131.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/docs/AUDIT_REPORT_20260131.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/reference/MANIFESTS/AUDIT_REPORT_20260131_2215.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/docs/AUDIT_REPORT_20260131_2215.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/reference/MANIFESTS/CAMELOT_TRIAD_INTEGRATION.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/docs/CAMELOT_TRIAD_INTEGRATION.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/reference/MANIFESTS/ledger_tool.blueprint.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/docs/ledger_tool.blueprint.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/reference/MANIFESTS/PHASE_8_KINETIC_ASCENSION.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/docs/PHASE_8_KINETIC_ASCENSION.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/reference/MANIFESTS/PHASE_9_ETHEREAL_RESONANCE.md",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/docs/PHASE_9_ETHEREAL_RESONANCE.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md",
+      "line": 0,
+      "detail": "identical content to docs/architecture/entiremap.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/apps/bifrost/DEPLOY_ZEROCOST.md",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/DEPLOY_ZEROCOST.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/apps/bifrost/package-lock.json",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/package-lock.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/apps/bifrost/tsconfig.json",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/tsconfig.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/drone_bundle/01_KERNEL/iron_gate/DEFENSE_GRID/knights/heimdall.py",
+      "line": 0,
+      "detail": "identical content to 01_KERNEL/iron_gate/DEFENSE_GRID/knights/heimdall.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/drone_bundle/02_FORGE/cartridge/cartridge_rbac.py",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/cartridge/cartridge_rbac.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/drone_bundle/control_plane/heimdall_watch.py",
+      "line": 0,
+      "detail": "identical content to control_plane/infra/heimdall_watch.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/drone_bundle/control_plane/hermes_bridge.py",
+      "line": 0,
+      "detail": "identical content to control_plane/infra/hermes_bridge.py"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/drone_bundle/Kickbox-audio/HELIO_PATCH.json",
+      "line": 0,
+      "detail": "identical content to HELIO_PATCH.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/drone_bundle/Kickbox-audio/turbo.json",
+      "line": 0,
+      "detail": "identical content to turbo.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "kickbox-audio/wasm/ledger-engine/Cargo.toml",
+      "line": 0,
+      "detail": "identical content to kickbox-audio/packages/wasm-pills/ledger-engine/Cargo.toml"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "Next development/CLAUDE.md",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/excalibur-dev/CLAUDE.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "Next development/excalibur_adjudicate.sh",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/excalibur-dev/core/excalibur_adjudicate.sh"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "Next development/excalibur_audit.sh",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/excalibur-dev/core/excalibur_audit.sh"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "Next development/excalibur_topology.md",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/excalibur-dev/core/excalibur_topology.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "Next development/tasks.md",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/excalibur-dev/tasks.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/migrations/migration_lock.toml",
+      "line": 0,
+      "detail": "identical content to 03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/client/prisma/migrations/migration_lock.toml"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/wasm.js",
+      "line": 0,
+      "detail": "identical content to packages/db/src/generated/client/index-browser.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/edge-esm.js",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/edge-esm.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/edge.js",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/edge.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/index-browser.d.ts",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/index-browser.d.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/index-browser.js",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/index-browser.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/library.d.ts",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/library.d.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/library.js",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/library.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/react-native.js",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/react-native.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/db/src/generated/client/runtime/wasm.js",
+      "line": 0,
+      "detail": "identical content to apps/bifrost/src/generated/client/runtime/wasm.js"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/policy-engine/package.json",
+      "line": 0,
+      "detail": "identical content to kickbox-audio/packages/policy-engine/package.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "packages/policy-engine/schemas/approval-states.yaml",
+      "line": 0,
+      "detail": "identical content to kickbox-audio/packages/policy-engine/schemas/approval-states.yaml"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "src/router/schema.ts",
+      "line": 0,
+      "detail": "identical content to 02_FORGE/kinetic/vizio-router/src/router/schema.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tasks/northstar-phase-2/PLAN.md",
+      "line": 0,
+      "detail": "identical content to docs/plans/PLAN.md"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/package-lock.json",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/package-lock.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/package.json",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/package.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/tsconfig.json",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/tsconfig.json"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/vite.config.ts",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/vite.config.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/src/App.tsx",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/src/App.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/src/camera-layout.ts",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/src/camera-layout.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/src/main.tsx",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/src/main.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/src/tower-data.ts",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/src/tower-data.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/src/TowerController.tsx",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/src/TowerController.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/src/TowerScene.tsx",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/src/TowerScene.tsx"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "tower-r3f/tests/camera-layout.test.ts",
+      "line": 0,
+      "detail": "identical content to handover/payload/tower-r3f/tests/camera-layout.test.ts"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "wasm/ledger-engine/Cargo.toml",
+      "line": 0,
+      "detail": "identical content to kickbox-audio/packages/wasm-pills/ledger-engine/Cargo.toml"
+    },
+    {
+      "kind": "duplicate_content",
+      "path": "wasm/ledger-engine/src/lib.rs",
+      "line": 0,
+      "detail": "identical content to kickbox-audio/wasm/ledger-engine/src/lib.rs"
+    },
+    {
+      "kind": "unused_import",
+      "path": "01_KERNEL/memory/mempalace_l2.py",
+      "line": 6,
+      "detail": "'sys' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "01_KERNEL/titan/phials/huggingface_phial.py",
+      "line": 17,
+      "detail": "'os' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "control_plane/infra/knight_registry.py",
+      "line": 119,
+      "detail": "'sys' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "control_plane/preflight/probes/env_dep_run.py",
+      "line": 11,
+      "detail": "'os' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "kickbox-audio/drone_bundle/02_FORGE/cartridge/bifrost_bridge.py",
+      "line": 165,
+      "detail": "'tempfile' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "kickbox-audio/drone_bundle/control_plane/drone_node.py",
+      "line": 38,
+      "detail": "'sys' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "scripts/kickbox_stability_test_suite.py",
+      "line": 19,
+      "detail": "'importlib' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "scripts/warmup_tiny_llms.py",
+      "line": 18,
+      "detail": "'socket' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "tests/preflight/test_awaken.py",
+      "line": 14,
+      "detail": "'shutil' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "tests/preflight/test_catalog_authored_matches_schema.py",
+      "line": 12,
+      "detail": "'pytest' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "tests/preflight/test_cli.py",
+      "line": 8,
+      "detail": "'pytest' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "tests/preflight/test_state.py",
+      "line": 4,
+      "detail": "'os' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "vfs/forge_v1000_system_instruction.py",
+      "line": 12,
+      "detail": "'asyncio' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "vfs/forge_v1000_system_instruction.py",
+      "line": 13,
+      "detail": "'json' imported but not referenced"
+    },
+    {
+      "kind": "unused_import",
+      "path": "vfs/knight_rpg_system.py",
+      "line": 14,
+      "detail": "'math' imported but not referenced"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/backend/travel_planning_team.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "vfs/install_and_verify_v1000.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/multimodal_coding_agent_team/ai_coding_agent_o3.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tools/social/session_setup.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/backend/tools/kayak_flight.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/bootstrap_demo.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "vfs/assimilate_v1000_sources.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "_tmp/integrate_hermes_rpg.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/embedding_search_test.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/tool_browseruse_test.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "vfs/forge_v1000_system_instruction.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/99_SCRATCHPAD/SCAVENGE_DOWNLOADS/ai_studio_code (1).py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "tests/test_harness_hermes_prime.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_game_design_agent_team/game_design_agent_team.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "control_plane/infra/huggingface_config.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "_tmp/seed_hermes_prime.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/multimodal_design_agent_team/design_agent_team.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_teaching_agent_team/teaching_agent_team.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "_tmp/create_hermes_prime_notebook.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_legal_agent_team/local_ai_legal_agent_team/local_legal_agent.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/celery_worker.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_legal_agent_team/legal_agent_team.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/pack_demo.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/agent_agno_test.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_competitor_intelligence_agent_team/competitor_agent_team.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_real_estate_agent_team/local_ai_real_estate_agent_team.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/ai_news_and_podcast_agents/beifong/tests/index_faiss_test.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "03_VAULT/LLM-Apps-Ref/Advanced-Agents/agent_teams/ai_travel_planner_agent_team/backend/broswer.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    },
+    {
+      "kind": "unreferenced_file",
+      "path": "_tmp/nlm_login_driver.py",
+      "line": 0,
+      "detail": "module name not imported anywhere"
+    }
+  ]
+}
