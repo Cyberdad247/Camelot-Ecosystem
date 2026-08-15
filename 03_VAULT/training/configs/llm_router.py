@@ -1,11 +1,13 @@
 """Camelot LLM Router -- Unified multi-provider LLM gateway.
 
-Routes requests through a fallback chain of LLM providers:
-  Tier 1: Cloud providers (Gemini, OpenAI, Claude, Grok, Mistral)
-  Tier 2: OpenRouter (aggregated cloud fallback)
-  Tier 3: Ollama (local inference)
+Routes requests through a local-first fallback chain of LLM providers:
+  Tier 1: Ollama (local inference)
+  Tier 2: CLIProxy/Bifrost (local gateway; upstream policy is configurable)
+  Tier 3: Explicitly configured cloud providers
 
-Supports streaming, model selection, and automatic failover.
+Set CAMELOT_LOCAL_ONLY=1 to fail closed after Ollama rather than permitting any
+remote provider or gateway fallback. Supports streaming, model selection, and
+automatic failover.
 """
 
 import logging
@@ -16,7 +18,7 @@ from typing import Optional
 
 import httpx
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
 
 logger = logging.getLogger("camelot.llm_router")
 
@@ -107,13 +109,20 @@ PROVIDERS = {
         name="ollama",
         base_url=OLLAMA_BASE,
         api_key_env="",  # No key needed
-        default_model="qwen3:0.6b",
+        default_model="qwen2.5-coder:3b",
         models=[],  # Populated dynamically from Ollama API
     ),
 }
 
-# Default fallback chain order
-FALLBACK_CHAIN = ["cliproxy", "gemini", "openai", "claude", "grok", "mistral", "openrouter", "ollama"]
+# Default fallback chain order: keep inference local before considering a gateway
+# or any explicitly configured remote provider. Set CAMELOT_LOCAL_ONLY=1 to
+# restrict dispatch to Ollama and prevent remote egress.
+FALLBACK_CHAIN = ["ollama", "cliproxy", "gemini", "openai", "claude", "grok", "mistral", "openrouter"]
+
+
+def _local_only_enabled() -> bool:
+    """Return whether remote inference is disabled for this process."""
+    return os.environ.get("CAMELOT_LOCAL_ONLY", "0").strip() == "1"
 
 
 # ── Unified Chat Interface ────────────────────────────────────────────
@@ -139,8 +148,8 @@ def _get_ollama_best_model(provider: ProviderConfig) -> str:
         models = [m["name"] for m in resp.json().get("models", [])]
         if models:
             provider.models = models
-            # Prefer larger models first
-            for preferred in ["qwen3:8b", "llama3.2:3b", "mistral:7b", "qwen2.5:7b"]:
+            # Prefer models known to be present in the local workstation catalog.
+            for preferred in ["qwen2.5-coder:3b", "qwen3.5:4b", "qwen3:4b", "gemma3:4b"]:
                 if preferred in models:
                     return preferred
             return models[0]
@@ -430,14 +439,33 @@ def chat(messages: list, provider: Optional[str] = None,
     Returns:
         dict with keys: provider, model, content, usage, duration_ms, error (if any).
     """
-    # Consult Soul Router for intelligent routing (unless provider is explicit)
-    if not provider:
+    local_only = _local_only_enabled()
+
+    # Local-only mode must not allow a caller or the Soul Router to select a
+    # remote provider. Reject explicitly requested remote providers instead of
+    # silently sending their model name to Ollama.
+    if local_only and provider and provider != "ollama":
+        return {
+            "provider": "none",
+            "model": "none",
+            "content": "",
+            "usage": {},
+            "duration_ms": 0,
+            "error": f"CAMELOT_LOCAL_ONLY=1 rejects remote provider: {provider}",
+            "fallback_errors": [],
+        }
+
+    # Consult Soul Router for intelligent routing (unless provider is explicit
+    # or local-only mode is active).
+    if not provider and not local_only:
         soul_decision = _soul_route_provider(messages)
         if soul_decision:
             provider, model = soul_decision
 
-    # Build provider chain
-    if provider and provider in PROVIDERS:
+    # Build provider chain. Local-only mode is intentionally fail-closed.
+    if local_only:
+        chain = ["ollama"]
+    elif provider and provider in PROVIDERS:
         chain = [provider] + [p for p in FALLBACK_CHAIN if p != provider]
     else:
         chain = list(FALLBACK_CHAIN)
@@ -451,7 +479,7 @@ def chat(messages: list, provider: Optional[str] = None,
 
         start = time.time()
         try:
-            provider_model = explicit_model if pname == provider else None
+            provider_model = explicit_model if (pname == provider or (provider is None and pname == "ollama")) else None
             result = _dispatch(prov, messages, model=provider_model, temperature=temperature,
                                max_tokens=max_tokens, timeout=timeout)
             result["duration_ms"] = int((time.time() - start) * 1000)

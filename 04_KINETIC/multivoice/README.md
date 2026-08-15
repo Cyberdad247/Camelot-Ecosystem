@@ -44,6 +44,37 @@ stub (`NewLocalStubProvider`) — Kinetic Resilience, no hard failure. The loopb
 `CLIPROXY_KEY` (`proxy-admin-key`) authorizes the local proxy only; it is **not** a
 paid credential.
 
+## Local-first inference policy
+
+The CAMELOT Python LLM router now prefers Ollama before Bifrost/CLIProxy or any
+remote provider. To make the policy fail closed and guarantee no remote egress
+from that router, set the process environment variable:
+
+```bash
+CAMELOT_LOCAL_ONLY=1
+```
+
+On this RTX 2050 workstation, the verified low-memory launch is CPU-only and
+cloud-disabled. It uses an already installed model and never pulls weights:
+
+```bash
+OLLAMA_NO_CLOUD=1 CUDA_VISIBLE_DEVICES=-1 OLLAMA_LLM_LIBRARY=cpu \
+OLLAMA_HOST=127.0.0.1:11434 ollama serve
+```
+
+The verified smoke model is `qwen2.5-coder:3b`; it returned `LOCAL_OK` locally.
+The 4B models are cataloged but currently fail GPU loading because the 4GB RTX
+2050 cannot allocate their required CUDA/KV buffers.
+
+In local-only mode, Ollama is the sole permitted provider; an explicit request
+for a cloud provider is rejected instead of being silently rerouted. The
+available workstation models are registered in
+`03_VAULT/training/configs/sovereign_models.json`, including the air-gapped
+`qwen3:4b` and `qwen2.5-coder:3b` assignments.
+
+This policy is separate from the Go Multivoice gateway: the Go service still
+requires an explicitly configured `CLIPROXY_BASE` when using Bifrost routing.
+
 ## Honest boundaries
 - Default path is **zero-cost via the gateway** — no paid keys, no per-token billing.
   A direct paid OpenAI client also exists (`NewOpenAIProvider`, `CAMELOT_OPENAI_KEY`)

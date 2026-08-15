@@ -28,8 +28,10 @@ def test_providers_configured():
 
 
 def test_fallback_chain_order():
-    assert FALLBACK_CHAIN[0] == "cliproxy"
-    assert FALLBACK_CHAIN[-1] == "ollama"
+    assert FALLBACK_CHAIN[0] == "ollama"
+    assert FALLBACK_CHAIN[1] == "cliproxy"
+    assert "openrouter" in FALLBACK_CHAIN
+    assert FALLBACK_CHAIN.index("ollama") < FALLBACK_CHAIN.index("openrouter")
 
 
 def test_provider_config():
@@ -42,6 +44,7 @@ def test_provider_config():
 
 def test_ollama_always_available():
     assert PROVIDERS["ollama"].available is True
+    assert PROVIDERS["ollama"].default_model == "qwen2.5-coder:3b"
 
 
 def test_validate_response_valid():
@@ -122,9 +125,52 @@ def test_fallback_resets_model_for_next_provider(monkeypatch):
     )
 
     assert calls[0] == ("gemini", "gemini-2.5-pro")
-    assert calls[1][0] == "cliproxy"
-    assert calls[1][1] is None
-    assert result["provider"] == "cliproxy"
+    assert calls[1] == ("ollama", None)
+    assert result["provider"] == "ollama"
+
+
+def test_local_only_rejects_remote_provider(monkeypatch):
+    """Local-only mode must fail closed before any remote dispatch."""
+    import llm_router
+
+    monkeypatch.setenv("CAMELOT_LOCAL_ONLY", "1")
+    result = llm_router.chat(
+        [{"role": "user", "content": "keep this local"}],
+        provider="openai",
+    )
+
+    assert result["provider"] == "none"
+    assert "rejects remote provider" in result["error"]
+
+
+def test_local_only_skips_soul_router_and_uses_ollama(monkeypatch):
+    """Local-only mode should select Ollama without consulting cloud routing."""
+    import llm_router
+
+    monkeypatch.setenv("CAMELOT_LOCAL_ONLY", "1")
+    calls = []
+
+    def fake_dispatch(prov, messages, **kwargs):
+        calls.append((prov.name, kwargs.get("model")))
+        return {
+            "provider": prov.name,
+            "model": kwargs.get("model") or prov.default_model,
+            "content": "local response",
+            "usage": {},
+            "duration_ms": 0,
+        }
+
+    monkeypatch.setattr(llm_router, "_dispatch", fake_dispatch)
+    monkeypatch.setattr(llm_router, "_soul_route_provider", lambda _messages: (_ for _ in ()).throw(AssertionError("Soul Router must be skipped")))
+
+    result = llm_router.chat(
+        [{"role": "user", "content": "keep this local"}],
+        model="qwen3:4b",
+    )
+
+    assert calls == [("ollama", "qwen3:4b")]
+    assert result["provider"] == "ollama"
+    assert result["model"] == "qwen3:4b"
 
 
 def test_ollama_autodetect_runs_when_model_not_supplied(monkeypatch):

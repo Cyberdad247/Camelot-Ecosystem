@@ -47,6 +47,9 @@ func buildPolyglot() *orchestration.APEEv6Router {
 	if live {
 		log.Printf("[CYBERTRONIA] Bifrost/CLIProxy gateway online (%s) — zero-cost routing.", providers.GatewayBase())
 	} else {
+		if env("CAMELOT_REQUIRE_GATEWAY", "0") == "1" {
+			log.Fatalf("[FATAL] gateway unavailable and CAMELOT_REQUIRE_GATEWAY=1")
+		}
 		log.Printf("[CYBERTRONIA] gateway offline — Knights degrade to local TinyLM stubs.")
 	}
 
