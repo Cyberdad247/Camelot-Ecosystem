@@ -25,7 +25,9 @@ function RouteLoading() {
   return (
     <div className="grid h-full place-items-center bg-[#050208] text-slate-100">
       <div className="rounded-3xl border border-fuchsia-300/20 bg-black/60 px-8 py-6 text-center shadow-2xl shadow-fuchsia-950/30">
-        <p className="text-xs font-black uppercase tracking-[0.28em] text-fuchsia-200">Camelot-OS</p>
+        <p className="text-xs font-black uppercase tracking-[0.28em] text-fuchsia-200">
+          Camelot-OS
+        </p>
         <p className="mt-2 text-lg font-black">Loading command deck…</p>
       </div>
     </div>
@@ -52,7 +54,10 @@ export default function App() {
               {/* System */}
               <Route path="/openviking" element={<OpenVikingDashboard />} />
               <Route path="/swarm" element={<SwarmMonitor />} />
-              <Route path="/anyas-link" element={<AnyasLink externalUrl="https://en.m.wikipedia.org/wiki/Special:Random" />} />
+              <Route
+                path="/anyas-link"
+                element={<AnyasLink externalUrl="https://en.m.wikipedia.org/wiki/Special:Random" />}
+              />
 
               {/* Legacy */}
               <Route path="/brain" element={<MorphingHUD />} />

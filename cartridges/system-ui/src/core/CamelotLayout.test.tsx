@@ -6,7 +6,10 @@ import { cleanup } from '@testing-library/react';
 // Mock R3F and THREE to avoid WebGL in jsdom test env
 vi.mock('@react-three/fiber', () => ({
   Canvas: () => null,
-  useThree: () => ({ gl: { dispose: vi.fn(), forceContextLoss: vi.fn() }, scene: { traverse: vi.fn() } }),
+  useThree: () => ({
+    gl: { dispose: vi.fn(), forceContextLoss: vi.fn() },
+    scene: { traverse: vi.fn() },
+  }),
 }));
 vi.mock('three', () => ({
   Mesh: class {},
@@ -28,25 +31,31 @@ class MockAudioContext {
 vi.stubGlobal('AudioContext', MockAudioContext);
 
 // Stub EventSource
-vi.stubGlobal('EventSource', class {
-  onmessage: any = null;
-  onerror: any = null;
-  close = vi.fn();
-});
+vi.stubGlobal(
+  'EventSource',
+  class {
+    onmessage: any = null;
+    onerror: any = null;
+    close = vi.fn();
+  },
+);
 
 // Stub SpeechSynthesis
 vi.stubGlobal('speechSynthesis', {
   speak: vi.fn(),
   cancel: vi.fn(),
 });
-vi.stubGlobal('SpeechSynthesisUtterance', class {
-  pitch = 1;
-  rate = 1;
-  onstart: any = null;
-  onend: any = null;
-  onerror: any = null;
-  constructor(public text: string) {}
-});
+vi.stubGlobal(
+  'SpeechSynthesisUtterance',
+  class {
+    pitch = 1;
+    rate = 1;
+    onstart: any = null;
+    onend: any = null;
+    onerror: any = null;
+    constructor(public text: string) {}
+  },
+);
 
 import { render, screen } from '@testing-library/react';
 import CamelotLayout from './CamelotLayout';

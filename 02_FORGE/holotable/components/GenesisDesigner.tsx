@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback } from 'react';
 import ReactFlow, {
   addEdge,
   Background,
@@ -12,22 +12,22 @@ import ReactFlow, {
   Edge,
   Connection,
   Panel,
-} from "reactflow";
-import "reactflow/dist/style.css";
-import { Save, Plus, Play, Cpu, Zap, Activity } from "lucide-react";
+} from 'reactflow';
+import 'reactflow/dist/style.css';
+import { Save, Plus, Play, Cpu, Zap, Activity } from 'lucide-react';
 
 const initialNodes: Node[] = [
   {
-    id: "merlin-core",
-    type: "input",
-    data: { label: "MERLIN_OMEGA_CORE" },
+    id: 'merlin-core',
+    type: 'input',
+    data: { label: 'MERLIN_OMEGA_CORE' },
     position: { x: 250, y: 25 },
     style: {
-      background: "#1a1a1a",
-      color: "#7D52FF",
-      border: "1px solid #7D52FF",
-      borderRadius: "8px",
-      padding: "10px",
+      background: '#1a1a1a',
+      color: '#7D52FF',
+      border: '1px solid #7D52FF',
+      borderRadius: '8px',
+      padding: '10px',
     },
   },
 ];
@@ -50,34 +50,32 @@ export default function GenesisDesigner() {
       data: { label: id.toUpperCase() },
       position: { x: Math.random() * 400, y: Math.random() * 400 },
       style: {
-        background: type === "knight" ? "#04B575" : "#FF0055",
-        color: "#fff",
-        borderRadius: "8px",
-        padding: "10px",
+        background: type === 'knight' ? '#04B575' : '#FF0055',
+        color: '#fff',
+        borderRadius: '8px',
+        padding: '10px',
       },
     };
     setNodes((nds) => nds.concat(newNode));
   };
 
   const onSave = () => {
-    console.log("AGENT_DNA_EXPORTED:", { nodes, edges });
-    alert(
-      "🧬 GENESIS: Agent DNA exported to 01_KERNEL/agora/dna_registry.json",
-    );
+    console.log('AGENT_DNA_EXPORTED:', { nodes, edges });
+    alert('🧬 GENESIS: Agent DNA exported to 01_KERNEL/agora/dna_registry.json');
   };
 
   return (
     <div className="h-[600px] w-full bg-[#0a0a0a] rounded-xl border border-[#1a1a1a] overflow-hidden relative group">
       <div className="absolute top-4 left-4 z-10 flex gap-2">
         <button
-          onClick={() => addNode("knight")}
+          onClick={() => addNode('knight')}
           className="bg-[#04B575]/20 hover:bg-[#04B575]/40 text-[#04B575] border border-[#04B575]/50 px-3 py-1 rounded-md flex items-center gap-2 text-xs transition-all"
           title="Add Knight Node"
         >
           <Plus size={14} /> Knight
         </button>
         <button
-          onClick={() => addNode("prompt")}
+          onClick={() => addNode('prompt')}
           className="bg-[#FF0055]/20 hover:bg-[#FF0055]/40 text-[#FF0055] border border-[#FF0055]/50 px-3 py-1 rounded-md flex items-center gap-2 text-xs transition-all"
           title="Add Prompt Node"
         >

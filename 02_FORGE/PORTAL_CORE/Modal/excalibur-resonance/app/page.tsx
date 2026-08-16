@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { HudHeader } from "../components/hud-header";
-import { TheArmory } from "../components/the-armory";
-import { Actuator } from "../components/actuator";
+import { HudHeader } from '../components/hud-header';
+import { TheArmory } from '../components/the-armory';
+import { Actuator } from '../components/actuator';
 
 export default function Page() {
   return (

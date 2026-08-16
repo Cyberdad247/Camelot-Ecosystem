@@ -1,13 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { describe, expect, it, vi } from 'vitest';
-import {
-  getLease,
-  issueLease,
-  revokeLease,
-  verifyManifest,
-  type VerifyContext,
-} from './sentinel';
+import { getLease, issueLease, revokeLease, verifyManifest, type VerifyContext } from './sentinel';
 import type { EffectManifest } from './contracts';
 
 function makeManifest(overrides: Partial<EffectManifest> = {}): EffectManifest {
@@ -49,18 +43,18 @@ describe('sentinel decision service', () => {
 
   it('rejects an expired manifest', () => {
     const ctx = makeCtx({ now: () => new Date('2026-08-14T15:00:00Z') });
-    const r = verifyManifest(
-      makeManifest({ expiresAt: '2026-08-14T14:00:00Z' }),
-      ctx,
-    );
+    const r = verifyManifest(makeManifest({ expiresAt: '2026-08-14T14:00:00Z' }), ctx);
     expect(r.approved).toBe(false);
     expect(r.reasons).toContain('manifest_expired');
   });
 
   it('rejects when required evidence is missing', () => {
-    const r = verifyManifest(makeManifest(), makeCtx({
-      requiredEvidencePresent: () => false,
-    }));
+    const r = verifyManifest(
+      makeManifest(),
+      makeCtx({
+        requiredEvidencePresent: () => false,
+      }),
+    );
     expect(r.approved).toBe(false);
     expect(r.reasons).toContain('required_evidence_missing');
   });

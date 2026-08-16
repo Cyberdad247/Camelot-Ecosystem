@@ -1,21 +1,7 @@
-import {
-  MapPin,
-  Zap,
-  Heart,
-  Star,
-  Plane,
-  Calendar,
-  Sparkles,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import Link from "next/link";
+import { MapPin, Zap, Heart, Star, Plane, Calendar, Sparkles } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -30,10 +16,9 @@ export default function Home() {
             Your Journey, Perfectly Crafted with Intelligence
           </h2>
           <p className="mt-6 text-lg leading-8 text-secondary-foreground max-w-3xl mx-auto">
-            Stop juggling dozens of tabs and conflicting travel info. Our
-            AI-powered platform turns your travel dreams into reality—complete
-            with flights, hotels, activities, and budget—all from a simple
-            conversation about your perfect trip.
+            Stop juggling dozens of tabs and conflicting travel info. Our AI-powered platform turns
+            your travel dreams into reality—complete with flights, hotels, activities, and
+            budget—all from a simple conversation about your perfect trip.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link href="/plan">
@@ -56,38 +41,30 @@ export default function Home() {
               <div className="flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6 mx-auto border-2 border-primary/20">
                 <span className="text-2xl font-bold text-primary">1</span>
               </div>
-              <h4 className="text-xl font-semibold mb-4">
-                Fill Once, Dream Big
-              </h4>
+              <h4 className="text-xl font-semibold mb-4">Fill Once, Dream Big</h4>
               <p className="text-muted-foreground">
-                Tell us about your ideal trip—destination, dates, style, budget,
-                and preferences. Our thoughtful form captures everything in
-                minutes.
+                Tell us about your ideal trip—destination, dates, style, budget, and preferences.
+                Our thoughtful form captures everything in minutes.
               </p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center w-16 h-16 bg-secondary/20 rounded-full mb-6 mx-auto border-2 border-secondary/40">
                 <span className="text-2xl font-bold text-foreground">2</span>
               </div>
-              <h4 className="text-xl font-semibold mb-4">
-                AI Agents Take Over
-              </h4>
+              <h4 className="text-xl font-semibold mb-4">AI Agents Take Over</h4>
               <p className="text-muted-foreground">
-                Specialized AI agents work together on flights, lodging,
-                activities, and budgeting—all happening seamlessly in the
-                background.
+                Specialized AI agents work together on flights, lodging, activities, and
+                budgeting—all happening seamlessly in the background.
               </p>
             </div>
             <div className="text-center">
               <div className="flex items-center justify-center w-16 h-16 bg-accent/10 rounded-full mb-6 mx-auto border-2 border-accent/20">
                 <span className="text-2xl font-bold text-accent">3</span>
               </div>
-              <h4 className="text-xl font-semibold mb-4">
-                Complete Itinerary Ready
-              </h4>
+              <h4 className="text-xl font-semibold mb-4">Complete Itinerary Ready</h4>
               <p className="text-muted-foreground">
-                Get a full day-by-day plan with flights, accommodations,
-                activities, costs, and booking links—all beautifully organized.
+                Get a full day-by-day plan with flights, accommodations, activities, costs, and
+                booking links—all beautifully organized.
               </p>
             </div>
           </div>
@@ -95,24 +72,19 @@ export default function Home() {
 
         {/* Feature Cards */}
         <div className="mt-20">
-          <h3 className="text-3xl font-bold text-center mb-12">
-            Why Choose TripCraft AI
-          </h3>
+          <h3 className="text-3xl font-bold text-center mb-12">Why Choose TripCraft AI</h3>
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="hover:shadow-lg transition-shadow border-primary/20 hover:border-primary/40">
               <CardHeader>
                 <div className="flex items-center justify-center w-12 h-12 bg-primary/10 rounded-lg mb-4">
                   <Sparkles className="w-6 h-6 text-primary" />
                 </div>
-                <CardTitle className="text-lg">
-                  AI-Powered Intelligence
-                </CardTitle>
+                <CardTitle className="text-lg">AI-Powered Intelligence</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Multi-agent AI system that understands your travel style and
-                  crafts personalized itineraries that feel like they were made
-                  just for you.
+                  Multi-agent AI system that understands your travel style and crafts personalized
+                  itineraries that feel like they were made just for you.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -126,9 +98,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Go beyond tourist traps. We find unique experiences, local
-                  events, and offbeat attractions that match your interests
-                  perfectly.
+                  Go beyond tourist traps. We find unique experiences, local events, and offbeat
+                  attractions that match your interests perfectly.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -142,9 +113,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  No more hours of research and comparison. Get a complete
-                  travel plan in moments, with everything balanced perfectly for
-                  your needs.
+                  No more hours of research and comparison. Get a complete travel plan in moments,
+                  with everything balanced perfectly for your needs.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -158,8 +128,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Learns from your preferences over time. Each trip becomes more
-                  tailored as our AI remembers what you love.
+                  Learns from your preferences over time. Each trip becomes more tailored as our AI
+                  remembers what you love.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -173,9 +143,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Flights, hotels, activities, and budget—all coordinated
-                  seamlessly. No conflicts, no stress, just a perfect plan ready
-                  to execute.
+                  Flights, hotels, activities, and budget—all coordinated seamlessly. No conflicts,
+                  no stress, just a perfect plan ready to execute.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -189,8 +158,8 @@ export default function Home() {
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Every detail is thoughtfully considered to create not just a
-                  trip, but an experience that feels truly magical and personal.
+                  Every detail is thoughtfully considered to create not just a trip, but an
+                  experience that feels truly magical and personal.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -199,12 +168,10 @@ export default function Home() {
 
         {/* CTA Section */}
         <div className="mt-20 text-center bg-primary/5 rounded-2xl py-16 px-8 border border-primary/10">
-          <h3 className="text-3xl font-bold mb-6">
-            Ready to Make Travel Planning Magical?
-          </h3>
+          <h3 className="text-3xl font-bold mb-6">Ready to Make Travel Planning Magical?</h3>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Stop spending hours planning and start experiencing. Let our AI
-            create your perfect journey.
+            Stop spending hours planning and start experiencing. Let our AI create your perfect
+            journey.
           </p>
           <Button size="lg" className="bg-primary hover:bg-primary/90">
             <Plane className="w-4 h-4 mr-2" />

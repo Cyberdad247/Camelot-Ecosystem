@@ -47,8 +47,12 @@ function runPortable(args: string[]): Promise<PortableResult> {
     let stderr = '';
     proc.stdout.setEncoding('utf8');
     proc.stderr.setEncoding('utf8');
-    proc.stdout.on('data', (d: string) => { stdout += d; });
-    proc.stderr.on('data', (d: string) => { stderr += d; });
+    proc.stdout.on('data', (d: string) => {
+      stdout += d;
+    });
+    proc.stderr.on('data', (d: string) => {
+      stderr += d;
+    });
     proc.on('close', (code) => resolve({ stdout, stderr, code: code ?? 0 }));
     proc.on('error', reject);
   });
@@ -96,7 +100,7 @@ class CamelotMcpProvider implements vscode.McpServerDefinitionProvider {
   }
 
   provideMcpServerDefinitions(
-    _token: vscode.CancellationToken
+    _token: vscode.CancellationToken,
   ): vscode.ProviderResult<vscode.McpServerDefinition[]> {
     // Workspace Trust gate — a malicious repo could put a hostile path in
     // `.vscode/settings.json` for `camelot.pythonPath`, so we refuse to expose
@@ -122,7 +126,7 @@ class CamelotMcpProvider implements vscode.McpServerDefinitionProvider {
       'Camelot-OS IDE/CLI',
       pythonExec,
       [MCP_SERVER],
-      { NO_RICH: '1', PYTHONUTF8: '1' }
+      { NO_RICH: '1', PYTHONUTF8: '1' },
     );
     def.cwd = vscode.Uri.file(REPO);
     return [def];
@@ -137,36 +141,45 @@ export function activate(ctx: vscode.ExtensionContext): void {
         prompt: 'Camelot: enter intent text (use Phase-H style — keyword or phrase)',
         ignoreFocusOut: true,
       });
-      if (!intent) { return; }
+      if (!intent) {
+        return;
+      }
       const r = await runPortable(['omniroute', '--select', intent]);
       if (r.code === 0) {
         await showOutput('Camelot OmniRoute', r.stdout);
         vscode.window.showInformationMessage('LaneSignal emitted — see Camelot OmniRoute output.');
       } else {
-        vscode.window.showErrorMessage(`Camelot omniroute exit ${r.code}: ${r.stderr.slice(0, 240)}`);
+        vscode.window.showErrorMessage(
+          `Camelot omniroute exit ${r.code}: ${r.stderr.slice(0, 240)}`,
+        );
       }
-    })
+    }),
   );
 
   ctx.subscriptions.push(
     vscode.commands.registerCommand('camelot.knight', async () => {
       const kid = await vscode.window.showInputBox({
-        prompt: 'Knight id (sir_codex, sir_boris, sir_helio, sir_alex, sir_mnemo, sir_forge, merlin_omega, ...)',
+        prompt:
+          'Knight id (sir_codex, sir_boris, sir_helio, sir_alex, sir_mnemo, sir_forge, merlin_omega, ...)',
         ignoreFocusOut: true,
       });
-      if (!kid) { return; }
+      if (!kid) {
+        return;
+      }
       const prompt = await vscode.window.showInputBox({
         prompt: 'Prompt for the knight',
         ignoreFocusOut: true,
       });
-      if (!prompt) { return; }
+      if (!prompt) {
+        return;
+      }
       const r = await runPortable(['knight', '--invoke', kid, '--prompt', prompt]);
       if (r.code === 0) {
         await showOutput(`Camelot Knight [${kid}]`, r.stdout);
       } else {
         vscode.window.showErrorMessage(`Camelot knight exit ${r.code}: ${r.stderr.slice(0, 240)}`);
       }
-    })
+    }),
   );
 
   ctx.subscriptions.push(
@@ -177,7 +190,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
       } else {
         vscode.window.showErrorMessage(`Camelot mcp exit ${r.code}: ${r.stderr.slice(0, 240)}`);
       }
-    })
+    }),
   );
 
   ctx.subscriptions.push(
@@ -186,14 +199,18 @@ export function activate(ctx: vscode.ExtensionContext): void {
         prompt: 'V4000 stage name (slug, lowercase snake_case)',
         ignoreFocusOut: true,
       });
-      if (!stage) { return; }
+      if (!stage) {
+        return;
+      }
       const defaultTarget = `projects/${stage}`;
       const target = await vscode.window.showInputBox({
         prompt: 'Target directory (default: projects/<stage>)',
         value: defaultTarget,
         ignoreFocusOut: true,
       });
-      if (!target) { return; }
+      if (!target) {
+        return;
+      }
 
       // First attempt: portable CLI preflight guard refuses (rc=1) when the
       // existing trio is non-trivial; stdout includes the
@@ -202,12 +219,8 @@ export function activate(ctx: vscode.ExtensionContext): void {
       // command + --force flag.
       const announceSuccess = async (rr: PortableResult): Promise<void> => {
         await showOutput(`Camelot Cartridge [${stage}]`, rr.stdout);
-        await vscode.commands.executeCommand(
-          'workbench.files.action.refreshFilesExplorer'
-        );
-        vscode.window.showInformationMessage(
-          `Camelot: emitted ${stage} trio to ${target}`
-        );
+        await vscode.commands.executeCommand('workbench.files.action.refreshFilesExplorer');
+        vscode.window.showInformationMessage(`Camelot: emitted ${stage} trio to ${target}`);
       };
 
       const r = await runCartridgeEmit(stage, target, false);
@@ -220,7 +233,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
           'Camelot: existing trio is non-trivial. Overwrite with --force?',
           { modal: false },
           'Overwrite (--force)',
-          'Cancel'
+          'Cancel',
         );
         if (choice === 'Overwrite (--force)') {
           const r2 = await runCartridgeEmit(stage, target, true);
@@ -229,21 +242,16 @@ export function activate(ctx: vscode.ExtensionContext): void {
             return;
           }
           vscode.window.showErrorMessage(
-            `Camelot cartridge exit ${r2.code} (after --force): ${r2.stderr.slice(0, 240)}`
+            `Camelot cartridge exit ${r2.code} (after --force): ${r2.stderr.slice(0, 240)}`,
           );
           return;
         }
         // Operator picked Cancel — leave the existing trio untouched.
-        await showOutput(
-          `Camelot Cartridge [${stage}] — refused, no changes made`,
-          r.stdout
-        );
+        await showOutput(`Camelot Cartridge [${stage}] — refused, no changes made`, r.stdout);
         return;
       }
-      vscode.window.showErrorMessage(
-        `Camelot cartridge exit ${r.code}: ${r.stderr.slice(0, 240)}`
-      );
-    })
+      vscode.window.showErrorMessage(`Camelot cartridge exit ${r.code}: ${r.stderr.slice(0, 240)}`);
+    }),
   );
 
   // ── Status bar item ─────────────────────────────────────────────────────────
@@ -265,9 +273,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
   // ``vscode.lm.registerMcpServerDefinitionProvider`` — verified verbatim from
   // node_modules/@types/vscode/index.d.ts line 20843.
   const mcpProvider = new CamelotMcpProvider();
-  ctx.subscriptions.push(
-    vscode.lm.registerMcpServerDefinitionProvider('camelot-ide', mcpProvider)
-  );
+  ctx.subscriptions.push(vscode.lm.registerMcpServerDefinitionProvider('camelot-ide', mcpProvider));
   // Fire ``onDidChangeMcpServerDefinitions`` whenever the user tweaks
   // ``camelot.pythonPath`` so the MCP client picks up the new interpreter
   // without an extension reload. Also refreshes the status bar text on
@@ -281,7 +287,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
       if (e.affectsConfiguration('camelot.defaultKnight')) {
         sb.text = `$(zap) Camelot: ${cfg.get<string>('defaultKnight') ?? 'sir_helio'}`;
       }
-    })
+    }),
   );
 }
 

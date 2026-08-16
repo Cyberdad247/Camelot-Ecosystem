@@ -1,7 +1,16 @@
 import React, { useState, useRef } from 'react';
 import {
-  FlaskConical, Send, ChevronDown, ChevronRight,
-  BookOpen, Globe, Search, Cpu, CheckCircle2, Loader2, Copy,
+  FlaskConical,
+  Send,
+  ChevronDown,
+  ChevronRight,
+  BookOpen,
+  Globe,
+  Search,
+  Cpu,
+  CheckCircle2,
+  Loader2,
+  Copy,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { bifrostFetch } from '@/lib/bifrostClient';
@@ -29,13 +38,41 @@ interface ResearchResult {
 }
 
 const ROUNDS_META = [
-  { id: 'R1', knight: 'Sir Octavian', role: 'Semantic Audit', color: 'text-purple-300', border: 'border-purple-500/30' },
-  { id: 'R2', knight: 'Merlin / Viden', role: 'Topology Shift', color: 'text-blue-300', border: 'border-blue-500/30' },
-  { id: 'R3', knight: 'Sir Myrmidon', role: 'Anchor Compression', color: 'text-emerald-300', border: 'border-emerald-500/30' },
+  {
+    id: 'R1',
+    knight: 'Sir Octavian',
+    role: 'Semantic Audit',
+    color: 'text-purple-300',
+    border: 'border-purple-500/30',
+  },
+  {
+    id: 'R2',
+    knight: 'Merlin / Viden',
+    role: 'Topology Shift',
+    color: 'text-blue-300',
+    border: 'border-blue-500/30',
+  },
+  {
+    id: 'R3',
+    knight: 'Sir Myrmidon',
+    role: 'Anchor Compression',
+    color: 'text-emerald-300',
+    border: 'border-emerald-500/30',
+  },
 ];
 
-function CollapsiblePanel({ title, color, border, children, defaultOpen = false }: {
-  title: string; color: string; border: string; children: React.ReactNode; defaultOpen?: boolean;
+function CollapsiblePanel({
+  title,
+  color,
+  border,
+  children,
+  defaultOpen = false,
+}: {
+  title: string;
+  color: string;
+  border: string;
+  children: React.ReactNode;
+  defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
@@ -44,7 +81,11 @@ function CollapsiblePanel({ title, color, border, children, defaultOpen = false 
         onClick={() => setOpen((o) => !o)}
         className="flex w-full items-center gap-2 px-4 py-3 text-left"
       >
-        {open ? <ChevronDown className={cn('h-3.5 w-3.5', color)} /> : <ChevronRight className={cn('h-3.5 w-3.5', color)} />}
+        {open ? (
+          <ChevronDown className={cn('h-3.5 w-3.5', color)} />
+        ) : (
+          <ChevronRight className={cn('h-3.5 w-3.5', color)} />
+        )}
         <span className={cn('text-sm font-semibold', color)}>{title}</span>
       </button>
       {open && <div className="px-4 pb-4">{children}</div>}
@@ -105,7 +146,9 @@ export default function ResearchDepartment() {
         sources: [],
         ts: Date.now(),
       });
-    } finally { setRunning(false); }
+    } finally {
+      setRunning(false);
+    }
   };
 
   return (
@@ -115,7 +158,9 @@ export default function ResearchDepartment() {
         <FlaskConical className="h-6 w-6 text-blue-400" />
         <div>
           <h1 className="text-2xl font-black text-slate-100">Research Department</h1>
-          <p className="text-xs text-slate-500">CHIMERA pipeline · LADY_APIS · NotebookLM ancestor synthesis</p>
+          <p className="text-xs text-slate-500">
+            CHIMERA pipeline · LADY_APIS · NotebookLM ancestor synthesis
+          </p>
         </div>
       </div>
 
@@ -124,13 +169,17 @@ export default function ResearchDepartment() {
         <div className="space-y-4">
           {/* Query */}
           <div className="rounded-xl border border-blue-500/30 bg-blue-950/20 p-4 space-y-3">
-            <label className="text-xs font-semibold uppercase tracking-widest text-blue-400">Research Query</label>
+            <label className="text-xs font-semibold uppercase tracking-widest text-blue-400">
+              Research Query
+            </label>
             <textarea
               rows={4}
               placeholder="What do you want to research? Be specific for best CHIMERA results…"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) run(); }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) run();
+              }}
               className="w-full rounded-lg border border-slate-700 bg-slate-900/60 px-3 py-2 text-sm text-slate-100 placeholder-slate-600 outline-none focus:border-blue-500 resize-none"
             />
             <button
@@ -138,14 +187,20 @@ export default function ResearchDepartment() {
               disabled={running || !query.trim()}
               className="w-full flex items-center justify-center gap-2 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:opacity-40 py-2.5 text-sm font-semibold text-white transition-colors"
             >
-              {running ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+              {running ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Send className="h-4 w-4" />
+              )}
               {running ? 'Running CHIMERA…' : 'Run Research'}
             </button>
           </div>
 
           {/* Settings */}
           <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4 space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">Settings</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-slate-500">
+              Settings
+            </p>
 
             <div>
               <label className="text-xs text-slate-500 mb-1.5 block">Search Depth</label>
@@ -158,7 +213,9 @@ export default function ResearchDepartment() {
                       'flex-1 py-1.5 text-xs font-semibold capitalize transition-colors',
                       depth === d ? 'bg-blue-700 text-white' : 'text-slate-400 hover:bg-slate-800',
                     )}
-                  >{d}</button>
+                  >
+                    {d}
+                  </button>
                 ))}
               </div>
             </div>
@@ -176,7 +233,9 @@ export default function ResearchDepartment() {
                         ? 'bg-blue-900/60 border-blue-500/40 text-blue-300'
                         : 'border-slate-700 text-slate-500 hover:border-slate-600',
                     )}
-                  >{s === 'notebooklm' ? 'NLM' : s}</button>
+                  >
+                    {s === 'notebooklm' ? 'NLM' : s}
+                  </button>
                 ))}
               </div>
             </div>
@@ -195,7 +254,9 @@ export default function ResearchDepartment() {
           {/* History */}
           {history.length > 0 && (
             <div className="rounded-xl border border-slate-700 bg-slate-900/40 p-4 space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">History</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2">
+                History
+              </p>
               {history.slice(0, 5).map((h, i) => (
                 <button
                   key={i}
@@ -203,7 +264,9 @@ export default function ResearchDepartment() {
                   className="w-full text-left rounded-lg px-3 py-2 hover:bg-slate-800/50 transition-colors"
                 >
                   <p className="text-xs font-medium text-slate-300 truncate">{h.query}</p>
-                  <p className="text-[10px] text-slate-600">{new Date(h.ts).toLocaleTimeString()}</p>
+                  <p className="text-[10px] text-slate-600">
+                    {new Date(h.ts).toLocaleTimeString()}
+                  </p>
                 </button>
               ))}
             </div>
@@ -233,26 +296,42 @@ export default function ResearchDepartment() {
               <div className="flex items-center gap-2 px-1">
                 <Globe className="h-4 w-4 text-blue-400" />
                 <span className="text-sm font-semibold text-slate-200">"{result.query}"</span>
-                <span className="ml-auto text-[10px] text-slate-600">{new Date(result.ts).toLocaleTimeString()}</span>
+                <span className="ml-auto text-[10px] text-slate-600">
+                  {new Date(result.ts).toLocaleTimeString()}
+                </span>
               </div>
 
               {/* Ancestor */}
               {result.ancestor && (
-                <CollapsiblePanel title="NotebookLM Ancestor" color="text-fuchsia-300" border="border-fuchsia-500/30">
-                  <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{result.ancestor}</p>
+                <CollapsiblePanel
+                  title="NotebookLM Ancestor"
+                  color="text-fuchsia-300"
+                  border="border-fuchsia-500/30"
+                >
+                  <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
+                    {result.ancestor}
+                  </p>
                 </CollapsiblePanel>
               )}
 
               {/* CHIMERA rounds */}
-              {result.chimera_rounds.length > 0 && ROUNDS_META.map((meta, i) => {
-                const round = result.chimera_rounds[i];
-                if (!round) return null;
-                return (
-                  <CollapsiblePanel key={meta.id} title={`${meta.id} — ${meta.knight}: ${meta.role}`} color={meta.color} border={meta.border}>
-                    <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">{round.output}</p>
-                  </CollapsiblePanel>
-                );
-              })}
+              {result.chimera_rounds.length > 0 &&
+                ROUNDS_META.map((meta, i) => {
+                  const round = result.chimera_rounds[i];
+                  if (!round) return null;
+                  return (
+                    <CollapsiblePanel
+                      key={meta.id}
+                      title={`${meta.id} — ${meta.knight}: ${meta.role}`}
+                      color={meta.color}
+                      border={meta.border}
+                    >
+                      <p className="text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">
+                        {round.output}
+                      </p>
+                    </CollapsiblePanel>
+                  );
+                })}
 
               {/* Synthesis */}
               <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4">
@@ -266,17 +345,30 @@ export default function ResearchDepartment() {
                     <Copy className="h-3.5 w-3.5" />
                   </button>
                 </div>
-                <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap">{result.synthesis}</p>
+                <p className="text-sm text-slate-200 leading-relaxed whitespace-pre-wrap">
+                  {result.synthesis}
+                </p>
               </div>
 
               {/* Sources */}
               {result.sources.length > 0 && (
-                <CollapsiblePanel title={`Sources (${result.sources.length})`} color="text-slate-400" border="border-slate-700">
+                <CollapsiblePanel
+                  title={`Sources (${result.sources.length})`}
+                  color="text-slate-400"
+                  border="border-slate-700"
+                >
                   <ul className="space-y-1">
                     {result.sources.map((s, i) => (
                       <li key={i} className="flex items-center gap-2 text-xs text-blue-400">
                         <BookOpen className="h-3 w-3 shrink-0 text-slate-600" />
-                        <a href={s} target="_blank" rel="noreferrer" className="truncate hover:underline">{s}</a>
+                        <a
+                          href={s}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="truncate hover:underline"
+                        >
+                          {s}
+                        </a>
                       </li>
                     ))}
                   </ul>
@@ -287,7 +379,13 @@ export default function ResearchDepartment() {
 
           {/* Live feed */}
           <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-3 h-40 overflow-hidden">
-            <EventFeed events={events} isConnected={isConnected} maxRows={15} compact filterSource="research" />
+            <EventFeed
+              events={events}
+              isConnected={isConnected}
+              maxRows={15}
+              compact
+              filterSource="research"
+            />
           </div>
         </div>
       </div>

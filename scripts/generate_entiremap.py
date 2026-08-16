@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: MIT
 
 import os
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 # Dynamic VFS Node Mapping Script
 # Maps the Camelot-OS Worldtree nodes into entiremap.md

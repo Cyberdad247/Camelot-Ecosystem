@@ -8,7 +8,7 @@ interface TripFormData {
   destination: string;
   startingLocation: string;
   travelDates: { start: string; end: string };
-  dateInputType: "picker" | "text";
+  dateInputType: 'picker' | 'text';
   duration: number;
   travelingWith: string;
   adults: number;
@@ -40,9 +40,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Missing required fields: name, destination, or starting location'
+          message: 'Missing required fields: name, destination, or starting location',
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -54,14 +54,14 @@ export async function POST(request: NextRequest) {
         startingLocation: tripData.startingLocation,
         travelDatesStart: tripData.travelDates.start,
         travelDatesEnd: tripData.travelDates.end || null,
-        dateInputType: tripData.dateInputType || "picker",
+        dateInputType: tripData.dateInputType || 'picker',
         duration: tripData.duration || null,
         travelingWith: tripData.travelingWith,
         adults: tripData.adults || 1,
         children: tripData.children || 0,
         ageGroups: tripData.ageGroups || [],
         budget: tripData.budget,
-        budgetCurrency: tripData.budgetCurrency || "USD",
+        budgetCurrency: tripData.budgetCurrency || 'USD',
         travelStyle: tripData.travelStyle,
         budgetFlexible: tripData.budgetFlexible || false,
         vibes: tripData.vibes || [],
@@ -73,8 +73,8 @@ export async function POST(request: NextRequest) {
         lovedPlaces: tripData.lovedPlaces || null,
         additionalInfo: tripData.additionalInfo || null,
         // userId can be added later when auth is implemented
-        userId: null
-      }
+        userId: null,
+      },
     });
 
     console.log('Trip plan saved to database:', savedTripPlan.id);
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
         starting_location: tripData.startingLocation,
         travel_dates: {
           start: tripData.travelDates.start,
-          end: tripData.travelDates.end || ""
+          end: tripData.travelDates.end || '',
         },
         date_input_type: tripData.dateInputType,
         duration: tripData.duration,
@@ -101,14 +101,14 @@ export async function POST(request: NextRequest) {
         budget_flexible: tripData.budgetFlexible,
         vibes: tripData.vibes,
         priorities: tripData.priorities,
-        interests: tripData.interests || "",
+        interests: tripData.interests || '',
         rooms: tripData.rooms,
         pace: tripData.pace,
-        been_there_before: tripData.beenThereBefore || "",
-        loved_places: tripData.lovedPlaces || "",
-        additional_info: tripData.additionalInfo || ""
-      }
-    }
+        been_there_before: tripData.beenThereBefore || '',
+        loved_places: tripData.lovedPlaces || '',
+        additional_info: tripData.additionalInfo || '',
+      },
+    };
 
     console.log('Request body:', JSON.stringify(requestBody, null, 2));
 
@@ -118,7 +118,7 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify(requestBody),
     });
 
     if (!backendResponse.ok) {
@@ -126,9 +126,9 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Failed to trigger trip planning'
+          message: 'Failed to trigger trip planning',
         },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -140,18 +140,18 @@ export async function POST(request: NextRequest) {
         success: true,
         message: 'Trip planning triggered successfully',
         response: responseData,
-        tripPlanId: savedTripPlan.id
+        tripPlanId: savedTripPlan.id,
       },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Error processing trip submission:', error);
     return NextResponse.json(
       {
         success: false,
-        message: 'Failed to save trip plan to database'
+        message: 'Failed to save trip plan to database',
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { NextResponse } from "next/server";
-import { AccessToken } from "livekit-server-sdk";
+import { NextResponse } from 'next/server';
+import { AccessToken } from 'livekit-server-sdk';
 
 export async function POST() {
   const apiKey = process.env.LIVEKIT_API_KEY;
@@ -9,10 +9,7 @@ export async function POST() {
   const livekitUrl = process.env.LIVEKIT_URL;
 
   if (!apiKey || !apiSecret || !livekitUrl) {
-    return NextResponse.json(
-      { error: "LiveKit not configured" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'LiveKit not configured' }, { status: 500 });
   }
 
   const roomName = `tasha-${crypto.randomUUID().slice(0, 8)}`;
@@ -20,7 +17,7 @@ export async function POST() {
 
   const token = new AccessToken(apiKey, apiSecret, {
     identity: participantIdentity,
-    ttl: "10m",
+    ttl: '10m',
   });
   token.addGrant({
     room: roomName,

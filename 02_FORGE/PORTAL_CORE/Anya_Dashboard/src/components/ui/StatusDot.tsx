@@ -27,19 +27,28 @@ export function StatusDot({ service, showLabel = false, className }: StatusDotPr
       setHealth((s) => ({ ...s, status: 'checking' }));
       const { ok, latency_ms } = await ping(service.healthUrl);
       if (!cancelled) {
-        setHealth((s) => ({ ...s, status: ok ? 'live' : 'dark', latency_ms, last_checked: Date.now() }));
+        setHealth((s) => ({
+          ...s,
+          status: ok ? 'live' : 'dark',
+          latency_ms,
+          last_checked: Date.now(),
+        }));
       }
     }
     check();
     const id = setInterval(check, 30_000);
-    return () => { cancelled = true; clearInterval(id); };
+    return () => {
+      cancelled = true;
+      clearInterval(id);
+    };
   }, [service.healthUrl]);
 
-  const dot = health.status === 'live'
-    ? 'bg-emerald-400 shadow-[0_0_6px_#34d399]'
-    : health.status === 'checking'
-    ? 'bg-amber-400 animate-pulse'
-    : 'bg-red-600';
+  const dot =
+    health.status === 'live'
+      ? 'bg-emerald-400 shadow-[0_0_6px_#34d399]'
+      : health.status === 'checking'
+        ? 'bg-amber-400 animate-pulse'
+        : 'bg-red-600';
 
   return (
     <span className={cn('inline-flex items-center gap-1.5', className)}>
@@ -57,10 +66,46 @@ export function StatusDot({ service, showLabel = false, className }: StatusDotPr
 }
 
 export const SERVICES: ServiceHealth[] = [
-  { name: 'morgana_bridge', label: 'Morgana', port: 8001, healthUrl: 'http://127.0.0.1:8001/bifrost/status', status: 'checking' },
-  { name: 'saltare', label: 'Saltare', port: 8085, healthUrl: 'http://127.0.0.1:8085/health', status: 'checking' },
-  { name: 'rotel', label: 'Rotel', port: 4317, healthUrl: 'http://127.0.0.1:4317/health', status: 'checking' },
-  { name: 'excalibur', label: 'Excalibur', port: 8000, healthUrl: 'http://127.0.0.1:8000/health', status: 'checking' },
-  { name: 'qdrant', label: 'Qdrant', port: 6333, healthUrl: 'http://127.0.0.1:6333/', status: 'checking' },
-  { name: 'modal_lt', label: 'Modal LT', port: 0, healthUrl: 'https://cyberdad247--camelot-lt-memory-health.modal.run', status: 'checking' },
+  {
+    name: 'morgana_bridge',
+    label: 'Morgana',
+    port: 8001,
+    healthUrl: 'http://127.0.0.1:8001/bifrost/status',
+    status: 'checking',
+  },
+  {
+    name: 'saltare',
+    label: 'Saltare',
+    port: 8085,
+    healthUrl: 'http://127.0.0.1:8085/health',
+    status: 'checking',
+  },
+  {
+    name: 'rotel',
+    label: 'Rotel',
+    port: 4317,
+    healthUrl: 'http://127.0.0.1:4317/health',
+    status: 'checking',
+  },
+  {
+    name: 'excalibur',
+    label: 'Excalibur',
+    port: 8000,
+    healthUrl: 'http://127.0.0.1:8000/health',
+    status: 'checking',
+  },
+  {
+    name: 'qdrant',
+    label: 'Qdrant',
+    port: 6333,
+    healthUrl: 'http://127.0.0.1:6333/',
+    status: 'checking',
+  },
+  {
+    name: 'modal_lt',
+    label: 'Modal LT',
+    port: 0,
+    healthUrl: 'https://cyberdad247--camelot-lt-memory-health.modal.run',
+    status: 'checking',
+  },
 ];

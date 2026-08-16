@@ -1,5 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Plus, X, BrainCircuit, Filter, Clock, CheckCircle2, Loader2, AlertCircle } from 'lucide-react';
+import {
+  Plus,
+  X,
+  BrainCircuit,
+  Filter,
+  Clock,
+  CheckCircle2,
+  Loader2,
+  AlertCircle,
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { CARTRIDGES, CARTRIDGE_MAP } from '@/features/cartridges/registry';
 import { bifrostFetch } from '@/lib/bifrostClient';
@@ -12,7 +21,9 @@ const STORAGE_KEY = 'camelot_tasks_v1';
 function loadTasks(): CamelotTask[] {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
-  } catch { return []; }
+  } catch {
+    return [];
+  }
 }
 
 function saveTasks(tasks: CamelotTask[]) {
@@ -30,11 +41,12 @@ const PRIORITY_COLOR: Record<TaskPriority, string> = {
   critical: 'text-red-400 border-red-700',
 };
 
-const STATUS_COLS: { status: TaskStatus; label: string; icon: React.ElementType; color: string }[] = [
-  { status: 'pending', label: 'Pending', icon: Clock, color: 'text-slate-400' },
-  { status: 'in_progress', label: 'In Progress', icon: Loader2, color: 'text-blue-400' },
-  { status: 'completed', label: 'Completed', icon: CheckCircle2, color: 'text-emerald-400' },
-];
+const STATUS_COLS: { status: TaskStatus; label: string; icon: React.ElementType; color: string }[] =
+  [
+    { status: 'pending', label: 'Pending', icon: Clock, color: 'text-slate-400' },
+    { status: 'in_progress', label: 'In Progress', icon: Loader2, color: 'text-blue-400' },
+    { status: 'completed', label: 'Completed', icon: CheckCircle2, color: 'text-emerald-400' },
+  ];
 
 interface CreateForm {
   title: string;
@@ -43,7 +55,12 @@ interface CreateForm {
   priority: TaskPriority;
 }
 
-const BLANK: CreateForm = { title: '', description: '', cartridge: 'COGNITIVE', priority: 'medium' };
+const BLANK: CreateForm = {
+  title: '',
+  description: '',
+  cartridge: 'COGNITIVE',
+  priority: 'medium',
+};
 
 export default function AlexTaskManager() {
   const [tasks, setTasks] = useState<CamelotTask[]>(loadTasks);
@@ -53,7 +70,9 @@ export default function AlexTaskManager() {
   const [dispatching, setDispatching] = useState<string | null>(null);
   const { events } = useAnyaSocket();
 
-  useEffect(() => { saveTasks(tasks); }, [tasks]);
+  useEffect(() => {
+    saveTasks(tasks);
+  }, [tasks]);
 
   // Auto-complete tasks when WS signals dispatch done
   useEffect(() => {
@@ -92,7 +111,9 @@ export default function AlexTaskManager() {
   const dispatch = useCallback(async (task: CamelotTask) => {
     setDispatching(task.id);
     setTasks((prev) =>
-      prev.map((t) => t.id === task.id ? { ...t, status: 'in_progress', updated_at: Date.now() } : t),
+      prev.map((t) =>
+        t.id === task.id ? { ...t, status: 'in_progress', updated_at: Date.now() } : t,
+      ),
     );
     try {
       const res = await bifrostFetch(runtimeConfig.bifrost.dispatchUrl, {
@@ -114,12 +135,17 @@ export default function AlexTaskManager() {
           ),
         );
       }
-    } catch { /* bifrost dark — task stays in_progress */ }
-    finally { setDispatching(null); }
+    } catch {
+      /* bifrost dark — task stays in_progress */
+    } finally {
+      setDispatching(null);
+    }
   }, []);
 
   const updateStatus = useCallback((id: string, status: TaskStatus) => {
-    setTasks((prev) => prev.map((t) => t.id === id ? { ...t, status, updated_at: Date.now() } : t));
+    setTasks((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, status, updated_at: Date.now() } : t)),
+    );
   }, []);
 
   const deleteTask = useCallback((id: string) => {
@@ -127,7 +153,8 @@ export default function AlexTaskManager() {
   }, []);
 
   const filtered = useMemo(
-    () => filterCartridge === 'ALL' ? tasks : tasks.filter((t) => t.cartridge === filterCartridge),
+    () =>
+      filterCartridge === 'ALL' ? tasks : tasks.filter((t) => t.cartridge === filterCartridge),
     [tasks, filterCartridge],
   );
 
@@ -138,7 +165,9 @@ export default function AlexTaskManager() {
         <BrainCircuit className="h-6 w-6 text-indigo-400" />
         <div>
           <h1 className="text-2xl font-black text-slate-100">SIR_ALEX — Task Manager</h1>
-          <p className="text-xs text-slate-500">Cognitive orchestration · {tasks.length} tasks total</p>
+          <p className="text-xs text-slate-500">
+            Cognitive orchestration · {tasks.length} tasks total
+          </p>
         </div>
         <div className="ml-auto flex items-center gap-2">
           {/* Filter */}
@@ -151,7 +180,9 @@ export default function AlexTaskManager() {
             >
               <option value="ALL">All Cartridges</option>
               {CARTRIDGES.map((c) => (
-                <option key={c.id} value={c.id}>{c.label}</option>
+                <option key={c.id} value={c.id}>
+                  {c.label}
+                </option>
               ))}
             </select>
           </div>
@@ -170,7 +201,10 @@ export default function AlexTaskManager() {
           <div className="w-full max-w-md rounded-2xl border border-indigo-500/30 bg-[#0a0514] p-6 shadow-2xl shadow-indigo-950/50">
             <div className="flex items-center justify-between mb-4">
               <h2 className="font-black text-slate-100">New Task</h2>
-              <button onClick={() => setShowCreate(false)} className="text-slate-500 hover:text-slate-300">
+              <button
+                onClick={() => setShowCreate(false)}
+                className="text-slate-500 hover:text-slate-300"
+              >
                 <X className="h-4 w-4" />
               </button>
             </div>
@@ -194,17 +228,25 @@ export default function AlexTaskManager() {
                   <label className="text-xs text-slate-500 mb-1 block">Cartridge</label>
                   <select
                     value={form.cartridge}
-                    onChange={(e) => setForm((f) => ({ ...f, cartridge: e.target.value as CartridgeId }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, cartridge: e.target.value as CartridgeId }))
+                    }
                     className="w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-sm text-slate-300 outline-none"
                   >
-                    {CARTRIDGES.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
+                    {CARTRIDGES.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.label}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
                   <label className="text-xs text-slate-500 mb-1 block">Priority</label>
                   <select
                     value={form.priority}
-                    onChange={(e) => setForm((f) => ({ ...f, priority: e.target.value as TaskPriority }))}
+                    onChange={(e) =>
+                      setForm((f) => ({ ...f, priority: e.target.value as TaskPriority }))
+                    }
                     className="w-full rounded-lg border border-slate-700 bg-slate-900 px-2 py-1.5 text-sm text-slate-300 outline-none"
                   >
                     <option value="low">Low</option>
@@ -261,17 +303,31 @@ export default function AlexTaskManager() {
                       )}
                     >
                       <div className="flex items-start gap-2">
-                        <CartIcon className={cn('h-3.5 w-3.5 mt-0.5 shrink-0', cartridge.textClass)} />
-                        <p className="flex-1 text-sm font-semibold text-slate-200 leading-tight">{task.title}</p>
-                        <button onClick={() => deleteTask(task.id)} className="text-slate-700 hover:text-red-400 shrink-0">
+                        <CartIcon
+                          className={cn('h-3.5 w-3.5 mt-0.5 shrink-0', cartridge.textClass)}
+                        />
+                        <p className="flex-1 text-sm font-semibold text-slate-200 leading-tight">
+                          {task.title}
+                        </p>
+                        <button
+                          onClick={() => deleteTask(task.id)}
+                          className="text-slate-700 hover:text-red-400 shrink-0"
+                        >
                           <X className="h-3.5 w-3.5" />
                         </button>
                       </div>
                       {task.description && (
-                        <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">{task.description}</p>
+                        <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
+                          {task.description}
+                        </p>
                       )}
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className={cn('rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase', PRIORITY_COLOR[task.priority])}>
+                        <span
+                          className={cn(
+                            'rounded border px-1.5 py-0.5 text-[10px] font-semibold uppercase',
+                            PRIORITY_COLOR[task.priority],
+                          )}
+                        >
                           {task.priority}
                         </span>
                         <span className="text-[10px] text-slate-600">{task.knight}</span>

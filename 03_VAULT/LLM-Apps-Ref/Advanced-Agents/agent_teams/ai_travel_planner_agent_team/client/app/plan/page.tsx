@@ -1,32 +1,26 @@
-"use client";
+'use client';
 
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { format } from "date-fns";
-import { authClient } from "@/lib/auth-client";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
+import { format } from 'date-fns';
+import { authClient } from '@/lib/auth-client';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Badge } from "@/components/ui/badge";
+} from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Checkbox } from '@/components/ui/checkbox';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Badge } from '@/components/ui/badge';
 import {
   Form,
   FormControl,
@@ -35,7 +29,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from '@/components/ui/form';
 import {
   MapPin,
   Calendar as CalendarIcon,
@@ -62,58 +56,54 @@ import {
   AlertCircle,
   Plus,
   Minus,
-} from "lucide-react";
-import { Calendar } from "@/components/ui/calendar";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
+} from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
 
 const travelVibes = [
-  { id: "relaxing", label: "Relaxing", icon: Waves },
-  { id: "adventure", label: "Adventure", icon: Mountain },
-  { id: "romantic", label: "Romantic", icon: Heart },
-  { id: "cultural", label: "Cultural", icon: Building },
-  { id: "food-focused", label: "Food-focused", icon: Utensils },
-  { id: "nature", label: "Nature", icon: TreePine },
-  { id: "photography", label: "Photography", icon: Camera },
+  { id: 'relaxing', label: 'Relaxing', icon: Waves },
+  { id: 'adventure', label: 'Adventure', icon: Mountain },
+  { id: 'romantic', label: 'Romantic', icon: Heart },
+  { id: 'cultural', label: 'Cultural', icon: Building },
+  { id: 'food-focused', label: 'Food-focused', icon: Utensils },
+  { id: 'nature', label: 'Nature', icon: TreePine },
+  { id: 'photography', label: 'Photography', icon: Camera },
 ];
 
 const travelStyles = [
   {
-    value: "backpacker",
-    label: "Backpacker",
-    description: "Budget-conscious, authentic experiences",
+    value: 'backpacker',
+    label: 'Backpacker',
+    description: 'Budget-conscious, authentic experiences',
   },
   {
-    value: "comfort",
-    label: "Comfort",
-    description: "Balance of comfort and value",
+    value: 'comfort',
+    label: 'Comfort',
+    description: 'Balance of comfort and value',
   },
   {
-    value: "luxury",
-    label: "Luxury",
-    description: "Premium experiences and stays",
+    value: 'luxury',
+    label: 'Luxury',
+    description: 'Premium experiences and stays',
   },
   {
-    value: "eco-conscious",
-    label: "Eco-conscious",
-    description: "Sustainable and responsible travel",
+    value: 'eco-conscious',
+    label: 'Eco-conscious',
+    description: 'Sustainable and responsible travel',
   },
 ];
 
 const travelingWithOptions = [
-  "Solo",
-  "Partner",
-  "Friends",
-  "Family with kids",
-  "Extended family",
-  "Colleagues",
+  'Solo',
+  'Partner',
+  'Friends',
+  'Family with kids',
+  'Extended family',
+  'Colleagues',
 ];
 
-const ageGroupOptions = ["Under 18", "18-25", "26-35", "36-50", "51-65", "65+"];
+const ageGroupOptions = ['Under 18', '18-25', '26-35', '36-50', '51-65', '65+'];
 
 // Custom NumberInput component with +/- buttons
 const NumberInput = ({
@@ -121,7 +111,7 @@ const NumberInput = ({
   onChange,
   min = 0,
   max = 99,
-  className = "",
+  className = '',
 }: {
   value: number;
   onChange: (value: number) => void;
@@ -173,15 +163,15 @@ const NumberInput = ({
 // Helper function to get default budget for currency
 const getDefaultBudgetForCurrency = (currency: string) => {
   switch (currency) {
-    case "USD":
+    case 'USD':
       return 1000;
-    case "EUR":
+    case 'EUR':
       return 900;
-    case "GBP":
+    case 'GBP':
       return 800;
-    case "INR":
+    case 'INR':
       return 75000;
-    case "JPY":
+    case 'JPY':
       return 120000;
     default:
       return 1000;
@@ -193,7 +183,7 @@ interface TripFormData {
   destination: string;
   startingLocation: string;
   travelDates: { start: string; end: string };
-  dateInputType: "picker" | "text";
+  dateInputType: 'picker' | 'text';
   duration: number;
   travelingWith: string;
   adults: number;
@@ -217,47 +207,41 @@ export default function Plan() {
   const [currentStep, setCurrentStep] = useState(0);
   const [selectedVibes, setSelectedVibes] = useState<string[]>([]);
   const [selectedPriorities, setSelectedPriorities] = useState<string[]>([]);
-  const [dateInputType, setDateInputType] = useState<"picker" | "text">(
-    "picker"
-  );
+  const [dateInputType, setDateInputType] = useState<'picker' | 'text'>('picker');
   const [validationError, setValidationError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<string | null>(null);
   const router = useRouter();
 
   // Better Auth session hook
-  const {
-    data: session,
-    isPending: sessionLoading,
-    error: sessionError,
-  } = authClient.useSession();
+  const { data: session, isPending: sessionLoading, error: sessionError } = authClient.useSession();
 
   const form = useForm<TripFormData>({
     defaultValues: {
-      name: "",
+      name: '',
       adults: 1,
       children: 0,
       rooms: 1,
       pace: [3],
       budgetFlexible: false,
-      budget: getDefaultBudgetForCurrency("USD"),
-      travelingWith: "",
+      budget: getDefaultBudgetForCurrency('USD'),
+      travelingWith: '',
       ageGroups: [],
       vibes: [],
       priorities: [],
-      budgetCurrency: "USD",
-      dateInputType: "picker",
+      budgetCurrency: 'USD',
+      dateInputType: 'picker',
       travelDates: {
-        start: "",
-        end: "",
+        start: '',
+        end: '',
       },
     },
   });
 
   // Prefill user name when session data is available
   useEffect(() => {
-    if (session?.user?.name && !form.getValues("name")) {
-      form.setValue("name", session.user.name);
+    if (session?.user?.name && !form.getValues('name')) {
+      form.setValue('name', session.user.name);
     }
   }, [session, form]);
 
@@ -274,7 +258,7 @@ export default function Plan() {
   }
 
   if (sessionError) {
-    console.error("Session error:", sessionError);
+    console.error('Session error:', sessionError);
     // Continue without session data - allow anonymous users
   }
 
@@ -283,8 +267,8 @@ export default function Plan() {
     setSubmitMessage(null);
 
     // Debug: Log the data being submitted
-    console.log("Form data being submitted:", data);
-    console.log("Personal touch data:", {
+    console.log('Form data being submitted:', data);
+    console.log('Personal touch data:', {
       beenThereBefore: data.beenThereBefore,
       lovedPlaces: data.lovedPlaces,
       additionalInfo: data.additionalInfo,
@@ -297,10 +281,10 @@ export default function Plan() {
         userId: session?.user?.id || null, // Include user ID from Better Auth session
       };
 
-      const response = await fetch("/api/plan/submit", {
-        method: "POST",
+      const response = await fetch('/api/plan/submit', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(submitData),
       });
@@ -308,19 +292,19 @@ export default function Plan() {
       const result = await response.json();
 
       if (result.success) {
-        setSubmitMessage("🎉 Your trip plan has been submitted successfully!");
-        console.log("Trip submitted with ID:", result.tripPlanId);
+        setSubmitMessage('🎉 Your trip plan has been submitted successfully!');
+        console.log('Trip submitted with ID:', result.tripPlanId);
 
         // Show success message briefly, then redirect to the plan details page
         setTimeout(() => {
           router.push(`/plan/${result.tripPlanId}`);
         }, 1500);
       } else {
-        setSubmitMessage("❌ Failed to submit trip plan. Please try again.");
+        setSubmitMessage('❌ Failed to submit trip plan. Please try again.');
       }
     } catch (error) {
-      console.error("Submission error:", error);
-      setSubmitMessage("❌ Something went wrong. Please try again.");
+      console.error('Submission error:', error);
+      setSubmitMessage('❌ Something went wrong. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -328,46 +312,46 @@ export default function Plan() {
 
   const steps = [
     {
-      id: "basics",
-      title: "Trip Basics",
+      id: 'basics',
+      title: 'Trip Basics',
       icon: Plane,
-      description: "Where and when are you going?",
+      description: 'Where and when are you going?',
     },
     {
-      id: "group",
-      title: "Group Details",
+      id: 'group',
+      title: 'Group Details',
       icon: Users,
       description: "Who's joining the adventure?",
     },
     {
-      id: "budget",
-      title: "Budget & Style",
+      id: 'budget',
+      title: 'Budget & Style',
       icon: DollarSign,
       description: "What's your travel style?",
     },
     {
-      id: "vibe",
-      title: "Trip Vibe",
+      id: 'vibe',
+      title: 'Trip Vibe',
       icon: Heart,
-      description: "What experience are you after?",
+      description: 'What experience are you after?',
     },
     {
-      id: "accommodation",
-      title: "Stay Preferences",
+      id: 'accommodation',
+      title: 'Stay Preferences',
       icon: Home,
-      description: "Where will you rest?",
+      description: 'Where will you rest?',
     },
     {
-      id: "pace",
-      title: "Pace & Style",
+      id: 'pace',
+      title: 'Pace & Style',
       icon: Clock,
-      description: "How do you like to travel?",
+      description: 'How do you like to travel?',
     },
     {
-      id: "personal",
-      title: "Personal Touch",
+      id: 'personal',
+      title: 'Personal Touch',
       icon: Globe,
-      description: "Tell us more about you",
+      description: 'Tell us more about you',
     },
   ];
 
@@ -376,7 +360,7 @@ export default function Plan() {
       ? selectedVibes.filter((v) => v !== vibeId)
       : [...selectedVibes, vibeId];
     setSelectedVibes(newVibes);
-    form.setValue("vibes", newVibes);
+    form.setValue('vibes', newVibes);
     setValidationError(null);
   };
 
@@ -385,7 +369,7 @@ export default function Plan() {
       ? selectedPriorities.filter((p) => p !== priority)
       : [...selectedPriorities, priority];
     setSelectedPriorities(newPriorities);
-    form.setValue("priorities", newPriorities);
+    form.setValue('priorities', newPriorities);
   };
 
   const nextStep = async (e?: React.MouseEvent) => {
@@ -410,15 +394,13 @@ export default function Plan() {
             !currentValues.travelDates?.start ||
             !currentValues.duration
           ) {
-            setValidationError(
-              "Please fill in all required fields to continue"
-            );
+            setValidationError('Please fill in all required fields to continue');
             form.trigger([
-              "name",
-              "destination",
-              "startingLocation",
-              "travelDates.start",
-              "duration",
+              'name',
+              'destination',
+              'startingLocation',
+              'travelDates.start',
+              'duration',
             ]);
             return false;
           }
@@ -430,38 +412,36 @@ export default function Plan() {
             !currentValues.ageGroups?.length
           ) {
             setValidationError(
-              "Please select who you're traveling with, number of adults, and age groups"
+              "Please select who you're traveling with, number of adults, and age groups",
             );
-            form.trigger(["travelingWith", "adults", "ageGroups"]);
+            form.trigger(['travelingWith', 'adults', 'ageGroups']);
             return false;
           }
           break;
         case 2: // Budget & Style
           if (!currentValues.budget || !currentValues.travelStyle) {
-            setValidationError(
-              "Please enter your budget and select a travel style"
-            );
-            form.trigger(["budget", "travelStyle"]);
+            setValidationError('Please enter your budget and select a travel style');
+            form.trigger(['budget', 'travelStyle']);
             return false;
           }
           break;
         case 3: // Trip Vibe
           if (!currentValues.vibes?.length) {
-            setValidationError("Please select at least one trip vibe");
+            setValidationError('Please select at least one trip vibe');
             return false;
           }
           break;
         case 4: // Accommodation
           if (!currentValues.rooms) {
-            setValidationError("Please specify the number of rooms needed");
-            form.trigger(["rooms"]);
+            setValidationError('Please specify the number of rooms needed');
+            form.trigger(['rooms']);
             return false;
           }
           break;
         case 5: // Pace & Style
           if (!currentValues.pace?.length) {
-            setValidationError("Please set your preferred activity pace");
-            form.trigger(["pace"]);
+            setValidationError('Please set your preferred activity pace');
+            form.trigger(['pace']);
             return false;
           }
           break;
@@ -493,8 +473,8 @@ export default function Plan() {
             Plan Your Perfect Trip
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tell us about your dream destination and we&apos;ll craft the
-            perfect itinerary just for you
+            Tell us about your dream destination and we&apos;ll craft the perfect itinerary just for
+            you
           </p>
         </div>
 
@@ -508,17 +488,15 @@ export default function Plan() {
                   <div
                     className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                       index <= currentStep
-                        ? "bg-primary border-primary text-primary-foreground"
-                        : "bg-background border-border text-muted-foreground"
+                        ? 'bg-primary border-primary text-primary-foreground'
+                        : 'bg-background border-border text-muted-foreground'
                     }`}
                   >
                     <StepIcon className="w-5 h-5" />
                   </div>
                   <span
                     className={`text-xs mt-2 font-medium ${
-                      index <= currentStep
-                        ? "text-primary"
-                        : "text-muted-foreground"
+                      index <= currentStep ? 'text-primary' : 'text-muted-foreground'
                     }`}
                   >
                     {step.title}
@@ -539,9 +517,7 @@ export default function Plan() {
         {validationError && (
           <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-2">
             <AlertCircle className="w-5 h-5 text-destructive" />
-            <span className="text-destructive font-medium">
-              {validationError}
-            </span>
+            <span className="text-destructive font-medium">{validationError}</span>
           </div>
         )}
 
@@ -551,7 +527,7 @@ export default function Plan() {
               <CardHeader className="pb-4">
                 <CardTitle className="flex items-center gap-3 text-2xl">
                   {React.createElement(steps[currentStep].icon, {
-                    className: "w-6 h-6 text-primary",
+                    className: 'w-6 h-6 text-primary',
                   })}
                   {steps[currentStep].title}
                 </CardTitle>
@@ -579,21 +555,16 @@ export default function Plan() {
                             )}
                           </FormLabel>
                           <FormControl>
-                            <Input
-                              placeholder="Your name"
-                              {...field}
-                              className="h-12 text-base"
-                            />
+                            <Input placeholder="Your name" {...field} className="h-12 text-base" />
                           </FormControl>
                           <FormDescription>
                             {session?.user?.name ? (
                               <span className="text-green-600 flex items-center gap-1">
                                 <Sparkles className="w-3 h-3" />
-                                Welcome back, {session.user.name}! Your name has
-                                been prefilled.
+                                Welcome back, {session.user.name}! Your name has been prefilled.
                               </span>
                             ) : (
-                              "Enter your name to personalize your trip plan"
+                              'Enter your name to personalize your trip plan'
                             )}
                           </FormDescription>
                           <FormMessage />
@@ -656,16 +627,16 @@ export default function Plan() {
                           <button
                             type="button"
                             className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap ${
-                              dateInputType === "picker"
-                                ? "bg-background text-primary shadow-sm border border-border"
-                                : "text-muted-foreground hover:text-foreground"
+                              dateInputType === 'picker'
+                                ? 'bg-background text-primary shadow-sm border border-border'
+                                : 'text-muted-foreground hover:text-foreground'
                             }`}
                             onClick={() => {
-                              setDateInputType("picker");
-                              form.setValue("dateInputType", "picker");
-                              if (dateInputType === "text") {
-                                form.setValue("travelDates.start", "");
-                                form.setValue("travelDates.end", "");
+                              setDateInputType('picker');
+                              form.setValue('dateInputType', 'picker');
+                              if (dateInputType === 'text') {
+                                form.setValue('travelDates.start', '');
+                                form.setValue('travelDates.end', '');
                               }
                             }}
                           >
@@ -675,16 +646,16 @@ export default function Plan() {
                           <button
                             type="button"
                             className={`inline-flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all whitespace-nowrap ${
-                              dateInputType === "text"
-                                ? "bg-background text-primary shadow-sm border border-border"
-                                : "text-muted-foreground hover:text-foreground"
+                              dateInputType === 'text'
+                                ? 'bg-background text-primary shadow-sm border border-border'
+                                : 'text-muted-foreground hover:text-foreground'
                             }`}
                             onClick={() => {
-                              setDateInputType("text");
-                              form.setValue("dateInputType", "text");
-                              if (dateInputType === "picker") {
-                                form.setValue("travelDates.start", "");
-                                form.setValue("travelDates.end", "");
+                              setDateInputType('text');
+                              form.setValue('dateInputType', 'text');
+                              if (dateInputType === 'picker') {
+                                form.setValue('travelDates.start', '');
+                                form.setValue('travelDates.end', '');
                               }
                             }}
                           >
@@ -694,51 +665,41 @@ export default function Plan() {
                         </div>
                       </div>
 
-                      {dateInputType === "picker" ? (
+                      {dateInputType === 'picker' ? (
                         <div className="grid md:grid-cols-2 gap-4">
                           <FormField
                             control={form.control}
                             name="travelDates.start"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-medium">
-                                  Start Date
-                                </FormLabel>
+                                <FormLabel className="text-sm font-medium">Start Date</FormLabel>
                                 <FormControl>
                                   <Popover>
                                     <PopoverTrigger asChild>
                                       <Button
-                                        variant={"outline"}
+                                        variant={'outline'}
                                         className={cn(
-                                          "w-full justify-start text-left font-normal h-12",
-                                          !field.value &&
-                                            "text-muted-foreground"
+                                          'w-full justify-start text-left font-normal h-12',
+                                          !field.value && 'text-muted-foreground',
                                         )}
                                       >
                                         <CalendarIcon className="mr-2 h-4 w-4" />
                                         {field.value ? (
-                                          format(new Date(field.value), "PPP")
+                                          format(new Date(field.value), 'PPP')
                                         ) : (
                                           <span>Pick start date</span>
                                         )}
                                       </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent
-                                      className="w-auto p-0"
-                                      align="start"
-                                    >
+                                    <PopoverContent className="w-auto p-0" align="start">
                                       <Calendar
                                         mode="single"
-                                        selected={
-                                          field.value
-                                            ? new Date(field.value)
-                                            : undefined
-                                        }
+                                        selected={field.value ? new Date(field.value) : undefined}
                                         onSelect={(date) => {
                                           if (date) {
                                             field.onChange(date.toISOString());
                                           } else {
-                                            field.onChange("");
+                                            field.onChange('');
                                           }
                                         }}
                                         initialFocus
@@ -755,52 +716,39 @@ export default function Plan() {
                             name="travelDates.end"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-medium">
-                                  End Date
-                                </FormLabel>
+                                <FormLabel className="text-sm font-medium">End Date</FormLabel>
                                 <FormControl>
                                   <Popover>
                                     <PopoverTrigger asChild>
                                       <Button
-                                        variant={"outline"}
+                                        variant={'outline'}
                                         className={cn(
-                                          "w-full justify-start text-left font-normal h-12",
-                                          !field.value &&
-                                            "text-muted-foreground"
+                                          'w-full justify-start text-left font-normal h-12',
+                                          !field.value && 'text-muted-foreground',
                                         )}
                                       >
                                         <CalendarIcon className="mr-2 h-4 w-4" />
                                         {field.value ? (
-                                          format(new Date(field.value), "PPP")
+                                          format(new Date(field.value), 'PPP')
                                         ) : (
                                           <span>Pick end date</span>
                                         )}
                                       </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent
-                                      className="w-auto p-0"
-                                      align="start"
-                                    >
+                                    <PopoverContent className="w-auto p-0" align="start">
                                       <Calendar
                                         mode="single"
-                                        selected={
-                                          field.value
-                                            ? new Date(field.value)
-                                            : undefined
-                                        }
+                                        selected={field.value ? new Date(field.value) : undefined}
                                         onSelect={(date) => {
                                           if (date) {
                                             field.onChange(date.toISOString());
                                           } else {
-                                            field.onChange("");
+                                            field.onChange('');
                                           }
                                         }}
                                         disabled={(date) => {
-                                          const startDate =
-                                            form.getValues("travelDates.start");
-                                          return startDate
-                                            ? date < new Date(startDate)
-                                            : false;
+                                          const startDate = form.getValues('travelDates.start');
+                                          return startDate ? date < new Date(startDate) : false;
                                         }}
                                         initialFocus
                                       />
@@ -819,9 +767,7 @@ export default function Plan() {
                             name="travelDates.start"
                             render={({ field }) => (
                               <FormItem>
-                                <FormLabel className="text-sm font-medium">
-                                  Travel Dates
-                                </FormLabel>
+                                <FormLabel className="text-sm font-medium">Travel Dates</FormLabel>
                                 <FormControl>
                                   <Input
                                     placeholder="e.g., July 10 – July 17, August 2025 (flexible), Summer 2025"
@@ -831,10 +777,8 @@ export default function Plan() {
                                 </FormControl>
                                 <FormDescription className="text-xs text-muted-foreground">
                                   <Sparkles className="w-3 h-3 inline mr-1" />
-                                  You can enter flexible dates like &quot;August
-                                  2025&quot;, &quot;Summer 2025
-                                  (flexible)&quot;, or &quot;Early
-                                  December&quot;
+                                  You can enter flexible dates like &quot;August 2025&quot;,
+                                  &quot;Summer 2025 (flexible)&quot;, or &quot;Early December&quot;
                                 </FormDescription>
                                 <FormMessage />
                               </FormItem>
@@ -846,11 +790,7 @@ export default function Plan() {
                             render={({ field }) => (
                               <FormItem className="hidden">
                                 <FormControl>
-                                  <Input
-                                    {...field}
-                                    value={field.value || ""}
-                                    className="hidden"
-                                  />
+                                  <Input {...field} value={field.value || ''} className="hidden" />
                                 </FormControl>
                               </FormItem>
                             )}
@@ -864,17 +804,13 @@ export default function Plan() {
                       name="duration"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel className="text-base font-semibold">
-                            How many days?
-                          </FormLabel>
+                          <FormLabel className="text-base font-semibold">How many days?</FormLabel>
                           <FormControl>
                             <Input
                               type="number"
                               placeholder="5"
                               {...field}
-                              onChange={(e) =>
-                                field.onChange(Number(e.target.value))
-                              }
+                              onChange={(e) => field.onChange(Number(e.target.value))}
                               className="h-12 text-base"
                             />
                           </FormControl>
@@ -906,10 +842,7 @@ export default function Plan() {
                             className="grid grid-cols-2 md:grid-cols-3 gap-3 mt-2"
                           >
                             {travelingWithOptions.map((option) => (
-                              <div
-                                key={option}
-                                className="flex items-center space-x-2"
-                              >
+                              <div key={option} className="flex items-center space-x-2">
                                 <RadioGroupItem value={option} id={option} />
                                 <Label
                                   htmlFor={option}
@@ -935,11 +868,7 @@ export default function Plan() {
                               Number of adults
                             </FormLabel>
                             <FormControl>
-                              <NumberInput
-                                value={field.value}
-                                onChange={field.onChange}
-                                min={1}
-                              />
+                              <NumberInput value={field.value} onChange={field.onChange} min={1} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -955,11 +884,7 @@ export default function Plan() {
                               Number of children
                             </FormLabel>
                             <FormControl>
-                              <NumberInput
-                                value={field.value}
-                                onChange={field.onChange}
-                                min={1}
-                              />
+                              <NumberInput value={field.value} onChange={field.onChange} min={1} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -979,20 +904,12 @@ export default function Plan() {
                             {ageGroupOptions.map((ageGroup) => (
                               <Badge
                                 key={ageGroup}
-                                variant={
-                                  field.value?.includes(ageGroup)
-                                    ? "default"
-                                    : "outline"
-                                }
+                                variant={field.value?.includes(ageGroup) ? 'default' : 'outline'}
                                 className="cursor-pointer px-4 py-2 hover:bg-primary/10"
                                 onClick={() => {
                                   const value = field.value || [];
                                   if (value.includes(ageGroup)) {
-                                    field.onChange(
-                                      value.filter(
-                                        (v: string) => v !== ageGroup
-                                      )
-                                    );
+                                    field.onChange(value.filter((v: string) => v !== ageGroup));
                                   } else {
                                     field.onChange([...value, ageGroup]);
                                   }
@@ -1026,95 +943,88 @@ export default function Plan() {
                                 <div className="px-4 py-6">
                                   <div className="mb-4 text-center">
                                     <span className="text-2xl font-bold text-primary">
-                                      {form.watch("budgetCurrency") === "USD" &&
-                                        "$"}
-                                      {form.watch("budgetCurrency") === "EUR" &&
-                                        "€"}
-                                      {form.watch("budgetCurrency") === "GBP" &&
-                                        "£"}
-                                      {form.watch("budgetCurrency") === "INR" &&
-                                        "₹"}
-                                      {form.watch("budgetCurrency") === "JPY" &&
-                                        "¥"}
+                                      {form.watch('budgetCurrency') === 'USD' && '$'}
+                                      {form.watch('budgetCurrency') === 'EUR' && '€'}
+                                      {form.watch('budgetCurrency') === 'GBP' && '£'}
+                                      {form.watch('budgetCurrency') === 'INR' && '₹'}
+                                      {form.watch('budgetCurrency') === 'JPY' && '¥'}
                                       {field.value.toLocaleString()}
                                     </span>
                                   </div>
                                   <Slider
                                     min={
-                                      form.watch("budgetCurrency") === "USD"
+                                      form.watch('budgetCurrency') === 'USD'
                                         ? 100
-                                        : form.watch("budgetCurrency") === "EUR"
-                                        ? 100
-                                        : form.watch("budgetCurrency") === "GBP"
-                                        ? 100
-                                        : form.watch("budgetCurrency") === "INR"
-                                        ? 5000
-                                        : form.watch("budgetCurrency") === "JPY"
-                                        ? 10000
-                                        : 100
+                                        : form.watch('budgetCurrency') === 'EUR'
+                                          ? 100
+                                          : form.watch('budgetCurrency') === 'GBP'
+                                            ? 100
+                                            : form.watch('budgetCurrency') === 'INR'
+                                              ? 5000
+                                              : form.watch('budgetCurrency') === 'JPY'
+                                                ? 10000
+                                                : 100
                                     }
                                     max={
-                                      form.watch("budgetCurrency") === "USD"
+                                      form.watch('budgetCurrency') === 'USD'
                                         ? 10000
-                                        : form.watch("budgetCurrency") === "EUR"
-                                        ? 9000
-                                        : form.watch("budgetCurrency") === "GBP"
-                                        ? 8000
-                                        : form.watch("budgetCurrency") === "INR"
-                                        ? 500000
-                                        : form.watch("budgetCurrency") === "JPY"
-                                        ? 1000000
-                                        : 10000
+                                        : form.watch('budgetCurrency') === 'EUR'
+                                          ? 9000
+                                          : form.watch('budgetCurrency') === 'GBP'
+                                            ? 8000
+                                            : form.watch('budgetCurrency') === 'INR'
+                                              ? 500000
+                                              : form.watch('budgetCurrency') === 'JPY'
+                                                ? 1000000
+                                                : 10000
                                     }
                                     step={
-                                      form.watch("budgetCurrency") === "USD"
+                                      form.watch('budgetCurrency') === 'USD'
                                         ? 100
-                                        : form.watch("budgetCurrency") === "EUR"
-                                        ? 100
-                                        : form.watch("budgetCurrency") === "GBP"
-                                        ? 100
-                                        : form.watch("budgetCurrency") === "INR"
-                                        ? 5000
-                                        : form.watch("budgetCurrency") === "JPY"
-                                        ? 10000
-                                        : 100
+                                        : form.watch('budgetCurrency') === 'EUR'
+                                          ? 100
+                                          : form.watch('budgetCurrency') === 'GBP'
+                                            ? 100
+                                            : form.watch('budgetCurrency') === 'INR'
+                                              ? 5000
+                                              : form.watch('budgetCurrency') === 'JPY'
+                                                ? 10000
+                                                : 100
                                     }
                                     value={[field.value]}
-                                    onValueChange={(values) =>
-                                      field.onChange(values[0])
-                                    }
+                                    onValueChange={(values) => field.onChange(values[0])}
                                     className="w-full"
                                   />
                                   <div className="flex justify-between text-sm text-muted-foreground mt-2">
-                                    {form.watch("budgetCurrency") === "USD" && (
+                                    {form.watch('budgetCurrency') === 'USD' && (
                                       <>
                                         <span>$100</span>
                                         <span>$5,000</span>
                                         <span>$10,000+</span>
                                       </>
                                     )}
-                                    {form.watch("budgetCurrency") === "EUR" && (
+                                    {form.watch('budgetCurrency') === 'EUR' && (
                                       <>
                                         <span>€100</span>
                                         <span>€4,500</span>
                                         <span>€9,000+</span>
                                       </>
                                     )}
-                                    {form.watch("budgetCurrency") === "GBP" && (
+                                    {form.watch('budgetCurrency') === 'GBP' && (
                                       <>
                                         <span>£100</span>
                                         <span>£4,000</span>
                                         <span>£8,000+</span>
                                       </>
                                     )}
-                                    {form.watch("budgetCurrency") === "INR" && (
+                                    {form.watch('budgetCurrency') === 'INR' && (
                                       <>
                                         <span>₹5,000</span>
                                         <span>₹250,000</span>
                                         <span>₹500,000+</span>
                                       </>
                                     )}
-                                    {form.watch("budgetCurrency") === "JPY" && (
+                                    {form.watch('budgetCurrency') === 'JPY' && (
                                       <>
                                         <span>¥10,000</span>
                                         <span>¥500,000</span>
@@ -1134,17 +1044,12 @@ export default function Plan() {
                         name="budgetCurrency"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel className="text-base font-semibold">
-                              Currency
-                            </FormLabel>
+                            <FormLabel className="text-base font-semibold">Currency</FormLabel>
                             <Select
                               onValueChange={(value) => {
                                 field.onChange(value);
                                 // Update budget to appropriate default for new currency
-                                form.setValue(
-                                  "budget",
-                                  getDefaultBudgetForCurrency(value)
-                                );
+                                form.setValue('budget', getDefaultBudgetForCurrency(value));
                               }}
                               defaultValue={field.value}
                             >
@@ -1181,19 +1086,10 @@ export default function Plan() {
                             className="grid md:grid-cols-2 gap-4 mt-2"
                           >
                             {travelStyles.map((style) => (
-                              <div
-                                key={style.value}
-                                className="flex items-center space-x-2"
-                              >
-                                <RadioGroupItem
-                                  value={style.value}
-                                  id={style.value}
-                                />
+                              <div key={style.value} className="flex items-center space-x-2">
+                                <RadioGroupItem value={style.value} id={style.value} />
                                 <div className="grid gap-1">
-                                  <Label
-                                    htmlFor={style.value}
-                                    className="font-medium"
-                                  >
+                                  <Label htmlFor={style.value} className="font-medium">
                                     {style.label}
                                   </Label>
                                   <p className="text-sm text-muted-foreground">
@@ -1218,15 +1114,11 @@ export default function Plan() {
                               Budget flexibility
                             </FormLabel>
                             <FormDescription>
-                              Can you go a bit over budget for amazing
-                              experiences?
+                              Can you go a bit over budget for amazing experiences?
                             </FormDescription>
                           </div>
                           <FormControl>
-                            <Checkbox
-                              checked={field.value}
-                              onCheckedChange={field.onChange}
-                            />
+                            <Checkbox checked={field.value} onCheckedChange={field.onChange} />
                           </FormControl>
                         </FormItem>
                       )}
@@ -1248,32 +1140,26 @@ export default function Plan() {
                           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
                             {travelVibes.map((vibe) => {
                               const VibeIcon = vibe.icon;
-                              const isSelected = selectedVibes.includes(
-                                vibe.id
-                              );
+                              const isSelected = selectedVibes.includes(vibe.id);
                               return (
                                 <div
                                   key={vibe.id}
                                   onClick={() => handleVibeToggle(vibe.id)}
                                   className={`p-4 rounded-xl border-2 cursor-pointer transition-all hover:shadow-lg ${
                                     isSelected
-                                      ? "border-primary bg-primary/5 shadow-md"
-                                      : "border-border hover:border-primary/50"
+                                      ? 'border-primary bg-primary/5 shadow-md'
+                                      : 'border-border hover:border-primary/50'
                                   }`}
                                 >
                                   <div className="text-center">
                                     <VibeIcon
                                       className={`w-8 h-8 mx-auto mb-2 ${
-                                        isSelected
-                                          ? "text-primary"
-                                          : "text-muted-foreground"
+                                        isSelected ? 'text-primary' : 'text-muted-foreground'
                                       }`}
                                     />
                                     <span
                                       className={`font-medium ${
-                                        isSelected
-                                          ? "text-primary"
-                                          : "text-foreground"
+                                        isSelected ? 'text-primary' : 'text-foreground'
                                       }`}
                                     >
                                       {vibe.label}
@@ -1298,19 +1184,17 @@ export default function Plan() {
                           </FormLabel>
                           <div className="flex flex-wrap gap-2 mt-2">
                             {[
-                              "Comfort",
-                              "Budget-friendly",
-                              "Unique stays",
-                              "Local experiences",
-                              "Instagram-worthy spots",
-                              "Safety",
+                              'Comfort',
+                              'Budget-friendly',
+                              'Unique stays',
+                              'Local experiences',
+                              'Instagram-worthy spots',
+                              'Safety',
                             ].map((priority) => (
                               <Badge
                                 key={priority}
                                 variant={
-                                  selectedPriorities.includes(priority)
-                                    ? "default"
-                                    : "outline"
+                                  selectedPriorities.includes(priority) ? 'default' : 'outline'
                                 }
                                 className="cursor-pointer px-4 py-2 hover:bg-primary/10"
                                 onClick={() => handlePriorityToggle(priority)}
@@ -1338,9 +1222,7 @@ export default function Plan() {
                               className="min-h-[100px] text-base"
                             />
                           </FormControl>
-                          <FormDescription>
-                            Help us personalize your trip
-                          </FormDescription>
+                          <FormDescription>Help us personalize your trip</FormDescription>
                         </FormItem>
                       )}
                     />
@@ -1359,11 +1241,7 @@ export default function Plan() {
                             How many rooms do you need?
                           </FormLabel>
                           <FormControl>
-                            <NumberInput
-                              value={field.value}
-                              onChange={field.onChange}
-                              min={1}
-                            />
+                            <NumberInput value={field.value} onChange={field.onChange} min={1} />
                           </FormControl>
                           <FormDescription>
                             This helps us suggest the right accommodations
@@ -1404,16 +1282,16 @@ export default function Plan() {
                             </div>
                           </FormControl>
                           <FormDescription>
-                            Current setting:{" "}
+                            Current setting:{' '}
                             {field.value?.[0] === 1
-                              ? "Very relaxed"
+                              ? 'Very relaxed'
                               : field.value?.[0] === 2
-                              ? "Mostly relaxed"
-                              : field.value?.[0] === 3
-                              ? "Balanced"
-                              : field.value?.[0] === 4
-                              ? "Quite busy"
-                              : "Action-packed"}
+                                ? 'Mostly relaxed'
+                                : field.value?.[0] === 3
+                                  ? 'Balanced'
+                                  : field.value?.[0] === 4
+                                    ? 'Quite busy'
+                                    : 'Action-packed'}
                           </FormDescription>
                         </FormItem>
                       )}
@@ -1488,8 +1366,7 @@ export default function Plan() {
                             />
                           </FormControl>
                           <FormDescription>
-                            Share any special requirements, dietary
-                            restrictions, or preferences
+                            Share any special requirements, dietary restrictions, or preferences
                           </FormDescription>
                         </FormItem>
                       )}
@@ -1503,9 +1380,9 @@ export default function Plan() {
             {submitMessage && (
               <div
                 className={`p-4 rounded-lg border text-center font-medium ${
-                  submitMessage.includes("🎉")
-                    ? "bg-green-50 border-green-200 text-green-800"
-                    : "bg-red-50 border-red-200 text-red-800"
+                  submitMessage.includes('🎉')
+                    ? 'bg-green-50 border-green-200 text-green-800'
+                    : 'bg-red-50 border-red-200 text-red-800'
                 }`}
               >
                 {submitMessage}
@@ -1530,11 +1407,7 @@ export default function Plan() {
               </span>
 
               {currentStep === steps.length - 1 ? (
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="h-12 px-8"
-                >
+                <Button type="submit" disabled={isSubmitting} className="h-12 px-8">
                   {isSubmitting ? (
                     <>
                       <div className="w-4 h-4 mr-2 animate-spin rounded-full border-2 border-background border-t-transparent" />

@@ -118,21 +118,21 @@ function App() {
             }
           />
           <Route
-  path="/social-media"
-  element={
-    <AppLayout>
-      <SocialMedia />
-    </AppLayout>
-  }
-/>
-<Route
-  path="/social-media/:postId"
-  element={
-    <AppLayout>
-      <SocialMediaDetail />
-    </AppLayout>
-  }
-/>
+            path="/social-media"
+            element={
+              <AppLayout>
+                <SocialMedia />
+              </AppLayout>
+            }
+          />
+          <Route
+            path="/social-media/:postId"
+            element={
+              <AppLayout>
+                <SocialMediaDetail />
+              </AppLayout>
+            }
+          />
         </Routes>
       </div>
     </Router>

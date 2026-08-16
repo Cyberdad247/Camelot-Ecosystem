@@ -27,13 +27,20 @@ export function TaskGraphPanel({ nodes }: { nodes: Array<Record<string, unknown>
       {dag.map((n) => {
         const status = n.status ?? 'unknown';
         return (
-          <li key={n.nodeId} className="flex items-center justify-between gap-2 text-xs text-white/80">
+          <li
+            key={n.nodeId}
+            className="flex items-center justify-between gap-2 text-xs text-white/80"
+          >
             <span className="flex items-center gap-2">
-              <span aria-hidden="true" className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[status] ?? 'bg-white/40'}`} />
+              <span
+                aria-hidden="true"
+                className={`h-1.5 w-1.5 rounded-full ${STATUS_DOT[status] ?? 'bg-white/40'}`}
+              />
               <span>{n.name ?? n.nodeId}</span>
             </span>
             <span className="font-mono text-[10px] uppercase tracking-wider text-white/40">
-              {status}{n.worker ? ` · ${n.worker}` : ''}
+              {status}
+              {n.worker ? ` · ${n.worker}` : ''}
             </span>
           </li>
         );

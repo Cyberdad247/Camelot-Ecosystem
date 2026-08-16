@@ -19,7 +19,11 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import { activateSupportSession, loadCamelotOsState, revokeSupportSession } from './camelotOsClient';
+import {
+  activateSupportSession,
+  loadCamelotOsState,
+  revokeSupportSession,
+} from './camelotOsClient';
 import type { CamelotOsState, FileState, FrontierNode, MemoryTier } from './types';
 
 const statusTone: Record<string, string> = {
@@ -44,19 +48,30 @@ function fmtDate(value?: string | number) {
 
 function fileLabel(file: FileState) {
   if (!file.exists) return 'missing';
-  const kb = file.bytes ? `${Math.max(1, Math.round(file.bytes / 1024)).toLocaleString()} KB` : 'tracked';
+  const kb = file.bytes
+    ? `${Math.max(1, Math.round(file.bytes / 1024)).toLocaleString()} KB`
+    : 'tracked';
   return `${kb} · ${fmtDate(file.updated)}`;
 }
 
 function StatusPill({ status }: { status: string }) {
   return (
-    <span className={cn('rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest', statusTone[status] ?? 'border-slate-700 bg-slate-900 text-slate-300')}>
+    <span
+      className={cn(
+        'rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest',
+        statusTone[status] ?? 'border-slate-700 bg-slate-900 text-slate-300',
+      )}
+    >
       {status.replace(/_/g, ' ')}
     </span>
   );
 }
 
-function Metric({ label, value, icon: Icon }: { label: string; value: string | number; icon: React.ElementType }) {
+function Metric({
+  label,
+  value,
+  icon: Icon,
+}: { label: string; value: string | number; icon: React.ElementType }) {
   return (
     <div className="rounded-lg border border-slate-800/70 bg-slate-950/60 p-4">
       <div className="flex items-center justify-between gap-3">
@@ -85,7 +100,12 @@ function MemoryTierRow({ tier }: { tier: MemoryTier }) {
         <p className="text-sm leading-6 text-slate-300">{tier.purpose}</p>
         <p className="mt-1 font-mono text-[11px] text-slate-500">{tier.source}</p>
         {tier.notebook_url && (
-          <a className="mt-2 inline-flex text-xs font-semibold text-cyan-300 hover:text-cyan-200" href={tier.notebook_url} target="_blank" rel="noreferrer">
+          <a
+            className="mt-2 inline-flex text-xs font-semibold text-cyan-300 hover:text-cyan-200"
+            href={tier.notebook_url}
+            target="_blank"
+            rel="noreferrer"
+          >
             Open Cloudbrain notebook
           </a>
         )}
@@ -106,7 +126,10 @@ function SurfaceGrid({ surfaces }: { surfaces: Record<string, boolean> }) {
   return (
     <div className="grid grid-cols-2 gap-2 md:grid-cols-5">
       {entries.map(([key, online]) => (
-        <div key={key} className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2">
+        <div
+          key={key}
+          className="flex items-center gap-2 rounded-lg border border-slate-800 bg-slate-950/60 px-3 py-2"
+        >
           <CheckCircle2 className={cn('h-4 w-4', online ? 'text-emerald-400' : 'text-slate-600')} />
           <span className="text-xs font-semibold capitalize text-slate-300">{key}</span>
         </div>
@@ -125,10 +148,15 @@ function FrontierNodeCard({ node }: { node: FrontierNode }) {
         </div>
         <StatusPill status={node.status} />
       </div>
-      <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-cyan-300">{node.role}</p>
+      <p className="mt-3 text-xs font-semibold uppercase tracking-widest text-cyan-300">
+        {node.role}
+      </p>
       <div className="mt-3 flex flex-wrap gap-1.5">
         {node.memory_tiers.map((tier) => (
-          <span key={tier} className="rounded border border-fuchsia-500/20 bg-fuchsia-950/20 px-2 py-0.5 text-[10px] font-bold uppercase text-fuchsia-200">
+          <span
+            key={tier}
+            className="rounded border border-fuchsia-500/20 bg-fuchsia-950/20 px-2 py-0.5 text-[10px] font-bold uppercase text-fuchsia-200"
+          >
             {tier}
           </span>
         ))}
@@ -145,7 +173,9 @@ export default function CamelotOsCommand() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [supportReason, setSupportReason] = useState('client-requested support window');
-  const [operatorToken, setOperatorToken] = useState(() => window.sessionStorage.getItem('camelot.operatorToken') ?? '');
+  const [operatorToken, setOperatorToken] = useState(
+    () => window.sessionStorage.getItem('camelot.operatorToken') ?? '',
+  );
   const [supportToken, setSupportToken] = useState('');
 
   async function refresh() {
@@ -222,10 +252,13 @@ export default function CamelotOsCommand() {
         <div>
           <div className="flex items-center gap-3">
             <Layers3 className="h-6 w-6 text-fuchsia-300" />
-            <h1 className="text-2xl font-black tracking-tight text-slate-100">Camelot OS Command</h1>
+            <h1 className="text-2xl font-black tracking-tight text-slate-100">
+              Camelot OS Command
+            </h1>
           </div>
           <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-500">
-            Whole-system map for orchestration, Cloudbrain memory tiers, ledgers, active cartridges, and launch surfaces.
+            Whole-system map for orchestration, Cloudbrain memory tiers, ledgers, active cartridges,
+            and launch surfaces.
           </p>
         </div>
         <button
@@ -257,8 +290,12 @@ export default function CamelotOsCommand() {
           <section className="overflow-hidden rounded-lg border border-slate-800/70 bg-slate-900/35">
             <div className="flex items-center justify-between gap-4 px-5 py-4">
               <div>
-                <h2 className="text-sm font-black uppercase tracking-widest text-slate-200">Strategic Orchestration</h2>
-                <p className="mt-1 text-xs text-slate-500">Generated {fmtDate(state.generated_utc)} from {state.version}</p>
+                <h2 className="text-sm font-black uppercase tracking-widest text-slate-200">
+                  Strategic Orchestration
+                </h2>
+                <p className="mt-1 text-xs text-slate-500">
+                  Generated {fmtDate(state.generated_utc)} from {state.version}
+                </p>
               </div>
               <StatusPill status={state.status} />
             </div>
@@ -268,7 +305,9 @@ export default function CamelotOsCommand() {
             <div className="grid border-t border-slate-800/70 md:grid-cols-2 xl:grid-cols-3">
               {state.orchestration.layers.map((layer) => (
                 <div key={layer.layer} className="border-b border-r border-slate-800/70 p-4">
-                  <p className="text-xs font-bold uppercase tracking-widest text-fuchsia-300">{layer.layer}</p>
+                  <p className="text-xs font-bold uppercase tracking-widest text-fuchsia-300">
+                    {layer.layer}
+                  </p>
                   <p className="mt-2 text-sm font-black text-slate-100">{layer.owner}</p>
                   <p className="mt-2 text-xs leading-5 text-slate-400">{layer.purpose}</p>
                   <p className="mt-3 font-mono text-[10px] text-slate-600">{layer.source}</p>
@@ -282,9 +321,14 @@ export default function CamelotOsCommand() {
               <h2 className="flex items-center gap-2 text-sm font-black uppercase tracking-widest text-slate-200">
                 <BrainCircuit className="h-4 w-4 text-cyan-300" /> Cloudbrain Memory Routing
               </h2>
-              <p className="mt-1 text-xs text-slate-500">Flash for now, Short for NotebookLM synthesis, Long for durable archive and LT memory.</p>
+              <p className="mt-1 text-xs text-slate-500">
+                Flash for now, Short for NotebookLM synthesis, Long for durable archive and LT
+                memory.
+              </p>
             </div>
-            {state.memory_tiers.map((tier) => <MemoryTierRow key={tier.id} tier={tier} />)}
+            {state.memory_tiers.map((tier) => (
+              <MemoryTierRow key={tier.id} tier={tier} />
+            ))}
           </section>
 
           <div className="grid gap-6 xl:grid-cols-[1fr_420px]">
@@ -312,10 +356,30 @@ export default function CamelotOsCommand() {
                 <BookOpen className="h-4 w-4 text-fuchsia-300" /> Launch Surfaces
               </h2>
               <div className="mt-4 grid gap-2">
-                <Link to="/dev" className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-fuchsia-500/40">Development Portal</Link>
-                <Link to="/defense-grid" className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-emerald-500/40">Defense Grid</Link>
-                <Link to="/brain" className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-cyan-500/40">Flash Brain HUD</Link>
-                <Link to="/openviking" className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-blue-500/40">OpenViking Map</Link>
+                <Link
+                  to="/dev"
+                  className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-fuchsia-500/40"
+                >
+                  Development Portal
+                </Link>
+                <Link
+                  to="/defense-grid"
+                  className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-emerald-500/40"
+                >
+                  Defense Grid
+                </Link>
+                <Link
+                  to="/brain"
+                  className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-cyan-500/40"
+                >
+                  Flash Brain HUD
+                </Link>
+                <Link
+                  to="/openviking"
+                  className="rounded-lg border border-slate-800 bg-slate-950/60 px-4 py-3 text-sm font-semibold text-slate-200 hover:border-blue-500/40"
+                >
+                  OpenViking Map
+                </Link>
               </div>
             </section>
           </div>
@@ -327,13 +391,16 @@ export default function CamelotOsCommand() {
                   <Network className="h-4 w-4 text-cyan-300" /> Empire Nodes
                 </h2>
                 <p className="mt-1 max-w-3xl text-xs leading-5 text-slate-500">
-                  Frontier model chats become registered Camelot nodes with roles, memory tiers, permissions, and ledgered activity.
+                  Frontier model chats become registered Camelot nodes with roles, memory tiers,
+                  permissions, and ledgered activity.
                 </p>
               </div>
               <p className="font-mono text-[11px] text-slate-600">{state.frontier.artifact_path}</p>
             </div>
             <div className="grid gap-3 border-t border-slate-800/70 p-5 md:grid-cols-2 xl:grid-cols-5">
-              {state.frontier.nodes.map((node) => <FrontierNodeCard key={node.node_id} node={node} />)}
+              {state.frontier.nodes.map((node) => (
+                <FrontierNodeCard key={node.node_id} node={node} />
+              ))}
             </div>
           </section>
 
@@ -344,7 +411,9 @@ export default function CamelotOsCommand() {
                   <KeyRound className="h-4 w-4 text-amber-300" /> Break-Glass Support Portal
                 </h2>
                 <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-400">
-                  Future access is disabled by default. Activate it only when a client needs help; Camelot creates a temporary token, stores only its hash, expires it automatically, and writes the action to the ledger.
+                  Future access is disabled by default. Activate it only when a client needs help;
+                  Camelot creates a temporary token, stores only its hash, expires it automatically,
+                  and writes the action to the ledger.
                 </p>
                 <div className="mt-4 grid gap-3 md:grid-cols-[1fr_160px_160px]">
                   <input
@@ -375,26 +444,48 @@ export default function CamelotOsCommand() {
                 </div>
                 {supportToken && (
                   <div className="mt-4 rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
-                    <p className="text-xs font-bold uppercase tracking-widest text-amber-200">One-time token</p>
-                    <p className="mt-2 break-all font-mono text-sm text-amber-100">{supportToken}</p>
-                    <p className="mt-2 text-xs text-amber-200/70">This token is shown once. The runtime artifact stores only a SHA-256 hash.</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-amber-200">
+                      One-time token
+                    </p>
+                    <p className="mt-2 break-all font-mono text-sm text-amber-100">
+                      {supportToken}
+                    </p>
+                    <p className="mt-2 text-xs text-amber-200/70">
+                      This token is shown once. The runtime artifact stores only a SHA-256 hash.
+                    </p>
                   </div>
                 )}
               </div>
               <div className="rounded-lg border border-slate-800 bg-slate-950/60 p-4">
                 <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-black uppercase tracking-widest text-slate-400">Support State</p>
+                  <p className="text-xs font-black uppercase tracking-widest text-slate-400">
+                    Support State
+                  </p>
                   <StatusPill status={state.frontier.support.status} />
                 </div>
                 {state.frontier.support.active_session ? (
                   <div className="mt-4 space-y-3 text-xs text-slate-400">
-                    <p><span className="text-slate-500">Session:</span> {state.frontier.support.active_session.session_id}</p>
-                    <p><span className="text-slate-500">Portal:</span> {state.frontier.support.active_session.portal_path}</p>
-                    <p><span className="text-slate-500">Expires:</span> {fmtDate(state.frontier.support.active_session.expires_utc)}</p>
-                    <p><span className="text-slate-500">Reason:</span> {state.frontier.support.active_session.reason}</p>
+                    <p>
+                      <span className="text-slate-500">Session:</span>{' '}
+                      {state.frontier.support.active_session.session_id}
+                    </p>
+                    <p>
+                      <span className="text-slate-500">Portal:</span>{' '}
+                      {state.frontier.support.active_session.portal_path}
+                    </p>
+                    <p>
+                      <span className="text-slate-500">Expires:</span>{' '}
+                      {fmtDate(state.frontier.support.active_session.expires_utc)}
+                    </p>
+                    <p>
+                      <span className="text-slate-500">Reason:</span>{' '}
+                      {state.frontier.support.active_session.reason}
+                    </p>
                   </div>
                 ) : (
-                  <p className="mt-4 text-xs leading-5 text-slate-500">No active support session. The portal is closed.</p>
+                  <p className="mt-4 text-xs leading-5 text-slate-500">
+                    No active support session. The portal is closed.
+                  </p>
                 )}
               </div>
             </div>

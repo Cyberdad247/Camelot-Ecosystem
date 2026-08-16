@@ -8,7 +8,8 @@ if (!customElements.get('quick-add-modal')) {
       }
 
       hide(preventFocus = false) {
-        const cartNotification = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+        const cartNotification =
+          document.querySelector('cart-notification') || document.querySelector('cart-drawer');
         if (cartNotification) cartNotification.setActiveElement(this.openedBy);
         this.modalContent.innerHTML = '';
 
@@ -82,10 +83,15 @@ if (!customElements.get('quick-add-modal')) {
 
       preventDuplicatedIDs() {
         const sectionId = this.productElement.dataset.section;
-        this.productElement.innerHTML = this.productElement.innerHTML.replaceAll(sectionId, `quickadd-${sectionId}`);
-        this.productElement.querySelectorAll('variant-selects, variant-radios, product-info').forEach((element) => {
-          element.dataset.originalSection = sectionId;
-        });
+        this.productElement.innerHTML = this.productElement.innerHTML.replaceAll(
+          sectionId,
+          `quickadd-${sectionId}`,
+        );
+        this.productElement
+          .querySelectorAll('variant-selects, variant-radios, product-info')
+          .forEach((element) => {
+            element.dataset.originalSection = sectionId;
+          });
       }
 
       removeGalleryListSemantic() {
@@ -93,7 +99,9 @@ if (!customElements.get('quick-add-modal')) {
         if (!galleryList) return;
 
         galleryList.setAttribute('role', 'presentation');
-        galleryList.querySelectorAll('[id^="Slide-"]').forEach((li) => li.setAttribute('role', 'presentation'));
+        galleryList
+          .querySelectorAll('[id^="Slide-"]')
+          .forEach((li) => li.setAttribute('role', 'presentation'));
       }
 
       updateImageSizes() {
@@ -115,6 +123,6 @@ if (!customElements.get('quick-add-modal')) {
 
         mediaImages.forEach((img) => img.setAttribute('sizes', mediaImageSizes));
       }
-    }
+    },
   );
 }

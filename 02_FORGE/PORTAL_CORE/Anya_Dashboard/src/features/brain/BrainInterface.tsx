@@ -29,7 +29,10 @@ function formatDispatchResponse(data: any): string {
   if (typeof result?.brief === 'string' && result.brief.trim()) {
     lines.push('');
     lines.push(result.brief.trim());
-  } else if (typeof result?.bridge_response?.result === 'string' && result.bridge_response.result.trim()) {
+  } else if (
+    typeof result?.bridge_response?.result === 'string' &&
+    result.bridge_response.result.trim()
+  ) {
     lines.push('');
     lines.push(result.bridge_response.result.trim());
   } else if (typeof data?.response === 'string' && data.response.trim()) {
@@ -107,7 +110,7 @@ export default function BrainInterface() {
     }
 
     const userMsg = { role: 'user' as const, content: cleanQuery };
-    setMessages(prev => [...prev, userMsg]);
+    setMessages((prev) => [...prev, userMsg]);
     setQuery('');
     setLoading(true);
 
@@ -124,14 +127,20 @@ export default function BrainInterface() {
             source: 'brain_ui',
             bridge_knight: 'sir_link',
           },
-        })
+        }),
       });
 
       const data = await res.json();
       const aiMsg = { role: 'assistant' as const, content: formatDispatchResponse(data) };
-      setMessages(prev => [...prev, aiMsg]);
+      setMessages((prev) => [...prev, aiMsg]);
     } catch (err) {
-      setMessages(prev => [...prev, { role: 'assistant', content: "Local dispatch unreachable. Brain UI could not hand off through Sir Link." }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'assistant',
+          content: 'Local dispatch unreachable. Brain UI could not hand off through Sir Link.',
+        },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -143,32 +152,41 @@ export default function BrainInterface() {
       <div className="w-full lg:w-1/2 min-h-[300px] lg:h-full rounded-2xl overflow-hidden border border-slate-800 relative shadow-2xl shadow-cyan-900/20">
         <QuantumScene />
         <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md px-3 py-1 rounded-full text-[10px] text-cyan-400 font-mono border border-cyan-500/30">
-            QUANTUM RENDERER ACTIVE
+          QUANTUM RENDERER ACTIVE
         </div>
       </div>
 
       {/* Right Panel: Chat */}
-      <Card className="flex-1 flex flex-col h-[500px] lg:h-full border-none shadow-2xl bg-slate-900/50 backdrop-blur-sm" 
-            title="Anya's Interface"
-            description="Commanding the Kernel & Engine">
-
+      <Card
+        className="flex-1 flex flex-col h-[500px] lg:h-full border-none shadow-2xl bg-slate-900/50 backdrop-blur-sm"
+        title="Anya's Interface"
+        description="Commanding the Kernel & Engine"
+      >
         <div className="px-2 pb-2 text-[10px] uppercase tracking-widest">
           <span className={isConnected ? 'text-emerald-400' : 'text-amber-400'}>
-            {isConnected ? 'websocket linked to morgana bridge' : 'websocket offline, dispatch still available'}
+            {isConnected
+              ? 'websocket linked to morgana bridge'
+              : 'websocket offline, dispatch still available'}
           </span>
         </div>
-        
+
         <div className="flex-1 overflow-y-auto space-y-4 mb-4 p-2">
           {messages.map((m, i) => (
             <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-              <div className={`max-w-[80%] rounded-2xl px-4 py-2 ${
-                m.role === 'user' ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-slate-200'
-              }`}>
+              <div
+                className={`max-w-[80%] rounded-2xl px-4 py-2 ${
+                  m.role === 'user' ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-slate-200'
+                }`}
+              >
                 {m.content}
               </div>
             </div>
           ))}
-          {loading && <div className="text-slate-500 text-sm animate-pulse">Routing through Sir Alex and Sir Link...</div>}
+          {loading && (
+            <div className="text-slate-500 text-sm animate-pulse">
+              Routing through Sir Alex and Sir Link...
+            </div>
+          )}
         </div>
 
         <div className="flex gap-2">
@@ -179,8 +197,8 @@ export default function BrainInterface() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleAsk()}
           />
-          <button 
-            onClick={handleAsk} 
+          <button
+            onClick={handleAsk}
             className="p-3 bg-cyan-600 rounded-full text-white"
             title="Send Message"
             aria-label="Send Message"

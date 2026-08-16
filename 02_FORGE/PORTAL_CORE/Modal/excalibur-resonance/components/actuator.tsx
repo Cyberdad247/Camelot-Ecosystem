@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Zap } from "lucide-react";
+import { useState } from 'react';
+import { Zap } from 'lucide-react';
 
 export function Actuator() {
-  const [command, setCommand] = useState("");
+  const [command, setCommand] = useState('');
 
   return (
     <div className="rounded-2xl border border-zinc-800 bg-white/5 p-4 backdrop-blur flex flex-col gap-4">
@@ -12,9 +12,7 @@ export function Actuator() {
         <Zap className="h-5 w-5 text-yellow-400" />
         <h2 className="text-lg font-semibold text-white">Actuator</h2>
       </div>
-      <label className="text-xs uppercase tracking-[0.2em] text-slate-400">
-        Command
-      </label>
+      <label className="text-xs uppercase tracking-[0.2em] text-slate-400">Command</label>
       <input
         value={command}
         onChange={(e) => setCommand(e.target.value)}

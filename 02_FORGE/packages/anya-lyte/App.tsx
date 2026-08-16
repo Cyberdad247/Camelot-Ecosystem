@@ -23,7 +23,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#121212', alignItems: 'center', justifyContent: 'center' },
+  container: {
+    flex: 1,
+    backgroundColor: '#121212',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   header: { color: '#D4AF37', fontSize: 24, fontWeight: 'bold' },
   status: { color: '#00FFFF', marginTop: 10 },
 });

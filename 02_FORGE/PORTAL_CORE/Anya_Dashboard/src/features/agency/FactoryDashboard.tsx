@@ -93,7 +93,11 @@ const QUICK_ACTIONS: QuickAction[] = [
 ];
 
 function stamp() {
-  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  return new Date().toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
 }
 
 function toneClass(state: RouteState) {
@@ -257,7 +261,10 @@ export default function FactoryDashboard() {
       setBridgeError(error instanceof Error ? error.message : 'bridge refresh failed');
       setLastRefresh(stamp());
       if (announce) {
-        pushConsole('error', `Refresh failed: ${error instanceof Error ? error.message : 'unknown bridge error'}`);
+        pushConsole(
+          'error',
+          `Refresh failed: ${error instanceof Error ? error.message : 'unknown bridge error'}`,
+        );
       }
     } finally {
       setIsBusy(false);
@@ -287,7 +294,10 @@ export default function FactoryDashboard() {
       await navigator.clipboard.writeText(value);
       pushConsole('system', successMessage);
     } catch (error) {
-      pushConsole('error', `Copy failed: ${error instanceof Error ? error.message : 'clipboard error'}`);
+      pushConsole(
+        'error',
+        `Copy failed: ${error instanceof Error ? error.message : 'clipboard error'}`,
+      );
     }
   }
 
@@ -367,15 +377,25 @@ export default function FactoryDashboard() {
 
       try {
         const payload = await dispatchThroughBridge(intent, bifrostFetch);
-        const summary = payload?.response || payload?.payload?.result?.brief || payload?.payload?.status || 'Dispatch accepted.';
+        const summary =
+          payload?.response ||
+          payload?.payload?.result?.brief ||
+          payload?.payload?.status ||
+          'Dispatch accepted.';
         pushConsole('system', summary);
       } catch (error) {
-        pushConsole('error', `Dispatch failed: ${error instanceof Error ? error.message : 'unknown bridge error'}`);
+        pushConsole(
+          'error',
+          `Dispatch failed: ${error instanceof Error ? error.message : 'unknown bridge error'}`,
+        );
       }
       return;
     }
 
-    pushConsole('error', 'Unknown command. Try: probe, dispatch <intent>, open bridge|map|cloud, copy ws, copy status, clear');
+    pushConsole(
+      'error',
+      'Unknown command. Try: probe, dispatch <intent>, open bridge|map|cloud, copy ws, copy status, clear',
+    );
   }
 
   const onlineRoutes = routeHealth.filter((route) => route.state === 'online').length;
@@ -397,8 +417,12 @@ export default function FactoryDashboard() {
                   D
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">Development Portal</p>
-                  <h1 className="text-3xl font-black tracking-tight md:text-5xl">Camelot Command Deck</h1>
+                  <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">
+                    Development Portal
+                  </p>
+                  <h1 className="text-3xl font-black tracking-tight md:text-5xl">
+                    Camelot Command Deck
+                  </h1>
                 </div>
               </div>
               <div className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-200">
@@ -413,7 +437,9 @@ export default function FactoryDashboard() {
                   <LayoutDashboard className="h-4 w-4 text-cyan-300" />
                 </div>
                 <p className="text-2xl font-black lowercase">{buildState}</p>
-                <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">{buildDetail}</p>
+                <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">
+                  {buildDetail}
+                </p>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
@@ -423,7 +449,9 @@ export default function FactoryDashboard() {
                 </div>
                 <p className="text-2xl font-black lowercase">{bridgeState}</p>
                 <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">
-                  {bridgeStatus ? `${bridgeStatus.current_user}@${bridgeStatus.hostname}` : bridgeError || 'Waiting for Bifrost'}
+                  {bridgeStatus
+                    ? `${bridgeStatus.current_user}@${bridgeStatus.hostname}`
+                    : bridgeError || 'Waiting for Bifrost'}
                 </p>
               </div>
 
@@ -432,8 +460,12 @@ export default function FactoryDashboard() {
                   <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Socket</p>
                   <Radio className={`h-4 w-4 ${toneClass(isConnected ? 'online' : 'offline')}`} />
                 </div>
-                <p className="text-2xl font-black lowercase">{isConnected ? 'linked' : 'offline'}</p>
-                <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">{bifrostWebSocketUrl()}</p>
+                <p className="text-2xl font-black lowercase">
+                  {isConnected ? 'linked' : 'offline'}
+                </p>
+                <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">
+                  {bifrostWebSocketUrl()}
+                </p>
               </div>
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
@@ -444,7 +476,9 @@ export default function FactoryDashboard() {
                 <p className="text-2xl font-black lowercase">
                   {onlineRoutes}/{routeHealth.length}
                 </p>
-                <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">Last refresh {lastRefresh}</p>
+                <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">
+                  Last refresh {lastRefresh}
+                </p>
               </div>
             </div>
           </section>
@@ -477,13 +511,18 @@ export default function FactoryDashboard() {
           >
             <div className="space-y-3">
               {routeHealth.map((route) => (
-                <div key={route.key} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                <div
+                  key={route.key}
+                  className="rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+                >
                   <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <p className="text-sm font-semibold text-white">{route.label}</p>
                       <p className="text-xs text-slate-500">{route.hint}</p>
                     </div>
-                    <div className={`rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${pillClass(route.state)}`}>
+                    <div
+                      className={`rounded-full border px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${pillClass(route.state)}`}
+                    >
                       {route.state}
                     </div>
                   </div>
@@ -535,7 +574,8 @@ export default function FactoryDashboard() {
 
                 <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
                   <p className="text-xs text-slate-500">
-                    Commands: probe, dispatch &lt;intent&gt;, open bridge|map|cloud, copy ws, copy status, clear.
+                    Commands: probe, dispatch &lt;intent&gt;, open bridge|map|cloud, copy ws, copy
+                    status, clear.
                   </p>
                   <button
                     onClick={() => void executeCommand(command)}
@@ -581,14 +621,21 @@ export default function FactoryDashboard() {
                 </div>
               ) : (
                 recentEvents.map((event, index) => (
-                  <div key={`${event.timestamp_ms ?? index}-${index}`} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
+                  <div
+                    key={`${event.timestamp_ms ?? index}-${index}`}
+                    className="rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+                  >
                     <div className="mb-2 flex items-center justify-between gap-3">
-                      <span className={`rounded-full border px-2 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${eventBadgeClass(event.event)}`}>
+                      <span
+                        className={`rounded-full border px-2 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${eventBadgeClass(event.event)}`}
+                      >
                         {event.event}
                       </span>
                       <span className="text-[10px] text-slate-600">{event.source ?? 'bridge'}</span>
                     </div>
-                    <p className="text-sm leading-6 text-slate-300">{event.detail || formatEvent(event)}</p>
+                    <p className="text-sm leading-6 text-slate-300">
+                      {event.detail || formatEvent(event)}
+                    </p>
                   </div>
                 ))
               )}
@@ -623,7 +670,9 @@ export default function FactoryDashboard() {
                     </span>
                     <span className="text-[10px] text-slate-600">{entry.stamp}</span>
                   </div>
-                  <p className="whitespace-pre-wrap text-sm leading-6 text-slate-300">{entry.text}</p>
+                  <p className="whitespace-pre-wrap text-sm leading-6 text-slate-300">
+                    {entry.text}
+                  </p>
                 </div>
               ))}
             </div>
@@ -637,7 +686,9 @@ export default function FactoryDashboard() {
               <h2 className="text-2xl font-black">Operational Readiness</h2>
             </div>
             <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-slate-300">
-              <Circle className={`h-3 w-3 ${isConnected ? 'fill-emerald-300 text-emerald-300' : 'fill-rose-300 text-rose-300'}`} />
+              <Circle
+                className={`h-3 w-3 ${isConnected ? 'fill-emerald-300 text-emerald-300' : 'fill-rose-300 text-rose-300'}`}
+              />
               {isConnected ? 'websocket linked' : 'websocket offline'}
             </div>
           </div>
@@ -653,7 +704,9 @@ export default function FactoryDashboard() {
             </div>
             <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-4">
               <p className="text-xs uppercase tracking-[0.24em] text-slate-500">Cartridges</p>
-              <p className="mt-2 text-lg font-black">{bridgeStatus?.cartridges?.length ?? 0} live</p>
+              <p className="mt-2 text-lg font-black">
+                {bridgeStatus?.cartridges?.length ?? 0} live
+              </p>
             </div>
           </div>
 
@@ -666,7 +719,8 @@ export default function FactoryDashboard() {
               <span>{runtimeConfig.bifrost.websocketUrl}</span>
             </div>
             <p className="mt-3 text-xs leading-5 text-slate-500">
-              This surface is live when the Bifrost bridge answers, websocket events are flowing, and route probes remain responsive.
+              This surface is live when the Bifrost bridge answers, websocket events are flowing,
+              and route probes remain responsive.
             </p>
             {bridgeError && (
               <div className="mt-4 rounded-2xl border border-rose-400/20 bg-rose-400/10 p-3 text-sm text-rose-200">

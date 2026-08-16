@@ -9,12 +9,16 @@ describe('ConfigPanel', () => {
   });
 
   it('loads the persisted sync interval and query from /cognitive/config', async () => {
-    vi.stubGlobal('fetch', vi.fn(async () =>
-      new Response(JSON.stringify({ sync_interval: 30, sync_query: 'summarize the lattice' }), {
-        status: 200,
-        headers: { 'Content-Type': 'application/json' },
-      }),
-    ));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(
+        async () =>
+          new Response(JSON.stringify({ sync_interval: 30, sync_query: 'summarize the lattice' }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' },
+          }),
+      ),
+    );
 
     render(<ConfigPanel />);
 
@@ -51,19 +55,24 @@ describe('ConfigPanel', () => {
     await user.click(screen.getByRole('button', { name: /save/i }));
 
     await waitFor(() => expect(screen.getByLabelText('Saved')).toBeInTheDocument());
-    const postCall = fetchMock.mock.calls.find(([, init]) => (init as RequestInit | undefined)?.method === 'POST');
-    expect(postCall?.[1]?.body).toBe(JSON.stringify({ sync_interval: 60, sync_query: 'new query' }));
+    const postCall = fetchMock.mock.calls.find(
+      ([, init]) => (init as RequestInit | undefined)?.method === 'POST',
+    );
+    expect(postCall?.[1]?.body).toBe(
+      JSON.stringify({ sync_interval: 60, sync_query: 'new query' }),
+    );
   });
 
   it('shows an error state when the cognitive service is unreachable', async () => {
-    vi.stubGlobal('fetch', vi.fn(async () => {
-      throw new Error('network down');
-    }));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => {
+        throw new Error('network down');
+      }),
+    );
 
     render(<ConfigPanel />);
 
-    expect(
-      await screen.findByText(/Cognitive Service unreachable/i),
-    ).toBeInTheDocument();
+    expect(await screen.findByText(/Cognitive Service unreachable/i)).toBeInTheDocument();
   });
 });

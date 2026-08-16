@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useCallback } from "react";
-import { Badge } from "@/components/ui/badge";
+import { useEffect, useState, useCallback } from 'react';
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
@@ -9,9 +9,9 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from '@/components/ui/card';
+import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   CalendarDays,
   Clock,
@@ -31,13 +31,13 @@ import {
   Lightbulb,
   Utensils,
   Receipt,
-} from "lucide-react";
-import Link from "next/link";
-import { format } from "date-fns";
-import { useParams } from "next/navigation";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
-import remarkBreaks from "remark-breaks";
+} from 'lucide-react';
+import Link from 'next/link';
+import { format } from 'date-fns';
+import { useParams } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 
 // Type Definitions
 interface DayPlan {
@@ -95,7 +95,7 @@ interface Itinerary {
 interface TripDetails {
   id: string;
   name?: string;
-  status: "pending" | "completed" | "failed" | "in-progress";
+  status: 'pending' | 'completed' | 'failed' | 'in-progress';
   itinerary?: Itinerary;
   // Raw agent responses
   budget_agent_response?: string;
@@ -131,75 +131,75 @@ interface TripDetails {
 
 // Helper functions
 const formatCurrency = (amount?: number, currency?: string) => {
-  if (!amount) return "Not specified";
+  if (!amount) return 'Not specified';
   const symbols: Record<string, string> = {
-    USD: "$",
-    EUR: "€",
-    GBP: "£",
-    INR: "₹",
-    JPY: "¥",
+    USD: '$',
+    EUR: '€',
+    GBP: '£',
+    INR: '₹',
+    JPY: '¥',
   };
-  return `${symbols[currency || "USD"] || "$"}${amount.toLocaleString()}`;
+  return `${symbols[currency || 'USD'] || '$'}${amount.toLocaleString()}`;
 };
 
 const formatDate = (dateString?: string, inputType?: string) => {
-  if (!dateString || inputType === "text") {
-    return dateString || "Flexible dates";
+  if (!dateString || inputType === 'text') {
+    return dateString || 'Flexible dates';
   }
   try {
-    return format(new Date(dateString), "MMM dd, yyyy");
+    return format(new Date(dateString), 'MMM dd, yyyy');
   } catch {
     return dateString;
   }
 };
 
 const getPaceDescription = (pace?: number[]) => {
-  if (!pace || !pace.length) return "Balanced";
+  if (!pace || !pace.length) return 'Balanced';
   const paceValue = pace[0] || 3;
   const descriptions = {
-    1: "Very relaxed",
-    2: "Mostly relaxed",
-    3: "Balanced",
-    4: "Quite busy",
-    5: "Action-packed",
+    1: 'Very relaxed',
+    2: 'Mostly relaxed',
+    3: 'Balanced',
+    4: 'Quite busy',
+    5: 'Action-packed',
   };
-  return descriptions[paceValue as keyof typeof descriptions] || "Balanced";
+  return descriptions[paceValue as keyof typeof descriptions] || 'Balanced';
 };
 
 // Helper function to render status badge
-function StatusBadge({ status }: { status: TripDetails["status"] }) {
-  let variant: "default" | "secondary" | "destructive" | "outline" = "default";
+function StatusBadge({ status }: { status: TripDetails['status'] }) {
+  let variant: 'default' | 'secondary' | 'destructive' | 'outline' = 'default';
   let text = status.toUpperCase();
 
   switch (status) {
-    case "completed":
-      variant = "default"; // Using Tailwind's green for success
-      text = "Completed";
+    case 'completed':
+      variant = 'default'; // Using Tailwind's green for success
+      text = 'Completed';
       break;
-    case "pending":
-      variant = "secondary"; // Using Tailwind's yellow for pending
-      text = "Pending";
+    case 'pending':
+      variant = 'secondary'; // Using Tailwind's yellow for pending
+      text = 'Pending';
       break;
-    case "in-progress":
-      variant = "outline"; // Using Tailwind's blue for in-progress
-      text = "In Progress";
+    case 'in-progress':
+      variant = 'outline'; // Using Tailwind's blue for in-progress
+      text = 'In Progress';
       break;
-    case "failed":
-      variant = "destructive";
-      text = "Failed";
+    case 'failed':
+      variant = 'destructive';
+      text = 'Failed';
       break;
   }
   return (
     <Badge
       variant={variant}
       className={
-        status === "completed"
-          ? "bg-green-500 hover:bg-green-600 text-white"
-          : status === "pending"
-          ? "bg-yellow-500 hover:bg-yellow-600 text-black"
-          : status === "in-progress"
-          ? "bg-blue-500 hover:bg-blue-600 text-white"
-          : ""
+        status === 'completed'
+          ? 'bg-green-500 hover:bg-green-600 text-white'
+          : status === 'pending'
+            ? 'bg-yellow-500 hover:bg-yellow-600 text-black'
+            : status === 'in-progress'
+              ? 'bg-blue-500 hover:bg-blue-600 text-white'
+              : ''
       }
     >
       {text}
@@ -226,32 +226,32 @@ export default function TripDetailsPage() {
       const response = await fetch(`/api/plans/${tripId}`);
       const data = await response.json();
 
-      console.log("API Response:", data);
+      console.log('API Response:', data);
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to fetch trip details");
+        throw new Error(data.message || 'Failed to fetch trip details');
       }
 
       if (data.success && data.tripPlan) {
         // Convert raw data to our TripDetails format
         const tripPlan = data.tripPlan;
-        console.log("Trip plan data:", tripPlan);
+        console.log('Trip plan data:', tripPlan);
 
         // Map the database status to our TripDetails status
-        let status: TripDetails["status"] = "pending";
+        let status: TripDetails['status'] = 'pending';
         if (tripPlan.status) {
           switch (tripPlan.status.status) {
-            case "completed":
-              status = "completed";
+            case 'completed':
+              status = 'completed';
               break;
-            case "processing":
-              status = "in-progress";
+            case 'processing':
+              status = 'in-progress';
               break;
-            case "failed":
-              status = "failed";
+            case 'failed':
+              status = 'failed';
               break;
             default:
-              status = "pending";
+              status = 'pending';
           }
         }
 
@@ -259,40 +259,37 @@ export default function TripDetailsPage() {
         let itinerary: Itinerary | undefined;
 
         // Extract all agent responses from the parsed JSON
-        let budget_agent_response = "";
-        let destination_agent_response = "";
-        let flight_agent_response = "";
-        let restaurant_agent_response = "";
-        let itinerary_agent_response = "";
+        let budget_agent_response = '';
+        let destination_agent_response = '';
+        let flight_agent_response = '';
+        let restaurant_agent_response = '';
+        let itinerary_agent_response = '';
 
         if (tripPlan.output?.itinerary) {
           try {
             // First parse the outer JSON string
             const parsedOutput = JSON.parse(tripPlan.output.itinerary);
-            console.log("Parsed output:", parsedOutput);
+            console.log('Parsed output:', parsedOutput);
 
             // Extract agent responses from the parsed JSON
-            budget_agent_response = parsedOutput.budget_agent_response || "";
-            destination_agent_response =
-              parsedOutput.destination_agent_response || "";
-            flight_agent_response = parsedOutput.flight_agent_response || "";
-            restaurant_agent_response =
-              parsedOutput.restaurant_agent_response || "";
-            itinerary_agent_response =
-              parsedOutput.itinerary_agent_response || "";
+            budget_agent_response = parsedOutput.budget_agent_response || '';
+            destination_agent_response = parsedOutput.destination_agent_response || '';
+            flight_agent_response = parsedOutput.flight_agent_response || '';
+            restaurant_agent_response = parsedOutput.restaurant_agent_response || '';
+            itinerary_agent_response = parsedOutput.itinerary_agent_response || '';
 
             if (parsedOutput.itinerary) {
               // Then parse the inner JSON string to get the actual itinerary
               itinerary = JSON.parse(parsedOutput.itinerary) as Itinerary;
-              console.log("Parsed itinerary:", itinerary);
+              console.log('Parsed itinerary:', itinerary);
             }
           } catch (e) {
-            console.error("Failed to parse itinerary JSON:", e);
+            console.error('Failed to parse itinerary JSON:', e);
           }
         }
 
-        console.log("Budget agent response:", budget_agent_response);
-        console.log("Destination agent response:", destination_agent_response);
+        console.log('Budget agent response:', budget_agent_response);
+        console.log('Destination agent response:', destination_agent_response);
 
         const tripDetails: TripDetails = {
           id: tripPlan.id,
@@ -313,9 +310,7 @@ export default function TripDetailsPage() {
           travelDatesStart: tripPlan.travelDatesStart
             ? String(tripPlan.travelDatesStart)
             : undefined,
-          travelDatesEnd: tripPlan.travelDatesEnd
-            ? String(tripPlan.travelDatesEnd)
-            : undefined,
+          travelDatesEnd: tripPlan.travelDatesEnd ? String(tripPlan.travelDatesEnd) : undefined,
           dateInputType: tripPlan.dateInputType,
           duration: tripPlan.duration ?? undefined,
           travelingWith: tripPlan.travelingWith,
@@ -336,17 +331,15 @@ export default function TripDetailsPage() {
           additionalInfo: tripPlan.additionalInfo ?? undefined,
         };
 
-        console.log("Setting trip state:", tripDetails);
+        console.log('Setting trip state:', tripDetails);
         setTrip(tripDetails);
       } else {
-        setError("Trip plan not found");
+        setError('Trip plan not found');
       }
     } catch (err) {
-      console.error("Error fetching trip details:", err);
+      console.error('Error fetching trip details:', err);
       setError(
-        `Failed to fetch trip details: ${
-          err instanceof Error ? err.message : "Unknown error"
-        }`
+        `Failed to fetch trip details: ${err instanceof Error ? err.message : 'Unknown error'}`,
       );
     } finally {
       setLoading(false);
@@ -360,13 +353,13 @@ export default function TripDetailsPage() {
     try {
       setRetryLoading(true);
       const response = await fetch(`/api/plans/${tripId}/retry`, {
-        method: "POST",
+        method: 'POST',
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to retry trip plan");
+        throw new Error(data.message || 'Failed to retry trip plan');
       }
 
       // Refresh trip details after retry
@@ -375,11 +368,9 @@ export default function TripDetailsPage() {
       // Start polling again
       setPolling(true);
     } catch (err) {
-      console.error("Error retrying trip plan:", err);
+      console.error('Error retrying trip plan:', err);
       setError(
-        `Failed to retry trip plan: ${
-          err instanceof Error ? err.message : "Unknown error"
-        }`
+        `Failed to retry trip plan: ${err instanceof Error ? err.message : 'Unknown error'}`,
       );
     } finally {
       setRetryLoading(false);
@@ -396,7 +387,7 @@ export default function TripDetailsPage() {
     if (!trip) return;
 
     // Check if we should poll
-    const shouldPoll = trip.status !== "completed" && trip.status !== "failed";
+    const shouldPoll = trip.status !== 'completed' && trip.status !== 'failed';
 
     if (shouldPoll) {
       setPolling(true);
@@ -417,9 +408,7 @@ export default function TripDetailsPage() {
       <div className="container mx-auto p-4 flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]">
         <Loader2 size={48} className="animate-spin text-primary mb-4" />
         <h1 className="text-2xl font-semibold mb-2">Loading Trip Details</h1>
-        <p className="text-muted-foreground text-center">
-          Fetching your trip plan...
-        </p>
+        <p className="text-muted-foreground text-center">Fetching your trip plan...</p>
       </div>
     );
   }
@@ -431,8 +420,7 @@ export default function TripDetailsPage() {
         <Landmark size={64} className="text-muted-foreground mb-4" />
         <h1 className="text-2xl font-semibold mb-2">Trip Not Found</h1>
         <p className="text-muted-foreground text-center">
-          {error ||
-            "The trip you are looking for does not exist or could not be loaded."}
+          {error || 'The trip you are looking for does not exist or could not be loaded.'}
         </p>
         <Link href="/plans" className="mt-4 text-primary hover:underline">
           Go to your trip plans
@@ -488,16 +476,12 @@ export default function TripDetailsPage() {
             <CardContent>
               <div className="space-y-2">
                 <div>
-                  <span className="font-medium">To:</span>{" "}
-                  <span className="text-muted-foreground">
-                    {trip.destination}
-                  </span>
+                  <span className="font-medium">To:</span>{' '}
+                  <span className="text-muted-foreground">{trip.destination}</span>
                 </div>
                 <div>
-                  <span className="font-medium">From:</span>{" "}
-                  <span className="text-muted-foreground">
-                    {trip.startingLocation}
-                  </span>
+                  <span className="font-medium">From:</span>{' '}
+                  <span className="text-muted-foreground">{trip.startingLocation}</span>
                 </div>
               </div>
             </CardContent>
@@ -514,14 +498,14 @@ export default function TripDetailsPage() {
             <CardContent>
               <div className="space-y-2">
                 <div>
-                  <span className="font-medium">From:</span>{" "}
+                  <span className="font-medium">From:</span>{' '}
                   <span className="text-muted-foreground">
                     {formatDate(trip.travelDatesStart, trip.dateInputType)}
                   </span>
                 </div>
                 {trip.travelDatesEnd && (
                   <div>
-                    <span className="font-medium">To:</span>{" "}
+                    <span className="font-medium">To:</span>{' '}
                     <span className="text-muted-foreground">
                       {formatDate(trip.travelDatesEnd, trip.dateInputType)}
                     </span>
@@ -529,10 +513,8 @@ export default function TripDetailsPage() {
                 )}
                 {trip.duration && (
                   <div>
-                    <span className="font-medium">Duration:</span>{" "}
-                    <span className="text-muted-foreground">
-                      {trip.duration} days
-                    </span>
+                    <span className="font-medium">Duration:</span>{' '}
+                    <span className="text-muted-foreground">{trip.duration} days</span>
                   </div>
                 )}
               </div>
@@ -550,28 +532,22 @@ export default function TripDetailsPage() {
             <CardContent>
               <div className="space-y-2">
                 <div>
-                  <span className="font-medium">Type:</span>{" "}
-                  <span className="text-muted-foreground">
-                    {trip.travelingWith}
-                  </span>
+                  <span className="font-medium">Type:</span>{' '}
+                  <span className="text-muted-foreground">{trip.travelingWith}</span>
                 </div>
                 <div>
-                  <span className="font-medium">Group:</span>{" "}
+                  <span className="font-medium">Group:</span>{' '}
                   <span className="text-muted-foreground">
-                    {trip.adults} adult{trip.adults !== 1 ? "s" : ""}
+                    {trip.adults} adult{trip.adults !== 1 ? 's' : ''}
                     {trip.children && trip.children > 0
-                      ? `, ${trip.children} child${
-                          trip.children !== 1 ? "ren" : ""
-                        }`
-                      : ""}
+                      ? `, ${trip.children} child${trip.children !== 1 ? 'ren' : ''}`
+                      : ''}
                   </span>
                 </div>
                 {trip.ageGroups && trip.ageGroups.length > 0 && (
                   <div>
-                    <span className="font-medium">Ages:</span>{" "}
-                    <span className="text-muted-foreground">
-                      {trip.ageGroups.join(", ")}
-                    </span>
+                    <span className="font-medium">Ages:</span>{' '}
+                    <span className="text-muted-foreground">{trip.ageGroups.join(', ')}</span>
                   </div>
                 )}
               </div>
@@ -589,13 +565,11 @@ export default function TripDetailsPage() {
             <CardContent>
               <div className="space-y-2">
                 <div>
-                  <span className="font-medium">Type:</span>{" "}
-                  <span className="text-muted-foreground">
-                    {trip.travelStyle}
-                  </span>
+                  <span className="font-medium">Type:</span>{' '}
+                  <span className="text-muted-foreground">{trip.travelStyle}</span>
                 </div>
                 <div>
-                  <span className="font-medium">Rooms:</span>{" "}
+                  <span className="font-medium">Rooms:</span>{' '}
                   <span className="text-muted-foreground">{trip.rooms}</span>
                 </div>
               </div>
@@ -613,16 +587,15 @@ export default function TripDetailsPage() {
             <CardContent>
               <div className="space-y-2">
                 <div>
-                  <span className="font-medium">Amount:</span>{" "}
+                  <span className="font-medium">Amount:</span>{' '}
                   <span className="text-muted-foreground">
-                    {formatCurrency(trip.budget, trip.budgetCurrency)} per
-                    person
+                    {formatCurrency(trip.budget, trip.budgetCurrency)} per person
                   </span>
                 </div>
                 <div>
-                  <span className="font-medium">Flexible:</span>{" "}
+                  <span className="font-medium">Flexible:</span>{' '}
                   <span className="text-muted-foreground">
-                    {trip.budgetFlexible ? "Yes" : "No"}
+                    {trip.budgetFlexible ? 'Yes' : 'No'}
                   </span>
                 </div>
               </div>
@@ -640,21 +613,15 @@ export default function TripDetailsPage() {
             <CardContent>
               <div className="space-y-3">
                 <div>
-                  <span className="font-medium">Pace:</span>{" "}
-                  <span className="text-muted-foreground">
-                    {getPaceDescription(trip.pace)}
-                  </span>
+                  <span className="font-medium">Pace:</span>{' '}
+                  <span className="text-muted-foreground">{getPaceDescription(trip.pace)}</span>
                 </div>
                 {trip.vibes && trip.vibes.length > 0 && (
                   <div>
                     <span className="font-medium block mb-1">Vibes:</span>
                     <div className="flex flex-wrap gap-1">
                       {trip.vibes.map((vibe) => (
-                        <Badge
-                          key={vibe}
-                          variant="secondary"
-                          className="text-xs"
-                        >
+                        <Badge key={vibe} variant="secondary" className="text-xs">
                           {vibe}
                         </Badge>
                       ))}
@@ -666,11 +633,7 @@ export default function TripDetailsPage() {
                     <span className="font-medium block mb-1">Priorities:</span>
                     <div className="flex flex-wrap gap-1">
                       {trip.priorities.map((priority) => (
-                        <Badge
-                          key={priority}
-                          variant="outline"
-                          className="text-xs"
-                        >
+                        <Badge key={priority} variant="outline" className="text-xs">
                           {priority}
                         </Badge>
                       ))}
@@ -683,48 +646,33 @@ export default function TripDetailsPage() {
         </div>
 
         {/* Additional Information */}
-        {(trip.interests ||
-          trip.beenThereBefore ||
-          trip.lovedPlaces ||
-          trip.additionalInfo) && (
+        {(trip.interests || trip.beenThereBefore || trip.lovedPlaces || trip.additionalInfo) && (
           <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-3">
-              Additional Information
-            </h3>
+            <h3 className="text-xl font-semibold mb-3">Additional Information</h3>
             <Card>
               <CardContent className="pt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                 {trip.interests && (
                   <div>
                     <h4 className="font-medium mb-1">Specific Interests:</h4>
-                    <p className="text-muted-foreground text-sm">
-                      {trip.interests}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{trip.interests}</p>
                   </div>
                 )}
                 {trip.beenThereBefore && (
                   <div>
                     <h4 className="font-medium mb-1">Previous Visits:</h4>
-                    <p className="text-muted-foreground text-sm">
-                      {trip.beenThereBefore}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{trip.beenThereBefore}</p>
                   </div>
                 )}
                 {trip.lovedPlaces && (
                   <div>
                     <h4 className="font-medium mb-1">Loved Places:</h4>
-                    <p className="text-muted-foreground text-sm">
-                      {trip.lovedPlaces}
-                    </p>
+                    <p className="text-muted-foreground text-sm">{trip.lovedPlaces}</p>
                   </div>
                 )}
                 {trip.additionalInfo && (
                   <div className="md:col-span-2">
-                    <h4 className="font-medium mb-1">
-                      Additional Information:
-                    </h4>
-                    <p className="text-muted-foreground text-sm">
-                      {trip.additionalInfo}
-                    </p>
+                    <h4 className="font-medium mb-1">Additional Information:</h4>
+                    <p className="text-muted-foreground text-sm">{trip.additionalInfo}</p>
                   </div>
                 )}
               </CardContent>
@@ -734,35 +682,32 @@ export default function TripDetailsPage() {
       </section>
 
       {/* Show loading message or itinerary based on status */}
-      {(trip.status === "pending" ||
-        trip.status === "in-progress" ||
-        trip.status === "failed") && (
+      {(trip.status === 'pending' || trip.status === 'in-progress' || trip.status === 'failed') && (
         <div className="text-center py-10 border rounded-lg">
           <Info size={48} className="text-muted-foreground mx-auto mb-4" />
           <h2 className="text-xl font-semibold mb-2">
-            {trip.status === "pending" && "Trip Plan in Progress"}
-            {trip.status === "in-progress" && "Trip Plan is Being Generated"}
-            {trip.status === "failed" && "Failed to Generate Trip Plan"}
+            {trip.status === 'pending' && 'Trip Plan in Progress'}
+            {trip.status === 'in-progress' && 'Trip Plan is Being Generated'}
+            {trip.status === 'failed' && 'Failed to Generate Trip Plan'}
           </h2>
           <p className="text-muted-foreground">
-            {trip.status === "pending" &&
-              "Your trip itinerary is currently being planned. Please wait as we create your personalized travel plan."}
-            {trip.status === "in-progress" &&
-              "We are working on your trip details. This might take a few moments. The page will automatically update when your plan is ready."}
-            {trip.status === "failed" &&
-              "Something went wrong while generating your trip plan. Please try again or contact support."}
+            {trip.status === 'pending' &&
+              'Your trip itinerary is currently being planned. Please wait as we create your personalized travel plan.'}
+            {trip.status === 'in-progress' &&
+              'We are working on your trip details. This might take a few moments. The page will automatically update when your plan is ready.'}
+            {trip.status === 'failed' &&
+              'Something went wrong while generating your trip plan. Please try again or contact support.'}
           </p>
 
           {/* Show current step when available */}
-          {(trip.status === "pending" || trip.status === "in-progress") &&
-            trip.current_step && (
-              <div className="mt-4 bg-muted/30 p-4 rounded-lg max-w-md mx-auto">
-                <h3 className="font-medium text-sm mb-1">Current Progress:</h3>
-                <p className="text-primary font-medium">{trip.current_step}</p>
-              </div>
-            )}
+          {(trip.status === 'pending' || trip.status === 'in-progress') && trip.current_step && (
+            <div className="mt-4 bg-muted/30 p-4 rounded-lg max-w-md mx-auto">
+              <h3 className="font-medium text-sm mb-1">Current Progress:</h3>
+              <p className="text-primary font-medium">{trip.current_step}</p>
+            </div>
+          )}
 
-          {(trip.status === "pending" || trip.status === "in-progress") && (
+          {(trip.status === 'pending' || trip.status === 'in-progress') && (
             <div className="flex justify-center mt-4">
               <div className="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full">
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -772,7 +717,7 @@ export default function TripDetailsPage() {
           )}
 
           {/* Add retry button for failed plans */}
-          {trip.status === "failed" && (
+          {trip.status === 'failed' && (
             <div className="flex justify-center mt-6">
               <button
                 onClick={retryTripPlan}
@@ -812,7 +757,7 @@ export default function TripDetailsPage() {
       )}
 
       {/* Show tabbed content when completed */}
-      {trip.status === "completed" && (
+      {trip.status === 'completed' && (
         <Tabs defaultValue="itinerary" className="w-full">
           <TabsList className="mb-4 flex w-full justify-start overflow-auto">
             <TabsTrigger value="itinerary" className="flex items-center">
@@ -842,8 +787,7 @@ export default function TripDetailsPage() {
                 {/* Day-by-Day Plan Section */}
                 <section>
                   <h2 className="text-2xl font-semibold mb-6 flex items-center">
-                    <CalendarDays className="mr-3 h-6 w-6 text-primary" /> Daily
-                    Itinerary
+                    <CalendarDays className="mr-3 h-6 w-6 text-primary" /> Daily Itinerary
                   </h2>
                   <div className="grid grid-cols-1 gap-6">
                     {trip.itinerary.day_by_day_plan.map((dayPlan) => (
@@ -862,14 +806,11 @@ export default function TripDetailsPage() {
                             {dayPlan.date && (
                               <Badge variant="outline" className="ml-auto">
                                 <CalendarDays className="mr-1 h-3 w-3" />
-                                {new Date(dayPlan.date).toLocaleDateString(
-                                  undefined,
-                                  {
-                                    year: "numeric",
-                                    month: "long",
-                                    day: "numeric",
-                                  }
-                                )}
+                                {new Date(dayPlan.date).toLocaleDateString(undefined, {
+                                  year: 'numeric',
+                                  month: 'long',
+                                  day: 'numeric',
+                                })}
                               </Badge>
                             )}
                           </div>
@@ -908,8 +849,7 @@ export default function TripDetailsPage() {
                             <div className="flex items-start">
                               <Paperclip className="h-5 w-5 mr-2 mt-0.5 text-primary flex-shrink-0" />
                               <p className="text-sm text-muted-foreground">
-                                <span className="font-medium">Note:</span>{" "}
-                                {dayPlan.notes}
+                                <span className="font-medium">Note:</span> {dayPlan.notes}
                               </p>
                             </div>
                           </div>
@@ -920,43 +860,40 @@ export default function TripDetailsPage() {
                 </section>
 
                 {/* Attractions Section */}
-                {trip.itinerary.attractions &&
-                  trip.itinerary.attractions.length > 0 && (
-                    <section>
-                      <h2 className="text-2xl font-semibold mb-6 flex items-center">
-                        <Landmark className="mr-3 h-6 w-6 text-primary" />{" "}
-                        Attractions & Activities
-                      </h2>
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {trip.itinerary.attractions.map((attraction, index) => (
-                          <Card
-                            key={index}
-                            className="group hover:shadow-md transition-all duration-300 border-b-4 border-b-transparent hover:border-b-primary"
-                          >
-                            <CardHeader>
-                              <CardTitle className="text-lg group-hover:text-primary transition-colors">
-                                {attraction.name}
-                              </CardTitle>
-                            </CardHeader>
-                            {attraction.description && (
-                              <CardContent>
-                                <p className="text-sm text-muted-foreground whitespace-pre-line">
-                                  {attraction.description}
-                                </p>
-                              </CardContent>
-                            )}
-                          </Card>
-                        ))}
-                      </div>
-                    </section>
-                  )}
+                {trip.itinerary.attractions && trip.itinerary.attractions.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold mb-6 flex items-center">
+                      <Landmark className="mr-3 h-6 w-6 text-primary" /> Attractions & Activities
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {trip.itinerary.attractions.map((attraction, index) => (
+                        <Card
+                          key={index}
+                          className="group hover:shadow-md transition-all duration-300 border-b-4 border-b-transparent hover:border-b-primary"
+                        >
+                          <CardHeader>
+                            <CardTitle className="text-lg group-hover:text-primary transition-colors">
+                              {attraction.name}
+                            </CardTitle>
+                          </CardHeader>
+                          {attraction.description && (
+                            <CardContent>
+                              <p className="text-sm text-muted-foreground whitespace-pre-line">
+                                {attraction.description}
+                              </p>
+                            </CardContent>
+                          )}
+                        </Card>
+                      ))}
+                    </div>
+                  </section>
+                )}
 
                 {/* Tips Section */}
                 {trip.itinerary.tips && trip.itinerary.tips.length > 0 && (
                   <section>
                     <h2 className="text-2xl font-semibold mb-6 flex items-center">
-                      <Lightbulb className="mr-3 h-6 w-6 text-primary" /> Travel
-                      Tips
+                      <Lightbulb className="mr-3 h-6 w-6 text-primary" /> Travel Tips
                     </h2>
                     <Card>
                       <CardContent className="pt-6">
@@ -966,9 +903,7 @@ export default function TripDetailsPage() {
                               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary mr-3 flex-shrink-0">
                                 {index + 1}
                               </span>
-                              <span className="text-muted-foreground">
-                                {tip}
-                              </span>
+                              <span className="text-muted-foreground">{tip}</span>
                             </li>
                           ))}
                         </ul>
@@ -986,12 +921,10 @@ export default function TripDetailsPage() {
               <Card className="overflow-hidden">
                 <CardHeader className="bg-muted/30">
                   <CardTitle className="flex items-center">
-                    <Lightbulb className="h-5 w-5 mr-2 text-primary" />{" "}
-                    Destination Guide
+                    <Lightbulb className="h-5 w-5 mr-2 text-primary" /> Destination Guide
                   </CardTitle>
                   <CardDescription>
-                    Tourist information and recommendations for{" "}
-                    {trip.destination}
+                    Tourist information and recommendations for {trip.destination}
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pt-6">
@@ -1004,13 +937,8 @@ export default function TripDetailsPage() {
               </Card>
             ) : (
               <div className="text-center py-10 border rounded-lg">
-                <Info
-                  size={48}
-                  className="text-muted-foreground mx-auto mb-4"
-                />
-                <h2 className="text-xl font-semibold mb-2">
-                  Destination Guide Not Available
-                </h2>
+                <Info size={48} className="text-muted-foreground mx-auto mb-4" />
+                <h2 className="text-xl font-semibold mb-2">Destination Guide Not Available</h2>
                 <p className="text-muted-foreground">
                   Destination guide information is not available for this trip.
                 </p>
@@ -1020,26 +948,18 @@ export default function TripDetailsPage() {
 
           {/* Hotels Tab Content */}
           <TabsContent value="hotels" className="space-y-8">
-            {trip.itinerary &&
-            trip.itinerary.hotels &&
-            trip.itinerary.hotels.length > 0 ? (
+            {trip.itinerary && trip.itinerary.hotels && trip.itinerary.hotels.length > 0 ? (
               <section>
                 <h2 className="text-2xl font-semibold mb-6 flex items-center">
-                  <Home className="mr-3 h-6 w-6 text-primary" /> Recommended
-                  Accommodations
+                  <Home className="mr-3 h-6 w-6 text-primary" /> Recommended Accommodations
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {trip.itinerary.hotels.map((hotel, index) => (
-                    <Card
-                      key={index}
-                      className="overflow-hidden border-l-4 border-l-primary"
-                    >
+                    <Card key={index} className="overflow-hidden border-l-4 border-l-primary">
                       <CardHeader className="bg-muted/30">
                         <div className="flex justify-between items-start">
                           <div>
-                            <CardTitle className="text-lg">
-                              {hotel.hotel_name}
-                            </CardTitle>
+                            <CardTitle className="text-lg">{hotel.hotel_name}</CardTitle>
                             {hotel.rating && (
                               <CardDescription className="flex items-center mt-1">
                                 <span className="text-yellow-500 flex items-center">
@@ -1074,9 +994,7 @@ export default function TripDetailsPage() {
                         <div className="space-y-4">
                           <div className="flex items-start">
                             <MapPin className="h-5 w-5 mr-2 mt-0.5 text-primary flex-shrink-0" />
-                            <p className="text-sm text-muted-foreground">
-                              {hotel.address}
-                            </p>
+                            <p className="text-sm text-muted-foreground">{hotel.address}</p>
                           </div>
 
                           {hotel.description && (
@@ -1089,16 +1007,10 @@ export default function TripDetailsPage() {
 
                           {hotel.amenities && hotel.amenities.length > 0 && (
                             <div className="mt-4">
-                              <h3 className="text-sm font-medium mb-2">
-                                Amenities:
-                              </h3>
+                              <h3 className="text-sm font-medium mb-2">Amenities:</h3>
                               <div className="flex flex-wrap gap-1.5">
                                 {hotel.amenities.map((amenity, i) => (
-                                  <Badge
-                                    key={i}
-                                    variant="secondary"
-                                    className="text-xs"
-                                  >
+                                  <Badge key={i} variant="secondary" className="text-xs">
                                     {amenity}
                                   </Badge>
                                 ))}
@@ -1115,8 +1027,7 @@ export default function TripDetailsPage() {
                             rel="noopener noreferrer"
                             className="text-primary hover:underline text-sm flex items-center"
                           >
-                            View Hotel / Book{" "}
-                            <Globe className="h-4 w-4 ml-1.5" />
+                            View Hotel / Book <Globe className="h-4 w-4 ml-1.5" />
                           </a>
                         </CardFooter>
                       )}
@@ -1126,13 +1037,8 @@ export default function TripDetailsPage() {
               </section>
             ) : (
               <div className="text-center py-10 border rounded-lg">
-                <Info
-                  size={48}
-                  className="text-muted-foreground mx-auto mb-4"
-                />
-                <h2 className="text-xl font-semibold mb-2">
-                  Hotel Information Not Available
-                </h2>
+                <Info size={48} className="text-muted-foreground mx-auto mb-4" />
+                <h2 className="text-xl font-semibold mb-2">Hotel Information Not Available</h2>
                 <p className="text-muted-foreground">
                   Hotel recommendations are not available for this trip.
                 </p>
@@ -1143,122 +1049,96 @@ export default function TripDetailsPage() {
           {/* Flights Tab Content */}
           <TabsContent value="flights" className="space-y-8">
             {trip.flight_agent_response ||
-            (trip.itinerary &&
-              trip.itinerary.flights &&
-              trip.itinerary.flights.length > 0) ? (
+            (trip.itinerary && trip.itinerary.flights && trip.itinerary.flights.length > 0) ? (
               <div className="space-y-8">
                 {/* Flights from itinerary */}
-                {trip.itinerary &&
-                  trip.itinerary.flights &&
-                  trip.itinerary.flights.length > 0 && (
-                    <section>
-                      <h2 className="text-2xl font-semibold mb-6 flex items-center">
-                        <Plane className="mr-3 h-6 w-6 text-primary" /> Selected
-                        Flights
-                      </h2>
-                      <div className="space-y-6">
-                        {trip.itinerary.flights
-                          .filter(
-                            (flight) =>
-                              flight.airline !== "TBD" &&
-                              flight.departure_time !== "TBD"
-                          )
-                          .map((flight, index) => (
-                            <Card
-                              key={index}
-                              className="border-r-4 border-r-primary overflow-hidden"
-                            >
-                              <CardHeader className="bg-muted/30">
-                                <CardTitle className="text-xl flex items-center">
-                                  <Plane className="h-5 w-5 mr-2 text-primary" />
-                                  {flight.airline}
-                                </CardTitle>
-                                {flight.flight_number &&
-                                  flight.flight_number !== "N/A" &&
-                                  flight.flight_number !== "TBD" && (
-                                    <CardDescription>
-                                      Flight {flight.flight_number}
-                                    </CardDescription>
-                                  )}
-                              </CardHeader>
-                              <CardContent className="py-6">
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
-                                  <div className="bg-muted/20 p-3 rounded-lg">
-                                    <p className="font-medium flex items-center">
-                                      <Clock className="h-4 w-4 mr-2 text-primary" />
-                                      Duration:
-                                    </p>
-                                    <p className="text-muted-foreground mt-1">
-                                      {flight.duration}
-                                    </p>
-                                  </div>
-                                  <div className="bg-muted/20 p-3 rounded-lg">
-                                    <p className="font-medium flex items-center">
-                                      <DollarSign className="h-4 w-4 mr-2 text-primary" />
-                                      Price:
-                                    </p>
-                                    <p className="text-muted-foreground mt-1">
-                                      {flight.price}
-                                    </p>
-                                  </div>
-                                  <div className="bg-muted/20 p-3 rounded-lg">
-                                    <p className="font-medium flex items-center">
-                                      <Clock className="h-4 w-4 mr-2 text-green-500" />
-                                      Departure:
-                                    </p>
-                                    <p className="text-muted-foreground mt-1">
-                                      {flight.departure_time || "Not specified"}
-                                    </p>
-                                  </div>
-                                  <div className="bg-muted/20 p-3 rounded-lg">
-                                    <p className="font-medium flex items-center">
-                                      <Clock className="h-4 w-4 mr-2 text-red-500" />
-                                      Arrival:
-                                    </p>
-                                    <p className="text-muted-foreground mt-1">
-                                      {flight.arrival_time || "Not specified"}
-                                    </p>
-                                  </div>
-                                  {typeof flight.stops !== "undefined" && (
-                                    <div className="bg-muted/20 p-3 rounded-lg">
-                                      <p className="font-medium">Stops:</p>
-                                      <p className="text-muted-foreground mt-1">
-                                        {flight.stops}
-                                      </p>
-                                    </div>
-                                  )}
-                                </div>
-                              </CardContent>
-                              {flight.url &&
-                                flight.url !== "N/A" &&
-                                flight.url !== "TBD" && (
-                                  <CardFooter className="bg-muted/30 border-t">
-                                    <a
-                                      href={flight.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="text-primary hover:underline text-sm flex items-center"
-                                    >
-                                      Book / View Flight{" "}
-                                      <Globe className="h-4 w-4 ml-1.5" />
-                                    </a>
-                                  </CardFooter>
+                {trip.itinerary && trip.itinerary.flights && trip.itinerary.flights.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold mb-6 flex items-center">
+                      <Plane className="mr-3 h-6 w-6 text-primary" /> Selected Flights
+                    </h2>
+                    <div className="space-y-6">
+                      {trip.itinerary.flights
+                        .filter(
+                          (flight) => flight.airline !== 'TBD' && flight.departure_time !== 'TBD',
+                        )
+                        .map((flight, index) => (
+                          <Card key={index} className="border-r-4 border-r-primary overflow-hidden">
+                            <CardHeader className="bg-muted/30">
+                              <CardTitle className="text-xl flex items-center">
+                                <Plane className="h-5 w-5 mr-2 text-primary" />
+                                {flight.airline}
+                              </CardTitle>
+                              {flight.flight_number &&
+                                flight.flight_number !== 'N/A' &&
+                                flight.flight_number !== 'TBD' && (
+                                  <CardDescription>Flight {flight.flight_number}</CardDescription>
                                 )}
-                            </Card>
-                          ))}
-                      </div>
-                    </section>
-                  )}
+                            </CardHeader>
+                            <CardContent className="py-6">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                                <div className="bg-muted/20 p-3 rounded-lg">
+                                  <p className="font-medium flex items-center">
+                                    <Clock className="h-4 w-4 mr-2 text-primary" />
+                                    Duration:
+                                  </p>
+                                  <p className="text-muted-foreground mt-1">{flight.duration}</p>
+                                </div>
+                                <div className="bg-muted/20 p-3 rounded-lg">
+                                  <p className="font-medium flex items-center">
+                                    <DollarSign className="h-4 w-4 mr-2 text-primary" />
+                                    Price:
+                                  </p>
+                                  <p className="text-muted-foreground mt-1">{flight.price}</p>
+                                </div>
+                                <div className="bg-muted/20 p-3 rounded-lg">
+                                  <p className="font-medium flex items-center">
+                                    <Clock className="h-4 w-4 mr-2 text-green-500" />
+                                    Departure:
+                                  </p>
+                                  <p className="text-muted-foreground mt-1">
+                                    {flight.departure_time || 'Not specified'}
+                                  </p>
+                                </div>
+                                <div className="bg-muted/20 p-3 rounded-lg">
+                                  <p className="font-medium flex items-center">
+                                    <Clock className="h-4 w-4 mr-2 text-red-500" />
+                                    Arrival:
+                                  </p>
+                                  <p className="text-muted-foreground mt-1">
+                                    {flight.arrival_time || 'Not specified'}
+                                  </p>
+                                </div>
+                                {typeof flight.stops !== 'undefined' && (
+                                  <div className="bg-muted/20 p-3 rounded-lg">
+                                    <p className="font-medium">Stops:</p>
+                                    <p className="text-muted-foreground mt-1">{flight.stops}</p>
+                                  </div>
+                                )}
+                              </div>
+                            </CardContent>
+                            {flight.url && flight.url !== 'N/A' && flight.url !== 'TBD' && (
+                              <CardFooter className="bg-muted/30 border-t">
+                                <a
+                                  href={flight.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-primary hover:underline text-sm flex items-center"
+                                >
+                                  Book / View Flight <Globe className="h-4 w-4 ml-1.5" />
+                                </a>
+                              </CardFooter>
+                            )}
+                          </Card>
+                        ))}
+                    </div>
+                  </section>
+                )}
               </div>
             ) : (
               <div className="text-center py-10 border rounded-lg">
-                <Info
-                  size={48}
-                  className="text-muted-foreground mx-auto mb-4"
-                />
-                <h2 className="text-xl font-semibold mb-2">
-                  Flight Information Not Available
-                </h2>
+                <Info size={48} className="text-muted-foreground mx-auto mb-4" />
+                <h2 className="text-xl font-semibold mb-2">Flight Information Not Available</h2>
                 <p className="text-muted-foreground">
                   Flight information is not available for this trip.
                 </p>
@@ -1278,18 +1158,14 @@ export default function TripDetailsPage() {
                   <Card className="overflow-hidden">
                     <CardHeader className="bg-muted/30">
                       <CardTitle className="flex items-center">
-                        <Utensils className="h-5 w-5 mr-2 text-primary" />{" "}
-                        Restaurant Recommendations
+                        <Utensils className="h-5 w-5 mr-2 text-primary" /> Restaurant
+                        Recommendations
                       </CardTitle>
-                      <CardDescription>
-                        Dining options for your trip
-                      </CardDescription>
+                      <CardDescription>Dining options for your trip</CardDescription>
                     </CardHeader>
                     <CardContent className="pt-6">
                       <div className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-bold prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg">
-                        <ReactMarkdown
-                          remarkPlugins={[remarkGfm, remarkBreaks]}
-                        >
+                        <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
                           {trip.restaurant_agent_response}
                         </ReactMarkdown>
                       </div>
@@ -1303,8 +1179,7 @@ export default function TripDetailsPage() {
                   trip.itinerary.restaurants.length > 0 && (
                     <section>
                       <h2 className="text-2xl font-semibold mb-6 flex items-center">
-                        <Utensils className="mr-3 h-6 w-6 text-primary" />{" "}
-                        Selected Restaurants
+                        <Utensils className="mr-3 h-6 w-6 text-primary" /> Selected Restaurants
                       </h2>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {trip.itinerary.restaurants.map((restaurant, index) => (
@@ -1330,7 +1205,7 @@ export default function TripDetailsPage() {
                                 </p>
                               </CardContent>
                             )}
-                            {restaurant.url && restaurant.url.trim() !== "" && (
+                            {restaurant.url && restaurant.url.trim() !== '' && (
                               <CardFooter className="bg-muted/30 border-t">
                                 <a
                                   href={restaurant.url}
@@ -1338,8 +1213,7 @@ export default function TripDetailsPage() {
                                   rel="noopener noreferrer"
                                   className="text-primary hover:underline text-sm flex items-center"
                                 >
-                                  Visit Website{" "}
-                                  <Globe className="h-4 w-4 ml-1.5" />
+                                  Visit Website <Globe className="h-4 w-4 ml-1.5" />
                                 </a>
                               </CardFooter>
                             )}
@@ -1351,13 +1225,8 @@ export default function TripDetailsPage() {
               </div>
             ) : (
               <div className="text-center py-10 border rounded-lg">
-                <Info
-                  size={48}
-                  className="text-muted-foreground mx-auto mb-4"
-                />
-                <h2 className="text-xl font-semibold mb-2">
-                  Dining Information Not Available
-                </h2>
+                <Info size={48} className="text-muted-foreground mx-auto mb-4" />
+                <h2 className="text-xl font-semibold mb-2">Dining Information Not Available</h2>
                 <p className="text-muted-foreground">
                   Restaurant recommendations are not available for this trip.
                 </p>
@@ -1371,8 +1240,7 @@ export default function TripDetailsPage() {
               <Card className="overflow-hidden">
                 <CardHeader className="bg-muted/30">
                   <CardTitle className="flex items-center">
-                    <Receipt className="h-5 w-5 mr-2 text-primary" /> Budget
-                    Analysis
+                    <Receipt className="h-5 w-5 mr-2 text-primary" /> Budget Analysis
                   </CardTitle>
                   <CardDescription>
                     Budget recommendations and optimization strategies
@@ -1388,13 +1256,8 @@ export default function TripDetailsPage() {
               </Card>
             ) : (
               <div className="text-center py-10 border rounded-lg">
-                <Info
-                  size={48}
-                  className="text-muted-foreground mx-auto mb-4"
-                />
-                <h2 className="text-xl font-semibold mb-2">
-                  Budget Information Not Available
-                </h2>
+                <Info size={48} className="text-muted-foreground mx-auto mb-4" />
+                <h2 className="text-xl font-semibold mb-2">Budget Information Not Available</h2>
                 <p className="text-muted-foreground">
                   Budget analysis information is not available for this trip.
                 </p>

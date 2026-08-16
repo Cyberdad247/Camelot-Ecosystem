@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { TitanLinkEventSchema, TitanLinkCommand, TitanLinkEvent } from "@camelot/anya-domain";
+import { TitanLinkEventSchema, TitanLinkCommand, TitanLinkEvent } from '@camelot/anya-domain';
 
 type Listener = (event: TitanLinkEvent) => void;
 
@@ -20,7 +20,7 @@ export class TitanLinkClient {
     this.ws = new WebSocket(this.url);
 
     this.ws.onopen = () => {
-      console.log("[TITANLINK] Connected to Kernel");
+      console.log('[TITANLINK] Connected to Kernel');
       this.startHeartbeat();
     };
 
@@ -30,19 +30,19 @@ export class TitanLinkClient {
         const parsed = TitanLinkEventSchema.parse(raw);
         this.listeners.forEach((fn) => fn(parsed));
       } catch (err) {
-        console.warn("[TITANLINK] Parse error", err);
+        console.warn('[TITANLINK] Parse error', err);
       }
     };
 
     this.ws.onclose = () => {
-      console.log("[TITANLINK] Disconnected. Reconnecting...");
+      console.log('[TITANLINK] Disconnected. Reconnecting...');
       this.stopHeartbeat();
       this.ws = null;
       setTimeout(() => this.connect(), 2000); // simple backoff
     };
 
     this.ws.onerror = (err) => {
-      console.error("[TITANLINK] WS Error", err);
+      console.error('[TITANLINK] WS Error', err);
       this.ws?.close();
     };
   }
@@ -50,7 +50,7 @@ export class TitanLinkClient {
   private startHeartbeat() {
     this.heartbeatInterval = setInterval(() => {
       if (this.ws?.readyState === WebSocket.OPEN) {
-        this.ws.send(JSON.stringify({ kind: "heartbeat" }));
+        this.ws.send(JSON.stringify({ kind: 'heartbeat' }));
       }
     }, 15000);
   }
@@ -63,7 +63,7 @@ export class TitanLinkClient {
     if (this.ws?.readyState === WebSocket.OPEN) {
       this.ws.send(JSON.stringify(command));
     } else {
-      console.warn("[TITANLINK] Cannot send, WS not open");
+      console.warn('[TITANLINK] Cannot send, WS not open');
     }
   }
 

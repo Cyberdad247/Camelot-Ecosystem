@@ -11,9 +11,5 @@
     "key_rotation_days": 30,
     "post_quantum_ready": true
   },
-  "runtime_checks": [
-    "injection_detection",
-    "cartridge_integrity_scan",
-    "merkle_ledger_audit"
-  ]
+  "runtime_checks": ["injection_detection", "cartridge_integrity_scan", "merkle_ledger_audit"]
 }

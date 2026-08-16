@@ -8,8 +8,8 @@ import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 export const nodes = sqliteTable('nodes', {
   id: text('id').primaryKey(), // UKG Node ID (e.g. uuid)
-  type: text('type'),           // JSON-LD @type
-  raw: text('raw').notNull(),    // Full JSON-LD content
+  type: text('type'), // JSON-LD @type
+  raw: text('raw').notNull(), // Full JSON-LD content
   lastUpdated: integer('last_updated', { mode: 'timestamp' }),
 });
 

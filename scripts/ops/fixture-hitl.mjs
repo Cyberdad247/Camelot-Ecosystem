@@ -84,9 +84,7 @@ for (const actionId of actionIds) {
     );
     failures += 1;
   } else {
-    console.log(
-      `[fixture-hitl] PASS ${actionId} status=${res.status} ${body.status}`,
-    );
+    console.log(`[fixture-hitl] PASS ${actionId} status=${res.status} ${body.status}`);
   }
 }
 

@@ -1,14 +1,14 @@
 // 🕵️ STEALTH INJECTOR (Content Script - Isolated World)
 // Reads config and injects anti-detect script into Main World.
 
-(async function() {
-    try {
-        // 1. Get Global Config from Storage
-        const storage = await chrome.storage.local.get(null);
-        // We might not have the full library in storage if it's hardcoded in JS.
-        // So we will inject the library definitions directly into the page context.
+(async function () {
+  try {
+    // 1. Get Global Config from Storage
+    const storage = await chrome.storage.local.get(null);
+    // We might not have the full library in storage if it's hardcoded in JS.
+    // So we will inject the library definitions directly into the page context.
 
-        const scriptContent = `
+    const scriptContent = `
         (function() {
             // --- EMBEDDED PROFILE LIBRARY ---
             const PROFILE_LIBRARY = {
@@ -96,12 +96,11 @@
         })();
         `;
 
-        const script = document.createElement('script');
-        script.textContent = scriptContent;
-        (document.head || document.documentElement).appendChild(script);
-        script.remove();
-
-    } catch (e) {
-        console.error("[STEALTH] Injection Failed:", e);
-    }
+    const script = document.createElement('script');
+    script.textContent = scriptContent;
+    (document.head || document.documentElement).appendChild(script);
+    script.remove();
+  } catch (e) {
+    console.error('[STEALTH] Injection Failed:', e);
+  }
 })();

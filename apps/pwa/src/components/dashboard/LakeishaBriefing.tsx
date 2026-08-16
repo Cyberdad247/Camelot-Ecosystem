@@ -14,7 +14,11 @@ interface WeatherData {
 
 export function LakeishaBriefing() {
   const { state: bifrostState } = useBifrost();
-  const [weather, setWeather] = useState<WeatherData>({ temp: 72, condition: 'rain', isDay: false });
+  const [weather, setWeather] = useState<WeatherData>({
+    temp: 72,
+    condition: 'rain',
+    isDay: false,
+  });
   const [loadingWeather, setLoadingWeather] = useState(true);
 
   useEffect(() => {
@@ -97,7 +101,9 @@ export function LakeishaBriefing() {
 
           <div className="mt-6 flex items-center justify-between gap-6">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">Condition</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">
+                Condition
+              </p>
               <p className="font-display text-4xl text-white mt-1 capitalize">
                 {loadingWeather ? 'Resolving…' : weather.condition}
               </p>
@@ -106,7 +112,9 @@ export function LakeishaBriefing() {
               </p>
             </div>
             <div className="text-right">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">Temperature</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-white/45">
+                Temperature
+              </p>
               <p className="font-display text-6xl text-gold-royal tracking-minted mt-1">
                 {loadingWeather ? '--' : `${weather.temp}°F`}
               </p>
@@ -123,8 +131,8 @@ export function LakeishaBriefing() {
                 {weather.condition === 'snow'
                   ? 'Glacier Ice Grid (White/Blue)'
                   : weather.condition === 'rain'
-                  ? 'Storm Ripple Grid (Indigo/Violet)'
-                  : 'Golden Emerald Meadow Grid (Gold/Green)'}
+                    ? 'Storm Ripple Grid (Indigo/Violet)'
+                    : 'Golden Emerald Meadow Grid (Gold/Green)'}
               </span>
             </div>
           </div>
@@ -182,9 +190,14 @@ export function LakeishaBriefing() {
             <tbody className="divide-y divide-white/5">
               {knightTasks.map((k) => (
                 <tr key={k.id} className="align-middle hover:bg-white/[0.02]">
-                  <td className="py-3 font-display text-sm text-gold-light font-medium">{k.name}</td>
+                  <td className="py-3 font-display text-sm text-gold-light font-medium">
+                    {k.name}
+                  </td>
                   <td className="py-3 text-[10px] uppercase text-white/50">{k.role}</td>
-                  <td className="py-3 pr-4 text-white/80 leading-relaxed max-w-[20rem] truncate" title={k.activeTask}>
+                  <td
+                    className="py-3 pr-4 text-white/80 leading-relaxed max-w-[20rem] truncate"
+                    title={k.activeTask}
+                  >
                     {k.activeTask}
                   </td>
                   <td className="py-3">
@@ -193,8 +206,8 @@ export function LakeishaBriefing() {
                         k.status === 'EXECUTING'
                           ? 'border-violet/50 text-violet-light bg-violet/5'
                           : k.status === 'VALIDATING'
-                          ? 'border-gold/50 text-gold-light bg-gold/5'
-                          : 'border-white/15 text-white/30'
+                            ? 'border-gold/50 text-gold-light bg-gold/5'
+                            : 'border-white/15 text-white/30'
                       }`}
                     >
                       {k.status}
@@ -203,10 +216,7 @@ export function LakeishaBriefing() {
                   <td className="py-3 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <div className="w-12 h-1 bg-white/10 hidden sm:block">
-                        <div
-                          className="h-full bg-gold-royal"
-                          style={{ width: `${k.progress}%` }}
-                        />
+                        <div className="h-full bg-gold-royal" style={{ width: `${k.progress}%` }} />
                       </div>
                       <span className="text-[10px] text-white/70">{k.progress}%</span>
                     </div>

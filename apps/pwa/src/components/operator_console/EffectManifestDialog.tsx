@@ -27,23 +27,49 @@ export function EffectManifestDialog({
     >
       <h3 className="font-display text-sm tracking-minted text-gold-light">EFFECT MANIFEST</h3>
       <dl className="mt-3 space-y-2 text-xs text-white/70">
-        <div className="flex justify-between gap-4"><dt className="text-white/40">Manifest</dt><dd className="break-all">{manifest.manifestId}</dd></div>
-        <div className="flex justify-between gap-4"><dt className="text-white/40">Kind</dt><dd>{manifest.kind}</dd></div>
-        <div className="flex justify-between gap-4"><dt className="text-white/40">Diff SHA-256</dt><dd className="break-all">{manifest.diffSha256}</dd></div>
-        <div className="flex justify-between gap-4"><dt className="text-white/40">Policy</dt><dd>{manifest.policyClass}</dd></div>
-        <div className="flex justify-between gap-4"><dt className="text-white/40">Expires</dt><dd>{manifest.expiresAt}</dd></div>
-        <div className="flex justify-between gap-4"><dt className="text-white/40">Base → Candidate</dt><dd className="break-all">{manifest.baseRevision.slice(0, 8)} → {manifest.candidateRevision.slice(0, 8)}</dd></div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-white/40">Manifest</dt>
+          <dd className="break-all">{manifest.manifestId}</dd>
+        </div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-white/40">Kind</dt>
+          <dd>{manifest.kind}</dd>
+        </div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-white/40">Diff SHA-256</dt>
+          <dd className="break-all">{manifest.diffSha256}</dd>
+        </div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-white/40">Policy</dt>
+          <dd>{manifest.policyClass}</dd>
+        </div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-white/40">Expires</dt>
+          <dd>{manifest.expiresAt}</dd>
+        </div>
+        <div className="flex justify-between gap-4">
+          <dt className="text-white/40">Base → Candidate</dt>
+          <dd className="break-all">
+            {manifest.baseRevision.slice(0, 8)} → {manifest.candidateRevision.slice(0, 8)}
+          </dd>
+        </div>
       </dl>
       <div className="mt-3">
         <p className="mb-1 text-[10px] uppercase tracking-widest text-white/40">Changed paths</p>
         <ul className="max-h-28 overflow-auto border border-white/10 p-2 font-mono text-[10px] text-white/60">
-          {manifest.allowedPaths.map((p) => <li key={p}>+ {p}</li>)}
+          {manifest.allowedPaths.map((p) => (
+            <li key={p}>+ {p}</li>
+          ))}
         </ul>
       </div>
       <div className="mt-3">
-        <p className="mb-1 text-[10px] uppercase tracking-widest text-white/40">Required evidence</p>
+        <p className="mb-1 text-[10px] uppercase tracking-widest text-white/40">
+          Required evidence
+        </p>
         <ul className="font-mono text-[10px] text-white/60">
-          {manifest.requiredEvidence.map((e) => <li key={e}>· {e}</li>)}
+          {manifest.requiredEvidence.map((e) => (
+            <li key={e}>· {e}</li>
+          ))}
         </ul>
       </div>
       <label className="mt-4 block">
@@ -76,7 +102,8 @@ export function EffectManifestDialog({
       </div>
       {disabled && (
         <p className="mt-3 text-[11px] text-amber-200" role="alert">
-          Approve/deny disabled: Sentinel, policy, Gideon, VFS, or evidence integrity is unavailable or invalid.
+          Approve/deny disabled: Sentinel, policy, Gideon, VFS, or evidence integrity is unavailable
+          or invalid.
         </p>
       )}
     </div>

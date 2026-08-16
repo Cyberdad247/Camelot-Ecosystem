@@ -37,9 +37,9 @@ describe('node standing', () => {
     expect(nodeStandingLabel(node({ trust: 'limited' }))).toContain('read-only');
     expect(nodeStandingLabel(node({ trust: 'pending' }))).toContain('awaiting your approval');
     expect(nodeStandingLabel(node({ trust: 'degraded' }))).toContain('heartbeat stale');
-    expect(nodeStandingLabel(node({ trust: 'revoked', revocationReason: 'lost laptop' }))).toContain(
-      'lost laptop',
-    );
+    expect(
+      nodeStandingLabel(node({ trust: 'revoked', revocationReason: 'lost laptop' })),
+    ).toContain('lost laptop');
     expect(bandClass(node({ trust: 'revoked' }))).toBe('band-revoked');
   });
 });

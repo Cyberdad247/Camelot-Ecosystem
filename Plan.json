@@ -48,38 +48,22 @@
     {
       "id": "nexus",
       "label": "Nexus Overview",
-      "components": [
-        "SystemLatticeWidget",
-        "CartridgeDeckWidget",
-        "TelemetrySparklineGrid"
-      ]
+      "components": ["SystemLatticeWidget", "CartridgeDeckWidget", "TelemetrySparklineGrid"]
     },
     {
       "id": "vox",
       "label": "Vox Console",
-      "components": [
-        "OpenPersonaAvatar",
-        "KickboxAudioDeck",
-        "VoiceRouterMixer"
-      ]
+      "components": ["OpenPersonaAvatar", "KickboxAudioDeck", "VoiceRouterMixer"]
     },
     {
       "id": "hermes",
       "label": "Hermes Core",
-      "components": [
-        "HermesProcessTree",
-        "CMUXTerminalGrid",
-        "LiveRunePrompt"
-      ]
+      "components": ["HermesProcessTree", "CMUXTerminalGrid", "LiveRunePrompt"]
     },
     {
       "id": "forge",
       "label": "Forge Factory",
-      "components": [
-        "ASTGraphOfThoughts",
-        "KahnDagValidator",
-        "VercelDeployMonitor"
-      ]
+      "components": ["ASTGraphOfThoughts", "KahnDagValidator", "VercelDeployMonitor"]
     }
   ],
   "knight_task_assignments": [

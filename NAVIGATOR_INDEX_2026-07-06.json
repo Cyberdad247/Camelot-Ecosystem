@@ -33,18 +33,8 @@
       "role": "bin",
       "first_line": "\"\"\"AWAKEN — Universal Camelot-OS Bootstrap Entry Point",
       "classes": [],
-      "functions": [
-        "_banner",
-        "main"
-      ],
-      "imports": [
-        "argparse",
-        "control_plane",
-        "json",
-        "os",
-        "pathlib",
-        "sys"
-      ],
+      "functions": ["_banner", "main"],
+      "imports": ["argparse", "control_plane", "json", "os", "pathlib", "sys"],
       "module_version": null,
       "size_bytes": 3764,
       "lines": 91,
@@ -56,9 +46,7 @@
       "path": "bin\\bifrost.py",
       "role": "bin",
       "first_line": "\"\"\"Bifrost — Camelot-OS Sovereign Identity & Network Gate.",
-      "classes": [
-        "AccessDenied"
-      ],
+      "classes": ["AccessDenied"],
       "functions": [
         "_b64url_decode",
         "_env_flag",
@@ -110,14 +98,7 @@
         "send_message",
         "upload_file"
       ],
-      "imports": [
-        "fastapi",
-        "json",
-        "os",
-        "pathlib",
-        "time",
-        "uvicorn"
-      ],
+      "imports": ["fastapi", "json", "os", "pathlib", "time", "uvicorn"],
       "module_version": null,
       "size_bytes": 5220,
       "lines": 135,
@@ -139,16 +120,7 @@
         "send_message",
         "upload_file"
       ],
-      "imports": [
-        "fastapi",
-        "json",
-        "os",
-        "pathlib",
-        "psutil",
-        "subprocess",
-        "time",
-        "uvicorn"
-      ],
+      "imports": ["fastapi", "json", "os", "pathlib", "psutil", "subprocess", "time", "uvicorn"],
       "module_version": null,
       "size_bytes": 5159,
       "lines": 137,
@@ -162,14 +134,7 @@
       "first_line": "\"\"\"Debug boot hang — runs all phases with live timestamps.\"\"\"",
       "classes": [],
       "functions": [],
-      "imports": [
-        "control_plane",
-        "importlib",
-        "os",
-        "pathlib",
-        "sys",
-        "time"
-      ],
+      "imports": ["control_plane", "importlib", "os", "pathlib", "sys", "time"],
       "module_version": null,
       "size_bytes": 3105,
       "lines": 63,
@@ -196,11 +161,7 @@
         "_cmd_warp",
         "main"
       ],
-      "imports": [
-        "__future__",
-        "pathlib",
-        "sys"
-      ],
+      "imports": ["__future__", "pathlib", "sys"],
       "module_version": "400.1.0",
       "size_bytes": 11384,
       "lines": 318,
@@ -259,14 +220,7 @@
         "load_knight_persona",
         "load_ukg_anchor"
       ],
-      "imports": [
-        "__future__",
-        "json",
-        "os",
-        "pathlib",
-        "sys",
-        "typing"
-      ],
+      "imports": ["__future__", "json", "os", "pathlib", "sys", "typing"],
       "module_version": null,
       "size_bytes": 16511,
       "lines": 360,
@@ -325,13 +279,7 @@
         "load_keys_to_env",
         "main"
       ],
-      "imports": [
-        "__future__",
-        "os",
-        "pathlib",
-        "sys",
-        "typing"
-      ],
+      "imports": ["__future__", "os", "pathlib", "sys", "typing"],
       "module_version": null,
       "size_bytes": 8175,
       "lines": 250,
@@ -406,15 +354,7 @@
         "main",
         "run_shell_setup"
       ],
-      "imports": [
-        "__future__",
-        "os",
-        "pathlib",
-        "platform",
-        "shutil",
-        "subprocess",
-        "sys"
-      ],
+      "imports": ["__future__", "os", "pathlib", "platform", "shutil", "subprocess", "sys"],
       "module_version": null,
       "size_bytes": 11230,
       "lines": 308,
@@ -471,16 +411,7 @@
         "get_tailscale_peers",
         "main"
       ],
-      "imports": [
-        "datetime",
-        "json",
-        "os",
-        "pathlib",
-        "psutil",
-        "subprocess",
-        "sys",
-        "time"
-      ],
+      "imports": ["datetime", "json", "os", "pathlib", "psutil", "subprocess", "sys", "time"],
       "module_version": null,
       "size_bytes": 7885,
       "lines": 220,
@@ -493,17 +424,8 @@
       "role": "bin",
       "first_line": "# -*- coding: utf-8 -*-",
       "classes": [],
-      "functions": [
-        "run_intercept"
-      ],
-      "imports": [
-        "os",
-        "pathlib",
-        "subprocess",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "functions": ["run_intercept"],
+      "imports": ["os", "pathlib", "subprocess", "sys", "time", "typing"],
       "module_version": null,
       "size_bytes": 1969,
       "lines": 64,
@@ -558,19 +480,8 @@
       "role": "bin",
       "first_line": "\"\"\"OpenClaw CLI — CAMELOT-OS Dynamic Health Triage",
       "classes": [],
-      "functions": [
-        "_print_status_only",
-        "_print_table",
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "control_plane",
-        "json",
-        "pathlib",
-        "sys",
-        "time"
-      ],
+      "functions": ["_print_status_only", "_print_table", "main"],
+      "imports": ["__future__", "control_plane", "json", "pathlib", "sys", "time"],
       "module_version": null,
       "size_bytes": 3763,
       "lines": 101,
@@ -583,13 +494,8 @@
       "role": "bin",
       "first_line": "# -*- coding: utf-8 -*-",
       "classes": [],
-      "functions": [
-        "forge_pdf"
-      ],
-      "imports": [
-        "pathlib",
-        "reportlab"
-      ],
+      "functions": ["forge_pdf"],
+      "imports": ["pathlib", "reportlab"],
       "module_version": null,
       "size_bytes": 2529,
       "lines": 65,
@@ -601,21 +507,9 @@
       "path": "bin\\run_uiux_workflow.py",
       "role": "bin",
       "first_line": "\"\"\"Execute the UI/UX cloudbrain workflow JSON.\"\"\"",
-      "classes": [
-        "WorkflowRunner"
-      ],
-      "functions": [
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "argparse",
-        "datetime",
-        "json",
-        "os",
-        "pathlib",
-        "subprocess"
-      ],
+      "classes": ["WorkflowRunner"],
+      "functions": ["main"],
+      "imports": ["__future__", "argparse", "datetime", "json", "os", "pathlib", "subprocess"],
       "module_version": null,
       "size_bytes": 5683,
       "lines": 140,
@@ -628,10 +522,7 @@
       "role": "bin",
       "first_line": "\"\"\"",
       "classes": [],
-      "functions": [
-        "main",
-        "run"
-      ],
+      "functions": ["main", "run"],
       "imports": [
         "__future__",
         "argparse",
@@ -654,17 +545,8 @@
       "role": "bin",
       "first_line": "\"\"\"Sync the UI/UX workflow cartridge and knight bench into NotebookLM Cloud Brain.\"\"\"",
       "classes": [],
-      "functions": [
-        "_read",
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "json",
-        "os",
-        "pathlib",
-        "sys"
-      ],
+      "functions": ["_read", "main"],
+      "imports": ["__future__", "json", "os", "pathlib", "sys"],
       "module_version": null,
       "size_bytes": 3149,
       "lines": 92,
@@ -677,17 +559,8 @@
       "role": "bin",
       "first_line": "\"\"\"Omega₃ Oracle dispatch test — routes a synth request through CloudServiceRouter.",
       "classes": [],
-      "functions": [
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "control_plane",
-        "os",
-        "pathlib",
-        "sys"
-      ],
+      "functions": ["main"],
+      "imports": ["__future__", "asyncio", "control_plane", "os", "pathlib", "sys"],
       "module_version": null,
       "size_bytes": 3047,
       "lines": 82,
@@ -700,24 +573,8 @@
       "role": "bin",
       "first_line": "\"\"\"",
       "classes": [],
-      "functions": [
-        "_http_ok",
-        "_load",
-        "_resolve",
-        "_tcp_open",
-        "down",
-        "main",
-        "status",
-        "up"
-      ],
-      "imports": [
-        "__future__",
-        "pathlib",
-        "socket",
-        "subprocess",
-        "sys",
-        "urllib"
-      ],
+      "functions": ["_http_ok", "_load", "_resolve", "_tcp_open", "down", "main", "status", "up"],
+      "imports": ["__future__", "pathlib", "socket", "subprocess", "sys", "urllib"],
       "module_version": null,
       "size_bytes": 3546,
       "lines": 117,
@@ -730,16 +587,8 @@
       "role": "bin",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
       "classes": [],
-      "functions": [
-        "load_base_memory",
-        "load_cloudbrain",
-        "upgrade_roster"
-      ],
-      "imports": [
-        "importlib",
-        "pathlib",
-        "sys"
-      ],
+      "functions": ["load_base_memory", "load_cloudbrain", "upgrade_roster"],
+      "imports": ["importlib", "pathlib", "sys"],
       "module_version": null,
       "size_bytes": 3915,
       "lines": 71,
@@ -752,14 +601,8 @@
       "role": "bin",
       "first_line": "\"\"\"Verify the UI/UX cloudbrain sync artifacts without depending on notebooklm package imports.\"\"\"",
       "classes": [],
-      "functions": [
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "json",
-        "pathlib"
-      ],
+      "functions": ["main"],
+      "imports": ["__future__", "json", "pathlib"],
       "module_version": null,
       "size_bytes": 1240,
       "lines": 34,
@@ -786,15 +629,7 @@
         "cmd_unregister",
         "main"
       ],
-      "imports": [
-        "__future__",
-        "argparse",
-        "pathlib",
-        "platform",
-        "subprocess",
-        "sys",
-        "time"
-      ],
+      "imports": ["__future__", "argparse", "pathlib", "platform", "subprocess", "sys", "time"],
       "module_version": null,
       "size_bytes": 8201,
       "lines": 221,
@@ -808,23 +643,9 @@
       "path": "control_plane\\agent_gateway.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "AgentGateway"
-      ],
-      "functions": [
-        "dispatch_to_agent",
-        "get_agent_gateway",
-        "parallel_dispatch"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "json",
-        "sys",
-        "time",
-        "typing",
-        "uuid"
-      ],
+      "classes": ["AgentGateway"],
+      "functions": ["dispatch_to_agent", "get_agent_gateway", "parallel_dispatch"],
+      "imports": ["__future__", "asyncio", "json", "sys", "time", "typing", "uuid"],
       "module_version": null,
       "size_bytes": 8496,
       "lines": 276,
@@ -836,23 +657,9 @@
       "path": "control_plane\\agent_memory.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "KnightMemory"
-      ],
-      "functions": [
-        "get_memory",
-        "log_dispatch",
-        "log_response",
-        "search",
-        "store_fact"
-      ],
-      "imports": [
-        "__future__",
-        "os",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["KnightMemory"],
+      "functions": ["get_memory", "log_dispatch", "log_response", "search", "store_fact"],
+      "imports": ["__future__", "os", "sys", "time", "typing"],
       "module_version": null,
       "size_bytes": 9321,
       "lines": 283,
@@ -864,20 +671,9 @@
       "path": "control_plane\\agent_registry.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "AgentDefinition",
-        "AgentRegistry"
-      ],
-      "functions": [
-        "get_agent",
-        "get_agent_registry",
-        "list_agents"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "typing"
-      ],
+      "classes": ["AgentDefinition", "AgentRegistry"],
+      "functions": ["get_agent", "get_agent_registry", "list_agents"],
+      "imports": ["__future__", "dataclasses", "typing"],
       "module_version": null,
       "size_bytes": 9155,
       "lines": 271,
@@ -912,13 +708,7 @@
         "_stage_triage",
         "_stage_validate"
       ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "pathlib",
-        "re",
-        "time"
-      ],
+      "imports": ["__future__", "dataclasses", "pathlib", "re", "time"],
       "module_version": "9000.14",
       "size_bytes": 28741,
       "lines": 720,
@@ -930,25 +720,9 @@
       "path": "control_plane\\aperture_bridge.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "ApertureBridge",
-        "ModelUsage",
-        "UsageSummary"
-      ],
-      "functions": [
-        "_selftest",
-        "parse_usage",
-        "render_panel"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "json",
-        "os",
-        "sys",
-        "typing",
-        "urllib"
-      ],
+      "classes": ["ApertureBridge", "ModelUsage", "UsageSummary"],
+      "functions": ["_selftest", "parse_usage", "render_panel"],
+      "imports": ["__future__", "dataclasses", "json", "os", "sys", "typing", "urllib"],
       "module_version": "9000.14",
       "size_bytes": 9710,
       "lines": 219,
@@ -960,14 +734,8 @@
       "path": "control_plane\\bifrost.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "Bifrost"
-      ],
-      "functions": [
-        "_load_cliproxy_key",
-        "_main",
-        "_validate_base_url"
-      ],
+      "classes": ["Bifrost"],
+      "functions": ["_load_cliproxy_key", "_main", "_validate_base_url"],
       "imports": [
         "__future__",
         "asyncio",
@@ -991,13 +759,7 @@
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
       "classes": [],
-      "functions": [
-        "_main",
-        "_sign",
-        "health",
-        "send_command",
-        "tail_swarm_events"
-      ],
+      "functions": ["_main", "_sign", "health", "send_command", "tail_swarm_events"],
       "imports": [
         "__future__",
         "control_plane",
@@ -1019,22 +781,9 @@
       "path": "control_plane\\bifrost_integration.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "BifrostIntegration",
-        "OptimizationProfile"
-      ],
-      "functions": [
-        "get_bifrost_integration",
-        "integrate_with_bifrost"
-      ],
-      "imports": [
-        "__future__",
-        "control_plane",
-        "dataclasses",
-        "datetime",
-        "pathlib",
-        "typing"
-      ],
+      "classes": ["BifrostIntegration", "OptimizationProfile"],
+      "functions": ["get_bifrost_integration", "integrate_with_bifrost"],
+      "imports": ["__future__", "control_plane", "dataclasses", "datetime", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 18734,
       "lines": 499,
@@ -1046,10 +795,7 @@
       "path": "control_plane\\bifrost_server.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "PendingApproval",
-        "PendingApprovals"
-      ],
+      "classes": ["PendingApproval", "PendingApprovals"],
       "functions": [
         "_board_html",
         "_metrics_fragment",
@@ -1057,15 +803,7 @@
         "_selftest",
         "create_app"
       ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "dataclasses",
-        "json",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "imports": ["__future__", "asyncio", "dataclasses", "json", "sys", "time", "typing"],
       "module_version": "9000.14",
       "size_bytes": 14124,
       "lines": 335,
@@ -1077,9 +815,7 @@
       "path": "control_plane\\bifrost_triage_swarm.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "TriageTask"
-      ],
+      "classes": ["TriageTask"],
       "functions": [
         "_ledger",
         "_main",
@@ -1114,9 +850,7 @@
       "path": "control_plane\\bio_swarm_runtime.py",
       "role": "control_plane",
       "first_line": "\"\"\"Production evidence wrapper for the Bio-Swarm Rust spawner.\"\"\"",
-      "classes": [
-        "BioSwarmPaths"
-      ],
+      "classes": ["BioSwarmPaths"],
       "functions": [
         "_coerce_paths",
         "_find_binary",
@@ -1300,21 +1034,9 @@
       "path": "control_plane\\cartridge_manager.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "CartridgeManager",
-        "CartridgeState"
-      ],
-      "functions": [
-        "_selftest"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "json",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["CartridgeManager", "CartridgeState"],
+      "functions": ["_selftest"],
+      "imports": ["__future__", "dataclasses", "json", "sys", "time", "typing"],
       "module_version": "9000.14",
       "size_bytes": 8161,
       "lines": 216,
@@ -1326,19 +1048,13 @@
       "path": "control_plane\\claw_suite.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "ClawKnight"
-      ],
+      "classes": ["ClawKnight"],
       "functions": [
         "build_claw_suite_manifest",
         "is_forbidden_openclaw_intent",
         "route_claw_suite"
       ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "typing"
-      ],
+      "imports": ["__future__", "dataclasses", "typing"],
       "module_version": null,
       "size_bytes": 7203,
       "lines": 177,
@@ -1350,10 +1066,7 @@
       "path": "control_plane\\cli_intercept.py",
       "role": "control_plane",
       "first_line": "\"\"\"CLI Intercept — Bridges camelot-cli to the MFOE Soul Router.",
-      "classes": [
-        "CLIIntercept",
-        "DispatchResult"
-      ],
+      "classes": ["CLIIntercept", "DispatchResult"],
       "functions": [
         "_build_arg_parser",
         "_run_cloudbrain_action",
@@ -1461,21 +1174,9 @@
       "path": "control_plane\\cloudbrain_synthesis.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "CloudBrainSynthesizer",
-        "DispatchClusterer",
-        "WeeklySynthesisJob"
-      ],
-      "functions": [
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "json",
-        "sys",
-        "time"
-      ],
+      "classes": ["CloudBrainSynthesizer", "DispatchClusterer", "WeeklySynthesisJob"],
+      "functions": ["main"],
+      "imports": ["__future__", "asyncio", "json", "sys", "time"],
       "module_version": null,
       "size_bytes": 10786,
       "lines": 304,
@@ -1546,15 +1247,7 @@
         "read_codex_status",
         "write_codex_integration"
       ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "json",
-        "os",
-        "pathlib",
-        "sys",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "json", "os", "pathlib", "sys", "typing"],
       "module_version": null,
       "size_bytes": 8139,
       "lines": 211,
@@ -1602,9 +1295,7 @@
       "path": "control_plane\\cognitive_service.py",
       "role": "control_plane",
       "first_line": "\"\"\"Cognitive Service — HTTP front for the Tier-2/3 stack on cybertronia.",
-      "classes": [
-        "Handler"
-      ],
+      "classes": ["Handler"],
       "functions": [
         "_load",
         "_probe",
@@ -1645,22 +1336,9 @@
       "path": "control_plane\\colmad.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "ColMAD",
-        "CrucibleVerdict",
-        "PersonaVote"
-      ],
-      "functions": [
-        "_selftest",
-        "_vote"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "re",
-        "sys",
-        "typing"
-      ],
+      "classes": ["ColMAD", "CrucibleVerdict", "PersonaVote"],
+      "functions": ["_selftest", "_vote"],
+      "imports": ["__future__", "dataclasses", "re", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 6969,
       "lines": 172,
@@ -1679,15 +1357,7 @@
         "MemoryCompressionResult"
       ],
       "functions": [],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "gzip",
-        "json",
-        "logging",
-        "pathlib",
-        "typing"
-      ],
+      "imports": ["__future__", "dataclasses", "gzip", "json", "logging", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 10101,
       "lines": 270,
@@ -1699,22 +1369,9 @@
       "path": "control_plane\\config_manager.py",
       "role": "control_plane",
       "first_line": "\"\"\"Camelot-OS Configuration Manager — Persisted Operator Profiles.\"\"\"",
-      "classes": [
-        "CamelotConfig",
-        "ConfigManager",
-        "OperatorProfile",
-        "SubstrateProfile"
-      ],
+      "classes": ["CamelotConfig", "ConfigManager", "OperatorProfile", "SubstrateProfile"],
       "functions": [],
-      "imports": [
-        "__future__",
-        "json",
-        "os",
-        "pathlib",
-        "pydantic",
-        "typing",
-        "urllib"
-      ],
+      "imports": ["__future__", "json", "os", "pathlib", "pydantic", "typing", "urllib"],
       "module_version": null,
       "size_bytes": 14835,
       "lines": 344,
@@ -1726,21 +1383,9 @@
       "path": "control_plane\\consensus_layer.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "ConsensusLayer"
-      ],
-      "functions": [
-        "get_consensus_layer",
-        "vote_on_routing"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "collections",
-        "json",
-        "sys",
-        "typing"
-      ],
+      "classes": ["ConsensusLayer"],
+      "functions": ["get_consensus_layer", "vote_on_routing"],
+      "imports": ["__future__", "asyncio", "collections", "json", "sys", "typing"],
       "module_version": null,
       "size_bytes": 8099,
       "lines": 261,
@@ -1752,13 +1397,8 @@
       "path": "control_plane\\crucible_runner.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "CrucibleResult",
-        "CrucibleRunner"
-      ],
-      "functions": [
-        "_selftest"
-      ],
+      "classes": ["CrucibleResult", "CrucibleRunner"],
+      "functions": ["_selftest"],
       "imports": [
         "__future__",
         "dataclasses",
@@ -1781,11 +1421,7 @@
       "path": "control_plane\\deerflow_sandbox.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "DeerFlowSandbox",
-        "SandboxConfig",
-        "SandboxResult"
-      ],
+      "classes": ["DeerFlowSandbox", "SandboxConfig", "SandboxResult"],
       "functions": [],
       "imports": [
         "__future__",
@@ -1812,12 +1448,7 @@
       "path": "control_plane\\dependency_engine.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "DepAuditResult",
-        "DepEntry",
-        "DependencyEngine",
-        "UpdateProposal"
-      ],
+      "classes": ["DepAuditResult", "DepEntry", "DependencyEngine", "UpdateProposal"],
       "functions": [],
       "imports": [
         "__future__",
@@ -1840,22 +1471,9 @@
       "path": "control_plane\\distance_travel.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "DistanceTravel"
-      ],
-      "functions": [
-        "ask_agent",
-        "ask_agents",
-        "ask_best_agent",
-        "get_distance_travel"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["DistanceTravel"],
+      "functions": ["ask_agent", "ask_agents", "ask_best_agent", "get_distance_travel"],
+      "imports": ["__future__", "asyncio", "sys", "time", "typing"],
       "module_version": null,
       "size_bytes": 9527,
       "lines": 311,
@@ -1880,14 +1498,7 @@
         "get_distributed_agent_registry",
         "get_distributed_agent_router"
       ],
-      "imports": [
-        "asyncio",
-        "dataclasses",
-        "enum",
-        "json",
-        "time",
-        "typing"
-      ],
+      "imports": ["asyncio", "dataclasses", "enum", "json", "time", "typing"],
       "module_version": null,
       "size_bytes": 15548,
       "lines": 510,
@@ -1906,17 +1517,8 @@
         "SyncEvent",
         "SyncPhase"
       ],
-      "functions": [
-        "get_distributed_knowledge_sync",
-        "sync_demo"
-      ],
-      "imports": [
-        "asyncio",
-        "dataclasses",
-        "enum",
-        "time",
-        "typing"
-      ],
+      "functions": ["get_distributed_knowledge_sync", "sync_demo"],
+      "imports": ["asyncio", "dataclasses", "enum", "time", "typing"],
       "module_version": null,
       "size_bytes": 11138,
       "lines": 373,
@@ -1935,19 +1537,8 @@
         "DistributedConsensus",
         "NodeRole"
       ],
-      "functions": [
-        "consensus_demo",
-        "get_distributed_consensus"
-      ],
-      "imports": [
-        "asyncio",
-        "dataclasses",
-        "enum",
-        "hashlib",
-        "json",
-        "time",
-        "typing"
-      ],
+      "functions": ["consensus_demo", "get_distributed_consensus"],
+      "imports": ["asyncio", "dataclasses", "enum", "hashlib", "json", "time", "typing"],
       "module_version": null,
       "size_bytes": 19571,
       "lines": 537,
@@ -1959,22 +1550,9 @@
       "path": "control_plane\\distributed_memory.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "DistributedMemory",
-        "MemoryEvent"
-      ],
-      "functions": [
-        "get_distributed_memory"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "json",
-        "os",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["DistributedMemory", "MemoryEvent"],
+      "functions": ["get_distributed_memory"],
+      "imports": ["__future__", "dataclasses", "json", "os", "sys", "time", "typing"],
       "module_version": null,
       "size_bytes": 7648,
       "lines": 241,
@@ -1986,21 +1564,9 @@
       "path": "control_plane\\empire_drone.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "DroneAnnounce",
-        "DroneRecord",
-        "EmpireMesh"
-      ],
-      "functions": [
-        "_selftest"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["DroneAnnounce", "DroneRecord", "EmpireMesh"],
+      "functions": ["_selftest"],
+      "imports": ["__future__", "dataclasses", "sys", "time", "typing"],
       "module_version": "9000.14",
       "size_bytes": 5627,
       "lines": 148,
@@ -2012,13 +1578,8 @@
       "path": "control_plane\\event_bridge.py",
       "role": "control_plane",
       "first_line": "\"\"\"Event Bridge — Ingests OpenClaw events and routes to Omni-Router.",
-      "classes": [
-        "ClawEvent"
-      ],
-      "functions": [
-        "_submit_task",
-        "handle_event"
-      ],
+      "classes": ["ClawEvent"],
+      "functions": ["_submit_task", "handle_event"],
       "imports": [
         "control_plane",
         "datetime",
@@ -2079,17 +1640,8 @@
       "path": "control_plane\\factory_lane.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "FactoryJob",
-        "FileStatePersistence",
-        "ToolReturn",
-        "TriageScore",
-        "UsageLimits"
-      ],
-      "functions": [
-        "_selftest",
-        "enqueue_human_gate"
-      ],
+      "classes": ["FactoryJob", "FileStatePersistence", "ToolReturn", "TriageScore", "UsageLimits"],
+      "functions": ["_selftest", "enqueue_human_gate"],
       "imports": [
         "__future__",
         "datetime",
@@ -2112,16 +1664,8 @@
       "path": "control_plane\\firnflow.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "Chunk",
-        "FirnFlow",
-        "NuKGCrystal"
-      ],
-      "functions": [
-        "_est_tokens",
-        "_selftest",
-        "init_seed_crystals"
-      ],
+      "classes": ["Chunk", "FirnFlow", "NuKGCrystal"],
+      "functions": ["_est_tokens", "_selftest", "init_seed_crystals"],
       "imports": [
         "__future__",
         "collections",
@@ -2162,15 +1706,7 @@
         "utc_now",
         "validate_support_session"
       ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "hashlib",
-        "json",
-        "pathlib",
-        "secrets",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "hashlib", "json", "pathlib", "secrets", "typing"],
       "module_version": null,
       "size_bytes": 10692,
       "lines": 289,
@@ -2199,13 +1735,7 @@
         "list_gemini_extensions",
         "summarize_gemini_extensions"
       ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "json",
-        "pathlib",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "json", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 9624,
       "lines": 248,
@@ -2226,11 +1756,7 @@
         "main",
         "print_metrics_summary"
       ],
-      "imports": [
-        "control_plane",
-        "random",
-        "time"
-      ],
+      "imports": ["control_plane", "random", "time"],
       "module_version": null,
       "size_bytes": 4829,
       "lines": 166,
@@ -2243,13 +1769,8 @@
       "role": "control_plane",
       "first_line": "\"\"\"Global Ledger Synchronization — Replicates the root PROVENANCE_LEDGER.md across the Spire.",
       "classes": [],
-      "functions": [
-        "sync_all"
-      ],
-      "imports": [
-        "pathlib",
-        "shutil"
-      ],
+      "functions": ["sync_all"],
+      "imports": ["pathlib", "shutil"],
       "module_version": null,
       "size_bytes": 1388,
       "lines": 39,
@@ -2261,21 +1782,9 @@
       "path": "control_plane\\golay_error_correction.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "CodewordResult",
-        "DecodedResult",
-        "GolayErrorCorrection"
-      ],
-      "functions": [
-        "decode_with_golay",
-        "encode_with_golay",
-        "get_golay_codec"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "typing"
-      ],
+      "classes": ["CodewordResult", "DecodedResult", "GolayErrorCorrection"],
+      "functions": ["decode_with_golay", "encode_with_golay", "get_golay_codec"],
+      "imports": ["__future__", "dataclasses", "typing"],
       "module_version": null,
       "size_bytes": 9106,
       "lines": 240,
@@ -2287,17 +1796,8 @@
       "path": "control_plane\\graphify.py",
       "role": "control_plane",
       "first_line": "\"\"\"Graphify — the butcher: unstructured text -> (subject, predicate, object)",
-      "classes": [
-        "Graphify",
-        "Triplet"
-      ],
-      "functions": [
-        "_clean_np",
-        "_cli",
-        "_lemma",
-        "_sentences",
-        "extract_triplets"
-      ],
+      "classes": ["Graphify", "Triplet"],
+      "functions": ["_clean_np", "_cli", "_lemma", "_sentences", "extract_triplets"],
       "imports": [
         "__future__",
         "argparse",
@@ -2320,12 +1820,7 @@
       "path": "control_plane\\harness.py",
       "role": "control_plane",
       "first_line": "\"\"\"Sovereign Harness — 24/7 Agentic Daemon",
-      "classes": [
-        "HarnessStatus",
-        "HarnessTask",
-        "KnightCell",
-        "SovereignHarness"
-      ],
+      "classes": ["HarnessStatus", "HarnessTask", "KnightCell", "SovereignHarness"],
       "functions": [
         "_append_ledger",
         "_log",
@@ -2374,14 +1869,7 @@
         "read_governance_status",
         "write_governance_status"
       ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "json",
-        "os",
-        "pathlib",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "json", "os", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 8491,
       "lines": 228,
@@ -2393,10 +1881,7 @@
       "path": "control_plane\\heimdall_knight.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "HeimdallDeps",
-        "SecurityReport"
-      ],
+      "classes": ["HeimdallDeps", "SecurityReport"],
       "functions": [
         "bifrost_lock",
         "guard_bridge",
@@ -2425,20 +1910,9 @@
       "path": "control_plane\\hermes_bridge.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "HermesBus"
-      ],
+      "classes": ["HermesBus"],
       "functions": [],
-      "imports": [
-        "__future__",
-        "datetime",
-        "json",
-        "logging",
-        "os",
-        "pathlib",
-        "time",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "json", "logging", "os", "pathlib", "time", "typing"],
       "module_version": null,
       "size_bytes": 6290,
       "lines": 169,
@@ -2485,25 +1959,9 @@
       "path": "control_plane\\hive_stream_tui.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "HiveStreamTUI",
-        "KnightHealthTable",
-        "RoutingBar",
-        "StreamPanel"
-      ],
-      "functions": [
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "datetime",
-        "os",
-        "pathlib",
-        "rich",
-        "sys",
-        "textual"
-      ],
+      "classes": ["HiveStreamTUI", "KnightHealthTable", "RoutingBar", "StreamPanel"],
+      "functions": ["main"],
+      "imports": ["__future__", "asyncio", "datetime", "os", "pathlib", "rich", "sys", "textual"],
       "module_version": null,
       "size_bytes": 14748,
       "lines": 409,
@@ -2515,9 +1973,7 @@
       "path": "control_plane\\hyper_evolve.py",
       "role": "control_plane",
       "first_line": "\"\"\"Guarded hyper-evolution workflow for the Camelot control plane.\"\"\"",
-      "classes": [
-        "EvolutionPaths"
-      ],
+      "classes": ["EvolutionPaths"],
       "functions": [
         "append_learning",
         "ensure_evolution_files",
@@ -2544,9 +2000,7 @@
       "path": "control_plane\\inspira_metrics.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "InspiraMetrics"
-      ],
+      "classes": ["InspiraMetrics"],
       "functions": [
         "_colony_score",
         "_crystal_count",
@@ -2557,16 +2011,7 @@
         "_selftest",
         "collect_metrics"
       ],
-      "imports": [
-        "__future__",
-        "json",
-        "os",
-        "pathlib",
-        "pydantic",
-        "re",
-        "sys",
-        "time"
-      ],
+      "imports": ["__future__", "json", "os", "pathlib", "pydantic", "re", "sys", "time"],
       "module_version": "9000.14",
       "size_bytes": 10305,
       "lines": 265,
@@ -2579,17 +2024,8 @@
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
       "classes": [],
-      "functions": [
-        "classify_intent",
-        "explain_routing",
-        "route_by_intent"
-      ],
-      "imports": [
-        "__future__",
-        "control_plane",
-        "re",
-        "typing"
-      ],
+      "functions": ["classify_intent", "explain_routing", "route_by_intent"],
+      "imports": ["__future__", "control_plane", "re", "typing"],
       "module_version": null,
       "size_bytes": 4447,
       "lines": 114,
@@ -2601,25 +2037,9 @@
       "path": "control_plane\\kinetic_loop.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "KineticLoop",
-        "KineticResult",
-        "Stage"
-      ],
-      "functions": [
-        "_default_executor",
-        "_selftest",
-        "run_sync"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "dataclasses",
-        "enum",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["KineticLoop", "KineticResult", "Stage"],
+      "functions": ["_default_executor", "_selftest", "run_sync"],
+      "imports": ["__future__", "asyncio", "dataclasses", "enum", "sys", "time", "typing"],
       "module_version": "9000.14",
       "size_bytes": 9287,
       "lines": 239,
@@ -2631,17 +2051,8 @@
       "path": "control_plane\\kinetic_swarm.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "KineticSwarm",
-        "SwarmMember",
-        "SwarmRole",
-        "SwarmTask"
-      ],
-      "functions": [
-        "execute_swarm_task",
-        "get_kinetic_swarm",
-        "submit_task_to_swarm"
-      ],
+      "classes": ["KineticSwarm", "SwarmMember", "SwarmRole", "SwarmTask"],
+      "functions": ["execute_swarm_task", "get_kinetic_swarm", "submit_task_to_swarm"],
       "imports": [
         "__future__",
         "asyncio",
@@ -2662,23 +2073,9 @@
       "path": "control_plane\\knight_agent.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "CrystallineSleepManager",
-        "KnightCapability"
-      ],
-      "functions": [
-        "_selftest",
-        "get_capability",
-        "load_roster"
-      ],
-      "imports": [
-        "__future__",
-        "factory_lane",
-        "json",
-        "pydantic",
-        "sys",
-        "typing"
-      ],
+      "classes": ["CrystallineSleepManager", "KnightCapability"],
+      "functions": ["_selftest", "get_capability", "load_roster"],
+      "imports": ["__future__", "factory_lane", "json", "pydantic", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 11350,
       "lines": 272,
@@ -2699,13 +2096,7 @@
         "_warp_workflow_snapshot",
         "write_knight_configuration"
       ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "json",
-        "pathlib",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "json", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 3783,
       "lines": 118,
@@ -2717,13 +2108,8 @@
       "path": "control_plane\\knight_knowledgebase.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "KnightDocument",
-        "KnightKnowledgeBase"
-      ],
-      "functions": [
-        "get_knowledgebase"
-      ],
+      "classes": ["KnightDocument", "KnightKnowledgeBase"],
+      "functions": ["get_knowledgebase"],
       "imports": [
         "__future__",
         "asyncio",
@@ -2746,24 +2132,9 @@
       "path": "control_plane\\knight_self_enhancer.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "DispatchEvent",
-        "KnightSelfEnhancer",
-        "QualityAssessor"
-      ],
-      "functions": [
-        "get_enhancer",
-        "post_dispatch"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "dataclasses",
-        "json",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["DispatchEvent", "KnightSelfEnhancer", "QualityAssessor"],
+      "functions": ["get_enhancer", "post_dispatch"],
+      "imports": ["__future__", "asyncio", "dataclasses", "json", "sys", "time", "typing"],
       "module_version": null,
       "size_bytes": 10746,
       "lines": 308,
@@ -2819,15 +2190,7 @@
         "reconcile_ledger_mirrors",
         "sync_to_kernel"
       ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "hashlib",
-        "httpx",
-        "json",
-        "pathlib",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "hashlib", "httpx", "json", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 5654,
       "lines": 152,
@@ -2839,25 +2202,14 @@
       "path": "control_plane\\leech_lattice_packing.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "GolaySphereCode",
-        "LeechLattice",
-        "PackingDimension",
-        "SphereCoord"
-      ],
+      "classes": ["GolaySphereCode", "LeechLattice", "PackingDimension", "SphereCoord"],
       "functions": [
         "get_golay_code",
         "get_leech_lattice",
         "pack_into_lattice",
         "unpack_from_lattice"
       ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "enum",
-        "math",
-        "typing"
-      ],
+      "imports": ["__future__", "dataclasses", "enum", "math", "typing"],
       "module_version": null,
       "size_bytes": 7829,
       "lines": 201,
@@ -2869,12 +2221,7 @@
       "path": "control_plane\\lord_archivist.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "ArchivistReport",
-        "FailPattern",
-        "SkillAuditResult",
-        "XPEntry"
-      ],
+      "classes": ["ArchivistReport", "FailPattern", "SkillAuditResult", "XPEntry"],
       "functions": [
         "_append_learnings",
         "_detect_fail_patterns",
@@ -2885,15 +2232,7 @@
         "_suggest_action",
         "run_gep_scan"
       ],
-      "imports": [
-        "__future__",
-        "collections",
-        "dataclasses",
-        "datetime",
-        "pathlib",
-        "re",
-        "time"
-      ],
+      "imports": ["__future__", "collections", "dataclasses", "datetime", "pathlib", "re", "time"],
       "module_version": null,
       "size_bytes": 11404,
       "lines": 325,
@@ -2914,9 +2253,7 @@
         "ToolRequest",
         "ToolResponse"
       ],
-      "functions": [
-        "main"
-      ],
+      "functions": ["main"],
       "imports": [
         "__future__",
         "asyncio",
@@ -2962,13 +2299,7 @@
         "_serve_stdio",
         "_tools"
       ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "json",
-        "sys",
-        "typing"
-      ],
+      "imports": ["__future__", "asyncio", "json", "sys", "typing"],
       "module_version": null,
       "size_bytes": 13692,
       "lines": 345,
@@ -2981,19 +2312,8 @@
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
       "classes": [],
-      "functions": [
-        "_risk_band",
-        "_selftest",
-        "_stage_diagram",
-        "visual_plan",
-        "visual_recap"
-      ],
-      "imports": [
-        "__future__",
-        "mdx_schema",
-        "sys",
-        "typing"
-      ],
+      "functions": ["_risk_band", "_selftest", "_stage_diagram", "visual_plan", "visual_recap"],
+      "imports": ["__future__", "mdx_schema", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 6750,
       "lines": 171,
@@ -3006,18 +2326,8 @@
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
       "classes": [],
-      "functions": [
-        "_sample_doc",
-        "_selftest",
-        "_validate_fallback",
-        "render_mdx",
-        "validate_mdx"
-      ],
-      "imports": [
-        "__future__",
-        "sys",
-        "typing"
-      ],
+      "functions": ["_sample_doc", "_selftest", "_validate_fallback", "render_mdx", "validate_mdx"],
+      "imports": ["__future__", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 11586,
       "lines": 263,
@@ -3029,14 +2339,8 @@
       "path": "control_plane\\memcastle.py",
       "role": "control_plane",
       "first_line": "\"\"\"MemCastle — local vector fortress for Camelot-OS (the edge brain, Tier 2).",
-      "classes": [
-        "MemCastle"
-      ],
-      "functions": [
-        "_cli",
-        "_serialize",
-        "hash_embed"
-      ],
+      "classes": ["MemCastle"],
+      "functions": ["_cli", "_serialize", "hash_embed"],
       "imports": [
         "__future__",
         "argparse",
@@ -3061,15 +2365,7 @@
       "role": "control_plane",
       "first_line": "\"\"\"//sync — bidirectional bridge between MemCastle (edge vault) and NotebookLM",
       "classes": [],
-      "functions": [
-        "_cli",
-        "_cloud_ok",
-        "_load_bridge",
-        "build_snapshot",
-        "pull",
-        "push",
-        "sync"
-      ],
+      "functions": ["_cli", "_cloud_ok", "_load_bridge", "build_snapshot", "pull", "push", "sync"],
       "imports": [
         "__future__",
         "argparse",
@@ -3091,13 +2387,8 @@
       "path": "control_plane\\memory_palace_client.py",
       "role": "control_plane",
       "first_line": "\"\"\"memory_palace_client.py — Python shim for the Rust memory_palace binary.",
-      "classes": [
-        "MemoryPalace"
-      ],
-      "functions": [
-        "_run",
-        "get_memory_palace"
-      ],
+      "classes": ["MemoryPalace"],
+      "functions": ["_run", "get_memory_palace"],
       "imports": [
         "__future__",
         "json",
@@ -3119,22 +2410,9 @@
       "path": "control_plane\\memory_sync.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "MemorySyncer"
-      ],
-      "functions": [
-        "get_memory_syncer",
-        "merge_synthesis",
-        "sync_vector_to_peers"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "json",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["MemorySyncer"],
+      "functions": ["get_memory_syncer", "merge_synthesis", "sync_vector_to_peers"],
+      "imports": ["__future__", "asyncio", "json", "sys", "time", "typing"],
       "module_version": null,
       "size_bytes": 8307,
       "lines": 265,
@@ -3146,17 +2424,9 @@
       "path": "control_plane\\metrics_collector.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "MetricsCollector"
-      ],
-      "functions": [
-        "example_usage",
-        "get_metrics_collector"
-      ],
-      "imports": [
-        "prometheus_client",
-        "typing"
-      ],
+      "classes": ["MetricsCollector"],
+      "functions": ["example_usage", "get_metrics_collector"],
+      "imports": ["prometheus_client", "typing"],
       "module_version": null,
       "size_bytes": 14111,
       "lines": 404,
@@ -3168,9 +2438,7 @@
       "path": "control_plane\\microcubed.py",
       "role": "control_plane",
       "first_line": "\"\"\"Microcubed SmolVM task housing for Camelot-OS.",
-      "classes": [
-        "MicrocubedRequest"
-      ],
+      "classes": ["MicrocubedRequest"],
       "functions": [
         "_append_jsonl",
         "_append_queue",
@@ -3219,11 +2487,7 @@
       "path": "control_plane\\nano_swarm_runtime.py",
       "role": "control_plane",
       "first_line": "\"\"\"Runtime status surface for promoted UKG nano-swarm nodes.\"\"\"",
-      "classes": [
-        "OmegaNodeState",
-        "OmegaSwarm",
-        "OmegaSwarmNode"
-      ],
+      "classes": ["OmegaNodeState", "OmegaSwarm", "OmegaSwarmNode"],
       "functions": [
         "_is_pid_alive",
         "_make_colony_handler",
@@ -3270,19 +2534,8 @@
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
       "classes": [],
-      "functions": [
-        "_record",
-        "metrics_exposition",
-        "start_metrics_server",
-        "traced_op"
-      ],
-      "imports": [
-        "__future__",
-        "control_plane",
-        "functools",
-        "time",
-        "typing"
-      ],
+      "functions": ["_record", "metrics_exposition", "start_metrics_server", "traced_op"],
+      "imports": ["__future__", "control_plane", "functools", "time", "typing"],
       "module_version": null,
       "size_bytes": 3780,
       "lines": 107,
@@ -3294,13 +2547,7 @@
       "path": "control_plane\\obsidian_pillars.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "ObsidianPillars",
-        "Pillar",
-        "PillarContext",
-        "PillarReport",
-        "PillarVerdict"
-      ],
+      "classes": ["ObsidianPillars", "Pillar", "PillarContext", "PillarReport", "PillarVerdict"],
       "functions": [
         "_p1",
         "_p10",
@@ -3315,13 +2562,7 @@
         "_p9",
         "_selftest"
       ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "enum",
-        "sys",
-        "typing"
-      ],
+      "imports": ["__future__", "dataclasses", "enum", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 10381,
       "lines": 255,
@@ -3333,10 +2574,7 @@
       "path": "control_plane\\omc_team.py",
       "role": "control_plane",
       "first_line": "\"\"\"OMC Team CLI worker for Knight and Harness dispatch.",
-      "classes": [
-        "OMCTeam",
-        "WorkerPane"
-      ],
+      "classes": ["OMCTeam", "WorkerPane"],
       "functions": [],
       "imports": [
         "__future__",
@@ -3360,19 +2598,9 @@
       "path": "control_plane\\omniroute_policies.py",
       "role": "control_plane",
       "first_line": "\"\"\"control_plane/omniroute_policies.py — SELECT_OPTIMAL_FRAMEWORK_O1 lane signals.",
-      "classes": [
-        "LaneSignal"
-      ],
-      "functions": [
-        "_match_first",
-        "_run_self_test",
-        "select_lane"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "typing"
-      ],
+      "classes": ["LaneSignal"],
+      "functions": ["_match_first", "_run_self_test", "select_lane"],
+      "imports": ["__future__", "dataclasses", "typing"],
       "module_version": null,
       "size_bytes": 8978,
       "lines": 245,
@@ -3384,10 +2612,7 @@
       "path": "control_plane\\openclaw.py",
       "role": "control_plane",
       "first_line": "\"\"\"OpenClaw — Dynamic Health Monitor + Auto-Triage Engine",
-      "classes": [
-        "CheckResult",
-        "TriageAction"
-      ],
+      "classes": ["CheckResult", "TriageAction"],
       "functions": [
         "_check_gideon",
         "_check_ollama",
@@ -3435,14 +2660,7 @@
         "triage_files",
         "validate_autonomous_knight_workflows"
       ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "os",
-        "pathlib",
-        "subprocess",
-        "typing"
-      ],
+      "imports": ["__future__", "datetime", "os", "pathlib", "subprocess", "typing"],
       "module_version": null,
       "size_bytes": 5527,
       "lines": 144,
@@ -3454,19 +2672,9 @@
       "path": "control_plane\\orchestrator.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "JobStatus",
-        "Orchestrator"
-      ],
+      "classes": ["JobStatus", "Orchestrator"],
       "functions": [],
-      "imports": [
-        "enum",
-        "json",
-        "pathlib",
-        "sqlite3",
-        "time",
-        "typing"
-      ],
+      "imports": ["enum", "json", "pathlib", "sqlite3", "time", "typing"],
       "module_version": null,
       "size_bytes": 4441,
       "lines": 114,
@@ -3488,14 +2696,7 @@
         "TierResult"
       ],
       "functions": [],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "logging",
-        "pathlib",
-        "time",
-        "typing"
-      ],
+      "imports": ["__future__", "dataclasses", "logging", "pathlib", "time", "typing"],
       "module_version": null,
       "size_bytes": 20158,
       "lines": 529,
@@ -3507,17 +2708,9 @@
       "path": "control_plane\\phase_h_anomaly_detector.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "Anomaly",
-        "AnomalyDetector"
-      ],
+      "classes": ["Anomaly", "AnomalyDetector"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "sqlite3",
-        "time",
-        "typing"
-      ],
+      "imports": ["dataclasses", "sqlite3", "time", "typing"],
       "module_version": null,
       "size_bytes": 9612,
       "lines": 283,
@@ -3529,20 +2722,9 @@
       "path": "control_plane\\phase_h_autonomous_loop.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "AutonomousOptimizationLoop",
-        "LoopIteration",
-        "LoopMetrics",
-        "LoopStatus"
-      ],
+      "classes": ["AutonomousOptimizationLoop", "LoopIteration", "LoopMetrics", "LoopStatus"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "enum",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "enum", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 21351,
       "lines": 573,
@@ -3554,19 +2736,9 @@
       "path": "control_plane\\phase_h_business_metrics.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "BusinessMetrics",
-        "Constraint",
-        "KPITarget",
-        "SLAThreshold"
-      ],
+      "classes": ["BusinessMetrics", "Constraint", "KPITarget", "SLAThreshold"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 16151,
       "lines": 469,
@@ -3578,10 +2750,7 @@
       "path": "control_plane\\phase_h_business_optimizer.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "BusinessOptimizer",
-        "RankedCandidate"
-      ],
+      "classes": ["BusinessOptimizer", "RankedCandidate"],
       "functions": [],
       "imports": [
         "dataclasses",
@@ -3609,12 +2778,7 @@
         "FeedbackValidation"
       ],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 14635,
       "lines": 426,
@@ -3626,20 +2790,9 @@
       "path": "control_plane\\phase_h_executor.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "ExecutionResult",
-        "OptimizationExecutor",
-        "SystemStateSnapshot"
-      ],
+      "classes": ["ExecutionResult", "OptimizationExecutor", "SystemStateSnapshot"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "json",
-        "sqlite3",
-        "time",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "json", "sqlite3", "time", "typing"],
       "module_version": null,
       "size_bytes": 14638,
       "lines": 420,
@@ -3651,19 +2804,9 @@
       "path": "control_plane\\phase_h_feedback_collector.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "FeedbackCollector",
-        "FeedbackSignal",
-        "FeedbackValidator"
-      ],
+      "classes": ["FeedbackCollector", "FeedbackSignal", "FeedbackValidator"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "json",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "json", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 12460,
       "lines": 389,
@@ -3675,21 +2818,9 @@
       "path": "control_plane\\phase_h_integration.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "MetricsMiddleware",
-        "_TimingContext"
-      ],
-      "functions": [
-        "get_metrics",
-        "init_metrics"
-      ],
-      "imports": [
-        "phase_h_anomaly_detector",
-        "phase_h_metrics",
-        "threading",
-        "time",
-        "typing"
-      ],
+      "classes": ["MetricsMiddleware", "_TimingContext"],
+      "functions": ["get_metrics", "init_metrics"],
+      "imports": ["phase_h_anomaly_detector", "phase_h_metrics", "threading", "time", "typing"],
       "module_version": null,
       "size_bytes": 7735,
       "lines": 245,
@@ -3701,20 +2832,9 @@
       "path": "control_plane\\phase_h_metrics.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "MetricsCollector",
-        "OperationRecord"
-      ],
+      "classes": ["MetricsCollector", "OperationRecord"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "pathlib",
-        "random",
-        "sqlite3",
-        "statistics",
-        "time",
-        "typing"
-      ],
+      "imports": ["dataclasses", "pathlib", "random", "sqlite3", "statistics", "time", "typing"],
       "module_version": null,
       "size_bytes": 9094,
       "lines": 272,
@@ -3726,18 +2846,9 @@
       "path": "control_plane\\phase_h_optimizer.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "OptimizationCandidate",
-        "OptimizerEngine"
-      ],
+      "classes": ["OptimizationCandidate", "OptimizerEngine"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "json",
-        "pathlib",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "json", "pathlib", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 20115,
       "lines": 483,
@@ -3749,20 +2860,9 @@
       "path": "control_plane\\phase_h_pattern_learner.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "Pattern",
-        "PatternLearner",
-        "PatternScore"
-      ],
+      "classes": ["Pattern", "PatternLearner", "PatternScore"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "json",
-        "pathlib",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "json", "pathlib", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 16643,
       "lines": 457,
@@ -3774,19 +2874,9 @@
       "path": "control_plane\\phase_h_result_tracker.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "ImpactDelta",
-        "ImpactValidation",
-        "ResultTracker"
-      ],
+      "classes": ["ImpactDelta", "ImpactValidation", "ResultTracker"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "json",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "json", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 17133,
       "lines": 438,
@@ -3798,18 +2888,9 @@
       "path": "control_plane\\phase_h_rollback.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "RollbackManager",
-        "RollbackResult"
-      ],
+      "classes": ["RollbackManager", "RollbackResult"],
       "functions": [],
-      "imports": [
-        "dataclasses",
-        "datetime",
-        "json",
-        "sqlite3",
-        "typing"
-      ],
+      "imports": ["dataclasses", "datetime", "json", "sqlite3", "typing"],
       "module_version": null,
       "size_bytes": 12279,
       "lines": 360,
@@ -3821,19 +2902,9 @@
       "path": "control_plane\\pqcrypto_bridge.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "PQCrypto"
-      ],
-      "functions": [
-        "_find_binary"
-      ],
-      "imports": [
-        "__future__",
-        "json",
-        "pathlib",
-        "subprocess",
-        "typing"
-      ],
+      "classes": ["PQCrypto"],
+      "functions": ["_find_binary"],
+      "imports": ["__future__", "json", "pathlib", "subprocess", "typing"],
       "module_version": null,
       "size_bytes": 6183,
       "lines": 142,
@@ -3845,20 +2916,9 @@
       "path": "control_plane\\preview_drone.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "PreviewDrone",
-        "PreviewResult"
-      ],
-      "functions": [
-        "_selftest"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "pathlib",
-        "sys",
-        "typing"
-      ],
+      "classes": ["PreviewDrone", "PreviewResult"],
+      "functions": ["_selftest"],
+      "imports": ["__future__", "dataclasses", "pathlib", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 4380,
       "lines": 110,
@@ -3900,15 +2960,8 @@
       "path": "control_plane\\pydantic_ai_knight.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "KnightDeps",
-        "ResearchResult"
-      ],
-      "functions": [
-        "macroscopic_audit",
-        "read_provenance",
-        "run_sir_helio"
-      ],
+      "classes": ["KnightDeps", "ResearchResult"],
+      "functions": ["macroscopic_audit", "read_provenance", "run_sir_helio"],
       "imports": [
         "__future__",
         "dataclasses",
@@ -3929,17 +2982,8 @@
       "path": "control_plane\\qr_pill.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "HealthCheck",
-        "HealthStatus",
-        "PillManifest",
-        "PillState",
-        "QRPill"
-      ],
-      "functions": [
-        "activate_pill",
-        "get_qr_pill"
-      ],
+      "classes": ["HealthCheck", "HealthStatus", "PillManifest", "PillState", "QRPill"],
+      "functions": ["activate_pill", "get_qr_pill"],
       "imports": [
         "__future__",
         "control_plane",
@@ -3962,20 +3006,9 @@
       "path": "control_plane\\qr_pill_mobile.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "MobileActivationSession",
-        "MobileQRPillActivation"
-      ],
-      "functions": [
-        "get_mobile_activation"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "datetime",
-        "secrets",
-        "typing"
-      ],
+      "classes": ["MobileActivationSession", "MobileQRPillActivation"],
+      "functions": ["get_mobile_activation"],
+      "imports": ["__future__", "dataclasses", "datetime", "secrets", "typing"],
       "module_version": null,
       "size_bytes": 19891,
       "lines": 577,
@@ -3995,9 +3028,7 @@
         "ServiceDef",
         "ServiceState"
       ],
-      "functions": [
-        "demo_qr_pill"
-      ],
+      "functions": ["demo_qr_pill"],
       "imports": [
         "asyncio",
         "base64",
@@ -4022,19 +3053,9 @@
       "path": "control_plane\\rbac_matrix.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "RBACMatrix"
-      ],
-      "functions": [
-        "_load_matrix"
-      ],
-      "imports": [
-        "__future__",
-        "functools",
-        "json",
-        "pathlib",
-        "typing"
-      ],
+      "classes": ["RBACMatrix"],
+      "functions": ["_load_matrix"],
+      "imports": ["__future__", "functools", "json", "pathlib", "typing"],
       "module_version": "9000.14",
       "size_bytes": 3987,
       "lines": 114,
@@ -4046,9 +3067,7 @@
       "path": "control_plane\\runic_router.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "RuneResult"
-      ],
+      "classes": ["RuneResult"],
       "functions": [
         "_cli_main",
         "_handle_assimilate",
@@ -4120,10 +3139,7 @@
         "SubTask",
         "SubTaskStatus"
       ],
-      "functions": [
-        "decompose",
-        "run_critique"
-      ],
+      "functions": ["decompose", "run_critique"],
       "imports": [
         "__future__",
         "concurrent",
@@ -4153,21 +3169,9 @@
       "path": "control_plane\\scarcity_protocol.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "BudgetState",
-        "Lease",
-        "ScarcityBreach",
-        "ScarcityManager"
-      ],
-      "functions": [
-        "_selftest"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "sys",
-        "typing"
-      ],
+      "classes": ["BudgetState", "Lease", "ScarcityBreach", "ScarcityManager"],
+      "functions": ["_selftest"],
+      "imports": ["__future__", "dataclasses", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 7198,
       "lines": 184,
@@ -4179,24 +3183,9 @@
       "path": "control_plane\\secret_manager.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "SecretError",
-        "SecretManager"
-      ],
-      "functions": [
-        "_main",
-        "get_secret",
-        "get_secret_manager",
-        "looks_like_gemini_key"
-      ],
-      "imports": [
-        "__future__",
-        "json",
-        "os",
-        "pathlib",
-        "time",
-        "typing"
-      ],
+      "classes": ["SecretError", "SecretManager"],
+      "functions": ["_main", "get_secret", "get_secret_manager", "looks_like_gemini_key"],
+      "imports": ["__future__", "json", "os", "pathlib", "time", "typing"],
       "module_version": null,
       "size_bytes": 9694,
       "lines": 235,
@@ -4208,10 +3197,7 @@
       "path": "control_plane\\sentinel_asm.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "Finding",
-        "SentinelASM"
-      ],
+      "classes": ["Finding", "SentinelASM"],
       "functions": [
         "emit_ci_snippets",
         "load_baseline",
@@ -4246,13 +3232,8 @@
       "path": "control_plane\\shadow_provenance.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "ShadowProvenance",
-        "ShadowRollback"
-      ],
-      "functions": [
-        "_selftest"
-      ],
+      "classes": ["ShadowProvenance", "ShadowRollback"],
+      "functions": ["_selftest"],
       "imports": [
         "__future__",
         "contextlib",
@@ -4277,10 +3258,7 @@
       "path": "control_plane\\sir_octavian.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "AudioPipeline",
-        "CostTier"
-      ],
+      "classes": ["AudioPipeline", "CostTier"],
       "functions": [
         "_collect_ledger",
         "_collect_queue",
@@ -4321,21 +3299,9 @@
       "path": "control_plane\\sir_socrates.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "SirSocrates",
-        "SocratesExamination",
-        "SocraticAnswer"
-      ],
+      "classes": ["SirSocrates", "SocratesExamination", "SocraticAnswer"],
       "functions": [],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "json",
-        "logging",
-        "pathlib",
-        "re",
-        "time"
-      ],
+      "imports": ["__future__", "dataclasses", "json", "logging", "pathlib", "re", "time"],
       "module_version": null,
       "size_bytes": 9720,
       "lines": 249,
@@ -4347,10 +3313,7 @@
       "path": "control_plane\\soul_oversight.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing inc. All Rights Reserved.",
-      "classes": [
-        "GateDecision",
-        "SoulOversight"
-      ],
+      "classes": ["GateDecision", "SoulOversight"],
       "functions": [
         "_append_hitl",
         "_colony_escalate",
@@ -4361,14 +3324,7 @@
         "_z3_verify_patch",
         "pre_execute"
       ],
-      "imports": [
-        "dataclasses",
-        "json",
-        "os",
-        "pathlib",
-        "sys",
-        "typing"
-      ],
+      "imports": ["dataclasses", "json", "os", "pathlib", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 15155,
       "lines": 348,
@@ -4380,19 +3336,8 @@
       "path": "control_plane\\soul_router.py",
       "role": "control_plane",
       "first_line": "\"\"\"Soul Router — MFOE Routing Matrix for Camelot Foundry Council.",
-      "classes": [
-        "EngineWeight",
-        "IntentTensor",
-        "KnightEngine",
-        "RouteDecision",
-        "SoulRouter"
-      ],
-      "functions": [
-        "_normalize_knight_name",
-        "_selftest",
-        "resolve_knight",
-        "soul_equation"
-      ],
+      "classes": ["EngineWeight", "IntentTensor", "KnightEngine", "RouteDecision", "SoulRouter"],
+      "functions": ["_normalize_knight_name", "_selftest", "resolve_knight", "soul_equation"],
       "imports": [
         "__future__",
         "control_plane",
@@ -4421,18 +3366,8 @@
         "OperationType",
         "SovereignCommander"
       ],
-      "functions": [
-        "get_sovereign_commander",
-        "request_approval"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "datetime",
-        "enum",
-        "pathlib",
-        "typing"
-      ],
+      "functions": ["get_sovereign_commander", "request_approval"],
+      "imports": ["__future__", "dataclasses", "datetime", "enum", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 11274,
       "lines": 298,
@@ -4475,16 +3410,9 @@
       "path": "control_plane\\st_brain.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "ShortTermBrain"
-      ],
+      "classes": ["ShortTermBrain"],
       "functions": [],
-      "imports": [
-        "json",
-        "os",
-        "redis",
-        "typing"
-      ],
+      "imports": ["json", "os", "redis", "typing"],
       "module_version": null,
       "size_bytes": 2878,
       "lines": 76,
@@ -4496,23 +3424,9 @@
       "path": "control_plane\\supabase_bridge.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "EscalationEvent",
-        "SupabaseBridge"
-      ],
-      "functions": [
-        "notify_sarda_complete",
-        "notify_sarda_start",
-        "request_hitl"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "datetime",
-        "json",
-        "os",
-        "typing"
-      ],
+      "classes": ["EscalationEvent", "SupabaseBridge"],
+      "functions": ["notify_sarda_complete", "notify_sarda_start", "request_hitl"],
+      "imports": ["__future__", "dataclasses", "datetime", "json", "os", "typing"],
       "module_version": null,
       "size_bytes": 7544,
       "lines": 219,
@@ -4524,24 +3438,9 @@
       "path": "control_plane\\swarm_pin.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "LocalCASBackend",
-        "SwarmBackend",
-        "SwarmPinner"
-      ],
-      "functions": [
-        "_selftest",
-        "bzz_hash"
-      ],
-      "imports": [
-        "__future__",
-        "hashlib",
-        "pathlib",
-        "shutil",
-        "sys",
-        "tempfile",
-        "typing"
-      ],
+      "classes": ["LocalCASBackend", "SwarmBackend", "SwarmPinner"],
+      "functions": ["_selftest", "bzz_hash"],
+      "imports": ["__future__", "hashlib", "pathlib", "shutil", "sys", "tempfile", "typing"],
       "module_version": "9000.14",
       "size_bytes": 5777,
       "lines": 161,
@@ -4553,10 +3452,7 @@
       "path": "control_plane\\switchboard.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "Switchboard",
-        "Terminal"
-      ],
+      "classes": ["Switchboard", "Terminal"],
       "functions": [
         "_probe_http_health",
         "_probe_tcp",
@@ -4568,15 +3464,7 @@
         "route_sync",
         "summary"
       ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "dataclasses",
-        "json",
-        "os",
-        "pathlib",
-        "time"
-      ],
+      "imports": ["__future__", "asyncio", "dataclasses", "json", "os", "pathlib", "time"],
       "module_version": null,
       "size_bytes": 16736,
       "lines": 367,
@@ -4588,9 +3476,7 @@
       "path": "control_plane\\symbiotic_maintenance.py",
       "role": "control_plane",
       "first_line": "\"\"\"Symbiotic maintenance pipeline executed during Camelot-OS activation.",
-      "classes": [
-        "MCPHiveLink"
-      ],
+      "classes": ["MCPHiveLink"],
       "functions": [
         "_collect_pycache_dirs",
         "_compress_stale_logs",
@@ -4634,25 +3520,9 @@
       "path": "control_plane\\symbol_compressor.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "CompressedDispatch",
-        "SymbolCompressor"
-      ],
-      "functions": [
-        "compress_dispatch",
-        "find_similar_dispatches",
-        "get_compressor"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "hashlib",
-        "json",
-        "os",
-        "sys",
-        "time",
-        "typing"
-      ],
+      "classes": ["CompressedDispatch", "SymbolCompressor"],
+      "functions": ["compress_dispatch", "find_similar_dispatches", "get_compressor"],
+      "imports": ["__future__", "dataclasses", "hashlib", "json", "os", "sys", "time", "typing"],
       "module_version": null,
       "size_bytes": 12540,
       "lines": 364,
@@ -4664,25 +3534,9 @@
       "path": "control_plane\\symbolect_protocol.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "SymbolectProtocol",
-        "TransmissionMode",
-        "TransmissionPacket"
-      ],
-      "functions": [
-        "get_symbolect_protocol",
-        "receive_toon",
-        "transmit_toon"
-      ],
-      "imports": [
-        "__future__",
-        "base64",
-        "control_plane",
-        "dataclasses",
-        "enum",
-        "json",
-        "typing"
-      ],
+      "classes": ["SymbolectProtocol", "TransmissionMode", "TransmissionPacket"],
+      "functions": ["get_symbolect_protocol", "receive_toon", "transmit_toon"],
+      "imports": ["__future__", "base64", "control_plane", "dataclasses", "enum", "json", "typing"],
       "module_version": null,
       "size_bytes": 10346,
       "lines": 317,
@@ -4708,19 +3562,8 @@
         "SystemAnalyzer",
         "SystemProfile"
       ],
-      "functions": [
-        "analyze_system",
-        "get_system_analyzer"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "datetime",
-        "enum",
-        "platform",
-        "psutil",
-        "typing"
-      ],
+      "functions": ["analyze_system", "get_system_analyzer"],
+      "imports": ["__future__", "dataclasses", "datetime", "enum", "platform", "psutil", "typing"],
       "module_version": null,
       "size_bytes": 17748,
       "lines": 554,
@@ -4732,12 +3575,7 @@
       "path": "control_plane\\system_triage.py",
       "role": "control_plane",
       "first_line": "\"\"\"Evidence-gated, read-only CAMELOT-OS system triage.\"\"\"",
-      "classes": [
-        "CheckResult",
-        "TriageContext",
-        "TriageOptions",
-        "TriageResult"
-      ],
+      "classes": ["CheckResult", "TriageContext", "TriageOptions", "TriageResult"],
       "functions": [
         "_aspirational_claims",
         "_bio_swarm_runtime",
@@ -4808,13 +3646,9 @@
       "path": "control_plane\\taxonomy.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "IntentCategory"
-      ],
+      "classes": ["IntentCategory"],
       "functions": [],
-      "imports": [
-        "enum"
-      ],
+      "imports": ["enum"],
       "module_version": null,
       "size_bytes": 4917,
       "lines": 94,
@@ -4826,17 +3660,9 @@
       "path": "control_plane\\test_phase_h_anomaly_detector.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestAnomalyDetector"
-      ],
+      "classes": ["TestAnomalyDetector"],
       "functions": [],
-      "imports": [
-        "pathlib",
-        "phase_h_anomaly_detector",
-        "tempfile",
-        "time",
-        "unittest"
-      ],
+      "imports": ["pathlib", "phase_h_anomaly_detector", "tempfile", "time", "unittest"],
       "module_version": null,
       "size_bytes": 8630,
       "lines": 274,
@@ -4848,19 +3674,9 @@
       "path": "control_plane\\test_phase_h_autonomous_loop.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestAutonomousLoop",
-        "TestLoopIntegration"
-      ],
+      "classes": ["TestAutonomousLoop", "TestLoopIntegration"],
       "functions": [],
-      "imports": [
-        "datetime",
-        "pathlib",
-        "phase_h_autonomous_loop",
-        "sys",
-        "tempfile",
-        "unittest"
-      ],
+      "imports": ["datetime", "pathlib", "phase_h_autonomous_loop", "sys", "tempfile", "unittest"],
       "module_version": null,
       "size_bytes": 9926,
       "lines": 276,
@@ -4880,13 +3696,7 @@
         "TestSLAManagement"
       ],
       "functions": [],
-      "imports": [
-        "pathlib",
-        "phase_h_business_metrics",
-        "sys",
-        "tempfile",
-        "unittest"
-      ],
+      "imports": ["pathlib", "phase_h_business_metrics", "sys", "tempfile", "unittest"],
       "module_version": null,
       "size_bytes": 13637,
       "lines": 396,
@@ -4898,11 +3708,7 @@
       "path": "control_plane\\test_phase_h_business_optimizer.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestApprovalThresholds",
-        "TestBusinessRanking",
-        "TestBusinessScoreCalculation"
-      ],
+      "classes": ["TestApprovalThresholds", "TestBusinessRanking", "TestBusinessScoreCalculation"],
       "functions": [],
       "imports": [
         "pathlib",
@@ -4923,11 +3729,7 @@
       "path": "control_plane\\test_phase_h_constraint_validator.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestConstraintValidator",
-        "TestFeedbackIntegration",
-        "TestIntegrationEndToEnd"
-      ],
+      "classes": ["TestConstraintValidator", "TestFeedbackIntegration", "TestIntegrationEndToEnd"],
       "functions": [],
       "imports": [
         "pathlib",
@@ -4949,18 +3751,9 @@
       "path": "control_plane\\test_phase_h_day2_integration.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestMainRouting",
-        "TestOrchestratorMetrics",
-        "TestPerformanceRegression"
-      ],
+      "classes": ["TestMainRouting", "TestOrchestratorMetrics", "TestPerformanceRegression"],
       "functions": [],
-      "imports": [
-        "pathlib",
-        "tempfile",
-        "time",
-        "unittest"
-      ],
+      "imports": ["pathlib", "tempfile", "time", "unittest"],
       "module_version": null,
       "size_bytes": 7068,
       "lines": 204,
@@ -4981,14 +3774,7 @@
         "TestResourceManagement"
       ],
       "functions": [],
-      "imports": [
-        "control_plane",
-        "pathlib",
-        "tempfile",
-        "threading",
-        "time",
-        "unittest"
-      ],
+      "imports": ["control_plane", "pathlib", "tempfile", "threading", "time", "unittest"],
       "module_version": null,
       "size_bytes": 10095,
       "lines": 313,
@@ -5006,15 +3792,7 @@
         "TestSystemStateSnapshot"
       ],
       "functions": [],
-      "imports": [
-        "datetime",
-        "pathlib",
-        "phase_h_executor",
-        "sys",
-        "tempfile",
-        "time",
-        "unittest"
-      ],
+      "imports": ["datetime", "pathlib", "phase_h_executor", "sys", "tempfile", "time", "unittest"],
       "module_version": null,
       "size_bytes": 11126,
       "lines": 333,
@@ -5026,11 +3804,7 @@
       "path": "control_plane\\test_phase_h_feedback_collector.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestFeedbackCollector",
-        "TestFeedbackValidator",
-        "TestSignalIntegration"
-      ],
+      "classes": ["TestFeedbackCollector", "TestFeedbackValidator", "TestSignalIntegration"],
       "functions": [],
       "imports": [
         "datetime",
@@ -5052,10 +3826,7 @@
       "path": "control_plane\\test_phase_h_integration.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestDataIntegrity",
-        "TestEndToEndWorkflow"
-      ],
+      "classes": ["TestDataIntegrity", "TestEndToEndWorkflow"],
       "functions": [],
       "imports": [
         "pathlib",
@@ -5081,10 +3852,7 @@
       "path": "control_plane\\test_phase_h_load.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestLoadPerformance",
-        "TestSystemStability"
-      ],
+      "classes": ["TestLoadPerformance", "TestSystemStability"],
       "functions": [],
       "imports": [
         "concurrent",
@@ -5110,17 +3878,9 @@
       "path": "control_plane\\test_phase_h_metrics.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestMetricsCollector"
-      ],
+      "classes": ["TestMetricsCollector"],
       "functions": [],
-      "imports": [
-        "pathlib",
-        "phase_h_metrics",
-        "tempfile",
-        "time",
-        "unittest"
-      ],
+      "imports": ["pathlib", "phase_h_metrics", "tempfile", "time", "unittest"],
       "module_version": null,
       "size_bytes": 7883,
       "lines": 211,
@@ -5132,21 +3892,9 @@
       "path": "control_plane\\test_phase_h_optimizer.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestCandidateQuality",
-        "TestOptimizerEngine",
-        "TestOptimizerPerformance"
-      ],
+      "classes": ["TestCandidateQuality", "TestOptimizerEngine", "TestOptimizerPerformance"],
       "functions": [],
-      "imports": [
-        "control_plane",
-        "json",
-        "pathlib",
-        "sqlite3",
-        "tempfile",
-        "time",
-        "unittest"
-      ],
+      "imports": ["control_plane", "json", "pathlib", "sqlite3", "tempfile", "time", "unittest"],
       "module_version": null,
       "size_bytes": 14716,
       "lines": 433,
@@ -5158,11 +3906,7 @@
       "path": "control_plane\\test_phase_h_pattern_learner.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestPatternAccuracy",
-        "TestPatternLearner",
-        "TestPatternPerformance"
-      ],
+      "classes": ["TestPatternAccuracy", "TestPatternLearner", "TestPatternPerformance"],
       "functions": [],
       "imports": [
         "control_plane",
@@ -5184,11 +3928,7 @@
       "path": "control_plane\\test_phase_h_result_tracker.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestImpactDelta",
-        "TestImpactValidation",
-        "TestResultTracker"
-      ],
+      "classes": ["TestImpactDelta", "TestImpactValidation", "TestResultTracker"],
       "functions": [],
       "imports": [
         "datetime",
@@ -5211,10 +3951,7 @@
       "path": "control_plane\\test_phase_h_rollback.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "TestRollbackEdgeCases",
-        "TestRollbackSystem"
-      ],
+      "classes": ["TestRollbackEdgeCases", "TestRollbackSystem"],
       "functions": [],
       "imports": [
         "datetime",
@@ -5244,13 +3981,7 @@
         "TestProductionReadiness"
       ],
       "functions": [],
-      "imports": [
-        "control_plane",
-        "pathlib",
-        "tempfile",
-        "time",
-        "unittest"
-      ],
+      "imports": ["control_plane", "pathlib", "tempfile", "time", "unittest"],
       "module_version": null,
       "size_bytes": 10489,
       "lines": 282,
@@ -5291,20 +4022,9 @@
       "path": "control_plane\\test_runner_agent.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "PIVLoop",
-        "TestResult"
-      ],
-      "functions": [
-        "main"
-      ],
-      "imports": [
-        "__future__",
-        "asyncio",
-        "dataclasses",
-        "main",
-        "sys"
-      ],
+      "classes": ["PIVLoop", "TestResult"],
+      "functions": ["main"],
+      "imports": ["__future__", "asyncio", "dataclasses", "main", "sys"],
       "module_version": null,
       "size_bytes": 4844,
       "lines": 148,
@@ -5316,16 +4036,8 @@
       "path": "control_plane\\titan_audit.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "DimensionResult",
-        "TitanAudit",
-        "TitanAuditReport"
-      ],
-      "functions": [
-        "_score_color",
-        "_verdict_from_score",
-        "main"
-      ],
+      "classes": ["DimensionResult", "TitanAudit", "TitanAuditReport"],
+      "functions": ["_score_color", "_verdict_from_score", "main"],
       "imports": [
         "__future__",
         "dataclasses",
@@ -5359,21 +4071,8 @@
         "TOONVersion",
         "TOONv2Diff"
       ],
-      "functions": [
-        "compute_dict_diff",
-        "decode_from_toon",
-        "encode_to_toon",
-        "get_toon_encoder"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "datetime",
-        "enum",
-        "hashlib",
-        "json",
-        "typing"
-      ],
+      "functions": ["compute_dict_diff", "decode_from_toon", "encode_to_toon", "get_toon_encoder"],
+      "imports": ["__future__", "dataclasses", "datetime", "enum", "hashlib", "json", "typing"],
       "module_version": null,
       "size_bytes": 12494,
       "lines": 360,
@@ -5385,9 +4084,7 @@
       "path": "control_plane\\toon_manifest.py",
       "role": "control_plane",
       "first_line": "\"\"\"TOON manifest compiler for Camelot configuration payloads.",
-      "classes": [
-        "ToonKvPair"
-      ],
+      "classes": ["ToonKvPair"],
       "functions": [
         "_display_path",
         "_emit_node",
@@ -5429,15 +4126,8 @@
       "path": "control_plane\\tracing.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
-      "classes": [
-        "Scope",
-        "Span",
-        "Tracer"
-      ],
-      "functions": [
-        "_now_ms",
-        "get_tracer"
-      ],
+      "classes": ["Scope", "Span", "Tracer"],
+      "functions": ["_now_ms", "get_tracer"],
       "imports": [
         "__future__",
         "contextlib",
@@ -5468,17 +4158,8 @@
         "TriageScoreResult",
         "TriageScorer"
       ],
-      "functions": [
-        "calculate_triage_score",
-        "get_triage_scorer"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "datetime",
-        "enum",
-        "typing"
-      ],
+      "functions": ["calculate_triage_score", "get_triage_scorer"],
+      "imports": ["__future__", "dataclasses", "datetime", "enum", "typing"],
       "module_version": null,
       "size_bytes": 10809,
       "lines": 301,
@@ -5490,17 +4171,9 @@
       "path": "control_plane\\tui_app.py",
       "role": "control_plane",
       "first_line": "# Copyright (c) 2026 Invisioned Marketing inc. All Rights Reserved.",
-      "classes": [
-        "KnightMatrix",
-        "OmniTelemetry",
-        "SovereignApp",
-        "WorkflowNavigator"
-      ],
+      "classes": ["KnightMatrix", "OmniTelemetry", "SovereignApp", "WorkflowNavigator"],
       "functions": [],
-      "imports": [
-        "rich",
-        "textual"
-      ],
+      "imports": ["rich", "textual"],
       "module_version": null,
       "size_bytes": 5357,
       "lines": 142,
@@ -5512,21 +4185,9 @@
       "path": "control_plane\\voice_ingress.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "VoiceIngress",
-        "VoiceIntent"
-      ],
-      "functions": [
-        "_selftest",
-        "parse_transcript"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "re",
-        "sys",
-        "typing"
-      ],
+      "classes": ["VoiceIngress", "VoiceIntent"],
+      "functions": ["_selftest", "parse_transcript"],
+      "imports": ["__future__", "dataclasses", "re", "sys", "typing"],
       "module_version": "9000.14",
       "size_bytes": 4773,
       "lines": 122,
@@ -5538,9 +4199,7 @@
       "path": "control_plane\\worker.py",
       "role": "control_plane",
       "first_line": "\"\"\"",
-      "classes": [
-        "QueueTask"
-      ],
+      "classes": ["QueueTask"],
       "functions": [
         "_apply_output",
         "_call_llm_raw",
@@ -5606,21 +4265,9 @@
       "path": "control_plane\\z3_verify.py",
       "role": "control_plane",
       "first_line": "# -*- coding: utf-8 -*-",
-      "classes": [
-        "PatchIntent",
-        "Z3Verdict"
-      ],
-      "functions": [
-        "_selftest",
-        "ground_effects",
-        "verify_patch"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "re",
-        "sys"
-      ],
+      "classes": ["PatchIntent", "Z3Verdict"],
+      "functions": ["_selftest", "ground_effects", "verify_patch"],
+      "imports": ["__future__", "dataclasses", "re", "sys"],
       "module_version": "9000.14",
       "size_bytes": 8018,
       "lines": 199,
@@ -5649,14 +4296,7 @@
         "cmd_vector",
         "main"
       ],
-      "imports": [
-        "__future__",
-        "argparse",
-        "json",
-        "pathlib",
-        "sys",
-        "time"
-      ],
+      "imports": ["__future__", "argparse", "json", "pathlib", "sys", "time"],
       "module_version": null,
       "size_bytes": 15734,
       "lines": 414,
@@ -5668,21 +4308,9 @@
       "path": "squires\\ghost.py",
       "role": "squire",
       "first_line": "\"\"\"GHOST squire — air-gapped file triage. Finds secrets, TODOs, large files. Zero cloud.\"\"\"",
-      "classes": [
-        "GhostFlag",
-        "GhostReport"
-      ],
-      "functions": [
-        "_mask",
-        "triage"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "re",
-        "scan",
-        "typing"
-      ],
+      "classes": ["GhostFlag", "GhostReport"],
+      "functions": ["_mask", "triage"],
+      "imports": ["__future__", "dataclasses", "re", "scan", "typing"],
       "module_version": null,
       "size_bytes": 3489,
       "lines": 110,
@@ -5694,24 +4322,9 @@
       "path": "squires\\index.py",
       "role": "squire",
       "first_line": "\"\"\"INDEX squire — builds symbol + file index from SCAN output.\"\"\"",
-      "classes": [
-        "ColonyIndex",
-        "SymbolEntry"
-      ],
-      "functions": [
-        "_kind_from_pattern",
-        "build_index"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "gzip",
-        "json",
-        "pathlib",
-        "re",
-        "scan",
-        "typing"
-      ],
+      "classes": ["ColonyIndex", "SymbolEntry"],
+      "functions": ["_kind_from_pattern", "build_index"],
+      "imports": ["__future__", "dataclasses", "gzip", "json", "pathlib", "re", "scan", "typing"],
       "module_version": null,
       "size_bytes": 5154,
       "lines": 153,
@@ -5723,18 +4336,9 @@
       "path": "squires\\judge.py",
       "role": "squire",
       "first_line": "\"\"\"JUDGE squire — synthesizes SCAN/GHOST/SWEEP/INDEX results into a risk verdict.\"\"\"",
-      "classes": [
-        "Verdict"
-      ],
-      "functions": [
-        "_label",
-        "judge"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "typing"
-      ],
+      "classes": ["Verdict"],
+      "functions": ["_label", "judge"],
+      "imports": ["__future__", "dataclasses", "typing"],
       "module_version": null,
       "size_bytes": 3533,
       "lines": 107,
@@ -5747,16 +4351,8 @@
       "role": "squire",
       "first_line": "\"\"\"MASON squire — report writer. Produces colony_report.md from all squire outputs.\"\"\"",
       "classes": [],
-      "functions": [
-        "_ts",
-        "build_report"
-      ],
-      "imports": [
-        "__future__",
-        "datetime",
-        "pathlib",
-        "typing"
-      ],
+      "functions": ["_ts", "build_report"],
+      "imports": ["__future__", "datetime", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 3920,
       "lines": 126,
@@ -5768,20 +4364,9 @@
       "path": "squires\\scan.py",
       "role": "squire",
       "first_line": "\"\"\"SCAN squire — codebase walker. Emits file metadata for downstream squires.\"\"\"",
-      "classes": [
-        "FileRecord"
-      ],
-      "functions": [
-        "scan"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "hashlib",
-        "os",
-        "pathlib",
-        "typing"
-      ],
+      "classes": ["FileRecord"],
+      "functions": ["scan"],
+      "imports": ["__future__", "dataclasses", "hashlib", "os", "pathlib", "typing"],
       "module_version": null,
       "size_bytes": 2257,
       "lines": 72,
@@ -5793,18 +4378,9 @@
       "path": "squires\\sentinel.py",
       "role": "squire",
       "first_line": "\"\"\"SENTINEL squire — HITL gate. Blocks destructive operations pending human approval.\"\"\"",
-      "classes": [
-        "HITLBlocked"
-      ],
-      "functions": [
-        "_print_verdict",
-        "gate",
-        "soft_gate"
-      ],
-      "imports": [
-        "__future__",
-        "judge"
-      ],
+      "classes": ["HITLBlocked"],
+      "functions": ["_print_verdict", "gate", "soft_gate"],
+      "imports": ["__future__", "judge"],
       "module_version": null,
       "size_bytes": 1750,
       "lines": 54,
@@ -5816,20 +4392,9 @@
       "path": "squires\\sweep.py",
       "role": "squire",
       "first_line": "\"\"\"SWEEP squire — dead code & orphan file detection.\"\"\"",
-      "classes": [
-        "OrphanFlag",
-        "SweepReport"
-      ],
-      "functions": [
-        "sweep"
-      ],
-      "imports": [
-        "__future__",
-        "dataclasses",
-        "re",
-        "scan",
-        "typing"
-      ],
+      "classes": ["OrphanFlag", "SweepReport"],
+      "functions": ["sweep"],
+      "imports": ["__future__", "dataclasses", "re", "scan", "typing"],
       "module_version": null,
       "size_bytes": 3448,
       "lines": 105,
@@ -5841,25 +4406,9 @@
       "path": "squires\\vector.py",
       "role": "squire",
       "first_line": "\"\"\"VECTOR squire — TF-IDF semantic search over indexed files. Zero ML deps.\"\"\"",
-      "classes": [
-        "TFIDFCorpus",
-        "VectorMatch"
-      ],
-      "functions": [
-        "_compute_tf",
-        "_extract_snippet",
-        "_tokenize",
-        "build_corpus"
-      ],
-      "imports": [
-        "__future__",
-        "collections",
-        "dataclasses",
-        "math",
-        "re",
-        "scan",
-        "typing"
-      ],
+      "classes": ["TFIDFCorpus", "VectorMatch"],
+      "functions": ["_compute_tf", "_extract_snippet", "_tokenize", "build_corpus"],
+      "imports": ["__future__", "collections", "dataclasses", "math", "re", "scan", "typing"],
       "module_version": null,
       "size_bytes": 2638,
       "lines": 87,

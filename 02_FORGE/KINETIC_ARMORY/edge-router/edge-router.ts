@@ -7,17 +7,17 @@
  *   Rule B: non-loopback — must present valid bifrost token in first message
  */
 
-import { WebSocketServer, WebSocket } from "ws";
-import * as crypto from "crypto";
-import * as fs from "fs";
-import * as os from "os";
-import * as path from "path";
-import * as zlib from "zlib";
+import { WebSocketServer, WebSocket } from 'ws';
+import * as crypto from 'crypto';
+import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
+import * as zlib from 'zlib';
 
 const PORT = 3001;
-const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), "CAMELOT_OS");
-const QUEUE_PATH = path.join(HOME, "logs", "harness_queue.jsonl");
-const TOKEN_PATH = path.join(os.homedir(), ".camelot", "bifrost.token");
+const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), 'CAMELOT_OS');
+const QUEUE_PATH = path.join(HOME, 'logs', 'harness_queue.jsonl');
+const TOKEN_PATH = path.join(os.homedir(), '.camelot', 'bifrost.token');
 
 interface ClientMeta {
   id: string;
@@ -27,7 +27,7 @@ interface ClientMeta {
 }
 
 interface EdgeMessage {
-  type: "forge" | "query" | "ping" | "status";
+  type: 'forge' | 'query' | 'ping' | 'status';
   token?: string;
   id?: string;
   directive?: string;
@@ -39,7 +39,7 @@ const clients = new Map<WebSocket, ClientMeta>();
 
 function readToken(): string | null {
   try {
-    return fs.readFileSync(TOKEN_PATH, "ascii").trim();
+    return fs.readFileSync(TOKEN_PATH, 'ascii').trim();
   } catch {
     return null;
   }
@@ -50,29 +50,26 @@ function verifyToken(presented: string): boolean {
   if (!local || !presented) return false;
   // constant-time comparison to resist timing attacks
   try {
-    return crypto.timingSafeEqual(
-      Buffer.from(local, "utf8"),
-      Buffer.from(presented, "utf8"),
-    );
+    return crypto.timingSafeEqual(Buffer.from(local, 'utf8'), Buffer.from(presented, 'utf8'));
   } catch {
     return false;
   }
 }
 
 function isLoopback(addr: string): boolean {
-  return addr === "127.0.0.1" || addr === "::1" || addr === "::ffff:127.0.0.1";
+  return addr === '127.0.0.1' || addr === '::1' || addr === '::ffff:127.0.0.1';
 }
 
 function enqueue(task: object): void {
   try {
-    fs.appendFileSync(QUEUE_PATH, JSON.stringify(task) + "\n", "utf8");
+    fs.appendFileSync(QUEUE_PATH, JSON.stringify(task) + '\n', 'utf8');
   } catch (e) {
     console.error(`[EDGE-ROUTER] QUEUE ERROR: ${e}`);
   }
 }
 
 function mkId(): string {
-  return `ws-${Date.now()}-${crypto.randomBytes(3).toString("hex")}`;
+  return `ws-${Date.now()}-${crypto.randomBytes(3).toString('hex')}`;
 }
 
 // ── Server ────────────────────────────────────────────────────────────────────
@@ -83,21 +80,21 @@ const wss = new WebSocketServer({
     zlibDeflateOptions: {
       chunkSize: 1024,
       memLevel: 7,
-      level: 3
+      level: 3,
     },
     zlibInflateOptions: {
-      chunkSize: 10 * 1024
+      chunkSize: 10 * 1024,
     },
     clientNoContextTakeover: true,
     serverNoContextTakeover: true,
     concurrencyLimit: 10,
-    threshold: 1024
-  }
+    threshold: 1024,
+  },
 });
 console.log(`[EDGE-ROUTER] Kinetic Edge :${PORT} ONLINE (gzip compression enabled)`);
 
-wss.on("connection", (ws: WebSocket, req) => {
-  const remoteAddr = req.socket.remoteAddress ?? "";
+wss.on('connection', (ws: WebSocket, req) => {
+  const remoteAddr = req.socket.remoteAddress ?? '';
   const meta: ClientMeta = {
     id: mkId(),
     remoteAddr,
@@ -110,7 +107,7 @@ wss.on("connection", (ws: WebSocket, req) => {
   function sendResponse(obj: object, compress: boolean = false): void {
     const payloadStr = JSON.stringify(obj);
     if (compress) {
-      zlib.gzip(Buffer.from(payloadStr, "utf8"), (err, compressed) => {
+      zlib.gzip(Buffer.from(payloadStr, 'utf8'), (err, compressed) => {
         if (err) {
           ws.send(payloadStr);
         } else {
@@ -122,7 +119,7 @@ wss.on("connection", (ws: WebSocket, req) => {
     }
   }
 
-  ws.on("message", (raw) => {
+  ws.on('message', (raw) => {
     let data: Buffer;
     if (Buffer.isBuffer(raw)) {
       data = raw;
@@ -139,24 +136,24 @@ wss.on("connection", (ws: WebSocket, req) => {
       try {
         data = zlib.gunzipSync(data);
       } catch (e) {
-        sendResponse({ status: "error", reason: `gunzip failed: ${e}` });
+        sendResponse({ status: 'error', reason: `gunzip failed: ${e}` });
         return;
       }
     }
 
     let msg: EdgeMessage;
     try {
-      msg = JSON.parse(data.toString("utf8")) as EdgeMessage;
+      msg = JSON.parse(data.toString('utf8')) as EdgeMessage;
     } catch {
-      sendResponse({ status: "error", reason: "invalid JSON" });
+      sendResponse({ status: 'error', reason: 'invalid JSON' });
       return;
     }
 
     // Gate non-loopback on first message
     if (!meta.authenticated) {
-      if (!verifyToken(msg.token ?? "")) {
-        sendResponse({ status: "denied", reason: "invalid bifrost token" });
-        ws.close(1008, "unauthorized");
+      if (!verifyToken(msg.token ?? '')) {
+        sendResponse({ status: 'denied', reason: 'invalid bifrost token' });
+        ws.close(1008, 'unauthorized');
         return;
       }
       meta.authenticated = true;
@@ -166,74 +163,80 @@ wss.on("connection", (ws: WebSocket, req) => {
     const shouldCompress = !!msg.compress;
 
     switch (msg.type) {
-      case "ping":
-        sendResponse({ status: "pong", ts: Date.now() }, shouldCompress);
+      case 'ping':
+        sendResponse({ status: 'pong', ts: Date.now() }, shouldCompress);
         break;
 
-      case "status":
-        sendResponse({
-          status: "ok",
-          clients: clients.size,
-          uptime_s: Math.floor(process.uptime()),
-          queue: QUEUE_PATH,
-        }, shouldCompress);
+      case 'status':
+        sendResponse(
+          {
+            status: 'ok',
+            clients: clients.size,
+            uptime_s: Math.floor(process.uptime()),
+            queue: QUEUE_PATH,
+          },
+          shouldCompress,
+        );
         break;
 
-      case "forge":
+      case 'forge':
         if (!msg.directive) {
-          sendResponse({ status: "error", reason: "missing directive" }, shouldCompress);
+          sendResponse({ status: 'error', reason: 'missing directive' }, shouldCompress);
           break;
         }
         enqueue({
           id: msgId,
-          type: "forge",
+          type: 'forge',
           directive: msg.directive,
           payload: msg.payload ?? null,
-          source: "edge-router",
+          source: 'edge-router',
           queued_at: new Date().toISOString(),
           priority: 2,
         });
         console.log(`[EDGE-ROUTER] FORGE queued ${msgId}`);
-        sendResponse({ status: "queued", id: msgId }, shouldCompress);
+        sendResponse({ status: 'queued', id: msgId }, shouldCompress);
         break;
 
-      case "query":
+      case 'query':
         enqueue({
           id: msgId,
-          type: "query",
+          type: 'query',
           payload: msg.payload ?? null,
-          source: "edge-router",
+          source: 'edge-router',
           queued_at: new Date().toISOString(),
           priority: 3,
         });
-        sendResponse({ status: "queued", id: msgId }, shouldCompress);
+        sendResponse({ status: 'queued', id: msgId }, shouldCompress);
         break;
 
       default:
-        sendResponse({ status: "error", reason: `unknown type: ${(msg as { type: string }).type}` }, shouldCompress);
+        sendResponse(
+          { status: 'error', reason: `unknown type: ${(msg as { type: string }).type}` },
+          shouldCompress,
+        );
     }
   });
 
-  ws.on("close", () => {
+  ws.on('close', () => {
     console.log(`[EDGE-ROUTER] DISCONNECT ${meta.id}`);
     clients.delete(ws);
   });
 
-  ws.on("error", (err: Error) => {
+  ws.on('error', (err: Error) => {
     console.error(`[EDGE-ROUTER] ERROR ${meta.id}: ${err.message}`);
   });
 });
 
 function shutdown(): void {
-  console.log("[EDGE-ROUTER] Shutdown signal — closing connections");
+  console.log('[EDGE-ROUTER] Shutdown signal — closing connections');
   for (const [ws] of clients) {
-    ws.close(1001, "server shutdown");
+    ws.close(1001, 'server shutdown');
   }
   wss.close(() => {
-    console.log("[EDGE-ROUTER] OFFLINE");
+    console.log('[EDGE-ROUTER] OFFLINE');
     process.exit(0);
   });
 }
 
-process.on("SIGINT", shutdown);
-process.on("SIGTERM", shutdown);
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);

@@ -182,12 +182,18 @@ function showVoiceNotice(message: string): void {
 
 function voiceStateLabel(state: VoiceUiState): string {
   switch (state) {
-    case 'listening': return 'voice: listening';
-    case 'transcribing': return 'voice: transcribing…';
-    case 'review': return 'voice: review needed';
-    case 'voice-error': return 'voice: error';
-    case 'text-only': return 'voice: text-only fallback';
-    default: return 'voice: idle';
+    case 'listening':
+      return 'voice: listening';
+    case 'transcribing':
+      return 'voice: transcribing…';
+    case 'review':
+      return 'voice: review needed';
+    case 'voice-error':
+      return 'voice: error';
+    case 'text-only':
+      return 'voice: text-only fallback';
+    default:
+      return 'voice: idle';
   }
 }
 
@@ -209,7 +215,13 @@ const voiceSession = new VoiceSessionController(provider, {
     voiceStateEl.textContent = voiceStateLabel(state);
     voiceStateEl.className =
       'chip ' +
-      (state === 'listening' ? 'ok' : state === 'voice-error' || state === 'text-only' ? 'err' : state === 'review' ? 'warn' : '');
+      (state === 'listening'
+        ? 'ok'
+        : state === 'voice-error' || state === 'text-only'
+          ? 'err'
+          : state === 'review'
+            ? 'warn'
+            : '');
     pttBtn.classList.toggle('listening', state === 'listening');
     render();
   },
@@ -234,8 +246,10 @@ async function initVoice(): Promise<void> {
     );
     return;
   }
-  if (!(navigator.mediaDevices?.getUserMedia) && !(provider instanceof MockVoiceProvider)) {
-    showVoiceNotice('Voice disabled — no microphone API in this browser. Text mode is fully functional.');
+  if (!navigator.mediaDevices?.getUserMedia && !(provider instanceof MockVoiceProvider)) {
+    showVoiceNotice(
+      'Voice disabled — no microphone API in this browser. Text mode is fully functional.',
+    );
     return;
   }
   voiceEnabled = true;
@@ -244,7 +258,9 @@ async function initVoice(): Promise<void> {
   micStatusEl.className = 'chip ok';
 
   try {
-    const permission = await navigator.permissions?.query?.({ name: 'microphone' as PermissionName });
+    const permission = await navigator.permissions?.query?.({
+      name: 'microphone' as PermissionName,
+    });
     if (permission) {
       const update = () => {
         micStatusEl.textContent = `mic: ${permission.state} · stt=${health.stt}`;
@@ -270,7 +286,10 @@ async function initVoice(): Promise<void> {
   }
 }
 
-pttBtn.addEventListener('pointerdown', () => void voiceSession.pttDown(micDeviceEl.value || undefined));
+pttBtn.addEventListener(
+  'pointerdown',
+  () => void voiceSession.pttDown(micDeviceEl.value || undefined),
+);
 pttBtn.addEventListener('pointerup', () => void voiceSession.pttUp());
 pttBtn.addEventListener('pointerleave', () => void voiceSession.pttUp());
 stopSpeakingBtn.onclick = () => void voiceSession.stopSpeaking();
@@ -287,7 +306,10 @@ client.connectEvents(FIXTURE_SESSION_ID, (event) => {
   }
   if (event.type === 'turn.cancelled') {
     anyaBubbleFor(event.turnId).classList.add('cancelled');
-    addBubble('system', `Turn ${event.turnId} interrupted — response cancelled, unused leases revoked.`);
+    addBubble(
+      'system',
+      `Turn ${event.turnId} interrupted — response cancelled, unused leases revoked.`,
+    );
   }
   if (event.type === 'reply.done') {
     // Model-streamed replies have no sync text; speak the complete
@@ -345,9 +367,12 @@ async function resolveLease(approve: boolean): Promise<void> {
       leaseId: lease.leaseId,
       approve,
     });
-    view = reduceSessionEvent(view, approve
-      ? { type: 'lease.consumed', leaseId: lease.leaseId }
-      : { type: 'lease.revoked', leaseId: lease.leaseId, reason: 'denied by user' });
+    view = reduceSessionEvent(
+      view,
+      approve
+        ? { type: 'lease.consumed', leaseId: lease.leaseId }
+        : { type: 'lease.revoked', leaseId: lease.leaseId, reason: 'denied by user' },
+    );
     if (!approve) {
       addBubble('system', `Change request denied — lease ${lease.leaseId} revoked.`);
       view = { ...view, uiState: 'idle' };

@@ -48,7 +48,11 @@ describe('operator BFF', () => {
       headers: { 'x-operator-token': 'test-token' },
     });
     expect(res.status).toBe(200);
-    const body = (await res.json()) as { schemaVersion: string; integrity: string; taskGraph: unknown[] };
+    const body = (await res.json()) as {
+      schemaVersion: string;
+      integrity: string;
+      taskGraph: unknown[];
+    };
     expect(body.schemaVersion).toBe('operator-task-snapshot/1');
     expect(body.integrity).toBe('verified');
     expect(Array.isArray(body.taskGraph)).toBe(true);

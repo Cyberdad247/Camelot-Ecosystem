@@ -8,13 +8,7 @@
     "module": "control_plane/bifrost.py",
     "ui": "apps/bifrost/public/index.html",
     "ecosystem_ui": "02_FORGE/apps/omni-eye-dashboard",
-    "components": [
-      "CLIProxyAPI",
-      "OmniRoute",
-      "BitRouter",
-      "9Router",
-      "MultivoiceRouter"
-    ]
+    "components": ["CLIProxyAPI", "OmniRoute", "BitRouter", "9Router", "MultivoiceRouter"]
   },
   "components": {
     "CLIProxyAPI": {

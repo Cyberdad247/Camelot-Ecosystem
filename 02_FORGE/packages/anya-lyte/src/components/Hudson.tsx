@@ -11,12 +11,12 @@ interface HudsonProps {
 }
 
 export default function Hudson({ link }: HudsonProps) {
-  const [persona, setPersona] = useState<KnightPersona>("Anya_Omega");
-  const [cue, setCue] = useState<string>("System Online");
+  const [persona, setPersona] = useState<KnightPersona>('Anya_Omega');
+  const [cue, setCue] = useState<string>('System Online');
 
   useEffect(() => {
     // Listen for Swarm Handoffs
-    link.on("HANDOFF", (data: any) => {
+    link.on('HANDOFF', (data: any) => {
       console.log(`[📱] HUD Recieved Handoff: ${data.to}`);
       setPersona(data.to);
       setCue(data.vocal_cue);
@@ -39,14 +39,21 @@ export default function Hudson({ link }: HudsonProps) {
 
 const styles = StyleSheet.create({
   card: {
-    width: '90%', padding: 20, borderWidth: 2, borderRadius: 15,
-    backgroundColor: '#1a1b26', alignItems: 'center'
+    width: '90%',
+    padding: 20,
+    borderWidth: 2,
+    borderRadius: 15,
+    backgroundColor: '#1a1b26',
+    alignItems: 'center',
   },
   avatar: { fontSize: 60, marginBottom: 10 },
   role: { fontSize: 20, fontWeight: 'bold', textTransform: 'uppercase' },
   status: { color: '#888', fontStyle: 'italic', marginBottom: 15 },
   terminal: {
-    width: '100%', backgroundColor: '#000', padding: 10, borderRadius: 5
+    width: '100%',
+    backgroundColor: '#000',
+    padding: 10,
+    borderRadius: 5,
   },
-  log: { color: '#00FF00', fontFamily: 'monospace' }
+  log: { color: '#00FF00', fontFamily: 'monospace' },
 });

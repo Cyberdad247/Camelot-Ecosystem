@@ -19,15 +19,9 @@
       "type": "run_check"
     },
     {
-      "argv": [
-        "npm",
-        "run",
-        "verify"
-      ],
+      "argv": ["npm", "run", "verify"],
       "cwd": "02_FORGE/apps/pwa-cockpit",
-      "dependsOn": [
-        "core-tests"
-      ],
+      "dependsOn": ["core-tests"],
       "id": "pwa-verify",
       "timeoutSeconds": 900,
       "type": "build"
@@ -48,10 +42,7 @@
   },
   "targetRoot": ".",
   "title": "Forge Law R&D Command Center Integration v10000.1",
-  "verification": [
-    "core-tests",
-    "pwa-verify"
-  ],
+  "verification": ["core-tests", "pwa-verify"],
   "verificationEvidence": {
     "entryHash": "e9caf9b1623f3477f891e1490ce48e4b57c515e58320d41031ff6eb0b17a44e4",
     "entryId": 137,

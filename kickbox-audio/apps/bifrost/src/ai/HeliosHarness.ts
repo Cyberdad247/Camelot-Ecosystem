@@ -22,7 +22,7 @@ export class HeliosHarness {
       3. "swarm_tasks": An array of bulk tasks to delegate to the Microcubic Swarm. Use this exact format:
          - For SMS: { "type": "draft_tenant_notice", "payload": { "tenantName": "John", "threadId": "uuid", "issue": "Late Rent", "tone": "firm" } }
     `;
-    
+
     const result = await proModel.generateContent(prompt);
     return JSON.parse(result.response.text());
   }

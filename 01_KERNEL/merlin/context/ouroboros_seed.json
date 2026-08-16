@@ -16,10 +16,7 @@
       "L2_Kinetic": "SIR_BORRIS AST Auditor \u2192 Saltare / Cribo / Rotel",
       "L1_Substrate": "eBPF syscall intercept \u2192 Modal / Docker"
     },
-    "persona_vectors": [
-      "ANYA_Omega",
-      "SIR_BORRIS"
-    ],
+    "persona_vectors": ["ANYA_Omega", "SIR_BORRIS"],
     "execution_state": "PDDL_Signed_Zero_Entropy"
   },
   "seeded_at": "2026-06-21T10:47:32.265982+00:00",

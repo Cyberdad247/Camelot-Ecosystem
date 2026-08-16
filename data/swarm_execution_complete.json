@@ -2286,9 +2286,7 @@
         "main_branch_exists": true,
         "legacy_master_exists": true,
         "status": "PASS",
-        "required_actions": [
-          "Clean up legacy master branch"
-        ]
+        "required_actions": ["Clean up legacy master branch"]
       },
       "count_threshold": {
         "current_count": 194,

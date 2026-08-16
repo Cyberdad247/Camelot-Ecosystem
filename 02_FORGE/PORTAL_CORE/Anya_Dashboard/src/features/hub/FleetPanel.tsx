@@ -60,7 +60,9 @@ export default function FleetPanel() {
     }
   }, []);
 
-  useEffect(() => { fetchFleet(); }, [fetchFleet]);
+  useEffect(() => {
+    fetchFleet();
+  }, [fetchFleet]);
   useEffect(() => {
     const id = setInterval(fetchFleet, POLL_MS);
     return () => clearInterval(id);
@@ -78,10 +80,14 @@ export default function FleetPanel() {
         </h2>
         <div className="flex items-center gap-2">
           {loadState === 'ok' && (
-            <span className={cn(
-              'text-[10px] font-bold uppercase tracking-wide',
-              upCount === daemons.length && daemons.length > 0 ? 'text-emerald-400' : 'text-amber-400',
-            )}>
+            <span
+              className={cn(
+                'text-[10px] font-bold uppercase tracking-wide',
+                upCount === daemons.length && daemons.length > 0
+                  ? 'text-emerald-400'
+                  : 'text-amber-400',
+              )}
+            >
               {upCount}/{daemons.length} daemons up
             </span>
           )}
@@ -117,10 +123,12 @@ export default function FleetPanel() {
                 key={d.name}
                 className="flex items-center gap-2 rounded-lg border border-slate-800/50 bg-slate-900/40 px-2.5 py-2"
               >
-                <span className={cn(
-                  'h-2 w-2 rounded-full shrink-0',
-                  d.up ? 'bg-emerald-400 shadow-[0_0_6px_#34d399]' : 'bg-red-600',
-                )} />
+                <span
+                  className={cn(
+                    'h-2 w-2 rounded-full shrink-0',
+                    d.up ? 'bg-emerald-400 shadow-[0_0_6px_#34d399]' : 'bg-red-600',
+                  )}
+                />
                 <div className="min-w-0">
                   <p className="text-xs font-medium text-slate-200 truncate">{d.name}</p>
                   <p className="text-[9px] text-slate-600 truncate">{d.role}</p>
@@ -131,7 +139,8 @@ export default function FleetPanel() {
 
           <div>
             <p className="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 flex items-center gap-1.5">
-              <Radio className="h-3 w-3" /> Tailnet{fleet.tailnet.tailnet ? ` — ${fleet.tailnet.tailnet}` : ''}
+              <Radio className="h-3 w-3" /> Tailnet
+              {fleet.tailnet.tailnet ? ` — ${fleet.tailnet.tailnet}` : ''}
             </p>
             {fleet.tailnet.error ? (
               <p className="text-[10px] text-slate-600 italic">{fleet.tailnet.error}</p>
@@ -141,7 +150,12 @@ export default function FleetPanel() {
               <div className="space-y-1">
                 {nodes.map((n) => (
                   <div key={n.name} className="flex items-center gap-2 text-[10px]">
-                    <span className={cn('h-1.5 w-1.5 rounded-full shrink-0', n.online ? 'bg-emerald-400' : 'bg-slate-600')} />
+                    <span
+                      className={cn(
+                        'h-1.5 w-1.5 rounded-full shrink-0',
+                        n.online ? 'bg-emerald-400' : 'bg-slate-600',
+                      )}
+                    />
                     <Server className="h-3 w-3 text-slate-600 shrink-0" />
                     <span className="text-slate-300 truncate">{n.name}</span>
                     {n.self && <span className="text-fuchsia-400 font-bold">(self)</span>}

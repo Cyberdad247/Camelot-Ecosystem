@@ -37,7 +37,7 @@ export default function KnightAvatarScene({ activeKnight }: KnightAvatarScenePro
   const stream = useKnightStream();
   const knight = activeKnight ?? stream.activeKnight?.knight ?? null;
   const color = useMemo(
-    () => (knight ? KNIGHT_COLORS[knight] ?? IDLE_COLOR : IDLE_COLOR),
+    () => (knight ? (KNIGHT_COLORS[knight] ?? IDLE_COLOR) : IDLE_COLOR),
     [knight],
   );
 
@@ -45,7 +45,9 @@ export default function KnightAvatarScene({ activeKnight }: KnightAvatarScenePro
     <div className="relative h-full w-full overflow-hidden rounded-xl border border-slate-800/60 bg-[#05060c]">
       <div className="absolute left-3 top-3 z-10 font-mono text-[11px] text-slate-400">
         <span className="uppercase tracking-widest text-slate-600">active</span>{' '}
-        <span style={{ color }} className="capitalize">{knight ?? 'idle'}</span>
+        <span style={{ color }} className="capitalize">
+          {knight ?? 'idle'}
+        </span>
       </div>
       <Canvas camera={{ position: [0, 0.6, 3.2], fov: 42 }} dpr={[1, 2]}>
         <ambientLight intensity={0.6} />

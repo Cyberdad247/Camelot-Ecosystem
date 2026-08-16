@@ -1,20 +1,13 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import {
-  Code,
-  Play,
-  Settings,
-  Activity,
-  Search,
-  ShieldCheck,
-} from "lucide-react";
+import { useEffect, useState } from 'react';
+import { Code, Play, Settings, Activity, Search, ShieldCheck } from 'lucide-react';
 
 export default function DevHub() {
   const [stats, setStats] = useState({
     files: 0,
     tests: 0,
-    health: "RADIANT",
+    health: 'RADIANT',
   });
 
   return (
@@ -74,9 +67,7 @@ export default function DevHub() {
       <div className="flex-1 space-y-4 overflow-y-auto pr-2 custom-scrollbar">
         <div className="group p-3 rounded-lg border border-slate-800/50 bg-slate-900/30 hover:border-purple-500/30 transition-all cursor-pointer">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-mono text-slate-300">
-              Omega_OPEN: Kinetic Refactor
-            </span>
+            <span className="text-sm font-mono text-slate-300">Omega_OPEN: Kinetic Refactor</span>
             <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 uppercase font-bold">
               In-Progress
             </span>
@@ -87,9 +78,7 @@ export default function DevHub() {
         </div>
         <div className="group p-3 rounded-lg border border-slate-800/50 bg-slate-900/30 hover:border-purple-500/30 transition-all cursor-pointer">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-mono text-slate-300">
-              //DEV: Build Deployment
-            </span>
+            <span className="text-sm font-mono text-slate-300">//DEV: Build Deployment</span>
             <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-500/10 text-slate-400 border border-slate-500/20 uppercase font-bold">
               Standing By
             </span>

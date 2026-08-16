@@ -53,7 +53,12 @@ export function decisionCardModel(decision: PolicyDecision | null): {
   reason: string;
 } {
   if (!decision) {
-    return { effectLabel: 'No decision yet', effectClass: 'effect-none', skillLine: '—', reason: '' };
+    return {
+      effectLabel: 'No decision yet',
+      effectClass: 'effect-none',
+      skillLine: '—',
+      reason: '',
+    };
   }
   const effectLabel =
     decision.effect === 'allow'

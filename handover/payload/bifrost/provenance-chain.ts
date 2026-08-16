@@ -37,12 +37,27 @@ function sha256(s: string): string {
   return createHash('sha256').update(s).digest('hex');
 }
 
-function recordHashInput(r: Omit<LedgerRecord, 'current_hash' | 'signature' | 'provenance_ref'>): string {
+function recordHashInput(
+  r: Omit<LedgerRecord, 'current_hash' | 'signature' | 'provenance_ref'>,
+): string {
   return [
-    r.ledger_version, r.event_id, r.trace_id, r.parent_event_id ?? '', r.msg_id,
-    r.msg_type, r.src, r.dst, r.session_id ?? '', r.node_id ?? '',
-    r.cartridge_id ?? '', r.operator_id ?? '', r.timestamp, r.trust_band,
-    r.policy_decision, r.payload_hash, r.prev_hash ?? ''
+    r.ledger_version,
+    r.event_id,
+    r.trace_id,
+    r.parent_event_id ?? '',
+    r.msg_id,
+    r.msg_type,
+    r.src,
+    r.dst,
+    r.session_id ?? '',
+    r.node_id ?? '',
+    r.cartridge_id ?? '',
+    r.operator_id ?? '',
+    r.timestamp,
+    r.trust_band,
+    r.policy_decision,
+    r.payload_hash,
+    r.prev_hash ?? '',
   ].join('|');
 }
 
@@ -51,7 +66,10 @@ export class ProvenanceChain {
   private buffer: BifrostEnvelope[] = [];
   private seq = 0;
 
-  constructor(private readonly signingSecret: string, private failNextAppend = false) {}
+  constructor(
+    private readonly signingSecret: string,
+    private failNextAppend = false,
+  ) {}
 
   get head(): LedgerRecord | undefined {
     return this.records[this.records.length - 1];
@@ -100,12 +118,19 @@ export class ProvenanceChain {
       trust_band: h.trust_band,
       policy_decision: h.policy_decision ?? 'none',
       payload_hash: sha256(JSON.stringify(envelope.payload ?? null)),
-      prev_hash: this.head?.current_hash ?? null
+      prev_hash: this.head?.current_hash ?? null,
     };
 
     const current_hash = sha256(recordHashInput(base));
-    const signature = createHmac('sha256', this.signingSecret).update(current_hash).digest('base64');
-    const record: LedgerRecord = { ...base, current_hash, signature, provenance_ref: `ledger://camelot/${base.event_id}` };
+    const signature = createHmac('sha256', this.signingSecret)
+      .update(current_hash)
+      .digest('base64');
+    const record: LedgerRecord = {
+      ...base,
+      current_hash,
+      signature,
+      provenance_ref: `ledger://camelot/${base.event_id}`,
+    };
     this.records.push(record);
     return record.provenance_ref;
   }
@@ -114,8 +139,9 @@ export class ProvenanceChain {
   retryBuffered(): number {
     const pending = [...this.buffer];
     this.buffer = [];
-    pending.sort((a, b) =>
-      Number(PRIORITY_TYPES.has(b.header.type)) - Number(PRIORITY_TYPES.has(a.header.type))
+    pending.sort(
+      (a, b) =>
+        Number(PRIORITY_TYPES.has(b.header.type)) - Number(PRIORITY_TYPES.has(a.header.type)),
     );
     let committed = 0;
     for (const env of pending) {
@@ -127,7 +153,7 @@ export class ProvenanceChain {
   /** Yggdrasil Merkle root over all committed record hashes (crystal: prove.Yggdrasil_Merkle_root). */
   merkleRoot(): string | null {
     if (this.records.length === 0) return null;
-    let level = this.records.map(r => r.current_hash);
+    let level = this.records.map((r) => r.current_hash);
     while (level.length > 1) {
       const next: string[] = [];
       for (let i = 0; i < level.length; i += 2) {
@@ -144,8 +170,11 @@ export class ProvenanceChain {
     for (const r of this.records) {
       if (r.prev_hash !== prev) return { valid: false, brokenAt: r.event_id };
       const { current_hash, signature, provenance_ref, ...base } = r;
-      if (sha256(recordHashInput(base)) !== current_hash) return { valid: false, brokenAt: r.event_id };
-      const expectedSig = createHmac('sha256', this.signingSecret).update(current_hash).digest('base64');
+      if (sha256(recordHashInput(base)) !== current_hash)
+        return { valid: false, brokenAt: r.event_id };
+      const expectedSig = createHmac('sha256', this.signingSecret)
+        .update(current_hash)
+        .digest('base64');
       if (expectedSig !== signature) return { valid: false, brokenAt: r.event_id };
       prev = current_hash;
     }

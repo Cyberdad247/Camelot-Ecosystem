@@ -179,7 +179,7 @@ export function KnightSwarmCommand() {
             }
           }
           return k;
-        })
+        }),
       );
     }, 3000);
     return () => clearInterval(simulationInterval);
@@ -273,10 +273,10 @@ export function KnightSwarmCommand() {
                           knight.status === 'PROCESSING'
                             ? 'border-emerald-500 text-emerald-400 bg-emerald-950/20 animate-pulse'
                             : knight.status === 'PENDING_HITL'
-                            ? 'border-[#9D4EDD] text-[#9D4EDD] bg-purple-950/30 font-bold'
-                            : knight.status === 'STAKED'
-                            ? 'border-amber-500 text-amber-400 bg-amber-950/20'
-                            : 'border-gray-700 text-gray-400'
+                              ? 'border-[#9D4EDD] text-[#9D4EDD] bg-purple-950/30 font-bold'
+                              : knight.status === 'STAKED'
+                                ? 'border-amber-500 text-amber-400 bg-amber-950/20'
+                                : 'border-gray-700 text-gray-400'
                         }`}
                       >
                         {knight.status}

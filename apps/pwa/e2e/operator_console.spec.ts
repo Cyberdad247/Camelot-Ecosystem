@@ -17,19 +17,32 @@ function snapshotPayload(overrides: Record<string, unknown> = {}) {
       { nodeId: 'n1', name: 'ant-mapper', status: 'done' },
       { nodeId: 'n2', name: 'owl-auditor', status: 'running' },
     ],
-    diffs: [{
-      baseRevision: 'base', candidateRevision: 'cand', diffSha256: 'sha256:abc',
-      changedPaths: ['apps/pwa/src/app/console/page.tsx'],
-      addedLines: 12, removedLines: 3, generatedAt: new Date().toISOString(),
-      gideonVerdict: 'pass',
-    }],
-    tests: [{
-      schemaVersion: 'test-run-result/1', runId: 'run_1', taskId: 'task_01J',
-      correlationId: 'cor_task_01J', runner: 'boris-gideon-adapter',
-      status: 'passed', startedAt: new Date().toISOString(),
-      suites: [], summary: { total: 4, passed: 4, failed: 0, skipped: 0 },
-      outputHash: 'sha256:test',
-    }],
+    diffs: [
+      {
+        baseRevision: 'base',
+        candidateRevision: 'cand',
+        diffSha256: 'sha256:abc',
+        changedPaths: ['apps/pwa/src/app/console/page.tsx'],
+        addedLines: 12,
+        removedLines: 3,
+        generatedAt: new Date().toISOString(),
+        gideonVerdict: 'pass',
+      },
+    ],
+    tests: [
+      {
+        schemaVersion: 'test-run-result/1',
+        runId: 'run_1',
+        taskId: 'task_01J',
+        correlationId: 'cor_task_01J',
+        runner: 'boris-gideon-adapter',
+        status: 'passed',
+        startedAt: new Date().toISOString(),
+        suites: [],
+        summary: { total: 4, passed: 4, failed: 0, skipped: 0 },
+        outputHash: 'sha256:test',
+      },
+    ],
     receipts: [],
     ...overrides,
   };
@@ -59,7 +72,11 @@ test.describe('operator console', () => {
       route.fulfill({
         status: 200,
         contentType: 'application/json',
-        body: JSON.stringify({ status: 'APPROVED', manifestId: 'eff_01J', lease: { leaseId: 'lease_1' } }),
+        body: JSON.stringify({
+          status: 'APPROVED',
+          manifestId: 'eff_01J',
+          lease: { leaseId: 'lease_1' },
+        }),
       }),
     );
     await page.goto('/console');
@@ -71,7 +88,11 @@ test.describe('operator console', () => {
   test('deny path records a denial and issues no lease', async ({ page }) => {
     await interceptSnapshot(page, snapshotPayload());
     await page.route(`${BFF_PREFIX}/effect-manifests/eff_01J/decision`, (route) =>
-      route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ status: 'DENIED', manifestId: 'eff_01J' }) }),
+      route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ status: 'DENIED', manifestId: 'eff_01J' }),
+      }),
     );
     await page.goto('/console');
     await page.getByRole('button', { name: 'Deny' }).click();
@@ -102,14 +123,14 @@ test.describe('operator console', () => {
   });
 
   test('stale Bifrost connection disables live controls', async ({ page }) => {
-    await page.route(`${BFF_PREFIX}/tasks/task_01J/snapshot`, (route) =>
-      route.abort(),
-    );
+    await page.route(`${BFF_PREFIX}/tasks/task_01J/snapshot`, (route) => route.abort());
     await page.goto('/console');
     await expect(page.getByText(/STALE/)).toBeVisible();
     // No snapshot arrives, so no evidence and no approval path exist — the
     // Approval panel renders its empty state rather than live controls.
-    await expect(page.getByLabel('Approval', { exact: true })).toContainText(/No verified evidence yet/);
+    await expect(page.getByLabel('Approval', { exact: true })).toContainText(
+      /No verified evidence yet/,
+    );
     await expect(page.getByRole('button', { name: 'Approve' })).toHaveCount(0);
   });
 

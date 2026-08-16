@@ -1,13 +1,4 @@
-import {
-  Brain,
-  Code2,
-  Search,
-  Palette,
-  TrendingUp,
-  Scale,
-  Lightbulb,
-  Target,
-} from 'lucide-react';
+import { Brain, Code2, Search, Palette, TrendingUp, Scale, Lightbulb, Target } from 'lucide-react';
 import type { CartridgeMeta, CartridgeId } from '@/types/camelot';
 
 export const CARTRIDGES: CartridgeMeta[] = [
@@ -113,14 +104,13 @@ export const CARTRIDGES: CartridgeMeta[] = [
     bgClass: 'bg-red-950/30',
     textClass: 'text-red-300',
     icon: Target,
-    description: 'Socratic analysis, Devil\'s Advocate, bias surfacing, NPE/TCoT.',
+    description: "Socratic analysis, Devil's Advocate, bias surfacing, NPE/TCoT.",
   },
 ];
 
-export const CARTRIDGE_MAP = Object.fromEntries(
-  CARTRIDGES.map((c) => [c.id, c]),
-) as Record<CartridgeId, CartridgeMeta>;
+export const CARTRIDGE_MAP = Object.fromEntries(CARTRIDGES.map((c) => [c.id, c])) as Record<
+  CartridgeId,
+  CartridgeMeta
+>;
 
-export const CARTRIDGE_BY_SLUG = Object.fromEntries(
-  CARTRIDGES.map((c) => [c.slug, c]),
-);
+export const CARTRIDGE_BY_SLUG = Object.fromEntries(CARTRIDGES.map((c) => [c.slug, c]));

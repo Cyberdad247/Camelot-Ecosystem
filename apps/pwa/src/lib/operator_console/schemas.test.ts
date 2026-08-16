@@ -11,15 +11,25 @@ describe('operator console client schemas', () => {
       correlationId: 'cor_1',
       generatedAt: '2026-08-14T13:48:00Z',
       integrity: 'verified',
-      intent: {}, approval: {}, taskGraph: [], diffs: [], tests: [], receipts: [],
+      intent: {},
+      approval: {},
+      taskGraph: [],
+      diffs: [],
+      tests: [],
+      receipts: [],
     });
     expect(parsed.integrity).toBe('verified');
   });
 
   it('rejects an unknown schemaVersion (drift guard)', () => {
-    expect(() => OperatorTaskSnapshotSchema.parse({
-      schemaVersion: 'operator-task-snapshot/2',
-      taskId: 'task_1', correlationId: 'cor_1', generatedAt: 'x', integrity: 'verified',
-    })).toThrow();
+    expect(() =>
+      OperatorTaskSnapshotSchema.parse({
+        schemaVersion: 'operator-task-snapshot/2',
+        taskId: 'task_1',
+        correlationId: 'cor_1',
+        generatedAt: 'x',
+        integrity: 'verified',
+      }),
+    ).toThrow();
   });
 });

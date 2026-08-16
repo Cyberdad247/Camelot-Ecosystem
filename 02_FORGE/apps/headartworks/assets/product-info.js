@@ -19,10 +19,15 @@ if (!customElements.get('product-info')) {
         if (!this.quantityForm) return;
         this.setQuantityBoundries();
         if (!this.dataset.originalSection) {
-          this.cartUpdateUnsubscriber = subscribe(PUB_SUB_EVENTS.cartUpdate, this.fetchQuantityRules.bind(this));
+          this.cartUpdateUnsubscriber = subscribe(
+            PUB_SUB_EVENTS.cartUpdate,
+            this.fetchQuantityRules.bind(this),
+          );
         }
         this.variantChangeUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, (event) => {
-          const sectionId = this.dataset.originalSection ? this.dataset.originalSection : this.dataset.section;
+          const sectionId = this.dataset.originalSection
+            ? this.dataset.originalSection
+            : this.dataset.section;
           if (event.data.sectionId !== sectionId) return;
           this.updateQuantityRules(event.data.sectionId, event.data.html);
           this.setQuantityBoundries();
@@ -40,7 +45,9 @@ if (!customElements.get('product-info')) {
 
       setQuantityBoundries() {
         const data = {
-          cartQuantity: this.input.dataset.cartQuantity ? parseInt(this.input.dataset.cartQuantity) : 0,
+          cartQuantity: this.input.dataset.cartQuantity
+            ? parseInt(this.input.dataset.cartQuantity)
+            : 0,
           min: this.input.dataset.min ? parseInt(this.input.dataset.min) : 1,
           max: this.input.dataset.max ? parseInt(this.input.dataset.max) : null,
           step: this.input.step ? parseInt(this.input.step) : 1,
@@ -60,7 +67,9 @@ if (!customElements.get('product-info')) {
       fetchQuantityRules() {
         if (!this.currentVariant || !this.currentVariant.value) return;
         this.querySelector('.quantity__rules-cart .loading-overlay').classList.remove('hidden');
-        fetch(`${this.dataset.url}?variant=${this.currentVariant.value}&section_id=${this.dataset.section}`)
+        fetch(
+          `${this.dataset.url}?variant=${this.currentVariant.value}&section_id=${this.dataset.section}`,
+        )
           .then((response) => {
             return response.text();
           })
@@ -95,6 +104,6 @@ if (!customElements.get('product-info')) {
           }
         }
       }
-    }
+    },
   );
 }

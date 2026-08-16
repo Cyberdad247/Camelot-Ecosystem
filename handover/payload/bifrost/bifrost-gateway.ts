@@ -15,12 +15,15 @@ const SEVERITY: Record<TrustBand, number> = {
   block: 3,
   review: 2,
   warn: 1,
-  allow: 0
+  allow: 0,
 };
 
 export function reconcileTrust(verdicts: TrustBand[]): TrustBand {
   if (verdicts.length === 0) return 'review';
-  return verdicts.reduce((worst, v) => (SEVERITY[v] > SEVERITY[worst] ? v : worst), 'allow' as TrustBand);
+  return verdicts.reduce(
+    (worst, v) => (SEVERITY[v] > SEVERITY[worst] ? v : worst),
+    'allow' as TrustBand,
+  );
 }
 
 export interface GatewayDecision {
@@ -35,31 +38,44 @@ export function gateIntent(
   route: IntentRoute,
   envelope: BifrostEnvelope,
   verifyOpts: VerifyOptions,
-  heimdall: HeimdallFsm
+  heimdall: HeimdallFsm,
 ): GatewayDecision {
   const verdicts: GatewayDecision['verdicts'] = [];
 
   // 1. Signed envelope verification
   const env = verifyEnvelope(envelope, verifyOpts);
-  verdicts.push({ source: 'bifrost_envelope', band: env.valid ? env.trust_band : 'quarantine', reason: env.reasons.join('; ') });
+  verdicts.push({
+    source: 'bifrost_envelope',
+    band: env.valid ? env.trust_band : 'quarantine',
+    reason: env.reasons.join('; '),
+  });
 
   // 2. Heimdall node health
   const advisory = heimdall.sidecarAdvisory();
-  const heimdallBand: TrustBand = advisory === 'proceed' ? 'allow' : advisory === 'review_only' ? 'review' : 'block';
-  verdicts.push({ source: 'heimdall_fsm', band: heimdallBand, reason: `node=${heimdall.nodeId} state=${heimdall.state} advisory=${advisory}` });
+  const heimdallBand: TrustBand =
+    advisory === 'proceed' ? 'allow' : advisory === 'review_only' ? 'review' : 'block';
+  verdicts.push({
+    source: 'heimdall_fsm',
+    band: heimdallBand,
+    reason: `node=${heimdall.nodeId} state=${heimdall.state} advisory=${advisory}`,
+  });
 
   // 3. Intent policy engine
   const policy = evaluatePolicy(route);
-  const policyBand: TrustBand = !policy.allowed ? 'block' : policy.route.requiresApproval ? 'review' : 'allow';
+  const policyBand: TrustBand = !policy.allowed
+    ? 'block'
+    : policy.route.requiresApproval
+      ? 'review'
+      : 'allow';
   verdicts.push({ source: 'policy_engine', band: policyBand, reason: policy.reason });
 
-  const trust_band = reconcileTrust(verdicts.map(v => v.band));
+  const trust_band = reconcileTrust(verdicts.map((v) => v.band));
 
   return {
     trust_band,
     proceed: trust_band === 'allow' || trust_band === 'warn',
     requiresApproval: trust_band === 'review',
     verdicts,
-    route: policy.route
+    route: policy.route,
   };
 }

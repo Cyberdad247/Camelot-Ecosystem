@@ -1,6 +1,13 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BrainCircuit, FlaskConical, Layers3, ShieldCheck, Settings2 } from 'lucide-react';
+import {
+  LayoutDashboard,
+  BrainCircuit,
+  FlaskConical,
+  Layers3,
+  ShieldCheck,
+  Settings2,
+} from 'lucide-react';
 
 const navItems = [
   { path: '/', icon: LayoutDashboard, label: 'Hub', end: true },

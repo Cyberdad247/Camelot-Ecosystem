@@ -1,5 +1,23 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Activity, ArrowRight, Brain, Cable, CheckCircle2, Cpu, Database, Gavel, Lightbulb, Megaphone, PenTool, Radio, Scale, Search, Shield, TerminalSquare, Zap } from 'lucide-react';
+import {
+  Activity,
+  ArrowRight,
+  Brain,
+  Cable,
+  CheckCircle2,
+  Cpu,
+  Database,
+  Gavel,
+  Lightbulb,
+  Megaphone,
+  PenTool,
+  Radio,
+  Scale,
+  Search,
+  Shield,
+  TerminalSquare,
+  Zap,
+} from 'lucide-react';
 import { useAnyaSocket, type AnyaSocketEvent } from './useAnyaSocket';
 import { runtimeConfig } from '@/config/runtime';
 import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
@@ -103,17 +121,30 @@ const cartridges: Array<{
 ];
 
 function timestamp() {
-  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  return new Date().toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  });
 }
 
 function cartridgeForIntent(intent: string, selected: CartridgeId): CartridgeId {
   const text = intent.toLowerCase();
-  if (text.includes('build') || text.includes('fix') || text.includes('implement') || text.includes('code')) return 'ENGINEER';
-  if (text.includes('research') || text.includes('source') || text.includes('compare')) return 'RESEARCH';
-  if (text.includes('campaign') || text.includes('funnel') || text.includes('market')) return 'MARKETING';
+  if (
+    text.includes('build') ||
+    text.includes('fix') ||
+    text.includes('implement') ||
+    text.includes('code')
+  )
+    return 'ENGINEER';
+  if (text.includes('research') || text.includes('source') || text.includes('compare'))
+    return 'RESEARCH';
+  if (text.includes('campaign') || text.includes('funnel') || text.includes('market'))
+    return 'MARKETING';
   if (text.includes('legal') || text.includes('risk') || text.includes('contract')) return 'LEGAL';
   if (text.includes('brainstorm') || text.includes('ideas')) return 'BRAINSTORM';
-  if (text.includes('critique') || text.includes('audit') || text.includes('pressure')) return 'CRITICAL_THINKING';
+  if (text.includes('critique') || text.includes('audit') || text.includes('pressure'))
+    return 'CRITICAL_THINKING';
   return selected;
 }
 
@@ -258,7 +289,9 @@ export default function MorphingHUD() {
     {
       label: 'Bifrost Gate',
       value: status?.gate ?? 'offline',
-      detail: status ? `${status.current_user}@${status.hostname}` : statusError || 'No bridge response',
+      detail: status
+        ? `${status.current_user}@${status.hostname}`
+        : statusError || 'No bridge response',
       icon: Shield,
       tone: status ? 'emerald' : 'amber',
     },
@@ -304,19 +337,26 @@ export default function MorphingHUD() {
         <div className="pointer-events-none absolute top-4 right-4 flex flex-col items-end gap-1 opacity-20 font-mono text-[10px] text-cyan-500 md:opacity-40">
           <span>EDGE_NODE :: SM-S26-ULTRA</span>
           <span>DISP_MODE :: MATRIX_OF_LEADERSHIP</span>
-          <span>SEC_STAT  :: ARMED</span>
+          <span>SEC_STAT :: ARMED</span>
         </div>
 
         <header className="grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
-          <section className="rounded-[2rem] border border-white/10 bg-black/35 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur" aria-labelledby="bridge-title">
+          <section
+            className="rounded-[2rem] border border-white/10 bg-black/35 p-6 shadow-2xl shadow-cyan-950/30 backdrop-blur"
+            aria-labelledby="bridge-title"
+          >
             <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-400 text-xl font-black text-slate-950 shadow-lg shadow-cyan-500/30">
                   A
                 </div>
                 <div>
-                  <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">Anya Interface</p>
-                  <h1 id="bridge-title" className="text-3xl font-black tracking-tight md:text-5xl">Camelot Command Bridge</h1>
+                  <p className="text-xs uppercase tracking-[0.38em] text-cyan-300">
+                    Anya Interface
+                  </p>
+                  <h1 id="bridge-title" className="text-3xl font-black tracking-tight md:text-5xl">
+                    Camelot Command Bridge
+                  </h1>
                 </div>
               </div>
               <div className="rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-cyan-200">
@@ -328,20 +368,32 @@ export default function MorphingHUD() {
               {healthCards.map((card) => {
                 const Icon = card.icon;
                 return (
-                  <div key={card.label} className="rounded-2xl border border-white/10 bg-white/[0.04] p-4" role="status" aria-label={`${card.label}: ${card.value}`}>
+                  <div
+                    key={card.label}
+                    className="rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+                    role="status"
+                    aria-label={`${card.label}: ${card.value}`}
+                  >
                     <div className="mb-4 flex items-center justify-between">
-                      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">{card.label}</p>
+                      <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
+                        {card.label}
+                      </p>
                       <Icon className={`h-4 w-4 ${toneClass(card.tone)}`} aria-hidden="true" />
                     </div>
                     <p className="text-2xl font-black lowercase">{card.value}</p>
-                    <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">{card.detail}</p>
+                    <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-400">
+                      {card.detail}
+                    </p>
                   </div>
                 );
               })}
             </div>
           </section>
 
-          <aside className="rounded-[2rem] border border-amber-300/20 bg-amber-300/[0.06] p-6 backdrop-blur" aria-label="Helm Status">
+          <aside
+            className="rounded-[2rem] border border-amber-300/20 bg-amber-300/[0.06] p-6 backdrop-blur"
+            aria-label="Helm Status"
+          >
             <p className="text-xs uppercase tracking-[0.34em] text-amber-200">Helm</p>
             <div className="mt-5 space-y-4">
               <div className="rounded-2xl bg-black/30 p-4">
@@ -387,11 +439,16 @@ export default function MorphingHUD() {
                     }`}
                   >
                     <div className="mb-3 flex items-center justify-between">
-                      <Icon className={selected ? 'text-cyan-200' : 'text-slate-400'} aria-hidden="true" />
+                      <Icon
+                        className={selected ? 'text-cyan-200' : 'text-slate-400'}
+                        aria-hidden="true"
+                      />
                       {selected && <CheckCircle2 className="h-4 w-4 text-cyan-200" />}
                     </div>
                     <p className="font-black">{cartridge.label}</p>
-                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-500">{cartridge.helm}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-500">
+                      {cartridge.helm}
+                    </p>
                     <p className="mt-3 text-xs leading-5 text-slate-400">{cartridge.description}</p>
                   </button>
                 );
@@ -412,7 +469,7 @@ export default function MorphingHUD() {
               {/* Proactive UX Hints */}
               {proactiveHints.length > 0 && (
                 <div className="mb-4 flex flex-wrap gap-2 animate-in fade-in slide-in-from-top-2 duration-500">
-                  {proactiveHints.map(hint => (
+                  {proactiveHints.map((hint) => (
                     <button
                       key={hint}
                       onClick={() => setIntent(hint)}
@@ -461,12 +518,19 @@ export default function MorphingHUD() {
                 </div>
                 <div className="max-h-72 space-y-3 overflow-y-auto pr-1">
                   {messages.map((message, index) => (
-                    <div key={`${message.stamp}-${index}`} className="rounded-xl bg-white/[0.04] p-3">
+                    <div
+                      key={`${message.stamp}-${index}`}
+                      className="rounded-xl bg-white/[0.04] p-3"
+                    >
                       <div className="mb-1 flex items-center justify-between gap-3">
-                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">{message.role}</span>
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-cyan-200">
+                          {message.role}
+                        </span>
                         <span className="text-[10px] text-slate-600">{message.stamp}</span>
                       </div>
-                      <p className="whitespace-pre-wrap text-sm leading-6 text-slate-300">{message.text}</p>
+                      <p className="whitespace-pre-wrap text-sm leading-6 text-slate-300">
+                        {message.text}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -475,20 +539,29 @@ export default function MorphingHUD() {
               <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
                 <div className="mb-3 flex items-center gap-2">
                   <Radio className="h-4 w-4 text-emerald-300" />
-                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">Live Bridge Events</p>
+                  <p className="text-xs uppercase tracking-[0.28em] text-slate-500">
+                    Live Bridge Events
+                  </p>
                 </div>
                 <div className="max-h-72 space-y-2 overflow-y-auto pr-1 font-mono text-xs">
                   {events.length === 0 ? (
-                    <p className="rounded-xl bg-white/[0.04] p-3 text-slate-500">Waiting for websocket events...</p>
+                    <p className="rounded-xl bg-white/[0.04] p-3 text-slate-500">
+                      Waiting for websocket events...
+                    </p>
                   ) : (
                     events
                       .slice()
                       .reverse()
                       .map((event, index) => (
-                        <div key={`${event.timestamp_ms ?? index}-${index}`} className="rounded-xl border border-white/10 bg-black/30 p-3">
+                        <div
+                          key={`${event.timestamp_ms ?? index}-${index}`}
+                          className="rounded-xl border border-white/10 bg-black/30 p-3"
+                        >
                           <p className="text-cyan-200">{event.event}</p>
                           <p className="mt-1 text-slate-500">{event.source ?? 'bridge'}</p>
-                          {event.detail && <p className="mt-2 leading-5 text-slate-300">{event.detail}</p>}
+                          {event.detail && (
+                            <p className="mt-2 leading-5 text-slate-300">{event.detail}</p>
+                          )}
                         </div>
                       ))
                   )}

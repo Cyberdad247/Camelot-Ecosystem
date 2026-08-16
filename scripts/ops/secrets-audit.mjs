@@ -109,7 +109,9 @@ const lines = [];
 lines.push('# Secret scan — /audit-kickbox-audio');
 lines.push('');
 lines.push(`Generated: ${ts}`);
-lines.push(`Scanned ${scannedFiles.length} files (skipping node_modules, .next, .turbo, .vercel, dist, .git, .env.example, large binaries).`);
+lines.push(
+  `Scanned ${scannedFiles.length} files (skipping node_modules, .next, .turbo, .vercel, dist, .git, .env.example, large binaries).`,
+);
 lines.push(`Real hits: **${hits.length}**`);
 lines.push('');
 if (hits.length === 0) {
@@ -168,7 +170,9 @@ if (outIdx !== -1) {
     process.exit(2);
   }
   writeFileSync(path, lines.join('\n'), 'utf8');
-  console.log(`[secrets-audit] ${hits.length === 0 ? 'CLEAN' : hits.length + ' HITS'} — wrote plan to ${path}`);
+  console.log(
+    `[secrets-audit] ${hits.length === 0 ? 'CLEAN' : hits.length + ' HITS'} — wrote plan to ${path}`,
+  );
 } else {
   console.log(lines.join('\n'));
 }

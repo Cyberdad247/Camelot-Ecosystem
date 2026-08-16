@@ -12,7 +12,7 @@ const PURPLE = '#2E0854';
 const PURPLE_NEON = '#7A3BD6';
 
 export interface ScrollState {
-  progress: number;      // 0 = crown, 1 = foundation
+  progress: number; // 0 = crown, 1 = foundation
   activeFloor: number;
 }
 
@@ -35,7 +35,14 @@ function Floor({ index, scroll }: { index: number; scroll: React.MutableRefObjec
     const count = 6 + index;
     return Array.from({ length: count }, (_, i) => {
       const a = (i / count) * Math.PI * 2;
-      return { position: [Math.cos(a) * (r + 0.02), 0.3, Math.sin(a) * (r + 0.02)] as [number, number, number], rotationY: -a + Math.PI / 2 };
+      return {
+        position: [Math.cos(a) * (r + 0.02), 0.3, Math.sin(a) * (r + 0.02)] as [
+          number,
+          number,
+          number,
+        ],
+        rotationY: -a + Math.PI / 2,
+      };
     });
   }, [index, r]);
 
@@ -54,7 +61,13 @@ function Floor({ index, scroll }: { index: number; scroll: React.MutableRefObjec
       {/* Active-floor ring: emissive intensity driven per-frame */}
       <mesh position={[0, -0.9, 0]} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[r + 0.22, 0.045, 12, 48]} />
-        <meshStandardMaterial ref={ringRef} color={PURPLE} emissive={PURPLE_NEON} emissiveIntensity={0} roughness={0.4} />
+        <meshStandardMaterial
+          ref={ringRef}
+          color={PURPLE}
+          emissive={PURPLE_NEON}
+          emissiveIntensity={0}
+          roughness={0.4}
+        />
       </mesh>
       {/* Arrow-slit windows, gold-lit */}
       {windows.map((w, i) => (
@@ -69,7 +82,15 @@ function Floor({ index, scroll }: { index: number; scroll: React.MutableRefObjec
 }
 
 /** Pulses the purple ring of whichever floor is active. */
-function FloorRingDriver({ index, ringRef, scroll }: { index: number; ringRef: React.RefObject<THREE.MeshStandardMaterial>; scroll: React.MutableRefObject<ScrollState> }) {
+function FloorRingDriver({
+  index,
+  ringRef,
+  scroll,
+}: {
+  index: number;
+  ringRef: React.RefObject<THREE.MeshStandardMaterial>;
+  scroll: React.MutableRefObject<ScrollState>;
+}) {
   useFrame(({ clock }) => {
     const mat = ringRef.current;
     if (!mat) return;
@@ -101,7 +122,7 @@ function Roof() {
 function Spine() {
   const points = useMemo(
     () => [new THREE.Vector3(0, TOWER_TOP_Y + 1.2, 0), new THREE.Vector3(0, -1.4, 0)],
-    []
+    [],
   );
   const geometry = useMemo(() => new THREE.BufferGeometry().setFromPoints(points), [points]);
   return (
@@ -123,11 +144,17 @@ function CameraRig({ scroll, reducedMotion }: SceneProps) {
 
   useFrame(() => {
     const target = scroll.current.progress;
-    smoothed.current = reducedMotion ? target : THREE.MathUtils.lerp(smoothed.current, target, 0.08);
+    smoothed.current = reducedMotion
+      ? target
+      : THREE.MathUtils.lerp(smoothed.current, target, 0.08);
 
     const layout = resolveCameraLayout(size.width, size.height, smoothed.current);
     const persp = camera as THREE.PerspectiveCamera;
-    if (Math.abs(persp.fov - layout.fov) > 0.1 || persp.near !== layout.near || persp.far !== layout.far) {
+    if (
+      Math.abs(persp.fov - layout.fov) > 0.1 ||
+      persp.near !== layout.near ||
+      persp.far !== layout.far
+    ) {
       persp.fov = THREE.MathUtils.lerp(persp.fov, layout.fov, 0.1);
       persp.near = layout.near;
       persp.far = layout.far;
@@ -154,7 +181,9 @@ export function TowerScene({ scroll, reducedMotion }: SceneProps) {
       <directionalLight position={[6, 14, 4]} intensity={0.7} color="#e8e2d0" />
       <pointLight position={[0, -2, 0]} color={PURPLE_NEON} intensity={2} distance={14} />
 
-      {FLOORS.map((_, i) => <Floor key={i} index={i} scroll={scroll} />)}
+      {FLOORS.map((_, i) => (
+        <Floor key={i} index={i} scroll={scroll} />
+      ))}
       <Roof />
       <Spine />
 

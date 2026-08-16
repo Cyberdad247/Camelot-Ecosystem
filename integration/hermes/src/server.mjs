@@ -25,7 +25,9 @@ const TTS_CMD = process.env.HERMES_TTS_CMD || '';
 const MAX_BODY = 16 * 1024 * 1024;
 
 const script = process.env.HERMES_STT_SCRIPT
-  ? process.env.HERMES_STT_SCRIPT.split('|').map((s) => s.trim()).filter(Boolean)
+  ? process.env.HERMES_STT_SCRIPT.split('|')
+      .map((s) => s.trim())
+      .filter(Boolean)
   : DEFAULT_STT_SCRIPT;
 const fixtureStt = makeFixtureStt(script);
 
@@ -90,7 +92,8 @@ const server = http.createServer(async (req, res) => {
       const body = JSON.parse((await readBody(req)).toString('utf8'));
       const text = String(body.text ?? '').slice(0, 2000);
       if (!text) return json(res, 400, { error: 'text required' });
-      const wav = TTS_ENGINE === 'command' && TTS_CMD ? await commandTts(TTS_CMD, text) : fixtureTts(text);
+      const wav =
+        TTS_ENGINE === 'command' && TTS_CMD ? await commandTts(TTS_CMD, text) : fixtureTts(text);
       res.writeHead(200, {
         'content-type': 'audio/wav',
         'content-length': wav.length,

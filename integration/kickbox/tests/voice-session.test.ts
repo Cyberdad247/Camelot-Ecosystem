@@ -77,7 +77,9 @@ describe('Phase 2 voice guardrails', () => {
 
   it('3. low confidence -> review required, no auto-submission', async () => {
     const h = makeHarness({
-      script: [{ transcript: 'create a change request', confidence: LOW_CONFIDENCE_THRESHOLD - 0.1 }],
+      script: [
+        { transcript: 'create a change request', confidence: LOW_CONFIDENCE_THRESHOLD - 0.1 },
+      ],
     });
     await pressAndRelease(h);
     expect(h.submitted).toHaveLength(0);
@@ -88,14 +90,18 @@ describe('Phase 2 voice guardrails', () => {
   });
 
   it('4. accepted transcript -> submitted ONLY through the turn path, with audio hash', async () => {
-    const h = makeHarness({ script: [{ transcript: 'prepare a deployment review', confidence: 0.93 }] });
+    const h = makeHarness({
+      script: [{ transcript: 'prepare a deployment review', confidence: 0.93 }],
+    });
     await pressAndRelease(h);
     expect(h.submitted).toHaveLength(1);
     expect(h.submitted[0]!.transcript).toBe('prepare a deployment review');
     // Raw audio's only trace: a SHA-256 hex digest.
     expect(h.submitted[0]!.audioSha256).toMatch(/^[0-9a-f]{64}$/);
     // Deterministic mock audio -> deterministic hash across runs.
-    const h2 = makeHarness({ script: [{ transcript: 'prepare a deployment review', confidence: 0.93 }] });
+    const h2 = makeHarness({
+      script: [{ transcript: 'prepare a deployment review', confidence: 0.93 }],
+    });
     await pressAndRelease(h2);
     expect(h2.submitted[0]!.audioSha256).toBe(h.submitted[0]!.audioSha256);
   });

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from 'react';
 import ReactFlow, {
   Node,
   Edge,
@@ -9,10 +9,10 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   Connection,
-} from "reactflow";
-import "reactflow/dist/style.css";
-import { api, OracleState } from "@/lib/api";
-import { Zap, Hexagon, Database } from "lucide-react";
+} from 'reactflow';
+import 'reactflow/dist/style.css';
+import { api, OracleState } from '@/lib/api';
+import { Zap, Hexagon, Database } from 'lucide-react';
 
 // Mock Layout Logic
 const CENTER_X = 250;
@@ -32,20 +32,20 @@ export default function OracleCanvas() {
     // 1. Create Core Node (Tension / Epoch)
     const newNodes: Node[] = [
       {
-        id: "CORE",
+        id: 'CORE',
         position: { x: CENTER_X, y: CENTER_Y },
         data: { label: `EPOCH: ${data.epoch}` },
         style: {
-          background: "#a855f7",
-          color: "#fff",
-          border: "2px solid #fff",
+          background: '#a855f7',
+          color: '#fff',
+          border: '2px solid #fff',
           width: 100,
-          fontSize: "0.8rem",
-          fontWeight: "bold",
-          textAlign: "center",
-          boxShadow: "0 0 20px #a855f7",
+          fontSize: '0.8rem',
+          fontWeight: 'bold',
+          textAlign: 'center',
+          boxShadow: '0 0 20px #a855f7',
         },
-        type: "default",
+        type: 'default',
       },
     ];
 
@@ -63,23 +63,23 @@ export default function OracleCanvas() {
         position: { x, y },
         data: { label: f.name },
         style: {
-          background: "#1e293b",
-          color: "#e2e8f0",
-          border: "1px solid #06b6d4",
-          padding: "10px",
-          borderRadius: "8px",
-          minWidth: "120px",
-          textAlign: "center",
+          background: '#1e293b',
+          color: '#e2e8f0',
+          border: '1px solid #06b6d4',
+          padding: '10px',
+          borderRadius: '8px',
+          minWidth: '120px',
+          textAlign: 'center',
         },
       });
 
       // Connect to Core
       newEdges.push({
         id: `e-core-${nodeId}`,
-        source: "CORE",
+        source: 'CORE',
         target: nodeId,
         animated: true,
-        style: { stroke: "#eab308" },
+        style: { stroke: '#eab308' },
       });
     });
 
@@ -101,11 +101,8 @@ export default function OracleCanvas() {
         </h2>
         {state && (
           <div className="text-xs font-mono text-slate-300">
-            TENSION:{" "}
-            <span className="text-red-400">
-              {(state.global_tension * 100).toFixed(0)}%
-            </span>{" "}
-            <br />
+            TENSION:{' '}
+            <span className="text-red-400">{(state.global_tension * 100).toFixed(0)}%</span> <br />
             RESOURCES: {Object.keys(state.resources).length}
           </div>
         )}

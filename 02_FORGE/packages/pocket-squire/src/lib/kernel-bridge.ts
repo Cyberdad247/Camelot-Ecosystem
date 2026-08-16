@@ -1,7 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-export const KERNEL_API =
-  process.env.NEXT_PUBLIC_KERNEL_API || "http://localhost:8001";
+export const KERNEL_API = process.env.NEXT_PUBLIC_KERNEL_API || 'http://localhost:8001';
 
 /**
  * POCKET SQUIRE KERNEL BRIDGE
@@ -11,7 +10,7 @@ export const KERNEL_API =
 
 // Simple typed interface for the Kernel Response
 export interface KernelResponse<T = any> {
-  status: "SUCCESS" | "ERROR";
+  status: 'SUCCESS' | 'ERROR';
   data?: T;
   msg?: string;
 }
@@ -31,28 +30,28 @@ export async function checkKernelHealth(): Promise<boolean> {
 // 2. Dispatch Command (A2A Protocol Wrapper)
 export async function dispatchCommand(
   intent: string,
-  agentId: string = "MERLIN",
+  agentId: string = 'MERLIN',
 ): Promise<KernelResponse> {
   try {
     const payload = {
       agent_id: agentId,
       intent: intent,
-      source: "POCKET_SQUIRE_MOBILE",
+      source: 'POCKET_SQUIRE_MOBILE',
     };
 
     const res = await fetch(`${KERNEL_API}/agent/dispatch`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "x-camelot-token": "merlin-v100-dev", // Shared Secret
+        'Content-Type': 'application/json',
+        'x-camelot-token': 'merlin-v100-dev', // Shared Secret
       },
       body: JSON.stringify(payload),
     });
 
-    if (!res.ok) throw new Error("Kernel Rejected Command");
+    if (!res.ok) throw new Error('Kernel Rejected Command');
     return await res.json();
   } catch (e: any) {
-    return { status: "ERROR", msg: e.message || "Network Error" };
+    return { status: 'ERROR', msg: e.message || 'Network Error' };
   }
 }
 

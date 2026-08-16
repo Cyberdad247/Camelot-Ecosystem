@@ -3,13 +3,24 @@
 import { z } from 'zod';
 
 export const ActorRoleSchema = z.enum([
-  'operator', 'anya', 'merlin', 'hiveide', 'nano_knight',
-  'sentinel', 'gideon', 'boris', 'herald', 'system',
+  'operator',
+  'anya',
+  'merlin',
+  'hiveide',
+  'nano_knight',
+  'sentinel',
+  'gideon',
+  'boris',
+  'herald',
+  'system',
 ]);
 export type ActorRole = z.infer<typeof ActorRoleSchema>;
 
 export const EvidenceIntegritySchema = z.enum([
-  'verified', 'pending_anchor', 'unavailable', 'integrity_failed',
+  'verified',
+  'pending_anchor',
+  'unavailable',
+  'integrity_failed',
 ]);
 export type EvidenceIntegrity = z.infer<typeof EvidenceIntegritySchema>;
 
@@ -85,12 +96,16 @@ export const TestRunResultSchema = z.object({
   status: z.enum(['passed', 'failed', 'cancelled', 'timed_out']),
   startedAt: z.string().min(1),
   completedAt: z.string().optional(),
-  suites: z.array(z.object({
-    name: z.string().min(1),
-    status: z.enum(['passed', 'failed', 'skipped']),
-    durationMs: z.number().nonnegative(),
-    artifactRef: z.string().optional(),
-  })).default([]),
+  suites: z
+    .array(
+      z.object({
+        name: z.string().min(1),
+        status: z.enum(['passed', 'failed', 'skipped']),
+        durationMs: z.number().nonnegative(),
+        artifactRef: z.string().optional(),
+      }),
+    )
+    .default([]),
   summary: z.object({
     total: z.number().int().nonnegative(),
     passed: z.number().int().nonnegative(),

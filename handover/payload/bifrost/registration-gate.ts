@@ -34,22 +34,46 @@ export function runRegistrationGate(req: RegistrationRequest, score: ScoringFn):
 
   // 1. Registration must pass before scoring.
   if (!req.identityValid) {
-    return { granted: false, finalBand: 'block', stage: 'registration', scoringInvoked: false, notes: ['identity validation failed'] };
+    return {
+      granted: false,
+      finalBand: 'block',
+      stage: 'registration',
+      scoringInvoked: false,
+      notes: ['identity validation failed'],
+    };
   }
 
   // 2. Sidecar health must be green or degraded-but-allowed.
   const sidecar = evaluateSidecar(req.sidecar);
   if (sidecar.scoring === 'no_grant') {
-    return { granted: false, finalBand: 'block', stage: 'sidecar', scoringInvoked: false, notes: ['sidecar failed: no scoring, no session grant'] };
+    return {
+      granted: false,
+      finalBand: 'block',
+      stage: 'sidecar',
+      scoringInvoked: false,
+      notes: ['sidecar failed: no scoring, no session grant'],
+    };
   }
   if (sidecar.blockNewGrants) {
-    return { granted: false, finalBand: 'block', stage: 'sidecar', scoringInvoked: false, notes: ['route lost: new grants blocked, node degraded'] };
+    return {
+      granted: false,
+      finalBand: 'block',
+      stage: 'sidecar',
+      scoringInvoked: false,
+      notes: ['route lost: new grants blocked, node degraded'],
+    };
   }
   if (sidecar.scoring === 'review_only') notes.push('sidecar degraded: review mode');
 
   // 3. Preflight validation must succeed before scoring is called.
   if (!req.schemaValid) {
-    return { granted: false, finalBand: 'block', stage: 'preflight', scoringInvoked: false, notes: ['schema validation failed'] };
+    return {
+      granted: false,
+      finalBand: 'block',
+      stage: 'preflight',
+      scoringInvoked: false,
+      notes: ['schema validation failed'],
+    };
   }
 
   // 4–5. Scoring execution + FFI outcome (conservative degradation on failure).
@@ -73,6 +97,6 @@ export function runRegistrationGate(req: RegistrationRequest, score: ScoringFn):
     finalBand,
     stage: granted ? 'granted' : 'reconciliation',
     scoringInvoked: true,
-    notes: [...notes, `reconciled band: ${finalBand}`]
+    notes: [...notes, `reconciled band: ${finalBand}`],
   };
 }

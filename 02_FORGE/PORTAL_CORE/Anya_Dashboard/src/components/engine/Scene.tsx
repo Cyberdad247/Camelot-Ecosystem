@@ -31,7 +31,11 @@ export default function QuantumScene() {
               <RigidBody key={obj.id} position={obj.position} colliders="cuboid">
                 <mesh castShadow>
                   <boxGeometry />
-                  <meshStandardMaterial color={obj.color} emissive={obj.color} emissiveIntensity={1} />
+                  <meshStandardMaterial
+                    color={obj.color}
+                    emissive={obj.color}
+                    emissiveIntensity={1}
+                  />
                 </mesh>
               </RigidBody>
             ))}

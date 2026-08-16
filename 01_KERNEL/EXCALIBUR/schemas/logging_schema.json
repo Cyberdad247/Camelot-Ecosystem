@@ -1,10 +1,10 @@
 ﻿{
-    "action":  "String (Verb)",
-    "timestamp":  "ISO8601",
-    "context":  "Dictionary (Metadata)",
-    "status":  "Enum (SUCCESS, FAILURE, PENDING)",
-    "target":  "String (Object)",
-    "event_id":  "UUID",
-    "actor":  "String (Agent/User)",
-    "hash":  "SHA256 (Immutable)"
+  "action": "String (Verb)",
+  "timestamp": "ISO8601",
+  "context": "Dictionary (Metadata)",
+  "status": "Enum (SUCCESS, FAILURE, PENDING)",
+  "target": "String (Object)",
+  "event_id": "UUID",
+  "actor": "String (Agent/User)",
+  "hash": "SHA256 (Immutable)"
 }

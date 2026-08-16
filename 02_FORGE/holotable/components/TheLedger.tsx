@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
-import { api } from "@/lib/api";
-import { Terminal, AlertTriangle, CheckCircle } from "lucide-react";
+import { useEffect, useState, useRef } from 'react';
+import { api } from '@/lib/api';
+import { Terminal, AlertTriangle, CheckCircle } from 'lucide-react';
 
 export default function TheLedger() {
   const [lines, setLines] = useState<string[]>([]);
@@ -24,18 +24,12 @@ export default function TheLedger() {
   }, [lines]);
 
   const getLinestyle = (line: string) => {
-    if (
-      line.includes("ERROR") ||
-      line.includes("FATAL") ||
-      line.includes("CAUSALITY BREACH")
-    )
-      return "text-red-500 font-bold";
-    if (line.includes("WARN") || line.includes("Omega_CONFIRM"))
-      return "text-yellow-500";
-    if (line.includes("SUCCESS") || line.includes("RADIANT"))
-      return "text-green-500";
-    if (line.includes("Omega_")) return "text-purple-400"; // Oracle Command
-    return "text-slate-400";
+    if (line.includes('ERROR') || line.includes('FATAL') || line.includes('CAUSALITY BREACH'))
+      return 'text-red-500 font-bold';
+    if (line.includes('WARN') || line.includes('Omega_CONFIRM')) return 'text-yellow-500';
+    if (line.includes('SUCCESS') || line.includes('RADIANT')) return 'text-green-500';
+    if (line.includes('Omega_')) return 'text-purple-400'; // Oracle Command
+    return 'text-slate-400';
   };
 
   return (
@@ -53,9 +47,7 @@ export default function TheLedger() {
             {line}
           </div>
         ))}
-        {lines.length === 0 && (
-          <div className="text-slate-600">Initializing Uplink...</div>
-        )}
+        {lines.length === 0 && <div className="text-slate-600">Initializing Uplink...</div>}
       </div>
     </div>
   );

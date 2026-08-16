@@ -38,15 +38,16 @@ export const SENTINEL_UNAVAILABLE = {
   lastVerifiedTimestamp: null,
 } as const;
 
-export function verifyManifest(
-  manifest: EffectManifest,
-  ctx: VerifyContext,
-): VerifyResult {
+export function verifyManifest(manifest: EffectManifest, ctx: VerifyContext): VerifyResult {
   const reasons: string[] = [];
 
   const parsed = EffectManifestSchema.safeParse(manifest);
   if (!parsed.success) {
-    return { approved: false, reasons: ['manifest_schema_invalid'], manifestId: manifest.manifestId };
+    return {
+      approved: false,
+      reasons: ['manifest_schema_invalid'],
+      manifestId: manifest.manifestId,
+    };
   }
 
   if (new Date(manifest.expiresAt).getTime() <= ctx.now().getTime()) {

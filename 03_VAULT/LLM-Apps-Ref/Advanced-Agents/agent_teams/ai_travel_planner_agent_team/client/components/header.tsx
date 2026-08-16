@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { authClient } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
-import { Luggage } from "lucide-react";
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { Luggage } from 'lucide-react';
 
 export default function Header() {
   const router = useRouter();
@@ -14,11 +14,11 @@ export default function Header() {
   async function handleLogout() {
     try {
       await authClient.signOut();
-      toast.success("Logged out successfully");
-      router.push("/");
+      toast.success('Logged out successfully');
+      router.push('/');
     } catch (error) {
-      toast.error("Failed to log out");
-      console.error("Logout error:", error);
+      toast.error('Failed to log out');
+      console.error('Logout error:', error);
     }
   }
 
@@ -49,9 +49,7 @@ export default function Header() {
               <div className="flex items-center gap-4">
                 <div className="text-sm">
                   <span className="text-muted-foreground">Welcome, </span>
-                  <span className="font-medium">
-                    {session.user.name || session.user.email}
-                  </span>
+                  <span className="font-medium">{session.user.name || session.user.email}</span>
                 </div>
                 <Button variant="outline" size="sm" onClick={handleLogout}>
                   Logout
@@ -65,9 +63,7 @@ export default function Header() {
                   </Button>
                 </Link>
                 <Link href="/plan">
-                  <Button className="bg-primary hover:bg-primary/90">
-                    Get Started
-                  </Button>
+                  <Button className="bg-primary hover:bg-primary/90">Get Started</Button>
                 </Link>
               </div>
             )}
