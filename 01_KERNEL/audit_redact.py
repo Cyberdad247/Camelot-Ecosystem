@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 # SPDX-License-Identifier: MIT
 
 # -*- coding: utf-8 -*-
