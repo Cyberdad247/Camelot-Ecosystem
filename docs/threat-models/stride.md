@@ -1,6 +1,8 @@
 # Camelot-OS Threat Model (STRIDE)
 
-**Authoritative companion:** `Camelot-OS SADD + LLDD v1.2.md` (this directory's parent).
+*Adapted copy (2026-08-16): this file describes **this repository** (`Cyberdad247/Camelot-Ecosystem`). The canonical copy lives in the package repo `Cyberdad247/CAMELOT_OS`. The §16 fixture-map wording differs here: this repo ships the 4 operator-console fixtures; the full §22.1 set lives in the package repo.*
+
+**Authoritative companion:** `Camelot-OS SADD + LLDD v1.2.md` (canonical copy in the package repo `Cyberdad247/CAMELOT_OS`).
 **Version:** v1.2 (delta on v1.1 — adds two-person rule, trust bands, witness, mobile epoch cache, cache-namespace HMAC, receipt chain canonicality).
 **Scope:** All six planes of Camelot-OS (Experience, Control, Safety, Cloudbrain Execution, Evidence Data, Evidence Audit) and the active/standby Hub twin.
 **Out of scope:** Underlying hypervisor/container escapes, physical hardware attacks, language-runtime bugs in third-party libraries (handled at supply-chain level, not in this document).
@@ -310,7 +312,7 @@ Cross-link audit:
 
 ## 16. Fixture implementation map (Appendix F)
 
-The fixture names in §5–§13 are the §22.1 catalog. The live Camelot-OS repository ships every one of them as a real file under `harness/fixtures/` (canonical map: `docs/architecture/repo-alignment.md` §3, SADD Appendix F). The table below maps the STRIDE rows to the real harness files — all 25 §22.1 fixtures plus the 4 operator-console fixtures exist on disk (divergence D-3 closed, 2026-08-15).
+The fixture names in §5–§13 are the §22.1 catalog. **This repository** ships the 4 operator-console fixtures below under `harness/fixtures/`; the remaining 21 §22.1 fixtures are ported in the package repo (`Cyberdad247/CAMELOT_OS`), where divergence D-3 closed (2026-08-15; canonical map: `docs/architecture/repo-alignment.md` §3, SADD Appendix F).
 
 | STRIDE row(s) exercised | Real harness fixture | What the fixture proves |
 |-------------------------|----------------------|--------------------------|
@@ -319,7 +321,7 @@ The fixture names in §5–§13 are the §22.1 catalog. The live Camelot-OS repo
 | S-4, T-1, I-8 | `harness/fixtures/operator-console-integrity-failure/` | Snapshot carries `integrity: integrity_failed` with a forged receipt hash: alert raised, approval disabled, record preserved (AC17–AC18) |
 | I-8, D-10 | `harness/fixtures/operator-console-readonly-audit/` | Deterministic read-only audit task: six panels render real state, no fabricated content, no-write receipt (AC19) |
 
-**All §22.1 fixtures ported (2026-08-15).** The other 21 §22.1 fixtures (chain-tamper, epoch-stale, mobile-epoch-window, cross-policy-cache, tier-quorum, …) now have real READMEs under `harness/fixtures/`; each cites its production gate and SADD section. The full mapping and divergence register live in `docs/architecture/repo-alignment.md` §3 + §9.
+**All §22.1 fixtures ported in the package repo (2026-08-15).** The 21 non-operator-console fixtures (chain-tamper, epoch-stale, mobile-epoch-window, cross-policy-cache, tier-quorum, …) carry READMEs citing production gate + SADD § under the package repo's `harness/fixtures/`. This repository's `harness/fixtures/` tracks the 4 operator-console fixtures above, and the harness gate that exercises them lives here too (`docs/architecture/harness-gate.md`). The full mapping and divergence register live in `docs/architecture/repo-alignment.md` §3 + §9.
 
 ---
 
