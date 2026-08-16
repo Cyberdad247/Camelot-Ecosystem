@@ -4,6 +4,7 @@
 **Version:** v1.2 (delta on v1.1 — adds two-person rule, trust bands, witness, mobile epoch cache, cache-namespace HMAC, receipt chain canonicality).
 **Scope:** All six planes of Camelot-OS (Experience, Control, Safety, Cloudbrain Execution, Evidence Data, Evidence Audit) and the active/standby Hub twin.
 **Out of scope:** Underlying hypervisor/container escapes, physical hardware attacks, language-runtime bugs in third-party libraries (handled at supply-chain level, not in this document).
+**Implementation map:** fixture rows below cite the §22.1 catalog names. The live repository mapping (real `harness/fixtures/` files → STRIDE rows) lives in `docs/architecture/repo-alignment.md` §3 (SADD Appendix F) — see §16.
 
 ## 1. Methodology
 
@@ -141,7 +142,7 @@ Each row is iterated through STRIDE in §5–§10 below. Where an attack is gene
 | T-7 | Policy bundle tampering (downgrade attack) | Sentinel | Policy versioning → new epoch on bump; old leases reject | `stale_authority_epoch` | `stale_epoch_rejection_tested`, `policy_outside_models` |
 | T-8 | Cloudbrain memory tampering across tenants | Redis, Open Notebook | Cache HMAC scoped to tenant+policy; cross-policy reads unreachable (§15.6); NotebookLM always quarantine | `untrusted_memory_promotion`, `cross_policy_namespace_cache_hit` | `memory_promotion_verified`, `cache_namespace_verified` |
 | T-9 | Auth chain tampering (Boris test report) | Boris, Scribe | Boris reports are signed and chain-linked | `unauthorized_persona_capability` (variant) | `receipt_chain_verified` |
-| T-10 | Ledger anchor tampering | Ledger anchor | Anchor service writes to immutable log operator controls | (covered by ledger_anchor_verified CI) | `ledger_anchor_verified` |
+| T-10 | Ledger anchor tampering | Ledger anchor | Anchor service writes to immutable log operator controls; anchor records are ed25519-signed (pinned key) so tampering is detectable from the record alone, without re-deriving the chain (§11.3) | `harness/contracts/verify_receipt_chain.py` STEP 5 (signed anchors, 5-case T-10/S-4 battery, dual chain+signature checks) + `--replay` re-verifying committed `anchor_*.json` and `golden-anchor-0000.json` from disk | `ledger_anchor_verified` |
 
 ## 7. Repudiation (R)
 
@@ -305,6 +306,20 @@ Cross-link audit:
 - Each row in §5–§10 cites at least one SADD § and at least one fixture and at least one production gate.
 - The §13 matrix is the canonical flat view used by assurance/security review.
 - The §14 register is reviewed quarterly by the operational risk owner.
+- §16 maps the §22.1 fixture names to the real `harness/fixtures/` files in the live repository.
+
+## 16. Fixture implementation map (Appendix F)
+
+The fixture names in §5–§13 are the §22.1 catalog. The live Camelot-OS repository ships every one of them as a real file under `harness/fixtures/` (canonical map: `docs/architecture/repo-alignment.md` §3, SADD Appendix F). The table below maps the STRIDE rows to the real harness files — all 25 §22.1 fixtures plus the 4 operator-console fixtures exist on disk (divergence D-3 closed, 2026-08-15).
+
+| STRIDE row(s) exercised | Real harness fixture | What the fixture proves |
+|-------------------------|----------------------|--------------------------|
+| E-6, R-1 | `harness/fixtures/operator-console-approval/` | Approval-required task: approve issues a lease, deny records a denial; controls enabled only with valid operator session + evidence gates green (AC10–AC13) |
+| T-3, R-4, D-12 | `harness/fixtures/operator-console-cancellation/` | Active task cancelled mid-run: cancellation receipt, lease revoked, workers stopped, VFS workspace cleaned (AC20) |
+| S-4, T-1, I-8 | `harness/fixtures/operator-console-integrity-failure/` | Snapshot carries `integrity: integrity_failed` with a forged receipt hash: alert raised, approval disabled, record preserved (AC17–AC18) |
+| I-8, D-10 | `harness/fixtures/operator-console-readonly-audit/` | Deterministic read-only audit task: six panels render real state, no fabricated content, no-write receipt (AC19) |
+
+**All §22.1 fixtures ported (2026-08-15).** The other 21 §22.1 fixtures (chain-tamper, epoch-stale, mobile-epoch-window, cross-policy-cache, tier-quorum, …) now have real READMEs under `harness/fixtures/`; each cites its production gate and SADD section. The full mapping and divergence register live in `docs/architecture/repo-alignment.md` §3 + §9.
 
 ---
 
