@@ -273,3 +273,6 @@ test_browser_upload_failure.html
 03_VAULT/Reference_Architectures/skills/nemanjadotcom-skills
 04_KINETIC/tiny-tts
 camelot-fable-25
+
+# Harness golden set: pinned TEST-ONLY public key is committed by design (receipt-chain replay)
+!harness/golden-receipts/sentinel_test_public.pem
