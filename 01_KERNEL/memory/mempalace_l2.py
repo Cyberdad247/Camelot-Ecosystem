@@ -4,11 +4,10 @@
 
 import hashlib
 import hmac
+import logging
 import os
-import sys
 from pathlib import Path
 from typing import Any, Optional
-import logging
 
 logger = logging.getLogger("MemPalaceL2")
 

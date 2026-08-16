@@ -22,6 +22,7 @@ from typing import (
     Dict,
     Generic,
     List,
+    Optional,
     Tuple,
     TypeVar,
     Union,
@@ -43,7 +44,7 @@ PriorityT = TypeVar("PriorityT")
 P = TypeVar("P")
 
 # ------ Hyperscalar Context Management ------ #
-deep_crawl_ctx = ContextVar("deep_crawl_stack", default=deque())
+deep_crawl_ctx = ContextVar("deep_crawl_stack", default=None)
 
 
 # ------ Algebraic Crawler Monoid ------ #
@@ -173,7 +174,7 @@ class DeepCrawlDecorator:
     def __call__(self, original_arun: Callable) -> Callable:
         @wraps(original_arun)
         async def quantum_arun(url: str, config: CrawlerRunConfig = None, **kwargs):
-            stack = deep_crawl_ctx.get()
+            stack = deep_crawl_ctx.get() or deque()
             if config and config.deep_crawl_strategy and not stack:
                 stack.append(self.crawler)
                 try:
@@ -312,12 +313,12 @@ class BFSDeepCrawlStrategy(DeepCrawlStrategy):
     def __init__(
         self,
         max_depth: int,
-        filter_chain: FilterChain = FilterChain(),
+        filter_chain: Optional[FilterChain] = None,
         priority_fn: Callable[[str], Awaitable[float]] = lambda url: 1.0,
         logger: logging.Logger = None,
     ):
         self.max_depth = max_depth
-        self.filter_chain = filter_chain
+        self.filter_chain = filter_chain or FilterChain()
         self.priority_fn = priority_fn
         self.stats = TraversalStats()
         self._cancel = asyncio.Event()
@@ -364,15 +365,8 @@ class BFSDeepCrawlStrategy(DeepCrawlStrategy):
                                 ctx.visited.add(link)
                                 ctx.depths[link] = depth + 1
 
-    @lru_cache(maxsize=65536)
-    async def validate_url(self, url: str) -> bool:
-        """Memoized URL validation with λ-calculus purity"""
-        try:
-            parsed = urlparse(url)
-            return parsed.scheme in {"http", "https"} and "." in parsed.netloc and await self.filter_chain.apply(url)
-        except Exception:
-            return False
-
+    async def validate_url(self, url):
+        return await _BFSDeepCrawlStrategy_validate_url_cached(self, url)
     async def link_hypercube(self, result: CrawlResult) -> AsyncGenerator[str, None]:
         """Hilbert-ordered link generation with O(1) yield latency"""
         links = (link["href"] for link in result.links.get("internal", []))
@@ -423,3 +417,14 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
+
+@lru_cache(maxsize=65536)
+async def _BFSDeepCrawlStrategy_validate_url_cached(self, url):
+    """Memoized URL validation with λ-calculus purity"""
+    try:
+        parsed = urlparse(url)
+        return parsed.scheme in {"http", "https"} and "." in parsed.netloc and await self.filter_chain.apply(url)
+    except Exception:
+        return False
+

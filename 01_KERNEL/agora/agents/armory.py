@@ -116,7 +116,7 @@ def web_search(query: str):
         results = DDGS().text(query, max_results=3)
         summary = "\\n".join([f"- {r['title']}: {r['href']}" for r in results])
         return f"Found Results:\\n{summary}"
-    except:
+    except Exception:
         return "Search failed. Simulated data retrieved."
 
 

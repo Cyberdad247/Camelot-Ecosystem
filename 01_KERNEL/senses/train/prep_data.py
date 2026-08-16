@@ -35,7 +35,7 @@ def extract_training_data():
                             "output": "Action executed successfully and logged to Provenance Ledger.",
                         }
                         dataset.append(example)
-                except:
+                except Exception:
                     continue
 
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:

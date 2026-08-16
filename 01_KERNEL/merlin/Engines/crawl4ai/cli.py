@@ -125,10 +125,10 @@ def parse_key_values(ctx, param, value) -> Dict[str, Any]:
                 try:
                     v = json.loads(v)
                 except json.JSONDecodeError:
-                    raise click.BadParameter(f"Invalid JSON object: {v}")
+                    raise click.BadParameter(f"Invalid JSON object: {v}") from None
             result[k.strip()] = v
         except ValueError:
-            raise click.BadParameter(f"Invalid key=value pair: {pair}")
+            raise click.BadParameter(f"Invalid key=value pair: {pair}") from None
     return result
 
 
@@ -142,7 +142,7 @@ def load_config_file(path: Optional[str]) -> dict:
                 return yaml.safe_load(f)
             return json.load(f)
     except Exception as e:
-        raise click.BadParameter(f"Error loading config file {path}: {str(e)}")
+        raise click.BadParameter(f"Error loading config file {path}: {str(e)}") from e
 
 
 def load_schema_file(path: Optional[str]) -> dict:
@@ -162,7 +162,7 @@ async def run_crawler(url: str, browser_cfg: BrowserConfig, crawler_cfg: Crawler
             result = await crawler.arun(url=url, config=crawler_cfg)
             return result
         except Exception as e:
-            raise click.ClickException(f"Crawling failed: {str(e)}")
+            raise click.ClickException(f"Crawling failed: {str(e)}") from e
 
 
 def show_examples():
@@ -1261,7 +1261,7 @@ Always return valid, properly formatted JSON."""
                     f.write(result.markdown.fit_markdown)
 
     except Exception as e:
-        raise click.ClickException(str(e))
+        raise click.ClickException(str(e)) from e
 
 
 @cli.command("examples")

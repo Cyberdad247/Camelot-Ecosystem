@@ -88,7 +88,7 @@ async def repo_create(table: str, data: Dict[str, Any]) -> Dict[str, Any]:
             return parse_record_ids(await connection.insert(table, data))
     except Exception as e:
         logger.exception(e)
-        raise RuntimeError("Failed to create record")
+        raise RuntimeError("Failed to create record") from e
 
 
 async def repo_relate(
@@ -138,7 +138,7 @@ async def repo_update(table: str, id: str, data: Dict[str, Any]) -> List[Dict[st
         #     return [_return_data(item) for item in result]
         return parse_record_ids(result)
     except Exception as e:
-        raise RuntimeError(f"Failed to update record: {str(e)}")
+        raise RuntimeError(f"Failed to update record: {str(e)}") from e
 
 
 async def repo_get_news_by_jota_id(jota_id: str) -> Dict[str, Any]:
@@ -150,7 +150,7 @@ async def repo_get_news_by_jota_id(jota_id: str) -> Dict[str, Any]:
         return parse_record_ids(results)
     except Exception as e:
         logger.exception(e)
-        raise RuntimeError(f"Failed to fetch record: {str(e)}")
+        raise RuntimeError(f"Failed to fetch record: {str(e)}") from e
 
 
 async def repo_delete(record_id: Union[str, RecordID]):
@@ -161,7 +161,7 @@ async def repo_delete(record_id: Union[str, RecordID]):
             return await connection.delete(ensure_record_id(record_id))
     except Exception as e:
         logger.exception(e)
-        raise RuntimeError(f"Failed to delete record: {str(e)}")
+        raise RuntimeError(f"Failed to delete record: {str(e)}") from e
 
 
 async def repo_insert(table: str, data: List[Dict[str, Any]], ignore_duplicates: bool = False) -> List[Dict[str, Any]]:
@@ -173,4 +173,4 @@ async def repo_insert(table: str, data: List[Dict[str, Any]], ignore_duplicates:
         if ignore_duplicates and "already contains" in str(e):
             return []
         logger.exception(e)
-        raise RuntimeError("Failed to create record")
+        raise RuntimeError("Failed to create record") from e

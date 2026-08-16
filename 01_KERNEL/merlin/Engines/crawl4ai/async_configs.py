@@ -837,8 +837,8 @@ class CrawlerRunConfig:
         # Content Processing Parameters
         word_count_threshold: int = MIN_WORD_THRESHOLD,
         extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
-        markdown_generator: MarkdownGenerationStrategy = DefaultMarkdownGenerator(),
+        chunking_strategy: ChunkingStrategy = None,
+        markdown_generator: MarkdownGenerationStrategy = None,
         only_text: bool = False,
         css_selector: str = None,
         target_elements: List[str] = None,
@@ -1032,9 +1032,11 @@ class CrawlerRunConfig:
         if self.chunking_strategy is not None and not isinstance(self.chunking_strategy, ChunkingStrategy):
             raise ValueError("chunking_strategy must be an instance of ChunkingStrategy")
 
-        # Set default chunking strategy if None
+        # Set default strategies if None
         if self.chunking_strategy is None:
             self.chunking_strategy = RegexChunking()
+        if self.markdown_generator is None:
+            self.markdown_generator = DefaultMarkdownGenerator()
 
         # Deep Crawl Parameters
         self.deep_crawl_strategy = deep_crawl_strategy

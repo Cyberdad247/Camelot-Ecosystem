@@ -42,7 +42,7 @@ async def get_notes(notebook_id: Optional[str] = Query(None, description="Filter
         raise
     except Exception as e:
         logger.error(f"Error fetching notes: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching notes: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching notes: {str(e)}") from e
 
 
 @router.post("/notes", response_model=NoteResponse)
@@ -94,10 +94,10 @@ async def create_note(note_data: NoteCreate):
     except HTTPException:
         raise
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error creating note: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error creating note: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating note: {str(e)}") from e
 
 
 @router.get("/notes/{note_id}", response_model=NoteResponse)
@@ -120,7 +120,7 @@ async def get_note(note_id: str):
         raise
     except Exception as e:
         logger.error(f"Error fetching note {note_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching note: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching note: {str(e)}") from e
 
 
 @router.put("/notes/{note_id}", response_model=NoteResponse)
@@ -155,10 +155,10 @@ async def update_note(note_id: str, note_update: NoteUpdate):
     except HTTPException:
         raise
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error updating note {note_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating note: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating note: {str(e)}") from e
 
 
 @router.delete("/notes/{note_id}")
@@ -176,4 +176,4 @@ async def delete_note(note_id: str):
         raise
     except Exception as e:
         logger.error(f"Error deleting note {note_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error deleting note: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error deleting note: {str(e)}") from e

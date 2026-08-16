@@ -19,10 +19,8 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import socket
 import sys
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -110,7 +108,7 @@ def main() -> int:
     report = run_orchestrator(args.mode)
 
     print("\n" + "=" * 70)
-    print(f"✅ MERLIN_Ω DUAL-MODE DYNAMIC SYSTEM READY")
+    print("✅ MERLIN_Ω DUAL-MODE DYNAMIC SYSTEM READY")
     print(f"   Active Mode: {report['mode']}")
     print(f"   Readiness:   {report['readiness']}")
     print(f"   Probes:      CLIProxy(8080)={report['probes']['cliproxy_8080']} | Ollama(11434)={report['probes']['ollama_11434']} | Bifrost(4433)={report['probes']['bifrost_4433']}")

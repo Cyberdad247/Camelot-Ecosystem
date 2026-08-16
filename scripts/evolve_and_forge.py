@@ -25,10 +25,10 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from control_plane.hyper_evolve import promote_mutation
-from control_plane.runic_router import route_rune
+from control_plane.hyper_evolve import promote_mutation  # noqa: E402
+from control_plane.runic_router import route_rune  # noqa: E402
 
-from control_plane.worker import QueueTask, _call_llm_raw
+from control_plane.worker import QueueTask, _call_llm_raw  # noqa: E402
 
 
 def run_cmd(cmd: list[str], cwd: Path = REPO_ROOT, capture: bool = True) -> tuple[int, str, str]:

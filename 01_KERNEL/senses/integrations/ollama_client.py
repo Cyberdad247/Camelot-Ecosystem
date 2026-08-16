@@ -41,7 +41,7 @@ class OllamaClient:
         # API key is optional for local Ollama
         try:
             self.api_key = self.vault.get("OLLAMA_API_KEY")
-        except:
+        except Exception:
             self.api_key = None
     
     def _get_headers(self) -> Dict[str, str]:

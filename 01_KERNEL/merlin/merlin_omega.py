@@ -8,6 +8,7 @@ import subprocess
 import sys
 import time
 from datetime import datetime
+from pathlib import Path
 from typing import Dict, List, Optional
 
 # Add KERNEL to path for telemetry import

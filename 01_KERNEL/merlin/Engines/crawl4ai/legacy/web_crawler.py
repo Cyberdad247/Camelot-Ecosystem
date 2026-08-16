@@ -10,14 +10,14 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import List
 
-from .chunking_strategy import *
-from .config import *
+from ..chunking_strategy import ChunkingStrategy, RegexChunking
+from ..config import DEFAULT_PROVIDER, IMAGE_DESCRIPTION_MIN_WORD_THRESHOLD, MIN_WORD_THRESHOLD
+from ..extraction_strategy import ExtractionStrategy, NoExtractionStrategy
+from ..utils import InvalidCSSSelectorError, format_html, sanitize_input_encode
 from .content_scraping_strategy import WebScrapingStrategy
-from .crawler_strategy import *
+from .crawler_strategy import CrawlerStrategy, LocalSeleniumCrawlerStrategy
 from .database import cache_url, get_cached_url, init_db
-from .extraction_strategy import *
 from .models import CrawlResult, UrlModel
-from .utils import *
 
 warnings.filterwarnings(
     "ignore",
@@ -63,7 +63,7 @@ class WebCrawler:
         screenshot: bool = False,
         use_cached_html: bool = False,
         extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
+        chunking_strategy: ChunkingStrategy = None,
         **kwargs,
     ) -> CrawlResult:
         return self.run(
@@ -89,7 +89,7 @@ class WebCrawler:
         css_selector: str = None,
         screenshot: bool = False,
         extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
+        chunking_strategy: ChunkingStrategy = None,
         **kwargs,
     ) -> List[CrawlResult]:
         extraction_strategy = extraction_strategy or NoExtractionStrategy()
@@ -122,7 +122,7 @@ class WebCrawler:
         url: str,
         word_count_threshold=MIN_WORD_THRESHOLD,
         extraction_strategy: ExtractionStrategy = None,
-        chunking_strategy: ChunkingStrategy = RegexChunking(),
+        chunking_strategy: ChunkingStrategy = None,
         bypass_cache: bool = False,
         css_selector: str = None,
         screenshot: bool = False,
@@ -135,6 +135,7 @@ class WebCrawler:
             extraction_strategy.verbose = verbose
             if not isinstance(extraction_strategy, ExtractionStrategy):
                 raise ValueError("Unsupported extraction strategy")
+            chunking_strategy = chunking_strategy or RegexChunking()
             if not isinstance(chunking_strategy, ChunkingStrategy):
                 raise ValueError("Unsupported chunking strategy")
 
@@ -233,7 +234,7 @@ class WebCrawler:
             if result is None:
                 raise ValueError(f"Failed to extract content from the website: {url}")
         except InvalidCSSSelectorError as e:
-            raise ValueError(str(e))
+            raise ValueError(str(e)) from e
 
         cleaned_html = sanitize_input_encode(result.get("cleaned_html", ""))
         markdown = sanitize_input_encode(result.get("markdown", ""))

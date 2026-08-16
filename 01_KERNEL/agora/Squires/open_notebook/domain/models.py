@@ -73,7 +73,7 @@ class ModelManager:
         try:
             model: Model = await Model.get(model_id)
         except Exception:
-            raise ValueError(f"Model with ID {model_id} not found")
+            raise ValueError(f"Model with ID {model_id} not found") from None
 
         if not model.type or model.type not in [
             "language",

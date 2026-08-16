@@ -5,6 +5,8 @@
 import importlib.util
 from pathlib import Path
 
+import pytest
+
 
 @pytest.fixture
 def bridge_client():
@@ -18,7 +20,7 @@ def bridge_client():
     return bridge.OuroborosClient()
 
 def test_kernel_ouroboros_handshake(bridge_client):
-    assert bridge_client.health_check() == True
+    assert bridge_client.health_check() is True
 
 def test_omega_patch_capabilities(bridge_client):
     status = bridge_client.get_status()

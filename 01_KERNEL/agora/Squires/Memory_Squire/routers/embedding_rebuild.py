@@ -110,7 +110,7 @@ async def start_rebuild(request: RebuildRequest):
     except Exception as e:
         logger.error(f"Failed to start rebuild: {e}")
         logger.exception(e)
-        raise HTTPException(status_code=500, detail=f"Failed to start rebuild operation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to start rebuild operation: {str(e)}") from e
 
 
 @router.get("/rebuild/{command_id}/status", response_model=RebuildStatusResponse)
@@ -176,4 +176,4 @@ async def get_rebuild_status(command_id: str):
     except Exception as e:
         logger.error(f"Failed to get rebuild status: {e}")
         logger.exception(e)
-        raise HTTPException(status_code=500, detail=f"Failed to get rebuild status: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to get rebuild status: {str(e)}") from e

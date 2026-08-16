@@ -222,8 +222,8 @@ try:
     detail = ""
     if ollama_bin:
         out = subprocess.run([ollama_bin, "list"], capture_output=True, text=True, timeout=10)
-        lines = [l for l in out.stdout.splitlines() if l.strip()]
-        model_lines = [l for l in lines if not l.lstrip().startswith("NAME")]
+        lines = [ln for ln in out.stdout.splitlines() if ln.strip()]
+        model_lines = [ln for ln in lines if not ln.lstrip().startswith("NAME")]
         model_count = len(model_lines)
         detail = f"{model_count} models"
         if out.returncode != 0 and out.stderr.strip():

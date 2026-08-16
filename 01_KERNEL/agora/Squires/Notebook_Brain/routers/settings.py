@@ -24,7 +24,7 @@ async def get_settings():
         )
     except Exception as e:
         logger.error(f"Error fetching settings: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching settings: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching settings: {str(e)}") from e
 
 
 @router.put("/settings", response_model=SettingsResponse)
@@ -72,7 +72,7 @@ async def update_settings(settings_update: SettingsUpdate):
     except HTTPException:
         raise
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error updating settings: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating settings: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating settings: {str(e)}") from e

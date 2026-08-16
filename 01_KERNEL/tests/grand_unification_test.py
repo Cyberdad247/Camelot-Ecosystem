@@ -1,11 +1,12 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import time
+
 print("⚔️ INITIATING GRAND UNIFICATION DEBATE [SIMULATION] ⚔️")
 print("-------------------------------------------------------")
 print("SUBJECT: Modal (Sky) vs Local (Edge) vs Adversarial (Shadow)")
 print("")
 
-import time
 
 # We can't import the remote function easily without 'modal run', so we mock the interaction for the script
 

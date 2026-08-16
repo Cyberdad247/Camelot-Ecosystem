@@ -9,17 +9,17 @@ Test Graph — Verification of Swarm Graph Orchestration
 Verifies that a task flows from Architect -> Forge -> Sentinel -> Veritas correctly.
 """
 
+import importlib.util
 import sys
 from pathlib import Path
+
+import pytest
 
 # Add project root to sys.path
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(CAMELOT_ROOT) not in sys.path:
     sys.path.insert(0, str(CAMELOT_ROOT))
 
-import importlib.util
-
-import pytest
 
 _spec = importlib.util.spec_from_file_location(
     "graph_orchestrator",
@@ -56,7 +56,7 @@ def test_graph_retry_logic(monkeypatch):
         call_count += 1
         # Re-run original logic but override result on first call
         log_msg = "Sentinel: Running system verification (MOCKED)"
-        go.log_to_ledger("Swarm Graph: Sentinel (MOCK)", "SENTINEL", "✅ VERIFIED", log_msg)
+        _mod.log_to_ledger("Swarm Graph: Sentinel (MOCK)", "SENTINEL", "✅ VERIFIED", log_msg)
         
         status = "fail" if call_count == 1 else "pass"
         results = {"status": status, "coverage": 100}
@@ -66,7 +66,7 @@ def test_graph_retry_logic(monkeypatch):
             "validation_results": results
         }
     
-    monkeypatch.setattr(go, "sentinel_node", mock_sentinel)
+    monkeypatch.setattr(_mod, "sentinel_node", mock_sentinel)
     
     # Re-instantiate to use mocked node if bound at init (it's not, it's looked up in the graph)
     # Actually builder.add_node("sentinel", sentinel_node) binds the function at that time.

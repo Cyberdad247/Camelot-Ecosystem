@@ -42,7 +42,7 @@ async def get_transformations():
         ]
     except Exception as e:
         logger.error(f"Error fetching transformations: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching transformations: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching transformations: {str(e)}") from e
 
 
 @router.post("/transformations", response_model=TransformationResponse)
@@ -69,10 +69,10 @@ async def create_transformation(transformation_data: TransformationCreate):
             updated=str(new_transformation.updated),
         )
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error creating transformation: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error creating transformation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating transformation: {str(e)}") from e
 
 
 @router.get("/transformations/{transformation_id}", response_model=TransformationResponse)
@@ -97,7 +97,7 @@ async def get_transformation(transformation_id: str):
         raise
     except Exception as e:
         logger.error(f"Error fetching transformation {transformation_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching transformation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching transformation: {str(e)}") from e
 
 
 @router.put("/transformations/{transformation_id}", response_model=TransformationResponse)
@@ -135,10 +135,10 @@ async def update_transformation(transformation_id: str, transformation_update: T
     except HTTPException:
         raise
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error updating transformation {transformation_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating transformation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating transformation: {str(e)}") from e
 
 
 @router.delete("/transformations/{transformation_id}")
@@ -156,7 +156,7 @@ async def delete_transformation(transformation_id: str):
         raise
     except Exception as e:
         logger.error(f"Error deleting transformation {transformation_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error deleting transformation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error deleting transformation: {str(e)}") from e
 
 
 @router.post("/transformations/execute", response_model=TransformationExecuteResponse)
@@ -192,7 +192,7 @@ async def execute_transformation(execute_request: TransformationExecuteRequest):
         raise
     except Exception as e:
         logger.error(f"Error executing transformation: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error executing transformation: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error executing transformation: {str(e)}") from e
 
 
 @router.get("/transformations/default-prompt", response_model=DefaultPromptResponse)
@@ -204,7 +204,7 @@ async def get_default_prompt():
         return DefaultPromptResponse(transformation_instructions=default_prompts.transformation_instructions or "")
     except Exception as e:
         logger.error(f"Error fetching default prompt: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching default prompt: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching default prompt: {str(e)}") from e
 
 
 @router.put("/transformations/default-prompt", response_model=DefaultPromptResponse)
@@ -219,4 +219,4 @@ async def update_default_prompt(prompt_update: DefaultPromptUpdate):
         return DefaultPromptResponse(transformation_instructions=default_prompts.transformation_instructions)
     except Exception as e:
         logger.error(f"Error updating default prompt: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating default prompt: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating default prompt: {str(e)}") from e

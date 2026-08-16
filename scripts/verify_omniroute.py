@@ -8,8 +8,8 @@ from pathlib import Path
 repo = Path(__file__).parent.parent
 sys.path.insert(0, str(repo))
 
-from control_plane.cli_intercept import CLIIntercept
-from control_plane.soul_router import CLIPROXY_URL, SALTARE_URL
+from control_plane.cli_intercept import CLIIntercept  # noqa: E402
+from control_plane.soul_router import CLIPROXY_URL, SALTARE_URL  # noqa: E402
 
 intercept = CLIIntercept()
 cliproxy_url = "http://127.0.0.1:8080/v1"

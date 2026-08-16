@@ -95,7 +95,7 @@ class SwarmExecutor:
             return res.stdout.strip()
         except subprocess.CalledProcessError as e:
             logger.error(f"Git command failed: git {' '.join(args)} - Error: {e.stderr}")
-            raise RuntimeError(f"Git command failed: {e.stderr.strip()}")
+            raise RuntimeError(f"Git command failed: {e.stderr.strip()}") from e
 
     # =========================================================================
     # PHASE 1: AUDIT

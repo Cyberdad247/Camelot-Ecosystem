@@ -250,7 +250,7 @@ class ManagedBrowser:
             return f"http://{self.host}:{self.debugging_port}"
         except Exception as e:
             await self.cleanup()
-            raise Exception(f"Failed to start browser: {e}")
+            raise Exception(f"Failed to start browser: {e}") from e
 
     async def _initial_startup_check(self):
         """

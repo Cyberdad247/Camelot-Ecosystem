@@ -47,8 +47,10 @@ class ExcaliburEngine:
         self.REPLICATE_API_TOKEN = os.getenv("REPLICATE_API_TOKEN")
 
         missing = []
-        if not self.APPWRITE_API_KEY: missing.append("APPWRITE_API_KEY")
-        if not self.GOOGLE_API_KEY: missing.append("GOOGLE_API_KEY")
+        if not self.APPWRITE_API_KEY:
+            missing.append("APPWRITE_API_KEY")
+        if not self.GOOGLE_API_KEY:
+            missing.append("GOOGLE_API_KEY")
         
         if missing:
             logger.critical(f"MISSING KEYS: {missing}. HALTING.")
