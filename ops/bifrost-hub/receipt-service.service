@@ -1,0 +1,52 @@
+# Camelot Bifrost Hub — receipt service unit
+#   Roles: receipt ingest, §11.3 chain verification, ledger anchoring
+#   DB:    /opt/camelot/bifrost-hub/data/receipts.db (WAL, see init-receipt-db.sh)
+#   Data:  /opt/camelot/bifrost-hub/receipts (raw receipt JSON sidecars)
+#
+# The unit stays INACTIVE (not failing) until the receipt-service binary exists
+# at /opt/camelot/bifrost-hub/bin/receipt-service (ConditionPathExists below).
+# Deploy the binary, then:
+#   sudo systemctl daemon-reload && sudo systemctl restart receipt-service
+
+[Unit]
+Description=Camelot Bifrost Hub — receipt service (ingest, verify, anchor)
+Documentation=https://github.com/Cyberdad247/Camelot-Ecosystem/blob/main/ops/bifrost-hub/README.md
+After=network-online.target
+Wants=network-online.target
+
+ConditionPathExists=/opt/camelot/bifrost-hub/bin/receipt-service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/camelot/bifrost-hub
+# NOTE: binary path is a placeholder until the component is built. The flags
+# below match the harness defaults (harness/contracts/verify_receipt_chain.py):
+# anchor every N entries, reject receipts below the trusted authority epoch.
+ExecStart=/opt/camelot/bifrost-hub/bin/receipt-service \
+    --db /opt/camelot/bifrost-hub/data/receipts.db \
+    --anchor-every 1000
+Restart=on-failure
+RestartSec=5
+
+# Optional overrides (dash = file may be absent)
+EnvironmentFile=-/etc/camelot/receipt-service.env
+Environment=ANCHOR_INTERVAL=1000
+Environment=TRUSTED_EPOCH=43
+
+# Hardening — the service only ever touches its data + receipts dirs.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/camelot/bifrost-hub/data /opt/camelot/bifrost-hub/receipts
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictRealtime=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target
