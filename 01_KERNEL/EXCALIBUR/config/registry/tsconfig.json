@@ -4,9 +4,7 @@
     "forceConsistentCasingInFileNames": true,
     "composite": true
   },
-  "files": [
-    "camelot.d.ts"
-  ],
+  "files": ["camelot.d.ts"],
   "references": [
     {
       "path": "./02_FORGE"

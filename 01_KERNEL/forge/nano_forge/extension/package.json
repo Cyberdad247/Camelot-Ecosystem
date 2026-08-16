@@ -14,13 +14,7 @@
     "lint": "echo 'Linting not yet configured'",
     "build": "echo 'Build optimization pending - see BUNDLE_OPTIMIZATION.md'"
   },
-  "keywords": [
-    "chrome-extension",
-    "ai",
-    "research",
-    "automation",
-    "voice-commands"
-  ],
+  "keywords": ["chrome-extension", "ai", "research", "automation", "voice-commands"],
   "author": "ANNA (Artificial Neural Network Architect)",
   "license": "MIT",
   "devDependencies": {},
