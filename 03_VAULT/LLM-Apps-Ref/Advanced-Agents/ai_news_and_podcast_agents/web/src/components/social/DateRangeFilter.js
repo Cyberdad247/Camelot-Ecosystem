@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import { Calendar, ChevronDown, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const DateRangeFilter = ({ onDateRangeChange, initialDateRange }) => {
   const presets = [
@@ -56,7 +56,7 @@ const DateRangeFilter = ({ onDateRangeChange, initialDateRange }) => {
       const start = new Date(initialDateRange.startDate);
       const end = new Date(initialDateRange.endDate);
       const daysDiff = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
-      let matchingPreset = presets.find((p) => p.days === daysDiff);
+      const matchingPreset = presets.find((p) => p.days === daysDiff);
       if (matchingPreset) {
         setSelectedPreset(matchingPreset);
         setIsCustom(false);

@@ -1,5 +1,5 @@
+import { Check, Download, Loader2, Play, Sparkles, Volume2 } from 'lucide-react';
 import React, { useState, useEffect, useRef } from 'react';
-import { Download, Check, Loader2, Volume2, Sparkles, Play } from 'lucide-react';
 
 const AudioConfirmation = ({ audioUrl, topic, onApprove, isProcessing }) => {
   const [isPlaying, setIsPlaying] = useState(false);

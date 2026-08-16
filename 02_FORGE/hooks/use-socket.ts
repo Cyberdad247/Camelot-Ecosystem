@@ -3,7 +3,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+import { type Socket, io } from 'socket.io-client';
 
 export interface KnightState {
   name: string;

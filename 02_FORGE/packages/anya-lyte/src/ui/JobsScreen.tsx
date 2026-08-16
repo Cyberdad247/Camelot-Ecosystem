@@ -1,6 +1,6 @@
+import { Activity, AlertCircle, CheckCircle, Package } from 'lucide-react-native';
 import React, { useState, useEffect } from 'react';
-import { YStack, XStack, Text, ScrollView, Card, Badge, Theme } from 'tamagui';
-import { Activity, Package, CheckCircle, AlertCircle } from 'lucide-react-native';
+import { Badge, Card, ScrollView, Text, Theme, XStack, YStack } from 'tamagui';
 import { TitanLinkClient } from '../api/titanlink_client';
 
 /**

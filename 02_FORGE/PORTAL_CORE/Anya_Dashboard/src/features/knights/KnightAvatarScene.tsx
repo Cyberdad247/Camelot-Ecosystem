@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { useKnightStream } from './useKnightStream';
+import React, { useMemo } from 'react';
 import VideoAvatar from './VideoAvatar';
+import { useKnightStream } from './useKnightStream';
 
 /**
  * Knight -> accent colour. Keys are the EXACT lowercase names broadcast by

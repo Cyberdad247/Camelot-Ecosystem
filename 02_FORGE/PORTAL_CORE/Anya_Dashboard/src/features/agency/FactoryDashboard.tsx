@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { Card } from '@/components/ui/Card';
+import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
 import {
   ArrowRight,
   Circle,
@@ -15,10 +17,9 @@ import {
   TerminalSquare,
   Zap,
 } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { runtimeConfig } from '@/config/runtime';
-import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
-import { useAnyaSocket, type AnyaSocketEvent } from '../brain/useAnyaSocket';
+import type React from 'react';
+import { useEffect, useState } from 'react';
+import { type AnyaSocketEvent, useAnyaSocket } from '../brain/useAnyaSocket';
 
 type RouteState = 'online' | 'degraded' | 'offline' | 'checking';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import api from '../services/api';
 
 const SocialMediaDetail = () => {
@@ -39,7 +39,9 @@ const SocialMediaDetail = () => {
         platform: platform,
         per_page: 5,
       });
-      const filteredPosts = response.data.items.filter((item) => item.id !== parseInt(postId));
+      const filteredPosts = response.data.items.filter(
+        (item) => item.id !== Number.parseInt(postId),
+      );
       setRelatedPosts(filteredPosts.slice(0, 4));
     } catch (error) {
       console.error('Error fetching related posts:', error);

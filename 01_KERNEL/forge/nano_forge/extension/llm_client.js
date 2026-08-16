@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
-import { ResourceSquire } from './src/squires/resource_squire.js';
 import { ChunkManager } from './src/logic/chunk_manager.js';
+import { ResourceSquire } from './src/squires/resource_squire.js';
 
 const DEFAULT_CONFIG = {
   provider: 'ollama', // 'ollama' | 'gemini'

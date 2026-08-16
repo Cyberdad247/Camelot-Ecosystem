@@ -1,9 +1,9 @@
 // Phase 2 acceptance tests — voice guardrails, all against the DEFAULT test
 // provider (MockVoiceProvider) and the pure VoiceSessionController.
 
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { LOW_CONFIDENCE_THRESHOLD, MockVoiceProvider } from '@camelot/contracts';
 import type { MockVoiceProviderOptions } from '@camelot/contracts';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { VoiceSessionController } from '../src/voice-session.js';
 import type { VoiceNotice, VoiceUiState } from '../src/voice-session.js';
 

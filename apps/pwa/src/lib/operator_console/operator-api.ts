@@ -2,7 +2,7 @@
 
 'use client';
 
-import { OperatorTaskSnapshotSchema, type OperatorTaskSnapshot } from './schemas';
+import { type OperatorTaskSnapshot, OperatorTaskSnapshotSchema } from './schemas';
 
 const BFF_BASE = process.env.NEXT_PUBLIC_BIFROST_HTTP_URL ?? 'http://localhost:3001';
 

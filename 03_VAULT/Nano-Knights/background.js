@@ -3,12 +3,12 @@ import './src/security/profile_manager.js';
 import './src/security/proxy_manager.js';
 import './src/security/auth_manager.js';
 import './src/security/crypto_utils.js';
-import { ActionExecutor } from './src/logic/action_executor.js';
-import { ContextPruner } from './src/logic/context_pruner.js';
-import { CognitiveParser } from './src/logic/cognitive_parser.js';
-import { GraphRAG } from './src/prometheus/index.js';
-import { KnightSpawner } from './src/knights/knight_spawner.js';
 import { SynthesisEngine } from './src/intelligence/synthesis_engine.js';
+import { KnightSpawner } from './src/knights/knight_spawner.js';
+import { ActionExecutor } from './src/logic/action_executor.js';
+import { CognitiveParser } from './src/logic/cognitive_parser.js';
+import { ContextPruner } from './src/logic/context_pruner.js';
+import { GraphRAG } from './src/prometheus/index.js';
 import { MemoryExporter } from './src/prometheus/memory_exporter.js';
 
 // MERLIN LITE - AGENCY DISPATCHER [Omega_RECON v3.0]

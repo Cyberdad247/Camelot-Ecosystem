@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Scale, ShieldAlert } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Loader2, Scale, Send, ShieldAlert } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type AnalysisType = 'contract' | 'compliance' | 'risk' | 'ip' | 'privacy';

@@ -1,13 +1,14 @@
-import React, { lazy, Suspense, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { Send, Loader2, Copy, ArrowUpRight } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { CARTRIDGE_BY_SLUG } from './registry';
-import type { CartridgeMeta } from '@/types/camelot';
-import { bifrostFetch } from '@/lib/bifrostClient';
+import EventFeed from '@/components/ui/EventFeed';
 import { runtimeConfig } from '@/config/runtime';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
-import EventFeed from '@/components/ui/EventFeed';
+import { bifrostFetch } from '@/lib/bifrostClient';
+import { cn } from '@/lib/utils';
+import type { CartridgeMeta } from '@/types/camelot';
+import { ArrowUpRight, Copy, Loader2, Send } from 'lucide-react';
+import type React from 'react';
+import { Suspense, lazy, useState } from 'react';
+import { Navigate, useParams } from 'react-router-dom';
+import { CARTRIDGE_BY_SLUG } from './registry';
 
 const DECKS: Record<string, React.LazyExoticComponent<(props: DeckProps) => React.ReactElement>> = {
   cognitive: lazy(() => import('./decks/CognitiveDeck')),

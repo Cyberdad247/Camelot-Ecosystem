@@ -69,7 +69,7 @@ export const api = {
   /**
    * Fetch Ledger Stream
    */
-  getLedger: async (lines: number = 50): Promise<{ lines: string[]; total: number }> => {
+  getLedger: async (lines = 50): Promise<{ lines: string[]; total: number }> => {
     try {
       const res = await fetch(`${API_BASE}/system/ledger?lines=${lines}`);
       if (!res.ok) return { lines: [], total: 0 };

@@ -5,10 +5,10 @@
  * Automated verification of Lane Transcripts, Retry Policies, and Success Criteria.
  */
 
-import { GoalOrchestrator } from '../src/logic/goal_orchestrator.js';
 import { ActionExecutor } from '../src/logic/action_executor.js';
-import { TranscriptManager } from '../src/logic/transcript_manager.js';
+import { GoalOrchestrator } from '../src/logic/goal_orchestrator.js';
 import { MissionEvaluator } from '../src/logic/mission_evaluator.js';
+import { TranscriptManager } from '../src/logic/transcript_manager.js';
 
 // --- 1. TEST MOCKS ---
 global.chrome = {

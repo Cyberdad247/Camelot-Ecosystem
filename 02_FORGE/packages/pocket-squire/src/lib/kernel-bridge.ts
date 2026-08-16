@@ -28,10 +28,7 @@ export async function checkKernelHealth(): Promise<boolean> {
 }
 
 // 2. Dispatch Command (A2A Protocol Wrapper)
-export async function dispatchCommand(
-  intent: string,
-  agentId: string = 'MERLIN',
-): Promise<KernelResponse> {
+export async function dispatchCommand(intent: string, agentId = 'MERLIN'): Promise<KernelResponse> {
   try {
     const payload = {
       agent_id: agentId,

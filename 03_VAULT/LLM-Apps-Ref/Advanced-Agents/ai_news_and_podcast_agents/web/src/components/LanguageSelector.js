@@ -1,5 +1,5 @@
+import { Check, ChevronDown, Globe2, Search, X } from 'lucide-react';
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Search, Check, Globe2, X } from 'lucide-react';
 import { useMemo } from 'react';
 
 const LanguageSelector = ({ languages, selectedLanguage, onSelectLanguage, isDisabled }) => {

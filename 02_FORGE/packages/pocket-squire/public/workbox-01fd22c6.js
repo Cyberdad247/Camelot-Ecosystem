@@ -1,5 +1,4 @@
-define(['exports'], function (t) {
-  'use strict';
+define(['exports'], (t) => {
   try {
     self['workbox:core:6.5.4'] && _();
   } catch (t) {}
@@ -276,7 +275,7 @@ define(['exports'], function (t) {
         u = await self.caches.open(c),
         l = this.hasCallback('cacheDidUpdate'),
         f = l
-          ? await (async function (t, e, s, n) {
+          ? await (async (t, e, s, n) => {
               const r = p(e.url, s);
               if (e.url === r) return t.match(e, n);
               const i = Object.assign(Object.assign({}, n), { ignoreSearch: !0 }),
@@ -290,7 +289,7 @@ define(['exports'], function (t) {
         if (t instanceof Error)
           throw (
             ('QuotaExceededError' === t.name &&
-              (await (async function () {
+              (await (async () => {
                 for (const t of g) await t();
               })()),
             t)
@@ -339,7 +338,7 @@ define(['exports'], function (t) {
     }
     async doneWaiting() {
       let t;
-      for (; (t = this.p.shift()); ) await t;
+      while ((t = this.p.shift())) await t;
     }
     destroy() {
       this.l.resolve(null);
@@ -424,7 +423,7 @@ define(['exports'], function (t) {
     return (
       (q = Object.assign
         ? Object.assign.bind()
-        : function (t) {
+        : (t) => {
             for (var e = 1; e < arguments.length; e++) {
               var s = arguments[e];
               for (var n in s) ({}).hasOwnProperty.call(s, n) && (t[n] = s[n]);
@@ -478,7 +477,7 @@ define(['exports'], function (t) {
     return 'function' == typeof t
       ? O(t)
       : (t instanceof IDBTransaction &&
-          (function (t) {
+          ((t) => {
             if (L.has(t)) return;
             const e = new Promise((e, s) => {
               const n = () => {
@@ -508,7 +507,7 @@ define(['exports'], function (t) {
   }
   function k(t) {
     if (t instanceof IDBRequest)
-      return (function (t) {
+      return ((t) => {
         const e = new Promise((e, s) => {
           const n = () => {
               t.removeEventListener('success', r), t.removeEventListener('error', i);
@@ -578,7 +577,7 @@ define(['exports'], function (t) {
     C(t) {
       this.I(t),
         this.L &&
-          (function (t, { blocked: e } = {}) {
+          ((t, { blocked: e } = {}) => {
             const s = indexedDB.deleteDatabase(t);
             e && s.addEventListener('blocked', (t) => e(t.oldVersion, t)), k(s).then(() => {});
           })(this.L);
@@ -598,7 +597,7 @@ define(['exports'], function (t) {
       let n = await s.transaction(S).store.index('timestamp').openCursor(null, 'prev');
       const r = [];
       let i = 0;
-      for (; n; ) {
+      while (n) {
         const s = n.value;
         s.cacheName === this.L && ((t && s.timestamp < t) || (e && i >= e) ? r.push(n.value) : i++),
           (n = await n.continue());
@@ -613,11 +612,7 @@ define(['exports'], function (t) {
     async getDb() {
       return (
         this._ ||
-          (this._ = await (function (
-            t,
-            e,
-            { blocked: s, upgrade: n, blocking: r, terminated: i } = {},
-          ) {
+          (this._ = await ((t, e, { blocked: s, upgrade: n, blocking: r, terminated: i } = {}) => {
             const a = indexedDB.open(t, e),
               o = k(a);
             return (
@@ -682,7 +677,7 @@ define(['exports'], function (t) {
       if (206 === e.status) return e;
       const n = t.headers.get('range');
       if (!n) throw new s('no-range-header');
-      const r = (function (t) {
+      const r = ((t) => {
           const e = t.trim().toLowerCase();
           if (!e.startsWith('bytes='))
             throw new s('unit-must-be-bytes', { normalizedRangeHeader: e });
@@ -696,7 +691,7 @@ define(['exports'], function (t) {
           };
         })(n),
         i = await e.blob(),
-        a = (function (t, e, n) {
+        a = ((t, e, n) => {
           const r = t.size;
           if ((n && n > r) || (e && e < 0))
             throw new s('range-not-satisfiable', { size: r, end: n, start: e });
@@ -785,7 +780,7 @@ define(['exports'], function (t) {
     const r = t.clone(),
       i = { headers: new Headers(r.headers), status: r.status, statusText: r.statusText },
       a = e ? e(i) : i,
-      o = (function () {
+      o = (() => {
         if (void 0 === J) {
           const t = new Response('');
           if ('body' in t)
@@ -967,7 +962,7 @@ define(['exports'], function (t) {
         ) {
           const i = new URL(t, location.href);
           (i.hash = ''), yield i.href;
-          const a = (function (t, e = []) {
+          const a = ((t, e = []) => {
             for (const s of [...t.searchParams.keys()])
               e.some((t) => t.test(s)) && t.searchParams.delete(s);
             return t;
@@ -1034,7 +1029,7 @@ define(['exports'], function (t) {
           (this.B = t.maxAgeSeconds),
           (this.Y = new Map()),
           t.purgeOnQuotaError &&
-            (function (t) {
+            ((t) => {
               g.add(t);
             })(() => this.deleteCacheAndMetadata());
       }
@@ -1129,7 +1124,7 @@ define(['exports'], function (t) {
         return i;
       }
     }),
-    (t.cleanupOutdatedCaches = function () {
+    (t.cleanupOutdatedCaches = () => {
       self.addEventListener('activate', (t) => {
         const e = w();
         t.waitUntil(
@@ -1142,14 +1137,14 @@ define(['exports'], function (t) {
         );
       });
     }),
-    (t.clientsClaim = function () {
+    (t.clientsClaim = () => {
       self.addEventListener('activate', () => self.clients.claim());
     }),
-    (t.precacheAndRoute = function (t, e) {
-      !(function (t) {
+    (t.precacheAndRoute = (t, e) => {
+      !((t) => {
         tt().precache(t);
       })(t),
-        (function (t) {
+        ((t) => {
           const e = tt();
           h(new et(e, t));
         })(e);

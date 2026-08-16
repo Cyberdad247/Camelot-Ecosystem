@@ -2,7 +2,7 @@
 
 import { describe, expect, it } from 'vitest';
 // @ts-expect-error zero-dep plain ESM module
-import { fixtureTts, makeFixtureStt, pcmStats, pcm16ToWav, SILENCE_RMS } from '../src/engines.mjs';
+import { SILENCE_RMS, fixtureTts, makeFixtureStt, pcm16ToWav, pcmStats } from '../src/engines.mjs';
 
 function sine(amplitude: number, ms: number, sampleRate = 16000): Int16Array {
   const pcm = new Int16Array((sampleRate * ms) / 1000);

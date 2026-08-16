@@ -52,7 +52,7 @@ const TaskForm = ({ task = null, onSubmit, onCancel }) => {
         name,
         description,
         task_type: taskType,
-        frequency: parseInt(frequency),
+        frequency: Number.parseInt(frequency),
         frequency_unit: frequencyUnit,
         enabled,
       };

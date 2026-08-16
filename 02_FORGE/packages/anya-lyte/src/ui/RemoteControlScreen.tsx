@@ -1,29 +1,29 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import {
-  YStack,
-  XStack,
-  Text,
-  ScrollView,
-  Card,
-  Button,
-  Input,
-  Theme,
-  Sheet,
-  Spinner,
-} from 'tamagui';
-import {
-  Monitor,
+  Camera,
   Mic,
   MicOff,
+  Monitor,
+  Power,
+  Send,
   Shield,
   ShieldAlert,
+  Terminal,
   Wifi,
   WifiOff,
-  Terminal,
-  Power,
-  Camera,
-  Send,
 } from 'lucide-react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import {
+  Button,
+  Card,
+  Input,
+  ScrollView,
+  Sheet,
+  Spinner,
+  Text,
+  Theme,
+  XStack,
+  YStack,
+} from 'tamagui';
 import { TitanLinkClient } from '../api/titanlink_client';
 
 interface RemoteDevice {

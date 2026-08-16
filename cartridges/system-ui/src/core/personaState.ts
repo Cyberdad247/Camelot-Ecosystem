@@ -6,7 +6,7 @@ interface PersonaConfig {
 }
 
 export class PersonaStateManager {
-  private activePersona: string = 'Anya';
+  private activePersona = 'Anya';
   private configs: Record<string, PersonaConfig> = {
     Anya: { name: 'Anya', emotion: 'CREATIVE_BRUTALIST', voicePitch: 1.2, voiceSpeed: 1.1 },
     Merlin: { name: 'Merlin', emotion: 'LOGIC_STRICT', voicePitch: 0.8, voiceSpeed: 0.95 },

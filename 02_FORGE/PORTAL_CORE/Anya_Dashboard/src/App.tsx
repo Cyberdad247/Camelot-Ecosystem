@@ -1,7 +1,7 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
 import AppShell from '@/components/layout/AppShell';
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import FactoryDashboard from './features/agency/FactoryDashboard';
 
 // Core feature pages

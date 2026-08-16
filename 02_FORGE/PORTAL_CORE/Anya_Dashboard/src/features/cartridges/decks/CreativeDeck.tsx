@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Palette, Music, Mic } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Loader2, Mic, Music, Palette, Send } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type OutputType = 'text' | 'voice' | 'script' | 'storyboard';

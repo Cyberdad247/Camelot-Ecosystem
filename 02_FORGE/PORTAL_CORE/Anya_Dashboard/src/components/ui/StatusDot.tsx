@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 import type { ServiceHealth } from '@/types/camelot';
+import React, { useEffect, useState } from 'react';
 
 interface StatusDotProps {
   service: ServiceHealth;

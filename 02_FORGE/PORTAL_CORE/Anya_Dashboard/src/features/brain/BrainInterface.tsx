@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/Card';
-import { Send } from 'lucide-react';
 import QuantumScene from '@/components/engine/Scene';
-import { useEngineStore } from './engineStore';
-import { useAnyaSocket } from './useAnyaSocket';
+import { Card } from '@/components/ui/Card';
 import { runtimeConfig } from '@/config/runtime';
 import { bifrostFetch } from '@/lib/bifrostClient';
+import { Send } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useEngineStore } from './engineStore';
+import { useAnyaSocket } from './useAnyaSocket';
 
 interface Message {
   role: 'user' | 'assistant';

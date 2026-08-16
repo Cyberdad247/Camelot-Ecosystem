@@ -14,7 +14,7 @@ export class TitanLinkClient {
   private reconnectAttempts = 0;
   private maxBackoff = 30000; // 30 seconds
 
-  constructor(url: string = 'ws://100.64.0.1:18788') {
+  constructor(url = 'ws://100.64.0.1:18788') {
     // Example Tailscale IP
     this.url = url;
   }

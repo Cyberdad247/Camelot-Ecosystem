@@ -1,26 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
-import { format } from 'date-fns';
-import { authClient } from '@/lib/auth-client';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
-import { Checkbox } from '@/components/ui/checkbox';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormControl,
@@ -30,36 +14,52 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
-  MapPin,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Textarea } from '@/components/ui/textarea';
+import { authClient } from '@/lib/auth-client';
+import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
+import {
+  AlertCircle,
+  Building,
   Calendar as CalendarIcon,
-  Users,
+  Camera,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
   DollarSign,
+  Edit3,
+  Globe,
   Heart,
   Home,
-  Clock,
-  Globe,
-  Plane,
-  Camera,
-  Utensils,
-  Mountain,
-  Waves,
-  Building,
-  TreePine,
-  Star,
-  ChevronRight,
-  ChevronLeft,
-  Luggage,
-  Sparkles,
-  Edit3,
   Lightbulb,
-  AlertCircle,
-  Plus,
+  Luggage,
+  MapPin,
   Minus,
+  Mountain,
+  Plane,
+  Plus,
+  Sparkles,
+  Star,
+  TreePine,
+  Users,
+  Utensils,
+  Waves,
 } from 'lucide-react';
-import { Calendar } from '@/components/ui/calendar';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 const travelVibes = [
   { id: 'relaxing', label: 'Relaxing', icon: Waves },

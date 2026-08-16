@@ -5,10 +5,10 @@
  * Deterministic simulation of Nano-Knight swarm logic.
  */
 
-import { GoalOrchestrator } from './goal_orchestrator.js';
 import { ActionExecutor } from './action_executor.js';
-import { TranscriptManager } from './transcript_manager.js';
+import { GoalOrchestrator } from './goal_orchestrator.js';
 import { MissionEvaluator } from './mission_evaluator.js';
+import { TranscriptManager } from './transcript_manager.js';
 
 // --- 1. MOCK CHROME API ---
 global.chrome = {

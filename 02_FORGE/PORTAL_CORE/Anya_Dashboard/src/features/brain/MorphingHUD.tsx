@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
 import {
   Activity,
   ArrowRight,
@@ -18,9 +19,9 @@ import {
   TerminalSquare,
   Zap,
 } from 'lucide-react';
-import { useAnyaSocket, type AnyaSocketEvent } from './useAnyaSocket';
-import { runtimeConfig } from '@/config/runtime';
-import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
+import type React from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { type AnyaSocketEvent, useAnyaSocket } from './useAnyaSocket';
 
 const DISPATCH_URL = runtimeConfig.bifrost.dispatchUrl;
 const BIFROST_STATUS_URL = runtimeConfig.bifrost.statusUrl;

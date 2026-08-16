@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { Activity, Server } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function RotelMonitor() {
   const [metrics, setMetrics] = useState({ cpu: 12, ram: 44, active_traces: 0 });

@@ -1,5 +1,5 @@
-import { expect, test, vi } from 'vitest';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { expect, test, vi } from 'vitest';
 
 // Mocking GoogleGenerativeAI
 vi.mock('@google/generative-ai', () => {

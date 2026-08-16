@@ -1,7 +1,7 @@
-import React from 'react';
-import { Radio } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import type { AnyaSocketEvent } from '@/features/brain/useAnyaSocket';
+import { cn } from '@/lib/utils';
+import { Radio } from 'lucide-react';
+import React from 'react';
 
 interface EventFeedProps {
   events: AnyaSocketEvent[];

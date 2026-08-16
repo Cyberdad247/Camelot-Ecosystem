@@ -42,9 +42,9 @@ const btnVoice = document.getElementById('btnVoice');
 const voiceStatus = document.getElementById('voiceStatus');
 const voiceText = document.getElementById('voiceText');
 
+import { TOONEncoder } from '../src/prometheus/index.js';
 // Import VoiceSquire
 import { VoiceSquire } from '../src/squires/voice_squire.js';
-import { TOONEncoder } from '../src/prometheus/index.js';
 import { UIManager } from './ui_manager.js';
 const voiceSquire = new VoiceSquire();
 

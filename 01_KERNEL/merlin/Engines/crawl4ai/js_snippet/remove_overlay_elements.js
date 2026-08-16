@@ -57,7 +57,7 @@ async () => {
     const allElements = document.querySelectorAll('*');
     for (const elem of allElements) {
       const style = window.getComputedStyle(elem);
-      const zIndex = parseInt(style.zIndex);
+      const zIndex = Number.parseInt(style.zIndex);
       const position = style.position;
 
       if (
@@ -66,7 +66,7 @@ async () => {
         (elem.offsetWidth > window.innerWidth * 0.5 ||
           elem.offsetHeight > window.innerHeight * 0.5 ||
           style.backgroundColor.includes('rgba') ||
-          parseFloat(style.opacity) < 1)
+          Number.parseFloat(style.opacity) < 1)
       ) {
         elem.remove();
       }

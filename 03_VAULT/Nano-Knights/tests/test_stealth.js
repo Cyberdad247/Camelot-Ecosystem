@@ -133,7 +133,7 @@ function validateChromeVersion(ua) {
   const versionMatch = ua.match(/Chrome\/(\d+)\.(\d+)\.(\d+)\.(\d+)/);
   if (!versionMatch) return false;
 
-  const major = parseInt(versionMatch[1]);
+  const major = Number.parseInt(versionMatch[1]);
   // Chrome version should be realistic (70-130 range as of 2024)
   return major >= 70 && major <= 150;
 }

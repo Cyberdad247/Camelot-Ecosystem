@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useRef } from 'react';
+import { Billboard, Image as DreiImage, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Billboard, Image as DreiImage } from '@react-three/drei';
+import React, { useRef } from 'react';
 import * as THREE from 'three';
 
 const KNIGHTS_META = [

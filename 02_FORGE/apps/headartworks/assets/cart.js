@@ -159,7 +159,7 @@ class CartItems extends HTMLElement {
         let message = '';
         if (
           items.length === parsedState.items.length &&
-          updatedValue !== parseInt(quantityElement.value)
+          updatedValue !== Number.parseInt(quantityElement.value)
         ) {
           if (typeof updatedValue === 'undefined') {
             message = window.cartStrings.error;

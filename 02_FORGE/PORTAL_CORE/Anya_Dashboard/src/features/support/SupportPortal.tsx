@@ -1,6 +1,6 @@
+import { KeyRound, ShieldCheck } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { KeyRound, ShieldCheck } from 'lucide-react';
 
 interface ValidationResult {
   valid: boolean;

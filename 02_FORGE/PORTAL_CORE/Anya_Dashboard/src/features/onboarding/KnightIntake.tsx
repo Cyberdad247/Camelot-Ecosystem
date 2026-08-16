@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import {
-  Shield,
-  Target,
-  Cpu,
-  ArrowRight,
-  CheckCircle2,
-  MessageSquare,
-  Zap,
-  Sparkles,
-  Waves,
-} from 'lucide-react';
 import { Card } from '@/components/ui/Card';
 import { cn } from '@/lib/utils';
+import {
+  ArrowRight,
+  CheckCircle2,
+  Cpu,
+  MessageSquare,
+  Shield,
+  Sparkles,
+  Target,
+  Waves,
+  Zap,
+} from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 /* 
   LAW #06: KNIGHT PERSONALITY MANDATE

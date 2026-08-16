@@ -1,5 +1,5 @@
+import { describe, expect, it } from 'vitest';
 import { validateA2ARequest } from '../../src/router/schema';
-import { describe, it, expect } from 'vitest';
 
 describe('A2A Schema Validation', () => {
   it('should validate a correct A2A JSON-RPC request', () => {

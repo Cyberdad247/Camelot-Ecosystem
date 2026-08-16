@@ -2,7 +2,7 @@ export class AionTimelineCache {
   private frames: any[] = [];
   private limit: number;
 
-  constructor(limit: number = 20) {
+  constructor(limit = 20) {
     this.limit = limit;
   }
 

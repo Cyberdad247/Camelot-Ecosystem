@@ -1,8 +1,8 @@
 // ANYA LYTE: ENTRY POINT
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import TitanLink from './src/services/TitanLink';
+import { StyleSheet, Text, View } from 'react-native';
 import Hudson from './src/components/Hudson';
+import TitanLink from './src/services/TitanLink';
 
 export default function App() {
   const [status, setStatus] = useState<string>('DISCONNECTED');

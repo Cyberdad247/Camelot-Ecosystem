@@ -6,9 +6,7 @@
  * Based on Multi-Login anti-detect techniques
  */
 
-(function () {
-  'use strict';
-
+(() => {
   // Fingerprint config will be injected by Phantom Engine
   const FINGERPRINT = window.__PHANTOM_FINGERPRINT__ || {};
 
@@ -138,7 +136,7 @@
       if (!seed) return imageData;
 
       const data = imageData.data;
-      const seedNum = parseInt(seed.substring(0, 8), 16);
+      const seedNum = Number.parseInt(seed.substring(0, 8), 16);
 
       for (let i = 0; i < data.length; i += 4) {
         // Apply minimal noise (±1-2 per channel)
@@ -162,13 +160,16 @@
     const OriginalAudioContext = window.AudioContext || window.webkitAudioContext;
 
     if (OriginalAudioContext) {
-      window.AudioContext = function () {
+      window.AudioContext = () => {
         const context = new OriginalAudioContext(...arguments);
         const originalCreateOscillator = context.createOscillator.bind(context);
 
-        context.createOscillator = function () {
+        context.createOscillator = () => {
           const oscillator = originalCreateOscillator();
-          const seedNum = parseInt(FINGERPRINT.audioContext.noiseSeed?.substring(0, 8) || '0', 16);
+          const seedNum = Number.parseInt(
+            FINGERPRINT.audioContext.noiseSeed?.substring(0, 8) || '0',
+            16,
+          );
           const noise = (seedNum % 100) / 100000; // Minimal frequency shift
 
           const originalFrequency = Object.getOwnPropertyDescriptor(
@@ -196,7 +197,7 @@
   if (FINGERPRINT.geolocation && navigator.geolocation) {
     const originalGetCurrentPosition = navigator.geolocation.getCurrentPosition;
 
-    navigator.geolocation.getCurrentPosition = function (success, error, options) {
+    navigator.geolocation.getCurrentPosition = (success, error, options) => {
       const fakePosition = {
         coords: {
           latitude: FINGERPRINT.geolocation.latitude,
@@ -217,7 +218,7 @@
   // === 8. TIMEZONE ===
   if (FINGERPRINT.timezone) {
     const originalDateTimeFormat = Intl.DateTimeFormat;
-    Intl.DateTimeFormat = function (...args) {
+    Intl.DateTimeFormat = (...args) => {
       if (!args[1]) args[1] = {};
       if (!args[1].timeZone) args[1].timeZone = FINGERPRINT.timezone;
       return new originalDateTimeFormat(...args);

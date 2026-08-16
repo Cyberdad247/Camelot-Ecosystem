@@ -1,7 +1,7 @@
+import ConfigPanel from '@/features/hub/ConfigPanel';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import ConfigPanel from '@/features/hub/ConfigPanel';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 describe('ConfigPanel', () => {
   afterEach(() => {

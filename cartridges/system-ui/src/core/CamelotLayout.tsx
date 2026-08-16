@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef, useTransition } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
+import { useEffect, useRef, useState, useTransition } from 'react';
 import * as THREE from 'three';
-import { KickboxAudioController } from './audioContext';
-import { PersonaStateManager } from './personaState';
 import { AionTimelineCache } from './aionTimeline';
+import { KickboxAudioController } from './audioContext';
 import { HerdrMeshRouter } from './herdrMesh';
+import { PersonaStateManager } from './personaState';
 
 // ── VRAM Protection Governor (SIR_BORIS Protocol) ────────────────────────────
 function VramGovernor() {
@@ -145,7 +145,7 @@ export default function CamelotLayout() {
   };
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = parseFloat(e.target.value);
+    const val = Number.parseFloat(e.target.value);
     setMasterVolume(val);
     audioController.current.setVolume(val);
   };
@@ -161,7 +161,9 @@ export default function CamelotLayout() {
             const next = {
               ...prev,
               cpuUsage: data.cpuUsage ?? prev.cpuUsage,
-              ramUsage: data.ramUsage ? parseFloat((data.ramUsage / 10).toFixed(1)) : prev.ramUsage,
+              ramUsage: data.ramUsage
+                ? Number.parseFloat((data.ramUsage / 10).toFixed(1))
+                : prev.ramUsage,
               lattice: data.lattice ?? prev.lattice,
               networkLag: data.networkLag ?? prev.networkLag,
             };
@@ -192,8 +194,8 @@ export default function CamelotLayout() {
         );
         const next = {
           ...prev,
-          cpuUsage: parseFloat(nextCpu.toFixed(1)),
-          ramUsage: parseFloat(nextRam.toFixed(1)),
+          cpuUsage: Number.parseFloat(nextCpu.toFixed(1)),
+          ramUsage: Number.parseFloat(nextRam.toFixed(1)),
           networkLag: nextLag,
         };
         timelineCache.current.push(next);

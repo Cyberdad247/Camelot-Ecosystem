@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Shield, Globe, Cpu, Zap, Lock, Activity } from 'lucide-react';
 import { runtimeConfig } from '@/config/runtime';
+import { Activity, Cpu, Globe, Lock, Shield, Zap } from 'lucide-react';
+import React, { useState } from 'react';
 
 const KINETIC_TOKEN = runtimeConfig.saltare.token;
 const SALTARE_ROUTE_URL = runtimeConfig.saltare.routeUrl;

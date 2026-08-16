@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Code2, FileCode, Wrench } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Code2, FileCode, Loader2, Send, Wrench } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type Language = 'rust' | 'go' | 'python' | 'typescript' | 'bash';

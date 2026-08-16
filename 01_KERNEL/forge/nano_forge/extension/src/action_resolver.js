@@ -6,7 +6,7 @@
  * Part of Phase 18: Cognitive Action Layer
  */
 
-(function () {
+(() => {
   window.HeuristicResolver = {
     // Main Entry Point
     resolve: function (intent) {
@@ -39,7 +39,7 @@
       return { found: false };
     },
 
-    fuzzyMatch: function (text) {
+    fuzzyMatch: (text) => {
       const lowerText = text.toLowerCase();
       const all = document.querySelectorAll('button, input, a, [role="button"]');
       const matches = [];
@@ -62,7 +62,7 @@
       return matches;
     },
 
-    findByText: function (text) {
+    findByText: (text) => {
       const xpath = `//*[contains(text(), '${text}')] | //input[@value='${text}'] | //*[@aria-label='${text}'] | //img[@alt='${text}']`;
       const result = document.evaluate(
         xpath,
@@ -78,7 +78,7 @@
       return nodes;
     },
 
-    isVisible: function (el) {
+    isVisible: (el) => {
       const rect = el.getBoundingClientRect();
       return (
         rect.width > 0 && rect.height > 0 && window.getComputedStyle(el).visibility !== 'hidden'
@@ -96,7 +96,7 @@
       })[0];
     },
 
-    getScore: function (el) {
+    getScore: (el) => {
       let score = 0;
       const tag = el.tagName.toLowerCase();
       if (tag === 'button') score += 10;

@@ -1,8 +1,8 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
 import { useSocket } from '@/hooks/use-socket';
+import { motion } from 'framer-motion';
+import React from 'react';
 
 const KNIGHTS_META = [
   {
@@ -71,7 +71,12 @@ export function KnightSprites() {
               opacity: knight.isGhost ? (isActive ? 0.9 : 0.4) : 1,
             }}
             transition={{
-              y: { duration: 4, repeat: Infinity, ease: 'easeInOut', delay: idx * 0.5 },
+              y: {
+                duration: 4,
+                repeat: Number.POSITIVE_INFINITY,
+                ease: 'easeInOut',
+                delay: idx * 0.5,
+              },
               opacity: { duration: 1 },
             }}
           >

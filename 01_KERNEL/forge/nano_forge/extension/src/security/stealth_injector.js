@@ -3,7 +3,7 @@
 // 🕵️ STEALTH INJECTOR (Content Script - Isolated World)
 // Reads config and injects anti-detect script into Main World.
 
-(async function () {
+(async () => {
   try {
     // 1. Get Global Config from Storage
     const storage = await chrome.storage.local.get(null);

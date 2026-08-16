@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 
 interface PersonaTAL {
   root: { id: string; mandate: string; alignment?: string };

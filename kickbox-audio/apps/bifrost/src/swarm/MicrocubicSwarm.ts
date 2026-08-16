@@ -1,5 +1,5 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { EventEmitter } from 'events';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 import dotenv from 'dotenv';
 import { SovereignDB } from '../db/SovereignDB';
 
@@ -17,7 +17,7 @@ export interface SwarmTask {
 
 class MicrocubicMatrix extends EventEmitter {
   private queue: SwarmTask[] = [];
-  private activeCubes: number = 0;
+  private activeCubes = 0;
   private readonly MAX_CONCURRENCY = 10; // Strict limit to prevent Google API 429 errors
   private readonly RATE_LIMIT_DELAY_MS = 1000;
 

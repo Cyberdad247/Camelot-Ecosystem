@@ -5,7 +5,7 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
-import { useClevelandWeather, type WeatherCondition } from '../../hooks/useClevelandWeather';
+import { type WeatherCondition, useClevelandWeather } from '../../hooks/useClevelandWeather';
 
 type TimeOfDay = 'day' | 'night';
 

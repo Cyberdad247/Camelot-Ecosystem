@@ -1,7 +1,7 @@
+import * as ort from 'onnxruntime-web';
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import * as ort from 'onnxruntime-web';
 
 // Configuration: Kokoro-82M Web Quantized
 const MODEL_URL =
@@ -49,7 +49,7 @@ export function useKokoro() {
     init();
   }, []);
 
-  const speak = useCallback(async (text: string, voiceId: string = 'af_heart') => {
+  const speak = useCallback(async (text: string, voiceId = 'af_heart') => {
     if (!session || !voiceData) {
       console.warn('⚠️ [KOKORO] Engine not ready.');
       return;

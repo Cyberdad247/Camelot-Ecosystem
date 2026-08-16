@@ -2,8 +2,8 @@
  * Verification Suite: Social Engineering & Handoff
  */
 
-import { SOCIAL_SKILLS } from '../src/skills/social_skills.js';
 import { KnightSpawner } from '../src/knights/knight_spawner.js';
+import { SOCIAL_SKILLS } from '../src/skills/social_skills.js';
 
 // Mock Browser
 global.chrome = {

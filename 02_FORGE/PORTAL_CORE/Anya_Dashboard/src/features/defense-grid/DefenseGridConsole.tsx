@@ -1,4 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import { Card } from '@/components/ui/Card';
+import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch } from '@/lib/bifrostClient';
+import { cn } from '@/lib/utils';
 import {
   AlertTriangle,
   CheckCircle2,
@@ -11,10 +14,8 @@ import {
   ShieldCheck,
   TerminalSquare,
 } from 'lucide-react';
-import { Card } from '@/components/ui/Card';
-import { runtimeConfig } from '@/config/runtime';
-import { bifrostFetch } from '@/lib/bifrostClient';
-import { cn } from '@/lib/utils';
+import type React from 'react';
+import { useMemo, useState } from 'react';
 
 type ConsoleKind = 'system' | 'command' | 'bridge' | 'warn' | 'error';
 type GuardState = 'green' | 'amber' | 'red' | 'checking';

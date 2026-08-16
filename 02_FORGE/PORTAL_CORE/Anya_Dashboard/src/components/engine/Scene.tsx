@@ -1,8 +1,8 @@
-import React, { Suspense } from 'react';
+import { Environment, OrbitControls, PerspectiveCamera, useGLTF } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { OrbitControls, PerspectiveCamera, Environment, useGLTF } from '@react-three/drei';
+import { Bloom, EffectComposer, Noise, Vignette } from '@react-three/postprocessing';
 import { Physics, RigidBody } from '@react-three/rapier';
-import { EffectComposer, Bloom, Vignette, Noise } from '@react-three/postprocessing';
+import React, { Suspense } from 'react';
 import { useEngineStore } from '../../features/brain/engineStore';
 
 export default function QuantumScene() {

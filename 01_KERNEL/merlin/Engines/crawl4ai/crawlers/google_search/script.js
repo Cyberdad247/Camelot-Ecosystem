@@ -4,12 +4,12 @@
   // Function to extract image data from Google Images page
   function extractImageData() {
     const keys = Object.keys(window.W_jd);
-    let allImageData = [];
+    const allImageData = [];
     let currentPosition = 0;
 
     // Get the symbol we'll use (from first valid entry)
     let targetSymbol;
-    for (let key of keys) {
+    for (const key of keys) {
       try {
         const symbols = Object.getOwnPropertySymbols(window.W_jd[key]);
         if (symbols.length > 0) {
@@ -24,7 +24,7 @@
     if (!targetSymbol) return [];
 
     // Iterate through ALL keys
-    for (let key of keys) {
+    for (const key of keys) {
       try {
         const o1 = window.W_jd[key][targetSymbol];
         if (!o1) continue;

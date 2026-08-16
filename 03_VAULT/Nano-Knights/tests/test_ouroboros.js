@@ -2,8 +2,8 @@
  * Verification Suite: Ouroboros Integration
  */
 
-import { MemoryExporter } from '../src/prometheus/memory_exporter.js';
 import { GraphRAG } from '../src/prometheus/index.js';
+import { MemoryExporter } from '../src/prometheus/memory_exporter.js';
 
 async function runTest() {
   console.log('🛡️ VERIFYING OUROBOROS MEMORY BRIDGE...\n');

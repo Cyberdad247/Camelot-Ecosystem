@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
-import ChatMessage, { LoadingIndicator } from '../components/ChatMessage';
-import SourceSelection from '../components/SourceSelection';
-import ScriptConfirmation from '../components/ScriptConfirmation';
-import BannerConfirmation from '../components/BannerConfirmation';
-import AudioConfirmation from '../components/AudioConfirmation';
-import FinalPresentation from '../components/FinalPresentation';
+import { useNavigate, useParams } from 'react-router-dom';
 import ActivePodcastPreview from '../components/ActivePodcastPreview';
 import { PodcastAssetsToggle } from '../components/AssetPannelToggle';
+import AudioConfirmation from '../components/AudioConfirmation';
+import BannerConfirmation from '../components/BannerConfirmation';
+import ChatMessage, { LoadingIndicator } from '../components/ChatMessage';
+import FinalPresentation from '../components/FinalPresentation';
+import ScriptConfirmation from '../components/ScriptConfirmation';
+import Sidebar from '../components/Sidebar';
+import SourceSelection from '../components/SourceSelection';
 import api from '../services/api';
 
 const PodcastSession = () => {

@@ -8,13 +8,13 @@ import ReactFlow, {
   MiniMap,
   useNodesState,
   useEdgesState,
-  Node,
-  Edge,
-  Connection,
+  type Node,
+  type Edge,
+  type Connection,
   Panel,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { Save, Plus, Play, Cpu, Zap, Activity } from 'lucide-react';
+import { Activity, Cpu, Play, Plus, Save, Zap } from 'lucide-react';
 
 const initialNodes: Node[] = [
   {

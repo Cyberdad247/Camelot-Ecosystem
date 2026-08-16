@@ -40,11 +40,11 @@ function trapFocus(container, elementToFocus = container) {
     document.addEventListener('keydown', trapFocusHandlers.keydown);
   };
 
-  trapFocusHandlers.focusout = function () {
+  trapFocusHandlers.focusout = () => {
     document.removeEventListener('keydown', trapFocusHandlers.keydown);
   };
 
-  trapFocusHandlers.keydown = function (event) {
+  trapFocusHandlers.keydown = (event) => {
     if (event.code.toUpperCase() !== 'TAB') return; // If not TAB key
     // On the last focusable element and tab forward, focus the first element.
     if (event.target === last && !event.shiftKey) {
@@ -198,14 +198,14 @@ class QuantityInput extends HTMLElement {
   }
 
   validateQtyRules() {
-    const value = parseInt(this.input.value);
+    const value = Number.parseInt(this.input.value);
     if (this.input.min) {
-      const min = parseInt(this.input.min);
+      const min = Number.parseInt(this.input.min);
       const buttonMinus = this.querySelector(".quantity__button[name='minus']");
       buttonMinus.classList.toggle('disabled', value <= min);
     }
     if (this.input.max) {
-      const max = parseInt(this.input.max);
+      const max = Number.parseInt(this.input.max);
       const buttonPlus = this.querySelector(".quantity__button[name='plus']");
       buttonPlus.classList.toggle('disabled', value >= max);
     }
@@ -224,7 +224,7 @@ function debounce(fn, wait) {
 
 function throttle(fn, delay) {
   let lastCall = 0;
-  return function (...args) {
+  return (...args) => {
     const now = new Date().getTime();
     if (now - lastCall < delay) {
       return;
@@ -249,13 +249,9 @@ if (typeof window.Shopify == 'undefined') {
   window.Shopify = {};
 }
 
-Shopify.bind = function (fn, scope) {
-  return function () {
-    return fn.apply(scope, arguments);
-  };
-};
+Shopify.bind = (fn, scope) => () => fn.apply(scope, arguments);
 
-Shopify.setSelectorByValue = function (selector, value) {
+Shopify.setSelectorByValue = (selector, value) => {
   for (var i = 0, count = selector.options.length; i < count; i++) {
     var option = selector.options[i];
     if (value == option.value || value == option.innerHTML) {
@@ -265,13 +261,13 @@ Shopify.setSelectorByValue = function (selector, value) {
   }
 };
 
-Shopify.addListener = function (target, eventName, callback) {
+Shopify.addListener = (target, eventName, callback) => {
   target.addEventListener
     ? target.addEventListener(eventName, callback, false)
     : target.attachEvent('on' + eventName, callback);
 };
 
-Shopify.postLink = function (path, options) {
+Shopify.postLink = (path, options) => {
   options = options || {};
   var method = options['method'] || 'post';
   var params = options['parameters'] || {};
@@ -337,13 +333,13 @@ Shopify.CountryProvinceSelector.prototype = {
     }
   },
 
-  clearOptions: function (selector) {
+  clearOptions: (selector) => {
     while (selector.firstChild) {
       selector.removeChild(selector.firstChild);
     }
   },
 
-  setOptions: function (selector, values) {
+  setOptions: (selector, values) => {
     for (var i = 0, count = values.length; i < values.length; i++) {
       var opt = document.createElement('option');
       opt.value = values[i];
@@ -509,7 +505,7 @@ class HeaderDrawer extends MenuDrawer {
         : 0;
     document.documentElement.style.setProperty(
       '--header-bottom-position',
-      `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`,
+      `${Number.parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`,
     );
     this.header.classList.add('menu-open');
 
@@ -534,7 +530,7 @@ class HeaderDrawer extends MenuDrawer {
     this.header &&
       document.documentElement.style.setProperty(
         '--header-bottom-position',
-        `${parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`,
+        `${Number.parseInt(this.header.getBoundingClientRect().bottom - this.borderOffset)}px`,
       );
     document.documentElement.style.setProperty('--viewport-height', `${window.innerHeight}px`);
   };

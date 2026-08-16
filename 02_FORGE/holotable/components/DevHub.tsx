@@ -1,7 +1,7 @@
 'use client';
 
+import { Activity, Code, Play, Search, Settings, ShieldCheck } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Code, Play, Settings, Activity, Search, ShieldCheck } from 'lucide-react';
 
 export default function DevHub() {
   const [stats, setStats] = useState({

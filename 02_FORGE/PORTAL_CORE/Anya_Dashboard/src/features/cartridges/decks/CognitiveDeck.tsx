@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, GitBranch, Layers, Cpu } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Cpu, GitBranch, Layers, Loader2, Send } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type ReasoningMode = 'ToT' | 'GoT' | 'DoT' | 'ReAct' | 'TCoT';

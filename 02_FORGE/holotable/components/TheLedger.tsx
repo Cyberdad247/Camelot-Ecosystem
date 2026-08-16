@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
 import { api } from '@/lib/api';
-import { Terminal, AlertTriangle, CheckCircle } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Terminal } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function TheLedger() {
   const [lines, setLines] = useState<string[]>([]);

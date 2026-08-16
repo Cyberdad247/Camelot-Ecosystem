@@ -11,12 +11,12 @@
  * On transcript message: enqueues forge directive to harness_queue.jsonl (priority=1)
  */
 
-import { WebSocketServer, WebSocket } from 'ws';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
+import * as http from 'http';
 import * as os from 'os';
 import * as path from 'path';
-import * as http from 'http';
+import { type WebSocket, WebSocketServer } from 'ws';
 
 const PORT = 3002;
 const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), 'CAMELOT_OS');
@@ -77,7 +77,7 @@ function rms(samples: number[]): number {
   return Math.sqrt(sum / samples.length);
 }
 
-function writeWavFile(filePath: string, samples: number[], sampleRate: number = 16000): void {
+function writeWavFile(filePath: string, samples: number[], sampleRate = 16000): void {
   const numChannels = 1;
   const bytesPerSample = 2; // Int16
   const blockAlign = numChannels * bytesPerSample;

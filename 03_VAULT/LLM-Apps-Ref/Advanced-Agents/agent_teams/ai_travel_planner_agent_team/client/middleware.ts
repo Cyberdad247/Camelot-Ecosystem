@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 

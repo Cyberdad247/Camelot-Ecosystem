@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { Server } from 'node:http';
 import type { AddressInfo } from 'node:net';
 import express from 'express';
+import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { createOperatorBff, redactSensitive } from './bff';
-import { InMemoryEventStore } from './receipts';
-import { verifyManifest, issueLease } from './sentinel';
 import type { EffectManifest } from './contracts';
+import { InMemoryEventStore } from './receipts';
+import { issueLease, verifyManifest } from './sentinel';
 
 let server: Server;
 let base: string;

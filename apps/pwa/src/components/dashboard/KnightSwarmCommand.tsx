@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 interface KnightStatus {
   id: string;
@@ -169,11 +169,11 @@ export function KnightSwarmCommand() {
         prev.map((k) => {
           if (k.status === 'PROCESSING') {
             if (k.id === 'KNIGHT_MAIL_003') {
-              const num = parseInt(k.currentMetricValue, 10);
+              const num = Number.parseInt(k.currentMetricValue, 10);
               return { ...k, currentMetricValue: String(isNaN(num) ? 142 : num + 1) };
             }
             if (k.id === 'KNIGHT_STREAM_007') {
-              const val = parseFloat(k.currentMetricValue.replace('%', ''));
+              const val = Number.parseFloat(k.currentMetricValue.replace('%', ''));
               const nextVal = Math.max(0.01, val + (Math.random() - 0.5) * 0.005);
               return { ...k, currentMetricValue: `${nextVal.toFixed(3)}%` };
             }

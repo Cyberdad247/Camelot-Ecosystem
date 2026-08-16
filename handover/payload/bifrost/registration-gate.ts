@@ -1,6 +1,6 @@
-import { TrustBand } from './bifrost-envelope';
+import type { TrustBand } from './bifrost-envelope';
 import { reconcileTrust } from './bifrost-gateway';
-import { degradeTrustBand, evaluateSidecar, FfiError, SidecarStatus } from './ffi-policy';
+import { type FfiError, type SidecarStatus, degradeTrustBand, evaluateSidecar } from './ffi-policy';
 
 /**
  * Bifrost registration gate — spec workflow:

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
-import TaskForm from '../components/TaskForm';
 import PodcastConfigForm from '../components/PodcastConfigForm';
+import TaskForm from '../components/TaskForm';
+import api from '../services/api';
 
 const Voyager = () => {
   const [tasks, setTasks] = useState([]);
@@ -689,7 +689,7 @@ const Voyager = () => {
                     value={selectedTaskId || ''}
                     onChange={(e) => {
                       const value = e.target.value;
-                      handleFilterByTask(value ? parseInt(value) : null);
+                      handleFilterByTask(value ? Number.parseInt(value) : null);
                     }}
                     className="bg-gradient-to-r from-gray-800 to-gray-900 border border-gray-700 text-gray-300 text-sm rounded-sm px-3 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                   >

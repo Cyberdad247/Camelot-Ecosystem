@@ -1,26 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import EventFeed from '@/components/ui/EventFeed';
+import { SERVICES, StatusDot } from '@/components/ui/StatusDot';
+import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
+import { CARTRIDGES } from '@/features/cartridges/registry';
+import ConfigPanel from '@/features/hub/ConfigPanel';
+import FleetPanel from '@/features/hub/FleetPanel';
+import KnightAvatarScene from '@/features/knights/KnightAvatarScene';
+import KnightStreamBanner from '@/features/knights/KnightStreamBanner';
+import VisualPlanOverlay from '@/features/knights/VisualPlanOverlay';
+import { useKnightStream } from '@/features/knights/useKnightStream';
+import { cn } from '@/lib/utils';
 import {
   Activity,
+  AlertTriangle,
   ArrowRight,
   Cpu,
   Database,
-  Zap,
   ShieldCheck,
   TrendingUp,
-  AlertTriangle,
+  Zap,
 } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { CARTRIDGES } from '@/features/cartridges/registry';
-import { SERVICES, StatusDot } from '@/components/ui/StatusDot';
-import EventFeed from '@/components/ui/EventFeed';
-import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
-import KnightStreamBanner from '@/features/knights/KnightStreamBanner';
-import KnightAvatarScene from '@/features/knights/KnightAvatarScene';
-import FleetPanel from '@/features/hub/FleetPanel';
-import ConfigPanel from '@/features/hub/ConfigPanel';
-import VisualPlanOverlay from '@/features/knights/VisualPlanOverlay';
-import { useKnightStream } from '@/features/knights/useKnightStream';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const STAT_CARDS = [
   { label: 'Active Knights', value: '7', icon: Zap, color: 'text-fuchsia-400' },

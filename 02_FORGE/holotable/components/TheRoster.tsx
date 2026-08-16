@@ -1,8 +1,8 @@
 'use client';
 
+import { type Agent, api } from '@/lib/api';
+import { Bot, Brain, Shield, Zap } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Agent, api } from '@/lib/api';
-import { Bot, Zap, Brain, Shield } from 'lucide-react';
 
 export default function TheRoster() {
   const [agents, setAgents] = useState<Agent[]>([]);

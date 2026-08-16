@@ -185,7 +185,7 @@ window.buildDomTree = (
       const backgroundColor = baseColor + '1A'; // 10% opacity version of the color
 
       // Get iframe offset if necessary
-      let iframeOffset = { x: 0, y: 0 };
+      const iframeOffset = { x: 0, y: 0 };
       if (parentIframe) {
         const iframeRect = parentIframe.getBoundingClientRect(); // Keep getBoundingClientRect for iframe offset
         iframeOffset.x = iframeRect.left;
@@ -258,7 +258,7 @@ window.buildDomTree = (
       // Update positions on scroll/resize
       const updatePositions = () => {
         const newRects = element.getClientRects(); // Get fresh rects
-        let newIframeOffset = { x: 0, y: 0 };
+        const newIframeOffset = { x: 0, y: 0 };
 
         if (parentIframe) {
           const iframeRect = parentIframe.getBoundingClientRect(); // Keep getBoundingClientRect for iframe
@@ -638,7 +638,7 @@ window.buildDomTree = (
       return false;
     }
 
-    let isInteractiveCursor = doesElementHaveInteractivePointer(element);
+    const isInteractiveCursor = doesElementHaveInteractivePointer(element);
 
     // Genius fix for almost all interactive elements
     if (isInteractiveCursor) {
@@ -870,7 +870,7 @@ window.buildDomTree = (
     }
 
     // Find the correct document context and root element
-    let doc = element.ownerDocument;
+    const doc = element.ownerDocument;
 
     // If we're in an iframe, elements are considered top by default
     if (doc !== window.document) {
@@ -1532,7 +1532,7 @@ window.buildDomTree = (
   // --- TOON SERIALIZER (Token Optimized Object Notation) ---
   function toTOON(map, rootId) {
     // Header: N=Hierarchy Indent | ID=NanoID | Tag | Vis=Visibility(T/F) | Text | Ref=RefID
-    let output = ['#@ N|ID|Tag|Vis|Text|Ref'];
+    const output = ['#@ N|ID|Tag|Vis|Text|Ref'];
 
     function limitText(text) {
       if (!text) return '_';

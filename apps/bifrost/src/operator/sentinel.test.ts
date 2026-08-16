@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
 import { describe, expect, it, vi } from 'vitest';
-import { getLease, issueLease, revokeLease, verifyManifest, type VerifyContext } from './sentinel';
 import type { EffectManifest } from './contracts';
+import { type VerifyContext, getLease, issueLease, revokeLease, verifyManifest } from './sentinel';
 
 function makeManifest(overrides: Partial<EffectManifest> = {}): EffectManifest {
   return {

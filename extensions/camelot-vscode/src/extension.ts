@@ -1,3 +1,6 @@
+import { spawn } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import * as path from 'node:path';
 /**
  * Camelot-OS VS Code Extension
  * ==============================
@@ -15,9 +18,6 @@
  *    the same risk as running `bin/camelot_portable.py cartridge --emit`.
  */
 import * as vscode from 'vscode';
-import { spawn } from 'node:child_process';
-import { existsSync } from 'node:fs';
-import * as path from 'node:path';
 
 const REPO: string = path.resolve(__dirname, '..', '..', '..');
 const PORTABLE: string = path.join(REPO, 'bin', 'camelot_portable.py');

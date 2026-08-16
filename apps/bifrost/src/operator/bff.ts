@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-import { Router, type Request, type Response } from 'express';
+import { type Request, type Response, Router } from 'express';
 import { z } from 'zod';
-import type { EventStore } from './receipts';
 import type { EffectManifest, OperatorTaskSnapshot } from './contracts';
+import { FIXTURES, type FixtureName, snapshotFor } from './fixtures';
+import type { EventStore } from './receipts';
 import type { VerifyContext, VerifyResult } from './sentinel';
-import { FIXTURES, snapshotFor, type FixtureName } from './fixtures';
 
 // Keys are stored lowercase so the case-insensitive match (`k.toLowerCase()`)
 // actually hits camelCase keys like `apiKey` (design §8.3 redact_sensitive_fields).

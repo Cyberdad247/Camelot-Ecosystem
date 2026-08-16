@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Terminal as XTerminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl'; // Optional, but usually good. I'll stick to Fit for now to minimize deps.
+import { Terminal as XTerminal } from '@xterm/xterm';
+import React, { useEffect, useRef, useState } from 'react';
 import '@xterm/xterm/css/xterm.css';
 import { TerminalSquare } from 'lucide-react';
 

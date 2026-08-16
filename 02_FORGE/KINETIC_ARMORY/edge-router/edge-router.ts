@@ -7,12 +7,12 @@
  *   Rule B: non-loopback — must present valid bifrost token in first message
  */
 
-import { WebSocketServer, WebSocket } from 'ws';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import * as zlib from 'zlib';
+import { type WebSocket, WebSocketServer } from 'ws';
 
 const PORT = 3001;
 const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), 'CAMELOT_OS');
@@ -104,7 +104,7 @@ wss.on('connection', (ws: WebSocket, req) => {
   clients.set(ws, meta);
   console.log(`[EDGE-ROUTER] CONNECT ${meta.id} ${remoteAddr}`);
 
-  function sendResponse(obj: object, compress: boolean = false): void {
+  function sendResponse(obj: object, compress = false): void {
     const payloadStr = JSON.stringify(obj);
     if (compress) {
       zlib.gzip(Buffer.from(payloadStr, 'utf8'), (err, compressed) => {

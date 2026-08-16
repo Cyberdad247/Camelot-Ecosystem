@@ -1,7 +1,12 @@
-import { IntentRoute } from '../router/intent-router';
 import { evaluatePolicy } from '../policy/policy-engine';
-import { BifrostEnvelope, TrustBand, verifyEnvelope, VerifyOptions } from './bifrost-envelope';
-import { HeimdallFsm } from './heimdall-fsm';
+import type { IntentRoute } from '../router/intent-router';
+import {
+  type BifrostEnvelope,
+  type TrustBand,
+  type VerifyOptions,
+  verifyEnvelope,
+} from './bifrost-envelope';
+import type { HeimdallFsm } from './heimdall-fsm';
 
 /**
  * Bifrost gateway — reconciles envelope verification, Heimdall node health,

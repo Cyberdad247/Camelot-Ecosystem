@@ -1,6 +1,6 @@
+import { describe, expect, it } from 'vitest';
 // tests/router/policy.test.ts
-import { determineRoute, resolveRoute, PERSONA_PROMPTS } from '../../src/router/policy';
-import { describe, it, expect } from 'vitest';
+import { PERSONA_PROMPTS, determineRoute, resolveRoute } from '../../src/router/policy';
 
 describe('OmniRoute Policy', () => {
   it('should route high-context tasks to Gemini', () => {

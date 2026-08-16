@@ -2,14 +2,14 @@
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 'use client';
 
-import { useState, useCallback } from 'react';
 import {
+  BarVisualizer,
+  DisconnectButton,
   LiveKitRoom,
   RoomAudioRenderer,
   useVoiceAssistant,
-  BarVisualizer,
-  DisconnectButton,
 } from '@livekit/components-react';
+import { useCallback, useState } from 'react';
 import '@livekit/components-styles';
 
 function TashaSession({ onDisconnect }: { onDisconnect: () => void }) {

@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TowerScene, ScrollState } from './TowerScene';
-import { FLOORS, PhaseId, phaseAt } from './tower-data';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { type ScrollState, TowerScene } from './TowerScene';
+import { FLOORS, type PhaseId, phaseAt } from './tower-data';
 
 gsap.registerPlugin(ScrollTrigger);
 

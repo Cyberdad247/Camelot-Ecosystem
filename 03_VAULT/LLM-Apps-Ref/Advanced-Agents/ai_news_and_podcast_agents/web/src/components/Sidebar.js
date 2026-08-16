@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
 import { ShieldCheck } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from '../services/api';
 
 const Sidebar = ({ onNewSession, onSessionSelect }) => {
@@ -67,7 +67,7 @@ const Sidebar = ({ onNewSession, onSessionSelect }) => {
       if (!timestamp) {
         return 'Recent';
       }
-      const date = new Date(isNaN(timestamp) ? parseInt(timestamp) : timestamp * 1000);
+      const date = new Date(isNaN(timestamp) ? Number.parseInt(timestamp) : timestamp * 1000);
       if (isNaN(date.getTime()) || date.getFullYear() < 2000) {
         return 'Recent';
       }

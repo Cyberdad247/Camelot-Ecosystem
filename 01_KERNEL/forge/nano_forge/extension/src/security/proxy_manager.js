@@ -34,7 +34,7 @@ class ProxyManager {
         singleProxy: {
           scheme: 'http',
           host: this.config.host,
-          port: parseInt(this.config.port),
+          port: Number.parseInt(this.config.port),
         },
         bypassList: ['localhost', '127.0.0.1'],
       },

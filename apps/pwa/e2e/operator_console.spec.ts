@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { expect, test, type Page } from '@playwright/test';
+import { type Page, expect, test } from '@playwright/test';
 
 const BFF_PREFIX = '**/v1/operator/**';
 

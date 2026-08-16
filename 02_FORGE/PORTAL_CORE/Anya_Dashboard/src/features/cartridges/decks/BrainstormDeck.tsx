@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Lightbulb, Shuffle, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Layers, Lightbulb, Loader2, Send, Shuffle } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type IdeationMode = 'divergent' | 'convergent' | 'scamper' | 'triz' | 'auto';

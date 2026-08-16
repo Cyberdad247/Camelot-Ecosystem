@@ -1,22 +1,23 @@
-import React, { useState, useRef } from 'react';
-import {
-  FlaskConical,
-  Send,
-  ChevronDown,
-  ChevronRight,
-  BookOpen,
-  Globe,
-  Search,
-  Cpu,
-  CheckCircle2,
-  Loader2,
-  Copy,
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { bifrostFetch } from '@/lib/bifrostClient';
+import EventFeed from '@/components/ui/EventFeed';
 import { runtimeConfig } from '@/config/runtime';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
-import EventFeed from '@/components/ui/EventFeed';
+import { bifrostFetch } from '@/lib/bifrostClient';
+import { cn } from '@/lib/utils';
+import {
+  BookOpen,
+  CheckCircle2,
+  ChevronDown,
+  ChevronRight,
+  Copy,
+  Cpu,
+  FlaskConical,
+  Globe,
+  Loader2,
+  Search,
+  Send,
+} from 'lucide-react';
+import type React from 'react';
+import { useRef, useState } from 'react';
 
 type SearchDepth = 'quick' | 'medium' | 'deep';
 type SourceType = 'web' | 'github' | 'arxiv' | 'notebooklm';

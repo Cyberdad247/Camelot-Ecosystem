@@ -1,4 +1,4 @@
-import { HeimdallEvent, HeimdallFsm } from './heimdall-fsm';
+import type { HeimdallEvent, HeimdallFsm } from './heimdall-fsm';
 
 /**
  * Microfish — predictive time-series engine (TS reference for the Rust cartridge).

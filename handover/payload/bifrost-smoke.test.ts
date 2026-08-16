@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
-import { signDag, verifyDagSignature } from '../provenance/dag-signer';
-import { buildPromptDependencyGraph, enforceAgentArmor } from '../security/agentarmor-pdg';
 import { runAntigravity } from '../execution/antigravity-engine';
+import { signDag, verifyDagSignature } from '../provenance/dag-signer';
 import { InMemoryCommandQueue } from '../runtime/command-queue';
+import { buildPromptDependencyGraph, enforceAgentArmor } from '../security/agentarmor-pdg';
 
 const secret = 'test-secret-that-is-long-enough';
 

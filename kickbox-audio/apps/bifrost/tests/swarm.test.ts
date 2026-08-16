@@ -1,5 +1,5 @@
 import { expect, test, vi } from 'vitest';
-import { swarmMatrix, SwarmTask } from '../src/swarm/MicrocubicSwarm';
+import { type SwarmTask, swarmMatrix } from '../src/swarm/MicrocubicSwarm';
 
 // Stub the DB boundary so the test exercises swarm orchestration in isolation
 // (no live Prisma/network dependency).

@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Check, Loader2, Settings2, ShieldAlert } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { bifrostFetch } from '@/lib/bifrostClient';
 import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch } from '@/lib/bifrostClient';
+import { cn } from '@/lib/utils';
+import { Check, Loader2, Settings2, ShieldAlert } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 interface CognitiveConfig {
   sync_interval: number;

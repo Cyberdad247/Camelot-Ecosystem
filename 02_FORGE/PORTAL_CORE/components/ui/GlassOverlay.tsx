@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Cpu, Terminal, Users, Wand2, Menu, Activity } from 'lucide-react';
+import { Activity, Cpu, Menu, Shield, Terminal, Users, Wand2 } from 'lucide-react';
+import React, { useState } from 'react';
 
 // --- Sidebar Component ---
 function Sidebar({ activeAgent }: { activeAgent: string }) {

@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { useScroll, useTransform, useSpring } from 'framer-motion';
+import { useScroll, useSpring, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 export const useFireTrail = () => {

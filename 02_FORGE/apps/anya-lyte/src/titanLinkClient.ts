@@ -1,6 +1,10 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { TitanLinkEventSchema, TitanLinkCommand, TitanLinkEvent } from '@camelot/anya-domain';
+import {
+  type TitanLinkCommand,
+  type TitanLinkEvent,
+  TitanLinkEventSchema,
+} from '@camelot/anya-domain';
 
 type Listener = (event: TitanLinkEvent) => void;
 

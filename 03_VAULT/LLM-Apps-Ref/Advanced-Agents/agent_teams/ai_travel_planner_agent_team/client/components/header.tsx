@@ -1,11 +1,11 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { authClient } from '@/lib/auth-client';
+import { Luggage } from 'lucide-react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
-import { Luggage } from 'lucide-react';
 
 export default function Header() {
   const router = useRouter();

@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type ConnectionState = 'idle' | 'connecting' | 'connected' | 'blocked';
 

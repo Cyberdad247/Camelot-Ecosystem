@@ -2,9 +2,9 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useBifrost } from '../../context/BifrostContext';
+import { useEffect, useState } from 'react';
 import { KNIGHTS_REGISTRY, type KnightMetrics } from '../../actions/coreRegistry';
+import { useBifrost } from '../../context/BifrostContext';
 
 interface WeatherData {
   temp: number;

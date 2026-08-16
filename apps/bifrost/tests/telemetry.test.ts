@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 
-import { expect, test, vi } from 'vitest';
-import { WebSocket, WebSocketServer } from 'ws';
 import { createServer } from 'http';
 import express from 'express';
+import { expect, test, vi } from 'vitest';
+import { WebSocket, WebSocketServer } from 'ws';
 import { HeliosHarness } from '../src/ai/HeliosHarness';
 
 // Mocking HeliosHarness

@@ -24,6 +24,10 @@ import type {
   VoiceProvider,
   VoiceTurn,
 } from '@camelot/contracts';
+import type { NodeView } from '@camelot/contracts';
+import { HermesVoiceProvider } from './hermes-provider.js';
+import { initialNodePanelState, renderNodePanel } from './node-panel.js';
+import type { NodePanelState } from './node-panel.js';
 import {
   approvalVisible,
   avatarBadge,
@@ -32,12 +36,8 @@ import {
   modelRouteLine,
   pendingLease,
 } from './view-model.js';
-import { HermesVoiceProvider } from './hermes-provider.js';
 import { VoiceSessionController } from './voice-session.js';
 import type { VoiceUiState } from './voice-session.js';
-import { initialNodePanelState, renderNodePanel } from './node-panel.js';
-import type { NodePanelState } from './node-panel.js';
-import type { NodeView } from '@camelot/contracts';
 
 const params = new URLSearchParams(location.search);
 const GATEWAY_URL = params.get('gateway') ?? `http://${location.hostname}:8788`;

@@ -1,6 +1,6 @@
+import { Fingerprint, ShieldAlert, XCircle } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { YStack, XStack, Text, Button, Theme, Sheet, Card } from 'tamagui';
-import { ShieldAlert, Fingerprint, XCircle } from 'lucide-react-native';
+import { Button, Card, Sheet, Text, Theme, XStack, YStack } from 'tamagui';
 
 /**
  * Anya Lyte: Iron Gate Approval Sheet

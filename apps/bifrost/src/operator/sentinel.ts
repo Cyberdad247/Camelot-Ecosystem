@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { randomUUID } from 'node:crypto';
-import { EffectManifestSchema, type EffectManifest } from './contracts';
+import { type EffectManifest, EffectManifestSchema } from './contracts';
 
 export interface VerifyContext {
   now: () => Date;

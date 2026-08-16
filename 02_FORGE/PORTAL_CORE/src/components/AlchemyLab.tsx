@@ -35,6 +35,7 @@ export default function AlchemyLab() {
               key={item.id}
               className={`${item.col} group relative h-[400px] overflow-hidden rounded-xl border border-[#00FF99]/30 bg-[#0a0a0a] hover:border-[#00FF99] transition-colors`}
               whileHover={{ scale: 0.98 }}
+              rel="noreferrer"
             >
               <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
 

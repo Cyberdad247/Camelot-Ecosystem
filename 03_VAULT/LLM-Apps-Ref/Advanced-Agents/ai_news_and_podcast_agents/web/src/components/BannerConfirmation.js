@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
 import {
   Check,
-  X,
-  Loader2,
-  Maximize2,
-  Info,
   ChevronLeft,
   ChevronRight,
+  Eye,
+  Info,
+  Loader2,
+  Maximize2,
   Pause,
   Play,
-  Eye,
   Sparkles,
+  X,
 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 
 const BannerConfirmation = ({

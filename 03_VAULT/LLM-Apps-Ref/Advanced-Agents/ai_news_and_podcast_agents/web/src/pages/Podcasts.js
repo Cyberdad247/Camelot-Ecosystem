@@ -1,6 +1,6 @@
+import { Sparkles } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles } from 'lucide-react';
 import api from '../services/api';
 
 const ToggleSwitch = ({ isActive, isUpdating, onChange }) => {

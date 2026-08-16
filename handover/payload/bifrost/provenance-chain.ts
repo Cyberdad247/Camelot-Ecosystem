@@ -1,5 +1,5 @@
 import { createHash, createHmac } from 'node:crypto';
-import { BifrostEnvelope, TrustBand } from './bifrost-envelope';
+import type { BifrostEnvelope, TrustBand } from './bifrost-envelope';
 
 /**
  * Provenance ledger append protocol — spec:

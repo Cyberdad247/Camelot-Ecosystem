@@ -27,7 +27,7 @@ export const SPECIALIZED_SKILLS = {
   EXTRACT_CODE: () => {
     const blocks = Array.from(document.querySelectorAll('pre code, div.code-block, textarea.code'));
     const artifacts = blocks.map((b, i) => {
-      let lang = b.className.match(/language-(\w+)/)?.[1] || 'text';
+      const lang = b.className.match(/language-(\w+)/)?.[1] || 'text';
       return {
         id: `code_${i}`,
         language: lang,

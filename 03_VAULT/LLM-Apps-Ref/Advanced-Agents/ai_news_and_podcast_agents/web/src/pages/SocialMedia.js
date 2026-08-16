@@ -1,10 +1,10 @@
+import { Key, ShieldCheck } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
-import api from '../services/api';
 import FeedTab from '../components/social/FeedTab';
-import StatsTab from '../components/social/StatsTab';
-import SessionSetupTab from '../components/social/SessionSetupTab';
 import PostDetailPanel from '../components/social/PostDetailPanel';
-import { ShieldCheck, Key } from 'lucide-react';
+import SessionSetupTab from '../components/social/SessionSetupTab';
+import StatsTab from '../components/social/StatsTab';
+import api from '../services/api';
 
 const SocialMedia = () => {
   const [posts, setPosts] = useState([]);

@@ -1,4 +1,9 @@
-import { BifrostEnvelope, QueuePriority, verifyEnvelope, VerifyOptions } from './bifrost-envelope';
+import {
+  type BifrostEnvelope,
+  type QueuePriority,
+  type VerifyOptions,
+  verifyEnvelope,
+} from './bifrost-envelope';
 
 /**
  * Bifrost bounded async queues — spec:
@@ -150,7 +155,7 @@ export class BifrostQueue {
    * Drain in priority order (quarantine/revoke first via critical class),
    * preserving FIFO ordering within each partition.
    */
-  drain(max = Infinity): QueueItem[] {
+  drain(max = Number.POSITIVE_INFINITY): QueueItem[] {
     const out: QueueItem[] = [];
     for (const priority of PRIORITY_ORDER) {
       for (const [partition, items] of this.partitions) {

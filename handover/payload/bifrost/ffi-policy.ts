@@ -1,4 +1,4 @@
-import { TrustBand } from './bifrost-envelope';
+import type { TrustBand } from './bifrost-envelope';
 
 /**
  * FFI timeout/failure policy — Bifrost spec.

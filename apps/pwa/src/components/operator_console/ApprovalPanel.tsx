@@ -3,10 +3,10 @@
 'use client';
 
 import { useState } from 'react';
-import { submitDecision, type DecisionResponse } from '../../lib/operator_console/operator-api';
+import { type DecisionResponse, submitDecision } from '../../lib/operator_console/operator-api';
 import type { EffectManifest } from '../../lib/operator_console/schemas';
-import { EffectManifestDialog } from './EffectManifestDialog';
 import { ApprovalConfirmationDialog } from './ApprovalConfirmationDialog';
+import { EffectManifestDialog } from './EffectManifestDialog';
 
 export function ApprovalPanel({
   approval,

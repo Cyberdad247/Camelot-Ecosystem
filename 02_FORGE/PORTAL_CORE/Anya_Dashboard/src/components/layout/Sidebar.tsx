@@ -1,22 +1,22 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
+import { CARTRIDGES } from '@/features/cartridges/registry';
 import { cn } from '@/lib/utils';
 import {
-  LayoutDashboard,
   BrainCircuit,
-  FlaskConical,
-  Map,
-  LayoutGrid,
-  Globe,
   ChevronDown,
+  FlaskConical,
+  Globe,
+  Layers3,
+  LayoutDashboard,
+  LayoutGrid,
+  Map,
+  ShieldCheck,
   Sword,
   Wifi,
   WifiOff,
-  ShieldCheck,
-  Layers3,
 } from 'lucide-react';
-import { CARTRIDGES } from '@/features/cartridges/registry';
-import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
+import type React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const navLinkBase =
   'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors duration-150';

@@ -1,4 +1,4 @@
-import { FLOORS, FLOOR_GAP, TOWER_TOP_Y, phaseAt, PhaseId } from './tower-data';
+import { FLOORS, FLOOR_GAP, type PhaseId, TOWER_TOP_Y, phaseAt } from './tower-data';
 
 /**
  * Camera layout resolution — sealed glyph contract:

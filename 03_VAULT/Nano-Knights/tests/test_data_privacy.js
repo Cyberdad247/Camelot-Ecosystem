@@ -3,9 +3,9 @@
  * Validates: CryptoVault, PII Scrubbing, GraphRAG Persistence
  */
 
-import { CryptoVault } from '../src/security/crypto_vault.js';
 import { TOONEncoder } from '../src/prometheus/encoder.js';
 import { GraphRAG } from '../src/prometheus/index.js';
+import { CryptoVault } from '../src/security/crypto_vault.js';
 
 // Mock Web Crypto (if not available in Node environment, polyfill or check)
 if (!global.crypto) {

@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import {
+  BASE_PATH,
+  BREAKPOINTS,
+  FLOOR_LAYOUTS,
   breakpointFor,
   resolveCameraLayout,
-  BREAKPOINTS,
-  BASE_PATH,
-  FLOOR_LAYOUTS,
 } from '../src/camera-layout';
-import { FLOORS, phaseAt, TOWER_TOP_Y } from '../src/tower-data';
+import { FLOORS, TOWER_TOP_Y, phaseAt } from '../src/tower-data';
 
 // ── Breakpoints (incl. ultrawide) ──────────────────────────────
 assert.equal(breakpointFor(390, 844), 'mobile');
@@ -32,7 +32,7 @@ assert.ok(Math.abs(mid.path.x - Math.cos(mid.path.angle) * mid.path.radius) < 1e
 assert.ok(Math.abs(mid.path.z - Math.sin(mid.path.angle) * mid.path.radius) < 1e-9);
 
 // focusY descends monotonically with progress
-let prevY = Infinity;
+let prevY = Number.POSITIVE_INFINITY;
 for (let p = 0; p <= 1.0001; p += 0.1) {
   const r = resolveCameraLayout(1920, 1080, p);
   assert.ok(r.path.focusY <= prevY + 1e-9, `focusY not descending at p=${p}`);

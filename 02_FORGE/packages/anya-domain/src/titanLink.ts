@@ -1,8 +1,8 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import { z } from 'zod';
-import { UKGDeltaSchema } from './types.js';
 import { IronGateApprovalRequestSchema, IronGateApprovalResponseSchema } from './ironGate.js';
+import { UKGDeltaSchema } from './types.js';
 
 export const ChatRoleSchema = z.enum(['user', 'assistant', 'system', 'knight']);
 export type ChatRole = z.infer<typeof ChatRoleSchema>;

@@ -6,7 +6,7 @@ class MainSearch extends SearchForm {
   }
 
   setupEventListeners() {
-    let allSearchForms = [];
+    const allSearchForms = [];
     this.allSearchInputs.forEach((input) => allSearchForms.push(input.form));
     this.input.addEventListener('focus', this.onInputFocus.bind(this));
     if (allSearchForms.length < 2) return;

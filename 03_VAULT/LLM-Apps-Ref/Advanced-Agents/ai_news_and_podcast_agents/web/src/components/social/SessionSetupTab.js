@@ -1,6 +1,6 @@
+import { AlertCircle, ArrowRight, CheckCircle, Clock, Globe, Key, Shield, Zap } from 'lucide-react';
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
-import { CheckCircle, AlertCircle, Clock, Shield, Globe, Zap, ArrowRight, Key } from 'lucide-react';
 
 const SessionSetupTab = () => {
   const [isLoading, setIsLoading] = useState(false);

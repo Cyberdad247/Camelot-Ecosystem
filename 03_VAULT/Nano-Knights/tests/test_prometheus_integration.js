@@ -3,8 +3,8 @@
  * Validates: TOON Encoding, GraphRAG Indexing, Sentinel Compression, Knight Spawner
  */
 
-import { TOONEncoder, GraphRAG, Sentinel } from '../src/prometheus/index.js';
 import { KnightSpawner } from '../src/knights/knight_spawner.js';
+import { GraphRAG, Sentinel, TOONEncoder } from '../src/prometheus/index.js';
 
 // Mock Browser Environment
 global.chrome = {

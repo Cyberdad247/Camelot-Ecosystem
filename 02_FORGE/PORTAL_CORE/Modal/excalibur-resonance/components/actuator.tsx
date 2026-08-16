@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { Zap } from 'lucide-react';
+import { useState } from 'react';
 
 export function Actuator() {
   const [command, setCommand] = useState('');

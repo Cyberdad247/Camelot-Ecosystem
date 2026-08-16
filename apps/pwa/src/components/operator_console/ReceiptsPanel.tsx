@@ -2,8 +2,8 @@
 
 'use client';
 
-import type { ReceiptSummary } from '../../lib/operator_console/schemas';
 import { ageLabel } from '../../lib/operator_console/formatters';
+import type { ReceiptSummary } from '../../lib/operator_console/schemas';
 
 export function ReceiptsPanel({
   receipts,

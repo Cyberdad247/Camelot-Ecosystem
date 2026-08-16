@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { Mic, MicOff, Globe, Loader2, Sparkles, Zap } from 'lucide-react';
-import { speakNeural, initVoice } from './VoiceEngine';
 import { runtimeConfig } from '@/config/runtime';
 import { bifrostFetch } from '@/lib/bifrostClient';
+import { Globe, Loader2, Mic, MicOff, Sparkles, Zap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { initVoice, speakNeural } from './VoiceEngine';
 
 interface AnyasLinkProps {
   externalUrl: string;

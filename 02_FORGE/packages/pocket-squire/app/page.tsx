@@ -1,7 +1,7 @@
 'use client';
 
+import { Activity, Copy, Mic, Shield, Terminal } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Copy, Terminal, Activity, Mic, Shield } from 'lucide-react';
 import { checkKernelHealth, dispatchCommand } from '../src/lib/kernel-bridge';
 
 export default function PocketSquireDeck() {

@@ -1,9 +1,9 @@
+import { useState } from 'react';
+import AgnoDebateBridge from './components/AgnoDebateBridge';
+import PersonaStudio from './components/PersonaStudio';
 import RotelMonitor from './components/RotelMonitor';
 import SaltareController from './components/SaltareController';
 import Terminal from './components/Terminal';
-import AgnoDebateBridge from './components/AgnoDebateBridge';
-import PersonaStudio from './components/PersonaStudio';
-import { useState } from 'react';
 
 function App() {
   const [view, setView] = useState<'DASHBOARD' | 'STUDIO'>('DASHBOARD');

@@ -1,4 +1,4 @@
-import { microphoneArbiter, type MicrophoneLease } from './microphone-arbiter';
+import { type MicrophoneLease, microphoneArbiter } from './microphone-arbiter';
 import { SharedPcmRing, sharedPcmAvailable } from './shared-pcm-ring';
 import type {
   VoiceFirstRuntimeOptions,

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { cn } from '@/lib/utils';
 import {
   Activity,
   Archive,
@@ -17,8 +17,9 @@ import {
   Sparkles,
   Zap,
 } from 'lucide-react';
+import type React from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { cn } from '@/lib/utils';
 import {
   activateSupportSession,
   loadCamelotOsState,

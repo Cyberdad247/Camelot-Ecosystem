@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Check, Loader2, FileText, Sparkles, Eye, X, Users, Globe } from 'lucide-react';
 import DOMPurify from 'dompurify';
+import { Check, Eye, FileText, Globe, Loader2, Sparkles, Users, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
 
 const SourceIcon = ({ url }) => {
   const [iconUrl, setIconUrl] = useState(null);

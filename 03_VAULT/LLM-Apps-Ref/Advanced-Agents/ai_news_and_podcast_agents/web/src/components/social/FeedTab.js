@@ -1,7 +1,7 @@
 import React from 'react';
-import PostItem from './PostItem';
 import Filters from './Filters';
 import Pagination from './Pagination';
+import PostItem from './PostItem';
 
 const FeedTab = ({
   posts,

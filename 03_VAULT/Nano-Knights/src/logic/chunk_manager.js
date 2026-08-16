@@ -71,7 +71,7 @@ export class ChunkManager {
     // Assumption: 'extract' usually returns an Array of objects from the prompt instruction.
     // OR an object { "items": [...] }.
 
-    let allItems = [];
+    const allItems = [];
 
     results.forEach((res) => {
       if (Array.isArray(res)) {

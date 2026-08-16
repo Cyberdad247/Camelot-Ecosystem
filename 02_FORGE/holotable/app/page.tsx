@@ -1,12 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
-import TheRoster from '@/components/TheRoster';
-import TheLedger from '@/components/TheLedger';
-import OracleCanvas from '@/components/OracleCanvas';
 import DevHub from '@/components/DevHub';
 import GenesisDesigner from '@/components/GenesisDesigner';
-import { LayoutGrid, Binary, GitBranch, Cpu, Sparkles } from 'lucide-react';
+import OracleCanvas from '@/components/OracleCanvas';
+import TheLedger from '@/components/TheLedger';
+import TheRoster from '@/components/TheRoster';
+import { Binary, Cpu, GitBranch, LayoutGrid, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'oracle' | 'genesis'>('oracle');

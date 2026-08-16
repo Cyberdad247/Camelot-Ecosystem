@@ -23,7 +23,7 @@ export class ContextPruner {
       (m) => m.skill === 'SUMMARIZE_CORE' || m.skill === 'ANALYZE_SCREENSHOT',
     );
 
-    let pruned = [];
+    const pruned = [];
 
     // If we have a summary, keep it.
     if (summaryIndex !== -1) {

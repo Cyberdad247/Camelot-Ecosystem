@@ -1,19 +1,19 @@
-import React, { useState, useRef, useEffect } from 'react';
 import {
-  Image,
-  Video,
-  FileText,
-  Volume2,
+  Calendar,
   ChevronLeft,
   ChevronRight,
-  Play,
-  X,
-  Users,
-  Calendar,
-  Sparkles,
-  Globe,
   ExternalLink,
+  FileText,
+  Globe,
+  Image,
+  Play,
+  Sparkles,
+  Users,
+  Video,
+  Volume2,
+  X,
 } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
 import api from '../services/api';
 
 const SourceIcon = ({ url }) => {

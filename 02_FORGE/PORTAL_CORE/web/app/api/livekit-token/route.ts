@@ -1,7 +1,7 @@
+import { AccessToken } from 'livekit-server-sdk';
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import { NextResponse } from 'next/server';
-import { AccessToken } from 'livekit-server-sdk';
 
 export async function POST() {
   const apiKey = process.env.LIVEKIT_API_KEY;

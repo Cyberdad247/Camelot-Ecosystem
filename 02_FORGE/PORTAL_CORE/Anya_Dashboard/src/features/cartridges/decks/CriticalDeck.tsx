@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Target, ShieldAlert, Scale } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Loader2, Scale, Send, ShieldAlert, Target } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type CritMode = 'socratic' | 'red_team' | 'bias' | 'failure' | 'proof';

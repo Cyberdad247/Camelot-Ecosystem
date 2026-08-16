@@ -2,9 +2,9 @@
 // Reacts to TitanLink events to update the Avatar
 
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { AvatarManager, KnightPersona } from '../services/AvatarManager';
-import TitanLink from '../services/TitanLink';
+import { StyleSheet, Text, View } from 'react-native';
+import { AvatarManager, type KnightPersona } from '../services/AvatarManager';
+import type TitanLink from '../services/TitanLink';
 
 interface HudsonProps {
   link: TitanLink;

@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Terminal as XTerminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
+import { Terminal as XTerminal } from '@xterm/xterm';
+import React, { useEffect, useRef, useState } from 'react';
 import '@xterm/xterm/css/xterm.css';
 import { TerminalSquare } from 'lucide-react';
 import { useCamelotNetwork } from '../hooks/useCamelotNetwork';

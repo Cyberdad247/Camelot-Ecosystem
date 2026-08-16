@@ -22,7 +22,7 @@
 //   1  ≥ 1 real hit
 //   2  invocation error (no path to .)
 
-import { readFileSync, writeFileSync, statSync, readdirSync } from 'node:fs';
+import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 
 const ROOT = resolve('.');

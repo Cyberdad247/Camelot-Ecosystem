@@ -1,5 +1,5 @@
-import { Brain, Code2, Search, Palette, TrendingUp, Scale, Lightbulb, Target } from 'lucide-react';
-import type { CartridgeMeta, CartridgeId } from '@/types/camelot';
+import type { CartridgeId, CartridgeMeta } from '@/types/camelot';
+import { Brain, Code2, Lightbulb, Palette, Scale, Search, Target, TrendingUp } from 'lucide-react';
 
 export const CARTRIDGES: CartridgeMeta[] = [
   {

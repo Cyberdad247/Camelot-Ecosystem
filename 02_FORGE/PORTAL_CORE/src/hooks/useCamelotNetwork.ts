@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useCamelotNetwork = () => {
   const [status, setStatus] = useState<'EARTH' | 'SKY' | 'OFFLINE'>('OFFLINE');

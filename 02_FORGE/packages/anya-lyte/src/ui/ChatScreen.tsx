@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { YStack, XStack, Text, Input, Button, ScrollView, Theme } from 'tamagui';
 import { Send } from 'lucide-react-native';
+import React, { useState, useEffect } from 'react';
+import { Button, Input, ScrollView, Text, Theme, XStack, YStack } from 'tamagui';
 import { TitanLinkClient } from '../api/titanlink_client';
 
 /**

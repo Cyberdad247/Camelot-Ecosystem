@@ -20,10 +20,10 @@ class QuickOrderListRemoveAllButton extends HTMLElement {
     this.quickOrderList = this.closest('quick-order-list');
 
     allVariants.forEach((variant) => {
-      const cartQty = parseInt(variant.dataset.cartQty);
+      const cartQty = Number.parseInt(variant.dataset.cartQty);
       if (cartQty > 0) {
         hasVariantsInCart = true;
-        items[parseInt(variant.dataset.variantId)] = 0;
+        items[Number.parseInt(variant.dataset.variantId)] = 0;
       }
     });
 
@@ -106,8 +106,8 @@ class QuickOrderList extends HTMLElement {
   }
 
   onChange(event) {
-    const inputValue = parseInt(event.target.value);
-    const cartQuantity = parseInt(event.target.dataset.cartQuantity);
+    const inputValue = Number.parseInt(event.target.value);
+    const cartQuantity = Number.parseInt(event.target.dataset.cartQuantity);
     const index = event.target.dataset.index;
     const name = document.activeElement.getAttribute('name');
 
@@ -239,8 +239,8 @@ class QuickOrderList extends HTMLElement {
       body = JSON.stringify({
         items: [
           {
-            quantity: parseInt(quantity),
-            id: parseInt(id),
+            quantity: Number.parseInt(quantity),
+            id: Number.parseInt(id),
           },
         ],
         sections: this.getSectionsToRender().map((section) => section.section),
@@ -280,7 +280,9 @@ class QuickOrderList extends HTMLElement {
 
         let hasError = false;
 
-        const currentItem = parsedState.items.find((item) => item.variant_id === parseInt(id));
+        const currentItem = parsedState.items.find(
+          (item) => item.variant_id === Number.parseInt(id),
+        );
         const updatedValue = currentItem ? currentItem.quantity : undefined;
         if (updatedValue && updatedValue !== quantity) {
           this.updateError(updatedValue, id);
@@ -299,11 +301,11 @@ class QuickOrderList extends HTMLElement {
         if (hasError) {
           this.updateMessage();
         } else if (action === this.actions.add) {
-          this.updateMessage(parseInt(quantity));
+          this.updateMessage(Number.parseInt(quantity));
         } else if (action === this.actions.update) {
-          this.updateMessage(parseInt(quantity - quantityElement.dataset.cartQuantity));
+          this.updateMessage(Number.parseInt(quantity - quantityElement.dataset.cartQuantity));
         } else {
-          this.updateMessage(-parseInt(quantityElement.dataset.cartQuantity));
+          this.updateMessage(-Number.parseInt(quantityElement.dataset.cartQuantity));
         }
       })
       .catch((error) => {

@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
 import { ScrollText, X } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
 import type { PlanEvent } from './useKnightStream';
 
 function escapeHtml(s: string): string {

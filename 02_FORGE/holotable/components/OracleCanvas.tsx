@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import ReactFlow, {
-  Node,
-  Edge,
+  type Node,
+  type Edge,
   Background,
   Controls,
   useNodesState,
@@ -11,8 +11,8 @@ import ReactFlow, {
   Connection,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { api, OracleState } from '@/lib/api';
-import { Zap, Hexagon, Database } from 'lucide-react';
+import { type OracleState, api } from '@/lib/api';
+import { Database, Hexagon, Zap } from 'lucide-react';
 
 // Mock Layout Logic
 const CENTER_X = 250;

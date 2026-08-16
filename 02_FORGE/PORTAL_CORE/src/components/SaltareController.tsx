@@ -1,5 +1,5 @@
+import { Cpu, Globe, Shield } from 'lucide-react';
 import { useState } from 'react';
-import { Shield, Globe, Cpu } from 'lucide-react';
 
 export default function SaltareController() {
   const [executing, setExecuting] = useState<string | null>(null);

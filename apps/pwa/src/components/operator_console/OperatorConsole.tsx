@@ -3,20 +3,20 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { subscribe } from '../../lib/operator_console/operator-events';
-import { fetchSnapshot, OperatorApiError } from '../../lib/operator_console/operator-api';
-import type { OperatorTaskSnapshot } from '../../lib/operator_console/schemas';
 import { ageLabel } from '../../lib/operator_console/formatters';
-import { OperatorConsoleHeader } from './OperatorConsoleHeader';
-import { StaleEvidenceNotice } from './StaleEvidenceNotice';
+import { OperatorApiError, fetchSnapshot } from '../../lib/operator_console/operator-api';
+import { subscribe } from '../../lib/operator_console/operator-events';
+import type { OperatorTaskSnapshot } from '../../lib/operator_console/schemas';
+import { ApprovalPanel } from './ApprovalPanel';
+import { DiffStreamPanel } from './DiffStreamPanel';
 import { EmptyEvidenceState } from './EmptyEvidenceState';
 // Panels (Tasks 8-10) fill these slots:
 import { IntentPanel } from './IntentPanel';
-import { ApprovalPanel } from './ApprovalPanel';
-import { TaskGraphPanel } from './TaskGraphPanel';
-import { DiffStreamPanel } from './DiffStreamPanel';
-import { TestsPanel } from './TestsPanel';
+import { OperatorConsoleHeader } from './OperatorConsoleHeader';
 import { ReceiptsPanel } from './ReceiptsPanel';
+import { StaleEvidenceNotice } from './StaleEvidenceNotice';
+import { TaskGraphPanel } from './TaskGraphPanel';
+import { TestsPanel } from './TestsPanel';
 
 export function OperatorConsole({ taskId }: { taskId: string }) {
   const [snapshot, setSnapshot] = useState<OperatorTaskSnapshot | null>(null);

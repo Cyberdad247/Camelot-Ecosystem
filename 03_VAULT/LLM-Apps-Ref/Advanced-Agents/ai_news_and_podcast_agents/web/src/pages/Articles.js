@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import api from '../services/api';
 import SourceSelector from '../components/SourceSelector';
+import api from '../services/api';
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);

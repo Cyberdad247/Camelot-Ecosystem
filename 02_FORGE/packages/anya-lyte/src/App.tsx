@@ -1,7 +1,7 @@
-import React from 'react';
-import { TamaguiProvider, createTamagui, YStack, Text, Button, Theme } from 'tamagui';
 import { config } from '@tamagui/config/v3';
-import { Database, Zap, Shield, Menu } from 'lucide-react-native';
+import { Database, Menu, Shield, Zap } from 'lucide-react-native';
+import React from 'react';
+import { Button, TamaguiProvider, Text, Theme, YStack, createTamagui } from 'tamagui';
 
 const tamaguiConfig = createTamagui(config);
 

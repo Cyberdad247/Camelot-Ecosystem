@@ -3,8 +3,8 @@
  * Validates: Persona Registry, Knight Spawner Persona Injection
  */
 
-import { ROUND_TABLE } from '../src/knights/personas.js';
 import { KnightSpawner } from '../src/knights/knight_spawner.js';
+import { ROUND_TABLE } from '../src/knights/personas.js';
 
 // Mock Browser Environment
 global.chrome = {

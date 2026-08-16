@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
 import { Badge } from '@/components/ui/badge';
 import {
   Card,
@@ -12,32 +11,33 @@ import {
 } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { format } from 'date-fns';
 import {
   CalendarDays,
   Clock,
   DollarSign,
   Globe,
+  Heart,
+  Home,
   Info,
   Landmark,
+  Lightbulb,
+  Loader2,
   MapPin,
   Moon,
   Paperclip,
   Plane,
+  Receipt,
   Sun,
   Users,
-  Heart,
-  Home,
-  Loader2,
-  Lightbulb,
   Utensils,
-  Receipt,
 } from 'lucide-react';
 import Link from 'next/link';
-import { format } from 'date-fns';
 import { useParams } from 'next/navigation';
+import { useCallback, useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import remarkBreaks from 'remark-breaks';
+import remarkGfm from 'remark-gfm';
 
 // Type Definitions
 interface DayPlan {

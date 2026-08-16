@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Send, Loader2, Search, Sliders } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Loader2, Search, Send, Sliders } from 'lucide-react';
+import React, { useState } from 'react';
 import type { DeckProps } from '../CartridgeDeck';
 
 type Depth = 'quick' | 'medium' | 'deep';

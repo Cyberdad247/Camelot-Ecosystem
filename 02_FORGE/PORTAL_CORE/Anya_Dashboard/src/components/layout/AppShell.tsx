@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
-import Sidebar from './Sidebar';
 import MobileNav from '@/components/ui/BottomNav';
 import { useDisplayProfile } from '@/hooks/useDisplayProfile';
+import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 export default function AppShell() {
   const [sidebarOpen, setSidebarOpen] = useState(true);

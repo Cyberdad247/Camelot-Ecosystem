@@ -5,18 +5,18 @@ import http from 'node:http';
 import express, { type Request } from 'express';
 import rateLimit from 'express-rate-limit';
 import { WebSocket, WebSocketServer } from 'ws';
+import { z } from 'zod';
 import { SovereignDB } from './db/SovereignDB';
 import { SWARM_EVENTS, publishHermes } from './hermes';
-import { type Command, parseCommand } from './nlp';
-import { MicrocubicMatrix } from './microcubic';
-import { type RouteOutcome, route } from './router';
-import { z } from 'zod';
-import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
-import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
 import { issueSignedAction } from './issuance';
+import { MicrocubicMatrix } from './microcubic';
+import { type Command, parseCommand } from './nlp';
 import { createOperatorBff } from './operator/bff';
 import { InMemoryEventStore } from './operator/receipts';
-import { verifyManifest, issueLease } from './operator/sentinel';
+import { issueLease, verifyManifest } from './operator/sentinel';
+import { type RouteOutcome, route } from './router';
+import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
+import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
 
 // WebSocket carrying the heartbeat flag used by the reaper loop below.
 interface LiveSocket extends WebSocket {

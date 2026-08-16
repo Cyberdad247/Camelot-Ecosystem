@@ -1,5 +1,5 @@
-import { useAnyaCodecStore } from './store';
 import { encodeNativeMessage, fetchNanoSwarmStatus } from './nativeBridge';
+import { useAnyaCodecStore } from './store';
 
 export function App() {
   const { bridgeStatus, lastMessage, setBridgeStatus, setLastMessage } = useAnyaCodecStore();

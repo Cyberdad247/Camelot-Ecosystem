@@ -1,8 +1,9 @@
 'use client';
-import React, { useRef, useMemo, useState, useEffect } from 'react';
+import { Float, Html, MeshDistortMaterial, Sphere, Stars } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Sphere, MeshDistortMaterial, Float, Stars, Html } from '@react-three/drei';
-import * as THREE from 'three';
+import type React from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type * as THREE from 'three';
 
 interface MorganaAvatarProps {
   mode?: 'IDLE' | 'RESEARCH' | 'DEV' | 'MUSIC' | 'ANALYSIS';

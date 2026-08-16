@@ -1,6 +1,6 @@
+import { Cpu, Globe, Settings, ShieldCheck } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { YStack, XStack, Text, Switch, Label, Separator, Theme, ScrollView } from 'tamagui';
-import { Settings, Cpu, Globe, ShieldCheck } from 'lucide-react-native';
+import { Label, ScrollView, Separator, Switch, Text, Theme, XStack, YStack } from 'tamagui';
 
 /**
  * Anya Lyte: Settings & Providers Hub

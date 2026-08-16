@@ -3,11 +3,11 @@
 'use client';
 
 import { useBifrost } from '../../context/BifrostContext';
-import { Sparkline } from '../Sparkline';
-import { OpenDesignStatusPills } from '../OpenDesignStatusPills';
-import { ExecutiveMetricsPanel } from '../ExecutiveMetricsPanel';
-import { SwarmRosterPanel } from '../SwarmRosterPanel';
 import { CartridgeSlot } from '../CartridgeSlot';
+import { ExecutiveMetricsPanel } from '../ExecutiveMetricsPanel';
+import { OpenDesignStatusPills } from '../OpenDesignStatusPills';
+import { Sparkline } from '../Sparkline';
+import { SwarmRosterPanel } from '../SwarmRosterPanel';
 
 // Seed baseline (task.md §1.4) — used until Bifrost broadcasts live state.
 const BASELINE_VALUATION = 14_200_000;

@@ -1,6 +1,6 @@
+import { SynthesisEngine } from './src/intelligence/synthesis_engine.js';
 import { GraphRAG } from './src/prometheus/index.js';
 import { MemoryExporter } from './src/prometheus/memory_exporter.js';
-import { SynthesisEngine } from './src/intelligence/synthesis_engine.js';
 
 // Singleton Instance for Offscreen
 const knowledgeGraph = new GraphRAG();

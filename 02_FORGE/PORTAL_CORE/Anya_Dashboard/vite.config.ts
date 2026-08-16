@@ -1,8 +1,8 @@
+import path from 'path';
+import react from '@vitejs/plugin-react';
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({

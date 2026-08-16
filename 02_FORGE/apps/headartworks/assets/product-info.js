@@ -46,11 +46,11 @@ if (!customElements.get('product-info')) {
       setQuantityBoundries() {
         const data = {
           cartQuantity: this.input.dataset.cartQuantity
-            ? parseInt(this.input.dataset.cartQuantity)
+            ? Number.parseInt(this.input.dataset.cartQuantity)
             : 0,
-          min: this.input.dataset.min ? parseInt(this.input.dataset.min) : 1,
-          max: this.input.dataset.max ? parseInt(this.input.dataset.max) : null,
-          step: this.input.step ? parseInt(this.input.step) : 1,
+          min: this.input.dataset.min ? Number.parseInt(this.input.dataset.min) : 1,
+          max: this.input.dataset.max ? Number.parseInt(this.input.dataset.max) : null,
+          step: this.input.step ? Number.parseInt(this.input.step) : 1,
         };
 
         let min = data.min;
@@ -89,13 +89,13 @@ if (!customElements.get('product-info')) {
       updateQuantityRules(sectionId, html) {
         const quantityFormUpdated = html.getElementById(`Quantity-Form-${sectionId}`);
         const selectors = ['.quantity__input', '.quantity__rules', '.quantity__label'];
-        for (let selector of selectors) {
+        for (const selector of selectors) {
           const current = this.quantityForm.querySelector(selector);
           const updated = quantityFormUpdated.querySelector(selector);
           if (!current || !updated) continue;
           if (selector === '.quantity__input') {
             const attributes = ['data-cart-quantity', 'data-min', 'data-max', 'step'];
-            for (let attribute of attributes) {
+            for (const attribute of attributes) {
               const valueUpdated = updated.getAttribute(attribute);
               if (valueUpdated !== null) current.setAttribute(attribute, valueUpdated);
             }

@@ -3,8 +3,8 @@
  * Validates: Skill Registry, Executor Routing
  */
 
-import { SPECIALIZED_SKILLS } from '../src/logic/specialized_skills.js';
 import { ActionExecutor } from '../src/logic/action_executor.js';
+import { SPECIALIZED_SKILLS } from '../src/logic/specialized_skills.js';
 
 // Mock Browser
 global.chrome = {

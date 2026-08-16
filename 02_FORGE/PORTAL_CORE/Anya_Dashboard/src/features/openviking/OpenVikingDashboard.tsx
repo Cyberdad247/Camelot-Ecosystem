@@ -1,4 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { runtimeConfig } from '@/config/runtime';
+import { useDisplayProfile } from '@/hooks/useDisplayProfile';
+import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
 import {
   Activity,
   BrainCircuit,
@@ -22,10 +24,8 @@ import {
   TerminalSquare,
   X,
 } from 'lucide-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useAnyaSocket } from '../brain/useAnyaSocket';
-import { useDisplayProfile } from '@/hooks/useDisplayProfile';
-import { runtimeConfig } from '@/config/runtime';
-import { bifrostFetch, bifrostWebSocketUrl } from '@/lib/bifrostClient';
 
 const MAP_URL = runtimeConfig.bifrost.openVikingMapUrl;
 const GRADIO_URL = runtimeConfig.gradioUrl;
