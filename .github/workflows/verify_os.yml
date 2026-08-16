@@ -448,7 +448,7 @@ jobs:
             'excalibur_dashboard.html',
             'tests/test_excalibur_pyinstaller_smoke.py',
             'scripts/excalibur_pyinstaller_smoke.sh',
-            'DEPLOYMENT_EXCALIBUR.md',
+            'docs/guides/DEPLOYMENT_EXCALIBUR.md',
             '.github/workflows/verify_os.yml',
           )
           # Distinguish 'file missing from checkout' from 'file has CRLF'.
@@ -487,7 +487,7 @@ jobs:
               - 'excalibur_dashboard.html'
               - 'tests/test_excalibur_pyinstaller_smoke.py'
               - 'scripts/excalibur_pyinstaller_smoke.sh'
-              - 'DEPLOYMENT_EXCALIBUR.md'
+              - 'docs/guides/DEPLOYMENT_EXCALIBUR.md'
               - '.github/workflows/verify_os.yml'
 
       - name: Install dependencies
