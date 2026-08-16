@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/policy-decision.schema.json",
+  "title": "Camelot Policy Decision",
+  "description": "v1.2 policy-decision record produced by Sentinel §13.1. Outputs allow, deny, or approval_required together with the allowlist, computed risk tier, limits, and quorum. A policy-decision receipt is chain-linked into the tenant chain (§13.1 step 10). See Camelot-OS SADD+LLDD v1.2 §13.1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "decision_id",
+    "manifest_hash",
+    "tenant_id",
+    "authority_epoch",
+    "decision",
+    "computed_risk_tier",
+    "policy_bundle_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-policy-decision/1"
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^dec_[A-Za-z0-9_-]+$"
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "authority_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "decision": {
+      "type": "string",
+      "enum": ["allow", "deny", "approval_required"]
+    },
+    "deny_reasons": {
+      "description": "Policy denial reasons when decision is deny.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "computed_risk_tier": {
+      "description": "Sentinel's classification; operators cannot downgrade it (§5.5).",
+      "type": "string",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "allowlist": {
+      "description": "Capabilities permitted by policy; input to §13.3 derivation step 1.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_actions": { "type": "integer", "minimum": 0 },
+        "max_memory_mb": { "type": "integer", "minimum": 0 },
+        "timeout_s": { "type": "integer", "minimum": 0 },
+        "rate_limit": { "type": "string" },
+        "spend_limit_cents": { "type": "integer", "minimum": 0 },
+        "concurrency_limit": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "quorum_required": {
+      "description": "Approval count required for this tier per §5.5.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "approval_required": {
+      "type": "boolean"
+    },
+    "policy_bundle_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "policy_outside_models": {
+      "description": "True when the decision was produced by the canonical policy bundle, not a model (§25).",
+      "type": "boolean"
+    },
+    "decided_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

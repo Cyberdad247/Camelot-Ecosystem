@@ -1,0 +1,5 @@
+verify(chain) -> PASS (4 receipts, ed25519, epoch 43)
+signer_public_key: ed25519:c984f3de52c5b5837a54a227f735560e686e157707be0784f2e68532c5d4bbfc
+golden_anchor: height=0 tenant=tenant_alpha interval=1000
+anchored_chain: size=2000 interval=1000 tenant=tenant_ledger
+anchors: 2 @ heights 0,1000 (interval 1000, tenant_ledger)

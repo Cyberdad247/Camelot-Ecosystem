@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/gideon-verdict.schema.json",
+  "title": "Camelot Gideon Verdict",
+  "description": "v1.2 independent verifier verdict. Gideon decides pass/block only; it does not narrate (that is Scribe's role) (§18, Appendix E). v1.2 adds declared-risk-tier and effect-class consistency gates. See Camelot-OS SADD+LLDD v1.2 §18.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "verdict_id",
+    "task_id",
+    "correlation_id",
+    "tenant_id",
+    "verdict",
+    "gates",
+    "issued_at",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-gideon-verdict/1"
+    },
+    "verdict_id": {
+      "type": "string",
+      "pattern": "^gv_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "manifest_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": ["pass", "block"]
+    },
+    "gates": {
+      "description": "Gates evaluated by Gideon (§18).",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "contract_conformance",
+          "path_scope_conformance",
+          "diff_integrity",
+          "test_result_validity",
+          "dependency_risk",
+          "secret_exposure",
+          "security_regression",
+          "accessibility_baseline",
+          "rollback_availability",
+          "lifecycle_cleanup",
+          "memory_provenance_for_material_claims",
+          "declared_risk_tier_matches_observable_effect",
+          "declared_effect_class_consistent"
+        ]
+      }
+    },
+    "block_reasons": {
+      "description": "Reasons when verdict is block.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_refs": {
+      "description": "Receipt references to the evidence this verdict relied on.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+      }
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^ed25519:[A-Za-z0-9_-]+$"
+    }
+  }
+}

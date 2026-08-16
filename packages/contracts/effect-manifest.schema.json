@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/effect-manifest.schema.json",
+  "title": "Camelot Effect Manifest",
+  "description": "v1.2 pinned, hash-bound declaration of intent. Sentinel classifies the declared effect per §5.5, computes the risk tier, and binds leases to the manifest hash (§13.2). declared_risk_tier cannot exceed Sentinel's classification, the cartridge's risk_tier_invariant_cap (§8.2), or the tenant's max_risk_tier_allowed (§9.2). See Camelot-OS SADD+LLDD v1.2 §11.1.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "manifest_id",
+    "task_id",
+    "correlation_id",
+    "tenant_id",
+    "authority_epoch",
+    "effect_class",
+    "declared_risk_tier",
+    "declaration_hash",
+    "kind",
+    "target",
+    "immutable_inputs",
+    "constraints"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-effect-manifest/1"
+    },
+    "manifest_id": {
+      "type": "string",
+      "pattern": "^eff_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "workspace_id": {
+      "type": "string",
+      "pattern": "^ws_[A-Za-z0-9_-]+$"
+    },
+    "authority_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "effect_class": {
+      "description": "Closed set per §5.5 of Camelot-OS SADD+LLDD v1.2.",
+      "type": "string",
+      "enum": [
+        "ro.fetch",
+        "ro.audit",
+        "internal.synth",
+        "workspace.test",
+        "workspace.patch",
+        "promote.worktree.merge",
+        "promote.deploy",
+        "external.publish.draft",
+        "external.publish.publish",
+        "external.email.send",
+        "payment.invoice.draft",
+        "payment.invoice.issue",
+        "payment.capture",
+        "payment.refund",
+        "device.calendar.write",
+        "device.sms.send",
+        "device.call.initiate",
+        "promote.failover"
+      ]
+    },
+    "declared_risk_tier": {
+      "type": "string",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "declaration_hash": {
+      "description": "Covers effect_class + declared_risk_tier + immutable_inputs (v1.2).",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "kind": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "cartridge_id", "workload_id"],
+      "properties": {
+        "node_id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "cartridge_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]+$"
+        },
+        "workload_id": {
+          "description": "Workload id as bound in §13.2, e.g. 'sir-forge'.",
+          "type": "string"
+        }
+      }
+    },
+    "immutable_inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["diff_sha256", "changed_paths"],
+      "properties": {
+        "base_revision": {
+          "type": "string"
+        },
+        "candidate_revision": {
+          "type": "string"
+        },
+        "diff_sha256": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-fA-F]{64}$"
+        },
+        "changed_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "recipient_scope": {
+          "description": "Audience/recipient/target scope for external effects (publish, email, SMS, call).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "amount_cents": {
+          "description": "Payment amount in minor units for payment effects.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "external_ref": {
+          "type": "string"
+        }
+      }
+    },
+    "requested_capabilities": {
+      "description": "Capabilities the effect requires; intersected with policy allowlist in §13.3.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "required_evidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+      }
+    },
+    "constraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_actions", "expires_at"],
+      "properties": {
+        "max_actions": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "expires_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "rollback_ref": {
+          "type": "string"
+        },
+        "max_memory_mb": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeout_s": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    }
+  }
+}

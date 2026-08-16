@@ -1,0 +1,36 @@
+{
+  "schema_version": "camelot-receipt/1",
+  "receipt_id": "rcp_0002",
+  "parent_hash": "sha256:76144a8bc1e266756f7c61f0c8ffc131c25874db2748b11ccf80dd66665accf0",
+  "chain_height": 2,
+  "tenant_id": "tenant_alpha",
+  "correlation_id": "cor_c001",
+  "task_id": "task_t001",
+  "authority_epoch": 43,
+  "effect_class": "workspace.test",
+  "declared_risk_tier": "T1",
+  "timestamp": "2026-08-14T18:00:00Z",
+  "actor": {
+    "id": "sir-forge",
+    "role": "engineering_builder",
+    "node_id": "engineering-01",
+    "trust_band": "attested"
+  },
+  "event": "tests.passed",
+  "refs": {
+    "manifest_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "lease_id": "lease_0001"
+  },
+  "payload_redacted": {
+    "passed": 42,
+    "failed": 0
+  },
+  "proof": {
+    "hash_algorithm": "sha256",
+    "signature_algorithm": "ed25519",
+    "signer": "sentinel",
+    "signature": "ed25519:182675181e537ccd387a1e99b0e0ec87a19611422f16ce1b82e8ca8951933911d61f7a5daa3ae948160e35aad677dde689169b8c0593459c286ae0d036a3f900"
+  },
+  "ledger_anchor_eligible": false,
+  "self_hash": "sha256:70a75da3b20513d8384cc1ca056477b42e6fd599e3396ea349064769380a59c9"
+}

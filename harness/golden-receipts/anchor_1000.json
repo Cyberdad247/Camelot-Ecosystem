@@ -1,0 +1,18 @@
+{
+  "schema_version": "camelot-receipt-chain/1",
+  "tenant_id": "tenant_ledger",
+  "chain_height": 1000,
+  "head_hash": "sha256:ecc181802d6a58d1a3b35a8c23e26bd83be6b75af9ff0e9f86d61c68146f1136",
+  "anchor_interval": 1000,
+  "last_anchor_height": 0,
+  "last_anchor_hash": "sha256:ddc708d6829f5ba968743d025cb1610f1234c56f76a0d3f4e4f8411ae35c8540",
+  "verified": true,
+  "last_verified_at": "2026-08-14T17:00:00Z",
+  "replay_protected": true,
+  "proof": {
+    "hash_algorithm": "sha256",
+    "signature_algorithm": "ed25519",
+    "signer": "sentinel",
+    "signature": "ed25519:03966b18931c84d564c053be05ffe0bf8d40a6f07d9e62293d4e81e053d160c77d4e85d55f867931371ef61f5cdb64c94f873c3e718803dd53fbe5082464b705"
+  }
+}

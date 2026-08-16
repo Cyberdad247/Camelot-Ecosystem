@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/vfs-attestation.schema.json",
+  "title": "Camelot VFS Attestation",
+  "description": "v1.2 attestation emitted by the VFS Guardian after successful preflight (§14.1). Attests the workspace_ref, mounts, quotas, and admission of the pinned source snapshot (§14.2). Receipts carry immutable_inputs checksums so Sentinel can refetch on hash mismatch (T-5). See Camelot-OS SADD+LLDD v1.2 §14.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attestation_id",
+    "task_id",
+    "workspace_ref",
+    "source_classification",
+    "checks",
+    "attested_at",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-vfs-attestation/1"
+    },
+    "attestation_id": {
+      "type": "string",
+      "pattern": "^va_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "workspace_ref": {
+      "description": "/runtime/camelot/tasks/<task-id>/ workspace layout root (§14.2).",
+      "type": "string"
+    },
+    "source_classification": {
+      "description": "Tier classification of the admitted source (Tier 4 = quarantine by default for external content).",
+      "type": "string",
+      "enum": ["tier0", "tier1", "tier2", "tier3", "tier4"]
+    },
+    "pinned_revision": {
+      "description": "Pinned source revision; receipts record immutable_inputs checksum for refetch on mismatch (T-5).",
+      "type": "string"
+    },
+    "checks": {
+      "description": "Preflight checks that passed (§14.1).",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "enum": [
+          "pinned_repository_revision",
+          "normalized_allowed_paths",
+          "no_parent_path_escape",
+          "protected_paths_denied",
+          "approved_worktree_location",
+          "quota_available",
+          "executable_allowlist_valid",
+          "network_mode_matches_lease",
+          "secrets_match_lease",
+          "authority_epoch_current",
+          "source_classification_valid",
+          "node_trust_band_permits",
+          "risk_tier_invariant_within_cap"
+        ]
+      }
+    },
+    "mounts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quotas": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "disk_mb": { "type": "integer", "minimum": 0 },
+        "memory_mb": { "type": "integer", "minimum": 0 },
+        "tmp_mb": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "source_admission_receipt_ref": {
+      "type": "string",
+      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+    },
+    "attested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^ed25519:[A-Za-z0-9_-]+$"
+    }
+  }
+}

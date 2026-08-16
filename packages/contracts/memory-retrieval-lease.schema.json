@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/memory-retrieval-lease.schema.json",
+  "title": "Camelot Memory Retrieval Lease",
+  "description": "v1.2 short-lived lease granting bounded retrieval from the Cloudbrain memory plane. Context compilation validates the retrieval lease before any tier read (§15.3 step 1); promotion of untrusted memory (Tier 4 → Tier 2) requires VFS admission plus a retrieval lease (§15.3, I-4). See Camelot-OS SADD+LLDD v1.2 §15.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "retrieval_lease_id",
+    "tenant_id",
+    "authority_epoch",
+    "granted_to",
+    "scopes",
+    "max_tiers",
+    "expires_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-memory-retrieval-lease/1"
+    },
+    "retrieval_lease_id": {
+      "type": "string",
+      "pattern": "^rl_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "workspace_id": {
+      "type": "string",
+      "pattern": "^ws_[A-Za-z0-9_-]+$"
+    },
+    "authority_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "granted_to": {
+      "$ref": "https://camelot-os/schemas/actor.schema.json"
+    },
+    "scopes": {
+      "description": "viking:// namespace scopes allowed, per §15.2.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "max_tiers": {
+      "description": "Highest memory tier readable. Tier 4 (quarantine) requires explicit admission.",
+      "type": "string",
+      "enum": ["tier0", "tier1", "tier2", "tier3", "tier4"]
+    },
+    "graph_scope": {
+      "description": "Graphify traversal constraints: scope/depth (§15.3, §15.4).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_graph_nodes": { "type": "integer", "minimum": 0 },
+        "max_graph_depth": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "token_budget": {
+      "description": "Context-packet token budget in effect (§15.4).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total_input_tokens_soft_max": { "type": "integer", "minimum": 0 },
+        "total_input_tokens_hard_max": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "promotion_allowed": {
+      "description": "Whether Tier 4 → Tier 2 promotion may be requested under this lease (§15.3).",
+      "type": "boolean"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

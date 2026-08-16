@@ -1,0 +1,127 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/symbolect-tree.schema.json",
+  "title": "Camelot Symbolect Tree",
+  "description": "v1.2 approved task-structure tree in the Symbolect language (§17). Every node must declare actor/runtime, input schema, output schema, resource budget, and failure policy; branches must end in merge/halt/escalate; no node can self-authorize (§17.3). Malformed trees are rejected at registration with a symbolect.rejected receipt. See Camelot-OS SADD+LLDD v1.2 §17.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tree_id", "task_id", "objective", "root"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-symbolect-tree/1"
+    },
+    "tree_id": {
+      "type": "string",
+      "pattern": "^sym_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "class": {
+      "description": "Task class, e.g. 'read_only', 'controlled_patch'.",
+      "type": "string"
+    },
+    "root": {
+      "type": "string",
+      "description": "Reference to the root node id."
+    },
+    "nodes": {
+      "type": "object",
+      "description": "Map of node id → glyph node.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "glyph",
+          "actor",
+          "input_schema",
+          "output_schema",
+          "resource_budget",
+          "failure_policy"
+        ],
+        "properties": {
+          "glyph": {
+            "description": "Glyph from the §17.1 registry.",
+            "type": "string",
+            "enum": [
+              "intent",
+              "plan",
+              "retrieve",
+              "policy",
+              "execute",
+              "verify",
+              "test",
+              "receipt",
+              "memory",
+              "approve",
+              "lease",
+              "cache",
+              "escalate",
+              "branch",
+              "merge",
+              "alternate",
+              "halt"
+            ]
+          },
+          "actor": {
+            "$ref": "https://camelot-os/schemas/actor.schema.json"
+          },
+          "input_schema": {
+            "type": "string"
+          },
+          "output_schema": {
+            "type": "string"
+          },
+          "resource_budget": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "memory_mb": { "type": "integer", "minimum": 0 },
+              "timeout_s": { "type": "integer", "minimum": 0 },
+              "tokens_max": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "failure_policy": {
+            "type": "string",
+            "enum": ["halt", "branch", "degrade"]
+          },
+          "children": {
+            "description": "Required children per the §17.1 registry.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "effect_class": {
+            "description": "Bound effect class when this node carries an effect (§17.1 binding rule).",
+            "type": "string"
+          },
+          "approval_quorum": {
+            "description": "Approver count required for approve nodes (§5.5).",
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "compiled_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "rejection_receipt_ref": {
+      "description": "symbolect.rejected receipt if registration failed (§17.3).",
+      "type": "string",
+      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+    }
+  }
+}

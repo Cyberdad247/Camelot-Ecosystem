@@ -1,0 +1,42 @@
+name: harness-gate
+
+# Camelot-OS harness CI gate — runs on every push / pull request so each build
+# re-verifies the golden receipts from disk (pinned-key replay) and re-checks
+# schema meta-validation before anything can be promoted.
+#
+# The gate itself lives in harness/gate.sh and hard-fails (non-zero exit) on
+# any failed check; this workflow only has to invoke it.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  contracts-harness:
+    name: Contract harness (receipts + schemas)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Install harness dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install cryptography jsonschema
+
+      - name: Run harness CI gate
+        run: bash harness/gate.sh
+
+      - name: Upload per-check result logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: harness-results
+          path: harness/results/
+          if-no-files-found: warn
