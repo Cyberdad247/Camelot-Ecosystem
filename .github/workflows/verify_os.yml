@@ -448,7 +448,7 @@ jobs:
             'excalibur_dashboard.html',
             'tests/test_excalibur_pyinstaller_smoke.py',
             'scripts/excalibur_pyinstaller_smoke.sh',
-            'DEPLOYMENT_EXCALIBUR.md',
+            'docs/guides/DEPLOYMENT_EXCALIBUR.md',
             '.github/workflows/verify_os.yml',
           )
           # Distinguish 'file missing from checkout' from 'file has CRLF'.
@@ -487,14 +487,14 @@ jobs:
               - 'excalibur_dashboard.html'
               - 'tests/test_excalibur_pyinstaller_smoke.py'
               - 'scripts/excalibur_pyinstaller_smoke.sh'
-              - 'DEPLOYMENT_EXCALIBUR.md'
+              - 'docs/guides/DEPLOYMENT_EXCALIBUR.md'
               - '.github/workflows/verify_os.yml'
 
       - name: Install dependencies
         if: steps.filter.outputs.excalibur-paths == 'true' || github.event_name == 'workflow_dispatch'
         run: |
           python -m pip install --upgrade pip
-          pip install fastapi "uvicorn[standard]" pytest httpx pydantic pyttsx3 pyinstaller
+          pip install fastapi "uvicorn[standard]" pytest pytest-rerunfailures httpx pydantic pyttsx3 pyinstaller
 
       - name: Excalibur PyInstaller smoke (production)
         if: steps.filter.outputs.excalibur-paths == 'true' || github.event_name == 'workflow_dispatch'
