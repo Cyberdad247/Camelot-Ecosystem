@@ -1,84 +1,64 @@
 {
-    "model_profiles": [
-        {
-            "id": "openai:gpt-4.5",
-            "role": "high_reasoning",
-            "max_ctx_tokens": 128000,
-            "cost_weight": 1.0,
-            "use_cases": [
-                "swarm_coordination",
-                "repo_analysis",
-                "synthesis"
-            ]
-        },
-        {
-            "id": "anthropic:claude-3.5-sonnet",
-            "role": "swarm_coordinator",
-            "max_ctx_tokens": 200000,
-            "cost_weight": 0.9,
-            "use_cases": [
-                "parallel_foraging",
-                "ukg_generation",
-                "policy_enforcement"
-            ]
-        },
-        {
-            "id": "local:llama-3-8b-instruct",
-            "role": "bulk_evals",
-            "max_ctx_tokens": 8192,
-            "cost_weight": 0.1,
-            "use_cases": [
-                "benchmarking",
-                "batch_processing",
-                "low_stakes_tasks"
-            ]
-        }
-    ],
-    "routing_policy": {
-        "swarm_coordination": "anthropic:claude-3.5-sonnet",
-        "repo_analysis": "openai:gpt-4.5",
-        "bulk_benchmarking": "local:llama-3-8b-instruct",
-        "high_stakes_synthesis": "openai:gpt-4.5"
+  "model_profiles": [
+    {
+      "id": "openai:gpt-4.5",
+      "role": "high_reasoning",
+      "max_ctx_tokens": 128000,
+      "cost_weight": 1.0,
+      "use_cases": ["swarm_coordination", "repo_analysis", "synthesis"]
     },
-    "routes": [
-        {
-            "id": "route::anya_clawdbot_gateway",
-            "description": "Route Anya tasks that require multi-channel messaging or Clawdbot skills via the Clawdbot gateway bridge.",
-            "match": {
-                "agent": "anya",
-                "tags_any": [
-                    "needs_multichannel_messaging",
-                    "needs_device_node",
-                    "clawdbot_gateway"
-                ]
-            },
-            "target": {
-                "type": "gateway",
-                "id": "gateway::clawdbot"
-            },
-            "bridge": {
-                "module": "connectivity.aether",
-                "function": "call_clawdbot_gateway"
-            }
-        },
-        {
-            "id": "route::merlin_claraverse_gateway",
-            "description": "Route Merlin tasks that require Block-DAG workflows or CRM integrations via the ClaraVerse sidecar.",
-            "match": {
-                "tags_any": [
-                    "needs_block_dag",
-                    "needs_crm_integration",
-                    "claraverse_sidecar"
-                ]
-            },
-            "target": {
-                "type": "gateway",
-                "id": "gateway::claraverse"
-            },
-            "bridge": {
-                "module": "connectivity.aether",
-                "function": "call_claraverse_gateway"
-            }
-        }
-    ]
+    {
+      "id": "anthropic:claude-3.5-sonnet",
+      "role": "swarm_coordinator",
+      "max_ctx_tokens": 200000,
+      "cost_weight": 0.9,
+      "use_cases": ["parallel_foraging", "ukg_generation", "policy_enforcement"]
+    },
+    {
+      "id": "local:llama-3-8b-instruct",
+      "role": "bulk_evals",
+      "max_ctx_tokens": 8192,
+      "cost_weight": 0.1,
+      "use_cases": ["benchmarking", "batch_processing", "low_stakes_tasks"]
+    }
+  ],
+  "routing_policy": {
+    "swarm_coordination": "anthropic:claude-3.5-sonnet",
+    "repo_analysis": "openai:gpt-4.5",
+    "bulk_benchmarking": "local:llama-3-8b-instruct",
+    "high_stakes_synthesis": "openai:gpt-4.5"
+  },
+  "routes": [
+    {
+      "id": "route::anya_clawdbot_gateway",
+      "description": "Route Anya tasks that require multi-channel messaging or Clawdbot skills via the Clawdbot gateway bridge.",
+      "match": {
+        "agent": "anya",
+        "tags_any": ["needs_multichannel_messaging", "needs_device_node", "clawdbot_gateway"]
+      },
+      "target": {
+        "type": "gateway",
+        "id": "gateway::clawdbot"
+      },
+      "bridge": {
+        "module": "connectivity.aether",
+        "function": "call_clawdbot_gateway"
+      }
+    },
+    {
+      "id": "route::merlin_claraverse_gateway",
+      "description": "Route Merlin tasks that require Block-DAG workflows or CRM integrations via the ClaraVerse sidecar.",
+      "match": {
+        "tags_any": ["needs_block_dag", "needs_crm_integration", "claraverse_sidecar"]
+      },
+      "target": {
+        "type": "gateway",
+        "id": "gateway::claraverse"
+      },
+      "bridge": {
+        "module": "connectivity.aether",
+        "function": "call_claraverse_gateway"
+      }
+    }
+  ]
 }

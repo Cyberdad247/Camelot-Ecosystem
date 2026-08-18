@@ -1,74 +1,74 @@
 [
-    {
-        "@type": "KineticArtifact",
-        "name": "Rotel",
-        "description": "Rust OpenTelemetry Collector",
-        "vector": "SPEED",
-        "impact": "Replaces Python logging stack with a single Rust binary OpenTelemetry pipeline; reduces logging CPU and GC overhead versus Python-based collectors",
-        "alignment": "Rust implementation satisfies Kinetic Purity; single-binary deployment with minimal dependencies satisfies Velocity; can run as a local sidecar without heavy infra, preserving Zero-Burn",
-        "status": "ASSIMILATE"
-    },
-    {
-        "@type": "KineticArtifact",
-        "name": "PRP Templates",
-        "description": "context-engineering-intro",
-        "vector": "OPTIMIZE",
-        "impact": "Introduces structured Product Requirements Prompts and frozen-context specs that reduce iterative prompt thrash and hallucination risk for large tasks",
-        "alignment": "Runs as static markdown/templates with no interpreter overhead (Velocity); improves context-density per token by enforcing blueprint-first flows (Enhance); works with local LLM backends (Zero-Burn)",
-        "status": "ASSIMILATE"
-    },
-    {
-        "@type": "KineticArtifact",
-        "name": "MASON",
-        "description": "Local Multi-Agent Framework",
-        "vector": "ENHANCE",
-        "impact": "YAML-defined multi-agent workflows proven on small local LLMs, enabling multi-step autonomy without cloud-only dependencies",
-        "alignment": "No mandatory Python web-stack at runtime when orchestrated via local binaries and small models (Zero-Burn); YAML graph reduces orchestration code-surface, improving Velocity; explicitly designed for local LLMs instead of GPT-4-only setups",
-        "status": "ASSIMILATE"
-    },
-    {
-        "@type": "KineticArtifact",
-        "name": "Saltare",
-        "description": "Go MCP Gateway",
-        "vector": "SPEED",
-        "impact": "Consolidates all MCP tools behind one low-latency Go gateway, reducing per-tool connection overhead and enabling semantic routing in a single binary",
-        "alignment": "Pure Go binary aligns with Kinetic Purity; gateway pattern allows single-binary-style deployment at the edge (Velocity); can run locally beside agents without GPU/VRAM requirements (Zero-Burn)",
-        "status": "ASSIMILATE"
-    },
-    {
-        "@type": "KineticArtifact",
-        "name": "Multiagent Debate",
-        "description": "DebateLLM-style Protocol",
-        "vector": "ENHANCE",
-        "impact": "Improves factual accuracy and robustness via structured multi-round debate, critique, and consensus among agents",
-        "alignment": "Protocol, not a heavyweight framework; can be encoded in YAML/JSON and executed on local small models (Zero-Burn); no dependency chains beyond your existing runtime, preserving Velocity; enhances effective reasoning density per token through iterative critique (Enhance)",
-        "status": "ASSIMILATE"
-    },
-    {
-        "@type": "KineticArtifact",
-        "name": "Map-Reduce Swarm",
-        "description": "Swarm Topology for Coding Tasks",
-        "vector": "OPTIMIZE",
-        "impact": "Enables parallel decomposition of large coding/analysis tasks into shards that can be processed by many local agents, then merged into a coherent output",
-        "alignment": "Topology spec only; can be implemented using Rust/Go orchestrators and small local LLMs (Zero-Burn); focuses on a single orchestrator binary coordinating worker agents, fitting the Law of Velocity; avoids complex interpreter dependency meshes if orchestrated via compiled runner",
-        "status": "ASSIMILATE"
-    },
-    {
-        "@type": "KineticArtifact",
-        "name": "ggRMCP",
-        "description": "Go gRPC→MCP Gateway",
-        "vector": "SPEED",
-        "impact": "Wraps existing gRPC microservices as MCP tools via a single Go gateway, reducing the need to re‑implement services while keeping low‑latency, compiled routing",
-        "alignment": "Pure Go binary aligns with Kinetic Purity; lets you consolidate gRPC services behind one endpoint (Velocity); can run locally without GPU/VRAM needs (Zero-Burn)",
-        "status": "MONITOR"
-    },
-    {
-        "@type": "KineticArtifact",
-        "name": "LocalLLaMA Agent Builders",
-        "description": "TX/TessAI-style frameworks",
-        "vector": "ENHANCE",
-        "impact": "Provide visual or configuration‑driven workflows for building local‑LLM agents, improving developer ergonomics and enabling multi‑step tasks without cloud dependence",
-        "alignment": "Designed for local LLMs on consumer hardware (Zero-Burn); generally ship as single binaries or self‑contained apps with limited dependencies (Velocity); can be used as experimental orchestration front‑ends around Camelot’s compiled core",
-        "status": "MONITOR"
-    }
+  {
+    "@type": "KineticArtifact",
+    "name": "Rotel",
+    "description": "Rust OpenTelemetry Collector",
+    "vector": "SPEED",
+    "impact": "Replaces Python logging stack with a single Rust binary OpenTelemetry pipeline; reduces logging CPU and GC overhead versus Python-based collectors",
+    "alignment": "Rust implementation satisfies Kinetic Purity; single-binary deployment with minimal dependencies satisfies Velocity; can run as a local sidecar without heavy infra, preserving Zero-Burn",
+    "status": "ASSIMILATE"
+  },
+  {
+    "@type": "KineticArtifact",
+    "name": "PRP Templates",
+    "description": "context-engineering-intro",
+    "vector": "OPTIMIZE",
+    "impact": "Introduces structured Product Requirements Prompts and frozen-context specs that reduce iterative prompt thrash and hallucination risk for large tasks",
+    "alignment": "Runs as static markdown/templates with no interpreter overhead (Velocity); improves context-density per token by enforcing blueprint-first flows (Enhance); works with local LLM backends (Zero-Burn)",
+    "status": "ASSIMILATE"
+  },
+  {
+    "@type": "KineticArtifact",
+    "name": "MASON",
+    "description": "Local Multi-Agent Framework",
+    "vector": "ENHANCE",
+    "impact": "YAML-defined multi-agent workflows proven on small local LLMs, enabling multi-step autonomy without cloud-only dependencies",
+    "alignment": "No mandatory Python web-stack at runtime when orchestrated via local binaries and small models (Zero-Burn); YAML graph reduces orchestration code-surface, improving Velocity; explicitly designed for local LLMs instead of GPT-4-only setups",
+    "status": "ASSIMILATE"
+  },
+  {
+    "@type": "KineticArtifact",
+    "name": "Saltare",
+    "description": "Go MCP Gateway",
+    "vector": "SPEED",
+    "impact": "Consolidates all MCP tools behind one low-latency Go gateway, reducing per-tool connection overhead and enabling semantic routing in a single binary",
+    "alignment": "Pure Go binary aligns with Kinetic Purity; gateway pattern allows single-binary-style deployment at the edge (Velocity); can run locally beside agents without GPU/VRAM requirements (Zero-Burn)",
+    "status": "ASSIMILATE"
+  },
+  {
+    "@type": "KineticArtifact",
+    "name": "Multiagent Debate",
+    "description": "DebateLLM-style Protocol",
+    "vector": "ENHANCE",
+    "impact": "Improves factual accuracy and robustness via structured multi-round debate, critique, and consensus among agents",
+    "alignment": "Protocol, not a heavyweight framework; can be encoded in YAML/JSON and executed on local small models (Zero-Burn); no dependency chains beyond your existing runtime, preserving Velocity; enhances effective reasoning density per token through iterative critique (Enhance)",
+    "status": "ASSIMILATE"
+  },
+  {
+    "@type": "KineticArtifact",
+    "name": "Map-Reduce Swarm",
+    "description": "Swarm Topology for Coding Tasks",
+    "vector": "OPTIMIZE",
+    "impact": "Enables parallel decomposition of large coding/analysis tasks into shards that can be processed by many local agents, then merged into a coherent output",
+    "alignment": "Topology spec only; can be implemented using Rust/Go orchestrators and small local LLMs (Zero-Burn); focuses on a single orchestrator binary coordinating worker agents, fitting the Law of Velocity; avoids complex interpreter dependency meshes if orchestrated via compiled runner",
+    "status": "ASSIMILATE"
+  },
+  {
+    "@type": "KineticArtifact",
+    "name": "ggRMCP",
+    "description": "Go gRPC→MCP Gateway",
+    "vector": "SPEED",
+    "impact": "Wraps existing gRPC microservices as MCP tools via a single Go gateway, reducing the need to re‑implement services while keeping low‑latency, compiled routing",
+    "alignment": "Pure Go binary aligns with Kinetic Purity; lets you consolidate gRPC services behind one endpoint (Velocity); can run locally without GPU/VRAM needs (Zero-Burn)",
+    "status": "MONITOR"
+  },
+  {
+    "@type": "KineticArtifact",
+    "name": "LocalLLaMA Agent Builders",
+    "description": "TX/TessAI-style frameworks",
+    "vector": "ENHANCE",
+    "impact": "Provide visual or configuration‑driven workflows for building local‑LLM agents, improving developer ergonomics and enabling multi‑step tasks without cloud dependence",
+    "alignment": "Designed for local LLMs on consumer hardware (Zero-Burn); generally ship as single binaries or self‑contained apps with limited dependencies (Velocity); can be used as experimental orchestration front‑ends around Camelot’s compiled core",
+    "status": "MONITOR"
+  }
 ]

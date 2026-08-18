@@ -11,16 +11,16 @@
  * On transcript message: enqueues forge directive to harness_queue.jsonl (priority=1)
  */
 
-import { WebSocketServer, WebSocket } from "ws";
-import * as crypto from "crypto";
-import * as fs from "fs";
-import * as os from "os";
-import * as path from "path";
-import * as http from "http";
+import * as crypto from 'crypto';
+import * as fs from 'fs';
+import * as http from 'http';
+import * as os from 'os';
+import * as path from 'path';
+import { type WebSocket, WebSocketServer } from 'ws';
 
 const PORT = 3002;
-const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), "CAMELOT_OS");
-const QUEUE_PATH = path.join(HOME, "logs", "harness_queue.jsonl");
+const HOME = process.env.CAMELOT_OS_HOME ?? path.join(os.homedir(), 'CAMELOT_OS');
+const QUEUE_PATH = path.join(HOME, 'logs', 'harness_queue.jsonl');
 
 const VAD_RMS_THRESHOLD = 0.01;
 const VAD_SPEECH_MIN_MS = 200;
@@ -41,7 +41,7 @@ interface PeerState {
 }
 
 interface OmniMessage {
-  type: "offer" | "answer" | "candidate" | "data_frame" | "transcript" | "ping" | "set_knight";
+  type: 'offer' | 'answer' | 'candidate' | 'data_frame' | 'transcript' | 'ping' | 'set_knight';
   sdp?: string;
   candidate?: unknown;
   samples?: number[];
@@ -61,14 +61,14 @@ const httpPeers = new Map<string, HttpPeerState>();
 
 function enqueue(task: object): void {
   try {
-    fs.appendFileSync(QUEUE_PATH, JSON.stringify(task) + "\n", "utf8");
+    fs.appendFileSync(QUEUE_PATH, JSON.stringify(task) + '\n', 'utf8');
   } catch (e) {
     console.error(`[OMNIVOICE] QUEUE ERROR: ${e}`);
   }
 }
 
 function mkId(prefix: string): string {
-  return `${prefix}-${Date.now()}-${crypto.randomBytes(2).toString("hex")}`;
+  return `${prefix}-${Date.now()}-${crypto.randomBytes(2).toString('hex')}`;
 }
 
 function rms(samples: number[]): number {
@@ -77,7 +77,7 @@ function rms(samples: number[]): number {
   return Math.sqrt(sum / samples.length);
 }
 
-function writeWavFile(filePath: string, samples: number[], sampleRate: number = 16000): void {
+function writeWavFile(filePath: string, samples: number[], sampleRate = 16000): void {
   const numChannels = 1;
   const bytesPerSample = 2; // Int16
   const blockAlign = numChannels * bytesPerSample;
@@ -86,18 +86,18 @@ function writeWavFile(filePath: string, samples: number[], sampleRate: number = 
 
   const buffer = Buffer.alloc(44 + dataSize);
 
-  buffer.write("RIFF", 0);
+  buffer.write('RIFF', 0);
   buffer.writeUInt32LE(36 + dataSize, 4);
-  buffer.write("WAVE", 8);
-  buffer.write("fmt ", 12);
+  buffer.write('WAVE', 8);
+  buffer.write('fmt ', 12);
   buffer.writeUInt32LE(16, 16); // Subchunk1Size
-  buffer.writeUInt16LE(1, 20);  // AudioFormat (PCM)
+  buffer.writeUInt16LE(1, 20); // AudioFormat (PCM)
   buffer.writeUInt16LE(numChannels, 22);
   buffer.writeUInt32LE(sampleRate, 24);
   buffer.writeUInt32LE(byteRate, 28);
   buffer.writeUInt16LE(blockAlign, 32);
   buffer.writeUInt16LE(bytesPerSample * 8, 34);
-  buffer.write("data", 36);
+  buffer.write('data', 36);
   buffer.writeUInt32LE(dataSize, 40);
 
   let offset = 44;
@@ -114,7 +114,7 @@ function writeWavFile(filePath: string, samples: number[], sampleRate: number = 
 function purgeExpiredAudio(audioDir: string, now: number): void {
   try {
     for (const entry of fs.readdirSync(audioDir, { withFileTypes: true })) {
-      if (!entry.isFile() || !entry.name.endsWith(".wav")) continue;
+      if (!entry.isFile() || !entry.name.endsWith('.wav')) continue;
       const candidate = path.join(audioDir, entry.name);
       if (now - fs.statSync(candidate).mtimeMs > AUDIO_RETENTION_MS) fs.unlinkSync(candidate);
     }
@@ -142,37 +142,39 @@ function processFrame(state: PeerState, samples: number[]): void {
       // 1. Send socket clear-signal to clients to immediately halt local audio playback
       for (const [ws, peer] of peers) {
         if (ws.readyState === ws.OPEN) {
-          ws.send(JSON.stringify({ type: "clear" }));
+          ws.send(JSON.stringify({ type: 'clear' }));
           console.log(`[OMNIVOICE] Broadcast clear-signal to ${peer.id}`);
         }
       }
 
       // 2. Flush current outgoing audio streams in kitten_service.py
-      const req = http.request({
-        hostname: "127.0.0.1",
-        port: 8300,
-        path: "/flush",
-        method: "POST",
-        headers: {
-          "Content-Length": 0,
+      const req = http.request(
+        {
+          hostname: '127.0.0.1',
+          port: 8300,
+          path: '/flush',
+          method: 'POST',
+          headers: {
+            'Content-Length': 0,
+          },
         },
-      }, (res) => {
-        console.log(`[OMNIVOICE] Kitten flush response status: ${res.statusCode}`);
-      });
-      req.on("error", (err) => {
+        (res) => {
+          console.log(`[OMNIVOICE] Kitten flush response status: ${res.statusCode}`);
+        },
+      );
+      req.on('error', (err) => {
         console.error(`[OMNIVOICE] Kitten flush HTTP request error: ${err.message}`);
       });
       req.end();
 
       // 3. Cancel current LLM completion run on the control plane
       enqueue({
-        id: mkId("interrupt"),
-        type: "interrupt",
-        source: "omnivoice-router",
+        id: mkId('interrupt'),
+        type: 'interrupt',
+        source: 'omnivoice-router',
         queued_at: new Date().toISOString(),
         priority: 1,
       });
-
     } else {
       state.silenceStartMs = null; // reset silence timer on new energy
     }
@@ -185,7 +187,7 @@ function processFrame(state: PeerState, samples: number[]): void {
     const speechDuration = now - (state.speechStartMs ?? now);
 
     if (silenceDuration >= VAD_SILENCE_GAP_MS && speechDuration >= VAD_SPEECH_MIN_MS) {
-      const audioDir = path.join(HOME, "03_VAULT", "runtime_state", "audio");
+      const audioDir = path.join(HOME, '03_VAULT', 'runtime_state', 'audio');
       if (!fs.existsSync(audioDir)) {
         fs.mkdirSync(audioDir, { recursive: true });
       }
@@ -194,9 +196,9 @@ function processFrame(state: PeerState, samples: number[]): void {
       writeWavFile(audioPath, state.utteranceBuffer, 16000);
 
       enqueue({
-        id: mkId("vad"),
-        type: "vad_utterance",
-        source: "omnivoice-router",
+        id: mkId('vad'),
+        type: 'vad_utterance',
+        source: 'omnivoice-router',
         peer_id: state.id,
         samples_count: state.utteranceBuffer.length,
         duration_ms: speechDuration,
@@ -216,18 +218,18 @@ function processFrame(state: PeerState, samples: number[]): void {
 }
 
 function isLoopback(address: string | undefined): boolean {
-  return address === "127.0.0.1" || address === "::1" || address === "::ffff:127.0.0.1";
+  return address === '127.0.0.1' || address === '::1' || address === '::ffff:127.0.0.1';
 }
 
 function header(req: http.IncomingMessage, name: string): string {
   const value = req.headers[name];
-  return Array.isArray(value) ? value[0] ?? "" : value ?? "";
+  return Array.isArray(value) ? (value[0] ?? '') : (value ?? '');
 }
 
 function respondJson(res: http.ServerResponse, status: number, body: object): void {
   res.writeHead(status, {
-    "Content-Type": "application/json; charset=utf-8",
-    "Cache-Control": "no-store",
+    'Content-Type': 'application/json; charset=utf-8',
+    'Cache-Control': 'no-store',
   });
   res.end(JSON.stringify(body));
 }
@@ -271,59 +273,69 @@ function getHttpPeer(sessionId: string, remoteAddr: string): HttpPeerState | nul
 // ── Server ────────────────────────────────────────────────────────────────────
 
 const server = http.createServer((req, res) => {
-  if (req.method === "POST" && req.url === "/ingest_pcm") {
-    const remoteAddr = req.socket.remoteAddress ?? "";
+  if (req.method === 'POST' && req.url === '/ingest_pcm') {
+    const remoteAddr = req.socket.remoteAddress ?? '';
     if (!isLoopback(remoteAddr)) {
-      respondJson(res, 403, { error: "loopback_only" });
+      respondJson(res, 403, { error: 'loopback_only' });
       req.resume();
       return;
     }
 
-    if (!header(req, "content-type").toLowerCase().startsWith("application/octet-stream")) {
-      respondJson(res, 415, { error: "unsupported_media_type" });
+    if (!header(req, 'content-type').toLowerCase().startsWith('application/octet-stream')) {
+      respondJson(res, 415, { error: 'unsupported_media_type' });
       req.resume();
       return;
     }
 
-    const sessionId = header(req, "x-voice-session");
-    const sequenceText = header(req, "x-voice-sequence");
-    const sampleRateText = header(req, "x-voice-sample-rate");
-    const discontinuity = header(req, "x-voice-discontinuity") === "1";
+    const sessionId = header(req, 'x-voice-session');
+    const sequenceText = header(req, 'x-voice-sequence');
+    const sampleRateText = header(req, 'x-voice-sample-rate');
+    const discontinuity = header(req, 'x-voice-discontinuity') === '1';
     const sequence = Number(sequenceText);
-    if (!/^vfc-[a-f0-9]{24}$/.test(sessionId) || !Number.isSafeInteger(sequence) || sequence < 0 || sampleRateText !== "16000") {
-      respondJson(res, 400, { error: "invalid_frame_metadata" });
+    if (
+      !/^vfc-[a-f0-9]{24}$/.test(sessionId) ||
+      !Number.isSafeInteger(sequence) ||
+      sequence < 0 ||
+      sampleRateText !== '16000'
+    ) {
+      respondJson(res, 400, { error: 'invalid_frame_metadata' });
       req.resume();
       return;
     }
 
-    const contentLength = Number(header(req, "content-length"));
-    if (!Number.isSafeInteger(contentLength) || contentLength <= 0 || contentLength > PCM_FRAME_BYTES || contentLength % 2 !== 0) {
-      respondJson(res, 413, { error: "invalid_frame_size" });
+    const contentLength = Number(header(req, 'content-length'));
+    if (
+      !Number.isSafeInteger(contentLength) ||
+      contentLength <= 0 ||
+      contentLength > PCM_FRAME_BYTES ||
+      contentLength % 2 !== 0
+    ) {
+      respondJson(res, 413, { error: 'invalid_frame_size' });
       req.resume();
       return;
     }
 
     const state = getHttpPeer(sessionId, remoteAddr);
     if (!state) {
-      respondJson(res, 503, { error: "session_capacity_reached" });
+      respondJson(res, 503, { error: 'session_capacity_reached' });
       req.resume();
       return;
     }
     if (sequence <= state.lastSequence) {
-      respondJson(res, 409, { error: "stale_sequence" });
+      respondJson(res, 409, { error: 'stale_sequence' });
       req.resume();
       return;
     }
 
     const chunks: Buffer[] = [];
     let received = 0;
-    req.on("data", (chunk: Buffer) => {
+    req.on('data', (chunk: Buffer) => {
       received += chunk.length;
       if (received <= PCM_FRAME_BYTES) chunks.push(chunk);
     });
-    req.on("end", () => {
+    req.on('end', () => {
       if (received !== contentLength || received > PCM_FRAME_BYTES || received % 2 !== 0) {
-        respondJson(res, 400, { error: "frame_length_mismatch" });
+        respondJson(res, 400, { error: 'frame_length_mismatch' });
         return;
       }
 
@@ -346,13 +358,13 @@ const server = http.createServer((req, res) => {
 
   if (req.method === 'POST' && req.url === '/broadcast_audio') {
     const chunks: Buffer[] = [];
-    req.on('data', chunk => chunks.push(chunk));
+    req.on('data', (chunk) => chunks.push(chunk));
     req.on('end', () => {
       const pcmData = Buffer.concat(chunks);
       const base64Data = pcmData.toString('base64');
       const payload = JSON.stringify({
-        type: "audio_playback",
-        audio_b64: base64Data
+        type: 'audio_playback',
+        audio_b64: base64Data,
       });
       for (const [ws, state] of peers) {
         if (ws.readyState === ws.OPEN) {
@@ -361,24 +373,24 @@ const server = http.createServer((req, res) => {
         }
       }
       res.writeHead(200);
-      res.end("OK");
+      res.end('OK');
     });
     return;
   }
   res.writeHead(404);
-  res.end("Not found");
+  res.end('Not found');
 });
 
 const wss = new WebSocketServer({ server });
 
-server.listen(PORT, "127.0.0.1", () => {
+server.listen(PORT, '127.0.0.1', () => {
   console.log(`[OMNIVOICE] OmniVoice Router 127.0.0.1:${PORT} ONLINE`);
 });
 
-wss.on("connection", (ws: WebSocket, req) => {
-  const remoteAddr = req.socket.remoteAddress ?? "";
+wss.on('connection', (ws: WebSocket, req) => {
+  const remoteAddr = req.socket.remoteAddress ?? '';
   const state: PeerState = {
-    id: mkId("peer"),
+    id: mkId('peer'),
     remoteAddr,
     speaking: false,
     speechStartMs: null,
@@ -387,96 +399,100 @@ wss.on("connection", (ws: WebSocket, req) => {
   };
   peers.set(ws, state);
   console.log(`[OMNIVOICE] CONNECT ${state.id} ${remoteAddr}`);
-  ws.send(JSON.stringify({ type: "welcome", peer_id: state.id }));
+  ws.send(JSON.stringify({ type: 'welcome', peer_id: state.id }));
 
-  ws.on("message", (raw) => {
+  ws.on('message', (raw) => {
     let msg: OmniMessage;
     try {
       msg = JSON.parse(raw.toString()) as OmniMessage;
     } catch {
-      ws.send(JSON.stringify({ type: "error", reason: "invalid JSON" }));
+      ws.send(JSON.stringify({ type: 'error', reason: 'invalid JSON' }));
       return;
     }
 
     switch (msg.type) {
-      case "ping":
-        ws.send(JSON.stringify({ type: "pong", ts: Date.now() }));
+      case 'ping':
+        ws.send(JSON.stringify({ type: 'pong', ts: Date.now() }));
         break;
 
-      case "offer":
+      case 'offer':
         // Relay SDP offer — future: forward to target peer; for now ack
-        ws.send(JSON.stringify({ type: "offer_ack", peer_id: state.id }));
+        ws.send(JSON.stringify({ type: 'offer_ack', peer_id: state.id }));
         break;
 
-      case "answer":
-        ws.send(JSON.stringify({ type: "answer_ack" }));
+      case 'answer':
+        ws.send(JSON.stringify({ type: 'answer_ack' }));
         break;
 
-      case "candidate":
+      case 'candidate':
         // ICE candidate relay — future: trickle to target peer
-        ws.send(JSON.stringify({ type: "candidate_ack" }));
+        ws.send(JSON.stringify({ type: 'candidate_ack' }));
         break;
 
-      case "data_frame": {
+      case 'data_frame': {
         const samples = Array.isArray(msg.samples) ? msg.samples : [];
         processFrame(state, samples);
         break;
       }
 
-      case "transcript": {
-        const text = (msg.text ?? "").trim();
+      case 'transcript': {
+        const text = (msg.text ?? '').trim();
         if (text) {
-          const tId = mkId("transcript");
+          const tId = mkId('transcript');
           const targetKnight = msg.knight_id ?? state.knight_id;
           enqueue({
             id: tId,
-            type: "forge",
+            type: 'forge',
             directive: text,
-            source: "omnivoice-router",
+            source: 'omnivoice-router',
             queued_at: new Date().toISOString(),
             priority: 1,
             knight_id: targetKnight ?? null,
           });
-          console.log(`[OMNIVOICE] TRANSCRIPT queued ${tId} (knight_id: ${targetKnight ?? 'default'}): ${text.slice(0, 60)}`);
-          ws.send(JSON.stringify({ type: "transcript_queued", id: tId, knight_id: targetKnight }));
+          console.log(
+            `[OMNIVOICE] TRANSCRIPT queued ${tId} (knight_id: ${targetKnight ?? 'default'}): ${text.slice(0, 60)}`,
+          );
+          ws.send(JSON.stringify({ type: 'transcript_queued', id: tId, knight_id: targetKnight }));
         }
         break;
       }
 
-      case "set_knight": {
+      case 'set_knight': {
         if (msg.knight_id) {
           state.knight_id = msg.knight_id;
           console.log(`[OMNIVOICE] Set active knight for ${state.id} to ${msg.knight_id}`);
-          ws.send(JSON.stringify({ type: "knight_updated", knight_id: msg.knight_id }));
+          ws.send(JSON.stringify({ type: 'knight_updated', knight_id: msg.knight_id }));
         }
         break;
       }
 
       default:
-        ws.send(JSON.stringify({ type: "error", reason: `unknown: ${(msg as { type: string }).type}` }));
+        ws.send(
+          JSON.stringify({ type: 'error', reason: `unknown: ${(msg as { type: string }).type}` }),
+        );
     }
   });
 
-  ws.on("close", () => {
+  ws.on('close', () => {
     console.log(`[OMNIVOICE] DISCONNECT ${state.id}`);
     peers.delete(ws);
   });
 
-  ws.on("error", (err: Error) => {
+  ws.on('error', (err: Error) => {
     console.error(`[OMNIVOICE] ERROR ${state.id}: ${err.message}`);
   });
 });
 
 function shutdown(): void {
-  console.log("[OMNIVOICE] Shutdown signal — closing connections");
+  console.log('[OMNIVOICE] Shutdown signal — closing connections');
   for (const [ws] of peers) {
-    ws.close(1001, "server shutdown");
+    ws.close(1001, 'server shutdown');
   }
   wss.close(() => {
-    console.log("[OMNIVOICE] OFFLINE");
+    console.log('[OMNIVOICE] OFFLINE');
     process.exit(0);
   });
 }
 
-process.on("SIGINT", shutdown);
-process.on("SIGTERM", shutdown);
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);

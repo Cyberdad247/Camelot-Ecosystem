@@ -1,17 +1,17 @@
 {
-    "@context": "https://camelot.os/ukg",
-    "UKG_NODE": {
-        "TYPE": "ASSIMILATION_EVENT",
-        "SOURCE": "02_FORGE/assimilated/cliproxyapi",
-        "DATE": "2026-02-10",
-        "SUMMARY": "Assimilated CLIProxyAPI as the Core Kinetic Tunnel for protocol translation and OAuth management. Established roadmap for Sir Proxy Knight and Iron Gate Sentry integration.",
-        "KEY_MECHANICS": [
-            "Protocol_Transmutation",
-            "OAuth_Swarm_Pool",
-            "Zero_Latency_Proxy",
-            "UKG_Telemetry_Bridge"
-        ],
-        "STATUS": "RADIANT",
-        "PROVENANCE_HASH": "0xPROXY_SINGULARITY_V1"
-    }
+  "@context": "https://camelot.os/ukg",
+  "UKG_NODE": {
+    "TYPE": "ASSIMILATION_EVENT",
+    "SOURCE": "02_FORGE/assimilated/cliproxyapi",
+    "DATE": "2026-02-10",
+    "SUMMARY": "Assimilated CLIProxyAPI as the Core Kinetic Tunnel for protocol translation and OAuth management. Established roadmap for Sir Proxy Knight and Iron Gate Sentry integration.",
+    "KEY_MECHANICS": [
+      "Protocol_Transmutation",
+      "OAuth_Swarm_Pool",
+      "Zero_Latency_Proxy",
+      "UKG_Telemetry_Bridge"
+    ],
+    "STATUS": "RADIANT",
+    "PROVENANCE_HASH": "0xPROXY_SINGULARITY_V1"
+  }
 }

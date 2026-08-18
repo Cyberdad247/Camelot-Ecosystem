@@ -1,4 +1,4 @@
-let subscribers = {};
+const subscribers = {};
 
 function subscribe(eventName, callback) {
   if (subscribers[eventName] === undefined) {

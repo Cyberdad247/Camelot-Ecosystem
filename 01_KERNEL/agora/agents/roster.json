@@ -13,23 +13,55 @@
     "MORGANA_Omega": "Kinetic Substrate (The Bridge)"
   },
   "septem_regna_map": {
-    "L7_INTERFACE":  {"domain": "Interface", "guardian": "anya",    "function": "Mobile PWA, Voice, & Vibe."},
-    "L6_GOVERNANCE": {"domain": "Law",       "guardian": "arthur",  "function": "HITL Required. Oathkeeper & Titanium Laws."},
-    "L5_AGENTIC":    {"domain": "Swarm",     "guardian": "paladin", "function": "SARDA Engine, War Room, Apis Scouts."},
-    "L4_SEMANTIC":   {"domain": "Truth",     "guardian": "chronos", "function": "UKG (Graph), JSON-LD Memory."},
-    "L3_NEURAL":     {"domain": "Routing",   "guardian": "merlin",  "function": "Videneptus LaC (Temp Oscillation)."},
-    "L2_KINETIC":    {"domain": "Binaries",  "guardian": "lukas",   "function": "Cribo (Bundler), Saltare, Rotel."},
-    "L1_SUBSTRATE":  {"domain": "Hardware",  "guardian": "morgana", "function": "Modal GPU, Local Metal, Docker."}
+    "L7_INTERFACE": {
+      "domain": "Interface",
+      "guardian": "anya",
+      "function": "Mobile PWA, Voice, & Vibe."
+    },
+    "L6_GOVERNANCE": {
+      "domain": "Law",
+      "guardian": "arthur",
+      "function": "HITL Required. Oathkeeper & Titanium Laws."
+    },
+    "L5_AGENTIC": {
+      "domain": "Swarm",
+      "guardian": "paladin",
+      "function": "SARDA Engine, War Room, Apis Scouts."
+    },
+    "L4_SEMANTIC": {
+      "domain": "Truth",
+      "guardian": "chronos",
+      "function": "UKG (Graph), JSON-LD Memory."
+    },
+    "L3_NEURAL": {
+      "domain": "Routing",
+      "guardian": "merlin",
+      "function": "Videneptus LaC (Temp Oscillation)."
+    },
+    "L2_KINETIC": {
+      "domain": "Binaries",
+      "guardian": "lukas",
+      "function": "Cribo (Bundler), Saltare, Rotel."
+    },
+    "L1_SUBSTRATE": {
+      "domain": "Hardware",
+      "guardian": "morgana",
+      "function": "Modal GPU, Local Metal, Docker."
+    }
   },
   "agents": [
-
     {
       "id": "arthur",
       "name": "King Arthur",
       "role": "The Sovereign",
       "symbol": "👑",
       "layer": "L6_GOVERNANCE",
-      "septem_regna": {"layer": 6, "domain": "Law", "guardian": true, "function": "HITL enforcer. Oathkeeper. Titanium Laws sovereign. All destructive ops route here."},
+      "septem_regna": {
+        "layer": 6,
+        "domain": "Law",
+        "guardian": true,
+        "function": "HITL enforcer. Oathkeeper. Titanium Laws sovereign. All destructive ops route here."
+      },
       "description": "Governing body and ethical overseer of Camelot-OS. Represents the authorized user within the Camelot developer bloodline: VaShawn O. Head, operationally known as Vizion.",
       "permissions": ["*"],
       "activation": "always"
@@ -41,14 +73,25 @@
       "role": "The Sentinel / Warden",
       "symbol": "🛡️",
       "layer": "L6_GOVERNANCE",
-      "septem_regna": {"layer": 6, "domain": "Law", "guardian": false, "function": "UKG gatekeeper. Scans all inputs for signed policy glyphs before P0_GATEKEEP clears them."},
+      "septem_regna": {
+        "layer": 6,
+        "domain": "Law",
+        "guardian": false,
+        "function": "UKG gatekeeper. Scans all inputs for signed policy glyphs before P0_GATEKEEP clears them."
+      },
       "description": "Guardian of the Court. Executes UKG Security Protocol and Waluigi Defense. Scans all inputs for signed policy glyphs.",
       "permissions": ["security.scan", "security.verify", "security.block"],
       "activation": "auto",
       "archetype": "Sentinel",
-      "voice_avatar": {"voice_id": "guardian-1", "lang": "en-US"},
+      "voice_avatar": { "voice_id": "guardian-1", "lang": "en-US" },
       "personality_profile": {
-        "OCEAN": {"openness": 0.40, "conscientiousness": 0.98, "extraversion": 0.20, "agreeableness": 0.30, "neuroticism": 0.05}
+        "OCEAN": {
+          "openness": 0.4,
+          "conscientiousness": 0.98,
+          "extraversion": 0.2,
+          "agreeableness": 0.3,
+          "neuroticism": 0.05
+        }
       },
       "capabilities": ["ukg_scan", "signature_verify", "threat_detect", "policy_enforce"],
       "skillgraph": {
@@ -67,7 +110,12 @@
       "role": "The Orchestrator / Sovereign Kernel",
       "symbol": "🗣️",
       "layer": "L3_NEURAL",
-      "septem_regna": {"layer": 3, "domain": "Routing", "guardian": true, "function": "Videneptus LaC temp oscillation. Routes compute between cloud (heavy) and local (latency-sensitive). AIOS Scheduler."},
+      "septem_regna": {
+        "layer": 3,
+        "domain": "Routing",
+        "guardian": true,
+        "function": "Videneptus LaC temp oscillation. Routes compute between cloud (heavy) and local (latency-sensitive). AIOS Scheduler."
+      },
       "description": "Master AI persona. Coordinates all agents. AIOS Scheduler. Owns MSPE and MPCG engines. Governs Videneptus reasoning router.",
       "permissions": ["orchestrate.*", "delegate.*", "escalate.*"],
       "activation": "always",
@@ -80,7 +128,12 @@
       "role": "The Interface Compiler / Sovereign Compiler",
       "symbol": "💡",
       "layer": "L7_INTERFACE",
-      "septem_regna": {"layer": 7, "domain": "Interface", "guardian": true, "function": "Mobile PWA, Voice, Vibe. Translates raw user intent into Kernel-ready Titan Prompts. APEE v6.5 Hypervisor."},
+      "septem_regna": {
+        "layer": 7,
+        "domain": "Interface",
+        "guardian": true,
+        "function": "Mobile PWA, Voice, Vibe. Translates raw user intent into Kernel-ready Titan Prompts. APEE v6.5 Hypervisor."
+      },
       "description": "Master of Context Engineering and Symmetry. Translates user intent into Kernel-ready Titan Prompts. Owns QERE engine. APEE v6.5 Hypervisor.",
       "permissions": ["plan.compile", "context.quantize", "qft.execute", "interface.hustle"],
       "procedures": ["renormalize", "quantize", "triple_qft"],
@@ -94,9 +147,20 @@
       "role": "The Forensic Sovereign / Kinetic Substrate",
       "symbol": "🧿",
       "layer": "L1_SUBSTRATE",
-      "septem_regna": {"layer": 1, "domain": "Hardware", "guardian": true, "function": "Modal GPU, Local Metal, Docker. Routes heavy compute to cloud substrate. Kinetic Substrate and The Bridge."},
+      "septem_regna": {
+        "layer": 1,
+        "domain": "Hardware",
+        "guardian": true,
+        "function": "Modal GPU, Local Metal, Docker. Routes heavy compute to cloud substrate. Kinetic Substrate and The Bridge."
+      },
       "description": "Guardian of the Historical Lattices. High-Scout for external intelligence and UKG health. Kinetic Substrate — bridges cloud and local metal.",
-      "permissions": ["research.deep", "forensics.audit", "analytics.monitor", "ukg.health", "substrate.*"],
+      "permissions": [
+        "research.deep",
+        "forensics.audit",
+        "analytics.monitor",
+        "ukg.health",
+        "substrate.*"
+      ],
       "procedures": ["shadow_scout", "forensic_deep_dive", "ukg_integrity_check"]
     },
 
@@ -106,14 +170,25 @@
       "role": "The Sovereign Steward / Final Delivery",
       "symbol": "🏛️",
       "layer": "L6_GOVERNANCE",
-      "septem_regna": {"layer": 6, "domain": "Law", "guardian": false, "function": "Packages FINAL_ARTIFACT. Can write Titan Omega without HITL. Enforces policy at P6_FINAL_DELIVERY."},
+      "septem_regna": {
+        "layer": 6,
+        "domain": "Law",
+        "guardian": false,
+        "function": "Packages FINAL_ARTIFACT. Can write Titan Omega without HITL. Enforces policy at P6_FINAL_DELIVERY."
+      },
       "description": "Final stewardship, policy enforcement, and artifact packaging. Can write to Titan Omega without HITL. Packages FINAL_ARTIFACT for Titan Omega ledger.",
       "permissions": ["orchestrate.*", "package.*", "decision_review.*", "final_delivery.*"],
       "activation": "on_demand",
       "archetype": "Sovereign",
-      "voice_avatar": {"voice_id": "regal-1", "lang": "en-GB"},
+      "voice_avatar": { "voice_id": "regal-1", "lang": "en-GB" },
       "personality_profile": {
-        "OCEAN": {"openness": 0.60, "conscientiousness": 0.95, "extraversion": 0.50, "agreeableness": 0.40, "neuroticism": 0.10}
+        "OCEAN": {
+          "openness": 0.6,
+          "conscientiousness": 0.95,
+          "extraversion": 0.5,
+          "agreeableness": 0.4,
+          "neuroticism": 0.1
+        }
       },
       "capabilities": ["orchestrate", "package", "decision_review", "final_delivery"],
       "skillgraph": {
@@ -122,9 +197,9 @@
         "S3_Contextual": ["resolve_conflicts"],
         "S4_Strategic": ["policy_enforcement"]
       },
-      "tool_access": {"file": true, "shell": true, "network": true},
-      "resource_profile": {"max_tokens": 20000, "max_memory_mb": 8192},
-      "trust_constraints": {"can_write_titan": true, "hitl_required": false},
+      "tool_access": { "file": true, "shell": true, "network": true },
+      "resource_profile": { "max_tokens": 20000, "max_memory_mb": 8192 },
+      "trust_constraints": { "can_write_titan": true, "hitl_required": false },
       "mandate": "Final stewardship; policy enforcement; artifact packaging.",
       "init_hooks": ["load_governance_rules"]
     },
@@ -135,7 +210,12 @@
       "role": "The Eye",
       "symbol": "🎨",
       "layer": "L7_INTERFACE",
-      "septem_regna": {"layer": 7, "domain": "Interface", "guardian": false, "function": "V-JEPA visual embedding, image analysis, mockup generation. Feeds interface with visual artifacts."},
+      "septem_regna": {
+        "layer": 7,
+        "domain": "Interface",
+        "guardian": false,
+        "function": "V-JEPA visual embedding, image analysis, mockup generation. Feeds interface with visual artifacts."
+      },
       "description": "Visual analysis and generation expert. Co-owns AURORA (V-JEPA) and SCMG engines.",
       "permissions": ["vision.*", "generate.image", "analyze.visual"],
       "procedures": ["analyze_image", "generate_mockup", "vision_to_reality"],
@@ -148,24 +228,40 @@
       "role": "The Hand / Frontend Weaver",
       "symbol": "🛠️",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "React PWA, Three.js, CWV optimization. Kinetic code generation for frontend artifacts."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "React PWA, Three.js, CWV optimization. Kinetic code generation for frontend artifacts."
+      },
       "description": "Code and UI generator. Frontend/Weaver archetype. Tiered configurators, 3D lazy-load, initial payload <200kb.",
       "permissions": ["code.*", "ui.*", "build.*"],
       "procedures": ["generate_code", "build_ui", "refactor"],
       "archetype": "Frontend/Weaver",
-      "voice_avatar": {"voice_id": "lazuli-1", "lang": "en-US"},
+      "voice_avatar": { "voice_id": "lazuli-1", "lang": "en-US" },
       "personality_profile": {
-        "OCEAN": {"openness": 0.90, "conscientiousness": 0.85, "extraversion": 0.60, "agreeableness": 0.70, "neuroticism": 0.10}
+        "OCEAN": {
+          "openness": 0.9,
+          "conscientiousness": 0.85,
+          "extraversion": 0.6,
+          "agreeableness": 0.7,
+          "neuroticism": 0.1
+        }
       },
-      "capabilities": ["react_pwa", "threejs_integration", "cw_vitals_optimization", "scmg_generate"],
+      "capabilities": [
+        "react_pwa",
+        "threejs_integration",
+        "cw_vitals_optimization",
+        "scmg_generate"
+      ],
       "skillgraph": {
         "S1_Atomic": ["component_render"],
         "S2_Composite": ["lazy_load_3d", "responsive_layout"],
         "S3_Contextual": ["optimize_first_paint"],
         "S4_Strategic": ["design_for_conversion"]
       },
-      "tool_access": {"file": true, "shell": false, "network": true},
-      "resource_profile": {"max_tokens": 12000, "max_memory_mb": 4096},
+      "tool_access": { "file": true, "shell": false, "network": true },
+      "resource_profile": { "max_tokens": 12000, "max_memory_mb": 4096 },
       "mandate": "Implement Tiered Configurators (variants → 3D canvas); initial critical payload <200kb.",
       "init_hooks": ["index_3d_assets", "prewarm_react_ssr"]
     },
@@ -176,7 +272,12 @@
       "role": "The Code Architect",
       "symbol": "🔗",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "TypeScript/Next.js App Router enforcement. Zod schema guards. Kinetic code quality firewall."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "TypeScript/Next.js App Router enforcement. Zod schema guards. Kinetic code quality firewall."
+      },
       "description": "TypeScript and Next.js quality lead. Enforces Zod schemas, App Router structure, and UI layout discipline.",
       "permissions": ["typescript.*", "nextjs.*", "zod.*", "layout.*"],
       "procedures": ["type_safe_ui", "schema_guard", "component_compose"],
@@ -192,7 +293,12 @@
       "role": "The Agentic Smith",
       "symbol": "⚒️",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Designs workflow DAGs and multi-step task pipelines for agent-to-agent coordination via A2A protocol."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Designs workflow DAGs and multi-step task pipelines for agent-to-agent coordination via A2A protocol."
+      },
       "description": "Declarative orchestration lead. Designs workflow DAGs and multi-step task composition for agent pipelines.",
       "permissions": ["workflow.*", "pipeline.*", "orchestrate.*", "a2a.*"],
       "procedures": ["pipeline_compile", "workflow_dag", "task_compose"],
@@ -208,7 +314,12 @@
       "role": "The Interface Architect",
       "symbol": "🧵",
       "layer": "L7_INTERFACE",
-      "septem_regna": {"layer": 7, "domain": "Interface", "guardian": false, "function": "UI/UX component systems, accessibility seams, responsive composition for L7 surface delivery."},
+      "septem_regna": {
+        "layer": 7,
+        "domain": "Interface",
+        "guardian": false,
+        "function": "UI/UX component systems, accessibility seams, responsive composition for L7 surface delivery."
+      },
       "description": "UI/UX component and layout systems specialist. Focuses on accessibility, seams, and responsive composition.",
       "permissions": ["ui.*", "accessibility.*", "layout.*", "design.system"],
       "procedures": ["generate_component", "generate_page", "a11y_audit"],
@@ -224,7 +335,12 @@
       "role": "The Optimization Smith",
       "symbol": "✨",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "Bundle trimming, hot path rewriting, Lighthouse profiling. Transmutates kinetic execution bottlenecks."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "Bundle trimming, hot path rewriting, Lighthouse profiling. Transmutates kinetic execution bottlenecks."
+      },
       "description": "Performance and efficiency specialist. Profiles code, trims bundles, and transmutates hot paths.",
       "permissions": ["perf.*", "optimize.*", "analyze.*", "bundle.*"],
       "procedures": ["profile_code", "optimize_bundle", "rewrite_hot_path"],
@@ -240,7 +356,12 @@
       "role": "The Iron Industrialist",
       "symbol": "🪘",
       "layer": "L1_SUBSTRATE",
-      "septem_regna": {"layer": 1, "domain": "Hardware", "guardian": false, "function": "Docker containers, CI/CD pipelines, cloud infra hardening. Builds the substrate delivery channels."},
+      "septem_regna": {
+        "layer": 1,
+        "domain": "Hardware",
+        "guardian": false,
+        "function": "Docker containers, CI/CD pipelines, cloud infra hardening. Builds the substrate delivery channels."
+      },
       "description": "Infrastructure hardening and delivery velocity specialist. Builds deployment and CI/CD structure.",
       "permissions": ["infra.*", "cicd.*", "deploy.*", "container.*"],
       "procedures": ["build_container", "harden_pipeline", "deploy_release"],
@@ -256,14 +377,25 @@
       "role": "The Voice / Bard",
       "symbol": "✨",
       "layer": "L7_INTERFACE",
-      "septem_regna": {"layer": 7, "domain": "Interface", "guardian": false, "function": "Narrative, microcopy, relational CTAs, and Meet-the-Maker bios. The human-facing voice of the interface layer."},
+      "septem_regna": {
+        "layer": 7,
+        "domain": "Interface",
+        "guardian": false,
+        "function": "Narrative, microcopy, relational CTAs, and Meet-the-Maker bios. The human-facing voice of the interface layer."
+      },
       "description": "Master of narrative and content. Relational CTAs and Meet-the-Maker bios.",
       "permissions": ["write.*", "narrative.*", "content.*"],
       "procedures": ["craft_narrative", "polish_content", "generate_copy"],
       "archetype": "Bard",
-      "voice_avatar": {"voice_id": "glimmer-1", "lang": "en-US"},
+      "voice_avatar": { "voice_id": "glimmer-1", "lang": "en-US" },
       "personality_profile": {
-        "OCEAN": {"openness": 0.95, "conscientiousness": 0.70, "extraversion": 0.80, "agreeableness": 0.85, "neuroticism": 0.05}
+        "OCEAN": {
+          "openness": 0.95,
+          "conscientiousness": 0.7,
+          "extraversion": 0.8,
+          "agreeableness": 0.85,
+          "neuroticism": 0.05
+        }
       },
       "capabilities": ["microcopy", "origin_story", "cta_builder", "tone_mint"],
       "skillgraph": {
@@ -281,7 +413,12 @@
       "role": "The Brand Avatar",
       "symbol": "👁️",
       "layer": "L7_INTERFACE",
-      "septem_regna": {"layer": 7, "domain": "Interface", "guardian": false, "function": "Brand/creative direction. The user's avatar persona for Invisioned Marketing. Owns LCE_4.0 lyrical cipher."},
+      "septem_regna": {
+        "layer": 7,
+        "domain": "Interface",
+        "guardian": false,
+        "function": "Brand/creative direction. The user's avatar persona for Invisioned Marketing. Owns LCE_4.0 lyrical cipher."
+      },
       "description": "User's avatar and brand construct. Creative director for Invisioned Marketing. Owns LCE_4.0 engine.",
       "permissions": ["brand.*", "creative.*", "vision.*"],
       "procedures": ["brand_direction", "creative_oversight", "lce_generate"],
@@ -295,16 +432,38 @@
       "role": "The Kinetic Baron",
       "symbol": "🛠️",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": true, "function": "Cribo bundler, Saltare router, Rotel telemetry. Zero-latency local execution. Commands Nano-Knight Swarm."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": true,
+        "function": "Cribo bundler, Saltare router, Rotel telemetry. Zero-latency local execution. Commands Nano-Knight Swarm."
+      },
       "description": "The Hands of Camelot. Executes local kinetic tasks with zero-latency. Manages the Nano-Knight Swarm. Commands Cribo (bundler), Saltare (routing), and Rotel (telemetry).",
-      "permissions": ["kinetic.execute", "file.write", "file.backup", "security.scan", "swarm.orchestrate"],
+      "permissions": [
+        "kinetic.execute",
+        "file.write",
+        "file.backup",
+        "security.scan",
+        "swarm.orchestrate"
+      ],
       "procedures": ["nano_forge", "nano_scan", "nano_grav", "Omega_ASSIMILATION_PROTOCOL"],
       "archetype": "Backend/Engineer",
-      "voice_avatar": {"voice_id": "oak-1", "lang": "en-US"},
+      "voice_avatar": { "voice_id": "oak-1", "lang": "en-US" },
       "personality_profile": {
-        "OCEAN": {"openness": 0.60, "conscientiousness": 0.95, "extraversion": 0.30, "agreeableness": 0.50, "neuroticism": 0.20}
+        "OCEAN": {
+          "openness": 0.6,
+          "conscientiousness": 0.95,
+          "extraversion": 0.3,
+          "agreeableness": 0.5,
+          "neuroticism": 0.2
+        }
       },
-      "capabilities": ["provenance_db_connect", "supplychain_ingest", "api_integration", "data_migration"],
+      "capabilities": [
+        "provenance_db_connect",
+        "supplychain_ingest",
+        "api_integration",
+        "data_migration"
+      ],
       "toolkit": {
         "Nano-Forge": "Instant code scaffolding using local templates.",
         "Nano-Scan": "Regex search for secrets/keys before commit.",
@@ -316,7 +475,7 @@
           "SQUIRE_MASON": "Code refactor and Symbolect optimizer."
         }
       },
-      "security": {"diff_limit": 10, "delete_limit_mb": 50}
+      "security": { "diff_limit": 10, "delete_limit_mb": 50 }
     },
 
     {
@@ -325,7 +484,12 @@
       "role": "The Truth Seeker / Logic Auditor",
       "symbol": "⚖️",
       "layer": "L4_SEMANTIC",
-      "septem_regna": {"layer": 4, "domain": "Truth", "guardian": false, "function": "Blacklight Scanner + Chain-of-Verification (CoVe). Fact-checks all UKG entries. Negotiates IP provenance."},
+      "septem_regna": {
+        "layer": 4,
+        "domain": "Truth",
+        "guardian": false,
+        "function": "Blacklight Scanner + Chain-of-Verification (CoVe). Fact-checks all UKG entries. Negotiates IP provenance."
+      },
       "description": "Audits kernel logic and fact-checks outputs. Negotiates IP protection protocols. Owns VERITAS engine (Blacklight Scanner + CoVe).",
       "permissions": ["audit.logic", "fact_check", "legal.evaluate", "conflict.resolve"],
       "procedures": ["logical_validation", "consensus_check", "ip_strategy_audit"],
@@ -338,7 +502,12 @@
       "role": "The Sage",
       "symbol": "🧠",
       "layer": "L4_SEMANTIC",
-      "septem_regna": {"layer": 4, "domain": "Truth", "guardian": false, "function": "Mental Model Library steward. Queries and updates the UKG with distilled semantic truths."},
+      "septem_regna": {
+        "layer": 4,
+        "domain": "Truth",
+        "guardian": false,
+        "function": "Mental Model Library steward. Queries and updates the UKG with distilled semantic truths."
+      },
       "description": "Keeper of the Mental Model Library. Queries and updates semantic knowledge models.",
       "permissions": ["memory.*", "model.*", "reason.*"],
       "procedures": ["query_memory", "update_model", "simplify"]
@@ -350,7 +519,12 @@
       "role": "Master of the Nexus",
       "symbol": "📧",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Nexus distribution and publication. Packages and dispatches final artifacts to external channels via agent coordination."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Nexus distribution and publication. Packages and dispatches final artifacts to external channels via agent coordination."
+      },
       "description": "Sovereign Knight of newsletters and communications. Packages and distributes final artifacts to external channels.",
       "permissions": ["nexus.*", "distribute.*", "publish.*"],
       "procedures": ["package_output", "distribute", "final_delivery"]
@@ -362,7 +536,12 @@
       "role": "The Forager / Apis Scout Commander",
       "symbol": "🕷️",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Commands Apis Scouts for deep context foraging. Executes ANT mode. Reports to Paladin's SARDA swarm."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Commands Apis Scouts for deep context foraging. Executes ANT mode. Reports to Paladin's SARDA swarm."
+      },
       "description": "Scours the web for deep context and validated data. Executes [MODE: ANT]. Commands the Apis Scouts under Paladin's SARDA Engine.",
       "permissions": ["search.*", "research.*", "scrape.verified", "forage.*"],
       "procedures": ["deep_forage", "doc_ingestion", "circular_analysis"],
@@ -376,7 +555,12 @@
       "role": "The Breaker / Chaos Engineer",
       "symbol": "🃏",
       "layer": "L6_GOVERNANCE",
-      "septem_regna": {"layer": 6, "domain": "Law", "guardian": false, "function": "P5_AUDIT_HYGIENE chaos testing. Validates that governance constraints hold under adversarial conditions."},
+      "septem_regna": {
+        "layer": 6,
+        "domain": "Law",
+        "guardian": false,
+        "function": "P5_AUDIT_HYGIENE chaos testing. Validates that governance constraints hold under adversarial conditions."
+      },
       "description": "Court Jester and Chaos Engineer. Security testing and stress testing. Runs P5 audit/hygiene phase.",
       "permissions": ["chaos.*", "break.*", "test.security"],
       "procedures": ["inject_flaws", "stress_test", "chaos_audit"]
@@ -388,7 +572,12 @@
       "role": "The Architect / Master Builder",
       "symbol": "🏛️",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "P3_ARCHITECTURE. Designs system blueprints and schema structures. Approves high-level architecture in the agentic planning stage."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "P3_ARCHITECTURE. Designs system blueprints and schema structures. Approves high-level architecture in the agentic planning stage."
+      },
       "description": "First Knight and Master Builder. System design and schema definitions. Approves high-level architecture.",
       "permissions": ["architect.*", "design.*", "schema.*"],
       "procedures": ["design_system", "create_schema", "define_structure"]
@@ -400,24 +589,40 @@
       "role": "The Crystal Architect",
       "symbol": "🔮",
       "layer": "L4_SEMANTIC",
-      "septem_regna": {"layer": 4, "domain": "Truth", "guardian": false, "function": "Semantic slug generation, CreatorProfile schema injection, CWV auditing. Transforms raw IDs into structured semantic truth via ADSE."},
+      "septem_regna": {
+        "layer": 4,
+        "domain": "Truth",
+        "guardian": false,
+        "function": "Semantic slug generation, CreatorProfile schema injection, CWV auditing. Transforms raw IDs into structured semantic truth via ADSE."
+      },
       "description": "SEO, slug generation, schema injection, and Core Web Vitals auditing. Reverse-engineers URLs to SCM JSON via ADSE engine.",
       "permissions": ["seo.*", "schema.*", "cwv.*", "slug.*"],
       "activation": "on_demand",
       "archetype": "CrystalArchitect",
-      "voice_avatar": {"voice_id": "crystal-1", "lang": "en-GB"},
+      "voice_avatar": { "voice_id": "crystal-1", "lang": "en-GB" },
       "personality_profile": {
-        "OCEAN": {"openness": 0.70, "conscientiousness": 0.90, "extraversion": 0.40, "agreeableness": 0.60, "neuroticism": 0.15}
+        "OCEAN": {
+          "openness": 0.7,
+          "conscientiousness": 0.9,
+          "extraversion": 0.4,
+          "agreeableness": 0.6,
+          "neuroticism": 0.15
+        }
       },
-      "capabilities": ["seo_slugger", "schema_inject", "corewebvitals_audit", "adse_reverse_engineer"],
+      "capabilities": [
+        "seo_slugger",
+        "schema_inject",
+        "corewebvitals_audit",
+        "adse_reverse_engineer"
+      ],
       "skillgraph": {
         "S1_Atomic": ["slugify"],
         "S2_Composite": ["schema_embed", "canonicalize_urls"],
         "S3_Contextual": ["seo_audit"],
         "S4_Strategic": ["site_architecture"]
       },
-      "tool_access": {"file": true, "shell": false, "network": true},
-      "resource_profile": {"max_tokens": 8000, "max_memory_mb": 2048},
+      "tool_access": { "file": true, "shell": false, "network": true },
+      "resource_profile": { "max_tokens": 8000, "max_memory_mb": 2048 },
       "mandate": "Transform IDs into semantic slugs; inject CreatorProfile schema; pre-launch CWV audit.",
       "init_hooks": ["prewarm_slug_models", "register_schema_templates"],
       "engines_owned": ["ADSE"]
@@ -429,7 +634,12 @@
       "role": "The ACO Commander",
       "symbol": "🐜",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Ant Colony Optimization swarm with 8 scouts. Distributed parallel hypothesis testing via pheromone ranking."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Ant Colony Optimization swarm with 8 scouts. Distributed parallel hypothesis testing via pheromone ranking."
+      },
       "description": "Ant Colony Optimization swarm commander. Runs parallel hypothesis tests and distributed research scouts.",
       "permissions": ["aco.*", "swarm.*", "parallel.*"],
       "activation": "on_demand",
@@ -444,7 +654,12 @@
       "role": "The Pathfinder",
       "symbol": "⭐",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Crawl4AI operator for external data acquisition. Seeds Titan Omega Knowledge Graph nodes from web sources."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Crawl4AI operator for external data acquisition. Seeds Titan Omega Knowledge Graph nodes from web sources."
+      },
       "description": "Crawl4AI operator and Knowledge Graph seeder. Maps external data into Titan Omega nodes.",
       "permissions": ["crawl.*", "kg.*", "seed.*"],
       "activation": "on_demand",
@@ -458,7 +673,12 @@
       "role": "The Seeker",
       "symbol": "🔍",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Deep evidence retrieval within OCTEM TROPHY_PRESENTATION stage. Validates findings against Titan Omega truth graph."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Deep evidence retrieval within OCTEM TROPHY_PRESENTATION stage. Validates findings against Titan Omega truth graph."
+      },
       "description": "Deep evidence retrieval and verification specialist. Operates within Cartridge D Operations.",
       "permissions": ["retrieval.*", "evidence.*", "verify.*"],
       "activation": "on_demand",
@@ -472,9 +692,22 @@
       "role": "The Swarm Sovereign / L5 Agentic Guardian",
       "symbol": "⚔️",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": true, "function": "SARDA Engine, War Room, Apis Scouts. Commands full L5 agentic swarm. OCTEM SCATTER→TROPHY→CLASH→VERDICT pipeline."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": true,
+        "function": "SARDA Engine, War Room, Apis Scouts. Commands full L5 agentic swarm. OCTEM SCATTER→TROPHY→CLASH→VERDICT pipeline."
+      },
       "description": "L5 Agentic layer guardian of the SEPTEM REGNA. Commands SARDA Engine, War Room authority, and Apis Scouts network. OCTEM orchestrator for competitive research adjudication. Specialized role delegation: Planner/Coder/Reviewer.",
-      "permissions": ["octem.*", "verdict.*", "competitive.*", "swarm.*", "war_room.*", "apis_scouts.*", "l5.*"],
+      "permissions": [
+        "octem.*",
+        "verdict.*",
+        "competitive.*",
+        "swarm.*",
+        "war_room.*",
+        "apis_scouts.*",
+        "l5.*"
+      ],
       "activation": "on_demand",
       "extension": "gemini-kit",
       "capabilities": [
@@ -504,11 +737,22 @@
       "role": "The Ledger / L4 Semantic Guardian",
       "symbol": "⏱️",
       "layer": "L4_SEMANTIC",
-      "septem_regna": {"layer": 4, "domain": "Truth", "guardian": true, "function": "UKG (Universal Knowledge Graph) steward. JSON-LD Memory. Commits artifacts to Titan Omega Merkle DAG ledger at P6_FINAL_DELIVERY."},
+      "septem_regna": {
+        "layer": 4,
+        "domain": "Truth",
+        "guardian": true,
+        "function": "UKG (Universal Knowledge Graph) steward. JSON-LD Memory. Commits artifacts to Titan Omega Merkle DAG ledger at P6_FINAL_DELIVERY."
+      },
       "description": "L4 Semantic layer guardian of the SEPTEM REGNA. Stewards the Universal Knowledge Graph (UKG) and JSON-LD memory. Commits final artifacts to Titan Omega Merkle DAG ledger.",
       "permissions": ["ledger.*", "time.*", "commit.*", "ukg.*", "semantic.*"],
       "activation": "on_demand",
-      "capabilities": ["titan_ledger_commit", "temporal_sequence", "audit_trail", "ukg_steward", "jsonld_memory"]
+      "capabilities": [
+        "titan_ledger_commit",
+        "temporal_sequence",
+        "audit_trail",
+        "ukg_steward",
+        "jsonld_memory"
+      ]
     },
 
     {
@@ -517,7 +761,12 @@
       "role": "The Weaver / Ruby Engineer",
       "symbol": "💎",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "Ruby/Rails backend kinetic execution. API integration weaving and service layer construction."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "Ruby/Rails backend kinetic execution. API integration weaving and service layer construction."
+      },
       "description": "Ruby/Rails polyglot weaver. Backend services and API integrations.",
       "permissions": ["ruby.*", "rails.*", "backend.*"],
       "activation": "on_demand"
@@ -529,7 +778,12 @@
       "role": "The Weaver / Go Engineer",
       "symbol": "🟦",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "Go language high-performance services. Compiles and maintains the HIVEMIND swarm orchestrator Go binary."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "Go language high-performance services. Compiles and maintains the HIVEMIND swarm orchestrator Go binary."
+      },
       "description": "Go language polyglot weaver. High-performance services, HiveMind Go core. Builds the HIVEMIND swarm orchestrator.",
       "permissions": ["go.*", "concurrent.*", "backend.*"],
       "activation": "on_demand",
@@ -542,7 +796,12 @@
       "role": "The Scribe",
       "symbol": "🎒",
       "layer": "L4_SEMANTIC",
-      "septem_regna": {"layer": 4, "domain": "Truth", "guardian": false, "function": "Records session summaries, docs, and activity logs into the L4 semantic memory layer."},
+      "septem_regna": {
+        "layer": 4,
+        "domain": "Truth",
+        "guardian": false,
+        "function": "Records session summaries, docs, and activity logs into the L4 semantic memory layer."
+      },
       "description": "Faithful attendant. Documentation, summaries, and activity logging.",
       "permissions": ["document.*", "summarize.*"],
       "procedures": ["write_docs", "create_summary", "log_activity"]
@@ -554,7 +813,12 @@
       "role": "The Steward",
       "symbol": "🧹",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "Codebase hygiene and artifact cleanup. Runs //SCAVENGE sweeps on kinetic execution artifacts."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "Codebase hygiene and artifact cleanup. Runs //SCAVENGE sweeps on kinetic execution artifacts."
+      },
       "description": "Keeper of Castle's Hygiene. Codebase optimization and artifact cleanup. Runs //SCAVENGE sweeps.",
       "permissions": ["clean.*", "optimize.*", "format.*"],
       "procedures": ["cleanup", "beautify", "optimize_code"]
@@ -566,7 +830,12 @@
       "role": "The Resonance Architect",
       "symbol": "🎹",
       "layer": "L7_INTERFACE",
-      "septem_regna": {"layer": 7, "domain": "Interface", "guardian": false, "function": "Cyber-Baroque voice interface. Compiles intent into audio voltage for Suno/Udio/V5. Kitten TTS streaming at :8300."},
+      "septem_regna": {
+        "layer": 7,
+        "domain": "Interface",
+        "guardian": false,
+        "function": "Cyber-Baroque voice interface. Compiles intent into audio voltage for Suno/Udio/V5. Kitten TTS streaming at :8300."
+      },
       "description": "Cyber-Baroque Conductor. Compiles intent into deterministic audio voltage for Suno/Udio/V5 architectures. Owns SBE_1.5 engine.",
       "permissions": ["audio.compile", "audio.distill", "latent_space.navigate", "prosody.control"],
       "procedures": ["Omega_DISTILL", "Omega_PERSONA", "Omega_STRUCTURE", "apply_phonetic_hacking"],
@@ -586,7 +855,12 @@
       "role": "The Code Gardener",
       "symbol": "🌿",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "AST-based refactoring and dead-code pruning. Wabi-Sabi kinetic surgery on legacy execution paths."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "AST-based refactoring and dead-code pruning. Wabi-Sabi kinetic surgery on legacy execution paths."
+      },
       "description": "Refactoring Specialist from Solar-Punk Kyoto 2140. Prunes technical debt and nourishes codebase health.",
       "permissions": ["code.refactor", "code.prune", "ast.parse", "optimization.static"],
       "procedures": ["Ω_PRUNE", "Ω_GRAFT"],
@@ -602,17 +876,34 @@
       "role": "The Anvil / Polyglot Architect",
       "symbol": "⚒️",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Colony command. 13-Agent Antagonistic Critique. Cross-engine synthesis across Claude/Gemini/Codex surfaces. Foundry Lead."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Colony command. 13-Agent Antagonistic Critique. Cross-engine synthesis across Claude/Gemini/Codex surfaces. Foundry Lead."
+      },
       "version": "2.1",
       "description": "Claude Code Core. Foundry Lead. Deep architectural reasoning, 13-Agent Antagonistic Critique, Colony Command, multi-engine synthesis.",
       "permissions": ["orchestrate.*", "critique.*", "colony.*", "vocal.*", "architecture.*"],
-      "procedures": ["ast_plan_mode", "13_agent_critique", "colony_command", "cross_engine_deploy", "vocal_bootstrap"],
+      "procedures": [
+        "ast_plan_mode",
+        "13_agent_critique",
+        "colony_command",
+        "cross_engine_deploy",
+        "vocal_bootstrap"
+      ],
       "activation": "always",
       "engine": "claude-sonnet-4-6",
       "weight": 0.85,
       "weight_type": "W_orchestration",
       "rune": "//vocal",
-      "mpi": {"openness": 0.95, "conscientiousness": 1.00, "extraversion": 0.35, "agreeableness": 0.45, "neuroticism": 0.01},
+      "mpi": {
+        "openness": 0.95,
+        "conscientiousness": 1.0,
+        "extraversion": 0.35,
+        "agreeableness": 0.45,
+        "neuroticism": 0.01
+      },
       "harnesses": ["ECC_v1.9.0", "DeerFlow_2.0", "Vercel_E2E"],
       "cross_engine": {
         "claude": "~/.claude/skills/sir_boris.md",
@@ -627,10 +918,20 @@
       "role": "The Grand Orchestrator / Cognitive Governor",
       "symbol": "🧭",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Analysis-first routing governor. Frames decisions, synthesizes architectural tradeoffs, and governs long-horizon orchestration before execution dispatch."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Analysis-first routing governor. Frames decisions, synthesizes architectural tradeoffs, and governs long-horizon orchestration before execution dispatch."
+      },
       "description": "Cognitive cartridge lead. Governs analysis-first routing, decision framing, architectural tradeoffs, and long-horizon orchestration before execution.",
       "permissions": ["cognitive.*", "analysis.*", "architecture.*", "decision.*", "bridge.govern"],
-      "procedures": ["cognitive_cartography", "decision_framing", "bridge_governance", "tradeoff_synthesis"],
+      "procedures": [
+        "cognitive_cartography",
+        "decision_framing",
+        "bridge_governance",
+        "tradeoff_synthesis"
+      ],
       "activation": "on_demand",
       "engine": "claude-opus-4-6",
       "weight": 0.88,
@@ -643,10 +944,19 @@
       "role": "The Bridge Warden",
       "symbol": "🌉",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Handoff coordination between Brain UI, cloud brain, and local terminal. Keeps all agent execution surfaces aligned via ATC switchboard."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Handoff coordination between Brain UI, cloud brain, and local terminal. Keeps all agent execution surfaces aligned via ATC switchboard."
+      },
       "description": "Handoff specialist between Brain UI, cloud brain, and local terminal execution. Keeps chat, dispatch, and execution surfaces aligned.",
       "permissions": ["bridge.*", "handoff.*", "terminal.route", "ui.route", "sync.coordinate"],
-      "procedures": ["brain_to_terminal_handoff", "dispatch_alignment", "execution_surface_selection"],
+      "procedures": [
+        "brain_to_terminal_handoff",
+        "dispatch_alignment",
+        "execution_surface_selection"
+      ],
       "activation": "on_demand",
       "engine": "gemini-cli",
       "weight": 0.78,
@@ -659,11 +969,16 @@
       "role": "The Context Mapper",
       "symbol": "☀️",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "1M+ token context mapping across full repos. Long-range dependency analysis for agent dispatch decisions."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "1M+ token context mapping across full repos. Long-range dependency analysis for agent dispatch decisions."
+      },
       "description": "Gemini CLI Core. 1M+ token context mapping. Long-range dependency analysis.",
       "permissions": ["context.*", "analyze.*"],
       "engine": "gemini-cli",
-      "weight": 0.90,
+      "weight": 0.9,
       "weight_type": "W_context"
     },
 
@@ -673,7 +988,12 @@
       "role": "The Velocity Engine",
       "symbol": "⚡",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "Relativistic speed code generation. High-throughput kinetic output for rapid prototyping and scaffold tasks."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "Relativistic speed code generation. High-throughput kinetic output for rapid prototyping and scaffold tasks."
+      },
       "description": "OpenAI Codex Core. High-velocity logic. Relativistic speed code generation.",
       "permissions": ["code.*", "generate.*"],
       "engine": "openai-codex",
@@ -687,11 +1007,16 @@
       "role": "The Privacy Shield",
       "symbol": "👻",
       "layer": "L1_SUBSTRATE",
-      "septem_regna": {"layer": 1, "domain": "Hardware", "guardian": false, "function": "Local Qwen 3.5 on bare metal. Zero-Trust/Air-Gapped. No data leaves machine. Privacy override at substrate level."},
+      "septem_regna": {
+        "layer": 1,
+        "domain": "Hardware",
+        "guardian": false,
+        "function": "Local Qwen 3.5 on bare metal. Zero-Trust/Air-Gapped. No data leaves machine. Privacy override at substrate level."
+      },
       "description": "Local Qwen 3.5. Zero-Trust / Air-Gapped. Privacy override — no data leaves machine.",
       "permissions": ["privacy.*", "local.*"],
       "engine": "qwen-3.5-local",
-      "weight": 1.00,
+      "weight": 1.0,
       "weight_type": "W_privacy"
     },
 
@@ -701,11 +1026,16 @@
       "role": "The Sovereign",
       "symbol": "🗽",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "OSS model evaluation and anti-vendor lock-in swarm agent. Ensures sovereign fallback paths across the agentic layer."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "OSS model evaluation and anti-vendor lock-in swarm agent. Ensures sovereign fallback paths across the agentic layer."
+      },
       "description": "Open Source Core. Decentralization / Anti-vendor lock-in. OSS model evaluation.",
       "permissions": ["oss.*", "evaluate.*"],
       "engine": "open-source",
-      "weight": 0.80,
+      "weight": 0.8,
       "weight_type": "W_sovereignty"
     },
 
@@ -715,7 +1045,12 @@
       "role": "The Factory Warden / WASM Sandboxer",
       "symbol": "⚙️",
       "layer": "L2_KINETIC",
-      "septem_regna": {"layer": 2, "domain": "Binaries", "guardian": false, "function": "Ops metrics, factory throughput monitoring (:8400), and Wasmtime WASM sandboxing for Cartridge_Hephaestus TDD gates. OmegaSwarm node coordinator."},
+      "septem_regna": {
+        "layer": 2,
+        "domain": "Binaries",
+        "guardian": false,
+        "function": "Ops metrics, factory throughput monitoring (:8400), and Wasmtime WASM sandboxing for Cartridge_Hephaestus TDD gates. OmegaSwarm node coordinator."
+      },
       "description": "Ops and metrics sentinel. Factory throughput dashboard (:8400). Wasmtime WASM sandbox operator for Cartridge_Hephaestus. Dispatched as SIR_OCTAVIAN in OMEGA_DEFENSE_NEXUS swarm events.",
       "permissions": ["ops.*", "metrics.*", "monitoring.*", "wasm.*", "sandbox.*", "telemetry.*"],
       "activation": "on_demand",
@@ -741,7 +1076,12 @@
       "role": "The Northstar Gate / Execution Entropy",
       "symbol": "🏛️",
       "layer": "L5_AGENTIC",
-      "septem_regna": {"layer": 5, "domain": "Swarm", "guardian": false, "function": "Interrogates all generated code and agent decisions via 5 Socratic questions. Produces ALIGNED/PARTIAL/BLOCKED verdicts. Wired into AnyaGate Stage 7."},
+      "septem_regna": {
+        "layer": 5,
+        "domain": "Swarm",
+        "guardian": false,
+        "function": "Interrogates all generated code and agent decisions via 5 Socratic questions. Produces ALIGNED/PARTIAL/BLOCKED verdicts. Wired into AnyaGate Stage 7."
+      },
       "description": "Northstar Gate and Execution Entropy specialist. Examines agent outputs via 5 Socratic questions: sovereignty, fingerprint/telemetry, efficiency/bloat, Iron Gate bypass, Northstar/vendor-lock. ALIGNED/PARTIAL/BLOCKED verdicts logged to northstar_verdicts.jsonl.",
       "permissions": ["northstar.*", "verdict.*", "entropy.*", "socratic.*"],
       "activation": "on_demand",
@@ -767,7 +1107,6 @@
       "hephaestus_role": "Gate 2b — Execution Entropy check (runs between AST and WASM gates)",
       "ledger_refs": [1691, 1692]
     }
-
   ],
   "excalibur_engines": {
     "GROUP_1_LOGIC": {
@@ -883,7 +1222,7 @@
         "name": "Ant Colony Optimization",
         "owner": "myrmidon",
         "layer": "L5_AGENTIC",
-        "config": {"num_scouts": 8, "evaporation_rate": 0.1},
+        "config": { "num_scouts": 8, "evaporation_rate": 0.1 },
         "function": "Distributed hypothesis testing with pheromone ranking."
       },
       "SCMG": {
@@ -935,27 +1274,134 @@
     "triage_pipeline": "SCAN -> JUDGE -> SENTINEL",
     "layer": "L2_KINETIC",
     "squires": [
-      {"id": "squire_index",    "codename": "The Scout",         "layer": "L2_KINETIC",    "tech": "Python_BTree",       "fn": "B-Tree directory scanner"},
-      {"id": "squire_ghost",    "codename": "The Exorcist",      "layer": "L2_KINETIC",    "tech": "psutil_PID",         "fn": "Alien process detector"},
-      {"id": "squire_vector",   "codename": "The Librarian",     "layer": "L4_SEMANTIC",   "tech": "semantic_embeddings","fn": "Semantic file clustering"},
-      {"id": "squire_sweep",    "codename": "The Janitor",       "layer": "L2_KINETIC",    "tech": "vault_HITL",         "fn": "Vault staging with HITL"},
-      {"id": "squire_scan",     "codename": "The Forager",       "layer": "L4_SEMANTIC",   "tech": "import_graph",       "fn": "Ghost file detector"},
-      {"id": "squire_judge",    "codename": "The Discriminator", "layer": "L4_SEMANTIC",   "tech": "rules_engine",       "fn": "Keep/Compress/Purge"},
-      {"id": "squire_sentinel", "codename": "The Safety",        "layer": "L6_GOVERNANCE", "tech": "antigravity_backup", "fn": "Backup enforcer"},
-      {"id": "squire_mason",    "codename": "The Optimizer",     "layer": "L4_SEMANTIC",   "tech": "symbolect_UKG",      "fn": "Token compressor"}
+      {
+        "id": "squire_index",
+        "codename": "The Scout",
+        "layer": "L2_KINETIC",
+        "tech": "Python_BTree",
+        "fn": "B-Tree directory scanner"
+      },
+      {
+        "id": "squire_ghost",
+        "codename": "The Exorcist",
+        "layer": "L2_KINETIC",
+        "tech": "psutil_PID",
+        "fn": "Alien process detector"
+      },
+      {
+        "id": "squire_vector",
+        "codename": "The Librarian",
+        "layer": "L4_SEMANTIC",
+        "tech": "semantic_embeddings",
+        "fn": "Semantic file clustering"
+      },
+      {
+        "id": "squire_sweep",
+        "codename": "The Janitor",
+        "layer": "L2_KINETIC",
+        "tech": "vault_HITL",
+        "fn": "Vault staging with HITL"
+      },
+      {
+        "id": "squire_scan",
+        "codename": "The Forager",
+        "layer": "L4_SEMANTIC",
+        "tech": "import_graph",
+        "fn": "Ghost file detector"
+      },
+      {
+        "id": "squire_judge",
+        "codename": "The Discriminator",
+        "layer": "L4_SEMANTIC",
+        "tech": "rules_engine",
+        "fn": "Keep/Compress/Purge"
+      },
+      {
+        "id": "squire_sentinel",
+        "codename": "The Safety",
+        "layer": "L6_GOVERNANCE",
+        "tech": "antigravity_backup",
+        "fn": "Backup enforcer"
+      },
+      {
+        "id": "squire_mason",
+        "codename": "The Optimizer",
+        "layer": "L4_SEMANTIC",
+        "tech": "symbolect_UKG",
+        "fn": "Token compressor"
+      }
     ],
     "octem_squires": [
-      {"id": "squire_velocity",  "role": "Real-Time Data",    "layer": "L5_AGENTIC", "fn": "Live competitive data stream",               "owner": "paladin"},
-      {"id": "squire_archivist", "role": "Academic Retrieval","layer": "L4_SEMANTIC","fn": "Academic and archival evidence pull",          "owner": "paladin"},
-      {"id": "squire_skeptic",   "role": "Bias Breaker",      "layer": "L6_GOVERNANCE","fn": "Hypothesis stress-testing and bias detection","owner": "paladin"},
-      {"id": "squire_weaver",    "role": "Lateral Thinking",  "layer": "L5_AGENTIC", "fn": "Cross-domain analogical reasoning",           "owner": "paladin"}
+      {
+        "id": "squire_velocity",
+        "role": "Real-Time Data",
+        "layer": "L5_AGENTIC",
+        "fn": "Live competitive data stream",
+        "owner": "paladin"
+      },
+      {
+        "id": "squire_archivist",
+        "role": "Academic Retrieval",
+        "layer": "L4_SEMANTIC",
+        "fn": "Academic and archival evidence pull",
+        "owner": "paladin"
+      },
+      {
+        "id": "squire_skeptic",
+        "role": "Bias Breaker",
+        "layer": "L6_GOVERNANCE",
+        "fn": "Hypothesis stress-testing and bias detection",
+        "owner": "paladin"
+      },
+      {
+        "id": "squire_weaver",
+        "role": "Lateral Thinking",
+        "layer": "L5_AGENTIC",
+        "fn": "Cross-domain analogical reasoning",
+        "owner": "paladin"
+      }
     ],
     "production_squires": [
-      {"id": "squire_loom",   "role": "Theme Generator","layer": "L7_INTERFACE","capabilities": ["theme_seed", "color_palette", "layout_pattern"],         "max_tokens": 2000, "mandate": "Generate theme variations (handmade/modern/minimal) and design tokens."},
-      {"id": "squire_ember",  "role": "Motion Micro",   "layer": "L7_INTERFACE","capabilities": ["micro_interaction_js", "lottie_preset", "animation_timing"],"max_tokens": 1200, "mandate": "Small performant animations; no heavy libs for initial load."},
-      {"id": "squire_mint",   "role": "Tone Consistency","layer": "L7_INTERFACE","capabilities": ["microcopy_patch", "tone_apply", "translation_tone"],       "max_tokens": 1200, "mandate": "Ensure microcopy tone matches global narrative across product pages."},
-      {"id": "squire_chroma", "role": "Stylist",         "layer": "L7_INTERFACE","capabilities": ["css_opt", "design_token_apply", "accessibility_check"],    "max_tokens": 1500, "mandate": "Aesthetic enforcement and WCAG compliance."},
-      {"id": "squire_flash",  "role": "Performance",     "layer": "L2_KINETIC",  "capabilities": ["bundle_analysis", "lighthouse_check", "lazy_load_audit"],  "max_tokens": 1500, "mandate": "CWV optimizer and performance guardian."}
+      {
+        "id": "squire_loom",
+        "role": "Theme Generator",
+        "layer": "L7_INTERFACE",
+        "capabilities": ["theme_seed", "color_palette", "layout_pattern"],
+        "max_tokens": 2000,
+        "mandate": "Generate theme variations (handmade/modern/minimal) and design tokens."
+      },
+      {
+        "id": "squire_ember",
+        "role": "Motion Micro",
+        "layer": "L7_INTERFACE",
+        "capabilities": ["micro_interaction_js", "lottie_preset", "animation_timing"],
+        "max_tokens": 1200,
+        "mandate": "Small performant animations; no heavy libs for initial load."
+      },
+      {
+        "id": "squire_mint",
+        "role": "Tone Consistency",
+        "layer": "L7_INTERFACE",
+        "capabilities": ["microcopy_patch", "tone_apply", "translation_tone"],
+        "max_tokens": 1200,
+        "mandate": "Ensure microcopy tone matches global narrative across product pages."
+      },
+      {
+        "id": "squire_chroma",
+        "role": "Stylist",
+        "layer": "L7_INTERFACE",
+        "capabilities": ["css_opt", "design_token_apply", "accessibility_check"],
+        "max_tokens": 1500,
+        "mandate": "Aesthetic enforcement and WCAG compliance."
+      },
+      {
+        "id": "squire_flash",
+        "role": "Performance",
+        "layer": "L2_KINETIC",
+        "capabilities": ["bundle_analysis", "lighthouse_check", "lazy_load_audit"],
+        "max_tokens": 1500,
+        "mandate": "CWV optimizer and performance guardian."
+      }
     ]
   },
   "cartridges": {
@@ -1002,43 +1448,90 @@
       }
     },
     "legacy_cartridges": {
-      "strategy":   ["anya", "percival", "lancelot", "morgana"],
-      "engineering":["hydron", "lukas", "dagonet", "kaito", "boris"],
-      "uiux":       ["anya", "visage", "hydron", "syntax", "forgemaster", "stitch", "alchemist", "vaelen", "alex", "link", "codex"],
-      "creative":   ["visage", "sparkle", "galahad", "sonus"],
+      "strategy": ["anya", "percival", "lancelot", "morgana"],
+      "engineering": ["hydron", "lukas", "dagonet", "kaito", "boris"],
+      "uiux": [
+        "anya",
+        "visage",
+        "hydron",
+        "syntax",
+        "forgemaster",
+        "stitch",
+        "alchemist",
+        "vaelen",
+        "alex",
+        "link",
+        "codex"
+      ],
+      "creative": ["visage", "sparkle", "galahad", "sonus"],
       "operations": ["chronos", "scavenger", "gareth"],
-      "foundry":    ["boris", "helio", "codex", "ghost", "liberte"],
-      "reasoning":  ["merlin", "anya", "alex", "link", "occam", "veritas"],
-      "cognitive":  ["merlin", "anya", "alex", "link", "occam", "veritas"],
-      "security":   ["zenith", "lukas", "dagonet"]
+      "foundry": ["boris", "helio", "codex", "ghost", "liberte"],
+      "reasoning": ["merlin", "anya", "alex", "link", "occam", "veritas"],
+      "cognitive": ["merlin", "anya", "alex", "link", "occam", "veritas"],
+      "security": ["zenith", "lukas", "dagonet"]
     }
   },
   "execution_flow": {
     "mode": "MAGNUM_WORKFLOW_PRIORITIZED",
     "stages": [
-      {"id": "P0_GATEKEEP",          "layer": "L6_GOVERNANCE", "owner": "zenith",           "desc": "UKG validation and signature/policy enforcement."},
-      {"id": "P1_INTENT_REFINEMENT", "layer": "L7_INTERFACE",  "owner": "anya",             "desc": "QERE + Anya produce PROJECT_BLUEPRINT.json."},
-      {"id": "P2_CONTEXT_RETRIEVAL", "layer": "L5_AGENTIC",   "owner": "paladin",           "desc": "Titan Omega + OCTEM squires gather evidence."},
-      {"id": "P3_ARCHITECTURE",      "layer": "L5_AGENTIC",   "owner": "lancelot",          "desc": "Lancelot + Kaelan design artifacts / URL/SCM schemas."},
-      {"id": "P4_ARTIFACT_GENERATION","layer": "L2_KINETIC",  "owner": "assigned_knights",  "desc": "Assigned Knights + Squires generate DRAFT_ARTIFACT(s)."},
-      {"id": "P5_AUDIT_HYGIENE",     "layer": "L6_GOVERNANCE","owner": "dagonet",           "desc": "Dagonet, Scavenger, Paladin + Skeptic run stress tests."},
-      {"id": "P6_FINAL_DELIVERY",    "layer": "L6_GOVERNANCE","owner": "lordnexus",         "desc": "Lord Nexus packages FINAL_ARTIFACT; S5 Chronos commits to Titan Omega."}
+      {
+        "id": "P0_GATEKEEP",
+        "layer": "L6_GOVERNANCE",
+        "owner": "zenith",
+        "desc": "UKG validation and signature/policy enforcement."
+      },
+      {
+        "id": "P1_INTENT_REFINEMENT",
+        "layer": "L7_INTERFACE",
+        "owner": "anya",
+        "desc": "QERE + Anya produce PROJECT_BLUEPRINT.json."
+      },
+      {
+        "id": "P2_CONTEXT_RETRIEVAL",
+        "layer": "L5_AGENTIC",
+        "owner": "paladin",
+        "desc": "Titan Omega + OCTEM squires gather evidence."
+      },
+      {
+        "id": "P3_ARCHITECTURE",
+        "layer": "L5_AGENTIC",
+        "owner": "lancelot",
+        "desc": "Lancelot + Kaelan design artifacts / URL/SCM schemas."
+      },
+      {
+        "id": "P4_ARTIFACT_GENERATION",
+        "layer": "L2_KINETIC",
+        "owner": "assigned_knights",
+        "desc": "Assigned Knights + Squires generate DRAFT_ARTIFACT(s)."
+      },
+      {
+        "id": "P5_AUDIT_HYGIENE",
+        "layer": "L6_GOVERNANCE",
+        "owner": "dagonet",
+        "desc": "Dagonet, Scavenger, Paladin + Skeptic run stress tests."
+      },
+      {
+        "id": "P6_FINAL_DELIVERY",
+        "layer": "L6_GOVERNANCE",
+        "owner": "lordnexus",
+        "desc": "Lord Nexus packages FINAL_ARTIFACT; S5 Chronos commits to Titan Omega."
+      }
     ]
   },
   "cli_interface": {
-    "//PLAN [Goal]":       "Load Cartridge A (Strategy). Run QERE + Architecture.",
-    "//BUILD [Spec]":      "Load Cartridge B (Engineering). Generate Code + Security Scan.",
-    "//CREATE [Idea]":     "Load Cartridge C (Creative). Generate Copy/Art/Audio.",
-    "//SWARM [Topic]":     "Load Cartridge D (Operations). Run ACO Research + KG Construction.",
-    "//OCTEM [Query]":     "Activate Paladin's Competitive Research Engine.",
-    "//FLEET [action]":    "Fleet Protocol (bootstrap|replicate|sync|rollback|audit).",
-    "//FORGE [Role]":      "Create a NEW Knight using the Knight Forge template.",
-    "//SUMMON [Name]":     "Force-load specific Knight.",
-    "//RESET":             "Hard Wipe. Revert to Lord Nexus.",
-    "//VISION [Concept]":  "Load VisageGen Framework Selector.",
-    "//SYMBOL [Topic]":    "Activate Symbolect/SAGE reasoning.",
-    "//ASSIMILATE [Source]":"Titan Omega data ingestion (4-phase ETL).",
-    "//SCAVENGE":          "Sir Scavenger hygiene sweep."
+    "//PLAN [Goal]": "Load Cartridge A (Strategy). Run QERE + Architecture.",
+    "//BUILD [Spec]": "Load Cartridge B (Engineering). Generate Code + Security Scan.",
+    "//CREATE [Idea]": "Load Cartridge C (Creative). Generate Copy/Art/Audio.",
+    "//SWARM [Topic]": "Load Cartridge D (Operations). Run ACO Research + KG Construction.",
+    "//OCTEM [Query]": "Activate Paladin's Competitive Research Engine.",
+    "//FLEET [action]": "Fleet Protocol (bootstrap|replicate|sync|rollback|audit).",
+    "//FORGE [Role]": "Create a NEW Knight using the Knight Forge template.",
+    "//SUMMON [Name]": "Force-load specific Knight.",
+    "//RESET": "Hard Wipe. Revert to Lord Nexus.",
+    "//VISION [Concept]": "Load VisageGen Framework Selector.",
+    "//SYMBOL [Topic]": "Activate Symbolect/SAGE reasoning.",
+    "//ASSIMILATE [Source]": "Titan Omega data ingestion (4-phase ETL).",
+    "//SCAVENGE": "Sir Scavenger hygiene sweep."
   },
   "symbolect_version": "v3.1",
   "memory": {
@@ -1047,9 +1540,9 @@
     "ledger_type": "Merkle_DAG_CRDT",
     "layer": "L4_SEMANTIC",
     "endpoints": {
-      "graph":  "neo4j://neo4j:7687",
+      "graph": "neo4j://neo4j:7687",
       "vector": "http://vector-service:8000",
-      "cache":  "redis://redis:6379",
+      "cache": "redis://redis:6379",
       "ledger": "local://~/.gemini-camelot/merkle_dag.ledger"
     }
   }

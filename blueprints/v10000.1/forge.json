@@ -24,21 +24,11 @@
     {
       "id": "pwa-verify",
       "type": "build",
-      "dependsOn": [
-        "core-tests"
-      ],
-      "argv": [
-        "npm",
-        "run",
-        "verify"
-      ],
+      "dependsOn": ["core-tests"],
+      "argv": ["npm", "run", "verify"],
       "cwd": "02_FORGE/apps/pwa-cockpit",
       "timeoutSeconds": 900
     }
   ],
-  "verification": [
-    "core-tests",
-    "pwa-verify"
-  ]
+  "verification": ["core-tests", "pwa-verify"]
 }
-

@@ -8,18 +8,17 @@ const prisma = new PrismaClient({
 });
 
 export class SovereignDB {
-  
   // ==========================================
   // VAULT_Ω (Accounting & Ledger)
   // ==========================================
-  
+
   /**
    * Posts a double-entry transaction to Vault_Ω.
    * Enforces strict balance checking.
    */
   static async postTransaction(entity: string, action: string, amount: number, accountId: string) {
     console.log(`[Vault_Ω] Forging ledger entry: ${entity} | ${action} | $${amount}`);
-    
+
     // In a true double-entry system, we write two rows (Debit & Credit).
     // For this implementation, we log the primary transaction against the target account.
     return await prisma.transaction.create({
@@ -29,7 +28,7 @@ export class SovereignDB {
         debit: amount > 0 ? amount : 0,
         credit: amount < 0 ? Math.abs(amount) : 0,
         accountId: accountId,
-      }
+      },
     });
   }
 
@@ -42,7 +41,7 @@ export class SovereignDB {
    */
   static async logMessage(threadId: string, channel: string, content: string, status: string) {
     console.log(`[Echo_Ω] Archiving ${channel} message to Thread ${threadId}`);
-    
+
     return await prisma.message.create({
       data: {
         threadId,
@@ -50,7 +49,7 @@ export class SovereignDB {
         channel,
         content,
         status,
-      }
+      },
     });
   }
 
@@ -63,7 +62,7 @@ export class SovereignDB {
    */
   static async tagContact(email: string, newTag: string) {
     console.log(`[Raven_Ω] Tagging contact ${email} with [${newTag}]`);
-    
+
     const contact = await prisma.contact.findUnique({ where: { email } });
     if (!contact) return null;
 
@@ -79,7 +78,7 @@ export class SovereignDB {
 
     return await prisma.contact.update({
       where: { email },
-      data: { tags: JSON.stringify(updatedTags) }
+      data: { tags: JSON.stringify(updatedTags) },
     });
   }
 }

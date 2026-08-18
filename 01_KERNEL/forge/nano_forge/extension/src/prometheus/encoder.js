@@ -23,10 +23,10 @@ export class TOONEncoder {
         language,
         path: filePath,
         lines: lines.length,
-        chars: content.length
+        chars: content.length,
       },
       raw_ref: `file://${filePath}`,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -44,10 +44,10 @@ export class TOONEncoder {
       entities,
       metadata: {
         title,
-        wordCount: content.split(/\s+/).length
+        wordCount: content.split(/\s+/).length,
       },
       tags,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
@@ -68,41 +68,44 @@ export class TOONEncoder {
         url,
         title,
         author: author || 'Unknown',
-        domain: new URL(url).hostname
+        domain: new URL(url).hostname,
       },
       raw_ref: url,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 
   // ===== PRIVATE HELPERS =====
 
   static scrubPII(text) {
-      if (!text) return "";
-      // Redact Email
-      text = text.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '[REDACTED_EMAIL]');
-      // Redact Phone (Simple US/Intl format)
-      text = text.replace(/(?:\+?1[-.]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})/g, '[REDACTED_PHONE]');
-      return text;
+    if (!text) return '';
+    // Redact Email
+    text = text.replace(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, '[REDACTED_EMAIL]');
+    // Redact Phone (Simple US/Intl format)
+    text = text.replace(
+      /(?:\+?1[-.]?)?\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})/g,
+      '[REDACTED_PHONE]',
+    );
+    return text;
   }
 
   static generateCodeSummary(content, language) {
     // For now, extract first meaningful comment or generate from structure
     const lines = content.split('\n').slice(0, 10);
     const comments = lines
-      .filter(l => l.trim().startsWith('//') || l.trim().startsWith('#'))
-      .map(l => l.replace(/^[#/\s]+/, ''))
+      .filter((l) => l.trim().startsWith('//') || l.trim().startsWith('#'))
+      .map((l) => l.replace(/^[#/\s]+/, ''))
       .join(' ');
-    
+
     return comments || `${language} file with ${content.split('\n').length} lines`;
   }
 
   static extractCodeEntities(content, language) {
     const entities = new Set();
     const patterns = {
-      'python': [/def\s+(\w+)/g, /class\s+(\w+)/g],
-      'javascript': [/function\s+(\w+)/g, /class\s+(\w+)/g, /const\s+(\w+)\s*=/g],
-      'typescript': [/function\s+(\w+)/g, /class\s+(\w+)/g, /interface\s+(\w+)/g]
+      python: [/def\s+(\w+)/g, /class\s+(\w+)/g],
+      javascript: [/function\s+(\w+)/g, /class\s+(\w+)/g, /const\s+(\w+)\s*=/g],
+      typescript: [/function\s+(\w+)/g, /class\s+(\w+)/g, /interface\s+(\w+)/g],
     };
 
     const langPatterns = patterns[language] || [];
@@ -118,18 +121,16 @@ export class TOONEncoder {
 
   static generateNoteSummary(content) {
     const firstPara = content.split('\n\n')[0];
-    return firstPara.length > 200 
-      ? firstPara.slice(0, 197) + '...'
-      : firstPara;
+    return firstPara.length > 200 ? firstPara.slice(0, 197) + '...' : firstPara;
   }
 
   static extractNoteEntities(content) {
     const entities = new Set();
     const hashtags = content.match(/#\w+/g) || [];
-    hashtags.forEach(tag => entities.add(tag.slice(1)));
-    
+    hashtags.forEach((tag) => entities.add(tag.slice(1)));
+
     const wikiLinks = content.match(/\[\[([\w\s]+)\]\]/g) || [];
-    wikiLinks.forEach(link => {
+    wikiLinks.forEach((link) => {
       const term = link.slice(2, -2);
       entities.add(term);
     });
@@ -145,14 +146,14 @@ export class TOONEncoder {
   static extractArticleEntities(content) {
     const entities = new Set();
     const matches = [...content.matchAll(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b/g)];
-    
+
     for (const match of matches) {
-      if (match[0].length > 3) { 
+      if (match[0].length > 3) {
         entities.add(match[0]);
       }
     }
 
-    return Array.from(entities).slice(0, 20); 
+    return Array.from(entities).slice(0, 20);
   }
 
   static generateId(prefix, identifier) {
@@ -164,8 +165,8 @@ export class TOONEncoder {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; 
+      hash = (hash << 5) - hash + char;
+      hash = hash & hash;
     }
     return Math.abs(hash).toString(36);
   }

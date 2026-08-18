@@ -7,11 +7,11 @@
 // tests assert both properties (client-guard.test.ts).
 
 import type {
+  AuditEvent,
   BargeInResponse,
   CamelotTurnResponse,
   ConfirmationRequest,
   ConfirmationResponse,
-  AuditEvent,
   HealthResponse,
   SessionEvent,
   VoiceBargeIn,

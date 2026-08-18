@@ -1,13 +1,13 @@
-import js from "@eslint/js";
-import tseslint from "typescript-eslint";
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
 
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommended.map((config) => ({
     ...config,
-    files: ["src/**/*.ts"],
+    files: ['src/**/*.ts'],
   })),
   {
-    ignores: ["dist/**", "node_modules/**"],
+    ignores: ['dist/**', 'node_modules/**'],
   },
 ];

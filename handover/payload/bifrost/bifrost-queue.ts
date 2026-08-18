@@ -1,4 +1,9 @@
-import { BifrostEnvelope, QueuePriority, verifyEnvelope, VerifyOptions } from './bifrost-envelope';
+import {
+  type BifrostEnvelope,
+  type QueuePriority,
+  type VerifyOptions,
+  verifyEnvelope,
+} from './bifrost-envelope';
 
 /**
  * Bifrost bounded async queues — spec:
@@ -42,7 +47,7 @@ export class BifrostQueue {
   constructor(
     private readonly capacity: number,
     private readonly verifyOpts: VerifyOptions,
-    private readonly overflowStrikeLimit = 3
+    private readonly overflowStrikeLimit = 3,
   ) {}
 
   get size(): number {
@@ -71,10 +76,12 @@ export class BifrostQueue {
   canBypass(envelope: BifrostEnvelope): { eligible: boolean; reason: string } {
     const h = envelope.header;
     if (h.priority !== 'critical') return { eligible: false, reason: 'not critical class' };
-    if (!BYPASS_ELIGIBLE_TYPES.has(h.type)) return { eligible: false, reason: `type ${h.type} not bypass-eligible` };
+    if (!BYPASS_ELIGIBLE_TYPES.has(h.type))
+      return { eligible: false, reason: `type ${h.type} not bypass-eligible` };
     const v = verifyEnvelope(envelope, this.verifyOpts);
     if (!v.valid) return { eligible: false, reason: v.reasons.join('; ') };
-    if (h.policy_decision !== 'allow_direct') return { eligible: false, reason: 'policy_decision does not allow direct execution' };
+    if (h.policy_decision !== 'allow_direct')
+      return { eligible: false, reason: 'policy_decision does not allow direct execution' };
     return { eligible: true, reason: 'signed critical event, bypass granted' };
   }
 
@@ -88,20 +95,40 @@ export class BifrostQueue {
         const bypass = this.canBypass(envelope);
         if (bypass.eligible) {
           this.audit('queue.bypass_used', h.msg_id);
-          return { accepted: true, bypass: true, audit: 'queue.bypass_used', reason: bypass.reason };
+          return {
+            accepted: true,
+            bypass: true,
+            audit: 'queue.bypass_used',
+            reason: bypass.reason,
+          };
         }
         this.push(envelope, partition);
         this.strike();
-        return { accepted: true, bypass: false, audit: 'queue_overflow', reason: 'critical force-enqueued at capacity' };
+        return {
+          accepted: true,
+          bypass: false,
+          audit: 'queue_overflow',
+          reason: 'critical force-enqueued at capacity',
+        };
       }
       if (h.priority === 'high') {
         this.audit('queue.backpressure_applied', h.msg_id);
         this.strike();
-        return { accepted: false, bypass: false, audit: 'queue.backpressure_applied', reason: 'block until space available' };
+        return {
+          accepted: false,
+          bypass: false,
+          audit: 'queue.backpressure_applied',
+          reason: 'block until space available',
+        };
       }
       if (h.priority === 'normal') {
         this.audit('queue.delayed', h.msg_id);
-        return { accepted: false, bypass: false, audit: 'queue.delayed', reason: 'delayed / retry with backoff' };
+        return {
+          accepted: false,
+          bypass: false,
+          audit: 'queue.delayed',
+          reason: 'delayed / retry with backoff',
+        };
       }
       // low: shed to dead-letter for audit
       this.deadLetter.push({ envelope, reason: 'shed at capacity' });
@@ -128,7 +155,7 @@ export class BifrostQueue {
    * Drain in priority order (quarantine/revoke first via critical class),
    * preserving FIFO ordering within each partition.
    */
-  drain(max = Infinity): QueueItem[] {
+  drain(max = Number.POSITIVE_INFINITY): QueueItem[] {
     const out: QueueItem[] = [];
     for (const priority of PRIORITY_ORDER) {
       for (const [partition, items] of this.partitions) {

@@ -7,9 +7,9 @@
 // Raw audio is ephemeral: STT processes buffers in memory; the command
 // engine's temp WAV is unlinked in a finally block.
 
-import { createHash } from 'node:crypto';
 import { execFile } from 'node:child_process';
-import { mkdtemp, rm, writeFile, readFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 

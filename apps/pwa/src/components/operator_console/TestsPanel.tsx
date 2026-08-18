@@ -20,7 +20,9 @@ export function TestsPanel({ tests }: { tests: TestRunResult[] }) {
       {tests.map((t) => (
         <li key={t.runId} className="border border-white/10 p-3">
           <div className="flex items-center justify-between gap-2">
-            <span className={`font-mono text-[11px] uppercase ${STATUS_STYLE[t.status] ?? ''}`}>{t.status}</span>
+            <span className={`font-mono text-[11px] uppercase ${STATUS_STYLE[t.status] ?? ''}`}>
+              {t.status}
+            </span>
             <span className="font-mono text-[10px] text-white/40">
               {t.summary.passed}/{t.summary.total} passed · {t.summary.failed} failed
             </span>

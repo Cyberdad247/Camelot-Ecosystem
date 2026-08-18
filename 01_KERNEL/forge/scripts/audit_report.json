@@ -24,10 +24,7 @@
     },
     "documentation": {
       "grade": "C",
-      "missing": [
-        "CONTRIBUTING.md",
-        "LICENSE"
-      ]
+      "missing": ["CONTRIBUTING.md", "LICENSE"]
     }
   },
   "score": {
