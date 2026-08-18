@@ -14,8 +14,6 @@ Run:
 from __future__ import annotations
 
 import json
-import os
-import socket
 import sys
 import time
 import urllib.request
@@ -66,7 +64,7 @@ def main() -> int:
     start_time = time.time()
     ollama_online = check_ollama_status()
 
-    print(f"\n[1/2] Probing Local Ollama Instance (127.0.0.1:11434)...")
+    print("\n[1/2] Probing Local Ollama Instance (127.0.0.1:11434)...")
     if ollama_online:
         print("  --> Ollama Backend: ONLINE (http://127.0.0.1:11434)")
         installed_models = get_installed_ollama_models()

@@ -46,4 +46,4 @@ if __name__ == "__main__":
         print(f"FAILED: {exc}")
         if "Authentication expired" in str(exc) or "login" in str(exc):
             print("\n>> Run:  .venv/Scripts/notebooklm.exe login   then re-run this script.")
-        raise SystemExit(1)
+        raise SystemExit(1) from exc

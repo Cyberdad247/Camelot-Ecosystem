@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 import argparse
+import importlib.util
 
 # Need to ensure we can import from CAMELOT_OS
 import os
@@ -20,7 +21,6 @@ except ImportError:
     print("[SIR_SONUS] ERROR: faster_whisper not installed")
     sys.exit(1)
 
-import importlib.util
 
 _spec = importlib.util.spec_from_file_location(
     "hydration_manager", HOME / "01_KERNEL" / "memory" / "hydration_manager.py"

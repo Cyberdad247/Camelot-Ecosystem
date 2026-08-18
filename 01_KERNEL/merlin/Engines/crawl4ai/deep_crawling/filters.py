@@ -204,42 +204,8 @@ class URLPatternFilter(URLFilter):
                 pattern = fnmatch.translate(pattern)
             self._path_patterns.append(pattern if isinstance(pattern, Pattern) else re.compile(pattern))
 
-    @lru_cache(maxsize=10000)
     def apply(self, url: str) -> bool:
-        # Quick suffix check (*.html)
-        if self._simple_suffixes:
-            path = url.split("?")[0]
-            if path.split("/")[-1].split(".")[-1] in self._simple_suffixes:
-                result = True
-                self._update_stats(result)
-                return not result if self._reverse else result
-
-        # Domain check
-        if self._domain_patterns:
-            for pattern in self._domain_patterns:
-                if pattern.match(url):
-                    result = True
-                    self._update_stats(result)
-                    return not result if self._reverse else result
-
-        # Prefix check (/foo/*)
-        if self._simple_prefixes:
-            path = url.split("?")[0]
-            if any(path.startswith(p) for p in self._simple_prefixes):
-                result = True
-                self._update_stats(result)
-                return not result if self._reverse else result
-
-        # Complex patterns
-        if self._path_patterns:
-            if any(p.search(url) for p in self._path_patterns):
-                result = True
-                self._update_stats(result)
-                return not result if self._reverse else result
-
-        result = False
-        self._update_stats(result)
-        return not result if self._reverse else result
+        return _URLPatternFilter_apply_cached(self, url)
 
 
 class ContentTypeFilter(URLFilter):
@@ -376,16 +342,8 @@ class ContentTypeFilter(URLFilter):
             ext for ext, mime in self._MIME_MAP.items() if any(allowed in mime for allowed in self.allowed_types)
         )
 
-    @lru_cache(maxsize=1000)
     def _check_url_cached(self, url: str) -> bool:
-        """Cached URL checking"""
-        if not self._check_extension:
-            return True
-        ext = self._extract_extension(url)
-        if not ext:
-            return True
-
-        return ext in self._ext_map
+        return _ContentTypeFilter__check_url_cached_cached(self, url)
 
     def apply(self, url: str) -> bool:
         """Fast extension check with caching"""
@@ -635,3 +593,54 @@ class SEOFilter(URLFilter):
             score *= 0.9  # Underscores vs hyphens
 
         return score
+
+
+@lru_cache(maxsize=10000)
+def _URLPatternFilter_apply_cached(self, url):
+    # Quick suffix check (*.html)
+    if self._simple_suffixes:
+        path = url.split("?")[0]
+        if path.split("/")[-1].split(".")[-1] in self._simple_suffixes:
+            result = True
+            self._update_stats(result)
+            return not result if self._reverse else result
+
+    # Domain check
+    if self._domain_patterns:
+        for pattern in self._domain_patterns:
+            if pattern.match(url):
+                result = True
+                self._update_stats(result)
+                return not result if self._reverse else result
+
+    # Prefix check (/foo/*)
+    if self._simple_prefixes:
+        path = url.split("?")[0]
+        if any(path.startswith(p) for p in self._simple_prefixes):
+            result = True
+            self._update_stats(result)
+            return not result if self._reverse else result
+
+    # Complex patterns
+    if self._path_patterns:
+        if any(p.search(url) for p in self._path_patterns):
+            result = True
+            self._update_stats(result)
+            return not result if self._reverse else result
+
+    result = False
+    self._update_stats(result)
+    return not result if self._reverse else result
+
+
+
+@lru_cache(maxsize=1000)
+def _ContentTypeFilter__check_url_cached_cached(self, url):
+    """Cached URL checking"""
+    if not self._check_extension:
+        return True
+    ext = self._extract_extension(url)
+    if not ext:
+        return True
+
+    return ext in self._ext_map

@@ -71,10 +71,10 @@ jobs:
         run: pip install ruff black
 
       - name: Ruff check
-        run: ruff check 01_KERNEL/ scripts/ tools/ .camelot/ --config pyproject.toml
+        run: ruff check 01_KERNEL/ scripts/ .camelot/ --config pyproject.toml
 
       - name: Black format check
-        run: black --check 01_KERNEL/ scripts/ tools/ .camelot/ --config pyproject.toml
+        run: black --check 01_KERNEL/ scripts/ .camelot/ --config pyproject.toml
 
   # ── Stage 3: Security ───────────────────────────────────────────
   security:

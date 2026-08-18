@@ -103,10 +103,10 @@ async def get_sessions(notebook_id: str = Query(..., description="Notebook ID"))
             for session in sessions
         ]
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Notebook not found")
+        raise HTTPException(status_code=404, detail="Notebook not found") from None
     except Exception as e:
         logger.error(f"Error fetching chat sessions: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching chat sessions: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching chat sessions: {str(e)}") from e
 
 
 @router.post("/chat/sessions", response_model=ChatSessionResponse)
@@ -138,10 +138,10 @@ async def create_session(request: CreateSessionRequest):
             model_override=session.model_override,
         )
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Notebook not found")
+        raise HTTPException(status_code=404, detail="Notebook not found") from None
     except Exception as e:
         logger.error(f"Error creating chat session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error creating chat session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating chat session: {str(e)}") from e
 
 
 @router.get("/chat/sessions/{session_id}", response_model=ChatSessionWithMessagesResponse)
@@ -197,10 +197,10 @@ async def get_session(session_id: str):
             model_override=getattr(session, "model_override", None),
         )
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Session not found")
+        raise HTTPException(status_code=404, detail="Session not found") from None
     except Exception as e:
         logger.error(f"Error fetching session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching session: {str(e)}") from e
 
 
 @router.put("/chat/sessions/{session_id}", response_model=ChatSessionResponse)
@@ -242,10 +242,10 @@ async def update_session(session_id: str, request: UpdateSessionRequest):
             model_override=session.model_override,
         )
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Session not found")
+        raise HTTPException(status_code=404, detail="Session not found") from None
     except Exception as e:
         logger.error(f"Error updating session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating session: {str(e)}") from e
 
 
 @router.delete("/chat/sessions/{session_id}", response_model=SuccessResponse)
@@ -262,10 +262,10 @@ async def delete_session(session_id: str):
 
         return SuccessResponse(success=True, message="Session deleted successfully")
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Session not found")
+        raise HTTPException(status_code=404, detail="Session not found") from None
     except Exception as e:
         logger.error(f"Error deleting session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error deleting session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error deleting session: {str(e)}") from e
 
 
 @router.post("/chat/execute", response_model=ExecuteChatResponse)
@@ -331,10 +331,10 @@ async def execute_chat(request: ExecuteChatRequest):
 
         return ExecuteChatResponse(session_id=request.session_id, messages=messages)
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Session not found")
+        raise HTTPException(status_code=404, detail="Session not found") from None
     except Exception as e:
         logger.error(f"Error executing chat: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error executing chat: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error executing chat: {str(e)}") from e
 
 
 @router.post("/chat/context", response_model=BuildContextResponse)
@@ -434,4 +434,4 @@ async def build_context(request: BuildContextRequest):
         raise
     except Exception as e:
         logger.error(f"Error building context: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error building context: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error building context: {str(e)}") from e

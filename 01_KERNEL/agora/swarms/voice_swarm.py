@@ -8,6 +8,8 @@ Deploys Sir Echo (TTS) and Lady Nightingale (Cloning) for multi-modal interactio
 import os
 from typing import Optional, TypedDict
 
+import soundfile as sf
+from kokoro_onnx import Kokoro
 from langgraph.graph import END, StateGraph
 
 
@@ -21,9 +23,6 @@ class VoiceState(TypedDict):
     audio_buffer: Optional[bytes]
     status: str
 
-
-import soundfile as sf
-from kokoro_onnx import Kokoro
 
 MODELS_DIR = r"c:\Users\vizio\CAMELOT_OS\docs\EXTERNAL\kokoro-onnx\models"
 ONNX_PATH = os.path.join(MODELS_DIR, "kokoro-v1.0.onnx")

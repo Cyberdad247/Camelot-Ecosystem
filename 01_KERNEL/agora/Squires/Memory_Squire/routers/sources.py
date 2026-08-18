@@ -95,7 +95,7 @@ def parse_source_form_data(
     embed: str = Form("false"),  # Accept as string, convert to bool
     delete_source: str = Form("false"),  # Accept as string, convert to bool
     async_processing: str = Form("false"),  # Accept as string, convert to bool
-    file: Optional[UploadFile] = File(None),
+    file: Optional[UploadFile] = File(None),  # noqa: B008
 ) -> tuple[SourceCreate, Optional[UploadFile]]:
     """Parse form data into SourceCreate model and return upload file separately."""
     import json
@@ -115,7 +115,7 @@ def parse_source_form_data(
             notebooks_list = json.loads(notebooks)
         except json.JSONDecodeError:
             logger.error(f"DEBUG - Invalid JSON in notebooks field: {notebooks}")
-            raise ValueError("Invalid JSON in notebooks field")
+            raise ValueError("Invalid JSON in notebooks field") from None
 
     transformations_list = []
     if transformations:
@@ -123,7 +123,7 @@ def parse_source_form_data(
             transformations_list = json.loads(transformations)
         except json.JSONDecodeError:
             logger.error(f"DEBUG - Invalid JSON in transformations field: {transformations}")
-            raise ValueError("Invalid JSON in transformations field")
+            raise ValueError("Invalid JSON in transformations field") from None
 
     # Create SourceCreate instance
     try:
@@ -306,7 +306,7 @@ async def get_sources(
         raise
     except Exception as e:
         logger.error(f"Error fetching sources: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching sources: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching sources: {str(e)}") from e
 
 
 @router.post("/sources", response_model=SourceResponse)
@@ -330,7 +330,7 @@ async def create_source(
                 file_path = await save_uploaded_file(upload_file)
             except Exception as e:
                 logger.error(f"File upload failed: {e}")
-                raise HTTPException(status_code=400, detail=f"File upload failed: {str(e)}")
+                raise HTTPException(status_code=400, detail=f"File upload failed: {str(e)}") from e
 
         # Prepare content_state for processing
         content_state: dict[str, Any] = {}
@@ -438,7 +438,7 @@ async def create_source(
                         os.unlink(file_path)
                     except Exception:
                         pass
-                raise HTTPException(status_code=500, detail=f"Failed to queue processing: {str(e)}")
+                raise HTTPException(status_code=500, detail=f"Failed to queue processing: {str(e)}") from e
 
         else:
             # SYNC PATH: Execute synchronously using execute_command_sync
@@ -547,7 +547,7 @@ async def create_source(
                 os.unlink(file_path)
             except Exception:
                 pass
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error creating source: {str(e)}")
         # Clean up uploaded file on unexpected errors if we created it
@@ -556,7 +556,7 @@ async def create_source(
                 os.unlink(file_path)
             except Exception:
                 pass
-        raise HTTPException(status_code=500, detail=f"Error creating source: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating source: {str(e)}") from e
 
 
 @router.post("/sources/json", response_model=SourceResponse)
@@ -661,7 +661,7 @@ async def get_source(source_id: str):
         raise
     except Exception as e:
         logger.error(f"Error fetching source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching source: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching source: {str(e)}") from e
 
 
 @router.head("/sources/{source_id}/download")
@@ -674,7 +674,7 @@ async def check_source_file(source_id: str):
         raise
     except Exception as e:
         logger.error(f"Error checking file for source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to verify file")
+        raise HTTPException(status_code=500, detail="Failed to verify file") from e
 
 
 @router.get("/sources/{source_id}/download")
@@ -691,7 +691,7 @@ async def download_source_file(source_id: str):
         raise
     except Exception as e:
         logger.error(f"Error downloading file for source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail="Failed to download source file")
+        raise HTTPException(status_code=500, detail="Failed to download source file") from e
 
 
 @router.get("/sources/{source_id}/status", response_model=SourceStatusResponse)
@@ -751,7 +751,7 @@ async def get_source_status(source_id: str):
         raise
     except Exception as e:
         logger.error(f"Error fetching status for source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching source status: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching source status: {str(e)}") from e
 
 
 @router.put("/sources/{source_id}", response_model=SourceResponse)
@@ -792,10 +792,10 @@ async def update_source(source_id: str, source_update: SourceUpdate):
     except HTTPException:
         raise
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except Exception as e:
         logger.error(f"Error updating source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating source: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating source: {str(e)}") from e
 
 
 @router.post("/sources/{source_id}/retry", response_model=SourceResponse)
@@ -900,13 +900,13 @@ async def retry_source_processing(source_id: str):
 
         except Exception as e:
             logger.error(f"Failed to submit retry processing command for source {source_id}: {e}")
-            raise HTTPException(status_code=500, detail=f"Failed to queue retry processing: {str(e)}")
+            raise HTTPException(status_code=500, detail=f"Failed to queue retry processing: {str(e)}") from e
 
     except HTTPException:
         raise
     except Exception as e:
         logger.error(f"Error retrying source processing for {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error retrying source processing: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error retrying source processing: {str(e)}") from e
 
 
 @router.delete("/sources/{source_id}")
@@ -924,7 +924,7 @@ async def delete_source(source_id: str):
         raise
     except Exception as e:
         logger.error(f"Error deleting source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error deleting source: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error deleting source: {str(e)}") from e
 
 
 @router.get("/sources/{source_id}/insights", response_model=List[SourceInsightResponse])
@@ -951,7 +951,7 @@ async def get_source_insights(source_id: str):
         raise
     except Exception as e:
         logger.error(f"Error fetching insights for source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching insights: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching insights: {str(e)}") from e
 
 
 @router.post("/sources/{source_id}/insights", response_model=SourceInsightResponse)
@@ -994,4 +994,4 @@ async def create_source_insight(source_id: str, request: CreateSourceInsightRequ
         raise
     except Exception as e:
         logger.error(f"Error creating insight for source {source_id}: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error creating insight: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating insight: {str(e)}") from e

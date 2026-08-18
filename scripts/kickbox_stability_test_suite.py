@@ -16,9 +16,7 @@ Run:
 
 from __future__ import annotations
 
-import importlib
 import json
-import os
 import socket
 import sys
 import time
@@ -140,7 +138,7 @@ def test_private_saas() -> list[dict[str, str]]:
         elif cid == "TENANT_POLICY":
             try:
                 from control_plane.core.anya_gate import AnyaGate
-                gate = AnyaGate()
+                AnyaGate()
                 detail = "AnyaGate APEE v7.0 governance gate online"
             except Exception as e:
                 status = "FAILED"

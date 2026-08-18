@@ -3,6 +3,7 @@
 import ast
 import inspect
 import json
+import os
 import re
 import time
 from abc import ABC, abstractmethod
@@ -22,7 +23,6 @@ from .config import (
     OVERLAP_RATE,
     WORD_TOKEN_RATE,
 )
-from .model_loader import *  # noqa: F403
 from .model_loader import calculate_batch_size, get_device, load_HF_embedding_model, load_text_multilabel_classifier
 from .models import *  # noqa: F403
 from .models import TokenUsage
@@ -1069,7 +1069,7 @@ class JsonElementExtractionStrategy(ExtractionStrategy):
         schema_type: str = "CSS",  # or XPATH
         query: str = None,
         target_json_example: str = None,
-        llm_config: "LLMConfig" = create_llm_config(),
+        llm_config: "LLMConfig" = None,
         provider: str = None,
         api_token: str = None,
         **kwargs,
@@ -1090,6 +1090,9 @@ class JsonElementExtractionStrategy(ExtractionStrategy):
             dict: Generated schema following the JsonElementExtractionStrategy format
         """
         from .prompts import JSON_SCHEMA_BUILDER
+
+        if not llm_config:
+            llm_config = create_llm_config()
         from .utils import perform_completion_with_backoff
 
         for name, message in JsonElementExtractionStrategy._GENERATE_SCHEMA_UNWANTED_PROPS.items():
@@ -1175,7 +1178,7 @@ In this scenario, use your best judgment to generate the schema. You need to exa
             return json.loads(response.choices[0].message.content)
 
         except Exception as e:
-            raise Exception(f"Failed to generate schema: {str(e)}")
+            raise Exception(f"Failed to generate schema: {str(e)}") from e
 
 
 class JsonCssExtractionStrategy(JsonElementExtractionStrategy):
@@ -1382,10 +1385,10 @@ class JsonLxmlExtractionStrategy(JsonElementExtractionStrategy):
             try:
                 element.xpath(context_xpath)
                 return context_xpath
-            except:
+            except Exception:
                 # If that fails, try a simpler descendant search
                 return f".//{xpath.split('/')[-1]}"
-        except:
+        except Exception:
             return None
 
     def _handle_nth_child_selector(self, element, selector_str):
@@ -1475,7 +1478,7 @@ class JsonLxmlExtractionStrategy(JsonElementExtractionStrategy):
             # Fallback
             try:
                 return element.text_content().strip()
-            except:
+            except Exception:
                 return ""
 
     def _get_element_html(self, element) -> str:

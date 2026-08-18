@@ -36,9 +36,12 @@ try:
 except ImportError:
     HAYSTACK_AVAILABLE = False
     # Define stub classes for type hints
-    class Pipeline: pass
-    class Document: pass
-    class InMemoryDocumentStore: pass
+    class Pipeline:
+        pass
+    class Document:
+        pass
+    class InMemoryDocumentStore:
+        pass
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

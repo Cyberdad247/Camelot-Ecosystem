@@ -1,5 +1,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
+import html
 import re
 
 
@@ -68,8 +69,6 @@ def paeth_predictor(a, b, c):
     else:
         return c
 
-
-import html
 
 
 def clean_pdf_text_to_html(page_number, text):
