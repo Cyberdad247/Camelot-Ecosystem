@@ -3,7 +3,12 @@
   "$id": "harness/contracts/effect-manifest.schema.json",
   "title": "Effect Manifest (effect-manifest/1)",
   "type": "object",
-  "required": ["schemaVersion", "manifestId", "taskId", "correlationId", "kind", "baseRevision", "candidateRevision", "diffSha256", "policyClass", "expiresAt", "oneTimeNonce"],
+  "required": [
+    "schemaVersion", "manifestId", "taskId", "correlationId", "kind",
+    "baseRevision", "candidateRevision", "diffSha256", "policyClass",
+    "expiresAt", "oneTimeNonce",
+    "effectClass", "declaredRiskTier", "declarationHash"
+  ],
   "properties": {
     "schemaVersion": { "const": "effect-manifest/1" },
     "manifestId": { "type": "string" },
@@ -17,6 +22,28 @@
     "requiredEvidence": { "type": "array", "items": { "type": "string" } },
     "policyClass": { "type": "string" },
     "expiresAt": { "type": "string" },
-    "oneTimeNonce": { "type": "string" }
+    "oneTimeNonce": { "type": "string" },
+    "effectClass": {
+      "description": "v1.2 effect class per §5.5 of the SADD; closed enum, classification is not freeform.",
+      "type": "string",
+      "enum": [
+        "ro.fetch", "ro.audit", "internal.synth", "workspace.test",
+        "workspace.patch", "promote.worktree.merge", "promote.deploy",
+        "external.publish.draft", "external.publish.publish",
+        "external.email.send", "payment.invoice.draft", "payment.invoice.issue",
+        "payment.capture", "payment.refund", "device.calendar.write",
+        "device.sms.send", "device.call.initiate", "promote.failover"
+      ]
+    },
+    "declaredRiskTier": {
+      "description": "v1.2 risk tier per §5.5; cannot exceed Sentinel's classification.",
+      "type": "string",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "declarationHash": {
+      "description": "v1.2 sha256 over effectClass + declaredRiskTier + immutable inputs.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    }
   }
 }
