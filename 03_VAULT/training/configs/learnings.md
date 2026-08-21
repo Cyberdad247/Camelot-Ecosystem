@@ -22,3 +22,30 @@ This file records execution friction, proposed fixes, and review outcomes.
   - All connection attempts failed
 - Learning: Caught unhandled exception in main loop.
 - Proposed Mutation: Patch affected path and implement guardrail for: All connection attempts failed
+---
+## 2026-08-18T19:48:30.789670+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - [ONNXRuntimeError] : 1 : FAIL : Load model from C:\Users\vizio\.cache\chroma\onnx_models\all-MiniLM-L6-v2\onnx\model.onnx failed:bad allocation in upsert.
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: [ONNXRuntimeError] : 1 : FAIL : Load model from C:\Users\vizio\.cache\chroma\onnx_models\all-MiniLM-L6-v2\onnx\model.onnx failed:bad allocation in upsert.
+---
+## 2026-08-18T19:55:42.068256+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - Page.wait_for_timeout: Target page, context or browser has been closed
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: Page.wait_for_timeout: Target page, context or browser has been closed
+---
+## 2026-08-18T19:55:58.210298+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://notebooklm.google.com/", waiting until "load"
+
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: Page.goto: Target page, context or browser has been closed
+Call log:
+  - navigating to "https://notebooklm.google.com/", waiting until "load"
+

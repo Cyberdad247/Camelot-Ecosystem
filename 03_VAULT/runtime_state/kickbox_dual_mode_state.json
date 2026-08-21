@@ -1,24 +1,30 @@
 {
-  "mode": "OFFLINE_MINIMUM",
-  "timestamp_utc": "2026-08-12T17:40:19.977705+00:00",
+  "mode": "DYNAMIC_ONLINE",
+  "timestamp_utc": "2026-08-12T22:26:33.365561+00:00",
   "spec": {
-    "title": "Offline Minimum Zero-Cloud Fallback (Bare Minimum Lightweight)",
-    "cloudbrain_node": "LOCAL_OPEN_NOTEBOOK_STUB (Air-Gapped)",
-    "worldtree_anchor": "LOCAL_VFS_CACHE",
+    "title": "Dynamic Online CloudBrain Mode (Max Capability & Efficiency)",
+    "cloudbrain_node": "KICKBOX (8531e6d4-6fc4-428f-a754-b9e9592ac7ff)",
+    "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "primary_knights": [
-      "SIR_GHOST",
-      "SIR_FORGE",
-      "SIR_SENTINEL"
+      "SIR_BORIS",
+      "SIR_CODEX",
+      "LADY_APIS",
+      "MERLIN_OMEGA",
+      "HERMES_PRIME"
     ],
-    "llm_tier": "Tiny LLMs (Ollama qwen2.5:1.5b / llama3.2:1b)",
-    "proxy_endpoint": "http://127.0.0.1:11434 (Local Ollama)",
-    "voice_engine": "On-Device Web Audio RMS VAD + Local SpeechSynthesis",
-    "bifrost_mesh": "Localhost IPC (127.0.0.1:4433)",
+    "llm_tier": "Frontier CLIProxy OAuth (Gemini 3.1 Pro / GPT-5.5 Codex / Claude 4.8)",
+    "proxy_endpoint": "http://127.0.0.1:8080/v1",
+    "voice_engine": "Lakisha Hybrid WebRTC + Remote Telemetry",
+    "bifrost_mesh": "Tailscale Direct (100.71.218.75:4433 WS / :4434 gRPC)",
     "cartridges": [
       "ANT",
+      "BEAVER",
+      "SPIDER",
+      "EAGLE",
+      "OCTOPUS",
       "BIO_SWARM"
     ],
-    "max_ram_mb": 1200
+    "max_ram_mb": 4096
   },
   "probes": {
     "cliproxy_8080": false,
