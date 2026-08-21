@@ -111,9 +111,15 @@ CLIPROXY_KEY   = os.environ.get("CLIPROXY_KEY", _cliproxy.get("api_key", "proxy-
 OLLAMA_URL     = "http://127.0.0.1:11434/v1"
 STREAM_TIMEOUT = _constraints.get("request_timeout_ms", 120000) / 1000
 
-PRIVACY_KEYWORDS: frozenset[str] = frozenset(
-    _privacy.get("trigger_keywords", ["secret", "local", "private", "credential", "key", "password"])
-)
+# Canonical privacy keywords — single source of truth in taxonomy.py
+try:
+    from control_plane.taxonomy import PRIVACY_KEYWORDS as _TAXONOMY_PRIVACY_KW
+    PRIVACY_KEYWORDS: frozenset[str] = _TAXONOMY_PRIVACY_KW
+except ImportError:
+    # Fallback: load from omniroute.json if taxonomy unavailable
+    PRIVACY_KEYWORDS: frozenset[str] = frozenset(
+        _privacy.get("trigger_keywords", ["secret", "local", "private", "credential", "key", "password"])
+    )
 PRIVACY_KNIGHT = _privacy.get("forced_knight", "SIR_GHOST").lower().replace("-", "_")
 
 _TIER_MAP = {
@@ -351,6 +357,19 @@ def _build_system_prompt(
 # ── OmniRoute helpers ─────────────────────────────────────────────────────────
 
 def _privacy_check(prompt: str) -> Optional[str]:
+    """Check if the prompt triggers a privacy override.
+
+    Uses the canonical SoulRouter.privacy path when available; falls back to
+    local keyword matching.
+    """
+    try:
+        from control_plane.core.soul_router import route_intent
+        decision = route_intent(prompt)
+        if decision.privacy_override:
+            return decision.knight_id
+        return None
+    except ImportError:
+        pass
     words = set(prompt.lower().split())
     if words & PRIVACY_KEYWORDS:
         return PRIVACY_KNIGHT
@@ -616,6 +635,7 @@ def _repl(
     no_context: bool = False,
     system_file: Optional[str] = None,
     verbose: bool = False,
+    non_interactive: bool = False,
 ) -> None:
     # ── Keyring auto-load (inject stored API keys into env) ─────────────────────
     try:
@@ -668,6 +688,8 @@ def _repl(
         title="[bold]⚔  KNIGHT-SESSION  //  OMNIROUTE[/bold]",
         border_style="yellow",
     ))
+    if non_interactive:
+        console.print("[bold yellow]Non-interactive mode — runic dispatch blocked.[/bold yellow]")
     _models_table(console)
     console.print()
 
@@ -770,6 +792,12 @@ def _repl(
 
         # ── Runic dispatch (// prefix) ────────────────────────────────────────
         if user_input.startswith("//") or (user_input.startswith("Omega_") and "_" in user_input[6:]):
+            if non_interactive:
+                console.print(
+                    "[bold red]  ⚠ Non-interactive mode — runic dispatch blocked.[/bold red]"
+                    "[dim] Use --non-interactive=false or remove CAMELOT_NON_INTERACTIVE env.[/dim]"
+                )
+                continue
             if _handle_runic(user_input, console):
                 continue
 
@@ -841,6 +869,9 @@ def main() -> None:
                         help="Override system prompt from a file")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Show context token counts and routing details")
+    parser.add_argument("--non-interactive", action="store_true",
+                        default=os.environ.get("CAMELOT_NON_INTERACTIVE", "").lower() in ("true", "1", "yes"),
+                        help="Non-interactive mode: block runic dispatch that might trigger HITL prompts (env: CAMELOT_NON_INTERACTIVE)")
     args = parser.parse_args()
 
     console = Console()
@@ -852,6 +883,14 @@ def main() -> None:
     if args.route:
         _route_table(console)
         return
+
+    # Activate iron gate non-interactive mode when --non-interactive or env var
+    if args.non_interactive:
+        try:
+            from control_plane.cli.iron_gate import set_non_interactive
+            set_non_interactive(True)
+        except ImportError:
+            pass
 
     forced: Optional[str] = None
     if args.knight:
@@ -869,6 +908,7 @@ def main() -> None:
         no_context=args.no_context,
         system_file=args.system,
         verbose=args.verbose,
+        non_interactive=args.non_interactive,
     )
 
 
