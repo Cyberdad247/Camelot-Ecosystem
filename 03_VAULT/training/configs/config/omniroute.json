@@ -1,36 +1,94 @@
 {
+  "version": "2.0.0",
+  "description": "OmniRoute config — SoulRouter routing matrix + OpenCodex combo definitions",
+
+  "upstream": {
+    "cliproxy": {
+      "url": "http://127.0.0.1:8080/v1",
+      "api_key": "proxy-admin-key"
+    },
+    "opencodex": {
+      "url": "http://127.0.0.1:10100",
+      "api_key": "proxy-admin-key"
+    }
+  },
+
+  "constraints": {
+    "request_timeout_ms": 120000,
+    "max_retries": 2,
+    "cooldown_seconds": 300
+  },
+
   "routing_matrix": {
     "strategy": "cost-optimized",
-    "fallback_chain": ["local", "free", "paid"]
+    "fallback_chain": ["local", "free", "paid"],
+    "privacy_override": {
+      "forced_knight": "SIR_GHOST",
+      "trigger_keywords": [
+        "secret", "local", "private", "credential", "key", "password",
+        "confidential", "internal", "sensitive", "classified"
+      ]
+    },
+    "tiers": {
+      "tier0_local_kinetic": {
+        "description": "Local-only harness-locked (Ollama)",
+        "models": ["qwen3:8b", "qwen3:1.7b", "agents-a1"],
+        "local_eligible": true
+      },
+      "tier1_low_stakes": {
+        "description": "Low-stakes flash models",
+        "models": ["gemini-3-flash-preview", "gpt-4.1-mini"],
+        "local_eligible": false
+      },
+      "tier2_standard": {
+        "description": "Standard pro models",
+        "models": ["gemini-3-pro-preview", "claude-sonnet-4", "gpt-5.4"],
+        "local_eligible": false
+      },
+      "tier3_complex": {
+        "description": "Frontier apex models",
+        "models": ["gemini-3.1-pro-preview", "claude-opus-5", "gpt-5.5"],
+        "local_eligible": false
+      }
+    }
   },
+
   "engines": {
     "qwen2.5-coder:7b": {
       "provider": "local",
       "status": "active",
       "tier": "free",
       "priority": 1,
-      "roles": ["forge", "debug", "architect"]
+      "roles": ["forge", "debug", "architect"],
+      "knight_binding": "sir_forge",
+      "weight": 0.70
     },
     "qwen2.5:7b": {
       "provider": "local",
       "status": "active",
       "tier": "free",
       "priority": 2,
-      "roles": ["reasoning", "merlin"]
+      "roles": ["reasoning", "merlin"],
+      "knight_binding": "merlin_omega",
+      "weight": 0.85
     },
     "qwen2.5:3b": {
       "provider": "local",
       "status": "active",
       "tier": "free",
       "priority": 3,
-      "roles": ["planning", "audit", "default"]
+      "roles": ["planning", "audit", "default"],
+      "knight_binding": "sir_alex",
+      "weight": 0.88
     },
     "qwen2.5:1.5b": {
       "provider": "local",
       "status": "active",
       "tier": "free",
       "priority": 4,
-      "roles": ["security", "ghost"]
+      "roles": ["security", "ghost"],
+      "knight_binding": "sir_ghost",
+      "weight": 1.00
     },
     "qwen2.5:0.5b": {
       "provider": "local",
@@ -46,7 +104,218 @@
       "priority": 1,
       "roles": ["agentic", "architect", "planning", "reasoning"],
       "execution_path": "127.0.0.1:8000",
-      "model": "InternScience/Agents-A1"
+      "model": "InternScience/Agents-A1",
+      "knight_binding": "sir_agentis",
+      "weight": 0.87
+    }
+  },
+
+  "knight_model_map": {
+    "sir_boris": {
+      "primary": "claude-opus-5",
+      "provider": "anthropic",
+      "fallback": "gemini-3.1-pro-preview",
+      "fallback_provider": "google"
+    },
+    "sir_alex": {
+      "primary": "gemini-3-pro-preview",
+      "provider": "google",
+      "fallback": "claude-sonnet-4",
+      "fallback_provider": "anthropic"
+    },
+    "sir_helio": {
+      "primary": "gemini-3.1-pro-preview",
+      "provider": "google",
+      "fallback": "gpt-5.4",
+      "fallback_provider": "openai"
+    },
+    "sir_sentinel": {
+      "primary": "gemini-3-pro-preview",
+      "provider": "google",
+      "fallback": "claude-sonnet-4",
+      "fallback_provider": "anthropic"
+    },
+    "sir_codex": {
+      "primary": "gpt-5.5-codex",
+      "provider": "openai",
+      "fallback": "gemini-3.1-pro-preview",
+      "fallback_provider": "google"
+    },
+    "sir_link": {
+      "primary": "gemini-3-flash-preview",
+      "provider": "google",
+      "fallback": "gpt-4.1-mini",
+      "fallback_provider": "openai"
+    },
+    "sir_debug": {
+      "primary": "gemini-3-flash-preview",
+      "provider": "google",
+      "fallback": "gpt-4.1-mini",
+      "fallback_provider": "openai"
+    },
+    "lady_apis": {
+      "primary": "gemini-3.1-pro-preview",
+      "provider": "google",
+      "fallback": "claude-sonnet-4",
+      "fallback_provider": "anthropic"
+    },
+    "sir_mnemo": {
+      "primary": "gemini-3.1-pro-preview",
+      "provider": "google",
+      "fallback": "claude-sonnet-4",
+      "fallback_provider": "anthropic"
+    },
+    "lady_mnemosyne": {
+      "primary": "gemini-3.1-pro-preview",
+      "provider": "google",
+      "fallback": "claude-sonnet-4",
+      "fallback_provider": "anthropic"
+    },
+    "sir_liberte": {
+      "primary": "gemini-2.5-flash",
+      "provider": "google",
+      "fallback": "gpt-4.1-mini",
+      "fallback_provider": "openai"
+    },
+    "sir_valerian": {
+      "primary": "gemini-3-pro-preview",
+      "provider": "google",
+      "fallback": "claude-sonnet-4",
+      "fallback_provider": "anthropic"
+    },
+    "sir_forge": {
+      "primary": "qwen3:1.7b",
+      "provider": "ollama",
+      "fallback": "qwen3:1.7b",
+      "fallback_provider": "ollama"
+    },
+    "sir_ghost": {
+      "primary": "qwen3:8b",
+      "provider": "ollama",
+      "fallback": "qwen3:8b",
+      "fallback_provider": "ollama"
+    },
+    "sir_ouroboros": {
+      "primary": "qwen3:8b",
+      "provider": "ollama",
+      "fallback": "gemini-3-flash-preview",
+      "fallback_provider": "google"
+    },
+    "sir_heimdall": {
+      "primary": "gemini-3-pro-preview",
+      "provider": "google",
+      "fallback": "claude-sonnet-4",
+      "fallback_provider": "anthropic"
+    },
+    "merlin_omega": {
+      "primary": "gemini-3.1-pro-preview",
+      "provider": "google",
+      "fallback": "claude-opus-5",
+      "fallback_provider": "anthropic"
+    }
+  },
+
+  "combos": {
+    "_doc": "OpenCodex combo definitions — one virtual model ID with failover or weighted round-robin across providers. Used by ocx_bridge.py for knight-tier resolution.",
+
+    "G3_apex": {
+      "description": "Frontier apex: Claude Opus → Gemini 3.1 Pro → GPT-5.5",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "anthropic", "model": "claude-opus-5"},
+        {"provider": "google",    "model": "gemini-3.1-pro-preview"},
+        {"provider": "openai",    "model": "gpt-5.5"}
+      ],
+      "cooldown_seconds": 300,
+      "applicable_knights": ["sir_boris", "merlin_omega"]
+    },
+
+    "G3_flash_apex": {
+      "description": "Flash apex: Gemini 3 Pro → Claude Sonnet 4 → GPT-5.4",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "google",    "model": "gemini-3-pro-preview"},
+        {"provider": "anthropic", "model": "claude-sonnet-4"},
+        {"provider": "openai",    "model": "gpt-5.4"}
+      ],
+      "cooldown_seconds": 300,
+      "applicable_knights": ["sir_sentinel", "sir_alex", "sir_valerian", "sir_heimdall"]
+    },
+
+    "G2_pro": {
+      "description": "Pro context: Gemini 3.1 Pro → GPT-5.4",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "google", "model": "gemini-3.1-pro-preview"},
+        {"provider": "openai", "model": "gpt-5.4"}
+      ],
+      "cooldown_seconds": 300,
+      "applicable_knights": ["sir_helio", "lady_apis", "sir_mnemo", "lady_mnemosyne"]
+    },
+
+    "G2_pro_anthropic": {
+      "description": "Pro context (Anthropic-first): Claude Sonnet 4 → Gemini 3.1 Pro",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "anthropic", "model": "claude-sonnet-4"},
+        {"provider": "google",    "model": "gemini-3.1-pro-preview"}
+      ],
+      "cooldown_seconds": 300,
+      "applicable_knights": ["sir_mnemo", "lady_mnemosyne"]
+    },
+
+    "G1_flash": {
+      "description": "Flash bridge: Gemini 3 Flash → GPT-4.1 Mini",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "google", "model": "gemini-3-flash-preview"},
+        {"provider": "openai", "model": "gpt-4.1-mini"}
+      ],
+      "cooldown_seconds": 180,
+      "applicable_knights": ["sir_link", "sir_debug", "sir_liberte"]
+    },
+
+    "X1_codex": {
+      "description": "Codex velocity: GPT-5.5 Codex (pinned, no failover)",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "openai", "model": "gpt-5.5-codex"}
+      ],
+      "cooldown_seconds": 0,
+      "applicable_knights": ["sir_codex"]
+    },
+
+    "L0_local_qwen8": {
+      "description": "Local harness-locked: Ollama Qwen3 8B (no failover)",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "ollama", "model": "qwen3:8b"}
+      ],
+      "cooldown_seconds": 0,
+      "local_only": true,
+      "applicable_knights": ["sir_ghost", "sir_ouroboros"]
+    },
+
+    "L0_local_qwen1": {
+      "description": "Local harness-locked: Ollama Qwen3 1.7B (no failover)",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "ollama", "model": "qwen3:1.7b"}
+      ],
+      "cooldown_seconds": 0,
+      "local_only": true,
+      "applicable_knights": ["sir_forge"]
+    },
+
+    "L0_local_agents": {
+      "description": "Local harness-locked: Agents-A1 35B MoE (no failover)",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "ollama", "model": "agents-a1"}
+      ],
+      "cooldown_seconds": 0,
+      "local_only": true,
+      "applicable_knights": ["sir_agentis"]
     }
   }
 }
