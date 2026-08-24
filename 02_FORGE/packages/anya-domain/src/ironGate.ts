@@ -108,7 +108,7 @@ export async function enforceBiometricGate(intent: string, titanLink: { send: (p
 
     const response = await titanLink.send(challengePayload);
 
-    const isVerified = await MoltbotGateway.verifySignature(challengePayload, response, "SOVEREIGN_PUB_KEY");
+    const isVerified = await MoltbotGateway.verifySignature(challengePayload, response as any, "SOVEREIGN_PUB_KEY");
 
     if (!isVerified) {
       throw new Error("⛔ IRON GATE: Biometrics Rejected. Unauthorized Access Blocked.");
