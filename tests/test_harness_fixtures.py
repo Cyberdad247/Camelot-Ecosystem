@@ -608,20 +608,26 @@ def operator_console_gate():
 
 
 def _good_manifest(gate, now: float, nonce: str = "nonce-a", **overrides):
-    return {
-        "schemaVersion": "effect-manifest/1",
-        "manifestId": "manifest_0001",
-        "taskId": "task_0001",
-        "effectClass": "workspace.patch",
-        "declaredRiskTier": "T2",
-        "expiresAt": str(now + 3600),
-        "requiredEvidence": [{"ref": "receipt://t", "present": True}],
-        "gideonVerdict": "pass",
-        "vfsEvidenceOk": True,
-        "oneTimeNonce": nonce,
-        "operatorSessionValid": True,
-        **overrides,
-    }
+    m = gate.build_effect_manifest(
+        manifest_id="manifest_0001",
+        task_id="task_0001",
+        correlation_id="cor_0001",
+        kind="workspace.patch",
+        base_revision="git-sha-base",
+        candidate_revision="git-sha-candidate",
+        diff_sha256="sha256:" + "a" * 64,
+        policy_class="standard",
+        expires_at=now + 3600,
+        one_time_nonce=nonce,
+        effect_class="workspace.patch",
+        declared_risk_tier="T2",
+        required_evidence=["receipt://t"],
+    )
+    m.update(overrides)
+    return m
+
+
+_EVIDENCE = {"receipt://t"}
 
 
 def check_operator_console_approval(gate) -> None:
@@ -637,24 +643,39 @@ def check_operator_console_approval(gate) -> None:
     gate_mod.ApprovalGate  # noqa: B018 — confirm symbol exists
     console = gate_mod.ApprovalGate(now=now)
 
+    manifest = _good_manifest(gate_mod, now)
+    # The manifest shape validates against effect-manifest.schema.json.
+    ok_shape, shape_msg = gate_mod.manifest_validates_against_schema(manifest)
+    assert ok_shape, f"manifest must conform to effect-manifest.schema.json: {shape_msg}"
+    assert manifest["schemaVersion"] == "effect-manifest/1"
+    assert manifest["declarationHash"].startswith("sha256:")
+
     # All gates green + valid session -> approve.
-    ok, reasons = console.verify_manifest(_good_manifest(gate_mod, now))
+    ok, reasons = console.verify_manifest(manifest, evidence_present=_EVIDENCE)
     assert ok and not reasons, f"approve expected, got: {reasons}"
 
     # Invalid operator session alone must deny.
-    ok2, reasons2 = console.verify_manifest(
-        _good_manifest(gate_mod, now, nonce="nonce-s", operatorSessionValid=False)
-    )
+    bad_session = _good_manifest(gate_mod, now, nonce="nonce-s")
+    bad_session["operatorSessionValid"] = False
+    ok2, reasons2 = console.verify_manifest(bad_session, evidence_present=_EVIDENCE)
     assert not ok2 and "operator_session_invalid" in reasons2
 
     # Gideon fail must deny with the reason recorded.
-    ok3, reasons3 = console.verify_manifest(
-        _good_manifest(gate_mod, now, nonce="nonce-g", gideonVerdict="fail")
-    )
+    bad_gideon = _good_manifest(gate_mod, now, nonce="nonce-g")
+    bad_gideon["gideonVerdict"] = "fail"
+    ok3, reasons3 = console.verify_manifest(bad_gideon, evidence_present=_EVIDENCE)
     assert not ok3 and "gideon_verdict_not_pass" in reasons3
 
+    # Missing required evidence must deny (schema-string refs).
+    ok4, reasons4 = console.verify_manifest(
+        _good_manifest(gate_mod, now, nonce="nonce-e")
+    )
+    assert not ok4 and "required_evidence_missing" in reasons4
+
     # Approve issues a lease; deny records a denial (no lease).
-    lease = console.issue_lease(_good_manifest(gate_mod, now, nonce="nonce-l"))
+    lease = console.issue_lease(
+        _good_manifest(gate_mod, now, nonce="nonce-l"), evidence_present=_EVIDENCE
+    )
     assert console.get_lease(lease["leaseId"]) is not None, "lease must be active"
     denial = console.record_denial(
         _good_manifest(gate_mod, now, nonce="nonce-d"), ["gideon_verdict_not_pass"]
@@ -678,7 +699,9 @@ def check_operator_console_cancellation(gate) -> None:
     chain = gate.EvidenceChain()
     ctrl = gate.TaskController(chain, console)
 
-    lease = console.issue_lease(_good_manifest(gate, now, nonce="nonce-x"))
+    lease = console.issue_lease(
+        _good_manifest(gate, now, nonce="nonce-x"), evidence_present=_EVIDENCE
+    )
     ctrl.start("task_c", ["w1", "w2"])
     evt = ctrl.cancel("task_c", lease["leaseId"])
 
@@ -733,12 +756,17 @@ def check_operator_console_readonly_audit(gate) -> None:
                  actor="owl-auditor", payload={"worker": "owl-auditor"})
     audit = gate.run_readonly_audit(chain, "task_r")
 
-    assert audit["fabricated"] is False
+    # The audit result IS an operator-task-snapshot/1 and must validate.
+    ok_snap, snap_msg = gate.snapshot_validates_against_schema(audit)
+    assert ok_snap, f"snapshot must conform to operator-task-snapshot.schema.json: {snap_msg}"
+    assert audit["schemaVersion"] == "operator-task-snapshot/1"
+    assert audit["integrity"] == "verified"
+
     assert audit["no_write_receipt"]["write_path_exercised"] is False
     assert audit["no_write_receipt"]["kind"] == "audit.readonly"
-    assert audit["panels"]["approval"] is None, "no approval path in audit"
-    assert audit["panels"]["workers"][0]["id"] == "ant-mapper"
-    assert audit["panels"]["receipts"][0]["kind"] == "audit.readonly"
+    assert "approval" not in audit, "no approval path in read-only audit"
+    assert audit["taskGraph"][0]["id"] == "ant-mapper"
+    assert audit["receipts"][0]["kind"] == "audit.readonly"
 
 
 def test_operator_console_readonly_audit(operator_console_gate) -> None:

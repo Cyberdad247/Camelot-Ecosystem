@@ -36,6 +36,10 @@ import json
 import sys
 import time
 import uuid
+from datetime import datetime, timezone
+from pathlib import Path
+
+from jsonschema import Draft7Validator
 
 # Windows consoles default to cp1252, which cannot encode the ✓/✗ glyphs used
 # in output. Force UTF-8 (with replacement fallback) so the battery never
@@ -55,6 +59,58 @@ EFFECT_CLASSES = (
 )
 RISK_TIERS = ("T0", "T1", "T2", "T3", "T4")
 INTEGRITY_STATES = ("verified", "pending_anchor", "unavailable", "integrity_failed")
+
+# Published contracts the gate's manifest and snapshot shapes must conform to
+# (harness draft-07 copies of the camelCase contracts the TS plane mirrors).
+EFFECT_MANIFEST_SCHEMA = Path(__file__).resolve().parent / "effect-manifest.schema.json"
+OPERATOR_TASK_SNAPSHOT_SCHEMA = (
+    Path(__file__).resolve().parent / "operator-task-snapshot.schema.json"
+)
+
+_MANIFEST_VALIDATOR: Draft7Validator | None = None
+_SNAPSHOT_VALIDATOR: Draft7Validator | None = None
+
+
+def _manifest_validator() -> Draft7Validator:
+    global _MANIFEST_VALIDATOR
+    if _MANIFEST_VALIDATOR is None:
+        with EFFECT_MANIFEST_SCHEMA.open(encoding="utf-8") as fh:
+            _MANIFEST_VALIDATOR = Draft7Validator(json.load(fh))
+    return _MANIFEST_VALIDATOR
+
+
+def _snapshot_validator() -> Draft7Validator:
+    global _SNAPSHOT_VALIDATOR
+    if _SNAPSHOT_VALIDATOR is None:
+        with OPERATOR_TASK_SNAPSHOT_SCHEMA.open(encoding="utf-8") as fh:
+            _SNAPSHOT_VALIDATOR = Draft7Validator(json.load(fh))
+    return _SNAPSHOT_VALIDATOR
+
+
+def manifest_validates_against_schema(manifest: dict) -> tuple[bool, str]:
+    """Check an effect-manifest shape against effect-manifest.schema.json."""
+    errors = sorted(
+        _manifest_validator().iter_errors(manifest),
+        key=lambda e: [str(p) for p in e.path],
+    )
+    if errors:
+        first = errors[0]
+        where = ".".join(str(p) for p in first.path) or "(root)"
+        return False, f"{where}: {first.message}"
+    return True, "effect-manifest schema conformant"
+
+
+def snapshot_validates_against_schema(snapshot: dict) -> tuple[bool, str]:
+    """Check an operator-task-snapshot shape against the published schema."""
+    errors = sorted(
+        _snapshot_validator().iter_errors(snapshot),
+        key=lambda e: [str(p) for p in e.path],
+    )
+    if errors:
+        first = errors[0]
+        where = ".".join(str(p) for p in first.path) or "(root)"
+        return False, f"{where}: {first.message}"
+    return True, "operator-task-snapshot schema conformant"
 
 
 class OperatorConsoleError(Exception):
@@ -77,6 +133,14 @@ def sha256_hex(data: bytes) -> str:
 
 def payload_hash(payload: object) -> str:
     return "sha256:" + sha256_hex(canonical_json(payload).encode("utf-8"))
+
+
+def _iso_from_epoch(epoch: float) -> str:
+    return datetime.fromtimestamp(epoch, tz=timezone.utc).isoformat().replace("+00:00", "Z")
+
+
+def _epoch_from_iso(value: str) -> float:
+    return datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
 
 
 # ---------------------------------------------------------------------------
@@ -139,12 +203,75 @@ class EvidenceChain:
 # Approval gate (mirror of sentinel.ts verifyManifest / issueLease)
 # ---------------------------------------------------------------------------
 
+def build_effect_manifest(
+    *,
+    manifest_id: str,
+    task_id: str,
+    correlation_id: str,
+    kind: str,
+    base_revision: str,
+    candidate_revision: str,
+    diff_sha256: str,
+    policy_class: str,
+    expires_at: float,
+    one_time_nonce: str,
+    effect_class: str,
+    declared_risk_tier: str,
+    required_evidence: list[str] | None = None,
+    allowed_paths: list[str] | None = None,
+    declaration_hash: str | None = None,
+    gideon_verdict: str = "pass",
+    vfs_evidence_ok: bool = True,
+    operator_session_valid: bool = True,
+) -> dict:
+    """Build a schema-conformant effect-manifest/1 (effect-manifest.schema.json).
+
+    `requiredEvidence` is a list of receipt-ref strings (the published schema's
+    item type), and `declarationHash` is a sha256 over the immutable inputs
+    (effectClass + declaredRiskTier + diff + revisions) per §5.5/§11.1. The
+    gate-only decision fields (gideonVerdict, vfsEvidenceOk,
+    operatorSessionValid) ride along as additional properties, which the
+    schema permits.
+    """
+    manifest = {
+        "schemaVersion": "effect-manifest/1",
+        "manifestId": manifest_id,
+        "taskId": task_id,
+        "correlationId": correlation_id,
+        "kind": kind,
+        "baseRevision": base_revision,
+        "candidateRevision": candidate_revision,
+        "diffSha256": diff_sha256,
+        "allowedPaths": allowed_paths or [],
+        "requiredEvidence": required_evidence or [],
+        "policyClass": policy_class,
+        "expiresAt": _iso_from_epoch(expires_at),
+        "oneTimeNonce": one_time_nonce,
+        "effectClass": effect_class,
+        "declaredRiskTier": declared_risk_tier,
+        "declarationHash": declaration_hash or "sha256:" + sha256_hex(
+            canonical_json({
+                "effectClass": effect_class,
+                "declaredRiskTier": declared_risk_tier,
+                "diffSha256": diff_sha256,
+                "baseRevision": base_revision,
+                "candidateRevision": candidate_revision,
+            }).encode("utf-8")
+        ),
+        "gideonVerdict": gideon_verdict,
+        "vfsEvidenceOk": vfs_evidence_ok,
+        "operatorSessionValid": operator_session_valid,
+    }
+    return manifest
+
+
 class ApprovalGate:
     """Decision service: approve issues a lease, deny records a denial.
 
     Controls are enabled only when: the manifest is schema-conformant, not
     expired, every required evidence ref is present, Gideon verdict is pass,
-    VFS evidence is OK, and the one-time nonce is fresh.
+    VFS evidence is OK, the one-time nonce is fresh, and the operator session
+    is valid.
     """
 
     def __init__(self, now: float | None = None) -> None:
@@ -152,22 +279,30 @@ class ApprovalGate:
         self._seen_nonces: set[str] = set()
         self._leases: dict[str, dict] = {}
 
-    def verify_manifest(self, manifest: dict) -> tuple[bool, list[str]]:
+    def verify_manifest(
+        self,
+        manifest: dict,
+        evidence_present: set[str] | None = None,
+    ) -> tuple[bool, list[str]]:
         reasons: list[str] = []
         m = manifest
-        if m.get("schemaVersion") != "effect-manifest/1":
-            reasons.append("manifest_schema_invalid")
+        # 0. Shape conformance against effect-manifest.schema.json.
+        ok_shape, shape_msg = manifest_validates_against_schema(manifest)
+        if not ok_shape:
+            reasons.append(f"manifest_schema_invalid: {shape_msg}")
+            return False, reasons
         if m.get("effectClass") not in EFFECT_CLASSES:
             reasons.append("manifest_schema_invalid")
         if m.get("declaredRiskTier") not in RISK_TIERS:
             reasons.append("manifest_schema_invalid")
         try:
-            if float(m["expiresAt"]) <= self._now:
+            if _epoch_from_iso(m["expiresAt"]) <= self._now:
                 reasons.append("manifest_expired")
         except (KeyError, TypeError, ValueError):
             reasons.append("manifest_expired")
+        present = set() if evidence_present is None else evidence_present
         for ref in m.get("requiredEvidence", []):
-            if not ref.get("present", False):
+            if ref not in present:
                 reasons.append("required_evidence_missing")
         if m.get("gideonVerdict") != "pass":
             reasons.append("gideon_verdict_not_pass")
@@ -182,8 +317,13 @@ class ApprovalGate:
             self._seen_nonces.add(m.get("oneTimeNonce", ""))
         return len(reasons) == 0, reasons
 
-    def issue_lease(self, manifest: dict, ttl_ms: int = 5 * 60_000) -> dict:
-        ok, reasons = self.verify_manifest(manifest)
+    def issue_lease(
+        self,
+        manifest: dict,
+        ttl_ms: int = 5 * 60_000,
+        evidence_present: set[str] | None = None,
+    ) -> dict:
+        ok, reasons = self.verify_manifest(manifest, evidence_present=evidence_present)
         if not ok:
             raise OperatorConsoleError(f"approval denied: {', '.join(reasons)}")
         lease = {
@@ -279,31 +419,70 @@ def detect_integrity_failure(chain: EvidenceChain, task_id: str) -> dict:
 # Read-only audit (AC19) — deterministic render, no approval path, no writes
 # ---------------------------------------------------------------------------
 
+def build_operator_task_snapshot(
+    *,
+    task_id: str,
+    correlation_id: str,
+    generated_at: float,
+    integrity: str = "verified",
+    intent: dict | None = None,
+    approval: dict | None = None,
+    task_graph: list | None = None,
+    diffs: list | None = None,
+    tests: list | None = None,
+    receipts: list | None = None,
+    no_write_receipt: dict | None = None,
+) -> dict:
+    """Build a schema-conformant operator-task-snapshot/1 envelope.
+
+    `approval` is omitted when None (the schema types it object, so a null
+    would fail validation); the no-write receipt rides as an additional
+    property, which the schema permits.
+    """
+    snapshot = {
+        "schemaVersion": "operator-task-snapshot/1",
+        "taskId": task_id,
+        "correlationId": correlation_id,
+        "generatedAt": _iso_from_epoch(generated_at),
+        "integrity": integrity,
+        "intent": intent or {},
+        "taskGraph": task_graph or [],
+        "diffs": diffs or [],
+        "tests": tests or [],
+        "receipts": receipts or [],
+    }
+    if approval is not None:
+        snapshot["approval"] = approval
+    if no_write_receipt is not None:
+        snapshot["no_write_receipt"] = no_write_receipt
+    return snapshot
+
+
 def run_readonly_audit(chain: EvidenceChain, task_id: str) -> dict:
     """Deterministic read-only audit: render real state from the chain, no
-    approval path, no fabricated content, emit a no-write receipt."""
+    approval path, no fabricated content, emit a no-write receipt. The result
+    IS an operator-task-snapshot/1 (validates against its schema)."""
     rows = chain.list_by_task(task_id)
-    panels = {
-        "workers": [{"id": w, "status": "running" if i == 0 else "done"}
-                    for i, w in enumerate(["ant-mapper", "owl-auditor"])],
-        "receipts": [{"event_id": r["event_id"], "kind": r["kind"]} for r in rows],
-        "intent": {"kind": rows[0]["kind"]} if rows else {},
-        "approval": None,  # read-only audit has no approval path
-        "diffs": [],
-        "tests": [],
-    }
-    return {
+    workers = [{"id": w, "status": "running" if i == 0 else "done"}
+               for i, w in enumerate(["ant-mapper", "owl-auditor"])]
+    receipts = [{"event_id": r["event_id"], "kind": r["kind"]} for r in rows]
+    no_write_receipt = {
+        "event_id": f"evt_{task_id}_audit",
         "task_id": task_id,
-        "panels": panels,
-        "no_write_receipt": {
-            "event_id": f"evt_{task_id}_audit",
-            "task_id": task_id,
-            "kind": "audit.readonly",
-            "write_path_exercised": False,
-            "payload_hash": payload_hash(panels),
-        },
-        "fabricated": False,
+        "kind": "audit.readonly",
+        "write_path_exercised": False,
+        "payload_hash": payload_hash({"workers": workers, "receipts": receipts}),
     }
+    return build_operator_task_snapshot(
+        task_id=task_id,
+        correlation_id=f"cor_{task_id}",
+        generated_at=time.time(),
+        integrity="verified",
+        intent={"kind": rows[0]["kind"]} if rows else {},
+        task_graph=workers,
+        receipts=receipts,
+        no_write_receipt=no_write_receipt,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -326,38 +505,55 @@ def main() -> int:
 
     # --- approval (AC10–AC13) ---------------------------------------------
     gate = ApprovalGate(now=now)
-    manifest = {
-        "schemaVersion": "effect-manifest/1",
-        "manifestId": "manifest_0001",
-        "taskId": "task_0001",
-        "effectClass": "workspace.patch",
-        "declaredRiskTier": "T2",
-        "expiresAt": str(now + 3600),
-        "requiredEvidence": [{"ref": "receipt://t", "present": True}],
-        "gideonVerdict": "pass",
-        "vfsEvidenceOk": True,
-        "oneTimeNonce": "nonce-a",
-        "operatorSessionValid": True,
-    }
-    ok, reasons = gate.verify_manifest(manifest)
+    manifest = build_effect_manifest(
+        manifest_id="manifest_0001",
+        task_id="task_0001",
+        correlation_id="cor_0001",
+        kind="workspace.patch",
+        base_revision="git-sha-base",
+        candidate_revision="git-sha-candidate",
+        diff_sha256="sha256:" + "a" * 64,
+        policy_class="standard",
+        expires_at=now + 3600,
+        one_time_nonce="nonce-a",
+        effect_class="workspace.patch",
+        declared_risk_tier="T2",
+        required_evidence=["receipt://t"],
+    )
+    ok_shape, shape_msg = manifest_validates_against_schema(manifest)
+    expect(ok_shape, f"approval: manifest conforms to effect-manifest.schema.json ({shape_msg})")
+
+    ok, reasons = gate.verify_manifest(manifest, evidence_present={"receipt://t"})
     expect(ok and not reasons, "approval: all gates green -> approve")
+
+    # Missing required evidence must deny.
+    ok_miss, reasons_miss = gate.verify_manifest(manifest)
+    expect(not ok_miss and "required_evidence_missing" in reasons_miss,
+           "approval: missing evidence -> deny")
 
     # The same manifest must NOT verify twice (nonce replay), but a fresh
     # nonce on an otherwise identical manifest is a new approval.
     replayed = dict(manifest, manifestId="manifest_0001r")
-    ok_r, reasons_r = gate.verify_manifest(replayed)
+    ok_r, reasons_r = gate.verify_manifest(replayed, evidence_present={"receipt://t"})
     expect(not ok_r and "nonce_replayed" in reasons_r,
            "approval: nonce replay -> deny")
 
-    denied = dict(manifest, gideonVerdict="fail", manifestId="manifest_0002",
-                  oneTimeNonce="nonce-b")
-    ok2, reasons2 = gate.verify_manifest(denied)
+    denied = build_effect_manifest(
+        manifest_id="manifest_0002", task_id="task_0001",
+        correlation_id="cor_0002", kind="workspace.patch",
+        base_revision="git-sha-base", candidate_revision="git-sha-candidate",
+        diff_sha256="sha256:" + "a" * 64, policy_class="standard",
+        expires_at=now + 3600, one_time_nonce="nonce-b",
+        effect_class="workspace.patch", declared_risk_tier="T2",
+        required_evidence=["receipt://t"], gideon_verdict="fail",
+    )
+    ok2, reasons2 = gate.verify_manifest(denied, evidence_present={"receipt://t"})
     expect(not ok2 and "gideon_verdict_not_pass" in reasons2,
            "approval: gideon fail -> deny with reason")
 
     lease_manifest = dict(manifest, manifestId="manifest_0003",
                           oneTimeNonce="nonce-c")
-    lease = gate.issue_lease(lease_manifest)
+    lease = gate.issue_lease(lease_manifest, evidence_present={"receipt://t"})
     expect(gate.get_lease(lease["leaseId"]) is not None, "approval: lease issued")
 
     # --- cancellation (AC20) ----------------------------------------------
@@ -388,9 +584,12 @@ def main() -> int:
     chain3.append(event_id="evt_1", task_id="task_r", kind="audit.readonly",
                   actor="owl-auditor", payload={"worker": "owl-auditor"})
     audit = run_readonly_audit(chain3, "task_r")
-    expect(audit["fabricated"] is False
-           and audit["no_write_receipt"]["write_path_exercised"] is False
-           and audit["panels"]["approval"] is None,
+    ok_snap, snap_msg = snapshot_validates_against_schema(audit)
+    expect(ok_snap, f"readonly-audit: snapshot conforms to operator-task-snapshot.schema.json ({snap_msg})")
+    expect(audit["no_write_receipt"]["write_path_exercised"] is False
+           and "approval" not in audit
+           and audit["taskGraph"][0]["id"] == "ant-mapper"
+           and audit["receipts"][0]["kind"] == "audit.readonly",
            "readonly-audit: real state, no-write receipt, no approval path")
 
     print("=" * 72)
