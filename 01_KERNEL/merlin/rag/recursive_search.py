@@ -7,6 +7,7 @@ Implements the Recursive Search & Reflection Engine for Chronos.
 Allows the system to critique its own retrieval results and generate follow-up queries.
 """
 
+import json
 import logging
 from typing import Any, Dict, List
 
@@ -35,17 +36,46 @@ class ReflectionEngine:
         def get_content(d):
             return d.get("content", "") if isinstance(d, dict) else getattr(d, "content", str(d))
             
-        "\n".join([get_content(d)[:200] + "..." for d in documents[:3]])
+        docs_text = "\n\n".join([f"Doc {i+1}: {get_content(d)[:200]}..." for i, d in enumerate(documents[:3])])
         
+        prompt = f"""
+Evaluate if the following documents provide enough information to answer the query.
+Respond ONLY with a valid JSON object matching this schema:
+{{
+    "score": <int 0-10>,
+    "missing": "<string detailing what information is missing, or 'None'>",
+    "needs_recursion": <boolean>
+}}
+
+Query: {query}
+
+Documents:
+{docs_text}
+"""
         
         try:
-            # In a real implementation, we would parse the JSON output from the LLM.
-            # For this MVP, we will simulate a "Check" or use a structured parser if available.
-            # Since MerlinGenerator returns string, we'll do a simple heuristic or mock.
+            result = self.evaluator.run(prompt=prompt)
+            reply = result.get("replies", ["{}"])[0]
+
+            # Clean up potential markdown formatting
+            if reply.startswith("```json"):
+                reply = reply[7:]
+            if reply.endswith("```"):
+                reply = reply[:-3]
+
+            parsed = json.loads(reply.strip())
+
+            # Ensure required keys exist
+            return {
+                "score": int(parsed.get("score", 5)),
+                "missing": str(parsed.get("missing", "Parsing error")),
+                "needs_recursion": bool(parsed.get("needs_recursion", True))
+            }
             
-            # TODO: Connect to actual LLM for critique. 
-            # For Phase 3 MVP, we assume if docs < 2 or content is short, we recurse.
+        except Exception as e:
+            logger.error(f"Reflection failed: {e}")
             
+            # Fallback to simple heuristic
             score = 10
             missing = "None"
             needs_recursion = False
@@ -60,10 +90,6 @@ class ReflectionEngine:
                 "missing": missing,
                 "needs_recursion": needs_recursion
             }
-            
-        except Exception as e:
-            logger.error(f"Reflection failed: {e}")
-            return {"score": 0, "missing": "Error", "needs_recursion": False}
 
     def generate_followup(self, original_query: str, missing_info: str) -> str:
         """
