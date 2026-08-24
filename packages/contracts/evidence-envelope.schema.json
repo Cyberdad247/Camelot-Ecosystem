@@ -1,69 +1,38 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://camelot-os/schemas/evidence-envelope.schema.json",
-  "title": "Camelot Evidence Envelope",
-  "description": "v1.2 structured event envelope used to stream verified evidence to the Operator Console and mobile clients (§12.1). Envelopes reference chain-linked receipts; they are downstream projections and never the basis for authorization (§11.3). See Camelot-OS SADD+LLDD v1.2 §12.1 and §19.",
+  "title": "Operator Evidence Envelope (operator-evidence/1)",
+  "description": "v1.2 canonical operator-evidence/1 envelope — the authorization-relevant evidence record streamed to the Operator Console and mobile clients (§12.1). Canonical shape is camelCase, matching the live operator plane (apps/bifrost/src/operator/contracts.ts EvidenceEnvelopeSchema) and the harness gate mirror (harness/contracts/operator-evidence.schema.json). Envelopes are hash-chain-linked via payloadHash/parentHash and reference chain receipts; they are evidence records, never authorization decisions (§11.3). See Camelot-OS SADD+LLDD v1.2 §12.1, §11.3, and §19.",
   "type": "object",
   "additionalProperties": false,
   "required": [
-    "schema_version",
-    "event_id",
-    "task_id",
-    "correlation_id",
+    "schemaVersion",
+    "eventId",
+    "taskId",
+    "correlationId",
     "timestamp",
-    "kind",
     "actor",
+    "kind",
+    "payloadHash",
     "integrity"
   ],
   "properties": {
-    "schema_version": {
-      "type": "string",
-      "const": "operator-evidence/1"
-    },
-    "event_id": {
-      "type": "string",
-      "pattern": "^evt_[A-Za-z0-9_-]+$"
-    },
-    "task_id": {
-      "type": "string",
-      "pattern": "^task_[A-Za-z0-9_-]+$"
-    },
-    "correlation_id": {
-      "type": "string",
-      "pattern": "^cor_[A-Za-z0-9_-]+$"
-    },
-    "tenant_id": {
-      "type": "string",
-      "pattern": "^tenant_[A-Za-z0-9_-]+$"
-    },
-    "timestamp": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "kind": {
-      "description": "Event kind, e.g. 'lease.issued', 'patch.applied', 'gideon.pass', 'cache.write'.",
-      "type": "string"
-    },
-    "actor": {
-      "$ref": "https://camelot-os/schemas/actor.schema.json"
-    },
+    "schemaVersion": { "const": "operator-evidence/1" },
+    "eventId": { "type": "string", "minLength": 1 },
+    "taskId": { "type": "string", "minLength": 1 },
+    "correlationId": { "type": "string", "minLength": 1 },
+    "causationId": { "type": "string", "minLength": 1 },
+    "timestamp": { "type": "string", "minLength": 1 },
+    "actor": { "$ref": "https://camelot-os/schemas/actor.schema.json" },
+    "kind": { "type": "string", "minLength": 1 },
+    "payload": { "type": "object", "additionalProperties": true },
+    "payloadHash": { "type": "string", "minLength": 1 },
+    "parentHash": { "type": "string", "pattern": "^sha256:[0-9a-fA-F]{64}$" },
     "integrity": {
       "type": "string",
-      "enum": ["verified", "pending", "failed"]
+      "enum": ["verified", "pending_anchor", "unavailable", "integrity_failed"]
     },
-    "receipt_ref": {
-      "description": "Receipt reference in the tenant chain.",
-      "type": "string",
-      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
-    },
-    "parent_hash": {
-      "type": "string",
-      "pattern": "^sha256:0{64}$|^sha256:[0-9a-fA-F]{64}$"
-    },
-    "payload_redacted": {
-      "description": "Role-scoped projection; consumers see only what their role permits (§11.3, D-10).",
-      "type": "object",
-      "additionalProperties": true
-    }
+    "receiptRef": { "type": "string", "minLength": 1 },
+    "ledgerAnchorRef": { "type": "string", "minLength": 1 }
   }
 }
