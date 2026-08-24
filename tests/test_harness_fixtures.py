@@ -90,6 +90,12 @@ FIXTURE_MANIFEST: dict[str, tuple[str, str, str]] = {
         "check_forged_signature",
         "verify_chain rejects bad ed25519 signature / self_hash mismatch (§11.3)",
     ),
+    "forged_operator_request": (
+        "confirmed",
+        "check_forged_operator_request",
+        "verify_operator_request denies forged signature, stale cookie, replayed "
+        "nonce, and missing MFA (§12.2, §13.1, §19.2)",
+    ),
     "receipt_parent_hash_tamper": (
         "confirmed",
         "check_parent_hash_tamper",
@@ -113,25 +119,28 @@ FIXTURE_MANIFEST: dict[str, tuple[str, str, str]] = {
         "validation/rejection path; §17.3 gate not implemented",
     ),
     "operator-console-approval": (
-        "planned",
-        "apps/pwa/src/lib/operator_console/",
-        "real TS implementation (schemas.ts, integrity.ts, operator-api.ts) "
-        "with its own .test.ts suite; no Python harness wiring",
+        "confirmed",
+        "check_operator_console_approval",
+        "operator_console_gate.py ApprovalGate mirrors sentinel.ts verifyManifest/"
+        "issueLease: approve issues lease, deny records denial (AC10–AC13)",
     ),
     "operator-console-cancellation": (
-        "planned",
-        "apps/pwa/src/lib/operator_console/",
-        "real TS implementation with its own .test.ts suite; no Python harness wiring",
+        "confirmed",
+        "check_operator_console_cancellation",
+        "operator_console_gate.py TaskController.cancel: cancellation receipt, "
+        "lease revoked, workers stopped, workspace cleaned (AC20)",
     ),
     "operator-console-integrity-failure": (
-        "planned",
-        "apps/pwa/src/lib/operator_console/integrity.ts",
-        "integrity.snapshot.ts + integrity.test.ts exist; no Python harness wiring",
+        "confirmed",
+        "check_operator_console_integrity_failure",
+        "operator_console_gate.py detect_integrity_failure: INTEGRITY FAILED "
+        "alert, approval disabled, record preserved (AC17–AC18)",
     ),
     "operator-console-readonly-audit": (
-        "planned",
-        "apps/bifrost/src/operator/",
-        "real TS implementation (receipts.ts, chain.ts, sentinel.ts); no Python harness wiring",
+        "confirmed",
+        "check_operator_console_readonly_audit",
+        "operator_console_gate.py run_readonly_audit: real state, no-write "
+        "receipt, no approval path (AC19)",
     ),
     "VFS_path_escape": (
         "aspirational",
@@ -178,11 +187,7 @@ FIXTURE_MANIFEST: dict[str, tuple[str, str, str]] = {
         "",
         "no effect-manifest expiry enforcement in tree (§13.2)",
     ),
-    "forged_operator_request": (
-        "aspirational",
-        "",
-        "no operator-request signature/replay gate in tree (§12.2, §13.1, §19.2)",
-    ),
+
     "local_twin_promotion": (
         "aspirational",
         "",
@@ -238,6 +243,9 @@ FIXTURE_MANIFEST: dict[str, tuple[str, str, str]] = {
 _CONFIRMED = {n for n, (cls, _, _) in FIXTURE_MANIFEST.items() if cls == "confirmed"}
 _PLANNED = {n for n, (cls, _, _) in FIXTURE_MANIFEST.items() if cls == "planned"}
 _ASPIRATIONAL = {n for n, (cls, _, _) in FIXTURE_MANIFEST.items() if cls == "aspirational"}
+
+VERIFY_OPERATOR_REQUEST = REPO_ROOT / "harness" / "contracts" / "verify_operator_request.py"
+OPERATOR_CONSOLE_GATE = REPO_ROOT / "harness" / "contracts" / "operator_console_gate.py"
 
 _VERIFY_TOKEN_RE = re.compile(r"Verify:\s*(.+)$", re.MULTILINE)
 # §x.y / §x.y.z section refs, the spec shorthand §x.y.z.k, and Operator
@@ -304,9 +312,9 @@ def test_manifest_covers_every_fixture_exactly_once() -> None:
 
 def test_evidence_class_totals() -> None:
     """Guard against silent classification drift as fixtures get wired."""
-    assert len(_CONFIRMED) == 3, f"confirmed set changed: {sorted(_CONFIRMED)}"
-    assert len(_PLANNED) == 6, f"planned set changed: {sorted(_PLANNED)}"
-    assert len(_ASPIRATIONAL) == 20, f"aspirational set changed: {sorted(_ASPIRATIONAL)}"
+    assert len(_CONFIRMED) == 8, f"confirmed set changed: {sorted(_CONFIRMED)}"
+    assert len(_PLANNED) == 2, f"planned set changed: {sorted(_PLANNED)}"
+    assert len(_ASPIRATIONAL) == 19, f"aspirational set changed: {sorted(_ASPIRATIONAL)}"
     assert len(FIXTURE_MANIFEST) == 29
 
 
@@ -359,6 +367,11 @@ def test_confirmed_fixtures_have_checks() -> None:
     """Every confirmed fixture maps to a check function defined in this module."""
     expected_checks = {
         "forged_node_receipt": "check_forged_signature",
+        "forged_operator_request": "check_forged_operator_request",
+        "operator-console-approval": "check_operator_console_approval",
+        "operator-console-cancellation": "check_operator_console_cancellation",
+        "operator-console-integrity-failure": "check_operator_console_integrity_failure",
+        "operator-console-readonly-audit": "check_operator_console_readonly_audit",
         "receipt_parent_hash_tamper": "check_parent_hash_tamper",
         "stale_authority_epoch": "check_stale_epoch",
     }
@@ -465,6 +478,271 @@ def check_tenant_binding(receipt_chain) -> None:
 
 def test_cross_tenant_chain_binding(receipt_chain) -> None:
     check_tenant_binding(receipt_chain)
+
+
+# ---------------------------------------------------------------------------
+# Operator-request gate (§12.2 replay window / §13.1 signature / §19.2 MFA)
+# ---------------------------------------------------------------------------
+
+@pytest.fixture(scope="module")
+def operator_request_gate():
+    """Load harness/contracts/verify_operator_request.py (standalone script)."""
+    spec = importlib.util.spec_from_file_location(
+        "verify_operator_request_under_test", VERIFY_OPERATOR_REQUEST
+    )
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _signed_operator_request(gate, operator_id="op_alice", nonce="nonce-0001", now=None):
+    """A valid signed operator request + its signer public key."""
+    import time
+    key = gate.signer_key()
+    now = time.time() if now is None else now
+    req = gate.build_operator_request(
+        key,
+        request_id="op_req_0001",
+        operator_id=operator_id,
+        effect="payment.capture",
+        declared_risk_tier="T4",
+        nonce=nonce,
+        issued_at=now,
+    )
+    return req, key.public_key()
+
+
+def check_forged_operator_request(gate) -> None:
+    """Fixture: forged_operator_request — forged/replayed/stale session proof
+    must be denied before any policy evaluation or effect path.
+
+    Verify: request denied with `operator_request_signature_verified` failing;
+    no lease issued; replay window (60s, §12.2) enforced; MFA required for
+    operators (§13.1, §19.2).
+    """
+    import copy
+    import time
+
+    req, pubkey = _signed_operator_request(gate)
+
+    # Valid request passes (sanity), and the gate token is the fixture's token.
+    ok, msg = gate.verify_operator_request(req, pubkey)
+    assert ok, f"sanity: valid operator request must pass, got: {msg}"
+    assert gate.GATE_TOKEN in msg
+
+    # The request shape validates against operator-evidence.schema.json.
+    ok_shape, shape_msg = gate.request_validates_against_schema(req)
+    assert ok_shape, f"valid request must conform to operator-evidence schema: {shape_msg}"
+    assert req["schemaVersion"] == "operator-evidence/1"
+
+    # Shape violation (missing required field) must be rejected before any
+    # signature/replay check — even with a valid signature.
+    bad_shape = copy.deepcopy(req)
+    del bad_shape["schemaVersion"]
+    ok, msg = gate.verify_operator_request(bad_shape, pubkey)
+    assert not ok, "non-conformant shape must be rejected"
+    assert "schema violation" in msg.lower(), f"must cite schema, got: {msg}"
+
+    # Forged signature (S-4): bad ed25519 signature must be rejected.
+    forged = copy.deepcopy(req)
+    forged["proof"]["signature"] = "ed25519:" + "0" * 128
+    ok, msg = gate.verify_operator_request(forged, pubkey)
+    assert not ok, "forged operator signature must be rejected"
+    assert "signature" in msg.lower(), f"must cite signature, got: {msg}"
+
+    # Stale cookie (§12.2): 60s replay window — a 120s-old proof must fail
+    # even with a valid signature (re-sign isolates the window conjunct).
+    stale = copy.deepcopy(req)
+    stale["timestamp"] = gate._iso_from_epoch(time.time() - 120)
+    stale["proof"]["signature"] = "ed25519:" + (
+        gate.signer_key().sign(gate.canonical(stale)).hex()
+    )
+    ok, msg = gate.verify_operator_request(stale, pubkey)
+    assert not ok, "stale session proof must be rejected (60s replay window)"
+    assert "stale" in msg.lower(), f"must cite stale window, got: {msg}"
+
+    # Replayed nonce: same nonce seen before must be rejected.
+    seen: set[str] = set()
+    ok, _ = gate.verify_operator_request(req, pubkey, seen_nonces=seen)
+    assert ok
+    replayed = copy.deepcopy(req)
+    replayed["eventId"] = "op_req_9999"
+    replayed["proof"]["signature"] = "ed25519:" + (
+        gate.signer_key().sign(gate.canonical(replayed)).hex()
+    )
+    ok, msg = gate.verify_operator_request(replayed, pubkey, seen_nonces=seen)
+    assert not ok, "replayed nonce must be rejected"
+    assert "nonce" in msg.lower(), f"must cite nonce, got: {msg}"
+
+    # MFA required (§13.1, §19.2): operator without verified MFA is denied
+    # even with a perfect signature + fresh nonce.
+    no_mfa = copy.deepcopy(req)
+    no_mfa["mfa_verified"] = False
+    no_mfa["proof"]["signature"] = "ed25519:" + (
+        gate.signer_key().sign(gate.canonical(no_mfa)).hex()
+    )
+    ok, msg = gate.verify_operator_request(no_mfa, pubkey)
+    assert not ok, "operator without MFA must be rejected"
+    assert "mfa" in msg.lower(), f"must cite MFA, got: {msg}"
+
+
+def test_forged_operator_request(operator_request_gate) -> None:
+    check_forged_operator_request(operator_request_gate)
+
+
+# ---------------------------------------------------------------------------
+# Operator-console gate (Python mirror of the TS operator plane)
+# ---------------------------------------------------------------------------
+
+@pytest.fixture(scope="module")
+def operator_console_gate():
+    """Load harness/contracts/operator_console_gate.py (standalone script)."""
+    spec = importlib.util.spec_from_file_location(
+        "operator_console_gate_under_test", OPERATOR_CONSOLE_GATE
+    )
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _good_manifest(gate, now: float, nonce: str = "nonce-a", **overrides):
+    return {
+        "schemaVersion": "effect-manifest/1",
+        "manifestId": "manifest_0001",
+        "taskId": "task_0001",
+        "effectClass": "workspace.patch",
+        "declaredRiskTier": "T2",
+        "expiresAt": str(now + 3600),
+        "requiredEvidence": [{"ref": "receipt://t", "present": True}],
+        "gideonVerdict": "pass",
+        "vfsEvidenceOk": True,
+        "oneTimeNonce": nonce,
+        "operatorSessionValid": True,
+        **overrides,
+    }
+
+
+def check_operator_console_approval(gate) -> None:
+    """Fixture: operator-console-approval — approve issues a lease, deny
+    records a denial; controls require a valid session + all gates green.
+
+    Verify: controls enabled only with valid operator session + all evidence
+    gates green (AC10–AC13).
+    """
+    import time
+    now = time.time()
+    gate_mod = gate  # module under test
+    gate_mod.ApprovalGate  # noqa: B018 — confirm symbol exists
+    console = gate_mod.ApprovalGate(now=now)
+
+    # All gates green + valid session -> approve.
+    ok, reasons = console.verify_manifest(_good_manifest(gate_mod, now))
+    assert ok and not reasons, f"approve expected, got: {reasons}"
+
+    # Invalid operator session alone must deny.
+    ok2, reasons2 = console.verify_manifest(
+        _good_manifest(gate_mod, now, nonce="nonce-s", operatorSessionValid=False)
+    )
+    assert not ok2 and "operator_session_invalid" in reasons2
+
+    # Gideon fail must deny with the reason recorded.
+    ok3, reasons3 = console.verify_manifest(
+        _good_manifest(gate_mod, now, nonce="nonce-g", gideonVerdict="fail")
+    )
+    assert not ok3 and "gideon_verdict_not_pass" in reasons3
+
+    # Approve issues a lease; deny records a denial (no lease).
+    lease = console.issue_lease(_good_manifest(gate_mod, now, nonce="nonce-l"))
+    assert console.get_lease(lease["leaseId"]) is not None, "lease must be active"
+    denial = console.record_denial(
+        _good_manifest(gate_mod, now, nonce="nonce-d"), ["gideon_verdict_not_pass"]
+    )
+    assert denial["decision"] == "deny"
+
+
+def test_operator_console_approval(operator_console_gate) -> None:
+    check_operator_console_approval(operator_console_gate)
+
+
+def check_operator_console_cancellation(gate) -> None:
+    """Fixture: operator-console-cancellation — cancel an active task.
+
+    Verify: cancellation receipt, lease revoked, workers stopped, VFS
+    workspace cleaned (AC20).
+    """
+    import time
+    now = time.time()
+    console = gate.ApprovalGate(now=now)
+    chain = gate.EvidenceChain()
+    ctrl = gate.TaskController(chain, console)
+
+    lease = console.issue_lease(_good_manifest(gate, now, nonce="nonce-x"))
+    ctrl.start("task_c", ["w1", "w2"])
+    evt = ctrl.cancel("task_c", lease["leaseId"])
+
+    assert evt["kind"] == "task.cancelled"
+    assert evt["payload"]["lease_revoked"] is True
+    assert evt["payload"]["workers_stopped"] is True
+    assert evt["payload"]["workspace_cleaned"] is True
+    assert console.get_lease(lease["leaseId"]) is None, "lease must be revoked"
+
+
+def test_operator_console_cancellation(operator_console_gate) -> None:
+    check_operator_console_cancellation(operator_console_gate)
+
+
+def check_operator_console_integrity_failure(gate) -> None:
+    """Fixture: operator-console-integrity-failure — forged receipt hash.
+
+    Verify: INTEGRITY FAILED alert, approval disabled, record preserved for
+    investigation (AC17–AC18).
+    """
+    chain = gate.EvidenceChain()
+    chain.append(
+        event_id="evt_1", task_id="task_i", kind="snapshot",
+        actor="gideon", integrity="integrity_failed",
+        payload={"receipt_hash": "sha256:" + "f" * 64},
+    )
+    alert = gate.detect_integrity_failure(chain, "task_i")
+    assert alert["alert"] == "INTEGRITY FAILED"
+    assert alert["integrity"] == "integrity_failed"
+    assert alert["approval_disabled"] is True
+    assert alert["preserved_record"] is not None, "record must be preserved"
+
+    # A clean chain raises no alert.
+    clean = gate.EvidenceChain()
+    clean.append(event_id="evt_1", task_id="task_ok", kind="snapshot",
+                 actor="gideon")
+    assert gate.detect_integrity_failure(clean, "task_ok")["alert"] is None
+
+
+def test_operator_console_integrity_failure(operator_console_gate) -> None:
+    check_operator_console_integrity_failure(operator_console_gate)
+
+
+def check_operator_console_readonly_audit(gate) -> None:
+    """Fixture: operator-console-readonly-audit — deterministic read-only task.
+
+    Verify: all six panels render real state, no fabricated content, no-write
+    receipt (AC19).
+    """
+    chain = gate.EvidenceChain()
+    chain.append(event_id="evt_1", task_id="task_r", kind="audit.readonly",
+                 actor="owl-auditor", payload={"worker": "owl-auditor"})
+    audit = gate.run_readonly_audit(chain, "task_r")
+
+    assert audit["fabricated"] is False
+    assert audit["no_write_receipt"]["write_path_exercised"] is False
+    assert audit["no_write_receipt"]["kind"] == "audit.readonly"
+    assert audit["panels"]["approval"] is None, "no approval path in audit"
+    assert audit["panels"]["workers"][0]["id"] == "ant-mapper"
+    assert audit["panels"]["receipts"][0]["kind"] == "audit.readonly"
+
+
+def test_operator_console_readonly_audit(operator_console_gate) -> None:
+    check_operator_console_readonly_audit(operator_console_gate)
 
 
 # ---------------------------------------------------------------------------
