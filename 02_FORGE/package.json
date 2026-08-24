@@ -1,28 +1,25 @@
 {
-    "name": "camelot-forge",
-    "version": "1.0.0",
-    "private": true,
-    "description": "CAMELOT-OS 02_FORGE monorepo — Turborepo orchestrated build system",
-    "scripts": {
-        "build": "turbo run build",
-        "dev": "turbo run dev",
-        "lint": "turbo run lint",
-        "test": "turbo run test",
-        "typecheck": "turbo run typecheck",
-        "clean": "turbo run clean && rimraf node_modules dist .next .turbo",
-        "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\""
-    },
-    "workspaces": [
-        "apps/*",
-        "packages/*"
-    ],
-    "engines": {
-        "node": ">=18"
-    },
-    "packageManager": "pnpm@9.15.4",
-    "devDependencies": {
-        "turbo": "^2.5.6",
-        "prettier": "^3.5.3",
-        "rimraf": "^6.0.1"
-    }
+  "name": "camelot-forge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CAMELOT-OS 02_FORGE monorepo — Turborepo orchestrated build system",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "clean": "turbo run clean && rimraf node_modules dist .next .turbo",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\""
+  },
+  "workspaces": ["apps/*", "packages/*"],
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.15.4",
+  "devDependencies": {
+    "turbo": "^2.5.6",
+    "prettier": "^3.5.3",
+    "rimraf": "^6.0.1"
+  }
 }
