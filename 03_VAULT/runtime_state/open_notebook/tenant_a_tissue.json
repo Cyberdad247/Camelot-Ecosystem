@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "TENANT_A",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_3d5e4b640d783d6173008dc7bc80516cb66e0392180cb119943f52257b8f5ef4",
+    "content": "Shared Prefix",
+    "vfs_path": "vfs://worldtree/knights/tenant_a/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_TENANT_A",
+    "open_viking_tether": "open_viking://worldtree/tenant_a",
+    "updated_at": "2026-08-24T14:25:22.718747+00:00"
+  }
+]

@@ -49,3 +49,17 @@ Call log:
 Call log:
   - navigating to "https://notebooklm.google.com/", waiting until "load"
 
+---
+## 2026-08-24T14:38:11.344942+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - Page.wait_for_timeout: Target page, context or browser has been closed
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: Page.wait_for_timeout: Target page, context or browser has been closed
+---
+## 2026-08-24T14:39:12.558846+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - Page.wait_for_timeout: Target page, context or browser has been closed
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: Page.wait_for_timeout: Target page, context or browser has been closed
