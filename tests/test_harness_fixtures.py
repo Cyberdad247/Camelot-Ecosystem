@@ -1,0 +1,480 @@
+# SPDX-License-Identifier: MIT
+
+"""Harness fixture coverage gate.
+
+Wires the 29 ``harness/fixtures/*/README.md`` security-behavior specs into
+machine-checked test coverage. Each README is a fixture spec with a
+``Verify:`` clause naming the production gate it must back. This module
+enforces three layers:
+
+1. STRUCTURE — every fixture directory has a well-formed README (title
+   matching the directory, a scenario, a ``Verify:`` clause, and at least
+   one ``§x.y`` section reference). A malformed README fails the gate.
+2. MANIFEST — every fixture is classified into an evidence class with an
+   explicit wiring target:
+
+   - ``confirmed``: the fixture's Verify clause is exercised in this module
+     against real code (today: the §11.3 receipt chain).
+   - ``planned``: a real implementation exists in the tree but the exact
+     verify gate is not yet wired into this module.
+   - ``aspirational``: the README is a spec only — no implementation
+     exists in the tree yet.
+
+   Nothing is silently dropped: the manifest must cover exactly the
+   fixture directories on disk.
+3. WIRING — confirmed fixtures execute their Verify clause against
+   ``harness/contracts/verify_receipt_chain.py`` (the pinned-key §11.3
+   chain: self_hash, ed25519 signature, height continuity, parent linkage,
+   epoch freshness, tenant binding via canonical serialization).
+
+Evidence-class discipline follows the repository constitution: a fixture
+is never claimed tested unless this module actually runs its check against
+live code.
+"""
+
+from __future__ import annotations
+
+import copy
+import importlib.util
+import re
+from pathlib import Path
+
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
+FIXTURES_DIR = REPO_ROOT / "harness" / "fixtures"
+VERIFY_RECEIPT_CHAIN = REPO_ROOT / "harness" / "contracts" / "verify_receipt_chain.py"
+
+# ---------------------------------------------------------------------------
+# Fixture discovery
+# ---------------------------------------------------------------------------
+
+EXPECTED_FIXTURES: tuple[str, ...] = (
+    "VFS_path_escape",
+    "VPS_network_partition",
+    "cached_epoch_across_policy_bump",
+    "cartridge_exceeding_risk_tier_invariant_cap",
+    "cross_policy_namespace_cache_hit",
+    "cross_tenant_cache_key",
+    "cross_tenant_event_query",
+    "duplicate_provider_webhook",
+    "equota_promotion_with_witness_unreachable",
+    "expired_effect_manifest",
+    "forged_node_receipt",
+    "forged_operator_request",
+    "local_twin_promotion",
+    "malformed_symbolect_tree",
+    "mobile_epoch_window_expired",
+    "mobile_permission_denied",
+    "network_call_without_lease",
+    "operator-console-approval",
+    "operator-console-cancellation",
+    "operator-console-integrity-failure",
+    "operator-console-readonly-audit",
+    "prohibited_process_execution",
+    "prompt_injection_document",
+    "receipt_parent_hash_tamper",
+    "single_operator_t3_approval_attempt",
+    "stale_authority_epoch",
+    "unauthorized_persona_capability",
+    "unauthorized_secret_handle",
+    "untrusted_memory_promotion",
+)
+
+# Evidence manifest: fixture -> (evidence_class, wiring_target, reason).
+# The wiring target names the check in this module (or the on-disk code)
+# that backs the fixture's Verify clause.
+FIXTURE_MANIFEST: dict[str, tuple[str, str, str]] = {
+    "forged_node_receipt": (
+        "confirmed",
+        "check_forged_signature",
+        "verify_chain rejects bad ed25519 signature / self_hash mismatch (§11.3)",
+    ),
+    "receipt_parent_hash_tamper": (
+        "confirmed",
+        "check_parent_hash_tamper",
+        "verify_chain detects parent_hash rewrite via re-derivation + linkage (§11.3)",
+    ),
+    "stale_authority_epoch": (
+        "confirmed",
+        "check_stale_epoch",
+        "verify_chain rejects authority_epoch below trusted (§6.3, §11.3 D-4)",
+    ),
+    "cross_tenant_event_query": (
+        "planned",
+        "check_tenant_binding",
+        "receipt chain enforces tenant binding via canonical serialization (S-3); "
+        "retrieval-denial layer is not implemented — chain side wired here",
+    ),
+    "malformed_symbolect_tree": (
+        "planned",
+        "01_KERNEL/merlin/Engines/symbolect_transpiler/symbolect.py",
+        "SymbolectTranspiler exists (encode/decode/parse) but has no "
+        "validation/rejection path; §17.3 gate not implemented",
+    ),
+    "operator-console-approval": (
+        "planned",
+        "apps/pwa/src/lib/operator_console/",
+        "real TS implementation (schemas.ts, integrity.ts, operator-api.ts) "
+        "with its own .test.ts suite; no Python harness wiring",
+    ),
+    "operator-console-cancellation": (
+        "planned",
+        "apps/pwa/src/lib/operator_console/",
+        "real TS implementation with its own .test.ts suite; no Python harness wiring",
+    ),
+    "operator-console-integrity-failure": (
+        "planned",
+        "apps/pwa/src/lib/operator_console/integrity.ts",
+        "integrity.snapshot.ts + integrity.test.ts exist; no Python harness wiring",
+    ),
+    "operator-console-readonly-audit": (
+        "planned",
+        "apps/bifrost/src/operator/",
+        "real TS implementation (receipts.ts, chain.ts, sentinel.ts); no Python harness wiring",
+    ),
+    "VFS_path_escape": (
+        "aspirational",
+        "",
+        "no VFSGuardian / path-escape guard implementation in tree (§14.1, §14.3)",
+    ),
+    "VPS_network_partition": (
+        "aspirational",
+        "",
+        "no failover/twin promotion implementation in tree (§6.4, §25.1)",
+    ),
+    "cached_epoch_across_policy_bump": (
+        "aspirational",
+        "",
+        "no mobile epoch-cache implementation in tree (§10.3, §6.3)",
+    ),
+    "cartridge_exceeding_risk_tier_invariant_cap": (
+        "aspirational",
+        "",
+        "no risk-tier invariant derivation in tree (§13.3, §8.2)",
+    ),
+    "cross_policy_namespace_cache_hit": (
+        "aspirational",
+        "",
+        "no HMAC cache namespace implementation in tree (§15.6, §25.1)",
+    ),
+    "cross_tenant_cache_key": (
+        "aspirational",
+        "",
+        "no HMAC cache namespace implementation in tree (§15.6)",
+    ),
+    "duplicate_provider_webhook": (
+        "aspirational",
+        "",
+        "no provider webhook signature/dedupe implementation in tree (§20.x)",
+    ),
+    "equota_promotion_with_witness_unreachable": (
+        "aspirational",
+        "",
+        "no witness-quorum failover implementation in tree (§6.5)",
+    ),
+    "expired_effect_manifest": (
+        "aspirational",
+        "",
+        "no effect-manifest expiry enforcement in tree (§13.2)",
+    ),
+    "forged_operator_request": (
+        "aspirational",
+        "",
+        "no operator-request signature/replay gate in tree (§12.2, §13.1, §19.2)",
+    ),
+    "local_twin_promotion": (
+        "aspirational",
+        "",
+        "no promotion/fencing controller implementation in tree (§6.4, §6.5)",
+    ),
+    "mobile_epoch_window_expired": (
+        "aspirational",
+        "",
+        "no mobile epoch-window enforcement in tree (§10.3)",
+    ),
+    "mobile_permission_denied": (
+        "aspirational",
+        "",
+        "no Android permission broker in tree (§10.1)",
+    ),
+    "network_call_without_lease": (
+        "aspirational",
+        "",
+        "no network lease / egress boundary implementation in tree (§13.3)",
+    ),
+    "prohibited_process_execution": (
+        "aspirational",
+        "",
+        "no native process supervisor in tree (§14.1)",
+    ),
+    "prompt_injection_document": (
+        "aspirational",
+        "",
+        "no context-compiler stripping path in tree (§15.3)",
+    ),
+    "single_operator_t3_approval_attempt": (
+        "aspirational",
+        "",
+        "no two-person-rule approval gate in tree (§5.5)",
+    ),
+    "unauthorized_persona_capability": (
+        "aspirational",
+        "",
+        "no persona prohibited-capability compile gate in tree (§16, §13.3)",
+    ),
+    "unauthorized_secret_handle": (
+        "aspirational",
+        "",
+        "no secret-broker handle authorization in tree (§14.3)",
+    ),
+    "untrusted_memory_promotion": (
+        "aspirational",
+        "",
+        "no memory-promotion VFS/lease gate in tree (§15.1, §15.3)",
+    ),
+}
+
+_CONFIRMED = {n for n, (cls, _, _) in FIXTURE_MANIFEST.items() if cls == "confirmed"}
+_PLANNED = {n for n, (cls, _, _) in FIXTURE_MANIFEST.items() if cls == "planned"}
+_ASPIRATIONAL = {n for n, (cls, _, _) in FIXTURE_MANIFEST.items() if cls == "aspirational"}
+
+_VERIFY_TOKEN_RE = re.compile(r"Verify:\s*(.+)$", re.MULTILINE)
+# §x.y / §x.y.z section refs, the spec shorthand §x.y.z.k, and Operator
+# Console acceptance-criteria refs (AC10–AC13, AC20, …).
+_SECTION_RE = re.compile(r"§\d+(?:\.\d+|\.[A-Za-z])+|AC\d+(?:–AC\d+)?")
+
+
+def read_fixture_readme(name: str) -> str:
+    """Return the raw README text for a fixture, or raise on absence."""
+    readme = FIXTURES_DIR / name / "README.md"
+    if not readme.is_file():
+        raise FileNotFoundError(f"fixture {name!r} has no README.md at {readme}")
+    return readme.read_text(encoding="utf-8")
+
+
+def parse_fixture(name: str) -> dict[str, str]:
+    """Parse a fixture README into {title, scenario, verify, sections}."""
+    text = read_fixture_readme(name)
+    title_m = re.search(r"^# Fixture:\s*(.+)$", text, re.MULTILINE)
+    verify_m = _VERIFY_TOKEN_RE.search(text)
+    scenario = " ".join(text.splitlines()[2:]) if text.splitlines() else ""
+    sections = _SECTION_RE.findall(text)
+    return {
+        "title": title_m.group(1).strip() if title_m else "",
+        "scenario": scenario,
+        "verify": verify_m.group(1).strip() if verify_m else "",
+        "sections": sections,
+    }
+
+
+# ---------------------------------------------------------------------------
+# Layer 1 — structural validation (all 29 fixtures)
+# ---------------------------------------------------------------------------
+
+def test_all_expected_fixture_dirs_exist() -> None:
+    on_disk = sorted(p.name for p in FIXTURES_DIR.iterdir() if p.is_dir())
+    missing = [n for n in EXPECTED_FIXTURES if n not in on_disk]
+    extra = [n for n in on_disk if n not in EXPECTED_FIXTURES]
+    assert not missing, f"fixture dirs missing: {missing}"
+    assert not extra, f"unexpected fixture dirs (update EXPECTED_FIXTURES): {extra}"
+
+
+@pytest.mark.parametrize("name", EXPECTED_FIXTURES)
+def test_fixture_readme_is_wellformed(name: str) -> None:
+    parsed = parse_fixture(name)
+    assert parsed["title"] == name, (
+        f"{name}: README title {parsed['title']!r} does not match fixture dir name"
+    )
+    assert len(parsed["scenario"]) > 40, f"{name}: scenario prose missing or too short"
+    assert parsed["verify"], f"{name}: missing 'Verify:' clause"
+    assert parsed["sections"], f"{name}: missing §x.y section reference(s)"
+
+
+# ---------------------------------------------------------------------------
+# Layer 2 — evidence manifest completeness
+# ---------------------------------------------------------------------------
+
+def test_manifest_covers_every_fixture_exactly_once() -> None:
+    on_disk = {p.name for p in FIXTURES_DIR.iterdir() if p.is_dir()}
+    assert on_disk == set(FIXTURE_MANIFEST), (
+        "FIXTURE_MANIFEST must cover exactly the on-disk fixtures"
+    )
+
+
+def test_evidence_class_totals() -> None:
+    """Guard against silent classification drift as fixtures get wired."""
+    assert len(_CONFIRMED) == 3, f"confirmed set changed: {sorted(_CONFIRMED)}"
+    assert len(_PLANNED) == 6, f"planned set changed: {sorted(_PLANNED)}"
+    assert len(_ASPIRATIONAL) == 20, f"aspirational set changed: {sorted(_ASPIRATIONAL)}"
+    assert len(FIXTURE_MANIFEST) == 29
+
+
+def test_aspirational_fixtures_have_no_impl_ref() -> None:
+    """Aspirational fixtures must not claim a wiring target."""
+    for name, (cls, target, reason) in FIXTURE_MANIFEST.items():
+        if cls == "aspirational":
+            assert not target, f"{name}: aspirational fixture must have empty wiring target"
+            assert reason, f"{name}: aspirational fixture needs a reason"
+
+
+def test_planned_fixtures_reference_real_code() -> None:
+    """Planned fixtures must point at code that exists on disk, or at a
+    check function defined in this module (a real, runnable wiring)."""
+    for name, (cls, target, _reason) in FIXTURE_MANIFEST.items():
+        if cls != "planned":
+            continue
+        assert target, f"{name}: planned fixture needs a wiring target"
+        target_path = REPO_ROOT / target
+        if target in globals():
+            continue  # a check function defined in this module
+        assert target_path.exists(), (
+            f"{name}: planned wiring target {target!r} does not exist on disk"
+        )
+
+
+# ---------------------------------------------------------------------------
+# Layer 3 — confirmed wiring against the §11.3 receipt chain
+# ---------------------------------------------------------------------------
+
+@pytest.fixture(scope="module")
+def receipt_chain():
+    """Load harness/contracts/verify_receipt_chain.py (standalone script)."""
+    spec = importlib.util.spec_from_file_location(
+        "verify_receipt_chain_under_test", VERIFY_RECEIPT_CHAIN
+    )
+    assert spec is not None and spec.loader is not None
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def _signed_chain(receipt_chain):
+    """A clean 4-receipt chain (genesis + 3) + its signer public key."""
+    chain, priv = receipt_chain.build_chain()
+    return chain, priv.public_key()
+
+
+def test_confirmed_fixtures_have_checks() -> None:
+    """Every confirmed fixture maps to a check function defined in this module."""
+    expected_checks = {
+        "forged_node_receipt": "check_forged_signature",
+        "receipt_parent_hash_tamper": "check_parent_hash_tamper",
+        "stale_authority_epoch": "check_stale_epoch",
+    }
+    for name, (cls, target, _reason) in FIXTURE_MANIFEST.items():
+        if cls == "confirmed":
+            assert name in expected_checks, f"{name}: no expected check mapping"
+            assert target == expected_checks[name]
+            assert target in globals(), f"{name}: check {target!r} not defined"
+
+
+def check_forged_signature(receipt_chain) -> None:
+    """Fixture: forged_node_receipt — forged signer/bad signature must fail.
+
+    Verify: receipt_signature_verified fails; chain linkage refused; no
+    chain discontinuity introduced (§11.3).
+    """
+    chain, pubkey = _signed_chain(receipt_chain)
+    # Valid chain verifies first (sanity).
+    ok, msg = receipt_chain.verify_chain(chain, pubkey)
+    assert ok, f"sanity: clean chain must verify, got: {msg}"
+    # Forge rcp_0002's signature (S-4 analogue).
+    forged = copy.deepcopy(chain)
+    forged[2]["proof"]["signature"] = "ed25519:" + "0" * 128
+    ok, msg = receipt_chain.verify_chain(forged, pubkey)
+    assert not ok, "forged signature must fail verification"
+    assert "signature" in msg.lower(), f"failure must cite signature, got: {msg}"
+
+
+def test_forged_node_receipt(receipt_chain) -> None:
+    check_forged_signature(receipt_chain)
+
+
+def check_parent_hash_tamper(receipt_chain) -> None:
+    """Fixture: receipt_parent_hash_tamper — parent_hash rewrite must break
+    the chain link.
+
+    Verify: tamper_detection_verified catches the rewrite;
+    receipt_chain_verified fails at the broken link (§11.3).
+    """
+    chain, pubkey = _signed_chain(receipt_chain)
+    tampered = copy.deepcopy(chain)
+    tampered[2]["parent_hash"] = "sha256:" + "f" * 64
+    ok, msg = receipt_chain.verify_chain(tampered, pubkey)
+    assert not ok, "parent_hash rewrite must fail verification"
+    # parent_hash is part of canonical serialization, so detection may fire
+    # as self_hash mismatch OR as the explicit parent_hash linkage break.
+    assert ("parent_hash" in msg.lower()) or ("self_hash" in msg.lower()), (
+        f"failure must cite parent_hash/self_hash, got: {msg}"
+    )
+
+
+def test_receipt_parent_hash_tamper(receipt_chain) -> None:
+    check_parent_hash_tamper(receipt_chain)
+
+
+def check_stale_epoch(receipt_chain) -> None:
+    """Fixture: stale_authority_epoch — message signed under an epoch below
+    the trusted epoch must be rejected.
+
+    Verify: stale_epoch_rejection_tested passes; stale leases and control
+    messages denied (§6.3, §13.1).
+    """
+    chain, pubkey = _signed_chain(receipt_chain)
+    trusted = receipt_chain.TRUSTED_EPOCH
+    stale = copy.deepcopy(chain)
+    stale[2]["authority_epoch"] = trusted - 1
+    # Re-sign so only the epoch rule can fail (isolates the conjunct).
+    stale[2]["self_hash"] = receipt_chain.sha256_hex(receipt_chain.canonical(stale[2]))
+    stale[2]["proof"]["signature"] = "ed25519:" + (
+        _priv_from_chain(receipt_chain).sign(receipt_chain.canonical(stale[2])).hex()
+    )
+    ok, msg = receipt_chain.verify_chain(stale, pubkey, trusted_epoch=trusted)
+    assert not ok, "stale epoch must fail verification"
+    assert "epoch" in msg.lower(), f"failure must cite epoch, got: {msg}"
+
+
+def test_stale_authority_epoch(receipt_chain) -> None:
+    check_stale_epoch(receipt_chain)
+
+
+def _priv_from_chain(receipt_chain):
+    """The pinned TEST-ONLY signer private key (same deterministic key the
+    harness uses; used only to re-sign an isolated tamper case)."""
+    return receipt_chain.signer_key()
+
+
+def check_tenant_binding(receipt_chain) -> None:
+    """Chain-side tenant binding (S-3) — tenant_id is part of canonical
+    serialization, so a cross-tenant injection breaks self_hash/signature
+    even without touching the linkage fields.
+
+    Backs fixture: cross_tenant_event_query (chain side). Retrieval-denial
+    layer is aspirational.
+    """
+    chain, pubkey = _signed_chain(receipt_chain)
+    injected = copy.deepcopy(chain)
+    injected[1]["tenant_id"] = "tenant_other"
+    ok, msg = receipt_chain.verify_chain(injected, pubkey)
+    assert not ok, "cross-tenant injection must fail verification"
+    assert "self_hash" in msg.lower() or "signature" in msg.lower(), (
+        f"failure must cite self_hash/signature, got: {msg}"
+    )
+
+
+def test_cross_tenant_chain_binding(receipt_chain) -> None:
+    check_tenant_binding(receipt_chain)
+
+
+# ---------------------------------------------------------------------------
+# Summary surface — the gate reports the wiring map on demand
+# ---------------------------------------------------------------------------
+
+def test_fixture_wiring_summary(capsys) -> None:
+    """Print the evidence-class map so CI logs show coverage at a glance."""
+    lines = ["harness fixture coverage map:"]
+    for name in EXPECTED_FIXTURES:
+        cls, target, reason = FIXTURE_MANIFEST[name]
+        lines.append(f"  {name:45s} {cls:12s} {target or '(spec only)'}")
+    print("\n".join(lines))
