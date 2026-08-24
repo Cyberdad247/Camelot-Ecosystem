@@ -85,6 +85,14 @@ nul
 
 # Camelot generated runtime state
 .hive/context/
+# Runtime databases and memory stores (binary churn — never version)
+*.rdb
+01_KERNEL/memory/tissue/*.toon
+01_KERNEL/titan/memory/*.toon
+01_KERNEL/titan/Data_Pipeline/*.db
+01_KERNEL/titan/Titan_Graph/chromadb/*.sqlite3
+01_KERNEL/agora/Squires/data/sqlite-db/*.sqlite
+03_VAULT/runtime_state/universal_vkg_crystal.toon
 03_VAULT/runtime_state/nano_swarm_dry_runs/
 03_VAULT/runtime_state/preflight/
 03_VAULT/runtime_state/20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T*/
