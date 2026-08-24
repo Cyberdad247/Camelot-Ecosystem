@@ -1,0 +1,20 @@
+{
+  "status": "ROUTED",
+  "routed": true,
+  "classification": "runic",
+  "input": "//PLAN build cockpit",
+  "rune": "//PLAN",
+  "knight": "merlin_omega",
+  "mode": "ORACLE",
+  "directive": "//PLAN build cockpit",
+  "task_id": "rune-39051971",
+  "queued": true,
+  "queue_error": null,
+  "metadata": {
+    "action": "tot_planning",
+    "output": "Plan.json",
+    "param": "build cockpit"
+  },
+  "latency_ms": 8.86,
+  "timestamp_utc": "2026-08-24T14:56:01.630217+00:00"
+}
