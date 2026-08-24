@@ -1,28 +1,25 @@
 import assert from 'node:assert/strict';
-import { runAntigravity } from '../execution/antigravity-engine';
 import { signDag, verifyDagSignature } from '../provenance/dag-signer';
-import { InMemoryCommandQueue } from '../runtime/command-queue';
 import { buildPromptDependencyGraph, enforceAgentArmor } from '../security/agentarmor-pdg';
+import { runAntigravity } from '../execution/antigravity-engine';
+import { InMemoryCommandQueue } from '../runtime/command-queue';
 
 const secret = 'test-secret-that-is-long-enough';
 
-const envelope = signDag(
-  {
-    dagId: 'dag_test',
-    root: 'a',
-    nodes: {
-      a: { id: 'a', kind: 'test', intent: 'verify' },
-    },
-  },
-  secret,
-);
+const envelope = signDag({
+  dagId: 'dag_test',
+  root: 'a',
+  nodes: {
+    a: { id: 'a', kind: 'test', intent: 'verify' }
+  }
+}, secret);
 assert.equal(verifyDagSignature(envelope, secret), true);
 
 const graph = buildPromptDependencyGraph({
   sourceLabel: 'web_page',
   sourceIntegrity: 'LOW_INTEGRITY',
   transforms: ['APEE'],
-  sink: 'file_delete',
+  sink: 'file_delete'
 });
 const armor = enforceAgentArmor(graph);
 assert.equal(armor.allowed, false);
@@ -44,18 +41,10 @@ import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope
   const { reconcileTrust, gateIntent } = await import('../bifrost/bifrost-gateway');
 
   const bsecret = 'bifrost-mesh-secret';
-  const env = sealEnvelope(
-    { intent: 'status_check' },
-    {
-      type: 'intent',
-      src: 'excalibur',
-      dst: 'cybertronia',
-      realm: 'camelot',
-      node: 'console',
-      seq: 1,
-      secret: bsecret,
-    },
-  );
+  const env = sealEnvelope({ intent: 'status_check' }, {
+    type: 'intent', src: 'excalibur', dst: 'cybertronia', realm: 'camelot',
+    node: 'console', seq: 1, secret: bsecret
+  });
 
   // Valid envelope verifies
   assert.equal(verifyEnvelope(env, { secret: bsecret }).valid, true);
@@ -84,7 +73,7 @@ import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope
   const caps = fsm.capabilities;
   assert.deepEqual(
     [caps.sessions, caps.commits, caps.upgrades, caps.forward, caps.recoveryOnly],
-    [false, false, false, false, true],
+    [false, false, false, false, true]
   );
   fsm.dispatch('recovery_verified');
   assert.equal(fsm.state, 'recovered');
@@ -97,31 +86,16 @@ import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope
   // End-to-end gate: healthy node + signed envelope + benign intent → allow
   const healthy = new HeimdallFsm('console');
   const decision = gateIntent(
-    {
-      intent: 'status',
-      payload: { text: 'show system status' },
-      requiresApproval: false,
-      riskLevel: 'low',
-    } as any,
-    env2(),
-    { secret: bsecret },
-    healthy,
+    { intent: 'status', payload: { text: 'show system status' }, requiresApproval: false, riskLevel: 'low' } as any,
+    env2(), { secret: bsecret }, healthy
   );
   assert.equal(decision.proceed, true);
 
   function env2() {
-    return sealEnvelope(
-      { intent: 'status' },
-      {
-        type: 'intent',
-        src: 'excalibur',
-        dst: 'console',
-        realm: 'camelot',
-        node: 'console',
-        seq: 2,
-        secret: bsecret,
-      },
-    );
+    return sealEnvelope({ intent: 'status' }, {
+      type: 'intent', src: 'excalibur', dst: 'console', realm: 'camelot',
+      node: 'console', seq: 2, secret: bsecret
+    });
   }
 
   // ── Bifrost phase 2: FFI policy, queues, ledger chain, registration gate ──
@@ -147,21 +121,10 @@ import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope
 
   // Queue: overflow policy per class
   const q = new BifrostQueue(2, { secret: bsecret });
-  const mk = (priority: any, type = 'telemetry', policy?: string) =>
-    sealEnvelope(
-      { t: type },
-      {
-        type,
-        src: 'excalibur',
-        dst: 'cybertronia',
-        realm: 'camelot',
-        node: 'console',
-        seq: 1,
-        secret: bsecret,
-        priority,
-        policyDecision: policy,
-      },
-    );
+  const mk = (priority: any, type = 'telemetry', policy?: string) => sealEnvelope({ t: type }, {
+    type, src: 'excalibur', dst: 'cybertronia', realm: 'camelot', node: 'console',
+    seq: 1, secret: bsecret, priority, policyDecision: policy
+  });
   q.enqueue(mk('normal'), 'p1');
   q.enqueue(mk('normal'), 'p1');
   assert.equal(q.enqueue(mk('high'), 'p1').audit, 'queue.backpressure_applied');
@@ -196,58 +159,20 @@ import('../bifrost/bifrost-envelope').then(async ({ sealEnvelope, verifyEnvelope
 
   // Registration gate: no scoring for invalid nodes; conservative reconciliation
   const okScore = () => ({ band: 'allow' as const });
-  const badId = runRegistrationGate(
-    {
-      nodeId: 'n1',
-      identityValid: false,
-      schemaValid: true,
-      sidecar: { health: 'ok', routeReady: true },
-      realmBands: [],
-    },
-    okScore,
-  );
+  const badId = runRegistrationGate({ nodeId: 'n1', identityValid: false, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: [] }, okScore);
   assert.equal(badId.scoringInvoked, false);
   assert.equal(badId.stage, 'registration');
-  const granted = runRegistrationGate(
-    {
-      nodeId: 'n2',
-      identityValid: true,
-      schemaValid: true,
-      sidecar: { health: 'ok', routeReady: true },
-      realmBands: ['allow'],
-    },
-    okScore,
-  );
+  const granted = runRegistrationGate({ nodeId: 'n2', identityValid: true, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: ['allow'] }, okScore);
   assert.equal(granted.granted, true);
-  const crossRealm = runRegistrationGate(
-    {
-      nodeId: 'n3',
-      identityValid: true,
-      schemaValid: true,
-      sidecar: { health: 'ok', routeReady: true },
-      realmBands: ['allow', 'quarantine'],
-    },
-    okScore,
-  );
+  const crossRealm = runRegistrationGate({ nodeId: 'n3', identityValid: true, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: ['allow', 'quarantine'] }, okScore);
   assert.equal(crossRealm.finalBand, 'quarantine');
   assert.equal(crossRealm.granted, false);
-  const ffiDown = runRegistrationGate(
-    {
-      nodeId: 'n4',
-      identityValid: true,
-      schemaValid: true,
-      sidecar: { health: 'ok', routeReady: true },
-      realmBands: [],
-    },
-    () => ({ error: 'ffi_timeout' as const }),
-  );
+  const ffiDown = runRegistrationGate({ nodeId: 'n4', identityValid: true, schemaValid: true, sidecar: { health: 'ok', routeReady: true }, realmBands: [] }, () => ({ error: 'ffi_timeout' as const }));
   assert.equal(ffiDown.finalBand, 'review');
 
   // Heimdall spec alignment: soft_quarantine → recovered via full revalidation
   const fsm2 = new HeimdallFsm('n5');
-  fsm2.dispatch('anomaly');
-  fsm2.dispatch('anomaly_confirmed');
-  fsm2.dispatch('threshold_breach');
+  fsm2.dispatch('anomaly'); fsm2.dispatch('anomaly_confirmed'); fsm2.dispatch('threshold_breach');
   assert.equal(fsm2.state, 'soft_quarantine');
   fsm2.dispatch('recovery_verified');
   assert.equal(fsm2.state, 'recovered');

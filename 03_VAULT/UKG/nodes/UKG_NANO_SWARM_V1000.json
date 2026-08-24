@@ -117,13 +117,13 @@
   },
 
   "layer_bindings": {
-    "L7_Ethereal": "ANYA_Omega — Meta Compiler Soul",
-    "L6_Governance": "Aegis eBPF O(1) Redaction → Iron Gate",
-    "L5_Agentic": "Z3 SAT-Gated Routing → Paladin HTN",
-    "L4_Semantic": "Myrddin CvRDT Mesh Sync → UKG GraphRAG",
-    "L3_Neural": "Ouroboros 1.58bit SSM → Merlin Videneptus LaC",
-    "L2_Kinetic": "SIR_BORRIS AST Auditor → Saltare / Cribo / Rotel",
-    "L1_Substrate": "eBPF syscall intercept → Modal / Docker"
+    "L7_Ethereal":    "ANYA_Omega — Meta Compiler Soul",
+    "L6_Governance":  "Aegis eBPF O(1) Redaction → Iron Gate",
+    "L5_Agentic":     "Z3 SAT-Gated Routing → Paladin HTN",
+    "L4_Semantic":    "Myrddin CvRDT Mesh Sync → UKG GraphRAG",
+    "L3_Neural":      "Ouroboros 1.58bit SSM → Merlin Videneptus LaC",
+    "L2_Kinetic":     "SIR_BORRIS AST Auditor → Saltare / Cribo / Rotel",
+    "L1_Substrate":   "eBPF syscall intercept → Modal / Docker"
   },
 
   "connected_nodes": [

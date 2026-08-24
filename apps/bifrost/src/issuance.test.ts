@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 import { describe, expect, it } from 'vitest';
-import { FRESHNESS_TOLERANCE_MS, TTL_MS, issueSignedAction } from './issuance';
+import { issueSignedAction, TTL_MS, FRESHNESS_TOLERANCE_MS } from './issuance';
 
 const SECRET = 'unit-test-secret';
 

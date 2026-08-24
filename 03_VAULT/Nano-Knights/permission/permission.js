@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Set up i18n text content
-  document.getElementById('title').textContent = chrome.i18n.getMessage(
-    'permissions_microphone_title',
-  );
-  document.getElementById('description').textContent = chrome.i18n.getMessage(
-    'permissions_microphone_description',
-  );
+  document.getElementById('title').textContent = chrome.i18n.getMessage('permissions_microphone_title');
+  document.getElementById('description').textContent = chrome.i18n.getMessage('permissions_microphone_description');
 
   const requestButton = document.getElementById('requestPermission');
   const statusText = document.getElementById('status');
@@ -21,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
       // Permission granted - stop the tracks immediately
-      stream.getTracks().forEach((track) => track.stop());
+      stream.getTracks().forEach(track => track.stop());
 
       // Update UI
       statusText.textContent = chrome.i18n.getMessage('permissions_microphone_grantedSuccess');
@@ -54,17 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Check if permission is already granted
   navigator.permissions
     .query({ name: 'microphone' })
-    .then((permissionStatus) => {
+    .then(permissionStatus => {
       if (permissionStatus.state === 'granted') {
         statusText.textContent = chrome.i18n.getMessage('permissions_microphone_alreadyGranted');
         statusText.className = 'success';
-        requestButton.textContent = chrome.i18n.getMessage(
-          'permissions_microphone_alreadyGrantedButton',
-        );
+        requestButton.textContent = chrome.i18n.getMessage('permissions_microphone_alreadyGrantedButton');
         requestButton.disabled = true;
       }
     })
-    .catch((err) => {
+    .catch(err => {
       console.log('Permission query not supported:', err);
     });
 });

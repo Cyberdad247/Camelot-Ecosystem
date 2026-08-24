@@ -3,16 +3,7 @@
   "$id": "harness/contracts/test-run-result.schema.json",
   "title": "Test Run Result (test-run-result/1)",
   "type": "object",
-  "required": [
-    "schemaVersion",
-    "runId",
-    "taskId",
-    "correlationId",
-    "runner",
-    "status",
-    "startedAt",
-    "outputHash"
-  ],
+  "required": ["schemaVersion", "runId", "taskId", "correlationId", "runner", "status", "startedAt", "outputHash"],
   "properties": {
     "schemaVersion": { "const": "test-run-result/1" },
     "runId": { "type": "string" },

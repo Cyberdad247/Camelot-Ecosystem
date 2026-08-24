@@ -1,27 +1,27 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-'use client';
+"use client";
 
+import { useState, useCallback } from "react";
 import {
-  BarVisualizer,
-  DisconnectButton,
   LiveKitRoom,
   RoomAudioRenderer,
   useVoiceAssistant,
-} from '@livekit/components-react';
-import { useCallback, useState } from 'react';
-import '@livekit/components-styles';
+  BarVisualizer,
+  DisconnectButton,
+} from "@livekit/components-react";
+import "@livekit/components-styles";
 
 function TashaSession({ onDisconnect }: { onDisconnect: () => void }) {
   const { state, audioTrack } = useVoiceAssistant();
 
   const statusText: Record<string, string> = {
-    disconnected: 'Connecting...',
-    connecting: 'Connecting...',
-    initializing: 'Starting...',
-    listening: 'Tasha is listening',
-    thinking: 'Tasha is thinking...',
-    speaking: 'Tasha is speaking',
+    disconnected: "Connecting...",
+    connecting: "Connecting...",
+    initializing: "Starting...",
+    listening: "Tasha is listening",
+    thinking: "Tasha is thinking...",
+    speaking: "Tasha is speaking",
   };
 
   return (
@@ -36,7 +36,9 @@ function TashaSession({ onDisconnect }: { onDisconnect: () => void }) {
         />
       </div>
 
-      <p className="text-sm text-white/70 font-medium">{statusText[state] || 'Connected'}</p>
+      <p className="text-sm text-white/70 font-medium">
+        {statusText[state] || "Connected"}
+      </p>
 
       <DisconnectButton
         className="px-4 py-2 rounded-full bg-red-500/80 hover:bg-red-500 text-white text-sm font-medium transition-colors"
@@ -61,14 +63,14 @@ export function TashaVoiceWidget() {
     setConnecting(true);
     setError(null);
     try {
-      const res = await fetch('/api/livekit-token', { method: 'POST' });
-      if (!res.ok) throw new Error('Failed to get connection token');
+      const res = await fetch("/api/livekit-token", { method: "POST" });
+      if (!res.ok) throw new Error("Failed to get connection token");
       const data = await res.json();
       setToken(data.token);
       setLivekitUrl(data.url);
       setIsOpen(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Connection failed');
+      setError(err instanceof Error ? err.message : "Connection failed");
     } finally {
       setConnecting(false);
     }
@@ -107,10 +109,12 @@ export function TashaVoiceWidget() {
               d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
             />
           </svg>
-          {connecting ? 'Connecting...' : 'Talk to Tasha'}
+          {connecting ? "Connecting..." : "Talk to Tasha"}
         </button>
 
-        {error && <p className="mt-2 text-xs text-red-400 text-center">{error}</p>}
+        {error && (
+          <p className="mt-2 text-xs text-red-400 text-center">{error}</p>
+        )}
       </div>
     );
   }
@@ -124,7 +128,9 @@ export function TashaVoiceWidget() {
                     overflow-hidden"
       >
         <div className="px-4 py-3 border-b border-white/10 bg-gradient-to-r from-amber-500/10 to-transparent">
-          <h3 className="text-sm font-semibold text-amber-400">Tasha — Voice Receptionist</h3>
+          <h3 className="text-sm font-semibold text-amber-400">
+            Tasha — Voice Receptionist
+          </h3>
         </div>
 
         {token && livekitUrl && (

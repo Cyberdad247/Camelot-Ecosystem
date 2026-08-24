@@ -1,4 +1,4 @@
-import { FLOORS, FLOOR_GAP, type PhaseId, TOWER_TOP_Y, phaseAt } from './tower-data';
+import { FLOORS, FLOOR_GAP, TOWER_TOP_Y, phaseAt, PhaseId } from './tower-data';
 
 /**
  * Camera layout resolution — sealed glyph contract:
@@ -18,7 +18,7 @@ export const BASE_PATH = {
   sweep: Math.PI * 1.5,
   heightOffset: 1.6,
   near: 0.1,
-  far: 80,
+  far: 80
 } as const;
 
 export interface BreakpointLayout {
@@ -34,10 +34,10 @@ export interface BreakpointLayout {
 }
 
 export const BREAKPOINTS: Record<Breakpoint, BreakpointLayout> = {
-  mobile: { fov: 62, baseRadius: 8.6, radiusGrowth: 1.4, framingBias: 0.9, viewportScale: 1.0 },
-  tablet: { fov: 52, baseRadius: 7.8, radiusGrowth: 1.3, framingBias: 0.4, viewportScale: 1.0 },
-  desktop: { fov: 45, baseRadius: 7.2, radiusGrowth: 1.2, framingBias: 0.0, viewportScale: 1.0 },
-  ultrawide: { fov: 40, baseRadius: 7.2, radiusGrowth: 1.2, framingBias: 0.0, viewportScale: 1.15 },
+  mobile:    { fov: 62, baseRadius: 8.6, radiusGrowth: 1.4, framingBias: 0.9,  viewportScale: 1.0 },
+  tablet:    { fov: 52, baseRadius: 7.8, radiusGrowth: 1.3, framingBias: 0.4,  viewportScale: 1.0 },
+  desktop:   { fov: 45, baseRadius: 7.2, radiusGrowth: 1.2, framingBias: 0.0,  viewportScale: 1.0 },
+  ultrawide: { fov: 40, baseRadius: 7.2, radiusGrowth: 1.2, framingBias: 0.0,  viewportScale: 1.15 }
 };
 
 export function breakpointFor(width: number, height: number): Breakpoint {
@@ -56,8 +56,8 @@ export interface FloorLayout {
 }
 
 export const FLOOR_LAYOUTS: Record<string, FloorLayout> = {
-  envelope: { height: 0.8 }, // arrive slightly above the crown
-  yggdrasil: { radius: 1.3, height: -0.7 }, // reverence shot: wide and low at the foundation
+  envelope:  { height: 0.8 },              // arrive slightly above the crown
+  yggdrasil: { radius: 1.3, height: -0.7 } // reverence shot: wide and low at the foundation
 };
 
 export interface CameraPath {
@@ -81,11 +81,7 @@ export interface ResolvedCameraLayout {
 }
 
 /** Phase modifiers — transition behavior as data, reusing the same progress scalar. */
-function applyPhase(
-  phase: PhaseId,
-  working: { radius: number; heightOffset: number; focusY: number },
-  progress: number,
-) {
+function applyPhase(phase: PhaseId, working: { radius: number; heightOffset: number; focusY: number }, progress: number) {
   if (phase === 'arrival') {
     const t = progress / 0.06;
     working.radius += (1 - t) * 3.2;
@@ -103,11 +99,7 @@ function applyPhase(
  *   3. viewport scale    4. phase modifier
  * No side effects; camera.aspect is the renderer's concern.
  */
-export function resolveCameraLayout(
-  width: number,
-  height: number,
-  progress: number,
-): ResolvedCameraLayout {
+export function resolveCameraLayout(width: number, height: number, progress: number): ResolvedCameraLayout {
   const p = Math.min(1, Math.max(0, progress));
   const breakpoint = breakpointFor(width, height);
   const bp = BREAKPOINTS[breakpoint];
@@ -120,7 +112,7 @@ export function resolveCameraLayout(
   const working = {
     radius: (bp.baseRadius + p * bp.radiusGrowth + (override.radius ?? 0)) * bp.viewportScale,
     heightOffset: BASE_PATH.heightOffset + (override.height ?? 0),
-    focusY: TOWER_TOP_Y - p * (lastIndex * FLOOR_GAP),
+    focusY: TOWER_TOP_Y - p * (lastIndex * FLOOR_GAP)
   };
   applyPhase(phase, working, p);
 
@@ -136,11 +128,11 @@ export function resolveCameraLayout(
       x: Math.cos(angle) * working.radius,
       y: working.focusY + working.heightOffset,
       z: Math.sin(angle) * working.radius,
-      focusY: working.focusY,
+      focusY: working.focusY
     },
     fov: bp.fov,
     near: BASE_PATH.near,
     far: BASE_PATH.far,
-    framingBias: bp.framingBias,
+    framingBias: bp.framingBias
   };
 }

@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 
 import { describe, expect, it } from 'vitest';
-import type { DiffEvidence, TestRunResult } from './contracts';
 import { verdictFor } from './gideon';
+import type { DiffEvidence, TestRunResult } from './contracts';
 
 function makeDiff(overrides: Partial<DiffEvidence> = {}): DiffEvidence {
   return {

@@ -8,14 +8,8 @@ window.buildDomTree = (
     startHighlightIndex: 0,
   },
 ) => {
-  const {
-    showHighlightElements,
-    focusHighlightIndex,
-    viewportExpansion,
-    startHighlightIndex,
-    startId,
-    debugMode,
-  } = args;
+  const { showHighlightElements, focusHighlightIndex, viewportExpansion, startHighlightIndex, startId, debugMode } =
+    args;
   // Make sure to do highlight elements always, but we can hide the highlights if needed
   const doHighlightElements = true;
 
@@ -185,7 +179,7 @@ window.buildDomTree = (
       const backgroundColor = baseColor + '1A'; // 10% opacity version of the color
 
       // Get iframe offset if necessary
-      const iframeOffset = { x: 0, y: 0 };
+      let iframeOffset = { x: 0, y: 0 };
       if (parentIframe) {
         const iframeRect = parentIframe.getBoundingClientRect(); // Keep getBoundingClientRect for iframe offset
         iframeOffset.x = iframeRect.left;
@@ -258,7 +252,7 @@ window.buildDomTree = (
       // Update positions on scroll/resize
       const updatePositions = () => {
         const newRects = element.getClientRects(); // Get fresh rects
-        const newIframeOffset = { x: 0, y: 0 };
+        let newIframeOffset = { x: 0, y: 0 };
 
         if (parentIframe) {
           const iframeRect = parentIframe.getBoundingClientRect(); // Keep getBoundingClientRect for iframe
@@ -278,8 +272,7 @@ window.buildDomTree = (
             overlayData.element.style.left = `${newLeft}px`;
             overlayData.element.style.width = `${newRect.width}px`;
             overlayData.element.style.height = `${newRect.height}px`;
-            overlayData.element.style.display =
-              newRect.width === 0 || newRect.height === 0 ? 'none' : 'block';
+            overlayData.element.style.display = newRect.width === 0 || newRect.height === 0 ? 'none' : 'block';
           } else {
             // If fewer rects now, hide extra overlays
             overlayData.element.style.display = 'none';
@@ -340,7 +333,7 @@ window.buildDomTree = (
         window.removeEventListener('scroll', throttledUpdatePositions, true);
         window.removeEventListener('resize', throttledUpdatePositions);
         // Remove overlay elements if needed
-        overlays.forEach((overlay) => overlay.element.remove());
+        overlays.forEach(overlay => overlay.element.remove());
         if (label) label.remove();
       };
 
@@ -352,9 +345,7 @@ window.buildDomTree = (
       // Store cleanup function for later use
       if (cleanupFn) {
         // Keep a reference to cleanup functions in a global array
-        (window._highlightCleanupFunctions = window._highlightCleanupFunctions || []).push(
-          cleanupFn,
-        );
+        (window._highlightCleanupFunctions = window._highlightCleanupFunctions || []).push(cleanupFn);
       }
     }
   }
@@ -385,7 +376,7 @@ window.buildDomTree = (
     const tagName = currentElement.nodeName.toLowerCase();
 
     const siblings = Array.from(currentElement.parentElement.children).filter(
-      (sib) => sib.nodeName.toLowerCase() === tagName,
+      sib => sib.nodeName.toLowerCase() === tagName,
     );
 
     if (siblings.length === 1) {
@@ -406,8 +397,7 @@ window.buildDomTree = (
       // Stop if we hit a shadow root or iframe
       if (
         stopAtBoundary &&
-        (currentElement.parentNode instanceof ShadowRoot ||
-          currentElement.parentNode instanceof HTMLIFrameElement)
+        (currentElement.parentNode instanceof ShadowRoot || currentElement.parentNode instanceof HTMLIFrameElement)
       ) {
         break;
       }
@@ -516,29 +506,12 @@ window.buildDomTree = (
     if (!element || !element.tagName) return false;
 
     // Always accept body and common container elements
-    const alwaysAccept = new Set([
-      'body',
-      'div',
-      'main',
-      'article',
-      'section',
-      'nav',
-      'header',
-      'footer',
-    ]);
+    const alwaysAccept = new Set(['body', 'div', 'main', 'article', 'section', 'nav', 'header', 'footer']);
     const tagName = element.tagName.toLowerCase();
 
     if (alwaysAccept.has(tagName)) return true;
 
-    const leafElementDenyList = new Set([
-      'svg',
-      'script',
-      'style',
-      'link',
-      'meta',
-      'noscript',
-      'template',
-    ]);
+    const leafElementDenyList = new Set(['svg', 'script', 'style', 'link', 'meta', 'noscript', 'template']);
 
     return !leafElementDenyList.has(tagName);
   }
@@ -552,10 +525,7 @@ window.buildDomTree = (
   function isElementVisible(element) {
     const style = getCachedComputedStyle(element);
     return (
-      element.offsetWidth > 0 &&
-      element.offsetHeight > 0 &&
-      style?.visibility !== 'hidden' &&
-      style?.display !== 'none'
+      element.offsetWidth > 0 && element.offsetHeight > 0 && style?.visibility !== 'hidden' && style?.display !== 'none'
     );
   }
 
@@ -638,7 +608,7 @@ window.buildDomTree = (
       return false;
     }
 
-    const isInteractiveCursor = doesElementHaveInteractivePointer(element);
+    let isInteractiveCursor = doesElementHaveInteractivePointer(element);
 
     // Genius fix for almost all interactive elements
     if (isInteractiveCursor) {
@@ -773,8 +743,7 @@ window.buildDomTree = (
       }
 
       const getEventListenersForNode =
-        element?.ownerDocument?.defaultView?.getEventListenersForNode ||
-        window.getEventListenersForNode;
+        element?.ownerDocument?.defaultView?.getEventListenersForNode || window.getEventListenersForNode;
       if (typeof getEventListenersForNode === 'function') {
         const listeners = getEventListenersForNode(element);
         const interactionEvents = [
@@ -829,8 +798,8 @@ window.buildDomTree = (
     // --- PHASE 22: SOURCE GROUNDING ---
     // Inject stable ID for extraction engine
     if (element.nodeType === Node.ELEMENT_NODE && !element.hasAttribute('data-nano-id')) {
-      element.setAttribute('data-nano-id', ID.current);
-      ID.current++;
+        element.setAttribute('data-nano-id', ID.current);
+        ID.current++;
     }
     const nodeId = element.getAttribute ? element.getAttribute('data-nano-id') : null;
 
@@ -843,6 +812,7 @@ window.buildDomTree = (
     // RE-READING STRATEGY:
     // Since I cannot see the specific lines for node construction (it was truncated),
     // I will read the REST of buildDomTree.js first.
+
 
     let isAnyRectInViewport = false;
     for (const rect of rects) {
@@ -870,7 +840,7 @@ window.buildDomTree = (
     }
 
     // Find the correct document context and root element
-    const doc = element.ownerDocument;
+    let doc = element.ownerDocument;
 
     // If we're in an iframe, elements are considered top by default
     if (doc !== window.document) {
@@ -880,10 +850,8 @@ window.buildDomTree = (
     // For shadow DOM, we need to check within its own root context
     const shadowRoot = element.getRootNode();
     if (shadowRoot instanceof ShadowRoot) {
-      const centerX =
-        rects[Math.floor(rects.length / 2)].left + rects[Math.floor(rects.length / 2)].width / 2;
-      const centerY =
-        rects[Math.floor(rects.length / 2)].top + rects[Math.floor(rects.length / 2)].height / 2;
+      const centerX = rects[Math.floor(rects.length / 2)].left + rects[Math.floor(rects.length / 2)].width / 2;
+      const centerY = rects[Math.floor(rects.length / 2)].top + rects[Math.floor(rects.length / 2)].height / 2;
 
       try {
         const topEl = shadowRoot.elementFromPoint(centerX, centerY);
@@ -1016,16 +984,7 @@ window.buildDomTree = (
     const tagName = element.tagName.toLowerCase();
 
     // Fast-path for common interactive elements
-    const interactiveElements = new Set([
-      'a',
-      'button',
-      'input',
-      'select',
-      'textarea',
-      'details',
-      'summary',
-      'label',
-    ]);
+    const interactiveElements = new Set(['a', 'button', 'input', 'select', 'textarea', 'details', 'summary', 'label']);
 
     if (interactiveElements.has(tagName)) return true;
 
@@ -1097,14 +1056,10 @@ window.buildDomTree = (
       typeof element.onclick === 'function';
 
     // Check for semantic class names suggesting interactivity
-    const hasInteractiveClass = /\b(btn|clickable|menu|item|entry|link)\b/i.test(
-      element.className || '',
-    );
+    const hasInteractiveClass = /\b(btn|clickable|menu|item|entry|link)\b/i.test(element.className || '');
 
     // Determine whether the element is inside a known interactive container
-    const isInKnownContainer = Boolean(
-      element.closest('button,a,[role="button"],.menu,.dropdown,.list,.toolbar'),
-    );
+    const isInKnownContainer = Boolean(element.closest('button,a,[role="button"],.menu,.dropdown,.list,.toolbar'));
 
     // Ensure the element has at least one visible child (to avoid marking empty wrappers)
     const hasVisibleChildren = [...element.children].some(isElementVisible);
@@ -1153,11 +1108,7 @@ window.buildDomTree = (
       return true;
     }
     // Check for common testing/automation attributes
-    if (
-      element.hasAttribute('data-testid') ||
-      element.hasAttribute('data-cy') ||
-      element.hasAttribute('data-test')
-    ) {
+    if (element.hasAttribute('data-testid') || element.hasAttribute('data-cy') || element.hasAttribute('data-test')) {
       return true;
     }
     // Check for explicit onclick handler (attribute or property)
@@ -1170,8 +1121,7 @@ window.buildDomTree = (
     // Check for other common interaction event listeners
     try {
       const getEventListenersForNode =
-        element?.ownerDocument?.defaultView?.getEventListenersForNode ||
-        window.getEventListenersForNode;
+        element?.ownerDocument?.defaultView?.getEventListenersForNode || window.getEventListenersForNode;
       if (typeof getEventListenersForNode === 'function') {
         const listeners = getEventListenersForNode(element);
         const interactionEvents = [
@@ -1206,7 +1156,7 @@ window.buildDomTree = (
         'onfocus',
         'onblur',
       ];
-      if (commonEventAttrs.some((attr) => element.hasAttribute(attr))) {
+      if (commonEventAttrs.some(attr => element.hasAttribute(attr))) {
         return true;
       }
     } catch (e) {
@@ -1441,12 +1391,7 @@ window.buildDomTree = (
         if (nodeData.isTopElement || isMenuContainer) {
           nodeData.isInteractive = isInteractiveElement(node);
           // Call the dedicated highlighting function
-          nodeWasHighlighted = handleHighlighting(
-            nodeData,
-            node,
-            parentIframe,
-            isParentHighlighted,
-          );
+          nodeWasHighlighted = handleHighlighting(nodeData, node, parentIframe, isParentHighlighted);
         }
       }
     }
@@ -1509,10 +1454,7 @@ window.buildDomTree = (
     if (nodeData.tagName === 'a' && nodeData.children.length === 0 && !nodeData.attributes.href) {
       // Check if the anchor has actual dimensions
       const rect = getCachedBoundingRect(node);
-      const hasSize =
-        (rect && rect.width > 0 && rect.height > 0) ||
-        node.offsetWidth > 0 ||
-        node.offsetHeight > 0;
+      const hasSize = (rect && rect.width > 0 && rect.height > 0) || node.offsetWidth > 0 || node.offsetHeight > 0;
 
       if (!hasSize) {
         return null;
@@ -1531,50 +1473,46 @@ window.buildDomTree = (
 
   // --- TOON SERIALIZER (Token Optimized Object Notation) ---
   function toTOON(map, rootId) {
-    // Header: N=Hierarchy Indent | ID=NanoID | Tag | Vis=Visibility(T/F) | Text | Ref=RefID
-    const output = ['#@ N|ID|Tag|Vis|Text|Ref'];
+      // Header: N=Hierarchy Indent | ID=NanoID | Tag | Vis=Visibility(T/F) | Text | Ref=RefID
+      let output = ["#@ N|ID|Tag|Vis|Text|Ref"];
 
-    function limitText(text) {
-      if (!text) return '_';
-      return text.replace(/\|/g, '').replace(/\n/g, ' ').substring(0, 60).trim() || '_';
-    }
-
-    function traverse(id, depth) {
-      const node = map[id];
-      if (!node) return;
-
-      const indent = ' '.repeat(depth);
-      const tag = node.tagName.toLowerCase();
-      const vis = node.isVisible ? 'T' : 'F';
-
-      let text = '_';
-      if (node.text)
-        text = limitText(node.text); // TEXT_NODE
-      else if (node.attributes && node.attributes.value) text = limitText(node.attributes.value);
-      else if (node.attributes && node.attributes.placeholder)
-        text = limitText(node.attributes.placeholder);
-      else if (node.attributes && node.attributes['aria-label'])
-        text = limitText(node.attributes['aria-label']);
-
-      // Get the Real Grounding ID (injected earlier)
-      // Note: map[id] is the nodeData. We need the original element to get the attribute?
-      // Wait, buildDomTree returns an ID to map, but doesn't store the Grounding ID in nodeData.
-      // FIX: We need to store the Grounding ID in nodeData during traversal.
-
-      // Fallback if not stored (will fix in next step if needed, but for now assuming logic flow)
-      const groundingId =
-        node.attributes && node.attributes['data-nano-id'] ? node.attributes['data-nano-id'] : '_';
-
-      // Format: Indent | ID | Tag | Vis | Text | GroundingID
-      output.push(`${indent}|${id}|${tag}|${vis}|${text}|${groundingId}`);
-
-      if (node.children) {
-        node.children.forEach((childId) => traverse(childId, depth + 1));
+      function limitText(text) {
+          if (!text) return "_";
+          return text.replace(/\|/g, "").replace(/\n/g, " ").substring(0, 60).trim() || "_";
       }
-    }
 
-    traverse(rootId, 0);
-    return output.join('\n');
+      function traverse(id, depth) {
+          const node = map[id];
+          if (!node) return;
+
+          const indent = " ".repeat(depth);
+          const tag = node.tagName.toLowerCase();
+          const vis = node.isVisible ? "T" : "F";
+
+          let text = "_";
+          if (node.text) text = limitText(node.text); // TEXT_NODE
+          else if (node.attributes && node.attributes.value) text = limitText(node.attributes.value);
+          else if (node.attributes && node.attributes.placeholder) text = limitText(node.attributes.placeholder);
+          else if (node.attributes && node.attributes['aria-label']) text = limitText(node.attributes['aria-label']);
+
+          // Get the Real Grounding ID (injected earlier)
+          // Note: map[id] is the nodeData. We need the original element to get the attribute?
+          // Wait, buildDomTree returns an ID to map, but doesn't store the Grounding ID in nodeData.
+          // FIX: We need to store the Grounding ID in nodeData during traversal.
+
+          // Fallback if not stored (will fix in next step if needed, but for now assuming logic flow)
+          const groundingId = node.attributes && node.attributes['data-nano-id'] ? node.attributes['data-nano-id'] : "_";
+
+          // Format: Indent | ID | Tag | Vis | Text | GroundingID
+          output.push(`${indent}|${id}|${tag}|${vis}|${text}|${groundingId}`);
+
+          if (node.children) {
+              node.children.forEach(childId => traverse(childId, depth + 1));
+          }
+      }
+
+      traverse(rootId, 0);
+      return output.join("\n");
   }
 
   const toonOutput = toTOON(DOM_HASH_MAP, rootId);

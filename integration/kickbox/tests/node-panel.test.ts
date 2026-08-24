@@ -1,9 +1,9 @@
 // Phase 4A UI contract: the Node Status panel shows standing and routing,
 // and never shows an address, key, or credential.
 
+import { describe, expect, it } from 'vitest';
 import { nodeIsServiceable, nodeStandingLabel, routeExplanation } from '@camelot/contracts';
 import type { NodeView } from '@camelot/contracts';
-import { describe, expect, it } from 'vitest';
 import { bandClass, initialNodePanelState, meshSummary } from '../src/node-panel.js';
 
 function node(overrides: Partial<NodeView> = {}): NodeView {
@@ -37,9 +37,9 @@ describe('node standing', () => {
     expect(nodeStandingLabel(node({ trust: 'limited' }))).toContain('read-only');
     expect(nodeStandingLabel(node({ trust: 'pending' }))).toContain('awaiting your approval');
     expect(nodeStandingLabel(node({ trust: 'degraded' }))).toContain('heartbeat stale');
-    expect(
-      nodeStandingLabel(node({ trust: 'revoked', revocationReason: 'lost laptop' })),
-    ).toContain('lost laptop');
+    expect(nodeStandingLabel(node({ trust: 'revoked', revocationReason: 'lost laptop' }))).toContain(
+      'lost laptop',
+    );
     expect(bandClass(node({ trust: 'revoked' }))).toBe('band-revoked');
   });
 });

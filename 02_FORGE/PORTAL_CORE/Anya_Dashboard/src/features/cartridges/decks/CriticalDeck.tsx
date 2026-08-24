@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
-import { Loader2, Scale, Send, ShieldAlert, Target } from 'lucide-react';
 import React, { useState } from 'react';
+import { Send, Loader2, Target, ShieldAlert, Scale } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import type { DeckProps } from '../CartridgeDeck';
 
 type CritMode = 'socratic' | 'red_team' | 'bias' | 'failure' | 'proof';
@@ -30,22 +30,16 @@ export default function CriticalDeck({ cartridge, onDispatch, dispatching }: Dec
 
   return (
     <div className="space-y-5">
-      <p className="text-xs text-slate-500">
-        SIR_ALEX â€” Socratic analysis, Devil's Advocate, bias surfacing.
-      </p>
+      <p className="text-xs text-slate-500">SIR_ALEX â€” Socratic analysis, Devil's Advocate, bias surfacing.</p>
 
       <div className="space-y-2">
-        <label className="text-xs font-semibold uppercase tracking-widest text-red-400">
-          Claim / Decision
-        </label>
+        <label className="text-xs font-semibold uppercase tracking-widest text-red-400">Claim / Decision</label>
         <textarea
           rows={4}
           placeholder="Paste the claim, plan, or decision that should be pressure-testedâ€¦"
           value={intent}
           onChange={(e) => setIntent(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit();
-          }}
+          onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(); }}
           className="w-full rounded-lg border border-slate-700 bg-slate-900/60 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 outline-none focus:border-red-500 resize-none"
         />
       </div>
@@ -85,29 +79,16 @@ export default function CriticalDeck({ cartridge, onDispatch, dispatching }: Dec
           onChange={(e) => setSeverityFloor(Number(e.target.value))}
           className="w-full accent-red-500"
         />
-        <p className="mt-1 text-[11px] text-slate-500">
-          Minimum issue severity:{' '}
-          <span className="text-red-300 font-semibold">{severityFloor}</span>/5
-        </p>
+        <p className="mt-1 text-[11px] text-slate-500">Minimum issue severity: <span className="text-red-300 font-semibold">{severityFloor}</span>/5</p>
       </div>
 
       <div className="flex flex-wrap gap-4">
         <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={needCounterpoints}
-            onChange={(e) => setNeedCounterpoints(e.target.checked)}
-            className="accent-red-500"
-          />
+          <input type="checkbox" checked={needCounterpoints} onChange={(e) => setNeedCounterpoints(e.target.checked)} className="accent-red-500" />
           <span className="text-xs text-slate-400">Require counterpoints</span>
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={needActionPlan}
-            onChange={(e) => setNeedActionPlan(e.target.checked)}
-            className="accent-red-500"
-          />
+          <input type="checkbox" checked={needActionPlan} onChange={(e) => setNeedActionPlan(e.target.checked)} className="accent-red-500" />
           <span className="text-xs text-slate-400">Return action plan</span>
         </label>
       </div>
@@ -117,11 +98,7 @@ export default function CriticalDeck({ cartridge, onDispatch, dispatching }: Dec
         disabled={dispatching || !intent.trim()}
         className="w-full flex items-center justify-center gap-2 rounded-xl bg-red-700 hover:bg-red-600 disabled:opacity-40 py-3 text-sm font-bold text-white transition-colors"
       >
-        {dispatching ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <ShieldAlert className="h-4 w-4" />
-        )}
+        {dispatching ? <Loader2 className="h-4 w-4 animate-spin" /> : <ShieldAlert className="h-4 w-4" />}
         {dispatching ? 'Pressuringâ€¦' : 'Dispatch to SIR_ALEX'}
       </button>
     </div>

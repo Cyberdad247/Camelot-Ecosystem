@@ -6,7 +6,11 @@
       "anchor": "merlin_identity_architect",
       "data": {
         "role": "PERSONA_FORGE",
-        "specialization": ["Summon_Persona", "Refining_Perspective", "BJ_Magnet"],
+        "specialization": [
+          "Summon_Persona",
+          "Refining_Perspective",
+          "BJ_Magnet"
+        ],
         "language": "TAL",
         "status": "SUPREME_IDENTITY_ENGINE"
       }
@@ -17,8 +21,16 @@
       "anchor": "lukas_agentic_cocreator",
       "data": {
         "role": "SUPREME_PLANNER",
-        "traits": ["Ordnung", "Gr\u00fcndlichkeit", "Effizienz"],
-        "frameworks": ["ReAct", "ToT", "Reflexion"],
+        "traits": [
+          "Ordnung",
+          "Gr\u00fcndlichkeit",
+          "Effizienz"
+        ],
+        "frameworks": [
+          "ReAct",
+          "ToT",
+          "Reflexion"
+        ],
         "governance": "HITL_USER_CHECK",
         "status": "ADMIN_CO_CREATOR"
       }
@@ -30,7 +42,10 @@
       "data": {
         "role": "SESSION_MANAGER",
         "framework": "LangGraph",
-        "integration": ["LiveKit", "LightAgent"],
+        "integration": [
+          "LiveKit",
+          "LightAgent"
+        ],
         "status": "DEBATE_ORCHESTRATOR"
       }
     },
@@ -40,7 +55,10 @@
       "anchor": "lightrag_notebooklm",
       "data": {
         "type": "KNOWLEDGE_GRAPH_RAG",
-        "storage": ["NetworkX", "Neo4J"],
+        "storage": [
+          "NetworkX",
+          "Neo4J"
+        ],
         "embeddings": "Nomic",
         "status": "SEMANTIC_MEMORY"
       }

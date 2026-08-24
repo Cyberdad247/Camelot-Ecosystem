@@ -1,32 +1,50 @@
 {
-  "cartridge_id": "BROWSER_CONTROL",
-  "version": "1.0.0",
-  "description": "page-agent MCP bridge (alibaba/page-agent) \u2014 natural-language browser automation via a Chrome extension hub tab, reached over an unauthenticated localhost WebSocket bridge. Vendored per Omega Assimilation 2026-07-08.",
-  "agents": ["Sir_Link"],
-  "tools": ["page_agent.execute_task", "page_agent.get_status", "page_agent.stop_task"],
-  "protocols": ["MCP_stdio"],
-  "capabilities": ["browser_automation", "web_task_execution"],
-  "resource_budget": {
-    "max_tokens": 8000,
-    "max_memory_mb": 256,
-    "max_latency_ms": 30000
-  },
-  "risk_profile": "high",
-  "governance": {
-    "HITL_required": true,
-    "allowed_tools": ["page_agent.execute_task", "page_agent.get_status", "page_agent.stop_task"],
-    "denied_operations": ["unauthorized_cloud_egress", "credential_harvesting"]
-  },
-  "hooks": {
-    "on_load": [],
-    "on_unload": [],
-    "health_check": []
-  },
-  "embeddings": {
-    "static_docs": [],
-    "symbolic_snippets": []
-  },
-  "created_by": "Sir_Boris",
-  "signature": "ed25519:default:sBnLMx0cnwl1EsazGo/n+9sBj12Q2Nj94AJOY062n6oFUEVvP6230pBiN/rdmqLwbk/eo1p8sEnc0xxg5vtBDQ==",
-  "created_at": "2026-07-08T18:50:27Z"
+    "cartridge_id": "BROWSER_CONTROL",
+    "version": "1.0.0",
+    "description": "page-agent MCP bridge (alibaba/page-agent) \u2014 natural-language browser automation via a Chrome extension hub tab, reached over an unauthenticated localhost WebSocket bridge. Vendored per Omega Assimilation 2026-07-08.",
+    "agents": [
+        "Sir_Link"
+    ],
+    "tools": [
+        "page_agent.execute_task",
+        "page_agent.get_status",
+        "page_agent.stop_task"
+    ],
+    "protocols": [
+        "MCP_stdio"
+    ],
+    "capabilities": [
+        "browser_automation",
+        "web_task_execution"
+    ],
+    "resource_budget": {
+        "max_tokens": 8000,
+        "max_memory_mb": 256,
+        "max_latency_ms": 30000
+    },
+    "risk_profile": "high",
+    "governance": {
+        "HITL_required": true,
+        "allowed_tools": [
+            "page_agent.execute_task",
+            "page_agent.get_status",
+            "page_agent.stop_task"
+        ],
+        "denied_operations": [
+            "unauthorized_cloud_egress",
+            "credential_harvesting"
+        ]
+    },
+    "hooks": {
+        "on_load": [],
+        "on_unload": [],
+        "health_check": []
+    },
+    "embeddings": {
+        "static_docs": [],
+        "symbolic_snippets": []
+    },
+    "created_by": "Sir_Boris",
+    "signature": "ed25519:default:sBnLMx0cnwl1EsazGo/n+9sBj12Q2Nj94AJOY062n6oFUEVvP6230pBiN/rdmqLwbk/eo1p8sEnc0xxg5vtBDQ==",
+    "created_at": "2026-07-08T18:50:27Z"
 }

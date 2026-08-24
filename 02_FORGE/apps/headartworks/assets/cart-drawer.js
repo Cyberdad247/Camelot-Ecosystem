@@ -26,8 +26,7 @@ class CartDrawer extends HTMLElement {
   open(triggeredBy) {
     if (triggeredBy) this.setActiveElement(triggeredBy);
     const cartDrawerNote = this.querySelector('[id^="Details-"] summary');
-    if (cartDrawerNote && !cartDrawerNote.hasAttribute('role'))
-      this.setSummaryAccessibility(cartDrawerNote);
+    if (cartDrawerNote && !cartDrawerNote.hasAttribute('role')) this.setSummaryAccessibility(cartDrawerNote);
     // here the animation doesn't seem to always get triggered. A timeout seem to help
     setTimeout(() => {
       this.classList.add('animate', 'active');
@@ -39,11 +38,10 @@ class CartDrawer extends HTMLElement {
         const containerToTrapFocusOn = this.classList.contains('is-empty')
           ? this.querySelector('.drawer__inner-empty')
           : document.getElementById('CartDrawer');
-        const focusElement =
-          this.querySelector('.drawer__inner') || this.querySelector('.drawer__close');
+        const focusElement = this.querySelector('.drawer__inner') || this.querySelector('.drawer__close');
         trapFocus(containerToTrapFocusOn, focusElement);
       },
-      { once: true },
+      { once: true }
     );
 
     document.body.classList.add('overflow-hidden');
@@ -64,10 +62,7 @@ class CartDrawer extends HTMLElement {
     }
 
     cartDrawerNote.addEventListener('click', (event) => {
-      event.currentTarget.setAttribute(
-        'aria-expanded',
-        !event.currentTarget.closest('details').hasAttribute('open'),
-      );
+      event.currentTarget.setAttribute('aria-expanded', !event.currentTarget.closest('details').hasAttribute('open'));
     });
 
     cartDrawerNote.parentElement.addEventListener('keyup', onKeyUpEscape);
@@ -81,10 +76,7 @@ class CartDrawer extends HTMLElement {
       const sectionElement = section.selector
         ? document.querySelector(section.selector)
         : document.getElementById(section.id);
-      sectionElement.innerHTML = this.getSectionInnerHTML(
-        parsedState.sections[section.id],
-        section.selector,
-      );
+      sectionElement.innerHTML = this.getSectionInnerHTML(parsedState.sections[section.id], section.selector);
     });
 
     setTimeout(() => {

@@ -9,12 +9,18 @@
   "claimed_status": "SYSTEM_INSTRUCTIONS_INTEGRATED_ACTIVATION_PENDING",
   "physical_nodes": {
     "Expansion_Ingestion": {
-      "stack": ["Frontier Gemini"],
+      "stack": [
+        "Frontier Gemini"
+      ],
       "claimed_core_logic": "deep-context re-hydration, load local vKG crystals, expand dynamic Round Table registry",
       "evidence_class": "planned"
     },
     "Execution_Swarm": {
-      "stack": ["Sir Boris", "Sir Codex", "Sir Helio"],
+      "stack": [
+        "Sir Boris",
+        "Sir Codex",
+        "Sir Helio"
+      ],
       "claimed_core_logic": "coordinate multi-agent swarm, verify 100% test passing, execute runic commands",
       "evidence_class": "planned"
     }

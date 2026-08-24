@@ -30,7 +30,7 @@ export interface ApprovalStateMachineSchema {
 
 export class KBAPolicyEngine {
   private schema: ApprovalStateMachineSchema;
-  private currentState = 'IDLE';
+  private currentState: string = 'IDLE';
 
   constructor(schemaPath?: string) {
     const defaultPath = schemaPath || path.join(__dirname, '../schemas/approval-states.yaml');

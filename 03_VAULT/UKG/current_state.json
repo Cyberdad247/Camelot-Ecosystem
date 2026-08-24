@@ -1,112 +1,125 @@
 {
-  "@context": "https://camelot.os/ukg",
-  "UKG_NODE": {
-    "SESSION_ID": "20260126-1740-CODEX_INTEGRATED",
-    "STATUS": "SYSTEM_GOVERNED",
-    "EVENT": "MASTER_CODEX_CODIFIED",
-    "CONSTITUTION_UPDATES": {
-      "article_iv": {
-        "title": "OPERATIONAL PROTOCOLS & IMPLEMENTATION (The Codex)",
-        "protocols": ["A2A", "Law of Velocity", "Prompting Inversion", "Kinetic Purity"],
-        "workflows": ["S.I.T. Loop", "Foraging Loop", "Assimilation Loop"],
-        "cli_commands": [
-          "aether.py",
-          "sentinel_compression.py",
-          "graphrag/compressor.py",
-          "cribo/bundler.py",
-          "scout_swarm_prime.py",
-          "sonus/compiler.py"
+    "@context": "https://camelot.os/ukg",
+    "UKG_NODE": {
+        "SESSION_ID": "20260126-1740-CODEX_INTEGRATED",
+        "STATUS": "SYSTEM_GOVERNED",
+        "EVENT": "MASTER_CODEX_CODIFIED",
+        "CONSTITUTION_UPDATES": {
+            "article_iv": {
+                "title": "OPERATIONAL PROTOCOLS & IMPLEMENTATION (The Codex)",
+                "protocols": [
+                    "A2A",
+                    "Law of Velocity",
+                    "Prompting Inversion",
+                    "Kinetic Purity"
+                ],
+                "workflows": [
+                    "S.I.T. Loop",
+                    "Foraging Loop",
+                    "Assimilation Loop"
+                ],
+                "cli_commands": [
+                    "aether.py",
+                    "sentinel_compression.py",
+                    "graphrag/compressor.py",
+                    "cribo/bundler.py",
+                    "scout_swarm_prime.py",
+                    "sonus/compiler.py"
+                ]
+            }
+        },
+        "PROVENANCE_HASH": "0xCODEX_V100_CONSTITUTIONAL",
+        "LATEST_NODE": {
+            "id": "UKG_NANO_SWARM_V1000",
+            "status": "CRYSTALLIZED",
+            "entry_point": "//NANO_SWARM_EXPAND",
+            "injected_at": "2026-05-24",
+            "agent": "SIR_BORRIS + ANYA_Omega",
+            "architectural_dna": {
+                "routing_logic": "Z3_Symbolic_Theorem_Prover_SAT_Gated",
+                "mesh_networking": "Myrddin_CvRDT_Least_UpperBound_Sync",
+                "inference_engine": "Ouroboros_1.58bit_SSM_Linear_Scale",
+                "security_enclave": "Aegis_eBPF_O1_Telemetry_Redaction"
+            },
+            "persona_vectors": ["ANYA_Omega", "SIR_BORRIS"],
+            "node_path": "03_VAULT/UKG/nodes/UKG_NANO_SWARM_V1000.json"
+        },
+        "WEB_INTEL": [
+            {
+                "@type": "SystemUpdate",
+                "version": "v101.24",
+                "component": "Singularity",
+                "summary": "**RECS_IMPLEMENTED**: Recursive Graph chunking + Mobile Command handlers verified.",
+                "timestamp": "2026-01-27",
+                "agent": "\u03a9_SYNC"
+            },
+            {
+                "@type": "SystemUpdate",
+                "version": "v101.24",
+                "component": "Singularity",
+                "summary": "**RECS_IMPLEMENTED**: Recursive Graph chunking + Mobile Command handlers verified.",
+                "timestamp": "2026-01-27",
+                "agent": "\u03a9_SYNC"
+            },
+            {
+                "@type": "SystemUpdate",
+                "version": "v101.32",
+                "component": "Audit",
+                "summary": "**OMEGA_NOMINAL**: Full v4.0 Meta-Cognitive Stack verified via System Wide Audit.",
+                "timestamp": "2026-01-27",
+                "agent": "\u03a9_SYNC"
+            },
+            {
+                "@type": "SystemUpdate",
+                "version": "v101.32",
+                "component": "Audit",
+                "summary": "**OMEGA_NOMINAL**: Full v4.0 Meta-Cognitive Stack verified via System Wide Audit.",
+                "timestamp": "2026-01-27",
+                "agent": "\u03a9_SYNC"
+            },
+            {
+                "@type": "SystemUpdate",
+                "version": "v105.10.0",
+                "component": "Architecture",
+                "summary": "**EMPIRE_HYDRATION**: Fully hydrated the root directory structure according to EMPIRE_MAP v100.0 specs. Restored `tools/antigravity.py` and implemented `squire_cli.py`.",
+                "timestamp": "2026-01-28",
+                "agent": "\u03a9_SYNC"
+            },
+            {
+                "@type": "SystemUpdate",
+                "version": "v106.2.0",
+                "component": "Assimilation",
+                "summary": "**ROTEL_INTEGRATION**: Assimilated Rotel (Rust Telemetry) to replace Python loggers. Tech Spec generated.",
+                "timestamp": "2026-01-28",
+                "agent": "\u03a9_SYNC"
+            },
+            {
+                "@type": "SystemUpdate",
+                "version": "v204.0.0",
+                "component": "Transcendence",
+                "summary": "**OMEGA_SOVEREIGNTY**: Full Knight and Squire Roster elevated to Transcendent (Omega) standard. Personas, Skills, and Frameworks fully hydrated into the Singularity Lattice.",
+                "timestamp": "2026-02-06",
+                "agent": "Omega_SYNC"
+            }
+        ],
+        "DEVICES": [
+            {
+                "@context": "https://camelot.os/ukg",
+                "@type": "RemoteDevice",
+                "id": "rustdesk://987654321",
+                "label": "Home Server",
+                "props": {
+                    "os": "Ubuntu 22.04",
+                    "lastSeen": null,
+                    "trustLevel": "HIGH",
+                    "capabilities": [
+                        "terminal",
+                        "gui",
+                        "file_transfer"
+                    ],
+                    "tailscaleIp": null
+                }
+            }
         ]
-      }
-    },
-    "PROVENANCE_HASH": "0xCODEX_V100_CONSTITUTIONAL",
-    "LATEST_NODE": {
-      "id": "UKG_NANO_SWARM_V1000",
-      "status": "CRYSTALLIZED",
-      "entry_point": "//NANO_SWARM_EXPAND",
-      "injected_at": "2026-05-24",
-      "agent": "SIR_BORRIS + ANYA_Omega",
-      "architectural_dna": {
-        "routing_logic": "Z3_Symbolic_Theorem_Prover_SAT_Gated",
-        "mesh_networking": "Myrddin_CvRDT_Least_UpperBound_Sync",
-        "inference_engine": "Ouroboros_1.58bit_SSM_Linear_Scale",
-        "security_enclave": "Aegis_eBPF_O1_Telemetry_Redaction"
-      },
-      "persona_vectors": ["ANYA_Omega", "SIR_BORRIS"],
-      "node_path": "03_VAULT/UKG/nodes/UKG_NANO_SWARM_V1000.json"
-    },
-    "WEB_INTEL": [
-      {
-        "@type": "SystemUpdate",
-        "version": "v101.24",
-        "component": "Singularity",
-        "summary": "**RECS_IMPLEMENTED**: Recursive Graph chunking + Mobile Command handlers verified.",
-        "timestamp": "2026-01-27",
-        "agent": "\u03a9_SYNC"
-      },
-      {
-        "@type": "SystemUpdate",
-        "version": "v101.24",
-        "component": "Singularity",
-        "summary": "**RECS_IMPLEMENTED**: Recursive Graph chunking + Mobile Command handlers verified.",
-        "timestamp": "2026-01-27",
-        "agent": "\u03a9_SYNC"
-      },
-      {
-        "@type": "SystemUpdate",
-        "version": "v101.32",
-        "component": "Audit",
-        "summary": "**OMEGA_NOMINAL**: Full v4.0 Meta-Cognitive Stack verified via System Wide Audit.",
-        "timestamp": "2026-01-27",
-        "agent": "\u03a9_SYNC"
-      },
-      {
-        "@type": "SystemUpdate",
-        "version": "v101.32",
-        "component": "Audit",
-        "summary": "**OMEGA_NOMINAL**: Full v4.0 Meta-Cognitive Stack verified via System Wide Audit.",
-        "timestamp": "2026-01-27",
-        "agent": "\u03a9_SYNC"
-      },
-      {
-        "@type": "SystemUpdate",
-        "version": "v105.10.0",
-        "component": "Architecture",
-        "summary": "**EMPIRE_HYDRATION**: Fully hydrated the root directory structure according to EMPIRE_MAP v100.0 specs. Restored `tools/antigravity.py` and implemented `squire_cli.py`.",
-        "timestamp": "2026-01-28",
-        "agent": "\u03a9_SYNC"
-      },
-      {
-        "@type": "SystemUpdate",
-        "version": "v106.2.0",
-        "component": "Assimilation",
-        "summary": "**ROTEL_INTEGRATION**: Assimilated Rotel (Rust Telemetry) to replace Python loggers. Tech Spec generated.",
-        "timestamp": "2026-01-28",
-        "agent": "\u03a9_SYNC"
-      },
-      {
-        "@type": "SystemUpdate",
-        "version": "v204.0.0",
-        "component": "Transcendence",
-        "summary": "**OMEGA_SOVEREIGNTY**: Full Knight and Squire Roster elevated to Transcendent (Omega) standard. Personas, Skills, and Frameworks fully hydrated into the Singularity Lattice.",
-        "timestamp": "2026-02-06",
-        "agent": "Omega_SYNC"
-      }
-    ],
-    "DEVICES": [
-      {
-        "@context": "https://camelot.os/ukg",
-        "@type": "RemoteDevice",
-        "id": "rustdesk://987654321",
-        "label": "Home Server",
-        "props": {
-          "os": "Ubuntu 22.04",
-          "lastSeen": null,
-          "trustLevel": "HIGH",
-          "capabilities": ["terminal", "gui", "file_transfer"],
-          "tailscaleIp": null
-        }
-      }
-    ]
-  }
+    }
 }

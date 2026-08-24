@@ -1,6 +1,6 @@
 // TAPESTRY VISUALIZER (UKG Graph)
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
 export default function Tapestry() {
   return (
@@ -14,5 +14,5 @@ export default function Tapestry() {
 const styles = StyleSheet.create({
   graph: { padding: 20, backgroundColor: '#000' },
   node: { color: '#00FF00', fontWeight: 'bold' },
-  edge: { color: '#888', marginLeft: 20 },
+  edge: { color: '#888', marginLeft: 20 }
 });

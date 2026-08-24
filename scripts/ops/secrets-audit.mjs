@@ -22,7 +22,7 @@
 //   1  ≥ 1 real hit
 //   2  invocation error (no path to .)
 
-import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, statSync, readdirSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 
 const ROOT = resolve('.');
@@ -109,9 +109,7 @@ const lines = [];
 lines.push('# Secret scan — /audit-kickbox-audio');
 lines.push('');
 lines.push(`Generated: ${ts}`);
-lines.push(
-  `Scanned ${scannedFiles.length} files (skipping node_modules, .next, .turbo, .vercel, dist, .git, .env.example, large binaries).`,
-);
+lines.push(`Scanned ${scannedFiles.length} files (skipping node_modules, .next, .turbo, .vercel, dist, .git, .env.example, large binaries).`);
 lines.push(`Real hits: **${hits.length}**`);
 lines.push('');
 if (hits.length === 0) {
@@ -170,9 +168,7 @@ if (outIdx !== -1) {
     process.exit(2);
   }
   writeFileSync(path, lines.join('\n'), 'utf8');
-  console.log(
-    `[secrets-audit] ${hits.length === 0 ? 'CLEAN' : hits.length + ' HITS'} — wrote plan to ${path}`,
-  );
+  console.log(`[secrets-audit] ${hits.length === 0 ? 'CLEAN' : hits.length + ' HITS'} — wrote plan to ${path}`);
 } else {
   console.log(lines.join('\n'));
 }

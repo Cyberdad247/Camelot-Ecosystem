@@ -1,6 +1,6 @@
-import { cn } from '@/lib/utils';
-import { Loader2, Search, Send, Sliders } from 'lucide-react';
 import React, { useState } from 'react';
+import { Send, Loader2, Search, Sliders } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import type { DeckProps } from '../CartridgeDeck';
 
 type Depth = 'quick' | 'medium' | 'deep';
@@ -17,22 +17,16 @@ export default function ResearchDeck({ cartridge, onDispatch, dispatching }: Dec
 
   return (
     <div className="space-y-5">
-      <p className="text-xs text-slate-500">
-        LADY_APIS — Browser Nano-Knights + CHIMERA 3-round pipeline.
-      </p>
+      <p className="text-xs text-slate-500">LADY_APIS — Browser Nano-Knights + CHIMERA 3-round pipeline.</p>
 
       <div className="space-y-2">
-        <label className="text-xs font-semibold uppercase tracking-widest text-blue-400">
-          Research Query
-        </label>
+        <label className="text-xs font-semibold uppercase tracking-widest text-blue-400">Research Query</label>
         <textarea
           rows={4}
           placeholder="What topic, question, or competitor should be researched?…"
           value={intent}
           onChange={(e) => setIntent(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit();
-          }}
+          onKeyDown={(e) => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) submit(); }}
           className="w-full rounded-lg border border-slate-700 bg-slate-900/60 px-3 py-2.5 text-sm text-slate-100 placeholder-slate-600 outline-none focus:border-blue-500 resize-none"
         />
       </div>
@@ -50,9 +44,7 @@ export default function ResearchDeck({ cartridge, onDispatch, dispatching }: Dec
                 'flex-1 py-2 text-xs font-semibold capitalize transition-colors',
                 depth === d ? 'bg-blue-700 text-white' : 'text-slate-400 hover:bg-slate-800',
               )}
-            >
-              {d}
-            </button>
+            >{d}</button>
           ))}
         </div>
       </div>
@@ -62,10 +54,7 @@ export default function ResearchDeck({ cartridge, onDispatch, dispatching }: Dec
           Max Sources: <span className="text-blue-400">{maxSources}</span>
         </label>
         <input
-          type="range"
-          min={1}
-          max={20}
-          value={maxSources}
+          type="range" min={1} max={20} value={maxSources}
           onChange={(e) => setMaxSources(Number(e.target.value))}
           className="w-full accent-blue-500"
         />
@@ -73,21 +62,11 @@ export default function ResearchDeck({ cartridge, onDispatch, dispatching }: Dec
 
       <div className="flex flex-wrap gap-4">
         <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={chimera}
-            onChange={(e) => setChimera(e.target.checked)}
-            className="accent-blue-500"
-          />
+          <input type="checkbox" checked={chimera} onChange={(e) => setChimera(e.target.checked)} className="accent-blue-500" />
           <span className="text-xs text-slate-400">CHIMERA 3-Round Refinement</span>
         </label>
         <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={nlmAncestor}
-            onChange={(e) => setNlmAncestor(e.target.checked)}
-            className="accent-blue-500"
-          />
+          <input type="checkbox" checked={nlmAncestor} onChange={(e) => setNlmAncestor(e.target.checked)} className="accent-blue-500" />
           <span className="text-xs text-slate-400">NotebookLM Ancestor Seed</span>
         </label>
       </div>
@@ -97,11 +76,7 @@ export default function ResearchDeck({ cartridge, onDispatch, dispatching }: Dec
         disabled={dispatching || !intent.trim()}
         className="w-full flex items-center justify-center gap-2 rounded-xl bg-blue-700 hover:bg-blue-600 disabled:opacity-40 py-3 text-sm font-bold text-white transition-colors"
       >
-        {dispatching ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
-        ) : (
-          <Search className="h-4 w-4" />
-        )}
+        {dispatching ? <Loader2 className="h-4 w-4 animate-spin" /> : <Search className="h-4 w-4" />}
         {dispatching ? 'Scouting…' : 'Dispatch to LADY_APIS'}
       </button>
     </div>

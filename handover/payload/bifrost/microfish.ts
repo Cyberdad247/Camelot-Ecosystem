@@ -1,4 +1,4 @@
-import type { HeimdallEvent, HeimdallFsm } from './heimdall-fsm';
+import { HeimdallEvent, HeimdallFsm } from './heimdall-fsm';
 
 /**
  * Microfish — predictive time-series engine (TS reference for the Rust cartridge).
@@ -7,7 +7,7 @@ import type { HeimdallEvent, HeimdallFsm } from './heimdall-fsm';
  */
 
 export interface TrendReport {
-  slope: number; // units per sample
+  slope: number;          // units per sample
   direction: 'rising' | 'falling' | 'flat';
 }
 
@@ -17,7 +17,7 @@ export interface AnomalyReport {
 }
 
 export interface CapacityReport {
-  utilization: number; // 0..1
+  utilization: number;    // 0..1
   samplesToCapacity: number | null; // null when not trending toward limit
 }
 
@@ -41,8 +41,7 @@ export class MicrofishSeries {
     if (n < 2) return { slope: 0, direction: 'flat' };
     const xMean = (n - 1) / 2;
     const yMean = this.values.reduce((a, b) => a + b, 0) / n;
-    let num = 0,
-      den = 0;
+    let num = 0, den = 0;
     for (let i = 0; i < n; i++) {
       num += (i - xMean) * (this.values[i] - yMean);
       den += (i - xMean) ** 2;
@@ -80,7 +79,7 @@ export class MicrofishSeries {
 const SEVERITY_EVENT: Record<Exclude<AnomalyReport['severity'], 'none'>, HeimdallEvent> = {
   minor: 'anomaly',
   major: 'anomaly_confirmed',
-  critical: 'critical_breach',
+  critical: 'critical_breach'
 };
 
 /** Predictive → containment: dispatch the anomaly severity into Heimdall. */

@@ -1,18 +1,18 @@
 {
-  "@context": "https://camelot.os/ukg",
-  "UKG_NODE": {
-    "TYPE": "ASSIMILATION_EVENT",
-    "SOURCE": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
-    "DATE": "2026-07-08",
-    "SUMMARY": "Assimilated Chrome DevTools MCP (Model Context Protocol) to enable live DOM inspection, console log monitoring, network request tracking, and browser runtime automation for sovereign agents.",
-    "KEY_MECHANICS": [
-      "Chrome_DevTools_Protocol_CDP",
-      "Model_Context_Protocol_MCP",
-      "Live_DOM_Inspection",
-      "Console_Telemetry",
-      "Browser_Runtime_Automation"
-    ],
-    "STATUS": "RADIANT",
-    "PROVENANCE_HASH": "0xCHROME_DEVTOOLS_MCP_ASSIMILATION_V1"
-  }
+    "@context": "https://camelot.os/ukg",
+    "UKG_NODE": {
+        "TYPE": "ASSIMILATION_EVENT",
+        "SOURCE": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+        "DATE": "2026-07-08",
+        "SUMMARY": "Assimilated Chrome DevTools MCP (Model Context Protocol) to enable live DOM inspection, console log monitoring, network request tracking, and browser runtime automation for sovereign agents.",
+        "KEY_MECHANICS": [
+            "Chrome_DevTools_Protocol_CDP",
+            "Model_Context_Protocol_MCP",
+            "Live_DOM_Inspection",
+            "Console_Telemetry",
+            "Browser_Runtime_Automation"
+        ],
+        "STATUS": "RADIANT",
+        "PROVENANCE_HASH": "0xCHROME_DEVTOOLS_MCP_ASSIMILATION_V1"
+    }
 }

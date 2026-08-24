@@ -2,11 +2,11 @@
 
 import { describe, expect, it } from 'vitest';
 import {
-  type EffectManifest,
-  EffectManifestSchema,
-  type EvidenceEnvelope,
   EvidenceEnvelopeSchema,
+  EffectManifestSchema,
   OperatorTaskSnapshotSchema,
+  type EvidenceEnvelope,
+  type EffectManifest,
 } from './contracts';
 
 describe('operator contracts', () => {

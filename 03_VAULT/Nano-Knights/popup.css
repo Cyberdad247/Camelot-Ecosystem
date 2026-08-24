@@ -1,222 +1,176 @@
 /* ROYAL CYBER THEME - POPUP */
 body {
-  width: 320px;
-  font-family: "Segoe UI", "Roboto", sans-serif;
-  background: #050505; /* Deep Black */
-  color: #ffd700; /* Cyber Gold */
-  padding: 15px;
-  border: 1px solid #333;
-  border-top: 4px solid #9d00ff; /* Royal Purple */
+    width: 320px;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background: #050505; /* Deep Black */
+    color: #ffd700; /* Cyber Gold */
+    padding: 15px;
+    border: 1px solid #333;
+    border-top: 4px solid #9d00ff; /* Royal Purple */
 }
 
 /* Header */
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #333;
-  padding-bottom: 10px;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 h3 {
-  margin: 0;
-  border: none;
-  color: #ffd700;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-  font-weight: 300;
-  letter-spacing: 2px;
-  font-size: 1.1em;
+    margin: 0;
+    border: none;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    font-weight: 300;
+    letter-spacing: 2px;
+    font-size: 1.1em;
 }
 
 .settings-icon {
-  cursor: pointer;
-  font-size: 1.2em;
-  color: #9d00ff;
-  transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #9d00ff;
+    transition: all 0.3s ease;
 }
 
 .settings-icon:hover {
-  color: #ffd700;
-  text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
-  transform: rotate(30deg);
+    color: #ffd700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    transform: rotate(30deg);
 }
 
 /* Inputs */
 label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 0.8em;
-  color: #bfaee3; /* Soft Purple */
-  font-weight: 600;
-  letter-spacing: 1px;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    color: #bfaee3; /* Soft Purple */
+    font-weight: 600;
+    letter-spacing: 1px;
 }
 
 input[type="text"] {
-  width: 100%;
-  background: #000;
-  color: #fff;
-  border: 1px solid #333;
-  padding: 8px 10px;
-  margin-bottom: 15px;
-  border-radius: 2px;
-  box-sizing: border-box;
-  font-family: "Consolas", monospace;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-family: 'Consolas', monospace;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 input[type="text"]:focus {
-  border-color: #9d00ff;
-  outline: none;
-  box-shadow: 0 0 8px rgba(157, 0, 255, 0.3);
+    border-color: #9d00ff;
+    outline: none;
+    box-shadow: 0 0 8px rgba(157, 0, 255, 0.3);
 }
 
 /* Buttons */
 button {
-  width: 100%;
-  background: #111;
-  color: #ffd700;
-  border: 1px solid #ffd700;
-  padding: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  border-radius: 2px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+    width: 100%;
+    background: #111;
+    color: #ffd700;
+    border: 1px solid #ffd700;
+    padding: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-  background: #ffd700;
-  color: #000;
-  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    background: #ffd700;
+    color: #000;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
 }
 
 /* Status */
 /* ROYAL CYBER v2 ANIMATIONS */
 
 @keyframes pulse-green {
-  0% {
-    color: #888;
-    text-shadow: none;
-  }
-  50% {
-    color: #00ff9d;
-    text-shadow: 0 0 8px rgba(0, 255, 157, 0.6);
-  }
-  100% {
-    color: #888;
-    text-shadow: none;
-  }
+    0% { color: #888; text-shadow: none; }
+    50% { color: #00ff9d; text-shadow: 0 0 8px rgba(0, 255, 157, 0.6); }
+    100% { color: #888; text-shadow: none; }
 }
 
 @keyframes glitch-skew {
-  0% {
-    transform: skew(0deg);
-  }
-  20% {
-    transform: skew(-2deg);
-  }
-  40% {
-    transform: skew(2deg);
-  }
-  60% {
-    transform: skew(-1deg);
-  }
-  80% {
-    transform: skew(1deg);
-  }
-  100% {
-    transform: skew(0deg);
-  }
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-2deg); }
+    40% { transform: skew(2deg); }
+    60% { transform: skew(-1deg); }
+    80% { transform: skew(1deg); }
+    100% { transform: skew(0deg); }
 }
 
 @keyframes scanline {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 0% 100%;
-  }
+    0% { background-position: 0% 0%; }
+    100% { background-position: 0% 100%; }
 }
 
 /* Enhanced Elements */
 #status {
-  margin-top: 10px;
-  font-size: 0.8em;
-  font-family: "Consolas", monospace;
-  color: #888;
-  text-align: center;
-  transition: color 0.3s;
+    margin-top: 10px;
+    font-size: 0.8em;
+    font-family: 'Consolas', monospace;
+    color: #888;
+    text-align: center;
+    transition: color 0.3s;
 }
 
 #status.active {
-  animation: pulse-green 2s infinite;
-  color: #00ff9d;
-  font-weight: bold;
+    animation: pulse-green 2s infinite;
+    color: #00ff9d;
+    font-weight: bold;
 }
 
 .agent-card:hover {
-  background: #1a052b;
-  border-color: #00ff9d; /* Cyber Green on hover */
-  color: #fff;
-  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
-  box-shadow: 0 0 10px rgba(0, 255, 157, 0.4);
+    background: #1a052b;
+    border-color: #00ff9d; /* Cyber Green on hover */
+    color: #fff;
+    animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.4);
 }
 
 #results-display {
-  background: #050505;
-  background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-  background-size: 100% 2px, 3px 100%;
-  color: #e0e0e0;
-  padding: 10px;
-  font-size: 0.8em;
-  white-space: pre-wrap;
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #333;
-  border-left: 2px solid #9d00ff;
-  border-radius: 2px;
-  margin-bottom: 10px;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+    background: #050505;
+    background-image: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    background-size: 100% 2px, 3px 100%;
+    color: #e0e0e0;
+    padding: 10px;
+    font-size: 0.8em;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #333;
+    border-left: 2px solid #9d00ff;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 
 .typewriter-cursor::after {
-  content: "▋";
-  color: #9d00ff;
-  animation: blink 1s step-end infinite;
+    content: '▋';
+    color: #9d00ff;
+    animation: blink 1s step-end infinite;
 }
 
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
-}
+@keyframes blink { 50% { opacity: 0; } }
 
 /* Scrollbar */
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #000;
-}
-::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #9d00ff;
-  box-shadow: 0 0 5px #9d00ff;
-}
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #9d00ff; box-shadow: 0 0 5px #9d00ff; }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }

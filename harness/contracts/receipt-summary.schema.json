@@ -3,17 +3,7 @@
   "$id": "harness/contracts/receipt-summary.schema.json",
   "title": "Receipt Summary",
   "type": "object",
-  "required": [
-    "receiptId",
-    "eventId",
-    "taskId",
-    "correlationId",
-    "kind",
-    "timestamp",
-    "actor",
-    "payloadHash",
-    "integrity"
-  ],
+  "required": ["receiptId", "eventId", "taskId", "correlationId", "kind", "timestamp", "actor", "payloadHash", "integrity"],
   "properties": {
     "receiptId": { "type": "string" },
     "eventId": { "type": "string" },

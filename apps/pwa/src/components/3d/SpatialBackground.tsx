@@ -5,7 +5,7 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
-import { type WeatherCondition, useClevelandWeather } from '../../hooks/useClevelandWeather';
+import { useClevelandWeather, type WeatherCondition } from '../../hooks/useClevelandWeather';
 
 type TimeOfDay = 'day' | 'night';
 
@@ -139,11 +139,7 @@ function Atmosphere({ isNight }: { isNight: boolean }) {
   return (
     <mesh ref={meshRef} position={[0, 0, -2]}>
       <torusGeometry args={[3.6, 0.025, 12, 96]} />
-      <meshBasicMaterial
-        color={isNight ? '#9D4EDD' : '#FFD700'}
-        transparent
-        opacity={isNight ? 0.24 : 0.18}
-      />
+      <meshBasicMaterial color={isNight ? '#9D4EDD' : '#FFD700'} transparent opacity={isNight ? 0.24 : 0.18} />
     </mesh>
   );
 }
@@ -187,12 +183,7 @@ function RainParticles({ active, lowPower }: { active: boolean; lowPower: boolea
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
-      <pointsMaterial
-        color="#9D4EDD"
-        size={active ? 0.035 : 0.018}
-        transparent
-        opacity={active ? 0.78 : 0.28}
-      />
+      <pointsMaterial color="#9D4EDD" size={active ? 0.035 : 0.018} transparent opacity={active ? 0.78 : 0.28} />
     </points>
   );
 }

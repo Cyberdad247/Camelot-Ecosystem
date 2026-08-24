@@ -7,7 +7,9 @@
   "phases": {
     "architecture": {
       "type": "Service/App",
-      "stack": ["Python"]
+      "stack": [
+        "Python"
+      ]
     },
     "quality": {
       "score": 70,
@@ -15,7 +17,9 @@
       "configs": []
     },
     "testing": {
-      "frameworks": ["Pytest"],
+      "frameworks": [
+        "Pytest"
+      ],
       "test_count": 31
     },
     "security": {
@@ -24,7 +28,9 @@
     },
     "documentation": {
       "grade": "B",
-      "missing": ["ARCHITECTURE.md"]
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

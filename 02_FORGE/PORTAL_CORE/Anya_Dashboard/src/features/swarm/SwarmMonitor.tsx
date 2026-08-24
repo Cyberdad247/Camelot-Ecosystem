@@ -1,21 +1,12 @@
+import React, { useCallback, useEffect, useState } from 'react';
+import {
+  Activity, AlertCircle, BrainCircuit, CheckCircle2,
+  Cpu, Loader2, Radio, RefreshCw, Shield, Users, Zap,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { bifrostFetch } from '@/lib/bifrostClient';
 import { runtimeConfig } from '@/config/runtime';
 import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
-import { bifrostFetch } from '@/lib/bifrostClient';
-import { cn } from '@/lib/utils';
-import {
-  Activity,
-  AlertCircle,
-  BrainCircuit,
-  CheckCircle2,
-  Cpu,
-  Loader2,
-  Radio,
-  RefreshCw,
-  Shield,
-  Users,
-  Zap,
-} from 'lucide-react';
-import React, { useCallback, useEffect, useState } from 'react';
 
 interface BifrostStatus {
   gate: string;
@@ -156,9 +147,7 @@ export default function SwarmMonitor() {
     }
   }, []);
 
-  useEffect(() => {
-    fetchStatus();
-  }, [fetchStatus]);
+  useEffect(() => { fetchStatus(); }, [fetchStatus]);
   useEffect(() => {
     const id = setInterval(fetchStatus, 30_000);
     return () => clearInterval(id);
@@ -166,15 +155,13 @@ export default function SwarmMonitor() {
 
   const terminals: SwitchboardTerminal[] = status?.switchboard ?? status?.terminals ?? [];
   const cartridges: string[] = status?.cartridges ?? [];
-  const liveCount = terminals.filter((t) => {
+  const liveCount = terminals.filter(t => {
     const s = (t.status ?? '').toLowerCase();
     return s === 'live' || s === 'active' || s === 'assumed_live';
   }).length;
   const healthPct = terminals.length
     ? Math.round((liveCount / terminals.length) * 100)
-    : loadState === 'ok'
-      ? 100
-      : 0;
+    : (loadState === 'ok' ? 100 : 0);
 
   const recentEvents = events.slice(-8).reverse();
 
@@ -191,20 +178,12 @@ export default function SwarmMonitor() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <div
-            className={cn(
-              'flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold',
-              loadState === 'ok'
-                ? 'border-emerald-700 text-emerald-300'
-                : 'border-slate-700 text-slate-500',
-            )}
-          >
+          <div className={cn(
+            'flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-bold',
+            loadState === 'ok' ? 'border-emerald-700 text-emerald-300' : 'border-slate-700 text-slate-500',
+          )}>
             <Activity size={12} className={loadState === 'ok' ? 'animate-pulse' : ''} />
-            {loadState === 'ok'
-              ? `${healthPct}% LIVE`
-              : loadState === 'loading'
-                ? 'Polling…'
-                : 'DARK'}
+            {loadState === 'ok' ? `${healthPct}% LIVE` : loadState === 'loading' ? 'Polling…' : 'DARK'}
           </div>
           <button
             onClick={fetchStatus}
@@ -219,30 +198,10 @@ export default function SwarmMonitor() {
       {/* Metrics row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         {[
-          {
-            label: 'Terminals',
-            value: terminals.length || (loadState === 'ok' ? '—' : '…'),
-            icon: Users,
-            color: 'text-blue-400',
-          },
-          {
-            label: 'Live',
-            value: terminals.length ? liveCount : loadState === 'ok' ? '—' : '…',
-            icon: Zap,
-            color: 'text-emerald-400',
-          },
-          {
-            label: 'Cartridges',
-            value: cartridges.length || (loadState === 'ok' ? '—' : '…'),
-            icon: Cpu,
-            color: 'text-fuchsia-400',
-          },
-          {
-            label: 'Bifrost',
-            value: isConnected ? 'LIVE' : 'DARK',
-            icon: Radio,
-            color: isConnected ? 'text-cyan-400' : 'text-red-400',
-          },
+          { label: 'Terminals', value: terminals.length || (loadState === 'ok' ? '—' : '…'), icon: Users, color: 'text-blue-400' },
+          { label: 'Live', value: terminals.length ? liveCount : (loadState === 'ok' ? '—' : '…'), icon: Zap, color: 'text-emerald-400' },
+          { label: 'Cartridges', value: cartridges.length || (loadState === 'ok' ? '—' : '…'), icon: Cpu, color: 'text-fuchsia-400' },
+          { label: 'Bifrost', value: isConnected ? 'LIVE' : 'DARK', icon: Radio, color: isConnected ? 'text-cyan-400' : 'text-red-400' },
         ].map(({ label, value, icon: Icon, color }) => (
           <div key={label} className="rounded-xl border border-slate-800 bg-slate-900/60 p-3">
             <div className="flex items-center justify-between mb-2">
@@ -283,11 +242,8 @@ export default function SwarmMonitor() {
                 No terminals in switchboard — cartridges active via bridge_knight
               </p>
               <div className="mt-3 flex flex-wrap gap-1.5 justify-center">
-                {cartridges.map((c) => (
-                  <span
-                    key={c}
-                    className="rounded-md border border-fuchsia-700/40 bg-fuchsia-950/30 px-2 py-0.5 text-[10px] font-bold text-fuchsia-300"
-                  >
+                {cartridges.map(c => (
+                  <span key={c} className="rounded-md border border-fuchsia-700/40 bg-fuchsia-950/30 px-2 py-0.5 text-[10px] font-bold text-fuchsia-300">
                     {c}
                   </span>
                 ))}
@@ -302,33 +258,21 @@ export default function SwarmMonitor() {
             >
               <span className={cn('h-2 w-2 shrink-0 rounded-full', statusDot(t.status))} />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold truncate text-white group-hover:text-[#00FFC2] transition-colors">
-                  {t.name ?? t.id}
-                </p>
+                <p className="text-sm font-semibold truncate text-white group-hover:text-[#00FFC2] transition-colors">{t.name ?? t.id}</p>
                 <p className="text-[10px] text-[#8E95A5] font-mono truncate">
-                  {t.role ?? 'knight'}
-                  {t.engine ? ` · ${t.engine}` : ''}
+                  {t.role ?? 'knight'}{t.engine ? ` · ${t.engine}` : ''}
                 </p>
               </div>
               <div className="flex items-center gap-2 shrink-0">
                 {t.cost_tier && (
-                  <span
-                    className={cn(
-                      'rounded border px-1.5 py-0.5 text-[9px] font-bold uppercase',
-                      tierBadge(t.cost_tier),
-                    )}
-                  >
+                  <span className={cn('rounded border px-1.5 py-0.5 text-[9px] font-bold uppercase', tierBadge(t.cost_tier))}>
                     {t.cost_tier}
                   </span>
                 )}
-                <span
-                  className={cn(
-                    'text-[10px] font-bold uppercase',
-                    (t.status ?? '').toLowerCase() === 'live'
-                      ? 'text-emerald-400'
-                      : 'text-slate-600',
-                  )}
-                >
+                <span className={cn(
+                  'text-[10px] font-bold uppercase',
+                  (t.status ?? '').toLowerCase() === 'live' ? 'text-emerald-400' : 'text-slate-600',
+                )}>
                   {t.status ?? 'unknown'}
                 </span>
               </div>
@@ -337,9 +281,7 @@ export default function SwarmMonitor() {
               <div className="absolute bottom-full left-0 mb-2.5 hidden group-hover:flex flex-col w-80 bg-[#08080A] border border-[#1A1D26] rounded-lg shadow-2xl p-3 z-50 pointer-events-none font-mono text-[10px] text-[#8E95A5] border-l-2 border-l-[#00FFC2]">
                 <div className="flex items-center justify-between border-b border-[#1A1D26] pb-1.5 mb-2">
                   <span className="text-white font-bold text-xs">{t.name ?? t.id}</span>
-                  <span className="text-[#00FFC2] font-semibold tracking-wider text-[8px] uppercase">
-                    DTCG YAML SPEC
-                  </span>
+                  <span className="text-[#00FFC2] font-semibold tracking-wider text-[8px] uppercase">DTCG YAML SPEC</span>
                 </div>
                 <pre className="bg-[#0D0E12] p-2 rounded border border-[#1A1D26] text-emerald-400 overflow-x-auto leading-relaxed text-[9px]">
                   {getKnightDtcgYaml(t.id, t.name)}
@@ -353,15 +295,10 @@ export default function SwarmMonitor() {
 
           {loadState === 'ok' && terminals.length > 0 && cartridges.length > 0 && (
             <div className="mt-2">
-              <p className="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5">
-                Active Cartridges
-              </p>
+              <p className="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5">Active Cartridges</p>
               <div className="flex flex-wrap gap-1.5">
-                {cartridges.map((c) => (
-                  <span
-                    key={c}
-                    className="rounded-md border border-fuchsia-700/40 bg-fuchsia-950/30 px-2 py-0.5 text-[10px] font-bold text-fuchsia-300"
-                  >
+                {cartridges.map(c => (
+                  <span key={c} className="rounded-md border border-fuchsia-700/40 bg-fuchsia-950/30 px-2 py-0.5 text-[10px] font-bold text-fuchsia-300">
                     {c}
                   </span>
                 ))}
@@ -373,15 +310,8 @@ export default function SwarmMonitor() {
         {/* Live event feed */}
         <div className="flex flex-col gap-2 overflow-hidden">
           <div className="flex items-center justify-between px-1">
-            <h2 className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">
-              Live Events
-            </h2>
-            <div
-              className={cn(
-                'h-1.5 w-1.5 rounded-full',
-                isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600',
-              )}
-            />
+            <h2 className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">Live Events</h2>
+            <div className={cn('h-1.5 w-1.5 rounded-full', isConnected ? 'bg-emerald-400 animate-pulse' : 'bg-slate-600')} />
           </div>
           <div className="flex-1 overflow-y-auto rounded-xl border border-slate-800 bg-slate-900/30 p-3 space-y-1.5 min-h-[180px]">
             {recentEvents.length === 0 ? (

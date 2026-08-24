@@ -6,8 +6,14 @@
   "signer_trust_band": "camelot-community",
   "hash_algorithm": "sha256",
   "signature_algorithm": "ed25519",
-  "entrypoints": ["execute", "forge", "test"],
-  "supported_node_profiles": ["engineering"],
+  "entrypoints": [
+    "execute",
+    "forge",
+    "test"
+  ],
+  "supported_node_profiles": [
+    "engineering"
+  ],
   "requested_capabilities": [
     "vfs.read",
     "vfs.worktree_write",
@@ -43,7 +49,10 @@
     "strategy": "destroy_ephemeral_worktree"
   },
   "compat": {
-    "supported_knight_classes": ["engineering_builder", "engineering_auditor"]
+    "supported_knight_classes": [
+      "engineering_builder",
+      "engineering_auditor"
+    ]
   },
   "artifact_hash": "sha256:05d7e7564df3a31744f338c3dbdb9aa58ea34583f640a255ed625fa01acb7d47",
   "signature": "ed25519:6VMBOhTWt60hB-Qd5fGjBis5sBeW8LyvM7tiLcDh64xMChmAkVbACK-hdtqtXYPKLehOo7vVk4cWkkdruHA3AQ"

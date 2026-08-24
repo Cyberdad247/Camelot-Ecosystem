@@ -6,7 +6,7 @@ const patchPath = (path) => {
 };
 
 const originalMkdirSync = fs.mkdirSync;
-fs.mkdirSync = function (path, options) {
+fs.mkdirSync = function(path, options) {
   if (patchPath(path)) {
     console.log('[MONKEYPATCH] Skipping mkdirSync for:', path);
     return;
@@ -23,7 +23,7 @@ fs.mkdirSync = function (path, options) {
 };
 
 const originalMkdir = fs.mkdir;
-fs.mkdir = function (path, options, callback) {
+fs.mkdir = function(path, options, callback) {
   if (patchPath(path)) {
     console.log('[MONKEYPATCH] Skipping mkdir for:', path);
     const cb = typeof options === 'function' ? options : callback;
@@ -31,7 +31,7 @@ fs.mkdir = function (path, options, callback) {
     return;
   }
   const cb = typeof options === 'function' ? options : callback;
-  const wrappedCallback = function (err) {
+  const wrappedCallback = function(err) {
     if (err && patchPath(err.path)) {
       console.log('[MONKEYPATCH] Caught and skipped mkdir error for:', err.path);
       if (cb) cb(null);
@@ -46,7 +46,7 @@ fs.mkdir = function (path, options, callback) {
 };
 
 const originalPromisesMkdir = fsPromises.mkdir || fs.promises.mkdir;
-const patchedPromisesMkdir = function (path, options) {
+const patchedPromisesMkdir = function(path, options) {
   if (patchPath(path)) {
     console.log('[MONKEYPATCH] Skipping fs.promises.mkdir for:', path);
     return Promise.resolve();
@@ -66,7 +66,7 @@ if (fs.promises) {
 }
 
 const originalWriteFileSync = fs.writeFileSync;
-fs.writeFileSync = function (path, data, options) {
+fs.writeFileSync = function(path, data, options) {
   if (patchPath(path)) {
     console.log('[MONKEYPATCH] Skipping writeFileSync for:', path);
     return;
@@ -83,7 +83,7 @@ fs.writeFileSync = function (path, data, options) {
 };
 
 const originalWriteFile = fs.writeFile;
-fs.writeFile = function (path, data, options, callback) {
+fs.writeFile = function(path, data, options, callback) {
   if (patchPath(path)) {
     console.log('[MONKEYPATCH] Skipping writeFile for:', path);
     const cb = typeof options === 'function' ? options : callback;
@@ -91,7 +91,7 @@ fs.writeFile = function (path, data, options, callback) {
     return;
   }
   const cb = typeof options === 'function' ? options : callback;
-  const wrappedCallback = function (err) {
+  const wrappedCallback = function(err) {
     if (err && patchPath(err.path)) {
       console.log('[MONKEYPATCH] Caught and skipped writeFile error for:', err.path);
       if (cb) cb(null);
@@ -106,7 +106,7 @@ fs.writeFile = function (path, data, options, callback) {
 };
 
 const originalPromisesWriteFile = fsPromises.writeFile || fs.promises.writeFile;
-const patchedPromisesWriteFile = function (path, data, options) {
+const patchedPromisesWriteFile = function(path, data, options) {
   if (patchPath(path)) {
     console.log('[MONKEYPATCH] Skipping fs.promises.writeFile for:', path);
     return Promise.resolve();

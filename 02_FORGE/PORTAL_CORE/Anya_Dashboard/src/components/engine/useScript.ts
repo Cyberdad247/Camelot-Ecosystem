@@ -2,7 +2,7 @@
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import { useFrame } from '@react-three/fiber';
 import { useRef } from 'react';
-import type * as THREE from 'three';
+import * as THREE from 'three';
 
 // Feature 9: Scripting Interface
 // Allows JSON-defined behavior to drive 3D objects

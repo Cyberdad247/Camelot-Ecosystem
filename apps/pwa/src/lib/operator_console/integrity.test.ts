@@ -8,13 +8,10 @@ function envelope(overrides: Partial<EvidenceEnvelope> = {}): EvidenceEnvelope {
   const payload = { decision: 'approve' };
   return {
     schemaVersion: 'operator-evidence/1',
-    eventId: 'evt_1',
-    taskId: 'task_1',
-    correlationId: 'cor_1',
+    eventId: 'evt_1', taskId: 'task_1', correlationId: 'cor_1',
     timestamp: '2026-08-14T13:48:00Z',
     actor: { id: 'sentinel', role: 'sentinel' },
-    kind: 'decision.approved',
-    payload,
+    kind: 'decision.approved', payload,
     payloadHash: 'sha256:placeholder', // replaced below with the real hash
     integrity: 'verified',
     ...overrides,

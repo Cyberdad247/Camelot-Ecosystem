@@ -18,16 +18,8 @@ await page.waitForTimeout(1500);
 
 await page.screenshot({ path: `${SCREEN_DIR}/01_hub_initial.png`, fullPage: true });
 
-const fleetText = await page
-  .locator('text=Live Fleet')
-  .locator('xpath=ancestor::div[contains(@class,"rounded-xl")]')
-  .first()
-  .innerText();
-const configText = await page
-  .locator('text=Config')
-  .locator('xpath=ancestor::div[contains(@class,"rounded-xl")]')
-  .first()
-  .innerText();
+const fleetText = await page.locator('text=Live Fleet').locator('xpath=ancestor::div[contains(@class,"rounded-xl")]').first().innerText();
+const configText = await page.locator('text=Config').locator('xpath=ancestor::div[contains(@class,"rounded-xl")]').first().innerText();
 
 console.log('--- FLEET PANEL TEXT ---');
 console.log(fleetText);

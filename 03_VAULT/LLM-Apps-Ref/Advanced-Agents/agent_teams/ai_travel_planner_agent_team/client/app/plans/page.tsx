@@ -1,29 +1,35 @@
-'use client';
+"use client";
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { format } from 'date-fns';
+import React, { useState, useEffect } from "react";
 import {
-  AlertCircle,
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import {
+  MapPin,
   Calendar as CalendarIcon,
-  Clock,
+  Users,
   DollarSign,
-  Eye,
-  Globe,
   Heart,
   Home,
-  Luggage,
-  MapPin,
+  Clock,
+  Globe,
   Plane,
+  Luggage,
   Plus,
   RefreshCw,
+  AlertCircle,
   Trash2,
-  Users,
-} from 'lucide-react';
-import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
-import { toast } from 'sonner';
+  Eye,
+} from "lucide-react";
+import { format } from "date-fns";
+import Link from "next/link";
+import { toast } from "sonner";
 
 interface TripPlan {
   id: string;
@@ -57,21 +63,21 @@ interface TripPlan {
 
 const formatCurrency = (amount: number, currency: string) => {
   const symbols: Record<string, string> = {
-    USD: '$',
-    EUR: '€',
-    GBP: '£',
-    INR: '₹',
-    JPY: '¥',
+    USD: "$",
+    EUR: "€",
+    GBP: "£",
+    INR: "₹",
+    JPY: "¥",
   };
-  return `${symbols[currency] || '$'}${amount.toLocaleString()}`;
+  return `${symbols[currency] || "$"}${amount.toLocaleString()}`;
 };
 
 const formatDate = (dateString: string, inputType: string) => {
-  if (inputType === 'text' || !dateString) {
-    return dateString || 'Flexible dates';
+  if (inputType === "text" || !dateString) {
+    return dateString || "Flexible dates";
   }
   try {
-    return format(new Date(dateString), 'MMM dd, yyyy');
+    return format(new Date(dateString), "MMM dd, yyyy");
   } catch {
     return dateString;
   }
@@ -80,13 +86,13 @@ const formatDate = (dateString: string, inputType: string) => {
 const getPaceDescription = (pace: number[]) => {
   const paceValue = pace[0] || 3;
   const descriptions = {
-    1: 'Very relaxed',
-    2: 'Mostly relaxed',
-    3: 'Balanced',
-    4: 'Quite busy',
-    5: 'Action-packed',
+    1: "Very relaxed",
+    2: "Mostly relaxed",
+    3: "Balanced",
+    4: "Quite busy",
+    5: "Action-packed",
   };
-  return descriptions[paceValue as keyof typeof descriptions] || 'Balanced';
+  return descriptions[paceValue as keyof typeof descriptions] || "Balanced";
 };
 
 export default function Plans() {
@@ -99,17 +105,17 @@ export default function Plans() {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch('/api/plans');
+      const response = await fetch("/api/plans");
       const data = await response.json();
 
       if (data.success) {
         setTripPlans(data.tripPlans);
       } else {
-        setError(data.message || 'Failed to fetch trip plans');
+        setError(data.message || "Failed to fetch trip plans");
       }
     } catch (err) {
-      console.error('Error fetching trip plans:', err);
-      setError('Failed to fetch trip plans');
+      console.error("Error fetching trip plans:", err);
+      setError("Failed to fetch trip plans");
     } finally {
       setLoading(false);
     }
@@ -119,20 +125,20 @@ export default function Plans() {
     try {
       setDeletingPlanId(planId);
       const response = await fetch(`/api/plans/${planId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
       const data = await response.json();
 
       if (data.success) {
         // Remove the plan from the local state
         setTripPlans(tripPlans.filter((plan) => plan.id !== planId));
-        toast.success('Trip plan deleted successfully');
+        toast.success("Trip plan deleted successfully");
       } else {
-        toast.error(data.message || 'Failed to delete trip plan');
+        toast.error(data.message || "Failed to delete trip plan");
       }
     } catch (err) {
-      console.error('Error deleting trip plan:', err);
-      toast.error('Failed to delete trip plan');
+      console.error("Error deleting trip plan:", err);
+      toast.error("Failed to delete trip plan");
     } finally {
       setDeletingPlanId(null);
     }
@@ -141,7 +147,7 @@ export default function Plans() {
   const handleDeletePlan = (planId: string) => {
     if (
       window.confirm(
-        'Are you sure you want to delete this trip plan? This action cannot be undone.',
+        "Are you sure you want to delete this trip plan? This action cannot be undone."
       )
     ) {
       deleteTripPlan(planId);
@@ -200,7 +206,7 @@ export default function Plans() {
         {/* Action Bar */}
         <div className="flex justify-between items-center mb-8">
           <div className="text-sm text-muted-foreground">
-            {tripPlans.length} {tripPlans.length === 1 ? 'plan' : 'plans'} found
+            {tripPlans.length} {tripPlans.length === 1 ? "plan" : "plans"} found
           </div>
           <div className="flex gap-3">
             <Button onClick={fetchTripPlans} variant="outline" size="sm">
@@ -221,7 +227,9 @@ export default function Plans() {
           <div className="text-center py-16">
             <Globe className="w-16 h-16 text-muted-foreground/50 mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-2">No trip plans yet</h3>
-            <p className="text-muted-foreground mb-6">Start planning your next adventure!</p>
+            <p className="text-muted-foreground mb-6">
+              Start planning your next adventure!
+            </p>
             <Link href="/plan">
               <Button>
                 <Plus className="w-4 h-4 mr-2" />
@@ -232,13 +240,18 @@ export default function Plans() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tripPlans.map((plan) => (
-              <Card key={plan.id} className="shadow-lg border hover:shadow-xl transition-shadow">
+              <Card
+                key={plan.id}
+                className="shadow-lg border hover:shadow-xl transition-shadow"
+              >
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2 text-xl">
                     <MapPin className="w-5 h-5 text-primary" />
                     {plan.destination}
                   </CardTitle>
-                  <CardDescription className="text-base font-medium">{plan.name}</CardDescription>
+                  <CardDescription className="text-base font-medium">
+                    {plan.name}
+                  </CardDescription>
                 </CardHeader>
 
                 <CardContent className="space-y-4">
@@ -253,12 +266,16 @@ export default function Plans() {
                       <CalendarIcon className="w-4 h-4 text-muted-foreground" />
                       <span>
                         {formatDate(plan.travelDatesStart, plan.dateInputType)}
-                        {plan.travelDatesEnd && plan.dateInputType === 'picker' && (
-                          <>
-                            {' - '}
-                            {formatDate(plan.travelDatesEnd, plan.dateInputType)}
-                          </>
-                        )}
+                        {plan.travelDatesEnd &&
+                          plan.dateInputType === "picker" && (
+                            <>
+                              {" - "}
+                              {formatDate(
+                                plan.travelDatesEnd,
+                                plan.dateInputType
+                              )}
+                            </>
+                          )}
                       </span>
                     </div>
 
@@ -272,21 +289,27 @@ export default function Plans() {
                     <div className="flex items-center gap-2 text-sm">
                       <Users className="w-4 h-4 text-muted-foreground" />
                       <span>
-                        {plan.adults} adult{plan.adults > 1 ? 's' : ''}
+                        {plan.adults} adult{plan.adults > 1 ? "s" : ""}
                         {plan.children > 0 &&
-                          `, ${plan.children} child${plan.children > 1 ? 'ren' : ''}`}
+                          `, ${plan.children} child${
+                            plan.children > 1 ? "ren" : ""
+                          }`}
                       </span>
                     </div>
 
                     <div className="flex items-center gap-2 text-sm">
                       <DollarSign className="w-4 h-4 text-muted-foreground" />
-                      <span>{formatCurrency(plan.budget, plan.budgetCurrency)} per person</span>
+                      <span>
+                        {formatCurrency(plan.budget, plan.budgetCurrency)} per
+                        person
+                      </span>
                     </div>
 
                     <div className="flex items-center gap-2 text-sm">
                       <Home className="w-4 h-4 text-muted-foreground" />
                       <span>
-                        {plan.rooms} room{plan.rooms > 1 ? 's' : ''}, {plan.travelStyle}
+                        {plan.rooms} room{plan.rooms > 1 ? "s" : ""},{" "}
+                        {plan.travelStyle}
                       </span>
                     </div>
                   </div>
@@ -300,7 +323,11 @@ export default function Plans() {
                       </h4>
                       <div className="flex flex-wrap gap-1">
                         {plan.vibes.slice(0, 3).map((vibe) => (
-                          <Badge key={vibe} variant="secondary" className="text-xs">
+                          <Badge
+                            key={vibe}
+                            variant="secondary"
+                            className="text-xs"
+                          >
                             {vibe}
                           </Badge>
                         ))}
@@ -315,12 +342,17 @@ export default function Plans() {
 
                   {/* Pace */}
                   <div className="text-sm text-muted-foreground">
-                    <span className="font-medium">Pace:</span> {getPaceDescription(plan.pace)}
+                    <span className="font-medium">Pace:</span>{" "}
+                    {getPaceDescription(plan.pace)}
                   </div>
 
                   {/* Created Date */}
                   <div className="text-xs text-muted-foreground pt-2 border-t">
-                    Created {format(new Date(plan.createdAt), "MMM dd, yyyy 'at' h:mm a")}
+                    Created{" "}
+                    {format(
+                      new Date(plan.createdAt),
+                      "MMM dd, yyyy 'at' h:mm a"
+                    )}
                   </div>
 
                   {/* Actions */}

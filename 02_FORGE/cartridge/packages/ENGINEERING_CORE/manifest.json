@@ -1,32 +1,70 @@
 {
-  "cartridge_id": "ENGINEERING_CORE",
-  "version": "1.0.0",
-  "description": "The Engineering Core cartridge, headlined by Sir Lukas. Focused on kinetic execution, system stability, and high-performance implementation.",
-  "agents": ["Sir_Lukas", "Sir_Hydron", "Sir_Syntax"],
-  "tools": ["CodeGen", "SecurityScan", "SyntaxChecker", "Cribo", "Saltare", "Rotel"],
-  "protocols": ["TDD", "CodeReview", "KineticPurity"],
-  "capabilities": ["backend", "frontend", "cli", "testing", "systems_engineering"],
-  "resource_budget": {
-    "max_tokens": 30000,
-    "max_memory_mb": 1024,
-    "max_latency_ms": 1000
-  },
-  "risk_profile": "medium",
-  "governance": {
-    "HITL_required": false,
-    "allowed_tools": ["*"],
-    "denied_operations": ["rm -rf /", "mkfs"]
-  },
-  "hooks": {
-    "on_load": ["setup_kinetic_stack.py"],
-    "on_unload": ["cleanup_tmp.py"],
-    "health_check": ["check_binaries.py"]
-  },
-  "embeddings": {
-    "static_docs": ["DOC_KINETIC_STACK", "DOC_ENGINEERING_STANDARDS"],
-    "symbolic_snippets": ["SNIP_RUST_CORE", "SNIP_GO_CORE"]
-  },
-  "signature": "sha256:7e8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q5r6s7t8u9v0w1x2y3z4a5b6c7d8",
-  "created_at": "2026-02-09T16:05:00Z",
-  "created_by": "ChimeraKernel"
+    "cartridge_id": "ENGINEERING_CORE",
+    "version": "1.0.0",
+    "description": "The Engineering Core cartridge, headlined by Sir Lukas. Focused on kinetic execution, system stability, and high-performance implementation.",
+    "agents": [
+        "Sir_Lukas",
+        "Sir_Hydron",
+        "Sir_Syntax"
+    ],
+    "tools": [
+        "CodeGen",
+        "SecurityScan",
+        "SyntaxChecker",
+        "Cribo",
+        "Saltare",
+        "Rotel"
+    ],
+    "protocols": [
+        "TDD",
+        "CodeReview",
+        "KineticPurity"
+    ],
+    "capabilities": [
+        "backend",
+        "frontend",
+        "cli",
+        "testing",
+        "systems_engineering"
+    ],
+    "resource_budget": {
+        "max_tokens": 30000,
+        "max_memory_mb": 1024,
+        "max_latency_ms": 1000
+    },
+    "risk_profile": "medium",
+    "governance": {
+        "HITL_required": false,
+        "allowed_tools": [
+            "*"
+        ],
+        "denied_operations": [
+            "rm -rf /",
+            "mkfs"
+        ]
+    },
+    "hooks": {
+        "on_load": [
+            "setup_kinetic_stack.py"
+        ],
+        "on_unload": [
+            "cleanup_tmp.py"
+        ],
+        "health_check": [
+            "check_binaries.py"
+        ]
+    },
+    "embeddings": {
+        "static_docs": [
+            "DOC_KINETIC_STACK",
+            "DOC_ENGINEERING_STANDARDS"
+        ],
+        "symbolic_snippets": [
+            "SNIP_RUST_CORE",
+            "SNIP_GO_CORE"
+        ]
+    },
+    "signature": "sha256:7e8a9b0c1d2e3f4g5h6i7j8k9l0m1n2o3p4q5r6s7t8u9v0w1x2y3z4a5b6c7d8",
+    "created_at": "2026-02-09T16:05:00Z",
+    "created_by": "ChimeraKernel"
 }

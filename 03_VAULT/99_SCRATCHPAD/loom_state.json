@@ -1,26 +1,34 @@
 {
-  "workflows": {
-    "3c9783bc": {
-      "id": "3c9783bc",
-      "name": "Trinity_Test",
-      "agent": "Sir_Forge",
-      "status": "COMPLETED",
-      "current_step": 3,
-      "steps": ["Scan_Core", "Plan_Repair", "Verify_State"],
-      "started_at": "2026-02-06T11:20:07.321136",
-      "updated_at": "2026-02-06T11:20:17.770670",
-      "completed_at": "2026-02-06T11:20:17.782851"
-    },
-    "e1430e40": {
-      "id": "e1430e40",
-      "name": "Security_Drill",
-      "agent": "Sir_Sentinel",
-      "status": "COMPLETED",
-      "current_step": 3,
-      "steps": ["Scan_Ports", "Audit_Logs", "Seal_Vulnerabilities"],
-      "started_at": "2026-02-06T12:08:25.661442",
-      "updated_at": "2026-02-06T12:08:39.812397",
-      "completed_at": "2026-02-06T12:08:39.825612"
+    "workflows": {
+        "3c9783bc": {
+            "id": "3c9783bc",
+            "name": "Trinity_Test",
+            "agent": "Sir_Forge",
+            "status": "COMPLETED",
+            "current_step": 3,
+            "steps": [
+                "Scan_Core",
+                "Plan_Repair",
+                "Verify_State"
+            ],
+            "started_at": "2026-02-06T11:20:07.321136",
+            "updated_at": "2026-02-06T11:20:17.770670",
+            "completed_at": "2026-02-06T11:20:17.782851"
+        },
+        "e1430e40": {
+            "id": "e1430e40",
+            "name": "Security_Drill",
+            "agent": "Sir_Sentinel",
+            "status": "COMPLETED",
+            "current_step": 3,
+            "steps": [
+                "Scan_Ports",
+                "Audit_Logs",
+                "Seal_Vulnerabilities"
+            ],
+            "started_at": "2026-02-06T12:08:25.661442",
+            "updated_at": "2026-02-06T12:08:39.812397",
+            "completed_at": "2026-02-06T12:08:39.825612"
+        }
     }
-  }
 }

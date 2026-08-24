@@ -26,3 +26,4 @@ chrono     = { version = "0.4", features = ["serde"] }
 opt-level = 3
 lto = true
 codegen-units = 1
+[workspace]

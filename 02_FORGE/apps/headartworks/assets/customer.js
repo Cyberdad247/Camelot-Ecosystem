@@ -43,13 +43,9 @@ class CustomerAddresses {
       this.elements.countrySelects.forEach((select) => {
         const formId = select.dataset.formId;
         // eslint-disable-next-line no-new
-        new Shopify.CountryProvinceSelector(
-          `AddressCountry_${formId}`,
-          `AddressProvince_${formId}`,
-          {
-            hideElement: `AddressProvinceContainer_${formId}`,
-          },
-        );
+        new Shopify.CountryProvinceSelector(`AddressCountry_${formId}`, `AddressProvince_${formId}`, {
+          hideElement: `AddressProvinceContainer_${formId}`,
+        });
       });
     }
   }
@@ -67,10 +63,7 @@ class CustomerAddresses {
   }
 
   _toggleExpanded(target) {
-    target.setAttribute(
-      attributes.expanded,
-      (target.getAttribute(attributes.expanded) === 'false').toString(),
-    );
+    target.setAttribute(attributes.expanded, (target.getAttribute(attributes.expanded) === 'false').toString());
   }
 
   _handleAddEditButtonClick = ({ currentTarget }) => {
@@ -78,9 +71,7 @@ class CustomerAddresses {
   };
 
   _handleCancelButtonClick = ({ currentTarget }) => {
-    this._toggleExpanded(
-      currentTarget.closest(selectors.addressContainer).querySelector(`[${attributes.expanded}]`),
-    );
+    this._toggleExpanded(currentTarget.closest(selectors.addressContainer).querySelector(`[${attributes.expanded}]`));
   };
 
   _handleDeleteButtonClick = ({ currentTarget }) => {

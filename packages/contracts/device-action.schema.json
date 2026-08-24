@@ -37,7 +37,11 @@
     "effect_class": {
       "description": "Device effect class per §5.5: device.calendar.write, device.sms.send, device.call.initiate.",
       "type": "string",
-      "enum": ["device.calendar.write", "device.sms.send", "device.call.initiate"]
+      "enum": [
+        "device.calendar.write",
+        "device.sms.send",
+        "device.call.initiate"
+      ]
     },
     "declared_risk_tier": {
       "type": "string",

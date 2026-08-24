@@ -2,13 +2,10 @@
 
 'use client';
 
-import { ageLabel } from '../../lib/operator_console/formatters';
 import type { ReceiptSummary } from '../../lib/operator_console/schemas';
+import { ageLabel } from '../../lib/operator_console/formatters';
 
-export function ReceiptsPanel({
-  receipts,
-  taskId,
-}: { receipts: ReceiptSummary[]; taskId: string }) {
+export function ReceiptsPanel({ receipts, taskId }: { receipts: ReceiptSummary[]; taskId: string }) {
   const verified = receipts.filter((r) => r.integrity === 'verified');
   const unanchored = receipts.filter((r) => r.integrity === 'pending_anchor');
   const failed = receipts.filter((r) => r.integrity === 'integrity_failed');
@@ -31,10 +28,7 @@ export function ReceiptsPanel({
       </p>
       <ul className="max-h-72 space-y-1.5 overflow-auto">
         {verified.slice(0, 50).map((r) => (
-          <li
-            key={r.receiptId}
-            className="flex items-center justify-between gap-2 text-[11px] text-white/70"
-          >
+          <li key={r.receiptId} className="flex items-center justify-between gap-2 text-[11px] text-white/70">
             <span className="uppercase">{r.kind}</span>
             <span className="text-white/40">{ageLabel(r.timestamp)}</span>
           </li>

@@ -76,11 +76,7 @@ export class HermesVoiceProvider implements VoiceProvider {
   }
 
   async transcribe(audio: CapturedAudio): Promise<TranscriptResult> {
-    const bytes = new Uint8Array(
-      audio.pcm16.buffer,
-      audio.pcm16.byteOffset,
-      audio.pcm16.byteLength,
-    );
+    const bytes = new Uint8Array(audio.pcm16.buffer, audio.pcm16.byteOffset, audio.pcm16.byteLength);
     let binary = '';
     for (let i = 0; i < bytes.length; i += 0x8000) {
       binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
@@ -91,16 +87,8 @@ export class HermesVoiceProvider implements VoiceProvider {
       body: JSON.stringify({ sampleRate: audio.sampleRate, pcm16: btoa(binary) }),
     });
     if (!res.ok) throw new Error(`hermes stt HTTP ${res.status}`);
-    const body = (await res.json()) as {
-      transcript: string | null;
-      confidence: number;
-      engine: string;
-    };
-    return {
-      transcript: body.transcript,
-      confidence: body.confidence,
-      provider: `hermes/${body.engine}`,
-    };
+    const body = (await res.json()) as { transcript: string | null; confidence: number; engine: string };
+    return { transcript: body.transcript, confidence: body.confidence, provider: `hermes/${body.engine}` };
   }
 
   async synthesize(text: string, directives: SynthesisDirectives): Promise<PlaybackHandle> {
@@ -173,13 +161,7 @@ export class HermesVoiceProvider implements VoiceProvider {
       const body = (await res.json()) as { stt: string; tts: string };
       return { ok: true, provider: 'hermes', stt: body.stt, tts: body.tts };
     } catch (err) {
-      return {
-        ok: false,
-        provider: 'hermes',
-        stt: 'unreachable',
-        tts: 'unreachable',
-        detail: String(err),
-      };
+      return { ok: false, provider: 'hermes', stt: 'unreachable', tts: 'unreachable', detail: String(err) };
     }
   }
 }

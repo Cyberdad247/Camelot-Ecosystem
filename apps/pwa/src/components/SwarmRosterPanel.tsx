@@ -14,86 +14,16 @@ export interface SwarmAgentMember {
 }
 
 const SWARM_ROSTER_AGENTS: SwarmAgentMember[] = [
-  {
-    id: 'agent_malik',
-    name: 'Malik',
-    role: 'Chief of Staff',
-    domain: 'Executive',
-    status: 'ACTIVE',
-    task: 'Compiling the daily Sovereign briefing',
-  },
-  {
-    id: 'agent_jalen',
-    name: 'Jalen',
-    role: 'Calendar',
-    domain: 'Executive',
-    status: 'IDLE',
-    task: '3 events scheduled today',
-  },
-  {
-    id: 'agent_aaliyah',
-    name: 'Aaliyah',
-    role: 'Email',
-    domain: 'Comms',
-    status: 'BUSY',
-    task: 'Triaging 14 inbound threads',
-  },
-  {
-    id: 'agent_marcus',
-    name: 'Marcus',
-    role: 'Property',
-    domain: 'Property',
-    status: 'ACTIVE',
-    task: 'Sandusky portfolio review',
-  },
-  {
-    id: 'agent_tyrell',
-    name: 'Tyrell',
-    role: 'Maintenance',
-    domain: 'Property',
-    status: 'BUSY',
-    task: '2 work orders dispatched',
-  },
-  {
-    id: 'agent_nia',
-    name: 'Nia',
-    role: 'Rent',
-    domain: 'Finance',
-    status: 'ACTIVE',
-    task: 'Rent roll reconciled · 96% collected',
-  },
-  {
-    id: 'agent_isaiah',
-    name: 'Isaiah',
-    role: 'Streaming',
-    domain: 'Streaming',
-    status: 'ACTIVE',
-    task: 'Edge nodes nominal · 2.1k live',
-  },
-  {
-    id: 'agent_chloe',
-    name: 'Chloe',
-    role: 'Billing',
-    domain: 'Finance',
-    status: 'IDLE',
-    task: 'Next invoice run in 4 days',
-  },
-  {
-    id: 'agent_elijah',
-    name: 'Elijah',
-    role: 'Media & Audio',
-    domain: 'Production',
-    status: 'ACTIVE',
-    task: 'Processing Kickbox-Audio spatial stream & VAD telemetry',
-  },
-  {
-    id: 'agent_maya',
-    name: 'Maya',
-    role: 'Security & Vault',
-    domain: 'Governance',
-    status: 'ACTIVE',
-    task: 'Encrypted UKG backup & air-gap verification',
-  },
+  { id: 'agent_malik', name: 'Malik', role: 'Chief of Staff', domain: 'Executive', status: 'ACTIVE', task: 'Compiling the daily Sovereign briefing' },
+  { id: 'agent_jalen', name: 'Jalen', role: 'Calendar', domain: 'Executive', status: 'IDLE', task: '3 events scheduled today' },
+  { id: 'agent_aaliyah', name: 'Aaliyah', role: 'Email', domain: 'Comms', status: 'BUSY', task: 'Triaging 14 inbound threads' },
+  { id: 'agent_marcus', name: 'Marcus', role: 'Property', domain: 'Property', status: 'ACTIVE', task: 'Sandusky portfolio review' },
+  { id: 'agent_tyrell', name: 'Tyrell', role: 'Maintenance', domain: 'Property', status: 'BUSY', task: '2 work orders dispatched' },
+  { id: 'agent_nia', name: 'Nia', role: 'Rent', domain: 'Finance', status: 'ACTIVE', task: 'Rent roll reconciled · 96% collected' },
+  { id: 'agent_isaiah', name: 'Isaiah', role: 'Streaming', domain: 'Streaming', status: 'ACTIVE', task: 'Edge nodes nominal · 2.1k live' },
+  { id: 'agent_chloe', name: 'Chloe', role: 'Billing', domain: 'Finance', status: 'IDLE', task: 'Next invoice run in 4 days' },
+  { id: 'agent_elijah', name: 'Elijah', role: 'Media & Audio', domain: 'Production', status: 'ACTIVE', task: 'Processing Kickbox-Audio spatial stream & VAD telemetry' },
+  { id: 'agent_maya', name: 'Maya', role: 'Security & Vault', domain: 'Governance', status: 'ACTIVE', task: 'Encrypted UKG backup & air-gap verification' },
 ];
 
 export function SwarmRosterPanel() {
@@ -117,13 +47,13 @@ export function SwarmRosterPanel() {
           <div className="text-[10px] text-[#9D4EDD] font-bold tracking-widest uppercase">
             SWARM ROSTER // OPERATIONAL AGENT MATRIX
           </div>
-          <h2 className="text-xl font-black text-slate-100 uppercase mt-1">Active Swarm Roster</h2>
+          <h2 className="text-xl font-black text-slate-100 uppercase mt-1">
+            Active Swarm Roster
+          </h2>
         </div>
         <div className="px-3 py-1 bg-slate-900 border border-[#D4AF37] text-[#D4AF37] text-xs font-bold uppercase flex items-center gap-2">
           <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>
-            ROSTER STATUS: {activeCount}/{agents.length} ENGAGED
-          </span>
+          <span>ROSTER STATUS: {activeCount}/{agents.length} ENGAGED</span>
         </div>
       </div>
 
@@ -145,9 +75,7 @@ export function SwarmRosterPanel() {
                 <span className="text-[10px] font-extrabold text-[#D4AF37] uppercase">
                   {agent.name}
                 </span>
-                <span
-                  className={`text-[9px] px-1.5 py-0.5 font-bold border ${statusBadges[agent.status]}`}
-                >
+                <span className={`text-[9px] px-1.5 py-0.5 font-bold border ${statusBadges[agent.status]}`}>
                   {agent.status}
                 </span>
               </div>
@@ -167,10 +95,7 @@ export function SwarmRosterPanel() {
         <div>
           <div className="text-[10px] text-slate-500 uppercase">SELECTED AGENT CONSOLE:</div>
           <div className="text-sm font-bold text-[#D4AF37] mt-0.5">
-            {selectedAgent.name}{' '}
-            <span className="text-slate-400 text-xs">
-              ({selectedAgent.role} · {selectedAgent.domain})
-            </span>
+            {selectedAgent.name} <span className="text-slate-400 text-xs">({selectedAgent.role} · {selectedAgent.domain})</span>
           </div>
           <div className="text-xs text-slate-300 mt-1">
             Current Task: <span className="text-emerald-400 font-bold">{selectedAgent.task}</span>

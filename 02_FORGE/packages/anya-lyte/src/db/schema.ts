@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
 
 /**
  * Anya Lyte: Local-First UKG Cache (SQLite)
@@ -8,8 +8,8 @@ import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 export const nodes = sqliteTable('nodes', {
   id: text('id').primaryKey(), // UKG Node ID (e.g. uuid)
-  type: text('type'), // JSON-LD @type
-  raw: text('raw').notNull(), // Full JSON-LD content
+  type: text('type'),           // JSON-LD @type
+  raw: text('raw').notNull(),    // Full JSON-LD content
   lastUpdated: integer('last_updated', { mode: 'timestamp' }),
 });
 

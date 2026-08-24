@@ -1,6 +1,6 @@
+import { describe, expect, it } from 'vitest';
 import { initialSessionView, reduceSessionEvent } from '@camelot/contracts';
 import type { CapabilityLease, SessionView } from '@camelot/contracts';
-import { describe, expect, it } from 'vitest';
 import {
   approvalVisible,
   avatarBadge,

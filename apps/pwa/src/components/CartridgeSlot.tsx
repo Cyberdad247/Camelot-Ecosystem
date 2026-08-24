@@ -117,8 +117,7 @@ export function CartridgeSlot() {
           </h2>
         </div>
         <div className="px-3 py-1 bg-slate-900 border border-[#D4AF37] text-[#D4AF37] text-xs font-bold uppercase">
-          SLOT 01: LOADED ({pills.filter((p) => p.status === 'ACTIVE').length}/{pills.length}{' '}
-          ACTIVE)
+          SLOT 01: LOADED ({pills.filter((p) => p.status === 'ACTIVE').length}/{pills.length} ACTIVE)
         </div>
       </div>
 
@@ -144,7 +143,9 @@ export function CartridgeSlot() {
                   {pill.status}
                 </span>
               </div>
-              <div className="text-sm font-black text-slate-100 truncate">{pill.name}</div>
+              <div className="text-sm font-black text-slate-100 truncate">
+                {pill.name}
+              </div>
               <div className="text-[11px] text-[#D4AF37] font-bold mt-1 truncate">
                 KNIGHT: {pill.knight}
               </div>
@@ -163,8 +164,7 @@ export function CartridgeSlot() {
           <span className="text-[#9D4EDD] font-bold">RUNTIME: {selectedPill.runtime}</span>
         </div>
         <div className="text-sm font-bold text-slate-100">
-          {selectedPill.name} &mdash;{' '}
-          <span className="text-slate-400 text-xs font-normal">{selectedPill.description}</span>
+          {selectedPill.name} &mdash; <span className="text-slate-400 text-xs font-normal">{selectedPill.description}</span>
         </div>
       </div>
     </div>

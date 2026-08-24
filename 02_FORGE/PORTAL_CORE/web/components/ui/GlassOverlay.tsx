@@ -1,35 +1,37 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { Activity, Cpu, Menu, Shield, Terminal, Users, Wand2 } from 'lucide-react';
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  Shield,
+  Cpu,
+  Terminal,
+  Users,
+  Wand2,
+  Menu,
+  Activity
+} from 'lucide-react';
 
 // --- Sidebar Component ---
 function Sidebar({ activeAgent }: { activeAgent: string }) {
   const [expanded, setExpanded] = useState(false);
 
   const getAgentGlow = (agentName: string) => {
-    return activeAgent === agentName
-      ? 'text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]'
-      : 'text-gray-400 hover:text-white';
+    return activeAgent === agentName ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" : "text-gray-400 hover:text-white";
   };
 
   return (
     <motion.div
       className="h-full flex flex-col bg-black/40 backdrop-blur-xl border-r border-white/10 text-white z-50 pointer-events-auto"
-      initial={{ width: '4rem' }}
-      animate={{ width: expanded ? '16rem' : '4rem' }}
+      initial={{ width: "4rem" }}
+      animate={{ width: expanded ? "16rem" : "4rem" }}
       onHoverStart={() => setExpanded(true)}
       onHoverEnd={() => setExpanded(false)}
     >
       {/* Branding */}
       <div className="p-4 flex items-center justify-center border-b border-white/10">
-        <Shield
-          className={`w-8 h-8 ${activeAgent === 'ZENITH' ? 'text-red-500 animate-pulse' : 'text-yellow-500'}`}
-        />
-        {expanded && (
-          <span className="ml-3 font-bold text-yellow-500 tracking-widest">CAMELOT</span>
-        )}
+        <Shield className={`w-8 h-8 ${activeAgent === 'ZENITH' ? 'text-red-500 animate-pulse' : 'text-yellow-500'}`} />
+        {expanded && <span className="ml-3 font-bold text-yellow-500 tracking-widest">CAMELOT</span>}
       </div>
 
       {/* Navigation */}
@@ -68,19 +70,12 @@ function Sidebar({ activeAgent }: { activeAgent: string }) {
   );
 }
 
-function NavItem({
-  icon: Icon,
-  label,
-  expanded,
-  active = false,
-}: { icon: any; label: string; expanded: boolean; active?: boolean }) {
+function NavItem({ icon: Icon, label, expanded, active = false }: { icon: any, label: string, expanded: boolean, active?: boolean }) {
   return (
-    <div
-      className={`
+    <div className={`
       flex items-center px-4 py-3 cursor-pointer transition-colors relative
-      ${active ? 'text-yellow-400 bg-white/5 shadow-[inset_4px_0_0_0_#eab308]' : 'text-gray-400 hover:text-white hover:bg-white/5'}
-    `}
-    >
+      ${active ? "text-yellow-400 bg-white/5 shadow-[inset_4px_0_0_0_#eab308]" : "text-gray-400 hover:text-white hover:bg-white/5"}
+    `}>
       <Icon className={`w-6 h-6 min-w-[1.5rem] ${active ? 'animate-pulse' : ''}`} />
       {expanded && (
         <motion.span
@@ -98,7 +93,7 @@ function NavItem({
 // --- Sky Prism (Antigravity Chamber) ---
 import { useSocket } from '@/hooks/use-socket';
 
-function SkyPrism({ logs, isConnected }: { logs: string[]; isConnected: boolean }) {
+function SkyPrism({ logs, isConnected }: { logs: string[], isConnected: boolean }) {
   return (
     <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[600px] pointer-events-none">
       <motion.div
@@ -110,16 +105,12 @@ function SkyPrism({ logs, isConnected }: { logs: string[]; isConnected: boolean 
         <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/5">
           <div className="flex items-center gap-2">
             <Activity className={`w-4 h-4 ${isConnected ? 'text-green-400' : 'text-red-400'}`} />
-            <span
-              className={`text-xs font-mono ${isConnected ? 'text-green-400' : 'text-red-400'}`}
-            >
+            <span className={`text-xs font-mono ${isConnected ? 'text-green-400' : 'text-red-400'}`}>
               {isConnected ? 'ANTIGRAVITY_CHAMBER::ONLINE' : 'BRIDGE::OFFLINE'}
             </span>
           </div>
           <div className="flex gap-1">
-            <div
-              className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}
-            />
+            <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
             <div className="w-2 h-2 rounded-full bg-yellow-500/50" />
             <div className="w-2 h-2 rounded-full bg-green-500/50" />
           </div>
@@ -136,10 +127,7 @@ function SkyPrism({ logs, isConnected }: { logs: string[]; isConnected: boolean 
               const isUser = log.includes('[USER]');
               const isThought = log.includes('[THOUGHT]');
               return (
-                <p
-                  key={i}
-                  className={`${isUser ? 'text-cyan-300' : isThought ? 'text-purple-300' : 'text-gray-300'}`}
-                >
+                <p key={i} className={`${isUser ? 'text-cyan-300' : isThought ? 'text-purple-300' : 'text-gray-300'}`}>
                   {log}
                 </p>
               );
@@ -169,7 +157,7 @@ function StatusHUD({ activeAgent }: { activeAgent: string }) {
   );
 }
 
-function StatusItem({ label, value, color }: { label: string; value: string; color: string }) {
+function StatusItem({ label, value, color }: { label: string, value: string, color: string }) {
   return (
     <div className="flex items-center justify-between bg-black/40 backdrop-blur-md px-3 py-1 rounded border border-white/5 w-40">
       <span className="text-[10px] text-gray-500 font-bold">{label}</span>
@@ -180,18 +168,17 @@ function StatusItem({ label, value, color }: { label: string; value: string; col
 
 export function GlassOverlay() {
   const { logs, isConnected } = useSocket();
-  const [activeAgent, setActiveAgent] = useState('SYSTEM');
+  const [activeAgent, setActiveAgent] = useState("SYSTEM");
 
   // Determine Active Agent from latest logs
   React.useEffect(() => {
     if (logs.length > 0) {
       const lastLog = logs[logs.length - 1];
-      if (lastLog.includes('MERLIN')) setActiveAgent('MERLIN');
-      else if (lastLog.includes('DAME_ANYA') || lastLog.includes('ANYA')) setActiveAgent('ANYA');
-      else if (lastLog.includes('SIR_ZENITH') || lastLog.includes('ZENITH'))
-        setActiveAgent('ZENITH');
-      else if (lastLog.includes('KERNEL')) setActiveAgent('KERNEL');
-      else if (lastLog.includes('USER')) setActiveAgent('USER');
+      if (lastLog.includes('MERLIN')) setActiveAgent("MERLIN");
+      else if (lastLog.includes('DAME_ANYA') || lastLog.includes('ANYA')) setActiveAgent("ANYA");
+      else if (lastLog.includes('SIR_ZENITH') || lastLog.includes('ZENITH')) setActiveAgent("ZENITH");
+      else if (lastLog.includes('KERNEL')) setActiveAgent("KERNEL");
+      else if (lastLog.includes('USER')) setActiveAgent("USER");
       // Don't reset to SYSTEM immediately to keep the 'thought' state visible for a moment
     }
   }, [logs]);

@@ -13,9 +13,7 @@ if (!customElements.get('localization-form')) {
         this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
         this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
 
-        this.querySelectorAll('a').forEach((item) =>
-          item.addEventListener('click', this.onItemClick.bind(this)),
-        );
+        this.querySelectorAll('a').forEach((item) => item.addEventListener('click', this.onItemClick.bind(this)));
       }
 
       hidePanel() {
@@ -44,18 +42,17 @@ if (!customElements.get('localization-form')) {
         this.elements.panel.toggleAttribute('hidden');
         this.elements.button.setAttribute(
           'aria-expanded',
-          (this.elements.button.getAttribute('aria-expanded') === 'false').toString(),
+          (this.elements.button.getAttribute('aria-expanded') === 'false').toString()
         );
       }
 
       closeSelector(event) {
         const isChild =
-          this.elements.panel.contains(event.relatedTarget) ||
-          this.elements.button.contains(event.relatedTarget);
+          this.elements.panel.contains(event.relatedTarget) || this.elements.button.contains(event.relatedTarget);
         if (!event.relatedTarget || !isChild) {
           this.hidePanel();
         }
       }
-    },
+    }
   );
 }

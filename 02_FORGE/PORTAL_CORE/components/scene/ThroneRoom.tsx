@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { Billboard, Image as DreiImage, OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import React, { useRef } from 'react';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera, Billboard, Image as DreiImage } from '@react-three/drei';
 import * as THREE from 'three';
 
 const KNIGHTS_META = [
@@ -31,36 +31,30 @@ function RoundTable() {
       {/* Center Hologram Core */}
       <mesh position={[0, 0.3, 0]}>
         <cylinderGeometry args={[1, 1, 0.5, 32]} />
-        <meshStandardMaterial
-          color="#44aaff"
-          transparent
-          opacity={0.3}
-          emissive="#44aaff"
-          emissiveIntensity={1}
-        />
+        <meshStandardMaterial color="#44aaff" transparent opacity={0.3} emissive="#44aaff" emissiveIntensity={1} />
       </mesh>
     </group>
   );
 }
 
-function KnightBillboard({
-  position,
-  sprite,
-  color,
-}: { position: number[]; sprite: string; color: string }) {
+function KnightBillboard({ position, sprite, color }: { position: number[], sprite: string, color: string }) {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.position.y =
-        position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.1;
+      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.1;
     }
   });
 
   return (
     <group ref={groupRef} position={new THREE.Vector3(position[0], position[1], position[2])}>
       <Billboard follow={true}>
-        <DreiImage url={sprite} scale={[2.5, 3.5]} transparent alphaTest={0.5} />
+        <DreiImage
+          url={sprite}
+          scale={[2.5, 3.5]}
+          transparent
+          alphaTest={0.5}
+        />
         {/* Glow behind the sprite */}
         <mesh position={[0, 0, -0.1]}>
           <planeGeometry args={[3, 4]} />
@@ -121,13 +115,7 @@ export function ThroneRoom() {
       {/* Floor reflection effect */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} receiveShadow>
         <planeGeometry args={[100, 100]} />
-        <meshStandardMaterial
-          color="#000"
-          metalness={0.9}
-          roughness={0.1}
-          transparent
-          opacity={0.8}
-        />
+        <meshStandardMaterial color="#000" metalness={0.9} roughness={0.1} transparent opacity={0.8} />
       </mesh>
     </Canvas>
   );

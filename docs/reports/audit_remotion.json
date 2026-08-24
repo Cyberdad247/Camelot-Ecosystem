@@ -7,7 +7,13 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": ["Rust", "Next.js", "Python", "Docker", "Node.js"]
+      "stack": [
+        "Rust",
+        "Next.js",
+        "Python",
+        "Docker",
+        "Node.js"
+      ]
     },
     "quality": {
       "score": 100,
@@ -38,7 +44,10 @@
       ]
     },
     "testing": {
-      "frameworks": ["Jest", "Pytest"],
+      "frameworks": [
+        "Jest",
+        "Pytest"
+      ],
       "test_count": 486
     },
     "security": {
@@ -47,7 +56,10 @@
     },
     "documentation": {
       "grade": "C",
-      "missing": ["LICENSE", "ARCHITECTURE.md"]
+      "missing": [
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

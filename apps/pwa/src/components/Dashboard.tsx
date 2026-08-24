@@ -6,7 +6,6 @@ import { useState } from 'react';
 import { useBifrost } from '../context/BifrostContext';
 import { LakishaHUD } from './LakishaHUD';
 import { PlanCard } from './PlanCard';
-import { ThemeToggle } from './ThemeToggle';
 import { CoffeeTab } from './tabs/CoffeeTab';
 import { KnightsTab } from './tabs/KnightsTab';
 import { OverviewTab } from './tabs/OverviewTab';
@@ -14,6 +13,7 @@ import { PropertiesTab } from './tabs/PropertiesTab';
 import { SettingsTab } from './tabs/SettingsTab';
 import { StreamingTab } from './tabs/StreamingTab';
 import { VentureTab } from './tabs/VentureTab';
+import { ThemeToggle } from './ThemeToggle';
 
 const TABS = [
   'Overview',

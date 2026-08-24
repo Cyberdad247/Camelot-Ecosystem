@@ -7,7 +7,10 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": ["Python", "Docker"]
+      "stack": [
+        "Python",
+        "Docker"
+      ]
     },
     "quality": {
       "score": 70,
@@ -15,16 +18,24 @@
       "configs": []
     },
     "testing": {
-      "frameworks": ["Pytest"],
+      "frameworks": [
+        "Pytest"
+      ],
       "test_count": 59
     },
     "security": {
       "vulnerabilities": 3,
-      "critical_findings": ["Potential secret in dpo_en_demo.json"]
+      "critical_findings": [
+        "Potential secret in dpo_en_demo.json"
+      ]
     },
     "documentation": {
       "grade": "F",
-      "missing": ["CONTRIBUTING.md", "LICENSE", "ARCHITECTURE.md"]
+      "missing": [
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

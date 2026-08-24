@@ -1,11 +1,13 @@
-'use client';
+"use client";
 
 import React from 'react';
 
 export default function AgentSidebar() {
   return (
     <div className="h-full w-64 bg-black border-l border-green-900 flex flex-col font-mono text-xs">
-      <div className="p-3 border-b border-green-900 text-green-400 font-bold">⚔️ KNIGHT ROSTER</div>
+      <div className="p-3 border-b border-green-900 text-green-400 font-bold">
+        ⚔️ KNIGHT ROSTER
+      </div>
 
       <div className="flex-1 p-2 space-y-2 overflow-y-auto">
         <div className="p-2 bg-green-900 bg-opacity-20 border border-green-800 rounded">

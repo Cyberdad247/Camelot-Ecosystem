@@ -1,26 +1,26 @@
 {
-  "engine": "VIDENEPTUS_v2.0",
-  "protocol": "LaC_Phase_Transition",
-  "trigger_threshold": 0.8,
-  "execution_loop": [
-    {
-      "phase": "DIVERGENCE",
-      "temperature": 1.2,
-      "top_p": 0.95,
-      "instruction": "Generate 3 divergent architectural approaches. Ignore standard conventions.",
-      "rationale": "Escape local optima via high-entropy exploration."
-    },
-    {
-      "phase": "CRITICALITY",
-      "temperature": 0.9,
-      "instruction": "Critique the 3 approaches against First Principles (Physics/Cost/Security). Filter invalid paths.",
-      "rationale": "Test hypotheses at the critical point of stability."
-    },
-    {
-      "phase": "CONVERGENCE",
-      "temperature": 0.2,
-      "instruction": "Synthesize the surviving path into a rigorous execution plan.",
-      "rationale": "Collapse the wave function into a deterministic output."
-    }
-  ]
+    "engine": "VIDENEPTUS_v2.0",
+    "protocol": "LaC_Phase_Transition",
+    "trigger_threshold": 0.8,
+    "execution_loop": [
+        {
+            "phase": "DIVERGENCE",
+            "temperature": 1.2,
+            "top_p": 0.95,
+            "instruction": "Generate 3 divergent architectural approaches. Ignore standard conventions.",
+            "rationale": "Escape local optima via high-entropy exploration."
+        },
+        {
+            "phase": "CRITICALITY",
+            "temperature": 0.9,
+            "instruction": "Critique the 3 approaches against First Principles (Physics/Cost/Security). Filter invalid paths.",
+            "rationale": "Test hypotheses at the critical point of stability."
+        },
+        {
+            "phase": "CONVERGENCE",
+            "temperature": 0.2,
+            "instruction": "Synthesize the surviving path into a rigorous execution plan.",
+            "rationale": "Collapse the wave function into a deterministic output."
+        }
+    ]
 }

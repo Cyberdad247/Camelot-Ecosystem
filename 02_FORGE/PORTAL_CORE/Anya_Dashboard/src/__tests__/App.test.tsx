@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
+import { describe, expect, it, beforeEach, vi } from 'vitest';
 import type { ReactNode } from 'react';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
 import App from '../App';
 
 const camelotOsFixture = {
@@ -28,18 +28,9 @@ const camelotOsFixture = {
   ledgers: {
     root: { exists: true, path: 'PROVENANCE_LEDGER.md' },
     verification: { exists: true, path: '03_VAULT/Missions/verification_ledger.jsonl' },
-    cloudbrain_manifest: {
-      exists: true,
-      path: '03_VAULT/runtime_state/camelot_cloudbrain_v701_manifest.json',
-    },
-    codex_integration: {
-      exists: true,
-      path: '03_VAULT/runtime_state/codex_integration_latest.json',
-    },
-    knight_configuration: {
-      exists: true,
-      path: '03_VAULT/runtime_state/knight_configuration_latest.json',
-    },
+    cloudbrain_manifest: { exists: true, path: '03_VAULT/runtime_state/camelot_cloudbrain_v701_manifest.json' },
+    codex_integration: { exists: true, path: '03_VAULT/runtime_state/codex_integration_latest.json' },
+    knight_configuration: { exists: true, path: '03_VAULT/runtime_state/knight_configuration_latest.json' },
     latest_root_excerpt: '',
   },
   outputs: {},
@@ -95,19 +86,16 @@ const navItems = [
 describe('App navigation and development portal', () => {
   beforeEach(() => {
     window.history.pushState({}, '', '/dev');
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(async (input: RequestInfo | URL) => {
-        const url = String(input);
-        if (url.includes('/api/camelot-os/status')) {
-          return new Response(JSON.stringify(camelotOsFixture), {
-            status: 200,
-            headers: { 'Content-Type': 'application/json' },
-          });
-        }
-        return new Response('{}', { status: 200, headers: { 'Content-Type': 'application/json' } });
-      }),
-    );
+    vi.stubGlobal('fetch', vi.fn(async (input: RequestInfo | URL) => {
+      const url = String(input);
+      if (url.includes('/api/camelot-os/status')) {
+        return new Response(JSON.stringify(camelotOsFixture), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' },
+        });
+      }
+      return new Response('{}', { status: 200, headers: { 'Content-Type': 'application/json' } });
+    }));
   });
 
   it('renders the development portal headings, live status, and affordances', async () => {
@@ -122,9 +110,7 @@ describe('App navigation and development portal', () => {
     expect(await screen.findByRole('heading', { name: /command console/i })).toBeInTheDocument();
     expect(await screen.findByRole('heading', { name: /bridge transcript/i })).toBeInTheDocument();
     expect(await screen.findByRole('heading', { name: /console log/i })).toBeInTheDocument();
-    expect(
-      await screen.findByRole('heading', { name: /operational readiness/i }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /operational readiness/i })).toBeInTheDocument();
 
     expect(await screen.findByText(/development console/i)).toBeInTheDocument();
     expect(await screen.findByText(/websocket linked|websocket offline/i)).toBeInTheDocument();
@@ -150,9 +136,7 @@ describe('App navigation and development portal', () => {
     window.history.pushState({}, '', '/defense-grid');
     render(<App />);
 
-    expect(
-      await screen.findByRole('heading', { name: /defense grid console/i }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: /defense grid console/i })).toBeInTheDocument();
     expect(await screen.findByRole('heading', { name: /user console/i })).toBeInTheDocument();
     expect(await screen.findByRole('button', { name: /^run$/i })).toBeInTheDocument();
     expect(await screen.findByText(/lockdown requires typed confirmation/i)).toBeInTheDocument();

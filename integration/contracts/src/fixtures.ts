@@ -64,11 +64,7 @@ export function matchIntent(transcript: string): IntentFixture | null {
 }
 
 /** Build a deterministic text-first turn. `n` numbers the turn within the session. */
-export function fixtureTurn(
-  transcript: string,
-  n: number,
-  sessionId = FIXTURE_SESSION_ID,
-): VoiceTurn {
+export function fixtureTurn(transcript: string, n: number, sessionId = FIXTURE_SESSION_ID): VoiceTurn {
   return {
     sessionId,
     turnId: `turn-${String(n).padStart(4, '0')}`,

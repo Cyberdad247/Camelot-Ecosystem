@@ -20,7 +20,7 @@ export class Sentinel {
         compressed_tokens: originalTokens,
         compression_ratio: 1.0,
         nodes,
-        summary: 'No compression needed',
+        summary: 'No compression needed'
       };
     }
 
@@ -33,7 +33,7 @@ export class Sentinel {
     compressed.push(...anchors);
     currentTokens += anchorTokens;
 
-    const remaining = nodes.filter((n) => !anchors.find((a) => a.id === n.id));
+    const remaining = nodes.filter(n => !anchors.find(a => a.id === n.id));
 
     for (const node of remaining) {
       if (currentTokens >= targetTokens) break;
@@ -54,7 +54,7 @@ export class Sentinel {
       compressed_tokens: currentTokens,
       compression_ratio: originalTokens / currentTokens,
       nodes: compressed,
-      summary,
+      summary
     };
   }
 
@@ -71,20 +71,20 @@ export class Sentinel {
     const anchorCount = Math.max(3, Math.ceil(nodes.length * 0.2));
 
     if (strategy === 'recency') {
-      return nodes
-        .filter((n) => n.timestamp)
-        .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
-        .slice(0, anchorCount);
+        return nodes
+          .filter(n => n.timestamp)
+          .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+          .slice(0, anchorCount);
     } else {
-      // Default importance
-      return nodes
-        .map((n) => ({
-          node: n,
-          score: this.calculateImportance(n),
-        }))
-        .sort((a, b) => b.score - a.score)
-        .slice(0, anchorCount)
-        .map((x) => x.node);
+        // Default importance
+        return nodes
+          .map(n => ({
+            node: n,
+            score: this.calculateImportance(n)
+          }))
+          .sort((a, b) => b.score - a.score)
+          .slice(0, anchorCount)
+          .map(x => x.node);
     }
   }
 
@@ -100,7 +100,7 @@ export class Sentinel {
     return {
       ...node,
       summary: compressedSummary,
-      entities: preserveEntities ? node.entities : node.entities.slice(0, 5),
+      entities: preserveEntities ? node.entities : node.entities.slice(0, 5)
     };
   }
 }

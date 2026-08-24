@@ -7,15 +7,23 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": ["Python", "Docker", "Node.js"]
+      "stack": [
+        "Python",
+        "Docker",
+        "Node.js"
+      ]
     },
     "quality": {
       "score": 100,
       "style": "Foundational",
-      "configs": [".prettierrc"]
+      "configs": [
+        ".prettierrc"
+      ]
     },
     "testing": {
-      "frameworks": ["Vitest"],
+      "frameworks": [
+        "Vitest"
+      ],
       "test_count": 3
     },
     "security": {
@@ -24,7 +32,9 @@
     },
     "documentation": {
       "grade": "B",
-      "missing": ["ARCHITECTURE.md"]
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

@@ -47,8 +47,7 @@ class PredictiveSearch extends SearchForm {
   }
 
   onFormSubmit(event) {
-    if (!this.getQuery().length || this.querySelector('[aria-selected="true"] a'))
-      event.preventDefault();
+    if (!this.getQuery().length || this.querySelector('[aria-selected="true"] a')) event.preventDefault();
   }
 
   onFormReset(event) {
@@ -127,9 +126,9 @@ class PredictiveSearch extends SearchForm {
 
     // Filter out hidden elements (duplicated page and article resources) thanks
     // to this https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent
-    const allVisibleElements = Array.from(
-      this.querySelectorAll('li, button.predictive-search__item'),
-    ).filter((element) => element.offsetParent !== null);
+    const allVisibleElements = Array.from(this.querySelectorAll('li, button.predictive-search__item')).filter(
+      (element) => element.offsetParent !== null
+    );
     let activeElementIndex = 0;
 
     if (moveUp && !selectedElement) return;
@@ -147,11 +146,9 @@ class PredictiveSearch extends SearchForm {
     this.statusElement.textContent = '';
 
     if (!moveUp && selectedElement) {
-      activeElementIndex =
-        selectedElementIndex === allVisibleElements.length - 1 ? 0 : selectedElementIndex + 1;
+      activeElementIndex = selectedElementIndex === allVisibleElements.length - 1 ? 0 : selectedElementIndex + 1;
     } else if (moveUp) {
-      activeElementIndex =
-        selectedElementIndex === 0 ? allVisibleElements.length - 1 : selectedElementIndex - 1;
+      activeElementIndex = selectedElementIndex === 0 ? allVisibleElements.length - 1 : selectedElementIndex - 1;
     }
 
     if (activeElementIndex === selectedElementIndex) return;
@@ -165,9 +162,7 @@ class PredictiveSearch extends SearchForm {
   }
 
   selectOption() {
-    const selectedOption = this.querySelector(
-      '[aria-selected="true"] a, button[aria-selected="true"]',
-    );
+    const selectedOption = this.querySelector('[aria-selected="true"] a, button[aria-selected="true"]');
 
     if (selectedOption) selectedOption.click();
   }
@@ -181,12 +176,9 @@ class PredictiveSearch extends SearchForm {
       return;
     }
 
-    fetch(
-      `${routes.predictive_search_url}?q=${encodeURIComponent(searchTerm)}&section_id=predictive-search`,
-      {
-        signal: this.abortController.signal,
-      },
-    )
+    fetch(`${routes.predictive_search_url}?q=${encodeURIComponent(searchTerm)}&section_id=predictive-search`, {
+      signal: this.abortController.signal,
+    })
       .then((response) => {
         if (!response.ok) {
           var error = new Error(response.status);
@@ -243,9 +235,7 @@ class PredictiveSearch extends SearchForm {
 
   setLiveRegionResults() {
     this.removeAttribute('loading');
-    this.setLiveRegionText(
-      this.querySelector('[data-predictive-search-live-region-count-value]').textContent,
-    );
+    this.setLiveRegionText(this.querySelector('[data-predictive-search-live-region-count-value]').textContent);
   }
 
   getResultsMaxHeight() {
@@ -255,8 +245,7 @@ class PredictiveSearch extends SearchForm {
   }
 
   open() {
-    this.predictiveSearchResults.style.maxHeight =
-      this.resultsMaxHeight || `${this.getResultsMaxHeight()}px`;
+    this.predictiveSearchResults.style.maxHeight = this.resultsMaxHeight || `${this.getResultsMaxHeight()}px`;
     this.setAttribute('open', true);
     this.input.setAttribute('aria-expanded', true);
     this.isOpen = true;

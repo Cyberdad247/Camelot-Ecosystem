@@ -16,7 +16,7 @@ export class SharedPcmRing {
 
   constructor(capacitySamples = 32_000) {
     if (!Number.isInteger(capacitySamples) || capacitySamples < 3_200) {
-      throw new Error('PCM ring capacity must be at least 3,200 samples.');
+      throw new Error("PCM ring capacity must be at least 3,200 samples.");
     }
     const control = new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT * 4);
     const samples = new SharedArrayBuffer(Int16Array.BYTES_PER_ELEMENT * capacitySamples);
@@ -49,5 +49,5 @@ export class SharedPcmRing {
 }
 
 export function sharedPcmAvailable(): boolean {
-  return typeof SharedArrayBuffer !== 'undefined' && globalThis.crossOriginIsolated === true;
+  return typeof SharedArrayBuffer !== "undefined" && globalThis.crossOriginIsolated === true;
 }

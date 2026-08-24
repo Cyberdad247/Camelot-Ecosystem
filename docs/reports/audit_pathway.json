@@ -7,7 +7,12 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": ["Docker", "Node.js", "Python", "Rust"]
+      "stack": [
+        "Docker",
+        "Node.js",
+        "Python",
+        "Rust"
+      ]
     },
     "quality": {
       "score": 70,
@@ -15,16 +20,24 @@
       "configs": []
     },
     "testing": {
-      "frameworks": ["Pytest"],
+      "frameworks": [
+        "Pytest"
+      ],
       "test_count": 113
     },
     "security": {
       "vulnerabilities": 4,
-      "critical_findings": ["Potential secret in api.py", "Potential secret in utils.py"]
+      "critical_findings": [
+        "Potential secret in api.py",
+        "Potential secret in utils.py"
+      ]
     },
     "documentation": {
       "grade": "C",
-      "missing": ["LICENSE", "ARCHITECTURE.md"]
+      "missing": [
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

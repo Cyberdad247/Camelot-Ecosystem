@@ -5,7 +5,7 @@ const http = require('http');
 const data = JSON.stringify({
   model: 'gemma3:1b',
   prompt: 'Ping',
-  stream: false,
+  stream: false
 });
 
 const options = {
@@ -15,21 +15,19 @@ const options = {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json',
-    'Content-Length': data.length,
-  },
+    'Content-Length': data.length
+  }
 };
 
 const req = http.request(options, (res) => {
   let body = '';
-  res.on('data', (chunk) => (body += chunk));
+  res.on('data', (chunk) => body += chunk);
   res.on('end', () => {
     console.log('STATUS:', res.statusCode);
     try {
-      const json = JSON.parse(body);
-      console.log('RESPONSE:', json.response);
-    } catch (e) {
-      console.log('BODY:', body);
-    }
+        const json = JSON.parse(body);
+        console.log('RESPONSE:', json.response);
+    } catch(e) { console.log('BODY:', body); }
   });
 });
 

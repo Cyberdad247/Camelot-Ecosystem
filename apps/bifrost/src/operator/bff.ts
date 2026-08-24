@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 
-import { type Request, type Response, Router } from 'express';
+import { Router, type Request, type Response } from 'express';
 import { z } from 'zod';
-import type { EffectManifest, OperatorTaskSnapshot } from './contracts';
-import { FIXTURES, type FixtureName, snapshotFor } from './fixtures';
 import type { EventStore } from './receipts';
+import type { EffectManifest, OperatorTaskSnapshot } from './contracts';
 import type { VerifyContext, VerifyResult } from './sentinel';
+import { FIXTURES, snapshotFor, type FixtureName } from './fixtures';
 
 // Keys are stored lowercase so the case-insensitive match (`k.toLowerCase()`)
 // actually hits camelCase keys like `apiKey` (design §8.3 redact_sensitive_fields).
@@ -28,12 +28,10 @@ export function redactSensitive(value: unknown): unknown {
   return value;
 }
 
-const DecisionBodySchema = z
-  .object({
-    decision: z.enum(['approve', 'deny']),
-    reason: z.string().max(2000).optional(),
-  })
-  .strict(); // .strict() rejects command/path/raw-diff smuggling (design §9)
+const DecisionBodySchema = z.object({
+  decision: z.enum(['approve', 'deny']),
+  reason: z.string().max(2000).optional(),
+}).strict(); // .strict() rejects command/path/raw-diff smuggling (design §9)
 
 export interface OperatorBffDeps {
   store: EventStore;
@@ -47,9 +45,7 @@ export interface OperatorBffDeps {
 
 function authorize(req: Request): boolean {
   const token = req.header('x-operator-token');
-  return Boolean(
-    token && process.env.OPERATOR_SESSION_TOKEN && token === process.env.OPERATOR_SESSION_TOKEN,
-  );
+  return Boolean(token && process.env.OPERATOR_SESSION_TOKEN && token === process.env.OPERATOR_SESSION_TOKEN);
 }
 
 function auth(res: Response): void {
@@ -88,9 +84,7 @@ export function createOperatorBff(deps: OperatorBffDeps): Router {
     res.setHeader('connection', 'keep-alive');
     res.flushHeaders();
     const first = redactSensitive(fixtureSnapshot(taskId)) as OperatorTaskSnapshot;
-    res.write(
-      `event: operator.evidence\ndata: ${JSON.stringify({ type: 'snapshot', payload: first })}\n\n`,
-    );
+    res.write(`event: operator.evidence\ndata: ${JSON.stringify({ type: 'snapshot', payload: first })}\n\n`);
     const timer = setInterval(() => res.write(': keepalive\n\n'), 15_000);
     req.on('close', () => clearInterval(timer));
   });
@@ -110,10 +104,8 @@ export function createOperatorBff(deps: OperatorBffDeps): Router {
         taskId: 'task_fixture',
         correlationId: 'cor_fixture',
         timestamp: new Date().toISOString(),
-        actorId: 'sentinel',
-        actorRole: 'sentinel',
-        kind: 'decision.denied',
-        payload: { manifestId, reason },
+        actorId: 'sentinel', actorRole: 'sentinel',
+        kind: 'decision.denied', payload: { manifestId, reason },
         integrity: 'verified',
       });
       return res.status(200).json({ status: 'DENIED', manifestId });
@@ -125,8 +117,7 @@ export function createOperatorBff(deps: OperatorBffDeps): Router {
       taskId: 'task_fixture',
       correlationId: 'cor_fixture',
       kind: 'worktree.patch.promote',
-      baseRevision: 'base',
-      candidateRevision: 'cand',
+      baseRevision: 'base', candidateRevision: 'cand',
       diffSha256: 'sha256:abc',
       allowedPaths: ['apps/pwa/src/components/operator_console/**'],
       requiredEvidence: ['receipt://vfs/no-escape/1'],
@@ -150,10 +141,8 @@ export function createOperatorBff(deps: OperatorBffDeps): Router {
       taskId: 'task_fixture',
       correlationId: 'cor_fixture',
       timestamp: new Date().toISOString(),
-      actorId: 'sentinel',
-      actorRole: 'sentinel',
-      kind: 'decision.approved',
-      payload: { manifestId, leaseId: lease.leaseId },
+      actorId: 'sentinel', actorRole: 'sentinel',
+      kind: 'decision.approved', payload: { manifestId, leaseId: lease.leaseId },
       integrity: 'verified',
     });
     res.status(200).json({ status: 'APPROVED', manifestId, lease });

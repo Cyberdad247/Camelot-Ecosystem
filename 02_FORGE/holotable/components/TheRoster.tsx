@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { type Agent, api } from '@/lib/api';
-import { Bot, Brain, Shield, Zap } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
+import { Agent, api } from "@/lib/api";
+import { Bot, Zap, Brain, Shield } from "lucide-react";
 
 export default function TheRoster() {
   const [agents, setAgents] = useState<Agent[]>([]);
@@ -33,12 +33,14 @@ export default function TheRoster() {
             className="border border-slate-800 bg-slate-900/50 p-3 rounded-lg flex items-center gap-3"
           >
             <div
-              className={`w-2 h-2 rounded-full ${agent.status === 'ACTIVE' ? 'bg-green-500 neon-border' : 'bg-slate-500'}`}
+              className={`w-2 h-2 rounded-full ${agent.status === "ACTIVE" ? "bg-green-500 neon-border" : "bg-slate-500"}`}
             />
 
             <div>
               <div className="font-bold text-slate-200">{agent.name}</div>
-              <div className="text-xs text-slate-500 font-mono">{agent.status}</div>
+              <div className="text-xs text-slate-500 font-mono">
+                {agent.status}
+              </div>
             </div>
 
             <div className="ml-auto">
@@ -48,7 +50,9 @@ export default function TheRoster() {
         ))}
 
         {agents.length === 0 && (
-          <div className="text-slate-500 italic text-sm">No active signals...</div>
+          <div className="text-slate-500 italic text-sm">
+            No active signals...
+          </div>
         )}
       </div>
     </div>

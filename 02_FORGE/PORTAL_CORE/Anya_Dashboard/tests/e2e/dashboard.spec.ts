@@ -26,9 +26,7 @@ test('cognitive cartridge loads without stale dynamic import failures', async ({
   await expect(page.getByRole('heading', { name: /Cognitive Command Deck/i })).toBeVisible();
   await expect(page.locator('.vite-error-overlay, [data-nextjs-dialog]')).toHaveCount(0);
   expect(failedAssetRequests).toEqual([]);
-  expect(browserErrors.join('\n')).not.toMatch(
-    /Failed to fetch dynamically imported module|vite-error-overlay/i,
-  );
+  expect(browserErrors.join('\n')).not.toMatch(/Failed to fetch dynamically imported module|vite-error-overlay/i);
 });
 
 test('camelot os command surface reads local orchestration and memory tiers', async ({ page }) => {

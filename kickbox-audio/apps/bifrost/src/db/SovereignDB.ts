@@ -6,6 +6,7 @@ const prisma = new PrismaClient({
 });
 
 export class SovereignDB {
+
   // ==========================================
   // VAULT_Ω (Accounting & Ledger)
   // ==========================================
@@ -26,7 +27,7 @@ export class SovereignDB {
         debit: amount > 0 ? amount : 0,
         credit: amount < 0 ? Math.abs(amount) : 0,
         accountId: accountId,
-      },
+      }
     });
   }
 
@@ -47,7 +48,7 @@ export class SovereignDB {
         channel,
         content,
         status,
-      },
+      }
     });
   }
 
@@ -76,7 +77,7 @@ export class SovereignDB {
 
     return await prisma.contact.update({
       where: { email },
-      data: { tags: JSON.stringify(updatedTags) },
+      data: { tags: JSON.stringify(updatedTags) }
     });
   }
 }

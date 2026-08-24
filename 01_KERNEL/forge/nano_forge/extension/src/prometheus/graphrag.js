@@ -14,15 +14,15 @@ export class GraphRAG {
    */
   async load() {
     try {
-      const stored = await chrome.storage.local.get('encrypted_graph');
-      if (stored.encrypted_graph) {
-        const data = await this.vault.decrypt(stored.encrypted_graph);
-        this.nodes = new Map(data.nodes.map((n) => [n.id, n]));
-        this.edges = data.edges;
-        console.log(`[GraphRAG] Loaded ${this.nodes.size} nodes from vault.`);
-      }
+        const stored = await chrome.storage.local.get('encrypted_graph');
+        if (stored.encrypted_graph) {
+            const data = await this.vault.decrypt(stored.encrypted_graph);
+            this.nodes = new Map(data.nodes.map(n => [n.id, n]));
+            this.edges = data.edges;
+            console.log(`[GraphRAG] Loaded ${this.nodes.size} nodes from vault.`);
+        }
     } catch (e) {
-      console.warn('[GraphRAG] Failed to load graph:', e);
+        console.warn("[GraphRAG] Failed to load graph:", e);
     }
   }
 
@@ -30,24 +30,24 @@ export class GraphRAG {
    * Save graph to encrypted storage
    */
   async save() {
-    const data = {
-      nodes: Array.from(this.nodes.values()),
-      edges: this.edges,
-    };
+      const data = {
+          nodes: Array.from(this.nodes.values()),
+          edges: this.edges
+      };
 
-    const encrypted = await this.vault.encrypt(data);
-    await chrome.storage.local.set({ encrypted_graph: encrypted });
-    console.log(`[GraphRAG] Saved ${this.nodes.size} nodes to vault.`);
+      const encrypted = await this.vault.encrypt(data);
+      await chrome.storage.local.set({ encrypted_graph: encrypted });
+      console.log(`[GraphRAG] Saved ${this.nodes.size} nodes to vault.`);
   }
 
   /**
    * Clear all graph data (Memory + Storage)
    */
   async clear() {
-    this.nodes.clear();
-    this.edges = [];
-    await chrome.storage.local.remove('encrypted_graph');
-    console.log('[GraphRAG] System Purged.');
+      this.nodes.clear();
+      this.edges = [];
+      await chrome.storage.local.remove('encrypted_graph');
+      console.log("[GraphRAG] System Purged.");
   }
 
   /**
@@ -57,7 +57,7 @@ export class GraphRAG {
     for (const node of nodes) {
       const graphNode = {
         ...node,
-        edges: [],
+        edges: []
       };
 
       this.nodes.set(node.id, graphNode);
@@ -96,20 +96,20 @@ export class GraphRAG {
     for (const node of startNodes) {
       expandedNodes.add(node);
       const neighbors = this.getNeighbors(node.id, hopDistance);
-      neighbors.forEach((n) => expandedNodes.add(n));
+      neighbors.forEach(n => expandedNodes.add(n));
     }
 
     const ranked = Array.from(expandedNodes)
-      .map((node) => ({
+      .map(node => ({
         node,
-        score: this.scoreRelevance(node, question),
+        score: this.scoreRelevance(node, question)
       }))
       .sort((a, b) => b.score - a.score)
       .slice(0, maxResults);
 
     return {
-      nodes: ranked.map((r) => r.node),
-      confidence: ranked[0]?.score || 0,
+      nodes: ranked.map(r => r.node),
+      confidence: ranked[0]?.score || 0
     };
   }
 
@@ -123,12 +123,14 @@ export class GraphRAG {
         const nodeA = nodes[i];
         const nodeB = nodes[j];
 
-        const sharedEntities = nodeA.entities.filter((e) => nodeB.entities.includes(e));
+        const sharedEntities = nodeA.entities.filter(
+          e => nodeB.entities.includes(e)
+        );
 
         if (sharedEntities.length > 0) {
           this.addEdge(nodeA.id, nodeB.id, 'RELATES_TO', {
             sharedEntities,
-            strength: sharedEntities.length,
+            strength: sharedEntities.length
           });
         }
       }
@@ -138,17 +140,17 @@ export class GraphRAG {
   semanticSearch(query, limit) {
     const queryTokens = query.toLowerCase().split(/\s+/);
 
-    const scored = Array.from(this.nodes.values()).map((node) => {
+    const scored = Array.from(this.nodes.values()).map(node => {
       const text = (node.summary + ' ' + node.entities.join(' ')).toLowerCase();
-      const score = queryTokens.filter((token) => text.includes(token)).length;
+      const score = queryTokens.filter(token => text.includes(token)).length;
       return { node, score };
     });
 
     return scored
-      .filter((s) => s.score > 0)
+      .filter(s => s.score > 0)
       .sort((a, b) => b.score - a.score)
       .slice(0, limit)
-      .map((s) => s.node);
+      .map(s => s.node);
   }
 
   getNeighbors(nodeId, maxHops) {
@@ -170,7 +172,7 @@ export class GraphRAG {
     };
 
     explore(nodeId, maxHops);
-    return result.filter((n) => n.id !== nodeId);
+    return result.filter(n => n.id !== nodeId);
   }
 
   scoreRelevance(node, query) {

@@ -1,21 +1,16 @@
-'use client';
+"use client";
 
-import Editor, { type OnMount } from '@monaco-editor/react';
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
+import Editor, { OnMount } from "@monaco-editor/react";
 
 interface CodeEditorProps {
   code: string;
   language: string;
   onChange: (value: string | undefined) => void;
-  theme?: 'vs-dark' | 'light';
+  theme?: "vs-dark" | "light";
 }
 
-export default function CodeEditor({
-  code,
-  language,
-  onChange,
-  theme = 'vs-dark',
-}: CodeEditorProps) {
+export default function CodeEditor({ code, language, onChange, theme = "vs-dark" }: CodeEditorProps) {
   const editorRef = useRef(null);
 
   const handleEditorDidMount: OnMount = (editor, monaco) => {
@@ -34,7 +29,7 @@ export default function CodeEditor({
         options={{
           minimap: { enabled: false },
           fontSize: 14,
-          fontFamily: 'Fira Code, monospace',
+          fontFamily: "Fira Code, monospace",
           scrollBeyondLastLine: false,
           automaticLayout: true,
         }}

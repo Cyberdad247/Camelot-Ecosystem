@@ -11,11 +11,7 @@ describe('model.route events', () => {
       turnId: 'turn-1',
       provider: 'testprov',
     });
-    expect(view.lastModelRoute).toEqual({
-      turnId: 'turn-1',
-      provider: 'testprov',
-      fallback: false,
-    });
+    expect(view.lastModelRoute).toEqual({ turnId: 'turn-1', provider: 'testprov', fallback: false });
   });
 
   it('a fallback route overwrites the primary route visibly', () => {

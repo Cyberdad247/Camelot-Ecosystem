@@ -1,6 +1,6 @@
-import { Mic, Volume2 } from 'lucide-react-native';
 import React, { useState } from 'react';
-import { AnimatePresence, Button, Circle, Text, Theme, YStack } from 'tamagui';
+import { YStack, Text, Button, Theme, AnimatePresence, Circle } from 'tamagui';
+import { Mic, Volume2 } from 'lucide-react-native';
 
 /**
  * Anya Lyte: Voice Deck (Sir Sonus / Sir Sonus Integration)
@@ -17,6 +17,7 @@ export const VoiceDeck = () => {
   return (
     <Theme name="dark">
       <YStack f={1} jc="center" ai="center" space="$8" bg="$background">
+
         {/* The Orb (Visualizer Placeholder) */}
         <YStack jc="center" ai="center">
           <AnimatePresence>
@@ -34,14 +35,16 @@ export const VoiceDeck = () => {
             )}
           </AnimatePresence>
           <Circle size={150} bg="$color3" elevate ai="center" jc="center">
-            {isListening ? <ActivityIndicator color="cyan" /> : <Mic size={50} color="$blue10" />}
+            {isListening ? (
+              <ActivityIndicator color="cyan" />
+            ) : (
+              <Mic size={50} color="$blue10" />
+            )}
           </Circle>
         </YStack>
 
         <YStack ai="center" space="$2">
-          <Text fS={24} fOW="bold">
-            {isListening ? 'Anya is listening...' : 'Ready to Conduct'}
-          </Text>
+          <Text fS={24} fOW="bold">{isListening ? 'Anya is listening...' : 'Ready to Conduct'}</Text>
           <Text col="$colorSecondary">Sir Sonus Resonance active</Text>
         </YStack>
 
@@ -62,7 +65,7 @@ function ActivityIndicator({ color }) {
   return (
     <YStack space="$2" ai="center">
       <XStack space="$1">
-        {[1, 2, 3].map((i) => (
+        {[1, 2, 3].map(i => (
           <Circle key={i} size={8} bg={color} animation="bouncy" />
         ))}
       </XStack>

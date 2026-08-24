@@ -1,6 +1,6 @@
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-export const API_BASE = 'http://localhost:3001';
+export const API_BASE = "http://localhost:3001";
 
 export interface Agent {
   name: string;
@@ -26,7 +26,7 @@ export const api = {
       const data = await res.json();
       return data.agents || [];
     } catch (e) {
-      console.error('API Error (getAgents):', e);
+      console.error("API Error (getAgents):", e);
       return [];
     }
   },
@@ -47,21 +47,21 @@ export const api = {
         epoch: 42,
         global_tension: 0.75,
         factions: [
-          { name: 'Corp A', assets: ['Tower'] },
-          { name: 'Rebels', assets: ['Bunker'] },
+          { name: "Corp A", assets: ["Tower"] },
+          { name: "Rebels", assets: ["Bunker"] },
         ],
-        resources: { Energy: 'Low' },
+        resources: { Energy: "Low" },
       };
     } catch (e) {
-      console.warn('API Error (getWorldState), returning mock:', e);
+      console.warn("API Error (getWorldState), returning mock:", e);
       return {
         epoch: 42,
         global_tension: 0.75,
         factions: [
-          { name: 'Corp A', assets: ['Tower'] },
-          { name: 'Rebels', assets: ['Bunker'] },
+          { name: "Corp A", assets: ["Tower"] },
+          { name: "Rebels", assets: ["Bunker"] },
         ],
-        resources: { Energy: 'Low' },
+        resources: { Energy: "Low" },
       };
     }
   },
@@ -69,14 +69,16 @@ export const api = {
   /**
    * Fetch Ledger Stream
    */
-  getLedger: async (lines = 50): Promise<{ lines: string[]; total: number }> => {
+  getLedger: async (
+    lines: number = 50,
+  ): Promise<{ lines: string[]; total: number }> => {
     try {
       const res = await fetch(`${API_BASE}/system/ledger?lines=${lines}`);
       if (!res.ok) return { lines: [], total: 0 };
       const data = await res.json();
       return { lines: data.lines || [], total: data.total_lines || 0 };
     } catch (e) {
-      console.error('API Error (getLedger):', e);
+      console.error("API Error (getLedger):", e);
       return { lines: [], total: 0 };
     }
   },
@@ -87,12 +89,12 @@ export const api = {
   sendCommand: async (command: string): Promise<string> => {
     try {
       const res = await fetch(`${API_BASE}/agent/dispatch`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: command }),
       });
       const data = await res.json();
-      return data.response || 'No response';
+      return data.response || "No response";
     } catch (e) {
       return `Error: ${e}`;
     }

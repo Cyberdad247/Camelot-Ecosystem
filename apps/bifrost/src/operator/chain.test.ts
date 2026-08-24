@@ -20,8 +20,6 @@ describe('chain', () => {
 
   it('sha256Hex is deterministic', () => {
     expect(sha256Hex('abc')).toBe(sha256Hex('abc'));
-    expect(sha256Hex('abc')).toBe(
-      'sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad',
-    );
+    expect(sha256Hex('abc')).toBe('sha256:ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad');
   });
 });

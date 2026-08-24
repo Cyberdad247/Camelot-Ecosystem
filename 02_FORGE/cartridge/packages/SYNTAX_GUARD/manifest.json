@@ -1,32 +1,65 @@
 {
-  "cartridge_id": "SYNTAX_GUARD",
-  "version": "1.0.0",
-  "description": "The Syntax Guard cartridge, headlined by Sir Syntax. Focused on code quality, linting, formatting, and structural integrity.",
-  "agents": ["Sir_Syntax"],
-  "tools": ["Ruff", "Biome", "Black", "Mypy", "Prettier"],
-  "protocols": ["Squire_Clean", "AutoFormat", "TypeValidation"],
-  "capabilities": ["linting", "formatting", "static_analysis", "type_checking"],
-  "resource_budget": {
-    "max_tokens": 15000,
-    "max_memory_mb": 256,
-    "max_latency_ms": 400
-  },
-  "risk_profile": "low",
-  "governance": {
-    "HITL_required": false,
-    "allowed_tools": ["*"],
-    "denied_operations": ["destructive_write"]
-  },
-  "hooks": {
-    "on_load": ["init_linters.py"],
-    "on_unload": ["summarize_lint_stats.py"],
-    "health_check": ["verify_config_alignment.py"]
-  },
-  "embeddings": {
-    "static_docs": ["DOC_LINTING_GUIDELINES", "DOC_STYLE_GUIDES"],
-    "symbolic_snippets": ["SNIP_RUFF_CONFIG", "SNIP_BIOME_CONFIG"]
-  },
-  "signature": "sha256:b1c2d3e4f5g6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2",
-  "created_at": "2026-02-09T16:20:00Z",
-  "created_by": "Sir_Lukas"
+    "cartridge_id": "SYNTAX_GUARD",
+    "version": "1.0.0",
+    "description": "The Syntax Guard cartridge, headlined by Sir Syntax. Focused on code quality, linting, formatting, and structural integrity.",
+    "agents": [
+        "Sir_Syntax"
+    ],
+    "tools": [
+        "Ruff",
+        "Biome",
+        "Black",
+        "Mypy",
+        "Prettier"
+    ],
+    "protocols": [
+        "Squire_Clean",
+        "AutoFormat",
+        "TypeValidation"
+    ],
+    "capabilities": [
+        "linting",
+        "formatting",
+        "static_analysis",
+        "type_checking"
+    ],
+    "resource_budget": {
+        "max_tokens": 15000,
+        "max_memory_mb": 256,
+        "max_latency_ms": 400
+    },
+    "risk_profile": "low",
+    "governance": {
+        "HITL_required": false,
+        "allowed_tools": [
+            "*"
+        ],
+        "denied_operations": [
+            "destructive_write"
+        ]
+    },
+    "hooks": {
+        "on_load": [
+            "init_linters.py"
+        ],
+        "on_unload": [
+            "summarize_lint_stats.py"
+        ],
+        "health_check": [
+            "verify_config_alignment.py"
+        ]
+    },
+    "embeddings": {
+        "static_docs": [
+            "DOC_LINTING_GUIDELINES",
+            "DOC_STYLE_GUIDES"
+        ],
+        "symbolic_snippets": [
+            "SNIP_RUFF_CONFIG",
+            "SNIP_BIOME_CONFIG"
+        ]
+    },
+    "signature": "sha256:b1c2d3e4f5g6h7i8j9k0l1m2n3o4p5q6r7s8t9u0v1w2x3y4z5a6b7c8d9e0f1g2",
+    "created_at": "2026-02-09T16:20:00Z",
+    "created_by": "Sir_Lukas"
 }

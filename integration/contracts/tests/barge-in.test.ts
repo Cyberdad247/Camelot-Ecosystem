@@ -2,7 +2,10 @@
 // unused lease — as observed by the session reducer the Console renders from.
 
 import { describe, expect, it } from 'vitest';
-import { initialSessionView, reduceSessionEvent } from '../src/index.js';
+import {
+  initialSessionView,
+  reduceSessionEvent,
+} from '../src/index.js';
 import type { CapabilityLease, SessionEvent, SessionView } from '../src/index.js';
 
 const lease: CapabilityLease = {

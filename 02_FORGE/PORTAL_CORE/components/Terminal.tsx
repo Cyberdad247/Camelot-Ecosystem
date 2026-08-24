@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
+import React, { useEffect, useRef, useState } from 'react';
+import { Terminal as XTerminal } from '@xterm/xterm';
 import { FitAddon } from '@xterm/addon-fit';
 import { WebglAddon } from '@xterm/addon-webgl'; // Optional, but usually good. I'll stick to Fit for now to minimize deps.
-import { Terminal as XTerminal } from '@xterm/xterm';
-import React, { useEffect, useRef, useState } from 'react';
 import '@xterm/xterm/css/xterm.css';
 import { TerminalSquare } from 'lucide-react';
 
@@ -108,21 +108,18 @@ export default function Terminal() {
       if (input.startsWith('/query ')) {
         const query = input.replace('/query ', '');
         term.writeln('\x1b[2mSearching Vault...\x1b[0m');
-        response = await fetch(
-          `http://localhost:8001/memory/query?q=${encodeURIComponent(query)}`,
-          {
-            method: 'GET',
-            headers: { 'x-camelot-token': 'merlin-v100-dev' },
-          },
-        );
+        response = await fetch(`http://localhost:8001/memory/query?q=${encodeURIComponent(query)}`, {
+          method: 'GET',
+          headers: { 'x-camelot-token': 'merlin-v100-dev' }
+        });
       } else {
         response = await fetch('http://localhost:8001/agent/dispatch', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-camelot-token': 'merlin-v100-dev',
+            'x-camelot-token': 'merlin-v100-dev'
           },
-          body: JSON.stringify({ intent: input, agent_id: 'MERLIN' }),
+          body: JSON.stringify({ intent: input, agent_id: "MERLIN" })
         });
       }
 
@@ -140,11 +137,11 @@ export default function Terminal() {
           }
         } else {
           // Standard Agent Response
-          const reply = data.response || 'No response.';
+          const reply = data.response || "No response.";
           term.writeln(`\r\n\x1b[1;32m🧠 MERLIN_Omega>\x1b[0m ${reply}`);
         }
       } else {
-        const data = await response.json().catch(() => ({ detail: 'Unknown Error' }));
+        const data = await response.json().catch(() => ({ detail: "Unknown Error" }));
         term.writeln(`\x1b[1;31m❌ ERROR: ${data.detail || response.statusText}\x1b[0m`);
       }
     } catch (err) {
@@ -160,16 +157,12 @@ export default function Terminal() {
       <div className="bg-gray-900 border-b border-green-900 p-2 flex items-center justify-between px-4 z-10 select-none">
         <div className="flex items-center space-x-2">
           <TerminalSquare size={14} className="text-green-500" />
-          <span className="text-xs font-bold text-green-500 tracking-wider">
-            SOVEREIGN_COMMAND_UNIT_v2.0 [XTERM]
-          </span>
+          <span className="text-xs font-bold text-green-500 tracking-wider">SOVEREIGN_COMMAND_UNIT_v2.0 [XTERM]</span>
         </div>
         <div className="flex space-x-1">
           <div className="w-2 h-2 rounded-full bg-red-900"></div>
           <div className="w-2 h-2 rounded-full bg-yellow-900"></div>
-          <div
-            className={`w-2 h-2 rounded-full transition-colors duration-500 ${status === 'processing' ? 'bg-blue-500 animate-pulse' : 'bg-green-500'}`}
-          ></div>
+          <div className={`w-2 h-2 rounded-full transition-colors duration-500 ${status === 'processing' ? 'bg-blue-500 animate-pulse' : 'bg-green-500'}`}></div>
         </div>
       </div>
 

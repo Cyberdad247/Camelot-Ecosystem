@@ -38,14 +38,10 @@
     }
   },
   "active_vectors": [
-    { "agent": "Sir_Syntax", "domain": "Cross-Language_Compilation", "evidence_class": "planned" },
-    { "agent": "Merlin_Omega", "domain": "State_Ledger_Routing", "evidence_class": "planned" },
-    { "agent": "Sir_Octavian", "domain": "Tailscale_Mesh_IO", "evidence_class": "planned" },
-    {
-      "agent": "Lady_Alexandria",
-      "domain": "Wasm_Memory_Management",
-      "evidence_class": "aspirational"
-    }
+    {"agent": "Sir_Syntax", "domain": "Cross-Language_Compilation", "evidence_class": "planned"},
+    {"agent": "Merlin_Omega", "domain": "State_Ledger_Routing", "evidence_class": "planned"},
+    {"agent": "Sir_Octavian", "domain": "Tailscale_Mesh_IO", "evidence_class": "planned"},
+    {"agent": "Lady_Alexandria", "domain": "Wasm_Memory_Management", "evidence_class": "aspirational"}
   ],
   "claims_requiring_verification": [
     "Triple-QFT ingestion across React, Rust, Go, and Wasm codebases",

@@ -8,7 +8,11 @@
       "attributes": {
         "name": "Sir Lukas",
         "role": "Engineer",
-        "skills": ["Python", "FastAPI", "backend"]
+        "skills": [
+          "Python",
+          "FastAPI",
+          "backend"
+        ]
       },
       "trust_score": 0.95,
       "provenance": {

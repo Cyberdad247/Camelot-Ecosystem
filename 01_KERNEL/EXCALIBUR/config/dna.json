@@ -6,7 +6,11 @@
   "archetype": "L500_QUANTUM_SOVEREIGN",
   "author": "VaShawn O. Head",
   "company": "Invisioned Marketing inc.",
-  "runtimePlatform": ["Python 3.10+", "Node.js 18+", "Go 1.23+"],
+  "runtimePlatform": [
+    "Python 3.10+",
+    "Node.js 18+",
+    "Go 1.23+"
+  ],
   "applicationCategory": "Cognitive Operating System",
   "featureList": [
     "Autonomous Agent Orchestration",
@@ -51,7 +55,10 @@
         "channel:webchat",
         "workspace:skills"
       ],
-      "owners": ["AnyaMobileBridge", "Merlin_Omega"]
+      "owners": [
+        "AnyaMobileBridge",
+        "Merlin_Omega"
+      ]
     },
     {
       "id": "gateway::claraverse",
@@ -67,7 +74,10 @@
         "tool:data_analyst",
         "tool:multimodal_inference"
       ],
-      "owners": ["Merlin_Omega", "Sir_Oracle"]
+      "owners": [
+        "Merlin_Omega",
+        "Sir_Oracle"
+      ]
     }
   ],
   "devices": [
@@ -76,7 +86,9 @@
       "type": "mobile",
       "os": "android_ios",
       "description": "Anya mobile interface device abstraction.",
-      "gateways": ["gateway::clawdbot"]
+      "gateways": [
+        "gateway::clawdbot"
+      ]
     }
   ]
 }

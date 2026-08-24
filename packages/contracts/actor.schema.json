@@ -23,7 +23,14 @@
     "node_trust_band": {
       "description": "Trust band of the node under which this actor acted (v1.2).",
       "type": "string",
-      "enum": ["attested", "attested-witness", "enrolled", "probationary", "quarantined", "revoked"]
+      "enum": [
+        "attested",
+        "attested-witness",
+        "enrolled",
+        "probationary",
+        "quarantined",
+        "revoked"
+      ]
     },
     "persona_class": {
       "description": "Knight persona class when the actor is a compiled persona (§16).",

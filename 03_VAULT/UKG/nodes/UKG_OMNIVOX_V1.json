@@ -6,44 +6,48 @@
   "synthesis_source": "Hybrid: Multivoice-router + OmniRoute",
   "implementation_status": "COMPLETE",
   "capabilities": {
-    "intent_shattering": true,
-    "multi_persona_vox": true,
-    "sonic_caching": true,
-    "srdl_parallel_dispatch": true,
-    "lyricus_v4": true,
-    "simultaneous_synthesis": true,
-    "debate_mode": true,
-    "native_audio_routing": true,
-    "zero_cost_tts_stack": true,
-    "zero_cost_stt_stack": true
+    "intent_shattering":       true,
+    "multi_persona_vox":       true,
+    "sonic_caching":           true,
+    "srdl_parallel_dispatch":  true,
+    "lyricus_v4":              true,
+    "simultaneous_synthesis":  true,
+    "debate_mode":             true,
+    "native_audio_routing":    true,
+    "zero_cost_tts_stack":     true,
+    "zero_cost_stt_stack":     true
   },
   "components": {
-    "L3_neural": "01_KERNEL/senses/audio/lyricus_v4.py",
-    "L2_kinetic": "01_KERNEL/senses/audio/kitten_service.py",
-    "routing": "control_plane/sir_octavian.py (AudioPipelineRouter)",
-    "intent": "control_plane/intent_router.py",
-    "tts_engines": "01_KERNEL/senses/audio/tts_engines.py",
-    "stt_service": "01_KERNEL/senses/audio/stt_service.py",
-    "knight_schema": "01_KERNEL/senses/audio/knight_voices.py",
-    "session": "01_KERNEL/senses/audio/audio_session.py"
+    "L3_neural":       "01_KERNEL/senses/audio/lyricus_v4.py",
+    "L2_kinetic":      "01_KERNEL/senses/audio/kitten_service.py",
+    "routing":         "control_plane/sir_octavian.py (AudioPipelineRouter)",
+    "intent":          "control_plane/intent_router.py",
+    "tts_engines":     "01_KERNEL/senses/audio/tts_engines.py",
+    "stt_service":     "01_KERNEL/senses/audio/stt_service.py",
+    "knight_schema":   "01_KERNEL/senses/audio/knight_voices.py",
+    "session":         "01_KERNEL/senses/audio/audio_session.py"
   },
   "vocal_modes": ["SEQUENTIAL", "SIMULTANEOUS", "DEBATE"],
   "tts_engines_zero_cost": ["kokoro", "piper", "silero", "speecht5", "bark", "mms"],
   "stt_engines_zero_cost": ["faster_whisper", "whisper_hf", "wav2vec2"],
   "audio_pipelines": {
-    "cascaded": "STT → LLM → TTS  (always available, zero cost)",
+    "cascaded":     "STT → LLM → TTS  (always available, zero cost)",
     "native_audio": "Omni LLM audio-in → audio-out  (GPT-4o Realtime, Gemini Live)"
   },
   "knight_profiles": 45,
-  "connected_nodes": ["UKG_KITTEN_VOX_V1", "UKG_ANYA_SOUL_V4", "UKG_MORGANA_BRIDGE_V2"],
+  "connected_nodes": [
+    "UKG_KITTEN_VOX_V1",
+    "UKG_ANYA_SOUL_V4",
+    "UKG_MORGANA_BRIDGE_V2"
+  ],
   "metadata": {
-    "latency_target_ms": 150,
-    "cache_hit_latency_ms": 10,
-    "simultaneous_speedup": "~60% latency reduction vs sequential",
-    "ram_footprint": "8GB_SAFE",
-    "sonic_cache_mb": 25,
-    "sonic_cache_ttl_sec": 1800,
-    "soul_router_equation": "S = 0.20V + 0.35M + 0.30P + 0.15E"
+    "latency_target_ms":      150,
+    "cache_hit_latency_ms":   10,
+    "simultaneous_speedup":   "~60% latency reduction vs sequential",
+    "ram_footprint":          "8GB_SAFE",
+    "sonic_cache_mb":         25,
+    "sonic_cache_ttl_sec":    1800,
+    "soul_router_equation":   "S = 0.20V + 0.35M + 0.30P + 0.15E"
   },
   "last_synced_utc": "2026-05-17T00:00:00Z"
 }

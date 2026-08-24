@@ -1,6 +1,9 @@
 {
   "aaliyah_hits": [
-    [361, "            \"Specify cartridge ignition order for Aaliyah/Castellon/etc.\","]
+    [
+      361,
+      "            \"Specify cartridge ignition order for Aaliyah/Castellon/etc.\","
+    ]
   ],
   "aegis_hits": [
     [
@@ -9,12 +12,30 @@
     ]
   ],
   "kba_services_hits": [
-    [311, "    \"schema\": \"camelot-os.system/schema/cybertronia/v26/kba_services\","],
-    [333, "        \"domain\": \"KBA_SERVICES\","],
-    [344, "        \"domain\": \"KBA_SERVICES\","],
-    [354, "        \"domain\": \"KBA_SERVICES\","],
-    [365, "        \"domain\": \"KBA_SERVICES\","],
-    [410, "        \"domain\": cfg.get(\"domain\", \"KBA_SERVICES\"),"]
+    [
+      311,
+      "    \"schema\": \"camelot-os.system/schema/cybertronia/v26/kba_services\","
+    ],
+    [
+      333,
+      "        \"domain\": \"KBA_SERVICES\","
+    ],
+    [
+      344,
+      "        \"domain\": \"KBA_SERVICES\","
+    ],
+    [
+      354,
+      "        \"domain\": \"KBA_SERVICES\","
+    ],
+    [
+      365,
+      "        \"domain\": \"KBA_SERVICES\","
+    ],
+    [
+      410,
+      "        \"domain\": cfg.get(\"domain\", \"KBA_SERVICES\"),"
+    ]
   ],
   "amani_hits": [],
   "argus_hits": [],

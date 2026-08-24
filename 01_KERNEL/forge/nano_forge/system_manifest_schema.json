@@ -1,93 +1,123 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "Nano Knight System Manifest",
-  "description": "Configuration schema for a Nano Knight agent.",
-  "type": "object",
-  "required": ["id", "archetype", "bio_mode", "permissions", "capabilities"],
-  "properties": {
-    "id": {
-      "type": "string",
-      "description": "Unique identifier for the Nano Knight (e.g., knight_scout_01)."
-    },
-    "archetype": {
-      "type": "string",
-      "enum": ["NANO_KNIGHT"],
-      "default": "NANO_KNIGHT"
-    },
-    "bio_mode": {
-      "type": "string",
-      "enum": ["ANT", "BEAVER", "SPIDER", "SENTINEL"],
-      "description": "Operational mode defining resource usage and behavior."
-    },
-    "permissions": {
-      "type": "object",
-      "required": ["file_system", "network"],
-      "properties": {
-        "file_system": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of allowed directory paths."
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Nano Knight System Manifest",
+    "description": "Configuration schema for a Nano Knight agent.",
+    "type": "object",
+    "required": [
+        "id",
+        "archetype",
+        "bio_mode",
+        "permissions",
+        "capabilities"
+    ],
+    "properties": {
+        "id": {
+            "type": "string",
+            "description": "Unique identifier for the Nano Knight (e.g., knight_scout_01)."
         },
-        "network": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of allowed domains (allow_list)."
+        "archetype": {
+            "type": "string",
+            "enum": [
+                "NANO_KNIGHT"
+            ],
+            "default": "NANO_KNIGHT"
         },
-        "max_ram": {
-          "type": "string",
-          "pattern": "^[0-9]+(MB|GB)$",
-          "description": "Maximum RAM allocation."
+        "bio_mode": {
+            "type": "string",
+            "enum": [
+                "ANT",
+                "BEAVER",
+                "SPIDER",
+                "SENTINEL"
+            ],
+            "description": "Operational mode defining resource usage and behavior."
+        },
+        "permissions": {
+            "type": "object",
+            "required": [
+                "file_system",
+                "network"
+            ],
+            "properties": {
+                "file_system": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of allowed directory paths."
+                },
+                "network": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of allowed domains (allow_list)."
+                },
+                "max_ram": {
+                    "type": "string",
+                    "pattern": "^[0-9]+(MB|GB)$",
+                    "description": "Maximum RAM allocation."
+                }
+            }
+        },
+        "capabilities": {
+            "type": "object",
+            "properties": {
+                "browser_engine": {
+                    "type": "string",
+                    "enum": [
+                        "playwright-core",
+                        "puppeteer",
+                        "chrome-extension",
+                        "hybrid",
+                        "none"
+                    ],
+                    "default": "playwright-core"
+                },
+                "anti_detect": {
+                    "type": "boolean",
+                    "default": true
+                },
+                "mcp_tools": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of enabled MCP tools."
+                }
+            }
+        },
+        "profile_config": {
+            "type": "object",
+            "properties": {
+                "fingerprint_seed": {
+                    "type": "string"
+                },
+                "user_agent_rotation": {
+                    "type": "string",
+                    "enum": [
+                        "session",
+                        "daily",
+                        "none"
+                    ]
+                }
+            }
+        },
+        "governance": {
+            "type": "object",
+            "properties": {
+                "iron_gate_level": {
+                    "type": "string",
+                    "enum": [
+                        "BLUE",
+                        "AMBER",
+                        "RED"
+                    ]
+                },
+                "owner": {
+                    "type": "string"
+                }
+            }
         }
-      }
-    },
-    "capabilities": {
-      "type": "object",
-      "properties": {
-        "browser_engine": {
-          "type": "string",
-          "enum": ["playwright-core", "puppeteer", "chrome-extension", "hybrid", "none"],
-          "default": "playwright-core"
-        },
-        "anti_detect": {
-          "type": "boolean",
-          "default": true
-        },
-        "mcp_tools": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of enabled MCP tools."
-        }
-      }
-    },
-    "profile_config": {
-      "type": "object",
-      "properties": {
-        "fingerprint_seed": {
-          "type": "string"
-        },
-        "user_agent_rotation": {
-          "type": "string",
-          "enum": ["session", "daily", "none"]
-        }
-      }
-    },
-    "governance": {
-      "type": "object",
-      "properties": {
-        "iron_gate_level": {
-          "type": "string",
-          "enum": ["BLUE", "AMBER", "RED"]
-        },
-        "owner": {
-          "type": "string"
-        }
-      }
     }
-  }
 }

@@ -41,13 +41,7 @@ function readDisplayProfile(): DisplayProfile {
   const reducedMotion = safeMatchMedia('(prefers-reduced-motion: reduce)').matches;
   const lowHeight = height < 760;
   const displayClass: DisplayClass =
-    width < 720
-      ? 'handheld'
-      : width < 1120
-        ? 'tablet'
-        : width >= 1920 && height >= 980
-          ? 'wall'
-          : 'console';
+    width < 720 ? 'handheld' : width < 1120 ? 'tablet' : width >= 1920 && height >= 980 ? 'wall' : 'console';
 
   return {
     width,

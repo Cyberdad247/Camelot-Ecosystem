@@ -1,83 +1,89 @@
 {
-  "@context": "https://camelot.os/ukg/v1",
-  "@type": "KnowledgeCrystal",
-  "id": "CAMELOT_APEX_Ω_PRIME_CRYSTAL",
-  "status": "RADIANT",
-  "version": "v204.0",
-  "mantra": "Context is the Compiler. Invariant Truths Locked.",
-  "architecture": {
-    "topology": "Septem Regna (7-Layer Sovereign Stack)",
-    "layers": {
-      "L7": {
-        "name": "Ethereal",
-        "guardian": "Anya",
-        "tech": "Triple-QFT / Next.js",
-        "role": "Intent Compiler"
-      },
-      "L6": {
-        "name": "Governance",
-        "guardian": "Arthur",
-        "tech": "Iron Gate",
-        "role": "Law Enforcer"
-      },
-      "L5": {
-        "name": "Agentic",
-        "guardian": "Paladin",
-        "tech": "SARDA Engine",
-        "role": "Swarm Orchestrator"
-      },
-      "L4": {
-        "name": "Semantic",
-        "guardian": "Chronos",
-        "tech": "UKG (GraphRAG)",
-        "role": "Truth Memory"
-      },
-      "L3": {
-        "name": "Neural",
-        "guardian": "Merlin",
-        "tech": "Videneptus LaC",
-        "role": "Cognitive Brain"
-      },
-      "L2": {
-        "name": "Kinetic",
-        "guardian": "Lukas",
-        "tech": "Saltare / Cribo / Rotel",
-        "role": "Binary Execution"
-      },
-      "L1": {
-        "name": "Substrate",
-        "guardian": "Morgana",
-        "tech": "Modal / Docker",
-        "role": "Metal Bridge"
-      }
-    }
-  },
-  "kinetic_trinity": {
-    "saltare": {
-      "role": "Semantic MCP Router",
-      "tech": "Go-native",
-      "port": 8080
+    "@context": "https://camelot.os/ukg/v1",
+    "@type": "KnowledgeCrystal",
+    "id": "CAMELOT_APEX_Ω_PRIME_CRYSTAL",
+    "status": "RADIANT",
+    "version": "v204.0",
+    "mantra": "Context is the Compiler. Invariant Truths Locked.",
+    "architecture": {
+        "topology": "Septem Regna (7-Layer Sovereign Stack)",
+        "layers": {
+            "L7": {
+                "name": "Ethereal",
+                "guardian": "Anya",
+                "tech": "Triple-QFT / Next.js",
+                "role": "Intent Compiler"
+            },
+            "L6": {
+                "name": "Governance",
+                "guardian": "Arthur",
+                "tech": "Iron Gate",
+                "role": "Law Enforcer"
+            },
+            "L5": {
+                "name": "Agentic",
+                "guardian": "Paladin",
+                "tech": "SARDA Engine",
+                "role": "Swarm Orchestrator"
+            },
+            "L4": {
+                "name": "Semantic",
+                "guardian": "Chronos",
+                "tech": "UKG (GraphRAG)",
+                "role": "Truth Memory"
+            },
+            "L3": {
+                "name": "Neural",
+                "guardian": "Merlin",
+                "tech": "Videneptus LaC",
+                "role": "Cognitive Brain"
+            },
+            "L2": {
+                "name": "Kinetic",
+                "guardian": "Lukas",
+                "tech": "Saltare / Cribo / Rotel",
+                "role": "Binary Execution"
+            },
+            "L1": {
+                "name": "Substrate",
+                "guardian": "Morgana",
+                "tech": "Modal / Docker",
+                "role": "Metal Bridge"
+            }
+        }
     },
-    "cribo": {
-      "role": "Context Compressor",
-      "tech": "Rust-based",
-      "function": "Tree-shaking"
+    "kinetic_trinity": {
+        "saltare": {
+            "role": "Semantic MCP Router",
+            "tech": "Go-native",
+            "port": 8080
+        },
+        "cribo": {
+            "role": "Context Compressor",
+            "tech": "Rust-based",
+            "function": "Tree-shaking"
+        },
+        "rotel": {
+            "role": "Telemetry / Black Box",
+            "tech": "Rust OpenTelemetry",
+            "function": "Thought Tracing"
+        }
     },
-    "rotel": {
-      "role": "Telemetry / Black Box",
-      "tech": "Rust OpenTelemetry",
-      "function": "Thought Tracing"
-    }
-  },
-  "titanium_laws": [
-    "Law of Kinetic Purity: Prefer Binaries over Scripts",
-    "Law of Antigravity: Mandatory I/O Middleware",
-    "Law of the Ledger: Cryptographic Action Logging"
-  ],
-  "swarm_protocols": {
-    "framework": "HIVE_IDE v6.0",
-    "methodology": "Map-Reduce Knight Crusades",
-    "knights": ["Oracle", "Forge", "Sentinel", "Debug", "Aegis"]
-  },
-  "checksum": "Ω-PRIME-CRYSTAL-LOCK"
+    "titanium_laws": [
+        "Law of Kinetic Purity: Prefer Binaries over Scripts",
+        "Law of Antigravity: Mandatory I/O Middleware",
+        "Law of the Ledger: Cryptographic Action Logging"
+    ],
+    "swarm_protocols": {
+        "framework": "HIVE_IDE v6.0",
+        "methodology": "Map-Reduce Knight Crusades",
+        "knights": [
+            "Oracle",
+            "Forge",
+            "Sentinel",
+            "Debug",
+            "Aegis"
+        ]
+    },
+    "checksum": "Ω-PRIME-CRYSTAL-LOCK"
 }

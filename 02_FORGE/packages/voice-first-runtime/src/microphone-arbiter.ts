@@ -15,7 +15,7 @@ export class MicrophoneArbiter {
   private readonly subscribers = new Set<Subscriber>();
 
   acquire(holderId: string, reason: string): MicrophoneLease {
-    if (!holderId.trim()) throw new Error('Microphone holderId is required.');
+    if (!holderId.trim()) throw new Error("Microphone holderId is required.");
     if (this.state.holderId && this.state.holderId !== holderId) {
       return { ok: false, currentHolder: this.state.holderId, reason: this.state.reason };
     }

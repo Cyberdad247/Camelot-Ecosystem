@@ -26,18 +26,10 @@ export function CancellationDialog({
           cancellation receipt.
         </p>
         <div className="mt-5 flex justify-end gap-3">
-          <button
-            type="button"
-            onClick={onCancel}
-            className="border border-white/20 px-4 py-2 text-xs uppercase tracking-widest text-white/60"
-          >
+          <button type="button" onClick={onCancel} className="border border-white/20 px-4 py-2 text-xs uppercase tracking-widest text-white/60">
             Keep running
           </button>
-          <button
-            type="button"
-            onClick={onConfirm}
-            className="border border-red-400/60 px-4 py-2 text-xs uppercase tracking-widest text-red-300"
-          >
+          <button type="button" onClick={onConfirm} className="border border-red-400/60 px-4 py-2 text-xs uppercase tracking-widest text-red-300">
             Confirm cancel
           </button>
         </div>

@@ -20,7 +20,11 @@
   "01_KERNEL_AGENTS": {
     "root": "01_KERNEL",
     "path": "agents",
-    "cells": ["armory.py", "knight_base.py", "roster.json"]
+    "cells": [
+      "armory.py",
+      "knight_base.py",
+      "roster.json"
+    ]
   },
   "01_KERNEL_AGORA": {
     "root": "01_KERNEL",
@@ -39,17 +43,26 @@
   "01_KERNEL_AGORA_KNIGHTS": {
     "root": "01_KERNEL",
     "path": "agora\\knights",
-    "cells": ["notebook_knight.py", "omni_knight.py", "opencode_knight.py"]
+    "cells": [
+      "notebook_knight.py",
+      "omni_knight.py",
+      "opencode_knight.py"
+    ]
   },
   "01_KERNEL_AGORA_MODELS": {
     "root": "01_KERNEL",
     "path": "agora\\models",
-    "cells": ["proteus_vector.py"]
+    "cells": [
+      "proteus_vector.py"
+    ]
   },
   "01_KERNEL_ASSIMILATION": {
     "root": "01_KERNEL",
     "path": "assimilation",
-    "cells": ["__init__.py", "__main__.py"]
+    "cells": [
+      "__init__.py",
+      "__main__.py"
+    ]
   },
   "01_KERNEL_ASSIMILATION_CORE": {
     "root": "01_KERNEL",
@@ -67,17 +80,24 @@
   "01_KERNEL_ASSIMILATION_TESTS": {
     "root": "01_KERNEL",
     "path": "assimilation\\tests",
-    "cells": ["test_integration.py"]
+    "cells": [
+      "test_integration.py"
+    ]
   },
   "01_KERNEL_AUDIO": {
     "root": "01_KERNEL",
     "path": "audio",
-    "cells": ["vox_anima.py", "vox_service.py"]
+    "cells": [
+      "vox_anima.py",
+      "vox_service.py"
+    ]
   },
   "01_KERNEL_AUDIO_SONUS": {
     "root": "01_KERNEL",
     "path": "audio\\sonus",
-    "cells": ["compiler.py"]
+    "cells": [
+      "compiler.py"
+    ]
   },
   "01_KERNEL_CONFIG": {
     "root": "01_KERNEL",
@@ -96,37 +116,57 @@
   "01_KERNEL_CONFIG_SCHEMAS": {
     "root": "01_KERNEL",
     "path": "config\\schemas",
-    "cells": ["agent_dispatch.schema.json", "memory_query.schema.json", "system_health.schema.json"]
+    "cells": [
+      "agent_dispatch.schema.json",
+      "memory_query.schema.json",
+      "system_health.schema.json"
+    ]
   },
   "01_KERNEL_CONNECTIVITY": {
     "root": "01_KERNEL",
     "path": "connectivity",
-    "cells": ["aether.py", "titanlink_server.py"]
+    "cells": [
+      "aether.py",
+      "titanlink_server.py"
+    ]
   },
   "01_KERNEL_CONNECTIVITY_BRIDGES": {
     "root": "01_KERNEL",
     "path": "connectivity\\bridges",
-    "cells": ["clawdbot_client.py"]
+    "cells": [
+      "clawdbot_client.py"
+    ]
   },
   "01_KERNEL_DATA": {
     "root": "01_KERNEL",
     "path": "data",
-    "cells": ["titan_ledger.json", "ukg_seed.json", "wvs_map.json"]
+    "cells": [
+      "titan_ledger.json",
+      "ukg_seed.json",
+      "wvs_map.json"
+    ]
   },
   "01_KERNEL_DATA_PIPELINE": {
     "root": "01_KERNEL",
     "path": "Data_Pipeline",
-    "cells": ["Assimilation_Protocol.md", "storage.py"]
+    "cells": [
+      "Assimilation_Protocol.md",
+      "storage.py"
+    ]
   },
   "01_KERNEL_DEPLOYMENT_CRIBO": {
     "root": "01_KERNEL",
     "path": "deployment\\cribo",
-    "cells": ["bundler.py"]
+    "cells": [
+      "bundler.py"
+    ]
   },
   "01_KERNEL_ENGINES": {
     "root": "01_KERNEL",
     "path": "Engines",
-    "cells": ["prism_gateway.py"]
+    "cells": [
+      "prism_gateway.py"
+    ]
   },
   "01_KERNEL_ENGINES_CRAWL4AI": {
     "root": "01_KERNEL",
@@ -167,22 +207,32 @@
   "01_KERNEL_ENGINES_CRAWL4AI_COMPONENTS": {
     "root": "01_KERNEL",
     "path": "Engines\\crawl4ai\\components",
-    "cells": ["crawler_monitor.py"]
+    "cells": [
+      "crawler_monitor.py"
+    ]
   },
   "01_KERNEL_ENGINES_CRAWL4AI_CRAWLERS": {
     "root": "01_KERNEL",
     "path": "Engines\\crawl4ai\\crawlers",
-    "cells": ["__init__.py"]
+    "cells": [
+      "__init__.py"
+    ]
   },
   "01_KERNEL_ENGINES_CRAWL4AI_CRAWLERS_AMAZON_PRODUCT": {
     "root": "01_KERNEL",
     "path": "Engines\\crawl4ai\\crawlers\\amazon_product",
-    "cells": ["crawler.py", "__init__.py"]
+    "cells": [
+      "crawler.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_ENGINES_CRAWL4AI_CRAWLERS_GOOGLE_SEARCH": {
     "root": "01_KERNEL",
     "path": "Engines\\crawl4ai\\crawlers\\google_search",
-    "cells": ["crawler.py", "__init__.py"]
+    "cells": [
+      "crawler.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_ENGINES_CRAWL4AI_DEEP_CRAWLING": {
     "root": "01_KERNEL",
@@ -214,7 +264,9 @@
   "01_KERNEL_ENGINES_CRAWL4AI_JS_SNIPPET": {
     "root": "01_KERNEL",
     "path": "Engines\\crawl4ai\\js_snippet",
-    "cells": ["__init__.py"]
+    "cells": [
+      "__init__.py"
+    ]
   },
   "01_KERNEL_ENGINES_CRAWL4AI_LEGACY": {
     "root": "01_KERNEL",
@@ -233,17 +285,26 @@
   "01_KERNEL_ENGINES_CRAWL4AI_PROCESSORS_PDF": {
     "root": "01_KERNEL",
     "path": "Engines\\crawl4ai\\processors\\pdf",
-    "cells": ["processor.py", "utils.py", "__init__.py"]
+    "cells": [
+      "processor.py",
+      "utils.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_ENGINES_SYMBOLECT_TRANSPILER": {
     "root": "01_KERNEL",
     "path": "Engines\\symbolect_transpiler",
-    "cells": ["symbolect.py"]
+    "cells": [
+      "symbolect.py"
+    ]
   },
   "01_KERNEL_EXCALIBUR": {
     "root": "01_KERNEL",
     "path": "EXCALIBUR",
-    "cells": ["main.py", "system_prompt.md"]
+    "cells": [
+      "main.py",
+      "system_prompt.md"
+    ]
   },
   "01_KERNEL_EXP": {
     "root": "01_KERNEL",
@@ -266,17 +327,27 @@
   "01_KERNEL_GATES": {
     "root": "01_KERNEL",
     "path": "gates",
-    "cells": ["zenith_exp_gate.py", "__init__.py"]
+    "cells": [
+      "zenith_exp_gate.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_GRAPH": {
     "root": "01_KERNEL",
     "path": "graph",
-    "cells": ["knowledge_graph.py", "__init__.py"]
+    "cells": [
+      "knowledge_graph.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_LEARNING": {
     "root": "01_KERNEL",
     "path": "learning",
-    "cells": ["dataset_collector.py", "dataset_generator.py", "omega_trainer.py"]
+    "cells": [
+      "dataset_collector.py",
+      "dataset_generator.py",
+      "omega_trainer.py"
+    ]
   },
   "01_KERNEL_MEMORY": {
     "root": "01_KERNEL",
@@ -301,7 +372,9 @@
   "01_KERNEL_MEMORY_GRAPHRAG": {
     "root": "01_KERNEL",
     "path": "memory\\graphrag",
-    "cells": ["compressor.py"]
+    "cells": [
+      "compressor.py"
+    ]
   },
   "01_KERNEL_NANO_FORGE": {
     "root": "01_KERNEL",
@@ -321,12 +394,16 @@
   "01_KERNEL_NANO_FORGE_BEHAVIORS": {
     "root": "01_KERNEL",
     "path": "nano_forge\\behaviors",
-    "cells": ["human_simulator.py"]
+    "cells": [
+      "human_simulator.py"
+    ]
   },
   "01_KERNEL_NANO_FORGE_DIST_NANO_KNIGHTS": {
     "root": "01_KERNEL",
     "path": "nano_forge\\dist\\nano_knights",
-    "cells": ["knight_scout_01.py"]
+    "cells": [
+      "knight_scout_01.py"
+    ]
   },
   "01_KERNEL_NANO_FORGE_EXTENSION": {
     "root": "01_KERNEL",
@@ -349,12 +426,16 @@
   "01_KERNEL_NANO_FORGE_EXTENSION__LOCALES_EN": {
     "root": "01_KERNEL",
     "path": "nano_forge\\extension\\_locales\\en",
-    "cells": ["messages.json"]
+    "cells": [
+      "messages.json"
+    ]
   },
   "01_KERNEL_NANO_FORGE_EXTENSION__LOCALES_ZH_TW": {
     "root": "01_KERNEL",
     "path": "nano_forge\\extension\\_locales\\zh_TW",
-    "cells": ["messages.json"]
+    "cells": [
+      "messages.json"
+    ]
   },
   "01_KERNEL_PHIALS": {
     "root": "01_KERNEL",
@@ -370,32 +451,44 @@
   "01_KERNEL_PHIALS_REGEX_CLEANER": {
     "root": "01_KERNEL",
     "path": "phials\\regex_cleaner",
-    "cells": ["main.py"]
+    "cells": [
+      "main.py"
+    ]
   },
   "01_KERNEL_PROMPTS": {
     "root": "01_KERNEL",
     "path": "prompts",
-    "cells": ["merlin_v2.md"]
+    "cells": [
+      "merlin_v2.md"
+    ]
   },
   "01_KERNEL_PROMPTS_AUDIO": {
     "root": "01_KERNEL",
     "path": "prompts\\AUDIO",
-    "cells": ["SIR_SONUS_\u03a9.md"]
+    "cells": [
+      "SIR_SONUS_\u03a9.md"
+    ]
   },
   "01_KERNEL_PROMPTS_DEVELOPMENT": {
     "root": "01_KERNEL",
     "path": "prompts\\DEVELOPMENT",
-    "cells": ["kaito_pruner.md"]
+    "cells": [
+      "kaito_pruner.md"
+    ]
   },
   "01_KERNEL_PROMPTS_FORGE": {
     "root": "01_KERNEL",
     "path": "prompts\\FORGE",
-    "cells": ["TITAN_FORGE_\u03a9.md"]
+    "cells": [
+      "TITAN_FORGE_\u03a9.md"
+    ]
   },
   "01_KERNEL_PROMPTS_GUILDS": {
     "root": "01_KERNEL",
     "path": "prompts\\guilds",
-    "cells": ["think_tank.md"]
+    "cells": [
+      "think_tank.md"
+    ]
   },
   "01_KERNEL_PROMPTS_HYBRID_OMEGA": {
     "root": "01_KERNEL",
@@ -411,22 +504,34 @@
   "01_KERNEL_PROMPTS_LEGACY": {
     "root": "01_KERNEL",
     "path": "prompts\\LEGACY",
-    "cells": ["v33_universal.md"]
+    "cells": [
+      "v33_universal.md"
+    ]
   },
   "01_KERNEL_PROMPTS_ORACLE": {
     "root": "01_KERNEL",
     "path": "prompts\\oracle",
-    "cells": ["EVENT_WEAVER.md", "NPC_FORGE.md", "SCENARIO_GENERATOR.md"]
+    "cells": [
+      "EVENT_WEAVER.md",
+      "NPC_FORGE.md",
+      "SCENARIO_GENERATOR.md"
+    ]
   },
   "01_KERNEL_PROMPTS_SYNTHESIS": {
     "root": "01_KERNEL",
     "path": "prompts\\SYNTHESIS",
-    "cells": ["\u03a9_NOTEBOOK_COMPILER.md"]
+    "cells": [
+      "\u03a9_NOTEBOOK_COMPILER.md"
+    ]
   },
   "01_KERNEL_PROTOCOLS": {
     "root": "01_KERNEL",
     "path": "Protocols",
-    "cells": ["ASSIMILATE.md", "AUDIT_v32.md", "SECURITY.md"]
+    "cells": [
+      "ASSIMILATE.md",
+      "AUDIT_v32.md",
+      "SECURITY.md"
+    ]
   },
   "01_KERNEL_PROTOCOLS_THINKTANK": {
     "root": "01_KERNEL",
@@ -445,17 +550,25 @@
   "01_KERNEL_PROTOCOLS_WARROOM": {
     "root": "01_KERNEL",
     "path": "Protocols\\WarRoom",
-    "cells": ["PROTOCOL.md"]
+    "cells": [
+      "PROTOCOL.md"
+    ]
   },
   "01_KERNEL_PROXY": {
     "root": "01_KERNEL",
     "path": "proxy",
-    "cells": ["bridge.py"]
+    "cells": [
+      "bridge.py"
+    ]
   },
   "01_KERNEL_RAG": {
     "root": "01_KERNEL",
     "path": "rag",
-    "cells": ["chronos.py", "lightrag_engine.py", "__init__.py"]
+    "cells": [
+      "chronos.py",
+      "lightrag_engine.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_REASONING": {
     "root": "01_KERNEL",
@@ -480,12 +593,20 @@
   "01_KERNEL_RUNE_PHASES": {
     "root": "01_KERNEL",
     "path": "rune_phases",
-    "cells": ["experience_check.py", "graph_traverse.py", "lightrag_retrieve.py", "__init__.py"]
+    "cells": [
+      "experience_check.py",
+      "graph_traverse.py",
+      "lightrag_retrieve.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_SCHEMAS": {
     "root": "01_KERNEL",
     "path": "schemas",
-    "cells": ["anya_constrict.py", "logging_schema.json"]
+    "cells": [
+      "anya_constrict.py",
+      "logging_schema.json"
+    ]
   },
   "01_KERNEL_SCRIPTS": {
     "root": "01_KERNEL",
@@ -540,27 +661,39 @@
   "01_KERNEL_SHARED": {
     "root": "01_KERNEL",
     "path": "shared",
-    "cells": ["symbolect.py", "__init__.py"]
+    "cells": [
+      "symbolect.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_SKILLS_REPO_FORENSIC_AUDIT": {
     "root": "01_KERNEL",
     "path": "skills\\repo_forensic_audit",
-    "cells": ["SKILL.md"]
+    "cells": [
+      "SKILL.md"
+    ]
   },
   "01_KERNEL_SKILLS_VISUAL_QA_SENTRY": {
     "root": "01_KERNEL",
     "path": "skills\\visual_qa_sentry",
-    "cells": ["SKILL.md"]
+    "cells": [
+      "SKILL.md"
+    ]
   },
   "01_KERNEL_SQUIRE": {
     "root": "01_KERNEL",
     "path": "squire",
-    "cells": ["biome.json", "task.md"]
+    "cells": [
+      "biome.json",
+      "task.md"
+    ]
   },
   "01_KERNEL_SQUIRES": {
     "root": "01_KERNEL",
     "path": "Squires",
-    "cells": ["ignite_notebook.py"]
+    "cells": [
+      "ignite_notebook.py"
+    ]
   },
   "01_KERNEL_SQUIRES_COMMANDS": {
     "root": "01_KERNEL",
@@ -682,12 +815,20 @@
   "01_KERNEL_SQUIRES_OPEN_NOTEBOOK": {
     "root": "01_KERNEL",
     "path": "Squires\\open_notebook",
-    "cells": ["config.py", "exceptions.py", "__init__.py"]
+    "cells": [
+      "config.py",
+      "exceptions.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_DATABASE": {
     "root": "01_KERNEL",
     "path": "Squires\\open_notebook\\database",
-    "cells": ["async_migrate.py", "migrate.py", "repository.py"]
+    "cells": [
+      "async_migrate.py",
+      "migrate.py",
+      "repository.py"
+    ]
   },
   "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_DOMAIN": {
     "root": "01_KERNEL",
@@ -719,7 +860,9 @@
   "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_PLUGINS": {
     "root": "01_KERNEL",
     "path": "Squires\\open_notebook\\plugins",
-    "cells": ["podcasts.py"]
+    "cells": [
+      "podcasts.py"
+    ]
   },
   "01_KERNEL_SQUIRES_OPEN_NOTEBOOK_UTILS": {
     "root": "01_KERNEL",
@@ -736,7 +879,11 @@
   "01_KERNEL_STORAGE": {
     "root": "01_KERNEL",
     "path": "storage",
-    "cells": ["exp_ledger.py", "sync_protocol.py", "__init__.py"]
+    "cells": [
+      "exp_ledger.py",
+      "sync_protocol.py",
+      "__init__.py"
+    ]
   },
   "01_KERNEL_SWARMS": {
     "root": "01_KERNEL",
@@ -754,7 +901,9 @@
   "01_KERNEL_SWARMS_PERPLEXITY": {
     "root": "01_KERNEL",
     "path": "swarms\\perplexity",
-    "cells": ["scout_sonar.py"]
+    "cells": [
+      "scout_sonar.py"
+    ]
   },
   "01_KERNEL_TESTS": {
     "root": "01_KERNEL",
@@ -787,102 +936,159 @@
   "01_KERNEL_TRAIN": {
     "root": "01_KERNEL",
     "path": "train",
-    "cells": ["prep_data.py"]
+    "cells": [
+      "prep_data.py"
+    ]
   },
   "01_KERNEL_WORKFLOWS": {
     "root": "01_KERNEL",
     "path": "workflows",
-    "cells": ["validation_workflow.json"]
+    "cells": [
+      "validation_workflow.json"
+    ]
   },
   "src_CORE": {
     "root": "src",
     "path": ".",
-    "cells": ["__init__.py"]
+    "cells": [
+      "__init__.py"
+    ]
   },
   "SRC_CAMELOT_CLI_CORE": {
     "root": "src",
     "path": "camelot_cli\\core",
-    "cells": ["handlers.py", "parser.py"]
+    "cells": [
+      "handlers.py",
+      "parser.py"
+    ]
   },
   "SRC_CONNECTIVITY": {
     "root": "src",
     "path": "connectivity",
-    "cells": ["saltare.py"]
+    "cells": [
+      "saltare.py"
+    ]
   },
   "SRC_ENGINES_INTERFACE": {
     "root": "src",
     "path": "engines\\interface",
-    "cells": ["aether.py", "antigravity.py", "aurora.py", "genesis.py", "lyricus.py"]
+    "cells": [
+      "aether.py",
+      "antigravity.py",
+      "aurora.py",
+      "genesis.py",
+      "lyricus.py"
+    ]
   },
   "SRC_ENGINES_LOGIC": {
     "root": "src",
     "path": "engines\\logic",
-    "cells": ["apee.py", "prometheus.py", "videneptus.py"]
+    "cells": [
+      "apee.py",
+      "prometheus.py",
+      "videneptus.py"
+    ]
   },
   "SRC_ENGINES_MEMORY": {
     "root": "src",
     "path": "engines\\memory",
-    "cells": ["helix.py", "ouroboros.py", "veritas.py"]
+    "cells": [
+      "helix.py",
+      "ouroboros.py",
+      "veritas.py"
+    ]
   },
   "SRC_ENGINES_RENDERING": {
     "root": "src",
     "path": "engines\\rendering",
-    "cells": ["prism.py"]
+    "cells": [
+      "prism.py"
+    ]
   },
   "SRC_KERNEL": {
     "root": "src",
     "path": "kernel",
-    "cells": ["router.py"]
+    "cells": [
+      "router.py"
+    ]
   },
   "SRC_KNIGHTS": {
     "root": "src",
     "path": "knights",
-    "cells": ["__init__.py"]
+    "cells": [
+      "__init__.py"
+    ]
   },
   "SRC_KNIGHTS_BYTEBOT": {
     "root": "src",
     "path": "knights\\bytebot",
-    "cells": ["bytebot_knight.py", "__init__.py"]
+    "cells": [
+      "bytebot_knight.py",
+      "__init__.py"
+    ]
   },
   "SRC_KNIGHTS_BYTEBOT_COMPONENTS_BYTEBOT-AGENT": {
     "root": "src",
     "path": "knights\\bytebot\\components\\bytebot-agent",
-    "cells": ["package.json"]
+    "cells": [
+      "package.json"
+    ]
   },
   "SRC_KNIGHTS_BYTEBOT_COMPONENTS_BYTEBOT-AGENT-CC": {
     "root": "src",
     "path": "knights\\bytebot\\components\\bytebot-agent-cc",
-    "cells": ["package.json"]
+    "cells": [
+      "package.json"
+    ]
   },
   "SRC_KNIGHTS_BYTEBOT_COMPONENTS_BYTEBOTD": {
     "root": "src",
     "path": "knights\\bytebot\\components\\bytebotd",
-    "cells": ["package.json"]
+    "cells": [
+      "package.json"
+    ]
   },
   "SRC_SWARM": {
     "root": "src",
     "path": "swarm",
-    "cells": ["README.md"]
+    "cells": [
+      "README.md"
+    ]
   },
   "SRC_TOOLS": {
     "root": "src",
     "path": "tools",
-    "cells": ["antigravity.py", "context_optimizer.py", "rotel.py", "__init__.py"]
+    "cells": [
+      "antigravity.py",
+      "context_optimizer.py",
+      "rotel.py",
+      "__init__.py"
+    ]
   },
   "SRC_TOOLS_ANTIGRAVITY_CORE_PYTHON": {
     "root": "src",
     "path": "tools\\antigravity_core\\python",
-    "cells": ["api.py", "config_loader.py", "main.py", "schemas.py", "squire_ghost.py"]
+    "cells": [
+      "api.py",
+      "config_loader.py",
+      "main.py",
+      "schemas.py",
+      "squire_ghost.py"
+    ]
   },
   "SRC_UKG": {
     "root": "src",
     "path": "ukg",
-    "cells": ["ukg.py"]
+    "cells": [
+      "ukg.py"
+    ]
   },
   "APPS_ANYA-LYTE": {
     "root": "apps",
     "path": "anya-lyte",
-    "cells": ["package.json"]
+    "cells": [
+      "package.json"
+    ]
   },
   "DOCS_GUIDES": {
     "root": "docs",
@@ -897,12 +1103,18 @@
   "RESEARCH": {
     "root": "docs",
     "path": "RESEARCH",
-    "cells": ["KINETIC_RESEARCH_MEMO_v1.0.md"]
+    "cells": [
+      "KINETIC_RESEARCH_MEMO_v1.0.md"
+    ]
   },
   "VAULT": {
     "root": "03_VAULT",
     "path": "",
-    "cells": ["ZERO_TRUST_VAULT.md", "vault_manager.py", "ollama_client.py"]
+    "cells": [
+      "ZERO_TRUST_VAULT.md",
+      "vault_manager.py",
+      "ollama_client.py"
+    ]
   },
   "02_FORGE_TITAN_MAESTRO": {
     "root": "02_FORGE",
@@ -918,21 +1130,33 @@
   "02_FORGE_TITAN_HAYSTACK": {
     "root": "02_FORGE",
     "path": "assimilated\\titan_swarm_v2\\haystack",
-    "cells": ["README.md", "pyproject.toml", "CONTRIBUTING.md"]
+    "cells": [
+      "README.md",
+      "pyproject.toml",
+      "CONTRIBUTING.md"
+    ]
   },
   "02_FORGE_TITAN_VM0": {
     "root": "02_FORGE",
     "path": "assimilated\\titan_swarm_v2\\vm0",
-    "cells": ["README.md", "CLAUDE.md"]
+    "cells": [
+      "README.md",
+      "CLAUDE.md"
+    ]
   },
   "02_FORGE_TITAN_LEAKS": {
     "root": "02_FORGE",
     "path": "assimilated\\titan_swarm_v2\\system_prompts_leaks",
-    "cells": ["readme.md", "claude.txt"]
+    "cells": [
+      "readme.md",
+      "claude.txt"
+    ]
   },
   "03_VAULT_TITAN_MAPPING": {
     "root": "03_VAULT",
     "path": "KNOWLEDGE\\TITAN_SWARM",
-    "cells": ["ASSIMILATION_MAPPING.md"]
+    "cells": [
+      "ASSIMILATION_MAPPING.md"
+    ]
   }
 }

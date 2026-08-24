@@ -7,7 +7,10 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": ["Docker", "Node.js"]
+      "stack": [
+        "Docker",
+        "Node.js"
+      ]
     },
     "quality": {
       "score": 70,
@@ -24,7 +27,9 @@
     },
     "documentation": {
       "grade": "B",
-      "missing": ["ARCHITECTURE.md"]
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

@@ -131,6 +131,7 @@ pub fn prepare_component(engine: &Engine, wasm: &[u8]) -> Result<(Component, Lin
 #[cfg(test)]
 mod tests {
     use super::*;
+    use anyhow::Context;;
 
     #[test]
     fn host_engine_constructs_with_component_model_enabled() -> Result<()> {

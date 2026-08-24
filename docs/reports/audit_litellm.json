@@ -7,15 +7,27 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": ["Python", "Docker", "Node.js"]
+      "stack": [
+        "Python",
+        "Docker",
+        "Node.js"
+      ]
     },
     "quality": {
       "score": 100,
       "style": "Foundational",
-      "configs": [".flake8", "pyrightconfig.json", "ruff.toml"]
+      "configs": [
+        ".flake8",
+        "pyrightconfig.json",
+        "ruff.toml"
+      ]
     },
     "testing": {
-      "frameworks": ["Pytest", "Jest", "Vitest"],
+      "frameworks": [
+        "Pytest",
+        "Jest",
+        "Vitest"
+      ],
       "test_count": 725
     },
     "security": {
@@ -45,7 +57,9 @@
     },
     "documentation": {
       "grade": "B",
-      "missing": ["ARCHITECTURE.md"]
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

@@ -6,9 +6,18 @@
   "signer_trust_band": "camelot-community",
   "hash_algorithm": "sha256",
   "signature_algorithm": "ed25519",
-  "entrypoints": ["execute", "summarize"],
-  "supported_node_profiles": ["inference"],
-  "requested_capabilities": ["process.allowlisted", "vfs.read", "memory.read_l1"],
+  "entrypoints": [
+    "execute",
+    "summarize"
+  ],
+  "supported_node_profiles": [
+    "inference"
+  ],
+  "requested_capabilities": [
+    "process.allowlisted",
+    "vfs.read",
+    "memory.read_l1"
+  ],
   "denied_capabilities": [
     "lease.issue",
     "policy.admin",
@@ -25,13 +34,19 @@
     "timeout_s": 600,
     "max_workers": 1
   },
-  "verification": ["contract_test", "Gideon_verdict", "receipt_issued"],
+  "verification": [
+    "contract_test",
+    "Gideon_verdict",
+    "receipt_issued"
+  ],
   "risk_tier_invariant_cap": "T1",
   "rollback": {
     "strategy": "destroy_ephemeral_worktree"
   },
   "compat": {
-    "supported_knight_classes": ["inference_worker"]
+    "supported_knight_classes": [
+      "inference_worker"
+    ]
   },
   "artifact_hash": "sha256:40c03752096f2c561e21c897e654a4d2de605e30bf503f527056f7248975e800",
   "signature": "ed25519:NoUepGvLaRMSfqO-ldLM37YmINeIEF5A8zc1FzvM-CtIGc8mi_TzSYgOic8I3uzZEYzWbDg5_t6njzZeY5kiDQ"

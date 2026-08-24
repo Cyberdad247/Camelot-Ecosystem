@@ -7,7 +7,12 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": ["Node.js", "Docker", "Python", "Rust"]
+      "stack": [
+        "Node.js",
+        "Docker",
+        "Python",
+        "Rust"
+      ]
     },
     "quality": {
       "score": 70,
@@ -15,7 +20,9 @@
       "configs": []
     },
     "testing": {
-      "frameworks": ["Jest"],
+      "frameworks": [
+        "Jest"
+      ],
       "test_count": 1
     },
     "security": {
@@ -28,7 +35,9 @@
     },
     "documentation": {
       "grade": "B",
-      "missing": ["ARCHITECTURE.md"]
+      "missing": [
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

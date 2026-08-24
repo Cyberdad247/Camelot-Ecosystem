@@ -45,7 +45,11 @@
     "signer_trust_band": {
       "description": "Per §8.3: 'customer-controlled' cartridges cannot exceed their declared risk_tier_invariant_cap.",
       "type": "string",
-      "enum": ["camelot-commercial", "camelot-community", "customer-controlled"]
+      "enum": [
+        "camelot-commercial",
+        "camelot-community",
+        "customer-controlled"
+      ]
     },
     "artifact_hash": {
       "description": "SHA-256 of the cartridge binary or compiled artifact.",

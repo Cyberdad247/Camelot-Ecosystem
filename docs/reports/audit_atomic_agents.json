@@ -7,15 +7,21 @@
   "phases": {
     "architecture": {
       "type": "Service/App",
-      "stack": ["Python"]
+      "stack": [
+        "Python"
+      ]
     },
     "quality": {
       "score": 100,
       "style": "Foundational",
-      "configs": [".flake8"]
+      "configs": [
+        ".flake8"
+      ]
     },
     "testing": {
-      "frameworks": ["Pytest"],
+      "frameworks": [
+        "Pytest"
+      ],
       "test_count": 9
     },
     "security": {
@@ -24,7 +30,10 @@
     },
     "documentation": {
       "grade": "C",
-      "missing": ["CONTRIBUTING.md", "ARCHITECTURE.md"]
+      "missing": [
+        "CONTRIBUTING.md",
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

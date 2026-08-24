@@ -3,7 +3,11 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { type MemoryEntry, deleteMemoryEntry, loadMemoryEntries } from '../lib/portalBridge';
+import {
+  deleteMemoryEntry,
+  loadMemoryEntries,
+  type MemoryEntry,
+} from '../lib/portalBridge';
 
 // Lakisha "Learn With Me" curator. Reads `audit-kickbox-audio/apps/pwa/public/memory.md`
 // (served from `/memory.md` via Next.js public dir), lists each `- [date]` line

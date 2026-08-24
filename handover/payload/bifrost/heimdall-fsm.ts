@@ -31,18 +31,13 @@ export interface HeimdallCapabilities {
 }
 
 const TRANSITIONS: Record<HeimdallState, Partial<Record<HeimdallEvent, HeimdallState>>> = {
-  healthy: { anomaly: 'observed', critical_breach: 'ragnarok' },
-  observed: { anomaly_confirmed: 'suspect', clear: 'healthy', critical_breach: 'ragnarok' },
-  suspect: { threshold_breach: 'soft_quarantine', clear: 'observed', critical_breach: 'ragnarok' },
-  soft_quarantine: {
-    threshold_breach: 'hard_quarantine',
-    clear: 'suspect',
-    critical_breach: 'ragnarok',
-    recovery_verified: 'recovered',
-  },
-  hard_quarantine: { critical_breach: 'ragnarok', recovery_verified: 'recovered' },
-  ragnarok: { recovery_verified: 'recovered' },
-  recovered: { clear: 'healthy', anomaly: 'observed' },
+  healthy:          { anomaly: 'observed', critical_breach: 'ragnarok' },
+  observed:         { anomaly_confirmed: 'suspect', clear: 'healthy', critical_breach: 'ragnarok' },
+  suspect:          { threshold_breach: 'soft_quarantine', clear: 'observed', critical_breach: 'ragnarok' },
+  soft_quarantine:  { threshold_breach: 'hard_quarantine', clear: 'suspect', critical_breach: 'ragnarok', recovery_verified: 'recovered' },
+  hard_quarantine:  { critical_breach: 'ragnarok', recovery_verified: 'recovered' },
+  ragnarok:         { recovery_verified: 'recovered' },
+  recovered:        { clear: 'healthy', anomaly: 'observed' }
 };
 
 export function capabilitiesFor(state: HeimdallState): HeimdallCapabilities {
@@ -53,38 +48,14 @@ export function capabilitiesFor(state: HeimdallState): HeimdallCapabilities {
     case 'observed':
       return { sessions: true, commits: true, upgrades: false, forward: true, recoveryOnly: false };
     case 'suspect':
-      return {
-        sessions: true,
-        commits: false,
-        upgrades: false,
-        forward: true,
-        recoveryOnly: false,
-      };
+      return { sessions: true, commits: false, upgrades: false, forward: true, recoveryOnly: false };
     case 'soft_quarantine':
-      return {
-        sessions: false,
-        commits: false,
-        upgrades: false,
-        forward: true,
-        recoveryOnly: false,
-      };
+      return { sessions: false, commits: false, upgrades: false, forward: true, recoveryOnly: false };
     case 'hard_quarantine':
-      return {
-        sessions: false,
-        commits: false,
-        upgrades: false,
-        forward: false,
-        recoveryOnly: false,
-      };
+      return { sessions: false, commits: false, upgrades: false, forward: false, recoveryOnly: false };
     case 'ragnarok':
       // Guarantee: no sessions/commits/upgrades/forward except recovery.
-      return {
-        sessions: false,
-        commits: false,
-        upgrades: false,
-        forward: false,
-        recoveryOnly: true,
-      };
+      return { sessions: false, commits: false, upgrades: false, forward: false, recoveryOnly: true };
   }
 }
 
@@ -99,10 +70,7 @@ export class HeimdallFsm {
   private _state: HeimdallState;
   readonly history: TransitionRecord[] = [];
 
-  constructor(
-    readonly nodeId: string,
-    initial: HeimdallState = 'healthy',
-  ) {
+  constructor(readonly nodeId: string, initial: HeimdallState = 'healthy') {
     this._state = initial;
   }
 

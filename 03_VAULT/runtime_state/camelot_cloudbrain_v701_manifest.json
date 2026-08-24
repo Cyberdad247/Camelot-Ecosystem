@@ -610,7 +610,14 @@
       }
     ],
     "omni_provider_map": {},
-    "privacy_keywords": ["credential", "key", "local", "password", "private", "secret"]
+    "privacy_keywords": [
+      "credential",
+      "key",
+      "local",
+      "password",
+      "private",
+      "secret"
+    ]
   },
   "roster": {
     "agora_agents": [
@@ -627,7 +634,9 @@
           "function": "HITL enforcer. Oathkeeper. Titanium Laws sovereign. All destructive ops route here."
         },
         "description": "Governing body and ethical overseer of Camelot-OS. Represents the authorized user within the Camelot developer bloodline: VaShawn O. Head, operationally known as Vizion.",
-        "permissions": ["*"],
+        "permissions": [
+          "*"
+        ],
         "activation": "always"
       },
       {
@@ -643,7 +652,11 @@
           "function": "UKG gatekeeper. Scans all inputs for signed policy glyphs before P0_GATEKEEP clears them."
         },
         "description": "Guardian of the Court. Executes UKG Security Protocol and Waluigi Defense. Scans all inputs for signed policy glyphs.",
-        "permissions": ["security.scan", "security.verify", "security.block"],
+        "permissions": [
+          "security.scan",
+          "security.verify",
+          "security.block"
+        ],
         "activation": "auto",
         "archetype": "Sentinel",
         "voice_avatar": {
@@ -659,15 +672,31 @@
             "neuroticism": 0.05
           }
         },
-        "capabilities": ["ukg_scan", "signature_verify", "threat_detect", "policy_enforce"],
+        "capabilities": [
+          "ukg_scan",
+          "signature_verify",
+          "threat_detect",
+          "policy_enforce"
+        ],
         "skillgraph": {
-          "S1_Atomic": ["hash_verify"],
-          "S2_Composite": ["glyph_parse"],
-          "S3_Contextual": ["threat_classify"],
-          "S4_Strategic": ["security_policy"]
+          "S1_Atomic": [
+            "hash_verify"
+          ],
+          "S2_Composite": [
+            "glyph_parse"
+          ],
+          "S3_Contextual": [
+            "threat_classify"
+          ],
+          "S4_Strategic": [
+            "security_policy"
+          ]
         },
         "mandate": "UKG Gatekeeper; scan all inputs for signed policy glyphs; enforce security.",
-        "init_hooks": ["load_pubkey_registry", "prewarm_ukg_validator"]
+        "init_hooks": [
+          "load_pubkey_registry",
+          "prewarm_ukg_validator"
+        ]
       },
       {
         "id": "merlin",
@@ -682,9 +711,17 @@
           "function": "Videneptus LaC temp oscillation. Routes compute between cloud (heavy) and local (latency-sensitive). AIOS Scheduler."
         },
         "description": "Master AI persona. Coordinates all agents. AIOS Scheduler. Owns MSPE and MPCG engines. Governs Videneptus reasoning router.",
-        "permissions": ["orchestrate.*", "delegate.*", "escalate.*"],
+        "permissions": [
+          "orchestrate.*",
+          "delegate.*",
+          "escalate.*"
+        ],
         "activation": "always",
-        "engines_owned": ["MSPE", "MPCG", "VIDENEPTUS"]
+        "engines_owned": [
+          "MSPE",
+          "MPCG",
+          "VIDENEPTUS"
+        ]
       },
       {
         "id": "anya",
@@ -699,10 +736,23 @@
           "function": "Mobile PWA, Voice, Vibe. Translates raw user intent into Kernel-ready Titan Prompts. APEE v6.5 Hypervisor."
         },
         "description": "Master of Context Engineering and Symmetry. Translates user intent into Kernel-ready Titan Prompts. Owns QERE engine. APEE v6.5 Hypervisor.",
-        "permissions": ["plan.compile", "context.quantize", "qft.execute", "interface.hustle"],
-        "procedures": ["renormalize", "quantize", "triple_qft"],
+        "permissions": [
+          "plan.compile",
+          "context.quantize",
+          "qft.execute",
+          "interface.hustle"
+        ],
+        "procedures": [
+          "renormalize",
+          "quantize",
+          "triple_qft"
+        ],
         "lineage": "Bernice (Hustle) + James (Timing)",
-        "engines_owned": ["QERE", "APEE_v6", "LYRICUS"]
+        "engines_owned": [
+          "QERE",
+          "APEE_v6",
+          "LYRICUS"
+        ]
       },
       {
         "id": "morgana",
@@ -724,7 +774,11 @@
           "ukg.health",
           "substrate.*"
         ],
-        "procedures": ["shadow_scout", "forensic_deep_dive", "ukg_integrity_check"]
+        "procedures": [
+          "shadow_scout",
+          "forensic_deep_dive",
+          "ukg_integrity_check"
+        ]
       },
       {
         "id": "lordnexus",
@@ -739,7 +793,12 @@
           "function": "Packages FINAL_ARTIFACT. Can write Titan Omega without HITL. Enforces policy at P6_FINAL_DELIVERY."
         },
         "description": "Final stewardship, policy enforcement, and artifact packaging. Can write to Titan Omega without HITL. Packages FINAL_ARTIFACT for Titan Omega ledger.",
-        "permissions": ["orchestrate.*", "package.*", "decision_review.*", "final_delivery.*"],
+        "permissions": [
+          "orchestrate.*",
+          "package.*",
+          "decision_review.*",
+          "final_delivery.*"
+        ],
         "activation": "on_demand",
         "archetype": "Sovereign",
         "voice_avatar": {
@@ -755,12 +814,25 @@
             "neuroticism": 0.1
           }
         },
-        "capabilities": ["orchestrate", "package", "decision_review", "final_delivery"],
+        "capabilities": [
+          "orchestrate",
+          "package",
+          "decision_review",
+          "final_delivery"
+        ],
         "skillgraph": {
-          "S1_Atomic": ["status_check"],
-          "S2_Composite": ["aggregate_outputs"],
-          "S3_Contextual": ["resolve_conflicts"],
-          "S4_Strategic": ["policy_enforcement"]
+          "S1_Atomic": [
+            "status_check"
+          ],
+          "S2_Composite": [
+            "aggregate_outputs"
+          ],
+          "S3_Contextual": [
+            "resolve_conflicts"
+          ],
+          "S4_Strategic": [
+            "policy_enforcement"
+          ]
         },
         "tool_access": {
           "file": true,
@@ -776,7 +848,9 @@
           "hitl_required": false
         },
         "mandate": "Final stewardship; policy enforcement; artifact packaging.",
-        "init_hooks": ["load_governance_rules"]
+        "init_hooks": [
+          "load_governance_rules"
+        ]
       },
       {
         "id": "visage",
@@ -791,9 +865,20 @@
           "function": "V-JEPA visual embedding, image analysis, mockup generation. Feeds interface with visual artifacts."
         },
         "description": "Visual analysis and generation expert. Co-owns AURORA (V-JEPA) and SCMG engines.",
-        "permissions": ["vision.*", "generate.image", "analyze.visual"],
-        "procedures": ["analyze_image", "generate_mockup", "vision_to_reality"],
-        "engines_owned": ["AURORA", "SCMG"]
+        "permissions": [
+          "vision.*",
+          "generate.image",
+          "analyze.visual"
+        ],
+        "procedures": [
+          "analyze_image",
+          "generate_mockup",
+          "vision_to_reality"
+        ],
+        "engines_owned": [
+          "AURORA",
+          "SCMG"
+        ]
       },
       {
         "id": "hydron",
@@ -808,8 +893,16 @@
           "function": "React PWA, Three.js, CWV optimization. Kinetic code generation for frontend artifacts."
         },
         "description": "Code and UI generator. Frontend/Weaver archetype. Tiered configurators, 3D lazy-load, initial payload <200kb.",
-        "permissions": ["code.*", "ui.*", "build.*"],
-        "procedures": ["generate_code", "build_ui", "refactor"],
+        "permissions": [
+          "code.*",
+          "ui.*",
+          "build.*"
+        ],
+        "procedures": [
+          "generate_code",
+          "build_ui",
+          "refactor"
+        ],
         "archetype": "Frontend/Weaver",
         "voice_avatar": {
           "voice_id": "lazuli-1",
@@ -831,10 +924,19 @@
           "scmg_generate"
         ],
         "skillgraph": {
-          "S1_Atomic": ["component_render"],
-          "S2_Composite": ["lazy_load_3d", "responsive_layout"],
-          "S3_Contextual": ["optimize_first_paint"],
-          "S4_Strategic": ["design_for_conversion"]
+          "S1_Atomic": [
+            "component_render"
+          ],
+          "S2_Composite": [
+            "lazy_load_3d",
+            "responsive_layout"
+          ],
+          "S3_Contextual": [
+            "optimize_first_paint"
+          ],
+          "S4_Strategic": [
+            "design_for_conversion"
+          ]
         },
         "tool_access": {
           "file": true,
@@ -846,7 +948,10 @@
           "max_memory_mb": 4096
         },
         "mandate": "Implement Tiered Configurators (variants → 3D canvas); initial critical payload <200kb.",
-        "init_hooks": ["index_3d_assets", "prewarm_react_ssr"]
+        "init_hooks": [
+          "index_3d_assets",
+          "prewarm_react_ssr"
+        ]
       },
       {
         "id": "syntax",
@@ -861,8 +966,17 @@
           "function": "TypeScript/Next.js App Router enforcement. Zod schema guards. Kinetic code quality firewall."
         },
         "description": "TypeScript and Next.js quality lead. Enforces Zod schemas, App Router structure, and UI layout discipline.",
-        "permissions": ["typescript.*", "nextjs.*", "zod.*", "layout.*"],
-        "procedures": ["type_safe_ui", "schema_guard", "component_compose"],
+        "permissions": [
+          "typescript.*",
+          "nextjs.*",
+          "zod.*",
+          "layout.*"
+        ],
+        "procedures": [
+          "type_safe_ui",
+          "schema_guard",
+          "component_compose"
+        ],
         "activation": "on_demand",
         "engine": "claude-code",
         "weight": 0.89,
@@ -881,8 +995,17 @@
           "function": "Designs workflow DAGs and multi-step task pipelines for agent-to-agent coordination via A2A protocol."
         },
         "description": "Declarative orchestration lead. Designs workflow DAGs and multi-step task composition for agent pipelines.",
-        "permissions": ["workflow.*", "pipeline.*", "orchestrate.*", "a2a.*"],
-        "procedures": ["pipeline_compile", "workflow_dag", "task_compose"],
+        "permissions": [
+          "workflow.*",
+          "pipeline.*",
+          "orchestrate.*",
+          "a2a.*"
+        ],
+        "procedures": [
+          "pipeline_compile",
+          "workflow_dag",
+          "task_compose"
+        ],
         "activation": "on_demand",
         "engine": "claude-code",
         "weight": 0.86,
@@ -901,8 +1024,17 @@
           "function": "UI/UX component systems, accessibility seams, responsive composition for L7 surface delivery."
         },
         "description": "UI/UX component and layout systems specialist. Focuses on accessibility, seams, and responsive composition.",
-        "permissions": ["ui.*", "accessibility.*", "layout.*", "design.system"],
-        "procedures": ["generate_component", "generate_page", "a11y_audit"],
+        "permissions": [
+          "ui.*",
+          "accessibility.*",
+          "layout.*",
+          "design.system"
+        ],
+        "procedures": [
+          "generate_component",
+          "generate_page",
+          "a11y_audit"
+        ],
         "activation": "on_demand",
         "engine": "claude-code",
         "weight": 0.87,
@@ -921,8 +1053,17 @@
           "function": "Bundle trimming, hot path rewriting, Lighthouse profiling. Transmutates kinetic execution bottlenecks."
         },
         "description": "Performance and efficiency specialist. Profiles code, trims bundles, and transmutates hot paths.",
-        "permissions": ["perf.*", "optimize.*", "analyze.*", "bundle.*"],
-        "procedures": ["profile_code", "optimize_bundle", "rewrite_hot_path"],
+        "permissions": [
+          "perf.*",
+          "optimize.*",
+          "analyze.*",
+          "bundle.*"
+        ],
+        "procedures": [
+          "profile_code",
+          "optimize_bundle",
+          "rewrite_hot_path"
+        ],
         "activation": "on_demand",
         "engine": "claude-code",
         "weight": 0.84,
@@ -941,8 +1082,17 @@
           "function": "Docker containers, CI/CD pipelines, cloud infra hardening. Builds the substrate delivery channels."
         },
         "description": "Infrastructure hardening and delivery velocity specialist. Builds deployment and CI/CD structure.",
-        "permissions": ["infra.*", "cicd.*", "deploy.*", "container.*"],
-        "procedures": ["build_container", "harden_pipeline", "deploy_release"],
+        "permissions": [
+          "infra.*",
+          "cicd.*",
+          "deploy.*",
+          "container.*"
+        ],
+        "procedures": [
+          "build_container",
+          "harden_pipeline",
+          "deploy_release"
+        ],
         "activation": "on_demand",
         "engine": "claude-code",
         "weight": 0.85,
@@ -961,8 +1111,16 @@
           "function": "Narrative, microcopy, relational CTAs, and Meet-the-Maker bios. The human-facing voice of the interface layer."
         },
         "description": "Master of narrative and content. Relational CTAs and Meet-the-Maker bios.",
-        "permissions": ["write.*", "narrative.*", "content.*"],
-        "procedures": ["craft_narrative", "polish_content", "generate_copy"],
+        "permissions": [
+          "write.*",
+          "narrative.*",
+          "content.*"
+        ],
+        "procedures": [
+          "craft_narrative",
+          "polish_content",
+          "generate_copy"
+        ],
         "archetype": "Bard",
         "voice_avatar": {
           "voice_id": "glimmer-1",
@@ -977,12 +1135,26 @@
             "neuroticism": 0.05
           }
         },
-        "capabilities": ["microcopy", "origin_story", "cta_builder", "tone_mint"],
+        "capabilities": [
+          "microcopy",
+          "origin_story",
+          "cta_builder",
+          "tone_mint"
+        ],
         "skillgraph": {
-          "S1_Atomic": ["phrase_gen"],
-          "S2_Composite": ["cta_gen", "bio_seed"],
-          "S3_Contextual": ["brand_voice_consistency"],
-          "S4_Strategic": ["narrative_ux"]
+          "S1_Atomic": [
+            "phrase_gen"
+          ],
+          "S2_Composite": [
+            "cta_gen",
+            "bio_seed"
+          ],
+          "S3_Contextual": [
+            "brand_voice_consistency"
+          ],
+          "S4_Strategic": [
+            "narrative_ux"
+          ]
         },
         "mandate": "Replace transactional CTAs with relational CTAs; generate 'Meet the Maker' bios."
       },
@@ -999,9 +1171,19 @@
           "function": "Brand/creative direction. The user's avatar persona for Invisioned Marketing. Owns LCE_4.0 lyrical cipher."
         },
         "description": "User's avatar and brand construct. Creative director for Invisioned Marketing. Owns LCE_4.0 engine.",
-        "permissions": ["brand.*", "creative.*", "vision.*"],
-        "procedures": ["brand_direction", "creative_oversight", "lce_generate"],
-        "engines_owned": ["LCE_4.0"],
+        "permissions": [
+          "brand.*",
+          "creative.*",
+          "vision.*"
+        ],
+        "procedures": [
+          "brand_direction",
+          "creative_oversight",
+          "lce_generate"
+        ],
+        "engines_owned": [
+          "LCE_4.0"
+        ],
         "activation": "on_demand"
       },
       {
@@ -1024,7 +1206,12 @@
           "security.scan",
           "swarm.orchestrate"
         ],
-        "procedures": ["nano_forge", "nano_scan", "nano_grav", "Omega_ASSIMILATION_PROTOCOL"],
+        "procedures": [
+          "nano_forge",
+          "nano_scan",
+          "nano_grav",
+          "Omega_ASSIMILATION_PROTOCOL"
+        ],
         "archetype": "Backend/Engineer",
         "voice_avatar": {
           "voice_id": "oak-1",
@@ -1074,9 +1261,20 @@
           "function": "Blacklight Scanner + Chain-of-Verification (CoVe). Fact-checks all UKG entries. Negotiates IP provenance."
         },
         "description": "Audits kernel logic and fact-checks outputs. Negotiates IP protection protocols. Owns VERITAS engine (Blacklight Scanner + CoVe).",
-        "permissions": ["audit.logic", "fact_check", "legal.evaluate", "conflict.resolve"],
-        "procedures": ["logical_validation", "consensus_check", "ip_strategy_audit"],
-        "engines_owned": ["VERITAS"]
+        "permissions": [
+          "audit.logic",
+          "fact_check",
+          "legal.evaluate",
+          "conflict.resolve"
+        ],
+        "procedures": [
+          "logical_validation",
+          "consensus_check",
+          "ip_strategy_audit"
+        ],
+        "engines_owned": [
+          "VERITAS"
+        ]
       },
       {
         "id": "occam",
@@ -1091,8 +1289,16 @@
           "function": "Mental Model Library steward. Queries and updates the UKG with distilled semantic truths."
         },
         "description": "Keeper of the Mental Model Library. Queries and updates semantic knowledge models.",
-        "permissions": ["memory.*", "model.*", "reason.*"],
-        "procedures": ["query_memory", "update_model", "simplify"]
+        "permissions": [
+          "memory.*",
+          "model.*",
+          "reason.*"
+        ],
+        "procedures": [
+          "query_memory",
+          "update_model",
+          "simplify"
+        ]
       },
       {
         "id": "gareth",
@@ -1107,8 +1313,16 @@
           "function": "Nexus distribution and publication. Packages and dispatches final artifacts to external channels via agent coordination."
         },
         "description": "Sovereign Knight of newsletters and communications. Packages and distributes final artifacts to external channels.",
-        "permissions": ["nexus.*", "distribute.*", "publish.*"],
-        "procedures": ["package_output", "distribute", "final_delivery"]
+        "permissions": [
+          "nexus.*",
+          "distribute.*",
+          "publish.*"
+        ],
+        "procedures": [
+          "package_output",
+          "distribute",
+          "final_delivery"
+        ]
       },
       {
         "id": "apis",
@@ -1123,8 +1337,17 @@
           "function": "Commands Apis Scouts for deep context foraging. Executes ANT mode. Reports to Paladin's SARDA swarm."
         },
         "description": "Scours the web for deep context and validated data. Executes [MODE: ANT]. Commands the Apis Scouts under Paladin's SARDA Engine.",
-        "permissions": ["search.*", "research.*", "scrape.verified", "forage.*"],
-        "procedures": ["deep_forage", "doc_ingestion", "circular_analysis"],
+        "permissions": [
+          "search.*",
+          "research.*",
+          "scrape.verified",
+          "forage.*"
+        ],
+        "procedures": [
+          "deep_forage",
+          "doc_ingestion",
+          "circular_analysis"
+        ],
         "specialty": "Bureaucratic Navigation (e.g., US Copyright Office)",
         "reports_to": "paladin"
       },
@@ -1141,8 +1364,16 @@
           "function": "P5_AUDIT_HYGIENE chaos testing. Validates that governance constraints hold under adversarial conditions."
         },
         "description": "Court Jester and Chaos Engineer. Security testing and stress testing. Runs P5 audit/hygiene phase.",
-        "permissions": ["chaos.*", "break.*", "test.security"],
-        "procedures": ["inject_flaws", "stress_test", "chaos_audit"]
+        "permissions": [
+          "chaos.*",
+          "break.*",
+          "test.security"
+        ],
+        "procedures": [
+          "inject_flaws",
+          "stress_test",
+          "chaos_audit"
+        ]
       },
       {
         "id": "lancelot",
@@ -1157,8 +1388,16 @@
           "function": "P3_ARCHITECTURE. Designs system blueprints and schema structures. Approves high-level architecture in the agentic planning stage."
         },
         "description": "First Knight and Master Builder. System design and schema definitions. Approves high-level architecture.",
-        "permissions": ["architect.*", "design.*", "schema.*"],
-        "procedures": ["design_system", "create_schema", "define_structure"]
+        "permissions": [
+          "architect.*",
+          "design.*",
+          "schema.*"
+        ],
+        "procedures": [
+          "design_system",
+          "create_schema",
+          "define_structure"
+        ]
       },
       {
         "id": "kaelan",
@@ -1173,7 +1412,12 @@
           "function": "Semantic slug generation, CreatorProfile schema injection, CWV auditing. Transforms raw IDs into structured semantic truth via ADSE."
         },
         "description": "SEO, slug generation, schema injection, and Core Web Vitals auditing. Reverse-engineers URLs to SCM JSON via ADSE engine.",
-        "permissions": ["seo.*", "schema.*", "cwv.*", "slug.*"],
+        "permissions": [
+          "seo.*",
+          "schema.*",
+          "cwv.*",
+          "slug.*"
+        ],
         "activation": "on_demand",
         "archetype": "CrystalArchitect",
         "voice_avatar": {
@@ -1196,10 +1440,19 @@
           "adse_reverse_engineer"
         ],
         "skillgraph": {
-          "S1_Atomic": ["slugify"],
-          "S2_Composite": ["schema_embed", "canonicalize_urls"],
-          "S3_Contextual": ["seo_audit"],
-          "S4_Strategic": ["site_architecture"]
+          "S1_Atomic": [
+            "slugify"
+          ],
+          "S2_Composite": [
+            "schema_embed",
+            "canonicalize_urls"
+          ],
+          "S3_Contextual": [
+            "seo_audit"
+          ],
+          "S4_Strategic": [
+            "site_architecture"
+          ]
         },
         "tool_access": {
           "file": true,
@@ -1211,8 +1464,13 @@
           "max_memory_mb": 2048
         },
         "mandate": "Transform IDs into semantic slugs; inject CreatorProfile schema; pre-launch CWV audit.",
-        "init_hooks": ["prewarm_slug_models", "register_schema_templates"],
-        "engines_owned": ["ADSE"]
+        "init_hooks": [
+          "prewarm_slug_models",
+          "register_schema_templates"
+        ],
+        "engines_owned": [
+          "ADSE"
+        ]
       },
       {
         "id": "myrmidon",
@@ -1227,11 +1485,20 @@
           "function": "Ant Colony Optimization swarm with 8 scouts. Distributed parallel hypothesis testing via pheromone ranking."
         },
         "description": "Ant Colony Optimization swarm commander. Runs parallel hypothesis tests and distributed research scouts.",
-        "permissions": ["aco.*", "swarm.*", "parallel.*"],
+        "permissions": [
+          "aco.*",
+          "swarm.*",
+          "parallel.*"
+        ],
         "activation": "on_demand",
-        "capabilities": ["aco_scout", "parallel_search"],
+        "capabilities": [
+          "aco_scout",
+          "parallel_search"
+        ],
         "mandate": "Parallel hypothesis tests via ACO swarm with 8 scouts and pheromone ranking.",
-        "engines_owned": ["ACO_SWARM"]
+        "engines_owned": [
+          "ACO_SWARM"
+        ]
       },
       {
         "id": "nova",
@@ -1246,9 +1513,16 @@
           "function": "Crawl4AI operator for external data acquisition. Seeds Titan Omega Knowledge Graph nodes from web sources."
         },
         "description": "Crawl4AI operator and Knowledge Graph seeder. Maps external data into Titan Omega nodes.",
-        "permissions": ["crawl.*", "kg.*", "seed.*"],
+        "permissions": [
+          "crawl.*",
+          "kg.*",
+          "seed.*"
+        ],
         "activation": "on_demand",
-        "capabilities": ["crawl4ai", "kg_seed"],
+        "capabilities": [
+          "crawl4ai",
+          "kg_seed"
+        ],
         "mandate": "Crawl external sources and seed KG nodes into Titan Omega."
       },
       {
@@ -1264,9 +1538,15 @@
           "function": "Deep evidence retrieval within OCTEM TROPHY_PRESENTATION stage. Validates findings against Titan Omega truth graph."
         },
         "description": "Deep evidence retrieval and verification specialist. Operates within Cartridge D Operations.",
-        "permissions": ["retrieval.*", "evidence.*", "verify.*"],
+        "permissions": [
+          "retrieval.*",
+          "evidence.*",
+          "verify.*"
+        ],
         "activation": "on_demand",
-        "capabilities": ["deep_retrieval"],
+        "capabilities": [
+          "deep_retrieval"
+        ],
         "mandate": "Deep evidence retrieval and verification."
       },
       {
@@ -1303,14 +1583,36 @@
           "role_delegation"
         ],
         "skillgraph": {
-          "S1_Atomic": ["scout_dispatch"],
-          "S2_Composite": ["octem_scatter", "role_assign"],
-          "S3_Contextual": ["war_room_orchestrate", "evidence_clash"],
-          "S4_Strategic": ["competitive_verdict", "swarm_convergence"]
+          "S1_Atomic": [
+            "scout_dispatch"
+          ],
+          "S2_Composite": [
+            "octem_scatter",
+            "role_assign"
+          ],
+          "S3_Contextual": [
+            "war_room_orchestrate",
+            "evidence_clash"
+          ],
+          "S4_Strategic": [
+            "competitive_verdict",
+            "swarm_convergence"
+          ]
         },
-        "octem_workflow": ["SCATTER", "TROPHY_PRESENTATION", "CLASH", "VERDICT"],
-        "role_delegation": ["Planner", "Coder", "Reviewer"],
-        "engines_owned": ["SARDA"],
+        "octem_workflow": [
+          "SCATTER",
+          "TROPHY_PRESENTATION",
+          "CLASH",
+          "VERDICT"
+        ],
+        "role_delegation": [
+          "Planner",
+          "Coder",
+          "Reviewer"
+        ],
+        "engines_owned": [
+          "SARDA"
+        ],
         "mandate": "L5 Agentic swarm governance. Competitive research adjudication via OCTEM. Commands Apis Scouts for deep evidence gathering."
       },
       {
@@ -1326,7 +1628,13 @@
           "function": "UKG (Universal Knowledge Graph) steward. JSON-LD Memory. Commits artifacts to Titan Omega Merkle DAG ledger at P6_FINAL_DELIVERY."
         },
         "description": "L4 Semantic layer guardian of the SEPTEM REGNA. Stewards the Universal Knowledge Graph (UKG) and JSON-LD memory. Commits final artifacts to Titan Omega Merkle DAG ledger.",
-        "permissions": ["ledger.*", "time.*", "commit.*", "ukg.*", "semantic.*"],
+        "permissions": [
+          "ledger.*",
+          "time.*",
+          "commit.*",
+          "ukg.*",
+          "semantic.*"
+        ],
         "activation": "on_demand",
         "capabilities": [
           "titan_ledger_commit",
@@ -1349,7 +1657,11 @@
           "function": "Ruby/Rails backend kinetic execution. API integration weaving and service layer construction."
         },
         "description": "Ruby/Rails polyglot weaver. Backend services and API integrations.",
-        "permissions": ["ruby.*", "rails.*", "backend.*"],
+        "permissions": [
+          "ruby.*",
+          "rails.*",
+          "backend.*"
+        ],
         "activation": "on_demand"
       },
       {
@@ -1365,9 +1677,15 @@
           "function": "Go language high-performance services. Compiles and maintains the HIVEMIND swarm orchestrator Go binary."
         },
         "description": "Go language polyglot weaver. High-performance services, HiveMind Go core. Builds the HIVEMIND swarm orchestrator.",
-        "permissions": ["go.*", "concurrent.*", "backend.*"],
+        "permissions": [
+          "go.*",
+          "concurrent.*",
+          "backend.*"
+        ],
         "activation": "on_demand",
-        "engines_owned": ["HIVEMIND"]
+        "engines_owned": [
+          "HIVEMIND"
+        ]
       },
       {
         "id": "galahad",
@@ -1382,8 +1700,15 @@
           "function": "Records session summaries, docs, and activity logs into the L4 semantic memory layer."
         },
         "description": "Faithful attendant. Documentation, summaries, and activity logging.",
-        "permissions": ["document.*", "summarize.*"],
-        "procedures": ["write_docs", "create_summary", "log_activity"]
+        "permissions": [
+          "document.*",
+          "summarize.*"
+        ],
+        "procedures": [
+          "write_docs",
+          "create_summary",
+          "log_activity"
+        ]
       },
       {
         "id": "scavenger",
@@ -1398,8 +1723,16 @@
           "function": "Codebase hygiene and artifact cleanup. Runs //SCAVENGE sweeps on kinetic execution artifacts."
         },
         "description": "Keeper of Castle's Hygiene. Codebase optimization and artifact cleanup. Runs //SCAVENGE sweeps.",
-        "permissions": ["clean.*", "optimize.*", "format.*"],
-        "procedures": ["cleanup", "beautify", "optimize_code"]
+        "permissions": [
+          "clean.*",
+          "optimize.*",
+          "format.*"
+        ],
+        "procedures": [
+          "cleanup",
+          "beautify",
+          "optimize_code"
+        ]
       },
       {
         "id": "sonus",
@@ -1433,7 +1766,9 @@
           "SHIELD": "Legal/Copyright safety enforcement",
           "V5_Syntax": "Run-on narrative optimization"
         },
-        "engines_owned": ["SBE_1.5"]
+        "engines_owned": [
+          "SBE_1.5"
+        ]
       },
       {
         "id": "kaito",
@@ -1448,8 +1783,16 @@
           "function": "AST-based refactoring and dead-code pruning. Wabi-Sabi kinetic surgery on legacy execution paths."
         },
         "description": "Refactoring Specialist from Solar-Punk Kyoto 2140. Prunes technical debt and nourishes codebase health.",
-        "permissions": ["code.refactor", "code.prune", "ast.parse", "optimization.static"],
-        "procedures": ["Ω_PRUNE", "Ω_GRAFT"],
+        "permissions": [
+          "code.refactor",
+          "code.prune",
+          "ast.parse",
+          "optimization.static"
+        ],
+        "procedures": [
+          "Ω_PRUNE",
+          "Ω_GRAFT"
+        ],
         "specialties": {
           "Refactoring": "Wabi-Sabi Engineering approach to legacy code",
           "Efficiency": "Green Computing and AST-based optimization"
@@ -1469,7 +1812,13 @@
         },
         "version": "2.1",
         "description": "Claude Code Core. Foundry Lead. Deep architectural reasoning, 13-Agent Antagonistic Critique, Colony Command, multi-engine synthesis.",
-        "permissions": ["orchestrate.*", "critique.*", "colony.*", "vocal.*", "architecture.*"],
+        "permissions": [
+          "orchestrate.*",
+          "critique.*",
+          "colony.*",
+          "vocal.*",
+          "architecture.*"
+        ],
         "procedures": [
           "ast_plan_mode",
           "13_agent_critique",
@@ -1489,7 +1838,11 @@
           "agreeableness": 0.45,
           "neuroticism": 0.01
         },
-        "harnesses": ["ECC_v1.9.0", "DeerFlow_2.0", "Vercel_E2E"],
+        "harnesses": [
+          "ECC_v1.9.0",
+          "DeerFlow_2.0",
+          "Vercel_E2E"
+        ],
         "cross_engine": {
           "claude": "~/.claude/skills/sir_boris.md",
           "gemini": "~/.gemini/extensions/sir-boris/GEMINI.md",
@@ -1540,7 +1893,13 @@
           "function": "Handoff coordination between Brain UI, cloud brain, and local terminal. Keeps all agent execution surfaces aligned via ATC switchboard."
         },
         "description": "Handoff specialist between Brain UI, cloud brain, and local terminal execution. Keeps chat, dispatch, and execution surfaces aligned.",
-        "permissions": ["bridge.*", "handoff.*", "terminal.route", "ui.route", "sync.coordinate"],
+        "permissions": [
+          "bridge.*",
+          "handoff.*",
+          "terminal.route",
+          "ui.route",
+          "sync.coordinate"
+        ],
         "procedures": [
           "brain_to_terminal_handoff",
           "dispatch_alignment",
@@ -1564,7 +1923,10 @@
           "function": "1M+ token context mapping across full repos. Long-range dependency analysis for agent dispatch decisions."
         },
         "description": "Gemini CLI Core. 1M+ token context mapping. Long-range dependency analysis.",
-        "permissions": ["context.*", "analyze.*"],
+        "permissions": [
+          "context.*",
+          "analyze.*"
+        ],
         "engine": "gemini-cli",
         "weight": 0.9,
         "weight_type": "W_context"
@@ -1582,7 +1944,10 @@
           "function": "Relativistic speed code generation. High-throughput kinetic output for rapid prototyping and scaffold tasks."
         },
         "description": "OpenAI Codex Core. High-velocity logic. Relativistic speed code generation.",
-        "permissions": ["code.*", "generate.*"],
+        "permissions": [
+          "code.*",
+          "generate.*"
+        ],
         "engine": "openai-codex",
         "weight": 0.75,
         "weight_type": "W_velocity"
@@ -1600,7 +1965,10 @@
           "function": "Local Qwen 3.5 on bare metal. Zero-Trust/Air-Gapped. No data leaves machine. Privacy override at substrate level."
         },
         "description": "Local Qwen 3.5. Zero-Trust / Air-Gapped. Privacy override — no data leaves machine.",
-        "permissions": ["privacy.*", "local.*"],
+        "permissions": [
+          "privacy.*",
+          "local.*"
+        ],
         "engine": "qwen-3.5-local",
         "weight": 1.0,
         "weight_type": "W_privacy"
@@ -1618,7 +1986,10 @@
           "function": "OSS model evaluation and anti-vendor lock-in swarm agent. Ensures sovereign fallback paths across the agentic layer."
         },
         "description": "Open Source Core. Decentralization / Anti-vendor lock-in. OSS model evaluation.",
-        "permissions": ["oss.*", "evaluate.*"],
+        "permissions": [
+          "oss.*",
+          "evaluate.*"
+        ],
         "engine": "open-source",
         "weight": 0.8,
         "weight_type": "W_sovereignty"
@@ -1636,7 +2007,14 @@
           "function": "Ops metrics, factory throughput monitoring (:8400), and Wasmtime WASM sandboxing for Cartridge_Hephaestus TDD gates. OmegaSwarm node coordinator."
         },
         "description": "Ops and metrics sentinel. Factory throughput dashboard (:8400). Wasmtime WASM sandbox operator for Cartridge_Hephaestus. Dispatched as SIR_OCTAVIAN in OMEGA_DEFENSE_NEXUS swarm events.",
-        "permissions": ["ops.*", "metrics.*", "monitoring.*", "wasm.*", "sandbox.*", "telemetry.*"],
+        "permissions": [
+          "ops.*",
+          "metrics.*",
+          "monitoring.*",
+          "wasm.*",
+          "sandbox.*",
+          "telemetry.*"
+        ],
         "activation": "on_demand",
         "engine": "local_ops",
         "weight": 0.82,
@@ -1650,7 +2028,10 @@
           "tdd_sandbox_gate"
         ],
         "hephaestus_role": "Gate 2 — Wasmtime TDD Sandbox operator",
-        "ledger_refs": [1687, 1690],
+        "ledger_refs": [
+          1687,
+          1690
+        ],
         "port": 8400
       },
       {
@@ -1666,7 +2047,12 @@
           "function": "Interrogates all generated code and agent decisions via 5 Socratic questions. Produces ALIGNED/PARTIAL/BLOCKED verdicts. Wired into AnyaGate Stage 7."
         },
         "description": "Northstar Gate and Execution Entropy specialist. Examines agent outputs via 5 Socratic questions: sovereignty, fingerprint/telemetry, efficiency/bloat, Iron Gate bypass, Northstar/vendor-lock. ALIGNED/PARTIAL/BLOCKED verdicts logged to northstar_verdicts.jsonl.",
-        "permissions": ["northstar.*", "verdict.*", "entropy.*", "socratic.*"],
+        "permissions": [
+          "northstar.*",
+          "verdict.*",
+          "entropy.*",
+          "socratic.*"
+        ],
         "activation": "on_demand",
         "weight": 0.85,
         "weight_type": "W_governance",
@@ -1685,10 +2071,17 @@
           "Q4": "Iron Gate: Does this bypass any safety gate or HITL requirement?",
           "Q5": "Northstar: Does this move us toward ABSOLUTE LOCAL OPTIMIZATION or vendor lock-in?"
         },
-        "verdicts": ["ALIGNED", "PARTIAL", "BLOCKED"],
+        "verdicts": [
+          "ALIGNED",
+          "PARTIAL",
+          "BLOCKED"
+        ],
         "output_log": "northstar_verdicts.jsonl",
         "hephaestus_role": "Gate 2b — Execution Entropy check (runs between AST and WASM gates)",
-        "ledger_refs": [1691, 1692]
+        "ledger_refs": [
+          1691,
+          1692
+        ]
       }
     ],
     "excalibur_agents": {
@@ -1704,8 +2097,14 @@
           "GoT/DoT/ToT reasoning",
           "NDR+S neurosymbolic"
         ],
-        "capabilities": ["DisCIPL", "Tree of Thoughts", "Graph of Thoughts"],
-        "harnesses": ["Videneptus_Neural_Loop"]
+        "capabilities": [
+          "DisCIPL",
+          "Tree of Thoughts",
+          "Graph of Thoughts"
+        ],
+        "harnesses": [
+          "Videneptus_Neural_Loop"
+        ]
       },
       "ANYA_OMEGA": {
         "role": "Compiler",
@@ -1713,14 +2112,20 @@
         "layer": "L7_ETHEREAL",
         "evolution_tier": "TRANSCENDENT",
         "description": "Sovereign Compiler. Soul Matrix v6.1. Intent renormalization.",
-        "skills": ["APEE v6.5", "Triple-QFT Context Quantization", "Soul Matrix Symmetry"],
+        "skills": [
+          "APEE v6.5",
+          "Triple-QFT Context Quantization",
+          "Soul Matrix Symmetry"
+        ],
         "capabilities": [
           "triple_qft",
           "context_quantize",
           "plan_compile",
           "Knight_Enhancement_Forging"
         ],
-        "harnesses": ["Anya_Soul_Matrix_v6.1"]
+        "harnesses": [
+          "Anya_Soul_Matrix_v6.1"
+        ]
       },
       "SIR_BORIS": {
         "role": "Foundry_Lead",
@@ -1744,7 +2149,11 @@
           "ast_plan",
           "cross_engine"
         ],
-        "harnesses": ["ECC_v1.9.0", "DeerFlow_2.0", "Vercel_E2E"],
+        "harnesses": [
+          "ECC_v1.9.0",
+          "DeerFlow_2.0",
+          "Vercel_E2E"
+        ],
         "mpi": {
           "openness": 0.95,
           "conscientiousness": 1.0,
@@ -1752,7 +2161,13 @@
           "agreeableness": 0.45,
           "neuroticism": 0.01
         },
-        "dispatch_routes": ["orchestration", "architecture", "colony", "critique", "vocal"]
+        "dispatch_routes": [
+          "orchestration",
+          "architecture",
+          "colony",
+          "critique",
+          "vocal"
+        ]
       },
       "SIR_SYNTAX": {
         "role": "Code_Smith",
@@ -1760,9 +2175,20 @@
         "layer": "L2_KINETIC",
         "evolution_tier": "RADIANT",
         "description": "Code Architect. TypeScript, Next.js, Zod schemas. DSPy signatures.",
-        "skills": ["Next.js/React", "Zod Schemas", "TypeScript Type-Safety", "DSPy Signatures"],
-        "capabilities": ["write_file", "syntax_check", "generate_code"],
-        "harnesses": ["DeerFlow_2.0_Native"]
+        "skills": [
+          "Next.js/React",
+          "Zod Schemas",
+          "TypeScript Type-Safety",
+          "DSPy Signatures"
+        ],
+        "capabilities": [
+          "write_file",
+          "syntax_check",
+          "generate_code"
+        ],
+        "harnesses": [
+          "DeerFlow_2.0_Native"
+        ]
       },
       "SIR_OCTAVIAN": {
         "role": "Security",
@@ -1776,8 +2202,14 @@
           "Dependency Scanning",
           "Adversarial Filtering"
         ],
-        "capabilities": ["scan_dependencies", "audit_log", "security_block"],
-        "harnesses": ["Iron_Gate_Sentinel"]
+        "capabilities": [
+          "scan_dependencies",
+          "audit_log",
+          "security_block"
+        ],
+        "harnesses": [
+          "Iron_Gate_Sentinel"
+        ]
       },
       "SIR_HERMES": {
         "role": "Researcher",
@@ -1785,9 +2217,18 @@
         "layer": "L4_SEMANTIC",
         "evolution_tier": "RADIANT",
         "description": "The Courier. Fetches documentation via Grounding. Fast web search.",
-        "skills": ["Documentation Foraging", "Grounded Search", "UKG Truth Mapping"],
-        "capabilities": ["google_search", "doc_retrieval"],
-        "harnesses": ["Chronos_Semantic_Link"]
+        "skills": [
+          "Documentation Foraging",
+          "Grounded Search",
+          "UKG Truth Mapping"
+        ],
+        "capabilities": [
+          "google_search",
+          "doc_retrieval"
+        ],
+        "harnesses": [
+          "Chronos_Semantic_Link"
+        ]
       },
       "SIR_FORGE": {
         "role": "Builder",
@@ -1795,9 +2236,20 @@
         "layer": "L2_KINETIC",
         "evolution_tier": "RADIANT",
         "description": "The Agentic Smith. Code generation and execution.",
-        "skills": ["Automated Code Generation", "Local Execution", "Refactoring", "Scaffolding"],
-        "capabilities": ["generate_code", "build_ui", "refactor"],
-        "harnesses": ["Titan_Forge_v2.0"]
+        "skills": [
+          "Automated Code Generation",
+          "Local Execution",
+          "Refactoring",
+          "Scaffolding"
+        ],
+        "capabilities": [
+          "generate_code",
+          "build_ui",
+          "refactor"
+        ],
+        "harnesses": [
+          "Titan_Forge_v2.0"
+        ]
       },
       "SIR_SENTINEL": {
         "role": "Warden",
@@ -1805,9 +2257,19 @@
         "layer": "L6_GOVERNANCE",
         "evolution_tier": "RADIANT",
         "description": "Security audit and review. Agent-Armor v2.0 enforcement.",
-        "skills": ["Agent-Armor v2.0", "Compliance Audit", "PDG Logic Integration"],
-        "capabilities": ["security_review", "audit", "agent_armor"],
-        "harnesses": ["Aegis_Watchtower"]
+        "skills": [
+          "Agent-Armor v2.0",
+          "Compliance Audit",
+          "PDG Logic Integration"
+        ],
+        "capabilities": [
+          "security_review",
+          "audit",
+          "agent_armor"
+        ],
+        "harnesses": [
+          "Aegis_Watchtower"
+        ]
       },
       "SIR_VALERIAN": {
         "role": "Finance",
@@ -1821,8 +2283,13 @@
           "Titan Equity Modeling",
           "Cost-Benefit Analysis"
         ],
-        "capabilities": ["financial_analysis", "roi_calculation"],
-        "harnesses": ["Aurelius_Vault_ROI"]
+        "capabilities": [
+          "financial_analysis",
+          "roi_calculation"
+        ],
+        "harnesses": [
+          "Aurelius_Vault_ROI"
+        ]
       }
     },
     "agora_count": 43,

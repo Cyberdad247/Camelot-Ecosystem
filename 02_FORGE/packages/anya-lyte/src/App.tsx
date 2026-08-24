@@ -1,7 +1,7 @@
-import { config } from '@tamagui/config/v3';
-import { Database, Menu, Shield, Zap } from 'lucide-react-native';
 import React from 'react';
-import { Button, TamaguiProvider, Text, Theme, YStack, createTamagui } from 'tamagui';
+import { TamaguiProvider, createTamagui, YStack, Text, Button, Theme } from 'tamagui';
+import { config } from '@tamagui/config/v3';
+import { Database, Zap, Shield, Menu } from 'lucide-react-native';
 
 const tamaguiConfig = createTamagui(config);
 
@@ -12,23 +12,15 @@ export default function App() {
         <YStack f={1} bg="$background" jc="center" ai="center" p="$4" space>
           {/* Header */}
           <YStack ai="center" space="$2">
-            <Text fOW="bold" fS={28} col="$color">
-              ANYA LYTE
-            </Text>
-            <Text col="$colorSecondary" fS={14}>
-              v1.0 • Singularity Lattice
-            </Text>
+            <Text fOW="bold" fS={28} col="$color">ANYA LYTE</Text>
+            <Text col="$colorSecondary" fS={14}>v1.0 • Singularity Lattice</Text>
           </YStack>
 
           {/* Status Hub */}
           <YStack w="100%" br="$4" p="$4" bg="$color3" space="$3">
             <StatusItem icon={<Zap size={20} color="gold" />} label="TitanLink" status="STABLE" />
             <StatusItem icon={<Database size={20} color="cyan" />} label="UKG Sync" status="98%" />
-            <StatusItem
-              icon={<Shield size={20} color="lightgreen" />}
-              label="Iron Gate"
-              status="ACTIVE"
-            />
+            <StatusItem icon={<Shield size={20} color="lightgreen" />} label="Iron Gate" status="ACTIVE" />
           </YStack>
 
           {/* Actions */}

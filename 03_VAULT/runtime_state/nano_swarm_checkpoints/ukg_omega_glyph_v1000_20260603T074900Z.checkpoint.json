@@ -20,22 +20,36 @@
     },
     "physical_nodes": {
       "Node_A_Frontend": {
-        "stack": ["React", "Zustand", "Tailwind_v4"],
+        "stack": [
+          "React",
+          "Zustand",
+          "Tailwind_v4"
+        ],
         "claimed_core_logic": "Anya_Codec_UI + Chrome_Native_Messaging_Bridge",
         "evidence_class": "built_verified"
       },
       "Node_B_Bifrost": {
-        "stack": ["Rust", "Tokio", "Serde"],
+        "stack": [
+          "Rust",
+          "Tokio",
+          "Serde"
+        ],
         "claimed_core_logic": "4-Byte_Length_Prefixed_IO + Tailscale_TCP_Forwarding",
         "evidence_class": "built_verified"
       },
       "Node_C_Omni_Router": {
-        "stack": ["Go", "tsnet"],
+        "stack": [
+          "Go",
+          "tsnet"
+        ],
         "claimed_core_logic": "Embedded_Zero_Trust_VPN + MCP_Multiplexing",
         "evidence_class": "built_verified"
       },
       "Node_D_MicroVM": {
-        "stack": ["Rust", "wasm-bindgen"],
+        "stack": [
+          "Rust",
+          "wasm-bindgen"
+        ],
         "claimed_core_logic": "Deterministic_Soul_Algorithm_Execution",
         "evidence_class": "built_verified"
       }

@@ -1,7 +1,4 @@
-import { Card } from '@/components/ui/Card';
-import { runtimeConfig } from '@/config/runtime';
-import { bifrostFetch } from '@/lib/bifrostClient';
-import { cn } from '@/lib/utils';
+import React, { useMemo, useState } from 'react';
 import {
   AlertTriangle,
   CheckCircle2,
@@ -14,8 +11,10 @@ import {
   ShieldCheck,
   TerminalSquare,
 } from 'lucide-react';
-import type React from 'react';
-import { useMemo, useState } from 'react';
+import { Card } from '@/components/ui/Card';
+import { runtimeConfig } from '@/config/runtime';
+import { bifrostFetch } from '@/lib/bifrostClient';
+import { cn } from '@/lib/utils';
 
 type ConsoleKind = 'system' | 'command' | 'bridge' | 'warn' | 'error';
 type GuardState = 'green' | 'amber' | 'red' | 'checking';
@@ -98,19 +97,14 @@ const QUICK_COMMANDS: QuickCommand[] = [
   {
     label: 'Safe Repair',
     command: 'repair',
-    intent:
-      'Ask Sir Castor for low-risk defensive repair recommendations without destructive actions',
+    intent: 'Ask Sir Castor for low-risk defensive repair recommendations without destructive actions',
     icon: CheckCircle2,
     risk: 'medium',
   },
 ];
 
 function stamp() {
-  return new Date().toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  });
+  return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 }
 
 function stateClass(state: GuardState) {
@@ -195,10 +189,7 @@ export default function DefenseGridConsole() {
         'Defense Grid dispatch accepted.';
       push('bridge', summary);
     } catch (error) {
-      push(
-        'error',
-        `Bifrost dispatch failed: ${error instanceof Error ? error.message : 'unknown error'}`,
-      );
+      push('error', `Bifrost dispatch failed: ${error instanceof Error ? error.message : 'unknown error'}`);
     } finally {
       setBusy(false);
     }
@@ -235,10 +226,7 @@ export default function DefenseGridConsole() {
         return;
       }
       setLockdownArmed(false);
-      await runIntent(
-        'lockdown',
-        'Defense Grid high-risk lockdown request from user console; require Iron Gate approval before execution',
-      );
+      await runIntent('lockdown', 'Defense Grid high-risk lockdown request from user console; require Iron Gate approval before execution');
       return;
     }
 
@@ -262,57 +250,35 @@ export default function DefenseGridConsole() {
                   <ShieldCheck className="h-6 w-6" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-black tracking-tight text-white">
-                    Defense Grid Console
-                  </h1>
+                  <h1 className="text-2xl font-black tracking-tight text-white">Defense Grid Console</h1>
                   <p className="mt-1 max-w-2xl text-sm leading-6 text-slate-400">
-                    Operator console for AEGIS pulse, Sentinel audit, Octavian triage, and guarded
-                    repair dispatch.
+                    Operator console for AEGIS pulse, Sentinel audit, Octavian triage, and guarded repair dispatch.
                   </p>
                 </div>
               </div>
-              <div
-                className={cn(
-                  'rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em]',
-                  stateClass(threatState),
-                )}
-              >
+              <div className={cn('rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em]', stateClass(threatState))}>
                 {threatState === 'green' ? 'guard green' : threatState}
               </div>
             </div>
 
             <div className="mt-5 grid gap-3 md:grid-cols-4">
               {SUBSYSTEMS.map((system) => (
-                <div
-                  key={system.id}
-                  className="rounded-lg border border-slate-800 bg-slate-900/70 p-3"
-                >
+                <div key={system.id} className="rounded-lg border border-slate-800 bg-slate-900/70 p-3">
                   <div className="mb-3 flex items-center justify-between gap-2">
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">
-                      {system.owner}
-                    </p>
-                    <span
-                      className={cn(
-                        'rounded-full border px-2 py-1 text-[10px] font-bold uppercase',
-                        stateClass(system.state),
-                      )}
-                    >
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">{system.owner}</p>
+                    <span className={cn('rounded-full border px-2 py-1 text-[10px] font-bold uppercase', stateClass(system.state))}>
                       {system.state}
                     </span>
                   </div>
                   <p className="text-sm font-semibold text-slate-100">{system.label}</p>
-                  <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-500">
-                    {system.detail}
-                  </p>
+                  <p className="mt-2 min-h-[2.5rem] text-xs leading-5 text-slate-500">{system.detail}</p>
                 </div>
               ))}
             </div>
           </section>
 
           <aside className="rounded-xl border border-slate-800 bg-slate-950/80 p-5">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">
-              Console State
-            </p>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Console State</p>
             <div className="mt-4 grid gap-3">
               <div className="flex items-center justify-between rounded-lg bg-slate-900/70 px-3 py-2">
                 <span className="text-sm text-slate-400">Dispatch target</span>
@@ -320,9 +286,7 @@ export default function DefenseGridConsole() {
               </div>
               <div className="flex items-center justify-between rounded-lg bg-slate-900/70 px-3 py-2">
                 <span className="text-sm text-slate-400">Bridge</span>
-                <span className="truncate pl-3 font-mono text-xs text-cyan-200">
-                  {runtimeConfig.bifrost.dispatchUrl}
-                </span>
+                <span className="truncate pl-3 font-mono text-xs text-cyan-200">{runtimeConfig.bifrost.dispatchUrl}</span>
               </div>
               <div className="flex items-center justify-between rounded-lg bg-slate-900/70 px-3 py-2">
                 <span className="text-sm text-slate-400">Last action</span>
@@ -330,8 +294,7 @@ export default function DefenseGridConsole() {
               </div>
               {lockdownArmed && (
                 <div className="rounded-lg border border-amber-400/30 bg-amber-400/10 p-3 text-sm leading-6 text-amber-100">
-                  Lockdown armed. Type <span className="font-mono font-bold">confirm lockdown</span>{' '}
-                  to continue.
+                  Lockdown armed. Type <span className="font-mono font-bold">confirm lockdown</span> to continue.
                 </div>
               )}
             </div>
@@ -356,9 +319,7 @@ export default function DefenseGridConsole() {
                   >
                     <span>
                       <span className="block text-sm font-bold text-white">{item.label}</span>
-                      <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-slate-500">
-                        {item.risk} risk
-                      </span>
+                      <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-slate-500">{item.risk} risk</span>
                     </span>
                     <Icon className="h-5 w-5 shrink-0 text-emerald-300" />
                   </button>
@@ -370,9 +331,7 @@ export default function DefenseGridConsole() {
               >
                 <span>
                   <span className="block text-sm font-bold text-amber-100">Arm Lockdown</span>
-                  <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-amber-300">
-                    high risk
-                  </span>
+                  <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-amber-300">high risk</span>
                 </span>
                 <Lock className="h-5 w-5 shrink-0 text-amber-300" />
               </button>
@@ -382,9 +341,7 @@ export default function DefenseGridConsole() {
               >
                 <span>
                   <span className="block text-sm font-bold text-white">Command Help</span>
-                  <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-slate-500">
-                    local
-                  </span>
+                  <span className="mt-1 block text-xs uppercase tracking-[0.14em] text-slate-500">local</span>
                 </span>
                 <AlertTriangle className="h-5 w-5 shrink-0 text-cyan-300" />
               </button>
@@ -398,9 +355,7 @@ export default function DefenseGridConsole() {
             actions={<TerminalSquare className="h-4 w-4 text-cyan-300" />}
           >
             <div className="rounded-lg border border-slate-800 bg-black/45 p-3 font-mono">
-              <div className="mb-2 text-[10px] uppercase tracking-[0.18em] text-slate-500">
-                operator@camelot / defense-grid
-              </div>
+              <div className="mb-2 text-[10px] uppercase tracking-[0.18em] text-slate-500">operator@camelot / defense-grid</div>
               <textarea
                 value={command}
                 onChange={(event) => setCommand(event.target.value)}
@@ -414,9 +369,7 @@ export default function DefenseGridConsole() {
                 placeholder="status | pulse | audit | repair | lockdown | confirm lockdown | clear"
               />
               <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-                <p className="text-xs leading-5 text-slate-500">
-                  Press Enter to run. Shift+Enter adds a line.
-                </p>
+                <p className="text-xs leading-5 text-slate-500">Press Enter to run. Shift+Enter adds a line.</p>
                 <button
                   onClick={() => void execute(command)}
                   disabled={busy || !command.trim()}
@@ -438,14 +391,9 @@ export default function DefenseGridConsole() {
         >
           <div className="grid max-h-[28rem] gap-2 overflow-y-auto pr-1">
             {lines.map((line, index) => (
-              <div
-                key={`${line.stamp}-${index}`}
-                className={cn('rounded-lg border p-3', lineClass(line.kind))}
-              >
+              <div key={`${line.stamp}-${index}`} className={cn('rounded-lg border p-3', lineClass(line.kind))}>
                 <div className="mb-1 flex items-center justify-between gap-3">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.16em]">
-                    {line.kind}
-                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.16em]">{line.kind}</span>
                   <span className="text-[10px] opacity-70">{line.stamp}</span>
                 </div>
                 <p className="whitespace-pre-wrap text-sm leading-6">{line.text}</p>

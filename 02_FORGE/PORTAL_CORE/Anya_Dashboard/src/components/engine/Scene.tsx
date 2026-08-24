@@ -1,8 +1,8 @@
-import { Environment, OrbitControls, PerspectiveCamera, useGLTF } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
-import { Bloom, EffectComposer, Noise, Vignette } from '@react-three/postprocessing';
-import { Physics, RigidBody } from '@react-three/rapier';
 import React, { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls, PerspectiveCamera, Environment, useGLTF } from '@react-three/drei';
+import { Physics, RigidBody } from '@react-three/rapier';
+import { EffectComposer, Bloom, Vignette, Noise } from '@react-three/postprocessing';
 import { useEngineStore } from '../../features/brain/engineStore';
 
 export default function QuantumScene() {
@@ -31,11 +31,7 @@ export default function QuantumScene() {
               <RigidBody key={obj.id} position={obj.position} colliders="cuboid">
                 <mesh castShadow>
                   <boxGeometry />
-                  <meshStandardMaterial
-                    color={obj.color}
-                    emissive={obj.color}
-                    emissiveIntensity={1}
-                  />
+                  <meshStandardMaterial color={obj.color} emissive={obj.color} emissiveIntensity={1} />
                 </mesh>
               </RigidBody>
             ))}

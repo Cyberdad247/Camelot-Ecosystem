@@ -2,7 +2,10 @@
   "mcpServers": {
     "NotebookLM_Worldtree_Node": {
       "command": "python",
-      "args": ["-m", "control_plane.worldtree_mcp_bridge"],
+      "args": [
+        "-m",
+        "control_plane.worldtree_mcp_bridge"
+      ],
       "env": {
         "TARGET_NOTEBOOK_ID": "Worldtree",
         "AUTH_MODE": "Session_Cookie_Bridge_OAuth2_Hard_Token",

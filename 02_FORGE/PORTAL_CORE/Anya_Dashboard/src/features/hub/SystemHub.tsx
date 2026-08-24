@@ -1,26 +1,20 @@
-import EventFeed from '@/components/ui/EventFeed';
-import { SERVICES, StatusDot } from '@/components/ui/StatusDot';
-import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
-import { CARTRIDGES } from '@/features/cartridges/registry';
-import ConfigPanel from '@/features/hub/ConfigPanel';
-import FleetPanel from '@/features/hub/FleetPanel';
-import KnightAvatarScene from '@/features/knights/KnightAvatarScene';
-import KnightStreamBanner from '@/features/knights/KnightStreamBanner';
-import VisualPlanOverlay from '@/features/knights/VisualPlanOverlay';
-import { useKnightStream } from '@/features/knights/useKnightStream';
-import { cn } from '@/lib/utils';
-import {
-  Activity,
-  AlertTriangle,
-  ArrowRight,
-  Cpu,
-  Database,
-  ShieldCheck,
-  TrendingUp,
-  Zap,
-} from 'lucide-react';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Activity, ArrowRight, Cpu, Database, Zap, ShieldCheck,
+  TrendingUp, AlertTriangle,
+} from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { CARTRIDGES } from '@/features/cartridges/registry';
+import { SERVICES, StatusDot } from '@/components/ui/StatusDot';
+import EventFeed from '@/components/ui/EventFeed';
+import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
+import KnightStreamBanner from '@/features/knights/KnightStreamBanner';
+import KnightAvatarScene from '@/features/knights/KnightAvatarScene';
+import FleetPanel from '@/features/hub/FleetPanel';
+import ConfigPanel from '@/features/hub/ConfigPanel';
+import VisualPlanOverlay from '@/features/knights/VisualPlanOverlay';
+import { useKnightStream } from '@/features/knights/useKnightStream';
 
 const STAT_CARDS = [
   { label: 'Active Knights', value: '7', icon: Zap, color: 'text-fuchsia-400' },
@@ -39,15 +33,11 @@ export default function SystemHub() {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-black tracking-tight text-slate-100">System Hub</h1>
-          <p className="text-sm text-slate-500 mt-0.5">
-            CAMELOT Apex OS v400.1.0 — LATTICE_RADIANT
-          </p>
+          <p className="text-sm text-slate-500 mt-0.5">CAMELOT Apex OS v400.1.0 — LATTICE_RADIANT</p>
         </div>
         {latestEvent && (
           <div className="rounded-lg border border-fuchsia-500/20 bg-fuchsia-950/20 px-3 py-1.5 max-w-xs">
-            <p className="text-[10px] uppercase tracking-widest text-fuchsia-500 mb-0.5">
-              Latest Event
-            </p>
+            <p className="text-[10px] uppercase tracking-widest text-fuchsia-500 mb-0.5">Latest Event</p>
             <p className="text-xs text-slate-300 truncate">{latestEvent.event}</p>
           </div>
         )}
@@ -143,11 +133,13 @@ export default function SystemHub() {
           <h2 className="text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3 flex items-center gap-2">
             <TrendingUp className="h-3.5 w-3.5" /> Activity
           </h2>
-          <div
-            className="flex-1 rounded-xl border border-slate-800/50 bg-slate-900/40 p-3 overflow-hidden"
-            style={{ minHeight: 320 }}
-          >
-            <EventFeed events={events} isConnected={isConnected} maxRows={30} className="h-full" />
+          <div className="flex-1 rounded-xl border border-slate-800/50 bg-slate-900/40 p-3 overflow-hidden" style={{ minHeight: 320 }}>
+            <EventFeed
+              events={events}
+              isConnected={isConnected}
+              maxRows={30}
+              className="h-full"
+            />
           </div>
         </div>
       </div>

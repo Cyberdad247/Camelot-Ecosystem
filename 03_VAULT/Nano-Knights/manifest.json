@@ -20,7 +20,9 @@
   "side_panel": {
     "default_path": "side_panel/research_panel.html"
   },
-  "host_permissions": ["<all_urls>"],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "background": {
     "service_worker": "background.js",
     "type": "module"

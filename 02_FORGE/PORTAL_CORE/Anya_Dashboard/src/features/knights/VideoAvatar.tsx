@@ -1,5 +1,5 @@
-import { useFrame } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import type { Mesh } from 'three';
 import KnightFigure from './KnightFigure';

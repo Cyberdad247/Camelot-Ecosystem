@@ -1,9 +1,12 @@
-import { prisma } from '@/lib/prisma';
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { id: string } }
+) {
   try {
     const { id } = params;
 
@@ -20,9 +23,9 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json(
         {
           success: false,
-          message: 'Trip plan not found',
+          message: 'Trip plan not found'
         },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -49,7 +52,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
         starting_location: tripPlan.startingLocation,
         travel_dates: {
           start: tripPlan.travelDatesStart,
-          end: tripPlan.travelDatesEnd || '',
+          end: tripPlan.travelDatesEnd || ""
         },
         date_input_type: tripPlan.dateInputType,
         duration: tripPlan.duration,
@@ -63,13 +66,13 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
         budget_flexible: tripPlan.budgetFlexible,
         vibes: tripPlan.vibes,
         priorities: tripPlan.priorities,
-        interests: tripPlan.interests || '',
+        interests: tripPlan.interests || "",
         rooms: tripPlan.rooms,
         pace: tripPlan.pace,
-        been_there_before: tripPlan.beenThereBefore || '',
-        loved_places: tripPlan.lovedPlaces || '',
-        additional_info: tripPlan.additionalInfo || '',
-      },
+        been_there_before: tripPlan.beenThereBefore || "",
+        loved_places: tripPlan.lovedPlaces || "",
+        additional_info: tripPlan.additionalInfo || ""
+      }
     };
 
     // Call backend API to trigger trip planning again
@@ -78,7 +81,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody),
+      body: JSON.stringify(requestBody)
     });
 
     if (!backendResponse.ok) {
@@ -95,9 +98,9 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       return NextResponse.json(
         {
           success: false,
-          message: 'Failed to retry trip planning',
+          message: 'Failed to retry trip planning'
         },
-        { status: 500 },
+        { status: 500 }
       );
     }
 
@@ -108,9 +111,9 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
       {
         success: true,
         message: 'Trip planning retry triggered successfully',
-        response: responseData,
+        response: responseData
       },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error('Error processing trip retry:', error);
@@ -131,9 +134,9 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
     return NextResponse.json(
       {
         success: false,
-        message: 'Failed to retry trip plan',
+        message: 'Failed to retry trip plan'
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

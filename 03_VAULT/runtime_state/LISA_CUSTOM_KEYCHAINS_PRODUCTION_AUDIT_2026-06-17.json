@@ -74,7 +74,10 @@
       "priority": "P0",
       "owner": "ARACHNE",
       "title": "Stored HTML injection in published blog content",
-      "evidence": ["src/app/blog/[slug]/page.tsx:49", "src/app/blog/[slug]/page.tsx:137"],
+      "evidence": [
+        "src/app/blog/[slug]/page.tsx:49",
+        "src/app/blog/[slug]/page.tsx:137"
+      ],
       "impact": "Raw editor content is converted with regex and inserted as HTML without sanitization.",
       "fix": "Escape raw HTML before markdown conversion and allow only http/https affiliate links."
     },
@@ -109,7 +112,9 @@
       "priority": "P1",
       "owner": "ARACHNE",
       "title": "Draft blog records are publicly returned",
-      "evidence": ["src/app/api/blog/route.ts:64"],
+      "evidence": [
+        "src/app/api/blog/route.ts:64"
+      ],
       "fix": "Return only published posts to anonymous callers; require owner auth for draft access."
     },
     {
@@ -117,7 +122,9 @@
       "priority": "P1",
       "owner": "ARACHNE",
       "title": "Meta OAuth state is static",
-      "evidence": ["src/app/api/auth/meta/start/route.ts:18"],
+      "evidence": [
+        "src/app/api/auth/meta/start/route.ts:18"
+      ],
       "fix": "Generate a random state value, store it in an HttpOnly SameSite cookie, and verify it in callback."
     },
     {
@@ -125,7 +132,9 @@
       "priority": "P1",
       "owner": "SIMIAN",
       "title": "Cron endpoint becomes public when CRON_SECRET is absent",
-      "evidence": ["src/app/api/cron/generate-content/route.ts:6"],
+      "evidence": [
+        "src/app/api/cron/generate-content/route.ts:6"
+      ],
       "fix": "Fail closed when CRON_SECRET is missing."
     },
     {
@@ -133,7 +142,10 @@
       "priority": "P1",
       "owner": "STRIGIFORM",
       "title": "Storefront-token placeholder can be mistaken for an Admin token",
-      "evidence": [".env.example:3", ".env.example:6"],
+      "evidence": [
+        ".env.example:3",
+        ".env.example:6"
+      ],
       "fix": "Use a Storefront API token placeholder for NEXT_PUBLIC_* and never place an Admin shpat token in a public variable."
     }
   ],
@@ -246,7 +258,11 @@
     "      - run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}"
   ],
   "environmentContract": {
-    "githubSecrets": ["VERCEL_TOKEN", "VERCEL_ORG_ID", "VERCEL_PROJECT_ID"],
+    "githubSecrets": [
+      "VERCEL_TOKEN",
+      "VERCEL_ORG_ID",
+      "VERCEL_PROJECT_ID"
+    ],
     "vercelServerOnly": [
       "OWNER_DASHBOARD_PASSWORD",
       "OWNER_DASHBOARD_SECRET",

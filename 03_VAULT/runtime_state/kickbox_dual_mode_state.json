@@ -5,12 +5,19 @@
     "title": "Offline Minimum Zero-Cloud Fallback (Bare Minimum Lightweight)",
     "cloudbrain_node": "LOCAL_OPEN_NOTEBOOK_STUB (Air-Gapped)",
     "worldtree_anchor": "LOCAL_VFS_CACHE",
-    "primary_knights": ["SIR_GHOST", "SIR_FORGE", "SIR_SENTINEL"],
+    "primary_knights": [
+      "SIR_GHOST",
+      "SIR_FORGE",
+      "SIR_SENTINEL"
+    ],
     "llm_tier": "Tiny LLMs (Ollama qwen2.5:1.5b / llama3.2:1b)",
     "proxy_endpoint": "http://127.0.0.1:11434 (Local Ollama)",
     "voice_engine": "On-Device Web Audio RMS VAD + Local SpeechSynthesis",
     "bifrost_mesh": "Localhost IPC (127.0.0.1:4433)",
-    "cartridges": ["ANT", "BIO_SWARM"],
+    "cartridges": [
+      "ANT",
+      "BIO_SWARM"
+    ],
     "max_ram_mb": 1200
   },
   "probes": {

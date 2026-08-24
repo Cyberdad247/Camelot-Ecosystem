@@ -52,9 +52,7 @@ afterAll(() => {
 describe('whisper.cpp STT wrapper', () => {
   it('refuses clearly when the binary is not configured', async () => {
     await expect(
-      run('bash', [WHISPER_WRAPPER, '/nonexistent.wav'], {
-        env: { PATH: process.env['PATH'] ?? '' },
-      }),
+      run('bash', [WHISPER_WRAPPER, '/nonexistent.wav'], { env: { PATH: process.env['PATH'] ?? '' } }),
     ).rejects.toMatchObject({ code: 1 });
   });
 
@@ -62,11 +60,7 @@ describe('whisper.cpp STT wrapper', () => {
     const bin = stub('whisper-ok', 'echo "should not be reached"');
     await expect(
       run('bash', [WHISPER_WRAPPER, '/nonexistent.wav'], {
-        env: {
-          PATH: process.env['PATH'] ?? '',
-          WHISPER_BIN: bin,
-          WHISPER_MODEL: '/nope/model.bin',
-        },
+        env: { PATH: process.env['PATH'] ?? '', WHISPER_BIN: bin, WHISPER_MODEL: '/nope/model.bin' },
       }),
     ).rejects.toMatchObject({ code: 1 });
   });
@@ -111,11 +105,7 @@ describe('whisper.cpp STT wrapper', () => {
 
     const pcm = new Int16Array(16000);
     const result = await commandStt(WHISPER_WRAPPER, pcm, 16000);
-    expect(result).toEqual({
-      transcript: 'read staging status',
-      confidence: 0.9,
-      engine: 'command',
-    });
+    expect(result).toEqual({ transcript: 'read staging status', confidence: 0.9, engine: 'command' });
 
     delete process.env['WHISPER_BIN'];
     delete process.env['WHISPER_MODEL'];

@@ -1,136 +1,159 @@
 {
-  "KERNEL_ID": "CHIMERA_UNIFIED_KERNEL_v2.0",
-  "DESCRIPTION": "Runtime manifest for Camelot AI kernel; contains service endpoints, model routing, cartridge manager hooks, Titan Omega connectors, and orchestration policies.",
-  "API": {
-    "admin": {
-      "POST /admin/system_prompt": "Load master system prompt",
-      "GET /admin/status": "Kernel health check"
+    "KERNEL_ID": "CHIMERA_UNIFIED_KERNEL_v2.0",
+    "DESCRIPTION": "Runtime manifest for Camelot AI kernel; contains service endpoints, model routing, cartridge manager hooks, Titan Omega connectors, and orchestration policies.",
+    "API": {
+        "admin": {
+            "POST /admin/system_prompt": "Load master system prompt",
+            "GET /admin/status": "Kernel health check"
+        },
+        "cartridges": {
+            "POST /cartridges/fabricate": "Build and sign cartridge",
+            "POST /cartridges/activate": "Activate cartridge",
+            "GET /cartridges/list": "List available cartridges"
+        },
+        "orchestrator": {
+            "POST /orchestrator/dispatch": "Route command to appropriate workflow stage"
+        },
+        "judge": {
+            "POST /judge/score": "Score artifact quality"
+        },
+        "fleet": {
+            "POST /fleet": "Execute Fleet Protocol action"
+        },
+        "commands": {
+            "POST /commands": "Execute squire CLI command"
+        },
+        "generate": {
+            "POST /api/generate": "LLM text generation"
+        },
+        "models": {
+            "GET /api/models": "List active LLM models"
+        }
     },
-    "cartridges": {
-      "POST /cartridges/fabricate": "Build and sign cartridge",
-      "POST /cartridges/activate": "Activate cartridge",
-      "GET /cartridges/list": "List available cartridges"
+    "SERVICES": {
+        "kernel": {
+            "host": "kernel:8080",
+            "healthcheck": "/health"
+        },
+        "dashboard_backend": {
+            "host": "dashboard-backend:8000",
+            "cors_origins": [
+                "http://localhost:3000"
+            ]
+        },
+        "dashboard_frontend": {
+            "host": "dashboard-frontend:3000"
+        },
+        "cartridge_fabricator": {
+            "host": "fabricator:6001",
+            "verify_signature": true,
+            "ukg_scan": true
+        },
+        "orchestrator": {
+            "host": "orchestrator:7000",
+            "fusion_mode": [
+                "pipeline",
+                "ensemble",
+                "hybrid"
+            ],
+            "judge": "judge:7200"
+        },
+        "got_visualizer": {
+            "host": "got-visualizer:5000"
+        },
+        "cartridge_runner": {
+            "host": "cartridge-runner:5001"
+        }
     },
-    "orchestrator": {
-      "POST /orchestrator/dispatch": "Route command to appropriate workflow stage"
+    "TITAN_OMEGA": {
+        "graph": {
+            "driver": "neo4j",
+            "uri": "bolt://neo4j:7687",
+            "user": "neo4j",
+            "database": "camelot"
+        },
+        "vector": {
+            "service": "vector-service:8000",
+            "engine": "faiss",
+            "dimensions": 768
+        },
+        "cache": {
+            "driver": "redis",
+            "host": "redis:6379"
+        },
+        "ledger": {
+            "type": "s3",
+            "bucket": "manus-ledger",
+            "region": "us-east-1"
+        }
     },
-    "judge": {
-      "POST /judge/score": "Score artifact quality"
+    "MODEL_ROUTER": {
+        "ollama": {
+            "endpoint": "http://host.docker.internal:11434",
+            "models": [
+                "llama3",
+                "mistral",
+                "codellama"
+            ]
+        },
+        "lmstudio": {
+            "endpoint": "http://host.docker.internal:1234",
+            "openai_compatible": true
+        },
+        "openai": {
+            "endpoint": "https://api.openai.com",
+            "requires_key": true
+        },
+        "gemini": {
+            "endpoint": "https://generativelanguage.googleapis.com",
+            "requires_key": true
+        },
+        "routing_policy": {
+            "strategy": "failover",
+            "priorities": [
+                "privacy",
+                "latency",
+                "quality"
+            ],
+            "fallback_order": [
+                "ollama",
+                "lmstudio",
+                "gemini",
+                "openai"
+            ]
+        }
     },
-    "fleet": {
-      "POST /fleet": "Execute Fleet Protocol action"
+    "CARTRIDGE_MANAGER": {
+        "store": "/data/cartridges",
+        "schema": "schema/cartridge_manifest_v1.1.json",
+        "prewarm": true,
+        "signature_required": true
     },
-    "commands": {
-      "POST /commands": "Execute squire CLI command"
+    "OBSERVABILITY": {
+        "prometheus": {
+            "endpoint": "metrics:9090",
+            "scrape_interval": "15s"
+        },
+        "traces": {
+            "endpoint": "otel:4317",
+            "exporter": "otlp"
+        },
+        "logs": {
+            "endpoint": "loki:3100",
+            "format": "json"
+        }
     },
-    "generate": {
-      "POST /api/generate": "LLM text generation"
-    },
-    "models": {
-      "GET /api/models": "List active LLM models"
+    "SECURITY": {
+        "ukg_enforcement": true,
+        "signature_verification": true,
+        "hitl_required_for": [
+            "provenance_write",
+            "fleet_rollback",
+            "system_prompt_update"
+        ],
+        "rate_limiting": {
+            "requests_per_minute": 60,
+            "burst": 10
+        }
     }
-  },
-  "SERVICES": {
-    "kernel": {
-      "host": "kernel:8080",
-      "healthcheck": "/health"
-    },
-    "dashboard_backend": {
-      "host": "dashboard-backend:8000",
-      "cors_origins": ["http://localhost:3000"]
-    },
-    "dashboard_frontend": {
-      "host": "dashboard-frontend:3000"
-    },
-    "cartridge_fabricator": {
-      "host": "fabricator:6001",
-      "verify_signature": true,
-      "ukg_scan": true
-    },
-    "orchestrator": {
-      "host": "orchestrator:7000",
-      "fusion_mode": ["pipeline", "ensemble", "hybrid"],
-      "judge": "judge:7200"
-    },
-    "got_visualizer": {
-      "host": "got-visualizer:5000"
-    },
-    "cartridge_runner": {
-      "host": "cartridge-runner:5001"
-    }
-  },
-  "TITAN_OMEGA": {
-    "graph": {
-      "driver": "neo4j",
-      "uri": "bolt://neo4j:7687",
-      "user": "neo4j",
-      "database": "camelot"
-    },
-    "vector": {
-      "service": "vector-service:8000",
-      "engine": "faiss",
-      "dimensions": 768
-    },
-    "cache": {
-      "driver": "redis",
-      "host": "redis:6379"
-    },
-    "ledger": {
-      "type": "s3",
-      "bucket": "manus-ledger",
-      "region": "us-east-1"
-    }
-  },
-  "MODEL_ROUTER": {
-    "ollama": {
-      "endpoint": "http://host.docker.internal:11434",
-      "models": ["llama3", "mistral", "codellama"]
-    },
-    "lmstudio": {
-      "endpoint": "http://host.docker.internal:1234",
-      "openai_compatible": true
-    },
-    "openai": {
-      "endpoint": "https://api.openai.com",
-      "requires_key": true
-    },
-    "gemini": {
-      "endpoint": "https://generativelanguage.googleapis.com",
-      "requires_key": true
-    },
-    "routing_policy": {
-      "strategy": "failover",
-      "priorities": ["privacy", "latency", "quality"],
-      "fallback_order": ["ollama", "lmstudio", "gemini", "openai"]
-    }
-  },
-  "CARTRIDGE_MANAGER": {
-    "store": "/data/cartridges",
-    "schema": "schema/cartridge_manifest_v1.1.json",
-    "prewarm": true,
-    "signature_required": true
-  },
-  "OBSERVABILITY": {
-    "prometheus": {
-      "endpoint": "metrics:9090",
-      "scrape_interval": "15s"
-    },
-    "traces": {
-      "endpoint": "otel:4317",
-      "exporter": "otlp"
-    },
-    "logs": {
-      "endpoint": "loki:3100",
-      "format": "json"
-    }
-  },
-  "SECURITY": {
-    "ukg_enforcement": true,
-    "signature_verification": true,
-    "hitl_required_for": ["provenance_write", "fleet_rollback", "system_prompt_update"],
-    "rate_limiting": {
-      "requests_per_minute": 60,
-      "burst": 10
-    }
-  }
 }

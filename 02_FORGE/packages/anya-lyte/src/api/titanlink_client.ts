@@ -14,8 +14,7 @@ export class TitanLinkClient {
   private reconnectAttempts = 0;
   private maxBackoff = 30000; // 30 seconds
 
-  constructor(url = 'ws://100.64.0.1:18788') {
-    // Example Tailscale IP
+  constructor(url: string = 'ws://100.64.0.1:18788') { // Example Tailscale IP
     this.url = url;
   }
 
@@ -32,7 +31,7 @@ export class TitanLinkClient {
     this.ws.onmessage = (event) => {
       try {
         const msg = JSON.parse(event.data);
-        this.listeners.forEach((l) => l(msg));
+        this.listeners.forEach(l => l(msg));
       } catch (e) {
         console.error('[TITANLINK] Parse Error:', e);
       }
@@ -60,7 +59,7 @@ export class TitanLinkClient {
       if (this.ws?.readyState === WebSocket.OPEN) {
         this.send({
           kind: 'heartbeat',
-          payload: { timestamp: new Date().toISOString() },
+          payload: { timestamp: new Date().toISOString() }
         });
       }
     }, 30000); // 30s heartbeat
@@ -68,14 +67,12 @@ export class TitanLinkClient {
 
   send(message: any) {
     if (this.ws?.readyState === WebSocket.OPEN) {
-      this.ws.send(
-        JSON.stringify({
-          id: Math.random().toString(36).substring(7),
-          timestamp: new Date().toISOString(),
-          version: 'v1.0',
-          ...message,
-        }),
-      );
+      this.ws.send(JSON.stringify({
+        id: Math.random().toString(36).substring(7),
+        timestamp: new Date().toISOString(),
+        version: 'v1.0',
+        ...message
+      }));
     } else {
       console.warn('[TITANLINK] Send failed: Socket not open.');
     }

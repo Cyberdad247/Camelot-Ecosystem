@@ -7,7 +7,9 @@
   "phases": {
     "architecture": {
       "type": "Service/App",
-      "stack": ["Python"]
+      "stack": [
+        "Python"
+      ]
     },
     "quality": {
       "score": 70,
@@ -15,7 +17,9 @@
       "configs": []
     },
     "testing": {
-      "frameworks": ["Pytest"],
+      "frameworks": [
+        "Pytest"
+      ],
       "test_count": 1
     },
     "security": {
@@ -24,7 +28,11 @@
     },
     "documentation": {
       "grade": "F",
-      "missing": ["CONTRIBUTING.md", "LICENSE", "ARCHITECTURE.md"]
+      "missing": [
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

@@ -1,16 +1,32 @@
 {
-  "node_id": "UKG_SWARM_MANIFEST_2026",
-  "type": "Manifest",
-  "title": "Cyberdad247 Swarm Assimilation Manifest",
-  "summary": "Consolidation of 10 AI client and proxy repositories into the Camelot OS Forge.",
-  "layers": {
-    "L7": ["AionUi", "CCManager", "geminicoder"],
-    "L5": ["goose", "claude-code", "kimi-cli", "gemini-cli-cyber"],
-    "L4": ["pi-mono"],
-    "L3": ["ringlet"],
-    "L2": ["ringlet", "AIClient-2-API"]
-  },
-  "status": "ASSIMILATED",
-  "version": "212.0.0",
-  "ledger_hash": "0xSWARM_ASSIMILATION_V1"
+    "node_id": "UKG_SWARM_MANIFEST_2026",
+    "type": "Manifest",
+    "title": "Cyberdad247 Swarm Assimilation Manifest",
+    "summary": "Consolidation of 10 AI client and proxy repositories into the Camelot OS Forge.",
+    "layers": {
+        "L7": [
+            "AionUi",
+            "CCManager",
+            "geminicoder"
+        ],
+        "L5": [
+            "goose",
+            "claude-code",
+            "kimi-cli",
+            "gemini-cli-cyber"
+        ],
+        "L4": [
+            "pi-mono"
+        ],
+        "L3": [
+            "ringlet"
+        ],
+        "L2": [
+            "ringlet",
+            "AIClient-2-API"
+        ]
+    },
+    "status": "ASSIMILATED",
+    "version": "212.0.0",
+    "ledger_hash": "0xSWARM_ASSIMILATION_V1"
 }

@@ -1,9 +1,12 @@
-import { prisma } from '@/lib/prisma';
 // Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 // Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import { NextResponse } from 'next/server';
+import { prisma } from '@/lib/prisma';
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     const { id } = await params;
 
@@ -19,32 +22,35 @@ export async function GET(request: Request, { params }: { params: { id: string }
       return NextResponse.json(
         {
           success: false,
-          message: 'Trip plan not found',
+          message: 'Trip plan not found'
         },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
     return NextResponse.json(
       {
         success: true,
-        tripPlan,
+        tripPlan
       },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error('Error fetching trip plan:', error);
     return NextResponse.json(
       {
         success: false,
-        message: 'Failed to fetch trip plan',
+        message: 'Failed to fetch trip plan'
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
   try {
     const { id } = params;
 
@@ -57,9 +63,9 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
       return NextResponse.json(
         {
           success: false,
-          message: 'Trip plan not found',
+          message: 'Trip plan not found'
         },
-        { status: 404 },
+        { status: 404 }
       );
     }
 
@@ -80,18 +86,18 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
     return NextResponse.json(
       {
         success: true,
-        message: 'Trip plan deleted successfully',
+        message: 'Trip plan deleted successfully'
       },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error('Error deleting trip plan:', error);
     return NextResponse.json(
       {
         success: false,
-        message: 'Failed to delete trip plan',
+        message: 'Failed to delete trip plan'
       },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

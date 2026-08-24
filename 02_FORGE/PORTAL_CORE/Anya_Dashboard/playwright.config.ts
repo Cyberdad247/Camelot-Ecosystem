@@ -17,14 +17,12 @@ export default defineConfig({
     baseURL,
     trace: 'on-first-retry',
   },
-  webServer: skipWebServer
-    ? undefined
-    : {
-        command: `..\\..\\..\\.venv\\Scripts\\python.exe ..\\..\\..\\scripts\\serve_anya_dashboard.py --host ${host} --port ${port}`,
-        url: baseURL,
-        reuseExistingServer: false,
-        timeout: 120_000,
-      },
+  webServer: skipWebServer ? undefined : {
+    command: `..\\..\\..\\.venv\\Scripts\\python.exe ..\\..\\..\\scripts\\serve_anya_dashboard.py --host ${host} --port ${port}`,
+    url: baseURL,
+    reuseExistingServer: false,
+    timeout: 120_000,
+  },
   projects: [
     {
       name: 'chromium',

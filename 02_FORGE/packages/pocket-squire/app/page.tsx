@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { Activity, Copy, Mic, Shield, Terminal } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { checkKernelHealth, dispatchCommand } from '../src/lib/kernel-bridge';
+import { useEffect, useState } from "react";
+import { Copy, Terminal, Activity, Mic, Shield } from "lucide-react";
+import { checkKernelHealth, dispatchCommand } from "../src/lib/kernel-bridge";
 
 export default function PocketSquireDeck() {
   const [online, setOnline] = useState(false);
-  const [status, setStatus] = useState('IDLE');
-  const [lastLog, setLastLog] = useState('Waiting for Neural Link...');
+  const [status, setStatus] = useState("IDLE");
+  const [lastLog, setLastLog] = useState("Waiting for Neural Link...");
 
   // Health Check Poll
   useEffect(() => {
     const interval = setInterval(async () => {
       const isHealthy = await checkKernelHealth();
       setOnline(isHealthy);
-      setStatus(isHealthy ? 'CONNECTED' : 'OFFLINE');
+      setStatus(isHealthy ? "CONNECTED" : "OFFLINE");
     }, 5000);
     checkKernelHealth().then(setOnline);
     return () => clearInterval(interval);
@@ -23,7 +23,7 @@ export default function PocketSquireDeck() {
   const handleCommand = async (cmd: string) => {
     setLastLog(`> ${cmd}...`);
     const res = await dispatchCommand(cmd);
-    if (res.status === 'SUCCESS') {
+    if (res.status === "SUCCESS") {
       setLastLog(`[OK] ${res.msg}`);
     } else {
       setLastLog(`[ERR] ${res.msg}`);
@@ -40,7 +40,7 @@ export default function PocketSquireDeck() {
           </h1>
           <div className="flex items-center gap-2 mt-1">
             <div
-              className={`w-2 h-2 rounded-full ${online ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}
+              className={`w-2 h-2 rounded-full ${online ? "bg-green-500 animate-pulse" : "bg-red-500"}`}
             ></div>
             <span className="text-xs text-gray-500">{status}</span>
           </div>
@@ -52,11 +52,15 @@ export default function PocketSquireDeck() {
       <section className="grid grid-cols-2 gap-4 mb-6">
         <div className="bg-[#111] border border-[#333] p-4 rounded-md">
           <span className="text-xs text-[#888] uppercase">Host CPU</span>
-          <div className="text-2xl font-bold text-[var(--color-royal)] mt-1">12%</div>
+          <div className="text-2xl font-bold text-[var(--color-royal)] mt-1">
+            12%
+          </div>
         </div>
         <div className="bg-[#111] border border-[#333] p-4 rounded-md">
           <span className="text-xs text-[#888] uppercase">Host RAM</span>
-          <div className="text-2xl font-bold text-[var(--color-gold)] mt-1">7.2GB</div>
+          <div className="text-2xl font-bold text-[var(--color-gold)] mt-1">
+            7.2GB
+          </div>
         </div>
       </section>
 
@@ -74,14 +78,14 @@ export default function PocketSquireDeck() {
       {/* TACTICAL GRID */}
       <section className="grid grid-cols-2 gap-3 mb-20">
         <button
-          onClick={() => handleCommand('Deploy Nano-Swarm')}
+          onClick={() => handleCommand("Deploy Nano-Swarm")}
           className="p-4 bg-[#111] border border-[var(--color-royal)] rounded flex flex-col items-center gap-2 active:bg-[var(--color-royal)] active:text-white transition-colors"
         >
           <Activity />
           <span className="text-xs font-bold">DEPLOY SWARM</span>
         </button>
         <button
-          onClick={() => handleCommand('Audit Codebase')}
+          onClick={() => handleCommand("Audit Codebase")}
           className="p-4 bg-[#111] border border-[#333] rounded flex flex-col items-center gap-2 active:bg-[#333] transition-colors"
         >
           <Copy />

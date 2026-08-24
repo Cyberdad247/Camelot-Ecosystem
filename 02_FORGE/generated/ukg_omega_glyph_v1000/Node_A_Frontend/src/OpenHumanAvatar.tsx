@@ -1,4 +1,4 @@
-import { type PersonaFrame, usePersona } from './usePersona';
+import { usePersona, type PersonaFrame } from './usePersona';
 
 export interface OpenHumanAvatarProps {
   frame?: PersonaFrame;

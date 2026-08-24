@@ -18,7 +18,7 @@ class CamelotVoiceCaptureProcessor extends AudioWorkletProcessor {
     this.control = config.ring ? new Int32Array(config.ring.control) : null;
     this.ring = config.ring ? new Int16Array(config.ring.samples) : null;
     this.port.onmessage = (event) => {
-      if (event.data?.type === 'stop') this.active = false;
+      if (event.data?.type === "stop") this.active = false;
     };
   }
 
@@ -50,7 +50,7 @@ class CamelotVoiceCaptureProcessor extends AudioWorkletProcessor {
     }
     const rms = Math.sqrt(energy / this.frame.length);
     const payload = {
-      type: 'frame',
+      type: "frame",
       sequence: this.sequence++,
       timestampMs: currentTime * 1000,
       sampleCount: this.frame.length,
@@ -79,12 +79,11 @@ class CamelotVoiceCaptureProcessor extends AudioWorkletProcessor {
       if (this.accumulator < sampleRate) continue;
       this.accumulator -= sampleRate;
       const sample = Math.max(-1, Math.min(1, input[index]));
-      this.frame[this.frameOffset++] =
-        sample < 0 ? Math.round(sample * 32768) : Math.round(sample * 32767);
+      this.frame[this.frameOffset++] = sample < 0 ? Math.round(sample * 32768) : Math.round(sample * 32767);
       if (this.frameOffset === this.frame.length) this.emitFrame();
     }
     return true;
   }
 }
 
-registerProcessor('camelot-voice-capture', CamelotVoiceCaptureProcessor);
+registerProcessor("camelot-voice-capture", CamelotVoiceCaptureProcessor);

@@ -22,6 +22,6 @@ export default class TitanLink {
   }
 
   emit(event: string, data: any) {
-    this.listeners[event]?.forEach((cb) => cb(data));
+    this.listeners[event]?.forEach(cb => cb(data));
   }
 }

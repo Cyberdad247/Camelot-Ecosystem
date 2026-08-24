@@ -7,24 +7,39 @@
   "phases": {
     "architecture": {
       "type": "Service/App",
-      "stack": ["Node.js", "Python"]
+      "stack": [
+        "Node.js",
+        "Python"
+      ]
     },
     "quality": {
       "score": 100,
       "style": "Foundational",
-      "configs": [".prettierrc"]
+      "configs": [
+        ".prettierrc"
+      ]
     },
     "testing": {
-      "frameworks": ["Pytest", "Vitest", "Jest"],
+      "frameworks": [
+        "Pytest",
+        "Vitest",
+        "Jest"
+      ],
       "test_count": 27
     },
     "security": {
       "vulnerabilities": 3,
-      "critical_findings": ["Potential secret in koboldcpp.py"]
+      "critical_findings": [
+        "Potential secret in koboldcpp.py"
+      ]
     },
     "documentation": {
       "grade": "F",
-      "missing": ["CONTRIBUTING.md", "LICENSE", "ARCHITECTURE.md"]
+      "missing": [
+        "CONTRIBUTING.md",
+        "LICENSE",
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

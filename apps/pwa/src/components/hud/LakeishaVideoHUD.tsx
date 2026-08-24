@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 
 type ConnectionState = 'idle' | 'connecting' | 'connected' | 'blocked';
 
@@ -77,16 +77,13 @@ export function LakeishaVideoHUD() {
     };
   };
 
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      if (!dragging) return;
-      setPosition({
-        x: e.clientX - dragStartRef.current.x,
-        y: e.clientY - dragStartRef.current.y,
-      });
-    },
-    [dragging],
-  );
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!dragging) return;
+    setPosition({
+      x: e.clientX - dragStartRef.current.x,
+      y: e.clientY - dragStartRef.current.y,
+    });
+  }, [dragging]);
 
   const handleMouseUp = useCallback(() => {
     setDragging(false);
@@ -102,17 +99,14 @@ export function LakeishaVideoHUD() {
     };
   };
 
-  const handleTouchMove = useCallback(
-    (e: TouchEvent) => {
-      if (!dragging) return;
-      const touch = e.touches[0];
-      setPosition({
-        x: touch.clientX - dragStartRef.current.x,
-        y: touch.clientY - dragStartRef.current.y,
-      });
-    },
-    [dragging],
-  );
+  const handleTouchMove = useCallback((e: TouchEvent) => {
+    if (!dragging) return;
+    const touch = e.touches[0];
+    setPosition({
+      x: touch.clientX - dragStartRef.current.x,
+      y: touch.clientY - dragStartRef.current.y,
+    });
+  }, [dragging]);
 
   useEffect(() => {
     if (dragging) {
@@ -176,7 +170,7 @@ export function LakeishaVideoHUD() {
         <div>
           <p className="font-display text-sm text-gold-light">Lakeisha</p>
           <p className="mt-1 text-[10px] uppercase tracking-[0.14em] text-white/45">
-            {connected ? 'persistent avatar online' : (mediaError ?? 'muted visual anchor')}
+            {connected ? 'persistent avatar online' : mediaError ?? 'muted visual anchor'}
           </p>
         </div>
 

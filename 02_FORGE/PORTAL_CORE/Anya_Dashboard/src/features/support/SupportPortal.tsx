@@ -1,6 +1,6 @@
-import { KeyRound, ShieldCheck } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { KeyRound, ShieldCheck } from 'lucide-react';
 
 interface ValidationResult {
   valid: boolean;
@@ -53,10 +53,7 @@ export default function SupportPortal() {
         </div>
 
         <div className="mt-6 space-y-3">
-          <label
-            className="block text-xs font-bold uppercase tracking-widest text-slate-500"
-            htmlFor="support-token"
-          >
+          <label className="block text-xs font-bold uppercase tracking-widest text-slate-500" htmlFor="support-token">
             Temporary token
           </label>
           <input
@@ -76,9 +73,7 @@ export default function SupportPortal() {
         </div>
 
         {result && (
-          <div
-            className={`mt-5 rounded-lg border p-4 ${active ? 'border-emerald-500/30 bg-emerald-950/20' : 'border-red-500/30 bg-red-950/20'}`}
-          >
+          <div className={`mt-5 rounded-lg border p-4 ${active ? 'border-emerald-500/30 bg-emerald-950/20' : 'border-red-500/30 bg-red-950/20'}`}>
             <div className="flex items-center gap-2">
               <ShieldCheck className={`h-4 w-4 ${active ? 'text-emerald-300' : 'text-red-300'}`} />
               <p className={`text-sm font-black ${active ? 'text-emerald-200' : 'text-red-200'}`}>
@@ -91,9 +86,7 @@ export default function SupportPortal() {
                 <p>Permissions: {(result.permissions ?? []).join(' / ')}</p>
               </div>
             ) : (
-              <p className="mt-3 text-xs text-red-200/80">
-                {result.reason ?? 'Token could not be validated.'}
-              </p>
+              <p className="mt-3 text-xs text-red-200/80">{result.reason ?? 'Token could not be validated.'}</p>
             )}
           </div>
         )}

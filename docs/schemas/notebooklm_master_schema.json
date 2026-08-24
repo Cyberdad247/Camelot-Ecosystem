@@ -105,7 +105,9 @@
       "reason": "PR #1 self-hostable Appwrite 5-service compose (appwrite + mariadb + redis + minio + traefik)"
     }
   ],
-  "forbidden_paths": ["\\.env$"],
+  "forbidden_paths": [
+    "\\.env$"
+  ],
   "allowed_paths_regex": [
     "^docs/.*\\.(md|json)$",
     "^tests/.*",

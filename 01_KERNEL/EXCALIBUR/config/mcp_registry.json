@@ -1,93 +1,166 @@
 {
-  "mcp_tools": [
-    {
-      "id": "github-mcp",
-      "name": "GitHub Integration",
-      "transport": "stdio",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-      },
-      "description": "Search repositories, read code, managing issues and pull requests on GitHub.",
-      "keywords": ["github", "repo", "code", "pr", "issue", "commit", "search_repos"]
-    },
-    {
-      "id": "filesystem-mcp",
-      "name": "Local Filesystem",
-      "transport": "stdio",
-      "command": [
-        "npx",
-        "-y",
-        "@modelcontextprotocol/server-filesystem",
-        "c:/Users/vizio/CAMELOT_OS"
-      ],
-      "description": "Read and write files on the local filesystem. Use strictly for authorized paths.",
-      "keywords": ["file", "read", "write", "fs", "directory", "ls"]
-    },
-    {
-      "id": "brave-search-mcp",
-      "name": "Brave Search",
-      "transport": "stdio",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
-      "env": {
-        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
-      },
-      "description": "Perform web searches using Brave Search API.",
-      "keywords": ["search", "web", "internet", "google", "brave"]
-    },
-    {
-      "id": "postgres-mcp",
-      "name": "PostgreSQL Database",
-      "transport": "stdio",
-      "command": [
-        "npx",
-        "-y",
-        "@modelcontextprotocol/server-postgres",
-        "postgresql://user:password@localhost:5432/camelot_ukg"
-      ],
-      "description": "Query the UKG knowledge graph stored in PostgreSQL.",
-      "keywords": ["db", "database", "sql", "ukg", "query", "postgres"]
-    },
-    {
-      "id": "tomcp-hub",
-      "name": "toMCP Hub",
-      "transport": "stdio",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-fetch"],
-      "env": {
-        "DEBUG": "true"
-      },
-      "description": "Convert any website to an MCP server and clean markdown context.",
-      "keywords": ["web", "fetch", "markdown", "docs", "context"]
-    },
-    {
-      "id": "desktop-commander",
-      "name": "Desktop Commander",
-      "transport": "stdio",
-      "command": [
-        "node",
-        "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/DesktopCommanderMCP/dist/index.js"
-      ],
-      "env": {
-        "TS_NODE_TRANSPILE_ONLY": "true"
-      },
-      "description": "Execute system commands and manage windows locally.",
-      "keywords": ["system", "shell", "windows", "automation"]
-    },
-    {
-      "id": "chrome-mcp",
-      "name": "Chrome Control",
-      "transport": "stdio",
-      "command": ["npx", "-y", "@modelcontextprotocol/server-browser"],
-      "description": "Control Chrome browser, read pages, and interact with elements.",
-      "keywords": ["browser", "chrome", "automation", "test"]
-    },
-    {
-      "id": "uv-mcp",
-      "name": "UV Package Manager",
-      "transport": "stdio",
-      "command": ["uv", "run", "--with", "mcp-server-uv", "mcp-server-uv"],
-      "description": "Automated Python environment and dependency management via uv.",
-      "keywords": ["python", "uv", "dependencies", "pip", "venv", "install"]
-    }
-  ]
-}
+    "mcp_tools": [
+        {
+            "id": "github-mcp",
+            "name": "GitHub Integration",
+            "transport": "stdio",
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ],
+            "env": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+            },
+            "description": "Search repositories, read code, managing issues and pull requests on GitHub.",
+            "keywords": [
+                "github",
+                "repo",
+                "code",
+                "pr",
+                "issue",
+                "commit",
+                "search_repos"
+            ]
+        },
+        {
+            "id": "filesystem-mcp",
+            "name": "Local Filesystem",
+            "transport": "stdio",
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-filesystem",
+                "c:/Users/vizio/CAMELOT_OS"
+            ],
+            "description": "Read and write files on the local filesystem. Use strictly for authorized paths.",
+            "keywords": [
+                "file",
+                "read",
+                "write",
+                "fs",
+                "directory",
+                "ls"
+            ]
+        },
+        {
+            "id": "brave-search-mcp",
+            "name": "Brave Search",
+            "transport": "stdio",
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-brave-search"
+            ],
+            "env": {
+                "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+            },
+            "description": "Perform web searches using Brave Search API.",
+            "keywords": [
+                "search",
+                "web",
+                "internet",
+                "google",
+                "brave"
+            ]
+        },
+        {
+            "id": "postgres-mcp",
+            "name": "PostgreSQL Database",
+            "transport": "stdio",
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-postgres",
+                "postgresql://user:password@localhost:5432/camelot_ukg"
+            ],
+            "description": "Query the UKG knowledge graph stored in PostgreSQL.",
+            "keywords": [
+                "db",
+                "database",
+                "sql",
+                "ukg",
+                "query",
+                "postgres"
+            ]
+        },
+        {
+            "id": "tomcp-hub",
+            "name": "toMCP Hub",
+            "transport": "stdio",
+            "command": [
+                "npx",
+                "-y",
+                "@modelcontextprotocol/server-fetch"
+            ],
+            "env": {
+                "DEBUG": "true"
+            },
+            "description": "Convert any website to an MCP server and clean markdown context.",
+            "keywords": [
+                "web",
+                "fetch",
+                "markdown",
+                "docs",
+                "context"
+            ]
+        },
+        {
+            "id": "desktop-commander",
+            "name": "Desktop Commander",
+            "transport": "stdio",
+            "command": [
+                "node",
+                "c:/Users/vizio/CAMELOT_OS/docs/EXTERNAL/DesktopCommanderMCP/dist/index.js"
+            ],
+            "env": {
+                "TS_NODE_TRANSPILE_ONLY": "true"
+            },
+            "description": "Execute system commands and manage windows locally.",
+            "keywords": [
+                "system",
+                "shell",
+                "windows",
+                "automation"
+            ]
+        },
+                {
+                    "id": "chrome-mcp",
+                    "name": "Chrome Control",
+                    "transport": "stdio",
+                    "command": [
+                        "npx",
+                        "-y",
+                        "@modelcontextprotocol/server-browser"
+                    ],
+                    "description": "Control Chrome browser, read pages, and interact with elements.",
+                    "keywords": [
+                        "browser",
+                        "chrome",
+                        "automation",
+                        "test"
+                    ]
+                },
+                {
+                    "id": "uv-mcp",
+                    "name": "UV Package Manager",
+                    "transport": "stdio",
+                    "command": [
+                        "uv",
+                        "run",
+                        "--with",
+                        "mcp-server-uv",
+                        "mcp-server-uv"
+                    ],
+                    "description": "Automated Python environment and dependency management via uv.",
+                    "keywords": [
+                        "python",
+                        "uv",
+                        "dependencies",
+                        "pip",
+                        "venv",
+                        "install"
+                    ]
+                }
+            ]
+        }

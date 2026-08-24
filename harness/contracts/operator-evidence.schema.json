@@ -3,17 +3,7 @@
   "$id": "harness/contracts/operator-evidence.schema.json",
   "title": "Operator Evidence Envelope (operator-evidence/1)",
   "type": "object",
-  "required": [
-    "schemaVersion",
-    "eventId",
-    "taskId",
-    "correlationId",
-    "timestamp",
-    "actor",
-    "kind",
-    "payloadHash",
-    "integrity"
-  ],
+  "required": ["schemaVersion", "eventId", "taskId", "correlationId", "timestamp", "actor", "kind", "payloadHash", "integrity"],
   "properties": {
     "schemaVersion": { "const": "operator-evidence/1" },
     "eventId": { "type": "string", "minLength": 1 },
@@ -25,20 +15,7 @@
       "required": ["id", "role"],
       "properties": {
         "id": { "type": "string" },
-        "role": {
-          "enum": [
-            "operator",
-            "anya",
-            "merlin",
-            "hiveide",
-            "nano_knight",
-            "sentinel",
-            "gideon",
-            "boris",
-            "herald",
-            "system"
-          ]
-        }
+        "role": { "enum": ["operator", "anya", "merlin", "hiveide", "nano_knight", "sentinel", "gideon", "boris", "herald", "system"] }
       }
     },
     "kind": { "type": "string", "minLength": 1 },

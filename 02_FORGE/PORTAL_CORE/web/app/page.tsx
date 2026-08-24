@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { GlassOverlay } from '@/components/ui/GlassOverlay';
 import { KnightSprites } from '@/components/ui/KnightSprites';

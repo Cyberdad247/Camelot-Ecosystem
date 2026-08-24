@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
-import { EventEmitter } from 'events';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { EventEmitter } from 'events';
 import dotenv from 'dotenv';
 import { SovereignDB } from '../db/SovereignDB';
 
@@ -19,7 +19,7 @@ export interface SwarmTask {
 
 class MicrocubicMatrix extends EventEmitter {
   private queue: SwarmTask[] = [];
-  private activeCubes = 0;
+  private activeCubes: number = 0;
   private readonly MAX_CONCURRENCY = 10; // Strict limit to prevent Google API 429 errors
   private readonly RATE_LIMIT_DELAY_MS = 1000;
 
@@ -78,12 +78,13 @@ class MicrocubicMatrix extends EventEmitter {
           threadId || 'default-thread',
           'SMS',
           result,
-          'STAGED_FOR_DELIVERY',
+          'STAGED_FOR_DELIVERY'
         );
       }
 
       // Emit telemetry back to the Bifrost Bridge
       this.emit('cube_collapsed', { taskId: task.id, success: true, result });
+
     } catch (error) {
       console.error(`[Microcube ${task.id}] FATAL EXCEPTION:`, error);
       this.emit('cube_collapsed', { taskId: task.id, success: false, error });

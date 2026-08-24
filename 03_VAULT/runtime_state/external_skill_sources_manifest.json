@@ -69,7 +69,9 @@
       "status": "active_local_adapter",
       "trust": "operator_supplied",
       "integration_mode": "first_class_local_skill",
-      "notable_skills": ["shape"],
+      "notable_skills": [
+        "shape"
+      ],
       "notes": "Operator-provided Shape Auto-Grill to PRD skill adapted into Camelot-local .agents skills."
     },
     {
@@ -80,7 +82,9 @@
       "status": "active_local_adapter",
       "trust": "operator_supplied",
       "integration_mode": "first_class_local_skill",
-      "notable_skills": ["merlin-knight-forge"],
+      "notable_skills": [
+        "merlin-knight-forge"
+      ],
       "notes": "Merlin-native routing wrapper that converts a task into the proper Knight character sheet, skill stack, mental framework, safety gate, output contract, and verification loop."
     },
     {
@@ -90,7 +94,9 @@
       "status": "active_local_adapter",
       "trust": "operator_supplied",
       "integration_mode": "first_class_local_skill",
-      "notable_skills": ["goal-video-workflow"],
+      "notable_skills": [
+        "goal-video-workflow"
+      ],
       "notes": "Camelot-native adapter for goal-style orchestration: goal contract, visible ledger, builder Knight, reviewer Knight, scoped fix loop, verification, and final evidence."
     }
   ],

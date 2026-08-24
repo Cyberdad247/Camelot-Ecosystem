@@ -3,16 +3,12 @@
 'use client';
 
 import { useState } from 'react';
-import { type DecisionResponse, submitDecision } from '../../lib/operator_console/operator-api';
+import { submitDecision, type DecisionResponse } from '../../lib/operator_console/operator-api';
 import type { EffectManifest } from '../../lib/operator_console/schemas';
-import { ApprovalConfirmationDialog } from './ApprovalConfirmationDialog';
 import { EffectManifestDialog } from './EffectManifestDialog';
+import { ApprovalConfirmationDialog } from './ApprovalConfirmationDialog';
 
-export function ApprovalPanel({
-  approval,
-  taskId,
-  forceDisabled = false,
-}: {
+export function ApprovalPanel({ approval, taskId, forceDisabled = false }: {
   approval: Record<string, unknown>;
   taskId: string;
   forceDisabled?: boolean;
@@ -57,13 +53,9 @@ export function ApprovalPanel({
     return (
       <div className="border border-amber-300/40 p-3" role="alert">
         <p className="font-mono text-[11px] uppercase tracking-widest text-amber-200">
-          {state === 'APPROVAL_SUSPENDED'
-            ? 'Approval suspended — Sentinel unavailable'
-            : 'Audit suspended — Gideon unavailable'}
+          {state === 'APPROVAL_SUSPENDED' ? 'Approval suspended — Sentinel unavailable' : 'Audit suspended — Gideon unavailable'}
         </p>
-        <p className="mt-1 text-[11px] text-white/50">
-          Existing manifests remain readable. Approve/deny is disabled.
-        </p>
+        <p className="mt-1 text-[11px] text-white/50">Existing manifests remain readable. Approve/deny is disabled.</p>
       </div>
     );
   }
@@ -71,12 +63,8 @@ export function ApprovalPanel({
   if (policyBlocked) {
     return (
       <div className="border border-red-400/50 p-3" role="alert">
-        <p className="font-mono text-[11px] uppercase tracking-widest text-red-300">
-          Policy blocked
-        </p>
-        <p className="mt-1 text-[11px] text-white/50">
-          This effect is blocked by policy. No approval path exists.
-        </p>
+        <p className="font-mono text-[11px] uppercase tracking-widest text-red-300">Policy blocked</p>
+        <p className="mt-1 text-[11px] text-white/50">This effect is blocked by policy. No approval path exists.</p>
       </div>
     );
   }
@@ -85,9 +73,7 @@ export function ApprovalPanel({
     return (
       <div className="border border-emerald-400/50 p-3">
         <p className="font-mono text-[11px] uppercase tracking-widest text-emerald-300">Approved</p>
-        <p className="mt-1 text-[11px] text-white/60">
-          Lease {outcome.lease?.leaseId} issued. Effect eligible to run.
-        </p>
+        <p className="mt-1 text-[11px] text-white/60">Lease {outcome.lease?.leaseId} issued. Effect eligible to run.</p>
       </div>
     );
   }

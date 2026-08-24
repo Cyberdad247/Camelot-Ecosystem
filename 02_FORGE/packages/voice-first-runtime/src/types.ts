@@ -1,14 +1,14 @@
 export type VoiceRuntimeState =
-  | 'idle'
-  | 'requesting'
-  | 'listening'
-  | 'detecting'
-  | 'transcribing'
-  | 'speaking'
-  | 'interrupted'
-  | 'unavailable';
+  | "idle"
+  | "requesting"
+  | "listening"
+  | "detecting"
+  | "transcribing"
+  | "speaking"
+  | "interrupted"
+  | "unavailable";
 
-export type VoiceTransportMode = 'shared-ring' | 'message-port';
+export type VoiceTransportMode = "shared-ring" | "message-port";
 
 export type VoiceFrame = {
   sessionId: string;

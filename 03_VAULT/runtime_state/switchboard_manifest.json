@@ -6,7 +6,12 @@
       "engine": "claude_code",
       "weight": 0.85,
       "cost_tier": "medium",
-      "capability": ["orchestration", "architecture", "critique", "forge"],
+      "capability": [
+        "orchestration",
+        "architecture",
+        "critique",
+        "forge"
+      ],
       "probe_url": "",
       "probe_port": 8080,
       "status": "live",
@@ -20,7 +25,12 @@
       "engine": "gemini_cli",
       "weight": 0.9,
       "cost_tier": "low",
-      "capability": ["context", "research", "burst", "1m_token"],
+      "capability": [
+        "context",
+        "research",
+        "burst",
+        "1m_token"
+      ],
       "probe_url": "",
       "probe_port": 0,
       "status": "assumed_live",
@@ -34,7 +44,12 @@
       "engine": "claude_code",
       "weight": 0.88,
       "cost_tier": "medium",
-      "capability": ["cognitive", "reasoning", "critical", "decision"],
+      "capability": [
+        "cognitive",
+        "reasoning",
+        "critical",
+        "decision"
+      ],
       "probe_url": "",
       "probe_port": 8080,
       "status": "live",
@@ -48,7 +63,13 @@
       "engine": "gemini_cli",
       "weight": 0.78,
       "cost_tier": "low",
-      "capability": ["bridge", "handoff", "terminal", "ui", "switchboard"],
+      "capability": [
+        "bridge",
+        "handoff",
+        "terminal",
+        "ui",
+        "switchboard"
+      ],
       "probe_url": "",
       "probe_port": 0,
       "status": "assumed_live",
@@ -62,7 +83,11 @@
       "engine": "local_qwen",
       "weight": 1.0,
       "cost_tier": "free",
-      "capability": ["privacy", "air_gapped", "zero_trust"],
+      "capability": [
+        "privacy",
+        "air_gapped",
+        "zero_trust"
+      ],
       "probe_url": "",
       "probe_port": 11434,
       "status": "live",
@@ -76,7 +101,12 @@
       "engine": "open_coder",
       "weight": 0.7,
       "cost_tier": "free",
-      "capability": ["code_gen", "scaffold", "technical", "kinetic"],
+      "capability": [
+        "code_gen",
+        "scaffold",
+        "technical",
+        "kinetic"
+      ],
       "probe_url": "",
       "probe_port": 11434,
       "status": "live",
@@ -90,7 +120,11 @@
       "engine": "openai_codex",
       "weight": 0.75,
       "cost_tier": "high",
-      "capability": ["velocity", "rapid_proto", "openai"],
+      "capability": [
+        "velocity",
+        "rapid_proto",
+        "openai"
+      ],
       "probe_url": "",
       "probe_port": 0,
       "status": "assumed_live",
@@ -104,7 +138,11 @@
       "engine": "open_source",
       "weight": 0.8,
       "cost_tier": "free",
-      "capability": ["sovereignty", "oss", "anti_lock"],
+      "capability": [
+        "sovereignty",
+        "oss",
+        "anti_lock"
+      ],
       "probe_url": "",
       "probe_port": 0,
       "status": "assumed_live",
@@ -118,7 +156,13 @@
       "engine": "integration_brain",
       "weight": 0.92,
       "cost_tier": "low",
-      "capability": ["memory", "archive", "recall", "synthesize", "route"],
+      "capability": [
+        "memory",
+        "archive",
+        "recall",
+        "synthesize",
+        "route"
+      ],
       "probe_url": "",
       "probe_port": 0,
       "status": "assumed_live",
@@ -132,7 +176,12 @@
       "engine": "claude_code",
       "weight": 0.85,
       "cost_tier": "medium",
-      "capability": ["security", "audit", "armor", "pdg"],
+      "capability": [
+        "security",
+        "audit",
+        "armor",
+        "pdg"
+      ],
       "probe_url": "",
       "probe_port": 3001,
       "status": "live",
@@ -146,7 +195,13 @@
       "engine": "local_audit",
       "weight": 0.85,
       "cost_tier": "free",
-      "capability": ["security", "audit", "scorpion", "gideon", "forensic"],
+      "capability": [
+        "security",
+        "audit",
+        "scorpion",
+        "gideon",
+        "forensic"
+      ],
       "probe_url": "",
       "probe_port": 0,
       "status": "live",

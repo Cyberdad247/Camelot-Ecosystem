@@ -3,7 +3,9 @@
   "schema_version": "camelot-os.system/adr/activation/v1",
   "namespace": "GCMN_STUB_ACTIVATION",
   "feature_gate": "CAMELOT_GCMN_STUBS_ENABLED",
-  "feature_gate_accepted_values": ["1"],
+  "feature_gate_accepted_values": [
+    "1"
+  ],
   "feature_gate_default": null,
   "feature_gate_shipped_value": null,
   "ratified": true,
@@ -107,7 +109,10 @@
     {
       "name": "01_KERNEL/audit_redact.py",
       "kind": "script",
-      "used_by": ["rollback_runbook.step_2_audit_recall", "rollback_runbook.step_3_dead_letter"],
+      "used_by": [
+        "rollback_runbook.step_2_audit_recall",
+        "rollback_runbook.step_3_dead_letter"
+      ],
       "shipped": false,
       "manual_fallback": "grep-then-annotate loop against PROVENANCE_LEDGER.md",
       "operator_decision_required": "ship the script before activation, OR accept manual-fallback workflow"
@@ -115,7 +120,9 @@
     {
       "name": "bin/sweep_inert_stubs.sh",
       "kind": "cron_script",
-      "used_by": ["expiry_policy.auto_deactivation_tiers"],
+      "used_by": [
+        "expiry_policy.auto_deactivation_tiers"
+      ],
       "shipped": false,
       "manual_fallback": "operator-runs sweep manually per cadence",
       "operator_decision_required": "ship the cron before activation, OR accept manual cadence"
@@ -123,7 +130,9 @@
     {
       "name": "runic_router --purge_stubs",
       "kind": "cli_flag",
-      "used_by": ["rollback_runbook.force_kill_escalation"],
+      "used_by": [
+        "rollback_runbook.force_kill_escalation"
+      ],
       "shipped": false,
       "manual_fallback": "edit control_plane/runic_router.py::GCMN_STUB_RUNES directly and ship a guards-on PR",
       "operator_decision_required": "land the flag before activation, OR accept emergency-edit fallback"
@@ -212,8 +221,16 @@
     "blocker_count": 5,
     "tracker_count": 1,
     "ignorable_count": 0,
-    "blocker_risk_ids": ["R1", "R2", "R4", "R5", "R6"],
-    "tracker_risk_ids": ["R3"],
+    "blocker_risk_ids": [
+      "R1",
+      "R2",
+      "R4",
+      "R5",
+      "R6"
+    ],
+    "tracker_risk_ids": [
+      "R3"
+    ],
     "ignorable_risk_ids": []
   },
   "gate_escalations": [

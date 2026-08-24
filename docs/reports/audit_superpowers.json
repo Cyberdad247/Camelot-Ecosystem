@@ -24,7 +24,10 @@
     },
     "documentation": {
       "grade": "C",
-      "missing": ["CONTRIBUTING.md", "ARCHITECTURE.md"]
+      "missing": [
+        "CONTRIBUTING.md",
+        "ARCHITECTURE.md"
+      ]
     }
   },
   "score": {

@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface KnightStatus {
   id: string;
@@ -169,17 +169,17 @@ export function KnightSwarmCommand() {
         prev.map((k) => {
           if (k.status === 'PROCESSING') {
             if (k.id === 'KNIGHT_MAIL_003') {
-              const num = Number.parseInt(k.currentMetricValue, 10);
+              const num = parseInt(k.currentMetricValue, 10);
               return { ...k, currentMetricValue: String(isNaN(num) ? 142 : num + 1) };
             }
             if (k.id === 'KNIGHT_STREAM_007') {
-              const val = Number.parseFloat(k.currentMetricValue.replace('%', ''));
+              const val = parseFloat(k.currentMetricValue.replace('%', ''));
               const nextVal = Math.max(0.01, val + (Math.random() - 0.5) * 0.005);
               return { ...k, currentMetricValue: `${nextVal.toFixed(3)}%` };
             }
           }
           return k;
-        }),
+        })
       );
     }, 3000);
     return () => clearInterval(simulationInterval);
@@ -273,10 +273,10 @@ export function KnightSwarmCommand() {
                           knight.status === 'PROCESSING'
                             ? 'border-emerald-500 text-emerald-400 bg-emerald-950/20 animate-pulse'
                             : knight.status === 'PENDING_HITL'
-                              ? 'border-[#9D4EDD] text-[#9D4EDD] bg-purple-950/30 font-bold'
-                              : knight.status === 'STAKED'
-                                ? 'border-amber-500 text-amber-400 bg-amber-950/20'
-                                : 'border-gray-700 text-gray-400'
+                            ? 'border-[#9D4EDD] text-[#9D4EDD] bg-purple-950/30 font-bold'
+                            : knight.status === 'STAKED'
+                            ? 'border-amber-500 text-amber-400 bg-amber-950/20'
+                            : 'border-gray-700 text-gray-400'
                         }`}
                       >
                         {knight.status}

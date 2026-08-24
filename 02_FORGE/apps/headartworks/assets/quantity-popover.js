@@ -7,9 +7,7 @@ if (!customElements.get('quantity-popover')) {
         this.mql = window.matchMedia('(min-width: 990px)');
         this.mqlTablet = window.matchMedia('(min-width: 750px)');
         this.infoButtonDesktop = this.querySelector('.quantity-popover__info-button--icon-only');
-        this.infoButtonMobile = this.querySelector(
-          '.quantity-popover__info-button--icon-with-label',
-        );
+        this.infoButtonMobile = this.querySelector('.quantity-popover__info-button--icon-with-label');
         this.popoverInfo = this.querySelector('.quantity-popover__info');
         this.closeButton = this.querySelector('.button-close');
         this.variantInfo = this.querySelector('.quantity-popover-container');
@@ -40,10 +38,7 @@ if (!customElements.get('quantity-popover')) {
       togglePopover(event) {
         event.preventDefault();
 
-        const button =
-          this.infoButtonDesktop && this.mql.matches
-            ? this.infoButtonDesktop
-            : this.infoButtonMobile;
+        const button = this.infoButtonDesktop && this.mql.matches ? this.infoButtonDesktop : this.infoButtonMobile;
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
 
         button.setAttribute('aria-expanded', !isExpanded);
@@ -63,10 +58,7 @@ if (!customElements.get('quantity-popover')) {
         event.preventDefault();
         const isChild = this.variantInfo.contains(event.relatedTarget);
 
-        const button =
-          this.infoButtonDesktop && this.mql.matches
-            ? this.infoButtonDesktop
-            : this.infoButtonMobile;
+        const button = this.infoButtonDesktop && this.mql.matches ? this.infoButtonDesktop : this.infoButtonMobile;
 
         if (!event.relatedTarget || !isChild) {
           button.setAttribute('aria-expanded', 'false');
@@ -74,6 +66,6 @@ if (!customElements.get('quantity-popover')) {
           this.popoverInfo.setAttribute('hidden', '');
         }
       }
-    },
+    }
   );
 }

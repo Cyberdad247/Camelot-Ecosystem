@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { Prisma, PrismaClient } from './generated/client';
+import { PrismaClient, Prisma } from './generated/client';
 import { ledgerValidator } from './ledgerValidator';
 
 // Reuse a single client across hot-reloads in dev to avoid connection exhaustion.
