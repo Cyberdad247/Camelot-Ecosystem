@@ -9,19 +9,16 @@ import time
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from multiprocessing import shared_memory
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, status, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
-from pydantic import BaseModel
-
-from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 
 try:
     from redis.asyncio.sentinel import Sentinel
-    import redis.asyncio as aioredis
     HAS_REDIS = True
 except ImportError:
     HAS_REDIS = False
@@ -230,11 +227,12 @@ class DistributedQRPillSecurityEngine:
 
 
 try:
-    from src.security import BifrostBridgeAuth
-    from src.extractors import AcousticSignalExtractor, ONNXEmbeddingModel
-    from src.vector_cache import AsyncSafeTTLLRUFAISSVectorCache
-    from src.router import TraitBlender
     from src.context import ContextRewindEngine
+    from src.extractors import AcousticSignalExtractor, ONNXEmbeddingModel
+    from src.security import BifrostBridgeAuth
+    from src.vector_cache import AsyncSafeTTLLRUFAISSVectorCache
+
+    from src.router import TraitBlender
 except ImportError:
     class BifrostBridgeAuth:
         def __init__(self, bridge_secret: str, allowed_uuids: List[str]):
@@ -428,11 +426,17 @@ async def lifespan(app: FastAPI):
             logger.warning(f"Redis Sentinel unavailable ({e}). Fallback to local memory.")
             redis_client = None
 
+    # Validate required secrets
+    bifrost_secret = os.getenv("BIFROST_BRIDGE_SECRET", "")
+    if not bifrost_secret:
+        logger.error("CRITICAL: BIFROST_BRIDGE_SECRET environment variable is missing or empty.")
+        raise RuntimeError("BIFROST_BRIDGE_SECRET is required to start the application.")
+
     # Initialize Pipeline
     knights = ["C1_Strategic", "C2_Technical", "C3_Creative", "C4_Analytical", "C5_Operational"]
     pipeline = MultivoiceRouterPipeline(
         knights=knights,
-        bridge_secret=os.getenv("BIFROST_BRIDGE_SECRET", "BIFROST_MASTER_SECRET_KEY_9981"),
+        bridge_secret=bifrost_secret,
         allowed_uuids=os.getenv("ALLOWED_UUIDS", "e83b27b4-1234-5678-9abc-def012345678").split(","),
         pill_secret=os.getenv("QR_PILL_SECRET", "QR_PILL_SECRET_KEY_4412"),
         redis_client=redis_client
