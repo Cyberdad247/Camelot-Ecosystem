@@ -19,6 +19,10 @@ Checks (order matters — documented in docs/architecture/harness-gate.md):
      (determinism: they must be byte-identical to the committed set).
   4. schema-meta      — meta-validate all 26 published schemas against the
      Draft 2020-12 meta-schema + index.json catalog conformance.
+  5. fixture-gate     — pytest: validate all 29 harness fixture READMEs
+     (structure), enforce the confirmed/planned/aspirational evidence
+     manifest, and run the confirmed fixtures' real checks (receipt chain
+     + operator-request gate) against live code.
 
 Every check runs even if an earlier one fails, so the report is complete;
 the exit code is 0 only if ALL checks pass.
@@ -30,6 +34,8 @@ Usage:  python harness/run_all.py
             # run only the schema meta-validation check (fast iteration)
         python harness/run_all.py --check replay --check schema-meta
             # run the two replay checks plus schema-meta
+        python harness/run_all.py --check fixture-gate
+            # run only the fixture coverage gate (fast iteration)
 
 Flags:
     --anchor-every N   forwarded to the receipt-chain checks (default 1000)
@@ -83,7 +89,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
         "--check", action="append", default=[], metavar="NAME",
         help="run only checks whose id contains NAME (repeatable / comma-separated; "
              "case-insensitive substring); valid ids: replay-committed, build, "
-             "replay-emitted, schema-meta",
+             "replay-emitted, schema-meta, fixture-gate",
     )
     parser.add_argument(
         "--list-checks", action="store_true",
@@ -120,10 +126,11 @@ def select_checks(
 
 
 def build_checks(flags: list[str]) -> list[tuple[str, list[str], str]]:
-    """The four gate checks. Receipt-chain checks receive the forwarded
+    """The five gate checks. Receipt-chain checks receive the forwarded
     anchoring flags; replay checks still use the persisted config from
-    chain.verified (the flags are only meaningful at build/emit time), and
-    schema-meta takes no flags."""
+    chain.verified (the flags are only meaningful at build/emit time),
+    schema-meta takes no flags, and the fixture gate is pytest-driven."""
+    fixture_gate = HERE.parent / "tests" / "test_harness_fixtures.py"
     return [
         (
             "replay-committed",
@@ -144,6 +151,11 @@ def build_checks(flags: list[str]) -> list[tuple[str, list[str], str]]:
             "schema-meta",
             [PYTHON, "contracts/validate_contract_schemas.py"],
             "26 schemas meta-validate as Draft 2020-12; catalog conformance",
+        ),
+        (
+            "fixture-gate",
+            [PYTHON, "-m", "pytest", "-q", str(fixture_gate)],
+            "29 harness fixture READMEs: structure + evidence manifest + confirmed wiring",
         ),
     ]
 
