@@ -926,105 +926,20 @@ class CrawlerRunConfig:
         # TODO: Planning to set properties dynamically based on the __init__ signature
         if user_agent_generator_config is None:
             user_agent_generator_config = {}
-        self.url = url
+        # Dynamically set properties based on the __init__ signature
+        kwargs = {k: v for k, v in locals().items() if k not in ('self', '__class__')}
+        for k, v in kwargs.items():
+            setattr(self, k, v)
 
-        # Content Processing Parameters
-        self.word_count_threshold = word_count_threshold
-        self.extraction_strategy = extraction_strategy
-        self.chunking_strategy = chunking_strategy
-        self.markdown_generator = markdown_generator
-        self.only_text = only_text
-        self.css_selector = css_selector
+        # Override defaults handling for mutable lists and objects logic present in the signature
         self.target_elements = target_elements or []
         self.excluded_tags = excluded_tags or []
         self.excluded_selector = excluded_selector or ""
-        self.keep_data_attributes = keep_data_attributes
         self.keep_attrs = keep_attrs or []
-        self.remove_forms = remove_forms
-        self.prettiify = prettiify
-        self.parser_type = parser_type
         self.scraping_strategy = scraping_strategy or WebScrapingStrategy()
-        self.proxy_config = proxy_config
-        self.proxy_rotation_strategy = proxy_rotation_strategy
-
-        # Browser Location and Identity Parameters
-        self.locale = locale
-        self.timezone_id = timezone_id
-        self.geolocation = geolocation
-
-        # SSL Parameters
-        self.fetch_ssl_certificate = fetch_ssl_certificate
-
-        # Caching Parameters
-        self.cache_mode = cache_mode
-        self.session_id = session_id
-        self.bypass_cache = bypass_cache
-        self.disable_cache = disable_cache
-        self.no_cache_read = no_cache_read
-        self.no_cache_write = no_cache_write
-        self.shared_data = shared_data
-
-        # Page Navigation and Timing Parameters
-        self.wait_until = wait_until
-        self.page_timeout = page_timeout
-        self.wait_for = wait_for
-        self.wait_for_images = wait_for_images
-        self.delay_before_return_html = delay_before_return_html
-        self.mean_delay = mean_delay
-        self.max_range = max_range
-        self.semaphore_count = semaphore_count
-
-        # Page Interaction Parameters
-        self.js_code = js_code
-        self.js_only = js_only
-        self.ignore_body_visibility = ignore_body_visibility
-        self.scan_full_page = scan_full_page
-        self.scroll_delay = scroll_delay
-        self.process_iframes = process_iframes
-        self.remove_overlay_elements = remove_overlay_elements
-        self.simulate_user = simulate_user
-        self.override_navigator = override_navigator
-        self.magic = magic
-        self.adjust_viewport_to_content = adjust_viewport_to_content
-
-        # Media Handling Parameters
-        self.screenshot = screenshot
-        self.screenshot_wait_for = screenshot_wait_for
-        self.screenshot_height_threshold = screenshot_height_threshold
-        self.pdf = pdf
-        self.capture_mhtml = capture_mhtml
-        self.image_description_min_word_threshold = image_description_min_word_threshold
-        self.image_score_threshold = image_score_threshold
-        self.exclude_external_images = exclude_external_images
-        self.exclude_all_images = exclude_all_images
-        self.table_score_threshold = table_score_threshold
-
-        # Link and Domain Handling Parameters
         self.exclude_social_media_domains = exclude_social_media_domains or SOCIAL_MEDIA_DOMAINS
-        self.exclude_external_links = exclude_external_links
-        self.exclude_social_media_links = exclude_social_media_links
         self.exclude_domains = exclude_domains or []
-        self.exclude_internal_links = exclude_internal_links
-
-        # Debugging and Logging Parameters
-        self.verbose = verbose
-        self.log_console = log_console
-
-        # Network and Console Capturing Parameters
-        self.capture_network_requests = capture_network_requests
-        self.capture_console_messages = capture_console_messages
-
-        # Connection Parameters
-        self.stream = stream
-        self.method = method
-
-        # Robots.txt Handling Parameters
-        self.check_robots_txt = check_robots_txt
-
-        # User Agent Parameters
-        self.user_agent = user_agent
-        self.user_agent_mode = user_agent_mode
-        self.user_agent_generator_config = user_agent_generator_config
+        self.experimental = experimental or {}
 
         # Validate type of extraction strategy and chunking strategy if they are provided
         if self.extraction_strategy is not None and not isinstance(self.extraction_strategy, ExtractionStrategy):
@@ -1035,12 +950,6 @@ class CrawlerRunConfig:
         # Set default chunking strategy if None
         if self.chunking_strategy is None:
             self.chunking_strategy = RegexChunking()
-
-        # Deep Crawl Parameters
-        self.deep_crawl_strategy = deep_crawl_strategy
-
-        # Experimental Parameters
-        self.experimental = experimental or {}
 
     def __getattr__(self, name):
         """Handle attribute access."""
