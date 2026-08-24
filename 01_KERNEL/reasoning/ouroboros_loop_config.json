@@ -3,7 +3,7 @@
   "default_threshold_mb": 7168,
   "operator_override_threshold_mb": 6144,
   "operator_override_env_var": "CAMELOT_OUROBOROS_THRESHOLD_MB",
-  "max_threshold_cap_factor": 0.90,
+  "max_threshold_cap_factor": 0.9,
   "max_threshold_margin_mb": 512,
   "cooldown_seconds": 300,
   "poll_interval_seconds": 5,

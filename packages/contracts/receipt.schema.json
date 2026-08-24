@@ -183,14 +183,7 @@
     "trust_band": {
       "type": "string",
       "description": "Node trust band per §7.3 of Camelot-OS SADD+LLDD v1.2.",
-      "enum": [
-        "attested",
-        "attested-witness",
-        "enrolled",
-        "probationary",
-        "quarantined",
-        "revoked"
-      ]
+      "enum": ["attested", "attested-witness", "enrolled", "probationary", "quarantined", "revoked"]
     }
   }
 }

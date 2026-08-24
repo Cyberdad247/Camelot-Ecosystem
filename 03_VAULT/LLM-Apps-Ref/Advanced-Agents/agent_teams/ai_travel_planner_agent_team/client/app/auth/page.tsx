@@ -1,26 +1,20 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { authClient } from "@/lib/auth-client";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "sonner";
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { authClient } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function AuthPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: '',
+    email: '',
+    password: '',
   });
   const router = useRouter();
 
@@ -39,15 +33,15 @@ export default function AuthPage() {
       });
 
       if (result.error) {
-        toast.error(result.error.message || "Failed to sign in");
+        toast.error(result.error.message || 'Failed to sign in');
         return;
       }
 
-      toast.success("Welcome back! Redirecting to your dashboard...");
-      router.push("/plan");
+      toast.success('Welcome back! Redirecting to your dashboard...');
+      router.push('/plan');
     } catch (error) {
-      toast.error("An unexpected error occurred");
-      console.error("Sign in failed:", error);
+      toast.error('An unexpected error occurred');
+      console.error('Sign in failed:', error);
     } finally {
       setIsLoading(false);
     }
@@ -65,15 +59,15 @@ export default function AuthPage() {
       });
 
       if (result.error) {
-        toast.error(result.error.message || "Failed to create account");
+        toast.error(result.error.message || 'Failed to create account');
         return;
       }
 
-      toast.success("Account created successfully! Redirecting...");
-      router.push("/plan");
+      toast.success('Account created successfully! Redirecting...');
+      router.push('/plan');
     } catch (error) {
-      toast.error("An unexpected error occurred");
-      console.error("Sign up failed:", error);
+      toast.error('An unexpected error occurred');
+      console.error('Sign up failed:', error);
     } finally {
       setIsLoading(false);
     }
@@ -83,9 +77,7 @@ export default function AuthPage() {
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">
-            Welcome
-          </CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">Welcome</CardTitle>
           <CardDescription className="text-center">
             Sign in to your account or create a new one
           </CardDescription>
@@ -111,7 +103,7 @@ export default function AuthPage() {
                     type="email"
                     placeholder="Enter your email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
                     required
                   />
                 </div>
@@ -127,14 +119,12 @@ export default function AuthPage() {
                     type="password"
                     placeholder="Enter your password"
                     value={formData.password}
-                    onChange={(e) =>
-                      handleInputChange("password", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange('password', e.target.value)}
                     required
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Signing in..." : "Sign In"}
+                  {isLoading ? 'Signing in...' : 'Sign In'}
                 </Button>
               </form>
             </TabsContent>
@@ -153,7 +143,7 @@ export default function AuthPage() {
                     type="text"
                     placeholder="Enter your name"
                     value={formData.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
                     required
                   />
                 </div>
@@ -169,7 +159,7 @@ export default function AuthPage() {
                     type="email"
                     placeholder="Enter your email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
                     required
                   />
                 </div>
@@ -185,14 +175,12 @@ export default function AuthPage() {
                     type="password"
                     placeholder="Create a password"
                     value={formData.password}
-                    onChange={(e) =>
-                      handleInputChange("password", e.target.value)
-                    }
+                    onChange={(e) => handleInputChange('password', e.target.value)}
                     required
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Creating account..." : "Sign Up"}
+                  {isLoading ? 'Creating account...' : 'Sign Up'}
                 </Button>
               </form>
             </TabsContent>

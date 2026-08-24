@@ -2,7 +2,7 @@
 
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface MemoryEntry {
   line: number;
@@ -22,7 +22,7 @@ export function MemoryVault() {
       setLoading(true);
       const res = await fetch('/api/memory');
       if (!res.ok) throw new Error('Failed to fetch memory aspects');
-      const data = await res.json() as { entries: MemoryEntry[] };
+      const data = (await res.json()) as { entries: MemoryEntry[] };
       setEntries(data.entries);
       setError(null);
     } catch (err) {

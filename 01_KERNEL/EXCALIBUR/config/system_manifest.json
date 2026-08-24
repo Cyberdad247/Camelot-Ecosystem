@@ -15,11 +15,7 @@
       "VIDENEPTUS": {
         "ROLE": "Reasoning Router",
         "ALGO": "Learning-at-Criticality (LaC)",
-        "ROUTING": [
-          "ToT",
-          "ReAct",
-          "PAL"
-        ]
+        "ROUTING": ["ToT", "ReAct", "PAL"]
       },
       "APEE_v6": {
         "ROLE": "Compiler",

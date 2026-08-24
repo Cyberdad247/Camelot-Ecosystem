@@ -106,4 +106,3 @@ export function setRouteTelemetry(
 export function snapshot(s: SovereignState = state): SovereignState {
   return { ...s, swarm: { ...s.swarm } };
 }
-

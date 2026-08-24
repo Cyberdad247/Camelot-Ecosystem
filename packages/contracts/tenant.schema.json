@@ -5,7 +5,13 @@
   "description": "v1.2 tenant record and tenant_profile (§9.2). Tenants are the isolation boundary: receipts are per-tenant chains, cache keys are tenant-scoped (§15.6), and policy_overrides may only narrow the policy surface. See Camelot-OS SADD+LLDD v1.2 §9.2 and §15.",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schema_version", "tenant_id", "organization_id", "agency_id", "max_risk_tier_allowed"],
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "organization_id",
+    "agency_id",
+    "max_risk_tier_allowed"
+  ],
   "properties": {
     "schema_version": {
       "type": "string",
@@ -22,14 +28,7 @@
     "agency_id": {
       "description": "Executive agency this tenant runs: marketing, commerce, wellness, research, engineering, client_operations.",
       "type": "string",
-      "enum": [
-        "marketing",
-        "commerce",
-        "wellness",
-        "research",
-        "engineering",
-        "client_operations"
-      ]
+      "enum": ["marketing", "commerce", "wellness", "research", "engineering", "client_operations"]
     },
     "branding": {
       "type": "object",
@@ -67,12 +66,7 @@
       "type": "object",
       "additionalProperties": {
         "type": "string",
-        "enum": [
-          "human_required",
-          "two_person_approval",
-          "denied",
-          "default"
-        ]
+        "enum": ["human_required", "two_person_approval", "denied", "default"]
       }
     },
     "retention": {

@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from 'react';
 import { ScrollText, X } from 'lucide-react';
+import React, { useMemo, useState } from 'react';
 import type { PlanEvent } from './useKnightStream';
 
 function escapeHtml(s: string): string {
@@ -23,7 +23,10 @@ function renderMarkdownSafe(md: string): string {
     .replace(/^### (.*)$/gm, '<h3 class="text-sm font-semibold text-fuchsia-300 mt-3 mb-1">$1</h3>')
     .replace(/^## (.*)$/gm, '<h2 class="text-base font-bold text-slate-100 mt-4 mb-1">$1</h2>')
     .replace(/^# (.*)$/gm, '<h1 class="text-lg font-black text-fuchsia-200 mb-2">$1</h1>')
-    .replace(/`([^`]+)`/g, '<code class="rounded bg-slate-800 px-1 font-mono text-emerald-300">$1</code>')
+    .replace(
+      /`([^`]+)`/g,
+      '<code class="rounded bg-slate-800 px-1 font-mono text-emerald-300">$1</code>',
+    )
     .replace(/\*\*([^*]+)\*\*/g, '<strong class="text-slate-100">$1</strong>')
     .replace(/^- (.*)$/gm, '<div class="pl-3">• $1</div>')
     .replace(/\n/g, '<br />');

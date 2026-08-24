@@ -4,9 +4,9 @@
   "owner": "Foundry Council",
   "purpose": "Technical engine metadata for high-frequency phonetic synthesis.",
   "prosody_vectors": {
-    "high_fidelity": {"speed": 1.0, "pitch": 1.0, "energy": 0.8},
-    "efficiency": {"speed": 1.2, "pitch": 1.0, "energy": 0.6},
-    "low_latency": {"speed": 1.5, "pitch": 1.0, "energy": 0.5}
+    "high_fidelity": { "speed": 1.0, "pitch": 1.0, "energy": 0.8 },
+    "efficiency": { "speed": 1.2, "pitch": 1.0, "energy": 0.6 },
+    "low_latency": { "speed": 1.5, "pitch": 1.0, "energy": 0.5 }
   },
   "sonic_cache_manifest": {
     "enabled": true,
@@ -15,9 +15,9 @@
     "prefix": "vox:engine:"
   },
   "system_emotes": [
-    {"event": "SYNC_COMPLETE", "code": "SC_01"},
-    {"event": "SECURITY_BLOCK", "code": "SB_99"},
-    {"event": "TASK_CLAIMED", "code": "TC_05"}
+    { "event": "SYNC_COMPLETE", "code": "SC_01" },
+    { "event": "SECURITY_BLOCK", "code": "SB_99" },
+    { "event": "TASK_CLAIMED", "code": "TC_05" }
   ],
   "last_audit_utc": "2026-05-13T03:35:00Z"
 }

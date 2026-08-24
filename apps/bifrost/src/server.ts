@@ -5,18 +5,18 @@ import http from 'node:http';
 import express, { type Request } from 'express';
 import rateLimit from 'express-rate-limit';
 import { WebSocket, WebSocketServer } from 'ws';
+import { z } from 'zod';
 import { SovereignDB } from './db/SovereignDB';
 import { SWARM_EVENTS, publishHermes } from './hermes';
-import { type Command, parseCommand } from './nlp';
-import { MicrocubicMatrix } from './microcubic';
-import { type RouteOutcome, route } from './router';
-import { z } from 'zod';
-import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
-import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
 import { issueSignedAction } from './issuance';
+import { MicrocubicMatrix } from './microcubic';
+import { type Command, parseCommand } from './nlp';
 import { createOperatorBff } from './operator/bff';
 import { InMemoryEventStore } from './operator/receipts';
-import { verifyManifest, issueLease } from './operator/sentinel';
+import { issueLease, verifyManifest } from './operator/sentinel';
+import { type RouteOutcome, route } from './router';
+import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
+import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
 
 // WebSocket carrying the heartbeat flag used by the reaper loop below.
 interface LiveSocket extends WebSocket {
@@ -34,8 +34,7 @@ const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET ?? '';
 // The Helios/Swarm AI path is opt-in: it needs a Gemini key and makes live
 // model calls. When disabled, the gateway runs purely on the deterministic NLP
 // parser so it stays bootable and testable without any secrets.
-const ENABLE_HELIOS =
-  process.env.ENABLE_HELIOS === '1' || Boolean(process.env.GEMINI_API_KEY);
+const ENABLE_HELIOS = process.env.ENABLE_HELIOS === '1' || Boolean(process.env.GEMINI_API_KEY);
 
 // Cap inbound frame size (16 KB) — commands are tiny; reject oversized payloads
 // at the protocol layer to avoid unbounded JSON.parse work.
@@ -101,13 +100,33 @@ function broadcastState(): void {
 async function persistCommand(cmd: Command): Promise<void> {
   try {
     if (cmd.action === 'add_transaction') {
-      await SovereignDB.postTransaction('command', 'add_transaction', cmd.amount, 'default-account');
+      await SovereignDB.postTransaction(
+        'command',
+        'add_transaction',
+        cmd.amount,
+        'default-account',
+      );
     } else if (cmd.action === 'remind') {
-      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Reminder set for ${cmd.who}`, 'LOGGED');
+      await SovereignDB.logMessage(
+        'default-thread',
+        'SYSTEM',
+        `Reminder set for ${cmd.who}`,
+        'LOGGED',
+      );
     } else if (cmd.action === 'order') {
-      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Order placed: ${cmd.item}`, 'LOGGED');
+      await SovereignDB.logMessage(
+        'default-thread',
+        'SYSTEM',
+        `Order placed: ${cmd.item}`,
+        'LOGGED',
+      );
     } else {
-      await SovereignDB.logMessage('default-thread', 'SYSTEM', `Unrecognized command: ${cmd.raw ?? cmd.action}`, 'LOGGED');
+      await SovereignDB.logMessage(
+        'default-thread',
+        'SYSTEM',
+        `Unrecognized command: ${cmd.raw ?? cmd.action}`,
+        'LOGGED',
+      );
     }
   } catch (error) {
     console.error('persistCommand failed:', error);
@@ -143,7 +162,10 @@ async function runHeliosCommand(textCommand: string, ws: WebSocket): Promise<voi
   const { HeliosHarness } = await import('./ai/HeliosHarness');
 
   ws.send(
-    JSON.stringify({ type: 'VOICE_FEEDBACK', payload: { text: 'Ingesting command into Helios Core...' } }),
+    JSON.stringify({
+      type: 'VOICE_FEEDBACK',
+      payload: { text: 'Ingesting command into Helios Core...' },
+    }),
   );
 
   const lakishaResponse = await HeliosHarness.askLakisha(textCommand, state);
@@ -158,11 +180,13 @@ async function runHeliosCommand(textCommand: string, ws: WebSocket): Promise<voi
   const swarmTasks = lakishaResponse.swarm_tasks ?? [];
   if (swarmTasks.length > 0) {
     const swarmMatrix = await getSwarm();
-    const tasksToSpawn = swarmTasks.map((task: { type: string; payload: unknown }, index: number) => ({
-      id: `cube-${Date.now()}-${index}`,
-      type: task.type,
-      payload: task.payload,
-    }));
+    const tasksToSpawn = swarmTasks.map(
+      (task: { type: string; payload: unknown }, index: number) => ({
+        id: `cube-${Date.now()}-${index}`,
+        type: task.type,
+        payload: task.payload,
+      }),
+    );
 
     state.swarm.active = true;
     state.swarm.tasks = tasksToSpawn.length;
@@ -173,11 +197,15 @@ async function runHeliosCommand(textCommand: string, ws: WebSocket): Promise<voi
     ws.send(
       JSON.stringify({
         type: 'VOICE_FEEDBACK',
-        payload: { text: `${lakishaResponse.feedback} Spawning ${tasksToSpawn.length} Microcubes.` },
+        payload: {
+          text: `${lakishaResponse.feedback} Spawning ${tasksToSpawn.length} Microcubes.`,
+        },
       }),
     );
   } else {
-    ws.send(JSON.stringify({ type: 'VOICE_FEEDBACK', payload: { text: lakishaResponse.feedback } }));
+    ws.send(
+      JSON.stringify({ type: 'VOICE_FEEDBACK', payload: { text: lakishaResponse.feedback } }),
+    );
   }
 
   state.lastCommand = 'voice_command';
@@ -330,9 +358,12 @@ app.post('/webhook/sms', webhookLimiter, async (req: RawBodyRequest, res) => {
     return res.status(400).send('Message is required');
   }
 
-  await SovereignDB.logMessage('default-thread', 'SMS', `SMS webhook: ${message}`, 'RECEIVED').catch(
-    (error) => console.error('webhook persist failed:', error),
-  );
+  await SovereignDB.logMessage(
+    'default-thread',
+    'SMS',
+    `SMS webhook: ${message}`,
+    'RECEIVED',
+  ).catch((error) => console.error('webhook persist failed:', error));
 
   const outcome = await handleUtterance(message);
   res.status(200).json({
@@ -374,7 +405,9 @@ wss.on('connection', (ws: LiveSocket) => {
         await runHeliosCommand(payloadText, ws);
       } catch (error) {
         console.error('[Helios] command failed:', error);
-        ws.send(JSON.stringify({ type: 'VOICE_FEEDBACK', payload: { text: 'Helios command failed.' } }));
+        ws.send(
+          JSON.stringify({ type: 'VOICE_FEEDBACK', payload: { text: 'Helios command failed.' } }),
+        );
       }
       return;
     }

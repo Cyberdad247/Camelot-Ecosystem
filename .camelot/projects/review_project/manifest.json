@@ -3,9 +3,5 @@
   "requested_name": "review_project",
   "protocol": "CYBERTRON_DAWNING",
   "created_or_verified_at": "2026-06-10T06:07:04.621174+00:00",
-  "files": [
-    "blueprint.md",
-    "task.md",
-    "verification.md"
-  ]
+  "files": ["blueprint.md", "task.md", "verification.md"]
 }

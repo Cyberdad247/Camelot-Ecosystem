@@ -21,7 +21,9 @@ export function DiffStreamPanel({ diffs }: { diffs: DiffEvidence[] }) {
         <li key={d.diffSha256} className="border border-white/10 p-3">
           <div className="flex items-center justify-between gap-2">
             <span className="break-all font-mono text-[10px] text-gold-light">{d.diffSha256}</span>
-            <span className={`font-mono text-[10px] uppercase ${VERDICT_STYLE[d.gideonVerdict] ?? ''}`}>
+            <span
+              className={`font-mono text-[10px] uppercase ${VERDICT_STYLE[d.gideonVerdict] ?? ''}`}
+            >
               gideon: {d.gideonVerdict}
             </span>
           </div>
@@ -29,7 +31,9 @@ export function DiffStreamPanel({ diffs }: { diffs: DiffEvidence[] }) {
             {d.addedLines} added · {d.removedLines} removed · {d.changedPaths.length} paths
           </p>
           {d.changedPaths.slice(0, 4).map((p) => (
-            <p key={p} className="mt-0.5 break-all font-mono text-[10px] text-white/40">+ {p}</p>
+            <p key={p} className="mt-0.5 break-all font-mono text-[10px] text-white/40">
+              + {p}
+            </p>
           ))}
         </li>
       ))}

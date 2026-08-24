@@ -36,9 +36,7 @@
     "owner_knight_spark_guess": "0xE3B8C190F4A2D765E8B1C9F0A3D4E5B6 (SIR_CODEX & MERLIN_Ω / ANYA_Ω)",
     "phase": "V1000-EXCALIBUR-A",
     "owner_repository": "CAMELOT-OS",
-    "predecessor_crystals_in_same_agenda": [
-      "Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3"
-    ],
+    "predecessor_crystals_in_same_agenda": ["Ω_ALPHA_OMEGA_DISTILLER_TOON_v3.3"],
     "storage_locations": {
       "live_crystal_store": "03_VAULT/firnflow/nukg_crystals.json",
       "aspirational_manifest": "03_VAULT/runtime_state/OMEGA_PRODUCTION_KERNEL.evidence.json (this file)",

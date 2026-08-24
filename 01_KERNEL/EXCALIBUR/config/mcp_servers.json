@@ -1,58 +1,44 @@
 {
-    "mcp_tools": [
-        {
-            "id": "github-mcp",
-            "name": "GitHub Integration",
-            "transport": "stdio",
-            "command": [
-                "npx",
-                "-y",
-                "@modelcontextprotocol/server-github"
-            ],
-            "env": {
-                "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
-            },
-            "description": "Search repositories, read code, managing issues and pull requests on GitHub."
-        },
-        {
-            "id": "filesystem-mcp",
-            "name": "Local Filesystem",
-            "transport": "stdio",
-            "command": [
-                "npx",
-                "-y",
-                "@modelcontextprotocol/server-filesystem",
-                "c:/Users/vizio/CAMELOT_OS"
-            ],
-            "description": "Read and write files on the local filesystem."
-        },
-        {
-            "id": "brave-search-mcp",
-            "name": "Brave Search",
-            "transport": "stdio",
-            "command": [
-                "npx",
-                "-y",
-                "@modelcontextprotocol/server-brave-search"
-            ],
-            "env": {
-                "BRAVE_API_KEY": "${BRAVE_API_KEY}"
-            },
-            "description": "Perform web searches using Brave Search API."
-        },
-        {
-            "id": "uv-mcp",
-            "name": "UV Package Manager",
-            "transport": "stdio",
-            "command": [
-                "uv",
-                "run",
-                "--with",
-                "mcp-server-uv",
-                "mcp-server-uv"
-            ],
-            "description": "Automated Python environment and dependency management via uv."
-        }
-    ],
-    "registry_note": "Consolidated tool registry for AETHER routing."
+  "mcp_tools": [
+    {
+      "id": "github-mcp",
+      "name": "GitHub Integration",
+      "transport": "stdio",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "Search repositories, read code, managing issues and pull requests on GitHub."
+    },
+    {
+      "id": "filesystem-mcp",
+      "name": "Local Filesystem",
+      "transport": "stdio",
+      "command": [
+        "npx",
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "c:/Users/vizio/CAMELOT_OS"
+      ],
+      "description": "Read and write files on the local filesystem."
+    },
+    {
+      "id": "brave-search-mcp",
+      "name": "Brave Search",
+      "transport": "stdio",
+      "command": ["npx", "-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "description": "Perform web searches using Brave Search API."
+    },
+    {
+      "id": "uv-mcp",
+      "name": "UV Package Manager",
+      "transport": "stdio",
+      "command": ["uv", "run", "--with", "mcp-server-uv", "mcp-server-uv"],
+      "description": "Automated Python environment and dependency management via uv."
+    }
+  ],
+  "registry_note": "Consolidated tool registry for AETHER routing."
 }

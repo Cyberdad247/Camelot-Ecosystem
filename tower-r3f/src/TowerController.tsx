@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { TowerScene, ScrollState } from './TowerScene';
-import { FLOORS, PhaseId, phaseAt } from './tower-data';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { type ScrollState, TowerScene } from './TowerScene';
+import { FLOORS, type PhaseId, phaseAt } from './tower-data';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -26,18 +26,18 @@ export function TowerController() {
       start: 'top top',
       end: 'bottom bottom',
       scrub: reducedMotion ? false : 0.6,
-      onUpdate: self => {
+      onUpdate: (self) => {
         const p = self.progress;
         scroll.current.progress = p;
         const idx = Math.min(FLOORS.length - 1, Math.round(p * (FLOORS.length - 1)));
         scroll.current.activeFloor = idx;
-        setActiveFloor(prev => (prev === idx ? prev : idx));
-        setPhase(prev => {
+        setActiveFloor((prev) => (prev === idx ? prev : idx));
+        setPhase((prev) => {
           const next = phaseAt(p);
           return prev === next ? prev : next;
         });
         setDescent(Math.round(p * 100));
-      }
+      },
     });
     return () => trigger.kill();
   }, [reducedMotion]);
@@ -45,7 +45,11 @@ export function TowerController() {
   /** Phase transition: announce the new phase on the card. */
   useEffect(() => {
     if (reducedMotion || !cardRef.current) return;
-    gsap.fromTo(cardRef.current, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' });
+    gsap.fromTo(
+      cardRef.current,
+      { opacity: 0, y: 12 },
+      { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+    );
   }, [phase, activeFloor, reducedMotion]);
 
   const jumpTo = (i: number) => {
@@ -94,7 +98,8 @@ export function TowerController() {
       </nav>
 
       <div className="readout">
-        DESCENT <b>{descent}%</b> · FLOOR <b>{floor.numeral}</b> · <b className="phase-label">{phase.toUpperCase()}</b>
+        DESCENT <b>{descent}%</b> · FLOOR <b>{floor.numeral}</b> ·{' '}
+        <b className="phase-label">{phase.toUpperCase()}</b>
       </div>
       {phase === 'arrival' && <div className="hint">SCROLL TO DESCEND</div>}
     </div>

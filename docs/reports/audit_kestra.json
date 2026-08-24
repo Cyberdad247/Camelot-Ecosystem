@@ -7,10 +7,7 @@
   "phases": {
     "architecture": {
       "type": "Containerized App",
-      "stack": [
-        "Docker",
-        "Node.js"
-      ]
+      "stack": ["Docker", "Node.js"]
     },
     "quality": {
       "score": 70,
@@ -18,9 +15,7 @@
       "configs": []
     },
     "testing": {
-      "frameworks": [
-        "Vitest"
-      ],
+      "frameworks": ["Vitest"],
       "test_count": 5
     },
     "security": {
@@ -33,10 +28,7 @@
     },
     "documentation": {
       "grade": "C",
-      "missing": [
-        "CONTRIBUTING.md",
-        "ARCHITECTURE.md"
-      ]
+      "missing": ["CONTRIBUTING.md", "ARCHITECTURE.md"]
     }
   },
   "score": {

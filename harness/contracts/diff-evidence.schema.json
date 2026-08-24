@@ -3,7 +3,16 @@
   "$id": "harness/contracts/diff-evidence.schema.json",
   "title": "Diff Evidence",
   "type": "object",
-  "required": ["baseRevision", "candidateRevision", "diffSha256", "changedPaths", "addedLines", "removedLines", "generatedAt", "gideonVerdict"],
+  "required": [
+    "baseRevision",
+    "candidateRevision",
+    "diffSha256",
+    "changedPaths",
+    "addedLines",
+    "removedLines",
+    "generatedAt",
+    "gideonVerdict"
+  ],
   "properties": {
     "baseRevision": { "type": "string" },
     "candidateRevision": { "type": "string" },

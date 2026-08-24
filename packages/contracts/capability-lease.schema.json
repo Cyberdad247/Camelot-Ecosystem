@@ -286,7 +286,12 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["approver_id", "approver_trust_band", "approved_at", "manifest_hash_at_approval"],
+        "required": [
+          "approver_id",
+          "approver_trust_band",
+          "approved_at",
+          "manifest_hash_at_approval"
+        ],
         "properties": {
           "approver_id": { "type": "string" },
           "approver_trust_band": {

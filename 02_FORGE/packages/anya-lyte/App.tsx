@@ -1,8 +1,8 @@
 // ANYA LYTE: ENTRY POINT
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import TitanLink from './src/services/TitanLink';
+import { StyleSheet, Text, View } from 'react-native';
 import Hudson from './src/components/Hudson';
+import TitanLink from './src/services/TitanLink';
 
 export default function App() {
   const [status, setStatus] = useState<string>('DISCONNECTED');
@@ -23,7 +23,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#121212', alignItems: 'center', justifyContent: 'center' },
+  container: {
+    flex: 1,
+    backgroundColor: '#121212',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   header: { color: '#D4AF37', fontSize: 24, fontWeight: 'bold' },
   status: { color: '#00FFFF', marginTop: 10 },
 });

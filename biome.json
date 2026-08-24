@@ -11,6 +11,8 @@
       "**/dist/**",
       "**/node_modules/**",
       "**/migrations/**",
+      "**/.camelot/**",
+      "**/vfs/**",
       "package-lock.json"
     ]
   },

@@ -12,10 +12,20 @@ export interface OpenDesignPillItem {
 }
 
 const PILL_DATA: OpenDesignPillItem[] = [
-  { label: 'OPEN DESIGN ENGINE', value: 'v1.0.0-LUXURY_BRUTALISM', status: 'ACTIVE', color: '#D4AF37' },
+  {
+    label: 'OPEN DESIGN ENGINE',
+    value: 'v1.0.0-LUXURY_BRUTALISM',
+    status: 'ACTIVE',
+    color: '#D4AF37',
+  },
   { label: 'ANYA FIRST LAW', value: 'APEE v7.0 ENFORCED', status: 'ENFORCED', color: '#9D4EDD' },
   { label: 'BIFROST DISPATCH', value: 'mTLS :4433 / :4434', status: 'ONLINE', color: '#10B981' },
-  { label: 'WORLDTREE CLOUDBRAIN', value: '24 KNIGHTS TETHERED', status: 'ONLINE', color: '#3B82F6' },
+  {
+    label: 'WORLDTREE CLOUDBRAIN',
+    value: '24 KNIGHTS TETHERED',
+    status: 'ONLINE',
+    color: '#3B82F6',
+  },
 ];
 
 export function OpenDesignStatusPills() {

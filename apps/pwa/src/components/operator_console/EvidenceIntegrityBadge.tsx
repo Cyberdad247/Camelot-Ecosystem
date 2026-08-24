@@ -6,12 +6,18 @@ import type { EvidenceIntegrity } from '../../lib/operator_console/schemas';
 
 const LABELS: Record<EvidenceIntegrity, { text: string; className: string }> = {
   verified: { text: 'VERIFIED', className: 'text-emerald-400 border-emerald-400/40' },
-  pending_anchor: { text: 'PENDING DURABLE ANCHOR', className: 'text-amber-300 border-amber-300/40' },
+  pending_anchor: {
+    text: 'PENDING DURABLE ANCHOR',
+    className: 'text-amber-300 border-amber-300/40',
+  },
   unavailable: { text: 'UNAVAILABLE', className: 'text-slate-400 border-slate-400/40' },
   integrity_failed: { text: 'INTEGRITY FAILED', className: 'text-red-400 border-red-400/60' },
 };
 
-export function EvidenceIntegrityBadge({ integrity, taskId }: {
+export function EvidenceIntegrityBadge({
+  integrity,
+  taskId,
+}: {
   integrity: EvidenceIntegrity;
   taskId: string;
 }) {

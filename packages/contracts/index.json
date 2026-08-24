@@ -73,7 +73,12 @@
       "$id": "https://camelot-os/schemas/effect-manifest.schema.json",
       "schema_version": "camelot-effect-manifest/1",
       "purpose": "Pinned, hash-bound declaration of intent; carries declared risk_tier and effect_class (§11.1, §13.2).",
-      "key_fields_v12": ["effect_class", "declared_risk_tier", "declaration_hash", "immutable_inputs"]
+      "key_fields_v12": [
+        "effect_class",
+        "declared_risk_tier",
+        "declaration_hash",
+        "immutable_inputs"
+      ]
     },
     {
       "file": "policy-decision.schema.json",
@@ -87,7 +92,13 @@
       "$id": "https://camelot-os/schemas/capability-lease.schema.json",
       "schema_version": "camelot-lease/1",
       "purpose": "Manifest-bound lease issued by Sentinel (§11.2, §13.3).",
-      "key_fields_v12": ["effect_class", "declared_risk_tier", "subject.node_trust_band", "derived_capabilities_provenance", "approvals"]
+      "key_fields_v12": [
+        "effect_class",
+        "declared_risk_tier",
+        "subject.node_trust_band",
+        "derived_capabilities_provenance",
+        "approvals"
+      ]
     },
     {
       "file": "memory-retrieval-lease.schema.json",
@@ -164,7 +175,12 @@
       "$id": "https://camelot-os/schemas/device-action.schema.json",
       "schema_version": "camelot-device-action/1",
       "purpose": "Immutable device-action manifest for mobile calendar/SMS/call actions (§10, §21).",
-      "key_fields_v12": ["effect_class", "content_hash", "cached_epoch_max_age_min", "two_person_required"]
+      "key_fields_v12": [
+        "effect_class",
+        "content_hash",
+        "cached_epoch_max_age_min",
+        "two_person_required"
+      ]
     },
     {
       "file": "promotion.schema.json",

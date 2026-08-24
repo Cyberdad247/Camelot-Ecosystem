@@ -40,26 +40,12 @@
     "registered_band": {
       "description": "Band issued at admission; the floor for current_band (a node cannot be promoted beyond its registration without re-admission).",
       "type": "string",
-      "enum": [
-        "attested",
-        "attested-witness",
-        "enrolled",
-        "probationary",
-        "quarantined",
-        "revoked"
-      ]
+      "enum": ["attested", "attested-witness", "enrolled", "probationary", "quarantined", "revoked"]
     },
     "current_band": {
       "description": "Live band; may be downgraded from registered_band by Sentinel (v1.2).",
       "type": "string",
-      "enum": [
-        "attested",
-        "attested-witness",
-        "enrolled",
-        "probationary",
-        "quarantined",
-        "revoked"
-      ]
+      "enum": ["attested", "attested-witness", "enrolled", "probationary", "quarantined", "revoked"]
     },
     "registered_at": {
       "type": "string",

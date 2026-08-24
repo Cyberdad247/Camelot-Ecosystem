@@ -1,11 +1,4 @@
 {
   "description": "Sensitive keys to redact during audits. Source: cherry-studio",
-  "patterns": [
-    "API_KEY",
-    "APIKEY",
-    "AUTHORIZATION",
-    "TOKEN",
-    "SECRET",
-    "PASSWORD"
-  ]
+  "patterns": ["API_KEY", "APIKEY", "AUTHORIZATION", "TOKEN", "SECRET", "PASSWORD"]
 }

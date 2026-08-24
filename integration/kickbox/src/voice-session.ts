@@ -12,15 +12,8 @@
 // Raw audio lives only inside this controller's call stack: captured,
 // hashed, transcribed, dropped.
 
-import {
-  LOW_CONFIDENCE_THRESHOLD,
-  hashAudio,
-} from '@camelot/contracts';
-import type {
-  CapturedAudio,
-  PlaybackHandle,
-  VoiceProvider,
-} from '@camelot/contracts';
+import { LOW_CONFIDENCE_THRESHOLD, hashAudio } from '@camelot/contracts';
+import type { CapturedAudio, PlaybackHandle, VoiceProvider } from '@camelot/contracts';
 
 export type VoiceUiState =
   | 'voice-idle'
@@ -39,7 +32,10 @@ export type VoiceNotice =
 
 export interface VoiceSessionCallbacks {
   /** Submit an accepted transcript through the existing turn path. */
-  submitTranscript: (transcript: string, meta: { audioSha256: string }) => Promise<{ turnId: string } | void>;
+  submitTranscript: (
+    transcript: string,
+    meta: { audioSha256: string },
+  ) => Promise<{ turnId: string } | void>;
   /** Fire the existing barge-in event for the given turn. */
   bargeIn: (turnId: string) => Promise<void>;
   onState: (state: VoiceUiState) => void;
@@ -133,7 +129,10 @@ export class VoiceSessionController {
       await this.#callbacks.submitTranscript(result.transcript, { audioSha256 });
     } catch (err) {
       // STT failure: no policy request, no tool action, visible notice.
-      this.#callbacks.onNotice({ kind: 'stt-failed', message: `Transcription failed: ${String(err)}` });
+      this.#callbacks.onNotice({
+        kind: 'stt-failed',
+        message: `Transcription failed: ${String(err)}`,
+      });
       this.#setState('voice-idle');
     }
   }

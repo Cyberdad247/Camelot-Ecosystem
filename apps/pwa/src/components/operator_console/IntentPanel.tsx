@@ -5,9 +5,7 @@
 export function IntentPanel({ intent }: { intent: Record<string, unknown> }) {
   const hasIntent = Object.keys(intent).length > 0;
   if (!hasIntent) {
-    return (
-      <p className="text-xs italic text-white/40">No signed raw intent available.</p>
-    );
+    return <p className="text-xs italic text-white/40">No signed raw intent available.</p>;
   }
   return (
     <div className="space-y-3">

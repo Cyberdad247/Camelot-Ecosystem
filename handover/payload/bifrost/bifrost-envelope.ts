@@ -1,4 +1,4 @@
-import { createHmac, createHash, randomUUID } from 'node:crypto';
+import { createHash, createHmac, randomUUID } from 'node:crypto';
 
 /**
  * Bifrost signed message envelope — Camelot-OS trust plane.
@@ -58,11 +58,29 @@ function canonicalPayload(payload: unknown): string {
 function headerSigningString(h: BifrostHeader): string {
   // Deterministic field order; sig and checksum excluded from their own inputs.
   return [
-    h.ver, h.msg_id, h.trace_id, h.parent_id ?? '', h.type, h.src, h.dst,
-    h.realm, h.session ?? '', h.node, h.cartridge ?? '', h.operator ?? '',
-    h.ts, h.nonce, h.expires, String(h.seq), h.priority, h.trust_band,
-    h.policy_decision ?? '', h.sig_alg, h.checksum_alg, h.checksum ?? '',
-    h.provenance_ref ?? ''
+    h.ver,
+    h.msg_id,
+    h.trace_id,
+    h.parent_id ?? '',
+    h.type,
+    h.src,
+    h.dst,
+    h.realm,
+    h.session ?? '',
+    h.node,
+    h.cartridge ?? '',
+    h.operator ?? '',
+    h.ts,
+    h.nonce,
+    h.expires,
+    String(h.seq),
+    h.priority,
+    h.trust_band,
+    h.policy_decision ?? '',
+    h.sig_alg,
+    h.checksum_alg,
+    h.checksum ?? '',
+    h.provenance_ref ?? '',
   ].join('|');
 }
 
@@ -110,7 +128,7 @@ export function sealEnvelope<T>(payload: T, opts: SealOptions): BifrostEnvelope<
     policy_decision: opts.policyDecision,
     sig_alg: 'hmac-sha256',
     checksum_alg: 'sha256',
-    provenance_ref: opts.provenanceRef
+    provenance_ref: opts.provenanceRef,
   };
 
   header.checksum = createHash('sha256').update(canonicalPayload(payload)).digest('hex');
@@ -150,13 +168,15 @@ export function verifyEnvelope(env: BifrostEnvelope, opts: VerifyOptions): Envel
   if (checksum !== h.checksum) reasons.push('payload checksum mismatch');
 
   // Signature (header integrity + provenance)
-  const expectedSig = createHmac('sha256', opts.secret).update(headerSigningString(h)).digest('hex');
+  const expectedSig = createHmac('sha256', opts.secret)
+    .update(headerSigningString(h))
+    .digest('hex');
   if (expectedSig !== h.sig) reasons.push('invalid signature');
 
   const valid = reasons.length === 0;
   return {
     valid,
     reasons: valid ? ['signed envelope verified'] : reasons,
-    trust_band: valid ? h.trust_band : 'quarantine'
+    trust_band: valid ? h.trust_band : 'quarantine',
   };
 }
