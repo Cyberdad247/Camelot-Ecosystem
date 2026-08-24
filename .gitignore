@@ -19,6 +19,8 @@ mcp-oauth-tokens*.json
 secrets.json
 *.key
 *.pem
+# KBA drone local rotated secrets (never commit)
+**/.drone_secrets.ps1
 .modal.toml
 **/.modal.toml
 auth.json
