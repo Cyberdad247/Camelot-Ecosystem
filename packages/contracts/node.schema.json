@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/node.schema.json",
+  "title": "Camelot Node",
+  "description": "v1.2 node registry record. Tracks identity, profile, trust band, epoch acknowledgement, and health. The catalog comment in §11 names trust_band, registered_band, and last_epoch_ack as key fields. See Camelot-OS SADD+LLDD v1.2 §7 and §7.3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "node_id",
+    "profile",
+    "registered_band",
+    "registered_at",
+    "last_epoch_ack"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-node/1"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "profile": {
+      "description": "Node profile per §7.1.",
+      "type": "string",
+      "enum": [
+        "hub",
+        "engineering",
+        "experience",
+        "marketing",
+        "commerce",
+        "wellness",
+        "research",
+        "inference",
+        "mobile"
+      ]
+    },
+    "registered_band": {
+      "description": "Band issued at admission; the floor for current_band (a node cannot be promoted beyond its registration without re-admission).",
+      "type": "string",
+      "enum": [
+        "attested",
+        "attested-witness",
+        "enrolled",
+        "probationary",
+        "quarantined",
+        "revoked"
+      ]
+    },
+    "current_band": {
+      "description": "Live band; may be downgraded from registered_band by Sentinel (v1.2).",
+      "type": "string",
+      "enum": [
+        "attested",
+        "attested-witness",
+        "enrolled",
+        "probationary",
+        "quarantined",
+        "revoked"
+      ]
+    },
+    "registered_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "hardware_attestation": {
+      "description": "Reference to the hardware root-of-trust attestation (TPM/SEV/TEE) backing an attested band (§7.3).",
+      "type": "string"
+    },
+    "signed_csr": {
+      "description": "Signed certificate signing request used at admission.",
+      "type": "string"
+    },
+    "public_key": {
+      "description": "Pinned node public key (ed25519).",
+      "type": "string",
+      "pattern": "^ed25519:[A-Za-z0-9_-]+$"
+    },
+    "last_epoch_ack": {
+      "description": "Most recent authority epoch this node acknowledged (§6.3). Nodes lagging the trusted epoch are excluded from leases and quorum.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "last_heartbeat_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_heartbeat_ok": {
+      "type": "boolean"
+    },
+    "resource_budget": {
+      "description": "8 GB edge-node budget per §7.2.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total_mb": { "type": "integer", "minimum": 0 },
+        "worker_pool_mb": { "type": "integer", "minimum": 0 },
+        "worker_hard_limit_mb": { "type": "integer", "minimum": 0 },
+        "worker_soft_limit_mb": { "type": "integer", "minimum": 0 },
+        "max_workers": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["enrolling", "active", "quarantined", "revoked", "retired"]
+    },
+    "revocation_ref": {
+      "description": "Receipt reference when the node was revoked.",
+      "type": "string",
+      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/workspace.schema.json",
+  "title": "Camelot Workspace",
+  "description": "v1.2 workspace record. Leaf of the org → tenant → workspace hierarchy in the Cloudbrain namespace model (§15.2). Workspaces scope VFS sources, notebooks, graphs, memories, and receipts. See Camelot-OS SADD+LLDD v1.2 §15.2.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "workspace_id", "tenant_id", "name"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-workspace/1"
+    },
+    "workspace_id": {
+      "type": "string",
+      "pattern": "^ws_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "namespace_prefix": {
+      "description": "viking:///org/<org>/tenant/<tenant>/workspace/<workspace> (§15.2).",
+      "type": "string"
+    },
+    "source_policy": {
+      "description": "Admission rules for sources in this workspace; default Tier 4 quarantine for external content.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "default_source_classification": {
+          "type": "string",
+          "enum": ["tier0", "tier1", "tier2", "tier3", "tier4"]
+        },
+        "quarantine_external": {
+          "type": "boolean"
+        }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "frozen", "closed"]
+    }
+  }
+}

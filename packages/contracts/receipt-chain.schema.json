@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/receipt-chain.schema.json",
+  "title": "Camelot Receipt Chain",
+  "description": "v1.2 per-tenant hash-linked receipt chain record (added in v1.2, §11.3). The chain head is written to the ledger anchor every N entries (default N=1000). The chain is the single source of truth; Redis, Open Notebook, and UI surfaces are downstream consumers (§11.3, §15.6). The optional proof block is an ed25519 signature over the canonical record (signature field stripped), so anchor tampering is detectable from the record alone without re-deriving the chain (STRIDE T-10, S-4).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "chain_height",
+    "head_hash",
+    "last_anchor_height",
+    "last_anchor_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-receipt-chain/1"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "chain_height": {
+      "description": "Monotonic height of the latest receipt in the tenant chain.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "head_hash": {
+      "description": "self_hash of the latest receipt.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "anchor_interval": {
+      "description": "N: write head to ledger anchor every N entries. Default 1000 (§11.3). Per-tenant deviation from N is an open question (§27.5).",
+      "type": "integer",
+      "minimum": 1
+    },
+    "last_anchor_height": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "last_anchor_hash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "anchor_target": {
+      "description": "Ledger anchor target (public chain vs internal tamper-evident log) — open question §27.5.",
+      "type": "string"
+    },
+    "verified": {
+      "description": "Whether the chain passed the §11.3 verification rule at last check: hash-links, signatures under signer trust band, height monotonicity, and epoch ≥ trusted epoch.",
+      "type": "boolean"
+    },
+    "last_verified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "replay_protected": {
+      "description": "Nonce + timestamp window replay protection applied at ingest (§12.2).",
+      "type": "boolean"
+    },
+    "proof": {
+      "description": "Optional. ed25519 signature over the canonical serialization of this record (self_hash and signature fields stripped), enabling tamper detection on the anchor alone — no chain re-derivation required. Mirrors the receipt proof block (§11.3, STRIDE T-10/S-4).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hash_algorithm", "signature_algorithm", "signer", "signature"],
+      "properties": {
+        "hash_algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "signature_algorithm": {
+          "type": "string",
+          "const": "ed25519"
+        },
+        "signer": {
+          "description": "Principal id of the anchor signer (e.g. 'sentinel').",
+          "type": "string"
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^ed25519:[A-Za-z0-9_-]+$"
+        }
+      }
+    }
+  }
+}

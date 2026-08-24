@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/evidence-envelope.schema.json",
+  "title": "Camelot Evidence Envelope",
+  "description": "v1.2 structured event envelope used to stream verified evidence to the Operator Console and mobile clients (§12.1). Envelopes reference chain-linked receipts; they are downstream projections and never the basis for authorization (§11.3). See Camelot-OS SADD+LLDD v1.2 §12.1 and §19.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "task_id",
+    "correlation_id",
+    "timestamp",
+    "kind",
+    "actor",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "operator-evidence/1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^evt_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "kind": {
+      "description": "Event kind, e.g. 'lease.issued', 'patch.applied', 'gideon.pass', 'cache.write'.",
+      "type": "string"
+    },
+    "actor": {
+      "$ref": "https://camelot-os/schemas/actor.schema.json"
+    },
+    "integrity": {
+      "type": "string",
+      "enum": ["verified", "pending", "failed"]
+    },
+    "receipt_ref": {
+      "description": "Receipt reference in the tenant chain.",
+      "type": "string",
+      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+    },
+    "parent_hash": {
+      "type": "string",
+      "pattern": "^sha256:0{64}$|^sha256:[0-9a-fA-F]{64}$"
+    },
+    "payload_redacted": {
+      "description": "Role-scoped projection; consumers see only what their role permits (§11.3, D-10).",
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

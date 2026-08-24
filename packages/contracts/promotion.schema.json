@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/promotion.schema.json",
+  "title": "Camelot Promotion",
+  "description": "v1.2 promotion record for standby promotion (VPS → local twin). Requires fencing, integrity checks, authority-epoch change, and operator/witness approval per §6.4–§6.5. witness_lock_ref is required for auto_failover and T4 promote effects (§6.5, catalog comment). See Camelot-OS SADD+LLDD v1.2 §6.4 + §6.5.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "promotion_id",
+    "active_hub_id",
+    "standby_hub_id",
+    "mode",
+    "authority_epoch",
+    "steps",
+    "promoted_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-promotion/1"
+    },
+    "promotion_id": {
+      "type": "string",
+      "pattern": "^prom_[A-Za-z0-9_-]+$"
+    },
+    "active_hub_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "standby_hub_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "mode": {
+      "description": "auto_failover requires witness lock AND operator MFA; manual_failover requires operator MFA only (§6.5).",
+      "type": "string",
+      "enum": ["auto_failover", "manual_failover"]
+    },
+    "authority_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "steps": {
+      "description": "Promotion steps completed per §6.4 (1–12).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "witness_lock_ref": {
+      "description": "Reference to the witness-signed promotion lock grant. Required for auto_failover (§6.5); may be absent for manual_failover.",
+      "type": "string",
+      "pattern": "^wlock_[A-Za-z0-9_-]+$"
+    },
+    "operator_approval_refs": {
+      "description": "Operator MFA approvals (two distinct identities required for T3+).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "replication_lag_slo_met": {
+      "type": "boolean"
+    },
+    "chain_integrity_verified": {
+      "description": "Local receipt-chain integrity verified per §11.3 (§6.4 step 1).",
+      "type": "boolean"
+    },
+    "vps_unreachable_probe": {
+      "description": "Independent VPS health probe result (§6.4 step 3).",
+      "type": "boolean"
+    },
+    "attested_quorum_count": {
+      "description": "Attested nodes that acknowledged the epoch broadcast (§7.3 quorum).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "fenced_old_vps": {
+      "type": "boolean"
+    },
+    "promoted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "receipt_ref": {
+      "description": "Chain-linked promotion receipt (§6.4 step 12).",
+      "type": "string",
+      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+    }
+  }
+}

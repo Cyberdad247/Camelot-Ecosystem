@@ -1,0 +1,36 @@
+{
+  "schema_version": "camelot-receipt/1",
+  "receipt_id": "rcp_0003",
+  "parent_hash": "sha256:70a75da3b20513d8384cc1ca056477b42e6fd599e3396ea349064769380a59c9",
+  "chain_height": 3,
+  "tenant_id": "tenant_alpha",
+  "correlation_id": "cor_c001",
+  "task_id": "task_t001",
+  "authority_epoch": 43,
+  "effect_class": "promote.worktree.merge",
+  "declared_risk_tier": "T3",
+  "timestamp": "2026-08-14T19:00:00Z",
+  "actor": {
+    "id": "sir-forge",
+    "role": "engineering_builder",
+    "node_id": "engineering-01",
+    "trust_band": "attested"
+  },
+  "event": "merge.promoted",
+  "refs": {
+    "manifest_hash": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+    "lease_id": "lease_0001"
+  },
+  "payload_redacted": {
+    "base_revision": "git-sha-base",
+    "candidate_revision": "git-sha-candidate"
+  },
+  "proof": {
+    "hash_algorithm": "sha256",
+    "signature_algorithm": "ed25519",
+    "signer": "sentinel",
+    "signature": "ed25519:1a39122107c18215d3fe091c9a101eb7827474597aa7cf4be28b3d93124bdb08e9571be0809ad508fa50f76aad20d2ac252f4a837f2c88f01d3b666b5aab5b08"
+  },
+  "ledger_anchor_eligible": false,
+  "self_hash": "sha256:9029696e005b045bce7b831c8d99a700576bdf81049ac7310c0703bc69e9c443"
+}

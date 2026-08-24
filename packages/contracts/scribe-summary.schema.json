@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/scribe-summary.schema.json",
+  "title": "Camelot Scribe Summary",
+  "description": "v1.2 evidence-summary envelope issued by Scribe (Appendix E). Scribe links existing receipts without mutation, narrates the decision and its evidence, and never asserts facts beyond its inputs. Stable content addressing: scribe-summary@<hash>. See Camelot-OS SADD+LLDD v1.2 Appendix E.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "summary_id",
+    "task_id",
+    "correlation_id",
+    "tenant_id",
+    "input_receipt_refs",
+    "verdicts",
+    "narrative",
+    "issued_at",
+    "signature"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-scribe-summary/1"
+    },
+    "summary_id": {
+      "type": "string",
+      "pattern": "^ss_[A-Za-z0-9_-]+$"
+    },
+    "content_address": {
+      "description": "Stable content address, e.g. scribe-summary@sha256:...",
+      "type": "string",
+      "pattern": "^scribe-summary@sha256:[0-9a-fA-F]{64}$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "input_receipt_refs": {
+      "description": "Receipts this summary links (no mutation of the chain).",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+      }
+    },
+    "verdicts": {
+      "description": "Gideon verdicts and Boris test reports summarized.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "narrative": {
+      "description": "Human-readable narration of the decision and its evidence.",
+      "type": "string"
+    },
+    "asserted_facts": {
+      "description": "Facts asserted; must be supported by inputs (prohibited: asserting beyond inputs).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^ed25519:[A-Za-z0-9_-]+$"
+    }
+  }
+}

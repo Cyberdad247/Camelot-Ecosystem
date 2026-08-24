@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/test-run-result.schema.json",
+  "title": "Camelot Test Run Result",
+  "description": "v1.2 result of a bounded test run (e.g. workspace.test effect under lease). Gideon's test_result_validity gate consumes this record; Boris contract tests are reported separately via boris-test-report.schema.json (§18). See Camelot-OS SADD+LLDD v1.2 §18 and §22.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "result_id",
+    "task_id",
+    "correlation_id",
+    "tenant_id",
+    "runner",
+    "result",
+    "summary",
+    "started_at",
+    "finished_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-test-run-result/1"
+    },
+    "result_id": {
+      "type": "string",
+      "pattern": "^tr_[A-Za-z0-9_-]+$"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "lease_id": {
+      "type": "string",
+      "pattern": "^lease_[A-Za-z0-9_-]+$"
+    },
+    "runner": {
+      "description": "Test runner used, e.g. 'test-runner', 'pytest', 'pnpm test'.",
+      "type": "string"
+    },
+    "result": {
+      "type": "string",
+      "enum": ["pass", "fail", "error", "skipped"]
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "total": { "type": "integer", "minimum": 0 },
+        "passed": { "type": "integer", "minimum": 0 },
+        "failed": { "type": "integer", "minimum": 0 },
+        "skipped": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "artifacts_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "receipt_ref": {
+      "description": "Chain-linked receipt for this test run.",
+      "type": "string",
+      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+    }
+  }
+}

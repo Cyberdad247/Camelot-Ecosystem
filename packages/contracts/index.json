@@ -2,9 +2,121 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "name": "camelot-contracts",
   "version": "1.2.0",
-  "description": "Camelot-OS v1.2 contract schemas (JSON Schema Draft 2020-12). Backward compatibility is guaranteed within the camelot-contracts/1 family. Bumping a schema's schema_version is a breaking change; non-breaking additions land in the same family.",
+  "description": "Camelot-OS v1.2 contract schemas (JSON Schema Draft 2020-12). Backward compatibility is guaranteed within the camelot-contracts/1 family. Bumping a schema's schema_version is a breaking change; non-breaking additions land in the same family. Catalog order follows §11 of the SADD+LLDD v1.2.",
   "json_schema_dialect": "https://json-schema.org/draft/2020-12/schema",
   "schemas": [
+    {
+      "file": "actor.schema.json",
+      "$id": "https://camelot-os/schemas/actor.schema.json",
+      "schema_version": "camelot-actor/1",
+      "purpose": "Principal identity (operator, knight, node, provider, service) used across receipts, leases, and decisions (§11).",
+      "key_fields_v12": ["id", "role", "node_trust_band"]
+    },
+    {
+      "file": "organization.schema.json",
+      "$id": "https://camelot-os/schemas/organization.schema.json",
+      "schema_version": "camelot-organization/1",
+      "purpose": "Top of the org → tenant → workspace hierarchy (§15.2).",
+      "key_fields_v12": ["organization_id", "tenant_ids", "max_risk_tier_allowed"]
+    },
+    {
+      "file": "tenant.schema.json",
+      "$id": "https://camelot-os/schemas/tenant.schema.json",
+      "schema_version": "camelot-tenant/1",
+      "purpose": "Tenant isolation boundary with tenant_profile customization that can only narrow policy (§9.2).",
+      "key_fields_v12": ["tenant_id", "agency_id", "policy_overrides", "max_risk_tier_allowed"]
+    },
+    {
+      "file": "workspace.schema.json",
+      "$id": "https://camelot-os/schemas/workspace.schema.json",
+      "schema_version": "camelot-workspace/1",
+      "purpose": "Leaf of the org → tenant → workspace hierarchy in the Cloudbrain namespace model (§15.2).",
+      "key_fields_v12": ["workspace_id", "namespace_prefix", "source_policy"]
+    },
+    {
+      "file": "node.schema.json",
+      "$id": "https://camelot-os/schemas/node.schema.json",
+      "schema_version": "camelot-node/1",
+      "purpose": "Node registry record: identity, profile, trust band, epoch acknowledgement, health (§7, §7.3).",
+      "key_fields_v12": ["trust_band", "registered_band", "last_epoch_ack"]
+    },
+    {
+      "file": "workload.schema.json",
+      "$id": "https://camelot-os/schemas/workload.schema.json",
+      "schema_version": "camelot-workload/1",
+      "purpose": "Runnable unit bound to a node and cartridge; leases bind to exact node, workload, cartridge, task, and manifest (§13.2).",
+      "key_fields_v12": ["workload_id", "node_id", "cartridge_id"]
+    },
+    {
+      "file": "cartridge.schema.json",
+      "$id": "https://camelot-os/schemas/cartridge.schema.json",
+      "schema_version": "camelot-cartridge/1",
+      "purpose": "Signed, versioned, registered bounded behavior declaration (§8.2, §8.3).",
+      "key_fields_v12": ["signer_trust_band", "risk_tier_invariant_cap", "verification"]
+    },
+    {
+      "file": "task.schema.json",
+      "$id": "https://camelot-os/schemas/task.schema.json",
+      "schema_version": "camelot-task/1",
+      "purpose": "Task record: submitted intent flowing through the Sentinel state machine (§13).",
+      "key_fields_v12": ["task_id", "status", "manifest_id", "lease_id"]
+    },
+    {
+      "file": "task-dag.schema.json",
+      "$id": "https://camelot-os/schemas/task-dag.schema.json",
+      "schema_version": "camelot-task-dag/1",
+      "purpose": "Merlin task-DAG compilation output binding workloads and glyphs under a task (§4, §17).",
+      "key_fields_v12": ["dag_id", "nodes", "edges"]
+    },
+    {
+      "file": "effect-manifest.schema.json",
+      "$id": "https://camelot-os/schemas/effect-manifest.schema.json",
+      "schema_version": "camelot-effect-manifest/1",
+      "purpose": "Pinned, hash-bound declaration of intent; carries declared risk_tier and effect_class (§11.1, §13.2).",
+      "key_fields_v12": ["effect_class", "declared_risk_tier", "declaration_hash", "immutable_inputs"]
+    },
+    {
+      "file": "policy-decision.schema.json",
+      "$id": "https://camelot-os/schemas/policy-decision.schema.json",
+      "schema_version": "camelot-policy-decision/1",
+      "purpose": "Sentinel §13.1 decision: allow / deny / approval_required with allowlist, limits, and quorum.",
+      "key_fields_v12": ["decision", "computed_risk_tier", "allowlist", "policy_bundle_hash"]
+    },
+    {
+      "file": "capability-lease.schema.json",
+      "$id": "https://camelot-os/schemas/capability-lease.schema.json",
+      "schema_version": "camelot-lease/1",
+      "purpose": "Manifest-bound lease issued by Sentinel (§11.2, §13.3).",
+      "key_fields_v12": ["effect_class", "declared_risk_tier", "subject.node_trust_band", "derived_capabilities_provenance", "approvals"]
+    },
+    {
+      "file": "memory-retrieval-lease.schema.json",
+      "$id": "https://camelot-os/schemas/memory-retrieval-lease.schema.json",
+      "schema_version": "camelot-memory-retrieval-lease/1",
+      "purpose": "Bounded retrieval lease for the Cloudbrain memory plane (§15.3).",
+      "key_fields_v12": ["scopes", "max_tiers", "graph_scope", "promotion_allowed"]
+    },
+    {
+      "file": "vfs-attestation.schema.json",
+      "$id": "https://camelot-os/schemas/vfs-attestation.schema.json",
+      "schema_version": "camelot-vfs-attestation/1",
+      "purpose": "VFS Guardian preflight attestation and source admission (§14.1, §14.2).",
+      "key_fields_v12": ["workspace_ref", "source_classification", "checks"]
+    },
+    {
+      "file": "evidence-envelope.schema.json",
+      "$id": "https://camelot-os/schemas/evidence-envelope.schema.json",
+      "schema_version": "operator-evidence/1",
+      "purpose": "Structured event envelope for evidence streaming to consoles and mobile (§12.1).",
+      "key_fields_v12": ["kind", "integrity", "receipt_ref", "parent_hash"]
+    },
+    {
+      "file": "context-packet.schema.json",
+      "$id": "https://camelot-os/schemas/context-packet.schema.json",
+      "schema_version": "camelot-context-packet/1",
+      "purpose": "Signed, token-budgeted context packet emitted by the context compiler (§15.3, §15.4).",
+      "key_fields_v12": ["sections", "total_input_tokens", "hard_max_tokens", "cache_signature"]
+    },
     {
       "file": "receipt.schema.json",
       "$id": "https://camelot-os/schemas/receipt.schema.json",
@@ -13,28 +125,67 @@
       "key_fields_v12": ["parent_hash", "chain_height", "actor.trust_band", "proof"]
     },
     {
-      "file": "capability-lease.schema.json",
-      "$id": "https://camelot-os/schemas/capability-lease.schema.json",
-      "schema_version": "camelot-lease/1",
-      "purpose": "Manifest-bound lease issued by Sentinel (§11.2, §13.3).",
-      "key_fields_v12": [
-        "effect_class",
-        "declared_risk_tier",
-        "subject.node_trust_band",
-        "derived_capabilities_provenance",
-        "approvals"
-      ]
+      "file": "receipt-chain.schema.json",
+      "$id": "https://camelot-os/schemas/receipt-chain.schema.json",
+      "schema_version": "camelot-receipt-chain/1",
+      "purpose": "Per-tenant receipt chain head and ledger-anchor state (v1.2, §11.3).",
+      "key_fields_v12": ["chain_height", "head_hash", "last_anchor_hash", "verified"]
     },
     {
-      "file": "cartridge.schema.json",
-      "$id": "https://camelot-os/schemas/cartridge.schema.json",
-      "schema_version": "camelot-cartridge/1",
-      "purpose": "Signed, versioned, registered bounded behavior declaration (§8.2, §8.3).",
-      "key_fields_v12": [
-        "signer_trust_band",
-        "risk_tier_invariant_cap",
-        "verification"
-      ]
+      "file": "gideon-verdict.schema.json",
+      "$id": "https://camelot-os/schemas/gideon-verdict.schema.json",
+      "schema_version": "camelot-gideon-verdict/1",
+      "purpose": "Independent verifier pass/block verdict (§18).",
+      "key_fields_v12": ["verdict", "gates", "declared_risk_tier_matches_observable_effect"]
+    },
+    {
+      "file": "boris-test-report.schema.json",
+      "$id": "https://camelot-os/schemas/boris-test-report.schema.json",
+      "schema_version": "camelot-boris-test-report/1",
+      "purpose": "Bounded contract-test report generated and run by Boris (v1.2, §18).",
+      "key_fields_v12": ["test_target", "gates", "result"]
+    },
+    {
+      "file": "scribe-summary.schema.json",
+      "$id": "https://camelot-os/schemas/scribe-summary.schema.json",
+      "schema_version": "camelot-scribe-summary/1",
+      "purpose": "Scribe evidence_summary envelope linking existing receipts without mutation (v1.2, Appendix E).",
+      "key_fields_v12": ["content_address", "input_receipt_refs", "verdicts"]
+    },
+    {
+      "file": "test-run-result.schema.json",
+      "$id": "https://camelot-os/schemas/test-run-result.schema.json",
+      "schema_version": "camelot-test-run-result/1",
+      "purpose": "Result of a bounded test run consumed by Gideon's test_result_validity gate (§18).",
+      "key_fields_v12": ["runner", "result", "summary"]
+    },
+    {
+      "file": "device-action.schema.json",
+      "$id": "https://camelot-os/schemas/device-action.schema.json",
+      "schema_version": "camelot-device-action/1",
+      "purpose": "Immutable device-action manifest for mobile calendar/SMS/call actions (§10, §21).",
+      "key_fields_v12": ["effect_class", "content_hash", "cached_epoch_max_age_min", "two_person_required"]
+    },
+    {
+      "file": "promotion.schema.json",
+      "$id": "https://camelot-os/schemas/promotion.schema.json",
+      "schema_version": "camelot-promotion/1",
+      "purpose": "Standby promotion record; witness_lock_ref required for auto_failover (§6.4, §6.5).",
+      "key_fields_v12": ["mode", "witness_lock_ref", "attested_quorum_count", "fenced_old_vps"]
+    },
+    {
+      "file": "persona.schema.json",
+      "$id": "https://camelot-os/schemas/persona.schema.json",
+      "schema_version": "camelot-persona/1",
+      "purpose": "Stunspot-compiled Knight persona with prohibited capability list (§16).",
+      "key_fields_v12": ["class", "competence_map.prohibited", "runtime_resource_profile"]
+    },
+    {
+      "file": "symbolect-tree.schema.json",
+      "$id": "https://camelot-os/schemas/symbolect-tree.schema.json",
+      "schema_version": "camelot-symbolect-tree/1",
+      "purpose": "Approved task-structure tree in Symbolect with glyph registry binding (§17).",
+      "key_fields_v12": ["root", "nodes", "glyph", "failure_policy"]
     }
   ]
 }

@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/task.schema.json",
+  "title": "Camelot Task",
+  "description": "v1.2 task record. A task is the unit submitted by an operator or intent; it carries an objective, a Symbolect structure, and a lifecycle that mirrors the Sentinel state machine (§13). Tasks produce effect manifests, leases, and receipts keyed by task_id. See Camelot-OS SADD+LLDD v1.2 §13.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "tenant_id",
+    "correlation_id",
+    "objective",
+    "status",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-task/1"
+    },
+    "task_id": {
+      "type": "string",
+      "pattern": "^task_[A-Za-z0-9_-]+$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "workspace_id": {
+      "type": "string",
+      "pattern": "^ws_[A-Za-z0-9_-]+$"
+    },
+    "correlation_id": {
+      "type": "string",
+      "pattern": "^cor_[A-Za-z0-9_-]+$"
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "symbolect_tree_ref": {
+      "description": "Reference to the approved Symbolect tree structure for this task (§17).",
+      "type": "string"
+    },
+    "manifest_id": {
+      "description": "Bound effect manifest once one is pinned (§11.1).",
+      "type": "string",
+      "pattern": "^eff_[A-Za-z0-9_-]+$"
+    },
+    "lease_id": {
+      "type": "string",
+      "pattern": "^lease_[A-Za-z0-9_-]+$"
+    },
+    "status": {
+      "description": "Mirrors §13 state machine.",
+      "type": "string",
+      "enum": [
+        "draft",
+        "classified",
+        "approval_required",
+        "preflight",
+        "lease_issued",
+        "running",
+        "verifying",
+        "completed",
+        "denied",
+        "failed",
+        "cancelled",
+        "timed_out",
+        "revoked",
+        "cleaned"
+      ]
+    },
+    "actor": {
+      "$ref": "https://camelot-os/schemas/actor.schema.json"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "receipt_refs": {
+      "description": "Chain-linked receipts produced by this task.",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+      }
+    }
+  }
+}

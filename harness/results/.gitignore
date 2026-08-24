@@ -1,0 +1,3 @@
+# Per-check logs written by harness/run_all.py. Regenerable build artifacts —
+# capture them as CI artifacts instead of committing them.
+*.log

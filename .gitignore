@@ -282,3 +282,6 @@ test_browser_upload_failure.html
 04_KINETIC/tiny-tts
 camelot-fable-25
 data/session_logs/
+
+# Harness golden set: pinned TEST-ONLY public key is committed by design (receipt-chain replay)
+!harness/golden-receipts/sentinel_test_public.pem

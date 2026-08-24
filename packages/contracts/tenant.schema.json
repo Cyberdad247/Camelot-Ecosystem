@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/tenant.schema.json",
+  "title": "Camelot Tenant",
+  "description": "v1.2 tenant record and tenant_profile (§9.2). Tenants are the isolation boundary: receipts are per-tenant chains, cache keys are tenant-scoped (§15.6), and policy_overrides may only narrow the policy surface. See Camelot-OS SADD+LLDD v1.2 §9.2 and §15.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "tenant_id", "organization_id", "agency_id", "max_risk_tier_allowed"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-tenant/1"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "organization_id": {
+      "type": "string",
+      "pattern": "^org_[A-Za-z0-9_-]+$"
+    },
+    "agency_id": {
+      "description": "Executive agency this tenant runs: marketing, commerce, wellness, research, engineering, client_operations.",
+      "type": "string",
+      "enum": [
+        "marketing",
+        "commerce",
+        "wellness",
+        "research",
+        "engineering",
+        "client_operations"
+      ]
+    },
+    "branding": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "logo_ref": { "type": "string" },
+        "theme": { "type": "string" },
+        "terminology": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "avatar": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "persona_id": { "type": "string" },
+        "display_name": { "type": "string" },
+        "role": { "type": "string" }
+      }
+    },
+    "enabled_modules": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "connector_allowlist": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "policy_overrides": {
+      "description": "Validated at registration to only narrow the policy surface; never widen (§9.2).",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "enum": [
+          "human_required",
+          "two_person_approval",
+          "denied",
+          "default"
+        ]
+      }
+    },
+    "retention": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "draft_days": { "type": "integer", "minimum": 0 },
+        "receipt_days": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "max_risk_tier_allowed": {
+      "description": "Tenant cannot execute effects above this tier (v1.2).",
+      "type": "string",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "suspended", "closed"]
+    }
+  }
+}

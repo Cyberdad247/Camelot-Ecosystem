@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/actor.schema.json",
+  "title": "Camelot Actor",
+  "description": "v1.2 principal identity (operator, knight, node, provider, or service). Shared fragment embedded via $ref into task, task-dag, memory-retrieval-lease, context-packet, evidence-envelope, and symbolect-tree schemas; the receipt schema carries an inline equivalent. Actors are identified by an immutable id plus a role and node binding; trust context is carried by the surrounding envelope (receipt.actor, lease.subject, decision.actor). The fragment has no schema_version of its own (versioned at catalog level as camelot-actor/1) so embedded actors stay consistent with the inline receipt actor shape. See Camelot-OS SADD+LLDD v1.2 §11 and §19.2.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "role"],
+  "properties": {
+    "id": {
+      "description": "Stable principal id, e.g. 'sentinel', 'sir-forge', 'operator:alice', 'node:engineering-01'.",
+      "type": "string",
+      "minLength": 1
+    },
+    "role": {
+      "type": "string",
+      "minLength": 1
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "node_trust_band": {
+      "description": "Trust band of the node under which this actor acted (v1.2).",
+      "type": "string",
+      "enum": [
+        "attested",
+        "attested-witness",
+        "enrolled",
+        "probationary",
+        "quarantined",
+        "revoked"
+      ]
+    },
+    "persona_class": {
+      "description": "Knight persona class when the actor is a compiled persona (§16).",
+      "type": "string"
+    },
+    "operator_id": {
+      "description": "Human operator identity when the actor is a person; paired with a tenant-scoped role.",
+      "type": "string"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "organization_id": {
+      "type": "string",
+      "pattern": "^org_[A-Za-z0-9_-]+$"
+    }
+  }
+}

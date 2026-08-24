@@ -1,16 +1,16 @@
 {
-    "name": "camelot-genkit-layer",
-    "version": "1.0.0",
-    "description": "Excalibur Engine Bridge for Camelot OS",
-    "main": "run_flow.ts",
-    "scripts": {
-        "dev": "tsx run_flow.ts"
-    },
-    "dependencies": {
-        "@genkit-ai/ai": "latest",
-        "@genkit-ai/core": "latest",
-        "@genkit-ai/googleai": "latest",
-        "tsx": "latest",
-        "typescript": "latest"
-    }
+  "name": "camelot-genkit-layer",
+  "version": "1.0.0",
+  "description": "Excalibur Engine Bridge for Camelot OS",
+  "main": "run_flow.ts",
+  "scripts": {
+    "dev": "tsx run_flow.ts"
+  },
+  "dependencies": {
+    "@genkit-ai/ai": "latest",
+    "@genkit-ai/core": "latest",
+    "@genkit-ai/googleai": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  }
 }

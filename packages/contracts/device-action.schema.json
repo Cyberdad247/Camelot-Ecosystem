@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/device-action.schema.json",
+  "title": "Camelot Device Action",
+  "description": "v1.2 immutable device-action manifest for mobile actions (calendar, SMS, call, open URL) per §10 and §21. A device action is permitted only when every condition in §10.1 holds: OS permission, device identity, tenant scope, active device-action lease, immutable manifest, explicit confirmation, and cached authority epoch within the §10.3 window. See Camelot-OS SADD+LLDD v1.2 §10 + §21.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "action_id",
+    "device_id",
+    "tenant_id",
+    "effect_class",
+    "declared_risk_tier",
+    "content_hash",
+    "authority_epoch",
+    "expires_at",
+    "confirmation_required"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-device-action/1"
+    },
+    "action_id": {
+      "type": "string",
+      "pattern": "^da_[A-Za-z0-9_-]+$"
+    },
+    "device_id": {
+      "description": "Device-bound identity (§10).",
+      "type": "string"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "effect_class": {
+      "description": "Device effect class per §5.5: device.calendar.write, device.sms.send, device.call.initiate.",
+      "type": "string",
+      "enum": [
+        "device.calendar.write",
+        "device.sms.send",
+        "device.call.initiate"
+      ]
+    },
+    "declared_risk_tier": {
+      "type": "string",
+      "enum": ["T0", "T1", "T2", "T3", "T4"]
+    },
+    "content": {
+      "description": "Exact action content: recipient, number, event, URL. Must match what the user confirms (§21).",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "recipient": { "type": "string" },
+        "phone_number": { "type": "string" },
+        "message": { "type": "string" },
+        "calendar_event": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "title": { "type": "string" },
+            "starts_at": { "type": "string", "format": "date-time" },
+            "ends_at": { "type": "string", "format": "date-time" }
+          }
+        },
+        "url": { "type": "string" }
+      }
+    },
+    "content_hash": {
+      "description": "Hash of the immutable content; user confirms the hash-consistent manifest (§21).",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "authority_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "cached_epoch_max_age_min": {
+      "description": "Cached-epoch window in minutes per §10.3 (30 for calendar, 5 for SMS/call).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "lease_id": {
+      "type": "string",
+      "pattern": "^lease_[A-Za-z0-9_-]+$"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confirmation_required": {
+      "type": "boolean",
+      "const": true
+    },
+    "two_person_required": {
+      "description": "True for T3+ device actions (SMS, call) per §5.5.",
+      "type": "boolean"
+    },
+    "os_permission": {
+      "description": "Android OS permission required (via permission broker, §10).",
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "confirmed", "executed", "denied", "expired"]
+    }
+  }
+}

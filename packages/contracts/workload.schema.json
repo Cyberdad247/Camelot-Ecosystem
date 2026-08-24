@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/workload.schema.json",
+  "title": "Camelot Workload",
+  "description": "v1.2 workload record. A runnable unit bound to a node and cartridge; leases bind to exact node, workload, cartridge, task, and manifest (§13.2). See Camelot-OS SADD+LLDD v1.2 §11.2 and §13.2.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "workload_id", "node_id", "cartridge_id", "kind"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-workload/1"
+    },
+    "workload_id": {
+      "description": "Workload id, e.g. 'sir-forge' (§13.2).",
+      "type": "string"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]*$"
+    },
+    "cartridge_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]+$"
+    },
+    "kind": {
+      "description": "Workload class, e.g. 'sir-forge', 'ant-mapper', 'owl-auditor', 'boris', 'scribe'.",
+      "type": "string"
+    },
+    "knight_class": {
+      "description": "Persona class if this workload runs a compiled Knight (§16).",
+      "type": "string"
+    },
+    "resource_profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "memory_mb": { "type": "integer", "minimum": 0 },
+        "timeout_s": { "type": "integer", "minimum": 0 },
+        "max_workers": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["registered", "running", "stopped", "revoked"]
+    }
+  }
+}
