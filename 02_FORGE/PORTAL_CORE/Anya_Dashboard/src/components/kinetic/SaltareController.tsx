@@ -33,7 +33,7 @@ export default function SaltareController() {
         try {
             const res = await fetch(SALTARE_ROUTE_URL, {
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'X-API-Key': KINETIC_TOKEN
                 },
@@ -44,9 +44,9 @@ export default function SaltareController() {
                     privacy: intent.includes("secret") ? 0.9 : 0.1
                 })
             });
-            
+
             if (!res.ok) throw new Error(`Gateway Error: ${res.status}`);
-            
+
             const data: RouteResponse = await res.json();
             setDecision(data);
         } catch (err) {
@@ -88,7 +88,7 @@ export default function SaltareController() {
                         <Zap size={10} /> Routing: {executing}...
                     </div>
                 )}
-                
+
                 {decision && (
                     <div className="space-y-3">
                         <div className="flex justify-between items-start">
@@ -99,7 +99,7 @@ export default function SaltareController() {
                                 SCORE: {decision.score.toFixed(4)}
                             </div>
                         </div>
-                        
+
                         <div className="grid grid-cols-2 gap-2 text-[8px] text-slate-500">
                             <div className="flex justify-between border-b border-white/5 pb-1">
                                 <span>VELOCITY</span>
@@ -132,7 +132,7 @@ export default function SaltareController() {
                 )}
 
                 {error && <div className="text-red-500 uppercase">❌ {error}</div>}
-                
+
                 {!executing && !decision && !error && (
                     <div className="h-full flex items-center justify-center text-slate-700 italic gap-2">
                         <Activity size={10} /> Awaiting Intent Dispatch...

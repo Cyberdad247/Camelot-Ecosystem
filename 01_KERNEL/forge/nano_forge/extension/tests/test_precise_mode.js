@@ -56,7 +56,7 @@ async function test_retry_policy() {
     console.log("[TEST] Action Executor Retry (D7)...");
     let scriptCalls = 0;
     const originalScripting = global.chrome.scripting.executeScript;
-    
+
     // Force transient failure
     global.chrome.scripting.executeScript = async () => {
         scriptCalls++;
@@ -66,7 +66,7 @@ async function test_retry_policy() {
     };
 
     const result = await ActionExecutor.perform(1, { action: 'click', target: 'Test' }, 'lane_retry');
-    
+
     global.chrome.scripting.executeScript = originalScripting;
 
     // Expected:

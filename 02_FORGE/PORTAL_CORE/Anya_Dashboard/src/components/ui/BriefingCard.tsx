@@ -37,7 +37,7 @@ export default function BriefingCard({
                 <span className="text-2xl font-bold text-white tracking-tight">{value}</span>
                 {trend && (
                     <span className={`text-[10px] font-bold ${
-                        trendType === 'positive' ? 'text-emerald-500' : 
+                        trendType === 'positive' ? 'text-emerald-500' :
                         trendType === 'negative' ? 'text-red-500' : 'text-slate-500'
                     }`}>
                         {trend}
@@ -53,9 +53,9 @@ export default function BriefingCard({
 
             {/* Subtle bottom progress or accent */}
             <div className="absolute bottom-0 left-0 h-0.5 w-full bg-slate-800">
-                <div 
-                    className="h-full transition-all duration-1000" 
-                    style={{ backgroundColor: color, width: '40%' }} 
+                <div
+                    className="h-full transition-all duration-1000"
+                    style={{ backgroundColor: color, width: '40%' }}
                 />
             </div>
         </div>

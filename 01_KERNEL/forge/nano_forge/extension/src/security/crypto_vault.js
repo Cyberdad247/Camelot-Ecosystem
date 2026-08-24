@@ -17,10 +17,10 @@ export class CryptoVault {
         const stored = await chrome.storage.local.get('master_key_jwk');
         if (stored.master_key_jwk) {
             this.key = await crypto.subtle.importKey(
-                'jwk', 
-                stored.master_key_jwk, 
-                ALGO, 
-                true, 
+                'jwk',
+                stored.master_key_jwk,
+                ALGO,
+                true,
                 ['encrypt', 'decrypt']
             );
         } else {
@@ -34,10 +34,10 @@ export class CryptoVault {
         if (!this.key) await this.init();
         const iv = crypto.getRandomValues(new Uint8Array(12));
         const encoded = new TextEncoder().encode(JSON.stringify(data));
-        
+
         const encrypted = await crypto.subtle.encrypt(
-            { name: 'AES-GCM', iv: iv }, 
-            this.key, 
+            { name: 'AES-GCM', iv: iv },
+            this.key,
             encoded
         );
 
@@ -54,8 +54,8 @@ export class CryptoVault {
         const data = new Uint8Array(packed.content);
 
         const decrypted = await crypto.subtle.decrypt(
-            { name: 'AES-GCM', iv: iv }, 
-            this.key, 
+            { name: 'AES-GCM', iv: iv },
+            this.key,
             data
         );
 

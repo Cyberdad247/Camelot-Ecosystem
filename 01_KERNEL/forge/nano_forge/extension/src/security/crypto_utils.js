@@ -8,10 +8,10 @@ const CryptoUtils = {
     async getKey(password) {
         const enc = new TextEncoder();
         const keyMaterial = await crypto.subtle.importKey(
-            "raw", 
-            enc.encode(password), 
-            { name: "PBKDF2" }, 
-            false, 
+            "raw",
+            enc.encode(password),
+            { name: "PBKDF2" },
+            false,
             ["deriveKey"]
         );
         return crypto.subtle.deriveKey(
@@ -33,7 +33,7 @@ const CryptoUtils = {
         const key = await this.getKey(password);
         const iv = crypto.getRandomValues(new Uint8Array(12));
         const enc = new TextEncoder();
-        
+
         const encrypted = await crypto.subtle.encrypt(
             { name: "AES-GCM", iv: iv },
             key,

@@ -59,12 +59,12 @@ global.window.Kinetic = Kinetic;
 // 2. Navigator Logic (from content_sentry.js)
 function execute_navigator(instructions) {
   console.log(`[NAVIGATOR] Executing: ${instructions.action}`);
-  
+
   if (instructions.action === "CLICK") {
       const result = window.Kinetic.click(instructions.target);
       console.log(`[NAVIGATOR] Click Result:`, result);
   }
-  
+
   if (instructions.action === "TYPE") {
       const result = window.Kinetic.type(instructions.target, instructions.text);
       console.log(`[NAVIGATOR] Type Result:`, result);

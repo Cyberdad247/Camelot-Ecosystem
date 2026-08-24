@@ -12,7 +12,7 @@ export class DiagnosticCore {
 
     async runAll() {
         console.log("⚡ [DIAGNOSTIC] Starting Full System Scan...");
-        
+
         await this.testDeployment();
         await this.testIntegration();
         await this.testExecution();
@@ -44,7 +44,7 @@ export class DiagnosticCore {
     // T2: Integration
     async testIntegration() {
         console.log("   > Testing Integration...");
-        
+
         // Helper: Timeout Wrapper
         const withTimeout = (promise, ms = 15000) => Promise.race([
             promise,
@@ -84,7 +84,7 @@ export class DiagnosticCore {
              const response = await new Promise(resolve => {
                  chrome.runtime.sendMessage({ action: "HEARTBEAT" }, resolve);
              });
-             
+
              if (response && response.status === "ALIVE") {
                  this.log('execution', 'PASS', 'Background Service Worker: ACTIVE');
              } else {
@@ -121,7 +121,7 @@ export class DiagnosticCore {
             const aria = el.getAttribute('aria-label');
             if (label || aria) labeled++;
         });
-        
+
         const coverage = Math.round((labeled / inputs.length) * 100);
         if (coverage > 80) this.log('ux', 'PASS', `Accessibility Coverage: ${coverage}%`);
         else this.log('ux', 'WARN', `Accessibility Low: ${coverage}%`);
@@ -134,7 +134,7 @@ export class DiagnosticCore {
     calculateScore() {
         let total = 0;
         let passed = 0;
-        
+
         // Only iterate over test category arrays, not the 'score' property
         const categories = ['deployment', 'integration', 'execution', 'ui', 'ux'];
         categories.forEach(category => {
@@ -145,7 +145,7 @@ export class DiagnosticCore {
                 });
             }
         });
-        
+
         this.results.score = total === 0 ? 0 : Math.round((passed / total) * 100);
         return this.results;
     }

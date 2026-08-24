@@ -60,24 +60,24 @@ class MicrocubicMatrix extends EventEmitter {
    */
   private async executeCube(task: SwarmTask) {
     console.log(`[Microcube ${task.id}] Booting... Executing task: ${task.type}`);
-    
+
     try {
       let result;
 
       if (task.type === 'draft_tenant_notice') {
         const { tenantName, threadId, issue, tone } = task.payload;
         const prompt = `Write a short, ${tone} SMS notice to tenant ${tenantName} regarding: ${issue}. Keep it under 160 characters.`;
-        
+
         const response = await flashModel.generateContent(prompt);
         result = response.response.text();
-        
+
         console.log(`[Microcube ${task.id}] Task Complete. Output: ${result}`);
-        
+
         // KINETIC ACTION: Write directly to Echo_Ω Database
         await SovereignDB.logMessage(
-          threadId || 'default-thread', 
-          'SMS', 
-          result, 
+          threadId || 'default-thread',
+          'SMS',
+          result,
           'STAGED_FOR_DELIVERY'
         );
       }
@@ -88,7 +88,7 @@ class MicrocubicMatrix extends EventEmitter {
     } catch (error) {
       console.error(`[Microcube ${task.id}] FATAL EXCEPTION:`, error);
       this.emit('cube_collapsed', { taskId: task.id, success: false, error });
-      
+
       // Re-queue on failure
       this.queue.push(task);
     }

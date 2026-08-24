@@ -54,12 +54,12 @@ class ProfileManager {
     async createProfile(name, type = "DESKTOP") {
         // If name is specific like "Mobile_Drone", use deterministic ID to reuse it/overwrite
         const id = (name === "Mobile_Drone") ? "mobile_drone_v1" : crypto.randomUUID();
-        
+
         const profile = {
             id,
             name,
             type,
-            userAgent: type === "MOBILE" 
+            userAgent: type === "MOBILE"
                 ? "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
                 : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
             screen: type === "MOBILE" ? { width: 390, height: 844 } : { width: 1920, height: 1080 },
@@ -68,7 +68,7 @@ class ProfileManager {
             timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
             locale: navigator.language
         };
-        
+
         await chrome.storage.local.set({ [`profile_${id}`]: profile });
         return profile;
     }
@@ -81,7 +81,7 @@ class ProfileManager {
 
         // Check Library first, then Custom
         let profile = PROFILE_LIBRARY[id] || this.customProfiles[id];
-        
+
         // If not found in memory, check storage
         if (!profile) {
             const stored = await chrome.storage.local.get(`profile_${id}`);
@@ -92,10 +92,10 @@ class ProfileManager {
             this.activeProfile = profile;
             // Persist choice to Sync for Options Page
             await chrome.storage.sync.set({ stealthConfig: { activeProfile: id } });
-            
+
             // 2. Restore cookies for new profile
             await this.restoreCookies(this.activeProfile.id);
-            
+
             console.log(`[PROFILE] Switched to Identity: ${this.activeProfile.name}`);
             return true;
         }
@@ -120,7 +120,7 @@ class ProfileManager {
         // Restore
         const data = await chrome.storage.local.get(`cookies_${profileId}`);
         const cookies = data[`cookies_${profileId}`] || [];
-        
+
         for (const c of cookies) {
             // Chrome API requires specific format for setting
             const newComp = {
@@ -140,7 +140,7 @@ class ProfileManager {
     }
 
     // --- IMPORT / EXPORT (Team Security) ---
-    
+
     async exportProfile(profileId, password) {
         // Gather Data: Config + Cookies
         const data = await chrome.storage.local.get([`profile_${profileId}`, `cookies_${profileId}`]);
@@ -148,7 +148,7 @@ class ProfileManager {
             config: data[`profile_${profileId}`],
             cookies: data[`cookies_${profileId}`] || []
         };
-        
+
         // Encrypt
         return await self.CryptoUtils.encryptData(exportBlob, password);
     }
@@ -157,17 +157,17 @@ class ProfileManager {
         try {
             const data = await self.CryptoUtils.decryptData(encryptedBlob, password);
             if (!data.config || !data.config.id) throw new Error("Invalid Profile Structure");
-            
-            // Re-ID to avoid collisions? Or overwrite? 
+
+            // Re-ID to avoid collisions? Or overwrite?
             // "Team Sync" implies overwrite. "Clone" implies new ID.
             // We'll use the ID from the blob to allow syncing.
             const id = data.config.id;
-            
+
             await chrome.storage.local.set({
                 [`profile_${id}`]: data.config,
                 [`cookies_${id}`]: data.cookies
             });
-            
+
             return { status: "SUCCESS", name: data.config.name, id: id };
         } catch (e) {
             return { status: "ERROR", msg: e.message };

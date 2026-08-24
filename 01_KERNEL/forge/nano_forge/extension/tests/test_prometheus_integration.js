@@ -50,10 +50,10 @@ async function runTest() {
         const graph = new GraphRAG();
         const node1 = TOONEncoder.encodeNote("Note A", "Concept Alpha is related to Beta.");
         const node2 = TOONEncoder.encodeNote("Note B", "Concept Beta is critical for Gamma.");
-        
+
         await graph.indexNodes([node1, node2]);
         const results = await graph.query("What is related to Beta?");
-        
+
         if (results.nodes.length >= 1) {
             console.log("✅ GraphRAG: Success (Found related nodes)");
             passed++;
@@ -71,9 +71,9 @@ async function runTest() {
             summary: `This is a long summary for node ${i} that takes up tokens. `.repeat(10),
             entities: [`Entity${i}`]
         }));
-        
+
         const compressed = await Sentinel.compress(nodes, { target_tokens: 50 });
-        
+
         if (compressed.nodes.length < 10 || compressed.compressed_tokens < compressed.original_tokens) {
             console.log(`✅ Sentinel: Success (Compressed ${compressed.original_tokens} -> ${compressed.compressed_tokens})`);
             passed++;
@@ -87,7 +87,7 @@ async function runTest() {
     try {
         const spawner = new KnightSpawner(mockProfileManager);
         const squad = await spawner.deploySquad("Test Mission");
-        
+
         if (squad.tabIds.length === 3 && squad.conf.length === 3) {
             console.log("✅ Knight Spawner: Success (Deployed 3 Knights)");
             passed++;

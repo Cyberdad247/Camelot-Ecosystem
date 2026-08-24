@@ -52,7 +52,7 @@ const voiceSquire = new VoiceSquire();
 async function clipCurrentPage() {
     try {
         const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-        
+
         if (!tab || !tab.url.startsWith('http')) {
             voiceSquire.speak("Cannot clip this page.");
             return;
@@ -73,7 +73,7 @@ async function clipCurrentPage() {
             action: 'INDEX_TOON_NODE',
             node: article
         });
-        
+
         voiceSquire.speak("Page clipped and indexed.");
         return article;
 
@@ -94,7 +94,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 function addIntelCard(intel) {
     const card = document.createElement('div');
     card.className = 'intel-card';
-    
+
     // Color coding by Skill/Agent
     const skill = intel.skill || "GENERAL";
     if (skill.includes("NAV")) card.style.borderLeftColor = "#ffeb3b";
@@ -102,7 +102,7 @@ function addIntelCard(intel) {
     if (skill.includes("SENTRY")) card.style.borderLeftColor = "#f44336";
 
     const time = new Date(intel.timestamp).toLocaleTimeString();
-    
+
     // Build Core Content
     let html = `
         <div class="meta">
@@ -130,7 +130,7 @@ function addIntelCard(intel) {
             </div>
         `;
     }
-    
+
     card.innerHTML = html;
     feed.prepend(card);
 }
@@ -232,7 +232,7 @@ if (btnSpawnSquad) {
         const goal = promptInput.value.trim() || "General Research";
         squadStatus.textContent = "Deploying 3 Knights...";
         voiceSquire.speak(`Deploying Knight Squad for ${goal}`);
-        
+
         chrome.runtime.sendMessage({ action: "SPAWN_SQUAD", goal: goal }, (res) => {
             if (res && res.status === "SUCCESS") {
                 const knights = res.squad.conf.map(k => k.role.split(' ')[1]).join(' • '); // "Apis • Syntax • Zenith"
@@ -254,7 +254,7 @@ if (btnSynthesize) {
         const query = promptInput.value.trim() || "Summarize all research";
         voiceSquire.speak("Synthesizing Intelligence Report...");
         squadStatus.textContent = "Synthesizing...";
-        
+
         chrome.runtime.sendMessage({ action: "SYNTHESIZE_REPORT", query: query }, (res) => {
             if (res && res.status === "SUCCESS") {
                 voiceSquire.speak("Synthesis Complete.");
@@ -302,7 +302,7 @@ if (btnVoice) {
                     voiceText.textContent = `Error: ${error}`;
                 }
             );
-            
+
             if (started) {
                 voiceText.textContent = 'Listening for "Nano" or "Anya"...';
                 voiceSquire.speak("Voice command activated.");
@@ -318,7 +318,7 @@ if (btnVoice) {
 // Voice Command Logic
 async function executeVoiceCommand(cmd) {
     const raw = cmd.command.toLowerCase();
-    
+
     if (raw.includes("clip") || raw.includes("save this")) {
         voiceSquire.speak("Clipping page to Brain Notebook.");
         await clipCurrentPage();
@@ -339,7 +339,7 @@ async function executeVoiceCommand(cmd) {
         voiceSquire.speak("Mission queued.");
         return;
     }
-    
+
     if (raw.includes("status")) {
         const queueCount = document.getElementById('queueContainer')?.children.length || 0;
         voiceSquire.speak(`Current status: ${UI_STATE._state.missionStatus}. Queue has ${queueCount} missions.`);
@@ -365,7 +365,7 @@ function updateQueueUI() {
             container.style.display = 'none';
             return;
         }
-        container.innerHTML = `<div style="padding:4px; font-weight:bold; color:#666;">MISSION QUEUE (${res.queue.length})</div>` + 
+        container.innerHTML = `<div style="padding:4px; font-weight:bold; color:#666;">MISSION QUEUE (${res.queue.length})</div>` +
             res.queue.map((m, i) => `<div style="font-size:0.8em; padding:2px 8px; border-top:1px solid #222; color:#aaa;">${i+1}. [${m.profileName}] ${m.qfocus}</div>`).join('');
         container.style.display = 'block';
     });
@@ -376,9 +376,9 @@ function loadProfiles() {
         if (res && res.profiles) {
             profileSelect.innerHTML = res.profiles.map(p => `<option value="${p.id}">${p.name}</option>`).join('');
             if (res.activeId) profileSelect.value = res.activeId;
-            
+
             // Update Observer state for reactive UI
-            UI_STATE.set({ 
+            UI_STATE.set({
                 activeProfile: res.activeProfile,
                 profiles: res.profiles
             });
@@ -405,7 +405,7 @@ chrome.storage.local.get(['research_history'], (data) => {
         // We recreate cards from historic data objects
         // To keep it simple for now, we just restore the innerHTML but that breaks events.
         // BETTER: Storage should hold the 'intel' objects.
-        // For now, simple innerHTML restore but re-bind links? 
+        // For now, simple innerHTML restore but re-bind links?
         feed.innerHTML = data.research_history;
     }
 });

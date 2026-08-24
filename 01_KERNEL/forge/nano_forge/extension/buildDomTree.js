@@ -810,8 +810,8 @@ window.buildDomTree = (
     // When constructing node data, include the ID:
     // This part is hypothetical as I don't see the full processNode function in the view.
     // I need to find where the node object is constructed and inject the ID.
-    
-    // RE-READING STRATEGY: 
+
+    // RE-READING STRATEGY:
     // Since I cannot see the specific lines for node construction (it was truncated),
     // I will read the REST of buildDomTree.js first.
 
@@ -1477,7 +1477,7 @@ window.buildDomTree = (
   function toTOON(map, rootId) {
       // Header: N=Hierarchy Indent | ID=NanoID | Tag | Vis=Visibility(T/F) | Text | Ref=RefID
       let output = ["#@ N|ID|Tag|Vis|Text|Ref"];
-      
+
       function limitText(text) {
           if (!text) return "_";
           return text.replace(/\|/g, "").replace(/\n/g, " ").substring(0, 60).trim() || "_";
@@ -1486,22 +1486,22 @@ window.buildDomTree = (
       function traverse(id, depth) {
           const node = map[id];
           if (!node) return;
-          
+
           const indent = " ".repeat(depth);
           const tag = node.tagName.toLowerCase();
           const vis = node.isVisible ? "T" : "F";
-          
+
           let text = "_";
           if (node.text) text = limitText(node.text); // TEXT_NODE
           else if (node.attributes && node.attributes.value) text = limitText(node.attributes.value);
           else if (node.attributes && node.attributes.placeholder) text = limitText(node.attributes.placeholder);
           else if (node.attributes && node.attributes['aria-label']) text = limitText(node.attributes['aria-label']);
-          
+
           // Get the Real Grounding ID (injected earlier)
-          // Note: map[id] is the nodeData. We need the original element to get the attribute? 
+          // Note: map[id] is the nodeData. We need the original element to get the attribute?
           // Wait, buildDomTree returns an ID to map, but doesn't store the Grounding ID in nodeData.
           // FIX: We need to store the Grounding ID in nodeData during traversal.
-          
+
           // Fallback if not stored (will fix in next step if needed, but for now assuming logic flow)
           const groundingId = node.attributes && node.attributes['data-nano-id'] ? node.attributes['data-nano-id'] : "_";
 

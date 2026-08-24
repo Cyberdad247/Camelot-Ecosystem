@@ -93,7 +93,7 @@ export class TOONEncoder {
       .filter(l => l.trim().startsWith('//') || l.trim().startsWith('#'))
       .map(l => l.replace(/^[#/\s]+/, ''))
       .join(' ');
-    
+
     return comments || `${language} file with ${content.split('\n').length} lines`;
   }
 
@@ -118,7 +118,7 @@ export class TOONEncoder {
 
   static generateNoteSummary(content) {
     const firstPara = content.split('\n\n')[0];
-    return firstPara.length > 200 
+    return firstPara.length > 200
       ? firstPara.slice(0, 197) + '...'
       : firstPara;
   }
@@ -127,7 +127,7 @@ export class TOONEncoder {
     const entities = new Set();
     const hashtags = content.match(/#\w+/g) || [];
     hashtags.forEach(tag => entities.add(tag.slice(1)));
-    
+
     const wikiLinks = content.match(/\[\[([\w\s]+)\]\]/g) || [];
     wikiLinks.forEach(link => {
       const term = link.slice(2, -2);
@@ -145,14 +145,14 @@ export class TOONEncoder {
   static extractArticleEntities(content) {
     const entities = new Set();
     const matches = [...content.matchAll(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b/g)];
-    
+
     for (const match of matches) {
-      if (match[0].length > 3) { 
+      if (match[0].length > 3) {
         entities.add(match[0]);
       }
     }
 
-    return Array.from(entities).slice(0, 20); 
+    return Array.from(entities).slice(0, 20);
   }
 
   static generateId(prefix, identifier) {
@@ -165,7 +165,7 @@ export class TOONEncoder {
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
       hash = ((hash << 5) - hash) + char;
-      hash = hash & hash; 
+      hash = hash & hash;
     }
     return Math.abs(hash).toString(36);
   }

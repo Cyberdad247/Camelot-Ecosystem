@@ -13,13 +13,13 @@ export class KnightSpawner {
 
     /**
      * Deploy a Squad for a research mission
-     * @param {string} missionGoal 
+     * @param {string} missionGoal
      * @param {Array<string>} [roster] - Optional list of Persona IDs
      */
     async deploySquad(missionGoal, roster = ['LADY_APIS', 'SIR_SYNTAX', 'SIR_ZENITH']) {
         console.log(`[SPAWNER] Deploying Squad for: ${missionGoal}`);
         const squadId = crypto.randomUUID();
-        
+
         // Define Squad Configuration based on Roster
         const squadConfig = roster.map(knightId => {
             const knight = ROUND_TABLE[knightId];
@@ -52,7 +52,7 @@ export class KnightSpawner {
         }
 
         this.activeSquads.set(squadId, squadTabs);
-        
+
         return {
             squadId,
             conf: squadConfig,
@@ -62,8 +62,8 @@ export class KnightSpawner {
 
     /**
      * Handoff a mission to a different Persona (e.g. on Block)
-     * @param {number} oldTabId 
-     * @param {string} newPersonaId 
+     * @param {number} oldTabId
+     * @param {string} newPersonaId
      */
     async handoff(oldTabId, newPersonaId) {
         console.log(`[SPAWNER] Initiating Handoff for Tab ${oldTabId} -> ${newPersonaId}`);
@@ -79,7 +79,7 @@ export class KnightSpawner {
 
         // 3. Spawn New Tab (Fresh Identity)
         const newTab = await chrome.tabs.create({ url: 'about:blank', active: true });
-        
+
         // 4. Inject New Persona
         await chrome.scripting.executeScript({
             target: { tabId: newTab.id },
@@ -95,7 +95,7 @@ export class KnightSpawner {
 
         // 5. Navigate
         await chrome.tabs.update(newTab.id, { url: url });
-        
+
         return newTab.id;
     }
 

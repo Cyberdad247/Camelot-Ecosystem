@@ -15,7 +15,7 @@ export class ActionExecutor {
      */
     static async perform(tabId, intent, laneId = 'default_lane') {
         const transcript = new TranscriptManager(laneId);
-        
+
         // 0. Meta-Cognition: The Mirror (Phase 51)
         if (typeof process_via_offscreen !== 'undefined') {
             console.log(`[MIRROR] Reflecting on action: ${intent.action}...`);
@@ -48,7 +48,7 @@ export class ActionExecutor {
             try {
                 await transcript.log('ACTION_ATTEMPT', { attempt, intent });
                 const result = await this._executeAttempt(tabId, intent);
-                
+
                 await transcript.log('ACTION_SUCCESS', { attempt, result });
                 return result;
 
@@ -64,7 +64,7 @@ export class ActionExecutor {
                 // On final retry failure, try Self-Healing
                 if (attempt > MAX_RETRIES) {
                     console.warn(`[HER] All retries exhausted. Initiating Self-Healing...`);
-                    
+
                     const diagnosis = await VisionHealer.heal(tabId, intent, e.message, typeof process_via_offscreen !== 'undefined' ? process_via_offscreen : null);
 
                     if (diagnosis.healed) {

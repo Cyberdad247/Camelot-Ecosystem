@@ -99,7 +99,7 @@ export async function enforceBiometricGate(intent: string, titanLink: { send: (p
 
     // Generate ephemeral challenge data
     const challengePayload = {
-      kind: 'IRON_GATE_CHALLENGE',
+      kind: 'IRON_GATE_CHALLENGE' as const,
       reason: `Remote Access Required for: ${intent}`,
       riskLevel: risk,
       timestamp: Math.floor(Date.now() / 1000),
@@ -108,7 +108,7 @@ export async function enforceBiometricGate(intent: string, titanLink: { send: (p
 
     const response = await titanLink.send(challengePayload);
 
-    const isVerified = await MoltbotGateway.verifySignature(challengePayload, response, "SOVEREIGN_PUB_KEY");
+    const isVerified = await MoltbotGateway.verifySignature(challengePayload, response as any, "SOVEREIGN_PUB_KEY");
 
     if (!isVerified) {
       throw new Error("⛔ IRON GATE: Biometrics Rejected. Unauthorized Access Blocked.");

@@ -49,26 +49,26 @@ export const SettingsScreen = () => {
               <Globe size={18} color="$colorSecondary" />
               <Text fS={14} fOW="bold" col="$colorSecondary">COGNITIVE PROVIDERS</Text>
             </XStack>
-            
-            <ProviderItem 
-               label="OpenAI (GPT-4.5)" 
-               active={providers.openai} 
-               onToggle={() => toggleProvider('openai')} 
+
+            <ProviderItem
+               label="OpenAI (GPT-4.5)"
+               active={providers.openai}
+               onToggle={() => toggleProvider('openai')}
             />
-            <ProviderItem 
-               label="Anthropic (Claude-3.5)" 
-               active={providers.anthropic} 
-               onToggle={() => toggleProvider('anthropic')} 
+            <ProviderItem
+               label="Anthropic (Claude-3.5)"
+               active={providers.anthropic}
+               onToggle={() => toggleProvider('anthropic')}
             />
-            <ProviderItem 
-               label="Local Llama (LLM-3-8B)" 
-               active={providers.local_llama} 
-               onToggle={() => toggleProvider('local_llama')} 
+            <ProviderItem
+               label="Local Llama (LLM-3-8B)"
+               active={providers.local_llama}
+               onToggle={() => toggleProvider('local_llama')}
             />
-            <ProviderItem 
-               label="Clawdbot Gateway" 
-               active={providers.clawdbot} 
-               onToggle={() => toggleProvider('clawdbot')} 
+            <ProviderItem
+               label="Clawdbot Gateway"
+               active={providers.clawdbot}
+               onToggle={() => toggleProvider('clawdbot')}
             />
           </YStack>
 

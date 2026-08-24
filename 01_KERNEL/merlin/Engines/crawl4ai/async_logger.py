@@ -1,6 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import os
+import string
 from abc import ABC, abstractmethod
 from datetime import datetime
 from enum import Enum
@@ -196,31 +197,46 @@ class AsyncLogger(AsyncLoggerBase):
         if level.value < self.log_level.value:
             return
 
-        # avoid conflict with rich formatting
-        parsed_message = message.replace("[", "[[").replace("]", "]]")
-        if params:
-            # FIXME: If there are formatting strings in floating point format,
-            # this may result in colors and boxes not being applied properly.
-            # such as {value:.2f}, the value is 0.23333 format it to 0.23,
-            # but we replace("0.23333", "[color]0.23333[/color]")
-            formatted_message = parsed_message.format(**params)
-            for key, value in params.items():
-                # value_str may discard `[` and `]`, so we need to replace it.
-                value_str = str(value).replace("[", "[[").replace("]", "]]")
-                # check is need apply color
-                if colors and key in colors:
-                    color_str = f"[{colors[key]}]{value_str}[/{colors[key]}]"
-                    formatted_message = formatted_message.replace(value_str, color_str)
-                    value_str = color_str
-
-                # check is need apply box
-                if boxes and key in boxes:
-                    formatted_message = formatted_message.replace(
-                        value_str, create_box_message(value_str, type=str(level))
-                    )
-
+        if not params:
+            formatted_message = message.replace("[", "[[").replace("]", "]]")
         else:
-            formatted_message = parsed_message
+            formatter = string.Formatter()
+            parts = []
+
+            for literal, field_name, format_spec, conversion in formatter.parse(message):
+                parts.append(literal.replace("[", "[[").replace("]", "]]"))
+
+                if field_name is not None:
+                    try:
+                        val, used_key = formatter.get_field(field_name, (), params)
+                    except KeyError:
+                        val = "{" + field_name + "}"
+                        used_key = None
+
+                    if used_key is not None:
+                        fmt_string = "{"
+                        if conversion:
+                            fmt_string += f"!{conversion}"
+                        if format_spec:
+                            fmt_string += f":{format_spec}"
+                        fmt_string += "}"
+
+                        val_str = fmt_string.format(val)
+                    else:
+                        val_str = str(val)
+
+                    val_str = val_str.replace("[", "[[").replace("]", "]]")
+
+                    if colors and used_key in colors:
+                        color_tag = colors[used_key]
+                        val_str = f"[{color_tag}]{val_str}[/{color_tag}]"
+
+                    if boxes and used_key in boxes:
+                        val_str = create_box_message(val_str, type=str(level))
+
+                    parts.append(val_str)
+
+            formatted_message = "".join(parts)
 
         # Construct the full log line
         color: LogColor = base_color or self.colors[level]

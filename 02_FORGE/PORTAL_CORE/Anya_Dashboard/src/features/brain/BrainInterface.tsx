@@ -148,7 +148,7 @@ export default function BrainInterface() {
       </div>
 
       {/* Right Panel: Chat */}
-      <Card className="flex-1 flex flex-col h-[500px] lg:h-full border-none shadow-2xl bg-slate-900/50 backdrop-blur-sm" 
+      <Card className="flex-1 flex flex-col h-[500px] lg:h-full border-none shadow-2xl bg-slate-900/50 backdrop-blur-sm"
             title="Anya's Interface"
             description="Commanding the Kernel & Engine">
 
@@ -157,7 +157,7 @@ export default function BrainInterface() {
             {isConnected ? 'websocket linked to morgana bridge' : 'websocket offline, dispatch still available'}
           </span>
         </div>
-        
+
         <div className="flex-1 overflow-y-auto space-y-4 mb-4 p-2">
           {messages.map((m, i) => (
             <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -179,8 +179,8 @@ export default function BrainInterface() {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleAsk()}
           />
-          <button 
-            onClick={handleAsk} 
+          <button
+            onClick={handleAsk}
             className="p-3 bg-cyan-600 rounded-full text-white"
             title="Send Message"
             aria-label="Send Message"

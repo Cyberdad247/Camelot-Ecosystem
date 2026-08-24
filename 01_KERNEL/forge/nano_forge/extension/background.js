@@ -28,8 +28,8 @@ const llmAdapter = {
         return await process_via_offscreen("EXECUTE_PROMPT", { prompt, context: [] });
     }
 };
-// SynthesisEngine relies on direct graph access. This likely needs refactoring too 
-// or SynthesisEngine moves to offscreen. For now, we will stub it or leave it broken 
+// SynthesisEngine relies on direct graph access. This likely needs refactoring too
+// or SynthesisEngine moves to offscreen. For now, we will stub it or leave it broken
 // (assuming SynthesisEngine isn't critical for this specific test or user can wait).
 // Actually, SynthesisEngine is imported. If it needs knowledgeGraph in constructor, we have a problem.
 // Solution: Move SynthesisEngine to offscreen in a future step. For now, comment out.
@@ -79,11 +79,11 @@ function connectTitanLink() {
 
         if (msg.kind === "handshake_ack") {
             console.log("[TITANLINK] Handshake Accepted. Permissions:", msg.permissions);
-            
+
             // Task D10: Sync Vault Token to Storage
             if (msg.secrets && msg.secrets.VAULT_TOKEN) {
-                chrome.storage.sync.set({ 
-                    operatorConfig: { vaultToken: msg.secrets.VAULT_TOKEN } 
+                chrome.storage.sync.set({
+                    operatorConfig: { vaultToken: msg.secrets.VAULT_TOKEN }
                 });
             }
 

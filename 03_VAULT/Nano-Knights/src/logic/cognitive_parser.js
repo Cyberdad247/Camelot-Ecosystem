@@ -8,7 +8,7 @@ export class CognitiveParser {
 
     /**
      * Parses the raw LLM response.
-     * @param {any} rawInput 
+     * @param {any} rawInput
      * @returns {object} { tags: { TagName: Content }, content: any }
      */
     static parse(rawInput) {
@@ -28,7 +28,7 @@ export class CognitiveParser {
 
         // 1. Extract Tags
         const matches = [...rawText.matchAll(this.TAG_REGEX)];
-        
+
         matches.forEach(m => {
             const tagName = m[1];
             const content = m[2].trim();

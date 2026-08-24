@@ -16,7 +16,7 @@ export default function SaltareController() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     intent: `execute ${tool}`, // Simple keyword intent for now, or explicit protocol if Morgana supports it
-                    // Ideally we'd send structured command, but Morgana parses intent. 
+                    // Ideally we'd send structured command, but Morgana parses intent.
                     // Let's use the keywords we added to Morgana Router: "audit" -> TRIVY, "fix" -> BIOME, "rustdesk" -> REMOTE
                 })
             });

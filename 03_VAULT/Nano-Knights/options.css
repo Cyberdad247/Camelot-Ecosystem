@@ -47,8 +47,8 @@ label {
     color: #888;
 }
 
-input[type="text"], 
-input[type="password"], 
+input[type="text"],
+input[type="password"],
 select {
     width: 100%;
     padding: 10px;

@@ -20,7 +20,7 @@ interface ModeColors {
 
 const MODE_COLORS: ModeColors = {
   IDLE: "#D4AF37",
-  RESEARCH: "#00F0FF", 
+  RESEARCH: "#00F0FF",
   DEV: "#10B981",
   MUSIC: "#8B5CF6",
   ANALYSIS: "#F59E0B"
@@ -34,9 +34,9 @@ interface LivingCoreProps {
 function LivingCore({ mode, onError }: LivingCoreProps) {
   const meshRef = useRef<THREE.Mesh>(null);
   const [error, setError] = useState<Error | null>(null);
-  
+
   const color = useMemo(() => MODE_COLORS[mode] || MODE_COLORS.IDLE, [mode]);
-  
+
   useFrame((state) => {
     try {
       const t = state.clock.getElapsedTime();
@@ -67,12 +67,12 @@ function LivingCore({ mode, onError }: LivingCoreProps) {
   return (
     <Float speed={2} rotationIntensity={1} floatIntensity={2}>
       <Sphere args={[1, 64, 64]} ref={meshRef} scale={1.2}>
-        <MeshDistortMaterial 
-            color={color} 
-            envMapIntensity={1} 
-            clearcoat={1} 
-            clearcoatRoughness={0.1} 
-            metalness={0.1} 
+        <MeshDistortMaterial
+            color={color}
+            envMapIntensity={1}
+            clearcoat={1}
+            clearcoatRoughness={0.1}
+            metalness={0.1}
             roughness={0.2}
         />
       </Sphere>
@@ -89,7 +89,7 @@ function ErrorBoundary({ children }: { children: React.ReactNode }) {
       setHasError(true);
       setError(new Error(event.message));
     };
-    
+
     window.addEventListener('error', handleError);
     return () => window.removeEventListener('error', handleError);
   }, []);
@@ -138,7 +138,7 @@ export default function MorganaAvatar({ mode = "IDLE", onError, requestId }: Mor
         setIsHealthy(false);
       }
     };
-    
+
     const interval = setInterval(checkHealth, 30000); // Check every 30s
     return () => clearInterval(interval);
   }, []);
@@ -156,8 +156,8 @@ export default function MorganaAvatar({ mode = "IDLE", onError, requestId }: Mor
             <div className="text-[#D4AF37] animate-pulse">Loading Morgana...</div>
           </div>
         )}
-        
-        <Canvas 
+
+        <Canvas
           camera={{ position: [0, 0, 3] }}
           gl={{ antialias: true, alpha: true }}
           dpr={[1, 2]}
@@ -169,7 +169,7 @@ export default function MorganaAvatar({ mode = "IDLE", onError, requestId }: Mor
           <LivingCore mode={mode} onError={handleCanvasError} />
           <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
         </Canvas>
-        
+
         <div className="absolute bottom-2 right-4 text-[10px] font-mono text-[#D4AF37] tracking-widest opacity-80 bg-black/50 px-2 py-1 rounded">
           <div className="flex items-center gap-2">
             <span className={`w-2 h-2 rounded-full ${isHealthy ? 'bg-green-500' : 'bg-red-500'} animate-pulse`}></span>

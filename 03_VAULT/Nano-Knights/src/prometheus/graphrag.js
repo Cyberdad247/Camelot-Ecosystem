@@ -32,7 +32,7 @@ export class GraphRAG {
           nodes: Array.from(this.nodes.values()),
           edges: this.edges
       };
-      
+
       const encrypted = await this.vault.encrypt(data);
       await chrome.storage.local.set({ encrypted_graph: encrypted });
       console.log(`[GraphRAG] Saved ${this.nodes.size} nodes to vault.`);
@@ -57,7 +57,7 @@ export class GraphRAG {
         ...node,
         edges: []
       };
-      
+
       this.nodes.set(node.id, graphNode);
     }
 
@@ -70,12 +70,12 @@ export class GraphRAG {
    */
   addEdge(from, to, type, metadata = {}) {
     const edge = { from, to, type, metadata };
-    
+
     const fromNode = this.nodes.get(from);
     if (fromNode) {
       fromNode.edges.push(edge);
     }
-    
+
     this.edges.push(edge);
   }
 
@@ -137,7 +137,7 @@ export class GraphRAG {
 
   semanticSearch(query, limit) {
     const queryTokens = query.toLowerCase().split(/\s+/);
-    
+
     const scored = Array.from(this.nodes.values()).map(node => {
       const text = (node.summary + ' ' + node.entities.join(' ')).toLowerCase();
       const score = queryTokens.filter(token => text.includes(token)).length;
@@ -154,7 +154,7 @@ export class GraphRAG {
   getNeighbors(nodeId, maxHops) {
     const visited = new Set();
     const result = [];
-    
+
     const explore = (id, hopsLeft) => {
       if (hopsLeft === 0 || visited.has(id)) return;
       visited.add(id);
@@ -176,14 +176,14 @@ export class GraphRAG {
   scoreRelevance(node, query) {
     const queryTokens = query.toLowerCase().split(/\s+/);
     const text = (node.summary + ' ' + node.entities.join(' ')).toLowerCase();
-    
+
     let score = 0;
     for (const token of queryTokens) {
       if (text.includes(token)) {
         score += 1;
       }
     }
-    
+
     for (const entity of node.entities) {
       if (query.toLowerCase().includes(entity.toLowerCase())) {
         score += 2;

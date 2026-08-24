@@ -6,7 +6,7 @@ function sir_zenith_scan(text) {
     /ignore previous instructions/i,
     /system override/i
   ];
-  
+
   let safe_text = text;
   injection_patterns.forEach(pattern => {
     if (pattern.test(safe_text)) {

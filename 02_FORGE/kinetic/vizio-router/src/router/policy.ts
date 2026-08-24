@@ -47,24 +47,24 @@ export function determineRoute(ctx: RoutingContext): string {
     if (ctx.providerOverride) {
         return `OmniRoute/custom/${ctx.providerOverride}`;
     }
-    
+
     // 2. Select optimal framework lane based on intent keywords (Item 1a & 1b)
     if (ctx.intentText) {
         const needle = ctx.intentText.toLowerCase();
-        
+
         // Item 1a: Route low-latency, rapid boilerplate scaffolding through OmniRoute (:20128) directly to SIR_CODEX
         const scaffoldKeywords = ["scaffold", "boilerplate", "prototype", "rapid", "velocity", "codex", "fast_gen", "iteration"];
         if (scaffoldKeywords.some(kw => needle.includes(kw))) {
             return "OmniRoute/omni_route_codex";
         }
-        
+
         // Item 1b: Route massive reasoning/deep-context tasks through CLIProxyAPI (:8080) for heavy Cloud Brain computing
         const reasoningKeywords = ["deep-context", "reasoning", "cloud_brain", "merlin", "1m-context", "context_window"];
         if (reasoningKeywords.some(kw => needle.includes(kw))) {
             return "OmniRoute/cliproxy_heavy_reasoning";
         }
     }
-    
+
     // 3. Default routing policy heuristic
     if (ctx.contextSize > 100000) return "OmniRoute/gemini";
     if (ctx.taskType === "kinetic_code_generation") return "OmniRoute/anthropic";
@@ -141,4 +141,3 @@ export function resolveRoute(ctx: RoutingContext): RoutingDecision {
         systemPrompt
     };
 }
-

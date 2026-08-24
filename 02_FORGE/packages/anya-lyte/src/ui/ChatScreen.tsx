@@ -16,10 +16,10 @@ export const ChatScreen = () => {
     client.addListener((msg) => {
       if (msg.kind === 'chat_delta') {
         const delta = msg.delta;
-        setMessages(prev => [...prev, { 
-          id: msg.id, 
-          text: delta.text, 
-          role: delta.role 
+        setMessages(prev => [...prev, {
+          id: msg.id,
+          text: delta.text,
+          role: delta.role
         }]);
       }
     });
@@ -47,14 +47,14 @@ export const ChatScreen = () => {
     <YStack f={1} bg="$background" p="$4">
       <ScrollView f={1} space="$2">
         {messages.map((m) => (
-          <XStack 
-            key={m.id} 
+          <XStack
+            key={m.id}
             jc={m.role === 'user' ? 'flex-end' : 'flex-start'}
             w="100%"
           >
-            <YStack 
-              bg={m.role === 'user' ? '$blue10' : '$color4'} 
-              p="$3" 
+            <YStack
+              bg={m.role === 'user' ? '$blue10' : '$color4'}
+              p="$3"
               br="$4"
               maxW="80%"
             >
@@ -65,11 +65,11 @@ export const ChatScreen = () => {
       </ScrollView>
 
       <XStack space="$2" ai="center" mt="$4">
-        <Input 
-          f={1} 
-          value={input} 
-          onChangeText={setInput} 
-          placeholder="Speak to Merlin..." 
+        <Input
+          f={1}
+          value={input}
+          onChangeText={setInput}
+          placeholder="Speak to Merlin..."
           br="$10"
         />
         <Button circle icon={Send} onPress={sendMessage} />

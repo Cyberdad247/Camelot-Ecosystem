@@ -32,7 +32,7 @@ export class ResourceSquire {
         // 3. Heuristic Analysis (Keywords)
         const lowerPrompt = prompt.toLowerCase();
         const heavyKeywords = [
-            "fine-tune", "train", "gradient", "comprehensive analysis", 
+            "fine-tune", "train", "gradient", "comprehensive analysis",
             "deep dive", "audit entire", "reasoning chain", "step-by-step proof"
         ];
 

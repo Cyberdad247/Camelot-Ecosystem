@@ -21,7 +21,7 @@ function RoundTable() {
         <cylinderGeometry args={[5, 5, 0.2, 32]} />
         <meshStandardMaterial color="#0c0c0c" roughness={0.05} metalness={0.9} />
       </mesh>
-      
+
       {/* Gold Rim / Energy Ring */}
       <mesh position={[0, 0.11, 0]}>
         <cylinderGeometry args={[5.05, 5.05, 0.02, 64]} />
@@ -49,11 +49,11 @@ function KnightBillboard({ position, sprite, color }: { position: number[], spri
   return (
     <group ref={groupRef} position={new THREE.Vector3(position[0], position[1], position[2])}>
       <Billboard follow={true}>
-        <DreiImage 
-          url={sprite} 
-          scale={[2.5, 3.5]} 
-          transparent 
-          alphaTest={0.5} 
+        <DreiImage
+          url={sprite}
+          scale={[2.5, 3.5]}
+          transparent
+          alphaTest={0.5}
         />
         {/* Glow behind the sprite */}
         <mesh position={[0, 0, -0.1]}>
@@ -61,7 +61,7 @@ function KnightBillboard({ position, sprite, color }: { position: number[], spri
           <meshBasicMaterial color={color} transparent opacity={0.1} />
         </mesh>
       </Billboard>
-      
+
       {/* Foot Light */}
       <pointLight position={[0, -1.5, 0]} distance={4} intensity={2} color={color} />
     </group>
@@ -71,7 +71,7 @@ function KnightBillboard({ position, sprite, color }: { position: number[], spri
 function Environment() {
   const texture = useLoader(THREE.TextureLoader, '/assets/throne_bg.webp');
   texture.mapping = THREE.EquirectangularReflectionMapping;
-  
+
   return (
     <mesh orientation-y={Math.PI}>
       <sphereGeometry args={[50, 64, 64]} />
@@ -84,16 +84,16 @@ export function ThroneRoom() {
   return (
     <Canvas shadows className="w-full h-full">
       <PerspectiveCamera makeDefault position={[0, 6, 12]} fov={50} />
-      <OrbitControls 
-        enableZoom={false} 
-        maxPolarAngle={Math.PI / 2.1} 
+      <OrbitControls
+        enableZoom={false}
+        maxPolarAngle={Math.PI / 2.1}
         minPolarAngle={Math.PI / 4}
         rotateSpeed={0.5}
       />
-      
+
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 15, 0]} intensity={3} color="#FFD700" />
-      
+
       {/* The Immersive Background */}
       <React.Suspense fallback={null}>
         <Environment />
@@ -101,17 +101,17 @@ export function ThroneRoom() {
 
       {/* The Stage */}
       <RoundTable />
-      
+
       {/* The Knights */}
       {KNIGHTS_META.map((knight, idx) => (
-        <KnightBillboard 
-          key={idx} 
-          position={knight.pos} 
-          sprite={knight.sprite} 
-          color={knight.color} 
+        <KnightBillboard
+          key={idx}
+          position={knight.pos}
+          sprite={knight.sprite}
+          color={knight.color}
         />
       ))}
-      
+
       {/* Floor reflection effect */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.5, 0]} receiveShadow>
         <planeGeometry args={[100, 100]} />

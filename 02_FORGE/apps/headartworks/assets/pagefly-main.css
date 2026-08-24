@@ -23,7 +23,7 @@
     we will apply this fix only to the new version. 
 
     For the new requirement, all focusable elements should have a default focus style.
-*/  
+*/
 .__pf:not([data-pf-editor-version="gen-2"]) *:focus-visible {
     outline: none !important;
     box-shadow: none !important;

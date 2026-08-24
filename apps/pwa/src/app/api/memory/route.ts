@@ -37,10 +37,10 @@ export async function POST(req: NextRequest) {
     if (!text) {
       return NextResponse.json({ error: 'Text is required' }, { status: 400 });
     }
-    
+
     const formattedDate = date ?? new Date().toISOString().split('T')[0];
     const newLine = `- [${formattedDate}] ${text}`;
-    
+
     // Append to public/memory.md
     let publicContent = await fs.readFile(publicPath, 'utf-8');
     if (!publicContent.endsWith('\n')) {
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
     }
     publicContent += newLine + '\n';
     await fs.writeFile(publicPath, publicContent, 'utf-8');
-    
+
     // Append to root memory.md if it exists
     try {
       let rootContent = await fs.readFile(rootPath, 'utf-8');
@@ -79,7 +79,7 @@ export async function DELETE(req: NextRequest) {
 
     const publicContent = await fs.readFile(publicPath, 'utf-8');
     const publicLines = publicContent.split('\n');
-    
+
     if (lineToDeviate < 1 || lineToDeviate > publicLines.length) {
       return NextResponse.json({ error: 'Index out of bounds' }, { status: 400 });
     }

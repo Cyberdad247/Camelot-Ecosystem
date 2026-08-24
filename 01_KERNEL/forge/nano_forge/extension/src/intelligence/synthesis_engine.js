@@ -64,9 +64,9 @@ export class SynthesisEngine {
 
         // 4. Generate Report (LLM)
         try {
-            // We assume LLMClient has a simple generate method. 
+            // We assume LLMClient has a simple generate method.
             // In background.js context, we might need to route this.
-            // But if this runs in background, we can use the LLMClient instance if available, 
+            // But if this runs in background, we can use the LLMClient instance if available,
             // OR route via offscreen if needed (which is what LLMClient usually does).
 
             // Simplification: We assume 'this.llm' wraps the complexity

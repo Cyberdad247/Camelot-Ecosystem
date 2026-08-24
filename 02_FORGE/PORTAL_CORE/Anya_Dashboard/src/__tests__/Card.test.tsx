@@ -5,9 +5,9 @@ import { Card } from '../components/ui/Card';
 describe('Card Component', () => {
   it('renders title and description correctly', () => {
     render(
-      <Card 
-        title="Test Title" 
-        description="Test Description" 
+      <Card
+        title="Test Title"
+        description="Test Description"
       />
     );
     expect(screen.getByText('Test Title')).toBeInTheDocument();

@@ -31,7 +31,7 @@ global.chrome = {
 async function runTest() {
     console.log("🛡️ VERIFYING SOVEREIGN DATA PRIVACY...\n");
     let passed = 0;
-    
+
     // TEST 1: PII Scrubbing
     const rawText = "Contact me at user@example.com or call 555-019-2834.";
     const scrubbed = TOONEncoder.scrubPII(rawText);
@@ -46,7 +46,7 @@ async function runTest() {
         await graph.indexNodes([
             TOONEncoder.encodeNote("Secret Plan", "The mission starts at dawn.")
         ]);
-        
+
         // Check Storage - Should be encrypted blob
         const stored = storage.get('encrypted_graph');
         if (stored && stored.iv && stored.content) {

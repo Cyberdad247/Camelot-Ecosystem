@@ -51,10 +51,10 @@ async function runTest() {
         const spawner = new KnightSpawner({});
         console.log("   [TEST] Deploying Squad...");
         const squad = await spawner.deploySquad("Persona Verification");
-        
+
         // Check config
         const syntax = squad.conf.find(c => c.personaId === 'SIR_SYNTAX');
-        
+
         if (squad.conf.length === 3 && syntax && syntax.role === 'Sir Syntax') {
             console.log("✅ Spawner: Squad Configured Correctly (Apis, Syntax, Zenith)");
             passed++;

@@ -37,7 +37,7 @@ export default function AnyasLink({ externalUrl }: AnyasLinkProps) {
       const utterance = new SpeechSynthesisUtterance(text);
       window.speechSynthesis.speak(utterance);
     } finally {
-      setTimeout(() => setIsSpeaking(false), text.length * 100); 
+      setTimeout(() => setIsSpeaking(false), text.length * 100);
     }
   };
 
@@ -50,9 +50,9 @@ export default function AnyasLink({ externalUrl }: AnyasLinkProps) {
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ topic })
         });
-        
+
         const data = await res.json();
-        
+
         if (data.audio_briefing) {
             // Play the Replicate Audio URL
             const audio = new Audio(data.audio_briefing);
@@ -93,7 +93,7 @@ export default function AnyasLink({ externalUrl }: AnyasLinkProps) {
                 {useCloudVoice ? "✨ KOKORO CLOUD (Humanistic)" : "⚡ LOCAL NEURAL (Fast)"}
             </span>
         </div>
-        
+
         <div className="flex gap-2 items-center">
           <a
             href={externalUrl}
@@ -111,12 +111,12 @@ export default function AnyasLink({ externalUrl }: AnyasLinkProps) {
           </button>
 
           {isProcessing && <Loader2 className="w-6 h-6 animate-spin text-purple-500" />}
-          
-          <button 
+
+          <button
             onClick={handleMicClick}
             disabled={isProcessing}
             className={`p-3 rounded-full transition-all shadow-lg ${
-                isSpeaking ? 'bg-green-500 hover:bg-green-600 shadow-green-500/50 animate-pulse' : 
+                isSpeaking ? 'bg-green-500 hover:bg-green-600 shadow-green-500/50 animate-pulse' :
                 isProcessing ? 'bg-slate-700' :
                 'bg-blue-600 hover:bg-blue-700 shadow-blue-500/50'
             }`}
@@ -148,8 +148,8 @@ export default function AnyasLink({ externalUrl }: AnyasLinkProps) {
             </div>
           </div>
         )}
-        <iframe 
-          src={externalUrl} 
+        <iframe
+          src={externalUrl}
           sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
           referrerPolicy="no-referrer"
           loading="lazy"

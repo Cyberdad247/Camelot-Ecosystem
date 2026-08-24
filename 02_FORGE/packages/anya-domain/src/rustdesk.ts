@@ -3,10 +3,10 @@
 /**
  * RustDesk TitanLink Protocol Extensions
  * =======================================
- * 
+ *
  * Extends the TitanLink protocol with RustDesk-specific commands and events
  * for remote desktop control via the Anya Mobile Bridge.
- * 
+ *
  * Author: Sir Bridge (The Integrator)
  * Version: 1.0.0
  * Created: 2026-01-29

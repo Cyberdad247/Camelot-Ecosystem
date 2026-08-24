@@ -35,7 +35,7 @@ type LoadState = 'idle' | 'loading' | 'ok' | 'error';
 
 const getKnightDtcgYaml = (id: string, name?: string) => {
   const cleanId = (id || name || '').toLowerCase();
-  
+
   if (cleanId.includes('merlin')) {
     return `merlin_omega:
   role: "ORCHESTRATOR"
@@ -100,7 +100,7 @@ const getKnightDtcgYaml = (id: string, name?: string) => {
   model_tier: "low"
   ocean_profile: "silent_sentinel"`;
   }
-  
+
   // Generic fallback
   return `${cleanId.replace(/[^a-z0-9]/g, '_')}:
   role: "NANO_KNIGHT"

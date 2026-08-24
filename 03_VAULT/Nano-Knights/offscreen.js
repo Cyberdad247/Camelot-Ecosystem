@@ -27,13 +27,13 @@ if (window.SKILL_LIBRARY) {
         console.log(`[OFFSCREEN] Querying Graph: ${query}`);
         return await knowledgeGraph.query(query);
     };
-    
+
     window.SKILL_LIBRARY["EXPORT_GRAPH"] = async () => {
          console.log("[OFFSCREEN] Exporting Memory Snapshot (JSON-LD)...");
          const exportData = MemoryExporter.export(knowledgeGraph);
          return exportData;
     };
-    
+
     window.SKILL_LIBRARY["SYNTHESIZE_REPORT"] = async (query) => {
         console.log(`[OFFSCREEN] Synthesizing Report: ${query}`);
         return await synthesisEngine.synthesize(query);
@@ -44,15 +44,15 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.target !== "OFFSCREEN") return;
 
   console.log(`[OFFSCREEN] Executing Aspect: ${msg.skill}`);
-  
+
   const skill_fn = window.SKILL_LIBRARY?.[msg.skill];
-  
+
   if (skill_fn) {
     // Wrap in Promise for async skills (LLM calls)
     Promise.resolve(skill_fn(msg.data))
       .then(result => sendResponse({ status: "SUCCESS", result: result }))
       .catch(err => sendResponse({ status: "ERROR", error: err.toString() }));
-      
+
     return true; // Keep message channel open for async response
   } else {
     sendResponse({ status: "ERROR", error: "Unknown Skill" });

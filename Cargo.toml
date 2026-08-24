@@ -8,6 +8,7 @@ members = [
     "02_FORGE/kinetic/actor",
     "02_FORGE/kinetic/contracts",
     "02_FORGE/kinetic/cribo",
+    "02_FORGE/kinetic/hephaestus",
     "02_FORGE/kinetic/omni_nexus_ide",
     "02_FORGE/kinetic/pmcp",
     "02_FORGE/kinetic/rotel",

@@ -8,7 +8,7 @@ export default function AgentSidebar() {
       <div className="p-3 border-b border-green-900 text-green-400 font-bold">
         ⚔️ KNIGHT ROSTER
       </div>
-      
+
       <div className="flex-1 p-2 space-y-2 overflow-y-auto">
         <div className="p-2 bg-green-900 bg-opacity-20 border border-green-800 rounded">
           <div className="font-bold text-green-300">Merlin_Omega</div>

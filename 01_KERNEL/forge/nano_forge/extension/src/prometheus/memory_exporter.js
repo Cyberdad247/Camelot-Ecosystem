@@ -6,14 +6,14 @@
  */
 
 export class MemoryExporter {
-    
+
     /**
      * Export the active Knowledge Graph
-     * @param {GraphRAG} graph 
+     * @param {GraphRAG} graph
      */
     static export(graph) {
         const timestamp = new Date().toISOString();
-        
+
         // 1. Convert Nodes to Standard Schema
         const nodes = Array.from(graph.nodes.values()).map(node => ({
             "@id": node.id,

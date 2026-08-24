@@ -6,20 +6,20 @@
 
 (function() {
     window.HeuristicResolver = {
-        
+
         // Main Entry Point
         resolve: function(intent) {
             console.log(`[HER] Resolving intent:`, intent);
-            
+
             // 1. Text Match (Exact -> Fuzzy)
             let candidates = this.findByText(intent.target);
-            
+
             // 2. Filter by Visibility
             candidates = candidates.filter(this.isVisible);
-            
+
             // 3. Score & Sort
             const bestMatch = this.rankCandidates(candidates, intent);
-            
+
             if (bestMatch) {
                 console.log(`[HER] Found match:`, bestMatch);
                 return {
@@ -28,7 +28,7 @@
                     id: bestMatch.getAttribute('data-nano-id') // If we have tagged it
                 };
             }
-            
+
             return { found: false };
         },
 
@@ -49,7 +49,7 @@
 
         rankCandidates: function(candidates, intent) {
             if (candidates.length === 0) return null;
-            
+
             // Priority: Button > Input > Link > Div
             return candidates.sort((a, b) => {
                 const scoreA = this.getScore(a);

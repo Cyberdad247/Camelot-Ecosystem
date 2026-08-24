@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Shield, 
-  Target, 
-  Cpu, 
-  ArrowRight, 
-  CheckCircle2, 
-  MessageSquare, 
+import {
+  Shield,
+  Target,
+  Cpu,
+  ArrowRight,
+  CheckCircle2,
+  MessageSquare,
   Zap,
   Sparkles,
   Waves
@@ -64,7 +64,7 @@ export default function KnightIntake() {
           "Anya L7 online! Ready to forge your legacy? We're ditching the boring forms and deploying real heat. Let's find your Knight! Word!"
         </p>
       </div>
-      <button 
+      <button
         onClick={() => setStep('tier-scout')}
         className="px-8 py-3 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform flex items-center gap-2"
       >
@@ -81,19 +81,19 @@ export default function KnightIntake() {
         </h2>
         <p className="text-slate-500 italic text-sm italic">// SIR_HERMES: "Terrain mapped. Pick your point of attack, Sovereign."</p>
       </div>
-      
+
       <div className="grid md:grid-cols-3 gap-4">
         {(Object.keys(KNIGHT_ROSTER) as Array<keyof typeof KNIGHT_ROSTER>).map((key) => {
           const knight = KNIGHT_ROSTER[key];
           const Icon = knight.icon;
           return (
-            <button 
+            <button
               key={key}
               onClick={() => setSelectedTier(key)}
               className={cn(
                 "p-6 rounded-3xl border transition-all text-left space-y-4 group",
-                selectedTier === key 
-                  ? `${knight.border} ${knight.bg} scale-[1.02]` 
+                selectedTier === key
+                  ? `${knight.border} ${knight.bg} scale-[1.02]`
                   : "border-white/5 bg-white/[0.02] hover:border-white/20"
               )}
             >
@@ -113,7 +113,7 @@ export default function KnightIntake() {
       </div>
 
       <div className="flex justify-center mt-8">
-        <button 
+        <button
           disabled={!selectedTier}
           onClick={() => {
             setIsDeploying(true);
@@ -124,8 +124,8 @@ export default function KnightIntake() {
           }}
           className={cn(
             "px-10 py-4 rounded-full font-black text-sm uppercase tracking-widest transition-all",
-            selectedTier 
-              ? "bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20" 
+            selectedTier
+              ? "bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/20"
               : "bg-slate-800 text-slate-600 cursor-not-allowed"
           )}
         >
@@ -155,7 +155,7 @@ export default function KnightIntake() {
              <p className="text-slate-600">{"$ PROVENANCE_LEDGER.append(ENTRY_1226)"}</p>
           </div>
         </div>
-        <button 
+        <button
           onClick={() => setStep('anya-outro')}
           className="px-8 py-3 border border-white/20 text-white font-bold rounded-full hover:bg-white/5 transition-all"
         >

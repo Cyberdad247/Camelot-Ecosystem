@@ -178,7 +178,7 @@ assert(avgTokens < 50, "Test 14: Average tokens per element <50");
 
 // Test 15: Header overhead
 // Header is fixed size (~50 chars). We need larger body to amortize it.
-const hugeBody = toonFormat + toonFormat.repeat(50); 
+const hugeBody = toonFormat + toonFormat.repeat(50);
 const headerSize = estimateTokens("#@ URL: test.com\n#@ Title: Test\n");
 const headerOverhead = (headerSize / estimateTokens(hugeBody)) * 100;
 assert(headerOverhead < 5, "Test 15: Header overhead negligible on large docs");

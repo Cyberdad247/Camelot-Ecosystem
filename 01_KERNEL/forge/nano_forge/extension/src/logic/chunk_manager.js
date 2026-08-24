@@ -28,7 +28,7 @@ export class ChunkManager {
         }
 
         const body = lines.slice(bodyStartIndex).join('\n');
-        
+
         if (body.length <= size) {
             return [text]; // No chunking needed
         }
@@ -38,7 +38,7 @@ export class ChunkManager {
 
         while (index < body.length) {
             let end = index + size;
-            
+
             // Adjust end to avoid splitting lines
             if (end < body.length) {
                 const nextNewLine = body.indexOf('\n', end);
@@ -71,7 +71,7 @@ export class ChunkManager {
         // Normalize: Results should be arrays of items usually, or object with a key being an array.
         // Assumption: 'extract' usually returns an Array of objects from the prompt instruction.
         // OR an object { "items": [...] }.
-        
+
         let allItems = [];
 
         results.forEach(res => {
@@ -95,10 +95,10 @@ export class ChunkManager {
 
         allItems.forEach(item => {
             if (!item) return;
-            
+
             // Key: _source is the Gold Standard.
             // Fallback: SHA of content? No, just keep all if no source.
-            
+
             if (item._source) {
                 const existing = unique.get(item._source);
                 if (!existing) {

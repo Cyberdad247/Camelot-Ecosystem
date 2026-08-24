@@ -51,7 +51,7 @@ export function SpatialBackground() {
         >
           <color attach="background" args={['#050505']} />
           <ambientLight intensity={isNight ? 0.22 : 0.85} />
-          
+
           {/* Dynamic Procedural Biome Grid */}
           <ProceduralBiomeMap active={isWet} isNight={isNight} condition={weather} />
 
@@ -61,7 +61,7 @@ export function SpatialBackground() {
             position={isNight ? [-3, 3, 5] : [4, 6, 7]}
           />
           <pointLight color="#D4AF37" intensity={isNight ? 0.4 : 1.4} position={[3, -1.5, 4]} />
-          
+
           <Atmosphere isNight={isNight} />
           <RainParticles active={isWet || isNight} lowPower={lowPower} />
         </Canvas>

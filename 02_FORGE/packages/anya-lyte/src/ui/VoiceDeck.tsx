@@ -17,7 +17,7 @@ export const VoiceDeck = () => {
   return (
     <Theme name="dark">
       <YStack f={1} jc="center" ai="center" space="$8" bg="$background">
-        
+
         {/* The Orb (Visualizer Placeholder) */}
         <YStack jc="center" ai="center">
           <AnimatePresence>
@@ -48,10 +48,10 @@ export const VoiceDeck = () => {
           <Text col="$colorSecondary">Sir Sonus Resonance active</Text>
         </YStack>
 
-        <Button 
-          size="$6" 
-          circular 
-          icon={isListening ? Volume2 : Mic} 
+        <Button
+          size="$6"
+          circular
+          icon={isListening ? Volume2 : Mic}
           onPress={toggleMic}
           theme={isListening ? 'active' : 'alt1'}
           elevate

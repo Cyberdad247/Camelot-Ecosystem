@@ -6,7 +6,7 @@
  */
 
 export const SPECIALIZED_SKILLS = {
-    
+
     // 🕷️ LADY APIS: Recursive Crawler Helper
     // Returns valid internal links for further exploration
     'RECURSIVE_CRAWL': () => {
@@ -15,7 +15,7 @@ export const SPECIALIZED_SKILLS = {
             .filter(href => href.startsWith(window.location.origin)) // Internal only
             .filter(href => !href.includes('#')) // No anchors
             .filter((v, i, a) => a.indexOf(v) === i); // Dedupe
-        
+
         return {
             action: 'CRAWL_RESULT',
             links: links.slice(0, 50), // Cap at 50 to avoid overload
@@ -49,7 +49,7 @@ export const SPECIALIZED_SKILLS = {
         const metaCSP = document.querySelector('meta[http-equiv="Content-Security-Policy"]')?.content;
         const https = window.location.protocol === 'https:';
         const scripts = Array.from(document.querySelectorAll('script')).filter(s => !s.src && s.innerText.length > 0);
-        
+
         return {
             action: 'AUDIT_RESULT',
             https: https,

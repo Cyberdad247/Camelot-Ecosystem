@@ -39,7 +39,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
             </div>
           </div>
         )}
-        
+
         <div className="p-6 pt-0">
           {children}
         </div>

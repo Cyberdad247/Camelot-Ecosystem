@@ -46,18 +46,18 @@ export const ApprovalSheet = ({ visible, action, onApprove, onReject }) => {
             </Card>
 
             <YStack w="100%" space="$3">
-              <Button 
-                theme="active" 
-                size="$5" 
+              <Button
+                theme="active"
+                size="$5"
                 icon={approving ? null : Fingerprint}
                 onPress={handleApprove}
                 disabled={approving}
               >
                 {approving ? 'VERIFYING BIOMETRICS...' : 'SIGN & APPROVE'}
               </Button>
-              <Button 
-                chromeless 
-                icon={XCircle} 
+              <Button
+                chromeless
+                icon={XCircle}
                 onPress={onReject}
                 disabled={approving}
               >

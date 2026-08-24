@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 function lady_apis_forage() {
     console.log("[LADY APIS] Ingesting DOM...");
     const raw_text = document.body.innerText;
-    
+
     // Triple-QFT Renormalization (Mock)
     // 1. Discard Fluff
     // 2. Quantize Relevant Operators
@@ -40,10 +40,10 @@ function lady_apis_forage() {
 // Security & Dependency Audit
 function sir_zenith_scan(text) {
   console.log("[SIR ZENITH] Scanning for Injection Vectors...");
-  
+
   // 1. Spotlighting: Wrap untrusted content
   let safe_text = `<<<UNTRUSTED_ZONE_START>>>\n${text}\n<<<UNTRUSTED_ZONE_END>>>`;
-  
+
   // 2. Adversarial Filtering (Regex)
   const injection_patterns = [
     /ignore previous instructions/i,
@@ -51,28 +51,28 @@ function sir_zenith_scan(text) {
     /you are now/i,
     /<script>/i // Basic XSS check
   ];
-  
+
   injection_patterns.forEach(pattern => {
     if (pattern.test(safe_text)) {
       console.warn(`[SIR ZENITH] Threat Detected: ${pattern}`);
       safe_text = safe_text.replace(pattern, "[REDACTED_THREAT]");
     }
   });
-  
+
   return safe_text;
 }
 
 // --- AGENT: NAVIGATOR (The Orchestrator on Page) ---
 function execute_navigator(instructions) {
   console.log(`[NAVIGATOR] Executing: ${instructions.action}`);
-  
+
   if (instructions.action === "ANALYZE_PAGE") {
     // 1. Forage (Apis)
     const raw_data = lady_apis_forage();
 
     // 2. Secure (Zenith)
     const clean_text = sir_zenith_scan(raw_data);
-    
+
     // 3. Report back to Merlin
     chrome.runtime.sendMessage({
       action: "REPORT_INTEL",
@@ -86,7 +86,7 @@ function execute_navigator(instructions) {
       const result = window.Kinetic.click(instructions.target);
       console.log(`[NAVIGATOR] Click Result:`, result);
   }
-  
+
   if (instructions.action === "TYPE") {
       const result = window.Kinetic.type(instructions.target, instructions.text);
       console.log(`[NAVIGATOR] Type Result:`, result);

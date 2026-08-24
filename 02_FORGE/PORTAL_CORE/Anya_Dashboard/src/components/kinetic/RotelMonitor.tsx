@@ -29,7 +29,7 @@ export default function RotelMonitor() {
             try {
                 const log: LogEntry = JSON.parse(event.data);
                 setLogs(prev => [log, ...prev].slice(0, 15));
-                
+
                 setMetrics(prev => ({
                     ...prev,
                     active_traces: prev.active_traces + 1

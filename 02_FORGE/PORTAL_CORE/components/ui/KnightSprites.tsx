@@ -25,7 +25,7 @@ export function KnightSprites() {
         const stateMatch = knightState?.name ? knight.aliases.some(a => knightState.name.toUpperCase().includes(a)) : false;
         const logMatch = knight.aliases.some(alias => lastLog.toUpperCase().includes(alias));
         const isActive = stateMatch || logMatch;
-        
+
         // Determine Thought Text
         const thoughtText = stateMatch ? knightState?.last_thought : (isActive && lastLog.includes("[THOUGHT]") ? lastLog.replace("[THOUGHT]", "") : null);
 
@@ -35,11 +35,11 @@ export function KnightSprites() {
             className="absolute flex flex-col items-center"
             style={knight.pos}
             initial={{ y: 20, opacity: knight.isGhost ? 0.5 : 0 }}
-            animate={{ 
+            animate={{
               y: [0, -10, 0],
-              opacity: knight.isGhost ? (isActive ? 0.9 : 0.4) : 1 
+              opacity: knight.isGhost ? (isActive ? 0.9 : 0.4) : 1
             }}
-            transition={{ 
+            transition={{
               y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: idx * 0.5 },
               opacity: { duration: 1 }
             }}
@@ -67,15 +67,15 @@ export function KnightSprites() {
 
             {/* Sprite Image */}
             <div className={`relative w-48 h-64 transition-all duration-500 ${isActive ? 'scale-110 z-20' : 'scale-100 z-10'} ${knight.isGhost ? 'opacity-80 mix-blend-screen' : ''}`}>
-              <img 
-                src={knight.sprite} 
-                alt={knight.name} 
+              <img
+                src={knight.sprite}
+                alt={knight.name}
                 className={`w-full h-full object-contain filter drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] ${isActive ? 'brightness-125' : 'brightness-90'}`}
               />
-              
+
               {/* Active Glow Ring */}
               {isActive && (
-                <motion.div 
+                <motion.div
                   className={`absolute -bottom-4 left-1/2 -translate-x-1/2 w-32 h-8 bg-white/20 blur-xl rounded-full ${knight.color}`}
                   initial={{ scale: 0.8, opacity: 0 }}
                   animate={{ scale: 1.2, opacity: 1 }}
@@ -90,11 +90,11 @@ export function KnightSprites() {
                 {knight.name.toUpperCase()}
               </span>
             </div>
-            
+
             {/* Stats (HP bar) */}
             {stateMatch && (
                  <div className="w-24 h-1 bg-gray-700 rounded-full mt-1 overflow-hidden">
-                    <motion.div 
+                    <motion.div
                         className={`h-full ${knight.name === 'Zenith' ? 'bg-red-500' : 'bg-blue-500'}`}
                         initial={{ width: 0 }}
                         animate={{ width: `${knightState?.hp || 100}%` }}

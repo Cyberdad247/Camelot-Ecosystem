@@ -16,7 +16,7 @@ function parseJson(text) {
         const start = text.indexOf('{');
         const startArr = text.indexOf('[');
         const effectiveStart = (start === -1) ? startArr : (startArr === -1 ? start : Math.min(start, startArr));
-        
+
         if (effectiveStart !== -1) {
              const end = text.lastIndexOf(startArr === effectiveStart ? ']' : '}');
              if (end !== -1) {
@@ -28,7 +28,7 @@ function parseJson(text) {
 }
 
 const SKILL_LIBRARY = {
-  
+
   // ASPECT: Omega_DISTILLER (The Reader)
   "SUMMARIZE_CORE": async (text) => {
     const prompt = `Synthesize the following text into a high-density "Anchor Token" summary. 
@@ -37,7 +37,7 @@ const SKILL_LIBRARY = {
     
     TEXT:
     ${text.substring(0, 15000)}`; // Token limit safety
-    
+
     return await window.LLM.generate(prompt, "You are Omega_DISTILLER, a hyper-efficient data compression intelligence.");
   },
 
@@ -61,7 +61,7 @@ const SKILL_LIBRARY = {
     
     DOM:
     ${dom_snippet}`;
-    
+
     return await window.LLM.generate(prompt, "You are Omega_NAVIGATOR, an autonomous web navigation agent.");
   },
 
@@ -72,7 +72,7 @@ const SKILL_LIBRARY = {
     
     DATA:
     ${data}`;
-    
+
     const raw = await window.LLM.generate(prompt, "You are Omega_SYNTH, a structured data architect. Return ONLY JSON.");
     return parseJson(raw);
   },
@@ -94,24 +94,24 @@ const SKILL_LIBRARY = {
     
     REQUEST:
     ${data.request}`;
-    
+
     const raw = await window.LLM.generate(prompt, "You are Omega_KINETIC. Return JSON Array of actions ONLY.");
     return parseJson(raw);
   },
 
   // ASPECT: Omega_OCULAR (Vision Lance)
   "ANALYZE_SCREENSHOT": async (data) => {
-      const prompt = `Analyze this screenshot. 
+      const prompt = `Analyze this screenshot.
       Goal: ${data.goal || "Describe the key interactive elements and potential data fields."}
       
       Respond in Markdown. Highlight specific UI elements by their visual text/labels.`;
-      
+
       // data.screenshot is expected to be a base64 string (plain or data URI)
       const images = [data.screenshot];
-      
+
       return await window.LLM.generate(prompt, "You are Omega_OCULAR, an expert UI/UX analyst.", 'HIGH', 'JSON', images);
   },
-  
+
   // ASPECT: Omega_AGENCY (The Dispatcher)
   "EXECUTE_PROMPT": async (data) => {
       // data.prompt is the optimized prompt
@@ -132,7 +132,7 @@ const SKILL_LIBRARY = {
     ${data.dom_snippet}
     
     Return a JSON object: { "stack": [], "structure": "", "critical_files": [], "risk_score": 0-100 }`;
-    
+
     const raw = await window.LLM.generate(prompt, "You are Omega_ARCHIVIST, a forensic code auditor. Return ONLY JSON.");
     return parseJson(raw);
   }

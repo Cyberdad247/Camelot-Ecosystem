@@ -15,7 +15,7 @@ const DEFAULT_CONFIG = {
 export class LLMClient {
     constructor() {
         this.config = { ...DEFAULT_CONFIG };
-        this.cache = {}; 
+        this.cache = {};
         this.loadConfig();
     }
 
@@ -32,7 +32,7 @@ export class LLMClient {
         } else {
              console.warn("[LLM] chrome.storage unavailable. Using defaults.");
         }
-        
+
         // 8GB Constraint: Aggressive Cache Clearing
         if (this.config.lowMemoryMode && Object.keys(this.cache).length > 20) {
             console.log("[MEM] Low Memory Mode: Clearing LLM Cache");
@@ -60,7 +60,7 @@ export class LLMClient {
             console.log("[LLM] Cache Hitted! (0 Tokens)");
             return this.cache[cacheKey];
         }
-        
+
         console.log(`[LLM] Generating... Mode: ${complexity}, Hybrid: ${this.config.hybridMode}, Format: ${format}, Images: ${images.length}`);
 
         let response = null;
@@ -69,13 +69,13 @@ export class LLMClient {
         // If images are present, we MUST use Cloud (Gemini) as Ollama/Gemma 2b text models can't see.
         // Unless we have LLaVA local? For now, force Cloud for Vision.
         let judgement = { environment: 'LOCAL', reason: 'Default' };
-        
+
         if (images.length > 0) {
             judgement = { environment: 'CLOUD', reason: 'Vision Required' };
         } else {
             judgement = this._judgeAndRoute(prompt, complexity);
         }
-        
+
         console.log(`[LLM] Squire Verdict: ${judgement.environment} (${judgement.reason})`);
 
         // 3. EXECUTION
@@ -91,7 +91,7 @@ export class LLMClient {
             }
         } else {
             // CLOUD REQUIRED
-            if (this.config.allowCloudOffload || images.length > 0) { // Vision implies consent? Or should we check? allowCloud is strictly for 'offloading', maybe Vision is a separate permission? 
+            if (this.config.allowCloudOffload || images.length > 0) { // Vision implies consent? Or should we check? allowCloud is strictly for 'offloading', maybe Vision is a separate permission?
                 // For now, assuming if user asks for screenshot analysis, they expect cloud.
                 console.log("[LLM] Offloading to Cloud (Morgana/Modal)...");
                 response = await this._callCloud(prompt, systemInstruction, images);
@@ -136,8 +136,8 @@ export class LLMClient {
         try {
             // 8GB Constraint: Agentic Optimization
             // Gemma 2b/Gemma 3 1b handles 4k-8k well, but we limit to 4k for speed/RAM balance.
-            const max_tokens = this.config.lowMemoryMode ? 4096 : 8192; 
-            
+            const max_tokens = this.config.lowMemoryMode ? 4096 : 8192;
+
             const response = await fetch(`${this.config.ollamaEndpoint}/api/generate`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -146,12 +146,12 @@ export class LLMClient {
                     prompt: prompt,
                     system: system,
                     stream: false,
-                    options: { 
+                    options: {
                         num_predict: 1024, // Increased for COT/Agentic output
                         temperature: 0.3,
                         num_ctx: max_tokens, // Valid Agentic Context Window
                         num_thread: 4 // Explicit threading for stability
-                    } 
+                    }
                 })
             });
 
@@ -174,22 +174,22 @@ export class LLMClient {
 
         // [HYDRA] 1. Check for Chunking Necessity
         const CHUNK_THRESHOLD = this.config.lowMemoryMode ? 8000 : 16000;
-        
+
         if (rawText.length > CHUNK_THRESHOLD) {
             console.log(`[HYDRA] Input size ${rawText.length} > ${CHUNK_THRESHOLD}. Engaging Chunk Manager.`);
-            
+
             const chunks = ChunkManager.chunk(rawText, 6000, 500); // 6000 chars ~ 1500 tokens
             console.log(`[HYDRA] Created ${chunks.length} chunks.`);
-            
+
             const results = [];
-            
+
             // SERIAL EXECUTION (Safe for 8GB)
             for (let i = 0; i < chunks.length; i++) {
                 console.log(`[HYDRA] Processing Chunk ${i+1}/${chunks.length}...`);
                 const result = await this._extractSinglePass(chunks[i], schema, userGoal);
                 if (!result.error) results.push(result);
             }
-            
+
             console.log(`[HYDRA] Merging ${results.length} results...`);
             return ChunkManager.merge(results, schema);
         }
@@ -200,7 +200,7 @@ export class LLMClient {
 
     async _extractSinglePass(rawText, schema, userGoal) {
         const schemaString = JSON.stringify(schema, null, 2);
-        
+
         const systemPrompt = `
 You are an advanced Data Extraction Engine (NANO-EXTRACT).
 Your goal is to parse the provided text (in TOON format) and output valid JSON matching the schema.
@@ -222,9 +222,9 @@ ${schemaString}
 [INPUT_DATA (TOON)]
 ${rawText}
 `;
-        
+
         const judgement = this._judgeAndRoute(userPrompt, 'HIGH');
-        
+
         let responseText = "";
         try {
             if (judgement.environment === 'LOCAL') {
@@ -248,7 +248,7 @@ ${rawText}
      */
     async orchestrate(state, goal) {
         await this.loadConfig();
-        
+
         // 1. Construct State Object (TOON-Ready)
         const payload = {
             goal: goal,
@@ -257,7 +257,7 @@ ${rawText}
             domSource: state.dom, // Ideally simplified
             timestamp: Date.now()
         };
-        
+
         const systemPrompt = `
 [SYSTEM: REMOTE_ORCHESTRATOR]
 You are the Strategic Planner. The user is a constrained Edge Agent.
@@ -265,7 +265,7 @@ Receive the State (TOON) and Goal.
 Output a MACRO-ACTION SCHEDULE (JSON).
 Format: { "plan_id": "...", "steps": [ { "action": "...", "target": "..." } ] }
 `;
-        
+
         const userPrompt = `
 [GOAL]: ${goal}
 [STATE]: ${JSON.stringify(payload)}
@@ -289,7 +289,7 @@ Format: { "plan_id": "...", "steps": [ { "action": "...", "target": "..." } ] }
 
         try {
             // Ensure trailing slash logic if needed
-            const baseUrl = this.config.customBaseUrl.replace(/\/$/, ""); 
+            const baseUrl = this.config.customBaseUrl.replace(/\/$/, "");
             const url = `${baseUrl}/chat/completions`;
 
             const messages = [
@@ -319,7 +319,7 @@ Format: { "plan_id": "...", "steps": [ { "action": "...", "target": "..." } ] }
 
             const response = await fetch(url, {
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${this.config.customApiKey}`
                 },
@@ -348,16 +348,16 @@ Format: { "plan_id": "...", "steps": [ { "action": "...", "target": "..." } ] }
 
         try {
             const url = `${this.config.geminiEndpoint}/${this.config.geminiModel}:generateContent?key=${this.config.geminiApiKey}`;
-            
+
             // Construct Content Parts
             const parts = [{ text: prompt }];
-            
+
             // Append Images (Gemini Format)
             images.forEach(img => {
                 // Determine mime type if possible, default to jpeg
                 // img is expected to be base64 data (without header, or we strip it)
                 const base64Data = img.replace(/^data:image\/\w+;base64,/, '');
-                
+
                 parts.push({
                     inlineData: {
                         mimeType: "image/jpeg",

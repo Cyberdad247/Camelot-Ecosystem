@@ -47,7 +47,7 @@ export const useSocket = () => {
                 return [...prev, `[THOUGHT] ${data.message}`];
             });
         });
-        
+
         socket.on('state_update', (data: KnightState) => {
             setKnightState(data);
         });

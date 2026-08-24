@@ -9,7 +9,7 @@ import { ActionExecutor } from '../src/logic/action_executor.js';
 // Mock Browser
 global.chrome = {
     tabs: { get: async () => ({ url: 'http://test.com' }) },
-    scripting: { 
+    scripting: {
         executeScript: async ({target, func}) => {
             // SIMULATE CONTENT SCRIPT ENV
             global.window = { location: { origin: 'http://test.com', protocol: 'https:' } };
@@ -21,21 +21,21 @@ global.chrome = {
                         { href: 'http://external.com' } // Should be filtered
                     ];
                     if (sel.includes('script')) return [
-                        { innerText: "console.log('hi')" }, 
-                        { innerText: "alert(1)" }, 
-                        { innerText: "track()" }, 
-                        { innerText: "ads()" }, 
-                        { innerText: "analytics()" }, 
+                        { innerText: "console.log('hi')" },
+                        { innerText: "alert(1)" },
+                        { innerText: "track()" },
+                        { innerText: "ads()" },
+                        { innerText: "analytics()" },
                         { innerText: "more()" }
                     ]; // 6 scripts with content
                     return [];
                 },
                 querySelector: () => null
             };
-            
+
             const res = func();
             return [{ result: res }];
-        } 
+        }
     }
 };
 

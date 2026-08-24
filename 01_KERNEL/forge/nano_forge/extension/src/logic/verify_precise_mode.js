@@ -53,9 +53,9 @@ global.process_via_offscreen = async (action, data) => {
 // --- 2. TEST SUITE ---
 async function runAcceptanceTest() {
     console.log("=== STARTING PRECISE MODE ACCEPTANCE RUN (G3) ===");
-    
+
     const orchestrator = new GoalOrchestrator("Research Camelot API");
-    
+
     // Test Goal Execution
     const results = await orchestrator.execute(async (goalDesc, context, laneId) => {
         console.log(`[TEST] Executing Goal: ${goalDesc}`);
@@ -65,7 +65,7 @@ async function runAcceptanceTest() {
 
     // --- 3. ASSERTIONS ---
     console.log("\n=== VERIFICATION RESULTS ===");
-    
+
     // Check Goal 1 Results
     const g1 = results['goal_1'];
     console.log(`Goal 1 Status: ${g1.evaluation.success ? 'PASSED' : 'FAILED'}`);
@@ -87,17 +87,17 @@ async function runAcceptanceTest() {
             throw new Error("TRANSIENT_DETECTION_ERROR");
         }
     };
-    
+
     // Temporarily swap scripting to test retries
     const originalScripting = global.chrome.scripting;
     global.chrome.scripting = failingScripting;
-    
+
     try {
         await ActionExecutor.perform(1, { action: 'click', target: 'Ghost' }, 'retry_test_lane');
     } catch (e) {
         console.log(`Captured Expected Failure: ${e.message}`);
     }
-    
+
     console.log(`Retry Attempts Detected: ${attemptsDetected}`);
     if (attemptsDetected >= 3) {
         console.log("✅ D7 (Retry Policy) Verified: Exponential backoff triggered 3+ times.");

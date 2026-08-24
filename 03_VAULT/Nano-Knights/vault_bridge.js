@@ -5,7 +5,7 @@ const KERNEL_API = "http://localhost:8001";
 async function syncToVault(intel, token) {
   try {
     console.log("[BRIDGE] Attempting Sync to Ouroboros...");
-    
+
     const payload = {
         intent: `[AUTO-MEMORIZE]: Web Intel from ${intel.agent}`,
         agent_id: "MERLIN",
@@ -17,7 +17,7 @@ async function syncToVault(intel, token) {
         // We wrap the intel as a memory ingestion request
         // Note: Real implementation needs a dedicated /memory/ingest endpoint
         // For now, we use agent/dispatch to tell Merlin to save it.
-        context: JSON.stringify(intel.content) 
+        context: JSON.stringify(intel.content)
     };
 
     const response = await fetch(`${KERNEL_API}/agent/dispatch`, {

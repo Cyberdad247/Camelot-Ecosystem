@@ -93,7 +93,7 @@ export class LLMClient {
             }
         } else {
             // CLOUD REQUIRED
-            if (this.config.allowCloudOffload || images.length > 0) { // Vision implies consent? Or should we check? allowCloud is strictly for 'offloading', maybe Vision is a separate permission? 
+            if (this.config.allowCloudOffload || images.length > 0) { // Vision implies consent? Or should we check? allowCloud is strictly for 'offloading', maybe Vision is a separate permission?
                 // For now, assuming if user asks for screenshot analysis, they expect cloud.
                 console.log("[LLM] Offloading to Cloud (Morgana/Modal)...");
                 response = await this._callCloud(prompt, systemInstruction, images);

@@ -22,7 +22,7 @@ class ProxyManager {
 
     async applyConfig(config) {
         this.config = { ...this.config, ...config };
-        
+
         if (this.config.mode === "direct") {
             await this.clearProxy();
             return;
@@ -118,4 +118,3 @@ if (chrome.webRequest && chrome.webRequest.onAuthRequired) {
         // NOTE: No "blocking" option - this is just a logger now.
     );
 }
-

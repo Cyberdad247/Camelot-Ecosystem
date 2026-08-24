@@ -28,7 +28,7 @@ export class MissionEvaluator {
         // 2. Consult the Oracle (LLM)
         if (typeof process_via_offscreen !== 'undefined') {
             const evaluation = await process_via_offscreen("EVALUATE_MISSION_SUCCESS", evidence);
-            
+
             if (evaluation && typeof evaluation.success === 'boolean') {
                 console.log(`[EVALUATOR] Verdict: ${evaluation.success ? 'PASSED' : 'FAILED'} (${evaluation.confidence * 100}%)`);
                 return {

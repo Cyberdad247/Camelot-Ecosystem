@@ -18,10 +18,10 @@ const GlowingTable = () => {
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
       <mesh ref={meshRef}>
         <cylinderGeometry args={[3, 3, 0.2, 32]} />
-        <meshStandardMaterial 
-            emissive="#00ffcc" 
-            emissiveIntensity={2} 
-            color="#000000" 
+        <meshStandardMaterial
+            emissive="#00ffcc"
+            emissiveIntensity={2}
+            color="#000000"
             roughness={0.1}
             metalness={0.8}
         />

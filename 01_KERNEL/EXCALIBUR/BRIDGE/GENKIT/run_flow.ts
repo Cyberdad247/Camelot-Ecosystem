@@ -13,19 +13,19 @@ let plan = "Analyzing request...";
 if (lowerInput.includes("plan") || lowerInput.includes("design") || lowerInput.includes("architect") || lowerInput.includes("tutorial")) {
     knight = "Sir Lancelot"; // The Architect
     plan = `Drafting documentation and blueprints for: '${input.substring(0, 50)}...'`;
-} 
+}
 else if (lowerInput.includes("code") || lowerInput.includes("function") || lowerInput.includes("dev") || lowerInput.includes("implement")) {
     knight = "Sir Galahad"; // The Pure (Coder)
     plan = `Forging code artifacts for request. Initiating syntax generation...`;
-} 
+}
 else if (lowerInput.includes("test") || lowerInput.includes("verify") || lowerInput.includes("audit") || lowerInput.includes("check")) {
     knight = "Sir Percival"; // The Seeker (QA)
     plan = `Running verification protocols. Scanning for anomalies...`;
-} 
+}
 else if (lowerInput.includes("delete") || lowerInput.includes("remove") || lowerInput.includes("destroy") || lowerInput.includes("kill")) {
     knight = "Sir Mordred"; // The Executioner
     plan = `Preparing for destructive kinetic action. Safety interlocks engaged.`;
-} 
+}
 else {
     plan = `Processing intent: '${input.substring(0, 50)}...' via Standard Protocol.`;
 }

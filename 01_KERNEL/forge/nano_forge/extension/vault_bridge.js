@@ -7,7 +7,7 @@ const KERNEL_API = "http://localhost:8001";
 async function syncToVault(intel) {
   try {
     console.log("[BRIDGE] Attempting Sync to Ouroboros...");
-    
+
     // Task D10: Retrieve operator token from storage
     const storage = await chrome.storage.sync.get(['operatorConfig']);
     const token = storage.operatorConfig?.vaultToken || "SECURE_TOKEN_REQUIRED";
@@ -17,10 +17,10 @@ async function syncToVault(intel) {
         agent_id: "MERLIN",
         metadata: {
             source: "Nano-Browser",
-            url: intel.url, 
+            url: intel.url,
             timestamp: intel.timestamp
         },
-        context: JSON.stringify(intel.content) 
+        context: JSON.stringify(intel.content)
     };
 
     const response = await fetch(`${KERNEL_API}/agent/dispatch`, {
@@ -53,7 +53,7 @@ async function fetchFromVault() {
             headers: { "x-camelot-token": token }
         });
         if (response.ok) {
-            return await response.json(); 
+            return await response.json();
         }
     } catch (e) {
         // Silent fail on polling

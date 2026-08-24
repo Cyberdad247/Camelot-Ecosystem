@@ -15,7 +15,7 @@ export class TranscriptManager {
     /**
      * Record an event in the transcript
      * @param {string} type - 'ACTION', 'SNAPSHOT', 'RESULT', 'RECOVERY'
-     * @param {object} data 
+     * @param {object} data
      */
     async log(type, data) {
         const event = {
@@ -25,10 +25,10 @@ export class TranscriptManager {
             type,
             data
         };
-        
+
         this.events.push(event);
         console.log(`[TRANSCRIPT] [${this.laneId}] Recorded ${type}`);
-        
+
         // Persist incrementally to storage
         await this._persist();
     }

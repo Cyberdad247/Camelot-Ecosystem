@@ -2,12 +2,12 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Shield, 
-  Cpu, 
-  Terminal, 
-  Users, 
-  Wand2, 
+import {
+  Shield,
+  Cpu,
+  Terminal,
+  Users,
+  Wand2,
   Menu,
   Activity
 } from 'lucide-react';
@@ -21,7 +21,7 @@ function Sidebar({ activeAgent }: { activeAgent: string }) {
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="h-full flex flex-col bg-black/40 backdrop-blur-xl border-r border-white/10 text-white z-50 pointer-events-auto"
       initial={{ width: "4rem" }}
       animate={{ width: expanded ? "16rem" : "4rem" }}
@@ -36,28 +36,28 @@ function Sidebar({ activeAgent }: { activeAgent: string }) {
 
       {/* Navigation */}
       <nav className="flex-1 py-6 flex flex-col gap-2">
-        <NavItem 
-          icon={Users} 
-          label="Guild Hall (Anya)" 
-          expanded={expanded} 
+        <NavItem
+          icon={Users}
+          label="Guild Hall (Anya)"
+          expanded={expanded}
           active={activeAgent === 'ANYA'}
         />
-        <NavItem 
-          icon={Terminal} 
-          label="Antigravity Console" 
-          expanded={expanded} 
+        <NavItem
+          icon={Terminal}
+          label="Antigravity Console"
+          expanded={expanded}
           active={activeAgent === 'SYSTEM'}
         />
-        <NavItem 
-          icon={Wand2} 
-          label="Merlin's Forge" 
-          expanded={expanded} 
+        <NavItem
+          icon={Wand2}
+          label="Merlin's Forge"
+          expanded={expanded}
           active={activeAgent === 'MERLIN'}
         />
-        <NavItem 
-          icon={Cpu} 
-          label="System Status" 
-          expanded={expanded} 
+        <NavItem
+          icon={Cpu}
+          label="System Status"
+          expanded={expanded}
           active={activeAgent === 'KERNEL'}
         />
       </nav>
@@ -78,7 +78,7 @@ function NavItem({ icon: Icon, label, expanded, active = false }: { icon: any, l
     `}>
       <Icon className={`w-6 h-6 min-w-[1.5rem] ${active ? 'animate-pulse' : ''}`} />
       {expanded && (
-        <motion.span 
+        <motion.span
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           className="ml-3 whitespace-nowrap text-sm font-medium"
@@ -96,7 +96,7 @@ import { useSocket } from '@/hooks/use-socket';
 function SkyPrism({ logs, isConnected }: { logs: string[], isConnected: boolean }) {
   return (
     <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[600px] pointer-events-none">
-      <motion.div 
+      <motion.div
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         className="bg-black/60 backdrop-blur-2xl border border-white/10 rounded-lg overflow-hidden shadow-2xl shadow-yellow-500/10 pointer-events-auto"
@@ -115,7 +115,7 @@ function SkyPrism({ logs, isConnected }: { logs: string[], isConnected: boolean 
             <div className="w-2 h-2 rounded-full bg-green-500/50" />
           </div>
         </div>
-        
+
         {/* Terminal Content - Live Logs */}
         <div className="p-4 font-mono text-xs h-32 overflow-y-auto relative custom-scrollbar">
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none z-10" />
@@ -147,7 +147,7 @@ function StatusHUD({ activeAgent }: { activeAgent: string }) {
       <StatusItem label="VRAM" value="5.5/8.0 GB" color="text-yellow-400" />
       <StatusItem label="LATENCY" value="12ms" color="text-green-400" />
       <StatusItem label="KNIGHTS" value="5 ACTIVE" color="text-blue-400" />
-      
+
       {/* Agent Status */}
       <div className="flex items-center justify-between bg-white/10 backdrop-blur-md px-3 py-1 rounded border border-white/20 w-40 mt-2">
         <span className="text-[10px] text-gray-400 font-bold">SPEAKER</span>

@@ -56,7 +56,7 @@ export class GoalOrchestrator {
             for (const goal of readyGoals) {
                 console.log(`[ORCHESTRATOR] Executing Sub-Goal: ${goal.id} - ${goal.description}`);
                 goal.status = "RUNNING";
-                
+
                 const laneId = `lane_${goal.id}_${Date.now()}`;
                 const transcript = new TranscriptManager(laneId);
                 this.transcripts[goal.id] = transcript;
@@ -64,10 +64,10 @@ export class GoalOrchestrator {
                 try {
                     // Inject context from previous results if needed
                     const context = this.getDependencyContext(goal);
-                    
+
                     // Task D6: Capture execution in transcript
                     await transcript.log('GOAL_START', { description: goal.description, context });
-                    
+
                     // The executorFunc should ideally take laneId to pass to ActionExecutor
                     const result = await executorFunc(goal.description, context, laneId);
 
@@ -79,7 +79,7 @@ export class GoalOrchestrator {
                     } catch (e) {}
 
                     const evaluation = await MissionEvaluator.evaluate(goal.description, transcript, finalUrl);
-                    
+
                     goal.status = evaluation.success ? "COMPLETED" : "FAILED";
                     goal.result = result;
                     goal.evaluation = evaluation;

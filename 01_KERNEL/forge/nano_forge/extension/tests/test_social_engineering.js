@@ -24,9 +24,9 @@ global.chrome = {
 global.document = {
     querySelector: (sel) => {
         // Simulate finding an email input
-        if (sel.includes('email')) return { 
-            value: '', 
-            dispatchEvent: () => {} 
+        if (sel.includes('email')) return {
+            value: '',
+            dispatchEvent: () => {}
         };
         return null;
     }
@@ -40,7 +40,7 @@ async function runTest() {
     try {
         const profile = { email: 'agent@nano.os' };
         const res = SOCIAL_SKILLS['FORM_FILL'](profile); // Direct call
-        
+
         if (res.action === 'FORM_RESULT' && res.filledFields >= 1) {
              console.log("✅ Form Fill: Success (Filled email)");
              passed++;
@@ -52,7 +52,7 @@ async function runTest() {
         const spawner = new KnightSpawner({});
         // Simulate handing off Tab 123 to Sir Zenith (Mobile/Stealth)
         const newTabId = await spawner.handoff(123, 'SIR_ZENITH');
-        
+
         if (newTabId === 999) {
             console.log("✅ Handoff: Success (Swapped Tab 123 -> 999)");
             passed++;

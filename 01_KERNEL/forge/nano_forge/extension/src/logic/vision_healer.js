@@ -9,7 +9,7 @@ export class VisionHealer {
 
     /**
      * Diagnose a failed action and propose a fix
-     * @param {number} tabId 
+     * @param {number} tabId
      * @param {object} intent - The original failed intent
      * @param {string} error - The error message
      * @returns {object} - New intent (e.g. { action: 'click', type: 'COORDINATE', x: 100, y: 200 })

@@ -4,7 +4,7 @@
  */
 
 export const SOCIAL_SKILLS = {
-    
+
     // 🎭 FORM FILLER: Uses Profile Identity to populate fields
     'FORM_FILL': (profileData = {}) => {
         const mappings = {
@@ -15,7 +15,7 @@ export const SOCIAL_SKILLS = {
         };
 
         let filled = 0;
-        
+
         // Basic Heuristic Loop
         for (const [key, selectors] of Object.entries(mappings)) {
             const value = profileData[key];
@@ -32,7 +32,7 @@ export const SOCIAL_SKILLS = {
                 }
             }
         }
-        
+
         return {
             action: 'FORM_RESULT',
             filledFields: filled
@@ -43,7 +43,7 @@ export const SOCIAL_SKILLS = {
     'DETECT_BLOCK': () => {
         const title = document.title.toLowerCase();
         const text = document.body.innerText.toLowerCase();
-        
+
         const isCloudflare = title.includes('just a moment') || text.includes('cloudflare');
         const is403 = title.includes('403') || title.includes('forbidden');
         const is429 = title.includes('429') || text.includes('too many requests');

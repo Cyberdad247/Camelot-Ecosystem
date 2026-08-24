@@ -15,7 +15,7 @@ export const JobsScreen = () => {
     client.connect();
     // Simulate fetching titan_ledger data via TitanLink
     client.send({ type: 'SYNC_DELTA', payload: { target: 'titan_ledger' } });
-    
+
     client.addListener((msg) => {
       if (msg.type === 'SYNC_DELTA' && msg.payload?.nodes) {
         // Map ledger nodes to job cards
@@ -51,7 +51,7 @@ export const JobsScreen = () => {
                   </XStack>
                   <Text col="$colorSecondary" fS={12}>Type: {job.type}</Text>
                 </YStack>
-                <Badge 
+                <Badge
                   bc={job.status === 'COMPLETED' ? '$green10' : '$orange10'}
                   p="$1"
                   px="$2"

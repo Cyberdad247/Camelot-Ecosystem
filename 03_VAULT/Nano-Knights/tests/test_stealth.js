@@ -59,9 +59,9 @@ function validateInjectionScript(profile) {
         const RENDERER = "${profile.webglRenderer}";
         const UA = "${profile.userAgent}";
     `;
-    
+
     // Check for injection vulnerabilities
-    const hasInjectionRisk = scriptTemplate.includes('</script>') || 
+    const hasInjectionRisk = scriptTemplate.includes('</script>') ||
                              scriptTemplate.includes('${') && !scriptTemplate.match(/\$\{[^}]+\}/);
     return !hasInjectionRisk;
 }
@@ -72,7 +72,7 @@ function checkConsistency(profile) {
     const isWindows = profile.userAgent.includes('Windows');
     const isMac = profile.userAgent.includes('Mac');
     const isLinux = profile.userAgent.includes('Linux');
-    
+
     // Basic consistency: OS should be one of the three
     return isWindows || isMac || isLinux;
 }
@@ -116,7 +116,7 @@ assert(checkPlatformConsistency(mockProfile.userAgent), "Test 13: Platform detai
 function validateChromeVersion(ua) {
     const versionMatch = ua.match(/Chrome\/(\d+)\.(\d+)\.(\d+)\.(\d+)/);
     if (!versionMatch) return false;
-    
+
     const major = parseInt(versionMatch[1]);
     // Chrome version should be realistic (70-130 range as of 2024)
     return major >= 70 && major <= 150;

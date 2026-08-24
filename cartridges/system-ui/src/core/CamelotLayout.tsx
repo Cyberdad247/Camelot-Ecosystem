@@ -57,7 +57,7 @@ function HyperrealisticGlobe({ audioActive }: { audioActive: boolean }) {
     <group>
       <directionalLight position={[5, 3, 5]} intensity={1.5} color="#D4AF37" />
       <pointLight position={[-5, -3, -5]} intensity={1.2} color="#6B3FA0" />
-      
+
       <mesh ref={globeRef} castShadow receiveShadow>
         <sphereGeometry args={[1.9, 64, 64]} />
         <meshStandardMaterial
@@ -341,10 +341,10 @@ export default function CamelotLayout() {
 
   return (
     <div className="flex flex-col h-screen w-screen bg-[#050505] text-[#D4AF37] font-mono select-none overflow-hidden relative selection:bg-[#6B3FA0] selection:text-white">
-      
+
       {/* Scanline Overlay */}
       <div className="absolute inset-0 pointer-events-none bg-[linear-gradient(rgba(212,175,55,0.04)_50%,rgba(0,0,0,0.18)_50%)] bg-[size:100%_4px] z-50 animate-[scan_6s_linear_infinite]" />
-      
+
       {/* ── HEADER ── */}
       <header className="border-b border-[#6B3FA0] bg-[#1e1e1e] p-4 flex justify-between items-center z-10">
         <div>
@@ -384,10 +384,10 @@ export default function CamelotLayout() {
 
       {/* ── MAIN WORKSPACE ── */}
       <main className="flex-grow flex p-4 gap-4 overflow-hidden z-10 min-h-0">
-        
+
         {/* Left Column: Active Swarm Status & OpenPersona State */}
         <aside className="w-1/4 flex flex-col gap-4">
-          
+
           {/* Active Swarm Status */}
           <div className="border border-[#6B3FA0] bg-[#1e1e1e] p-4 rounded shadow-[0_0_15px_rgba(107,63,160,0.2)] flex flex-col h-2/3 overflow-y-auto">
             <h2 className="text-xs font-bold border-b border-gray-700 pb-2 mb-2 text-[#6B3FA0]">🜲 ACTIVE SWARM STATUS</h2>
@@ -426,7 +426,7 @@ export default function CamelotLayout() {
                 ))}
               </div>
             </div>
-            
+
             {/* Hyperrealistic Canvas Avatar embed */}
             <div className="h-16 bg-black border border-[#D4AF37]/15 rounded overflow-hidden relative shadow-[inset_0_0_8px_rgba(212,175,55,0.1)]">
               <Canvas camera={{ position: [0, 0, 4.5] }}>
@@ -440,10 +440,10 @@ export default function CamelotLayout() {
 
         {/* Center / Main Viewport and Right panels */}
         <section className="flex-1 flex gap-4 min-h-0 overflow-hidden">
-          
+
           {/* Middle Viewport (Faculty / Sovereign Override) */}
           <div className="flex-grow border border-[#D4AF37] bg-[#1e1e1e] p-6 rounded flex flex-col shadow-[0_0_10px_rgba(212,175,55,0.2)] relative min-h-0">
-            
+
             {/* TAB 1: SOVEREIGN OVERRIDE */}
             {activeTab === 'SOVEREIGN' && (
               <div className="flex-grow flex flex-col min-h-0">
@@ -452,13 +452,13 @@ export default function CamelotLayout() {
                 <h2 className="text-xl font-bold mb-4 flex items-center border-b border-gray-800 pb-2 mt-4">
                   <span className="mr-2 text-red-500">⚠️</span> PENDING SOVEREIGN APPROVAL
                 </h2>
-                
+
                 <div className="flex-grow bg-[#050505] border border-gray-700 p-4 overflow-y-auto mb-4 text-sm text-gray-300 rounded">
                   <p className="text-[#6B3FA0] font-bold mb-2">TARGET: Refactor Next.js Headless Router</p>
                   <p className="mb-4">
                     Merlin_Ω has generated a structural DAG. Sir Sentinel has audited the PDG. Diff exceeds 10 lines. Security validation requires human override.
                   </p>
-                  
+
                   <pre className="bg-black p-3 border border-gray-800 text-green-400 overflow-x-auto rounded font-mono text-xs shadow-[inset_0_0_8px_rgba(0,0,0,0.8)]">
 {JSON.stringify({
   "action": "OVERWRITE",
@@ -501,7 +501,7 @@ export default function CamelotLayout() {
             {activeTab === 'VOX' && (
               <div className="flex-grow flex flex-col items-center justify-center min-h-0 relative">
                 <div className="absolute top-2 left-2 text-xs text-[#D4AF37]">FACULTY_VIEWPORT</div>
-                
+
                 {/* SVG Avatar Vector with Pinging Eyes and Lip-Sync Mouth */}
                 <div id="avatar-frame" className="w-48 h-48 rounded-full border-2 border-[#6B3FA0] flex items-center justify-center bg-[#050505] mb-6 shadow-[0_0_15px_rgba(107,63,160,0.5)] relative overflow-hidden">
                   <svg id="avatar-vector" className="w-32 h-32 text-[#D4AF37]" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -549,7 +549,7 @@ export default function CamelotLayout() {
             {activeTab === 'HERMES' && (
               <div className="flex-grow flex flex-col gap-3 min-h-0 text-[10px]">
                 <h2 className="text-xl font-bold border-b border-gray-800 pb-2">💻 HERMES DAEMONS & CMUX</h2>
-                
+
                 {/* 4-column CMUX / Topology Layout */}
                 <div className="flex-grow grid grid-cols-2 gap-3 overflow-y-auto min-h-0">
                   {/* Left inner column: Daemons */}
@@ -636,7 +636,7 @@ export default function CamelotLayout() {
                   </div>
                 ))}
               </div>
-              
+
               <div className="flex gap-2">
                 <input
                   type="text"
@@ -666,7 +666,7 @@ export default function CamelotLayout() {
               <p className="text-xs text-gray-400 mb-4">
                 Hold button or issue standard OpenCLI targets natively via text loop.
               </p>
-              
+
               <button
                 id="mic-btn"
                 onClick={handleCaptureToggle}
@@ -696,7 +696,7 @@ export default function CamelotLayout() {
                 />
               </div>
             </div>
-            
+
             <div className="bg-[#050505] border border-gray-800 p-3 rounded text-[10px] text-gray-400 font-mono">
               <p className="text-[#D4AF37] mb-1">SYSTEM_RECON_STREAM:</p>
               <p id="console-stream" className="whitespace-pre-wrap select-text selection:bg-[#6B3FA0]">{speechConsoleLog}</p>

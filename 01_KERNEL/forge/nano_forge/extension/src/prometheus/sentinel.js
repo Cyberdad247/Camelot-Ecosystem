@@ -15,7 +15,7 @@ export class Sentinel {
     const preserveEntities = options.preserve_entities ?? true;
 
     const originalTokens = this.estimateTokens(nodes);
-    
+
     if (originalTokens <= targetTokens) {
       return {
         original_tokens: originalTokens,
@@ -36,7 +36,7 @@ export class Sentinel {
     currentTokens += anchorTokens;
 
     const remaining = nodes.filter(n => !anchors.find(a => a.id === n.id));
-    
+
     for (const node of remaining) {
       if (currentTokens >= targetTokens) break;
 

@@ -49,4 +49,3 @@ export function parseCommand(input: string): Command {
 
   return { action: 'unknown', raw: input };
 }
-

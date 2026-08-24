@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         statusEl.innerHTML = `[STATUS]: <b>${agent}</b> DEPLOYED`;
         resultsContainer.style.display = "none";
-        
+
         chrome.runtime.sendMessage({
           action: "START_MISSION",
           qfocus: qfocus
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updateAgentStatus(agent, status) {
         // Reset all
         document.querySelectorAll('.agent-card').forEach(el => el.classList.remove('active'));
-        
+
         // Highlight active
         const card = document.getElementById(`card-${agent.toLowerCase()}`);
         if (card) card.classList.add('active');
@@ -73,17 +73,17 @@ document.addEventListener("DOMContentLoaded", () => {
     // 3. Broadcaster (The Hive Feed)
     chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       if (request.action === "INTEL_READY") {
-        
+
         statusEl.innerText = "[STATUS]: MISSION COMPLETE";
         resultsContainer.style.display = "block";
-        
+
         // Pretty Print JSON-LD or Markdown
         const content = request.intel.content;
         const textToRender = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
-        
+
         // Typewriter Effect
         typewriterEffect(resultsDisplay, textToRender);
-        
+
         // Update Roster to Idle
         document.querySelectorAll('.agent-card').forEach(el => el.classList.remove('active'));
       }
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function typewriterEffect(element, text, speed = 5) {
         element.textContent = "";
         element.classList.add("typewriter-cursor");
-        
+
         let i = 0;
         function type() {
             if (i < text.length) {
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (btnSync) {
         btnSync.addEventListener("click", () => {
             btnSync.innerText = "SYNCING...";
-            
+
             // Construct Intel Packet
             let intel;
             try {
@@ -146,9 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     btnSync.innerText = "❌ FAILED";
                     btnSync.classList.add('error');
                 }
-                setTimeout(() => { 
-                    btnSync.innerText = "VAULT SYNC"; 
-                    btnSync.classList.remove('success', 'error'); 
+                setTimeout(() => {
+                    btnSync.innerText = "VAULT SYNC";
+                    btnSync.classList.remove('success', 'error');
                 }, 3000);
             });
         });

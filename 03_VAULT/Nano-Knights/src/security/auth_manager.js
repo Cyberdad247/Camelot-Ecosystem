@@ -23,7 +23,7 @@ class AuthManager {
     async login(email, password, code2fa, githubToken) {
         // SIMULATION: Real auth would hit a backend
         // We validate against the specific Sovereign Identity requested
-        
+
         if (email === "cyberdad247@gmail.com") {
             // Verify 2FA (Mock check for now, can perform logic if needed)
             if (code2fa && code2fa.length === 6) {

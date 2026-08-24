@@ -7,11 +7,11 @@ export class VoiceSquire {
         this.recognition = null;
         this.isListening = false;
         this.wakeWords = ['nano', 'anya', 'merlin'];
-        
+
         this.anyaVoice = null;
         this.defaultRate = 1.0;
         this.defaultPitch = 1.0;
-        
+
         this.initialize();
     }
 
@@ -22,7 +22,7 @@ export class VoiceSquire {
             this.recognition.continuous = true;
             this.recognition.interimResults = false;
             this.recognition.lang = 'en-US';
-            
+
             // Handle auto-stop or silence
             this.recognition.onend = () => {
                 console.log('[VoiceSquire] Internal Recognition End');
@@ -52,7 +52,7 @@ export class VoiceSquire {
         this.recognition.onresult = (event) => {
             const transcript = event.results[event.resultIndex][0].transcript.trim();
             console.log(`[VoiceSquire] Heard: "${transcript}"`);
-            
+
             const command = this.extractCommand(transcript);
             if (command) {
                 onCommand(command);
@@ -89,7 +89,7 @@ export class VoiceSquire {
         const lower = transcript.toLowerCase();
         // Use a more precise word-based check to avoid partial matches (e.g., "banano")
         const words = lower.split(/[\s,]+/);
-        
+
         for (const wakeWord of this.wakeWords) {
             const wakeIndex = words.indexOf(wakeWord);
             if (wakeIndex !== -1) {
@@ -99,7 +99,7 @@ export class VoiceSquire {
                 const charIndex = rawLower.indexOf(wakeWord);
                 const commandText = transcript.substring(charIndex + wakeWord.length)
                                               .replace(/^[\s,!:;]+/, '').trim();
-                
+
                 if (commandText.length > 0) {
                     return {
                         raw: transcript,
@@ -140,4 +140,3 @@ export class VoiceSquire {
         return voices.find(v => v.lang.startsWith('en')) || voices[0];
     }
 }
-

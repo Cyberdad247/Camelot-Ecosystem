@@ -28,7 +28,7 @@ export default function AuroraVision() {
                         meta: log.metadata.meta
                     });
                     setIsLive(true);
-                    
+
                     // Simulate dynamic detections
                     if (Math.random() > 0.8) {
                         const objects = ["UI_BUTTON_DETECTED", "TEXT_FIELD_ACTIVE", "CURSOR_MOTION", "WINDOW_RESIZE"];
@@ -56,7 +56,7 @@ export default function AuroraVision() {
                 <div className="absolute inset-0 flex items-center justify-center opacity-20 group-hover:opacity-40 transition-opacity">
                     <Box size={64} className="text-purple-500" />
                 </div>
-                
+
                 {/* Visual HUD Overlays */}
                 <div className="absolute top-2 left-2 flex gap-1">
                     <div className="bg-purple-500/20 backdrop-blur-md border border-purple-500/40 px-1.5 py-0.5 rounded text-[6px] text-purple-300">

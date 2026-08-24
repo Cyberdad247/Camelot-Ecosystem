@@ -21,7 +21,7 @@ test('E2E: WebSocket interaction triggers swarm tasks', async () => {
     const app = express();
     const server = createServer(app);
     const wss = new WebSocketServer({ server });
-    
+
     // Minimal integration test setup (simplified from server.ts)
     wss.on('connection', (ws) => {
         ws.on('message', async (msg) => {
@@ -35,7 +35,7 @@ test('E2E: WebSocket interaction triggers swarm tasks', async () => {
 
     const PORT = 3005; // Change port to avoid conflicts
     server.listen(PORT);
-    
+
     const client = new WebSocket(`ws://localhost:${PORT}`);
 
     const feedbackPromise = new Promise((resolve) => {

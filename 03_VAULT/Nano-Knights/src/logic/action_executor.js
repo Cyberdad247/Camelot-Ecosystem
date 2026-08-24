@@ -3,7 +3,7 @@ import { SOCIAL_SKILLS } from '../skills/social_skills.js';
 import { VisionHealer } from './vision_healer.js';
 
 export class ActionExecutor {
-    
+
     /**
      * Executes a heuristic intent (Click/Type) OR a Specialized/Social Skill.
      * @param {number} tabId - The ID of the tab to act on.
@@ -14,16 +14,16 @@ export class ActionExecutor {
             return await this._executeAttempt(tabId, intent);
         } catch (e) {
             console.warn(`[HER] Action Failed: ${e.message}. Initiating Self-Healing...`);
-            
+
             // Invoke Vision Healer
             const diagnosis = await VisionHealer.heal(tabId, intent, e.message);
-            
+
             if (diagnosis.healed) {
                 console.log(`[HER] Retrying with Healed Strategy: ${diagnosis.reason}`);
-                // Retry with new strategy (Simulated by just retrying original for now, 
+                // Retry with new strategy (Simulated by just retrying original for now,
                 // but real logic would use diagnosis.fallback_selector)
                 try {
-                    return await this._executeAttempt(tabId, intent); 
+                    return await this._executeAttempt(tabId, intent);
                 } catch (retryErr) {
                     return { status: "FAILED", reason: "HEALING_FAILED", details: retryErr.message };
                 }
@@ -56,7 +56,7 @@ export class ActionExecutor {
             });
             return { status: "SUCCESS", data: result[0]?.result };
         }
-        
+
         // 1. Snapshot State (for verification)
         let pre_url = "unknown";
         try {
@@ -66,7 +66,7 @@ export class ActionExecutor {
             console.warn("[HER] Tab unavailable for pre-check", e);
             throw new Error("TAB_GONE");
         }
-        
+
         // 2. Resolve & Execute in Content Script
         const result = await chrome.scripting.executeScript({
             target: { tabId: tabId },
@@ -83,15 +83,15 @@ export class ActionExecutor {
         // 3. Handle Resolution
         if (resolution && resolution.found) {
             console.log(`[HER] Target Resolved:`, resolution.element);
-            
+
             // Execute Click/Input via Scripting (Secure Context)
             await chrome.scripting.executeScript({
                 target: { tabId: tabId },
                 func: (id, action, value) => {
                     // Try Data-Nano-ID first (from BuildDomTree), then Heuristic fallback
-                    const el = document.querySelector(`[data-nano-id='${id}']`) || window.HeuristicResolver.findByText(value)[0]; 
+                    const el = document.querySelector(`[data-nano-id='${id}']`) || window.HeuristicResolver.findByText(value)[0];
                     if (!el) return { success: false };
-                    
+
                     if (action === 'click') {
                         el.click();
                         return { success: true };
@@ -104,7 +104,7 @@ export class ActionExecutor {
                 },
                 args: [resolution.id, intent.action, intent.value]
             });
-            
+
             // 4. Verification Loop
             setTimeout(() => this.verifyOutcome(tabId, pre_url), 500);
             return { status: "SUCCESS", resolution };
@@ -118,7 +118,7 @@ export class ActionExecutor {
         try {
             const post_tab = await chrome.tabs.get(tabId);
             const post_url = post_tab.url;
-            
+
             if (pre_url !== post_url) {
                 console.log(`[VERIFY] Navigation Detected: ${pre_url} -> ${post_url}`);
                 // Trigger New Analysis?

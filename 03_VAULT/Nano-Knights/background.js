@@ -25,11 +25,11 @@ if (self.AuthManager && typeof self.AuthManager.init === 'function') {
 // LLM Adapter for Synthesis
 const llmAdapter = {
     generate: async (prompt, systemRole) => {
-        return await process_via_offscreen("EXECUTE_PROMPT", { prompt, context: [] }); 
+        return await process_via_offscreen("EXECUTE_PROMPT", { prompt, context: [] });
     }
 };
-// SynthesisEngine relies on direct graph access. This likely needs refactoring too 
-// or SynthesisEngine moves to offscreen. For now, we will stub it or leave it broken 
+// SynthesisEngine relies on direct graph access. This likely needs refactoring too
+// or SynthesisEngine moves to offscreen. For now, we will stub it or leave it broken
 // (assuming SynthesisEngine isn't critical for this specific test or user can wait).
 // Actually, SynthesisEngine is imported. If it needs knowledgeGraph in constructor, we have a problem.
 // Solution: Move SynthesisEngine to offscreen in a future step. For now, comment out.
@@ -40,8 +40,8 @@ const SWARM_STATE = {
   task_queue: [],
   memory: [],
   status: "IDLE",
-  current_vision: null, 
-  background_tabs: [], 
+  current_vision: null,
+  background_tabs: [],
   precise: {
     active: false,
     stopRequested: false,
@@ -53,10 +53,10 @@ const SWARM_STATE = {
     "NAVIGATOR": "DOM_STRATEGY",
     "SENTRY": "INJECTION_AUDIT",
     "DISTILLER": "SUMMARIZE_CORE",
-    "LADY_APIS": "RECURSIVE_CRAWL",     
-    "SIR_ORACLE": "PATTERN_SYNTHESIS",  
-    "SIR_ZENITH": "STEALTH_OPS",        
-    "LADY_EYE": "VISUAL_FORENSICS"      
+    "LADY_APIS": "RECURSIVE_CRAWL",
+    "SIR_ORACLE": "PATTERN_SYNTHESIS",
+    "SIR_ZENITH": "STEALTH_OPS",
+    "LADY_EYE": "VISUAL_FORENSICS"
   }
 };
 
@@ -555,7 +555,7 @@ async function deployPreciseMission(request) {
 
 // 2. Message Router
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  
+
   // --- PROMETHEUS INTELLIGENCE HANDLERS (ROUTED TO OFFSCREEN) ---
   if (request.action === 'INDEX_TOON_NODE') {
       (async () => {
@@ -565,7 +565,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })();
       return true;
   }
-  
+
   if (request.action === 'QUERY_KNOWLEDGE_GRAPH') {
       (async () => {
           console.log(`[PROMETHEUS] Routing Query: ${request.query}`);
@@ -574,7 +574,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })();
       return true;
   }
-  
+
   // Knight Squad Spawner
   if (request.action === "SPAWN_SQUAD") {
       (async () => {
@@ -672,7 +672,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })();
       return true;
   }
-  
+
   // Synthesis Engine
   if (request.action === "SYNTHESIZE_REPORT") {
       (async () => {
@@ -692,12 +692,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
           try {
               // 1. Get JSON-LD from Offscreen
               const exportData = await process_via_offscreen('EXPORT_GRAPH', null);
-              
+
               if (!exportData || !exportData['@graph']) throw new Error("Graph Export Failed");
 
               const jsonStr = JSON.stringify(exportData, null, 2);
               const dataUrl = 'data:application/json;base64,' + btoa(unescape(encodeURIComponent(jsonStr)));
-              
+
               // 2. Trigger Download
               const filename = `knight_memory_${new Date().toISOString().replace(/[:.]/g,'-')}.json`;
               await chrome.downloads.download({
@@ -705,7 +705,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                   filename: filename,
                   conflictAction: 'overwrite'
               });
-              
+
               sendResponse({ status: "SUCCESS", filename });
           } catch(e) {
               console.error("[SYNC] Failed:", e);
@@ -714,13 +714,13 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       })();
       return true;
   }
-  
+
   // Data Purge (Sovereign Mode)
   if (request.action === "DATA_PURGE") {
       (async () => {
           // Offscreen Purge Protocol (Future)
           // await process_via_offscreen('PURGE_GRAPH', null);
-          await chrome.storage.local.clear(); 
+          await chrome.storage.local.clear();
           sendResponse({ status: "SUCCESS", msg: "Memory Wiped (Local Shell)" });
       })();
       return true;
@@ -731,14 +731,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "HEARTBEAT") {
       sendResponse({ status: "ALIVE" });
   }
-  
+
   // B. Get Profiles
   if (request.action === "GET_PROFILES") {
       chrome.storage.local.get(null, (data) => {
           const profiles = Object.keys(data)
               .filter(k => k.startsWith('profile_'))
               .map(k => data[k]);
-          
+
           // Add Default Mock if none
           if (profiles.length === 0) profiles.push({ id: 'default', name: 'Default (Chromium)', type: 'DESKTOP' });
 
@@ -795,7 +795,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
   // --- AUTH HANDLERS (MV3) ---
   if (request.action === "GET_AUTH_STATE") {
-      sendResponse({ 
+      sendResponse({
           isAuthenticated: self.AuthManager.isAuthenticated,
           githubToken: self.AuthManager.githubToken
       });
@@ -826,7 +826,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     // E. Trigger Mission (Updated for Queue)
     if (request.action === "START_MISSION") {
-        
+
         // 1. Auth Check
         if (!self.AuthManager.isAuthenticated) {
             sendResponse({ status: "ERROR", msg: "AUTH_REQUIRED" });
@@ -846,7 +846,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             };
             SWARM_STATE.task_queue.push(mission);
             console.log(`[BARRACKS] Mission Queued: [${mission.profileName}] ${mission.qfocus}`);
-            
+
             // If IDLE, auto-start? Or wait for explicit "Run Queue"?
             // User requested "switching to next", implying auto-run sequence.
             if (SWARM_STATE.status === "IDLE") {
@@ -883,7 +883,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     // Attach Visual Context if available
     let context_data;
-    
+
     // Special handling for Vision Skill which passes complex object
     if (assigned_skill === "ANALYZE_SCREENSHOT") {
         context_data = request.data;
@@ -896,16 +896,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     process_via_offscreen(assigned_skill, context_data).then(result => {
       const parsed = CognitiveParser.parse(result);
-      
-      const intel_entry = { 
-        timestamp: new Date().toISOString(), 
-        agent: request.agent, 
+
+      const intel_entry = {
+        timestamp: new Date().toISOString(),
+        agent: request.agent,
         skill: assigned_skill,
         content: parsed.content,
         tags: parsed.tags, // Structured reasoning data
         url: sender.tab ? sender.tab.url : "unknown"
       };
-      
+
       SWARM_STATE.memory.push(intel_entry);
 
       // 8GB SCARCITY LOGIC: Prune Memory
@@ -945,12 +945,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === "LOG_CONFIG_CHANGE") {
     (async () => {
         console.log("[MERLIN] Config Update Received:", request.config);
-        
+
         // 1. Update Profile (Triggers Cookie Swap & Noise Update)
         const newProfileId = request.config.stealthConfig?.activeProfile;
         if (newProfileId) {
             await self.ProfileManager.loadProfile(newProfileId);
-            
+
             // Refresh Stealth Scripts
             chrome.tabs.query({}, (tabs) => {
                 tabs.forEach(tab => {
@@ -985,7 +985,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             });
         }
     })();
-    return true; 
+    return true;
   }
 });
 
@@ -995,16 +995,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 async function executeMission(missionRequest) {
     console.log("[AGENCY] Executing Mission:", missionRequest.qfocus);
     SWARM_STATE.status = "ACTIVE";
-    
+
     // 1. Optimize Prompt (Select Agent)
     const prompt = optimize_prompt(missionRequest.qfocus);
     const agentRole = prompt.split('|')[0].replace('[ACTIVATE]:', '').trim();
-    
+
     // 2. Broadcast Status Update
-    chrome.runtime.sendMessage({ 
-        action: "AGENT_STATUS", 
-        agent: agentRole, 
-        status: "DEPLOYED" 
+    chrome.runtime.sendMessage({
+        action: "AGENT_STATUS",
+        agent: agentRole,
+        status: "DEPLOYED"
     });
 
     // 3. Optimize Context via Sentinel (Prometheus)
@@ -1034,16 +1034,16 @@ async function executeMission(missionRequest) {
             prompt: prompt,
             context: optimizedContext
         });
-        
+
         // 4. Report Results (Intel)
-        const intel_entry = { 
-            timestamp: new Date().toISOString(), 
-            agent: agentRole, 
+        const intel_entry = {
+            timestamp: new Date().toISOString(),
+            agent: agentRole,
             content: result,
-            tags: ["MISSION_COMPLETE"] 
+            tags: ["MISSION_COMPLETE"]
         };
         SWARM_STATE.memory.push(intel_entry);
-        
+
         // Broadcast Intel
         chrome.runtime.sendMessage({
             action: "INTEL_READY",
@@ -1082,7 +1082,7 @@ async function process_via_offscreen(skill, data) {
 // 5. Meta-Prompt Engine
 function optimize_prompt(raw_input) {
   const lower = raw_input.toLowerCase();
-  
+
   // --- NEW: NAVIGATION DETECTION ---
   if (lower.startsWith("go to ") || lower.startsWith("open ")) {
       const url = raw_input.split(" ")[2];
@@ -1129,33 +1129,33 @@ function optimize_prompt(raw_input) {
 // 5b. Voice Command Parser
 function parseVoiceCommand(command) {
   const lower = command.toLowerCase();
-  
+
   // Pattern: "research X" or "find X" or "extract X"
   if (lower.match(/research|find|extract|search/)) {
     return { type: 'MISSION', query: command };
   }
-  
+
   // Pattern: "queue X" or "schedule X"
   if (lower.match(/queue|schedule|add to queue/)) {
     const query = command.replace(/queue|schedule|add to queue/gi, '').trim();
     return { type: 'QUEUE', query: query };
   }
-  
+
   // Pattern: "switch profile" or "change identity"
   if (lower.match(/switch|change.*profile|change.*identity/)) {
     return { type: 'SWITCH_PROFILE' };
   }
-  
+
   // Pattern: "clear" or "reset"
   if (lower.match(/clear|reset|stop/)) {
     return { type: 'CLEAR' };
   }
-  
+
   // Pattern: "status" or "what's happening"
   if (lower.match(/status|what('s|\s+is)\s+(happening|going on)/)) {
     return { type: 'STATUS' };
   }
-  
+
   // Default: treat as general research query
   return { type: 'MISSION', query: command };
 }
@@ -1169,7 +1169,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const tabId = request.tabId || (sender.tab ? sender.tab.id : null);
         if (tabId) {
              ActionExecutor.perform(tabId, request.intent).then(sendResponse);
-             return true; 
+             return true;
         }
     }
 });
@@ -1177,7 +1177,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // I. The Barracks (Queue Consumer)
 function processNextMission() {
     if (SWARM_STATE.status === "ACTIVE") return; // Busy
-    
+
     if (SWARM_STATE.task_queue.length > 0) {
         const nextMission = SWARM_STATE.task_queue.shift();
         console.log(`[BARRACKS] Deploying from Queue: ${nextMission.profileName}`);

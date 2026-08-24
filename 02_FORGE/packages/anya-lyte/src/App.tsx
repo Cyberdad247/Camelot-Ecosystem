@@ -27,7 +27,7 @@ export default function App() {
           <Button theme="active" w="100%" icon={Zap} size="$5">
             INITIATE INTENT
           </Button>
-          
+
           <Button chromeless icon={Menu}>
             KNOWLEDGE GRAPH
           </Button>
