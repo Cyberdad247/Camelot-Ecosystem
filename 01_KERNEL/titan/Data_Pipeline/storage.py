@@ -240,9 +240,9 @@ class Ledger:
         """Get all ledger data."""
         conn = Ledger._get_connection()
         data = {
-            "snapshots": [dict(r) for r in conn.execute("SELECT * FROM snapshots ORDER BY timestamp DESC").fetchall()],
-            "artifacts": [dict(r) for r in conn.execute("SELECT * FROM artifacts ORDER BY timestamp DESC").fetchall()],
-            "builds": [dict(r) for r in conn.execute("SELECT * FROM builds ORDER BY timestamp DESC").fetchall()],
+            "snapshots": [dict(r) for r in conn.execute("SELECT * FROM snapshots ORDER BY timestamp DESC")],
+            "artifacts": [dict(r) for r in conn.execute("SELECT * FROM artifacts ORDER BY timestamp DESC")],
+            "builds": [dict(r) for r in conn.execute("SELECT * FROM builds ORDER BY timestamp DESC")],
         }
         conn.close()
         return data
