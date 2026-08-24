@@ -89,6 +89,9 @@ nul
 .analysis/
 tests/tmp_vault_audit/
 
+# ChromaDB test-run artifacts (UUID-named .bin dirs regenerated on every test)
+tests/tmp_*/
+
 # Camelot generated runtime state
 .hive/context/
 # Runtime databases and memory stores (binary churn — never version)
