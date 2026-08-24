@@ -3,28 +3,6 @@
     "knight_id": "SIR_FORGE",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
-    "title": "L2_Artifact_//DAWNING Mixed Case Project",
-    "content": "{\"action\": \"cybertron_dawning\", \"lead_bio_knight\": \"lukas_forge\", \"project\": \"Mixed Case Project\", \"detail\": \"run: python scripts/cybertron_dawning.py \\\"Mixed Case Project\\\"\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_forge/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_FORGE",
-    "open_viking_tether": "open_viking://worldtree/sir_forge",
-    "updated_at": "2026-08-24T14:56:32.700504+00:00"
-  },
-  {
-    "knight_id": "SIR_FORGE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//DAWNING alpha-nexus",
-    "content": "{\"action\": \"cybertron_dawning\", \"lead_bio_knight\": \"lukas_forge\", \"project\": \"alpha-nexus\", \"detail\": \"run: python scripts/cybertron_dawning.py \\\"alpha-nexus\\\"\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_forge/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_FORGE",
-    "open_viking_tether": "open_viking://worldtree/sir_forge",
-    "updated_at": "2026-08-24T14:56:32.691582+00:00"
-  },
-  {
-    "knight_id": "SIR_FORGE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
     "title": "L2_Artifact_Omega_CLEAN",
     "content": "Cache + orphan cleanup",
     "vfs_path": "vfs://worldtree/knights/sir_forge/tether.json",
