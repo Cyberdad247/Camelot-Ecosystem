@@ -59,6 +59,7 @@ SCHEMA_VERSION_SNAPSHOT: str = "cybertronia.snapshot/v1"
 
 SPEC_BASE = '''\
 # spec.md fixture (Draft 0.3.1)
+```typescript
 const EXPECTED_LAYERS = [
   {layers_md}
 ] as const;
@@ -78,10 +79,12 @@ const EXPECTED_PERF_PROFILES = [
   {perf}
 ] as const;
 SCHEMA_VERSION_SNAPSHOT: spec literal = "cybertronia.snapshot/v1";
+```
 '''
 
 PKG_BASE = '''\
 # package-spec.md fixture (Draft 0.1.1) -- single-line TS literal style
+```typescript
 const EXPECTED_LAYERS = [{layers_md}] as const;
 const EXPECTED_KINDS = [{kinds_md}] as const;
 const EXPECTED_VECTOR_FIELD_NAMES = [{vector_names_md}] as const;
@@ -90,6 +93,7 @@ const EXPECTED_NODE_STRIDE_FLOATS = 10 as const;
 const EXPECTED_EDGE_STRIDE_FLOATS = 8 as const;
 const EXPECTED_RELATIONS = [{relations}] as const;
 const EXPECTED_PERF_PROFILES = [{perf}] as const;
+```
 '''
 
 
@@ -226,12 +230,15 @@ def test_migration_mode_consumer_only_present(tmp_path: Path):
 
 
 def test_migration_mode_consumer_only_missing(tmp_path: Path):
-    """--mode=migration-week-1 with consumer-only invariants absent from md
-    -> FAIL exit 1 (Draft 0.3.1 section6.3 binary-window rule)."""
+    """--mode=migration-week-1 with a consumer-only invariant absent from ONE
+    md source -> FAIL exit 1 (Draft 0.3.1 section6.3 binary-window rule).
+
+    The binary-window rule fires when at least one md source declares the
+    invariant but the other does not (partial declaration). Removing it from
+    BOTH sources is a SOFT-SKIP ("no source declares this invariant") and is
+    covered by test_soft_skip_case_python_only_invariant."""
     py_text = _make_py_text(CORRECT_25)
-    spec_text = _make_spec_text(CORRECT_25).replace(
-        'const EXPECTED_RELATIONS = [\n  "imports", "wires"\n] as const;\n', ""
-    )
+    spec_text = _make_spec_text(CORRECT_25)
     pkg_text = _make_pkg_text(CORRECT_25).replace(
         'const EXPECTED_RELATIONS = ["imports", "wires"] as const;\n', ""
     )
@@ -317,16 +324,18 @@ def test_kinds_set_compare_passes_with_positional_divergence(tmp_path: Path):
 
 
 def test_fail_case_kinds_set_divergence(tmp_path: Path):
-    """spec.md has foo as a kind; pkg.md does not; set-compare detects foo present in spec."""
+    """spec.md has foo as a kind; pkg.md has runtime_service; set-compare
+    detects foo present in spec (equal lengths so the UNORDERED path fires,
+    not the length-mismatch path)."""
     py_text = PY_BASE.format(
         names=', '.join(f'"{n}"' for n in CORRECT_25),
         declared_len=25,
         layers='("bin", "control_plane", "02_FORGE", "03_VAULT", "runtime")',
-        kinds_dict='{"file": 0, "dir": 1}',
+        kinds_dict='{"file": 0, "dir": 1, "runtime_service": 2}',
     )
     spec_text = SPEC_BASE.format(
         layers_md='\n  '.join(f'"{x}"' for x in ["bin", "control_plane", "02_FORGE", "03_VAULT", "runtime"]),
-        kinds_md='"file", "dir", "foo"',  # extra 'foo' that pkg/py don't have
+        kinds_md='"file", "dir", "foo"',  # same length as producer/pkg; 'foo' diverges
         vector_names_md="\n  ".join(f'"{n}"' for n in CORRECT_25),
         declared_len=25,
         relations=', '.join(f'"{x}"' for x in ["imports", "wires"]),
