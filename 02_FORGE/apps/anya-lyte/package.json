@@ -1,37 +1,37 @@
 {
-    "name": "anya-lyte",
-    "private": true,
-    "version": "1.0.6",
-    "scripts": {
-        "start": "expo start",
-        "android": "expo run:android",
-        "ios": "expo run:ios",
-        "build": "echo 'Expo mobile build skipped (requires macOS/Linux for Metro export); use typecheck and lint for CI'",
-        "lint": "tsc --noEmit",
-        "typecheck": "tsc --noEmit",
-        "test": "jest",
-        "clean": "rimraf dist .expo"
-    },
-    "dependencies": {
-        "@camelot/anya-domain": "workspace:*",
-        "@react-navigation/native": "^6.1.18",
-        "@react-navigation/native-stack": "^6.11.0",
-        "@tamagui/config": "latest",
-        "@tamagui/core": "latest",
-        "expo": "~50.0.21",
-        "expo-av": "~13.10.6",
-        "expo-notifications": "~0.27.8",
-        "expo-secure-store": "~12.8.1",
-        "lucide-react-native": "latest",
-        "react": "18.2.0",
-        "react-native": "0.73.2",
-        "react-native-gesture-handler": "~2.14.1",
-        "react-native-reanimated": "~3.6.3",
-        "tamagui": "latest",
-        "zod": "^3.25.76"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.29.0",
-        "typescript": "^5.9.3"
-    }
+  "name": "anya-lyte",
+  "private": true,
+  "version": "1.0.6",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "build": "echo 'Expo mobile build skipped (requires macOS/Linux for Metro export); use typecheck and lint for CI'",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "clean": "rimraf dist .expo"
+  },
+  "dependencies": {
+    "@camelot/anya-domain": "workspace:*",
+    "@react-navigation/native": "^6.1.18",
+    "@react-navigation/native-stack": "^6.11.0",
+    "@tamagui/config": "latest",
+    "@tamagui/core": "latest",
+    "expo": "~50.0.21",
+    "expo-av": "~13.10.6",
+    "expo-notifications": "~0.27.8",
+    "expo-secure-store": "~12.8.1",
+    "lucide-react-native": "latest",
+    "react": "18.2.0",
+    "react-native": "0.73.2",
+    "react-native-gesture-handler": "~2.14.1",
+    "react-native-reanimated": "~3.6.3",
+    "tamagui": "latest",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "typescript": "^5.9.3"
+  }
 }
