@@ -83,6 +83,10 @@ logs/
 04_KINETIC/multivoice/camelot_multivoice.sock
 nul
 
+# Vendored / nested-analysis projects and generated test output
+.analysis/
+tests/tmp_vault_audit/
+
 # Camelot generated runtime state
 .hive/context/
 # Runtime databases and memory stores (binary churn — never version)
