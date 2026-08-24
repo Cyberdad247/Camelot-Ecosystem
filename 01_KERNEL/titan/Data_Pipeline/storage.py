@@ -236,13 +236,17 @@ class Ledger:
         conn.close()
 
     @staticmethod
-    def get_all_data() -> Dict[str, List[Dict]]:
+    def get_all_data(limit: int = 100) -> Dict[str, List[Dict]]:
         """Get all ledger data."""
         conn = Ledger._get_connection()
         data = {
-            "snapshots": [dict(r) for r in conn.execute("SELECT * FROM snapshots ORDER BY timestamp DESC").fetchall()],
-            "artifacts": [dict(r) for r in conn.execute("SELECT * FROM artifacts ORDER BY timestamp DESC").fetchall()],
-            "builds": [dict(r) for r in conn.execute("SELECT * FROM builds ORDER BY timestamp DESC").fetchall()],
+            "snapshots": [
+                dict(r) for r in conn.execute("SELECT * FROM snapshots ORDER BY timestamp DESC LIMIT ?", (limit,))
+            ],
+            "artifacts": [
+                dict(r) for r in conn.execute("SELECT * FROM artifacts ORDER BY timestamp DESC LIMIT ?", (limit,))
+            ],
+            "builds": [dict(r) for r in conn.execute("SELECT * FROM builds ORDER BY timestamp DESC LIMIT ?", (limit,))],
         }
         conn.close()
         return data
