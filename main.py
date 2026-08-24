@@ -9,19 +9,17 @@ import time
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from multiprocessing import shared_memory
-from typing import Dict, List, Any, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import numpy as np
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect, status, HTTPException
+from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
-from pydantic import BaseModel
-
-from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
+from prometheus_client import CONTENT_TYPE_LATEST, Counter, Histogram, generate_latest
 
 try:
+
     from redis.asyncio.sentinel import Sentinel
-    import redis.asyncio as aioredis
     HAS_REDIS = True
 except ImportError:
     HAS_REDIS = False
@@ -230,11 +228,12 @@ class DistributedQRPillSecurityEngine:
 
 
 try:
-    from src.security import BifrostBridgeAuth
-    from src.extractors import AcousticSignalExtractor, ONNXEmbeddingModel
-    from src.vector_cache import AsyncSafeTTLLRUFAISSVectorCache
-    from src.router import TraitBlender
     from src.context import ContextRewindEngine
+    from src.extractors import AcousticSignalExtractor, ONNXEmbeddingModel
+    from src.security import BifrostBridgeAuth
+    from src.vector_cache import AsyncSafeTTLLRUFAISSVectorCache
+
+    from src.router import TraitBlender
 except ImportError:
     class BifrostBridgeAuth:
         def __init__(self, bridge_secret: str, allowed_uuids: List[str]):
@@ -419,7 +418,7 @@ async def lifespan(app: FastAPI):
     if HAS_REDIS:
         try:
             sentinel_hosts = [("10.0.0.1", 26379), ("10.0.0.2", 26379), ("10.0.0.3", 26379)]
-            redis_pwd = os.getenv("REDIS_PASSWORD", "MERLIN_SUPER_SECRET_REDIS_AUTH_9981")
+            redis_pwd = os.environ["REDIS_PASSWORD"]
             sentinel = Sentinel(sentinel_hosts, socket_timeout=0.5, password=redis_pwd, sentinel_kwargs={"password": redis_pwd})
             redis_client = sentinel.master_for("mymaster", decode_responses=True)
             await redis_client.ping()
@@ -432,9 +431,9 @@ async def lifespan(app: FastAPI):
     knights = ["C1_Strategic", "C2_Technical", "C3_Creative", "C4_Analytical", "C5_Operational"]
     pipeline = MultivoiceRouterPipeline(
         knights=knights,
-        bridge_secret=os.getenv("BIFROST_BRIDGE_SECRET", "BIFROST_MASTER_SECRET_KEY_9981"),
-        allowed_uuids=os.getenv("ALLOWED_UUIDS", "e83b27b4-1234-5678-9abc-def012345678").split(","),
-        pill_secret=os.getenv("QR_PILL_SECRET", "QR_PILL_SECRET_KEY_4412"),
+        bridge_secret=os.environ["BIFROST_BRIDGE_SECRET"],
+        allowed_uuids=os.environ["ALLOWED_UUIDS"].split(","),
+        pill_secret=os.environ["QR_PILL_SECRET"],
         redis_client=redis_client
     )
 
