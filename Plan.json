@@ -1,107 +1,74 @@
 {
-  "project": "Camelot-OS PWA Overhaul",
-  "version": "v1.0.0-Alpha-Omega",
+  "project": "Camelot-OS Master Multi-Source Integration",
+  "version": "v1000.0.2",
   "vetted_by": {
-    "architect": "sir_boris",
+    "architect": "merlin_omega",
     "planner": "sir_alex",
     "logic_oracle": "merlin_omega",
-    "interface_designer": "anya_omega"
+    "governor": "arthur_omega"
   },
+  "sources": [
+    "C:\\Users\\vizio\\CAMELOT_OS\\Camelot-OS_vMAX_Singularity",
+    "C:\\Users\\vizio\\Camelot-OS_v.100000.15",
+    "C:\\Users\\vizio\\Documents\\Camelot_Organized\\Documents"
+  ],
+  "target": "C:\\Users\\vizio\\CAMELOT_OS",
   "mathematical_bounds": {
+    "host_ram_cap_mb": 7372,
     "vram_limit_mb": 150,
     "inference_latency_limit_ms": 101,
-    "audio_latency_limit_ms": 250,
-    "state_dimension": 256
+    "token_reduction_target_pct": 85
   },
-  "thematic_design": {
-    "style": "16-bit cyber-retro brutalism",
-    "scanlines": true,
-    "glow_effects": "shadow-[0_0_15px_rgba(0,229,255,0.35)]",
-    "colors": {
-      "void": "#05050A",
-      "obsidian": "#12121A",
-      "trit_cyan": "#00E5FF",
-      "royal_gold": "#FFD700",
-      "system_green": "#39FF14"
-    }
-  },
-  "integration_map": {
-    "voice_router": {
-      "active_port": 8001,
-      "audio_deck_endpoint": "/bifrost/audio",
-      "active_profiles": ["Anya", "Boris", "Merlin", "Helio", "Stitch"]
-    },
-    "hermes_os": {
-      "process_monitor_endpoint": "/api/hermes/processes",
-      "active_daemons": ["sir_octavian", "watchdog", "front_nodes"]
-    },
-    "cmux_terminal": {
-      "channel_count": 4,
-      "logs_stream_endpoint": "/goRouter/events"
-    },
-    "ouroboros_ssm": {
-      "inference_endpoint": "/api/infer",
-      "model_type": "1.58-bit state-space-model"
-    }
-  },
-  "layout_tabs": [
+  "phases": [
     {
-      "id": "nexus",
-      "label": "Nexus Overview",
-      "components": [
-        "SystemLatticeWidget",
-        "CartridgeDeckWidget",
-        "TelemetrySparklineGrid"
+      "id": "P0",
+      "name": "Preflight Alignment & License Gate",
+      "tasks": [
+        "Extend FOSS validation skips in license_header.py for build metadata (.zon, .nix, .typed, .tsbuildinfo)",
+        "Verify 8/8 Preflight checks reach CONFIRMED"
       ]
     },
     {
-      "id": "vox",
-      "label": "Vox Console",
-      "components": [
-        "OpenPersonaAvatar",
-        "KickboxAudioDeck",
-        "VoiceRouterMixer"
+      "id": "P1",
+      "name": "Zero-Trust Contracts & Golden Receipt Harness",
+      "tasks": [
+        "Harmonize packages/contracts/ with 27 JSON-Schemas from v.100000.15",
+        "Wire harness/golden-receipts & verify_receipt_chain.py into test runner",
+        "Validate golden receipt cryptographic chains via verify_receipt_chain.py"
       ]
     },
     {
-      "id": "hermes",
-      "label": "Hermes Core",
-      "components": [
-        "HermesProcessTree",
-        "CMUXTerminalGrid",
-        "LiveRunePrompt"
+      "id": "P2",
+      "name": "Camelot Organized Documents & Knowledge Vault Ingestion",
+      "tasks": [
+        "Mirror 01-04 document trees into 03_VAULT/knowledge_vault/",
+        "Ingest Symbolect primer, blueprints, and task manifests into VFS tissue nodes (vfs/knowledge/)",
+        "Index documents into local Open-Notebook JSON structures for zero-token retrieval"
       ]
     },
     {
-      "id": "forge",
-      "label": "Forge Factory",
-      "components": [
-        "ASTGraphOfThoughts",
-        "KahnDagValidator",
-        "VercelDeployMonitor"
+      "id": "P3",
+      "name": "World Tree Cloudbrain & Hybrid 4-Tier Memory",
+      "tasks": [
+        "Promote hybrid_worldtree_architecture.py to main KERNEL memory tier",
+        "Activate 4-tier memory cascade (Redis L1 -> Qdrant L2 -> Open-Notebook L3 -> WorldTree L4)"
       ]
-    }
-  ],
-  "knight_task_assignments": [
-    {
-      "knight": "sir_forge",
-      "role": "layout_fabricator",
-      "task": "Create the 16-bit retro Bento containers in CamelotLayout.tsx, implementing tab switching, borders, scanline animations, and style variables."
     },
     {
-      "knight": "sir_boris",
-      "role": "resource_governor",
-      "task": "Enforce strict VRAM deallocation on the R3F OpenPersona component, verifying that materials, buffers, and textures are disposed of cleanly upon tab change."
+      "id": "P4",
+      "name": "Kinetic Voice & A2UI Experience Plane",
+      "tasks": [
+        "Bind packages/multivoice-router with control_plane/multivoice_bridge.py",
+        "Assemble A2UI Gateway and 3D spatial interface in experience plane"
+      ]
     },
     {
-      "knight": "lady_apis",
-      "role": "audio_connector",
-      "task": "Wire the Kickbox Audio sliders to HTML5 AudioContext nodes and interface the sound visualizer with active voice routing channels."
-    },
-    {
-      "knight": "merlin_omega",
-      "role": "state_synchronizer",
-      "task": "Map the CMUX channel multiplexer states to active Bifrost WebSocket streams, ensuring that log feeds filter and render at 60 FPS without memory leaks."
+      "id": "P5",
+      "name": "Native Systemd Daemons & Full Verification",
+      "tasks": [
+        "Deploy ops/bifrost-hub native service descriptors",
+        "Run full regression test suite and record graduation in PROVENANCE_LEDGER.md"
+      ]
     }
   ]
 }

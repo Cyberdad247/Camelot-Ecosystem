@@ -107,8 +107,8 @@
       "file": "evidence-envelope.schema.json",
       "$id": "https://camelot-os/schemas/evidence-envelope.schema.json",
       "schema_version": "operator-evidence/1",
-      "purpose": "Structured evidence envelope for the operator plane (camelCase operator-evidence/1, §12.1).",
-      "key_fields_v12": ["kind", "integrity", "payloadHash", "parentHash"]
+      "purpose": "Structured event envelope for evidence streaming to consoles and mobile (§12.1).",
+      "key_fields_v12": ["kind", "integrity", "receipt_ref", "parent_hash"]
     },
     {
       "file": "context-packet.schema.json",
