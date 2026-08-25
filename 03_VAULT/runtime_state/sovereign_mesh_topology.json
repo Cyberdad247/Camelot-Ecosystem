@@ -1,7 +1,7 @@
 {
   "system": "CAMELOT-OS Sovereign Autonomous Ecosystem",
   "version": "vMAX Singularity",
-  "timestamp": "2026-08-25T22:52:00Z",
+  "timestamp": "2026-08-25T22:53:00Z",
   "nodes": {
     "s26_ultra_mobile": {
       "designation": "EXCALIBUR_COMMAND_CENTER",
@@ -33,6 +33,28 @@
         "Digital Software Factory (Forge / Build Pipeline)",
         "Shadow Developers (PIV & Kinetic Code Generation)",
         "Swarm Researchers (Hermes Prime PhialEngine & Lady Apis Multi-Agent Grid)"
+      ]
+    },
+    "kba_services_node": {
+      "designation": "KBA_SERVICES_REMOTE_RUNTIME",
+      "role": "Kickbox Audio Voice OS & Remote Services Bridge",
+      "tailscale_ip": "100.71.218.75",
+      "os": "Linux",
+      "subsystems": [
+        "Kickbox Audio Realtime Voice Bridge",
+        "WebRTC Signaling Service",
+        "Remote MCP Guard (mcp-query)"
+      ]
+    },
+    "fathers_camelot_node": {
+      "designation": "FATHERS_CAMELOT_SECONDARY_NODE",
+      "role": "Sovereign Secondary Windows Execution Node & Failover Rig",
+      "tailscale_ip": "100.121.48.50",
+      "os": "Windows",
+      "subsystems": [
+        "Camelot-Relay Secondary Instance",
+        "Air-Gapped Secret Scanner support",
+        "Remote Kinetic Builder failover"
       ]
     },
     "cybertronia_host": {
