@@ -1,7 +1,7 @@
 {
   "system": "CAMELOT-OS Sovereign Autonomous Ecosystem",
   "version": "vMAX Singularity",
-  "timestamp": "2026-08-25T22:50:00Z",
+  "timestamp": "2026-08-25T22:52:00Z",
   "nodes": {
     "s26_ultra_mobile": {
       "designation": "EXCALIBUR_COMMAND_CENTER",
@@ -22,8 +22,10 @@
     "vps_hub": {
       "designation": "CAMELOT_HUB_CONTROL_PLANE",
       "role": "Sovereign Hub, Digital Factory & Swarm Research Grid",
-      "tailscale_ip": "100.71.218.75",
-      "tailscale_hostname": "kba-services",
+      "host_server": "KVM563",
+      "vm_id": "vps3573819",
+      "public_ip": "162.35.107.134",
+      "assigned_agent": "HERMES_PRIME (CloudBrain MGV Researcher & VFS Forger)",
       "subsystems": [
         "Open-Notebook L3 Memory Engine",
         "NotebookLM CloudBrain L4 Mesh (36 Live UUID Nodes)",
