@@ -9,6 +9,10 @@ on:
 env:
   PYTHON_VERSION: "3.13"
   PYTHONIOENCODING: utf-8
+  # Prevent the iron gate HITL prompt from blocking automated CI runs.
+  # In --non-interactive mode, risky intents are denied silently instead of
+  # hanging on an input() call that no human will answer.
+  CAMELOT_NON_INTERACTIVE: "true"
 
 jobs:
   # ── Stage 1: Governance & Structure ─────────────────────────────

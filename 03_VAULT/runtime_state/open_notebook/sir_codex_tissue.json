@@ -3,6 +3,28 @@
     "knight_id": "SIR_CODEX",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
+    "title": "L2_Artifact_Omega_CODEX IMPLAN: Kickbox-audio \u2014 create unified branch merging best of all 5 branches.",
+    "content": "Direct SIR_CODEX execution lane",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-08-22T05:13:41.072576+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_CODEX IMPLAN: Cyberdad247/Kickbox-audio \u2014 create feat/unified-v1000 branch merging best of all 4 branches",
+    "content": "Direct SIR_CODEX execution lane",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-08-22T04:46:15.833464+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
     "title": "L2_Artifact_//REZERO",
     "content": "{\"action\": \"//REZERO\"}",
     "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",

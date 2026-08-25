@@ -38,11 +38,24 @@ Why a synthetic package alias instead of mutating ``sys.path``?
 from __future__ import annotations
 
 import importlib.util
+import os
 import sys
 from pathlib import Path
 from types import ModuleType
 
 import pytest
+
+
+@pytest.fixture(scope="session", autouse=True)
+def _mempalace_secret_env() -> None:
+    """Provide MEMPALACE_SECRET for the whole pytest session.
+
+    MemPalaceL2 refuses to construct without it (fail-fast, no hardcoded
+    fallback). All mempalace tests construct the class, so the secret is set
+    once per session before any test runs. A test-only value is fine — the
+    salted IDs only need to be deterministic within a single process.
+    """
+    os.environ.setdefault("MEMPALACE_SECRET", "test-only-mempalace-secret")
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 KG_MEM_DIR = REPO_ROOT / "01_KERNEL" / "memory"

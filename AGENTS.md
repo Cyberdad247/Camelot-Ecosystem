@@ -175,6 +175,8 @@ Do not modify or delete previous rules without explicit user instruction.
 Rule 1: [UI/UX] - ALWAYS use Tailwind v4 and Luxora Gold (`#D4AF37`) for primary highlights when creating new Camelot UI because this is the repository preference.
 Rule 2: [Orchestration] - ALWAYS request a stateless validator for pull requests when available because independent review reduces bias.
 Rule 3: [Context] - ALWAYS use codegraph tools when `.codegraph/` exists because symbol queries are more efficient than broad file reads.
+Rule 4: [Architecture/Topology] - ALWAYS recognize Samsung Galaxy S26 Ultra as the `Excalibur Command Center` (Kinetic mobile sentinel & interactive telemetry cockpit) and the VPS (`KVM563` / `162.35.107.134` / VM `vps3573819`, governed by `HERMES_PRIME` / Hermes agent) as the `Camelot-OS Hub & Control Plane` (hosting Open-Notebook, NotebookLM CloudBrain mesh, VFS Digital Factory, Shadow Developers, and Swarm Researchers across the mesh network).
+Rule 5: [Architecture/Mesh] - ALWAYS integrate the full `Cyberdad247@github` Tailscale mesh inventory as active nodes in the Bifrost Bridge: `cybertronia` (`100.118.224.52`, primary Windows orchestrator), `vashawns-s26-ultra` (`100.106.246.126`, Excalibur Command Center / Android 16), `fothers-camelot` (`100.121.48.50`, Windows sovereign secondary node), `lakesha` (`100.100.155.55`, Windows secondary node / Lakisha Voice OS host), `camelot-relay-modal` (`100.84.98.39`, Linux cloud relay node), `kba-services` (`100.71.218.75`, Linux remote services node), and `motorola-moto-g-power-5g---2024` (`100.89.129.105`, auxiliary mobile sentinel).
 
 ---
 

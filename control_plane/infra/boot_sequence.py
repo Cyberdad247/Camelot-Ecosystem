@@ -1085,6 +1085,98 @@ def boot_pydantic_ai_knight(home: Path) -> tuple[bool, str]:
         return False, f"Pydantic AI init failed: {exc}"
 
 
+def boot_opencodex(home: Path) -> tuple[bool, str]:
+    """Start the OpenCodex universal provider proxy sidecar.
+
+    OpenCodex translates the OpenAI Responses API into any LLM provider's
+    wire format, providing 40+ provider support, combo failover, and
+    account pooling for all CAMELOT-OS knights.
+
+    Phase: runs right after CLIProxyAPI (:8080) since opencodex sits
+    upstream of cliproxy on :10100.
+    """
+    import socket
+
+    ocx_host = os.getenv("OCX_HOST", "127.0.0.1")
+    ocx_port = int(os.getenv("OCX_PORT", "10100"))
+
+    # Check if already running
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(1.0)
+            if sock.connect_ex((ocx_host, ocx_port)) == 0:
+                # Port occupied — check if it's actually opencodex
+                try:
+                    from control_plane.core.ocx_bridge import OCXBridge
+                    bridge = OCXBridge()
+                    if bridge.is_live():
+                        return True, f"OpenCodex already running on {ocx_host}:{ocx_port}"
+                except Exception:
+                    pass
+                return True, f"Port {ocx_port} occupied (non-ocx process); skipping launch"
+    except OSError:
+        pass
+
+    # Try to start opencodex via npx
+    node_bin = shutil.which("node")
+    npm_bin = shutil.which("npm")
+    npx_bin = shutil.which("npx")
+
+    ocx_cli = home / "node_modules" / "@bitkyc08" / "opencodex" / "bin" / "ocx.mjs"
+    if not ocx_cli.exists():
+        # Try the global install path
+        ocx_cli = None
+
+    if ocx_cli is None and npx_bin is None:
+        return False, "opencodex not installed (npm install @bitkyc08/opencodex) and npx unavailable"
+
+    log_dir = home / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    ocx_log = log_dir / "opencodex.log"
+    pid_file = log_dir / "opencodex.pid"
+
+    env = os.environ.copy()
+    env.setdefault("OCX_HOST", ocx_host)
+    env.setdefault("OCX_PORT", str(ocx_port))
+
+    try:
+        if ocx_cli is not None:
+            launch_cmd = [node_bin or "node", str(ocx_cli), "start", "--port", str(ocx_port)]
+        else:
+            launch_cmd = [npx_bin, "ocx", "start", "--port", str(ocx_port)]
+
+        log_fh = open(ocx_log, "a", encoding="utf-8")
+        proc = subprocess.Popen(
+            launch_cmd,
+            cwd=str(home),
+            stdout=log_fh,
+            stderr=log_fh,
+            env=env,
+            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+        )
+
+        pid_file.write_text(str(proc.pid), encoding="utf-8")
+
+        # Wait up to 8 seconds for the proxy to become ready
+        import time
+        for _ in range(16):
+            time.sleep(0.5)
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                    sock.settimeout(0.5)
+                    if sock.connect_ex((ocx_host, ocx_port)) == 0:
+                        return True, f"OpenCodex started on {ocx_host}:{ocx_port} (pid={proc.pid})"
+            except OSError:
+                pass
+            if proc.poll() is not None:
+                return False, f"OpenCodex exited early (code={proc.returncode}); see {ocx_log}"
+
+        return False, f"OpenCodex started but not ready after 8s; see {ocx_log}"
+
+    except Exception as exc:
+        return False, f"OpenCodex launch failed: {exc}"
+
+
 def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
     """Stage-0 VFS preflight gate (hard halt on strict REJECT).
 
@@ -1123,6 +1215,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
          "fn": lambda: _boot_vfs_preflight_stage0(home)},
         {"name": "EXCALIBUR Pre-Flight", "required": False, "fn": lambda: boot_excalibur_preflight(home)},
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
+        {"name": "OpenCodex    :10100", "required": False, "fn": lambda: boot_opencodex(home)},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},
         {"name": "OmniVoice     :3002", "required": False, "fn": lambda: boot_omnivoice_router(home)},

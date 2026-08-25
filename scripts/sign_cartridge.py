@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Sign and verify Camelot v1.2 cartridge manifests (§8.2 / §8.3).
 
 Implements the manifest signature policy from `packages/contracts/cartridge.schema.json`:

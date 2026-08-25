@@ -41,6 +41,7 @@
     "vitest": "^2.1.8"
   },
   "dependencies": {
+    "@bitkyc08/opencodex": "^2.29.0",
     "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^5.22.0",
     "dotenv": "^17.4.2",

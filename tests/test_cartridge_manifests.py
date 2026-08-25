@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Cartridge-manifest suite — enforces the §8.2 / §8.3 manifest policy.
 
 Every `cartridges/*/manifest.json` must:

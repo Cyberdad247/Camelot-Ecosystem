@@ -189,20 +189,34 @@ def _detect_backend(provider: str) -> tuple[str, str]:
     # Last resort: CLIProxy anyway (may 401 but at least tries)
     return CLIPROXY_URL, CLIPROXY_KEY
 
-# ── Keyword router (no soul_equation dependency) ──────────────────────────────
-
-_KEYWORD_MAP: list[tuple[list[str], str]] = [
-    (["password", "secret", "private", "credential", "token"], "sir_ghost"),
-    (["security", "audit", "vulnerability", "pentest", "owasp", "exploit"], "sir_sentinel"),
-    (["memory", "recall", "archive", "notebook", "remember", "elephas"], "sir_mnemo"),
-    (["research", "forage", "web", "search", "browse", "context", "fetch"], "sir_helio"),
-    (["code", "build", "compile", "forge", "function", "rust", "class", "debug", "scaffold"], "sir_forge"),
-    (["route", "bridge", "handoff", "terminal", "ui", "link"], "sir_link"),
-    (["reason", "think", "analyze", "critical", "decision", "decompose"], "sir_alex"),
-    (["orchestrate", "architect", "blueprint", "crucible", "colony", "strategy"], "sir_boris"),
-]
+# ── Unified router — delegates to SoulRouter when available ──────────────────
+# Portable binary may not have the full control_plane package (PyInstaller).
+# Fall back to a local keyword map when SoulRouter is unavailable.
 
 def _route(prompt: str, default_knight: str) -> str:
+    """Route a prompt to the best knight.
+
+    Uses the canonical SoulRouter (MFOE tensor scoring) when control_plane is
+    available.  Falls back to a lightweight keyword map for frozen binaries.
+    """
+    try:
+        from control_plane.core.soul_router import route_intent
+        decision = route_intent(prompt)
+        return decision.knight_id
+    except ImportError:
+        pass
+
+    # Fallback: keyword-based routing (no soul_equation dependency)
+    _KEYWORD_MAP: list[tuple[list[str], str]] = [
+        (["password", "secret", "private", "credential", "token"], "sir_ghost"),
+        (["security", "audit", "vulnerability", "pentest", "owasp", "exploit"], "sir_sentinel"),
+        (["memory", "recall", "archive", "notebook", "remember", "elephas"], "sir_mnemo"),
+        (["research", "forage", "web", "search", "browse", "context", "fetch"], "sir_helio"),
+        (["code", "build", "compile", "forge", "function", "rust", "class", "debug", "scaffold"], "sir_forge"),
+        (["route", "bridge", "handoff", "terminal", "ui", "link"], "sir_link"),
+        (["reason", "think", "analyze", "critical", "decision", "decompose"], "sir_alex"),
+        (["orchestrate", "architect", "blueprint", "crucible", "colony", "strategy"], "sir_boris"),
+    ]
     p = prompt.lower()
     words = set(p.split())
 
