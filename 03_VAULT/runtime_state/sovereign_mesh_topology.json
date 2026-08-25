@@ -1,0 +1,46 @@
+{
+  "system": "CAMELOT-OS Sovereign Autonomous Ecosystem",
+  "version": "vMAX Singularity",
+  "timestamp": "2026-08-25T22:50:00Z",
+  "nodes": {
+    "s26_ultra_mobile": {
+      "designation": "EXCALIBUR_COMMAND_CENTER",
+      "role": "Kinetic Mobile Sentinel & Interactive Telemetry Cockpit",
+      "hardware": "Samsung Galaxy S26 Ultra (SM-S948U)",
+      "tailscale_ip": "100.106.246.126",
+      "active_ports": {
+        "sentinel_bridge": 8090,
+        "termux_ssh": 8022
+      },
+      "subsystems": [
+        "Termux Autonomous Runtime",
+        "Always-On WakeLock Watchdog",
+        "QtScrcpy Kinetic Bridge Receiver",
+        "Mobile Voice & Push Notification Engine"
+      ]
+    },
+    "vps_hub": {
+      "designation": "CAMELOT_HUB_CONTROL_PLANE",
+      "role": "Sovereign Hub, Digital Factory & Swarm Research Grid",
+      "tailscale_ip": "100.71.218.75",
+      "tailscale_hostname": "kba-services",
+      "subsystems": [
+        "Open-Notebook L3 Memory Engine",
+        "NotebookLM CloudBrain L4 Mesh (36 Live UUID Nodes)",
+        "VFS (Virtual File System) Tissue Scaffold",
+        "Digital Software Factory (Forge / Build Pipeline)",
+        "Shadow Developers (PIV & Kinetic Code Generation)",
+        "Swarm Researchers (Hermes Prime PhialEngine & Lady Apis Multi-Agent Grid)"
+      ]
+    },
+    "cybertronia_host": {
+      "designation": "CYBERTRONIA_LOCAL_ORCHESTRATOR",
+      "role": "Primary Kinetic Execution Node & Excalibur IDE Harness",
+      "tailscale_ip": "100.118.224.52",
+      "active_ports": {
+        "bifrost_gateway": 3001,
+        "mesh_bridge": 8095
+      }
+    }
+  }
+}

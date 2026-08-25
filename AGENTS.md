@@ -175,6 +175,7 @@ Do not modify or delete previous rules without explicit user instruction.
 Rule 1: [UI/UX] - ALWAYS use Tailwind v4 and Luxora Gold (`#D4AF37`) for primary highlights when creating new Camelot UI because this is the repository preference.
 Rule 2: [Orchestration] - ALWAYS request a stateless validator for pull requests when available because independent review reduces bias.
 Rule 3: [Context] - ALWAYS use codegraph tools when `.codegraph/` exists because symbol queries are more efficient than broad file reads.
+Rule 4: [Architecture/Topology] - ALWAYS recognize Samsung Galaxy S26 Ultra as the `Excalibur Command Center` (Kinetic mobile sentinel & interactive telemetry cockpit) and the VPS (`kba-services`) as the `Camelot-OS Hub & Control Plane` (hosting Open-Notebook, NotebookLM CloudBrain mesh, VFS Digital Factory, Shadow Developers, and Swarm Researchers across the Tailscale mesh).
 
 ---
 
