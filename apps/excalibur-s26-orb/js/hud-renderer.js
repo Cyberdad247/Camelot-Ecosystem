@@ -29,15 +29,66 @@ class HUDRenderer {
         window.AudioPipeline?.startRecording();
       }
     });
+    this.initTabs();
+    this.initBiometricTimer();
+    this.initSecurityActions();
     this.initParallax();
     this.initParticles();
     setTimeout(() => {
       this.addMessage(
-        'The Gemini Trinity is forged into the Lattice. I am your interface to the order. Speak, and I shall execute.',
+        '⚔️ Excalibur Vocal Live Sentinel online. Sovereign lattice sealed across S26 Ultra and VPS Hub (100.110.180.18). Issue your command.',
         'ai'
       );
-    }, 800);
-    console.log('[HUD] Renderer initialized');
+    }, 400);
+    console.log('[HUD] Excalibur Renderer initialized');
+  }
+
+  initTabs() {
+    document.querySelectorAll('.hud-tab').forEach((tab) => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.hud-tab').forEach((t) => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach((c) => c.classList.remove('active'));
+        tab.classList.add('active');
+        const target = document.getElementById(`tab-${tab.dataset.tab}`);
+        if (target) target.classList.add('active');
+      });
+    });
+  }
+
+  initBiometricTimer() {
+    let lease = 30;
+    setInterval(() => {
+      lease = lease > 1 ? lease - 1 : 30;
+      const el = document.getElementById('bioTimer');
+      if (el) el.textContent = `${lease}s`;
+    }, 1000);
+  }
+
+  initSecurityActions() {
+    const btnGen = document.getElementById('btnGenChallenge');
+    if (btnGen) {
+      btnGen.addEventListener('click', () => {
+        const nonce = `knight-${Math.floor(Math.random() * 9 + 1)}-round-${Math.floor(Math.random() * 9 + 1)}`;
+        const nonceEl = document.getElementById('activeNonce');
+        if (nonceEl) nonceEl.textContent = nonce;
+      });
+    }
+
+    const duressBtn = document.getElementById('duressToggle');
+    if (duressBtn) {
+      duressBtn.addEventListener('click', () => {
+        const isLocked = duressBtn.textContent.includes('DEACTIVATE');
+        if (isLocked) {
+          duressBtn.textContent = 'INITIATE GHOST LOCKDOWN';
+          duressBtn.style.background = 'rgba(239, 68, 68, 0.15)';
+          this.addMessage('🛡️ Sovereign Vault unsealed. Normal patrol resumed.', 'ai');
+        } else {
+          duressBtn.textContent = 'DEACTIVATE GHOST LOCKDOWN';
+          duressBtn.style.background = '#ef4444';
+          this.addMessage('🚨 EMERGENCY DURESS TRIGGERED: Silent vault lock initiated. Sandboxed execution only.', 'ai');
+        }
+      });
+    }
   }
 
   initParallax() {
