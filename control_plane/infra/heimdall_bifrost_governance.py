@@ -82,6 +82,59 @@ HEIMDALL_NANO_KNIGHTS: tuple[dict[str, Any], ...] = (
         "mission": "Gate Bifrost→Appwrite egress against zero-trust policy; rotate APPWRITE_API_KEY per `appwrite_bootstrap.sh --rotate`.",
         "tier": "S2",
     },
+    # Hermes Prime always-on VPS bridge co-pilot & MGV synthesis nano-knight
+    {
+        "id": "heimdall.hermes_mesh",
+        "callsign": "Hermes Mesh Sentinel",
+        "channel": "hermes.mesh_synthesis",
+        "mission": "Always-on VPS Hub co-pilot, MGV research loop, VFS forge, and CloudBrain sync across Bifrost.",
+        "tier": "S4",
+    },
+)
+
+BIFROST_KNIGHTS_SWARM: tuple[dict[str, Any], ...] = (
+    {
+        "id": "SIR_HEIMDALL",
+        "role": "Bifrost Guardian & Boundary Sentinel",
+        "vfs": "vfs://sir_heimdall/",
+        "status": "ALWAYS_ON_HUB",
+    },
+    {
+        "id": "HERMES_PRIME",
+        "role": "Always-on VPS Co-Pilot & MGV Synthesis Engine",
+        "vfs": "vfs://hermes_prime/",
+        "status": "ALWAYS_ON_HUB",
+    },
+    {
+        "id": "SIR_LANCELOT",
+        "role": "Kinetic Edge & Frontline Defense",
+        "vfs": "vfs://sir_lancelot/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_GALAHAD",
+        "role": "Verification, Chivalric Purity & Z3 Formal Gate",
+        "vfs": "vfs://sir_galahad/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_SENTINEL",
+        "role": "AgentArmor, Zero-Trust Leases & Security Shield",
+        "vfs": "vfs://sir_sentinel/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "LADY_MNEMOSYNE",
+        "role": "Living Memory Guardian & World Tree Spine",
+        "vfs": "vfs://lady_mnemosyne/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_HELIO",
+        "role": "Voice OS & Phonetic Mesh Dispatch",
+        "vfs": "vfs://sir_helio/",
+        "status": "ACTIVE_ESCORT",
+    },
 )
 
 
@@ -145,6 +198,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
         heimdall_terminal = None
 
     nano_knights = [dict(item) for item in HEIMDALL_NANO_KNIGHTS]
+    bifrost_knights = [dict(item) for item in BIFROST_KNIGHTS_SWARM]
     ready = heimdall_terminal is not None and not missing_components and bool(nano_knights)
     status = "GOVERNING" if ready else "ATTENTION_REQUIRED"
     return {
@@ -152,7 +206,16 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
         "status": status,
         "ready": ready,
         "owner": "sir_heimdall",
+        "co_governor": "HERMES_PRIME",
         "governed_surface": "bifrost_bridge",
+        "vps_hub": {
+            "host_server": "KVM563",
+            "vm_id": "vps3573819",
+            "public_ip": "162.35.107.134",
+            "tailscale_ip": "100.71.218.75",
+            "role": "Camelot-OS Hub & Sovereign Control Plane",
+            "always_on_agents": ["HERMES_PRIME", "SIR_HEIMDALL"],
+        },
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "terminal": {
             "present": heimdall_terminal is not None,
@@ -172,6 +235,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
             "secret_values_serialized": False,
         },
         "nano_knights": nano_knights,
+        "bifrost_knights_swarm": bifrost_knights,
         "event_routes": {
             item["channel"]: {"nano_knight": item["id"], "callsign": item["callsign"]}
             for item in nano_knights

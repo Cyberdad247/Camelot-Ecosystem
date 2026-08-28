@@ -7,7 +7,7 @@
   "knight": "merlin_omega",
   "mode": "ORACLE",
   "directive": "//PLAN build cockpit",
-  "task_id": "rune-903e7b50",
+  "task_id": "rune-0986664a",
   "queued": true,
   "queue_error": null,
   "metadata": {
@@ -15,6 +15,6 @@
     "output": "Plan.json",
     "param": "build cockpit"
   },
-  "latency_ms": 36.84,
-  "timestamp_utc": "2026-08-25T23:37:23.694295+00:00"
+  "latency_ms": 33.34,
+  "timestamp_utc": "2026-08-28T01:11:15.340505+00:00"
 }

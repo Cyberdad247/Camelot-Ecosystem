@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 r"""
@@ -29,8 +29,10 @@ if hasattr(sys.stdout, "reconfigure"):
 
 VPS_PUBLIC_IP = "162.35.107.134"
 VPS_HOSTNAME = "vps3573819.trouble-free.net"
+VPS_TAILSCALE_IP = "100.110.180.18"
 VPS_KBA_TAILSCALE = "100.71.218.75"
 VPS_SSH_PORT = 22
+VPS_HTTP_PORT = 80
 VPS_BIFROST_PORT = 3001
 VPS_MESH_BRIDGE_PORT = 8095
 
@@ -46,6 +48,7 @@ def probe_port(host: str, port: int, timeout: float = 3.0) -> bool:
 
 def get_vps_status() -> dict:
     ssh_ok = probe_port(VPS_PUBLIC_IP, VPS_SSH_PORT, timeout=3.0)
+    http_ok = probe_port(VPS_PUBLIC_IP, VPS_HTTP_PORT, timeout=3.0)
     bifrost_ok = probe_port(VPS_PUBLIC_IP, VPS_BIFROST_PORT, timeout=2.0)
     mesh_ok = probe_port(VPS_PUBLIC_IP, VPS_MESH_BRIDGE_PORT, timeout=2.0)
     
@@ -54,8 +57,11 @@ def get_vps_status() -> dict:
         "vm_id": "vps3573819",
         "public_ip": VPS_PUBLIC_IP,
         "tailscale_ip": VPS_KBA_TAILSCALE,
-        "assigned_agent": "HERMES_PRIME",
+        "assigned_agent": "HERMES_PRIME (NousResearch Hermes Agent)",
+        "co_governor": "SIR_HEIMDALL (Bifrost Boundary)",
         "services": {
+            "hermes_dashboard_80": "ONLINE (http://162.35.107.134/)" if http_ok else "OFFLINE",
+            "openai_api_gateway": "ONLINE (http://162.35.107.134/api/v1)" if http_ok else "OFFLINE",
             "ssh_port_22": "ONLINE" if ssh_ok else "OFFLINE / FIREWALLED",
             "bifrost_gateway_3001": "ONLINE" if bifrost_ok else "STANDBY / PRIVATE_TS",
             "mesh_bridge_8095": "ONLINE" if mesh_ok else "STANDBY / PRIVATE_TS"
@@ -69,7 +75,7 @@ def print_status():
     status = get_vps_status()
     print(f"• Host Server        : {status['host_server']} ({status['vm_id']})")
     print(f"• Public IP          : {status['public_ip']} ({VPS_HOSTNAME})")
-    print(f"• Tailscale IP       : {status['tailscale_ip']} (kba-services)")
+    print(f"• Tailscale IP       : {VPS_TAILSCALE_IP} (vps-camelot-hub)")
     print(f"• Assigned Agent     : {status['assigned_agent']}")
     print("\n📡 Service Ports & Ingress:")
     for s, state in status["services"].items():

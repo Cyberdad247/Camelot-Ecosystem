@@ -1,0 +1,71 @@
+# Camelot-OS VPS Hub Unified Gateway — Caddyfile
+# Sovereign Host: 162.35.107.134 / kba-services (100.71.218.75)
+# Frontend PWA: Luxora Nexus Lab (https://github.com/Cyberdad247/luxora-nexus-lab)
+
+{
+    admin off
+    auto_https off
+}
+
+# --- 🏰 PUBLIC & TAILSCALE HUB REVERSE PROXY ---
+:80, :443, http://162.35.107.134, http://100.71.218.75, http://kba-services.tailcd0c29.ts.net {
+    encode zstd gzip
+
+    # Security & PWA Headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Access-Control-Allow-Origin "*"
+        Access-Control-Allow-Headers "Content-Type, Authorization, X-Sentinel-Lease"
+    }
+
+    # 1. Mesh Bridge & Node Telemetry (Hermes + Heimdall)
+    handle /mesh/* {
+        reverse_proxy 127.0.0.1:8095
+    }
+    handle /bifrost/knights {
+        reverse_proxy 127.0.0.1:8095
+    }
+    handle /hermes/* {
+        reverse_proxy 127.0.0.1:8095
+    }
+    handle /heimdall/* {
+        reverse_proxy 127.0.0.1:8095
+    }
+    handle /api/topology {
+        reverse_proxy 127.0.0.1:8095
+    }
+
+    # 2. Bifrost WebRTC & WebSocket Gateway
+    handle /ws* {
+        reverse_proxy 127.0.0.1:3001
+    }
+    handle /bifrost/* {
+        reverse_proxy 127.0.0.1:3001
+    }
+
+    # 3. Agent API & Sentinel Zero-Trust Leases
+    handle /v1/* {
+        reverse_proxy 127.0.0.1:8080
+    }
+
+    # 4. Vector DB (Qdrant)
+    handle /qdrant/* {
+        uri strip_prefix /qdrant
+        reverse_proxy 127.0.0.1:6333
+    }
+
+    # 5. Ouroboros SSM Reasoning Hot-Path
+    handle /ouroboros/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+
+    # 6. Primary Frontend Surface: Luxora Nexus Lab PWA
+    handle {
+        root * /var/www/camelot
+        try_files {path} /index.html
+        file_server
+    }
+}

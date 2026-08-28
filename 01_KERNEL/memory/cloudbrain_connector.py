@@ -77,6 +77,8 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
     "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
     "HERMES_PRIME":        "28f89cb6-5048-4b5d-9e94-376082d24744",   # hermes_prime_vfs_forge (verified 2026-08-10)
+    "HERMES_PRIME_VFS_FORGE": "28f89cb6-5048-4b5d-9e94-376082d24744",# Hermes_prime_vfs_forge CloudBrain Node
+    "HERMES_AGENT_EVOLUTION": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",# The Hermes Agent: Evolution Beyond OpenClaw
     "SIR_LANCELOT":        "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "LADY_GUINEVERE":      "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
     "SIR_HUGGINGFACE":     "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # HuggingFace Hub & Spaces Conductor (WorldTree Tethered)
@@ -108,7 +110,9 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "SIR_HELIO":           ["voice", "tts", "audio", "realtime"],
     "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic"],
     "SIR_CODEX":           ["kinetic", "rapid", "prototype", "openai"],
-    "HERMES_PRIME":        ["research", "synthesis", "vfs", "forage", "rnd", "multi_agent"],
+    "HERMES_PRIME":        ["research", "synthesis", "vfs", "forage", "rnd", "multi_agent", "hermes_agent", "ouroboros"],
+    "HERMES_PRIME_VFS_FORGE": ["vfs", "forge", "soul", "harness", "research_tissue", "mgv_loop"],
+    "HERMES_AGENT_EVOLUTION": ["evolution", "openclaw_transcendence", "nous_research", "gateway", "autonomous_agent"],
     "LADY_MNEMOSYNE":      ["memory", "vfs", "mnemosyne", "sweep", "brief"],
     "ANYA_QUANTUM_MANTRA": ["glyph", "quantum", "vfs", "token", "compression"],
     "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system"],

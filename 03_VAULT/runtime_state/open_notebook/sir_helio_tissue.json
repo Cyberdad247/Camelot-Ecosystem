@@ -3,6 +3,61 @@
     "knight_id": "SIR_HELIO",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_e02aee218b1dcecb5f31dd6db6aa1a741929f0d89fc7bcda3704d4ec53d6b3b3",
+    "content": "Verification Run run_4: cmd_4\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-08-28T01:12:50.815985+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_ec19eead48f5aee2ed934263c8851e42d65da3b9427a70f4f8a43c5cb6e54b33",
+    "content": "Verification Run run_3: cmd_3\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-08-28T01:12:49.280193+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_b075cf4fe0b785445f0a0ce01fc40f5a71c0202066367af3635ab96a05c8cb46",
+    "content": "Verification Run run_2: cmd_2\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-08-28T01:12:47.926572+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_d9328bb2267f4c1d9430c66f5a1263eea453ec2aa6688abf293461323969093c",
+    "content": "Verification Run run_1: cmd_1\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-08-28T01:12:46.427973+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_262af0acbd4c8446b27f3ff3860b99062674aa6b7ebf62a5cebd999dc4e51592",
+    "content": "Verification Run run_0: cmd_0\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-08-28T01:12:44.973639+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
     "title": "L2_Vector_Index_camelot_audit_8847321d90ca643050000beabacb2e5efdba1123309383ee516ec817f4d8405f",
     "content": "Verification Run run_2: //SYNC\nOperator: sir_helio\nSuccess: True\nResults: {\"status\": \"OK\"}",
     "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
@@ -493,60 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
     "open_viking_tether": "open_viking://worldtree/sir_helio",
     "updated_at": "2026-08-24T14:24:39.907257+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_6d43e173df1b3203bc8aa3d52f596efdfed197ba541a8c8f0499a46b2c0c640b",
-    "content": "Verification Run run_1: cmd_1\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T14:24:39.573670+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_930d822ff09243bcc2a10dc7d5a4dca099b613216f7649c0cd2f9cd01b945102",
-    "content": "Verification Run run_0: cmd_0\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T14:24:39.263162+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_3272feb014a1524aca93bf190c539e25f93bb430cb7e13a267416dcfb4a22ba3",
-    "content": "Verification Run run_4: cmd_4\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T13:56:42.214080+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_5a9c15763ea98ed49acac987684e2c80ecc309b5f64dfc9c1bac09ad924ba1f0",
-    "content": "Verification Run run_3: cmd_3\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T13:56:41.870553+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_fe095611f3647276506b08e1e916f5d133b93d31e7b91b73c9029a48717211eb",
-    "content": "Verification Run run_2: cmd_2\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T13:56:41.518240+00:00"
   }
 ]

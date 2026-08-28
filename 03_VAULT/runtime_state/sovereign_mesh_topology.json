@@ -67,7 +67,11 @@
       "host_server": "KVM563",
       "vm_id": "vps3573819",
       "public_ip": "162.35.107.134",
-      "assigned_agent": "HERMES_PRIME"
+      "tailscale_ip": "100.110.180.18",
+      "hostname": "vps-camelot-hub",
+      "assigned_agent": "HERMES_PRIME",
+      "co_governor": "SIR_HEIMDALL",
+      "status": "CONNECTED"
     }
   }
 }

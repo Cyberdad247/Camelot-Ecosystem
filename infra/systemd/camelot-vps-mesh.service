@@ -1,0 +1,25 @@
+[Unit]
+Description=Camelot-OS VPS Mobile & Mesh Bridge Daemon
+After=network.target tailscaled.service
+Wants=tailscaled.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/Camelot-Ecosystem
+ExecStart=/usr/bin/python3 -m control_plane.dispatch.vps_mobile_mesh_bridge
+Restart=always
+RestartSec=5s
+Environment=PYTHONUNBUFFERED=1
+Environment=VPS_BRIDGE_PORT=8095
+Environment=BIFROST_PORT=3001
+Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+
+# Scarcity Cap (cgroups v2)
+MemoryAccounting=true
+MemoryMax=256M
+CPUAccounting=true
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target

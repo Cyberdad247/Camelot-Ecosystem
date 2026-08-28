@@ -1,0 +1,28 @@
+[Unit]
+Description=Camelot-OS Luxora Nexus Lab Hub PWA UI
+After=network.target caddy.service camelot-vps-mesh.service
+Wants=caddy.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/luxora-nexus-lab
+ExecStart=/usr/bin/npm start -- --port 3000 --host 127.0.0.1
+Restart=always
+RestartSec=5s
+Environment=PORT=3000
+Environment=HOST=127.0.0.1
+Environment=NODE_ENV=production
+Environment=NEXT_PUBLIC_BIFROST_WS=wss://162.35.107.134/ws
+Environment=NEXT_PUBLIC_MESH_BRIDGE=http://162.35.107.134/mesh/status
+Environment=NEXT_PUBLIC_HERMES_API=http://162.35.107.134/hermes/telemetry
+Environment=NEXT_PUBLIC_HEIMDALL_API=http://162.35.107.134/heimdall/governance
+
+# Scarcity Cap (cgroups v2)
+MemoryAccounting=true
+MemoryMax=512M
+CPUAccounting=true
+CPUQuota=100%
+
+[Install]
+WantedBy=multi-user.target

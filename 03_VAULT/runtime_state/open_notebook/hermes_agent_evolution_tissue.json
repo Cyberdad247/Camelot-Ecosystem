@@ -1,0 +1,15 @@
+[
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "parent_knight": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "notebook_uuid": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",
+    "title": "The Hermes Agent: Evolution Beyond OpenClaw",
+    "version": "v1000.54-EXCALIBUR-A",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "status": "ALIGNED_MAX_VERSION",
+    "synced_at": "2026-08-28T10:41:00+00:00"
+  }
+]

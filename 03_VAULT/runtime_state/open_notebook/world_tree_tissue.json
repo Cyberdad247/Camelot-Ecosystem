@@ -2,6 +2,17 @@
   {
     "knight_id": "WORLD_TREE",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "VALIDATION_PULSE_WORLD_TREE",
+    "content": "{\n  \"validator\": \"ANTIGRAVITY_SENTINEL\",\n  \"probe\": \"SYNAPSE_LINK_AUDIT\",\n  \"status\": \"TETHERED_VALIDATED\"\n}",
+    "vfs_path": "vfs://worldtree/knights/world_tree/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",
+    "open_viking_tether": "open_viking://worldtree/world_tree",
+    "updated_at": "2026-08-28T14:38:12.991522+00:00"
+  },
+  {
+    "knight_id": "WORLD_TREE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",

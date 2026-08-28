@@ -2,6 +2,17 @@
   {
     "knight_id": "BIFROST",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "VALIDATION_PULSE_BIFROST",
+    "content": "{\n  \"validator\": \"ANTIGRAVITY_SENTINEL\",\n  \"probe\": \"SYNAPSE_LINK_AUDIT\",\n  \"status\": \"TETHERED_VALIDATED\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bifrost/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIFROST",
+    "open_viking_tether": "open_viking://worldtree/bifrost",
+    "updated_at": "2026-08-28T14:38:11.744657+00:00"
+  },
+  {
+    "knight_id": "BIFROST",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_BIFROST",
