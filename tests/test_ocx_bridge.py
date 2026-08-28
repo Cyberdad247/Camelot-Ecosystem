@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for the OpenCodex bridge (control_plane.core.ocx_bridge)."""
 
 from unittest.mock import patch
@@ -6,7 +8,6 @@ from control_plane.core.ocx_bridge import (
     KNIGHT_TIER_MAP,
     OCXBridge,
     ProviderModel,
-    KnightTierConfig,
     get_bridge,
     is_opencodex_available,
     resolve_knight_model,
@@ -35,7 +36,7 @@ class TestKnightTierMap:
         expected_engines = [
             "claude_code", "gemini_flash", "antigravity.cli",
             "integration_brain", "open_source", "openai_codex",
-            "local_qwen", "open_coder", "agents_a1", "default",
+            "openai_oauth", "local_qwen", "open_coder", "agents_a1", "default",
         ]
         for engine in expected_engines:
             assert engine in KNIGHT_TIER_MAP, f"Missing tier for {engine}"
@@ -103,10 +104,11 @@ class TestOCXBridge:
             assert chain[0][0] == "anthropic/claude-opus-5"
 
     def test_resolve_with_fallback_offline(self):
-        """Offline fallback chain is just the primary."""
+        """Offline fallback chain returns full provider chain resolved to cliproxy/endpoints."""
         with patch.object(self.bridge, "is_ready", return_value=False):
             chain = self.bridge.resolve_with_fallback("sir_boris", engine="claude_code")
-            assert len(chain) == 1
+            assert len(chain) >= 2  # primary + fallbacks
+            assert chain[0][0] == "claude-opus-5"
 
     def test_get_combo_config(self):
         """Combo config has strategy and targets."""
@@ -122,10 +124,10 @@ class TestOCXBridge:
             assert result["status"] == "unreachable"
 
     def test_list_providers_when_offline(self):
-        """list_providers returns empty list when offline."""
+        """list_providers returns default assimilated FCC catalog when offline."""
         with patch("control_plane.core.ocx_bridge._http_get", return_value=None):
             result = self.bridge.list_providers()
-            assert result == []
+            assert len(result) >= 30  # returns FCC provider catalog fallback
 
 
 class TestModuleSingleton:

@@ -82,7 +82,7 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  if (req.url === '/status'% || req.url === '/') {
+  if (req.url === '/status' || req.url === '/') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({
       node: 'EXCALIBUR_VOICE_NODE',

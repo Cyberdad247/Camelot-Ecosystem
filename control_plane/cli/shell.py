@@ -29,13 +29,11 @@ from control_plane.cli.renderer import (
     _identity_lines,
     _model_label,
     _print_json,
-    _progress,
     _provider_label,
     _prompt_text,
     _stream_print,
 )
 from control_plane.cli.session_log import (
-    get_log_path,
     log_command_error,
     log_raw_entry,
     reset_session,

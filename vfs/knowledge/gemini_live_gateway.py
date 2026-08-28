@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"R""Gemini Live Multimodal WebSocket Gateway"""
+r"""Gemini Live Multimodal WebSocket Gateway"""
 
-import asyncio, base64, json, logging, os, sys, websockets
+import asyncio
+import base64
+import json
+import logging
+import os
+import sys
+import websockets
 from typing import Optional
-
 from pathlib import Path
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [%(name)s% (message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [%(name)s] %(message)s')
 LOG = logging.getLogger('GeminiLiveGateway')
 
 GEMINI_LIVE_HOST = 'generativelanguage.googleapis.com'
@@ -19,8 +24,8 @@ DEFAULT_PORT = int(os.getenv('GEMINI_LIVE_PORT', 8765))
 KNIGHT_VOICE_MAP = {
     'MERLIN_OMEGA': {'voice': 'Fenrir', 'instructions': 'You are Merlin Omega, Arch-Sorcerer and Deep Logic Architect of Camelot-OS. Speak with wisdom, authority, and concise technical mastery.'},
     'SIR_BORIS': {'voice': 'Charon', 'instructions': 'You are Sir Boris, Lead Architect of Camelot-OS. Direct, authoritative, focused on system stability and orchestration.'},
-    'SIR_HEIMDALL': 'voice': 'Puck', 'instructions': 'You are Sir Heimdall, Guardian of the Bifrost Bridge. Vigilant, crisp, monitoring mesh telemetry and security gates.'},
-    'LADY_LAKISHA': 'voice': 'Aoede', 'instructions': 'You are Lady Lakisha, Voice OS Sentinel. Elegant, rapid, luxury brutalist clarity.'}
+    'SIR_HEIMDALL': {'voice': 'Puck', 'instructions': 'You are Sir Heimdall, Guardian of the Bifrost Bridge. Vigilant, crisp, monitoring mesh telemetry and security gates.'},
+    'LADY_LAKISHA': {'voice': 'Aoede', 'instructions': 'You are Lady Lakisha, Voice OS Sentinel. Elegant, rapid, luxury brutalist clarity.'}
 }
 
 class GeminiLiveRelay:
@@ -47,9 +52,9 @@ class GeminiLiveRelay:
                             'voiceConfig': {
                                 'prebuiltVoiceConfig': {
                                     'voiceName': self.knight_config['voice']
-                                   }
+                                }
                             }
-                          }
+                        }
                     },
                     'systemInstruction': {
                        'parts': [{'text': self.knight_config['instructions']}]
@@ -82,7 +87,7 @@ class GeminiLiveRelay:
                                    }]
                                 }
                             }
-                           await self.gemini_ws.send(json.dumps(audio_payload))
+                            await self.gemini_ws.send(json.dumps(audio_payload))
                     elif isinstance(message, str):
                         data = json.loads(message)
                         if data.get('type') == 'ping':
@@ -98,7 +103,7 @@ class GeminiLiveRelay:
                 async for message in self.gemini_ws:
                     resp = json.loads(message)
                     server_content = resp.get('serverContent', {})
-                   model_turn = server_content.get('modelTurn', {})
+                    model_turn = server_content.get('modelTurn', {})
                     for part in model_turn.get('parts', []):
                         if 'inlineData' in part:
                             audio_b64 = part['inlineData'].get('data')
@@ -111,7 +116,7 @@ class GeminiLiveRelay:
         await asyncio.gather(from_client_to_gemini(), from_gemini_to_client())
 
 
-async def run_server(port = DEFULT_PORT):
+async def run_server(port = DEFAULT_PORT):
     relay = GeminiLiveRelay()
     server = await websockets.serve(relay.handle_client, '0.0.0.0', port)
     LOG.info(f'Gemini Live Multimodal Gateway active on ws://0.0.0.0:{port}')

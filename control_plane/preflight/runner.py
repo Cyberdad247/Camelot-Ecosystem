@@ -18,14 +18,12 @@ import os
 import sys
 import tempfile
 import time
-from collections import Counter
-from dataclasses import asdict
 from pathlib import Path
-from typing import Callable, List, Optional
+from typing import Callable, List
 
 from .state import GraduationFlag
 from .schemas import (
-    CheckSpec, CheckResult, RunManifest, compute_catalog_hash, utc_now_iso,
+    CheckSpec, CheckResult, RunManifest, utc_now_iso,
 )
 
 

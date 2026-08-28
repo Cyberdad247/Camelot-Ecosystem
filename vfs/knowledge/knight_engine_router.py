@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"R""Knight Engine Router — Grade & Skill Routing for LLM, TTS, and STT.
+r"""Knight Engine Router — Grade & Skill Routing for LLM, TTS, and STT.
 =======================================================================
 Northstar Directive: Always Free Frontier & Top-Tier Sovereign Inference.
 Integrates proper Knight persona to optimal LLM, TTS, and STT engines.
 """
 
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 KNIGHT_ENGINE_MAP: Dict[str, Dict[str, Any]] = {
     "MERLIN_OMEGA": {
@@ -130,9 +130,8 @@ def get_knight_engine(knight_id: str) -> Dict[str, Any]:
     """Return optimal LLM, TTS, and STT grade configuration for a Knight."""
     return KNIGHT_ENGINE_MAP.get(knight_id.upper(), KNIGHT_ENGINE_MAP["MERLIN_OMEGA"])
 
-def dispatch_knight_inference(knight_id: str, messages: list, **kwargs) -> dict:
+def dispatch_knight_inference(knight_id: str, messages: list = None, **kwargs) -> dict:
     """Grade-aware inference router enforcing Free Frontier First policy."""
-    from 03urvault_link import llm_router # bridged via importlib
     config = get_knight_engine(knight_id)
     primary_model = config["llm"]["primary"]
     return {
@@ -141,5 +140,5 @@ def dispatch_knight_inference(knight_id: str, messages: list, **kwargs) -> dict:
         "llm_primary": primary_model,
         "tts_voice": config["tts"]["voice_id"],
         "stt_engine": config["stt"]["engine"],
-        "status": "ROETED_TO_FRONTIER_MODEL"
+        "status": "ROUTED_TO_FRONTIER_MODEL"
     }

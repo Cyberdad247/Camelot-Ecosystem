@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for CAMELOT_NON_INTERACTIVE env-var activation (CI gate)."""
 
 import os

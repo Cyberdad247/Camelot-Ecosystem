@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-import sys, json, os, urllib.request, urllib.error, logging, time, argparse
+import json, os, urllib.request, urllib.error, logging, argparse
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [%(name)s] %(message)s')

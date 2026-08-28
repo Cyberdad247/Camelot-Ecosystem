@@ -1,0 +1,73 @@
+{
+  "status": "OK",
+  "system": "CAMELOT_OS_HERMES_MOA",
+  "version": "1.0.0",
+  "timestamp_utc": "2026-08-25T06:04:14.155294Z",
+  "routing_policy": "cheapest_competent_agent",
+  "target_local_share": 0.9,
+  "nodes": {
+    "light_tier": {
+      "model": "qwen36-nvfp4-a4q",
+      "competence": [
+        "classify",
+        "extract",
+        "summarize",
+        "rewrite",
+        "short_chat",
+        "light"
+      ],
+      "cost_tier": 1
+    },
+    "perception": {
+      "model": "nemotron-omni",
+      "competence": [
+        "multimodal",
+        "perception",
+        "vision",
+        "audio",
+        "grounding",
+        "image"
+      ],
+      "cost_tier": 2
+    },
+    "aggregator_brain": {
+      "model": "deepseek-v4-flash-dspark",
+      "competence": [
+        "reasoning",
+        "routing",
+        "aggregation",
+        "tool_planning",
+        "complex"
+      ],
+      "cost_tier": 3
+    },
+    "two_tower_diffusion": {
+      "model": "twotower-diffusion",
+      "competence": [
+        "gen_heavy",
+        "batch",
+        "bulk",
+        "diffusion",
+        "parallel_generate"
+      ],
+      "cost_tier": 1,
+      "api": "/generate"
+    },
+    "escalation_cloud": {
+      "providers": [
+        "codex:gpt-5.5",
+        "anthropic/claude-opus-4.8",
+        "grok"
+      ],
+      "cost_tier": 10,
+      "gold_weight": 2.0
+    }
+  },
+  "lora_distillation": {
+    "trigger_threshold": 50,
+    "student_model": "gemma-4-12b",
+    "gold_weight": 2.0,
+    "routing_weight": 1.5,
+    "aggregation_weight": 1.2
+  }
+}

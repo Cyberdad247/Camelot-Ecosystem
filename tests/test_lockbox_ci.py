@@ -288,8 +288,8 @@ def test_markdown_parser_handles_singleline_array(tmp_path: Path):
 # -----------------------------------------------------------------------------
 
 @pytest.mark.skipif(
-    not (REPO_ROOT / "control_plane" / "cybertronia_compile.py").exists(),
-    reason="CAMELOT_OS root not found; skipping real-files integration test",
+    not (REPO_ROOT / "control_plane" / "infra" / "cybertronia_compile.py").exists(),
+    reason="producer cybertronia_compile.py not found; skipping real-files integration test",
 )
 def test_kinds_set_compare_passes_with_positional_divergence(tmp_path: Path):
     """KINDS is unordered (frozenset compare). spec.md lists
@@ -427,14 +427,14 @@ def test_exit2_on_zero_invariants_parsed(tmp_path: Path):
 
 
 @pytest.mark.skipif(
-    not (REPO_ROOT / "control_plane" / "cybertronia_compile.py").exists(),
-    reason="CAMELOT_OS root not found; skipping real-files integration test",
+    not (REPO_ROOT / "control_plane" / "infra" / "cybertronia_compile.py").exists(),
+    reason="producer cybertronia_compile.py not found; skipping real-files integration test",
 )
 def test_real_files_integration(tmp_path: Path):
     proc = subprocess.run(
         [
             sys.executable, str(SCRIPT_PATH),
-            "--producer-path",       str(REPO_ROOT / "control_plane" / "cybertronia_compile.py"),
+            "--producer-path",       str(REPO_ROOT / "control_plane" / "infra" / "cybertronia_compile.py"),
             "--spec-md",              str(REPO_ROOT / "docs" / "cybertronia-graph-ui-spec.md"),
             "--package-spec-md",     str(REPO_ROOT / "docs" / "cybertronia-graph-ui-package-spec.md"),
         ],

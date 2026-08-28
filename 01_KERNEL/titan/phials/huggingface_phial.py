@@ -14,10 +14,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import sys
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 _CAMELOT_ROOT = Path(__file__).resolve().parents[3]
 _STATE_PATH = _CAMELOT_ROOT / "03_VAULT" / "runtime_state" / "huggingface_phial.json"

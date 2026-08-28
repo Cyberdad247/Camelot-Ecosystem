@@ -17,7 +17,7 @@ import logging
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 LOG = logging.getLogger("WorldtreeCartridgeBridge")
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent

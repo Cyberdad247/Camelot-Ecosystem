@@ -14,7 +14,6 @@ import sys
 import time
 from typing import Any
 
-from control_plane.cli.constants import CAMELOT_HOME
 from control_plane.cli.directives import (
     _invoke_mode_directive,
     _invoke_swarm_directive,

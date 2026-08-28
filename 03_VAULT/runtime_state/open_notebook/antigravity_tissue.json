@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "ANTIGRAVITY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_bec932c1d7fc5b9ac6585e2333fd60529298f4020df3d620f725c9442cf1a2f7",
+    "content": "Verification Run omniroute_9router_integration_20260825234615: OmniRoute & 9Router Bifrost Bridge Assimilation & Telemetry Alignment\nOperator: Antigravity\nSuccess: True\nResults: {\"omniroute_upstream\": \"https://github.com/diegosouzapw/OmniRoute.git\", \"nine_router_upstream\": \"https://github.com/decolua/9router.git\", \"tests_passed\": 22, \"bifrost_board_selftest\": \"PASS\", \"capabilities\": [\"rtk_caveman_compression\", \"rtk_token_saver_git_diff_log_status\", \"350_plus_providers_1200_models\", \"protocol_translation_openai_claude\", \"multi_account_round_robin_quota_tracking\", \"sovereign_mesh_fleet_7_nodes\", \"knight_engine_matrix_free_frontier_first\"]}",
+    "vfs_path": "vfs://worldtree/knights/antigravity/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANTIGRAVITY",
+    "open_viking_tether": "open_viking://worldtree/antigravity",
+    "updated_at": "2026-08-25T23:46:15.933228+00:00"
+  }
+]

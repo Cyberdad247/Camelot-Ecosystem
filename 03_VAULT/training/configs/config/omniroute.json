@@ -3,6 +3,22 @@
   "description": "OmniRoute config — SoulRouter routing matrix + OpenCodex combo definitions",
 
   "upstream": {
+    "omniroute": {
+      "url": "http://127.0.0.1:20128/v1",
+      "api_key": "omniroute-sovereign-key",
+      "repo": "https://github.com/diegosouzapw/OmniRoute.git",
+      "providers_count": 350,
+      "models_count": 1200,
+      "compression": {
+        "enabled": true,
+        "mode": "rtk_caveman",
+        "target_savings_pct": "15-95%"
+      },
+      "resilience": {
+        "quota_aware_fallback": true,
+        "zero_downtime": true
+      }
+    },
     "cliproxy": {
       "url": "http://127.0.0.1:8080/v1",
       "api_key": "proxy-admin-key"
@@ -15,13 +31,13 @@
 
   "constraints": {
     "request_timeout_ms": 120000,
-    "max_retries": 2,
+    "max_retries": 3,
     "cooldown_seconds": 300
   },
 
   "routing_matrix": {
     "strategy": "cost-optimized",
-    "fallback_chain": ["local", "free", "paid"],
+    "fallback_chain": ["local", "free_tier_first", "paid"],
     "privacy_override": {
       "forced_knight": "SIR_GHOST",
       "trigger_keywords": [
@@ -31,23 +47,28 @@
     },
     "tiers": {
       "tier0_local_kinetic": {
-        "description": "Local-only harness-locked (Ollama)",
-        "models": ["qwen3:8b", "qwen3:1.7b", "agents-a1"],
+        "description": "Local-only harness-locked (Ollama / vLLM / GGUF)",
+        "models": ["qwen3:8b", "qwen3:1.7b", "agents-a1", "qwen2.5-coder:32b", "ornith-35b-uncensored"],
         "local_eligible": true
       },
       "tier1_low_stakes": {
-        "description": "Low-stakes flash models",
-        "models": ["gemini-3-flash-preview", "gpt-4.1-mini"],
+        "description": "Low-stakes high-speed flash models",
+        "models": ["gemini-2.5-flash", "gemini-2.0-flash", "gpt-4.1-mini", "claude-3-5-haiku-latest"],
         "local_eligible": false
       },
       "tier2_standard": {
-        "description": "Standard pro models",
-        "models": ["gemini-3-pro-preview", "claude-sonnet-4", "gpt-5.4"],
+        "description": "Standard pro and coding models",
+        "models": ["gemini-2.5-pro", "claude-3-7-sonnet", "claude-sonnet-4", "gpt-5.4", "qwen-max"],
         "local_eligible": false
       },
       "tier3_complex": {
-        "description": "Frontier apex models",
-        "models": ["gemini-3.1-pro-preview", "claude-opus-5", "gpt-5.5"],
+        "description": "Frontier apex reasoning models",
+        "models": ["gemini-3.1-pro-preview", "claude-opus-5", "gpt-5.5", "gpt-4.5-preview"],
+        "local_eligible": false
+      },
+      "tier4_deep_reasoning": {
+        "description": "Deep reasoning & System-2 CoT chains",
+        "models": ["deepseek-reasoner", "deepseek-r1", "o3-mini", "o1", "gemini-2.0-flash-thinking-exp"],
         "local_eligible": false
       }
     }
@@ -316,6 +337,44 @@
       "cooldown_seconds": 0,
       "local_only": true,
       "applicable_knights": ["sir_agentis"]
+    },
+
+    "R1_reasoner": {
+      "description": "DeepSeek R1 / Reasoning chain across OmniRoute free + cloud providers",
+      "strategy": "failover",
+      "targets": [
+        {"provider": "deepseek",  "model": "deepseek-reasoner"},
+        {"provider": "groq",      "model": "deepseek-r1-distill-llama-70b"},
+        {"provider": "together",  "model": "deepseek-ai/DeepSeek-R1"},
+        {"provider": "openai",    "model": "o3-mini"}
+      ],
+      "cooldown_seconds": 180,
+      "applicable_knights": ["merlin_omega", "sir_boris", "hermes_prime"]
+    },
+
+    "FREE_FRONTIER_TIER": {
+      "description": "Free Frontier First zero-cost rotation across OmniRoute 350+ providers",
+      "strategy": "weighted_round_robin",
+      "targets": [
+        {"provider": "google_ai_studio", "model": "gemini-2.5-flash", "weight": 0.35},
+        {"provider": "groq",             "model": "llama-3.3-70b-versatile", "weight": 0.25},
+        {"provider": "cerebras",         "model": "llama3.3-70b", "weight": 0.20},
+        {"provider": "openrouter_free",  "model": "deepseek/deepseek-chat:free", "weight": 0.20}
+      ],
+      "cooldown_seconds": 60,
+      "applicable_knights": ["sir_boris", "sir_alex", "sir_forge", "hermes_prime", "sir_codex"]
+    },
+
+    "OMNIROUTE_350_PROVIDERS": {
+      "description": "OmniRoute Unified Gateway (diegosouzapw/OmniRoute) 350+ providers & 1200+ models with RTK+Caveman compression",
+      "strategy": "dynamic_quota_aware",
+      "targets": [
+        {"provider": "omniroute_gateway", "model": "auto-best", "endpoint": "http://127.0.0.1:20128/v1"},
+        {"provider": "cliproxy",          "model": "auto-fallback", "endpoint": "http://127.0.0.1:8080/v1"}
+      ],
+      "cooldown_seconds": 30,
+      "compression_mode": "rtk_caveman",
+      "applicable_knights": ["sir_boris", "sir_codex", "merlin_omega", "sir_forge", "hermes_prime", "sir_sentinel"]
     }
   }
 }

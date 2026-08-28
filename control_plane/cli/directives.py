@@ -13,7 +13,7 @@ from control_plane.cli.constants import (
     BARE_SWARM_OBJECTIVE,
     MODE_CARTRIDGE_MAP,
 )
-from control_plane.cli.renderer import _progress, _stream_print
+from control_plane.cli.renderer import _progress
 from control_plane.cli.tasks import _run_sarda, _run_task, _stream_sarda_progress
 
 

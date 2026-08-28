@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
-"R""Gemini Live Multimodal WebSocket Gateway"""
+r"""Gemini Live Multimodal WebSocket Gateway"""
 
 import asyncio, base64, json, logging, os, sys, websockets
-from typing import Optional
 
-from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [%(name)s] %(message)s')
 LOG = logging.getLogger('GeminiLiveGateway')

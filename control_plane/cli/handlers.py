@@ -199,7 +199,6 @@ def _handle_toon(args: Any, _cm: Any, prov_mgr: Any, argv: list[str]) -> int:
 
 def _handle_glyph(args: Any, _cm: Any, prov_mgr: Any, argv: list[str]) -> int:
     from control_plane.infra.ledger_sync import append_provenance_entry
-    from control_plane.cli.dispatch import _log_run
 
     try:
         from control_plane.runes.glyph_registry import (
@@ -278,7 +277,6 @@ def _handle_glyph(args: Any, _cm: Any, prov_mgr: Any, argv: list[str]) -> int:
 
 def _handle_forge_unify(args: Any, _cm: Any, prov_mgr: Any, argv: list[str]) -> int:
     from control_plane.infra.ledger_sync import append_provenance_entry
-    from control_plane.cli.dispatch import _log_run
 
     try:
         from control_plane.runes.forge_unify import (
@@ -371,11 +369,6 @@ def _cloudbrain_progress(args: Any) -> None:
 
 
 def _handle_cloudbrain(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str]) -> int:
-    from control_plane.cli.cloudbrain import (
-        _audit_cloudbrain_configuration,
-        _diagnose_cloud_endpoints,
-        _discover_modal_endpoints,
-    )
     from control_plane.cli.notebooklm import _cmd_camelot_notebooklm_login
     from control_plane.cli.dispatch import _log_run
     import control_plane.camelot_cli as _cli_mod

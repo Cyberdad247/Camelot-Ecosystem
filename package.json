@@ -24,7 +24,8 @@
     "db:migrate": "npm run migrate --workspace=@sovereign/db",
     "db:migrate:dev": "npm run migrate:dev --workspace=@sovereign/db",
     "db:seed": "npm run seed --workspace=@sovereign/db",
-    "benchmark": "npm run start --workspace=@sovereign/benchmark"
+    "benchmark": "npm run start --workspace=@sovereign/benchmark",
+    "omx:camelot": "python scripts/omx-camelot.py"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",

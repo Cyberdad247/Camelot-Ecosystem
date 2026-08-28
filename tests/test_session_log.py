@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for the session log module (control_plane.cli.session_log)."""
 
 import json

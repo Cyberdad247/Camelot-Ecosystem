@@ -33,7 +33,7 @@ import json
 import sys
 from pathlib import Path
 
-from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 # Fields produced by this tool; excluded from the signed/ hashed payload.

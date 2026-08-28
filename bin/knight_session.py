@@ -778,6 +778,13 @@ def _repl(
                     )
                 else:
                     console.print("[yellow]Context: CLAUDE.md not found[/yellow]")
+            elif cmd == "/hud":
+                try:
+                    from control_plane.cli.knight_hud import render_knight_hud
+                    active_k = forced_knight or "MERLIN_OMEGA"
+                    print(render_knight_hud(active_k, use_color=True))
+                except Exception as e:
+                    console.print(f"[red]Could not render HUD: {e}[/red]")
             elif cmd == "/runes":
                 try:
                     from control_plane.runic_router import list_runes
@@ -867,6 +874,8 @@ def main() -> None:
                         help="Skip CLAUDE.md injection — raw LLM mode")
     parser.add_argument("--system", "-s", metavar="FILE",
                         help="Override system prompt from a file")
+    parser.add_argument("--hud", action="store_true",
+                        help="Render the Sovereign Knight Operator HUD and exit")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Show context token counts and routing details")
     parser.add_argument("--non-interactive", action="store_true",
@@ -875,6 +884,15 @@ def main() -> None:
     args = parser.parse_args()
 
     console = Console()
+
+    if args.hud:
+        try:
+            from control_plane.cli.knight_hud import render_knight_hud
+            kid = args.knight or "MERLIN_OMEGA"
+            print(render_knight_hud(kid, use_color=True))
+        except Exception as e:
+            console.print(f"[red]Could not render HUD: {e}[/red]")
+        return
 
     if args.list:
         _models_table(console)

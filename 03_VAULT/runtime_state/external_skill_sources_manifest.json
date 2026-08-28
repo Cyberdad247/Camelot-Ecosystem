@@ -98,6 +98,19 @@
         "goal-video-workflow"
       ],
       "notes": "Camelot-native adapter for goal-style orchestration: goal contract, visible ledger, builder Knight, reviewer Knight, scoped fix loop, verification, and final evidence."
+    },
+    {
+      "id": "camelot-local:multi-repo-branch-audit",
+      "url": null,
+      "local_path": "C:\\Users\\vizio\\CAMELOT_OS\\.agents\\skills\\multi-repo-branch-audit\\SKILL.md",
+      "runner_path": "C:\\Users\\vizio\\CAMELOT_OS\\.agents\\skills\\multi-repo-branch-audit\\run_audit.py",
+      "status": "active_local_adapter",
+      "trust": "operator_supplied",
+      "integration_mode": "first_class_local_skill",
+      "notable_skills": [
+        "multi-repo-branch-audit"
+      ],
+      "notes": "7-phase multi-repo branch audit pipeline: Discovery, Analysis, AnyaGate compilation, Multi-knight dispatch (SIR_BORIS, SIR_SENTINEL, MERLIN_OMEGA, SIR_CODEX), Squire Colony secret scanning, Synthesis, and optional Execution. Orchestrates AnyaGate + runic router for comprehensive repo analysis and branch unification."
     }
   ],
   "governance": {

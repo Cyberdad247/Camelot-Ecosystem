@@ -18,7 +18,7 @@ _IGNORE_DIRS = {
     "dist", "build", ".antigravity", "CAMELOT_DefenseGrid_Quarantine",
     ".mypy_cache", ".ruff_cache", "target",
 }
-_MAX_FILE_BYTES = 10 * 1024 * 1024  # 10 MB ceiling
+_MAX_FILE_BYTES = 2 * 1024 * 1024  # 2 MB ceiling for AST & symbol analysis
 
 
 @dataclass
@@ -32,9 +32,11 @@ class FileRecord:
     is_binary: bool = False
 
     def read_text(self) -> str:
+        if self.is_binary or self.size > _MAX_FILE_BYTES:
+            return ""
         try:
             return self.path.read_text(encoding="utf-8", errors="replace")
-        except OSError:
+        except (OSError, MemoryError, Exception):
             return ""
 
 

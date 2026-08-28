@@ -1,238 +1,136 @@
-# CAMELOT-OS ENTIRE MAP
+# ♜ CYBERTRONIA · CAMELOT-OS WORLDTREE ENTIRE MAP ♜
+========================================================================================
+**Node Identity:** `cybertronia` (`100.118.224.52` / Primary Windows Orchestrator)
+**Operating System:** Windows 11 Pro / x86_64
+**Authoritative Operator:** King Arthur (VaShawn O. Head / Vizion)
+**Max Camelot-OS Version:** `v1000.54-EXCALIBUR-A` (Singularity Living Glyph & VFS Scaffold)
+**WorldTree Home Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`
+**Generated Timestamp:** 2026-08-27 23:19:52 UTC
+========================================================================================
 
-Last reviewed: 2026-06-29
-Root: `C:\Users\vizio\CAMELOT_OS`
-Status: live architecture map for the current checkout
-Mirror: `docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md`
+## 1. SOVEREIGN TAILSCALE MESH TOPOLOGY
 
-## Scope
+| Node Name | Tailscale IP | Role & Operating System | Status |
+|---|---|---|---|
+| **cybertronia** (LOCAL) | `100.118.224.52` | Primary Windows Orchestrator & Local VFS Digital Factory | **ONLINE / MASTER** |
+| **vashawns-s26-ultra** | `100.106.246.126` | Excalibur Command Center / Kinetic Mobile Sentinel (Android 16) | **CONNECTED** |
+| **vps3573819** (`KVM563`) | `162.35.107.134` | Camelot-OS Hub & Control Plane / Hermes Prime VPS Node | **ACTIVE GATEWAY** |
+| **fothers-camelot** | `100.121.48.50` | Windows Sovereign Secondary Node / Distributed Build Agent | **MESH PEER** |
+| **lakesha** | `100.100.155.55` | Windows Secondary Node / Lakisha Voice OS Host | **VOICE CLUSTER** |
+| **camelot-relay-modal** | `100.84.98.39` | Linux Cloud Relay Node / Serverless MicroVM Runner | **CLOUD RELAY** |
+| **kba-services** | `100.71.218.75` | Linux Remote Services Node / Drone Matrix Controller | **SERVICES NODE** |
+| **motorola-moto-g-power** | `100.89.129.105` | Auxiliary Mobile Sentinel & Telemetry Watcher | **AUX SENTINEL** |
 
-This file is the maintained architecture map for the live repository state. It
-covers the meaningful source pillars and their real subdirectories. It is not a
-file-by-file dump: vendored and generated trees (`.venv`, `node_modules`,
-`target`, `dist`, `build`, `*.egg-info`, `__pycache__`, `.ruff_cache`,
-`.pytest_cache`, `.worktrees`) are deliberately excluded. Every path listed
-below was verified to exist in this checkout on the review date.
+---
 
-## Canonical inputs
+## 2. CAMELOT-OS REPOSITORY ROOT TOPOLOGY (`C:\Users\vizio\CAMELOT_OS\`)
 
-The current map is derived from these live surfaces (all verified present):
+```text
+CAMELOT_OS/
+├── 01_KERNEL/                  # Core runtime, agora agent mesh, EXCALIBUR, senses, titan phials
+│   ├── agora/                  # 13-Knight Colony & Agent Roster
+│   ├── core/                   # Aegis shield, mesh network, microvm cages
+│   ├── EXCALIBUR/              # Android 16 Command Center bridge, telemetry, proxy
+│   ├── memory/                 # WorldTree connector, MemPalace L2, Hybrid Router
+│   ├── senses/                 # Multi-modal sensory processing, audio, visual
+│   └── titan/                  # PhialEngine, self-evolution loops, Ouroboros WAL
+├── 02_FORGE/                   # Applications, dashboards, cartridges, kinetic tooling
+│   ├── apps/                   # Omni-Eye Dashboard, Camelot Portal, Kickbox PWA
+│   ├── cartridges/             # Assimilated runnable cartridge definitions
+│   └── portal_core/            # Anya Dashboard & Portal Core React engines
+├── 03_VAULT/                   # Cryptographic ledgers, runtime states, knight knowledge
+│   ├── Knights/                # Knight character sheets, soul equations, sparks
+│   ├── Missions/               # verification_ledger.jsonl & structured mission archives
+│   ├── runtime_state/          # Active manifests, Open-Notebook tissues, mesh topology
+│   └── training/               # CLAUDE.md constitution, configurations, omniroute configs
+├── 04_KINETIC/                 # High-velocity kinetic execution, multivoice, rust squires
+│   ├── huggingface_knight.py   # HuggingFace hub integration and model fetcher
+│   ├── multivoice/             # Multivoice switchboard & audio streaming ingress
+│   └── squires_rs/             # Bare-metal Rust squire scanner binaries
+├── 05_INFRASTRUCTURE/          # Gateways, k8s shims, edge routers, morgana bridge
+├── apps/                       # User interfaces (pwa, bifrost, mcp-query, mobile-node)
+│   ├── bifrost/                # Node.js WebSocket & Express Gateway (:3001)
+│   ├── mobile-node/            # Excalibur mobile node daemon
+│   └── pwa/                    # Next.js 14 Luxury Minimalist Brutalism Voice PWA
+├── bin/                        # Sovereign entrypoints (awaken.py, knight_session.py, camelot.py)
+├── cartridges/                 # V4000 Cartridge Scabbard (8 specialized cartridges)
+│   ├── freellmapi-gateway/     # Free LLM provider gateway & fallback
+│   ├── huginn-agents/          # Multi-agent cognitive reasoning & GoT deliberator
+│   ├── litert-lm-inference/    # On-device real-time speech & LiteRT audio
+│   ├── moa-routing-capture/    # Mixture-of-Agents transcript routing capture
+│   ├── openai-oauth-proxy/     # Zero-key developer proxy & tool runtime
+│   ├── openinterpreter-codex/  # Kinetic local execution & AST code generation
+│   └── system-ui/              # Sovereign Control Surface & Crucible Conductor
+├── control_plane/              # Dispatch, runic routing, CLI, governance, bifrost
+│   ├── cli/                    # Knight HUD, directives, handlers, iron gate
+│   ├── core/                   # Soul router, forge law, AST intercept
+│   ├── dispatch/               # OmniRoute policies, 9Router engine, Bifrost server, Gemini Live
+│   ├── infra/                  # Provenance manager, knight registry, titan audit
+│   └── runes/                  # Runic router, camelot CLI, system triage
+├── docs/                       # Architecture, blueprint, design, verification, SEPTEM REGNA
+│   ├── architecture/           # Source of truth maps, mesh specs, hybrid worldtree
+│   └── SEPTEM_REGNA/           # 7 Sovereign Realms of Camelot (L1 to L7)
+├── squires/                    # CLARITY_CORE v1.0.0 — 8-Squire Codebase Intelligence
+│   └── colony.py               # SCAN, INDEX, GHOST, SWEEP, JUDGE, SENTINEL, MASON
+└── vfs/                        # Virtual File System, WorldTree manifest, Anya glyphs
+    ├── open_notebook/          # Local offline counterpart tissue storage
+    └── worldtree_manifest.json # WorldTree 36-node reconciled taxonomy
+```
 
-- [bin/awaken.py](C:/Users/vizio/CAMELOT_OS/bin/awaken.py:1)
-- [control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/boot_sequence.py:845)
-- [control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runes/runic_router.py:1)
-- [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/cloud_services.py:1)
-- [control_plane/go_router/main.go](C:/Users/vizio/CAMELOT_OS/control_plane/go_router/main.go:1)
-- [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:16)
-- [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1)
-- [docs/architecture/SOURCE_OF_TRUTH_MAP.md](C:/Users/vizio/CAMELOT_OS/docs/architecture/SOURCE_OF_TRUTH_MAP.md:1)
+---
 
-## Live identity
+## 3. CYBERTRONIA FULL HOST WORKSPACE MAP (`C:\Users\vizio\`)
 
-- NotebookLM notebook ID: `8c656cfa-a189-409e-a72d-07692a47f17e`
-- NotebookLM notebook title in bridge code: `Camelot-OS v.999.3`
-- NotebookLM URL in operator config:
-  `https://notebooklm.google.com/notebook/8c656cfa-a189-409e-a72d-07692a47f17e`
+```text
+C:\Users\vizio\
+├── .agents/                    # Shared backplane, skills, workflows, MCP configs
+├── .antigravity/               # Antigravity CLI runtime state & configurations
+├── .claude/                    # Claude Code telemetry, credentials, session stores
+├── .gemini/                    # Gemini CLI and Antigravity brain logs & transcripts
+├── .hive/                      # Knight profiles, agent swarms, genesis blueprints
+├── .notebooklm/                # NotebookLM session cookies and client tokens
+├── .omniroute/                 # OmniRoute proxy configurations & model lists
+├── 02_ASSIMILATE/              # Assimilated upstream code repositories & tooling
+├── 02_FORGE/                   # Local forge applications & shadow developments
+├── 99_ARCHIVE/                 # Immutable historical backups and archives
+├── Camelot-OS_v.100000.15/     # Prior milestone release & standalone artifacts
+├── CAMELOT_DefenseGrid_Quarantine/ # Isolated sandbox quarantine zone
+├── CAMELOT_OS/                 # Live active sovereign repository workspace
+├── CLIProxyAPI/                # Upstream CLIProxyAPI provider gateway
+├── Kickbox-audio/              # Lakisha Voice OS & WebRTC audio bridge
+├── Multivoice-router/          # Upstream Multivoice audio routing server
+├── openclaw/                   # Autonomous coding bot & crawler workspace
+├── PortableAI/                 # Standalone offline model runtimes
+└── Projects/                   # Active client & enterprise development repositories
+```
 
-## Top-level pillar layout
+---
 
-The repository is organized into five numbered pillars plus a control plane and
-supporting trees:
+## 4. CYBERTRONIA SYSTEM ROOT DRIVE MAP (`C:\`)
 
-| Pillar | Path | Role |
-|---|---|---|
-| Kernel | `01_KERNEL/` | core runtime, agora agent mesh, EXCALIBUR, forge, senses |
-| Forge | `02_FORGE/` | applications, dashboards, cartridges, kinetic tooling |
-| Vault | `03_VAULT/` | knowledge, knights, credentials, training, missions, ledgers |
-| Kinetic | `04_KINETIC/` | Rust runic router + squires (`cmd/`, `squires_rs/`) |
-| Infrastructure | `05_INFRASTRUCTURE/` | gateways, k8s/infra shims, morgana bridge |
-| Control plane | `control_plane/` | boot, routers (py/go/rust), cluster, runners |
+```text
+C:\
+├── android-sdk/                # Android 16 Build Tools & Excalibur SDK
+├── dev/                        # Developer toolchains, runtimes, and local services
+├── etc/                        # Configuration overlays and Unix-compatibility shims
+├── java/                       # Java Development Kit (JDK 21/23)
+├── opt/                        # Optional vendor tools, Ollama weights, GGUFs
+├── Program Files/              # 64-bit Core System Binaries & Compilers
+├── Program Files (x86)/        # 32-bit Architecture Binaries
+├── Python314/                  # Global Python 3.14 runtime engine
+├── Users/                      # Operator userprofiles (vizio, Public, Default)
+├── var/                        # Dynamic spool, log directories, and caches
+└── Windows/                    # Windows 11 Sovereign Host Operating System
+```
 
-## Pillar detail
+---
 
-### 01_KERNEL — core runtime and agent mesh
+## 5. WORLDTREE INTEGRATION & VFS TETHER INVARIANTS
 
-- `agora/` — agent mesh: `agents/`, `knights/`, `squire/`, `Squires/`,
-  `swarms/`, `fleet/`, `orchestration/`, `persona/`, `models/`, `prompts/`,
-  `pkg/`, `cloud_orchestrator_shim/`
-- `core/` — `aegis_shield/`, `mesh/`, `microvm_cages/`
-- `EXCALIBUR/` — `BRIDGE/`, `core/`, `proxy/`, `schemas/`, `types/`,
-  `kernel_api_bridge/`, `system/`, `shared/`, `config/`
-- `forge/` — `assimilation/`, `cmd/`, `deployment/`, `diagnostics/`, `exp/`,
-  `internal/`
-- `senses/morgana_bridge` — bifrost bridge service source
-- `config/`, `config_shim/`, `docs/plans/`
+1. **Anya Law Arch-Sovereignty:** All intents originate from King Arthur (`VaShawn O. Head / Vizion`), validated by `ANYA_OMEGA`, translated by `Symbollect`, executed by `Knights`, and synthesized back to King Arthur.
+2. **Zero-Trust Proof-of-Execution:** Every node modification and build verification appends a cryptographically chained entry to `03_VAULT/Missions/verification_ledger.jsonl`.
+3. **Hybrid 4-Tier Memory:** Redis L1 Hot Cache -> Qdrant L2 Semantic Embeddings -> Open-Notebook L3 Local VFS -> WorldTree L4 CloudBrain (Gemini NotebookLM).
+4. **Bifrost Mesh Resilience:** Free Frontier First auto-fallback routing via OmniRoute (`:20128`), 9Router (`:8079`), CLIProxyAPI (`:8080`), and Gemini Live Gateway (`:8765`).
 
-### 02_FORGE — applications and tooling
-
-- `apps/` — `anya-lyte/`, `headartworks/`, `i2l-phygital/`, `lux11/`,
-  `omni-eye-dashboard/` (secondary dashboard surface)
-- `PORTAL_CORE/Anya_Dashboard` — main portal dashboard surface
-- `holotable/` — Next.js surface (`app/`, `components/`, `lib/`, `public/`)
-- `cartridge/` — `packages/`, `rustclaw/`
-- `kinetic/` — `bin/`, `cribo/`, `hephaestus/`, `nano_knights/`, `pmcp/`,
-  `rotel/`, `rustdesk-server/`
-- `excalibur-dev/` — `core/`, `crates/`, `orchestrator/`
-- `assimilation/voice_assistant_omega/`, `hive_api/`, `hooks/`, `generated/`,
-  `dyad-apps/`, `_templates/`
-
-### 03_VAULT — knowledge, knights, credentials
-
-- `Knights/` — role guilds: `Creative/`, `Engineering/`, `Finance/`,
-  `Governance/`, `Growth/`, `Kinetic/`, `Memory/`, `Monitoring/`, `Perception/`
-- `training/configs/` — includes `notebooklm_bridge.py` (Cloud Brain bridge)
-- `credentials/` — `.camelot/`, `.claude/`, `.gemini/`, `.mcp-auth/`,
-  `config_mirror/`, `identity_mirror/` (sensitive — keep gitignored)
-- `Missions/verification_ledger.jsonl` — proof of verification runs
-- `firnflow/l3_cold/`, `GLYPHS/`, `kernels/`, `KINETIC_REFERENCES/`,
-  `directives/`, `evidence/`, `CLOUD_SYNC/`, `bifrost_drop/`
-- `00_SECURE_ARCHIVE/`, `00_TEMPLATES/`, `99_HISTORY/`, `99_SCRATCHPAD/`
-
-### 04_KINETIC — Rust runic edge
-
-- `cmd/runic_router/` — Rust runic router command
-- `squires_rs/src/` — Rust squires implementation
-
-### 05_INFRASTRUCTURE — gateways and shims
-
-- `gateways/`, `infra_shim/caddy/`, `k8s_shim/`, `morgana_bridge/`
-
-### control_plane — orchestration core
-
-- `boot_sequence.py` — boot contract (`run_boot(...)`)
-- `runic_router.py` — Python `//...` / `Omega_...` dispatch
-- `cloud_services.py` — typed cloud / research / NotebookLM routing
-- `go_router/` — Go router. `main.go` is both the one-shot rune CLI
-  (`go_router <rune> <task>`) and an SSE daemon (`go_router serve [addr]`,
-  default `:8077`) exposing `/healthz`, `/rune`, and `/events`
-  (`active_knight` SSE stream for the 3D avatar hub)
-- `rtk/src/`, `cluster/`, `runners/go/`, `runners/rust/`
-
-## Supporting trees
-
-- `bin/` — operator entrypoints: `awaken.py`, `knight_session.py`,
-  `camelot-mcp-edge.exe`; `bin/redis/`
-- `apps/bifrost/` — `src/`, `prisma/`, `public/`, `tests/`
-- `kinetic_edge/` — `camelot_edge/src/`, `pqcrypto/src/`, `rotel/src/`,
-  `saltare/` (Go service: `cmd/`, `internal/`, `pkg/`, `deployments/`,
-  `docker/`, `docs/`, `tests/`), `swarm_spawner/src/`
-- `observability/grafana/` — `dashboards/`, `provisioning/`
-- `scripts/` — operator scripts incl. `governance/` and `inspect_fs.sh`
-  (read-only filesystem audit)
-- `docs/` — see Documentation map below
-- `squires/`, `conductor/`, `dashboards/`, `terraform/`, `tests/`,
-  `verification/`, `data/`, `logs/`
-
-## Documentation map
-
-- `docs/architecture/` — incl. `ARCH/`, `SOURCE_OF_TRUTH_MAP.md`
-- `docs/SEPTEM_REGNA/` — layered architecture: `L1_SUBSTRATE/`, `L2_KINETIC/`,
-  `L5_AGENTIC/`, `L6_GOVERNANCE/`, `L7_ETHEREAL/` (holds the entiremap mirror)
-- `docs/protocols/` — `LAWS/`, `PERSONA/`
-- `docs/reference/` — `ARTIFACTS/`, `INTEGRATIONS/`, `LEGAL/`, `MANIFESTS/`,
-  `PROMPTS/`, `SPECS/`
-- `docs/maestro/` (`plans/`, `state/`), `docs/plans/`, `docs/guides/`,
-  `docs/diagrams/`, `docs/reports/`, `docs/catridges/`
-
-## Boot architecture
-
-The current boot contract is defined by `run_boot(...)` in
-[control_plane/boot_sequence.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/boot_sequence.py:845).
-
-### Required phases
-
-- `CLIProxyAPI   :8080`
-- `Defense Grid`
-- `Kinetic Edge  :3001`
-- `Morgana Bridge :8001`
-
-### Optional phases currently wired in the boot sequence
-
-- `Cloud Brain  Auth`
-- `Vizion Telemetry`
-- `Sovereign Harness`
-
-## Command architecture
-
-### Operator entrypoints
-
-- `awaken` -> [bin/awaken.py](C:/Users/vizio/CAMELOT_OS/bin/awaken.py:1)
-- `camelot` surfaces under `bin/` and `control_plane/`
-- `ks` / knight session -> [bin/knight_session.py](C:/Users/vizio/CAMELOT_OS/bin/knight_session.py:1)
-
-### Runic routing
-
-Live rune routing is defined in
-[control_plane/runic_router.py](C:/Users/vizio/CAMELOT_OS/control_plane/runes/runic_router.py:1)
-(Python) with a Rust counterpart under `04_KINETIC/cmd/runic_router/` and a Go
-edge at `control_plane/go_router/`. The `//MALICIOUS` SAT-gate returns
-`UNSATISFIED` across the CLI and the Go `/rune` endpoint.
-
-## Cloud Brain architecture
-
-The live Cloud Brain path is split across:
-
-- NotebookLM short-term surface:
-  [03_VAULT/training/configs/notebooklm_bridge.py](C:/Users/vizio/CAMELOT_OS/03_VAULT/training/configs/notebooklm_bridge.py:16)
-- operator configuration:
-  [.camelot-config.yaml](C:/Users/vizio/CAMELOT_OS/.camelot-config.yaml:1)
-- typed router and local/remote fallback behavior:
-  [control_plane/cloud_services.py](C:/Users/vizio/CAMELOT_OS/control_plane/infra/cloud_services.py:1)
-
-Important current rule:
-
-- `CAMELOT_CLOUDBRAIN_URL` is not the notebook identity source for the live
-  NotebookLM surface. The bridge constants and the operator notebook URL are
-  the canonical identity anchors.
-
-## Dashboard architecture
-
-The current repo does not use `02_FORGE/web/` as the live dashboard root.
-Use these live surfaces instead:
-
-- `02_FORGE/PORTAL_CORE/Anya_Dashboard`
-- `02_FORGE/apps/omni-eye-dashboard`
-- `02_FORGE/holotable` (Next.js)
-
-## Kinetic and bridge architecture
-
-The repo contains a `kinetic_edge` tree, but not the old
-`kinetic_edge/mcp_server/` path referenced by older docs. The current live repo
-also contains:
-
-- `bin/camelot-mcp-edge.exe`
-- `01_KERNEL/senses/morgana_bridge`
-- `kinetic_edge/saltare` (Go edge service)
-
-Docs should reference those existing surfaces instead of the removed nested
-`mcp_server` path.
-
-## Known stale anchors removed from the canonical map
-
-Do not use these as current source-of-truth anchors for this checkout:
-
-- root `OS_MANIFEST.md`
-- root `VERSION`
-- root `config.json`
-- repo-root `cloud_orchestrator/`
-- `kinetic_edge/mcp_server/`
-- `02_FORGE/web/`
-
-## Cleanup status (2026-06-29)
-
-Malformed path-escaping artifacts at the repo root, audited and resolved:
-
-- `CUsersvizioCAMELOT_OSPROVENANCE_LEDGER.md` — REMOVED (untracked 1527-byte
-  stray; the canonical ledger is the tracked `PROVENANCE_LEDGER.md`, ~229 KB)
-- `UsersvizioCAMELOT_OS.pytest_cache_cx/`, `UsersvizioCAMELOT_OS.pytest_tmp_cx/`
-  — REMOVED (standard pytest cache/tmp junk)
-- `.runtime_logssaltare.err.log`, `.runtime_logssaltare.out.log` — KEPT for now:
-  locked by the live `saltare_gateway` process. Delete after the gateway stops;
-  they are intended for `.runtime_logs/`.
-
-## Maintenance rule
-
-1. Check live code and config first
-2. Verify the referenced paths exist
-3. Update root `entiremap.md` first
-4. Keep the L7 mirror content-aligned with this file
+========================================================================================
+*END OF CYBERTRONIA WORLDTREE ENTIRE MAP · RECONCILED & RATIFIED*

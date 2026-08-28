@@ -1,5 +1,5 @@
 # CLARITY_CORE Colony Report
-**Generated:** 2026-08-12 14:01 UTC
+**Generated:** 2026-08-26 19:34 UTC
 **Root:** `C:\Users\vizio\CAMELOT_OS`
 
 ---
@@ -8,21 +8,21 @@
 
 | Metric | Value |
 |--------|-------|
-| Files scanned | 13,223 |
-| Total lines | 3,709,429 |
-| Symbols indexed | 36,091 |
+| Files scanned | 31,605 |
+| Total lines | 7,086,803 |
+| Symbols indexed | 70,059 |
 | Risk Score | 100.0 / 100 |
 | Risk Label | **CRITICAL** |
 | HITL Required | Yes ⚠️ |
 
 ## Findings
 
-- 134 potential secret(s) detected — CRITICAL
-- 35 large file(s) (>500 KB) found
-- 213 TODO/FIXME markers — technical debt accumulation
-- 3375 duplicate file(s) detected
-- 14 unused imports (dead code)
-- Large codebase: 3,709,429 lines — context management critical
+- 198 potential secret(s) detected — CRITICAL
+- 44 large file(s) (>500 KB) found
+- 1493 TODO/FIXME markers — technical debt accumulation
+- 10574 duplicate file(s) detected
+- 285 unused imports (dead code)
+- Large codebase: 7,086,803 lines — context management critical
 
 ## Recommendations
 
@@ -37,9 +37,9 @@
 
 | Category | Count |
 |----------|-------|
-| Secrets (critical) | 134 |
-| Warnings | 35 |
-| Info | 222 |
+| Secrets (critical) | 198 |
+| Warnings | 44 |
+| Info | 1503 |
 
 ### Critical Flags
 
@@ -48,50 +48,50 @@
 - `02_FORGE/cartridge/bifrost_bridge.py:168` — secret: generic_token: secr...ook"
 - `02_FORGE/cartridge/test_bifrost_bridge.py:32` — secret: generic_token: SECR...ret"
 - `02_FORGE/kinetic/vizio-router/cmd/pulse/ops/TAILSCALE-KEY-MINT.md:65` — secret: generic_token: TOKE...XXX"
+- `02_FORGE/KINETIC_ARMORY/ansible/test/integration/targets/ansible-config/tasks/main.yml:128` — secret: generic_token: toke...ken"
+- `02_FORGE/KINETIC_ARMORY/ansible/test/integration/targets/ansible-vault/password-script.py:23` — secret: generic_token: PASS...ord'
+- `02_FORGE/KINETIC_ARMORY/ansible/test/integration/targets/module_utils_Ansible.Basic/library/ansible_basic_tests.ps1:666` — secret: generic_token: pass...TER"
+- `02_FORGE/KINETIC_ARMORY/ansible/test/integration/targets/user/tasks/test_create_user_password.yml:53` — secret: generic_token: pass...ord"
+- `02_FORGE/KINETIC_ARMORY/ansible/test/units/parsing/vault/test_vault.py:159` — secret: generic_token: pass...ord"
+- `02_FORGE/KINETIC_ARMORY/ansible/test/units/parsing/vault/test_vault.py:217` — secret: generic_token: pass...ord"
+- `02_FORGE/KINETIC_ARMORY/ansible/test/units/parsing/vault/test_vault.py:610` — secret: generic_token: pass...ord"
+- `02_FORGE/KINETIC_ARMORY/ansible/test/units/parsing/vault/test_vault_editor.py:52` — secret: generic_token: pass...ord"
+- `02_FORGE/KINETIC_ARMORY/freellmapi/README.md:454` — secret: generic_token: api_...key"
+- `02_FORGE/KINETIC_ARMORY/freellmapi/README.md:648` — secret: generic_token: TOKE...key"
+- `02_FORGE/KINETIC_ARMORY/freellmapi/server/src/__tests__/lib/crypto-keyfile.test.ts:87` — secret: generic_token: secr...ret'
 - `02_FORGE/KINETIC_ARMORY/goose/crates/goose/src/providers/gcpauth.rs:608` — secret: private_key: ----...----
 - `02_FORGE/KINETIC_ARMORY/goose/crates/goose/src/providers/gcpauth.rs:879` — secret: private_key: ----...----
 - `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/enhanced-code-editing.md:23` — secret: generic_token: API_...ere"
 - `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/environment-variables.md:55` — secret: generic_token: API_...ere"
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/security/prompt-injection-detection.md:84` — secret: generic_token: TOKE...KEN"
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/mcp/filesystem-mcp.md:130` — secret: generic_token: SECR...456'
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/src/pages/prompt-library/data/prompts/api-documentation-generator.json:8` — secret: generic_token: pass...123'
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/src/pages/prompt-library/data/prompts/multi-project-security-audit.json:8` — secret: aws_access_key: AKIA...CDEF
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/src/pages/prompt-library/data/prompts/multi-project-security-audit.json:8` — secret: aws_secret: aws_...890'
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/agent/redact.py:68` — secret: private_key: ----...----
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/optional-skills/email/agentmail/SKILL.md:44` — secret: generic_token: API_...ere"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/optional-skills/security/1password/SKILL.md:61` — secret: generic_token: TOKE...ken"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mcp/native-mcp/SKILL.md:278` — secret: generic_token: TOKE...xxx"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mcp/native-mcp/SKILL.md:313` — secret: generic_token: TOKE...xxx"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mlops/inference/guidance/references/backends.md:28` — secret: generic_token: api_...ere"
-- ... and 114 more
+- ... and 178 more
 
 ## SWEEP Report
 
 | Category | Count |
 |----------|-------|
-| Duplicate Content | 3375 |
-| Unused Import | 14 |
-| Unreferenced File | 10 |
+| Duplicate Content | 10574 |
+| Unused Import | 285 |
+| Unreferenced File | 383 |
 
 ## Language Breakdown
 
 | Extension | Files |
 |-----------|-------|
-| `.md` | 2240 |
-| `.py` | 2190 |
-| `.rs` | 1931 |
-| `.ts` | 1655 |
-| `.json` | 1515 |
-| `.h` | 816 |
-| `.tsx` | 643 |
-| `.go` | 493 |
-| `.js` | 377 |
-| `.cpp` | 239 |
-| `.txt` | 234 |
-| `.toml` | 229 |
-| `.sh` | 189 |
-| `.yml` | 174 |
-| `.yaml` | 155 |
+| `.py` | 7352 |
+| `.rs` | 4506 |
+| `.h` | 3527 |
+| `.md` | 3056 |
+| `.ts` | 2835 |
+| `.json` | 2799 |
+| `.yml` | 2292 |
+| `.txt` | 938 |
+| `.tsx` | 845 |
+| `.sh` | 823 |
+| `.c` | 565 |
+| `.go` | 510 |
+| `.js` | 449 |
+| `.toml` | 407 |
+| `.cpp` | 241 |
 
 ## Symbol Index (Top 30)
 
@@ -128,7 +128,7 @@
 | `stream_avatar_faculty` | function | `excalibur_controller.py` | 739 |
 | `health` | function | `excalibur_controller.py` | 750 |
 
-*...and 36061 more symbols in full index.*
+*...and 70029 more symbols in full index.*
 
 ---
 
