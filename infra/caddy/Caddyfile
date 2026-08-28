@@ -62,6 +62,22 @@
         reverse_proxy 127.0.0.1:8000
     }
 
+    # 6. Excalibur Gemini Live BidiStream (:8765 / :8085)
+    handle /gemini-live/* {
+        reverse_proxy 127.0.0.1:8765
+    }
+
+    # 7. Excalibur Anti-Spoof & Macro Engine (:8088 / :8089)
+    handle /excalibur/anti-spoof/* {
+        reverse_proxy 127.0.0.1:8088
+    }
+    handle /excalibur/macro/* {
+        reverse_proxy 127.0.0.1:8089
+    }
+    handle /excalibur/failover/* {
+        reverse_proxy 127.0.0.1:8090
+    }
+
     # 6. Primary Frontend Surface: Luxora Nexus Lab PWA
     handle {
         root * /var/www/camelot
