@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sovereign S26 — Knights of the Round</title>
+  <link rel="stylesheet" href="css/sovereign.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="sovereign-container" id="sovereignContainer">
+    <div class="bg-image-layer"></div>
+    <div class="bg-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="particles" id="particles"></div>
+    <div class="holo-floor"></div>
+
+    <div class="layer-badges">
+      <div class="layer-badge s26" title="S26 Orb — 350MB budget">S26 ORB</div>
+      <div class="layer-badge vps" title="VPS Hub — 8GB Cybertronia">VPS HUB</div>
+      <div class="layer-badge gcloud" title="Gemini Trinity Connected">GEMINI LIVE</div>
+    </div>
+
+    <div class="status-panel" id="statusPanel">
+      <div class="status-chip" data-service="live">
+        <div class="status-dot live"></div>
+        <span id="liveStatus">GEMINI LIVE</span>
+      </div>
+      <div class="status-chip" data-service="spark">
+        <div class="status-dot spark"></div>
+        <span id="sparkStatus">SPARK STANDBY</span>
+      </div>
+      <div class="status-chip" data-service="vault">
+        <div class="status-dot assist"></div>
+        <span id="vaultStatus">VAULT SEALED</span>
+      </div>
+    </div>
+
+    <div class="kotr-header">
+      <h1 class="kotr-title">Knights of the Round</h1>
+      <div class="title-ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+      </div>
+      <div class="kotr-subtitle">Sovereign Voice Command Center</div>
+    </div>
+
+    <div class="latency-monitor" id="latencyMonitor">
+      <span class="latency-label">RTT</span>
+      <span class="latency-value" id="latencyValue">--ms</span>
+    </div>
+
+    <div class="trinity-selector" id="trinitySelector">
+      <button class="trinity-mode active" data-mode="live" title="Full-duplex voice — Aoede">LIVE</button>
+      <button class="trinity-mode" data-mode="spark" title="24/7 background automation">SPARK</button>
+      <button class="trinity-mode" data-mode="assistant" title="Cognitive text routing">ASSISTANT</button>
+    </div>
+
+    <div class="kotr-chat" id="kotrChat">
+      <div class="empty-kotr" id="emptyState">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+        </svg>
+        <p>The Round Table awaits your command</p>
+        <p class="empty-hint">Speak: "Search the archives" · "Summon weather" · "Call for aid"</p>
+      </div>
+    </div>
+
+    <div class="typing-kotr" id="typingKotr">
+      <div class="t-dot"></div>
+      <div class="t-dot"></div>
+      <div class="t-dot"></div>
+    </div>
+
+    <div class="command-bar-container">
+      <div class="command-bar" id="commandBar">
+        <div class="voice-overlay" id="voiceOverlay">
+          <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+          <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
+          <div class="v-bar"></div>
+        </div>
+
+        <div class="kotr-avatar" id="kotrAvatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
+          </svg>
+        </div>
+
+        <input type="text" class="kotr-input" id="kotrInput" placeholder="Issue your command, Sovereign..." autocomplete="off" disabled>
+
+        <button class="voice-btn-kotr" id="voiceBtnKotr" title="Hold to speak (Web Speech API fallback)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+          </svg>
+        </button>
+
+        <button class="send-btn-kotr" id="sendBtnKotr" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="connection-banner" id="connBanner">
+      <span class="conn-icon">⚠</span>
+      <span class="conn-text">Native audio pipeline not connected — running in fallback mode</span>
+    </div>
+  </div>
+
+  <script src="js/sentinel-client.js"></script>
+  <script src="js/trinity-controller.js"></script>
+  <script src="js/audio-pipeline.js"></script>
+  <script src="js/hud-renderer.js"></script>
+</body>
+</html>
