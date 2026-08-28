@@ -27,6 +27,13 @@ same sandbox, network, or timing behavior.
 - Use approved local tools and documented Camelot commands before inventing a new path.
 - Do not bypass security prompts, HITL gates, or credential handling rules.
 
+## Hermes Gateway Configuration
+- `HERMES_GATEWAY_URL` (default `http://0.0.0.0:9119`): address of the Hermes web UI.
+- `HERMES_ALLOWLIST` (comma‑separated IDs): list of allowed senders for SMS, phone, Discord, Telegram.
+- `HERMES_SANDBOX` (default `docker`): sandbox backend for the Hermes API server.
+- Set `HERMES_AUTO_START=true` to launch the gateway on Antigravity boot.
+- Example: `HERMES_ALLOWLIST=+1234567890,discord_user_id,telegram_user_id`
+
 ## Timing Defaults
 
 - Use short first probes for boot/debug work.

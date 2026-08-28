@@ -17,6 +17,20 @@ export const EvidenceIntegritySchema = z.enum([
 ]);
 export type EvidenceIntegrity = z.infer<typeof EvidenceIntegritySchema>;
 
+// v1.2 closed effect-class set per §5.5 of the SADD (mirror of the Bifrost contract).
+export const EffectClassSchema = z.enum([
+  'ro.fetch', 'ro.audit', 'internal.synth', 'workspace.test',
+  'workspace.patch', 'promote.worktree.merge', 'promote.deploy',
+  'external.publish.draft', 'external.publish.publish', 'external.email.send',
+  'payment.invoice.draft', 'payment.invoice.issue', 'payment.capture',
+  'payment.refund', 'device.calendar.write', 'device.sms.send',
+  'device.call.initiate', 'promote.failover',
+]);
+export type EffectClass = z.infer<typeof EffectClassSchema>;
+
+export const RiskTierSchema = z.enum(['T0', 'T1', 'T2', 'T3', 'T4']);
+export type RiskTier = z.infer<typeof RiskTierSchema>;
+
 export const ActorSchema = z.object({ id: z.string(), role: ActorRoleSchema });
 export type Actor = z.infer<typeof ActorSchema>;
 
@@ -70,6 +84,10 @@ export const EffectManifestSchema = z.object({
   diffSha256: z.string(), allowedPaths: z.array(z.string()),
   requiredEvidence: z.array(z.string()), policyClass: z.string(),
   expiresAt: z.string(), oneTimeNonce: z.string(),
+  // v1.2 fields per §5.5/§11.1 of the SADD (mirror of the Bifrost contract)
+  effectClass: EffectClassSchema,
+  declaredRiskTier: RiskTierSchema,
+  declarationHash: z.string(),
 });
 export type EffectManifest = z.infer<typeof EffectManifestSchema>;
 

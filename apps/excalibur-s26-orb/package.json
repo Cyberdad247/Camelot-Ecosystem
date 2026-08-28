@@ -1,0 +1,9 @@
+{
+  "name": "excalibur-s26-orb",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sovereign S26 Excalibur Vocal Live Command Center HUD",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

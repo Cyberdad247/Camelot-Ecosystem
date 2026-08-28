@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 
 """TDD-first tests for GraduationFlag (slice #1 Task 1, Step 1)."""
-import os
 from pathlib import Path
 from control_plane.preflight import state
 

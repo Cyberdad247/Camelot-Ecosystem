@@ -14,12 +14,13 @@ def test_bifrost_token_reduction_enrichment():
 
     captured_args = {}
 
-    async def mock_stream_openai(self_obj, base, model, prompt, system, max_tokens):
+    async def mock_stream_openai(self_obj, base, model, prompt, system, max_tokens, api_key):
         captured_args["base"] = base
         captured_args["model"] = model
         captured_args["prompt"] = prompt
         captured_args["system"] = system
         captured_args["max_tokens"] = max_tokens
+        captured_args["api_key"] = api_key
         yield "Success"
 
     async def run_test():
@@ -42,5 +43,6 @@ def test_bifrost_token_reduction_enrichment():
             assert "Similar past work:" in captured_args["system"]
             assert "['auth', 'token'] (confidence: 0.85)" in captured_args["system"]
             assert "original system" in captured_args["system"]
+            assert captured_args["api_key"] == "" or isinstance(captured_args["api_key"], str)
 
     asyncio.run(run_test())

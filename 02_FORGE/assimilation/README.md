@@ -1,32 +1,23 @@
-# 🤖 Assimilation — Voice Assistant Omega
+# 🤖 Assimilation Engine — Camelot-OS 02_FORGE
 
-> **STATUS:** In Development · Python
+> **STATUS:** Active · Python
 
-The Assimilation module contains the Voice Assistant Omega — a Python-based voice interaction system with gVisor sandboxing for secure execution. Designed to integrate with the CAMELOT-OS voice pipeline.
+The Assimilation module integrates external frameworks, autonomous agent architectures, and specialized runtimes into CAMELOT-OS.
 
-## Structure
+## Modules
 
-```
-assimilation/
-└── voice_assistant_omega/
-    ├── main.py              # Main entry point
-    ├── BriefingScript.md    # Operational briefing
-    ├── requirements.txt     # Python dependencies
-    └── gvisor-run.ps1       # gVisor sandbox launcher (PowerShell)
-```
+### 1. Voice Assistant Omega
+A Python-based voice interaction system with gVisor sandboxing for secure execution. Integrated with the CAMELOT-OS voice pipeline.
 
-## Setup
+- Directory: `02_FORGE/assimilation/voice_assistant_omega/`
+- Entry Point: `main.py`
 
-```bash
-cd 02_FORGE/assimilation/voice_assistant_omega
-pip install -r requirements.txt
-python main.py
-```
+### 2. Penguin Harness Scaffolding
+Assimilated autonomous agent patterns from `penguin-harness`:
+- **1-Sentence Agent Builder Pattern**: Rapid agent generation (`system_config.yaml`, `AGENTS.md`, `skills/`).
+- **Minimal Tool Calling Engine**: Standard `BuiltinTool` execution contract and safe file/command tools.
+- **Merlin Knight Adapter**: Conversion between Merlin character sheets and Penguin Agent States.
 
-## Sandbox
-
-For secure gVisor-isolated execution:
-
-```powershell
-.\gvisor-run.ps1
-```
+- Directory: `02_FORGE/assimilation/penguin_harness/`
+- Entry Point: `penguin_scaffold.py`
+- Core Engine: `.agents/skills/merlin-knight-forge/penguin_builder.py`

@@ -39,6 +39,7 @@ SKIP_EXTS = {
     ".tpl",                 # source templates (rendered elsewhere)
     ".crusade", ".mlo", ".mermaid",  # workflow/diagram/data docs
     ".bak", ".old",        # archives
+    ".zon", ".nix", ".typed", ".tsbuildinfo",  # build/type metadata & package manifests
 }
 # Dotfiles/config files have no extension in Path.suffix — match by name.
 SKIP_NAMES = {

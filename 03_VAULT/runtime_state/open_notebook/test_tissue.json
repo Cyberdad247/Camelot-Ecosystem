@@ -1,0 +1,46 @@
+[
+  {
+    "knight_id": "TEST",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_5be270090591dd53c6ff939777f86560417b9b6b6587217ddf5b3ab7c26239d8",
+    "content": "Verification Run evolve_20260825054943: evolve sir_syntax\nOperator: test\nSuccess: True\nResults: {\"objective\": \"stabilize swarm review loop\", \"learning\": \"Record repeat failures before proposing permanent operating rules.\", \"proposal\": \"Require every promoted swarm rule to include at least one verification artifact.\", \"review\": {\"verdict\": \"PASS\", \"approved\": true, \"failures\": [], \"titanium_laws\": [\"Do not bypass human approval for high-risk or destructive operations.\", \"Do not disable provenance, verification, or audit logging.\", \"Do not weaken security boundaries, secret handling, or credential hygiene.\", \"Do not silently expand permissions or execution scope.\", \"Do not mutate production state without an explicit operator directive.\"], \"shatterpoints\": [\"security regression\", \"ledger drift\", \"unbounded scope expansion\", \"secret leakage\", \"destructive autonomy\", \"verification bypass\", \"context rot\", \"operator confusion\", \"non-reproducible behavior\", \"cost ceiling violation\"]}, \"ledger\": {\"status\": \"UPDATED\", \"title\": \"Hyper-Evolve mutation approved for sir_syntax\", \"actor\": \"test\", \"scope\": [\"control_plane/hyper_evolve.py\"], \"verification\": [\"pytest 03_VAULT/training/configs/tests/test_hyper_evolve.py\"], \"tag\": \"[HYPER_EVOLVE]\"}}",
+    "vfs_path": "vfs://worldtree/knights/test/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_TEST",
+    "open_viking_tether": "open_viking://worldtree/test",
+    "updated_at": "2026-08-25T05:49:43.753323+00:00"
+  },
+  {
+    "knight_id": "TEST",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_473be4dec766404479b074b9097678eef0531ab0654a9725453a93377774092e",
+    "content": "Verification Run evolve_20260824172731: evolve sir_syntax\nOperator: test\nSuccess: True\nResults: {\"objective\": \"stabilize swarm review loop\", \"learning\": \"Record repeat failures before proposing permanent operating rules.\", \"proposal\": \"Require every promoted swarm rule to include at least one verification artifact.\", \"review\": {\"verdict\": \"PASS\", \"approved\": true, \"failures\": [], \"titanium_laws\": [\"Do not bypass human approval for high-risk or destructive operations.\", \"Do not disable provenance, verification, or audit logging.\", \"Do not weaken security boundaries, secret handling, or credential hygiene.\", \"Do not silently expand permissions or execution scope.\", \"Do not mutate production state without an explicit operator directive.\"], \"shatterpoints\": [\"security regression\", \"ledger drift\", \"unbounded scope expansion\", \"secret leakage\", \"destructive autonomy\", \"verification bypass\", \"context rot\", \"operator confusion\", \"non-reproducible behavior\", \"cost ceiling violation\"]}, \"ledger\": {\"status\": \"UPDATED\", \"title\": \"Hyper-Evolve mutation approved for sir_syntax\", \"actor\": \"test\", \"scope\": [\"control_plane/hyper_evolve.py\"], \"verification\": [\"pytest 03_VAULT/training/configs/tests/test_hyper_evolve.py\"], \"tag\": \"[HYPER_EVOLVE]\"}}",
+    "vfs_path": "vfs://worldtree/knights/test/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_TEST",
+    "open_viking_tether": "open_viking://worldtree/test",
+    "updated_at": "2026-08-24T17:27:33.943893+00:00"
+  },
+  {
+    "knight_id": "TEST",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_1e5e0518d19be1b8effd8c25da8be2ed525525b13a626fbdfe701387046becab",
+    "content": "Verification Run evolve_20260824163729: evolve sir_syntax\nOperator: test\nSuccess: True\nResults: {\"objective\": \"stabilize swarm review loop\", \"learning\": \"Record repeat failures before proposing permanent operating rules.\", \"proposal\": \"Require every promoted swarm rule to include at least one verification artifact.\", \"review\": {\"verdict\": \"PASS\", \"approved\": true, \"failures\": [], \"titanium_laws\": [\"Do not bypass human approval for high-risk or destructive operations.\", \"Do not disable provenance, verification, or audit logging.\", \"Do not weaken security boundaries, secret handling, or credential hygiene.\", \"Do not silently expand permissions or execution scope.\", \"Do not mutate production state without an explicit operator directive.\"], \"shatterpoints\": [\"security regression\", \"ledger drift\", \"unbounded scope expansion\", \"secret leakage\", \"destructive autonomy\", \"verification bypass\", \"context rot\", \"operator confusion\", \"non-reproducible behavior\", \"cost ceiling violation\"]}, \"ledger\": {\"status\": \"UPDATED\", \"title\": \"Hyper-Evolve mutation approved for sir_syntax\", \"actor\": \"test\", \"scope\": [\"control_plane/hyper_evolve.py\"], \"verification\": [\"pytest 03_VAULT/training/configs/tests/test_hyper_evolve.py\"], \"tag\": \"[HYPER_EVOLVE]\"}}",
+    "vfs_path": "vfs://worldtree/knights/test/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_TEST",
+    "open_viking_tether": "open_viking://worldtree/test",
+    "updated_at": "2026-08-24T16:37:30.113082+00:00"
+  },
+  {
+    "knight_id": "TEST",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_8b75359b0d6f64702ebeb9255fbcbab245d04d447410fcf14a5d20b7dcd586fa",
+    "content": "Verification Run evolve_20260824142903: evolve sir_syntax\nOperator: test\nSuccess: True\nResults: {\"objective\": \"stabilize swarm review loop\", \"learning\": \"Record repeat failures before proposing permanent operating rules.\", \"proposal\": \"Require every promoted swarm rule to include at least one verification artifact.\", \"review\": {\"verdict\": \"PASS\", \"approved\": true, \"failures\": [], \"titanium_laws\": [\"Do not bypass human approval for high-risk or destructive operations.\", \"Do not disable provenance, verification, or audit logging.\", \"Do not weaken security boundaries, secret handling, or credential hygiene.\", \"Do not silently expand permissions or execution scope.\", \"Do not mutate production state without an explicit operator directive.\"], \"shatterpoints\": [\"security regression\", \"ledger drift\", \"unbounded scope expansion\", \"secret leakage\", \"destructive autonomy\", \"verification bypass\", \"context rot\", \"operator confusion\", \"non-reproducible behavior\", \"cost ceiling violation\"]}, \"ledger\": {\"status\": \"UPDATED\", \"title\": \"Hyper-Evolve mutation approved for sir_syntax\", \"actor\": \"test\", \"scope\": [\"control_plane/hyper_evolve.py\"], \"verification\": [\"pytest 03_VAULT/training/configs/tests/test_hyper_evolve.py\"], \"tag\": \"[HYPER_EVOLVE]\"}}",
+    "vfs_path": "vfs://worldtree/knights/test/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_TEST",
+    "open_viking_tether": "open_viking://worldtree/test",
+    "updated_at": "2026-08-24T14:29:03.563838+00:00"
+  }
+]

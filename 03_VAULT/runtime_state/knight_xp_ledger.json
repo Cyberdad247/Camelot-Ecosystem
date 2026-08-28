@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "updated_at": 1787701978.3722885,
+  "knights": {
+    "MERLIN_OMEGA": {
+      "total_xp": 18000,
+      "level": 5,
+      "missions_completed": 19,
+      "rank": "Grand Knight Commander"
+    },
+    "SIR_BORIS": {
+      "total_xp": 18200,
+      "level": 5,
+      "missions_completed": 15,
+      "rank": "Grand Knight Commander"
+    },
+    "SIR_CODEX": {
+      "total_xp": 16800,
+      "level": 5,
+      "missions_completed": 14,
+      "rank": "Grand Knight Commander"
+    },
+    "SIR_FORGE": {
+      "total_xp": 13900,
+      "level": 4,
+      "missions_completed": 11,
+      "rank": "Master of the Blade"
+    },
+    "HERMES_PRIME": {
+      "total_xp": 15400,
+      "level": 4,
+      "missions_completed": 12,
+      "rank": "Master of the Blade"
+    },
+    "LADY_LAKISHA": {
+      "total_xp": 14200,
+      "level": 4,
+      "missions_completed": 11,
+      "rank": "Master of the Blade"
+    },
+    "SIR_HEIMDALL": {
+      "total_xp": 13500,
+      "level": 4,
+      "missions_completed": 11,
+      "rank": "Master of the Blade"
+    },
+    "SIR_SENTINEL": {
+      "total_xp": 15800,
+      "level": 4,
+      "missions_completed": 13,
+      "rank": "Master of the Blade"
+    },
+    "SIR_GHOST": {
+      "total_xp": 12700,
+      "level": 4,
+      "missions_completed": 10,
+      "rank": "Master of the Blade"
+    }
+  }
+}

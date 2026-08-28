@@ -24,6 +24,7 @@ logger = logging.getLogger("camelot.llm_router")
 
 # ── Provider Configuration ────────────────────────────────────────────
 
+LOCAL_LLM_BASE = os.environ.get("LOCAL_LLM_HOST", "http://127.0.0.1:8090/v1")
 OLLAMA_BASE = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")
 OPENROUTER_BASE = "https://openrouter.ai/api/v1"
 CLIPROXY_BASE = os.environ.get("CLIPROXY_BASE", "http://127.0.0.1:8080/v1")
@@ -45,13 +46,27 @@ class ProviderConfig:
 
     @property
     def available(self) -> bool:
-        if self.name in ("ollama", "cliproxy"):
-            return True  # Local services, always attempt
+        if self.name in ("local_daemon", "bitgpu", "litert", "ollama", "cliproxy"):
+            return True  # Zero-cost and local services, always attempt
         return self.active and bool(self.api_key)
 
 
 # Provider registry
 PROVIDERS = {
+    "local_daemon": ProviderConfig(
+        name="local_daemon",
+        base_url=LOCAL_LLM_BASE,
+        api_key_env="",
+        default_model="bonsai-1.7b-1bit",
+        models=["bonsai-1.7b-1bit", "qwen3-4b-1bit", "litert-gemma-2b", "qwen2.5-coder-1bit"],
+    ),
+    "bitgpu": ProviderConfig(
+        name="bitgpu",
+        base_url=LOCAL_LLM_BASE,
+        api_key_env="",
+        default_model="bonsai-1.7b-1bit",
+        models=["bonsai-1.7b-1bit", "qwen3-4b-1bit", "qwen2.5-coder-1bit"],
+    ),
     "cliproxy": ProviderConfig(
         name="cliproxy",
         base_url=CLIPROXY_BASE,
@@ -198,6 +213,49 @@ def _openai_compatible_chat(provider: ProviderConfig, messages: list,
             },
             "duration_ms": int(data.get("total_duration", 0) / 1e6),
         }
+
+    # Zero-cost local LLM daemon (bitgpu + LiteRT-LM) with in-process fallback
+    if provider.name in ("local_daemon", "bitgpu", "litert"):
+        payload = {
+            "model": selected_model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max_tokens,
+            "stream": False,
+        }
+        try:
+            resp = httpx.post(url, json=payload, headers=headers, timeout=timeout)
+            resp.raise_for_status()
+            data = resp.json()
+            choice = data.get("choices", [{}])[0]
+            usage = data.get("usage", {})
+            return {
+                "provider": provider.name,
+                "model": selected_model,
+                "content": choice.get("message", {}).get("content", data.get("content", "")),
+                "usage": {
+                    "prompt_tokens": usage.get("prompt_tokens", 0),
+                    "completion_tokens": usage.get("completion_tokens", 0),
+                },
+                "duration_ms": data.get("duration_ms", 0),
+            }
+        except Exception:
+            # Fallback to direct in-process engine
+            from control_plane.infra.local_llm_daemon import get_local_engine
+            engine = get_local_engine()
+            res = engine.chat_completion(
+                messages=messages,
+                model=selected_model,
+                temperature=temperature,
+                max_tokens=max_tokens,
+            )
+            return {
+                "provider": provider.name,
+                "model": res.get("model", selected_model),
+                "content": res.get("content", ""),
+                "usage": res.get("usage", {}),
+                "duration_ms": res.get("duration_ms", 0),
+            }
 
     payload = {
         "model": selected_model,

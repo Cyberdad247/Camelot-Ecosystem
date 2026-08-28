@@ -1,0 +1,18 @@
+[
+  {
+    "node_name": "vps_hub_kvm563",
+    "host_server": "KVM563",
+    "vm_id": "vps3573819",
+    "public_ip": "162.35.107.134",
+    "tailscale_ip": "100.110.180.18",
+    "assigned_knight": "HERMES_PRIME",
+    "co_governor": "SIR_HEIMDALL",
+    "hermes_prime_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+    "sir_heimdall_uuid": "3205f189-91da-4272-96a9-3641fd642763",
+    "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "vfs_wing": "WING_WORLDTREE_VPS_HUB",
+    "version": "v1000.54-EXCALIBUR-A",
+    "status": "TETHERED_ALIGNED",
+    "timestamp": "2026-08-28T10:37:00.000000+00:00"
+  }
+]

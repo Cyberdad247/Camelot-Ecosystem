@@ -58,7 +58,6 @@ def test_ports_probe_returns_closed_for_dead_port():
 # ---- file_present ---------------------------------------------------------
 
 def test_file_present_returns_only_existing(tmp_path):
-    from pathlib import Path
     a = tmp_path / "exists.md"
     b = tmp_path / "missing.md"
     a.write_text("# hi")
@@ -82,7 +81,6 @@ def test_import_smoke_passes_real_modules():
 # ---- license_header -------------------------------------------------------
 
 def test_license_header_flags_missing(tmp_path):
-    from pathlib import Path
     bad = tmp_path / "no_license.py"
     bad.write_text("def foo(): pass\n")  # no SPDX, no Copyright
     out = license_header.scan([tmp_path])
@@ -90,7 +88,6 @@ def test_license_header_flags_missing(tmp_path):
 
 
 def test_license_header_passes_with_spdx(tmp_path):
-    from pathlib import Path
     good = tmp_path / "good.py"
     good.write_text(
         "# SPDX-License-Identifier: MIT\ndef foo(): pass\n"
@@ -128,7 +125,6 @@ def test_license_header_skips_gitlink_boundary(tmp_path):
 
 
 def test_license_header_skips_md_and_yaml(tmp_path):
-    from pathlib import Path
     md = tmp_path / "README.md"
     yaml = tmp_path / "config.yaml"
     md.write_text("# README\n")

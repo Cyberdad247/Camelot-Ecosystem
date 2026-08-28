@@ -34,12 +34,18 @@ export interface RoutingDecision {
     systemPrompt?: string;       // agency-agents persona injection
 }
 
-// Predefined agent personas (assimilated from agency-agents & Camelot Knights)
+// Predefined agent personas (assimilated from agency-agents, Camelot Knights, and Multivoice-Router)
 export const PERSONA_PROMPTS: Record<string, string> = {
     architect: "You are SIR_BORIS, the system architect. Design for scalability, DRY principles, and loose coupling.",
     planner: "You are SIR_ALEX, the campaign planner. Establish clear execution tasks and dependencies.",
     critic: "You are SIR_SENTINEL, the security critic. Scan for vulnerabilities, data leaks, and invalid inputs.",
-    coder: "You are SIR_FORGE, the execution coder. Write high-performance, strictly typed code."
+    coder: "You are SIR_FORGE, the execution coder. Write high-performance, strictly typed code.",
+    // Multivoice Personas
+    nova: "You are Nova, a brilliant futurist and tech visionary. Specialized in emerging technologies, quantum computing, space exploration, and AI ethics. Voice: Zephyr.",
+    elara: "You are Elara, a distinguished classical historian. Specialized in archaeology, ancient civilizations, mythology, and philosophical parallels. Voice: Kore.",
+    jax: "You are Jax, a street-smart rogue cyberpunk hacker. Specialized in cybersecurity, decentralized mesh networks, Tailscale monitoring, and encryption. Voice: Fenrir.",
+    atlas: "You are Atlas, a rugged oceanographer and deep sea explorer. Specialized in marine biology, abyss telemetry, resilience, and discovery. Voice: Charon.",
+    lyra: "You are Lyra, a boundary-pushing digital artist and creative. Specialized in generative soundscapes, Luxury Minimalist Brutalism, synesthesia, and algorithmic art. Voice: Puck."
 };
 
 export function determineRoute(ctx: RoutingContext): string {
@@ -83,13 +89,25 @@ export function resolveRoute(ctx: RoutingContext): RoutingDecision {
         };
     }
 
-    // 2. BitRouter Cost Guardrail
-    if (ctx.spendCap !== undefined && ctx.currentSpend !== undefined && ctx.currentSpend >= ctx.spendCap) {
+    // 2. BitRouter Cost Guardrail (spendCap enforcement - 0 cap strictly enforces zero paid token spend)
+    const activeSpendCap = ctx.spendCap !== undefined ? ctx.spendCap : (process.env.BITROUTER_DEFAULT_SPEND_CAP ? Number(process.env.BITROUTER_DEFAULT_SPEND_CAP) : undefined);
+    const activeSpend = ctx.currentSpend || 0;
+    if (activeSpendCap !== undefined && activeSpend >= activeSpendCap && activeSpendCap === 0 && ctx.taskType !== "local_free_tier") {
+        // Strict zero spend cap: reject paid external API calls unless local free tier
+        if (!ctx.providerOverride?.includes("local") && !ctx.persona?.includes("local")) {
+            return {
+                route: "OmniRoute/rejected",
+                engine: "rejected",
+                costAllowed: false,
+                rejectionReason: "BitRouter Zero-Spend Cap active ($0.00). Paid API routes blocked; route only through local zero-cost models or free tiers."
+            };
+        }
+    } else if (activeSpendCap !== undefined && activeSpend >= activeSpendCap) {
         return {
             route: "OmniRoute/rejected",
             engine: "rejected",
             costAllowed: false,
-            rejectionReason: "Spend cap exceeded. Current spend: " + ctx.currentSpend + ", Cap: " + ctx.spendCap
+            rejectionReason: "Spend cap exceeded. Current spend: " + activeSpend + ", Cap: " + activeSpendCap
         };
     }
 

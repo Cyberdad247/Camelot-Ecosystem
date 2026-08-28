@@ -114,6 +114,10 @@ Local record of gate executions. The authoritative full history is the GitHub Ac
 | 2026-08-15 | push-triggered run on `Cyberdad247/Camelot-Ecosystem` | ✅ PASS | — | Gate relocated to the ecosystem repo (contracts catalog 3→26 superset merge; `.pem` committed after the `*.pem` ignore dropped it on the first CI run). |
 | 2026-08-15 | `c044b71` push to `Cyberdad247/Camelot-Ecosystem` | ❌ FAIL | — | `replay-committed` blocked: repo `*.pem` ignore dropped `sentinel_test_public.pem` from the commit → fixed by an explicit `!` exception (`e1e5343`). |
 | 2026-08-15 | branch protection on `Cyberdad247/Camelot-Ecosystem` `main` | ✅ enforced | — | Required check `Contract harness (receipts + schemas)` (strict, incl. admins); force-push + deletions blocked. |
+| 2026-08-18 | `python harness/run_all.py` (post-doc-edit regression check) | ✅ PASS | — | All four checks green locally after the PURGE_PREP / README / stride / bootstrap edits; re-run confirmed determinism. |
+| 2026-08-18 | GitHub Actions run `32097918465` (push `d993b8f`, ops bootstrap bundle) | ✅ PASS | — | CI gate green on `Cyberdad247/CAMELOT_OS` main (04:06:39Z → 04:06:58Z). |
+| 2026-08-18 | GitHub Actions run `32098479702` (push `a6908bc`, docs refresh + typo fixes) | ✅ PASS | — | CI gate green on `Cyberdad247/CAMELOT_OS` main (04:15:37Z → 04:15:54Z); 9/9 runs green. |
+| 2026-08-18 | squire colony `//SCAN` (`python -m squires.colony triage .`) | ✅ PASS | — | Fresh security pass: LOW 0.0/100 — 53 files / 8,054 lines, 0 secrets, 0 warnings, 0 orphans; HITL not required. |
 
 **Maintenance:** after a gate-relevant change, run the full gate locally and append a row with the exact command/config and result. New PASS rows must carry the promoting operator's sign-off (see §3); `—` marks rows recorded before the sign-off requirement. Keep expected-failure rows from tamper drills (sign-off `n/a`) — they document the gate's detection coverage.
 

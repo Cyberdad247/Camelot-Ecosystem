@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package camelot.command.v1;
+
+option go_package = "camelot/command/v1;commandv1";
+
+message CommandEnvelope {
+  string command_id = 1;
+  string directive = 2; // e.g. //FORGE, //BOOT, //STATUS
+  string knight_persona = 3; // SIR_BORIS, MERLIN_OMEGA, etc.
+  string origin_node = 4; // vashawns-s26-ultra, cybertronia, etc.
+  int64 timestamp_utc = 5;
+  bytes sovereign_sig_ed25519 = 6;
+  string hitl_tier = 7; // AUTO, PROMPT, HUMAN_GATE
+  map<string, string> metadata = 8;
+}
+
+message CommandResponse {
+  string command_id = 1;
+  bool success = 2;
+  string status_detail = 3;
+  bytes result_payload = 4;
+  int64 execution_time_ms = 5;
+  string merkle_root_ref = 6;
+}

@@ -27,11 +27,10 @@ import os
 import re
 import sys
 from collections import defaultdict
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Set, Tuple
+from typing import Any, Dict, List, Optional, Set
 
 LOG = logging.getLogger("NotebookAuditor")
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent

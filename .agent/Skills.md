@@ -10,6 +10,18 @@ Avoids "vibe-coding" by requiring agents to refer to hardcoded execution guideli
 - `Speculative_Pre_Warming`
 - `Autonomous_OSINT_Scraping`
 - `Sovereign_WASM_Edge_Compilation`
+- `DeerFlow_Deep_Exploration`
+
+## Skill: DeerFlow Deep Exploration Research Flow & Sandboxed Execution
+**ID:** `skill_deerflow_deep_exploration_02`
+**Constraint:** `Zero external dependencies outside Python stdlib`, `Contained sandbox execution`, `Hierarchical memory trees`.
+
+### Workflow:
+1. **[B]ROAD SURVEY:** Execute multi-angle queries across facts, case studies, expert opinions, trends, and limitations.
+2. **[D]ECOMPOSITION & DEEP DIVE:** Categorize into research dimensions (Architecture, Security, Benchmarks) and fetch full source documents.
+3. **[S]IGNAL EXTRACTION & MEMORY TREE:** Parse signals (`preference`, `correction`, `decision`, `constraint`, `goal`) and index into hierarchical memory nodes with revision tracking.
+4. **[S]ANDBOX CONFINEMENT:** Execute local shell evaluations in bounded virtual paths (`/mnt/user-data/workspace`, `uploads`, `outputs`) with strict timeouts and output budgeting.
+5. **[S]YNTHESIS GATE:** Validate all 5 synthesis criteria before generating final knowledge artifacts.
 
 ## Skill: Sovereign WASM Edge Compilation
 **ID:** `skill_sovereign_wasm_01`

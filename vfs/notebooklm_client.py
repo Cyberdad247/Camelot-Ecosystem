@@ -21,7 +21,6 @@ import asyncio
 import logging
 import os
 import sys
-from functools import wraps
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -204,7 +203,9 @@ def query_notebook(knight_id: str, question: str) -> Optional[str]:
             if not nb:
                 return None
             try:
-                result = await client.chat.send_message(nb.id, question)
+                result = await client.chat.ask(nb.id, question)
+                if hasattr(result, "answer"):
+                    return str(result.answer)
                 return str(result)
             except Exception as e:
                 LOG.error(f"[NLM] Chat query failed for {knight_id}: {e}")

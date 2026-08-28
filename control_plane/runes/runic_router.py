@@ -286,6 +286,78 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_ignite_self_evolution_loop",
     },
+    # OH-MY-CODEX (OMX) MULTI-AGENT WORKFLOW PRIMITIVES
+    "//OMX_PLAN": {
+        "knight": "merlin_omega",
+        "description": "OMX Socratic interview vs direct planning state machine ($plan / $ralplan)",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_ULTRAGOAL": {
+        "knight": "sir_codex",
+        "description": "OMX durable multi-goal planning & steering invariant state machine ($ultragoal)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_TEAM": {
+        "knight": "sir_boris",
+        "description": "OMX multi-worker swarm coordination with mailboxes & task tokens ($team)",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_CODE_REVIEW": {
+        "knight": "sir_sentinel",
+        "description": "OMX 2-lane independent code-reviewer + architect synthesis ($code-review)",
+        "mode": "SENTINEL",
+        "priority": 2,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_ULTRAQA": {
+        "knight": "sir_sentinel",
+        "description": "OMX adversarial dynamic e2e QA cycle with hostile scenario matrix ($ultraqa)",
+        "mode": "SENTINEL",
+        "priority": 2,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_AUTOPILOT": {
+        "knight": "sir_boris",
+        "description": "OMX master supervisor FSM (interview -> plan -> ultragoal -> review/qa)",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_CAPABILITY_LOCK": {
+        "knight": "sir_sentinel",
+        "description": "OMX cryptographic tool & agent capability lock verification",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    # MULTI-HARNESS EMULATOR & HERMES AUTONOMOUS EXECUTION LOOPS
+    "//HARNESS": {
+        "knight": "sir_codex",
+        "description": "Multi-harness emulator dispatcher (Codex, Claude-Code, Kimi-Code, DeepSeek-TUI, Qwen)",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_harness_emulator",
+    },
+    "//HERMES_LOOP": {
+        "knight": "hermes_prime",
+        "description": "Hermes autonomous execution loop with trajectory logging and skill learning",
+        "mode": "SWARM",
+        "priority": 2,
+        "handler": "_handle_harness_emulator",
+    },
+    "//EMULATE": {
+        "knight": "sir_codex",
+        "description": "Universal multi-harness emulator & auto-router bridge",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_harness_emulator",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1015,6 +1087,53 @@ def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
     return {"action": "nano_swarm_expand", "detail": "script not found", "path": str(script)}
 
 
+def _handle_omx_workflow(param: str, context: dict) -> dict:
+    """Route OMX workflow primitives ($plan, $ultragoal, $team, $code-review, $ultraqa, $autopilot, capability_lock)."""
+    try:
+        from control_plane.runes.omx_workflow_adapter import route_omx_workflow
+    except ImportError:
+        import importlib.util
+        adapter_path = CAMELOT_HOME / "control_plane" / "runes" / "omx_workflow_adapter.py"
+        if adapter_path.exists():
+            spec = importlib.util.spec_from_file_location("omx_workflow_adapter", adapter_path)
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                sys.modules["omx_workflow_adapter"] = mod
+                spec.loader.exec_module(mod)
+                route_omx_workflow = mod.route_omx_workflow
+            else:
+                return {"action": "omx_workflow", "status": "ADAPTER_SPEC_ERROR"}
+        else:
+            return {"action": "omx_workflow", "status": "ADAPTER_NOT_FOUND"}
+
+    # Infer rune from context or fallback
+    rune = context.get("rune", "//OMX_PLAN")
+    return route_omx_workflow(rune=rune, param=param, context=context)
+
+
+def _handle_harness_emulator(param: str, context: dict) -> dict:
+    """Route multi-harness emulation and Hermes autonomous execution loops."""
+    try:
+        from control_plane.runes.harness_emulator import handle_harness_emulator
+    except ImportError:
+        import importlib.util
+        mod_path = CAMELOT_HOME / "control_plane" / "runes" / "harness_emulator.py"
+        if mod_path.exists():
+            spec = importlib.util.spec_from_file_location("harness_emulator", mod_path)
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                sys.modules["harness_emulator"] = mod
+                spec.loader.exec_module(mod)
+                handle_harness_emulator = mod.handle_harness_emulator
+            else:
+                return {"action": "harness_emulator", "status": "SPEC_ERROR"}
+        else:
+            return {"action": "harness_emulator", "status": "MODULE_NOT_FOUND"}
+
+    return handle_harness_emulator(param=param, context=context)
+
+
+# Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
     "_handle_dawning": _handle_dawning,
@@ -1044,6 +1163,8 @@ _HANDLERS = {
     "_handle_sync_vfs_workspace": _handle_sync_vfs_workspace,
     "_handle_forge_hermes_prime_files": _handle_forge_hermes_prime_files,
     "_handle_ignite_self_evolution_loop": _handle_ignite_self_evolution_loop,
+    "_handle_omx_workflow": _handle_omx_workflow,
+    "_handle_harness_emulator": _handle_harness_emulator,
 }
 
 
@@ -1051,12 +1172,27 @@ _HANDLERS = {
 # Public API
 # ---------------------------------------------------------------------------
 
-_RUNE_RE = re.compile(r"^(//[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
+_RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
     "omega_codex": "Omega_CODEX",
     "//nano-swarm": "//NANO_SWARM_EXPAND",
     "//nanoswarm": "//NANO_SWARM_EXPAND",
     "//nano": "//NANO_SWARM_EXPAND",
+    # OMX aliases
+    "$plan": "//OMX_PLAN",
+    "$ralplan": "//OMX_PLAN",
+    "$ultragoal": "//OMX_ULTRAGOAL",
+    "$team": "//OMX_TEAM",
+    "$code-review": "//OMX_CODE_REVIEW",
+    "$codereview": "//OMX_CODE_REVIEW",
+    "$review": "//OMX_CODE_REVIEW",
+    "$ultraqa": "//OMX_ULTRAQA",
+    "$autopilot": "//OMX_AUTOPILOT",
+    # Harness & Hermes aliases
+    "$harness": "//HARNESS",
+    "$emulate": "//EMULATE",
+    "$hermes": "//HERMES_LOOP",
+    "$hermes_loop": "//HERMES_LOOP",
 }
 
 
@@ -1099,7 +1235,8 @@ def parse_rune(text: str) -> Optional[tuple[str, str]]:
 def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> RuneResult:
     """Route a rune to the correct knight and queue the task."""
     rune = normalize_rune(rune)
-    context = context or {}
+    context = dict(context or {})
+    context["rune"] = rune
 
     # Check for Privacy Shield Override
     combined_text = f"{rune} {param}".lower()

@@ -26,7 +26,15 @@ from pydantic import BaseModel, Field
 try:
     MemPalaceL2 = importlib.import_module("01_KERNEL.memory.mempalace_l2").MemPalaceL2
 except Exception:
-    _MEM_PATH = Path(__file__).resolve().parent.parent / "01_KERNEL" / "memory" / "mempalace_l2.py"
+    # Fallback loader for CLIs whose sys.path does not include the repo root:
+    # __file__ is <root>/control_plane/infra/provenance.py, so the repo root is
+    # parents[2] (infra -> control_plane -> root).
+    _MEM_PATH = Path(__file__).resolve().parents[2] / "01_KERNEL" / "memory" / "mempalace_l2.py"
+    if not _MEM_PATH.exists():
+        raise ImportError(
+            f"Cannot locate 01_KERNEL/memory/mempalace_l2.py (tried {_MEM_PATH}). "
+            "Run the CLI from the CAMELOT_OS repo root."
+        ) from None
     _MEM_SPEC = importlib.util.spec_from_file_location("01_KERNEL.memory.mempalace_l2", _MEM_PATH)
     _MEM_MOD = importlib.util.module_from_spec(_MEM_SPEC)
     assert _MEM_SPEC and _MEM_SPEC.loader

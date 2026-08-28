@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Tests for the moa-routing-capture cartridge (Keys-Setup two-hook port).
 
 Covers the boundedness contract: no raw content in the routing log, explicit

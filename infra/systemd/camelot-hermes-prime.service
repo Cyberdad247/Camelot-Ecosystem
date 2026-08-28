@@ -1,0 +1,24 @@
+[Unit]
+Description=Camelot-OS Hermes Prime Always-On VPS Research & VFS Synthesis Engine
+After=network.target tailscaled.service camelot-heimdall-bifrost.service
+Wants=camelot-heimdall-bifrost.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/Camelot-Ecosystem
+ExecStart=/usr/bin/python3 01_KERNEL/titan/phials/hermes_prime_phial.py --loop 60
+Restart=always
+RestartSec=10s
+Environment=PYTHONUNBUFFERED=1
+Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+Environment=VPS_HOST=162.35.107.134
+
+# Scarcity Cap (cgroups v2)
+MemoryAccounting=true
+MemoryMax=768M
+CPUAccounting=true
+CPUQuota=150%
+
+[Install]
+WantedBy=multi-user.target

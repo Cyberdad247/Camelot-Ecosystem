@@ -124,6 +124,10 @@ export function createOperatorBff(deps: OperatorBffDeps): Router {
       policyClass: 'engineering.write',
       expiresAt: new Date(deps.now().getTime() + 60_000).toISOString(),
       oneTimeNonce: `nonce_${Date.now()}`,
+      // v1.2 fields per §5.5/§11.1 of the SADD
+      effectClass: 'workspace.patch',
+      declaredRiskTier: 'T2',
+      declarationHash: 'sha256:' + 'a'.repeat(64),
     };
     const verdict = deps.verifyManifest(manifest, {
       now: deps.now,
