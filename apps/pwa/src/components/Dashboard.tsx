@@ -7,6 +7,7 @@ import { useBifrost } from '../context/BifrostContext';
 import { LakishaHUD } from './LakishaHUD';
 import { PlanCard } from './PlanCard';
 import { CoffeeTab } from './tabs/CoffeeTab';
+import { ExcaliburCommandCenterTab } from './tabs/ExcaliburCommandCenterTab';
 import { KnightsTab } from './tabs/KnightsTab';
 import { OverviewTab } from './tabs/OverviewTab';
 import { PropertiesTab } from './tabs/PropertiesTab';
@@ -17,6 +18,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 const TABS = [
   'Overview',
+  'Excalibur',
   'Knights',
   'Properties',
   'Streaming',
@@ -96,6 +98,7 @@ export function Dashboard() {
 
         <main className="px-10">
           {active === 'Overview' && <OverviewTab />}
+          {active === 'Excalibur' && <ExcaliburCommandCenterTab />}
           {active === 'Knights' && <KnightsTab />}
           {active === 'Properties' && <PropertiesTab />}
           {active === 'Streaming' && <StreamingTab />}
