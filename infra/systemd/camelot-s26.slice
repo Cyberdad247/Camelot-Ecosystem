@@ -1,0 +1,12 @@
+[Unit]
+Description=Camelot S26 Orb Slice (Thin Client Resource Parent)
+DefaultDependencies=no
+Before=slices.target
+
+[Slice]
+MemoryAccounting=yes
+MemoryHigh=320M
+MemoryMax=350M
+CPUAccounting=yes
+CPUQuota=40%
+IOAccounting=yes

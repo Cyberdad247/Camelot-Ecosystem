@@ -1,0 +1,20 @@
+[Unit]
+Description=Camelot Gemini Live BidiStream Gateway
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+EnvironmentFile=-/etc/camelot/gemini-live.env
+ExecStart=/usr/local/bin/camelot-gemini-live
+Restart=always
+RestartSec=3s
+MemoryHigh=220M
+MemoryMax=256M
+CPUQuota=50%
+ProtectSystem=strict
+ProtectHome=read-only
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

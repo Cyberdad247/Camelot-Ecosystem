@@ -1,0 +1,18 @@
+[Unit]
+Description=Camelot Sovereign Arthur Ed25519 Seal Engine
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/camelot-arthur
+Restart=always
+RestartSec=3s
+MemoryHigh=110M
+MemoryMax=128M
+CPUQuota=20%
+ProtectSystem=strict
+ProtectHome=read-only
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
