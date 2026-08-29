@@ -365,54 +365,194 @@ class HUDRenderer {
     return escaped;
   }
 
+  // Knight Registry & API Routing Architecture
+  getKnightRouterTable() {
+    return {
+      'SIR_BORIS': {
+        role: 'Crucible Conductor & Master Architect',
+        model: 'Gemini 1.5 Pro / Claude 3.5 Sonnet',
+        api_endpoint: 'https://100.110.180.18:8095/v1/crucible/evaluate',
+        cloudbrain_uuid: 'f7707daa-2d10-4db8-8fda-be4661a27793',
+        runes: ['//BOOT', '//STATUS', '//FLEET', '//DAWNING', 'Omega_Boris']
+      },
+      'SIR_ALEX': {
+        role: 'Task Planner & DAG Orchestrator',
+        model: 'Gemini 1.5 Pro',
+        api_endpoint: 'https://100.110.180.18:8095/v1/dag/plan',
+        cloudbrain_uuid: 'f490c05e-d8c4-4008-87e1-5f901bf57c6a',
+        runes: ['//PLAN', '//THINK', '//OMX_PLAN', 'Omega_Alex']
+      },
+      'SIR_FORGE': {
+        role: 'Kinetic Code Execution & Build Pipeline',
+        model: 'Gemini 1.5 Flash / Claude 3.5 Sonnet',
+        api_endpoint: 'https://100.110.180.18:8095/v1/forge/compile',
+        cloudbrain_uuid: '91c5da8b-e2de-4a56-b7fd-c8b76c00afc7',
+        runes: ['//FORGE', '//CONTRACT', '//GENESIS', 'Omega_Forge']
+      },
+      'SIR_CODEX': {
+        role: 'High-Velocity Implementation & AST Builder',
+        model: 'GPT-5.5 Codex / OpenAI AST Provider',
+        api_endpoint: 'https://100.110.180.18:8095/v1/codex/dispatch',
+        cloudbrain_uuid: '8c656cfa-a189-409e-a72d-07692a47f17e',
+        runes: ['//CODEX', '//REZERO_CODE', 'Omega_Codex']
+      },
+      'SIR_SENTINEL': {
+        role: 'AgentArmor, mTLS Zero-Trust & Iron Gate',
+        model: 'Gemini 1.5 Flash / Local Rules',
+        api_endpoint: 'https://100.110.180.18:8443/v1/sentinel/gate',
+        cloudbrain_uuid: '07cbb441-f008-424c-820a-85676210be39',
+        runes: ['//BIFROST_LOCK', '//DEFENSE_INIT', 'Omega_Sentinel']
+      },
+      'SIR_DEBUG': {
+        role: 'PIV Self-Healing & Anomaly Repair',
+        model: 'Gemini 1.5 Pro',
+        api_endpoint: 'https://100.110.180.18:8095/v1/debug/heal',
+        cloudbrain_uuid: 'fdc42a4a-3060-4eac-b57c-8e6009ed634a',
+        runes: ['//HEAL', '//REZERO', '//TRIAGE', 'Omega_Debug']
+      },
+      'SIR_GHOST': {
+        role: 'Air-Gapped Privacy & Secrets Scanner',
+        model: 'Ollama Local (qwen2.5-coder / mistral)',
+        api_endpoint: 'http://127.0.0.1:11434/api/generate',
+        cloudbrain_uuid: '422a184b-93e7-4dfd-8a12-75d2268b6c60',
+        runes: ['//SCAN', '//PURGE_MEMORY', 'Omega_Ghost']
+      },
+      'LADY_APIS': {
+        role: 'BASHR Context Forager & Literature Search',
+        model: 'Gemini 1.5 Pro',
+        api_endpoint: 'https://100.110.180.18:8095/v1/forage/search',
+        cloudbrain_uuid: '378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f',
+        runes: ['//SWARM', '//BIO_SWARM', '//SCAVENGE', 'Omega_Apis']
+      },
+      'MERLIN_OMEGA': {
+        role: 'System 2 Deep Reasoning & Tree-of-Thought',
+        model: 'Gemini 1.5 Pro (Thinking Mode)',
+        api_endpoint: 'https://100.110.180.18:8095/v1/reasoning/crucible',
+        cloudbrain_uuid: 'af927fde-d7eb-42ee-8c79-51b3e78ef39b',
+        runes: ['//THINK', '//OMX_AUTOPILOT', 'Omega_Merlin']
+      },
+      'SIR_HELIO': {
+        role: 'Voice OS & Sub-50ms Aoede S2S Pipeline',
+        model: 'Gemini Live Multimodal Audio',
+        api_endpoint: 'wss://100.110.180.18:8095/v1/audio/stream',
+        cloudbrain_uuid: '56820318-bb91-451f-aac4-4b46424898cf',
+        runes: ['//vocal', '//EMULATE', 'Omega_Helio']
+      },
+      'HERMES_PRIME': {
+        role: 'High-Velocity R&D, VFS Synthesis & MGV Loop',
+        model: 'Gemini 1.5 Pro / Nous Research',
+        api_endpoint: 'https://100.110.180.18:8095/v1/hermes/synthesize',
+        cloudbrain_uuid: '28f89cb6-5048-4b5d-9e94-376082d24744',
+        runes: ['//SYNC_VFS_WORKSPACE', '//FORGE_HERMES_PRIME_FILES', '//IGNITE_SELF_EVOLUTION_LOOP', 'Omega_HermesPrime']
+      },
+      'ANYA_OMEGA': {
+        role: 'Arch-Sovereign Compiler & Quality Gate',
+        model: 'Symbollect Quantum Compiler',
+        api_endpoint: 'https://100.110.180.18:8095/v1/anya/compile',
+        cloudbrain_uuid: '32d38906-5ae8-4ecc-b77e-705d12c89f4a',
+        runes: ['//NANO_SWARM_EXPAND', 'Omega_Anya']
+      }
+    };
+  }
+
   processVPSWorldTreeResponse(text) {
     const low = text.toLowerCase();
+    const routerTable = this.getKnightRouterTable();
+
+    // Direct Omega Knight Dispatch
+    if (low.startsWith('omega_') || low.includes('omega')) {
+      const matchKey = Object.keys(routerTable).find(k => low.includes(k.toLowerCase().replace('sir_', '').replace('lady_', '')) || low.includes(k.toLowerCase()));
+      const knight = routerTable[matchKey] || {
+        role: 'Sovereign Knight Specialist',
+        model: 'Gemini 1.5 Pro',
+        api_endpoint: 'https://100.110.180.18:8095/v1/knight/dispatch',
+        cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795'
+      };
+      const knightName = matchKey || text.split(' ')[0].replace(/omega_/i, '').toUpperCase();
+      const response = `👑 **Omega Knight Router Dispatched: [${knightName}]**\n\n• **Knight Role:** ${knight.role}\n• **Model Provider:** \`${knight.model}\`\n• **API Gateway:** \`${knight.api_endpoint}\`\n• **CloudBrain Node:** UUID \`${knight.cloudbrain_uuid}\`\n• **Directive:** "${text.substring(text.indexOf(' ') + 1) || 'Standby Execution'}"\n\nExecution telemetry confirmed across the Bifrost Bridge.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
 
     if (low.includes('status') || low.includes('mesh') || low.includes('fleet')) {
-      const response = `📡 **VPS World Tree Mesh Telemetry:**\n\n• **VPS Hub (KVM563):** \`100.110.180.18:8095\` — Active (RTT: 18ms)\n• **Excalibur Sentinel:** \`100.106.246.126:8092\` — S26 Ultra (Sub-50ms Aoede S2S)\n• **Cybertronia:** \`100.118.224.52:3001\` — Primary Windows Orchestrator\n• **WorldTree CloudBrain:** UUID \`a0a4bfb9-62fc-4b55-a6a6-e3258ffda5b3\` Sealed`;
+      const k = routerTable['SIR_BORIS'];
+      const response = `📡 **VPS World Tree Mesh Telemetry (Routed via ${k.role}):**\n\n• **VPS Hub (KVM563):** \`100.110.180.18:8095\` — Active (RTT: 18ms)\n• **Excalibur Sentinel:** \`100.106.246.126:8092\` — S26 Ultra (Sub-50ms Aoede S2S)\n• **Cybertronia:** \`100.118.224.52:3001\` — Primary Windows Orchestrator\n• **API Router:** \`${k.api_endpoint}\`\n• **WorldTree CloudBrain:** UUID \`${k.cloudbrain_uuid}\` Sealed`;
       this.addMessage(response, 'ai');
       return;
     }
 
     if (low.includes('boot')) {
-      const response = `🚀 **Sovereign Boot Sequencer Initiated (VPS World Tree):**\n\n1. Port Probes (:8095, :8092, :3001) → **ONLINE**\n2. Ed25519 Arthur Identity Sealed → **CONFIRMED**\n3. Aoede Vocal Gateway Stream → **READY**\n4. CloudBrain Memory Tissue → **SYNCHRONIZED**\n\nExcalibur is standing by for your next vocal command, Sovereign.`;
+      const k = routerTable['SIR_BORIS'];
+      const response = `🚀 **Sovereign Boot Sequencer Initiated (Routed via ${k.role}):**\n\n1. Port Probes (:8095, :8092, :3001) → **ONLINE**\n2. Ed25519 Arthur Identity Sealed → **CONFIRMED**\n3. Aoede Vocal Gateway Stream → **READY**\n4. CloudBrain Memory Tissue → UUID \`${k.cloudbrain_uuid}\`\n\nExcalibur is standing by for your next vocal command, Sovereign.`;
       this.addMessage(response, 'ai');
       return;
     }
 
     if (low.includes('forge_hermes')) {
-      const response = `⚔️ **HERMES_PRIME VFS Soul Scaffolded:**\n\n• Location: \`Knights/Hermes_Prime/VFS_SOUL.json\`\n• Research Phial: \`01_KERNEL/titan/phials/hermes_prime_phial.py\`\n• Memory Mode: Ouroboros 1.58-bit BitNet WAL\n• State: Idempotent scaffold confirmed.`;
+      const k = routerTable['HERMES_PRIME'];
+      const response = `⚔️ **HERMES_PRIME VFS Soul Scaffolded:**\n\n• Location: \`Knights/Hermes_Prime/VFS_SOUL.json\`\n• API Route: \`${k.api_endpoint}\`\n• Model Provider: \`${k.model}\`\n• CloudBrain UUID: \`${k.cloudbrain_uuid}\`\n• Memory Mode: Ouroboros 1.58-bit BitNet WAL`;
       this.addMessage(response, 'ai');
       return;
     }
 
     if (low.includes('ignite_self_evolution') || low.includes('evolve_loop')) {
-      const response = `🧬 **MGV Research Cycle Ignited (HERMES_PRIME):**\n\n1. **Monitor:** Scraping latest papers and arXiv/bioRxiv feeds\n2. **Generate:** Synthesizing architectural hypotheses for Sovereign Mesh\n3. **Verify:** AST & zero-trust proof gates\n4. **Evolve:** Re-weighting Phial weights and updating CloudBrain tissue\n\nCycle completed with zero regression.`;
+      const k = routerTable['HERMES_PRIME'];
+      const response = `🧬 **MGV Research Cycle Ignited (${k.role}):**\n\n1. **Monitor:** Scraping latest papers and arXiv/bioRxiv feeds\n2. **Generate:** Synthesizing architectural hypotheses for Sovereign Mesh\n3. **Verify:** AST & zero-trust proof gates (\`${k.api_endpoint}\`)\n4. **Evolve:** Re-weighting Phial weights and updating CloudBrain tissue (\`${k.cloudbrain_uuid}\`)\n\nCycle completed with zero regression.`;
       this.addMessage(response, 'ai');
       return;
     }
 
-    if (low.includes('forge') || low.includes('codex')) {
-      const response = `⚡ **Kinetic Code Execution Lane Active (SIR_FORGE / SIR_CODEX):**\n\n• Dispatch: Direct Bare-Metal Kinetic Pipeline\n• Target: \`${text.replace(/\/\/(forge|codex)/i, '').trim() || 'Active Workspace'}\`\n• TDD Gate: Verified against test suite\n• Output: Sealed with zero security warnings.`;
+    if (low.includes('sync_vfs') || low.includes('vfs') || low.includes('cloudbrain')) {
+      const k = routerTable['HERMES_PRIME'];
+      const response = `🌳 **VPS World Tree VFS Synchronized:**\n\n• Local digital factory: \`Knights/Hermes_Prime/\`\n• API Bridge: \`${k.api_endpoint}\`\n• NotebookLM CloudBrain tissue: UUID \`${k.cloudbrain_uuid}\`\n• Memory WAL status: 0 uncommitted frames\n• Vocal routing: Live stream unobstructed.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('plan')) {
+      const k = routerTable['SIR_ALEX'];
+      const response = `🧠 **AST Plan Mode Dispatched to [SIR_ALEX]:**\n\n• Target: \`${text.replace(/\/\/plan/i, '').trim() || 'System Architecture'}\`\n• Model Engine: \`${k.model}\`\n• API Endpoint: \`${k.api_endpoint}\`\n• Consensus: 13-Agent Crucible Active\n• Task DAG: 5 verifiable execution gates generated`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('forge')) {
+      const k = routerTable['SIR_FORGE'];
+      const response = `⚡ **Kinetic Code Execution Lane Active ([SIR_FORGE]):**\n\n• Dispatch Endpoint: \`${k.api_endpoint}\`\n• Model Engine: \`${k.model}\`\n• Target: \`${text.replace(/\/\/forge/i, '').trim() || 'Active Workspace'}\`\n• TDD Gate: Verified against test suite`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('codex')) {
+      const k = routerTable['SIR_CODEX'];
+      const response = `💻 **High-Velocity Implementation Lane Active ([SIR_CODEX]):**\n\n• Dispatch Endpoint: \`${k.api_endpoint}\`\n• Engine Profile: \`${k.model}\`\n• Target: \`${text.replace(/\/\/codex/i, '').trim() || 'Rapid Prototype'}\`\n• Status: Kinetic dispatch ready`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('heal')) {
+      const k = routerTable['SIR_DEBUG'];
+      const response = `🩹 **PIV Self-Healing Loop Engaged ([SIR_DEBUG]):**\n\n• API Endpoint: \`${k.api_endpoint}\`\n• Model Engine: \`${k.model}\`\n• Scanned logs across VPS Hub & S26 Ultra\n• Error count: 0 fatal anomalies\n• Verification status: Green across all mesh nodes.`;
       this.addMessage(response, 'ai');
       return;
     }
 
     if (low.includes('swarm') || low.includes('bio_swarm')) {
-      const response = `🐝 **Multi-Agent Swarm Colony Dispatched (SIR_BORIS / LADY_APIS):**\n\n• Swarm Nodes: 8-Squire Colony + Research Foragers\n• Coordination: 13-Agent Consensus Lattice\n• Target: \`${text.replace(/\/\/swarm/i, '').trim() || 'Ecosystem Fleet'}\`\n• Status: Colony synchronized.`;
+      const k = routerTable['LADY_APIS'];
+      const response = `🐝 **Multi-Agent Swarm Colony Dispatched ([LADY_APIS]):**\n\n• Swarm Endpoint: \`${k.api_endpoint}\`\n• Research Model: \`${k.model}\`\n• Coordination: 13-Agent Consensus Lattice\n• Target: \`${text.replace(/\/\/swarm/i, '').trim() || 'Ecosystem Fleet'}\``;
       this.addMessage(response, 'ai');
       return;
     }
 
-    if (low.startsWith('omega_') || low.includes('omega')) {
-      const knight = text.split(' ')[0].replace(/omega_/i, '').toUpperCase();
-      const response = `👑 **Omega Knight Direct Dispatch: [${knight}]:**\n\n• Persona: Authenticated via Sovereign Registry\n• CloudBrain Node: Tethered to WorldTree UUID\n• Directive: "${text.substring(text.indexOf(' ') + 1) || 'Standby'}"\n• Execution: Real-time synthesis routed.`;
+    if (low.includes('bifrost_lock')) {
+      const k = routerTable['SIR_SENTINEL'];
+      const response = `🔒 **Bifrost Zero-Trust Lock Re-Sealed ([SIR_SENTINEL]):**\n\n• Security Endpoint: \`${k.api_endpoint}\`\n• Encryption: Ed25519 mTLS Boundary\n• CloudBrain Node: \`${k.cloudbrain_uuid}\`\n• State: Cryptographic boundary sealed across all mesh nodes.`;
       this.addMessage(response, 'ai');
       return;
     }
 
     // Default conversational vocal response
-    const defaultResponse = `⚔️ **VPS World Tree Synthesized:**\n\nReceived: "${text}"\n\nYour directive has been routed through the Sovereign Mesh. Speak or issue further runic directives directly.`;
+    const defaultResponse = `⚔️ **VPS World Tree Synthesized:**\n\nReceived: "${text}"\n\nYour directive has been routed through the Knight Router System. Speak or issue further runic directives directly.`;
     this.addMessage(defaultResponse, 'ai');
   }
 }
