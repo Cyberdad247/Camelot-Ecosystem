@@ -492,6 +492,27 @@ body.night-mode .bg-overlay {
   color: var(--text-primary);
 }
 
+.omega-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.rune-pill.mini {
+  padding: 6px 8px;
+  font-size: 0.68rem;
+  justify-content: center;
+  font-family: 'Orbitron', monospace;
+  font-weight: 600;
+  color: var(--gold-light);
+  background: rgba(212, 175, 55, 0.06);
+}
+
+.rune-pill.mini:hover {
+  background: rgba(212, 175, 55, 0.2);
+  transform: translateY(-1px);
+}
+
 .sidebar-footer {
   margin-top: auto;
   padding: 14px 16px;

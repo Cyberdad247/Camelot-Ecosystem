@@ -362,20 +362,33 @@ class HUDRenderer {
       return;
     }
 
-    if (low.includes('sync_vfs') || low.includes('vfs') || low.includes('cloudbrain')) {
-      const response = `🌳 **VPS World Tree VFS Synchronized:**\n\n• Local digital factory: \`Knights/Hermes_Prime/\`\n• NotebookLM CloudBrain tissue: \`hermes_prime_vfs_forge\`\n• Memory WAL status: 0 uncommitted frames\n• Vocal routing: Live stream unobstructed.`;
+    if (low.includes('forge_hermes')) {
+      const response = `⚔️ **HERMES_PRIME VFS Soul Scaffolded:**\n\n• Location: \`Knights/Hermes_Prime/VFS_SOUL.json\`\n• Research Phial: \`01_KERNEL/titan/phials/hermes_prime_phial.py\`\n• Memory Mode: Ouroboros 1.58-bit BitNet WAL\n• State: Idempotent scaffold confirmed.`;
       this.addMessage(response, 'ai');
       return;
     }
 
-    if (low.includes('plan')) {
-      const response = `🧠 **AST Plan Mode Dispatched to Merlin Omega & Sir Boris:**\n\n• Target: \`${text.replace(/\/\/plan/i, '').trim() || 'System Architecture'}\`\n• Consensus: 13-Agent Crucible Active\n• Task DAG: 5 verifiable execution gates generated\n• Zero-Trust AST check: Passed`;
+    if (low.includes('ignite_self_evolution') || low.includes('evolve_loop')) {
+      const response = `🧬 **MGV Research Cycle Ignited (HERMES_PRIME):**\n\n1. **Monitor:** Scraping latest papers and arXiv/bioRxiv feeds\n2. **Generate:** Synthesizing architectural hypotheses for Sovereign Mesh\n3. **Verify:** AST & zero-trust proof gates\n4. **Evolve:** Re-weighting Phial weights and updating CloudBrain tissue\n\nCycle completed with zero regression.`;
       this.addMessage(response, 'ai');
       return;
     }
 
-    if (low.includes('heal')) {
-      const response = `🩹 **PIV Self-Healing Loop Engaged (SIR_DEBUG):**\n\n• Scanned logs across VPS Hub & S26 Ultra\n• Error count: 0 fatal anomalies\n• Verification status: Green across all mesh nodes.`;
+    if (low.includes('forge') || low.includes('codex')) {
+      const response = `⚡ **Kinetic Code Execution Lane Active (SIR_FORGE / SIR_CODEX):**\n\n• Dispatch: Direct Bare-Metal Kinetic Pipeline\n• Target: \`${text.replace(/\/\/(forge|codex)/i, '').trim() || 'Active Workspace'}\`\n• TDD Gate: Verified against test suite\n• Output: Sealed with zero security warnings.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('swarm') || low.includes('bio_swarm')) {
+      const response = `🐝 **Multi-Agent Swarm Colony Dispatched (SIR_BORIS / LADY_APIS):**\n\n• Swarm Nodes: 8-Squire Colony + Research Foragers\n• Coordination: 13-Agent Consensus Lattice\n• Target: \`${text.replace(/\/\/swarm/i, '').trim() || 'Ecosystem Fleet'}\`\n• Status: Colony synchronized.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.startsWith('omega_') || low.includes('omega')) {
+      const knight = text.split(' ')[0].replace(/omega_/i, '').toUpperCase();
+      const response = `👑 **Omega Knight Direct Dispatch: [${knight}]:**\n\n• Persona: Authenticated via Sovereign Registry\n• CloudBrain Node: Tethered to WorldTree UUID\n• Directive: "${text.substring(text.indexOf(' ') + 1) || 'Standby'}"\n• Execution: Real-time synthesis routed.`;
       this.addMessage(response, 'ai');
       return;
     }
