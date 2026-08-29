@@ -826,6 +826,80 @@ body.night-mode .bg-overlay {
 .bm-val.purple { color: #d8b4fe; }
 .bm-val.cyan { color: var(--cyan-glow); }
 
+.router-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.router-node-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.router-node-card:hover {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: var(--cyan-glow);
+  transform: translateY(-2px);
+}
+
+.router-node-card.hermes {
+  border-color: rgba(212, 175, 55, 0.4);
+  background: rgba(212, 175, 55, 0.05);
+  grid-column: span 2;
+}
+
+.router-node-card.hermes:hover {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.12);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+}
+
+.rnc-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rnc-icon { font-size: 0.9rem; }
+
+.rnc-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.rnc-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--cyan-glow);
+}
+
+.rnc-badge.gold {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--gold-light);
+}
+
+.rnc-desc {
+  font-size: 0.64rem;
+  color: var(--text-secondary);
+  line-height: 1.25;
+}
+
 .bifrost-routes-section {
   display: flex;
   flex-direction: column;

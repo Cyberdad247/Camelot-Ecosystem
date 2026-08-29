@@ -551,6 +551,36 @@ class HUDRenderer {
       return;
     }
 
+    if (low.includes('9router')) {
+      const response = `⚡ **9router Packet Engine Active:**\n\n• **Throughput:** 24,000 ops/sec\n• **RTK Savings:** 72.4% KV cache reuse\n• **Packet Scheduling:** Sub-10ms priority FIFO\n• **Endpoint:** \`http://127.0.0.1:7680/affinity/stats\`\n• **LMCache:** P2P KV transfers enabled across Tailscale mesh.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('omniroute')) {
+      const response = `🌐 **OmniRoute Mesh Active:**\n\n• **Multi-Provider Matrix:** Gemini 1.5, Claude 3.5, OpenAI, Ollama Local\n• **Fallback Routing:** Automatic failover on rate-limits or latency spikes\n• **Cost Optimizer:** Zero-cost local inference bias\n• **Policy Engine:** \`control_plane/dispatch/omniroute_policies.py\` Sealed.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('bitrouter')) {
+      const response = `🧩 **BitRouter (1.58-Bit Neural Core) Active:**\n\n• **Quantization:** BitNet 1.58-bit Ternary {-1, 0, +1}\n• **Memory Profile:** Ultra-low VRAM footprint (< 150MB)\n• **Inference Mode:** Ouroboros SSM WAL\n• **Compression Ratio:** 85%+ token reduction theorem satisfied.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('persona_matrix') || low.includes('multivoice') || low.includes('voice_router')) {
+      const response = `🎙️ **Multi-Persona Voice Router Active:**\n\n• **Personas:** Anya (Sovereign), Merlin (Oracle), Lakisha (Empathetic), Helio (Fast)\n• **Latency:** Sub-50ms Aoede S2S Audio Pipeline\n• **VAD & PBX:** Fonoster Realtime Telephony Bridge linked\n• **Audio Bridge:** WebSocket \`wss://100.110.180.18:8095/v1/audio/stream\`.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('hermes_os') || low.includes('hermes_kernel')) {
+      const response = `🦅 **Hermes OS Autonomous Kernel Active:**\n\n• **Supervision:** Nous Research Self-Evolution Engine\n• **MGV Research Loop:** Monitor → Generate → Verify → Evolve\n• **Digital Factory:** \`Knights/Hermes_Prime/\` VFS Soul\n• **CloudBrain Node:** UUID \`28f89cb6-5048-4b5d-9e94-376082d24744\`\n• **Memory WAL:** Continuous Ouroboros sync active.`;
+      this.addMessage(response, 'ai');
+      return;
+    }
+
     // Default conversational vocal response
     const defaultResponse = `⚔️ **VPS World Tree Synthesized:**\n\nReceived: "${text}"\n\nYour directive has been routed through the Knight Router System. Speak or issue further runic directives directly.`;
     this.addMessage(defaultResponse, 'ai');
