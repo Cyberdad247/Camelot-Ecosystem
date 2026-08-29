@@ -358,6 +358,42 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_harness_emulator",
     },
+    # SOVEREIGN ROUTING MATRIX & HERMES OS INTEGRATION (P1-R01)
+    "//9ROUTER": {
+        "knight": "sir_forge",
+        "description": "High-throughput sub-10ms packet scheduler & LMCache KV cache affinity router",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_status",
+    },
+    "//OMNIROUTE": {
+        "knight": "sir_boris",
+        "description": "Universal model fallback, cost-optimizer & failover multi-provider load-balancer",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_status",
+    },
+    "//BITROUTER": {
+        "knight": "hermes_prime",
+        "description": "Ouroboros 1.58-bit ternary quantized neural routing & memory compression",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_sync_vfs_workspace",
+    },
+    "//VOICE_ROUTER": {
+        "knight": "sir_helio",
+        "description": "Multi-Persona voice router with sub-50ms Aoede S2S and Fonoster PBX telephony bridge",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_vocal",
+    },
+    "//HERMES_OS": {
+        "knight": "hermes_prime",
+        "description": "Hermes OS autonomous kernel: recursive MGV research cycle & VFS self-evolution",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_ignite_self_evolution_loop",
+    },
 }
 
 # 29 Omega Runes — system-level operations
