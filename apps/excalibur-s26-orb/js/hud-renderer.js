@@ -451,6 +451,13 @@ class HUDRenderer {
         api_endpoint: 'https://100.110.180.18:8095/v1/anya/compile',
         cloudbrain_uuid: '32d38906-5ae8-4ecc-b77e-705d12c89f4a',
         runes: ['//NANO_SWARM_EXPAND', 'Omega_Anya']
+      },
+      'SIR_HUGGINGFACE': {
+        role: 'HuggingFace Hub & Spaces Conductor (Valkyrie HF)',
+        model: 'Transformers / HuggingFace Hub API',
+        api_endpoint: 'https://100.110.180.18:8095/v1/huggingface/inspect',
+        cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795',
+        runes: ['//HUGGINGFACE', 'Omega_HuggingFace']
       }
     };
   }

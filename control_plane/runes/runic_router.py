@@ -394,6 +394,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_ignite_self_evolution_loop",
     },
+    "//HUGGINGFACE": {
+        "knight": "sir_huggingface",
+        "description": "HuggingFace Hub model inspection, dataset downloads, spaces management & transformer pipelines",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_status",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -430,6 +437,7 @@ OMEGA_RUNES: dict[str, dict[str, Any]] = {
     "Omega_CODEX": {"knight": "sir_codex", "description": "Direct SIR_CODEX execution lane"},
     "Omega_BIFROST": {"knight": "sir_heimdall", "description": "Bifrost Sentinel operations"},
     "Omega_HermesPrime": {"knight": "hermes_prime", "description": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)"},
+    "Omega_HuggingFace": {"knight": "sir_huggingface", "description": "HuggingFace Hub & Spaces Conductor (Valkyrie HF)"},
 }
 
 
