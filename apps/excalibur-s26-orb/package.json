@@ -4,6 +4,7 @@
   "private": true,
   "description": "Sovereign S26 Excalibur Vocal Live Command Center HUD",
   "scripts": {
-    "start": "npx serve ."
+    "start": "npx serve .",
+    "vercel-build": "echo Static deployment ready"
   }
 }

@@ -42,6 +42,7 @@ class TrinityController {
       console.error(`[TRINITY] Unknown mode: ${mode}`);
       return;
     }
+    if ('vibrate' in navigator) navigator.vibrate(20);
     const prevMode = this.activeMode;
     this.activeMode = mode;
     document.querySelectorAll('.trinity-mode').forEach(btn => {
@@ -83,6 +84,12 @@ class TrinityController {
     if (chat) {
       chat.appendChild(banner);
       chat.scrollTop = chat.scrollHeight;
+    }
+  }
+
+  switchTab(tabId) {
+    if (window.HUDRenderer?.switchTab) {
+      window.HUDRenderer.switchTab(tabId);
     }
   }
 

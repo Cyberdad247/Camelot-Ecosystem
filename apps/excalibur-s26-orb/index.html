@@ -2,321 +2,249 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Excalibur Command Center — Sovereign S26 Ultra</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Excalibur Command Center — VPS World Tree</title>
   <link rel="stylesheet" href="css/sovereign.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="sovereign-container" id="sovereignContainer">
-    <!-- Visual Backplane -->
+  <!-- Ambient Backdrop -->
+  <div class="ambient-bg">
     <div class="bg-image-layer"></div>
     <div class="bg-mesh-grid"></div>
     <div class="bg-overlay"></div>
-    <div class="scanlines"></div>
     <div class="particles" id="particles"></div>
-    <div class="holo-floor"></div>
-
-    <!-- Top Sovereign Bar -->
-    <header class="top-nav-bar">
-      <div class="brand-cluster">
-        <div class="crest-shield">
-          <span class="crest-rune">⚔️</span>
-        </div>
-        <div class="brand-text">
-          <h1 class="brand-title">EXCALIBUR</h1>
-          <span class="brand-sub">SOVEREIGN SENTINEL · S26 ULTRA</span>
-        </div>
-      </div>
-
-      <!-- Quick Mesh Nodes & RTT -->
-      <div class="mesh-telemetry-cluster">
-        <div class="node-pill online" title="Tailscale Primary Node: 100.118.224.52">
-          <span class="node-dot"></span>
-          <span class="node-label">CYBERTRONIA</span>
-        </div>
-        <div class="node-pill online" title="VPS Hub Node: 100.110.180.18">
-          <span class="node-dot"></span>
-          <span class="node-label">VPS HUB :8095</span>
-        </div>
-        <div class="rtt-badge" id="latencyMonitor">
-          <span class="rtt-icon">⚡</span>
-          <span class="latency-value" id="latencyValue">18ms</span>
-        </div>
-      </div>
-    </header>
-
-    <!-- Sub-Header Navigation Tabs -->
-    <nav class="hud-tab-bar">
-      <button class="hud-tab active" data-tab="cockpit">COCKPIT</button>
-      <button class="hud-tab" data-tab="security">SECURITY &amp; BIOMETRICS</button>
-      <button class="hud-tab" data-tab="services">SERVICE FLEET (8)</button>
-      <button class="hud-tab" data-tab="audit">AUDIT CHAIN</button>
-    </nav>
-
-    <!-- Main Dynamic Content Region -->
-    <main class="hud-main-viewport">
-      <!-- 1. COCKPIT TAB (Default) -->
-      <section class="tab-content active" id="tab-cockpit">
-        <!-- Trinity Voice & Dispatch Engine -->
-        <div class="trinity-cluster">
-          <div class="trinity-header">
-            <span class="cluster-tag">TRINITY DISPATCH MATRIX</span>
-            <div class="biometric-lease-counter">
-              <span class="bio-label">BIO-LEASE:</span>
-              <span class="bio-val" id="bioTimer">30s</span>
-            </div>
-          </div>
-          <div class="trinity-selector" id="trinitySelector">
-            <button class="trinity-mode active" data-mode="live" title="Full-duplex low-latency vocal stream">
-              <span class="mode-icon">🎙️</span>
-              <span class="mode-title">LIVE VOCAL</span>
-              <span class="mode-desc">Aoede BidiStream</span>
-            </button>
-            <button class="trinity-mode" data-mode="spark" title="24/7 background research & VFS synthesis">
-              <span class="mode-icon">⚡</span>
-              <span class="mode-title">HERMES SPARK</span>
-              <span class="mode-desc">Ouroboros Phial</span>
-            </button>
-            <button class="trinity-mode" data-mode="assistant" title="Cognitive reasoning & AST Plan Mode">
-              <span class="mode-icon">🧠</span>
-              <span class="mode-title">SIR BORIS / MERLIN</span>
-              <span class="mode-desc">Cognitive Lattice</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Conversation / Telemetry Stream -->
-        <div class="kotr-chat" id="kotrChat">
-          <div class="empty-kotr" id="emptyState">
-            <div class="empty-rune-circle">
-              <span class="rune-glyph">ᚲᚨᛗᛖᛚᛟᛏ</span>
-            </div>
-            <p class="empty-title">The Round Table is Sealed &amp; Listening</p>
-            <p class="empty-hint">Try: <code>"//BOOT"</code> · <code>"//STATUS"</code> · <code>"Engage Hermes Research Loop"</code></p>
-          </div>
-        </div>
-
-        <div class="typing-kotr" id="typingKotr">
-          <span class="typing-label">SYNTHESIZING</span>
-          <div class="t-dot"></div>
-          <div class="t-dot"></div>
-          <div class="t-dot"></div>
-        </div>
-      </section>
-
-      <!-- 2. SECURITY & BIOMETRICS TAB -->
-      <section class="tab-content" id="tab-security">
-        <div class="security-grid">
-          <div class="sec-card">
-            <div class="sec-card-header">
-              <span class="sec-title">VOICE BIOMETRIC ID</span>
-              <span class="sec-badge gold">ONNX 256-DIM</span>
-            </div>
-            <div class="sec-body">
-              <div class="metric-row">
-                <span class="lbl">Speaker Similarity</span>
-                <span class="val green" id="simScore">94.8%</span>
-              </div>
-              <div class="progress-bar-wrap">
-                <div class="progress-fill green" style="width: 94.8%;"></div>
-              </div>
-              <div class="metric-row">
-                <span class="lbl">Impostor Revocation Gate</span>
-                <span class="val">&lt; 60.0%</span>
-              </div>
-              <div class="metric-row">
-                <span class="lbl">Active Household Profile</span>
-                <div class="profile-chips">
-                  <button class="p-chip active">PRIMARY (VA'SHAWN)</button>
-                  <button class="p-chip">DELEGATE</button>
-                  <button class="p-chip">GUEST</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sec-card">
-            <div class="sec-card-header">
-              <span class="sec-title">ANTI-SPOOF &amp; DEEPFAKE DEFENSE</span>
-              <span class="sec-badge green">VPS SHIELD</span>
-            </div>
-            <div class="sec-body">
-              <div class="metric-row">
-                <span class="lbl">Spectral Synthesis Artifacts</span>
-                <span class="val green">0.00 (CLEAN)</span>
-              </div>
-              <div class="metric-row">
-                <span class="lbl">Active Phoneme Nonce</span>
-                <span class="val purple" id="activeNonce">knight-7-round-3</span>
-              </div>
-              <div class="metric-row">
-                <span class="lbl">Replay Nonce Hashing</span>
-                <span class="val green">VERIFIED</span>
-              </div>
-              <button class="action-btn-sm" id="btnGenChallenge">RE-GENERATE CHALLENGE</button>
-            </div>
-          </div>
-
-          <div class="sec-card">
-            <div class="sec-card-header">
-              <span class="sec-title">DURESS &amp; EMERGENCY GHOST MODE</span>
-              <span class="sec-badge red">HITL LEVEL 4</span>
-            </div>
-            <div class="sec-body">
-              <p class="sec-desc">Triggers zero-write sandboxed execution and silent cryptographic vault lock across all nodes.</p>
-              <button class="duress-btn" id="duressToggle">INITIATE GHOST LOCKDOWN</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 3. SERVICE FLEET TAB -->
-      <section class="tab-content" id="tab-services">
-        <div class="fleet-table-wrap">
-          <table class="fleet-table">
-            <thead>
-              <tr>
-                <th>DAEMON</th>
-                <th>HOST</th>
-                <th>LANG</th>
-                <th>BUDGET</th>
-                <th>STATUS</th>
-                <th>RTT</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="svc-name">excalibur-voice-auth</td>
-                <td><span class="tag s26">S26</span></td>
-                <td>Rust</td>
-                <td>64MB</td>
-                <td><span class="tag-status active">ACTIVE</span></td>
-                <td class="rtt-green">14ms</td>
-              </tr>
-              <tr>
-                <td class="svc-name">excalibur-anti-spoof</td>
-                <td><span class="tag vps">VPS</span></td>
-                <td>Go</td>
-                <td>128MB</td>
-                <td><span class="tag-status active">ACTIVE</span></td>
-                <td class="rtt-green">28ms</td>
-              </tr>
-              <tr>
-                <td class="svc-name">excalibur-macro-engine</td>
-                <td><span class="tag vps">VPS</span></td>
-                <td>Go</td>
-                <td>128MB</td>
-                <td><span class="tag-status active">ACTIVE</span></td>
-                <td class="rtt-green">19ms</td>
-              </tr>
-              <tr>
-                <td class="svc-name">excalibur-offline-queue</td>
-                <td><span class="tag s26">S26</span></td>
-                <td>Rust</td>
-                <td>32MB</td>
-                <td><span class="tag-status active">ACTIVE</span></td>
-                <td class="rtt-green">4ms</td>
-              </tr>
-              <tr>
-                <td class="svc-name">camelot-bifrost</td>
-                <td><span class="tag vps">VPS</span></td>
-                <td>Go</td>
-                <td>256MB</td>
-                <td><span class="tag-status active">ACTIVE</span></td>
-                <td class="rtt-green">22ms</td>
-              </tr>
-              <tr>
-                <td class="svc-name">camelot-gemini-live</td>
-                <td><span class="tag vps">VPS</span></td>
-                <td>Go</td>
-                <td>256MB</td>
-                <td><span class="tag-status active">ACTIVE</span></td>
-                <td class="rtt-green">35ms</td>
-              </tr>
-              <tr>
-                <td class="svc-name">camelot-arthur (Ed25519)</td>
-                <td><span class="tag vps">VPS</span></td>
-                <td>Rust</td>
-                <td>128MB</td>
-                <td><span class="tag-status active">ACTIVE</span></td>
-                <td class="rtt-green">9ms</td>
-              </tr>
-              <tr>
-                <td class="svc-name">excalibur-failover-orch</td>
-                <td><span class="tag vps">VPS</span></td>
-                <td>Go</td>
-                <td>64MB</td>
-                <td><span class="tag-status standby">STANDBY</span></td>
-                <td class="rtt-green">25ms</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- 4. AUDIT CHAIN TAB -->
-      <section class="tab-content" id="tab-audit">
-        <div class="audit-stream">
-          <div class="audit-entry">
-            <div class="audit-time">18:32:04 UTC</div>
-            <div class="audit-tag green">SEAL_ED25519</div>
-            <div class="audit-detail">Command Envelope #1042 signed by SIR_BORIS (Merkle Root: 0x8F3C...A419)</div>
-          </div>
-          <div class="audit-entry">
-            <div class="audit-time">18:31:58 UTC</div>
-            <div class="audit-tag purple">TRINITY_SWITCH</div>
-            <div class="audit-detail">Mode altered to LIVE VOCAL (Aoede BidiStream Gateway :8765)</div>
-          </div>
-          <div class="audit-entry">
-            <div class="audit-time">18:31:12 UTC</div>
-            <div class="audit-tag gold">BIO_REAUTH</div>
-            <div class="audit-detail">Continuous 30s speaker verification passed (Confidence: 0.948)</div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- Bottom Vocal Command Bar -->
-    <footer class="command-bar-wrapper">
-      <div class="command-bar" id="commandBar">
-        <div class="voice-overlay" id="voiceOverlay">
-          <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-          <div class="v-bar"></div><div class="v-bar"></div><div class="v-bar"></div>
-          <div class="v-bar"></div>
-        </div>
-
-        <button class="kotr-avatar" id="kotrAvatar" title="Sovereign Identity Sealed">
-          <span class="avatar-icon">👑</span>
-        </button>
-
-        <input type="text" class="kotr-input" id="kotrInput" placeholder="Speak or issue runic command, Sovereign..." autocomplete="off">
-
-        <button class="voice-btn-kotr" id="voiceBtnKotr" title="Tap/Hold to Speak">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
-          </svg>
-        </button>
-
-        <button class="send-btn-kotr" id="sendBtnKotr">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-            <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
-          </svg>
-        </button>
-      </div>
-    </footer>
-
-    <!-- Offline & Fallback Status Notice -->
-    <div class="connection-banner hidden" id="connBanner">
-      <span class="conn-icon">🛡️</span>
-      <span class="conn-text">Bifrost Encrypted Mesh Connected — Web Speech API Active</span>
-    </div>
   </div>
 
-  <!-- Core Scripts -->
+  <div class="chatgpt-app-layout" id="appLayout">
+    <!-- Collapsible & Hoverable Left Dock (Telemetry & Runes) -->
+    <aside class="sidebar-panel" id="sidebarPanel" data-docked="true">
+      <div class="sidebar-header">
+        <div class="brand-crest">
+          <span class="brand-rune">⚔️</span>
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">EXCALIBUR</span>
+          <span class="brand-version">S26 ULTRA · v1000.54</span>
+        </div>
+        <button class="sidebar-redock-btn" id="sidebarRedockBtn" title="Pin / Re-dock Left Panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+          </svg>
+          <span class="redock-text">RE-DOCK</span>
+        </button>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">✕</button>
+      </div>
+
+      <div class="sidebar-action">
+        <button class="new-session-btn" id="newSessionBtn">
+          <span>＋</span> New Voice Channel
+        </button>
+      </div>
+
+      <!-- VPS World Tree Status -->
+      <div class="sidebar-section">
+        <div class="section-label">VPS WORLD TREE MESH</div>
+        <div class="node-card active" title="KVM563 / 162.35.107.134">
+          <div class="node-icon">🌳</div>
+          <div class="node-meta">
+            <span class="node-title">VPS Hub (KVM563)</span>
+            <span class="node-ip">100.110.180.18 :8095</span>
+          </div>
+          <span class="status-dot green"></span>
+        </div>
+        <div class="node-card active" title="Excalibur Mobile Sentinel">
+          <div class="node-icon">📱</div>
+          <div class="node-meta">
+            <span class="node-title">S26 Ultra (Self)</span>
+            <span class="node-ip">100.106.246.126 :8092</span>
+          </div>
+          <span class="status-dot green"></span>
+        </div>
+        <div class="node-card active" title="Primary Windows Orchestrator">
+          <div class="node-icon">⚡</div>
+          <div class="node-meta">
+            <span class="node-title">Cybertronia</span>
+            <span class="node-ip">100.118.224.52 :3001</span>
+          </div>
+          <span class="status-dot green"></span>
+        </div>
+      </div>
+
+      <!-- Quick Runes -->
+      <div class="sidebar-section">
+        <div class="section-label">DIRECT RUNES</div>
+        <div class="rune-list">
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//BOOT')">
+            <span class="r-icon">🚀</span> <code>//BOOT</code> Full Sequencer
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//STATUS')">
+            <span class="r-icon">📡</span> <code>//STATUS</code> Mesh Probe
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//PLAN audit architecture')">
+            <span class="r-icon">🧠</span> <code>//PLAN</code> Task DAG
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//HEAL')">
+            <span class="r-icon">🩹</span> <code>//HEAL</code> PIV Repair
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//SYNC_VFS_WORKSPACE')">
+            <span class="r-icon">📁</span> <code>//SYNC_VFS_WORKSPACE</code>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer (Security) -->
+      <div class="sidebar-footer">
+        <div class="bio-lease-pill">
+          <span class="bio-icon">🛡️</span>
+          <div class="bio-text">
+            <span class="bio-lbl">BIO-LEASE</span>
+            <span class="bio-val" id="bioTimer">30s</span>
+          </div>
+        </div>
+        <button class="duress-btn-mini" id="duressToggle" title="Ghost Lockdown">🚨</button>
+      </div>
+    </aside>
+
+    <!-- Main Chat Surface -->
+    <main class="chat-main-surface">
+      <!-- Top Bar -->
+      <header class="chat-top-bar">
+        <div class="top-left-cluster">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+          </button>
+          <div class="title-wrap">
+            <h1 class="chat-title">EXCALIBUR</h1>
+            <span class="chat-subtitle">VPS WORLD TREE VOCAL-TO-COMMAND</span>
+          </div>
+        </div>
+
+        <div class="top-right-cluster">
+          <div class="vps-online-badge">
+            <span class="pulse-dot"></span>
+            <span>VPS HUB :8095 ONLINE</span>
+          </div>
+          <div class="rtt-badge" id="latencyBadge">⚡ 18ms</div>
+        </div>
+      </header>
+
+      <!-- Scrollable Message Feed -->
+      <div class="chat-scroll-area" id="chatScrollArea">
+        <!-- Hero Welcome Stage (ChatGPT Style with 3D Hologram Integration) -->
+        <div class="hero-welcome-stage" id="heroWelcome">
+          <div class="hero-3d-stage" id="hero3dStage">
+            <div class="hero-avatar-card-3d" id="heroAvatarCard">
+              <div class="holo-ring holo-ring-outer"></div>
+              <div class="holo-ring holo-ring-inner"></div>
+              <div class="holo-scanlines"></div>
+              <img src="https://i.postimg.cc/bwnYWzCv/3BEa-Vn0t-ST-Qtd-SFA1OMy-A.webp" alt="Excalibur Sovereign Knight" class="hero-avatar-img hero-avatar-img-3d" id="heroAvatarImg">
+              <div class="hero-avatar-glow-3d"></div>
+              <div class="holo-badge">
+                <span class="pulse-dot"></span>
+                <span>SOVEREIGN ARCHITECT</span>
+              </div>
+            </div>
+          </div>
+          <h2 class="hero-heading">How can Excalibur serve you, Sovereign?</h2>
+          <p class="hero-description">
+            Direct vocal-to-command integration. Speak your intent via high-speed Aoede neural stream or issue runic directives across the WorldTree mesh.
+          </p>
+        </div>
+
+        <!-- Dynamic Message Container -->
+        <div class="messages-container" id="messagesContainer"></div>
+
+        <!-- Typing / Synthesizing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="typing-avatar">⚔️</div>
+          <div class="typing-bubble">
+            <span class="typing-text">VPS WORLD TREE SYNTHESIZING</span>
+            <div class="typing-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Vocal & Command Input Dock (With 3D Excalibur Orb & Voice Bar) -->
+      <footer class="chat-input-dock">
+        <!-- 3D Voice Orb Stage -->
+        <div class="dock-3d-orb-stage" id="dock3dOrbStage">
+          <div class="dock-orb-halo"></div>
+          <div class="dock-orb-ring outer"></div>
+          <div class="dock-orb-ring inner"></div>
+          <div class="dock-3d-orb" id="dockVoiceOrb" title="Tap to Toggle Aoede Neural Vocal Stream">
+            <div class="orb-core">
+              <div class="orb-rune-symbol">⚔️</div>
+            </div>
+            <div class="orb-pulse-wave"></div>
+          </div>
+          <!-- Real-Time Audio Frequency Bar Visualizer Integrated with 3D Orb -->
+          <div class="dock-voice-spectrum" id="dockVoiceSpectrum">
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+          </div>
+        </div>
+
+        <div class="input-composer-wrap" id="composerWrap">
+          <!-- Real-Time Audio Reactive Waveform Overlay -->
+          <div class="waveform-overlay" id="waveformOverlay">
+            <div class="wave-tag">🎙️ AOEDE VOCAL STREAM ACTIVE</div>
+            <div class="wave-bars">
+              <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+              <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+              <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+            </div>
+          </div>
+
+          <!-- Textarea / Input -->
+          <textarea 
+            id="chatInput" 
+            class="chat-textarea" 
+            placeholder="Speak or message Excalibur VPS World Tree..." 
+            rows="1"
+            autocomplete="off"
+          ></textarea>
+
+          <!-- Voice Mic & Send Actions -->
+          <div class="input-actions-cluster">
+            <button class="voice-mic-btn" id="voiceMicBtn" title="Hold or Tap to Speak (Aoede Neural Stream)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+              </svg>
+            </button>
+
+            <button class="send-message-btn" id="sendMessageBtn" title="Send Directive">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="dock-footer-telemetry">
+          <span id="celestialIndicator" class="celestial-pill" title="Dynamic Day/Night Phase">🌙 NIGHT LATTICE</span>
+          <span>•</span>
+          <span>🛡️ Sovereign Node: <code>vashawns-s26-ultra</code></span>
+          <span>•</span>
+          <span>🌳 VPS Mesh: <code>162.35.107.134</code></span>
+          <span>•</span>
+          <span>👑 Authority: King Arthur (Vizion)</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Scripts -->
   <script src="js/sentinel-client.js"></script>
-  <script src="js/trinity-controller.js"></script>
   <script src="js/audio-pipeline.js"></script>
   <script src="js/hud-renderer.js"></script>
 </body>

@@ -5,7 +5,7 @@
 
 class SentinelClient {
   constructor(config = {}) {
-    this.vpsTailscaleIP = config.vpsIP || '100.64.0.1';
+    this.vpsTailscaleIP = config.vpsIP || '100.110.180.18';
     this.vaultAddr = config.vaultAddr || 'http://127.0.0.1:8200';
     this.leaseTTL = config.leaseTTL || 30 * 60 * 1000;
     this.lease = null;
