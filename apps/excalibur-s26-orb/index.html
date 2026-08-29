@@ -173,6 +173,10 @@
         </div>
 
         <div class="top-right-cluster">
+          <button class="bifrost-bridge-btn" id="bifrostBridgeBtn" title="Open Bifrost Bridge Gateway Telemetry">
+            <span class="rainbow-pulse"></span>
+            <span class="bifrost-btn-lbl">⚡ BIFROST BRIDGE</span>
+          </button>
           <div class="vps-online-badge">
             <span class="pulse-dot"></span>
             <span>VPS HUB :8095 ONLINE</span>
@@ -180,6 +184,87 @@
           <div class="rtt-badge" id="latencyBadge">⚡ 18ms</div>
         </div>
       </header>
+
+      <!-- Bifrost Bridge Modal Overlay -->
+      <div class="bifrost-modal-overlay" id="bifrostModal">
+        <div class="bifrost-modal-card">
+          <div class="bifrost-modal-header">
+            <div class="bifrost-title-group">
+              <span class="bifrost-icon">🌈</span>
+              <div>
+                <h3 class="bifrost-title">BIFROST BRIDGE GATEWAY</h3>
+                <span class="bifrost-sub">CROSS-MESH WEBRTC & ZERO-TRUST ROUTING</span>
+              </div>
+            </div>
+            <button class="bifrost-close-btn" id="bifrostCloseBtn">✕</button>
+          </div>
+
+          <div class="bifrost-modal-body">
+            <!-- Bridge Telemetry Stream Grid -->
+            <div class="bifrost-stream-grid">
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">PORTAL STATE</span>
+                <span class="bm-val live">🟢 ACTIVE (LOCKED)</span>
+              </div>
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">APERTURE LATENCY</span>
+                <span class="bm-val gold">18ms (Aoede S2S)</span>
+              </div>
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">ENCRYPTION</span>
+                <span class="bm-val purple">mTLS Ed25519</span>
+              </div>
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">ACTIVE LANES</span>
+                <span class="bm-val cyan">6 Nodes Linked</span>
+              </div>
+            </div>
+
+            <!-- Bridge Nodes Live Route Table -->
+            <div class="bifrost-routes-section">
+              <div class="bifrost-section-title">BIFROST MESH NODE APERTURES</div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">🌳 VPS Control Hub (KVM563)</span>
+                  <span class="bn-detail">100.110.180.18 · Port :8095 & :3001</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">📱 Excalibur Sentinel (S26 Ultra)</span>
+                  <span class="bn-detail">100.106.246.126 · Port :8092</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">⚡ Cybertronia Primary Orchestrator</span>
+                  <span class="bn-detail">100.118.224.52 · Windows Local Gateway</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">🎙️ Lakisha Voice OS Host</span>
+                  <span class="bn-detail">100.100.155.55 · Multivoice Bridge</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+            </div>
+
+            <!-- Bifrost Action Buttons -->
+            <div class="bifrost-actions-row">
+              <button class="bifrost-action-btn primary" onclick="window.HUDRenderer?.executeRune('//STATUS'); document.getElementById('bifrostModal')?.classList.remove('open');">
+                📡 Probe Bridge Latency
+              </button>
+              <button class="bifrost-action-btn secondary" onclick="window.HUDRenderer?.executeRune('//BIFROST_LOCK'); document.getElementById('bifrostModal')?.classList.remove('open');">
+                🔒 Re-Seal Bifrost Lock
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Scrollable Message Feed -->
       <div class="chat-scroll-area" id="chatScrollArea">

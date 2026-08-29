@@ -83,6 +83,24 @@ class HUDRenderer {
       this.sidebar?.classList.remove('open');
     });
 
+    // Bifrost Bridge Modal Toggles
+    const bifrostBtn = document.getElementById('bifrostBridgeBtn');
+    const bifrostModal = document.getElementById('bifrostModal');
+    const bifrostClose = document.getElementById('bifrostCloseBtn');
+
+    bifrostBtn?.addEventListener('click', () => {
+      bifrostModal?.classList.add('open');
+      if ('vibrate' in navigator) navigator.vibrate(20);
+    });
+
+    bifrostClose?.addEventListener('click', () => {
+      bifrostModal?.classList.remove('open');
+    });
+
+    bifrostModal?.addEventListener('click', (e) => {
+      if (e.target === bifrostModal) bifrostModal.classList.remove('open');
+    });
+
     // 3D Parallax Tilt on Hero Avatar & Ambient Background
     this.init3DParallax();
 
