@@ -85,6 +85,10 @@ LANE_OPENAI_OAUTH_PROXY: str = "openai_oauth_proxy"
 """ChatGPT Account-to-API local OAuth proxy lane (:10531). Selects zero-key
 OpenAI-compatible dev proxy runtime with token refresh & image generation."""
 
+LANE_MAXIM_BIFROST_GATEWAY: str = "maxim_bifrost_gateway"
+"""MaximHQ Bifrost AI Gateway & WebRTC/WSS Router lane (:3001). Selects ultra-low latency
+cross-mesh streaming telemetry, semantic caching, and resilient provider routing."""
+
 LANE_DEFAULT: str = "default"
 """No lane preference.  Punts to ``factory_lane``'s default dispatch."""
 
@@ -98,11 +102,26 @@ VALID_LANES: frozenset = frozenset(
         LANE_UNCENSORED_LOCAL_OFFLINE,
         LANE_XINFERENCE_MULTI_MODEL,
         LANE_OPENAI_OAUTH_PROXY,
+        LANE_MAXIM_BIFROST_GATEWAY,
         LANE_DEFAULT,
     }
 )
 
 # ── Keyword sets ────────────────────────────────────────────────────────────
+
+MAXIM_BIFROST_KEYWORDS: Tuple[str, ...] = (
+    "maximhq",
+    "maxim_bifrost",
+    "bifrost_gateway",
+    "bifrost_bridge",
+    "bifrost_ai_gateway",
+    "port_3001",
+    "maxim",
+    "adaptive_routing",
+    "semantic_caching",
+    "webrtc_audio_bridge",
+)
+"""Keywords that route to ``LANE_MAXIM_BIFROST_GATEWAY``."""
 
 OPENAI_OAUTH_PROXY_KEYWORDS: Tuple[str, ...] = (
     "openai_oauth",
@@ -237,6 +256,7 @@ class LaneSignal:
                 "cliproxy_heavy_reasoning",
                 "default",
                 "fcc_failover_matrix",
+                "maxim_bifrost_gateway",
                 "omni_route_codex",
                 "openai_oauth_proxy",
                 "ornith_uncensored_coding",
@@ -288,6 +308,18 @@ def select_lane(intent_text: str) -> LaneSignal:
         return LaneSignal.default()
 
     needle = intent_text.lower()
+
+    # 0. MaximHQ Bifrost Bridge AI Gateway check (:3001)
+    matched, kw = _match_first(needle, MAXIM_BIFROST_KEYWORDS)
+    if matched:
+        return LaneSignal(
+            lane=LANE_MAXIM_BIFROST_GATEWAY,
+            rationale=(
+                f"MaximHQ Bifrost keyword {kw!r} matched -> Maxim Bifrost Gateway (:3001) -> "
+                "ultra-low latency cross-mesh AI Gateway, WebRTC/WSS audio bridge & adaptive semantic cache [maximhq/bifrost]"
+            ),
+            matched_keyword=kw,
+        )
 
     # 1. OpenAI OAuth ChatGPT dev proxy check (:10531)
     matched, kw = _match_first(needle, OPENAI_OAUTH_PROXY_KEYWORDS)
@@ -393,6 +425,8 @@ def select_lane(intent_text: str) -> LaneSignal:
 def resolve_fcc_failover_chain(tier_or_intent: str) -> list[str]:
     """Return ordered provider failover ranking for a given tier or intent string."""
     normalized = tier_or_intent.lower()
+    if "maxim" in normalized or "bifrost" in normalized:
+        return ["maxim_bifrost_gateway", "omniroute_gateway", "google", "groq", "open_router", "anthropic", "openai"]
     if "omniroute" in normalized or "diegosouzapw" in normalized or "caveman" in normalized:
         return ["omniroute_gateway", "google", "groq", "cerebras", "open_router", "anthropic", "openai"]
     if "r1" in normalized or "deepseek" in normalized or "reasoner" in normalized:
@@ -426,6 +460,7 @@ def get_fcc_provider_policy(intent_text: str) -> dict[str, Any]:
         "primary_provider": chain[0] if chain else "google",
         "zero_downtime_enabled": signal.lane in (
             LANE_FCC_FAILOVER_MATRIX,
+            LANE_MAXIM_BIFROST_GATEWAY,
             LANE_DEFAULT,
             LANE_OMNI_ROUTE_CODEX,
             LANE_ORNITH_UNCENSORED_CODING,

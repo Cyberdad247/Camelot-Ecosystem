@@ -26,6 +26,20 @@
     "opencodex": {
       "url": "http://127.0.0.1:10100",
       "api_key": "proxy-admin-key"
+    },
+    "maxim_bifrost": {
+      "url": "http://127.0.0.1:3001",
+      "ws_url": "ws://100.110.180.18:3001",
+      "repo": "https://github.com/maximhq/bifrost.git",
+      "description": "MaximHQ Bifrost Bridge — Ultra-low latency cross-mesh AI Gateway & WebRTC/WSS Router",
+      "features": [
+        "adaptive_routing",
+        "semantic_caching",
+        "zero_trust_mtls",
+        "streaming_telemetry",
+        "webrtc_audio_bridge"
+      ],
+      "enabled": true
     }
   },
 
