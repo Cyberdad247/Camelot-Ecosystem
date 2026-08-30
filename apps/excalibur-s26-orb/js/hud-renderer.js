@@ -458,6 +458,20 @@ class HUDRenderer {
         api_endpoint: 'https://100.110.180.18:8095/v1/huggingface/inspect',
         cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795',
         runes: ['//HUGGINGFACE', 'Omega_HuggingFace']
+      },
+      'LADY_MNEMOSYNE': {
+        role: 'Arch-Archivist & Memory Oracle (Lady M)',
+        model: 'Gemini 1.5 Pro / CloudBrain Core',
+        api_endpoint: 'https://100.110.180.18:8095/v1/mnemosyne/sync',
+        cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795',
+        runes: ['Omega_SYNC', 'Omega_ARCHETYPE']
+      },
+      'SIR_SONUS': {
+        role: 'Phonetic Acoustic & Multivoice Conductor',
+        model: 'Gemini Multimodal / Edge-TTS',
+        api_endpoint: 'https://100.110.180.18:8095/v1/audio/synthesize',
+        cloudbrain_uuid: '6272aa35-c285-4edc-81bc-2824ab519edf',
+        runes: ['Omega_VOICE', '//VOICE_ROUTER']
       }
     };
   }
