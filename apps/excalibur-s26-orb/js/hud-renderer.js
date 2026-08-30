@@ -614,6 +614,13 @@ class HUDRenderer {
       return;
     }
 
+    if (low.includes('ravenry') || low.includes('email') || low.includes('mail')) {
+      const response = `✉️ **Ravenry Mail Cartridge (\`camelot.ravenry.mail\`):**\n\n• **Intent:** Email Triage & Auto-Drafting\n• **Target Recipient:** \`jane@example.com\`\n• **Subject:** Re: Invoice #1024\n• **Risk Tier:** **R4 (External Communication)**\n• **Capability Lease:** \`lease_sentinel_001\` (Ed25519 Verified)\n• **Draft Content Preview:** *"Dear Jane, regarding the quarterly invoice schedule, we have confirmed the deliverables..."*\n• **HITL Status:** ⚠️ **APPROVAL_PENDING** (Hold 'Bind Consent' for 1.5s)\n• **Offline QR Code:** Ed25519 signature pre-computed.`;
+      this.addMessage(response, 'ai');
+      window.AudioPipeline?.speakText('Ravenry Mail draft ready for approval. Risk tier R4.');
+      return;
+    }
+
     if (low.includes('bifrost_lock')) {
       const k = routerTable['SIR_SENTINEL'];
       const response = `🔒 **Bifrost Zero-Trust Lock Re-Sealed ([SIR_SENTINEL]):**\n\n• Security Endpoint: \`${k.api_endpoint}\`\n• Encryption: Ed25519 mTLS Boundary\n• CloudBrain Node: \`${k.cloudbrain_uuid}\`\n• State: Cryptographic boundary sealed across all mesh nodes.`;
