@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_HERMES",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_HERMES WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_HERMES\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"5dc31b8d-169d-4d4d-ab90-d12724fca720\", \"vfs_path\": \"vfs://worldtree/knights/sir_hermes/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_HERMES\", \"open_viking_node\": \"open_viking://worldtree/sir_hermes\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_hermes_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.948748+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-08-30T16:07:08.948807+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "5dc31b8d-169d-4d4d-ab90-d12724fca720",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",

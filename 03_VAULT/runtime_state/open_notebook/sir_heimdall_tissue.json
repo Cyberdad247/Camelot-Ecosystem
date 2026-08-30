@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_HEIMDALL",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_HEIMDALL WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_HEIMDALL\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"3205f189-91da-4272-96a9-3641fd642763\", \"vfs_path\": \"vfs://worldtree/knights/sir_heimdall/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_HEIMDALL\", \"open_viking_node\": \"open_viking://worldtree/sir_heimdall\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_heimdall_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.813887+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_heimdall/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HEIMDALL",
+    "open_viking_tether": "open_viking://worldtree/sir_heimdall",
+    "updated_at": "2026-08-30T16:07:08.813930+00:00"
+  },
+  {
+    "knight_id": "SIR_HEIMDALL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
     "title": "VALIDATION_PULSE_SIR_HEIMDALL",
     "content": "{\n  \"validator\": \"ANTIGRAVITY_SENTINEL\",\n  \"probe\": \"SYNAPSE_LINK_AUDIT\",\n  \"status\": \"TETHERED_VALIDATED\"\n}",

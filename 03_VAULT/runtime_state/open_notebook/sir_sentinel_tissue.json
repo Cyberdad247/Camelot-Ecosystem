@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_SENTINEL",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_SENTINEL WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_SENTINEL\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"07cbb441-f008-424c-820a-85676210be39\", \"vfs_path\": \"vfs://worldtree/knights/sir_sentinel/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_SENTINEL\", \"open_viking_node\": \"open_viking://worldtree/sir_sentinel\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_sentinel_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.694876+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",
+    "open_viking_tether": "open_viking://worldtree/sir_sentinel",
+    "updated_at": "2026-08-30T16:07:08.694901+00:00"
+  },
+  {
+    "knight_id": "SIR_SENTINEL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "07cbb441-f008-424c-820a-85676210be39",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_SIR_SENTINEL",

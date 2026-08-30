@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_MNEMO",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_MNEMO WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_MNEMO\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"8bf3f24e-da2e-45b9-8719-162fcd02a80d\", \"vfs_path\": \"vfs://worldtree/knights/sir_mnemo/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_MNEMO\", \"open_viking_node\": \"open_viking://worldtree/sir_mnemo\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_mnemo_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.069893+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-08-30T16:07:09.069939+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
     "title": "L2_Artifact_Omega_SYNC",
     "content": "Dual-tier memory sync (ST+LT)",

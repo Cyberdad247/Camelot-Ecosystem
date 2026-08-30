@@ -2,6 +2,28 @@
   {
     "knight_id": "SIR_BORIS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_BORIS WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_BORIS\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"f7707daa-2d10-4db8-8fda-be4661a27793\", \"vfs_path\": \"vfs://worldtree/knights/sir_boris/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_BORIS\", \"open_viking_node\": \"open_viking://worldtree/sir_boris\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_boris_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.651596+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-08-30T16:07:08.651635+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//STATUS",
+    "content": "{\"action\": \"system_status\", \"detail\": \"run: python -m control_plane.harness --status\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-08-29T01:50:06.300430+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
     "title": "L2_Artifact_//BOOT",
     "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}",
@@ -526,27 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
     "open_viking_tether": "open_viking://worldtree/sir_boris",
     "updated_at": "2026-08-24T14:25:27.070759+00:00"
-  },
-  {
-    "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//BOOT",
-    "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-24T14:23:56.920736+00:00"
-  },
-  {
-    "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//STATUS",
-    "content": "{\"action\": \"system_status\", \"detail\": \"run: python -m control_plane.harness --status\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-24T13:29:33.173950+00:00"
   }
 ]

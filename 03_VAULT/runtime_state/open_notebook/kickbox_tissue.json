@@ -2,6 +2,17 @@
   {
     "knight_id": "KICKBOX",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "KICKBOX WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"KICKBOX\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"8531e6d4-6fc4-428f-a754-b9e9592ac7ff\", \"vfs_path\": \"vfs://worldtree/knights/kickbox/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_KICKBOX\", \"open_viking_node\": \"open_viking://worldtree/kickbox\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\kickbox_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.237925+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/kickbox/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KICKBOX",
+    "open_viking_tether": "open_viking://worldtree/kickbox",
+    "updated_at": "2026-08-30T16:07:09.237956+00:00"
+  },
+  {
+    "knight_id": "KICKBOX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_KICKBOX",

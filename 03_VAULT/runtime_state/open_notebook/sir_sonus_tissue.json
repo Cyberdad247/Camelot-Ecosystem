@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_SONUS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_SONUS WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_SONUS\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"6272aa35-c285-4edc-81bc-2824ab519edf\", \"vfs_path\": \"vfs://worldtree/knights/sir_sonus/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_SONUS\", \"open_viking_node\": \"open_viking://worldtree/sir_sonus\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_sonus_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.780985+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
+    "open_viking_tether": "open_viking://worldtree/sir_sonus",
+    "updated_at": "2026-08-30T16:07:08.781027+00:00"
+  },
+  {
+    "knight_id": "SIR_SONUS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "6272aa35-c285-4edc-81bc-2824ab519edf",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",

@@ -2,6 +2,17 @@
   {
     "knight_id": "ANYA_OMEGA",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "ANYA_OMEGA WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"ANYA_OMEGA\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"32d38906-5ae8-4ecc-b77e-705d12c89f4a\", \"vfs_path\": \"vfs://worldtree/knights/anya_omega/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_ANYA_OMEGA\", \"open_viking_node\": \"open_viking://worldtree/anya_omega\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\anya_omega_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.931181+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-08-30T16:07:08.931227+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
     "title": "L2_Vector_Index_test_audit_data_1",
     "content": "Secure Data",
@@ -537,16 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
     "open_viking_tether": "open_viking://worldtree/anya_omega",
     "updated_at": "2026-08-24T14:25:21.971888+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_test_audit_data_1",
-    "content": "Secure Data",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:25:21.292802+00:00"
   }
 ]

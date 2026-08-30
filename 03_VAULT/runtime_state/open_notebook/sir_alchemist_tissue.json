@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_ALCHEMIST",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_ALCHEMIST WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_ALCHEMIST\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"d6bdd57c-84d2-4e24-bb10-ad1fd179fb04\", \"vfs_path\": \"vfs://worldtree/knights/sir_alchemist/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_ALCHEMIST\", \"open_viking_node\": \"open_viking://worldtree/sir_alchemist\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_alchemist_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.889157+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_alchemist/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ALCHEMIST",
+    "open_viking_tether": "open_viking://worldtree/sir_alchemist",
+    "updated_at": "2026-08-30T16:07:08.889198+00:00"
+  },
+  {
+    "knight_id": "SIR_ALCHEMIST",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "d6bdd57c-84d2-4e24-bb10-ad1fd179fb04",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_SIR_ALCHEMIST",

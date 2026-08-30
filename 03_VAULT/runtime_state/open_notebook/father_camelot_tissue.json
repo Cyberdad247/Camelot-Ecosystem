@@ -2,6 +2,17 @@
   {
     "knight_id": "FATHER_CAMELOT",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "FATHER_CAMELOT WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"FATHER_CAMELOT\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"39299131-0ade-4f48-8ad4-a68878a6d3d9\", \"vfs_path\": \"vfs://worldtree/knights/father_camelot/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_FATHER_CAMELOT\", \"open_viking_node\": \"open_viking://worldtree/father_camelot\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\father_camelot_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.168729+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/father_camelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_FATHER_CAMELOT",
+    "open_viking_tether": "open_viking://worldtree/father_camelot",
+    "updated_at": "2026-08-30T16:07:09.168772+00:00"
+  },
+  {
+    "knight_id": "FATHER_CAMELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_FATHER_CAMELOT",

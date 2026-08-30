@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_HELIO",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_HELIO WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_HELIO\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"56820318-bb91-451f-aac4-4b46424898cf\", \"vfs_path\": \"vfs://worldtree/knights/sir_helio/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_HELIO\", \"open_viking_node\": \"open_viking://worldtree/sir_helio\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_helio_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.766054+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-08-30T16:07:08.766080+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
     "title": "L2_Vector_Index_camelot_audit_e02aee218b1dcecb5f31dd6db6aa1a741929f0d89fc7bcda3704d4ec53d6b3b3",
     "content": "Verification Run run_4: cmd_4\nOperator: sir_helio\nSuccess: True\nResults: {}",
@@ -537,16 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
     "open_viking_tether": "open_viking://worldtree/sir_helio",
     "updated_at": "2026-08-24T14:24:40.268948+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_fe095611f3647276506b08e1e916f5d133b93d31e7b91b73c9029a48717211eb",
-    "content": "Verification Run run_2: cmd_2\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T14:24:39.907257+00:00"
   }
 ]

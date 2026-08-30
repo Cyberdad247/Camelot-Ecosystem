@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_DEBUG",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_DEBUG WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_DEBUG\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"fdc42a4a-3060-4eac-b57c-8e6009ed634a\", \"vfs_path\": \"vfs://worldtree/knights/sir_debug/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_DEBUG\", \"open_viking_node\": \"open_viking://worldtree/sir_debug\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_debug_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.706801+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_debug/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_DEBUG",
+    "open_viking_tether": "open_viking://worldtree/sir_debug",
+    "updated_at": "2026-08-30T16:07:08.706830+00:00"
+  },
+  {
+    "knight_id": "SIR_DEBUG",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
     "title": "[\u16de DEBUG] debug the failing PIV loop in the heal sequence",
     "content": "=== WORLDTREE RUNE DISPATCH ===\nRune: \u16de (DEBUG)\nTask: debug the failing PIV loop in the heal sequence\nTimestamp: 2026-08-28T01:12:03.720621+00:00\nTarget Notebooks: SIR_DEBUG\n========================================\n\nTest content for rune routing validation.",

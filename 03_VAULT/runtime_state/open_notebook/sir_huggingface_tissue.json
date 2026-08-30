@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_HUGGINGFACE",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_HUGGINGFACE WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_HUGGINGFACE\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"vfs_path\": \"vfs://worldtree/knights/sir_huggingface/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_HUGGINGFACE\", \"open_viking_node\": \"open_viking://worldtree/sir_huggingface\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_huggingface_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.037868+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-08-30T16:07:09.037925+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "tissue",
     "title": "Camelot-OS Quantization Scour",
     "content": "{\n  \"1.58_bit_ternary\": [\n    {\n      \"id\": \"microsoft/bitnet-b1.58-2B-4T-gguf\",\n      \"vram\": \"1.2 GB\",\n      \"engine\": \"bitnet.cpp / Ouroboros\"\n    },\n    {\n      \"id\": \"microsoft/bitnet-b1.58-3B\",\n      \"vram\": \"1.8 GB\",\n      \"engine\": \"bitnet.cpp\"\n    },\n    {\n      \"id\": \"Ouroboros-1.58bit-SSM-v1\",\n      \"vram\": \"1.1 GB\",\n      \"engine\": \"Ouroboros 0.8ms SSM\"\n    }\n  ],\n  \"gguf_importance_matrix\": [\n    {\n      \"id\": \"Qwen/Qwen2.5-Coder-7B-Instruct-GGUF\",\n      \"vram\": \"3.2 GB (IQ3_XXS)\",\n      \"engine\": \"llama.cpp / OmniRoute\"\n    },\n    {\n      \"id\": \"unsloth/gemma-2-2b-it-GGUF\",\n      \"vram\": \"1.6 GB (Q4_K_M)\",\n      \"engine\": \"llama.cpp\"\n    },\n    {\n      \"id\": \"Qwen/Qwen2.5-1.5B-Instruct-GGUF\",\n      \"vram\": \"1.1 GB (Q4_K_M)\",\n      \"engine\": \"llama.cpp\"\n    },\n    {\n      \"id\": \"HuggingFaceTB/SmolLM2-1.7B-Instruct-GGUF\",\n      \"vram\": \"1.2 GB (Q4_K_M)\",\n      \"engine\": \"llama.cpp\"\n    }\n  ],\n  \"exl2_awq\": [\n    {\n      \"id\": \"turboderp/Qwen2.5-7B-Instruct-exl2\",\n      \"vram\": \"3.1 GB (3.0bpw)\",\n      \"engine\": \"ExLlamaV2\"\n    },\n    {\n      \"id\": \"Qwen/Qwen2.5-Coder-7B-Instruct-AWQ\",\n      \"vram\": \"4.0 GB (AWQ 4-bit)\",\n      \"engine\": \"vLLM\"\n    }\n  ]\n}",

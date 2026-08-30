@@ -1,6 +1,17 @@
 [
   {
     "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "HERMES_AGENT_EVOLUTION WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"HERMES_AGENT_EVOLUTION\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"24f4a450-6456-49fe-bfab-8cfcf7c2a33b\", \"vfs_path\": \"vfs://worldtree/knights/hermes_agent_evolution/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_HERMES_AGENT_EVOLUTION\", \"open_viking_node\": \"open_viking://worldtree/hermes_agent_evolution\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\hermes_agent_evolution_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.977353+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-08-30T16:07:08.977399+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
     "parent_knight": "HERMES_PRIME",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",

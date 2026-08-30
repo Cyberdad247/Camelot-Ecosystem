@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_CODEX",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_CODEX WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_CODEX\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"8c656cfa-a189-409e-a72d-07692a47f17e\", \"vfs_path\": \"vfs://worldtree/knights/sir_codex/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_CODEX\", \"open_viking_node\": \"open_viking://worldtree/sir_codex\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_codex_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.801148+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-08-30T16:07:08.801189+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
     "title": "L2_Artifact_Omega_CODEX IMPLAN: Kickbox-audio \u2014 create unified branch merging best of all 5 branches.",
     "content": "Direct SIR_CODEX execution lane",

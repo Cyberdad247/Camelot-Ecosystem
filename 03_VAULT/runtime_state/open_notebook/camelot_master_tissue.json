@@ -2,6 +2,17 @@
   {
     "knight_id": "CAMELOT_MASTER",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "CAMELOT_MASTER WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"CAMELOT_MASTER\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"c5544902-cfb4-4864-b28e-1838b69b9814\", \"vfs_path\": \"vfs://worldtree/knights/camelot_master/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_CAMELOT_MASTER\", \"open_viking_node\": \"open_viking://worldtree/camelot_master\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\camelot_master_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.128306+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/camelot_master/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_MASTER",
+    "open_viking_tether": "open_viking://worldtree/camelot_master",
+    "updated_at": "2026-08-30T16:07:09.128346+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_MASTER",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "c5544902-cfb4-4864-b28e-1838b69b9814",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_CAMELOT_MASTER",

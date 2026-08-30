@@ -2,6 +2,17 @@
   {
     "knight_id": "ALPHA_OMEGA",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "ALPHA_OMEGA WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"ALPHA_OMEGA\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"2536aefb-937f-4a04-9142-d1a2f029d8a7\", \"vfs_path\": \"vfs://worldtree/knights/alpha_omega/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_ALPHA_OMEGA\", \"open_viking_node\": \"open_viking://worldtree/alpha_omega\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\alpha_omega_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.200603+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/alpha_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ALPHA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/alpha_omega",
+    "updated_at": "2026-08-30T16:07:09.200643+00:00"
+  },
+  {
+    "knight_id": "ALPHA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "2536aefb-937f-4a04-9142-d1a2f029d8a7",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_ALPHA_OMEGA",

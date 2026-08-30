@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_LANCELOT",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_LANCELOT WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_LANCELOT\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9\", \"vfs_path\": \"vfs://worldtree/knights/sir_lancelot/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_LANCELOT\", \"open_viking_node\": \"open_viking://worldtree/sir_lancelot\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_lancelot_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.987529+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-08-30T16:07:08.987558+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",

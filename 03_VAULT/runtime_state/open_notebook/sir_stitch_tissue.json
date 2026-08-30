@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_STITCH",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_STITCH WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_STITCH\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"0fdccdc1-a1d2-48c2-8948-187398bfbeb5\", \"vfs_path\": \"vfs://worldtree/knights/sir_stitch/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_STITCH\", \"open_viking_node\": \"open_viking://worldtree/sir_stitch\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_stitch_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.872652+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_stitch/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_STITCH",
+    "open_viking_tether": "open_viking://worldtree/sir_stitch",
+    "updated_at": "2026-08-30T16:07:08.872713+00:00"
+  },
+  {
+    "knight_id": "SIR_STITCH",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "0fdccdc1-a1d2-48c2-8948-187398bfbeb5",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_SIR_STITCH",

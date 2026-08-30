@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_GALAHAD",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "SIR_GALAHAD WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"SIR_GALAHAD\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"e0110853-14ef-403f-8def-bf3a5123986f\", \"vfs_path\": \"vfs://worldtree/knights/sir_galahad/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_GALAHAD\", \"open_viking_node\": \"open_viking://worldtree/sir_galahad\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_galahad_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.832187+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-08-30T16:07:08.832236+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "notebook_uuid": "e0110853-14ef-403f-8def-bf3a5123986f",
     "version": "v1000.54-EXCALIBUR-A",
     "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
