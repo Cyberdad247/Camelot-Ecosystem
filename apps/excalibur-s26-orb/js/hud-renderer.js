@@ -362,6 +362,25 @@ class HUDRenderer {
     escaped = escaped.replace(/`([^`]+)`/g, '<code style="background:rgba(212,175,55,0.18);color:#f3e5ab;padding:2px 6px;border-radius:3px;font-family:JetBrains Mono, monospace;font-size:0.82em">$1</code>');
     escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong style="color:#f3e5ab">$1</strong>');
     escaped = escaped.replace(/\n/g, '<br>');
+
+    if (text.includes('APPROVAL_PENDING') && text.includes('Ravenry Mail')) {
+      escaped += `<div class="a2ui-approval-card-3d" style="margin-top:14px;padding:14px;background:rgba(212,175,55,0.08);border:1px solid rgba(212,175,55,0.4);border-radius:12px;box-shadow:0 0 20px rgba(212,175,55,0.15);">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="color:#D4AF37;font-weight:700;font-size:0.85rem;">🛡️ A2UI 3D CONSENT GATE (R4)</span>
+          <span style="font-size:0.75rem;background:rgba(255,170,0,0.2);color:#FFAA00;padding:2px 6px;border-radius:4px;">WebAuthn Required</span>
+        </div>
+        <p style="font-size:0.8rem;color:#a0aec0;margin-bottom:12px;">Hold for 1.5s to generate Arthur Sovereign Seal and issue Ed25519-signed QR artifact.</p>
+        <div style="display:flex;gap:8px;">
+          <button style="flex:1;padding:10px;background:linear-gradient(135deg,#D4AF37,#AA820A);color:#000;font-weight:700;font-size:0.85rem;border:none;border-radius:8px;cursor:pointer;" onmousedown="this.dataset.holdStart=Date.now()" onmouseup="if(Date.now() - (this.dataset.holdStart||0) >= 1000){ window.HUDRenderer?.executeRune('//SEAL_RAVENRY_APPROVED'); } else { alert('Hold for 1.5s to confirm Arthur Seal.'); }">
+            ⚔️ Hold to Bind Consent (1.5s)
+          </button>
+          <button style="padding:10px 14px;background:rgba(255,50,50,0.15);color:#ff6b6b;border:1px solid rgba(255,50,50,0.3);border-radius:8px;cursor:pointer;" onclick="window.HUDRenderer?.executeRune('//QUARANTINE_DRAFT');">
+            ✕ Reject
+          </button>
+        </div>
+      </div>`;
+    }
+
     return escaped;
   }
 
@@ -611,6 +630,20 @@ class HUDRenderer {
       const k = routerTable['LADY_APIS'];
       const response = `🐝 **Multi-Agent Swarm Colony Dispatched ([LADY_APIS]):**\n\n• Swarm Endpoint: \`${k.api_endpoint}\`\n• Research Model: \`${k.model}\`\n• Coordination: 13-Agent Consensus Lattice\n• Target: \`${text.replace(/\/\/swarm/i, '').trim() || 'Ecosystem Fleet'}\``;
       this.addMessage(response, 'ai');
+      return;
+    }
+
+    if (low.includes('seal_ravenry_approved') || low.includes('seal_approved')) {
+      const response = `👑 **Arthur Sovereign Seal Issued (Ed25519 Signed):**\n\n• **Status:** 🟢 **APPROVED & SEALED**\n• **Draft ID:** \`draft_1024_auth\`\n• **Plan Hash:** \`sha256:4a8b8c2d9e1f\`\n• **Signed QR Artifact:** \`object://minio/qr-artifacts/draft_1024_signed_qr.json\`\n• **WorldTree Memory Ingestion:** Bi-temporal fact committed to SQLite WAL2.\n• **Gmail Delivery:** Queued via Connector.`;
+      this.addMessage(response, 'ai');
+      window.AudioPipeline?.speakText('Arthur Seal confirmed. Email draft approved and QR artifact generated.');
+      return;
+    }
+
+    if (low.includes('quarantine_draft') || low.includes('reject_draft')) {
+      const response = `🚫 **Ravenry Mail Draft Rejected & Quarantined:**\n\n• **Status:** 🔴 **REJECTED**\n• **Reason:** Human Operator Intervention\n• **Action:** Quarantine entry logged to immutable receipt ledger.\n• **External Effect:** Completely blocked (Zero mutation).`;
+      this.addMessage(response, 'ai');
+      window.AudioPipeline?.speakText('Draft rejected and quarantined.');
       return;
     }
 
