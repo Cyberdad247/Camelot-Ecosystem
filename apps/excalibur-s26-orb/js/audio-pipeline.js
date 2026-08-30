@@ -169,6 +169,66 @@ class AudioPipeline {
       this.gainNode.gain.setValueAtTime(value, this.audioContext.currentTime);
     }
   }
+
+  // Multi-Persona Text-To-Speech (TTS) Engine Integration
+  speakText(text, persona = 'anya_host') {
+    if (!text || typeof window === 'undefined') return;
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // clear previous utterance queue
+
+      const cleanText = text.replace(/[*#`_~]/g, '').replace(/https?:\/\/\S+/g, '');
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      const voices = window.speechSynthesis.getVoices();
+
+      // Timbre & Persona acoustic tuning
+      switch (persona) {
+        case 'merlin_architect':
+        case 'merlin':
+          utterance.pitch = 0.85;
+          utterance.rate = 0.95;
+          utterance.voice = voices.find(v => v.lang.includes('en-GB') || v.name.includes('Male')) || null;
+          break;
+        case 'lakisha_empathetic':
+        case 'lakisha':
+          utterance.pitch = 1.1;
+          utterance.rate = 1.0;
+          utterance.voice = voices.find(v => v.lang.includes('en-US') && v.name.includes('Female')) || null;
+          break;
+        case 'helio_voice':
+        case 'helio':
+          utterance.pitch = 1.0;
+          utterance.rate = 1.15; // fast sub-50ms cadence
+          break;
+        case 'sonus_narrator':
+        case 'sonus':
+          utterance.pitch = 0.75;
+          utterance.rate = 0.9;
+          break;
+        case 'anya_host':
+        default:
+          utterance.pitch = 1.05;
+          utterance.rate = 1.05;
+          utterance.voice = voices.find(v => v.lang.includes('en') && (v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Natural'))) || null;
+          break;
+      }
+
+      utterance.onstart = () => {
+        this.startVisualizer();
+        const dockOrb = document.getElementById('dockVoiceOrb');
+        if (dockOrb) dockOrb.classList.add('active');
+      };
+
+      utterance.onend = () => {
+        this.stopVisualizer();
+      };
+
+      utterance.onerror = () => {
+        this.stopVisualizer();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+  }
 }
 
 window.AudioPipeline = new AudioPipeline();

@@ -370,105 +370,150 @@ class HUDRenderer {
     return {
       'SIR_BORIS': {
         role: 'Crucible Conductor & Master Architect',
+        harness: 'claude-code / antigravity',
         model: 'Gemini 1.5 Pro / Claude 3.5 Sonnet',
+        tts_engine: 'kokoro_onnx (calm architect)',
+        stt_engine: 'Aoede S2S / Whisper-v3',
         api_endpoint: 'https://100.110.180.18:8095/v1/crucible/evaluate',
         cloudbrain_uuid: 'f7707daa-2d10-4db8-8fda-be4661a27793',
         runes: ['//BOOT', '//STATUS', '//FLEET', '//DAWNING', 'Omega_Boris']
       },
       'SIR_ALEX': {
         role: 'Task Planner & DAG Orchestrator',
+        harness: 'kimi-code / antigravity',
         model: 'Gemini 1.5 Pro',
+        tts_engine: 'kokoro_onnx (sharp strategist)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/dag/plan',
         cloudbrain_uuid: 'f490c05e-d8c4-4008-87e1-5f901bf57c6a',
         runes: ['//PLAN', '//THINK', '//OMX_PLAN', 'Omega_Alex']
       },
       'SIR_FORGE': {
         role: 'Kinetic Code Execution & Build Pipeline',
+        harness: 'codex / swe-agent',
         model: 'Gemini 1.5 Flash / Claude 3.5 Sonnet',
+        tts_engine: 'kokoro_onnx (kinetic executor)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/forge/compile',
         cloudbrain_uuid: '91c5da8b-e2de-4a56-b7fd-c8b76c00afc7',
         runes: ['//FORGE', '//CONTRACT', '//GENESIS', 'Omega_Forge']
       },
       'SIR_CODEX': {
         role: 'High-Velocity Implementation & AST Builder',
+        harness: 'codex / deepseek-tui',
         model: 'GPT-5.5 Codex / OpenAI AST Provider',
+        tts_engine: 'kokoro_onnx (rapid builder)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/codex/dispatch',
         cloudbrain_uuid: '8c656cfa-a189-409e-a72d-07692a47f17e',
         runes: ['//CODEX', '//REZERO_CODE', 'Omega_Codex']
       },
       'SIR_SENTINEL': {
         role: 'AgentArmor, mTLS Zero-Trust & Iron Gate',
+        harness: 'minimal / local-rules',
         model: 'Gemini 1.5 Flash / Local Rules',
+        tts_engine: 'kokoro_onnx (security sentinel)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8443/v1/sentinel/gate',
         cloudbrain_uuid: '07cbb441-f008-424c-820a-85676210be39',
         runes: ['//BIFROST_LOCK', '//DEFENSE_INIT', 'Omega_Sentinel']
       },
       'SIR_DEBUG': {
         role: 'PIV Self-Healing & Anomaly Repair',
+        harness: 'deepseek-tui / codewhale',
         model: 'Gemini 1.5 Pro',
+        tts_engine: 'kokoro_onnx (diagnostic repair)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/debug/heal',
         cloudbrain_uuid: 'fdc42a4a-3060-4eac-b57c-8e6009ed634a',
         runes: ['//HEAL', '//REZERO', '//TRIAGE', 'Omega_Debug']
       },
       'SIR_GHOST': {
         role: 'Air-Gapped Privacy & Secrets Scanner',
+        harness: 'minimal / offline-gguf',
         model: 'Ollama Local (qwen2.5-coder / mistral)',
+        tts_engine: 'offline_wav',
+        stt_engine: 'offline_whisper',
         api_endpoint: 'http://127.0.0.1:11434/api/generate',
         cloudbrain_uuid: '422a184b-93e7-4dfd-8a12-75d2268b6c60',
         runes: ['//SCAN', '//PURGE_MEMORY', 'Omega_Ghost']
       },
       'LADY_APIS': {
         role: 'BASHR Context Forager & Literature Search',
+        harness: 'antigravity / research-forager',
         model: 'Gemini 1.5 Pro',
+        tts_engine: 'kokoro_onnx (evidence researcher)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/forage/search',
         cloudbrain_uuid: '378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f',
         runes: ['//SWARM', '//BIO_SWARM', '//SCAVENGE', 'Omega_Apis']
       },
       'MERLIN_OMEGA': {
         role: 'System 2 Deep Reasoning & Tree-of-Thought',
+        harness: 'claude-code / antigravity',
         model: 'Gemini 1.5 Pro (Thinking Mode)',
+        tts_engine: 'kokoro_onnx (oracle explainer)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/reasoning/crucible',
         cloudbrain_uuid: 'af927fde-d7eb-42ee-8c79-51b3e78ef39b',
         runes: ['//THINK', '//OMX_AUTOPILOT', 'Omega_Merlin']
       },
       'SIR_HELIO': {
         role: 'Voice OS & Sub-50ms Aoede S2S Pipeline',
+        harness: 'multivoice / real-time-s2s',
         model: 'Gemini Live Multimodal Audio',
+        tts_engine: 'gemini_live / kokoro_onnx',
+        stt_engine: 'Aoede S2S (<50ms)',
         api_endpoint: 'wss://100.110.180.18:8095/v1/audio/stream',
         cloudbrain_uuid: '56820318-bb91-451f-aac4-4b46424898cf',
         runes: ['//vocal', '//EMULATE', 'Omega_Helio']
       },
       'HERMES_PRIME': {
         role: 'High-Velocity R&D, VFS Synthesis & MGV Loop',
+        harness: 'hermes (nous research)',
         model: 'Gemini 1.5 Pro / Nous Research',
+        tts_engine: 'kokoro_onnx / edge-tts',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/hermes/synthesize',
         cloudbrain_uuid: '28f89cb6-5048-4b5d-9e94-376082d24744',
         runes: ['//SYNC_VFS_WORKSPACE', '//FORGE_HERMES_PRIME_FILES', '//IGNITE_SELF_EVOLUTION_LOOP', 'Omega_HermesPrime']
       },
       'ANYA_OMEGA': {
         role: 'Arch-Sovereign Compiler & Quality Gate',
+        harness: 'claude-code / symbollect',
         model: 'Symbollect Quantum Compiler',
+        tts_engine: 'gemini_live (warm operator)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/anya/compile',
         cloudbrain_uuid: '32d38906-5ae8-4ecc-b77e-705d12c89f4a',
         runes: ['//NANO_SWARM_EXPAND', 'Omega_Anya']
       },
       'SIR_HUGGINGFACE': {
         role: 'HuggingFace Hub & Spaces Conductor (Valkyrie HF)',
+        harness: 'qwen-code / transformers-cli',
         model: 'Transformers / HuggingFace Hub API',
+        tts_engine: 'kokoro_onnx',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/huggingface/inspect',
         cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795',
         runes: ['//HUGGINGFACE', 'Omega_HuggingFace']
       },
       'LADY_MNEMOSYNE': {
         role: 'Arch-Archivist & Memory Oracle (Lady M)',
+        harness: 'antigravity / cloudbrain-governor',
         model: 'Gemini 1.5 Pro / CloudBrain Core',
+        tts_engine: 'notebooklm_audio / kokoro_onnx',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/mnemosyne/sync',
         cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795',
         runes: ['Omega_SYNC', 'Omega_ARCHETYPE']
       },
       'SIR_SONUS': {
         role: 'Phonetic Acoustic & Multivoice Conductor',
+        harness: 'multivoice / suno-audio',
         model: 'Gemini Multimodal / Edge-TTS',
+        tts_engine: 'suno / edge-tts (sonic narrator)',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/audio/synthesize',
         cloudbrain_uuid: '6272aa35-c285-4edc-81bc-2824ab519edf',
         runes: ['Omega_VOICE', '//VOICE_ROUTER']
@@ -485,13 +530,17 @@ class HUDRenderer {
       const matchKey = Object.keys(routerTable).find(k => low.includes(k.toLowerCase().replace('sir_', '').replace('lady_', '')) || low.includes(k.toLowerCase()));
       const knight = routerTable[matchKey] || {
         role: 'Sovereign Knight Specialist',
+        harness: 'antigravity / general',
         model: 'Gemini 1.5 Pro',
+        tts_engine: 'kokoro_onnx',
+        stt_engine: 'Aoede S2S',
         api_endpoint: 'https://100.110.180.18:8095/v1/knight/dispatch',
         cloudbrain_uuid: 'a0a4bfb9-e847-4c38-be39-7aee398f0795'
       };
       const knightName = matchKey || text.split(' ')[0].replace(/omega_/i, '').toUpperCase();
-      const response = `👑 **Omega Knight Router Dispatched: [${knightName}]**\n\n• **Knight Role:** ${knight.role}\n• **Model Provider:** \`${knight.model}\`\n• **API Gateway:** \`${knight.api_endpoint}\`\n• **CloudBrain Node:** UUID \`${knight.cloudbrain_uuid}\`\n• **Directive:** "${text.substring(text.indexOf(' ') + 1) || 'Standby Execution'}"\n\nExecution telemetry confirmed across the Bifrost Bridge.`;
+      const response = `👑 **Omega Knight Router Dispatched: [${knightName}]**\n\n• **Knight Role:** ${knight.role}\n• **Emulated Harness:** \`${knight.harness}\`\n• **LLM Engine:** \`${knight.model}\`\n• **TTS Engine:** \`${knight.tts_engine}\`\n• **STT Engine:** \`${knight.stt_engine}\`\n• **API Gateway:** \`${knight.api_endpoint}\`\n• **CloudBrain Node:** UUID \`${knight.cloudbrain_uuid}\`\n• **Directive:** "${text.substring(text.indexOf(' ') + 1) || 'Standby Execution'}"\n\nExecution telemetry confirmed across the Bifrost Bridge.`;
       this.addMessage(response, 'ai');
+      window.AudioPipeline?.speakText(`Omega Knight ${knightName} dispatched via ${knight.harness} harness.`);
       return;
     }
 
