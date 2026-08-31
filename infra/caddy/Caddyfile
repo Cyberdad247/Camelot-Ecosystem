@@ -78,7 +78,7 @@
         reverse_proxy 127.0.0.1:8090
     }
 
-    # 6. Primary Frontend Surface: Luxora Nexus Lab PWA
+    # 8. Primary Frontend Surface: Excalibur Cockpit & 3D Celestial Vocal HUD
     handle {
         root * /var/www/camelot
         try_files {path} /index.html
