@@ -62,8 +62,11 @@
         reverse_proxy 127.0.0.1:8000
     }
 
-    # 6. Excalibur Gemini Live BidiStream (:8765 / :8085)
+    # 6. Excalibur Gemini Live BidiStream & Google AI Studio CloudBrain (:8765 / :8085)
     handle /gemini-live/* {
+        reverse_proxy 127.0.0.1:8765
+    }
+    handle /aistudio/* {
         reverse_proxy 127.0.0.1:8765
     }
 
