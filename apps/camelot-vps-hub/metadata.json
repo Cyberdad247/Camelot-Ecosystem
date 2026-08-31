@@ -1,0 +1,6 @@
+{
+  "name": "Camelot-OS VPS Hub",
+  "description": "The Sovereign World Tree Control Center featuring 2D reference canvas, Three.js 3D animation engine, and real-time interactive VKG-HUD telemetry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
