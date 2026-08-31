@@ -77,11 +77,12 @@
     handle /excalibur/macro/* {
         reverse_proxy 127.0.0.1:8089
     }
-    handle /excalibur/failover/* {
-        reverse_proxy 127.0.0.1:8090
+    # 8. GitHub CI/CD Deployment Webhooks (:9000)
+    handle /webhook/* {
+        reverse_proxy 127.0.0.1:9000
     }
 
-    # 8. World Tree Sovereign Control Center (:3000 / /var/www/worldtree)
+    # 9. World Tree Sovereign Control Center (:3000 / /var/www/worldtree)
     handle /worldtree/* {
         root * /var/www/worldtree
         try_files {path} /index.html
