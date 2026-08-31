@@ -81,7 +81,14 @@
         reverse_proxy 127.0.0.1:8090
     }
 
-    # 8. Primary Frontend Surface: Excalibur Cockpit & 3D Celestial Vocal HUD
+    # 8. World Tree Sovereign Control Center (:3000 / /var/www/worldtree)
+    handle /worldtree/* {
+        root * /var/www/worldtree
+        try_files {path} /index.html
+        file_server
+    }
+
+    # 9. Primary Frontend Surface: Excalibur Cockpit & 3D Celestial Vocal HUD
     handle {
         root * /var/www/camelot
         try_files {path} /index.html
