@@ -408,6 +408,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_go_live",
     },
+    "//MARKETING_ASSIMILATE": {
+        "knight": "knight_strategos",
+        "description": "Ω_MARKETING_ASSIMILATION_VMAX 4-stage kinetic DAG: Forage -> Renormalize -> Assimilate -> Crystallize (<72us SLA)",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_marketing_assimilate",
+    },
+    "//ASSIMILATE_MARKETING": {
+        "knight": "knight_strategos",
+        "description": "Alias for //MARKETING_ASSIMILATE",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_marketing_assimilate",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1237,6 +1251,24 @@ def _handle_go_live(param: str, context: dict) -> dict:
     }
 
 
+def _handle_marketing_assimilate(param: str, context: dict) -> dict:
+    """Execute the Ω_MARKETING_ASSIMILATION_VMAX 4-stage kinetic DAG pipeline."""
+    try:
+        from control_plane.runners.marketing_assimilation_runner import execute_marketing_assimilation
+        res = execute_marketing_assimilation()
+        return {
+            "action": "marketing_assimilate",
+            "status": res.get("status", "SUCCESS"),
+            "pipeline_result": res,
+        }
+    except Exception as exc:
+        return {
+            "action": "marketing_assimilate",
+            "status": "FAILED",
+            "error": str(exc),
+        }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1270,6 +1302,7 @@ _HANDLERS = {
     "_handle_omx_workflow": _handle_omx_workflow,
     "_handle_harness_emulator": _handle_harness_emulator,
     "_handle_go_live": _handle_go_live,
+    "_handle_marketing_assimilate": _handle_marketing_assimilate,
 }
 
 
