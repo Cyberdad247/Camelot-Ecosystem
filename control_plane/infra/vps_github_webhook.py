@@ -20,12 +20,11 @@ import hmac
 import json
 import logging
 import os
-import subprocess
 import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Optional
 
 LOG = logging.getLogger("camelot.vps_webhook")
 

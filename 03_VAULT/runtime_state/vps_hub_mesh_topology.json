@@ -1,0 +1,92 @@
+{
+  "topology_id": "CAMELOT_VPS_HUB_INTEGRATION_V1000",
+  "status": "OPERATIONAL",
+  "governor": "HERMES_PRIME",
+  "hub_control_plane": {
+    "name": "Camelot-OS Hub & Control Plane",
+    "host": "KVM563",
+    "ip": "162.35.107.134",
+    "vm_id": "vps3573819",
+    "services": [
+      "Bifrost Gateway (:3001)",
+      "Runic Router Engine (runic_router.py)",
+      "VPS Mobile Mesh Bridge (vps_mobile_mesh_bridge.py :8095)",
+      "Multivoice Bridge (multivoice_bridge.py)",
+      "Open-Notebook & CloudBrain Mesh",
+      "VFS Digital Factory",
+      "Shadow Developers & Swarm Researchers"
+    ]
+  },
+  "mesh_peers": {
+    "cybertronia": {
+      "ip": "100.118.224.52",
+      "role": "Primary Windows Orchestrator",
+      "status": "ACTIVE"
+    },
+    "vashawns-s26-ultra": {
+      "ip": "100.106.246.126",
+      "role": "Excalibur Command Center (Kinetic Mobile Sentinel / Android 16)",
+      "status": "ACTIVE"
+    },
+    "motorola-moto-g-power-5g---2024": {
+      "ip": "100.89.129.105",
+      "os": "Android 15",
+      "tailscale_version": "1.92.3",
+      "account": "Cyberdad247@github",
+      "lease_status": "KEY_REAUTH_PENDING_EXPIRED_JUL_1_2026",
+      "role": "Auxiliary Kinetic Mobile Sentinel / Telemetry Collector",
+      "status": "REGISTERED_PENDING_REAUTH"
+    },
+    "fothers-camelot": {
+      "ip": "100.121.48.50",
+      "role": "Windows Sovereign Secondary Node",
+      "status": "ACTIVE"
+    },
+    "lakesha": {
+      "ip": "100.100.155.55",
+      "role": "Lakisha Voice OS Host / KickBox Audio Mesh",
+      "status": "ACTIVE"
+    },
+    "camelot-relay-modal": {
+      "ip": "100.84.98.39",
+      "role": "Linux Cloud Relay Node",
+      "status": "ACTIVE"
+    },
+    "kba-services": {
+      "ip": "100.71.218.75",
+      "role": "Linux Remote Services Node",
+      "status": "ACTIVE"
+    },
+    "macbook-pro-3": {
+      "machine_name": "macbook-pro-3",
+      "os_hostname": "MacBook Pro (3)",
+      "tailscale_id": "ntYveHNFH921CNTRL",
+      "node_key": "nodekey:ec2248087990f44c683208ddcacbea222589ecb7f7b2e0c61af9d1bf51f1652b",
+      "tailscale_ipv4": "100.113.101.43",
+      "tailscale_ipv6": "fd7a:115c:a1e0::5139:652c",
+      "full_domain": "macbook-pro-3.tailcd0c29.ts.net",
+      "short_domain": "macbook-pro-3",
+      "os": "macOS",
+      "os_version": "26.6.2",
+      "tailscale_version": "1.102.3",
+      "creator": "Cyberdad247@github",
+      "key_expiry": "6 months from now (Active)",
+      "relays": {
+        "Chicago": "23.79 ms",
+        "Toronto": "35.21 ms",
+        "New York City": "37.75 ms"
+      },
+      "endpoints": [
+        "10.5.0.2:41641",
+        "75.76.51.216:20691",
+        "75.76.51.216:41641",
+        "192.168.7.39:41641"
+      ],
+      "role": "Mac Sovereign Edge Node & Terminal Host",
+      "governing_knight": "SIR_DARWIN_MAC",
+      "status": "VERIFIED_ONLINE",
+      "verified_utc": "2026-09-04T01:30:31.480072+00:00"
+    }
+  },
+  "verified_utc": "2026-09-04T01:12:59.549333+00:00"
+}

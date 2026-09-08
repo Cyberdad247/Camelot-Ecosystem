@@ -11,11 +11,9 @@ Core Law: "The model selects; Camelot resolves, authorizes, and renders."
 
 from __future__ import annotations
 
-import base64
 import hashlib
 import json
 import logging
-import os
 import uuid
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone

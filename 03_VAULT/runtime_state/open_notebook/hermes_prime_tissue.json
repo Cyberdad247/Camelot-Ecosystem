@@ -2,6 +2,50 @@
   {
     "knight_id": "HERMES_PRIME",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "max_activation",
+    "title": "MAX_ACTIVATION_HERMES_PRIME",
+    "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: HERMES_PRIME (28f89cb6-5048-4b5d-9e94-376082d24744)",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-09-08T07:55:38.849182+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_boot",
+    "title": "CAMELOT_OS_MAX_ACTIVATION",
+    "content": "Activated Camelot-OS Max Version via Worldtree Cloudbrain mesh.",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-09-08T07:55:13.254880+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//HERMES_OS status",
+    "content": "{\"framework\": \"MGV + AlphaEvolve\", \"seed\": \"status\", \"cycle_id\": \"hp-c5de9e31\", \"signals\": 10, \"hypotheses\": [{\"kind\": \"probe\", \"target\": \"status\", \"label\": \"probe:status\"}, {\"kind\": \"imports\", \"target\": \"os\", \"label\": \"engine:self_check\"}, {\"kind\": \"path_exists\", \"target\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\Knights\\\\Hermes_Prime\\\\soul.md\", \"label\": \"scaffold:soul.md\"}, {\"kind\": \"path_exists\", \"target\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\Knights\\\\Hermes_Prime\\\\spark.md\", \"label\": \"scaffold:spark.md\"}, {\"kind\": \"path_exists\", \"target\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\Knights\\\\Hermes_Prime\\\\harness.md\", \"label\": \"scaffold:harness.md\"}, {\"kind\": \"path_exists\", \"target\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\Knights\\\\Hermes_Prime\\\\skills.md\", \"label\": \"scaffold:skills.md\"}], \"passed\": 6, \"failed\": 0, \"pass_ratio\": 1.0, \"verdict\": \"DEPLOY\", \"weights_before\": {\"forage_breadth\": 0.7000000000000001, \"hypothesis_count\": 0.6000000000000001, \"verify_strictness\": 0.4, \"deploy_threshold\": 0.8, \"ouroboros_decay\": 0.9}, \"weights_after\": {\"forage_breadth\": 0.7500000000000001, \"hypothesis_count\": 0.6500000000000001, \"verify_strictness\": 0.35000000000000003, \"deploy_threshold\": 0.8500000000000001, \"ouroboros_decay\": 0.9}, \"blacklist\": {\"mesh\": 0.9, \"assimilation\": 0.9, \"vMAX\": 0.9}, \"status\": \"CYCLE_COMPLETE\", \"action\": \"ignite_self_evolution_loop\"}",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-09-05T17:32:27.319598+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_HermesPrime",
+    "content": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-09-05T17:32:21.918053+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "system_tether",
     "title": "HERMES_PRIME WorldTree Tether Anchor",
     "content": "{\"knight_id\": \"HERMES_PRIME\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"28f89cb6-5048-4b5d-9e94-376082d24744\", \"vfs_path\": \"vfs://worldtree/knights/hermes_prime/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_HERMES_PRIME\", \"open_viking_node\": \"open_viking://worldtree/hermes_prime\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\hermes_prime_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.962362+00:00\"}",

@@ -1,0 +1,20 @@
+{
+  "node": "lakesha",
+  "ip": "100.100.155.55",
+  "status": "CONNECTED",
+  "governor": "SIR_HEIMDALL",
+  "voice_host": "Lakisha Voice OS",
+  "notebooklm_mesh": {
+    "kickbox_audio_notebook_id": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
+    "kickbox_audio_name": "KickBox Audio",
+    "sir_heimdall_notebook_id": "3205f189-91da-4272-96a9-3641fd642763",
+    "worldtree_home_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795"
+  },
+  "bifrost_bridge": {
+    "port": 8011,
+    "gateway": 3001,
+    "carrier": "Tailscale Mesh (Cyberdad247@github)",
+    "zero_trust_locked": true
+  },
+  "synced_at": "2026-09-03T16:39:46.961784+00:00"
+}

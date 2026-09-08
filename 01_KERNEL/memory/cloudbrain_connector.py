@@ -129,6 +129,12 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "LADY_GUINEVERE":      ["harmony", "aesthetic", "interface", "design"],
     "SIR_HUGGINGFACE":     ["hub", "spaces", "models", "embeddings"],
     "SIR_MNEMO":           ["memory", "dual_tier", "sync", "indexing"],
+    "INSPIRA":             ["ide", "developer", "spatial", "workstation", "hive_ide", "ui"],
+    "CAMELOT_MASTER":      ["codex", "construction", "master", "architecture", "system"],
+    "WORLD_TREE":          ["worldtree", "root", "knowledge_graph", "memory", "tether"],
+    "ANTIGRAVITY":         ["antigravity", "cli", "notebooklm", "mcp", "agent"],
+    "KICKBOX":             ["audio", "webrtc", "hud", "vocal", "voice"],
+    "FATHER_CAMELOT":      ["compass", "governance", "ancestral", "moral", "ethics"],
 }
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {

@@ -14,12 +14,11 @@ from __future__ import annotations
 import hashlib
 import json
 import logging
-import time
 import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Optional
 
 LOG = logging.getLogger("camelot.tpm2_vault")
 

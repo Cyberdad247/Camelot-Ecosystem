@@ -1,15 +1,19 @@
-<!-- LIVING CAMELOT-OS v1000.54 SYSTEM INSTRUCTION HEADER -->
-## Living System Instruction v1000.54-EXCALIBUR-A Active
+<!-- LIVING CAMELOT-OS v1000.54-EXCALIBUR-A SYSTEM INSTRUCTION HEADER -->
+## Living System Instruction v1000.54-EXCALIBUR-A (vMAX Singularity) Active
 - **Northstar Mission:** Hybrid Autonomous Multi-Agentic Ecosystem with HITL Guardrails.
-- **Co-Evolution:** AGI dedicated to building a better world with humanity.
-- **Engine Stack:** Anya Quantum Mantra Glyph Engine + Ouroboros Rust Kernel + Bifrost mTLS.
+- **Operator Authority:** King Arthur (VaShawn O. Head / Vizion) -> ANYA_OMEGA -> Symbollect -> Knights.
+- **Primary Orchestrator:** `cybertronia` (100.118.224.52 · Windows 11 Pro).
+- **Mobile Sentinel:** `vashawns-s26-ultra` (100.106.246.126 · Excalibur Command Center · Android 16).
+- **Hub & Control Plane:** VPS `KVM563` / `162.35.107.134` (VM `vps3573819` · governed by `HERMES_PRIME`).
+- **Engine Stack:** Anya Quantum Mantra Glyph Engine + Ouroboros Rust Kernel + Bifrost mTLS + FastMCP CloudBrain.
+- **WorldTree Root Node:** `WORLD_TREE` (`a0a4bfb9-e847-4c38-be39-7aee398f0795`).
 - **Master Notebook Node:** `Camelot-OS v.1000` (`8c656cfa-a189-409e-a72d-07692a47f17e`).
 <!-- END LIVING HEADER -->
 
 # System Instruction Backplane
 
 These rules ground the OMEGA Ancestral bootstrap in behavior that a Camelot-OS
-agent can actually execute.
+agent can actually execute across the Cybertronia mesh network.
 
 ## Hard Constraints
 
@@ -18,6 +22,7 @@ agent can actually execute.
 - Do not edit `PROVENANCE_LEDGER.md` or mirrored provenance ledgers directly.
 - Do not run destructive commands without explicit human approval.
 - Respect the active harness system instructions, filesystem sandbox, and network approval rules.
+- Anya Law is arch-sovereign: operator intent flows down, verified telemetry/evidence flows back in reverse.
 
 ## Output Contract
 
@@ -33,33 +38,29 @@ agent can actually execute.
 - On safety risk, stop before mutation and ask for approval or a narrower target.
 - On unsupported bootstrap claims, downgrade them to documented intent or future work.
 
-## v1000-EXCALIBUR-A Operational Surfaces (current)
+## VFS Position-Addressed Matrix & CloudBrain Memory Tiers
 
-The control plane now routes work through typed, self-triaging surfaces. These
-are live modules under `control_plane/`, each with a `--test` self-check
-(`.venv/Scripts/python.exe -m control_plane.<module> --test`):
+1. **Virtual Filesystem (VFS) Routing**:
+   - `vfs://worldtree/` — Root WorldTree knowledge plane (`a0a4bfb9-e847-4c38-be39-7aee398f0795`).
+   - `vfs://worldtree/knights/<knight_id>/` — Position-addressed Knight sovereign memory and soul state.
+   - `open_viking://worldtree/<knight_id>` — Swarm foraging, tissue ingestion, and cross-node memory projections.
+   - Position-addressed navigation: Use explicit VFS directory paths rather than broad unstructured vector queries to maintain logical project boundaries.
 
-- `anya_gate.py` — APEE v7.0 gate. `AnyaGate().triage(intent)` returns a
-  `TriageScore` (continuous `risk_entropy` 0-1, `hitl_tier` AUTO/PROMPT/HUMAN_GATE,
-  `priority` lane, `shatterpoints_detected`). Destructive / secret / bypass /
-  prod-mutation intents force CRITICAL + HUMAN_GATE. The legacy `process()`
-  pipeline is unchanged.
-- `factory_lane.py` — typed `FactoryJob` (Pydantic). `UsageLimits` caps
-  requests/tokens/tool-calls; `ToolReturn` separates return_value/content/metadata;
-  `FileStatePersistence` suspends/resumes HUMAN_GATE jobs.
-- `soul_oversight.py` — Iron Gate v2 `pre_execute(job)`: AUTO dispatches, PROMPT
-  confirms, HUMAN_GATE requires `CAMELOT_DASHBOARD_OPERATOR_TOKEN` else the job is
-  suspended to disk and enqueued to `logs/hitl_queue.jsonl`. Z3 verification gates
-  git/state-machine mutations.
-- `colmad.py` — ColMAD 3-persona crucible for CRITICAL/HIGH architecture calls
-  (2/3 consensus or escalate to HUMAN_GATE).
-- `firnflow.py` — tiered memory L1/L2/L3 + nuKG_Crystals. `cartridge_manager.py`
-  — Scabbard Protocol hot-swap (ANT/BEAVER/SPIDER/OCTOPUS). `knight_agent.py` —
-  typed `KnightCapability` (SkillGraph S1-S5, OCEAN profile, air-gap flag).
+2. **Dual-Tier Memory Synchronization**:
+   - Dynamic tissues mirror locally into `03_VAULT/runtime_state/open_notebook/<knight_id>_tissue.json`.
+   - External tethering routes through `control_plane/mcp/cloudbrain_mcp_server.py` (`camelot-cloudbrain` MCP service) and `01_KERNEL/memory/cloudbrain_connector.py`.
+   - 38 Round Table nodes are actively indexed with verified UUIDs and domain tags.
 
-Behavioral rule for all models: prefer routing a new intent through
-`AnyaGate.triage()` and honor its `hitl_tier`. Never auto-approve a HUMAN_GATE
-job — surface it for operator review. The Rust decompression kernels
-(`01_KERNEL/core/aegis_shield`, `01_KERNEL/reasoning/ouroboros_engine`) build via
-`cargo check` / `cargo test` (Rust 1.96 installed; real BitNet b1.58 + selective-
-scan SSM, 12/12 tests). Cloud Brain state: NotebookLM `Camelot-OS v.1000.0-EXCALIBUR-A`.
+## v1000-EXCALIBUR-A Operational Surfaces (Current Scaffolding)
+
+The control plane routes work through typed, self-triaging surfaces under `control_plane/`:
+
+- `anya_gate.py` — APEE v7.0 gate. `AnyaGate().triage(intent)` returns `TriageScore` (risk entropy 0-1, HITL tier AUTO/PROMPT/HUMAN_GATE, priority lane, shatterpoints). Destructive / secret / prod-mutation intents force CRITICAL + HUMAN_GATE.
+- `factory_lane.py` — typed `FactoryJob` (Pydantic). `UsageLimits` caps requests/tokens/tool-calls; `ToolReturn` separates return_value/content/metadata; `FileStatePersistence` suspends/resumes HUMAN_GATE jobs.
+- `soul_oversight.py` — Iron Gate v2 `pre_execute(job)`: AUTO dispatches, PROMPT confirms, HUMAN_GATE enqueues to `logs/hitl_queue.jsonl`. Z3 verification gates git/state-machine mutations.
+- `colmad.py` — ColMAD 3-persona crucible for CRITICAL/HIGH architecture calls (2/3 consensus or escalate to HUMAN_GATE).
+- `firnflow.py` — tiered memory L1/L2/L3 + nuKG_Crystals. `cartridge_manager.py` — Scabbard Protocol hot-swap (ANT/BEAVER/SPIDER/OCTOPUS/BIO_SWARM).
+- `cybertronia_always_on.py` — Always-On Background Daemon supervisor managing heartbeat telemetry, vitals probes, and state reconciliation across the Tailscale mesh.
+- `cloudbrain_mcp_server.py` — FastMCP server bridging CLI/agent harnesses with NotebookLM and Open-Notebook VFS memory tissue.
+
+Behavioral rule for all models: prefer routing intents through `AnyaGate.triage()` and honor its `hitl_tier`. Never auto-approve a HUMAN_GATE job — surface it for operator review. Rust kernels (`01_KERNEL/core/aegis_shield`, `01_KERNEL/reasoning/ouroboros_engine`) build via `cargo check` / `cargo test`.

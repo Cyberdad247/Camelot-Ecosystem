@@ -404,7 +404,9 @@ def boot_bifrost_go_sidecar(home: Path) -> tuple[bool, str]:
 
 
 def boot_harness(home: Path):
-    harness_py = home / "control_plane" / "harness.py"
+    harness_py = home / "control_plane" / "infra" / "harness.py"
+    if not harness_py.exists():
+        harness_py = home / "control_plane" / "harness.py"
     pid_file = home / "logs" / "harness.pid"
     if not harness_py.exists():
         return False, "harness.py not found - skipped"
@@ -1025,7 +1027,9 @@ def boot_sir_octavian(home: Path) -> tuple[bool, str]:
     if _probe_port("127.0.0.1", 8400):
         return True, "Sir Octavian already running on :8400"
 
-    octavian_py = home / "control_plane" / "sir_octavian.py"
+    octavian_py = home / "control_plane" / "infra" / "sir_octavian.py"
+    if not octavian_py.exists():
+        octavian_py = home / "control_plane" / "sir_octavian.py"
     if not octavian_py.exists():
         return False, "sir_octavian.py not found"
 
@@ -1072,9 +1076,12 @@ def boot_cloud_brain_auth(home: Path) -> tuple[bool, str]:
 
 def boot_pydantic_ai_knight(home: Path) -> tuple[bool, str]:
     """Phase 9 - Pydantic AI Knight (Sir Helio v400)."""
-    knight_py = home / "control_plane" / "pydantic_ai_knight.py"
+    knight_py = home / "control_plane" / "infra" / "pydantic_ai_knight.py"
+    if not knight_py.exists():
+        knight_py = home / "control_plane" / "pydantic_ai_knight.py"
     if not knight_py.exists():
         return False, "pydantic_ai_knight.py not found"
+
     
     try:
         import pydantic_ai
@@ -1146,13 +1153,14 @@ def boot_opencodex(home: Path) -> tuple[bool, str]:
             launch_cmd = [npx_bin, "ocx", "start", "--port", str(ocx_port)]
 
         log_fh = open(ocx_log, "a", encoding="utf-8")
+        kwargs = _child_spawn_kwargs(cwd=str(home))
+        kwargs["env"] = env
+        kwargs["stdin"] = subprocess.DEVNULL
         proc = subprocess.Popen(
             launch_cmd,
-            cwd=str(home),
             stdout=log_fh,
             stderr=log_fh,
-            env=env,
-            creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+            **kwargs,
         )
 
         pid_file.write_text(str(proc.pid), encoding="utf-8")

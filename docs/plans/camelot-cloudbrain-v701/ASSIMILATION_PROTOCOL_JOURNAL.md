@@ -42,6 +42,12 @@ Generated: 2026-08-12T17:36:02.237472+00:00
 | livekit | voice | Sir Sonus / Tasha Prime | 02_FORGE/KINETIC_ARMORY/livekit | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/livekit | Validate upstream license and active runtime need before deeper coupling. |
 | tiny-tts | voice | Sir Sonus | 02_FORGE/KINETIC_ARMORY/tiny-tts | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/tiny-tts | Validate upstream license and active runtime need before deeper coupling. |
 | VibeVoice | voice | Sir Sonus | 02_FORGE/KINETIC_ARMORY/VibeVoice | assimilated | Test-Path 02_FORGE/KINETIC_ARMORY/VibeVoice | Validate upstream license and active runtime need before deeper coupling. |
+| Understand-Anything | memory/graph | Sir Codex / Sir Boris | external/Egonex-AI/Understand-Anything | assimilated | python control_plane/graphify.py --test | Tree-sitter & LLM domain flow visualizer mapped to MemCastle |
+| book-to-skill | skills/evolution | Lady Apis / Merlin | external/Cyberdad247/book-to-skill | assimilated | agy skill list | Procedural technical doc to SKILL.md generator |
+| codebase-memory-mcp | memory/mcp | Sir Mnemo / Sir Debug | external/Cyberdad247/codebase-memory-mcp | assimilated | agy mcp list | Photographic AST & dependency graph with 120x token reduction |
+| notebooklm-py | cloudbrain/client | Sir Link / Hermes Prime | vfs/notebooklm_client.py | assimilated | python vfs/notebooklm_client.py | Underlying Playwright async SDK for CloudBrain nodes |
+| anything-to-notebooklm | ingestion/studio | Sir Helio / Lady Apis | external/joeseesun/qiaomu-anything-to-notebooklm | assimilated | python control_plane/infra/notebooklm_graphify_bridge.py | Multi-source content preprocessor & Studio generator |
+| notebooklm-mcp | mcp/cloudbrain | Anya Omega / Sir Forge | control_plane/mcp/cloudbrain_mcp_server.py | assimilated | agy mcp list | FastMCP server exposing citations and WorldTree CloudBrain |
 
 ## Assimilation States
 

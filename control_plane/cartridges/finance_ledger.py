@@ -18,7 +18,6 @@ import uuid
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
 
 LOG = logging.getLogger("camelot.finance_ledger")
 

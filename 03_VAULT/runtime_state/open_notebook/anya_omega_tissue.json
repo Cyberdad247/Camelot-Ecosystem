@@ -2,6 +2,72 @@
   {
     "knight_id": "ANYA_OMEGA",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "max_activation",
+    "title": "MAX_ACTIVATION_ANYA_OMEGA",
+    "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: ANYA_OMEGA (32d38906-5ae8-4ecc-b77e-705d12c89f4a)",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-09-08T07:55:38.869257+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_boot",
+    "title": "CAMELOT_OS_MAX_ACTIVATION",
+    "content": "Activated Camelot-OS Max Version via Worldtree Cloudbrain mesh.",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-09-08T07:55:13.262856+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_luxora_payment_gene_2",
+    "content": "Success Gene #2: Stripe handshake hardened.",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-08-31T21:28:37.837545+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_gene_1",
+    "content": "Success Gene #1: Linear scaling verified.",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-08-31T21:28:36.168692+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_test_audit_data_1",
+    "content": "Secure Data",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-08-31T21:28:29.945890+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_test_audit_data_1",
+    "content": "Secure Data",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-08-31T21:28:28.071106+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "system_tether",
     "title": "ANYA_OMEGA WorldTree Tether Anchor",
     "content": "{\"knight_id\": \"ANYA_OMEGA\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"32d38906-5ae8-4ecc-b77e-705d12c89f4a\", \"vfs_path\": \"vfs://worldtree/knights/anya_omega/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_ANYA_OMEGA\", \"open_viking_node\": \"open_viking://worldtree/anya_omega\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\anya_omega_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.931181+00:00\"}",
@@ -482,71 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
     "open_viking_tether": "open_viking://worldtree/anya_omega",
     "updated_at": "2026-08-24T14:34:51.149075+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_03566be823ef90c12c2804e3440a518fd033bf7dff83d2b6665e58b490f488f7",
-    "content": "Verification Run run_1787582082: ledger update --title SIR_CODEX session: harness fixture gate, operator gates, schema reconciliation --actor SIR_CODEX --tag harness --scope harness/ tests/ packages/contracts/ --verification 45/45 fixture-gate tests; full harness gate 5/5; schema-meta 26/26\nOperator: default\nSuccess: True\nResults: {\"status\": \"UPDATED\", \"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"title\": \"SIR_CODEX session: harness fixture gate, operator gates, schema reconciliation\", \"tag\": \"harness\", \"cloudbrain_sync\": {\"triggered\": true, \"error\": \"ValueError: Missing required cookies: {'SID'}\\nFound cookies: ['NID']\\nGoogle domains in storage: ['.google.com', 'accounts.google.com']\\nRun 'notebooklm login' to authenticate.\", \"queued\": true, \"queue_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\cloudbrain_sync_queue.jsonl\", \"pending\": 3}}",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:34:42.685171+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_59f3572161f991e32da4f12e8b240bfdda7a6a819e28b5b57605d58c407e6668",
-    "content": "Verification Run run_1787582070: ledger status\nOperator: default\nSuccess: True\nResults: {\"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"size_bytes\": 673252, \"tail\": \"| 2026-08-24T14:25:27.350740+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:25:28.144568+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\ukg.json --report-dir C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports --evidence' to Cloud Brain] | HYDRATED |\\n| 2026-08-24T14:25:28.145105+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\ukg.json --report-dir C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports --evidence] | HYDRATED |\\n| 2026-08-24T14:25:28.421158+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\ukg.json --report-dir C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:25:29.133707+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |\\n| 2026-08-24T14:25:29.134599+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |\\n| 2026-08-24T14:25:29.391436+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:25:29.701925+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |\\n| 2026-08-24T14:25:29.702775+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |\\n| 2026-08-24T14:25:29.987964+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:28:34.145588+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |\\n| 2026-08-24T10:29:01.410164 | CLI/Sir Forge | CREATE: build a test | SUCCESS |\", \"mirrors\": [{\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\training\\\\configs\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\docs\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}], \"mirrors_aligned\": false}",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:34:31.443025+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_2643511b6b1dd34febc01167092b7eff3cc91bb950fb480638111b0be6452852",
-    "content": "Verification Run run_1787582062: ledger status\nOperator: default\nSuccess: True\nResults: {\"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"size_bytes\": 673252, \"tail\": \"| 2026-08-24T14:25:27.350740+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:25:28.144568+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --manifest C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\ukg.json --report-dir C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports --evidence' to Cloud Brain] | HYDRATED |\\n| 2026-08-24T14:25:28.145105+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --manifest C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\ukg.json --report-dir C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports --evidence] | HYDRATED |\\n| 2026-08-24T14:25:28.421158+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --manifest C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\ukg.json --report-dir C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports --evidence, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:25:29.133707+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND expand --runtime-status' to Cloud Brain] | HYDRATED |\\n| 2026-08-24T14:25:29.134599+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND expand --runtime-status] | HYDRATED |\\n| 2026-08-24T14:25:29.391436+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND expand --runtime-status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:25:29.701925+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//NANO_SWARM_EXPAND supervise status' to Cloud Brain] | HYDRATED |\\n| 2026-08-24T14:25:29.702775+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //NANO_SWARM_EXPAND supervise status] | HYDRATED |\\n| 2026-08-24T14:25:29.987964+00:00 | HYDRATION_MGR | HYDRATE [Intent: //NANO_SWARM_EXPAND supervise status, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-08-24T14:28:34.145588+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_alex] | HYDRATED |\\n| 2026-08-24T10:29:01.410164 | CLI/Sir Forge | CREATE: build a test | SUCCESS |\", \"mirrors\": [{\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\training\\\\configs\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\docs\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}], \"mirrors_aligned\": false}",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:34:23.343018+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_luxora_payment_gene_2",
-    "content": "Success Gene #2: Stripe handshake hardened.",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:25:24.698393+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_gene_1",
-    "content": "Success Gene #1: Linear scaling verified.",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:25:24.247108+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_test_audit_data_1",
-    "content": "Secure Data",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:25:21.971888+00:00"
   }
 ]

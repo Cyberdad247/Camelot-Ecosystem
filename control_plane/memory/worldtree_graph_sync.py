@@ -12,7 +12,6 @@ Core Mandate: "Memories are topological nodes; the WorldTree links the 38 Knight
 
 from __future__ import annotations
 
-import hashlib
 import json
 import logging
 import uuid

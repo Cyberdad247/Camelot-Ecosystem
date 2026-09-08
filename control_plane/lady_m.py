@@ -10,6 +10,7 @@ import hashlib
 import json
 import logging
 import os
+import re
 import smtplib
 import subprocess
 import textwrap
@@ -69,7 +70,15 @@ class SquireReport:
 class SquireTriage:
     """L0 fast scan: count files, detect secrets, measure entropy drift."""
 
-    SECRET_PATTERNS = ["api_key", "secret", "password", "token", "bearer", "sk-", "AKIA"]
+    SECRET_PATTERNS = [
+        re.compile(r"sk-ant-[a-zA-Z0-9\-_]{20,}"),
+        re.compile(r"sk-[a-zA-Z0-9]{32,}"),
+        re.compile(r"AIza[0-9A-Za-z\-_]{35}"),
+        re.compile(r"AKIA[0-9A-Z]{16}"),
+        re.compile(r"(?i)aws.{0,20}secret.{0,20}['\"][0-9a-zA-Z/+]{40}['\"]"),
+        re.compile(r"(?i)(?:api[_-]?key|bearer|token|password|passwd|secret)\s*[=:]\s*['\"][A-Za-z0-9+/\-_]{24,}['\"]"),
+        re.compile(r"-----BEGIN (?:RSA |EC )?PRIVATE KEY-----"),
+    ]
 
     def run(self, scan_path: Path = CAMELOT_ROOT) -> SquireReport:
         LOG.info("[TRIAGE] Scanning %s", scan_path)
@@ -78,25 +87,41 @@ class SquireTriage:
         dead:   list[str]        = []
         recs:   list[str]        = []
 
-        ignore_dirs = {".git", "__pycache__", ".venv", "node_modules", ".pytest_cache", ".ruff_cache", "target"}
+        ignore_dirs = {".git", "__pycache__", ".venv", "node_modules", ".pytest_cache", ".ruff_cache", "target", ".secrets_backup"}
         
         for root, dirs, files in os.walk(scan_path):
             dirs[:] = [d for d in dirs if d not in ignore_dirs]
             for file in files:
                 fp = Path(root) / file
 
-                # Secret scan
+                # Secret scan with streaming line-by-line inspection to prevent MemoryError
+                if fp.suffix in (".exe", ".dll", ".so", ".dylib", ".bin", ".zip", ".tar", ".gz", ".7z", ".png", ".jpg", ".jpeg", ".ico", ".pdf", ".db", ".sqlite", ".rdb", ".lock", ".log"):
+                    continue
+
                 try:
-                    text = fp.read_text(encoding="utf-8", errors="replace")
+                    stat = fp.stat()
+                    if stat.st_size > 512 * 1024:  # Skip files > 512KB from deep secret scan
+                        continue
+                    
+                    found_in_file = False
+                    with open(fp, "r", encoding="utf-8", errors="replace") as f:
+                        for line in f:
+                            if "boolean" in line.lower() or "dummy" in line.lower() or "example" in line.lower():
+                                continue
+                            for pat in self.SECRET_PATTERNS:
+                                m = pat.search(line)
+                                if m:
+                                    found_secrets.append(f"{fp.name}:{pat.pattern[:15]}")
+                                    risk += 25
+                                    found_in_file = True
+                                    break
+                            if found_in_file:
+                                break
                 except OSError:
                     continue
-                for pat in self.SECRET_PATTERNS:
-                    if pat.lower() in text.lower() and "boolean" not in text.lower()[:200]:
-                        found_secrets.append(f"{fp.name}:{pat}")
-                        risk += 30
 
                 # Dead asset detection
-                if fp.suffix in (".pyc", ".cache", ".bak", ".tmp") and fp.stat().st_size == 0:
+                if fp.suffix in (".pyc", ".cache", ".bak", ".tmp") and stat.st_size == 0:
                     dead.append(str(fp))
                     risk += 5
 

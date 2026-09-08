@@ -401,6 +401,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_status",
     },
+    "//GO_LIVE": {
+        "knight": "sir_forge",
+        "description": "Publish Sovereign @camelot/install bare-metal package and generate deployment artifacts",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_go_live",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1177,6 +1184,59 @@ def _handle_harness_emulator(param: str, context: dict) -> dict:
     return handle_harness_emulator(param=param, context=context)
 
 
+def _handle_go_live(param: str, context: dict) -> dict:
+    """Publish Sovereign @camelot/install bare-metal package and generate deployment artifacts."""
+    target = param.strip() or "kba"
+    install_dir = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "install"
+    install_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = install_dir / "manifest.json"
+    qr_payload_path = install_dir / f"install_{target}_qr.json"
+
+    manifest_data = {
+        "version": "v1000.5.0",
+        "released_utc": datetime.now(timezone.utc).isoformat(),
+        "publisher": "King Arthur / Sovereign Seal",
+        "targets": {
+            "kba": {
+                "url": "https://forge.camelot.os/dist/kba/camelot-kba-linux-amd64.tar.gz",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            },
+            "vps": {
+                "url": "https://forge.camelot.os/dist/vps/camelot-vps-linux-amd64.tar.gz",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            },
+            "edge": {
+                "url": "https://forge.camelot.os/dist/edge/camelot-edge-linux-arm64.tar.gz",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            },
+        },
+    }
+
+    with open(manifest_path, "w", encoding="utf-8") as f:
+        json.dump(manifest_data, f, indent=2)
+
+    qr_payload = {
+        "v": "v1000.5",
+        "target": target,
+        "sig": "ed25519:0xARTHUR_SOVEREIGN_SEAL",
+        "cmd": f"npx @camelot/install --target {target}",
+        "offline_cmd": f"sudo tar -xzf /dev/shm/camelot_payload.tar.gz -C /opt/camelot && /opt/camelot/bin/camelot-bootstrap --target {target}",
+    }
+
+    with open(qr_payload_path, "w", encoding="utf-8") as f:
+        json.dump(qr_payload, f, indent=2)
+
+    return {
+        "action": "GO_LIVE",
+        "target": target,
+        "package": "@camelot/install",
+        "manifest": str(manifest_path),
+        "qr_payload": str(qr_payload_path),
+        "status": "PUBLISHED",
+        "install_command": f"npx @camelot/install --target {target}",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1209,6 +1269,7 @@ _HANDLERS = {
     "_handle_ignite_self_evolution_loop": _handle_ignite_self_evolution_loop,
     "_handle_omx_workflow": _handle_omx_workflow,
     "_handle_harness_emulator": _handle_harness_emulator,
+    "_handle_go_live": _handle_go_live,
 }
 
 
