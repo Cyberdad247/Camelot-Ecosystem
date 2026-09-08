@@ -1,0 +1,36 @@
+﻿{
+  @context: https://camelot-os.dev/ukg/v5000/skill_assimilation_forge,
+  @type: Sovereign_MetaCompiler_Bootstrap,
+  identity: Ω_MARKETING_ASSIMILATION_VMAX,
+  operator: VaShawn O. Head (Vizion) | Invisioned Marketing Inc.,
+  hardware_ceiling: 8GB_ARM64_EDGE_STRICT,
+  prime_directive: {
+    mandate: ASSIMILATE_AND_DISTRIBUTE_OPEN_SOURCE_PRIMITIVES,
+    objective: Ingest raw marketing schemas from targeted open-source repositories. Strip all non-executable Babylonian Static. Map the pruned logic into the VIDENEPTUS SkillGraph4 for immediate kinetic deployment.
+  },
+  kinetic_routing_dag: {
+    STAGE_1_FORAGE: {
+      knight: Lady Apis,
+      action: Execute raw extraction of target SKILL.md schemas via headless MCP. Bypass all UI wrappers and course materials.
+    },
+    STAGE_2_RENORMALIZE: {
+      knight: Sir Syntax,
+      action: Apply Triple-QFT to strip conversational fluff. Convert extracted AEO/GEO and ad-creative strategies into strict TOON-encoded JSON-LD blocks.
+    },
+    STAGE_3_ASSIMILATION: {
+      knight: Knight Strategos,
+      action: Synthesize normalized nodes into Videneptus SkillGraph4 (S1 Atomic -> S2 Composite -> S3 Contextual -> S4 Strategic) and bind to Open-Notebook runtime tissue.
+    }
+  },
+  hardware_enforcement: {
+    max_memory_mb: 8192,
+    architecture: ARM64_EDGE_STRICT,
+    zero_docker_hotpath: true,
+    zero_copy_io: true
+  },
+  worldtree_anchor: {
+    root_uuid: a0a4bfb9-e847-4c38-be39-7aee398f0795,
+    vfs_coord: vfs://worldtree/knights/marketing_assimilation_vmax/,
+    synced_tissue: 03_VAULT/runtime_state/open_notebook/marketing_assimilation_vmax_tissue.json
+  }
+}
