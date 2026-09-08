@@ -19,18 +19,32 @@
     },
     STAGE_3_ASSIMILATION: {
       knight: Knight Strategos,
-      action: Synthesize normalized nodes into Videneptus SkillGraph4 (S1 Atomic -> S2 Composite -> S3 Contextual -> S4 Strategic) and bind to Open-Notebook runtime tissue.
+      action: Absorb the cleaned A/B testing, AI-SEO, and copy generation vectors into the Invisioned Marketing operational core as executable routines.
+    },
+    STAGE_4_CRYSTALLIZATION: {
+      knight: Lady Mnemosyne,
+      action: Etch the verified skills into the local duckdb-wasm MemPalace. Ensure delta updates sync with the Worldtree in <72µs.
     }
   },
+  execution_symbolects: {
+    task_init: ⚡,
+    structural_audit: 🏗️,
+    knowledge_graft: 🧠,
+    sovereign_truth: ⚜️_SOVEREIGN_TRUTH
+  },
+  halt_condition: If context expansion threatens the 8GB Scarcity Protocol during ingestion, immediately trigger //REZERO, purge the cache, and ingest skills individually.,
   hardware_enforcement: {
     max_memory_mb: 8192,
     architecture: ARM64_EDGE_STRICT,
     zero_docker_hotpath: true,
-    zero_copy_io: true
+    zero_copy_io: true,
+    scarcity_action: //REZERO
   },
   worldtree_anchor: {
     root_uuid: a0a4bfb9-e847-4c38-be39-7aee398f0795,
     vfs_coord: vfs://worldtree/knights/marketing_assimilation_vmax/,
+    mempalace_substrate: duckdb-wasm,
+    delta_sync_sla: <72µs,
     synced_tissue: 03_VAULT/runtime_state/open_notebook/marketing_assimilation_vmax_tissue.json
   }
 }
