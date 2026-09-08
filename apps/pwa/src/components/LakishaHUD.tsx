@@ -5,7 +5,8 @@
 import type { FormEvent } from 'react';
 import { useBifrost } from '../context/BifrostContext';
 import { useLakishaVoice } from '../hooks/useLakishaVoice';
-import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs } from '../lib/telemetry';
+import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs, getLatencyHistory, recordLatencySample } from '../lib/telemetry';
+import { Sparkline } from './Sparkline';
 
 // One latency readout with a budget-colored status dot.
 function TelemetryMetric({
@@ -181,17 +182,23 @@ export function LakishaHUD() {
       </div>
       {/* vMAX KINETIC_THROUGHPUT telemetry strip */}
       {showTelemetry && (
-        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 pl-1 text-[10px] uppercase tracking-[0.14em]">
-          <TelemetryMetric label="TTFA" ms={ttfaMs} budget={TTFA_BUDGET_MS} />
-          <TelemetryMetric label="Query" ms={queryMs} budget={QUERY_BUDGET_MS} />
-          {laneLabel && (
-            <span className={`rounded-sm border px-1.5 py-0.5 ${laneClass}`}>
-              {laneLabel}
-              {state?.lastLatencyMs != null && (
-                <span className="ml-1 text-white/35">· {formatMs(state.lastLatencyMs)}</span>
-              )}
-            </span>
-          )}
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 pl-1 text-[10px] uppercase tracking-[0.14em]">
+          <div className="flex items-center gap-x-4">
+            <TelemetryMetric label="TTFA" ms={ttfaMs} budget={TTFA_BUDGET_MS} />
+            <TelemetryMetric label="Query" ms={queryMs} budget={QUERY_BUDGET_MS} />
+            {laneLabel && (
+              <span className={`rounded-sm border px-1.5 py-0.5 ${laneClass}`}>
+                {laneLabel}
+                {state?.lastLatencyMs != null && (
+                  <span className="ml-1 text-white/35">· {formatMs(state.lastLatencyMs)}</span>
+                )}
+              </span>
+            )}
+          </div>
+          <div className="hidden sm:flex items-center gap-2">
+            <span className="text-[9px] text-white/30 tracking-widest">STREAM JITTER</span>
+            <Sparkline data={getLatencyHistory()} width={64} height={16} stroke="#D4AF37" />
+          </div>
         </div>
       )}
       {!connected && (
