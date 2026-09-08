@@ -234,9 +234,9 @@ def test_pyinstaller_build_boots_and_serves(tmp_path: Path) -> None:
     data_dir = tmp_path / "excalibur-smoke-data"
     data_dir.mkdir(parents=True)
     with _boot_binary(binary, data_dir) as proc:
-        # Wait up to 30 s for the bootstrap (pyttsx3 init can take 5 s on cold SAPI5).
-        assert _wait_for_port("127.0.0.1", _TEST_PORT, timeout_seconds=30.0), (
-            f"binary never bound port {_TEST_PORT} within 30 s; "
+        # Wait up to 75 s for the bootstrap (pyttsx3/SAPI5 init and uvicorn port binding on cold CI runners).
+        assert _wait_for_port("127.0.0.1", _TEST_PORT, timeout_seconds=75.0), (
+            f"binary never bound port {_TEST_PORT} within 75 s; "
             f"pid_alive={proc.poll() is None} "
             f"boot_log={(data_dir / 'boot.log').read_text() if (data_dir / 'boot.log').exists() else '<no log>'}"
         )
