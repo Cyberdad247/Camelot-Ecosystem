@@ -14,7 +14,39 @@ class AudioPipeline {
     this.fallbackRecognition = null;
     this.isRecording = false;
     this.visualizerFrame = null;
+    this.autoplayUnlocked = false;
+    this.droneOscillator = null;
+    this.droneGain = null;
     this.init();
+    this.setupAutoplayGate();
+  }
+
+  setupAutoplayGate() {
+    // Autoplay Policy Gate: Mobile browsers (Android Chrome, iOS Safari) require
+    // a user gesture (touchstart, pointerdown, mousedown, keydown) before AudioContext can resume.
+    const unlockAudio = async () => {
+      if (this.autoplayUnlocked) return;
+      if (this.audioContext && this.audioContext.state === 'suspended') {
+        try {
+          await this.audioContext.resume();
+          this.autoplayUnlocked = true;
+          console.log('[AUDIO] Autoplay policy gate unlocked — AudioContext running');
+        } catch (e) {
+          console.warn('[AUDIO] Failed to unlock AudioContext on gesture:', e);
+        }
+      } else if (this.audioContext && this.audioContext.state === 'running') {
+        this.autoplayUnlocked = true;
+      }
+      if (this.autoplayUnlocked) {
+        ['pointerdown', 'touchstart', 'mousedown', 'keydown'].forEach(evt => {
+          window.removeEventListener(evt, unlockAudio);
+        });
+      }
+    };
+
+    ['pointerdown', 'touchstart', 'mousedown', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, unlockAudio, { passive: true });
+    });
   }
 
   async init() {
@@ -31,11 +63,41 @@ class AudioPipeline {
       this.analyser.connect(this.audioContext.destination);
       
       this.isNative = false;
-      console.log('[AUDIO] Pipeline initialized — sampleRate: 24000');
+      console.log('[AUDIO] Pipeline initialized — sampleRate: 24000 (state: ' + this.audioContext.state + ')');
       if (!this.isNative) this.initFallback();
     } catch (err) {
       console.error('[AUDIO] Init failed:', err);
       this.initFallback();
+    }
+  }
+
+  // Cinematic Sub-Atmospheric Drone (Kickbox-Audio parity: 41.2Hz - 82.4Hz)
+  startSubDrone(freq = 41.2, duration = 3.0) {
+    if (!this.audioContext) return;
+    try {
+      if (this.audioContext.state === 'suspended') {
+        this.audioContext.resume().catch(() => {});
+      }
+      const now = this.audioContext.currentTime;
+      const osc = this.audioContext.createOscillator();
+      const droneGain = this.audioContext.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      // Subtle pitch bend upwards
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + duration);
+
+      droneGain.gain.setValueAtTime(0.001, now);
+      droneGain.gain.exponentialRampToValueAtTime(0.04, now + 0.4);
+      droneGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      osc.connect(droneGain);
+      droneGain.connect(this.gainNode);
+
+      osc.start(now);
+      osc.stop(now + duration);
+    } catch (e) {
+      console.warn('[AUDIO] SubDrone generation error:', e);
     }
   }
 
