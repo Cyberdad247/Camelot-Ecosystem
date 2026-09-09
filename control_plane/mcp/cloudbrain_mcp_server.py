@@ -165,6 +165,29 @@ def cloudbrain_status() -> dict:
     }
 
 
+@mcp_server.tool()
+def excalibur_mobile_scrcpy_command(
+    device_ip: str = "100.106.246.126:5555",
+    bitrate_mbps: int = 8,
+    audio_opus: bool = True,
+) -> str:
+    """Generate the native scrcpy low-latency command for Excalibur Command Center (S26 Ultra)."""
+    audio_flag = "--audio-codec=opus" if audio_opus else "--no-audio"
+    return f"scrcpy -s {device_ip} --video-bit-rate {bitrate_mbps}M --max-fps 60 {audio_flag}"
+
+
+@mcp_server.tool()
+def excalibur_adb_tap(x: int, y: int, device_ip: str = "100.106.246.126:5555") -> str:
+    """Inject a tap touch action into the Excalibur mobile sentinel via ADB over Tailscale."""
+    import subprocess
+    cmd = ["adb", "-s", device_ip, "shell", "input", "tap", str(x), str(y)]
+    try:
+        res = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
+        return f"Tap at ({x}, {y}) dispatched to {device_ip}. Exit: {res.returncode}"
+    except Exception as e:
+        return f"Tap failed: {e}"
+
+
 if __name__ == "__main__":
     mcp_server.run()
 
