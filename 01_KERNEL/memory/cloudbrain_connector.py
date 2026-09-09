@@ -96,6 +96,8 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "KICKBOX":             "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",   # KickBox Audio
     "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
     "BIO_KINETIC_SWARM":   "93b21c40-10ff-4e89-a212-08f37b1297e1",   # Bio-Kinetic Swarm Node
+    "INVISIONED_MARKETING":"a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Invisioned Marketing Sovereign CloudBrain (WorldTree Root Tethered)
+    "KNIGHT_STRATEGOS":    "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Knight Strategos Marketing Assimilation Node
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
@@ -135,6 +137,8 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "ANTIGRAVITY":         ["antigravity", "cli", "notebooklm", "mcp", "agent"],
     "KICKBOX":             ["audio", "webrtc", "hud", "vocal", "voice"],
     "FATHER_CAMELOT":      ["compass", "governance", "ancestral", "moral", "ethics"],
+    "INVISIONED_MARKETING":["marketing", "invisioned", "brand", "aeo", "geo", "seo", "ab_testing", "copywriting", "campaigns", "conversion"],
+    "KNIGHT_STRATEGOS":    ["marketing", "strategy", "assimilation", "skillgraph4", "videneptus", "growth", "advertising"],
 }
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {

@@ -1,5 +1,16 @@
 [
   {
+    "knight_id": "INVISIONED_MARKETING",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "sovereign_cloudbrain_anchor",
+    "title": "INVISIONED_MARKETING_SOVEREIGN_CLOUDBRAIN_ANCHOR",
+    "content": "{\n  \"node\": \"INVISIONED_MARKETING\",\n  \"uuid\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"role\": \"Invisioned Marketing Inc. Sovereign CloudBrain & Brand Direction Mesh\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/invisioned_marketing/\",\n  \"status\": \"ANCHORED_EXPANDED_SYNCHRONIZED\",\n  \"synchronized_knights\": [\n    \"KNIGHT_STRATEGOS\",\n    \"LADY_APIS\",\n    \"SIR_SYNTAX\",\n    \"LADY_MNEMOSYNE\",\n    \"MERLIN_OMEGA\"\n  ]\n}",
+    "vfs_path": "vfs://worldtree/knights/invisioned_marketing/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INVISIONED_MARKETING",
+    "open_viking_tether": "open_viking://worldtree/invisioned_marketing",
+    "synced_at": "2026-09-09T03:38:11.925536+00:00"
+  },
+  {
     "knight_id": "WORLD_TREE",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "cloudbrain_expansion",

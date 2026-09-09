@@ -49,4 +49,6 @@ All Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be
 | **ANTIGRAVITY** | NotebookLM + AntiGravity CLI Synergy & MCP Integration | FastMCP / agy | `ab8aa359-2b3b-4bc1-b41f-34979cdc184e` |
 | **KICKBOX** | KickBox Audio, WebRTC State & Vocal HUD Integration | Next.js 14 / WebRTC | `8531e6d4-6fc4-428f-a754-b9e9592ac7ff` |
 | **INSPIRA** | HiveIDE / Inspira Spatial Developer Workstation | IDE Substrate | `cadfe67e-7187-472e-8bf4-8a2aded84e4e` |
+| **INVISIONED_MARKETING** | Invisioned Marketing Sovereign CloudBrain & Brand Direction | WorldTree Substrate | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |
+| **KNIGHT_STRATEGOS** | Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO | Gemini 3.8 Flash | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |
 

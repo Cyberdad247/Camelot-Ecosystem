@@ -15,3 +15,5 @@ def test_sir_codex_has_cloudbrain_mapping() -> None:
     spec.loader.exec_module(module)
 
     assert module.KNIGHT_NOTEBOOKS["SIR_CODEX"] == "8c656cfa-a189-409e-a72d-07692a47f17e"
+    assert module.KNIGHT_NOTEBOOKS["INVISIONED_MARKETING"] == "a0a4bfb9-e847-4c38-be39-7aee398f0795"
+    assert "marketing" in module.NOTEBOOK_DOMAIN_TAGS["INVISIONED_MARKETING"]
