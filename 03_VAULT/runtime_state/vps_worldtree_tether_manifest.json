@@ -416,5 +416,38 @@
     "open_notebook_local": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\open_notebook\\bio_kinetic_swarm_tissue.json",
     "tether_active": true,
     "timestamp": "2026-08-30T16:07:09.271135+00:00"
+  },
+  "INVISIONED_MARKETING": {
+    "knight_id": "INVISIONED_MARKETING",
+    "worldtree_home_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "personal_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "vfs_path": "vfs://worldtree/knights/invisioned_marketing/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INVISIONED_MARKETING",
+    "open_viking_node": "open_viking://worldtree/invisioned_marketing",
+    "open_notebook_local": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\invisioned_marketing_tissue.json",
+    "tether_active": true,
+    "timestamp": "2026-09-09T03:38:11.925536+00:00"
+  },
+  "KNIGHT_STRATEGOS": {
+    "knight_id": "KNIGHT_STRATEGOS",
+    "worldtree_home_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "personal_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "vfs_path": "vfs://worldtree/knights/knight_strategos/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KNIGHT_STRATEGOS",
+    "open_viking_node": "open_viking://worldtree/knight_strategos",
+    "open_notebook_local": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\knight_strategos_tissue.json",
+    "tether_active": true,
+    "timestamp": "2026-09-09T03:38:11.925536+00:00"
+  },
+  "SIR_GIDEON": {
+    "knight_id": "SIR_GIDEON",
+    "worldtree_home_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "personal_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "vfs_path": "vfs://worldtree/knights/sir_gideon/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GIDEON",
+    "open_viking_node": "open_viking://worldtree/sir_gideon",
+    "open_notebook_local": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_gideon_tissue.json",
+    "tether_active": true,
+    "timestamp": "2026-09-09T03:38:11.925536+00:00"
   }
 }
