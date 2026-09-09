@@ -1,0 +1,16 @@
+﻿[Unit]
+Description=Camelot VKG Crystal (Self-Documenting System)
+After=camelot-graph-memory.service camelot-sentinel.service network.target
+
+[Service]
+Type=simple
+User=camelot-svc
+Environment="CAMELOT_OS_HOME=/opt/Camelot-Ecosystem"
+ExecStart=/usr/local/bin/camelot-vkg-crystal --daemon
+Restart=always
+RestartSec=5s
+MemoryMax=256M
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target
