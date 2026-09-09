@@ -1575,6 +1575,11 @@ _RUNE_ALIASES: dict[str, str] = {
     "//forge-source": "//FORGE_SOURCE",
     "$forge-source": "//FORGE_SOURCE",
     "/forge-source": "//FORGE_SOURCE",
+    "//implement": "//CODEX",
+    "/implement": "//CODEX",
+    "$implement": "//CODEX",
+    "//vkg": "//FORGE",
+    "//vkg_crystal": "//FORGE",
 }
 
 

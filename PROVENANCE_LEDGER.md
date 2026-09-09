@@ -5712,3 +5712,7 @@
 | 2026-09-09T08:24:31.916262+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC zero-login autonomous pipeline] | HYDRATED |
 | 2026-09-09T08:24:33.441081+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: Omega_SYNC zero-login autonomous pipeline, Complexity: 9] | HYDRATED |
 | 2026-09-09T08:24:33.442556+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_SYNC zero-login autonomous pipeline, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD] | HYDRATED |
+| 2026-09-09T08:30:45.761555+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //FORGE deploy vkg crystal to vps hub] | HYDRATED |
+| 2026-09-09T08:30:45.766686+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE deploy vkg crystal to vps hub, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+| 2026-09-09T08:45:02.859784+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //CODEX VKG Crystal live daemon verification] | HYDRATED |
+| 2026-09-09T08:45:02.864310+00:00 | HYDRATION_MGR | HYDRATE [Intent: //CODEX VKG Crystal live daemon verification, Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
