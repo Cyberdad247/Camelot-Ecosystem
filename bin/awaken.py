@@ -57,7 +57,7 @@ def main():
     crystal_bin = home / "bin" / ("camelot-vkg-crystal.exe" if sys.platform == "win32" else "camelot-vkg-crystal")
     if crystal_bin.exists():
         import subprocess
-        res = subprocess.run([str(crystal_bin), "--verify"], capture_output=True, text=True)
+        res = subprocess.run([str(crystal_bin), "--verify"], capture_output=True, text=True, encoding="utf-8", errors="replace")
         if res.returncode != 0:
             sys.stderr.write(f"{_C['r']}AWAKEN: VKG Crystal gate verification failed:{_C['x']}\n{res.stderr or res.stdout}\n")
             sys.exit(78)
