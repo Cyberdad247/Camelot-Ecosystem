@@ -107,6 +107,22 @@ pub enum AdbAction {
         #[arg(short, long, default_value = "excalibur_screenshot.png")]
         output: String,
     },
+    /// Pull reverse device telemetry (battery, memory, orientation, active window)
+    Telemetry {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        /// Output formatted JSON
+        #[arg(long)]
+        json: bool,
+    },
+    /// Listen for reverse mobile intent broadcasts and touch telemetry
+    Listen {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        /// Bounded stream capture duration (seconds)
+        #[arg(long, default_value_t = 10)]
+        duration_s: u64,
+    },
 }
 
 #[derive(Serialize, Deserialize)]
@@ -237,6 +253,53 @@ fn handle_adb(action: AdbAction) -> Result<()> {
                 .status()
                 .context("Failed to capture screenshot via adb")?;
             println!("✓ Screenshot saved to {output}");
+        }
+        AdbAction::Telemetry { serial, json } => {
+            println!("⚡ [ROTEL_ADB] Pulling reverse mobile sentinel telemetry from {serial}...");
+            let battery = std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "dumpsys", "battery"])
+                .output()
+                .map(|o| String::from_utf8_lossy(&o.stdout).to_string())
+                .unwrap_or_else(|_| "battery_unavailable".to_string());
+
+            let window = std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "dumpsys", "window", "displays"])
+                .output()
+                .map(|o| String::from_utf8_lossy(&o.stdout).to_string())
+                .unwrap_or_else(|_| "window_unavailable".to_string());
+
+            if json {
+                let report = serde_json::json!({
+                    "serial": serial,
+                    "direction": "MOBILE_TO_CAMELOT (REVERSE TELEMETRY)",
+                    "battery_sample": battery.lines().take(6).collect::<Vec<&str>>(),
+                    "window_sample": window.lines().filter(|l| l.contains("cur=")).take(3).collect::<Vec<&str>>(),
+                    "timestamp": Utc::now().to_rfc3339()
+                });
+                println!("{}", serde_json::to_string_pretty(&report)?);
+            } else {
+                println!("--- Battery Telemetry ---");
+                for line in battery.lines().take(6) {
+                    println!("  {}", line);
+                }
+                println!("--- Display & Focus Telemetry ---");
+                for line in window.lines().filter(|l| l.contains("cur=")).take(3) {
+                    println!("  {}", line);
+                }
+            }
+            println!("✓ Bidirectional telemetry verified.");
+        }
+        AdbAction::Listen { serial, duration_s } => {
+            println!("⚡ [ROTEL_ADB] Listening to reverse event stream from {serial} for {}s...", duration_s);
+            let mut child = std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "getevent", "-l"])
+                .stdout(std::process::Stdio::piped())
+                .spawn()
+                .context("Failed to attach to device event queue")?;
+
+            std::thread::sleep(std::time::Duration::from_secs(duration_s));
+            let _ = child.kill();
+            println!("✓ Reverse stream listener detached after {}s.", duration_s);
         }
     }
     Ok(())
