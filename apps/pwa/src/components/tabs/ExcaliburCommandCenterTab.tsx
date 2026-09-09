@@ -4,6 +4,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useBifrost } from '../../context/BifrostContext';
+import { Form, FormItem } from '../Form';
 
 interface ServiceStatus {
   name: string;
@@ -70,6 +71,15 @@ const EXCALIBUR_SERVICES: ServiceStatus[] = [
     status: 'STANDBY',
     latencyMs: 22,
   },
+  {
+    name: 'camelot-crawler',
+    lang: 'Rust',
+    location: 'VPS',
+    memory: '48M',
+    purpose: 'Native web crawler engine (reqwest, scraper, tokio, SHA-256 deduplication, zero Redis)',
+    status: 'ACTIVE',
+    latencyMs: 8,
+  },
 ];
 
 export function ExcaliburCommandCenterTab() {
@@ -80,6 +90,7 @@ export function ExcaliburCommandCenterTab() {
   const [similarityScore, setSimilarityScore] = useState(0.94);
   const [offlineQueueCount, setOfflineQueueCount] = useState(0);
   const [activeChallenge, setActiveChallenge] = useState('knight-7-round-3');
+  const [dispatchStatus, setDispatchStatus] = useState<string | null>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -228,7 +239,7 @@ export function ExcaliburCommandCenterTab() {
           <h3 className="text-xs uppercase tracking-wider text-gold-light font-display">
             Excalibur Production Service Fleet (S26 Sentinel + VPS Hub)
           </h3>
-          <span className="text-[10px] text-white/40">6 Core Engines Loaded</span>
+          <span className="text-[10px] text-white/40">7 Core Engines Loaded</span>
         </div>
 
         <div className="mt-4 overflow-x-auto">
@@ -272,6 +283,126 @@ export function ExcaliburCommandCenterTab() {
               ))}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      {/* ── Declarative Excalibur Voice & Runic Dispatch Form ──── */}
+      <div className="border border-gold/30 bg-smoke-900/90 p-5 shadow-gold">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <h3 className="text-xs uppercase tracking-wider text-gold-light font-display">
+            ⚔️ Declarative Excalibur Telemetry & Voice Dispatch Form
+          </h3>
+          <span className="text-[10px] text-white/40">Ant Design Controller Pattern · Tailwind v4</span>
+        </div>
+
+        <Form
+          className="mt-4 space-y-4"
+          initialValues={{
+            targetKnight: 'SIR_SENTINEL',
+            executionTier: 'L1_HOTPATH',
+            directive: '',
+          }}
+          onFinish={async (values) => {
+            setDispatchStatus(`//DISPATCH [${values.targetKnight}@${values.executionTier}] -> "${values.directive}"`);
+            setTimeout(() => setDispatchStatus(null), 6000);
+          }}
+        >
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <FormItem
+              name="targetKnight"
+              label="Target Sovereign Knight"
+              rules={[{ required: true, message: 'Please select a recipient Knight' }]}
+            >
+              <select className="w-full border border-white/20 bg-obsidian px-3 py-2 text-xs text-white focus:border-gold focus:outline-none">
+                <option value="SIR_SENTINEL">SIR_SENTINEL (Zero-Trust Guard)</option>
+                <option value="SIR_CODEX">SIR_CODEX (Kinetic Implementer)</option>
+                <option value="SIR_BORIS">SIR_BORIS (Crucible Conductor)</option>
+                <option value="LADY_GUINEVERE">LADY_GUINEVERE (Aesthetic Tokens)</option>
+                <option value="HERMES_PRIME">HERMES_PRIME (VFS Synthesizer)</option>
+              </select>
+            </FormItem>
+
+            <FormItem
+              name="executionTier"
+              label="Execution Boundary / Tier"
+              rules={[{ required: true, message: 'Execution boundary required' }]}
+            >
+              <select className="w-full border border-white/20 bg-obsidian px-3 py-2 text-xs text-white focus:border-gold focus:outline-none">
+                <option value="L1_HOTPATH">L1 HotPath (0% Node/Python - Bare Metal)</option>
+                <option value="L2_SIDECAR">L2 Bifrost Go/Rust Sidecar :8011</option>
+                <option value="L3_CLOUDBRAIN">L3 CloudBrain Mesh (WorldTree / NotebookLM)</option>
+              </select>
+            </FormItem>
+          </div>
+
+          <FormItem
+            name="directive"
+            label="Runic / Vocal Directive"
+            rules={[
+              { required: true, message: 'Directive cannot be empty' },
+              {
+                validator: (val: string) => {
+                  if (val && val.length < 3) {
+                    return 'Directive must contain at least 3 characters';
+                  }
+                  return true;
+                },
+              },
+            ]}
+          >
+            <input
+              type="text"
+              placeholder="//RUNE or spoken command intent..."
+              className="w-full border border-white/20 bg-obsidian px-3 py-2 text-xs text-white placeholder-white/30 focus:border-gold focus:outline-none"
+            />
+          </FormItem>
+
+          <div className="flex items-center justify-between pt-2">
+            <button
+              type="submit"
+              className="border border-gold bg-gold/15 px-5 py-2 text-xs font-bold uppercase tracking-wider text-gold-royal transition-all hover:bg-gold/30 hover:shadow-gold"
+            >
+              TRANSMIT TO SOVEREIGN MESH
+            </button>
+            {dispatchStatus && (
+              <span className="text-xs font-mono text-emerald-400 animate-pulse">
+                {dispatchStatus}
+              </span>
+            )}
+          </div>
+        </Form>
+      </div>
+
+      {/* ── Native Rust/WASM Crawler Console Card ────────────── */}
+      <div className="border border-gold/20 bg-smoke-900/90 p-5">
+        <div className="flex items-center justify-between border-b border-white/10 pb-3">
+          <div className="flex items-center gap-2">
+            <span className="text-gold-royal font-bold">🕸️</span>
+            <h3 className="text-xs uppercase tracking-wider text-gold-light font-display">
+              Native Crawler Engine Subsystem (Rust / Wasmtime / AgentBus)
+            </h3>
+          </div>
+          <span className="border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-400">
+            ZERO PYTHON HOTPATH
+          </span>
+        </div>
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+          <div className="border border-white/10 bg-black/40 p-3">
+            <span className="text-white/40 block text-[10px] uppercase">Engine Crate</span>
+            <span className="text-gold-light font-mono font-bold">camelot-crawler v0.1.0</span>
+          </div>
+          <div className="border border-white/10 bg-black/40 p-3">
+            <span className="text-white/40 block text-[10px] uppercase">Queue Channel</span>
+            <span className="text-emerald-400 font-mono">AgentBus (crawl_queue)</span>
+          </div>
+          <div className="border border-white/10 bg-black/40 p-3">
+            <span className="text-white/40 block text-[10px] uppercase">Deduplication</span>
+            <span className="text-white/80 font-mono">SHA-256 (Zero Redis)</span>
+          </div>
+          <div className="border border-white/10 bg-black/40 p-3">
+            <span className="text-white/40 block text-[10px] uppercase">Sandboxing</span>
+            <span className="text-gold-royal font-mono">WASI 0.2 / Leased Egress</span>
+          </div>
         </div>
       </div>
 

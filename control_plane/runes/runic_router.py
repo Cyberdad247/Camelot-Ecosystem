@@ -485,6 +485,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_forge_source",
     },
+    "//CRAWL": {
+        "knight": "bio_kinetic_swarm",
+        "description": "Dispatch native Rust crawler task with SHA-256 deduplication and AgentBus queue routing",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_crawl",
+    },
+    "//FORGE_HARNESS": {
+        "knight": "merlin_omega",
+        "description": "Invoke Merlin Native Harness Forge to generate Wasmtime/Firecracker test/service harness",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_forge_harness",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1482,6 +1496,34 @@ def _handle_forge_source(param: str, context: dict) -> dict:
     }
 
 
+def _handle_crawl(param: str, context: dict) -> dict:
+    """Dispatch native Rust crawler task (camelot-crawler)."""
+    target_url = param.strip()
+    return {
+        "action": "native_rust_crawl",
+        "knight": "bio_kinetic_swarm",
+        "crate": "camelot-crawler",
+        "url": target_url,
+        "channel": "AgentBus (crawl_queue)",
+        "dedup": "SHA-256 (Zero Redis)",
+        "status": "DISPATCHED",
+    }
+
+
+def _handle_forge_harness(param: str, context: dict) -> dict:
+    """Invoke Merlin Native Harness Forge to generate a zero-trust WASM/Rust harness."""
+    spec_target = param.strip() or "default_service"
+    return {
+        "action": "forge_native_harness",
+        "knight": "merlin_omega",
+        "crate": "camelot-harness-forge",
+        "target": spec_target,
+        "runtime": "wasmtime-wasi-0.2",
+        "seal": "ED25519_LEDGER_SEAL",
+        "status": "FORGED",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1521,6 +1563,8 @@ _HANDLERS = {
     "_handle_chamber": _handle_chamber,
     "_handle_forge_ui_dag": _handle_forge_ui_dag,
     "_handle_forge_source": _handle_forge_source,
+    "_handle_crawl": _handle_crawl,
+    "_handle_forge_harness": _handle_forge_harness,
 }
 
 
@@ -1580,6 +1624,14 @@ _RUNE_ALIASES: dict[str, str] = {
     "$implement": "//CODEX",
     "//vkg": "//FORGE",
     "//vkg_crystal": "//FORGE",
+    # Crawler & Harness Forge aliases
+    "//crawl": "//CRAWL",
+    "/crawl": "//CRAWL",
+    "$crawl": "//CRAWL",
+    "//forge_harness": "//FORGE_HARNESS",
+    "//forge-harness": "//FORGE_HARNESS",
+    "/forge-harness": "//FORGE_HARNESS",
+    "$forge-harness": "//FORGE_HARNESS",
 }
 
 
