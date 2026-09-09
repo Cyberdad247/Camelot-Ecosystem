@@ -60,18 +60,20 @@ async def _get_client() -> Optional[Any]:
     """Acquire authenticated NotebookLMClient from stored session."""
     if not NOTEBOOKLM_AVAILABLE:
         return None
+    if os.environ.get("CAMELOT_OFFLINE_CLOUDBRAIN") == "1":
+        return None
     auth_path = r"C:\Users\vizio\.notebooklm\storage_state.json"
     try:
         client = await NotebookLMClient.from_storage(path=auth_path if os.path.exists(auth_path) else None)
         return client
     except AuthError:
-        LOG.error(
+        LOG.debug(
             "[NLM] Authentication required. Run in terminal: "
             ".venv\\Scripts\\notebooklm login"
         )
         return None
     except Exception as e:
-        LOG.error(f"[NLM] Client init failed: {e}")
+        LOG.debug(f"[NLM] Client init failed: {e}")
         return None
 
 

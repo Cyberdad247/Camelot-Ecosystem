@@ -282,7 +282,9 @@ class CloudBrainConnector:
                 if res:
                     return res
                 if self.notebook_id != self.worldtree_home_id:
-                    return _nlm_query("WORLD_TREE", query)
+                    wt_res = _nlm_query("WORLD_TREE", query)
+                    if wt_res:
+                        return wt_res
             except Exception as e:
                 logging.error(f"[SDK] Query failed for {self.knight_id}: {e}")
 
@@ -292,6 +294,21 @@ class CloudBrainConnector:
                 return ws.query(query)
             except Exception as e:
                 logging.error(f"[STUB] Query failed: {e}")
+
+        # Priority 3: Sovereign Zero-Login Fallback (Local Open-Notebook Tissue)
+        if self.open_notebook_path.exists():
+            try:
+                tissues = json.loads(self.open_notebook_path.read_text(encoding="utf-8"))
+                for entry in tissues:
+                    content = entry.get("content", "")
+                    title = entry.get("title", "")
+                    if any(w.lower() in (content + " " + title).lower() for w in query.split()):
+                        return f"[{self.knight_id} Local Open-Notebook]: {title}\n{content}"
+                if tissues:
+                    latest = tissues[0]
+                    return f"[{self.knight_id} Local Open-Notebook Latest]: {latest.get('title')}\n{latest.get('content')}"
+            except Exception as e:
+                logging.warning(f"[LOCAL_FALLBACK] Open-Notebook read failed: {e}")
 
         return None
 
