@@ -46,3 +46,17 @@ Avoids "vibe-coding" by requiring agents to refer to hardcoded execution guideli
 4. **[T]IME BOUNDING:** Concrete time ballparks (e.g., "5 minutes", "15 minutes") instead of vague estimates.
 5. **[S]UPPRESS TANGENTS & WIN VISIBILITY:** Tangents isolated to separate prompts; completed wins stated with matter-of-fact clarity.
 
+## Skill: Editorial Diagram & Architecture Visualizer (`diagram-design`)
+**ID:** `skill_diagram_design_01`
+**Assigned Knight:** `SIR_BORIS` (Lead Architect) & `LADY_GUINEVERE` (Aesthetic Harmony / Luxury Minimalist Design)
+**Constraint:** `Stand-alone HTML/SVG/CSS`, `Target density 4/10`, `Editorial color discipline (Luxora Gold #D4AF37 / Obsidian #050505)`, `39 visual types`, `No messy text overlapping`.
+**Source:** `.agents/skills/diagram-design/SKILL.md`
+
+### Workflow:
+1. **[S]ELECT TYPE:** Choose precisely among 39 visual types (flowchart, sequence, ER model, state machine, quadrant, layer stack, tree, Wardley map, dependency graph).
+2. **[B]RAND TOKENS:** Enforce Camelot palette (Obsidian `#050505`, Royal Purple `#6B3FA0`, Luxora Gold `#D4AF37`, Emerald Green `#00FF66`).
+3. **[R]EDUCE DENSITY:** Keep density <= 4/10. Nodes carry distinct ideas; lines carry actual data flow.
+4. **[R]ENDER STANDALONE:** Emit self-contained HTML files with inline responsive SVG and CSS.
+5. **[V]ERIFY ACCESSIBILITY:** Verify contrast, dark/light compatibility, and crisp vector bounds.
+
+

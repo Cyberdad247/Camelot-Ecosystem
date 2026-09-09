@@ -436,6 +436,27 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_adhd",
     },
+    "//DIAGRAM": {
+        "knight": "sir_boris",
+        "description": "Editorial architecture & 39-type diagram visualizer (HTML/SVG/CSS) with brand tokens",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_diagram",
+    },
+    "//DRAW": {
+        "knight": "lady_guinevere",
+        "description": "Aesthetic diagram & schematic layout generator",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_diagram",
+    },
+    "//DIAGRAM_DESIGN": {
+        "knight": "sir_boris",
+        "description": "Alias for //DIAGRAM editorial architecture visualizer",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_diagram",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1309,6 +1330,31 @@ def _handle_adhd(param: str, context: dict) -> dict:
     }
 
 
+def _handle_diagram(param: str, context: dict) -> dict:
+    """Handle Editorial Diagram & Architecture Visualizer protocol (39 visual types)."""
+    skill_path = CAMELOT_HOME / ".agents" / "skills" / "diagram-design" / "SKILL.md"
+    diagram_type = "architecture"
+    tokens = param.strip().split()
+    if tokens:
+        diagram_type = tokens[0].lower()
+    return {
+        "action": "diagram_design",
+        "knight": "sir_boris",
+        "aesthetic_partner": "lady_guinevere",
+        "type": diagram_type,
+        "mode": "EDITORIAL_HTML_SVG",
+        "brand_palette": {
+            "obsidian": "#050505",
+            "royal_purple": "#6B3FA0",
+            "luxora_gold": "#D4AF37",
+            "emerald_green": "#00FF66"
+        },
+        "target_density": "4/10",
+        "skill_definition": str(skill_path) if skill_path.exists() else "SKILL.md",
+        "status": "ARMED",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1344,6 +1390,7 @@ _HANDLERS = {
     "_handle_go_live": _handle_go_live,
     "_handle_marketing_assimilate": _handle_marketing_assimilate,
     "_handle_adhd": _handle_adhd,
+    "_handle_diagram": _handle_diagram,
 }
 
 
@@ -1362,6 +1409,12 @@ _RUNE_ALIASES: dict[str, str] = {
     "//i-have-adhd": "//ADHD",
     "/i-have-adhd": "//ADHD",
     "/adhd": "//ADHD",
+    "$diagram": "//DIAGRAM",
+    "$draw": "//DRAW",
+    "$diagram-design": "//DIAGRAM",
+    "//diagram-design": "//DIAGRAM",
+    "/diagram": "//DIAGRAM",
+    "/draw": "//DRAW",
     # OMX aliases
     "$plan": "//OMX_PLAN",
     "$ralplan": "//OMX_PLAN",
