@@ -42,6 +42,7 @@ import { SystemLogPanel } from './SystemLogPanel';
 import { SystemCommandsPanel } from './SystemCommandsPanel';
 import { MemcastleModal } from './MemcastleModal';
 import { TwinBrainsModal } from './TwinBrainsModal';
+import { TailscaleMeshPanel } from './TailscaleMeshPanel';
 import confetti from 'canvas-confetti';
 
 interface BentoGridOverviewProps {
@@ -465,7 +466,11 @@ export const BentoGridOverview: React.FC<BentoGridOverviewProps> = ({
               </div>
             )}
           </div>
+
+          {/* Real-time Tailscale Mesh Overlay */}
+          <TailscaleMeshPanel />
         </div>
+
 
         {/* ================= RIGHT HUD COLUMN (Span 3) ================= */}
         <div className="lg:col-span-3 flex flex-col gap-4">

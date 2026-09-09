@@ -2,6 +2,17 @@
   {
     "knight_id": "SIR_BORIS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_UI_DAG",
+    "content": "{\"action\": \"forge_pwa_ecosystem_bootstrap_dag\", \"supervisor\": \"SIR_BORIS\", \"lead_implementer\": \"ANTIGRAVITY\", \"backend_architect\": \"SIR_CODEX\", \"audio_sentinel\": \"KICKBOX\", \"security_gatekeeper\": \"SIR_SENTINEL\", \"formal_auditor\": \"SIR_GIDEON\", \"brand_palette\": {\"obsidian\": \"#050505\", \"luxora_gold\": \"#D4AF37\", \"royal_purple\": \"#6B3FA0\", \"emerald_green\": \"#00FF66\"}, \"phases\": {\"Phase_0_Foundation\": {\"lead_knight\": \"LADY_GUINEVERE\", \"partner\": \"KICKBOX\", \"tasks\": [\"Design tokens\", \"Caddy + Vite PWA Shell\", \"Vendor HTMX\", \"Integrate Kickbox-audio WASM VAD\"]}, \"Phase_1_Excalibur_Gate\": {\"lead_knight\": \"SIR_SENTINEL\", \"partner\": \"SIR_GALAHAD\", \"tasks\": [\"Bio-Auth Go/Rust single round-trip\", \"QR Device Binding + Ed25519 Session\", \"Tenant Carousel lock\"]}, \"Phase_2_Desktop_Grid\": {\"lead_knight\": \"SIR_FORGE\", \"partner\": \"SIR_STITCH\", \"tasks\": [\"DesktopGrid.tsx\", \"CartridgeVault.tsx\", \"Marketplace.tsx\", \"GuildBoard.tsx\"]}, \"Phase_3_World_Tree_VKG_HUD\": {\"lead_knight\": \"WORLD_TREE\", \"partner\": \"SIR_BORIS\", \"tasks\": [\"3D WebGPU World Tree (Desktop)\", \"2D Canvas Tactical Map (S26 Mobile)\", \"SSE Telemetry via Bifrost :8095\"]}, \"Phase_4_Open_Viking_VFS\": {\"lead_knight\": \"SIR_MNEMO\", \"partner\": \"LADY_MNEMOSYNE\", \"tasks\": [\"VFS Tree Traversal API\", \"File Previewer + Metadata Panel\", \"CRDT Sync Manager\"]}, \"Phase_5_Alfred_Command_Dock\": {\"lead_knight\": \"KICKBOX\", \"partner\": \"SIR_HELIO\", \"tasks\": [\"Alfred Sprite + Gold Waveform\", \"Push-to-Talk Local VAD\", \"VPS Telephony / Aoede TTS Bridge\"]}, \"Phase_6_Twin_Brain_Node_Mgmt\": {\"lead_knight\": \"SIR_HEIMDALL\", \"partner\": \"CAMELOT_V1000\", \"tasks\": [\"Node Selector (VPS Hub / Local PC / S26)\", \"CRDT Sync Visualization\", \"Iron Wall Status\"]}, \"Phase_7_Deployment_Gideon_Gate\": {\"lead_knight\": \"SIR_GIDEON\", \"partner\": \"SIR_GALAHAD\", \"tasks\": [\"camelot-vitals convergence check\", \"Caddy Config + Security Headers\", \"VPS deployment via npx/QR\", \"Final Z3 Gideon Verification\"]}}, \"status\": \"DAG_COMPILED_AND_ROUTED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-09-09T05:57:32.632052+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "max_activation",
     "title": "MAX_ACTIVATION_SIR_BORIS",
     "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: SIR_BORIS (f7707daa-2d10-4db8-8fda-be4661a27793)",
@@ -537,16 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
     "open_viking_tether": "open_viking://worldtree/sir_boris",
     "updated_at": "2026-08-24T17:18:16.392081+00:00"
-  },
-  {
-    "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//BOOT",
-    "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-24T17:15:56.724459+00:00"
   }
 ]

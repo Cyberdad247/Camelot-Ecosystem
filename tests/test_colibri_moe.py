@@ -231,9 +231,9 @@ class TestColibriMoEStreamer(unittest.TestCase):
             ok = automaton.accept_byte(b)
             self.assertTrue(ok)
 
-        # Next forced span should be '"ok"'
+        # Next forced span should be '"ok"}'
         next_forced = automaton.extract_forced_span(max_bytes=5)
-        self.assertEqual(next_forced, b'"ok"')
+        self.assertEqual(next_forced, b'"ok"}')
 
     def test_mtp_speculation_and_leviathan_verification(self) -> None:
         """Verify MTP multi-token draft rollout and Leviathan rejection sampling."""

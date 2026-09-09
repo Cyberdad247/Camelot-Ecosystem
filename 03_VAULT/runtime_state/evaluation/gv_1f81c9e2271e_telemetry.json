@@ -1,0 +1,27 @@
+{
+  "verdict_id": "gv_1f81c9e2271e",
+  "task_id": "task_bbf8b95f0b28",
+  "correlation_id": "cor_360f22ac1150",
+  "verdict": "pass",
+  "candidate": "pwa_ecosystem_release_v1",
+  "weighted_score": 0.9735,
+  "dimensions": {
+    "correctness": 0.96,
+    "security": 0.99,
+    "path_scope": 1.0,
+    "test_validity": 0.95,
+    "efficiency": 0.95
+  },
+  "suites_evaluated": [
+    "unit",
+    "fuzzing",
+    "vfs_containment",
+    "lease_boundary"
+  ],
+  "sandbox_runtime": "camelot-wasmtime-wasi0.2",
+  "memory_rss_mb": 24.5,
+  "elapsed_ms": 0.31,
+  "promotion_eligible": true,
+  "hitl_approval_required": true,
+  "issued_at": "2026-09-09T06:00:53.263474+00:00"
+}

@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@theme {
+  --color-luxora-gold: #D4AF37;
+  --color-luxora-gold-light: #F3E5AB;
+  --color-luxora-gold-dark: #AA820A;
+}
+
 @layer base {
   :root {
     --font-cinzel: 'Cinzel', serif;
@@ -27,12 +33,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(34, 211, 238, 0.25);
+  background: rgba(212, 175, 55, 0.35);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(34, 211, 238, 0.5);
+  background: rgba(212, 175, 55, 0.7);
 }
 
 /* HUD Bento Box styles */
@@ -49,6 +55,18 @@
   box-shadow: 0 0 24px rgba(6, 182, 212, 0.12), inset 0 0 16px rgba(34, 211, 238, 0.05);
 }
 
+.hud-panel-gold {
+  background: rgba(14, 12, 6, 0.85);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  box-shadow: 0 0 22px rgba(0, 0, 0, 0.75), inset 0 0 14px rgba(212, 175, 55, 0.06);
+}
+
+.hud-panel-gold:hover {
+  border-color: rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 26px rgba(212, 175, 55, 0.18), inset 0 0 18px rgba(212, 175, 55, 0.1);
+}
+
 .hud-panel-amber {
   background: rgba(12, 10, 18, 0.82);
   backdrop-filter: blur(16px);
@@ -61,6 +79,10 @@
 }
 
 /* Neon glow texts */
+.glow-gold {
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.7), 0 0 18px rgba(212, 175, 55, 0.35);
+}
+
 .glow-cyan {
   text-shadow: 0 0 8px rgba(34, 211, 238, 0.6), 0 0 16px rgba(34, 211, 238, 0.3);
 }
@@ -76,6 +98,7 @@
 .glow-purple {
   text-shadow: 0 0 8px rgba(192, 132, 252, 0.6), 0 0 16px rgba(192, 132, 252, 0.3);
 }
+
 
 /* Subtle scanlines effect */
 .scanlines {

@@ -24,7 +24,8 @@ def build_report(
     verdict: "Verdict",
     out_path: Path | None = None,
 ) -> Path:
-    out_path = out_path or (root / "colony_report.md")
+    out_dir = root if root.is_dir() else root.parent
+    out_path = out_path or (out_dir / "colony_report.md")
 
     lines: list[str] = []
 

@@ -2,6 +2,17 @@
   {
     "knight_id": "ANYA_OMEGA",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_c494c9c4d83308c6eb7dcdd1009315910733f1e29582aeeb8f3936db9167b90b",
+    "content": "Verification Run run_1788880176: ledger status\nOperator: default\nSuccess: True\nResults: {\"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"size_bytes\": 811113, \"tail\": \"| 1132 | **Harness Heartbeat** | SovereignHarness | \\u26a1 LIVE | uptime=151706s tasks=2 fail=0 probes=5/9 cells=1 |\\n| 1133 | **Harness Heartbeat** | SovereignHarness | \\u26a1 LIVE | uptime=152306s tasks=2 fail=0 probes=5/9 cells=1 |\\n| 1134 | **Harness Heartbeat** | SovereignHarness | \\u26a1 LIVE | uptime=152906s tasks=2 fail=0 probes=5/9 cells=1 || 2026-09-06T16:06:22.640489+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_BIFROST status' to Cloud Brain] | HYDRATED |\\n| 2026-09-06T16:06:22.641556+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_BIFROST status] | HYDRATED |\\n| 2026-09-06T16:06:24.087390+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_BIFROST status, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n\\n| 1135 | **Harness Heartbeat** | SovereignHarness | \\u26a1 LIVE | uptime=153506s tasks=3 fail=0 probes=5/9 cells=2 || 2026-09-08T07:54:51.328071+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//BOOT' to Cloud Brain] | HYDRATED |\\n| 2026-09-08T07:54:51.329597+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //BOOT] | HYDRATED |\\n| 2026-09-08T07:54:52.609302+00:00 | HYDRATION_MGR | HYDRATE [Intent: //BOOT, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\\n| 2026-09-08T11:13:27.659812+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_SYNC' to Cloud Brain] | HYDRATED |\\n| 2026-09-08T11:13:27.661917+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_SYNC] | HYDRATED |\\n| 2026-09-08T11:13:28.909610+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_SYNC, Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD_EMPTY] | HYDRATED |\", \"mirrors\": [{\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\training\\\\configs\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\docs\\\\PROVENANCE_LEDGER.md\", \"exists\": true, \"aligned\": false}], \"mirrors_aligned\": false}",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "updated_at": "2026-09-08T15:09:37.742550+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "max_activation",
     "title": "MAX_ACTIVATION_ANYA_OMEGA",
     "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: ANYA_OMEGA (32d38906-5ae8-4ecc-b77e-705d12c89f4a)",
@@ -537,16 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
     "open_viking_tether": "open_viking://worldtree/anya_omega",
     "updated_at": "2026-08-24T14:34:54.246707+00:00"
-  },
-  {
-    "knight_id": "ANYA_OMEGA",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_3aa920a1040c1dc4e4fcdfb3689e8cfb7c9fb5471ef57af582039b03a1293189",
-    "content": "Verification Run run_1787582090: ledger reconcile\nOperator: default\nSuccess: True\nResults: {\"status\": \"RECONCILED\", \"ledger_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\PROVENANCE_LEDGER.md\", \"mirrors\": [{\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\PROVENANCE_LEDGER.md\", \"action\": \"updated\", \"aligned\": true}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\training\\\\configs\\\\PROVENANCE_LEDGER.md\", \"action\": \"updated\", \"aligned\": true}, {\"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\docs\\\\PROVENANCE_LEDGER.md\", \"action\": \"updated\", \"aligned\": true}], \"mirrors_aligned\": true}",
-    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
-    "open_viking_tether": "open_viking://worldtree/anya_omega",
-    "updated_at": "2026-08-24T14:34:51.149075+00:00"
   }
 ]

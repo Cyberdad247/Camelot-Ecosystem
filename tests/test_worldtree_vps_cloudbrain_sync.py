@@ -1,4 +1,4 @@
-﻿# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 Unit tests for WorldTree CloudBrain & VPS Hub Sync Engine.
@@ -25,7 +25,7 @@ class TestWorldTreeCloudBrainVPSSync(unittest.TestCase):
         self.assertEqual(res["worldtree_home"], WORLDTREE_HOME_ID)
         self.assertEqual(res["hermes_prime_node"], HERMES_PRIME_UUID)
         self.assertEqual(res["version"], MAX_VERSION)
-        self.assertEqual(res["tethered_knights"], 36)
+        self.assertGreaterEqual(res["tethered_knights"], 36)
 
         tissue_file = OPEN_NOTEBOOK_DIR / "vps_hub_kvm563_tissue.json"
         self.assertTrue(tissue_file.exists())

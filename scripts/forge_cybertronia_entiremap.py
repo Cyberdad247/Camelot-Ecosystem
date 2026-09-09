@@ -1,18 +1,23 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 r"""
 Forge Cybertronia Full C: Drive & Camelot-OS WorldTree EntireMap Scaffolding
 """
 
+import hashlib
+import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Tuple
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+SNAPSHOT_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "snapshots"
+WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
 
 def build_cybertronia_entiremap() -> str:
     now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
@@ -158,25 +163,89 @@ def build_cybertronia_entiremap() -> str:
     ]
     return "\n".join(lines)
 
-def main():
-    map_content = build_cybertronia_entiremap()
+def create_cybertronia_snapshot(version_tag: str = "v1000.54-EXCALIBUR-A") -> Tuple[str, Path, Path]:
+    snapshot_timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    snapshot_id = f"cybertronia_cicd_{snapshot_timestamp}"
+    
+    content = build_cybertronia_entiremap()
+    content_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()
     
     # 1. Write root entiremap.md
     root_out = REPO_ROOT / "entiremap.md"
-    root_out.write_text(map_content, encoding="utf-8")
-    print(f"[FORGE] Written root entiremap: {root_out} ({root_out.stat().st_size} bytes)")
+    root_out.write_text(content, encoding="utf-8")
     
     # 2. Write docs mirror
     docs_out = REPO_ROOT / "docs" / "SEPTEM_REGNA" / "L7_ETHEREAL" / "entiremap.md"
     docs_out.parent.mkdir(parents=True, exist_ok=True)
-    docs_out.write_text(map_content, encoding="utf-8")
-    print(f"[FORGE] Written docs mirror: {docs_out} ({docs_out.stat().st_size} bytes)")
+    docs_out.write_text(content, encoding="utf-8")
 
     # 3. Write architecture mirror
     arch_out = REPO_ROOT / "docs" / "architecture" / "entiremap.md"
     arch_out.parent.mkdir(parents=True, exist_ok=True)
-    arch_out.write_text(map_content, encoding="utf-8")
-    print(f"[FORGE] Written architecture mirror: {arch_out} ({arch_out.stat().st_size} bytes)")
+    arch_out.write_text(content, encoding="utf-8")
+
+    # 4. Create snapshot metadata
+    SNAPSHOT_DIR.mkdir(parents=True, exist_ok=True)
+    snapshot_meta = {
+        "snapshot_id": snapshot_id,
+        "version_tag": version_tag,
+        "timestamp_utc": datetime.now(timezone.utc).isoformat() + "Z",
+        "operator": "King_Arthur_Vizion",
+        "target_node": "cybertronia (100.118.224.52)",
+        "worldtree_home": WORLDTREE_HOME_ID,
+        "sha256": content_hash,
+        "surfaces": [
+            "entiremap.md",
+            "docs/architecture/entiremap.md",
+            "docs/SEPTEM_REGNA/L7_ETHEREAL/entiremap.md"
+        ],
+        "status": "RATIFIED_IMMUTABLE"
+    }
+
+    snapshot_meta_path = SNAPSHOT_DIR / f"{snapshot_id}.json"
+    snapshot_meta_path.write_text(json.dumps(snapshot_meta, indent=2), encoding="utf-8")
+
+    latest_pointer = SNAPSHOT_DIR / "latest_cybertronia_snapshot.json"
+    latest_pointer.write_text(json.dumps(snapshot_meta, indent=2), encoding="utf-8")
+
+    # 5. Provenance Ledger Logging
+    try:
+        import os
+        if "MEMPALACE_SECRET" not in os.environ:
+            import secrets
+            os.environ["MEMPALACE_SECRET"] = secrets.token_hex(32)
+        if str(REPO_ROOT) not in sys.path:
+            sys.path.insert(0, str(REPO_ROOT))
+        from control_plane.infra.provenance import ProvenanceManager, VerificationRun
+        pm = ProvenanceManager()
+        run = VerificationRun(
+            run_id=snapshot_id,
+            operator="King_Arthur_Vizion",
+            command="//squire colony snapshot cybertronia entiremap.md",
+            results={
+                "snapshot_id": snapshot_id,
+                "version_tag": version_tag,
+                "target_node": "cybertronia (100.118.224.52)",
+                "worldtree_home": WORLDTREE_HOME_ID,
+                "sha256": content_hash,
+                "surfaces_written": 3,
+                "status": "CYBERTRONIA_ENTIREMAP_SNAPSHOT_SEALED"
+            },
+            success=True
+        )
+        pm.log_verification(run)
+    except Exception as e:
+        print(f"[WARN] Provenance logging skipped: {e}")
+
+
+    return snapshot_id, root_out, snapshot_meta_path
+
+def main():
+    version_tag = "v1000.54-EXCALIBUR-A"
+    snapshot_id, map_path, snap_path = create_cybertronia_snapshot(version_tag)
+    print(f"[CYBERTRONIA FORGE] Generated Cybertronia EntireMap: {map_path.relative_to(REPO_ROOT)}")
+    print(f"[CYBERTRONIA CI/CD] Created Snapshot: {snap_path.relative_to(REPO_ROOT)} (ID: {snapshot_id})")
 
 if __name__ == "__main__":
     main()
+

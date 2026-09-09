@@ -63,3 +63,10 @@ Call log:
   - Page.wait_for_timeout: Target page, context or browser has been closed
 - Learning: Caught unhandled exception in main loop.
 - Proposed Mutation: Patch affected path and implement guardrail for: Page.wait_for_timeout: Target page, context or browser has been closed
+---
+## 2026-09-08T15:09:19.254322+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.

@@ -280,8 +280,25 @@ export const SOVEREIGN_LAWS: SovereignLaw[] = [
     enforcement: 'Full containment of stochastic generative output behind deterministic validation firewalls.',
     status: 'ENFORCED',
     axiom: 'AI proposes; the Sovereign OS disposes.'
+  },
+  {
+    id: 9,
+    title: 'Anya Law Arch-Sovereignty & Operator Hierarchy',
+    description: 'Enforces the unalterable sovereignty chain: King Arthur (VaShawn O. Head / Vizion) -> ANYA_OMEGA -> Symbollect (Runic/Cognitive Lattice) -> Knights of the Round Table (Boris, Merlin, Forge, Codex, Sentinel, Hermes, Helio, Lakisha).',
+    enforcement: 'Intent routes downward; synthesized execution telemetry/evidence flows directly back in reverse to King Arthur.',
+    status: 'ENFORCED',
+    axiom: 'Zero-trust alignment and sovereign operator authority must never break.'
+  },
+  {
+    id: 10,
+    title: 'Cyberdad247 Sovereign Mesh Inventory & Bifrost Peering',
+    description: 'Maintains active Tailscale peering across all 8 nodes: cybertronia (100.118.224.52), vashawns-s26-ultra (100.106.246.126 / Excalibur Command Center), KVM563/vps3573819 (162.35.107.134 / 100.71.218.75 / Camelot-OS Hub), fothers-camelot (100.121.48.50), lakesha (100.100.155.55), camelot-relay-modal (100.84.98.39), kba-services (100.71.218.75), and motorola-moto-g-power (100.89.129.105).',
+    enforcement: 'Continuous mTLS handshake, Bifrost Mesh route validation, and automatic heartbeat verification.',
+    status: 'ENFORCED',
+    axiom: 'The sovereign mesh spans mobile, local workstation, secondary nodes, and cloud control plane seamlessly.'
   }
 ];
+
 
 export const BOOTSTRAP_PHASES: BootstrapPhase[] = [
   {
@@ -901,7 +918,7 @@ export const CAMELOT_SERVICES: CamelotService[] = [
 
 export const INITIAL_VITALS: SystemVitals = {
   targetHost: '162.35.107.134',
-  hostAlias: 'Cybertronia Hub',
+  hostAlias: 'Camelot-OS Hub & Control Plane (KVM563 / vps3573819)',
   os: 'Ubuntu 24.04.1 LTS (Noble Numbat)',
   kernel: 'Linux 6.8.0-40-generic x86_64',
   cgroups: 'cgroups v2 (Unified Hierarchy)',
@@ -910,8 +927,8 @@ export const INITIAL_VITALS: SystemVitals = {
   kernelReserveMB: 820,
   usedRamMB: 4892,
   tailscaleStatus: 'CONNECTED',
-  tailscaleIp: '100.112.44.89',
-  tailscaleTag: 'tag:vps',
+  tailscaleIp: '100.71.218.75',
+  tailscaleTag: 'tag:vps-hub',
   gideonConvergence: 'CONVERGED',
   caddyStatus: 'ONLINE',
   caddyDomain: 'camelot.invisionedmarketing.com',
@@ -919,6 +936,7 @@ export const INITIAL_VITALS: SystemVitals = {
   wal2LedgerTxCount: 849,
   uptimeSeconds: 14820
 };
+
 
 export const SAMPLE_AGENTS: {
   id: AgentMission['agentId'];

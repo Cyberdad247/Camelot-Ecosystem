@@ -2,6 +2,72 @@
   {
     "knight_id": "SIR_CODEX",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_0",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_0\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-09T05:57:35.666564+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ADHD stop",
+    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": false, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"DISARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-09T03:56:47.165231+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ADHD",
+    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-09T03:56:44.206754+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ADHD",
+    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-09T03:56:41.561738+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ADHD",
+    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-09T03:56:38.856391+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//ADHD",
+    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-09T03:56:11.293039+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "max_activation",
     "title": "MAX_ACTIVATION_SIR_CODEX",
     "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: SIR_CODEX (8c656cfa-a189-409e-a72d-07692a47f17e)",

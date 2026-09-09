@@ -44,9 +44,14 @@ def main():
     parser.add_argument("--sync", action="store_true", help="Synchronize CloudBrain & WorldTree Max Version")
     parser.add_argument("--scan", action="store_true", help="Run Squire Colony codebase intelligence scan")
     parser.add_argument("--status", action="store_true", default=False, help="Display master node status")
+    parser.add_argument("--always-on", nargs="?", const="status", choices=["status", "start", "tick", "install", "uninstall"],
+                        help="Manage Cybertronia Always-On Engine (status, start, tick, install, uninstall)")
     args = parser.parse_args()
 
-    if args.hud:
+    if args.always_on:
+        always_on_script = REPO_ROOT / "control_plane" / "infra" / "cybertronia_always_on.py"
+        subprocess.run([sys.executable, str(always_on_script), args.always_on])
+    elif args.hud:
         hud_script = REPO_ROOT / "control_plane" / "cli" / "knight_hud.py"
         subprocess.run([sys.executable, str(hud_script)])
     elif args.tuneup:
@@ -74,11 +79,12 @@ def main():
         print(f"• 36 Knights Status    : 100% Tethered & Matched to Max Version")
         print("=" * 85)
         print("Available Commands:")
-        print("   python bin/cybertronia.py --hud     : Live 36-Knight Sovereign REPL HUD")
-        print("   python bin/cybertronia.py --tuneup  : One-Command Daily System Tuneup")
-        print("   python bin/cybertronia.py --vps     : Query & SSH to Camelot Hub VPS")
-        print("   python bin/cybertronia.py --sync    : Synchronize CloudBrain & WorldTree")
-        print("   python bin/cybertronia.py --scan    : Check Squire Colony Intelligence")
+        print("   python bin/cybertronia.py --hud       : Live 36-Knight Sovereign REPL HUD")
+        print("   python bin/cybertronia.py --tuneup    : One-Command Daily System Tuneup")
+        print("   python bin/cybertronia.py --vps       : Query & SSH to Camelot Hub VPS")
+        print("   python bin/cybertronia.py --sync      : Synchronize CloudBrain & WorldTree")
+        print("   python bin/cybertronia.py --scan      : Check Squire Colony Intelligence")
+        print("   python bin/cybertronia.py --always-on : Always-On Daemon Mesh Supervisor & Telemetry")
         print("=" * 85)
 
 if __name__ == "__main__":
