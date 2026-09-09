@@ -457,6 +457,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_diagram",
     },
+    "//CHAMBER": {
+        "knight": "sir_gideon",
+        "description": "Hyperbolic Chamber evaluation simulator: adversarial sandbox test + Gideon verdict emission",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_chamber",
+    },
+    "//EVAL": {
+        "knight": "sir_gideon",
+        "description": "Alias for //CHAMBER evaluation simulator",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_chamber",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1355,6 +1369,30 @@ def _handle_diagram(param: str, context: dict) -> dict:
     }
 
 
+def _handle_chamber(param: str, context: dict) -> dict:
+    """Handle Hyperbolic Chamber evaluation simulator execution (Wasmtime sandbox + Gideon verdict)."""
+    try:
+        from control_plane.runners.evaluation_chamber_runner import execute_evaluation_run
+        verdict_wrapper = execute_evaluation_run(param)
+        return {
+            "action": "cartridge_evaluation_simulation",
+            "knight": "sir_gideon",
+            "chamber_supervisor": "sir_boris",
+            "param": param,
+            "verdict": verdict_wrapper.get("verdict", {}),
+            "telemetry": verdict_wrapper.get("telemetry", {}),
+            "status": "COMPLETED",
+        }
+    except Exception as exc:
+        logger.error("Chamber evaluation execution failed: %s", exc)
+        return {
+            "action": "cartridge_evaluation_simulation",
+            "knight": "sir_gideon",
+            "error": str(exc),
+            "status": "FAILED",
+        }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1391,6 +1429,7 @@ _HANDLERS = {
     "_handle_marketing_assimilate": _handle_marketing_assimilate,
     "_handle_adhd": _handle_adhd,
     "_handle_diagram": _handle_diagram,
+    "_handle_chamber": _handle_chamber,
 }
 
 
@@ -1415,6 +1454,12 @@ _RUNE_ALIASES: dict[str, str] = {
     "//diagram-design": "//DIAGRAM",
     "/diagram": "//DIAGRAM",
     "/draw": "//DRAW",
+    "$chamber": "//CHAMBER",
+    "//chamber": "//CHAMBER",
+    "/chamber": "//CHAMBER",
+    "$eval": "//EVAL",
+    "//eval": "//EVAL",
+    "/eval": "//EVAL",
     # OMX aliases
     "$plan": "//OMX_PLAN",
     "$ralplan": "//OMX_PLAN",

@@ -1,0 +1,41 @@
+﻿[Unit]
+Description=Camelot-OS Engineering Cartridge Evaluation Simulator (Hyperbolic Chamber)
+Documentation=https://camelot-os.dev/contracts/gideon-verdict.schema.json
+After=network.target local-fs.target
+Wants=local-fs.target
+
+[Service]
+Type=simple
+User=camelot
+Group=camelot
+WorkingDirectory=/opt/Camelot-Ecosystem
+ExecStart=/usr/bin/python3 -m control_plane.runners.evaluation_chamber_runner --daemon
+Restart=on-failure
+RestartSec=3s
+Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+Environment=PYTHONUNBUFFERED=1
+Environment=CAMELOT_EVAL_SANDBOX=wasmtime
+
+# Hard Isolation & Scarcity Constraints (cgroups v2)
+MemoryAccounting=true
+MemoryMax=512M
+MemoryHigh=448M
+CPUAccounting=true
+CPUQuota=75%
+TasksAccounting=true
+TasksMax=64
+
+# Security Hardening
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=true
+CapabilityBoundingSet=
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictNamespaces=true
+RestrictRealtime=true
+ReadWritePaths=/opt/Camelot-Ecosystem/03_VAULT/runtime_state/evaluation /tmp
+
+[Install]
+WantedBy=multi-user.target
