@@ -16,11 +16,13 @@ import { StreamingTab } from './tabs/StreamingTab';
 import { VentureTab } from './tabs/VentureTab';
 import { DesktopGrid } from './DesktopGrid';
 import { AlfredCommandDock } from './AlfredCommandDock';
+import { TwinBrainNodeManager } from './TwinBrainNodeManager';
 import { ThemeToggle } from './ThemeToggle';
 
 const TABS = [
   'Overview',
   'Desktop Grid',
+  'Twin-Brain Nodes',
   'Excalibur',
   'Knights',
   'Properties',
@@ -97,6 +99,7 @@ export function Dashboard() {
         <main className="px-10">
           {active === 'Overview' && <OverviewTab />}
           {active === 'Desktop Grid' && <DesktopGrid />}
+          {active === 'Twin-Brain Nodes' && <TwinBrainNodeManager />}
           {active === 'Excalibur' && <ExcaliburCommandCenterTab />}
           {active === 'Knights' && <KnightsTab />}
           {active === 'Properties' && <PropertiesTab />}
