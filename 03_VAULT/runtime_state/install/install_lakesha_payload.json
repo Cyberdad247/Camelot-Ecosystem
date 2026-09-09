@@ -1,0 +1,9 @@
+{
+  "v": "v1000.5",
+  "target": "kba",
+  "mode": "online",
+  "hash": "sha256:218b8ad58a2cf85a399f079763d00cc29f8bd697ebef98e9ce9cba783ffd136c",
+  "sig": "ed25519:0xARTHUR_SOVEREIGN_SEAL_STUB",
+  "cmd": "npx @camelot/install --target kba",
+  "timestamp": "2026-09-03T08:56:13.155278+00:00"
+}

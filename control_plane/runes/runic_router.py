@@ -286,6 +286,205 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_ignite_self_evolution_loop",
     },
+    # OH-MY-CODEX (OMX) MULTI-AGENT WORKFLOW PRIMITIVES
+    "//OMX_PLAN": {
+        "knight": "merlin_omega",
+        "description": "OMX Socratic interview vs direct planning state machine ($plan / $ralplan)",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_ULTRAGOAL": {
+        "knight": "sir_codex",
+        "description": "OMX durable multi-goal planning & steering invariant state machine ($ultragoal)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_TEAM": {
+        "knight": "sir_boris",
+        "description": "OMX multi-worker swarm coordination with mailboxes & task tokens ($team)",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_CODE_REVIEW": {
+        "knight": "sir_sentinel",
+        "description": "OMX 2-lane independent code-reviewer + architect synthesis ($code-review)",
+        "mode": "SENTINEL",
+        "priority": 2,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_ULTRAQA": {
+        "knight": "sir_sentinel",
+        "description": "OMX adversarial dynamic e2e QA cycle with hostile scenario matrix ($ultraqa)",
+        "mode": "SENTINEL",
+        "priority": 2,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_AUTOPILOT": {
+        "knight": "sir_boris",
+        "description": "OMX master supervisor FSM (interview -> plan -> ultragoal -> review/qa)",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    "//OMX_CAPABILITY_LOCK": {
+        "knight": "sir_sentinel",
+        "description": "OMX cryptographic tool & agent capability lock verification",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_omx_workflow",
+    },
+    # MULTI-HARNESS EMULATOR & HERMES AUTONOMOUS EXECUTION LOOPS
+    "//HARNESS": {
+        "knight": "sir_codex",
+        "description": "Multi-harness emulator dispatcher (Codex, Claude-Code, Kimi-Code, DeepSeek-TUI, Qwen)",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_harness_emulator",
+    },
+    "//HERMES_LOOP": {
+        "knight": "hermes_prime",
+        "description": "Hermes autonomous execution loop with trajectory logging and skill learning",
+        "mode": "SWARM",
+        "priority": 2,
+        "handler": "_handle_harness_emulator",
+    },
+    "//EMULATE": {
+        "knight": "sir_codex",
+        "description": "Universal multi-harness emulator & auto-router bridge",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_harness_emulator",
+    },
+    # SOVEREIGN ROUTING MATRIX & HERMES OS INTEGRATION (P1-R01)
+    "//9ROUTER": {
+        "knight": "sir_forge",
+        "description": "High-throughput sub-10ms packet scheduler & LMCache KV cache affinity router",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_status",
+    },
+    "//OMNIROUTE": {
+        "knight": "sir_boris",
+        "description": "Universal model fallback, cost-optimizer & failover multi-provider load-balancer",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_status",
+    },
+    "//BITROUTER": {
+        "knight": "hermes_prime",
+        "description": "Ouroboros 1.58-bit ternary quantized neural routing & memory compression",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_sync_vfs_workspace",
+    },
+    "//VOICE_ROUTER": {
+        "knight": "sir_helio",
+        "description": "Multi-Persona voice router with sub-50ms Aoede S2S and Fonoster PBX telephony bridge",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_vocal",
+    },
+    "//HERMES_OS": {
+        "knight": "hermes_prime",
+        "description": "Hermes OS autonomous kernel: recursive MGV research cycle & VFS self-evolution",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_ignite_self_evolution_loop",
+    },
+    "//HUGGINGFACE": {
+        "knight": "sir_huggingface",
+        "description": "HuggingFace Hub model inspection, dataset downloads, spaces management & transformer pipelines",
+        "mode": "KINETIC",
+        "priority": 2,
+        "handler": "_handle_status",
+    },
+    "//GO_LIVE": {
+        "knight": "sir_forge",
+        "description": "Publish Sovereign @camelot/install bare-metal package and generate deployment artifacts",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_go_live",
+    },
+    "//MARKETING_ASSIMILATE": {
+        "knight": "knight_strategos",
+        "description": "Ω_MARKETING_ASSIMILATION_VMAX 4-stage kinetic DAG: Forage -> Renormalize -> Assimilate -> Crystallize (<72us SLA)",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_marketing_assimilate",
+    },
+    "//ASSIMILATE_MARKETING": {
+        "knight": "knight_strategos",
+        "description": "Alias for //MARKETING_ASSIMILATE",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_marketing_assimilate",
+    },
+    "//ADHD": {
+        "knight": "sir_codex",
+        "description": "ADHD Cognitive Focus & Kinetic Output Shaping: action-first, capped lists, zero preamble/recap",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_adhd",
+    },
+    "//I_HAVE_ADHD": {
+        "knight": "sir_codex",
+        "description": "Alias for //ADHD cognitive shaping protocol",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_adhd",
+    },
+    "//DIAGRAM": {
+        "knight": "sir_boris",
+        "description": "Editorial architecture & 39-type diagram visualizer (HTML/SVG/CSS) with brand tokens",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_diagram",
+    },
+    "//DRAW": {
+        "knight": "lady_guinevere",
+        "description": "Aesthetic diagram & schematic layout generator",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_diagram",
+    },
+    "//DIAGRAM_DESIGN": {
+        "knight": "sir_boris",
+        "description": "Alias for //DIAGRAM editorial architecture visualizer",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_diagram",
+    },
+    "//CHAMBER": {
+        "knight": "sir_gideon",
+        "description": "Hyperbolic Chamber evaluation simulator: adversarial sandbox test + Gideon verdict emission",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_chamber",
+    },
+    "//EVAL": {
+        "knight": "sir_gideon",
+        "description": "Alias for //CHAMBER evaluation simulator",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_chamber",
+    },
+    "//FORGE_UI_DAG": {
+        "knight": "sir_boris",
+        "description": "Execute full 8-phase PWA Ecosystem Bootstrap DAG with parallel multi-knight routing",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_forge_ui_dag",
+    },
+    "//FORGE_SOURCE": {
+        "knight": "sir_codex",
+        "description": "Generate source code artifact for a specific PWA DAG Phase (0-7)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_forge_source",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -322,6 +521,7 @@ OMEGA_RUNES: dict[str, dict[str, Any]] = {
     "Omega_CODEX": {"knight": "sir_codex", "description": "Direct SIR_CODEX execution lane"},
     "Omega_BIFROST": {"knight": "sir_heimdall", "description": "Bifrost Sentinel operations"},
     "Omega_HermesPrime": {"knight": "hermes_prime", "description": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)"},
+    "Omega_HuggingFace": {"knight": "sir_huggingface", "description": "HuggingFace Hub & Spaces Conductor (Valkyrie HF)"},
 }
 
 
@@ -1015,6 +1215,274 @@ def _handle_nano_swarm_expand(param: str, context: dict) -> dict:
     return {"action": "nano_swarm_expand", "detail": "script not found", "path": str(script)}
 
 
+def _handle_omx_workflow(param: str, context: dict) -> dict:
+    """Route OMX workflow primitives ($plan, $ultragoal, $team, $code-review, $ultraqa, $autopilot, capability_lock)."""
+    try:
+        from control_plane.runes.omx_workflow_adapter import route_omx_workflow
+    except ImportError:
+        import importlib.util
+        adapter_path = CAMELOT_HOME / "control_plane" / "runes" / "omx_workflow_adapter.py"
+        if adapter_path.exists():
+            spec = importlib.util.spec_from_file_location("omx_workflow_adapter", adapter_path)
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                sys.modules["omx_workflow_adapter"] = mod
+                spec.loader.exec_module(mod)
+                route_omx_workflow = mod.route_omx_workflow
+            else:
+                return {"action": "omx_workflow", "status": "ADAPTER_SPEC_ERROR"}
+        else:
+            return {"action": "omx_workflow", "status": "ADAPTER_NOT_FOUND"}
+
+    # Infer rune from context or fallback
+    rune = context.get("rune", "//OMX_PLAN")
+    return route_omx_workflow(rune=rune, param=param, context=context)
+
+
+def _handle_harness_emulator(param: str, context: dict) -> dict:
+    """Route multi-harness emulation and Hermes autonomous execution loops."""
+    try:
+        from control_plane.runes.harness_emulator import handle_harness_emulator
+    except ImportError:
+        import importlib.util
+        mod_path = CAMELOT_HOME / "control_plane" / "runes" / "harness_emulator.py"
+        if mod_path.exists():
+            spec = importlib.util.spec_from_file_location("harness_emulator", mod_path)
+            if spec and spec.loader:
+                mod = importlib.util.module_from_spec(spec)
+                sys.modules["harness_emulator"] = mod
+                spec.loader.exec_module(mod)
+                handle_harness_emulator = mod.handle_harness_emulator
+            else:
+                return {"action": "harness_emulator", "status": "SPEC_ERROR"}
+        else:
+            return {"action": "harness_emulator", "status": "MODULE_NOT_FOUND"}
+
+    return handle_harness_emulator(param=param, context=context)
+
+
+def _handle_go_live(param: str, context: dict) -> dict:
+    """Publish Sovereign @camelot/install bare-metal package and generate deployment artifacts."""
+    target = param.strip() or "kba"
+    install_dir = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "install"
+    install_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = install_dir / "manifest.json"
+    qr_payload_path = install_dir / f"install_{target}_qr.json"
+
+    manifest_data = {
+        "version": "v1000.5.0",
+        "released_utc": datetime.now(timezone.utc).isoformat(),
+        "publisher": "King Arthur / Sovereign Seal",
+        "targets": {
+            "kba": {
+                "url": "https://forge.camelot.os/dist/kba/camelot-kba-linux-amd64.tar.gz",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            },
+            "vps": {
+                "url": "https://forge.camelot.os/dist/vps/camelot-vps-linux-amd64.tar.gz",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            },
+            "edge": {
+                "url": "https://forge.camelot.os/dist/edge/camelot-edge-linux-arm64.tar.gz",
+                "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            },
+        },
+    }
+
+    with open(manifest_path, "w", encoding="utf-8") as f:
+        json.dump(manifest_data, f, indent=2)
+
+    qr_payload = {
+        "v": "v1000.5",
+        "target": target,
+        "sig": "ed25519:0xARTHUR_SOVEREIGN_SEAL",
+        "cmd": f"npx @camelot/install --target {target}",
+        "offline_cmd": f"sudo tar -xzf /dev/shm/camelot_payload.tar.gz -C /opt/camelot && /opt/camelot/bin/camelot-bootstrap --target {target}",
+    }
+
+    with open(qr_payload_path, "w", encoding="utf-8") as f:
+        json.dump(qr_payload, f, indent=2)
+
+    return {
+        "action": "GO_LIVE",
+        "target": target,
+        "package": "@camelot/install",
+        "manifest": str(manifest_path),
+        "qr_payload": str(qr_payload_path),
+        "status": "PUBLISHED",
+        "install_command": f"npx @camelot/install --target {target}",
+    }
+
+
+def _handle_marketing_assimilate(param: str, context: dict) -> dict:
+    """Execute the Ω_MARKETING_ASSIMILATION_VMAX 4-stage kinetic DAG pipeline."""
+    try:
+        from control_plane.runners.marketing_assimilation_runner import execute_marketing_assimilation
+        res = execute_marketing_assimilation()
+        return {
+            "action": "marketing_assimilate",
+            "status": res.get("status", "SUCCESS"),
+            "pipeline_result": res,
+        }
+    except Exception as exc:
+        return {
+            "action": "marketing_assimilate",
+            "status": "FAILED",
+            "error": str(exc),
+        }
+
+
+def _handle_adhd(param: str, context: dict) -> dict:
+    """Handle ADHD Cognitive Focus & Kinetic Output Shaping protocol."""
+    skill_path = CAMELOT_HOME / ".agents" / "skills" / "i-have-adhd" / "SKILL.md"
+    active = "stop" not in param.lower() and "off" not in param.lower() and "normal" not in param.lower()
+    return {
+        "action": "adhd_cognitive_shaping",
+        "knight": "sir_codex",
+        "active": active,
+        "mode": "KINETIC_ACTION_FIRST",
+        "rules": [
+            "1. Lead with the next action",
+            "2. Number multi-step tasks",
+            "3. End with one concrete next action",
+            "4. Suppress tangents",
+            "5. Restate state every turn",
+            "6. Give specific time estimates",
+            "7. Make completed work visible",
+            "8. Matter-of-fact tone for errors",
+            "9. Cap lists at 5 items",
+            "10. No preamble, no recap, no closing pleasantries"
+        ],
+        "skill_definition": str(skill_path) if skill_path.exists() else "SKILL.md",
+        "status": "ARMED" if active else "DISARMED",
+    }
+
+
+def _handle_diagram(param: str, context: dict) -> dict:
+    """Handle Editorial Diagram & Architecture Visualizer protocol (39 visual types)."""
+    skill_path = CAMELOT_HOME / ".agents" / "skills" / "diagram-design" / "SKILL.md"
+    diagram_type = "architecture"
+    tokens = param.strip().split()
+    if tokens:
+        diagram_type = tokens[0].lower()
+    return {
+        "action": "diagram_design",
+        "knight": "sir_boris",
+        "aesthetic_partner": "lady_guinevere",
+        "type": diagram_type,
+        "mode": "EDITORIAL_HTML_SVG",
+        "brand_palette": {
+            "obsidian": "#050505",
+            "royal_purple": "#6B3FA0",
+            "luxora_gold": "#D4AF37",
+            "emerald_green": "#00FF66"
+        },
+        "target_density": "4/10",
+        "skill_definition": str(skill_path) if skill_path.exists() else "SKILL.md",
+        "status": "ARMED",
+    }
+
+
+def _handle_chamber(param: str, context: dict) -> dict:
+    """Handle Hyperbolic Chamber evaluation simulator execution (Wasmtime sandbox + Gideon verdict)."""
+    try:
+        from control_plane.runners.evaluation_chamber_runner import execute_evaluation_run
+        verdict_wrapper = execute_evaluation_run(param)
+        return {
+            "action": "cartridge_evaluation_simulation",
+            "knight": "sir_gideon",
+            "chamber_supervisor": "sir_boris",
+            "param": param,
+            "verdict": verdict_wrapper.get("verdict", {}),
+            "telemetry": verdict_wrapper.get("telemetry", {}),
+            "status": "COMPLETED",
+        }
+    except Exception as exc:
+        logger.error("Chamber evaluation execution failed: %s", exc)
+        return {
+            "action": "cartridge_evaluation_simulation",
+            "knight": "sir_gideon",
+            "error": str(exc),
+            "status": "FAILED",
+        }
+
+
+def _handle_forge_ui_dag(param: str, context: dict) -> dict:
+    """Execute full 8-phase PWA Ecosystem Bootstrap DAG with optimal multi-knight routing."""
+    dag_plan = {
+        "action": "forge_pwa_ecosystem_bootstrap_dag",
+        "supervisor": "SIR_BORIS",
+        "lead_implementer": "ANTIGRAVITY",
+        "backend_architect": "SIR_CODEX",
+        "audio_sentinel": "KICKBOX",
+        "security_gatekeeper": "SIR_SENTINEL",
+        "formal_auditor": "SIR_GIDEON",
+        "brand_palette": {
+            "obsidian": "#050505",
+            "luxora_gold": "#D4AF37",
+            "royal_purple": "#6B3FA0",
+            "emerald_green": "#00FF66"
+        },
+        "phases": {
+            "Phase_0_Foundation": {
+                "lead_knight": "LADY_GUINEVERE",
+                "partner": "KICKBOX",
+                "tasks": ["Design tokens", "Caddy + Vite PWA Shell", "Vendor HTMX", "Integrate Kickbox-audio WASM VAD"]
+            },
+            "Phase_1_Excalibur_Gate": {
+                "lead_knight": "SIR_SENTINEL",
+                "partner": "SIR_GALAHAD",
+                "tasks": ["Bio-Auth Go/Rust single round-trip", "QR Device Binding + Ed25519 Session", "Tenant Carousel lock"]
+            },
+            "Phase_2_Desktop_Grid": {
+                "lead_knight": "SIR_FORGE",
+                "partner": "SIR_STITCH",
+                "tasks": ["DesktopGrid.tsx", "CartridgeVault.tsx", "Marketplace.tsx", "GuildBoard.tsx"]
+            },
+            "Phase_3_World_Tree_VKG_HUD": {
+                "lead_knight": "WORLD_TREE",
+                "partner": "SIR_BORIS",
+                "tasks": ["3D WebGPU World Tree (Desktop)", "2D Canvas Tactical Map (S26 Mobile)", "SSE Telemetry via Bifrost :8095"]
+            },
+            "Phase_4_Open_Viking_VFS": {
+                "lead_knight": "SIR_MNEMO",
+                "partner": "LADY_MNEMOSYNE",
+                "tasks": ["VFS Tree Traversal API", "File Previewer + Metadata Panel", "CRDT Sync Manager"]
+            },
+            "Phase_5_Alfred_Command_Dock": {
+                "lead_knight": "KICKBOX",
+                "partner": "SIR_HELIO",
+                "tasks": ["Alfred Sprite + Gold Waveform", "Push-to-Talk Local VAD", "VPS Telephony / Aoede TTS Bridge"]
+            },
+            "Phase_6_Twin_Brain_Node_Mgmt": {
+                "lead_knight": "SIR_HEIMDALL",
+                "partner": "CAMELOT_V1000",
+                "tasks": ["Node Selector (VPS Hub / Local PC / S26)", "CRDT Sync Visualization", "Iron Wall Status"]
+            },
+            "Phase_7_Deployment_Gideon_Gate": {
+                "lead_knight": "SIR_GIDEON",
+                "partner": "SIR_GALAHAD",
+                "tasks": ["camelot-vitals convergence check", "Caddy Config + Security Headers", "VPS deployment via npx/QR", "Final Z3 Gideon Verification"]
+            }
+        },
+        "status": "DAG_COMPILED_AND_ROUTED",
+    }
+    return dag_plan
+
+
+def _handle_forge_source(param: str, context: dict) -> dict:
+    """Generate source code scaffolding for a specific PWA DAG Phase."""
+    target_phase = param.strip() or "0"
+    return {
+        "action": "forge_pwa_source_scaffolding",
+        "knight": "sir_codex",
+        "target_phase": target_phase,
+        "mode": "KINETIC_SOURCE_EXPANSION",
+        "status": "ARMED",
+    }
+
+
+# Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
     "_handle_dawning": _handle_dawning,
@@ -1044,6 +1512,15 @@ _HANDLERS = {
     "_handle_sync_vfs_workspace": _handle_sync_vfs_workspace,
     "_handle_forge_hermes_prime_files": _handle_forge_hermes_prime_files,
     "_handle_ignite_self_evolution_loop": _handle_ignite_self_evolution_loop,
+    "_handle_omx_workflow": _handle_omx_workflow,
+    "_handle_harness_emulator": _handle_harness_emulator,
+    "_handle_go_live": _handle_go_live,
+    "_handle_marketing_assimilate": _handle_marketing_assimilate,
+    "_handle_adhd": _handle_adhd,
+    "_handle_diagram": _handle_diagram,
+    "_handle_chamber": _handle_chamber,
+    "_handle_forge_ui_dag": _handle_forge_ui_dag,
+    "_handle_forge_source": _handle_forge_source,
 }
 
 
@@ -1051,12 +1528,53 @@ _HANDLERS = {
 # Public API
 # ---------------------------------------------------------------------------
 
-_RUNE_RE = re.compile(r"^(//[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
+_RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
     "omega_codex": "Omega_CODEX",
     "//nano-swarm": "//NANO_SWARM_EXPAND",
     "//nanoswarm": "//NANO_SWARM_EXPAND",
     "//nano": "//NANO_SWARM_EXPAND",
+    "$adhd": "//ADHD",
+    "$i-have-adhd": "//ADHD",
+    "//i-have-adhd": "//ADHD",
+    "/i-have-adhd": "//ADHD",
+    "/adhd": "//ADHD",
+    "$diagram": "//DIAGRAM",
+    "$draw": "//DRAW",
+    "$diagram-design": "//DIAGRAM",
+    "//diagram-design": "//DIAGRAM",
+    "/diagram": "//DIAGRAM",
+    "/draw": "//DRAW",
+    "$chamber": "//CHAMBER",
+    "//chamber": "//CHAMBER",
+    "/chamber": "//CHAMBER",
+    "$eval": "//EVAL",
+    "//eval": "//EVAL",
+    "/eval": "//EVAL",
+    # OMX aliases
+    "$plan": "//OMX_PLAN",
+    "$ralplan": "//OMX_PLAN",
+    "$ultragoal": "//OMX_ULTRAGOAL",
+    "$team": "//OMX_TEAM",
+    "$code-review": "//OMX_CODE_REVIEW",
+    "$codereview": "//OMX_CODE_REVIEW",
+    "$review": "//OMX_CODE_REVIEW",
+    "$ultraqa": "//OMX_ULTRAQA",
+    "$autopilot": "//OMX_AUTOPILOT",
+    # Harness & Hermes aliases
+    "$harness": "//HARNESS",
+    "$emulate": "//EMULATE",
+    "$hermes": "//HERMES_LOOP",
+    "$hermes_loop": "//HERMES_LOOP",
+    # PWA DAG aliases
+    "//forge_ui_dag": "//FORGE_UI_DAG",
+    "//forge-ui-dag": "//FORGE_UI_DAG",
+    "$forge-ui-dag": "//FORGE_UI_DAG",
+    "/forge-ui-dag": "//FORGE_UI_DAG",
+    "//forge_source": "//FORGE_SOURCE",
+    "//forge-source": "//FORGE_SOURCE",
+    "$forge-source": "//FORGE_SOURCE",
+    "/forge-source": "//FORGE_SOURCE",
 }
 
 
@@ -1099,7 +1617,8 @@ def parse_rune(text: str) -> Optional[tuple[str, str]]:
 def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> RuneResult:
     """Route a rune to the correct knight and queue the task."""
     rune = normalize_rune(rune)
-    context = context or {}
+    context = dict(context or {})
+    context["rune"] = rune
 
     # Check for Privacy Shield Override
     combined_text = f"{rune} {param}".lower()

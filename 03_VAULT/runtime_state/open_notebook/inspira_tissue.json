@@ -1,0 +1,34 @@
+[
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "cloudbrain_expansion",
+    "title": "WORLDTREE_CLOUDBRAIN_EXPANSION_INSPIRA",
+    "content": "{\n  \"node\": \"INSPIRA\",\n  \"uuid\": \"cadfe67e-7187-472e-8bf4-8a2aded84e4e\",\n  \"role\": \"HiveIDE / Inspira Spatial Developer Workstation\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/inspira/\",\n  \"status\": \"EXPANDED_SYNCHRONIZED\",\n  \"synchronized_with\": [\n    \"CAMELOT_V1000\",\n    \"INSPIRA_HIVE_IDE\",\n    \"UI_UX_MASTERY\"\n  ]\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "synced_at": "2026-09-08T08:10:44.565513+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "INSPIRA WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"INSPIRA\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"cadfe67e-7187-472e-8bf4-8a2aded84e4e\", \"vfs_path\": \"vfs://worldtree/knights/inspira/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_INSPIRA\", \"open_viking_node\": \"open_viking://worldtree/inspira\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\inspira_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.252043+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-08-30T16:07:09.252075+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "notebook_uuid": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",
+    "version": "v1000.54-EXCALIBUR-A",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "status": "ALIGNED_MAX_VERSION",
+    "synced_at": "2026-08-27T22:49:50.659166+00:00"
+  }
+]

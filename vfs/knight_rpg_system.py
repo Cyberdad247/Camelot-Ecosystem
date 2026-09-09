@@ -11,10 +11,9 @@ from __future__ import annotations
 
 import json
 import logging
-import math
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict
 
 LOG = logging.getLogger("KnightRPG")
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent

@@ -1,0 +1,21 @@
+{
+  "mergeable": [
+    "origin/fix-go-module-template-11915086332059480524",
+    "origin/fix/bifrost-path-traversal-12920532030833178479",
+    "origin/fix/bifrost-secret-vulnerability-9692439515697370356",
+    "origin/fix/chaos-engineer-ssh-exec-cmd-injection-11318835194895624429",
+    "origin/fix/chat-session-message-count-6746660588984624685",
+    "origin/fix/component-template-props-16493431646273032043",
+    "origin/fix/n-plus-1-notes-11567502951563396669",
+    "origin/fix/n-plus-1-transformations-4638488964349460669",
+    "origin/fix/ruff-530-manual",
+    "origin/fix/secure-ast-eval-6446032791505160235",
+    "origin/fix/store-grounding-id-3477205575185918070",
+    "origin/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "origin/perf/limit-ledger-queries-9360251954406859550",
+    "origin/perf/optimize-get-all-data-9582424866941690986",
+    "origin/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "origin/perf/titan-ledger-get-all-data-10080314446502054566"
+  ],
+  "conflicts": []
+}

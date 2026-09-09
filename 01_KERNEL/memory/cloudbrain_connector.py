@@ -77,6 +77,8 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
     "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
     "HERMES_PRIME":        "28f89cb6-5048-4b5d-9e94-376082d24744",   # hermes_prime_vfs_forge (verified 2026-08-10)
+    "HERMES_PRIME_VFS_FORGE": "28f89cb6-5048-4b5d-9e94-376082d24744",# Hermes_prime_vfs_forge CloudBrain Node
+    "HERMES_AGENT_EVOLUTION": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",# The Hermes Agent: Evolution Beyond OpenClaw
     "SIR_LANCELOT":        "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "LADY_GUINEVERE":      "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
     "SIR_HUGGINGFACE":     "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # HuggingFace Hub & Spaces Conductor (WorldTree Tethered)
@@ -94,37 +96,51 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "KICKBOX":             "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",   # KickBox Audio
     "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
     "BIO_KINETIC_SWARM":   "93b21c40-10ff-4e89-a212-08f37b1297e1",   # Bio-Kinetic Swarm Node
+    "SIR_GIDEON":          "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Sir Gideon: Hyperbolic Chamber, Z3 & Gideon Verdict Gate
+    "INVISIONED_MARKETING":"a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Invisioned Marketing Sovereign CloudBrain (WorldTree Root Tethered)
+    "KNIGHT_STRATEGOS":    "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Knight Strategos Marketing Assimilation Node
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
-    "SIR_BORIS":           ["architecture", "crucible", "design", "review"],
-    "SIR_ALEX":            ["planning", "dag", "orchestration", "tasks"],
-    "SIR_FORGE":           ["kinetic", "build", "execution", "code"],
-    "SIR_SENTINEL":        ["security", "audit", "iron_gate", "guard"],
+    "SIR_BORIS":           ["architecture", "crucible", "design", "review", "pwa", "desktop_grid", "vkg_hud"],
+    "SIR_ALEX":            ["planning", "dag", "orchestration", "tasks", "pipeline", "execution_dag"],
+    "SIR_FORGE":           ["kinetic", "build", "execution", "code", "pwa", "compile", "desktop_grid"],
+    "SIR_SENTINEL":        ["security", "audit", "iron_gate", "guard", "bio_auth", "ed25519", "cgroups"],
     "SIR_DEBUG":           ["debug", "heal", "piv", "repair"],
     "SIR_GHOST":           ["privacy", "secrets", "air_gap", "scan"],
     "LADY_APIS":           ["research", "bashr", "foraging", "context", "bio_swarm", "eagle_audit"],
-    "MERLIN_OMEGA":        ["reasoning", "got", "tot", "deep_think", "math"],
-    "SIR_HELIO":           ["voice", "tts", "audio", "realtime"],
-    "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic"],
-    "SIR_CODEX":           ["kinetic", "rapid", "prototype", "openai"],
-    "HERMES_PRIME":        ["research", "synthesis", "vfs", "forage", "rnd", "multi_agent"],
-    "LADY_MNEMOSYNE":      ["memory", "vfs", "mnemosyne", "sweep", "brief"],
+    "MERLIN_OMEGA":        ["reasoning", "got", "tot", "deep_think", "math", "z3", "formal_verification"],
+    "SIR_HELIO":           ["voice", "tts", "audio", "realtime", "alfred", "vad", "webrtc"],
+    "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic", "waveform", "push_to_talk"],
+    "SIR_CODEX":           ["kinetic", "rapid", "prototype", "openai", "backend", "go", "rust", "desktop_grid", "pwa"],
+    "HERMES_PRIME":        ["research", "synthesis", "vfs", "forage", "rnd", "multi_agent", "hermes_agent", "ouroboros", "vps_hub"],
+    "HERMES_PRIME_VFS_FORGE": ["vfs", "forge", "soul", "harness", "research_tissue", "mgv_loop"],
+    "HERMES_AGENT_EVOLUTION": ["evolution", "openclaw_transcendence", "nous_research", "gateway", "autonomous_agent"],
+    "LADY_MNEMOSYNE":      ["memory", "vfs", "mnemosyne", "sweep", "brief", "open_viking", "crdt", "data_layer"],
     "ANYA_QUANTUM_MANTRA": ["glyph", "quantum", "vfs", "token", "compression"],
-    "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system"],
+    "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system", "twin_brain"],
     "BIO_KINETIC_SWARM":   ["bio_kinetic", "cellular_swarm", "tissue_isolation", "neural_pulse", "mitosis", "lady_apis"],
-    "SIR_HEIMDALL":        ["bifrost", "guardian", "mTLS", "boundary"],
-    "SIR_GALAHAD":         ["chivalry", "purity", "verification", "truth"],
+    "SIR_HEIMDALL":        ["bifrost", "guardian", "mTLS", "boundary", "mesh", "nodes", "sse", "twin_brain"],
+    "SIR_GALAHAD":         ["chivalry", "purity", "verification", "truth", "ed25519", "gideon"],
     "ARTHUR_OMEGA":        ["sovereign", "king", "governance", "authority"],
-    "SIR_STITCH":          ["kinematics", "micro_interactions", "ui", "patch"],
+    "SIR_STITCH":          ["kinematics", "micro_interactions", "ui", "patch", "desktop_grid", "components"],
     "SIR_ALCHEMIST":       ["transmutation", "compression", "quantization", "optimization"],
-    "SIR_RUSTCLAW":        ["rust", "image_pipeline", "kinetic", "aegis"],
+    "SIR_RUSTCLAW":        ["rust", "image_pipeline", "kinetic", "aegis", "vfs_api"],
     "ANYA_OMEGA":          ["helm", "gate", "quality", "first_law", "router"],
     "SIR_HERMES":          ["graphql", "webhooks", "courier", "dispatch"],
     "SIR_LANCELOT":        ["champion", "kinetic_edge", "frontline", "defense"],
-    "LADY_GUINEVERE":      ["harmony", "aesthetic", "interface", "design"],
+    "LADY_GUINEVERE":      ["harmony", "aesthetic", "interface", "design", "obsidian_gold_purple", "tokens", "luxury_minimalist"],
     "SIR_HUGGINGFACE":     ["hub", "spaces", "models", "embeddings"],
-    "SIR_MNEMO":           ["memory", "dual_tier", "sync", "indexing"],
+    "SIR_MNEMO":           ["memory", "dual_tier", "sync", "indexing", "crdt", "vfs_traversal"],
+    "INSPIRA":             ["ide", "developer", "spatial", "workstation", "hive_ide", "ui", "pwa_shell"],
+    "CAMELOT_MASTER":      ["codex", "construction", "master", "architecture", "system"],
+    "WORLD_TREE":          ["worldtree", "root", "knowledge_graph", "memory", "tether", "vkg_hud", "3d_webgpu", "tactical_map"],
+    "ANTIGRAVITY":         ["antigravity", "cli", "notebooklm", "mcp", "agent", "orchestration", "harness"],
+    "KICKBOX":             ["audio", "webrtc", "hud", "vocal", "voice", "kickbox_audio", "wasm_vad", "sound_engine"],
+    "SIR_GIDEON":          ["gideon", "verdict", "risk_matrix", "hyperbolic_chamber", "z3", "audit", "convergence"],
+    "FATHER_CAMELOT":      ["compass", "governance", "ancestral", "moral", "ethics"],
+    "INVISIONED_MARKETING":["marketing", "invisioned", "brand", "aeo", "geo", "seo", "ab_testing", "copywriting", "campaigns", "conversion"],
+    "KNIGHT_STRATEGOS":    ["marketing", "strategy", "assimilation", "skillgraph4", "videneptus", "growth", "advertising"],
 }
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {

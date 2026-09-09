@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Contract-suite validation for packages/contracts (Camelot-OS SADD + LLDD v1.2 §11).
 
 The v1.2 contract family is JSON Schema Draft 2020-12, published from

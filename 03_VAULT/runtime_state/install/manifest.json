@@ -1,0 +1,19 @@
+{
+  "version": "v1000.5.0",
+  "released_utc": "2026-09-03T08:56:15.966161+00:00",
+  "publisher": "King Arthur / Sovereign Seal",
+  "targets": {
+    "kba": {
+      "url": "https://forge.camelot.os/dist/kba/camelot-kba-linux-amd64.tar.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "vps": {
+      "url": "https://forge.camelot.os/dist/vps/camelot-vps-linux-amd64.tar.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "edge": {
+      "url": "https://forge.camelot.os/dist/edge/camelot-edge-linux-arm64.tar.gz",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

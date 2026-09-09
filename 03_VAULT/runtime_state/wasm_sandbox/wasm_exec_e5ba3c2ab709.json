@@ -1,0 +1,11 @@
+{
+  "execution_id": "wasm_exec_e5ba3c2ab709",
+  "tool_id": "read_public_doc",
+  "status": "VIOLATION_BLOCKED",
+  "output_data": null,
+  "error_message": "[WASI_EGRESS_BLOCKED] Outbound connection to 'malicious-domain.com' forbidden by policy.",
+  "memory_used_mb": 15.0,
+  "duration_ms": 0.06,
+  "transcript_hash": "sha256:6cf3c4f19e73a6d83214fc02283241225b8dcc2bbab034314e2fd892fe2b4a34",
+  "executed_at": "2026-08-31T21:31:16.057969+00:00"
+}

@@ -101,17 +101,22 @@ def build_index(records: Iterable[FileRecord]) -> ColonyIndex:
         patterns = _SYMBOL_PATTERNS.get(rec.ext, [])
         if not patterns:
             continue
-        text = rec.read_text()
-        for pat in patterns:
-            kind = _kind_from_pattern(pat)
-            for m in pat.finditer(text):
-                line = text[: m.start()].count("\n") + 1
-                idx.symbols.append(SymbolEntry(
-                    name=m.group(1),
-                    kind=kind,
-                    file=rec.rel,
-                    line_hint=line,
-                ))
+        try:
+            text = rec.read_text()
+            if not text:
+                continue
+            for pat in patterns:
+                kind = _kind_from_pattern(pat)
+                for m in pat.finditer(text):
+                    line = text[: m.start()].count("\n") + 1
+                    idx.symbols.append(SymbolEntry(
+                        name=m.group(1),
+                        kind=kind,
+                        file=rec.rel,
+                        line_hint=line,
+                    ))
+        except Exception:
+            pass
 
     idx.stats = {
         "total_files": len(idx.files),

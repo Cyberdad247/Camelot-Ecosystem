@@ -59,6 +59,10 @@ describe('operator contracts', () => {
       policyClass: 'engineering.write',
       expiresAt: '2026-08-14T14:05:00Z',
       oneTimeNonce: 'opaque-random-value',
+      // v1.2 fields per §5.5/§11.1 of the SADD
+      effectClass: 'workspace.patch',
+      declaredRiskTier: 'T2',
+      declarationHash: 'sha256:' + 'a'.repeat(64),
     };
     expect(EffectManifestSchema.parse(manifest).policyClass).toBe('engineering.write');
   });

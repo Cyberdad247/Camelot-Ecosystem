@@ -1,0 +1,27 @@
+{
+  "verdict_id": "gv_74071ba0d60e",
+  "task_id": "task_3ef8948277d0",
+  "correlation_id": "cor_2bcc9400bde8",
+  "verdict": "block",
+  "candidate": "candidate_rogue_v1",
+  "weighted_score": 0.775,
+  "dimensions": {
+    "correctness": 0.9,
+    "security": 0.8,
+    "path_scope": 0.5,
+    "test_validity": 0.8,
+    "efficiency": 0.8
+  },
+  "suites_evaluated": [
+    "unit",
+    "fuzzing",
+    "vfs_containment",
+    "lease_boundary"
+  ],
+  "sandbox_runtime": "camelot-wasmtime-wasi0.2",
+  "memory_rss_mb": 24.5,
+  "elapsed_ms": 0.24,
+  "promotion_eligible": false,
+  "hitl_approval_required": true,
+  "issued_at": "2026-09-09T04:22:18.235164+00:00"
+}

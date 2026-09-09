@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 
 """Pytest fixtures for VFS preflight slice #1 Task 1."""
-import sys
 from pathlib import Path
 
 import pytest

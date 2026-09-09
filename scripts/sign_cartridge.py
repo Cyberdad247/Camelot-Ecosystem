@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: MIT
+
 """Sign and verify Camelot v1.2 cartridge manifests (§8.2 / §8.3).
 
 Implements the manifest signature policy from `packages/contracts/cartridge.schema.json`:
@@ -31,7 +33,7 @@ import json
 import sys
 from pathlib import Path
 
-from cryptography.hazmat.primitives import hashes, serialization
+from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 # Fields produced by this tool; excluded from the signed/ hashed payload.

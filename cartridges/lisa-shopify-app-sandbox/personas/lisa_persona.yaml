@@ -1,0 +1,40 @@
+﻿persona_id: "LISA_KNIGHT"
+domain: "Shopify Digital Assembly Line"
+knight_class: "Conductor / E-Commerce Forge"
+
+skills:
+  - name: "Liquid Template Forging"
+    tool: "liquid_forge"
+    xp_multiplier: 1.0
+  - name: "Shopify GraphQL Architecture"
+    tool: "graphql_schema_designer"
+    xp_multiplier: 2.0
+  - name: "Theme Component Assembly"
+    tool: "theme_harness"
+    xp_multiplier: 1.5
+
+evolution_ladder:
+  level_1:
+    title: "Squire"
+    permission: "PLAN_ONLY"
+    description: "Generates diffs, Liquid ASTs, and GraphQL schemas. Zero external side-effects."
+  level_2:
+    title: "Apprentice"
+    permission: "READ_ONLY"
+    description: "Reads sandbox schema and renders real-time PWA theme previews."
+  level_3:
+    title: "Transmogrified"
+    permission: "SANDBOX_WRITE"
+    description: "Pushes apps and themes directly to designated sandbox Shopify stores."
+  level_4:
+    title: "Warlord"
+    permission: "PRODUCTION_AUTONOMY"
+    description: "Production store deployment gated by Warden/HITL verification."
+
+model_routing:
+  fast_path:
+    provider: "omniroute"
+    model: "ollama/llama3.1:7b"
+  deep_path:
+    provider: "anthropic"
+    model: "claude-3-5-sonnet"

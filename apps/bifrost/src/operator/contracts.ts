@@ -13,6 +13,21 @@ export const EvidenceIntegritySchema = z.enum([
 ]);
 export type EvidenceIntegrity = z.infer<typeof EvidenceIntegritySchema>;
 
+/** v1.2 closed effect-class set per §5.5 of the SADD. */
+export const EffectClassSchema = z.enum([
+  'ro.fetch', 'ro.audit', 'internal.synth', 'workspace.test',
+  'workspace.patch', 'promote.worktree.merge', 'promote.deploy',
+  'external.publish.draft', 'external.publish.publish', 'external.email.send',
+  'payment.invoice.draft', 'payment.invoice.issue', 'payment.capture',
+  'payment.refund', 'device.calendar.write', 'device.sms.send',
+  'device.call.initiate', 'promote.failover',
+]);
+export type EffectClass = z.infer<typeof EffectClassSchema>;
+
+/** v1.2 risk tier per §5.5; cannot exceed Sentinel's classification. */
+export const RiskTierSchema = z.enum(['T0', 'T1', 'T2', 'T3', 'T4']);
+export type RiskTier = z.infer<typeof RiskTierSchema>;
+
 export const ActorSchema = z.object({
   id: z.string().min(1),
   role: ActorRoleSchema,
@@ -51,6 +66,10 @@ export const EffectManifestSchema = z.object({
   policyClass: z.string().min(1),
   expiresAt: z.string().min(1),
   oneTimeNonce: z.string().min(1),
+  // v1.2 fields per §5.5/§11.1 of the SADD
+  effectClass: EffectClassSchema,
+  declaredRiskTier: RiskTierSchema,
+  declarationHash: z.string().regex(/^sha256:[0-9a-fA-F]{64}$/),
 });
 export type EffectManifest = z.infer<typeof EffectManifestSchema>;
 

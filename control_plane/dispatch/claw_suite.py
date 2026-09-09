@@ -79,6 +79,15 @@ CLAW_KNIGHTS: dict[str, ClawKnight] = {
         capabilities=("zero_trust", "ip_trademark_guard", "affiliate_abuse_guard", "checkout_risk_gate"),
         safety_boundary="HUMAN_GATE required for fraud blocks, fingerprinting, and any irreversible commerce action.",
     ),
+    "lisa_knight": ClawKnight(
+        knight_id="lisa_knight",
+        title="The Shopify Digital Assembly Line",
+        function="WASM-sandboxed Liquid template forger, GraphQL schema designer, and XP-driven app builder",
+        replaces="ad hoc theme and app scripts",
+        capabilities=("liquid_forge", "graphql_schema_designer", "theme_harness", "wasm_sandboxed_assembly"),
+        safety_boundary="Plan-Only at Level 1/2. Level 3 Sandbox Write gated by XP ladder. Level 4 Production requires Warden HITL gate.",
+        evidence_class="confirmed",
+    ),
 }
 
 
@@ -167,6 +176,38 @@ def build_claw_suite_manifest(objective: str = "shopify headless ai forger") -> 
 
 
 def route_claw_suite(param: str = "", context: dict[str, Any] | None = None) -> dict[str, Any]:
+    raw = (param or "").strip()
+    if raw.lower().startswith("lisa"):
+        task_prompt = raw[4:].strip() or "Build Shopify subscription app"
+        try:
+            from cartridges.lisa_shopify_app_sandbox.core.cartridge_adapter import LisaCartridgeHost
+        except ImportError:
+            import importlib.util
+            from pathlib import Path
+            adapter_path = Path(__file__).resolve().parent.parent.parent / "cartridges" / "lisa-shopify-app-sandbox" / "core" / "cartridge_adapter.py"
+            if adapter_path.exists():
+                spec = importlib.util.spec_from_file_location("lisa_adapter", adapter_path)
+                if spec and spec.loader:
+                    import sys
+                    mod = importlib.util.module_from_spec(spec)
+                    sys.modules["lisa_adapter"] = mod
+                    spec.loader.exec_module(mod)
+                    LisaCartridgeHost = mod.LisaCartridgeHost
+                else:
+                    LisaCartridgeHost = None
+            else:
+                LisaCartridgeHost = None
+
+        if LisaCartridgeHost:
+            host = LisaCartridgeHost()
+            result = host.process_task(task_prompt, mode="dry-run")
+            return {
+                "action": "lisa_cartridge_process",
+                "suite": "CLAW",
+                "knight": "lisa_knight",
+                "execution_result": result,
+            }
+
     manifest = build_claw_suite_manifest(param or "shopify headless ai forger")
     return {
         "action": "claw_suite_manifest",

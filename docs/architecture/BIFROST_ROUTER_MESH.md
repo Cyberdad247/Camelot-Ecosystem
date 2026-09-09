@@ -37,9 +37,9 @@ These upstream heads were verified live during this integration pass:
 | Repo | HEAD | Pushed |
 |---|---|---|
 | `https://github.com/Cyberdad247/CLIProxyAPI.git` | `f8334be82755113acce3f4a9fb03adc6c1313529` | `2026-07-02T18:32:44Z` |
-| `https://github.com/Cyberdad247/OmniRoute.git` | `b729a8f27364f072c87082e03bb8e122f3d76251` | `2026-07-02T18:33:42Z` |
+| `https://github.com/diegosouzapw/OmniRoute.git` | `main` | `2026-08-25` |
 | `https://github.com/Cyberdad247/bitrouter.git` | `56b2634a94288ed5b9cfc4840e36877a70e82af4` | `2026-07-02T07:53:20Z` |
-| `https://github.com/Cyberdad247/9router.git` | `0b3c794075dd2f4148f01fbc9cd561c8d6bbdb4c` | `2026-07-02T07:52:31Z` |
+| `https://github.com/decolua/9router.git` | `main` | `2026-08-25` |
 | `https://github.com/Cyberdad247/Multivoice-router.git` | `57c7c5030628b4630b1e5f0d4cc6ad3358eebe42` | `2026-06-10T20:21:09Z` |
 
 ## Verification Gates

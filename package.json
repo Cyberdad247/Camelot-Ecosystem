@@ -24,7 +24,8 @@
     "db:migrate": "npm run migrate --workspace=@sovereign/db",
     "db:migrate:dev": "npm run migrate:dev --workspace=@sovereign/db",
     "db:seed": "npm run seed --workspace=@sovereign/db",
-    "benchmark": "npm run start --workspace=@sovereign/benchmark"
+    "benchmark": "npm run start --workspace=@sovereign/benchmark",
+    "omx:camelot": "python scripts/omx-camelot.py"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -41,6 +42,7 @@
     "vitest": "^2.1.8"
   },
   "dependencies": {
+    "@bitkyc08/opencodex": "^2.29.0",
     "@google/generative-ai": "^0.24.1",
     "@prisma/client": "^5.22.0",
     "dotenv": "^17.4.2",

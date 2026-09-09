@@ -1,0 +1,7 @@
+{
+  "v": "v1000.5",
+  "target": "lakesha",
+  "sig": "ed25519:0xARTHUR_SOVEREIGN_SEAL",
+  "cmd": "npx @camelot/install --target lakesha",
+  "offline_cmd": "sudo tar -xzf /dev/shm/camelot_payload.tar.gz -C /opt/camelot && /opt/camelot/bin/camelot-bootstrap --target lakesha"
+}

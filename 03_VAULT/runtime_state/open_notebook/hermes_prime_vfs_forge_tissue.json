@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "HERMES_PRIME_VFS_FORGE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "HERMES_PRIME_VFS_FORGE WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"HERMES_PRIME_VFS_FORGE\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"28f89cb6-5048-4b5d-9e94-376082d24744\", \"vfs_path\": \"vfs://worldtree/knights/hermes_prime_vfs_forge/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_HERMES_PRIME_VFS_FORGE\", \"open_viking_node\": \"open_viking://worldtree/hermes_prime_vfs_forge\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\hermes_prime_vfs_forge_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.976259+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime_vfs_forge/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME_VFS_FORGE",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime_vfs_forge",
+    "updated_at": "2026-08-30T16:07:08.976291+00:00"
+  }
+]

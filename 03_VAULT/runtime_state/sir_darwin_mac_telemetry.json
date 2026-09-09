@@ -1,0 +1,22 @@
+{
+  "knight": "SIR_DARWIN_MAC",
+  "spark_id": "0xDARW1N9000M4XMACEDGE9942763",
+  "target_node": "macbook-pro-3",
+  "tailscale_ip": "100.113.101.43",
+  "hardware_matrix": {
+    "platform": "macOS / Apple Silicon (ARM64)",
+    "neural_engine": "Apple Neural Engine (ANE) Ready",
+    "metal_compute": "Metal 3 / MPS Framework Active",
+    "unified_memory_target": "LPDDR5 / LPDDR5X Unified Bus",
+    "thunderbolt_ports": "Thunderbolt 4 / USB4 Ready"
+  },
+  "software_matrix": {
+    "os_kernel": "Darwin / XNU Mach Kernel",
+    "service_manager": "launchd",
+    "package_manager": "Homebrew / Nix Darwin",
+    "local_inference": "Ollama / llama.cpp / MLX Metal",
+    "shell": "zsh / bash",
+    "bifrost_protocol": "Tailscale Peer / SSH / WebSocket :8011"
+  },
+  "staged_at_utc": "2026-09-05T22:29:41.147179+00:00"
+}
