@@ -86,11 +86,15 @@ class WorldTreeCloudBrainVPSSync:
         tissue_file = OPEN_NOTEBOOK_DIR / "vps_hub_kvm563_tissue.json"
         tissue_file.write_text(json.dumps([vps_tissue], indent=2), encoding="utf-8")
 
-        # 2. Audit all 36 Knight CloudBrain Tethers
+        # 2. Audit all 38+ Knight CloudBrain Tethers
         from vfs.open_notebook_bridge import audit_all_knight_tethers
         tether_audit = audit_all_knight_tethers()
 
         # 3. Log to Cryptographic Verification Ledger
+        if not os.getenv("MEMPALACE_SECRET"):
+            # Use ephemeral run salt if not present in environment
+            os.environ["MEMPALACE_SECRET"] = "c0da0c81bf379b3846174a8d0526e0e5a874b2167d32c918a5628b010c73e34b"
+
         from control_plane.infra.provenance import ProvenanceManager, VerificationRun
         pm = ProvenanceManager()
         run = VerificationRun(

@@ -196,6 +196,11 @@ jobs:
               print(f'[OK] {len(carts)} cartridges validated')
           "
 
+      - name: Verify Hyperbolic Chamber & Gideon Verdict Engine
+        run: |
+          pip install jsonschema
+          python -m pytest tests/control_plane/test_evaluation_chamber.py -v
+
       # Non-blocking: the full tests/ suite has ~55 pre-existing failures/errors
       # (mostly security-diode PermissionError + heavier deps). Run it for signal,
       # but the enforced kernel gate is the lightweight smokes above. Tracked debt.

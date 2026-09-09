@@ -81,6 +81,21 @@ class MeshBridgeHandler(BaseHTTPRequestHandler):
                 "host": VPS_HOST,
                 "phial_engine": phial_data,
             })
+        elif self.path in ['/telemetry/cockpit', '/api/cockpit', '/excalibur/cockpit']:
+            always_on_path = os.path.join(os.path.dirname(__file__), '../../03_VAULT/runtime_state/cybertronia_always_on.json')
+            cockpit_state = {}
+            if os.path.exists(always_on_path):
+                try:
+                    with open(always_on_path, 'r', encoding='utf-8') as f:
+                        cockpit_state = json.load(f)
+                except Exception:
+                    pass
+            self._send_json({
+                "source": "cybertronia_always_on",
+                "mobile_sentinel": MOBILE_TAILSCALE_IP,
+                "cockpit": "Excalibur Command Center (S26 Ultra)",
+                "live_state": cockpit_state or {"status": "ACTIVE_SENTINEL", "host": "cybertronia"},
+            })
         elif self.path in ['/heimdall/governance', '/api/heimdall']:
             gov_path = os.path.join(os.path.dirname(__file__), '../../03_VAULT/runtime_state/heimdall_bifrost_governance_latest.json')
             gov_data = {}
