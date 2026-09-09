@@ -471,6 +471,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_chamber",
     },
+    "//FORGE_UI_DAG": {
+        "knight": "sir_boris",
+        "description": "Execute full 8-phase PWA Ecosystem Bootstrap DAG with parallel multi-knight routing",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_forge_ui_dag",
+    },
+    "//FORGE_SOURCE": {
+        "knight": "sir_codex",
+        "description": "Generate source code artifact for a specific PWA DAG Phase (0-7)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_forge_source",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1393,6 +1407,81 @@ def _handle_chamber(param: str, context: dict) -> dict:
         }
 
 
+def _handle_forge_ui_dag(param: str, context: dict) -> dict:
+    """Execute full 8-phase PWA Ecosystem Bootstrap DAG with optimal multi-knight routing."""
+    dag_plan = {
+        "action": "forge_pwa_ecosystem_bootstrap_dag",
+        "supervisor": "SIR_BORIS",
+        "lead_implementer": "ANTIGRAVITY",
+        "backend_architect": "SIR_CODEX",
+        "audio_sentinel": "KICKBOX",
+        "security_gatekeeper": "SIR_SENTINEL",
+        "formal_auditor": "SIR_GIDEON",
+        "brand_palette": {
+            "obsidian": "#050505",
+            "luxora_gold": "#D4AF37",
+            "royal_purple": "#6B3FA0",
+            "emerald_green": "#00FF66"
+        },
+        "phases": {
+            "Phase_0_Foundation": {
+                "lead_knight": "LADY_GUINEVERE",
+                "partner": "KICKBOX",
+                "tasks": ["Design tokens", "Caddy + Vite PWA Shell", "Vendor HTMX", "Integrate Kickbox-audio WASM VAD"]
+            },
+            "Phase_1_Excalibur_Gate": {
+                "lead_knight": "SIR_SENTINEL",
+                "partner": "SIR_GALAHAD",
+                "tasks": ["Bio-Auth Go/Rust single round-trip", "QR Device Binding + Ed25519 Session", "Tenant Carousel lock"]
+            },
+            "Phase_2_Desktop_Grid": {
+                "lead_knight": "SIR_FORGE",
+                "partner": "SIR_STITCH",
+                "tasks": ["DesktopGrid.tsx", "CartridgeVault.tsx", "Marketplace.tsx", "GuildBoard.tsx"]
+            },
+            "Phase_3_World_Tree_VKG_HUD": {
+                "lead_knight": "WORLD_TREE",
+                "partner": "SIR_BORIS",
+                "tasks": ["3D WebGPU World Tree (Desktop)", "2D Canvas Tactical Map (S26 Mobile)", "SSE Telemetry via Bifrost :8095"]
+            },
+            "Phase_4_Open_Viking_VFS": {
+                "lead_knight": "SIR_MNEMO",
+                "partner": "LADY_MNEMOSYNE",
+                "tasks": ["VFS Tree Traversal API", "File Previewer + Metadata Panel", "CRDT Sync Manager"]
+            },
+            "Phase_5_Alfred_Command_Dock": {
+                "lead_knight": "KICKBOX",
+                "partner": "SIR_HELIO",
+                "tasks": ["Alfred Sprite + Gold Waveform", "Push-to-Talk Local VAD", "VPS Telephony / Aoede TTS Bridge"]
+            },
+            "Phase_6_Twin_Brain_Node_Mgmt": {
+                "lead_knight": "SIR_HEIMDALL",
+                "partner": "CAMELOT_V1000",
+                "tasks": ["Node Selector (VPS Hub / Local PC / S26)", "CRDT Sync Visualization", "Iron Wall Status"]
+            },
+            "Phase_7_Deployment_Gideon_Gate": {
+                "lead_knight": "SIR_GIDEON",
+                "partner": "SIR_GALAHAD",
+                "tasks": ["camelot-vitals convergence check", "Caddy Config + Security Headers", "VPS deployment via npx/QR", "Final Z3 Gideon Verification"]
+            }
+        },
+        "status": "DAG_COMPILED_AND_ROUTED",
+    }
+    return dag_plan
+
+
+def _handle_forge_source(param: str, context: dict) -> dict:
+    """Generate source code scaffolding for a specific PWA DAG Phase."""
+    target_phase = param.strip() or "0"
+    return {
+        "action": "forge_pwa_source_scaffolding",
+        "knight": "sir_codex",
+        "target_phase": target_phase,
+        "mode": "KINETIC_SOURCE_EXPANSION",
+        "status": "ARMED",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1430,6 +1519,8 @@ _HANDLERS = {
     "_handle_adhd": _handle_adhd,
     "_handle_diagram": _handle_diagram,
     "_handle_chamber": _handle_chamber,
+    "_handle_forge_ui_dag": _handle_forge_ui_dag,
+    "_handle_forge_source": _handle_forge_source,
 }
 
 
@@ -1475,6 +1566,15 @@ _RUNE_ALIASES: dict[str, str] = {
     "$emulate": "//EMULATE",
     "$hermes": "//HERMES_LOOP",
     "$hermes_loop": "//HERMES_LOOP",
+    # PWA DAG aliases
+    "//forge_ui_dag": "//FORGE_UI_DAG",
+    "//forge-ui-dag": "//FORGE_UI_DAG",
+    "$forge-ui-dag": "//FORGE_UI_DAG",
+    "/forge-ui-dag": "//FORGE_UI_DAG",
+    "//forge_source": "//FORGE_SOURCE",
+    "//forge-source": "//FORGE_SOURCE",
+    "$forge-source": "//FORGE_SOURCE",
+    "/forge-source": "//FORGE_SOURCE",
 }
 
 
