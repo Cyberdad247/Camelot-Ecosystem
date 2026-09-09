@@ -422,6 +422,20 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_marketing_assimilate",
     },
+    "//ADHD": {
+        "knight": "sir_codex",
+        "description": "ADHD Cognitive Focus & Kinetic Output Shaping: action-first, capped lists, zero preamble/recap",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_adhd",
+    },
+    "//I_HAVE_ADHD": {
+        "knight": "sir_codex",
+        "description": "Alias for //ADHD cognitive shaping protocol",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_adhd",
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1269,6 +1283,32 @@ def _handle_marketing_assimilate(param: str, context: dict) -> dict:
         }
 
 
+def _handle_adhd(param: str, context: dict) -> dict:
+    """Handle ADHD Cognitive Focus & Kinetic Output Shaping protocol."""
+    skill_path = CAMELOT_HOME / ".agents" / "skills" / "i-have-adhd" / "SKILL.md"
+    active = "stop" not in param.lower() and "off" not in param.lower() and "normal" not in param.lower()
+    return {
+        "action": "adhd_cognitive_shaping",
+        "knight": "sir_codex",
+        "active": active,
+        "mode": "KINETIC_ACTION_FIRST",
+        "rules": [
+            "1. Lead with the next action",
+            "2. Number multi-step tasks",
+            "3. End with one concrete next action",
+            "4. Suppress tangents",
+            "5. Restate state every turn",
+            "6. Give specific time estimates",
+            "7. Make completed work visible",
+            "8. Matter-of-fact tone for errors",
+            "9. Cap lists at 5 items",
+            "10. No preamble, no recap, no closing pleasantries"
+        ],
+        "skill_definition": str(skill_path) if skill_path.exists() else "SKILL.md",
+        "status": "ARMED" if active else "DISARMED",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1303,6 +1343,7 @@ _HANDLERS = {
     "_handle_harness_emulator": _handle_harness_emulator,
     "_handle_go_live": _handle_go_live,
     "_handle_marketing_assimilate": _handle_marketing_assimilate,
+    "_handle_adhd": _handle_adhd,
 }
 
 
@@ -1316,6 +1357,11 @@ _RUNE_ALIASES: dict[str, str] = {
     "//nano-swarm": "//NANO_SWARM_EXPAND",
     "//nanoswarm": "//NANO_SWARM_EXPAND",
     "//nano": "//NANO_SWARM_EXPAND",
+    "$adhd": "//ADHD",
+    "$i-have-adhd": "//ADHD",
+    "//i-have-adhd": "//ADHD",
+    "/i-have-adhd": "//ADHD",
+    "/adhd": "//ADHD",
     # OMX aliases
     "$plan": "//OMX_PLAN",
     "$ralplan": "//OMX_PLAN",
