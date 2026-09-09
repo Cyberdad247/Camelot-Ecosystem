@@ -91,8 +91,17 @@ export function ExcaliburCommandCenterTab() {
   const [offlineQueueCount, setOfflineQueueCount] = useState(0);
   const [activeChallenge, setActiveChallenge] = useState('knight-7-round-3');
   const [dispatchStatus, setDispatchStatus] = useState<string | null>(null);
+  const [crawlerQueueSize, setCrawlerQueueSize] = useState(14);
+  const [pagesScrapedRate, setPagesScrapedRate] = useState(48.2);
+  const [activeHarnessSandboxes, setActiveHarnessSandboxes] = useState(2);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      setCrawlerQueueSize((prev) => Math.max(2, prev + (Math.random() > 0.5 ? 1 : -1)));
+      setPagesScrapedRate((prev) => Number((45 + Math.random() * 8).toFixed(1)));
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
     const timer = setInterval(() => {
       setReauthCountdown((prev) => (prev > 1 ? prev - 1 : 30));
     }, 1000);
@@ -390,18 +399,22 @@ export function ExcaliburCommandCenterTab() {
           <div className="border border-white/10 bg-black/40 p-3">
             <span className="text-white/40 block text-[10px] uppercase">Engine Crate</span>
             <span className="text-gold-light font-mono font-bold">camelot-crawler v0.1.0</span>
+            <span className="text-[10px] text-emerald-400 block mt-1">Throughput: {pagesScrapedRate} p/s</span>
           </div>
           <div className="border border-white/10 bg-black/40 p-3">
             <span className="text-white/40 block text-[10px] uppercase">Queue Channel</span>
             <span className="text-emerald-400 font-mono">AgentBus (crawl_queue)</span>
+            <span className="text-[10px] text-gold-royal block mt-1">{crawlerQueueSize} active tasks</span>
           </div>
           <div className="border border-white/10 bg-black/40 p-3">
             <span className="text-white/40 block text-[10px] uppercase">Deduplication</span>
             <span className="text-white/80 font-mono">SHA-256 (Zero Redis)</span>
+            <span className="text-[10px] text-white/50 block mt-1">SQLite WAL2 State Sync</span>
           </div>
           <div className="border border-white/10 bg-black/40 p-3">
             <span className="text-white/40 block text-[10px] uppercase">Sandboxing</span>
             <span className="text-gold-royal font-mono">WASI 0.2 / Leased Egress</span>
+            <span className="text-[10px] text-emerald-400 block mt-1">{activeHarnessSandboxes} active micro-VMs</span>
           </div>
         </div>
       </div>

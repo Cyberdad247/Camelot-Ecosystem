@@ -34,3 +34,13 @@ dead_code = "warn"
 unused_variables = "warn"
 unused_imports = "warn"
 unused_mut = "warn"
+
+[profile.dev]
+opt-level = 0
+debug = 0
+codegen-units = 1
+
+[profile.test]
+opt-level = 1
+debug = 0
+codegen-units = 1
