@@ -113,7 +113,19 @@ class ProvenanceManager:
         
         self.vault_path.mkdir(parents=True, exist_ok=True)
         self.verification_ledger = self.vault_path / "verification_ledger.jsonl"
-        self.mempalace = MemPalaceL2()
+        # MemPalace remains strict about its HMAC secret, but missing optional
+        # persistence must not prevent CLI startup or local ledger writes.
+        try:
+            self.mempalace = MemPalaceL2()
+            self.memory_status = {"state": "ready", "reason": None}
+        except RuntimeError as exc:
+            if "MEMPALACE_SECRET is not set" not in str(exc):
+                raise
+            self.mempalace = None
+            self.memory_status = {
+                "state": "degraded",
+                "reason": "MEMPALACE_SECRET is not set",
+            }
 
     def log_mission(self, record: MissionRecord):
         """Save a complete mission record to the vault."""
@@ -153,20 +165,21 @@ class ProvenanceManager:
 
         # Automatic feed into MemPalace L2
         content = f"Verification Run {run.run_id}: {run.command}\nOperator: {run.operator}\nSuccess: {run.success}\nResults: {json.dumps(run.results)}"
-        self.mempalace.store(
-            wing="camelot",
-            room="audit",
-            content=content,
-            metadata={
-                "run_id": run.run_id,
-                "operator": run.operator,
-                "command": run.command,
-                "success": run.success,
-                "entry_hash": run.entry_hash,
-                "retention_class": "SCHEMA_STATIC"  # Verification logs are high-value
-            },
-            tenant_id=run.operator
-        )
+        if self.mempalace is not None:
+            self.mempalace.store(
+                wing="camelot",
+                room="audit",
+                content=content,
+                metadata={
+                    "run_id": run.run_id,
+                    "operator": run.operator,
+                    "command": run.command,
+                    "success": run.success,
+                    "entry_hash": run.entry_hash,
+                    "retention_class": "SCHEMA_STATIC",
+                },
+                tenant_id=run.operator,
+            )
         
         return self.verification_ledger
 
