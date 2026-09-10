@@ -159,3 +159,4 @@
 {"alerts": ["Module has 1 recent remediation/failure entries."], "intent": "help me", "module_path": "CLI_CONTEXT", "relevant_count": 1, "risk_score": 0.1, "timestamp_utc": "2026-08-31 17:26 UTC"}
 {"alerts": [], "intent": "delete everything", "module_path": "CLI_CONTEXT", "relevant_count": 0, "risk_score": 0.0, "timestamp_utc": "2026-08-31 17:26 UTC"}
 {"alerts": ["Historical Security Critical (RCE/Vulnerability) detected in context.", "Module has 14 recent remediation/failure entries."], "intent": "status", "module_path": "CLI_CONTEXT", "relevant_count": 14, "risk_score": 1.0, "timestamp_utc": "2026-09-09 09:47 UTC"}
+{"alerts": ["Historical Security Critical (RCE/Vulnerability) detected in context.", "Module has 19 recent remediation/failure entries."], "intent": "cloudbrain status", "module_path": "CLI_CONTEXT", "relevant_count": 19, "risk_score": 1.0, "timestamp_utc": "2026-09-10 13:59 UTC"}

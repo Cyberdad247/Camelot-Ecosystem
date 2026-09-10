@@ -70,3 +70,17 @@ Call log:
   - MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.
 - Learning: Caught unhandled exception in main loop.
 - Proposed Mutation: Patch affected path and implement guardrail for: MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.
+---
+## 2026-09-10T17:07:51.041798+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.
+---
+## 2026-09-10T17:59:07.364832+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt HMAC drawer IDs; refusing to use a hardcoded fallback. Generate one with: python -c "import secrets; print(secrets.token_hex(32))" and export it in the environment.

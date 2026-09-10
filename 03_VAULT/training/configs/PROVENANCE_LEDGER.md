@@ -5762,3 +5762,82 @@
 | 2026-09-09T22:54:10.545941+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //FORGE_HARNESS service-auth] | HYDRATED |
 | 2026-09-09T22:54:11.905519+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //FORGE_HARNESS service-auth, Complexity: 9] | HYDRATED |
 | 2026-09-09T22:54:11.907121+00:00 | HYDRATION_MGR | HYDRATE [Intent: //FORGE_HARNESS service-auth, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD] | HYDRATED |
+
+| 900 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=60s tasks=0 fail=0 probes=7/9 cells=0 |
+| 901 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=660s tasks=0 fail=0 probes=7/9 cells=0 |
+| 902 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1260s tasks=0 fail=0 probes=7/9 cells=0 |
+| 903 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=1860s tasks=0 fail=0 probes=7/9 cells=0 |
+| 904 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=2460s tasks=0 fail=0 probes=7/9 cells=0 |
+| 905 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3060s tasks=0 fail=0 probes=7/9 cells=0 |
+| 906 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=3660s tasks=0 fail=0 probes=7/9 cells=0 |
+| 907 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4260s tasks=0 fail=0 probes=7/9 cells=0 |
+| 908 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=4860s tasks=0 fail=0 probes=7/9 cells=0 |
+| 909 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=5460s tasks=0 fail=0 probes=7/9 cells=0 |
+| 910 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6060s tasks=0 fail=0 probes=7/9 cells=0 |
+| 911 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=6660s tasks=0 fail=0 probes=7/9 cells=0 |
+| 912 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7260s tasks=0 fail=0 probes=6/9 cells=0 || 2026-09-10T17:07:52.130151+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent '//STATUS' to Cloud Brain] | HYDRATED |
+| 2026-09-10T17:07:52.130665+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: //STATUS] | HYDRATED |
+| 2026-09-10T17:07:52.183657+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: //STATUS, Complexity: 9] | HYDRATED |
+| 2026-09-10T17:07:52.183997+00:00 | HYDRATION_MGR | HYDRATE [Intent: //STATUS, Tiers: L0_LOCAL,L1_LOCAL,L2_CLOUD] | HYDRATED |
+
+| 913 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=7860s tasks=1 fail=0 probes=6/9 cells=1 |
+---
+## [2026-09-10] Codex integrated with Camelot-OS
+- **Actor**: SIR_CODEX
+- **Scope**:
+  - control_plane/codex_integration.py
+  - control_plane/camelot_cli.py
+  - control_plane/boot_sequence.py
+  - 02_FORGE/apps/omni-eye-dashboard
+  - 03_VAULT/runtime_state/codex_integration_latest.json
+- **Verification performed**:
+  - `camelot codex status`
+  - `camelot codex integrate`
+  - `awaken --quick surfaces Codex Integration`
+- **Tag**: [Omega_CODEX]
+
+| 914 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=8460s tasks=1 fail=0 probes=6/9 cells=1 |
+| 915 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9060s tasks=1 fail=0 probes=6/9 cells=1 |
+| 916 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=9660s tasks=1 fail=0 probes=6/9 cells=1 |
+| 917 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10260s tasks=1 fail=0 probes=6/9 cells=1 || 2026-09-10T17:59:58.536674+00:00 | HYDRATION_MGR | L2_CLOUD_PUSH [Pushed intent 'Omega_ANYA DAG_BOOTSTRAP_SELF_TRIAGE_V1 PLAN ONLY. Inputs: OpenClaw reported KineticEdge, harness_pid, rbac_matrix, access_matrix critical; watchdog reported KineticEdge, Qdrant, SirOctavian dark and no restart commands; switchboard reported sir_sentinel, sir_octavian, bifrost_gateway, sir_agentis dark. Loop: (1) capture timestamped evidence from current ports, PIDs, manifests, and source paths; (2) classify each item as live outage, stale validator/path drift, missing restart contract, or unknown; (3) have Anya gate every proposed action and preserve HUMAN_GATE; (4) have Merlin produce dependency-aware repair order and explicit verification command for every node; (5) execute only read-only probes automatically; (6) queue all restart, RBAC/access change, process launch, or configuration mutation for human approval; (7) stop after one bounded cycle, emit delta, and back off rather than retry-storm. Reconcile the stale July HITL file against the current GIDEON report before any action. Required deliverable: a 4-lane D.A.G. of Observe, Diagnose, Approve, Verify, with owners, evidence, acceptance gates, and rollback points.' to Cloud Brain] | HYDRATED |
+| 2026-09-10T17:59:58.537383+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: Omega_ANYA DAG_BOOTSTRAP_SELF_TRIAGE_V1 PLAN ONLY. Inputs: OpenClaw reported KineticEdge, harness_pid, rbac_matrix, access_matrix critical; watchdog reported KineticEdge, Qdrant, SirOctavian dark and no restart commands; switchboard reported sir_sentinel, sir_octavian, bifrost_gateway, sir_agentis dark. Loop: (1) capture timestamped evidence from current ports, PIDs, manifests, and source paths; (2) classify each item as live outage, stale validator/path drift, missing restart contract, or unknown; (3) have Anya gate every proposed action and preserve HUMAN_GATE; (4) have Merlin produce dependency-aware repair order and explicit verification command for every node; (5) execute only read-only probes automatically; (6) queue all restart, RBAC/access change, process launch, or configuration mutation for human approval; (7) stop after one bounded cycle, emit delta, and back off rather than retry-storm. Reconcile the stale July HITL file against the current GIDEON report before any action. Required deliverable: a 4-lane D.A.G. of Observe, Diagnose, Approve, Verify, with owners, evidence, acceptance gates, and rollback points.] | HYDRATED |
+| 2026-09-10T17:59:58.614987+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: Omega_ANYA DAG_BOOTSTRAP_SELF_TRIAGE_V1 PLAN ONLY. Inputs: OpenClaw reported KineticEdge, harness_pid, rbac_matrix, access_matrix critical; watchdog reported KineticEdge, Qdrant, SirOctavian dark and no restart commands; switchboard reported sir_sentinel, sir_octavian, bifrost_gateway, sir_agentis dark. Loop: (1) capture timestamped evidence from current ports, PIDs, manifests, and source paths; (2) classify each item as live outage, stale validator/path drift, missing restart contract, or unknown; (3) have Anya gate every proposed action and preserve HUMAN_GATE; (4) have Merlin produce dependency-aware repair order and explicit verification command for every node; (5) execute only read-only probes automatically; (6) queue all restart, RBAC/access change, process launch, or configuration mutation for human approval; (7) stop after one bounded cycle, emit delta, and back off rather than retry-storm. Reconcile the stale July HITL file against the current GIDEON report before any action. Required deliverable: a 4-lane D.A.G. of Observe, Diagnose, Approve, Verify, with owners, evidence, acceptance gates, and rollback points., Complexity: 9] | HYDRATED |
+| 2026-09-10T17:59:58.615670+00:00 | HYDRATION_MGR | HYDRATE [Intent: Omega_ANYA DAG_BOOTSTRAP_SELF_TRIAGE_V1 PLAN ONLY. Inputs: OpenClaw reported KineticEdge, harness_pid, rbac_matrix, access_matrix critical; watchdog reported KineticEdge, Qdrant, SirOctavian dark and no restart commands; switchboard reported sir_sentinel, sir_octavian, bifrost_gateway, sir_agentis dark. Loop: (1) capture timestamped evidence from current ports, PIDs, manifests, and source paths; (2) classify each item as live outage, stale validator/path drift, missing restart contract, or unknown; (3) have Anya gate every proposed action and preserve HUMAN_GATE; (4) have Merlin produce dependency-aware repair order and explicit verification command for every node; (5) execute only read-only probes automatically; (6) queue all restart, RBAC/access change, process launch, or configuration mutation for human approval; (7) stop after one bounded cycle, emit delta, and back off rather than retry-storm. Reconcile the stale July HITL file against the current GIDEON report before any action. Required deliverable: a 4-lane D.A.G. of Observe, Diagnose, Approve, Verify, with owners, evidence, acceptance gates, and rollback points., Tiers: L0_LOCAL_RAW,L1_LOCAL,L2_CLOUD] | HYDRATED |
+| 2026-09-10T17:59:59.385354+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: //PLAN DAG_BOOTSTRAP_SELF_TRIAGE_V1 PLAN ONLY. Inputs: OpenClaw reported KineticEdge, harness_pid, rbac_matrix, access_matrix critical; watchdog reported KineticEdge, Qdrant, SirOctavian dark and no restart commands; switchboard reported sir_sentinel, sir_octavian, bifrost_gateway, sir_agentis dark. Loop: (1) capture timestamped evidence from current ports, PIDs, manifests, and source paths; (2) classify each item as live outage, stale validator/path drift, missing restart contract, or unknown; (3) have Anya gate every proposed action and preserve HUMAN_GATE; (4) have Merlin produce dependency-aware repair order and explicit verification command for every node; (5) execute only read-only probes automatically; (6) queue all restart, RBAC/access change, process launch, or configuration mutation for human approval; (7) stop after one bounded cycle, emit delta, and back off rather than retry-storm. Reconcile the stale July HITL file against the current GIDEON report before any action. Required deliverable: a 4-lane D.A.G. of Observe, Diagnose, Approve, Verify, with owners, evidence, acceptance gates, and rollback points.] | HYDRATED |
+| 2026-09-10T17:59:59.388780+00:00 | HYDRATION_MGR | HYDRATE [Intent: //PLAN DAG_BOOTSTRAP_SELF_TRIAGE_V1 PLAN ONLY. Inputs: OpenClaw reported KineticEdge, harness_pid, rbac_matrix, access_matrix critical; watchdog reported KineticEdge, Qdrant, SirOctavian dark and no restart commands; switchboard reported sir_sentinel, sir_octavian, bifrost_gateway, sir_agentis dark. Loop: (1) capture timestamped evidence from current ports, PIDs, manifests, and source paths; (2) classify each item as live outage, stale validator/path drift, missing restart contract, or unknown; (3) have Anya gate every proposed action and preserve HUMAN_GATE; (4) have Merlin produce dependency-aware repair order and explicit verification command for every node; (5) execute only read-only probes automatically; (6) queue all restart, RBAC/access change, process launch, or configuration mutation for human approval; (7) stop after one bounded cycle, emit delta, and back off rather than retry-storm. Reconcile the stale July HITL file against the current GIDEON report before any action. Required deliverable: a 4-lane D.A.G. of Observe, Diagnose, Approve, Verify, with owners, evidence, acceptance gates, and rollback points., Tiers: L0_LOCAL,L1_LOCAL] | HYDRATED |
+
+| 918 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=10860s tasks=3 fail=0 probes=6/9 cells=3 |
+| 919 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=11460s tasks=3 fail=0 probes=6/9 cells=3 |
+| 920 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12060s tasks=3 fail=0 probes=6/9 cells=3 |
+| 921 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=12660s tasks=3 fail=0 probes=6/9 cells=3 |
+| 922 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13260s tasks=3 fail=0 probes=6/9 cells=3 |
+| 923 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=13860s tasks=3 fail=0 probes=6/9 cells=3 |
+| 924 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=14460s tasks=3 fail=0 probes=6/9 cells=3 |
+| 925 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15060s tasks=3 fail=0 probes=6/9 cells=3 |
+| 926 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=15660s tasks=3 fail=0 probes=6/9 cells=3 |
+| 927 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16260s tasks=3 fail=0 probes=6/9 cells=3 |
+| 928 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=16860s tasks=3 fail=0 probes=6/9 cells=3 |
+| 929 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=17460s tasks=3 fail=0 probes=6/9 cells=3 |
+| 930 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18060s tasks=3 fail=0 probes=6/9 cells=3 |
+| 931 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=18660s tasks=3 fail=0 probes=6/9 cells=3 |
+| 932 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19260s tasks=3 fail=0 probes=6/9 cells=3 |
+| 933 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=19860s tasks=3 fail=0 probes=6/9 cells=3 |
+| 934 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=20460s tasks=3 fail=0 probes=6/9 cells=3 |
+| 935 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21060s tasks=3 fail=0 probes=6/9 cells=3 |
+| 936 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=21660s tasks=3 fail=0 probes=6/9 cells=3 |
+| 937 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22260s tasks=3 fail=0 probes=6/9 cells=3 |
+| 938 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=22860s tasks=3 fail=0 probes=6/9 cells=3 |
+| 939 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=23460s tasks=3 fail=0 probes=6/9 cells=3 |
+| 940 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24060s tasks=3 fail=0 probes=6/9 cells=3 |
+| 941 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=24660s tasks=3 fail=0 probes=6/9 cells=3 |
+| 942 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25260s tasks=3 fail=0 probes=6/9 cells=3 |
+| 943 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=25860s tasks=3 fail=0 probes=6/9 cells=3 |
+| 944 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=26460s tasks=3 fail=0 probes=6/9 cells=3 |
+| 945 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27060s tasks=3 fail=0 probes=6/9 cells=3 |
+| 946 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=27660s tasks=3 fail=0 probes=6/9 cells=3 |
+| 947 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28260s tasks=3 fail=0 probes=6/9 cells=3 |
+| 948 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=28860s tasks=3 fail=0 probes=6/9 cells=3 |
+| 949 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=29460s tasks=3 fail=0 probes=6/9 cells=3 |
+| 950 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30060s tasks=3 fail=0 probes=6/9 cells=3 |
+| 951 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=30660s tasks=3 fail=0 probes=6/9 cells=3 |
+| 952 | **Harness Heartbeat** | SovereignHarness | ⚡ LIVE | uptime=31260s tasks=3 fail=0 probes=6/9 cells=3 |

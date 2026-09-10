@@ -8,6 +8,17 @@
     "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
     "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-09-10T17:07:51.911510+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//STATUS",
+    "content": "{\"action\": \"system_status\", \"detail\": \"run: python -m control_plane.harness --status\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
     "updated_at": "2026-09-09T08:01:36.254863+00:00"
   },
   {
@@ -537,16 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
     "open_viking_tether": "open_viking://worldtree/sir_boris",
     "updated_at": "2026-08-24T17:56:03.385661+00:00"
-  },
-  {
-    "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run",
-    "content": "{\"action\": \"nano_swarm_expand\", \"dry_run\": true, \"status\": \"DRY_RUN_READY\", \"node\": \"Node_A_Frontend\", \"artifact_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\nano_swarm_dry_runs\\\\Node_A_Frontend.dry_run.json\", \"rollback\": \"delete_dry_run_artifact\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-24T17:55:59.962843+00:00"
   }
 ]
