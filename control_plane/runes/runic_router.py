@@ -781,6 +781,7 @@ def _queue_task(knight: str, directive: str, priority: int = 2, extra: Optional[
         return task_id, rl_err
     entry: dict[str, Any] = {
         "id": task_id,
+        "queue_version": 2,
         "knight": knight,
         "directive": directive,
         "priority": priority,
