@@ -246,7 +246,11 @@
       "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
       "open_viking_node": "open_viking://worldtree/sir_helio",
-      "primary_engine": "Gemini 3.6 Flash / OmniVoice",
+      "primary_engine": "Gemini 3.8 Flash / OmniVoice",
+      "aliases": [
+        "SIR_HELIOS",
+        "SIR_HELIO"
+      ],
       "skill_tier": "S3 Contextual",
       "ocean_vector": {
         "O": 0.9,

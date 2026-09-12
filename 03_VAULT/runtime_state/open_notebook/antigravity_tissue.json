@@ -2,9 +2,20 @@
   {
     "knight_id": "ANTIGRAVITY",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "INTEGRATION_ANTIGRAVITY_SIR_HELIOS",
+    "content": "# ANTIGRAVITY <-> SIR_HELIO CloudBrain Synergy\nNode ANTIGRAVITY (ab8aa359-2b3b-4bc1-b41f-34979cdc184e) is formally integrated with SIR_HELIO (56820318-bb91-451f-aac4-4b46424898cf).\nIntegration scope:\n- 1M-context Gemini-class deep reasoning and RAG\n- Multimodal and WebRTC audio resonance (SIR_SONUS, KICKBOX)\n- WorldTree VFS and Open-Viking bidirectional synchronization\n- Unified polyglot swarm orchestration",
+    "vfs_path": "vfs://worldtree/knights/antigravity/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANTIGRAVITY",
+    "open_viking_tether": "open_viking://worldtree/antigravity",
+    "updated_at": "2026-09-12T15:27:30.677262+00:00"
+  },
+  {
+    "knight_id": "ANTIGRAVITY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "cloudbrain_expansion",
     "title": "WORLDTREE_CLOUDBRAIN_EXPANSION_ANTIGRAVITY",
-    "content": "{\n  \"node\": \"ANTIGRAVITY\",\n  \"uuid\": \"ab8aa359-2b3b-4bc1-b41f-34979cdc184e\",\n  \"role\": \"Synergizing NotebookLM + AntiGravity CLI Synergy\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/antigravity/\",\n  \"status\": \"EXPANDED_SYNCHRONIZED\",\n  \"synchronized_with\": [\n    \"CAMELOT_V1000\",\n    \"INSPIRA_HIVE_IDE\",\n    \"UI_UX_MASTERY\"\n  ]\n}",
+    "content": "{\n  \"node\": \"ANTIGRAVITY\",\n  \"uuid\": \"ab8aa359-2b3b-4bc1-b41f-34979cdc184e\",\n  \"role\": \"Synergizing NotebookLM + AntiGravity CLI Synergy\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/antigravity/\",\n  \"status\": \"EXPANDED_SYNCHRONIZED\",\n  \"synchronized_with\": [\n    \"CAMELOT_V1000\",\n    \"INSPIRA_HIVE_IDE\",\n    \"UI_UX_MASTERY\",\n    \"SIR_HELIO\",\n    \"SIR_SONUS\",\n    \"KICKBOX\",\n    \"WORLD_TREE\",\n    \"MERLIN_OMEGA\"\n  ]\n}",
     "vfs_path": "vfs://worldtree/knights/antigravity/tether.json",
     "mempalace_wing": "WING_WORLDTREE_ANTIGRAVITY",
     "open_viking_tether": "open_viking://worldtree/antigravity",

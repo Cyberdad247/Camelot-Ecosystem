@@ -2,6 +2,28 @@
   {
     "knight_id": "SIR_HELIO",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "HELIOS_ENHANCEMENT_2026_09_12",
+    "content": "# SIR_HELIO Optimization & Enhancement Milestone (2026-09-12)\n- Engine Upgrade: Gemini 3.8 Flash (CAMELOT_MODEL_HELIOS) in Polyglot Matrix.\n- Canonical Alias Unification: Transparent normalization between SIR_HELIO and SIR_HELIOS across Python, Go, and JSON configs.\n- Hierarchical JIT Context: Integrated HydrationManager with L0-Graphiti temporal fact extraction and L1-MemCastle vector KNN search.\n- Swarm Synergy: Formal alliance with ANTIGRAVITY knight (ab8aa359-2b3b-4bc1-b41f-34979cdc184e) for deep-context RAG delegation and macro-architectural analysis.",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-12T17:51:43.016578+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "INTEGRATION_SIR_HELIOS_ANTIGRAVITY",
+    "content": "# SIR_HELIO <-> ANTIGRAVITY CloudBrain Synergy\nNode SIR_HELIO (56820318-bb91-451f-aac4-4b46424898cf) is formally integrated with ANTIGRAVITY (ab8aa359-2b3b-4bc1-b41f-34979cdc184e).\nIntegration scope:\n- Pair programming and autonomous agent CLI harness synergy\n- 1M-context Gemini RAG query bridge for agent tool calling\n- Voice OS / WebRTC pipeline awareness inside Antigravity agent loops\n- WorldTree VFS shared memory alignment",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-12T15:27:39.552402+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
     "title": "L2_Vector_Index_camelot_audit_8847321d90ca643050000beabacb2e5efdba1123309383ee516ec817f4d8405f",
     "content": "Verification Run run_2: //SYNC\nOperator: sir_helio\nSuccess: True\nResults: {\"status\": \"OK\"}",
@@ -526,27 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
     "open_viking_tether": "open_viking://worldtree/sir_helio",
     "updated_at": "2026-08-24T16:36:13.427982+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_e02aee218b1dcecb5f31dd6db6aa1a741929f0d89fc7bcda3704d4ec53d6b3b3",
-    "content": "Verification Run run_4: cmd_4\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T16:32:38.724474+00:00"
-  },
-  {
-    "knight_id": "SIR_HELIO",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_ec19eead48f5aee2ed934263c8851e42d65da3b9427a70f4f8a43c5cb6e54b33",
-    "content": "Verification Run run_3: cmd_3\nOperator: sir_helio\nSuccess: True\nResults: {}",
-    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
-    "open_viking_tether": "open_viking://worldtree/sir_helio",
-    "updated_at": "2026-08-24T16:32:35.086044+00:00"
   }
 ]
