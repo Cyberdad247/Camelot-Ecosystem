@@ -1,6 +1,17 @@
 [
   {
     "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T13:19:54.452760+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
     "cloudbrain_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
     "spark_id": "0x8C656CFAA189409EA72D07692A47F17E",
     "role": "Kinetic Implementer, High-Velocity Zero-Trust Architecture",

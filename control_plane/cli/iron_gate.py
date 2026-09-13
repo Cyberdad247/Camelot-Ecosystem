@@ -74,17 +74,55 @@ def _check_iron_gate(
             pass
 
         # Import warden here to maintain lazy loading
-        from security.warden import SecurityException, warden  # noqa: F401
+        from security.warden import SecurityDecision, SecurityException, warden  # noqa: F401
 
         # Verify permission via the unified security warden
-        warden.verify_permission(
+        decision = warden.verify_permission(
             agent_id="CLI",
             resource_type="kinetic_action",
             action="EXECUTE",
             target=intent,
             trust_level="KERNEL",
         )
-        return True
+
+        if isinstance(decision, SecurityDecision):
+            if decision.decision == "allow":
+                return True
+            elif decision.decision == "deny":
+                _stream_print(f"\n[HITL_GATE] Iron Gate: blocked ({decision.reason})", tone="err")
+                return False
+            elif decision.decision == "require_approval":
+                _stream_print(f"\n[HITL_GATE] Iron Gate: approval required ({decision.reason})", tone="warn")
+                if non_interactive:
+                    _stream_print("[HITL_GATE] Non-interactive mode — denying unapproved action.", tone="err")
+                    return False
+                # Fall through to interactive prompt
+        elif decision is True:
+            return True
+        elif decision is False:
+            return False
+
+        # Display Impact Brief for approval-required actions
+        if file_count > 0 or size_delta_mb > 0.0:
+            brief = f"[Impact_Brief] Files: {file_count or 'N/A'} | Delta: {size_delta_mb or 'Unknown'} MB"
+            _stream_print(brief, tone="info")
+
+        # Fallback to manual confirmation if in interactive mode
+        try:
+            prompt_text = _color(
+                "[HITL_APPROVAL] Force override and Proceed? [operator approval] [y/N]: ",
+                "warn",
+            )
+            stream_encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+            prompt_text = prompt_text.encode(stream_encoding, errors="replace").decode(
+                stream_encoding,
+                errors="replace",
+            )
+            choice = input(prompt_text).strip().lower()
+            return choice == "y"
+        except (EOFError, KeyboardInterrupt):
+            return False
+
     except ModuleNotFoundError as e:
         if e.name not in {"security", "security.warden"}:
             raise
@@ -102,9 +140,9 @@ def _check_iron_gate(
             "deploy",
         }
         if any(term in intent.lower() for term in risky_terms):
-            _stream_print(f"\n[HITL_GATE] Security module missing; blocked risky intent: {intent}", tone="err")
+            _stream_print(f"\n[HITL_GATE] Iron Gate: blocked (security module missing; blocked risky intent: {intent})", tone="err")
             return False
-        _stream_print("[HITL_GATE] Security module missing; allowing low-risk status/sync intent.", tone="warn")
+        _stream_print("[HITL_GATE] Iron Gate: degraded (security module missing; allowing low-risk status/sync intent)", tone="warn")
         return True
     except Exception as e:
         # SecurityException or other error means blocked

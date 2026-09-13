@@ -47,6 +47,7 @@ PID_FILE     = LOGS_DIR / "harness.pid"
 QUEUE_FILE   = LOGS_DIR / "harness_queue.jsonl"
 QUEUE_STATE_FILE = LOGS_DIR / "harness_queue_state.jsonl"
 LEDGER_FILE  = CAMELOT_HOME / "PROVENANCE_LEDGER.md"
+HEARTBEAT_FILE = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "harness_heartbeat.jsonl"
 
 # Ensure logs dir exists
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
@@ -194,6 +195,23 @@ async def _probe_port(host: str, port: int, timeout: float = 1.5) -> bool:
         return False
 
 
+def read_latest_heartbeat(home: Path | None = None) -> dict[str, Any] | None:
+    """Read the latest heartbeat record from 03_VAULT/runtime_state/harness_heartbeat.jsonl."""
+    target_file = (home or CAMELOT_HOME) / "03_VAULT" / "runtime_state" / "harness_heartbeat.jsonl"
+    if not target_file.exists():
+        return None
+    try:
+        with open(target_file, "r", encoding="utf-8") as f:
+            lines = f.readlines()
+            for line in reversed(lines):
+                line = line.strip()
+                if line:
+                    return json.loads(line)
+    except Exception:
+        return None
+    return None
+
+
 def _append_ledger(entry: str) -> None:
     try:
         with open(LEDGER_FILE, "a", encoding="utf-8") as f:
@@ -238,6 +256,50 @@ class SovereignHarness:
             event["result"] = result
         with QUEUE_STATE_FILE.open("a", encoding="utf-8") as file:
             file.write(json.dumps(event) + "\n")
+
+    def _write_runtime_heartbeat(self, record: dict[str, Any]) -> None:
+        """Write runtime telemetry heartbeat to 03_VAULT/runtime_state/harness_heartbeat.jsonl."""
+        try:
+            HEARTBEAT_FILE.parent.mkdir(parents=True, exist_ok=True)
+            with open(HEARTBEAT_FILE, "a", encoding="utf-8") as f:
+                f.write(json.dumps(record) + "\n")
+        except Exception as e:
+            _log(f"[HEARTBEAT] Failed to write runtime heartbeat: {e}")
+
+    def _is_material_state_change(self, status: str, probes_green: int, fail_count: int) -> bool:
+        """Detect if system state has materially changed since the last ledger entry.
+
+        Material transitions include:
+          - Initial system boot/status establishment
+          - State degradation: e.g. GREEN -> DEGRADED or CRITICAL
+          - State recovery: e.g. DEGRADED -> GREEN
+          - Change in number of healthy probes (service drops or recoveries)
+          - Increase in task failure count
+        """
+        if not hasattr(self, "_last_material_state"):
+            self._last_material_state = {
+                "status": status,
+                "probes_green": probes_green,
+                "fail_count": fail_count,
+            }
+            return True
+
+        prev = self._last_material_state
+        has_changed = (
+            prev["status"] != status
+            or prev["probes_green"] != probes_green
+            or fail_count > prev["fail_count"]
+        )
+
+        if has_changed:
+            self._last_material_state = {
+                "status": status,
+                "probes_green": probes_green,
+                "fail_count": fail_count,
+            }
+            return True
+
+        return False
 
     # ── Watchdog ──────────────────────────────────────────────────────────────
 
@@ -398,7 +460,7 @@ class SovereignHarness:
             f"## Knight Cells\n{cell_lines or '  (none active)'}\n"
         )
 
-    # ── Ledger loop ───────────────────────────────────────────────────────────
+    # ── Ledger & Heartbeat loop ───────────────────────────────────────────────
 
     async def _ledger_loop(self) -> None:
         await asyncio.sleep(60)   # first entry after 1min
@@ -407,14 +469,33 @@ class SovereignHarness:
             uptime = round(time.time() - self._start)
             probes_green = sum(self._probe_cache.values())
             probes_total = len(BOOT_PROBES)
-            entry = (
-                f"| {entry_num} | **Harness Heartbeat** | SovereignHarness | "
-                f"⚡ LIVE | uptime={uptime}s tasks={self._done} fail={self._fail} "
-                f"probes={probes_green}/{probes_total} cells={len(self._cells)} |"
-            )
-            _append_ledger(entry)
+            status = "GREEN" if (probes_green == probes_total and self._fail == 0) else ("DEGRADED" if probes_green > 0 else "CRITICAL")
+
+            # Always record runtime telemetry to 03_VAULT/runtime_state (zero git noise)
+            heartbeat_record = {
+                "timestamp": _utcnow(),
+                "uptime_s": uptime,
+                "tasks_done": self._done,
+                "tasks_fail": self._fail,
+                "probes_green": probes_green,
+                "probes_total": probes_total,
+                "probes": dict(self._probe_cache),
+                "cells_count": len(self._cells),
+                "status": status,
+            }
+            self._write_runtime_heartbeat(heartbeat_record)
             self._last_ledger = _utcnow()
-            entry_num += 1
+
+            # Material-state-change detector: Only record to PROVENANCE_LEDGER on material transitions
+            if self._is_material_state_change(status, probes_green, self._fail):
+                entry = (
+                    f"| {entry_num} | **Harness State Transition** | SovereignHarness | "
+                    f"{'⚡ LIVE' if status == 'GREEN' else '⚠️ ' + status} | uptime={uptime}s tasks={self._done} fail={self._fail} "
+                    f"probes={probes_green}/{probes_total} cells={len(self._cells)} |"
+                )
+                _append_ledger(entry)
+                entry_num += 1
+
             await asyncio.sleep(LEDGER_INTERVAL_S)
 
     # ── Lord Archivist GEP scan ───────────────────────────────────────────────
@@ -1012,19 +1093,20 @@ def main() -> None:
     harness = SovereignHarness()
 
     if args.status:
+        latest = read_latest_heartbeat()
         if PID_FILE.exists():
             try:
                 pid = int(PID_FILE.read_text().strip())
                 import psutil
                 if psutil.pid_exists(pid):
-                    print(json.dumps({"running": True, "pid": pid}))
+                    print(json.dumps({"running": True, "pid": pid, "latest_heartbeat": latest}))
                 else:
                     PID_FILE.unlink(missing_ok=True)
-                    print(json.dumps({"running": False, "stale_pid": pid}))
+                    print(json.dumps({"running": False, "stale_pid": pid, "latest_heartbeat": latest}))
             except Exception:
-                print(json.dumps({"running": False}))
+                print(json.dumps({"running": False, "latest_heartbeat": latest}))
         else:
-            print(json.dumps({"running": False}))
+            print(json.dumps({"running": False, "latest_heartbeat": latest}))
         return
 
     import traceback
