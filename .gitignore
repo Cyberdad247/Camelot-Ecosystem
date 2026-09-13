@@ -37,6 +37,7 @@ tmp/
 tmp_awesome_repo/
 data/.pytest_tmp/
 data/.pytest_temp/
+03_VAULT/runtime_state/wasm_sandbox/
 
 # 4. Python / Node Runtime
 __pycache__/
