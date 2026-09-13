@@ -1,46 +1,27 @@
 [
   {
     "knight_id": "ANTIGRAVITY",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "INTEGRATION_ANTIGRAVITY_SIR_HELIOS",
-    "content": "# ANTIGRAVITY <-> SIR_HELIO CloudBrain Synergy\nNode ANTIGRAVITY (ab8aa359-2b3b-4bc1-b41f-34979cdc184e) is formally integrated with SIR_HELIO (56820318-bb91-451f-aac4-4b46424898cf).\nIntegration scope:\n- 1M-context Gemini-class deep reasoning and RAG\n- Multimodal and WebRTC audio resonance (SIR_SONUS, KICKBOX)\n- WorldTree VFS and Open-Viking bidirectional synchronization\n- Unified polyglot swarm orchestration",
-    "vfs_path": "vfs://worldtree/knights/antigravity/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANTIGRAVITY",
-    "open_viking_tether": "open_viking://worldtree/antigravity",
-    "updated_at": "2026-09-12T15:27:30.677262+00:00"
-  },
-  {
-    "knight_id": "ANTIGRAVITY",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "cloudbrain_expansion",
-    "title": "WORLDTREE_CLOUDBRAIN_EXPANSION_ANTIGRAVITY",
-    "content": "{\n  \"node\": \"ANTIGRAVITY\",\n  \"uuid\": \"ab8aa359-2b3b-4bc1-b41f-34979cdc184e\",\n  \"role\": \"Synergizing NotebookLM + AntiGravity CLI Synergy\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/antigravity/\",\n  \"status\": \"EXPANDED_SYNCHRONIZED\",\n  \"synchronized_with\": [\n    \"CAMELOT_V1000\",\n    \"INSPIRA_HIVE_IDE\",\n    \"UI_UX_MASTERY\",\n    \"SIR_HELIO\",\n    \"SIR_SONUS\",\n    \"KICKBOX\",\n    \"WORLD_TREE\",\n    \"MERLIN_OMEGA\"\n  ]\n}",
-    "vfs_path": "vfs://worldtree/knights/antigravity/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANTIGRAVITY",
-    "open_viking_tether": "open_viking://worldtree/antigravity",
-    "synced_at": "2026-09-08T08:10:44.613961+00:00"
-  },
-  {
-    "knight_id": "ANTIGRAVITY",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "system_tether",
-    "title": "ANTIGRAVITY WorldTree Tether Anchor",
-    "content": "{\"knight_id\": \"ANTIGRAVITY\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"ab8aa359-2b3b-4bc1-b41f-34979cdc184e\", \"vfs_path\": \"vfs://worldtree/knights/antigravity/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_ANTIGRAVITY\", \"open_viking_node\": \"open_viking://worldtree/antigravity\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\antigravity_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.217404+00:00\"}",
-    "vfs_path": "vfs://worldtree/knights/antigravity/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANTIGRAVITY",
-    "open_viking_tether": "open_viking://worldtree/antigravity",
-    "updated_at": "2026-08-30T16:07:09.217441+00:00"
-  },
-  {
-    "knight_id": "ANTIGRAVITY",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_bec932c1d7fc5b9ac6585e2333fd60529298f4020df3d620f725c9442cf1a2f7",
-    "content": "Verification Run omniroute_9router_integration_20260825234615: OmniRoute & 9Router Bifrost Bridge Assimilation & Telemetry Alignment\nOperator: Antigravity\nSuccess: True\nResults: {\"omniroute_upstream\": \"https://github.com/diegosouzapw/OmniRoute.git\", \"nine_router_upstream\": \"https://github.com/decolua/9router.git\", \"tests_passed\": 22, \"bifrost_board_selftest\": \"PASS\", \"capabilities\": [\"rtk_caveman_compression\", \"rtk_token_saver_git_diff_log_status\", \"350_plus_providers_1200_models\", \"protocol_translation_openai_claude\", \"multi_account_round_robin_quota_tracking\", \"sovereign_mesh_fleet_7_nodes\", \"knight_engine_matrix_free_frontier_first\"]}",
-    "vfs_path": "vfs://worldtree/knights/antigravity/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_ANTIGRAVITY",
-    "open_viking_tether": "open_viking://worldtree/antigravity",
-    "updated_at": "2026-08-25T23:46:15.933228+00:00"
+    "cloudbrain_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+    "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
+    "role": "NotebookLM + AntiGravity CLI Synergy & MCP Integration",
+    "model": "FastMCP / agy",
+    "summoning_rune": "Omega_AntiGravity",
+    "vfs_mount": "vfs/notebooks/ab8aa359-2b3b-4bc1-b41f-34979cdc184e/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

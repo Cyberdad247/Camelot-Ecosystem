@@ -1,59 +1,275 @@
 {
-  "schema_version": "1000.54",
+  "schema_version": "1000.54-EXCALIBUR-A",
   "generated": "2026-08-10T17:39:02.888622+00:00",
   "total_live_notebooks": 275,
   "camelot_affiliated": 88,
-  "verified_knights": 10,
+  "verified_knights": 38,
   "worldtree_nodes": {
     "SIR_BORIS": {
       "id": "f7707daa-2d10-4db8-8fda-be4661a27793",
-      "title": "Sovereign_Workspace: SIR_BORIS",
-      "verified": true
+      "role": "Lead Architect, Crucible Conductor, 13-Agent Critique",
+      "model": "Gemini / Claude Code",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/f7707daa-2d10-4db8-8fda-be4661a27793/"
     },
     "SIR_ALEX": {
       "id": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
-      "title": "Sovereign_Workspace: SIR_ALEX",
-      "verified": true
+      "role": "Task Planner, DAG Orchestrator, AST Task Breakdown",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/f490c05e-d8c4-4008-87e1-5f901bf57c6a/"
     },
     "SIR_FORGE": {
       "id": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
-      "title": "Sovereign_Workspace: SIR_FORGE",
-      "verified": true
-    },
-    "SIR_SENTINEL": {
-      "id": "07cbb441-f008-424c-820a-85676210be39",
-      "title": "Sovereign_Workspace: SIR_SENTINEL",
-      "verified": true
-    },
-    "SIR_DEBUG": {
-      "id": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
-      "title": "Sovereign_Workspace: SIR_DEBUG",
-      "verified": true
-    },
-    "SIR_GHOST": {
-      "id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
-      "title": "Sovereign_Workspace: SIR_GHOST",
-      "verified": true
-    },
-    "LADY_APIS": {
-      "id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
-      "title": "Sovereign_Workspace: LADY_APIS",
-      "verified": true
-    },
-    "MERLIN_OMEGA": {
-      "id": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
-      "title": "Sovereign_Workspace: MERLIN_OMEGA",
-      "verified": true
-    },
-    "SIR_HELIO": {
-      "id": "56820318-bb91-451f-aac4-4b46424898cf",
-      "title": "Sovereign_Workspace: SIR_HELIO",
-      "verified": true
+      "role": "Kinetic Code Generation, Compiles, //FORGE Dispatcher",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/91c5da8b-e2de-4a56-b7fd-c8b76c00afc7/"
     },
     "SIR_CODEX": {
       "id": "8c656cfa-a189-409e-a72d-07692a47f17e",
-      "title": "Camelot-OS v.1000",
-      "verified": true
+      "role": "Kinetic Implementer, High-Velocity Zero-Trust Architecture",
+      "model": "OpenAI Codex / GPT-5.5",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/8c656cfa-a189-409e-a72d-07692a47f17e/"
+    },
+    "SIR_SENTINEL": {
+      "id": "07cbb441-f008-424c-820a-85676210be39",
+      "role": "AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/07cbb441-f008-424c-820a-85676210be39/"
+    },
+    "SIR_DEBUG": {
+      "id": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
+      "role": "PIV Self-Healing Loop, Error Diagnosis & AST Repair",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/fdc42a4a-3060-4eac-b57c-8e6009ed634a/"
+    },
+    "SIR_GHOST": {
+      "id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+      "role": "Privacy Scanner, Air-Gapped Credentials & Local Vault",
+      "model": "Ollama Local Container",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/422a184b-93e7-4dfd-8a12-75d2268b6c60/"
+    },
+    "LADY_APIS": {
+      "id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+      "role": "BASHR Research Loop, Bio-Swarm Isolation, Context Forager",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f/"
+    },
+    "MERLIN_OMEGA": {
+      "id": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
+      "role": "GoT/ToT Deep Reasoning, Mathematical Proofs, System 2",
+      "model": "Gemini Pro / Opus",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/af927fde-d7eb-42ee-8c79-51b3e78ef39b/"
+    },
+    "SIR_HELIO": {
+      "id": "56820318-bb91-451f-aac4-4b46424898cf",
+      "role": "Voice OS, Real-Time Audio Pipeline, //vocal Dispatcher",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/56820318-bb91-451f-aac4-4b46424898cf/"
+    },
+    "SIR_SONUS": {
+      "id": "6272aa35-c285-4edc-81bc-2824ab519edf",
+      "role": "Multivoice Audio Routing, Phonetic Analysis, Aoede S2S",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/6272aa35-c285-4edc-81bc-2824ab519edf/"
+    },
+    "HERMES_PRIME": {
+      "id": "28f89cb6-5048-4b5d-9e94-376082d24744",
+      "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",
+      "model": "Gemini / Hermes OS",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/28f89cb6-5048-4b5d-9e94-376082d24744/"
+    },
+    "HERMES_AGENT_EVOLUTION": {
+      "id": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",
+      "role": "OpenClaw Transcendence, Nous Research, Autonomous Evolution",
+      "model": "Hermes Kernel",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/24f4a450-6456-49fe-bfab-8cfcf7c2a33b/"
+    },
+    "ANYA_OMEGA": {
+      "id": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+      "role": "Sovereign Compiler, Helm Authority, Anya First & Last Gate",
+      "model": "Sovereign Lattice",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/32d38906-5ae8-4ecc-b77e-705d12c89f4a/"
+    },
+    "ANYA_QUANTUM_MANTRA": {
+      "id": "219e765a-0c8e-4b66-b356-f277cb441b14",
+      "role": "Glyph Quantum Engine, Token Compression, VFS Mantra",
+      "model": "Sovereign Lattice",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/219e765a-0c8e-4b66-b356-f277cb441b14/"
+    },
+    "ARTHUR_OMEGA": {
+      "id": "cbb310bd-987e-4b84-bf45-12d37d090bec",
+      "role": "Sovereign King Authority, Ethical Compass, Governance",
+      "model": "Human Operator (Vizion)",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/cbb310bd-987e-4b84-bf45-12d37d090bec/"
+    },
+    "SIR_HEIMDALL": {
+      "id": "3205f189-91da-4272-96a9-3641fd642763",
+      "role": "Bifrost Guardian, Perimeter Lock, mTLS Boundary",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/3205f189-91da-4272-96a9-3641fd642763/"
+    },
+    "SIR_GALAHAD": {
+      "id": "e0110853-14ef-403f-8def-bf3a5123986f",
+      "role": "Chivalric Verification, Cryptographic Purity, Truth Audit",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/e0110853-14ef-403f-8def-bf3a5123986f/"
+    },
+    "SIR_STITCH": {
+      "id": "0fdccdc1-a1d2-48c2-8948-187398bfbeb5",
+      "role": "Kinematics, Micro-Interactions, UI State Patching",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/0fdccdc1-a1d2-48c2-8948-187398bfbeb5/"
+    },
+    "SIR_ALCHEMIST": {
+      "id": "d6bdd57c-84d2-4e24-bb10-ad1fd179fb04",
+      "role": "Transmutation, Model Quantization, Compression",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/d6bdd57c-84d2-4e24-bb10-ad1fd179fb04/"
+    },
+    "SIR_RUSTCLAW": {
+      "id": "2b3b6ec3-e020-484d-914d-92241a97ea55",
+      "role": "Rust Image & Kernel Pipelines, Bare-Metal Decompressor",
+      "model": "Rust 1.96 / Cargo",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/2b3b6ec3-e020-484d-914d-92241a97ea55/"
+    },
+    "SIR_HERMES": {
+      "id": "5dc31b8d-169d-4d4d-ab90-d12724fca720",
+      "role": "Courier Dispatch, Webhooks, GraphQL Endpoints",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/5dc31b8d-169d-4d4d-ab90-d12724fca720/"
+    },
+    "SIR_LANCELOT": {
+      "id": "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
+      "role": "Frontline Champion, Kinetic Edge Defense, Real-Time Guard",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9/"
+    },
+    "LADY_GUINEVERE": {
+      "id": "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
+      "role": "Aesthetic Harmony, Interface Tokens, Luxury Minimalist",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/8dca4a86-2bb6-4332-96b6-79899c0a9ccf/"
+    },
+    "SIR_HUGGINGFACE": {
+      "id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "role": "Model Inspection, Spaces Management, Transformer Pipelines",
+      "model": "HuggingFace Hub API",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/"
+    },
+    "SIR_MNEMO": {
+      "id": "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
+      "role": "Dual-Tier Memory Sync, Vector Indexing, Tissue Journaling",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/8bf3f24e-da2e-45b9-8719-162fcd02a80d/"
+    },
+    "LADY_MNEMOSYNE": {
+      "id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "role": "WorldTree Master Memory, Memory Palace & VFS Sweeps",
+      "model": "Memory Substrate",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/"
+    },
+    "BIO_KINETIC_SWARM": {
+      "id": "93b21c40-10ff-4e89-a212-08f37b1297e1",
+      "role": "Bio-Kinetic Matrix, Cellular Diode Isolation, Mitosis",
+      "model": "Swarm Coordinator",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/93b21c40-10ff-4e89-a212-08f37b1297e1/"
+    },
+    "CAMELOT_V1000": {
+      "id": "8c656cfa-a189-409e-a72d-07692a47f17e",
+      "role": "Sovereign OS Master Construction Codex, Excalibur Hub",
+      "model": "System Substrate",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/8c656cfa-a189-409e-a72d-07692a47f17e/"
+    },
+    "BIFROST": {
+      "id": "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",
+      "role": "Bifrost Bridge Architecture, WebSocket & Express Transport",
+      "model": "Node.js / Rust",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/cbbb0c32-3919-4b77-9158-1d9f9ebf359f/"
+    },
+    "FATHER_CAMELOT": {
+      "id": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
+      "role": "Ancestral Compass, Moral & Ethical Governance Ledger",
+      "model": "Sovereign Substrate",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/39299131-0ade-4f48-8ad4-a68878a6d3d9/"
+    },
+    "WORLD_TREE": {
+      "id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "role": "Living Knowledge Graph & Root WorldTree Tether",
+      "model": "WorldTree Substrate",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/"
+    },
+    "ALPHA_OMEGA": {
+      "id": "2536aefb-937f-4a04-9142-d1a2f029d8a7",
+      "role": "Camelot-OS Alpha-Omega Artifacts & Compilation Store",
+      "model": "Forge Substrate",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/2536aefb-937f-4a04-9142-d1a2f029d8a7/"
+    },
+    "ANTIGRAVITY": {
+      "id": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+      "role": "NotebookLM + AntiGravity CLI Synergy & MCP Integration",
+      "model": "FastMCP / agy",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/ab8aa359-2b3b-4bc1-b41f-34979cdc184e/"
+    },
+    "KICKBOX": {
+      "id": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
+      "role": "KickBox Audio, WebRTC State & Vocal HUD Integration",
+      "model": "Next.js 14 / WebRTC",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/8531e6d4-6fc4-428f-a754-b9e9592ac7ff/"
+    },
+    "INSPIRA": {
+      "id": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",
+      "role": "HiveIDE / Inspira Spatial Developer Workstation",
+      "model": "IDE Substrate",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/cadfe67e-7187-472e-8bf4-8a2aded84e4e/"
+    },
+    "INVISIONED_MARKETING": {
+      "id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "role": "Invisioned Marketing Sovereign CloudBrain & Brand Direction",
+      "model": "WorldTree Substrate",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/"
+    },
+    "KNIGHT_STRATEGOS": {
+      "id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "role": "Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO",
+      "model": "Gemini 3.8 Flash",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/"
     }
   },
   "camelot_extended": [
@@ -115,7 +331,7 @@
     },
     {
       "id": "6b49cc67-ea71-4bdb-9955-bc12d05d35cf",
-      "title": "Cybertronia Universal Empirical Architecture: The Sovereign Bifröst Topology"
+      "title": "Cybertronia Universal Empirical Architecture: The Sovereign Bifr\u00f6st Topology"
     },
     {
       "id": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
@@ -375,7 +591,7 @@
     },
     {
       "id": "c499f2a8-e246-496e-b21d-20456a1540ab",
-      "title": "Sir Lumière and the Signal in the Noise"
+      "title": "Sir Lumi\u00e8re and the Signal in the Noise"
     },
     {
       "id": "56820318-bb91-451f-aac4-4b46424898cf",
@@ -493,7 +709,7 @@
     },
     {
       "id": "efd05be8-ac3b-4616-9433-eb5c2f886679",
-      "title": "The Cybertronia PWA Cartridge Operational Protocol ⚜️"
+      "title": "The Cybertronia PWA Cartridge Operational Protocol \u269c\ufe0f"
     },
     {
       "id": "03dc365b-1769-4632-9df3-d763f2bd90a7",
@@ -521,7 +737,7 @@
     },
     {
       "id": "6b49cc67-ea71-4bdb-9955-bc12d05d35cf",
-      "title": "Cybertronia Universal Empirical Architecture: The Sovereign Bifröst Topology"
+      "title": "Cybertronia Universal Empirical Architecture: The Sovereign Bifr\u00f6st Topology"
     },
     {
       "id": "8972c340-fd55-4b56-9112-44c3abe5f57a",
@@ -553,7 +769,7 @@
     },
     {
       "id": "dcf677ea-c5af-4e6d-8b6b-ae2c957560c8",
-      "title": "The Romantic High: VaShawn’s Tickle Love Test Results"
+      "title": "The Romantic High: VaShawn\u2019s Tickle Love Test Results"
     },
     {
       "id": "ba87d454-9335-4f2f-bf9f-f3845a8c6948",
@@ -885,7 +1101,7 @@
     },
     {
       "id": "bebdf3e3-bbb0-455b-9c02-1469202baf74",
-      "title": "Lukas Müller v3.0: The Ultimate Cognitive Forge Persona"
+      "title": "Lukas M\u00fcller v3.0: The Ultimate Cognitive Forge Persona"
     },
     {
       "id": "feb0933e-7d77-4f03-82ff-3e9070541a13",
@@ -957,7 +1173,7 @@
     },
     {
       "id": "e0b3c81c-4544-4047-ba4d-4939bbd29050",
-      "title": "The X Ecosystem: Elon Musk’s New Creator Economy Playbook"
+      "title": "The X Ecosystem: Elon Musk\u2019s New Creator Economy Playbook"
     },
     {
       "id": "d5dc71e2-b16e-4e55-8897-1d4ef0b0d4a8",
@@ -1145,7 +1361,7 @@
     },
     {
       "id": "c499f2a8-e246-496e-b21d-20456a1540ab",
-      "title": "Sir Lumière and the Signal in the Noise"
+      "title": "Sir Lumi\u00e8re and the Signal in the Noise"
     },
     {
       "id": "81f74080-19e9-4de6-8f5c-2cb5ad06b443",
@@ -1177,7 +1393,7 @@
     },
     {
       "id": "e699156b-f280-4ac6-8ae0-23a236d7130e",
-      "title": "The Price of Control: How Berry Gordy Failed Motown’s Legends"
+      "title": "The Price of Control: How Berry Gordy Failed Motown\u2019s Legends"
     },
     {
       "id": "37106afc-2020-49a3-8b2a-f2e63fdfade3",
@@ -1245,7 +1461,7 @@
     },
     {
       "id": "fc8ec0c3-8511-4b00-931e-412881ec7b0b",
-      "title": "Lisa’s Custom Keychains: Strategic Social Media Launch Plan"
+      "title": "Lisa\u2019s Custom Keychains: Strategic Social Media Launch Plan"
     },
     {
       "id": "84d23b92-986b-429f-965e-0391b3c59bac",
@@ -1309,7 +1525,7 @@
     },
     {
       "id": "b7454711-f464-4ca6-bc81-e2ed7e205087",
-      "title": "The Agentic Web: Google Chrome’s Gemini AI Evolution"
+      "title": "The Agentic Web: Google Chrome\u2019s Gemini AI Evolution"
     },
     {
       "id": "397dca54-1511-4157-b6f2-f94f834c1562",
@@ -1437,7 +1653,7 @@
     },
     {
       "id": "00e7df0e-2ddc-4ba2-9ab7-b81a24e21be5",
-      "title": "Gamer’s Lair Digital Presence and GEO Strategy Audit"
+      "title": "Gamer\u2019s Lair Digital Presence and GEO Strategy Audit"
     },
     {
       "id": "16950cde-7caa-453a-bc6f-ec070e888ea6",
@@ -1477,7 +1693,7 @@
     },
     {
       "id": "c940302e-2817-4b43-a472-9f3c87848a7f",
-      "title": "Proprius-Ω: The Autonomous Real Estate Synthetic Enterprise Asset"
+      "title": "Proprius-\u03a9: The Autonomous Real Estate Synthetic Enterprise Asset"
     },
     {
       "id": "963ec614-a993-480f-a7d7-3fe94e35b05b",
@@ -1511,5 +1727,6 @@
       "id": "95b1fce4-7d6b-46df-ab73-a80dbd80642c",
       "title": "Mugifier Documents"
     }
-  ]
+  ],
+  "updated": "2026-09-13T04:44:44.073279+00:00"
 }

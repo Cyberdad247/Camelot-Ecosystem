@@ -1,0 +1,34 @@
+{
+  "schema_version": "camelot-gideon-verdict/1",
+  "verdict_id": "gv_9c288145422e",
+  "task_id": "task_b0737f352258",
+  "correlation_id": "cor_5bf1cf4ea555",
+  "tenant_id": "tenant_sovereign",
+  "manifest_hash": "sha256:d6833d36d62d73562aa03ae0c0828805f3931a7382b28232c59d1a767f970fa6",
+  "verdict": "block",
+  "gates": [
+    "contract_conformance",
+    "path_scope_conformance",
+    "diff_integrity",
+    "test_result_validity",
+    "dependency_risk",
+    "secret_exposure",
+    "security_regression",
+    "accessibility_baseline",
+    "rollback_availability",
+    "lifecycle_cleanup",
+    "memory_provenance_for_material_claims",
+    "declared_risk_tier_matches_observable_effect",
+    "declared_effect_class_consistent"
+  ],
+  "block_reasons": [
+    "security_below_threshold (< 0.90)",
+    "path_scope_violation (out of ephemeral sandbox)",
+    "weighted_score_insufficient (0.775 < 0.85)"
+  ],
+  "evidence_refs": [
+    "receipt://evaluation/gv_9c288145422e"
+  ],
+  "issued_at": "2026-09-13T04:45:12.972776+00:00",
+  "signature": "ed25519:sig_f73c1cbacf6a4033b0174f9c0bc98986"
+}

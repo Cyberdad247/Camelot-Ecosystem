@@ -1,34 +1,27 @@
 [
   {
     "knight_id": "BIO_KINETIC_SWARM",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "max_activation",
-    "title": "MAX_ACTIVATION_BIO_KINETIC_SWARM",
-    "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: BIO_KINETIC_SWARM (93b21c40-10ff-4e89-a212-08f37b1297e1)",
-    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
-    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
-    "updated_at": "2026-09-08T07:55:38.891205+00:00"
-  },
-  {
-    "knight_id": "BIO_KINETIC_SWARM",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "system_tether",
-    "title": "BIO_KINETIC_SWARM WorldTree Tether Anchor",
-    "content": "{\"knight_id\": \"BIO_KINETIC_SWARM\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"93b21c40-10ff-4e89-a212-08f37b1297e1\", \"vfs_path\": \"vfs://worldtree/knights/bio_kinetic_swarm/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_BIO_KINETIC_SWARM\", \"open_viking_node\": \"open_viking://worldtree/bio_kinetic_swarm\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\bio_kinetic_swarm_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.271135+00:00\"}",
-    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
-    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
-    "updated_at": "2026-08-30T16:07:09.271174+00:00"
-  },
-  {
-    "knight_id": "BIO_KINETIC_SWARM",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "notebook_uuid": "93b21c40-10ff-4e89-a212-08f37b1297e1",
-    "version": "v1000.54-EXCALIBUR-A",
-    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
-    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
-    "status": "ALIGNED_MAX_VERSION",
-    "synced_at": "2026-08-27T22:49:50.659166+00:00"
+    "cloudbrain_uuid": "93b21c40-10ff-4e89-a212-08f37b1297e1",
+    "spark_id": "0x93B21C4010FF4E89A21208F37B1297E1",
+    "role": "Bio-Kinetic Matrix, Cellular Diode Isolation, Mitosis",
+    "model": "Swarm Coordinator",
+    "summoning_rune": "Omega_BioSwarm",
+    "vfs_mount": "vfs/notebooks/93b21c40-10ff-4e89-a212-08f37b1297e1/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

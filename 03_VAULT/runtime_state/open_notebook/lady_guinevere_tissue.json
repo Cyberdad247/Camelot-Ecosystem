@@ -1,45 +1,27 @@
 [
   {
     "knight_id": "LADY_GUINEVERE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "Ant Design Assimilation Memorandum",
-    "content": "# Assimilation Memorandum: Ant Design (antd v6.6.3)\n**Source:** https://github.com/ant-design/ant-design  \n**Assimilated By:** Antigravity / MERLIN_OMEGA / LADY_GUINEVERE  \n**Target Subsystems:** apps/pwa, Lady Guinevere (Aesthetic Harmony), Sir Stitch (Kinematics & Micro-interactions)\n\n## Architectural Profile\n- **Release Line:** Ant Design v6.6.3 (TypeScript strict, Biome format/lint, CSS-in-JS + @layer styling)\n- **Core Capabilities:**\n  - Token-based design architecture (Design Tokens, Component Tokens, Seed/Map/Alias tokens)\n  - Full-featured enterprise widgets: Data Table (virtualized sorting, filtering, row selection), Form & Form.Item reactive validation, TreeSelect, DatePicker, Cascader\n  - Accessibility & multi-language i18n support across 50+ locales\n\n## Camelot Sovereign Governance Alignment\n- **Rule 1 Enforcement:** CAMELOT-OS mandates Tailwind v4 and Luxora Gold (`#D4AF37`) for primary highlights. Direct monolithic runtime imports of `@ant-design/cssinjs` are rejected in the hot-path to preserve sub-100ms FCP and green compute budgets.\n- **Architectural Extraction:**\n  1. Component API contract patterns (declarative schema-driven forms, structured tables).\n  2. Design token mapping algorithm mapped to Tailwind v4 CSS variables.\n  3. Micro-interaction and kinematic states assigned to Sir Stitch (`0fdccdc1-a1d2-48c2-8948-187398bfbeb5`).\n",
-    "vfs_path": "vfs://worldtree/knights/lady_guinevere/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_GUINEVERE",
-    "open_viking_tether": "open_viking://worldtree/lady_guinevere",
-    "updated_at": "2026-09-09T18:34:09.780261+00:00"
-  },
-  {
-    "knight_id": "LADY_GUINEVERE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "cloudbrain_expansion",
-    "title": "WORLDTREE_CLOUDBRAIN_EXPANSION_LADY_GUINEVERE",
-    "content": "{\n  \"node\": \"LADY_GUINEVERE\",\n  \"uuid\": \"8dca4a86-2bb6-4332-96b6-79899c0a9ccf\",\n  \"role\": \"Mastery of UI/UX & Luxury Minimalist Design Tokens\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/lady_guinevere/\",\n  \"status\": \"EXPANDED_SYNCHRONIZED\",\n  \"synchronized_with\": [\n    \"CAMELOT_V1000\",\n    \"INSPIRA_HIVE_IDE\",\n    \"UI_UX_MASTERY\"\n  ]\n}",
-    "vfs_path": "vfs://worldtree/knights/lady_guinevere/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_GUINEVERE",
-    "open_viking_tether": "open_viking://worldtree/lady_guinevere",
-    "synced_at": "2026-09-08T08:10:44.581546+00:00"
-  },
-  {
-    "knight_id": "LADY_GUINEVERE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "system_tether",
-    "title": "LADY_GUINEVERE WorldTree Tether Anchor",
-    "content": "{\"knight_id\": \"LADY_GUINEVERE\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"8dca4a86-2bb6-4332-96b6-79899c0a9ccf\", \"vfs_path\": \"vfs://worldtree/knights/lady_guinevere/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_LADY_GUINEVERE\", \"open_viking_node\": \"open_viking://worldtree/lady_guinevere\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\lady_guinevere_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.014295+00:00\"}",
-    "vfs_path": "vfs://worldtree/knights/lady_guinevere/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_GUINEVERE",
-    "open_viking_tether": "open_viking://worldtree/lady_guinevere",
-    "updated_at": "2026-08-30T16:07:09.014340+00:00"
-  },
-  {
-    "knight_id": "LADY_GUINEVERE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "notebook_uuid": "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
-    "version": "v1000.54-EXCALIBUR-A",
-    "mempalace_wing": "WING_WORLDTREE_LADY_GUINEVERE",
-    "vfs_path": "vfs://worldtree/knights/lady_guinevere/tether.json",
-    "status": "ALIGNED_MAX_VERSION",
-    "synced_at": "2026-08-27T22:49:50.659166+00:00"
+    "cloudbrain_uuid": "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
+    "spark_id": "0x8DCA4A862BB6433296B679899C0A9CCF",
+    "role": "Aesthetic Harmony, Interface Tokens, Luxury Minimalist",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Guinevere",
+    "vfs_mount": "vfs/notebooks/8dca4a86-2bb6-4332-96b6-79899c0a9ccf/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

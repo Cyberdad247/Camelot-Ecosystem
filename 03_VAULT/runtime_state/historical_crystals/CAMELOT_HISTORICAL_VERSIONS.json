@@ -1,0 +1,90 @@
+{
+  "schema_version": "TOON_CRYSTAL_v1.0",
+  "crystal_name": "CAMELOT_HISTORICAL_VERSIONS",
+  "status": "COLD_STORAGE_SEALED",
+  "canonical_active_target": {
+    "version": "v1000.54-EXCALIBUR-A",
+    "uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
+    "title": "Camelot-OS v.1000"
+  },
+  "archived_at": "2026-09-13T04:44:44.071223+00:00",
+  "total_archived_versions": 15,
+  "versions": [
+    {
+      "version": "v57.0",
+      "id": "19f90acf-6731-4ba3-bf87-1310b1c97564",
+      "title": "Camelot OS v57.0 Master Bootstrap Protocol"
+    },
+    {
+      "version": "v300.4.0",
+      "id": "a9cf586e-1971-4959-bb97-cdcd37257ebb",
+      "title": "living Camelot-OS: The v300.4.0 Universal Singularity Recompilation"
+    },
+    {
+      "version": "v400",
+      "id": "bcaadfdd-1654-487d-9c4c-111f7dea120e",
+      "title": "Living Camelot-OS v.400"
+    },
+    {
+      "version": "v700.0",
+      "id": "d02cc716-d235-4d34-9185-a07860ec5272",
+      "title": "Camelot-OS v.700.0"
+    },
+    {
+      "version": "v999.3",
+      "id": "28bca096-1ba2-4e47-8b92-aa88e90be210",
+      "title": "Camelot-OS v.999.3"
+    },
+    {
+      "version": "v_living",
+      "id": "eaff9959-4d7b-4761-8850-c0b2e25a2b45",
+      "title": "Living Camelot-OS"
+    },
+    {
+      "version": "v_court3",
+      "id": "cab403c0-bb66-454d-a529-84f7e8ac5cff",
+      "title": "Court of Camelot 3.0: Agentic Ecosystem Architecture"
+    },
+    {
+      "version": "v_codex",
+      "id": "c5544902-cfb4-4864-b28e-1838b69b9814",
+      "title": "The Camelot-OS Master Construction Codex"
+    },
+    {
+      "version": "v_lattice",
+      "id": "74895628-d98d-4d93-a789-dde10e7f27ff",
+      "title": "Camelot-OS: Leech-Lattice Quantization for Swarm-Scale Agentic Systems"
+    },
+    {
+      "version": "v_alpha_omega",
+      "id": "2536aefb-937f-4a04-9142-d1a2f029d8a7",
+      "title": "The Camelot-OS Alpha-Omega artifacts"
+    },
+    {
+      "version": "v_gde",
+      "id": "a9109641-116a-4589-a867-2e0d27ee5536",
+      "title": "Camelot GDE Universal Orchestrator Protocol"
+    },
+    {
+      "version": "v_glyph",
+      "id": "38096a21-e19d-4f91-b48f-e92c2adbd879",
+      "title": "Camelot OS: Universal Knowledge Glyph and System State Ledger"
+    },
+    {
+      "version": "v_distill",
+      "id": "58130cac-8415-4ab9-918e-fa76b1ad66cd",
+      "title": "Camelot-OS: The Alpha Omega Distillation Protocol"
+    },
+    {
+      "version": "v_ascension",
+      "id": "b3b9f907-a256-4351-a0a4-31f6ddd82c4a",
+      "title": "The Camelot-OS Ascension Manifest and System Architecture shadow"
+    },
+    {
+      "version": "v_warroom",
+      "id": "b2ef1f3b-8f14-47c6-bf27-8d8c5f76d1b8",
+      "title": "war room of camelot"
+    }
+  ],
+  "query_routing_policy": "ALL_QUERIES_REDIRECT_TO_V1000"
+}

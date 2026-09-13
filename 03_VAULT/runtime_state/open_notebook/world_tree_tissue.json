@@ -1,89 +1,27 @@
 [
   {
-    "knight_id": "INVISIONED_MARKETING",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "sovereign_cloudbrain_anchor",
-    "title": "INVISIONED_MARKETING_SOVEREIGN_CLOUDBRAIN_ANCHOR",
-    "content": "{\n  \"node\": \"INVISIONED_MARKETING\",\n  \"uuid\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"role\": \"Invisioned Marketing Inc. Sovereign CloudBrain & Brand Direction Mesh\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/invisioned_marketing/\",\n  \"status\": \"ANCHORED_EXPANDED_SYNCHRONIZED\",\n  \"synchronized_knights\": [\n    \"KNIGHT_STRATEGOS\",\n    \"LADY_APIS\",\n    \"SIR_SYNTAX\",\n    \"LADY_MNEMOSYNE\",\n    \"MERLIN_OMEGA\"\n  ]\n}",
-    "vfs_path": "vfs://worldtree/knights/invisioned_marketing/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_INVISIONED_MARKETING",
-    "open_viking_tether": "open_viking://worldtree/invisioned_marketing",
-    "synced_at": "2026-09-09T03:38:11.925536+00:00"
-  },
-  {
     "knight_id": "WORLD_TREE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "cloudbrain_expansion",
-    "title": "WORLDTREE_CLOUDBRAIN_EXPANSION_WORLD_TREE",
-    "content": "{\n  \"node\": \"WORLD_TREE\",\n  \"uuid\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"role\": \"Living Knowledge Graph Root WorldTree Anchor\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/world_tree/\",\n  \"status\": \"EXPANDED_SYNCHRONIZED\",\n  \"synchronized_with\": [\n    \"CAMELOT_V1000\",\n    \"INSPIRA_HIVE_IDE\",\n    \"UI_UX_MASTERY\"\n  ]\n}",
-    "vfs_path": "vfs://worldtree/knights/world_tree/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",
-    "open_viking_tether": "open_viking://worldtree/world_tree",
-    "synced_at": "2026-09-08T08:10:44.597611+00:00"
-  },
-  {
-    "knight_id": "WORLD_TREE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "max_activation",
-    "title": "MAX_ACTIVATION_WORLD_TREE",
-    "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: WORLD_TREE (a0a4bfb9-e847-4c38-be39-7aee398f0795)",
-    "vfs_path": "vfs://worldtree/knights/world_tree/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",
-    "open_viking_tether": "open_viking://worldtree/world_tree",
-    "updated_at": "2026-09-08T07:55:38.825558+00:00"
-  },
-  {
-    "knight_id": "WORLD_TREE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "system_boot",
-    "title": "CAMELOT_OS_MAX_ACTIVATION",
-    "content": "Activated Camelot-OS Max Version via Worldtree Cloudbrain mesh.",
-    "vfs_path": "vfs://worldtree/knights/world_tree/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",
-    "open_viking_tether": "open_viking://worldtree/world_tree",
-    "updated_at": "2026-09-08T07:55:13.239132+00:00"
-  },
-  {
-    "knight_id": "WORLD_TREE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "system_tether",
-    "title": "WORLD_TREE WorldTree Tether Anchor",
-    "content": "{\"knight_id\": \"WORLD_TREE\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"vfs_path\": \"vfs://worldtree/knights/world_tree/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_WORLD_TREE\", \"open_viking_node\": \"open_viking://worldtree/world_tree\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\world_tree_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.185725+00:00\"}",
-    "vfs_path": "vfs://worldtree/knights/world_tree/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",
-    "open_viking_tether": "open_viking://worldtree/world_tree",
-    "updated_at": "2026-08-30T16:07:09.185772+00:00"
-  },
-  {
-    "knight_id": "WORLD_TREE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "VALIDATION_PULSE_WORLD_TREE",
-    "content": "{\n  \"validator\": \"ANTIGRAVITY_SENTINEL\",\n  \"probe\": \"SYNAPSE_LINK_AUDIT\",\n  \"status\": \"TETHERED_VALIDATED\"\n}",
-    "vfs_path": "vfs://worldtree/knights/world_tree/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",
-    "open_viking_tether": "open_viking://worldtree/world_tree",
-    "updated_at": "2026-08-28T14:38:12.991522+00:00"
-  },
-  {
-    "knight_id": "WORLD_TREE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "notebook_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "version": "v1000.54-EXCALIBUR-A",
-    "mempalace_wing": "WING_WORLDTREE_WORLD_TREE",
-    "vfs_path": "vfs://worldtree/knights/world_tree/tether.json",
-    "status": "ALIGNED_MAX_VERSION",
-    "synced_at": "2026-08-27T22:49:50.659166+00:00"
-  },
-  {
-    "knight_id": "\u03a9_MARKETING_ASSIMILATION_VMAX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "sovereign_metacompiler_bootstrap",
-    "title": "\u03a9_MARKETING_ASSIMILATION_VMAX 4-Stage Crystallized Anchor",
-    "content": "4-Stage Kinetic DAG (Forage -> Renormalize -> Assimilation -> Crystallization) bound to duckdb-wasm MemPalace with <72us sync SLA and //REZERO scarcity halt condition",
-    "vfs_path": "vfs://worldtree/knights/marketing_assimilation_vmax/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_MARKETING_ASSIMILATION",
-    "open_viking_tether": "open_viking://worldtree/marketing_assimilation_vmax",
-    "synced_at": "2026-09-08T22:05:00.000000+00:00"
+    "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+    "role": "Living Knowledge Graph & Root WorldTree Tether",
+    "model": "WorldTree Substrate",
+    "summoning_rune": "Omega_WorldTree",
+    "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

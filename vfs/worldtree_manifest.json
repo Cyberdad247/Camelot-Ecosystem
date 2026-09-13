@@ -1,7 +1,5 @@
-# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
-# Camelot Apex OS — Worldtree VFS Manifest
 {
-  "schema_version": "1000.54",
+  "schema_version": "1000.54-EXCALIBUR-A",
   "generated": "2026-08-10T13:15:00Z",
   "worldtree_root": "vfs://camelot_os/",
   "sync_protocol": "Viking Block HMAC-SHA256 + Anya Quantum Mantra Glyph",
@@ -11,127 +9,366 @@
   "janitor": "vfs/cloudbrain_janitor.py",
   "system_instructions": "vfs/notebook_system_instructions.py",
   "rune_symbolect": {
-    "\u16B1": {"name": "RESEARCH",   "targets": ["LADY_APIS", "MERLIN_OMEGA"]},
-    "\u16A0": {"name": "FORGE",      "targets": ["SIR_FORGE", "SIR_CODEX", "CAMELOT_V1000"]},
-    "\u16D7": {"name": "MEMORY",     "targets": ["LADY_MNEMOSYNE", "ANYA_QUANTUM_MANTRA"]},
-    "\u16DC": {"name": "GUARD",      "targets": ["SIR_SENTINEL", "SIR_GHOST"]},
-    "\u16DE": {"name": "DEBUG",      "targets": ["SIR_DEBUG"]},
-    "\u16A2": {"name": "VOICE",      "targets": ["SIR_HELIO", "SIR_SONUS"]},
-    "\u16A8": {"name": "ARCHITECT",  "targets": ["SIR_BORIS", "SIR_ALEX"]},
-    "\u16DF": {"name": "SOVEREIGN",  "targets": "ALL"}
+    "\u16b1": {
+      "name": "RESEARCH",
+      "targets": [
+        "LADY_APIS",
+        "MERLIN_OMEGA"
+      ]
+    },
+    "\u16a0": {
+      "name": "FORGE",
+      "targets": [
+        "SIR_FORGE",
+        "SIR_CODEX",
+        "CAMELOT_V1000"
+      ]
+    },
+    "\u16d7": {
+      "name": "MEMORY",
+      "targets": [
+        "LADY_MNEMOSYNE",
+        "ANYA_QUANTUM_MANTRA"
+      ]
+    },
+    "\u16dc": {
+      "name": "GUARD",
+      "targets": [
+        "SIR_SENTINEL",
+        "SIR_GHOST"
+      ]
+    },
+    "\u16de": {
+      "name": "DEBUG",
+      "targets": [
+        "SIR_DEBUG"
+      ]
+    },
+    "\u16a2": {
+      "name": "VOICE",
+      "targets": [
+        "SIR_HELIO",
+        "SIR_SONUS"
+      ]
+    },
+    "\u16a8": {
+      "name": "ARCHITECT",
+      "targets": [
+        "SIR_BORIS",
+        "SIR_ALEX"
+      ]
+    },
+    "\u16df": {
+      "name": "SOVEREIGN",
+      "targets": "ALL"
+    }
   },
   "nodes": [
     {
       "knight_id": "SIR_BORIS",
       "notebook_id": "f7707daa-2d10-4db8-8fda-be4661a27793",
-      "vfs_path": "vfs://sir_boris/",
-      "domain_tags": ["architecture", "crucible", "design", "review"],
-      "rune": "\u16A8",
+      "vfs_path": "vfs://worldtree/knights/sir_boris/",
+      "role": "Lead Architect, Crucible Conductor, 13-Agent Critique",
+      "primary_model": "Gemini / Claude Code",
       "active_last_3_months": true
     },
     {
       "knight_id": "SIR_ALEX",
       "notebook_id": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
-      "vfs_path": "vfs://sir_alex/",
-      "domain_tags": ["planning", "dag", "orchestration", "tasks"],
-      "rune": "\u16A8",
+      "vfs_path": "vfs://worldtree/knights/sir_alex/",
+      "role": "Task Planner, DAG Orchestrator, AST Task Breakdown",
+      "primary_model": "Gemini 3.8 Flash",
       "active_last_3_months": true
     },
     {
       "knight_id": "SIR_FORGE",
       "notebook_id": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
-      "vfs_path": "vfs://sir_forge/",
-      "domain_tags": ["kinetic", "build", "execution", "code"],
-      "rune": "\u16A0",
-      "active_last_3_months": true
-    },
-    {
-      "knight_id": "SIR_SENTINEL",
-      "notebook_id": "07cbb441-f008-424c-820a-85676210be39",
-      "vfs_path": "vfs://sir_sentinel/",
-      "domain_tags": ["security", "audit", "iron_gate", "guard"],
-      "rune": "\u16DC",
-      "active_last_3_months": true
-    },
-    {
-      "knight_id": "SIR_DEBUG",
-      "notebook_id": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
-      "vfs_path": "vfs://sir_debug/",
-      "domain_tags": ["debug", "heal", "piv", "repair"],
-      "rune": "\u16DE",
-      "active_last_3_months": true
-    },
-    {
-      "knight_id": "SIR_GHOST",
-      "notebook_id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
-      "vfs_path": "vfs://sir_ghost/",
-      "domain_tags": ["privacy", "secrets", "air_gap", "scan"],
-      "rune": "\u16DC",
-      "active_last_3_months": true
-    },
-    {
-      "knight_id": "LADY_APIS",
-      "notebook_id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
-      "vfs_path": "vfs://lady_apis/",
-      "domain_tags": ["research", "bashr", "foraging", "context"],
-      "rune": "\u16B1",
-      "active_last_3_months": true
-    },
-    {
-      "knight_id": "MERLIN_OMEGA",
-      "notebook_id": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
-      "vfs_path": "vfs://merlin_omega/",
-      "domain_tags": ["reasoning", "got", "tot", "deep_think", "math"],
-      "rune": "\u16B1",
-      "active_last_3_months": true
-    },
-    {
-      "knight_id": "SIR_HELIO",
-      "notebook_id": "56820318-bb91-451f-aac4-4b46424898cf",
-      "vfs_path": "vfs://sir_helio/",
-      "domain_tags": ["voice", "tts", "audio", "realtime"],
-      "rune": "\u16A2",
-      "active_last_3_months": true
-    },
-    {
-      "knight_id": "SIR_SONUS",
-      "notebook_id": "b8a1c3d5-e2f4-4687-9a01-234567890abc",
-      "vfs_path": "vfs://sir_sonus/",
-      "domain_tags": ["voice", "audio", "multivoice", "phonetic"],
-      "rune": "\u16A2",
+      "vfs_path": "vfs://worldtree/knights/sir_forge/",
+      "role": "Kinetic Code Generation, Compiles, //FORGE Dispatcher",
+      "primary_model": "Gemini 3.8 Flash",
       "active_last_3_months": true
     },
     {
       "knight_id": "SIR_CODEX",
       "notebook_id": "8c656cfa-a189-409e-a72d-07692a47f17e",
-      "vfs_path": "vfs://sir_codex/",
-      "domain_tags": ["kinetic", "rapid", "prototype", "openai"],
-      "rune": "\u16A0",
+      "vfs_path": "vfs://worldtree/knights/sir_codex/",
+      "role": "Kinetic Implementer, High-Velocity Zero-Trust Architecture",
+      "primary_model": "OpenAI Codex / GPT-5.5",
       "active_last_3_months": true
     },
     {
-      "knight_id": "LADY_MNEMOSYNE",
-      "notebook_id": "mnemosyne-cloudbrain-vfs-1100",
-      "vfs_path": "vfs://lady_mnemosyne/",
-      "domain_tags": ["memory", "vfs", "mnemosyne", "sweep", "brief"],
-      "rune": "\u16D7",
+      "knight_id": "SIR_SENTINEL",
+      "notebook_id": "07cbb441-f008-424c-820a-85676210be39",
+      "vfs_path": "vfs://worldtree/knights/sir_sentinel/",
+      "role": "AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_DEBUG",
+      "notebook_id": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
+      "vfs_path": "vfs://worldtree/knights/sir_debug/",
+      "role": "PIV Self-Healing Loop, Error Diagnosis & AST Repair",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_GHOST",
+      "notebook_id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+      "vfs_path": "vfs://worldtree/knights/sir_ghost/",
+      "role": "Privacy Scanner, Air-Gapped Credentials & Local Vault",
+      "primary_model": "Ollama Local Container",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "LADY_APIS",
+      "notebook_id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+      "vfs_path": "vfs://worldtree/knights/lady_apis/",
+      "role": "BASHR Research Loop, Bio-Swarm Isolation, Context Forager",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "MERLIN_OMEGA",
+      "notebook_id": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
+      "vfs_path": "vfs://worldtree/knights/merlin_omega/",
+      "role": "GoT/ToT Deep Reasoning, Mathematical Proofs, System 2",
+      "primary_model": "Gemini Pro / Opus",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_HELIO",
+      "notebook_id": "56820318-bb91-451f-aac4-4b46424898cf",
+      "vfs_path": "vfs://worldtree/knights/sir_helio/",
+      "role": "Voice OS, Real-Time Audio Pipeline, //vocal Dispatcher",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_SONUS",
+      "notebook_id": "6272aa35-c285-4edc-81bc-2824ab519edf",
+      "vfs_path": "vfs://worldtree/knights/sir_sonus/",
+      "role": "Multivoice Audio Routing, Phonetic Analysis, Aoede S2S",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "HERMES_PRIME",
+      "notebook_id": "28f89cb6-5048-4b5d-9e94-376082d24744",
+      "vfs_path": "vfs://worldtree/knights/hermes_prime/",
+      "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",
+      "primary_model": "Gemini / Hermes OS",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "HERMES_AGENT_EVOLUTION",
+      "notebook_id": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",
+      "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/",
+      "role": "OpenClaw Transcendence, Nous Research, Autonomous Evolution",
+      "primary_model": "Hermes Kernel",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "ANYA_OMEGA",
+      "notebook_id": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+      "vfs_path": "vfs://worldtree/knights/anya_omega/",
+      "role": "Sovereign Compiler, Helm Authority, Anya First & Last Gate",
+      "primary_model": "Sovereign Lattice",
       "active_last_3_months": true
     },
     {
       "knight_id": "ANYA_QUANTUM_MANTRA",
-      "notebook_id": "anya-glyph-engine-vfs-1200",
-      "vfs_path": "vfs://anya_quantum_mantra/",
-      "domain_tags": ["glyph", "quantum", "vfs", "token", "compression"],
-      "rune": "\u16D7",
+      "notebook_id": "219e765a-0c8e-4b66-b356-f277cb441b14",
+      "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/",
+      "role": "Glyph Quantum Engine, Token Compression, VFS Mantra",
+      "primary_model": "Sovereign Lattice",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "ARTHUR_OMEGA",
+      "notebook_id": "cbb310bd-987e-4b84-bf45-12d37d090bec",
+      "vfs_path": "vfs://worldtree/knights/arthur_omega/",
+      "role": "Sovereign King Authority, Ethical Compass, Governance",
+      "primary_model": "Human Operator (Vizion)",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_HEIMDALL",
+      "notebook_id": "3205f189-91da-4272-96a9-3641fd642763",
+      "vfs_path": "vfs://worldtree/knights/sir_heimdall/",
+      "role": "Bifrost Guardian, Perimeter Lock, mTLS Boundary",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_GALAHAD",
+      "notebook_id": "e0110853-14ef-403f-8def-bf3a5123986f",
+      "vfs_path": "vfs://worldtree/knights/sir_galahad/",
+      "role": "Chivalric Verification, Cryptographic Purity, Truth Audit",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_STITCH",
+      "notebook_id": "0fdccdc1-a1d2-48c2-8948-187398bfbeb5",
+      "vfs_path": "vfs://worldtree/knights/sir_stitch/",
+      "role": "Kinematics, Micro-Interactions, UI State Patching",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_ALCHEMIST",
+      "notebook_id": "d6bdd57c-84d2-4e24-bb10-ad1fd179fb04",
+      "vfs_path": "vfs://worldtree/knights/sir_alchemist/",
+      "role": "Transmutation, Model Quantization, Compression",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_RUSTCLAW",
+      "notebook_id": "2b3b6ec3-e020-484d-914d-92241a97ea55",
+      "vfs_path": "vfs://worldtree/knights/sir_rustclaw/",
+      "role": "Rust Image & Kernel Pipelines, Bare-Metal Decompressor",
+      "primary_model": "Rust 1.96 / Cargo",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_HERMES",
+      "notebook_id": "5dc31b8d-169d-4d4d-ab90-d12724fca720",
+      "vfs_path": "vfs://worldtree/knights/sir_hermes/",
+      "role": "Courier Dispatch, Webhooks, GraphQL Endpoints",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_LANCELOT",
+      "notebook_id": "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
+      "vfs_path": "vfs://worldtree/knights/sir_lancelot/",
+      "role": "Frontline Champion, Kinetic Edge Defense, Real-Time Guard",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "LADY_GUINEVERE",
+      "notebook_id": "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
+      "vfs_path": "vfs://worldtree/knights/lady_guinevere/",
+      "role": "Aesthetic Harmony, Interface Tokens, Luxury Minimalist",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_HUGGINGFACE",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/sir_huggingface/",
+      "role": "Model Inspection, Spaces Management, Transformer Pipelines",
+      "primary_model": "HuggingFace Hub API",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_MNEMO",
+      "notebook_id": "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
+      "vfs_path": "vfs://worldtree/knights/sir_mnemo/",
+      "role": "Dual-Tier Memory Sync, Vector Indexing, Tissue Journaling",
+      "primary_model": "Gemini 3.8 Flash",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "LADY_MNEMOSYNE",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/",
+      "role": "WorldTree Master Memory, Memory Palace & VFS Sweeps",
+      "primary_model": "Memory Substrate",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "BIO_KINETIC_SWARM",
+      "notebook_id": "93b21c40-10ff-4e89-a212-08f37b1297e1",
+      "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/",
+      "role": "Bio-Kinetic Matrix, Cellular Diode Isolation, Mitosis",
+      "primary_model": "Swarm Coordinator",
       "active_last_3_months": true
     },
     {
       "knight_id": "CAMELOT_V1000",
-      "notebook_id": "camelot-os-v1000-excalibur-a",
-      "vfs_path": "vfs://camelot_v1000/",
-      "domain_tags": ["sovereign", "os", "broadcast", "excalibur", "system"],
-      "rune": "\u16DF",
+      "notebook_id": "8c656cfa-a189-409e-a72d-07692a47f17e",
+      "vfs_path": "vfs://worldtree/knights/camelot_v1000/",
+      "role": "Sovereign OS Master Construction Codex, Excalibur Hub",
+      "primary_model": "System Substrate",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "BIFROST",
+      "notebook_id": "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",
+      "vfs_path": "vfs://worldtree/knights/bifrost/",
+      "role": "Bifrost Bridge Architecture, WebSocket & Express Transport",
+      "primary_model": "Node.js / Rust",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "FATHER_CAMELOT",
+      "notebook_id": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
+      "vfs_path": "vfs://worldtree/knights/father_camelot/",
+      "role": "Ancestral Compass, Moral & Ethical Governance Ledger",
+      "primary_model": "Sovereign Substrate",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "WORLD_TREE",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/world_tree/",
+      "role": "Living Knowledge Graph & Root WorldTree Tether",
+      "primary_model": "WorldTree Substrate",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "ALPHA_OMEGA",
+      "notebook_id": "2536aefb-937f-4a04-9142-d1a2f029d8a7",
+      "vfs_path": "vfs://worldtree/knights/alpha_omega/",
+      "role": "Camelot-OS Alpha-Omega Artifacts & Compilation Store",
+      "primary_model": "Forge Substrate",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "ANTIGRAVITY",
+      "notebook_id": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+      "vfs_path": "vfs://worldtree/knights/antigravity/",
+      "role": "NotebookLM + AntiGravity CLI Synergy & MCP Integration",
+      "primary_model": "FastMCP / agy",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "KICKBOX",
+      "notebook_id": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
+      "vfs_path": "vfs://worldtree/knights/kickbox/",
+      "role": "KickBox Audio, WebRTC State & Vocal HUD Integration",
+      "primary_model": "Next.js 14 / WebRTC",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "INSPIRA",
+      "notebook_id": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",
+      "vfs_path": "vfs://worldtree/knights/inspira/",
+      "role": "HiveIDE / Inspira Spatial Developer Workstation",
+      "primary_model": "IDE Substrate",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "INVISIONED_MARKETING",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/invisioned_marketing/",
+      "role": "Invisioned Marketing Sovereign CloudBrain & Brand Direction",
+      "primary_model": "WorldTree Substrate",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "KNIGHT_STRATEGOS",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/knight_strategos/",
+      "role": "Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO",
+      "primary_model": "Gemini 3.8 Flash",
       "active_last_3_months": true
     }
-  ]
+  ],
+  "updated": "2026-09-13T04:44:44.073279+00:00",
+  "verified_knights_count": 38
 }

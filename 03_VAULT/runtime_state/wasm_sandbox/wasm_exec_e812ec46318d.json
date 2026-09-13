@@ -1,0 +1,17 @@
+{
+  "execution_id": "wasm_exec_e812ec46318d",
+  "tool_id": "calculator",
+  "status": "SUCCESS",
+  "output_data": {
+    "result": "Execution of calculator succeeded in WASI 0.2 sandbox.",
+    "inputs_echo": {
+      "expression": "12 * 8"
+    },
+    "sandbox_isolation": "Wasmtime WASI 0.2 Active"
+  },
+  "error_message": null,
+  "memory_used_mb": 4.2,
+  "duration_ms": 0.08,
+  "transcript_hash": "sha256:8481b9a4f5a761c32a6d02dcf3c4951a893d43ce7802e0a063268eb8e0b0ed96",
+  "executed_at": "2026-09-13T04:50:14.227020+00:00"
+}

@@ -3,9 +3,9 @@
   "updated_at": 1787701978.3722885,
   "knights": {
     "MERLIN_OMEGA": {
-      "total_xp": 18500,
+      "total_xp": 20000,
       "level": 5,
-      "missions_completed": 20,
+      "missions_completed": 23,
       "rank": "Grand Knight Commander"
     },
     "SIR_BORIS": {

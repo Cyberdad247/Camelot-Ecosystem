@@ -1,123 +1,27 @@
 [
   {
     "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//FORGE_SOURCE Phase_0",
-    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_0\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-09-09T05:57:35.666564+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//ADHD stop",
-    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": false, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"DISARMED\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-09-09T03:56:47.165231+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//ADHD",
-    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-09-09T03:56:44.206754+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//ADHD",
-    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-09-09T03:56:41.561738+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//ADHD",
-    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-09-09T03:56:38.856391+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//ADHD",
-    "content": "{\"action\": \"adhd_cognitive_shaping\", \"knight\": \"sir_codex\", \"active\": true, \"mode\": \"KINETIC_ACTION_FIRST\", \"rules\": [\"1. Lead with the next action\", \"2. Number multi-step tasks\", \"3. End with one concrete next action\", \"4. Suppress tangents\", \"5. Restate state every turn\", \"6. Give specific time estimates\", \"7. Make completed work visible\", \"8. Matter-of-fact tone for errors\", \"9. Cap lists at 5 items\", \"10. No preamble, no recap, no closing pleasantries\"], \"skill_definition\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\.agents\\\\skills\\\\i-have-adhd\\\\SKILL.md\", \"status\": \"ARMED\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-09-09T03:56:11.293039+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "max_activation",
-    "title": "MAX_ACTIVATION_SIR_CODEX",
-    "content": "Camelot-OS Max Version Online via Worldtree Cloudbrain Tether: SIR_CODEX (8c656cfa-a189-409e-a72d-07692a47f17e)",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-09-08T07:55:38.931886+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "system_tether",
-    "title": "SIR_CODEX WorldTree Tether Anchor",
-    "content": "{\"knight_id\": \"SIR_CODEX\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"8c656cfa-a189-409e-a72d-07692a47f17e\", \"vfs_path\": \"vfs://worldtree/knights/sir_codex/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_CODEX\", \"open_viking_node\": \"open_viking://worldtree/sir_codex\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_codex_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.801148+00:00\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-08-30T16:07:08.801189+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_CODEX IMPLAN: Kickbox-audio \u2014 create unified branch merging best of all 5 branches.",
-    "content": "Direct SIR_CODEX execution lane",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-08-22T05:13:41.072576+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_CODEX IMPLAN: Cyberdad247/Kickbox-audio \u2014 create feat/unified-v1000 branch merging best of all 4 branches",
-    "content": "Direct SIR_CODEX execution lane",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-08-22T04:46:15.833464+00:00"
-  },
-  {
-    "knight_id": "SIR_CODEX",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//REZERO",
-    "content": "{\"action\": \"//REZERO\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
-    "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-08-12T18:06:29.887941+00:00"
+    "cloudbrain_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
+    "spark_id": "0x8C656CFAA189409EA72D07692A47F17E",
+    "role": "Kinetic Implementer, High-Velocity Zero-Trust Architecture",
+    "model": "OpenAI Codex / GPT-5.5",
+    "summoning_rune": "Omega_Codex",
+    "vfs_mount": "vfs/notebooks/8c656cfa-a189-409e-a72d-07692a47f17e/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

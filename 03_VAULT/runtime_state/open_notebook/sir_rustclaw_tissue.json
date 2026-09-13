@@ -1,23 +1,27 @@
 [
   {
     "knight_id": "SIR_RUSTCLAW",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "system_tether",
-    "title": "SIR_RUSTCLAW WorldTree Tether Anchor",
-    "content": "{\"knight_id\": \"SIR_RUSTCLAW\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"2b3b6ec3-e020-484d-914d-92241a97ea55\", \"vfs_path\": \"vfs://worldtree/knights/sir_rustclaw/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_SIR_RUSTCLAW\", \"open_viking_node\": \"open_viking://worldtree/sir_rustclaw\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_rustclaw_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:08.908986+00:00\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
-    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
-    "updated_at": "2026-08-30T16:07:08.909029+00:00"
-  },
-  {
-    "knight_id": "SIR_RUSTCLAW",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "notebook_uuid": "2b3b6ec3-e020-484d-914d-92241a97ea55",
-    "version": "v1000.54-EXCALIBUR-A",
-    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
-    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
-    "status": "ALIGNED_MAX_VERSION",
-    "synced_at": "2026-08-27T22:49:50.659166+00:00"
+    "cloudbrain_uuid": "2b3b6ec3-e020-484d-914d-92241a97ea55",
+    "spark_id": "0x2B3B6EC3E020484D914D92241A97EA55",
+    "role": "Rust Image & Kernel Pipelines, Bare-Metal Decompressor",
+    "model": "Rust 1.96 / Cargo",
+    "summoning_rune": "Omega_Rustclaw",
+    "vfs_mount": "vfs/notebooks/2b3b6ec3-e020-484d-914d-92241a97ea55/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

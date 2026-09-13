@@ -11,6 +11,9 @@
 
 | Timestamp (UTC) | Cadence | Active Version | Snapshot ID | Tethered Knights | Duration | Status |
 |---|---|---|---|---|---|---|
+| `2026-09-13T04:58:58Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260913_045857` | 41 / 36 | 1.82s | `SUCCESS` |
+| `2026-09-13T04:51:34Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260913_045132` | 41 / 36 | 1.82s | `SUCCESS` |
+| `2026-09-13T04:46:51Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260913_044649` | 41 / 36 | 1.88s | `SUCCESS` |
 | `2026-08-31T21:27:22Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260831_212719` | 38 / 36 | 2.77s | `SUCCESS` |
 | `2026-08-28T20:22:53Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260828_202248` | 38 / 36 | 4.91s | `SUCCESS` |
 | `2026-08-28T01:12:08Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260828_011205` | 36 / 36 | 2.84s | `SUCCESS` |
@@ -106,4 +109,25 @@
 * **Trigger:** Autonomous CI/CD Loop (DAILY)
 * **Snapshot SHA-256:** `b5d184dca3cbcf12c6eec15d9c72ffa8d0654e51c5d3164feb787ce7ffe738f8`
 * **WorldTree Tethers:** 38 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260913_044649` (DAILY)
+* **Timestamp:** `2026-09-13T04:46:51Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `1e9e2b58c51423c7b25ed1ca0a1a7c4806193182103572eee075c6a24daf4237`
+* **WorldTree Tethers:** 41 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260913_045132` (DAILY)
+* **Timestamp:** `2026-09-13T04:51:34Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `e061c7370736633d6063a75b39259545f5906692261193ddf01cd0216e394e96`
+* **WorldTree Tethers:** 41 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260913_045857` (DAILY)
+* **Timestamp:** `2026-09-13T04:58:58Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `22267f208b1eb049bef98c6a5eea961edecea5aabb96e63518c2a480d0eb4cc1`
+* **WorldTree Tethers:** 41 Active Nodes Verified
 * **Status:** `NOMINAL_SUCCESS`

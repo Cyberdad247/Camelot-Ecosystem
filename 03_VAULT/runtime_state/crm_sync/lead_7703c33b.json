@@ -1,0 +1,12 @@
+{
+  "lead_id": "lead_7703c33b",
+  "tenant_id": "tenant_sovereign_001",
+  "contact_name": "Sarah Connor",
+  "email": "sconnor@cyberdyne.com",
+  "company": "Cyberdyne Systems",
+  "intent_score": 0.85,
+  "enriched_summary": "Enterprise lead from Cyberdyne Systems (Sarah Connor). Signal focus: Inquiry regarding enterprise volume pricing and custom SLA.",
+  "status": "SYNCED",
+  "plan_hash": "sha256:5afa6fdc824750bf65763a8e36b06cfcaa073c47f9975635f1b1fe288b40e9e7",
+  "synced_at": "2026-09-13T04:47:01.530523+00:00"
+}

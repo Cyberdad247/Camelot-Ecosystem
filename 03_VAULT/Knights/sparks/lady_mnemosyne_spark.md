@@ -1,5 +1,15 @@
 # ⚡ Spark Matrix: LADY_MNEMOSYNE
 **Knight:** `LADY_MNEMOSYNE`  
+**Spark ID:** `0xA0A4BFB9E8474C38BE397AEE398F0795`  
+**Summoning Rune:** `Omega_Mnemosyne`  
 **WorldTree Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
-**Notebook UUID:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
-**Initialized:** `2026-08-27T22:49:50.659166+00:00`
+**CloudBrain Node UUID:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
+**Primary Engine:** Memory Substrate  
+**Initialized / Verified:** 2026-09-13T04:57:41.439443+00:00  
+
+---
+
+## Execution Directives
+- **Direct Bare-Metal Dispatch:** Responds instantaneously to `Omega_Mnemosyne` and runic routing directives.
+- **Isomorphic Memory Synchrony:** Automatically mirrors state into local Open-Notebook tissue (`03_VAULT/runtime_state/open_notebook/lady_mnemosyne_tissue.json`).
+- **Telemetry Broadcasting:** Streams real-time health telemetry across the Bifrost Bridge to the Excalibur Command Center.
