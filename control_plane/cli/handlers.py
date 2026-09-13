@@ -355,6 +355,8 @@ def _cloudbrain_progress(args: Any) -> None:
                               constraints=[f"compute_tier={args.tier}", f"budget_mode={args.budget_mode}"])
     elif c == "eldergod-health":
         _stream_task_progress("elderGod forge health")
+    elif c == "health":
+        _stream_task_progress("unified health rollup")
     elif c == "eldergod":
         _stream_task_progress("elderGod forge objective", objective=args.objective,
                               constraints=[f"compute_tier={args.tier}"])
@@ -426,6 +428,8 @@ def _handle_cloudbrain(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str
                                                          "prioritize_local_first": True, "multilogin_enabled": not args.disable_multilogin}))
     elif c == "eldergod-health":
         output = asyncio.run(_run_task("elderGod forge health"))
+    elif c == "health":
+        return _handle_health(args, config_mgr, prov_mgr, argv)
     elif c == "eldergod":
         output = asyncio.run(_run_task("elderGod forge objective", objective=args.objective,
                                        constraints=[f"compute_tier={args.tier}"],
@@ -818,6 +822,72 @@ def _handle_pipeline(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str])
     return handle_pipeline(args, config_mgr, prov_mgr, argv)
 
 
+# ---------------------------------------------------------------------------
+# health (Track B5)
+# ---------------------------------------------------------------------------
+
+def _handle_health(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str]) -> int:
+    """Handle the 'camelot health' command (Track B5)."""
+    from control_plane.infra.cloud_services import CloudServiceRequest, CloudServiceName, CloudServiceRouter
+
+    router = CloudServiceRouter()
+    probe_remote = getattr(args, "probe_remote", True)
+
+    if not getattr(args, "json", False):
+        _stream_print("Probing Camelot ecosystem health rollup...", tone="info")
+
+    result = asyncio.run(router.invoke(CloudServiceRequest(
+        service=CloudServiceName.HEALTH_ROLLUP,
+        payload={"probe_remote": probe_remote},
+    )))
+
+    if getattr(args, "json", False):
+        _print_json(result.model_dump())
+        return 0 if result.success else 1
+
+    data = result.result
+    overall = data.get("overall_status", "UNKNOWN")
+    score_pct = data.get("score_pct", 0.0)
+    healthy_count = data.get("healthy_count", 0)
+    total_count = data.get("total_count", 0)
+    fallback_count = data.get("fallback_count", 0)
+    subsystems = data.get("subsystems", {})
+    contract = data.get("deployment_contract", {})
+    cb = data.get("circuit_breaker", {})
+
+    tone = "accent" if overall == "HEALTHY" else ("warn" if overall == "DEGRADED" else "err")
+    _stream_print("==================================================================", tone="accent")
+    _stream_print(f"CAMELOT-OS UNIFIED HEALTH ROLLUP  [{overall}]  {score_pct}% READY", tone=tone)
+    _stream_print(f"   Healthy: {healthy_count}/{total_count} subsystems | Active Fallbacks: {fallback_count}", tone="info")
+    _stream_print("==================================================================", tone="accent")
+
+    _stream_print(f"{'Subsystem':<20} {'Status':<10} {'Source':<15} {'Details'}", tone="info")
+    _stream_print("-" * 66, tone="dim")
+    for name, sub in subsystems.items():
+        status = sub.get("status", "UNKNOWN")
+        source = sub.get("source", "unknown")
+        summary = str(sub.get("summary") or sub.get("error") or "OK")[:30]
+        s_tone = "accent" if status == "ONLINE" else ("warn" if status == "FALLBACK" else "err")
+        _stream_print(f"{name:<20} {status:<10} {source:<15} {summary}", tone=s_tone)
+
+    _stream_print("-" * 66, tone="dim")
+    contract_status = contract.get("status", "UNKNOWN")
+    c_tone = "accent" if contract_status == "PASS" else ("warn" if contract_status == "WARN" else "err")
+    _stream_print(f"Deployment Contract: [{contract_status}] {contract.get('summary', '')}", tone=c_tone)
+
+    if getattr(args, "verbose", False):
+        _stream_print("\nCircuit Breaker Status:", tone="info")
+        if cb:
+            for k, v in cb.items():
+                is_open = v.get("circuit_open", False)
+                cb_tone = "err" if is_open else "info"
+                _stream_print(f"  - {k}: {'OPEN' if is_open else 'CLOSED'} (failures={v.get('consecutive_failures', 0)})", tone=cb_tone)
+        else:
+            _stream_print("  - All circuits CLOSED (0 failures)", tone="accent")
+
+    return 0 if result.success else 1
+
+
 # ===========================================================================
 # COMMAND REGISTRY
 # ===========================================================================
@@ -845,4 +915,5 @@ COMMAND_REGISTRY: dict[str, HandlerFn] = {
     "scripts": _handle_scripts,
     "ctx7": _handle_ctx7,
     "pipeline": _handle_pipeline,
+    "health": _handle_health,
 }

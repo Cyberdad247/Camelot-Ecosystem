@@ -205,11 +205,19 @@ def _build_parser() -> argparse.ArgumentParser:
     cloud_queue_sub.add_parser("status", help="Show queued Cloud Brain sync events")
     cloud_queue_flush = cloud_queue_sub.add_parser("flush", help="Retry queued Cloud Brain sync events")
     cloud_queue_flush.add_argument("--limit", type=int, default=0, help="Maximum events to retry; 0 means all")
-    cloud_sub.add_parser("research-health", help="Show research agency health")
-    cloud_sub.add_parser("northstar-health", help="Show Northstar war-room health")
-    cloud_sub.add_parser("blueprint-health", help="Show development blueprint health")
-    cloud_sub.add_parser("precise-health", help="Show precise-mode swarm health")
-    cloud_sub.add_parser("eldergod-health", help="Show elderGod forge health")
+    p_res_health = cloud_sub.add_parser("research-health", help="Show research agency health")
+    p_res_health.add_argument("--json", action="store_true", help="Emit JSON output")
+    p_ns_health = cloud_sub.add_parser("northstar-health", help="Show Northstar war-room health")
+    p_ns_health.add_argument("--json", action="store_true", help="Emit JSON output")
+    p_bp_health = cloud_sub.add_parser("blueprint-health", help="Show development blueprint health")
+    p_bp_health.add_argument("--json", action="store_true", help="Emit JSON output")
+    p_pm_health = cloud_sub.add_parser("precise-health", help="Show precise-mode swarm health")
+    p_pm_health.add_argument("--json", action="store_true", help="Emit JSON output")
+    p_eg_health = cloud_sub.add_parser("eldergod-health", help="Show elderGod forge health")
+    p_eg_health.add_argument("--json", action="store_true", help="Emit JSON output")
+    cloud_health = cloud_sub.add_parser("health", help="Unified health aggregation rolling up cloudbrain, research, northstar, blueprint, precise-mode, and eldergod readiness")
+    cloud_health.add_argument("--json", action="store_true", help="Emit JSON output")
+    cloud_health.add_argument("--no-probe-remote", dest="probe_remote", action="store_false", default=True, help="Skip remote network probes")
 
     cloud_nb = cloud_sub.add_parser("notebooklm", help="Manage NotebookLM auth state (Google sign-in)")
     cloud_nb_sub = cloud_nb.add_subparsers(dest="cloud_nb_command", required=True)
@@ -463,5 +471,10 @@ def _build_parser() -> argparse.ArgumentParser:
 
     pipeline_verify = pipeline_sub.add_parser("verify", help="Run automated 6-stage self-diagnostic smoke test")
     pipeline_verify.add_argument("--json", action="store_true", help="Emit JSON output")
+
+    health = sub.add_parser("health", help="Unified production health aggregation rolling up all subsystems (Track B5)")
+    health.add_argument("--json", action="store_true", help="Emit structured JSON output")
+    health.add_argument("--no-probe-remote", dest="probe_remote", action="store_false", default=True, help="Skip remote network probes and check local/cached status only")
+    health.add_argument("--verbose", "-v", action="store_true", help="Include full contract and circuit breaker diagnostics")
 
     return parser

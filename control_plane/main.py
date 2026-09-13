@@ -234,7 +234,7 @@ class ControlPlane:
         intent = task.intent.lower()
         allow_sensitive_remote = "allow_remote_sensitive" in task.constraints
 
-        if request.service is CloudServiceName.CLOUDBRAIN_STATUS:
+        if request.service in {CloudServiceName.CLOUDBRAIN_STATUS, CloudServiceName.HEALTH_ROLLUP}:
             return None
 
         if request.service is CloudServiceName.CLOUDBRAIN_MEMORY and privacy >= 0.95:
@@ -330,6 +330,7 @@ class ControlPlane:
             CloudServiceName.NOTEBOOKLM_SOURCES_LIST,
             CloudServiceName.NOTEBOOKLM_SOURCES_ADD,
             CloudServiceName.NOTEBOOKLM_SOURCES_DELETE,
+            CloudServiceName.HEALTH_ROLLUP,
         }
         if service in cloud_brain_services:
             return "cloud_brain"
@@ -714,6 +715,9 @@ class ControlPlane:
                 service=CloudServiceName.NOTEBOOKLM_SOURCES_DELETE,
                 payload=payload,
             )
+
+        if any(keyword in intent for keyword in {"health rollup", "unified health", "system health", "cloudbrain health", "ecosystem health"}) or intent == "health":
+            return CloudServiceRequest(service=CloudServiceName.HEALTH_ROLLUP)
 
         if any(keyword in intent for keyword in {"cloudbrain", "notebook", "memory status"}):
             return CloudServiceRequest(service=CloudServiceName.CLOUDBRAIN_STATUS)

@@ -41,14 +41,16 @@ def _log_run(
     from control_plane.infra.provenance import VerificationRun
     from control_plane.infra.cloudbrain_sync import sync_after_event
 
+    operator = getattr(args, "profile", "default") or "default"
     run = VerificationRun(
         run_id=f"run_{int(time.time())}",
-        operator=args.profile or "default",
+        operator=operator,
         command=" ".join(argv),
         results=results,
         success=success,
     )
-    prov_mgr.log_verification(run)
+    if prov_mgr is not None:
+        prov_mgr.log_verification(run)
     payload = results.get("payload", {}) if isinstance(results, dict) else {}
     service = payload.get("service")
     mutating_command = (
@@ -82,7 +84,7 @@ KNOWN_COMMANDS = {
     "chat", "route", "triage", "cloudbrain", "orchestrator", "sarda",
     "ledger", "toon", "glyph", "glyth", "forge-unify", "cockpit",
     "evolve", "team", "codex", "bio-swarm", "nano-swarm", "microcubed",
-    "gemini-ext", "scripts", "ctx7", "pipeline",
+    "gemini-ext", "scripts", "ctx7", "pipeline", "health",
 }
 
 

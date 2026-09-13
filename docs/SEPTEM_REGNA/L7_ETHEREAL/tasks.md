@@ -15,7 +15,7 @@
 
 ## Production Goal
 *   [ ] **G1** - One-command operator workflow: generate, deploy, monitor, stop, and sync a mission without manual code edits.
-*   [ ] **G2** - Supportable runtime: every critical subsystem has health checks, bounded retries, logs, and fail-soft behavior.
+*   [X] **G2** - Supportable runtime: every critical subsystem has health checks, bounded retries, logs, and fail-soft behavior.
 *   [ ] **G3** - Auditable missions: every precise mission can be reconstructed from a ledger and synced to the vault.
 *   [ ] **G4** - Safe browser execution: proxy, stealth, profile, and session lifecycle are explicit and operator-controlled.
 *   [ ] **G5** - Release readiness: verification coverage exists for CLI, control plane, cloudbrain, extension runtime, and vault sync.
@@ -27,15 +27,15 @@
 *   [X] **A4** - Result envelopes: control-plane cloud responses now include `result` and `error` payloads instead of only status.
 *   [X] **A5** - Operator profiles in CLI: add first-class CLI flags or config presets for proxy, stealth, and session policy defaults.
 *   [X] **A6** - Persisted operator config: add a canonical Camelot-OS config file for cloud URLs, browser policies, and default tiers.
-*   [ ] **A7** - CLI smoke test suite: add automated tests for `status`, `research-health`, `northstar-health`, `blueprint-health`, and `precise-health`.
+*   [X] **A7** - CLI smoke test suite: add automated tests for `status`, `research-health`, `northstar-health`, `blueprint-health`, and `precise-health`.
 
 ## Track B - Hybrid Cloudbrain
 *   [X] **B1** - Long-term cloudbrain bootstrap: `cloud_orchestrator/long_term_cloudbrain.py` bootstraps Open Notebook and fail-soft Appwrite memory access.
 *   [X] **B2** - Modal service surface: `cloud_orchestrator/modal_services.py` exposes typed endpoints for research, Northstar, blueprint, and precise-mode planning.
 *   [X] **B3** - Local fallback execution: all typed services can execute locally through the control-plane router.
-*   [ ] **B4** - Remote deployment contract: document and validate required environment variables for Modal, Appwrite, and remote health URLs.
-*   [ ] **B5** - Health aggregation: add one production health command that rolls up cloudbrain, research, Northstar, blueprint, and precise-mode readiness.
-*   [ ] **B6** - Cloud timeout policy: standardize timeouts, retries, and fallback thresholds for remote service invocation.
+*   [X] **B4** - Remote deployment contract: document and validate required environment variables for Modal, Appwrite, and remote health URLs.
+*   [X] **B5** - Health aggregation: add one production health command that rolls up cloudbrain, research, Northstar, blueprint, and precise-mode readiness.
+*   [X] **B6** - Cloud timeout policy: standardize timeouts, retries, and fallback thresholds for remote service invocation.
 
 ## Track C - Research And Northstar
 *   [X] **C1** - Research agency tiers: `kinetic`, `hybrid`, and `apex` are implemented with typed profiles and cell definitions.
