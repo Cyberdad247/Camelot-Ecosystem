@@ -3,6 +3,28 @@
     "knight_id": "KING_ARTHUR_VIZION",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_5616de48016ae1e8b12108a777673364cd24d6f8ccaecf9d907af83e3c9d9782",
+    "content": "Verification Run worldtree_cloudbrain_vps_sync_20260913130040: //SYNC WorldTree CloudBrain, VPS Hub KVM563 & Maximum Version Mesh\nOperator: King_Arthur_Vizion\nSuccess: True\nResults: {\"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"hermes_prime_vfs_uuid\": \"28f89cb6-5048-4b5d-9e94-376082d24744\", \"camelot_v1000_uuid\": \"8c656cfa-a189-409e-a72d-07692a47f17e\", \"vps_public_ip\": \"162.35.107.134\", \"vps_tailscale_ip\": \"100.71.218.75\", \"active_version\": \"v1000.54-EXCALIBUR-A\", \"tethered_knights\": 41, \"open_notebook_tissue\": \"03_VAULT\\\\runtime_state\\\\open_notebook\\\\vps_hub_kvm563_tissue.json\", \"status\": \"WORLDTREE_VPS_MAX_VERSION_INTEGRATED\"}",
+    "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KING_ARTHUR_VIZION",
+    "open_viking_tether": "open_viking://worldtree/king_arthur_vizion",
+    "updated_at": "2026-09-13T13:00:41.751208+00:00"
+  },
+  {
+    "knight_id": "KING_ARTHUR_VIZION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_eb0dacec82f0c1337d2d826aee28c7412c726afbb35053dee11e6c2bac5548d2",
+    "content": "Verification Run worldtree_cloudbrain_vps_sync_20260913125951: //SYNC WorldTree CloudBrain, VPS Hub KVM563 & Maximum Version Mesh\nOperator: King_Arthur_Vizion\nSuccess: True\nResults: {\"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"hermes_prime_vfs_uuid\": \"28f89cb6-5048-4b5d-9e94-376082d24744\", \"camelot_v1000_uuid\": \"8c656cfa-a189-409e-a72d-07692a47f17e\", \"vps_public_ip\": \"162.35.107.134\", \"vps_tailscale_ip\": \"100.71.218.75\", \"active_version\": \"v1000.54-EXCALIBUR-A\", \"tethered_knights\": 41, \"open_notebook_tissue\": \"03_VAULT\\\\runtime_state\\\\open_notebook\\\\vps_hub_kvm563_tissue.json\", \"status\": \"WORLDTREE_VPS_MAX_VERSION_INTEGRATED\"}",
+    "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KING_ARTHUR_VIZION",
+    "open_viking_tether": "open_viking://worldtree/king_arthur_vizion",
+    "updated_at": "2026-09-13T12:59:53.297039+00:00"
+  },
+  {
+    "knight_id": "KING_ARTHUR_VIZION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
     "title": "L2_Vector_Index_camelot_audit_e46ae3e3af5a50a92f4dde62a25806631ecfbe5cffd95a5cd5b0b7d9b5ad20ea",
     "content": "Verification Run worldtree_cloudbrain_vps_sync_20260913124950: //SYNC WorldTree CloudBrain, VPS Hub KVM563 & Maximum Version Mesh\nOperator: King_Arthur_Vizion\nSuccess: True\nResults: {\"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"hermes_prime_vfs_uuid\": \"28f89cb6-5048-4b5d-9e94-376082d24744\", \"camelot_v1000_uuid\": \"8c656cfa-a189-409e-a72d-07692a47f17e\", \"vps_public_ip\": \"162.35.107.134\", \"vps_tailscale_ip\": \"100.71.218.75\", \"active_version\": \"v1000.54-EXCALIBUR-A\", \"tethered_knights\": 41, \"open_notebook_tissue\": \"03_VAULT\\\\runtime_state\\\\open_notebook\\\\vps_hub_kvm563_tissue.json\", \"status\": \"WORLDTREE_VPS_MAX_VERSION_INTEGRATED\"}",
     "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",

@@ -112,9 +112,20 @@ class ProductionReadinessVerifier:
         except Exception:
             vps_ssh_online = False
 
+        nodes = {
+            "cybertronia": "100.118.224.52",
+            "vashawns-s26-ultra": "100.106.246.126",
+            "fothers-camelot": "100.121.48.50",
+            "lakesha": "100.100.155.55",
+            "camelot-relay-modal": "100.84.98.39",
+            "kba-services": "100.71.218.75",
+            "motorola-moto-g-power-5g---2024": "100.89.129.105",
+        }
+
         return {
             "gate": "GATE_3_SOVEREIGN_MESH_TOPOLOGY",
             "status": "PASS",
+            "mesh_inventory": nodes,
             "host_node": "cybertronia (100.118.224.52)",
             "mobile_sentinel": "vashawns-s26-ultra (100.106.246.126)",
             "vps_hub": f"{VPS_PUBLIC_IP} (KVM563)",

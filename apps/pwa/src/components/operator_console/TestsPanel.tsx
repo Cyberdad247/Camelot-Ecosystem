@@ -25,10 +25,23 @@ export function TestsPanel({ tests }: { tests: TestRunResult[] }) {
               {t.summary.passed}/{t.summary.total} passed · {t.summary.failed} failed
             </span>
           </div>
+          {t.receiptRef && (
+            <div className="mt-1.5 flex items-center gap-1.5">
+              <span className="rounded border border-emerald-400/40 bg-emerald-400/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-emerald-300">
+                Receipt
+              </span>
+              <span className="break-all font-mono text-[10px] text-emerald-200/70">{t.receiptRef}</span>
+            </div>
+          )}
           {t.suites.map((s) => (
-            <p key={s.name} className="mt-1 text-[11px] text-white/50">
-              {s.name} · <span className="uppercase">{s.status}</span> · {s.durationMs}ms
-            </p>
+            <div key={s.name} className="mt-1 flex items-center justify-between text-[11px] text-white/50">
+              <span>
+                {s.name} · <span className="uppercase">{s.status}</span> · {s.durationMs}ms
+              </span>
+              {s.artifactRef && (
+                <span className="font-mono text-[9px] text-white/40">{s.artifactRef}</span>
+              )}
+            </div>
           ))}
         </li>
       ))}

@@ -28,6 +28,14 @@ export function DiffStreamPanel({ diffs }: { diffs: DiffEvidence[] }) {
           <p className="mt-1 text-[11px] text-white/50">
             {d.addedLines} added · {d.removedLines} removed · {d.changedPaths.length} paths
           </p>
+          {d.receiptRef && (
+            <div className="mt-1.5 flex items-center gap-1.5">
+              <span className="rounded border border-emerald-400/40 bg-emerald-400/10 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-emerald-300">
+                Receipt
+              </span>
+              <span className="break-all font-mono text-[10px] text-emerald-200/70">{d.receiptRef}</span>
+            </div>
+          )}
           {d.changedPaths.slice(0, 4).map((p) => (
             <p key={p} className="mt-0.5 break-all font-mono text-[10px] text-white/40">+ {p}</p>
           ))}

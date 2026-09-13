@@ -78,6 +78,14 @@ const operatorBff = createOperatorBff({
   requiredEvidencePresent: (ref: string) => ref.startsWith('receipt://'),
   gideonVerdict: () => 'pass' as const,
   vfsEvidenceOk: () => true,
+  broadcastWs: (envelope) => {
+    const msg = JSON.stringify({ type: 'OPERATOR_EVIDENCE', payload: envelope });
+    for (const client of wss.clients) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(msg);
+      }
+    }
+  },
 });
 app.use('/v1/operator', operatorBff);
 

@@ -21,25 +21,25 @@ export function ApprovalPanel({ approval, taskId, forceDisabled = false }: {
   const policyBlocked = state === 'POLICY_BLOCKED';
   const disabled = suspended || policyBlocked || forceDisabled;
 
-  // Fixture manifest surfaced by the BFF (Task 5) — slice #2 renders the
-  // immutable manifest for the fixture task.
+  // Dynamic manifest surfaced by the BFF/snapshot, falling back to the default fixture manifest.
+  const rawManifest = (approval.manifest ?? {}) as Partial<EffectManifest>;
   const manifest: EffectManifest = {
     schemaVersion: 'effect-manifest/1',
-    manifestId: 'eff_01J',
+    manifestId: rawManifest.manifestId ?? 'eff_01J',
     taskId,
-    correlationId: `cor_${taskId}`,
-    kind: 'worktree.patch.promote',
-    baseRevision: 'base',
-    candidateRevision: 'cand',
-    diffSha256: 'sha256:abc',
-    allowedPaths: ['apps/pwa/src/components/operator_console/**'],
-    requiredEvidence: ['receipt://vfs/no-escape/1'],
-    policyClass: 'engineering.write',
-    expiresAt: new Date(Date.now() + 60_000).toISOString(),
-    oneTimeNonce: 'nonce_fixture',
-    effectClass: 'workspace.patch',
-    declaredRiskTier: 'T1',
-    declarationHash: 'sha256:fixture_decl_hash',
+    correlationId: rawManifest.correlationId ?? `cor_${taskId}`,
+    kind: rawManifest.kind ?? 'worktree.patch.promote',
+    baseRevision: rawManifest.baseRevision ?? 'base',
+    candidateRevision: rawManifest.candidateRevision ?? 'cand',
+    diffSha256: rawManifest.diffSha256 ?? 'sha256:abc',
+    allowedPaths: rawManifest.allowedPaths ?? ['apps/pwa/src/components/operator_console/**'],
+    requiredEvidence: rawManifest.requiredEvidence ?? ['receipt://vfs/no-escape/1'],
+    policyClass: rawManifest.policyClass ?? 'engineering.write',
+    expiresAt: rawManifest.expiresAt ?? new Date(Date.now() + 60_000).toISOString(),
+    oneTimeNonce: rawManifest.oneTimeNonce ?? 'nonce_fixture',
+    effectClass: rawManifest.effectClass ?? 'workspace.patch',
+    declaredRiskTier: rawManifest.declaredRiskTier ?? 'T1',
+    declarationHash: rawManifest.declarationHash ?? 'sha256:fixture_decl_hash',
   };
 
   const runDecision = async (decision: 'approve' | 'deny', reason?: string) => {
