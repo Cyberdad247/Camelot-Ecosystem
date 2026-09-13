@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 'use strict';
 
 /**
@@ -144,7 +144,7 @@ async function run() {
   fs.writeFileSync(stagePayload, tarBuffer);
   console.log(`📦 Payload staged at ${stagePayload} (${(tarBuffer.length / 1024 / 1024).toFixed(2)} MB)`);
 
-  const destDir = process.platform === 'win32' ? 'C:\\opt\\camelot' : '/opt/camelot';
+  const destDir = process.env.CAMELOT_DEST_DIR || (process.platform === 'win32' ? 'C:\\opt\\camelot' : '/opt/camelot');
   const bootstrapBin = process.platform === 'win32' ? path.join(destDir, 'bin', 'camelot-bootstrap.exe') : path.join(destDir, 'bin', 'camelot-bootstrap');
 
   console.log(`🚀 Extracting bare-metal binaries to ${destDir}...`);
