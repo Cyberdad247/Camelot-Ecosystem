@@ -7,6 +7,7 @@ from control_plane.dispatch.idempotency_guardian import (
     IdempotencyConflictError,
     IdempotencyDecision,
     IdempotencyGuardian,
+    IdempotencyPayloadMismatchError,
     IdempotencyStatus,
     compute_compound_key,
 )
@@ -26,22 +27,23 @@ def test_compute_compound_key():
 
 def test_fast_mutex_accelerator():
     mutex = FastMutexAccelerator(default_ttl_sec=0.2)
-    key = "test_compound_key"
+    tenant = "tenant_test"
+    key = "test_key"
 
-    assert mutex.try_acquire(key) is True
-    assert mutex.is_locked(key) is True
+    assert mutex.try_acquire(tenant, key) is True
+    assert mutex.is_locked(tenant, key) is True
     # Immediate second acquire must fail
-    assert mutex.try_acquire(key) is False
+    assert mutex.try_acquire(tenant, key) is False
 
     # Release allows immediate re-acquire
-    mutex.release(key)
-    assert mutex.is_locked(key) is False
-    assert mutex.try_acquire(key) is True
+    mutex.release(tenant, key)
+    assert mutex.is_locked(tenant, key) is False
+    assert mutex.try_acquire(tenant, key) is True
 
     # TTL expiry allows re-acquire
     time.sleep(0.25)
-    assert mutex.is_locked(key) is False
-    assert mutex.try_acquire(key) is True
+    assert mutex.is_locked(tenant, key) is False
+    assert mutex.try_acquire(tenant, key) is True
 
 
 def test_idempotency_lifecycle_proceed_commit_replay():
@@ -57,11 +59,13 @@ def test_idempotency_lifecycle_proceed_commit_replay():
     assert rec is not None
     assert rec.status == IdempotencyStatus.IN_FLIGHT
 
-    # 2. Duplicate while in flight: CONFLICT
+    # 2. Duplicate while in flight: CONFLICT with Retry-After
     with pytest.raises(IdempotencyConflictError) as exc_info:
         guardian.acquire_or_replay(key, tenant_id, manifest_hash, correlation_id)
     assert exc_info.value.key == key
     assert exc_info.value.tenant_id == tenant_id
+    assert exc_info.value.status_code == 409
+    assert exc_info.value.retry_after_sec >= 1
 
     # 3. Execution succeeds: commit receipt
     committed = guardian.commit(
@@ -71,7 +75,7 @@ def test_idempotency_lifecycle_proceed_commit_replay():
         receipt_ref="rcp_001_sealed",
         response_body={"outcome": "SUCCESS", "amount": 100},
     )
-    assert committed.status == IdempotencyStatus.COMMITTED
+    assert committed.status == IdempotencyStatus.COMPLETED
     assert committed.receipt_ref == "rcp_001_sealed"
     assert "amount" in committed.response_body
 
@@ -80,6 +84,28 @@ def test_idempotency_lifecycle_proceed_commit_replay():
     assert decision == IdempotencyDecision.REPLAY
     assert replay_rec.receipt_ref == "rcp_001_sealed"
     assert replay_rec.response_body == committed.response_body
+
+
+def test_payload_mismatch_triggers_422():
+    """Deviation in payload under the same idempotency key triggers IDEMPOTENCY_PAYLOAD_MISMATCH (HTTP 422)."""
+    guardian = IdempotencyGuardian()
+    key = "key_fixed_001"
+    tenant_id = "tenant_mismatch"
+    manifest_original = "sha256:" + "1" * 64
+    manifest_deviated = "sha256:" + "2" * 64
+
+    # First ingress registers manifest_original
+    decision, _ = guardian.acquire_or_replay(key, tenant_id, manifest_original, "cor_orig")
+    assert decision == IdempotencyDecision.PROCEED
+
+    # Second ingress with different manifest under SAME key must raise 422
+    with pytest.raises(IdempotencyPayloadMismatchError) as exc_info:
+        guardian.acquire_or_replay(key, tenant_id, manifest_deviated, "cor_hacker")
+
+    assert exc_info.value.status_code == 422
+    assert exc_info.value.error_code == "IDEMPOTENCY_PAYLOAD_MISMATCH"
+    assert exc_info.value.existing_hash == manifest_original
+    assert exc_info.value.new_hash == manifest_deviated
 
 
 def test_cross_tenant_idempotency_isolation():

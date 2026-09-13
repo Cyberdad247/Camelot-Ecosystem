@@ -2,20 +2,21 @@
 """Idempotency Guardian — Phase 1B Ingress & Replay Protection.
 
 Enforces durable idempotency keys backed by PostgreSQL / SQLite WAL
-with a high-speed transit accelerator (<10s fast mutex).
+(table: `bifrost_idempotency_journal`) with a high-speed transit accelerator
+(<10s fast mutex).
 
-Compound Key Tuple:
-    compound_key = SHA-256(client_key || tenant_id || manifest_hash)
-
-State Machine:
-    [NONE] ──(ingress)──> [IN_FLIGHT] ──(success)──> [COMMITTED]
-                               │
-                               └──(failure)──> [REJECTED]
-
-Invariants:
-    1. An IN_FLIGHT key triggers a 409 Conflict if a duplicate arrives before expiry.
-    2. A COMMITTED key returns the exact cached ExecutionReceipt / response.
-    3. Cross-tenant key isolation is strictly enforced via the compound tuple.
+Ingress Protocol:
+    1. FastMutex Check: Acquire short-lived mutex lock (tau <= 10s) to absorb
+       high-concurrency burst traffic.
+    2. Durable Assertion: Check record existence under (client_key, tenant_id) in
+       `bifrost_idempotency_journal`.
+    3. Payload Mismatch Detection: If record exists and manifest_hash does NOT match,
+       raise IdempotencyPayloadMismatchError (HTTP 422 IDEMPOTENCY_PAYLOAD_MISMATCH).
+    4. State Machine Evaluation:
+       - COMPLETED / COMMITTED: Return cached, signed execution envelope (REPLAY).
+       - IN_FLIGHT: Return 409 CONFLICT with Retry-After header bound to lease TTL.
+       - REJECTED / Expired: Permit retry or return error.
+       - Absent: Write state IN_FLIGHT, bound to the exact manifest_hash, and PROCEED.
 """
 from __future__ import annotations
 
@@ -33,24 +34,55 @@ from typing import Any, Optional
 
 class IdempotencyStatus(str, enum.Enum):
     IN_FLIGHT = "IN_FLIGHT"
-    COMMITTED = "COMMITTED"
+    COMPLETED = "COMPLETED"
+    COMMITTED = "COMPLETED"  # Backward-compatible alias
     REJECTED = "REJECTED"
 
 
 class IdempotencyDecision(str, enum.Enum):
     PROCEED = "PROCEED"      # New key acquired, caller must execute
-    REPLAY = "REPLAY"        # Previously committed, return cached receipt/response
-    CONFLICT = "CONFLICT"    # Currently in-flight, return 409 Conflict
-    REJECTED = "REJECTED"    # Previously rejected, retry permitted or error returned
+    REPLAY = "REPLAY"        # Previously completed, return cached receipt/envelope
+    CONFLICT = "CONFLICT"    # Currently in-flight, return 409 Conflict with Retry-After
+    REJECTED = "REJECTED"    # Previously rejected
 
 
 class IdempotencyConflictError(Exception):
-    """Raised when an operation is already in flight for the given compound key."""
-    def __init__(self, key: str, tenant_id: str, correlation_id: str, message: str = ""):
+    """Raised when an operation is already IN_FLIGHT for the given key (HTTP 409)."""
+    def __init__(
+        self,
+        key: str,
+        tenant_id: str,
+        correlation_id: str,
+        retry_after_sec: int = 5,
+        message: str = "",
+    ):
         self.key = key
         self.tenant_id = tenant_id
         self.correlation_id = correlation_id
-        super().__init__(message or f"Operation '{key}' is already IN_FLIGHT under correlation '{correlation_id}'.")
+        self.retry_after_sec = max(1, retry_after_sec)
+        self.status_code = 409
+        self.error_code = "IDEMPOTENCY_CONFLICT"
+        super().__init__(
+            message or (
+                f"Operation '{key}' under tenant '{tenant_id}' is already IN_FLIGHT "
+                f"(correlation: '{correlation_id}', retry_after: {self.retry_after_sec}s)."
+            )
+        )
+
+
+class IdempotencyPayloadMismatchError(Exception):
+    """Raised when an idempotency key is reused with a different payload/manifest (HTTP 422)."""
+    def __init__(self, key: str, tenant_id: str, existing_hash: str, new_hash: str):
+        self.key = key
+        self.tenant_id = tenant_id
+        self.existing_hash = existing_hash
+        self.new_hash = new_hash
+        self.status_code = 422
+        self.error_code = "IDEMPOTENCY_PAYLOAD_MISMATCH"
+        super().__init__(
+            f"IDEMPOTENCY_PAYLOAD_MISMATCH: Key '{key}' for tenant '{tenant_id}' was previously bound "
+            f"to manifest '{existing_hash}', cannot execute with '{new_hash}'."
+        )
 
 
 @dataclass
@@ -81,53 +113,57 @@ def compute_compound_key(key: str, tenant_id: str, manifest_hash: str) -> str:
 
 
 class FastMutexAccelerator:
-    """In-memory fast mutex accelerator (<10s transit lock).
+    """In-memory fast mutex accelerator (tau <= 10s transit lock).
 
-    Guarantees zero database round-trips for sub-second concurrent burst collisions.
+    Absorbs sub-second concurrent burst collisions without unnecessary DB pressure.
     """
     def __init__(self, default_ttl_sec: float = 10.0):
         self._lock = threading.Lock()
-        self._default_ttl = default_ttl_sec
-        self._locks: dict[str, float] = {}  # compound_key -> expiry_ts
+        self._default_ttl = min(default_ttl_sec, 10.0)
+        self._locks: dict[str, float] = {}  # tenant:key -> expiry_ts
 
-    def try_acquire(self, compound_key: str, ttl_sec: Optional[float] = None) -> bool:
-        ttl = ttl_sec if ttl_sec is not None else self._default_ttl
+    def try_acquire(self, tenant_id: str, key: str, ttl_sec: Optional[float] = None) -> bool:
+        lock_id = f"{tenant_id}:{key}"
+        ttl = min(ttl_sec if ttl_sec is not None else self._default_ttl, 10.0)
         now = time.time()
         with self._lock:
             # Purge expired entry if present
-            if compound_key in self._locks and self._locks[compound_key] <= now:
-                del self._locks[compound_key]
+            if lock_id in self._locks and self._locks[lock_id] <= now:
+                del self._locks[lock_id]
 
-            if compound_key in self._locks:
-                return False  # Locked
-            self._locks[compound_key] = now + ttl
+            if lock_id in self._locks:
+                return False  # Actively locked
+            self._locks[lock_id] = now + ttl
             return True
 
-    def release(self, compound_key: str) -> None:
+    def release(self, tenant_id: str, key: str) -> None:
+        lock_id = f"{tenant_id}:{key}"
         with self._lock:
-            self._locks.pop(compound_key, None)
+            self._locks.pop(lock_id, None)
 
-    def is_locked(self, compound_key: str) -> bool:
+    def is_locked(self, tenant_id: str, key: str) -> bool:
+        lock_id = f"{tenant_id}:{key}"
         now = time.time()
         with self._lock:
-            exp = self._locks.get(compound_key)
+            exp = self._locks.get(lock_id)
             if exp is None:
                 return False
             if exp <= now:
-                del self._locks[compound_key]
+                del self._locks[lock_id]
                 return False
             return True
 
 
 class DurableIdempotencyStore:
-    """Thread-safe SQLite/PostgreSQL durable WAL store for idempotency records."""
+    """Thread-safe SQLite/PostgreSQL durable WAL store for bifrost_idempotency_journal."""
+
+    TABLE_NAME = "bifrost_idempotency_journal"
 
     def __init__(self, db_path: str = ":memory:"):
         self.db_path = db_path
         self._lock = threading.Lock()
         self._conn: Optional[sqlite3.Connection] = None
         if self.db_path == ":memory:":
-            # Persistent connection for in-memory instance
             self._conn = sqlite3.connect(":memory:", check_same_thread=False, timeout=15.0)
             self._conn.row_factory = sqlite3.Row
         self._init_db()
@@ -147,12 +183,10 @@ class DurableIdempotencyStore:
         with self._lock:
             conn = self._get_conn()
             try:
-                # Enable WAL mode for durability & concurrency if on disk
                 if self.db_path != ":memory:":
                     conn.execute("PRAGMA journal_mode=WAL;")
-                conn.execute("""
-                    CREATE TABLE IF NOT EXISTS idempotency_records (
-                        compound_key TEXT PRIMARY KEY,
+                conn.execute(f"""
+                    CREATE TABLE IF NOT EXISTS {self.TABLE_NAME} (
                         client_key TEXT NOT NULL,
                         tenant_id TEXT NOT NULL,
                         manifest_hash TEXT NOT NULL,
@@ -162,38 +196,46 @@ class DurableIdempotencyStore:
                         response_body TEXT,
                         expires_at REAL NOT NULL,
                         created_at REAL NOT NULL,
-                        updated_at REAL NOT NULL
+                        updated_at REAL NOT NULL,
+                        PRIMARY KEY (tenant_id, client_key)
                     );
                 """)
-                conn.execute("""
-                    CREATE INDEX IF NOT EXISTS idx_idempotency_tenant_key 
-                    ON idempotency_records (tenant_id, client_key);
+                conn.execute(f"""
+                    CREATE INDEX IF NOT EXISTS idx_bifrost_idemp_tenant_manifest 
+                    ON {self.TABLE_NAME} (tenant_id, manifest_hash);
                 """)
-                conn.execute("""
-                    CREATE INDEX IF NOT EXISTS idx_idempotency_expiry 
-                    ON idempotency_records (expires_at);
+                conn.execute(f"""
+                    CREATE INDEX IF NOT EXISTS idx_bifrost_idemp_expiry 
+                    ON {self.TABLE_NAME} (expires_at);
                 """)
                 conn.commit()
             finally:
                 self._close_conn(conn)
 
-    def get(self, compound_key: str) -> Optional[IdempotencyRecord]:
+    def get_by_key(self, client_key: str, tenant_id: str) -> Optional[IdempotencyRecord]:
+        """Look up active record by (client_key, tenant_id)."""
         with self._lock:
             conn = self._get_conn()
             try:
                 cur = conn.execute(
-                    "SELECT * FROM idempotency_records WHERE compound_key = ?",
-                    (compound_key,),
+                    f"SELECT * FROM {self.TABLE_NAME} WHERE client_key = ? AND tenant_id = ?",
+                    (client_key, tenant_id),
                 )
                 row = cur.fetchone()
                 if not row:
                     return None
+                status_raw = row["status"]
+                status_enum = (
+                    IdempotencyStatus.COMPLETED
+                    if status_raw in ("COMPLETED", "COMMITTED")
+                    else IdempotencyStatus(status_raw)
+                )
                 return IdempotencyRecord(
                     key=row["client_key"],
                     tenant_id=row["tenant_id"],
                     manifest_hash=row["manifest_hash"],
                     correlation_id=row["correlation_id"],
-                    status=IdempotencyStatus(row["status"]),
+                    status=status_enum,
                     receipt_ref=row["receipt_ref"],
                     response_body=row["response_body"],
                     expires_at=float(row["expires_at"]),
@@ -209,32 +251,32 @@ class DurableIdempotencyStore:
             conn = self._get_conn()
             try:
                 now = time.time()
-                # Check existing
                 cur = conn.execute(
-                    "SELECT status, expires_at FROM idempotency_records WHERE compound_key = ?",
-                    (record.compound_key,),
+                    f"SELECT status, expires_at FROM {self.TABLE_NAME} WHERE client_key = ? AND tenant_id = ?",
+                    (record.key, record.tenant_id),
                 )
                 existing = cur.fetchone()
                 if existing:
-                    # If expired or previously REJECTED, overwrite for retry
-                    if existing["status"] == IdempotencyStatus.REJECTED.value or float(existing["expires_at"]) <= now:
+                    if (
+                        existing["status"] == IdempotencyStatus.REJECTED.value
+                        or float(existing["expires_at"]) <= now
+                    ):
                         conn.execute(
-                            "DELETE FROM idempotency_records WHERE compound_key = ?",
-                            (record.compound_key,),
+                            f"DELETE FROM {self.TABLE_NAME} WHERE client_key = ? AND tenant_id = ?",
+                            (record.key, record.tenant_id),
                         )
                     else:
                         return False
 
                 conn.execute(
-                    """
-                    INSERT INTO idempotency_records (
-                        compound_key, client_key, tenant_id, manifest_hash,
-                        correlation_id, status, receipt_ref, response_body,
-                        expires_at, created_at, updated_at
-                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    f"""
+                    INSERT INTO {self.TABLE_NAME} (
+                        client_key, tenant_id, manifest_hash, correlation_id,
+                        status, receipt_ref, response_body, expires_at,
+                        created_at, updated_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                     """,
                     (
-                        record.compound_key,
                         record.key,
                         record.tenant_id,
                         record.manifest_hash,
@@ -256,7 +298,8 @@ class DurableIdempotencyStore:
 
     def update_status(
         self,
-        compound_key: str,
+        client_key: str,
+        tenant_id: str,
         status: IdempotencyStatus,
         receipt_ref: Optional[str] = None,
         response_body: Optional[str] = None,
@@ -266,28 +309,28 @@ class DurableIdempotencyStore:
             try:
                 now = time.time()
                 cur = conn.execute(
-                    """
-                    UPDATE idempotency_records
+                    f"""
+                    UPDATE {self.TABLE_NAME}
                     SET status = ?, receipt_ref = COALESCE(?, receipt_ref),
                         response_body = COALESCE(?, response_body),
                         updated_at = ?
-                    WHERE compound_key = ?
+                    WHERE client_key = ? AND tenant_id = ?
                     """,
-                    (status.value, receipt_ref, response_body, now, compound_key),
+                    (status.value, receipt_ref, response_body, now, client_key, tenant_id),
                 )
                 conn.commit()
                 if cur.rowcount == 0:
                     return None
             finally:
                 self._close_conn(conn)
-        return self.get(compound_key)
+        return self.get_by_key(client_key, tenant_id)
 
     def purge_expired(self) -> int:
         with self._lock:
             conn = self._get_conn()
             try:
                 now = time.time()
-                cur = conn.execute("DELETE FROM idempotency_records WHERE expires_at < ?", (now,))
+                cur = conn.execute(f"DELETE FROM {self.TABLE_NAME} WHERE expires_at < ?", (now,))
                 deleted = cur.rowcount
                 conn.commit()
                 return deleted
@@ -298,7 +341,7 @@ class DurableIdempotencyStore:
 class IdempotencyGuardian:
     """The Sovereign Ingress Idempotency Guardian.
 
-    Coordinates FastMutex (<10s) and Durable WAL store for zero-drift execution.
+    Coordinates FastMutex (<10s) and PostgreSQL/SQLite WAL store for zero-drift execution.
     """
 
     def __init__(
@@ -317,41 +360,68 @@ class IdempotencyGuardian:
         correlation_id: str,
         ttl_seconds: float = 300.0,
     ) -> tuple[IdempotencyDecision, Optional[IdempotencyRecord]]:
-        """Evaluate key ingress against FastMutex and Durable WAL.
+        """Ingress Protocol (§12.2 / Phase 1B).
 
-        Returns (PROCEED, record) if caller should execute effect.
-        Returns (REPLAY, record) if caller should replay cached result.
-        Raises IdempotencyConflictError if operation is currently IN_FLIGHT.
+        1. FastMutex Check: Acquire short-lived transit mutex lock (tau <= 10s).
+        2. Assert Existence: Look up (key, tenant_id) in durable WAL.
+        3. Payload Mismatch Rule: If key exists under tenant and manifest_hash differs,
+           raise IdempotencyPayloadMismatchError (HTTP 422).
+        4. State Evaluation:
+           - COMPLETED / COMMITTED: return (REPLAY, record) with cached execution envelope.
+           - IN_FLIGHT: raise IdempotencyConflictError (HTTP 409) with retry_after_sec.
+           - Absent: insert IN_FLIGHT and return (PROCEED, record).
         """
-        compound_key = compute_compound_key(key, tenant_id, manifest_hash)
         now = time.time()
 
-        # 1. FastMutex check (<10s short transit collision)
-        # If fast mutex is actively held, this is an immediate burst conflict
-        if not self.fast_mutex.try_acquire(compound_key, ttl_sec=min(ttl_seconds, 10.0)):
-            existing = self.store.get(compound_key)
-            cid = existing.correlation_id if existing else correlation_id
-            raise IdempotencyConflictError(key, tenant_id, cid, "FastMutex burst collision: operation is in flight")
-
-        # 2. Check durable WAL
-        existing = self.store.get(compound_key)
+        # 1. First check durable WAL for existing record
+        existing = self.store.get_by_key(key, tenant_id)
         if existing:
-            # Check expiration
-            if existing.expires_at <= now:
-                # Expired -> purge and treat as new
-                self.store.purge_expired()
-            elif existing.status == IdempotencyStatus.COMMITTED:
-                # Already committed: release fast mutex and replay
-                self.fast_mutex.release(compound_key)
-                return IdempotencyDecision.REPLAY, existing
-            elif existing.status == IdempotencyStatus.IN_FLIGHT:
-                # Active in flight in DB
-                raise IdempotencyConflictError(key, tenant_id, existing.correlation_id)
-            elif existing.status == IdempotencyStatus.REJECTED:
-                # Previously failed/rejected -> allow retry by continuing below
-                pass
+            # Payload Mismatch check: identical key reused with different manifest
+            if existing.manifest_hash != manifest_hash:
+                # If expired, we allow overwrite below after purge; if active, hard-reject 422
+                if existing.expires_at > now and existing.status != IdempotencyStatus.REJECTED:
+                    raise IdempotencyPayloadMismatchError(
+                        key=key,
+                        tenant_id=tenant_id,
+                        existing_hash=existing.manifest_hash,
+                        new_hash=manifest_hash,
+                    )
+                else:
+                    self.store.purge_expired()
 
-        # 3. Insert new IN_FLIGHT record into durable WAL
+            elif existing.expires_at <= now:
+                # Expired identical record -> purge and proceed
+                self.store.purge_expired()
+
+            elif existing.status in (IdempotencyStatus.COMPLETED, IdempotencyStatus.COMMITTED):
+                # Already completed: return cached signed receipt / execution envelope
+                self.fast_mutex.release(tenant_id, key)
+                return IdempotencyDecision.REPLAY, existing
+
+            elif existing.status == IdempotencyStatus.IN_FLIGHT:
+                # Actively in-flight in DB -> 409 CONFLICT with Retry-After header
+                retry_after = max(1, int(existing.expires_at - now))
+                raise IdempotencyConflictError(
+                    key=key,
+                    tenant_id=tenant_id,
+                    correlation_id=existing.correlation_id,
+                    retry_after_sec=retry_after,
+                )
+
+        # 2. FastMutex check (absorb high-concurrency burst traffic)
+        if not self.fast_mutex.try_acquire(tenant_id, key, ttl_sec=min(ttl_seconds, 10.0)):
+            existing = self.store.get_by_key(key, tenant_id)
+            cid = existing.correlation_id if existing else correlation_id
+            retry_after = max(1, int((existing.expires_at - now) if existing else 5))
+            raise IdempotencyConflictError(
+                key=key,
+                tenant_id=tenant_id,
+                correlation_id=cid,
+                retry_after_sec=retry_after,
+                message="FastMutex burst collision: operation is in flight",
+            )
+
+        # 3. Write state IN_FLIGHT to durable WAL
         record = IdempotencyRecord(
             key=key,
             tenant_id=tenant_id,
@@ -367,10 +437,16 @@ class IdempotencyGuardian:
 
         inserted = self.store.insert_in_flight(record)
         if not inserted:
-            # Race condition in WAL: re-read and conflict
-            existing = self.store.get(compound_key)
+            existing = self.store.get_by_key(key, tenant_id)
             cid = existing.correlation_id if existing else correlation_id
-            raise IdempotencyConflictError(key, tenant_id, cid, "Durable WAL collision: operation is in flight")
+            retry_after = max(1, int((existing.expires_at - now) if existing else 5))
+            raise IdempotencyConflictError(
+                key=key,
+                tenant_id=tenant_id,
+                correlation_id=cid,
+                retry_after_sec=retry_after,
+                message="Durable WAL collision: operation is in flight",
+            )
 
         return IdempotencyDecision.PROCEED, record
 
@@ -382,8 +458,12 @@ class IdempotencyGuardian:
         receipt_ref: str,
         response_body: Optional[Any] = None,
     ) -> IdempotencyRecord:
-        """Mark record COMMITTED with the emitted receipt reference and optional response payload."""
-        compound_key = compute_compound_key(key, tenant_id, manifest_hash)
+        """Mark record COMPLETED with the emitted signed receipt / execution envelope."""
+        # Assert matching manifest before committing
+        existing = self.store.get_by_key(key, tenant_id)
+        if existing and existing.manifest_hash != manifest_hash:
+            raise IdempotencyPayloadMismatchError(key, tenant_id, existing.manifest_hash, manifest_hash)
+
         serialized_body = None
         if response_body is not None:
             if isinstance(response_body, (dict, list)):
@@ -392,14 +472,15 @@ class IdempotencyGuardian:
                 serialized_body = str(response_body)
 
         updated = self.store.update_status(
-            compound_key,
-            status=IdempotencyStatus.COMMITTED,
+            client_key=key,
+            tenant_id=tenant_id,
+            status=IdempotencyStatus.COMPLETED,
             receipt_ref=receipt_ref,
             response_body=serialized_body,
         )
-        self.fast_mutex.release(compound_key)
+        self.fast_mutex.release(tenant_id, key)
         if not updated:
-            raise ValueError(f"No idempotency record found to commit for compound key '{compound_key}'")
+            raise ValueError(f"No idempotency record found to commit for key '{key}' under tenant '{tenant_id}'")
         return updated
 
     def reject(
@@ -410,15 +491,15 @@ class IdempotencyGuardian:
         reason: Optional[str] = None,
     ) -> IdempotencyRecord:
         """Mark record REJECTED upon execution or verification failure."""
-        compound_key = compute_compound_key(key, tenant_id, manifest_hash)
         updated = self.store.update_status(
-            compound_key,
+            client_key=key,
+            tenant_id=tenant_id,
             status=IdempotencyStatus.REJECTED,
             response_body=reason,
         )
-        self.fast_mutex.release(compound_key)
+        self.fast_mutex.release(tenant_id, key)
         if not updated:
-            raise ValueError(f"No idempotency record found to reject for compound key '{compound_key}'")
+            raise ValueError(f"No idempotency record found to reject for key '{key}' under tenant '{tenant_id}'")
         return updated
 
     def purge_expired(self) -> int:

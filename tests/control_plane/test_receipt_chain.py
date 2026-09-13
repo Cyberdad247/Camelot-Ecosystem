@@ -157,3 +157,64 @@ def test_tampered_payload_detected_in_verification():
     valid, msg = chain.verify_chain()
     assert valid is False
     assert "integrity failed: self_hash tampered" in msg
+
+
+def test_signed_merkle_checkpoint_arthur_seal():
+    """Validates the multi-tenant signed Merkle root checkpoint (Arthur Ed25519 Seal).
+
+    Diagram:
+        Tenant A Chain ─── Head A ┐
+        Tenant B Chain ─── Head B ├─► Signed Merkle Root Checkpoint (Arthur Ed25519 Seal)
+        Tenant C Chain ─── Head C ┘
+    """
+    from control_plane.security.receipt_chain import SovereignMerkleCheckpointGovernor
+
+    # 1. Initialize chains for 3 tenants
+    chain_a = TenantReceiptChain("tenant_a")
+    chain_b = TenantReceiptChain("tenant_b")
+    chain_c = TenantReceiptChain("tenant_c")
+
+    # Append genesis receipts
+    chain_a.append(_make_receipt("tenant_a", 0, GENESIS_PARENT_HASH, "rcp_a0"))
+    chain_b.append(_make_receipt("tenant_b", 0, GENESIS_PARENT_HASH, "rcp_b0"))
+    chain_c.append(_make_receipt("tenant_c", 0, GENESIS_PARENT_HASH, "rcp_c0"))
+
+    # Append extra receipts
+    chain_a.append(_make_receipt("tenant_a", 1, chain_a.head_hash, "rcp_a1"))
+    chain_b.append(_make_receipt("tenant_b", 1, chain_b.head_hash, "rcp_b1"))
+
+    # 2. Register with Governor
+    gov = SovereignMerkleCheckpointGovernor()
+    gov.register_chain(chain_a)
+    gov.register_chain(chain_b)
+    gov.register_chain(chain_c)
+
+    # 3. Create signed checkpoint with Arthur Ed25519 Seal
+    checkpoint = gov.create_signed_checkpoint(authority_epoch=42)
+
+    assert checkpoint.schema_version == "camelot-checkpoint/1"
+    assert checkpoint.merkle_root.startswith("sha256:")
+    assert checkpoint.proof.signer == "king-arthur"
+    assert checkpoint.proof.signature.startswith("ed25519:")
+    assert len(checkpoint.proof.public_key) == 64
+    assert len(checkpoint.tenant_heads) == 3
+
+    # 4. Cryptographically verify the checkpoint seal
+    valid, msg = SovereignMerkleCheckpointGovernor.verify_checkpoint(checkpoint)
+    assert valid is True
+    assert msg == "CHECKPOINT_SEAL_VALID"
+
+    # 5. Generate and verify Merkle inclusion proof for Tenant B
+    leaf_b, proof_b = gov.generate_inclusion_proof("tenant_b")
+    assert len(proof_b) >= 1
+    verified_b = SovereignMerkleCheckpointGovernor.verify_inclusion_proof(
+        leaf_b, proof_b, checkpoint.merkle_root
+    )
+    assert verified_b is True
+
+    # 6. Tamper test: Altering Tenant A's head breaks Merkle verification
+    checkpoint.tenant_heads["tenant_a"]["head_hash"] = "sha256:" + "0" * 64
+    valid_tampered, err = SovereignMerkleCheckpointGovernor.verify_checkpoint(checkpoint)
+    assert valid_tampered is False
+    assert "Merkle root mismatch" in err or "signature verification failed" in err
+

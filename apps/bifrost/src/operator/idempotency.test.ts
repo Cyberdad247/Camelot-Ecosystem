@@ -5,6 +5,7 @@ import {
   FastMutexAccelerator,
   IdempotencyConflictError,
   IdempotencyGuardian,
+  IdempotencyPayloadMismatchError,
   computeCompoundKey,
 } from './idempotency';
 
@@ -23,13 +24,13 @@ describe('IdempotencyGuardian TS', () => {
 
   it('handles fast mutex lock/release', () => {
     const mutex = new FastMutexAccelerator(100);
-    expect(mutex.tryAcquire('lock_1')).toBe(true);
-    expect(mutex.isLocked('lock_1')).toBe(true);
-    expect(mutex.tryAcquire('lock_1')).toBe(false);
+    expect(mutex.tryAcquire('tenant_1', 'lock_1')).toBe(true);
+    expect(mutex.isLocked('tenant_1', 'lock_1')).toBe(true);
+    expect(mutex.tryAcquire('tenant_1', 'lock_1')).toBe(false);
 
-    mutex.release('lock_1');
-    expect(mutex.isLocked('lock_1')).toBe(false);
-    expect(mutex.tryAcquire('lock_1')).toBe(true);
+    mutex.release('tenant_1', 'lock_1');
+    expect(mutex.isLocked('tenant_1', 'lock_1')).toBe(false);
+    expect(mutex.tryAcquire('tenant_1', 'lock_1')).toBe(true);
   });
 
   it('runs complete proceed-commit-replay lifecycle', () => {
@@ -50,13 +51,27 @@ describe('IdempotencyGuardian TS', () => {
 
     // 3. Commit
     const committed = guardian.commit(key, tenantId, manifest, 'rcp_123', { status: 'OK' });
-    expect(committed.status).toBe('COMMITTED');
+    expect(committed.status).toBe('COMPLETED');
     expect(committed.receiptRef).toBe('rcp_123');
 
     // 4. Replay
     const replay = guardian.acquireOrReplay(key, tenantId, manifest, 'cor_3');
     expect(replay.decision).toBe('REPLAY');
     expect(replay.record?.receiptRef).toBe('rcp_123');
+  });
+
+  it('triggers HTTP 422 IDEMPOTENCY_PAYLOAD_MISMATCH on payload deviation', () => {
+    const guardian = new IdempotencyGuardian();
+    const key = 'key_fixed_001';
+    const tenantId = 'tenant_mismatch';
+    const manifestOriginal = 'sha256:1111';
+    const manifestDeviated = 'sha256:2222';
+
+    guardian.acquireOrReplay(key, tenantId, manifestOriginal, 'cor_orig');
+
+    expect(() => guardian.acquireOrReplay(key, tenantId, manifestDeviated, 'cor_dev')).toThrow(
+      IdempotencyPayloadMismatchError,
+    );
   });
 
   it('strictly isolates identical keys across different tenants', () => {

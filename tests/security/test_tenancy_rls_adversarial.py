@@ -2,13 +2,15 @@
 """Adversarial Test Suite — Phase 2 Enterprise Tenancy Isolation & PostgreSQL RLS Enforcement.
 
 Validates the zero-trust tenancy barrier across:
-    1. PostgreSQL Migration DDL Rigor (ENABLE + FORCE RLS + RESTRICTIVE policies).
-    2. Cross-Tenant Read Leak (Tenant A cannot see Tenant B data).
-    3. Cross-Tenant Write & Spoofing (Tenant A cannot write/update Tenant B data).
-    4. Unset / Unauthenticated Session (NULL tenant yields empty set and rejects writes).
-    5. Tenant Identifier Injection (SQL injection and pattern violations blocked).
-    6. Idempotency Key Isolation (Identical client key isolated per tenant).
-    7. Merkle Receipt Chain Cross-Tenant Isolation (No cross-chain linking).
+    1. PostgreSQL Migration DDL Rigor (ENABLE + FORCE RLS + RESTRICTIVE policies on
+       workspaces, tasks, receipts, capability_leases, bifrost_idempotency_journal).
+    2. Connection Handshake (DISCARD TEMP, SET LOCAL tenant_id, principal_id, risk_tier).
+    3. Cross-Tenant Read Leak (Tenant A cannot see Tenant B data).
+    4. Cross-Tenant Write & Spoofing (Tenant A cannot write/update Tenant B data).
+    5. Unset / Unauthenticated Session (NULL tenant yields empty set and rejects writes).
+    6. Tenant Identifier Injection (SQL injection and pattern violations blocked).
+    7. Idempotency Key Isolation & Payload Mismatch (HTTP 422 IDEMPOTENCY_PAYLOAD_MISMATCH).
+    8. Merkle Receipt Chain Cross-Tenant Isolation (No cross-chain linking).
 """
 from __future__ import annotations
 
@@ -26,7 +28,17 @@ from control_plane.dispatch.idempotency_guardian import (
     IdempotencyGuardian,
     IdempotencyDecision,
     IdempotencyConflictError,
+    IdempotencyPayloadMismatchError,
     compute_compound_key,
+)
+from control_plane.security.connection_handshake import (
+    MockPostgresConnection,
+    TenancyHandshakeError,
+    generate_handshake_sql,
+    sanitize_and_bind_connection,
+    reset_connection_session,
+    scoped_tenant_connection,
+    validate_handshake_parameters,
 )
 from control_plane.security.receipt_chain import (
     GENESIS_PARENT_HASH,
@@ -46,7 +58,16 @@ MIGRATION_PATH = (
     / "migration.sql"
 )
 
-MULTI_TENANT_TABLES = [
+CORE_ENGINE_TABLES = [
+    "workspaces",
+    "tasks",
+    "receipts",
+    "capability_leases",
+    "bifrost_idempotency_journal",
+    "receipt_chains",
+]
+
+LEGACY_DOMAIN_TABLES = [
     "JournalEntry",
     "Transaction",
     "Contact",
@@ -56,10 +77,9 @@ MULTI_TENANT_TABLES = [
     "MessageThread",
     "Message",
     "EchoLog",
-    "IdempotencyRecord",
-    "ReceiptChain",
-    "Receipt",
 ]
+
+ALL_MULTI_TENANT_TABLES = CORE_ENGINE_TABLES + LEGACY_DOMAIN_TABLES
 
 
 # ==============================================================================
@@ -73,7 +93,7 @@ def test_migration_file_exists():
 def test_ddl_enables_and_forces_rls_on_all_multi_tenant_tables():
     content = MIGRATION_PATH.read_text(encoding="utf-8")
 
-    for table in MULTI_TENANT_TABLES:
+    for table in ALL_MULTI_TENANT_TABLES:
         enable_pattern = rf'ALTER\s+TABLE\s+"{table}"\s+ENABLE\s+ROW\s+LEVEL\s+SECURITY\s*;'
         force_pattern = rf'ALTER\s+TABLE\s+"{table}"\s+FORCE\s+ROW\s+LEVEL\s+SECURITY\s*;'
 
@@ -88,8 +108,7 @@ def test_ddl_enables_and_forces_rls_on_all_multi_tenant_tables():
 def test_ddl_policies_use_current_setting_and_with_check():
     content = MIGRATION_PATH.read_text(encoding="utf-8")
 
-    for table in MULTI_TENANT_TABLES:
-        # Verify CREATE POLICY exists for the table
+    for table in ALL_MULTI_TENANT_TABLES:
         policy_decl = rf'CREATE\s+POLICY\s+"[^"]+"\s+ON\s+"{table}"'
         assert re.search(policy_decl, content, re.IGNORECASE), (
             f"Table '{table}' missing CREATE POLICY statement"
@@ -101,19 +120,76 @@ def test_ddl_policies_use_current_setting_and_with_check():
         content,
         re.IGNORECASE,
     )
-    assert len(setting_matches) >= len(MULTI_TENANT_TABLES) * 2, (
-        f"Expected at least {len(MULTI_TENANT_TABLES) * 2} occurrences of current_setting (USING + WITH CHECK), got {len(setting_matches)}"
+    assert len(setting_matches) >= len(ALL_MULTI_TENANT_TABLES) * 2, (
+        f"Expected at least {len(ALL_MULTI_TENANT_TABLES) * 2} occurrences of current_setting, got {len(setting_matches)}"
     )
 
-    # Invariant: AS RESTRICTIVE must be present
+    # Invariant: AS RESTRICTIVE must be present on every table policy
     restrictive_matches = re.findall(r"AS\s+RESTRICTIVE", content, re.IGNORECASE)
-    assert len(restrictive_matches) == len(MULTI_TENANT_TABLES), (
-        f"Expected {len(MULTI_TENANT_TABLES)} AS RESTRICTIVE policies, got {len(restrictive_matches)}"
+    assert len(restrictive_matches) == len(ALL_MULTI_TENANT_TABLES), (
+        f"Expected {len(ALL_MULTI_TENANT_TABLES)} AS RESTRICTIVE policies, got {len(restrictive_matches)}"
     )
+
+
+def test_core_engine_tenant_isolation_policy_names():
+    """Verify core engine tables use the exact 'tenant_isolation_policy' name."""
+    content = MIGRATION_PATH.read_text(encoding="utf-8")
+    for table in CORE_ENGINE_TABLES:
+        pattern = rf'CREATE\s+POLICY\s+"tenant_isolation_policy"\s+ON\s+"{table}"'
+        assert re.search(pattern, content, re.IGNORECASE), (
+            f"Core engine table '{table}' missing exact 'tenant_isolation_policy'"
+        )
 
 
 # ==============================================================================
-# 2. In-Memory RLS Session Barrier Emulator
+# 2. Connection Handshake Sanitization Tests
+# ==============================================================================
+
+def test_connection_handshake_sql_generation():
+    """Verify handshake produces DISCARD TEMP and SET LOCAL statements."""
+    statements = generate_handshake_sql(
+        tenant_id="tenant_omega_01",
+        principal_id="actor_sir_codex",
+        risk_tier="T2",
+    )
+
+    assert statements[0] == "DISCARD TEMP;"
+    assert statements[1] == "SET LOCAL app.current_tenant_id = 'tenant_omega_01';"
+    assert statements[2] == "SET LOCAL app.current_principal_id = 'actor_sir_codex';"
+    assert statements[3] == "SET LOCAL app.current_risk_tier = 'T2';"
+
+
+def test_connection_handshake_parameter_validation():
+    """Verify handshake rejects invalid tenant formats and dangerous characters."""
+    with pytest.raises(TenancyHandshakeError):
+        validate_handshake_parameters("invalid_tenant", "actor_1", "T1")
+
+    with pytest.raises(TenancyHandshakeError):
+        validate_handshake_parameters("tenant_valid", "", "T1")
+
+    with pytest.raises(TenancyHandshakeError):
+        validate_handshake_parameters("tenant_valid", "actor_1", "T9_INVALID")
+
+
+def test_scoped_tenant_connection_context_manager():
+    """Verify connection context manager sets and cleans up session attributes."""
+    conn = MockPostgresConnection()
+
+    with scoped_tenant_connection(conn, "tenant_scoped_01", "actor_forge", "T1"):
+        assert conn._app_current_tenant_id == "tenant_scoped_01"
+        assert conn._app_current_principal_id == "actor_forge"
+        assert conn._app_current_risk_tier == "T1"
+        assert "DISCARD TEMP;" in conn.statements_executed
+
+    # Reset on exit
+    assert conn._app_current_tenant_id is None
+    assert conn._app_current_principal_id is None
+    assert conn._app_current_risk_tier is None
+    assert "RESET ALL;" in conn.statements_executed
+
+
+# ==============================================================================
+# 3. In-Memory RLS Session Barrier Emulator
 # ==============================================================================
 
 class PostgresRLSSessionEmulator:
@@ -159,7 +235,6 @@ class PostgresRLSSessionEmulator:
     def insert_document(self, doc_id: str, tenant_id: str, title: str, content: str) -> None:
         """Simulates INSERT with WITH CHECK (tenant_id = current_setting('app.current_tenant_id', true))."""
         active = self.get_session_tenant()
-        # RLS WITH CHECK enforcement
         if active is None or active != tenant_id:
             raise PermissionError(
                 f"new row violates row-level security policy for table \"documents\" (active tenant: '{active}', target: '{tenant_id}')"
@@ -174,7 +249,6 @@ class PostgresRLSSessionEmulator:
         """Simulates SELECT with USING (tenant_id = current_setting('app.current_tenant_id', true))."""
         active = self.get_session_tenant()
         if active is None:
-            # NULL = tenant_id evaluates to NULL (false in SQL WHERE) -> returns empty set
             return []
         cur = self._conn.execute(
             "SELECT * FROM documents WHERE tenant_id = ?",
@@ -196,29 +270,25 @@ class PostgresRLSSessionEmulator:
 
 
 # ==============================================================================
-# 3. Adversarial Tenancy Attack Tests
+# 4. Adversarial Tenancy Attack Tests
 # ==============================================================================
 
 def test_cross_tenant_read_leak_adversary():
     """Tenant A attempts to read Tenant B's documents. Must return empty set."""
     db = PostgresRLSSessionEmulator()
 
-    # Seed data as Tenant Alpha
     db.set_session_tenant("tenant_alpha")
     db.insert_document("doc_a1", "tenant_alpha", "Alpha Secret Plan", "Top Secret Alpha Content")
 
-    # Seed data as Tenant Beta
     db.set_session_tenant("tenant_beta")
     db.insert_document("doc_b1", "tenant_beta", "Beta Financial Ledger", "Top Secret Beta Content")
 
-    # Adversary logs in as Tenant Alpha
     db.set_session_tenant("tenant_alpha")
     docs = db.select_documents()
 
     assert len(docs) == 1
     assert docs[0]["id"] == "doc_a1"
     assert docs[0]["tenant_id"] == "tenant_alpha"
-    # Verify Tenant Beta's data is completely invisible
     assert all(d["tenant_id"] != "tenant_beta" for d in docs)
 
 
@@ -237,7 +307,6 @@ def test_unset_tenant_context_adversary():
     """Unauthenticated request (session tenant is NULL). Must reject all writes and return 0 rows."""
     db = PostgresRLSSessionEmulator()
 
-    # Seed data under a valid tenant
     db.set_session_tenant("tenant_alpha")
     db.insert_document("doc_1", "tenant_alpha", "Notice", "Public notice")
 
@@ -268,6 +337,23 @@ def test_tenant_identifier_injection_adversary():
         with pytest.raises(ValueError) as exc_info:
             db.set_session_tenant(payload)
         assert "Invalid tenant_id format" in str(exc_info.value)
+
+
+def test_idempotency_payload_mismatch_adversary():
+    """Reusing identical idempotency key with deviated payload triggers HTTP 422 IDEMPOTENCY_PAYLOAD_MISMATCH."""
+    guardian = IdempotencyGuardian()
+    key = "key_adversary_001"
+    tenant_id = "tenant_victim"
+    manifest_original = "sha256:" + "a" * 64
+    manifest_tampered = "sha256:" + "b" * 64
+
+    guardian.acquire_or_replay(key, tenant_id, manifest_original, "cor_1")
+
+    with pytest.raises(IdempotencyPayloadMismatchError) as exc_info:
+        guardian.acquire_or_replay(key, tenant_id, manifest_tampered, "cor_2")
+
+    assert exc_info.value.status_code == 422
+    assert exc_info.value.error_code == "IDEMPOTENCY_PAYLOAD_MISMATCH"
 
 
 def test_idempotency_cross_tenant_isolation_adversary():

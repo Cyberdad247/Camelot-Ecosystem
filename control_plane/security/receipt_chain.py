@@ -277,3 +277,254 @@ class TenantReceiptChain:
 
     def list_receipts(self, limit: int = 50) -> list[Receipt]:
         return list(self._receipts[-limit:])
+
+
+# ==============================================================================
+# Sovereign Merkle Root Checkpoint (Arthur Ed25519 Seal)
+# ==============================================================================
+
+@dataclass
+class CheckpointProof:
+    signer: str  # "king-arthur"
+    signature: str  # "ed25519:<hex>"
+    public_key: str  # hex string
+    hash_algorithm: str = "sha256"
+    signature_algorithm: str = "ed25519"
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass
+class SovereignMerkleCheckpoint:
+    checkpoint_id: str
+    merkle_root: str
+    tenant_heads: dict[str, dict[str, Any]]  # tenant_id -> {"chain_height": int, "head_hash": str}
+    authority_epoch: int
+    proof: CheckpointProof
+    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
+    schema_version: str = "camelot-checkpoint/1"
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema_version": self.schema_version,
+            "checkpoint_id": self.checkpoint_id,
+            "merkle_root": self.merkle_root,
+            "tenant_heads": self.tenant_heads,
+            "authority_epoch": self.authority_epoch,
+            "timestamp": self.timestamp,
+            "proof": self.proof.to_dict(),
+        }
+
+    def canonical_digest(self) -> str:
+        """Compute SHA-256 over RFC 8785 canonical serialization with proof.signature stripped."""
+        data = self.to_dict()
+        if "proof" in data and isinstance(data["proof"], dict):
+            proof_copy = dict(data["proof"])
+            proof_copy.pop("signature", None)
+            data["proof"] = proof_copy
+        return sha256_canonical(data)
+
+
+def compute_tenant_head_leaf(tenant_id: str, chain_height: int, head_hash: str) -> str:
+    """Compute deterministic SHA-256 leaf hash for a tenant's head in the Merkle checkpoint."""
+    payload = {
+        "tenant_id": tenant_id,
+        "chain_height": chain_height,
+        "head_hash": head_hash,
+    }
+    return sha256_canonical(payload)
+
+
+def build_merkle_tree(leaf_hashes: list[str]) -> tuple[str, list[list[str]]]:
+    """Build a binary Merkle tree over sorted leaf hashes.
+
+    Returns (merkle_root, tree_levels) where tree_levels[0] is leaves and tree_levels[-1][0] is root.
+    """
+    if not leaf_hashes:
+        return "sha256:" + "0" * 64, []
+
+    current_level = list(leaf_hashes)
+    levels = [current_level]
+
+    while len(current_level) > 1:
+        next_level = []
+        for i in range(0, len(current_level), 2):
+            left = current_level[i]
+            # If odd number of nodes, duplicate the last node
+            right = current_level[i + 1] if i + 1 < len(current_level) else left
+            combined = hashlib.sha256(f"{left}:{right}".encode("utf-8")).hexdigest()
+            next_level.append(combined)
+        current_level = next_level
+        levels.append(current_level)
+
+    root = f"sha256:{levels[-1][0]}"
+    return root, levels
+
+
+class SovereignMerkleCheckpointGovernor:
+    """Aggregates per-tenant append-only Merkle chains into a signed Merkle root checkpoint (Arthur Ed25519 Seal).
+
+    Diagram:
+        Tenant A Chain ─── Head A ┐
+        Tenant B Chain ─── Head B ├─► Signed Merkle Root Checkpoint (Arthur Ed25519 Seal)
+        Tenant C Chain ─── Head C ┘
+    """
+
+    # Sovereign test key (deterministic 32-byte seed for King Arthur)
+    _ARTHUR_SOVEREIGN_SEED = b"Arthur_Omega_Sovereign_Seed_32B!"
+
+    def __init__(self, chains: Optional[dict[str, TenantReceiptChain]] = None):
+        self._chains: dict[str, TenantReceiptChain] = chains or {}
+
+    def register_chain(self, chain: TenantReceiptChain) -> None:
+        self._chains[chain.tenant_id] = chain
+
+    def get_chain(self, tenant_id: str) -> Optional[TenantReceiptChain]:
+        return self._chains.get(tenant_id)
+
+    @classmethod
+    def get_default_arthur_key(cls):
+        from cryptography.hazmat.primitives.asymmetric import ed25519
+        return ed25519.Ed25519PrivateKey.from_private_bytes(cls._ARTHUR_SOVEREIGN_SEED)
+
+    def compute_merkle_root(self) -> tuple[str, list[str], dict[str, dict[str, Any]]]:
+        """Collect sorted tenant heads and compute the binary Merkle root."""
+        sorted_tenants = sorted(self._chains.keys())
+        tenant_heads: dict[str, dict[str, Any]] = {}
+        leaf_hashes: list[str] = []
+
+        for tenant_id in sorted_tenants:
+            chain = self._chains[tenant_id]
+            head_info = {
+                "chain_height": chain.chain_height,
+                "head_hash": chain.head_hash,
+            }
+            tenant_heads[tenant_id] = head_info
+            leaf = compute_tenant_head_leaf(tenant_id, chain.chain_height, chain.head_hash)
+            leaf_hashes.append(leaf)
+
+        root, _ = build_merkle_tree(leaf_hashes)
+        return root, leaf_hashes, tenant_heads
+
+    def create_signed_checkpoint(
+        self,
+        authority_epoch: int = 1,
+        private_key: Optional[Any] = None,
+        checkpoint_id: Optional[str] = None,
+    ) -> SovereignMerkleCheckpoint:
+        """Issue a Signed Merkle Root Checkpoint with the Arthur Ed25519 Seal."""
+        from cryptography.hazmat.primitives.asymmetric import ed25519
+
+        key = private_key or self.get_default_arthur_key()
+        pub_bytes = key.public_key().public_bytes_raw()
+        pub_hex = pub_bytes.hex()
+
+        merkle_root, _, tenant_heads = self.compute_merkle_root()
+        cid = checkpoint_id or f"chk_{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}_{merkle_root[7:15]}"
+
+        # Create unsigned checkpoint template
+        checkpoint = SovereignMerkleCheckpoint(
+            checkpoint_id=cid,
+            merkle_root=merkle_root,
+            tenant_heads=tenant_heads,
+            authority_epoch=authority_epoch,
+            proof=CheckpointProof(
+                signer="king-arthur",
+                signature="",  # will populate after signing
+                public_key=pub_hex,
+            ),
+        )
+
+        # Cryptographic signing with Arthur Ed25519 Seal
+        digest = checkpoint.canonical_digest()
+        signature_bytes = key.sign(digest.encode("utf-8"))
+        signature_hex = f"ed25519:{signature_bytes.hex()}"
+
+        checkpoint.proof.signature = signature_hex
+        return checkpoint
+
+    @staticmethod
+    def verify_checkpoint(checkpoint: SovereignMerkleCheckpoint) -> tuple[bool, str]:
+        """Cryptographically verify the Arthur Ed25519 Seal and Merkle root integrity."""
+        from cryptography.hazmat.primitives.asymmetric import ed25519
+
+        # 1. Recompute Merkle root over tenant heads
+        sorted_tenants = sorted(checkpoint.tenant_heads.keys())
+        leaf_hashes = []
+        for t in sorted_tenants:
+            info = checkpoint.tenant_heads[t]
+            leaf = compute_tenant_head_leaf(t, info["chain_height"], info["head_hash"])
+            leaf_hashes.append(leaf)
+
+        expected_root, _ = build_merkle_tree(leaf_hashes)
+        if expected_root != checkpoint.merkle_root:
+            return False, f"Merkle root mismatch: expected {expected_root}, got {checkpoint.merkle_root}"
+
+        # 2. Verify Arthur Ed25519 signature
+        if not checkpoint.proof.signature.startswith("ed25519:"):
+            return False, "Invalid signature format; expected 'ed25519:<hex>'"
+
+        sig_hex = checkpoint.proof.signature.split("ed25519:", 1)[1]
+        sig_bytes = bytes.fromhex(sig_hex)
+        pub_bytes = bytes.fromhex(checkpoint.proof.public_key)
+
+        public_key = ed25519.Ed25519PublicKey.from_public_bytes(pub_bytes)
+        digest = checkpoint.canonical_digest().encode("utf-8")
+
+        try:
+            public_key.verify(sig_bytes, digest)
+        except Exception as e:
+            return False, f"Ed25519 signature verification failed: {e}"
+
+        return True, "CHECKPOINT_SEAL_VALID"
+
+    def generate_inclusion_proof(self, tenant_id: str) -> tuple[str, list[dict[str, str]]]:
+        """Generate a Merkle inclusion proof (audit path) for a specific tenant chain head."""
+        sorted_tenants = sorted(self._chains.keys())
+        if tenant_id not in self._chains:
+            raise KeyError(f"Tenant '{tenant_id}' is not registered in this governor")
+
+        target_idx = sorted_tenants.index(tenant_id)
+        leaf_hashes = [
+            compute_tenant_head_leaf(t, self._chains[t].chain_height, self._chains[t].head_hash)
+            for t in sorted_tenants
+        ]
+
+        target_leaf = leaf_hashes[target_idx]
+        _, levels = build_merkle_tree(leaf_hashes)
+
+        proof: list[dict[str, str]] = []
+        idx = target_idx
+
+        for level in levels[:-1]:
+            if idx % 2 == 0:
+                # Target is left, sibling is right
+                sibling_idx = idx + 1 if idx + 1 < len(level) else idx
+                position = "right"
+            else:
+                # Target is right, sibling is left
+                sibling_idx = idx - 1
+                position = "left"
+
+            proof.append({
+                "position": position,
+                "sibling_hash": level[sibling_idx],
+            })
+            idx = idx // 2
+
+        return target_leaf, proof
+
+    @staticmethod
+    def verify_inclusion_proof(leaf_hash: str, proof: list[dict[str, str]], expected_root: str) -> bool:
+        """Verify a Merkle audit path connects leaf_hash to expected_root."""
+        current = leaf_hash
+        for step in proof:
+            sibling = step["sibling_hash"]
+            if step["position"] == "right":
+                current = hashlib.sha256(f"{current}:{sibling}".encode("utf-8")).hexdigest()
+            else:
+                current = hashlib.sha256(f"{sibling}:{current}".encode("utf-8")).hexdigest()
+
+        return f"sha256:{current}" == expected_root
+

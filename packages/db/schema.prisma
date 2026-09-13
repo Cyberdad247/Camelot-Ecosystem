@@ -151,11 +151,11 @@ model Tenant {
 
 // ─────────────────────────────────────────────
 // Phase 1B: Durable Bifrost Idempotency WAL (§12.2)
-// Compound Tuple: key ⊕ tenantId ⊕ manifestHash
+// Table: bifrost_idempotency_journal
 // ─────────────────────────────────────────────
 enum IdempotencyStatus {
   IN_FLIGHT
-  COMMITTED
+  COMPLETED
   REJECTED
 }
 
@@ -173,6 +173,73 @@ model IdempotencyRecord {
 
   @@index([tenantId, manifestHash])
   @@index([expiresAt])
+  @@map("bifrost_idempotency_journal")
+}
+
+// ─────────────────────────────────────────────
+// Core Engine: Workspaces, Tasks, Capability Leases
+// ─────────────────────────────────────────────
+model Workspace {
+  id              String   @id // ws_xxx
+  tenantId        String   // tenant_xxx
+  name            String
+  namespacePrefix String?
+  sourcePolicy    Json?
+  status          String   @default("active") // active, frozen, closed
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  tasks           Task[]
+
+  @@index([tenantId])
+  @@map("workspaces")
+}
+
+model Task {
+  id               String            @id // task_xxx
+  tenantId         String            // tenant_xxx
+  workspaceId      String?
+  correlationId    String
+  objective        String
+  symbolectTreeRef String?
+  manifestId       String?
+  leaseId          String?
+  status           String            @default("draft")
+  actor            Json?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  expiresAt        DateTime?
+  receiptRefs      String[]
+  workspace        Workspace?        @relation(fields: [workspaceId], references: [id])
+  leases           CapabilityLease[]
+
+  @@index([tenantId])
+  @@index([workspaceId])
+  @@index([correlationId])
+  @@map("tasks")
+}
+
+model CapabilityLease {
+  id                           String   @id // lease_xxx
+  tenantId                     String   // tenant_xxx
+  taskId                       String
+  correlationId                String
+  manifestHash                 String
+  authorityEpoch               Int
+  authorityVector              Int[]
+  effectClass                  String
+  declaredRiskTier             String
+  subject                      Json
+  permissions                  Json
+  limits                       Json
+  properties                   Json?
+  derivedCapabilitiesProvenance Json?
+  createdAt                    DateTime @default(now())
+  expiresAt                    DateTime
+  task                         Task     @relation(fields: [taskId], references: [id])
+
+  @@index([tenantId])
+  @@index([taskId])
+  @@map("capability_leases")
 }
 
 // ─────────────────────────────────────────────
@@ -197,6 +264,7 @@ model ReceiptChain {
   receipts         Receipt[]
 
   @@index([chainHeight])
+  @@map("receipt_chains")
 }
 
 model Receipt {
@@ -233,5 +301,7 @@ model Receipt {
   @@index([tenantId, parentHash])
   @@index([correlationId])
   @@index([selfHash])
+  @@map("receipts")
 }
+
 
