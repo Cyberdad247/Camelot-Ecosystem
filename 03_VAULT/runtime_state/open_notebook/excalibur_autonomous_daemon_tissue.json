@@ -3,6 +3,28 @@
     "knight_id": "EXCALIBUR_AUTONOMOUS_DAEMON",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_288e8790fc38e5190a4b62263d06c28ddac253865f5a906d2c6a6f182065310d",
+    "content": "Verification Run excalibur_daily_20260913123447: Autonomous Daily CI/CD Snapshot & WorldTree Tether Sync\nOperator: Excalibur_Autonomous_Daemon\nSuccess: True\nResults: {\"cadence\": \"DAILY\", \"snapshot_id\": \"excalibur_cicd_20260913_123447\", \"version\": \"v1000.54-EXCALIBUR-A\", \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"tethered_knights\": 41, \"snapshots_rotated\": 0}",
+    "vfs_path": "vfs://worldtree/knights/excalibur_autonomous_daemon/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_EXCALIBUR_AUTONOMOUS_DAEMON",
+    "open_viking_tether": "open_viking://worldtree/excalibur_autonomous_daemon",
+    "updated_at": "2026-09-13T12:34:48.262906+00:00"
+  },
+  {
+    "knight_id": "EXCALIBUR_AUTONOMOUS_DAEMON",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_28ec72e2f1040b7030fac5f06009deb14d0a2fe0d12d89a2a571ab3234ea861b",
+    "content": "Verification Run excalibur_daily_20260913123341: Autonomous Daily CI/CD Snapshot & WorldTree Tether Sync\nOperator: Excalibur_Autonomous_Daemon\nSuccess: True\nResults: {\"cadence\": \"DAILY\", \"snapshot_id\": \"excalibur_cicd_20260913_123341\", \"version\": \"v1000.54-EXCALIBUR-A\", \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"tethered_knights\": 41, \"snapshots_rotated\": 0}",
+    "vfs_path": "vfs://worldtree/knights/excalibur_autonomous_daemon/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_EXCALIBUR_AUTONOMOUS_DAEMON",
+    "open_viking_tether": "open_viking://worldtree/excalibur_autonomous_daemon",
+    "updated_at": "2026-09-13T12:33:41.898428+00:00"
+  },
+  {
+    "knight_id": "EXCALIBUR_AUTONOMOUS_DAEMON",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
     "title": "L2_Vector_Index_camelot_audit_f0db00d1c7e7c8fee951623228337c053a84482d84b231c417c2ba9e4522beb4",
     "content": "Verification Run excalibur_daily_20260913072852: Autonomous Daily CI/CD Snapshot & WorldTree Tether Sync\nOperator: Excalibur_Autonomous_Daemon\nSuccess: True\nResults: {\"cadence\": \"DAILY\", \"snapshot_id\": \"excalibur_cicd_20260913_072852\", \"version\": \"v1000.54-EXCALIBUR-A\", \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"tethered_knights\": 41, \"snapshots_rotated\": 0}",
     "vfs_path": "vfs://worldtree/knights/excalibur_autonomous_daemon/tether.json",
