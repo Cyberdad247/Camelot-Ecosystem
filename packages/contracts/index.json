@@ -186,6 +186,34 @@
       "schema_version": "camelot-symbolect-tree/1",
       "purpose": "Approved task-structure tree in Symbolect with glyph registry binding (§17).",
       "key_fields_v12": ["root", "nodes", "glyph", "failure_policy"]
+    },
+    {
+      "file": "approval-certificate.schema.json",
+      "$id": "https://camelot-os/schemas/approval-certificate.schema.json",
+      "schema_version": "camelot-approval-certificate/1",
+      "purpose": "Operator or multi-party approval certificate issued by Arthur Sovereign Authority or Excalibur Command Center for R >= R3 effects.",
+      "key_fields_v12": ["certificate_id", "task_id", "manifest_hash", "approver", "authority_vector", "decision", "signature"]
+    },
+    {
+      "file": "authority-epoch.schema.json",
+      "$id": "https://camelot-os/schemas/authority-epoch.schema.json",
+      "schema_version": "camelot-authority-epoch/1",
+      "purpose": "v1.2 multidimensional authority vector and cluster fencing epoch state formalizing A_epoch = <E_leadership, R_policy, R_revocation, R_registry, R_identity, R_contract>.",
+      "key_fields_v12": ["epoch_id", "authority_vector", "fenced_leader_node", "active_leader_node", "policy_bundle_hash", "contracts_lock_hash"]
+    },
+    {
+      "file": "arthur-resolution.schema.json",
+      "$id": "https://camelot-os/schemas/arthur-resolution.schema.json",
+      "schema_version": "camelot-arthur-resolution/1",
+      "purpose": "Sovereign King Arthur resolution and ethical compass override directive (§1.1, §6.2).",
+      "key_fields_v12": ["resolution_id", "directive_type", "target_scope", "authority_vector", "sovereign_seal"]
+    },
+    {
+      "file": "workspace-event.schema.json",
+      "$id": "https://camelot-os/schemas/workspace-event.schema.json",
+      "schema_version": "camelot-workspace-event/1",
+      "purpose": "Immutable append-only VFS mutation record (§14.3) tracking file creation, patches, and compendium mutations.",
+      "key_fields_v12": ["event_id", "workspace_id", "lease_id", "mutation_type", "path", "pre_hash", "post_hash"]
     }
   ]
 }
