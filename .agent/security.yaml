@@ -1,0 +1,8 @@
+﻿zero_trust:
+  - "All comms via Bifrost mTLS"
+  - "Sentinel leases required"
+  - "Arthur seal for R5/R6"
+path_isolation:
+  - "AgentArmor: no path escape"
+secret_handling:
+  - "Vault only, no plaintext"

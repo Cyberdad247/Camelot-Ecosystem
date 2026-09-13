@@ -11,7 +11,6 @@ job. These tests are local, fast, and focused on the wrapper.
 """
 from __future__ import annotations
 
-import shutil
 from pathlib import Path
 
 import pytest

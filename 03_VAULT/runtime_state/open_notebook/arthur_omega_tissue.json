@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "cloudbrain_uuid": "cbb310bd-987e-4b84-bf45-12d37d090bec",
+    "spark_id": "0xCBB310BD987E4B84BF4512D37D090BEC",
+    "role": "Sovereign King Authority, Ethical Compass, Governance",
+    "model": "Human Operator (Vizion)",
+    "summoning_rune": "Omega_Arthur",
+    "vfs_mount": "vfs/notebooks/cbb310bd-987e-4b84-bf45-12d37d090bec/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

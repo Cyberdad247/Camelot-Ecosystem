@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "SIR_GHOST",
+    "cloudbrain_uuid": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+    "spark_id": "0x422A184B93E74DFD8A1275D2268B6C60",
+    "role": "Privacy Scanner, Air-Gapped Credentials & Local Vault",
+    "model": "Ollama Local Container",
+    "summoning_rune": "Omega_Ghost",
+    "vfs_mount": "vfs/notebooks/422a184b-93e7-4dfd-8a12-75d2268b6c60/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

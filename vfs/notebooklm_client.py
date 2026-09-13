@@ -21,7 +21,6 @@ import asyncio
 import logging
 import os
 import sys
-from functools import wraps
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -61,18 +60,20 @@ async def _get_client() -> Optional[Any]:
     """Acquire authenticated NotebookLMClient from stored session."""
     if not NOTEBOOKLM_AVAILABLE:
         return None
+    if os.environ.get("CAMELOT_OFFLINE_CLOUDBRAIN") == "1":
+        return None
     auth_path = r"C:\Users\vizio\.notebooklm\storage_state.json"
     try:
         client = await NotebookLMClient.from_storage(path=auth_path if os.path.exists(auth_path) else None)
         return client
     except AuthError:
-        LOG.error(
+        LOG.debug(
             "[NLM] Authentication required. Run in terminal: "
             ".venv\\Scripts\\notebooklm login"
         )
         return None
     except Exception as e:
-        LOG.error(f"[NLM] Client init failed: {e}")
+        LOG.debug(f"[NLM] Client init failed: {e}")
         return None
 
 
@@ -204,7 +205,9 @@ def query_notebook(knight_id: str, question: str) -> Optional[str]:
             if not nb:
                 return None
             try:
-                result = await client.chat.send_message(nb.id, question)
+                result = await client.chat.ask(nb.id, question)
+                if hasattr(result, "answer"):
+                    return str(result.answer)
                 return str(result)
             except Exception as e:
                 LOG.error(f"[NLM] Chat query failed for {knight_id}: {e}")

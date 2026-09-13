@@ -45,12 +45,15 @@ CONFIGS_DIR  = CAMELOT_HOME / "03_VAULT" / "training" / "configs"
 LOGS_DIR     = CAMELOT_HOME / "logs"
 PID_FILE     = LOGS_DIR / "harness.pid"
 QUEUE_FILE   = LOGS_DIR / "harness_queue.jsonl"
+QUEUE_STATE_FILE = LOGS_DIR / "harness_queue_state.jsonl"
 LEDGER_FILE  = CAMELOT_HOME / "PROVENANCE_LEDGER.md"
 
 # Ensure logs dir exists
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
-# Add configs dir to path for knight imports
+# Add CAMELOT_HOME and configs dir to path for imports
+if str(CAMELOT_HOME) not in sys.path:
+    sys.path.insert(0, str(CAMELOT_HOME))
 if str(CONFIGS_DIR) not in sys.path:
     sys.path.insert(0, str(CONFIGS_DIR))
 
@@ -146,6 +149,39 @@ def _utcnow() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
+def requeue_legacy_task(task_id: str) -> bool:
+    """Promote one approved legacy *planning* task into the v2 queue.
+
+    This deliberately refuses all non-planning directives: approval to inspect
+    or plan never becomes approval to restart a process or alter state.
+    """
+    if not QUEUE_FILE.exists():
+        return False
+    for line in QUEUE_FILE.read_text(encoding="utf-8").splitlines():
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if item.get("id") != task_id:
+            continue
+        directive = str(item.get("directive", ""))
+        if not (directive.startswith("//PLAN") or directive.startswith("Omega_ANYA")):
+            return False
+        promoted = {
+            "id": f"requeue-{task_id}",
+            "queue_version": 2,
+            "knight": item.get("knight", "merlin_omega"),
+            "directive": directive,
+            "priority": item.get("priority", 3),
+            "submitted": _utcnow(),
+            "requeued_from": task_id,
+        }
+        with QUEUE_FILE.open("a", encoding="utf-8") as file:
+            file.write(json.dumps(promoted) + "\n")
+        return True
+    return False
+
+
 async def _probe_port(host: str, port: int, timeout: float = 1.5) -> bool:
     try:
         _, writer = await asyncio.wait_for(
@@ -181,6 +217,27 @@ class SovereignHarness:
         self._restart_ts: dict[str, float] = {}    # service → last restart epoch
         self._restart_count: dict[str, int] = {}  # consecutive failures per service
         self._prev_dark: set[str] = set()         # dark set from previous watchdog tick
+
+    def _task_states(self) -> dict[str, dict[str, Any]]:
+        states: dict[str, dict[str, Any]] = {}
+        if not QUEUE_STATE_FILE.exists():
+            return states
+        for line in QUEUE_STATE_FILE.read_text(encoding="utf-8").splitlines():
+            try:
+                event = json.loads(line)
+                if event.get("task_id"):
+                    states[str(event["task_id"])] = event
+            except json.JSONDecodeError:
+                continue
+        return states
+
+    def _record_task_state(self, task_id: str, state: str, *, result: Any = None) -> None:
+        QUEUE_STATE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        event: dict[str, Any] = {"task_id": task_id, "state": state, "at": _utcnow()}
+        if result is not None:
+            event["result"] = result
+        with QUEUE_STATE_FILE.open("a", encoding="utf-8") as file:
+            file.write(json.dumps(event) + "\n")
 
     # ── Watchdog ──────────────────────────────────────────────────────────────
 
@@ -268,6 +325,7 @@ class SovereignHarness:
         return min(WATCHDOG_RESTART_COOLDOWN_S * (2 ** failures), WATCHDOG_RESTART_MAX_COOLDOWN_S)
 
     async def _watchdog_loop(self) -> None:
+        await asyncio.sleep(15)  # let boot sequence settle before probing
         while self._running:
             results = await asyncio.gather(*[
                 _probe_port(host, port)
@@ -292,6 +350,7 @@ class SovereignHarness:
                     if now - self._restart_ts.get(name, 0) >= cooldown:
                         self._restart_ts[name] = now
                         asyncio.create_task(self._restart_soft_service(name))
+                        await asyncio.sleep(2.0)  # stagger restarts to prevent memory thundering herd
             else:
                 _log("[WATCHDOG] All probes green")
 
@@ -504,10 +563,14 @@ class SovereignHarness:
     # ── Task queue ────────────────────────────────────────────────────────────
 
     async def _task_loop(self) -> None:
-        processed: set[str] = self._queue_ids()
+        processed = {
+            task_id for task_id, event in self._task_states().items()
+            if event.get("state") in {"claimed", "running", "completed", "failed", "blocked"}
+        }
         while self._running:
             tasks = self._read_queue(processed)
             for task in sorted(tasks, key=lambda t: t.priority):
+                self._record_task_state(task.id, "claimed")
                 asyncio.create_task(self._dispatch(task))
                 processed.add(task.id)
             await asyncio.sleep(TASK_POLL_INTERVAL_S)
@@ -544,6 +607,8 @@ class SovereignHarness:
                 continue
             try:
                 data = json.loads(line)
+                if data.get("queue_version") != 2:
+                    continue
                 tid = data.get("id", "")
                 if tid and tid not in processed:
                     # Robust resolution of knight name
@@ -569,12 +634,15 @@ class SovereignHarness:
         cell.task_count += 1
         cell.last_active = time.time()
         _log(f"[DISPATCH] {task.knight} ← {task.directive[:60]}")
+        self._record_task_state(task.id, "running")
         try:
             result = await self._run_knight(task)
             self._done += 1
+            self._record_task_state(task.id, "completed", result=result)
             _log(f"[DONE] {task.id} → {str(result)[:80]}")
         except Exception as e:
             self._fail += 1
+            self._record_task_state(task.id, "failed", result={"error": str(e)})
             cell.error_count += 1
             _log(f"[FAIL] {task.id} {type(e).__name__}: {e}")
             # Cellular apoptosis: >5% error rate
@@ -674,6 +742,43 @@ class SovereignHarness:
         # Hermes_Prime — PhialEngine (MGV + Ouroboros + re-weighting)
         if self._is_hermes_prime_directive(task.directive) or knight_id in ("hermes_prime", "hermesprime"):
             return await self._run_hermes_prime(task, knight_id)
+
+        # Merlin planning is a read-only operation.  Preserve the requested
+        # directive as an inspectable artifact instead of acknowledging it
+        # without output or recursively re-queuing the rune.
+        if knight_id in ("merlin_omega", "merlin") and task.directive.startswith("//PLAN"):
+            plan_dir = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "plans"
+            plan_dir.mkdir(parents=True, exist_ok=True)
+            artifact = plan_dir / f"{task.id}.json"
+            artifact.write_text(json.dumps({
+                "task_id": task.id,
+                "knight": task.knight,
+                "directive": task.directive,
+                "status": "PLANNED",
+                "execution": "read_only",
+                "requires_human_gate_for_mutations": True,
+                "generated_utc": _utcnow(),
+            }, indent=2), encoding="utf-8")
+            return {"status": "PLANNED", "artifact_path": str(artifact)}
+
+        if knight_id in ("anya_omega", "anya") and task.directive.startswith("Omega_ANYA"):
+            from control_plane.core.anya_gate import AnyaGate
+            intent = task.directive.removeprefix("Omega_ANYA").strip()
+            triage = AnyaGate().triage(intent)
+            artifact_dir = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "anya_gates"
+            artifact_dir.mkdir(parents=True, exist_ok=True)
+            artifact = artifact_dir / f"{task.id}.json"
+            artifact.write_text(json.dumps({
+                "task_id": task.id,
+                "directive": task.directive,
+                "status": "GATED",
+                "execution": "read_only",
+                "hitl_tier": getattr(triage, "hitl_tier", "PROMPT"),
+                "risk_entropy": getattr(triage, "risk_entropy", None),
+                "requires_human_gate_for_mutations": True,
+                "generated_utc": _utcnow(),
+            }, indent=2), encoding="utf-8")
+            return {"status": "GATED", "artifact_path": str(artifact)}
 
         # Runic command dispatch
         if task.directive.startswith("//") or task.directive.startswith("Omega_"):
@@ -839,7 +944,10 @@ def _rotate_log(log_path: Path) -> None:
 def _log(msg: str) -> None:
     ts = datetime.now().strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
-    print(line, flush=True)
+    try:
+        print(line, flush=True)
+    except (OSError, ValueError):
+        pass
     try:
         log_path = LOGS_DIR / "harness.log"
         if log_path.exists() and log_path.stat().st_size >= _LOG_MAX_BYTES:
@@ -857,7 +965,7 @@ def boot_harness(home: Path | None = None) -> tuple[bool, str]:
     import platform
     import subprocess
     home = home or CAMELOT_HOME
-    script = home / "control_plane" / "harness.py"
+    script = home / "control_plane" / "infra" / "harness.py"
     if not script.exists():
         return False, "harness.py not found"
 
@@ -865,19 +973,28 @@ def boot_harness(home: Path | None = None) -> tuple[bool, str]:
     if PID_FILE.exists():
         try:
             pid = int(PID_FILE.read_text().strip())
-            os.kill(pid, 0)  # check alive
-            return True, f"Sovereign Harness already running PID={pid}"
-        except (ProcessLookupError, ValueError):
+            import psutil
+            if psutil.pid_exists(pid):
+                return True, f"Sovereign Harness already running PID={pid}"
+            PID_FILE.unlink(missing_ok=True)
+        except Exception:
             PID_FILE.unlink(missing_ok=True)
 
     py = sys.executable
     kwargs: dict = {"cwd": str(home)}
     if platform.system() == "Windows":
-        kwargs["creationflags"] = subprocess.CREATE_NEW_CONSOLE
+        kwargs["creationflags"] = (
+            getattr(subprocess, "DETACHED_PROCESS", 0x00000008)
+            | getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0x00000200)
+            | getattr(subprocess, "CREATE_NO_WINDOW", 0)
+        )
+        kwargs["close_fds"] = True
+        kwargs["stdout"] = subprocess.DEVNULL
+        kwargs["stderr"] = subprocess.DEVNULL
     else:
         kwargs["start_new_session"] = True
 
-    proc = subprocess.Popen([py, str(script)], **kwargs)
+    proc = subprocess.Popen([py, "-m", "control_plane.infra.harness"], **kwargs)
     time.sleep(1.0)
     if proc.poll() is not None:
         return False, f"Harness exited immediately (code {proc.returncode})"
@@ -898,14 +1015,24 @@ def main() -> None:
         if PID_FILE.exists():
             try:
                 pid = int(PID_FILE.read_text().strip())
-                print(json.dumps({"running": True, "pid": pid}))
+                import psutil
+                if psutil.pid_exists(pid):
+                    print(json.dumps({"running": True, "pid": pid}))
+                else:
+                    PID_FILE.unlink(missing_ok=True)
+                    print(json.dumps({"running": False, "stale_pid": pid}))
             except Exception:
                 print(json.dumps({"running": False}))
         else:
             print(json.dumps({"running": False}))
         return
 
-    asyncio.run(harness.run(once=args.once))
+    import traceback
+    try:
+        asyncio.run(harness.run(once=args.once))
+    except Exception:
+        _log(f"[FATAL_CRASH] harness.run exited: {traceback.format_exc()}")
+        PID_FILE.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":

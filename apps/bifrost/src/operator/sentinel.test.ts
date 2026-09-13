@@ -25,6 +25,10 @@ function makeManifest(overrides: Partial<EffectManifest> = {}): EffectManifest {
     policyClass: 'engineering.write',
     expiresAt: new Date(Date.now() + 60_000).toISOString(),
     oneTimeNonce: 'nonce-1',
+    // v1.2 fields per §5.5/§11.1 of the SADD
+    effectClass: 'workspace.patch',
+    declaredRiskTier: 'T2',
+    declarationHash: 'sha256:' + 'a'.repeat(64),
     ...overrides,
   };
 }

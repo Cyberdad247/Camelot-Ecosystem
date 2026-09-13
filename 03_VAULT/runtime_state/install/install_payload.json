@@ -1,0 +1,9 @@
+{
+  "v": "v1000.5",
+  "target": "kba",
+  "mode": "offline",
+  "hash": "sha256:0ef5aa235f00de514a47c4fc995d1108e858f7d646fe970d19baf6b32530256e",
+  "sig": "ed25519:0xARTHUR_SOVEREIGN_SEAL_STUB",
+  "cmd": "sudo tar -xzf /dev/shm/camelot_payload.tar.gz -C /opt/camelot && /opt/camelot/bin/camelot-bootstrap --target kba --offline",
+  "timestamp": "2026-09-03T01:43:33.232109+00:00"
+}

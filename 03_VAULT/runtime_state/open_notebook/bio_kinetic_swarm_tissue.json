@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "cloudbrain_uuid": "93b21c40-10ff-4e89-a212-08f37b1297e1",
+    "spark_id": "0x93B21C4010FF4E89A21208F37B1297E1",
+    "role": "Bio-Kinetic Matrix, Cellular Diode Isolation, Mitosis",
+    "model": "Swarm Coordinator",
+    "summoning_rune": "Omega_BioSwarm",
+    "vfs_mount": "vfs/notebooks/93b21c40-10ff-4e89-a212-08f37b1297e1/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

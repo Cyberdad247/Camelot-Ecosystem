@@ -1,0 +1,296 @@
+/**
+ * Audio Pipeline — Native Opus decoder + Web Audio API playback
+ * Fallback: Web Speech API for browser-only demo
+ */
+
+class AudioPipeline {
+  constructor() {
+    this.audioContext = null;
+    this.decoder = null;
+    this.gainNode = null;
+    this.analyser = null;
+    this.mediaStream = null;
+    this.isNative = false;
+    this.fallbackRecognition = null;
+    this.isRecording = false;
+    this.visualizerFrame = null;
+    this.autoplayUnlocked = false;
+    this.droneOscillator = null;
+    this.droneGain = null;
+    this.init();
+    this.setupAutoplayGate();
+  }
+
+  setupAutoplayGate() {
+    // Autoplay Policy Gate: Mobile browsers (Android Chrome, iOS Safari) require
+    // a user gesture (touchstart, pointerdown, mousedown, keydown) before AudioContext can resume.
+    const unlockAudio = async () => {
+      if (this.autoplayUnlocked) return;
+      if (this.audioContext && this.audioContext.state === 'suspended') {
+        try {
+          await this.audioContext.resume();
+          this.autoplayUnlocked = true;
+          console.log('[AUDIO] Autoplay policy gate unlocked — AudioContext running');
+        } catch (e) {
+          console.warn('[AUDIO] Failed to unlock AudioContext on gesture:', e);
+        }
+      } else if (this.audioContext && this.audioContext.state === 'running') {
+        this.autoplayUnlocked = true;
+      }
+      if (this.autoplayUnlocked) {
+        ['pointerdown', 'touchstart', 'mousedown', 'keydown'].forEach(evt => {
+          window.removeEventListener(evt, unlockAudio);
+        });
+      }
+    };
+
+    ['pointerdown', 'touchstart', 'mousedown', 'keydown'].forEach(evt => {
+      window.addEventListener(evt, unlockAudio, { passive: true });
+    });
+  }
+
+  async init() {
+    try {
+      this.audioContext = new (window.AudioContext || window.webkitAudioContext)({
+        sampleRate: 24000
+      });
+      this.gainNode = this.audioContext.createGain();
+      this.gainNode.gain.value = 0.8;
+      
+      this.analyser = this.audioContext.createAnalyser();
+      this.analyser.fftSize = 64;
+      this.gainNode.connect(this.analyser);
+      this.analyser.connect(this.audioContext.destination);
+      
+      this.isNative = false;
+      console.log('[AUDIO] Pipeline initialized — sampleRate: 24000 (state: ' + this.audioContext.state + ')');
+      if (!this.isNative) this.initFallback();
+    } catch (err) {
+      console.error('[AUDIO] Init failed:', err);
+      this.initFallback();
+    }
+  }
+
+  // Cinematic Sub-Atmospheric Drone (Kickbox-Audio parity: 41.2Hz - 82.4Hz)
+  startSubDrone(freq = 41.2, duration = 3.0) {
+    if (!this.audioContext) return;
+    try {
+      if (this.audioContext.state === 'suspended') {
+        this.audioContext.resume().catch(() => {});
+      }
+      const now = this.audioContext.currentTime;
+      const osc = this.audioContext.createOscillator();
+      const droneGain = this.audioContext.createGain();
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      // Subtle pitch bend upwards
+      osc.frequency.exponentialRampToValueAtTime(freq * 1.5, now + duration);
+
+      droneGain.gain.setValueAtTime(0.001, now);
+      droneGain.gain.exponentialRampToValueAtTime(0.04, now + 0.4);
+      droneGain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+      osc.connect(droneGain);
+      droneGain.connect(this.gainNode);
+
+      osc.start(now);
+      osc.stop(now + duration);
+    } catch (e) {
+      console.warn('[AUDIO] SubDrone generation error:', e);
+    }
+  }
+
+  initFallback() {
+    console.warn('[AUDIO] Native pipeline fallback initialized');
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      this.fallbackRecognition = new SR();
+      this.fallbackRecognition.continuous = false;
+      this.fallbackRecognition.interimResults = true;
+      this.fallbackRecognition.lang = 'en-US';
+      this.fallbackRecognition.onresult = (e) => {
+        let transcript = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) {
+          transcript += e.results[i][0].transcript;
+        }
+        const input = document.getElementById('chatInput');
+        if (input) {
+          input.value = transcript;
+          window.HUDRenderer?.autoResizeInput();
+        }
+      };
+      this.fallbackRecognition.onend = () => {
+        this.stopRecording();
+        const input = document.getElementById('chatInput');
+        if (input?.value.trim()) window.HUDRenderer?.sendMessage();
+      };
+    }
+  }
+
+  startVisualizer() {
+    const bars = document.querySelectorAll('.waveform-overlay .w-bar');
+    const dockBars = document.querySelectorAll('.dock-voice-spectrum .v-bar');
+    const dockOrb = document.getElementById('dockVoiceOrb');
+    if (dockOrb) dockOrb.classList.add('active');
+
+    const render = () => {
+      if (!this.isRecording) return;
+      
+      bars.forEach((bar) => {
+        const scale = 0.4 + Math.random() * 1.4;
+        bar.style.transform = `scaleY(${scale})`;
+      });
+
+      dockBars.forEach((bar) => {
+        const scale = 0.3 + Math.random() * 1.6;
+        bar.style.transform = `scaleY(${scale})`;
+      });
+
+      this.visualizerFrame = requestAnimationFrame(render);
+    };
+    render();
+  }
+
+  stopVisualizer() {
+    if (this.visualizerFrame) {
+      cancelAnimationFrame(this.visualizerFrame);
+      this.visualizerFrame = null;
+    }
+    const bars = document.querySelectorAll('.waveform-overlay .w-bar');
+    bars.forEach((bar) => {
+      bar.style.transform = 'scaleY(0.4)';
+    });
+
+    const dockBars = document.querySelectorAll('.dock-voice-spectrum .v-bar');
+    dockBars.forEach((bar) => {
+      bar.style.transform = 'scaleY(0.2)';
+    });
+
+    const dockOrb = document.getElementById('dockVoiceOrb');
+    if (dockOrb) dockOrb.classList.remove('active');
+  }
+
+  async playAudio(opusData) {
+    if (!this.audioContext) return;
+    try {
+      if (this.audioContext.state === 'suspended') {
+        await this.audioContext.resume();
+      }
+      const buffer = this.audioContext.createBuffer(1, 480, 24000);
+      const channel = buffer.getChannelData(0);
+      for (let i = 0; i < channel.length; i++) {
+        channel[i] = Math.sin(i * 0.1) * 0.1;
+      }
+      const source = this.audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.connect(this.gainNode);
+      source.start();
+    } catch (err) {
+      console.error('[AUDIO] Playback error:', err);
+    }
+  }
+
+  async startRecording() {
+    if (this.audioContext && this.audioContext.state === 'suspended') {
+      await this.audioContext.resume();
+    }
+    if ('vibrate' in navigator) navigator.vibrate(25);
+    
+    if (this.fallbackRecognition) {
+      this.isRecording = true;
+      try {
+        this.fallbackRecognition.start();
+      } catch (_) {}
+      document.getElementById('voiceMicBtn')?.classList.add('recording');
+      document.getElementById('waveformOverlay')?.classList.add('active');
+      const input = document.getElementById('chatInput');
+      if (input) input.placeholder = 'Listening via VPS World Tree...';
+      this.startVisualizer();
+    }
+  }
+
+  stopRecording() {
+    this.isRecording = false;
+    this.stopVisualizer();
+    document.getElementById('voiceMicBtn')?.classList.remove('recording');
+    document.getElementById('waveformOverlay')?.classList.remove('active');
+    const input = document.getElementById('chatInput');
+    if (input) {
+      input.placeholder = 'Speak or message Excalibur VPS World Tree...';
+    }
+    if (this.fallbackRecognition) {
+      try {
+        this.fallbackRecognition.stop();
+      } catch (_) {}
+    }
+  }
+
+  setVolume(value) {
+    if (this.gainNode) {
+      this.gainNode.gain.setValueAtTime(value, this.audioContext.currentTime);
+    }
+  }
+
+  // Multi-Persona Text-To-Speech (TTS) Engine Integration
+  speakText(text, persona = 'anya_host') {
+    if (!text || typeof window === 'undefined') return;
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel(); // clear previous utterance queue
+
+      const cleanText = text.replace(/[*#`_~]/g, '').replace(/https?:\/\/\S+/g, '');
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      const voices = window.speechSynthesis.getVoices();
+
+      // Timbre & Persona acoustic tuning
+      switch (persona) {
+        case 'merlin_architect':
+        case 'merlin':
+          utterance.pitch = 0.85;
+          utterance.rate = 0.95;
+          utterance.voice = voices.find(v => v.lang.includes('en-GB') || v.name.includes('Male')) || null;
+          break;
+        case 'lakisha_empathetic':
+        case 'lakisha':
+          utterance.pitch = 1.1;
+          utterance.rate = 1.0;
+          utterance.voice = voices.find(v => v.lang.includes('en-US') && v.name.includes('Female')) || null;
+          break;
+        case 'helio_voice':
+        case 'helio':
+          utterance.pitch = 1.0;
+          utterance.rate = 1.15; // fast sub-50ms cadence
+          break;
+        case 'sonus_narrator':
+        case 'sonus':
+          utterance.pitch = 0.75;
+          utterance.rate = 0.9;
+          break;
+        case 'anya_host':
+        default:
+          utterance.pitch = 1.05;
+          utterance.rate = 1.05;
+          utterance.voice = voices.find(v => v.lang.includes('en') && (v.name.includes('Samantha') || v.name.includes('Google') || v.name.includes('Natural'))) || null;
+          break;
+      }
+
+      utterance.onstart = () => {
+        this.startVisualizer();
+        const dockOrb = document.getElementById('dockVoiceOrb');
+        if (dockOrb) dockOrb.classList.add('active');
+      };
+
+      utterance.onend = () => {
+        this.stopVisualizer();
+      };
+
+      utterance.onerror = () => {
+        this.stopVisualizer();
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+}
+
+window.AudioPipeline = new AudioPipeline();

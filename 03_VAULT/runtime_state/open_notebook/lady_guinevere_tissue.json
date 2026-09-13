@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "LADY_GUINEVERE",
+    "cloudbrain_uuid": "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
+    "spark_id": "0x8DCA4A862BB6433296B679899C0A9CCF",
+    "role": "Aesthetic Harmony, Interface Tokens, Luxury Minimalist",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Guinevere",
+    "vfs_mount": "vfs/notebooks/8dca4a86-2bb6-4332-96b6-79899c0a9ccf/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

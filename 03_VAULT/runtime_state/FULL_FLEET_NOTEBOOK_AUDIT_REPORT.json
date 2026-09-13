@@ -1,0 +1,534 @@
+{
+  "timestamp": "CAMELOT_OS",
+  "total_cloud_notebooks": 275,
+  "total_knights_in_constitution": 38,
+  "knights_matched_in_cloud": 36,
+  "knights_with_local_tissue": 38,
+  "knights_with_vfs_mounts": 38,
+  "fleet_taxonomy_counts": {
+    "sovereign_knights": 61,
+    "inspira_hiveide": 1,
+    "camelot_core_versions": 14,
+    "ai_research_skills": 56,
+    "knowledge_archive": 135,
+    "business_commerce": 6,
+    "audio_transport": 2
+  },
+  "duplicate_clusters_found": 8,
+  "knight_roster_audit": [
+    {
+      "knight": "SIR_BORIS",
+      "role": "Lead Architect, Crucible Conductor, 13-Agent Critique",
+      "model": "Gemini / Claude Code",
+      "canonical_uuid": "f7707daa-2d10-4db8-8fda-be4661a27793",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR_BORIS",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_ALEX",
+      "role": "Task Planner, DAG Orchestrator, AST Task Breakdown",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR_ALEX",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_FORGE",
+      "role": "Kinetic Code Generation, Compiles, //FORGE Dispatcher",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR_FORGE",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_CODEX",
+      "role": "Kinetic Implementer, High-Velocity Zero-Trust Architecture",
+      "model": "OpenAI Codex / GPT-5.5",
+      "canonical_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
+      "cloud_matched": true,
+      "cloud_title": "Camelot-OS v.1000",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_SENTINEL",
+      "role": "AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "07cbb441-f008-424c-820a-85676210be39",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR_SENTINEL",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_DEBUG",
+      "role": "PIV Self-Healing Loop, Error Diagnosis & AST Repair",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR_DEBUG",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_GHOST",
+      "role": "Privacy Scanner, Air-Gapped Credentials & Local Vault",
+      "model": "Ollama Local Container",
+      "canonical_uuid": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR_GHOST",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "LADY_APIS",
+      "role": "BASHR Research Loop, Bio-Swarm Isolation, Context Forager",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: LADY_APIS",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "MERLIN_OMEGA",
+      "role": "GoT/ToT Deep Reasoning, Mathematical Proofs, System 2",
+      "model": "Gemini Pro / Opus",
+      "canonical_uuid": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: MERLIN_OMEGA",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_HELIO",
+      "role": "Voice OS, Real-Time Audio Pipeline, //vocal Dispatcher",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "56820318-bb91-451f-aac4-4b46424898cf",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR_HELIO",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_SONUS",
+      "role": "Multivoice Audio Routing, Phonetic Analysis, Aoede S2S",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "6272aa35-c285-4edc-81bc-2824ab519edf",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR SONUS",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "HERMES_PRIME",
+      "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",
+      "model": "Gemini / Hermes OS",
+      "canonical_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+      "cloud_matched": false,
+      "cloud_title": null,
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "HERMES_AGENT_EVOLUTION",
+      "role": "OpenClaw Transcendence, Nous Research, Autonomous Evolution",
+      "model": "Hermes Kernel",
+      "canonical_uuid": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",
+      "cloud_matched": true,
+      "cloud_title": "The Hermes Agent: Evolution Beyond OpenClaw",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "ANYA_OMEGA",
+      "role": "Sovereign Compiler, Helm Authority, Anya First & Last Gate",
+      "model": "Sovereign Lattice",
+      "canonical_uuid": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: ANYA OMEGA",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "ANYA_QUANTUM_MANTRA",
+      "role": "Glyph Quantum Engine, Token Compression, VFS Mantra",
+      "model": "Sovereign Lattice",
+      "canonical_uuid": "219e765a-0c8e-4b66-b356-f277cb441b14",
+      "cloud_matched": true,
+      "cloud_title": "Anya Omega: Sovereign Compiler of Camelot-OS",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "ARTHUR_OMEGA",
+      "role": "Sovereign King Authority, Ethical Compass, Governance",
+      "model": "Human Operator (Vizion)",
+      "canonical_uuid": "cbb310bd-987e-4b84-bf45-12d37d090bec",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: ARTHUR OMEGA",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_HEIMDALL",
+      "role": "Bifrost Guardian, Perimeter Lock, mTLS Boundary",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "3205f189-91da-4272-96a9-3641fd642763",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR HEIMDALL",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_GALAHAD",
+      "role": "Chivalric Verification, Cryptographic Purity, Truth Audit",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "e0110853-14ef-403f-8def-bf3a5123986f",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR GALAHAD",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_STITCH",
+      "role": "Kinematics, Micro-Interactions, UI State Patching",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "0fdccdc1-a1d2-48c2-8948-187398bfbeb5",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR STITCH",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_ALCHEMIST",
+      "role": "Transmutation, Model Quantization, Compression",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "d6bdd57c-84d2-4e24-bb10-ad1fd179fb04",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR ALCHEMIST",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_RUSTCLAW",
+      "role": "Rust Image & Kernel Pipelines, Bare-Metal Decompressor",
+      "model": "Rust 1.96 / Cargo",
+      "canonical_uuid": "2b3b6ec3-e020-484d-914d-92241a97ea55",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR RUSTCLAW",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_HERMES",
+      "role": "Courier Dispatch, Webhooks, GraphQL Endpoints",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "5dc31b8d-169d-4d4d-ab90-d12724fca720",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR HERMES",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_LANCELOT",
+      "role": "Frontline Champion, Kinetic Edge Defense, Real-Time Guard",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR LANCELOT",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "LADY_GUINEVERE",
+      "role": "Aesthetic Harmony, Interface Tokens, Luxury Minimalist",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: LADY GUINEVERE",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_HUGGINGFACE",
+      "role": "Model Inspection, Spaces Management, Transformer Pipelines",
+      "model": "HuggingFace Hub API",
+      "canonical_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloud_matched": true,
+      "cloud_title": "World Tree",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "SIR_MNEMO",
+      "role": "Dual-Tier Memory Sync, Vector Indexing, Tissue Journaling",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
+      "cloud_matched": true,
+      "cloud_title": "Sovereign_Workspace: SIR MNEMO",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "LADY_MNEMOSYNE",
+      "role": "WorldTree Master Memory, Memory Palace & VFS Sweeps",
+      "model": "Memory Substrate",
+      "canonical_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloud_matched": true,
+      "cloud_title": "World Tree",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "BIO_KINETIC_SWARM",
+      "role": "Bio-Kinetic Matrix, Cellular Diode Isolation, Mitosis",
+      "model": "Swarm Coordinator",
+      "canonical_uuid": "93b21c40-10ff-4e89-a212-08f37b1297e1",
+      "cloud_matched": false,
+      "cloud_title": null,
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "CAMELOT_V1000",
+      "role": "Sovereign OS Master Construction Codex, Excalibur Hub",
+      "model": "System Substrate",
+      "canonical_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
+      "cloud_matched": true,
+      "cloud_title": "Camelot-OS v.1000",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "BIFROST",
+      "role": "Bifrost Bridge Architecture, WebSocket & Express Transport",
+      "model": "Node.js / Rust",
+      "canonical_uuid": "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",
+      "cloud_matched": true,
+      "cloud_title": "Bifrost Bridge: Camelot-OS Trust and Transport Architecture",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "FATHER_CAMELOT",
+      "role": "Ancestral Compass, Moral & Ethical Governance Ledger",
+      "model": "Sovereign Substrate",
+      "canonical_uuid": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
+      "cloud_matched": true,
+      "cloud_title": "Father's Camelot",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "WORLD_TREE",
+      "role": "Living Knowledge Graph & Root WorldTree Tether",
+      "model": "WorldTree Substrate",
+      "canonical_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloud_matched": true,
+      "cloud_title": "World Tree",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "ALPHA_OMEGA",
+      "role": "Camelot-OS Alpha-Omega Artifacts & Compilation Store",
+      "model": "Forge Substrate",
+      "canonical_uuid": "2536aefb-937f-4a04-9142-d1a2f029d8a7",
+      "cloud_matched": true,
+      "cloud_title": "The Camelot-OS Alpha-Omega artifacts",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "ANTIGRAVITY",
+      "role": "NotebookLM + AntiGravity CLI Synergy & MCP Integration",
+      "model": "FastMCP / agy",
+      "canonical_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+      "cloud_matched": true,
+      "cloud_title": "Synergizing NotebookLM and Anti-Gravity for AI Automation Systems",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "KICKBOX",
+      "role": "KickBox Audio, WebRTC State & Vocal HUD Integration",
+      "model": "Next.js 14 / WebRTC",
+      "canonical_uuid": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
+      "cloud_matched": true,
+      "cloud_title": "KickBox Audio",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "INSPIRA",
+      "role": "HiveIDE / Inspira Spatial Developer Workstation",
+      "model": "IDE Substrate",
+      "canonical_uuid": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",
+      "cloud_matched": true,
+      "cloud_title": "HiveIDE-aka Inspira",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "INVISIONED_MARKETING",
+      "role": "Invisioned Marketing Sovereign CloudBrain & Brand Direction",
+      "model": "WorldTree Substrate",
+      "canonical_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloud_matched": true,
+      "cloud_title": "World Tree",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    },
+    {
+      "knight": "KNIGHT_STRATEGOS",
+      "role": "Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO",
+      "model": "Gemini 3.8 Flash",
+      "canonical_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloud_matched": true,
+      "cloud_title": "World Tree",
+      "local_tissue_active": true,
+      "local_vfs_mounted": true
+    }
+  ],
+  "duplicate_clusters": [
+    [
+      {
+        "id": "f6466e10-d1b1-4904-9f87-081d031b0595",
+        "title": "Sovereign_Workspace: LADY APIS"
+      },
+      {
+        "id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+        "title": "Sovereign_Workspace: LADY_APIS"
+      }
+    ],
+    [
+      {
+        "id": "b4cfc5af-1555-4f23-a131-1ec6d03c2787",
+        "title": "Sovereign_Workspace: SIR GHOST"
+      },
+      {
+        "id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+        "title": "Sovereign_Workspace: SIR_GHOST"
+      }
+    ],
+    [
+      {
+        "id": "3a09997b-3d65-46c9-b9aa-fb8ebce927a9",
+        "title": "Sovereign_Workspace: SIR SENTINEL"
+      },
+      {
+        "id": "07cbb441-f008-424c-820a-85676210be39",
+        "title": "Sovereign_Workspace: SIR_SENTINEL"
+      }
+    ],
+    [
+      {
+        "id": "96f9233b-6efa-46a3-8242-98f0c463680c",
+        "title": "Sovereign_Workspace: SIR FORGE"
+      },
+      {
+        "id": "91c5da8b-e2de-4a56-b7fd-c8b76c00afc7",
+        "title": "Sovereign_Workspace: SIR_FORGE"
+      }
+    ],
+    [
+      {
+        "id": "da2e51db-780a-48cf-a40a-4f0f65ff9295",
+        "title": "Sovereign_Workspace: SIR BORIS"
+      },
+      {
+        "id": "f7707daa-2d10-4db8-8fda-be4661a27793",
+        "title": "Sovereign_Workspace: SIR_BORIS"
+      }
+    ],
+    [
+      {
+        "id": "e9fcbbbc-cd43-4b2d-a437-b2570267a0a9",
+        "title": "Sovereign_Workspace: SIR ALEX"
+      },
+      {
+        "id": "f490c05e-d8c4-4008-87e1-5f901bf57c6a",
+        "title": "Sovereign_Workspace: SIR_ALEX"
+      }
+    ],
+    [
+      {
+        "id": "5a032241-f2b9-45dd-be84-2140c82a8143",
+        "title": ""
+      },
+      {
+        "id": "e68c8e7b-ed60-4464-8ce8-536cd0002205",
+        "title": ""
+      },
+      {
+        "id": "3937314d-7844-45bb-bbc2-300f0ec3d76b",
+        "title": ""
+      },
+      {
+        "id": "938b6aa9-e577-423b-9437-cd31f8f676b8",
+        "title": ""
+      },
+      {
+        "id": "b810f484-7abf-47f3-acb0-1fdcd47076e5",
+        "title": ""
+      },
+      {
+        "id": "6c552186-e313-4cb6-baa2-251fe9d6a42a",
+        "title": ""
+      },
+      {
+        "id": "7d720a63-19df-4dc6-86f1-e5db52909187",
+        "title": ""
+      },
+      {
+        "id": "267bf1d4-320c-4f78-a77e-3109a9de8c49",
+        "title": ""
+      },
+      {
+        "id": "baf72ef4-9a44-4cfc-a754-37801176ae0f",
+        "title": ""
+      },
+      {
+        "id": "3f7c67f7-c376-417a-a557-6d7b34319705",
+        "title": ""
+      },
+      {
+        "id": "f2ad7713-257e-4273-acbe-489c4738fd85",
+        "title": ""
+      },
+      {
+        "id": "d7f71718-d48a-43b5-820b-b2826995c6d4",
+        "title": ""
+      }
+    ],
+    [
+      {
+        "id": "e1d3220b-fa7c-4e22-8d80-f6a4ecfde1c5",
+        "title": "Untitled notebook"
+      },
+      {
+        "id": "71c1a76e-ced3-423f-82a9-8492439c6131",
+        "title": "Untitled notebook"
+      },
+      {
+        "id": "efa29fc9-a128-4726-ae28-686a30fd4046",
+        "title": "Untitled notebook"
+      },
+      {
+        "id": "8fda1443-b934-467f-9170-62935a8011a8",
+        "title": "Untitled notebook"
+      },
+      {
+        "id": "511d48cf-1f83-4d01-8669-4713a2d0f6b1",
+        "title": "Untitled notebook"
+      }
+    ]
+  ]
+}

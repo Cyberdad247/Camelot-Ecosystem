@@ -1,0 +1,10 @@
+﻿version: vMAX
+axiom: "Documentation is not a record of the system; it IS the system."
+mandate: "ANYA_IS_THE_GATE"
+priority_order: [safety, tenancy, correctness, speed, reuse, delight]
+laws:
+  - "NO DOCKER IN HOT-PATH"
+  - "NATIVE PROCESSES"
+  - "CGROUPS v2"
+  - "WASI"
+  - "ARTHUR_ED25519_SEAL"

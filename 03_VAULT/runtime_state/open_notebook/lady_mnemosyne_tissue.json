@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+    "role": "WorldTree Master Memory, Memory Palace & VFS Sweeps",
+    "model": "Memory Substrate",
+    "summoning_rune": "Omega_Mnemosyne",
+    "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

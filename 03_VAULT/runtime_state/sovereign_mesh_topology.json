@@ -1,0 +1,77 @@
+{
+  "system": "CAMELOT-OS Sovereign Autonomous Ecosystem",
+  "version": "vMAX Singularity",
+  "tailscale_account": "Cyberdad247@github",
+  "timestamp": "2026-08-25T22:55:00Z",
+  "nodes": {
+    "cybertronia": {
+      "designation": "CYBERTRONIA_LOCAL_ORCHESTRATOR",
+      "role": "Primary Kinetic Execution Node & Excalibur IDE Harness",
+      "tailscale_ip": "100.118.224.52",
+      "version": "1.102.2",
+      "os": "Windows 11 25H2",
+      "status": "CONNECTED",
+      "active_ports": { "bifrost_gateway": 3001, "mesh_bridge": 8095 }
+    },
+    "vashawns_s26_ultra": {
+      "designation": "EXCALIBUR_COMMAND_CENTER",
+      "role": "Kinetic Mobile Sentinel & Interactive Telemetry Cockpit",
+      "tailscale_ip": "100.106.246.126",
+      "version": "1.98.8",
+      "os": "Android 16",
+      "status": "CONNECTED",
+      "active_ports": { "sentinel_bridge": 8090, "termux_ssh": 8022 }
+    },
+    "fothers_camelot": {
+      "designation": "FATHERS_CAMELOT_SECONDARY_NODE",
+      "role": "Sovereign Secondary Windows Execution Node & Failover Rig",
+      "tailscale_ip": "100.121.48.50",
+      "version": "1.102.3",
+      "os": "Windows 11 25H2",
+      "status": "CONNECTED"
+    },
+    "lakesha": {
+      "designation": "LAKESHA_VOICE_OS_NODE",
+      "role": "Lakisha Voice OS Host & Secondary Surface",
+      "tailscale_ip": "100.100.155.55",
+      "version": "1.102.2",
+      "os": "Windows 11 25H2",
+      "status": "CONNECTED"
+    },
+    "camelot_relay_modal": {
+      "designation": "CAMELOT_RELAY_COUD_NODE",
+      "role": "Secure Cloud Relay & Modal Inference Bridge",
+      "tailscale_ip": "100.84.98.39",
+      "version": "1.96.4",
+      "os": "Linux 4.4.0",
+      "status": "RELAY_MODE"
+    },
+    "kba_services": {
+      "designation": "KBA_SERVICES_REMOTE_RUNTIME",
+      "role": "Kickbox Audio Voice OS & Remote Services Bridge",
+      "tailscale_ip": "100.71.218.75",
+      "os": "Linux",
+      "status": "LINUX_SERVICES"
+    },
+    "motorola_moto_g_power": {
+      "designation": "AUXILIARY_MOBILE_SENTINEL",
+      "role": "Backup Kinetic Mobile Sentinel",
+      "tailscale_ip": "100.89.129.105",
+      "version": "1.92.3",
+      "os": "Android 15",
+      "status": "AUXILIARY"
+    },
+    "vps_hub_kvm563": {
+      "designation": "CAMELOT_HUB_CONTROL_PLANE",
+      "role": "Camelot-OS Hub, Open-Notebook, NotebookLM CloudBrain & VFS Factory",
+      "host_server": "KVM563",
+      "vm_id": "vps3573819",
+      "public_ip": "162.35.107.134",
+      "tailscale_ip": "100.110.180.18",
+      "hostname": "vps-camelot-hub",
+      "assigned_agent": "HERMES_PRIME",
+      "co_governor": "SIR_HEIMDALL",
+      "status": "CONNECTED"
+    }
+  }
+}

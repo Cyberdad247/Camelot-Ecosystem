@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package camelot.intent.v1;
+
+option go_package = "camelot/intent/v1;intentv1";
+
+message IntentRequest {
+  string session_id = 1;
+  string natural_query = 2;
+  string source_channel = 3; // "vocal_live", "web_pwa", "terminal"
+  string caller_identity = 4; // "VaShawn O. Head", "Delegate", etc.
+  float speaker_similarity = 5;
+  bool duress_flag = 6;
+}
+
+message IntentClassification {
+  string intent_id = 1;
+  string primary_intent = 2;
+  string target_knight = 3;
+  string suggested_rune = 4;
+  float risk_entropy = 5;
+  string security_policy = 6; // OPA rule result
+  bool requires_hitl = 7;
+}

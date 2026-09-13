@@ -1,0 +1,23 @@
+{
+  "store": "duckdb-wasm",
+  "table": "mempalace_marketing_skills",
+  "records": [
+    {
+      "id": "skill-aeo-geo-01",
+      "name": "AEO/GEO Intent Routing",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "skill-ab-bayesian-02",
+      "name": "Bayesian Test Orchestration",
+      "status": "VERIFIED"
+    },
+    {
+      "id": "skill-copy-neuro-03",
+      "name": "Kinetic Copy Generation",
+      "status": "VERIFIED"
+    }
+  ],
+  "synced_at": "2026-09-08T22:23:43.066286+00:00",
+  "sync_latency_micros": 41.6
+}

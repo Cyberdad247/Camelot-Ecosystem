@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "BIFROST",
+    "cloudbrain_uuid": "cbbb0c32-3919-4b77-9158-1d9f9ebf359f",
+    "spark_id": "0xCBBB0C3239194B7791581D9F9EBF359F",
+    "role": "Bifrost Bridge Architecture, WebSocket & Express Transport",
+    "model": "Node.js / Rust",
+    "summoning_rune": "Omega_Bifrost",
+    "vfs_mount": "vfs/notebooks/cbbb0c32-3919-4b77-9158-1d9f9ebf359f/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

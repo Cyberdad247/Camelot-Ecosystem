@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "ANYA_OMEGA",
+    "cloudbrain_uuid": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+    "spark_id": "0x32D389065AE84ECCB77E705D12C89F4A",
+    "role": "Sovereign Compiler, Helm Authority, Anya First & Last Gate",
+    "model": "Sovereign Lattice",
+    "summoning_rune": "Omega_ANYA",
+    "vfs_mount": "vfs/notebooks/32d38906-5ae8-4ecc-b77e-705d12c89f4a/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

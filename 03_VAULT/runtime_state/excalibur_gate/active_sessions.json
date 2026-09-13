@@ -1,0 +1,11 @@
+{
+  "session_id": "sess_3a9de71381a14eb188108ae5aec34057",
+  "device_id": "vashawns-s26-ultra",
+  "authenticated": true,
+  "face_vector_verified": true,
+  "voice_vad_verified": true,
+  "qr_verified": true,
+  "round_trip_ms": 0.0,
+  "issued_at": "2026-09-13T04:45:12.991037+00:00",
+  "signature": "ed25519:sig_4b5c8e9e551c4b18a8f7fba3a1e94819"
+}

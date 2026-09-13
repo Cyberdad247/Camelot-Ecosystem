@@ -85,3 +85,14 @@ repos:
               \.github/workflows/verify_os\.yml
             | scripts/check_excalibur_filter_parity\.py
           )$
+      - id: provenance-mirror-sync
+        name: Automatically sync all 4 PROVENANCE_LEDGER.md mirrors
+        description: >-
+          Enforces that any modification to root PROVENANCE_LEDGER.md
+          immediately cascades to 03_VAULT, docs, and 03_VAULT/training/configs
+          with updated cryptographic hash receipts and defense grid sync status.
+        entry: python scripts/sync_provenance.py
+        language: system
+        pass_filenames: false
+        files: ^PROVENANCE_LEDGER\.md$
+

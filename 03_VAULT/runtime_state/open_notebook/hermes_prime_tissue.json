@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "HERMES_PRIME",
+    "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+    "spark_id": "0x28F89CB650484B5D9E94376082D24744",
+    "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",
+    "model": "Gemini / Hermes OS",
+    "summoning_rune": "Omega_HermesPrime",
+    "vfs_mount": "vfs/notebooks/28f89cb6-5048-4b5d-9e94-376082d24744/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

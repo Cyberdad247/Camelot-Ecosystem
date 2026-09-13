@@ -9,7 +9,6 @@ uniqueness, required fields). It does NOT yet exercise the orchestrator
 probe-runner CLIs aren't yet on disk.
 """
 from pathlib import Path
-import pytest
 from control_plane.preflight import runner
 
 CATALOG_DIR = Path(__file__).resolve().parents[2] / "vfs" / "checks"

@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "SIR_HERMES",
+    "cloudbrain_uuid": "5dc31b8d-169d-4d4d-ab90-d12724fca720",
+    "spark_id": "0x5DC31B8D169D4D4DAB90D12724FCA720",
+    "role": "Courier Dispatch, Webhooks, GraphQL Endpoints",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Hermes",
+    "vfs_mount": "vfs/notebooks/5dc31b8d-169d-4d4d-ab90-d12724fca720/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

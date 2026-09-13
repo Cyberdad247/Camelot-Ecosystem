@@ -383,7 +383,7 @@ def verify_all_generated_nodes(report_dir: Path | str = EVIDENCE_DIR) -> dict[st
         (["npm", "run", "typecheck"], GENERATED_DIR / "Node_A_Frontend" / "source", 120),
         (["npm", "run", "build"], GENERATED_DIR / "Node_A_Frontend" / "source", 120),
         (["cargo", "test"], GENERATED_DIR / "Node_B_Bifrost" / "source", 300),
-        (["go", "test", "./..."], GENERATED_DIR / "Node_C_Omni_Router" / "source", 300),
+        (["go", "test", "."], GENERATED_DIR / "Node_C_Omni_Router" / "source", 60),
         (["cargo", "test"], GENERATED_DIR / "Node_D_MicroVM" / "source", 300),
     ]
     results = [_run_command(command, cwd, timeout) for command, cwd, timeout in commands]

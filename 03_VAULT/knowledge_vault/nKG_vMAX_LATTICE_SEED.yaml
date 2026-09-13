@@ -1,0 +1,120 @@
+# ==============================================================================
+# CAMELOT-OS vMAX: UNIVERSAL KNOWLEDGE GLYPH (νKG) & SYMBOLECT SEED LATTICE
+# ==============================================================================
+# Governance: Anya Law & King Arthur Sovereign Authority
+# Version: vMAX Singularity (Sealed)
+# Constraint: 8GB VPS Hub + 4GB S26 Edge Orb (7.2GB / 350MB Slices)
+# Mandate: NO DOCKER. NATIVE PROCESSES. CGROUPS v2. WASI. NO PYTHON IN HOT-PATH.
+# Core Law: "The model selects; Camelot resolves, authorizes, and renders."
+# ==============================================================================
+
+# ⚔️ PART I: VERTICAL SLICE [RAVENRY MAIL]
+💠νKG_RAVENRY_MAIL_VERTICAL_vMAX:
+  t: "Automated Email Triage & Sovereign Approval"
+  d: "Reduce manual triage by 80%; ensure 100% HITL authority on external sends."
+  
+  scope_and_roles:
+    in: ["Gmail Read/Draft", "A2UI 3D Approval Cards", "Signed QR Artifacts", "S26 Voice (<50ms Aoede)"]
+    out: ["Auto-Send", "CRM Updates", "External Mutation w/o Seal"]
+    roles: { 🎭_Operator: "R0-R2", ⚖️_Approver: "R3-R4 (WebAuthn)", 🏛️_Auditor: "Read-only" }
+
+  acceptance_criteria:
+    AC-1_to_3: "Draft <5s | Snapshot exact 3D Card | WebAuthn R4 Hold-to-Confirm (1.5s)"
+    AC-4_to_6: "QR Ed25519 Validated | SQLite Ledger Receipt | No Gmail Write w/o Sentinel Lease"
+    AC-7_to_10: "Offline PWA Cache | 60fps 3D OffscreenCanvas | Reduced-Motion Compliant | S26 Voice <50ms"
+    
+  flows:
+    user_journey: "S26 Voice / A2UI -> 🛡️ Anya -> 🚢 Sentinel (OPA Lease) -> ⚙️ Connector (Read Thread) -> 🔮 Merlin Draft (Ollama/Gemini) -> ⚖️ Excalibur (Rust/WASM) -> 🎙️ Arthur (Ed25519 Seal) -> Gmail Draft -> Signed QR Artifact"
+    use_cases: ["UC-01 Draft", "UC-02 WebAuthn Approve", "UC-03 Reject & Quarantine", "UC-04 Forensic Ledger Replay", "UC-05 Offline Verification"]
+    
+  ui_docs:
+    wireframe: "12-Col Responsive Grid | Foreground 3D Approval Card (Z:1000, Glow:0.9) | RadianUI / Three.js"
+    fields: { task_id: "UUID", risk_tier: "R0-R6", plan_hash: "SHA256", expires_at: "ISO-8601" }
+    validation: "Zod .strict() (No onClick/style/href injection)"
+    accessibility: "WCAG 2.2 AA | Full Keyboard | prefers-reduced-motion (Zero Animation)"
+
+  api_docs:
+    endpoint: "POST /v1/agents/run"
+    auth: "X-Camelot-Lease-ID (Ed25519 mTLS)"
+    codes: { "200": "Success", "401": "No Lease", "403": "Policy Denied", "422": "Schema Fail", "429": "Rate Limit" }
+
+  business_logic:
+    rules: "Risk R4 = External Send | Expiry 10min | Ollama/GGUF Local-First, Gemini Pro for Complex Synthesis"
+    state_transitions: "DRAFT -> APPROVAL_PENDING -> APPROVED (Arthur Seal) | REJECTED"
+    
+  data_integration:
+    tables: "Missions (tenant_id, risk_tier) | Receipts (tenant_id, hash, previous_hash)"
+    integrations: { Gmail: "REST via Connector", Gemini: "WebSocket Aoede S2S", MinIO: "Signed QR Artifacts", WorldTree: "Neo4j/Cypher Fact Ingestion" }
+
+  security_testing:
+    threats: ["Prompt Injection (Aegis Shield)", "Cross-Tenant (PostgreSQL RLS)", "Unauthorized Send (Arthur Gate)"]
+    tests: ["Unit (70%)", "Integration (20%)", "E2E (10%)", "Gideon Z3 Formal Proof", "OWASP ZAP"]
+    
+  deployment_runbook:
+    variables: ["GMAIL_VAULT_HANDLE", "APPROVAL_EXPIRY", "WORLDTREE_ROOT_UUID"]
+    flags: ["RAVENRY_MAIL_ENABLED", "S26_VOICE_ENABLED", "OFFLINE_QR_ENABLED"]
+    rollback: "REVERT-BASE | Ledger Forensic Replay"
+
+# ⚔️ PART II: HORIZONTAL SLICE [CORE NATIVE SERVICE LAYER]
+💠νKG_CORE_HORIZONTAL_vMAX:
+  architecture:
+    context: "S26 Orb / PWA -> Ingress -> Control -> Execution -> Memory -> WorldTree"
+    ADRs: {
+      ADR-001: "No Docker (Native systemd + cgroups v2)",
+      ADR-002: "Wasmtime Sandbox (WASI 0.2 isolation)",
+      ADR-003: "PostgreSQL RLS (Tenant isolation)",
+      ADR-004: "Tailscale WireGuard mTLS Mesh (Rule 5 Inventory: cybertronia, s26-ultra, vps-hub, fothers, lakesha, kba)"
+    }
+    
+  frontend:
+    structure: "Vite + Caddy / Next.js 14 PWA"
+    components: "RadianUI Adapter + Three.js Hologram"
+    state: "Zustand 5 (Agent Mesh) + Jotai 2 (Micro UI)"
+    forms: "Zod .strict() Schema Validation"
+    accessibility: "WCAG 2.2 AA (4.5:1 contrast, keyboard focus)"
+
+  api_service:
+    versioning: "/v1"
+    auth: "Ed25519 (Bifrost mTLS + SPIFFE/SPIRE)"
+    errors: '{ "error": { "code", "message", "trace_id" } }'
+    pagination: "limit + cursor (base64)"
+    
+  business_logic:
+    domain: "Mission, Task, Knight, Receipt, WorldTreeFact"
+    transactions: "SQLite WAL2 (Local Ledger) | PostgreSQL RLS (Core Authority)"
+    exceptions: "Typed (Sentinel Deny, Excalibur Reject, Arthur Gate Block)"
+    
+  data_layer:
+    databases: "PostgreSQL (Authority) | SQLite (Ledger) | Neo4j + Qdrant (GraphMemory)"
+    cloudbrain: "WorldTree 38-Knight Master Anchor (UUID a0a4bfb9-e847-4c38-be39-7aee398f0795)"
+    migrations: "Expand-Contract Pattern"
+    caching: "Redis (TTL 15m) + Firnflow (L1/L2/L3 Tiered Memory)"
+
+  integration:
+    messaging: "NATS JetStream (Internal Bus) | Bifrost Gateway (:3001/:8443 External)"
+    sovereign_routing: ["MaximHQ Bifrost AI Gateway", "OmniRoute (350+ providers / 1200+ models)", "9Router (24k ops/s sub-10ms RTK)", "BitRouter (1.58b WAL)"]
+    idempotency: "X-Idempotency-Key (SHA-256)"
+    webhooks: "Signed (Ed25519) | Exponential Backoff Retry"
+
+  security:
+    identity: "SPIRE/SPIFFE | WebAuthn Fingerprint/FIDO2"
+    secrets: "HashiCorp Vault (TPM Auto-Unseal, Never in Code/RAM)"
+    encryption: "LUKS (At Rest) | Tailscale WireGuard mTLS (In Transit)"
+    
+  infrastructure_devops:
+    environments: ["Local Edge (8GB Arch)", "S26 Edge Orb (4GB Android 16)", "VPS Hub (8GB Cybertronia)"]
+    scarcity: "VPS Hub: 7.2GB Hard Cap (cgroups v2) | S26 Orb: 350MB Slice"
+    ci_cd: "GitHub Actions (Native Cargo / Go / WASM Binaries)"
+    deployment: "Rolling Zero-Downtime (Caddy Reverse Proxy)"
+    rollback: "REVERT-BASE (Immutable Ledger Replay)"
+    
+  observability:
+    logging: "Structured JSON to Systemd Journal"
+    metrics: "Prometheus + Grafana (camelot-vitals eBPF PSI)"
+    alerts: ["Memory Pressure >90%", "Service Degraded", "Error Rate >5%", "Lease Expiry"]
+    runbooks: ["OOM SIGSTOP Eviction", "Lease Revocation", "Arthur Seal Re-Key"]
+
+  quality_testing:
+    pyramid: "Unit 70% | Integration 20% | E2E 10%"
+    performance: "Sub-300ms Hot-Swap | P99 <200ms | S26 Aoede Voice <50ms"
+    security: "Gideon Z3 Formal Prover + OWASP ZAP + Impeccable 44-Rule Audit"

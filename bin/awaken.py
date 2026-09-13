@@ -13,6 +13,15 @@ import os
 import sys
 from pathlib import Path
 
+if sys.platform == "win32":
+    try:
+        if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+            sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 # Add control_plane to path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from control_plane.boot_sequence import _C
@@ -52,6 +61,28 @@ def main():
 
     home = boot_sequence._detect_home()
     os.environ["CAMELOT_OS_HOME"] = str(home)
+
+    # Thread and memory bounds for host (caps BLAS thread pool allocations)
+    for _k, _v in [
+        ("OPENBLAS_NUM_THREADS", "2"),
+        ("OMP_NUM_THREADS", "2"),
+        ("MKL_NUM_THREADS", "2"),
+        ("NUMEXPR_NUM_THREADS", "2"),
+        ("VECLIB_MAXIMUM_THREADS", "2"),
+    ]:
+        os.environ.setdefault(_k, _v)
+
+    # Phase 0: Machine-Actionable VKG Crystal Layer Gate
+    crystal_bin = home / "bin" / ("camelot-vkg-crystal.exe" if sys.platform == "win32" else "camelot-vkg-crystal")
+    if crystal_bin.exists():
+        import subprocess
+        res = subprocess.run([str(crystal_bin), "--verify"], capture_output=True, text=True, encoding="utf-8", errors="replace")
+        if res.returncode != 0:
+            sys.stderr.write(f"{_C['r']}AWAKEN: VKG Crystal gate verification failed:{_C['x']}\n{res.stderr or res.stdout}\n")
+            sys.exit(78)
+        else:
+            if not args.quick and not args.json:
+                print(f"{_C['g']}[VKG_CRYSTAL] All 6 machine-actionable layers verified.{_C['x']}")
 
     if args.json:
         results = boot_sequence.run_boot(home, quick=True)

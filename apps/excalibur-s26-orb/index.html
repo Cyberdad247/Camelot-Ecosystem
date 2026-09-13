@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Excalibur Command Center — VPS World Tree</title>
+  <link rel="stylesheet" href="css/sovereign.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Ambient Backdrop -->
+  <div class="ambient-bg">
+    <div class="bg-image-layer"></div>
+    <div class="bg-mesh-grid"></div>
+    <div class="bg-overlay"></div>
+    <div class="particles" id="particles"></div>
+  </div>
+
+  <div class="chatgpt-app-layout" id="appLayout">
+    <!-- Collapsible & Hoverable Left Dock (Telemetry & Runes) -->
+    <aside class="sidebar-panel" id="sidebarPanel" data-docked="true">
+      <div class="sidebar-header">
+        <div class="brand-crest">
+          <span class="brand-rune">⚔️</span>
+        </div>
+        <div class="brand-info">
+          <span class="brand-name">EXCALIBUR</span>
+          <span class="brand-version">S26 ULTRA · v1000.54</span>
+        </div>
+        <button class="sidebar-redock-btn" id="sidebarRedockBtn" title="Pin / Re-dock Left Panel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/>
+          </svg>
+          <span class="redock-text">RE-DOCK</span>
+        </button>
+        <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">✕</button>
+      </div>
+
+      <div class="sidebar-action">
+        <button class="new-session-btn" id="newSessionBtn">
+          <span>＋</span> New Voice Channel
+        </button>
+      </div>
+
+      <!-- VPS World Tree Status -->
+      <div class="sidebar-section">
+        <div class="section-label">VPS WORLD TREE MESH</div>
+        <div class="node-card active" title="KVM563 / 162.35.107.134">
+          <div class="node-icon">🌳</div>
+          <div class="node-meta">
+            <span class="node-title">VPS Hub (KVM563)</span>
+            <span class="node-ip">100.110.180.18 :8095</span>
+          </div>
+          <span class="status-dot green"></span>
+        </div>
+        <div class="node-card active" title="Excalibur Mobile Sentinel">
+          <div class="node-icon">📱</div>
+          <div class="node-meta">
+            <span class="node-title">S26 Ultra (Self)</span>
+            <span class="node-ip">100.106.246.126 :8092</span>
+          </div>
+          <span class="status-dot green"></span>
+        </div>
+        <div class="node-card active" title="Primary Windows Orchestrator">
+          <div class="node-icon">⚡</div>
+          <div class="node-meta">
+            <span class="node-title">Cybertronia</span>
+            <span class="node-ip">100.118.224.52 :3001</span>
+          </div>
+          <span class="status-dot green"></span>
+        </div>
+      </div>
+
+      <!-- Quick Runes & WorldTree Protocols -->
+      <div class="sidebar-section">
+        <div class="section-label">WORLDTREE PROTOCOLS</div>
+        <div class="rune-list">
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//STATUS')">
+            <span class="r-icon">📡</span> <code>//STATUS</code> Mesh Probe
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//BOOT')">
+            <span class="r-icon">🚀</span> <code>//BOOT</code> Full Sequencer
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//SYNC_VFS_WORKSPACE')">
+            <span class="r-icon">🌳</span> <code>//SYNC_VFS</code> WorldTree VFS
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//FORGE_HERMES_PRIME_FILES')">
+            <span class="r-icon">⚔️</span> <code>//FORGE_HERMES</code> VFS Soul
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//IGNITE_SELF_EVOLUTION_LOOP research sovereign mesh')">
+            <span class="r-icon">🧬</span> <code>//EVOLVE_LOOP</code> MGV Cycle
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//PLAN audit architecture')">
+            <span class="r-icon">🧠</span> <code>//PLAN</code> Task DAG
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//FORGE')">
+            <span class="r-icon">⚡</span> <code>//FORGE</code> Kinetic Build
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//CODEX prototype')">
+            <span class="r-icon">💻</span> <code>//CODEX</code> Rapid Dispatch
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//HEAL')">
+            <span class="r-icon">🩹</span> <code>//HEAL</code> PIV Repair
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//SWARM coordinate agents')">
+            <span class="r-icon">🐝</span> <code>//SWARM</code> Multi-Agent
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//CRUCIBLE review high-risk directive R4')">
+            <span class="r-icon">⚖️</span> <code>//CRUCIBLE</code> 13-Knight Vote
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//HEAL_DAEMON engage background auto-repair')">
+            <span class="r-icon">🛡️</span> <code>//HEAL_DAEMON</code> PIV Auto-Loop
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//RAVENRY_MAIL draft reply to jane@example.com about invoice')">
+            <span class="r-icon">✉️</span> <code>//RAVENRY</code> Mail Cartridge
+          </button>
+          <button class="rune-pill" onclick="window.HUDRenderer?.executeRune('//BIFROST_LOCK')">
+            <span class="r-icon">🔒</span> <code>//BIFROST_LOCK</code>
+          </button>
+        </div>
+      </div>
+
+      <!-- Omega Knights Dispatch -->
+      <div class="sidebar-section">
+        <div class="section-label">OMEGA KNIGHTS DISPATCH</div>
+        <div class="rune-list omega-grid">
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_Boris review')">
+            <span>🛡️ Boris</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_Merlin deep think')">
+            <span>🧙 Merlin</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_HermesPrime research')">
+            <span>🦅 Hermes</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_Forge execute')">
+            <span>🔨 Forge</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_Codex code')">
+            <span>⚡ Codex</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_Sentinel audit')">
+            <span>⚔️ Sentinel</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_Helio voice')">
+            <span>🎙️ Helio</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_Anya compile')">
+            <span>👑 Anya</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_HuggingFace inspect')">
+            <span>🤗 HF Hub</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_SYNC')">
+            <span>🏛️ Lady M</span>
+          </button>
+          <button class="rune-pill mini" onclick="window.HUDRenderer?.executeRune('Omega_VOICE')">
+            <span>🔊 Sonus</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Sidebar Footer (Security) -->
+      <div class="sidebar-footer">
+        <div class="bio-lease-pill">
+          <span class="bio-icon">🛡️</span>
+          <div class="bio-text">
+            <span class="bio-lbl">BIO-LEASE</span>
+            <span class="bio-val" id="bioTimer">30s</span>
+          </div>
+        </div>
+        <button class="duress-btn-mini" id="duressToggle" title="Ghost Lockdown">🚨</button>
+      </div>
+    </aside>
+
+    <!-- Main Chat Surface -->
+    <main class="chat-main-surface">
+      <!-- Top Bar -->
+      <header class="chat-top-bar">
+        <div class="top-left-cluster">
+          <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+          </button>
+          <div class="title-wrap">
+            <h1 class="chat-title">EXCALIBUR</h1>
+            <span class="chat-subtitle">VPS WORLD TREE VOCAL-TO-COMMAND</span>
+          </div>
+        </div>
+
+        <div class="top-right-cluster">
+          <button class="bifrost-bridge-btn" id="bifrostBridgeBtn" title="Open Bifrost Bridge Gateway Telemetry">
+            <span class="rainbow-pulse"></span>
+            <span class="bifrost-btn-lbl">⚡ BIFROST BRIDGE</span>
+          </button>
+          <div class="vps-online-badge">
+            <span class="pulse-dot"></span>
+            <span>VPS HUB :8095 ONLINE</span>
+          </div>
+          <div class="rtt-badge" id="latencyBadge">⚡ 18ms</div>
+        </div>
+      </header>
+
+      <!-- Bifrost Bridge Modal Overlay -->
+      <div class="bifrost-modal-overlay" id="bifrostModal">
+        <div class="bifrost-modal-card">
+          <div class="bifrost-modal-header">
+            <div class="bifrost-title-group">
+              <span class="bifrost-icon">🌈</span>
+              <div>
+                <h3 class="bifrost-title">BIFROST BRIDGE GATEWAY</h3>
+                <span class="bifrost-sub">CROSS-MESH WEBRTC & ZERO-TRUST ROUTING</span>
+              </div>
+            </div>
+            <button class="bifrost-close-btn" id="bifrostCloseBtn">✕</button>
+          </div>
+
+          <div class="bifrost-modal-body">
+            <!-- Bridge Telemetry Stream Grid -->
+            <div class="bifrost-stream-grid">
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">PORTAL STATE</span>
+                <span class="bm-val live">🟢 ACTIVE (LOCKED)</span>
+              </div>
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">APERTURE LATENCY</span>
+                <span class="bm-val gold">18ms (Aoede S2S)</span>
+              </div>
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">ENCRYPTION</span>
+                <span class="bm-val purple">mTLS Ed25519</span>
+              </div>
+              <div class="bifrost-metric-card">
+                <span class="bm-lbl">ACTIVE LANES</span>
+                <span class="bm-val cyan">6 Nodes Linked</span>
+              </div>
+            </div>
+
+            <!-- Advanced Routing Engine Quadrant (9router, OmniRoute, BitRouter, Multivoice, Hermes OS) -->
+            <div class="bifrost-routes-section">
+              <div class="bifrost-section-title">SOVEREIGN ROUTING MATRIX & HERMES OS</div>
+              <div class="router-matrix-grid">
+                <div class="router-node-card active" onclick="window.HUDRenderer?.executeRune('//STATUS 9router')">
+                  <div class="rnc-header">
+                    <span class="rnc-icon">⚡</span>
+                    <span class="rnc-name">9router Engine</span>
+                    <span class="rnc-badge">RTK 72%</span>
+                  </div>
+                  <p class="rnc-desc">High-throughput sub-10ms packet scheduler & cache-affinity router.</p>
+                </div>
+
+                <div class="router-node-card active" onclick="window.HUDRenderer?.executeRune('//STATUS omniroute')">
+                  <div class="rnc-header">
+                    <span class="rnc-icon">🌐</span>
+                    <span class="rnc-name">OmniRoute Mesh</span>
+                    <span class="rnc-badge">Multi-Provider</span>
+                  </div>
+                  <p class="rnc-desc">Universal model fallback, cost-optimizer & failover load-balancer.</p>
+                </div>
+
+                <div class="router-node-card active" onclick="window.HUDRenderer?.executeRune('//STATUS bitrouter')">
+                  <div class="rnc-header">
+                    <span class="rnc-icon">🧩</span>
+                    <span class="rnc-name">BitRouter (1.58b)</span>
+                    <span class="rnc-badge">BitNet WAL</span>
+                  </div>
+                  <p class="rnc-desc">Ouroboros 1.58-bit ternary quantized neural routing & memory compression.</p>
+                </div>
+
+                <div class="router-node-card active" onclick="window.HUDRenderer?.executeRune('//vocal persona_matrix')">
+                  <div class="rnc-header">
+                    <span class="rnc-icon">🎙️</span>
+                    <span class="rnc-name">Multi-Persona Voice</span>
+                    <span class="rnc-badge">Aoede S2S</span>
+                  </div>
+                  <p class="rnc-desc">Phonetic timbre switcher (Anya, Merlin, Lakisha, Helio) @ sub-50ms.</p>
+                </div>
+
+                <div class="router-node-card active hermes" onclick="window.HUDRenderer?.executeRune('//IGNITE_SELF_EVOLUTION_LOOP hermes_os')">
+                  <div class="rnc-header">
+                    <span class="rnc-icon">🦅</span>
+                    <span class="rnc-name">Hermes OS Kernel</span>
+                    <span class="rnc-badge gold">MGV Autonomous</span>
+                  </div>
+                  <p class="rnc-desc">Recursive Monitor-Generate-Verify synthesis & autonomous VFS self-evolution.</p>
+                </div>
+
+                <div class="router-node-card active" style="border-color: rgba(66, 133, 244, 0.5);" onclick="window.open('https://aistudio.google.com/apps/36db3e4c-678f-4925-8f38-5ad2f65e69a7?showPreview=true&showAssistant=true', '_blank')">
+                  <div class="rnc-header">
+                    <span class="rnc-icon">🔮</span>
+                    <span class="rnc-name">Gemini AI Studio</span>
+                    <span class="rnc-badge" style="background: rgba(66, 133, 244, 0.2); color: #4285F4;">Live Assistant</span>
+                  </div>
+                  <p class="rnc-desc">Google AI Studio CloudBrain Aperture (App 36db3e4c) linked to VPS BidiStream.</p>
+                </div>
+
+                <div class="router-node-card active" style="border-color: rgba(212, 175, 55, 0.6);" onclick="window.open('/worldtree/', '_blank')">
+                  <div class="rnc-header">
+                    <span class="rnc-icon">🌳</span>
+                    <span class="rnc-name">WorldTree Hub UI</span>
+                    <span class="rnc-badge gold">VPS Matrix</span>
+                  </div>
+                  <p class="rnc-desc">Sovereign World Tree Control Center (Three.js 3D Engine & VKG-HUD).</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bridge Nodes Live Route Table -->
+            <div class="bifrost-routes-section">
+              <div class="bifrost-section-title">BIFROST MESH NODE APERTURES</div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">🌳 VPS Control Hub (KVM563) · Hermes OS</span>
+                  <span class="bn-detail">100.110.180.18 · Port :8095 & :3001</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">📱 Excalibur Sentinel (S26 Ultra)</span>
+                  <span class="bn-detail">100.106.246.126 · Port :8092 · BitRouter 1.58b</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">⚡ Cybertronia Primary Orchestrator</span>
+                  <span class="bn-detail">100.118.224.52 · 9router & OmniRoute Core</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+              <div class="bifrost-node-item">
+                <div class="bn-meta">
+                  <span class="bn-name">🎙️ Lakisha Voice OS Host</span>
+                  <span class="bn-detail">100.100.155.55 · Multi-Persona Audio Bridge</span>
+                </div>
+                <span class="bn-status-badge online">ONLINE</span>
+              </div>
+            </div>
+
+            <!-- Bifrost Action Buttons -->
+            <div class="bifrost-actions-row">
+              <button class="bifrost-action-btn primary" onclick="window.HUDRenderer?.executeRune('//STATUS'); document.getElementById('bifrostModal')?.classList.remove('open');">
+                📡 Probe Bridge Latency
+              </button>
+              <button class="bifrost-action-btn secondary" onclick="window.HUDRenderer?.executeRune('//BIFROST_LOCK'); document.getElementById('bifrostModal')?.classList.remove('open');">
+                🔒 Re-Seal Bifrost Lock
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scrollable Message Feed -->
+      <div class="chat-scroll-area" id="chatScrollArea">
+        <!-- Hero Welcome Stage (ChatGPT Style with 3D Hologram Integration) -->
+        <div class="hero-welcome-stage" id="heroWelcome">
+          <div class="hero-3d-stage" id="hero3dStage">
+            <div class="hero-avatar-card-3d" id="heroAvatarCard">
+              <div class="holo-ring holo-ring-outer"></div>
+              <div class="holo-ring holo-ring-inner"></div>
+              <div class="holo-scanlines"></div>
+              <img src="https://i.postimg.cc/bwnYWzCv/3BEa-Vn0t-ST-Qtd-SFA1OMy-A.webp" alt="Excalibur Sovereign Knight" class="hero-avatar-img hero-avatar-img-3d" id="heroAvatarImg">
+              <div class="hero-avatar-glow-3d"></div>
+              <div class="holo-badge">
+                <span class="pulse-dot"></span>
+                <span>SOVEREIGN ARCHITECT</span>
+              </div>
+            </div>
+          </div>
+          <h2 class="hero-heading">How can Excalibur serve you, Sovereign?</h2>
+          <p class="hero-description">
+            Direct vocal-to-command integration. Speak your intent via high-speed Aoede neural stream or issue runic directives across the WorldTree mesh.
+          </p>
+        </div>
+
+        <!-- Dynamic Message Container -->
+        <div class="messages-container" id="messagesContainer"></div>
+
+        <!-- Typing / Synthesizing Indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+          <div class="typing-avatar">⚔️</div>
+          <div class="typing-bubble">
+            <span class="typing-text">VPS WORLD TREE SYNTHESIZING</span>
+            <div class="typing-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Vocal & Command Input Dock (With 3D Excalibur Orb & Voice Bar) -->
+      <footer class="chat-input-dock">
+        <!-- 3D Voice Orb Stage -->
+        <div class="dock-3d-orb-stage" id="dock3dOrbStage">
+          <div class="dock-orb-halo"></div>
+          <div class="dock-orb-ring outer"></div>
+          <div class="dock-orb-ring inner"></div>
+          <div class="dock-3d-orb" id="dockVoiceOrb" title="Tap to Toggle Aoede Neural Vocal Stream">
+            <div class="orb-core">
+              <div class="orb-rune-symbol">⚔️</div>
+            </div>
+            <div class="orb-pulse-wave"></div>
+          </div>
+          <!-- Real-Time Audio Frequency Bar Visualizer Integrated with 3D Orb -->
+          <div class="dock-voice-spectrum" id="dockVoiceSpectrum">
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+            <span class="v-bar"></span><span class="v-bar"></span><span class="v-bar"></span>
+          </div>
+        </div>
+
+        <div class="input-composer-wrap" id="composerWrap">
+          <!-- Real-Time Audio Reactive Waveform Overlay -->
+          <div class="waveform-overlay" id="waveformOverlay">
+            <div class="wave-tag">🎙️ AOEDE VOCAL STREAM ACTIVE</div>
+            <div class="wave-bars">
+              <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+              <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+              <div class="w-bar"></div><div class="w-bar"></div><div class="w-bar"></div>
+            </div>
+          </div>
+
+          <!-- Textarea / Input -->
+          <textarea 
+            id="chatInput" 
+            class="chat-textarea" 
+            placeholder="Speak or message Excalibur VPS World Tree..." 
+            rows="1"
+            autocomplete="off"
+          ></textarea>
+
+          <!-- Voice Mic & Send Actions -->
+          <div class="input-actions-cluster">
+            <button class="voice-mic-btn" id="voiceMicBtn" title="Hold or Tap to Speak (Aoede Neural Stream)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 18.75a6 6 0 006-6v-1.5m-6 7.5a6 6 0 01-6-6v-1.5m6 7.5v3.75m-3.75 0h7.5M12 15.75a3 3 0 01-3-3V4.5a3 3 0 116 0v8.25a3 3 0 01-3 3z"/>
+              </svg>
+            </button>
+
+            <button class="send-message-btn" id="sendMessageBtn" title="Send Directive">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="dock-footer-telemetry">
+          <span id="celestialIndicator" class="celestial-pill" title="Dynamic Day/Night Phase">🌙 NIGHT LATTICE</span>
+          <span>•</span>
+          <span>🛡️ Sovereign Node: <code>vashawns-s26-ultra</code></span>
+          <span>•</span>
+          <span>🌳 VPS Mesh: <code>162.35.107.134</code></span>
+          <span>•</span>
+          <span>👑 Authority: King Arthur (Vizion)</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/sentinel-client.js"></script>
+  <script src="js/audio-pipeline.js"></script>
+  <script src="js/hud-renderer.js"></script>
+</body>
+</html>

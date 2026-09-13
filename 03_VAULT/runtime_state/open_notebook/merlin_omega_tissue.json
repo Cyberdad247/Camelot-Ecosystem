@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "cloudbrain_uuid": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
+    "spark_id": "0xAF927FDED7EB42EE8C7951B3E78EF39B",
+    "role": "GoT/ToT Deep Reasoning, Mathematical Proofs, System 2",
+    "model": "Gemini Pro / Opus",
+    "summoning_rune": "Omega_Merlin",
+    "vfs_mount": "vfs/notebooks/af927fde-d7eb-42ee-8c79-51b3e78ef39b/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

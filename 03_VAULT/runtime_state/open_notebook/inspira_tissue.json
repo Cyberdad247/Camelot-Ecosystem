@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "INSPIRA",
+    "cloudbrain_uuid": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",
+    "spark_id": "0xCADFE67E7187472E8BF48A2ADED84E4E",
+    "role": "HiveIDE / Inspira Spatial Developer Workstation",
+    "model": "IDE Substrate",
+    "summoning_rune": "Omega_Inspira",
+    "vfs_mount": "vfs/notebooks/cadfe67e-7187-472e-8bf4-8a2aded84e4e/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

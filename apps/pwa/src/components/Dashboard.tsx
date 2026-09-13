@@ -7,16 +7,23 @@ import { useBifrost } from '../context/BifrostContext';
 import { LakishaHUD } from './LakishaHUD';
 import { PlanCard } from './PlanCard';
 import { CoffeeTab } from './tabs/CoffeeTab';
+import { ExcaliburCommandCenterTab } from './tabs/ExcaliburCommandCenterTab';
 import { KnightsTab } from './tabs/KnightsTab';
 import { OverviewTab } from './tabs/OverviewTab';
 import { PropertiesTab } from './tabs/PropertiesTab';
 import { SettingsTab } from './tabs/SettingsTab';
 import { StreamingTab } from './tabs/StreamingTab';
 import { VentureTab } from './tabs/VentureTab';
+import { DesktopGrid } from './DesktopGrid';
+import { AlfredCommandDock } from './AlfredCommandDock';
+import { TwinBrainNodeManager } from './TwinBrainNodeManager';
 import { ThemeToggle } from './ThemeToggle';
 
 const TABS = [
   'Overview',
+  'Desktop Grid',
+  'Twin-Brain Nodes',
+  'Excalibur',
   'Knights',
   'Properties',
   'Streaming',
@@ -58,22 +65,17 @@ export function Dashboard() {
                     : 'text-white/45 hover:bg-white/5 hover:text-white/80'
                 }`}
               >
-                {/* gold active indicator */}
-                <span
-                  className={`absolute left-0 h-5 w-0.5 rounded-full transition-all ${
-                    isActive ? 'bg-gold-royal shadow-gold' : 'bg-transparent'
-                  }`}
-                />
+                {isActive && (
+                  <span className="absolute inset-y-1.5 left-0 w-0.5 rounded-full bg-gold" />
+                )}
                 {tab}
               </button>
             );
           })}
         </nav>
 
-        <div className="border-gold/10 border-t px-6 py-5">
-          <span
-            className={`flex items-center gap-2 text-[11px] ${connected ? 'text-violet-light' : 'text-white/40'}`}
-          >
+        <div className="border-gold/10 border-t p-4">
+          <span className="flex items-center gap-2 text-xs text-white/40">
             <span
               className={`h-2 w-2 rounded-full ${connected ? 'bg-violet shadow-glow' : 'bg-white/30'}`}
             />
@@ -96,6 +98,9 @@ export function Dashboard() {
 
         <main className="px-10">
           {active === 'Overview' && <OverviewTab />}
+          {active === 'Desktop Grid' && <DesktopGrid />}
+          {active === 'Twin-Brain Nodes' && <TwinBrainNodeManager />}
+          {active === 'Excalibur' && <ExcaliburCommandCenterTab />}
           {active === 'Knights' && <KnightsTab />}
           {active === 'Properties' && <PropertiesTab />}
           {active === 'Streaming' && <StreamingTab />}
@@ -107,6 +112,7 @@ export function Dashboard() {
 
       <PlanCard />
       <LakishaHUD />
+      <AlfredCommandDock />
     </div>
   );
 }

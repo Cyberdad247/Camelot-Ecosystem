@@ -31,7 +31,11 @@ _HEADER = "SPDX-License-Identifier: MIT"
 
 # comment open/close per extension. Line comments use ("#", "").
 _COMMENT_FOR: dict[str, tuple[str, str]] = {
+_COMMENT_FOR: dict[str, tuple[str, str]] = {
     **{ext: ("#", "") for ext in (
+        ".py", ".sh", ".bash", ".zsh", ".ps1", ".cmd", ".bat",
+        ".rb", ".pl", ".php", ".nix", ".zig", ".zon", ".typed", ".tsbuildinfo",
+    )},
         ".py", ".sh", ".bash", ".zsh", ".ps1", ".cmd", ".bat",
         ".rb", ".pl", ".php",
     )},

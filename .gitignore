@@ -19,6 +19,8 @@ mcp-oauth-tokens*.json
 secrets.json
 *.key
 *.pem
+# KBA drone local rotated secrets (never commit)
+**/.drone_secrets.ps1
 .modal.toml
 **/.modal.toml
 auth.json
@@ -83,8 +85,23 @@ logs/
 04_KINETIC/multivoice/camelot_multivoice.sock
 nul
 
+# Vendored / nested-analysis projects and generated test output
+.analysis/
+tests/tmp_vault_audit/
+
+# ChromaDB test-run artifacts (UUID-named .bin dirs regenerated on every test)
+tests/tmp_*/
+
 # Camelot generated runtime state
 .hive/context/
+# Runtime databases and memory stores (binary churn — never version)
+*.rdb
+01_KERNEL/memory/tissue/*.toon
+01_KERNEL/titan/memory/*.toon
+01_KERNEL/titan/Data_Pipeline/*.db
+01_KERNEL/titan/Titan_Graph/chromadb/*.sqlite3
+01_KERNEL/agora/Squires/data/sqlite-db/*.sqlite
+03_VAULT/runtime_state/universal_vkg_crystal.toon
 03_VAULT/runtime_state/nano_swarm_dry_runs/
 03_VAULT/runtime_state/preflight/
 03_VAULT/runtime_state/20[0-9][0-9]-[0-9][0-9]-[0-9][0-9]T*/
@@ -273,6 +290,7 @@ test_browser_upload_failure.html
 03_VAULT/Reference_Architectures/skills/nemanjadotcom-skills
 04_KINETIC/tiny-tts
 camelot-fable-25
+data/session_logs/
 
 # Harness golden set: pinned TEST-ONLY public key is committed by design (receipt-chain replay)
 !harness/golden-receipts/sentinel_test_public.pem

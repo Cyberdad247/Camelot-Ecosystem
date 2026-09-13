@@ -75,16 +75,40 @@ describe('Assimilated Protocols Policy Routing (resolveRoute)', () => {
         const target = resolveRoute({
             contextSize: 500,
             taskType: "summarization",
-            persona: "architect"
+            persona: "architect",
+            spendCap: 10
         });
         expect(target.systemPrompt).toBe(PERSONA_PROMPTS.architect);
+    });
+
+    it('should inject Multivoice personas (nova, jax, lyra, elara, atlas)', () => {
+        const targetNova = resolveRoute({ contextSize: 500, taskType: "summarization", persona: "nova", spendCap: 10 });
+        expect(targetNova.systemPrompt).toContain("Nova");
+        expect(targetNova.systemPrompt).toContain("Zephyr");
+
+        const targetJax = resolveRoute({ contextSize: 500, taskType: "netsec", persona: "jax", spendCap: 10 });
+        expect(targetJax.systemPrompt).toContain("Jax");
+        expect(targetJax.systemPrompt).toContain("Fenrir");
+    });
+
+    it('should strictly enforce BitRouter spend cap = 0', () => {
+        const target = resolveRoute({
+            contextSize: 500,
+            taskType: "summarization",
+            spendCap: 0,
+            currentSpend: 0
+        });
+        expect(target.costAllowed).toBe(false);
+        expect(target.route).toBe("OmniRoute/rejected");
+        expect(target.rejectionReason).toContain("Zero-Spend Cap active");
     });
 
     it('should apply provider overrides from simonw/llm client setup', () => {
         const target = resolveRoute({
             contextSize: 500,
             taskType: "summarization",
-            providerOverride: "github-copilot/gpt-4o"
+            providerOverride: "github-copilot/gpt-4o",
+            spendCap: 10
         });
         expect(target.route).toBe("OmniRoute/custom/github-copilot/gpt-4o");
     });
@@ -93,7 +117,8 @@ describe('Assimilated Protocols Policy Routing (resolveRoute)', () => {
         const target = resolveRoute({
             contextSize: 1000,
             taskType: "scaffolding",
-            intentText: "please scaffold a rapid prototype for our new velocity model"
+            intentText: "please scaffold a rapid prototype for our new velocity model",
+            spendCap: 10
         });
         expect(target.route).toBe("OmniRoute/omni_route_codex");
         expect(target.engine).toBe("codex");
@@ -101,12 +126,14 @@ describe('Assimilated Protocols Policy Routing (resolveRoute)', () => {
 
     it('should route reasoning keywords to cliproxy_heavy_reasoning', () => {
         const target = resolveRoute({
-            contextSize: 5000,
+            contextSize: 500,
             taskType: "reasoning_task",
-            intentText: "we need deep-context reasoning via the cloud_brain"
+            intentText: "we need deep-context reasoning via the cloud_brain",
+            spendCap: 10
         });
         expect(target.route).toBe("OmniRoute/cliproxy_heavy_reasoning");
         expect(target.engine).toBe("cliproxy");
     });
 });
+
 

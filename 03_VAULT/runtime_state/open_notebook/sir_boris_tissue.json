@@ -1,35 +1,27 @@
 [
   {
     "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//BOOT",
-    "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-12T18:16:41.894563+00:00"
-  },
-  {
-    "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//BIO_SWARM audit memory and biological isolation boundaries",
-    "content": "{\"action\": \"//BIO_SWARM\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-12T14:18:35.813453+00:00"
-  },
-  {
-    "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//BOOT",
-    "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-12T13:24:18.673584+00:00"
+    "cloudbrain_uuid": "f7707daa-2d10-4db8-8fda-be4661a27793",
+    "spark_id": "0xF7707DAA2D104DB88FDABE4661A27793",
+    "role": "Lead Architect, Crucible Conductor, 13-Agent Critique",
+    "model": "Gemini / Claude Code",
+    "summoning_rune": "Omega_Boris",
+    "vfs_mount": "vfs/notebooks/f7707daa-2d10-4db8-8fda-be4661a27793/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

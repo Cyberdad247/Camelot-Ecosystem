@@ -9,6 +9,7 @@
     "eventId": { "type": "string", "minLength": 1 },
     "taskId": { "type": "string", "minLength": 1 },
     "correlationId": { "type": "string", "minLength": 1 },
+    "causationId": { "type": "string", "minLength": 1 },
     "timestamp": { "type": "string", "minLength": 1 },
     "actor": {
       "type": "object",
@@ -21,6 +22,9 @@
     "kind": { "type": "string", "minLength": 1 },
     "payload": { "type": "object" },
     "payloadHash": { "type": "string", "minLength": 1 },
-    "integrity": { "enum": ["verified", "pending_anchor", "unavailable", "integrity_failed"] }
+    "parentHash": { "type": "string", "minLength": 1 },
+    "integrity": { "enum": ["verified", "pending_anchor", "unavailable", "integrity_failed"] },
+    "receiptRef": { "type": "string", "minLength": 1 },
+    "ledgerAnchorRef": { "type": "string", "minLength": 1 }
   }
 }

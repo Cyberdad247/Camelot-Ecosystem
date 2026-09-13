@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "ROUND_TABLE_ROSTER",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "knight_roster_evolution",
+    "title": "KNIGHT_ROSTER_AGENT_EVOLUTION_SYNC",
+    "content": "{\n  \"roster_nodes\": 38,\n  \"synchronized_files\": [\n    \"AGENTS.md\",\n    \".agent/AGENTS.md\",\n    \"vfs/agents.md\",\n    \"vfs/rosters.md\",\n    \"01_KERNEL/memory/cloudbrain_connector.py\",\n    \"03_VAULT/runtime_state/vps_worldtree_tether_manifest.json\"\n  ],\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"status\": \"ROSTER_ALIGNED_EVOLVED_38_KNIGHTS\",\n  \"verified_knights\": 38\n}",
+    "vfs_path": "vfs://worldtree/knights/round_table_roster/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ROUND_TABLE_ROSTER",
+    "open_viking_tether": "open_viking://worldtree/round_table_roster",
+    "synced_at": "2026-09-13T04:47:00.000000+00:00"
+  }
+]

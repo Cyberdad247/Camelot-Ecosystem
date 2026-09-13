@@ -17,7 +17,10 @@ members = [
     "kinetic_edge/camelot_edge",
     "kinetic_edge/pqcrypto",
     "kinetic_edge/swarm_spawner",
-    "wasm/ledger-engine"
+    "wasm/ledger-engine",
+    "crates/camelot-vkg-crystal",
+    "packages/crawler",
+    "packages/harness-forge"
 ]
 exclude = [
     "03_VAULT/runtime_state/nano_swarm_generated/Node_B_Bifrost/source",
@@ -31,3 +34,13 @@ dead_code = "warn"
 unused_variables = "warn"
 unused_imports = "warn"
 unused_mut = "warn"
+
+[profile.dev]
+opt-level = 0
+debug = 0
+codegen-units = 1
+
+[profile.test]
+opt-level = 1
+debug = 0
+codegen-units = 1

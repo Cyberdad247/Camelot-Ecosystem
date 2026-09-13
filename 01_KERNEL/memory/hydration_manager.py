@@ -32,11 +32,21 @@ try:
 except Exception:
     _agent_memory = None
 
+try:
+    from .graphiti_engine import KnightGraphitiEngine
+except Exception:
+    KnightGraphitiEngine = None
+
+try:
+    from control_plane.memcastle import MemCastle
+except Exception:
+    MemCastle = None
+
 RAM_LAW_LIMIT_GB = 8.0
 PROVENANCE_LEDGER = Path("C:/Users/vizio/CAMELOT_OS/PROVENANCE_LEDGER.md")
 
 class HydrationManager:
-    """Tiered Context Manager for Camelot OS."""
+    """Tiered Context Manager for Camelot OS with JIT L0-L1-L2 Hierarchical Retrieval."""
 
     def __init__(self, storage_dir: Optional[Path] = None, knight_id: str = "ANYA_OMEGA"):
         self.root = Path("C:/Users/vizio/CAMELOT_OS")
@@ -44,8 +54,14 @@ class HydrationManager:
         self.storage_dir.mkdir(parents=True, exist_ok=True)
         # L0 Flash Storage (Local Disk/SQLite)
         self.l0_db_path = self.storage_dir / "flash_context.toon"
-        self.knight_id = knight_id
+        # Canonical alias normalization (e.g. SIR_HELIOS -> SIR_HELIO)
+        kid = knight_id.upper()
+        if kid == "SIR_HELIOS":
+            kid = "SIR_HELIO"
+        self.knight_id = kid
         self.cloudbrain = CloudBrainConnector(knight_id=self.knight_id)
+        self.graphiti = KnightGraphitiEngine(self.knight_id) if KnightGraphitiEngine else None
+        self.memcastle = MemCastle() if MemCastle else None
         self._init_l0_storage()
 
     def _init_l0_storage(self):
@@ -90,7 +106,17 @@ class HydrationManager:
         """
         results = {"tiers_active": []}
         
-        # L0: Flash (Local SQLite)
+        # L0-A: Graphiti Temporal Entity Triplet Retrieval
+        if complexity >= 1 and self.graphiti:
+            try:
+                subgraph = self.graphiti.query_subgraph(intent, limit=5)
+                if subgraph.get("temporal_facts_count", 0) > 0:
+                    results["L0_GRAPHITI"] = subgraph
+                    results["tiers_active"].append("L0_GRAPHITI")
+            except Exception:
+                pass
+
+        # L0-B: Flash (Local SQLite)
         if complexity >= 1:
             conn = sqlite3.connect(self.l0_db_path)
             try:
@@ -110,7 +136,17 @@ class HydrationManager:
             finally:
                 conn.close()
 
-        # L1: Short-Term (local SQLite store)
+        # L1-A: MemCastle KNN Vector Search (sqlite-vec)
+        if complexity >= 4 and self.memcastle:
+            try:
+                hits = self.memcastle.search(intent, k=3)
+                if hits:
+                    results["L1_MEMCASTLE"] = hits
+                    results["tiers_active"].append("L1_MEMCASTLE")
+            except Exception:
+                pass
+
+        # L1-B: Short-Term (local SQLite store)
         if complexity >= 4:
             hits = local_store.search(collection=f"intent:{intent}", vector=[1.0], limit=1)
             if hits:
@@ -125,8 +161,8 @@ class HydrationManager:
                 results["tiers_active"].append("L1_5_AGENT_MEMORY")
                 self._log_provenance("L1_5_AGENT_RECALL", f"Intent: {intent}, hits={len(recalled)}")
 
-        # L2: Long-Term (NotebookLM)
-        if complexity >= 8:
+        # L2: Long-Term (NotebookLM / 1M Context Cloud Brain)
+        if complexity >= 7:
             if self.check_ram_law():
                 # Query NotebookLM Cloud Brain for context burst
                 cb_context = self.cloudbrain.query_notebook(intent)
@@ -159,8 +195,20 @@ class HydrationManager:
                 conn.commit()
             finally:
                 conn.close()
+
+        # L1-A: MemCastle Vector Persistence (sqlite-vec)
+        if (tier in ("L1", "L1.5", "L2") or complexity >= 4) and self.memcastle:
+            try:
+                preview = content_json[:500] if len(content_json) > 500 else content_json
+                self.memcastle.store(
+                    text=f"[{self.knight_id}] {intent}: {preview}",
+                    source=f"hydration:{self.knight_id.lower()}",
+                    knight=self.knight_id,
+                )
+            except Exception:
+                pass
                 
-        # L1: Short-Term (local SQLite)
+        # L1-B: Short-Term (local SQLite)
         if tier == "L1" or complexity >= 4:
             success = local_store.upsert(
                 collection=f"intent:{intent}",

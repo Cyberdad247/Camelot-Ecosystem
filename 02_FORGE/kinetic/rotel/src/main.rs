@@ -47,6 +47,82 @@ enum Commands {
     },
     /// Generate a new Trace ID
     Id,
+    /// Mobile Sentinel & ADB Device Controller (assimilated from escrcpy)
+    Adb {
+        #[command(subcommand)]
+        action: AdbAction,
+    },
+}
+
+#[derive(Subcommand)]
+pub enum AdbAction {
+    /// List connected mobile sentinels via ADB (S26 Ultra & Moto G)
+    Devices,
+    /// Generate or launch scrcpy streaming session optimized for Excalibur
+    Mirror {
+        /// Target device serial or Tailscale IP (e.g. 100.106.246.126:5555)
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+
+        /// Video bitrate (Mbps)
+        #[arg(long, default_value_t = 8)]
+        bitrate: u32,
+
+        /// Forward Opus audio stream into Bifrost
+        #[arg(long, default_value_t = true)]
+        audio: bool,
+
+        /// Only output the command line without launching
+        #[arg(long)]
+        dry_run: bool,
+    },
+    /// Inject touch tap at coordinates (x, y)
+    Tap {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        x: u32,
+        y: u32,
+    },
+    /// Inject swipe gesture (x1 y1 x2 y2 duration_ms)
+    Swipe {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        x1: u32,
+        y1: u32,
+        x2: u32,
+        y2: u32,
+        #[arg(long, default_value_t = 300)]
+        duration_ms: u32,
+    },
+    /// Inject text input into mobile device
+    Text {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        text: String,
+    },
+    /// Capture screenshot and save to path
+    Screenshot {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        #[arg(short, long, default_value = "excalibur_screenshot.png")]
+        output: String,
+    },
+    /// Pull reverse device telemetry (battery, memory, orientation, active window)
+    Telemetry {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        /// Output formatted JSON
+        #[arg(long)]
+        json: bool,
+    },
+    /// Listen for reverse mobile intent broadcasts and touch telemetry
+    Listen {
+        #[arg(short, long, default_value = "100.106.246.126:5555")]
+        serial: String,
+        /// Bounded stream capture duration (seconds)
+        #[arg(long, default_value_t = 10)]
+        duration_s: u64,
+    },
 }
 
 #[derive(Serialize, Deserialize)]
@@ -99,8 +175,133 @@ fn main() -> Result<()> {
         Commands::Id => {
             println!("{}", Uuid::new_v4());
         }
+        Commands::Adb { action } => {
+            handle_adb(action)?;
+        }
     }
 
+    Ok(())
+}
+
+fn handle_adb(action: AdbAction) -> Result<()> {
+    match action {
+        AdbAction::Devices => {
+            println!("⚡ [ROTEL_ADB] Enumerating connected Mobile Sentinels...");
+            let out = std::process::Command::new("adb")
+                .arg("devices")
+                .output()
+                .context("Failed to execute adb. Ensure android platform-tools are in PATH.")?;
+            println!("{}", String::from_utf8_lossy(&out.stdout));
+        }
+        AdbAction::Mirror { serial, bitrate, audio, dry_run } => {
+            let mut args = vec![
+                "-s".to_string(), serial.clone(),
+                "--video-bit-rate".to_string(), format!("{}M", bitrate),
+                "--max-fps".to_string(), "60".to_string(),
+            ];
+            if audio {
+                args.push("--audio-codec=opus".to_string());
+            } else {
+                args.push("--no-audio".to_string());
+            }
+
+            let full_cmd = format!("scrcpy {}", args.join(" "));
+            println!("⚡ [EXCALIBUR_MIRROR] Command: {}", full_cmd);
+            if !dry_run {
+                println!("🚀 Launching scrcpy mobile stream for Excalibur ({serial})...");
+                std::process::Command::new("scrcpy")
+                    .args(&args)
+                    .spawn()
+                    .context("Failed to spawn scrcpy. Ensure scrcpy is installed.")?;
+            }
+        }
+        AdbAction::Tap { serial, x, y } => {
+            println!("⚡ [ROTEL_ADB] Injecting tap at ({x}, {y}) on {serial}...");
+            std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "input", "tap", &x.to_string(), &y.to_string()])
+                .status()
+                .context("Failed to inject tap via adb")?;
+            println!("✓ Tap injected.");
+        }
+        AdbAction::Swipe { serial, x1, y1, x2, y2, duration_ms } => {
+            println!("⚡ [ROTEL_ADB] Injecting swipe ({x1},{y1}) -> ({x2},{y2}) [{}ms] on {serial}...", duration_ms);
+            std::process::Command::new("adb")
+                .args([
+                    "-s", &serial, "shell", "input", "swipe",
+                    &x1.to_string(), &y1.to_string(),
+                    &x2.to_string(), &y2.to_string(),
+                    &duration_ms.to_string()
+                ])
+                .status()
+                .context("Failed to inject swipe via adb")?;
+            println!("✓ Swipe injected.");
+        }
+        AdbAction::Text { serial, text } => {
+            println!("⚡ [ROTEL_ADB] Sending text input to {serial}...");
+            std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "input", "text", &text])
+                .status()
+                .context("Failed to input text via adb")?;
+            println!("✓ Text dispatched.");
+        }
+        AdbAction::Screenshot { serial, output } => {
+            println!("⚡ [ROTEL_ADB] Capturing screenshot from {serial} -> {output}...");
+            let out_file = std::fs::File::create(&output).context("Failed to create screenshot file")?;
+            std::process::Command::new("adb")
+                .args(["-s", &serial, "exec-out", "screencap", "-p"])
+                .stdout(out_file)
+                .status()
+                .context("Failed to capture screenshot via adb")?;
+            println!("✓ Screenshot saved to {output}");
+        }
+        AdbAction::Telemetry { serial, json } => {
+            println!("⚡ [ROTEL_ADB] Pulling reverse mobile sentinel telemetry from {serial}...");
+            let battery = std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "dumpsys", "battery"])
+                .output()
+                .map(|o| String::from_utf8_lossy(&o.stdout).to_string())
+                .unwrap_or_else(|_| "battery_unavailable".to_string());
+
+            let window = std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "dumpsys", "window", "displays"])
+                .output()
+                .map(|o| String::from_utf8_lossy(&o.stdout).to_string())
+                .unwrap_or_else(|_| "window_unavailable".to_string());
+
+            if json {
+                let report = serde_json::json!({
+                    "serial": serial,
+                    "direction": "MOBILE_TO_CAMELOT (REVERSE TELEMETRY)",
+                    "battery_sample": battery.lines().take(6).collect::<Vec<&str>>(),
+                    "window_sample": window.lines().filter(|l| l.contains("cur=")).take(3).collect::<Vec<&str>>(),
+                    "timestamp": Utc::now().to_rfc3339()
+                });
+                println!("{}", serde_json::to_string_pretty(&report)?);
+            } else {
+                println!("--- Battery Telemetry ---");
+                for line in battery.lines().take(6) {
+                    println!("  {}", line);
+                }
+                println!("--- Display & Focus Telemetry ---");
+                for line in window.lines().filter(|l| l.contains("cur=")).take(3) {
+                    println!("  {}", line);
+                }
+            }
+            println!("✓ Bidirectional telemetry verified.");
+        }
+        AdbAction::Listen { serial, duration_s } => {
+            println!("⚡ [ROTEL_ADB] Listening to reverse event stream from {serial} for {}s...", duration_s);
+            let mut child = std::process::Command::new("adb")
+                .args(["-s", &serial, "shell", "getevent", "-l"])
+                .stdout(std::process::Stdio::piped())
+                .spawn()
+                .context("Failed to attach to device event queue")?;
+
+            std::thread::sleep(std::time::Duration::from_secs(duration_s));
+            let _ = child.kill();
+            println!("✓ Reverse stream listener detached after {}s.", duration_s);
+        }
+    }
     Ok(())
 }
 

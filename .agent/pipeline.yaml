@@ -1,0 +1,10 @@
+﻿stages:
+  - build:
+      tool: "cargo"
+      parallel: true
+  - verify:
+      tool: "camelot-sentinel"
+      audit_pass: true
+  - deploy:
+      tool: "systemd"
+      target: "vps-hub"

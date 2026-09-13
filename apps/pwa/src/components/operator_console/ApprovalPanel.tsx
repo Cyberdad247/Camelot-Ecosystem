@@ -37,6 +37,9 @@ export function ApprovalPanel({ approval, taskId, forceDisabled = false }: {
     policyClass: 'engineering.write',
     expiresAt: new Date(Date.now() + 60_000).toISOString(),
     oneTimeNonce: 'nonce_fixture',
+    effectClass: 'workspace.patch',
+    declaredRiskTier: 'T1',
+    declarationHash: 'sha256:fixture_decl_hash',
   };
 
   const runDecision = async (decision: 'approve' | 'deny', reason?: string) => {

@@ -11,10 +11,10 @@ from __future__ import annotations
 
 import json
 import logging
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 _SHEETS_PATH = _REPO_ROOT / "03_VAULT" / "training" / "configs" / "knight_character_sheets.json"
@@ -116,7 +116,6 @@ LIBRARIAN_REGISTRY = ArchLibrarianRegistry()
 
 
 if __name__ == "__main__":
-    import sys
     print("=== ARCH-LIBRARIAN KNIGHT CHARACTER SHEET REGISTRY ===")
     all_sheets = LIBRARIAN_REGISTRY.list_all_sheets()
     print(f"Total Registered Character Sheets: {len(all_sheets)}")
