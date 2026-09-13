@@ -1,7 +1,7 @@
 {
   "schema": "excalibur.telemetry/v1000.0.0",
   "profile": "cybertronia-win",
-  "timestamp_utc": "2026-09-10T22:27:00.306119+00:00",
+  "timestamp_utc": "2026-09-13T04:05:27.062697+00:00",
   "platform": {
     "vendor": "Windows",
     "product": "Cybertronia",
@@ -16,14 +16,14 @@
   },
   "memory_mb": {
     "total": 7895,
-    "used": 6078,
-    "available": 1817
+    "used": 6819,
+    "available": 1076
   },
   "storage_mb": {
     "mount": "C:\\",
     "total": 487084,
-    "used": 407693,
-    "free": 79391
+    "used": 402604,
+    "free": 84480
   },
   "kernel_features": {
     "btf_ebpf": false

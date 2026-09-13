@@ -8,6 +8,17 @@
     "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
     "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-09-13T03:08:26.905187+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//STATUS",
+    "content": "{\"action\": \"system_status\", \"detail\": \"run: python -m control_plane.harness --status\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
     "updated_at": "2026-09-10T17:07:51.911510+00:00"
   },
   {
@@ -537,16 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
     "open_viking_tether": "open_viking://worldtree/sir_boris",
     "updated_at": "2026-08-24T17:56:06.982045+00:00"
-  },
-  {
-    "knight_id": "SIR_BORIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//NANO_SWARM_EXPAND expand --manifest C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_temp\\test_nano_swarm_evidence_route0\\ukg.json --report-dir C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_temp\\test_nano_swarm_evidence_route0\\route_reports --evidence",
-    "content": "{\"action\": \"nano_swarm_expand\", \"evidence\": true, \"status\": \"EVIDENCE_RECORDED\", \"report_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports\\\\ukg_nano_omega_glyph_v1000_omni_codex.evidence.json\", \"schema_status\": \"SCHEMA_VALID\"}",
-    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
-    "open_viking_tether": "open_viking://worldtree/sir_boris",
-    "updated_at": "2026-08-24T17:56:03.385661+00:00"
   }
 ]

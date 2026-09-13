@@ -1576,6 +1576,12 @@ _HANDLERS = {
 _RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
     "omega_codex": "Omega_CODEX",
+    "//sync": "Omega_SYNC",
+    "/sync": "Omega_SYNC",
+    "$sync": "Omega_SYNC",
+    "//evolve": "Omega_EVOLVE",
+    "/evolve": "Omega_EVOLVE",
+    "$evolve": "Omega_EVOLVE",
     "//nano-swarm": "//NANO_SWARM_EXPAND",
     "//nanoswarm": "//NANO_SWARM_EXPAND",
     "//nano": "//NANO_SWARM_EXPAND",

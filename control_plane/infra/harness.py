@@ -51,7 +51,9 @@ LEDGER_FILE  = CAMELOT_HOME / "PROVENANCE_LEDGER.md"
 # Ensure logs dir exists
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
 
-# Add configs dir to path for knight imports
+# Add CAMELOT_HOME and configs dir to path for imports
+if str(CAMELOT_HOME) not in sys.path:
+    sys.path.insert(0, str(CAMELOT_HOME))
 if str(CONFIGS_DIR) not in sys.path:
     sys.path.insert(0, str(CONFIGS_DIR))
 
@@ -323,6 +325,7 @@ class SovereignHarness:
         return min(WATCHDOG_RESTART_COOLDOWN_S * (2 ** failures), WATCHDOG_RESTART_MAX_COOLDOWN_S)
 
     async def _watchdog_loop(self) -> None:
+        await asyncio.sleep(15)  # let boot sequence settle before probing
         while self._running:
             results = await asyncio.gather(*[
                 _probe_port(host, port)
@@ -347,6 +350,7 @@ class SovereignHarness:
                     if now - self._restart_ts.get(name, 0) >= cooldown:
                         self._restart_ts[name] = now
                         asyncio.create_task(self._restart_soft_service(name))
+                        await asyncio.sleep(2.0)  # stagger restarts to prevent memory thundering herd
             else:
                 _log("[WATCHDOG] All probes green")
 
@@ -940,7 +944,10 @@ def _rotate_log(log_path: Path) -> None:
 def _log(msg: str) -> None:
     ts = datetime.now().strftime("%H:%M:%S")
     line = f"[{ts}] {msg}"
-    print(line, flush=True)
+    try:
+        print(line, flush=True)
+    except (OSError, ValueError):
+        pass
     try:
         log_path = LOGS_DIR / "harness.log"
         if log_path.exists() and log_path.stat().st_size >= _LOG_MAX_BYTES:
@@ -966,9 +973,11 @@ def boot_harness(home: Path | None = None) -> tuple[bool, str]:
     if PID_FILE.exists():
         try:
             pid = int(PID_FILE.read_text().strip())
-            os.kill(pid, 0)  # check alive
-            return True, f"Sovereign Harness already running PID={pid}"
-        except (ProcessLookupError, ValueError):
+            import psutil
+            if psutil.pid_exists(pid):
+                return True, f"Sovereign Harness already running PID={pid}"
+            PID_FILE.unlink(missing_ok=True)
+        except Exception:
             PID_FILE.unlink(missing_ok=True)
 
     py = sys.executable
@@ -980,10 +989,12 @@ def boot_harness(home: Path | None = None) -> tuple[bool, str]:
             | getattr(subprocess, "CREATE_NO_WINDOW", 0)
         )
         kwargs["close_fds"] = True
+        kwargs["stdout"] = subprocess.DEVNULL
+        kwargs["stderr"] = subprocess.DEVNULL
     else:
         kwargs["start_new_session"] = True
 
-    proc = subprocess.Popen([py, str(script)], **kwargs)
+    proc = subprocess.Popen([py, "-m", "control_plane.infra.harness"], **kwargs)
     time.sleep(1.0)
     if proc.poll() is not None:
         return False, f"Harness exited immediately (code {proc.returncode})"
@@ -1004,14 +1015,24 @@ def main() -> None:
         if PID_FILE.exists():
             try:
                 pid = int(PID_FILE.read_text().strip())
-                print(json.dumps({"running": True, "pid": pid}))
+                import psutil
+                if psutil.pid_exists(pid):
+                    print(json.dumps({"running": True, "pid": pid}))
+                else:
+                    PID_FILE.unlink(missing_ok=True)
+                    print(json.dumps({"running": False, "stale_pid": pid}))
             except Exception:
                 print(json.dumps({"running": False}))
         else:
             print(json.dumps({"running": False}))
         return
 
-    asyncio.run(harness.run(once=args.once))
+    import traceback
+    try:
+        asyncio.run(harness.run(once=args.once))
+    except Exception:
+        _log(f"[FATAL_CRASH] harness.run exited: {traceback.format_exc()}")
+        PID_FILE.unlink(missing_ok=True)
 
 
 if __name__ == "__main__":
