@@ -171,7 +171,7 @@ class PipelineExecutionResult:
             "status": self.status.value,
             "current_stage": self.current_stage.value,
             "idempotency_decision": self.idempotency_decision.value,
-            "security_decision": self.security_decision.to_dict() if self.security_decision else None,
+            "security_decision": self.security_decision.to_dict() if self.security_decision is not None else None,
             "lease_id": self.lease.get("lease_id") if self.lease else None,
             "execution_status": self.execution_envelope.status if self.execution_envelope else None,
             "gideon_verdict": self.gideon_verdict.verdict if self.gideon_verdict else None,

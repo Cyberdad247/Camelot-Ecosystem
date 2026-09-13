@@ -809,6 +809,15 @@ def _handle_ctx7(args: Any, _cm: Any, _pm: Any, _argv: list[str]) -> int:
     return 0
 
 
+# ---------------------------------------------------------------------------
+# pipeline
+# ---------------------------------------------------------------------------
+
+def _handle_pipeline(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str]) -> int:
+    from control_plane.cli.pipeline_cmd import handle_pipeline
+    return handle_pipeline(args, config_mgr, prov_mgr, argv)
+
+
 # ===========================================================================
 # COMMAND REGISTRY
 # ===========================================================================
@@ -835,4 +844,5 @@ COMMAND_REGISTRY: dict[str, HandlerFn] = {
     "evolve": _handle_evolve,
     "scripts": _handle_scripts,
     "ctx7": _handle_ctx7,
+    "pipeline": _handle_pipeline,
 }

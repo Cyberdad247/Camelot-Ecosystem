@@ -444,4 +444,24 @@ def _build_parser() -> argparse.ArgumentParser:
     p_ctx7.add_argument("report", help="Path to the sentinel forensic report (.json)")
     p_ctx7.add_argument("--setup", action="store_true", help="Execute automated setup based on report")
 
+    pipeline = sub.add_parser("pipeline", help="Sovereign End-to-End Execution Pipeline (Zero-Trust Lifecycle)")
+    pipeline_sub = pipeline.add_subparsers(dest="pipeline_command", required=True)
+
+    pipeline_run = pipeline_sub.add_parser("run", help="Submit and execute a task manifest through all 6 stages")
+    pipeline_run.add_argument("manifest", nargs="?", default=None, help="Path to manifest JSON file or raw JSON")
+    pipeline_run.add_argument("--tenant", default="tenant_default", help="Tenant ID for Merkle chain isolation")
+    pipeline_run.add_argument("--client-key", dest="client_key", default=None, help="Idempotency client key")
+    pipeline_run.add_argument("--intent", default=None, help="Human-readable task intent")
+    pipeline_run.add_argument("--effect-class", dest="effect_class", default=None, help="Canonical effect class")
+    pipeline_run.add_argument("--risk-tier", dest="risk_tier", default=None, help="Declared risk tier (T1-T4)")
+    pipeline_run.add_argument("--bypass-approvals", action="store_true", help="Mark operator approval for mutating tasks")
+    pipeline_run.add_argument("--auto-ratify", action="store_true", help="Auto-ratify T3/T4 high-risk tasks with Arthur Crown")
+    pipeline_run.add_argument("--json", action="store_true", help="Emit JSON output")
+
+    pipeline_status = pipeline_sub.add_parser("status", help="Show pipeline governance and scarcity status")
+    pipeline_status.add_argument("--json", action="store_true", help="Emit JSON output")
+
+    pipeline_verify = pipeline_sub.add_parser("verify", help="Run automated 6-stage self-diagnostic smoke test")
+    pipeline_verify.add_argument("--json", action="store_true", help="Emit JSON output")
+
     return parser

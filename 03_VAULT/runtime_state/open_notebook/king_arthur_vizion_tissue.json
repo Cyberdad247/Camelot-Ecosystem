@@ -3,6 +3,17 @@
     "knight_id": "KING_ARTHUR_VIZION",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_32290b13e131c9aaa0b49a3bba3f13b2ea41915982ec6cda5f31ec6574c5a581",
+    "content": "Verification Run worldtree_cloudbrain_vps_sync_20260913134625: //SYNC WorldTree CloudBrain, VPS Hub KVM563 & Maximum Version Mesh\nOperator: King_Arthur_Vizion\nSuccess: True\nResults: {\"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"hermes_prime_vfs_uuid\": \"28f89cb6-5048-4b5d-9e94-376082d24744\", \"camelot_v1000_uuid\": \"8c656cfa-a189-409e-a72d-07692a47f17e\", \"vps_public_ip\": \"162.35.107.134\", \"vps_tailscale_ip\": \"100.71.218.75\", \"active_version\": \"v1000.54-EXCALIBUR-A\", \"tethered_knights\": 41, \"open_notebook_tissue\": \"03_VAULT\\\\runtime_state\\\\open_notebook\\\\vps_hub_kvm563_tissue.json\", \"status\": \"WORLDTREE_VPS_MAX_VERSION_INTEGRATED\"}",
+    "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KING_ARTHUR_VIZION",
+    "open_viking_tether": "open_viking://worldtree/king_arthur_vizion",
+    "updated_at": "2026-09-13T13:46:26.423834+00:00"
+  },
+  {
+    "knight_id": "KING_ARTHUR_VIZION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
     "title": "L2_Vector_Index_camelot_audit_92958aa5ee51cbe31ff361fbf914c8e28a32c41221d654885735760f8d6b20f1",
     "content": "Verification Run worldtree_cloudbrain_vps_sync_20260913133712: //SYNC WorldTree CloudBrain, VPS Hub KVM563 & Maximum Version Mesh\nOperator: King_Arthur_Vizion\nSuccess: True\nResults: {\"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"hermes_prime_vfs_uuid\": \"28f89cb6-5048-4b5d-9e94-376082d24744\", \"camelot_v1000_uuid\": \"8c656cfa-a189-409e-a72d-07692a47f17e\", \"vps_public_ip\": \"162.35.107.134\", \"vps_tailscale_ip\": \"100.71.218.75\", \"active_version\": \"v1000.54-EXCALIBUR-A\", \"tethered_knights\": 41, \"open_notebook_tissue\": \"03_VAULT\\\\runtime_state\\\\open_notebook\\\\vps_hub_kvm563_tissue.json\", \"status\": \"WORLDTREE_VPS_MAX_VERSION_INTEGRATED\"}",
     "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",
@@ -537,16 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_KING_ARTHUR_VIZION",
     "open_viking_tether": "open_viking://worldtree/king_arthur_vizion",
     "updated_at": "2026-08-25T23:58:00.306327+00:00"
-  },
-  {
-    "knight_id": "KING_ARTHUR_VIZION",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_e734bf698967eac7115c7bcb49aa3bc0bdfce2f110553838089bb96d24d43670",
-    "content": "Verification Run sovereign_knight_hud_forged_20260825235405: Forge CLI HUD for User Telemetry (Knight, Router, LLM, XP, Protocols, Runes, Cartridge)\nOperator: King_Arthur_Vizion\nSuccess: True\nResults: {\"hud_module\": \"control_plane/cli/knight_hud.py\", \"knights_supported\": [\"MERLIN_OMEGA\", \"SIR_BORIS\", \"SIR_CODEX\", \"SIR_FORGE\", \"HERMES_PRIME\", \"LADY_LAKISHA\", \"SIR_HEIMDALL\", \"SIR_SENTINEL\", \"SIR_GHOST\"], \"router_fleet_probes\": [\"OmniRoute:20128\", \"9Router:8079\", \"Bifrost:3001\", \"CLIProxyAPI:8080\", \"BitRouter:8078\", \"MeshBridge:8095\", \"GeminiLive:8765\", \"Morgana:8001\"], \"xp_ledger\": \"03_VAULT/runtime_state/knight_xp_ledger.json\", \"tests_passed\": 6, \"status\": \"VERIFIED_OPERATIONAL\"}",
-    "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KING_ARTHUR_VIZION",
-    "open_viking_tether": "open_viking://worldtree/king_arthur_vizion",
-    "updated_at": "2026-08-25T23:54:05.923026+00:00"
   }
 ]
