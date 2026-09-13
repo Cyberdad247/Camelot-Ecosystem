@@ -84,7 +84,7 @@ KNOWN_COMMANDS = {
     "chat", "route", "triage", "cloudbrain", "orchestrator", "sarda",
     "ledger", "toon", "glyph", "glyth", "forge-unify", "cockpit",
     "evolve", "team", "codex", "bio-swarm", "nano-swarm", "microcubed",
-    "gemini-ext", "scripts", "ctx7", "pipeline", "health",
+    "gemini-ext", "scripts", "ctx7", "pipeline", "health", "templates",
 }
 
 

@@ -793,6 +793,7 @@ class ControlPlane:
                     ),
                     "multilogin_enabled": bool(task.parameters.get("multilogin_enabled", True)),
                     "browser_isolation": str(task.parameters.get("browser_isolation", "team")),
+                    "template": task.parameters.get("template"),
                 },
             )
 
@@ -811,6 +812,7 @@ class ControlPlane:
                     "horizon_days": int(task.parameters.get("horizon_days", 30)),
                     "prioritize_local_first": bool(task.parameters.get("prioritize_local_first", True)),
                     "multilogin_enabled": bool(task.parameters.get("multilogin_enabled", True)),
+                    "template": task.parameters.get("template"),
                 },
             )
 

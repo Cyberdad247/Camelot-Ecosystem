@@ -3,6 +3,94 @@
     "knight_id": "KINETIC_LOOP",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_c9b6a70607f0754db6ff386c09129d459c68b637fcdd64582ae7d7329c4e1b01",
+    "content": "Verification Run 689323e9-734b-4087-8dfc-22e50d61afa6: kinetic_loop:build a small dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:43:03.350477+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_7acb23678bee16f676a851d47269e2cc1457429f558075fc2e9acd38f8609c43",
+    "content": "Verification Run b9a0826d-7072-4adf-992a-55dc204dea01: kinetic_loop:build a status dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:42:57.639115+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_de87319c44f2439699ac8eeb2576d6702eb0322ecab920fe64076523d05986bb",
+    "content": "Verification Run 78912b23-7003-479e-90cf-3ddd124f24f9: kinetic_loop:create a greeting string\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_ouroboros\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:42:53.948483+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_448398d8866449adbba986d992720de4e6257cd02ffc22d0206cdd3780aac47c",
+    "content": "Verification Run a2ea80be-dd32-4327-bdbe-3eb83f4ba8c9: kinetic_loop:build a status dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:42:51.453109+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_f21d061c5233f7bf4dacddf760384d23dc9b451e79c3900f3ab70fcb95d04052",
+    "content": "Verification Run b3b6c59a-3e61-41c0-a00f-1cec0a99e4dd: kinetic_loop:build a thing\nOperator: kinetic_loop\nSuccess: False\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:41:01.565402+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_e8ba2b8d5dac6ac873f8efaa4c349fdfe63a842949fc5b22b5b70742bc489115",
+    "content": "Verification Run db14385a-4564-439e-9cdf-51d40d6bb8f7: kinetic_loop:create a greeting string\nOperator: kinetic_loop\nSuccess: False\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_ouroboros\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:40:58.772396+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_f2b48baa58bf2b4b7211489f4146c96f63c58775ffd36461d8414d2bd792a579",
+    "content": "Verification Run c217d2d3-a22f-433d-b39e-eb90d37c0292: kinetic_loop:create a greeting string\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_ouroboros\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:40:55.445729+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_b73c05495efab09323fbbc2ab2571a5e8c9670b7dc574c43d30cc37667955d15",
+    "content": "Verification Run 3228a351-ddba-4d1c-b0ee-558e8ce6b3c4: kinetic_loop:build a small status dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
+    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
+    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
+    "updated_at": "2026-09-13T14:40:53.008220+00:00"
+  },
+  {
+    "knight_id": "KINETIC_LOOP",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
     "title": "L2_Vector_Index_camelot_audit_3ad3454c360933f630188ee9ba04eb51088827a05b3dcc28904d7a98d8e7262b",
     "content": "Verification Run 26673e52-52b6-466e-b399-8ba9a6522af3: kinetic_loop:build a small dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
     "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
@@ -460,93 +548,5 @@
     "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
     "open_viking_tether": "open_viking://worldtree/kinetic_loop",
     "updated_at": "2026-08-24T17:55:31.358002+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_9161da2f7cba719ea7235b3333092fd06577b4b6930c347f4e3b7c5b7a5da8c4",
-    "content": "Verification Run facb88b9-550c-4e91-acfe-78ea6cd86d15: kinetic_loop:create a greeting string\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_ouroboros\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:55:27.852903+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_8a26d61c94507fb576553c42ab38618c9b5e8d0e36c31c05bae447948222d48a",
-    "content": "Verification Run e3d4f1d8-9d45-4936-bef1-948cf51ed3e1: kinetic_loop:build a small status dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:55:25.308975+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_88c872df8fd03ef19fee4dc05695e0acf1e171c45f97e9d1c8d27d9f46e1e474",
-    "content": "Verification Run b7621ef2-1bf8-4958-bdfa-85c96e9739b6: kinetic_loop:build a small dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:22:24.844426+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_d66d4630f7b0941cc6255203a3a9589f7673fef25316e8d6648c1458444eb349",
-    "content": "Verification Run 6376d662-9ea7-40cb-9d93-3a3d94b39ecc: kinetic_loop:build a status dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:22:17.505078+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_c5eb6f37cd72c1493fc73ff171e8951dd8323fb6b3d087f757a23551e42d7b21",
-    "content": "Verification Run 95737d2d-cf1e-4ea5-8b3f-2f1cfc572caf: kinetic_loop:create a greeting string\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_ouroboros\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:22:12.204421+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_447c29fc5c2bf3e248a78cbbd5a9cb9869f060cfddd810f56390457dfffa4bb1",
-    "content": "Verification Run 690bd190-3d06-4621-b553-ba8dc2b2105c: kinetic_loop:build a status dashboard\nOperator: kinetic_loop\nSuccess: True\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:22:07.958447+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_8ca1cf266454838c0549e770da17c796a11c45f40286092cba1cbc3ad4a11db1",
-    "content": "Verification Run a43e4b25-5fcc-4d57-8acf-efeb329d3cc0: kinetic_loop:build a thing\nOperator: kinetic_loop\nSuccess: False\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_link\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:17:14.921326+00:00"
-  },
-  {
-    "knight_id": "KINETIC_LOOP",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "source",
-    "title": "L2_Vector_Index_camelot_audit_5f5f19809dbe4478e2b38335c19d2118f07b829aa50dfb6d56ac6260b3d0c7d3",
-    "content": "Verification Run 66259c10-b8d5-47ed-beb6-82bc690ac1a0: kinetic_loop:create a greeting string\nOperator: kinetic_loop\nSuccess: False\nResults: {\"stages\": [\"TRIAGE\", \"PLAN\", \"APPROVE\", \"EXECUTE\", \"VERIFY\", \"RECORD\"], \"approved\": false, \"knight\": \"sir_ouroboros\", \"lane\": \"HIGH\", \"gate_method\": \"PROMPT\"}",
-    "vfs_path": "vfs://worldtree/knights/kinetic_loop/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_KINETIC_LOOP",
-    "open_viking_tether": "open_viking://worldtree/kinetic_loop",
-    "updated_at": "2026-08-24T17:17:10.852768+00:00"
   }
 ]

@@ -189,6 +189,45 @@ def _pretty_render(payload: Any) -> str:
                     lines.append(
                         f"- {item.get('knight_id')}: {item.get('engine')} / {item.get('model')}"
                     )
+            if "template" in result and result["template"]:
+                lines.append(f"template: {result['template']}")
+            if "deliverables" in result and isinstance(result["deliverables"], list):
+                lines.append("deliverables:")
+                lines.extend(f"- {item}" for item in result["deliverables"][:5])
+            if "scoring" in result and isinstance(result["scoring"], dict):
+                sc = result["scoring"]
+                conf_pct = sc.get("confidence_pct") or f"{int(sc.get('confidence_score', 0) * 100)}%"
+                risk_pct = sc.get("risk_pct") or f"{int(sc.get('risk_score', 0) * 100)}%"
+                comp_pct = sc.get("completeness_pct") or f"{int(sc.get('completeness_score', 0) * 100)}%"
+                lines.append("")
+                lines.append("objective_scoring:")
+                lines.append(f"  confidence: {conf_pct}")
+                lines.append(f"  risk: {risk_pct}")
+                lines.append(f"  completeness: {comp_pct}")
+                rationale = sc.get("rationale")
+                if isinstance(rationale, dict):
+                    for k, v in rationale.items():
+                        lines.append(f"  - {k}: {v}")
+        return "\n".join(lines)
+
+    if isinstance(payload, dict) and "templates" in payload and isinstance(payload["templates"], list):
+        lines = [
+            "=" * 70,
+            "🛡️  CAMELOT-OS CANONICAL MISSION TEMPLATES (TRACK C4) 🛡️",
+            "=" * 70,
+        ]
+        for tmpl in payload["templates"]:
+            lines.append(f"\n◈ [{tmpl.get('name', '').upper()}] — {tmpl.get('title', '')}")
+            lines.append(f"  Aspect: {tmpl.get('aspect', '')} | Cartridge: {tmpl.get('cartridge', '')} | Tier: {tmpl.get('compute_tier', '')} | Isolation: {tmpl.get('browser_isolation', '')}")
+            lines.append(f"  Scope: {tmpl.get('description', '')}")
+            lines.append(f"  Default Objective: {tmpl.get('default_objective', '')}")
+            if tmpl.get("recommended_knights"):
+                lines.append(f"  Knights: {', '.join(tmpl.get('recommended_knights', []))}")
+            if tmpl.get("deliverables"):
+                lines.append(f"  Deliverables: {', '.join(tmpl.get('deliverables', []))}")
+        lines.append("\n" + "=" * 70)
+        lines.append("Invoke via: camelot cloudbrain northstar --template <name> [custom objective]")
+        lines.append("=" * 70)
         return "\n".join(lines)
 
     if isinstance(payload, dict) and {"task_id", "phase", "sub_tasks"}.issubset(payload.keys()):

@@ -413,19 +413,81 @@ def _handle_cloudbrain(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str
         output = asyncio.run(_run_task("memory recall", agent_id=args.agent_id,
                                        constraints=[f"privacy={args.privacy}"]))
     elif c == "northstar":
-        constraints = [f"privacy={args.privacy}", f"compute_tier={args.tier}", f"aspect={args.aspect}"]
+        if getattr(args, "list_templates", False):
+            from control_plane.infra.mission_templates import list_mission_templates
+            payload = {"status": "SUCCESS", "templates": [t.model_dump() for t in list_mission_templates()]}
+            _log_run(payload, success=True, args=args, prov_mgr=prov_mgr, argv=argv)
+            _emit(payload, json_mode=args.json, title="Northstar Mission Templates")
+            return 0
+
+        tmpl_name = getattr(args, "template", None)
+        objective = args.objective
+        aspect = args.aspect
+        cartridge = args.cartridge
+        tier = args.tier
+        isolation = args.browser_isolation
+
+        if tmpl_name:
+            from control_plane.infra.mission_templates import resolve_template_parameters
+            tmpl_params = resolve_template_parameters(tmpl_name, custom_objective=args.objective)
+            if not objective:
+                objective = tmpl_params["objective"]
+            if aspect == "research" and tmpl_params.get("aspect"):
+                aspect = tmpl_params["aspect"]
+            if cartridge == "COGNITIVE" and tmpl_params.get("cartridge"):
+                cartridge = tmpl_params["cartridge"]
+            if tier == "apex" and tmpl_params.get("compute_tier"):
+                tier = tmpl_params["compute_tier"]
+            if isolation == "team" and tmpl_params.get("browser_isolation"):
+                isolation = tmpl_params["browser_isolation"]
+
+        objective = objective or "northstar war room objective"
+        constraints = [f"privacy={args.privacy}", f"compute_tier={tier}", f"aspect={aspect}"]
+        extra_params = {
+            "aspect": aspect,
+            "compute_tier": tier,
+            "cartridge": cartridge,
+            "browser_isolation": isolation,
+            "multilogin_enabled": not args.disable_multilogin,
+        }
+        if tmpl_name:
+            extra_params["template"] = tmpl_name
+
         output = asyncio.run(_run_task("northstar war room objective", agent_id=args.agent_id,
-                                       objective=args.objective, constraints=constraints,
-                                       extra_parameters={"aspect": args.aspect, "compute_tier": args.tier,
-                                                         "cartridge": args.cartridge, "browser_isolation": args.browser_isolation,
-                                                         "multilogin_enabled": not args.disable_multilogin}))
+                                       objective=objective, constraints=constraints,
+                                       extra_parameters=extra_params))
     elif c == "blueprint":
+        if getattr(args, "list_templates", False):
+            from control_plane.infra.mission_templates import list_mission_templates
+            payload = {"status": "SUCCESS", "templates": [t.model_dump() for t in list_mission_templates()]}
+            _log_run(payload, success=True, args=args, prov_mgr=prov_mgr, argv=argv)
+            _emit(payload, json_mode=args.json, title="Blueprint Mission Templates")
+            return 0
+
+        tmpl_name = getattr(args, "template", None)
+        objective = args.objective
+        if tmpl_name:
+            from control_plane.infra.mission_templates import resolve_template_parameters
+            tmpl_params = resolve_template_parameters(tmpl_name, custom_objective=args.objective)
+            if not objective:
+                objective = tmpl_params["objective"]
+
+        objective = objective or "development blueprint objective"
         constraints = [f"compute_tier={args.tier}", f"budget_mode={args.budget_mode}"]
-        output = asyncio.run(_run_task("development blueprint objective", objective=args.objective,
+        extra_params = {
+            "compute_tier": args.tier,
+            "budget_mode": args.budget_mode,
+            "team_size": args.team_size,
+            "horizon_days": args.horizon_days,
+            "prioritize_local_first": True,
+            "multilogin_enabled": not args.disable_multilogin,
+        }
+        if tmpl_name:
+            extra_params["template"] = tmpl_name
+
+        output = asyncio.run(_run_task("development blueprint objective", objective=objective,
                                        constraints=constraints,
-                                       extra_parameters={"compute_tier": args.tier, "budget_mode": args.budget_mode,
-                                                         "team_size": args.team_size, "horizon_days": args.horizon_days,
-                                                         "prioritize_local_first": True, "multilogin_enabled": not args.disable_multilogin}))
+                                       extra_parameters=extra_params))
     elif c == "eldergod-health":
         output = asyncio.run(_run_task("elderGod forge health"))
     elif c == "health":
@@ -888,6 +950,31 @@ def _handle_health(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str]) -
     return 0 if result.success else 1
 
 
+def _handle_templates(args: Any, _config_mgr: Any, prov_mgr: Any, argv: list[str]) -> int:
+    from control_plane.infra.mission_templates import (
+        list_mission_templates,
+        get_mission_template,
+    )
+    from control_plane.cli.dispatch import _log_run
+
+    name = getattr(args, "name", None)
+    if name:
+        tmpl = get_mission_template(name)
+        if not tmpl:
+            _stream_print(f"Error: Unknown template '{name}'", tone="err")
+            return 1
+        payload = {"status": "SUCCESS", "template": tmpl.model_dump()}
+    else:
+        payload = {
+            "status": "SUCCESS",
+            "templates": [t.model_dump() for t in list_mission_templates()],
+        }
+
+    _log_run(payload, success=True, args=args, prov_mgr=prov_mgr, argv=argv)
+    _emit(payload, json_mode=args.json, title="Canonical Mission Templates (Track C4)")
+    return 0
+
+
 # ===========================================================================
 # COMMAND REGISTRY
 # ===========================================================================
@@ -916,4 +1003,5 @@ COMMAND_REGISTRY: dict[str, HandlerFn] = {
     "ctx7": _handle_ctx7,
     "pipeline": _handle_pipeline,
     "health": _handle_health,
+    "templates": _handle_templates,
 }

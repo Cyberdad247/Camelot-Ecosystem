@@ -247,7 +247,7 @@ def _build_parser() -> argparse.ArgumentParser:
     research.add_argument("--allow-remote-sensitive", action="store_true")
 
     northstar = cloud_sub.add_parser("northstar", help="Run Northstar war-room planning")
-    northstar.add_argument("objective")
+    northstar.add_argument("objective", nargs="?", default=None, help="Mission objective or target statement")
     northstar.add_argument(
         "--aspect",
         choices=("research", "architecture", "audit", "operations", "growth"),
@@ -267,14 +267,38 @@ def _build_parser() -> argparse.ArgumentParser:
         default="team",
     )
     northstar.add_argument("--disable-multilogin", action="store_true")
+    northstar.add_argument(
+        "--template",
+        choices=("research", "architecture", "audit", "operations", "growth"),
+        default=None,
+        help="Canonical mission template preset (Tracks C4, C5)",
+    )
+    northstar.add_argument(
+        "--list-templates",
+        action="store_true",
+        help="List available canonical mission templates",
+    )
+    northstar.add_argument("--json", action="store_true", help="Emit JSON output")
 
     blueprint = cloud_sub.add_parser("blueprint", help="Generate efficient development blueprint")
-    blueprint.add_argument("objective")
+    blueprint.add_argument("objective", nargs="?", default=None, help="Blueprint objective statement")
     blueprint.add_argument("--tier", choices=("kinetic", "hybrid", "apex"), default="kinetic")
     blueprint.add_argument("--budget-mode", choices=("lean", "balanced", "aggressive"), default="lean")
     blueprint.add_argument("--team-size", type=int, default=1)
     blueprint.add_argument("--horizon-days", type=int, default=30)
     blueprint.add_argument("--disable-multilogin", action="store_true")
+    blueprint.add_argument(
+        "--template",
+        choices=("research", "architecture", "audit", "operations", "growth"),
+        default=None,
+        help="Apply canonical mission template context",
+    )
+    blueprint.add_argument(
+        "--list-templates",
+        action="store_true",
+        help="List available canonical mission templates",
+    )
+    blueprint.add_argument("--json", action="store_true", help="Emit JSON output")
 
     precise = cloud_sub.add_parser("precise", help="Plan precise-mode Nano-Knight browser swarm")
     precise.add_argument("objective")
@@ -476,5 +500,14 @@ def _build_parser() -> argparse.ArgumentParser:
     health.add_argument("--json", action="store_true", help="Emit structured JSON output")
     health.add_argument("--no-probe-remote", dest="probe_remote", action="store_false", default=True, help="Skip remote network probes and check local/cached status only")
     health.add_argument("--verbose", "-v", action="store_true", help="Include full contract and circuit breaker diagnostics")
+
+    templates_p = sub.add_parser("templates", help="List and inspect canonical mission templates (Track C4)")
+    templates_p.add_argument("--json", action="store_true", help="Emit template catalog as JSON")
+    templates_p.add_argument(
+        "--name",
+        choices=("research", "architecture", "audit", "operations", "growth"),
+        default=None,
+        help="Inspect specific canonical template details",
+    )
 
     return parser
