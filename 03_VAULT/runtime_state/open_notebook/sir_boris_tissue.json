@@ -3,6 +3,28 @@
     "knight_id": "SIR_BORIS",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
+    "title": "L2_Artifact_//STATUS",
+    "content": "{\"action\": \"system_status\", \"detail\": \"run: python -m control_plane.harness --status\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-09-14T03:36:26.922560+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//STATUS",
+    "content": "{\"action\": \"system_status\", \"detail\": \"run: python -m control_plane.harness --status\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
+    "open_viking_tether": "open_viking://worldtree/sir_boris",
+    "updated_at": "2026-09-14T01:12:40.733206+00:00"
+  },
+  {
+    "knight_id": "SIR_BORIS",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
     "title": "L2_Artifact_//NANO_SWARM_EXPAND supervise status",
     "content": "{\"action\": \"status\", \"supervise\": true, \"status\": \"SUPERVISOR_STATUS\", \"node\": \"all\", \"state_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_supervise_rout0\\\\state\\\\nano_swarm_supervisor_state.json\", \"nodes\": {\"Node_A_Frontend\": {\"status\": \"PROMOTED\", \"promoted\": true, \"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_supervise_rout0\\\\forge\\\\ukg\\\\Node_A_Frontend\", \"stack\": [\"React\", \"Zustand\", \"Tailwind_v4\"], \"startable\": true, \"missing_files\": [], \"promotion\": {\"status\": \"PROMOTED\", \"node\": \"Node_A_Frontend\"}, \"service_command\": [\"npm\", \"exec\", \"vite\", \"--\", \"--host\", \"127.0.0.1\", \"--port\", \"4177\"], \"health_url\": \"http://127.0.0.1:4177\", \"pid\": null, \"process_status\": \"STOPPED\", \"supervisor\": {}}, \"Node_B_Bifrost\": {\"status\": \"PROMOTED\", \"promoted\": true, \"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_supervise_rout0\\\\forge\\\\ukg\\\\Node_B_Bifrost\", \"stack\": [\"Rust\", \"Tokio\", \"Serde\"], \"startable\": true, \"missing_files\": [], \"promotion\": {\"status\": \"PROMOTED\", \"node\": \"Node_B_Bifrost\"}, \"service_command\": [\"cargo\", \"run\", \"--\", \"--serve\", \"--host\", \"127.0.0.1\", \"--port\", \"4178\"], \"health_url\": \"http://127.0.0.1:4178/health\", \"pid\": null, \"process_status\": \"STOPPED\", \"supervisor\": {}}, \"Node_C_Omni_Router\": {\"status\": \"PROMOTED\", \"promoted\": true, \"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_supervise_rout0\\\\forge\\\\ukg\\\\Node_C_Omni_Router\", \"stack\": [\"Go\", \"tsnet\"], \"startable\": true, \"missing_files\": [], \"promotion\": {\"status\": \"PROMOTED\", \"node\": \"Node_C_Omni_Router\"}, \"service_command\": [\"go\", \"run\", \".\", \"--serve\", \"--host\", \"127.0.0.1\", \"--port\", \"4180\"], \"health_url\": \"http://127.0.0.1:4180/health\", \"pid\": null, \"process_status\": \"STOPPED\", \"supervisor\": {}}, \"Node_D_MicroVM\": {\"status\": \"PROMOTED\", \"promoted\": true, \"path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_supervise_rout0\\\\forge\\\\ukg\\\\Node_D_MicroVM\", \"stack\": [\"Rust\", \"wasm-bindgen\"], \"startable\": true, \"missing_files\": [], \"promotion\": {\"status\": \"PROMOTED\", \"node\": \"Node_D_MicroVM\"}, \"service_command\": [\"cargo\", \"run\", \"--\", \"--serve\", \"--host\", \"127.0.0.1\", \"--port\", \"4179\"], \"health_url\": \"http://127.0.0.1:4179/health\", \"pid\": null, \"process_status\": \"STOPPED\", \"supervisor\": {}}}}",
     "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",

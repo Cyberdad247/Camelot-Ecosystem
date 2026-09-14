@@ -23,7 +23,12 @@ from memory.cloudbrain_connector import (
     route_by_domain,
     batch_query,
 )
-from vfs.notebooklm_client import NOTEBOOKLM_AVAILABLE
+from vfs.notebooklm_client import (
+    NOTEBOOKLM_AVAILABLE,
+    query_notebook_async,
+    push_note_async,
+    push_source_async,
+)
 from control_plane.memcastle import MemCastle
 from control_plane.graphify import extract_triplets
 from memory.graphiti_engine import KnightGraphitiEngine
@@ -44,9 +49,16 @@ def route_cloudbrain_by_domain(keywords: list[str]) -> list[str]:
 
 
 @mcp_server.tool()
-def query_cloudbrain(knight_id: str, question: str) -> str:
+async def query_cloudbrain(knight_id: str, question: str) -> str:
     """Query a specific Knight Cloudbrain node (eg SIR_BORIS, HERMES_PRIME, BIO_KINETIC_SWARM, ANYA_OMEGA)."""
     kid = knight_id.upper()
+    if NOTEBOOKLM_AVAILABLE:
+        try:
+            answer = await query_notebook_async(kid, question)
+            if answer:
+                return answer
+        except Exception:
+            pass
     connector = CloudBrainConnector(knight_id=kid)
     answer = connector.query_notebook(question)
     if answer:
@@ -55,22 +67,38 @@ def query_cloudbrain(knight_id: str, question: str) -> str:
 
 
 @mcp_server.tool()
-def push_cloudbrain_note(knight_id: str, title: str, content: str) -> str:
+async def push_cloudbrain_note(knight_id: str, title: str, content: str) -> str:
     """Push an artifact or operational note to a Knight Cloudbrain node and local Open-Notebook tissue."""
     kid = knight_id.upper()
     connector = CloudBrainConnector(knight_id=kid)
-    ok = connector.push_to_notebook(artifact_type="note", content=content, title=title)
+    connector._sync_open_notebook_local("note", title, content)
+    ok = False
+    if NOTEBOOKLM_AVAILABLE:
+        try:
+            ok = await push_note_async(kid, title, content)
+        except Exception:
+            pass
+    if not ok:
+        ok = connector.push_to_notebook(artifact_type="note", content=content, title=title)
     if ok:
         return f"Successfully pushed note '{title}' to {kid} Cloudbrain."
     return f"Local tissue mirrored, but remote NotebookLM push skipped/failed for {kid}."
 
 
 @mcp_server.tool()
-def push_cloudbrain_source(knight_id: str, title: str, content: str) -> str:
+async def push_cloudbrain_source(knight_id: str, title: str, content: str) -> str:
     """Push a full text source or code artifact to a Knight Cloudbrain notebook."""
     kid = knight_id.upper()
     connector = CloudBrainConnector(knight_id=kid)
-    ok = connector.push_to_notebook(artifact_type="source", content=content, title=title)
+    connector._sync_open_notebook_local("source", title, content)
+    ok = False
+    if NOTEBOOKLM_AVAILABLE:
+        try:
+            ok = await push_source_async(kid, title, content)
+        except Exception:
+            pass
+    if not ok:
+        ok = connector.push_to_notebook(artifact_type="source", content=content, title=title)
     if ok:
         return f"Successfully pushed source '{title}' to {kid} Cloudbrain."
     return f"Local tissue mirrored, but remote NotebookLM source upload skipped/failed for {kid}."
@@ -186,6 +214,74 @@ def excalibur_adb_tap(x: int, y: int, device_ip: str = "100.106.246.126:5555") -
         return f"Tap at ({x}, {y}) dispatched to {device_ip}. Exit: {res.returncode}"
     except Exception as e:
         return f"Tap failed: {e}"
+
+
+@mcp_server.tool()
+def get_notebook_manifest() -> dict:
+    """Get the master NotebookLM WorldTree Manifest summary across all 294 nodes and 7 categories."""
+    try:
+        from merlin.context.merlin_infinite_context import merlin_context
+        return {
+            "version": merlin_context.manifest.get("version", "2.0.0"),
+            "total_notebooks": merlin_context.manifest.get("total_notebooks", 294),
+            "worldtree_root_uuid": merlin_context.manifest.get("worldtree_root_uuid"),
+            "categories": merlin_context.manifest.get("categories", []),
+            "active_sovereign_knights": len(KNIGHT_NOTEBOOKS),
+        }
+    except Exception as e:
+        return {"error": str(e), "total_knights": len(KNIGHT_NOTEBOOKS)}
+
+
+@mcp_server.tool()
+def route_by_manifest(intent_or_query: str) -> dict:
+    """Route an intent or query using Merlin Infinite Context Engine across the 294 NotebookLM Manifest."""
+    try:
+        from merlin.context.merlin_infinite_context import merlin_context
+        category, knight_id, notebook_uuid = merlin_context.categorize_intent(intent_or_query)
+        meta = merlin_context.manifest.get("notebooks", {}).get(notebook_uuid, {})
+        return {
+            "intent": intent_or_query,
+            "recommended_category": category,
+            "recommended_knight": knight_id,
+            "target_notebook_uuid": notebook_uuid,
+            "notebook_title": meta.get("title", "Unknown"),
+            "anchor_tether": meta.get("anchor_tether", "a0a4bfb9-e847-4c38-be39-7aee398f0795"),
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@mcp_server.tool()
+def crystallize_infinite_context(
+    raw_text: str,
+    title: str,
+    category: str = "",
+    target_knight: str = "",
+) -> dict:
+    """Crystallize arbitrary text using Merlin Infinite Context Engine with living system instructions."""
+    try:
+        from merlin.context.merlin_infinite_context import merlin_context
+        cat = category if category else None
+        kid = target_knight.upper() if target_knight else None
+        crystal = merlin_context.crystallize(
+            raw_text=raw_text,
+            title=title,
+            category_override=cat,
+            target_knight=kid,
+        )
+        return {
+            "crystal_id": crystal.crystal_id,
+            "category": crystal.category,
+            "target_knight": crystal.target_knight,
+            "target_notebook_uuid": crystal.target_notebook_uuid,
+            "l0_flash_summary": crystal.l0_flash_summary,
+            "l1_semantic_outline": crystal.l1_semantic_outline,
+            "l2_triplets_count": len(crystal.l2_knowledge_triplets),
+            "full_markdown_length": len(crystal.full_markdown_source),
+            "created_at": crystal.created_at,
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 
 if __name__ == "__main__":

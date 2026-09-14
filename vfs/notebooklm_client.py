@@ -20,11 +20,18 @@ from __future__ import annotations
 import asyncio
 import logging
 import os
+import re
 import sys
+from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 LOG = logging.getLogger("NotebookLM_Client")
+
+_NOTEBOOK_UUID_RE = re.compile(
+    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+    re.IGNORECASE,
+)
 
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(CAMELOT_ROOT / "01_KERNEL"))
@@ -63,22 +70,70 @@ async def _get_client() -> Optional[Any]:
     if os.environ.get("CAMELOT_OFFLINE_CLOUDBRAIN") == "1":
         return None
     auth_path = r"C:\Users\vizio\.notebooklm\storage_state.json"
+    if not os.path.exists(auth_path):
+        LOG.warning(
+            "[NLM] No NotebookLM session at %s. Run in terminal: "
+            ".venv\\Scripts\\notebooklm login",
+            auth_path,
+        )
+        return None
     try:
-        client = await NotebookLMClient.from_storage(path=auth_path if os.path.exists(auth_path) else None)
-        return client
-    except AuthError:
-        LOG.debug(
-            "[NLM] Authentication required. Run in terminal: "
-            ".venv\\Scripts\\notebooklm login"
+        # Construct AuthTokens directly instead of NotebookLMClient.from_storage.
+        # The SDK's flat-cookie extraction (extract_cookies_from_storage) only
+        # gives .google.com precedence on name collisions, but OSID and
+        # __Secure-OSID are host-only cookies that exist on BOTH
+        # notebook.google.com and notebooklm.google.com. Whichever appears
+        # first in storage_state.json wins, and the notebooklm.google.com RPC
+        # endpoint then rejects the request with 401. Enforce notebooklm
+        # service-cookie precedence here before fetching CSRF/session tokens.
+        from notebooklm.auth import AuthTokens, _load_storage_state, extract_cookies_from_storage, fetch_tokens
+
+        state = _load_storage_state(Path(auth_path))
+        cookies = extract_cookies_from_storage(state)
+        for c in state.get("cookies", []):
+            if c.get("domain") == "notebooklm.google.com" and c.get("name") in ("OSID", "__Secure-OSID"):
+                cookies[c["name"]] = c.get("value", "")
+        csrf_token, session_id = await fetch_tokens(cookies)
+        auth = AuthTokens(cookies=cookies, csrf_token=csrf_token, session_id=session_id)
+        return NotebookLMClient(auth)
+    except (AuthError, ValueError) as e:
+        # Auth expiry surfaces as a plain ValueError from notebooklm.auth.fetch_tokens
+        # (redirect to Google sign-in), not as AuthError — handle both.
+        LOG.warning(
+            "[NLM] NotebookLM authentication expired or missing. "
+            "Run in terminal: .venv\\Scripts\\notebooklm login  (%s)",
+            e,
         )
         return None
     except Exception as e:
-        LOG.debug(f"[NLM] Client init failed: {e}")
+        LOG.warning(f"[NLM] Client init failed: {e}")
         return None
 
 
+@asynccontextmanager
+async def _open_client():
+    """Yield an opened client, or None when no backend is available.
+
+    Wraps ``_get_client`` so callers can distinguish "no backend" (yields
+    None) from a real client session without tripping
+    ``'NoneType' object does not support the asynchronous context manager
+    protocol`` on the ``async with`` line.
+    """
+    client = await _get_client()
+    if client is None:
+        yield None
+        return
+    async with client:
+        yield client
+
+
 async def _find_notebook_by_id(client, notebook_id: str) -> Optional[Any]:
-    """Locate a notebook by its UUID or title fragment."""
+    """Locate a notebook by its UUID or title fragment with 0-scan fast path."""
+    if _NOTEBOOK_UUID_RE.match(notebook_id):
+        try:
+            return await client.notebooks.get(notebook_id)
+        except Exception as e:
+            LOG.debug(f"[NLM] Direct notebooks.get({notebook_id}) failed: {e}. Falling back to list scan.")
     try:
         notebooks = await client.notebooks.list()
         for nb in notebooks:
@@ -94,9 +149,9 @@ async def _find_notebook_by_id(client, notebook_id: str) -> Optional[Any]:
         return None
 
 
-async def _push_note_async(knight_id: str, title: str, content: str) -> bool:
-    """Push a note to a knight's Notebook."""
-    async with await _get_client() as client:
+async def push_note_async(knight_id: str, title: str, content: str) -> bool:
+    """Push a note to a knight's Notebook (async)."""
+    async with _open_client() as client:
         if not client:
             return False
         try:
@@ -122,9 +177,9 @@ async def _push_note_async(knight_id: str, title: str, content: str) -> bool:
             return False
 
 
-async def _push_source_async(knight_id: str, title: str, content: str) -> bool:
-    """Push a text source to a knight's Notebook."""
-    async with await _get_client() as client:
+async def push_source_async(knight_id: str, title: str, content: str) -> bool:
+    """Push a text source to a knight's Notebook (async)."""
+    async with _open_client() as client:
         if not client:
             return False
         try:
@@ -151,9 +206,9 @@ async def _push_source_async(knight_id: str, title: str, content: str) -> bool:
             return False
 
 
-async def _list_notebooks_async() -> List[Dict[str, Any]]:
-    """List all available notebooks from the authenticated account."""
-    async with await _get_client() as client:
+async def list_notebooks_async() -> List[Dict[str, Any]]:
+    """List all available notebooks from the authenticated account (async)."""
+    async with _open_client() as client:
         if not client:
             return []
         try:
@@ -162,7 +217,7 @@ async def _list_notebooks_async() -> List[Dict[str, Any]]:
                 {
                     "id": nb.id,
                     "title": nb.title,
-                    "source_count": getattr(nb, "source_count", 0),
+                    "source_count": getattr(nb, "sources_count", getattr(nb, "source_count", 0)),
                 }
                 for nb in notebooks
             ]
@@ -171,48 +226,51 @@ async def _list_notebooks_async() -> List[Dict[str, Any]]:
             return []
 
 
+async def query_notebook_async(knight_id: str, question: str) -> Optional[str]:
+    """Query a notebook via chat (async)."""
+    async with _open_client() as client:
+        if not client:
+            return None
+        try:
+            from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
+        except ImportError:
+            KNIGHT_NOTEBOOKS = {}
+        notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
+        if not notebook_id:
+            return None
+        nb = await _find_notebook_by_id(client, notebook_id)
+        if not nb:
+            return None
+        try:
+            result = await client.chat.ask(nb.id, question)
+            if hasattr(result, "answer"):
+                return str(result.answer)
+            return str(result)
+        except Exception as e:
+            LOG.error(f"[NLM] Chat query failed for {knight_id}: {e}")
+            return None
+
+
 # ── Public synchronous API ─────────────────────────────────────────────────
 
 def push_note(knight_id: str, title: str, content: str) -> bool:
     """Synchronously push a note to a Cloudbrain Notebook node."""
-    return _run_async(_push_note_async(knight_id, title, content))
+    return _run_async(push_note_async(knight_id, title, content))
 
 
 def push_source(knight_id: str, title: str, content: str) -> bool:
     """Synchronously push a text source to a Cloudbrain Notebook node."""
-    return _run_async(_push_source_async(knight_id, title, content))
+    return _run_async(push_source_async(knight_id, title, content))
 
 
 def list_notebooks() -> List[Dict[str, Any]]:
     """Synchronously list all available Gemini Notebooks."""
-    return _run_async(_list_notebooks_async())
+    return _run_async(list_notebooks_async())
 
 
 def query_notebook(knight_id: str, question: str) -> Optional[str]:
     """Query a notebook via chat (best-effort — may not be available in all contexts)."""
-    async def _query():
-        async with await _get_client() as client:
-            if not client:
-                return None
-            try:
-                from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
-            except ImportError:
-                KNIGHT_NOTEBOOKS = {}
-            notebook_id = KNIGHT_NOTEBOOKS.get(knight_id.upper())
-            if not notebook_id:
-                return None
-            nb = await _find_notebook_by_id(client, notebook_id)
-            if not nb:
-                return None
-            try:
-                result = await client.chat.ask(nb.id, question)
-                if hasattr(result, "answer"):
-                    return str(result.answer)
-                return str(result)
-            except Exception as e:
-                LOG.error(f"[NLM] Chat query failed for {knight_id}: {e}")
-                return None
-    return _run_async(_query())
+    return _run_async(query_notebook_async(knight_id, question))
 
 
 if __name__ == "__main__":

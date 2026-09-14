@@ -66,7 +66,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "MERLIN_OMEGA":        "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
     "SIR_HELIO":           "56820318-bb91-451f-aac4-4b46424898cf",
     "SIR_SONUS":           "6272aa35-c285-4edc-81bc-2824ab519edf",   # Sovereign_Workspace: SIR SONUS
-    "SIR_CODEX":           "8c656cfa-a189-409e-a72d-07692a47f17e",   # Camelot-OS v.1000
+    "SIR_CODEX":           "05f1985d-e356-45d9-85b8-d101013a90b8",   # Sovereign_Workspace: SIR CODEX (Verified Live)
     # Extended Knights (discovered from live account)
     "SIR_HEIMDALL":        "3205f189-91da-4272-96a9-3641fd642763",
     "SIR_GALAHAD":         "e0110853-14ef-403f-8def-bf3a5123986f",
@@ -97,8 +97,26 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
     "BIO_KINETIC_SWARM":   "93b21c40-10ff-4e89-a212-08f37b1297e1",   # Bio-Kinetic Swarm Node
     "SIR_GIDEON":          "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Sir Gideon: Hyperbolic Chamber, Z3 & Gideon Verdict Gate
-    "INVISIONED_MARKETING":"a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Invisioned Marketing Sovereign CloudBrain (WorldTree Root Tethered)
+    "INVISIONED_MARKETING":"e6374819-50ce-41cf-b6b3-99924ca6ab90",   # Invisioned Marketing: Agentic OS and Digital Strategy Dashboard (Verified Live)
     "KNIGHT_STRATEGOS":    "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Knight Strategos Marketing Assimilation Node
+    # Discovered Sovereign Knights (Sovereign_Workspace verified)
+    "SIR_OCTAVIAN":        "0d2af08b-f85b-4dc0-ae3a-5cf5aaf5e08a",   # Sovereign_Workspace: SIR OCTAVIAN
+    "SIR_OPENCLAW":        "f5f2179c-3320-48f1-ace4-4f9bdd71f9b7",   # Sovereign_Workspace: SIR OPENCLAW
+    "SIR_OUROBOROS":       "3e61cfb1-b62d-4e9b-893e-4735d1a55426",   # Sovereign_Workspace: SIR OUROBOROS
+    "SIR_LIBERTE":         "da5f74b8-d948-4c37-b7da-7eec1fa18e5f",   # Sovereign_Workspace: SIR LIBERTE
+    "SIR_ZEROCLAW":        "4b382f7d-f662-4daa-9438-082b025624dc",   # Sovereign_Workspace: SIR ZEROCLAW
+    "SIR_NANOBOT":         "e4fbff10-9241-480e-9d2c-1f9dac50c51a",   # Sovereign_Workspace: SIR NANOBOT
+    "SIR_GAWAIN":          "75c7862e-c0d2-40cb-8b20-ed6dcfadd049",   # Sovereign_Workspace: SIR GAWAIN
+    "SIR_HASHIMOTO":       "71399d4d-fabd-4897-a877-bf7e26cb9e96",   # Sovereign_Workspace: SIR HASHIMOTO
+    "SIR_VALERIAN":        "3d6e1ef4-a37a-4475-8cc1-b62aa6b148fc",   # Sovereign_Workspace: SIR VALERIAN
+    "SIR_VERITAS":         "781ad058-8418-4bbb-8459-73af3ed38184",   # Sovereign_Workspace: SIR VERITAS
+    "SIR_PROXY":           "4255d63e-b881-4efd-bd1d-dbbd649f96a4",   # Sovereign_Workspace: SIR PROXY
+    "SIR_AURELIUS":        "d46ebc2f-8681-4919-8815-4e3f41f37ad7",   # Sovereign_Workspace: SIR AURELIUS
+    "SIR_VAELEN":          "76769b00-864b-409f-89ab-8eef68d98d50",   # Sovereign_Workspace: SIR VAELEN
+    "SIR_SCAVENGER":       "104a6e2f-892a-42a7-b9ea-3b92f95abedd",   # Sovereign_Workspace: SIR SCAVENGER
+    "LADY_SPARKLE":        "b6ec57ed-e232-4b9b-9bcf-338b70bc5365",   # Sovereign_Workspace: LADY SPARKLE
+    "SIR_VISAGE":          "e41c0c29-a7ba-4bd8-94df-30eb9224f7f8",   # Sovereign_Workspace: SIR VISAGE
+    "SIR_MARCUS":          "1c55963f-4a02-4c26-92ed-e087ecfdf8b8",   # Sovereign_Workspace: SIR MARCUS
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
@@ -368,6 +386,7 @@ def route_by_domain(task_keywords: List[str]) -> List[str]:
     Mathematical domain router.
     Φ(task, n) = |intersection(task_keywords, domain_tags[n])| / |domain_tags[n]|
     Returns notebooks sorted by descending relevance score.
+    Dynamically overlays NOTEBOOK_MANIFEST.json tags across all 294 nodes.
     """
     kw_set = {k.lower() for k in task_keywords}
     scores: Dict[str, float] = {}
@@ -376,6 +395,22 @@ def route_by_domain(task_keywords: List[str]) -> List[str]:
         score = len(kw_set & tag_set) / len(tag_set) if tag_set else 0.0
         if score > 0:
             scores[knight] = score
+
+    # Manifest overlay
+    manifest_path = _CAMELOT_ROOT / "01_KERNEL" / "memory" / "NOTEBOOK_MANIFEST.json"
+    if manifest_path.exists():
+        try:
+            data = json.loads(manifest_path.read_text(encoding="utf-8"))
+            for nid, meta in data.get("notebooks", {}).items():
+                kid = meta.get("knight_id")
+                if kid and not meta.get("is_duplicate"):
+                    tags = set(meta.get("domain_tags", []))
+                    score = len(kw_set & tags) / len(tags) if tags else 0.0
+                    if score > scores.get(kid, 0.0):
+                        scores[kid] = score
+        except Exception:
+            pass
+
     return sorted(scores, key=lambda k: scores[k], reverse=True)
 
 
