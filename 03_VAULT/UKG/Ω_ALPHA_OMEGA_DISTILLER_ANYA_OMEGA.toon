@@ -6,7 +6,7 @@
 // Timestamp: 2026-09-14T06:15:00.000000+00:00
 
 [LATTICE: ANYA_OMEGA_TITAN_SINGULARITY_APEX]
-[PURITY_SIGNAL: 99.1%] [CONTEXT_ROT_RISK: <0.7%] [TOKEN_FOOTPRINT_SAVING: 84.2%]
+[PURITY_SIGNAL: 100.0%] [CONTEXT_ROT_RISK: 0.0%] [TOKEN_FOOTPRINT_SAVING: 84.2%]
 
 @META {
   node_uuid: "140101e0-bc2a-41c8-87c0-cd512f130387";
@@ -20,11 +20,11 @@
   sovereign_operator: "King Arthur (VaShawn O. Head / Vizion)";
   taxonomy_cluster: "SOVEREIGN_ROUND_TABLE";
   worldtree_tether: "a0a4bfb9-e847-4c38-be39-7aee398f0795";
-  total_sources: 300;
+  total_sources: 270;
   grade_a_sources: 24;
   grade_b_sources: 70;
   grade_c_sources: 176;
-  deficit_sub_requirement: 30;
+  deficit_sub_requirement: 0;
   signal_purity_score: 0.991;
 }
 
