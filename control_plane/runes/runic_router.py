@@ -499,6 +499,22 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_forge_harness",
     },
+    "//NOTEBOOK_EVOLVE": {
+        "knight": "merlin_omega",
+        "description": "Autonomous Notebook Architect (Lady M + Lady A + Merlin) audit, distill & scaffold",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_notebook_evolve",
+        "hydrate": False,
+    },
+    "//NOTEBOOK_AUDIT": {
+        "knight": "lady_mnemosyne",
+        "description": "Lady M & Lady A 5-tier source signal audit and categorization",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_notebook_audit",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1525,6 +1541,62 @@ def _handle_forge_harness(param: str, context: dict) -> dict:
     }
 
 
+def _handle_notebook_evolve(param: str, context: dict) -> dict:
+    """Invoke Autonomous Notebook Architect (Lady M + Lady A + Merlin) to evolve a notebook."""
+    target = param.strip() or "anya_omega"
+    from control_plane.cloudbrain.autonomous_notebook_architect import AutonomousNotebookArchitect
+    architect = AutonomousNotebookArchitect()
+    try:
+        import asyncio
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor() as pool:
+                res = pool.submit(asyncio.run, architect.evolve_notebook(target)).result()
+        else:
+            res = loop.run_until_complete(architect.evolve_notebook(target))
+    except Exception:
+        import asyncio
+        res = asyncio.run(architect.evolve_notebook(target))
+    return {
+        "action": "autonomous_notebook_evolution",
+        "target": target,
+        "result": res,
+        "status": "EVOLVED",
+    }
+
+
+def _handle_notebook_audit(param: str, context: dict) -> dict:
+    """Invoke Lady M & Lady A to audit and categorize a notebook's sources."""
+    target = param.strip() or "anya_omega"
+    from control_plane.cloudbrain.autonomous_notebook_architect import AutonomousNotebookArchitect, LadyMAuditor
+    from vfs.notebooklm_client import _get_client
+    import asyncio
+    async def _audit():
+        nb_id = AutonomousNotebookArchitect.resolve_notebook_id(target)
+        client = await _get_client()
+        async with client:
+            nb = await client.notebooks.get(nb_id)
+            sources = await client.sources.list(nb_id)
+            return LadyMAuditor.audit_sources(sources, nb.title)
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_running():
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor() as pool:
+                res = pool.submit(asyncio.run, _audit()).result()
+        else:
+            res = loop.run_until_complete(_audit())
+    except Exception:
+        res = asyncio.run(_audit())
+    return {
+        "action": "notebook_source_audit",
+        "target": target,
+        "stats": res.get("stats", {}),
+        "status": "AUDITED",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_boot": _handle_boot,
@@ -1566,6 +1638,8 @@ _HANDLERS = {
     "_handle_forge_source": _handle_forge_source,
     "_handle_crawl": _handle_crawl,
     "_handle_forge_harness": _handle_forge_harness,
+    "_handle_notebook_evolve": _handle_notebook_evolve,
+    "_handle_notebook_audit": _handle_notebook_audit,
 }
 
 
@@ -1639,6 +1713,15 @@ _RUNE_ALIASES: dict[str, str] = {
     "//forge-harness": "//FORGE_HARNESS",
     "/forge-harness": "//FORGE_HARNESS",
     "$forge-harness": "//FORGE_HARNESS",
+    # Autonomous Notebook Architect aliases
+    "//notebook_evolve": "//NOTEBOOK_EVOLVE",
+    "//notebook-evolve": "//NOTEBOOK_EVOLVE",
+    "/notebook-evolve": "//NOTEBOOK_EVOLVE",
+    "$notebook-evolve": "//NOTEBOOK_EVOLVE",
+    "//notebook_audit": "//NOTEBOOK_AUDIT",
+    "//notebook-audit": "//NOTEBOOK_AUDIT",
+    "/notebook-audit": "//NOTEBOOK_AUDIT",
+    "$notebook-audit": "//NOTEBOOK_AUDIT",
 }
 
 
@@ -1680,6 +1763,10 @@ def parse_rune(text: str) -> Optional[tuple[str, str]]:
 
 def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> RuneResult:
     """Route a rune to the correct knight and queue the task."""
+    if not param and " " in (rune or "").strip():
+        parts = (rune or "").strip().split(None, 1)
+        rune = parts[0]
+        param = parts[1]
     rune = normalize_rune(rune)
     context = dict(context or {})
     context["rune"] = rune
