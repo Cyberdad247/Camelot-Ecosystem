@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-13T04:08:21.696684+00:00",
+  "timestamp": "2026-09-14T08:08:08.084928+00:00",
   "mandate": "VERIFY //sync AND //evolve ON LIVING CAMELOT-OS NOTEBOOKS",
   "total_evaluated": 20,
   "sync_verified_count": 20,
@@ -231,7 +231,7 @@
       "sync": {
         "status": "SYNCHRONIZED",
         "details": {
-          "isomorphic_vfs": "RECONCILED_VIRTUAL",
+          "isomorphic_vfs": "MOUNTED",
           "dual_tier_tissue": "L1_L2_ALIGNED",
           "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
           "ouroboros_state": "ZERO_DRIFT",
@@ -303,7 +303,7 @@
       "sync": {
         "status": "SYNCHRONIZED",
         "details": {
-          "isomorphic_vfs": "RECONCILED_VIRTUAL",
+          "isomorphic_vfs": "MOUNTED",
           "dual_tier_tissue": "L1_L2_ALIGNED",
           "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
           "ouroboros_state": "ZERO_DRIFT",
@@ -471,7 +471,7 @@
       "sync": {
         "status": "SYNCHRONIZED",
         "details": {
-          "isomorphic_vfs": "RECONCILED_VIRTUAL",
+          "isomorphic_vfs": "MOUNTED",
           "dual_tier_tissue": "L1_L2_ALIGNED",
           "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
           "ouroboros_state": "ZERO_DRIFT",
