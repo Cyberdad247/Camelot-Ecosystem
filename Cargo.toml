@@ -20,6 +20,7 @@ members = [
     "wasm/ledger-engine",
     "crates/camelot-vkg-crystal",
     "crates/hive-ide-cli",
+    "crates/omni-forge-cli",
     "packages/crawler",
     "packages/harness-forge"
 ]
