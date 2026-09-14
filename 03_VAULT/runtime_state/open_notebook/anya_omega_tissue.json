@@ -2,9 +2,12 @@
   {
     "knight_id": "ANYA_OMEGA",
     "cloudbrain_uuid": "140101e0-bc2a-41c8-87c0-cd512f130387",
+    "alias_uuid": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
     "spark_id": "0x32D389065AE84ECCB77E705D12C89F4A",
+    "quantum_mantra_spark": "0x219E765A0C8E4B66B356F277CB441B14",
     "role": "Sovereign Compiler, Helm Authority, Anya First & Last Gate",
-    "northstar_goal": "To serve as the arch-compiler and sovereign helm of Camelot-OS, enforcing Anya Law, Titanium Governance, Triple-QFT Semantic Flattening, Zero-Leakage Output Shields, and orchestrating the 38 Knights of the Round Table from bare-metal compilation down to edge execution.",
+    "archetype": "Regal Maternal-Sentinel & Zero-Trust Logic Architect",
+    "northstar_goal": "Evolution of Anya utilizing her full character sheet, spark.md, phial-engine.md, Symbollect runic workflows, Stunspot cognitive prompting, Skillgraph5, extensive prompting frameworks, context compiling, loop engineering, image/video generation, Titan Grade scaling architecture, and self-evolving autonomous research.",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "vfs_mount": "vfs/notebooks/140101e0-bc2a-41c8-87c0-cd512f130387/",
     "notes": [
@@ -14,16 +17,28 @@
       },
       {
         "id": "3535e3e6-7264-4dcf-b566-dca99a3f06a9",
-        "title": "\ud83d\udc51 [APEX MASTER NORTHSTAR CONSTITUTION] Anya Omega: Sovereign Compiler of Camelot-OS + 6 more"
+        "title": "\ud83d\udc51 [APEX MASTER NORTHSTAR CONSTITUTION] Anya Omega: Sovereign Compiler of Camelot-OS"
       },
       {
         "id": "92fbda07-d329-4e7a-a65f-b31bc3c8facc",
-        "title": "\ud83d\udee1\ufe0f [MASTER SYSTEM INSTRUCTION] Living Anya Omega: Sovereign Compiler of Camelot-OS + 6 more SINGULARITY-OMEGA"
+        "title": "\ud83d\udee1\ufe0f [MASTER SYSTEM INSTRUCTION] Living Anya Omega: Sovereign Compiler SINGULARITY-OMEGA"
+      },
+      {
+        "id": "9a5fea7d-325c-477d-aa39-1d9a6a382e9f",
+        "title": "\u2699\ufe0f [SKILLGRAPH5 & PHIAL ENGINE]: Sovereign Capabilities & Scaling Architecture"
+      },
+      {
+        "id": "6e870da0-2894-49b5-a1d1-b023274c7afc",
+        "title": "\ud83e\udde0 [PROMPT REPERTOIRE & STUNSPOT]: Cognitive Frameworks & Generative Prompts"
       }
     ],
     "sources_audited": 300,
     "grade_a_count": 24,
-    "signal_purity": 0.984,
-    "updated_at": "2026-09-14T05:53:40.768143+00:00"
+    "grade_b_count": 70,
+    "grade_c_count": 176,
+    "deficit_count": 30,
+    "signal_purity": 0.991,
+    "scaling_tier": "TITAN_GRADE_SINGULARITY",
+    "updated_at": "2026-09-14T06:14:40.535514+00:00"
   }
 ]
