@@ -53,6 +53,7 @@ out/
 data/go-build/
 .pytest_cache/
 .venv/
+tools/notebooklm-py/
 *.egg-info/
 target/
 

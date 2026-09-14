@@ -69,26 +69,30 @@ async def _get_client() -> Optional[Any]:
         return None
     if os.environ.get("CAMELOT_OFFLINE_CLOUDBRAIN") == "1":
         return None
-    auth_path = r"C:\Users\vizio\.notebooklm\storage_state.json"
-    if not os.path.exists(auth_path):
+    
+    # Check default profile path first, then ~/.notebooklm/storage_state.json
+    possible_paths = [
+        Path.home() / ".notebooklm" / "profiles" / "default" / "storage_state.json",
+        Path.home() / ".notebooklm" / "storage_state.json",
+        Path(r"C:\Users\vizio\.notebooklm\storage_state.json"),
+    ]
+    auth_path = next((p for p in possible_paths if p.exists()), None)
+    if not auth_path:
         LOG.warning(
-            "[NLM] No NotebookLM session at %s. Run in terminal: "
-            ".venv\\Scripts\\notebooklm login",
-            auth_path,
+            "[NLM] No NotebookLM session found. Run in terminal: .venv\\Scripts\\notebooklm login"
         )
         return None
+
     try:
-        # Construct AuthTokens directly instead of NotebookLMClient.from_storage.
-        # The SDK's flat-cookie extraction (extract_cookies_from_storage) only
-        # gives .google.com precedence on name collisions, but OSID and
-        # __Secure-OSID are host-only cookies that exist on BOTH
-        # notebook.google.com and notebooklm.google.com. Whichever appears
-        # first in storage_state.json wins, and the notebooklm.google.com RPC
-        # endpoint then rejects the request with 401. Enforce notebooklm
-        # service-cookie precedence here before fetching CSRF/session tokens.
+        # Use NotebookLMClient.from_storage for full L1/L2/L3 rotation and cookie support
+        return await NotebookLMClient.from_storage(path=auth_path)
+    except Exception as e:
+        LOG.debug(f"[NLM] from_storage failed ({e}), attempting direct cookie extraction fallback...")
+
+    try:
         from notebooklm.auth import AuthTokens, _load_storage_state, extract_cookies_from_storage, fetch_tokens
 
-        state = _load_storage_state(Path(auth_path))
+        state = _load_storage_state(auth_path)
         cookies = extract_cookies_from_storage(state)
         for c in state.get("cookies", []):
             if c.get("domain") == "notebooklm.google.com" and c.get("name") in ("OSID", "__Secure-OSID"):
@@ -97,8 +101,6 @@ async def _get_client() -> Optional[Any]:
         auth = AuthTokens(cookies=cookies, csrf_token=csrf_token, session_id=session_id)
         return NotebookLMClient(auth)
     except (AuthError, ValueError) as e:
-        # Auth expiry surfaces as a plain ValueError from notebooklm.auth.fetch_tokens
-        # (redirect to Google sign-in), not as AuthError — handle both.
         LOG.warning(
             "[NLM] NotebookLM authentication expired or missing. "
             "Run in terminal: .venv\\Scripts\\notebooklm login  (%s)",
@@ -114,11 +116,20 @@ async def _get_client() -> Optional[Any]:
 async def _open_client():
     """Yield an opened client, or None when no backend is available.
 
-    Wraps ``_get_client`` so callers can distinguish "no backend" (yields
-    None) from a real client session without tripping
-    ``'NoneType' object does not support the asynchronous context manager
-    protocol`` on the ``async with`` line.
+    Wraps client acquisition in async context manager so callers can distinguish
+    'no backend' from a live client session.
     """
+    if not NOTEBOOKLM_AVAILABLE or os.environ.get("CAMELOT_OFFLINE_CLOUDBRAIN") == "1":
+        yield None
+        return
+
+    try:
+        async with NotebookLMClient.from_storage() as client:
+            yield client
+            return
+    except Exception as e:
+        LOG.debug(f"[NLM] Context manager from_storage failed ({e}), trying _get_client()...")
+
     client = await _get_client()
     if client is None:
         yield None
