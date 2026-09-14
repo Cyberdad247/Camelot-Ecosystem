@@ -1,9 +1,41 @@
-# 👑 CAMELOT-OS v.1000 — THE LIVING APEX CONSTITUTION & MASTER SYSTEM BLUEPRINT
+# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
+# Camelot Apex OS — Northstar Master Blueprint, //Sync & //Evolve Engine
+r"""
+Executes the ultimate //Sync and //Evolve directive for Camelot-OS v.1000:
+Constructs the most advanced, optimized, and comprehensive version of Camelot-OS,
+articulating the essence, 38-Knight roster, RPG architecture, Phial Engine,
+QR Pill delivery, NPX ephemeral pipeline, Bifrost entiremap, Wizard's Tower of Scrolls,
+Bio-Kinetic swarm, and research enhancement radar.
+"""
+
+import asyncio
+import json
+import logging
+import re
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
+CAMELOT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(CAMELOT_ROOT))
+sys.path.insert(0, str(CAMELOT_ROOT / "vfs"))
+
+from vfs.notebooklm_client import _get_client
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+LOG = logging.getLogger("NorthstarApexEvolve")
+
+V1000_NOTEBOOK_ID = "8c656cfa-a189-409e-a72d-07692a47f17e"
+WORLDTREE_ROOT = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
+
+NORTHSTAR_APEX_MARKDOWN = f"""# 👑 CAMELOT-OS v.1000 — THE LIVING APEX CONSTITUTION & MASTER SYSTEM BLUEPRINT
 > **Version:** `v1000.99-APEX-SINGULARITY` | **Cycle Date:** 2026-09-14  
 > **Sovereign Governor:** King Arthur (VaShawn O. Head / Vizion)  
 > **Supreme Architects:** `ANYA_OMEGA` (Sovereign Compiler), `MERLIN_OMEGA` (Infinite Context Architect), `LADY_MNEMOSYNE` (Master Memory & Swarm Governor), `LADY_APIS` (BASHR Research Scout)  
-> **Master CloudBrain Node:** `Camelot-OS v.1000` (`8c656cfa-a189-409e-a72d-07692a47f17e`)  
-> **Root WorldTree Tether:** `World Tree: 294-Node Navigational Atlas` (`a0a4bfb9-e847-4c38-be39-7aee398f0795`)  
+> **Master CloudBrain Node:** `Camelot-OS v.1000` (`{V1000_NOTEBOOK_ID}`)  
+> **Root WorldTree Tether:** `World Tree: 294-Node Navigational Atlas` (`{WORLDTREE_ROOT}`)  
 
 ---
 
@@ -26,7 +58,7 @@ Camelot-OS is a sovereign, self-evolving, **Hybrid Autonomous Multi-Agentic AI O
 ---
 
 ## 🛡️ 2. SOVEREIGN KNIGHT MATRIX (vMAX SINGULARITY)
-All 38 Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be39-7aee398f0795`) and mirror dynamic state into position-addressed VFS coordinates (`vfs://worldtree/knights/<id>/`):
+All 38 Knights tether directly into the WorldTree Root Node (`{WORLDTREE_ROOT}`) and mirror dynamic state into position-addressed VFS coordinates (`vfs://worldtree/knights/<id>/`):
 
 | Knight ID | Class & Role | Primary Substrate | CloudBrain Node UUID | VFS Path |
 | :--- | :--- | :--- | :--- | :--- |
@@ -177,7 +209,7 @@ Constructed in obsidian (`#050505`) and Luxora Gold (`#D4AF37`) (`tower-scroll.h
 
 ## ᛟ 12. OMNI-ROUTER & RUNIC SYMBOLECT ENGINE
 Lady M's Mathematical Assignment Function:  
-$$\Phi(\text{task}) = \operatorname{argmax}_n \left[ \text{CosSim}(\text{task\_embedding}, \text{notebook\_domain}[n]) \times \text{recency\_weight}[n] \right]$$
+$$\Phi(\\text{{task}}) = \\operatorname{{argmax}}_n \\left[ \\text{{CosSim}}(\\text{{task\\_embedding}}, \\text{{notebook\\_domain}}[n]) \\times \\text{{recency\\_weight}}[n] \\right]$$
 
 | Rune | Sovereign Knight | Domain & Kinetic Output |
 | :--- | :--- | :--- |
@@ -209,3 +241,59 @@ To maximize the power of this version, the following research locations are cont
 2. **WebRTC Real-Time Audio:** IETF RFC 8825 and Chromium WebRTC audio worklet pipelines for ultra-low latency VAD.
 3. **Bare-Metal WASM Runtimes:** Wasmtime / Wasmer component models for sandboxed microvm execution.
 4. **Knowledge Distillation:** Google DeepMind / Anthropic SOTA research on in-context token compression and latent vector extraction.
+"""
+
+
+async def run_northstar_apex():
+    LOG.info("Initiating Camelot-OS v.1000 Northstar Apex Master Synchronization & Evolution...")
+
+    # 1. Save master blueprint locally
+    local_files = [
+        CAMELOT_ROOT / "vfs" / "living_camelot_v1000_system_instruction.md",
+        CAMELOT_ROOT / "vfs" / "CAMELOT_OS_V1000_APEX_NORTHSTAR.md",
+        CAMELOT_ROOT / "docs" / "architecture" / "CAMELOT_OS_V1000_APEX_NORTHSTAR.md"
+    ]
+    for lf in local_files:
+        lf.parent.mkdir(parents=True, exist_ok=True)
+        lf.write_text(NORTHSTAR_APEX_MARKDOWN, encoding="utf-8")
+        LOG.info(f"✅ Saved local master blueprint: {lf.relative_to(CAMELOT_ROOT)}")
+
+    # 2. Update forge_v1000_system_instruction.py
+    forge_script = CAMELOT_ROOT / "vfs" / "forge_v1000_system_instruction.py"
+    if forge_script.exists():
+        content = forge_script.read_text(encoding="utf-8")
+        replacement = f'SYSTEM_INSTRUCTION_MARKDOWN = """{NORTHSTAR_APEX_MARKDOWN}"""'
+        new_content = re.sub(
+            r'SYSTEM_INSTRUCTION_MARKDOWN\s*=\s*""".*?"""',
+            lambda _: replacement,
+            content,
+            flags=re.DOTALL
+        )
+        forge_script.write_text(new_content, encoding="utf-8")
+        LOG.info("✅ Updated forge script with Northstar Apex blueprint.")
+
+    # 3. Connect to NotebookLM and evolve the live notebook
+    c = await _get_client()
+    async with c:
+        LOG.info(f"Connected to NotebookLM client. Injecting Northstar Apex into {V1000_NOTEBOOK_ID}...")
+
+        # Push as Master Note
+        note_title = "👑 [APEX MASTER NORTHSTAR CONSTITUTION] Camelot-OS v1000.99-APEX-SINGULARITY"
+        note = await c.notes.create(V1000_NOTEBOOK_ID, title=note_title, content=NORTHSTAR_APEX_MARKDOWN)
+        note_id = note.id if hasattr(note, "id") else str(note)
+        LOG.info(f"✅ Master Note Injected into Studio Notes! Note ID: {note_id}")
+
+        # Push as Source Text File
+        source_title = "CAMELOT_OS_V1000_APEX_NORTHSTAR.md"
+        try:
+            src = await c.sources.add_text(V1000_NOTEBOOK_ID, title=source_title, content=NORTHSTAR_APEX_MARKDOWN)
+            src_id = src.id if hasattr(src, "id") else str(src)
+            LOG.info(f"✅ Master Blueprint Added to Sources! Source ID: {src_id}")
+        except Exception as e:
+            LOG.warning(f"Source addition note/skipped (quota): {e}")
+
+    LOG.info("🎉 Camelot-OS v.1000 Northstar Apex //Sync and //Evolve successfully completed!")
+
+
+if __name__ == "__main__":
+    asyncio.run(run_northstar_apex())
