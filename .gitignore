@@ -57,6 +57,7 @@ data/go-build/
 .venv/
 tools/notebooklm-py/
 tools/arthurian-omni-forge/
+tools/agent-reach/
 *.egg-info/
 target/
 
