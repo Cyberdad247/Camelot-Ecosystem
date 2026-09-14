@@ -32,7 +32,11 @@
       "growth_targets": [
         "docs/architecture/sovereign_round_table",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 262,
+      "has_living_manifest": true,
+      "living_note_id": "15f3d675-c353-488f-af12-cee33ab48e1c",
+      "living_source_id": "85104e6b-0f63-46db-a623-5f8e4b385d7e"
     },
     "3925e761-0283-4391-9efc-5e596b7b25c3": {
       "id": "3925e761-0283-4391-9efc-5e596b7b25c3",
@@ -75,7 +79,11 @@
       "growth_targets": [
         "docs/architecture/camelot_systems_architecture",
         "01_KERNEL/directives/camelot_v1000"
-      ]
+      ],
+      "verified_source_count": 315,
+      "has_living_manifest": true,
+      "living_note_id": "6e8dc4f9-6f4b-4a56-8fc3-bba2ca33e27d",
+      "living_source_id": null
     },
     "ec6fe6e0-a47c-422e-a747-7d1d321c24a4": {
       "id": "ec6fe6e0-a47c-422e-a747-7d1d321c24a4",
@@ -170,7 +178,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/antigravity"
-      ]
+      ],
+      "verified_source_count": 52,
+      "has_living_manifest": true,
+      "living_note_id": "038e4717-147f-47dc-9697-b8284026c8a9",
+      "living_source_id": "1091345d-3cbe-4833-81bb-4bdef5635e4e"
     },
     "140101e0-bc2a-41c8-87c0-cd512f130387": {
       "id": "140101e0-bc2a-41c8-87c0-cd512f130387",
@@ -194,7 +206,11 @@
       "growth_targets": [
         "docs/architecture/sovereign_round_table",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 300,
+      "has_living_manifest": true,
+      "living_note_id": "9bd1df87-c5ab-4715-ab4e-07e3017fbe44",
+      "living_source_id": null
     },
     "f7707daa-2d10-4db8-8fda-be4661a27793": {
       "id": "f7707daa-2d10-4db8-8fda-be4661a27793",
@@ -282,7 +298,11 @@
       "growth_targets": [
         "docs/architecture/camelot_systems_architecture",
         "01_KERNEL/directives/knight_strategos"
-      ]
+      ],
+      "verified_source_count": 80,
+      "has_living_manifest": true,
+      "living_note_id": "76e9f4dc-2b07-4d9f-aea6-ab5f795c3cb1",
+      "living_source_id": "5a54f33f-33d1-488c-86ab-922c092469b8"
     },
     "876f30c4-efce-415d-8098-cad500de159c": {
       "id": "876f30c4-efce-415d-8098-cad500de159c",
@@ -352,7 +372,11 @@
       "growth_targets": [
         "docs/architecture/codebases_dev_tooling",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 55,
+      "has_living_manifest": true,
+      "living_note_id": "9851fc34-1503-4e89-b52c-9a479aef3d5b",
+      "living_source_id": "d292f207-a775-4584-9093-00901944a7de"
     },
     "f4ec645e-ab54-404f-a6c9-d2c2ac1f21bf": {
       "id": "f4ec645e-ab54-404f-a6c9-d2c2ac1f21bf",
@@ -489,7 +513,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 60,
+      "has_living_manifest": true,
+      "living_note_id": "32e12679-625a-44c9-acd0-7cfccf755c1f",
+      "living_source_id": "b1ad47ac-e887-4262-b221-d1139e8ecd64"
     },
     "18ef4da2-0a2a-473c-a337-0a9e6770f371": {
       "id": "18ef4da2-0a2a-473c-a337-0a9e6770f371",
@@ -636,7 +664,11 @@
       "growth_targets": [
         "docs/architecture/marketing_wealth_brand",
         "01_KERNEL/directives/invisioned_marketing"
-      ]
+      ],
+      "verified_source_count": 171,
+      "has_living_manifest": true,
+      "living_note_id": "50900cf4-aa50-46bb-8e7c-a0b879371f30",
+      "living_source_id": "a602cd63-68f3-4450-8096-4da64b2be5d0"
     },
     "8531e6d4-6fc4-428f-a754-b9e9592ac7ff": {
       "id": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
@@ -658,7 +690,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/kickbox"
-      ]
+      ],
+      "verified_source_count": 56,
+      "has_living_manifest": true,
+      "living_note_id": "a0e7824b-1254-4ce2-903e-d539c1137be5",
+      "living_source_id": "2ecc58d3-ef52-4958-baee-718399a627f4"
     },
     "cc5f6c4f-efb6-4b69-99bb-66f705d385fd": {
       "id": "cc5f6c4f-efb6-4b69-99bb-66f705d385fd",
@@ -844,7 +880,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 89,
+      "has_living_manifest": true,
+      "living_note_id": "de3b3fd6-5c2c-4393-99a0-3a13b5942c7c",
+      "living_source_id": "833e3c9b-a63a-43aa-938b-dd607cdf5766"
     },
     "d8c07571-1351-4b74-8ffb-9b8313cb7fac": {
       "id": "d8c07571-1351-4b74-8ffb-9b8313cb7fac",
@@ -983,7 +1023,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 88,
+      "has_living_manifest": true,
+      "living_note_id": "4a726c19-ac7f-4859-9a2e-d4ebb1daab35",
+      "living_source_id": "c654fdd3-3e3c-4229-989e-520a813d6659"
     },
     "8b2850c8-edcb-4ba0-967d-6adcfbbe0a8b": {
       "id": "8b2850c8-edcb-4ba0-967d-6adcfbbe0a8b",
@@ -1157,7 +1201,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 192,
+      "has_living_manifest": true,
+      "living_note_id": "f2b0c3dc-e995-47d6-aeda-f29fea8c184f",
+      "living_source_id": "5d589ddb-3293-4038-a19e-a112f7c5d5fc"
     },
     "259b796f-fdd0-48c0-a68e-607dd2053d22": {
       "id": "259b796f-fdd0-48c0-a68e-607dd2053d22",
@@ -1273,7 +1321,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 190,
+      "has_living_manifest": true,
+      "living_note_id": "aa7e9fc1-1b65-46da-b964-419720c079c4",
+      "living_source_id": "365e070b-e728-4388-809e-972f7d5a588c"
     },
     "33561481-900f-4b2e-b4e0-c1461230500a": {
       "id": "33561481-900f-4b2e-b4e0-c1461230500a",
@@ -1593,7 +1645,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 98,
+      "has_living_manifest": true,
+      "living_note_id": "6faf7e78-f0d8-4c16-8d9e-433a5870de66",
+      "living_source_id": "b79fe00a-42fa-499e-ad18-a3ffeca89b79"
     },
     "636487dd-e6e6-4b25-bece-0c754d27ba89": {
       "id": "636487dd-e6e6-4b25-bece-0c754d27ba89",
@@ -1818,7 +1874,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 112,
+      "has_living_manifest": true,
+      "living_note_id": "93b19ecc-6b29-4277-9ccf-267c5e1e9651",
+      "living_source_id": "7c234c86-0074-4e83-9cbb-0e00c02223af"
     },
     "69ab6126-bc7d-4c3f-8739-f1861e03e184": {
       "id": "69ab6126-bc7d-4c3f-8739-f1861e03e184",
@@ -1860,7 +1920,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/inspira"
-      ]
+      ],
+      "verified_source_count": 266,
+      "has_living_manifest": true,
+      "living_note_id": "2ad774c8-681d-48dd-b3ab-d0d44e406787",
+      "living_source_id": "946c5ed5-aee3-447f-b7eb-3abbbc74ab93"
     },
     "5ffaf13c-4db5-4619-9d6d-4bb1f660e91a": {
       "id": "5ffaf13c-4db5-4619-9d6d-4bb1f660e91a",
@@ -1903,7 +1967,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 128,
+      "has_living_manifest": true,
+      "living_note_id": "662429e9-ba86-4a98-a98f-f36567020fed",
+      "living_source_id": "75a49b5f-eb38-47b4-8956-ca5d01db31d2"
     },
     "f8779e7a-c545-43ee-8f08-87c69cb8c68c": {
       "id": "f8779e7a-c545-43ee-8f08-87c69cb8c68c",
@@ -1994,7 +2062,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 66,
+      "has_living_manifest": true,
+      "living_note_id": "d9bdaada-69a4-460f-bf4b-d3fb35977c4d",
+      "living_source_id": "fd2d3c66-9f6a-4e6e-b761-199c6a6a61ef"
     },
     "9ad4a888-9442-4225-bc6f-c7809b6b3796": {
       "id": "9ad4a888-9442-4225-bc6f-c7809b6b3796",
@@ -2169,7 +2241,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 300,
+      "has_living_manifest": true,
+      "living_note_id": "96e93144-104c-4f85-9897-6a4944379810",
+      "living_source_id": null
     },
     "3d90aabc-065a-4c48-beaf-692445aba107": {
       "id": "3d90aabc-065a-4c48-beaf-692445aba107",
@@ -2234,7 +2310,11 @@
       "growth_targets": [
         "docs/architecture/sovereign_round_table",
         "01_KERNEL/directives/sir_helio"
-      ]
+      ],
+      "verified_source_count": 82,
+      "has_living_manifest": true,
+      "living_note_id": "9dd4a6f1-59f8-472f-816c-eb4995878b2e",
+      "living_source_id": "6da33325-97f3-4106-8bd7-6fb56c738fa6"
     },
     "2c4b898c-44a4-46b1-8f6b-49173d0aef92": {
       "id": "2c4b898c-44a4-46b1-8f6b-49173d0aef92",
@@ -2491,7 +2571,11 @@
       "growth_targets": [
         "docs/architecture/camelot_systems_architecture",
         "01_KERNEL/directives/father_camelot"
-      ]
+      ],
+      "verified_source_count": 61,
+      "has_living_manifest": true,
+      "living_note_id": "e884eeeb-3609-4fc0-bdd4-eb9e81dda461",
+      "living_source_id": "eeea78a2-3ec0-4c39-880e-7cbafaf85cfa"
     },
     "01d4b690-9e71-4c3f-b8f9-2c803ea3e2cd": {
       "id": "01d4b690-9e71-4c3f-b8f9-2c803ea3e2cd",
@@ -2896,7 +2980,11 @@
       "growth_targets": [
         "docs/architecture/camelot_systems_architecture",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 80,
+      "has_living_manifest": true,
+      "living_note_id": "640cd96c-d348-49c4-a651-b0e91cc1eb75",
+      "living_source_id": "b763648b-7834-41ac-9b50-3bfde70b0b12"
     },
     "28bca096-1ba2-4e47-8b92-aa88e90be210": {
       "id": "28bca096-1ba2-4e47-8b92-aa88e90be210",
@@ -3551,7 +3639,11 @@
       "growth_targets": [
         "docs/architecture/camelot_systems_architecture",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 78,
+      "has_living_manifest": true,
+      "living_note_id": "31f08e92-88de-4b18-b11f-c9b064ddd791",
+      "living_source_id": "7646bbf4-d99d-47a5-ae2a-caf9501e78a9"
     },
     "a9109641-116a-4589-a867-2e0d27ee5536": {
       "id": "a9109641-116a-4589-a867-2e0d27ee5536",
@@ -3617,7 +3709,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 111,
+      "has_living_manifest": true,
+      "living_note_id": null,
+      "living_source_id": null
     },
     "ae1da39c-01b5-4dc4-8f22-b2fc7e9d56b9": {
       "id": "ae1da39c-01b5-4dc4-8f22-b2fc7e9d56b9",
@@ -3967,7 +4063,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 126,
+      "has_living_manifest": true,
+      "living_note_id": "6207b1dd-4ecf-45df-adb1-e1ada84f2ee2",
+      "living_source_id": "bd5b89ef-63fa-42fa-99b9-b63407f0a5c4"
     },
     "482222a1-f7e6-4a36-8f4f-cad872b9f511": {
       "id": "482222a1-f7e6-4a36-8f4f-cad872b9f511",
@@ -4038,7 +4138,11 @@
       "growth_targets": [
         "docs/architecture/sovereign_round_table",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 113,
+      "has_living_manifest": true,
+      "living_note_id": "a9353fa9-3daa-4895-b073-6901124733cc",
+      "living_source_id": "cb3b2d9f-65f8-4546-9783-7a51375d91f2"
     },
     "feb0933e-7d77-4f03-82ff-3e9070541a13": {
       "id": "feb0933e-7d77-4f03-82ff-3e9070541a13",
@@ -5520,7 +5624,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 241,
+      "has_living_manifest": true,
+      "living_note_id": "6f866ecd-8e2b-48ff-a1c2-4b7ed54c919a",
+      "living_source_id": "9cbafcc7-d8a7-432a-98f8-6ebd0cf66e52"
     },
     "83d5db98-9933-4664-9c5a-83ba65342282": {
       "id": "83d5db98-9933-4664-9c5a-83ba65342282",
@@ -5720,7 +5828,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 59,
+      "has_living_manifest": true,
+      "living_note_id": "8b558ae0-f071-4581-b6f1-3b2558fac524",
+      "living_source_id": "006a93c2-5c14-4d3d-b77f-1c463c201112"
     },
     "b7454711-f464-4ca6-bc81-e2ed7e205087": {
       "id": "b7454711-f464-4ca6-bc81-e2ed7e205087",
@@ -5968,7 +6080,11 @@
       "growth_targets": [
         "docs/architecture/ai_multiagent_research",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 58,
+      "has_living_manifest": true,
+      "living_note_id": "6832fbda-98f7-4bb6-b2a2-3c58d17f28c6",
+      "living_source_id": "58ea79fe-67ca-4e86-98c4-52fdd7e246b7"
     },
     "baf72ef4-9a44-4cfc-a754-37801176ae0f": {
       "id": "baf72ef4-9a44-4cfc-a754-37801176ae0f",
@@ -6238,7 +6354,11 @@
       "growth_targets": [
         "docs/architecture/specialized_substrates",
         "01_KERNEL/directives/general"
-      ]
+      ],
+      "verified_source_count": 61,
+      "has_living_manifest": true,
+      "living_note_id": "142006c5-81ff-4d70-86c4-fc5a033e9bc2",
+      "living_source_id": "1806f2b1-e1dd-431c-a65d-01b5c2d2861f"
     },
     "c34389bd-87c0-4ed5-bf81-a3b7b0c52d74": {
       "id": "c34389bd-87c0-4ed5-bf81-a3b7b0c52d74",
