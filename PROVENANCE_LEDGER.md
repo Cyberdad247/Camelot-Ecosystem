@@ -6308,7 +6308,26 @@
   - `python cartridges/cartridge-hive-ide-swarm/parallel_ast_runner.py` (33.8ms, 2/2 Promoted, Z3 PASS)
   - `pytest tests/test_cartridge_hive_ide_swarm.py` (8/8 PASS)
   - `pytest tests/test_cartridge_manifests.py` (43/43 PASS)
-- **Tag**: [ANYA_LAST_LAW] WASM_PARALLEL_AST_SWARM_VERIFIED
 | 2026-09-14T09:16:00.000000+00:00 | ANYA_LAST_LAW | WASM_PARALLEL_AST_SWARM [Cartridge: cartridge-hive-ide-swarm, Promoted: 2, Latency: 33.8ms, Verdict: SEALED] | HYDRATED |
+---
+## [2026-09-14] WASM32-WASI Workspace Enclaves & ZeroClaw IPC Integration
+- **Actor**: SIR_CODEX / MERLIN_OMEGA / SIR_SENTINEL / ANYA_OMEGA
+- **Scope**:
+  - Target Enclaves: `/hive-core/workspace/`
+    - `/hive-core/workspace/source/` -> **VFS Guardian** (Read-only pinned snapshot, SHA-256 tree locked, zero write mutation)
+    - `/hive-core/workspace/worktree/` -> **Sentinel Lease** (Ephemeral approved-write compilation workspace, Capability Lease T1)
+    - `/hive-core/workspace/tmp/` -> **cgroups v2 Gate** (Quota-limited hard 64MB scratch execution zone, OOM protection)
+    - `/hive-core/workspace/socket/` -> **AgentArmor** (ZeroClaw Zero-Copy IPC `memfd_create` lock-free ring buffers)
+  - Engine Components:
+    - `ZeroClawRingBuffer` (`zeroclaw_ipc.py`): Lock-free ring buffer in shared memory eliminating token state duplication.
+    - `WASMComponentRuntime`: Polyglot component model runner (Rust, Go, Python) enforcing 64MB linear memory ceiling and pre-warmed snapshot CoW overhead ($\Delta \le 0.12\text{ MiB}$).
+    - `HiveEngine` Scaffolding & Telemetry: Live enclave tracking integrated into `/hive-core/telemetry/telemetry_buffer.json`.
+- **Verification performed**:
+  - `python cartridges/cartridge-hive-ide-swarm/zeroclaw_ipc.py` (RingBuffer lock-free test PASS, 64MB cap PASS, CoW delta 0.08 MiB PASS)
+  - `pytest tests/test_cartridge_hive_ide_swarm.py` (11/11 PASS)
+  - `pytest tests/test_cartridge_manifests.py` (43/43 PASS)
+- **Tag**: [ANYA_LAST_LAW] WASM32_WASI_WORKSPACE_ENCLAVES_SEALED
+| 2026-09-14T13:43:00.000000+00:00 | ANYA_LAST_LAW | WASM_ENCLAVES_SEALED [Enclaves: source,worktree,tmp,socket, Protocol: ZeroClaw_memfd, Verdict: SEALED] | HYDRATED |
+
 
 

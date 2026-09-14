@@ -1,0 +1,11 @@
+{
+  "enclave": "Sentinel Lease",
+  "path": "/hive-core/workspace/worktree/",
+  "permission": "EPHEMERAL_APPROVED_WRITE",
+  "enforced_by": "SIR_SENTINEL",
+  "lease_policy": "CAPABILITY_LEASE_T1",
+  "max_cow_delta_mib": 0.12,
+  "max_memory_mb": 512,
+  "requires_z3_verification": true,
+  "status": "ACTIVE_ENFORCEMENT"
+}

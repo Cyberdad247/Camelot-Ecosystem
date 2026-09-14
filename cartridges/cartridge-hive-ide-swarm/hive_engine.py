@@ -79,9 +79,11 @@ class HiveEngine:
         self.ensure_scaffolding()
 
     def ensure_scaffolding(self) -> None:
-        """Enforces positional memory layout: workspace, telemetry, refractions, socket."""
+        """Enforces positional memory layout: workspace, telemetry, refractions, socket, and sub-enclaves."""
         for path in [self.workspace, self.telemetry, self.refractions, self.socket]:
             path.mkdir(parents=True, exist_ok=True)
+        for enclave in ["source", "worktree", "tmp", "socket"]:
+            (self.workspace / enclave).mkdir(parents=True, exist_ok=True)
 
     def spawn_sandbox(self, knight_id: str, task_id: Optional[str] = None) -> MicroVMSandbox:
         """
@@ -208,6 +210,12 @@ class HiveEngine:
                 }
                 for s in self.active_sandboxes.values()
             ],
+            "workspace_enclaves": {
+                "source": "VFS Guardian (Read-Only)",
+                "worktree": "Sentinel Lease (Approved-Write)",
+                "tmp": "cgroups v2 Gate (64MB Scratch)",
+                "socket": "AgentArmor (ZeroClaw Zero-Copy IPC)"
+            },
             "mounted_skills": list(self.mounted_skills.keys())
         }
 

@@ -29,6 +29,14 @@ from hive_engine import (
     COW_DELTA_LIMIT_MIB,
 )
 from parallel_ast_runner import ParallelASTExecutionEngine
+from zeroclaw_ipc import (
+    ZeroClawRingBuffer,
+    WASMComponentRuntime,
+    VFSGuardianError,
+    CgroupsV2QuotaExceeded,
+    LINEAR_MEMORY_HARD_CAP_MB,
+    COW_OVERHEAD_CEILING_MIB,
+)
 from vfs.worldtree_cartridge_knight_bridge import WorldtreeCartridgeKnightBridge
 
 
@@ -143,4 +151,52 @@ def test_pdg_security_audit_rejection():
 
     eval_code = "def eval_bad():\n    eval('1+1')\n"
     assert runner.audit_pdg_security(eval_code) is False
+
+
+def test_workspace_enclaves_structure():
+    workspace = ROOT / "hive-core" / "workspace"
+    for enc in ["source", "worktree", "tmp", "socket"]:
+        assert (workspace / enc).is_dir(), f"Missing workspace enclave {enc}"
+
+    assert (workspace / "source" / "guardian.json").is_file()
+    assert (workspace / "worktree" / "sentinel_lease.json").is_file()
+    assert (workspace / "tmp" / "cgroup_quota.json").is_file()
+    assert (workspace / "socket" / "zeroclaw_ring.json").is_file()
+
+
+def test_zeroclaw_ring_buffer_lock_free():
+    ring = ZeroClawRingBuffer(buffer_id="ring-test")
+    data = b'{"msg": "AST_STREAM_DATA", "tokens": 0}'
+    written = ring.write_packet(data)
+    assert written > len(data)
+
+    read_back = ring.read_packet()
+    assert read_back == data
+    assert ring.read_packet() is None
+
+
+def test_wasm_component_runtime_and_guardian(tmp_path):
+    runtime = WASMComponentRuntime(root_dir=tmp_path)
+    # Ensure directories
+    for enc in ["source", "worktree", "tmp", "socket"]:
+        (tmp_path / "hive-core" / "workspace" / enc).mkdir(parents=True, exist_ok=True)
+
+    # Spawn within 64MB hard ceiling
+    comp = runtime.spawn_prewarmed_component("comp-01", "rust", "SIR_CODEX", 32.0)
+    assert comp["linear_memory_mb"] == 32.0
+    assert comp["cow_delta_mib"] <= COW_OVERHEAD_CEILING_MIB
+
+    # Attempt allocation beyond 64MB hard cap -> must raise CgroupsV2QuotaExceeded
+    with pytest.raises(CgroupsV2QuotaExceeded):
+        runtime.allocate_linear_memory("comp-oom", 128.0)
+
+    # Attempt write under pinned source enclave -> must raise VFSGuardianError
+    forbidden_target = tmp_path / "hive-core" / "workspace" / "source" / "injected.py"
+    with pytest.raises(VFSGuardianError):
+        runtime.enforce_vfs_guardian(forbidden_target)
+
+    # Evaporate cleanly
+    evaporated = runtime.evaporate_component("comp-01")
+    assert evaporated is True
+
 

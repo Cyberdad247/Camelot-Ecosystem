@@ -1,0 +1,14 @@
+{
+  "enclave": "AgentArmor",
+  "path": "/hive-core/workspace/socket/",
+  "ipc_protocol": "ZeroClaw_memfd_ring_buffer",
+  "enforced_by": "AGENT_ARMOR",
+  "lock_free": true,
+  "ring_buffer_size_kb": 128,
+  "supported_mechanisms": [
+    "memfd_create",
+    "shm_open",
+    "windows_named_pipe"
+  ],
+  "status": "ARMORED"
+}

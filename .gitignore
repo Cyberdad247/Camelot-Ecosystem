@@ -34,6 +34,8 @@ cap_sid
 .antigravity_backups/
 temp/
 tmp/
+!hive-core/workspace/tmp/
+!hive-core/workspace/tmp/**
 tmp_awesome_repo/
 data/.pytest_tmp/
 data/.pytest_temp/
