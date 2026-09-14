@@ -1,0 +1,18 @@
+{
+  "timestamp": 1789397068.0108213,
+  "governor": "HERMES_PRIME + PALADIN_HEIMDALL",
+  "verdict": "HEIMDALL_PERIMETER_LOCKED",
+  "ports": {
+    ":3001 (Express/WS)": true,
+    ":8095 (Mobile Bridge)": true
+  },
+  "nodes": {
+    "cybertronia": true,
+    "vashawns_s26_ultra": false,
+    "fothers_camelot": false,
+    "lakesha": true,
+    "camelot_relay_modal": false,
+    "kba_services": false,
+    "motorola_moto_g_power": true
+  }
+}
