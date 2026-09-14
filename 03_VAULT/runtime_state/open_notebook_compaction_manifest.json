@@ -1,0 +1,161 @@
+{
+  "timestamp": 1789397457.750848,
+  "total_repositories": 17,
+  "db_size_mb": 0.05,
+  "memory_bounded": true,
+  "shards": [
+    {
+      "shard_id": "shard_arthurian_omni_forge",
+      "repository_name": "arthurian-omni-forge",
+      "layer_id": "L1_CONTROL_ORCHESTRATION",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "331ee7215da3274dc486d2197a408c6e7396f62795d6d083740db7bf484b3cee",
+      "created_at": 1789397457.6628296
+    },
+    {
+      "shard_id": "shard_blueprint_os",
+      "repository_name": "Blueprint-OS",
+      "layer_id": "L1_CONTROL_ORCHESTRATION",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "1fac6a2b8c3f87dea3c46bfa8d164dfdf326b81aebd001b10badc7afd8fd49b4",
+      "created_at": 1789397457.6693568
+    },
+    {
+      "shard_id": "shard_arthurian_omni_forge",
+      "repository_name": "arthurian-omni-forge",
+      "layer_id": "L1_CONTROL_ORCHESTRATION",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "331ee7215da3274dc486d2197a408c6e7396f62795d6d083740db7bf484b3cee",
+      "created_at": 1789397457.6755123
+    },
+    {
+      "shard_id": "shard_camelot_vps",
+      "repository_name": "Camelot-VPS",
+      "layer_id": "L1_CONTROL_ORCHESTRATION",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "e2192a67504a2acbd9a148196c91efbe1b4dcd0cfdfd9fd26abe828ef7ae2c5d",
+      "created_at": 1789397457.681303
+    },
+    {
+      "shard_id": "shard_qtscrcpy",
+      "repository_name": "QtScrcpy",
+      "layer_id": "L2_UI_UX_EDGE_RENDERING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "8d90c646d52928b8e8f4f8c7732931d4bd3f19923530b9eb14e804c4ac56fad8",
+      "created_at": 1789397457.6894145
+    },
+    {
+      "shard_id": "shard_ncnn",
+      "repository_name": "ncnn",
+      "layer_id": "L2_UI_UX_EDGE_RENDERING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "95b4008ef54ffa57411ec16ed9a6a01585888a3ed5f0b71b3a888339c20f7d16",
+      "created_at": 1789397457.6963382
+    },
+    {
+      "shard_id": "shard_ark_cli",
+      "repository_name": "ark-cli",
+      "layer_id": "L2_UI_UX_EDGE_RENDERING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "8c3c076a6b3bea6c7aa181a8b9a97029f011bfbd06199694256e77efe1606d3d",
+      "created_at": 1789397457.7035756
+    },
+    {
+      "shard_id": "shard_jcode.git",
+      "repository_name": "jcode.git",
+      "layer_id": "L2_UI_UX_EDGE_RENDERING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "d34d0b581163590f221170a52c0bbedc1479573828c610fd02893af037cd2633",
+      "created_at": 1789397457.7088425
+    },
+    {
+      "shard_id": "shard_multivoice_router",
+      "repository_name": "Multivoice-router",
+      "layer_id": "L3_S2S_VOICE_SENSORY",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "1bb232d354c3739722861e43f1dcab9f7cbcf6ae7e2f7ea278f4f9b24c70685c",
+      "created_at": 1789397457.7128093
+    },
+    {
+      "shard_id": "shard_camelot_os_voice_",
+      "repository_name": "Camelot-OS-Voice-",
+      "layer_id": "L3_S2S_VOICE_SENSORY",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "7dce41244f26d3595139dac952d7007fe8184181ebe5c90c25970ffaf28cae1e",
+      "created_at": 1789397457.7172346
+    },
+    {
+      "shard_id": "shard_prime_agent",
+      "repository_name": "prime-agent",
+      "layer_id": "L4_KINETIC_SWARM_BROWSING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "564006aa3ca06b19fe4189a0bffca3e8ea0537ecffa700fe0c1afa332ba71260",
+      "created_at": 1789397457.722254
+    },
+    {
+      "shard_id": "shard_open_claude_cowork",
+      "repository_name": "open-claude-cowork",
+      "layer_id": "L4_KINETIC_SWARM_BROWSING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "a244c7f230ea828dc554a56188d4fd90b81c96e52012500f4e5108925056aaac",
+      "created_at": 1789397457.7277257
+    },
+    {
+      "shard_id": "shard_penguin_harness",
+      "repository_name": "penguin-harness",
+      "layer_id": "L4_KINETIC_SWARM_BROWSING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "3a3d0512feb8c33ef933ed56d2039723622948fb8ec3d3f300c3abbc3dd9978a",
+      "created_at": 1789397457.7331357
+    },
+    {
+      "shard_id": "shard_nanobot_custom",
+      "repository_name": "nanobot-custom",
+      "layer_id": "L4_KINETIC_SWARM_BROWSING",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "c5adde3d1ed0c57e776efc234af18e5a5d4c6a983e6133a2bd205774c5ba2f97",
+      "created_at": 1789397457.7376032
+    },
+    {
+      "shard_id": "shard_semantica",
+      "repository_name": "semantica",
+      "layer_id": "L5_MEMORY_SEMANTICS",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "b1211037919f46895aa3e29eb05ac08e590c80c0043d0eca6912c4a00770ea0f",
+      "created_at": 1789397457.74161
+    },
+    {
+      "shard_id": "shard_oss_maintainer",
+      "repository_name": "oss-maintainer",
+      "layer_id": "L5_MEMORY_SEMANTICS",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "fbd526ac7e52def49251e558fbdd095a01f744987ca458d2b59ef53506f77b32",
+      "created_at": 1789397457.745943
+    },
+    {
+      "shard_id": "shard_self_evolving_agent_daily",
+      "repository_name": "self-evolving-agent-daily",
+      "layer_id": "L5_MEMORY_SEMANTICS",
+      "symbols_indexed": 3,
+      "compressed_tokens": 96,
+      "sha256_hash": "f79afa41cef3a0b3a5be3517d600a565154e788b464f053d980e8e8c3dd25576",
+      "created_at": 1789397457.7506819
+    }
+  ]
+}
