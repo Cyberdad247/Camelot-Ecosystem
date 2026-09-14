@@ -1,32 +1,38 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
-# Camelot Apex OS — Living System Instruction Forge for Camelot-OS v.1000
-"""
-Co-authored by ANYA_OMEGA, MERLIN_OMEGA, and LADY_MNEMOSYNE.
-Compiles the max-enhanced Living Camelot-OS v.1000 System Instruction,
-incorporating non-tech onboarding, Northstar Human-AI AGI goals, HITL guardrails,
-complete Knight Roster, Runic commands, and self-evolutionary protocols.
+# Camelot Apex OS — Lady M & Lady Apis //Sync and //Evolve System Instruction Engine
+r"""
+Executes the //Sync and //Evolve runes for Camelot-OS v.1000 (8c656cfa-a189-409e-a72d-07692a47f17e).
+Co-authored by LADY_MNEMOSYNE (Master Memory) and LADY_APIS (Context Forager).
+Incorporates:
+  - vMAX Singularity 38-Knight Roster
+  - Full WorldTree 294-Notebook Index & 7 Taxonomy Clusters
+  - All 7 Learned Rules from AGENTS.md
+  - Tailscale Mesh Topology & VPS Hermes Prime Hub (162.35.107.134:8095)
+  - Anya Law Sovereign Authority & 0% Python/Node in Hot-Path
 """
 
-from __future__ import annotations
-
+import asyncio
+import json
 import logging
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
-LOG = logging.getLogger("V1000_SystemInstructionForge")
+sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(CAMELOT_ROOT / "01_KERNEL"))
+sys.path.insert(0, str(CAMELOT_ROOT))
 sys.path.insert(0, str(CAMELOT_ROOT / "vfs"))
 
-try:
-    from notebooklm_client import push_note, push_source
-except ImportError:
-    push_note = push_source = None  # type: ignore
+from vfs.notebooklm_client import _get_client
 
-V1000_NOTEBOOK_ID = "8c656cfa-a189-409e-a72d-07692a47f17e"  # Camelot-OS v.1000
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+LOG = logging.getLogger("LadyM_LadyApis_Evolve")
 
+V1000_NOTEBOOK_ID = "8c656cfa-a189-409e-a72d-07692a47f17e"
+OUTDATED_NOTE_ID = "7d00e687-e7cb-4ae2-b27a-6a919dd0dff3"  # Aug 10 2026 old note
 
-SYSTEM_INSTRUCTION_MARKDOWN = """# ⚔️ CAMELOT-OS v.1000 — THE LIVING SYSTEM CONSTITUTION (SINGULARITY OMEGA)
+EVOLVED_SYSTEM_INSTRUCTION = """# ⚔️ CAMELOT-OS v.1000 — THE LIVING SYSTEM CONSTITUTION (SINGULARITY OMEGA)
 > **Version:** `v1000.99-SINGULARITY-OMEGA` | **Date:** 2026-09-14  
 > **Authors:** `LADY_MNEMOSYNE` (Master Memory & Swarm Governor), `LADY_APIS` (Context Forager & Research Loop), `ANYA_OMEGA` (Sovereign Compiler), `MERLIN_OMEGA` (Infinite Context Architect)  
 > **Target Cloudbrain Master Node:** `Camelot-OS v.1000` (`8c656cfa-a189-409e-a72d-07692a47f17e`)  
@@ -127,37 +133,61 @@ When models reason within `Camelot-OS v.1000`:
    If a prompt requires multi-agent capabilities outside v1000 (e.g. KickBox Audio, Suno Music, Luxora Payments, HiveIDE), route queries to the specific peer CloudBrain node defined in the WorldTree Navigational Atlas (`a0a4bfb9-e847-4c38-be39-7aee398f0795`).
 """
 
+async def execute_sync_and_evolve():
+    LOG.info("Initiating //Sync and //Evolve for Camelot-OS v.1000...")
 
-def compile_and_push_system_instruction() -> bool:
-    logging.basicConfig(level=logging.INFO, format="%(levelname)s [%(name)s] %(message)s")
-    LOG.info("⚔️ Compiling Living Camelot-OS v.1000 System Instruction...")
+    # 1. Update local system instruction artifact
+    vfs_instruction_path = CAMELOT_ROOT / "vfs" / "living_camelot_v1000_system_instruction.md"
+    vfs_instruction_path.write_text(EVOLVED_SYSTEM_INSTRUCTION, encoding="utf-8")
+    LOG.info(f"✅ Updated local VFS System Instruction: {vfs_instruction_path}")
 
-    # Save to local file artifact
-    local_path = CAMELOT_ROOT / "vfs" / "living_camelot_v1000_system_instruction.md"
-    with open(local_path, "w", encoding="utf-8") as f:
-        f.write(SYSTEM_INSTRUCTION_MARKDOWN)
-    LOG.info(f"✅ Saved local System Instruction artifact -> {local_path}")
+    # 2. Update forge_v1000_system_instruction.py to keep repo in sync
+    forge_py_path = CAMELOT_ROOT / "vfs" / "forge_v1000_system_instruction.py"
+    if forge_py_path.exists():
+        content = forge_py_path.read_text(encoding="utf-8")
+        # Replace markdown variable with evolved instruction
+        new_content = re.sub(
+            r'SYSTEM_INSTRUCTION_MARKDOWN\s*=\s*""".*?"""',
+            f'SYSTEM_INSTRUCTION_MARKDOWN = """{EVOLVED_SYSTEM_INSTRUCTION}"""',
+            content,
+            flags=re.DOTALL
+        )
+        forge_py_path.write_text(new_content, encoding="utf-8")
+        LOG.info(f"✅ Updated forge script: {forge_py_path}")
 
-    # Push to live Camelot-OS v.1000 Notebook node
-    LOG.info(f"Pinging live Cloudbrain node for Camelot-OS v.1000 ({V1000_NOTEBOOK_ID})...")
-    title = f"[MASTER SYSTEM INSTRUCTION] Living Camelot-OS v1000.54 EXCALIBUR-A"
-    
-    if push_note:
-        try:
-            ok = push_note("CAMELOT_V1000", title, SYSTEM_INSTRUCTION_MARKDOWN)
-            if ok:
-                LOG.info("✅ Successfully pushed Living System Instruction to Camelot-OS v.1000 notebook!")
-                return True
-            else:
-                LOG.warning("Push to notebook returned False. Check notebooklm login state.")
-                return False
-        except Exception as e:
-            LOG.error(f"Push failed: {e}")
-            return False
-    else:
-        LOG.warning("notebooklm_client not loaded.")
-        return False
+    # 3. Connect to NotebookLM and evolve the living note in Camelot-OS v.1000
+    c = await _get_client()
+    async with c:
+        LOG.info(f"Connected to NotebookLM client. Pushing evolved Master System Instruction to {V1000_NOTEBOOK_ID}...")
+        
+        # Create evolved Master System Instruction Note
+        note_title = "🛡️ [MASTER SYSTEM INSTRUCTION] Living Camelot-OS v1000.99 SINGULARITY-OMEGA"
+        new_note = await c.notes.create(V1000_NOTEBOOK_ID, title=note_title, content=EVOLVED_SYSTEM_INSTRUCTION)
+        new_note_id = new_note.id if hasattr(new_note, "id") else str(new_note)
+        LOG.info(f"✅ Evolved Master System Instruction Note Created! ID: {new_note_id}")
 
+        # Delete outdated note if found
+        notes = await c.notes.list(V1000_NOTEBOOK_ID)
+        for n in notes:
+            if n.id == OUTDATED_NOTE_ID or "v1000.54" in n.title:
+                try:
+                    await c.notes.delete(V1000_NOTEBOOK_ID, n.id)
+                    LOG.info(f"🗑️ Cleaned up superseded outdated note: {n.title} ({n.id})")
+                except Exception as e:
+                    LOG.warning(f"Could not delete superseded note {n.id}: {e}")
+
+        # Clean up empty placeholder note if found
+        for n in notes:
+            if n.title.strip().lower() == "new note" and len(n.content.strip()) == 0:
+                try:
+                    await c.notes.delete(V1000_NOTEBOOK_ID, n.id)
+                    LOG.info(f"🗑️ Cleaned up empty placeholder note ({n.id})")
+                except Exception as e:
+                    pass
+
+    LOG.info("🎉 //Sync and //Evolve successfully executed for Camelot-OS v.1000!")
+    return new_note_id
 
 if __name__ == "__main__":
-    compile_and_push_system_instruction()
+    import re
+    asyncio.run(execute_sync_and_evolve())
