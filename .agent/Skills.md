@@ -133,4 +133,18 @@ Avoids "vibe-coding" by requiring agents to refer to hardcoded execution guideli
 4. **[S]EAL & SIGN:** Compute SHA-256 manifest hash and sign with Ed25519 Ledger key.
 5. **[V]ERIFY & AUDIT:** Sentinel validates sandbox containment and zero-secret policy prior to execution.
 
+## Skill: Cloud Database Decapitation & Sovereign SQLite Transmutation (`cloud-sever-sqlite-vfs`)
+**ID:** `skill_cloud_sever_sqlite_vfs_01`
+**Assigned Knight:** `SIR_CODEX` (Kinetic Builder) & `PALADIN_OCTEM` (Z3 Formal Prover)
+**Constraint:** `0 external cloud calls`, `SQLite WAL mode`, `Row-Level Security UID invariant`, `Z3 verified leak-free (ΔM ≤ 0.12 MiB)`, `Zero mock stubs`.
+**Source:** `03_VAULT/runtime_state/paladin_crucible_receipt.json`
+
+### Workflow:
+1. **[S]URVEY (The Surveyor):** AST parsing scans codebase topology to isolate third-party cloud SDK dependencies (Firebase, Supabase, DynamoDB).
+2. **[S]CYTHE (The Scythe):** RTK (Rust Token Killer) surgically excises remote cloud SDKs, purges proprietary cloud config files (`*-applet-config.json`, `firestore.rules`), and drops cloud packages from manifests.
+3. **[F]ORGE (The Forge):** Synthesize sovereign local SQLite schemas with WAL mode and local VFS reactive adapters (`src/lib/firebase.ts` local drop-in) enforcing synchronous transaction isolation.
+4. **[C]RUCIBLE (The Crucible):** Execute Paladin Octem Z3 SMT solver proving 4 invariant obligations: memory boundedness (leak-free), RLS tenant isolation (`authorUid == sovereignUser.uid`), AST DAG acyclicity, and zero egress telemetry.
+5. **[S]EAL (The Ledger):** Generate Ed25519-signed verification receipt and cryptographically inscribe receipt into all 4 PROVENANCE_LEDGER.md mirrors.
+
+
 
