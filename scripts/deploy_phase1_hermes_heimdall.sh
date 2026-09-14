@@ -12,6 +12,7 @@ set -euo pipefail
 
 echo "🛡️ [CAMELOT_VPS] Initializing Phase 1: Hermes Prime & Paladin Heimdall Deployment..."
 
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APP_DIR="/opt/Camelot-Ecosystem"
 SYSTEMD_DIR="/etc/systemd/system"
 
@@ -19,11 +20,16 @@ SYSTEMD_DIR="/etc/systemd/system"
 mkdir -p "${APP_DIR}/control_plane/infra"
 mkdir -p "${APP_DIR}/03_VAULT/runtime_state"
 
-# 2. Copy Sentinel Daemon and Systemd Unit
+# 2. Copy Sentinel Daemon and Systemd Unit (skip if already running inside APP_DIR)
 echo "📦 Staging Sentinel Daemon & Configuration..."
-cp control_plane/infra/hermes_heimdall_sentinel.py "${APP_DIR}/control_plane/infra/"
-cp control_plane/infra/z3_verify.py "${APP_DIR}/control_plane/infra/" || true
-cp infra/systemd/hermes-bifrost-sentinel.service "${SYSTEMD_DIR}/hermes-bifrost-sentinel.service"
+if [ "$REPO_ROOT" != "$APP_DIR" ]; then
+    cp "${REPO_ROOT}/control_plane/infra/hermes_heimdall_sentinel.py" "${APP_DIR}/control_plane/infra/"
+    cp "${REPO_ROOT}/control_plane/infra/z3_verify.py" "${APP_DIR}/control_plane/infra/" 2>/dev/null || true
+fi
+cp "${REPO_ROOT}/infra/systemd/hermes-bifrost-sentinel.service" "${SYSTEMD_DIR}/hermes-bifrost-sentinel.service"
+
+# Ensure write permissions for systemd user
+chown -R ubuntu:ubuntu "${APP_DIR}/03_VAULT/runtime_state" 2>/dev/null || true
 
 # 3. Configure UFW Firewall for Tailscale-Only Perimeter Locking
 if command -v ufw &> /dev/null; then
