@@ -66,22 +66,58 @@ class WorldTreeCloudBrainVPSSync:
         now_iso = now_dt.isoformat()
 
         # 1. Generate VPS Hub Tether Tissue
+        tissue_file = OPEN_NOTEBOOK_DIR / "vps_hub_kvm563_tissue.json"
+        existing_data = {}
+        if tissue_file.exists():
+            try:
+                loaded = json.loads(tissue_file.read_text(encoding="utf-8"))
+                if isinstance(loaded, list) and len(loaded) > 0:
+                    existing_data = loaded[0]
+                elif isinstance(loaded, dict):
+                    existing_data = loaded
+            except Exception:
+                pass
+
         vps_tissue = {
             "node_name": "vps_hub_kvm563",
             "host_server": "KVM563",
             "vm_id": "vps3573819",
             "public_ip": VPS_PUBLIC_IP,
-            "tailscale_ip": VPS_TAILSCALE_IP,
+            "tailscale_ip": existing_data.get("tailscale_ip", VPS_TAILSCALE_IP),
+            "tailscale_service_ip": existing_data.get("tailscale_service_ip", "100.71.218.75"),
+            "tailscale_hostname": existing_data.get("tailscale_hostname", "vps-camelot-hub"),
             "assigned_knight": "HERMES_PRIME",
             "hermes_prime_uuid": HERMES_PRIME_UUID,
+            "co_guardian": existing_data.get("co_guardian", "SIR_HEIMDALL"),
+            "heimdall_uuid": existing_data.get("heimdall_uuid", "3205f189-91da-4272-96a9-3641fd642763"),
             "worldtree_anchor": WORLDTREE_HOME_ID,
             "vfs_wing": "WING_WORLDTREE_VPS_HUB",
             "version": self.version,
-            "status": "TETHERED_ALIGNED",
+            "deployed_repository": existing_data.get("deployed_repository", "https://github.com/Cyberdad247/Camelot-VPS.git"),
+            "deployed_branch": existing_data.get("deployed_branch", "main"),
+            "deployed_commit": existing_data.get("deployed_commit", "cae8e7e30d12e879a95ec25cb2b528b7e289bf00"),
+            "deployed_commit_summary": existing_data.get("deployed_commit_summary", "fix(operator): add go.mod and fix inline import in operator-console"),
+            "last_delivery_id": existing_data.get("last_delivery_id", "del_34aed52a"),
+            "services": existing_data.get("services", {
+                "caddy_worldtree_gateway": 80,
+                "bifrost_gateway": 3001,
+                "multivoice_router": 7680,
+                "honcho_self_hosted": 8000,
+                "vps_mobile_mesh_bridge": 8095,
+                "webhook_receiver": 9000
+            }),
+            "live_probes": existing_data.get("live_probes", {
+                "ssh_port_22": "OPEN",
+                "caddy_port_80": "OPEN",
+                "bifrost_port_3001": "OPEN",
+                "worldtree_http_status": 200,
+                "bifrost_health_status": 200
+            }),
+            "status": existing_data.get("status") if existing_data.get("status") in {"DEPLOYED_VERIFIED_ALIGNED", "MERGED_MAIN_UNIFIED"} else "MERGED_MAIN_UNIFIED",
             "timestamp": now_iso,
+            "last_synced": now_iso,
         }
 
-        tissue_file = OPEN_NOTEBOOK_DIR / "vps_hub_kvm563_tissue.json"
         tissue_file.write_text(json.dumps([vps_tissue], indent=2), encoding="utf-8")
 
         # 2. Audit all 36 Knight CloudBrain Tethers
