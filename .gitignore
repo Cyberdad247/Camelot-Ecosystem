@@ -54,6 +54,7 @@ data/go-build/
 .pytest_cache/
 .venv/
 tools/notebooklm-py/
+tools/arthurian-omni-forge/
 *.egg-info/
 target/
 
