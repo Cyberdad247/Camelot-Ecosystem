@@ -19,6 +19,7 @@ members = [
     "kinetic_edge/swarm_spawner",
     "wasm/ledger-engine",
     "crates/camelot-vkg-crystal",
+    "crates/hive-ide-cli",
     "packages/crawler",
     "packages/harness-forge"
 ]
