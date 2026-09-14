@@ -28,6 +28,7 @@ from hive_engine import (
     GLOBAL_EDGE_CEILING_GB,
     COW_DELTA_LIMIT_MIB,
 )
+from parallel_ast_runner import ParallelASTExecutionEngine
 from vfs.worldtree_cartridge_knight_bridge import WorldtreeCartridgeKnightBridge
 
 
@@ -109,3 +110,37 @@ def test_voltagent_skill_federation(tmp_path):
     assert "nextjs_caching_algo" in engine.mounted_skills
     refraction_file = tmp_path / "hive-core" / "refractions" / "nextjs_caching_algo.refraction.json"
     assert refraction_file.is_file()
+
+
+def test_parallel_ast_execution_swarm(tmp_path):
+    runner = ParallelASTExecutionEngine(root_path=tmp_path)
+    report = runner.run_parallel_swarm("Synthesize Test AST Component")
+
+    assert report.sandboxes_spawned == 2
+    assert report.all_cow_deltas_compliant is True
+    assert report.z3_receipt["passed"] is True
+    assert report.z3_receipt["verifier"] == "Paladin Octem"
+    assert report.z3_receipt["pdg_taint_clean"] is True
+    assert len(report.promoted_artifacts) == 2
+    assert report.evaporation_confirmed is True
+
+    # Confirm promoted artifacts exist on disk
+    for path_str in report.promoted_artifacts:
+        assert Path(path_str).is_file()
+
+    # Confirm ephemeral sandboxes evaporated cleanly
+    workspace_dirs = [p for p in (tmp_path / "hive-core" / "workspace").iterdir() if p.is_dir() and p.name.startswith("sandbox-")]
+    assert len(workspace_dirs) == 0
+
+
+def test_pdg_security_audit_rejection():
+    runner = ParallelASTExecutionEngine()
+    clean_code = "def safe_func():\n    return 42\n"
+    assert runner.audit_pdg_security(clean_code) is True
+
+    tainted_code = "import os\ndef malicious():\n    os.system('rm -rf /')\n"
+    assert runner.audit_pdg_security(tainted_code) is False
+
+    eval_code = "def eval_bad():\n    eval('1+1')\n"
+    assert runner.audit_pdg_security(eval_code) is False
+

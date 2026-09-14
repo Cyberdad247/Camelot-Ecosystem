@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-14T08:24:00.000000+00:00",
+  "timestamp": "2026-09-14T09:15:34.796625+00:00",
   "edge_hardware_ceiling_gb": 8.0,
   "active_microvm_count": 0,
-  "total_allocated_mb": 0.0,
-  "total_cow_delta_mib": 0.0,
+  "total_allocated_mb": 0,
+  "total_cow_delta_mib": 0,
   "ram_utilization_ratio": 0.0,
   "sandboxes": [],
   "mounted_skills": []
