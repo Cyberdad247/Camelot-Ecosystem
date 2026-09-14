@@ -1,0 +1,15 @@
+{
+  "bus_id": "agentbus-local-0",
+  "protocol": "zero_copy_memfd",
+  "socket_path": "/tmp/camelot_agentbus.sock",
+  "windows_named_pipe": "\\\\.\\pipe\\camelot_agentbus",
+  "buffer_size_kb": 256,
+  "channels": [
+    "telemetry.stream",
+    "dag.events",
+    "wasm.microvm.io",
+    "z3.verification"
+  ],
+  "status": "LISTENING",
+  "created_at": "2026-09-14T08:24:00.000000+00:00"
+}

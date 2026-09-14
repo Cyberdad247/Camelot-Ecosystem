@@ -6269,4 +6269,27 @@
   - `//CODEX verify --capability worktree_isolation --node vfs://worldtree/knights/sir_codex/ --zero-entropy` (Task ID: rune-5f751cd3)
 - **Tag**: [ANYA_LAST_LAW] ZERO_ENTROPY_PASS_CONFIRMED
 | 2026-09-14T08:21:00.000000+00:00 | ANYA_LAST_LAW | ZERO_ENTROPY_PASS [Knight: SIR_CODEX, VFS: vfs://worldtree/knights/sir_codex/, Verdict: CONFIRMED] | SEALED |
+---
+## [2026-09-14] Digital Factory Integration: cartridge-hive-ide-swarm & VFS Scaffolding
+- **Actor**: SIR_CODEX / MERLIN_OMEGA / SIR_VISAGE / ANYA_OMEGA
+- **Scope**:
+  - Cartridge ID: `cartridge-hive-ide-swarm` (Schema `camelot-cartridge/1`, Ed25519 Signed)
+  - Domain Authority: Multi-Agent Orchestration & Reactive 3D Topology
+  - Maintainers: Merlin_Ω (DAG), Sir_Visage (WebGPU), Sir_Codex (WASM)
+  - Memory Constraint: Max 512MB RAM per active node, 8GB global edge ceiling, CoW page sharing delta $\Delta \le 0.12\text{ MiB}$
+  - Security Guardrail: Excalibur Zero-Trust; all output sealed by Ed25519 signatures
+  - Z3 Verification Gate: Paladin Octem formal mathematical proof and Program Dependency Graph (PDG) security invariants
+  - VFS Scaffolding Matrix:
+    - `/hive-core/workspace/`: Ephemeral approved-write sandbox with automatic evaporation on inspection failure
+    - `/hive-core/telemetry/`: Real-time rendering buffers + `glass_cockpit.wgsl` WebGPU shader for 3D-to-2D reactive glass cockpit
+    - `/hive-core/refractions/`: Hot-swappable agent persona files (Merlin, Visage, Codex, Boris) under 1.58-bit ternary limit
+    - `/hive-core/socket/`: Task-local AgentBus network layer executing Zero-Copy memfd IPC
+- **Verification performed**:
+  - `python scripts/sign_cartridge.py --verify cartridges/cartridge-hive-ide-swarm/manifest.json` (OK)
+  - `pytest tests/test_cartridge_manifests.py` (43/43 PASS)
+  - `pytest tests/test_cartridge_hive_ide_swarm.py` (6/6 PASS)
+  - `python control_plane/core/factory_lane.py --test` (ALL PASS)
+  - `python vfs/worldtree_cartridge_knight_bridge.py` (23/23 Knights PASS)
+- **Tag**: [ANYA_LAST_LAW] HIVE_IDE_SWARM_FACTORY_INTEGRATION_SEALED
+| 2026-09-14T08:26:45.000000+00:00 | ANYA_LAST_LAW | CARTRIDGE_INTEGRATION [Cartridge: cartridge-hive-ide-swarm, VFS: /hive-core/, Verdict: SEALED] | HYDRATED |
 

@@ -1,0 +1,13 @@
+{
+  "knight_id": "MERLIN_OMEGA",
+  "role": "DAG Orchestrator & Deep Reasoning",
+  "cartridge_binding": "cartridge-hive-ide-swarm",
+  "max_memory_mb": 512,
+  "skills": [
+    "task_dag_decomposition",
+    "graph_of_thoughts",
+    "zero_entropy_scheduling"
+  ],
+  "ternary_quantization_active": true,
+  "status": "READY"
+}

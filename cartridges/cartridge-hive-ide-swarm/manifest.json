@@ -1,0 +1,66 @@
+{
+  "schema_version": "camelot-cartridge/1",
+  "cartridge_id": "cartridge-hive-ide-swarm",
+  "version": "1.0.0",
+  "signer": "camelot-community",
+  "signer_trust_band": "camelot-community",
+  "hash_algorithm": "sha256",
+  "signature_algorithm": "ed25519",
+  "entrypoints": [
+    "forge",
+    "plan",
+    "test",
+    "audit",
+    "execute"
+  ],
+  "supported_node_profiles": [
+    "hub",
+    "engineering",
+    "experience"
+  ],
+  "requested_capabilities": [
+    "vfs.read",
+    "vfs.worktree_write",
+    "process.allowlisted",
+    "network.scoped",
+    "memory.read_l1",
+    "memory.read_l2"
+  ],
+  "denied_capabilities": [
+    "lease.issue",
+    "policy.admin",
+    "secret.export",
+    "unrestricted.network",
+    "direct_main_branch_write",
+    "auto_merge",
+    "auto_deploy",
+    "promotion.issue",
+    "epoch.increment"
+  ],
+  "resource_profile": {
+    "memory_mb": 512,
+    "timeout_s": 300,
+    "max_workers": 8
+  },
+  "verification": [
+    "contract_test",
+    "VFS_attestation",
+    "Gideon_verdict",
+    "Boris_contract_tests",
+    "receipt_issued"
+  ],
+  "risk_tier_invariant_cap": "T1",
+  "rollback": {
+    "strategy": "destroy_ephemeral_worktree"
+  },
+  "compat": {
+    "supported_knight_classes": [
+      "MERLIN_OMEGA",
+      "SIR_VISAGE",
+      "SIR_CODEX",
+      "SIR_BORIS"
+    ]
+  },
+  "artifact_hash": "sha256:a0ecef65a4d7d95e5f5773783e5285609e722d82d914a1984a8066309b7a571d",
+  "signature": "ed25519:roEGqywd_z2GzXFHjDJ9Z8YhsaJS-wbDv8G44Z8YXFzVyzM2IqLFAke7wADvyHmaH9QZBTZGrHuHqZXJAme5Bw"
+}

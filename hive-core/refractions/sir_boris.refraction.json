@@ -1,0 +1,13 @@
+{
+  "knight_id": "SIR_BORIS",
+  "role": "Crucible Conductor & Architecture Validator",
+  "cartridge_binding": "cartridge-hive-ide-swarm",
+  "max_memory_mb": 512,
+  "skills": [
+    "multi_agent_arbitration",
+    "zero_entropy_diff_review",
+    "provenance_ledger_verification"
+  ],
+  "ternary_quantization_active": true,
+  "status": "READY"
+}

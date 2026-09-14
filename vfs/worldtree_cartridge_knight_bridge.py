@@ -41,7 +41,8 @@ CARTRIDGE_KNIGHT_MAP: Dict[str, List[str]] = {
     "ANT":      ["LADY_APIS", "SIR_SCAVENGER"],                    # Scraping & Extraction
     "BEAVER":   ["SIR_FORGE", "SIR_CODEX", "SIR_ALCHEMIST"],        # AST & Code Refactoring
     "SPIDER":   ["MERLIN_OMEGA", "LADY_APIS", "SIR_HERMES"],        # BASHR Web Research & Foraging
-    "OCTOPUS":  ["SIR_BORIS", "SIR_ALEX", "LADY_MNEMOSYNE"]         # Multi-Agent Swarm Orchestration
+    "OCTOPUS":  ["SIR_BORIS", "SIR_ALEX", "LADY_MNEMOSYNE"],        # Multi-Agent Swarm Orchestration
+    "HIVE_IDE_SWARM": ["MERLIN_OMEGA", "SIR_VISAGE", "SIR_CODEX", "SIR_BORIS"]  # Reactive WebGPU & WASM Swarm
 }
 
 
