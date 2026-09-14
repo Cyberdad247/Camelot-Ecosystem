@@ -1,0 +1,57 @@
+{
+  "version": "1000.1.0",
+  "generated_utc": "2026-09-14T15:52:00Z",
+  "governor": "ANYA_OMEGA / MERLIN_OMEGA / SIR_CODEX / ARTHUR_OMEGA",
+  "system_contract": "ENTERPRISE_BATCH_OMNIROUTER_INTEGRATION",
+  "cartridge_target": "arthurian-omni-forge",
+  "pillars": {
+    "enterprise_batch_operations": {
+      "execution_engine": "DAG_BATCH_ORCHESTRATOR",
+      "concurrency_limit": 50,
+      "transaction_mode": "SQLITE_WAL_ISOLATION",
+      "retry_policy": "EXPONENTIAL_BACKOFF_JITTER",
+      "dead_letter_vault": "03_VAULT/runtime_state/dead_letters/",
+      "max_heap_mb": 150,
+      "audit_trail": "PROVENANCE_LEDGER_CHAIN"
+    },
+    "bifrost_omniroute_matrix": {
+      "base_url": "http://127.0.0.1:3001",
+      "affinity_engine": "04_KINETIC/multivoice/orchestration/affinity.go",
+      "slo_threshold_ms": 2000,
+      "tiering": {
+        "tier_0_zero_cost": ["cliproxy:gpt-4o", "cliproxy:claude-sonnet", "cliproxy:gemini-flash"],
+        "tier_1_frontier": ["gemini-3-pro-preview", "claude-3-7-sonnet", "o3-mini"],
+        "tier_2_local_resilience": ["ollama:deepseek-r1:8b", "local-stub:tinylm"]
+      }
+    },
+    "dynamic_knight_routing": {
+      "cloudbrain_root_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "affinity_algorithm": "COSINE_AST_TOPOLOGY_MATCH",
+      "tissue_path": "03_VAULT/runtime_state/open_notebook/",
+      "rpg_gamification": {
+        "ledger_path": "03_VAULT/runtime_state/knight_xp_ledger.json",
+        "xp_formula": "XP = (ast_nodes * 10) + (z3_proofs * 500) + (latency_bonus)",
+        "audit_gate": "PALADIN_OCTEM_RECEIPT"
+      }
+    },
+    "phial_engine_squires": {
+      "colony_engine": "squires/colony.py",
+      "squire_count": 8,
+      "healing_loop": "PIV_SELF_HEALING_AST_LOOP",
+      "mutation_storage": ".agent/Skills.md"
+    },
+    "mobile_voice_excalibur": {
+      "node": "vashawns-s26-ultra (100.106.246.126)",
+      "acoustic_protocol": "SIP_TLS_AUDIOWORKLET_16KHZ",
+      "audio_transport": "BIFROST_WEBSOCKET_AOEDE",
+      "latency_sla_ms": 100
+    },
+    "quad_knight_factory": {
+      "orchestrator": "CLAUDE_LOCAL",
+      "deep_reasoner": "MERLIN_OMEGA_GEMINI_PRO",
+      "kinetic_builder": "SIR_CODEX_RUST",
+      "edge_sentinel": "PI_LOCAL_DAEMON"
+    }
+  },
+  "status": "RATIFIED_AND_LOCKED"
+}
