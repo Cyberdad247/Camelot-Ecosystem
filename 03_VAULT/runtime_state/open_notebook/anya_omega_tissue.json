@@ -1,6 +1,17 @@
 [
   {
     "knight_id": "ANYA_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "tissue",
+    "title": "PreFlight Backplane Test",
+    "content": "{\n  \"status\": \"OK\",\n  \"timestamp\": \"2026-09-14T07:55:00Z\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/anya_omega",
+    "synced_at": "2026-09-14T07:55:58.974103+00:00"
+  },
+  {
+    "knight_id": "ANYA_OMEGA",
     "cloudbrain_uuid": "140101e0-bc2a-41c8-87c0-cd512f130387",
     "alias_uuid": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
     "spark_id": "0x32D389065AE84ECCB77E705D12C89F4A",

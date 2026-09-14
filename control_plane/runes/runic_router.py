@@ -1669,9 +1669,9 @@ def _handle_sync_omni_forge_databases(param: str, context: dict) -> dict:
     }
 
 
-def _handle_ignite_speech_avatar_ui(param: str, context: dict) -> dict:
+def _handle_ignite_speech_avatar_ui(param: Any, context: dict) -> dict:
     """Ignite sub-100ms Gemini Live Speech-to-Speech & WebGPU 3D/2D Avatar HUD pipeline."""
-    target_mode = param.strip() or "GEMINI_LIVE_AOEDE_DUPLEX"
+    target_mode = (str(param).strip() if param and not isinstance(param, dict) else "") or "GEMINI_LIVE_AOEDE_DUPLEX"
     return {
         "action": "ignite_speech_avatar_ui",
         "target_mode": target_mode,
@@ -1683,7 +1683,7 @@ def _handle_ignite_speech_avatar_ui(param: str, context: dict) -> dict:
     }
 
 
-def _handle_lock_bifrost_mtls(param: str, context: dict) -> dict:
+def _handle_lock_bifrost_mtls(param: Any, context: dict) -> dict:
     """Lock down Bifrost Bridge perimeter with zero-trust mTLS, capability leases, and port-isolation."""
     return {
         "action": "lock_bifrost_mtls",
@@ -1696,9 +1696,9 @@ def _handle_lock_bifrost_mtls(param: str, context: dict) -> dict:
     }
 
 
-def _handle_render_3d_adaptive_workspace(param: str, context: dict) -> dict:
+def _handle_render_3d_adaptive_workspace(param: Any, context: dict) -> dict:
     """Initialize 3D-to-2D UI/UX Adaptive Operating Environment WebGPU viewport."""
-    preset = param.strip() or "DEFAULT_COMMAND_CENTER"
+    preset = (str(param).strip() if param and not isinstance(param, dict) else "") or "DEFAULT_COMMAND_CENTER"
     return {
         "action": "render_3d_adaptive_workspace",
         "preset": preset,
