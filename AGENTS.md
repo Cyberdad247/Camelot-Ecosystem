@@ -357,7 +357,7 @@ All Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be
 | **FATHER_CAMELOT** | Ancestral Compass, Moral & Ethical Governance Ledger | Sovereign Substrate | `39299131-0ade-4f48-8ad4-a68878a6d3d9` |
 | **WORLD_TREE** | Living Knowledge Graph & Root WorldTree Tether | WorldTree Substrate | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |
 | **ALPHA_OMEGA** | Camelot-OS Alpha-Omega Artifacts & Compilation Store | Forge Substrate | `2536aefb-937f-4a04-9142-d1a2f029d8a7` |
-| **ANTIGRAVITY** | NotebookLM + AntiGravity CLI Synergy & MCP Integration | FastMCP / agy | `ab8aa359-2b3b-4bc1-b41f-34979cdc184e` |
+| **SIR_HELIOS** | NotebookLM + Sir Helios (AntiGravity) CLI & CloudBrain Synergy | FastMCP / agy | `ab8aa359-2b3b-4bc1-b41f-34979cdc184e` |
 | **KICKBOX** | KickBox Audio, WebRTC State & Vocal HUD Integration | Next.js 14 / WebRTC | `8531e6d4-6fc4-428f-a754-b9e9592ac7ff` |
 | **INSPIRA** | HiveIDE / Inspira Spatial Developer Workstation | IDE Substrate | `cadfe67e-7187-472e-8bf4-8a2aded84e4e` |
 | **INVISIONED_MARKETING** | Invisioned Marketing Sovereign CloudBrain & Brand Direction | WorldTree Substrate | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |

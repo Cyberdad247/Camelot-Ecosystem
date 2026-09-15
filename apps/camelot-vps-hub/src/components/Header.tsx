@@ -23,7 +23,8 @@ import {
   Eye,
   Key,
   HardDrive,
-  BookOpen
+  BookOpen,
+  Bot
 } from 'lucide-react';
 import { SystemVitals } from '../types';
 
@@ -57,6 +58,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const tabs = [
     { id: 'deck', label: 'World Tree UI (2D ➔ 3D Continuity)', icon: TreeDeciduous },
+    { id: 'hermes', label: 'Hermes Agent Dashboard', icon: Bot },
     { id: 'vps_init', label: 'VPS Hub Initiation (vps3573819)', icon: Server },
     { id: 'docs', label: 'Docs Forge (νKG-Crystal)', icon: BookOpen },
     { id: 'operator', label: 'HTMX Console & WebGPU HUD', icon: ShieldCheck },

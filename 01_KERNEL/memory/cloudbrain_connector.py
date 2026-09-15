@@ -92,7 +92,8 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "FATHER_CAMELOT":      "39299131-0ade-4f48-8ad4-a68878a6d3d9",   # Father's Camelot
     "WORLD_TREE":          "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # World Tree
     "ALPHA_OMEGA":         "2536aefb-937f-4a04-9142-d1a2f029d8a7",   # Camelot-OS Alpha-Omega artifacts
-    "ANTIGRAVITY":         "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Synergizing NotebookLM + AntiGravity
+    "SIR_HELIOS":          "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Synergizing NotebookLM + Sir Helios (formerly AntiGravity)
+    "ANTIGRAVITY":         "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Legacy alias for Sir Helios FastMCP
     "KICKBOX":             "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",   # KickBox Audio
     "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
     "BIO_KINETIC_SWARM":   "93b21c40-10ff-4e89-a212-08f37b1297e1",   # Bio-Kinetic Swarm Node
@@ -117,9 +118,15 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "LADY_SPARKLE":        "b6ec57ed-e232-4b9b-9bcf-338b70bc5365",   # Sovereign_Workspace: LADY SPARKLE
     "SIR_VISAGE":          "e41c0c29-a7ba-4bd8-94df-30eb9224f7f8",   # Sovereign_Workspace: SIR VISAGE
     "SIR_MARCUS":          "1c55963f-4a02-4c26-92ed-e087ecfdf8b8",   # Sovereign_Workspace: SIR MARCUS
+    "SIR_KAY":             "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",   # Sovereign_Workspace: SIR KAY (Kai Richter: Agentic Architect)
+    "SIR_LUCAS":           "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # WorldTree-tethered: SIR LUCAS (Lukas Müller: Telemetry & Visualization)
+    "LADY_LAKISHA":        "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # WorldTree-tethered: LADY LAKISHA (Voice OS Sentinel & Intercom Matrix)
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
+    "SIR_LUCAS":           ["telemetry", "visualization", "hud", "observability", "dashboard", "verified_state", "evidence_class", "truth_surface"],
+    "LADY_LAKISHA":        ["voice", "tts", "audio", "realtime", "webrtc", "intercom", "vad", "luxury_brutalism"],
+    "SIR_KAY":             ["kinetic_engineering", "agentic_architect", "hotpath_purity", "zero_regression", "sprint_governance", "dkesi"],
     "SIR_BORIS":           ["architecture", "crucible", "design", "review", "pwa", "desktop_grid", "vkg_hud"],
     "SIR_ALEX":            ["planning", "dag", "orchestration", "tasks", "pipeline", "execution_dag"],
     "SIR_FORGE":           ["kinetic", "build", "execution", "code", "pwa", "compile", "desktop_grid"],
@@ -153,6 +160,7 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "INSPIRA":             ["ide", "developer", "spatial", "workstation", "hive_ide", "ui", "pwa_shell"],
     "CAMELOT_MASTER":      ["codex", "construction", "master", "architecture", "system"],
     "WORLD_TREE":          ["worldtree", "root", "knowledge_graph", "memory", "tether", "vkg_hud", "3d_webgpu", "tactical_map"],
+    "SIR_HELIOS":          ["sir_helios", "antigravity", "cli", "notebooklm", "mcp", "agent", "orchestration", "harness", "cloudbrain"],
     "ANTIGRAVITY":         ["antigravity", "cli", "notebooklm", "mcp", "agent", "orchestration", "harness"],
     "KICKBOX":             ["audio", "webrtc", "hud", "vocal", "voice", "kickbox_audio", "wasm_vad", "sound_engine"],
     "SIR_GIDEON":          ["gideon", "verdict", "risk_matrix", "hyperbolic_chamber", "z3", "audit", "convergence"],

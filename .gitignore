@@ -299,5 +299,13 @@ test_browser_upload_failure.html
 camelot-fable-25
 data/session_logs/
 
+# Isolated TypeScript toolchain installed by the `generated-artifact-parity`
+# CI job (see .github/workflows/verify_os.yml Stage 14). Never committed.
+.parity-toolchain/
+
 # Harness golden set: pinned TEST-ONLY public key is committed by design (receipt-chain replay)
 !harness/golden-receipts/sentinel_test_public.pem
+
+# Staging repos for assimilation
+.camelot/staging/
+deploy/multivoice-router/

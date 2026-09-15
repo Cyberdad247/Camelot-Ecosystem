@@ -76,11 +76,56 @@ jobs:
       - name: Install linters
         run: pip install ruff black
 
+      # Scope note: control_plane/ and tests/ were never listed here, which is
+      # why unformatted/unlinted code in those trees could sit indefinitely
+      # without anyone seeing it. Both trees are now reported.
       - name: Ruff check
-        run: ruff check 01_KERNEL/ scripts/ .camelot/ --config pyproject.toml
+        run: ruff check 01_KERNEL/ scripts/ .camelot/ control_plane/ tests/ --config pyproject.toml
 
       - name: Black format check
-        run: black --check 01_KERNEL/ scripts/ .camelot/ --config pyproject.toml
+        run: black --check 01_KERNEL/ scripts/ .camelot/ control_plane/ tests/ --config pyproject.toml
+
+  # ── Stage 2b: Lint ratchet (BLOCKING) ───────────────────────────
+  # The advisory `lint` job above reports a legacy backlog but cannot fail, so
+  # it provides no regression signal. This job supplies exactly that: the
+  # backlog may not GROW. It deliberately does not demand a clean tree.
+  lint-ratchet:
+    name: Python lint ratchet
+    runs-on: windows-latest
+    env:
+      # Measured with: ruff check control_plane/ tests/ --config pyproject.toml
+      # Lower this as debt is burned down. Raising it requires a deliberate
+      # edit to this file, so an increase is always a visible decision.
+      RUFF_SCOPE_BASELINE: "460"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Ruff ratchet — control_plane/ + tests/ may not regress
+        shell: bash
+        run: |
+          set -euo pipefail
+          json="${{ runner.temp }}/ruff-scope.json"
+          ruff check control_plane/ tests/ --config pyproject.toml \
+            --output-format=json > "$json" || true
+          # encoding='utf-8' is required, not decorative: ruff's JSON carries the
+          # ᛟ_/ν glyphs from omni_voice_dag.py, and Windows' default cp1252 codec
+          # cannot decode them (UnicodeDecodeError). PYTHONIOENCODING only covers
+          # stdout/stderr, not open().
+          actual=$(python -c "import json, sys; print(len(json.load(open(sys.argv[1], encoding='utf-8'))))" "$json")
+          echo "control_plane/ + tests/ violations: $actual (pinned baseline: $RUFF_SCOPE_BASELINE)"
+          if [ "$actual" -gt "$RUFF_SCOPE_BASELINE" ]; then
+            echo "::error ::Ruff ratchet exceeded: $actual > $RUFF_SCOPE_BASELINE - new violations were introduced."
+            ruff check control_plane/ tests/ --config pyproject.toml || true
+            exit 1
+          fi
+          echo "[OK] no new violations in control_plane/ or tests/"
 
   # ── Stage 3: Security ───────────────────────────────────────────
   security:
@@ -200,6 +245,14 @@ jobs:
         run: |
           pip install jsonschema
           python -m pytest tests/control_plane/test_evaluation_chamber.py -v
+
+      # Blocking gate over the WHOLE control_plane suite. Previously only the
+      # single file above was enforced while the rest ran "informational" below;
+      # that gap is how a JSX syntax error (which broke `next build`), two stale
+      # CloudBrain UUIDs and a reload/alias failure all sat in the tree unnoticed.
+      # `-p no:cacheprovider` keeps the run from writing data/.pytest_cache.
+      - name: Control plane suite (blocking)
+        run: python -m pytest tests/control_plane -q -p no:cacheprovider
 
       # Non-blocking: the full tests/ suite has ~55 pre-existing failures/errors
       # (mostly security-diode PermissionError + heavier deps). Run it for signal,
@@ -572,3 +625,136 @@ jobs:
           echo "::notice::No excalibur filter-parity-affected paths changed."
           echo "Skipping parity gate (matches local pre-commit hook for the same files)."
           echo "Filter source of truth: .pre-commit-config.yaml hook 'excalibur-pyinstaller-filter-parity'."
+
+  # ── Stage 13: OmniVoice Router Build Parity ─────────────────────────
+  # Server-side mirror of the local pre-commit hook
+  # `omnivoice-router-build-parity` declared in `.pre-commit-config.yaml`.
+  # `02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.js` is a
+  # COMMITTED build artifact (the package `main`) that nothing regenerates
+  # automatically. It sat seven weeks stale and shipped a router containing
+  # none of the `/ingest_pcm` validation, so this gate keeps the artifact
+  # honest against its source.
+  # Sync assumption: future changes to either the pre-commit regex below OR
+  # this dorny filter MUST update the other in lock-step within the same PR.
+  omnivoice-router-parity:
+    name: OmniVoice Router Build Parity
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      # Cheap and self-contained: proves the checker's own drift detection
+      # still works before relying on its verdict for the real artifact.
+      - name: Self-test the parity checker
+        run: python scripts/check_omnivoice_router_build.py --self-test
+
+      - name: Detect changes to router paths
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            router-paths:
+              # Strict 1:1 mirror of .pre-commit-config.yaml hook
+              # `omnivoice-router-build-parity` `files:` regex.
+              - '02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.ts'
+              - '02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.js'
+              - 'scripts/check_omnivoice_router_build.py'
+
+      - name: Run router build parity check
+        if: steps.filter.outputs.router-paths == 'true' || github.event_name == 'workflow_dispatch'
+        run: python scripts/check_omnivoice_router_build.py
+
+      - name: Skipped (no router paths changed)
+        if: steps.filter.outputs.router-paths != 'true' && github.event_name != 'workflow_dispatch'
+        run: |
+          echo "::notice::No OmniVoice Router paths changed."
+          echo "Skipping build-parity gate (matches local pre-commit hook)."
+          echo "Filter source of truth: .pre-commit-config.yaml hook 'omnivoice-router-build-parity'."
+
+  # ── Stage 14: Generated Artifact Parity (HELIO_PATCH + tsc emits) ───
+  # Server-side mirror of the local pre-commit hook
+  # `generated-artifact-parity` declared in `.pre-commit-config.yaml`.
+  #
+  # Regenerates each committed artifact from its inputs and compares, instead
+  # of merely running the generator and trusting its exit code. On 2026-09-14
+  # the committed HELIO_PATCH.json certified design PASS while a fresh regen
+  # produced FAIL with three real violations in LakishaHUD.tsx; the older
+  # `scripts/ops/check-helio-dry.sh` asserted a `.status` key that does not
+  # exist in the schema, so it could never have caught that.
+  #
+  # TypeScript is installed into an isolated prefix (not `npm ci`) because this
+  # job only needs the compiler to emit three files, and the monorepo tree is
+  # large. `CAMELOT_PARITY_TSC` tells the checker where to find it.
+  #
+  # Sync assumption: future changes to either the pre-commit `files:` regex OR
+  # this dorny filter MUST update the other in lock-step within the same PR.
+  generated-artifact-parity:
+    name: Generated Artifact Parity
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          # Plain YAML scalar (not quoted) so it parses cleanly, matching the
+          # node-version convention in .github/workflows/kba-smoke.yml.
+          node-version: 22
+
+      - name: Install TypeScript into an isolated prefix
+        run: |
+          TS_VERSION="$(node -p "require('./package.json').devDependencies.typescript.replace(/^[^0-9]/, '')")"
+          echo "Pinning parity toolchain to typescript@${TS_VERSION}"
+          npm install --no-save --no-audit --no-fund --prefix .parity-toolchain "typescript@${TS_VERSION}"
+          test -f .parity-toolchain/node_modules/typescript/bin/tsc
+
+      # Cheap and self-contained: proves the comparison logic still classifies
+      # drift correctly before relying on its verdict for the real artifacts.
+      - name: Self-test the parity checker
+        run: python scripts/check_generated_artifact_parity.py --self-test
+
+      - name: Detect changes to parity-affected files
+        id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            artifact-paths:
+              # Strict 1:1 mirror of .pre-commit-config.yaml hook
+              # `generated-artifact-parity` `files:` regex.
+              - 'HELIO_PATCH.json'
+              - 'scripts/regen-helio-patch.mjs'
+              - 'scripts/check_generated_artifact_parity.py'
+              - 'apps/pwa/src/components/LakishaHUD.tsx'
+              - 'apps/pwa/src/app/page.tsx'
+              - 'apps/bifrost/src/security.ts'
+              - 'apps/bifrost/src/server.ts'
+              - 'apps/bifrost/src/mcp.ts'
+              - '02_FORGE/KINETIC_ARMORY/edge-router/edge-router.ts'
+              - '02_FORGE/KINETIC_ARMORY/edge-router/edge-router.js'
+              - '02_FORGE/KINETIC_ARMORY/edge-router/tsconfig.json'
+              - 'extensions/camelot-vscode/src/**/*.ts'
+              - 'extensions/camelot-vscode/out/**/*.js'
+              - 'extensions/camelot-vscode/tsconfig.json'
+
+      - name: Run generated artifact parity check
+        if: steps.filter.outputs.artifact-paths == 'true' || github.event_name == 'workflow_dispatch'
+        env:
+          CAMELOT_PARITY_TSC: .parity-toolchain/node_modules/typescript/bin/tsc
+        run: python scripts/check_generated_artifact_parity.py
+
+      - name: Skipped (no parity-affected files changed)
+        if: steps.filter.outputs.artifact-paths != 'true' && github.event_name != 'workflow_dispatch'
+        run: |
+          echo "::notice::No generated-artifact-parity paths changed."
+          echo "Skipping parity gate (matches local pre-commit hook)."
+          echo "Filter source of truth: .pre-commit-config.yaml hook 'generated-artifact-parity'."

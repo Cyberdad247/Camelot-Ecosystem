@@ -3,6 +3,7 @@
 'use client';
 
 import { useState } from 'react';
+import { InterphaseCartridge } from '../cartridges/interphase/InterphaseCartridge';
 import { useBifrost } from '../context/BifrostContext';
 import { LakishaHUD } from './LakishaHUD';
 import { PlanCard } from './PlanCard';
@@ -21,6 +22,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 const TABS = [
   'Overview',
+  'Interphase',
   'Desktop Grid',
   'Twin-Brain Nodes',
   'Excalibur',
@@ -98,6 +100,7 @@ export function Dashboard() {
 
         <main className="px-10">
           {active === 'Overview' && <OverviewTab />}
+          {active === 'Interphase' && <InterphaseCartridge />}
           {active === 'Desktop Grid' && <DesktopGrid />}
           {active === 'Twin-Brain Nodes' && <TwinBrainNodeManager />}
           {active === 'Excalibur' && <ExcaliburCommandCenterTab />}

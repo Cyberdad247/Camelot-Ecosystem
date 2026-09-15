@@ -329,10 +329,10 @@
       "active_last_3_months": true
     },
     {
-      "knight_id": "ANTIGRAVITY",
+      "knight_id": "SIR_HELIOS",
       "notebook_id": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
-      "vfs_path": "vfs://worldtree/knights/antigravity/",
-      "role": "NotebookLM + AntiGravity CLI Synergy & MCP Integration",
+      "vfs_path": "vfs://worldtree/knights/sir_helios/",
+      "role": "NotebookLM + Sir Helios CLI Synergy & CloudBrain Integration",
       "primary_model": "FastMCP / agy",
       "active_last_3_months": true
     },

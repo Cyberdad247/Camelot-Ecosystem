@@ -31,19 +31,9 @@ const MasterBootstrapScript = lazy(() => import('./components/MasterBootstrapScr
 const OperatorConsoleHtmx = lazy(() => import('./components/OperatorConsoleHtmx').then(m => ({ default: m.OperatorConsoleHtmx })));
 const VpsHubInitiationConsole = lazy(() => import('./components/VpsHubInitiationConsole').then(m => ({ default: m.VpsHubInitiationConsole })));
 const DocumentationForge = lazy(() => import('./components/DocumentationForge').then(m => ({ default: m.DocumentationForge })));
+const HermesDashboard = lazy(() => import('./components/HermesDashboard').then(m => ({ default: m.HermesDashboard })));
 
-
-
-
-
-
-
-
-
-
-
-
-import { Layers, Maximize2, Plus, Minus, TreeDeciduous, Terminal, Server, Flame, Lock, Cpu, FileCode, ShieldCheck, HardDrive, BookOpen } from 'lucide-react';
+import { Layers, Maximize2, Plus, Minus, TreeDeciduous, Terminal, Server, Flame, Lock, Cpu, FileCode, ShieldCheck, HardDrive, BookOpen, Bot } from 'lucide-react';
 
 const INITIAL_LOGS: TerminalLog[] = [
   { id: '1', timestamp: '12:00:01', level: 'sovereign', message: 'WORLD_TREE_BOOTSTRAP... OK' },
@@ -119,9 +109,10 @@ export default function App() {
   const [minimizedTabs, setMinimizedTabs] = useState<Record<string, boolean>>({});
 
   const tabLabels: Record<string, { label: string; icon: any }> = {
+    deck: { label: 'World Tree UI (2D ➔ 3D Continuity)', icon: TreeDeciduous },
+    hermes: { label: 'Hermes Agent Dashboard', icon: Bot },
     vps_init: { label: 'VPS Hub Initiation (vps3573819)', icon: Server },
     docs: { label: 'Docs Forge (νKG-Crystal)', icon: BookOpen },
-    deck: { label: 'World Tree UI (2D ➔ 3D Continuity)', icon: TreeDeciduous },
     operator: { label: 'HTMX Operator Console', icon: ShieldCheck },
     bento: { label: 'Bento Grid Hub', icon: Layers },
     terminal: { label: 'Baremetal Terminal', icon: Terminal },
@@ -330,7 +321,7 @@ export default function App() {
       />
 
       {/* Main Content Arena */}
-      <main className={`flex-1 w-full ${(activeTab === 'vps_init' || activeTab === 'docs' || activeTab === 'deck' || activeTab === 'operator') ? 'p-0' : 'p-2 sm:p-4'}`}>
+      <main className={`flex-1 w-full ${(activeTab === 'vps_init' || activeTab === 'docs' || activeTab === 'deck' || activeTab === 'operator' || activeTab === 'hermes') ? 'p-0' : 'p-2 sm:p-4'}`}>
         <Suspense fallback={<div className="flex-1 flex flex-col items-center justify-center min-h-[500px]"><div className="w-12 h-12 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin"></div><div className="mt-4 text-cyan-500 font-mono text-sm tracking-widest font-bold animate-pulse">INITIATING DMA TRANSFER...</div></div>}>
         {isCurrentTabMinimized ? (
           <div className="max-w-4xl mx-auto my-12 p-8 bg-[#0a1020]/90 border-2 border-cyan-500/40 rounded-2xl text-center space-y-4 shadow-2xl animate-fadeIn">
@@ -352,6 +343,13 @@ export default function App() {
           </div>
         ) : (
           <>
+            {activeTab === 'hermes' && (
+              <HermesDashboard
+                onExecuteCommand={handleRunCustomCommand}
+                onNavigateTab={setActiveTab}
+              />
+            )}
+
             {activeTab === 'vps_init' && (
               <VpsHubInitiationConsole
                 onExecuteCommand={handleRunCustomCommand}

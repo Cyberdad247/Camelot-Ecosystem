@@ -57,7 +57,12 @@ const QUEUE_PATH = path.join(HOME, "logs", "harness_queue.jsonl");
 const VAD_RMS_THRESHOLD = 0.01;
 const VAD_SPEECH_MIN_MS = 200;
 const VAD_SILENCE_GAP_MS = 800;
+const PCM_FRAME_BYTES = 3200;
+const HTTP_SESSION_TTL_MS = 60000;
+const MAX_HTTP_SESSIONS = 16;
+const AUDIO_RETENTION_MS = 5 * 60000;
 const peers = new Map();
+const httpPeers = new Map();
 function enqueue(task) {
     try {
         fs.appendFileSync(QUEUE_PATH, JSON.stringify(task) + "\n", "utf8");
@@ -103,6 +108,20 @@ function writeWavFile(filePath, samples, sampleRate = 16000) {
         offset += 2;
     }
     fs.writeFileSync(filePath, buffer);
+}
+function purgeExpiredAudio(audioDir, now) {
+    try {
+        for (const entry of fs.readdirSync(audioDir, { withFileTypes: true })) {
+            if (!entry.isFile() || !entry.name.endsWith(".wav"))
+                continue;
+            const candidate = path.join(audioDir, entry.name);
+            if (now - fs.statSync(candidate).mtimeMs > AUDIO_RETENTION_MS)
+                fs.unlinkSync(candidate);
+        }
+    }
+    catch (error) {
+        console.error(`[OMNIVOICE] Audio retention sweep failed: ${error}`);
+    }
 }
 // ── Energy VAD state machine ──────────────────────────────────────────────────
 function processFrame(state, samples) {
@@ -164,6 +183,7 @@ function processFrame(state, samples) {
             if (!fs.existsSync(audioDir)) {
                 fs.mkdirSync(audioDir, { recursive: true });
             }
+            purgeExpiredAudio(audioDir, now);
             const audioPath = path.join(audioDir, `${state.id}-${now}.wav`);
             writeWavFile(audioPath, state.utteranceBuffer, 16000);
             enqueue({
@@ -174,6 +194,7 @@ function processFrame(state, samples) {
                 samples_count: state.utteranceBuffer.length,
                 duration_ms: speechDuration,
                 file_path: audioPath,
+                expires_at: new Date(now + AUDIO_RETENTION_MS).toISOString(),
                 queued_at: new Date().toISOString(),
                 priority: 1,
             });
@@ -186,8 +207,122 @@ function processFrame(state, samples) {
         }
     }
 }
+function isLoopback(address) {
+    return address === "127.0.0.1" || address === "::1" || address === "::ffff:127.0.0.1";
+}
+function header(req, name) {
+    const value = req.headers[name];
+    return Array.isArray(value) ? value[0] ?? "" : value ?? "";
+}
+function respondJson(res, status, body) {
+    res.writeHead(status, {
+        "Content-Type": "application/json; charset=utf-8",
+        "Cache-Control": "no-store",
+    });
+    res.end(JSON.stringify(body));
+}
+function resetPeerSpeech(peer) {
+    peer.speaking = false;
+    peer.speechStartMs = null;
+    peer.silenceStartMs = null;
+    peer.utteranceBuffer = [];
+}
+function getHttpPeer(sessionId, remoteAddr) {
+    const now = Date.now();
+    for (const [id, state] of httpPeers) {
+        if (now - state.lastSeenMs > HTTP_SESSION_TTL_MS)
+            httpPeers.delete(id);
+    }
+    const existing = httpPeers.get(sessionId);
+    if (existing) {
+        existing.lastSeenMs = now;
+        return existing;
+    }
+    if (httpPeers.size >= MAX_HTTP_SESSIONS)
+        return null;
+    const created = {
+        peer: {
+            id: sessionId,
+            remoteAddr,
+            speaking: false,
+            speechStartMs: null,
+            silenceStartMs: null,
+            utteranceBuffer: [],
+        },
+        lastSeenMs: now,
+        lastSequence: -1,
+    };
+    httpPeers.set(sessionId, created);
+    return created;
+}
 // ── Server ────────────────────────────────────────────────────────────────────
 const server = http.createServer((req, res) => {
+    if (req.method === "POST" && req.url === "/ingest_pcm") {
+        const remoteAddr = req.socket.remoteAddress ?? "";
+        if (!isLoopback(remoteAddr)) {
+            respondJson(res, 403, { error: "loopback_only" });
+            req.resume();
+            return;
+        }
+        if (!header(req, "content-type").toLowerCase().startsWith("application/octet-stream")) {
+            respondJson(res, 415, { error: "unsupported_media_type" });
+            req.resume();
+            return;
+        }
+        const sessionId = header(req, "x-voice-session");
+        const sequenceText = header(req, "x-voice-sequence");
+        const sampleRateText = header(req, "x-voice-sample-rate");
+        const discontinuity = header(req, "x-voice-discontinuity") === "1";
+        const sequence = Number(sequenceText);
+        if (!/^vfc-[a-f0-9]{24}$/.test(sessionId) || !Number.isSafeInteger(sequence) || sequence < 0 || sampleRateText !== "16000") {
+            respondJson(res, 400, { error: "invalid_frame_metadata" });
+            req.resume();
+            return;
+        }
+        const contentLength = Number(header(req, "content-length"));
+        if (!Number.isSafeInteger(contentLength) || contentLength <= 0 || contentLength > PCM_FRAME_BYTES || contentLength % 2 !== 0) {
+            respondJson(res, 413, { error: "invalid_frame_size" });
+            req.resume();
+            return;
+        }
+        const state = getHttpPeer(sessionId, remoteAddr);
+        if (!state) {
+            respondJson(res, 503, { error: "session_capacity_reached" });
+            req.resume();
+            return;
+        }
+        if (sequence <= state.lastSequence) {
+            respondJson(res, 409, { error: "stale_sequence" });
+            req.resume();
+            return;
+        }
+        const chunks = [];
+        let received = 0;
+        req.on("data", (chunk) => {
+            received += chunk.length;
+            if (received <= PCM_FRAME_BYTES)
+                chunks.push(chunk);
+        });
+        req.on("end", () => {
+            if (received !== contentLength || received > PCM_FRAME_BYTES || received % 2 !== 0) {
+                respondJson(res, 400, { error: "frame_length_mismatch" });
+                return;
+            }
+            if (discontinuity || (state.lastSequence >= 0 && sequence !== state.lastSequence + 1)) {
+                resetPeerSpeech(state.peer);
+            }
+            state.lastSequence = sequence;
+            state.lastSeenMs = Date.now();
+            const pcm = Buffer.concat(chunks, received);
+            const samples = new Array(received / 2);
+            for (let offset = 0; offset < received; offset += 2) {
+                samples[offset / 2] = pcm.readInt16LE(offset) / 32768;
+            }
+            processFrame(state.peer, samples);
+            respondJson(res, 202, { accepted: true, sequence });
+        });
+        return;
+    }
     if (req.method === 'POST' && req.url === '/broadcast_audio') {
         const chunks = [];
         req.on('data', chunk => chunks.push(chunk));
@@ -213,8 +348,8 @@ const server = http.createServer((req, res) => {
     res.end("Not found");
 });
 const wss = new ws_1.WebSocketServer({ server });
-server.listen(PORT, () => {
-    console.log(`[OMNIVOICE] OmniVoice Router :${PORT} ONLINE`);
+server.listen(PORT, "127.0.0.1", () => {
+    console.log(`[OMNIVOICE] OmniVoice Router 127.0.0.1:${PORT} ONLINE`);
 });
 wss.on("connection", (ws, req) => {
     const remoteAddr = req.socket.remoteAddress ?? "";

@@ -18,3 +18,9 @@ When Hermes_Prime encounters a multi-vector problem, the trait blending engine w
 ## Dual CloudBrain Notebook Tethers
 1. **Primary VFS Forge Node**: `Hermes_prime_vfs_forge` (`28f89cb6-5048-4b5d-9e94-376082d24744`) — anchors kinetic soul scaffolding, PhialEngine parameters, and MGV loop state.
 2. **Evolution & Autonomous Transcendence Node**: `The Hermes Agent: Evolution Beyond OpenClaw` (`24f4a450-6456-49fe-bfab-8cfcf7c2a33b`) — governs gateway autonomy, OpenClaw architectural transcendence, and multi-agent NousResearch synthesis.
+
+## Honcho Self-Hosted L4 Metamemory Layer
+- **Memory Architecture**: Self-hosted Honcho engine (`deploy/honcho-self-hosted/`) integrated directly into Hermes Agent via `control_plane/infra/honcho_bridge.py`.
+- **Dialectic & User Modeling**: Retains cross-session operator state, deductive observation graphs, and long-term theory-of-mind without cloud data leakage.
+- **Endpoint**: Local `http://127.0.0.1:8000` / VPS Hub `http://100.71.218.75:8000`.
+- **VFS Anchor**: `vfs://worldtree/memory/honcho/` mapped to WorldTree root `a0a4bfb9-e847-4c38-be39-7aee398f0795`.

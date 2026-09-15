@@ -15,9 +15,14 @@ function TelemetryMetric({
   budget,
 }: { label: string; ms: number | null; budget: number }) {
   const status = budgetStatus(ms, budget);
-  const dot = status === 'breach' ? 'bg-red-400' : status === 'warn' ? 'bg-amber-400' : 'bg-violet';
+  // Severity ramp is expressed in the sovereign palette only — violet (calm),
+  // gold (attention), gold-royal (peak). Standard red/amber are forbidden by the
+  // design-token conformance rule enforced in HELIO_PATCH.json, so do not reach
+  // for `red-*`/`amber-*` here even though a latency breach feels like a
+  // conventional "error" state.
+  const dot = status === 'breach' ? 'bg-gold-royal' : status === 'warn' ? 'bg-gold' : 'bg-violet';
   const value =
-    status === 'breach' ? 'text-red-400' : status === 'warn' ? 'text-amber-300' : 'text-white/60';
+    status === 'breach' ? 'text-gold-royal' : status === 'warn' ? 'text-gold-light' : 'text-white/60';
   return (
     <span className="flex items-center gap-1.5">
       <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
@@ -65,8 +70,10 @@ export function LakishaHUD() {
       : lane === 'LOCAL_TOOLS'
         ? 'LOCAL'
         : null;
+  // //REZERO uses gold-royal so it stays distinct from both the default gold
+  // lane badge and the violet REMOTE_MCP badge.
   const laneClass = state?.lastRezeroed
-    ? 'border-amber-400/40 text-amber-300'
+    ? 'border-gold-royal/40 text-gold-royal'
     : lane === 'REMOTE_MCP'
       ? 'border-violet/40 text-violet-light'
       : 'border-gold/30 text-gold-light';
