@@ -113,6 +113,20 @@ def probe_ollama() -> dict:
     return {"live": False, "url": None, "models": [], "note": "connection refused"}
 
 
+def probe_vps_hermes_prime() -> dict:
+    """Read the configured VPS Hermes_Prime contract without serializing secrets."""
+    try:
+        from control_plane.infra.vps_hermes_prime import summarize_vps_hermes_prime
+
+        return summarize_vps_hermes_prime(root=_REPO, probe_live=False)
+    except Exception as exc:
+        return {
+            "status": "UNAVAILABLE",
+            "summary": f"{type(exc).__name__}: {exc}",
+            "secret_values_serialized": False,
+        }
+
+
 # ── API key discovery ─────────────────────────────────────────────────────────
 
 def scan_api_keys() -> dict:
@@ -415,6 +429,7 @@ def show_status() -> None:
 
     cliproxy = probe_cliproxy()
     ollama   = probe_ollama()
+    hermes   = probe_vps_hermes_prime()
     keys     = scan_api_keys()
     hw       = detect_hardware()
     cfg      = load_config()
@@ -431,6 +446,15 @@ def show_status() -> None:
               f"{cliproxy.get('latency_ms','?')}ms · {cliproxy['note']}")
     t.add_row("Ollama :11434",  _status_cell(ollama["live"]),
               ", ".join(ollama["models"][:4]) if ollama["live"] else ollama["note"])
+    hermes_ready = hermes.get("status") in {"CONFIGURED", "ONLINE", "DEGRADED"}
+    hermes_detail = hermes.get("summary") or (
+        f"{hermes.get('tailscale_ip', '?')} - Bifrost :3001 - Mesh :8095 - camelot hermes"
+    )
+    t.add_row(
+        "VPS Hermes_Prime",
+        "[green]CONFIGURED[/green]" if hermes_ready else "[red]unavailable[/red]",
+        str(hermes_detail),
+    )
     t.add_row("Anthropic API",  _status_cell(keys["anthropic"]),
               "key present" if keys["anthropic"] else "not detected")
     t.add_row("Google API",     _status_cell(keys["google"]),

@@ -73,6 +73,22 @@ def _build_parser() -> argparse.ArgumentParser:
     orchestrator.add_argument("--status", default="green")
     orchestrator.add_argument("--json", action="store_true", help="Emit JSON output")
 
+    hermes = sub.add_parser("hermes", help="Show VPS Hermes_Prime and Bifrost bridge status")
+    hermes.add_argument("--json", action="store_true", help="Emit JSON output")
+    hermes.add_argument(
+        "--probe-live",
+        dest="probe_live",
+        action="store_true",
+        default=False,
+        help="Run read-only TCP probes against VPS bridge ports",
+    )
+    hermes.add_argument(
+        "--no-probe",
+        dest="probe_live",
+        action="store_false",
+        help="Skip live probes and show configured contract only",
+    )
+
     ledger = sub.add_parser("ledger", help="Update and sync repository-side ledgers")
     ledger_sub = ledger.add_subparsers(dest="ledger_command", required=True)
     ledger_sub.add_parser("status", help="Show repository ledger status")

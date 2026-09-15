@@ -87,6 +87,8 @@ def _run_orchestrator_cli(
                 {"name": "CLIProxyAPI", "ok": True, "required": True},
                 {"name": "Defense Grid", "ok": True, "required": True},
                 {"name": "Kinetic Edge", "ok": True, "required": True},
+                {"name": "VPS Hermes_Prime", "ok": True, "required": False},
+                {"name": "Bifrost Gateway :3001", "ok": True, "required": False},
                 {"name": "Cloud Brain", "ok": True, "required": True},
             ]
         )
@@ -98,6 +100,8 @@ def _run_orchestrator_cli(
                 {"name": "CLIProxyAPI", "ok": True, "required": True},
                 {"name": "Defense Grid", "ok": True, "required": True},
                 {"name": "Kinetic Edge", "ok": True, "required": True},
+                {"name": "VPS Hermes_Prime", "ok": True, "required": False},
+                {"name": "Bifrost Gateway :3001", "ok": True, "required": False},
                 {"name": "Cloud Brain", "ok": True, "required": True},
             ]
         )

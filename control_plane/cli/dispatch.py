@@ -82,7 +82,7 @@ def _log_run(
 
 KNOWN_COMMANDS = {
     "chat", "route", "triage", "cloudbrain", "orchestrator", "sarda",
-    "ledger", "toon", "glyph", "glyth", "forge-unify", "cockpit",
+    "hermes", "ledger", "toon", "glyph", "glyth", "forge-unify", "cockpit",
     "evolve", "team", "codex", "bio-swarm", "nano-swarm", "microcubed",
     "gemini-ext", "scripts", "ctx7", "pipeline", "health", "templates",
 }
@@ -167,4 +167,3 @@ def main() -> int:
         json_mode=args.json,
         non_interactive=getattr(args, "non_interactive", False),
     )
-

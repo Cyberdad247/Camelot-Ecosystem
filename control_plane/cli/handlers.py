@@ -121,6 +121,21 @@ def _handle_orchestrator(args: Any, _cm: Any, _pm: Any, _argv: list[str]) -> int
 
 
 # ---------------------------------------------------------------------------
+# hermes
+# ---------------------------------------------------------------------------
+
+def _handle_hermes(args: Any, _cm: Any, _pm: Any, _argv: list[str]) -> int:
+    from control_plane.infra.vps_hermes_prime import summarize_vps_hermes_prime
+
+    output = summarize_vps_hermes_prime(
+        root=CAMELOT_HOME,
+        probe_live=getattr(args, "probe_live", False),
+    )
+    _emit(output, json_mode=args.json, title="VPS Hermes_Prime")
+    return 0 if output.get("status") in {"CONFIGURED", "ONLINE", "DEGRADED"} else 2
+
+
+# ---------------------------------------------------------------------------
 # ledger
 # ---------------------------------------------------------------------------
 
@@ -984,6 +999,7 @@ COMMAND_REGISTRY: dict[str, HandlerFn] = {
     "route": _handle_route,
     "triage": _handle_triage,
     "orchestrator": _handle_orchestrator,
+    "hermes": _handle_hermes,
     "ledger": _handle_ledger,
     "toon": _handle_toon,
     "glyph": _handle_glyph,

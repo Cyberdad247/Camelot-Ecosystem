@@ -32,6 +32,7 @@ from control_plane.core.knight_configuration import write_knight_configuration
 from .nano_swarm_runtime import boot_nano_swarm_runtime
 from .orchestration_state import summarize_boot_results
 from .symbiotic_maintenance import boot_symbiotic_maintenance
+from .vps_hermes_prime import boot_vps_hermes_prime
 
 _C = {
     "g": "\033[92m",
@@ -1234,6 +1235,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},
         {"name": "OmniRoute    :20128", "required": False, "fn": lambda: boot_omniroute_gateway(home)},
         {"name": "Hermes OmniRoute", "required": False, "fn": lambda: boot_hermes_omniroute_orchestrator(home)},
+        {"name": "VPS Hermes_Prime", "required": False, "fn": lambda: boot_vps_hermes_prime(home)},
         {"name": "Heimdall Bifrost Governance", "required": False, "fn": lambda: boot_heimdall_bifrost_governance(home)},
         {"name": "Local LT Memory:8200","required": False, "fn": lambda: start_local_lt_memory(home)},
         {"name": "Cloud Brain  Auth",  "required": False, "fn": lambda: boot_cloud_brain_auth(home)},
