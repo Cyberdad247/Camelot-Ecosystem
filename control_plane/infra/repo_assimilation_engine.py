@@ -681,6 +681,45 @@ def build_vps_hub_default_cartridge() -> Tuple[str, str, List[CartridgeAspect], 
     return cartridge_id, name, aspects, branch_name
 
 
+def build_omarchy_default_cartridge() -> Tuple[str, str, List[CartridgeAspect], str]:
+    """Helper returning standard cartridge configuration for Omarchy integration."""
+    cartridge_id = "omarchy-vps-hermes-v1"
+    name = "Omarchy Sovereign Agentic Linux & Hermes Layer Cartridge"
+    branch_name = "cartridge/omarchy-vps-hermes-v1"
+    aspects = [
+        CartridgeAspect(
+            id="aspect_omarchy_headless",
+            name="Omarchy Headless Toolchain & Security Baseline",
+            subsystem="system_isolation",
+            description="Bare-metal Linux user namespaces, cgroups resource slices, and UFW perimeter hardening (0% GUI/Hyprland on VPS)",
+        ),
+        CartridgeAspect(
+            id="aspect_omarchy_hermes_runtime",
+            name="NousResearch Hermes Layer Integration",
+            subsystem="agent_executor",
+            ports=[80, 8642, 9119],
+            health_endpoint="/health",
+            systemd_unit="hermes-agent.service",
+            description="Native tethering to ~/.hermes runtime, OpenAI-compatible API gateway, and Web Dashboard",
+        ),
+        CartridgeAspect(
+            id="aspect_omarchy_agent_matrix",
+            name="Multi-Agent Execution Matrix",
+            subsystem="swarm_dispatch",
+            description="Lazy-loaded launcher stubs and session metrics for claude, codex, agy, opencode, and hermes",
+        ),
+        CartridgeAspect(
+            id="aspect_omarchy_coredump_sentinel",
+            name="Automated Crash Diagnosis Sentinel",
+            subsystem="system_resilience",
+            systemd_unit="systemd-coredump.service",
+            description="systemd-coredump inspection pipeline dispatched directly to Sir Debug & Hermes Agent",
+        ),
+    ]
+    return cartridge_id, name, aspects, branch_name
+
+
+
 def main():
     parser = argparse.ArgumentParser(description="Camelot-OS GitHub Repository Assimilation Engine")
     parser.add_argument("--repo", default="https://github.com/Cyberdad247/Camelot-VPS.git", help="Target GitHub repo URL")

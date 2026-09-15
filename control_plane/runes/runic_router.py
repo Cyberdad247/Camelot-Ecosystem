@@ -2256,11 +2256,24 @@ def _handle_assimilate_repo(param: Any, context: dict) -> dict:
 
     should_merge = "merge" in raw.lower() or bool(context.get("merge"))
     try:
-        from control_plane.infra.repo_assimilation_engine import RepoAssimilationEngine, build_vps_hub_default_cartridge
+        from control_plane.infra.repo_assimilation_engine import (
+            RepoAssimilationEngine,
+            build_vps_hub_default_cartridge,
+            build_omarchy_default_cartridge,
+        )
         engine = RepoAssimilationEngine()
         repo_root = Path(__file__).resolve().parent.parent.parent
-        local_path = repo_root / "apps" / "camelot-vps-hub"
-        cartridge_id, name, aspects, branch_name = build_vps_hub_default_cartridge()
+
+        if "omarchy" in url.lower():
+            staging_path = repo_root / ".camelot" / "staging" / "repos" / "omarchy"
+            local_path = staging_path if staging_path.exists() else (repo_root / "apps" / "omarchy")
+            cartridge_id, name, aspects, branch_name = build_omarchy_default_cartridge()
+            base_branch = "quattro"
+        else:
+            local_path = repo_root / "apps" / "camelot-vps-hub"
+            cartridge_id, name, aspects, branch_name = build_vps_hub_default_cartridge()
+            base_branch = "main"
+
         receipt = engine.assimilate(
             repo_url=url,
             local_path=local_path,
@@ -2268,10 +2281,12 @@ def _handle_assimilate_repo(param: Any, context: dict) -> dict:
             name=name,
             aspects=aspects,
             branch_name=branch_name,
+            base_branch=base_branch,
         )
         merge_info = None
         if should_merge:
-            staging_path = repo_root / ".camelot" / "staging" / "repos" / "Camelot-VPS"
+            staging_name = "omarchy" if "omarchy" in url.lower() else "Camelot-VPS"
+            staging_path = repo_root / ".camelot" / "staging" / "repos" / staging_name
             merge_target = staging_path if staging_path.exists() else local_path
             merge_info = engine.merge_to_main(local_path=merge_target, branch_name=branch_name, base_branch="main")
 

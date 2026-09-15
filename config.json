@@ -1,0 +1,19 @@
+{
+  "runtime_mode": "SOVEREIGN",
+  "version": "v10001.00-CYBERTRONIA",
+  "api_keys": {
+    "groq": true,
+    "gemini": true,
+    "openai": false,
+    "openrouter": false,
+    "resend": false,
+    "livekit": false,
+    "qdrant": false,
+    "redis": false
+  },
+  "governance": {
+    "zero_trust": true,
+    "sir_ghost_airgap": true,
+    "docker_bloat": null
+  }
+}

@@ -36,6 +36,10 @@
     },
     "status": "MERGED_MAIN_UNIFIED",
     "timestamp": "2026-09-15T00:16:14.260224+00:00",
-    "last_synced": "2026-09-15T00:16:14.260224+00:00"
+    "last_synced": "2026-09-15T01:09:11.905898+00:00",
+    "active_cartridges": [
+      "omarchy-vps-hermes-v1"
+    ],
+    "latest_assimilation_delivery": "asm_bd835c11f0"
   }
 ]
