@@ -97,5 +97,12 @@ def test_cliproxy_default_is_registered_without_replacing_default_routes():
     manifest = json.loads((root / "03_VAULT/training/configs/sovereign_models.json").read_text(encoding="utf-8"))
     routing = json.loads((root / "01_KERNEL/EXCALIBUR/config/llm_routing.json").read_text(encoding="utf-8"))
     assert manifest["models"]["cliproxy:default"]["backend"] == "cliproxy"
+    assert {
+        "id": "cliproxy:default",
+        "role": "high_reasoning_proxy",
+        "max_ctx_tokens": 200000,
+        "cost_weight": 0.2,
+        "use_cases": ["high_reasoning", "swarm_coordination", "repo_analysis"],
+    } in routing["model_profiles"]
     assert routing["routing_policy"]["swarm_coordination"] == "anthropic:claude-3.5-sonnet"
     assert routing["routing_policy"]["high_stakes_synthesis"] == "openai:gpt-4.5"
