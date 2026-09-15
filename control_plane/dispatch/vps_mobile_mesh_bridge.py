@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: MIT
+import hmac
 import json, os, logging
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -11,6 +12,7 @@ VPS_KBA_TAILSCALE = '100.71.218.75'
 FATHERS_CAMELOT_TAILSCALE = '100.121.48.50'
 MOBILE_TAILSCALE_IP = '100.106.246.126'
 LOCAL_CYBERTRONIA_IP = '100.118.224.52'
+MOTO_TAILSCALE_IP = '100.89.129.105'
 LOCAL_BIFROST_PORT = int(os.getenv('BIFROST_PORT', 3001))
 BRIDGE_PORT = int(os.getenv('VPS_BRIDGE_PORT', 8095))
 
@@ -43,8 +45,20 @@ def load_mesh_topology() -> dict:
         }
     }
 
+def is_mesh_request_authorized(headers: dict) -> bool:
+    """Require the runtime-only mesh token for topology and telemetry reads."""
+    expected = os.getenv("MESH_BRIDGE_TOKEN", "")
+    provided = headers.get("x-camelot-token", "")
+    if not expected or not provided:
+        return False
+    return hmac.compare_digest(provided, expected)
+
+
 class MeshBridgeHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if not is_mesh_request_authorized(self.headers):
+            self._send_json({"error": "mesh bridge authentication failed"}, code=401)
+            return
         if self.path in ['/mesh/status', '/', '/api/topology']:
             topology_data = load_mesh_topology()
             status = {
@@ -95,6 +109,26 @@ class MeshBridgeHandler(BaseHTTPRequestHandler):
                 "mobile_sentinel": MOBILE_TAILSCALE_IP,
                 "cockpit": "Excalibur Command Center (S26 Ultra)",
                 "live_state": cockpit_state or {"status": "ACTIVE_SENTINEL", "host": "cybertronia"},
+            })
+        elif self.path in ['/telemetry/moto', '/api/moto', '/moto/sentinel', '/api/sentinel/moto']:
+            self._send_json({
+                "source": "motorola_moto_g_power",
+                "tailscale_ip": MOTO_TAILSCALE_IP,
+                "designation": "AUXILIARY_MOBILE_SENTINEL",
+                "role": "Auxiliary Mobile Sentinel & Backup Telemetry Relay",
+                "model": "Motorola Moto G Power 5G (2024)",
+                "status": "ONLINE_STANDBY",
+                "active_ports": {"aux_sentinel_relay": 8092, "termux_ssh": 8023},
+                "primary_cockpit_peer": MOBILE_TAILSCALE_IP,
+                "mesh_gateway": f"http://{LOCAL_CYBERTRONIA_IP}:{BRIDGE_PORT}",
+                "bifrost_port": LOCAL_BIFROST_PORT,
+                "governing_knight": "SIR_HEIMDALL",
+            })
+        elif self.path in ['/mesh/nodes', '/api/mesh/nodes']:
+            topology_data = load_mesh_topology()
+            self._send_json({
+                "account": topology_data.get('tailscale_account', 'Cyberdad247@github'),
+                "nodes": topology_data.get('nodes', {}),
             })
         elif self.path in ['/heimdall/governance', '/api/heimdall']:
             gov_path = os.path.join(os.path.dirname(__file__), '../../03_VAULT/runtime_state/heimdall_bifrost_governance_latest.json')

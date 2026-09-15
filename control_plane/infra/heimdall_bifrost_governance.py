@@ -137,6 +137,59 @@ BIFROST_KNIGHTS_SWARM: tuple[dict[str, Any], ...] = (
     },
 )
 
+CANONICAL_MESH_INVENTORY: tuple[dict[str, Any], ...] = (
+    {
+        "id": "cybertronia",
+        "name": "cybertronia",
+        "tailscale_ip": "100.118.224.52",
+        "role": "Primary Windows Orchestrator & Local VFS Factory",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "vashawns_s26_ultra",
+        "name": "vashawns-s26-ultra",
+        "tailscale_ip": "100.106.246.126",
+        "role": "Excalibur Command Center (Kinetic Mobile Sentinel & Cockpit / Android 16)",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "fothers_camelot",
+        "name": "fothers-camelot",
+        "tailscale_ip": "100.121.48.50",
+        "role": "Windows Sovereign Secondary Node & Failover Rig",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "lakesha",
+        "name": "lakesha",
+        "tailscale_ip": "100.100.155.55",
+        "role": "Lakisha Voice OS Host & Secondary Surface",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "camelot_relay_modal",
+        "name": "camelot-relay-modal",
+        "tailscale_ip": "100.84.98.39",
+        "role": "Linux Cloud Relay Node & Modal Inference Bridge",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "kba_services",
+        "name": "kba-services",
+        "tailscale_ip": "100.71.218.75",
+        "role": "Linux Remote Services Node & VPS KVM563 Bridge (162.35.107.134)",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "motorola_moto_g_power",
+        "name": "motorola-moto-g-power-5g---2024",
+        "tailscale_ip": "100.89.129.105",
+        "role": "Auxiliary Kinetic Mobile Sentinel & Backup Telemetry Relay",
+        "status": "ACTIVE",
+        "governing_knight": "SIR_HEIMDALL",
+    },
+)
+
 
 def _read_json(path: Path) -> dict[str, Any]:
     try:
@@ -215,6 +268,15 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
             "tailscale_ip": "100.71.218.75",
             "role": "Camelot-OS Hub & Sovereign Control Plane",
             "always_on_agents": ["HERMES_PRIME", "SIR_HEIMDALL"],
+        },
+        "mesh_inventory": {
+            "account": "Cyberdad247@github",
+            "node_count": len(CANONICAL_MESH_INVENTORY),
+            "nodes": [dict(node) for node in CANONICAL_MESH_INVENTORY],
+            "sentinel_mobile_nodes": [
+                {"name": "vashawns-s26-ultra", "ip": "100.106.246.126", "tier": "PRIMARY_COCKPIT"},
+                {"name": "motorola-moto-g-power-5g---2024", "ip": "100.89.129.105", "tier": "AUXILIARY_SENTINEL"},
+            ],
         },
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "terminal": {
