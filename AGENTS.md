@@ -421,6 +421,24 @@ dispatch directly to the runic router.
 | `//HORDE <component> [tasks]` | LADY_APIS | Direct aggressive Map-Reduce parallel batch code creation & refactoring |
 | `//BATCH_CREATE <component> [tasks]` | LADY_APIS | Dispatch batch creation mode to Formica & Beaver micro-workers |
 | `//CHIMERA [objective]` | LADY_APIS | Execute Ancestral Chimera Research Swarm Protocol v400.0 (3-round war room) |
+| `//FORMICA <task>` | LADY_APIS | Parallel Map-Reduce Worker Ants micro-execution (150-token lifecycle) |
+| `//BEAVER <task>` | SIR_FORGE | Castor Beaver SSU construction & container isolation dams |
+| `//GORILLA <task>` | SIR_FORGE | Pongid Gorilla heavyweight API & Cloud SDK connectivity |
+| `//ARACHNE <url>` | SIR_BORIS | Arachne headless browser automation, MCP scraping & DOM sentry |
+| `//SIMIAN <target>` | SIR_SENTINEL | Chaos Monkey adversarial entropy & fault injection audit |
+| `//OWL <task>` | MERLIN_OMEGA | Strigiform Owl high-logic ToT workforce optimization |
+| `//OCTOPUS <target>` | SIR_DEBUG | Octopus Lazarus multi-threaded AST repair & self-healing |
+| `//MANTIS <target>` | SIR_CODEX | Praying Mantis surgical AST dissection & dead-code elimination |
+| `//FALCON <target>` | SIR_LUCAS | Peregrine Falcon sub-10ms line-rate telemetry interception |
+| `//CHAMELEON <target>` | LADY_GUINEVERE | Chameleon polymorphic theme shifting & adaptive layout |
+| `//ELEPHANT <query>` | LADY_MNEMOSYNE | Proboscidean Elephant long-term MemPalace vector indexing |
+| `//LOBO <target>` | KNIGHT_STRATEGOS | Wolf Pack quorum consensus & commercial revenue strikes |
+| `//VULPIS <target>` | LADY_GUINEVERE | Fox growth hacking, SEO/GEO & multi-channel syndication |
+| `//PHOENIX` | SIR_DEBUG | Phoenix automated failure recovery & ReZero rollback |
+| `//CORVUS [path]` | SIR_CODEX | Raven dead-drop forensic scavenging & commit reverse-engineering |
+| `//DELPHINUS <stream>` | SIR_SONUS | Dolphin acoustic resonance & Aoede speech-to-speech routing |
+| `//SCORPIO <target>` | SIR_GIDEON | Scorpion GIDEON 13-gate forensic risk needle & security audit |
+| `//ALCHEMIST <model>` | SIR_ALCHEMIST | Alchemist TurboQuant 3-bit / BitNet b1.58 model quantization |
 
 ### Omega Dispatch
 

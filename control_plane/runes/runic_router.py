@@ -771,6 +771,25 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_chimera",
         "hydrate": False,
     },
+    # BIOMIMETIC FAUNA MATRIX RUNES
+    "//FORMICA": {"knight": "lady_apis", "description": "Parallel Map-Reduce Worker Ants micro-batch execution", "mode": "BIO_KINETIC", "priority": 1, "handler": "_handle_fauna_formica", "hydrate": False},
+    "//BEAVER": {"knight": "sir_forge", "description": "Castor Beaver SSU Construction & Infrastructure Builder", "mode": "FORGE", "priority": 1, "handler": "_handle_fauna_beaver", "hydrate": False},
+    "//GORILLA": {"knight": "sir_forge", "description": "Pongid Gorilla Heavyweight API & Cloud SDK Connector", "mode": "FORGE", "priority": 1, "handler": "_handle_fauna_gorilla", "hydrate": False},
+    "//ARACHNE": {"knight": "sir_boris", "description": "Arachne Neural Web Orchestration & Headless MCP Sentry", "mode": "BIO_KINETIC", "priority": 1, "handler": "_handle_fauna_arachne", "hydrate": False},
+    "//SIMIAN": {"knight": "sir_sentinel", "description": "Chaos Monkey Adversarial Entropy & Fault Injection", "mode": "SENTINEL", "priority": 1, "handler": "_handle_fauna_simian", "hydrate": False},
+    "//OWL": {"knight": "merlin_omega", "description": "Strigiform Owl High-Logic ToT Workflow Optimization", "mode": "ORACLE", "priority": 1, "handler": "_handle_fauna_owl", "hydrate": False},
+    "//OCTOPUS": {"knight": "sir_debug", "description": "Octopus Lazarus Multi-Threaded AST Self-Healing", "mode": "FORGE", "priority": 1, "handler": "_handle_fauna_octopus", "hydrate": False},
+    "//MANTIS": {"knight": "sir_codex", "description": "Praying Mantis Surgical AST Dissection & Pruning", "mode": "KINETIC", "priority": 1, "handler": "_handle_fauna_mantis", "hydrate": False},
+    "//FALCON": {"knight": "sir_lucas", "description": "Peregrine Falcon Sub-10ms Line-Rate Telemetry Interceptor", "mode": "ORACLE", "priority": 1, "handler": "_handle_fauna_falcon", "hydrate": False},
+    "//CHAMELEON": {"knight": "lady_guinevere", "description": "Chameleon Polymorphic Theme & Layout Adaptation", "mode": "BIO_KINETIC", "priority": 1, "handler": "_handle_fauna_chameleon", "hydrate": False},
+    "//ELEPHANT": {"knight": "lady_mnemosyne", "description": "Proboscidean Elephant Long-Term MemPalace Indexing", "mode": "ORACLE", "priority": 1, "handler": "_handle_fauna_elephant", "hydrate": False},
+    "//LOBO": {"knight": "knight_strategos", "description": "Wolf Pack Quorum & Aggressive Revenue Strikes", "mode": "BIO_KINETIC", "priority": 1, "handler": "_handle_fauna_lobo", "hydrate": False},
+    "//VULPIS": {"knight": "lady_guinevere", "description": "Fox Growth Hacking, SEO/GEO & Distribution", "mode": "BIO_KINETIC", "priority": 1, "handler": "_handle_fauna_vulpis", "hydrate": False},
+    "//PHOENIX": {"knight": "sir_debug", "description": "Phoenix Automated ReZero & Crash Resurrector", "mode": "FORGE", "priority": 1, "handler": "_handle_fauna_phoenix", "hydrate": False},
+    "//CORVUS": {"knight": "sir_codex", "description": "Raven Dead-Drop Forensic Scavenging & Git Reverser", "mode": "KINETIC", "priority": 1, "handler": "_handle_fauna_corvus", "hydrate": False},
+    "//DELPHINUS": {"knight": "sir_sonus", "description": "Dolphin Acoustic Resonance & Aoede S2S Audio Router", "mode": "ORACLE", "priority": 1, "handler": "_handle_fauna_delphinus", "hydrate": False},
+    "//SCORPIO": {"knight": "sir_gideon", "description": "Scorpion GIDEON Forensic Risk Needle & Security Audit", "mode": "SENTINEL", "priority": 1, "handler": "_handle_fauna_scorpio", "hydrate": False},
+    "//ALCHEMIST": {"knight": "sir_alchemist", "description": "Alchemist TurboQuant 3-Bit Quantization & Compression", "mode": "FORGE", "priority": 1, "handler": "_handle_fauna_alchemist", "hydrate": False},
 }
 
 # 29 Omega Runes — system-level operations
@@ -1291,6 +1310,91 @@ def _handle_chimera(param: str, context: dict) -> dict:
         return {"action": "chimera_v400_pulse", "result": pulse}
     except Exception as e:
         return {"action": "chimera_error", "error": str(e)}
+
+
+def _handle_fauna_generic(fauna_name: str, param: str, default_directives: list[str]) -> dict:
+    import importlib
+    try:
+        bk = importlib.import_module("01_KERNEL.bio_kinetic")
+        conductor = bk.LadyApisConductor()
+        target = param or f"{fauna_name}_task"
+        res = conductor.dispatch_batch_creation(target, default_directives, worker_type=fauna_name)
+        return {"action": f"{fauna_name}_dispatched", "worker": f"{fauna_name}_01", "result": res}
+    except Exception as e:
+        return {"action": f"{fauna_name}_error", "error": str(e)}
+
+
+def _handle_fauna_formica(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("formica", param, ["map_reduce_batch"])
+
+
+def _handle_fauna_beaver(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("beaver", param, ["ssu_build", "isolation_dam"])
+
+
+def _handle_fauna_gorilla(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("gorilla", param, ["typed_api_connect"])
+
+
+def _handle_fauna_arachne(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("arachne", param, ["mcp_dom_scrape"])
+
+
+def _handle_fauna_simian(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("simian", param, ["entropy_fault_injection"])
+
+
+def _handle_fauna_owl(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("owl", param, ["tot_strategy_optimize"])
+
+
+def _handle_fauna_octopus(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("octopus", param, ["piv_ast_self_heal"])
+
+
+def _handle_fauna_mantis(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("mantis", param, ["surgical_dead_code_prune"])
+
+
+def _handle_fauna_falcon(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("falcon", param, ["line_rate_telemetry_intercept"])
+
+
+def _handle_fauna_chameleon(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("chameleon", param, ["adaptive_layout_morph"])
+
+
+def _handle_fauna_elephant(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("elephant", param, ["mempalace_unforgettable_index"])
+
+
+def _handle_fauna_lobo(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("lobo", param, ["revenue_strike_quorum"])
+
+
+def _handle_fauna_vulpis(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("vulpis", param, ["seo_geo_syndication"])
+
+
+def _handle_fauna_phoenix(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("phoenix", param, ["rezero_crash_recovery"])
+
+
+def _handle_fauna_corvus(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("corvus", param, ["dead_drop_scavenge"])
+
+
+def _handle_fauna_delphinus(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("delphinus", param, ["aoede_voice_routing"])
+
+
+def _handle_fauna_scorpio(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("scorpio", param, ["gideon_13gate_audit"])
+
+
+def _handle_fauna_alchemist(param: str, context: dict) -> dict:
+    return _handle_fauna_generic("alchemist", param, ["turboquant_bitnet_compress"])
+
 
 
 def _handle_ghost(param: str, context: dict) -> dict:

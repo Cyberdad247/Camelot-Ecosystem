@@ -74,13 +74,28 @@ class BioHordeEngine:
         self.cipher = CamouflageCipher()
         self.aegis = AegisShield(hitl_threshold_lines=10)
 
-        # Worker roster (Nano-Knights fauna)
+        # Worker roster (20-Fauna Biomimetic Nano-Knights)
         self.workers: Dict[str, MicroWorkerSpec] = {
-            "formica_01": MicroWorkerSpec("formica_01", "formica", "Parallel Map-Reduce Worker Ant"),
-            "beaver_01": MicroWorkerSpec("beaver_01", "beaver", "SSU Construction & Infrastructure"),
-            "gorilla_01": MicroWorkerSpec("gorilla_01", "gorilla", "Heavyweight Tool & API Integration"),
-            "arachne_01": MicroWorkerSpec("arachne_01", "arachne", "MCP Web Scraping & DOM Sentry"),
-            "owl_01": MicroWorkerSpec("owl_01", "owl", "ToT Workflow Optimizer & Collision Sentry"),
+            "formica_01": MicroWorkerSpec("formica_01", "formica", "Parallel Map-Reduce Worker Ant (150 tok)", token_budget=150, memory_cap_mb=1.0),
+            "beaver_01": MicroWorkerSpec("beaver_01", "beaver", "SSU Construction & Infrastructure Builder", token_budget=300, memory_cap_mb=2.0),
+            "gorilla_01": MicroWorkerSpec("gorilla_01", "gorilla", "Heavyweight Tool & API/SDK Integrator", token_budget=500, memory_cap_mb=3.0),
+            "arachne_01": MicroWorkerSpec("arachne_01", "arachne", "MCP Headless Web Scraping & DOM Sentry", token_budget=350, memory_cap_mb=2.5),
+            "simian_01": MicroWorkerSpec("simian_01", "simian", "Chaos Monkey & Adversarial Fault Injector", token_budget=250, memory_cap_mb=1.5),
+            "owl_01": MicroWorkerSpec("owl_01", "owl", "ToT Workflow Optimizer & Collision Sentry", token_budget=600, memory_cap_mb=4.0),
+            "octopus_01": MicroWorkerSpec("octopus_01", "octopus", "Multi-Threaded AST Repair & Self-Healing", token_budget=450, memory_cap_mb=3.0),
+            "mantis_01": MicroWorkerSpec("mantis_01", "mantis", "Surgical AST Dissection & Dead-Code Pruner", token_budget=200, memory_cap_mb=1.2),
+            "falcon_01": MicroWorkerSpec("falcon_01", "falcon", "Sub-10ms Line-Rate Telemetry Interceptor", token_budget=150, memory_cap_mb=1.0),
+            "chameleon_01": MicroWorkerSpec("chameleon_01", "chameleon", "Polymorphic Code & Theme Adaptive Transformer", token_budget=300, memory_cap_mb=2.0),
+            "elephant_01": MicroWorkerSpec("elephant_01", "elephant", "Long-Term MemPalace Vector & FTS5 Indexer", token_budget=400, memory_cap_mb=2.5),
+            "wolf_01": MicroWorkerSpec("wolf_01", "wolf", "Distributed Pack Quorum & Revenue Strike Sentry", token_budget=350, memory_cap_mb=2.0),
+            "vulpis_01": MicroWorkerSpec("vulpis_01", "vulpis", "SEO/GEO Syndication & Multi-Channel Broadcaster", token_budget=300, memory_cap_mb=1.8),
+            "phoenix_01": MicroWorkerSpec("phoenix_01", "phoenix", "ReZero Protocol & Automated Crash Resurrector", token_budget=250, memory_cap_mb=1.5),
+            "corvus_01": MicroWorkerSpec("corvus_01", "corvus", "Dead-Drop Forensic Scavenger & Git Reverser", token_budget=300, memory_cap_mb=2.0),
+            "ghost_01": MicroWorkerSpec("ghost_01", "ghost", "Air-Gapped Privacy Vault & Tor Rotator", token_budget=200, memory_cap_mb=1.5),
+            "delphinus_01": MicroWorkerSpec("delphinus_01", "delphinus", "Real-Time Acoustic Resonance & Voice S2S Router", token_budget=300, memory_cap_mb=2.0),
+            "scorpio_01": MicroWorkerSpec("scorpio_01", "scorpio", "GIDEON Risk Matrix & Forensic Penetration Auditor", token_budget=400, memory_cap_mb=2.5),
+            "alchemist_01": MicroWorkerSpec("alchemist_01", "alchemist", "TurboQuant 3-Bit Quantizer & Token Compressor", token_budget=250, memory_cap_mb=1.5),
+            "octavian_01": MicroWorkerSpec("octavian_01", "octavian", "8-Terminal PTY Factory Warden & WASM Runner", token_budget=500, memory_cap_mb=3.5),
         }
 
         self.task_queue: queue.Queue[BatchCreationTask] = queue.Queue()
