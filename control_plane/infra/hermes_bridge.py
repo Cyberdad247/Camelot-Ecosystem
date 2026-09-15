@@ -114,25 +114,53 @@ class HermesBus:
                   poll_interval: float = 5.0, run_forever: bool = True) -> None:
         """Poll-based subscribe. Calls callback for each new message.
 
-        Tracks last-seen line count to avoid reprocessing old messages.
+        Tracks the last-read byte offset (not line count) so that corrupt
+        JSONL lines, torn final writes, and file truncation/rotation never
+        cause valid messages to be permanently skipped or duplicated:
+
+        - Corrupt line: consumed and skipped; cursor advances past it.
+        - Torn tail (no trailing newline yet): retried on the next poll
+          once the writer finishes the line.
+        - Truncation/rotation (file shrinks below the cursor): cursor
+          resets to 0, giving at-least-once delivery after rotation.
+
         Non-blocking version: set run_forever=False for single-poll.
         """
         channel_path = self._sessions / f"{channel.replace('.', '_')}.jsonl"
-        last_line = 0
+        offset = 0
 
         def _poll():
-            nonlocal last_line
-            if not channel_path.exists():
+            nonlocal offset
+            try:
+                size = channel_path.stat().st_size
+            except OSError:
+                offset = 0
                 return
-            lines = channel_path.read_text(encoding="utf-8").strip().splitlines()
-            new_lines = lines[last_line:]
-            for line in new_lines:
-                try:
-                    msg = json.loads(line)
-                    callback(msg)
-                except Exception as exc:
-                    log.debug("[HERMES] callback error on %s: %s", channel, exc)
-            last_line = len(lines)
+            if size < offset:
+                # Truncated or rotated: restart from the beginning.
+                offset = 0
+            try:
+                with open(channel_path, "rb") as f:
+                    f.seek(offset)
+                    while True:
+                        raw = f.readline()
+                        if not raw:
+                            break
+                        if not raw.endswith(b"\n"):
+                            # Torn final line: wait for the writer to finish it.
+                            break
+                        offset = f.tell()
+                        try:
+                            msg = json.loads(raw.decode("utf-8"))
+                        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+                            log.debug("[HERMES] skipping malformed line on %s: %s", channel, exc)
+                            continue
+                        try:
+                            callback(msg)
+                        except Exception as exc:
+                            log.debug("[HERMES] callback error on %s: %s", channel, exc)
+            except OSError as exc:
+                log.debug("[HERMES] read error on %s: %s", channel, exc)
 
         if not run_forever:
             _poll()
