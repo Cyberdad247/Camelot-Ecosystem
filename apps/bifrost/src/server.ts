@@ -10,9 +10,10 @@ import { SWARM_EVENTS, publishHermes } from './hermes';
 import { type Command, parseCommand } from './nlp';
 import { MicrocubicMatrix } from './microcubic';
 import { type RouteOutcome, route } from './router';
+import { routeOmniVoice } from './omniVoice';
 import { z } from 'zod';
 import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
-import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
+import { applyCommand, setOmniVoiceTelemetry, setRouteTelemetry, snapshot, state } from './state';
 import { issueSignedAction } from './issuance';
 import { createOperatorBff } from './operator/bff';
 import { InMemoryEventStore } from './operator/receipts';
@@ -373,6 +374,43 @@ wss.on('connection', (ws: LiveSocket) => {
       }
     } catch {
       // Plain-text command frame — treat the whole payload as the command.
+    }
+
+    // ── Omni-Voice D.A.G. ingress routing ─────────────────────────────────
+    // Runs before any LLM work: the ᛟ_ runic bypass and the Softmax persona
+    // dispatch are both deterministic, so a control token never pays inference
+    // cost. This mirrors control_plane/dispatch/omni_voice_dag.py, and the port
+    // is pinned to that module by the vectors in omniVoice.crystal.json.
+    const omni = routeOmniVoice(payloadText);
+    setOmniVoiceTelemetry({
+      status: omni.status,
+      path: omni.path,
+      knight: omni.knight ?? null,
+      tau: omni.tau ?? null,
+      confidence: omni.confidence ?? null,
+      delegatesRune: omni.delegatesRune ?? null,
+    });
+    console.log(
+      `omni-voice ${omni.status} path=${omni.path} knight=${omni.knight ?? '-'}` +
+        (omni.tau != null ? ` tau=${omni.tau}` : '') +
+        (omni.delegatesRune ? ` rune=${omni.delegatesRune}` : ''),
+    );
+
+    if (omni.status === 'ROUTED_BYPASS') {
+      // A rune is a control token, not an utterance: it never reaches the NLP
+      // parser or the remote MCP lane. Executing the delegated rune is the
+      // Python router's job (HITL-gated), so the gateway reports the dispatch
+      // rather than pretending it already ran.
+      ws.send(
+        JSON.stringify({
+          type: 'VOICE_FEEDBACK',
+          payload: {
+            text: `Rune ${omni.token} dispatched to ${omni.knight} via ${omni.delegatesRune}.`,
+          },
+        }),
+      );
+      broadcastState();
+      return;
     }
 
     // Voice commands route through Helios when enabled; everything else uses the

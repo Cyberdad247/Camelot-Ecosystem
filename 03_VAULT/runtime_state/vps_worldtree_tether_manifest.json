@@ -449,5 +449,16 @@
     "open_notebook_local": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_gideon_tissue.json",
     "tether_active": true,
     "timestamp": "2026-09-09T03:38:11.925536+00:00"
+  },
+  "SIR_KAY": {
+    "knight_id": "SIR_KAY",
+    "worldtree_home_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "personal_notebook_id": "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",
+    "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
+    "open_viking_node": "open_viking://worldtree/sir_kay",
+    "open_notebook_local": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\sir_kay_tissue.json",
+    "tether_active": true,
+    "timestamp": "2026-09-14T17:30:00.000000+00:00"
   }
 }

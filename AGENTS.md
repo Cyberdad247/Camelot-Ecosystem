@@ -362,6 +362,9 @@ All Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be
 | **INSPIRA** | HiveIDE / Inspira Spatial Developer Workstation | IDE Substrate | `cadfe67e-7187-472e-8bf4-8a2aded84e4e` |
 | **INVISIONED_MARKETING** | Invisioned Marketing Sovereign CloudBrain & Brand Direction | WorldTree Substrate | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |
 | **KNIGHT_STRATEGOS** | Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO | Gemini 3.8 Flash | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |
+| **SIR_KAY** | High Seneschal, Chief Engineering Director, Kinetic Department Lead | Gemini 3 Pro / GPT-5.5 | `7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6` |
+| **SIR_LUCAS** | Sovereign Herald of Telemetry & Visualization (Council) | Gemini 3 Flash / GPT-5.3 | `5ac0de5a-c0de-5ac0-de5a-c0de5ac0de5a` |
+| **LADY_LAKISHA** | Voice OS Sentinel & Intercom Matrix (Luxury Brutalist Voice HUD) | Gemini 2.5 Flash / LiteRT | `1a1a5555-8888-3333-cccc-444499990000` |
 
 ---
 
@@ -374,6 +377,14 @@ dispatch directly to the runic router.
 
 | Rune | Knight | What it does |
 |---|---|---|
+| `//ENGINEERING_SPRINT <goal>` | SIR_KAY | Initiate multi-knight kinetic development sprint |
+| `//DIRECT_BUILD <spec>` | SIR_KAY | Direct Sir Forge & Sir Codex implementation |
+| `//REGRESSION_AUDIT` | SIR_KAY | Execute full test battery & AST health check |
+| `//HOTPATH_VERIFY` | SIR_KAY | Verify 0% Python/Node in critical hotpaths (Rule 7) |
+| `//LUCAS_TELEMETRY` | SIR_LUCAS | Render verified knight/router/ledger telemetry surface |
+| `//LUCAS_HUD <knight>` | SIR_LUCAS | Round-trip-verified Knight HUD inspection |
+| `//LUCAS_ANOMALY <claim>` | SIR_LUCAS | Verify claimed state against disk/git/probes |
+| `//LUCAS_REPORT` | SIR_LUCAS | Evidence-class telemetry brief to the council |
 | `//FORGE <task>` | SIR_FORGE | Kinetic code generation & execution |
 | `//CODEX <task>` | SIR_CODEX | Direct high-velocity Codex execution lane |
 | `//CONTRACT [brief]` | SIR_FORGE | Portable runtime packaging contract |

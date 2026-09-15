@@ -22,6 +22,18 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+    "updated_at": "2026-09-14T17:30:00.000000+00:00"
+  },
+  {
+    "knight_id": "WORLD_TREE",
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "subsystem_tether",
+    "title": "Honcho Self-Hosted L4 Metamemory Subsystem Tether",
+    "content": "{\"subsystem\": \"Honcho Self-Hosted\", \"layer\": \"L4 Cross-Session Metamemory\", \"vfs_path\": \"vfs://worldtree/memory/honcho/\", \"governing_knight\": \"HERMES_PRIME\", \"deploy_path\": \"deploy/honcho-self-hosted/\", \"status\": \"TETHERED_TO_WORLDTREE\"}",
+    "vfs_path": "vfs://worldtree/memory/honcho/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MEMORY_HONCHO",
+    "open_viking_tether": "open_viking://worldtree/memory/honcho",
+    "created_at": "2026-09-14T18:45:00.000000+00:00",
+    "updated_at": "2026-09-14T18:45:00.000000+00:00"
   }
 ]

@@ -70,7 +70,22 @@ export function LakishaHUD() {
     : lane === 'REMOTE_MCP'
       ? 'border-violet/40 text-violet-light'
       : 'border-gold/30 text-gold-light';
-  const showTelemetry = queryMs != null || laneLabel != null;
+
+  // Omni-Voice D.A.G. badge — the ingress routing decision the gateway made for
+  // this utterance: a ᛟ_ runic bypass (deterministic, zero inference cost) or
+  // the Softmax persona lane (with the Sentinel-governed tau).
+  const omni = state?.lastOmniVoice ?? null;
+  const omniBypass = omni?.path === 'runic_bypass';
+  const omniLabel = omni
+    ? omniBypass
+      ? `ᛟ ${omni.delegatesRune ?? 'BYPASS'}`
+      : `${omni.knight ?? '—'}${omni.tau != null ? ` · τ${omni.tau}` : ''}`
+    : null;
+  const omniClass = omniBypass
+    ? 'border-violet/40 text-violet-light'
+    : 'border-gold/30 text-gold-light';
+
+  const showTelemetry = queryMs != null || laneLabel != null || omniLabel != null;
 
   return (
     <form
@@ -191,6 +206,20 @@ export function LakishaHUD() {
                 {laneLabel}
                 {state?.lastLatencyMs != null && (
                   <span className="ml-1 text-white/35">· {formatMs(state.lastLatencyMs)}</span>
+                )}
+              </span>
+            )}
+            {omniLabel && (
+              <span
+                className={`rounded-sm border px-1.5 py-0.5 ${omniClass}`}
+                title={omni?.status}
+                aria-label={`Omni-Voice: ${omniLabel}`}
+              >
+                {omniLabel}
+                {!omniBypass && omni?.confidence != null && (
+                  <span className="ml-1 text-white/35">
+                    · {Math.round(omni.confidence * 100)}%
+                  </span>
                 )}
               </span>
             )}

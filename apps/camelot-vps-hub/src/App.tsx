@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { 
   RAW_BOOTSTRAP_PROMPT,
   BOOTSTRAP_PHASES,
@@ -18,15 +18,32 @@ import {
   TerminalLog 
 } from './types';
 import { Header } from './components/Header';
-import { MasterWorldTreeDeck } from './components/MasterWorldTreeDeck';
-import { BentoGridOverview } from './components/BentoGridOverview';
-import { BootstrapTerminal } from './components/BootstrapTerminal';
-import { VKGHud } from './components/VKGHud';
-import { MissionArena } from './components/MissionArena';
-import { SovereignLaws } from './components/SovereignLaws';
-import { ScarcityProtocol } from './components/ScarcityProtocol';
-import { MasterBootstrapScript } from './components/MasterBootstrapScript';
-import { Layers, Maximize2, Plus, Minus, TreeDeciduous, Terminal, Server, Flame, Lock, Cpu, FileCode } from 'lucide-react';
+import { OmarchyManager } from './utils/OmarchyManager';
+
+const MasterWorldTreeDeck = lazy(() => import('./components/MasterWorldTreeDeck').then(m => ({ default: m.MasterWorldTreeDeck })));
+const BentoGridOverview = lazy(() => import('./components/BentoGridOverview').then(m => ({ default: m.BentoGridOverview })));
+const BootstrapTerminal = lazy(() => import('./components/BootstrapTerminal').then(m => ({ default: m.BootstrapTerminal })));
+const VKGHud = lazy(() => import('./components/VKGHud').then(m => ({ default: m.VKGHud })));
+const MissionArena = lazy(() => import('./components/MissionArena').then(m => ({ default: m.MissionArena })));
+const SovereignLaws = lazy(() => import('./components/SovereignLaws').then(m => ({ default: m.SovereignLaws })));
+const ScarcityProtocol = lazy(() => import('./components/ScarcityProtocol').then(m => ({ default: m.ScarcityProtocol })));
+const MasterBootstrapScript = lazy(() => import('./components/MasterBootstrapScript').then(m => ({ default: m.MasterBootstrapScript })));
+const OperatorConsoleHtmx = lazy(() => import('./components/OperatorConsoleHtmx').then(m => ({ default: m.OperatorConsoleHtmx })));
+const VpsHubInitiationConsole = lazy(() => import('./components/VpsHubInitiationConsole').then(m => ({ default: m.VpsHubInitiationConsole })));
+const DocumentationForge = lazy(() => import('./components/DocumentationForge').then(m => ({ default: m.DocumentationForge })));
+
+
+
+
+
+
+
+
+
+
+
+
+import { Layers, Maximize2, Plus, Minus, TreeDeciduous, Terminal, Server, Flame, Lock, Cpu, FileCode, ShieldCheck, HardDrive, BookOpen } from 'lucide-react';
 
 const INITIAL_LOGS: TerminalLog[] = [
   { id: '1', timestamp: '12:00:01', level: 'sovereign', message: 'WORLD_TREE_BOOTSTRAP... OK' },
@@ -72,6 +89,20 @@ const INITIAL_MISSIONS: AgentMission[] = [
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('deck');
   const [vitals, setVitals] = useState<SystemVitals>(INITIAL_VITALS);
+  const [omarchyVitals, setOmarchyVitals] = useState<any>(null);
+  const [omarchySlices, setOmarchySlices] = useState<any[]>([]);
+
+  React.useEffect(() => {
+    const manager = OmarchyManager.getInstance();
+    const unsubscribe = manager.subscribe((newVitals, newSlices) => {
+      setOmarchyVitals(newVitals);
+      setOmarchySlices(newSlices);
+    });
+    return () => {
+      unsubscribe();
+      manager.stopSimulation();
+    };
+  }, []);
   const [services, setServices] = useState<CamelotService[]>(CAMELOT_SERVICES);
   const [phases, setPhases] = useState<BootstrapPhase[]>(BOOTSTRAP_PHASES);
   const [laws, setLaws] = useState<SovereignLaw[]>(SOVEREIGN_LAWS);
@@ -88,10 +119,13 @@ export default function App() {
   const [minimizedTabs, setMinimizedTabs] = useState<Record<string, boolean>>({});
 
   const tabLabels: Record<string, { label: string; icon: any }> = {
-    deck: { label: '3D World Tree Deck', icon: TreeDeciduous },
+    vps_init: { label: 'VPS Hub Initiation (vps3573819)', icon: Server },
+    docs: { label: 'Docs Forge (νKG-Crystal)', icon: BookOpen },
+    deck: { label: 'World Tree UI (2D ➔ 3D Continuity)', icon: TreeDeciduous },
+    operator: { label: 'HTMX Operator Console', icon: ShieldCheck },
     bento: { label: 'Bento Grid Hub', icon: Layers },
     terminal: { label: 'Baremetal Terminal', icon: Terminal },
-    vkg: { label: 'VKG-HUD Services', icon: Server },
+    vkg: { label: 'VKG-HUD Services', icon: HardDrive },
     mission: { label: 'Mission Arena', icon: Flame },
     laws: { label: 'Sovereign Laws & Ledger', icon: Lock },
     scarcity: { label: '8GB Scarcity Protocol', icon: Cpu },
@@ -296,7 +330,8 @@ export default function App() {
       />
 
       {/* Main Content Arena */}
-      <main className="flex-1 w-full p-2 sm:p-4">
+      <main className={`flex-1 w-full ${(activeTab === 'vps_init' || activeTab === 'docs' || activeTab === 'deck' || activeTab === 'operator') ? 'p-0' : 'p-2 sm:p-4'}`}>
+        <Suspense fallback={<div className="flex-1 flex flex-col items-center justify-center min-h-[500px]"><div className="w-12 h-12 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin"></div><div className="mt-4 text-cyan-500 font-mono text-sm tracking-widest font-bold animate-pulse">INITIATING DMA TRANSFER...</div></div>}>
         {isCurrentTabMinimized ? (
           <div className="max-w-4xl mx-auto my-12 p-8 bg-[#0a1020]/90 border-2 border-cyan-500/40 rounded-2xl text-center space-y-4 shadow-2xl animate-fadeIn">
             <div className="w-12 h-12 mx-auto rounded-full bg-cyan-500/10 border border-cyan-400 flex items-center justify-center text-cyan-300">
@@ -317,8 +352,33 @@ export default function App() {
           </div>
         ) : (
           <>
+            {activeTab === 'vps_init' && (
+              <VpsHubInitiationConsole
+                onExecuteCommand={handleRunCustomCommand}
+                onNavigateTab={setActiveTab}
+              />
+            )}
+
+            {activeTab === 'docs' && (
+              <DocumentationForge
+                onNavigateTab={setActiveTab}
+                onExecuteCommand={handleRunCustomCommand}
+              />
+            )}
+
             {activeTab === 'deck' && (
-              <MasterWorldTreeDeck />
+              <MasterWorldTreeDeck 
+                vitals={vitals}
+                onNavigateTab={setActiveTab}
+                onExecuteCommand={handleRunCustomCommand}
+              />
+            )}
+
+            {activeTab === 'operator' && (
+              <OperatorConsoleHtmx
+                onExecuteCommand={handleRunCustomCommand}
+                onNavigateTab={setActiveTab}
+              />
             )}
 
             {activeTab === 'bento' && (
@@ -358,6 +418,8 @@ export default function App() {
                 vitals={vitals}
                 onRestartService={handleRestartService}
                 onExecuteCommand={handleRunCustomCommand}
+                onOpenOperatorConsole={() => setActiveTab('operator')}
+                onOpenVpsInitiation={() => setActiveTab('vps_init')}
               />
             )}
 
@@ -395,6 +457,7 @@ export default function App() {
             )}
           </>
         )}
+        </Suspense>
       </main>
 
       {/* Floating Minimized Tabs Dock */}

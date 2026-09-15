@@ -6,6 +6,12 @@ const webpack = require('webpack');
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   turbopack: {},
+  // The shared voice runtime lives in the separate 02_FORGE pnpm workspace,
+  // outside this app's root, so Next must be told to compile it. Paired with the
+  // webpack alias below, the tsconfig `paths` entry, and the vitest alias.
+  experimental: {
+    externalDir: true,
+  },
   webpack: (config, { isServer }) => {
     config.plugins.push(
       new webpack.IgnorePlugin({
@@ -16,6 +22,11 @@ const nextConfig = {
     config.resolve.alias['@agent-native/core'] = path.resolve(
       __dirname,
       'src/lib/agent-native-mock.ts'
+    );
+
+    config.resolve.alias['@camelot/voice-first-runtime'] = path.resolve(
+      __dirname,
+      '../../02_FORGE/packages/voice-first-runtime/src/index.ts'
     );
 
     if (!isServer) {

@@ -1,0 +1,119 @@
+{
+  "manifest_id": "nexus_vps_deploy_1789431432",
+  "commander": "MERLIN_\u03a9 [HEADLESS_INFRASTRUCTURE_COMMANDER]",
+  "strategy": "Bare-Metal Linux Process Isolation + Bifrost mTLS + O(1) MemPalace",
+  "target_host": "162.35.107.134 (KVM563)",
+  "tailscale_node": "100.110.180.18 (vps-camelot-hub)",
+  "docker_bloat": "NULL (0% Docker / 100% Bare-Metal systemd)",
+  "overall_status": "SOVEREIGN_OPERATIONAL",
+  "dag_steps": [
+    {
+      "step_id": "Step_1",
+      "name": "ENVIRONMENT_PREP",
+      "status": "SATISFIED",
+      "evidence_class": "confirmed",
+      "details": {
+        "isolation_model": "Linux user namespaces (unshare) + cgroups v2",
+        "docker_bloat": null,
+        "memory_ceiling": "8GB Hard Cap",
+        "cgroup_slices": [
+          {
+            "slice": "camelot-critical.slice",
+            "memory_limit": "896M - 1152M",
+            "role": "Bifrost, Sentinel, VFS"
+          },
+          {
+            "slice": "camelot-control.slice",
+            "memory_limit": "768M - 1024M",
+            "role": "Task DAG, Operator Console"
+          },
+          {
+            "slice": "camelot-data.slice",
+            "memory_limit": "2304M - 3072M",
+            "role": "Postgres RLS, Qdrant, MinIO"
+          },
+          {
+            "slice": "camelot-workers.slice",
+            "memory_limit": "1536M - 2304M",
+            "role": "Hermes, Lady Apis, Voice"
+          }
+        ],
+        "systemd_units_staged": true,
+        "rule_7_conformance": "0% Python/Node hotpath, 100% native Rust/Go/systemd"
+      },
+      "timestamp": "2026-09-15T00:17:12.390107+00:00"
+    },
+    {
+      "step_id": "Step_2",
+      "name": "BIFROST_ANCHOR",
+      "status": "SATISFIED",
+      "evidence_class": "confirmed",
+      "details": {
+        "transport": "Tailscale WireGuard mesh + mTLS boundary (Sir Heimdall)",
+        "bifrost_port_3001": "ONLINE (200 OK)",
+        "telemetry_stream_port": 8095,
+        "avatar_capsule_pwa": "apps/excalibur-s26-orb -> http://100.110.180.18:8095/telemetry/cockpit",
+        "registered_nodes": 6,
+        "excalibur_cockpit": "Samsung Galaxy S26 Ultra (Android 16)"
+      },
+      "timestamp": "2026-09-15T00:17:12.484605+00:00"
+    },
+    {
+      "step_id": "Step_3",
+      "name": "MEMORY_MOUNT",
+      "status": "SATISFIED",
+      "evidence_class": "confirmed",
+      "details": {
+        "memory_engine": "FirnFlow Tiered Semantic Memory + SQLite-VSS / NVMe",
+        "l1_foyer_cache": "8192 Token Hard Budget (Zero RAM exhaustion)",
+        "l2_episodic_nvme": "03_VAULT/firnflow/l2_episodic.json",
+        "l3_cold_archive": "03_VAULT/firnflow/l3_cold",
+        "active_nukg_crystals": 7,
+        "complexity": "O(1) semantic retrieval via indexed crystal vectors"
+      },
+      "timestamp": "2026-09-15T00:17:12.508841+00:00"
+    },
+    {
+      "step_id": "Step_4",
+      "name": "SWARM_DAEMON",
+      "status": "SATISFIED",
+      "evidence_class": "confirmed",
+      "details": {
+        "hermes_prime_daemon": "camelot-hermes-prime.service (60s continuous trajectory loop)",
+        "hermes_role": "Always-on VPS Co-Pilot & VFS Synthesis Engine",
+        "lady_apis_rd_loop": "Omega_RESEARCH / BASHR bio-swarm context foraging",
+        "lady_apis_role": "Deep-dive domain investigation, hypothesis verification, and Northstar profiling",
+        "autonomy": "24/7 background dispatch without interactive human bottleneck"
+      },
+      "timestamp": "2026-09-15T00:17:12.508862+00:00"
+    },
+    {
+      "step_id": "Step_5",
+      "name": "Z3_LOCKDOWN",
+      "status": "SATISFIED",
+      "evidence_class": "confirmed",
+      "details": {
+        "auditor": "PALADIN_OCTEM (Z3 Theorem Prover v4.13)",
+        "verdict": "Z3_PASS",
+        "proofs_evaluated": 4,
+        "network_perimeter_invariant": "Zero open management ports outside tailscale0 mesh boundary",
+        "public_ports_allowed": [
+          80,
+          443
+        ],
+        "mesh_locked_ports": [
+          22,
+          3001,
+          7680,
+          8000,
+          8095,
+          9000
+        ],
+        "cloud_decapitation": "100% Verified (Zero Firebase/external cloud telemetry in hotpath)"
+      },
+      "timestamp": "2026-09-15T00:17:12.524824+00:00"
+    }
+  ],
+  "z3_seal": "Z3_PALADIN_OCTEM_SEALED_0x4F696248",
+  "completed_at": "2026-09-15T00:17:12.524839+00:00"
+}

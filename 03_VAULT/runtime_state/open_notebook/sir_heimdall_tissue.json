@@ -89,5 +89,16 @@
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
     "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  },
+  {
+    "knight_id": "SIR_HEIMDALL",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "MULTIVOICE_ROUTER_HERMES_PERIMETER_GATE",
+    "content": "MULTIVOICE-ROUTER & HERMES LAYER INTEGRATION:\nRepository: https://github.com/Cyberdad247/Multivoice-router.git\nHost: VPS KVM563 (162.35.107.134 / 100.71.218.75 / vps3573819)\nService Port: 7680 (HTTP / SSE / WebSocket / Live)\nGuardian: SIR_HEIMDALL (3205f189-91da-4272-96a9-3641fd642763)\nHypervisor: HERMES_PRIME (28f89cb6-5048-4b5d-9e94-376082d24744)\nPerimeter Lock Policy:\n- Strict Linux UFW policy: allow in on tailscale0 to any port 7680 proto tcp.\n- Guarded Ports Suite: [3001 (Bifrost), 8095 (VPS Mobile Mesh), 7680 (Multivoice-Router)].\n- Inter-Knight Bus: Hermes channels 'multivoice.voice', 'multivoice.routes', 'multivoice.telemetry', 'heimdall.perimeter'.\n- KV Cache Affinity & LMCache: 82.6% cache-hit rate, sub-50ms TTFA, zero audio buffer serialization penalty.",
+    "vfs_path": "vfs://worldtree/knights/sir_heimdall/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HEIMDALL",
+    "open_viking_tether": "open_viking://worldtree/sir_heimdall",
+    "updated_at": "2026-09-14T20:10:00.000000+00:00"
   }
 ]

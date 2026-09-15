@@ -166,7 +166,16 @@ class _ControlPlaneModuleFinder:
                 # The canonical module may already be imported (canonical
                 # name used before the legacy alias). Reuse that instance so
                 # both names stay one object instead of double-loading.
-                if canonical in sys.modules:
+                #
+                # ``importlib.reload()`` is the exception. It re-executes a
+                # module by re-running its body, but ``_ExistingModuleLoader``
+                # deliberately skips execution (the module is already loaded),
+                # so a reload would leave stale module-level state behind —
+                # e.g. a session flag stuck at True. ``reload()`` is the only
+                # caller that passes ``target``, so treat a non-None target as
+                # the reload signal and fall through to a genuine
+                # re-execution under the requested name.
+                if canonical in sys.modules and target is None:
                     spec = importlib.util.spec_from_loader(fullname, _ExistingModuleLoader(sys.modules[canonical]))
                     spec.submodule_search_locations = None
                     return spec

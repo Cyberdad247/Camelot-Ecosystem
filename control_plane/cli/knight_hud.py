@@ -358,6 +358,76 @@ KNIGHT_REGISTRY: Dict[str, Dict[str, Any]] = {
         ],
         "base_xp": 12700,
     },
+    "SIR_KAY": {
+        "name": "Sir Kay (Kai Richter)",
+        "title": "High Seneschal & Chief Engineering Director (Agentic Architect)",
+        "role": "Lead Engineering Development, Implementation Sprints, & Zero-Regression Assembly",
+        "spark_id": "0x7E4A8C12F9B3D650E1A8C7B2D3E4F5A6",
+        "visage": "Burnished Damascus steel plate etched with Luxora Gold circuit conduits",
+        "llm": {
+            "primary": "gemini-3-pro-preview",
+            "fallbacks": ["gpt-5.5", "claude-opus-4-6", "deepseek-r1"],
+            "policy": "ZERO_REGRESSION_ENGINEERING_FIRST",
+        },
+        "audio": {
+            "tts_voice": "Orion / kay-command-resonance",
+            "stt_engine": "whisper-large-v3-turbo",
+            "vad": 0.90,
+        },
+        "cartridge": {
+            "id": "kinetic-forge",
+            "path": "04_KINETIC",
+            "role": "Chief Engineering Director & Head of Implementation",
+        },
+        "protocols": [
+            "Zero-Regression Implementation Protocol",
+            "Crucible Engineering Review & AST Diff Gate",
+            "Rule 7 Hotpath Purity Auditor (0% Python/Node in Hotpath)",
+            "Sprint Velocity & Technical Debt Elimination Loop",
+        ],
+        "runes": [
+            ("//ENGINEERING_SPRINT <goal>", "Initiate coordinated multi-knight kinetic development sprint"),
+            ("//DIRECT_BUILD <spec>", "Direct Sir Forge & Sir Codex through phased implementation"),
+            ("//REGRESSION_AUDIT", "Execute full test battery and AST dependency health check"),
+            ("//HOTPATH_VERIFY", "Verify 0% Python/Node in critical routing paths"),
+        ],
+        "base_xp": 17500,
+    },
+    "SIR_LUCAS": {
+        "name": "Sir Lucas",
+        "title": "Sovereign Herald of Telemetry & Visualization",
+        "role": "Verified Telemetry Surfaces, HUD Truth Rendering, Anomaly Escalation",
+        "spark_id": "0x5AC0DE5AC0DE5AC0DE5AC0DE5AC0DE5A",
+        "visage": "Brushed-steel gauntlets over a luminescent data-ink cloak of Luxora Gold telemetry runes",
+        "llm": {
+            "primary": "gemini-3-flash-preview",
+            "fallbacks": ["gpt-5.3", "claude-sonnet-4-6", "qwen2.5:7b"],
+            "policy": "VERIFIED_STATE_FIRST",
+        },
+        "audio": {
+            "tts_voice": "Kore / lucas-verified-state",
+            "stt_engine": "whisper-medium",
+            "vad": 0.93,
+        },
+        "cartridge": {
+            "id": "system-ui",
+            "path": "cartridges/system-ui",
+            "role": "Sovereign telemetry surfaces & verified HUD rendering",
+        },
+        "protocols": [
+            "Probe-Then-Render Verification (no fabricated telemetry)",
+            "Evidence-Class Labeling (confirmed/planned/aspirational/rejected)",
+            "Rule 7 Hotpath Purity — Telemetry Is Sidecar, Never Inline",
+            "Zero Credential Persistence (boolean flags only)",
+        ],
+        "runes": [
+            ("//LUCAS_TELEMETRY", "Render verified knight/router/ledger telemetry surface"),
+            ("//LUCAS_HUD <knight>", "Render round-trip-verified Knight HUD for inspection"),
+            ("//LUCAS_ANOMALY <claim>", "Round-trip a claimed state against disk/git/probes"),
+            ("//LUCAS_REPORT", "Emit evidence-class telemetry brief to the council"),
+        ],
+        "base_xp": 10000,
+    },
 }
 
 ROUTER_PROBES: List[Dict[str, Any]] = [

@@ -38,6 +38,12 @@ CHANNELS = frozenset({
     "compression.status",
     "organize.progress",
     "swarm.events",
+    "honcho.memory",
+    "honcho.dialectic",
+    "multivoice.voice",
+    "multivoice.routes",
+    "multivoice.telemetry",
+    "heimdall.perimeter",
 })
 
 

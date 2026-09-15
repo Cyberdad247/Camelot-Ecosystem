@@ -233,24 +233,24 @@ class PaladinCrucibleEngine:
     def _inscribe_verification_ledger(self, verdict: PaladinCrucibleVerdict) -> None:
         if not MISSIONS_DIR.exists():
             return
-        
-        entry = {
-            "run_id": verdict.verdict_id,
-            "timestamp_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(verdict.timestamp)),
-            "operator": "paladin_octem",
-            "command": "crucible:verify_reforge_decoupling",
-            "results": {
-                "status": verdict.status,
-                "obligations_verified": len(verdict.proof_obligations),
-                "all_satisfied": verdict.all_obligations_satisfied,
-                "seal": verdict.ed25519_seal_hash
-            },
-            "success": verdict.all_obligations_satisfied,
-            "entry_hash": verdict.ed25519_seal_hash
-        }
-        with open(LEDGER_FILE, "a", encoding="utf-8") as f:
-            f.write(json.dumps(entry) + "\n")
-        LOG.info("Appended Crucible entry to verification_ledger.jsonl")
+        try:
+            from control_plane.infra.ledger_sync import append_verification_entry
+            append_verification_entry(
+                run_id=verdict.verdict_id,
+                operator="paladin_octem",
+                command="crucible:verify_reforge_decoupling",
+                results={
+                    "status": verdict.status,
+                    "obligations_verified": len(verdict.proof_obligations),
+                    "all_satisfied": verdict.all_obligations_satisfied,
+                    "seal": verdict.ed25519_seal_hash,
+                },
+                success=verdict.all_obligations_satisfied,
+                timestamp_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(verdict.timestamp)),
+            )
+            LOG.info("Appended Crucible entry to verification_ledger.jsonl (chained)")
+        except Exception as exc:
+            LOG.warning(f"Failed to inscribe verification ledger: {exc}")
 
 
 if __name__ == "__main__":

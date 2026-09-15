@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-09-14T08:08:10.681254+00:00",
+  "timestamp": "2026-09-14T18:38:54.112640+00:00",
   "evaluators": [
     "MERLIN_OMEGA",
     "LADY_MNEMOSYNE_OMEGA"
   ],
-  "total_knights": 38,
-  "knights_pass": 38,
+  "total_knights": 39,
+  "knights_pass": 39,
   "all_green": true,
   "verdict": "100% VERIFIED PASS",
   "results": [
@@ -679,6 +679,24 @@
       "knight_id": "KNIGHT_STRATEGOS",
       "uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "role": "Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO",
+      "character_sheet": true,
+      "vault_soul": true,
+      "vault_spark": true,
+      "vault_phial": true,
+      "vfs_soul": true,
+      "vfs_spark": true,
+      "vfs_phial": true,
+      "vfs_system_instruction": true,
+      "vfs_compendium": true,
+      "open_notebook_tissue": true,
+      "cloudbrain_connector": true,
+      "vps_tether": true,
+      "verdict": "PASS"
+    },
+    {
+      "knight_id": "SIR_KAY",
+      "uuid": "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",
+      "role": "High Seneschal, Chief Engineering Director, Kinetic Department Lead",
       "character_sheet": true,
       "vault_soul": true,
       "vault_spark": true,

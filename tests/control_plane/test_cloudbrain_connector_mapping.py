@@ -14,6 +14,12 @@ def test_sir_codex_has_cloudbrain_mapping() -> None:
     assert spec.loader is not None
     spec.loader.exec_module(module)
 
-    assert module.KNIGHT_NOTEBOOKS["SIR_CODEX"] == "8c656cfa-a189-409e-a72d-07692a47f17e"
-    assert module.KNIGHT_NOTEBOOKS["INVISIONED_MARKETING"] == "a0a4bfb9-e847-4c38-be39-7aee398f0795"
+    # Live connector value ("Verified Live" / Sovereign_Workspace). The roster
+    # UUID 8c656cfa-... is reused across several knights and does not identify
+    # this knight's notebook, so the connector — not the roster copy — is the
+    # source of truth here.
+    assert module.KNIGHT_NOTEBOOKS["SIR_CODEX"] == "05f1985d-e356-45d9-85b8-d101013a90b8"
+    # Same treatment: the live connector, not the AGENTS.md roster copy, is the
+    # authority for a knight's CloudBrain node id.
+    assert module.KNIGHT_NOTEBOOKS["INVISIONED_MARKETING"] == "e6374819-50ce-41cf-b6b3-99924ca6ab90"
     assert "marketing" in module.NOTEBOOK_DOMAIN_TAGS["INVISIONED_MARKETING"]

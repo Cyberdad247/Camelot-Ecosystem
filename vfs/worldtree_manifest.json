@@ -367,8 +367,32 @@
       "role": "Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO",
       "primary_model": "Gemini 3.8 Flash",
       "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_LUCAS",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/sir_lucas/",
+      "role": "Sovereign Herald of Telemetry & Visualization — verified HUD/telemetry truth surfaces",
+      "primary_model": "Gemini 3 Flash / GPT-5.3",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "SIR_KAY",
+      "notebook_id": "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",
+      "vfs_path": "vfs://worldtree/knights/sir_kay/",
+      "role": "High Seneschal, Chief Engineering Director, Kinetic Department Lead (DKESI)",
+      "primary_model": "Gemini 3 Pro / GPT-5.5",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "LADY_LAKISHA",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/lady_lakisha/",
+      "role": "Voice OS Sentinel & Intercom Matrix, Luxury Brutalist Voice HUD, WebRTC Bridge",
+      "primary_model": "Gemini 2.5 Flash / LiteRT",
+      "active_last_3_months": true
     }
   ],
-  "updated": "2026-09-13T04:44:44.073279+00:00",
-  "verified_knights_count": 38
+  "updated": "2026-09-14T16:30:00.000000+00:00",
+  "verified_knights_count": 41
 }

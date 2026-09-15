@@ -17,6 +17,7 @@ members = [
     "kinetic_edge/camelot_edge",
     "kinetic_edge/pqcrypto",
     "kinetic_edge/swarm_spawner",
+    "wasm/camelot-audio-dsp",
     "wasm/ledger-engine",
     "crates/camelot-vkg-crystal",
     "crates/hive-ide-cli",

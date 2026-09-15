@@ -40,9 +40,8 @@ import { SystemTelemetry } from './SystemTelemetry';
 import { ProcessMatrix } from './ProcessMatrix';
 import { SystemLogPanel } from './SystemLogPanel';
 import { SystemCommandsPanel } from './SystemCommandsPanel';
-import { MemcastleModal } from './MemcastleModal';
-import { TwinBrainsModal } from './TwinBrainsModal';
-import { TailscaleMeshPanel } from './TailscaleMeshPanel';
+const MemcastleModal = lazy(() => import('./MemcastleModal').then(m => ({ default: m.MemcastleModal })));
+const TwinBrainsModal = lazy(() => import('./TwinBrainsModal').then(m => ({ default: m.TwinBrainsModal })));
 import confetti from 'canvas-confetti';
 
 interface BentoGridOverviewProps {
@@ -318,7 +317,7 @@ export const BentoGridOverview: React.FC<BentoGridOverviewProps> = ({
       )}
       
       {/* 3-Column Bento Grid Master Architecture */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start hud-perspective-field">
         
         {/* ================= LEFT HUD COLUMN (Span 3) ================= */}
         <div className="lg:col-span-3 flex flex-col gap-4">
@@ -466,11 +465,7 @@ export const BentoGridOverview: React.FC<BentoGridOverviewProps> = ({
               </div>
             )}
           </div>
-
-          {/* Real-time Tailscale Mesh Overlay */}
-          <TailscaleMeshPanel />
         </div>
-
 
         {/* ================= RIGHT HUD COLUMN (Span 3) ================= */}
         <div className="lg:col-span-3 flex flex-col gap-4">

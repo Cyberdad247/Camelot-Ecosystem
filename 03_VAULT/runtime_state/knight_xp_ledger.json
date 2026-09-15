@@ -55,6 +55,18 @@
       "level": 4,
       "missions_completed": 10,
       "rank": "Master of the Blade"
+    },
+    "SIR_KAY": {
+      "total_xp": 17500,
+      "level": 5,
+      "missions_completed": 14,
+      "rank": "Grand Knight Commander"
+    },
+    "SIR_LUCAS": {
+      "total_xp": 12500,
+      "level": 4,
+      "missions_completed": 2,
+      "rank": "Master of the Blade"
     }
   }
 }

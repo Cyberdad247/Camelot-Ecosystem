@@ -102,6 +102,8 @@ export function ExcaliburCommandCenterTab() {
     }, 3000);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setReauthCountdown((prev) => (prev > 1 ? prev - 1 : 30));
     }, 1000);
