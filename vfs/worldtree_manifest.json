@@ -391,8 +391,16 @@
       "role": "Voice OS Sentinel & Intercom Matrix, Luxury Brutalist Voice HUD, WebRTC Bridge",
       "primary_model": "Gemini 2.5 Flash / LiteRT",
       "active_last_3_months": true
+    },
+    {
+      "knight_id": "CYBERTRONIA",
+      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/cybertronia/",
+      "role": "Primary Windows Orchestrator & World Tree Root Host (100.118.224.52)",
+      "primary_model": "Host Substrate / Bifrost Bridge",
+      "active_last_3_months": true
     }
   ],
-  "updated": "2026-09-14T16:30:00.000000+00:00",
-  "verified_knights_count": 41
+  "updated": "2026-09-15T08:26:00.000000+00:00",
+  "verified_knights_count": 42
 }

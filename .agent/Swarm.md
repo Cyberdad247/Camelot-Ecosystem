@@ -8,3 +8,5 @@
 | **Cellular Diodes** | Unidirectional Dataflow | Worker outputs stream to Central Bus only via cryptographically signed receipts |
 | **Scarcity Gate** | Hysteresis Throttling at 85% RAM | Automatic `//REZERO` and ephemeral worker termination if RAM > 6.8 GB |
 | **Intercom Matrix** | Bifrost IPC Message Channels | Zero-latency internal socket dispatch over Tailscale mTLS boundary |
+| **WorldTree VFS Mesh** | Cybertronia Distributed Coordinate Bus | All spawned worker tissues mirror to `vfs://worldtree/knights/` anchored on Cybertronia |
+| **Helio Oversight** | Sir Helios Macroscopic Telemetry | Real-time telemetry ingestion via FastMCP & Graphiti temporal state logging |

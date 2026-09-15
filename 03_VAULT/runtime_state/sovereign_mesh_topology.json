@@ -55,11 +55,13 @@
     },
     "motorola_moto_g_power": {
       "designation": "AUXILIARY_MOBILE_SENTINEL",
-      "role": "Backup Kinetic Mobile Sentinel",
+      "role": "Auxiliary Mobile Sentinel & Backup Telemetry Relay",
       "tailscale_ip": "100.89.129.105",
       "version": "1.92.3",
       "os": "Android 15",
-      "status": "AUXILIARY"
+      "status": "ONLINE_STANDBY",
+      "active_ports": { "aux_sentinel_relay": 8092, "termux_ssh": 8023 },
+      "governing_knight": "SIR_HEIMDALL"
     },
     "vps_hub_kvm563": {
       "designation": "CAMELOT_HUB_CONTROL_PLANE",

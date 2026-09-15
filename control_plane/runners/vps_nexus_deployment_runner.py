@@ -164,7 +164,7 @@ class VpsNexusDeploymentCommander:
                 "transport": "Tailscale WireGuard mesh + mTLS boundary (Sir Heimdall)",
                 "bifrost_port_3001": "ONLINE (200 OK)" if bifrost_ok else "ACTIVE_INTERNAL_BUS",
                 "telemetry_stream_port": 8095,
-                "avatar_capsule_pwa": "apps/excalibur-s26-orb -> http://100.110.180.18:8095/telemetry/cockpit",
+                "avatar_capsule_pwa": "apps/excalibur-cmd-1 -> http://100.110.180.18:8095/telemetry/cockpit",
                 "registered_nodes": len(mesh_nodes),
                 "excalibur_cockpit": "Samsung Galaxy S26 Ultra (Android 16)",
             },

@@ -8,6 +8,17 @@
     "vfs_path": "vfs://worldtree/knights/sir_alex/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_ALEX",
     "open_viking_tether": "open_viking://worldtree/sir_alex",
+    "updated_at": "2026-09-15T08:31:17.503347+00:00"
+  },
+  {
+    "knight_id": "SIR_ALEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_test_l2_burst",
+    "content": "{\"status\": \"active\", \"description\": \"This is a test of the Knight -> Cloud Brain pipeline from SIR_ALEX.\", \"layer\": \"L2\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_alex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ALEX",
+    "open_viking_tether": "open_viking://worldtree/sir_alex",
     "updated_at": "2026-09-14T05:52:37.204413+00:00"
   },
   {

@@ -1,0 +1,38 @@
+id: "excalibur-auth"
+name: "Excalibur Sovereign Authenticity Gate"
+type: "SECURITY_CARTRIDGE"
+risk: "R5"
+encryption: "AES-256-GCM + Ed25519"
+capabilities:
+  - "webcam_face_vector"
+  - "voiceprint_liveness"
+  - "qr_device_binding"
+  - "webauthn_fido2_knox"
+  - "dynamic_challenge_rotation"
+  - "tenant_carousel_unlock"
+hardware_constraints:
+  ram_ceiling: "4096MB_STRICT"
+  memory_reclamation: "MADV_DONTNEED"
+  cgroups_v2: "enforced"
+dependencies:
+  - "camelot-sentinel"
+  - "camelot-vault"
+  - "camelot-multivoice"
+  - "camelot-compositor"
+auth_pipeline:
+  modalities:
+    - type: "FACE_VECTOR"
+      engine: "WASM/Rust Face Lattice Prover"
+      resolution: "512-dim Float32 vector"
+      hash_algorithm: "BLAKE3 + Vault Salt"
+    - type: "VOICEPRINT"
+      engine: "camelot-audio-engine VAD"
+      challenge_phrase: "Dreams don't come true, visions do"
+      duration_sec: 5
+    - type: "DEVICE_BINDING"
+      target_device: "S26 Sovereign Terminal"
+      cipher: "Ed25519 Nonce Signer"
+lease:
+  issuer: "Arthur Sentinel v1000"
+  header_key: "X-Camelot-Lease-ID"
+  ttl_seconds: 86400

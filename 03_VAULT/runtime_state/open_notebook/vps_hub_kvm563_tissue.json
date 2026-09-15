@@ -18,8 +18,8 @@
     "deployed_branch": "main",
     "deployed_commit": "27e66d0113879dc39b8122a51284624bcb95e692",
     "deployed_commit_summary": "feat(vps-hub): implement Omni-Voice DAG, VPS Nexus deployment, and WorldTree integration",
-    "deployed_commit_verified_at": "2026-09-15T03:55:44Z",
-    "deployed_commit_verification": "ssh git rev-parse HEAD on /opt/camelot-ecosystem",
+    "deployed_commit_verified_at": "2026-09-15T08:31:50.653016+00:00",
+    "deployed_commit_verification": "live ssh git rev-parse probe",
     "last_delivery_id": "del_34aed52a",
     "services": {
       "caddy_worldtree_gateway": 80,
@@ -29,38 +29,35 @@
       "vps_mobile_mesh_bridge": 8095,
       "webhook_receiver": 9000
     },
-    "live_probes": {
-      "ssh_port_22": "OPEN",
-      "caddy_port_80": "OPEN",
-      "bifrost_port_3001": "OPEN",
-      "worldtree_http_status": 200,
-      "bifrost_health_status": 200
-    },
-    "status": "MERGED_MAIN_UNIFIED",
-    "timestamp": "2026-09-15T03:59:34.472759+00:00",
-    "last_synced": "2026-09-15T04:05:00.000000+00:00",
     "services_state": {
-      "caddy_worldtree_gateway": "RUNNING (nginx :80, worldtree_http 302)",
-      "bifrost_gateway": "RUNNING (node /opt/camelot-ecosystem/apps/bifrost/dist/server.js, health 200)",
-      "hermes_container": "RUNNING (docker 'hermes', loopback 8642/9119)",
-      "multivoice_router": "STOPPED (port 7680 closed)",
-      "honcho_self_hosted": "STOPPED (port 8000 closed)",
-      "vps_mobile_mesh_bridge": "STOPPED (port 8095 closed)",
-      "webhook_receiver": "STOPPED (port 9000 closed)"
+      "caddy_worldtree_gateway": "RUNNING (live probe)",
+      "bifrost_gateway": "RUNNING (live probe)",
+      "multivoice_router": "STOPPED (live probe: port closed)",
+      "honcho_self_hosted": "STOPPED (live probe: port closed)",
+      "vps_mobile_mesh_bridge": "RUNNING (live probe)",
+      "webhook_receiver": "STOPPED (live probe: port closed)"
     },
-    "live_probes_update": {
-      "worldtree_http_status": 302,
-      "multivoice_port_7680": "CLOSED",
-      "honcho_port_8000": "CLOSED",
-      "mesh_bridge_port_8095": "CLOSED",
-      "webhook_port_9000": "CLOSED",
-      "probe_timestamp": "2026-09-15T03:55:44Z"
+    "live_probes": {
+      "port_80": "OPEN",
+      "port_3001": "OPEN",
+      "port_7680": "CLOSED",
+      "port_8000": "CLOSED",
+      "port_8095": "OPEN",
+      "port_9000": "CLOSED",
+      "probe_timestamp": "2026-09-15T08:31:50.653016+00:00"
     },
     "drift": {
       "detected": true,
-      "summary": "4 mesh services (multivoice, honcho, mesh bridge, webhook) recorded in services map are not running; no matching systemd units active",
-      "previously_masked_by": "sync engine preserved stale live_probes/services from prior tissue"
+      "stopped_services": [
+        "multivoice_router",
+        "honcho_self_hosted",
+        "webhook_receiver"
+      ],
+      "summary": "3 recorded service(s) not reachable"
     },
+    "status": "MERGED_MAIN_UNIFIED",
+    "timestamp": "2026-09-15T08:31:46.721050+00:00",
+    "last_synced": "2026-09-15T08:31:46.721050+00:00",
     "active_cartridges": [
       "omarchy-vps-hermes-v1"
     ],

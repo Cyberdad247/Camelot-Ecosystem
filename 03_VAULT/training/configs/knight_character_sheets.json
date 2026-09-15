@@ -1132,6 +1132,44 @@
       ],
       "interconnect_status": "TETHERED_TO_WORLDTREE"
     },
+    "SIR_HELIOS": {
+      "knight_id": "SIR_HELIOS",
+      "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
+      "name": "Sir Helios (The Sovereign Eye of the Spire)",
+      "title": "Telemetry Cockpit Sentinel & AntiGravity CLI Synergy",
+      "layer": "L2 Telemetry / L5 Synergy",
+      "role": "Sovereign Spire Sentinel, High Herald of Telemetry, AntiGravity CLI & CloudBrain Synergy Knight",
+      "summoning_rune": "//HELIOS",
+      "cloudbrain_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+      "vfs_path": "vfs://worldtree/knights/sir_helios/tether.json",
+      "mempalace_wing": "WING_WORLDTREE_SIR_HELIOS",
+      "open_viking_node": "open_viking://worldtree/sir_helios",
+      "primary_engine": "FastMCP / agy (Gemini 3.8 Flash / Pro)",
+      "aliases": [
+        "ANTIGRAVITY",
+        "SIR_HELIOS"
+      ],
+      "skill_tier": "S4 Strategic",
+      "ocean_vector": {
+        "O": 0.95,
+        "C": 0.98,
+        "E": 0.70,
+        "A": 0.80,
+        "N": 0.02
+      },
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "domain_tags": [
+        "sir_helios",
+        "antigravity",
+        "cli",
+        "notebooklm",
+        "mcp",
+        "agent",
+        "orchestration",
+        "harness",
+        "cloudbrain"
+      ]
+    },
     "ANTIGRAVITY": {
       "knight_id": "ANTIGRAVITY",
       "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",

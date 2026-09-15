@@ -33,9 +33,10 @@
       "os": "Android 15",
       "tailscale_version": "1.92.3",
       "account": "Cyberdad247@github",
-      "lease_status": "KEY_REAUTH_PENDING_EXPIRED_JUL_1_2026",
-      "role": "Auxiliary Kinetic Mobile Sentinel / Telemetry Collector",
-      "status": "REGISTERED_PENDING_REAUTH"
+      "lease_status": "ACTIVE_AUTHENTICATED",
+      "role": "Auxiliary Kinetic Mobile Sentinel & Telemetry Collector",
+      "status": "ACTIVE_ONLINE",
+      "governing_knight": "SIR_HEIMDALL"
     },
     "fothers-camelot": {
       "ip": "100.121.48.50",

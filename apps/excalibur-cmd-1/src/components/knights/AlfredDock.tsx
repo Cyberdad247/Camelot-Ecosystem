@@ -1,0 +1,1 @@
+export { AlfredDock } from '../AlfredDock';

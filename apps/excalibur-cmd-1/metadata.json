@@ -1,0 +1,11 @@
+{
+  "name": "Excalibur Command Center",
+  "description": "Digital Throne Room with node registry, telemetry, and Alfred voice interface.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

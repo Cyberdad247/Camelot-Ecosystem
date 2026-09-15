@@ -11,6 +11,7 @@ import { CoffeeTab } from './tabs/CoffeeTab';
 import { ExcaliburCommandCenterTab } from './tabs/ExcaliburCommandCenterTab';
 import { KnightsTab } from './tabs/KnightsTab';
 import { OverviewTab } from './tabs/OverviewTab';
+import { TenantsTab } from './tabs/TenantsTab';
 import { PropertiesTab } from './tabs/PropertiesTab';
 import { SettingsTab } from './tabs/SettingsTab';
 import { StreamingTab } from './tabs/StreamingTab';
@@ -22,6 +23,7 @@ import { ThemeToggle } from './ThemeToggle';
 
 const TABS = [
   'Overview',
+  'Tenants',
   'Interphase',
   'Desktop Grid',
   'Twin-Brain Nodes',
@@ -100,6 +102,7 @@ export function Dashboard() {
 
         <main className="px-10">
           {active === 'Overview' && <OverviewTab />}
+          {active === 'Tenants' && <TenantsTab />}
           {active === 'Interphase' && <InterphaseCartridge />}
           {active === 'Desktop Grid' && <DesktopGrid />}
           {active === 'Twin-Brain Nodes' && <TwinBrainNodeManager />}

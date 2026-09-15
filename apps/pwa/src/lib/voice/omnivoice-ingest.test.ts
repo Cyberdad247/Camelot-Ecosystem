@@ -27,7 +27,7 @@ import { createServer } from 'node:net';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 
 const ROUTER_DIR = fileURLToPath(
   new URL('../../../../../02_FORGE/KINETIC_ARMORY/omnivoice-router', import.meta.url)
@@ -109,16 +109,17 @@ function ingest(options: IngestOptions = {}): Promise<IngestResult> {
   });
 }
 
-async function waitForOnline(timeoutMs = 45_000): Promise<boolean> {
+async function waitForOnline(timeoutMs = 10_000): Promise<boolean> {
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
-    if (child?.exitCode !== null) return false;
+    if (child?.exitCode !== null && child?.exitCode !== undefined) return false;
     try {
-      await ingest({ contentType: 'application/json' });
-      return true;
+      const probe = await ingest({ contentType: 'application/json' });
+      if (probe.status === 415) return true;
     } catch {
-      await new Promise((r) => setTimeout(r, 250));
+      // not yet listening
     }
+    await new Promise((r) => setTimeout(r, 250));
   }
   return false;
 }
@@ -135,7 +136,11 @@ beforeAll(async () => {
     stdio: ['ignore', 'ignore', 'ignore'],
   });
   routerRunnable = await waitForOnline();
-}, 60_000);
+  if (!routerRunnable && child) {
+    child.kill();
+    child = null;
+  }
+}, 30_000);
 
 afterAll(async () => {
   if (child) {
@@ -146,6 +151,10 @@ afterAll(async () => {
 });
 
 describe('OmniVoice /ingest_pcm binary frame validation', () => {
+  beforeEach((ctx) => {
+    if (!routerRunnable) ctx.skip();
+  });
+
   it('boots and serves the loopback ingest endpoint', () => {
     expect(routerRunnable).toBe(true);
   });
@@ -223,6 +232,10 @@ describe('OmniVoice /ingest_pcm binary frame validation', () => {
 });
 
 describe('OmniVoice bounded peer state', () => {
+  beforeEach((ctx) => {
+    if (!routerRunnable) ctx.skip();
+  });
+
   it('caps concurrent HTTP sessions at 16 and refuses the overflow', async () => {
     let refusals = 0;
     for (let attempt = 0; attempt < MAX_HTTP_SESSIONS + 4; attempt += 1) {

@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: MIT
+// Excalibur_cmd-1 // Arch-Sovereign Mobile Edge Command Center
+// Repository Anchor: https://github.com/Cyberdad247/Excalibur_cmd-1.git
+// Restricted Exclusively to King Arthur (ARTHUR_OMEGA / VaShawn O. Head / Vizion)
 
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useBifrost } from '../../context/BifrostContext';
-import { Form, FormItem } from '../Form';
 
 interface ServiceStatus {
   name: string;
@@ -17,6 +19,15 @@ interface ServiceStatus {
 }
 
 const EXCALIBUR_SERVICES: ServiceStatus[] = [
+  {
+    name: 'excalibur-cmd-1-relay',
+    lang: 'Rust',
+    location: 'S26',
+    memory: '32M',
+    purpose: 'Arch-Sovereign zero-latency scrcpy opus relay (100.106.246.126:5555)',
+    status: 'ACTIVE',
+    latencyMs: 12,
+  },
   {
     name: 'excalibur-voice-auth',
     lang: 'Rust',
@@ -63,388 +74,301 @@ const EXCALIBUR_SERVICES: ServiceStatus[] = [
     latencyMs: 31,
   },
   {
-    name: 'excalibur-failover-orch',
-    lang: 'Go',
-    location: 'VPS',
-    memory: '64M',
-    purpose: 'DR coordination (10s health loop, Avalon secondary failover & Vault unseal)',
-    status: 'STANDBY',
-    latencyMs: 22,
-  },
-  {
-    name: 'camelot-crawler',
+    name: 'excalibur-knox-enclave',
     lang: 'Rust',
-    location: 'VPS',
+    location: 'S26',
     memory: '48M',
-    purpose: 'Native web crawler engine (reqwest, scraper, tokio, SHA-256 deduplication, zero Redis)',
+    purpose: 'Samsung Galaxy S26 Ultra Knox TrustZone hardware-backed secure world attestation',
     status: 'ACTIVE',
-    latencyMs: 8,
-  },
+    latencyMs: 6,
+  }
 ];
 
 export function ExcaliburCommandCenterTab() {
   const { connected } = useBifrost();
-  const [activeProfile, setActiveProfile] = useState<'Primary' | 'Delegate' | 'Guest'>('Primary');
-  const [duressMode, setDuressMode] = useState(false);
-  const [reauthCountdown, setReauthCountdown] = useState(30);
-  const [similarityScore, setSimilarityScore] = useState(0.94);
-  const [offlineQueueCount, setOfflineQueueCount] = useState(0);
-  const [activeChallenge, setActiveChallenge] = useState('knight-7-round-3');
-  const [dispatchStatus, setDispatchStatus] = useState<string | null>(null);
-  const [crawlerQueueSize, setCrawlerQueueSize] = useState(14);
-  const [pagesScrapedRate, setPagesScrapedRate] = useState(48.2);
-  const [activeHarnessSandboxes, setActiveHarnessSandboxes] = useState(2);
+  
+  // Arch-Sovereign Biometric Gate State
+  const [isBioAuthenticated, setIsBioAuthenticated] = useState<boolean>(true);
+  const [bioTier, setBioTier] = useState<'IDLE' | 'SCANNING_FACE' | 'SAMPLING_VOICE' | 'KNOX_PRF' | 'AUTHENTICATED'>('AUTHENTICATED');
+  const [bioLog, setBioLog] = useState<string>('Arch-Sovereign lease verified: 0xCBB310BD987E4B84BF4512D37D090BEC (King Arthur / Vizion). Zero-Trust gate active.');
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCrawlerQueueSize((prev) => Math.max(2, prev + (Math.random() > 0.5 ? 1 : -1)));
-      setPagesScrapedRate((prev) => Number((45 + Math.random() * 8).toFixed(1)));
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  // S26 Ultra Edge Hardware Telemetry
+  const [s26Battery, setS26Battery] = useState<number>(88);
+  const [s26MemoryMb, setS26MemoryMb] = useState<number>(298); // within 350MB slice
+  const [s26LatencyMs, setS26LatencyMs] = useState<number>(18);
+  const [scrcpyBitrate, setScrcpyBitrate] = useState<number>(8);
+  const [tapCoords, setTapCoords] = useState<{ x: number; y: number }>({ x: 540, y: 1200 });
+  const [adbFeedback, setAdbFeedback] = useState<string | null>(null);
+  const [duressMode, setDuressMode] = useState<boolean>(false);
+  const [emergencySealed, setEmergencySealed] = useState<boolean>(false);
 
+  // Periodic Telemetry Pulse
   useEffect(() => {
     const timer = setInterval(() => {
-      setReauthCountdown((prev) => (prev > 1 ? prev - 1 : 30));
-    }, 1000);
+      setS26LatencyMs(Math.floor(Math.random() * 6 + 16));
+      setS26MemoryMb(Math.floor(Math.random() * 20 + 290));
+    }, 2500);
     return () => clearInterval(timer);
   }, []);
 
+  const handleInitiateBioAuth = () => {
+    setBioTier('SCANNING_FACE');
+    setBioLog('Tier 1: Scanning client-side WASM facial topology vector...');
+    
+    setTimeout(() => {
+      setBioTier('SAMPLING_VOICE');
+      setBioLog('Tier 2: Ingesting 432Hz fundamental voice resonance (VAD wake-word)...');
+      
+      setTimeout(() => {
+        setBioTier('KNOX_PRF');
+        setBioLog('Tier 3: Interrogating Samsung Galaxy S26 Ultra Knox hardware PRF enclave...');
+        
+        setTimeout(() => {
+          setBioTier('AUTHENTICATED');
+          setIsBioAuthenticated(true);
+          setBioLog('SEALED // ARCH-SOVEREIGN ACCESS GRANTED: VaShawn O. Head (King Arthur / Vizion).');
+        }, 1200);
+      }, 1200);
+    }, 1200);
+  };
+
+  const handleDispatchTap = (e: React.FormEvent) => {
+    e.preventDefault();
+    setAdbFeedback(`[ADB INJECT]: Input tap (${tapCoords.x}, ${tapCoords.y}) dispatched to 100.106.246.126:5555. Return code: 0.`);
+    setTimeout(() => {
+      setAdbFeedback(null);
+    }, 4000);
+  };
+
+  const handleSealVault = () => {
+    setEmergencySealed(true);
+    setIsBioAuthenticated(false);
+    setBioTier('IDLE');
+    setBioLog('EMERGENCY KILLSWITCH ENGAGED: Sovereign tokens revoked. Re-attestation mandatory.');
+  };
+
   return (
-    <div className="space-y-6 font-mono text-white">
-      {/* ── Header HUD Banner ─────────────────────────────────── */}
-      <div className="border border-gold/30 bg-smoke-900/90 p-5 shadow-gold">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center border border-gold bg-obsidian text-lg font-bold text-gold-royal shadow-gold">
-              ⚔️
-            </span>
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="font-display text-lg tracking-wide text-gold-light">
-                  EXCALIBUR VOCAL LIVE COMMAND CENTER
-                </h2>
-                <span className="border border-gold/40 bg-gold/10 px-2 py-0.5 text-[10px] text-gold-royal">
-                  S26 ULTRA SENTINEL
+    <div className="space-y-6">
+      {/* ── Arch-Sovereign Header ───────────────────────────────── */}
+      <div className="border border-gold/40 bg-smoke-900/95 p-6 backdrop-blur-md shadow-gold flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div className="h-12 w-12 border-2 border-gold bg-obsidian flex items-center justify-center text-2xl shadow-gold">
+            ⚔️
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-mono uppercase tracking-widest text-gold-royal font-bold">
+                EXCALIBUR_CMD-1 // ARCH-SOVEREIGN MOBILE SENTINEL
+              </span>
+              <span className="px-1.5 py-0.5 text-[9px] font-mono border border-gold/40 bg-gold/10 text-gold-light">
+                ARCH-SOVEREIGN ONLY
+              </span>
+            </div>
+            <h2 className="text-2xl font-display text-white tracking-minted">
+              Excalibur Command Center
+            </h2>
+            <p className="text-xs font-mono text-white/50 mt-0.5">
+              Target Node: <span className="text-gold-royal font-bold">vashawns-s26-ultra</span> (100.106.246.126:5555) · Repository: <a href="https://github.com/Cyberdad247/Excalibur_cmd-1.git" target="_blank" rel="noreferrer" className="text-gold-light underline">Cyberdad247/Excalibur_cmd-1</a>
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="text-right hidden md:block">
+            <p className="text-[10px] text-white/40 font-mono">SOVEREIGN OPERATOR</p>
+            <p className="text-xs font-mono text-gold-royal font-bold">VaShawn O. Head (King Arthur)</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleSealVault}
+            className="px-4 py-2 border border-red-500/60 bg-red-950/40 text-red-300 hover:bg-red-900/60 font-mono text-xs uppercase tracking-wider transition-colors flex items-center gap-1.5"
+          >
+            <span>🔒</span>
+            <span>Seal Sovereign Vault</span>
+          </button>
+        </div>
+      </div>
+
+      {/* ── Sovereign Biometric Gate Verification ───────────────── */}
+      {!isBioAuthenticated && (
+        <div className="border border-red-500/40 bg-smoke-950/90 p-8 backdrop-blur-md text-center max-w-xl mx-auto space-y-4">
+          <span className="text-4xl">🛡️</span>
+          <h3 className="text-xl font-display text-white tracking-minted">
+            Arch-Sovereign Biometric Gate Armed
+          </h3>
+          <p className="text-xs font-mono text-white/60">
+            Access to Excalibur_cmd-1 is restricted exclusively to King Arthur (ARTHUR_OMEGA). Tri-modal biometric attestation required.
+          </p>
+
+          <div className="p-3 bg-black/80 border border-gold/20 font-mono text-xs text-gold-light text-left whitespace-pre-line">
+            {bioLog}
+          </div>
+
+          <button
+            type="button"
+            onClick={handleInitiateBioAuth}
+            disabled={bioTier !== 'IDLE' && bioTier !== 'AUTHENTICATED'}
+            className="w-full py-3 border border-gold bg-gold/20 text-gold-royal font-mono font-bold text-xs uppercase tracking-wider hover:bg-gold hover:text-black transition-all shadow-gold"
+          >
+            {bioTier === 'IDLE' ? 'Initiate Tri-Modal Bio-Auth' : 'Attesting Hardware Knots...'}
+          </button>
+        </div>
+      )}
+
+      {isBioAuthenticated && (
+        <>
+          {/* ── Telemetry Cockpit Stats ──────────────────────────── */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div className="border border-gold/20 bg-smoke-800/80 p-5 backdrop-blur-sm">
+              <span className="text-[10px] text-white/40 uppercase font-mono tracking-wider">S26 Ultra Battery</span>
+              <p className="mt-2 text-2xl font-display text-gold-royal tracking-minted">{s26Battery}%</p>
+              <span className="text-[10px] font-mono text-emerald-400">⚡ Qi2 Fast Wireless</span>
+            </div>
+
+            <div className="border border-gold/20 bg-smoke-800/80 p-5 backdrop-blur-sm">
+              <span className="text-[10px] text-white/40 uppercase font-mono tracking-wider">Audio Slice RAM</span>
+              <p className="mt-2 text-2xl font-display text-gold-royal tracking-minted">{s26MemoryMb} / 350 MB</p>
+              <span className="text-[10px] font-mono text-emerald-400">Bounded Scarcity OK</span>
+            </div>
+
+            <div className="border border-gold/20 bg-smoke-800/80 p-5 backdrop-blur-sm">
+              <span className="text-[10px] text-white/40 uppercase font-mono tracking-wider">Mesh RTT Latency</span>
+              <p className="mt-2 text-2xl font-display text-white tracking-minted">{s26LatencyMs} ms</p>
+              <span className="text-[10px] font-mono text-emerald-400">Tailscale WireGuard</span>
+            </div>
+
+            <div className="border border-gold/20 bg-smoke-800/80 p-5 backdrop-blur-sm">
+              <span className="text-[10px] text-white/40 uppercase font-mono tracking-wider">Knox Enclave</span>
+              <p className="mt-2 text-2xl font-display text-gold-royal tracking-minted">SECURE</p>
+              <span className="text-[10px] font-mono text-emerald-400">TrustZone PRF Verified</span>
+            </div>
+          </div>
+
+          {/* ── Remote scrcpy Stream & Tactile ADB Injection ──────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {/* scrcpy Command Card */}
+            <div className="border border-gold/20 bg-smoke-800/80 p-6 backdrop-blur-sm">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-display text-lg text-white">Native scrcpy Remote Stream</h3>
+                <span className="text-[10px] font-mono border border-emerald-500/40 bg-emerald-950/40 text-emerald-400 px-2 py-0.5">
+                  OPUS 60FPS
                 </span>
               </div>
-              <p className="text-xs text-white/50">
-                Hub Node: <span className="text-white/80">vps-camelot-hub (100.110.180.18)</span> · Mesh Bridge: <span className="text-emerald-400">ENCRYPTED BIFROST :8095</span>
+              <p className="text-xs font-mono text-white/60 mb-4">
+                Zero-latency hardware-accelerated video & audio stream directly from Samsung Galaxy S26 Ultra to Cybertronia over Tailscale.
               </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3 text-xs">
-            <div className="border border-white/10 bg-black/40 px-3 py-1.5">
-              <span className="text-white/40">BIO-AUTH LEASE: </span>
-              <span className="font-bold text-gold-royal">{reauthCountdown}s</span>
-            </div>
-            <div className="border border-white/10 bg-black/40 px-3 py-1.5">
-              <span className="text-white/40">SIMILARITY: </span>
-              <span className={`font-bold ${similarityScore >= 0.6 ? 'text-emerald-400' : 'text-red-400'}`}>
-                {(similarityScore * 100).toFixed(1)}%
-              </span>
-            </div>
-            <div className={`border px-3 py-1.5 ${duressMode ? 'border-red-500 bg-red-950/80 text-red-300' : 'border-emerald-500/30 bg-emerald-950/20 text-emerald-400'}`}>
-              {duressMode ? '🚨 DURESS LOCKDOWN' : '🛡️ NORMAL PATROL'}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Key Security Telemetry Cards ─────────────────────── */}
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {/* Voice Biometric Identity */}
-        <div className="border border-gold/20 bg-smoke-800/80 p-4">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] uppercase tracking-wider text-white/50">Voice Biometric Identity</span>
-            <span className="text-[10px] text-gold-royal">ONNX 256-dim</span>
-          </div>
-          <div className="mt-3 space-y-2 text-xs">
-            <div className="flex justify-between">
-              <span className="text-white/40">Active Profile:</span>
-              <span className="text-gold-light font-bold">{activeProfile}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">Speaker Hash:</span>
-              <span className="text-white/80">0x7A9B...E5F6</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">Impostor Cutoff:</span>
-              <span className="text-amber-400">&lt; 0.60 Cosine</span>
-            </div>
-            <div className="mt-2 flex gap-1">
-              {(['Primary', 'Delegate', 'Guest'] as const).map((p) => (
+              <div className="p-3 bg-obsidian border border-gold/20 font-mono text-xs text-gold-light select-all mb-4 break-all">
+                scrcpy -s 100.106.246.126:5555 --video-bit-rate {scrcpyBitrate}M --max-fps 60 --audio-codec=opus
+              </div>
+              <div className="flex items-center gap-3">
                 <button
-                  key={p}
-                  onClick={() => setActiveProfile(p)}
-                  className={`flex-1 border py-1 text-[10px] uppercase transition-colors ${
-                    activeProfile === p
-                      ? 'border-gold bg-gold/20 text-gold-light font-bold'
-                      : 'border-white/10 hover:border-white/30 text-white/50'
-                  }`}
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(`scrcpy -s 100.106.246.126:5555 --video-bit-rate ${scrcpyBitrate}M --max-fps 60 --audio-codec=opus`);
+                    setAdbFeedback('scrcpy command copied to clipboard.');
+                    setTimeout(() => setAdbFeedback(null), 3000);
+                  }}
+                  className="px-4 py-2 border border-gold bg-gold/20 text-gold-royal text-xs font-mono uppercase tracking-wider hover:bg-gold hover:text-black transition-colors"
                 >
-                  {p}
+                  Copy scrcpy Command
                 </button>
-              ))}
+                <div className="flex items-center gap-2 text-xs font-mono text-white/50">
+                  <span>Bitrate:</span>
+                  {[4, 8, 12].map(rate => (
+                    <button
+                      key={rate}
+                      type="button"
+                      onClick={() => setScrcpyBitrate(rate)}
+                      className={`px-2 py-0.5 border text-[10px] ${scrcpyBitrate === rate ? 'border-gold text-gold-light' : 'border-white/10 text-white/30'}`}
+                    >
+                      {rate}M
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* ADB Tactile Injection Card */}
+            <div className="border border-gold/20 bg-smoke-800/80 p-6 backdrop-blur-sm">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-display text-lg text-white">Tactile ADB Injection</h3>
+                <span className="text-[10px] font-mono border border-gold/40 text-gold-royal px-2 py-0.5">
+                  100.106.246.126:5555
+                </span>
+              </div>
+              <p className="text-xs font-mono text-white/60 mb-4">
+                Send low-latency coordinate tap injections into the Excalibur Mobile Sentinel without touching the device.
+              </p>
+              <form onSubmit={handleDispatchTap} className="space-y-3">
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-mono text-white/40 uppercase mb-1">X Coordinate</label>
+                    <input
+                      type="number"
+                      value={tapCoords.x}
+                      onChange={e => setTapCoords(prev => ({ ...prev, x: Number(e.target.value) }))}
+                      className="w-full bg-obsidian border border-gold/20 px-3 py-1.5 text-xs font-mono text-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-mono text-white/40 uppercase mb-1">Y Coordinate</label>
+                    <input
+                      type="number"
+                      value={tapCoords.y}
+                      onChange={e => setTapCoords(prev => ({ ...prev, y: Number(e.target.value) }))}
+                      className="w-full bg-obsidian border border-gold/20 px-3 py-1.5 text-xs font-mono text-white"
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full py-2 border border-gold/40 bg-smoke-900 text-gold-light text-xs font-mono uppercase tracking-wider hover:bg-gold hover:text-black transition-colors"
+                >
+                  Inject ADB Tap
+                </button>
+              </form>
+              {adbFeedback && (
+                <p className="mt-2 text-xs font-mono text-emerald-400">{adbFeedback}</p>
+              )}
             </div>
           </div>
-        </div>
 
-        {/* Anti-Spoofing & Deepfake Defense */}
-        <div className="border border-gold/20 bg-smoke-800/80 p-4">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] uppercase tracking-wider text-white/50">Anti-Spoofing Stack</span>
-            <span className="text-[10px] text-emerald-400">VPS SHIELD</span>
-          </div>
-          <div className="mt-3 space-y-2 text-xs">
-            <div className="flex justify-between">
-              <span className="text-white/40">Spectral Analysis:</span>
-              <span className="text-emerald-400 font-bold">SYNTH_ARTIFACT_ZERO</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">Phoneme Challenge:</span>
-              <span className="text-violet-light font-mono">{activeChallenge}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">Replay Defense:</span>
-              <span className="text-white/80">Nonce Hashing OK</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">Prosody/Vocal Tremor:</span>
-              <span className="text-emerald-400">NATURAL_BREATH</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Disaster Recovery & Memory Budget */}
-        <div className="border border-gold/20 bg-smoke-800/80 p-4">
-          <div className="flex items-center justify-between">
-            <span className="text-[11px] uppercase tracking-wider text-white/50">DR & Resource Budget</span>
-            <span className="text-[10px] text-gold-royal">S26 HARD CAP &lt;500M</span>
-          </div>
-          <div className="mt-3 space-y-2 text-xs">
-            <div className="flex justify-between">
-              <span className="text-white/40">S26 Memory Used:</span>
-              <span className="text-emerald-400 font-bold">478MB / 500MB</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">VPS Hub Memory:</span>
-              <span className="text-emerald-400 font-bold">2.45GB / 8.0GB</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">Failover Route:</span>
-              <span className="text-white/80">KVM563 → Avalon DR</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-white/40">Offline SQLite Queue:</span>
-              <span className="text-gold-light">{offlineQueueCount} packets stored</span>
+          {/* ── Excalibur Services Inventory Table ───────────────── */}
+          <div className="border border-gold/20 bg-smoke-800/80 p-6 backdrop-blur-sm">
+            <h3 className="font-display text-lg text-white mb-4">Excalibur Sentinel Services Registry</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs font-mono">
+                <thead>
+                  <tr className="border-b border-gold/20 text-white/40 uppercase text-[10px]">
+                    <th className="pb-2">Service</th>
+                    <th className="pb-2">Substrate</th>
+                    <th className="pb-2">Location</th>
+                    <th className="pb-2">Memory</th>
+                    <th className="pb-2">Latency</th>
+                    <th className="pb-2">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-white/5">
+                  {EXCALIBUR_SERVICES.map(svc => (
+                    <tr key={svc.name} className="hover:bg-white/5">
+                      <td className="py-2.5 text-white font-bold">{svc.name}</td>
+                      <td className="py-2.5 text-gold-light">{svc.lang}</td>
+                      <td className="py-2.5 text-white/60">{svc.location}</td>
+                      <td className="py-2.5 text-white/60">{svc.memory}</td>
+                      <td className="py-2.5 text-white/60">{svc.latencyMs}ms</td>
+                      <td className="py-2.5">
+                        <span className="px-1.5 py-0.5 text-[9px] border border-emerald-500/40 bg-emerald-950/40 text-emerald-400">
+                          {svc.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* ── Excalibur 8-Service Architecture Matrix ───────────── */}
-      <div className="border border-gold/20 bg-smoke-900/90 p-5">
-        <div className="flex items-center justify-between border-b border-white/10 pb-3">
-          <h3 className="text-xs uppercase tracking-wider text-gold-light font-display">
-            Excalibur Production Service Fleet (S26 Sentinel + VPS Hub)
-          </h3>
-          <span className="text-[10px] text-white/40">7 Core Engines Loaded</span>
-        </div>
-
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full text-left text-xs">
-            <thead>
-              <tr className="border-b border-white/10 text-white/40">
-                <th className="pb-2">SERVICE</th>
-                <th className="pb-2">LOCATION</th>
-                <th className="pb-2">LANG</th>
-                <th className="pb-2">MEMORY</th>
-                <th className="pb-2">LATENCY</th>
-                <th className="pb-2">STATUS</th>
-                <th className="pb-2">PURPOSE</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-white/5">
-              {EXCALIBUR_SERVICES.map((s) => (
-                <tr key={s.name} className="hover:bg-white/5">
-                  <td className="py-2.5 font-bold text-gold-light">{s.name}</td>
-                  <td className="py-2.5">
-                    <span className={`px-2 py-0.5 text-[10px] border ${
-                      s.location === 'S26' ? 'border-amber-400/40 text-amber-300 bg-amber-950/20' : 'border-blue-400/40 text-blue-300 bg-blue-950/20'
-                    }`}>
-                      {s.location}
-                    </span>
-                  </td>
-                  <td className="py-2.5 text-white/60">{s.lang}</td>
-                  <td className="py-2.5 text-white/80">{s.memory}</td>
-                  <td className="py-2.5 text-emerald-400">{s.latencyMs}ms</td>
-                  <td className="py-2.5">
-                    <span className={`px-2 py-0.5 text-[10px] border ${
-                      s.status === 'ACTIVE'
-                        ? 'border-emerald-500/40 bg-emerald-950/20 text-emerald-400'
-                        : 'border-white/20 text-white/40'
-                    }`}>
-                      {s.status}
-                    </span>
-                  </td>
-                  <td className="py-2.5 text-white/50 text-[11px]">{s.purpose}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      {/* ── Declarative Excalibur Voice & Runic Dispatch Form ──── */}
-      <div className="border border-gold/30 bg-smoke-900/90 p-5 shadow-gold">
-        <div className="flex items-center justify-between border-b border-white/10 pb-3">
-          <h3 className="text-xs uppercase tracking-wider text-gold-light font-display">
-            ⚔️ Declarative Excalibur Telemetry & Voice Dispatch Form
-          </h3>
-          <span className="text-[10px] text-white/40">Ant Design Controller Pattern · Tailwind v4</span>
-        </div>
-
-        <Form
-          className="mt-4 space-y-4"
-          initialValues={{
-            targetKnight: 'SIR_SENTINEL',
-            executionTier: 'L1_HOTPATH',
-            directive: '',
-          }}
-          onFinish={async (values) => {
-            setDispatchStatus(`//DISPATCH [${values.targetKnight}@${values.executionTier}] -> "${values.directive}"`);
-            setTimeout(() => setDispatchStatus(null), 6000);
-          }}
-        >
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <FormItem
-              name="targetKnight"
-              label="Target Sovereign Knight"
-              rules={[{ required: true, message: 'Please select a recipient Knight' }]}
-            >
-              <select className="w-full border border-white/20 bg-obsidian px-3 py-2 text-xs text-white focus:border-gold focus:outline-none">
-                <option value="SIR_SENTINEL">SIR_SENTINEL (Zero-Trust Guard)</option>
-                <option value="SIR_CODEX">SIR_CODEX (Kinetic Implementer)</option>
-                <option value="SIR_BORIS">SIR_BORIS (Crucible Conductor)</option>
-                <option value="LADY_GUINEVERE">LADY_GUINEVERE (Aesthetic Tokens)</option>
-                <option value="HERMES_PRIME">HERMES_PRIME (VFS Synthesizer)</option>
-              </select>
-            </FormItem>
-
-            <FormItem
-              name="executionTier"
-              label="Execution Boundary / Tier"
-              rules={[{ required: true, message: 'Execution boundary required' }]}
-            >
-              <select className="w-full border border-white/20 bg-obsidian px-3 py-2 text-xs text-white focus:border-gold focus:outline-none">
-                <option value="L1_HOTPATH">L1 HotPath (0% Node/Python - Bare Metal)</option>
-                <option value="L2_SIDECAR">L2 Bifrost Go/Rust Sidecar :8011</option>
-                <option value="L3_CLOUDBRAIN">L3 CloudBrain Mesh (WorldTree / NotebookLM)</option>
-              </select>
-            </FormItem>
-          </div>
-
-          <FormItem
-            name="directive"
-            label="Runic / Vocal Directive"
-            rules={[
-              { required: true, message: 'Directive cannot be empty' },
-              {
-                validator: (val: string) => {
-                  if (val && val.length < 3) {
-                    return 'Directive must contain at least 3 characters';
-                  }
-                  return true;
-                },
-              },
-            ]}
-          >
-            <input
-              type="text"
-              placeholder="//RUNE or spoken command intent..."
-              className="w-full border border-white/20 bg-obsidian px-3 py-2 text-xs text-white placeholder-white/30 focus:border-gold focus:outline-none"
-            />
-          </FormItem>
-
-          <div className="flex items-center justify-between pt-2">
-            <button
-              type="submit"
-              className="border border-gold bg-gold/15 px-5 py-2 text-xs font-bold uppercase tracking-wider text-gold-royal transition-all hover:bg-gold/30 hover:shadow-gold"
-            >
-              TRANSMIT TO SOVEREIGN MESH
-            </button>
-            {dispatchStatus && (
-              <span className="text-xs font-mono text-emerald-400 animate-pulse">
-                {dispatchStatus}
-              </span>
-            )}
-          </div>
-        </Form>
-      </div>
-
-      {/* ── Native Rust/WASM Crawler Console Card ────────────── */}
-      <div className="border border-gold/20 bg-smoke-900/90 p-5">
-        <div className="flex items-center justify-between border-b border-white/10 pb-3">
-          <div className="flex items-center gap-2">
-            <span className="text-gold-royal font-bold">🕸️</span>
-            <h3 className="text-xs uppercase tracking-wider text-gold-light font-display">
-              Native Crawler Engine Subsystem (Rust / Wasmtime / AgentBus)
-            </h3>
-          </div>
-          <span className="border border-emerald-500/40 bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-400">
-            ZERO PYTHON HOTPATH
-          </span>
-        </div>
-        <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
-          <div className="border border-white/10 bg-black/40 p-3">
-            <span className="text-white/40 block text-[10px] uppercase">Engine Crate</span>
-            <span className="text-gold-light font-mono font-bold">camelot-crawler v0.1.0</span>
-            <span className="text-[10px] text-emerald-400 block mt-1">Throughput: {pagesScrapedRate} p/s</span>
-          </div>
-          <div className="border border-white/10 bg-black/40 p-3">
-            <span className="text-white/40 block text-[10px] uppercase">Queue Channel</span>
-            <span className="text-emerald-400 font-mono">AgentBus (crawl_queue)</span>
-            <span className="text-[10px] text-gold-royal block mt-1">{crawlerQueueSize} active tasks</span>
-          </div>
-          <div className="border border-white/10 bg-black/40 p-3">
-            <span className="text-white/40 block text-[10px] uppercase">Deduplication</span>
-            <span className="text-white/80 font-mono">SHA-256 (Zero Redis)</span>
-            <span className="text-[10px] text-white/50 block mt-1">SQLite WAL2 State Sync</span>
-          </div>
-          <div className="border border-white/10 bg-black/40 p-3">
-            <span className="text-white/40 block text-[10px] uppercase">Sandboxing</span>
-            <span className="text-gold-royal font-mono">WASI 0.2 / Leased Egress</span>
-            <span className="text-[10px] text-emerald-400 block mt-1">{activeHarnessSandboxes} active micro-VMs</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Transactional Voice Macro & Duress Trigger Bar ────── */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border border-white/10 bg-black/50 p-4">
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setDuressMode(!duressMode)}
-            className={`border px-4 py-2 text-xs uppercase font-bold tracking-wider transition-colors ${
-              duressMode
-                ? 'border-red-500 bg-red-600 text-white'
-                : 'border-red-500/40 bg-red-950/20 text-red-400 hover:bg-red-900/40'
-            }`}
-          >
-            {duressMode ? 'DEACTIVATE GHOST LOCKDOWN' : 'SIMULATE DURESS TRIGGER'}
-          </button>
-          <button
-            onClick={() => setActiveChallenge(`knight-${Math.floor(Math.random() * 9 + 1)}-round-${Math.floor(Math.random() * 9 + 1)}`)}
-            className="border border-gold/40 bg-gold/10 px-4 py-2 text-xs text-gold-light hover:bg-gold/20"
-          >
-            GENERATE PHONEME CHALLENGE
-          </button>
-        </div>
-        <p className="text-[11px] text-white/40">
-          Ed25519 Audit Chain Head: <span className="font-mono text-white/70">0x8F3C...A419 (Merkle Root #1042)</span>
-        </p>
-      </div>
+        </>
+      )}
     </div>
   );
 }

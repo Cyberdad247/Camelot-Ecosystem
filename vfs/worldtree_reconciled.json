@@ -270,6 +270,13 @@
       "model": "Gemini 3.8 Flash",
       "verified": true,
       "isomorphic_vfs_path": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/"
+    },
+    "CYBERTRONIA": {
+      "id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "role": "Primary Windows Orchestrator & World Tree Root Host (100.118.224.52)",
+      "model": "Host Substrate / Bifrost Bridge",
+      "verified": true,
+      "isomorphic_vfs_path": "vfs/worldtree/cybertronia/"
     }
   },
   "camelot_extended": [

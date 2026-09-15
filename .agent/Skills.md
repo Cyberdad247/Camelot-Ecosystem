@@ -3,6 +3,9 @@
 
 | Skill ID | Trigger Rune / Command | Executor | Execution Bounds & Payload |
 | :--- | :--- | :--- | :--- |
+| **`helios_audit`** | `//HELIOS_AUDIT` / `//HELIOS_MACRO` | SIR_HELIOS | Macroscopic structural alignment, 1M+ context ingestion, multimodal shatterpoint audit |
+| **`cloudbrain_sync`** | `//CLOUDBRAIN_SYNC` | SIR_HELIOS | Dynamic sync to Sir Helios CloudBrain node (`ab8aa359-2b3b-4bc1-b41f-34979cdc184e`) & Graphiti temporal DB |
+| **`vfs_resolve`** | `//VFS_RESOLVE <path>` | SIR_HELIOS | Resolve coordinate across World Tree on Cybertronia (`100.118.224.52`) |
 | **`vps_init`** | `//INIT_VPS_ENVIRONMENT` | MERLIN_Ω | Bare-metal namespaces (`unshare`), cgroups v2 slices, zero Docker |
 | **`ingress_lock`** | `//LOCK_NETWORK_INGRESS` | SIR_HEIMDALL | UFW default-deny, Tailscale0 mTLS boundary lock, Paladin Octem Z3 static analysis |
 | **`swarm_wake`** | `//WAKE_24_7_SWARM_DAEMON` | HERMES_PRIME | 24/7 background scheduler, Lady Apis BASHR R&D, SQLite-VSS / FirnFlow NVMe mount |
@@ -33,4 +36,3 @@
 | **`bio_scorpio`** | `//SCORPIO` | SIR_GIDEON | GIDEON 13-gate forensic risk needle, adversarial compliance puncture |
 | **`bio_octavian`** | `//OCTAVIAN` | SIR_OCTAVIAN | Split-brain IPC sync, 8-terminal execution management, IP copyright tagging (:8400) |
 | **`bio_alchemist`**| `//ALCHEMIST`| SIR_ALCHEMIST | TurboQuant 3-bit / BitNet b1.58 quantization & token compression under 8GB RAM |
-

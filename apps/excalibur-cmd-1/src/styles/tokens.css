@@ -1,0 +1,21 @@
+:root {
+  --obsidian: #050510;
+  --luxora-gold: #D4AF37;
+  --royal-purple: #4B0082;
+  --vellum: #F1EFF4;
+  --garnet: #DE4258;
+
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Spectral', serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --glass-bg: rgba(5, 5, 16, 0.7);
+  --glass-border: 1px solid rgba(212, 175, 55, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+
+  --spacing-unit: 8px;
+  --touch-target: 44px;
+  --transition-fast: 150ms;
+  --transition-medium: 300ms;
+  --transition-slow: 500ms;
+}

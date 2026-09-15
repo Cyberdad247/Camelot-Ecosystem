@@ -4,7 +4,7 @@
 | B.L.A.S.T. Phase | Operational Action | OMH Review Threshold & Gate |
 | :--- | :--- | :--- |
 | **B — Blueprint** | Ingest specs, generate DAG, model constraints | Triple-QFT prompt reduction, zero conversational bloat |
-| **L — Link** | Bind local VFS context and 24D Leech Lattice | O(1) semantic retrieval via SQLite-VSS; token delta ≤ 0.12 MiB |
-| **A — Actuate** | Kinetic code generation via native toolchains | 100% Rust/Go compile verification; test-driven assertions |
-| **S — Scrutinize** | Z3 formal proofs + Paladin Octem analysis | Formal verification pass (`Z3_PASS`), zero open ingress ports |
-| **T — Tether** | Issue signed receipt to Provenance Ledger | Cryptographic Ed25519 hash chain append, single-trunk Git sync |
+| **L — Link** | Bind Cybertronia VFS context (`vfs://worldtree/`) & Sir Helios CloudBrain | O(1) semantic retrieval via MemCastle KNN & Graphiti; token delta ≤ 0.12 MiB |
+| **A — Actuate** | Kinetic code generation via native toolchains | 100% Rust/Go/WASM compile verification; test-driven assertions (Rule 7) |
+| **S — Scrutinize** | Sir Helios Macroscopic Audit (`//HELIOS_MACRO`) + Z3 proofs | Paladin Octem matrix, zero open ports, multimodal shatterpoint clearance |
+| **T — Tether** | Issue signed receipt to Provenance Ledger & Graphiti | Cryptographic Ed25519 hash chain append, `sir_helios_graphiti.db` fact log |

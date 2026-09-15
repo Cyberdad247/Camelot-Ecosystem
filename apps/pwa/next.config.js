@@ -5,7 +5,6 @@ const webpack = require('webpack');
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  turbopack: {},
   // The shared voice runtime lives in the separate 02_FORGE pnpm workspace,
   // outside this app's root, so Next must be told to compile it. Paired with the
   // webpack alias below, the tsconfig `paths` entry, and the vitest alias.
@@ -13,6 +12,9 @@ const nextConfig = {
     externalDir: true,
   },
   webpack: (config, { isServer }) => {
+    config.resolve.alias['react'] = path.resolve(__dirname, 'node_modules/react');
+    config.resolve.alias['react-dom'] = path.resolve(__dirname, 'node_modules/react-dom');
+
     config.plugins.push(
       new webpack.IgnorePlugin({
         resourceRegExp: /^virtual:/,
