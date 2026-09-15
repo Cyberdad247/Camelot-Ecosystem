@@ -44,6 +44,8 @@ if str(REPO_ROOT / "vfs") not in sys.path:
 if str(REPO_ROOT / "01_KERNEL") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "01_KERNEL"))
 
+from control_plane.dispatch.vps_hermes_links import build_vps_hermes_inference_links
+
 WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
 HERMES_PRIME_UUID = "28f89cb6-5048-4b5d-9e94-376082d24744"
 CAMELOT_V1000_UUID = "8c656cfa-a189-409e-a72d-07692a47f17e"
@@ -226,6 +228,13 @@ class WorldTreeCloudBrainVPSSync:
                 "deployed_commit_summary", "commit probe unavailable"
             )
             commit_verification = "probe_unavailable (fallback to last recorded value)"
+        inference_links = dict(existing_data.get("inference_links", {}) or {})
+        inference_links.update(
+            build_vps_hermes_inference_links(
+                public_ip=VPS_PUBLIC_IP,
+                tailscale_ip=existing_data.get("tailscale_ip", VPS_TAILSCALE_IP),
+            )
+        )
 
         vps_tissue = {
             "node_name": "vps_hub_kvm563",
@@ -252,6 +261,7 @@ class WorldTreeCloudBrainVPSSync:
             "services": existing_data.get("services", {
                 name: port for name, port in SERVICE_PORT_MAP.items()
             }),
+            "inference_links": inference_links,
             "services_state": services_state,
             "live_probes": live_probes,
             "drift": {

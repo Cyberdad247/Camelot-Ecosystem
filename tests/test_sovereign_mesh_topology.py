@@ -28,6 +28,18 @@ def test_sovereign_mesh_topology_structure():
     assert "Auxiliary Mobile Sentinel" in nodes["motorola_moto_g_power"]["role"]
     assert nodes["motorola_moto_g_power"]["status"] in ("AUXILIARY", "ONLINE_STANDBY")
     assert nodes["vps_hub_kvm563"]["public_ip"] == "162.35.107.134"
+    vps_tailscale_ip = nodes["vps_hub_kvm563"]["tailscale_ip"]
+    cliproxy_link = nodes["vps_hub_kvm563"]["inference_links"]["cliproxy_sie"]
+    assert cliproxy_link["selector"] == "cliproxy:default"
+    assert cliproxy_link["governing_knight"] == "HERMES_PRIME"
+    assert cliproxy_link["vps_node"] == "vps_hub_kvm563"
+    bifrost_bridge = cliproxy_link["bifrost_bridge"]
+    assert bifrost_bridge["module"] == "control_plane/dispatch/bifrost.py"
+    assert bifrost_bridge["gateway_url"] == f"http://{vps_tailscale_ip}:3001"
+    assert bifrost_bridge["mesh_bridge_url"] == f"http://{vps_tailscale_ip}:8095"
+    assert bifrost_bridge["co_governors"] == ["HERMES_PRIME", "SIR_HEIMDALL"]
+    assert bifrost_bridge["auth"]["secret_values_serialized"] is False
+    assert cliproxy_link["secret_values_serialized"] is False
 
 
 def test_heimdall_bifrost_governance_mesh_inventory():

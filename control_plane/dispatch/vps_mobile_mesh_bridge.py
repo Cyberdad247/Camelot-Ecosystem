@@ -3,6 +3,8 @@ import hmac
 import json, os, logging
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
+from control_plane.dispatch.vps_hermes_links import attach_vps_hermes_links
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [%(name)s] %(message)s')
 LOG = logging.getLogger('VpsMobileMeshBridge')
 
@@ -22,10 +24,10 @@ def load_mesh_topology() -> dict:
     if os.path.exists(TOPOLOGY_PATH):
         try:
             with open(TOPOLOGY_PATH, 'r', encoding='utf-8') as f:
-                return json.load(f)
+                return attach_vps_hermes_links(json.load(f))
         except Exception as e:
             LOG.warning(f"Failed to read topology file: {e}")
-    return {
+    return attach_vps_hermes_links({
         "system": "CAMELOT-OS Sovereign Autonomous Ecosystem",
         "nodes": {
             "cybertronia": {"tailscale_ip": LOCAL_CYBERTRONIA_IP, "role": "Primary Kinetic Execution Node"},
@@ -43,7 +45,7 @@ def load_mesh_topology() -> dict:
                 "always_on": True,
             }
         }
-    }
+    })
 
 def is_mesh_request_authorized(headers: dict) -> bool:
     """Require the runtime-only mesh token for topology and telemetry reads."""

@@ -33,6 +33,18 @@ class TestWorldTreeCloudBrainVPSSync(unittest.TestCase):
         self.assertIsInstance(data, list)
         self.assertEqual(data[0]["host_server"], "KVM563")
         self.assertEqual(data[0]["assigned_knight"], "HERMES_PRIME")
+        vps_tailscale_ip = data[0]["tailscale_ip"]
+        cliproxy_link = data[0]["inference_links"]["cliproxy_sie"]
+        self.assertEqual(cliproxy_link["selector"], "cliproxy:default")
+        self.assertEqual(cliproxy_link["governing_knight"], "HERMES_PRIME")
+        self.assertEqual(cliproxy_link["vps_node"], "vps_hub_kvm563")
+        bifrost_bridge = cliproxy_link["bifrost_bridge"]
+        self.assertEqual(bifrost_bridge["module"], "control_plane/dispatch/bifrost.py")
+        self.assertEqual(bifrost_bridge["gateway_url"], f"http://{vps_tailscale_ip}:3001")
+        self.assertEqual(bifrost_bridge["mesh_bridge_url"], f"http://{vps_tailscale_ip}:8095")
+        self.assertEqual(bifrost_bridge["co_governors"], ["HERMES_PRIME", "SIR_HEIMDALL"])
+        self.assertFalse(bifrost_bridge["auth"]["secret_values_serialized"])
+        self.assertFalse(cliproxy_link["secret_values_serialized"])
 
 
 if __name__ == "__main__":

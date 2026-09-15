@@ -1,11 +1,13 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import { defineConfig, type PluginOption } from 'vite';
+
+const plugins = [react(), tailwindcss()] as unknown as PluginOption[];
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins,
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

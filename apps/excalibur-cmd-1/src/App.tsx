@@ -4,15 +4,14 @@ import { NodeInventory } from './components/NodeInventory';
 import { HolographicGlobe } from './components/HolographicGlobe';
 import { SovereignActions } from './components/SovereignActions';
 import { AlfredDock } from './components/AlfredDock';
-import { ExcaliburAuthCartridge } from './components/ExcaliburAuthCartridge';
-import { OnboardingFlow } from './components/auth/OnboardingFlow';
 import { DesktopGrid } from './components/dashboard/DesktopGrid';
 import { TenantCarousel } from './components/TenantCarousel';
 import { CartridgeLoadingFallback } from './components/CartridgeLoadingFallback';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { useEcosystemStore } from './state/useEcosystemStore';
 import { NodeRecord, TelemetryData, CartridgeId } from './types';
-import { Smartphone, Shield } from 'lucide-react';
+
+const OPERATOR_LEASE_ID = 'EXCALIBUR_LEASE_SOVEREIGN_V1000';
 
 // Dynamic Code Splitting for Tenant Carousel Cartridges (Lightweight Initial Load & Strict 4GB Boundary)
 const KbaExecutiveCartridge = lazy(() =>
@@ -30,12 +29,10 @@ export default function App() {
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [telemetry, setTelemetry] = useState<TelemetryData | null>(null);
 
-  // Authentication & Cartridge Hierarchy State
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [authMode, setAuthMode] = useState<'excalibur' | 'onboarding'>('onboarding');
-  const [activeLeaseId, setActiveLeaseId] = useState<string | null>(null);
-  const [operator, setOperator] = useState('VaShawn O. Head (Vizion)');
-  const [activeCartridge, setActiveCartridge] = useState<CartridgeId>('ecosystem-pwa');
+  // Operator access is direct; server-side lease enforcement remains the backstop.
+  const [activeLeaseId, setActiveLeaseId] = useState(OPERATOR_LEASE_ID);
+  const operator = 'VaShawn O. Head (Vizion)';
+  const [activeCartridge, setActiveCartridge] = useState<CartridgeId>('excalibur-ecc');
 
   const { deviceMode } = useEcosystemStore();
 
@@ -65,13 +62,6 @@ export default function App() {
     return () => eventSource.close();
   }, []);
 
-  const handleAuthenticated = (leaseId: string, opName: string) => {
-    setActiveLeaseId(leaseId);
-    setOperator(opName);
-    setIsAuthenticated(true);
-    setActiveCartridge('excalibur-ecc');
-  };
-
   const handleLockVault = async () => {
     try {
       if (activeLeaseId) {
@@ -85,8 +75,8 @@ export default function App() {
     } catch (e) {
       console.error('Error locking vault:', e);
     }
-    setIsAuthenticated(false);
-    setActiveLeaseId(null);
+    setActiveLeaseId(OPERATOR_LEASE_ID);
+    setActiveCartridge('excalibur-ecc');
   };
 
   const handleNodeAction = async (id: string, action: string) => {
@@ -95,7 +85,7 @@ export default function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-Camelot-Lease-ID': activeLeaseId || 'EXCALIBUR_LEASE_SOVEREIGN_V1000'
+          'X-Camelot-Lease-ID': activeLeaseId || OPERATOR_LEASE_ID
         },
         body: JSON.stringify({ action })
       });
@@ -116,50 +106,6 @@ export default function App() {
     <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#050510] text-[#F1EFF4] font-['Spectral'] selection:bg-[#D4AF37] selection:text-black">
       <TelemetryHeader telemetry={telemetry} />
       
-      {!isAuthenticated ? (
-        /* Vault Door: Cartridge 00 Excalibur Sovereign Bio-Auth Gate & Onboarding Flow */
-        <main className="flex-1 overflow-y-auto flex flex-col">
-          <div className="w-full bg-black/60 border-b border-[#4B0082]/60 px-4 py-2 flex items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={() => setAuthMode('onboarding')}
-              className={`px-3 py-1.5 rounded text-xs font-['Cinzel'] font-bold flex items-center gap-1.5 transition-all ${
-                authMode === 'onboarding'
-                  ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
-                  : 'text-[#F1EFF4]/70 hover:text-[#D4AF37] border border-[#4B0082]/50'
-              }`}
-            >
-              <Smartphone className="w-3.5 h-3.5" />
-              <span>CAMELOT PWA ONBOARDING (S26)</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => setAuthMode('excalibur')}
-              className={`px-3 py-1.5 rounded text-xs font-['Cinzel'] font-bold flex items-center gap-1.5 transition-all ${
-                authMode === 'excalibur'
-                  ? 'bg-[#D4AF37] text-black shadow-[0_0_15px_rgba(212,175,55,0.4)]'
-                  : 'text-[#F1EFF4]/70 hover:text-[#D4AF37] border border-[#4B0082]/50'
-              }`}
-            >
-              <Shield className="w-3.5 h-3.5" />
-              <span>EXCALIBUR 3-PILL CHAMBER</span>
-            </button>
-          </div>
-
-          <div className="flex-1 flex items-center justify-center p-2 sm:p-4">
-            {authMode === 'onboarding' ? (
-              <OnboardingFlow
-                onComplete={() =>
-                  handleAuthenticated('EXCALIBUR_ED25519_LEASE_ACTIVE', 'VaShawn O. Head (Vizion)')
-                }
-              />
-            ) : (
-              <ExcaliburAuthCartridge onAuthenticated={handleAuthenticated} />
-            )}
-          </div>
-        </main>
-      ) : (
-        /* Authenticated: Tenant Carousel + Mounted Cartridges */
         <div className="flex-1 flex flex-col overflow-hidden">
           <TenantCarousel
             activeCartridge={activeCartridge}
@@ -265,7 +211,6 @@ export default function App() {
           {/* Alfred Audio Engine Dock */}
           {(activeCartridge === 'excalibur-ecc' || activeCartridge === 'ecosystem-pwa') && <AlfredDock />}
         </div>
-      )}
     </div>
   );
 }

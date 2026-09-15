@@ -6673,3 +6673,6 @@
   - `.venv\Scripts\python.exe -m pytest tests\test_bifrost_token_reduction.py -q -> 1 passed`
   - `.venv\Scripts\python.exe -m pytest tests\test_omniroute_policies.py -q -> 10 passed`
 - **Tag**: [CLIPROXY_SIE]
+
+| 904 | **Harness State Transition** | SovereignHarness | ⚠️ DEGRADED | uptime=43947s tasks=403 fail=0 probes=7/9 cells=21 |
+| 905 | **Harness State Transition** | SovereignHarness | ⚠️ DEGRADED | uptime=46347s tasks=403 fail=0 probes=6/9 cells=21 |
