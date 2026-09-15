@@ -40,7 +40,7 @@ func env(key, def string) string {
 // the Knight degrades gracefully to the local TinyLM stub (Kinetic Resilience).
 //
 //	SIR_CODEX  -> openai slot -> gpt-4o            (CAMELOT_MODEL_CODEX)
-//	SIR_HELIOS -> gemini slot -> gemini-2.5-flash  (CAMELOT_MODEL_HELIOS)
+//	SIR_HELIOS -> gemini slot -> gemini-3.8-flash  (CAMELOT_MODEL_HELIOS)
 //	SIR_BORIS  -> claude slot -> claude-sonnet-4-6 (CAMELOT_MODEL_BORIS)
 func buildPolyglot() *orchestration.APEEv6Router {
 	live := providers.GatewayReachable(800 * time.Millisecond)
@@ -74,7 +74,7 @@ func buildPolyglot() *orchestration.APEEv6Router {
 
 	provs := map[string]orchestration.Provider{
 		"openai": bind("Bifrost:codex", "CAMELOT_MODEL_CODEX", "gpt-4o", "SIR_CODEX"),
-		"gemini": bind("Bifrost:helios", "CAMELOT_MODEL_HELIOS", "gemini-2.5-flash", "SIR_HELIOS"),
+		"gemini": bind("Bifrost:helios", "CAMELOT_MODEL_HELIOS", "gemini-3.8-flash", "SIR_HELIOS"),
 		"claude": bind("Bifrost:boris", "CAMELOT_MODEL_BORIS", "claude-sonnet-4-6", "SIR_BORIS"),
 	}
 	log.Printf("[CYBERTRONIA] Polyglot Matrix synchronized: SIR_CODEX, SIR_HELIOS, SIR_BORIS.")

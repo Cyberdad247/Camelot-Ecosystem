@@ -31,12 +31,16 @@
 cd C:\Users\vizio\CAMELOT_OS
 .\.venv\Scripts\python.exe scripts\verify_vfc_preflight.py
 
-cd 02_FORGE\apps\pwa-cockpit
+# Host re-homed from 02_FORGE\apps\pwa-cockpit (purged in 944e4532) to apps\pwa.
+cd apps\pwa
 npm test
 npm run typecheck
 npm run build
 
-cd ..\..\KINETIC_ARMORY\omnivoice-router
+cd ..\..\02_FORGE\KINETIC_ARMORY\omnivoice-router
+npx tsc --noEmit
+
+cd ..\..\packages\voice-first-runtime
 npx tsc --noEmit
 ```
 

@@ -1,0 +1,82 @@
+[
+  {
+    "branch": "origin/fix-go-module-template-11915086332059480524",
+    "commit": "55c30809",
+    "subject": "fix: update go module template to panic on unhandled TODO"
+  },
+  {
+    "branch": "origin/fix/bifrost-path-traversal-12920532030833178479",
+    "commit": "9e219d58",
+    "subject": "fix: sanitize filenames to prevent path traversal in bifrost_port.py"
+  },
+  {
+    "branch": "origin/fix/bifrost-secret-vulnerability-9692439515697370356",
+    "commit": "98373457",
+    "subject": "Fix hardcoded BIFROST_BRIDGE_SECRET fallback in main.py"
+  },
+  {
+    "branch": "origin/fix/chaos-engineer-ssh-exec-cmd-injection-11318835194895624429",
+    "commit": "be3057c1",
+    "subject": "fix: resolve command injection vulnerability in chaos_engineer.py"
+  },
+  {
+    "branch": "origin/fix/chat-session-message-count-6746660588984624685",
+    "commit": "6b090705",
+    "subject": "Fix message count in source chat and notebook chat session lists"
+  },
+  {
+    "branch": "origin/fix/component-template-props-16493431646273032043",
+    "commit": "dd5c3eb8",
+    "subject": "feat(coder): define props for component template"
+  },
+  {
+    "branch": "origin/fix/n-plus-1-notes-11567502951563396669",
+    "commit": "b1909b85",
+    "subject": "\u00e2\u0161\u00a1 perf: Resolve N+1 query issue in note embeddings"
+  },
+  {
+    "branch": "origin/fix/n-plus-1-transformations-4638488964349460669",
+    "commit": "08359508",
+    "subject": "perf(Notebook_Brain): fix N+1 query issue for transformations validation"
+  },
+  {
+    "branch": "origin/fix/ruff-530-manual",
+    "commit": "b8c86c9a",
+    "subject": "Drop non-existent tools/ dir from black check in verify_os.yml"
+  },
+  {
+    "branch": "origin/fix/secure-ast-eval-6446032791505160235",
+    "commit": "ec6c331c",
+    "subject": "Remove use of insecure eval() during expression parsing in extraction strategy"
+  },
+  {
+    "branch": "origin/fix/store-grounding-id-3477205575185918070",
+    "commit": "5bc907e2",
+    "subject": "fix(nano-knights): store Grounding ID in nodeData during DOM traversal"
+  },
+  {
+    "branch": "origin/perf/embedding-n-plus-1-optimization-15445770156298811611",
+    "commit": "1f8cde02",
+    "subject": "perf(embedding): eliminate N+1 query in rebuild_embeddings_command"
+  },
+  {
+    "branch": "origin/perf/limit-ledger-queries-9360251954406859550",
+    "commit": "c6cd85d8",
+    "subject": "perf(storage): Add LIMIT clause and cursor iteration to get_all_data"
+  },
+  {
+    "branch": "origin/perf/optimize-get-all-data-9582424866941690986",
+    "commit": "fe14827e",
+    "subject": "perf(storage): replace fetchall with iterator in get_all_data"
+  },
+  {
+    "branch": "origin/perf/optimize-n-plus-1-queries-13777398068298918860",
+    "commit": "e60bffe6",
+    "subject": "perf: optimize N+1 queries in source creation"
+  },
+  {
+    "branch": "origin/perf/titan-ledger-get-all-data-10080314446502054566",
+    "commit": "18a5e12d",
+    "subject": "perf: optimize Ledger.get_all_data cursor iteration"
+  }
+]

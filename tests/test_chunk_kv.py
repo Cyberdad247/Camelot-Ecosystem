@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 
 import importlib.util
+import sys
 from pathlib import Path
 
 _spec = importlib.util.spec_from_file_location(
@@ -8,6 +9,7 @@ _spec = importlib.util.spec_from_file_location(
     Path(__file__).resolve().parents[1] / "01_KERNEL" / "memory" / "chunk_kv.py",
 )
 _mod = importlib.util.module_from_spec(_spec)
+sys.modules["chunk_kv"] = _mod
 _spec.loader.exec_module(_mod)
 ChunkKVPolicy = _mod.ChunkKVPolicy
 

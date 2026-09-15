@@ -47,9 +47,15 @@ class MCPAdapter:
             "endpoint": endpoint,
             "capability": capability,
             "params": params_schema or {},
-            "status": "ONLINE"
+            "status": "ONLINE",
         }
-        print(f"🔌 [MCP_ADAPTER]: Registered {name} ({capability})")
+        try:
+            print(f"🔌 [MCP_ADAPTER]: Registered {name} ({capability})")
+        except Exception:
+            try:
+                print(f"[MCP_ADAPTER]: Registered {name} ({capability})")
+            except Exception:
+                pass
 
     async def call(self, adapter_name: str, payload: Dict[str, Any], hitl_approved: bool = False, requestor: str = "unknown") -> Dict[str, Any]:
         """

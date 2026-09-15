@@ -12,6 +12,7 @@ const state = (over: Partial<SovereignState>): SovereignState => ({
   lastLane: null,
   lastLatencyMs: null,
   lastRezeroed: false,
+  lastOmniVoice: null,
   updatedAt: new Date(0).toISOString(),
   ...over,
 });

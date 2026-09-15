@@ -15,7 +15,21 @@ export interface SovereignState {
   lastLane: string | null;
   lastLatencyMs: number | null;
   lastRezeroed: boolean;
+  // Omni-Voice D.A.G. ingress routing decision for the last utterance.
+  lastOmniVoice: OmniVoiceDecision | null;
   updatedAt: string;
+}
+
+// Mirrors `OmniVoiceTelemetry` on the gateway: which lane the Omni-Voice router
+// took (a ᛟ_ runic bypass or the Softmax persona distribution) and why.
+export interface OmniVoiceDecision {
+  status: string;
+  path: string;
+  knight: string | null;
+  tau: number | null;
+  confidence: number | null;
+  /** Rune a deterministic bypass delegated to; null on the Softmax lane. */
+  delegatesRune: string | null;
 }
 
 // HITL guardrail — financial/destructive intents render a Plan Card for approval

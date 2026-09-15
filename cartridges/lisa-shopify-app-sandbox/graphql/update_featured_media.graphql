@@ -1,0 +1,20 @@
+﻿mutation UpdateFeaturedProductMedia($productId: ID!, $media: [CreateMediaInput!]!) {
+  productCreateMedia(productId: $productId, media: $media) {
+    media {
+      id
+      status
+      alt
+      ... on MediaImage {
+        image {
+          url
+          width
+          height
+        }
+      }
+    }
+    userErrors {
+      field
+      message
+    }
+  }
+}

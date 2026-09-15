@@ -37,18 +37,18 @@ id "$ADMIN_USER" >/dev/null 2>&1 || { echo "error: user '$ADMIN_USER' does not e
 
 export DEBIAN_FRONTEND=noninteractive
 
-log "Phase 1/5 — base packages (minimal, per plan)"
+log "Phase 1/6 — base packages (minimal, per plan)"
 apt-get update -qq
 apt-get install -y -qq \
   curl ca-certificates gnupg \
   sqlite3 age ufw fail2ban unattended-upgrades
 
-log "Phase 2/5 — Tailscale (private admin plane)"
+log "Phase 2/6 — Tailscale (private admin plane)"
 curl -fsSL https://tailscale.com/install.sh | sh
 tailscale up --authkey "$TS_AUTHKEY" --hostname "$TS_HOSTNAME"
 TS_IP="$(tailscale ip -4 | head -n1)"
 
-log "Phase 3/5 — control-plane layout + SQLite"
+log "Phase 3/6 — control-plane layout + SQLite"
 mkdir -p "$APP_DIR"/{bin,bifrost,sentinel,scheduler,registry,receipts,data} \
          "$BACKUP_DIR"
 chown -R "$ADMIN_USER":"$ADMIN_USER" "$APP_DIR" "$BACKUP_DIR"
@@ -64,7 +64,7 @@ Encrypted nightly snapshots: /opt/camelot/backups (age-encrypted).
 MD
 chown "$ADMIN_USER":"$ADMIN_USER" "$APP_DIR/data/README.md"
 
-log "Phase 4/5 — firewall: no public ingress after bootstrap"
+log "Phase 4/6 — firewall: no public ingress after bootstrap"
 ufw default deny incoming
 ufw default allow outgoing
 # SSH only from the Tailscale CGNAT range (100.64.0.0/10); drop public SSH.
@@ -125,7 +125,7 @@ UNIT
 systemctl daemon-reload
 systemctl enable --now camelot-backup.timer
 
-log "Phase 6/6 — receipt service (systemd unit + SQLite WAL init)"
+log "Phase 6/6 — control-plane services (systemd units + SQLite WAL init)"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 if [ -f "$SCRIPT_DIR/init-receipt-db.sh" ]; then
   install -m 0755 "$SCRIPT_DIR/init-receipt-db.sh" /usr/local/bin/camelot-init-receipt-db
@@ -134,15 +134,20 @@ if [ -f "$SCRIPT_DIR/init-receipt-db.sh" ]; then
 else
   echo "  ⚠ init-receipt-db.sh not next to bootstrap.sh — skipping DB init"
 fi
-if [ -f "$SCRIPT_DIR/receipt-service.service" ]; then
-  install -m 0644 "$SCRIPT_DIR/receipt-service.service" /etc/systemd/system/receipt-service.service
-  systemctl daemon-reload
-  systemctl enable receipt-service.service
-  echo "  unit installed + enabled — stays inactive until the binary exists"
-  echo "  (ConditionPathExists=/opt/camelot/bifrost-hub/bin/receipt-service)"
-else
-  echo "  ⚠ receipt-service.service not next to bootstrap.sh — skipping unit install"
-fi
+for unit in receipt-service scheduler-service registry-service; do
+  if [ -f "$SCRIPT_DIR/$unit.service" ]; then
+    install -m 0644 "$SCRIPT_DIR/$unit.service" "/etc/systemd/system/$unit.service"
+    echo "  unit $unit.service installed"
+  else
+    echo "  ⚠ $unit.service not next to bootstrap.sh — skipping unit install"
+  fi
+done
+systemctl daemon-reload
+for unit in receipt-service scheduler-service registry-service; do
+  systemctl enable "$unit.service" 2>/dev/null || true
+done
+echo "  units enabled — each stays inactive until its binary exists"
+echo "  (ConditionPathExists=/opt/camelot/bifrost-hub/bin/<unit>)"
 
 log "Bootstrap complete."
 echo "  Tailscale IP : $TS_IP  (set ssh HostName of 'oci-admin-ts' to this)"
@@ -150,5 +155,6 @@ echo "  Public IP    : for bootstrap only; public SSH is now blocked"
 echo "  Backup key   : $AGE_KEY  (recipient: $AGE_RECIPIENT) — back this key up offline!"
 echo "  Test backup  : sudo /usr/local/bin/camelot-backup"
 echo "  Restore      : age -d backup.tgz.age | tar -xzf - -C /tmp/restore"
-echo "  Receipt svc  : deploy the binary to /opt/camelot/bifrost-hub/bin/receipt-service,"
-echo "                 then: sudo systemctl restart receipt-service"
+echo "  Services     : deploy the binaries to /opt/camelot/bifrost-hub/bin/"
+echo "                 (receipt-service, scheduler-service, registry-service)"
+echo "                 then: sudo systemctl restart receipt-service scheduler-service registry-service"

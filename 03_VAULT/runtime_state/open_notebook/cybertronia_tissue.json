@@ -1,0 +1,24 @@
+[
+  {
+    "knight_id": "CYBERTRONIA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_instructions_evolution",
+    "title": "CYBERTRONIA_VFS_UNIVERSAL_INSTRUCTION_SYNC",
+    "content": "{\n  \"node\": \"cybertronia\",\n  \"ip\": \"100.118.224.52\",\n  \"role\": \"Primary Windows Orchestrator\",\n  \"vfs_root\": \"vfs://worldtree/cybertronia/\",\n  \"instructions_path\": \".agent/system_instructions.md\",\n  \"status\": \"EVOLVED_MAX_VERSION_ALIGNED\",\n  \"max_version\": \"v1000.54-EXCALIBUR-A\"\n}",
+    "vfs_path": "vfs://worldtree/knights/cybertronia/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CYBERTRONIA",
+    "open_viking_tether": "open_viking://worldtree/cybertronia",
+    "synced_at": "2026-09-08T07:59:14.882186+00:00"
+  },
+  {
+    "knight_id": "CYBERTRONIA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_instructions_evolution",
+    "title": "CYBERTRONIA_VFS_UNIVERSAL_INSTRUCTION_SYNC",
+    "content": "{\n  \"node\": \"cybertronia\",\n  \"ip\": \"100.118.224.52\",\n  \"role\": \"Primary Windows Orchestrator\",\n  \"vfs_root\": \"vfs://worldtree/cybertronia/\",\n  \"instructions_path\": \".agent/system_instructions.md\",\n  \"status\": \"EVOLVED_MAX_VERSION_ALIGNED\",\n  \"max_version\": \"v1000.54-EXCALIBUR-A\"\n}",
+    "vfs_path": "vfs://worldtree/knights/cybertronia/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CYBERTRONIA",
+    "open_viking_tether": "open_viking://worldtree/cybertronia",
+    "synced_at": "2026-09-08T07:59:07.755865+00:00"
+  }
+]

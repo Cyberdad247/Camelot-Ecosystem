@@ -103,12 +103,15 @@ def repair(path: Path, *, dry_run: bool = False) -> dict[str, Any]:
     previous_hash = entries[count - 2]["entry_hash"] if count >= 2 else None
     for index in range(count - 1, len(entries)):
         entry = entries[index]
+        expected_entry_id = index + 1
+        if entry.get("entry_id") != expected_entry_id:
+            entry["entry_id"] = expected_entry_id
         # Mutate parent_hash only if it actually drifted.
         if entry.get("parent_hash") != previous_hash:
             entry["parent_hash"] = previous_hash
         # Recompute and overwrite entry_hash if it differs.
         new_hash = compute_entry_hash(entry)
-        if entry["entry_hash"] != new_hash:
+        if entry.get("entry_hash") != new_hash:
             entry["entry_hash"] = new_hash
         previous_hash = new_hash
 

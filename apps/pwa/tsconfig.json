@@ -15,7 +15,10 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@camelot/voice-first-runtime": [
+        "../../02_FORGE/packages/voice-first-runtime/src/index.ts"
+      ]
     },
     "plugins": [
       {

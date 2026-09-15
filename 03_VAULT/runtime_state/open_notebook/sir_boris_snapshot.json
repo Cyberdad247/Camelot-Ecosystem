@@ -1,0 +1,95 @@
+{
+  "knight_id": "SIR_BORIS",
+  "notebook_uuid": "f7707daa-2d10-4db8-8fda-be4661a27793",
+  "snapshot_time": "2026-09-14T04:18:17.336779+00:00",
+  "sources": [
+    {
+      "id": "4093b340-5bfa-4d4c-a354-59cb401cdd15",
+      "title": "CLAUDE CODE FULL COURSE 4 HOURS: Build & Sell (2026)"
+    },
+    {
+      "id": "6ef1954a-39c0-4491-864b-62228645a946",
+      "title": "CRYSTAL_20260914_001808_SIR_BORIS"
+    },
+    {
+      "id": "10a7406c-c6c7-462c-879e-a68b4ea0fe56",
+      "title": "L2_Vector_Index_camelot_audit_12b909d262761b8aab9d0279528184fac9706afedc2f5939daf4983a772fec1a"
+    },
+    {
+      "id": "67b4a25a-b698-451e-b711-f758f6592562",
+      "title": "L2_Vector_Index_camelot_audit_gene_1"
+    },
+    {
+      "id": "d188cf5b-ace6-4297-82b9-ab8be6f950d1",
+      "title": "L2_Vector_Index_luxora_payment_gene_2"
+    },
+    {
+      "id": "03ba0d28-e42c-4b15-9354-d4eecd5627c2",
+      "title": "L2_Vector_Index_test_audit_data_1"
+    },
+    {
+      "id": "de77fa69-3bca-4a9c-9c10-a85ab7f76e5e",
+      "title": "L2_Vector_Index_test_audit_data_1"
+    },
+    {
+      "id": "a221b46f-7569-4015-bedc-f3ff15436aaa",
+      "title": "SIR_BORIS_CORE_DIRECTIVE.md"
+    },
+    {
+      "id": "1721971d-c827-44fc-bc99-a3cb8e15ef86",
+      "title": "Top 10 AI GitHub Repos: The 2 Commit Repo Outrunning Every Tool"
+    }
+  ],
+  "notes": [
+    {
+      "id": "054bd8c9-6d49-4e94-bb47-194860a17a93",
+      "title": "L2_Artifact_//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run",
+      "content": "{\"action\": \"nano_swarm_expand\", \"dry_run\": true, \"status\": \"DRY_RUN_READY\", \"node\": \"Node_A_Frontend\", \"artifact_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\nano_swarm_dry_runs\\\\Node_A_Frontend.dry_run.json\", \"rollback\": \"delete_dry_run_artifact\"}"
+    },
+    {
+      "id": "2bd53629-4493-450c-83e2-3fe8f8481638",
+      "title": "L2_Artifact_//BOOT",
+      "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}"
+    },
+    {
+      "id": "38cd59cc-8ec5-426d-8910-18baf2250447",
+      "title": "L2_Artifact_//BOOT",
+      "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}"
+    },
+    {
+      "id": "6c309117-3ffd-4c1f-a363-ad1fd5109875",
+      "title": "L2_Artifact_//BOOT",
+      "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}"
+    },
+    {
+      "id": "71a8adc2-0452-4e7c-800d-e0d551fe6370",
+      "title": "L2_Artifact_//STATUS",
+      "content": "{\"action\": \"system_status\", \"detail\": \"run: python -m control_plane.harness --status\"}"
+    },
+    {
+      "id": "7f94925a-7bb1-456a-acb8-92b78b250b43",
+      "title": "L2_Artifact_//BOOT",
+      "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}"
+    },
+    {
+      "id": "82903e44-e8c7-4b53-9deb-978f8ae27753",
+      "title": "L2_Artifact_//NANO_SWARM_EXPAND expand --manifest C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_temp\\test_nano_swarm_evidence_route0\\ukg.json --report-dir C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_temp\\test_nano_swarm_evidence_route0\\route_reports --evidence",
+      "content": "{\"action\": \"nano_swarm_expand\", \"evidence\": true, \"status\": \"EVIDENCE_RECORDED\", \"report_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports\\\\ukg_nano_omega_glyph_v1000_omni_codex.evidence.json\", \"schema_status\": \"SCHEMA_VALID\"}"
+    },
+    {
+      "id": "b16b19a5-dc8f-49da-a220-a48e9d5002c9",
+      "title": "L2_Artifact_//BOOT",
+      "content": "{\"action\": \"awaken global boot\", \"detail\": \"run: awaken\", \"canonical_command\": \"awaken\", \"fallback\": \"python bin/awaken.py\"}"
+    },
+    {
+      "id": "b3eb76f0-f1a3-4417-a460-3a6c3177f1a2",
+      "title": "L2_Artifact_//NANO_SWARM_EXPAND expand --manifest C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_temp\\test_nano_swarm_evidence_route0\\ukg.json --report-dir C:\\Users\\vizio\\CAMELOT_OS\\data\\.pytest_temp\\test_nano_swarm_evidence_route0\\route_reports --evidence",
+      "content": "{\"action\": \"nano_swarm_expand\", \"evidence\": true, \"status\": \"EVIDENCE_RECORDED\", \"report_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\data\\\\.pytest_temp\\\\test_nano_swarm_evidence_route0\\\\route_reports\\\\ukg_nano_omega_glyph_v1000_omni_codex.evidence.json\", \"schema_status\": \"SCHEMA_VALID\"}"
+    },
+    {
+      "id": "d5e3b457-14db-4769-b6b5-721c53810d8a",
+      "title": "L2_Artifact_//NANO_SWARM_EXPAND expand --node Node_A_Frontend --dry-run",
+      "content": "{\"action\": \"nano_swarm_expand\", \"dry_run\": true, \"status\": \"DRY_RUN_READY\", \"node\": \"Node_A_Frontend\", \"artifact_path\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\nano_swarm_dry_runs\\\\Node_A_Frontend.dry_run.json\", \"rollback\": \"delete_dry_run_artifact\"}"
+    }
+  ]
+}

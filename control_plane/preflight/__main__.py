@@ -21,7 +21,6 @@ ADR 0006 (drop the sovereign escape hatch).
 """
 from __future__ import annotations
 import argparse
-import json
 import os
 import sys
 import tempfile
@@ -29,7 +28,6 @@ from pathlib import Path
 
 from .runner import CatalogError, execute_catalog, load_catalog
 from .state import GraduationFlag
-from .runner import utc_now_iso_for_id
 
 
 FORBIDDEN_ENVS = ("CAMELOT_SKIP_PREFLIGHT", "CAMELOT_BYPASS_PREFLIGHT")

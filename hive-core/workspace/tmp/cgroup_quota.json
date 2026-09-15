@@ -1,0 +1,9 @@
+{
+  "enclave": "cgroups v2 Gate",
+  "path": "/hive-core/workspace/tmp/",
+  "permission": "SCRATCH_VOLATILE",
+  "enforced_by": "CGROUPS_V2_GATE",
+  "linear_memory_hard_cap_mb": 64,
+  "oom_kill_policy": "IMMEDIATE_EVAPORATE",
+  "status": "ENFORCED"
+}

@@ -23,33 +23,62 @@ $env:CAMELOT_COGNITIVE_URL = "http://127.0.0.1:8092"  # go_router /cognitive pro
 $env:COGNITIVE_SYNC_INTERVAL = "1800"  # auto //sync every 30 min (edge-first; skips if cloud down)
 
 $daemons = @(
-  @{ Name = "go_router";       Exe = "$root\control_plane\go_router\go_router.exe";              Args = @("serve", ":8077") },
-  @{ Name = "bifrost_sidecar"; Exe = "$root\01_KERNEL\senses\bifrost_go_sidecar\bifrost_sidecar.exe"; Args = @() },
-  @{ Name = "cognitive_service"; Exe = "python"; Args = @("$root\control_plane\cognitive_service.py") }
+  @{ Name = "go_router";       Port = 8077; Exe = "$root\control_plane\go_router\go_router.exe";              Args = @("serve", ":8077") },
+  @{ Name = "bifrost_sidecar"; Port = 8011; Exe = "$root\01_KERNEL\senses\bifrost_go_sidecar\bifrost_sidecar.exe"; Args = @() },
+  @{ Name = "cognitive_service"; Port = 8092; Exe = "python"; Args = @("$root\control_plane\cognitive_service.py") },
+  @{ Name = "opencodex";       Port = 10100; Exe = "node"; Args = @("$root\node_modules\@bitkyc08\opencodex\bin\ocx.mjs", "start", "--port", "10100") },
+  @{ Name = "omnivoice";       Port = 3002; Exe = "node"; Args = @("$root\02_FORGE\KINETIC_ARMORY\omnivoice-router\dist\omnivoice-router.js") }
 )
 
+function Test-PortListening {
+  param([int]$port)
+  $tcp = New-Object System.Net.Sockets.TcpClient
+  try {
+    $res = $tcp.BeginConnect("127.0.0.1", $port, $null, $null)
+    if ($res.AsyncWaitHandle.WaitOne(400) -and $tcp.Connected) {
+      $tcp.EndConnect($res)
+      return $true
+    }
+  } catch {} finally {
+    $tcp.Close()
+  }
+  return $false
+}
+
 $procs = @{}
-"[{0}] Cybertronia supervisor online" -f (Get-Date -Format s) | Add-Content (Join-Path $logDir "supervisor.log")
+"[{0}] Cybertronia Always-On supervisor online" -f (Get-Date -Format s) | Add-Content (Join-Path $logDir "supervisor.log")
 
 while ($true) {
   foreach ($d in $daemons) {
-    $p = $procs[$d.Name]
-    if (-not $p -or $p.HasExited) {
-      $log = Join-Path $logDir ($d.Name + ".log")
-      $err = Join-Path $logDir ($d.Name + ".err.log")
-      "[{0}] (re)starting {1}" -f (Get-Date -Format s), $d.Name | Add-Content (Join-Path $logDir "supervisor.log")
-      try {
-        if ($d.Args.Count -gt 0) {
-          $procs[$d.Name] = Start-Process -FilePath $d.Exe -ArgumentList $d.Args `
-            -RedirectStandardOutput $log -RedirectStandardError $err -WindowStyle Hidden -PassThru
-        } else {
-          $procs[$d.Name] = Start-Process -FilePath $d.Exe `
-            -RedirectStandardOutput $log -RedirectStandardError $err -WindowStyle Hidden -PassThru
+    if (Test-Path $d.Exe) {
+      $isListening = Test-PortListening -port $d.Port
+      if (-not $isListening) {
+        $p = $procs[$d.Name]
+        if (-not $p -or $p.HasExited) {
+          $log = Join-Path $logDir ($d.Name + ".log")
+          $err = Join-Path $logDir ($d.Name + ".err.log")
+          "[{0}] (re)starting {1} on :{2}" -f (Get-Date -Format s), $d.Name, $d.Port | Add-Content (Join-Path $logDir "supervisor.log")
+          try {
+            if ($d.Args.Count -gt 0) {
+              $procs[$d.Name] = Start-Process -FilePath $d.Exe -ArgumentList $d.Args `
+                -RedirectStandardOutput $log -RedirectStandardError $err -WindowStyle Hidden -PassThru
+            } else {
+              $procs[$d.Name] = Start-Process -FilePath $d.Exe `
+                -RedirectStandardOutput $log -RedirectStandardError $err -WindowStyle Hidden -PassThru
+            }
+          } catch {
+            "[{0}] FAILED to start {1}: {2}" -f (Get-Date -Format s), $d.Name, $_ | Add-Content (Join-Path $logDir "supervisor.log")
+          }
         }
-      } catch {
-        "[{0}] FAILED to start {1}: {2}" -f (Get-Date -Format s), $d.Name, $_ | Add-Content (Join-Path $logDir "supervisor.log")
       }
     }
   }
+
+  # Flush live JSON telemetry via Python Always-On supervisor
+  try {
+    Start-Process -FilePath "python" -ArgumentList @("-m", "control_plane.infra.cybertronia_always_on", "tick") `
+      -WindowStyle Hidden -Wait -ErrorAction SilentlyContinue
+  } catch {}
+
   Start-Sleep -Seconds 5
 }

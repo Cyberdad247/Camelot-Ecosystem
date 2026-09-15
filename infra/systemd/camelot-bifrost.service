@@ -1,0 +1,24 @@
+[Unit]
+Description=Camelot-OS Native Bifrost WebRTC & WebSocket Gateway
+After=network.target tailscaled.service
+Wants=tailscaled.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/Camelot-Ecosystem
+ExecStart=/usr/local/bin/camelot-bifrost --port 3001 --host 0.0.0.0
+Restart=always
+RestartSec=5s
+Environment=PORT=3001
+Environment=BIFROST_SECURE=true
+Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+
+# Scarcity Cap (cgroups v2)
+MemoryAccounting=true
+MemoryMax=512M
+CPUAccounting=true
+CPUQuota=100%
+
+[Install]
+WantedBy=multi-user.target

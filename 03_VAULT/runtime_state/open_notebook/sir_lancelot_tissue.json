@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "SIR_LANCELOT",
+    "cloudbrain_uuid": "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
+    "spark_id": "0xD8DD1669AEF44C348C44D9CC5E51E0C9",
+    "role": "Frontline Champion, Kinetic Edge Defense, Real-Time Guard",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Lancelot",
+    "vfs_mount": "vfs/notebooks/d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

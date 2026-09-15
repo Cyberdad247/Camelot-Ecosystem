@@ -1,0 +1,48 @@
+# Camelot Bifrost Hub — task scheduler unit
+#   Role: task scheduler (task DAG scheduling, job queue)
+#   DB:   /opt/camelot/bifrost-hub/data/scheduler.db (auto-created on first run)
+#   Data: /opt/camelot/bifrost-hub/scheduler (task state sidecars)
+#
+# The unit stays INACTIVE (not failing) until the scheduler-service binary exists
+# at /opt/camelot/bifrost-hub/bin/scheduler-service (ConditionPathExists below).
+# Deploy the binary, then:
+#   sudo systemctl daemon-reload && sudo systemctl restart scheduler-service
+
+[Unit]
+Description=Camelot Bifrost Hub — task scheduler
+Documentation=https://github.com/Cyberdad247/Camelot-Ecosystem/blob/main/ops/bifrost-hub/README.md
+After=network-online.target
+Wants=network-online.target
+
+ConditionPathExists=/opt/camelot/bifrost-hub/bin/scheduler-service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/camelot/bifrost-hub
+# NOTE: binary path + flags are placeholders until the scheduler is built. Task
+# state mirrors packages/contracts/task-dag.schema.json.
+ExecStart=/opt/camelot/bifrost-hub/bin/scheduler-service \
+    --db /opt/camelot/bifrost-hub/data/scheduler.db
+Restart=on-failure
+RestartSec=5
+
+# Optional overrides (dash = file may be absent)
+EnvironmentFile=-/etc/camelot/scheduler-service.env
+
+# Hardening — the service only ever touches its data + scheduler dirs.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/camelot/bifrost-hub/data /opt/camelot/bifrost-hub/scheduler
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictRealtime=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

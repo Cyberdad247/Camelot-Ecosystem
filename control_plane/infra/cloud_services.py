@@ -4,16 +4,19 @@
 
 from __future__ import annotations
 
+import asyncio
 import importlib.util
 import os
 import sys
+from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 import httpx
 from pydantic import BaseModel, Field
 
+from .cloud_policy import CloudTimeoutPolicy
 from .config_manager import ConfigManager
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
@@ -100,6 +103,7 @@ class CloudServiceName(str, Enum):
     NOTEBOOKLM_SOURCES_LIST = "notebooklm_sources_list"
     NOTEBOOKLM_SOURCES_ADD = "notebooklm_sources_add"
     NOTEBOOKLM_SOURCES_DELETE = "notebooklm_sources_delete"
+    HEALTH_ROLLUP = "health_rollup"
 
 
 class CloudServiceRequest(BaseModel):
@@ -118,8 +122,9 @@ class CloudServiceResult(BaseModel):
 class CloudServiceRouter:
     """Routes typed requests to local or remote cloud services."""
 
-    def __init__(self):
+    def __init__(self, policy: Optional[CloudTimeoutPolicy] = None):
         ConfigManager().hydrate_runtime_environment()
+        self.policy = policy or CloudTimeoutPolicy()
         self.cloudbrain_url = os.getenv("CAMELOT_CLOUDBRAIN_URL", "").rstrip("/")
         self.living_notebook_url = os.getenv("CAMELOT_LIVING_NOTEBOOK_URL", "").rstrip("/")
         self.research_url = os.getenv("CAMELOT_RESEARCH_AGENCY_URL", "").rstrip("/")
@@ -186,20 +191,22 @@ class CloudServiceRouter:
             "payload": payload,
         }
         try:
-            async with httpx.AsyncClient(timeout=60.0) as client:
-                response = await client.post(self.excalibur_bridge_url, json=bridge_payload)
-                response.raise_for_status()
-                result = response.json()
-                return CloudServiceResult(
-                    service=service,
-                    success=True,
-                    result={
-                        "bridge_service": "excalibur-brain",
-                        "bridge_url": self.excalibur_bridge_url,
-                        "bridge_response": result,
-                    },
-                    source="remote_bridge",
-                )
+            async def _do_post() -> httpx.Response:
+                async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=False)) as client:
+                    return await client.post(self.excalibur_bridge_url, json=bridge_payload)
+
+            response = await self.policy.execute_http(_do_post, service_key=f"excalibur_bridge:{service.value}", is_health=False)
+            result = response.json()
+            return CloudServiceResult(
+                service=service,
+                success=True,
+                result={
+                    "bridge_service": "excalibur-brain",
+                    "bridge_url": self.excalibur_bridge_url,
+                    "bridge_response": result,
+                },
+                source="remote_bridge",
+            )
         except Exception as exc:
             return CloudServiceResult(
                 service=service,
@@ -217,20 +224,22 @@ class CloudServiceRouter:
                 source="config",
             )
         try:
-            async with httpx.AsyncClient(timeout=20.0) as client:
-                response = await client.get(self.excalibur_health_url)
-                response.raise_for_status()
-                result = response.json()
-                return CloudServiceResult(
-                    service=service,
-                    success=True,
-                    result={
-                        "bridge_service": "excalibur-brain",
-                        "bridge_health_url": self.excalibur_health_url,
-                        **result,
-                    },
-                    source="remote_bridge",
-                )
+            async def _do_get() -> httpx.Response:
+                async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=True)) as client:
+                    return await client.get(self.excalibur_health_url)
+
+            response = await self.policy.execute_http(_do_get, service_key=f"excalibur_health:{service.value}", is_health=True)
+            result = response.json()
+            return CloudServiceResult(
+                service=service,
+                success=True,
+                result={
+                    "bridge_service": "excalibur-brain",
+                    "bridge_health_url": self.excalibur_health_url,
+                    **result,
+                },
+                source="remote_bridge",
+            )
         except Exception as exc:
             return CloudServiceResult(
                 service=service,
@@ -284,6 +293,9 @@ class CloudServiceRouter:
             return await self._notebooklm_sources_add(request.payload)
         if request.service is CloudServiceName.NOTEBOOKLM_SOURCES_DELETE:
             return await self._notebooklm_sources_delete(request.payload)
+        if request.service is CloudServiceName.HEALTH_ROLLUP:
+            probe_remote = bool(request.payload.get("probe_remote", True))
+            return await self._health_rollup(probe_remote=probe_remote)
         return CloudServiceResult(
             service=request.service,
             success=False,
@@ -346,15 +358,17 @@ class CloudServiceRouter:
     async def _research_agency(self, payload: dict[str, Any]) -> CloudServiceResult:
         if self.research_url:
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    response = await client.post(self.research_url, json=payload)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.RESEARCH_AGENCY,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_post() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=False)) as client:
+                        return await client.post(self.research_url, json=payload)
+
+                response = await self.policy.execute_http(_do_post, service_key="research_agency", is_health=False)
+                return CloudServiceResult(
+                    service=CloudServiceName.RESEARCH_AGENCY,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_bridge_url:
                     fallback = await self._invoke_excalibur_bridge(
@@ -438,15 +452,17 @@ class CloudServiceRouter:
     async def _research_agency_health(self) -> CloudServiceResult:
         if self.research_health_url:
             try:
-                async with httpx.AsyncClient(timeout=20.0) as client:
-                    response = await client.get(self.research_health_url)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.RESEARCH_AGENCY_HEALTH,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_get() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=True)) as client:
+                        return await client.get(self.research_health_url)
+
+                response = await self.policy.execute_http(_do_get, service_key="research_agency_health", is_health=True)
+                return CloudServiceResult(
+                    service=CloudServiceName.RESEARCH_AGENCY_HEALTH,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_health_url:
                     fallback = await self._invoke_excalibur_health(CloudServiceName.RESEARCH_AGENCY_HEALTH)
@@ -479,15 +495,17 @@ class CloudServiceRouter:
     async def _northstar(self, payload: dict[str, Any]) -> CloudServiceResult:
         if self.northstar_url:
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    response = await client.post(self.northstar_url, json=payload)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.NORTHSTAR,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_post() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=False)) as client:
+                        return await client.post(self.northstar_url, json=payload)
+
+                response = await self.policy.execute_http(_do_post, service_key="northstar", is_health=False)
+                return CloudServiceResult(
+                    service=CloudServiceName.NORTHSTAR,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_bridge_url:
                     fallback = await self._invoke_excalibur_bridge(
@@ -540,15 +558,17 @@ class CloudServiceRouter:
     async def _northstar_health(self) -> CloudServiceResult:
         if self.northstar_health_url:
             try:
-                async with httpx.AsyncClient(timeout=20.0) as client:
-                    response = await client.get(self.northstar_health_url)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.NORTHSTAR_HEALTH,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_get() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=True)) as client:
+                        return await client.get(self.northstar_health_url)
+
+                response = await self.policy.execute_http(_do_get, service_key="northstar_health", is_health=True)
+                return CloudServiceResult(
+                    service=CloudServiceName.NORTHSTAR_HEALTH,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_health_url:
                     fallback = await self._invoke_excalibur_health(CloudServiceName.NORTHSTAR_HEALTH)
@@ -581,15 +601,17 @@ class CloudServiceRouter:
     async def _development_blueprint(self, payload: dict[str, Any]) -> CloudServiceResult:
         if self.blueprint_url:
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    response = await client.post(self.blueprint_url, json=payload)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.DEVELOPMENT_BLUEPRINT,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_post() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=False)) as client:
+                        return await client.post(self.blueprint_url, json=payload)
+
+                response = await self.policy.execute_http(_do_post, service_key="development_blueprint", is_health=False)
+                return CloudServiceResult(
+                    service=CloudServiceName.DEVELOPMENT_BLUEPRINT,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_bridge_url:
                     fallback = await self._invoke_excalibur_bridge(
@@ -642,15 +664,17 @@ class CloudServiceRouter:
     async def _development_blueprint_health(self) -> CloudServiceResult:
         if self.blueprint_health_url:
             try:
-                async with httpx.AsyncClient(timeout=20.0) as client:
-                    response = await client.get(self.blueprint_health_url)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_get() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=True)) as client:
+                        return await client.get(self.blueprint_health_url)
+
+                response = await self.policy.execute_http(_do_get, service_key="development_blueprint_health", is_health=True)
+                return CloudServiceResult(
+                    service=CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_health_url:
                     fallback = await self._invoke_excalibur_health(CloudServiceName.DEVELOPMENT_BLUEPRINT_HEALTH)
@@ -683,15 +707,17 @@ class CloudServiceRouter:
     async def _precise_mode(self, payload: dict[str, Any]) -> CloudServiceResult:
         if self.precise_mode_url:
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    response = await client.post(self.precise_mode_url, json=payload)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.PRECISE_MODE,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_post() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=False)) as client:
+                        return await client.post(self.precise_mode_url, json=payload)
+
+                response = await self.policy.execute_http(_do_post, service_key="precise_mode", is_health=False)
+                return CloudServiceResult(
+                    service=CloudServiceName.PRECISE_MODE,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_bridge_url:
                     fallback = await self._invoke_excalibur_bridge(
@@ -744,15 +770,17 @@ class CloudServiceRouter:
     async def _precise_mode_health(self) -> CloudServiceResult:
         if self.precise_mode_health_url:
             try:
-                async with httpx.AsyncClient(timeout=20.0) as client:
-                    response = await client.get(self.precise_mode_health_url)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.PRECISE_MODE_HEALTH,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_get() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=True)) as client:
+                        return await client.get(self.precise_mode_health_url)
+
+                response = await self.policy.execute_http(_do_get, service_key="precise_mode_health", is_health=True)
+                return CloudServiceResult(
+                    service=CloudServiceName.PRECISE_MODE_HEALTH,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_health_url:
                     fallback = await self._invoke_excalibur_health(CloudServiceName.PRECISE_MODE_HEALTH)
@@ -785,15 +813,17 @@ class CloudServiceRouter:
     async def _eldergod_forge(self, payload: dict[str, Any]) -> CloudServiceResult:
         if self.eldergod_url:
             try:
-                async with httpx.AsyncClient(timeout=60.0) as client:
-                    response = await client.post(self.eldergod_url, json=payload)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.ELDERGOD_FORGE,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_post() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=False)) as client:
+                        return await client.post(self.eldergod_url, json=payload)
+
+                response = await self.policy.execute_http(_do_post, service_key="eldergod_forge", is_health=False)
+                return CloudServiceResult(
+                    service=CloudServiceName.ELDERGOD_FORGE,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_bridge_url:
                     fallback = await self._invoke_excalibur_bridge(
@@ -846,15 +876,17 @@ class CloudServiceRouter:
     async def _eldergod_forge_health(self) -> CloudServiceResult:
         if self.eldergod_health_url:
             try:
-                async with httpx.AsyncClient(timeout=20.0) as client:
-                    response = await client.get(self.eldergod_health_url)
-                    response.raise_for_status()
-                    return CloudServiceResult(
-                        service=CloudServiceName.ELDERGOD_FORGE_HEALTH,
-                        success=True,
-                        result=response.json(),
-                        source="remote",
-                    )
+                async def _do_get() -> httpx.Response:
+                    async with httpx.AsyncClient(timeout=self.policy.get_httpx_timeout(is_health=True)) as client:
+                        return await client.get(self.eldergod_health_url)
+
+                response = await self.policy.execute_http(_do_get, service_key="eldergod_forge_health", is_health=True)
+                return CloudServiceResult(
+                    service=CloudServiceName.ELDERGOD_FORGE_HEALTH,
+                    success=True,
+                    result=response.json(),
+                    source="remote",
+                )
             except Exception as exc:
                 if self.excalibur_health_url:
                     fallback = await self._invoke_excalibur_health(CloudServiceName.ELDERGOD_FORGE_HEALTH)
@@ -882,6 +914,99 @@ class CloudServiceRouter:
             success=True,
             result=_modal_services().eldergod_forge_health(),
             source="local",
+        )
+
+    async def _health_rollup(self, probe_remote: bool = True) -> CloudServiceResult:
+        """Unified health rollup across cloudbrain, research, northstar, blueprint,
+
+        precise-mode, eldergod forge, notebooklm, and deployment contract (Track B5).
+        """
+        from .deployment_contract import validate_deployment_contract
+
+        contract_report = validate_deployment_contract()
+
+        # Run health probes concurrently
+        probes = {
+            "cloudbrain": self._cloudbrain_status(),
+            "research": self._research_agency_health(),
+            "northstar": self._northstar_health(),
+            "blueprint": self._development_blueprint_health(),
+            "precise_mode": self._precise_mode_health(),
+            "eldergod": self._eldergod_forge_health(),
+            "notebooklm": self._notebooklm_health(),
+        }
+
+        keys = list(probes.keys())
+        probe_results = await asyncio.gather(*probes.values(), return_exceptions=True)
+
+        results: dict[str, CloudServiceResult] = {}
+        for key, res in zip(keys, probe_results):
+            if isinstance(res, Exception):
+                results[key] = CloudServiceResult(
+                    service=CloudServiceName.HEALTH_ROLLUP,
+                    success=False,
+                    error=str(res),
+                    source="error",
+                )
+            else:
+                results[key] = res
+
+        # Evaluate status per subsystem
+        subsystems: dict[str, dict[str, Any]] = {}
+        healthy_count = 0
+        total_count = len(results)
+
+        core_services = {"cloudbrain", "research", "northstar", "blueprint", "precise_mode"}
+        core_failures = 0
+        fallback_count = 0
+
+        for key, r in results.items():
+            is_healthy = r.success
+            source = r.source
+            if is_healthy:
+                healthy_count += 1
+                if source in {"local", "local_fallback", "browser_nano_knights"}:
+                    fallback_count += 1
+            else:
+                if key in core_services:
+                    core_failures += 1
+
+            subsystems[key] = {
+                "service": r.service.value if hasattr(r, "service") else key,
+                "healthy": r.success,
+                "status": "ONLINE" if (r.success and source == "remote") else ("FALLBACK" if r.success else "OFFLINE"),
+                "source": source,
+                "error": r.error,
+                "summary": r.result.get("status") or r.result.get("message") or ("OK" if r.success else "FAILED"),
+            }
+
+        if core_failures == 0 and contract_report.status == "PASS" and healthy_count == total_count:
+            overall_status = "HEALTHY"
+        elif core_failures == 0:
+            overall_status = "DEGRADED"
+        else:
+            overall_status = "UNAVAILABLE"
+
+        score_pct = round((healthy_count / total_count) * 100, 1)
+
+        rollup_data = {
+            "overall_status": overall_status,
+            "score_pct": score_pct,
+            "healthy_count": healthy_count,
+            "total_count": total_count,
+            "fallback_count": fallback_count,
+            "subsystems": subsystems,
+            "deployment_contract": contract_report.to_dict(),
+            "circuit_breaker": self.policy.get_circuit_summary(),
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+
+        return CloudServiceResult(
+            service=CloudServiceName.HEALTH_ROLLUP,
+            success=(overall_status in {"HEALTHY", "DEGRADED"}),
+            result=rollup_data,
+            error=None if overall_status in {"HEALTHY", "DEGRADED"} else f"{core_failures} core services unavailable",
+            source="rollup",
         )
 
     # --- NotebookLM Cloud Brain (Omega₃) ---------------------------------------

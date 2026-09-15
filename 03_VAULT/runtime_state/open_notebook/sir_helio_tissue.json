@@ -1,0 +1,104 @@
+[
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_8847321d90ca643050000beabacb2e5efdba1123309383ee516ec817f4d8405f",
+    "content": "Verification Run run_2: //SYNC\nOperator: sir_helio\nSuccess: True\nResults: {\"status\": \"OK\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-13T14:43:21.270967+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_2e45549bea03e2aab550de0d4a2e05ffd62b21ffa260d50969c601a11927809c",
+    "content": "Verification Run run_1: //BOOT\nOperator: sir_helio\nSuccess: True\nResults: {\"status\": \"OK\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-13T14:43:19.826523+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_e02aee218b1dcecb5f31dd6db6aa1a741929f0d89fc7bcda3704d4ec53d6b3b3",
+    "content": "Verification Run run_4: cmd_4\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-13T14:41:22.729794+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_ec19eead48f5aee2ed934263c8851e42d65da3b9427a70f4f8a43c5cb6e54b33",
+    "content": "Verification Run run_3: cmd_3\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-13T14:41:21.354441+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_b075cf4fe0b785445f0a0ce01fc40f5a71c0202066367af3635ab96a05c8cb46",
+    "content": "Verification Run run_2: cmd_2\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-13T14:41:19.948836+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_d9328bb2267f4c1d9430c66f5a1263eea453ec2aa6688abf293461323969093c",
+    "content": "Verification Run run_1: cmd_1\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-13T14:41:18.379043+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "L2_Vector_Index_camelot_audit_262af0acbd4c8446b27f3ff3860b99062674aa6b7ebf62a5cebd999dc4e51592",
+    "content": "Verification Run run_0: cmd_0\nOperator: sir_helio\nSuccess: True\nResults: {}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-13T14:41:16.997384+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "cloudbrain_uuid": "56820318-bb91-451f-aac4-4b46424898cf",
+    "spark_id": "0x56820318BB91451FAAC44B46424898CF",
+    "role": "Voice OS, Real-Time Audio Pipeline, //vocal Dispatcher",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Helio",
+    "vfs_mount": "vfs/notebooks/56820318-bb91-451f-aac4-4b46424898cf/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

@@ -29,15 +29,17 @@ function base(taskId: string): OperatorTaskSnapshot {
       changedPaths: ['apps/pwa/src/app/console/page.tsx'],
       addedLines: 12, removedLines: 3, generatedAt: new Date().toISOString(),
       gideonVerdict: 'pass',
+      receiptRef: 'receipt://vfs/diff/01abc',
     }],
     tests: [{
       schemaVersion: 'test-run-result/1',
       runId: 'run_1', taskId, correlationId: `cor_${taskId}`,
       runner: 'boris-gideon-adapter', status: 'passed',
       startedAt: new Date().toISOString(), completedAt: new Date().toISOString(),
-      suites: [{ name: 'operator-console', status: 'passed', durationMs: 1200 }],
+      suites: [{ name: 'operator-console', status: 'passed', durationMs: 1200, artifactRef: 'receipt://boris/test-report/run_1' }],
       summary: { total: 4, passed: 4, failed: 0, skipped: 0 },
       outputHash: 'sha256:test',
+      receiptRef: 'receipt://boris/test-run/run_1',
     }],
     receipts: [],
   };

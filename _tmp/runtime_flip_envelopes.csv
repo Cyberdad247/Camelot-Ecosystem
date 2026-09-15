@@ -1,5 +1,0 @@
-rune,snapshot_task_id,snapshot_run_iso,returncode,status,knight,collision_short,passed,failed,all_pass
-//SYNC_KBA_DATABASES_SQLCIPHER,gcmn-stub-8633da90,2026-07-15T06:19:25Z,0,STUB_INERT,sir_sentinel,(none),18,0,True
-//LOCK_BIFROST_mTLS_KYBER768,gcmn-stub-686a2e38,2026-07-15T06:19:26Z,0,STUB_INERT,sir_heimdall,bin/bifrost.py + control_plane/pqcrypto_bridge....,18,0,True
-//ENGAGE_RUST_IRON_DAEMON,gcmn-stub-d8b3316c,2026-07-15T06:19:27Z,0,STUB_INERT,sir_forge,Namespace may clash with 04_KINETIC binaries,18,0,True
-//CRYSTALLIZE_GCMN_vMAX,gcmn-stub-78f2269e,2026-07-15T06:19:28Z,0,STUB_INERT,sir_boris,Overlaps //NANO_SWARM_EXPAND + cartridge_manage...,18,0,True

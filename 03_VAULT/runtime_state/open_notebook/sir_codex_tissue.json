@@ -3,11 +3,168 @@
     "knight_id": "SIR_CODEX",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
-    "title": "L2_Artifact_//REZERO",
-    "content": "{\"action\": \"//REZERO\"}",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
     "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
     "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
     "open_viking_tether": "open_viking://worldtree/sir_codex",
-    "updated_at": "2026-08-12T18:06:29.887941+00:00"
+    "updated_at": "2026-09-14T23:23:18.859582+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-14T23:16:47.103444+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-14T23:14:17.449973+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-14T23:12:18.214658+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-14T22:59:33.715036+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "verification_receipt",
+    "title": "Zero-Entropy Verification: Worktree Isolation & Quantization",
+    "content": "{\n  \"verification_id\": \"ZE-VERIFY-CODEX-20260914\",\n  \"knight_id\": \"SIR_CODEX\",\n  \"spark_id\": \"0xE3B8C190F4A2D765E8B1C9F0A3D4E5B6\",\n  \"vfs_node\": \"vfs://worldtree/knights/sir_codex/\",\n  \"cloudbrain_uuid\": \"8c656cfa-a189-409e-a72d-07692a47f17e\",\n  \"capability\": \"worktree_isolation_and_capability_leases\",\n  \"quantization_schema\": \"1.58-bit BitNet ternary W in {-1, 0, 1}\",\n  \"memory_envelope\": \"0.4GB per 2B params (<64MB Context Burst)\",\n  \"rate_fair_queue\": \"harness_queue.jsonl (Dedup 10.0s window, max 5)\",\n  \"verdict\": \"ZERO_ENTROPY_PASS_CONFIRMED\",\n  \"timestamp\": \"2026-09-14T08:20:54.725523+00:00\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "synced_at": "2026-09-14T08:20:54.725574+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T14:38:57.378242+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T14:36:39.258906+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T14:05:53.853340+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T13:46:10.241399+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T13:45:40.092318+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T13:34:59.227260+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//FORGE_SOURCE Phase_1",
+    "content": "{\"action\": \"forge_pwa_source_scaffolding\", \"knight\": \"sir_codex\", \"target_phase\": \"Phase_1\", \"mode\": \"KINETIC_SOURCE_EXPANSION\", \"status\": \"ARMED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_CODEX",
+    "open_viking_tether": "open_viking://worldtree/sir_codex",
+    "updated_at": "2026-09-13T13:19:54.452760+00:00"
+  },
+  {
+    "knight_id": "SIR_CODEX",
+    "cloudbrain_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
+    "spark_id": "0x8C656CFAA189409EA72D07692A47F17E",
+    "role": "Kinetic Implementer, High-Velocity Zero-Trust Architecture",
+    "model": "OpenAI Codex / GPT-5.5",
+    "summoning_rune": "Omega_Codex",
+    "vfs_mount": "vfs/notebooks/8c656cfa-a189-409e-a72d-07692a47f17e/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

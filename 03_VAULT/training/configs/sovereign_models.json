@@ -40,6 +40,12 @@
       "tag": "qwen2.5-coder:3b",
       "air_gapped": false
     },
+    "cliproxy:default": {
+      "backend": "cliproxy",
+      "tag": "auto-fallback",
+      "air_gapped": false,
+      "notes": "Opt-in loopback CLIProxyAPI route for high-reasoning and swarm work"
+    },
     "gemma3:4b": {
       "backend": "ollama",
       "tag": "gemma3:4b",

@@ -54,12 +54,16 @@ runcmd:
 - Admin over `ssh oci-admin-ts`; the public IP path is for bootstrap only.
 - **Back up `/root/.config/age/bifrost-key.txt` offline** — the nightly backups
   are encrypted to it and are unrecoverable without it.
-- **Receipt service** — bootstrap phase 6 already ran `init-receipt-db.sh`
+- **Control-plane services** — bootstrap phase 6 runs `init-receipt-db.sh`
   (creating `data/receipts.db` in WAL mode, tables mirroring
   `packages/contracts/receipt.schema.json` / `receipt-chain.schema.json`) and
-  installed + enabled `receipt-service.service`. The unit stays inactive until
-  the service binary is deployed to `/opt/camelot/bifrost-hub/bin/receipt-service`,
-  then `sudo systemctl restart receipt-service`.
+  installs + enables three systemd units: `receipt-service`, `scheduler-service`,
+  `registry-service` (each with hardened `ProtectSystem=strict` settings).
+  Every unit stays **inactive until its binary exists** under
+  `/opt/camelot/bifrost-hub/bin/` (`ConditionPathExists`), so nothing fails
+  before the components are built. `scheduler.db` / `registry.db` are
+  auto-created by their services on first run. Deploy the binaries, then:
+  `sudo systemctl restart receipt-service scheduler-service registry-service`.
 
 ## Local SSH config (already in place)
 
@@ -84,5 +88,5 @@ sudo TS_AUTHKEY=tskey-auth-XXXX ./bootstrap.sh
 sudo /usr/local/bin/camelot-init-receipt-db   # idempotent; re-run any time
 sqlite3 /opt/camelot/bifrost-hub/data/receipts.db 'PRAGMA journal_mode;'  # wal
 sudo /usr/local/bin/camelot-backup && ls -l /opt/camelot/backups/
-systemctl status receipt-service              # inactive until binary deployed
+systemctl status receipt-service scheduler-service registry-service  # inactive until binaries deployed
 ```

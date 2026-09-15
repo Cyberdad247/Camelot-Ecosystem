@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "KICKBOX",
+    "cloudbrain_uuid": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
+    "spark_id": "0x8531E6D46FC4428FA754B9E9592AC7FF",
+    "role": "KickBox Audio, WebRTC State & Vocal HUD Integration",
+    "model": "Next.js 14 / WebRTC",
+    "summoning_rune": "Omega_Kickbox",
+    "vfs_mount": "vfs/notebooks/8531e6d4-6fc4-428f-a754-b9e9592ac7ff/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

@@ -1,13 +1,27 @@
 [
   {
     "knight_id": "LADY_APIS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//BIO_SWARM Lady Apis command sequence audit",
-    "content": "{\"action\": \"//BIO_SWARM\"}",
-    "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
-    "open_viking_tether": "open_viking://worldtree/lady_apis",
-    "updated_at": "2026-08-12T14:40:35.122610+00:00"
+    "cloudbrain_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+    "spark_id": "0x378D6049FFC34ED3A9E747FFC5C0AC3F",
+    "role": "BASHR Research Loop, Bio-Swarm Isolation, Context Forager",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Apis",
+    "vfs_mount": "vfs/notebooks/378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
   }
 ]

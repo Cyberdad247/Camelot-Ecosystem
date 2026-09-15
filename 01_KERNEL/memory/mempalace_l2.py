@@ -5,7 +5,6 @@
 import hashlib
 import hmac
 import os
-import sys
 from pathlib import Path
 from typing import Any, Optional
 import logging
@@ -29,12 +28,20 @@ class MemPalaceL2:
     """Persistent local vector index manager (Layer 2 Memory)."""
 
     def __init__(self, storage_path: Optional[Path] = None):
-        # System-level secret for HMAC salting
+        # System-level secret for HMAC salting. Required: refusing to fall back
+        # to a hardcoded value means every L2 drawer ID is salted with a real,
+        # operator-supplied secret. Fail fast so a misconfigured deployment is
+        # loud instead of silently forgeable.
         secret_env = os.environ.get("MEMPALACE_SECRET")
         if not secret_env:
-            logger.warning("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
-            secret_env = "OMEGA_DEER_CORE_FIX_2026"
-            
+            raise RuntimeError(
+                "MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt "
+                "HMAC drawer IDs; refusing to use a hardcoded fallback. "
+                "Generate one with: python -c "
+                "\"import secrets; print(secrets.token_hex(32))\" "
+                "and export it in the environment."
+            )
+
         self._secret = secret_env.encode()
         if storage_path:
             self.storage_path = storage_path

@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "SIR_DEBUG",
+    "cloudbrain_uuid": "fdc42a4a-3060-4eac-b57c-8e6009ed634a",
+    "spark_id": "0xFDC42A4A30604EACB57C8E6009ED634A",
+    "role": "PIV Self-Healing Loop, Error Diagnosis & AST Repair",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Debug",
+    "vfs_mount": "vfs/notebooks/fdc42a4a-3060-4eac-b57c-8e6009ed634a/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

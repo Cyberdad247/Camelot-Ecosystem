@@ -1,0 +1,9 @@
+{
+  "session_id": "sess_test_001",
+  "node_id": "vashawns-s26-ultra",
+  "status": "CLOSED",
+  "packets_received": 2,
+  "packets_transmitted": 0,
+  "average_latency_ms": 23.71,
+  "barge_in_count": 1
+}

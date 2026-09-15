@@ -1,0 +1,22 @@
+[Unit]
+Description=Camelot S26 Streamer (Go mTLS WebSocket Client to VPS Hub)
+PartOf=camelot-s26.slice
+After=network-online.target camelot-audio-dsp.service
+Wants=network-online.target
+
+[Service]
+Slice=camelot-s26.slice
+Type=simple
+EnvironmentFile=-/etc/camelot/s26-streamer.env
+ExecStart=/usr/local/bin/camelot-streamer
+Restart=always
+RestartSec=3s
+MemoryHigh=110M
+MemoryMax=128M
+CPUQuota=15%
+ProtectSystem=strict
+ProtectHome=read-only
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

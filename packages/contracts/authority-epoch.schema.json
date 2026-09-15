@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/authority-epoch.schema.json",
+  "title": "Camelot Authority Epoch",
+  "description": "v1.2 multidimensional authority vector and cluster fencing epoch state. Formalizes A_epoch = <E_leadership, R_policy, R_revocation, R_registry, R_identity, R_contract> ensuring granular distributed invalidation across VPS, Excalibur, and local workstation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "epoch_id",
+    "authority_vector",
+    "fenced_leader_node",
+    "active_leader_node",
+    "policy_bundle_hash",
+    "contracts_lock_hash",
+    "issued_at",
+    "signer"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-authority-epoch/1"
+    },
+    "epoch_id": {
+      "type": "string",
+      "pattern": "^epoch_[A-Za-z0-9_-]+$"
+    },
+    "authority_vector": {
+      "description": "6-dimensional authority vector tuple: [E_leadership, R_policy, R_revocation, R_registry, R_identity, R_contract].",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 0
+      },
+      "minItems": 6,
+      "maxItems": 6
+    },
+    "fenced_leader_node": {
+      "description": "Node ID of the previous leader fenced out by this epoch change.",
+      "type": ["string", "null"]
+    },
+    "active_leader_node": {
+      "description": "Node ID of the active leader recognized in this epoch.",
+      "type": "string"
+    },
+    "policy_bundle_hash": {
+      "description": "SHA-256 hash of the currently authoritative Sentinel policy bundle.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "contracts_lock_hash": {
+      "description": "SHA-256 hash of CONTRACTS.lock governing this epoch.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": ["string", "null"],
+      "format": "date-time"
+    },
+    "signer": {
+      "type": "object",
+      "required": ["actor_id", "trust_band", "signature_algorithm", "signature"],
+      "additionalProperties": false,
+      "properties": {
+        "actor_id": {
+          "type": "string"
+        },
+        "trust_band": {
+          "type": "string",
+          "enum": ["sovereign", "attested", "witness"]
+        },
+        "signature_algorithm": {
+          "type": "string",
+          "enum": ["ed25519", "p256"]
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

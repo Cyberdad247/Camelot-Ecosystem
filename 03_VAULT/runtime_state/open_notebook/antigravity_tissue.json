@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "ANTIGRAVITY",
+    "cloudbrain_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+    "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
+    "role": "NotebookLM + AntiGravity CLI Synergy & MCP Integration",
+    "model": "FastMCP / agy",
+    "summoning_rune": "Omega_AntiGravity",
+    "vfs_mount": "vfs/notebooks/ab8aa359-2b3b-4bc1-b41f-34979cdc184e/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

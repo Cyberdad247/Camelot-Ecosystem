@@ -12,6 +12,7 @@ Sub-commands:
     camelot cockpit            Warp-first shell overlay helpers
     camelot configure          Run auto-configuration engine
     camelot status             Probe all services + show health matrix
+    camelot hermes             Show VPS Hermes_Prime + Bifrost bridge status
     camelot install            First-time setup guide
     camelot build              Build portable binary (PyInstaller)
     camelot completion SHELL   Print shell completion script (bash/zsh/fish/powershell)
@@ -26,6 +27,8 @@ Global flags (forwarded to warp):
 
 from __future__ import annotations
 
+import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -41,7 +44,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion"}
 
 
 def _banner() -> None:
@@ -76,6 +79,39 @@ def _cmd_configure(verbose: bool = False) -> None:
 def _cmd_status() -> None:
     from bin.camelot_configure import show_status
     show_status()
+
+
+def _cmd_hermes(argv: list[str]) -> None:
+    parser = argparse.ArgumentParser(
+        prog="camelot hermes",
+        description="Show VPS Hermes_Prime and Bifrost bridge status.",
+    )
+    parser.add_argument("--json", action="store_true", help="Emit JSON output")
+    parser.add_argument(
+        "--probe-live",
+        dest="probe_live",
+        action="store_true",
+        default=False,
+        help="Run read-only TCP probes against VPS bridge ports",
+    )
+    parser.add_argument(
+        "--no-probe",
+        dest="probe_live",
+        action="store_false",
+        help="Skip live probes and show configured contract only",
+    )
+    args = parser.parse_args(argv)
+
+    from control_plane.infra.vps_hermes_prime import (
+        format_vps_hermes_prime_status,
+        summarize_vps_hermes_prime,
+    )
+
+    status = summarize_vps_hermes_prime(root=_REPO, probe_live=args.probe_live)
+    if args.json:
+        print(json.dumps(status, indent=2))
+    else:
+        print(format_vps_hermes_prime_status(status))
 
 
 def _cmd_install() -> None:
@@ -172,7 +208,7 @@ def _cmd_completion(shell: str = "bash", install: bool = False) -> None:
         "sir_helio", "sir_link", "sir_liberte", "sir_forge", "sir_ghost",
         "sir_forge_master", "sir_gideon", "sir_octavian", "lady_apis",
     ])
-    _SUBCMDS = "configure config status install build update warp shell-setup keys cockpit completion"
+    _SUBCMDS = "configure config status hermes vps-hermes install build update warp shell-setup keys cockpit completion"
     _TIERS   = "T0 T1 T2 T3"
 
     shell = shell.lower().strip()
@@ -271,6 +307,10 @@ def main() -> None:
 
     if first == "status":
         _cmd_status()
+        return
+
+    if first in ("hermes", "vps-hermes"):
+        _cmd_hermes(args[1:])
         return
 
     if first == "install":

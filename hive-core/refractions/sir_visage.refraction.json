@@ -1,0 +1,13 @@
+{
+  "knight_id": "SIR_VISAGE",
+  "role": "WebGPU Spatial Rendering & Reactive UI/UX",
+  "cartridge_binding": "cartridge-hive-ide-swarm",
+  "max_memory_mb": 512,
+  "skills": [
+    "webgpu_shader_compilation",
+    "r3f_glass_cockpit_projection",
+    "zero_copy_ipc_visualization"
+  ],
+  "ternary_quantization_active": true,
+  "status": "READY"
+}

@@ -218,6 +218,22 @@ class SoulRouter:
         self._sync_to_cloudbrain(matched_knight, intent, reason)
         return RouteDecision(matched_knight, engine.engine, float(engine.weight), score, tensor, reason)
 
+    def resolve_model(self, knight_id: str) -> tuple[str, str, str]:
+        """Resolve a knight_id to (model, base_url, api_key) via OpenCodex bridge.
+
+        Falls back to cliproxy/Ollama if opencodex is not running.
+        """
+        try:
+            from control_plane.core.ocx_bridge import resolve_knight_model
+            engine = None
+            eng = self._engines.get(knight_id)
+            if eng:
+                engine = eng.engine
+            return resolve_knight_model(knight_id, engine)
+        except ImportError:
+            # Bridge not available — fall back to cliproxy
+            return "gemini-2.5-flash", CLIPROXY_URL, "proxy-admin-key"
+
     def get_engine(self, knight_id: str) -> Optional[KnightEngine]:
         return self._engines.get(knight_id)
 
@@ -270,6 +286,57 @@ def resolve_knight(name: str) -> Optional[str]:
     if norm in council_ids:
         return norm
     return None
+
+
+# ---------------------------------------------------------------------------
+# Convenience: single-call routing (replaces duplicated _route() helpers)
+# ---------------------------------------------------------------------------
+
+def route_intent(
+    intent: str,
+    *,
+    velocity: float | None = None,
+    magnitude: float | None = None,
+    privacy: float | None = None,
+    linear_need: float = 0.0,
+) -> RouteDecision:
+    """Route an intent through the Soul Equation in one call.
+
+    Estimates velocity/magnitude/privacy from intent keywords when not
+    explicitly provided, then delegates to ``SoulRouter.route()``.  This is
+    the single canonical entry point that all CLI surfaces should use.
+    """
+    lower = intent.lower()
+
+    if velocity is None:
+        _URGENT = {"urgent", "asap", "immediately", "now", "today", "fast", "quickly"}
+        velocity = 0.9 if any(kw in lower for kw in _URGENT) else 0.5
+
+    if magnitude is None:
+        _HIGH = {
+            "architecture", "refactor", "migrate", "redesign", "multi-agent",
+            "microservice", "deploy", "infrastructure", "pipeline", "orchestrat",
+            "scaling", "shard", "consensus", "evolution", "v1000",
+        }
+        _LOW = {"status", "list", "show", "who", "help", "ping", "version"}
+        if any(kw in lower for kw in _HIGH):
+            magnitude = 0.8
+        elif any(kw in lower for kw in _LOW):
+            magnitude = 0.2
+        else:
+            magnitude = 0.4
+
+    if privacy is None:
+        privacy = 0.95 if any(kw in lower for kw in PRIVACY_KEYWORDS) else 0.0
+
+    router = SoulRouter()
+    return router.route(
+        intent,
+        velocity=velocity,
+        magnitude=magnitude,
+        privacy=privacy,
+        linear_need=linear_need,
+    )
 
 
 def _selftest() -> int:

@@ -29,16 +29,15 @@ registers, or engine internals.
 | Visible Harness Context | Camelot Role |
 |---|---|
 | Claude-compatible coding harness | SIR_BORIS / LUKAS style surgical patch conductor |
-| Gemini CLI or Gemini extension workflow | SIR_HELIO large-context planner |
+| Antigravity CLI, Gemini CLI, or FastMCP harness | SIR_HELIOS sovereign sentinel & CloudBrain synergy knight (`ab8aa359-2b3b-4bc1-b41f-34979cdc184e`) |
+| Voice OS or real-time duplex audio harness | SIR_HELIO voice conductor & telemetry sentinel (`56820318-bb91-451f-aac4-4b46424898cf`) |
 | Codex or OpenAI coding harness | SIR_FORGE / SIR_CODEX implementation executor |
 | Local Llama, Qwen, or Ollama | SIR_GHOST / SIR_SENTINEL local privacy sentry |
 | Unknown or mixed harness | ANYA_OMEGA quality gate with safest-role routing |
 
-## Layer 1: Shared Context Runtime Backplane
+## Layer 1: Shared Context Runtime Backplane & Cybertronia VFS
 
-The `.agent/` files are the low-entropy shared context layer for Camelot agent
-sessions. They are markdown contracts, not magic memory maps. Agents should read
-them before making broad routing, safety, or workflow assumptions.
+The `.agent/` files and position-addressed `vfs://worldtree/` coordinates form the low-entropy shared context backplane for Camelot agent sessions, anchored to **Cybertronia** (`100.118.224.52`, World Tree Root `a0a4bfb9-e847-4c38-be39-7aee398f0795`). They are markdown contracts and dynamic tissues, not magic memory maps. Agents should read them before making broad routing, safety, or workflow assumptions.
 
 ## Layer 2: Inter-Agent Interface Commands
 

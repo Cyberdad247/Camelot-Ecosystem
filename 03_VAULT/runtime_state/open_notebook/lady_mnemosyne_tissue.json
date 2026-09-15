@@ -1,0 +1,38 @@
+[
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//NOTEBOOK_AUDIT anya_omega",
+    "content": "{\"action\": \"notebook_source_audit\", \"target\": \"anya_omega\", \"stats\": {\"total_sources\": 300, \"grade_a_count\": 24, \"grade_a_pct\": 8.0, \"grade_b_count\": 70, \"grade_b_pct\": 23.3, \"grade_c_count\": 176, \"grade_c_pct\": 58.7, \"grade_d_count\": 3, \"grade_d_pct\": 1.0, \"grade_f_count\": 27, \"grade_f_pct\": 9.0, \"duplicates_detected\": 19, \"sub_requirement_deficit\": 30}, \"status\": \"AUDITED\"}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "updated_at": "2026-09-14T05:58:05.387139+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+    "role": "WorldTree Master Memory, Memory Palace & VFS Sweeps",
+    "model": "Memory Substrate",
+    "summoning_rune": "Omega_Mnemosyne",
+    "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

@@ -91,8 +91,19 @@ check("Kinetic Edge :3001",    _probe_port("127.0.0.1", 3001), "MCP Rust Axum se
 check("Bifrost Sidecar :8011", _probe_port("127.0.0.1", 8011), "Go transport sidecar", warn_only=True)
 check("Qdrant :6333",          _probe_port("127.0.0.1", 6333), "vector DB", warn_only=True)
 check("Saltare :8085",         _probe_port("127.0.0.1", 8085), "gateway", warn_only=True)
-check("Holotable :3000",       _probe_port("127.0.0.1", 3000), "UI dashboard", warn_only=True)
 check("Sovereign Harness PID", (ROOT / "logs" / "harness.pid").exists(), "24/7 daemon")
+try:
+    from control_plane.infra.harness import read_latest_heartbeat
+    latest_hb = read_latest_heartbeat(ROOT)
+    if latest_hb:
+        check(
+            "Harness Heartbeat",
+            latest_hb.get("status") in {"GREEN", "LIVE"},
+            f"status={latest_hb.get('status')} uptime={latest_hb.get('uptime_s')}s probes={latest_hb.get('probes_green')}/{latest_hb.get('probes_total')}",
+            warn_only=True,
+        )
+except Exception:
+    pass
 token = _read_bifrost_token()
 if token:
     sidecar_status = _http_status("http://127.0.0.1:8011/v1/bifrost/status", token=token)

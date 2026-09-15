@@ -1,0 +1,13 @@
+[package]
+name = "hive-ide-cli"
+version = "1.0.0"
+edition = "2021"
+authors = ["Sir Codex <codex@camelot.os>"]
+description = "Bare-metal HIVE IDE CLI complying with 16.36 MB binary limit and 8GB Scarcity Protocol"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["full"] }
+sha2 = "0.10"

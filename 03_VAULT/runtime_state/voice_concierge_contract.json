@@ -1,0 +1,84 @@
+{
+  "$schema": "https://camelot-os/schemas/voice-concierge-v1.json",
+  "vertical_id": "autonomous-voice-concierge-agency",
+  "version": "1.0.0",
+  "authority": "Invisioned Marketing Inc. // Reginald Holloway & Merlin Ω",
+  "telephony_ingress": {
+    "protocol": "SIP_over_TLS",
+    "gateway_port": 8095,
+    "codecs": ["G.711u", "Opus"],
+    "sample_rate_hz": 16000,
+    "frame_duration_ms": 100,
+    "bytes_per_frame": 3200,
+    "vad_engine": "WASM_Silero_VAD",
+    "vad_threshold": 0.65,
+    "barge_in_enabled": true
+  },
+  "speech_engine": {
+    "provider": "Gemini_Live_Aoede_S2S",
+    "endpoint": "ws://127.0.0.1:3000/live",
+    "voice_profile": "Aoede_Warm_Professional",
+    "target_latency_budget_ms": 100,
+    "temperature": 0.3
+  },
+  "function_calling_tools": [
+    {
+      "name": "check_calendar_availability",
+      "description": "Checks open appointment slots for a requested date and service type.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "date": { "type": "string", "description": "ISO 8601 date string (YYYY-MM-DD)" },
+          "service_type": { "type": "string", "description": "Type of service requested" }
+        },
+        "required": ["date"]
+      }
+    },
+    {
+      "name": "book_confirmed_appointment",
+      "description": "Books an appointment slot with atomic cryptographic idempotency.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "client_name": { "type": "string" },
+          "client_phone": { "type": "string" },
+          "slot_time_iso": { "type": "string" },
+          "service_type": { "type": "string" },
+          "notes": { "type": "string" }
+        },
+        "required": ["client_name", "client_phone", "slot_time_iso"]
+      }
+    },
+    {
+      "name": "escalate_to_human",
+      "description": "Transfers call to on-call staff or emergency operator.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "reason": { "type": "string" },
+          "urgency": { "type": "string", "enum": ["LOW", "HIGH", "EMERGENCY_911"] }
+        },
+        "required": ["reason", "urgency"]
+      }
+    }
+  ],
+  "emergency_sentinel": {
+    "enabled": true,
+    "trigger_phrases": [
+      "chest pain",
+      "cannot breathe",
+      "severe bleeding",
+      "suicide",
+      "stroke",
+      "911",
+      "unconscious"
+    ],
+    "action": "INSTANT_WARM_TRANSFER_AND_WARNING"
+  },
+  "agency_tier_limits": {
+    "tier_1_starter": { "monthly_minutes": 500, "base_price_usd": 950 },
+    "tier_2_growth": { "monthly_minutes": 1500, "base_price_usd": 1750 },
+    "tier_3_enterprise": { "monthly_minutes": 5000, "base_price_usd": 3500 }
+  },
+  "created_at": "2026-09-14T14:34:00.000000+00:00"
+}

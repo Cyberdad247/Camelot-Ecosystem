@@ -5,13 +5,11 @@ Test Suite for Cartridge Fabrication Engine
 """
 
 import os
-import shutil
 import sys
-
+import shutil
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from cartridge.fabrication_engine import CartridgeFabricator
-
 
 def test_cartridge_fabrication():
     print("\n=== Testing Cartridge Fabrication ===")
@@ -50,7 +48,7 @@ def test_cartridge_fabrication():
     
     # Cleanup
     shutil.rmtree(fab.output_dir)
-    print("✅ Cleanup successful")
+    print(f"✅ Cleanup successful")
 
 def test_jit_tool_compilation():
     print("\n=== Testing JIT Tool Compilation ===")
@@ -103,13 +101,15 @@ def test_template_inheritance():
     shutil.rmtree(fab.output_dir)
 
 if __name__ == "__main__":
-    print("🧪 Starting Cartridge Fabrication Test Suite...")
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    print("[TEST] Starting Cartridge Fabrication Test Suite...")
     try:
         test_cartridge_fabrication()
         test_jit_tool_compilation()
         test_template_inheritance()
-        print("\n🏆 ALL FABRICATION TESTS PASSED!")
+        print("\n[PASS] ALL FABRICATION TESTS PASSED!")
     except Exception as e:
-        print(f"\n❌ TEST FAILED: {e}")
+        print(f"\n[FAIL] TEST FAILED: {e}")
         import traceback
         traceback.print_exc()

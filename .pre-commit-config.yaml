@@ -85,3 +85,68 @@ repos:
               \.github/workflows/verify_os\.yml
             | scripts/check_excalibur_filter_parity\.py
           )$
+      - id: omnivoice-router-build-parity
+        name: Verify OmniVoice Router build artifact parity
+        description: >-
+          Enforces that the COMMITTED
+          02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router.js build
+          artifact still matches its TypeScript source. That file is the
+          package `main` and nothing regenerates it automatically; as of
+          2026-09-14 it was seven weeks stale and contained none of the
+          /ingest_pcm HTTP ingest stack. Compares UPPER_SNAKE constants, route
+          paths, and response error identifiers. Mirrors the GitHub Actions
+          `omnivoice-router-parity` job in .github/workflows/verify_os.yml.
+        entry: python scripts/check_omnivoice_router_build.py
+        language: system
+        pass_filenames: false
+        files: |
+          (?x)^(
+              02_FORGE/KINETIC_ARMORY/omnivoice-router/omnivoice-router\.(ts|js)
+            | scripts/check_omnivoice_router_build\.py
+          )$
+      - id: generated-artifact-parity
+        name: Verify generated artifact parity (HELIO_PATCH + tsc emits)
+        description: >-
+          Enforces that committed generated artifacts still match the inputs
+          that produce them, by REGENERATING and comparing — not merely by
+          running the generator and trusting its exit code.
+
+          Why: on 2026-09-14 the committed HELIO_PATCH.json certified
+          design_tokens_conformance as PASS with zero violations while a fresh
+          regen produced FAIL with three real violations in
+          apps/pwa/src/components/LakishaHUD.tsx. The pre-existing
+          scripts/ops/check-helio-dry.sh could not have caught it: it asserted a
+          top-level `.status` key that has never existed in the emitted schema,
+          so it was incapable of passing for any input.
+
+          Covers two strategies (see the script docstring): `regen` for
+          HELIO_PATCH.json, and `tsc` for committed *.js build outputs
+          (edge-router.js, extensions/camelot-vscode/out/extension.js). The
+          OmniVoice router artifact has its own sibling hook
+          `omnivoice-router-build-parity`. Mirrors the GitHub Actions
+          `generated-artifact-parity` job in .github/workflows/verify_os.yml.
+        entry: python scripts/check_generated_artifact_parity.py
+        language: system
+        pass_filenames: false
+        files: |
+          (?x)^(
+              HELIO_PATCH\.json
+            | scripts/regen-helio-patch\.mjs
+            | scripts/check_generated_artifact_parity\.py
+            | apps/pwa/src/components/LakishaHUD\.tsx
+            | apps/pwa/src/app/page\.tsx
+            | apps/bifrost/src/(security|server|mcp)\.ts
+            | 02_FORGE/KINETIC_ARMORY/edge-router/(edge-router\.(ts|js)|tsconfig\.json)
+            | extensions/camelot-vscode/(src/.*\.ts|out/.*\.js|tsconfig\.json)
+          )$
+      - id: provenance-mirror-sync
+        name: Automatically sync all 4 PROVENANCE_LEDGER.md mirrors
+        description: >-
+          Enforces that any modification to root PROVENANCE_LEDGER.md
+          immediately cascades to 03_VAULT, docs, and 03_VAULT/training/configs
+          with updated cryptographic hash receipts and defense grid sync status.
+        entry: python scripts/sync_provenance.py
+        language: system
+        pass_filenames: false
+        files: ^PROVENANCE_LEDGER\.md$
+

@@ -17,6 +17,26 @@ from agora.cloud_orchestrator_shim.long_term_cloudbrain import (
 )
 from pydantic import BaseModel, Field
 
+try:
+    from control_plane.infra.mission_templates import (
+        CANONICAL_MISSION_TEMPLATES,
+        get_mission_template,
+        calculate_northstar_scoring,
+        calculate_blueprint_scoring,
+    )
+except ImportError:
+    import sys
+    from pathlib import Path
+    _repo_root = Path(__file__).resolve().parent.parent.parent
+    if str(_repo_root) not in sys.path:
+        sys.path.insert(0, str(_repo_root))
+    from control_plane.infra.mission_templates import (
+        CANONICAL_MISSION_TEMPLATES,
+        get_mission_template,
+        calculate_northstar_scoring,
+        calculate_blueprint_scoring,
+    )
+
 IMAGE = (
     modal.Image.debian_slim(python_version="3.13")
     .pip_install(
@@ -89,6 +109,7 @@ class NorthstarRequest(BaseModel):
     require_memory: bool = True
     multilogin_enabled: bool = True
     browser_isolation: BrowserIsolationMode = BrowserIsolationMode.TEAM
+    template: str | None = None
 
 
 class NorthstarResponse(BaseModel):
@@ -107,6 +128,9 @@ class NorthstarResponse(BaseModel):
     brief: str
     command_recommendations: list[str]
     production_ready: dict[str, bool]
+    template: str | None = None
+    deliverables: list[str] = Field(default_factory=list)
+    scoring: dict[str, Any] = Field(default_factory=dict)
 
 
 class DevelopmentBlueprintRequest(BaseModel):
@@ -117,6 +141,7 @@ class DevelopmentBlueprintRequest(BaseModel):
     horizon_days: int = 30
     prioritize_local_first: bool = True
     multilogin_enabled: bool = True
+    template: str | None = None
 
 
 class DevelopmentBlueprintResponse(BaseModel):
@@ -133,6 +158,8 @@ class DevelopmentBlueprintResponse(BaseModel):
     efficiency_recommendations: list[str]
     resource_profile: dict[str, Any]
     production_ready: dict[str, bool]
+    template: str | None = None
+    scoring: dict[str, Any] = Field(default_factory=dict)
 
 
 class PreciseModeRequest(BaseModel):
@@ -725,14 +752,56 @@ def run_research_agency(payload: dict[str, Any] | ResearchAgencyRequest) -> dict
 
 def run_northstar(payload: dict[str, Any] | NorthstarRequest) -> dict[str, Any]:
     request = _coerce_northstar_request(payload)
+
+    # Template resolution
+    tmpl = None
+    if request.template:
+        tmpl = get_mission_template(request.template)
+        if tmpl:
+            updates: dict[str, Any] = {}
+            if isinstance(payload, dict):
+                if "aspect" not in payload:
+                    updates["aspect"] = NorthstarAspect(tmpl.aspect)
+                if "cartridge" not in payload:
+                    updates["cartridge"] = tmpl.cartridge
+                if "compute_tier" not in payload:
+                    updates["compute_tier"] = ResearchComputeTier(tmpl.compute_tier)
+                if "browser_isolation" not in payload:
+                    updates["browser_isolation"] = BrowserIsolationMode(tmpl.browser_isolation)
+            if updates:
+                request = request.model_copy(update=updates)
+
     if request.cartridge not in CARTRIDGE_TEAMS:
         request = request.model_copy(
             update={"cartridge": ASPECT_CARTRIDGE_DEFAULTS[request.aspect]}
         )
 
     team = CARTRIDGE_TEAMS[request.cartridge]
-    assigned_knights = team["knights"][: TIER_PROFILES[request.compute_tier]["parallelism"]]
+    parallelism = TIER_PROFILES[request.compute_tier]["parallelism"]
+    if tmpl and tmpl.recommended_knights:
+        assigned_knights = tmpl.recommended_knights[:parallelism]
+    else:
+        assigned_knights = team["knights"][:parallelism]
+
+    chimera_rounds = tmpl.chimera_rounds if (tmpl and tmpl.chimera_rounds) else CHIMERA_ROUNDS
+    deliverables = tmpl.deliverables if tmpl else [
+        "Strategic Brief",
+        "Source Citation Matrix",
+        "Execution Track DAG",
+    ]
+
     memories = pull_long_term_memory(request.agent_id) if request.require_memory else []
+    mission_tracks = _northstar_tracks(request)
+
+    scoring = calculate_northstar_scoring(
+        compute_tier=request.compute_tier.value,
+        aspect=request.aspect.value,
+        memory_count=len(memories),
+        browser_isolation=request.browser_isolation.value,
+        multilogin_enabled=request.multilogin_enabled,
+        assigned_knights=assigned_knights,
+        mission_tracks=mission_tracks,
+    ).to_dict()
 
     response = NorthstarResponse(
         objective=request.objective,
@@ -742,9 +811,9 @@ def run_northstar(payload: dict[str, Any] | NorthstarRequest) -> dict[str, Any]:
         compute_tier=request.compute_tier,
         command_surface="Camelot-OS cloudbrain northstar",
         assigned_knights=assigned_knights,
-        chimera_rounds=CHIMERA_ROUNDS,
+        chimera_rounds=chimera_rounds,
         operator_profile=_operator_profile(request),
-        mission_tracks=_northstar_tracks(request),
+        mission_tracks=mission_tracks,
         memory_count=len(memories),
         brief=_northstar_brief(request, len(memories), assigned_knights),
         command_recommendations=[
@@ -761,6 +830,9 @@ def run_northstar(payload: dict[str, Any] | NorthstarRequest) -> dict[str, Any]:
             "modal_endpoint_ready": True,
             "cli_surface_ready": True,
         },
+        template=request.template,
+        deliverables=deliverables,
+        scoring=scoring,
     )
     return response.model_dump(mode="json")
 
@@ -770,6 +842,22 @@ def run_development_blueprint(
 ) -> dict[str, Any]:
     request = _coerce_blueprint_request(payload)
     tier_profile = TIER_PROFILES[request.compute_tier]
+    tmpl = get_mission_template(request.template) if request.template else None
+
+    principles = _blueprint_principles(request)
+    if tmpl and tmpl.description:
+        principles.insert(0, f"Template ({tmpl.title}): {tmpl.description}")
+
+    phases = _blueprint_phases(request)
+    scoring = calculate_blueprint_scoring(
+        compute_tier=request.compute_tier.value,
+        budget_mode=request.budget_mode,
+        team_size=request.team_size,
+        horizon_days=request.horizon_days,
+        prioritize_local_first=request.prioritize_local_first,
+        execution_phases=phases,
+    ).to_dict()
+
     response = DevelopmentBlueprintResponse(
         objective=request.objective,
         compute_tier=request.compute_tier,
@@ -781,9 +869,9 @@ def run_development_blueprint(
             f"use {request.compute_tier.value} as the default planning tier, and limit concurrent operator "
             f"lanes to what a {request.team_size}-person team can actually maintain."
         ),
-        principles=_blueprint_principles(request),
+        principles=principles,
         architecture_stack=_blueprint_stack(request),
-        execution_phases=_blueprint_phases(request),
+        execution_phases=phases,
         efficiency_recommendations=[
             "Use kinetic tier for routine workflows; escalate to hybrid only for synthesis-heavy tasks.",
             "Treat apex as an operator-invoked review mode, not the default runtime tier.",
@@ -805,6 +893,8 @@ def run_development_blueprint(
             "budget_guardrails": True,
             "operator_isolation": request.multilogin_enabled,
         },
+        template=request.template,
+        scoring=scoring,
     )
     return response.model_dump(mode="json")
 

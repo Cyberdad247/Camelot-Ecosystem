@@ -18,6 +18,8 @@ permissions:
 env:
   PYTHON_VERSION: "3.13"
   NODE_VERSION: "20"
+  # Prevent the iron gate HITL prompt from blocking automated CI runs.
+  CAMELOT_NON_INTERACTIVE: "true"
 
 jobs:
   # ── Detect which subsystems changed ──────────────────────────────

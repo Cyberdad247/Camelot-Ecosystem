@@ -33,6 +33,12 @@ afterAll(async () => {
 });
 
 describe('Bifrost WebSocket gateway', () => {
+  it('rejects anonymous mesh telemetry requests', async () => {
+    const response = await fetch(`http://127.0.0.1:${(server.address() as AddressInfo).port}/api/mesh/nodes`);
+
+    expect(response.status).toBe(503);
+  });
+
   it('transmits a STATE_UPDATE with valid metrics on connect', async () => {
     const ws = new WebSocket(url);
 

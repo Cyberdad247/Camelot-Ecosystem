@@ -2,7 +2,12 @@
 
 'use client';
 
-import { OperatorTaskSnapshotSchema, type OperatorTaskSnapshot } from './schemas';
+import {
+  OperatorTaskSnapshotSchema,
+  EvidenceEnvelopeSchema,
+  type OperatorTaskSnapshot,
+  type EvidenceEnvelope,
+} from './schemas';
 
 const BFF_BASE = process.env.NEXT_PUBLIC_BIFROST_HTTP_URL ?? 'http://localhost:3001';
 
@@ -13,6 +18,7 @@ const BFF_BASE = process.env.NEXT_PUBLIC_BIFROST_HTTP_URL ?? 'http://localhost:3
 export function subscribe(
   taskId: string,
   onSnapshot: (s: OperatorTaskSnapshot) => void,
+  onEvidence?: (e: EvidenceEnvelope) => void,
 ): () => void {
   let closed = false;
   let es: EventSource | null = null;
@@ -28,6 +34,8 @@ export function subscribe(
         const msg = JSON.parse(event.data) as { type?: string; payload?: unknown };
         if (msg.type === 'snapshot') {
           onSnapshot(OperatorTaskSnapshotSchema.parse(msg.payload));
+        } else if (msg.type === 'evidence') {
+          onEvidence?.(EvidenceEnvelopeSchema.parse(msg.payload));
         }
       } catch {
         // Ignore malformed frames; never fabricate state (design §18).

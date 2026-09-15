@@ -1,0 +1,21 @@
+[Unit]
+Description=Camelot S26 Audio DSP (Rust WebRTC VAD + Opus)
+PartOf=camelot-s26.slice
+After=network.target
+
+[Service]
+Slice=camelot-s26.slice
+Type=simple
+ExecStart=/usr/local/bin/camelot-audio-dsp
+Restart=always
+RestartSec=2s
+MemoryHigh=110M
+MemoryMax=128M
+CPUQuota=15%
+ProtectSystem=strict
+ProtectHome=read-only
+NoNewPrivileges=true
+PrivateNetwork=true
+
+[Install]
+WantedBy=multi-user.target

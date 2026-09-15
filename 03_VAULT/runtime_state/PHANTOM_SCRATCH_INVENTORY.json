@@ -1,0 +1,126 @@
+{
+  "timestamp": "2026-09-13T04:44:44.072745+00:00",
+  "total_phantom_scratch_nodes": 17,
+  "policy": "ISOLATE_AND_QUARANTINE_FOR_EPHEMERAL_SWARM",
+  "nodes": [
+    {
+      "id": "5a032241-f2b9-45dd-be84-2140c82a8143",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "e68c8e7b-ed60-4464-8ce8-536cd0002205",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "3937314d-7844-45bb-bbc2-300f0ec3d76b",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "938b6aa9-e577-423b-9437-cd31f8f676b8",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "b810f484-7abf-47f3-acb0-1fdcd47076e5",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "6c552186-e313-4cb6-baa2-251fe9d6a42a",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "7d720a63-19df-4dc6-86f1-e5db52909187",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "267bf1d4-320c-4f78-a77e-3109a9de8c49",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "baf72ef4-9a44-4cfc-a754-37801176ae0f",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "e1d3220b-fa7c-4e22-8d80-f6a4ecfde1c5",
+      "title": "Untitled notebook",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "3f7c67f7-c376-417a-a557-6d7b34319705",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "71c1a76e-ced3-423f-82a9-8492439c6131",
+      "title": "Untitled notebook",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "efa29fc9-a128-4726-ae28-686a30fd4046",
+      "title": "Untitled notebook",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "8fda1443-b934-467f-9170-62935a8011a8",
+      "title": "Untitled notebook",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "511d48cf-1f83-4d01-8669-4713a2d0f6b1",
+      "title": "Untitled notebook",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "f2ad7713-257e-4273-acbe-489c4738fd85",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    },
+    {
+      "id": "d7f71718-d48a-43b5-820b-b2826995c6d4",
+      "title": "<EMPTY_TITLE>",
+      "sources": 0,
+      "designation": "EPHEMERAL_SWARM_SCRATCHPAD",
+      "quarantine_status": "EXCLUDED_FROM_ROUTINE_FLEET_SYNC"
+    }
+  ]
+}

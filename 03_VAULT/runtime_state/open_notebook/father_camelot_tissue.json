@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "FATHER_CAMELOT",
+    "cloudbrain_uuid": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
+    "spark_id": "0x392991310ADE4F488AD4A68878A6D3D9",
+    "role": "Ancestral Compass, Moral & Ethical Governance Ledger",
+    "model": "Sovereign Substrate",
+    "summoning_rune": "Omega_FatherCamelot",
+    "vfs_mount": "vfs/notebooks/39299131-0ade-4f48-8ad4-a68878a6d3d9/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

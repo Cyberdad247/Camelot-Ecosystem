@@ -1,0 +1,14 @@
+{
+  "snapshot_id": "excalibur_cicd_20260831_212719",
+  "version_tag": "v1000.54-EXCALIBUR-A",
+  "timestamp_utc": "2026-08-31T21:27:19.805345+00:00Z",
+  "operator": "King_Arthur_Vizion",
+  "target_node": "vashawns-s26-ultra (100.106.246.126)",
+  "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "sha256": "b5d184dca3cbcf12c6eec15d9c72ffa8d0654e51c5d3164feb787ce7ffe738f8",
+  "surfaces": [
+    "docs/architecture/EXCALIBUR_ENTIREMAP.md",
+    "docs/SEPTEM_REGNA/L7_ETHEREAL/EXCALIBUR_ENTIREMAP.md"
+  ],
+  "status": "RATIFIED_IMMUTABLE"
+}

@@ -1,0 +1,37 @@
+﻿{
+  "schema": "camelot-os.system/schema/crawlers/v1",
+  "blueprint": "NATIVE_RUST_WASM_CRAWLER_SUBSYSTEM",
+  "origin_batch": [
+    "scrapy",
+    "scrapy-redis",
+    "scrapydweb",
+    "scrapyd",
+    "scrapy-proxies"
+  ],
+  "governance": {
+    "rule_7_hotpath": "100% native Rust / WASM; 0% Python in scraping hot-path",
+    "security": "Wasmtime micro-sandboxing for untrusted spiders",
+    "egress_control": "Egress Gateway proxy rotation with domain allowlisting",
+    "swarm_isolation": "Bio-Kinetic Swarm receives structured Graph Memory events only (Zero raw HTTP egress)"
+  },
+  "subsystems": {
+    "crawler_core": {
+      "crate": "camelot-crawler",
+      "runtime": "Rust / tokio / reqwest / scraper",
+      "mount": "/vfs/swarms/crawlers/native_core"
+    },
+    "queue_coordination": {
+      "channel": "AgentBus (crawl_queue topic)",
+      "dedup": "Postgres / Graph Memory SHA-256 fingerprinting (Zero Redis)"
+    },
+    "spider_runtime": {
+      "engine": "Wasmtime WASI 0.2",
+      "isolation": "Capability-lease constrained with network via Bifrost proxy"
+    },
+    "telemetry_ui": {
+      "surface": "Excalibur PWA Cartridge (crawler_console)",
+      "protocol": "Bifrost WebSocket :3001"
+    }
+  },
+  "seal": "⚜️_SOVEREIGN_TRUTH"
+}

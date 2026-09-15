@@ -1,0 +1,50 @@
+{
+  "schema": "camelot-vfs-manifest/2",
+  "knight_id": "ANYA_OMEGA",
+  "spark_id": "0x32D389065AE84ECCB77E705D12C89F4A",
+  "title": "Anya Omega Sovereign Scaffolding (Singularity Titan Grade)",
+  "updated_at": "2026-09-14T06:12:38.657841+00:00",
+  "files": {
+    "soul.md": {
+      "sha256": "a621d9528db86b7f2d21180950278f3529c87763128a47eb4f54293962294e42",
+      "bytes": 2569,
+      "updated_at": "2026-09-14T06:12:38.449173+00:00"
+    },
+    "spark.md": {
+      "sha256": "9495782690f6289dfc7fa7a6797abfba4dd3caf6ba5d5e991d1a37aa1017a577",
+      "bytes": 1984,
+      "updated_at": "2026-09-14T06:12:38.485266+00:00"
+    },
+    "phial-engine.md": {
+      "sha256": "2a562bae31e628174b117214353a1d7d737b2c0cae1855b180d60ec8b5d2702d",
+      "bytes": 3953,
+      "updated_at": "2026-09-14T06:12:38.510542+00:00"
+    },
+    "skillgraph5.md": {
+      "sha256": "f4bd7376d6e44b3aff5d2dd9faa6d33b0a6815ee29dbb432f76c47ce44cd38d2",
+      "bytes": 2931,
+      "updated_at": "2026-09-14T06:12:38.552832+00:00"
+    },
+    "prompt_frameworks.md": {
+      "sha256": "71c15f0744d094f66a366f34efaa0c2b41d172eaf3c583b0519e00ecc6eb3386",
+      "bytes": 3842,
+      "updated_at": "2026-09-14T06:12:38.577880+00:00"
+    },
+    "scaling_architecture.md": {
+      "sha256": "f98a5b1d735e75cee80946e9029d305e90ebf6ba217f2343c4849d929b404f37",
+      "bytes": 4069,
+      "updated_at": "2026-09-14T06:12:38.600182+00:00"
+    },
+    "system_instruction.md": {
+      "sha256": "b5c7fdea55def6e0333cbc316ebf586d7fd39d275fe945ad8a226dfe3fd1eb84",
+      "bytes": 4545,
+      "updated_at": "2026-09-14T06:12:38.633258+00:00"
+    },
+    "Master_Compendium.md": {
+      "sha256": "97dd31c0842568a8486d360116ce74dba3011262a2d6b772d4d63b0ee234232d",
+      "bytes": 6201,
+      "updated_at": "2026-09-14T06:12:38.657816+00:00"
+    }
+  },
+  "total_files": 8
+}

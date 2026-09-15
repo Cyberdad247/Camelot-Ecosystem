@@ -234,7 +234,7 @@ class ControlPlane:
         intent = task.intent.lower()
         allow_sensitive_remote = "allow_remote_sensitive" in task.constraints
 
-        if request.service is CloudServiceName.CLOUDBRAIN_STATUS:
+        if request.service in {CloudServiceName.CLOUDBRAIN_STATUS, CloudServiceName.HEALTH_ROLLUP}:
             return None
 
         if request.service is CloudServiceName.CLOUDBRAIN_MEMORY and privacy >= 0.95:
@@ -330,6 +330,7 @@ class ControlPlane:
             CloudServiceName.NOTEBOOKLM_SOURCES_LIST,
             CloudServiceName.NOTEBOOKLM_SOURCES_ADD,
             CloudServiceName.NOTEBOOKLM_SOURCES_DELETE,
+            CloudServiceName.HEALTH_ROLLUP,
         }
         if service in cloud_brain_services:
             return "cloud_brain"
@@ -508,53 +509,6 @@ class ControlPlane:
         Block if untrusted source data could reach a shell execution sink."""
         dangerous_intents = {"exec", "shell", "eval", "subprocess", "os.system"}
         return any(d in task.intent.lower() for d in dangerous_intents)
-
-    # Knight dispatch routing table
-    KNIGHT_ROUTES: dict[str, str] = {
-        "orchestration": "sir_boris",
-        "architecture": "sir_boris",
-        "colony": "sir_boris",
-        "critique": "sir_boris",
-        "vocal": "sir_boris",
-        "cognitive": "sir_alex",
-        "reasoning": "sir_alex",
-        "critical": "sir_alex",
-        "decision": "sir_alex",
-        "bridge": "sir_link",
-        "terminal": "sir_link",
-        "handoff": "sir_link",
-        "ui": "sir_link",
-        "technical": "sir_forge",
-        "scaffold": "sir_forge",
-        "code_gen": "sir_forge",
-        "security_review": "sir_sentinel",
-        "audit": "sir_sentinel",
-        "financial": "sir_valerian",
-        "roi": "sir_valerian",
-        # Omega₃ — Cloud Brain (notebooklm-py) dispatch
-        "synthesize": "merlin",
-        "oracle": "merlin",
-        "ask_brain": "merlin",
-        "notebook_query": "merlin",
-        "notebooklm_health": "merlin",
-        "notebooklm_sync": "merlin",
-        # Omega₃.2 — LADY_APIS research
-        "research": "lady_apis",
-        "deep_dive": "lady_apis",
-        "forage": "lady_apis",
-        # Omega₃.3 — SIR_SONUS studio
-        "studio": "sir_sonus",
-        "podcast": "sir_sonus",
-        "generate_audio": "sir_sonus",
-        "generate_video": "sir_sonus",
-        "infographic": "sir_sonus",
-        "mind_map": "sir_sonus",
-        # Omega₃.4 — MASON sources
-        "sources": "mason",
-        "add_source": "mason",
-        "list_sources": "mason",
-        "delete_source": "mason",
-    }
 
     def route_to_knight(self, task: TaskPayload) -> RouteDecision:
         """Route task to appropriate knight via MFOE Soul Equation.
@@ -762,6 +716,9 @@ class ControlPlane:
                 payload=payload,
             )
 
+        if any(keyword in intent for keyword in {"health rollup", "unified health", "system health", "cloudbrain health", "ecosystem health"}) or intent == "health":
+            return CloudServiceRequest(service=CloudServiceName.HEALTH_ROLLUP)
+
         if any(keyword in intent for keyword in {"cloudbrain", "notebook", "memory status"}):
             return CloudServiceRequest(service=CloudServiceName.CLOUDBRAIN_STATUS)
 
@@ -836,6 +793,7 @@ class ControlPlane:
                     ),
                     "multilogin_enabled": bool(task.parameters.get("multilogin_enabled", True)),
                     "browser_isolation": str(task.parameters.get("browser_isolation", "team")),
+                    "template": task.parameters.get("template"),
                 },
             )
 
@@ -854,6 +812,7 @@ class ControlPlane:
                     "horizon_days": int(task.parameters.get("horizon_days", 30)),
                     "prioritize_local_first": bool(task.parameters.get("prioritize_local_first", True)),
                     "multilogin_enabled": bool(task.parameters.get("multilogin_enabled", True)),
+                    "template": task.parameters.get("template"),
                 },
             )
 

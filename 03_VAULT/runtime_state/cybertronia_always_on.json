@@ -1,0 +1,79 @@
+{
+  "node": "cybertronia",
+  "tailscale_ip": "100.118.224.52",
+  "status": "ONLINE",
+  "mode": "ALWAYS_ON_MASTER",
+  "timestamp": "2026-09-04T22:23:32.193923+00:00",
+  "healthy_daemons": "4/6",
+  "memory": {
+    "load_pct": 94,
+    "total_phys_mb": 7895,
+    "avail_phys_mb": 422,
+    "total_page_mb": 16087,
+    "avail_page_mb": 543,
+    "pressure_alarm": false
+  },
+  "daemons": [
+    {
+      "name": "go_router",
+      "port": 8077,
+      "description": "Go SSE command router & Tailscale Funnel ingress",
+      "live": true,
+      "proc_alive": true,
+      "pid": 26536,
+      "restart_count": 1,
+      "last_restart": 1788560607.54477
+    },
+    {
+      "name": "bifrost_sidecar",
+      "port": 8011,
+      "description": "Bifrost Go Sidecar mTLS bridge",
+      "live": true,
+      "proc_alive": false,
+      "pid": null,
+      "restart_count": 0,
+      "last_restart": null
+    },
+    {
+      "name": "cognitive_service",
+      "port": 8092,
+      "description": "MemCastle / Graphify / WorldTree cognitive service",
+      "live": false,
+      "proc_alive": true,
+      "pid": 3576,
+      "restart_count": 1,
+      "last_restart": 1788560609.129039
+    },
+    {
+      "name": "opencodex",
+      "port": 10100,
+      "description": "OpenCodex universal OpenAI Responses proxy",
+      "live": false,
+      "proc_alive": true,
+      "pid": 25456,
+      "restart_count": 1,
+      "last_restart": 1788560611.2859962
+    },
+    {
+      "name": "omnivoice",
+      "port": 3002,
+      "description": "OmniVoice WebSocket & Voice switchboard",
+      "live": true,
+      "proc_alive": false,
+      "pid": null,
+      "restart_count": 0,
+      "last_restart": null
+    },
+    {
+      "name": "kitten_tts",
+      "port": 8300,
+      "description": "Kitten TTS low-latency audio stream",
+      "live": true,
+      "proc_alive": false,
+      "pid": null,
+      "restart_count": 0,
+      "last_restart": null
+    }
+  ],
+  "version": "1.0.0"
+}

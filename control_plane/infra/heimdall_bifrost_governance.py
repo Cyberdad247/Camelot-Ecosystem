@@ -82,6 +82,112 @@ HEIMDALL_NANO_KNIGHTS: tuple[dict[str, Any], ...] = (
         "mission": "Gate Bifrost→Appwrite egress against zero-trust policy; rotate APPWRITE_API_KEY per `appwrite_bootstrap.sh --rotate`.",
         "tier": "S2",
     },
+    # Hermes Prime always-on VPS bridge co-pilot & MGV synthesis nano-knight
+    {
+        "id": "heimdall.hermes_mesh",
+        "callsign": "Hermes Mesh Sentinel",
+        "channel": "hermes.mesh_synthesis",
+        "mission": "Always-on VPS Hub co-pilot, MGV research loop, VFS forge, and CloudBrain sync across Bifrost.",
+        "tier": "S4",
+    },
+)
+
+BIFROST_KNIGHTS_SWARM: tuple[dict[str, Any], ...] = (
+    {
+        "id": "SIR_HEIMDALL",
+        "role": "Bifrost Guardian & Boundary Sentinel",
+        "vfs": "vfs://sir_heimdall/",
+        "status": "ALWAYS_ON_HUB",
+    },
+    {
+        "id": "HERMES_PRIME",
+        "role": "Always-on VPS Co-Pilot & MGV Synthesis Engine",
+        "vfs": "vfs://hermes_prime/",
+        "status": "ALWAYS_ON_HUB",
+    },
+    {
+        "id": "SIR_LANCELOT",
+        "role": "Kinetic Edge & Frontline Defense",
+        "vfs": "vfs://sir_lancelot/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_GALAHAD",
+        "role": "Verification, Chivalric Purity & Z3 Formal Gate",
+        "vfs": "vfs://sir_galahad/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_SENTINEL",
+        "role": "AgentArmor, Zero-Trust Leases & Security Shield",
+        "vfs": "vfs://sir_sentinel/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "LADY_MNEMOSYNE",
+        "role": "Living Memory Guardian & World Tree Spine",
+        "vfs": "vfs://lady_mnemosyne/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_HELIO",
+        "role": "Voice OS & Phonetic Mesh Dispatch",
+        "vfs": "vfs://sir_helio/",
+        "status": "ACTIVE_ESCORT",
+    },
+)
+
+CANONICAL_MESH_INVENTORY: tuple[dict[str, Any], ...] = (
+    {
+        "id": "cybertronia",
+        "name": "cybertronia",
+        "tailscale_ip": "100.118.224.52",
+        "role": "Primary Windows Orchestrator & Local VFS Factory",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "vashawns_s26_ultra",
+        "name": "vashawns-s26-ultra",
+        "tailscale_ip": "100.106.246.126",
+        "role": "Excalibur Command Center (Kinetic Mobile Sentinel & Cockpit / Android 16)",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "fothers_camelot",
+        "name": "fothers-camelot",
+        "tailscale_ip": "100.121.48.50",
+        "role": "Windows Sovereign Secondary Node & Failover Rig",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "lakesha",
+        "name": "lakesha",
+        "tailscale_ip": "100.100.155.55",
+        "role": "Lakisha Voice OS Host & Secondary Surface",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "camelot_relay_modal",
+        "name": "camelot-relay-modal",
+        "tailscale_ip": "100.84.98.39",
+        "role": "Linux Cloud Relay Node & Modal Inference Bridge",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "kba_services",
+        "name": "kba-services",
+        "tailscale_ip": "100.71.218.75",
+        "role": "Linux Remote Services Node & VPS KVM563 Bridge (162.35.107.134)",
+        "status": "ACTIVE",
+    },
+    {
+        "id": "motorola_moto_g_power",
+        "name": "motorola-moto-g-power-5g---2024",
+        "tailscale_ip": "100.89.129.105",
+        "role": "Auxiliary Kinetic Mobile Sentinel & Backup Telemetry Relay",
+        "status": "ACTIVE",
+        "governing_knight": "SIR_HEIMDALL",
+    },
 )
 
 
@@ -145,6 +251,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
         heimdall_terminal = None
 
     nano_knights = [dict(item) for item in HEIMDALL_NANO_KNIGHTS]
+    bifrost_knights = [dict(item) for item in BIFROST_KNIGHTS_SWARM]
     ready = heimdall_terminal is not None and not missing_components and bool(nano_knights)
     status = "GOVERNING" if ready else "ATTENTION_REQUIRED"
     return {
@@ -152,7 +259,25 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
         "status": status,
         "ready": ready,
         "owner": "sir_heimdall",
+        "co_governor": "HERMES_PRIME",
         "governed_surface": "bifrost_bridge",
+        "vps_hub": {
+            "host_server": "KVM563",
+            "vm_id": "vps3573819",
+            "public_ip": "162.35.107.134",
+            "tailscale_ip": "100.71.218.75",
+            "role": "Camelot-OS Hub & Sovereign Control Plane",
+            "always_on_agents": ["HERMES_PRIME", "SIR_HEIMDALL"],
+        },
+        "mesh_inventory": {
+            "account": "Cyberdad247@github",
+            "node_count": len(CANONICAL_MESH_INVENTORY),
+            "nodes": [dict(node) for node in CANONICAL_MESH_INVENTORY],
+            "sentinel_mobile_nodes": [
+                {"name": "vashawns-s26-ultra", "ip": "100.106.246.126", "tier": "PRIMARY_COCKPIT"},
+                {"name": "motorola-moto-g-power-5g---2024", "ip": "100.89.129.105", "tier": "AUXILIARY_SENTINEL"},
+            ],
+        },
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "terminal": {
             "present": heimdall_terminal is not None,
@@ -172,6 +297,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
             "secret_values_serialized": False,
         },
         "nano_knights": nano_knights,
+        "bifrost_knights_swarm": bifrost_knights,
         "event_routes": {
             item["channel"]: {"nano_knight": item["id"], "callsign": item["callsign"]}
             for item in nano_knights

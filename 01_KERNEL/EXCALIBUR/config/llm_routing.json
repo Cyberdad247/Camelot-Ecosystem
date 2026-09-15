@@ -23,6 +23,17 @@
             ]
         },
         {
+            "id": "cliproxy:default",
+            "role": "high_reasoning_proxy",
+            "max_ctx_tokens": 200000,
+            "cost_weight": 0.2,
+            "use_cases": [
+                "high_reasoning",
+                "swarm_coordination",
+                "repo_analysis"
+            ]
+        },
+        {
             "id": "local:llama-3-8b-instruct",
             "role": "bulk_evals",
             "max_ctx_tokens": 8192,

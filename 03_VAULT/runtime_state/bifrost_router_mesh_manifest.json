@@ -25,11 +25,18 @@
       "camelot_surface": "control_plane/bifrost.py"
     },
     "OmniRoute": {
-      "repo": "https://github.com/Cyberdad247/OmniRoute.git",
-      "head": "b729a8f27364f072c87082e03bb8e122f3d76251",
-      "pushed_at": "2026-07-02T18:33:42Z",
+      "repo": "https://github.com/diegosouzapw/OmniRoute.git",
+      "upstream_author": "diegosouzapw",
+      "capabilities": [
+        "unified_gateway",
+        "350_plus_providers",
+        "1200_plus_models",
+        "rtk_caveman_compression",
+        "quota_aware_fallback",
+        "zero_downtime_failover"
+      ],
       "default_base_url": "http://127.0.0.1:20128/v1",
-      "camelot_surface": "control_plane/omniroute_policies.py"
+      "camelot_surface": "control_plane/dispatch/omniroute_policies.py"
     },
     "BitRouter": {
       "repo": "https://github.com/Cyberdad247/bitrouter.git",
@@ -39,11 +46,17 @@
       "camelot_surface": "control_plane/codex_integration.py"
     },
     "9Router": {
-      "repo": "https://github.com/Cyberdad247/9router.git",
-      "head": "0b3c794075dd2f4148f01fbc9cd561c8d6bbdb4c",
-      "pushed_at": "2026-07-02T07:52:31Z",
+      "repo": "https://github.com/decolua/9router.git",
+      "upstream_author": "decolua",
+      "capabilities": [
+        "rtk_token_saver",
+        "auto_fallback_tier_routing",
+        "multi_account_round_robin",
+        "protocol_translation_openai_claude",
+        "universal_coding_tool_compatibility"
+      ],
       "default_base_url": "http://127.0.0.1:8079/v1",
-      "camelot_surface": "control_plane/codex_integration.py"
+      "camelot_surface": "control_plane/dispatch/nine_router_engine.py"
     },
     "MultivoiceRouter": {
       "repo": "https://github.com/Cyberdad247/Multivoice-router.git",

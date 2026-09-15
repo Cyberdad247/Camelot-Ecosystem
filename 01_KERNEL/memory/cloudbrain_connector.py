@@ -66,7 +66,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "MERLIN_OMEGA":        "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
     "SIR_HELIO":           "56820318-bb91-451f-aac4-4b46424898cf",
     "SIR_SONUS":           "6272aa35-c285-4edc-81bc-2824ab519edf",   # Sovereign_Workspace: SIR SONUS
-    "SIR_CODEX":           "8c656cfa-a189-409e-a72d-07692a47f17e",   # Camelot-OS v.1000
+    "SIR_CODEX":           "05f1985d-e356-45d9-85b8-d101013a90b8",   # Sovereign_Workspace: SIR CODEX (Verified Live)
     # Extended Knights (discovered from live account)
     "SIR_HEIMDALL":        "3205f189-91da-4272-96a9-3641fd642763",
     "SIR_GALAHAD":         "e0110853-14ef-403f-8def-bf3a5123986f",
@@ -77,6 +77,8 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
     "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
     "HERMES_PRIME":        "28f89cb6-5048-4b5d-9e94-376082d24744",   # hermes_prime_vfs_forge (verified 2026-08-10)
+    "HERMES_PRIME_VFS_FORGE": "28f89cb6-5048-4b5d-9e94-376082d24744",# Hermes_prime_vfs_forge CloudBrain Node
+    "HERMES_AGENT_EVOLUTION": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",# The Hermes Agent: Evolution Beyond OpenClaw
     "SIR_LANCELOT":        "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "LADY_GUINEVERE":      "8dca4a86-2bb6-4332-96b6-79899c0a9ccf",
     "SIR_HUGGINGFACE":     "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # HuggingFace Hub & Spaces Conductor (WorldTree Tethered)
@@ -90,41 +92,85 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "FATHER_CAMELOT":      "39299131-0ade-4f48-8ad4-a68878a6d3d9",   # Father's Camelot
     "WORLD_TREE":          "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # World Tree
     "ALPHA_OMEGA":         "2536aefb-937f-4a04-9142-d1a2f029d8a7",   # Camelot-OS Alpha-Omega artifacts
-    "ANTIGRAVITY":         "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Synergizing NotebookLM + AntiGravity
+    "SIR_HELIOS":          "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Synergizing NotebookLM + Sir Helios (formerly AntiGravity)
+    "ANTIGRAVITY":         "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",   # Legacy alias for Sir Helios FastMCP
     "KICKBOX":             "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",   # KickBox Audio
     "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
     "BIO_KINETIC_SWARM":   "93b21c40-10ff-4e89-a212-08f37b1297e1",   # Bio-Kinetic Swarm Node
+    "ANCESTRAL_CHIMERA_RESEARCH_SWARM_PROTOCOL_V400": "ba87d454-9335-4f2f-bf9f-f3845a8c6948", # Ancestral Chimera Research Swarm Protocol v400.0
+    "CHIMERA_RESEARCH_SWARM": "ba87d454-9335-4f2f-bf9f-f3845a8c6948",# Chimera Research Swarm Protocol v400.0 alias
+    "SIR_GIDEON":          "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Sir Gideon: Hyperbolic Chamber, Z3 & Gideon Verdict Gate
+    "INVISIONED_MARKETING":"e6374819-50ce-41cf-b6b3-99924ca6ab90",   # Invisioned Marketing: Agentic OS and Digital Strategy Dashboard (Verified Live)
+    "KNIGHT_STRATEGOS":    "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Knight Strategos Marketing Assimilation Node
+    # Discovered Sovereign Knights (Sovereign_Workspace verified)
+    "SIR_OCTAVIAN":        "0d2af08b-f85b-4dc0-ae3a-5cf5aaf5e08a",   # Sovereign_Workspace: SIR OCTAVIAN
+    "SIR_OPENCLAW":        "f5f2179c-3320-48f1-ace4-4f9bdd71f9b7",   # Sovereign_Workspace: SIR OPENCLAW
+    "SIR_OUROBOROS":       "3e61cfb1-b62d-4e9b-893e-4735d1a55426",   # Sovereign_Workspace: SIR OUROBOROS
+    "SIR_LIBERTE":         "da5f74b8-d948-4c37-b7da-7eec1fa18e5f",   # Sovereign_Workspace: SIR LIBERTE
+    "SIR_ZEROCLAW":        "4b382f7d-f662-4daa-9438-082b025624dc",   # Sovereign_Workspace: SIR ZEROCLAW
+    "SIR_NANOBOT":         "e4fbff10-9241-480e-9d2c-1f9dac50c51a",   # Sovereign_Workspace: SIR NANOBOT
+    "SIR_GAWAIN":          "75c7862e-c0d2-40cb-8b20-ed6dcfadd049",   # Sovereign_Workspace: SIR GAWAIN
+    "SIR_HASHIMOTO":       "71399d4d-fabd-4897-a877-bf7e26cb9e96",   # Sovereign_Workspace: SIR HASHIMOTO
+    "SIR_VALERIAN":        "3d6e1ef4-a37a-4475-8cc1-b62aa6b148fc",   # Sovereign_Workspace: SIR VALERIAN
+    "SIR_VERITAS":         "781ad058-8418-4bbb-8459-73af3ed38184",   # Sovereign_Workspace: SIR VERITAS
+    "SIR_PROXY":           "4255d63e-b881-4efd-bd1d-dbbd649f96a4",   # Sovereign_Workspace: SIR PROXY
+    "SIR_AURELIUS":        "d46ebc2f-8681-4919-8815-4e3f41f37ad7",   # Sovereign_Workspace: SIR AURELIUS
+    "SIR_VAELEN":          "76769b00-864b-409f-89ab-8eef68d98d50",   # Sovereign_Workspace: SIR VAELEN
+    "SIR_SCAVENGER":       "104a6e2f-892a-42a7-b9ea-3b92f95abedd",   # Sovereign_Workspace: SIR SCAVENGER
+    "LADY_SPARKLE":        "b6ec57ed-e232-4b9b-9bcf-338b70bc5365",   # Sovereign_Workspace: LADY SPARKLE
+    "SIR_VISAGE":          "e41c0c29-a7ba-4bd8-94df-30eb9224f7f8",   # Sovereign_Workspace: SIR VISAGE
+    "SIR_MARCUS":          "1c55963f-4a02-4c26-92ed-e087ecfdf8b8",   # Sovereign_Workspace: SIR MARCUS
+    "SIR_KAY":             "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",   # Sovereign_Workspace: SIR KAY (Kai Richter: Agentic Architect)
+    "SIR_LUCAS":           "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # WorldTree-tethered: SIR LUCAS (Lukas Müller: Telemetry & Visualization)
+    "LADY_LAKISHA":        "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # WorldTree-tethered: LADY LAKISHA (Voice OS Sentinel & Intercom Matrix)
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
-    "SIR_BORIS":           ["architecture", "crucible", "design", "review"],
-    "SIR_ALEX":            ["planning", "dag", "orchestration", "tasks"],
-    "SIR_FORGE":           ["kinetic", "build", "execution", "code"],
-    "SIR_SENTINEL":        ["security", "audit", "iron_gate", "guard"],
+    "SIR_LUCAS":           ["telemetry", "visualization", "hud", "observability", "dashboard", "verified_state", "evidence_class", "truth_surface"],
+    "LADY_LAKISHA":        ["voice", "tts", "audio", "realtime", "webrtc", "intercom", "vad", "luxury_brutalism"],
+    "SIR_KAY":             ["kinetic_engineering", "agentic_architect", "hotpath_purity", "zero_regression", "sprint_governance", "dkesi"],
+    "SIR_BORIS":           ["architecture", "crucible", "design", "review", "pwa", "desktop_grid", "vkg_hud"],
+    "SIR_ALEX":            ["planning", "dag", "orchestration", "tasks", "pipeline", "execution_dag"],
+    "SIR_FORGE":           ["kinetic", "build", "execution", "code", "pwa", "compile", "desktop_grid"],
+    "SIR_SENTINEL":        ["security", "audit", "iron_gate", "guard", "bio_auth", "ed25519", "cgroups"],
     "SIR_DEBUG":           ["debug", "heal", "piv", "repair"],
     "SIR_GHOST":           ["privacy", "secrets", "air_gap", "scan"],
-    "LADY_APIS":           ["research", "bashr", "foraging", "context", "bio_swarm", "eagle_audit"],
-    "MERLIN_OMEGA":        ["reasoning", "got", "tot", "deep_think", "math"],
-    "SIR_HELIO":           ["voice", "tts", "audio", "realtime"],
-    "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic"],
-    "SIR_CODEX":           ["kinetic", "rapid", "prototype", "openai"],
-    "HERMES_PRIME":        ["research", "synthesis", "vfs", "forage", "rnd", "multi_agent"],
-    "LADY_MNEMOSYNE":      ["memory", "vfs", "mnemosyne", "sweep", "brief"],
+    "LADY_APIS":           ["research", "bashr", "foraging", "context", "bio_swarm", "horde", "batch_creation", "chimera_v400", "ancestral_chimera", "nullclaw", "camouflage"],
+    "BIO_KINETIC_SWARM":   ["swarm", "horde", "bio_kinetic", "cellular_diode", "nullclaw", "chimera_v400", "formica", "beaver", "gorilla", "arachne"],
+    "ANCESTRAL_CHIMERA_RESEARCH_SWARM_PROTOCOL_V400": ["chimera", "ancestral", "v400", "research", "swarm", "horde", "piv", "hydra_cascade", "bio_kinetic", "lady_apis"],
+    "MERLIN_OMEGA":        ["reasoning", "got", "tot", "deep_think", "math", "z3", "formal_verification"],
+    "SIR_HELIO":           ["voice", "tts", "audio", "realtime", "alfred", "vad", "webrtc"],
+    "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic", "waveform", "push_to_talk"],
+    "SIR_CODEX":           ["kinetic", "rapid", "prototype", "openai", "backend", "go", "rust", "desktop_grid", "pwa"],
+    "HERMES_PRIME":        ["research", "synthesis", "vfs", "forage", "rnd", "multi_agent", "hermes_agent", "ouroboros", "vps_hub"],
+    "HERMES_PRIME_VFS_FORGE": ["vfs", "forge", "soul", "harness", "research_tissue", "mgv_loop"],
+    "HERMES_AGENT_EVOLUTION": ["evolution", "openclaw_transcendence", "nous_research", "gateway", "autonomous_agent"],
+    "LADY_MNEMOSYNE":      ["memory", "vfs", "mnemosyne", "sweep", "brief", "open_viking", "crdt", "data_layer"],
     "ANYA_QUANTUM_MANTRA": ["glyph", "quantum", "vfs", "token", "compression"],
-    "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system"],
+    "CAMELOT_V1000":       ["sovereign", "os", "broadcast", "excalibur", "system", "twin_brain"],
     "BIO_KINETIC_SWARM":   ["bio_kinetic", "cellular_swarm", "tissue_isolation", "neural_pulse", "mitosis", "lady_apis"],
-    "SIR_HEIMDALL":        ["bifrost", "guardian", "mTLS", "boundary"],
-    "SIR_GALAHAD":         ["chivalry", "purity", "verification", "truth"],
+    "SIR_HEIMDALL":        ["bifrost", "guardian", "mTLS", "boundary", "mesh", "nodes", "sse", "twin_brain"],
+    "SIR_GALAHAD":         ["chivalry", "purity", "verification", "truth", "ed25519", "gideon"],
     "ARTHUR_OMEGA":        ["sovereign", "king", "governance", "authority"],
-    "SIR_STITCH":          ["kinematics", "micro_interactions", "ui", "patch"],
+    "SIR_STITCH":          ["kinematics", "micro_interactions", "ui", "patch", "desktop_grid", "components"],
     "SIR_ALCHEMIST":       ["transmutation", "compression", "quantization", "optimization"],
-    "SIR_RUSTCLAW":        ["rust", "image_pipeline", "kinetic", "aegis"],
+    "SIR_RUSTCLAW":        ["rust", "image_pipeline", "kinetic", "aegis", "vfs_api"],
     "ANYA_OMEGA":          ["helm", "gate", "quality", "first_law", "router"],
     "SIR_HERMES":          ["graphql", "webhooks", "courier", "dispatch"],
     "SIR_LANCELOT":        ["champion", "kinetic_edge", "frontline", "defense"],
-    "LADY_GUINEVERE":      ["harmony", "aesthetic", "interface", "design"],
+    "LADY_GUINEVERE":      ["harmony", "aesthetic", "interface", "design", "obsidian_gold_purple", "tokens", "luxury_minimalist"],
     "SIR_HUGGINGFACE":     ["hub", "spaces", "models", "embeddings"],
-    "SIR_MNEMO":           ["memory", "dual_tier", "sync", "indexing"],
+    "SIR_MNEMO":           ["memory", "dual_tier", "sync", "indexing", "crdt", "vfs_traversal"],
+    "INSPIRA":             ["ide", "developer", "spatial", "workstation", "hive_ide", "ui", "pwa_shell"],
+    "CAMELOT_MASTER":      ["codex", "construction", "master", "architecture", "system"],
+    "WORLD_TREE":          ["worldtree", "root", "knowledge_graph", "memory", "tether", "vkg_hud", "3d_webgpu", "tactical_map"],
+    "SIR_HELIOS":          ["sir_helios", "antigravity", "cli", "notebooklm", "mcp", "agent", "orchestration", "harness", "cloudbrain"],
+    "ANTIGRAVITY":         ["antigravity", "cli", "notebooklm", "mcp", "agent", "orchestration", "harness"],
+    "KICKBOX":             ["audio", "webrtc", "hud", "vocal", "voice", "kickbox_audio", "wasm_vad", "sound_engine"],
+    "SIR_GIDEON":          ["gideon", "verdict", "risk_matrix", "hyperbolic_chamber", "z3", "audit", "convergence"],
+    "FATHER_CAMELOT":      ["compass", "governance", "ancestral", "moral", "ethics"],
+    "INVISIONED_MARKETING":["marketing", "invisioned", "brand", "aeo", "geo", "seo", "ab_testing", "copywriting", "campaigns", "conversion"],
+    "KNIGHT_STRATEGOS":    ["marketing", "strategy", "assimilation", "skillgraph4", "videneptus", "growth", "advertising"],
 }
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {
@@ -266,7 +312,9 @@ class CloudBrainConnector:
                 if res:
                     return res
                 if self.notebook_id != self.worldtree_home_id:
-                    return _nlm_query("WORLD_TREE", query)
+                    wt_res = _nlm_query("WORLD_TREE", query)
+                    if wt_res:
+                        return wt_res
             except Exception as e:
                 logging.error(f"[SDK] Query failed for {self.knight_id}: {e}")
 
@@ -276,6 +324,21 @@ class CloudBrainConnector:
                 return ws.query(query)
             except Exception as e:
                 logging.error(f"[STUB] Query failed: {e}")
+
+        # Priority 3: Sovereign Zero-Login Fallback (Local Open-Notebook Tissue)
+        if self.open_notebook_path.exists():
+            try:
+                tissues = json.loads(self.open_notebook_path.read_text(encoding="utf-8"))
+                for entry in tissues:
+                    content = entry.get("content", "")
+                    title = entry.get("title", "")
+                    if any(w.lower() in (content + " " + title).lower() for w in query.split()):
+                        return f"[{self.knight_id} Local Open-Notebook]: {title}\n{content}"
+                if tissues:
+                    latest = tissues[0]
+                    return f"[{self.knight_id} Local Open-Notebook Latest]: {latest.get('title')}\n{latest.get('content')}"
+            except Exception as e:
+                logging.warning(f"[LOCAL_FALLBACK] Open-Notebook read failed: {e}")
 
         return None
 
@@ -335,6 +398,7 @@ def route_by_domain(task_keywords: List[str]) -> List[str]:
     Mathematical domain router.
     Φ(task, n) = |intersection(task_keywords, domain_tags[n])| / |domain_tags[n]|
     Returns notebooks sorted by descending relevance score.
+    Dynamically overlays NOTEBOOK_MANIFEST.json tags across all 294 nodes.
     """
     kw_set = {k.lower() for k in task_keywords}
     scores: Dict[str, float] = {}
@@ -343,6 +407,22 @@ def route_by_domain(task_keywords: List[str]) -> List[str]:
         score = len(kw_set & tag_set) / len(tag_set) if tag_set else 0.0
         if score > 0:
             scores[knight] = score
+
+    # Manifest overlay
+    manifest_path = _CAMELOT_ROOT / "01_KERNEL" / "memory" / "NOTEBOOK_MANIFEST.json"
+    if manifest_path.exists():
+        try:
+            data = json.loads(manifest_path.read_text(encoding="utf-8"))
+            for nid, meta in data.get("notebooks", {}).items():
+                kid = meta.get("knight_id")
+                if kid and not meta.get("is_duplicate"):
+                    tags = set(meta.get("domain_tags", []))
+                    score = len(kw_set & tags) / len(tags) if tags else 0.0
+                    if score > scores.get(kid, 0.0):
+                        scores[kid] = score
+        except Exception:
+            pass
+
     return sorted(scores, key=lambda k: scores[k], reverse=True)
 
 

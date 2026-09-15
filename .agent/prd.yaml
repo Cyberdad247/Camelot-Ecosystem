@@ -1,0 +1,11 @@
+﻿id: camelot-ecosystem
+title: "Camelot-OS Sovereign AI OS"
+objective: "Automate business workflows while retaining absolute human authority."
+target_users: [Sovereign, Tenant Admin, Operator, Approver, Auditor]
+features:
+  - id: excalibur-command
+    name: "Excalibur Command (Bio-Auth Gate)"
+  - id: kba-executive
+    name: "KBA Executive Suite"
+  - id: vkg-hud
+    name: "World Tree Command Center"

@@ -1,0 +1,25 @@
+﻿[metadata]
+name = "lisa_shopify_knight"
+version = "2.0.0"
+type = "wasm_cartridge"
+author = "Invisioned Marketing Inc. / King Arthur"
+license = "MIT"
+
+[permissions]
+# CORE RULE: Lisa cannot touch the network or filesystem directly.
+# All external actions are intercepted and gated by the Host.
+network = false
+filesystem = false
+llm_gateway = true
+mcp_dispatcher = true
+
+[sandbox]
+memory_limit_mb = 128
+cpu_limit = "0.5"
+sandbox_store_url = "https://sandbox-dev.myshopify.com"
+
+[persona]
+name = "Lisa"
+domain = "Shopify App Development & Liquid Architecture"
+initial_level = "Squire"
+xp = 0

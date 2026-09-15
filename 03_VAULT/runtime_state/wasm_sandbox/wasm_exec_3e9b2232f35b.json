@@ -1,0 +1,11 @@
+{
+  "execution_id": "wasm_exec_3e9b2232f35b",
+  "tool_id": "untrusted_script",
+  "status": "VIOLATION_BLOCKED",
+  "output_data": null,
+  "error_message": "[WASI_SECURITY_VIOLATION] Operator tier R0 insufficient for untrusted_script (requires R4)",
+  "memory_used_mb": 0.0,
+  "duration_ms": 0.08,
+  "transcript_hash": "sha256:c908db13c98df15c47735c2de78dbb7bc78b1bc3e8f8ffb87cd8e421fa1d89d0",
+  "executed_at": "2026-08-31T00:18:47.240150+00:00"
+}

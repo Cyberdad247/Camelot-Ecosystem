@@ -18,7 +18,7 @@ _IGNORE_DIRS = {
     "dist", "build", ".antigravity", "CAMELOT_DefenseGrid_Quarantine",
     ".mypy_cache", ".ruff_cache", "target",
 }
-_MAX_FILE_BYTES = 10 * 1024 * 1024  # 10 MB ceiling
+_MAX_FILE_BYTES = 2 * 1024 * 1024  # 2 MB ceiling for AST & symbol analysis
 
 
 @dataclass
@@ -32,14 +32,37 @@ class FileRecord:
     is_binary: bool = False
 
     def read_text(self) -> str:
+        if self.is_binary or self.size > _MAX_FILE_BYTES:
+            return ""
         try:
             return self.path.read_text(encoding="utf-8", errors="replace")
-        except OSError:
+        except (OSError, MemoryError, Exception):
             return ""
 
 
 def scan(root: Path, *, extensions: set[str] | None = None) -> Iterator[FileRecord]:
     exts = extensions or _CODE_EXTS
+    if root.is_file():
+        if (root.suffix in exts or not exts) and root.stat().st_size <= _MAX_FILE_BYTES:
+            st = root.stat()
+            rel = root.name
+            rec = FileRecord(
+                path=root,
+                rel=rel,
+                size=st.st_size,
+                ext=root.suffix,
+            )
+            try:
+                raw = root.read_bytes()
+                rec.sha256 = hashlib.sha256(raw).hexdigest()[:12]
+                rec.is_binary = b"\x00" in raw[:1024]
+                if not rec.is_binary:
+                    rec.lines = raw.count(b"\n")
+            except OSError:
+                pass
+            yield rec
+        return
+
     for dirpath, dirnames, filenames in os.walk(root):
         # Prune ignored dirs in-place
         dirnames[:] = [d for d in dirnames if d not in _IGNORE_DIRS and not d.startswith(".")]

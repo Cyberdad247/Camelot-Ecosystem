@@ -1,0 +1,13 @@
+{
+  "entry_id": "jrn_4bb458f8",
+  "tenant_id": "tenant_sovereign_001",
+  "description": "Q3 Server Infrastructure Hosting",
+  "debit_account": "Operating_Expenses",
+  "debit_amount": 1500.0,
+  "credit_account": "Accounts_Payable",
+  "credit_amount": 1500.0,
+  "is_balanced": true,
+  "entry_hash": "sha256:486c61377c1e241a935b6d355fbc6c70bc7afcef1a96e37cf3c2d973612e0ef7",
+  "status": "SEALED",
+  "created_at": "2026-08-31T00:42:33.314612+00:00"
+}

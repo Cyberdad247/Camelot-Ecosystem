@@ -1,0 +1,13 @@
+{
+  "knight_id": "SIR_CODEX",
+  "role": "WASM MicroVM & Kinetic Implementer",
+  "cartridge_binding": "cartridge-hive-ide-swarm",
+  "max_memory_mb": 512,
+  "skills": [
+    "wasm32_wasi_compilation",
+    "cow_page_sharing_controller",
+    "zero_trust_code_repair"
+  ],
+  "ternary_quantization_active": true,
+  "status": "READY"
+}

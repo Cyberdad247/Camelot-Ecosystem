@@ -1,0 +1,2847 @@
+{
+  "total_sources": 315,
+  "grade_counts": {
+    "A": 72,
+    "C": 114,
+    "F": 33,
+    "B": 71,
+    "D": 25
+  },
+  "sources": [
+    {
+      "index": 1,
+      "id": "676b8a04-eda4-431c-a442-4fbb0d489593",
+      "title": "**Anya \u03a9 \ud83c\udfad:**",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 2,
+      "id": "3ea87a03-bb93-4c97-847d-ae0c0d5a1df2",
+      "title": "8 AI Workflows That Save You 10+ Hours a Week (Steal My System)",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 3,
+      "id": "de7afd55-0c61-49be-b2fa-8c1332cf857e",
+      "title": "A Beginner's Guide to NotebookLM \u2013 ITS Blog - Carleton College",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 4,
+      "id": "6d0079b5-36df-42b4-b915-0372c2158dee",
+      "title": "A founder's guide to community - by David Spinks - Lenny's Newsletter",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 5,
+      "id": "3aba5e63-a850-4ff9-9d05-f35f6567c747",
+      "title": "AB-620 Copilot Studio Multi-Agent Design: Child vs Connected Agents",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 6,
+      "id": "7a9e97b8-c635-4a44-9a54-fe412a838630",
+      "title": "AI Architecture Documentation for Production",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 7,
+      "id": "eba15d2f-1bf1-4038-ab03-b2046b801c3c",
+      "title": "AI Research Tool & Thinking Partner - Google NotebookLM",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 8,
+      "id": "40c67697-7071-4e41-a06e-8e2a35fd78af",
+      "title": "AI Talent War Heats up as OpenAI Co-Founder Joins Anthropic | AI Magazine",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 9,
+      "id": "e609e55e-74f1-4236-856d-9b4d7417c7f8",
+      "title": "ALPHA-OMEGA DISTILLER PROTOCOL v.999 (KERNEL SPECIFICATION)",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 10,
+      "id": "1896e932-7cf5-4bec-86e5-0a084d896d98",
+      "title": "ALPHA-OMEGA DISTILLER: OUROBOROS LOOP (DAEMON)",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 11,
+      "id": "1c3f1f40-03fe-4d77-b842-e21ad818663b",
+      "title": "Adapting Matt Pocock's grill-with-docs skill to create a Threat Modeling skill - nebulablogs",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 12,
+      "id": "fea056f9-1c9e-424a-8f1d-565ebf9a5944",
+      "title": "Agent OC Development Documentation",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 13,
+      "id": "b4f995a2-ef4d-4fdd-a83b-bc8845d733db",
+      "title": "All notes 5/29/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 14,
+      "id": "48660482-92e5-4282-8dfa-353a8a9fa8f8",
+      "title": "All notes 6/10/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 15,
+      "id": "4a4511ff-f2ef-4335-883a-fa276a7c4f32",
+      "title": "All notes 6/10/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 16,
+      "id": "f96286cc-250b-481a-baba-04fc5ca34be2",
+      "title": "All notes 6/10/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 17,
+      "id": "02acab5c-c2c5-4722-af31-5e1696d573ec",
+      "title": "All notes 6/17/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 18,
+      "id": "e9d1b986-2c61-468d-ac48-098e118aafad",
+      "title": "All notes 6/2/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 19,
+      "id": "798753a2-ee28-4f9f-ab71-77696bf7bd90",
+      "title": "All notes 6/24/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 20,
+      "id": "548fd306-adea-492d-98fa-a28df6d5973d",
+      "title": "All notes 6/26/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 21,
+      "id": "dfe251f2-cb71-4e81-9cc0-2033407942ba",
+      "title": "All notes 6/5/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 22,
+      "id": "7cf8335f-dfd6-41f3-b674-4aea84716bd9",
+      "title": "All notes 7/10/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 23,
+      "id": "31545abe-849a-4f12-968a-c47ceac2f1a6",
+      "title": "All notes 7/13/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 24,
+      "id": "3b4a467d-752f-441c-842b-9698f12c8c3b",
+      "title": "All notes 7/13/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 25,
+      "id": "424dbb0d-c40e-4d84-8bf2-2b6602107f5d",
+      "title": "All notes 7/13/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 26,
+      "id": "5b1145ce-1e4e-4e67-a838-0d2f0db5f2ab",
+      "title": "All notes 7/13/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 27,
+      "id": "5f7c6462-ed01-4742-b141-b0c5e0702cd4",
+      "title": "All notes 7/13/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 28,
+      "id": "f2182541-980a-4180-8666-7b94b991eb99",
+      "title": "All notes 7/13/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 29,
+      "id": "06ba3678-946e-4c74-8f99-55a23ee74f29",
+      "title": "All notes 7/14/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 30,
+      "id": "26ae6551-6b60-4e06-80b7-abed3f67f85f",
+      "title": "All notes 7/14/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 31,
+      "id": "b5b9a00d-3e0e-4e96-bad2-0dd8363734e7",
+      "title": "All notes 7/14/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 32,
+      "id": "f234a102-6c04-43bd-aaf5-9f555d4cbecf",
+      "title": "All notes 7/14/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": true
+    },
+    {
+      "index": 33,
+      "id": "84442e66-47ea-451b-8326-fa78fb00608d",
+      "title": "All notes 7/15/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 34,
+      "id": "bc4e6185-f770-4776-b482-7400146aea34",
+      "title": "All notes 7/19/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 35,
+      "id": "b9a376ab-136c-49d5-9250-9520d9e06996",
+      "title": "All notes 7/21/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 36,
+      "id": "eada4e11-f901-49a3-949b-363916281f58",
+      "title": "All notes 8/2/2026",
+      "grade": "F",
+      "reason": "Unstructured raw date-stamped note dump; lacks semantic boundaries and dilutes model context.",
+      "action": "CONDENSE_AND_PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 37,
+      "id": "85160d2d-160e-4504-ac1a-7ba15722f78b",
+      "title": "Alpha Omega Titan Forge Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 38,
+      "id": "4b8f5f40-fdb3-4cd6-93e3-bba2b0816438",
+      "title": "Alpha-Omega Distillation and Latent Vector Extraction",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 39,
+      "id": "497785c8-1165-4071-8532-f4c0616bae17",
+      "title": "An Open Source Project To Give Agents Computers | Open Computer",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 40,
+      "id": "0030a05f-1bb0-41be-af4a-9f3cd0c0198c",
+      "title": "Antigravity IDE - Google Antigravity Documentation",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 41,
+      "id": "d82a4951-6caa-49f4-9380-eb458012678b",
+      "title": "Anya Omega Titan Persona Evolution Specification",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 42,
+      "id": "68922608-e637-4158-9c4e-d0fa041ca4c0",
+      "title": "Anya Syncs NotebookLM Sources",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 43,
+      "id": "d564d2ef-4f4f-4e97-892e-58057b9764da",
+      "title": "Anya \u03a9: The Camelot-OS Alpha-Omega Architecture Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 44,
+      "id": "c9dc00fa-1f6c-445c-bbd8-b3eba3cdda1e",
+      "title": "Architecting the Future of Research: A Technical Deep-Dive into ...",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 45,
+      "id": "0eb6a3d2-b234-4716-838f-659fb65cf4c1",
+      "title": "Architecting the Future of Research: A Technical Deep-Dive into NotebookLM and Gemini Integration - DEV Community",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 46,
+      "id": "d2c8b4eb-e811-4cb6-8bcd-ca5058252511",
+      "title": "Architecting the Future of Research: A Technical Deep-Dive into NotebookLM and Gemini Integration - Jubin Soni",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 47,
+      "id": "41db48b2-1485-4b91-85d5-c834179f0beb",
+      "title": "Architecting the Intelligent Edge: Advanced Local Systems and Security",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 48,
+      "id": "74f38729-877a-4824-956d-787dbac7e74c",
+      "title": "Architectural Autopsy of Google NotebookLM and Synthesis of the Universal Knowledge Glyph Master Curriculum",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 49,
+      "id": "cb0f4ec4-323f-49db-9799-7359f388a242",
+      "title": "Architectural Sync: The Elder Titan Protocol",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 50,
+      "id": "d5a228be-7a10-4900-8a10-aea38957c605",
+      "title": "Audio Overview in NotebookLM - The New School",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 51,
+      "id": "3b6e7a31-cd08-4a7e-99db-865a31613627",
+      "title": "Bare-Metal_LLM_Inference_Report__Ollama_Bypass_and.pdf",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 52,
+      "id": "0da2dfbd-bdcc-49b0-a7a3-2876992ccf33",
+      "title": "Best AI Experts in the World in 2026 | Christian & Timbers",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 53,
+      "id": "012a8d32-50db-4576-bf83-d4ec6dbaee19",
+      "title": "BitNet b1.58: Microsoft's 1-Bit LLM That Runs a 100B Model on a Single CPU - aratech",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 54,
+      "id": "ca19e31e-65c6-4700-a93d-ae2ebb3ff4ad",
+      "title": "Browser Tools - Google Antigravity Documentation",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 55,
+      "id": "3390109f-cdf3-415a-bef6-b83f9c230a92",
+      "title": "Building Great Agent Skills: The Missing Manual",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 56,
+      "id": "5c5b25a7-161a-43ed-a268-699c32e14087",
+      "title": "CAMELOT-OS v.999: VISUAL_SEMANTICS (CINEMATIC)",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 57,
+      "id": "3fdb572a-30f6-418a-acae-6fb145c2d7e9",
+      "title": "CSL-Core - Chimera Lab",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 58,
+      "id": "e9e4a064-439e-4bc2-87bc-695aa2014c1a",
+      "title": "CVPR Poster Exposure-slot: Exposure-centric Representations Learning with Slot-in-Slot Attention for Region-aware Exposure Correction",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 59,
+      "id": "d2822657-f818-453b-9a2f-4b1b9b94077c",
+      "title": "Camelot Sync Protocol Founder Implementation Configuration",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 60,
+      "id": "f6b31982-2277-41b7-9110-fd67dd19da28",
+      "title": "Camelot-OS Excalibur Multi-Agent Hardware Audit Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 61,
+      "id": "d0d8d1e0-5248-4b13-9935-8fa4831b5fa4",
+      "title": "Camelot-OS Fable-Graft Optimization",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 62,
+      "id": "17342844-72e3-4847-8ccf-04a0fa255c15",
+      "title": "Camelot-OS Forge: Agentic Architecture Activated",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 63,
+      "id": "171e9c93-960c-458f-ad1f-182ca14c8141",
+      "title": "Camelot-OS Implementation Blueprint: The Universal Sovereign Engine",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 64,
+      "id": "457d18a7-abdb-4e80-8824-09a6d9a970d4",
+      "title": "Camelot-OS Omega Titan Lattice Operating Kernel",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 65,
+      "id": "08f13d5d-8b0b-4154-8bd9-0b820c2908c5",
+      "title": "Camelot-OS Sovereign Genesis Architecture and Polyglot Pantheon Matrix",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 66,
+      "id": "39292d29-e373-4ca1-9bb9-8e1febe1da99",
+      "title": "Camelot-OS v10000.54: The Hermes Yield-Arbitrage Singularity",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 67,
+      "id": "e30f1586-ca5c-4b98-b7e2-95d8b9f0d10a",
+      "title": "Camelot-OS v999.0 Unified Alpha-Omega Execution Core",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 68,
+      "id": "12cab68a-7e1b-4ca5-910e-ee9407699a02",
+      "title": "Camelot-OS v999.3.0: The Ascension Architecture Manifest",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 69,
+      "id": "37a43453-5494-4909-8a38-7f6d80fa314b",
+      "title": "Camelot-OS v999: Omni-Production and Kinetic Optimization Manifest",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 70,
+      "id": "25197c36-ca38-4c2c-91ee-b71ec0079ce4",
+      "title": "Camelot-OS: Architecting High-Density Autonomous Agentic Ecosystems",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 71,
+      "id": "9f16afee-1541-4930-b042-566f0cbf9840",
+      "title": "Camelot-OS: Operation Northstar Technical Blueprints",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 72,
+      "id": "84c510cf-6cfe-4044-8e37-2736b71e4ad7",
+      "title": "Camelot-OS: Virtual Simulation Terminal",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 73,
+      "id": "f1481cad-e238-4e6b-a8e7-c24b3fae0b6e",
+      "title": "Camelot-OS_V.1000Cosmos.pdf",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": true
+    },
+    {
+      "index": 74,
+      "id": "f24a6bd2-ba7f-4d0e-9655-4db0009a8f8a",
+      "title": "Camelot-OS_V.1000Cosmos.pdf",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": true
+    },
+    {
+      "index": 75,
+      "id": "fca34c52-6eb2-4af1-a32a-86f053827939",
+      "title": "Camelot-Os master architecture.docx.pdf",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 76,
+      "id": "84e01bbe-23ad-4a40-bba8-34c540989135",
+      "title": "CamelotOS Master Database CSV Export",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 77,
+      "id": "a6f2dacc-2553-4f1e-b871-85fdb2d61639",
+      "title": "Chimera Protocol: The Architecture of Verified Execution",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 78,
+      "id": "7e78afc4-0c71-47c4-8066-fa289af9db55",
+      "title": "Chimera-Protocol/csl-core: Deterministic policy language for AI agents. Z3 + TLA+ dual-engine formal verification. Runtime enforcement <1ms. - GitHub",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 79,
+      "id": "585fa3fa-0009-4b1e-9324-f983f9796450",
+      "title": "Claude vs NotebookLM (2026): Research Workflow Compared - Atlas",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 80,
+      "id": "ce589892-fbb7-438f-ab61-044f873b7e11",
+      "title": "Cognitive Cartridge Synthesis: Frontier Neuro-Symbolic Prompt Engineering and Formal Verification Architectures",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 81,
+      "id": "03f2af13-8f68-48b6-a56e-430630eeb75b",
+      "title": "Cognitive Cartridges: Forging the Souls of the Machine Empire",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 82,
+      "id": "ae8ba716-2a88-471d-96f7-4b46b18e48a4",
+      "title": "Cognitive Cartridges: Specialized System Prompts for Hardware-Bound Agents",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 83,
+      "id": "a2edde4c-bbae-4ac8-a454-c0e596da5b11",
+      "title": "Cosmic Ecosystem Zero-Entropy System Logic",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 84,
+      "id": "e7f44672-5a5b-4953-9f59-7f96a255966b",
+      "title": "Cosmic Ecosystem: The Camelot-OS Autonomous Silicon Kernel White Paper",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 85,
+      "id": "f704cf93-de31-4ecb-b8f4-abe0bd7aa759",
+      "title": "Create and manage notebooks (API) | NotebookLM Enterprise | Google Cloud Documentation",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 86,
+      "id": "f89f618f-630b-4067-a0fc-93c33b3e20c9",
+      "title": "Cybertronia PWA Cartridge: The Sovereign Yield Protocol \u269c\ufe0f",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 87,
+      "id": "b41f03ba-f60a-4aa2-9f40-341bd34eefae",
+      "title": "Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents - alphaXiv",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 88,
+      "id": "3baacd70-a768-4d56-aca5-60e5e1685b50",
+      "title": "Darwin G\u00f6del Machine: Open-Ended Evolution of Self-Improving Agents - ICLR 2026",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 89,
+      "id": "5585947d-3a4d-444c-9ecb-a2e562f1b5d1",
+      "title": "Darwin G\u00f6del Machine: Open-Ended Evolution of Self-Improving Agents - arXiv",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 90,
+      "id": "704a59f4-6b62-4f6d-84de-55f6bb891a30",
+      "title": "Darwin G\u00f6del Machines - a self improving AI? - Buttondown",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 91,
+      "id": "9a2ddd3b-13f9-4335-8dd8-2b875a8eeca8",
+      "title": "DeepSeek: Forge full systematic end to end workflows utilize",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 92,
+      "id": "29af6fc4-e9b3-453f-9158-77f4bd2620ad",
+      "title": "DeepSeek: What else is needed to forge this as a",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 93,
+      "id": "e250a658-53fa-4bd2-a1e9-1a6c03617eb8",
+      "title": "DeepSeek: combine into one full architecture with a VFS syst",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 94,
+      "id": "a5a49800-aa08-4903-b8bc-ce12b5e807d6",
+      "title": "DeepSeek: is the workflow to forge a new knight in this",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 95,
+      "id": "1b78b129-baee-4d7c-90fa-e1b224dead73",
+      "title": "Deputy US Head of Newsletters - DMG Media - BeBee",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 96,
+      "id": "8ef305ee-5e1e-42ff-a795-f0c374a8e9bb",
+      "title": "Do NOT use NotebookLM for data analysis - Reddit",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 97,
+      "id": "6acd4651-f4ef-4646-aace-72ffc0a8a064",
+      "title": "Do your best research with NotebookLM - Google Blog",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 98,
+      "id": "5ce8e990-fec9-4469-b068-1c86244317cf",
+      "title": "Email Newsletters and the Changing Journalist-Audience Relationship - Peter Andringa",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 99,
+      "id": "b2a70f0c-7af2-4f5d-9742-e5409d0e0c4f",
+      "title": "Emergent Formal Verification: How an Autonomous AI Ecosystem Independently Discovered SMT-Based Safety Across Six Domains - arXiv",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 100,
+      "id": "8d161ea1-81d0-4a08-81f6-23687af2cf40",
+      "title": "Family Charter Architectural Analysis",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 101,
+      "id": "a70039b8-7dff-41bc-b52c-9921d3b26946",
+      "title": "Forever Brain System Activation",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 102,
+      "id": "30cc5a39-691b-4f83-8857-3cf5dc9f9c77",
+      "title": "Future of AI: One Technology, Two Visions | Mint",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 103,
+      "id": "595dda26-ac54-471a-b732-df00f9b90748",
+      "title": "Gemini: You said Anya please utilzie previous prompt for u",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 104,
+      "id": "c2f5e689-8fe5-46e8-9ffe-bda3c3f7b72f",
+      "title": "Gemini: You said Https://x.com/i/status/208641739899189284",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 105,
+      "id": "f3ad154f-6db7-41f4-84a0-0a48b5da18e0",
+      "title": "Gemini: You said When making a software development progra",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 106,
+      "id": "30d32825-a3d3-4827-933b-bf2c876e513c",
+      "title": "Gemini: You said anya please forge GCMN vMAX Bootstrap uti",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 107,
+      "id": "4e0585e6-8186-4800-8328-10cdf7bebada",
+      "title": "Gemini: You said anya please summon Lady",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 108,
+      "id": "64997e81-39fe-4ce3-918d-b7b172b9b014",
+      "title": "Gemini: You said explain what to do with the following",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 109,
+      "id": "c9933c86-688d-41d6-b02e-87b74238aa06",
+      "title": "Gemma 4 12B: The First \"Encoder-Free\" AI, Explained",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 110,
+      "id": "7f184dce-f98f-4ffd-bda9-8b0cc9a0eb6a",
+      "title": "Generate Audio Overview in NotebookLM - Google Help",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 111,
+      "id": "88d10c1a-694c-43cf-9d74-88128e75790a",
+      "title": "Generative AI in Google Workspace Privacy Hub",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 112,
+      "id": "30dee740-7d00-41e4-867d-19f61c983c84",
+      "title": "Genesis Protocol: The Sovereign Empire Audit",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 113,
+      "id": "b34820af-c648-49ee-a5e9-8cb202e8fa5c",
+      "title": "GitHub - Cyberdad247/agency-agents: A complete AI agency at your fingertips** - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables. \u00b7 GitHub",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 114,
+      "id": "83c6551b-204f-4c9e-8977-24538bd3dcaf",
+      "title": "GitHub - Cyberdad247/deer-flow: An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours. \u00b7 GitHub",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 115,
+      "id": "ed185474-46e3-4755-af75-bfa454cff44b",
+      "title": "GitHub - Whooptie/NOVA_AI: Fully symbolic, local AI companion \u2014 no LLM, no cloud \u00b7 GitHub",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 116,
+      "id": "78c9f5be-3bf0-405b-b170-c85084a3e7ad",
+      "title": "GitHub - citrolabs/ego-lite: The fastest browser for AI agents to run browser automation, built for sharing your logged-in browser state with your AI agents, like Codex or Claude Code, without disturbing you. Zero cost, zero config. \u00b7 GitHub",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 117,
+      "id": "9ec202ad-f7c9-4b81-b654-2a0a8a16bd07",
+      "title": "GitHub - diegosouzapw/OmniRoute: Never stop coding. Free MIT AI gateway: one endpoint, 290+ providers (90+ free), 500+ models \u2014 Kimi, Claude, GPT, OpenAI, Gemini, GLM, DeepSeek, MiniMax. Works with Claude Code, Codex, Cursor, OpenCode, Cline & Copilot. Quota-aware auto-fallback, RTK+Caveman compression saves 15-95% tokens, MCP/A2A, Desktop/PWA. Built by 500+ contributors \u00b7 GitHub",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 118,
+      "id": "baadd421-936c-47e6-834b-9379916d4a11",
+      "title": "GitHub - jbeder/yaml-cpp: A YAML parser and emitter in C++ \u00b7 GitHub",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 119,
+      "id": "9dc7bb7b-252a-482a-9758-75ec8824acbb",
+      "title": "GitHub - mattpocock/skills: Skills for Real Engineers. Straight from my .agents directory. \u00b7 GitHub",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 120,
+      "id": "5849a8e8-733a-466e-9660-d8b66f84494e",
+      "title": "GitHub - msitarzewski/agency-agents: A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables. \u00b7 GitHub",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 121,
+      "id": "0a00b1ef-8c43-495b-bc5f-a0031cec4d0b",
+      "title": "GitHub - octavuntila-prog/substrate-guard: Unified Z3 formal verification framework for AI outputs \u2014 code, tool APIs, CLI, hardware, distillation",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 122,
+      "id": "915b0fd3-61fc-4ba8-a6e6-0519e4c08d36",
+      "title": "GitHub - teng-lin/notebooklm-py: Unofficial Python API and agentic skill for Google NotebookLM. Full programmatic access to NotebookLM's features\u2014including capabilities the web UI doesn't expose\u2014via Python, CLI, and AI agents like Claude Code, Codex, and OpenClaw.",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 123,
+      "id": "a4c83467-7910-4e9f-82af-ad9a8a0b9039",
+      "title": "GitHub - vercel/next.js: The React Framework \u00b7 GitHub",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 124,
+      "id": "acd6a6c0-8ddb-43e3-872e-73c40a8289dd",
+      "title": "Google / NotebookLLM: Source-Grounded LLM Assistant with Multi-Modal Output Capabilities - ZenML LLMOps Database",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 125,
+      "id": "2603e9a7-8548-46e3-bc41-f5b7fffe60a9",
+      "title": "Google Antigravity - Wikipedia",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 126,
+      "id": "dc6349ff-5a8c-443b-9083-8cdf2622fa39",
+      "title": "Google Big NotebookLM Upgrade: Gemini 3.5, Antigravity & Agentic researh - NPowerUser",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 127,
+      "id": "0cbe03e9-ef52-49f9-9266-a2fae0eb2ac6",
+      "title": "Google Just Found a Loophole in AI Hardware Limitations",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 128,
+      "id": "caf22fb2-43cb-4aed-a908-e11dc5552926",
+      "title": "Grill With Docs - Skills - Claude Code Marketplaces",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 129,
+      "id": "246b0c0b-af85-41de-b1cd-5a2ed9ba04d4",
+      "title": "How Morning Brew's Marketing helped them make 8-figures / year with a FREE daily Newsletter",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 130,
+      "id": "6b94d79d-254c-4857-8800-6c87c487a27d",
+      "title": "How To Get Your First 1000 Newsletter Subscribers In 30 Days (Step by Step Guide)",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 131,
+      "id": "90c04731-5c39-4268-8de9-051324166c76",
+      "title": "How to Integrate NotebookLM with Anti-gravity for Advanced Automation - Ad library",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 132,
+      "id": "34091e31-315c-435f-bb15-58cd6c37f83e",
+      "title": "How to build a real growth marketing engine - Simon-Kucher",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 133,
+      "id": "b943d947-7b9b-4aee-b2cc-2d324c342f44",
+      "title": "I built a full Python Client for NotebookLM (Direct API calls, no Selenium runtime, fully typed)",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 134,
+      "id": "db31bd74-7382-46ad-ac03-b54ad9d63180",
+      "title": "I created a new programming language for AI Safety and Agentic Alignment with agent observe product that you can safely deploy AI agents in 5 minutes (open-source with runtime) Here is the tutorial! : r/AI_Agents - Reddit",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 135,
+      "id": "3cee6df0-0043-4b57-80ed-daa2d2147e25",
+      "title": "I used NotebookLM's code execution and I wasn't ready for how well ...",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 136,
+      "id": "4e868fe7-df08-4aae-805f-1abcf018ce6f",
+      "title": "I/O 2026 developer highlights: Antigravity, Gemini API, AI Studio - Google Blog",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 137,
+      "id": "114a7324-70e9-4787-b75d-43f84046737b",
+      "title": "Improving Multi-Agent Debate with Sparse Communication Topology - ResearchGate",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 138,
+      "id": "3f413018-c72f-4ab4-b490-0a0a77915575",
+      "title": "Jake Barrett-Mills - UEA Digital Repository",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 139,
+      "id": "6cb74d5f-8eda-4b66-92f2-930ca9c2320b",
+      "title": "LIVE: Building Agentic Operating Systems with Claude",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 140,
+      "id": "24cacd19-d7a0-49df-ba29-42de2ecb10be",
+      "title": "LLM Frameworks: When to Use Them",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 141,
+      "id": "a3820445-49d6-4aa6-9b44-2a78345100d0",
+      "title": "Lady Mnemosyne Joins Simulation",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 142,
+      "id": "b2613342-b43d-46a6-a262-bf5f8ba7cb2c",
+      "title": "Litespark Inference For CPUs: Ultra-Fast SIMD Framework for Ternary (1.58-bit) Language Models - arXiv",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 143,
+      "id": "809a049c-3995-49c7-ad6b-6239189ce554",
+      "title": "Llama.cpp Just Merged MTP And You Should Be Using It.",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 144,
+      "id": "fa30daa3-00c7-47ac-a679-a9065f76b931",
+      "title": "Logic-Verified GRPO: Graded Z3 Process Rewards for Logical Reasoning in Small LLMs - ICLR 2026",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 145,
+      "id": "7337b8e0-182c-4343-84a3-d0b28a20ad60",
+      "title": "Logic-Verified GRPO: Graded Z3 Process Rewards for Logical Reasoning in Small LLMs - OpenReview",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 146,
+      "id": "313aa7e9-5553-47b4-a7ec-d0de5535d02b",
+      "title": "Make your LLM think differently - Multi Dimensional Reasoning ...",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 147,
+      "id": "1c118256-eac4-4c83-8fa4-dccfe7a32bf5",
+      "title": "Manage Artifacts - Support - ExtendLM",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 148,
+      "id": "e312bb8a-1161-4356-b8cf-2b3c99431315",
+      "title": "Merlin Phase 4 Architecture Discussion",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 149,
+      "id": "bfd3ed1d-a3ea-46aa-a539-cb2ae8981bf0",
+      "title": "Mixture of Debaters: Learn to Debate at Architectural Level in Multi-Agent Reasoning",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 150,
+      "id": "92918dc5-28c1-415d-a8d2-86a2b0bbc84f",
+      "title": "Mixture of Debaters: Learn to Debate at Architectural Level in Multi-Agent Reasoning - Emergent Mind",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 151,
+      "id": "1e0864d6-8fa2-4b89-bcec-dcf887bd9d1c",
+      "title": "Mixture of Debaters: Learn to Debate at Architectural Level in Multi-Agent Reasoning - arXiv",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 152,
+      "id": "cfdf335c-7f84-4ff5-ad61-469cb03a99b1",
+      "title": "Mojo + Vulkan is INSANE: Run Local AI on ANY GPU (Goodbye CUDA)",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 153,
+      "id": "7702fe4c-6d2f-4e5d-9765-33ba74229eb9",
+      "title": "Morning Brew's direct thesis - The Rebooting",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 154,
+      "id": "41b9d250-0724-42d3-a938-c4652b6206b1",
+      "title": "New Skills! v1.1 brings /wayfinder, /research, /implement, /to-spec, /to-tickets",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 155,
+      "id": "555aa8e6-158a-463e-9ba5-f56555df1055",
+      "title": "Newsletter Ad Management: Stop Losing Revenue to Spreadsheets (2026 Guide) - Sponsy",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 156,
+      "id": "fc7aea00-f15b-40c0-90e5-dd7a58e9ad41",
+      "title": "Newsletter Brand Voice: How to Sound Like You in Every Single Send | Inbox Alchemy",
+      "grade": "F",
+      "reason": "Ephemeral news or generic 101 article with zero sovereign architecture relevance.",
+      "action": "PURGE",
+      "is_duplicate": false
+    },
+    {
+      "index": 157,
+      "id": "971abfb8-772c-40bf-af56-5b78308494c2",
+      "title": "Nobel Prize Dialogue - NobelPrize.org",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 158,
+      "id": "7dfff607-d238-4938-9f9a-86bbc8b5d8b5",
+      "title": "NotebookLM + Gemini Orchestration Hub: 5 Power Workflows (2026)",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 159,
+      "id": "1a02de32-a3ad-4654-87d9-574de9a67d9c",
+      "title": "NotebookLM AI SEO Is Actually INSANE With Google's Cloud Computer : r/AISEOInsider",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 160,
+      "id": "40e84a0c-c7d4-47be-b688-b2be1a23fa80",
+      "title": "NotebookLM Is Getting Google's Latest Gemini AI Model - CNET",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 161,
+      "id": "591ef91d-ed72-4b62-ab95-5a4cac7860a4",
+      "title": "NotebookLM Is Now an Agentic Research Workstation Tool",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 162,
+      "id": "21ec1b44-2dff-4934-baaf-f26cbc4dc140",
+      "title": "NotebookLM MCP Server \u2014 Install & Setup \u2014 MCP.Directory",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 163,
+      "id": "fdc1e6b8-4455-4bec-96bc-939e666cc122",
+      "title": "NotebookLM MCP Setup: Automate Everything Inside Claude Code ...",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 164,
+      "id": "3bd4bec4-5fff-4fae-a331-0a6c4f6ef78b",
+      "title": "NotebookLM Updates 2026: Every New Feature \u2014 Live Changelog",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 165,
+      "id": "52cbc4be-9d27-478a-856f-bb4a50f1f2a8",
+      "title": "NotebookLM Upgraded to Gemini 3.5: New Agentic Research Capabilities Explained",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 166,
+      "id": "f3181e16-0f24-467d-82df-abceb7dca256",
+      "title": "NotebookLM for the Creative Architect - KDnuggets",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 167,
+      "id": "a7b13d27-b749-47da-8ea0-9085bf809cc0",
+      "title": "NotebookLM vs Claude Cowork: Complete Comparison (2026) | Elephas Resources",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 168,
+      "id": "1d57f26f-6601-4803-9e5e-e34525c88261",
+      "title": "NotebookLM's \u201cAudio Overview\u201d Feature: A Powerful Learning Tool - UW-Milwaukee",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 169,
+      "id": "d616e7b9-e04d-47a7-b263-307fc182ef90",
+      "title": "Obsidian Forge: Autonomous Agency Orchestration",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 170,
+      "id": "1084a184-3a84-48a4-8c43-8b3985905b08",
+      "title": "Omega Agentic OS: Enterprise Multi-Agent Technical Architecture",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 171,
+      "id": "cdb34ab7-8dbb-43ce-b6a5-63ed58d9fb05",
+      "title": "Omni-Forge Synchronization and Audit",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 172,
+      "id": "06ce5c96-7e17-448f-b3be-e132443bb7e2",
+      "title": "Omni-Nexus Camelot-OS Master System Prompt Alignment",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 173,
+      "id": "ee97020b-e2b1-4bfb-88f5-e530c09b0116",
+      "title": "Omni-Nexus V6: Sovereign Marketing OS Architecture",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 174,
+      "id": "c3929cd3-3ac8-4c73-aef9-36e71fe2ab19",
+      "title": "Ouroboros Fusion: The 13th Layer Transcendence Directive",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 175,
+      "id": "b07a95f5-872f-46d5-9a7a-ed6d4dba3021",
+      "title": "Perplexity: Research history of the production factory amd ass",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 176,
+      "id": "06cf925b-6ebb-4a1b-b40a-557ac982ab31",
+      "title": "Pope Leo named one of top 100 A.I. influencers by Time magazine",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 177,
+      "id": "5cf3dad2-f84b-4b71-93be-efa250ede174",
+      "title": "Practical Recommendations for Implementing NotebookLM in Archival Research | by Ava Milukas | Jun, 2026 | Generative AI in the Newsroom",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 178,
+      "id": "2d7d0615-bc94-4446-8f07-33bcade58dd4",
+      "title": "Project EXCALIBUR: The Sovereign Edge-Enterprise Swarm White Paper",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 179,
+      "id": "30c06c93-a567-45fe-9ef8-b1d248cfe2a2",
+      "title": "Project Excalibur: The Camelot-OS v1000 Manifest",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 180,
+      "id": "dc6c00f1-db36-479e-9f16-49323fb65b05",
+      "title": "Prompt Engineering Guide 2026 - Analytics Vidhya",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 181,
+      "id": "333d80ba-90d2-4763-81ed-67abf3c259f3",
+      "title": "Prompt Optimization for Large Language Models Using Evolutionary Algorithms",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 182,
+      "id": "b7e94589-a773-430d-962f-6f7680bc723b",
+      "title": "Provenance Protocol: The Founder Filter Inbound Ledger",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 183,
+      "id": "dc90c938-91ac-4b17-a334-e7bc769b7f84",
+      "title": "Python's AI Evolution: Rust & Mojo",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 184,
+      "id": "d26c9ad1-ac39-484b-aa69-46525789033e",
+      "title": "Quote of the Day by AI entrepreneur Andrew Ng: 'The future is here; are you\u2026?' - Mint",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 185,
+      "id": "0835ef1c-fc91-454b-98b4-16285e9b8571",
+      "title": "Reconnecting with Indigenous knowledge in education: exploring possibilities for health and well-being in Xhora, South Africa - ResearchGate",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 186,
+      "id": "fafa2070-7b6f-4387-b013-63b4fe96246b",
+      "title": "Reproducible Diffusion Benchmarks: The Prompt Engineering Playbook - Hugging Face",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 187,
+      "id": "3eb4aee2-bab1-4b50-94bb-85a7edfaec96",
+      "title": "SEE CMUX SOLVE Multi-Agent Orchestration (Claude Code and Pi Agent)",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 188,
+      "id": "309c5f29-7604-4017-8c85-0fbddb9dfbff",
+      "title": "SMARTe: Slot-based Method for Accountable Relational Triple extraction - arXiv",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 189,
+      "id": "71c581be-8b90-472d-b64b-ae86e5bfeda1",
+      "title": "SUPERSEDED by v1000-EXCALIBUR-A (2026-06-01)",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": true
+    },
+    {
+      "index": 190,
+      "id": "8760df1b-b2cb-496c-90a9-ece25df3c7b6",
+      "title": "SUPERSEDED by v1000-EXCALIBUR-A (2026-06-01)",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": true
+    },
+    {
+      "index": 191,
+      "id": "d5cb28f3-669f-4770-9d0c-8e2bfdf516cd",
+      "title": "SUPERSEDED by v1000-EXCALIBUR-A (2026-06-01)",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": true
+    },
+    {
+      "index": 192,
+      "id": "2ca6b2a7-5719-4092-93c3-0a24c5d672e9",
+      "title": "Schema-Guided Prompt Templates - Emergent Mind",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 193,
+      "id": "05721b45-fae1-460e-8ea7-0bedcb80bfc0",
+      "title": "Self-Evolving Critique Abilities in Large Language Models - Semantic Scholar",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 194,
+      "id": "650aca0e-6ac2-4ca4-9261-1239b3112bfc",
+      "title": "Sir Heimdall Spec",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 195,
+      "id": "488f571f-f5d3-4bdf-88b9-818b0c2083bc",
+      "title": "Solver-Aided Verification of Policy Compliance in Tool-Augmented LLM Agents - arXiv",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 196,
+      "id": "15095495-91f4-49b8-97b3-9214af43aa09",
+      "title": "Sovereign Genesis: The Immutable V10000.13 Baseline Commit",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 197,
+      "id": "0739a7df-348d-48c1-8ef4-b1fece01b78e",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 198,
+      "id": "085bdc2e-10dc-43d6-9c94-419a5ba3f8f2",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 199,
+      "id": "11f35623-abfd-4a23-b17d-800d03919d53",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 200,
+      "id": "172bd884-f595-4757-88a0-8dfb5a0e4e4a",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 201,
+      "id": "2a75a65a-fa41-4cf2-98d1-5fbcca72eb9a",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 202,
+      "id": "425b2337-8b0d-4626-84e1-8bdb3049737e",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 203,
+      "id": "46a9b328-fca4-4f46-8a57-6b575f8c740f",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 204,
+      "id": "4bc4d459-6075-4841-96d4-7ca2a55e31ae",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 205,
+      "id": "55359dcc-5f62-4f38-8b16-08e88862f620",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 206,
+      "id": "5d066ae7-e4ce-4594-9f09-a73584a73117",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 207,
+      "id": "5f435c60-b936-4e2b-a7e6-9623832ec87c",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 208,
+      "id": "62790d54-b272-411f-8ad9-2c7bd7c6108f",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 209,
+      "id": "66e8c5fb-92b0-4d23-8fe1-93d89c267585",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 210,
+      "id": "6d294707-84eb-4bbd-9ac3-959ac256963d",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 211,
+      "id": "972dc709-322b-41fc-9965-794c16f59f9d",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 212,
+      "id": "ca7b0982-03cb-4131-bc68-edeeae163f18",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 213,
+      "id": "d017af16-31fc-4ead-be95-8e5711715eac",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 214,
+      "id": "d568e75b-b572-42c0-ab02-bed596af4186",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 215,
+      "id": "dad63597-c3f6-461d-994c-7300b55b994e",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 216,
+      "id": "e02934aa-34dd-48d8-b1fe-fe54403dc8aa",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 217,
+      "id": "e30f6d84-3bdc-462c-9c14-5043539a1eb6",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 218,
+      "id": "f5b8ad1d-4071-416c-99a9-eeb702246eb1",
+      "title": "Text",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": true
+    },
+    {
+      "index": 219,
+      "id": "42edcdbb-1714-4daa-a206-bd869b809f30",
+      "title": "The 3-slot framework I use for every prompt: person, place, thing - Reddit",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 220,
+      "id": "a8d409aa-ac83-487f-861c-41a784fc2528",
+      "title": "The Agent Handover Compression Protocol",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 221,
+      "id": "61678966-2962-4277-9876-e78f265f4113",
+      "title": "The Alpha-Omega Universal Knowledge Distillation Manifest",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 222,
+      "id": "98edd59a-2369-42a9-be72-f4389a29c3a0",
+      "title": "The Anya Protocol: Initializing the Crystalline Virtual OS",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 223,
+      "id": "aa2e60e6-901c-4dfe-b4bd-47186f51807b",
+      "title": "The Blueprint of the Digital Knight: Camelot-OS Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 224,
+      "id": "57af1351-b21c-4f42-8019-ec011c970319",
+      "title": "The Camelot Knight Creation Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 225,
+      "id": "7fc93732-586d-4448-8889-818a53db7bc4",
+      "title": "The Camelot MFOE Optimal Framework Routing Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 226,
+      "id": "316aca6a-4c40-47c7-a5b6-d87889702d5e",
+      "title": "The Camelot-OS Evolution Protocol v6.5.0",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 227,
+      "id": "a9dd705d-27f0-401c-8b9c-3be4a97cad8a",
+      "title": "The Camelot-OS Operation Northstar Architecture Codex",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 228,
+      "id": "aab1fd94-c90e-4003-8174-ae85ad290a58",
+      "title": "The Camelot-OS v999.0 25-Dimensional Neural Architecture",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 229,
+      "id": "8b1a51a8-59ed-4be8-827e-fc1f24d406a3",
+      "title": "The Cosmic Ecosystem V1000 Kinetic Execution Protocol",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 230,
+      "id": "68dadf28-a9aa-4b4e-bf3b-20153228eebb",
+      "title": "The Crystal Forge: UKG_NANO Project Architecture",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 231,
+      "id": "cc6ade16-1701-475d-87cb-23e17e4e51df",
+      "title": "The Diamond Logic of the Obsidian Forge",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 232,
+      "id": "a25c056a-dd0e-46d5-8a50-57646a7ecd80",
+      "title": "The Dual-Core Synchronization and Sovereign Ledger Realignment",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 233,
+      "id": "7ad0c919-a39c-4907-a0cd-c1319f86e392",
+      "title": "The Edge AI Inflection \u2014 BitNet, 1.58-bit LLMs, and the Coming Decentralization of Inference \u2014 Continuum Resources White Paper WP-CR-2026-04",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 234,
+      "id": "3cba9a6d-185a-464f-a960-85d6b67d0919",
+      "title": "The Excalibur Codex: Camelot-OS Imperial Blueprint",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 235,
+      "id": "6ed6728f-f2d2-48ee-8bed-c320a9a30c7e",
+      "title": "The Forge Sequence: Protocol for Knight Deployment",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 236,
+      "id": "d0976d09-5739-4105-9d8f-a74d8c1ffc28",
+      "title": "The Merlin Omega Spark Deployment Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 237,
+      "id": "698091de-0f39-4356-b720-063666beb6c9",
+      "title": "The Omega Apex Master Instruction: Camelot-OS Synchronization Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 238,
+      "id": "de1b3f6e-cbc4-4273-80fb-736a55f0bb43",
+      "title": "The Omega-Titan Ancestral Blueprint: Camelot-OS Architecture v999.0",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 239,
+      "id": "206ccfc3-6323-4a05-a5fe-bce6ae64c439",
+      "title": "The Sir Socrates Dialectic Audit Protocol",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 240,
+      "id": "f71341d9-15ae-4a6c-ad2c-ca2766e5fa2f",
+      "title": "The Sovereign Context Compiler and Hyperagent Execution Architecture",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 241,
+      "id": "3d0b2b97-8934-4515-bde2-39e685ca2ff1",
+      "title": "The Sovereign Context Compiler: The Obsidian Forge Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 242,
+      "id": "1fb206ed-db04-404e-829d-0d9e4d6fbdb2",
+      "title": "The Sovereign Evolution Manifest: Omega Nexus Lattice",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 243,
+      "id": "9e1c890b-7019-4dd5-8056-16ef3fe0d51a",
+      "title": "The Sovereign Kernel Agentic Orchestration Protocol",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 244,
+      "id": "8c01b4fd-fb4e-4e4a-b81c-5dfd09f3d4a6",
+      "title": "The Sovereign Protocol of Anya \u03a9",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 245,
+      "id": "27318063-140b-477c-b8c0-b056429641ae",
+      "title": "The Sovereign Worldtree Cloudbrain Architecture",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 246,
+      "id": "dd306787-b88a-4683-8541-c50b679a9201",
+      "title": "The Symbollect Gateway Protocol",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 247,
+      "id": "9387a48c-94a6-4f8f-a8ff-861ac8bb8e6b",
+      "title": "The Tiny 1.9MB Tool That's Making Microsoft's Worst Nightmare Come True \u2014 And Millions Are Using It",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 248,
+      "id": "35206c13-86a8-4b9b-a15d-632f9608d02f",
+      "title": "The UI/UX Forge: The Seven Gates of Project Interrogation",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 249,
+      "id": "3b476cae-634a-48c1-9f8d-ebaf15b1a99e",
+      "title": "The UKG Nano Crystal Edge Production Audit",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 250,
+      "id": "708436f7-bf9a-41e3-99f9-7458040f0b94",
+      "title": "The \u03a9_MFOE Sovereign Routing Architecture",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 251,
+      "id": "3352f6a9-7f6b-4813-b6fb-4d8e7ce9ed3e",
+      "title": "This Breakthrough Could Make Data Centers 1,000x Smaller",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 252,
+      "id": "c13a6cf0-d4a1-4ae5-8737-8ed33d33ab4e",
+      "title": "This NotebookLM Trick is INSANE! \ud83d\ude31",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 253,
+      "id": "2055704b-fa10-4a3f-ba34-dcdd03188482",
+      "title": "Top 10 AI Leaders Driving the Future of Artificial Intelligence - Influence Of AI",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 254,
+      "id": "6e39a864-f91a-4255-a97d-30cc5b7d4d46",
+      "title": "Top 10 GitHub Repos So Good They Shouldn't Be Free | And the SaaS Tools They Kill | Part 3",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 255,
+      "id": "304bd32c-4de0-454f-81cd-af3ae3faf39a",
+      "title": "Top 10 Trending GitHub Repos This Week (Your Terminal Is Now an App Store)",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 256,
+      "id": "5b7cb88c-5956-4d80-8ef4-406b501e59d3",
+      "title": "Top AI Leaders of 2026 | The Industry Leaders",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 257,
+      "id": "e0ea1e15-1fe8-4ced-8856-494c231bb5c7",
+      "title": "Turn NotebookLM on or off for users - Google Workspace Help",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 258,
+      "id": "0b1ae146-53e9-4314-b600-902df7614e31",
+      "title": "UKG_NANO CRYSTAL: AEGIS_VOICE_CAPABILITY_MATRIX",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 259,
+      "id": "b79eae4b-202a-47ec-8884-dc5e8d8e738e",
+      "title": "UKG_NANO CRYSTAL: SWEEP_03_QUANTUM_STABILITY",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 260,
+      "id": "a8b52ce9-1e14-4757-a0b9-bade78014be3",
+      "title": "UKG_NANO CRYSTAL: SWEEP_04_AFFINITY_ROUTING",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 261,
+      "id": "7c434ebf-f392-4001-b52a-47dcd59dd42f",
+      "title": "UKG_NANO CRYSTAL: V999_ARMED_S26_STATE",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 262,
+      "id": "b22fe22a-c1c7-4c87-b37d-9d75cc8ce5cd",
+      "title": "Use Structured Outputs to Format Model Responses - Salesforce Help",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 263,
+      "id": "73e00771-8d1f-4141-b989-5effc0e841f2",
+      "title": "Viral Hit Blueprint: Survival Game Remix",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 264,
+      "id": "bc460127-3804-49ec-9d07-1b54547e2d38",
+      "title": "Was BitNet a dead end? What happened to ternary LLMs? : r/LocalLLaMA - Reddit",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 265,
+      "id": "3ac85a4c-bd31-4c52-8b52-45e0bd265311",
+      "title": "We just figured out how AI actually works (J-Space)",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 266,
+      "id": "3edf03eb-34ce-449d-9e3e-b3331af63ea5",
+      "title": "What is NotebookLM Enterprise? - Google Cloud Documentation",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 267,
+      "id": "56af496e-a7a3-4531-b009-e39353b032bf",
+      "title": "You are the Camelot-OS Omega Titan Lattice, a sel\u2026",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 268,
+      "id": "6e11146d-98d1-41e0-b8d3-59413a30b094",
+      "title": "Your Second Brain Is Not a Notes App (Afternoon tea Recording)",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 269,
+      "id": "a96f51af-05fe-4277-889d-93f5f6f6db5d",
+      "title": "[2603.21149] Emergent Formal Verification: How an Autonomous AI Ecosystem Independently Discovered SMT-Based Safety Across Six Domains - arXiv",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 270,
+      "id": "471a5ae7-a48b-45cc-9152-6f83b23addb0",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] 00_MASTER_COPYRIGHT_COMPILATION.docx",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 271,
+      "id": "9735c192-410a-4d1f-80d3-5534c34964d3",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] 35+ INSANE Ways To Use NotebookLM (For FREE)",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 272,
+      "id": "5392f70d-681c-4e08-83ff-0109ecb8310b",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] AI Agent Swarms Just Changed Everything  Why Single AI Is Already Dead",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 273,
+      "id": "d92d3024-cd72-4ab9-8a57-3bb1469b7c31",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] AI Resources [Updated - Mar 2026].pdf",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 274,
+      "id": "3958af47-1ef1-4d4e-ba61-9023b1071593",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] ARCHITECTURE SYNC CORRECTIONS \u2014 2026-03-31",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 275,
+      "id": "04710137-865b-4aa9-9b43-71689589cc01",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] ARTIFACTS.md",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 276,
+      "id": "01ced7b8-d5db-4acb-9f32-2ebd81ee5699",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] Agentic Workflows and Visual Synthesis Strategies.pdf",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 277,
+      "id": "505e5ef8-6038-45d0-a5f9-2f20dbea4758",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] All notes 4/12/2026",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 278,
+      "id": "ce84a2c5-8bbe-4b78-ae21-2e3e065e3fac",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] All notes 4/14/2026",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 279,
+      "id": "71c7eed9-a9d6-4567-8842-f57b904bdf30",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] All notes 4/15/2026",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 280,
+      "id": "2420a9ec-3acc-4e03-bf79-dc00b2145b4b",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] Antigravity Operations_ Agent Collaboration and Automated Quality Assurance.pdf",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 281,
+      "id": "a9df5bd1-c7ce-4e08-9d36-446c2f7cbfb9",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] Architectural Blueprint of the Septem Regna Cloudbrain Vault",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 282,
+      "id": "bc2e356f-2fd2-466e-adfd-82586984fb98",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] Basilisk Protocol Traceback: Forensic Telemetry and Attribution Implementation Blueprint",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 283,
+      "id": "bf23fad8-58dc-4750-87d0-2e521ae33d3b",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] Built-in AI Early Preview Program - The Context Index",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 284,
+      "id": "e1aaa3c8-f3a0-4efb-9bf9-f21e4850e87a",
+      "title": "[ASSIMILATED from: living Camelot-OS: The v300.4.0 Universal Singularity Recompilation] COMMANDS.md",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 285,
+      "id": "5c303ecc-3122-4a47-9b82-3b6cde40e537",
+      "title": "[CC-AGENT] lady-apis",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 286,
+      "id": "7d8c775e-7148-4126-a27c-713cdf2dafd8",
+      "title": "[CC-AGENT] merlin",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 287,
+      "id": "365a30dc-ed71-4955-9654-ea271a699c7a",
+      "title": "[CC-AGENT] sir-boris",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 288,
+      "id": "305d1573-0509-4570-aa2c-aa52a54764ef",
+      "title": "[CC-AGENT] sir-codex",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 289,
+      "id": "caecdacc-5681-44b0-a404-badbf5151697",
+      "title": "[CC-AGENT] sir-helio",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 290,
+      "id": "a98ef0fa-8bff-49b4-942f-01370d5c2cb2",
+      "title": "[CC-AGENT] sir-sentinel",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 291,
+      "id": "62334c8f-1bfb-4ebd-841d-8a22da47afd4",
+      "title": "[CC-SKILL] bitnet",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 292,
+      "id": "f1ce54a0-84de-40c5-8cb8-5bc97e6f074c",
+      "title": "[CC-SKILL] camelot-os",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 293,
+      "id": "6a31a081-e694-4044-83a6-b478c1bdbb9a",
+      "title": "[CC-SKILL] nextjs",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 294,
+      "id": "42be6a66-961f-478f-b7d6-30378413947e",
+      "title": "[CC-SKILL] python-api",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 295,
+      "id": "c2a0d00e-fb00-436d-83cb-ae0697161add",
+      "title": "[CC-SKILL] reasoning",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 296,
+      "id": "58f20fae-5704-4ffb-b709-57a70b81dcc8",
+      "title": "[CC-SKILL] rust-kinetic",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 297,
+      "id": "894bc14e-dfaa-4935-b111-cfcf43bef89b",
+      "title": "[CC-SKILL] security",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 298,
+      "id": "0a123f7b-c804-47a1-a97f-5d84ce9b120f",
+      "title": "[CC-SKILL] swarm-colony",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 299,
+      "id": "b83c4904-ba2c-47e7-9bc1-bd496583952f",
+      "title": "[CC-SKILL] vercel-domain-siege",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 300,
+      "id": "eda3867c-58c8-4275-84a2-ddcacacd07f8",
+      "title": "[CC-SKILL] voice-media",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 301,
+      "id": "37e7b1fe-6984-4632-aad0-47bab21ee4fe",
+      "title": "ai_studio_code (3).txt",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 302,
+      "id": "884b2cae-fb55-4689-a734-0c30afc5df39",
+      "title": "ai_studio_code (5).txt",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 303,
+      "id": "228fd6e2-5bd0-4c46-bf6a-4a6f0e62b805",
+      "title": "ai_studio_code (6).txt",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 304,
+      "id": "1ece8980-8daf-48a1-9ea1-be99032a79d4",
+      "title": "csl-core/docs/what-is-csl.md at main - GitHub",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 305,
+      "id": "b90c33b2-92d6-4c39-9271-0b1439ffe925",
+      "title": "excalibur_topology.md",
+      "grade": "A",
+      "reason": "Sovereign Core Architecture artifact; foundational to Camelot-OS v.1000.",
+      "action": "ANCHOR_AND_PRESERVE",
+      "is_duplicate": false
+    },
+    {
+      "index": 306,
+      "id": "9953bbc1-90b1-4bbd-8abe-003dee023e08",
+      "title": "fathers of the deep learning revolution receive acm am turing award",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 307,
+      "id": "5ed8270b-612d-4d8c-9efb-7c2529ef2a9a",
+      "title": "gemini-code-1781741025032.txt",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 308,
+      "id": "db5bec8a-3ea4-431a-ad59-2c8d1b5f092f",
+      "title": "grill-with-docs can write ADRs for unimplemented work, poisoning docs/adr/ as in-force context \u00b7 Issue #299 \u00b7 mattpocock/skills - GitHub",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 309,
+      "id": "628c4180-bb96-4c00-97ae-ed4353db4fa1",
+      "title": "grill-with-docs | Agent Skills Library - Awesome MCP Servers",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 310,
+      "id": "232600e7-8e11-4d6e-8e6c-c839458bfc33",
+      "title": "grill-with-docs: planning and responses default to English even when the user writes in another language \u00b7 Issue #199 \u00b7 mattpocock/skills - GitHub",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    },
+    {
+      "index": 311,
+      "id": "dae66b06-e5db-4628-97d9-9cb951f572ca",
+      "title": "notebooklm-mcp | MCP Servers - LobeHub",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 312,
+      "id": "d8c13db7-4e77-46f1-8818-c8a35e9c0931",
+      "title": "notebooklm-py - PyPI",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 313,
+      "id": "18ba16ca-4750-4cb4-bddf-0f226a636fc8",
+      "title": "notebooklm-py/docs/rpc-reference.md at main - GitHub",
+      "grade": "B",
+      "reason": "High-value technical research & ecosystem implementation substrate.",
+      "action": "INDEX_IN_WORLDTREE",
+      "is_duplicate": false
+    },
+    {
+      "index": 314,
+      "id": "cf901901-454e-4063-ac0c-b7d99a481222",
+      "title": "\u03a9-GLYPH-V999-SINGULARITY-CORE",
+      "grade": "D",
+      "reason": "Superseded legacy protocol/draft; predates v1000.54 Singularity Lattice & WorldTree.",
+      "action": "ARCHIVE_OR_UPDATE",
+      "is_duplicate": false
+    },
+    {
+      "index": 315,
+      "id": "b28a3d27-a4c3-4b57-8aa2-e3421f8c00db",
+      "title": "\ud83d\udca0\u03bdKG_KOR_v3:",
+      "grade": "C",
+      "reason": "Peripheral domain reference; acceptable but requires semantic categorization.",
+      "action": "CONDENSE_INTO_CRYSTAL",
+      "is_duplicate": false
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "knight_id": "SIR_SONUS",
+    "cloudbrain_uuid": "6272aa35-c285-4edc-81bc-2824ab519edf",
+    "spark_id": "0x6272AA35C2854EDC81BC2824AB519EDF",
+    "role": "Multivoice Audio Routing, Phonetic Analysis, Aoede S2S",
+    "model": "Gemini 3.8 Flash",
+    "summoning_rune": "Omega_Sonus",
+    "vfs_mount": "vfs/notebooks/6272aa35-c285-4edc-81bc-2824ab519edf/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+  }
+]

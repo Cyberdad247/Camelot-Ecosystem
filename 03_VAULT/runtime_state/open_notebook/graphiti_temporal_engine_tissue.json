@@ -1,0 +1,16 @@
+{
+  "node_type": "GRAPHITI_TEMPORAL_KNOWLEDGE_ENGINE",
+  "status": "FORGED_AND_SYNCHRONIZED",
+  "timestamp": "2026-09-08T11:07:13.882987+00:00",
+  "partitioned_knights_count": 38,
+  "database_vault": "03_VAULT/memory/graphiti/",
+  "mcp_server": "control_plane/mcp/cloudbrain_mcp_server.py",
+  "capabilities": [
+    "temporal_subgraph_querying",
+    "entity_resolution",
+    "token_consumption_optimization",
+    "time_travel_validity_intervals",
+    "fastmcp_agent_access"
+  ],
+  "verification": "PASS_ALL_38_NODES"
+}

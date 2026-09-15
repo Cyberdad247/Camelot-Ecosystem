@@ -1,0 +1,51 @@
+[
+  {
+    "knight_id": "HERMES_PRIME",
+    "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+    "spark_id": "0x28F89CB650484B5D9E94376082D24744",
+    "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",
+    "model": "Gemini / Hermes OS",
+    "summoning_rune": "Omega_HermesPrime",
+    "vfs_mount": "vfs/notebooks/28f89cb6-5048-4b5d-9e94-376082d24744/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-14T17:30:00.000000+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho Self-Hosted L4 Metamemory & Dialectic State Engine",
+    "content": "{\"status\": \"INTEGRATED\", \"subsystem\": \"Honcho Self-Hosted\", \"layer\": \"L4 Cross-Session Metamemory\", \"api_local\": \"http://127.0.0.1:8000\", \"api_mesh_vps\": \"http://100.71.218.75:8000\", \"compose_path\": \"deploy/honcho-self-hosted/docker-compose.yml\", \"vfs_path\": \"vfs://worldtree/memory/honcho/\", \"upstream_repo\": \"https://github.com/elkimek/honcho-self-hosted\", \"features\": [\"user_modeling\", \"cross_session_metamemory\", \"dialectic_derivation\", \"zero_cloud_data_leak\"]}",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/honcho_l4_memory.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime/honcho",
+    "created_at": "2026-09-14T18:45:00.000000+00:00",
+    "updated_at": "2026-09-14T18:45:00.000000+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "multivoice_router_engine",
+    "title": "Multivoice-Router Telemetry, Realtime Voice & RAG Engine",
+    "content": "{\"status\": \"INTEGRATED\", \"subsystem\": \"Multivoice-Router\", \"guardian\": \"SIR_HEIMDALL\", \"hypervisor\": \"HERMES_PRIME\", \"port\": 7680, \"upstream_repo\": \"https://github.com/Cyberdad247/Multivoice-router.git\", \"api_local\": \"http://127.0.0.1:7680\", \"api_mesh_vps\": \"http://100.71.218.75:7680\", \"features\": [\"gemini_3_1_flash_tts\", \"lmcache_affinity\", \"colibri_moe\", \"omniroute_compression\", \"tailscale_mesh\", \"superpowers_skills\", \"cloudbrain_notebook_sync\"]}",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/multivoice_router.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime/multivoice",
+    "created_at": "2026-09-14T20:10:00.000000+00:00",
+    "updated_at": "2026-09-14T20:10:00.000000+00:00"
+  }
+]

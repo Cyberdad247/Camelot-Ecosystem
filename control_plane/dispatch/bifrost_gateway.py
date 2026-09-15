@@ -9,6 +9,8 @@ runtime. This module is the Python control plane's curl-able handle on it:
   health()             — GET /health
   send_command(text)   — HMAC-signed POST /webhook/sms (inbound command inject)
   tail_swarm_events()  — read recent gateway/swarm events off the Hermes bus
+  poll_swarm_events()  — single poll of new events via hardened subscribe path
+  subscribe_swarm_events() — stream events via hardened subscribe path
 
 The link is deliberately transport-light: outbound goes over the gateway's
 existing HMAC-signed webhook (no new ingress surface), inbound observability
@@ -28,7 +30,7 @@ import json
 import os
 import urllib.error
 import urllib.request
-from typing import Any
+from typing import Any, Callable
 
 from control_plane.hermes_bridge import HermesBus
 
@@ -93,9 +95,41 @@ def send_command(message: str, timeout: float = DEFAULT_TIMEOUT) -> dict[str, An
 
 # ── Inbound: observe gateway/swarm events off the Hermes bus ────────────────
 
-def tail_swarm_events(last_n: int = 20) -> list[dict]:
-    """Read the most recent gateway/swarm events from the Hermes bus."""
-    return HermesBus().read_channel(SWARM_EVENTS_CHANNEL, last_n=last_n)
+def tail_swarm_events(last_n: int = 20, bus: HermesBus | None = None) -> list[dict]:
+    """Read the most recent gateway/swarm events from the Hermes bus (history)."""
+    return (bus or HermesBus()).read_channel(SWARM_EVENTS_CHANNEL, last_n=last_n)
+
+
+def poll_swarm_events(bus: HermesBus | None = None) -> list[dict]:
+    """Single poll of NEW swarm events via the hardened subscribe path.
+
+    Uses HermesBus.subscribe(run_forever=False), whose byte-offset cursor is
+    immune to corrupt lines, torn final writes, and file truncation — valid
+    messages are never skipped. One poll re-reads the channel from the start
+    (at-least-once per invocation); callers needing strict incrementality
+    should hold a long-lived subscriber via subscribe_swarm_events().
+    """
+    events: list[dict] = []
+    (bus or HermesBus()).subscribe(
+        SWARM_EVENTS_CHANNEL, events.append, run_forever=False
+    )
+    return events
+
+
+def subscribe_swarm_events(
+    callback: Callable[[dict], None],
+    poll_interval: float = 5.0,
+    run_forever: bool = True,
+    bus: HermesBus | None = None,
+) -> None:
+    """Stream swarm events through the hardened subscribe path.
+
+    Thin wrapper over HermesBus.subscribe for the swarm.events channel;
+    see hermes_bridge.subscribe for the corruption-immunity contract.
+    """
+    (bus or HermesBus()).subscribe(
+        SWARM_EVENTS_CHANNEL, callback, poll_interval=poll_interval, run_forever=run_forever
+    )
 
 
 # ── CLI ─────────────────────────────────────────────────────────────────────
@@ -113,6 +147,11 @@ def _main(argv: list[str] | None = None) -> None:
 
     events_p = sub.add_parser("events", help="Tail swarm/gateway events from Hermes")
     events_p.add_argument("--last", type=int, default=20)
+    events_p.add_argument(
+        "--poll",
+        action="store_true",
+        help="Use the hardened single-poll subscribe path instead of history read",
+    )
 
     args = parser.parse_args(argv)
 
@@ -121,8 +160,12 @@ def _main(argv: list[str] | None = None) -> None:
     elif args.cmd == "send":
         print(json.dumps(send_command(args.message), indent=2))
     elif args.cmd == "events":
-        for ev in tail_swarm_events(args.last):
-            print(json.dumps(ev))
+        if args.poll:
+            for ev in poll_swarm_events():
+                print(json.dumps(ev))
+        else:
+            for ev in tail_swarm_events(args.last):
+                print(json.dumps(ev))
     else:
         parser.print_help()
 

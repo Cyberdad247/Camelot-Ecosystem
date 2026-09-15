@@ -1,0 +1,10 @@
+{
+  "enclave": "VFS Guardian",
+  "path": "/hive-core/workspace/source/",
+  "permission": "READ_ONLY_PINNED",
+  "enforced_by": "VFS_GUARDIAN",
+  "mutation_permitted": false,
+  "snapshot_id": "snap-source-pinned-v1000",
+  "sha256_tree": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "status": "LOCKED"
+}
