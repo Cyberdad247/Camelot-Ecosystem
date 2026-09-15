@@ -126,10 +126,12 @@ def test_full_trust_with_revocation():
     print("\n=== Bridge: enterprise trust + cartridge revocation ===")
     reg = ToolRegistry(with_builtins=True)
     store = TrustStore(_tmp("ts.json"))
-    store.add_key("default", cc.SCHEME_HMAC)  # kid used by cc.sign default
+    m = _signed("PROD", ["echo"])
+    scheme, kid, _ = cc.parse_signature(m.signature)
+    pub = cc._resolve_public_b64(None) if scheme == cc.SCHEME_ED25519 else None
+    store.add_key(kid, scheme, public_key_b64=pub)
     rev = RevocationList(_tmp("r.json"))
     tm = TrustManager(store, rev, AuditLog(_tmp("a.log")))
-    m = _signed("PROD", ["echo"])
     bridge = BifrostCartridgeBridge(manifest_loader=_loader(m), registry=reg,
                                     trust_manager=tm, webhook_secret=SECRET)
 
