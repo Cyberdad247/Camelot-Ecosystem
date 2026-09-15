@@ -6655,3 +6655,21 @@
 | 2026-09-15T08:31:19.887443+00:00 | HYDRATION_MGR | STORE [Tier: L2, Intent: test_l2_burst] | HYDRATED |
 | 2026-09-15T08:31:24.173151+00:00 | HYDRATION_MGR | L2_CLOUD_MOUNT [Intent: test_l2_burst, Complexity: 9] | HYDRATED |
 | 2026-09-15T08:31:24.174027+00:00 | HYDRATION_MGR | HYDRATE [Intent: test_l2_burst, Tiers: L0_LOCAL,L1_MEMCASTLE,L1_LOCAL,L2_CLOUD] | HYDRATED |
+| 2026-09-15T17:11:47.931307+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-09-15T17:11:48.376989+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-09-15T17:11:48.823959+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-09-15T17:11:49.276734+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-09-15T17:11:49.683112+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+| 2026-09-15T17:11:50.124651+00:00 | HYDRATION_MGR | STORE [Tier: L1, Intent: soul_route_sir_ouroboros] | HYDRATED |
+---
+## [2026-09-15] CLIProxyAPI SIE opt-in route registered
+- **Actor**: SIR_CODEX
+- **Scope**:
+  - 01_KERNEL/EXCALIBUR/config/llm_routing.json
+  - tests/control_plane/test_sovereign_inference_cliproxy.py
+  - commit cd4a27f52e936449588e3e3f77dc90b15b8c2f2e
+- **Verification performed**:
+  - `.venv\Scripts\python.exe -m pytest tests\control_plane\test_sovereign_inference_cliproxy.py -q -> 5 passed`
+  - `.venv\Scripts\python.exe -m pytest tests\test_bifrost_token_reduction.py -q -> 1 passed`
+  - `.venv\Scripts\python.exe -m pytest tests\test_omniroute_policies.py -q -> 10 passed`
+- **Tag**: [CLIPROXY_SIE]
