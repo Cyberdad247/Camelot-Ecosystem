@@ -722,6 +722,55 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_wake_24_7_swarm_daemon",
         "hydrate": False,
     },
+    # BIO-KINETIC & SPECIALIZED KNIGHT RUNES (LADY_APIS, SIR_OCTAVIAN, SIR_GHOST)
+    "//OCTAVIAN": {
+        "knight": "sir_octavian",
+        "description": "Factory Warden, WASM sandbox execution & multi-terminal PTY (:8400)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_octavian",
+        "hydrate": False,
+    },
+    "//APIS": {
+        "knight": "lady_apis",
+        "description": "Lady Apis Bio-Kinetic Swarm & Horde Conductor (passive sensing vs. aggressive batch creation)",
+        "mode": "BIO_KINETIC",
+        "priority": 1,
+        "handler": "_handle_apis",
+        "hydrate": False,
+    },
+    "//GHOST": {
+        "knight": "sir_ghost",
+        "description": "Sir Ghost air-gapped local credential scanner & zero-cloud privacy boundary",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_ghost",
+        "hydrate": False,
+    },
+    "//HORDE": {
+        "knight": "lady_apis",
+        "description": "Aggressive bio-kinetic Map-Reduce horde batch code creation & refactoring",
+        "mode": "BIO_KINETIC",
+        "priority": 1,
+        "handler": "_handle_horde",
+        "hydrate": False,
+    },
+    "//BATCH_CREATE": {
+        "knight": "lady_apis",
+        "description": "Dispatch parallel micro-agent batch creation across the Formica & Beaver horde",
+        "mode": "BIO_KINETIC",
+        "priority": 1,
+        "handler": "_handle_batch_create",
+        "hydrate": False,
+    },
+    "//CHIMERA": {
+        "knight": "lady_apis",
+        "description": "Ancestral Chimera Research Swarm Protocol v400.0 (3-round war-room research & synthesis)",
+        "mode": "BIO_KINETIC",
+        "priority": 1,
+        "handler": "_handle_chimera",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1185,6 +1234,105 @@ def _handle_bio_swarm(param: str, context: dict) -> dict:
         "isolation": "CELLULAR_BIOLOGICAL",
         "detail": "run: python -m control_plane.core.cartridge_manager switch BIO_SWARM",
     }
+
+
+def _handle_octavian(param: str, context: dict) -> dict:
+    return {
+        "action": "octavian_dispatch",
+        "knight": "sir_octavian",
+        "service": "http://127.0.0.1:8400",
+        "directive": param or "factory metrics and WASM sandbox verification",
+        "status": "DISPATCHED",
+    }
+
+
+def _handle_apis(param: str, context: dict) -> dict:
+    import importlib
+    directive = (param or "").strip()
+    try:
+        bk = importlib.import_module("01_KERNEL.bio_kinetic")
+        conductor = bk.LadyApisConductor()
+        tokens = directive.split()
+        cmd = tokens[0].upper() if tokens else "STATUS"
+        if cmd == "HORDE":
+            res = conductor.shift_mode("HORDE")
+            return {"action": "apis_mode_shift", "mode": "HORDE", "result": res}
+        elif cmd == "SWARM":
+            res = conductor.shift_mode("SWARM")
+            return {"action": "apis_mode_shift", "mode": "SWARM", "result": res}
+        elif cmd in ("BATCH", "BATCH_CREATE"):
+            comp = tokens[1] if len(tokens) > 1 else "unnamed_batch"
+            subtasks = tokens[2:] if len(tokens) > 2 else ["generate"]
+            res = conductor.dispatch_batch_creation(comp, subtasks)
+            return {"action": "apis_batch_creation", "result": res}
+        elif cmd == "CHIMERA":
+            obj = " ".join(tokens[1:]) if len(tokens) > 1 else "deep codebase audit & architectural synthesis"
+            pulse = conductor.execute_chimera_research_pulse(obj)
+            return {"action": "apis_chimera_pulse", "result": pulse}
+        elif cmd == "START_LOOP":
+            msg = conductor.start_embedded_loop()
+            return {"action": "apis_start_loop", "message": msg}
+        elif cmd == "STOP_LOOP":
+            msg = conductor.stop_embedded_loop()
+            return {"action": "apis_stop_loop", "message": msg}
+        else:
+            return {"action": "apis_status", "status": conductor.get_status(), "directive": directive}
+    except Exception as e:
+        return {"action": "apis_error", "error": str(e), "directive": directive}
+
+
+def _handle_chimera(param: str, context: dict) -> dict:
+    import importlib
+    try:
+        bk = importlib.import_module("01_KERNEL.bio_kinetic")
+        conductor = bk.LadyApisConductor()
+        obj = (param or "deep codebase audit & architectural synthesis").strip()
+        pulse = conductor.execute_chimera_research_pulse(obj)
+        return {"action": "chimera_v400_pulse", "result": pulse}
+    except Exception as e:
+        return {"action": "chimera_error", "error": str(e)}
+
+
+def _handle_ghost(param: str, context: dict) -> dict:
+    return {
+        "action": "ghost_airgap_scan",
+        "knight": "sir_ghost",
+        "mode": "AIR_GAPPED",
+        "directive": param or "privacy and local credential audit",
+        "egress": "ZERO_CLOUD_STRICT",
+    }
+
+
+def _handle_horde(param: str, context: dict) -> dict:
+    import importlib
+    try:
+        bk = importlib.import_module("01_KERNEL.bio_kinetic")
+        conductor = bk.LadyApisConductor()
+        conductor.shift_mode("HORDE")
+        spec = (param or "unnamed_horde_batch").strip()
+        parts = spec.split()
+        target = parts[0] if parts else "component"
+        directives = parts[1:] if len(parts) > 1 else ["scaffold", "test"]
+        res = conductor.dispatch_batch_creation(target, directives)
+        return {"action": "horde_batch_dispatched", "mode": "HORDE", "result": res}
+    except Exception as e:
+        return {"action": "horde_error", "error": str(e)}
+
+
+def _handle_batch_create(param: str, context: dict) -> dict:
+    import importlib
+    try:
+        bk = importlib.import_module("01_KERNEL.bio_kinetic")
+        conductor = bk.LadyApisConductor()
+        spec = (param or "batch_item").strip()
+        parts = spec.split()
+        target = parts[0] if parts else "batch_target"
+        directives = parts[1:] if len(parts) > 1 else ["build"]
+        res = conductor.dispatch_batch_creation(target, directives)
+        return {"action": "batch_create_dispatched", "result": res}
+    except Exception as e:
+        return {"action": "batch_create_error", "error": str(e)}
+
 
 
 def _handle_rezero(param: str, context: dict) -> dict:

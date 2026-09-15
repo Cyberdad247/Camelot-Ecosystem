@@ -9,3 +9,17 @@
 | **`dkesi_build`** | `//DIRECT_BUILD <spec>` | SIR_KAY | Multi-knight kinetic build sprint, AST verification, test-first loop |
 | **`lucas_telemetry`**| `//LUCAS_TELEMETRY` | SIR_LUCAS | Live socket inspection across fleet, router status, XP ledger verification |
 | **`repo_assimilate`**| `//ASSIMILATE_REPO <url>` | ANYA_Ω | Isolated Git worktree branching, cartridge synthesis, single-trunk purge |
+| **`bio_beaver`** | `//BEAVER` | SIR_FORGE | SSU generation, strict DRY code construction, 12-col grid validation (≤18 MiB) |
+| **`bio_phoenix`** | `//PHOENIX` | SIR_DEBUG | ReZero protocol execution, automated git rollback, Z3 symbolic traceback |
+| **`bio_ghost`** | `//GHOST` | SIR_GHOST | Air-gapped isolation, Tor Signal.NEWNYM rotation, zero cloud egress |
+| **`bio_owl`** | `//OWL` | MERLIN_Ω | Tree of Thoughts (ToT), Vidal-Foresight simulation, 3-move consequence model |
+| **`bio_snowball`** | `//SNOWBALL` | LADY_MNEMOSYNE | L0/L1/L2 hierarchical context compression, TOON manifest, MemPalace SQLite FTS5 |
+| **`bio_apis`** | `//APIS` | LADY_APIS | SKILL_APIS_BIO_KINETIC_HARNESS: Passive SWARM vs. Aggressive HORDE mode shift, batch creation, minute-loop |
+| **`bio_horde`** | `//HORDE <spec>` | LADY_APIS | Map-Reduce parallel batch code creation & refactoring via Formica & Beaver horde |
+| **`bio_batch`** | `//BATCH_CREATE` | LADY_APIS | Batch creation mode: parallel dispatch of SSU tasks under 4-Knight Aegis Shield |
+| **`bio_arachne`** | `//ARACHNE` | SIR_BORIS | AsyncStealthySession, visual layout parsing, multi-profile scraping loops |
+| **`bio_corvus`** | `//CORVUS` | SIR_CODEX | Dead-drop extraction, reverse-engineering historical commits, artifact-to-skill |
+| **`bio_octavian`** | `//OCTAVIAN` | SIR_OCTAVIAN | Split-brain IPC sync, 8-terminal execution management, IP copyright tagging (:8400) |
+| **`bio_lobo`** | `//LOBO` | KNIGHT_STRATEGOS | Speed-to-revenue filtration, high-ticket workflow, $0-investment validation |
+| **`bio_vulpis`** | `//VULPIS` | LADY_GUINEVERE | SEO/GEO optimization, multi-channel syndication, engagement loop tracking |
+

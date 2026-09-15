@@ -331,7 +331,8 @@ All Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be
 | **SIR_SENTINEL** | AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement | Gemini 3.8 Flash | `07cbb441-f008-424c-820a-85676210be39` |
 | **SIR_DEBUG** | PIV Self-Healing Loop, Error Diagnosis & AST Repair | Gemini 3.8 Flash | `fdc42a4a-3060-4eac-b57c-8e6009ed634a` |
 | **SIR_GHOST** | Privacy Scanner, Air-Gapped Credentials & Local Vault | Ollama Local Container | `422a184b-93e7-4dfd-8a12-75d2268b6c60` |
-| **LADY_APIS** | BASHR Research Loop, Bio-Swarm Isolation, Context Forager | Gemini 3.8 Flash | `378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f` |
+| **LADY_APIS** | Bio-Kinetic Swarm/Horde Conductor, BASHR Research, Ambient Sensing | Gemini 3.8 Flash / NullClaw | `378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f` |
+| **SIR_OCTAVIAN** | Factory Warden, WASM Sandbox, Multi-Terminal PTY Execution (:8400) | Rust 1.96 / Wasmtime 14.0 | `0d2af08b-f85b-4dc0-ae3a-5cf5aaf5e08a` |
 | **MERLIN_OMEGA** | GoT/ToT Deep Reasoning, Mathematical Proofs, System 2 | Gemini Pro / Opus | `af927fde-d7eb-42ee-8c79-51b3e78ef39b` |
 | **SIR_HELIO** | Voice OS, Real-Time Audio Pipeline, //vocal Dispatcher | Gemini 3.8 Flash | `56820318-bb91-451f-aac4-4b46424898cf` |
 | **SIR_SONUS** | Multivoice Audio Routing, Phonetic Analysis, Aoede S2S | Gemini 3.8 Flash | `6272aa35-c285-4edc-81bc-2824ab519edf` |
@@ -414,6 +415,12 @@ dispatch directly to the runic router.
 | `//SYNC_VFS_WORKSPACE` | HERMES_PRIME | Realign `Knights/Hermes_Prime/` VFS state with research nodes |
 | `//FORGE_HERMES_PRIME_FILES` | HERMES_PRIME | Scaffold the Hermes_Prime VFS soul files (idempotent) |
 | `//IGNITE_SELF_EVOLUTION_LOOP <seed>` | HERMES_PRIME | Run a real MGV research cycle — Ouroboros memory + Phial weight re-weighting |
+| `//OCTAVIAN [spec]` | SIR_OCTAVIAN | Factory metrics, health endpoints, WASM sandbox & multi-terminal PTY (:8400) |
+| `//APIS [SWARM|HORDE|status]` | LADY_APIS | Command bio-kinetic swarm/horde posture, ambient foraging or batch execution |
+| `//GHOST [target]` | SIR_GHOST | Air-gapped local credential scanner, Tor rotation, zero-cloud egress |
+| `//HORDE <component> [tasks]` | LADY_APIS | Direct aggressive Map-Reduce parallel batch code creation & refactoring |
+| `//BATCH_CREATE <component> [tasks]` | LADY_APIS | Dispatch batch creation mode to Formica & Beaver micro-workers |
+| `//CHIMERA [objective]` | LADY_APIS | Execute Ancestral Chimera Research Swarm Protocol v400.0 (3-round war room) |
 
 ### Omega Dispatch
 

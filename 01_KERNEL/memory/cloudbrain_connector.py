@@ -97,6 +97,8 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "KICKBOX":             "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",   # KickBox Audio
     "INSPIRA":             "cadfe67e-7187-472e-8bf4-8a2aded84e4e",   # HiveIDE-aka Inspira
     "BIO_KINETIC_SWARM":   "93b21c40-10ff-4e89-a212-08f37b1297e1",   # Bio-Kinetic Swarm Node
+    "ANCESTRAL_CHIMERA_RESEARCH_SWARM_PROTOCOL_V400": "ba87d454-9335-4f2f-bf9f-f3845a8c6948", # Ancestral Chimera Research Swarm Protocol v400.0
+    "CHIMERA_RESEARCH_SWARM": "ba87d454-9335-4f2f-bf9f-f3845a8c6948",# Chimera Research Swarm Protocol v400.0 alias
     "SIR_GIDEON":          "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Sir Gideon: Hyperbolic Chamber, Z3 & Gideon Verdict Gate
     "INVISIONED_MARKETING":"e6374819-50ce-41cf-b6b3-99924ca6ab90",   # Invisioned Marketing: Agentic OS and Digital Strategy Dashboard (Verified Live)
     "KNIGHT_STRATEGOS":    "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # Knight Strategos Marketing Assimilation Node
@@ -133,7 +135,9 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "SIR_SENTINEL":        ["security", "audit", "iron_gate", "guard", "bio_auth", "ed25519", "cgroups"],
     "SIR_DEBUG":           ["debug", "heal", "piv", "repair"],
     "SIR_GHOST":           ["privacy", "secrets", "air_gap", "scan"],
-    "LADY_APIS":           ["research", "bashr", "foraging", "context", "bio_swarm", "eagle_audit"],
+    "LADY_APIS":           ["research", "bashr", "foraging", "context", "bio_swarm", "horde", "batch_creation", "chimera_v400", "ancestral_chimera", "nullclaw", "camouflage"],
+    "BIO_KINETIC_SWARM":   ["swarm", "horde", "bio_kinetic", "cellular_diode", "nullclaw", "chimera_v400", "formica", "beaver", "gorilla", "arachne"],
+    "ANCESTRAL_CHIMERA_RESEARCH_SWARM_PROTOCOL_V400": ["chimera", "ancestral", "v400", "research", "swarm", "horde", "piv", "hydra_cascade", "bio_kinetic", "lady_apis"],
     "MERLIN_OMEGA":        ["reasoning", "got", "tot", "deep_think", "math", "z3", "formal_verification"],
     "SIR_HELIO":           ["voice", "tts", "audio", "realtime", "alfred", "vad", "webrtc"],
     "SIR_SONUS":           ["voice", "audio", "multivoice", "phonetic", "waveform", "push_to_talk"],
