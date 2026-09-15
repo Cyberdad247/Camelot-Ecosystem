@@ -83,7 +83,7 @@ def print_status():
         print(f"   {icon} {s:<22} : {state}")
     print("=" * 80)
 
-def connect_ssh(user: str = "ubuntu"):
+def connect_ssh(user: str = "root"):
     print(f"\n🔐 Initiating SSH Session to Camelot Hub ({user}@{VPS_PUBLIC_IP})...")
     ssh_cmd = ["ssh", f"{user}@{VPS_PUBLIC_IP}"]
     try:
@@ -91,17 +91,53 @@ def connect_ssh(user: str = "ubuntu"):
     except Exception as e:
         print(f"❌ SSH Execution Error: {e}")
 
+def run_hermes_command(args_list: list[str]):
+    subcmd = " ".join(args_list) if args_list else ""
+    if subcmd:
+        full_cmd = f"docker exec -it hermes hermes {subcmd}"
+    else:
+        full_cmd = "docker exec -it hermes hermes"
+    print(f"🚀 Dispatching to Hermes Agent on VPS: {full_cmd}")
+    ssh_cmd = ["ssh", "-t", f"root@{VPS_PUBLIC_IP}", full_cmd]
+    try:
+        subprocess.run(ssh_cmd)
+    except Exception as e:
+        print(f"❌ Hermes Execution Error: {e}")
+
+def open_dashboard():
+    url = f"http://{VPS_PUBLIC_IP}/"
+    print(f"🌐 Opening Hermes Web Dashboard: {url}")
+    try:
+        import webbrowser
+        webbrowser.open(url)
+    except Exception as e:
+        print(f"❌ Could not launch browser: {e}")
+
 def main():
     parser = argparse.ArgumentParser(description="Camelot-OS Hub VPS Access Client")
     parser.add_argument("--status", action="store_true", help="Probe and display VPS status")
     parser.add_argument("--ssh", action="store_true", help="Launch SSH connection to VPS")
-    parser.add_argument("--user", type=str, default="ubuntu", help="SSH username (default: ubuntu)")
-    args = parser.parse_args()
+    parser.add_argument("--hermes", nargs="*", help="Execute Hermes Agent command inside container")
+    parser.add_argument("--dashboard", action="store_true", help="Open Hermes web dashboard in browser")
+    parser.add_argument("--model", action="store_true", help="Interactive Hermes model picker")
+    parser.add_argument("--logs", action="store_true", help="View Hermes container logs")
+    parser.add_argument("--user", type=str, default="root", help="SSH username (default: root)")
+    args, remaining = parser.parse_known_args()
 
     if args.ssh:
         connect_ssh(args.user)
+    elif args.dashboard:
+        open_dashboard()
+    elif args.model:
+        run_hermes_command(["model"])
+    elif args.logs:
+        run_hermes_command(["logs"])
+    elif args.hermes is not None:
+        cmd = args.hermes + remaining
+        run_hermes_command(cmd)
     else:
         print_status()
 
 if __name__ == "__main__":
     main()
+

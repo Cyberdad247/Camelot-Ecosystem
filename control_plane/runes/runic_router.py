@@ -623,6 +623,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_omni_voice_dag",
         "hydrate": False,
     },
+    "//HERMES": {
+        "knight": "hermes_prime",
+        "description": "Dispatch intent, command, or query directly to NousResearch Hermes Agent on VPS Hub",
+        "mode": "AGENTIC",
+        "priority": 1,
+        "handler": "_handle_hermes",
+        "hydrate": False,
+    },
     # SOVEREIGN TELEMETRY RUNES — SIR_LUCAS (Herald of Telemetry & Visualization)
     "//LUCAS_TELEMETRY": {
         "knight": "sir_lucas",
@@ -1967,6 +1975,31 @@ def _handle_render_3d_adaptive_workspace(param: Any, context: dict) -> dict:
         "frame_budget_ms": 16.6,
         "target_display": "Primary Desktop + S26 Ultra Excalibur ADB Viewport",
         "status": "RENDERED",
+    }
+
+
+def _handle_hermes(param: Any, context: dict) -> dict:
+    """//HERMES — dispatch intent or query directly to NousResearch Hermes Agent on VPS."""
+    from control_plane.infra.hermes_vps_gateway import get_hermes_status, run_hermes_cli
+
+    arg_str = str(param).strip() if param and not isinstance(param, dict) else ""
+    if not arg_str or arg_str.lower() in {"status", "info", "ping"}:
+        return {
+            "action": "hermes_dispatch",
+            "knight": "hermes_prime",
+            "mode": "STATUS",
+            "result": get_hermes_status(),
+        }
+
+    res = run_hermes_cli(arg_str)
+    return {
+        "action": "hermes_dispatch",
+        "knight": "hermes_prime",
+        "command": arg_str,
+        "status": res.get("status"),
+        "returncode": res.get("returncode"),
+        "stdout": res.get("stdout"),
+        "stderr": res.get("stderr"),
     }
 
 
