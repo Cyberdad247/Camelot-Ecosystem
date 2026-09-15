@@ -14,11 +14,14 @@ Sentinel) and disguised from developer inspection via CamouflageCipher.
 
 from __future__ import annotations
 
+import ast
 import enum
 import json
 import logging
 import os
 import queue
+import re
+import subprocess
 import threading
 import time
 from dataclasses import asdict, dataclass, field
@@ -33,7 +36,7 @@ logger = logging.getLogger("camelot.bio_kinetic")
 
 class HordeMode(str, enum.Enum):
     SWARM = "SWARM"  # Passive: Ambient background sensing & foraging
-    HORDE = "HORDE"  # Aggressive: Kinetic batch creation & Map-Reduce refactoring
+    HORDE = "HORDE"  # Aggressive: Kinetic batch creation, reverse engineering & Map-Reduce refactoring
 
 
 @dataclass
@@ -48,15 +51,20 @@ class MicroWorkerSpec:
 
 
 @dataclass
-class BatchCreationTask:
+class HordeTask:
     task_id: str
     target_component: str
     directives: List[str]
     assigned_worker: str
+    task_type: str = "BATCH_CREATION"  # "BATCH_CREATION" or "REVERSE_ENGINEER"
     diff_lines: int = 0
     code_content: Optional[str] = None
     completed: bool = False
     result_hash: Optional[str] = None
+    reverse_engineering_artifact: Optional[Dict[str, Any]] = None
+
+
+BatchCreationTask = HordeTask
 
 
 class BioHordeEngine:
@@ -135,16 +143,123 @@ class BioHordeEngine:
         if worker_id not in self.workers:
             worker_id = "formica_01"
 
-        task = BatchCreationTask(
+        task = HordeTask(
             task_id=task_id,
             target_component=target_component,
             directives=directives,
             assigned_worker=worker_id,
+            task_type="BATCH_CREATION",
             diff_lines=diff_lines,
             code_content=code_content,
         )
         self.task_queue.put(task)
         return task
+
+    def submit_reverse_engineering_task(
+        self,
+        target_component: str,
+        directives: Optional[List[str]] = None,
+        worker_type: str = "corvus",
+        diff_lines: int = 0,
+        code_content: Optional[str] = None,
+    ) -> HordeTask:
+        """Enqueue a reverse engineering strike into Horde Mode (Corvus / Mantis / Octopus)."""
+        active_directives = directives or [
+            "git_commit_forensics",
+            "ast_symbol_decomposition",
+            "dead_drop_scavenge",
+            "artifact_to_skill_synthesis",
+        ]
+        task_id = f"re_{int(time.time()*1000)}_{len(active_directives)}"
+        worker_id = f"{worker_type}_01"
+        if worker_id not in self.workers:
+            worker_id = "corvus_01"
+
+        task = HordeTask(
+            task_id=task_id,
+            target_component=target_component,
+            directives=active_directives,
+            assigned_worker=worker_id,
+            task_type="REVERSE_ENGINEER",
+            diff_lines=diff_lines,
+            code_content=code_content,
+        )
+        self.task_queue.put(task)
+        return task
+
+    def _execute_reverse_engineering(self, task: HordeTask) -> Dict[str, Any]:
+        """Perform AST decomposition, Git commit forensics, and artifact-to-skill synthesis."""
+        target_path = Path(task.target_component)
+        code = task.code_content
+        if not code and target_path.exists() and target_path.is_file():
+            try:
+                with open(target_path, "r", encoding="utf-8", errors="ignore") as fp:
+                    code = fp.read()
+            except Exception:
+                code = None
+
+        symbols: Dict[str, Any] = {"classes": [], "functions": [], "imports": []}
+        if code:
+            try:
+                tree = ast.parse(code)
+                for node in ast.walk(tree):
+                    if isinstance(node, ast.ClassDef):
+                        methods = [m.name for m in node.body if isinstance(m, ast.FunctionDef)]
+                        symbols["classes"].append({"name": node.name, "methods": methods, "lineno": node.lineno})
+                    elif isinstance(node, ast.FunctionDef):
+                        args = [a.arg for a in node.args.args]
+                        symbols["functions"].append({"name": node.name, "args": args, "lineno": node.lineno})
+                    elif isinstance(node, ast.Import):
+                        symbols["imports"].extend([alias.name for alias in node.names])
+                    elif isinstance(node, ast.ImportFrom):
+                        symbols["imports"].append(node.module or "")
+            except Exception:
+                class_matches = re.findall(r"(?:class|interface|struct)\s+([A-Za-z0-9_]+)", code)
+                func_matches = re.findall(r"(?:def|fn|function|func)\s+([A-Za-z0-9_]+)", code)
+                symbols["classes"] = [{"name": c} for c in class_matches]
+                symbols["functions"] = [{"name": f} for f in func_matches]
+
+        git_forensics: Dict[str, Any] = {"lineage_available": False, "historical_commits": []}
+        try:
+            if target_path.exists():
+                cmd = ["git", "log", "-n", "5", "--oneline", "--", str(target_path)]
+                out = subprocess.check_output(cmd, cwd=str(self.base_dir), text=True, stderr=subprocess.DEVNULL)
+                commits = [line.strip() for line in out.splitlines() if line.strip()]
+                git_forensics = {"lineage_available": bool(commits), "historical_commits": commits}
+        except Exception:
+            pass
+
+        clean_id = re.sub(r"[^A-Za-z0-9_]", "_", task.target_component).upper().strip("_")
+        skill_manifest = {
+            "skill_manifest": {
+                "id": f"SKILL_REVERSED_{clean_id}",
+                "target_engine": "SIR_CODEX //CORVUS",
+                "runtime_allocation": "<22MB_WASM_SANDBOX",
+                "progressive_disclosure": {
+                    "metadata_load": "Always active in global system prompt (Front-matter only)",
+                    "body_load": "Loaded into context only when //CORVUS mode is explicitly triggered",
+                },
+                "execution_rules": {
+                    "input_validation": "Strict DRY parsing via AST Scythe",
+                    "stop_condition": "All reconstructed interfaces pass type validation",
+                    "verification": "HitL Iron Gate required if diff > 10 lines",
+                },
+                "extracted_symbols": {
+                    "classes": [c["name"] if isinstance(c, dict) else c for c in symbols.get("classes", [])],
+                    "functions": [f["name"] if isinstance(f, dict) else f for f in symbols.get("functions", [])],
+                    "imports": symbols.get("imports", [])[:10],
+                },
+                "compliance_signature": f"[Ω-SKILL-Σ:λ24-χ:REVERSE_{clean_id}]",
+            }
+        }
+
+        return {
+            "target": task.target_component,
+            "forensics": git_forensics,
+            "ast_symbols": symbols,
+            "synthesized_skill": skill_manifest,
+            "decompilation_status": "SUCCESS" if symbols.get("classes") or symbols.get("functions") else "DEEP_SCAN_READY",
+        }
 
     def tick(self) -> Dict[str, Any]:
         """Execute one 60-second micro-loop cycle."""
@@ -162,13 +277,13 @@ class BioHordeEngine:
             }
             self._record_camouflaged_telemetry(pulse_data)
         else:
-            # Horde: Aggressive parallel execution of batch queue
+            # Horde: Aggressive parallel execution of batch queue (Creation & Reverse Engineering)
             while not self.task_queue.empty():
                 task = self.task_queue.get_nowait()
                 # Run Aegis Shield 4-Knight Audit
                 audit = self.aegis.audit_task(
                     task_id=task.task_id,
-                    task_type="BATCH_CREATION",
+                    task_type=task.task_type,
                     payload={"target": task.target_component, "directives": task.directives},
                     diff_lines=task.diff_lines,
                     code_content=task.code_content,
@@ -182,6 +297,9 @@ class BioHordeEngine:
                 worker = self.workers[task.assigned_worker]
                 worker.status = "EXECUTING"
                 worker.last_tick = time.time()
+
+                if task.task_type == "REVERSE_ENGINEER":
+                    task.reverse_engineering_artifact = self._execute_reverse_engineering(task)
 
                 task.completed = True
                 task.result_hash = f"0x{int(time.time()):x}"

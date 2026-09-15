@@ -418,9 +418,10 @@ dispatch directly to the runic router.
 | `//OCTAVIAN [spec]` | SIR_OCTAVIAN | Factory metrics, health endpoints, WASM sandbox & multi-terminal PTY (:8400) |
 | `//APIS [SWARM|HORDE|status]` | LADY_APIS | Command bio-kinetic swarm/horde posture, ambient foraging or batch execution |
 | `//GHOST [target]` | SIR_GHOST | Air-gapped local credential scanner, Tor rotation, zero-cloud egress |
-| `//HORDE <component> [tasks]` | LADY_APIS | Direct aggressive Map-Reduce parallel batch code creation & refactoring |
+| `//HORDE <component> [tasks]` | LADY_APIS | Direct aggressive Map-Reduce parallel batch code creation, reverse engineering strikes & refactoring |
 | `//BATCH_CREATE <component> [tasks]` | LADY_APIS | Dispatch batch creation mode to Formica & Beaver micro-workers |
 | `//CHIMERA [objective]` | LADY_APIS | Execute Ancestral Chimera Research Swarm Protocol v400.0 (3-round war room) |
+| `//REVERSE_ENGINEER <path>` | SIR_CODEX / LADY_APIS | Horde-Mode reverse engineering strike (Corvus AST dissection, git forensics & skill synthesis) |
 | `//FORMICA <task>` | LADY_APIS | Parallel Map-Reduce Worker Ants micro-execution (150-token lifecycle) |
 | `//BEAVER <task>` | SIR_FORGE | Castor Beaver SSU construction & container isolation dams |
 | `//GORILLA <task>` | SIR_FORGE | Pongid Gorilla heavyweight API & Cloud SDK connectivity |

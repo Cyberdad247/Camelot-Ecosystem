@@ -790,6 +790,8 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     "//DELPHINUS": {"knight": "sir_sonus", "description": "Dolphin Acoustic Resonance & Aoede S2S Audio Router", "mode": "ORACLE", "priority": 1, "handler": "_handle_fauna_delphinus", "hydrate": False},
     "//SCORPIO": {"knight": "sir_gideon", "description": "Scorpion GIDEON Forensic Risk Needle & Security Audit", "mode": "SENTINEL", "priority": 1, "handler": "_handle_fauna_scorpio", "hydrate": False},
     "//ALCHEMIST": {"knight": "sir_alchemist", "description": "Alchemist TurboQuant 3-Bit Quantization & Compression", "mode": "FORGE", "priority": 1, "handler": "_handle_fauna_alchemist", "hydrate": False},
+    "//REVERSE_ENGINEER": {"knight": "sir_codex", "description": "Horde-Mode Reverse Engineering Strike (Corvus/Mantis AST & Git Forensics)", "mode": "KINETIC", "priority": 1, "handler": "_handle_reverse_engineer", "hydrate": False},
+    "//REVERSE": {"knight": "sir_codex", "description": "Horde-Mode Reverse Engineering Strike (Alias)", "mode": "KINETIC", "priority": 1, "handler": "_handle_reverse_engineer", "hydrate": False},
 }
 
 # 29 Omega Runes — system-level operations
@@ -1381,7 +1383,17 @@ def _handle_fauna_phoenix(param: str, context: dict) -> dict:
 
 
 def _handle_fauna_corvus(param: str, context: dict) -> dict:
-    return _handle_fauna_generic("corvus", param, ["dead_drop_scavenge"])
+    import importlib
+    try:
+        bk = importlib.import_module("01_KERNEL.bio_kinetic")
+        conductor = bk.LadyApisConductor()
+        conductor.shift_mode("HORDE")
+        target = param or "legacy_codebase"
+        directives = ["git_commit_forensics", "ast_symbol_decomposition", "dead_drop_scavenge", "artifact_to_skill_synthesis"]
+        res = conductor.dispatch_reverse_engineering(target, directives, worker_type="corvus")
+        return {"action": "corvus_reverse_engineering_dispatched", "worker": "corvus_01", "result": res}
+    except Exception as e:
+        return {"action": "corvus_error", "error": str(e)}
 
 
 def _handle_fauna_delphinus(param: str, context: dict) -> dict:
@@ -1415,12 +1427,35 @@ def _handle_horde(param: str, context: dict) -> dict:
         conductor.shift_mode("HORDE")
         spec = (param or "unnamed_horde_batch").strip()
         parts = spec.split()
+        if parts and parts[0].upper() in ("REVERSE", "REVERSE_ENGINEER", "DECOMPILE", "DISSECT"):
+            target = parts[1] if len(parts) > 1 else "legacy_target"
+            directives = parts[2:] if len(parts) > 2 else ["git_commit_forensics", "ast_symbol_decomposition", "artifact_to_skill_synthesis"]
+            res = conductor.dispatch_reverse_engineering(target, directives, worker_type="corvus")
+            return {"action": "horde_reverse_engineering_dispatched", "mode": "HORDE", "result": res}
+
         target = parts[0] if parts else "component"
         directives = parts[1:] if len(parts) > 1 else ["scaffold", "test"]
         res = conductor.dispatch_batch_creation(target, directives)
         return {"action": "horde_batch_dispatched", "mode": "HORDE", "result": res}
     except Exception as e:
         return {"action": "horde_error", "error": str(e)}
+
+
+def _handle_reverse_engineer(param: str, context: dict) -> dict:
+    import importlib
+    try:
+        bk = importlib.import_module("01_KERNEL.bio_kinetic")
+        conductor = bk.LadyApisConductor()
+        conductor.shift_mode("HORDE")
+        target = (param or "legacy_codebase").strip()
+        res = conductor.dispatch_reverse_engineering(
+            target,
+            ["git_commit_forensics", "ast_symbol_decomposition", "artifact_to_skill_synthesis"],
+            worker_type="corvus",
+        )
+        return {"action": "reverse_engineer_dispatched", "mode": "HORDE", "result": res}
+    except Exception as e:
+        return {"action": "reverse_engineer_error", "error": str(e)}
 
 
 def _handle_batch_create(param: str, context: dict) -> dict:

@@ -10,7 +10,7 @@
 | **`lucas_telemetry`**| `//LUCAS_TELEMETRY` | SIR_LUCAS | Live socket inspection across fleet, router status, XP ledger verification |
 | **`repo_assimilate`**| `//ASSIMILATE_REPO <url>` | ANYA_Ω | Isolated Git worktree branching, cartridge synthesis, single-trunk purge |
 | **`bio_apis`** | `//APIS` | LADY_APIS | SKILL_APIS_BIO_KINETIC_HARNESS: Passive SWARM vs. Aggressive HORDE mode shift, batch creation, minute-loop |
-| **`bio_horde`** | `//HORDE <spec>` | LADY_APIS | Map-Reduce parallel batch code creation & refactoring via Formica & Beaver horde |
+| **`bio_horde`** | `//HORDE <spec>` | LADY_APIS | Map-Reduce parallel batch code creation, reverse engineering strikes & refactoring |
 | **`bio_batch`** | `//BATCH_CREATE` | LADY_APIS | Batch creation mode: parallel dispatch of SSU tasks under 4-Knight Aegis Shield |
 | **`bio_chimera`** | `//CHIMERA` | LADY_APIS | Ancestral Chimera Research Swarm Protocol v400.0: 3-round war-room research & synthesis (ba87d454) |
 | **`bio_formica`** | `//FORMICA` | LADY_APIS | Concurrent Map-Reduce micro-execution across 15-50 micro-worker ants (150-token lifecycle) |
@@ -27,7 +27,7 @@
 | **`bio_lobo`** | `//LOBO` | KNIGHT_STRATEGOS | Speed-to-revenue filtration, high-ticket workflow, $0-investment validation |
 | **`bio_vulpis`** | `//VULPIS` | LADY_GUINEVERE | SEO/GEO optimization, multi-channel syndication, engagement loop tracking |
 | **`bio_phoenix`** | `//PHOENIX` | SIR_DEBUG | ReZero protocol execution, automated git rollback, Z3 symbolic traceback |
-| **`bio_corvus`** | `//CORVUS` | SIR_CODEX | Dead-drop extraction, reverse-engineering historical commits, artifact-to-skill |
+| **`bio_corvus`** | `//CORVUS` / `//REVERSE_ENGINEER` | SIR_CODEX | Dead-drop extraction, reverse-engineering historical commits, AST decomposition & artifact-to-skill synthesis |
 | **`bio_ghost`** | `//GHOST` | SIR_GHOST | Air-gapped isolation, Tor Signal.NEWNYM rotation, zero cloud egress |
 | **`bio_delphinus`**| `//DELPHINUS`| SIR_SONUS | High-frequency acoustic resonance, Aoede duplex speech-to-speech audio routing |
 | **`bio_scorpio`** | `//SCORPIO` | SIR_GIDEON | GIDEON 13-gate forensic risk needle, adversarial compliance puncture |

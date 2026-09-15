@@ -64,6 +64,34 @@ class LadyApisConductor:
             "engine_tick": tick_res,
         }
 
+    def dispatch_reverse_engineering(
+        self,
+        target_component: str,
+        directives: Optional[List[str]] = None,
+        worker_type: str = "corvus",
+        code_content: Optional[str] = None,
+        diff_lines: int = 0,
+    ) -> Dict[str, Any]:
+        """Trigger Horde-mode reverse engineering strike across specialized fauna (Corvus, Mantis, Octopus)."""
+        task = self.engine.submit_reverse_engineering_task(
+            target_component=target_component,
+            directives=directives,
+            worker_type=worker_type,
+            diff_lines=diff_lines,
+            code_content=code_content,
+        )
+        # In HORDE mode, auto-tick once to begin processing immediate queue
+        tick_res = self.engine.tick() if self.engine.mode == HordeMode.HORDE else {"queued": True}
+        return {
+            "task_id": task.task_id,
+            "target_component": target_component,
+            "operation": "REVERSE_ENGINEERING",
+            "assigned_worker": task.assigned_worker,
+            "directives": task.directives,
+            "engine_tick": tick_res,
+            "artifact": task.reverse_engineering_artifact,
+        }
+
     def start_embedded_loop(self) -> str:
         """Start the embeddable 60-second micro-loop daemon."""
         self.engine.start_minute_loop()

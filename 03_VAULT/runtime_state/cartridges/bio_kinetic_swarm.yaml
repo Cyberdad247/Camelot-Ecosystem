@@ -181,13 +181,15 @@ engines:
 
   - id: "bio_corvus"
     rune: "//CORVUS"
-    archetype: "Dead-Drop Forensic Scavenging"
+    archetype: "Dead-Drop Forensic Scavenging & Reverse Engineering"
     executor: "SIR_CODEX"
     cgroup_memory_max_mb: 22
     skills:
       - name: "DeadDrop_Extraction"
         description: "Isolated recovery of orphaned scratch files and uncommitted diffs"
-    trigger: "Legacy codebase or orphaned vector audit"
+      - name: "Reverse_Engineering_Forensics"
+        description: "Historical commit analysis, AST symbol decomposition, dead-drop extraction, and artifact-to-skill synthesis"
+    trigger: "Legacy codebase, orphaned vector audit, or reverse engineering strike"
 
   - id: "bio_ghost"
     rune: "//GHOST"
