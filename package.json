@@ -44,6 +44,7 @@
   "dependencies": {
     "@bitkyc08/opencodex": "^2.29.0",
     "@google/generative-ai": "^0.24.1",
+    "@mariozechner/pi-coding-agent": "^0.73.1",
     "@prisma/client": "^5.22.0",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

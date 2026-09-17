@@ -88,9 +88,9 @@
 }
 
 @SCALING_TOPOLOGY {
-  vps_hub: "KVM563 (162.35.107.134) - Bifrost Gateway :3001, Router :8095, Open-Notebook, Shadow Devs (7.2GB cap)";
+  vps_hub: "KVM563 (162.35.107.134 / tailnet 100.110.180.18) - Bifrost Gateway :3001, Router :8095, Open-Notebook, Shadow Devs (7.2GB cap)";
   orchestrator: "Cybertronia (100.118.224.52) - High-Performance Windows Host";
   mobile_sentinel: "Samsung Galaxy S26 Ultra (100.106.246.126) - Excalibur Cockpit, Kickbox VAD, WebRTC (350MB slice)";
-  mesh_nodes: "fothers-camelot (100.121.48.50), lakesha (100.100.155.55), camelot-relay-modal (100.84.98.39), kba-services (100.71.218.75), motorola-moto-g-power-5g (100.89.129.105)";
+  mesh_nodes: "fothers-camelot (100.121.48.50), lakesha (100.100.155.55), macbook-pro-3 (100.113.101.43), motorola-moto-g-power-5g (100.89.129.105)";
   tenancy_isolation: "PostgreSQL Row-Level Security + TenantReceiptChain RFC 8785 Merkle Tree";
 }

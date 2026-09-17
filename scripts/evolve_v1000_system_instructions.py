@@ -99,7 +99,7 @@ All 38 Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38
 - **Rule 2 (Orchestration):** ALWAYS request a stateless validator for pull requests when available.
 - **Rule 3 (Context):** ALWAYS use codegraph AST tools when `.codegraph/` exists.
 - **Rule 4 (Topology):** Samsung Galaxy S26 Ultra is the `Excalibur Command Center` (Kinetic mobile sentinel). The VPS (`KVM563` / `162.35.107.134`, governed by `HERMES_PRIME`) is the `Camelot-OS Hub & Control Plane` (hosting Bifrost Bridge `:3001`, Runic Router `:8095`, Open-Notebook, and Swarm Mesh).
-- **Rule 5 (Mesh):** Active Tailscale mesh inventory: `cybertronia` (100.118.224.52), `vashawns-s26-ultra` (100.106.246.126), `fothers-camelot` (100.121.48.50), `lakesha` (100.100.155.55), `camelot-relay-modal` (100.84.98.39), `kba-services` (100.71.218.75), `motorola-moto-g` (100.89.129.105).
+- **Rule 5 (Mesh):** Active Tailscale mesh inventory: `cybertronia` (100.118.224.52), `vashawns-s26-ultra` (100.106.246.126), `fothers-camelot` (100.121.48.50), `lakesha` (100.100.155.55), `vps-camelot-hub` (100.110.180.18), `macbook-pro-3` (100.113.101.43), `motorola-moto-g` (100.89.129.105). `camelot-relay-modal` and `kba-services` are absent from the tailnet.
 - **Rule 6 (Governance):** Anya Law is arch-sovereign. Operator authority is absolute.
 - **Rule 7 (Runtime):** npx is strictly ephemeral bootstrapping; never the OS runtime.
 

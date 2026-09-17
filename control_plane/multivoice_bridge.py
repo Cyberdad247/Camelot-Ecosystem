@@ -27,12 +27,14 @@ import urllib.request
 from dataclasses import dataclass, field
 from typing import Any, Optional
 
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 DEFAULT_PORT = 7682 if sys.platform == "win32" else 7680
 DEFAULT_URL = os.environ.get("MULTIVOICE_URL", f"http://127.0.0.1:{DEFAULT_PORT}")
-VPS_MULTIVOICE_URL = os.environ.get("MULTIVOICE_VPS_URL", "http://100.71.218.75:7680")
+VPS_MULTIVOICE_URL = os.environ.get("MULTIVOICE_VPS_URL", f"http://{HUB_TAILSCALE_IP}:7680")
 DEFAULT_VOICE_URL = os.environ.get("REALTIME_VOICE_URL", "http://127.0.0.1:8765")
 
 
@@ -170,7 +172,7 @@ class MultivoiceBridge:
             "perimeter": "ZERO_TRUST_mTLS_LOCKED",
             "ports_guarded": [3001, 8095, 7680],
             "tailnet": "Cyberdad247@github",
-            "vps_ip": "100.71.218.75",
+            "vps_ip": HUB_TAILSCALE_IP,
             "enforcement": "LOCAL_VFS_SYNTHETIC"
         }
 

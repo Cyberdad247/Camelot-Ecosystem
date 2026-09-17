@@ -8,7 +8,7 @@ Operator Authority: King Arthur (VaShawn O. Head / Vizion)
 Governing Agent:    HERMES_PRIME (Hermes Research & Mesh Synthesis)
 VPS Host:           KVM563 (vps3573819.trouble-free.net)
 Public IP:          162.35.107.134
-Tailscale IP:       100.71.218.75 (kba-services) / 100.84.98.39 (relay)
+Tailscale IP:       mesh_topology.HUB_TAILSCALE_IP (vps-camelot-hub)
 
 Capabilities:
 1. --status    : Live ping & TCP service probe (SSH, Bifrost :3001, Mesh Bridge :8095)
@@ -24,9 +24,15 @@ import sys
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
+
 VPS_PUBLIC_IP = "162.35.107.134"
 VPS_HOSTNAME = "vps3573819.trouble-free.net"
-VPS_KBA_TAILSCALE = "100.71.218.75"
+# Was `VPS_KBA_TAILSCALE = "100.71.218.75"` — the kba_services address, which is
+# not the hub and is absent from the tailnet entirely. get_vps_status() reports
+# the hub, so it must publish the hub's own tailnet address. Sourced from
+# mesh_topology rather than repeated as a literal.
+VPS_TAILSCALE_IP = HUB_TAILSCALE_IP
 VPS_SSH_PORT = 22
 VPS_BIFROST_PORT = 3001
 VPS_MESH_BRIDGE_PORT = 8095
@@ -50,7 +56,7 @@ def get_vps_status() -> dict:
         "host_server": "KVM563",
         "vm_id": "vps3573819",
         "public_ip": VPS_PUBLIC_IP,
-        "tailscale_ip": VPS_KBA_TAILSCALE,
+        "tailscale_ip": VPS_TAILSCALE_IP,
         "assigned_agent": "HERMES_PRIME",
         "services": {
             "ssh_port_22": "ONLINE" if ssh_ok else "OFFLINE / FIREWALLED",

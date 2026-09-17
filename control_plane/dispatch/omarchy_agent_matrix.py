@@ -131,10 +131,26 @@ def generate_omarchy_mise_stub(agent_name: str) -> str:
         raise ValueError(f"Unknown agent: {agent_name}")
 
     if mapping.omarchy_cmd == "hermes":
-        return (
-            "#!/bin/bash\n"
-            "# Omarchy <-> Camelot Hermes Proxy Stub\n"
-            'ssh -o BatchMode=yes root@162.35.107.134 "docker exec -i hermes hermes \\"$@\\""\n'
+        # The hub runs Hermes as the native systemd unit hermes-agent.service.
+        # This path must not invoke a container runtime (Rule 7: 0% container in
+        # the hot path). Host is overridable so the stub is not pinned to the
+        # public WAN address.
+        #
+        # ssh joins its remaining arguments into a single string that the remote
+        # shell then splits, so arguments are escaped locally with printf '%q '
+        # rather than forwarded as a bare "$@" (which would split on spaces).
+        return "\n".join(
+            [
+                "#!/bin/bash",
+                "# Omarchy <-> Camelot Hermes proxy stub.",
+                "# The hub runs Hermes natively via hermes-agent.service.",
+                "# No container runtime is involved in this path.",
+                "set -euo pipefail",
+                'HUB="${CAMELOT_HUB_HOST:-162.35.107.134}"',
+                "ARGS=$(printf '%q ' \"$@\")",
+                'exec ssh -o BatchMode=yes "root@$HUB" "/usr/local/bin/hermes $ARGS"',
+                "",
+            ]
         )
 
     if mapping.omarchy_cmd in {"helios", "agy"}:

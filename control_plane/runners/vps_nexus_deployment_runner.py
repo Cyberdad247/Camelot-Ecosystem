@@ -31,6 +31,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP, as_rule5_inventory
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -47,7 +49,7 @@ RECEIPT_DIR = RUNTIME_STATE_DIR / "webhooks"
 TISSUE_DIR = RUNTIME_STATE_DIR / "open_notebook"
 
 VPS_PUBLIC_IP = "162.35.107.134"
-VPS_TAILSCALE_IP = "100.110.180.18"
+VPS_TAILSCALE_IP = HUB_TAILSCALE_IP
 WORLDTREE_ROOT = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
 
 
@@ -146,14 +148,9 @@ class VpsNexusDeploymentCommander:
         """Step 2: Tailscale / mTLS mesh and Avatar Capsule PWA WSS telemetry stream."""
         bifrost_ok = self._probe_tcp_socket(VPS_TAILSCALE_IP, 3001, timeout=1.5)
         
-        mesh_nodes = {
-            "vps-camelot-hub": VPS_TAILSCALE_IP,
-            "vashawns-s26-ultra": "100.106.246.126",
-            "cybertronia": "100.118.224.52",
-            "lakesha": "100.100.155.55",
-            "camelot-relay-modal": "100.84.98.39",
-            "kba-services": "100.71.218.75",
-        }
+        # Projected from the single mesh topology: the hub is first-class and the
+        # two nodes absent from the tailnet are not listed as registered.
+        mesh_nodes = {n["name"]: n["ip"] for n in as_rule5_inventory()}
 
         return DagStepResult(
             step_id="Step_2",
@@ -164,7 +161,7 @@ class VpsNexusDeploymentCommander:
                 "transport": "Tailscale WireGuard mesh + mTLS boundary (Sir Heimdall)",
                 "bifrost_port_3001": "ONLINE (200 OK)" if bifrost_ok else "ACTIVE_INTERNAL_BUS",
                 "telemetry_stream_port": 8095,
-                "avatar_capsule_pwa": "apps/excalibur-cmd-1 -> http://100.110.180.18:8095/telemetry/cockpit",
+                "avatar_capsule_pwa": f"apps/excalibur-cmd-1 -> http://{VPS_TAILSCALE_IP}:8095/telemetry/cockpit",
                 "registered_nodes": len(mesh_nodes),
                 "excalibur_cockpit": "Samsung Galaxy S26 Ultra (Android 16)",
             },

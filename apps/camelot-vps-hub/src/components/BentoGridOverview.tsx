@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { lazy, Suspense, useState } from 'react';
 import { 
   ShieldCheck, 
   Cpu, 
@@ -584,16 +584,21 @@ export const BentoGridOverview: React.FC<BentoGridOverviewProps> = ({
 
       </div>
 
-      {/* Exploration Modals */}
-      <MemcastleModal 
-        isOpen={isMemcastleOpen} 
-        onClose={() => setIsMemcastleOpen(false)} 
-      />
+      {/* Exploration Modals.
+          MemcastleModal and TwinBrainsModal are React.lazy, so they must sit
+          inside a Suspense boundary — without one React throws on the first
+          render of a suspended lazy component rather than showing nothing. */}
+      <Suspense fallback={null}>
+        <MemcastleModal 
+          isOpen={isMemcastleOpen} 
+          onClose={() => setIsMemcastleOpen(false)} 
+        />
 
-      <TwinBrainsModal
-        isOpen={isTwinBrainsOpen}
-        onClose={() => setIsTwinBrainsOpen(false)}
-      />
+        <TwinBrainsModal
+          isOpen={isTwinBrainsOpen}
+          onClose={() => setIsTwinBrainsOpen(false)}
+        />
+      </Suspense>
 
     </div>
   );

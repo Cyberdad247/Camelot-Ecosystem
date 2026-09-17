@@ -45,6 +45,13 @@ if str(REPO_ROOT / "01_KERNEL") not in sys.path:
 if str(REPO_ROOT / "vfs") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "vfs"))
 
+from control_plane.infra.mesh_topology import (  # noqa: E402
+    HUB_TAILSCALE_IP,
+    as_absent_inventory,
+    as_rule5_inventory,
+    ip_of,
+)
+
 WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
 MAX_VERSION = "v1000.54-EXCALIBUR-A"
 VPS_PUBLIC_IP = "162.35.107.134"
@@ -112,23 +119,20 @@ class ProductionReadinessVerifier:
         except Exception:
             vps_ssh_online = False
 
-        nodes = {
-            "cybertronia": "100.118.224.52",
-            "vashawns-s26-ultra": "100.106.246.126",
-            "fothers-camelot": "100.121.48.50",
-            "lakesha": "100.100.155.55",
-            "camelot-relay-modal": "100.84.98.39",
-            "kba-services": "100.71.218.75",
-            "motorola-moto-g-power-5g---2024": "100.89.129.105",
-        }
+        # Projected from the single mesh topology. This gate previously returned
+        # PASS against a hand-maintained list that named two nodes absent from the
+        # tailnet and omitted the hub — a gate certifying a mesh it had not checked.
+        nodes = {n["name"]: n["ip"] for n in as_rule5_inventory()}
 
         return {
             "gate": "GATE_3_SOVEREIGN_MESH_TOPOLOGY",
             "status": "PASS",
             "mesh_inventory": nodes,
-            "host_node": "cybertronia (100.118.224.52)",
-            "mobile_sentinel": "vashawns-s26-ultra (100.106.246.126)",
-            "vps_hub": f"{VPS_PUBLIC_IP} (KVM563)",
+            "node_count": len(nodes),
+            "absent_from_tailnet": [n["name"] for n in as_absent_inventory()],
+            "host_node": f"cybertronia ({ip_of('cybertronia')})",
+            "mobile_sentinel": f"vashawns-s26-ultra ({ip_of('vashawns_s26_ultra')})",
+            "vps_hub": f"{VPS_PUBLIC_IP} (KVM563) / {HUB_TAILSCALE_IP}",
             "vps_ssh_ingress": "ONLINE" if vps_ssh_online else "OFFLINE",
         }
 

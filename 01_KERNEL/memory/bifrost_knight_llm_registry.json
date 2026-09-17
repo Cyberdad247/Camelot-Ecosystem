@@ -2,8 +2,8 @@
   "version": "v1.0.0-EXCALIBUR",
   "generated_utc": "2026-08-12T21:16:30Z",
   "bifrost_bridge": {
-    "ws_endpoint": "ws://100.71.218.75:4433/ws",
-    "grpc_endpoint": "100.71.218.75:4434",
+    "ws_endpoint": "ws://100.110.180.18:4433/ws",
+    "grpc_endpoint": "100.110.180.18:4434",
     "mTLS": true,
     "fallback_proxy": "http://127.0.0.1:11434"
   },

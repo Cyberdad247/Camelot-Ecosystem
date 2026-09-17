@@ -2144,6 +2144,19 @@ def _handle_ignite_speech_avatar_ui(param: Any, context: dict) -> dict:
     }
 
 
+def _hub_tailnet_ip() -> str:
+    """The hub's tailnet address, from the single mesh source.
+
+    Imported lazily: this router is loaded on constrained standalone-VPS paths
+    where a hard top-level dependency on the mesh package would be a needless
+    import-time coupling. Deriving it here rather than restating the literal is
+    what keeps the router from publishing a stale address to dashboards.
+    """
+    from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
+
+    return HUB_TAILSCALE_IP
+
+
 def _handle_lock_bifrost_mtls(param: Any, context: dict) -> dict:
     """Lock down Bifrost Bridge perimeter with zero-trust mTLS, capability leases, and port-isolation."""
     return {
@@ -2154,7 +2167,7 @@ def _handle_lock_bifrost_mtls(param: Any, context: dict) -> dict:
         "ports_guarded": [3001, 8095, 7680],
         "host_binding": "127.0.0.1_LOOPBACK_ENFORCED",
         "tailnet": "Cyberdad247@github",
-        "vps_ip": "100.71.218.75",
+        "vps_ip": _hub_tailnet_ip(),
         "agent_armor": "PDG_TAINT_VERIFIED",
         "multivoice_router": "GUARDED",
         "status": "LOCKED",
@@ -2200,7 +2213,7 @@ def _handle_multivoice_route(param: Any, context: dict) -> dict:
         "directive": directive,
         "operator": "sir_sonus",
         "guardian": "SIR_HEIMDALL",
-        "target_endpoint": "http://100.71.218.75:7680",
+        "target_endpoint": f"http://{_hub_tailnet_ip()}:7680",
         "pipeline": "multivoice_bridge.py + Aoede S2S + Kokoro-82M",
         "status": "ROUTED",
     }

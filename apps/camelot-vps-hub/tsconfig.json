@@ -19,6 +19,12 @@
       "@/*": [
         "./*"
       ]
+      // No `vite` pin here: this app no longer installs its own copy. It used to
+      // nest vite@6 while the repo root hoisted vite@8, and the two
+      // structurally-incompatible `Plugin` types made vite.config.ts fail with
+      // "No overload matches this call". Both apps now declare `vite: ^8.0.0`,
+      // which the hoisted root copy satisfies, so there is a single copy and
+      // nothing to reconcile. Do not reintroduce a local vite dependency.
     },
     "allowImportingTsExtensions": true,
     "noEmit": true

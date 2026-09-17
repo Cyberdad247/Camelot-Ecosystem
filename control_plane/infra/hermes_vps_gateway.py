@@ -5,21 +5,32 @@ Camelot-OS — Hermes VPS Gateway & Remote Control
 =================================================
 Connects Camelot-OS local agents to the remote NousResearch Hermes Agent running
 on VPS Hub KVM563 (162.35.107.134 / 100.110.180.18).
+
+The hub runs Hermes as the native systemd unit ``hermes-agent.service`` with the
+binary at ``HERMES_BIN``. No container runtime is invoked from this module
+(Rule 7: 0% container in the hot path).
 """
 
 from __future__ import annotations
 
 import json
 import os
+import shlex
 import subprocess
 import sys
 import webbrowser
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
 
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
+
 VPS_HOST = os.environ.get("CAMELOT_VPS_HOST", "162.35.107.134")
-VPS_TAILSCALE_IP = os.environ.get("CAMELOT_VPS_TS_IP", "100.110.180.18")
+VPS_TAILSCALE_IP = os.environ.get("CAMELOT_VPS_TS_IP", HUB_TAILSCALE_IP)
 VPS_USER = "root"
+
+# Native install paths on the hub. Keep in sync with infra/systemd/hermes-agent.service.
+HERMES_BIN = "/usr/local/bin/hermes"
+HERMES_UNIT = "hermes-agent.service"
 
 DASHBOARD_URL = f"http://{VPS_HOST}/"
 DASHBOARD_TS_URL = f"http://{VPS_TAILSCALE_IP}/"
@@ -34,7 +45,8 @@ def get_hermes_endpoints() -> Dict[str, str]:
         "api_gateway_public": OPENAI_GATEWAY_URL,
         "api_gateway_tailscale": OPENAI_GATEWAY_TS_URL,
         "ssh_target": f"{VPS_USER}@{VPS_HOST}",
-        "container_name": "hermes",
+        "unit_name": HERMES_UNIT,
+        "hermes_bin": HERMES_BIN,
     }
 
 
@@ -45,13 +57,19 @@ def open_hermes_dashboard(use_tailscale: bool = False) -> str:
 
 
 def run_hermes_cli(args: List[str] | str, timeout: int = 30) -> Dict[str, Any]:
-    """Execute a Hermes CLI command inside the VPS Docker container."""
+    """Execute a Hermes CLI command natively on the VPS hub.
+
+    Runs the binary directly over ssh. Arguments are quoted with
+    :func:`shlex.quote` because ssh joins its argv into a single string that the
+    remote shell re-splits — an unquoted argument containing spaces would
+    otherwise be broken into several arguments.
+    """
     if isinstance(args, list):
-        cmd_str = " ".join(args)
+        cmd_str = " ".join(shlex.quote(str(a)) for a in args)
     else:
         cmd_str = str(args).strip()
 
-    remote_cmd = f"docker exec -i hermes hermes {cmd_str}"
+    remote_cmd = f"{HERMES_BIN} {cmd_str}".strip()
     ssh_cmd = [
         "ssh",
         "-o", "BatchMode=yes",

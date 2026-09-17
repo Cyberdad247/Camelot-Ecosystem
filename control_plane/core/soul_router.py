@@ -100,7 +100,11 @@ FOUNDRY_COUNCIL: tuple[KnightEngine, ...] = (
     KnightEngine("sir_heimdall", "pydantic_ai", EngineWeight.W_BIFROST, "Bifrost Guardian", privacy_level=0.9),
     KnightEngine("sir_openclaw", "openclaw", EngineWeight.W_CONTEXT, "Compliant Trend Harvester", privacy_level=0.6),
     KnightEngine("sir_rustclaw", "rustclaw", EngineWeight.W_KINETIC, "Rust Image Pipeline Executor", privacy_level=0.5),
-    KnightEngine("sir_hermes", "hermes_cli", EngineWeight.W_BRIDGE, "Shopify GraphQL/Webhook Courier", privacy_level=0.6),
+    # Commander of the Hermes automation fabric across all registered knights —
+    # see control_plane/infra/hermes_commander_fabric.py, which declares
+    # COMMANDER_KNIGHT="sir_hermes" / COMMANDER_ROLE="COMMANDER_KNIGHT". The
+    # courier duties below are still real; they are the engine's other half.
+    KnightEngine("sir_hermes", "hermes_cli", EngineWeight.W_BRIDGE, "Hermes Commander — all-knight automation coordination; Shopify GraphQL/Webhook Courier", privacy_level=0.6),
     KnightEngine("lady_nanobot", "next_edge", EngineWeight.W_VELOCITY, "Edge Component Swarm", privacy_level=0.6),
     KnightEngine("sir_zeroclaw", "local_qwen", EngineWeight.W_PRIVACY, "Zero-Trust Commerce Sentry", privacy_level=1.0),
     # Agents-A1 — 35B MoE agentic LLM, served locally via vLLM or SGLang

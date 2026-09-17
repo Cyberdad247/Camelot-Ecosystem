@@ -8,7 +8,7 @@ Operator Authority: King Arthur (VaShawn O. Head / Vizion)
 Governing Agent:    HERMES_PRIME (Hermes Research & Mesh Synthesis)
 VPS Host:           KVM563 (vps3573819.trouble-free.net)
 Public IP:          162.35.107.134
-Tailscale IP:       100.71.218.75 (kba-services) / 100.84.98.39 (relay)
+Tailscale IP:       mesh_topology.HUB_TAILSCALE_IP (vps-camelot-hub)
 
 Capabilities:
 1. --status    : Live ping & TCP service probe (SSH, Bifrost :3001, Mesh Bridge :8095)
@@ -27,10 +27,18 @@ from pathlib import Path
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
+_REPO_ROOT = Path(__file__).resolve().parent.parent
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP  # noqa: E402
+
 VPS_PUBLIC_IP = "162.35.107.134"
 VPS_HOSTNAME = "vps3573819.trouble-free.net"
-VPS_TAILSCALE_IP = "100.110.180.18"
-VPS_KBA_TAILSCALE = "100.71.218.75"
+# The hub's own tailnet address. This previously published `VPS_KBA_TAILSCALE`
+# (kba-services), a node absent from the tailnet entirely, so `--status` reported
+# the hub at a host that does not exist. Single-sourced now.
+VPS_TAILSCALE_IP = HUB_TAILSCALE_IP
 VPS_SSH_PORT = 22
 VPS_HTTP_PORT = 80
 VPS_BIFROST_PORT = 3001
@@ -56,7 +64,7 @@ def get_vps_status() -> dict:
         "host_server": "KVM563",
         "vm_id": "vps3573819",
         "public_ip": VPS_PUBLIC_IP,
-        "tailscale_ip": VPS_KBA_TAILSCALE,
+        "tailscale_ip": VPS_TAILSCALE_IP,
         "assigned_agent": "HERMES_PRIME (NousResearch Hermes Agent)",
         "co_governor": "SIR_HEIMDALL (Bifrost Boundary)",
         "services": {

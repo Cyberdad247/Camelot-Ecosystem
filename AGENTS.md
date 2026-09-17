@@ -176,7 +176,7 @@ Rule 1: [UI/UX] - ALWAYS use Tailwind v4 and Luxora Gold (`#D4AF37`) for primary
 Rule 2: [Orchestration] - ALWAYS request a stateless validator for pull requests when available because independent review reduces bias.
 Rule 3: [Context] - ALWAYS use codegraph tools when `.codegraph/` exists because symbol queries are more efficient than broad file reads.
 Rule 4: [Architecture/Topology] - ALWAYS recognize Samsung Galaxy S26 Ultra as the `Excalibur Command Center` (Kinetic mobile sentinel & interactive telemetry cockpit) and the VPS (`KVM563` / `162.35.107.134` / VM `vps3573819`, governed by `HERMES_PRIME` / Hermes agent) as the `Camelot-OS Hub & Control Plane` (hosting always-on Bifrost Gateway `:3001`, Dispatch & Runic Routing (`runic_router.py`, `vps_mobile_mesh_bridge.py` `:8095`, `multivoice_bridge.py`), Open-Notebook, NotebookLM CloudBrain mesh, VFS Digital Factory, Shadow Developers, and Swarm Researchers across the mesh network).
-Rule 5: [Architecture/Mesh] - ALWAYS integrate the full `Cyberdad247@github` Tailscale mesh inventory as active nodes in the Bifrost Bridge: `cybertronia` (`100.118.224.52`, primary Windows orchestrator), `vashawns-s26-ultra` (`100.106.246.126`, Excalibur Command Center / Android 16), `fothers-camelot` (`100.121.48.50`, Windows sovereign secondary node), `lakesha` (`100.100.155.55`, Windows secondary node / Lakisha Voice OS host), `camelot-relay-modal` (`100.84.98.39`, Linux cloud relay node), `kba-services` (`100.71.218.75`, Linux remote services node), and `motorola-moto-g-power-5g---2024` (`100.89.129.105`, auxiliary mobile sentinel).
+Rule 5: [Architecture/Mesh] - ALWAYS integrate the full `Cyberdad247@github` Tailscale mesh inventory as active nodes in the Bifrost Bridge: `cybertronia` (`100.118.224.52`, primary Windows orchestrator), `vashawns-s26-ultra` (`100.106.246.126`, Excalibur Command Center / Android 16), `fothers-camelot` (`100.121.48.50`, Windows sovereign secondary node), `lakesha` (`100.100.155.55`, Windows secondary node / Lakisha Voice OS host), `vps-camelot-hub` (`100.110.180.18`, Linux hub & control plane — the tailnet identity of the VPS in Rule 4), `macbook-pro-3` (`100.113.101.43`, macOS workstation, advertises an exit node), and `motorola-moto-g-power-5g---2024` (`100.89.129.105`, auxiliary mobile sentinel). Reconciled against live `tailscale status` on 2026-09-15: `camelot-relay-modal` (`100.84.98.39`) and `kba-services` (`100.71.218.75`) were removed from this rule because neither is present in the tailnet — a node that cannot be reached can only ever report offline, which masks a real node dropping. Re-add either if it rejoins.
 Rule 6: [Governance/AnyaLaw] - ALWAYS maintain Anya Law as arch-sovereign, enforcing the hierarchical sovereignty chain from King Arthur (VaShawn O. Head / Vizion) -> ANYA_OMEGA -> Symbollect (Runic/Cognitive Lattice) -> Knights of the Round Table (Boris, Merlin, Forge, Codex, Sentinel, Hermes, Helio, Lakisha, etc.), routing intent downwards and synthesized execution telemetry/evidence directly back in reverse to King Arthur, because sovereign operator authority and zero-trust alignment must never break.
 Rule 7: [Runtime/HotPath] - ALWAYS enforce `npx` as strictly an ephemeral bootstrapping delivery vehicle, NEVER the OS runtime. The `npx @camelot/install` process must download, cryptographically verify via Arthur Ed25519 Seal, and launch the native Rust/Go installer, then immediately terminate, ensuring 0% Python/Node in the hot-path while the OS runs 100% bare-metal systemd, Rust, Go, and WASM.
 Rule 8: [Communication/Pedagogy] - ALWAYS append a "College Sophomore" intuitive summary to responses and major kinetic actions because it translates complex distributed systems, formal logic, and swarm architectures into crystal-clear, relatable software engineering concepts for effortless cognitive alignment.
@@ -328,7 +328,7 @@ All Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be
 | **SIR_BORIS** | Lead Architect, Crucible Conductor, 13-Agent Critique | Gemini / Claude Code | `f7707daa-2d10-4db8-8fda-be4661a27793` |
 | **SIR_ALEX** | Task Planner, DAG Orchestrator, AST Task Breakdown | Gemini 3.8 Flash | `f490c05e-d8c4-4008-87e1-5f901bf57c6a` |
 | **SIR_FORGE** | Kinetic Code Generation, Compiles, //FORGE Dispatcher | Gemini 3.8 Flash | `91c5da8b-e2de-4a56-b7fd-c8b76c00afc7` |
-| **SIR_CODEX** | Kinetic Implementer, High-Velocity Zero-Trust Architecture | OpenAI Codex / GPT-5.5 | `8c656cfa-a189-409e-a72d-07692a47f17e` |
+| **SIR_CODEX** | Kinetic Implementer, High-Velocity Zero-Trust Architecture | OpenAI Codex / GPT-5.5 | `05f1985d-e356-45d9-85b8-d101013a90b8` |
 | **SIR_SENTINEL** | AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement | Gemini 3.8 Flash | `07cbb441-f008-424c-820a-85676210be39` |
 | **SIR_DEBUG** | PIV Self-Healing Loop, Error Diagnosis & AST Repair | Gemini 3.8 Flash | `fdc42a4a-3060-4eac-b57c-8e6009ed634a` |
 | **SIR_GHOST** | Privacy Scanner, Air-Gapped Credentials & Local Vault | Ollama Local Container | `422a184b-93e7-4dfd-8a12-75d2268b6c60` |
@@ -362,11 +362,67 @@ All Knights tether directly into the WorldTree Root Node (`a0a4bfb9-e847-4c38-be
 | **SIR_HELIOS** | NotebookLM + Sir Helios (AntiGravity) CLI & CloudBrain Synergy | FastMCP / agy | `ab8aa359-2b3b-4bc1-b41f-34979cdc184e` |
 | **KICKBOX** | KickBox Audio, WebRTC State & Vocal HUD Integration | Next.js 14 / WebRTC | `8531e6d4-6fc4-428f-a754-b9e9592ac7ff` |
 | **INSPIRA** | HiveIDE / Inspira Spatial Developer Workstation | IDE Substrate | `cadfe67e-7187-472e-8bf4-8a2aded84e4e` |
-| **INVISIONED_MARKETING** | Invisioned Marketing Sovereign CloudBrain & Brand Direction | WorldTree Substrate | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |
+| **INVISIONED_MARKETING** | Invisioned Marketing Sovereign CloudBrain & Brand Direction | WorldTree Substrate | `e6374819-50ce-41cf-b6b3-99924ca6ab90` |
 | **KNIGHT_STRATEGOS** | Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO | Gemini 3.8 Flash | `a0a4bfb9-e847-4c38-be39-7aee398f0795` |
 | **SIR_KAY** | High Seneschal, Chief Engineering Director, Kinetic Department Lead | Gemini 3 Pro / GPT-5.5 | `7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6` |
-| **SIR_LUCAS** | Sovereign Herald of Telemetry & Visualization (Council) | Gemini 3 Flash / GPT-5.3 | `5ac0de5a-c0de-5ac0-de5a-c0de5ac0de5a` |
-| **LADY_LAKISHA** | Voice OS Sentinel & Intercom Matrix (Luxury Brutalist Voice HUD) | Gemini 2.5 Flash / LiteRT | `1a1a5555-8888-3333-cccc-444499990000` |
+| **SIR_LUCAS** | Sovereign Herald of Telemetry & Visualization (Council) | Gemini 3 Flash / GPT-5.3 | `a0a4bfb9-e847-4c38-be39-7aee398f0795` (WorldTree-tethered) |
+| **LADY_LAKISHA** | Voice OS Sentinel & Intercom Matrix (Luxury Brutalist Voice HUD) | Gemini 2.5 Flash / LiteRT | `a0a4bfb9-e847-4c38-be39-7aee398f0795` (WorldTree-tethered) |
+
+### Roster reconciliation — 2026-09-15
+
+The eight rows below were **present in `soul_router.FOUNDRY_COUNCIL` but absent
+from this table**. The router is the authority for which knights are routable,
+so the table was under-reporting the roster. Roles come from each knight's
+`KnightEngine.function`; models from `knight_agent._PRIMARY_MODEL`.
+
+`SIR_LINK` and `SIR_AGENTIS` have **no dedicated CloudBrain node**. They resolve
+to the WorldTree root (`a0a4bfb9-…`), which is why they carry it here — the same
+convention already used for `SIR_LUCAS` and `LADY_LAKISHA`. `LADY_NANOBOT` was
+listed with the WorldTree fallback in an earlier draft of this table; that was
+correct until the `SIR_NANOBOT`/`LADY_NANOBOT` key mismatch in
+`cloudbrain_connector.KNIGHT_NOTEBOOKS` was fixed, after which it resolves to its
+own node (`e4fbff10-…`).
+
+Every UUID in this table is verified against the live resolver in
+`control_plane/infra/hermes_commander_fabric._cloudbrain_uuid`, not asserted.
+
+| Knight ID | Domain / Core Specialization | Primary Model / Substrate | CloudBrain Node UUID |
+| :--- | :--- | :--- | :--- |
+| **SIR_LINK** | Cross-UI Handoff, Switchboard ATC, Antigravity Bridge | Gemini 3 Flash | `a0a4bfb9-e847-4c38-be39-7aee398f0795` (WorldTree fallback) |
+| **SIR_LIBERTE** | Anti-Vendor Sovereign, Open-Source Substitution | Gemini 2.5 Flash | `da5f74b8-d948-4c37-b7da-7eec1fa18e5f` |
+| **SIR_OUROBOROS** | Linear Reasoning Tier (Ouroboros SSM) | `ouroboros-ssm-local` | `3e61cfb1-b62d-4e9b-893e-4735d1a55426` |
+| **SIR_VALERIAN** | Financial / ROI Analysis | Gemini Flash | `3d6e1ef4-a37a-4475-8cc1-b62aa6b148fc` |
+| **SIR_OPENCLAW** | Compliant Trend Harvester | `openclaw-local` | `f5f2179c-3320-48f1-ace4-4f9bdd71f9b7` |
+| **LADY_NANOBOT** | Edge Component Swarm | `next-edge` | `e4fbff10-9241-480e-9d2c-1f9dac50c51a` |
+| **SIR_ZEROCLAW** | Zero-Trust Commerce Sentry | `qwen3:8b` (local) | `4b382f7d-f662-4daa-9438-082b025624dc` |
+| **SIR_AGENTIS** | Agentic MoE Orchestrator (Agents-A1, local-first) | `agents-a1` (local) | `a0a4bfb9-e847-4c38-be39-7aee398f0795` (WorldTree fallback) |
+
+Known debt recorded rather than silently resolved:
+
+- `KNIGHT_NOTEBOOKS` keys `SIR_NANOBOT` (`e4fbff10-9241-480e-9d2c-1f9dac50c51a`),
+  but the resolver looks up `LADY_NANOBOT`, so the entry is unreachable and the
+  WorldTree fallback is used instead. Either key or lookup needs renaming.
+- **Resolved 2026-09-15:** `SIR_CODEX` previously carried
+  `8c656cfa-a189-409e-a72d-07692a47f17e`, which `01_KERNEL/memory/NOTEBOOK_MANIFEST.json`
+  registers as `knight_id: CAMELOT_V1000` ("Camelot-OS v.1000"). The row had
+  borrowed the Camelot-V1000 notebook's UUID, so the two knights collided on one
+  node. `SIR_CODEX` now carries its own canonical node
+  (`05f1985d-…`, `status: CANONICAL_SOVEREIGN`).
+- **Resolved 2026-09-15:** `LADY_LAKISHA` carried
+  `1a1a5555-8888-3333-cccc-444499990000`, which appears nowhere else in the
+  repository and has no entry in `NOTEBOOK_MANIFEST.json`. It has been replaced
+  with the WorldTree tether that `KNIGHT_NOTEBOOKS` already documented for this
+  knight. The previous value is recorded here rather than discarded.
+- **Resolved 2026-09-15:** `SIR_LUCAS` carried
+  `5ac0de5a-c0de-5ac0-de5a-c0de5ac0de5a`, the last instance of the same defect —
+  that value appears nowhere else in the repository and `NOTEBOOK_MANIFEST.json`
+  has no `SIR_LUCAS` entry at all. Replaced with the WorldTree tether that
+  `KNIGHT_NOTEBOOKS` already documented for this knight. Previous value recorded
+  here rather than discarded.
+
+All roster UUIDs now agree with `KNIGHT_NOTEBOOKS`; verify with the cross-check
+in `tests/test_mesh_topology_single_source.py` and by re-running the roster
+comparison against `01_KERNEL/memory/cloudbrain_connector.py`.
 
 ---
 

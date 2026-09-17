@@ -105,6 +105,8 @@ def write_knight_configuration(home: Path) -> dict[str, Any]:
     """Build, persist, and return the shared knight/cartridge configuration."""
     home = Path(home)
     artifact_path = home / ARTIFACT_RELATIVE_PATH
+    from control_plane.infra.hermes_commander_fabric import write_hermes_commander_fabric
+
     snapshot: dict[str, Any] = {
         "status": "OK",
         "generated_utc": datetime.now(timezone.utc).isoformat(),
@@ -114,6 +116,7 @@ def write_knight_configuration(home: Path) -> dict[str, Any]:
         "excalibur_roster": _excalibur_snapshot(home),
         "switchboard_roster": _switchboard_snapshot(home),
         "warp_workflows": _warp_workflow_snapshot(home),
+        "hermes_commander": write_hermes_commander_fabric(root=home),
     }
     artifact_path.parent.mkdir(parents=True, exist_ok=True)
     artifact_path.write_text(json.dumps(snapshot, indent=2, sort_keys=True), encoding="utf-8")

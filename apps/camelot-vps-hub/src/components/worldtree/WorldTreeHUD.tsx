@@ -34,7 +34,12 @@ import { WorldTree3D } from './WorldTree3D';
 import { WorldTreeTransition } from './WorldTreeTransition';
 
 interface WorldTreeHUDProps {
-  onOpenModal?: (modalType: 'memcastle' | 'twin_brains' | 'viking' | 'vkg') => void;
+  // The modals this HUD can actually open. `'vkg'` was declared here but never
+  // emitted by any call site (the only emission points are memcastle,
+  // twin_brains and viking below) and it is not a modal — it is a *tab* id,
+  // routed through `onNavigateTab` elsewhere. Keeping it forced every consumer
+  // to widen its modal union to accept a value that could never arrive.
+  onOpenModal?: (modalType: 'memcastle' | 'twin_brains' | 'viking') => void;
   className?: string;
 }
 

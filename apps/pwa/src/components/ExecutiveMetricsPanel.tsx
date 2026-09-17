@@ -22,7 +22,7 @@ const METRICS: MetricCardData[] = [
   },
   {
     title: 'BIFROST MESH TELEMETRY',
-    value: '100.71.218.75:4433',
+    value: '100.110.180.18:4433',
     subtext: '12ms Ping | 100% Packet Integrity',
     trend: 'NOMINAL',
     highlightColor: '#9D4EDD',

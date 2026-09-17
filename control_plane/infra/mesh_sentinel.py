@@ -6,13 +6,9 @@ Tailscale Mesh Sentinel & Real-Time Ping RTT Prober (`camelot-mesh-sentinel`)
 Continuously probes all Rule 5 Tailscale Mesh nodes and collects real-time
 round-trip latency (RTT) and status telemetry for the Excalibur Cockpit.
 
-Rule 5 Nodes:
-- cybertronia: 100.118.224.52 (Windows Primary Orchestrator)
-- vashawns-s26-ultra: 100.106.246.126 (Excalibur Command Center)
-- vps-camelot-hub: 100.110.180.18 (VPS Hub & Bifrost Gateway)
-- fothers-camelot: 100.121.48.50 (Windows Sovereign Secondary)
-- lakesha: 100.100.155.55 (Lakisha Voice OS Host)
-- kba-services: 100.71.218.75 (Linux Remote Services)
+Node inventory is projected from `control_plane.infra.mesh_topology`, which is
+reconciled against live `tailscale status` and is the single source of truth
+shared with the Heimdall sentinel and the Bifrost governance harness.
 """
 
 from __future__ import annotations
@@ -24,6 +20,11 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
+
+try:
+    from control_plane.infra.mesh_topology import as_rule5_inventory
+except ImportError:  # standalone fallback when executed in a remote VPS directory
+    from mesh_topology import as_rule5_inventory  # type: ignore
 
 LOG = logging.getLogger("camelot.mesh_sentinel")
 
@@ -51,14 +52,11 @@ class MeshTopologyReport:
 class TailscaleMeshSentinel:
     """Real-Time Tailscale WireGuard Mesh Latency Governor."""
 
-    RULE_5_INVENTORY = [
-        {"name": "cybertronia", "ip": "100.118.224.52", "role": "Primary Windows Orchestrator"},
-        {"name": "vashawns-s26-ultra", "ip": "100.106.246.126", "role": "Excalibur Command Center"},
-        {"name": "vps-camelot-hub", "ip": "100.110.180.18", "role": "VPS Hub & Bifrost Gateway"},
-        {"name": "fothers-camelot", "ip": "100.121.48.50", "role": "Windows Sovereign Secondary"},
-        {"name": "lakesha", "ip": "100.100.155.55", "role": "Lakisha Voice OS Host"},
-        {"name": "kba-services", "ip": "100.71.218.75", "role": "Linux Remote Services"}
-    ]
+    # Projected from control_plane.infra.mesh_topology — the single source of
+    # truth. Do not re-declare the node list here; this copy previously listed
+    # `kba-services`, which is not on the tailnet, and omitted `macbook-pro-3`,
+    # which is.
+    RULE_5_INVENTORY = as_rule5_inventory()
 
     def __init__(self, state_dir: Optional[Path] = None):
         self.state_dir = state_dir or Path("03_VAULT/runtime_state/mesh_sentinel")
@@ -68,13 +66,16 @@ class TailscaleMeshSentinel:
         """Pings all Rule 5 nodes and generates a complete topology health report."""
         report_id = f"mesh_rep_{int(time.time())}"
         results: List[MeshNodeProbeResult] = []
+        # Simulated baseline latencies. Keyed by tailscale hostname; any node not
+        # listed falls back to the 25.0 default below, so adding a node to
+        # mesh_topology cannot leave this map describing a stale roster.
         rtt_map = simulated_rtts or {
             "cybertronia": 2.1,
             "vashawns-s26-ultra": 18.4,
             "vps-camelot-hub": 16.2,
             "fothers-camelot": 12.0,
             "lakesha": 14.5,
-            "kba-services": 21.0
+            "macbook-pro-3": 9.5,
         }
 
         total_rtt = 0.0

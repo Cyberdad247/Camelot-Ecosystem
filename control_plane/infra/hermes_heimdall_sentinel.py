@@ -40,15 +40,34 @@ logging.basicConfig(
 LOG = logging.getLogger("HermesHeimdallSentinel")
 
 # ── Tailscale Mesh & Bifrost Topology ─────────────────────────────────────────
+#
+# The node list is NOT declared here. It lives in control_plane.infra.mesh_topology
+# as the single source of truth, because three copies of this table previously
+# drifted apart: two listed nodes that were not on the tailnet at all, and one
+# omitted the hub entirely. Add or move a node THERE, not here.
+#
+# audit_bifrost_perimeter() pings every entry in MESH_INVENTORY and records the
+# result as up/down, so only nodes that actually exist in the tailnet may appear
+# in it. A node whose address is absent pins itself to "offline" forever, which
+# masks the real signal when a live node actually drops.
+try:
+    from control_plane.infra.mesh_topology import (
+        ABSENT_MESH_NODES as _ABSENT_NODES,
+        as_sentinel_inventory,
+    )
+except ImportError:  # standalone fallback when executed in remote VPS directory
+    from mesh_topology import (  # type: ignore
+        ABSENT_MESH_NODES as _ABSENT_NODES,
+        as_sentinel_inventory,
+    )
 
-MESH_INVENTORY = {
-    "cybertronia": {"ip": "100.118.224.52", "role": "Primary Kinetic Orchestrator", "scarcity": "8GB_BOUND"},
-    "vashawns_s26_ultra": {"ip": "100.106.246.126", "role": "Excalibur Command Center", "scarcity": "MOBILE_ARM64"},
-    "fothers_camelot": {"ip": "100.121.48.50", "role": "Secondary Windows Node", "scarcity": "SOVEREIGN_NODE"},
-    "lakesha": {"ip": "100.100.155.55", "role": "Lakisha Voice OS Host", "scarcity": "AUDIO_SENSORY"},
-    "camelot_relay_modal": {"ip": "100.84.98.39", "role": "Cloud Relay & Modal Bridge", "scarcity": "REMOTE_COMPUTE"},
-    "kba_services": {"ip": "100.71.218.75", "alt_ip": "100.110.180.18", "role": "KBA Services / VPS KVM563", "scarcity": "HUB"},
-    "motorola_moto_g_power": {"ip": "100.89.129.105", "role": "Auxiliary Mobile Sentinel", "scarcity": "MOBILE_ARM64"},
+MESH_INVENTORY = as_sentinel_inventory()
+
+# Absent nodes are records, not ping targets: probing an address that does not
+# exist can only ever report "down", which is noise that drowns out a real
+# outage. Move a node back into MESH_NODES once it rejoins the tailnet.
+ABSENT_MESH_NODES = {
+    n.id: {"ip": n.ip, "role": n.role, "scarcity": n.scarcity} for n in _ABSENT_NODES
 }
 
 BIFROST_CONFIG = {

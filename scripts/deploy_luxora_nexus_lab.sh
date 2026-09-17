@@ -2,7 +2,7 @@
 # ========================================================================================
 # CAMELOT-OS: LUXORA NEXUS LAB PWA VPS HUB DEPLOYMENT & LINKING SCRIPT
 # Repository: https://github.com/Cyberdad247/luxora-nexus-lab
-# Target Host: 162.35.107.134 / kba-services (100.71.218.75)
+# Target Host: 162.35.107.134 / vps-camelot-hub (100.110.180.18)
 # ========================================================================================
 
 set -euo pipefail
@@ -35,7 +35,7 @@ echo "Injecting Hub environment bindings..."
 sudo tee "$DEST_DIR/.env.production" <<'ENV_EOF'
 # Sovereign Hub Service Endpoints
 NEXT_PUBLIC_HUB_IP=162.35.107.134
-NEXT_PUBLIC_TAILSCALE_IP=100.71.218.75
+NEXT_PUBLIC_TAILSCALE_IP=100.110.180.18
 NEXT_PUBLIC_BIFROST_WS=/ws
 NEXT_PUBLIC_MESH_STATUS=/mesh/status
 NEXT_PUBLIC_BIFROST_KNIGHTS=/bifrost/knights

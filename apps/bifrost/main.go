@@ -21,7 +21,12 @@ import (
 )
 
 const (
-	TailscaleBindIP = "100.71.218.75"
+	// The hub's own tailnet address (mesh_topology.HUB_TAILSCALE_IP). This was
+	// 100.71.218.75, which is `kba-services` — a node absent from the tailnet — so
+	// net.Listen below always failed and the service silently fell back to
+	// binding 0.0.0.0. The intent was a tailnet-scoped bind; the fallback quietly
+	// widened it to every interface instead.
+	TailscaleBindIP = "100.110.180.18"
 	HTTPPort        = "4433"
 	GRPCPort        = "4434"
 	RedisAddr       = "127.0.0.1:6379"
@@ -197,7 +202,7 @@ func main() {
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status":"HEALTHY","mesh":"100.71.218.75"}`))
+		w.Write([]byte(`{"status":"HEALTHY","mesh":"100.110.180.18"}`))
 	})
 
 	// Try binding to specific Tailscale IP first; fallback to 0.0.0.0 if Tailscale interface is bound to wildcard

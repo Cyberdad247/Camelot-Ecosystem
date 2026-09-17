@@ -7,9 +7,16 @@ from __future__ import annotations
 from copy import deepcopy
 from typing import Any
 
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
+
 VPS_NODE_ID = "vps_hub_kvm563"
 VPS_PUBLIC_IP = "162.35.107.134"
-VPS_TAILSCALE_IP = "100.71.218.75"
+# Sourced from the single mesh topology. This previously read 100.71.218.75, the
+# documented address of kba-services — a *different* node, and one absent from
+# `tailscale status` entirely. Do not reintroduce the literal; mesh_topology is
+# reconciled against the live tailnet and tests/test_mesh_topology_single_source
+# asserts this constant matches it.
+VPS_TAILSCALE_IP = HUB_TAILSCALE_IP
 HERMES_PRIME_UUID = "28f89cb6-5048-4b5d-9e94-376082d24744"
 
 

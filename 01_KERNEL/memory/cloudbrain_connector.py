@@ -108,7 +108,13 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "SIR_OUROBOROS":       "3e61cfb1-b62d-4e9b-893e-4735d1a55426",   # Sovereign_Workspace: SIR OUROBOROS
     "SIR_LIBERTE":         "da5f74b8-d948-4c37-b7da-7eec1fa18e5f",   # Sovereign_Workspace: SIR LIBERTE
     "SIR_ZEROCLAW":        "4b382f7d-f662-4daa-9438-082b025624dc",   # Sovereign_Workspace: SIR ZEROCLAW
-    "SIR_NANOBOT":         "e4fbff10-9241-480e-9d2c-1f9dac50c51a",   # Sovereign_Workspace: SIR NANOBOT
+    # FOUNDRY_COUNCIL registers this knight as `lady_nanobot`, and the resolver in
+    # control_plane/infra/hermes_commander_fabric does
+    # `KNIGHT_NOTEBOOKS.get(knight_id.upper())`. Keying this entry `SIR_NANOBOT`
+    # alone made it unreachable, so the knight silently fell back to the WorldTree
+    # root node and never reached its own notebook.
+    "LADY_NANOBOT":        "e4fbff10-9241-480e-9d2c-1f9dac50c51a",   # Sovereign_Workspace: LADY NANOBOT (canonical id)
+    "SIR_NANOBOT":         "e4fbff10-9241-480e-9d2c-1f9dac50c51a",   # Legacy alias — retained for older references
     "SIR_GAWAIN":          "75c7862e-c0d2-40cb-8b20-ed6dcfadd049",   # Sovereign_Workspace: SIR GAWAIN
     "SIR_HASHIMOTO":       "71399d4d-fabd-4897-a877-bf7e26cb9e96",   # Sovereign_Workspace: SIR HASHIMOTO
     "SIR_VALERIAN":        "3d6e1ef4-a37a-4475-8cc1-b62aa6b148fc",   # Sovereign_Workspace: SIR VALERIAN
@@ -156,7 +162,11 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "SIR_ALCHEMIST":       ["transmutation", "compression", "quantization", "optimization"],
     "SIR_RUSTCLAW":        ["rust", "image_pipeline", "kinetic", "aegis", "vfs_api"],
     "ANYA_OMEGA":          ["helm", "gate", "quality", "first_law", "router"],
-    "SIR_HERMES":          ["graphql", "webhooks", "courier", "dispatch"],
+    # `commander` / `hermes_automation` / `memory_fabric` are load-bearing: the
+    # commander-fabric contract test routes on exactly these three domains and
+    # expects SIR_HERMES to win. Keep them alongside the courier tags.
+    "SIR_HERMES":          ["graphql", "webhooks", "courier", "dispatch", "commander", "hermes_automation", "memory_fabric"],
+    "LADY_NANOBOT":        ["edge", "swarm", "edge_component_agents", "webgl_mockup_contract", "nfc_route_contract", "telemetry_event_contract"],
     "SIR_LANCELOT":        ["champion", "kinetic_edge", "frontline", "defense"],
     "LADY_GUINEVERE":      ["harmony", "aesthetic", "interface", "design", "obsidian_gold_purple", "tokens", "luxury_minimalist"],
     "SIR_HUGGINGFACE":     ["hub", "spaces", "models", "embeddings"],

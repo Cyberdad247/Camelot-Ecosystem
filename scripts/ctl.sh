@@ -2,11 +2,24 @@
 # SPDX-License-Identifier: MIT
 
 # Camelot-OS // Kinetic Local Engine Control Script (scripts/ctl.sh)
-# Target Node: Bare-metal Laptop Server (Tailscale IP: 100.71.218.75)
+# Target Node: the host this script runs on (its own tailnet address).
+#
+# This previously hardcoded 100.71.218.75, which is `kba-services` — a node
+# absent from the tailnet entirely — so every health probe and port check
+# targeted a host that does not exist. A local engine also has no business
+# naming a specific remote node, so the address is now discovered, not declared.
 
 set -e
 
-TAILSCALE_IP="100.71.218.75"
+# Override with CAMELOT_CTL_TAILSCALE_IP when running on a host without the
+# tailscale CLI available on PATH.
+TAILSCALE_IP="${CAMELOT_CTL_TAILSCALE_IP:-$(tailscale ip -4 2>/dev/null | head -n1)}"
+
+if [ -z "$TAILSCALE_IP" ]; then
+  echo "❌ Could not determine this host's tailnet address."
+  echo "   Install/authenticate tailscale, or set CAMELOT_CTL_TAILSCALE_IP."
+  exit 1
+fi
 HTTP_PORT="4433"
 GRPC_PORT="4434"
 

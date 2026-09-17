@@ -1,0 +1,43 @@
+{
+  "provenance": {
+    "captured_at": "2026-09-16",
+    "captured_from": "VPS hub KVM563 / vps-camelot-hub (tailnet 100.110.180.18, public 162.35.107.134), native install",
+    "binary": "/usr/local/bin/hermes",
+    "install_dir": "/usr/local/lib/hermes-agent",
+    "hermes_version": "Hermes Agent v0.21.3 (2026.9.14)",
+    "upstream_commit": "cf5287b0",
+    "install_method": "git",
+    "python": "3.12.3",
+    "command": "hermes serve --help",
+    "why": "infra/systemd/hermes-agent.service shipped with an ExecStart whose --host/--port flags were documented as NOT verified against upstream. This capture is the evidence that retired that caveat, kept as a fixture so the flag set stays checkable in CI without SSH access to the hub.",
+    "how_to_refresh": "ssh root@162.35.107.134 'hermes serve --help' — then update help_text, accepted_flags and the version fields together."
+  },
+  "accepted_flags": [
+    "--help",
+    "--port",
+    "--host",
+    "--insecure",
+    "--skip-build",
+    "--isolated",
+    "--stop",
+    "--status",
+    "--ssh-session-token-file",
+    "--ssh-owner-nonce"
+  ],
+  "flags_taking_a_value": [
+    "--port",
+    "--host",
+    "--ssh-session-token-file",
+    "--ssh-owner-nonce"
+  ],
+  "upstream_defaults": {
+    "--port": "9119",
+    "--host": "127.0.0.1"
+  },
+  "flags_that_must_not_be_used_by_a_systemd_unit": {
+    "--insecure": "Deprecated / NO-OP as of the June 2026 hardening: it no longer disables authentication, and a public bind always requires an auth provider.",
+    "--stop": "Terminates running servers and exits — not a service ExecStart.",
+    "--status": "Prints status and exits — not a service ExecStart."
+  },
+  "help_text": "usage: hermes serve [-h] [--port PORT] [--host HOST] [--insecure]\n                    [--skip-build] [--isolated] [--stop] [--status]\n                    [--ssh-session-token-file PATH] [--ssh-owner-nonce NONCE]\n\nRun the Hermes backend server — the JSON-RPC/WebSocket gateway the desktop app\nand remote clients connect to. Headless: it never opens a browser UI.\n\noptions:\n  -h, --help            show this help message and exit\n  --port PORT           Port (default 9119, 0 for auto-assign by OS)\n  --host HOST           Host (default 127.0.0.1)\n  --insecure            DEPRECATED / NO-OP. Formerly bypassed auth on a non-\n                        loopback bind. As of the June 2026 hardening it no\n                        longer disables authentication — a public bind always\n                        requires an auth provider (password or OAuth). Bind\n                        127.0.0.1 + tunnel to keep it local.\n  --skip-build          Skip the web UI build step and serve the existing dist\n                        directly. Useful for non-interactive contexts (Windows\n                        Scheduled Tasks, CI) where npm may not be available.\n                        Pre-build with: cd web && npm run build\n  --isolated            When launched from a named profile, run a dedicated\n                        server scoped to that profile instead of routing to\n                        the machine-level server. Default behavior is unified:\n                        profile launches attach to (or start) ONE machine-\n                        level server and preselect the profile.\n  --stop                Stop all running Hermes web server processes and exit\n  --status              List running Hermes web server processes and exit\n  --ssh-session-token-file PATH\n                        Read a one-shot Desktop SSH session token from PATH\n  --ssh-owner-nonce NONCE\n                        Identify a Desktop-owned SSH backend process\n"
+}

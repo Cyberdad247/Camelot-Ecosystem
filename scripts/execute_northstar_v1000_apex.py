@@ -173,8 +173,8 @@ Tailscale Mesh Interconnect (`100.x.y.z`) unified by Bifrost Gateway (`apps/bifr
 | **`vps3573819` (`KVM563`)** | `162.35.107.134` | Camelot-OS Hub & Control Plane / Hermes Prime | Linux Ubuntu 24.04 LTS |
 | **`fothers-camelot`** | `100.121.48.50` | Sovereign Secondary Node / Distributed Build Agent | Windows 11 |
 | **`lakesha`** | `100.100.155.55` | Lakisha Voice OS Host / Multivoice Cluster | Windows 11 |
-| **`camelot-relay-modal`** | `100.84.98.39` | Linux Cloud Relay Node / Serverless MicroVM Runner | Linux / Modal |
-| **`kba-services`** | `100.71.218.75` | Linux Remote Services Node / Drone Matrix Controller | Linux Headless |
+| **`vps-camelot-hub`** | `100.110.180.18` | Camelot-OS Hub & Control Plane (tailnet address) | Linux / Tailscale |
+| **`macbook-pro-3`** | `100.113.101.43` | macOS Workstation / Exit Node (role unconfirmed) | macOS / arm64 |
 | **`motorola-moto-g`** | `100.89.129.105` | Auxiliary Mobile Sentinel & Telemetry Watcher | Android Edge |
 
 ---

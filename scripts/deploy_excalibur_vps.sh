@@ -2,7 +2,7 @@
 # ==============================================================================
 # CAMELOT-OS VPS HUB — EXCALIBUR COCKPIT UI SYNC & DEPLOYMENT SCRIPT
 # ==============================================================================
-# Sovereign VPS Host: 162.35.107.134 / kba-services (100.71.218.75 / 100.110.180.18)
+# Sovereign VPS Host: 162.35.107.134 / vps-camelot-hub (tailnet 100.110.180.18)
 # Target Web Root: /var/www/camelot
 # Caddy Gateway Config: /etc/caddy/Caddyfile
 # ==============================================================================
@@ -30,7 +30,7 @@ if command -v caddy &> /dev/null; then
     echo "🔄 Reloading Caddy Reverse Proxy..."
     cp ./infra/caddy/Caddyfile /etc/caddy/Caddyfile
     caddy reload --config /etc/caddy/Caddyfile || systemctl reload caddy
-    echo "🎉 [SUCCESS] Excalibur UI is now live on VPS Hub (http://162.35.107.134 / http://100.71.218.75)!"
+    echo "🎉 [SUCCESS] Excalibur UI is now live on VPS Hub (http://162.35.107.134 / http://100.110.180.18)!"
 else
     echo "⚠️ Caddy not installed in this environment. Files staged at ${DEST_DIR}."
 fi

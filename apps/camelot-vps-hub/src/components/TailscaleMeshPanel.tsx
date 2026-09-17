@@ -50,7 +50,7 @@ export const TAILSCALE_MESH_NODES: MeshNode[] = [
   {
     id: 'vps3573819',
     name: 'KVM563 / vps3573819',
-    tailscaleIp: '100.71.218.75',
+    tailscaleIp: '100.110.180.18',
     publicIp: '162.35.107.134',
     role: 'Camelot-OS Hub & Control Plane (HERMES_PRIME)',
     os: 'Ubuntu 24.04 LTS / x86_64',
@@ -78,25 +78,18 @@ export const TAILSCALE_MESH_NODES: MeshNode[] = [
     latencyMs: 16.5,
     icon: 'laptop'
   },
+  // `camelot-relay-modal` and `kba-services` were listed here and are absent from
+  // the tailnet; the operator console was advertising nodes that cannot answer.
+  // The authoritative list is control_plane/infra/mesh_topology.py.
   {
-    id: 'camelot-relay-modal',
-    name: 'camelot-relay-modal',
-    tailscaleIp: '100.84.98.39',
-    role: 'Linux Cloud Relay Node & MicroVM Serverless',
-    os: 'Linux Cloud Kernel',
-    status: 'ROUTING',
-    latencyMs: 24.1,
-    icon: 'cloud'
-  },
-  {
-    id: 'kba-services',
-    name: 'kba-services',
-    tailscaleIp: '100.71.218.75',
-    role: 'Linux Remote Services & Matrix Ingress',
-    os: 'Linux 6.8 / x86_64',
-    status: 'ROUTING',
-    latencyMs: 11.3,
-    icon: 'server'
+    id: 'macbook-pro-3',
+    name: 'macbook-pro-3',
+    tailscaleIp: '100.113.101.43',
+    role: 'macOS Workstation (exit node; role unconfirmed)',
+    os: 'macOS / arm64',
+    status: 'ONLINE',
+    latencyMs: 21.0,
+    icon: 'laptop'
   },
   {
     id: 'motorola-moto-g-power',

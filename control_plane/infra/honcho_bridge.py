@@ -11,7 +11,8 @@ retrieval, and dialectic context consolidation for Hermes Agent.
 
 Topology:
   - Local Port: http://127.0.0.1:8000
-  - Mesh VPS Hub: http://100.71.218.75:8000 (KVM563 Hermes Node)
+  - Mesh VPS Hub: KVM563 Hermes Node, port 8000 (address from
+    ``mesh_topology.HUB_TAILSCALE_IP``; not restated here so it cannot drift)
   - VFS Coordinate: vfs://worldtree/memory/honcho/
 """
 
@@ -27,6 +28,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from control_plane.infra.hermes_bridge import HermesBus
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
 
 log = logging.getLogger("HONCHO_BRIDGE")
 
@@ -34,7 +36,7 @@ _CAMELOT_ROOT = Path(__file__).resolve().parent.parent.parent
 _CACHE_PATH = _CAMELOT_ROOT / "03_VAULT" / "runtime_state" / "honcho_memory_cache.json"
 
 DEFAULT_HONCHO_URL = os.environ.get("HONCHO_BASE_URL", "http://127.0.0.1:8000")
-VPS_HONCHO_URL = os.environ.get("HONCHO_VPS_URL", "http://100.71.218.75:8000")
+VPS_HONCHO_URL = os.environ.get("HONCHO_VPS_URL", f"http://{HUB_TAILSCALE_IP}:8000")
 
 
 class HonchoBridge:

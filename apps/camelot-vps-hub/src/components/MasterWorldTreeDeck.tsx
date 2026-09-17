@@ -1097,10 +1097,11 @@ export const MasterWorldTreeDeck: React.FC<MasterWorldTreeDeckProps> = ({
         </div>
       ) : continuityLayout === 'hud' ? (
         <div className="w-full max-w-[1880px] mx-auto p-2 sm:p-4 pt-16 pb-8">
+          {/* WorldTreeHUD accepts only `onOpenModal` and `className`; it reads
+              neither `onNavigateTab` nor `onExecuteCommand`, so passing them was
+              dead wiring that type-checked only by being untyped. */}
           <WorldTreeHUD 
             onOpenModal={(m) => setActiveModal(m)}
-            onNavigateTab={onNavigateTab}
-            onExecuteCommand={onExecuteCommand}
           />
         </div>
       ) : continuityLayout === 'split' ? (

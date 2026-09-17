@@ -92,13 +92,16 @@ const operatorBff = createOperatorBff({
 app.use('/v1/operator', operatorBff);
 
 // ── Canonical Tailscale Mesh Node Inventory ──
+// Must agree with control_plane/infra/mesh_topology.py. `camelot-relay-modal`
+// and `kba-services` were listed here and are absent from the tailnet entirely;
+// the hub was missing. tests/test_mesh_topology_single_source.py guards this set.
 export const TAILSCALE_MESH_NODES = [
   { id: 'cybertronia', name: 'cybertronia', ip: '100.118.224.52', role: 'Primary Windows Orchestrator & Local VFS Factory', status: 'ACTIVE' },
   { id: 'vashawns-s26-ultra', name: 'vashawns-s26-ultra', ip: '100.106.246.126', role: 'Excalibur Command Center (Kinetic Mobile Sentinel)', status: 'ACTIVE' },
   { id: 'fothers-camelot', name: 'fothers-camelot', ip: '100.121.48.50', role: 'Windows Sovereign Secondary Node', status: 'ACTIVE' },
   { id: 'lakesha', name: 'lakesha', ip: '100.100.155.55', role: 'Lakisha Voice OS Host', status: 'ACTIVE' },
-  { id: 'camelot-relay-modal', name: 'camelot-relay-modal', ip: '100.84.98.39', role: 'Linux Cloud Relay Node', status: 'ACTIVE' },
-  { id: 'kba-services', name: 'kba-services', ip: '100.71.218.75', role: 'Linux Remote Services Node', status: 'ACTIVE' },
+  { id: 'vps-camelot-hub', name: 'vps-camelot-hub', ip: '100.110.180.18', role: 'Camelot-OS Hub & Control Plane (KVM563)', status: 'ACTIVE', governingKnight: 'HERMES_PRIME' },
+  { id: 'macbook-pro-3', name: 'macbook-pro-3', ip: '100.113.101.43', role: 'macOS Workstation (exit node; role unconfirmed)', status: 'ACTIVE' },
   { id: 'motorola-moto-g-power', name: 'motorola-moto-g-power-5g---2024', ip: '100.89.129.105', role: 'Auxiliary Mobile Sentinel & Backup Telemetry Relay', status: 'ACTIVE', governingKnight: 'SIR_HEIMDALL' },
 ];
 

@@ -1,0 +1,17 @@
+# infra/systemd/camelot-workers.slice
+#
+# Agent workers, including Hermes.
+#
+# MemoryHigh sits below MemoryMax so PSI reclaim degrades the worker smoothly
+# instead of letting the hard cap OOM-kill it. Ceiling declared in
+# 05_INFRASTRUCTURE/distro/profile/camelot-os-profile/camelot-slice-budget.conf;
+# keep both in sync if either changes.
+
+[Unit]
+Description=Camelot-OS workers slice
+Before=slices.target
+
+[Slice]
+MemoryAccounting=yes
+MemoryHigh=1536M
+MemoryMax=2G

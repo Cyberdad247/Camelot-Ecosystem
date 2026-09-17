@@ -16,6 +16,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from control_plane.infra.mesh_topology import (
+        HUB_TAILSCALE_IP,
+        as_absent_inventory,
+        as_canonical_inventory,
+        as_sentinel_mobile_nodes,
+    )
+except ImportError:  # standalone fallback when executed from a remote VPS directory
+    from mesh_topology import (  # type: ignore
+        HUB_TAILSCALE_IP,
+        as_absent_inventory,
+        as_canonical_inventory,
+        as_sentinel_mobile_nodes,
+    )
+
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
@@ -137,58 +152,17 @@ BIFROST_KNIGHTS_SWARM: tuple[dict[str, Any], ...] = (
     },
 )
 
-CANONICAL_MESH_INVENTORY: tuple[dict[str, Any], ...] = (
-    {
-        "id": "cybertronia",
-        "name": "cybertronia",
-        "tailscale_ip": "100.118.224.52",
-        "role": "Primary Windows Orchestrator & Local VFS Factory",
-        "status": "ACTIVE",
-    },
-    {
-        "id": "vashawns_s26_ultra",
-        "name": "vashawns-s26-ultra",
-        "tailscale_ip": "100.106.246.126",
-        "role": "Excalibur Command Center (Kinetic Mobile Sentinel & Cockpit / Android 16)",
-        "status": "ACTIVE",
-    },
-    {
-        "id": "fothers_camelot",
-        "name": "fothers-camelot",
-        "tailscale_ip": "100.121.48.50",
-        "role": "Windows Sovereign Secondary Node & Failover Rig",
-        "status": "ACTIVE",
-    },
-    {
-        "id": "lakesha",
-        "name": "lakesha",
-        "tailscale_ip": "100.100.155.55",
-        "role": "Lakisha Voice OS Host & Secondary Surface",
-        "status": "ACTIVE",
-    },
-    {
-        "id": "camelot_relay_modal",
-        "name": "camelot-relay-modal",
-        "tailscale_ip": "100.84.98.39",
-        "role": "Linux Cloud Relay Node & Modal Inference Bridge",
-        "status": "ACTIVE",
-    },
-    {
-        "id": "kba_services",
-        "name": "kba-services",
-        "tailscale_ip": "100.71.218.75",
-        "role": "Linux Remote Services Node & VPS KVM563 Bridge (162.35.107.134)",
-        "status": "ACTIVE",
-    },
-    {
-        "id": "motorola_moto_g_power",
-        "name": "motorola-moto-g-power-5g---2024",
-        "tailscale_ip": "100.89.129.105",
-        "role": "Auxiliary Kinetic Mobile Sentinel & Backup Telemetry Relay",
-        "status": "ACTIVE",
-        "governing_knight": "SIR_HEIMDALL",
-    },
-)
+# Projected from control_plane.infra.mesh_topology — the single source of truth,
+# shared with the Heimdall sentinel and the mesh sentinel. This table used to be
+# a third independent copy, which is how `kba_services` came to be documented at
+# 100.71.218.75 with the role "VPS KVM563 Bridge" while the hub itself was
+# missing. Add or move a node in mesh_topology, not here.
+CANONICAL_MESH_INVENTORY: tuple[dict[str, Any], ...] = as_canonical_inventory()
+
+# Nodes named in AGENTS.md Rule 5 that are absent from the live tailnet. Held
+# separately so operational surfaces never advertise them as reachable ACTIVE
+# nodes.
+ABSENT_MESH_NODES: tuple[dict[str, Any], ...] = as_absent_inventory()
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -265,7 +239,9 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
             "host_server": "KVM563",
             "vm_id": "vps3573819",
             "public_ip": "162.35.107.134",
-            "tailscale_ip": "100.71.218.75",
+            # Was 100.71.218.75 — the kba_services address, not the hub's. This is
+            # the value the dashboard renders, so it advertised the wrong host.
+            "tailscale_ip": HUB_TAILSCALE_IP,
             "role": "Camelot-OS Hub & Sovereign Control Plane",
             "always_on_agents": ["HERMES_PRIME", "SIR_HEIMDALL"],
         },
@@ -273,10 +249,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
             "account": "Cyberdad247@github",
             "node_count": len(CANONICAL_MESH_INVENTORY),
             "nodes": [dict(node) for node in CANONICAL_MESH_INVENTORY],
-            "sentinel_mobile_nodes": [
-                {"name": "vashawns-s26-ultra", "ip": "100.106.246.126", "tier": "PRIMARY_COCKPIT"},
-                {"name": "motorola-moto-g-power-5g---2024", "ip": "100.89.129.105", "tier": "AUXILIARY_SENTINEL"},
-            ],
+            "sentinel_mobile_nodes": as_sentinel_mobile_nodes(),
         },
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "terminal": {

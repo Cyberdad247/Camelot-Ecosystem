@@ -7,7 +7,7 @@ WorldTree CloudBrain & VPS Hub Integration Engine
 Authority: King Arthur (VaShawn O. Head / Vizion)
 Governing Knights: MERLIN_OMEGA (Deep Reasoning) · HERMES_PRIME (VPS Hub & R&D)
 WorldTree Home Node: a0a4bfb9-e847-4c38-be39-7aee398f0795
-VPS Control Plane:  KVM563 (162.35.107.134 / 100.71.218.75)
+VPS Control Plane:  KVM563 (162.35.107.134 / mesh_topology.HUB_TAILSCALE_IP)
 Active Target:      v1000.54-EXCALIBUR-A (vMAX Singularity)
 
 Orchestrates:
@@ -44,12 +44,14 @@ if str(REPO_ROOT / "vfs") not in sys.path:
 if str(REPO_ROOT / "01_KERNEL") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "01_KERNEL"))
 
+from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP  # noqa: E402
+
 WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
 HERMES_PRIME_UUID = "28f89cb6-5048-4b5d-9e94-376082d24744"
 CAMELOT_V1000_UUID = "8c656cfa-a189-409e-a72d-07692a47f17e"
 
 VPS_PUBLIC_IP = "162.35.107.134"
-VPS_TAILSCALE_IP = "100.71.218.75"
+VPS_TAILSCALE_IP = HUB_TAILSCALE_IP
 MAX_VERSION = "v1000.54-EXCALIBUR-A"
 
 OPEN_NOTEBOOK_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "open_notebook"
