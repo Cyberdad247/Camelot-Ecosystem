@@ -24,7 +24,6 @@ import datetime
 from datetime import timezone
 import enum
 import hashlib
-import json
 import logging
 import re
 import time

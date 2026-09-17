@@ -31,6 +31,7 @@ import hashlib
 import hmac
 import json
 import os
+import secrets
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
@@ -162,10 +163,11 @@ class BifrostCartridgeBridge:
 
 if __name__ == "__main__":
     # Minimal self-demo: sign → verify → dispatch through the real executor.
+    # Demo credentials are ephemeral (regenerated every run) — never hardcode.
     from . import cartridge_crypto as cc
 
-    os.environ.setdefault("CAMELOT_CARTRIDGE_HMAC_KEY", "bridge-demo-cartridge-key")
-    secret = "bridge-demo-webhook"
+    os.environ.setdefault("CAMELOT_CARTRIDGE_HMAC_KEY", secrets.token_hex(16))
+    secret = secrets.token_hex(16)
 
     # A signed manifest allowing the built-in echo tool.
     m = CartridgeManifest(cartridge_id="DEMO", description="d", signature="pending",

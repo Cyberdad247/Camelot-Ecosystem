@@ -122,10 +122,51 @@ jobs:
           echo "control_plane/ + tests/ violations: $actual (pinned baseline: $RUFF_SCOPE_BASELINE)"
           if [ "$actual" -gt "$RUFF_SCOPE_BASELINE" ]; then
             echo "::error ::Ruff ratchet exceeded: $actual > $RUFF_SCOPE_BASELINE - new violations were introduced."
-            ruff check control_plane/ tests/ --config pyproject.toml || true
-            exit 1
+          ruff check control_plane/ tests/ --config pyproject.toml || true
+          exit 1
           fi
           echo "[OK] no new violations in control_plane/ or tests/"
+
+  # ── Stage 2c: Supply chain (SBOM + CVE scan) ──────────────────────
+  # Tools only (pip-audit, cyclonedx-bom, npm audit) — no third-party
+  # actions, so no SHA-pinning needed. Non-blocking until the two known
+  # pyo3 advisories (RUSTSEC-2025-0020, RUSTSEC-2026-0177, see
+  # .cargo/audit.toml) are triaged; then remove continue-on-error.
+  # Image signing (cosign) needs a KMS/fulcio identity — tracked follow-up.
+  supply-chain:
+    name: Supply chain (SBOM + audit)
+    runs-on: windows-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Python CVE scan
+        run: |
+          pip install pip-audit cyclonedx-bom
+          pip-audit --desc || true
+          cyclonedx-py environment --output-format JSON --output-file sbom-python.json
+
+      - name: npm CVE scan + SBOM
+        run: |
+          npm audit --audit-level=high || true
+          npx --yes @cyclonedx/cyclonedx-npm --output-file sbom-npm.json || true
+
+      - name: Upload SBOMs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: sbom-*.json
+          if-no-files-found: warn
 
   # ── Stage 3: Security ───────────────────────────────────────────
   security:

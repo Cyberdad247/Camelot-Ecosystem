@@ -44,7 +44,15 @@ class CamelotVPSWebhookHandler:
     """Zero-Trust GitHub Webhook Receiver for Camelot-VPS Sync."""
 
     def __init__(self, secret: Optional[str] = None, state_dir: Optional[Path] = None):
-        self.secret = secret or os.getenv("GITHUB_WEBHOOK_SECRET", "camelot_sovereign_webhook_key_2026")
+        # Fail closed: no hardcoded fallback. Resolve via explicit arg (tests),
+        # GITHUB_WEBHOOK_SECRET env, or the SecretManager store — the edge VPS
+        # bus holds the canonical value (see SecretManager / camelot-edge-bus).
+        self.secret = secret or os.getenv("GITHUB_WEBHOOK_SECRET", "")
+        if not self.secret:
+            raise RuntimeError(
+                "GITHUB_WEBHOOK_SECRET is not set — refusing to start with an open webhook. "
+                "Set the env var or store it via `python -m control_plane.infra.secret_manager set GITHUB_WEBHOOK_SECRET`."
+            )
         self.state_dir = state_dir or Path("03_VAULT/runtime_state/webhooks")
         self.state_dir.mkdir(parents=True, exist_ok=True)
 

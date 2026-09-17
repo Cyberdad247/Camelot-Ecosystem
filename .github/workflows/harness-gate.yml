@@ -18,10 +18,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        # NOTE: actions/*@v7 does not exist upstream (latest is v4/v5/v6).
+        # Pinned to the same majors used by verify_os.yml / ci.yml.
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
@@ -35,7 +37,7 @@ jobs:
 
       - name: Upload per-check result logs
         if: always()
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@v4
         with:
           name: harness-results
           path: harness/results/

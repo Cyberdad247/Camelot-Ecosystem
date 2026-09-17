@@ -17,6 +17,17 @@ _IGNORE_DIRS = {
     ".git", "__pycache__", "node_modules", ".venv", "venv",
     "dist", "build", ".antigravity", "CAMELOT_DefenseGrid_Quarantine",
     ".mypy_cache", ".ruff_cache", "target",
+    # Heavy / vendored / generated trees (mirrors pyproject norecursedirs).
+    # Without these, colony walks reference dumps and stalls on 30k+ files.
+    "data", "Velocity", "99_ARCHIVE", "99_HISTORY", ".worktrees",
+    ".colony", ".pytest_cache", ".pytest_temp",
+    "KINETIC_REFERENCES", "LLM-Apps-Ref", "omniroute_sandbox",
+    # 02_FORGE/KINETIC_ARMORY is a vendored third-party mirror (ansible, grpc,
+    # SpacetimeDB, ... — full clones, ~26k files). Same class as the 03_VAULT
+    # reference dumps pyproject already excludes. First-party kinetic crates in
+    # 02_FORGE/kinetic/* stay visible. `generated` mirrors the Cargo workspace
+    # exclude; `logs` is runtime output.
+    "KINETIC_ARMORY", "generated", "logs",
 }
 _MAX_FILE_BYTES = 2 * 1024 * 1024  # 2 MB ceiling for AST & symbol analysis
 

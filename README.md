@@ -11,7 +11,7 @@
 [![Status](https://img.shields.io/badge/status-production%20verified-2ea44f)]()
 [![PQ Crypto](https://img.shields.io/badge/crypto-ML--KEM--768%20%7C%20ML--DSA--65-D4AF37)]()
 [![RAM Ceiling](https://img.shields.io/badge/RAM%20ceiling-4GB%20Scarcity%20Protocol-blue)]()
-[![Languages](https://img.shields.io/badge/Python%203.11%20%7C%20Rust%201.96%20%7C%20Go%201.23-informational)]()
+[![Languages](https://img.shields.io/badge/Python%203.13%20%7C%20Rust%201.85%20%7C%20Go%201.23-informational)]()
 [![Architecture](https://img.shields.io/badge/OxiBonsai_v2-Ternary_STDP-FF4500)]()
 [![Engine](https://img.shields.io/badge/AntVortex-1M_Context_Engine-9370DB)]()
 
