@@ -229,10 +229,16 @@ def test_live_help_still_matches_the_fixture() -> None:  # pragma: no cover - op
     Skipped by default: CI should not depend on SSH to a production hub. Run this
     when upgrading Hermes, and update the fixture with the result.
     """
+    # encoding is explicit: `text=True` alone decodes with the platform default, which on
+    # Windows is cp1252. The hub emits UTF-8, so an em dash arrived as `â€”` and this drift
+    # detector failed on a host that had not drifted at all. A detector that cries wolf is
+    # one people learn to ignore.
     out = subprocess.run(
         ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=12", HUB, "hermes serve --help"],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         timeout=90,
     )
     if out.returncode != 0:

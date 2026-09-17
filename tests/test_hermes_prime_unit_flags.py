@@ -50,10 +50,14 @@ STALE_TREE = "/opt/Camelot-Ecosystem"
 
 def _engine_accepted_flags() -> set[str]:
     """Every flag the engine actually accepts, straight from its runtime --help."""
+    # encoding must be explicit: `text=True` alone uses the platform default (cp1252 on
+    # Windows) while the engine emits UTF-8, so non-ASCII output would decode to mojibake.
     proc = subprocess.run(
         [sys.executable, str(ENGINE), "--help"],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         timeout=60,
     )
     assert proc.returncode == 0, f"engine --help failed: {proc.stderr}"

@@ -206,10 +206,15 @@ _opt_in = pytest.mark.skipif(
 
 
 def _ssh(remote: str, timeout: int = 90) -> subprocess.CompletedProcess:
+    # encoding is explicit: `text=True` alone decodes with the platform default (cp1252 on
+    # Windows) while the hub emits UTF-8. Without this, any non-ASCII byte in the remote
+    # output decodes to mojibake and a passing check looks like a failure.
     return subprocess.run(
         ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=12", HUB, remote],
         capture_output=True,
         text=True,
+        encoding="utf-8",
+        errors="replace",
         timeout=timeout,
     )
 
