@@ -392,8 +392,15 @@ if [[ "$MODE" == "apply" ]]; then
   fi
 fi
 
-check_endpoint "mesh telemetry through nginx"  "http://localhost/mesh/status"
-check_endpoint "bifrost knights through nginx" "http://localhost/bifrost/knights"
+# The full client contract, not half of it. `deploy_luxora_nexus_lab.sh` verifies these
+# same four paths with its own `check_endpoint` calls; checking only two here let the
+# other two answer 302 from the Hermes dashboard while this audit reported the contract
+# satisfied. The routes live in infra/nginx/camelot-mesh-bridge.conf and are installed by
+# scripts/ops/install-mesh-bridge-routes.sh — this file does not restate them.
+check_endpoint "mesh telemetry through nginx"      "http://localhost/mesh/status"
+check_endpoint "bifrost knights through nginx"     "http://localhost/bifrost/knights"
+check_endpoint "hermes telemetry through nginx"    "http://localhost/hermes/telemetry"
+check_endpoint "heimdall governance through nginx" "http://localhost/heimdall/governance"
 
 # ========================================================================================
 # RESULT — the banner is a result, not a print statement

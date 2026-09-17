@@ -63,7 +63,7 @@ log() { printf '%s %s\n' "$(date -u +%FT%TZ)" "$*"; }
 logger_err() { logger -t camelot-selfcheck -p daemon.err -- "$*" 2>/dev/null || true; }
 
 usage() {
-  echo "usage: $0 run|alert|watchdog" >&2
+  echo "usage: $0 run|alert|watchdog|test-alert" >&2
   exit 2
 }
 
@@ -140,10 +140,37 @@ deliver() {
   # Mail: always attempted. Default recipient is root (local mailbox); a real address
   # only when explicitly configured, so nothing pretends to leave the box by accident.
   local recipient="${CAMELOT_ALERT_EMAIL:-root}"
+  # "submitted", NOT "delivered". sendmail returning 0 means the MTA ACCEPTED the message
+  # for delivery; final delivery can fail afterwards with a bounce that lands in root's
+  # local mailbox. Reporting the bare address here claimed a delivery that had not
+  # happened — the channel had never been exercised, so nobody could tell.
   if printf 'Subject: %s\n\n%s\n' "$subject" "$body" | sendmail "$recipient" 2>/dev/null; then
-    channels+=("mail:${recipient}")
+    channels+=("mail:submitted:${recipient}")
   else
-    channels+=("mail:FAILED(${recipient})")
+    channels+=("mail:REJECTED(${recipient})")
+  fi
+
+  # --- Resend (HTTPS email API) -------------------------------------------------
+  # Preferred over local sendmail wherever configured, because direct-to-MX delivery
+  # from this host FAILED (Final-Recipient accepted, then Action: failed / Status 5.0.0)
+  # and it failed AFTER the MTA accepted the message — so the submission looked like a
+  # success while nothing was delivered. An HTTPS API answers on the request, so a
+  # rejected send is reported at the moment it happens rather than by a bounce nobody
+  # reads. Needs CAMELOT_ALERT_RESEND_KEY; the from-address must be on a domain verified
+  # in the provider's dashboard, or delivery is accepted and then filtered.
+  if [[ -n "${CAMELOT_ALERT_RESEND_KEY:-}" ]]; then
+    local from="${CAMELOT_ALERT_FROM:-onboarding@resend.dev}" payload code
+    payload="$(python3 -c 'import json,sys;print(json.dumps({"from":sys.argv[1],"to":[sys.argv[2]],"subject":sys.argv[3],"text":sys.argv[4]}))' \
+      "$from" "$recipient" "$subject" "$body" 2>/dev/null)"
+    code="$(curl -sS -m 15 -o /dev/null -w '%{http_code}' -X POST https://api.resend.com/emails \
+      -H "Authorization: Bearer ${CAMELOT_ALERT_RESEND_KEY}" \
+      -H 'Content-Type: application/json' --data "$payload" 2>/dev/null)"
+    case "$code" in
+      200|201) channels+=("resend:${recipient}") ;;
+      *)      channels+=("resend:FAILED(http_${code:-000})") ;;
+    esac
+  else
+    channels+=("resend:unconfigured")
   fi
 
   if [[ -n "${CAMELOT_ALERT_WEBHOOK:-}" ]]; then
@@ -303,9 +330,70 @@ PY
   return 1
 }
 
+# ------------------------------------------------------------ test-alert ---
+# Sends a clearly-labelled test through the SAME delivery path a real alert uses, so that
+# "can this reach a person?" is answerable by running one command instead of by waiting
+# for a post-condition to fail. A delivery path that has never been exercised is an
+# assumption, and the failure mode of an untested alert is silence.
+cmd_test_alert() {
+  local last
+  if [[ -f "$STATUS" ]]; then
+    last="$(python3 -c "import json,sys;d=json.load(open(sys.argv[1]));print('audit: ok=%s failures=%s audit_sha=%s' % (d['ok'], d['failure_count'], d['audit_sha256']))" "$STATUS" 2>/dev/null)"
+  else
+    last="audit: unknown (no status file at $STATUS)"
+  fi
+
+  local rc=0
+  deliver "[Camelot] TEST alert from $(hostname) - no action required" \
+    "$(printf 'Delivery test for camelot-selfcheck-alert.service.\n\nIf you are reading this, the alert channel reaches a person.\nThis is a requested test; it describes nothing that is wrong.\n\nhost:        %s\nsent (UTC):  %s\n%s\n\nTo exercise the real path:  %s alert\n' \
+      "$(hostname)" "$(date -u +%FT%TZ)" "$last" "$0")" \
+    "test"
+
+  # Submitting is not delivering. Read the MTA's own bounce report and say which happened,
+  # because "sendmail exited 0" is exactly the kind of confident-but-unverified claim this
+  # whole layer exists to eliminate — and it hid a channel that delivered nothing.
+  if [[ -z "${CAMELOT_ALERT_EMAIL:-}" ]]; then
+    log "test: CAMELOT_ALERT_EMAIL unset — this reached only the local mailbox on this host"
+    return 0
+  fi
+
+  local wait="${CAMELOT_ALERT_VERIFY_WAIT:-25}" waited=0 bounce=2
+  log "test: watching for a bounce naming ${CAMELOT_ALERT_EMAIL} (up to ${wait}s)"
+  while (( waited < wait )); do
+    python3 - "${CAMELOT_ALERT_EMAIL}" 2>/dev/null <<'PY'
+import mailbox, sys
+addr = sys.argv[1].lower()
+try:
+    box = mailbox.mbox("/var/mail/root")
+except Exception:
+    sys.exit(2)
+for msg in box:
+    if "Undelivered" not in (msg.get("Subject") or ""):
+        continue
+    text = msg.as_string().lower()
+    if addr in text and "action: failed" in text:
+        sys.exit(0)
+for msg in box:
+    if addr in (msg.get("To") or "").lower():
+        sys.exit(3)
+PY
+    bounce=$?
+    (( bounce == 0 )) && break
+    sleep 5; waited=$((waited + 5))
+  done
+
+  case "$bounce" in
+    0) log "test: DELIVERY FAILED — the MTA bounced mail for ${CAMELOT_ALERT_EMAIL}; see root's mailbox for the diagnostic"; rc=1 ;;
+    3) log "test: DELIVERED (at least to this host's mailbox) for ${CAMELOT_ALERT_EMAIL}" ;;
+    *) log "test: NO BOUNCE within ${wait}s — the MTA accepted the message. That is not proof of inbox arrival: check the spam folder, and prefer a channel that reports its own errors" ;;
+  esac
+  return "$rc"
+}
+
 case "${1:-}" in
-  run)      cmd_run ;;
-  alert)    cmd_alert ;;
-  watchdog) cmd_watchdog ;;
-  *)        usage ;;
+  run)        cmd_run ;;
+  alert)      cmd_alert ;;
+  watchdog)   cmd_watchdog ;;
+  test-alert) cmd_test_alert ;;
+  *)          usage ;;
 esac

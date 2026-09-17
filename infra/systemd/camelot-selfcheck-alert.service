@@ -13,6 +13,18 @@
 #     [Service]
 #     Environment=CAMELOT_ALERT_EMAIL=you@example.com
 #     Environment=CAMELOT_ALERT_WEBHOOK=https://...
+#     Environment=CAMELOT_ALERT_RESEND_KEY=re_...
+#     Environment=CAMELOT_ALERT_FROM=alerts@your-verified-domain
+#
+# Prefer CAMELOT_ALERT_RESEND_KEY over CAMELOT_ALERT_EMAIL on this host. Local postfix
+# delivers to a consumer mailbox unsuccessfully: the MTA ACCEPTS the message and the
+# failure arrives afterwards as a bounce, so the alert log reports a channel that
+# delivered nothing. The HTTPS API answers on the request, so a rejection is knowable
+# immediately. The from-address must be on a domain verified with the provider.
+#
+# Verify whichever you set, rather than assuming it works:
+#     /usr/local/lib/camelot/hub-selfcheck.sh test-alert
+# It reads the MTA's own bounce report and prints DELIVERED / DELIVERY FAILED / NO BOUNCE.
 #
 # Deduplication lives in the script: the timer re-runs every 15 minutes, and repeating
 # an identical alert 96 times a day is how people learn to ignore alerts.

@@ -119,17 +119,22 @@ say "7) verify: run the audit once and report honestly"
   echo '  timers:'; \
   systemctl list-timers camelot-selfcheck.timer camelot-selfcheck-watchdog.timer --no-pager | head -3"
 
-say "8) alert reachability"
-# A notification that only reaches root's mailbox on the hub IS a real delivery, but it
-# is not a notification to a person. Saying so at deploy time stops an operator from
-# assuming alerting is wired because the units are enabled — which is the same
-# "installed is not running" mistake this whole layer exists to catch.
+say "8) alert reachability — configured is not the same as delivered"
+# Two separate things get confused here. A notification that only reaches root's mailbox
+# IS a real delivery, but not to a person. And an address in a drop-in is not a working
+# channel either: on this hub postfix ACCEPTS mail for a consumer mailbox and then bounces
+# it, so the alert log reported a channel that delivered nothing. This step therefore
+# reports CONFIGURATION and names the command that proves DELIVERY; it deliberately does
+# not send a test on every deploy.
 "${SSH[@]}" "if ls /etc/systemd/system/camelot-selfcheck-alert.service.d/*.conf >/dev/null 2>&1; then
-    echo '  remote channel configured:'
+    echo '  remote channel CONFIGURED (delivery NOT verified):'
     grep -hE 'Environment=' /etc/systemd/system/camelot-selfcheck-alert.service.d/*.conf | sed 's/^/    /'
+    echo '  prove delivery:  /usr/local/lib/camelot/hub-selfcheck.sh test-alert'
+    echo '  it reads the MTA bounce report and prints DELIVERED / DELIVERY FAILED / NO BOUNCE.'
   else
     echo '  WARN no remote alert channel: alerts land in the root mailbox on this host and in the journal.'
-    echo '       To reach a person:  systemctl edit camelot-selfcheck-alert'
-    echo '       and set  Environment=CAMELOT_ALERT_EMAIL=you@example.com'
-    echo '       or       Environment=CAMELOT_ALERT_WEBHOOK=https://...'
+    echo '       To reach a person:  systemctl edit camelot-selfcheck-alert  and set ONE of:'
+    echo '         Environment=CAMELOT_ALERT_RESEND_KEY=re_...  (+ CAMELOT_ALERT_FROM=alerts@verified-domain)'
+    echo '         Environment=CAMELOT_ALERT_WEBHOOK=https://...'
+    echo '         Environment=CAMELOT_ALERT_EMAIL=you@example.com   (direct-to-MX may bounce; verify it)'
   fi"

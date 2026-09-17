@@ -270,6 +270,70 @@ def test_the_engine_liveness_label_only_prints_served_fields() -> None:
 
 
 # --------------------------------------------------------------------------- #
+# alert delivery must not claim more than it knows
+# --------------------------------------------------------------------------- #
+
+
+def test_submitting_mail_is_not_reported_as_delivering_it() -> None:
+    """`sendmail` exiting 0 means the MTA ACCEPTED the message, nothing more.
+
+    Live evidence: an alert to the configured recipient was accepted, then came back as
+    `Action: failed / Status: 5.0.0`, while the log line had already reported the address
+    as a working channel. The delivery had never been exercised, so nobody could tell.
+    """
+    text = RUNNER.read_text(encoding="utf-8")
+    assert "mail:submitted:" in text, "the mail channel does not distinguish submit from deliver"
+    assert 'channels+=("mail:${recipient}")' not in text, (
+        "the mail channel reports a bare address, which reads as 'delivered'"
+    )
+
+
+def test_the_runner_can_prove_whether_a_test_alert_was_delivered() -> None:
+    """A delivery test that cannot detect a bounce is not a delivery test."""
+    text = RUNNER.read_text(encoding="utf-8")
+    assert "test-alert)" in text and "cmd_test_alert()" in text, (
+        "no way to exercise the alert path on demand"
+    )
+    body = text.split("cmd_test_alert()", 1)[1]
+    assert "action: failed" in body, (
+        "the test does not read the MTA's bounce report, so it cannot tell delivered "
+        "from rejected"
+    )
+    assert "DELIVERY FAILED" in body, "the test reports no verdict on failure"
+    assert "NO BOUNCE" in body, (
+        "absence of a bounce must not be presented as proof of inbox arrival"
+    )
+
+
+def test_an_https_email_channel_is_available_that_reports_its_own_errors() -> None:
+    """Direct-to-MX from this host fails after acceptance; an HTTP API answers inline.
+
+    This is the channel that turns 'submitted' into a fact, because a rejected send is
+    knowable at the moment it happens instead of via a bounce nobody reads.
+    """
+    text = RUNNER.read_text(encoding="utf-8")
+    assert "api.resend.com" in text, "no HTTPS email channel available"
+    assert "resend:unconfigured" in text, "the channel must report when it is not configured"
+    assert "http_" in text, "the channel does not report the provider's rejection"
+
+
+def test_every_alert_channel_reports_whether_it_was_used() -> None:
+    """Never imply a notification went somewhere it did not."""
+    text = RUNNER.read_text(encoding="utf-8")
+    for state in ("resend:unconfigured", "webhook:unconfigured"):
+        assert state in text, f"no {state} reporting"
+    assert "channels[*]" in text, "the emitted line does not name the channels actually used"
+
+
+def test_the_alert_paths_env_is_documented_where_it_is_set() -> None:
+    """The unit is where systemd reads the config, so the keys must be named there."""
+    text = ALERT.read_text(encoding="utf-8")
+    assert "CAMELOT_ALERT_EMAIL" in text
+    assert "CAMELOT_ALERT_WEBHOOK" in text
+    assert "CAMELOT_ALERT_RESEND_KEY" in text, "the HTTPS email key is not discoverable"
+
+
+# --------------------------------------------------------------------------- #
 # the watchdog: a monitor that stops must itself be an alert
 # --------------------------------------------------------------------------- #
 
@@ -394,6 +458,23 @@ def test_recovery_is_announced_by_the_only_unconditional_path() -> None:
     alert path could never be delivered in production."""
     body = RUNNER.read_text(encoding="utf-8").split("cmd_watchdog()", 1)[1]
     assert "RECOVERED" in body
+
+
+def test_the_deploy_does_not_present_a_configured_channel_as_a_working_one() -> None:
+    """A drop-in proves configuration. On this hub it did NOT prove delivery.
+
+    Live evidence: the configured email channel was accepted by postfix and then bounced
+    (`Action: failed / Status: 5.0.0`), so a deploy printing "remote channel configured"
+    would have described a notification path that reached nobody.
+    """
+    text = DEPLOY.read_text(encoding="utf-8")
+    assert "NOT verified" in text or "not verified" in text, (
+        "the deploy presents configuration as though delivery were established"
+    )
+    assert "test-alert" in text, (
+        "the deploy does not point at the command that would actually prove delivery"
+    )
+    assert "RESEND" in text, "the deploy does not mention the HTTPS channel that reports errors"
 
 
 def test_deploy_installs_and_enables_the_watchdog() -> None:
