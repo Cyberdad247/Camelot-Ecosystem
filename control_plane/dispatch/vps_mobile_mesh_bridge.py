@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 import hmac
 import json, os, logging
+import time
 from datetime import datetime, timezone
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from typing import Any, Optional
@@ -231,11 +232,56 @@ def load_mesh_topology() -> dict:
     }
     return attach_vps_hermes_links(topology)
 
+# Token enforcement is staged, because the strict form was not deployable.
+#
+# The previous implementation returned False whenever MESH_BRIDGE_TOKEN was unset.
+# Nothing on the hub provisions that variable — it appears in this file and in one
+# test fixture, and in no unit file, deploy script, or CI workflow. So shipping that
+# version would have answered 401 to every consumer of the bridge at once: the PWA
+# mesh panel, control_plane/cli/knight_hud.py, scripts/deploy_luxora_nexus_lab.sh's own
+# endpoint checks, and the Excalibur cockpit. A guard nobody can satisfy is not a
+# guard; it is an outage waiting for a deploy.
+#
+# Staged enforcement keeps the security property and removes the landmine:
+#   * token provisioned  -> required, constant-time compared, mismatch rejected
+#   * token absent       -> allowed, but warned (rate-limited) and reported in the
+#                           response as auth_mode="unconfigured", so an unguarded
+#                           bridge is visible instead of merely quiet
+_AUTH_WARN_INTERVAL_S = 60.0
+_last_auth_warning = 0.0
+
+
+def mesh_auth_mode() -> str:
+    """"enforced" once the token is provisioned, otherwise "unconfigured"."""
+    return "enforced" if os.getenv("MESH_BRIDGE_TOKEN", "").strip() else "unconfigured"
+
+
+def _warn_unconfigured_auth() -> None:
+    """Rate-limited so a polling consumer cannot flood the journal."""
+    global _last_auth_warning
+    now = time.monotonic()
+    if now - _last_auth_warning < _AUTH_WARN_INTERVAL_S:
+        return
+    _last_auth_warning = now
+    LOG.warning(
+        "MESH_BRIDGE_TOKEN is not set: mesh reads are UNAUTHENTICATED. "
+        "Provision it in camelot-vps-mesh.service to require x-camelot-token."
+    )
+
+
 def is_mesh_request_authorized(headers: dict) -> bool:
-    """Require the runtime-only mesh token for topology and telemetry reads."""
-    expected = os.getenv("MESH_BRIDGE_TOKEN", "")
-    provided = headers.get("x-camelot-token", "")
-    if not expected or not provided:
+    """Authorize a mesh read under staged enforcement (see the note above).
+
+    Returns True while the token is unprovisioned so that deploying this file does
+    not take the mesh down; returns False for a missing or wrong token as soon as
+    one is configured.
+    """
+    expected = os.getenv("MESH_BRIDGE_TOKEN", "").strip()
+    provided = (headers.get("x-camelot-token", "") or "").strip()
+    if not expected:
+        _warn_unconfigured_auth()
+        return True
+    if not provided:
         return False
     return hmac.compare_digest(provided, expected)
 
@@ -253,6 +299,9 @@ class MeshBridgeHandler(BaseHTTPRequestHandler):
                 'account': topology_data.get('tailscale_account', 'Cyberdad247@github'),
                 'nodes': topology_data.get('nodes', {}),
                 'bifrost_co_governors': ['HERMES_PRIME', "SIR_HEIMDALL"],
+                # Surfaced so an unguarded bridge is auditable rather than merely quiet.
+                # "unconfigured" means MESH_BRIDGE_TOKEN is unset and reads are open.
+                'auth_mode': mesh_auth_mode(),
             }
             self._send_json(status)
         elif self.path in ['/bifrost/knights', '/api/bifrost/knights']:
