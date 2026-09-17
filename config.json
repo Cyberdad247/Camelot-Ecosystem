@@ -4,6 +4,7 @@
   "api_keys": {
     "groq": true,
     "gemini": true,
+    "deepseek": true,
     "openai": false,
     "openrouter": false,
     "resend": false,
