@@ -2,6 +2,16 @@
 
 Replaces the subprocess-based nlm CLI with an in-process httpx RPC client.
 Lazy synthesis: health probe at //BOOT, full Oracle query deferred until //PLAN.
+
+SOVEREIGN CLOUD-BRAIN DOCTRINE (ratified 2026-09-17, King Arthur / Vizion):
+  1. PRIME — Google NotebookLM (canonical short-term brain). Remote synthesis
+     and sync ALWAYS attempt the live NotebookLM session first.
+  2. SECONDARY DYNAMIC TWIN — local open-notebook tissue
+     (03_VAULT/runtime_state/open_notebook/*_tissue.json). Serves ONLY as a
+     graceful fallback when remote auth is expired/unreachable, and as the
+     long-term store for VKG crystals. The twin must NEVER be promoted to
+     primary: CLOUD_BRAIN_DOCTRINE order is load-bearing for
+     test_notebooklm_bridge_doctrine.py and Sir Helios REMOTE_UNSYNC alerts.
 """
 from __future__ import annotations
 
@@ -11,6 +21,10 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+# Prime -> twin resolution order. Index 0 is ALWAYS attempted first.
+# Do not reorder without operator (King Arthur) approval.
+CLOUD_BRAIN_DOCTRINE: tuple[str, str] = ("notebooklm-prime", "open-notebook-twin-vkg-longterm")
 
 CANONICAL_NOTEBOOK_ID = "8c656cfa-a189-409e-a72d-07692a47f17e"
 CANONICAL_NOTEBOOK_TITLE = "Camelot-OS: The Alpha Omega Distillation Protocol"
