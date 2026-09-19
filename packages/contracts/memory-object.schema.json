@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/memory-object.schema.json",
+  "title": "Camelot Active Memory Object",
+  "description": "Governed persistent persona/enterprise memory admitted only after a candidate record, Gideon verdict, Arthur resolution, and activation receipt. Memory may preserve history and procedure but never reusable effect authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "object_id",
+    "tenant_id",
+    "workspace_id",
+    "issuer_id",
+    "issued_at",
+    "not_before",
+    "expires_at",
+    "lifecycle",
+    "derived_from",
+    "integrity",
+    "subject_ref",
+    "memory_class",
+    "content_digest",
+    "candidate_digest",
+    "gideon_verdict_ref",
+    "arthur_resolution_ref",
+    "activation_receipt_ref",
+    "authority_semantics"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-memory-object/1"
+    },
+    "object_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._:-]{2,127}$"
+    },
+    "tenant_id": {
+      "type": "string",
+      "pattern": "^tenant_[A-Za-z0-9_-]+$"
+    },
+    "workspace_id": {
+      "type": "string",
+      "pattern": "^ws_[A-Za-z0-9_-]+$"
+    },
+    "issuer_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "not_before": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUSPENDED",
+        "REVOKED",
+        "SUPERSEDED"
+      ]
+    },
+    "derived_from": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalization",
+        "digest_algorithm",
+        "digest",
+        "signature_algorithm",
+        "signature_domain",
+        "signer_key_id",
+        "signature"
+      ],
+      "properties": {
+        "canonicalization": {
+          "type": "string",
+          "const": "camelot-c14n-json/1"
+        },
+        "digest_algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "signature_algorithm": {
+          "type": "string",
+          "const": "ed25519"
+        },
+        "signature_domain": {
+          "type": "string",
+          "const": "camelot-signature:camelot-memory-object/1"
+        },
+        "signer_key_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+        }
+      }
+    },
+    "subject_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "memory_class": {
+      "type": "string",
+      "enum": [
+        "episodic",
+        "semantic",
+        "relational",
+        "enterprise",
+        "procedural"
+      ]
+    },
+    "content_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "candidate_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "gideon_verdict_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "arthur_resolution_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "activation_receipt_ref": {
+      "type": "string",
+      "pattern": "^receipt://[A-Za-z0-9:./_-]+$"
+    },
+    "authority_semantics": {
+      "type": "string",
+      "const": "memory-never-authority"
+    }
+  }
+}

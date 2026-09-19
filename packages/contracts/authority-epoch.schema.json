@@ -1,84 +1,129 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://camelot-os/schemas/authority-epoch.schema.json",
-  "title": "Camelot Authority Epoch",
-  "description": "v1.2 multidimensional authority vector and cluster fencing epoch state. Formalizes A_epoch = <E_leadership, R_policy, R_revocation, R_registry, R_identity, R_contract> ensuring granular distributed invalidation across VPS, Excalibur, and local workstation.",
+  "title": "Camelot Authority Epoch Certificate",
+  "description": "Signed Crown authority-epoch certificate for dynamic fencing. Exactly one current certificate defines the active authority epoch for receipt/lease/admission boundaries. Superseded certificates remain evidence, never current authority.",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "schema_version",
-    "epoch_id",
-    "authority_vector",
-    "fenced_leader_node",
-    "active_leader_node",
-    "policy_bundle_hash",
-    "contracts_lock_hash",
+    "certificate_id",
+    "authority_domain",
+    "authority_epoch",
+    "active_brain",
+    "promotion_mode",
     "issued_at",
-    "signer"
+    "effective_at",
+    "lifecycle",
+    "receipt_head",
+    "state_digest",
+    "previous_certificate_digest",
+    "integrity"
   ],
   "properties": {
     "schema_version": {
       "type": "string",
       "const": "camelot-authority-epoch/1"
     },
-    "epoch_id": {
+    "certificate_id": {
       "type": "string",
       "pattern": "^epoch_[A-Za-z0-9_-]+$"
     },
-    "authority_vector": {
-      "description": "6-dimensional authority vector tuple: [E_leadership, R_policy, R_revocation, R_registry, R_identity, R_contract].",
-      "type": "array",
-      "items": {
-        "type": "integer",
-        "minimum": 0
-      },
-      "minItems": 6,
-      "maxItems": 6
-    },
-    "fenced_leader_node": {
-      "description": "Node ID of the previous leader fenced out by this epoch change.",
-      "type": ["string", "null"]
-    },
-    "active_leader_node": {
-      "description": "Node ID of the active leader recognized in this epoch.",
-      "type": "string"
-    },
-    "policy_bundle_hash": {
-      "description": "SHA-256 hash of the currently authoritative Sentinel policy bundle.",
+    "authority_domain": {
       "type": "string",
-      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+      "minLength": 1
     },
-    "contracts_lock_hash": {
-      "description": "SHA-256 hash of CONTRACTS.lock governing this epoch.",
+    "authority_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "active_brain": {
       "type": "string",
-      "pattern": "^sha256:[0-9a-fA-F]{64}$"
+      "minLength": 1
+    },
+    "promotion_mode": {
+      "type": "string",
+      "enum": [
+        "BOOTSTRAP",
+        "PLANNED",
+        "FAILOVER"
+      ]
     },
     "issued_at": {
       "type": "string",
       "format": "date-time"
     },
-    "expires_at": {
-      "type": ["string", "null"],
+    "effective_at": {
+      "type": "string",
       "format": "date-time"
     },
-    "signer": {
-      "type": "object",
-      "required": ["actor_id", "trust_band", "signature_algorithm", "signature"],
-      "additionalProperties": false,
-      "properties": {
-        "actor_id": {
-          "type": "string"
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUPERSEDED",
+        "REVOKED"
+      ]
+    },
+    "receipt_head": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "state_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "previous_certificate_digest": {
+      "oneOf": [
+        {
+          "type": "null"
         },
-        "trust_band": {
+        {
           "type": "string",
-          "enum": ["sovereign", "attested", "witness"]
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      ]
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalization",
+        "digest_algorithm",
+        "digest",
+        "signature_algorithm",
+        "signature_domain",
+        "signer_key_id",
+        "signature"
+      ],
+      "properties": {
+        "canonicalization": {
+          "type": "string",
+          "const": "camelot-c14n-json/1"
+        },
+        "digest_algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
         },
         "signature_algorithm": {
           "type": "string",
-          "enum": ["ed25519", "p256"]
+          "const": "ed25519"
+        },
+        "signature_domain": {
+          "type": "string",
+          "const": "camelot-signature:camelot-authority-epoch/1"
+        },
+        "signer_key_id": {
+          "type": "string",
+          "minLength": 1
         },
         "signature": {
-          "type": "string"
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]+={0,2}$"
         }
       }
     }

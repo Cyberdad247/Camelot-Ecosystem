@@ -24,10 +24,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "enum": [
-        "camelot-receipt/1",
-        "camelot-receipt/2"
-      ]
+      "const": "camelot-receipt/1"
     },
     "receipt_id": {
       "type": "string",
@@ -64,13 +61,6 @@
       "description": "Monotonic epoch under which this receipt was issued; receivers REJECT receipts whose epoch is below trusted epoch (§6.3).",
       "type": "integer",
       "minimum": 0
-    },
-    "authority_vector": {
-      "description": "6-dimensional authority vector tuple: [E_leadership, R_policy, R_revocation, R_registry, R_identity, R_contract].",
-      "type": "array",
-      "items": { "type": "integer", "minimum": 0 },
-      "minItems": 6,
-      "maxItems": 6
     },
     "effect_class": {
       "$ref": "#/$defs/effect_class"

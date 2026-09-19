@@ -18,10 +18,7 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "enum": [
-        "camelot-vfs-attestation/1",
-        "camelot-vfs-attestation/2"
-      ]
+      "const": "camelot-vfs-attestation/1"
     },
     "attestation_id": {
       "type": "string",
