@@ -309,3 +309,8 @@ data/session_logs/
 # Staging repos for assimilation
 .camelot/staging/
 deploy/multivoice-router/
+
+# Redis append-only dumps (runtime data, never committed)
+appendonly.aof
+appendonly.aof.*
+*.aof

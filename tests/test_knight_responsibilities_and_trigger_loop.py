@@ -31,6 +31,13 @@ def test_sir_helios_session_keepalive_cron():
     state_file = REPO_ROOT / "03_VAULT" / "runtime_state" / "helios_session_keepalive.json"
     assert state_file.exists()
 
+    # 2b. Verify remote-verdict cache: an immediate second tick reuses the
+    # live verdict instead of re-hitting Google.
+    second = helios_keepalive_daemon.execute_keepalive_tick()
+    assert second["remote_sync"] == report["remote_sync"]
+    if report["remote_sync"] != "UNKNOWN":
+        assert second["remote_cached"] is True
+
     # 3. Verify character sheet assigns session keepalive cron responsibility
     reg = ArchLibrarianRegistry()
     helios = reg.summon_knight("SIR_HELIOS")

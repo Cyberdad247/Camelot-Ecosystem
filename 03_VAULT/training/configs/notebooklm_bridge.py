@@ -35,6 +35,13 @@ SYNC_NOTE_TITLE = "Camelot-OS Canonical Sync Snapshot"
 CLIENT_TIMEOUT_S = 90.0
 SYNTHESIS_TTL_S = 900
 
+# Shared Redis synthesis memo (cross-process, cross-lane).
+# Key scheme matches apps/bifrost/cache.go: "cb:memo:" + sha256 hex.
+# TTL matches Go DefaultMemoTTL (10 min) so both lanes expire together.
+MEMO_PREFIX = "cb:memo:"
+REDIS_MEMO_TTL_S = 600
+REDIS_ADDR = ("127.0.0.1", 6379)
+
 NLM_LEGACY_COOKIES = Path.home() / ".notebooklm-mcp-cli" / "profiles" / "default" / "cookies.json"
 REPO_ROOT = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
 LEDGER_PATH = REPO_ROOT / "PROVENANCE_LEDGER.md"
@@ -44,6 +51,62 @@ VERSION_PATH = REPO_ROOT / "VERSION"
 
 _client = None
 _synthesis_cache: dict[str, tuple[float, Any]] = {}
+_redis = None
+_redis_unavailable = False
+
+
+def _memo_key(notebook_id: str, query: str) -> str:
+    """Redis memo key, shared with the Go Bifrost lane (sha256 hex)."""
+    import hashlib
+
+    digest = hashlib.sha256(f"{notebook_id}::{query}".encode("utf-8")).hexdigest()
+    return f"{MEMO_PREFIX}{digest}"
+
+
+def _redis_client():
+    """Lazy localhost Redis handle. Returns None (and stays None) on any failure."""
+    global _redis, _redis_unavailable
+    if _redis is not None:
+        return _redis
+    if _redis_unavailable:
+        return None
+    try:
+        import redis
+
+        handle = redis.StrictRedis(
+            host=REDIS_ADDR[0], port=REDIS_ADDR[1],
+            socket_connect_timeout=1.0, socket_timeout=1.0,
+            decode_responses=True,
+        )
+        handle.ping()
+        _redis = handle
+        return _redis
+    except Exception:
+        _redis_unavailable = True
+        return None
+
+
+def _memo_lookup(memo_key: str) -> str | None:
+    handle = _redis_client()
+    if handle is None:
+        return None
+    try:
+        value = handle.get(memo_key)
+        return value if value else None
+    except Exception:
+        return None
+
+
+def _memo_store(memo_key: str, text: str) -> None:
+    if not text:
+        return
+    handle = _redis_client()
+    if handle is None:
+        return
+    try:
+        handle.setex(memo_key, REDIS_MEMO_TTL_S, text)
+    except Exception:
+        pass
 
 
 def _describe_connection_failure(exc: Exception) -> str:
@@ -150,22 +213,41 @@ def _save_cached_tokens(csrf_token: str, session_id: str):
         pass
 
 
+# Shared prime circuit-breaker: after a Google-side auth rejection, fail fast
+# for BREAKER_COOLDOWN_S instead of letting every caller pay the full
+# fetch_tokens cold-fallback chain (up to CLIENT_TIMEOUT_S each).
+BREAKER_COOLDOWN_S = 300.0
+_breaker_open_until: float = 0.0
+
+
 async def _build_client():
-    global _client
+    global _client, _breaker_open_until
     if _client is None:
         from notebooklm import NotebookLMClient
         from notebooklm.auth import AuthTokens, fetch_tokens, load_auth_from_storage
+        from notebooklm.exceptions import AuthError
+        try:
+            from notebooklm._auth.extraction import _LoginRedirectError
+        except ImportError:
+            _LoginRedirectError = AuthError
+        if time.time() < _breaker_open_until:
+            raise AuthError("NotebookLM prime circuit open — cooling down after auth failure")
         storage_path = _ensure_storage_state()
         cookies = load_auth_from_storage()
-        
+
         # Check cache before doing a network request
         cached = _load_cached_tokens(storage_path.stat().st_mtime)
         if cached:
             csrf, session = cached
         else:
-            csrf, session = await fetch_tokens(cookies)
+            try:
+                csrf, session = await fetch_tokens(cookies)
+            except _LoginRedirectError:
+                _breaker_open_until = time.time() + BREAKER_COOLDOWN_S
+                raise
             _save_cached_tokens(csrf, session)
-            
+
+        _breaker_open_until = 0.0
         tokens = AuthTokens(cookies=cookies, csrf_token=csrf, session_id=session)
         _client = NotebookLMClient(auth=tokens, timeout=CLIENT_TIMEOUT_S)
     return _client
@@ -298,12 +380,24 @@ def sync_state(
 
 async def async_synthesize(query: str, notebook_id: str = CANONICAL_NOTEBOOK_ID,
                             use_cache: bool = True) -> str | None:
-    """Async living-notebook synthesis. TTL-cached. Safe inside a running event loop."""
+    """Async living-notebook synthesis. TTL-cached. Safe inside a running event loop.
+
+    Cache order: in-process (900s) -> shared Redis memo (600s, cross-process
+    and shared with the Go Bifrost lane) -> remote NotebookLM prime ->
+    local open-notebook twin.
+    """
     cache_key = f"{notebook_id}::{hash(query)}"
     if use_cache and cache_key in _synthesis_cache:
         stamp, payload = _synthesis_cache[cache_key]
         if time.time() - stamp < SYNTHESIS_TTL_S:
             return payload
+
+    memo_key = _memo_key(notebook_id, query)
+    if use_cache:
+        memo_hit = _memo_lookup(memo_key)
+        if memo_hit is not None:
+            _synthesis_cache[cache_key] = (time.time(), memo_hit)
+            return memo_hit
 
     if os.environ.get("CAMELOT_OFFLINE_CLOUDBRAIN") != "1":
         try:
@@ -312,6 +406,7 @@ async def async_synthesize(query: str, notebook_id: str = CANONICAL_NOTEBOOK_ID,
                 response = await client.chat.ask(notebook_id=notebook_id, question=query)
             text = response.text if hasattr(response, "text") else str(response)
             _synthesis_cache[cache_key] = (time.time(), text)
+            _memo_store(memo_key, text)
             return text
         except Exception:
             pass

@@ -58,10 +58,18 @@ class SessionKeepAliveReport:
     # REMOTE_UNREACHABLE | PROBE_TIMEOUT | UNKNOWN.
     remote_sync: str = "UNKNOWN"
     notebooklm_age_days: Optional[float] = None
+    # When the remote verdict was last probed live (ISO UTC). Verdicts younger
+    # than REMOTE_VERDICT_TTL_S are reused so back-to-back ticks (tests, boot,
+    # CLI) don't each pay Google round-trips.
+    remote_checked_utc: Optional[str] = None
+    remote_cached: bool = False
 
 
 # Cap the remote probe so a hanging Google endpoint can never stall the tick.
 REMOTE_PROBE_TIMEOUT_S = 25.0
+
+# Reuse a live remote verdict for this long before re-probing Google.
+REMOTE_VERDICT_TTL_S = 300.0
 
 
 def _load_notebooklm_bridge():
@@ -75,13 +83,35 @@ def _load_notebooklm_bridge():
     return module
 
 
-def _probe_remote_sync() -> Dict[str, Any]:
+def _probe_remote_sync(*, state_file: Path | None = None) -> Dict[str, Any]:
     """Check Google-side NotebookLM reachability via the canonical bridge.
 
     Returns {"remote_sync": ..., "notebooklm_age_days": ...}. Never raises:
     every failure mode maps to a reportable state.
+
+    A live verdict cached in the state file younger than REMOTE_VERDICT_TTL_S
+    is reused (remote_cached=True) so repeated ticks don't each hit Google.
     """
     outcome: Dict[str, Any] = {"remote_sync": "UNKNOWN", "notebooklm_age_days": None}
+    if state_file is not None:
+        try:
+            cached = json.loads(state_file.read_text(encoding="utf-8"))
+            checked = cached.get("remote_checked_utc")
+            verdict = cached.get("remote_sync")
+            if checked and verdict and verdict != "UNKNOWN":
+                age_s = (
+                    datetime.now(timezone.utc)
+                    - datetime.fromisoformat(str(checked))
+                ).total_seconds()
+                if 0 <= age_s < REMOTE_VERDICT_TTL_S:
+                    outcome["remote_sync"] = verdict
+                    outcome["notebooklm_age_days"] = cached.get("notebooklm_age_days")
+                    outcome["remote_checked_utc"] = checked
+                    outcome["remote_cached"] = True
+                    outcome["remote_probe_message"] = "reused live verdict (TTL)"
+                    return outcome
+        except Exception as exc:
+            logger.debug(f"[SIR_HELIOS] Verdict cache unreadable: {exc}")
     try:
         bridge = _load_notebooklm_bridge()
     except Exception as exc:
@@ -190,9 +220,11 @@ class SirHeliosSessionKeepAlive:
 
         # Google-side prime-brain check: file-fresh cookies can still be
         # Google-rejected (CSRF redirect). Surface REMOTE_UNSYNC explicitly.
-        remote = _probe_remote_sync()
+        remote = _probe_remote_sync(state_file=self.state_file)
         report.remote_sync = remote.get("remote_sync", "UNKNOWN")
         report.notebooklm_age_days = remote.get("notebooklm_age_days")
+        report.remote_checked_utc = remote.get("remote_checked_utc", now_iso)
+        report.remote_cached = bool(remote.get("remote_cached", False))
         if report.remote_sync == "REMOTE_UNSYNC_LOCAL_FALLBACK":
             report.status = "REMOTE_UNSYNC"
             report.alerts.append(
