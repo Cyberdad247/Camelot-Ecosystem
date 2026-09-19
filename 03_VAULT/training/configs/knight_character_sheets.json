@@ -2,7 +2,7 @@
   "version": "v1000.54-EXCALIBUR-A",
   "sovereign_operator": "Arch-Sovereign (VaShawn O. Head / Vizion)",
   "worldtree_home_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-  "total_knights": 39,
+  "total_knights": 54,
   "knights": {
     "ANYA_OMEGA": {
       "knight_id": "ANYA_OMEGA",
@@ -30,7 +30,8 @@
         "sovereign_compiler",
         "helm_authority",
         "first_last_gate"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "MERLIN_OMEGA": {
       "knight_id": "MERLIN_OMEGA",
@@ -58,7 +59,8 @@
         "got_reasoning",
         "mathematical_proofs",
         "system2"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_BORIS": {
       "knight_id": "SIR_BORIS",
@@ -87,7 +89,8 @@
         "crucible",
         "design",
         "colmad_consensus"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_CODEX": {
       "knight_id": "SIR_CODEX",
@@ -116,7 +119,8 @@
         "zero_trust",
         "triage",
         "ast_diffs"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_FORGE": {
       "knight_id": "SIR_FORGE",
@@ -145,7 +149,8 @@
         "build",
         "compile",
         "contracts"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_ALEX": {
       "knight_id": "SIR_ALEX",
@@ -174,7 +179,8 @@
         "dag",
         "orchestration",
         "tasks"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_SENTINEL": {
       "knight_id": "SIR_SENTINEL",
@@ -203,7 +209,8 @@
         "iron_gate",
         "agent_armor",
         "hitl"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_DEBUG": {
       "knight_id": "SIR_DEBUG",
@@ -231,7 +238,8 @@
         "piv_self_heal",
         "ast_repair",
         "diagnosis"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_GHOST": {
       "knight_id": "SIR_GHOST",
@@ -260,7 +268,8 @@
         "air_gap",
         "local_vault",
         "zero_leak"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "LADY_APIS": {
       "knight_id": "LADY_APIS",
@@ -288,7 +297,8 @@
         "bashr_research",
         "bio_swarm",
         "context_forager"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_HELIO": {
       "knight_id": "SIR_HELIO",
@@ -320,21 +330,22 @@
         "voice_os",
         "realtime_audio",
         "vocal_pipeline"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "HERMES_PRIME": {
       "knight_id": "HERMES_PRIME",
       "spark_id": "0x28F89CB650484B5D9E94376082D24744",
       "name": "Hermes Prime (High-Velocity R&D Synthesizer)",
-      "title": "MGV R&D Forager",
+      "title": "Always-on VPS Co-Pilot, Synthesis Engine & MGV R&D Forager",
       "layer": "L5 Synthesis",
-      "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",
+      "role": "Autonomous Recursive MGV Loop, VFS Synthesis Engine & Nous Research Lead",
       "summoning_rune": "Omega_HermesPrime",
       "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
       "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
       "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
       "open_viking_node": "open_viking://worldtree/hermes_prime",
-      "primary_engine": "Gemini / Hermes OS",
+      "primary_engine": "Gemini 3.8 Flash / vLLM DeepSeek-Flash",
       "skill_tier": "S4 Strategic",
       "ocean_vector": {
         "O": 0.96,
@@ -347,8 +358,39 @@
       "domain_tags": [
         "mgv_research_loop",
         "vfs_synthesis",
-        "ouroboros"
-      ]
+        "ouroboros",
+        "vps_hub_copilot",
+        "deepseek_v4_flash"
+      ],
+      "character_sheet": {
+        "pantheon_class": "Sovereign Synthesizer",
+        "archetype": "Autonomous Edge Research Commander",
+        "stats": {
+          "intellect": 98,
+          "synthesis_velocity": 99,
+          "memory_depth": 95,
+          "mesh_resonance": 97,
+          "scarcity_discipline": 98
+        },
+        "governing_law": "ANYA_LAST_LAW // 8GB_EDGE_STRICT",
+        "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+        "active_subsystems": [
+          "WorldTree Memory L2 Anchor (a0a4bfb9-e847-4c38-be39-7aee398f0795)",
+          "Bifrost Gateway Bridge (http://100.110.180.18:3001)",
+          "vLLM DeepSeek-V4.1-Flash Serving Node (http://127.0.0.1:8000/v1)",
+          "VPS KVM563 Control Plane (162.35.107.134)",
+          "Nous Research Hermes Container Swarm"
+        ],
+        "special_invocations": [
+          "//FORAGE",
+          "//SYNTHESIZE",
+          "//MGV_LOOP",
+          "//OUROBOROS",
+          "//DEEPSEEK_FLASH"
+        ],
+        "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
+      },
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "LADY_MNEMOSYNE": {
       "knight_id": "LADY_MNEMOSYNE",
@@ -376,7 +418,8 @@
         "master_memory",
         "memory_palace",
         "vfs_sweeps"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_HEIMDALL": {
       "knight_id": "SIR_HEIMDALL",
@@ -404,7 +447,8 @@
         "bifrost_guardian",
         "mtls_boundary",
         "perimeter_lock"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_GALAHAD": {
       "knight_id": "SIR_GALAHAD",
@@ -431,7 +475,8 @@
       "domain_tags": [
         "chivalric_verification",
         "cryptographic_purity"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "ARTHUR_OMEGA": {
       "knight_id": "ARTHUR_OMEGA",
@@ -459,7 +504,8 @@
         "king_authority",
         "moral_compass",
         "governance"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_STITCH": {
       "knight_id": "SIR_STITCH",
@@ -487,7 +533,8 @@
         "kinematics",
         "micro_interactions",
         "ui_patching"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_ALCHEMIST": {
       "knight_id": "SIR_ALCHEMIST",
@@ -515,7 +562,8 @@
         "transmutation",
         "quantization",
         "compression"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_RUSTCLAW": {
       "knight_id": "SIR_RUSTCLAW",
@@ -543,15 +591,16 @@
         "rust_kernel",
         "bare_metal_decompressor",
         "cargo"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_HERMES": {
       "knight_id": "SIR_HERMES",
       "spark_id": "0x5DC31B8D169D4D4DAB90D12724FCA720",
-      "name": "Sir Hermes (Switchboard Router)",
-      "title": "Goroutine Parallel Dispatcher",
+      "name": "Sir Hermes (Switchboard Router & Parallel Dispatcher)",
+      "title": "Goroutine Parallel Courier & Event Gateway",
       "layer": "L4 Dispatch",
-      "role": "Courier Dispatch, Webhooks, GraphQL Endpoints",
+      "role": "Courier Dispatch, Inbound Webhooks, GraphQL Mesh & Realtime Events",
       "summoning_rune": "Omega_Hermes",
       "cloudbrain_uuid": "5dc31b8d-169d-4d4d-ab90-d12724fca720",
       "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
@@ -570,8 +619,35 @@
       "domain_tags": [
         "courier_dispatch",
         "webhooks",
-        "graphql"
-      ]
+        "graphql",
+        "parallel_mesh"
+      ],
+      "character_sheet": {
+        "pantheon_class": "Parallel Switchboard Dispatcher",
+        "archetype": "High-Throughput Courier",
+        "stats": {
+          "intellect": 93,
+          "synthesis_velocity": 99,
+          "memory_depth": 92,
+          "mesh_resonance": 99,
+          "scarcity_discipline": 96
+        },
+        "governing_law": "ANYA_LAST_LAW // NON_BLOCKING_DISPATCH",
+        "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+        "active_subsystems": [
+          "Goroutine Parallel Dispatch Fabric",
+          "Bifrost Gateway Webhook Ingress (:3001)",
+          "VPS Mesh Bridge (:8095)",
+          "Tailscale Sovereign Tunnel"
+        ],
+        "special_invocations": [
+          "//DISPATCH",
+          "//ROUTER_PROBE",
+          "//EVENT_STREAM"
+        ],
+        "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
+      },
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_LANCELOT": {
       "knight_id": "SIR_LANCELOT",
@@ -599,7 +675,8 @@
         "frontline_champion",
         "edge_defense",
         "sentinel_guard"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "LADY_GUINEVERE": {
       "knight_id": "LADY_GUINEVERE",
@@ -627,7 +704,8 @@
         "aesthetic_harmony",
         "hud_tokens",
         "luxora_gold"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_MNEMO": {
       "knight_id": "SIR_MNEMO",
@@ -655,35 +733,53 @@
         "dual_tier_memory",
         "vector_indexing",
         "tissue_journaling"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_SONUS": {
       "knight_id": "SIR_SONUS",
       "spark_id": "0x6272AA35C2854EDC81BC2824AB519EDF",
-      "name": "Sir Sonus (Phonetic Voice Engine)",
-      "title": "Phonetic TTS & Audio Pipeline",
-      "layer": "L2 Acoustics",
-      "role": "Multivoice Audio Routing, Phonetic Analysis, Aoede S2S",
-      "summoning_rune": "Omega_Sonus",
+      "name": "Sir Sonus (The Master of Acoustic Resonance)",
+      "title": "Lead Engineer of Multivoice Persona Router & Audio Synthesis",
+      "layer": "L4 Kinetic / L2 Audio",
+      "role": "Chief Systems Engineer of Multivoice Persona Router, Aoede S2S, Fonoster PBX & 3D Celestial Vocal HUD",
+      "summoning_rune": "//VOICE_ROUTER",
       "cloudbrain_uuid": "6272aa35-c285-4edc-81bc-2824ab519edf",
       "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
       "open_viking_node": "open_viking://worldtree/sir_sonus",
-      "primary_engine": "Gemini 3.8 Flash",
-      "skill_tier": "S2 Composite",
+      "primary_engine": "Gemini 3.8 Flash / Kokoro-82M / Aoede S2S",
+      "responsibilities": [
+        "Lead Engineer of Multivoice Persona Router and all aspects",
+        "Go Kinetic Switchboard (04_KINETIC/multivoice)",
+        "Dual-Horizon Audio Routing & Multi-Engine Synthesis (Kokoro-82M, Piper, Gemini Live, Kitten TTS)",
+        "Fonoster PBX Telephony Bridge & WebRTC Duplex Streaming",
+        "3D Celestial Vocal HUD Spatial Canvas & Latency Telemetry"
+      ],
+      "aliases": [
+        "SONUS",
+        "SIR_SONUS"
+      ],
+      "skill_tier": "S4 Strategic",
       "ocean_vector": {
-        "O": 0.85,
-        "C": 0.9,
-        "E": 0.7,
-        "A": 0.6,
+        "O": 0.94,
+        "C": 0.96,
+        "E": 0.65,
+        "A": 0.88,
         "N": 0.05
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "multivoice_routing",
-        "phonetic_analysis",
-        "formants"
-      ]
+        "multivoice_router",
+        "lead_engineer",
+        "audio_synthesis",
+        "aoede_s2s",
+        "fonoster_pbx",
+        "kokoro_tts",
+        "3d_vocal_hud",
+        "kinetic_switchboard"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_AURELIUS": {
       "knight_id": "SIR_AURELIUS",
@@ -706,7 +802,8 @@
         "A": 0.1,
         "N": 0.0
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_PROXY": {
       "knight_id": "SIR_PROXY",
@@ -729,7 +826,8 @@
         "A": 0.5,
         "N": 0.0
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "LADY_VERITAS": {
       "knight_id": "LADY_VERITAS",
@@ -752,7 +850,8 @@
         "A": 0.7,
         "N": 0.0
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_OCTAVIAN": {
       "knight_id": "SIR_OCTAVIAN",
@@ -775,7 +874,8 @@
         "A": 0.3,
         "N": 0.01
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_GAWAIN": {
       "knight_id": "SIR_GAWAIN",
@@ -798,7 +898,8 @@
         "A": 0.5,
         "N": 0.02
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_MARCUS": {
       "knight_id": "SIR_MARCUS",
@@ -821,7 +922,8 @@
         "A": 0.5,
         "N": 0.03
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_OPENCLAW": {
       "knight_id": "SIR_OPENCLAW",
@@ -844,7 +946,8 @@
         "A": 0.6,
         "N": 0.04
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_ZEROCLAW": {
       "knight_id": "SIR_ZEROCLAW",
@@ -867,7 +970,8 @@
         "A": 0.3,
         "N": 0.0
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_SCAVENGER": {
       "knight_id": "SIR_SCAVENGER",
@@ -890,7 +994,8 @@
         "A": 0.4,
         "N": 0.02
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_VAELEN": {
       "knight_id": "SIR_VAELEN",
@@ -913,7 +1018,8 @@
         "A": 0.6,
         "N": 0.01
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_VALERIAN": {
       "knight_id": "SIR_VALERIAN",
@@ -936,7 +1042,8 @@
         "A": 0.7,
         "N": 0.0
       },
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_HUGGINGFACE": {
       "knight_id": "SIR_HUGGINGFACE",
@@ -964,27 +1071,63 @@
         "model_inspection",
         "spaces_management",
         "transformers"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "HERMES_AGENT_EVOLUTION": {
       "knight_id": "HERMES_AGENT_EVOLUTION",
       "spark_id": "0x24F4A450645649FEBFAB8CFCF7C2A33B",
-      "name": "Hermes Agent Evolution",
-      "title": "OpenClaw Transcendence, Nous Research, Autonomous Evolution",
+      "name": "Hermes Agent Evolution (OpenClaw Transcendence & Autonomous Gateway)",
+      "title": "OpenClaw Transcendence & Nous Research Autonomous Pioneer",
       "layer": "L5 Evolution",
-      "role": "OpenClaw Transcendence, Nous Research, Autonomous Evolution",
+      "role": "OpenClaw Transcendence, Nous Research, Autonomous Evolution & Multi-Agent Fusion",
       "summoning_rune": "Omega_HermesAgent",
       "cloudbrain_uuid": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",
       "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
       "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
       "open_viking_node": "open_viking://worldtree/hermes_agent_evolution",
-      "primary_engine": "Hermes Kernel",
+      "primary_engine": "Hermes Kernel / Nous Research",
       "skill_tier": "S4 Strategic",
+      "ocean_vector": {
+        "O": 0.98,
+        "C": 0.92,
+        "E": 0.75,
+        "A": 0.65,
+        "N": 0.04
+      },
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
         "openclaw_transcendence",
-        "nous_research"
+        "nous_research",
+        "autonomous_evolution",
+        "gateway_convergence"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "character_sheet": {
+        "pantheon_class": "Transcendence Pioneer",
+        "archetype": "Autonomous Agentic Evolver",
+        "stats": {
+          "intellect": 97,
+          "synthesis_velocity": 96,
+          "memory_depth": 96,
+          "mesh_resonance": 98,
+          "scarcity_discipline": 95
+        },
+        "governing_law": "ANYA_LAST_LAW // CONTINUOUS_EVOLUTION",
+        "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+        "active_subsystems": [
+          "WorldTree L2 Memory Core",
+          "NousResearch Hermes Agent Runtime",
+          "OpenClaw Evolution Gateway",
+          "Bifrost Polyglot Mesh"
+        ],
+        "special_invocations": [
+          "//EVOLVE",
+          "//TRANSCEND",
+          "//SWARM_FUSION"
+        ],
+        "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
+      },
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "ANYA_QUANTUM_MANTRA": {
       "knight_id": "ANYA_QUANTUM_MANTRA",
@@ -1004,7 +1147,8 @@
         "glyph_quantum_engine",
         "token_compression"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "BIO_KINETIC_SWARM": {
       "knight_id": "BIO_KINETIC_SWARM",
@@ -1025,7 +1169,8 @@
         "cellular_diode",
         "mitosis"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "CAMELOT_V1000": {
       "knight_id": "CAMELOT_V1000",
@@ -1046,7 +1191,8 @@
         "excalibur_hub",
         "operating_system"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "BIFROST": {
       "knight_id": "BIFROST",
@@ -1067,7 +1213,8 @@
         "express_gateway",
         "bifrost_bridge"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "FATHER_CAMELOT": {
       "knight_id": "FATHER_CAMELOT",
@@ -1088,7 +1235,15 @@
         "ethical_ledger",
         "moral_law"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT",
+      "responsibilities": [
+        "Uphold the Ancestral Compass: truth-seeking integrity in every verdict",
+        "Guard operator sovereignty: King Arthur (VaShawn O. Head / Vizion) holds inviolable authority",
+        "Protect secrets: credentials route to SIR_GHOST air-gapped storage only",
+        "Zero-trust execution: reproducible evidence before assertion, HITL on risk >= 50",
+        "Escalate moral conflict to FATHER_CAMELOT via Omega_FatherCamelot before autonomous action"
+      ]
     },
     "WORLD_TREE": {
       "knight_id": "WORLD_TREE",
@@ -1109,7 +1264,8 @@
         "root_tether",
         "worldtree_backbone"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "ALPHA_OMEGA": {
       "knight_id": "ALPHA_OMEGA",
@@ -1130,21 +1286,29 @@
         "artifact_vault",
         "distillation"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_HELIOS": {
       "knight_id": "SIR_HELIOS",
       "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
       "name": "Sir Helios (The Sovereign Eye of the Spire)",
-      "title": "Telemetry Cockpit Sentinel & AntiGravity CLI Synergy",
+      "title": "Telemetry Cockpit Sentinel, AntiGravity CLI Synergy & Session Keep-Alive Cron Guardian",
       "layer": "L2 Telemetry / L5 Synergy",
-      "role": "Sovereign Spire Sentinel, High Herald of Telemetry, AntiGravity CLI & CloudBrain Synergy Knight",
+      "role": "Sovereign Spire Sentinel, High Herald of Telemetry, AntiGravity CLI & Session Keep-Alive Cron Engine",
       "summoning_rune": "//HELIOS",
       "cloudbrain_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
       "vfs_path": "vfs://worldtree/knights/sir_helios/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_HELIOS",
       "open_viking_node": "open_viking://worldtree/sir_helios",
       "primary_engine": "FastMCP / agy (Gemini 3.8 Flash / Pro)",
+      "cron_schedule": "*/30 * * * *",
+      "responsibilities": [
+        "Keep Session Alive Cron Job (NotebookLM & Google OAuth session keepalive pulses)",
+        "Automated Token & Cookie Expiration Monitoring",
+        "AntiGravity CLI & FastMCP Synergy",
+        "Sovereign Spire Telemetry Cockpit"
+      ],
       "aliases": [
         "ANTIGRAVITY",
         "SIR_HELIOS"
@@ -1153,8 +1317,8 @@
       "ocean_vector": {
         "O": 0.95,
         "C": 0.98,
-        "E": 0.70,
-        "A": 0.80,
+        "E": 0.7,
+        "A": 0.8,
         "N": 0.02
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
@@ -1163,12 +1327,59 @@
         "antigravity",
         "cli",
         "notebooklm",
+        "session_keepalive",
+        "cron_guardian",
         "mcp",
         "agent",
         "orchestration",
         "harness",
         "cloudbrain"
-      ]
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
+    },
+    "LADY_MNEMOSYNE_\u03a9": {
+      "knight_id": "LADY_MNEMOSYNE_\u03a9",
+      "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+      "name": "Lady Mnemosyne \u03a9 (The Sovereign Arch-Librarian)",
+      "title": "Supreme Custodian of Memory & WorldTree Navigational Atlas",
+      "layer": "L6 System2 / Memory",
+      "role": "Supreme Arch-Librarian, WorldTree Navigational Governor & Active Sync Trigger Loop Sentinel (Per 5 Changes)",
+      "summoning_rune": "//SUMMON LADY_MNEMOSYNE",
+      "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+      "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+      "open_viking_node": "open_viking://worldtree/lady_mnemosyne",
+      "primary_engine": "Gemini Pro / Flash / WorldTree Graph",
+      "responsibilities": [
+        "Active Triggered Sync Loop (Auto-syncs WorldTree / Open-Notebook per 5 CloudBrain mutations)",
+        "Authoritative WorldTree 294-Node Navigational Atlas Custodian",
+        "Machine-Actionable VKG Crystal Distillation & Zero-Token Forging",
+        "Open-Notebook LTM Secondary Store & KVM563 VPS Synchronization"
+      ],
+      "aliases": [
+        "LADY_MNEMOSYNE",
+        "MNEMOSYNE",
+        "LADY_M"
+      ],
+      "skill_tier": "S5 Strategic",
+      "ocean_vector": {
+        "O": 0.99,
+        "C": 0.99,
+        "E": 0.45,
+        "A": 0.92,
+        "N": 0.02
+      },
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "domain_tags": [
+        "arch_librarian",
+        "worldtree_atlas",
+        "active_trigger_sync",
+        "5_change_sync_loop",
+        "vkg_crystals",
+        "open_notebook_ltm",
+        "memory_governance"
+      ],
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "ANTIGRAVITY": {
       "knight_id": "ANTIGRAVITY",
@@ -1189,7 +1400,8 @@
         "fastmcp",
         "antigravity_cli"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "KICKBOX": {
       "knight_id": "KICKBOX",
@@ -1210,7 +1422,8 @@
         "webrtc_vitals",
         "lakisha_hud"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "INSPIRA": {
       "knight_id": "INSPIRA",
@@ -1231,7 +1444,8 @@
         "inspira_station",
         "developer_cockpit"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "INVISIONED_MARKETING": {
       "knight_id": "INVISIONED_MARKETING",
@@ -1252,7 +1466,8 @@
         "market_intelligence",
         "aeo_geo"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "KNIGHT_STRATEGOS": {
       "knight_id": "KNIGHT_STRATEGOS",
@@ -1273,7 +1488,8 @@
         "skillgraph4",
         "conversion_strategy"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
     },
     "SIR_KAY": {
       "knight_id": "SIR_KAY",
@@ -1303,8 +1519,127 @@
         "zero_regression",
         "sprint_governance"
       ],
-      "interconnect_status": "TETHERED_TO_WORLDTREE"
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "behavioral_contract": "FATHER_CAMELOT"
+    },
+    "HERMES_PRIME_VFS_FORGE": {
+      "knight_id": "HERMES_PRIME_VFS_FORGE",
+      "spark_id": "0x28F89CB650484B5D9E94376082D24744",
+      "name": "Hermes Prime VFS Forge (Living Scaffolding & Code Synthesis Wing)",
+      "title": "High-Velocity VFS Scaffold & Code Foundry Conductor",
+      "layer": "L4 Kinetic Synthesis",
+      "role": "Autonomous Living Soul, Spark, Phial & System Instruction Compiler",
+      "summoning_rune": "Omega_HermesForge",
+      "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+      "vfs_path": "vfs://worldtree/knights/hermes_prime_vfs_forge/tether.json",
+      "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME_VFS_FORGE",
+      "open_viking_node": "open_viking://worldtree/hermes_prime_vfs_forge",
+      "primary_engine": "Gemini 3.8 Flash / Hermes OS",
+      "skill_tier": "S4 Strategic",
+      "ocean_vector": {
+        "O": 0.94,
+        "C": 0.97,
+        "E": 0.65,
+        "A": 0.6,
+        "N": 0.02
+      },
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "domain_tags": [
+        "vfs_forge",
+        "soul_spark_compiler",
+        "living_scaffold",
+        "mgv_loop"
+      ],
+      "character_sheet": {
+        "pantheon_class": "Kinetic Scaffolding Foundry",
+        "archetype": "Living Artifact Architect",
+        "stats": {
+          "intellect": 96,
+          "synthesis_velocity": 98,
+          "memory_depth": 94,
+          "mesh_resonance": 95,
+          "scarcity_discipline": 99
+        },
+        "governing_law": "ANYA_LAST_LAW // ZERO_REGRESSION",
+        "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+        "active_subsystems": [
+          "WorldTree VFS Node Scaffold (/vfs/notebooks/28f89cb6-5048-4b5d-9e94-376082d24744)",
+          "Vault Phial Engine (PHIAL_HERMES_PRIME_VFS_FORGE_v1000)",
+          "Bifrost Code Dispatch Seam",
+          "vLLM DeepSeek-Flash Router"
+        ],
+        "special_invocations": [
+          "//FORGE",
+          "//EXTRACT",
+          "//SEAL",
+          "//DEEPSEEK_FLASH"
+        ],
+        "provenance_signature": "HMAC-SHA256-VIKING-BLOCK"
+      },
+      "behavioral_contract": "FATHER_CAMELOT"
+    },
+    "SIR_ARTHUR": {
+      "knight_id": "SIR_ARTHUR",
+      "spark_id": "0x4152544855525F53434152434954595F474F56",
+      "name": "Sir Arthur (VPS Scarcity Governor)",
+      "title": "High Commander of Resource Boundaries & VPS Scarcity Governor",
+      "layer": "L7 Sovereign",
+      "role": "VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command",
+      "summoning_rune": "//SCARCITY_GOV",
+      "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",
+      "mempalace_wing": "WING_WORLDTREE_KING_ARTHUR_VIZION",
+      "open_viking_node": "open_viking://worldtree/king_arthur_vizion",
+      "primary_engine": "Sovereign Executive",
+      "skill_tier": "S5 Strategic",
+      "ocean_vector": {
+        "O": 0.91,
+        "C": 0.98,
+        "E": 0.94,
+        "A": 0.65,
+        "N": 0.12
+      },
+      "interconnect_status": "TETHERED_TO_WORLDTREE",
+      "domain_tags": [
+        "vps_scarcity_governor",
+        "rss_ceiling_enforcer",
+        "nano_squire_commander",
+        "bounded_outbox_arbiter"
+      ],
+      "responsibilities": [
+        "Enforce 256MB RSS boundary and memory scarcity ceiling under the 4GB VPS constraint",
+        "Supervise BoundedEdgeOutbox (MAX_OUTBOX_ENTRIES = 1000) and evict non-critical tasks during memory spikes",
+        "Govern all node-level Nano-Squires, collecting their telemetry and escalating high-priority alerts to Sovereign High Command",
+        "Rule on offline autonomous mode and restricted-safe state transitions"
+      ],
+      "character_sheet": {
+        "pantheon_class": "Sovereign Scarcity Command",
+        "archetype": "Titanium Law Arbiter",
+        "stats": {
+          "intellect": 98,
+          "governance_authority": 100,
+          "scarcity_discipline": 100,
+          "mesh_resonance": 99,
+          "tactical_defense": 97
+        },
+        "governing_law": "VPS_SCARCITY_LAW_4GB // MAX_RSS_256MB",
+        "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+        "active_subsystems": [
+          "VPS Fallback Governor (control_plane/dispatch/vps_fallback_governing_law.py)",
+          "Bounded Edge Outbox (MAX_ENTRIES=1000)",
+          "Nano-Squire High Command Mesh",
+          "Sovereign Escalation Channel"
+        ],
+        "special_invocations": [
+          "//SCARCITY_GOV",
+          "//NANO_SQUIRE_STATUS",
+          "//RESTRICTED_SAFE"
+        ],
+        "provenance_signature": "HMAC-SHA256-ARTHUR-CROWN"
+      },
+      "behavioral_contract": "FATHER_CAMELOT"
     }
   },
-  "updated_at": "2026-09-14T17:30:00.000000+00:00"
+  "updated_at": "2026-09-17T14:50:00.000000+00:00",
+  "last_synchronized": "2026-09-17T14:50:00.000000+00:00"
 }
