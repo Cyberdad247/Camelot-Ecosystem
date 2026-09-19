@@ -9,10 +9,10 @@ Write-Host "Initializing NotebookLM Integration..." -ForegroundColor Cyan
 & "c:\Users\vizio\CAMELOT_OS\01_KERNEL\senses\integrations\ouroboros_sync.ps1"
 
 # 0.1 Start Saltare MCP Gateway
-Write-Host "Igniting Saltare Gateway (Port 8080)..." -ForegroundColor Cyan
-$SALT_BIN = "c:\Users\vizio\CAMELOT_OS\02_FORGE\KINETIC_ARMORY\saltare\saltare_gateway.exe"
-$SALT_CONF = "c:\Users\vizio\CAMELOT_OS\01_KERNEL\EXCALIBUR\config\saltare.toml"
-Start-Process -FilePath $SALT_BIN -ArgumentList "mcp", "http", "--port", "8080", "--config", $SALT_CONF
+Write-Host "Igniting Saltare Gateway (Port 8085)..." -ForegroundColor Cyan
+$SALT_BIN = "c:\Users\vizio\CAMELOT_OS\02_FORGE\KINETIC_ARMORY\Saltare\saltare.exe"
+$SALT_CONF = "c:\Users\vizio\CAMELOT_OS\kinetic_edge\saltare\config.yaml"
+Start-Process -FilePath $SALT_BIN -ArgumentList "--config", $SALT_CONF, "server", "--port", "8085"
 
 # 1. Start Backend
 Write-Host "Igniting Merlin Kernel (Port 8000)..." -ForegroundColor Cyan

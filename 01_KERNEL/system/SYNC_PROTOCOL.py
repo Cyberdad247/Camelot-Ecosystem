@@ -31,8 +31,8 @@ LEDGER_PATH = REPO_ROOT / "PROVENANCE_LEDGER.md"
 MORGANA_URL = "http://localhost:8001/ping"
 UKG_PATH = REPO_ROOT / "03_VAULT" / "UKG" / "UKG_MEMORY.jsonld"
 
-ROTEL_PATH = REPO_ROOT / "kinetic_edge" / "rotel" / "target" / "release" / "rotel.exe"
-SALTARE_PATH = REPO_ROOT / "kinetic_edge" / "saltare" / "saltare_gateway.exe"
+ROTEL_PATH = REPO_ROOT / "02_FORGE" / "kinetic" / "rotel" / "target" / "release" / "rotel.exe"
+SALTARE_PATH = REPO_ROOT / "02_FORGE" / "KINETIC_ARMORY" / "Saltare" / "saltare.exe"
 
 def get_timestamp():
     return datetime.datetime.now().isoformat()

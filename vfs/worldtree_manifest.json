@@ -372,7 +372,7 @@
       "knight_id": "SIR_LUCAS",
       "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_lucas/",
-      "role": "Sovereign Herald of Telemetry & Visualization — verified HUD/telemetry truth surfaces",
+      "role": "Sovereign Herald of Telemetry & Visualization \u2014 verified HUD/telemetry truth surfaces",
       "primary_model": "Gemini 3 Flash / GPT-5.3",
       "active_last_3_months": true
     },
@@ -399,8 +399,24 @@
       "role": "Primary Windows Orchestrator & World Tree Root Host (100.118.224.52)",
       "primary_model": "Host Substrate / Bifrost Bridge",
       "active_last_3_months": true
+    },
+    {
+      "knight_id": "MOTOROLA_EDGE_SENTINEL",
+      "notebook_id": "876f30c4-efce-415d-8098-cad500de159c",
+      "vfs_path": "vfs://worldtree/nodes/motorola_edge/",
+      "role": "Auxiliary Mobile Sentinel, VPS Fallback Continuity & Android 15 Edge Node",
+      "primary_model": "Native ARM64 camelot-edge / 4GB_ARM64_EDGE_STRICT",
+      "active_last_3_months": true
+    },
+    {
+      "knight_id": "HERMES_PRIME_VFS_FORGE",
+      "notebook_id": "28f89cb6-5048-4b5d-9e94-376082d24744",
+      "vfs_path": "vfs://worldtree/knights/hermes_prime_vfs_forge/",
+      "role": "Hermes VFS Synthesis & Forge Wing, Living Soul & Harness Compiler",
+      "primary_model": "Gemini / Hermes OS",
+      "active_last_3_months": true
     }
   ],
-  "updated": "2026-09-15T08:26:00.000000+00:00",
-  "verified_knights_count": 42
+  "updated": "2026-09-17T12:47:57.777998+00:00",
+  "verified_knights_count": 44
 }

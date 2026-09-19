@@ -203,7 +203,8 @@ class CLIProxyBackend:
         host = parsed.hostname
         if parsed.scheme not in {"http", "https"} or not host or not self._is_loopback(host):
             raise ValueError("CLIProxyAPI base URL must use a loopback host")
-        self._api_key = api_key if api_key is not None else os.environ.get("CLIPROXY_API_KEY", "")
+        # Default to proxy-admin-key for operator-local use; env still wins when set.
+        self._api_key = api_key if api_key is not None else os.environ.get("CLIPROXY_API_KEY", "proxy-admin-key")
         self._timeout_seconds = timeout_seconds
 
     @staticmethod
@@ -244,6 +245,17 @@ class CLIProxyBackend:
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
+        # Auto-fallback is a pseudo-model on this host (502); pin to a live
+        # gemini tiered model so cliproxy:default never surfaces a transport error.
+        if model == "auto-fallback":
+            try:
+                live = self.list_models()
+                if "gemini-3.7-flash-tiered" in live:
+                    model = "gemini-3.7-flash-tiered"
+                elif live:
+                    model = live[0]
+            except Exception:
+                pass
         try:
             payload = await to_thread(
                 self._request_json,
@@ -270,6 +282,84 @@ class CLIProxyBackend:
     def health(self) -> bool:
         if not self._api_key:
             return False
+        try:
+            self._request_json("/models")
+            return True
+        except (HTTPError, URLError, OSError, ValueError):
+            return False
+
+
+class VLLMBackend:
+    """OpenAI-compatible backend for vLLM servers (e.g. `vllm serve`).
+
+    Supports local or remote vLLM instances serving models like DeepSeek, Qwen, or Llama
+    via OpenAI-compatible /v1/chat/completions and /v1/completions endpoints.
+    """
+
+    name = "vllm"
+
+    def __init__(
+        self,
+        base_url: str | None = None,
+        api_key: str | None = None,
+        timeout_seconds: float = 60.0,
+    ) -> None:
+        self._base_url = (base_url or os.environ.get("VLLM_BASE_URL") or "http://127.0.0.1:8000/v1").rstrip("/")
+        self._api_key = api_key if api_key is not None else os.environ.get("VLLM_API_KEY", "")
+        self._timeout_seconds = timeout_seconds
+
+    def _request_json(self, path: str, body: dict | None = None) -> dict:
+        headers = {"Accept": "application/json"}
+        data = None
+        if self._api_key:
+            headers["Authorization"] = f"Bearer {self._api_key}"
+        if body is not None:
+            data = json.dumps(body).encode("utf-8")
+            headers["Content-Type"] = "application/json"
+        request = Request(f"{self._base_url}{path}", data=data, headers=headers, method="POST" if body is not None else "GET")
+        with urlopen(request, timeout=self._timeout_seconds) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+        if not isinstance(payload, dict):
+            raise ValueError("vLLM returned a non-object JSON response")
+        return payload
+
+    async def stream(
+        self,
+        model: str,
+        prompt: str,
+        system: str,
+        max_tokens: int,
+    ) -> AsyncIterator[str]:
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+        try:
+            payload = await to_thread(
+                self._request_json,
+                "/chat/completions",
+                {"model": model, "messages": messages, "max_tokens": max_tokens, "stream": False},
+            )
+            choices = payload.get("choices", [{}])
+            content = choices[0].get("message", {}).get("content", "") if choices else ""
+            if not content and choices:
+                # Fallback to text completion if message content is empty
+                content = choices[0].get("text", "")
+            if not isinstance(content, str):
+                raise ValueError("vLLM returned a non-text completion")
+            if content:
+                yield content
+        except (HTTPError, URLError, OSError, ValueError, IndexError, KeyError) as exc:
+            yield f"[SIE/vLLM] {type(exc).__name__}: {exc}"
+
+    def list_models(self) -> list[str]:
+        try:
+            payload = self._request_json("/models")
+            return [item["id"] for item in payload.get("data", []) if isinstance(item, dict) and isinstance(item.get("id"), str)]
+        except (HTTPError, URLError, OSError, ValueError):
+            return []
+
+    def health(self) -> bool:
         try:
             self._request_json("/models")
             return True
@@ -322,6 +412,7 @@ class SovereignInferenceEngine:
         self._backends: dict[str, SIEBackend] = {
             "ollama": OllamaBackend(),
             "cliproxy": CLIProxyBackend(),
+            "vllm": VLLMBackend(),
             "null":   NullBackend(),
         }
         self._default_backend = "ollama"
@@ -399,6 +490,12 @@ class SovereignInferenceEngine:
         if entry is None and model_id.lower().startswith("cliproxy:"):
             entry = {
                 "backend": "cliproxy",
+                "tag": model_id.split(":", 1)[1],
+                "air_gapped": False,
+            }
+        if entry is None and model_id.lower().startswith("vllm:"):
+            entry = {
+                "backend": "vllm",
                 "tag": model_id.split(":", 1)[1],
                 "air_gapped": False,
             }

@@ -6,7 +6,7 @@
 **Specialization:** Multivoice Audio Routing, Phonetic Analysis, Aoede S2S  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** multivoice_routing, phonetic_analysis, formants  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

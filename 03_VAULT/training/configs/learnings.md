@@ -147,3 +147,31 @@ Call log:
   - 'ArthurResolution' object has no attribute 'status'
 - Learning: Caught unhandled exception in main loop.
 - Proposed Mutation: Patch affected path and implement guardrail for: 'ArthurResolution' object has no attribute 'status'
+---
+## 2026-09-17T14:59:28.742441+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - All connection attempts failed
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: All connection attempts failed
+---
+## 2026-09-18T02:16:59.879989+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - Page.wait_for_timeout: Target page, context or browser has been closed
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: Page.wait_for_timeout: Target page, context or browser has been closed
+---
+## 2026-09-18T02:21:51.552793+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - Page.wait_for_timeout: Target page, context or browser has been closed
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: Page.wait_for_timeout: Target page, context or browser has been closed
+---
+## 2026-09-19T00:12:43.508298+00:00 :: SIR_BORIS
+- Objective: Global CLI Execution
+- Failures:
+  - Page.wait_for_timeout: Target page, context or browser has been closed
+- Learning: Caught unhandled exception in main loop.
+- Proposed Mutation: Patch affected path and implement guardrail for: Page.wait_for_timeout: Target page, context or browser has been closed

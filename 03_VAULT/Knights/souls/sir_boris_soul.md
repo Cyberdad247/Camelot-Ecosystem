@@ -6,7 +6,7 @@
 **Specialization:** Lead Architect, Crucible Conductor, 13-Agent Critique  
 **Primary Substrate:** Gemini / Claude Code  
 **Domain Tags:** architecture, crucible, design, colmad_consensus  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

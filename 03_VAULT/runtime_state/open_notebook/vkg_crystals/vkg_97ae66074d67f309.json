@@ -1,0 +1,12 @@
+{
+  "crystal_id": "VKG_97AE66074D67F309",
+  "notebook_id": "47c03ab7ad51d20d",
+  "notebook_title": "WorldTree Navigation Augmentation",
+  "sources_count": 57,
+  "category": "WORLDTREE_NAV",
+  "knight": "SIR_OCTAVIAN",
+  "manifest_content": "vkg_crystal L0 Dense Abstract: WorldTree navigation graph compression. Entity-Relation Triplets: (SIR_OCTAVAN, governs, WorldTree), (vKG_Crystal, stores, sovereign axioms). Constitutional Invariants: zero-trust integrity, air-gapped credentials, human operator authority. SHA-256 verification hash of source corpus. Zero-Token local fast-path retrieval. Root WorldTree Tether: a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "manifest_sha256": "0e769d1091868ef1c6895b37abd1a0bf0d98faaa40ed9dd305bbaf437e56c40b",
+  "triplets": [],
+  "created_at": "2026-09-19T12:35:12.731501+00:00"
+}

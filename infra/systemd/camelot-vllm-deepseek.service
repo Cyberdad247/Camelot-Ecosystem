@@ -1,0 +1,29 @@
+# SPDX-License-Identifier: MIT
+#
+# Camelot-OS — vLLM Sovereign Inference Service for DeepSeek-V4.1-Flash (hub: KVM563 / vps3573819)
+#
+# Architecture:
+# - Serves deepseek-ai/DeepSeek-V4.1-Flash locally via vLLM high-throughput engine on port 8000
+# - Exposed to Sir Hermes Prime & Bifrost Bridge via OpenAI-compatible endpoints (/v1/completions, /v1/chat/completions)
+# - Loopback-bound (127.0.0.1:8000) guarded by Sir Heimdall mTLS perimeter lock
+#
+
+[Unit]
+Description=Camelot-OS vLLM DeepSeek-V4.1-Flash Sovereign Engine
+Documentation=file:///opt/camelot-ecosystem/docs/architecture/CAMELOT_OS_V1000_APEX_NORTHSTAR.md
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/camelot-ecosystem
+Environment="HF_HOME=/opt/models/huggingface"
+Environment="VLLM_BASE_URL=http://127.0.0.1:8000/v1"
+ExecStart=/usr/local/bin/vllm serve "deepseek-ai/DeepSeek-V4.1-Flash" --host 127.0.0.1 --port 8000 --max-model-len 8192 --tensor-parallel-size 1 --gpu-memory-utilization 0.90
+Restart=on-failure
+RestartSec=10s
+LimitNOFILE=65535
+
+[Install]
+WantedBy=multi-user.target

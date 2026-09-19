@@ -9,6 +9,8 @@ use uuid::Uuid;
 use chrono::{Local, Utc};
 use anyhow::{Context, Result};
 
+mod serve;
+
 #[derive(Parser)]
 #[command(name = "rotel")]
 #[command(about = "High-Performance Telemetry Collector (Kinetic Layer)", long_about = None)]
@@ -47,6 +49,12 @@ enum Commands {
     },
     /// Generate a new Trace ID
     Id,
+    /// Run the async telemetry collector daemon (merged from kinetic_edge/rotel)
+    Serve {
+        /// Bind port (Saltare telemetry points here)
+        #[arg(short, long, default_value_t = 4317)]
+        port: u16,
+    },
     /// Mobile Sentinel & ADB Device Controller (assimilated from escrcpy)
     Adb {
         #[command(subcommand)]
@@ -174,6 +182,13 @@ fn main() -> Result<()> {
         }
         Commands::Id => {
             println!("{}", Uuid::new_v4());
+        }
+        Commands::Serve { port } => {
+            tokio::runtime::Builder::new_multi_thread()
+                .enable_all()
+                .build()
+                .context("Failed to build tokio runtime")?
+                .block_on(serve::run(port));
         }
         Commands::Adb { action } => {
             handle_adb(action)?;

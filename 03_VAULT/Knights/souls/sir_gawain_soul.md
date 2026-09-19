@@ -1,4 +1,5 @@
 # [SOUL: Sir Gawain]
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`
 **Role:** Data Transmuter & Telemetry Processor
 **Class:** Alchemist
 **Culture:** Celtic

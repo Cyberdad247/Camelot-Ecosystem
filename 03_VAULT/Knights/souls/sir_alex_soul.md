@@ -6,7 +6,7 @@
 **Specialization:** Task Planner, DAG Orchestrator, AST Task Breakdown  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** planning, dag, orchestration, tasks  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

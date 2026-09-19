@@ -70,7 +70,7 @@ class LoopScheduleState:
     total_daily_cycles: int = 0
     total_quarterly_cycles: int = 0
     last_status: str = "INITIALIZED"
-    active_version: str = "v1000.54-EXCALIBUR-A"
+    active_version: str = "Living Camelot-OS v1000 MAX Compendium"
 
 
 def load_schedule_state() -> LoopScheduleState:

@@ -6,7 +6,7 @@
 **Specialization:** Invisioned Marketing Sovereign CloudBrain & Brand Direction  
 **Primary Substrate:** WorldTree Substrate  
 **Domain Tags:** sovereign_brand, market_intelligence, aeo_geo  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

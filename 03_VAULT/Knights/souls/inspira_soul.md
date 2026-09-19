@@ -6,7 +6,7 @@
 **Specialization:** HiveIDE / Inspira Spatial Developer Workstation  
 **Primary Substrate:** IDE Substrate  
 **Domain Tags:** hiveide, inspira_station, developer_cockpit  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

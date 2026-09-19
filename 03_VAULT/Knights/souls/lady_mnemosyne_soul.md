@@ -6,7 +6,7 @@
 **Specialization:** WorldTree Master Memory, Memory Palace & VFS Sweeps  
 **Primary Substrate:** Memory Substrate  
 **Domain Tags:** master_memory, memory_palace, vfs_sweeps  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

@@ -6,7 +6,7 @@
 **Specialization:** AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** security, iron_gate, agent_armor, hitl  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

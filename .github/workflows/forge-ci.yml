@@ -217,6 +217,10 @@ jobs:
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
+        with:
+          # Match rust-toolchain.toml (channel 1.85.0). `stable` alone floats
+          # the compiler under CI; pin so local and CI use the same toolchain.
+          toolchain: 1.85.0
 
       - name: Cache Rust dependencies
         uses: actions/cache@v4
@@ -234,6 +238,45 @@ jobs:
 
       - name: Test ${{ matrix.crate }}
         run: cargo test
+
+  # ── Rust workspace: all 23 members ─────────────────────────────
+  # kinetic-build covers 6 crates under 02_FORGE/kinetic/. This job covers
+  # the full Cargo.toml workspace (01_KERNEL/*, 04_KINETIC/*,
+  # control_plane/rtk, kinetic_edge/*, wasm/*, crates/*, packages/*).
+  # `check` blocks (compile debt is real debt); `test` reports until the
+  # first full-green run, then drop its continue-on-error (ratchet pattern).
+  # Known debt: pyo3 RUSTSEC-2025-0020/2026-0177 ignored in .cargo/audit.toml
+  # pending bump to pyo3 >= 0.29.0 (see PYTHON_BINDING_PLAN.md §6).
+  rust-workspace:
+    name: Rust workspace check
+    needs: changes
+    if: needs.changes.outputs.kinetic == 'true' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.85.0
+
+      - name: Cache Rust dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-cargo-workspace-${{ hashFiles('Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-workspace-
+
+      - name: Check workspace
+        run: cargo check --workspace --all-targets
+
+      - name: Test workspace
+        continue-on-error: true
+        run: cargo test --workspace
 
   # ── Holotable: Next.js Build ───────────────────────────────────
   holotable-build:

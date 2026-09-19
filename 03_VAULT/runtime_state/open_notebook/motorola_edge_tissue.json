@@ -1,0 +1,39 @@
+[
+  {
+    "node_name": "motorola_moto_g_power",
+    "device_id": "motorola-moto-g-power-5g---2024",
+    "codename": "cancunn",
+    "product": "cancunn_g_sys",
+    "serial": "ZY22L3K36P",
+    "designation": "AUXILIARY_MOBILE_SENTINEL",
+    "role": "Auxiliary Mobile Sentinel & Backup Telemetry Relay",
+    "assigned_knight": "SIR_HEIMDALL",
+    "co_guardian": "LADY_MNEMOSYNE",
+    "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "cloudbrain_mastering_uuid": "876f30c4-efce-415d-8098-cad500de159c",
+    "cloudbrain_title": "Mastering the AI File and Folder Agent System",
+    "vfs_wing": "WING_WORLDTREE_MOTOROLA_EDGE",
+    "version": "v1000.54-EXCALIBUR-A",
+    "hardware_constraint": "4GB_ARM64_EDGE_STRICT",
+    "max_rss_bytes": 268435456,
+    "network": {
+      "tailscale_ip": "100.89.129.105",
+      "local_wlan_ip": "192.168.1.68",
+      "wireless_adb_port": 5555,
+      "termux_ssh_port": 8023,
+      "aux_sentinel_relay_port": 8092
+    },
+    "vps_links": {
+      "edge_bus": "http://100.110.180.18:8096",
+      "mesh_bridge": "http://162.35.107.134:8095"
+    },
+    "governing_cartridge": "motorola-edge-cartridge-v1",
+    "vps_fallback_policy": {
+      "status": "OFFLINE_AUTONOMOUS_READY",
+      "max_outbox_queue": 1000,
+      "snapshot_ttl_seconds": 3600,
+      "outbox_storage": "03_VAULT/runtime_state/motorola_edge/outbox.db"
+    },
+    "updated_at": "2026-09-17T04:40:00.000000+00:00"
+  }
+]

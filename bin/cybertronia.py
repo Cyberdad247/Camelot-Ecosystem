@@ -7,7 +7,7 @@ r"""
 Operator Authority: King Arthur (VaShawn O. Head / Vizion)
 Primary Node:       cybertronia (100.118.224.52 · Windows 11 Pro)
 WorldTree Anchor:   a0a4bfb9-e847-4c38-be39-7aee398f0795
-Max Version:        v1000.54-EXCALIBUR-A (vMAX Singularity)
+Max Version:        Living Camelot-OS v1000 MAX Compendium (vMAX Singularity)
 
 Commands:
     python bin/cybertronia.py --hud       : Launch 36-Knight Sovereign HUD
@@ -74,7 +74,7 @@ def main():
         print(f"• Excalibur Sentinel   : vashawns-s26-ultra (100.106.246.126 · Android 16)")
         print(f"• Camelot Hub VPS      : KVM563 / vps3573819 (162.35.107.134 / HERMES_PRIME)")
         print(f"• WorldTree Home Anchor: a0a4bfb9-e847-4c38-be39-7aee398f0795")
-        print(f"• Active Max Version   : v1000.54-EXCALIBUR-A (vMAX Singularity)")
+        print(f"• Active Max Version   : Living Camelot-OS v1000 MAX Compendium (vMAX Singularity)")
         print(f"• Repository Footprint : ~18.02 GB (18.78 GB Purged / 51% Optimized)")
         print(f"• 36 Knights Status    : 100% Tethered & Matched to Max Version")
         print("=" * 85)

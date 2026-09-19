@@ -6,7 +6,7 @@
 **Specialization:** Courier Dispatch, Webhooks, GraphQL Endpoints  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** courier_dispatch, webhooks, graphql  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

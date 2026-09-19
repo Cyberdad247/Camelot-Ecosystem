@@ -3,9 +3,9 @@
 **Node Identity:** `cybertronia` (`100.118.224.52` / Primary Windows Orchestrator)
 **Operating System:** Windows 11 Pro / x86_64
 **Authoritative Operator:** King Arthur (VaShawn O. Head / Vizion)
-**Max Camelot-OS Version:** `v1000.54-EXCALIBUR-A` (Singularity Living Glyph & VFS Scaffold)
+**Max Camelot-OS Version:** `Living Camelot-OS v1000 MAX Compendium`
 **WorldTree Home Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`
-**Generated Timestamp:** 2026-09-13 14:44:14 UTC
+**Generated Timestamp:** 2026-09-19 20:48:18 UTC
 ========================================================================================
 
 ## 1. SOVEREIGN TAILSCALE MESH TOPOLOGY
@@ -17,8 +17,8 @@
 | **vps3573819** (`KVM563`) | `162.35.107.134` | Camelot-OS Hub & Control Plane / Hermes Prime VPS Node | **ACTIVE GATEWAY** |
 | **fothers-camelot** | `100.121.48.50` | Windows Sovereign Secondary Node / Distributed Build Agent | **MESH PEER** |
 | **lakesha** | `100.100.155.55` | Windows Secondary Node / Lakisha Voice OS Host | **VOICE CLUSTER** |
-| **camelot-relay-modal** | `100.84.98.39` | Linux Cloud Relay Node / Serverless MicroVM Runner | **CLOUD RELAY** |
-| **kba-services** | `100.71.218.75` | Linux Remote Services Node / Drone Matrix Controller | **SERVICES NODE** |
+| **vps-camelot-hub** | `100.110.180.18` | Camelot-OS Hub & Control Plane (tailnet address) | **ACTIVE GATEWAY** |
+| **macbook-pro-3** | `100.113.101.43` | macOS Workstation / Exit Node (role unconfirmed) | **MESH PEER** |
 | **motorola-moto-g-power** | `100.89.129.105` | Auxiliary Mobile Sentinel & Telemetry Watcher | **AUX SENTINEL** |
 
 ---

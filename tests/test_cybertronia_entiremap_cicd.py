@@ -11,7 +11,7 @@ from scripts.forge_cybertronia_entiremap import create_cybertronia_snapshot, WOR
 
 class TestCybertroniaEntireMapCICD(unittest.TestCase):
     def test_create_cybertronia_snapshot(self):
-        snapshot_id, map_path, snap_meta_path = create_cybertronia_snapshot("v1000.54-EXCALIBUR-A")
+        snapshot_id, map_path, snap_meta_path = create_cybertronia_snapshot("Living Camelot-OS v1000 MAX Compendium")
         
         # Verify map file existence and content
         self.assertTrue(map_path.exists())
@@ -24,7 +24,7 @@ class TestCybertroniaEntireMapCICD(unittest.TestCase):
         self.assertTrue(snap_meta_path.exists())
         meta = json.loads(snap_meta_path.read_text(encoding="utf-8"))
         self.assertEqual(meta["snapshot_id"], snapshot_id)
-        self.assertEqual(meta["version_tag"], "v1000.54-EXCALIBUR-A")
+        self.assertEqual(meta["version_tag"], "Living Camelot-OS v1000 MAX Compendium")
         self.assertEqual(meta["target_node"], "cybertronia (100.118.224.52)")
         self.assertEqual(meta["worldtree_home"], WORLDTREE_HOME_ID)
         self.assertEqual(meta["status"], "RATIFIED_IMMUTABLE")

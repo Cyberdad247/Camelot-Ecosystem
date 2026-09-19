@@ -6,7 +6,7 @@
 **Specialization:** Model Inspection, Spaces Management, Transformer Pipelines  
 **Primary Substrate:** HuggingFace Hub API  
 **Domain Tags:** model_inspection, spaces_management, transformers  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

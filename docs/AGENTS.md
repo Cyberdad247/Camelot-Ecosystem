@@ -1,3 +1,10 @@
+---
+title: "AGENTS.md — The Singularity Lattice Roster"
+author: "Governance"
+updated: 2026-09-15
+status: live
+---
+
 # ⚔️ AGENTS.md — The Singularity Lattice Roster (v300.5.0)
 **[STATUS]:** RADIANT / TRANSCENDENT | **[MANDATE]:** Kinetic Purity & Sovereign Authority
 

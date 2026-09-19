@@ -19,16 +19,25 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "snapshots"
 WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
 
+def _max_version() -> str:
+    """Read the sovereign max version from the repo VERSION file."""
+    try:
+        return (REPO_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+    except OSError:
+        return "Living Camelot-OS v1000 MAX Compendium"
+
+
 def build_cybertronia_entiremap() -> str:
     now_utc = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
-    
+    max_version = _max_version()
+
     lines = [
         "# ♜ CYBERTRONIA · CAMELOT-OS WORLDTREE ENTIRE MAP ♜",
         "=" * 88,
         "**Node Identity:** `cybertronia` (`100.118.224.52` / Primary Windows Orchestrator)",
         "**Operating System:** Windows 11 Pro / x86_64",
         "**Authoritative Operator:** King Arthur (VaShawn O. Head / Vizion)",
-        "**Max Camelot-OS Version:** `v1000.54-EXCALIBUR-A` (Singularity Living Glyph & VFS Scaffold)",
+        f"**Max Camelot-OS Version:** `{max_version}`",
         "**WorldTree Home Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`",
         f"**Generated Timestamp:** {now_utc}",
         "=" * 88,
@@ -163,7 +172,7 @@ def build_cybertronia_entiremap() -> str:
     ]
     return "\n".join(lines)
 
-def create_cybertronia_snapshot(version_tag: str = "v1000.54-EXCALIBUR-A") -> Tuple[str, Path, Path]:
+def create_cybertronia_snapshot(version_tag: str = "Living Camelot-OS v1000 MAX Compendium") -> Tuple[str, Path, Path]:
     snapshot_timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     snapshot_id = f"cybertronia_cicd_{snapshot_timestamp}"
     
@@ -241,7 +250,7 @@ def create_cybertronia_snapshot(version_tag: str = "v1000.54-EXCALIBUR-A") -> Tu
     return snapshot_id, root_out, snapshot_meta_path
 
 def main():
-    version_tag = "v1000.54-EXCALIBUR-A"
+    version_tag = _max_version()
     snapshot_id, map_path, snap_path = create_cybertronia_snapshot(version_tag)
     print(f"[CYBERTRONIA FORGE] Generated Cybertronia EntireMap: {map_path.relative_to(REPO_ROOT)}")
     print(f"[CYBERTRONIA CI/CD] Created Snapshot: {snap_path.relative_to(REPO_ROOT)} (ID: {snapshot_id})")

@@ -17,7 +17,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@camelot/voice-first-runtime": [
-        "../../02_FORGE/packages/voice-first-runtime/src/index.ts"
+        "./src/lib/voice-first-runtime/index.ts"
       ]
     },
     "plugins": [

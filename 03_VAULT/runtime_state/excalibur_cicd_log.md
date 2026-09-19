@@ -11,6 +11,11 @@
 
 | Timestamp (UTC) | Cadence | Active Version | Snapshot ID | Tethered Knights | Duration | Status |
 |---|---|---|---|---|---|---|
+| `2026-09-19T20:48:23Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_204822` | 65 / 36 | 1.32s | `SUCCESS` |
+| `2026-09-19T20:15:00Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_201459` | 65 / 36 | 1.4s | `SUCCESS` |
+| `2026-09-19T20:13:48Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_201347` | 65 / 36 | 1.34s | `SUCCESS` |
+| `2026-09-19T20:12:42Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260919_201241` | 65 / 36 | 1.37s | `SUCCESS` |
+| `2026-09-19T15:06:01Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260919_150558` | 65 / 36 | 2.66s | `SUCCESS` |
 | `2026-09-13T14:44:20Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260913_144418` | 41 / 36 | 2.17s | `SUCCESS` |
 | `2026-09-13T14:40:27Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260913_144025` | 41 / 36 | 2.36s | `SUCCESS` |
 | `2026-09-13T14:06:29Z` | `DAILY` | `v1000.54-EXCALIBUR-A` | `excalibur_cicd_20260913_140627` | 41 / 36 | 2.04s | `SUCCESS` |
@@ -282,4 +287,39 @@
 * **Trigger:** Autonomous CI/CD Loop (DAILY)
 * **Snapshot SHA-256:** `150adcc783c9bd9647d50b8353689df8949461a13fb477e7e8f3fc51a5a8f550`
 * **WorldTree Tethers:** 41 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260919_150558` (DAILY)
+* **Timestamp:** `2026-09-19T15:06:01Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `80a80f1b3ddd7630c31f8b166e4d8ad18e2f73312b14615c9a5130b87b283488`
+* **WorldTree Tethers:** 65 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260919_201241` (DAILY)
+* **Timestamp:** `2026-09-19T20:12:42Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `855f790460e88b6938246bf326437744c8a02ff7de5de98be91a44caee0fe74a`
+* **WorldTree Tethers:** 65 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260919_201347` (DAILY)
+* **Timestamp:** `2026-09-19T20:13:48Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `17884d9fa7c1f854d95e969bb78aab95e532726ae5ae1984de8cdff2bb693ad7`
+* **WorldTree Tethers:** 65 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260919_201459` (DAILY)
+* **Timestamp:** `2026-09-19T20:15:00Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `7cf9df550ff282c203cdf12575d1baf307d08b8fe30591867ed5afa855d14dd2`
+* **WorldTree Tethers:** 65 Active Nodes Verified
+* **Status:** `NOMINAL_SUCCESS`
+
+### 🔹 Run `excalibur_cicd_20260919_204822` (DAILY)
+* **Timestamp:** `2026-09-19T20:48:23Z`
+* **Trigger:** Autonomous CI/CD Loop (DAILY)
+* **Snapshot SHA-256:** `5f122df3fbb55c1ab3156d40bf64ec400a14ff9487a73d7a2c060ebfb2888cb8`
+* **WorldTree Tethers:** 65 Active Nodes Verified
 * **Status:** `NOMINAL_SUCCESS`

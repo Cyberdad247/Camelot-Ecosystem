@@ -6,7 +6,7 @@
 **Specialization:** Dual-Tier Memory Sync, Vector Indexing, Tissue Journaling  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** dual_tier_memory, vector_indexing, tissue_journaling  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

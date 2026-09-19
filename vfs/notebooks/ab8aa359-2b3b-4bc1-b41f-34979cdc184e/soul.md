@@ -6,7 +6,7 @@
 **Specialization:** NotebookLM + AntiGravity CLI Synergy & MCP Integration  
 **Primary Substrate:** FastMCP / agy  
 **Domain Tags:** notebooklm_synergy, fastmcp, antigravity_cli  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

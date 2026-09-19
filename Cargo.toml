@@ -10,6 +10,7 @@ members = [
     "02_FORGE/kinetic/cribo",
     "02_FORGE/kinetic/omni_nexus_ide",
     "02_FORGE/kinetic/pmcp",
+    # rotel: merged single crate (log/id/adb CLI + serve daemon from ex-kinetic_edge/rotel).
     "02_FORGE/kinetic/rotel",
     "04_KINETIC/squires_rs",
     "04_KINETIC/memory_palace",
@@ -41,6 +42,11 @@ unused_mut = "warn"
 [profile.dev]
 opt-level = 0
 debug = 0
+codegen-units = 1
+
+# Release: smaller kinetic binaries for mesh distribution (cribo/rotel ship to edge nodes)
+[profile.release]
+lto = true
 codegen-units = 1
 
 [profile.test]

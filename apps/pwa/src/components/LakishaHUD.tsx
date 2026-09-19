@@ -7,6 +7,7 @@ import { useBifrost } from '../context/BifrostContext';
 import { useLakishaVoice } from '../hooks/useLakishaVoice';
 import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs, getLatencyHistory, recordLatencySample } from '../lib/telemetry';
 import { Sparkline } from './Sparkline';
+import { SymbolectVisualizer } from './SymbolectVisualizer';
 
 // One latency readout with a budget-colored status dot.
 function TelemetryMetric({
@@ -231,7 +232,8 @@ export function LakishaHUD() {
               </span>
             )}
           </div>
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-3">
+            <SymbolectVisualizer rune="|🧠⊗(⚡💬)⟩" />
             <span className="text-[9px] text-white/30 tracking-widest">STREAM JITTER</span>
             <Sparkline data={getLatencyHistory()} width={64} height={16} stroke="#D4AF37" />
           </div>

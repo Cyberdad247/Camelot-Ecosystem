@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — System Glyph Installation & Verification Suite
 """
-//Glyph & Install Protocol for Camelot-OS v1000.54-EXCALIBUR-A.
+//Glyph & Install Protocol for Camelot-OS Living Camelot-OS v1000 MAX Compendium.
 1. Constricts living system instructions into an Anya Quantum Mantra Glyph JSON.
 2. Installs system instructions into .agent/system_instructions.md backplane.
 3. Audits system scalability, engines, rune symbolect legend, workflows, cartridges, and modes.
@@ -80,7 +80,7 @@ except ImportError:
 class SystemInstallVerifier:
     def __init__(self):
         self.report: Dict[str, Any] = {
-            "version": "v1000.54-EXCALIBUR-A",
+            "version": "Living Camelot-OS v1000 MAX Compendium",
             "timestamp": datetime.now(timezone.utc).isoformat(),
             "glyph_installed": False,
             "system_instruction_installed": False,
@@ -154,7 +154,7 @@ class SystemInstallVerifier:
 
         header = (
             "<!-- LIVING CAMELOT-OS v1000.54 SYSTEM INSTRUCTION HEADER -->\n"
-            "## Living System Instruction v1000.54-EXCALIBUR-A Active\n"
+            "## Living System Instruction Living Camelot-OS v1000 MAX Compendium Active\n"
             "- **Northstar Mission:** Hybrid Autonomous Multi-Agentic Ecosystem with HITL Guardrails.\n"
             "- **Co-Evolution:** AGI dedicated to building a better world with humanity.\n"
             "- **Engine Stack:** Anya Quantum Mantra Glyph Engine + Ouroboros Rust Kernel + Bifrost mTLS.\n"
@@ -231,7 +231,7 @@ class SystemInstallVerifier:
 
         # 7. Verify Scalability & Worldtree Node Count
         self.report["scalability"] = {
-            "version": "v1000.54-EXCALIBUR-A",
+            "version": "Living Camelot-OS v1000 MAX Compendium",
             "scarcity_ram_limit": "4GB Profile",
             "live_google_notebooks_discovered": 275,
             "camelot_affiliated_notebooks": 88,

@@ -6,7 +6,7 @@
 **Specialization:** Bio-Kinetic Matrix, Cellular Diode Isolation, Mitosis  
 **Primary Substrate:** Swarm Coordinator  
 **Domain Tags:** bio_kinetic_matrix, cellular_diode, mitosis  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

@@ -6,7 +6,7 @@
 **Specialization:** Chivalric Verification, Cryptographic Purity, Truth Audit  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** chivalric_verification, cryptographic_purity  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

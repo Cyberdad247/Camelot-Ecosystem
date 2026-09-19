@@ -8,7 +8,7 @@ Authority: King Arthur (VaShawn O. Head / Vizion)
 Governing Knights: MERLIN_OMEGA (Deep Reasoning) · HERMES_PRIME (VPS Hub & R&D)
 WorldTree Home Node: a0a4bfb9-e847-4c38-be39-7aee398f0795
 VPS Control Plane:  KVM563 (162.35.107.134 / mesh_topology.HUB_TAILSCALE_IP)
-Active Target:      v1000.54-EXCALIBUR-A (vMAX Singularity)
+Active Target:      Living Camelot-OS v1000 MAX Compendium (vMAX Singularity)
 
 Orchestrates:
 1. CloudBrain NotebookLM & Open-Notebook VFS reconciliation.
@@ -53,7 +53,7 @@ CAMELOT_V1000_UUID = "8c656cfa-a189-409e-a72d-07692a47f17e"
 
 VPS_PUBLIC_IP = "162.35.107.134"
 VPS_TAILSCALE_IP = HUB_TAILSCALE_IP
-MAX_VERSION = "v1000.54-EXCALIBUR-A"
+MAX_VERSION = "Living Camelot-OS v1000 MAX Compendium"
 
 OPEN_NOTEBOOK_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "open_notebook"
 OPEN_NOTEBOOK_DIR.mkdir(parents=True, exist_ok=True)

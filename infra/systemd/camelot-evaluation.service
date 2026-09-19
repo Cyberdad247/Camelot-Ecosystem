@@ -8,11 +8,11 @@ Wants=local-fs.target
 Type=simple
 User=camelot
 Group=camelot
-WorkingDirectory=/opt/Camelot-Ecosystem
+WorkingDirectory=/opt/camelot-ecosystem
 ExecStart=/usr/bin/python3 -m control_plane.runners.evaluation_chamber_runner --daemon
 Restart=on-failure
 RestartSec=3s
-Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+Environment=CAMELOT_OS_HOME=/opt/camelot-ecosystem
 Environment=PYTHONUNBUFFERED=1
 Environment=CAMELOT_EVAL_SANDBOX=wasmtime
 
@@ -35,7 +35,7 @@ ProtectKernelTunables=true
 ProtectControlGroups=true
 RestrictNamespaces=true
 RestrictRealtime=true
-ReadWritePaths=/opt/Camelot-Ecosystem/03_VAULT/runtime_state/evaluation /tmp
+ReadWritePaths=/opt/camelot-ecosystem/03_VAULT/runtime_state/evaluation /tmp
 
 [Install]
 WantedBy=multi-user.target

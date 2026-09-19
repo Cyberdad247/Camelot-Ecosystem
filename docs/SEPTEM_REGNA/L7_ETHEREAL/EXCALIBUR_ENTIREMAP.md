@@ -4,10 +4,10 @@
 **Host Substrate:** Samsung Galaxy S26 Ultra / Android 16 / Linux Termux Core
 **Operator Authority:** King Arthur (VaShawn O. Head / Vizion)
 **Arch-Sovereign Governance:** Anya Law (King Arthur -> ANYA_OMEGA -> Symbollect -> Knights -> King Arthur)
-**System Version:** `v1000.54-EXCALIBUR-A`
-**CI/CD Snapshot ID:** `excalibur_cicd_20260913_144418`
+**System Version:** `Living Camelot-OS v1000 MAX Compendium`
+**CI/CD Snapshot ID:** `excalibur_cicd_20260919_204823`
 **WorldTree Home Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`
-**Generated Timestamp:** 2026-09-13 14:44:18 UTC
+**Generated Timestamp:** 2026-09-19 20:48:23 UTC
 ========================================================================================
 
 ## 1. EXCALIBUR TOPOLOGY & HARDWARE SUBSTRATE
@@ -60,8 +60,8 @@ flowchart TD
 
 The Excalibur EntireMap is bound to an immutable CI/CD Snapshot pipeline:
 
-1. **Active Release Version:** `v1000.54-EXCALIBUR-A`
-2. **Snapshot Hash:** Computed per build and archived in `03_VAULT/runtime_state/snapshots/snapshot_excalibur_cicd_20260913_144418.json`
+1. **Active Release Version:** `Living Camelot-OS v1000 MAX Compendium`
+2. **Snapshot Hash:** Computed per build and archived in `03_VAULT/runtime_state/snapshots/snapshot_excalibur_cicd_20260919_204823.json`
 3. **Cryptographic Proof Chain:** Chained to `03_VAULT/Missions/verification_ledger.jsonl` with sequential parent-hash linkage.
 4. **Reversible Rollback:** In the event of a deployment regression, the snapshot runner can roll back node topology to the exact prior snapshot.
 
@@ -76,8 +76,8 @@ The Excalibur EntireMap is bound to an immutable CI/CD Snapshot pipeline:
 | `vps3573819` (`KVM563`) | `162.35.107.134` | Hub & Control Plane | Hermes Prime Daemon / WAL Ingress |
 | `lakesha` | `100.100.155.55` | Lakisha Voice OS Host | Luxury Brutalism Voice Bridge |
 | `fothers-camelot` | `100.121.48.50` | Windows Secondary Node | Distributed Build Swarm |
-| `camelot-relay-modal` | `100.84.98.39` | Linux Cloud Relay | Serverless MicroVM Compute |
-| `kba-services` | `100.71.218.75` | Linux Remote Services | Drone Matrix Telemetry |
+| `vps-camelot-hub` | `100.110.180.18` | Hub & Control Plane | Tailnet address of `162.35.107.134` |
+| `macbook-pro-3` | `100.113.101.43` | macOS Workstation | Exit node (role unconfirmed) |
 | `motorola-moto-g-power` | `100.89.129.105` | Auxiliary Sentinel | Backup Telemetry Relay |
 
 ========================================================================================

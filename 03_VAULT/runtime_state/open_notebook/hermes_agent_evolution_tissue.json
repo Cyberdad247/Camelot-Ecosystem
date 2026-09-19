@@ -1,6 +1,17 @@
 [
   {
     "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "character_sheet",
+    "title": "Full Character Sheet & WorldTree CloudBrain Integration: Hermes Agent Evolution (OpenClaw Transcendence & Autonomous Gateway)",
+    "content": "{\n  \"cloudbrain_uuid\": \"24f4a450-6456-49fe-bfab-8cfcf7c2a33b\",\n  \"worldtree_anchor\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"character_sheet\": {\n    \"pantheon_class\": \"Transcendence Pioneer\",\n    \"archetype\": \"Autonomous Agentic Evolver\",\n    \"stats\": {\n      \"intellect\": 97,\n      \"synthesis_velocity\": 96,\n      \"memory_depth\": 96,\n      \"mesh_resonance\": 98,\n      \"scarcity_discipline\": 95\n    },\n    \"governing_law\": \"ANYA_LAST_LAW // CONTINUOUS_EVOLUTION\",\n    \"worldtree_anchor\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"active_subsystems\": [\n      \"WorldTree L2 Memory Core\",\n      \"NousResearch Hermes Agent Runtime\",\n      \"OpenClaw Evolution Gateway\",\n      \"Bifrost Polyglot Mesh\"\n    ],\n    \"special_invocations\": [\n      \"//EVOLVE\",\n      \"//TRANSCEND\",\n      \"//SWARM_FUSION\"\n    ],\n    \"provenance_signature\": \"HMAC-SHA256-VIKING-BLOCK\"\n  },\n  \"ocean_vector\": {\n    \"O\": 0.98,\n    \"C\": 0.92,\n    \"E\": 0.75,\n    \"A\": 0.65,\n    \"N\": 0.04\n  },\n  \"domain_tags\": [\n    \"openclaw_transcendence\",\n    \"nous_research\",\n    \"autonomous_evolution\",\n    \"gateway_convergence\"\n  ],\n  \"primary_engine\": \"Hermes Kernel / Nous Research\",\n  \"summoning_rune\": \"Omega_HermesAgent\",\n  \"vfs_coordinate\": \"vfs://worldtree/knights/hermes_agent_evolution/tether.json\",\n  \"mempalace_wing\": \"WING_WORLDTREE_HERMES_AGENT_EVOLUTION\",\n  \"status\": \"DYNAMICALLY_INTEGRATED_WORLDTREE\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "synced_at": "2026-09-17T12:47:57.809756+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
     "cloudbrain_uuid": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",
     "spark_id": "0x24F4A450645649FEBFAB8CFCF7C2A33B",
     "role": "OpenClaw Transcendence, Nous Research, Autonomous Evolution",

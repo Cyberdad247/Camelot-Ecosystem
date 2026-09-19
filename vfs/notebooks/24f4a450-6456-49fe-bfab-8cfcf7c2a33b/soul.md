@@ -6,7 +6,7 @@
 **Specialization:** OpenClaw Transcendence, Nous Research, Autonomous Evolution  
 **Primary Substrate:** Hermes Kernel  
 **Domain Tags:** openclaw_transcendence, nous_research  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

@@ -1,0 +1,4469 @@
+{
+  "emitted_at": "2026-09-17T03:45:47.628256+00:00",
+  "navigator_version": "1.1.0",
+  "navigator_rung": "Navigator (sibling of Audit Governor) + Crucible rung",
+  "camelot_home": "C:\\Users\\vizio\\CAMELOT_OS",
+  "canonical_files": 46719,
+  "canonical_lines": 11346662,
+  "canonical_symbols": 197770,
+  "extensions": {
+    ".yaml": 332,
+    ".toml": 230,
+    ".txt": 320,
+    ".md": 3623,
+    ".py": 2311,
+    ".sh": 508,
+    ".json": 2441,
+    ".go": 511,
+    ".cpp": 256,
+    ".rs": 1911,
+    ".ps1": 31,
+    ".ts": 31875,
+    ".yml": 184,
+    ".js": 477,
+    ".tsx": 761,
+    ".bat": 28,
+    ".h": 827,
+    ".c": 89,
+    ".jsx": 4
+  },
+  "bin_entry_points": [
+    {
+      "path": "bin\\ascension_mode.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [],
+      "imports": [
+        "__future__",
+        "control_plane"
+      ],
+      "module_version": null,
+      "size_bytes": 171,
+      "lines": 8,
+      "docstring_present": false,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\awaken.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_banner",
+        "main"
+      ],
+      "imports": [
+        "argparse",
+        "control_plane",
+        "json",
+        "os",
+        "pathlib",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 5079,
+      "lines": 125,
+      "docstring_present": true,
+      "banner_present": true,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\bifrost.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "AccessDenied"
+      ],
+      "functions": [
+        "_b64url_decode",
+        "_env_flag",
+        "_is_loopback",
+        "_is_tailnet",
+        "_parse_csv_env",
+        "_read_token",
+        "_tailscale_whois",
+        "enforce",
+        "mobile_gate",
+        "status_report",
+        "token_fingerprint",
+        "verify_caller",
+        "verify_client_cert",
+        "verify_oidc_token",
+        "verify_token"
+      ],
+      "imports": [
+        "__future__",
+        "base64",
+        "getpass",
+        "hashlib",
+        "hmac",
+        "ipaddress",
+        "json",
+        "os",
+        "pathlib",
+        "socket",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 11528,
+      "lines": 328,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\bifrost_port.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "bifrost_security_gate",
+        "download_file",
+        "get_messages",
+        "send_message",
+        "upload_file"
+      ],
+      "imports": [
+        "fastapi",
+        "json",
+        "os",
+        "pathlib",
+        "time",
+        "uvicorn"
+      ],
+      "module_version": null,
+      "size_bytes": 5175,
+      "lines": 137,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\bifrost_port_dynamic.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "bifrost_security_gate",
+        "bridge_status",
+        "get_active_relays",
+        "get_messages",
+        "get_rustdesk_id",
+        "send_message",
+        "upload_file"
+      ],
+      "imports": [
+        "fastapi",
+        "json",
+        "os",
+        "pathlib",
+        "psutil",
+        "subprocess",
+        "time",
+        "uvicorn"
+      ],
+      "module_version": null,
+      "size_bytes": 5112,
+      "lines": 139,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\boot_debug.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [],
+      "imports": [
+        "control_plane",
+        "importlib",
+        "os",
+        "pathlib",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 3236,
+      "lines": 67,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\camelot.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_banner",
+        "_cmd_build",
+        "_cmd_cockpit",
+        "_cmd_completion",
+        "_cmd_configure",
+        "_cmd_hermes",
+        "_cmd_install",
+        "_cmd_keys",
+        "_cmd_shell_setup",
+        "_cmd_status",
+        "_cmd_update",
+        "_cmd_warp",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "json",
+        "pathlib",
+        "sys"
+      ],
+      "module_version": "400.1.0",
+      "size_bytes": 12679,
+      "lines": 360,
+      "docstring_present": true,
+      "banner_present": true,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\camelot_configure.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "detect_hardware",
+        "detect_portable",
+        "load_config",
+        "probe_cliproxy",
+        "probe_ollama",
+        "probe_vps_hermes_prime",
+        "resolve_default_knight",
+        "resolve_tier",
+        "run_configure",
+        "scan_api_keys",
+        "show_status",
+        "write_config"
+      ],
+      "imports": [
+        "__future__",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "platform",
+        "subprocess",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 18210,
+      "lines": 486,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\camelot_context.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_compress_toon",
+        "build_system_prompt",
+        "detect_cartridge",
+        "load_cartridge",
+        "load_constitution",
+        "load_knight_persona",
+        "load_ukg_anchor"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "os",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 16543,
+      "lines": 362,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\camelot_ide_mcp.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_dispatch_tool",
+        "_init_sdk",
+        "_init_tool_handlers",
+        "_invoke_portable",
+        "_jail_target",
+        "_log",
+        "_main_loop",
+        "_self_test",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "asyncio",
+        "os",
+        "pathlib",
+        "re",
+        "sys",
+        "tempfile",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 15780,
+      "lines": 421,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\camelot_keys.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_get_keyring",
+        "_mask",
+        "_update_config_flag",
+        "cmd_delete",
+        "cmd_export_env",
+        "cmd_get",
+        "cmd_list",
+        "cmd_set",
+        "load_keys_to_env",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "os",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 8207,
+      "lines": 252,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\camelot_portable.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_asset_root",
+        "_build_system_prompt",
+        "_detect_backend",
+        "_get_mcp_config_paths",
+        "_load_cartridge",
+        "_load_config",
+        "_load_constitution",
+        "_load_omniroute",
+        "_models_table",
+        "_probe",
+        "_repl",
+        "_route",
+        "_stream",
+        "cmd_cartridge",
+        "cmd_knight",
+        "cmd_mcp",
+        "cmd_omniroute",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "cartridges",
+        "httpx",
+        "json",
+        "os",
+        "pathlib",
+        "rich",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "module_version": "1000-EXCALIBUR-A",
+      "size_bytes": 33999,
+      "lines": 813,
+      "docstring_present": true,
+      "banner_present": true,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\camelot_shell_setup.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_completion_script",
+        "_detect_shell",
+        "_install_bash",
+        "_install_fish",
+        "_install_powershell",
+        "_install_zsh",
+        "_powershell_cockpit_script",
+        "_repo_root",
+        "main",
+        "run_shell_setup"
+      ],
+      "imports": [
+        "__future__",
+        "os",
+        "pathlib",
+        "platform",
+        "shutil",
+        "subprocess",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 11262,
+      "lines": 310,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\cloudbrain_dedup.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "main",
+        "run_audit",
+        "run_dedup"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "asyncio",
+        "json",
+        "logging",
+        "pathlib",
+        "sys",
+        "vfs"
+      ],
+      "module_version": null,
+      "size_bytes": 7035,
+      "lines": 181,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\cloudbrain_hydrate.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "hydrate_knight",
+        "hydrate_worldtree",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "asyncio",
+        "logging",
+        "merlin",
+        "pathlib",
+        "sys",
+        "vfs"
+      ],
+      "module_version": null,
+      "size_bytes": 4143,
+      "lines": 109,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\cloudbrain_snapshot.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "main",
+        "run_snapshots",
+        "snapshot_knight"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "asyncio",
+        "control_plane",
+        "datetime",
+        "json",
+        "logging",
+        "memory",
+        "pathlib",
+        "sys",
+        "vfs"
+      ],
+      "module_version": null,
+      "size_bytes": 4018,
+      "lines": 117,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\cloudbrain_sync.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "WorldTreeCloudBrainVPSSync"
+      ],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "argparse",
+        "control_plane",
+        "datetime",
+        "json",
+        "logging",
+        "os",
+        "pathlib",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 6448,
+      "lines": 164,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\cybertronia.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "argparse",
+        "os",
+        "pathlib",
+        "subprocess",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 4753,
+      "lines": 91,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\factory_status.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_ledger_count",
+        "_octavian_metrics",
+        "_probe",
+        "_queue_stats",
+        "_render",
+        "collect",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "socket",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 4695,
+      "lines": 156,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\forge_living_artifacts.py",
+      "role": "bin",
+      "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
+      "classes": [],
+      "functions": [
+        "forge_and_inject_fleet",
+        "forge_manifest_content"
+      ],
+      "imports": [
+        "asyncio",
+        "datetime",
+        "json",
+        "logging",
+        "merlin",
+        "os",
+        "pathlib",
+        "sys",
+        "time",
+        "typing",
+        "vfs"
+      ],
+      "module_version": null,
+      "size_bytes": 26243,
+      "lines": 471,
+      "docstring_present": true,
+      "banner_present": true,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\heimdall.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "build_header",
+        "build_identity_panel",
+        "build_peer_table",
+        "build_relay_panel",
+        "build_terminal_table",
+        "get_bifrost_identity",
+        "get_relay_status",
+        "get_switchboard",
+        "get_tailscale_peers",
+        "main"
+      ],
+      "imports": [
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "psutil",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 7697,
+      "lines": 222,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\interceptor.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "run_intercept"
+      ],
+      "imports": [
+        "os",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 2003,
+      "lines": 66,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\knight_session.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_build_knight_fallback_map",
+        "_build_knight_model_map",
+        "_build_system_prompt",
+        "_classify_tier",
+        "_detect_and_load_cartridge",
+        "_handle_runic",
+        "_load_constitution",
+        "_load_omniroute",
+        "_models_table",
+        "_privacy_check",
+        "_repl",
+        "_resolve",
+        "_route_table",
+        "_status",
+        "_stream",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "control_plane",
+        "httpx",
+        "json",
+        "os",
+        "pathlib",
+        "rich",
+        "sys",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 39729,
+      "lines": 934,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\mirror_notebooklm_graphify.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_build_parser",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "control_plane",
+        "json",
+        "pathlib"
+      ],
+      "module_version": null,
+      "size_bytes": 1572,
+      "lines": 54,
+      "docstring_present": false,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\notebooklm_mcp_server.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_html_to_markdown",
+        "_main",
+        "_scrape_notebook_html",
+        "_ttl_days",
+        "cache_path",
+        "delete_local_notebook",
+        "evict_old",
+        "export_notebook",
+        "list_local_notebooks",
+        "slugify"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "mcp",
+        "os",
+        "pathlib",
+        "re",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 4998,
+      "lines": 166,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\onboarding.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "OnboardingHandler"
+      ],
+      "functions": [
+        "gather_system_diagnostics",
+        "main",
+        "run_command_silent"
+      ],
+      "imports": [
+        "__future__",
+        "http",
+        "json",
+        "os",
+        "pathlib",
+        "socketserver",
+        "subprocess",
+        "sys",
+        "typing",
+        "webbrowser"
+      ],
+      "module_version": null,
+      "size_bytes": 4441,
+      "lines": 132,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\openclaw.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_print_status_only",
+        "_print_table",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "control_plane",
+        "json",
+        "pathlib",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 3694,
+      "lines": 103,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\pdf_forge.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "forge_pdf"
+      ],
+      "imports": [
+        "pathlib",
+        "reportlab"
+      ],
+      "module_version": null,
+      "size_bytes": 2496,
+      "lines": 67,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\run_uiux_workflow.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "WorkflowRunner"
+      ],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "subprocess"
+      ],
+      "module_version": null,
+      "size_bytes": 5575,
+      "lines": 142,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\sir_sonus.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "main",
+        "run"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "asyncio",
+        "datetime",
+        "importlib",
+        "os",
+        "pathlib",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 5906,
+      "lines": 163,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\starship_camelot_module.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_ensure_repo_on_path",
+        "build_segment",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "pathlib",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 1279,
+      "lines": 45,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\sync_uiux_cloudbrain.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_read",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "os",
+        "pathlib",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 3057,
+      "lines": 95,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\test_oracle.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "asyncio",
+        "control_plane",
+        "os",
+        "pathlib",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 2997,
+      "lines": 84,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\tier.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_http_ok",
+        "_load",
+        "_resolve",
+        "_tcp_open",
+        "down",
+        "main",
+        "status",
+        "up"
+      ],
+      "imports": [
+        "__future__",
+        "pathlib",
+        "socket",
+        "subprocess",
+        "sys",
+        "urllib"
+      ],
+      "module_version": null,
+      "size_bytes": 3461,
+      "lines": 119,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\tuneup.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "main",
+        "run_step"
+      ],
+      "imports": [
+        "os",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 2524,
+      "lines": 74,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\understand_anything_assimilate.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [],
+      "imports": [
+        "__future__",
+        "control_plane"
+      ],
+      "module_version": null,
+      "size_bytes": 189,
+      "lines": 8,
+      "docstring_present": false,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\upgrade_cloudbrain.py",
+      "role": "bin",
+      "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
+      "classes": [],
+      "functions": [
+        "load_base_memory",
+        "load_cloudbrain",
+        "upgrade_roster"
+      ],
+      "imports": [
+        "importlib",
+        "pathlib",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 4358,
+      "lines": 85,
+      "docstring_present": false,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\verify_production.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "ProductionReadinessVerifier"
+      ],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "control_plane",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "socket",
+        "subprocess",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 10738,
+      "lines": 266,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\verify_uiux_cloudbrain.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "pathlib"
+      ],
+      "module_version": null,
+      "size_bytes": 1238,
+      "lines": 36,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\vps_hub.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "connect_ssh",
+        "get_vps_status",
+        "main",
+        "open_dashboard",
+        "print_status",
+        "probe_port",
+        "run_hermes_command"
+      ],
+      "imports": [
+        "argparse",
+        "control_plane",
+        "os",
+        "pathlib",
+        "socket",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 5842,
+      "lines": 151,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\worker_service.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_ensure_launcher",
+        "_require_windows",
+        "_run_schtasks",
+        "_task_exists",
+        "cmd_logs",
+        "cmd_register",
+        "cmd_reinstall",
+        "cmd_start",
+        "cmd_status",
+        "cmd_stop",
+        "cmd_unregister",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "pathlib",
+        "platform",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 8233,
+      "lines": 223,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "bin\\worldtree_nav.py",
+      "role": "bin",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "datetime_now_tag",
+        "forge_crystal",
+        "list_crystals",
+        "main",
+        "push_atlas_to_worldtree",
+        "show_status"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "asyncio",
+        "logging",
+        "pathlib",
+        "sys",
+        "vfs"
+      ],
+      "module_version": null,
+      "size_bytes": 5681,
+      "lines": 131,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    }
+  ],
+  "control_plane_modules": [
+    {
+      "path": "control_plane\\bifrost_triage_swarm.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TriageTask"
+      ],
+      "functions": [
+        "_ledger",
+        "_main",
+        "apply_task",
+        "build_prompt",
+        "dispatch_task",
+        "print_plan",
+        "run_all",
+        "topo_order"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "asyncio",
+        "dataclasses",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "subprocess",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 13772,
+      "lines": 317,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\camelot_cli.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "execute_governed_command"
+      ],
+      "imports": [
+        "__future__",
+        "control_plane",
+        "pathlib",
+        "security",
+        "sys",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 1326,
+      "lines": 46,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\cognitive_mcp.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_call",
+        "_dispatch",
+        "_err",
+        "_load",
+        "_log",
+        "_ok",
+        "_serve_stdio",
+        "_tool_cognitive_forage",
+        "_tool_cognitive_sync",
+        "_tool_graphify_ingest",
+        "_tool_memcastle_search",
+        "_tools"
+      ],
+      "imports": [
+        "__future__",
+        "asyncio",
+        "importlib",
+        "json",
+        "pathlib",
+        "sys",
+        "threading",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 11529,
+      "lines": 313,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\cognitive_service.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "Handler"
+      ],
+      "functions": [
+        "_load",
+        "_probe",
+        "_scheduler_loop",
+        "fetch_url",
+        "fleet_daemons",
+        "forage",
+        "html_to_text",
+        "load_config",
+        "main",
+        "save_config",
+        "serve",
+        "tailnet_nodes"
+      ],
+      "imports": [
+        "__future__",
+        "html",
+        "http",
+        "importlib",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "subprocess",
+        "sys",
+        "threading",
+        "time",
+        "urllib"
+      ],
+      "module_version": null,
+      "size_bytes": 11772,
+      "lines": 314,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\graphify.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "Graphify",
+        "Triplet"
+      ],
+      "functions": [
+        "_clean_np",
+        "_cli",
+        "_lemma",
+        "_sentences",
+        "extract_triplets"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "dataclasses",
+        "memcastle",
+        "pathlib",
+        "re",
+        "sys",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 7570,
+      "lines": 192,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\lady_m.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "LadyM",
+        "SquireBrief",
+        "SquireMerge",
+        "SquirePurge",
+        "SquireReport",
+        "SquireTriage"
+      ],
+      "functions": [],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "datetime",
+        "email",
+        "hashlib",
+        "json",
+        "logging",
+        "os",
+        "pathlib",
+        "re",
+        "smtplib",
+        "subprocess",
+        "sys",
+        "textwrap",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 14026,
+      "lines": 335,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\main.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "A2AMessage",
+        "ControlPlane",
+        "MCPClient",
+        "MessageType",
+        "TaskPayload",
+        "ToolRequest",
+        "ToolResponse"
+      ],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "asyncio",
+        "control_plane",
+        "datetime",
+        "enum",
+        "httpx",
+        "importlib",
+        "json",
+        "os",
+        "pathlib",
+        "pydantic",
+        "re",
+        "sys",
+        "time",
+        "typing",
+        "uuid"
+      ],
+      "module_version": null,
+      "size_bytes": 44073,
+      "lines": 1053,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\memcastle.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "MemCastle"
+      ],
+      "functions": [
+        "_cli",
+        "_serialize",
+        "hash_embed"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "hashlib",
+        "math",
+        "os",
+        "pathlib",
+        "sqlite3",
+        "struct",
+        "time",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 6417,
+      "lines": 176,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\memcastle_sync.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "_cli",
+        "_cloud_ok",
+        "_load_bridge",
+        "build_snapshot",
+        "pull",
+        "push",
+        "sync"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "importlib",
+        "memcastle",
+        "os",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 5069,
+      "lines": 130,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\memory_palace_client.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "MemoryPalace"
+      ],
+      "functions": [
+        "_run",
+        "get_memory_palace"
+      ],
+      "imports": [
+        "__future__",
+        "json",
+        "logging",
+        "os",
+        "pathlib",
+        "struct",
+        "subprocess",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 3746,
+      "lines": 98,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\multivoice_bridge.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "AffinityStats",
+        "MultivoiceBridge"
+      ],
+      "functions": [
+        "_selftest",
+        "parse_metrics",
+        "render_panel"
+      ],
+      "imports": [
+        "__future__",
+        "control_plane",
+        "dataclasses",
+        "json",
+        "os",
+        "sys",
+        "typing",
+        "urllib"
+      ],
+      "module_version": "9000.25",
+      "size_bytes": 14746,
+      "lines": 345,
+      "docstring_present": true,
+      "banner_present": true,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_drone_node.py",
+      "role": "control_plane",
+      "first_line": "# Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.",
+      "classes": [],
+      "functions": [
+        "_free_port",
+        "main"
+      ],
+      "imports": [
+        "control_plane",
+        "os",
+        "socket",
+        "sys",
+        "tempfile"
+      ],
+      "module_version": null,
+      "size_bytes": 3776,
+      "lines": 90,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_anomaly_detector.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestAnomalyDetector"
+      ],
+      "functions": [],
+      "imports": [
+        "pathlib",
+        "phase_h_anomaly_detector",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 8662,
+      "lines": 276,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_autonomous_loop.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestAutonomousLoop",
+        "TestLoopIntegration"
+      ],
+      "functions": [],
+      "imports": [
+        "datetime",
+        "pathlib",
+        "phase_h_autonomous_loop",
+        "sys",
+        "tempfile",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 9682,
+      "lines": 278,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_business_metrics.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestBusinessWeighting",
+        "TestConstraintManagement",
+        "TestKPIManagement",
+        "TestMetricsIntegration",
+        "TestSLAManagement"
+      ],
+      "functions": [],
+      "imports": [
+        "pathlib",
+        "phase_h_business_metrics",
+        "sys",
+        "tempfile",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 13669,
+      "lines": 398,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_business_optimizer.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestApprovalThresholds",
+        "TestBusinessRanking",
+        "TestBusinessScoreCalculation"
+      ],
+      "functions": [],
+      "imports": [
+        "pathlib",
+        "phase_h_business_optimizer",
+        "phase_h_optimizer",
+        "sys",
+        "tempfile",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 12507,
+      "lines": 329,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_constraint_validator.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestConstraintValidator",
+        "TestFeedbackIntegration",
+        "TestIntegrationEndToEnd"
+      ],
+      "functions": [],
+      "imports": [
+        "pathlib",
+        "phase_h_business_metrics",
+        "phase_h_constraint_validator",
+        "sqlite3",
+        "sys",
+        "tempfile",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 13576,
+      "lines": 389,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_day2_integration.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestMainRouting",
+        "TestOrchestratorMetrics",
+        "TestPerformanceRegression"
+      ],
+      "functions": [],
+      "imports": [
+        "pathlib",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 6896,
+      "lines": 206,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_day4_hardening.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestBackgroundThreads",
+        "TestDatabaseResilience",
+        "TestErrorHandling",
+        "TestMemoryStability",
+        "TestPerformanceUnderStress",
+        "TestResourceManagement"
+      ],
+      "functions": [],
+      "imports": [
+        "control_plane",
+        "pathlib",
+        "tempfile",
+        "threading",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 9814,
+      "lines": 315,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_executor.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestExecutionPerformance",
+        "TestOptimizationExecutor",
+        "TestSystemStateSnapshot"
+      ],
+      "functions": [],
+      "imports": [
+        "datetime",
+        "pathlib",
+        "phase_h_executor",
+        "sys",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 11158,
+      "lines": 335,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_feedback_collector.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestFeedbackCollector",
+        "TestFeedbackValidator",
+        "TestSignalIntegration"
+      ],
+      "functions": [],
+      "imports": [
+        "datetime",
+        "pathlib",
+        "phase_h_feedback_collector",
+        "sqlite3",
+        "sys",
+        "tempfile",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 13219,
+      "lines": 419,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_integration.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestDataIntegrity",
+        "TestEndToEndWorkflow"
+      ],
+      "functions": [],
+      "imports": [
+        "pathlib",
+        "phase_h_business_metrics",
+        "phase_h_business_optimizer",
+        "phase_h_constraint_validator",
+        "phase_h_feedback_collector",
+        "phase_h_optimizer",
+        "sqlite3",
+        "sys",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 16396,
+      "lines": 456,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_load.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestLoadPerformance",
+        "TestSystemStability"
+      ],
+      "functions": [],
+      "imports": [
+        "concurrent",
+        "datetime",
+        "pathlib",
+        "phase_h_autonomous_loop",
+        "phase_h_executor",
+        "phase_h_result_tracker",
+        "phase_h_rollback",
+        "sys",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 11000,
+      "lines": 325,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_metrics.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestMetricsCollector"
+      ],
+      "functions": [],
+      "imports": [
+        "pathlib",
+        "phase_h_metrics",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 7704,
+      "lines": 213,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_optimizer.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestCandidateQuality",
+        "TestOptimizerEngine",
+        "TestOptimizerPerformance"
+      ],
+      "functions": [],
+      "imports": [
+        "control_plane",
+        "json",
+        "pathlib",
+        "sqlite3",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 14748,
+      "lines": 435,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_pattern_learner.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestPatternAccuracy",
+        "TestPatternLearner",
+        "TestPatternPerformance"
+      ],
+      "functions": [],
+      "imports": [
+        "control_plane",
+        "datetime",
+        "pathlib",
+        "sqlite3",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 15094,
+      "lines": 432,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_result_tracker.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestImpactDelta",
+        "TestImpactValidation",
+        "TestResultTracker"
+      ],
+      "functions": [],
+      "imports": [
+        "datetime",
+        "json",
+        "pathlib",
+        "phase_h_result_tracker",
+        "sqlite3",
+        "sys",
+        "tempfile",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 9275,
+      "lines": 292,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_rollback.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestRollbackEdgeCases",
+        "TestRollbackSystem"
+      ],
+      "functions": [],
+      "imports": [
+        "datetime",
+        "json",
+        "pathlib",
+        "phase_h_rollback",
+        "sqlite3",
+        "sys",
+        "tempfile",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 10154,
+      "lines": 315,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_week1_final.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestAnomalyDetection",
+        "TestFullIntegration",
+        "TestLoadCapacity",
+        "TestProductionReadiness"
+      ],
+      "functions": [],
+      "imports": [
+        "control_plane",
+        "pathlib",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 10239,
+      "lines": 284,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_phase_h_week2_integration.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "TestFullPipeline",
+        "TestPipelineDataFlow",
+        "TestPipelineErrorHandling",
+        "TestPipelineWithLoad"
+      ],
+      "functions": [],
+      "imports": [
+        "control_plane",
+        "datetime",
+        "pathlib",
+        "phase_h_learning_dashboard",
+        "sqlite3",
+        "sys",
+        "tempfile",
+        "time",
+        "unittest"
+      ],
+      "module_version": null,
+      "size_bytes": 17436,
+      "lines": 497,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\test_runner_agent.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "PIVLoop",
+        "TestResult"
+      ],
+      "functions": [
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "asyncio",
+        "dataclasses",
+        "main",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 4876,
+      "lines": 150,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\worker.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [
+        "QueueTask"
+      ],
+      "functions": [
+        "_apply_output",
+        "_call_llm_raw",
+        "_dispatch",
+        "_dispatch_async",
+        "_enrich_directive",
+        "_exec_anthropic",
+        "_exec_colony",
+        "_exec_llm",
+        "_exec_ollama",
+        "_exec_shell",
+        "_get_redis_store",
+        "_git_commit",
+        "_hitl_prompt",
+        "_infer_output_path",
+        "_ledger_entry",
+        "_load_done",
+        "_log",
+        "_mark_done",
+        "_now",
+        "_ollama_model_for",
+        "_parse_code_blocks",
+        "_piv_fix",
+        "_piv_run",
+        "_probe_ollama",
+        "_queue_depth",
+        "_read_queue",
+        "_sentinel_gate",
+        "_validate_file",
+        "_write_response",
+        "main",
+        "run_once",
+        "run_once_parallel",
+        "run_watch"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "asyncio",
+        "dataclasses",
+        "datetime",
+        "json",
+        "os",
+        "pathlib",
+        "re",
+        "shutil",
+        "subprocess",
+        "sys",
+        "tempfile",
+        "time",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 51061,
+      "lines": 1328,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "control_plane\\worldtree_mcp_bridge.py",
+      "role": "control_plane",
+      "first_line": "# SPDX-License-Identifier: MIT",
+      "classes": [],
+      "functions": [
+        "handle_rpc_request",
+        "main"
+      ],
+      "imports": [
+        "json",
+        "logging",
+        "os",
+        "sys"
+      ],
+      "module_version": null,
+      "size_bytes": 2346,
+      "lines": 70,
+      "docstring_present": false,
+      "banner_present": false,
+      "has_sibling_docs": true
+    }
+  ],
+  "squire_modules": [
+    {
+      "path": "squires\\colony.py",
+      "role": "squire",
+      "first_line": "\"\"\"",
+      "classes": [],
+      "functions": [
+        "_console",
+        "_cron_scan_and_inject",
+        "_inject_forge_directives",
+        "_parse_schedule",
+        "_print",
+        "cmd_ghost",
+        "cmd_index",
+        "cmd_scan",
+        "cmd_status",
+        "cmd_triage",
+        "cmd_vector",
+        "main"
+      ],
+      "imports": [
+        "__future__",
+        "argparse",
+        "json",
+        "pathlib",
+        "sys",
+        "time"
+      ],
+      "module_version": null,
+      "size_bytes": 14940,
+      "lines": 407,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\ghost.py",
+      "role": "squire",
+      "first_line": "\"\"\"GHOST squire — air-gapped file triage. Finds secrets, TODOs, large files. Zero cloud.\"\"\"",
+      "classes": [
+        "GhostFlag",
+        "GhostReport"
+      ],
+      "functions": [
+        "_mask",
+        "triage"
+      ],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "re",
+        "scan",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 3599,
+      "lines": 110,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\index.py",
+      "role": "squire",
+      "first_line": "\"\"\"INDEX squire — builds symbol + file index from SCAN output.\"\"\"",
+      "classes": [
+        "ColonyIndex",
+        "SymbolEntry"
+      ],
+      "functions": [
+        "_kind_from_pattern",
+        "build_index"
+      ],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "json",
+        "pathlib",
+        "re",
+        "scan",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 3888,
+      "lines": 127,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\judge.py",
+      "role": "squire",
+      "first_line": "\"\"\"JUDGE squire — synthesizes SCAN/GHOST/SWEEP/INDEX results into a risk verdict.\"\"\"",
+      "classes": [
+        "Verdict"
+      ],
+      "functions": [
+        "_label",
+        "judge"
+      ],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 3640,
+      "lines": 107,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\mason.py",
+      "role": "squire",
+      "first_line": "\"\"\"MASON squire — report writer. Produces colony_report.md from all squire outputs.\"\"\"",
+      "classes": [],
+      "functions": [
+        "_ts",
+        "build_report"
+      ],
+      "imports": [
+        "__future__",
+        "datetime",
+        "pathlib",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 3976,
+      "lines": 127,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\scan.py",
+      "role": "squire",
+      "first_line": "\"\"\"SCAN squire — codebase walker. Emits file metadata for downstream squires.\"\"\"",
+      "classes": [
+        "FileRecord"
+      ],
+      "functions": [
+        "scan"
+      ],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "hashlib",
+        "os",
+        "pathlib",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 3069,
+      "lines": 95,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\sentinel.py",
+      "role": "squire",
+      "first_line": "\"\"\"SENTINEL squire — HITL gate. Blocks destructive operations pending human approval.\"\"\"",
+      "classes": [
+        "HITLBlocked"
+      ],
+      "functions": [
+        "_print_verdict",
+        "gate",
+        "soft_gate"
+      ],
+      "imports": [
+        "__future__",
+        "judge"
+      ],
+      "module_version": null,
+      "size_bytes": 1804,
+      "lines": 54,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\sweep.py",
+      "role": "squire",
+      "first_line": "\"\"\"SWEEP squire — dead code & orphan file detection.\"\"\"",
+      "classes": [
+        "OrphanFlag",
+        "SweepReport"
+      ],
+      "functions": [
+        "sweep"
+      ],
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "re",
+        "scan",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 3553,
+      "lines": 105,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    },
+    {
+      "path": "squires\\vector.py",
+      "role": "squire",
+      "first_line": "\"\"\"VECTOR squire — TF-IDF semantic search over indexed files. Zero ML deps.\"\"\"",
+      "classes": [
+        "TFIDFCorpus",
+        "VectorMatch"
+      ],
+      "functions": [
+        "_compute_tf",
+        "_extract_snippet",
+        "_tokenize",
+        "build_corpus"
+      ],
+      "imports": [
+        "__future__",
+        "collections",
+        "dataclasses",
+        "math",
+        "re",
+        "scan",
+        "typing"
+      ],
+      "module_version": null,
+      "size_bytes": 2725,
+      "lines": 87,
+      "docstring_present": true,
+      "banner_present": false,
+      "has_sibling_docs": true
+    }
+  ],
+  "runes": [],
+  "knights": [
+    {
+      "name": "Amara_Aura",
+      "role": "🎨 AMARA \"AURA\"",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Amara_Aura.md"
+    },
+    {
+      "name": "Anya_Omega",
+      "role": "🛡️ [KNIGHT_IDENTITY: ANYA OMEGA]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Anya_Omega.md"
+    },
+    {
+      "name": "Dame_Maya",
+      "role": "🎭 Dame_Maya",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Dame_Maya.md"
+    },
+    {
+      "name": "Lady_Guinevere",
+      "role": "🛡️ [KNIGHT_IDENTITY: LADY GUINEVERE]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Lady_Guinevere.md"
+    },
+    {
+      "name": "Lady_Sparkle",
+      "role": "🛡️ [KNIGHT_IDENTITY: LADY SPARKLE]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Lady_Sparkle.md"
+    },
+    {
+      "name": "Merlin_Omega",
+      "role": "🛡️ [KNIGHT_IDENTITY: MERLIN OMEGA]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Merlin_Omega.md"
+    },
+    {
+      "name": "Sir_Alchemist",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR ALCHEMIST]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Alchemist.md"
+    },
+    {
+      "name": "Sir_Alex",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR ALEX]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Alex.md"
+    },
+    {
+      "name": "Sir_Aurelius",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR AURELIUS]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Aurelius.md"
+    },
+    {
+      "name": "Sir_Boris",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR BORIS]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Boris.md"
+    },
+    {
+      "name": "Sir_Hermes",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR HERMES]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Hermes.md"
+    },
+    {
+      "name": "Sir_Liberte",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR LIBERTE]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Liberte.md"
+    },
+    {
+      "name": "Sir_Marcus",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR MARCUS]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Marcus.md"
+    },
+    {
+      "name": "Sir_Ouroboros",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR OUROBOROS]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Ouroboros.md"
+    },
+    {
+      "name": "Sir_Proxy",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR PROXY]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Proxy.md"
+    },
+    {
+      "name": "Sir_Scavenger",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR SCAVENGER]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Scavenger.md"
+    },
+    {
+      "name": "Sir_Sonus",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR SONUS]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Sonus.md"
+    },
+    {
+      "name": "Sir_Stitch",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR STITCH]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Stitch.md"
+    },
+    {
+      "name": "Sir_Vaelen",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR VAELEN]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Vaelen.md"
+    },
+    {
+      "name": "Sir_Visage",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR VISAGE]",
+      "surface": "Creative",
+      "path": "03_VAULT\\Knights\\Creative\\Sir_Visage.md"
+    },
+    {
+      "name": "Arthur_Omega",
+      "role": "🛡️ [KNIGHT_IDENTITY: ARTHUR OMEGA]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Arthur_Omega.md"
+    },
+    {
+      "name": "Lady_Apis",
+      "role": "🛡️ [KNIGHT_IDENTITY: LADY APIS]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Lady_Apis.md"
+    },
+    {
+      "name": "Sir_Alchemist",
+      "role": "🧪 Sir_Alchemist",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Alchemist.md"
+    },
+    {
+      "name": "Sir_Architect",
+      "role": "🛡️ Sir_Architect",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Architect.md"
+    },
+    {
+      "name": "Sir_Boris",
+      "role": "🔨 SIR BORIS",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Boris.md"
+    },
+    {
+      "name": "Sir_Codex",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR CODEX]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Codex.md"
+    },
+    {
+      "name": "Sir_Forge",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR FORGE]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Forge.md"
+    },
+    {
+      "name": "SIR_FORGE_MASTER",
+      "role": "⚙️ SIR_FORGE_MASTER",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\SIR_FORGE_MASTER.md"
+    },
+    {
+      "name": "Sir_ForgeMaster",
+      "role": "⚒️ KAI \"FORGE\" ZHANG",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_ForgeMaster.md"
+    },
+    {
+      "name": "Sir_Galahad",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR GALAHAD]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Galahad.md"
+    },
+    {
+      "name": "Sir_Gawain",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR GAWAIN]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Gawain.md"
+    },
+    {
+      "name": "Sir_Ghost",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR GHOST]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Ghost.md"
+    },
+    {
+      "name": "Sir_Hashimoto",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR HASHIMOTO]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Hashimoto.md"
+    },
+    {
+      "name": "Sir_Heimdall",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR HEIMDALL]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Heimdall.md"
+    },
+    {
+      "name": "Sir_Helios",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR HELIOS]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Helios.md"
+    },
+    {
+      "name": "Sir_Kay",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR KAY]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Kay.md"
+    },
+    {
+      "name": "Sir_Lancelot",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR LANCELOT]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Lancelot.md"
+    },
+    {
+      "name": "Sir_Mnemo",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR MNEMO]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Mnemo.md"
+    },
+    {
+      "name": "Sir_Nanobot",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR NANOBOT]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Nanobot.md"
+    },
+    {
+      "name": "Sir_Octavian",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR OCTAVIAN]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Octavian.md"
+    },
+    {
+      "name": "Sir_Openclaw",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR OPENCLAW]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Openclaw.md"
+    },
+    {
+      "name": "Sir_Rustclaw",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR RUSTCLAW]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Rustclaw.md"
+    },
+    {
+      "name": "Sir_Scribe",
+      "role": "🛡️ Sir_Scribe",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Scribe.md"
+    },
+    {
+      "name": "Sir_Sentinel",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR SENTINEL]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Sentinel.md"
+    },
+    {
+      "name": "Sir_SkillSmith",
+      "role": "⚒️ Sir_SkillSmith",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_SkillSmith.md"
+    },
+    {
+      "name": "Sir_Systéma",
+      "role": "🏛️ VALERIUS / SIR SYSTEMA",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Systéma.md"
+    },
+    {
+      "name": "Sir_Valerian",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR VALERIAN]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Valerian.md"
+    },
+    {
+      "name": "Sir_Veritas",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR VERITAS]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Veritas.md"
+    },
+    {
+      "name": "Sir_WebFarer",
+      "role": "🧭 Sir_WebFarer",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_WebFarer.md"
+    },
+    {
+      "name": "Sir_Zeroclaw",
+      "role": "🛡️ [KNIGHT_IDENTITY: SIR ZEROCLAW]",
+      "surface": "Engineering",
+      "path": "03_VAULT\\Knights\\Engineering\\Sir_Zeroclaw.md"
+    },
+    {
+      "name": "Sir_Sterling",
+      "role": "💰 Sir_Sterling",
+      "surface": "Finance",
+      "path": "03_VAULT\\Knights\\Finance\\Sir_Sterling.md"
+    },
+    {
+      "name": "Anya_Ω",
+      "role": "🎭 ANYA_Ω",
+      "surface": "Governance",
+      "path": "03_VAULT\\Knights\\Governance\\Anya_Ω.md"
+    },
+    {
+      "name": "Elder_Kaelen",
+      "role": "📜 Elder_Kaelen",
+      "surface": "Governance",
+      "path": "03_VAULT\\Knights\\Governance\\Elder_Kaelen.md"
+    },
+    {
+      "name": "Lady_Veritas",
+      "role": "⚖️ LADY VERITAS",
+      "surface": "Governance",
+      "path": "03_VAULT\\Knights\\Governance\\Lady_Veritas.md"
+    },
+    {
+      "name": "Sir_Arthur",
+      "role": "👑 ARTHUR_Omega",
+      "surface": "Governance",
+      "path": "03_VAULT\\Knights\\Governance\\Sir_Arthur.md"
+    },
+    {
+      "name": "Sir_Aurelius",
+      "role": "💰 SIR AURELIUS",
+      "surface": "Governance",
+      "path": "03_VAULT\\Knights\\Governance\\Sir_Aurelius.md"
+    },
+    {
+      "name": "Sir_Octavian",
+      "role": "👮 SIR OCTAVIAN",
+      "surface": "Governance",
+      "path": "03_VAULT\\Knights\\Governance\\Sir_Octavian.md"
+    },
+    {
+      "name": "Sir_Proxy_Knight",
+      "role": "🕵️ SIR PROXY KNIGHT",
+      "surface": "Governance",
+      "path": "03_VAULT\\Knights\\Governance\\Sir_Proxy_Knight.md"
+    },
+    {
+      "name": "Sir_Growth",
+      "role": "🚀 Sir_Growth",
+      "surface": "Growth",
+      "path": "03_VAULT\\Knights\\Growth\\Sir_Growth.md"
+    },
+    {
+      "name": "Lukas_Ω",
+      "role": "💻 LUKAS_Ω",
+      "surface": "Kinetic",
+      "path": "03_VAULT\\Knights\\Kinetic\\Lukas_Ω.md"
+    },
+    {
+      "name": "Sir_Myrmidon",
+      "role": "📦 SIR MYRMIDON",
+      "surface": "Memory",
+      "path": "03_VAULT\\Knights\\Memory\\Sir_Myrmidon.md"
+    },
+    {
+      "name": "Sir_Octavian",
+      "role": "🕵️ Sir_Octavian",
+      "surface": "Memory",
+      "path": "03_VAULT\\Knights\\Memory\\Sir_Octavian.md"
+    },
+    {
+      "name": "Sir_Chrome_Warden",
+      "role": "🌐 Sir_Chrome_Warden",
+      "surface": "Monitoring",
+      "path": "03_VAULT\\Knights\\Monitoring\\Sir_Chrome_Warden.md"
+    },
+    {
+      "name": "Sir_Kronos",
+      "role": "📊 Sir_Kronos",
+      "surface": "Monitoring",
+      "path": "03_VAULT\\Knights\\Monitoring\\Sir_Kronos.md"
+    },
+    {
+      "name": "Sir_Aurora",
+      "role": "👁️ Sir_Aurora",
+      "surface": "Perception",
+      "path": "03_VAULT\\Knights\\Perception\\Sir_Aurora.md"
+    },
+    {
+      "name": "alpha_omega_phial",
+      "role": "🧪 Phial Engine Specification: ALPHA_OMEGA",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\alpha_omega_phial.md"
+    },
+    {
+      "name": "antigravity_phial",
+      "role": "🧪 Phial Engine Specification: ANTIGRAVITY",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\antigravity_phial.md"
+    },
+    {
+      "name": "anya_omega_phial",
+      "role": "🧪 Phial Engine Specification: ANYA_OMEGA",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\anya_omega_phial.md"
+    },
+    {
+      "name": "anya_quantum_mantra_phial",
+      "role": "🧪 Phial Engine Specification: ANYA_QUANTUM_MANTRA",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\anya_quantum_mantra_phial.md"
+    },
+    {
+      "name": "arthur_omega_phial",
+      "role": "🧪 Phial Engine Specification: ARTHUR_OMEGA",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\arthur_omega_phial.md"
+    },
+    {
+      "name": "bifrost_phial",
+      "role": "🧪 Phial Engine Specification: BIFROST",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\bifrost_phial.md"
+    },
+    {
+      "name": "bio_kinetic_swarm_phial",
+      "role": "🧪 Phial Engine Specification: BIO_KINETIC_SWARM",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\bio_kinetic_swarm_phial.md"
+    },
+    {
+      "name": "camelot_v1000_phial",
+      "role": "🧪 Phial Engine Specification: CAMELOT_V1000",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\camelot_v1000_phial.md"
+    },
+    {
+      "name": "father_camelot_phial",
+      "role": "🧪 Phial Engine Specification: FATHER_CAMELOT",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\father_camelot_phial.md"
+    },
+    {
+      "name": "hermes_agent_evolution_phial",
+      "role": "🧪 Phial Engine Specification: HERMES_AGENT_EVOLUTION",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\hermes_agent_evolution_phial.md"
+    },
+    {
+      "name": "hermes_prime_phial",
+      "role": "🧪 Phial Engine Specification: HERMES_PRIME",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\hermes_prime_phial.md"
+    },
+    {
+      "name": "inspira_phial",
+      "role": "🧪 Phial Engine Specification: INSPIRA",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\inspira_phial.md"
+    },
+    {
+      "name": "invisioned_marketing_phial",
+      "role": "🧪 Phial Engine Specification: INVISIONED_MARKETING",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\invisioned_marketing_phial.md"
+    },
+    {
+      "name": "kickbox_phial",
+      "role": "🧪 Phial Engine Specification: KICKBOX",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\kickbox_phial.md"
+    },
+    {
+      "name": "knight_strategos_phial",
+      "role": "🧪 Phial Engine Specification: KNIGHT_STRATEGOS",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\knight_strategos_phial.md"
+    },
+    {
+      "name": "lady_apis_phial",
+      "role": "🧪 Phial Engine Specification: LADY_APIS",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\lady_apis_phial.md"
+    },
+    {
+      "name": "lady_guinevere_phial",
+      "role": "🧪 Phial Engine Specification: LADY_GUINEVERE",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\lady_guinevere_phial.md"
+    },
+    {
+      "name": "lady_mnemosyne_phial",
+      "role": "🧪 Phial Engine Specification: LADY_MNEMOSYNE",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\lady_mnemosyne_phial.md"
+    },
+    {
+      "name": "merlin_omega_phial",
+      "role": "🧪 Phial Engine Specification: MERLIN_OMEGA",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\merlin_omega_phial.md"
+    },
+    {
+      "name": "sir_alchemist_phial",
+      "role": "🧪 Phial Engine Specification: SIR_ALCHEMIST",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_alchemist_phial.md"
+    },
+    {
+      "name": "sir_alex_phial",
+      "role": "🧪 Phial Engine Specification: SIR_ALEX",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_alex_phial.md"
+    },
+    {
+      "name": "sir_boris_phial",
+      "role": "🧪 Phial Engine Specification: SIR_BORIS",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_boris_phial.md"
+    },
+    {
+      "name": "sir_codex_phial",
+      "role": "🧪 Phial Engine Specification: SIR_CODEX",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_codex_phial.md"
+    },
+    {
+      "name": "sir_debug_phial",
+      "role": "🧪 Phial Engine Specification: SIR_DEBUG",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_debug_phial.md"
+    },
+    {
+      "name": "sir_forge_phial",
+      "role": "🧪 Phial Engine Specification: SIR_FORGE",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_forge_phial.md"
+    },
+    {
+      "name": "sir_galahad_phial",
+      "role": "🧪 Phial Engine Specification: SIR_GALAHAD",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_galahad_phial.md"
+    },
+    {
+      "name": "sir_ghost_phial",
+      "role": "🧪 Phial Engine Specification: SIR_GHOST",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_ghost_phial.md"
+    },
+    {
+      "name": "sir_heimdall_phial",
+      "role": "🧪 Phial Engine Specification: SIR_HEIMDALL",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_heimdall_phial.md"
+    },
+    {
+      "name": "sir_helio_phial",
+      "role": "🧪 Phial Engine Specification: SIR_HELIO",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_helio_phial.md"
+    },
+    {
+      "name": "sir_hermes_phial",
+      "role": "🧪 Phial Engine Specification: SIR_HERMES",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_hermes_phial.md"
+    },
+    {
+      "name": "sir_huggingface_phial",
+      "role": "🧪 Phial Engine Specification: SIR_HUGGINGFACE",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_huggingface_phial.md"
+    },
+    {
+      "name": "sir_kay_phial",
+      "role": "🧪 Phial Engine Specification: SIR_KAY",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_kay_phial.md"
+    },
+    {
+      "name": "sir_lancelot_phial",
+      "role": "🧪 Phial Engine Specification: SIR_LANCELOT",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_lancelot_phial.md"
+    },
+    {
+      "name": "sir_mnemo_phial",
+      "role": "🧪 Phial Engine Specification: SIR_MNEMO",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_mnemo_phial.md"
+    },
+    {
+      "name": "sir_rustclaw_phial",
+      "role": "🧪 Phial Engine Specification: SIR_RUSTCLAW",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_rustclaw_phial.md"
+    },
+    {
+      "name": "sir_sentinel_phial",
+      "role": "🧪 Phial Engine Specification: SIR_SENTINEL",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_sentinel_phial.md"
+    },
+    {
+      "name": "sir_sonus_phial",
+      "role": "🧪 Phial Engine Specification: SIR_SONUS",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_sonus_phial.md"
+    },
+    {
+      "name": "sir_stitch_phial",
+      "role": "🧪 Phial Engine Specification: SIR_STITCH",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\sir_stitch_phial.md"
+    },
+    {
+      "name": "world_tree_phial",
+      "role": "🧪 Phial Engine Specification: WORLD_TREE",
+      "surface": "phials",
+      "path": "03_VAULT\\Knights\\phials\\world_tree_phial.md"
+    },
+    {
+      "name": "Merlin_Ω",
+      "role": "🧙‍♂️ MERLIN_Ω",
+      "surface": "Reasoning",
+      "path": "03_VAULT\\Knights\\Reasoning\\Merlin_Ω.md"
+    },
+    {
+      "name": "Sir_Aris",
+      "role": "🛡️ Sir_Aris",
+      "surface": "Reasoning",
+      "path": "03_VAULT\\Knights\\Reasoning\\Sir_Aris.md"
+    },
+    {
+      "name": "Sir_Vega",
+      "role": "🛡️ Sir_Vega",
+      "surface": "Reasoning",
+      "path": "03_VAULT\\Knights\\Reasoning\\Sir_Vega.md"
+    },
+    {
+      "name": "Lady_Apis",
+      "role": "🐜 LADY APIS",
+      "surface": "Research",
+      "path": "03_VAULT\\Knights\\Research\\Lady_Apis.md"
+    },
+    {
+      "name": "Sir_Helio",
+      "role": "[CHARACTER_SHEET: SIR_HELIO // CLOUD_BRAIN_ARCHIVIST]",
+      "surface": "Research",
+      "path": "03_VAULT\\Knights\\Research\\Sir_Helio.md"
+    },
+    {
+      "name": "Sir_Castor",
+      "role": "🦫 Sir_Castor",
+      "surface": "Security",
+      "path": "03_VAULT\\Knights\\Security\\Sir_Castor.md"
+    },
+    {
+      "name": "Sir_Sentinel_Ω",
+      "role": "🛡️ IVAN \"SENTINEL\" PETROV",
+      "surface": "Security",
+      "path": "03_VAULT\\Knights\\Security\\Sir_Sentinel_Ω.md"
+    },
+    {
+      "name": "tasks",
+      "role": "sir_forge Task Queue",
+      "surface": "sir_forge",
+      "path": "03_VAULT\\Knights\\sir_forge\\tasks.md"
+    },
+    {
+      "name": "verification",
+      "role": "sir_forge Verification Results",
+      "surface": "sir_forge",
+      "path": "03_VAULT\\Knights\\sir_forge\\verification.md"
+    },
+    {
+      "name": "tasks",
+      "role": "sir_openclaw Task Queue",
+      "surface": "sir_openclaw",
+      "path": "03_VAULT\\Knights\\sir_openclaw\\tasks.md"
+    },
+    {
+      "name": "verification",
+      "role": "sir_openclaw Verification Results",
+      "surface": "sir_openclaw",
+      "path": "03_VAULT\\Knights\\sir_openclaw\\verification.md"
+    },
+    {
+      "name": "tasks",
+      "role": "sir_sentinel Task Queue",
+      "surface": "sir_sentinel",
+      "path": "03_VAULT\\Knights\\sir_sentinel\\tasks.md"
+    },
+    {
+      "name": "verification",
+      "role": "sir_sentinel Verification Results",
+      "surface": "sir_sentinel",
+      "path": "03_VAULT\\Knights\\sir_sentinel\\verification.md"
+    },
+    {
+      "name": "alchemist_soul",
+      "role": "[SOUL: Sir Alchemist]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\alchemist_soul.md"
+    },
+    {
+      "name": "alex_soul",
+      "role": "[SOUL: Sir Alex]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\alex_soul.md"
+    },
+    {
+      "name": "alpha_omega_soul",
+      "role": "⚔️ Soul Matrix: ALPHA_OMEGA",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\alpha_omega_soul.md"
+    },
+    {
+      "name": "antigravity_soul",
+      "role": "⚔️ Soul Matrix: ANTIGRAVITY",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\antigravity_soul.md"
+    },
+    {
+      "name": "anya_omega_soul",
+      "role": "⚔️ Soul Matrix: ANYA_OMEGA",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\anya_omega_soul.md"
+    },
+    {
+      "name": "anya_quantum_mantra_soul",
+      "role": "⚔️ Soul Matrix: ANYA_QUANTUM_MANTRA",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\anya_quantum_mantra_soul.md"
+    },
+    {
+      "name": "anya_soul",
+      "role": "[SOUL: Anya Omega]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\anya_soul.md"
+    },
+    {
+      "name": "apis_soul",
+      "role": "[SOUL: Lady Apis]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\apis_soul.md"
+    },
+    {
+      "name": "arthur_omega_soul",
+      "role": "⚔️ Soul Matrix: ARTHUR_OMEGA",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\arthur_omega_soul.md"
+    },
+    {
+      "name": "arthur_soul",
+      "role": "[SOUL: Arthur Omega]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\arthur_soul.md"
+    },
+    {
+      "name": "aurelius_soul",
+      "role": "[SOUL: Sir Aurelius]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\aurelius_soul.md"
+    },
+    {
+      "name": "bifrost_soul",
+      "role": "⚔️ Soul Matrix: BIFROST",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\bifrost_soul.md"
+    },
+    {
+      "name": "bio_kinetic_swarm_soul",
+      "role": "⚔️ Soul Matrix: BIO_KINETIC_SWARM",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\bio_kinetic_swarm_soul.md"
+    },
+    {
+      "name": "boris_soul",
+      "role": "[SOUL: Sir Boris]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\boris_soul.md"
+    },
+    {
+      "name": "camelot_master_soul",
+      "role": "⚔️ Soul of CAMELOT_MASTER",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\camelot_master_soul.md"
+    },
+    {
+      "name": "camelot_v1000_soul",
+      "role": "⚔️ Soul Matrix: CAMELOT_V1000",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\camelot_v1000_soul.md"
+    },
+    {
+      "name": "codex_soul",
+      "role": "[SOUL: Sir Codex]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\codex_soul.md"
+    },
+    {
+      "name": "father_camelot_soul",
+      "role": "⚔️ Soul Matrix: FATHER_CAMELOT",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\father_camelot_soul.md"
+    },
+    {
+      "name": "forge_soul",
+      "role": "[SOUL: Sir Forge]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\forge_soul.md"
+    },
+    {
+      "name": "galahad_soul",
+      "role": "[SOUL: Sir Galahad]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\galahad_soul.md"
+    },
+    {
+      "name": "ghost_soul",
+      "role": "[SOUL: Sir Ghost]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\ghost_soul.md"
+    },
+    {
+      "name": "hashimoto_soul",
+      "role": "[SOUL: Sir Hashimoto]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\hashimoto_soul.md"
+    },
+    {
+      "name": "heimdall_soul",
+      "role": "[SOUL: Sir Heimdall]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\heimdall_soul.md"
+    },
+    {
+      "name": "helios_soul",
+      "role": "[SOUL: Sir Helios]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\helios_soul.md"
+    },
+    {
+      "name": "hermes_agent_evolution_soul",
+      "role": "⚔️ Soul Matrix: HERMES_AGENT_EVOLUTION",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\hermes_agent_evolution_soul.md"
+    },
+    {
+      "name": "hermes_prime_soul",
+      "role": "⚔️ Soul Matrix: HERMES_PRIME",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\hermes_prime_soul.md"
+    },
+    {
+      "name": "hermes_prime_vfs_forge_soul",
+      "role": "⚔️ Soul of HERMES_PRIME_VFS_FORGE",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\hermes_prime_vfs_forge_soul.md"
+    },
+    {
+      "name": "hermes_soul",
+      "role": "[SOUL: Sir Hermes]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\hermes_soul.md"
+    },
+    {
+      "name": "inspira_soul",
+      "role": "⚔️ Soul Matrix: INSPIRA",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\inspira_soul.md"
+    },
+    {
+      "name": "invisioned_marketing_soul",
+      "role": "⚔️ Soul Matrix: INVISIONED_MARKETING",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\invisioned_marketing_soul.md"
+    },
+    {
+      "name": "kickbox_soul",
+      "role": "⚔️ Soul Matrix: KICKBOX",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\kickbox_soul.md"
+    },
+    {
+      "name": "knight_strategos_soul",
+      "role": "⚔️ Soul Matrix: KNIGHT_STRATEGOS",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\knight_strategos_soul.md"
+    },
+    {
+      "name": "lady_apis_soul",
+      "role": "⚔️ Soul Matrix: LADY_APIS",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\lady_apis_soul.md"
+    },
+    {
+      "name": "lady_guinevere_soul",
+      "role": "⚔️ Soul Matrix: LADY_GUINEVERE",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\lady_guinevere_soul.md"
+    },
+    {
+      "name": "lady_mnemosyne_soul",
+      "role": "⚔️ Soul Matrix: LADY_MNEMOSYNE",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\lady_mnemosyne_soul.md"
+    },
+    {
+      "name": "lancelot_soul",
+      "role": "[SOUL: Sir Lancelot]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\lancelot_soul.md"
+    },
+    {
+      "name": "liberte_soul",
+      "role": "[SOUL: Sir Liberte]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\liberte_soul.md"
+    },
+    {
+      "name": "merlin_omega_soul",
+      "role": "⚔️ Soul Matrix: MERLIN_OMEGA",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\merlin_omega_soul.md"
+    },
+    {
+      "name": "merlin_soul",
+      "role": "[SOUL: Merlin Omega]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\merlin_soul.md"
+    },
+    {
+      "name": "mnemo_soul",
+      "role": "[SOUL: Sir Mnemo]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\mnemo_soul.md"
+    },
+    {
+      "name": "nanobot_soul",
+      "role": "[SOUL: Sir Nanobot]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\nanobot_soul.md"
+    },
+    {
+      "name": "octavian_soul",
+      "role": "[SOUL: Sir Octavian]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\octavian_soul.md"
+    },
+    {
+      "name": "openclaw_soul",
+      "role": "[SOUL: Sir Openclaw]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\openclaw_soul.md"
+    },
+    {
+      "name": "ouroboros_soul",
+      "role": "[SOUL: Sir Ouroboros]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\ouroboros_soul.md"
+    },
+    {
+      "name": "proxy_soul",
+      "role": "[SOUL: Sir Proxy]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\proxy_soul.md"
+    },
+    {
+      "name": "rustclaw_soul",
+      "role": "[SOUL: Sir Rustclaw]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\rustclaw_soul.md"
+    },
+    {
+      "name": "scavenger_soul",
+      "role": "[SOUL: Sir Scavenger]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\scavenger_soul.md"
+    },
+    {
+      "name": "sentinel_soul",
+      "role": "[SOUL: Sir Sentinel]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sentinel_soul.md"
+    },
+    {
+      "name": "sir_alchemist_soul",
+      "role": "⚔️ Soul Matrix: SIR_ALCHEMIST",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_alchemist_soul.md"
+    },
+    {
+      "name": "sir_alex_soul",
+      "role": "⚔️ Soul Matrix: SIR_ALEX",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_alex_soul.md"
+    },
+    {
+      "name": "sir_boris_soul",
+      "role": "⚔️ Soul Matrix: SIR_BORIS",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_boris_soul.md"
+    },
+    {
+      "name": "sir_codex_soul",
+      "role": "⚔️ Soul Matrix: SIR_CODEX",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_codex_soul.md"
+    },
+    {
+      "name": "sir_darwin_mac_soul",
+      "role": "⚔️ Soul of SIR_DARWIN_MAC",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_darwin_mac_soul.md"
+    },
+    {
+      "name": "sir_debug_soul",
+      "role": "⚔️ Soul Matrix: SIR_DEBUG",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_debug_soul.md"
+    },
+    {
+      "name": "sir_forge_soul",
+      "role": "⚔️ Soul Matrix: SIR_FORGE",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_forge_soul.md"
+    },
+    {
+      "name": "sir_galahad_soul",
+      "role": "⚔️ Soul Matrix: SIR_GALAHAD",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_galahad_soul.md"
+    },
+    {
+      "name": "sir_gawain_soul",
+      "role": "[SOUL: Sir Gawain]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_gawain_soul.md"
+    },
+    {
+      "name": "sir_ghost_soul",
+      "role": "⚔️ Soul Matrix: SIR_GHOST",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_ghost_soul.md"
+    },
+    {
+      "name": "sir_gideon_soul",
+      "role": "⚔️ Soul of SIR_GIDEON",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_gideon_soul.md"
+    },
+    {
+      "name": "sir_heimdall_soul",
+      "role": "⚔️ Soul Matrix: SIR_HEIMDALL",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_heimdall_soul.md"
+    },
+    {
+      "name": "sir_helio_soul",
+      "role": "⚔️ Soul Matrix: SIR_HELIO",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_helio_soul.md"
+    },
+    {
+      "name": "sir_hermes_soul",
+      "role": "⚔️ Soul Matrix: SIR_HERMES",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_hermes_soul.md"
+    },
+    {
+      "name": "sir_huggingface_soul",
+      "role": "⚔️ Soul Matrix: SIR_HUGGINGFACE",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_huggingface_soul.md"
+    },
+    {
+      "name": "sir_kay_soul",
+      "role": "[SOUL: Sir Kay]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_kay_soul.md"
+    },
+    {
+      "name": "sir_lancelot_soul",
+      "role": "⚔️ Soul Matrix: SIR_LANCELOT",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_lancelot_soul.md"
+    },
+    {
+      "name": "sir_marcus_soul",
+      "role": "[SOUL: Sir Marcus]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_marcus_soul.md"
+    },
+    {
+      "name": "sir_mnemo_soul",
+      "role": "⚔️ Soul Matrix: SIR_MNEMO",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_mnemo_soul.md"
+    },
+    {
+      "name": "sir_rustclaw_soul",
+      "role": "⚔️ Soul Matrix: SIR_RUSTCLAW",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_rustclaw_soul.md"
+    },
+    {
+      "name": "sir_sentinel_soul",
+      "role": "⚔️ Soul Matrix: SIR_SENTINEL",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_sentinel_soul.md"
+    },
+    {
+      "name": "sir_sonus_soul",
+      "role": "⚔️ Soul Matrix: SIR_SONUS",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_sonus_soul.md"
+    },
+    {
+      "name": "sir_stitch_soul",
+      "role": "⚔️ Soul Matrix: SIR_STITCH",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sir_stitch_soul.md"
+    },
+    {
+      "name": "sonus_soul",
+      "role": "[SOUL: Sir Sonus]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sonus_soul.md"
+    },
+    {
+      "name": "sparkle_soul",
+      "role": "[SOUL: Lady Sparkle]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\sparkle_soul.md"
+    },
+    {
+      "name": "stitch_soul",
+      "role": "[SOUL: Sir Stitch]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\stitch_soul.md"
+    },
+    {
+      "name": "vaelen_soul",
+      "role": "[SOUL: Sir Vaelen]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\vaelen_soul.md"
+    },
+    {
+      "name": "valerian_soul",
+      "role": "[SOUL: Sir Valerian]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\valerian_soul.md"
+    },
+    {
+      "name": "veritas_soul",
+      "role": "[SOUL: Sir Veritas]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\veritas_soul.md"
+    },
+    {
+      "name": "visage_soul",
+      "role": "[SOUL: Sir Visage]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\visage_soul.md"
+    },
+    {
+      "name": "world_tree_soul",
+      "role": "⚔️ Soul Matrix: WORLD_TREE",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\world_tree_soul.md"
+    },
+    {
+      "name": "zeroclaw_soul",
+      "role": "[SOUL: Sir Zeroclaw]",
+      "surface": "souls",
+      "path": "03_VAULT\\Knights\\souls\\zeroclaw_soul.md"
+    },
+    {
+      "name": "alchemist_spark",
+      "role": "[SPARK: Sir Alchemist]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\alchemist_spark.md"
+    },
+    {
+      "name": "alex_spark",
+      "role": "[SPARK: Sir Alex]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\alex_spark.md"
+    },
+    {
+      "name": "alpha_omega_spark",
+      "role": "⚡ Spark Matrix: ALPHA_OMEGA",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\alpha_omega_spark.md"
+    },
+    {
+      "name": "antigravity_spark",
+      "role": "⚡ Spark Matrix: ANTIGRAVITY",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\antigravity_spark.md"
+    },
+    {
+      "name": "anya_omega_spark",
+      "role": "⚡ Spark Matrix: ANYA_OMEGA",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\anya_omega_spark.md"
+    },
+    {
+      "name": "anya_quantum_mantra_spark",
+      "role": "⚡ Spark Matrix: ANYA_QUANTUM_MANTRA",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\anya_quantum_mantra_spark.md"
+    },
+    {
+      "name": "anya_spark",
+      "role": "[SPARK: Anya Omega]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\anya_spark.md"
+    },
+    {
+      "name": "apis_spark",
+      "role": "[SPARK: Lady Apis]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\apis_spark.md"
+    },
+    {
+      "name": "arthur_omega_spark",
+      "role": "⚡ Spark Matrix: ARTHUR_OMEGA",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\arthur_omega_spark.md"
+    },
+    {
+      "name": "arthur_spark",
+      "role": "[SPARK: Arthur Omega]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\arthur_spark.md"
+    },
+    {
+      "name": "aurelius_spark",
+      "role": "[SPARK: Sir Aurelius]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\aurelius_spark.md"
+    },
+    {
+      "name": "bifrost_spark",
+      "role": "⚡ Spark Matrix: BIFROST",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\bifrost_spark.md"
+    },
+    {
+      "name": "bio_kinetic_swarm_spark",
+      "role": "⚡ Spark Matrix: BIO_KINETIC_SWARM",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\bio_kinetic_swarm_spark.md"
+    },
+    {
+      "name": "boris_spark",
+      "role": "[SPARK: Sir Boris]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\boris_spark.md"
+    },
+    {
+      "name": "camelot_master_spark",
+      "role": "⚡ Spark Matrix: CAMELOT_MASTER",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\camelot_master_spark.md"
+    },
+    {
+      "name": "camelot_v1000_spark",
+      "role": "⚡ Spark Matrix: CAMELOT_V1000",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\camelot_v1000_spark.md"
+    },
+    {
+      "name": "codex_spark",
+      "role": "[SPARK: Sir Codex]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\codex_spark.md"
+    },
+    {
+      "name": "father_camelot_spark",
+      "role": "⚡ Spark Matrix: FATHER_CAMELOT",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\father_camelot_spark.md"
+    },
+    {
+      "name": "forge_spark",
+      "role": "[SPARK: Sir Forge]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\forge_spark.md"
+    },
+    {
+      "name": "galahad_spark",
+      "role": "[SPARK: Sir Galahad]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\galahad_spark.md"
+    },
+    {
+      "name": "ghost_spark",
+      "role": "[SPARK: Sir Ghost]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\ghost_spark.md"
+    },
+    {
+      "name": "hashimoto_spark",
+      "role": "[SPARK: Sir Hashimoto]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\hashimoto_spark.md"
+    },
+    {
+      "name": "heimdall_spark",
+      "role": "[SPARK: Sir Heimdall]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\heimdall_spark.md"
+    },
+    {
+      "name": "helios_spark",
+      "role": "[SPARK: Sir Helios]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\helios_spark.md"
+    },
+    {
+      "name": "hermes_agent_evolution_spark",
+      "role": "⚡ Spark Matrix: HERMES_AGENT_EVOLUTION",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\hermes_agent_evolution_spark.md"
+    },
+    {
+      "name": "hermes_prime_spark",
+      "role": "⚡ Spark Matrix: HERMES_PRIME",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\hermes_prime_spark.md"
+    },
+    {
+      "name": "hermes_prime_vfs_forge_spark",
+      "role": "⚡ Spark Matrix: HERMES_PRIME_VFS_FORGE",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\hermes_prime_vfs_forge_spark.md"
+    },
+    {
+      "name": "hermes_spark",
+      "role": "[SPARK: Sir Hermes]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\hermes_spark.md"
+    },
+    {
+      "name": "inspira_spark",
+      "role": "⚡ Spark Matrix: INSPIRA",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\inspira_spark.md"
+    },
+    {
+      "name": "invisioned_marketing_spark",
+      "role": "⚡ Spark Matrix: INVISIONED_MARKETING",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\invisioned_marketing_spark.md"
+    },
+    {
+      "name": "kickbox_spark",
+      "role": "⚡ Spark Matrix: KICKBOX",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\kickbox_spark.md"
+    },
+    {
+      "name": "knight_strategos_spark",
+      "role": "⚡ Spark Matrix: KNIGHT_STRATEGOS",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\knight_strategos_spark.md"
+    },
+    {
+      "name": "lady_apis_spark",
+      "role": "⚡ Spark Matrix: LADY_APIS",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\lady_apis_spark.md"
+    },
+    {
+      "name": "lady_guinevere_spark",
+      "role": "⚡ Spark Matrix: LADY_GUINEVERE",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\lady_guinevere_spark.md"
+    },
+    {
+      "name": "lady_mnemosyne_spark",
+      "role": "⚡ Spark Matrix: LADY_MNEMOSYNE",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\lady_mnemosyne_spark.md"
+    },
+    {
+      "name": "lancelot_spark",
+      "role": "[SPARK: Sir Lancelot]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\lancelot_spark.md"
+    },
+    {
+      "name": "liberte_spark",
+      "role": "[SPARK: Sir Liberte]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\liberte_spark.md"
+    },
+    {
+      "name": "merlin_omega_spark",
+      "role": "⚡ Spark Matrix: MERLIN_OMEGA",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\merlin_omega_spark.md"
+    },
+    {
+      "name": "merlin_spark",
+      "role": "[SPARK: Merlin Omega]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\merlin_spark.md"
+    },
+    {
+      "name": "mnemo_spark",
+      "role": "[SPARK: Sir Mnemo]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\mnemo_spark.md"
+    },
+    {
+      "name": "nanobot_spark",
+      "role": "[SPARK: Sir Nanobot]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\nanobot_spark.md"
+    },
+    {
+      "name": "octavian_spark",
+      "role": "[SPARK: Sir Octavian]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\octavian_spark.md"
+    },
+    {
+      "name": "openclaw_spark",
+      "role": "[SPARK: Sir Openclaw]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\openclaw_spark.md"
+    },
+    {
+      "name": "ouroboros_spark",
+      "role": "[SPARK: Sir Ouroboros]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\ouroboros_spark.md"
+    },
+    {
+      "name": "proxy_spark",
+      "role": "[SPARK: Sir Proxy]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\proxy_spark.md"
+    },
+    {
+      "name": "rustclaw_spark",
+      "role": "[SPARK: Sir Rustclaw]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\rustclaw_spark.md"
+    },
+    {
+      "name": "scavenger_spark",
+      "role": "[SPARK: Sir Scavenger]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\scavenger_spark.md"
+    },
+    {
+      "name": "sentinel_spark",
+      "role": "[SPARK: Sir Sentinel]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sentinel_spark.md"
+    },
+    {
+      "name": "sir_alchemist_spark",
+      "role": "⚡ Spark Matrix: SIR_ALCHEMIST",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_alchemist_spark.md"
+    },
+    {
+      "name": "sir_alex_spark",
+      "role": "⚡ Spark Matrix: SIR_ALEX",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_alex_spark.md"
+    },
+    {
+      "name": "sir_boris_spark",
+      "role": "⚡ Spark Matrix: SIR_BORIS",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_boris_spark.md"
+    },
+    {
+      "name": "sir_codex_spark",
+      "role": "⚡ Spark Matrix: SIR_CODEX",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_codex_spark.md"
+    },
+    {
+      "name": "sir_darwin_mac_spark",
+      "role": "⚡ Spark Matrix: SIR_DARWIN_MAC",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_darwin_mac_spark.md"
+    },
+    {
+      "name": "sir_debug_spark",
+      "role": "⚡ Spark Matrix: SIR_DEBUG",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_debug_spark.md"
+    },
+    {
+      "name": "sir_forge_spark",
+      "role": "⚡ Spark Matrix: SIR_FORGE",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_forge_spark.md"
+    },
+    {
+      "name": "sir_galahad_spark",
+      "role": "⚡ Spark Matrix: SIR_GALAHAD",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_galahad_spark.md"
+    },
+    {
+      "name": "sir_gawain_spark",
+      "role": "[SPARK: Sir Gawain]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_gawain_spark.md"
+    },
+    {
+      "name": "sir_ghost_spark",
+      "role": "⚡ Spark Matrix: SIR_GHOST",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_ghost_spark.md"
+    },
+    {
+      "name": "sir_gideon_spark",
+      "role": "⚡ Spark Matrix: SIR_GIDEON",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_gideon_spark.md"
+    },
+    {
+      "name": "sir_heimdall_spark",
+      "role": "⚡ Spark Matrix: SIR_HEIMDALL",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_heimdall_spark.md"
+    },
+    {
+      "name": "sir_helio_spark",
+      "role": "⚡ Spark Matrix: SIR_HELIO",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_helio_spark.md"
+    },
+    {
+      "name": "sir_hermes_spark",
+      "role": "⚡ Spark Matrix: SIR_HERMES",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_hermes_spark.md"
+    },
+    {
+      "name": "sir_huggingface_spark",
+      "role": "⚡ Spark Matrix: SIR_HUGGINGFACE",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_huggingface_spark.md"
+    },
+    {
+      "name": "sir_kay_spark",
+      "role": "[SPARK: Sir Kay]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_kay_spark.md"
+    },
+    {
+      "name": "sir_lancelot_spark",
+      "role": "⚡ Spark Matrix: SIR_LANCELOT",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_lancelot_spark.md"
+    },
+    {
+      "name": "sir_marcus_spark",
+      "role": "[SPARK: Sir Marcus]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_marcus_spark.md"
+    },
+    {
+      "name": "sir_mnemo_spark",
+      "role": "⚡ Spark Matrix: SIR_MNEMO",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_mnemo_spark.md"
+    },
+    {
+      "name": "sir_rustclaw_spark",
+      "role": "⚡ Spark Matrix: SIR_RUSTCLAW",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_rustclaw_spark.md"
+    },
+    {
+      "name": "sir_sentinel_spark",
+      "role": "⚡ Spark Matrix: SIR_SENTINEL",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_sentinel_spark.md"
+    },
+    {
+      "name": "sir_sonus_spark",
+      "role": "⚡ Spark Matrix: SIR_SONUS",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_sonus_spark.md"
+    },
+    {
+      "name": "sir_stitch_spark",
+      "role": "⚡ Spark Matrix: SIR_STITCH",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sir_stitch_spark.md"
+    },
+    {
+      "name": "sonus_spark",
+      "role": "[SPARK: Sir Sonus]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sonus_spark.md"
+    },
+    {
+      "name": "sparkle_spark",
+      "role": "[SPARK: Lady Sparkle]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\sparkle_spark.md"
+    },
+    {
+      "name": "stitch_spark",
+      "role": "[SPARK: Sir Stitch]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\stitch_spark.md"
+    },
+    {
+      "name": "vaelen_spark",
+      "role": "[SPARK: Sir Vaelen]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\vaelen_spark.md"
+    },
+    {
+      "name": "valerian_spark",
+      "role": "[SPARK: Sir Valerian]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\valerian_spark.md"
+    },
+    {
+      "name": "veritas_spark",
+      "role": "[SPARK: Sir Veritas]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\veritas_spark.md"
+    },
+    {
+      "name": "visage_spark",
+      "role": "[SPARK: Sir Visage]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\visage_spark.md"
+    },
+    {
+      "name": "world_tree_spark",
+      "role": "⚡ Spark Matrix: WORLD_TREE",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\world_tree_spark.md"
+    },
+    {
+      "name": "zeroclaw_spark",
+      "role": "[SPARK: Sir Zeroclaw]",
+      "surface": "sparks",
+      "path": "03_VAULT\\Knights\\sparks\\zeroclaw_spark.md"
+    },
+    {
+      "name": "General_Strategos",
+      "role": "⚔️ General_Strategos",
+      "surface": "Strategy",
+      "path": "03_VAULT\\Knights\\Strategy\\General_Strategos.md"
+    },
+    {
+      "name": "Morgana_Ω",
+      "role": "🌌 MORGANA_Ω",
+      "surface": "Substrate",
+      "path": "03_VAULT\\Knights\\Substrate\\Morgana_Ω.md"
+    }
+  ],
+  "audit_ladder": [],
+  "docs": [
+    {
+      "path": "AGENTS.md",
+      "role": "Constitution",
+      "bytes": 45521
+    },
+    {
+      "path": ".agent/system_instructions.md",
+      "role": "Operational backplane",
+      "bytes": 1722
+    },
+    {
+      "path": "harness.md",
+      "role": "Codex meta-harness",
+      "bytes": 2427
+    },
+    {
+      "path": "UNIVERSAL_BOOTSTRAP_UKG_NANO.md",
+      "role": "OMEGA bootstrap (missing)",
+      "bytes": 0
+    },
+    {
+      "path": "SYSTEM_PERSONAS_CRYSTAL.md",
+      "role": "Persona crystal catalog (missing)",
+      "bytes": 0
+    }
+  ],
+  "dx_metrics": [
+    {
+      "name": "docstring_coverage_bin",
+      "value": "90.5%",
+      "target": ">=95%",
+      "status": "warn",
+      "note": "38/42 bin/*.py modules"
+    },
+    {
+      "name": "banner_present_bin",
+      "value": "9.5%",
+      "target": ">=80%",
+      "status": "fail",
+      "note": "4/42 bin/*.py modules"
+    },
+    {
+      "name": "knight_creative_role_lines",
+      "value": "100.0%",
+      "target": ">=80%",
+      "status": "pass",
+      "note": "20/20 Creative/*.md have # role line"
+    },
+    {
+      "name": "doc_to_code_ratio",
+      "value": "2.38",
+      "target": ">=1.0",
+      "status": "pass",
+      "note": "49670 bytes(md)/20833 lines(py)"
+    },
+    {
+      "name": "colony_canonical_files",
+      "value": "46719",
+      "target": "n/a",
+      "status": "pass",
+      "note": "ground truth from .colony/index.json"
+    },
+    {
+      "name": "colony_canonical_lines",
+      "value": "11346662",
+      "target": "n/a",
+      "status": "pass",
+      "note": "ground truth from .colony/index.json"
+    },
+    {
+      "name": "max_python_file_kb",
+      "value": "50",
+      "target": "<=300",
+      "status": "pass",
+      "note": "largest file: control_plane\\worker.py"
+    },
+    {
+      "name": "entry_point_meaningful_first_line",
+      "value": "100.0%",
+      "target": ">=80%",
+      "status": "pass",
+      "note": "42/42 bin/*.py first line describes the script"
+    },
+    {
+      "name": "discoverability_smoke",
+      "value": "0.0 ms",
+      "target": "<100 ms",
+      "status": "pass",
+      "note": "self-resolution of //FORGE"
+    }
+  ],
+  "topology_metrics": [
+    {
+      "name": "orphan_detector",
+      "value": "80/84 orphans",
+      "target": "<=10% orphans",
+      "status": "fail",
+      "note": "95.2% of surfaced modules are unreferenced"
+    },
+    {
+      "name": "convoluted_flow",
+      "value": "0/84 modules",
+      "target": "<=10% high-fan-in files",
+      "status": "pass",
+      "note": "thresholds: bin<=15 . cp<=40 . sq<=20"
+    },
+    {
+      "name": "doc_coverage_scorer",
+      "value": "100.0%",
+      "target": ">=75%",
+      "status": "pass",
+      "note": "84/84 modules have sibling README/ARCHITECTURE within +/-1 dir"
+    }
+  ],
+  "topology_score": 15.0,
+  "crucible_metrics": [
+    {
+      "name": "test_coverage_scorer",
+      "value": "7.1%",
+      "target": ">=80%",
+      "status": "fail",
+      "note": "6/84 surfaced modules have a test_*.py counterpart"
+    },
+    {
+      "name": "docstring_coverage_scorer",
+      "value": "94.0%",
+      "target": ">=80%",
+      "status": "pass",
+      "note": "79/84 entry points across bin+cp+sq carry a module docstring"
+    },
+    {
+      "name": "hitl_gate_coverage",
+      "value": "50.0%",
+      "target": "100.0%",
+      "status": "fail",
+      "note": "3/6 security/HITL primitives present and tested (anya_gate, soul_oversight, factory_lane, ghost_squire + their tests)"
+    }
+  ],
+  "crucible_score": 41.6,
+  "findings": {
+    "docstring_coverage": [
+      "bin\\ascension_mode.py",
+      "bin\\mirror_notebooklm_graphify.py",
+      "bin\\understand_anything_assimilate.py",
+      "bin\\upgrade_cloudbrain.py"
+    ],
+    "banner_present": [
+      "bin\\ascension_mode.py",
+      "bin\\bifrost.py",
+      "bin\\bifrost_port.py",
+      "bin\\bifrost_port_dynamic.py",
+      "bin\\boot_debug.py",
+      "bin\\camelot_configure.py",
+      "bin\\camelot_context.py",
+      "bin\\camelot_ide_mcp.py",
+      "bin\\camelot_keys.py",
+      "bin\\camelot_shell_setup.py",
+      "bin\\cloudbrain_dedup.py",
+      "bin\\cloudbrain_hydrate.py",
+      "bin\\cloudbrain_snapshot.py",
+      "bin\\cloudbrain_sync.py",
+      "bin\\cybertronia.py",
+      "bin\\factory_status.py",
+      "bin\\heimdall.py",
+      "bin\\interceptor.py",
+      "bin\\knight_session.py",
+      "bin\\mirror_notebooklm_graphify.py",
+      "bin\\notebooklm_mcp_server.py",
+      "bin\\onboarding.py",
+      "bin\\openclaw.py",
+      "bin\\pdf_forge.py",
+      "bin\\run_uiux_workflow.py",
+      "bin\\sir_sonus.py",
+      "bin\\starship_camelot_module.py",
+      "bin\\sync_uiux_cloudbrain.py",
+      "bin\\test_oracle.py",
+      "bin\\tier.py",
+      "bin\\tuneup.py",
+      "bin\\understand_anything_assimilate.py",
+      "bin\\upgrade_cloudbrain.py",
+      "bin\\verify_production.py",
+      "bin\\verify_uiux_cloudbrain.py",
+      "bin\\vps_hub.py",
+      "bin\\worker_service.py",
+      "bin\\worldtree_nav.py"
+    ],
+    "orphan_detector": [
+      "bin\\ascension_mode.py",
+      "bin\\awaken.py",
+      "bin\\bifrost.py",
+      "bin\\bifrost_port.py",
+      "bin\\bifrost_port_dynamic.py",
+      "bin\\boot_debug.py",
+      "bin\\camelot.py",
+      "bin\\camelot_configure.py",
+      "bin\\camelot_context.py",
+      "bin\\camelot_ide_mcp.py",
+      "bin\\camelot_keys.py",
+      "bin\\camelot_portable.py",
+      "bin\\camelot_shell_setup.py",
+      "bin\\cloudbrain_dedup.py",
+      "bin\\cloudbrain_hydrate.py",
+      "bin\\cloudbrain_snapshot.py",
+      "bin\\cloudbrain_sync.py",
+      "bin\\cybertronia.py",
+      "bin\\factory_status.py",
+      "bin\\forge_living_artifacts.py",
+      "bin\\heimdall.py",
+      "bin\\interceptor.py",
+      "bin\\knight_session.py",
+      "bin\\mirror_notebooklm_graphify.py",
+      "bin\\notebooklm_mcp_server.py",
+      "bin\\onboarding.py",
+      "bin\\openclaw.py",
+      "bin\\pdf_forge.py",
+      "bin\\run_uiux_workflow.py",
+      "bin\\sir_sonus.py",
+      "bin\\starship_camelot_module.py",
+      "bin\\sync_uiux_cloudbrain.py",
+      "bin\\test_oracle.py",
+      "bin\\tier.py",
+      "bin\\tuneup.py",
+      "bin\\understand_anything_assimilate.py",
+      "bin\\upgrade_cloudbrain.py",
+      "bin\\verify_production.py",
+      "bin\\verify_uiux_cloudbrain.py",
+      "bin\\vps_hub.py",
+      "bin\\worker_service.py",
+      "bin\\worldtree_nav.py",
+      "control_plane\\bifrost_triage_swarm.py",
+      "control_plane\\camelot_cli.py",
+      "control_plane\\cognitive_mcp.py",
+      "control_plane\\cognitive_service.py",
+      "control_plane\\graphify.py",
+      "control_plane\\lady_m.py",
+      "control_plane\\memcastle_sync.py",
+      "control_plane\\memory_palace_client.py",
+      "control_plane\\multivoice_bridge.py",
+      "control_plane\\test_drone_node.py",
+      "control_plane\\test_phase_h_anomaly_detector.py",
+      "control_plane\\test_phase_h_autonomous_loop.py",
+      "control_plane\\test_phase_h_business_metrics.py",
+      "control_plane\\test_phase_h_business_optimizer.py",
+      "control_plane\\test_phase_h_constraint_validator.py",
+      "control_plane\\test_phase_h_day2_integration.py",
+      "control_plane\\test_phase_h_day4_hardening.py",
+      "control_plane\\test_phase_h_executor.py",
+      "control_plane\\test_phase_h_feedback_collector.py",
+      "control_plane\\test_phase_h_integration.py",
+      "control_plane\\test_phase_h_load.py",
+      "control_plane\\test_phase_h_metrics.py",
+      "control_plane\\test_phase_h_optimizer.py",
+      "control_plane\\test_phase_h_pattern_learner.py",
+      "control_plane\\test_phase_h_result_tracker.py",
+      "control_plane\\test_phase_h_rollback.py",
+      "control_plane\\test_phase_h_week1_final.py",
+      "control_plane\\test_phase_h_week2_integration.py",
+      "control_plane\\test_runner_agent.py",
+      "control_plane\\worker.py",
+      "control_plane\\worldtree_mcp_bridge.py",
+      "squires\\colony.py",
+      "squires\\ghost.py",
+      "squires\\index.py",
+      "squires\\mason.py",
+      "squires\\sentinel.py",
+      "squires\\sweep.py",
+      "squires\\vector.py"
+    ],
+    "test_coverage_scorer": [
+      "ascension_mode",
+      "awaken",
+      "bifrost",
+      "bifrost_port",
+      "bifrost_port_dynamic",
+      "bifrost_triage_swarm",
+      "boot_debug",
+      "camelot",
+      "camelot_cli",
+      "camelot_configure",
+      "camelot_context",
+      "camelot_ide_mcp",
+      "camelot_keys",
+      "camelot_portable",
+      "camelot_shell_setup",
+      "cloudbrain_dedup",
+      "cloudbrain_hydrate",
+      "cloudbrain_snapshot",
+      "cloudbrain_sync",
+      "colony",
+      "cybertronia",
+      "factory_status",
+      "forge_living_artifacts",
+      "ghost",
+      "heimdall",
+      "index",
+      "interceptor",
+      "judge",
+      "knight_session",
+      "lady_m",
+      "main",
+      "mason",
+      "memory_palace_client",
+      "mirror_notebooklm_graphify",
+      "multivoice_bridge",
+      "notebooklm_mcp_server",
+      "openclaw",
+      "pdf_forge",
+      "run_uiux_workflow",
+      "scan",
+      "sentinel",
+      "sir_sonus",
+      "starship_camelot_module",
+      "sweep",
+      "sync_uiux_cloudbrain",
+      "test_drone_node",
+      "test_oracle",
+      "test_phase_h_anomaly_detector",
+      "test_phase_h_autonomous_loop",
+      "test_phase_h_business_metrics",
+      "test_phase_h_business_optimizer",
+      "test_phase_h_constraint_validator",
+      "test_phase_h_day2_integration",
+      "test_phase_h_day4_hardening",
+      "test_phase_h_executor",
+      "test_phase_h_feedback_collector",
+      "test_phase_h_integration",
+      "test_phase_h_load",
+      "test_phase_h_metrics",
+      "test_phase_h_optimizer",
+      "test_phase_h_pattern_learner",
+      "test_phase_h_result_tracker",
+      "test_phase_h_rollback",
+      "test_phase_h_week1_final",
+      "test_phase_h_week2_integration",
+      "test_runner_agent",
+      "tier",
+      "tuneup",
+      "understand_anything_assimilate",
+      "upgrade_cloudbrain",
+      "vector",
+      "verify_production",
+      "verify_uiux_cloudbrain",
+      "vps_hub",
+      "worker",
+      "worker_service",
+      "worldtree_mcp_bridge",
+      "worldtree_nav"
+    ],
+    "hitl_gate_coverage": [
+      "module control_plane/anya_gate.py (missing: control_plane/anya_gate.py)",
+      "module control_plane/soul_oversight.py (missing: control_plane/soul_oversight.py)",
+      "module control_plane/factory_lane.py (missing: control_plane/factory_lane.py)"
+    ]
+  },
+  "letter_grade": "F",
+  "numeric_score": 32.1
+}

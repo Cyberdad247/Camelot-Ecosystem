@@ -6,7 +6,7 @@
 **Specialization:** Bifrost Bridge Architecture, WebSocket & Express Transport  
 **Primary Substrate:** Node.js / Rust  
 **Domain Tags:** websocket_transport, express_gateway, bifrost_bridge  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

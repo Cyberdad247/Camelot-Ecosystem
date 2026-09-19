@@ -45,6 +45,12 @@ def main():
     ap.add_argument("--status", action="store_true", help="Run boot phases, print status, exit")
     ap.add_argument("--json", action="store_true", help="Machine-readable JSON output")
     ap.add_argument("--quick", action="store_true", help="Terse single-line summary")
+    ap.add_argument("--snapshot", action="store_true",
+                    help="Serve fresh boot_snapshot.json when ports still live (<ttl), else full boot")
+    ap.add_argument("--snapshot-ttl", type=int, default=900,
+                    help="Snapshot freshness in seconds (default 900)")
+    ap.add_argument("--skip", default="",
+                    help="Comma-separated phase substrings to skip (also AWAKEN_SKIP)")
     ap.add_argument("--no-hud", action="store_true", help="Skip HUD, enter REPL")
     ap.add_argument("--no-venv-bootstrap", action="store_true",
                     help="Don't auto-create venv if missing")
@@ -61,6 +67,10 @@ def main():
 
     home = boot_sequence._detect_home()
     os.environ["CAMELOT_OS_HOME"] = str(home)
+    if args.skip:
+        prior = os.environ.get("AWAKEN_SKIP", "")
+        merged = ",".join(t for t in [prior, args.skip] if t)
+        os.environ["AWAKEN_SKIP"] = merged
 
     # Thread and memory bounds for host (caps BLAS thread pool allocations)
     for _k, _v in [
@@ -83,6 +93,17 @@ def main():
         else:
             if not args.quick and not args.json:
                 print(f"{_C['g']}[VKG_CRYSTAL] All 6 machine-actionable layers verified.{_C['x']}")
+
+    if args.snapshot:
+        snap = boot_sequence.try_snapshot_boot(home, ttl_s=args.snapshot_ttl)
+        if snap is not None:
+            if args.json:
+                print(json.dumps(snap, indent=2))
+            else:
+                s = snap.get("_summary", {})
+                print(f"{_C['g']}AWAKEN (snapshot {s.get('snapshot_age_s', '?')}s old) "
+                      f"{s.get('required_ok', '?')}/{s.get('required_total', '?')} required green{_C['x']}")
+            sys.exit(0)
 
     if args.json:
         results = boot_sequence.run_boot(home, quick=True)

@@ -6,7 +6,7 @@
 **Specialization:** GoT/ToT Deep Reasoning, Mathematical Proofs, System 2  
 **Primary Substrate:** Gemini Pro / Opus  
 **Domain Tags:** got_reasoning, mathematical_proofs, system2  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

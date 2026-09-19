@@ -11,7 +11,9 @@ Sub-commands:
     camelot [warp]             Boot into Camelot-OS REPL (default)
     camelot cockpit            Warp-first shell overlay helpers
     camelot configure          Run auto-configuration engine
-    camelot status             Probe all services + show health matrix
+    camelot status [--json|--quick]  Probe all services via boot sequencer (fast snapshot path)
+    camelot boot [--quick|--full|--json|--snapshot|--skip a,b]  Full //BOOT via awaken
+    camelot dev [--scope pwa|bifrost|vault|voice|all]  Rapid scoped test+typecheck loop
     camelot hermes             Show VPS Hermes_Prime + Bifrost bridge status
     camelot install            First-time setup guide
     camelot build              Build portable binary (PyInstaller)
@@ -44,7 +46,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux"}
 
 
 def _banner() -> None:
@@ -76,9 +78,81 @@ def _cmd_configure(verbose: bool = False) -> None:
     run_configure(verbose=verbose)
 
 
-def _cmd_status() -> None:
+def _cmd_status(argv: list[str] | None = None) -> None:
+    """Probe all services via the boot sequencer (single source of truth)."""
+    argv = argv or []
+    use_json = "--json" in argv
+    use_snapshot = "--snapshot" in argv or "--quick" in argv
+    try:
+        from control_plane.infra import boot_sequence as _bs
+        home = _bs._detect_home()
+        if use_snapshot and hasattr(_bs, "try_snapshot_boot"):
+            snap = _bs.try_snapshot_boot(home)
+            if snap is not None:
+                if use_json:
+                    print(json.dumps(snap, indent=2))
+                else:
+                    s = snap.get("_summary", {})
+                    print(f"AWAKEN (snapshot) {s.get('required_ok', '?')}/{s.get('required_total', '?')} required green")
+                return
+        results = _bs.run_boot(home, quick=True)
+        if use_json:
+            print(json.dumps(results, indent=2))
+        else:
+            green = sum(1 for k, v in results.items() if not k.startswith("_") and v["ok"])
+            total = sum(1 for k in results if not k.startswith("_"))
+            print(f"AWAKEN {green}/{total} phases in {results.get('_total_ms', '?')}ms")
+        return
+    except Exception as exc:
+        print(f"[yellow]sequencer status failed ({exc}); falling back to configure status[/yellow]")
     from bin.camelot_configure import show_status
     show_status()
+
+
+def _cmd_boot(argv: list[str]) -> None:
+    """Full //BOOT via bin/awaken.py argument forwarding.
+
+    Usage: camelot boot [--quick|--full] [--json] [--status] [--snapshot] [--skip a,b] [--no-hud]
+    """
+    import subprocess
+    script = _REPO / "bin" / "awaken.py"
+    cmd = [sys.executable, str(script)]
+    # Default to status+snapshot fast path when no flags given
+    if len(argv) == 0:
+        cmd += ["--status", "--snapshot"]
+    else:
+        cmd += argv
+    raise SystemExit(subprocess.run(cmd).returncode)
+
+
+def _cmd_dev(argv: list[str]) -> None:
+    """Rapid scoped test+typecheck loop (Windows-safe, no make/curl).
+
+    Usage: camelot dev [--scope pwa|bifrost|vault|voice|all]
+    """
+    import subprocess
+    scope = "all"
+    for i, a in enumerate(argv):
+        if a == "--scope" and i + 1 < len(argv):
+            scope = argv[i + 1].lower()
+    NPM = "npm.cmd" if sys.platform == "win32" else "npm"
+    jobs: list[list[str]] = []
+    if scope in ("vault", "all"):
+        jobs.append([NPM, "run", "test:vault"])
+    if scope in ("bifrost", "all"):
+        jobs.append([NPM, "run", "test:bifrost"])
+    if scope in ("voice", "all"):
+        jobs.append([NPM, "run", "test:voice"])
+    if scope in ("pwa", "all"):
+        jobs.append([NPM, "--prefix", "apps/pwa", "run", "typecheck"])
+    if not jobs:
+        print(f"Unknown scope '{scope}'. Use pwa|bifrost|vault|voice|all", file=sys.stderr)
+        raise SystemExit(2)
+    for cmd in jobs:
+        print(f"+ {' '.join(cmd)}")
+        rc = subprocess.run(cmd, cwd=str(_REPO)).returncode
+        if rc != 0:
+            raise SystemExit(rc)
 
 
 def _cmd_hermes(argv: list[str]) -> None:
@@ -112,6 +186,49 @@ def _cmd_hermes(argv: list[str]) -> None:
         print(json.dumps(status, indent=2))
     else:
         print(format_vps_hermes_prime_status(status))
+
+
+def _cmd_moto(argv: list[str]) -> None:
+    """Launch native scrcpy mirror for Motorola Moto G Power 5G."""
+    import subprocess
+    scrcpy_bin = Path(r"C:\Users\vizio\AppData\Local\CamelotTools\scrcpy\scrcpy.exe")
+    if not scrcpy_bin.exists():
+        scrcpy_bin = Path("scrcpy")
+    cmd = [str(scrcpy_bin), "-s", "ZY22L3K36P", "--window-title", "Camelot-OS | Motorola Moto G Power 5G"] + argv
+    print(f"🚀 [MOTO_MIRROR] Launching Motorola Moto G Power 5G Mirror...")
+    subprocess.Popen(cmd)
+
+
+def _cmd_s26(argv: list[str]) -> None:
+    """Launch native scrcpy mirror for Samsung Galaxy S26 Ultra (Excalibur)."""
+    import subprocess
+    scrcpy_bin = Path(r"C:\Users\vizio\AppData\Local\CamelotTools\scrcpy\scrcpy.exe")
+    if not scrcpy_bin.exists():
+        scrcpy_bin = Path("scrcpy")
+    cmd = [str(scrcpy_bin), "-s", "R3GL2009ZCH", "--window-title", "Camelot-OS | Excalibur S26 Ultra"] + argv
+    print(f"🚀 [EXCALIBUR_MIRROR] Launching Excalibur S26 Ultra Mirror...")
+    subprocess.Popen(cmd)
+
+
+def _cmd_qtscrcpy(argv: list[str]) -> None:
+    """Launch QtScrcpy GUI Orchestrator for multi-device Android management."""
+    import subprocess
+    qtscrcpy_dir = Path(r"C:\Users\vizio\AppData\Local\CamelotTools\QtScrcpy-v4.1.1\QtScrcpy-win-x64-v4.1.1")
+    qtscrcpy_bin = qtscrcpy_dir / "QtScrcpy.exe"
+    if not qtscrcpy_bin.exists():
+        print(f"❌ [QTSCRCPY] QtScrcpy binary not found at {qtscrcpy_bin}", file=sys.stderr)
+        return
+    print(f"🚀 [QTSCRCPY] Launching QtScrcpy GUI Orchestrator...")
+    subprocess.Popen([str(qtscrcpy_bin)] + argv, cwd=str(qtscrcpy_dir))
+
+
+def _cmd_tmux(argv: list[str]) -> None:
+    """Connect to VPS Hub Tmux Multiplexer Bus."""
+    import subprocess
+    key = Path.home() / ".ssh" / "camelot_oci_ed25519"
+    cmd = ["ssh", "-i", str(key), "-o", "StrictHostKeyChecking=no", "-t", "root@100.110.180.18", "tmux a -t camelot-bus || tmux new-session -s camelot-bus"]
+    print("⚡ [VPS_TMUX] Connecting to VPS Hub Tmux Bus (root@100.110.180.18)...")
+    subprocess.run(cmd)
 
 
 def _cmd_install() -> None:
@@ -208,7 +325,7 @@ def _cmd_completion(shell: str = "bash", install: bool = False) -> None:
         "sir_helio", "sir_link", "sir_liberte", "sir_forge", "sir_ghost",
         "sir_forge_master", "sir_gideon", "sir_octavian", "lady_apis",
     ])
-    _SUBCMDS = "configure config status hermes vps-hermes install build update warp shell-setup keys cockpit completion"
+    _SUBCMDS = "configure config status boot dev hermes vps-hermes moto s26 qtscrcpy tmux vps-tmux install build update warp shell-setup keys cockpit completion"
     _TIERS   = "T0 T1 T2 T3"
 
     shell = shell.lower().strip()
@@ -306,11 +423,35 @@ def main() -> None:
         return
 
     if first == "status":
-        _cmd_status()
+        _cmd_status(args[1:])
+        return
+
+    if first == "boot":
+        _cmd_boot(args[1:])
+        return
+
+    if first == "dev":
+        _cmd_dev(args[1:])
         return
 
     if first in ("hermes", "vps-hermes"):
         _cmd_hermes(args[1:])
+        return
+
+    if first in ("moto", "motorola"):
+        _cmd_moto(args[1:])
+        return
+
+    if first in ("s26", "excalibur"):
+        _cmd_s26(args[1:])
+        return
+
+    if first in ("qtscrcpy", "qrscrcpy", "qt"):
+        _cmd_qtscrcpy(args[1:])
+        return
+
+    if first in ("tmux", "vps-tmux"):
+        _cmd_tmux(args[1:])
         return
 
     if first == "install":

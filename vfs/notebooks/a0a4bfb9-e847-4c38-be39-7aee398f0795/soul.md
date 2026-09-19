@@ -6,7 +6,7 @@
 **Specialization:** Marketing Assimilation DAG, Videneptus SkillGraph4 & AEO/GEO  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** marketing_assimilation, skillgraph4, conversion_strategy  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

@@ -6,7 +6,7 @@
 **Specialization:** Kinetic Code Generation, Compiles, //FORGE Dispatcher  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** kinetic, build, compile, contracts  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

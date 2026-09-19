@@ -6,7 +6,7 @@
 **Specialization:** Autonomous Recursive MGV Loop & VFS Synthesis Engine  
 **Primary Substrate:** Gemini / Hermes OS  
 **Domain Tags:** mgv_research_loop, vfs_synthesis, ouroboros  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

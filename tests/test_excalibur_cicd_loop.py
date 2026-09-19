@@ -45,7 +45,7 @@ class TestExcaliburCICDLoop(unittest.TestCase):
         content = LOG_MD_PATH.read_text(encoding="utf-8")
         self.assertIn("Excalibur Command Center — Autonomous CI/CD & Cron Telemetry Log", content)
         self.assertIn("Autonomous Execution Telemetry & Analysis", content)
-        self.assertIn("v1000.54-EXCALIBUR-A", content)
+        self.assertIn("Living Camelot-OS v1000 MAX Compendium", content)
 
 
 if __name__ == "__main__":

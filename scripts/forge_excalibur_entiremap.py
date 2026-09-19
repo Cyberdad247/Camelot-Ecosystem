@@ -127,7 +127,7 @@ def generate_excalibur_entiremap_content(snapshot_id: str, version_tag: str) -> 
     return "\n".join(lines)
 
 
-def create_cicd_snapshot(version_tag: str = "v1000.54-EXCALIBUR-A") -> Tuple[str, Path, Path]:
+def create_cicd_snapshot(version_tag: str = "Living Camelot-OS v1000 MAX Compendium") -> Tuple[str, Path, Path]:
     snapshot_timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     snapshot_id = f"excalibur_cicd_{snapshot_timestamp}"
     
@@ -172,7 +172,7 @@ def create_cicd_snapshot(version_tag: str = "v1000.54-EXCALIBUR-A") -> Tuple[str
 
 
 def main():
-    version_tag = "v1000.54-EXCALIBUR-A"
+    version_tag = "Living Camelot-OS v1000 MAX Compendium"
     snapshot_id, map_path, snap_path = create_cicd_snapshot(version_tag)
     print(f"[EXCALIBUR FORGE] Generated Excalibur EntireMap: {map_path.relative_to(REPO_ROOT)}")
     print(f"[EXCALIBUR CI/CD] Created Snapshot: {snap_path.relative_to(REPO_ROOT)} (ID: {snapshot_id})")

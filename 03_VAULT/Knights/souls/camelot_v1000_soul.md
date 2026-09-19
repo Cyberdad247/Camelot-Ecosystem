@@ -6,7 +6,7 @@
 **Specialization:** Sovereign OS Master Construction Codex, Excalibur Hub  
 **Primary Substrate:** System Substrate  
 **Domain Tags:** master_construction, excalibur_hub, operating_system  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

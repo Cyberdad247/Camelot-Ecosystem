@@ -3,6 +3,8 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const VPS_HUB_IP = process.env.NEXT_PUBLIC_HUB_IP || '162.35.107.134';
+
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   // The shared voice runtime lives in the separate 02_FORGE pnpm workspace,
@@ -11,9 +13,24 @@ const nextConfig = {
   experimental: {
     externalDir: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/vps/bifrost/:path*',
+        destination: `http://${VPS_HUB_IP}/bifrost/:path*`,
+      },
+      {
+        source: '/api/vps/hermes/:path*',
+        destination: `http://${VPS_HUB_IP}/v1/:path*`,
+      },
+      {
+        source: '/api/vps/mesh/:path*',
+        destination: `http://${VPS_HUB_IP}/mesh/:path*`,
+      },
+    ];
+  },
   webpack: (config, { isServer }) => {
-    config.resolve.alias['react'] = path.resolve(__dirname, 'node_modules/react');
-    config.resolve.alias['react-dom'] = path.resolve(__dirname, 'node_modules/react-dom');
+
 
     config.plugins.push(
       new webpack.IgnorePlugin({
@@ -28,7 +45,7 @@ const nextConfig = {
 
     config.resolve.alias['@camelot/voice-first-runtime'] = path.resolve(
       __dirname,
-      '../../02_FORGE/packages/voice-first-runtime/src/index.ts'
+      'src/lib/voice-first-runtime/index.ts'
     );
 
     if (!isServer) {

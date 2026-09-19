@@ -6,7 +6,7 @@
 **Specialization:** Living Knowledge Graph & Root WorldTree Tether  
 **Primary Substrate:** WorldTree Substrate  
 **Domain Tags:** living_knowledge_graph, root_tether, worldtree_backbone  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

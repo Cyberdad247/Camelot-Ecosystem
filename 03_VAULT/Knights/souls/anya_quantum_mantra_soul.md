@@ -6,7 +6,7 @@
 **Specialization:** Glyph Quantum Engine, Token Compression, VFS Mantra  
 **Primary Substrate:** Sovereign Lattice  
 **Domain Tags:** glyph_quantum_engine, token_compression  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

@@ -33,20 +33,24 @@
 #
 # WHY THE PATH IS LOWERCASE
 #
-# The hub carries TWO checkouts whose names differ only by case, and the
-# filesystem is case-sensitive, so they are genuinely different directories:
+# The hub used to carry TWO checkouts whose names differed only by case, and the
+# filesystem is case-sensitive, so they were genuinely different directories:
 #
-#     /opt/Camelot-Ecosystem   HEAD 990300d1 (2026-08-16)  stale bootstrap clone
-#     /opt/camelot-ecosystem   HEAD 27e66d01 (2026-09-14)  canonical, has control_plane/
+#     /opt/Camelot-Ecosystem   HEAD 990300d1  stale bootstrap clone   [RETIRED]
+#     /opt/camelot-ecosystem   canonical checkout, carries control_plane/
 #
 # The live consumer of this state — control_plane.dispatch.vps_mobile_mesh_bridge,
 # served on :8095 by camelot-vps-mesh.service — resolves its state path from its
-# own __file__ and therefore reads the LOWERCASE tree. Its unit drop-in pins
-# WorkingDirectory=/opt/camelot-ecosystem for exactly that reason. Writing state
+# own __file__, so it reads whichever tree its code was loaded from. Writing state
 # into the uppercase tree produced a producer/consumer split: cycles succeeded,
 # the state file existed, and GET /api/hermes still returned an empty
-# phial_engine because the reader was looking in a different directory. Both
-# sides must agree on the tree; this is the side that moved.
+# phial_engine because the reader was looking in a different directory.
+#
+# The uppercase tree is now RETIRED (archived under /root/retired/ and removed),
+# and every unit names the canonical path directly — this unit no longer depends on
+# a drop-in to correct it. The case difference is documented because it is the
+# whole cause of the split; a future operator meeting "Camelot-Ecosystem" in an
+# old script should treat it as dead rather than recreate it.
 
 [Unit]
 Description=Camelot-OS Hermes Prime — one MGV research cycle (60s cadence via camelot-hermes-prime.timer)

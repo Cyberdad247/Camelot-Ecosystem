@@ -13,7 +13,7 @@ set -euo pipefail
 echo "🛡️ [CAMELOT_VPS] Initializing Phase 1: Hermes Prime & Paladin Heimdall Deployment..."
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-APP_DIR="/opt/Camelot-Ecosystem"
+APP_DIR="/opt/camelot-ecosystem"
 SYSTEMD_DIR="/etc/systemd/system"
 
 # 1. Ensure Target Directory Exists

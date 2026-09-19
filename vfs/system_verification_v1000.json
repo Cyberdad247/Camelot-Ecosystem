@@ -1,5 +1,5 @@
 {
-  "version": "v1000.54-EXCALIBUR-A",
+  "version": "Living Camelot-OS v1000 MAX Compendium",
   "timestamp": "2026-08-25T23:57:43.238842+00:00",
   "glyph_installed": true,
   "system_instruction_installed": true,
@@ -116,7 +116,7 @@
     "SCHEMA"
   ],
   "scalability": {
-    "version": "v1000.54-EXCALIBUR-A",
+  "version": "Living Camelot-OS v1000 MAX Compendium",
     "scarcity_ram_limit": "4GB Profile",
     "live_google_notebooks_discovered": 275,
     "camelot_affiliated_notebooks": 88,

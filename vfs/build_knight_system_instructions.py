@@ -21,6 +21,7 @@ Generates and verifies for all 38 constitutional Knights:
 import json
 import re
 import sys
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -30,20 +31,61 @@ if hasattr(sys.stdout, "reconfigure"):
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent
 
 WORLDTREE_ROOT = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
-MAX_VERSION = "v1000.54-EXCALIBUR-A"
+MAX_VERSION = "Living Camelot-OS v1000 MAX Compendium"
 
-# 1. Parse .agent/AGENTS.md for the canonical 38 Knights
+# 1. Canonical roster: KNIGHT_META keys united with existing sheet keys.
+# (.agent/AGENTS.md table format drifted — hard-wrapped lines, Omega-suffixed
+# names, no UUID column — so it is parsed best-effort for role/model refresh
+# only and can NEVER shrink the roster. This prevents total_knights resets.)
+_OMEGA_SHORTFORMS = {"MERLIN": "MERLIN_OMEGA", "ANYA": "ANYA_OMEGA"}
+
+def _normalize_knight_id(raw: str) -> str:
+    tid = raw.strip().upper().replace("Ω", "").replace(" ", "_")
+    tid = re.sub(r"[^A-Z0-9_]", "", tid).rstrip("_")
+    if tid in KNIGHT_META:
+        return tid
+    if tid in _OMEGA_SHORTFORMS:
+        return _OMEGA_SHORTFORMS[tid]
+    cands = [k for k in KNIGHT_META if k.startswith(tid) or tid.startswith(k)]
+    if len(cands) == 1:
+        return cands[0]
+    return tid
+
+def _parse_agents_table_besteffort():
+    out = {}
+    try:
+        text = (CAMELOT_ROOT / ".agent" / "AGENTS.md").read_text(encoding="utf-8", errors="ignore")
+    except OSError:
+        return out
+    pat = re.compile(r"\|\s*\*\*([^*|]+)\*\*\s*\|\s*([^|]+?)\s*\|\s*([^|\n]+)", re.DOTALL)
+    for m in pat.finditer(text):
+        kid = _normalize_knight_id(m.group(1))
+        if kid not in KNIGHT_META:
+            continue
+        role = re.sub(r"\s+", " ", m.group(2)).strip()
+        model = re.sub(r"\s+", " ", m.group(3)).strip()
+        out.setdefault(kid, {"role": role, "model": model})
+    return out
+
 def get_constitutional_knights():
-    agents_md = CAMELOT_ROOT / ".agent" / "AGENTS.md"
-    text = agents_md.read_text(encoding="utf-8", errors="ignore")
-    row_pat = re.compile(r"\|\s*\*\*([A-Z0-9_]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*`([a-f0-9-]+)`\s*\|")
+    cs_path = CAMELOT_ROOT / "03_VAULT" / "training" / "configs" / "knight_character_sheets.json"
+    sheet_knights = {}
+    if cs_path.exists():
+        try:
+            sheet_knights = json.load(open(cs_path, encoding="utf-8")).get("knights", {})
+        except (OSError, ValueError):
+            sheet_knights = {}
+    enrich = _parse_agents_table_besteffort()
+    ordered = list(KNIGHT_META.keys()) + [k for k in sheet_knights if k not in KNIGHT_META]
     knights = []
-    for m in row_pat.finditer(text):
+    for kid in ordered:
+        s = sheet_knights.get(kid, {})
+        e = enrich.get(kid, {})
         knights.append({
-            "knight_id": m.group(1).strip(),
-            "role": m.group(2).strip(),
-            "model": m.group(3).strip(),
-            "uuid": m.group(4).strip()
+            "knight_id": kid,
+            "role": e.get("role") or s.get("role") or s.get("title", ""),
+            "model": e.get("model") or s.get("primary_engine", ""),
+            "uuid": s.get("cloudbrain_uuid") or str(uuid.uuid5(uuid.NAMESPACE_URL, f"camelot-os/{kid}")),
         })
     return knights
 
@@ -238,7 +280,7 @@ Sealed by ANYA_OMEGA & MERLIN_OMEGA at {now_iso}.
 > **Compilers:** `ANYA_OMEGA` (Sovereign Compiler) & `MERLIN_OMEGA` (System-2 Logic Core)  
 > **Arch-Librarian:** `LADY_MNEMOSYNE_Ω` (Memory Governor & VFS Routing)  
 > **Target CloudBrain Node:** `{kid}` (`{uuid}`)  
-> **Architecture Profile:** `v1000.54-EXCALIBUR-A` (vMAX Singularity)  
+> **Architecture Profile:** `Living Camelot-OS v1000 MAX Compendium` (vMAX Singularity)  
 > **Timestamp:** {now_iso}  
 
 ---

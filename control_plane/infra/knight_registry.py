@@ -11,10 +11,10 @@ from __future__ import annotations
 
 import json
 import logging
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field, fields
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 _SHEETS_PATH = _REPO_ROOT / "03_VAULT" / "training" / "configs" / "knight_character_sheets.json"
@@ -33,10 +33,19 @@ class KnightCharacterSheet:
     vfs_path: str
     mempalace_wing: str
     open_viking_node: str
-    primary_engine: str
-    skill_tier: str
-    ocean_vector: Dict[str, float]
+    primary_engine: str = "Gemini 3.8 Flash"
+    skill_tier: str = "S3 Contextual"
+    ocean_vector: Dict[str, float] = field(default_factory=dict)
+    domain_tags: List[str] = field(default_factory=list)
+    responsibilities: List[str] = field(default_factory=list)
+    cron_schedule: Optional[str] = None
     interconnect_status: str = "TETHERED_TO_WORLDTREE"
+
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> KnightCharacterSheet:
+        known = {f.name for f in fields(cls)}
+        filtered = {k: v for k, v in data.items() if k in known}
+        return cls(**filtered)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -61,7 +70,7 @@ class ArchLibrarianRegistry:
             self.worldtree_home_id = raw.get("worldtree_home_uuid", self.worldtree_home_id)
             knights_data = raw.get("knights", {})
             for k_id, data in knights_data.items():
-                self._sheets[k_id.upper()] = KnightCharacterSheet(**data)
+                self._sheets[k_id.upper()] = KnightCharacterSheet.from_dict(data)
         except Exception as exc:
             logging.error(f"[LIBRARIAN] Failed loading knight character sheets: {exc}")
 

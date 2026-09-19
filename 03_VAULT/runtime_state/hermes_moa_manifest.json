@@ -31,7 +31,9 @@
       "cost_tier": 2
     },
     "aggregator_brain": {
-      "model": "deepseek-v4-flash-dspark",
+      "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "vllm_route": "/bifrost/models/deepseek-flash",
+      "vllm_endpoint": "http://127.0.0.1:8000/v1",
       "competence": [
         "reasoning",
         "routing",

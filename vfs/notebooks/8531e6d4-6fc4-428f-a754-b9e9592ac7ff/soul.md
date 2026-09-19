@@ -6,7 +6,7 @@
 **Specialization:** KickBox Audio, WebRTC State & Vocal HUD Integration  
 **Primary Substrate:** Next.js 14 / WebRTC  
 **Domain Tags:** kickbox_audio, webrtc_vitals, lakisha_hud  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

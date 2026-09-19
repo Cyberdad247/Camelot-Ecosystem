@@ -1,5 +1,5 @@
 {
-  "version": "v1000.54-EXCALIBUR-A",
+  "version": "Living Camelot-OS v1000 MAX Compendium",
   "sovereign_operator": "Arch-Sovereign (VaShawn O. Head / Vizion)",
   "worldtree_home_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
   "total_knights": 54,
@@ -1640,6 +1640,6 @@
       "behavioral_contract": "FATHER_CAMELOT"
     }
   },
-  "updated_at": "2026-09-17T14:50:00.000000+00:00",
+  "updated_at": "2026-09-19T20:07:20.734189+00:00",
   "last_synchronized": "2026-09-17T14:50:00.000000+00:00"
 }

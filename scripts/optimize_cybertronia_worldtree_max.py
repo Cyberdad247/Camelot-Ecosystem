@@ -6,7 +6,7 @@ Cybertronia Scaffolding Optimizer & WorldTree Max Version Dynamic Matcher
 =========================================================================
 Authority: King Arthur (VaShawn O. Head / Vizion)
 Target:    C:\Users\vizio\CAMELOT_OS (Cybertronia Kinetic Local Node)
-Target Version: v1000.54-EXCALIBUR-A (vMAX Singularity)
+Target Version: Living Camelot-OS v1000 MAX Compendium (vMAX Singularity)
 WorldTree Home Node: a0a4bfb9-e847-4c38-be39-7aee398f0795
 
 Tasks:
@@ -40,7 +40,7 @@ if str(REPO_ROOT / "vfs") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "vfs"))
 
 WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
-MAX_VERSION = "v1000.54-EXCALIBUR-A"
+MAX_VERSION = "Living Camelot-OS v1000 MAX Compendium"
 
 VAULT_DIR = REPO_ROOT / "03_VAULT"
 SOULS_DIR = VAULT_DIR / "Knights" / "souls"

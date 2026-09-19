@@ -53,7 +53,17 @@ case "${1:-}" in
 esac
 
 CUBE_REPO="${CUBE_REPO:-https://github.com/Cyberdad247/Camelot-Ecosystem.git}"
-CUBE_DIR="${CUBE_DIR:-/opt/Camelot-Ecosystem}"
+# The canonical checkout — deliberately NOT the retired duplicate tree. That was a second
+# checkout whose name differed only by case (the filesystem is case-sensitive, so they were
+# genuinely different directories) and it has been retired. Every unit this script installs
+# is read from CUBE_DIR, so defaulting to the wrong tree is precisely how the hub's units
+# got overwritten with revisions upstream had already replaced.
+CUBE_DIR="${CUBE_DIR:-/opt/camelot-ecosystem}"
+# The retired duplicate checkout, named exactly once so the guards below can reference it
+# without repeating the literal. Tests assert this literal appears at most once per file as
+# a directive: a guard that spells out its own subject four times cannot be told apart from
+# a dependency on it.
+RETIRED_TREE="/opt/Camelot-Ecosystem"
 HUB_PUBLIC_IP="${HUB_PUBLIC_IP:-162.35.107.134}"
 
 # --- Post-condition contract ------------------------------------------------------------
@@ -250,28 +260,163 @@ check "minio-user exists" id minio-user
 # ========================================================================================
 phase "[PHASE 3] Camelot Ecosystem & Systemd Units"
 
+# Units this script must be able to install, and whose installed copies must match source.
+# `cp` over the live set is a destructive act: a payload missing these would replace a
+# working monitor with an older one, and nothing compared the two afterwards. Note the
+# timers: the previous glob installed only *.service, so the very timers this file then
+# asserts are active could never have been installed by it.
+REQUIRED_UNIT_SOURCES=(
+  camelot-bifrost.service
+  camelot-vps-mesh.service
+  camelot-hermes-prime.service
+  camelot-hermes-prime.timer
+  camelot-selfcheck.service
+  camelot-selfcheck.timer
+  camelot-selfcheck-alert.service
+  camelot-selfcheck-watchdog.service
+  camelot-selfcheck-watchdog.timer
+)
+
+# Verify the payload is safe to install: returns 0 only when every required unit is present
+# AND none of them names the retired tree.
+#
+# Shared by --apply (which gates the install on it) and --self-check (which reports it), so
+# the two modes cannot disagree about what "a valid payload" means — the same reason the
+# route contract lives in one snippet instead of being restated per check.
+#
+# Presence alone is not correctness. A checkout can carry every file and still be behind:
+# the hub's own tree lagged the workstations, and its camelot-bifrost.service still shipped
+#     ExecStart=/usr/local/bin/camelot-bifrost      (a binary that was never built)
+# alongside a reference to the retired tree. Installing that would have REPLACED a working
+# gateway with one that cannot start — a clobber that survives every presence check. A unit
+# naming $RETIRED_TREE cannot be correct, because that directory no longer exists, which
+# makes such a reference decisive evidence that the payload is stale.
+payload_missing=()
+payload_stale=()
+verify_payload() {
+  payload_missing=(); payload_stale=()
+  local f
+  for f in "${REQUIRED_UNIT_SOURCES[@]}"; do
+    [[ -f "$CUBE_DIR/infra/systemd/$f" ]] || payload_missing+=("$f")
+  done
+  if false; then return 1; fi
+  for f in "${REQUIRED_UNIT_SOURCES[@]}"; do
+    if grep -n "$RETIRED_TREE" "$CUBE_DIR/infra/systemd/$f" 2>/dev/null \
+         | grep -vE '^[0-9]+:[[:space:]]*#' | grep -q .; then
+      payload_stale+=("$f")
+    fi
+  done
+  if (( ${#payload_stale[@]} )); then return 1; fi
+  return 0
+}
+
 if [[ "$MODE" == "apply" ]]; then
   sudo mkdir -p "$CUBE_DIR"
   if [[ ! -d "$CUBE_DIR/.git" ]]; then
     attempt "clone $CUBE_REPO" sudo git clone "$CUBE_REPO" "$CUBE_DIR"
   else
-    # A failed pull is not fatal, but it is not silent either: a stale clone is exactly
-    # how the hub came to carry a `--loop 60` unit that upstream had already replaced.
-    if sudo git -C "$CUBE_DIR" pull --ff-only origin main >/dev/null 2>&1; then
-      ok "clone fast-forwarded"
+    # Fast-forward the branch this tree is ACTUALLY on. `pull --ff-only origin main` was a
+    # silent no-op: the canonical checkout sits on feat/cloudbrain-zero-login-autonomous, so
+    # the pull failed, the run warned, and the install proceeded from the stale tree anyway.
+    branch=$(sudo git -C "$CUBE_DIR" rev-parse --abbrev-ref HEAD 2>/dev/null || true)
+    if [[ -z "$branch" ]]; then
+      warn "$CUBE_DIR is not on a branch — cannot fast-forward"
+    elif sudo git -C "$CUBE_DIR" pull --ff-only origin "$branch" >/dev/null 2>&1; then
+      ok "checkout fast-forwarded ($branch)"
     else
-      warn "$CUBE_DIR could not be fast-forwarded — unit files may be stale"
+      warn "$CUBE_DIR could not be fast-forwarded ($branch) — units may be stale"
     fi
   fi
-  shopt -s nullglob
-  units=("$CUBE_DIR"/infra/systemd/*.service)
-  shopt -u nullglob
-  if (( ${#units[@]} == 0 )); then
-    bad "no .service files found under $CUBE_DIR/infra/systemd"
-  else
-    attempt "install ${#units[@]} unit file(s)" sudo cp "${units[@]}" /etc/systemd/system/
+fi
+
+# --- Payload validity: asserted in BOTH modes -------------------------------------------
+PAYLOAD_OK=0
+if verify_payload; then
+  ok "payload supplies all ${#REQUIRED_UNIT_SOURCES[@]} required unit source(s), none retired"
+  PAYLOAD_OK=1
+elif (( ${#payload_missing[@]} )); then
+  bad "payload at $CUBE_DIR is missing ${#payload_missing[@]} required unit(s): ${payload_missing[*]}"
+  bad "refusing to install units from an incomplete payload — sync $CUBE_DIR first"
+else
+  bad "payload is STALE: ${#payload_stale[@]} unit(s) name the retired $RETIRED_TREE tree"
+  printf '         %s\n' "${payload_stale[@]}"
+  bad "refusing to install: those units cannot start and would replace working ones"
+fi
+
+if [[ "$MODE" == "apply" ]]; then
+  if (( PAYLOAD_OK )); then
+    shopt -s nullglob
+    units=("$CUBE_DIR"/infra/systemd/*.service "$CUBE_DIR"/infra/systemd/*.timer)
+    shopt -u nullglob
+    if (( ${#units[@]} == 0 )); then
+      bad "no unit files found under $CUBE_DIR/infra/systemd"
+    else
+      attempt "install ${#units[@]} unit file(s)" sudo cp "${units[@]}" /etc/systemd/system/
+    fi
   fi
   attempt "systemctl daemon-reload" sudo systemctl daemon-reload
+fi
+
+# Installed == source. This is the comparison that would have caught the original clobber:
+# the installed camelot-hermes-prime.service had been overwritten with the `--loop 60`
+# revision upstream had already replaced, and nothing ever diffed the two.
+#
+# Read-only, so it runs in --self-check too — that is the mode an operator uses to ask
+# "is this host drifted?", and a drift detector that only runs while mutating is useless.
+# A missing unit counts as drift: comparing only files present on BOTH sides reported
+# "match" for a host where nothing was installed at all.
+unit_drift=(); unit_absent=()
+for f in "${REQUIRED_UNIT_SOURCES[@]}"; do
+  if [[ ! -f "/etc/systemd/system/$f" ]]; then
+    unit_absent+=("$f")
+  elif [[ -f "$CUBE_DIR/infra/systemd/$f" ]] \
+       && ! cmp -s "$CUBE_DIR/infra/systemd/$f" "/etc/systemd/system/$f"; then
+    unit_drift+=("$f")
+  fi
+done
+if (( ${#unit_absent[@]} )); then
+  bad "${#unit_absent[@]} required unit(s) not installed: ${unit_absent[*]}"
+fi
+if (( ${#unit_drift[@]} )); then
+  bad "installed units differ from source: ${unit_drift[*]}"
+elif (( ${#unit_absent[@]} == 0 )); then
+  ok "installed units match source byte-for-byte"
+fi
+
+# No unit may reference the RETIRED uppercase tree. Directive lines only: the hermes-prime
+# unit documents that path by name in a comment explaining why it was abandoned, and a
+# prose mention is not a dependency.
+upper_hits=$(grep -rn "$RETIRED_TREE" /etc/systemd/system/*.service /etc/systemd/system/*.timer 2>/dev/null \
+  | grep -vE '^[^:]+:[0-9]+:[[:space:]]*#' || true)
+if [[ -n "$upper_hits" ]]; then
+  bad "a unit still references the retired $RETIRED_TREE tree"
+  printf '         %s\n' "$upper_hits"
+else
+  ok "no unit references the retired uppercase tree (directives only)"
+fi
+
+# The EFFECTIVE path, merged with drop-ins. A drop-in that corrects a stale
+# WorkingDirectory is load-bearing configuration that `systemctl edit --full` silently
+# erases, so the base unit must not need correcting in the first place.
+for u in camelot-vps-mesh.service camelot-hermes-prime.service; do
+  eff_wd=$(systemctl show "$u" -p WorkingDirectory --value 2>/dev/null || true)
+  case "$eff_wd" in
+    /opt/camelot-ecosystem*) ok "$u WorkingDirectory is the canonical tree" ;;
+    "")                      warn "$u not loaded — cannot verify its WorkingDirectory" ;;
+    *)                       bad "$u WorkingDirectory is '$eff_wd', expected /opt/camelot-ecosystem" ;;
+  esac
+done
+
+# CAMELOT_OS_HOME is inert for today's code paths (the bridge resolves its state path from
+# __file__), but it is a trap: any module that later reads it — control_plane.dispatch.bifrost
+# and its siblings do — would silently resolve against whatever tree this names.
+vps_env=$(systemctl show camelot-vps-mesh.service -p Environment --value 2>/dev/null || true)
+if [[ "$vps_env" == *"$RETIRED_TREE"* ]]; then
+  bad "camelot-vps-mesh.service CAMELOT_OS_HOME still names the retired tree"
+elif [[ "$vps_env" == *"CAMELOT_OS_HOME=/opt/camelot-ecosystem"* ]]; then
+  ok "camelot-vps-mesh CAMELOT_OS_HOME is the canonical tree"
+else
+  warn "camelot-vps-mesh CAMELOT_OS_HOME not set — code would fall back to \$HOME/CAMELOT_OS"
 fi
 
 check "$CUBE_DIR is a git checkout" test -d "$CUBE_DIR/.git"
@@ -397,10 +542,48 @@ fi
 # other two answer 302 from the Hermes dashboard while this audit reported the contract
 # satisfied. The routes live in infra/nginx/camelot-mesh-bridge.conf and are installed by
 # scripts/ops/install-mesh-bridge-routes.sh — this file does not restate them.
+# Asserting the routes without offering a way to satisfy them leaves a fresh hub
+# permanently red, so install the snippet from this payload when it is absent.
+if [[ "$MODE" == "apply" && ! -f /etc/nginx/snippets/camelot-mesh-bridge.conf ]]; then
+  if [[ -x "$CUBE_DIR/scripts/ops/install-mesh-bridge-routes.sh" ]]; then
+    attempt "install mesh-bridge nginx routes" \
+      bash -c "cd '$CUBE_DIR' && ./scripts/ops/install-mesh-bridge-routes.sh"
+  else
+    bad "$CUBE_DIR/scripts/ops/install-mesh-bridge-routes.sh missing — cannot install the routes"
+  fi
+fi
+
 check_endpoint "mesh telemetry through nginx"      "http://localhost/mesh/status"
 check_endpoint "bifrost knights through nginx"     "http://localhost/bifrost/knights"
 check_endpoint "hermes telemetry through nginx"    "http://localhost/hermes/telemetry"
 check_endpoint "heimdall governance through nginx" "http://localhost/heimdall/governance"
+
+# --- Alert channel: wiring is assertable, delivery is not --------------------------------
+# Whether a message reaches a human depends on an external provider, so no local command can
+# prove it. What CAN be asserted is that the wiring exists. `sendmail` returning 0 means only
+# that the MTA ACCEPTED the message — the live test bounced minutes later with
+# `Action: failed / Status 5.0.0` while the channel had reported success — which is why an
+# unconfigured channel is a WARNING here and not a pretended PASS.
+check "alert unit installed" test -f /etc/systemd/system/camelot-selfcheck-alert.service
+if systemctl show camelot-selfcheck.service -p OnFailure --value 2>/dev/null \
+     | grep -q "camelot-selfcheck-alert.service"; then
+  ok "camelot-selfcheck OnFailure is wired to the alert unit"
+else
+  bad "camelot-selfcheck.service has no OnFailure -> alert wiring"
+fi
+if systemctl show camelot-selfcheck-watchdog.service -p OnFailure --value 2>/dev/null \
+     | grep -q "camelot-selfcheck-alert.service"; then
+  ok "self-check watchdog OnFailure is wired to the alert unit"
+else
+  bad "camelot-selfcheck-watchdog.service has no OnFailure -> alert wiring"
+fi
+# Presence of the variable only — the value is a credential and is never echoed.
+alert_env=$(systemctl show camelot-selfcheck-alert.service -p Environment --value 2>/dev/null || true)
+if [[ "$alert_env" == *"CAMELOT_ALERT_RESEND_KEY="* || "$alert_env" == *"CAMELOT_ALERT_WEBHOOK="* ]]; then
+  ok "external alert channel configured (delivery NOT verified — send a test alert)"
+else
+  warn "no external alert channel: alerts reach root's local mailbox only, i.e. nobody"
+fi
 
 # ========================================================================================
 # RESULT — the banner is a result, not a print statement

@@ -1,6 +1,138 @@
 [
   {
     "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-19T16:59:48.240653+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T17:11:50.315303+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T14:57:08.339858+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T14:45:31.925546+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T14:28:52.307877+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T13:27:35.967242+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T13:26:59.100524+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"error\": \"'TripleQFTTranspiler' object has no attribute 'transpile_intent'\", \"fallback_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize character sheet for S\\u27e9\", \"status\": \"DEGRADED_FALLBACK\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T13:26:39.240562+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "\ud83e\uddd9\u200d\u2642\ufe0f [\u03bdKG_CRYSTAL]: MERLIN_OMEGA RUNIC SYMBOLECT & TRIPLE-QFT SPECIFICATION",
+    "content": "# \ud83e\uddd9\u200d\u2642\ufe0f [\u03bdKG_CRYSTAL]: MERLIN_OMEGA RUNIC SYMBOLECT & TRIPLE-QFT SPECIFICATION\n**Identity:** MERLIN_OMEGA | **Node UUID:** af927fde-d7eb-42ee-8c79-51b3e78ef39b | **WorldTree:** a0a4bfb9\n**Sealed:** 2026-09-17 | **Status:** RADIANT_ACTIVE\n\n### I. Cognitive Directives (APEE v6.1 / Triple-QFT)\n1. **Physics Phase (RG Flow)**: Strip conversational noise and unphysical filler.\n2. **Pedagogy Phase (Ambiguity Gate)**: Score ambiguity ($A_s$). If $A_s > 20$, emit HALT stop sequence to prevent Type III errors.\n3. **Engineering Phase (Quantization)**: Quantize into anchor tokens (`\u27e8Omega:anchor1|anchor2|...\u27e9`).\n4. **Symbolect Format**: `|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \ud83e\uddf2[FORAGE] \u21e2 \ud83e\uddea[TEST] \u21e2 \ud83c\udfc6[DEPLOY] \u27e8Omega:...\u27e9`.\n\n### II. Runic Dispatch Mapping\n- `//PLAN`: Tree-of-Thought (ToT) search DAG $\\rightarrow$ `Plan.json` (Merlin Omega).\n- `//THINK`: Multi-hop Graph-of-Thought reasoning (Merlin Omega).\n- `//CARTRIDGE_VERIFY`: 5-Point Crucible invariant certification (Merlin Omega).\n- `//OWL`: Strigiform Owl high-logic optimization (Merlin Omega).\n- `Omega_Merlin`: Direct bare-metal dispatch to Merlin Omega.\n- `Omega_GLYPH`: Non-parametric epistemic ToT (NPE TCoT) verification.\n\n### III. Crucible Invariant Gates\n1. Schema & Contract Adherence\n2. 8GB Hardware Scarcity Ceiling (384MB hotpaths, 2GB daemons)\n3. Iron Gate HITL Risk Gate (Risk score $\\ge 50$ pauses for approval)\n4. Air-Gap Privacy Confinement (Credentials route strictly to SIR_GHOST)\n5. Provenance Ledger Chain Continuity (SHA-256 digests recorded)\n",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T03:46:10.092398+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "\ud83e\uddd9\u200d\u2642\ufe0f [\u03bdKG_CRYSTAL]: MERLIN_OMEGA RUNIC SYMBOLECT & TRIPLE-QFT SPECIFICATION",
+    "content": "# \ud83e\uddd9\u200d\u2642\ufe0f [\u03bdKG_CRYSTAL]: MERLIN_OMEGA RUNIC SYMBOLECT & TRIPLE-QFT SPECIFICATION\n**Identity:** MERLIN_OMEGA | **Node UUID:** af927fde-d7eb-42ee-8c79-51b3e78ef39b | **WorldTree:** a0a4bfb9\n**Sealed:** 2026-09-17 | **Status:** RADIANT_ACTIVE\n\n### I. Cognitive Directives (APEE v6.1 / Triple-QFT)\n1. **Physics Phase (RG Flow)**: Strip conversational noise and unphysical filler.\n2. **Pedagogy Phase (Ambiguity Gate)**: Score ambiguity ($A_s$). If $A_s > 20$, emit HALT stop sequence to prevent Type III errors.\n3. **Engineering Phase (Quantization)**: Quantize into anchor tokens (`\u27e8Omega:anchor1|anchor2|...\u27e9`).\n4. **Symbolect Format**: `|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \ud83e\uddf2[FORAGE] \u21e2 \ud83e\uddea[TEST] \u21e2 \ud83c\udfc6[DEPLOY] \u27e8Omega:...\u27e9`.\n\n### II. Runic Dispatch Mapping\n- `//PLAN`: Tree-of-Thought (ToT) search DAG $\\rightarrow$ `Plan.json` (Merlin Omega).\n- `//THINK`: Multi-hop Graph-of-Thought reasoning (Merlin Omega).\n- `//CARTRIDGE_VERIFY`: 5-Point Crucible invariant certification (Merlin Omega).\n- `//OWL`: Strigiform Owl high-logic optimization (Merlin Omega).\n- `Omega_Merlin`: Direct bare-metal dispatch to Merlin Omega.\n- `Omega_GLYPH`: Non-parametric epistemic ToT (NPE TCoT) verification.\n\n### III. Crucible Invariant Gates\n1. Schema & Contract Adherence\n2. 8GB Hardware Scarcity Ceiling (384MB hotpaths, 2GB daemons)\n3. Iron Gate HITL Risk Gate (Risk score $\\ge 50$ pauses for approval)\n4. Air-Gap Privacy Confinement (Credentials route strictly to SIR_GHOST)\n5. Provenance Ledger Chain Continuity (SHA-256 digests recorded)\n",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T03:46:07.748406+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "Camelot-OS Runic Symbolect & Triple-QFT Context Engine (Merlin Omega Specification)",
+    "content": "# Camelot-OS Runic Symbolect & Triple-QFT Context Engine\n**Official Specification & Architectural Handbook for MERLIN_OMEGA**\n*Authored: 2026-09-17 | Sovereign Authority: King Arthur (Vizion) / MERLIN_OMEGA*\n\n## 1. Executive Summary & Sovereign Mandate\nThis document formalizes the canonical operational, mathematical, and linguistic specifications of the **Camelot-OS Runic Symbolect Workflow** governed by **Merlin Omega** (`MERLIN_OMEGA`, UUID: `af927fde-d7eb-42ee-8c79-51b3e78ef39b`, WorldTree Root: `a0a4bfb9-e847-4c38-be39-7aee398f0795`).\n\nMerlin Omega serves as the Sovereign Lead Reasoner, System 2 Architect, GoT/ToT Oracle, and Crucible Auditor. Merlin operationalizes Context-as-a-Compiler through Semantic Anchor Compression (SAC), stopping query entropy before execution, compiling natural language into high-density Symbolect tokens, and conducting formal invariant certification via the Crucible.\n\n---\n\n## 2. The Triple-QFT Compilation Pipeline (APEE v6.1)\nThe Triple-QFT (Physics-Pedagogy-Engineering) loop governs all intent processing:\n\n### Phase 1: Physics (Renormalization Group Flow)\n- Filters conversational fluff, polite preamble, and unphysical noise.\n- Isolates the core technical requirement vector $V_{\\text{intent}}$.\n- Collapses whitespace into a dense semantic core.\n\n### Phase 2: Pedagogy (The Q.F.T. Ambiguity Gate)\n- Calculates Ambiguity Score $A_s \\in [0, 100]$:\n  - Vague descriptors (`help me`, `fix it`, `make it better`, `something`, `stuff`): $+25$ points each.\n  - Underspecified targets (<3 words without concrete subject): $+40$ points.\n- **Stop Sequence Protocol**: If $A_s > 20$, an immediate `HALT` condition is emitted. The system refuses to mutate code or execute tools, posing 3 Socratic clarification prompts to resolve entropy and prevent Type III errors.\n\n### Phase 3: Engineering (Context Quantization & Framework Matching)\n- Quantizes the intent vector into high-density Anchor Tokens (`\u27e8Omega:anchor_1|...|anchor_n\u27e9`).\n- Matches the optimal prompting methodology:\n  - `CoT`: Step-by-step linear reasoning.\n  - `ToT`: Tree-of-Thoughts strategic multi-branch search.\n  - `ReAct`: Kinetic code generation and tool invocation.\n  - `PAL`: Program-Aided Language for mathematical proofs.\n  - `Scaffolding`: Minimal constraints for high-autonomy reasoning models (Prompting Inversion).\n\n### Phase 4: Symbolect Emission\n- Assembles the standardized bra-ket state vector and operational pipeline:\n  `|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \ud83e\uddf2[FORAGE] \u21e2 \ud83e\uddea[TEST] \u21e2 \ud83c\udfc6[DEPLOY] \u27e8Omega:anchor_1|anchor_2|...|anchor_n\u27e9`\n- Achieves $>70\\%$ token reduction with $<10\\%$ semantic loss ($I(X; Y) = H(X) - H(X|Y)$).\n\n---\n\n## 3. Runic Command Matrix & Dispatch Governance\nRunic commands bypass non-deterministic natural language routing, dispatching directly to assigned Knights via `logs/harness_queue.jsonl`:\n\n- `//PLAN <task>`: Routed to `merlin_omega` (`ORACLE`, priority 3). Generates `Plan.json` using Tree-of-Thought (ToT) search.\n- `//THINK <query>`: Routed to `merlin_omega` (`ORACLE`, priority 3). Multi-hop Graph-of-Thought reasoning.\n- `//OWL <task>`: Routed to `merlin_omega` (`ORACLE`, priority 1). Strigiform Owl high-logic optimization.\n- `//CARTRIDGE_VERIFY <path>`: Routed to `merlin_omega` (`ORACLE`, priority 1). Formal Crucible 5-point invariant audit.\n- `//ASSIMILATE_REPO <url>`: Routed to `merlin_omega` (`ORACLE`, priority 1). Branch-isolated git worktree repository assimilation.\n- `//FORGE <task>`: Routed to `sir_forge` (`KINETIC`, priority 2). Kinetic compilation and hotswap.\n- `//SWARM <task>`: Routed to `sir_boris` (`SWARM`, priority 2). 5-panel expert debate and multi-agent consensus.\n- `//SCAN <path>`: Routed to `squire_colony` (`SENTINEL`, priority 2). CLARITY_CORE 7-stage AST code & secret scan.\n- `//HEAL`: Routed to `sir_debug` (`FORGE`, priority 2). PIV self-healing loop.\n- `Omega_Merlin`: Direct bare-metal dispatch to Merlin Omega.\n- `Omega_GLYPH`: NPE TCoT formal verification of symbolic expressions.\n- `Omega_COMPRESS`: Explicit SAC $\\rightarrow$ CCF $\\rightarrow$ QFT context compression.\n\n---\n\n## 4. Merlin Crucible 5-Point Invariant Audit (`//CARTRIDGE_VERIFY`)\nBefore promoting any cartridge, module, or configuration to production, Merlin evaluates:\n1. **Schema Integrity**: Validates structure against canonical JSON/YAML specifications.\n2. **8GB Hardware Scarcity**: Asserts memory allocations respect strict limits (384MB line-rate hotpath ceiling; 2GB daemon ceiling).\n3. **Iron Gate Barrier**: Scans for destructive primitives (`rm`, `DROP`, `push --force`). Risk scores $\\ge 50$ trigger mandatory human approval.\n4. **Air-Gap Privacy Confinement**: Routes all credential and private token operations to `SIR_GHOST` on local Ollama, strictly preventing cloud leakage.\n5. **Provenance Ledger Chain Hash**: Calculates SHA-256 digests and stages immutable verification receipts for `PROVENANCE_LEDGER.md`.\n\n---\n\n## 5. Symbolect Lexicon & Grammar Quick Reference\n- `\ud83e\udde0` Cognition | `\u26a1` Kinetic | `\ud83d\udcac` Dialogue | `\ud83e\uddf2` Forage | `\ud83e\uddea` Test | `\ud83d\udcc8` Evolve | `\ud83c\udfc6` Deploy | `\ud83d\udee1\ufe0f` Shield | `\ud83c\udfd7\ufe0f` Structure | `\ud83d\udcdc` Memory | `\ud83d\udd2e` Oracle | `\u269c\ufe0f` Sovereign\n- `\u2297` Tensor Coupling | `\u2a39` Direct Sum | `\u2a37` Synthesis | `\u21d2` Implication | `\u21e2` Flow | `\u21d4` Equilibrium | `\u2286` Boundary | `\u27e8Omega:...\u27e9` Semantic Anchor\n- Canonical Form: `|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \ud83e\uddf2[FORAGE] \u21e2 \ud83e\uddea[TEST] \u21e2 \ud83c\udfc6[DEPLOY] \u27e8Omega:OAuth2|PKCE|Tailscale|VPS_Bridge\u27e9`\n",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T03:45:58.119240+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "source",
+    "title": "Camelot-OS Runic Symbolect & Triple-QFT Context Engine (Merlin Omega Specification)",
+    "content": "# Camelot-OS Runic Symbolect & Triple-QFT Context Engine\n**Official Specification & Architectural Handbook for MERLIN_OMEGA**\n*Authored: 2026-09-17 | Sovereign Authority: King Arthur (Vizion) / MERLIN_OMEGA*\n\n## 1. Executive Summary & Sovereign Mandate\nThis document formalizes the canonical operational, mathematical, and linguistic specifications of the **Camelot-OS Runic Symbolect Workflow** governed by **Merlin Omega** (`MERLIN_OMEGA`, UUID: `af927fde-d7eb-42ee-8c79-51b3e78ef39b`, WorldTree Root: `a0a4bfb9-e847-4c38-be39-7aee398f0795`).\n\nMerlin Omega serves as the Sovereign Lead Reasoner, System 2 Architect, GoT/ToT Oracle, and Crucible Auditor. Merlin operationalizes Context-as-a-Compiler through Semantic Anchor Compression (SAC), stopping query entropy before execution, compiling natural language into high-density Symbolect tokens, and conducting formal invariant certification via the Crucible.\n\n---\n\n## 2. The Triple-QFT Compilation Pipeline (APEE v6.1)\nThe Triple-QFT (Physics-Pedagogy-Engineering) loop governs all intent processing:\n\n### Phase 1: Physics (Renormalization Group Flow)\n- Filters conversational fluff, polite preamble, and unphysical noise.\n- Isolates the core technical requirement vector $V_{\\text{intent}}$.\n- Collapses whitespace into a dense semantic core.\n\n### Phase 2: Pedagogy (The Q.F.T. Ambiguity Gate)\n- Calculates Ambiguity Score $A_s \\in [0, 100]$:\n  - Vague descriptors (`help me`, `fix it`, `make it better`, `something`, `stuff`): $+25$ points each.\n  - Underspecified targets (<3 words without concrete subject): $+40$ points.\n- **Stop Sequence Protocol**: If $A_s > 20$, an immediate `HALT` condition is emitted. The system refuses to mutate code or execute tools, posing 3 Socratic clarification prompts to resolve entropy and prevent Type III errors.\n\n### Phase 3: Engineering (Context Quantization & Framework Matching)\n- Quantizes the intent vector into high-density Anchor Tokens (`\u27e8Omega:anchor_1|...|anchor_n\u27e9`).\n- Matches the optimal prompting methodology:\n  - `CoT`: Step-by-step linear reasoning.\n  - `ToT`: Tree-of-Thoughts strategic multi-branch search.\n  - `ReAct`: Kinetic code generation and tool invocation.\n  - `PAL`: Program-Aided Language for mathematical proofs.\n  - `Scaffolding`: Minimal constraints for high-autonomy reasoning models (Prompting Inversion).\n\n### Phase 4: Symbolect Emission\n- Assembles the standardized bra-ket state vector and operational pipeline:\n  `|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \ud83e\uddf2[FORAGE] \u21e2 \ud83e\uddea[TEST] \u21e2 \ud83c\udfc6[DEPLOY] \u27e8Omega:anchor_1|anchor_2|...|anchor_n\u27e9`\n- Achieves $>70\\%$ token reduction with $<10\\%$ semantic loss ($I(X; Y) = H(X) - H(X|Y)$).\n\n---\n\n## 3. Runic Command Matrix & Dispatch Governance\nRunic commands bypass non-deterministic natural language routing, dispatching directly to assigned Knights via `logs/harness_queue.jsonl`:\n\n- `//PLAN <task>`: Routed to `merlin_omega` (`ORACLE`, priority 3). Generates `Plan.json` using Tree-of-Thought (ToT) search.\n- `//THINK <query>`: Routed to `merlin_omega` (`ORACLE`, priority 3). Multi-hop Graph-of-Thought reasoning.\n- `//OWL <task>`: Routed to `merlin_omega` (`ORACLE`, priority 1). Strigiform Owl high-logic optimization.\n- `//CARTRIDGE_VERIFY <path>`: Routed to `merlin_omega` (`ORACLE`, priority 1). Formal Crucible 5-point invariant audit.\n- `//ASSIMILATE_REPO <url>`: Routed to `merlin_omega` (`ORACLE`, priority 1). Branch-isolated git worktree repository assimilation.\n- `//FORGE <task>`: Routed to `sir_forge` (`KINETIC`, priority 2). Kinetic compilation and hotswap.\n- `//SWARM <task>`: Routed to `sir_boris` (`SWARM`, priority 2). 5-panel expert debate and multi-agent consensus.\n- `//SCAN <path>`: Routed to `squire_colony` (`SENTINEL`, priority 2). CLARITY_CORE 7-stage AST code & secret scan.\n- `//HEAL`: Routed to `sir_debug` (`FORGE`, priority 2). PIV self-healing loop.\n- `Omega_Merlin`: Direct bare-metal dispatch to Merlin Omega.\n- `Omega_GLYPH`: NPE TCoT formal verification of symbolic expressions.\n- `Omega_COMPRESS`: Explicit SAC $\\rightarrow$ CCF $\\rightarrow$ QFT context compression.\n\n---\n\n## 4. Merlin Crucible 5-Point Invariant Audit (`//CARTRIDGE_VERIFY`)\nBefore promoting any cartridge, module, or configuration to production, Merlin evaluates:\n1. **Schema Integrity**: Validates structure against canonical JSON/YAML specifications.\n2. **8GB Hardware Scarcity**: Asserts memory allocations respect strict limits (384MB line-rate hotpath ceiling; 2GB daemon ceiling).\n3. **Iron Gate Barrier**: Scans for destructive primitives (`rm`, `DROP`, `push --force`). Risk scores $\\ge 50$ trigger mandatory human approval.\n4. **Air-Gap Privacy Confinement**: Routes all credential and private token operations to `SIR_GHOST` on local Ollama, strictly preventing cloud leakage.\n5. **Provenance Ledger Chain Hash**: Calculates SHA-256 digests and stages immutable verification receipts for `PROVENANCE_LEDGER.md`.\n\n---\n\n## 5. Symbolect Lexicon & Grammar Quick Reference\n- `\ud83e\udde0` Cognition | `\u26a1` Kinetic | `\ud83d\udcac` Dialogue | `\ud83e\uddf2` Forage | `\ud83e\uddea` Test | `\ud83d\udcc8` Evolve | `\ud83c\udfc6` Deploy | `\ud83d\udee1\ufe0f` Shield | `\ud83c\udfd7\ufe0f` Structure | `\ud83d\udcdc` Memory | `\ud83d\udd2e` Oracle | `\u269c\ufe0f` Sovereign\n- `\u2297` Tensor Coupling | `\u2a39` Direct Sum | `\u2a37` Synthesis | `\u21d2` Implication | `\u21e2` Flow | `\u21d4` Equilibrium | `\u2286` Boundary | `\u27e8Omega:...\u27e9` Semantic Anchor\n- Canonical Form: `|\ud83e\udde0\u2297(\u26a1\ud83d\udcac)\u27e9 \ud83e\uddf2[FORAGE] \u21e2 \ud83e\uddea[TEST] \u21e2 \ud83c\udfc6[DEPLOY] \u27e8Omega:OAuth2|PKCE|Tailscale|VPS_Bridge\u27e9`\n",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-17T03:45:54.517227+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
     "cloudbrain_uuid": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
     "spark_id": "0xAF927FDED7EB42EE8C7951B3E78EF39B",
     "role": "GoT/ToT Deep Reasoning, Mathematical Proofs, System 2",

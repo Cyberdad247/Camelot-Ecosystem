@@ -59,7 +59,25 @@ def build_vps_hermes_inference_links(
             "loopback_only_upstream": True,
             "credential_env": "CLIPROXY_API_KEY",
             "secret_values_serialized": False,
-        }
+        },
+        "vllm_deepseek_flash": {
+            "selector": "vllm:deepseek-ai/DeepSeek-V4.1-Flash",
+            "backend": "vllm",
+            "model_tag": "deepseek-ai/DeepSeek-V4.1-Flash",
+            "manifest_alias": "deepseek-flash",
+            "service": "vLLM",
+            "local_base_url": "http://127.0.0.1:8000/v1",
+            "bifrost_route": "/bifrost/models/deepseek-flash",
+            "bifrost_gateway": bifrost_gateway,
+            "mesh_bridge": mesh_bridge,
+            "vps_public_ip": public_ip,
+            "vps_node": VPS_NODE_ID,
+            "governing_knight": "HERMES_PRIME",
+            "hermes_prime_uuid": HERMES_PRIME_UUID,
+            "co_guardian": "SIR_HEIMDALL",
+            "air_gapped": False,
+            "secret_values_serialized": False,
+        },
     }
 
 

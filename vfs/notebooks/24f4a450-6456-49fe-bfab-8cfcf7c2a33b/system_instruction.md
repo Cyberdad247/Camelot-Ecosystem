@@ -3,7 +3,7 @@
 > **Compilers:** `ANYA_OMEGA` (Sovereign Compiler) & `MERLIN_OMEGA` (System-2 Logic Core)  
 > **Arch-Librarian:** `LADY_MNEMOSYNE_Ω` (Memory Governor & VFS Routing)  
 > **Target CloudBrain Node:** `HERMES_AGENT_EVOLUTION` (`24f4a450-6456-49fe-bfab-8cfcf7c2a33b`)  
-> **Architecture Profile:** `v1000.54-EXCALIBUR-A` (vMAX Singularity)  
+> **Architecture Profile:** `Living Camelot-OS v1000 MAX Compendium` (vMAX Singularity)  
 > **Timestamp:** 2026-09-13T04:57:41.439443+00:00  
 
 ---

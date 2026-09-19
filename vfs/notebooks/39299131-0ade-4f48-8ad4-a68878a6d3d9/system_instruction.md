@@ -3,7 +3,7 @@
 > **Compilers:** `ANYA_OMEGA` (Sovereign Compiler) & `MERLIN_OMEGA` (System-2 Logic Core)  
 > **Arch-Librarian:** `LADY_MNEMOSYNE_Ω` (Memory Governor & VFS Routing)  
 > **Target CloudBrain Node:** `FATHER_CAMELOT` (`39299131-0ade-4f48-8ad4-a68878a6d3d9`)  
-> **Architecture Profile:** `v1000.54-EXCALIBUR-A` (vMAX Singularity)  
+> **Architecture Profile:** `Living Camelot-OS v1000 MAX Compendium` (vMAX Singularity)  
 > **Timestamp:** 2026-09-13T04:57:41.439443+00:00  
 
 ---

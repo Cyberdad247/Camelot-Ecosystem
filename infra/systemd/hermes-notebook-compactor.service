@@ -5,10 +5,10 @@ After=network.target
 [Service]
 Type=oneshot
 User=ubuntu
-WorkingDirectory=/opt/Camelot-Ecosystem
+WorkingDirectory=/opt/camelot-ecosystem
 ExecStart=/usr/bin/python3 -m control_plane.infra.open_notebook_compactor
 Environment=PYTHONUNBUFFERED=1
-Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+Environment=CAMELOT_OS_HOME=/opt/camelot-ecosystem
 
 # Scarcity Protection (cgroups v2)
 MemoryAccounting=true

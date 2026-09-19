@@ -6,7 +6,7 @@
 **Specialization:** PIV Self-Healing Loop, Error Diagnosis & AST Repair  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** piv_self_heal, ast_repair, diagnosis  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

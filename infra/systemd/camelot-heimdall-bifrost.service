@@ -6,12 +6,12 @@ Wants=tailscaled.service
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory=/opt/Camelot-Ecosystem
+WorkingDirectory=/opt/camelot-ecosystem
 ExecStart=/usr/bin/python3 -m control_plane.infra.heimdall_bifrost_governance
 Restart=always
 RestartSec=5s
 Environment=PYTHONUNBUFFERED=1
-Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+Environment=CAMELOT_OS_HOME=/opt/camelot-ecosystem
 Environment=BIFROST_PORT=3001
 Environment=VPS_HOST=162.35.107.134
 

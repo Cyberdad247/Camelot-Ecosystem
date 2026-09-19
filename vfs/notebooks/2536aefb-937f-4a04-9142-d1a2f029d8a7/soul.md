@@ -6,7 +6,7 @@
 **Specialization:** Camelot-OS Alpha-Omega Artifacts & Compilation Store  
 **Primary Substrate:** Forge Substrate  
 **Domain Tags:** compilation_store, artifact_vault, distillation  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

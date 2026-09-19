@@ -1,4 +1,5 @@
 # [SOUL: Sir Marcus]
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`
 **Role:** Cultural Chronicler & Swarm Director
 **Class:** Chronos
 **Culture:** Roman

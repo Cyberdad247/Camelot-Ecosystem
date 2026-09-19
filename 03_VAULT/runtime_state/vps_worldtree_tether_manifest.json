@@ -206,7 +206,7 @@
     "open_viking_node": "open_viking://worldtree/sir_hermes",
     "open_notebook_local": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\open_notebook\\sir_hermes_tissue.json",
     "tether_active": true,
-    "timestamp": "2026-08-30T16:07:08.948748+00:00"
+    "timestamp": "2026-09-17T12:47:57.777998+00:00"
   },
   "HERMES_PRIME": {
     "knight_id": "HERMES_PRIME",
@@ -217,7 +217,7 @@
     "open_viking_node": "open_viking://worldtree/hermes_prime",
     "open_notebook_local": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\open_notebook\\hermes_prime_tissue.json",
     "tether_active": true,
-    "timestamp": "2026-08-30T16:07:08.962362+00:00"
+    "timestamp": "2026-09-17T12:47:57.777998+00:00"
   },
   "HERMES_PRIME_VFS_FORGE": {
     "knight_id": "HERMES_PRIME_VFS_FORGE",
@@ -228,7 +228,7 @@
     "open_viking_node": "open_viking://worldtree/hermes_prime_vfs_forge",
     "open_notebook_local": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\open_notebook\\hermes_prime_vfs_forge_tissue.json",
     "tether_active": true,
-    "timestamp": "2026-08-30T16:07:08.976259+00:00"
+    "timestamp": "2026-09-17T12:47:57.777998+00:00"
   },
   "HERMES_AGENT_EVOLUTION": {
     "knight_id": "HERMES_AGENT_EVOLUTION",
@@ -239,7 +239,7 @@
     "open_viking_node": "open_viking://worldtree/hermes_agent_evolution",
     "open_notebook_local": "C:\\Users\\vizio\\CAMELOT_OS\\03_VAULT\\runtime_state\\open_notebook\\hermes_agent_evolution_tissue.json",
     "tether_active": true,
-    "timestamp": "2026-08-30T16:07:08.977353+00:00"
+    "timestamp": "2026-09-17T12:47:57.777998+00:00"
   },
   "SIR_LANCELOT": {
     "knight_id": "SIR_LANCELOT",

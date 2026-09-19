@@ -100,7 +100,11 @@ func (p *ProxyServer) connectBackends() error {
 	// Get backends from environment
 	backendsEnv := os.Getenv("SALTARE_BACKENDS")
 	if backendsEnv == "" {
-		log.Warn().Msg("No backends configured. Set SALTARE_BACKENDS env var.")
+		if os.Getenv("SALTARE_OFFLINE") != "" {
+			log.Info().Msg("Offline mode (SALTARE_OFFLINE set): running with no backends.")
+		} else {
+			log.Warn().Msg("No backends configured. Set SALTARE_BACKENDS env var (or SALTARE_OFFLINE=1 for intentional offline mode).")
+		}
 		return nil
 	}
 

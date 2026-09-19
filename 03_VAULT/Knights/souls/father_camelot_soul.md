@@ -6,7 +6,7 @@
 **Specialization:** Ancestral Compass, Moral & Ethical Governance Ledger  
 **Primary Substrate:** Sovereign Substrate  
 **Domain Tags:** ancestral_compass, ethical_ledger, moral_law  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

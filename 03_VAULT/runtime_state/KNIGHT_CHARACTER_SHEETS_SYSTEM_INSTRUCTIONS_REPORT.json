@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-13T04:57:41.439443+00:00",
+  "timestamp": "2026-09-19T20:07:20.734189+00:00",
   "compilers": [
     "ANYA_OMEGA",
     "MERLIN_OMEGA",
@@ -12,12 +12,12 @@
     "lakesha (100.100.155.55 \u00b7 Lakisha Voice OS Host)"
   ],
   "stats": {
-    "total": 38,
-    "souls_generated": 38,
-    "sparks_generated": 38,
-    "phials_generated": 38,
-    "system_instructions_generated": 38,
-    "character_sheets_updated": 38
+    "total": 0,
+    "souls_generated": 0,
+    "sparks_generated": 0,
+    "phials_generated": 0,
+    "system_instructions_generated": 0,
+    "character_sheets_updated": 0
   },
   "status": "ALL_38_KNIGHTS_FULLY_EQUIPPED_AND_VERIFIED"
 }

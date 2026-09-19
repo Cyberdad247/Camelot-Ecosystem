@@ -1,8 +1,8 @@
 # Saltare Semantic Gateway Configuration
-# The Go-based MCP multiplexer for Camelot-OS v60.0
+# The Go-based MCP multiplexer for Living Camelot-OS v1000 MAX Compendium
 
 [server]
-port = 8080
+port = 8085
 host = "127.0.0.1"
 log_level = "info"
 

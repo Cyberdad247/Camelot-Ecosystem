@@ -6,7 +6,7 @@
 **Specialization:** Privacy Scanner, Air-Gapped Credentials & Local Vault  
 **Primary Substrate:** Ollama Local Container  
 **Domain Tags:** privacy, air_gap, local_vault, zero_leak  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

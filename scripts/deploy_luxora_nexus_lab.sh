@@ -17,6 +17,12 @@ REPO_URL="https://github.com/Cyberdad247/luxora-nexus-lab.git"
 DEST_DIR="/opt/luxora-nexus-lab"
 WWW_ROOT="/var/www/camelot"
 
+# The Camelot-OS checkout this script lives in, resolved from the script's own location.
+# The Caddyfile is read from whichever tree is actually running rather than a hardcoded
+# /opt path: the hub carried two checkouts differing only by case, and hardcoding one of
+# them meant this script silently no-opped (or copied from the retired tree).
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 # 1. Clone or pull latest Luxora Nexus Lab
 sudo mkdir -p "$DEST_DIR"
 if [ ! -d "$DEST_DIR/.git" ]; then
@@ -67,11 +73,19 @@ fi
 
 # 4. Deploy Unified Caddyfile
 echo "Updating Caddy Gateway configuration..."
-if [ -f "/opt/Camelot-Ecosystem/infra/caddy/Caddyfile" ]; then
-  sudo cp /opt/Camelot-Ecosystem/infra/caddy/Caddyfile /etc/caddy/Caddyfile
+if [ -f "${REPO_ROOT}/infra/caddy/Caddyfile" ]; then
+  sudo cp "${REPO_ROOT}/infra/caddy/Caddyfile" /etc/caddy/Caddyfile
 fi
 
-sudo systemctl restart caddy || true
+# A swallowed `systemctl restart caddy || true` is indistinguishable from a successful
+# reload. Caddy is not installed on the hub (nginx owns ingress there), so this reports
+# which gateway is actually in charge instead of pretending to have restarted one.
+if command -v caddy >/dev/null 2>&1; then
+  sudo systemctl restart caddy
+  echo "  caddy reloaded"
+else
+  echo "  caddy NOT installed — nginx owns ingress on this host, Caddyfile staged only"
+fi
 
 # 5. Service Response Health Check
 echo "========================================================================"

@@ -1,5 +1,5 @@
 {
-  "manifest_id": "nexus_vps_deploy_1789431432",
+  "manifest_id": "nexus_vps_deploy_1789618702",
   "commander": "MERLIN_\u03a9 [HEADLESS_INFRASTRUCTURE_COMMANDER]",
   "strategy": "Bare-Metal Linux Process Isolation + Bifrost mTLS + O(1) MemPalace",
   "target_host": "162.35.107.134 (KVM563)",
@@ -41,7 +41,7 @@
         "systemd_units_staged": true,
         "rule_7_conformance": "0% Python/Node hotpath, 100% native Rust/Go/systemd"
       },
-      "timestamp": "2026-09-15T00:17:12.390107+00:00"
+      "timestamp": "2026-09-17T04:18:22.690417+00:00"
     },
     {
       "step_id": "Step_2",
@@ -53,10 +53,10 @@
         "bifrost_port_3001": "ONLINE (200 OK)",
         "telemetry_stream_port": 8095,
         "avatar_capsule_pwa": "apps/excalibur-cmd-1 -> http://100.110.180.18:8095/telemetry/cockpit",
-        "registered_nodes": 6,
+        "registered_nodes": 7,
         "excalibur_cockpit": "Samsung Galaxy S26 Ultra (Android 16)"
       },
-      "timestamp": "2026-09-15T00:17:12.484605+00:00"
+      "timestamp": "2026-09-17T04:18:22.786704+00:00"
     },
     {
       "step_id": "Step_3",
@@ -71,7 +71,7 @@
         "active_nukg_crystals": 7,
         "complexity": "O(1) semantic retrieval via indexed crystal vectors"
       },
-      "timestamp": "2026-09-15T00:17:12.508841+00:00"
+      "timestamp": "2026-09-17T04:18:22.811701+00:00"
     },
     {
       "step_id": "Step_4",
@@ -85,7 +85,7 @@
         "lady_apis_role": "Deep-dive domain investigation, hypothesis verification, and Northstar profiling",
         "autonomy": "24/7 background dispatch without interactive human bottleneck"
       },
-      "timestamp": "2026-09-15T00:17:12.508862+00:00"
+      "timestamp": "2026-09-17T04:18:22.811735+00:00"
     },
     {
       "step_id": "Step_5",
@@ -111,9 +111,9 @@
         ],
         "cloud_decapitation": "100% Verified (Zero Firebase/external cloud telemetry in hotpath)"
       },
-      "timestamp": "2026-09-15T00:17:12.524824+00:00"
+      "timestamp": "2026-09-17T04:18:22.843405+00:00"
     }
   ],
   "z3_seal": "Z3_PALADIN_OCTEM_SEALED_0x4F696248",
-  "completed_at": "2026-09-15T00:17:12.524839+00:00"
+  "completed_at": "2026-09-17T04:18:22.843430+00:00"
 }

@@ -6,7 +6,7 @@
 **Specialization:** Sovereign King Authority, Ethical Compass, Governance  
 **Primary Substrate:** Human Operator (Vizion)  
 **Domain Tags:** king_authority, moral_compass, governance  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

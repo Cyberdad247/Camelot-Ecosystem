@@ -1,0 +1,14 @@
+{
+  "snapshot_id": "excalibur_cicd_20260919_201348",
+  "version_tag": "Living Camelot-OS v1000 MAX Compendium",
+  "timestamp_utc": "2026-09-19T20:13:48.567664+00:00Z",
+  "operator": "King_Arthur_Vizion",
+  "target_node": "vashawns-s26-ultra (100.106.246.126)",
+  "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "sha256": "b31bf1f944323eec4244dbd858cd621c0177e602050d18e89026bf9ea21b6b9b",
+  "surfaces": [
+    "docs/architecture/EXCALIBUR_ENTIREMAP.md",
+    "docs/SEPTEM_REGNA/L7_ETHEREAL/EXCALIBUR_ENTIREMAP.md"
+  ],
+  "status": "RATIFIED_IMMUTABLE"
+}

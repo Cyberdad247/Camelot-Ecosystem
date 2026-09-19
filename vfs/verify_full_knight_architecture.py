@@ -20,13 +20,33 @@ def verify_all():
     agents_md = CAMELOT_ROOT / ".agent" / "AGENTS.md"
     row_pat = re.compile(r"\|\s*\*\*([A-Z0-9_]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*`([a-f0-9-]+)`\s*\|")
     knights = []
-    for m in row_pat.finditer(agents_md.read_text(encoding="utf-8", errors="ignore")):
-        knights.append({
-            "knight_id": m.group(1).strip(),
-            "role": m.group(2).strip(),
-            "model": m.group(3).strip(),
-            "uuid": m.group(4).strip()
-        })
+    if agents_md.exists():
+        for m in row_pat.finditer(agents_md.read_text(encoding="utf-8", errors="ignore")):
+            knights.append({
+                "knight_id": m.group(1).strip(),
+                "role": m.group(2).strip(),
+                "model": m.group(3).strip(),
+                "uuid": m.group(4).strip()
+            })
+
+    if not knights:
+        rosters_md = CAMELOT_ROOT / "vfs" / "rosters.md"
+        if rosters_md.exists():
+            for line in rosters_md.read_text(encoding="utf-8", errors="ignore").splitlines():
+                line = line.strip()
+                if line.startswith("| **") and "|" in line:
+                    parts = [p.strip() for p in line.split("|")[1:-1]]
+                    if len(parts) >= 4:
+                        kid = parts[0].replace("*", "").strip()
+                        role = parts[1].strip()
+                        model = parts[2].strip()
+                        uuid = parts[3].replace("`", "").strip()
+                        knights.append({
+                            "knight_id": kid,
+                            "role": role,
+                            "model": model,
+                            "uuid": uuid
+                        })
 
     cs_data = json.load(open(CAMELOT_ROOT / "03_VAULT" / "training" / "configs" / "knight_character_sheets.json", encoding="utf-8"))
     cs_knights = cs_data.get("knights", {})

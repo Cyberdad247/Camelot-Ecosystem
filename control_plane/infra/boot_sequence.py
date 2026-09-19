@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import asyncio
+import concurrent.futures
 import importlib.util
 import json
 import os
@@ -131,6 +132,95 @@ def _probe_port(host: str, port: int, timeout: float = 1.0) -> bool:
             return True
     except OSError:
         return False
+
+
+_SNAPSHOT_TTL_S = 900
+_SNAPSHOT_NAME = "boot_snapshot.json"
+# Phases that must stay serial (ordering / spawn side-effects / heavy FS writes)
+_SERIAL_PHASE_HINTS = (
+    "vfs preflight",
+    "excalibur",
+    "cliproxy",
+    "defense grid",
+    "kinetic edge",
+    "morgana bridge",
+    "bifrost sidecar",
+    "symbiotic",
+)
+# Port probes used to validate a cached snapshot (host, port, label-hint)
+# NOTE: 8080 added 2026-09-19 — stale snapshot hid dead CLIProxyAPI (PID 3272 TIME_WAIT)
+_SNAPSHOT_PORTS: tuple[tuple[str, int], ...] = (
+    ("127.0.0.1", 8080),
+    ("127.0.0.1", 3000),
+    ("127.0.0.1", 3002),
+    ("127.0.0.1", 8001),
+    ("127.0.0.1", 8011),
+    ("127.0.0.1", 8200),
+    ("127.0.0.1", 8300),
+    ("127.0.0.1", 8400),
+    ("127.0.0.1", 10100),
+    ("127.0.0.1", 20128),
+)
+
+
+def _snapshot_path(home: Path) -> Path:
+    return home / "03_VAULT" / "runtime_state" / _SNAPSHOT_NAME
+
+
+def _skipped_phases(explicit: set[str] | None = None) -> set[str]:
+    raw = ",".join(
+        [os.environ.get("AWAKEN_SKIP", ""), ",".join(sorted(explicit or set()))]
+    )
+    return {t.strip().lower() for t in raw.split(",") if t.strip()}
+
+
+def _write_boot_snapshot(home: Path, results: dict[str, Any]) -> None:
+    try:
+        summary = results.get("_summary", {})
+        if summary and summary.get("required_ok", 0) < summary.get("required_total", 0):
+            return  # only cache GREEN-required boots
+        payload = {
+            "captured_at": time.time(),
+            "total_ms": results.get("_total_ms", 0),
+            "summary": summary,
+            "results": {
+                k: v for k, v in results.items() if not k.startswith("_")
+            },
+            "ports": [
+                {"host": h, "port": p, "open": _probe_port(h, p, timeout=0.5)}
+                for h, p in _SNAPSHOT_PORTS
+            ],
+        }
+        _snapshot_path(home).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
+
+def try_snapshot_boot(home: Path, ttl_s: int = _SNAPSHOT_TTL_S) -> dict[str, Any] | None:
+    """Return cached boot results if fresh and ports still live, else None."""
+    try:
+        path = _snapshot_path(home)
+        if not path.exists():
+            return None
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        age = time.time() - float(payload.get("captured_at", 0))
+        if age > ttl_s:
+            return None
+        for entry in payload.get("ports", []):
+            if entry.get("open") and not _probe_port(
+                entry.get("host", "127.0.0.1"), int(entry.get("port", 0)), timeout=0.5
+            ):
+                return None  # a previously-live port died -> full boot
+        results: dict[str, Any] = dict(payload.get("results", {}))
+        results["_total_ms"] = 0
+        summary = dict(payload.get("summary", {}))
+        summary["snapshot"] = True
+        summary["snapshot_age_s"] = round(age)
+        results["_summary"] = summary
+        results["_snapshot"] = True
+        return results
+    except Exception:
+        return None
 
 
 def _read_bifrost_token() -> str | None:
@@ -1202,7 +1292,10 @@ def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
     return ok, msg
 
 
-def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
+def run_boot(
+    home: Path, quick: bool = False, skip: set[str] | None = None
+) -> dict[str, Any]:
+    skip_tokens = _skipped_phases(skip)
     # Load local LT env overrides before integration_brain is imported so module-level
     # constants pick up localhost:8200 URLs instead of the Modal cloud endpoints
     lt_env = home / "03_VAULT" / "training" / "configs" / ".env.lt_local"
@@ -1257,7 +1350,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
     summary_phases: list[dict[str, Any]] = []
     t_total = time.perf_counter()
 
-    for phase in phases:
+    def _run_one(phase: dict[str, Any]) -> tuple[str, bool, str, int, bool]:
         label = phase["name"]
         fn = phase["fn"]
         t0 = time.perf_counter()
@@ -1273,20 +1366,57 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
             ok = False
             clean = f"exception: {type(exc).__name__}: {exc}"
         dt = round((time.perf_counter() - t0) * 1000)
-        results[label] = {"ok": ok, "msg": clean, "ms": dt}
-        summary_phases.append(
-            {
-                "name": label,
-                "ok": ok,
-                "required": bool(phase["required"]),
-                "detail": clean,
-                "ms": dt,
-            }
-        )
+        return label, ok, clean, dt, bool(phase["required"])
+
+    def _emit(label: str, ok: bool, clean: str, dt: int) -> None:
         if not quick:
             glyph = f"{_C['g']}OK{_C['x']}" if ok else f"{_C['y']}WARN{_C['x']}"
             print(f"  {glyph} {_C['B']}{label}{_C['x']}  {clean}  {_C['d']}({dt}ms){_C['x']}")
 
+    active: list[dict[str, Any]] = []
+    for phase in phases:
+        lname = str(phase["name"]).lower()
+        if skip_tokens and any(tok in lname for tok in skip_tokens):
+            results[phase["name"]] = {"ok": True, "msg": "skipped via AWAKEN_SKIP", "ms": 0}
+            summary_phases.append(
+                {"name": phase["name"], "ok": True, "required": False,
+                 "detail": "skipped via AWAKEN_SKIP", "ms": 0}
+            )
+            continue
+        active.append(phase)
+
+    serial = [p for p in active if any(h in str(p["name"]).lower() for h in _SERIAL_PHASE_HINTS)]
+    parallel = [p for p in active if p not in serial]
+
+    for phase in serial:
+        label, ok, clean, dt, req = _run_one(phase)
+        results[label] = {"ok": ok, "msg": clean, "ms": dt}
+        summary_phases.append(
+            {"name": label, "ok": ok, "required": req, "detail": clean, "ms": dt}
+        )
+        _emit(label, ok, clean, dt)
+
+    if parallel:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+            futs = {pool.submit(_run_one, p): p["name"] for p in parallel}
+            done: dict[str, tuple[bool, str, int, bool]] = {}
+            for fut in concurrent.futures.as_completed(futs):
+                label, ok, clean, dt, req = fut.result()
+                done[label] = (ok, clean, dt, req)
+                _emit(label, ok, clean, dt)
+            for phase in parallel:
+                label = phase["name"]
+                ok, clean, dt, req = done[label]
+                results[label] = {"ok": ok, "msg": clean, "ms": dt}
+                summary_phases.append(
+                    {"name": label, "ok": ok, "required": req, "detail": clean, "ms": dt}
+                )
+
+    # Restore canonical phase order for summary stability
+    order = [p["name"] for p in phases if p["name"] in results]
+    summary_phases.sort(key=lambda s: order.index(s["name"]) if s["name"] in order else 999)
+
     results["_total_ms"] = round((time.perf_counter() - t_total) * 1000)
     results["_summary"] = summarize_boot_results(summary_phases)
+    _write_boot_snapshot(home, results)
     return results

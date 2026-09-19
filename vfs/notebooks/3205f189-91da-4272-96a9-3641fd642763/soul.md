@@ -6,7 +6,7 @@
 **Specialization:** Bifrost Guardian, Perimeter Lock, mTLS Boundary  
 **Primary Substrate:** Gemini 3.8 Flash  
 **Domain Tags:** bifrost_guardian, mtls_boundary, perimeter_lock  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

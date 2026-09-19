@@ -503,6 +503,17 @@ const interval = setInterval(() => {
 
 wss.on('close', () => clearInterval(interval));
 
+// Fail fast on unbound datastore: SovereignDB/Prisma need DATABASE_URL
+// (Postgres via @sovereign/db in prod, sqlite file:./vault.db locally —
+// see apps/bifrost/.env.example). Booting deaf to the ledger is worse than
+// refusing to boot.
+const DATABASE_URL = process.env.DATABASE_URL ?? '';
+if (!DATABASE_URL) {
+  throw new Error(
+    'DATABASE_URL is not set — refusing to boot with an unbound datastore.'
+  );
+}
+
 server.listen(PORT, () => {
   console.log(`Bifrost gateway listening on port ${PORT} (helios=${ENABLE_HELIOS})`);
 });

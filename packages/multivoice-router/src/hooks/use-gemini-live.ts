@@ -18,6 +18,10 @@ export function useGeminiLive(persona: Persona) {
   const sourceRef = useRef<MediaStreamAudioSourceNode | null>(null);
   const audioQueueRef = useRef<Float32Array[]>([]);
   const isPlayingRef = useRef(false);
+  const retryCountRef = useRef(0);
+  const reconnectTimeoutRef = useRef<any>(null);
+  const manualDisconnectRef = useRef(false);
+  const MAX_RECONNECT_RETRIES = 5;
 
   const stopAudio = useCallback(() => {
     if (processorRef.current) processorRef.current.disconnect();
@@ -388,6 +392,15 @@ export function useGeminiLive(persona: Persona) {
             setIsConnected(false);
             setIsConnecting(false);
             stopAudio();
+            if (!manualDisconnectRef.current && retryCountRef.current < MAX_RECONNECT_RETRIES) {
+              retryCountRef.current++;
+              const expDelay = Math.min(8000, 500 * Math.pow(2, retryCountRef.current - 1));
+              const jitterDelay = Math.floor(Math.random() * expDelay);
+              toast.info(`Bifrost connection dropped. Auto-reconnecting in ${(jitterDelay / 1000).toFixed(1)}s (${retryCountRef.current}/${MAX_RECONNECT_RETRIES})...`);
+              reconnectTimeoutRef.current = setTimeout(() => {
+                connect();
+              }, jitterDelay);
+            }
           },
           onerror: (error) => {
             console.error('Gemini Live Error:', error);
@@ -399,6 +412,8 @@ export function useGeminiLive(persona: Persona) {
       });
 
       sessionRef.current = await sessionPromise;
+      retryCountRef.current = 0;
+      manualDisconnectRef.current = false;
     } catch (error) {
       console.error('Failed to connect to Gemini Live:', error);
       setIsConnecting(false);
@@ -406,6 +421,11 @@ export function useGeminiLive(persona: Persona) {
   }, [persona, stopAudio, playNextInQueue, isConnecting, isConnected]);
 
   const disconnect = useCallback(() => {
+    manualDisconnectRef.current = true;
+    if (reconnectTimeoutRef.current) {
+      clearTimeout(reconnectTimeoutRef.current);
+      reconnectTimeoutRef.current = null;
+    }
     sessionRef.current?.close();
     setIsConnected(false);
     stopAudio();

@@ -6,14 +6,14 @@ Wants=tailscaled.service
 [Service]
 Type=simple
 User=ubuntu
-WorkingDirectory=/opt/Camelot-Ecosystem
+WorkingDirectory=/opt/camelot-ecosystem
 ExecStart=/usr/bin/python3 -m control_plane.infra.hermes_heimdall_sentinel
 Restart=always
 RestartSec=5s
 Environment=PYTHONUNBUFFERED=1
 Environment=VPS_BRIDGE_PORT=8095
 Environment=BIFROST_PORT=3001
-Environment=CAMELOT_OS_HOME=/opt/Camelot-Ecosystem
+Environment=CAMELOT_OS_HOME=/opt/camelot-ecosystem
 
 # Hardware Scarcity Caps (cgroups v2) - 8GB Scarcity Protection
 MemoryAccounting=true

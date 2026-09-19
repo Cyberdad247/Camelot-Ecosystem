@@ -6,7 +6,7 @@ Camelot-OS Production Readiness Gatekeeper & Zero-Trust Auditor
 ===============================================================
 Operator Authority: King Arthur (VaShawn O. Head / Vizion)
 Target Node:        cybertronia (100.118.224.52 · Windows 11 Pro)
-Active Baseline:    v1000.54-EXCALIBUR-A (vMAX Singularity)
+Active Baseline:    Living Camelot-OS v1000 MAX Compendium (vMAX Singularity)
 WorldTree Home:     a0a4bfb9-e847-4c38-be39-7aee398f0795
 
 Production Gates:
@@ -46,7 +46,7 @@ if str(REPO_ROOT / "vfs") not in sys.path:
     sys.path.insert(0, str(REPO_ROOT / "vfs"))
 
 WORLDTREE_HOME_ID = "a0a4bfb9-e847-4c38-be39-7aee398f0795"
-MAX_VERSION = "v1000.54-EXCALIBUR-A"
+MAX_VERSION = "Living Camelot-OS v1000 MAX Compendium"
 VPS_PUBLIC_IP = "162.35.107.134"
 
 class ProductionReadinessVerifier:

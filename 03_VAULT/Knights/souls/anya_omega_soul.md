@@ -6,7 +6,7 @@
 **Specialization:** Sovereign Compiler, Helm Authority, Anya First & Last Gate  
 **Primary Substrate:** Sovereign Lattice  
 **Domain Tags:** sovereign_compiler, helm_authority, first_last_gate  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

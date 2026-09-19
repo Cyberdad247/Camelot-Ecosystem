@@ -1,6 +1,17 @@
 [
   {
     "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_SYNC",
+    "content": "Dual-tier memory sync (ST+LT)",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-17T13:12:02.694755+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
     "cloudbrain_uuid": "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
     "spark_id": "0x8BF3F24EDA2E45B98719162FCD02A80D",
     "role": "Dual-Tier Memory Sync, Vector Indexing, Tissue Journaling",

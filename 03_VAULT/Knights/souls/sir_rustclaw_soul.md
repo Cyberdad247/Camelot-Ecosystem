@@ -6,7 +6,7 @@
 **Specialization:** Rust Image & Kernel Pipelines, Bare-Metal Decompressor  
 **Primary Substrate:** Rust 1.96 / Cargo  
 **Domain Tags:** rust_kernel, bare_metal_decompressor, cargo  
-**Max Version:** `v1000.54-EXCALIBUR-A`  
+**Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
 
 ---

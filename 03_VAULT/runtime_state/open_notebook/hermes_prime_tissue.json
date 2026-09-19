@@ -1,6 +1,50 @@
 [
   {
     "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_HermesPrime",
+    "content": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-09-19T17:32:34.567570+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_SPEC_VALIDATE audit",
+    "content": "Formal specification, 36 Draft 2020-12 schemas and authority closure validation",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-09-19T16:47:56.343236+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_Omega_HermesPrime status check via VPS",
+    "content": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "updated_at": "2026-09-17T17:03:44.979263+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "character_sheet",
+    "title": "Full Character Sheet & WorldTree CloudBrain Integration: Hermes Prime (High-Velocity R&D Synthesizer)",
+    "content": "{\n  \"cloudbrain_uuid\": \"28f89cb6-5048-4b5d-9e94-376082d24744\",\n  \"worldtree_anchor\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"character_sheet\": {\n    \"pantheon_class\": \"Sovereign Synthesizer\",\n    \"archetype\": \"Autonomous Edge Research Commander\",\n    \"stats\": {\n      \"intellect\": 98,\n      \"synthesis_velocity\": 99,\n      \"memory_depth\": 95,\n      \"mesh_resonance\": 97,\n      \"scarcity_discipline\": 98\n    },\n    \"governing_law\": \"ANYA_LAST_LAW // 8GB_EDGE_STRICT\",\n    \"worldtree_anchor\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"active_subsystems\": [\n      \"WorldTree Memory L2 Anchor (a0a4bfb9-e847-4c38-be39-7aee398f0795)\",\n      \"Bifrost Gateway Bridge (http://100.110.180.18:3001)\",\n      \"vLLM DeepSeek-V4.1-Flash Serving Node (http://127.0.0.1:8000/v1)\",\n      \"VPS KVM563 Control Plane (162.35.107.134)\",\n      \"Nous Research Hermes Container Swarm\"\n    ],\n    \"special_invocations\": [\n      \"//FORAGE\",\n      \"//SYNTHESIZE\",\n      \"//MGV_LOOP\",\n      \"//OUROBOROS\",\n      \"//DEEPSEEK_FLASH\"\n    ],\n    \"provenance_signature\": \"HMAC-SHA256-VIKING-BLOCK\"\n  },\n  \"ocean_vector\": {\n    \"O\": 0.96,\n    \"C\": 0.95,\n    \"E\": 0.7,\n    \"A\": 0.6,\n    \"N\": 0.03\n  },\n  \"domain_tags\": [\n    \"mgv_research_loop\",\n    \"vfs_synthesis\",\n    \"ouroboros\",\n    \"vps_hub_copilot\",\n    \"deepseek_v4_flash\"\n  ],\n  \"primary_engine\": \"Gemini 3.8 Flash / vLLM DeepSeek-Flash\",\n  \"summoning_rune\": \"Omega_HermesPrime\",\n  \"vfs_coordinate\": \"vfs://worldtree/knights/hermes_prime/tether.json\",\n  \"mempalace_wing\": \"WING_WORLDTREE_HERMES_PRIME\",\n  \"status\": \"DYNAMICALLY_INTEGRATED_WORLDTREE\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
+    "open_viking_tether": "open_viking://worldtree/hermes_prime",
+    "synced_at": "2026-09-17T12:47:57.805977+00:00"
+  },
+  {
+    "knight_id": "HERMES_PRIME",
     "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
     "spark_id": "0x28F89CB650484B5D9E94376082D24744",
     "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",

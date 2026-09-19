@@ -1,0 +1,13 @@
+{
+  "entry_id": "jrn_86b73010",
+  "tenant_id": "tenant_sovereign_001",
+  "description": "Faulty Invoice",
+  "debit_account": "Operating_Expenses",
+  "debit_amount": 2000.0,
+  "credit_account": "Accounts_Payable",
+  "credit_amount": 1800.0,
+  "is_balanced": false,
+  "entry_hash": "sha256:acb418e34dfd6c436589ea60720edf8187720096d6ca6e81e3f286f2dd8dcb9e",
+  "status": "UNBALANCED",
+  "created_at": "2026-09-19T15:06:10.762779+00:00"
+}

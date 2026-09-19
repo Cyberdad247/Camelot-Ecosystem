@@ -184,7 +184,7 @@ def phase2_historical_version_cold_storage():
         "crystal_name": "CAMELOT_HISTORICAL_VERSIONS",
         "status": "COLD_STORAGE_SEALED",
         "canonical_active_target": {
-            "version": "v1000.54-EXCALIBUR-A",
+            "version": "Living Camelot-OS v1000 MAX Compendium",
             "uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
             "title": "Camelot-OS v.1000"
         },

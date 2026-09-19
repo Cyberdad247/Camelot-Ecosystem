@@ -12,6 +12,7 @@ import atexit
 import json
 import os
 import shlex
+import socket
 import subprocess
 import sys
 import threading
@@ -90,6 +91,14 @@ def _shutdown_defense_grid():
         _heartbeat_proc = None
 
 
+def _tcp_open(host: str, port: int, timeout: float = 1.0) -> bool:
+    try:
+        with socket.create_connection((host, port), timeout=timeout):
+            return True
+    except OSError:
+        return False
+
+
 def _boot_cliproxy():
     """Spawn CLIProxyAPI as a background process (Zero-Burn local proxy)."""
     global _cliproxy_proc
@@ -104,6 +113,8 @@ def _boot_cliproxy():
             return None, "[green]CLIProxyAPI already running[/] on :8080"
     except Exception:
         pass
+    if _tcp_open("127.0.0.1", 8080, timeout=0.5):
+        return None, "[yellow]port :8080 open but /v1/models probe failed — treating as WARN, not spawning[/]"
     try:
         _cliproxy_proc = subprocess.Popen(
             [CLIPROXY_BIN],
@@ -113,7 +124,10 @@ def _boot_cliproxy():
             creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
         )
         atexit.register(_shutdown_cliproxy)
-        return _cliproxy_proc.pid, f"[green]CLIProxyAPI online[/] (PID {_cliproxy_proc.pid}, port 8080)"
+        time.sleep(1.0)
+        if _tcp_open("127.0.0.1", 8080, timeout=1.0):
+            return _cliproxy_proc.pid, f"[green]CLIProxyAPI online[/] (PID {_cliproxy_proc.pid}, port 8080)"
+        return None, f"[yellow]CLIProxyAPI spawned (PID {_cliproxy_proc.pid}) but :8080 not reachable yet[/]"
     except Exception as e:
         return None, f"[red]CLIProxyAPI failed: {e}[/]"
 
@@ -123,6 +137,9 @@ def _boot_kinetic_edge():
     global _kinetic_edge_proc
     if not os.path.isfile(KINETIC_EDGE_BIN):
         return None, "[yellow]camelot-mcp-edge.exe not found — Kinetic Edge skipped[/]"
+    # Live-first: if the port already answers, do not spawn a duplicate.
+    if _tcp_open("127.0.0.1", 3001, timeout=0.5):
+        return None, "[green]Kinetic Edge already running[/] on :3001"
     # v6 review fix: dropped the legacy httpx /tool/stat_file probe — that endpoint
     # was camelot-mcp-edge specific. pmcp-server-v0.1 is stdio-MCP only; the probe
     # would silently time out and trigger a retry loop. The RustClaw lineage now
@@ -143,7 +160,10 @@ def _boot_kinetic_edge():
         )
         if not detach:
             atexit.register(_shutdown_kinetic_edge)
-        return _kinetic_edge_proc.pid, f"[green]Kinetic Edge online[/] (PID {_kinetic_edge_proc.pid}, port 3001)"
+        time.sleep(1.0)
+        if _tcp_open("127.0.0.1", 3001, timeout=1.0):
+            return _kinetic_edge_proc.pid, f"[green]Kinetic Edge online[/] (PID {_kinetic_edge_proc.pid}, port 3001)"
+        return None, f"[yellow]Kinetic Edge spawned (PID {_kinetic_edge_proc.pid}) but :3001 not reachable yet[/]"
     except Exception as e:
         return None, f"[red]Kinetic Edge failed: {e}[/]"
 
