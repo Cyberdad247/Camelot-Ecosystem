@@ -1,7 +1,7 @@
 {
   "_meta": {
-    "version": "400.1.0",
-    "updated": "2026-04-21",
+    "version": "400.2.0",
+    "updated": "2026-09-19",
     "authority": "Sir Sentinel + Anya_Omega APEE v6.5",
     "shatterpoint": "SP-01",
     "description": "A2A RBAC access matrix. Knights are mapped to allowed execution_modes, domains, and iron_gate levels."
@@ -149,6 +149,30 @@
       "can_write_ledger": false,
       "can_modify_config": false,
       "max_net_lines": 150,
+      "cost_ceiling": "low"
+    },
+    "sir_ouroboros": {
+      "role": "DEFAULT_DISPATCHER",
+      "tier": "HIGH_KNIGHT",
+      "allowed_modes": ["ORACLE", "FORGE", "SWARM"],
+      "allowed_domains": ["*"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 50,
+      "cost_ceiling": "low"
+    },
+    "anya_omega": {
+      "role": "SOVEREIGN_COMPILER",
+      "tier": "OMEGA",
+      "allowed_modes": ["ORACLE", "FORGE"],
+      "allowed_domains": ["general", "research"],
+      "iron_gate_override": false,
+      "can_spawn_swarm": false,
+      "can_write_ledger": false,
+      "can_modify_config": false,
+      "max_net_lines": 100,
       "cost_ceiling": "low"
     }
   },
