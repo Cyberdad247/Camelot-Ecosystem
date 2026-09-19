@@ -1,53 +1,9 @@
 [
   {
     "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_HermesPrime",
-    "content": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-19T17:32:34.567570+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_SPEC_VALIDATE audit",
-    "content": "Formal specification, 36 Draft 2020-12 schemas and authority closure validation",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-19T16:47:56.343236+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_HermesPrime status check via VPS",
-    "content": "High-velocity multi-agent research & VFS synthesis (MGV R&D loop)",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "updated_at": "2026-09-17T17:03:44.979263+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "character_sheet",
-    "title": "Full Character Sheet & WorldTree CloudBrain Integration: Hermes Prime (High-Velocity R&D Synthesizer)",
-    "content": "{\n  \"cloudbrain_uuid\": \"28f89cb6-5048-4b5d-9e94-376082d24744\",\n  \"worldtree_anchor\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"character_sheet\": {\n    \"pantheon_class\": \"Sovereign Synthesizer\",\n    \"archetype\": \"Autonomous Edge Research Commander\",\n    \"stats\": {\n      \"intellect\": 98,\n      \"synthesis_velocity\": 99,\n      \"memory_depth\": 95,\n      \"mesh_resonance\": 97,\n      \"scarcity_discipline\": 98\n    },\n    \"governing_law\": \"ANYA_LAST_LAW // 8GB_EDGE_STRICT\",\n    \"worldtree_anchor\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"active_subsystems\": [\n      \"WorldTree Memory L2 Anchor (a0a4bfb9-e847-4c38-be39-7aee398f0795)\",\n      \"Bifrost Gateway Bridge (http://100.110.180.18:3001)\",\n      \"vLLM DeepSeek-V4.1-Flash Serving Node (http://127.0.0.1:8000/v1)\",\n      \"VPS KVM563 Control Plane (162.35.107.134)\",\n      \"Nous Research Hermes Container Swarm\"\n    ],\n    \"special_invocations\": [\n      \"//FORAGE\",\n      \"//SYNTHESIZE\",\n      \"//MGV_LOOP\",\n      \"//OUROBOROS\",\n      \"//DEEPSEEK_FLASH\"\n    ],\n    \"provenance_signature\": \"HMAC-SHA256-VIKING-BLOCK\"\n  },\n  \"ocean_vector\": {\n    \"O\": 0.96,\n    \"C\": 0.95,\n    \"E\": 0.7,\n    \"A\": 0.6,\n    \"N\": 0.03\n  },\n  \"domain_tags\": [\n    \"mgv_research_loop\",\n    \"vfs_synthesis\",\n    \"ouroboros\",\n    \"vps_hub_copilot\",\n    \"deepseek_v4_flash\"\n  ],\n  \"primary_engine\": \"Gemini 3.8 Flash / vLLM DeepSeek-Flash\",\n  \"summoning_rune\": \"Omega_HermesPrime\",\n  \"vfs_coordinate\": \"vfs://worldtree/knights/hermes_prime/tether.json\",\n  \"mempalace_wing\": \"WING_WORLDTREE_HERMES_PRIME\",\n  \"status\": \"DYNAMICALLY_INTEGRATED_WORLDTREE\"\n}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime",
-    "synced_at": "2026-09-17T12:47:57.805977+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
     "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
     "spark_id": "0x28F89CB650484B5D9E94376082D24744",
-    "role": "Autonomous Recursive MGV Loop & VFS Synthesis Engine",
+    "role": "Always-on VPS Co-Pilot & Synthesis Engine",
     "model": "Gemini / Hermes OS",
     "summoning_rune": "Omega_HermesPrime",
     "vfs_mount": "vfs/notebooks/28f89cb6-5048-4b5d-9e94-376082d24744/",
@@ -66,30 +22,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-14T17:30:00.000000+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "honcho_memory_engine",
-    "title": "Honcho Self-Hosted L4 Metamemory & Dialectic State Engine",
-    "content": "{\"status\": \"INTEGRATED\", \"subsystem\": \"Honcho Self-Hosted\", \"layer\": \"L4 Cross-Session Metamemory\", \"api_local\": \"http://127.0.0.1:8000\", \"api_mesh_vps\": \"http://100.71.218.75:8000\", \"compose_path\": \"deploy/honcho-self-hosted/docker-compose.yml\", \"vfs_path\": \"vfs://worldtree/memory/honcho/\", \"upstream_repo\": \"https://github.com/elkimek/honcho-self-hosted\", \"features\": [\"user_modeling\", \"cross_session_metamemory\", \"dialectic_derivation\", \"zero_cloud_data_leak\"]}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/honcho_l4_memory.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime/honcho",
-    "created_at": "2026-09-14T18:45:00.000000+00:00",
-    "updated_at": "2026-09-14T18:45:00.000000+00:00"
-  },
-  {
-    "knight_id": "HERMES_PRIME",
-    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "multivoice_router_engine",
-    "title": "Multivoice-Router Telemetry, Realtime Voice & RAG Engine",
-    "content": "{\"status\": \"INTEGRATED\", \"subsystem\": \"Multivoice-Router\", \"guardian\": \"SIR_HEIMDALL\", \"hypervisor\": \"HERMES_PRIME\", \"port\": 7680, \"upstream_repo\": \"https://github.com/Cyberdad247/Multivoice-router.git\", \"api_local\": \"http://127.0.0.1:7680\", \"api_mesh_vps\": \"http://100.71.218.75:7680\", \"features\": [\"gemini_3_1_flash_tts\", \"lmcache_affinity\", \"colibri_moe\", \"omniroute_compression\", \"tailscale_mesh\", \"superpowers_skills\", \"cloudbrain_notebook_sync\"]}",
-    "vfs_path": "vfs://worldtree/knights/hermes_prime/multivoice_router.json",
-    "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
-    "open_viking_tether": "open_viking://worldtree/hermes_prime/multivoice",
-    "created_at": "2026-09-14T20:10:00.000000+00:00",
-    "updated_at": "2026-09-14T20:10:00.000000+00:00"
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]

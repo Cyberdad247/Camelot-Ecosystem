@@ -1,87 +1,10 @@
 [
   {
     "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "knight_summoning",
-    "title": "Summoned Knight: SIR_HELIOS",
-    "content": "{\n  \"action\": \"summon_knight\",\n  \"knight_id\": \"SIR_HELIOS\",\n  \"interconnect\": {\n    \"knight_id\": \"SIR_HELIOS\",\n    \"spark_id\": \"0xAB8AA3592B3B4BC1B41F34979CDC184E\",\n    \"name\": \"Sir Helios (The Sovereign Eye of the Spire)\",\n    \"title\": \"Telemetry Cockpit Sentinel, AntiGravity CLI Synergy & Session Keep-Alive Cron Guardian\",\n    \"summoning_rune\": \"//HELIOS\",\n    \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"cloudbrain_uuid\": \"ab8aa359-2b3b-4bc1-b41f-34979cdc184e\",\n    \"vfs_path\": \"vfs://worldtree/knights/sir_helios/tether.json\",\n    \"mempalace_wing\": \"WING_WORLDTREE_SIR_HELIOS\",\n    \"open_viking_node\": \"open_viking://worldtree/sir_helios\",\n    \"primary_engine\": \"FastMCP / agy (Gemini 3.8 Flash / Pro)\",\n    \"ocean_vector\": {\n      \"O\": 0.95,\n      \"C\": 0.98,\n      \"E\": 0.7,\n      \"A\": 0.8,\n      \"N\": 0.02\n    },\n    \"brain_interconnected\": true,\n    \"timestamp\": \"2026-09-17T17:06:21.504043+00:00\"\n  },\n  \"timestamp\": \"2026-09-17T17:06:21.506760+00:00\"\n}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-17T17:06:21.506816+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "knight_summoning",
-    "title": "Summoned Knight: SIR HELIOS",
-    "content": "{\n  \"action\": \"summon_knight\",\n  \"knight_id\": \"SIR HELIOS\",\n  \"interconnect\": {\n    \"knight_id\": \"SIR HELIOS\",\n    \"status\": \"UNMAPPED_FALLBACK\",\n    \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"cloudbrain_uuid\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"vfs_path\": \"vfs://worldtree/knights/sir helios/tether.json\",\n    \"mempalace_wing\": \"WING_WORLDTREE_SIR HELIOS\",\n    \"open_viking_node\": \"open_viking://worldtree/sir helios\"\n  },\n  \"timestamp\": \"2026-09-17T17:05:44.103754+00:00\"\n}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-17T17:05:44.103839+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "memory_sweep",
-    "title": "WorldTree Memory Sweep (sweep_mnemosyne_20260917_091237)",
-    "content": "{\n  \"sweep_id\": \"sweep_mnemosyne_20260917_091237\",\n  \"custodian\": \"LADY_MNEMOSYNE_\\u03a9\",\n  \"spark_id\": \"0xA0A4BFB9E8474C38BE397AEE398F0795\",\n  \"total_nodes_inspected\": 294,\n  \"canonical_knights_count\": 50,\n  \"library_nodes_count\": 237,\n  \"shadow_duplicates_count\": 0,\n  \"finalized_crystals_count\": 33,\n  \"drift_risk_pct\": 0.0,\n  \"signal_purity_pct\": 99.8,\n  \"status\": \"PURIFIED_AND_GOVERNED\",\n  \"timestamp\": \"2026-09-17T13:12:37.390389+00:00\"\n}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-17T13:12:37.390431+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "knight_summoning",
-    "title": "Summoned Knight: LADY_MNEMOSYNE",
-    "content": "{\n  \"action\": \"summon_knight\",\n  \"knight_id\": \"LADY_MNEMOSYNE\",\n  \"interconnect\": {\n    \"knight_id\": \"LADY_MNEMOSYNE\",\n    \"spark_id\": \"0xA0A4BFB9E8474C38BE397AEE398F0795\",\n    \"name\": \"Lady Mnemosyne (The Arch-Librarian)\",\n    \"title\": \"Memory Governor & CloudBrain Custodian\",\n    \"summoning_rune\": \"Omega_Mnemosyne\",\n    \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"cloudbrain_uuid\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"vfs_path\": \"vfs://worldtree/knights/lady_mnemosyne/tether.json\",\n    \"mempalace_wing\": \"WING_WORLDTREE_LADY_MNEMOSYNE\",\n    \"open_viking_node\": \"open_viking://worldtree/lady_mnemosyne\",\n    \"primary_engine\": \"Memory Substrate\",\n    \"ocean_vector\": {\n      \"O\": 0.99,\n      \"C\": 0.99,\n      \"E\": 0.4,\n      \"A\": 0.85,\n      \"N\": 0.01\n    },\n    \"brain_interconnected\": true,\n    \"timestamp\": \"2026-09-17T13:09:32.281936+00:00\"\n  },\n  \"timestamp\": \"2026-09-17T13:09:32.285827+00:00\"\n}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-17T13:09:32.285893+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "vkg_crystal",
-    "title": "Forged VKG Crystal: VKG_CAM_LADY_MNEMOSYNE_SOVEREIGN_NAVIGAT_20260917",
-    "content": "{\n  \"action\": \"forge_crystal\",\n  \"crystal_id\": \"VKG_CAM_LADY_MNEMOSYNE_SOVEREIGN_NAVIGAT_20260917\",\n  \"title\": \"Lady Mnemosyne Sovereign Navigational Compass\",\n  \"category\": \"CAMELOT_SYSTEMS_ARCHITECTURE\",\n  \"anchor_knight\": \"LADY_MNEMOSYNE_\\u03a9\",\n  \"vfs_coordinate\": \"vfs://worldtree/crystals/VKG_CAM_LADY_MNEMOSYNE_SOVEREIGN_NAVIGAT_20260917.vkg\",\n  \"sha256\": \"7004dd5fe7fa5b17\",\n  \"nodes_count\": 2,\n  \"edges_count\": 1,\n  \"timestamp\": \"2026-09-17T13:05:54.298521+00:00\"\n}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-17T13:05:54.298558+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "memory_sweep",
-    "title": "WorldTree Memory Sweep (sweep_mnemosyne_20260917_090537)",
-    "content": "{\n  \"sweep_id\": \"sweep_mnemosyne_20260917_090537\",\n  \"custodian\": \"LADY_MNEMOSYNE_\\u03a9\",\n  \"spark_id\": \"0xA0A4BFB9E8474C38BE397AEE398F0795\",\n  \"total_nodes_inspected\": 294,\n  \"canonical_knights_count\": 50,\n  \"library_nodes_count\": 237,\n  \"shadow_duplicates_count\": 0,\n  \"finalized_crystals_count\": 32,\n  \"drift_risk_pct\": 0.0,\n  \"signal_purity_pct\": 99.8,\n  \"status\": \"PURIFIED_AND_GOVERNED\",\n  \"timestamp\": \"2026-09-17T13:05:37.935641+00:00\"\n}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "synced_at": "2026-09-17T13:05:37.935896+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_//NOTEBOOK_AUDIT anya_omega",
-    "content": "{\"action\": \"notebook_source_audit\", \"target\": \"anya_omega\", \"stats\": {\"total_sources\": 300, \"grade_a_count\": 24, \"grade_a_pct\": 8.0, \"grade_b_count\": 70, \"grade_b_pct\": 23.3, \"grade_c_count\": 176, \"grade_c_pct\": 58.7, \"grade_d_count\": 3, \"grade_d_pct\": 1.0, \"grade_f_count\": 27, \"grade_f_pct\": 9.0, \"duplicates_detected\": 19, \"sub_requirement_deficit\": 30}, \"status\": \"AUDITED\"}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
-    "updated_at": "2026-09-14T05:58:05.387139+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
-    "role": "WorldTree Master Memory, Memory Palace & VFS Sweeps",
-    "model": "Memory Substrate",
+    "role": "WorldTree Living Memory & Palace",
+    "model": "24D Leech Lattice / SQLite-VSS",
     "summoning_rune": "Omega_Mnemosyne",
     "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
     "files": [
@@ -96,32 +19,9 @@
       "cybertronia",
       "vps-camelot-hub",
       "vashawns-s26-ultra",
-      "lakesha",
-      "motorola-moto-g-power-5g---2024"
+      "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-17T04:40:00.000000+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "audit_crystal",
-    "title": "L2_Artifact_//SYNC_EVOLVE_AUDIT Lady_Mnemosyne",
-    "content": "{\"action\": \"worldtree_sync_evolve_audit\", \"authority\": \"King_Arthur_Vizion\", \"custodian\": \"LADY_MNEMOSYNE\", \"chimera_state\": \"CHIMERA_READY\", \"cloudbrain_audit\": \"MNEMOSYNE_READY\", \"living_notebooks_sync\": \"20/20 (100%)\", \"living_notebooks_evolve\": \"20/20 (100%)\", \"knights_tethered\": \"65/36 VERIFIED\", \"tri_brain_status\": {\"cybertronia\": \"100.118.224.52 (SCAFFOLDING_OPTIMIZED)\", \"vps_camelot_hub\": \"162.35.107.134 / 100.110.180.18 (SOVEREIGN_OPERATIONAL)\", \"mobile_sentinel\": \"100.106.246.126 (PORT_8095_BRIDGE_LIVE)\"}, \"ledger_mirrors\": \"6/6 RECONCILED\", \"verification_ledger_entries\": 442, \"status\": \"PERFECT_EQUILIBRIUM\"}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/sync_evolve_audit.json",
-    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne/audit",
-    "updated_at": "2026-09-17T04:23:45.000000+00:00"
-  },
-  {
-    "knight_id": "LADY_MNEMOSYNE",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "mastering_crystal",
-    "title": "L2_Artifact_//MASTERING_FOLDER_EDGE_SYNTHESIS Lady_Mnemosyne",
-    "content": "{\"action\": \"mastering_folder_edge_synthesis\", \"custodian\": \"LADY_MNEMOSYNE\", \"source_cloudbrain_node\": \"876f30c4-efce-415d-8098-cad500de159c\", \"source_title\": \"Mastering the AI File and Folder Agent System\", \"target_edge_node\": \"motorola-moto-g-power-5g---2024\", \"codename\": \"cancunn\", \"cartridge\": \"motorola-edge-cartridge-v1\", \"vfs_mount\": \"vfs://worldtree/nodes/motorola_edge/\", \"hardware_constraint\": \"4GB_ARM64_EDGE_STRICT\", \"rss_ceiling_bytes\": 268435456, \"vps_fallback_policy\": \"OFFLINE_AUTONOMOUS_WAL_BUFFER\", \"wireless_adb_mode\": \"TCP_5555_PERSISTENT\", \"status\": \"CRYSTALLIZED_AND_SYNCHRONIZED\"}",
-    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/mastering_edge_synthesis.json",
-    "mempalace_wing": "WING_WORLDTREE_MOTOROLA_EDGE",
-    "open_viking_tether": "open_viking://worldtree/nodes/motorola_edge",
-    "updated_at": "2026-09-17T04:40:00.000000+00:00"
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]

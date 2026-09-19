@@ -83,8 +83,8 @@ def get_constitutional_knights():
         e = enrich.get(kid, {})
         knights.append({
             "knight_id": kid,
-            "role": e.get("role") or s.get("role") or s.get("title", ""),
-            "model": e.get("model") or s.get("primary_engine", ""),
+            "role": s.get("role") or s.get("title", "") or e.get("role", ""),
+            "model": s.get("primary_engine", "") or e.get("model", ""),
             "uuid": s.get("cloudbrain_uuid") or str(uuid.uuid5(uuid.NAMESPACE_URL, f"camelot-os/{kid}")),
         })
     return knights

@@ -5,7 +5,7 @@
 **Engine Architecture:** Monitor-Generate-Verify (MGV) Autonomous Loop  
 **Memory Substrate:** Ouroboros 1.58-bit WAL + duckdb-wasm MemPalace  
 **Governance:** `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_LAW`  
-**Compiled:** 2026-09-13T04:57:41.439443+00:00  
+**Compiled:** 2026-09-19T23:09:24.762524+00:00  
 
 ---
 

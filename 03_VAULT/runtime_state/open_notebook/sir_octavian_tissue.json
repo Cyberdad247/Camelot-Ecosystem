@@ -1,12 +1,27 @@
 [
   {
     "knight_id": "SIR_OCTAVIAN",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "notebook_uuid": "0d2af08b-f85b-4dc0-ae3a-5cf5aaf5e08a",
-    "version": "v1000.54-EXCALIBUR-A",
-    "mempalace_wing": "WING_WORLDTREE_SIR_OCTAVIAN",
-    "vfs_path": "vfs://worldtree/knights/sir_octavian/tether.json",
-    "status": "ALIGNED_MAX_VERSION",
-    "synced_at": "2026-09-17T04:23:30.073664+00:00"
+    "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+    "role": "GIGO Filtering & Port 8400 Metrics API",
+    "model": "Python / FastAPI",
+    "summoning_rune": "Omega_SIR_OCTAVIAN",
+    "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]

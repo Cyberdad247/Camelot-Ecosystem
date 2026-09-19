@@ -3,7 +3,7 @@
     "knight_id": "SIR_SENTINEL",
     "cloudbrain_uuid": "07cbb441-f008-424c-820a-85676210be39",
     "spark_id": "0x07CBB441F008424C820A85676210BE39",
-    "role": "AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement",
+    "role": "AgentArmor v2.0, PDG Taint & Leases",
     "model": "Gemini 3.8 Flash",
     "summoning_rune": "Omega_Sentinel",
     "vfs_mount": "vfs/notebooks/07cbb441-f008-424c-820a-85676210be39/",
@@ -22,6 +22,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]

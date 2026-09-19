@@ -3,8 +3,8 @@
     "knight_id": "LADY_APIS",
     "cloudbrain_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
     "spark_id": "0x378D6049FFC34ED3A9E747FFC5C0AC3F",
-    "role": "BASHR Research Loop, Bio-Swarm Isolation, Context Forager",
-    "model": "Gemini 3.8 Flash",
+    "role": "Bio-Kinetic Swarm/Horde Conductor & BASHR Forager",
+    "model": "Gemini 3.8 Flash / NullClaw",
     "summoning_rune": "Omega_Apis",
     "vfs_mount": "vfs/notebooks/378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f/",
     "files": [
@@ -22,6 +22,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]

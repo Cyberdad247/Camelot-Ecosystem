@@ -1,51 +1,24 @@
-# Phial Engine v4.0: ANYA_OMEGA
-*Self-Evolving Autonomous Research & Prompt Optimization Lattice*
+# 🧪 Phial Engine Specification: ANYA_OMEGA
+**Phial ID:** `PHIAL_ANYA_OMEGA_v1000`  
+**Knight Target:** `ANYA_OMEGA`  
+**Node UUID:** `32d38906-5ae8-4ecc-b77e-705d12c89f4a`  
+**Engine Architecture:** Monitor-Generate-Verify (MGV) Autonomous Loop  
+**Memory Substrate:** Ouroboros 1.58-bit WAL + duckdb-wasm MemPalace  
+**Governance:** `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_LAW`  
+**Compiled:** 2026-09-19T23:09:24.762524+00:00  
 
-## Engine Architecture
-The **Phial Engine** is the kinetic self-evolution organ of Anya Omega. It continuously observes Round Table execution telemetry, identifies prompt rot, compiles high-density token-reduced embeddings, and mutates operational rules via the Genome Evolution Protocol (GEP).
+---
 
-```
-  ┌─────────────────────────────────────────────────────────────┐
-  │                 ANYA PHIAL ENGINE v4.0                      │
-  │                                                             │
-  │   [Input Intent] ──► [Symbollect Rune Squeezer]             │
-  │                              │                              │
-  │                              ▼                              │
-  │                     [Triple-QFT Fluff Stripper]             │
-  │                              │                              │
-  │                              ▼                              │
-  │                  [Cognitive Loop Orchestrator]              │
-  │                   ├── MGV Loop (Monitor-Gen-Verify)         │
-  │                   ├── PIV Loop (Plan-Impl-Verify)           │
-  │                   └── BASHR Swarm Forager                   │
-  │                              │                              │
-  │                              ▼                              │
-  │                 [Autonomous Research Worker]                │
-  │                   ├── Benchmarking & Token Profiling        │
-  │                   ├── Stunspot Prompt Meta-Synthesis        │
-  │                   └── GEP Rule Induction (AGENTS.md)        │
-  │                              │                              │
-  │                              ▼                              │
-  │                 [Output: Sealed Execution Phial]             │
-  └─────────────────────────────────────────────────────────────┘
-```
+## 1. Phial Hyperparameters & Tuning
+- **Max Memory Depth:** 50 state transitions per rolling window
+- **Adaptive Learning Rate:** $\eta = 0.10$
+- **Blacklist Penalty Threshold:** 1.0 (auto-skip verified failing pathways)
+- **Max Concurrency:** Bound to thread throttle (`OMP=2`, `OPENBLAS=2`, `MKL=2`)
 
-## Core Execution Loops
-1. **MGV Loop (Monitor -> Generate -> Verify):**
-   - *Monitor:* Real-time sampling of prompt tokens, context drift, model hallucinations, and execution latency.
-   - *Generate:* Dynamic compilation of few-shot exemplars, constraint guards, and typed JSON schemas.
-   - *Verify:* Z3 theorem verification, AST validation, and Sir Gideon 13-gate audit before output release.
-2. **Symbollect Token Reduction Embedding:**
-   - Translates verbosity into dense mathematical glyphs (`⚡`, `🏗️`, `🧠`, `⚜️`, `💎`, `🛡️`, `⚙️`, `🔮`).
-   - Squeezes multi-paragraph natural language instructions into typed TOON schemas, achieving 70%–85% token reductions without semantic loss.
-   - Preserves exact entity relationships and logic trees in bi-temporal Graphiti and DuckDB-WASM indices.
-3. **Self-Evolving Autonomous Research Workflow:**
-   - When execution telemetry reveals an optimization deficit or a new domain pattern:
-     a. Lady Apis foragers extract upstream patterns and documentation.
-     b. Sir Syntax applies Triple-QFT distillation.
-     c. Knight Strategos benchmarks prompt tokens and latency across model targets.
-     d. Anya compiles the refined pattern into a Phial cartridge and commits an induced rule into `AGENTS.md` via Rule X format.
-4. **Adaptive Learning Parameters:**
-   - **Learning Rate:** `0.10` adaptive re-weighting.
-   - **Context Decay Half-Life:** 10,000 tokens (automatic sliding-window pruning).
-   - **Mutation Freeze Gate:** Net changes >10 lines require explicit King Arthur authorization (Iron Gate).
+---
+
+## 2. Symbolect Triggers & Kinetic Hooks
+- `🧲 [FORAGE]`: Extract clean domain context via headless tools and MCP connectors.
+- `🧪 [TEST]`: Validate invariants via AST verification and test-driven gates before state promotion.
+- `📈 [EVOLVE]`: Re-weight internal hyper-parameters upon receiving operator feedback.
+- `🏆 [DEPLOY]`: Emit cryptographically signed verification receipt to the Provenance Ledger.

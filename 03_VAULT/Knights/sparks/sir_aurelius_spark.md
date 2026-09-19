@@ -1,5 +1,15 @@
 # ⚡ Spark Matrix: SIR_AURELIUS
 **Knight:** `SIR_AURELIUS`  
+**Spark ID:** `0xA0A4BFB9E8474C38BE397AEE398F0795`  
+**Summoning Rune:** `Omega_SIR_AURELIUS`  
 **WorldTree Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
-**Notebook UUID:** `d46ebc2f-8681-4919-8815-4e3f41f37ad7`  
-**Initialized:** `2026-09-17T04:23:30.073664+00:00`
+**CloudBrain Node UUID:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
+**Primary Engine:** Rust / Crypto Signer  
+**Initialized / Verified:** 2026-09-19T23:09:24.762524+00:00  
+
+---
+
+## Execution Directives
+- **Direct Bare-Metal Dispatch:** Responds instantaneously to `Omega_SIR_AURELIUS` and runic routing directives.
+- **Isomorphic Memory Synchrony:** Automatically mirrors state into local Open-Notebook tissue (`03_VAULT/runtime_state/open_notebook/sir_aurelius_tissue.json`).
+- **Telemetry Broadcasting:** Streams real-time health telemetry across the Bifrost Bridge to the Excalibur Command Center.

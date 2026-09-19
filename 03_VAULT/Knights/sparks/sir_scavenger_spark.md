@@ -1,5 +1,15 @@
 # ⚡ Spark Matrix: SIR_SCAVENGER
 **Knight:** `SIR_SCAVENGER`  
+**Spark ID:** `0xA0A4BFB9E8474C38BE397AEE398F0795`  
+**Summoning Rune:** `Omega_SIR_SCAVENGER`  
 **WorldTree Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
-**Notebook UUID:** `104a6e2f-892a-42a7-b9ea-3b92f95abedd`  
-**Initialized:** `2026-09-17T04:23:30.073664+00:00`
+**CloudBrain Node UUID:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
+**Primary Engine:** Python / NetworkX  
+**Initialized / Verified:** 2026-09-19T23:09:24.762524+00:00  
+
+---
+
+## Execution Directives
+- **Direct Bare-Metal Dispatch:** Responds instantaneously to `Omega_SIR_SCAVENGER` and runic routing directives.
+- **Isomorphic Memory Synchrony:** Automatically mirrors state into local Open-Notebook tissue (`03_VAULT/runtime_state/open_notebook/sir_scavenger_tissue.json`).
+- **Telemetry Broadcasting:** Streams real-time health telemetry across the Bifrost Bridge to the Excalibur Command Center.

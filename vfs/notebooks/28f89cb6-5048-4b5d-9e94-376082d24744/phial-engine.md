@@ -1,11 +1,11 @@
-# 🧪 Phial Engine Specification: HERMES_PRIME
-**Phial ID:** `PHIAL_HERMES_PRIME_v1000`  
-**Knight Target:** `HERMES_PRIME`  
+# 🧪 Phial Engine Specification: HERMES_PRIME_VFS_FORGE
+**Phial ID:** `PHIAL_HERMES_PRIME_VFS_FORGE_v1000`  
+**Knight Target:** `HERMES_PRIME_VFS_FORGE`  
 **Node UUID:** `28f89cb6-5048-4b5d-9e94-376082d24744`  
 **Engine Architecture:** Monitor-Generate-Verify (MGV) Autonomous Loop  
 **Memory Substrate:** Ouroboros 1.58-bit WAL + duckdb-wasm MemPalace  
 **Governance:** `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_LAW`  
-**Compiled:** 2026-09-13T04:57:41.439443+00:00  
+**Compiled:** 2026-09-19T23:09:24.762524+00:00  
 
 ---
 

@@ -4,8 +4,8 @@
 **Summoning Rune:** `Omega_HermesAgent`  
 **WorldTree Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
 **CloudBrain Node UUID:** `24f4a450-6456-49fe-bfab-8cfcf7c2a33b`  
-**Primary Engine:** Hermes Kernel  
-**Initialized / Verified:** 2026-09-13T04:57:41.439443+00:00  
+**Primary Engine:** Hermes Kernel / Nous Research  
+**Initialized / Verified:** 2026-09-19T23:09:24.762524+00:00  
 
 ---
 

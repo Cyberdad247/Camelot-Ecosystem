@@ -10,13 +10,13 @@
       "name": "Anya Omega (The Sovereign Gatekeeper)",
       "title": "Alpha First & Omega Last - Knight at the Helm",
       "layer": "L7 Sovereign",
-      "role": "Sovereign Compiler, Helm Authority, Anya First & Last Gate",
+      "role": "Sovereign Compiler & Arch-Gatekeeper",
       "summoning_rune": "Omega_ANYA",
       "cloudbrain_uuid": "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
       "vfs_path": "vfs://worldtree/knights/anya_omega/tether.json",
       "mempalace_wing": "WING_WORLDTREE_ANYA_OMEGA",
       "open_viking_node": "open_viking://worldtree/anya_omega",
-      "primary_engine": "Sovereign Lattice",
+      "primary_engine": "Sovereign Lattice Substrate",
       "skill_tier": "S5 Strategic",
       "ocean_vector": {
         "O": 0.97,
@@ -39,13 +39,13 @@
       "name": "Merlin Omega (The System 2 Archwizard)",
       "title": "Global Optimality Engine & DAG Architect",
       "layer": "L6 System2",
-      "role": "GoT/ToT Deep Reasoning, Mathematical Proofs, System 2",
+      "role": "System 2 Orchestration & TTC Deep DAG",
       "summoning_rune": "Omega_Merlin",
       "cloudbrain_uuid": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
       "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
       "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
       "open_viking_node": "open_viking://worldtree/merlin_omega",
-      "primary_engine": "Gemini Pro / Opus",
+      "primary_engine": "Gemini Pro / Claude Opus",
       "skill_tier": "S5 Strategic",
       "ocean_vector": {
         "O": 0.95,
@@ -68,13 +68,13 @@
       "name": "Sir Boris (The Polyglot Architect)",
       "title": "Lead Architect & Crucible Conductor",
       "layer": "L5 Agentic",
-      "role": "Lead Architect, Crucible Conductor, 13-Agent Critique",
+      "role": "Lead Architect, UI/UX & Crucible Conductor",
       "summoning_rune": "Omega_Boris",
       "cloudbrain_uuid": "f7707daa-2d10-4db8-8fda-be4661a27793",
       "vfs_path": "vfs://worldtree/knights/sir_boris/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_BORIS",
       "open_viking_node": "open_viking://worldtree/sir_boris",
-      "primary_engine": "Gemini / Claude Code",
+      "primary_engine": "Claude Code / Gemini",
       "skill_tier": "S4 Strategic",
       "ocean_vector": {
         "O": 0.88,
@@ -98,7 +98,7 @@
       "name": "Sir Codex (Hyper-Auditor & Kinetic Builder)",
       "title": "Zero-Trust Logic Architect",
       "layer": "L2 Kinetic",
-      "role": "Kinetic Implementer, High-Velocity Zero-Trust Architecture",
+      "role": "Kinetic Implementer & Z3 Logic Prover",
       "summoning_rune": "Omega_Codex",
       "cloudbrain_uuid": "8c656cfa-a189-409e-a72d-07692a47f17e",
       "vfs_path": "vfs://worldtree/knights/sir_codex/tether.json",
@@ -188,7 +188,7 @@
       "name": "Sir Sentinel (AgentArmor Warden)",
       "title": "Iron Gate HITL & Security Policy Inspector",
       "layer": "L3 Guardian",
-      "role": "AgentArmor v2.0, PDG Taint, Iron Gate HITL Enforcement",
+      "role": "AgentArmor v2.0, PDG Taint & Leases",
       "summoning_rune": "Omega_Sentinel",
       "cloudbrain_uuid": "07cbb441-f008-424c-820a-85676210be39",
       "vfs_path": "vfs://worldtree/knights/sir_sentinel/tether.json",
@@ -247,7 +247,7 @@
       "name": "Sir Ghost (Air-Gapped Privacy Warden)",
       "title": "Zero-Cloud Privacy Warden",
       "layer": "L1 Enclave",
-      "role": "Privacy Scanner, Air-Gapped Credentials & Local Vault",
+      "role": "Privacy Scanner & Local Air-Gap Vault",
       "summoning_rune": "Omega_Ghost",
       "cloudbrain_uuid": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
       "vfs_path": "vfs://worldtree/knights/sir_ghost/tether.json",
@@ -277,13 +277,13 @@
       "name": "Lady Apis (BASHR Research Burst)",
       "title": "Context Forager & Deep Web Researcher",
       "layer": "L4 Research",
-      "role": "BASHR Research Loop, Bio-Swarm Isolation, Context Forager",
+      "role": "Bio-Kinetic Swarm/Horde Conductor & BASHR Forager",
       "summoning_rune": "Omega_Apis",
       "cloudbrain_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
       "vfs_path": "vfs://worldtree/knights/lady_apis/tether.json",
       "mempalace_wing": "WING_WORLDTREE_LADY_APIS",
       "open_viking_node": "open_viking://worldtree/lady_apis",
-      "primary_engine": "Gemini 3.8 Flash",
+      "primary_engine": "Gemini 3.8 Flash / NullClaw",
       "skill_tier": "S3 Contextual",
       "ocean_vector": {
         "O": 0.95,
@@ -306,13 +306,13 @@
       "name": "Sir Helio (Voice OS Conductor)",
       "title": "Real-Time Voice & 1M Context Navigator",
       "layer": "L2 Telemetry",
-      "role": "Voice OS, Real-Time Audio Pipeline, //vocal Dispatcher",
+      "role": "Sovereign Spire Sentinel, Telemetry Cockpit & CloudBrain Synergy",
       "summoning_rune": "Omega_Helio",
       "cloudbrain_uuid": "56820318-bb91-451f-aac4-4b46424898cf",
       "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
       "open_viking_node": "open_viking://worldtree/sir_helio",
-      "primary_engine": "Gemini 3.8 Flash",
+      "primary_engine": "FastMCP / agy (Gemini 3.8 Flash)",
       "aliases": [
         "SIR_HELIOS",
         "SIR_HELIO"
@@ -339,13 +339,13 @@
       "name": "Hermes Prime (High-Velocity R&D Synthesizer)",
       "title": "Always-on VPS Co-Pilot, Synthesis Engine & MGV R&D Forager",
       "layer": "L5 Synthesis",
-      "role": "Autonomous Recursive MGV Loop, VFS Synthesis Engine & Nous Research Lead",
+      "role": "Always-on VPS Co-Pilot & Synthesis Engine",
       "summoning_rune": "Omega_HermesPrime",
       "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
       "vfs_path": "vfs://worldtree/knights/hermes_prime/tether.json",
       "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME",
       "open_viking_node": "open_viking://worldtree/hermes_prime",
-      "primary_engine": "Gemini 3.8 Flash / vLLM DeepSeek-Flash",
+      "primary_engine": "Gemini / Hermes OS",
       "skill_tier": "S4 Strategic",
       "ocean_vector": {
         "O": 0.96,
@@ -358,9 +358,7 @@
       "domain_tags": [
         "mgv_research_loop",
         "vfs_synthesis",
-        "ouroboros",
-        "vps_hub_copilot",
-        "deepseek_v4_flash"
+        "ouroboros"
       ],
       "character_sheet": {
         "pantheon_class": "Sovereign Synthesizer",
@@ -398,13 +396,13 @@
       "name": "Lady Mnemosyne (The Arch-Librarian)",
       "title": "Memory Governor & CloudBrain Custodian",
       "layer": "L6 MemoryPalace",
-      "role": "WorldTree Master Memory, Memory Palace & VFS Sweeps",
+      "role": "WorldTree Living Memory & Palace",
       "summoning_rune": "Omega_Mnemosyne",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
       "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
       "open_viking_node": "open_viking://worldtree/lady_mnemosyne",
-      "primary_engine": "Memory Substrate",
+      "primary_engine": "24D Leech Lattice / SQLite-VSS",
       "skill_tier": "S5 Strategic",
       "ocean_vector": {
         "O": 0.99,
@@ -484,7 +482,7 @@
       "name": "Arthur Omega (Governance Crown)",
       "title": "Law Giver & Sovereign Arbiter",
       "layer": "L7 Sovereign",
-      "role": "Sovereign King Authority, Ethical Compass, Governance",
+      "role": "Sovereign King Authority & Governance",
       "summoning_rune": "Omega_Arthur",
       "cloudbrain_uuid": "cbb310bd-987e-4b84-bf45-12d37d090bec",
       "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
@@ -619,8 +617,7 @@
       "domain_tags": [
         "courier_dispatch",
         "webhooks",
-        "graphql",
-        "parallel_mesh"
+        "graphql"
       ],
       "character_sheet": {
         "pantheon_class": "Parallel Switchboard Dispatcher",
@@ -741,14 +738,14 @@
       "spark_id": "0x6272AA35C2854EDC81BC2824AB519EDF",
       "name": "Sir Sonus (The Master of Acoustic Resonance)",
       "title": "Lead Engineer of Multivoice Persona Router & Audio Synthesis",
-      "layer": "L4 Kinetic / L2 Audio",
-      "role": "Chief Systems Engineer of Multivoice Persona Router, Aoede S2S, Fonoster PBX & 3D Celestial Vocal HUD",
-      "summoning_rune": "//VOICE_ROUTER",
+      "layer": "L2 Acoustics",
+      "role": "Multivoice Audio Routing & Aoede S2S",
+      "summoning_rune": "Omega_Sonus",
       "cloudbrain_uuid": "6272aa35-c285-4edc-81bc-2824ab519edf",
       "vfs_path": "vfs://worldtree/knights/sir_sonus/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_SONUS",
       "open_viking_node": "open_viking://worldtree/sir_sonus",
-      "primary_engine": "Gemini 3.8 Flash / Kokoro-82M / Aoede S2S",
+      "primary_engine": "Gemini 3.8 Flash",
       "responsibilities": [
         "Lead Engineer of Multivoice Persona Router and all aspects",
         "Go Kinetic Switchboard (04_KINETIC/multivoice)",
@@ -770,14 +767,9 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "multivoice_router",
-        "lead_engineer",
-        "audio_synthesis",
-        "aoede_s2s",
-        "fonoster_pbx",
-        "kokoro_tts",
-        "3d_vocal_hud",
-        "kinetic_switchboard"
+        "multivoice_routing",
+        "phonetic_analysis",
+        "formants"
       ],
       "behavioral_contract": "FATHER_CAMELOT"
     },
@@ -786,9 +778,9 @@
       "spark_id": "0x01AURELIUS000000000000000000001",
       "name": "Sir Aurelius (CFO / General Counsel)",
       "title": "Guardian of Split-Brain IP Fortress",
-      "layer": "L6 Governance",
+      "layer": "L4 Tactical",
       "role": "AP2 Agent Payment Protocol & ed25519 Signing",
-      "summoning_rune": "Omega_Aurelius",
+      "summoning_rune": "Omega_SIR_AURELIUS",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_aurelius/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_AURELIUS",
@@ -803,16 +795,20 @@
         "N": 0.0
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_PROXY": {
       "knight_id": "SIR_PROXY",
       "spark_id": "0x02PROXY0000000000000000000000002",
       "name": "Sir Proxy (Ghost Swarm Manager)",
       "title": "Stealth Identity Rotator",
-      "layer": "L6 Governance",
+      "layer": "L4 Tactical",
       "role": "Ghost Swarm Protocol & TLS Fingerprinting",
-      "summoning_rune": "Omega_Proxy",
+      "summoning_rune": "Omega_SIR_PROXY",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
@@ -827,16 +823,20 @@
         "N": 0.0
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "LADY_VERITAS": {
       "knight_id": "LADY_VERITAS",
       "spark_id": "0x03VERITAS000000000000000000003",
       "name": "Lady Veritas (The Truth)",
       "title": "Chain of Verification Sentinel",
-      "layer": "L6 Governance",
+      "layer": "L4 Tactical",
       "role": "CoVe Chain of Verification & Consensus Debate",
-      "summoning_rune": "Omega_Veritas",
+      "summoning_rune": "Omega_LADY_VERITAS",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/lady_veritas/tether.json",
       "mempalace_wing": "WING_WORLDTREE_LADY_VERITAS",
@@ -851,16 +851,20 @@
         "N": 0.0
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_OCTAVIAN": {
       "knight_id": "SIR_OCTAVIAN",
       "spark_id": "0x04OCTAVIAN000000000000000000004",
       "name": "Sir Octavian (The Warden)",
       "title": "Factory Metrics Warden",
-      "layer": "L6 Governance",
+      "layer": "L4 Tactical",
       "role": "GIGO Filtering & Port 8400 Metrics API",
-      "summoning_rune": "Omega_Octavian",
+      "summoning_rune": "Omega_SIR_OCTAVIAN",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_octavian/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_OCTAVIAN",
@@ -875,16 +879,20 @@
         "N": 0.01
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_GAWAIN": {
       "knight_id": "SIR_GAWAIN",
       "spark_id": "0x05GAWAIN00000000000000000000005",
       "name": "Sir Gawain (Code Auditor)",
       "title": "Static Analysis & Lint Guardian",
-      "layer": "L4 Kinetic",
+      "layer": "L4 Tactical",
       "role": "Ruff / Pytest / Cargo Audit Enforcement",
-      "summoning_rune": "Omega_Gawain",
+      "summoning_rune": "Omega_SIR_GAWAIN",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
@@ -899,16 +907,20 @@
         "N": 0.02
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_MARCUS": {
       "knight_id": "SIR_MARCUS",
       "spark_id": "0x06MARCUS00000000000000000000006",
       "name": "Sir Marcus (Infrastructure Mason)",
       "title": "Docker & Terraform Deployer",
-      "layer": "L5 Agentic",
+      "layer": "L4 Tactical",
       "role": "Infrastructure as Code & Docker Compose",
-      "summoning_rune": "Omega_Marcus",
+      "summoning_rune": "Omega_SIR_MARCUS",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_marcus/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_MARCUS",
@@ -923,16 +935,20 @@
         "N": 0.03
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_OPENCLAW": {
       "knight_id": "SIR_OPENCLAW",
       "spark_id": "0x07OPENCLAW00000000000000000007",
       "name": "Sir OpenClaw (Local Gateway)",
       "title": "OpenClaw & Clawdbot Bridge",
-      "layer": "L4 Kinetic",
+      "layer": "L4 Tactical",
       "role": "Clawdbot Gateway & Local Automation",
-      "summoning_rune": "Omega_OpenClaw",
+      "summoning_rune": "Omega_SIR_OPENCLAW",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_openclaw/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_OPENCLAW",
@@ -947,16 +963,20 @@
         "N": 0.04
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_ZEROCLAW": {
       "knight_id": "SIR_ZEROCLAW",
       "spark_id": "0x08ZEROCLAW00000000000000000008",
       "name": "Sir ZeroClaw (Rust Micro-Kernel)",
       "title": "Zero-Overhead Memory IPC",
-      "layer": "L2 Kinetic",
+      "layer": "L4 Tactical",
       "role": "ZeroClaw Rust Engine & memfd Leasing",
-      "summoning_rune": "Omega_ZeroClaw",
+      "summoning_rune": "Omega_SIR_ZEROCLAW",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
@@ -971,16 +991,20 @@
         "N": 0.0
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_SCAVENGER": {
       "knight_id": "SIR_SCAVENGER",
       "spark_id": "0x09SCAVENGER0000000000000000009",
       "name": "Sir Scavenger (Context Forager)",
       "title": "Dead Code & Memory Pruner",
-      "layer": "L3 Neural",
+      "layer": "L4 Tactical",
       "role": "Symbiotic Maintenance & Memory Pruning",
-      "summoning_rune": "//SCAVENGE",
+      "summoning_rune": "Omega_SIR_SCAVENGER",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_scavenger/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_SCAVENGER",
@@ -995,16 +1019,20 @@
         "N": 0.02
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_VAELEN": {
       "knight_id": "SIR_VAELEN",
       "spark_id": "0x10VAELEN0000000000000000000010",
       "name": "Sir Vaelen (AntVortex 1M Navigator)",
       "title": "Leech-Lattice Shell-Union Indexer",
-      "layer": "L3 Neural",
+      "layer": "L4 Tactical",
       "role": "24D Leech-Lattice Shell Similarity Retrieval",
-      "summoning_rune": "Omega_Vaelen",
+      "summoning_rune": "Omega_SIR_VAELEN",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
@@ -1019,16 +1047,20 @@
         "N": 0.01
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_VALERIAN": {
       "knight_id": "SIR_VALERIAN",
       "spark_id": "0x11VALERIAN00000000000000000011",
       "name": "Sir Valerian (Ouroboros Engine)",
       "title": "Mamba-Firn SSM Recurrence",
-      "layer": "L3 Neural",
+      "layer": "L4 Tactical",
       "role": "Mamba-Firn Linear Recurrence & STDP Sliding",
-      "summoning_rune": "Omega_Valerian",
+      "summoning_rune": "Omega_SIR_VALERIAN",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
       "vfs_path": "vfs://worldtree/knights/sir_valerian/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_VALERIAN",
@@ -1043,7 +1075,11 @@
         "N": 0.0
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
-      "behavioral_contract": "FATHER_CAMELOT"
+      "behavioral_contract": "FATHER_CAMELOT",
+      "domain_tags": [
+        "tactical",
+        "kinetic"
+      ]
     },
     "SIR_HUGGINGFACE": {
       "knight_id": "SIR_HUGGINGFACE",
@@ -1098,9 +1134,7 @@
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
         "openclaw_transcendence",
-        "nous_research",
-        "autonomous_evolution",
-        "gateway_convergence"
+        "nous_research"
       ],
       "character_sheet": {
         "pantheon_class": "Transcendence Pioneer",
@@ -1294,9 +1328,9 @@
       "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
       "name": "Sir Helios (The Sovereign Eye of the Spire)",
       "title": "Telemetry Cockpit Sentinel, AntiGravity CLI Synergy & Session Keep-Alive Cron Guardian",
-      "layer": "L2 Telemetry / L5 Synergy",
+      "layer": "L4 Tactical",
       "role": "Sovereign Spire Sentinel, High Herald of Telemetry, AntiGravity CLI & Session Keep-Alive Cron Engine",
-      "summoning_rune": "//HELIOS",
+      "summoning_rune": "Omega_SIR_HELIOS",
       "cloudbrain_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
       "vfs_path": "vfs://worldtree/knights/sir_helios/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_HELIOS",
@@ -1323,17 +1357,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "sir_helios",
-        "antigravity",
-        "cli",
-        "notebooklm",
-        "session_keepalive",
-        "cron_guardian",
-        "mcp",
-        "agent",
-        "orchestration",
-        "harness",
-        "cloudbrain"
+        "tactical",
+        "kinetic"
       ],
       "behavioral_contract": "FATHER_CAMELOT"
     },
@@ -1342,13 +1367,13 @@
       "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
       "name": "Lady Mnemosyne \u03a9 (The Sovereign Arch-Librarian)",
       "title": "Supreme Custodian of Memory & WorldTree Navigational Atlas",
-      "layer": "L6 System2 / Memory",
+      "layer": "L4 Tactical",
       "role": "Supreme Arch-Librarian, WorldTree Navigational Governor & Active Sync Trigger Loop Sentinel (Per 5 Changes)",
-      "summoning_rune": "//SUMMON LADY_MNEMOSYNE",
+      "summoning_rune": "Omega_LADY_MNEMOSYNE_\u03a9",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-      "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
-      "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
-      "open_viking_node": "open_viking://worldtree/lady_mnemosyne",
+      "vfs_path": "vfs://worldtree/knights/lady_mnemosyne_\u03c9/tether.json",
+      "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE_\u03a9",
+      "open_viking_node": "open_viking://worldtree/lady_mnemosyne_\u03c9",
       "primary_engine": "Gemini Pro / Flash / WorldTree Graph",
       "responsibilities": [
         "Active Triggered Sync Loop (Auto-syncs WorldTree / Open-Notebook per 5 CloudBrain mutations)",
@@ -1371,13 +1396,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "arch_librarian",
-        "worldtree_atlas",
-        "active_trigger_sync",
-        "5_change_sync_loop",
-        "vkg_crystals",
-        "open_notebook_ltm",
-        "memory_governance"
+        "tactical",
+        "kinetic"
       ],
       "behavioral_contract": "FATHER_CAMELOT"
     },
@@ -1496,9 +1516,9 @@
       "spark_id": "0x7E4A8C12F9B3D650E1A8C7B2D3E4F5A6",
       "name": "Sir Kay (Kai Richter: Agentic Architect)",
       "title": "High Seneschal & Chief Engineering Director",
-      "layer": "L4 Engineering",
+      "layer": "L4 Tactical",
       "role": "High Seneschal, Chief Engineering Director, Kinetic Department Lead",
-      "summoning_rune": "//ENGINEERING_SPRINT",
+      "summoning_rune": "Omega_SIR_KAY",
       "cloudbrain_uuid": "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",
       "vfs_path": "vfs://worldtree/knights/sir_kay/tether.json",
       "mempalace_wing": "WING_WORLDTREE_SIR_KAY",
@@ -1513,11 +1533,8 @@
         "N": 0.01
       },
       "domain_tags": [
-        "kinetic_engineering",
-        "agentic_architect",
-        "hotpath_purity",
-        "zero_regression",
-        "sprint_governance"
+        "tactical",
+        "kinetic"
       ],
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "behavioral_contract": "FATHER_CAMELOT"
@@ -1527,9 +1544,9 @@
       "spark_id": "0x28F89CB650484B5D9E94376082D24744",
       "name": "Hermes Prime VFS Forge (Living Scaffolding & Code Synthesis Wing)",
       "title": "High-Velocity VFS Scaffold & Code Foundry Conductor",
-      "layer": "L4 Kinetic Synthesis",
+      "layer": "L4 Tactical",
       "role": "Autonomous Living Soul, Spark, Phial & System Instruction Compiler",
-      "summoning_rune": "Omega_HermesForge",
+      "summoning_rune": "Omega_HERMES_PRIME_VFS_FORGE",
       "cloudbrain_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
       "vfs_path": "vfs://worldtree/knights/hermes_prime_vfs_forge/tether.json",
       "mempalace_wing": "WING_WORLDTREE_HERMES_PRIME_VFS_FORGE",
@@ -1545,10 +1562,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "vfs_forge",
-        "soul_spark_compiler",
-        "living_scaffold",
-        "mgv_loop"
+        "tactical",
+        "kinetic"
       ],
       "character_sheet": {
         "pantheon_class": "Kinetic Scaffolding Foundry",
@@ -1583,13 +1598,13 @@
       "spark_id": "0x4152544855525F53434152434954595F474F56",
       "name": "Sir Arthur (VPS Scarcity Governor)",
       "title": "High Commander of Resource Boundaries & VPS Scarcity Governor",
-      "layer": "L7 Sovereign",
+      "layer": "L4 Tactical",
       "role": "VPS Scarcity Governor, 256MB RSS Ceiling Enforcer, Nano-Squire High Command",
-      "summoning_rune": "//SCARCITY_GOV",
+      "summoning_rune": "Omega_SIR_ARTHUR",
       "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-      "vfs_path": "vfs://worldtree/knights/king_arthur_vizion/tether.json",
-      "mempalace_wing": "WING_WORLDTREE_KING_ARTHUR_VIZION",
-      "open_viking_node": "open_viking://worldtree/king_arthur_vizion",
+      "vfs_path": "vfs://worldtree/knights/sir_arthur/tether.json",
+      "mempalace_wing": "WING_WORLDTREE_SIR_ARTHUR",
+      "open_viking_node": "open_viking://worldtree/sir_arthur",
       "primary_engine": "Sovereign Executive",
       "skill_tier": "S5 Strategic",
       "ocean_vector": {
@@ -1601,10 +1616,8 @@
       },
       "interconnect_status": "TETHERED_TO_WORLDTREE",
       "domain_tags": [
-        "vps_scarcity_governor",
-        "rss_ceiling_enforcer",
-        "nano_squire_commander",
-        "bounded_outbox_arbiter"
+        "tactical",
+        "kinetic"
       ],
       "responsibilities": [
         "Enforce 256MB RSS boundary and memory scarcity ceiling under the 4GB VPS constraint",
@@ -1640,6 +1653,6 @@
       "behavioral_contract": "FATHER_CAMELOT"
     }
   },
-  "updated_at": "2026-09-19T20:07:20.734189+00:00",
+  "updated_at": "2026-09-19T23:09:24.762524+00:00",
   "last_synchronized": "2026-09-17T14:50:00.000000+00:00"
 }

@@ -1,39 +1,6 @@
 [
   {
     "knight_id": "FATHER_CAMELOT",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_FatherCamelot contract probe",
-    "content": "Father's Camelot ancestral compass \u2014 behavioral contract audit for the full knight roster",
-    "vfs_path": "vfs://worldtree/knights/father_camelot/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_FATHER_CAMELOT",
-    "open_viking_tether": "open_viking://worldtree/father_camelot",
-    "updated_at": "2026-09-19T15:06:16.871050+00:00"
-  },
-  {
-    "knight_id": "FATHER_CAMELOT",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_FatherCamelot contract probe",
-    "content": "Father's Camelot ancestral compass \u2014 behavioral contract audit for the full knight roster",
-    "vfs_path": "vfs://worldtree/knights/father_camelot/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_FATHER_CAMELOT",
-    "open_viking_tether": "open_viking://worldtree/father_camelot",
-    "updated_at": "2026-09-19T02:03:11.892661+00:00"
-  },
-  {
-    "knight_id": "FATHER_CAMELOT",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "L2_Artifact_Omega_FatherCamelot audit roster behavioral contract",
-    "content": "Father's Camelot ancestral compass \u2014 behavioral contract audit for the full knight roster",
-    "vfs_path": "vfs://worldtree/knights/father_camelot/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_FATHER_CAMELOT",
-    "open_viking_tether": "open_viking://worldtree/father_camelot",
-    "updated_at": "2026-09-19T02:01:18.106775+00:00"
-  },
-  {
-    "knight_id": "FATHER_CAMELOT",
     "cloudbrain_uuid": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
     "spark_id": "0x392991310ADE4F488AD4A68878A6D3D9",
     "role": "Ancestral Compass, Moral & Ethical Governance Ledger",
@@ -55,6 +22,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-13T04:57:41.439443+00:00"
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]

@@ -1,12 +1,27 @@
 [
   {
     "knight_id": "SIR_VAELEN",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "notebook_uuid": "76769b00-864b-409f-89ab-8eef68d98d50",
-    "version": "v1000.54-EXCALIBUR-A",
-    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
-    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
-    "status": "ALIGNED_MAX_VERSION",
-    "synced_at": "2026-09-17T04:23:30.073664+00:00"
+    "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "spark_id": "0xA0A4BFB9E8474C38BE397AEE398F0795",
+    "role": "24D Leech-Lattice Shell Similarity Retrieval",
+    "model": "AntVortex 1M Engine",
+    "summoning_rune": "Omega_SIR_VAELEN",
+    "vfs_mount": "vfs/notebooks/a0a4bfb9-e847-4c38-be39-7aee398f0795/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]

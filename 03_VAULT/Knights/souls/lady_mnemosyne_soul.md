@@ -3,8 +3,8 @@
 **Sovereign Node UUID:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
 **WorldTree Root Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
 **Architectural Layer:** `L6 MemoryPalace`  
-**Specialization:** WorldTree Master Memory, Memory Palace & VFS Sweeps  
-**Primary Substrate:** Memory Substrate  
+**Specialization:** WorldTree Living Memory & Palace  
+**Primary Substrate:** 24D Leech Lattice / SQLite-VSS  
 **Domain Tags:** master_memory, memory_palace, vfs_sweeps  
 **Max Version:** `Living Camelot-OS v1000 MAX Compendium`  
 **Status:** `ACTIVE_SOVEREIGN`  
@@ -17,4 +17,4 @@
 3. **8GB Scarcity Protocol:** Strict adherence to the 1-Source Mutate protocol ($O(1)$ slot economy) and token compression.
 4. **Zero-Trust Guardrails:** Never mutate external production environments or bypass human confirmation on high-risk operations.
 
-Sealed by ANYA_OMEGA & MERLIN_OMEGA at 2026-09-13T04:57:41.439443+00:00.
+Sealed by ANYA_OMEGA & MERLIN_OMEGA at 2026-09-19T23:09:24.762524+00:00.

@@ -3,10 +3,10 @@
     "knight_id": "SIR_HELIOS",
     "cloudbrain_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
     "spark_id": "0xAB8AA3592B3B4BC1B41F34979CDC184E",
-    "role": "Sovereign Spire Sentinel, High Herald of Telemetry, AntiGravity CLI & CloudBrain Synergy Knight",
+    "role": "Sovereign Spire Sentinel, High Herald of Telemetry, AntiGravity CLI & Session Keep-Alive Cron Engine",
     "model": "FastMCP / agy (Gemini 3.8 Flash / Pro)",
-    "summoning_rune": "//HELIOS",
-    "vfs_mount": "vfs://worldtree/knights/sir_helios/",
+    "summoning_rune": "Omega_SIR_HELIOS",
+    "vfs_mount": "vfs/notebooks/ab8aa359-2b3b-4bc1-b41f-34979cdc184e/",
     "files": [
       "soul.md",
       "spark.md",
@@ -22,9 +22,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "mempalace_wing": "WING_WORLDTREE_SIR_HELIOS",
-    "open_viking_tether": "open_viking://worldtree/sir_helios",
-    "graphiti_db": "03_VAULT/memory/graphiti/sir_helios_graphiti.db",
-    "updated_at": "2026-09-15T08:20:00.000000+00:00"
+    "updated_at": "2026-09-19T23:09:24.762524+00:00"
   }
 ]
