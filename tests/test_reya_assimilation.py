@@ -169,3 +169,34 @@ def test_runic_dispatch_hitl_iron_gate_approval():
     assert res_over.metadata.get("requires_hitl") is True
     assert res_over.metadata.get("status") == "HITL_REQUIRED"
 
+
+# ── 5. Systemd Daemon & Nostr Transport Tests ─────────────────────────────────
+
+def test_systemd_daemon_script_and_cgroups():
+    """Verify systemd daemon service file enforces cgroups v2 limits and strict isolation."""
+    service_path = CAMELOT_HOME / "infra" / "systemd" / "camelot-reya-edge.service"
+    assert service_path.exists()
+    content = service_path.read_text(encoding="utf-8")
+    assert "MemoryMax=350M" in content
+    assert "MemoryHigh=300M" in content
+    assert "CPUQuota=60%" in content
+    assert "ProtectSystem=strict" in content
+    assert "ProtectHome=read-only" in content
+    assert "PrivateTmp=true" in content
+    assert "Slice=camelot-workers.slice" in content
+
+    install_script = CAMELOT_HOME / "infra" / "systemd" / "install-reya-edge.sh"
+    assert install_script.exists()
+
+
+def test_runic_dispatch_activate_reya_nostr_bridge():
+    """Test //ACTIVATE_REYA_NOSTR_BRIDGE execution and QR-Pill pairing."""
+    res = route_rune("//ACTIVATE_REYA_NOSTR_BRIDGE", "vashawns-s26-ultra")
+    assert res.queued is True
+    assert res.metadata.get("status") == "REYA_NOSTR_BRIDGE_ACTIVE"
+    assert res.metadata.get("knight") == "SIR_HELIO"
+    assert res.metadata.get("device_id") == "vashawns-s26-ultra"
+    assert res.metadata.get("systemd_present") is True
+    assert "hmac_digest" in res.metadata.get("qr_pill", {})
+
+

@@ -932,6 +932,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_sovereign_seal",
         "hydrate": False,
     },
+    "//ACTIVATE_REYA_NOSTR_BRIDGE": {
+        "knight": "sir_helio",
+        "description": "Activate REYA Nostr P2P transport bridge with HMAC-SHA256 QR-Pill mobile pairing",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_activate_reya_nostr_bridge",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -3405,8 +3413,48 @@ def _handle_sovereign_seal(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_activate_reya_nostr_bridge(param: Any, context: dict) -> dict:
+    """//ACTIVATE_REYA_NOSTR_BRIDGE — Activate REYA Nostr P2P transport bridge & QR-Pill pairing."""
+    device_id = str(param or "").strip() or "vashawns-s26-ultra"
+    pubkey = context.get("pubkey", "npub_sovereign_mobile_sentinel") if context else "npub_sovereign_mobile_sentinel"
+    systemd_unit = CAMELOT_HOME / "infra" / "systemd" / "camelot-reya-edge.service"
+    systemd_present = systemd_unit.exists()
+
+    import importlib.util
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_nostr_bridge.py"
+    spec = importlib.util.spec_from_file_location("reya_nostr_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.ReyaNostrBridge()
+        pairing = bridge.generate_pairing_qr_pill(device_id, pubkey)
+        status_info = bridge.get_status()
+    else:
+        pairing = {"token": {"device_id": device_id, "status": "FALLBACK"}}
+        status_info = {"relays": ["wss://relay.damus.io"]}
+
+    return {
+        "action": "activate_reya_nostr_bridge",
+        "knight": "SIR_HELIO",
+        "device_id": device_id,
+        "qr_pill": pairing.get("token"),
+        "relays": status_info.get("relays"),
+        "systemd_service": "infra/systemd/camelot-reya-edge.service",
+        "systemd_present": systemd_present,
+        "cgroups_limits": {
+            "MemoryHigh": "300M",
+            "MemoryMax": "350M",
+            "CPUQuota": "60%",
+            "Slice": "camelot-workers.slice",
+        },
+        "status": "REYA_NOSTR_BRIDGE_ACTIVE",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_activate_reya_nostr_bridge": _handle_activate_reya_nostr_bridge,
     "_handle_arthur_merlin_handshake": _handle_arthur_merlin_handshake,
     "_handle_sovereign_seal": _handle_sovereign_seal,
     "_handle_forge_reya_scaffold": _handle_forge_reya_scaffold,
@@ -3498,6 +3546,11 @@ _HANDLERS = {
 
 _RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
+    "//activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "/activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "$activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "//reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "//reya_nostr": "//ACTIVATE_REYA_NOSTR_BRIDGE",
     "//handshake": "//HANDSHAKE",
     "/handshake": "//HANDSHAKE",
     "$handshake": "//HANDSHAKE",

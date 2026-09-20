@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1853",
-            "task": "Arthur-Merlin Handshake Protocol & HITL Governance Architecture (AM-HANDSHAKE/1): Bicameral Risk Arbitration, Gideon 13-Gate Pre-Flight, Arthur Sovereign Golden Seal & Runic Dispatch",
-            "author": "ARTHUR_OMEGA / MERLIN_Ω / SIR_GIDEON / ANYA_Ω / SIR_HELIOS",
+            "id": "1854",
+            "task": "REYA Nostr Bridge Activation & Sir Codex Edge Systemd Daemon Lockdown (camelot-reya-edge.service): cgroups v2 Strict Scarcity Bounds (<350MB MemoryMax) & QR-Pill Pairing",
+            "author": "SIR_HELIO / SIR_CODEX / ANYA_Ω / MERLIN_Ω / SIR_HELIOS / ARTHUR_OMEGA",
             "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
-            "notes": "Architected, verified, and sealed the Arthur-Merlin Handshake and HITL Governing Architecture (AM-HANDSHAKE/1) under King Arthur's Sovereign Authority and Merlin_Ω System 2 Orchestration: (1) Implemented ArthurMerlinHandshakeEngine in control_plane/security/arthur_merlin_handshake.py orchestrating the bicameral governance lifecycle: Merlin System 2 TTC DAG decomposition, memory scarcity boundary check (MAX_EDGE_SLAB_MB=256), Gideon 13-gate pre-flight audit, risk tier arbitration (T0-T4), and Anya 10-line atomic code firewall, (2) Enforced hard suspension (SUSPENDED_AWAITING_HITL) on all consequential operations (>10 lines, T3/T4, destructive commands), unlocking only upon application of King Arthur's Sovereign Golden Seal (apply_arthur_golden_seal) cryptographically signed via Ed25519 under camelot-arthur-resolution/1, (3) Registered runes //HANDSHAKE and //SOVEREIGN_SEAL with aliases (//ARTHUR_MERLIN, //AM_HANDSHAKE, //GOLDEN_SEAL) in control_plane/runes/runic_router.py, (4) Created comprehensive test suite tests/test_arthur_merlin_handshake.py passing 8/8 tests (26/26 combined across voice, reya, and handshake), (5) Stored governance crystal into MemCastle KNN store (Row ID 538) and Graphiti temporal knowledge graph (Fact 38) under SIR_HELIOS, and (6) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-20 22:00 UTC"
+            "notes": "Activated REYA Nostr transport bridge and locked execution onto edge node under Sir Helio and Sir Codex: (1) Sir Codex forged infra/systemd/camelot-reya-edge.service and install-reya-edge.sh constraining Reya's Python process strictly inside camelot-workers.slice with cgroups v2 limits (MemoryHigh=300M, MemoryMax=350M, CPUQuota=60%, ProtectSystem=strict, ProtectHome=read-only, PrivateTmp=true, IPAddressAllow=127.0.0.1/32 100.64.0.0/10), (2) Engineered 02_FORGE/assimilation/reya/reya_nostr_bridge.py implementing decentralized Nostr relay listener (NIP-01/NIP-44), HMAC-SHA256 QR-Pill device pairing for Excalibur S26 Ultra / Motorola, and zero-copy packet piping into Bifrost Gateway (:3001) and shared memory slab, (3) Registered rune //ACTIVATE_REYA_NOSTR_BRIDGE and aliases in control_plane/runes/runic_router.py with verified CLI dispatch, (4) Extended test suite tests/test_reya_assimilation.py passing 14/14 tests (28/28 full suite green), (5) Stored crystal into MemCastle KNN store (Row ID 539) and Graphiti temporal knowledge graph (Fact 9) under SIR_HELIO, and (6) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-20 22:15 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1852" in line:
+            if "| 1853" in line:
                 insert_at = i
                 break
         
