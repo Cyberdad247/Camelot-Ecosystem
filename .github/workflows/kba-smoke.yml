@@ -34,7 +34,7 @@ jobs:
       PORT: '3017'
       ACTION_ID: KBA_SYNC_001
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v4
         # 2026-06-27 promotion: bump to Node 22 LTS — current LTS since
