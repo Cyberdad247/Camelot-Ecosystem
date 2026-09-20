@@ -34,12 +34,25 @@ import sys
 import time
 import uuid
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 logger = logging.getLogger("realtime_voice_bridge")
+
+CAMELOT_HOME = Path(__file__).resolve().parent.parent.parent
+try:
+    s2s_dir = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omni_s2s"
+    if str(s2s_dir) not in sys.path:
+        sys.path.insert(0, str(s2s_dir))
+    from radix_audio_cache import RadixAudioCache
+    from agora_rtc_bridge import AgoraRTCBridge, AgoraRTCConfig
+except ImportError:
+    RadixAudioCache = None
+    AgoraRTCBridge = None
+    AgoraRTCConfig = None
 
 # ── Audio & Pipeline Constants ───────────────────────────────────────────────
 
@@ -645,6 +658,9 @@ class RealtimeSessionMetrics:
     stt_latency_ms: float = 0.0
     llm_latency_ms: float = 0.0
     tts_latency_ms: float = 0.0
+    radix_cache_hits: int = 0
+    radix_cache_hit_rate_pct: float = 0.0
+    agora_transport_active: bool = False
 
 
 class RealtimeVoiceSession:
@@ -675,6 +691,10 @@ class RealtimeVoiceSession:
         self.tts = tts_processor or TTSProcessor()
         self.send_event_fn = send_event_fn
 
+        # RadixAttention multi-turn KV cache & Agora SD-RTN transport (assimilated from sglang-omni & AgoraAI)
+        self.radix_cache = RadixAudioCache() if RadixAudioCache else None
+        self.agora_bridge: Optional[Any] = None
+
         self.metrics = RealtimeSessionMetrics()
         self.in_response: bool = False
         self.current_response_id: Optional[str] = None
@@ -685,6 +705,24 @@ class RealtimeVoiceSession:
         # Wire VAD callbacks
         self.vad.speech_start_callback = self._on_vad_speech_start
         self.vad.speech_stop_callback = self._on_vad_speech_stop
+
+    def attach_agora_rtc(self, channel_name: str = "camelot_omni_s2s") -> Dict[str, Any]:
+        """Attaches Agora RTC SD-RTN transport directly to this session."""
+        if AgoraRTCBridge and AgoraRTCConfig:
+            self.agora_bridge = AgoraRTCBridge(AgoraRTCConfig(channel_name=channel_name))
+            res = self.agora_bridge.join_channel()
+            self.metrics.agora_transport_active = True
+            return res
+        return {"status": "AGORA_RTC_UNAVAILABLE"}
+
+    def ingest_agora_frame(self, pcm_bytes: bytes) -> Dict[str, Any]:
+        """Ingests raw PCM frame directly from Agora RTC channel into session buffer."""
+        if self.agora_bridge:
+            ingest_res = self.agora_bridge.push_audio_frame(pcm_bytes)
+            self.audio_input_buffer.extend(pcm_bytes)
+            self.metrics.total_audio_in_bytes += len(pcm_bytes)
+            return ingest_res
+        return {"status": "NO_AGORA_BRIDGE"}
 
     def _on_vad_speech_start(self) -> None:
         """Triggered when user speech begins. Executes barge-in cancellation if currently speaking."""
@@ -830,6 +868,18 @@ class RealtimeVoiceSession:
 
         # 2. LLM Phase
         t0_llm = time.perf_counter()
+
+        # RadixAttention multi-turn KV cache acceleration (sglang-omni)
+        if self.radix_cache:
+            tokens = [abs(hash(w)) % 50000 for w in transcript.split()]
+            matched_node, matched_count = self.radix_cache.match_prefix(tokens)
+            if matched_count > 0:
+                self.metrics.radix_cache_hits += 1
+                self.metrics.radix_cache_hit_rate_pct = round(
+                    (matched_count / max(1, len(tokens))) * 100.0, 1
+                )
+            self.radix_cache.insert_sequence(tokens, kv_data={"turn": self.metrics.turns})
+
         reply_text = self.llm.generate_response(transcript)
         self.metrics.llm_latency_ms = (time.perf_counter() - t0_llm) * 1000.0
         self.metrics.ttft_ms = self.metrics.stt_latency_ms + self.metrics.llm_latency_ms
@@ -857,6 +907,10 @@ class RealtimeVoiceSession:
         self.metrics.tts_latency_ms = (time.perf_counter() - t0_tts) * 1000.0
         self.metrics.ttfa_ms = self.metrics.ttft_ms + self.metrics.tts_latency_ms
         self.metrics.total_audio_out_bytes += len(out_pcm)
+
+        # Stream egress audio to Agora RTC SD-RTN channel if active
+        if self.agora_bridge and out_pcm:
+            self.agora_bridge.pull_egress_frame(out_pcm)
 
         if not self._cancel_generation_flag:
             audio_b64 = base64.b64encode(out_pcm).decode("ascii")

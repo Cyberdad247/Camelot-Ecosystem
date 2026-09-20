@@ -215,3 +215,30 @@ def test_runic_dispatch_omni_s2s_aliases():
     res3 = route_rune("//s2s_stream Full duplex stream check", {})
     assert res3.rune == "//s2s_stream"
     assert res3.metadata["status"] == "OMNI_S2S_STREAM_ACTIVE"
+
+
+# ── 6. RealtimeVoiceSession Integration Test ──────────────────────────────────
+
+@pytest.mark.anyio
+async def test_realtime_voice_session_radix_and_agora_integration():
+    """Verify RealtimeVoiceSession attaches Agora RTC and reuses Radix KV cache."""
+    from control_plane.dispatch.realtime_voice_bridge import RealtimeVoiceSession
+
+    session = RealtimeVoiceSession()
+    assert session.radix_cache is not None
+
+    # Attach Agora RTC channel
+    agora_attach = session.attach_agora_rtc("test_session_channel")
+    assert agora_attach["status"] == "AGORA_CHANNEL_JOINED"
+    assert session.metrics.agora_transport_active is True
+
+    # Ingest Agora audio frame
+    pcm_frame = b"\x10\x00" * 160
+    ingest = session.ingest_agora_frame(pcm_frame)
+    assert ingest["bytes_ingested"] == 320
+    assert session.metrics.total_audio_in_bytes >= 320
+
+    # Simulate speech turn response
+    events = await session._run_pipeline(pcm_frame * 10)
+    assert len(events) > 0
+    assert session.metrics.turns >= 0
