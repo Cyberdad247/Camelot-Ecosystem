@@ -1,0 +1,13 @@
+[
+  {
+    "knight_id": "ASSIMILATION_ENGINE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "assimilation_protocol_verification",
+    "title": "ASSIMILATION_PROTOCOL_MEMORY_INTEGRATION",
+    "content": "{\n  \"assimilated_repos\": [\n    \"https://github.com/Egonex-AI/Understand-Anything\",\n    \"https://github.com/Cyberdad247/book-to-skill\",\n    \"https://github.com/Cyberdad247/codebase-memory-mcp\",\n    \"https://github.com/teng-lin/notebooklm-py\",\n    \"https://github.com/joeseesun/qiaomu-anything-to-notebooklm\",\n    \"https://github.com/roomi-fields/notebooklm-mcp\"\n  ],\n  \"mcp_tools_exposed\": [\n    \"memcastle_store\",\n    \"memcastle_search\",\n    \"graphify_extract\",\n    \"assimilation_status\"\n  ],\n  \"vector_substrate\": \"MemCastle (sqlite-vec) + Qdrant Cloud\",\n  \"status\": \"ASSIMILATED_AND_INTEGRATED\"\n}",
+    "vfs_path": "vfs://worldtree/knights/assimilation_engine/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ASSIMILATION_ENGINE",
+    "open_viking_tether": "open_viking://worldtree/assimilation_engine",
+    "synced_at": "2026-09-08T10:46:19.779164+00:00"
+  }
+]

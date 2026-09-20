@@ -232,3 +232,25 @@ def test_lane_module_source_ast_forbids_upstream_control_plane_imports():
         "omniroute_policies source AST contains forbidden control_plane "
         f"imports: {leaks}"
     )
+
+
+# ── OmniRoute & Failover Chain Integration ──────────────────────────────────
+
+
+def test_omniroute_failover_chain_resolution():
+    from control_plane.omniroute_policies import resolve_fcc_failover_chain, get_fcc_provider_policy
+
+    chain_omni = resolve_fcc_failover_chain("omniroute_350_providers")
+    assert chain_omni[0] == "omniroute_gateway"
+    assert "groq" in chain_omni
+    assert "cerebras" in chain_omni
+
+    chain_r1 = resolve_fcc_failover_chain("r1_reasoner deepseek")
+    assert chain_r1[0] == "deepseek"
+    assert "groq" in chain_r1
+    assert "openai" in chain_r1
+
+    policy = get_fcc_provider_policy("scaffold rapid boilerplate prototype")
+    assert policy["primary_provider"] is not None
+    assert policy["zero_downtime_enabled"] is True
+

@@ -1,0 +1,89 @@
+{
+  "cartridge_id": "motorola-edge-cartridge-v1",
+  "version": "1.0.0",
+  "name": "Motorola Edge Hub & VPS Fallback Governing Law Cartridge",
+  "description": "Autonomous Edge Cartridge for Motorola Moto G Power 5G (2024) under 4GB constraint, VPS Fallback Law, and CloudBrain Mastering Folder integration.",
+  "target_repo": "https://github.com/Cyberdad247/Camelot-VPS.git",
+  "branch": "cartridge/motorola-edge-cartridge-v1",
+  "base_branch": "main",
+  "device_target": {
+    "model": "Motorola Moto G Power 5G (2024)",
+    "codename": "cancunn",
+    "product": "cancunn_g_sys",
+    "serial": "ZY22L3K36P",
+    "os": "Android 15 (SDK 35)",
+    "display": "1080x2400 @ 400 DPI",
+    "tailscale_ip": "100.89.129.105",
+    "local_ip": "192.168.1.68"
+  },
+  "governing_knights": [
+    "SIR_HEIMDALL",
+    "LADY_MNEMOSYNE",
+    "SIR_FORGE",
+    "ANYA_OMEGA"
+  ],
+  "aspects": [
+    {
+      "id": "aspect_vps_fallback_law",
+      "name": "VPS Fallback Governing Law Engine",
+      "subsystem": "edge_resilience",
+      "enabled": true,
+      "ports": [
+        8096,
+        8095
+      ],
+      "governing_engine": "control_plane.dispatch.vps_fallback_governing_law",
+      "description": "Monotonic nonces, bounded SQLite WAL outbox (<1000 items), offline autonomous standby, fail-safe snapshot lock",
+      "rules": {
+        "max_outbox_queue": 1000,
+        "max_snapshot_ttl_seconds": 3600,
+        "allowed_offline_actions": [
+          "health_probe",
+          "tailscale_route_check",
+          "collect_telemetry",
+          "notify"
+        ],
+        "forbidden_offline_actions": [
+          "vfs_mutation",
+          "unauthenticated_exec",
+          "model_inference_spawn",
+          "credential_export"
+        ]
+      }
+    },
+    {
+      "id": "aspect_4gb_scarcity_guard",
+      "name": "4GB ARM64 Edge Scarcity Controller",
+      "subsystem": "resource_governance",
+      "enabled": true,
+      "constraint_tag": "4GB_ARM64_EDGE_STRICT",
+      "max_rss_bytes": 268435456,
+      "thread_throttle": 2,
+      "description": "Hard 256MB RSS ceiling, zero Node/Python in hot execution path, native ARM64 Rust/C supervisor"
+    },
+    {
+      "id": "aspect_cloudbrain_mastering_folder",
+      "name": "Mastering AI File & Folder CloudBrain Synthesizer",
+      "subsystem": "semantic_palace",
+      "enabled": true,
+      "notebook_uuid": "876f30c4-efce-415d-8098-cad500de159c",
+      "notebook_title": "Mastering the AI File and Folder Agent System",
+      "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "custodian": "LADY_MNEMOSYNE",
+      "description": "Hierarchical file/folder memory palace distillation with Lady Mnemosyne for edge VFS operations"
+    },
+    {
+      "id": "aspect_wireless_debug_continuity",
+      "name": "Wireless Debugging & Telemetry Continuity",
+      "subsystem": "kinetic_transport",
+      "enabled": true,
+      "ports": [
+        5555,
+        8023,
+        8092
+      ],
+      "pairing_protocol": "TCP/IP Wireless ADB + Termux SSH Relay",
+      "description": "Cable-free wireless debugging over Wi-Fi (192.168.1.68:5555) and Tailscale (100.89.129.105:5555/8023)"
+    }
+  ]
+}

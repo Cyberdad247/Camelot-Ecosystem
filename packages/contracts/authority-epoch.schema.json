@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camelot-os/schemas/authority-epoch.schema.json",
+  "title": "Camelot Authority Epoch Certificate",
+  "description": "Signed Crown authority-epoch certificate for dynamic fencing. Exactly one current certificate defines the active authority epoch for receipt/lease/admission boundaries. Superseded certificates remain evidence, never current authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "certificate_id",
+    "authority_domain",
+    "authority_epoch",
+    "active_brain",
+    "promotion_mode",
+    "issued_at",
+    "effective_at",
+    "lifecycle",
+    "receipt_head",
+    "state_digest",
+    "previous_certificate_digest",
+    "integrity"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-authority-epoch/1"
+    },
+    "certificate_id": {
+      "type": "string",
+      "pattern": "^epoch_[A-Za-z0-9_-]+$"
+    },
+    "authority_domain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority_epoch": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "active_brain": {
+      "type": "string",
+      "minLength": 1
+    },
+    "promotion_mode": {
+      "type": "string",
+      "enum": [
+        "BOOTSTRAP",
+        "PLANNED",
+        "FAILOVER"
+      ]
+    },
+    "issued_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "effective_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lifecycle": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUPERSEDED",
+        "REVOKED"
+      ]
+    },
+    "receipt_head": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "state_digest": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "previous_certificate_digest": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      ]
+    },
+    "integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalization",
+        "digest_algorithm",
+        "digest",
+        "signature_algorithm",
+        "signature_domain",
+        "signer_key_id",
+        "signature"
+      ],
+      "properties": {
+        "canonicalization": {
+          "type": "string",
+          "const": "camelot-c14n-json/1"
+        },
+        "digest_algorithm": {
+          "type": "string",
+          "const": "sha256"
+        },
+        "digest": {
+          "type": "string",
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "signature_algorithm": {
+          "type": "string",
+          "const": "ed25519"
+        },
+        "signature_domain": {
+          "type": "string",
+          "const": "camelot-signature:camelot-authority-epoch/1"
+        },
+        "signer_key_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "signature": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9+/]+={0,2}$"
+        }
+      }
+    }
+  }
+}

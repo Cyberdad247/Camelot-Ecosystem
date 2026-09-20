@@ -1,0 +1,37 @@
+{
+  "crystals": [
+    {
+      "crystal_id": "VKG_59887B07524C653A",
+      "knight": "SIR_BORIS",
+      "notebook_title": "Test Multi-Agent Platform Study",
+      "category": "AI_MULTIAGENT_RESEARCH",
+      "vfs_coord": "vfs://worldtree/knights/sir_boris/domain_nodes/48e475268a143741",
+      "added_at": "2026-09-19T12:34:15.627368+00:00"
+    },
+    {
+      "crystal_id": "VKG_FFE846B8DBE8A502",
+      "knight": "SIR_HELIO",
+      "notebook_title": "Voice OS Audio Pipeline Study",
+      "category": "VOICE_PIPELINE",
+      "vfs_coord": "vfs://worldtree/knights/sir_helio/domain_nodes/79cbec0fcb7e05f8",
+      "added_at": "2026-09-19T12:34:34.439504+00:00"
+    },
+    {
+      "crystal_id": "VKG_622E2A5F421058CE",
+      "knight": "SIR_FORGE",
+      "notebook_title": "Rust Forge Study",
+      "category": "INFRASTRUCTURE_BUILD",
+      "vfs_coord": "vfs://worldtree/knights/sir_forge/domain_nodes/b88abfbd0974bcc4",
+      "added_at": "2026-09-19T12:34:40.285508+00:00"
+    },
+    {
+      "crystal_id": "VKG_97AE66074D67F309",
+      "knight": "SIR_OCTAVIAN",
+      "notebook_title": "WorldTree Navigation Augmentation",
+      "category": "WORLDTREE_NAV",
+      "vfs_coord": "vfs://worldtree/knights/sir_octavian/domain_nodes/47c03ab7ad51d20d",
+      "added_at": "2026-09-19T12:35:12.731501+00:00"
+    }
+  ],
+  "updated_at": "2026-09-19T12:35:12.733842+00:00"
+}

@@ -10,6 +10,7 @@ members = [
     "02_FORGE/kinetic/cribo",
     "02_FORGE/kinetic/omni_nexus_ide",
     "02_FORGE/kinetic/pmcp",
+    # rotel: merged single crate (log/id/adb CLI + serve daemon from ex-kinetic_edge/rotel).
     "02_FORGE/kinetic/rotel",
     "04_KINETIC/squires_rs",
     "04_KINETIC/memory_palace",
@@ -17,7 +18,13 @@ members = [
     "kinetic_edge/camelot_edge",
     "kinetic_edge/pqcrypto",
     "kinetic_edge/swarm_spawner",
-    "wasm/ledger-engine"
+    "wasm/camelot-audio-dsp",
+    "wasm/ledger-engine",
+    "crates/camelot-vkg-crystal",
+    "crates/hive-ide-cli",
+    "crates/omni-forge-cli",
+    "packages/crawler",
+    "packages/harness-forge"
 ]
 exclude = [
     "03_VAULT/runtime_state/nano_swarm_generated/Node_B_Bifrost/source",
@@ -31,3 +38,18 @@ dead_code = "warn"
 unused_variables = "warn"
 unused_imports = "warn"
 unused_mut = "warn"
+
+[profile.dev]
+opt-level = 0
+debug = 0
+codegen-units = 1
+
+# Release: smaller kinetic binaries for mesh distribution (cribo/rotel ship to edge nodes)
+[profile.release]
+lto = true
+codegen-units = 1
+
+[profile.test]
+opt-level = 1
+debug = 0
+codegen-units = 1

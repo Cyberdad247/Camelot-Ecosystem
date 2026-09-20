@@ -1,0 +1,23 @@
+﻿User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /cart/
+Disallow: /checkout/
+
+# Agentic Graph Optimization (A.G.O.) - Allow AI Answer Engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+Sitemap: https://lisascustomkeychains.com/sitemap.xml

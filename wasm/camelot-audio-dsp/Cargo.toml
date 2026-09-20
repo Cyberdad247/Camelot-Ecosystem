@@ -1,0 +1,15 @@
+[package]
+name = "camelot-audio-dsp"
+version = "1.0.0"
+edition = "2021"
+authors = ["Sir Codex <codex@camelot.os>"]
+description = "Omni-Voice D.A.G. ingress DSP — 20 ms / 16 kHz PCM framing, VAD and ring-buffer leak accounting"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# The binding glue is only needed when compiling for the browser. Host builds
+# and the unit tests stay dependency-free, so `cargo test -p camelot-audio-dsp`
+# never requires a WASM toolchain.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+wasm-bindgen = "0.2"

@@ -5,7 +5,9 @@
 import type { FormEvent } from 'react';
 import { useBifrost } from '../context/BifrostContext';
 import { useLakishaVoice } from '../hooks/useLakishaVoice';
-import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs } from '../lib/telemetry';
+import { QUERY_BUDGET_MS, TTFA_BUDGET_MS, budgetStatus, formatMs, getLatencyHistory, recordLatencySample } from '../lib/telemetry';
+import { Sparkline } from './Sparkline';
+import { SymbolectVisualizer } from './SymbolectVisualizer';
 
 // One latency readout with a budget-colored status dot.
 function TelemetryMetric({
@@ -14,9 +16,14 @@ function TelemetryMetric({
   budget,
 }: { label: string; ms: number | null; budget: number }) {
   const status = budgetStatus(ms, budget);
-  const dot = status === 'breach' ? 'bg-red-400' : status === 'warn' ? 'bg-amber-400' : 'bg-violet';
+  // Severity ramp is expressed in the sovereign palette only — violet (calm),
+  // gold (attention), gold-royal (peak). Standard red/amber are forbidden by the
+  // design-token conformance rule enforced in HELIO_PATCH.json, so do not reach
+  // for `red-*`/`amber-*` here even though a latency breach feels like a
+  // conventional "error" state.
+  const dot = status === 'breach' ? 'bg-gold-royal' : status === 'warn' ? 'bg-gold' : 'bg-violet';
   const value =
-    status === 'breach' ? 'text-red-400' : status === 'warn' ? 'text-amber-300' : 'text-white/60';
+    status === 'breach' ? 'text-gold-royal' : status === 'warn' ? 'text-gold-light' : 'text-white/60';
   return (
     <span className="flex items-center gap-1.5">
       <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />
@@ -64,12 +71,29 @@ export function LakishaHUD() {
       : lane === 'LOCAL_TOOLS'
         ? 'LOCAL'
         : null;
+  // //REZERO uses gold-royal so it stays distinct from both the default gold
+  // lane badge and the violet REMOTE_MCP badge.
   const laneClass = state?.lastRezeroed
-    ? 'border-amber-400/40 text-amber-300'
+    ? 'border-gold-royal/40 text-gold-royal'
     : lane === 'REMOTE_MCP'
       ? 'border-violet/40 text-violet-light'
       : 'border-gold/30 text-gold-light';
-  const showTelemetry = queryMs != null || laneLabel != null;
+
+  // Omni-Voice D.A.G. badge — the ingress routing decision the gateway made for
+  // this utterance: a ᛟ_ runic bypass (deterministic, zero inference cost) or
+  // the Softmax persona lane (with the Sentinel-governed tau).
+  const omni = state?.lastOmniVoice ?? null;
+  const omniBypass = omni?.path === 'runic_bypass';
+  const omniLabel = omni
+    ? omniBypass
+      ? `ᛟ ${omni.delegatesRune ?? 'BYPASS'}`
+      : `${omni.knight ?? '—'}${omni.tau != null ? ` · τ${omni.tau}` : ''}`
+    : null;
+  const omniClass = omniBypass
+    ? 'border-violet/40 text-violet-light'
+    : 'border-gold/30 text-gold-light';
+
+  const showTelemetry = queryMs != null || laneLabel != null || omniLabel != null;
 
   return (
     <form
@@ -181,17 +205,38 @@ export function LakishaHUD() {
       </div>
       {/* vMAX KINETIC_THROUGHPUT telemetry strip */}
       {showTelemetry && (
-        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 pl-1 text-[10px] uppercase tracking-[0.14em]">
-          <TelemetryMetric label="TTFA" ms={ttfaMs} budget={TTFA_BUDGET_MS} />
-          <TelemetryMetric label="Query" ms={queryMs} budget={QUERY_BUDGET_MS} />
-          {laneLabel && (
-            <span className={`rounded-sm border px-1.5 py-0.5 ${laneClass}`}>
-              {laneLabel}
-              {state?.lastLatencyMs != null && (
-                <span className="ml-1 text-white/35">· {formatMs(state.lastLatencyMs)}</span>
-              )}
-            </span>
-          )}
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-x-4 gap-y-1 pl-1 text-[10px] uppercase tracking-[0.14em]">
+          <div className="flex items-center gap-x-4">
+            <TelemetryMetric label="TTFA" ms={ttfaMs} budget={TTFA_BUDGET_MS} />
+            <TelemetryMetric label="Query" ms={queryMs} budget={QUERY_BUDGET_MS} />
+            {laneLabel && (
+              <span className={`rounded-sm border px-1.5 py-0.5 ${laneClass}`}>
+                {laneLabel}
+                {state?.lastLatencyMs != null && (
+                  <span className="ml-1 text-white/35">· {formatMs(state.lastLatencyMs)}</span>
+                )}
+              </span>
+            )}
+            {omniLabel && (
+              <span
+                className={`rounded-sm border px-1.5 py-0.5 ${omniClass}`}
+                title={omni?.status}
+                aria-label={`Omni-Voice: ${omniLabel}`}
+              >
+                {omniLabel}
+                {!omniBypass && omni?.confidence != null && (
+                  <span className="ml-1 text-white/35">
+                    · {Math.round(omni.confidence * 100)}%
+                  </span>
+                )}
+              </span>
+            )}
+          </div>
+          <div className="hidden sm:flex items-center gap-3">
+            <SymbolectVisualizer rune="|🧠⊗(⚡💬)⟩" />
+            <span className="text-[9px] text-white/30 tracking-widest">STREAM JITTER</span>
+            <Sparkline data={getLatencyHistory()} width={64} height={16} stroke="#D4AF37" />
+          </div>
         </div>
       )}
       {!connected && (

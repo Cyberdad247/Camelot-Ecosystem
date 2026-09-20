@@ -1,0 +1,13 @@
+﻿[package]
+name = "camelot-harness-forge"
+version = "0.1.0"
+edition = "2021"
+description = "Merlin's Native Rust Zero-Trust Service Harness Forge (Raven Architecture Adaptation)"
+license = "MIT"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+tokio = { version = "1.0", features = ["full"] }
+thiserror = "1.0"

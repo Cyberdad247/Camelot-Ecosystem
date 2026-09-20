@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-09-14T13:42:09.080801+00:00",
+  "edge_hardware_ceiling_gb": 8.0,
+  "active_microvm_count": 0,
+  "total_allocated_mb": 0,
+  "total_cow_delta_mib": 0,
+  "ram_utilization_ratio": 0.0,
+  "sandboxes": [],
+  "workspace_enclaves": {
+    "source": "VFS Guardian (Read-Only)",
+    "worktree": "Sentinel Lease (Approved-Write)",
+    "tmp": "cgroups v2 Gate (64MB Scratch)",
+    "socket": "AgentArmor (ZeroClaw Zero-Copy IPC)"
+  },
+  "mounted_skills": []
+}

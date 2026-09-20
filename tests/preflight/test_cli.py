@@ -5,7 +5,6 @@ import os
 import subprocess
 import sys
 
-import pytest
 
 
 def _run_cli(*args, env_extra=None, cwd=None):

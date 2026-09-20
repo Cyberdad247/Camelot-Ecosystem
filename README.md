@@ -11,7 +11,7 @@
 [![Status](https://img.shields.io/badge/status-production%20verified-2ea44f)]()
 [![PQ Crypto](https://img.shields.io/badge/crypto-ML--KEM--768%20%7C%20ML--DSA--65-D4AF37)]()
 [![RAM Ceiling](https://img.shields.io/badge/RAM%20ceiling-4GB%20Scarcity%20Protocol-blue)]()
-[![Languages](https://img.shields.io/badge/Python%203.11%20%7C%20Rust%201.96%20%7C%20Go%201.23-informational)]()
+[![Languages](https://img.shields.io/badge/Python%203.13%20%7C%20Rust%201.85%20%7C%20Go%201.23-informational)]()
 [![Architecture](https://img.shields.io/badge/OxiBonsai_v2-Ternary_STDP-FF4500)]()
 [![Engine](https://img.shields.io/badge/AntVortex-1M_Context_Engine-9370DB)]()
 
@@ -106,6 +106,10 @@ CAMELOT-OS dispatches work across a **Foundry Council** of typed AI Knights — 
 
 This isn't a roadmap cosplaying as a product. Here's what's **on `main`, tested, and green**:
 
+- ✅ **Kickbox-Audio PWA Shell (`apps/pwa`)** — Next.js 14 luxury minimalist brutalist interface with dynamic tabbed navigation, Alfred Command Dock, and real-time telemetry HUD.
+- ✅ **Tenant Selection & Multivoice Router Cockpit** — Dedicated tenant cartridge matrix (`ecosystem-pwa`, `excalibur-ecc`, `kba-executive`, `digital-factory`, `1vizion-rcrds`) dynamically transitioning into the Multivoice Router Cockpit with live 432Hz Canvas waveform visualizer, persona matrix, and duplex voice toggle.
+- ✅ **Sir Helio Default Voice OS & Dual-Horizon Inference** — Real-time Aoede 432Hz duplex voice pipeline defaulting to **SIR_HELIO** with zero-overhead switching between Local Ollama (`:11434`), VPS OmniRoute (`:20128`), Gemini Live S2S, and CLIProxy (`:8080`).
+- ✅ **Arch-Sovereign Excalibur Mobile Edge (`apps/excalibur-cmd-1`)** — Samsung Galaxy S26 Ultra converted to `Excalibur_cmd-1`, strictly gated to King Arthur (`0xCBB310BD987E4B84BF4512D37D090BEC`), with `TenantBioAuth` biometric challenges, native `scrcpy` opus 60FPS streaming, and tactile ADB coordinate injection.
 - ✅ **Kinetic Execution Loop** — 6 deterministic stages, halts at the HITL gate for CRITICAL intents
 - ✅ **Real Z3 verification** — PDDL-encoded safety invariants; a `git push --force origin main` gets `Z3_BLOCK`'d *mathematically*
 - ✅ **11 Obsidian Pillars** enforcement — every run audited across all 11, positive & negative cases
@@ -125,36 +129,35 @@ This isn't a roadmap cosplaying as a product. Here's what's **on `main`, tested,
 - [+] **HMAC Cache Salting** — Tenant-isolated cache safety and cryptographic verification in local cache lanes (tests/test_mempalace_security.py).
 - [+] **Multivoice Switchboard & Bridge** — Go-native goroutine-parallel router and local KV-cache affinity telemetry bridge (control_plane/multivoice_bridge.py).
 - [+] **Bifrost Triage Swarm** — Automated dispatch triage engine and service registry reconciliation loop (control_plane/bifrost_triage_swarm.py).
-- [+] **Anya Cockpit Bento Overhaul** — Excalibur PWA layout restructured as a brutalist dashboard with ChromeDevTools MCP assimilation and node mesh trackers (cartridges/system-ui).
 - [+] **OxiBonsai_v2 Ternary-STDP Recurrence** — Quantization mechanics scaling to a ternary weight constraint space using integrated Hebbian Spike-Timing-Dependent Plasticity (STDP) sliding update rule on constrained 8GB ARM64 edge hardware.
 - [+] **AntVortex (1M) Leech-Lattice Shell-Unions (Λ24)** — Similarity mapping coordinates indexed using 24-Dimensional Leech-Lattice shell-unions for sub-millisecond retrieval of 171 specialized agents.
 - [+] **Ouroboros Adaptive Governance (APEE v7.0)** — Anya's gate determining autonomous execution dispatch thresholds based on a continuous risk-entropy triage function.
 
-> **52 pytest · 19 module selftests · 8 Rust tests · `cargo audit` clean · WSL2 memfd verified.**
-
+> **8/8 PWA Vitest suites passed · 52 pytest · 19 module selftests · 8 Rust tests · `cargo audit` clean · WSL2 memfd verified.**
 
 ---
 
-## 🚀 BUT WAIT — THERE'S MORE: The Cybertronia Roadmap
+## 🚀 BUT WAIT — THERE'S MORE: The Cybertronia Full-Stack Convergence
 
-The next ignition sequence wires the **Multivoice-Router** (a Go-native, goroutine-parallel switchboard) to the **Camelot-Ecosystem** "World Tree" skill registry:
+The sovereign stack unites the **Kickbox-Audio PWA Shell**, **Multivoice-Router**, and **Excalibur_cmd-1**:
 
 ```mermaid
 graph TD
-  A[Sovereign Intent: Voice / CLI / WebMCP] --> B(Multivoice-Router · Go)
-  B -->|Vector Similarity Search| C[(World Tree · SQLite Ledger)]
-  C -->|skill cartridge| D[Rust Registry Parser · WASM]
-  D -->|ZeroClaw memfd IPC| E[Skill loaded zero-copy]
-  E --> F{APEE Polyglot Router}
-  F -->|build / wasm / code| G[SIR_CODEX -> OpenAI]
-  F -->|architect / RAG| H[SIR_HELIOS -> Gemini]
-  F -->|balance / security| I[SIR_BORIS -> Claude]
-  G --> J[Crucible Test -> Bifrost Board]
-  H --> J
-  I --> J
+  A[Sovereign Operator: King Arthur / Arthur Ω] --> B(Kickbox-Audio PWA Shell · Next.js 14)
+  B --> C{Tenant Selection Matrix}
+  C -->|Select Cartridge| D[Multivoice Router Cockpit]
+  D -->|Aoede 432Hz Duplex Voice| E[Sir Helio Sovereign Voice OS]
+  E --> F{Dual-Horizon Inference Router}
+  F -->|Air-Gapped / Zero-Cost| G[Local Ollama :11434]
+  F -->|Multi-Provider Failover| H[VPS OmniRoute :20128]
+  F -->|Ultra Low Latency| I[Gemini Live S2S]
+  B -->|Arch-Sovereign Command Tab| J[Excalibur_cmd-1 Mobile Sentinel]
+  J -->|Biometric Gate| K[TenantBioAuth]
+  K -->|Tailscale WireGuard| L[Samsung Galaxy S26 Ultra :5555]
+  L --> M[Native scrcpy 60FPS Opus Stream & ADB Injection]
 ```
 
-Skills load **on demand** into a `memfd` buffer (honoring the 4GB Scarcity Protocol), so a registry of *thousands* of skills costs you near-zero idle RAM. *Status: in active fabrication — see `04_KINETIC/multivoice/`.*
+Skills load **on demand** into a `memfd` buffer (honoring the 4GB Scarcity Protocol), so a registry of *thousands* of skills costs you near-zero idle RAM.
 
 ---
 
@@ -163,6 +166,13 @@ Skills load **on demand** into a `memfd` buffer (honoring the 4GB Scarcity Proto
 ```bash
 # Boot the sovereign control plane
 python bin/awaken.py
+
+# Launch the Kickbox-Audio PWA Shell (:3000)
+npm --prefix apps/pwa run dev
+
+# Run PWA TypeScript typecheck & Vitest test suites
+npm --prefix apps/pwa run typecheck
+npm --prefix apps/pwa test
 
 # Drive an intent through the Kinetic Loop
 python -m control_plane.kinetic_loop "build a status dashboard"
@@ -183,10 +193,13 @@ tsnet mesh (tags/grants/k8s), Aperture wiring, and the one-command `scripts/wsl_
 
 | Path | What lives here |
 |---|---|
+| `apps/pwa/` | Kickbox-Audio Next.js 14 PWA Shell, Tenant matrix, Multivoice Router Cockpit, Voice layer |
+| `apps/excalibur-cmd-1/` | Arch-Sovereign Mobile Edge Sentinel (S26 Ultra), BioAuth, scrcpy, ADB injection |
+| `apps/bifrost/` | Node.js WebSocket (:3001) & Express Gateway, microcubic worker threads |
 | `control_plane/` | The cognitive apex — gate, kinetic loop, Z3, pillars, routing, Bifrost |
 | `kinetic_edge/` | Rust crates — post-quantum crypto, WASM edge pill, swarm |
 | `01_KERNEL/` | Reasoning, memory, and the tsnet mesh node |
-| `02_FORGE/` | Kinetic fabrication crates |
+| `02_FORGE/` | Kinetic fabrication crates & voice-first runtime |
 | `03_VAULT/` | Provenance, training configs, runtime state |
 | `04_KINETIC/` | Edge runtime + Multivoice switchboard (Cybertronia) |
 | `blueprints/v9000.14/` | The CYBERTRONIA blueprint, tasks, verification & go-live docs |

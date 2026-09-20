@@ -1,17 +1,18 @@
 name: KBA Smoke
 
 # Per AGENTS.md governance rules, this workflow exercises the
-# /api/bifrost/hitl handshake end-to-end on every push to a feat branch
-# and on every PR targeting a feat branch. The workflow mints a real
-# HMAC-signed KBA bundle (canonical actionId:timestamp) and asserts that
-# the gated acknowledgement comes back. It also gates the read-only
+# /api/bifrost/hitl handshake end-to-end on every push to main / feat branches
+# and on every PR targeting them. `main` is included so the hitl-handshake
+# check actually gates the default branch (protect-branch.json requires it).
+# The workflow mints a real HMAC-signed KBA bundle (canonical
+# actionId:timestamp) and asserts that the gated acknowledgement comes back. It also gates the read-only
 # HELIO_PATCH.json dry-run to prove the regen script stays hygienic.
 
 on:
   push:
-    branches: ['feat/**']
+    branches: [main, 'feat/**']
   pull_request:
-    branches: ['feat/**']
+    branches: [main, 'feat/**']
   workflow_dispatch:
 
 permissions:

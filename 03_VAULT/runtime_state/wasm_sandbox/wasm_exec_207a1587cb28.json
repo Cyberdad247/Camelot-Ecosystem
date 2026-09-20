@@ -1,0 +1,11 @@
+{
+  "execution_id": "wasm_exec_207a1587cb28",
+  "tool_id": "calculator",
+  "status": "MEMORY_EXCEEDED",
+  "output_data": null,
+  "error_message": "[WASI_OOM_GUARD] Memory usage 25.0MB exceeded maximum allowed 10.0MB",
+  "memory_used_mb": 25.0,
+  "duration_ms": 0.08,
+  "transcript_hash": "sha256:ddba3c71dfbf760090d00c17af24217140bd74fa881907ee7f20eedc359b806b",
+  "executed_at": "2026-08-31T00:18:47.245487+00:00"
+}

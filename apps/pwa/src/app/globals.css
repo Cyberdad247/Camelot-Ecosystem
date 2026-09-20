@@ -1,5 +1,7 @@
 /* SPDX-License-Identifier: MIT */
 
+@layer theme, base, components, antd, utilities;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

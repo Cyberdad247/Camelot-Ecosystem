@@ -1,0 +1,139 @@
+{
+  "schema_version": "camelot.omni-voice-dag/1",
+  "fingerprint": "νKG_CRYSTAL_OMNI_VOICE_DAG_VMAX",
+  "system_identity": "OMNI_VOICE_ROUTER_vMAX",
+  "hardware_ceiling_mb": 384,
+  "provenance": {
+    "origin": "pasted_sovereign_seed",
+    "trust": "untrusted_external_input",
+    "governance": "AGENTS.md evidence classes — a claim is 'confirmed' only when a local command or artifact reproduces it",
+    "activation_gate": "read-only routing; no process is spawned by this crystal",
+    "hitl_required_for_process_launch": true
+  },
+  "stages": [
+    { "stage": 1, "node_id": "node_01_ingress" },
+    { "stage": 2, "node_id": "node_02_routing" },
+    { "stage": 3, "node_id": "node_03_thread_a_viseme" },
+    { "stage": 4, "node_id": "node_03_thread_b_synthesis" },
+    { "stage": 5, "node_id": "node_04_egress" }
+  ],
+  "nodes": [
+    {
+      "node_id": "node_01_ingress",
+      "stage": 1,
+      "title": "Ingress (The Listener)",
+      "declared_service": "camelot-audio-dsp",
+      "declared_runtime": "Rust/WASM",
+      "action": "Process 20ms PCM frames at 16kHz via lock-free ring buffers",
+      "memory_budget_mb": 96,
+      "predecessors": [],
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "wasm/camelot-audio-dsp/Cargo.toml",
+        "wasm/camelot-audio-dsp/src/lib.rs"
+      ],
+      "notes": "camelot-audio-dsp is now a real Rust crate: 20 ms / 16 kHz framing (320 samples), a non-blocking ring buffer with short-write drop accounting, a sample-derived audio clock that stays authoritative for viseme sync, hangover VAD, and a process-wide open-buffer gauge that makes the 'open ring buffers = 0' invariant a checkable integer. wasm-bindgen glue is compiled only for wasm32, so host tests stay toolchain-light. Reproduce with `cargo test -p camelot-audio-dsp` (20 tests + doctest) and `cargo build -p camelot-audio-dsp --target wasm32-unknown-unknown --release`. The Python s26_audio_bridge remains the deployed predecessor bridge carrying the same ring-buffer/VAD semantics, but it is no longer the only artifact behind this node."
+    },
+    {
+      "node_id": "node_02_routing",
+      "stage": 2,
+      "title": "The Bifurcation / Omni-Routing",
+      "declared_service": "camelot-runic-router",
+      "declared_runtime": "Python",
+      "action": "Detect ᛟ_ prefix bypass OR execute Softmax dispatch P(Ki|v) via camelot-armory",
+      "memory_budget_mb": 64,
+      "predecessors": ["node_01_ingress"],
+      "evidence_class": "confirmed",
+      "resolved_paths": ["control_plane/runes/runic_router.py"],
+      "notes": "Runic router confirmed. 'camelot-armory' does NOT exist as a persona softmax router — 01_KERNEL/agora/agents/armory.py is a Knight tool library. Softmax dispatch is implemented in control_plane/omni_voice_dag.py instead."
+    },
+    {
+      "node_id": "node_03_thread_a_viseme",
+      "stage": 3,
+      "title": "Parallel Thread A — Acoustic Extraction",
+      "declared_service": "VisemeExtractor",
+      "declared_runtime": "Wav2Vec2",
+      "action": "Map PCM to 106 2D facial landmarks",
+      "memory_budget_mb": 48,
+      "predecessors": ["node_02_routing"],
+      "evidence_class": "aspirational",
+      "resolved_paths": [],
+      "notes": "No viseme extractor or 2D landmark model exists anywhere in the repository. The 106-landmark figure is unverified."
+    },
+    {
+      "node_id": "node_03_thread_b_synthesis",
+      "stage": 4,
+      "title": "Parallel Thread B — Resonance & Synthesis",
+      "declared_service": "camelot-multivoice",
+      "declared_runtime": "Python",
+      "action": "Generate local Piper VITS PCM audio buffer",
+      "memory_budget_mb": 128,
+      "predecessors": ["node_02_routing"],
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "control_plane/multivoice_bridge.py",
+        "01_KERNEL/agora/swarms/piper_tts.py"
+      ],
+      "notes": "Multivoice bridge and the local Piper ONNX VITS engine are both deployed and confirmed."
+    },
+    {
+      "node_id": "node_04_egress",
+      "stage": 5,
+      "title": "Egress (The Glass Terminal)",
+      "declared_service": "camelot-sip-bridge",
+      "declared_runtime": "Go/WebRTC",
+      "action": "Multiplex synchronized visual/audio over mTLS data channels",
+      "memory_budget_mb": 48,
+      "predecessors": ["node_03_thread_a_viseme", "node_03_thread_b_synthesis"],
+      "evidence_class": "planned",
+      "resolved_paths": [
+        "control_plane/go_router",
+        "control_plane/dispatch/realtime_voice_bridge.py",
+        "control_plane/audio/s26_audio_bridge.py"
+      ],
+      "notes": "control_plane/go_router is Go but contains zero webrtc/opus/sip references, and no Go egress service named camelot-sip-bridge exists. WebRTC/Opus multiplexing and SIP/PBX dialing are deployed in Python instead, so the Go/WebRTC egress remains planned."
+    }
+  ],
+  "parallel_threads": {
+    "fan_out_at": "node_02_routing",
+    "reduce_at": "node_04_egress",
+    "threads": [
+      "node_03_thread_a_viseme",
+      "node_03_thread_b_synthesis"
+    ]
+  },
+  "memory_invariants": [
+    "Sum of node memory budgets must not exceed hardware_ceiling_mb (384 MB)",
+    "Zero frame leaks (open ring buffers = 0)",
+    "Audio clock is authoritative for viseme sync"
+  ],
+  "runic_bypass": {
+    "prefix": "ᛟ_",
+    "description": "Explicit rune tokens bypass all LLM inference cost and dispatch deterministically.",
+    "commands": [
+      { "token": "ᛟ_SUMMON", "knight": "sir_sonus", "delegates_rune": "//VOICE_ROUTER" },
+      { "token": "ᛟ_MULTIVOICE", "knight": "sir_sonus", "delegates_rune": "//MULTIVOICE_ROUTE" },
+      { "token": "ᛟ_STATUS", "knight": "sir_lucas", "delegates_rune": "//STATUS" },
+      { "token": "ᛟ_FORGE", "knight": "sir_forge", "delegates_rune": "//FORGE" },
+      { "token": "ᛟ_SILENCE", "knight": "sir_sentinel", "delegates_rune": "//BIFROST_LOCK" }
+    ]
+  },
+  "persona_dispatch": {
+    "formula": "P(K_i|v) = exp(v·W_i / τ) / Σ_j exp(v·W_j / τ)",
+    "feature_dims": ["lexical_intent", "urgency", "privacy_sensitive", "telemetry_request", "build_intent", "audio_focus"],
+    "tau_policy": {
+      "enforced_by": "sir_sentinel",
+      "allowed_tau_values": [0, 1],
+      "deterministic_tau": 0,
+      "exploratory_tau": 1
+    },
+    "weights": {
+      "sir_sonus": [0.9, 0.2, 0.1, 0.1, 0.1, 0.9],
+      "sir_helio": [0.7, 0.8, 0.1, 0.2, 0.2, 0.8],
+      "merlin_omega": [0.8, 0.1, 0.2, 0.3, 0.2, 0.2],
+      "sir_boris": [0.6, 0.3, 0.2, 0.6, 0.3, 0.1],
+      "sir_sentinel": [0.2, 0.4, 0.9, 0.2, 0.1, 0.1],
+      "sir_forge": [0.3, 0.5, 0.1, 0.2, 0.9, 0.1]
+    }
+  }
+}

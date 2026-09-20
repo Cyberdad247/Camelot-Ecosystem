@@ -1,0 +1,18 @@
+# Dependabot — keep pinned Actions and workspaces current.
+# SHA-pinning actions requires resolving SHAs over the network; until then,
+# version majors stay aligned (checkout@v4, setup-*/v4/v5) and Dependabot
+# files weekly PRs to advance them.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"

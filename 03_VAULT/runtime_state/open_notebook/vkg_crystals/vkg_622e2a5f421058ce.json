@@ -1,0 +1,12 @@
+{
+  "crystal_id": "VKG_622E2A5F421058CE",
+  "notebook_id": "b88abfbd0974bcc4",
+  "notebook_title": "Rust Forge Study",
+  "sources_count": 33,
+  "category": "INFRASTRUCTURE_BUILD",
+  "knight": "SIR_FORGE",
+  "manifest_content": "Mojo compiles GPU kernels. Rust runs low-latency mixing. King Arthur governs the Excalibur Hub. SIR_FORGE drives binary builds for CI pipelines.",
+  "manifest_sha256": "c38bb4603d7f85db45b6753c1c301960fa800ba298629b92eaada334bf72b7e8",
+  "triplets": [],
+  "created_at": "2026-09-19T12:34:40.285508+00:00"
+}

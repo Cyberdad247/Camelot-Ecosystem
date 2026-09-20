@@ -1,0 +1,35 @@
+{
+  "schema": "camelot-vfs-manifest/2",
+  "knight_id": "SIR_KAY",
+  "spark_id": "0x7E4A8C12F9B3D650E1A8C7B2D3E4F5A6",
+  "title": "Sir Kay (Kai Richter: Agentic Architect Blueprint) Sovereign Scaffolding",
+  "updated_at": "2026-09-14T18:37:12.057130+00:00",
+  "files": {
+    "Master_Compendium.md": {
+      "sha256": "5246b294377461fade209320e0e0cf95d532322347da902de5687c0baa97cc7f",
+      "bytes": 2189,
+      "updated_at": "2026-09-14T18:37:12.056332+00:00"
+    },
+    "phial-engine.md": {
+      "sha256": "917e54901263e6897a79c3a4a7a5f74af9e7724fea8aaf0229585c86c5faf49c",
+      "bytes": 1759,
+      "updated_at": "2026-09-14T18:37:12.056698+00:00"
+    },
+    "soul.md": {
+      "sha256": "5e2d770ab27a0f5b75153dee12fc3c04b064e07459362681a089b9f5dbdb4273",
+      "bytes": 1579,
+      "updated_at": "2026-09-14T18:37:12.056856+00:00"
+    },
+    "spark.md": {
+      "sha256": "2305d0a111d3d66d0aaf0739135b32d3e43edfe5fee716649b55b358066cc614",
+      "bytes": 1287,
+      "updated_at": "2026-09-14T18:37:12.057000+00:00"
+    },
+    "system_instruction.md": {
+      "sha256": "eaec12de72f79ce5e55bf3b841b28f72056ad5ece3944ed186c2413a9793de65",
+      "bytes": 2037,
+      "updated_at": "2026-09-14T18:37:12.057117+00:00"
+    }
+  },
+  "total_files": 5
+}

@@ -1,0 +1,15 @@
+[Unit]
+Description=Camelot Vault Auto-Unseal Daemon (Sovereign Shamir Recovery)
+After=vault.service
+Wants=vault.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=-/etc/camelot/vault-unseal.env
+ExecStart=/usr/local/bin/camelot-vault-auto-unseal
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

@@ -124,9 +124,10 @@ def _sha1(path: Path) -> str | None:
 
 
 def _directory_audit(root: Path, *, quick: bool) -> dict[str, Any]:
-    max_files = int(os.environ.get("CAMELOT_SYMBIOTIC_MAX_FILES", "12000"))
+    default_max = "2500" if quick else "4000"
+    max_files = int(os.environ.get("CAMELOT_SYMBIOTIC_MAX_FILES", default_max))
     if quick:
-        max_files = min(max_files, 4500)
+        max_files = min(max_files, 2500)
 
     scanned = 0
     total_bytes = 0
@@ -342,7 +343,12 @@ def _compress_stale_logs(root: Path) -> dict[str, Any]:
     for path in log_root.rglob("*"):
         if not path.is_file() or path.name.endswith(".gz"):
             continue
-        if not (path.name.endswith(".log") or path.name.endswith(".jsonl")):
+        if not (
+            path.name.endswith(".log")
+            or path.name.endswith(".jsonl")
+            or ".log." in path.name
+            or path.name.endswith(".txt")
+        ):
             continue
 
         try:

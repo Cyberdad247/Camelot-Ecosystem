@@ -1,0 +1,47 @@
+{
+  "schema_version": "1000.54-EXCALIBUR-A",
+  "node_id": "motorola-moto-g-power-5g---2024",
+  "alias": "motorola_moto_g_power",
+  "designation": "AUXILIARY_MOBILE_SENTINEL",
+  "role": "Auxiliary Mobile Sentinel & Backup Telemetry Relay",
+  "hardware": {
+    "manufacturer": "Motorola",
+    "model": "moto g power 5G - 2024",
+    "codename": "cancunn",
+    "soc": "MediaTek Dimensity 7020",
+    "arch": "aarch64",
+    "ram_ceiling_constraint": "4GB_ARM64_EDGE_STRICT",
+    "max_rss_bytes": 268435456,
+    "display": "1080x2400 @ 400 DPI"
+  },
+  "os_environment": {
+    "android_version": "15",
+    "sdk_version": 35,
+    "host_runtime": "Termux (com.termux) + Termux:Boot (com.termux.boot)",
+    "tailscale_package": "com.tailscale.ipn",
+    "native_supervisor": "camelot-edge (ARM64 binary)"
+  },
+  "network_interfaces": {
+    "tailscale_ip": "100.89.129.105",
+    "local_wlan_ip": "192.168.1.68",
+    "ports": {
+      "wireless_adb": 5555,
+      "termux_ssh": 8023,
+      "aux_sentinel_relay": 8092
+    }
+  },
+  "governance": {
+    "governing_knights": ["SIR_HEIMDALL", "LADY_MNEMOSYNE", "ANYA_OMEGA"],
+    "worldtree_root_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "cloudbrain_mastering_uuid": "876f30c4-efce-415d-8098-cad500de159c",
+    "active_cartridge": "motorola-edge-cartridge-v1",
+    "vps_edge_bus": "http://100.110.180.18:8096",
+    "vps_mesh_bridge": "http://162.35.107.134:8095"
+  },
+  "vps_fallback_policy": {
+    "state": "OFFLINE_AUTONOMOUS_CAPABLE",
+    "max_outbox_entries": 1000,
+    "snapshot_ttl_seconds": 3600,
+    "storage_backend": "sqlite3_wal"
+  }
+}

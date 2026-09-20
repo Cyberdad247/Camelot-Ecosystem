@@ -10,3 +10,7 @@ serde_json = "1.0"
 chrono = { version = "0.4", features = ["serde"] }
 uuid = { version = "1.4", features = ["v4", "fast-rng"] }
 anyhow = "1.0"
+# Merged from kinetic_edge/rotel: async telemetry daemon (rotel serve :4317)
+tokio = { version = "1.28", features = ["full"] }
+warp = "0.3"
+tokio-stream = { version = "0.1", features = ["sync"] }

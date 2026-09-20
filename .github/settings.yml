@@ -14,10 +14,18 @@ repository:
 branches:
   - name: main
     protection:
-      # ── Status checks (all forge-ci.yml jobs) ──────────────────────
+      # ── Status checks ──────────────────────────────────────────────
+      # Contexts are job names as reported by GitHub Checks. forge-ci jobs
+      # only exist when 02_FORGE/** changes (paths-filter); the always-on
+      # gates below must pass on every PR to main.
       required_status_checks:
         strict: true   # Require branches to be up-to-date before merging
         contexts:
+          # Always-on gates
+          - verify                          # ci.yml (Biome → typecheck → vitest → build)
+          - hitl-handshake                  # kba-smoke.yml (runs on main + feat/**)
+          - Contract harness (receipts + schemas)  # harness-gate.yml
+          # forge-ci.yml jobs (present only when 02_FORGE/** changes)
           - Forge Lint
           - Forge Typecheck
           - Forge Test
@@ -33,6 +41,8 @@ branches:
       required_pull_request_reviews:
         required_approving_review_count: 1
         dismiss_stale_reviews: true
+        # CODEOWNERS exists at .github/CODEOWNERS — enforce it once coverage
+        # extends beyond the current paths, then flip this to true.
         require_code_owner_reviews: false
 
       # ── Restrictions ───────────────────────────────────────────────

@@ -1,3 +1,10 @@
+---
+title: "KOA REALM: ISOMORPHIC MULTIPLAYER ARCHITECTURE"
+author: "Arch Knights"
+updated: 2026-09-15
+status: live
+---
+
 # [KOA REALM]: ISOMORPHIC MULTIPLAYER ARCHITECTURE (v2.0)
 
 ## 1. The Isomorphic Action Layer

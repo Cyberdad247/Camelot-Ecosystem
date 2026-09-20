@@ -53,7 +53,7 @@ HITL_QUEUE = CAMELOT_HOME / "logs" / "hitl_queue.jsonl"
 Lane = Literal["CRITICAL", "HIGH", "NORMAL", "BACKGROUND"]
 HitlTier = Literal["AUTO", "PROMPT", "HUMAN_GATE"]
 Stage = Literal["QUEUED", "DISPATCHED", "EXECUTING", "PIV_LOOP", "DONE", "FAILED"]
-Cartridge = Literal["ANT", "BEAVER", "SPIDER", "OCTOPUS", "DEFAULT"]
+Cartridge = Literal["ANT", "BEAVER", "SPIDER", "OCTOPUS", "HIVE_IDE_SWARM", "DEFAULT"]
 
 LANE_PRIORITY: dict[str, int] = {"CRITICAL": 0, "HIGH": 1, "NORMAL": 2, "BACKGROUND": 3}
 LANE_WORKERS: dict[str, int] = {"CRITICAL": 1, "HIGH": 2, "NORMAL": 4, "BACKGROUND": 2}

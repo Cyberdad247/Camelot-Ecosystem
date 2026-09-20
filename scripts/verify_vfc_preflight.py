@@ -56,13 +56,18 @@ REQUIRED_MARKERS = {
         "message-port",
     ],
     "02_FORGE/packages/voice-first-runtime/src/shared-pcm-ring.ts": ["SharedArrayBuffer"],
-    "02_FORGE/apps/pwa-cockpit/public/voice-capture.worklet.js": ["camelot-voice-capture"],
-    "02_FORGE/apps/pwa-cockpit/src/app/api/voice/frames/route.ts": [
+    # Host re-pointed 2026-09-14. The original host `02_FORGE/apps/pwa-cockpit`
+    # was deleted in 944e4532 ("purge redundant PWAs"), which left these three
+    # markers permanently unsatisfiable. The surviving root `apps/pwa` is the
+    # live voice PWA and now carries the cartridge; the shared runtime package
+    # above is unchanged and still the single source of the worklet asset.
+    "apps/pwa/public/voice-capture.worklet.js": ["camelot-voice-capture"],
+    "apps/pwa/src/app/api/voice/frames/route.ts": [
         "MAX_FRAME_BYTES = 3_200",
         "voice.use",
         "127.0.0.1",
     ],
-    "02_FORGE/apps/pwa-cockpit/src/cartridges/interphase/interphase-cartridge.tsx": [
+    "apps/pwa/src/cartridges/interphase/InterphaseCartridge.tsx": [
         "useVoiceFirstRuntime",
         "Start capture",
     ],
@@ -71,7 +76,10 @@ REQUIRED_MARKERS = {
         "isLoopback",
         'server.listen(PORT, "127.0.0.1"',
     ],
-    "control_plane/forge_law.py": ["Forge"],
+    # Forge Law moved to control_plane/core/ during the v1000.54 COSMOS
+    # consolidation; the previous control_plane/forge_law.py path no longer
+    # exists, which made this marker permanently unsatisfiable.
+    "control_plane/core/forge_law.py": ["Forge"],
     "control_plane/worker.py": [
         "audio_path.relative_to(audio_root)",
         "audio_path.unlink(missing_ok=True)",

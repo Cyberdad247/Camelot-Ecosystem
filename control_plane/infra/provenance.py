@@ -26,7 +26,15 @@ from pydantic import BaseModel, Field
 try:
     MemPalaceL2 = importlib.import_module("01_KERNEL.memory.mempalace_l2").MemPalaceL2
 except Exception:
-    _MEM_PATH = Path(__file__).resolve().parent.parent / "01_KERNEL" / "memory" / "mempalace_l2.py"
+    # Fallback loader for CLIs whose sys.path does not include the repo root:
+    # __file__ is <root>/control_plane/infra/provenance.py, so the repo root is
+    # parents[2] (infra -> control_plane -> root).
+    _MEM_PATH = Path(__file__).resolve().parents[2] / "01_KERNEL" / "memory" / "mempalace_l2.py"
+    if not _MEM_PATH.exists():
+        raise ImportError(
+            f"Cannot locate 01_KERNEL/memory/mempalace_l2.py (tried {_MEM_PATH}). "
+            "Run the CLI from the CAMELOT_OS repo root."
+        ) from None
     _MEM_SPEC = importlib.util.spec_from_file_location("01_KERNEL.memory.mempalace_l2", _MEM_PATH)
     _MEM_MOD = importlib.util.module_from_spec(_MEM_SPEC)
     assert _MEM_SPEC and _MEM_SPEC.loader
@@ -105,7 +113,19 @@ class ProvenanceManager:
         
         self.vault_path.mkdir(parents=True, exist_ok=True)
         self.verification_ledger = self.vault_path / "verification_ledger.jsonl"
-        self.mempalace = MemPalaceL2()
+        # MemPalace remains strict about its HMAC secret, but missing optional
+        # persistence must not prevent CLI startup or local ledger writes.
+        try:
+            self.mempalace = MemPalaceL2()
+            self.memory_status = {"state": "ready", "reason": None}
+        except RuntimeError as exc:
+            if "MEMPALACE_SECRET is not set" not in str(exc):
+                raise
+            self.mempalace = None
+            self.memory_status = {
+                "state": "degraded",
+                "reason": "MEMPALACE_SECRET is not set",
+            }
 
     def log_mission(self, record: MissionRecord):
         """Save a complete mission record to the vault."""
@@ -145,20 +165,21 @@ class ProvenanceManager:
 
         # Automatic feed into MemPalace L2
         content = f"Verification Run {run.run_id}: {run.command}\nOperator: {run.operator}\nSuccess: {run.success}\nResults: {json.dumps(run.results)}"
-        self.mempalace.store(
-            wing="camelot",
-            room="audit",
-            content=content,
-            metadata={
-                "run_id": run.run_id,
-                "operator": run.operator,
-                "command": run.command,
-                "success": run.success,
-                "entry_hash": run.entry_hash,
-                "retention_class": "SCHEMA_STATIC"  # Verification logs are high-value
-            },
-            tenant_id=run.operator
-        )
+        if self.mempalace is not None:
+            self.mempalace.store(
+                wing="camelot",
+                room="audit",
+                content=content,
+                metadata={
+                    "run_id": run.run_id,
+                    "operator": run.operator,
+                    "command": run.command,
+                    "success": run.success,
+                    "entry_hash": run.entry_hash,
+                    "retention_class": "SCHEMA_STATIC",
+                },
+                tenant_id=run.operator,
+            )
         
         return self.verification_ledger
 

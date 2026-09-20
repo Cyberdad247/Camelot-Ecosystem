@@ -21,7 +21,12 @@ import (
 )
 
 const (
-	TailscaleBindIP = "100.71.218.75"
+	// The hub's own tailnet address (mesh_topology.HUB_TAILSCALE_IP). This was
+	// 100.71.218.75, which is `kba-services` — a node absent from the tailnet — so
+	// net.Listen below always failed and the service silently fell back to
+	// binding 0.0.0.0. The intent was a tailnet-scoped bind; the fallback quietly
+	// widened it to every interface instead.
+	TailscaleBindIP = "100.110.180.18"
 	HTTPPort        = "4433"
 	GRPCPort        = "4434"
 	RedisAddr       = "127.0.0.1:6379"
@@ -46,6 +51,7 @@ type BullMQJob struct {
 
 type BifrostServer struct {
 	redisClient *redis.Client
+	memo        *MemoCache
 	upgrader    websocket.Upgrader
 }
 
@@ -58,6 +64,9 @@ func NewBifrostServer() *BifrostServer {
 
 	return &BifrostServer{
 		redisClient: rdb,
+		// CloudBrain synthesis memo, Redis-backed in production (cb:memo:,
+		// 10-minute TTL). Previously constructed only in tests — now live.
+		memo: NewMemoCache(NewRedisKV(rdb), DefaultMemoTTL),
 		upgrader: websocket.Upgrader{
 			CheckOrigin: func(r *http.Request) bool {
 				// Enforce strict local mesh origin verification
@@ -145,8 +154,29 @@ func (s *BifrostServer) RouteWebhook(source string, w http.ResponseWriter, r *ht
 	})
 }
 
-func (s *BifrostServer) HandleWebSocket(w http.ResponseWriter, r *http.Request) {
-	conn, err := s.upgrader.Upgrade(w, r, nil)
+// MemoLookup returns a cached CloudBrain synthesis for prompt, if fresh.
+func (s *BifrostServer) MemoLookup(prompt string) (string, bool) {
+	return s.memo.Lookup(context.Background(), prompt)
+}
+
+// StoreMemo caches a CloudBrain synthesis behind the memo TTL.
+func (s *BifrostServer) StoreMemo(prompt, synthesis string) error {
+	return s.memo.StoreMemo(context.Background(), prompt, synthesis)
+}
+
+// MemoStats reports memo wiring for the health probe (no secret values).
+func (s *BifrostServer) MemoStats() map[string]any {
+	ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
+	defer cancel()
+	redisOK := s.redisClient.Ping(ctx).Err() == nil
+	return map[string]any{
+		"prefix":     MemoPrefix,
+		"ttl_seconds": int(DefaultMemoTTL.Seconds()),
+		"redis_ok":   redisOK,
+	}
+}
+
+func (s *BifrostServer) HandleWebSocket(w http.ResponseWriter, r *http.Request) {	conn, err := s.upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Printf("[BIFROST_WS_ERROR] Upgrade failed: %v", err)
 		return
@@ -190,14 +220,18 @@ func main() {
 	// Zero-Trust mTLS WebSocket Bridge
 	mux.HandleFunc("/ws/bifrost", server.HandleWebSocket)
 
-	// Health probe endpoint
+	// Health probe endpoint (includes Redis + memo wiring status)
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		if server.enableCORS(w, r) {
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(`{"status":"HEALTHY","mesh":"100.71.218.75"}`))
+		json.NewEncoder(w).Encode(map[string]any{
+			"status": "HEALTHY",
+			"mesh":   TailscaleBindIP,
+			"memo":   server.MemoStats(),
+		})
 	})
 
 	// Try binding to specific Tailscale IP first; fallback to 0.0.0.0 if Tailscale interface is bound to wildcard

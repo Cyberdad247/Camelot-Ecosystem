@@ -174,16 +174,51 @@ export function LakeishaVideoHUD() {
           </p>
         </div>
 
-        {!connected && (
+        <div className="flex items-center gap-2">
           <button
             type="button"
-            onClick={connect}
-            disabled={state === 'connecting'}
-            className="border border-gold/40 bg-[#050505]/75 px-3 py-2 text-[10px] uppercase tracking-[0.14em] text-gold-light transition-colors hover:border-violet hover:text-violet-light disabled:opacity-50"
+            onClick={async () => {
+              if (typeof window !== 'undefined' && 'documentPictureInPicture' in window) {
+                try {
+                  const pipWindow = await (window as any).documentPictureInPicture.requestWindow({
+                    width: 380,
+                    height: 520,
+                  });
+                  if (pipWindow) {
+                    pipWindow.document.body.innerHTML = `
+                      <div style="background:#050507;color:#fff;font-family:sans-serif;padding:24px;text-align:center;height:100vh;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #D4AF37;">
+                        <div style="font-size:48px;margin-bottom:12px;">👑</div>
+                        <h2 style="color:#D4AF37;margin:0 0 6px 0;font-size:16px;letter-spacing:0.12em;">LAKEISHA ENCLAVE</h2>
+                        <p style="color:rgba(255,255,255,0.6);font-size:12px;margin:0 0 16px 0;">Picture-in-Picture Cockpit</p>
+                        <div style="padding:6px 14px;background:rgba(212,175,55,0.15);border:1px solid #D4AF37;border-radius:999px;font-size:11px;color:#D4AF37;">
+                          ● Always-on Edge Sentinel
+                        </div>
+                      </div>
+                    `;
+                  }
+                } catch {}
+              }
+            }}
+            title="Pop into Picture-in-Picture window"
+            className="border border-gold/30 bg-[#050505]/75 p-1.5 text-gold-light transition-colors hover:border-gold hover:text-white"
           >
-            {state === 'connecting' ? 'Connecting' : 'Tap to Connect'}
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-3.5 w-3.5">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <rect x="11" y="9" width="9" height="7" rx="1" fill="#D4AF37" fillOpacity="0.3" stroke="#D4AF37" />
+            </svg>
           </button>
-        )}
+
+          {!connected && (
+            <button
+              type="button"
+              onClick={connect}
+              disabled={state === 'connecting'}
+              className="border border-gold/40 bg-[#050505]/75 px-3 py-2 text-[10px] uppercase tracking-[0.14em] text-gold-light transition-colors hover:border-violet hover:text-violet-light disabled:opacity-50"
+            >
+              {state === 'connecting' ? 'Connecting' : 'Tap to Connect'}
+            </button>
+          )}
+        </div>
       </div>
     </aside>
   );

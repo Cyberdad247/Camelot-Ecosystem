@@ -17,13 +17,17 @@ generator client {
 // ─────────────────────────────────────────────
 model JournalEntry {
   id        String        @id @default(uuid())
+  tenantId  String        @default("tenant_default")
   memo      String
   createdAt DateTime      @default(now())
   lines     Transaction[]
+
+  @@index([tenantId])
 }
 
 model Transaction {
   id        String        @id @default(uuid())
+  tenantId  String        @default("tenant_default")
   debit     Float         @default(0)
   credit    Float         @default(0)
   journal   JournalEntry? @relation(fields: [journalId], references: [id])
@@ -32,6 +36,7 @@ model Transaction {
   updatedAt DateTime      @updatedAt
 
   @@index([journalId])
+  @@index([tenantId])
 }
 
 // ─────────────────────────────────────────────
@@ -39,27 +44,37 @@ model Transaction {
 // ─────────────────────────────────────────────
 model Contact {
   id        String   @id @default(uuid())
+  tenantId  String   @default("tenant_default")
   email     String   @unique
   name      String?
   tags      Tag[]    @relation("ContactTags")
   createdAt DateTime @default(now())
+
+  @@index([tenantId])
 }
 
 model Tag {
   id       String    @id @default(uuid())
+  tenantId String    @default("tenant_default")
   label    String    @unique
   contacts Contact[] @relation("ContactTags")
+
+  @@index([tenantId])
 }
 
 model EmailSequence {
   id        String         @id @default(uuid())
+  tenantId  String         @default("tenant_default")
   name      String
   steps     SequenceStep[]
   createdAt DateTime       @default(now())
+
+  @@index([tenantId])
 }
 
 model SequenceStep {
   id         String        @id @default(uuid())
+  tenantId   String        @default("tenant_default")
   order      Int
   subject    String
   body       String
@@ -68,6 +83,7 @@ model SequenceStep {
   sequenceId String
 
   @@index([sequenceId])
+  @@index([tenantId])
 }
 
 // ─────────────────────────────────────────────
@@ -75,6 +91,7 @@ model SequenceStep {
 // ─────────────────────────────────────────────
 model MessageThread {
   id        String    @id @default(uuid())
+  tenantId  String    @default("tenant_default")
   channel   String // sms | email | voice
   handle    String // phone number or address
   messages  Message[]
@@ -82,10 +99,12 @@ model MessageThread {
   updatedAt DateTime  @updatedAt
 
   @@unique([channel, handle])
+  @@index([tenantId])
 }
 
 model Message {
   id        String        @id @default(uuid())
+  tenantId  String        @default("tenant_default")
   direction String // inbound | outbound
   body      String
   thread    MessageThread @relation(fields: [threadId], references: [id])
@@ -93,11 +112,196 @@ model Message {
   createdAt DateTime      @default(now())
 
   @@index([threadId])
+  @@index([tenantId])
 }
 
 // Raw inbound webhook audit log (used by Bifrost /webhook/zelle-sms)
 model EchoLog {
   id        String   @id @default(uuid())
+  tenantId  String   @default("tenant_default")
   message   String
   timestamp DateTime @default(now())
+
+  @@index([tenantId])
 }
+
+// ─────────────────────────────────────────────
+// Sovereign Tenancy Boundary (§9.2, §15)
+// ─────────────────────────────────────────────
+model Tenant {
+  id                   String   @id // e.g. tenant_acme
+  schemaVersion        String   @default("camelot-tenant/1")
+  organizationId       String   // e.g. org_omega
+  agencyId             String   // marketing, commerce, wellness, research, engineering, client_operations
+  branding             Json?
+  avatar               Json?
+  enabledModules       String[]
+  connectorAllowlist   String[]
+  policyOverrides      Json?
+  retentionDraftDays   Int      @default(30)
+  retentionReceiptDays Int      @default(365)
+  maxRiskTierAllowed   String   @default("T2") // T0, T1, T2, T3, T4
+  status               String   @default("active") // active, suspended, closed
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([organizationId])
+  @@index([status])
+}
+
+// ─────────────────────────────────────────────
+// Phase 1B: Durable Bifrost Idempotency WAL (§12.2)
+// Table: bifrost_idempotency_journal
+// ─────────────────────────────────────────────
+enum IdempotencyStatus {
+  IN_FLIGHT
+  COMPLETED
+  REJECTED
+}
+
+model IdempotencyRecord {
+  key          String            @id // Client UUIDv7 or compound key
+  tenantId     String
+  manifestHash String
+  correlationId String
+  status       IdempotencyStatus @default(IN_FLIGHT)
+  receiptRef   String?           // rcp_xxx reference
+  responseBody String?           // Cached deterministic response payload
+  expiresAt    DateTime
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+
+  @@index([tenantId, manifestHash])
+  @@index([expiresAt])
+  @@map("bifrost_idempotency_journal")
+}
+
+// ─────────────────────────────────────────────
+// Core Engine: Workspaces, Tasks, Capability Leases
+// ─────────────────────────────────────────────
+model Workspace {
+  id              String   @id // ws_xxx
+  tenantId        String   // tenant_xxx
+  name            String
+  namespacePrefix String?
+  sourcePolicy    Json?
+  status          String   @default("active") // active, frozen, closed
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  tasks           Task[]
+
+  @@index([tenantId])
+  @@map("workspaces")
+}
+
+model Task {
+  id               String            @id // task_xxx
+  tenantId         String            // tenant_xxx
+  workspaceId      String?
+  correlationId    String
+  objective        String
+  symbolectTreeRef String?
+  manifestId       String?
+  leaseId          String?
+  status           String            @default("draft")
+  actor            Json?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  expiresAt        DateTime?
+  receiptRefs      String[]
+  workspace        Workspace?        @relation(fields: [workspaceId], references: [id])
+  leases           CapabilityLease[]
+
+  @@index([tenantId])
+  @@index([workspaceId])
+  @@index([correlationId])
+  @@map("tasks")
+}
+
+model CapabilityLease {
+  id                           String   @id // lease_xxx
+  tenantId                     String   // tenant_xxx
+  taskId                       String
+  correlationId                String
+  manifestHash                 String
+  authorityEpoch               Int
+  authorityVector              Int[]
+  effectClass                  String
+  declaredRiskTier             String
+  subject                      Json
+  permissions                  Json
+  limits                       Json
+  properties                   Json?
+  derivedCapabilitiesProvenance Json?
+  createdAt                    DateTime @default(now())
+  expiresAt                    DateTime
+  task                         Task     @relation(fields: [taskId], references: [id])
+
+  @@index([tenantId])
+  @@index([taskId])
+  @@map("capability_leases")
+}
+
+// ─────────────────────────────────────────────
+// Phase 1B: Merkle Ledger Receipt Chain (§11.3)
+// ─────────────────────────────────────────────
+model ReceiptChain {
+  tenantId         String    @id
+  schemaVersion    String    @default("camelot-receipt-chain/1")
+  chainHeight      Int       @default(0)
+  headHash         String    // selfHash of the latest receipt
+  anchorInterval   Int       @default(1000)
+  lastAnchorHeight Int       @default(0)
+  lastAnchorHash   String
+  anchorTarget     String?
+  verified         Boolean   @default(true)
+  lastVerifiedAt   DateTime?
+  replayProtected  Boolean   @default(true)
+  proofSigner      String?
+  proofSignature   String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  receipts         Receipt[]
+
+  @@index([chainHeight])
+  @@map("receipt_chains")
+}
+
+model Receipt {
+  id                   String       @id // rcp_xxx
+  schemaVersion        String       @default("camelot-receipt/2")
+  parentHash           String       // sha256:... (genesis: sha256:000...000)
+  selfHash             String       // sha256:...
+  chainHeight          Int          // 0 for genesis, monotonic
+  tenantId             String
+  correlationId        String
+  taskId               String
+  authorityEpoch       Int
+  authorityVector      Int[]        // 6-dimensional authority vector tuple
+  effectClass          String
+  declaredRiskTier     String
+  timestamp            DateTime     @default(now())
+  actorId              String
+  actorRole            String
+  actorNodeId          String
+  actorTrustBand       String
+  event                String
+  manifestHash         String?
+  leaseId              String?
+  parentReceiptId      String?
+  payloadRedacted      Json?
+  proofSigner          String
+  proofSignature       String
+  ledgerAnchorEligible Boolean      @default(false)
+  createdAt            DateTime     @default(now())
+
+  chain                ReceiptChain @relation(fields: [tenantId], references: [tenantId])
+
+  @@unique([tenantId, chainHeight])
+  @@index([tenantId, parentHash])
+  @@index([correlationId])
+  @@index([selfHash])
+  @@map("receipts")
+}
+
+

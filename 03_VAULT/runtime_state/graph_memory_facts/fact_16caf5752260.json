@@ -1,0 +1,17 @@
+{
+  "fact_id": "fact_16caf5752260",
+  "tenant_id": "tenant_sovereign_001",
+  "namespace": "ravenry.mail",
+  "predicate": "approved_reply_to",
+  "object_value": "jane@example.com",
+  "confidence": 0.99,
+  "valid_from": "2026-08-30T22:08:12.080117+00:00",
+  "valid_to": null,
+  "recorded_from": "2026-08-30T22:08:12.080117+00:00",
+  "recorded_to": null,
+  "provenance": [
+    "object://minio/qr-artifacts/draft_test_1024.json",
+    "worldtree://a0a4bfb9-e847-4c38-be39-7aee398f0795"
+  ],
+  "status": "current"
+}

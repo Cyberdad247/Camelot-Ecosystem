@@ -23,7 +23,7 @@ from pathlib import Path
 from typing import Optional
 
 _MATRIX_PATH = (
-    Path(__file__).parent.parent
+    Path(__file__).parent.parent.parent
     / "03_VAULT" / "training" / "configs" / "config" / "access_matrix.json"
 )
 

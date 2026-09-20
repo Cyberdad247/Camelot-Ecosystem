@@ -1,0 +1,36 @@
+{
+  "cartridge_id": "moa-routing-capture",
+  "vfs_uri": "vfs://worldtree/cartridges/moa-routing-capture/",
+  "cloudbrain_notebook_id": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+  "cloudbrain_title": "Synergizing NotebookLM and Anti-Gravity for AI Automation Systems",
+  "bound_knights": [
+    "MERLIN_OMEGA",
+    "SIR_HELIOS",
+    "SIR_SENTINEL"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "two_hook_routing",
+    "signal_mining",
+    "mixture_of_agents",
+    "training_signal",
+    "latency_verdict"
+  ],
+  "entrypoints": [
+    "audit",
+    "summarize",
+    "route"
+  ],
+  "physical_source_path": "cartridges/moa-routing-capture",
+  "files": [
+    "manifest.json",
+    "mine_signal.py",
+    "README.md",
+    "routing_capture.py",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T01:17:15.242000+00:00"
+}

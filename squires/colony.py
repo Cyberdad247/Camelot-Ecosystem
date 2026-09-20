@@ -20,7 +20,6 @@ if hasattr(sys.stderr, "reconfigure"):
 try:
     from rich.console import Console
     from rich.panel import Panel
-    from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn
     from rich.table import Table
     _RICH = True
 except ImportError:
@@ -83,7 +82,8 @@ def cmd_index(root: Path, args: argparse.Namespace) -> None:
     idx = build_index(iter(records))
     elapsed = time.perf_counter() - t0
 
-    out = root / ".colony" / "index.json"
+    out_dir = root if root.is_dir() else root.parent
+    out = out_dir / ".colony" / "index.json"
     idx.save(out)
 
     if _RICH:
@@ -235,9 +235,10 @@ def cmd_triage(root: Path, args: argparse.Namespace) -> None:
 
 
 def cmd_status(root: Path, args: argparse.Namespace) -> None:
-    colony_dir = root / ".colony"
+    base_dir = root if root.is_dir() else root.parent
+    colony_dir = base_dir / ".colony"
     index_file = colony_dir / "index.json"
-    report_file = root / "colony_report.md"
+    report_file = base_dir / "colony_report.md"
 
     if _RICH:
         console = _console()

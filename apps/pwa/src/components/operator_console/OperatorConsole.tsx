@@ -33,9 +33,43 @@ export function OperatorConsole({ taskId }: { taskId: string }) {
         }
         if (mounted) setBifrostDown(true);
       });
-    const unsubscribe = subscribe(taskId, (s) => {
-      if (mounted) { setSnapshot(s); setLastVerifiedAt(s.generatedAt); setBifrostDown(false); }
-    });
+    const unsubscribe = subscribe(
+      taskId,
+      (s) => {
+        if (mounted) { setSnapshot(s); setLastVerifiedAt(s.generatedAt); setBifrostDown(false); }
+      },
+      (envelope) => {
+        if (!mounted) return;
+        setSnapshot((prev) => {
+          if (!prev) return prev;
+          const updatedReceipts = [...prev.receipts];
+          if (envelope.receiptRef) {
+            updatedReceipts.unshift({
+              receiptId: envelope.eventId,
+              eventId: envelope.eventId,
+              taskId: envelope.taskId,
+              correlationId: envelope.correlationId,
+              kind: envelope.kind,
+              timestamp: envelope.timestamp,
+              actor: envelope.actor,
+              payloadHash: envelope.payloadHash,
+              parentHash: envelope.parentHash,
+              integrity: envelope.integrity,
+            });
+          }
+          let approvalState = prev.approval.state;
+          if (envelope.kind === 'decision.approved') approvalState = 'APPROVED';
+          if (envelope.kind === 'decision.denied') approvalState = 'DENIED';
+
+          return {
+            ...prev,
+            approval: { ...prev.approval, state: approvalState },
+            receipts: updatedReceipts,
+          };
+        });
+        setLastVerifiedAt(envelope.timestamp);
+      }
+    );
     return () => { mounted = false; unsubscribe(); };
   }, [taskId]);
 

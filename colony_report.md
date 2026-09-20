@@ -1,5 +1,5 @@
 # CLARITY_CORE Colony Report
-**Generated:** 2026-08-12 14:01 UTC
+**Generated:** 2026-09-20 00:16 UTC
 **Root:** `C:\Users\vizio\CAMELOT_OS`
 
 ---
@@ -8,21 +8,21 @@
 
 | Metric | Value |
 |--------|-------|
-| Files scanned | 13,223 |
-| Total lines | 3,709,429 |
-| Symbols indexed | 36,091 |
+| Files scanned | 10,375 |
+| Total lines | 2,440,498 |
+| Symbols indexed | 30,354 |
 | Risk Score | 100.0 / 100 |
 | Risk Label | **CRITICAL** |
 | HITL Required | Yes ⚠️ |
 
 ## Findings
 
-- 134 potential secret(s) detected — CRITICAL
-- 35 large file(s) (>500 KB) found
-- 213 TODO/FIXME markers — technical debt accumulation
-- 3375 duplicate file(s) detected
-- 14 unused imports (dead code)
-- Large codebase: 3,709,429 lines — context management critical
+- 19 potential secret(s) detected — CRITICAL
+- 29 large file(s) (>500 KB) found
+- 216 TODO/FIXME markers — technical debt accumulation
+- 2059 duplicate file(s) detected
+- 80 unused imports (dead code)
+- Large codebase: 2,440,498 lines — context management critical
 
 ## Recommendations
 
@@ -37,67 +37,65 @@
 
 | Category | Count |
 |----------|-------|
-| Secrets (critical) | 134 |
-| Warnings | 35 |
-| Info | 222 |
+| Secrets (critical) | 19 |
+| Warnings | 29 |
+| Info | 369 |
 
 ### Critical Flags
 
 - `02_FORGE/apps/lux11/firebase-applet-config.json:4` — secret: google_api_key: AIza...Zw4M
-- `02_FORGE/apps/lux11/src/tests/smoke.test.ts:7` — secret: generic_token: secr...ugh'
-- `02_FORGE/cartridge/bifrost_bridge.py:168` — secret: generic_token: secr...ook"
-- `02_FORGE/cartridge/test_bifrost_bridge.py:32` — secret: generic_token: SECR...ret"
-- `02_FORGE/kinetic/vizio-router/cmd/pulse/ops/TAILSCALE-KEY-MINT.md:65` — secret: generic_token: TOKE...XXX"
-- `02_FORGE/KINETIC_ARMORY/goose/crates/goose/src/providers/gcpauth.rs:608` — secret: private_key: ----...----
-- `02_FORGE/KINETIC_ARMORY/goose/crates/goose/src/providers/gcpauth.rs:879` — secret: private_key: ----...----
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/enhanced-code-editing.md:23` — secret: generic_token: API_...ere"
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/environment-variables.md:55` — secret: generic_token: API_...ere"
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/guides/security/prompt-injection-detection.md:84` — secret: generic_token: TOKE...KEN"
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/docs/mcp/filesystem-mcp.md:130` — secret: generic_token: SECR...456'
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/src/pages/prompt-library/data/prompts/api-documentation-generator.json:8` — secret: generic_token: pass...123'
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/src/pages/prompt-library/data/prompts/multi-project-security-audit.json:8` — secret: aws_access_key: AKIA...CDEF
-- `02_FORGE/KINETIC_ARMORY/goose/documentation/src/pages/prompt-library/data/prompts/multi-project-security-audit.json:8` — secret: aws_secret: aws_...890'
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/agent/redact.py:68` — secret: private_key: ----...----
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/optional-skills/email/agentmail/SKILL.md:44` — secret: generic_token: API_...ere"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/optional-skills/security/1password/SKILL.md:61` — secret: generic_token: TOKE...ken"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mcp/native-mcp/SKILL.md:278` — secret: generic_token: TOKE...xxx"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mcp/native-mcp/SKILL.md:313` — secret: generic_token: TOKE...xxx"
-- `02_FORGE/KINETIC_ARMORY/hermes-agent/skills/mlops/inference/guidance/references/backends.md:28` — secret: generic_token: api_...ere"
-- ... and 114 more
+- `02_FORGE/PORTAL_CORE/Modal/morgana/local_modal.toml:3` — secret: generic_token: secr...iL3'
+- `02_FORGE/tools/pi-mono/packages/coding-agent/examples/extensions/custom-provider-anthropic/index.ts:571` — secret: generic_token: apiK...KEY"
+- `03_VAULT/credentials/identity_mirror/claude.json:1` — secret: anthropic_key: sk-a...5wAA
+- `03_VAULT/credentials/identity_mirror/claude.json:1` — secret: anthropic_key: sk-a...cgAA
+- `03_VAULT/Nano-Knights/background.iife.js:842` — secret: generic_token: ApiK...KEY"
+- `03_VAULT/Nano-Knights/background.iife.js:870` — secret: generic_token: ApiK...KEY"
+- `03_VAULT/Nano-Knights/background.iife.js:870` — secret: generic_token: apiK...KEY"
+- `03_VAULT/Nano-Knights/background.iife.js:1093` — secret: generic_token: apiK...KEY"
+- `03_VAULT/Nano-Knights/background.iife.js:1093` — secret: generic_token: apiK...KEY"
+- `03_VAULT/Nano-Knights/background.iife.js:1096` — secret: generic_token: apiK...KEY"
+- `04_KINETIC/nullclaw/config.example.json:27` — secret: private_key: ----...----
+- `apps/excalibur-cmd-1/src/state/useEcosystemStore.ts:233` — secret: generic_token: Toke...ION'
+- `deploy/multivoice-router/firebase-applet-config.json:4` — secret: google_api_key: AIza...Zw4M
+- `harness/contracts/verify_operator_request.py:59` — secret: generic_token: TOKE...ied"
+- `kinetic_edge/saltare/internal/gateway/http/middleware.go:133` — secret: generic_token: Toke...ken"
+- `packages/policy-engine/schemas/approval-states.yaml:84` — secret: generic_token: toke...KEN"
+- `scripts/verify_frozen_bundle.py:41` — secret: generic_token: TOKE...R-A"
+- `tools/notebooklm-py/scripts/_live_auth_scenarios/rest_recovery.py:39` — secret: generic_token: TOKE...ken"
 
 ## SWEEP Report
 
 | Category | Count |
 |----------|-------|
-| Duplicate Content | 3375 |
-| Unused Import | 14 |
-| Unreferenced File | 10 |
+| Duplicate Content | 2059 |
+| Unused Import | 80 |
+| Unreferenced File | 420 |
 
 ## Language Breakdown
 
 | Extension | Files |
 |-----------|-------|
-| `.md` | 2240 |
-| `.py` | 2190 |
-| `.rs` | 1931 |
-| `.ts` | 1655 |
-| `.json` | 1515 |
-| `.h` | 816 |
-| `.tsx` | 643 |
-| `.go` | 493 |
-| `.js` | 377 |
-| `.cpp` | 239 |
-| `.txt` | 234 |
-| `.toml` | 229 |
-| `.sh` | 189 |
-| `.yml` | 174 |
-| `.yaml` | 155 |
+| `.py` | 2883 |
+| `.json` | 2685 |
+| `.md` | 1993 |
+| `.ts` | 1098 |
+| `.tsx` | 425 |
+| `.yaml` | 218 |
+| `.js` | 209 |
+| `.sh` | 178 |
+| `.rs` | 144 |
+| `.go` | 141 |
+| `.c` | 88 |
+| `.h` | 88 |
+| `.txt` | 83 |
+| `.toml` | 74 |
+| `.ps1` | 37 |
 
 ## Symbol Index (Top 30)
 
 | Symbol | Kind | File | Line |
 |--------|------|------|------|
-| `main` | function | `chaos_engineer.py` | 451 |
+| `main` | function | `chaos_engineer.py` | 450 |
 | `ChaosTest` | class | `chaos_engineer.py` | 32 |
 | `ChaosEngineer` | class | `chaos_engineer.py` | 40 |
 | `_bootstrap_sys_path` | function | `excalibur.py` | 28 |
@@ -128,7 +126,7 @@
 | `stream_avatar_faculty` | function | `excalibur_controller.py` | 739 |
 | `health` | function | `excalibur_controller.py` | 750 |
 
-*...and 36061 more symbols in full index.*
+*...and 30324 more symbols in full index.*
 
 ---
 

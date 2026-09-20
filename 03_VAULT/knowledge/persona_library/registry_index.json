@@ -51,6 +51,11 @@
       "role": "Security Expert",
       "id": "sec_expert",
       "file": "03_VAULT\\knowledge\\persona_library\\sec_expert.json"
+    },
+    {
+      "role": "Master Memory Custodian",
+      "id": "lady_mnemosyne",
+      "file": "03_VAULT\\knowledge\\persona_library\\lady_mnemosyne.json"
     }
   ]
 }

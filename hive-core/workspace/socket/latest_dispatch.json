@@ -1,0 +1,13 @@
+{
+  "rune": "//forge",
+  "target_subsystem": "Sir Boris & Sir Codex",
+  "payload": {
+    "cow_delta_mib": 0.08,
+    "intent": "Build AST Zero-Copy Ribbon",
+    "memory_cap_mb": 64,
+    "zk_proof": "formal_z3_invariants_pass"
+  },
+  "timestamp": "1789395581659",
+  "capability_lease": "LEASE_VALID_T1_FORGE",
+  "sentinel_verified": true
+}

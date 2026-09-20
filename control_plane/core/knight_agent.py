@@ -59,8 +59,12 @@ _SKILLGRAPH_TIER: dict[str, SkillTier] = {
     "sir_alex": "S4", "lady_apis": "S4", "sir_link": "S4", "sir_mnemo": "S4",
     "merlin_omega": "S5", "sir_helio": "S5", "sir_ouroboros": "S5",
     "sir_heimdall": "S4",
-    "sir_openclaw": "S3", "sir_rustclaw": "S2", "sir_hermes": "S3",
+    "sir_openclaw": "S3", "sir_rustclaw": "S2", "sir_hermes": "S4",
     "lady_nanobot": "S3", "sir_zeroclaw": "S4",
+    # Agents-A1 — agentic MoE orchestrator (S4 strategic orchestration). Was
+    # absent, so it silently defaulted to S2 and broke the council⊆tier
+    # invariant asserted by _selftest V5.6b.
+    "sir_agentis": "S4",
 }
 
 # LATTICE_SIGNAL primary model bindings (OMNI_ROUTER_AUDIT). Gemini-primary.
@@ -82,6 +86,12 @@ _PRIMARY_MODEL: dict[str, str] = {
     "sir_hermes": "hermes-cli",
     "lady_nanobot": "next-edge",
     "sir_zeroclaw": "qwen3:8b",
+    # Local-first (privacy_level=0.9). Without this entry the roster defaulted it
+    # to gemini-3-pro-preview — a third-party cloud model — which directly
+    # contradicts the "never leaks prompts to a third-party cloud" guarantee on
+    # the Agents-A1 engine definition. No _FALLBACK_MODEL entry is intentional: a
+    # cloud fallback would reintroduce the same leak.
+    "sir_agentis": "agents-a1",
 }
 
 _FALLBACK_MODEL: dict[str, str] = {

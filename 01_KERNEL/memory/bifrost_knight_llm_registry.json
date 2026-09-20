@@ -2,8 +2,8 @@
   "version": "v1.0.0-EXCALIBUR",
   "generated_utc": "2026-08-12T21:16:30Z",
   "bifrost_bridge": {
-    "ws_endpoint": "ws://100.71.218.75:4433/ws",
-    "grpc_endpoint": "100.71.218.75:4434",
+    "ws_endpoint": "ws://100.110.180.18:4433/ws",
+    "grpc_endpoint": "100.110.180.18:4434",
     "mTLS": true,
     "fallback_proxy": "http://127.0.0.1:11434"
   },
@@ -119,6 +119,14 @@
       "bifrost_route": "/bifrost/knights/lakisha_hypervisor",
       "cloudbrain_uuid": "8531e6d4-6fc4-428f-a754-b9e9592ac7ff",
       "vram_mb": 120
+    },
+    {
+      "knight_id": "DEEPSEEK_FLASH_ENGINE",
+      "pill_name": "DeepSeek Flash vLLM High-Throughput Engine",
+      "assigned_tiny_llm": "vllm/deepseek-ai/DeepSeek-V4.1-Flash",
+      "bifrost_route": "/bifrost/models/deepseek-flash",
+      "cloudbrain_uuid": "876f30c4-efce-415d-8098-cad500de159c",
+      "endpoint": "http://127.0.0.1:8000/v1"
     }
   ]
 }

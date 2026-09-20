@@ -19,10 +19,8 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import socket
 import sys
-import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -43,7 +41,7 @@ DUAL_MODE_CONFIG = {
         "llm_tier": "Frontier CLIProxy OAuth (Gemini 3.1 Pro / GPT-5.5 Codex / Claude 4.8)",
         "proxy_endpoint": "http://127.0.0.1:8080/v1",
         "voice_engine": "Lakisha Hybrid WebRTC + Remote Telemetry",
-        "bifrost_mesh": "Tailscale Direct (100.71.218.75:4433 WS / :4434 gRPC)",
+        "bifrost_mesh": "Tailscale Direct (100.110.180.18:4433 WS / :4434 gRPC)",
         "cartridges": ["ANT", "BEAVER", "SPIDER", "EAGLE", "OCTOPUS", "BIO_SWARM"],
         "max_ram_mb": 4096,
     },

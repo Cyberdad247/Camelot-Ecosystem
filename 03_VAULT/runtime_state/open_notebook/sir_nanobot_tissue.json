@@ -1,0 +1,12 @@
+[
+  {
+    "knight_id": "SIR_NANOBOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "notebook_uuid": "e4fbff10-9241-480e-9d2c-1f9dac50c51a",
+    "version": "v1000.54-EXCALIBUR-A",
+    "mempalace_wing": "WING_WORLDTREE_SIR_NANOBOT",
+    "vfs_path": "vfs://worldtree/knights/sir_nanobot/tether.json",
+    "status": "ALIGNED_MAX_VERSION",
+    "synced_at": "2026-09-17T04:23:30.073664+00:00"
+  }
+]

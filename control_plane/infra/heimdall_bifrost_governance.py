@@ -16,6 +16,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+try:
+    from control_plane.infra.mesh_topology import (
+        HUB_TAILSCALE_IP,
+        as_absent_inventory,
+        as_canonical_inventory,
+        as_sentinel_mobile_nodes,
+    )
+except ImportError:  # standalone fallback when executed from a remote VPS directory
+    from mesh_topology import (  # type: ignore
+        HUB_TAILSCALE_IP,
+        as_absent_inventory,
+        as_canonical_inventory,
+        as_sentinel_mobile_nodes,
+    )
+
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
@@ -82,7 +97,72 @@ HEIMDALL_NANO_KNIGHTS: tuple[dict[str, Any], ...] = (
         "mission": "Gate Bifrost→Appwrite egress against zero-trust policy; rotate APPWRITE_API_KEY per `appwrite_bootstrap.sh --rotate`.",
         "tier": "S2",
     },
+    # Hermes Prime always-on VPS bridge co-pilot & MGV synthesis nano-knight
+    {
+        "id": "heimdall.hermes_mesh",
+        "callsign": "Hermes Mesh Sentinel",
+        "channel": "hermes.mesh_synthesis",
+        "mission": "Always-on VPS Hub co-pilot, MGV research loop, VFS forge, and CloudBrain sync across Bifrost.",
+        "tier": "S4",
+    },
 )
+
+BIFROST_KNIGHTS_SWARM: tuple[dict[str, Any], ...] = (
+    {
+        "id": "SIR_HEIMDALL",
+        "role": "Bifrost Guardian & Boundary Sentinel",
+        "vfs": "vfs://sir_heimdall/",
+        "status": "ALWAYS_ON_HUB",
+    },
+    {
+        "id": "HERMES_PRIME",
+        "role": "Always-on VPS Co-Pilot & MGV Synthesis Engine",
+        "vfs": "vfs://hermes_prime/",
+        "status": "ALWAYS_ON_HUB",
+    },
+    {
+        "id": "SIR_LANCELOT",
+        "role": "Kinetic Edge & Frontline Defense",
+        "vfs": "vfs://sir_lancelot/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_GALAHAD",
+        "role": "Verification, Chivalric Purity & Z3 Formal Gate",
+        "vfs": "vfs://sir_galahad/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_SENTINEL",
+        "role": "AgentArmor, Zero-Trust Leases & Security Shield",
+        "vfs": "vfs://sir_sentinel/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "LADY_MNEMOSYNE",
+        "role": "Living Memory Guardian & World Tree Spine",
+        "vfs": "vfs://lady_mnemosyne/",
+        "status": "ACTIVE_ESCORT",
+    },
+    {
+        "id": "SIR_HELIO",
+        "role": "Voice OS & Phonetic Mesh Dispatch",
+        "vfs": "vfs://sir_helio/",
+        "status": "ACTIVE_ESCORT",
+    },
+)
+
+# Projected from control_plane.infra.mesh_topology — the single source of truth,
+# shared with the Heimdall sentinel and the mesh sentinel. This table used to be
+# a third independent copy, which is how `kba_services` came to be documented at
+# 100.71.218.75 with the role "VPS KVM563 Bridge" while the hub itself was
+# missing. Add or move a node in mesh_topology, not here.
+CANONICAL_MESH_INVENTORY: tuple[dict[str, Any], ...] = as_canonical_inventory()
+
+# Nodes named in AGENTS.md Rule 5 that are absent from the live tailnet. Held
+# separately so operational surfaces never advertise them as reachable ACTIVE
+# nodes.
+ABSENT_MESH_NODES: tuple[dict[str, Any], ...] = as_absent_inventory()
 
 
 def _read_json(path: Path) -> dict[str, Any]:
@@ -145,6 +225,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
         heimdall_terminal = None
 
     nano_knights = [dict(item) for item in HEIMDALL_NANO_KNIGHTS]
+    bifrost_knights = [dict(item) for item in BIFROST_KNIGHTS_SWARM]
     ready = heimdall_terminal is not None and not missing_components and bool(nano_knights)
     status = "GOVERNING" if ready else "ATTENTION_REQUIRED"
     return {
@@ -152,7 +233,24 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
         "status": status,
         "ready": ready,
         "owner": "sir_heimdall",
+        "co_governor": "HERMES_PRIME",
         "governed_surface": "bifrost_bridge",
+        "vps_hub": {
+            "host_server": "KVM563",
+            "vm_id": "vps3573819",
+            "public_ip": "162.35.107.134",
+            # Was 100.71.218.75 — the kba_services address, not the hub's. This is
+            # the value the dashboard renders, so it advertised the wrong host.
+            "tailscale_ip": HUB_TAILSCALE_IP,
+            "role": "Camelot-OS Hub & Sovereign Control Plane",
+            "always_on_agents": ["HERMES_PRIME", "SIR_HEIMDALL"],
+        },
+        "mesh_inventory": {
+            "account": "Cyberdad247@github",
+            "node_count": len(CANONICAL_MESH_INVENTORY),
+            "nodes": [dict(node) for node in CANONICAL_MESH_INVENTORY],
+            "sentinel_mobile_nodes": as_sentinel_mobile_nodes(),
+        },
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "terminal": {
             "present": heimdall_terminal is not None,
@@ -172,6 +270,7 @@ def read_governance_status(home: Path | None = None) -> dict[str, Any]:
             "secret_values_serialized": False,
         },
         "nano_knights": nano_knights,
+        "bifrost_knights_swarm": bifrost_knights,
         "event_routes": {
             item["channel"]: {"nano_knight": item["id"], "callsign": item["callsign"]}
             for item in nano_knights

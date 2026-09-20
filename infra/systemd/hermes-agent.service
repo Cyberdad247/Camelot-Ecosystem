@@ -1,0 +1,113 @@
+# infra/systemd/hermes-agent.service
+#
+# Native Hermes agent on the VPS hub. Replaces the container deployment.
+#
+# Rule 7: no container runtime may appear in this path. The migration script
+# refuses to install this unit if a container reference is present in it, and
+# tests/test_omarchy_agent_matrix_stub.py asserts the same property on the
+# launcher stub that fronts it.
+#
+# Requires: camelot-workers.slice (installed by scripts/ops/migrate-hermes-off-docker.sh)
+# Secrets:  /etc/camelot/hermes.env — real values only, never config.json.
+#           config.json carries boolean presence flags and nothing else.
+#
+# Upstream install layout (verified against the Hermes docs, not assumed):
+#   sudo curl -fsSL https://hermes-agent.nousresearch.com/install.sh | sudo bash
+# puts the code at /usr/local/lib/hermes-agent/ and the launcher at
+# /usr/local/bin/hermes. A per-user install instead lands at ~/.local/bin/hermes,
+# which this unit does not use. See:
+#   https://hermes-agent.nousresearch.com/docs/getting-started/installation
+#
+# HERMES_HOME is a documented override and is load-bearing here: with
+# ProtectHome=yes below, the default ~/.hermes data directory is unreachable, so
+# the agent would start and then fail to persist. Do not drop the setting.
+#
+# VERIFIED on the hub 2026-09-16 against Hermes Agent v0.21.3 (upstream cf5287b0),
+# which was installed natively here (`/usr/local/bin/hermes`, code at
+# /usr/local/lib/hermes-agent, a venv launcher). `hermes serve --help` confirms
+# both flags:
+#     --port PORT   Port (default 9119, 0 for auto-assign by OS)
+#     --host HOST   Host (default 127.0.0.1)
+# The port is set explicitly to 8642 rather than the upstream default 9119 so
+# this unit cannot be confused with a stray `hermes serve` someone starts by
+# hand.
+#
+# --skip-build is REQUIRED in this unit, and is not an optimisation. Without it
+# `hermes serve` runs a web UI build step, which fails twice over under the
+# sandbox below: ProtectSystem=strict makes /usr/local read-only so it cannot
+# write the build output, and IPAddressDeny=any blocks the npm registry. The
+# install shipped no pre-built web/dist, so build it once as root before first
+# start:  cd /usr/local/lib/hermes-agent/web && npm run build
+#
+# HERMES_HOME semantics (verified empirically on the hub, 2026-09-16, not
+# assumed): HERMES_HOME *is* the data directory itself — not a parent of a
+# `.hermes` subdirectory. Running any hermes command with HERMES_HOME=/tmp/x
+# created memories/, sessions/, skills/, hooks/, logs/, audio_cache/ and SOUL.md
+# directly under /tmp/x. So /srv/camelot/hermes is the data dir, and there must
+# be no `.hermes` component in the path.
+#
+# The installer seeds config at $HOME/.hermes and it ran as root, so the config
+# landed in /root/.hermes (config.yaml, .env, SOUL.md). The `camelot` account's
+# HERMES_HOME below starts empty, so the agent would come up with no provider
+# configured. Seed it before first start — copy the existing config in rather
+# than running the wizard, which needs a terminal this unit does not have:
+#     install -d -o camelot -g camelot -m 0700 /srv/camelot/hermes
+#     cp -a /root/.hermes/. /srv/camelot/hermes/
+#     chown -R camelot:camelot /srv/camelot/hermes
+#     chmod 0600 /srv/camelot/hermes/.env
+
+[Unit]
+Description=Camelot Hermes Agent (native)
+Documentation=https://hermes-agent.nousresearch.com/docs/reference/cli-commands
+After=network-online.target tailscaled.service
+Wants=network-online.target
+ConditionPathExists=/usr/local/bin/hermes
+
+[Service]
+Type=simple
+Slice=camelot-workers.slice
+User=camelot
+Group=camelot
+WorkingDirectory=/srv/camelot/hermes
+Environment=HERMES_HOME=/srv/camelot/hermes
+EnvironmentFile=-/etc/camelot/hermes.env
+ExecStart=/usr/local/bin/hermes serve --host 127.0.0.1 --port 8642 --skip-build
+Restart=on-failure
+RestartSec=5s
+StateDirectory=camelot/hermes
+RuntimeDirectory=camelot/hermes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=yes
+ReadWritePaths=/srv/camelot/hermes
+
+# Scarcity cap (cgroups v2). MemoryHigh sits below MemoryMax so PSI reclaim
+# degrades this worker smoothly instead of letting the hard cap OOM-kill it.
+MemoryHigh=1536M
+MemoryMax=2G
+TasksMax=512
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=hermes-agent
+
+# ORDERING NOTE (verified on the hub 2026-09-16): the container publishes BOTH
+# 8642/tcp and 9119/tcp on 127.0.0.1 (docker-proxy). While it is running, a
+# native `hermes serve` on this port fails with BACKEND_PORT_IN_USE — a smoke
+# test as the camelot user confirmed exactly that, then succeeded on a free
+# port. So the container MUST be stopped as part of the cutover; this unit and
+# the container cannot coexist on 8642.
+#
+# 8642 is deliberately kept rather than moved to a free port: it is the port the
+# container already published and that existing clients (Caddy, the mesh bridge
+# on :8095) point at, so the native service takes over the same endpoint and no
+# client config changes. Moving ports would silently break those callers.
+#
+# The listener is loopback-only; the mesh bridge fronts it.
+IPAddressDeny=any
+IPAddressAllow=localhost
+IPAddressAllow=100.64.0.0/10
+
+[Install]
+WantedBy=multi-user.target

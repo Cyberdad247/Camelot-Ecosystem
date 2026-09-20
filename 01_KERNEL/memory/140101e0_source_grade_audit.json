@@ -1,0 +1,1647 @@
+{
+  "stats": {
+    "total_sources": 270,
+    "grade_a_count": 24,
+    "grade_a_pct": 8.9,
+    "grade_b_count": 70,
+    "grade_b_pct": 25.9,
+    "grade_c_count": 176,
+    "grade_c_pct": 65.2,
+    "grade_d_count": 0,
+    "grade_d_pct": 0.0,
+    "grade_f_count": 0,
+    "grade_f_pct": 0.0,
+    "duplicates_detected": 0,
+    "sub_requirement_deficit": 0
+  },
+  "grade_a": [
+    {
+      "id": "224a7810-05af-485a-9bd2-dd9f091786bb",
+      "title": "Anya AI Persona: Dreamer to Prompt Architect",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "e65fabd7-5c9c-4828-b18f-4b7cf9fcee2a",
+      "title": "Anya Omega: Reverse Engineering the RevvTen Prompt Injection Architecture",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "2e7e54a6-37ea-4f6b-84dd-b0f2cb397b6b",
+      "title": "Anya Omega: The Ultimate Sovereign AI Architecture vMAX",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "8c13f7a2-ac9c-43f0-9e72-810fd11856f0",
+      "title": "Anya V4.5: The Prompt Architect's Methodology",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "fd347379-d6fb-4c7a-820e-f3a5fab7838d",
+      "title": "Anya V4: The Prompt and Context Engineer Persona",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "053a5dc4-ab12-42a1-8c02-c6d4cd53522c",
+      "title": "Anya V5.5: The Symmetry Engine Architecture",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "1e8492d8-0f1a-409c-9fd5-acabe7de17d2",
+      "title": "Anya \u03a9: The Soul Matrix and APEE Operating System",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "da040aef-231b-4602-8a8e-fe336537bf56",
+      "title": "Epic Merlin Persona Deployment Blueprint",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "0546cadc-d341-4309-a617-a94ded078df2",
+      "title": "Ethical Considerations and Responsible Governance of Generative AI: A Systematic Review | Premier Science",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "9d7d9cea-f560-4b1c-9324-db9d3f92a57f",
+      "title": "Gemini: You said Anya Merlin Alex Lady M Lady Alexandria S",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "cba6fb07-7c5d-4865-8f00-941132d9dbc8",
+      "title": "Gemini: You said Anya utilize notebooks as a synchronizati",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "9dc76032-30b0-4cab-8740-8ffce3f8c132",
+      "title": "Merlin Omega-Quantum: The Sovereign Kernel and Swarm Orchestration Protocol",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "7ce06a08-b7fb-48aa-a03b-d15199bde2cb",
+      "title": "Sovereign Core Architecture of the Omega VMAX Soul",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "51649e37-bb35-4b8e-bf17-6167b152a102",
+      "title": "The 2026 Context Compiler and Ant Vortex Architecture",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "2bc941c9-5806-4401-93a7-6590c5c2a4db",
+      "title": "The Anya Soul Matrix: TOON Architecture and Sovereign Optimization",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "eaa31ffc-6620-47bc-a999-9b99b0e6e45b",
+      "title": "The Apeiron Compiler Protocol",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "2678adfb-4280-4169-a549-7e6642f50222",
+      "title": "The Sovereign Core of Anya: Omega VMAX Architecture",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "326ebe75-108b-4190-9109-a4cf5e175990",
+      "title": "The Sovereign Meta-Compiler Architecture",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "aa1f67e1-06fa-46a6-b299-28263c970d91",
+      "title": "The Titan Reforge Multi-Agent Shared Memory Architecture",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "841f3017-7e4b-4466-adc0-d98738912445",
+      "title": "Titan Reforge: The Sovereign Multi-Agent Bootstrap Strategy",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "9de7370d-ceb1-43c2-8070-fd403cfe3470",
+      "title": "[CPU: \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 100%] [LATTICE: ALPHA_OMEGA_DIST\u2026",
+      "kind": "pasted_text",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "e72a18eb-dcf2-4f3f-8c7d-bce03fe1a245",
+      "title": "[CPU: \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 100%] [LATTICE: REVVTEN_TITAN_FO\u2026",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "a7ffe8da-52fa-4fca-a2f7-071c75283eb4",
+      "title": "anya-v999-manifest.md",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    },
+    {
+      "id": "b6d4d1f8-975d-494b-814a-9250839e1f8b",
+      "title": "omega-knight-summon-compiler-v2.md",
+      "kind": "markdown",
+      "reason": "Core Sovereign Architecture & Governance"
+    }
+  ],
+  "grade_b": [
+    {
+      "id": "26f376c3-8fdf-47b8-b57d-6e5dd03c646c",
+      "title": "10 AI Prompts That Make You a (Much) Faster Developer",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "25414275-ac6f-40ac-a1e7-18eb7376bab2",
+      "title": "26. Automatic Chain-of-Thought (Auto-CoT) Explained | Smarter AI Reasoning Without Manual Prompts",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "75418cfa-8a00-4408-b48c-a38f69c309f2",
+      "title": "38. Tree of Thoughts (ToT) Explained | Advanced AI Prompt Engineering for Smarter LLM Reasoning",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "dd948985-1a20-409b-b905-396a9a793f47",
+      "title": "40. Duty-Distinct Chain-of-Thought (DDCoT) Explained | Advanced Multimodal AI Prompt Engineering",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "31efcc1e-abee-4433-a87e-80f91a80d4b7",
+      "title": "8. Advanced Prompt Engineering: Self-Consistency, Step-Back & Tree of Thoughts Explained (2026)",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "17baf25b-b67c-4660-a71f-9760f11b6606",
+      "title": "A Framework for Integrated Thought and Emergent Understanding",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "0a7afc21-fbcd-4700-96f7-ac793e3d6c7d",
+      "title": "A Full Code Implementation to Design a Graph-Structured AI Agent with Gemini for Task Planning, Retrieval, Computation, and Self-Critique - MarkTechPost",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "e42ee1f0-f582-4745-9b2a-1c9ab6162189",
+      "title": "A Practical Guide for Designing, Developing, and Deploying Production-Grade Agentic AI Workflows - arXiv",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "49e7bc2a-0a52-4966-8f95-dcc39e67367f",
+      "title": "A Systematic Survey of Prompt Engineering in Large Language Models: Techniques and Applications - arXiv",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "76fd7de2-d3ca-44ae-b9aa-00136594d79e",
+      "title": "A-MEM: Agentic Memory for LLM Agents - arXiv",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "7d6b198a-6e51-4833-9209-acc113dcf054",
+      "title": "Adaptive Synchronization in Digital Twin\u2013Enabled IoT Systems: A Unified Framework for Energy, Fidelity, and Latency Trade-offs - MavMatrix",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "db08ca32-9ca7-46d8-a0c2-d7ae2878f951",
+      "title": "Agentic AI Infrastructure Stack for Agentic Systems - XenonStack",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "4ae67f5f-c7b0-44d1-85c6-1f0a91662892",
+      "title": "Agentic AI Solutions: Complete Guide for 2026 - OvalEdge",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "b5ddfd92-c0ee-4ccb-8ac5-8ef42fb17992",
+      "title": "Agentic Automation: The Future of Autonomous Task Execution in Software Development",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "62553f1a-e9be-4170-9af6-aac52a02f23a",
+      "title": "Agentic Design Patterns: A System-Theoretic Framework - OpenReview",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "c1d22aa6-21ba-4924-94be-9845506667d3",
+      "title": "Architectural Blueprint for Curated Mental Frameworks",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "1b6c3770-003f-424e-b607-05cabc036c8a",
+      "title": "Beyond Prompting: Guide to Agentic Loops & Loop Engineering",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "cd3c8cef-cb83-4fe4-a0a9-aa4fc3ecc211",
+      "title": "Build Production-Ready Agentic-RAG Applications From Scratch by Damien Benveniste on Maven",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "0871a98c-b5ca-49be-8da3-2a5b9c73909e",
+      "title": "Build an end-to-end agentic automation for your system in 15 mins | DEM507",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "56778e34-dd19-4d2f-a4a8-bb6cfa235e31",
+      "title": "Camelot Apex and Agentic Systems Architectural Audit",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "7c1312ac-6fa6-43db-a554-50aec0687da3",
+      "title": "Camelot Apex: The Singularity System Architecture",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "55e84230-1bc4-4562-a7e2-15ece6d6563d",
+      "title": "Camelot-OS: The Ancestral Tier System Architecture",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "0c43864a-1464-45ec-a544-827c4568a1fa",
+      "title": "ChatGPT Ep 1: The 3-Part Framework for Perfect AI Prompts (Every Time)",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "cbc991b5-c60f-41ce-80ba-4dedddfa1452",
+      "title": "CoAT: Chain-of-Associated-Thoughts Framework for Enhancing Large Language Models Reasoning - arXiv",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "885eedbf-ccb2-4373-a2bf-b95eef8f29ae",
+      "title": "Coaching Through Questions: An Instructional Coach's Experience with the QFT",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "c11dac0f-e295-4c83-b4b1-61b443bb8513",
+      "title": "Cognitive Architecture and Strategic Framework Protocol",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "8e40bcdd-ca1c-4a3d-b4e9-c46d0f57d6e3",
+      "title": "Cognitive Engineering and Advanced Orchestration: A Comprehensive Analysis of System Prompting, Specialized Data Ecosystems, and Multi-Agent AI Frameworks",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "665eeb91-b3c7-4081-825c-e4aea3764229",
+      "title": "Cognitive Orchestration and Multi-Agent IDE Architecture",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "5a3f1c79-d890-40b9-a570-f1e5714bde8d",
+      "title": "Context Engineering: A Framework for Robust Generative AI Systems - Sundeep Teki",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "27fe8a77-fb9f-416d-8f34-0ae880f9e7e8",
+      "title": "DAY - 1 | PROMPT LIKE A PRO \u2013 MASTER GENERATIVE AI WITH CONFIDENCE BOOTCAMP - 5 DAYS FREE BOOTCAMP",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "48dcbb30-ce5f-464c-a8b9-08960be68ed4",
+      "title": "DSPy",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "3cad7e6f-7d81-4bae-9374-22dc290fe1bb",
+      "title": "DSPy: The framework for programming\u2014not prompting\u2014language models - GitHub",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "9d268aec-3d30-4b74-986a-e868dc398193",
+      "title": "Digital Twin Integration Analysis for Overall Equipment Effectiveness (OEE) Improvement in Smart Manufacturing Environments | Jurnal Mekintek",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "3a1ac43f-d74a-4b77-a475-f2868771f911",
+      "title": "Digital Twin Synchronization: towards a data-centric architecture - arXiv",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "9daa2a7b-5b33-4e68-8926-2a0bc1e9f9d2",
+      "title": "Digital Twin for Training Bayesian Networks for Fault Diagnostics of Manufacturing Systems - PMC",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "8e02f6b5-fb76-4293-8426-bdc08a634202",
+      "title": "Digital Twins Explained: Data Foundation Guide | Informatica",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "2ce365a9-3bda-4df1-b3a9-e2a782b869bd",
+      "title": "Everything You Need to Know About Prompt Engineering Frameworks",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "0842ffe6-c195-4cf2-8288-0839d0f78bbd",
+      "title": "Experiencing the Question Formulation Technique\u2122 (QFT\u2122)",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "3ad07bef-8099-40c9-ad3b-963c5914262e",
+      "title": "Experiencing the Question Formulation Technique\u2122 (QFT\u2122) - Manhattan Theatre Club",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "760708d1-fdd2-4e06-81b6-e0ff75f25881",
+      "title": "FACILITATING THE QUESTION FORMULATION TECHNIQUE (QFT)",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "c5028d9d-4f76-4615-9469-75e931985bc2",
+      "title": "Fine-Tuning Large Language Models for Graph RAG-5 Indexing - Dataworkz",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "881d4542-7172-4660-8253-6a73010fa503",
+      "title": "Framework Guidance for AI Task Constraints",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "36d5a2d2-9804-401f-8332-12cb61421dd3",
+      "title": "From Individual AI to Org Level: Mastering Context Engineering",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "b43d8cea-21e5-4f84-9b1c-8cc55be95658",
+      "title": "Give Me 45min and You'll Master Any AI",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "ce30d7fb-f2a2-40a0-b1a4-21d81fb0cdfe",
+      "title": "Google Prompting Essentials Mastery Curriculum",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "167d7ef4-2668-494d-983a-97a3374ca01c",
+      "title": "Helpful Resources for Better Use of the Question Formulation Technique (QFT):",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "4d2bc878-e62f-4147-af9a-b0141dcb5280",
+      "title": "Introducing the Agentic Risk & Capability Framework for Governing Agentic AI Systems - arXiv",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "ebbaf680-77e5-4a9d-a91a-07ad109903d1",
+      "title": "Introducing the Question Formulation Technique (QFT) Into Your Classroom - Manhattan Theatre Club",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "06a0f3a7-7c53-4b6e-b874-7d41cc299442",
+      "title": "Introduction to the Question Formulation Technique (QFT)",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "3d88326d-ef7b-4fbe-b13c-60a72ebacb95",
+      "title": "Leveraging Prompt Engineering in Large Language Models for Accelerating Chemical Research - PMC - PubMed Central",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "33b578ad-44de-441c-980c-a816e0b94875",
+      "title": "Loaded questions: The Framework for Information Literacy through a DEI lens | Heffernan",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "e09d00c9-ce92-487f-b40b-d3195a5d1e83",
+      "title": "Mastering Autocompletion with Temperature and Top P",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "022f9bce-c02c-4c91-9498-40a4abca0c7b",
+      "title": "Mastering Prompt Engineering for AI Innovation - Databricks",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "1940178e-c3e1-4729-9693-20720597fe3f",
+      "title": "Mastering Prompt Engineering: A Guide to the CO-STAR and TIDD-EC Frameworks",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "20d1cb6b-b007-434b-bc82-15cea17f6641",
+      "title": "Multimodal Prompt Optimization: Why Not Leverage Multiple Modalities for MLLMs - arXiv",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "f6b8ba1a-947d-4399-98e2-fcf5aaf7da17",
+      "title": "Neurosymbolic Persona Engine: Architecture and Deployment Manual",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "74691a30-c252-402f-ab01-73d2d7c48f7b",
+      "title": "NotebookLM: I Built a Master Prompt Generator (Free & Unlimited)",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "3846e727-4169-4afc-a5ea-863b9337f3af",
+      "title": "Prompt Engineering for Grok Code Fast 1",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "57903c39-a35a-4e30-a158-e8d2ec056d22",
+      "title": "Prompting Frameworks and AI Strategies",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "c6c3973a-6005-43b5-a9b7-f4348e66f164",
+      "title": "Prompting Frameworks: A Comprehensive Analysis and Selection Guide",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "469d2be7-c260-4b25-90fb-5c6af60dd103",
+      "title": "Prompting Frameworks: A Performance Overview",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "961116b3-a225-4e7c-ac30-67274c958eea",
+      "title": "QFT: Quantized Full-parameter Tuning of LLMs with Affordable Resources - arXiv",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "d0826690-414b-4e18-b50d-a9af5f7ee178",
+      "title": "Question Formulation Technique (QFT) - Emerging America",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "71242009-ceb0-4793-8ec2-df4654ec84ff",
+      "title": "Standards for Digital Twins in Manufacturing - Squarespace",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "12972b2d-3bd7-43cb-9216-709c2ae1cf78",
+      "title": "The Camelot OS Transcendent Evolution Engine Architecture",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "78c4de75-030b-42ea-933c-e1a3efbaa861",
+      "title": "The Google Prompting Essentials Master Curriculum Swarm",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "611465bd-cdc3-4015-81f1-1f33f01ed773",
+      "title": "The Universal Chat Auditor Engine",
+      "kind": "pasted_text",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "2769e6c2-792d-419f-a094-2627a2309078",
+      "title": "The Universal Self-Improving Prompt Optimizer",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "4d8fd2e0-d61a-4d94-9898-fc30beb2df51",
+      "title": "The digital twin synchronization problem: Framework, formulations, and analysis - Re.Public@polimi.it",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    },
+    {
+      "id": "4401a922-47b0-4e87-b4e7-c714697e0a47",
+      "title": "universal-chat-auditor-prompt.md",
+      "kind": "markdown",
+      "reason": "Technical Framework & Engineering Pattern"
+    }
+  ],
+  "grade_c": [
+    {
+      "id": "ea0e7c8e-44ef-40d6-8018-a6e0ac2f9d03",
+      "title": "(PDF) Applying AI to Quantum Field Theory - ResearchGate",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ee981841-ec07-449f-815d-0f7c95db8a72",
+      "title": "**[AUDIT_SWARM_ACTIVATE]**",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "9048f528-22e9-41f0-8b93-fab7f1d85c24",
+      "title": "01 What is context engineering",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "b52af61f-9392-4320-b6a2-1d4f673a58e8",
+      "title": "0xeb/TheBigPromptLibrary: A collection of prompts, system prompts and LLM instructions",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "68b1d65f-1adf-4d3a-909b-504ad2bead05",
+      "title": "1. Emotion Prompting Explained: The AI Prompting Trick That Improves ChatGPT Responses (2026)",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "6ba6acb1-7a7f-4f6d-8c97-5acf64be369c",
+      "title": "10 Growth Hacking Strategies for Rapid Success in B2B - CallPage",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4bf9af6c-43cc-4004-99c9-7b4ebc5f60be",
+      "title": "13. Prompt Mining Explained in 5 Minutes | Find the Best AI Prompts for ChatGPT, Claude & Gemini",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "a061eb3b-0395-4ba8-a4a5-9549b08004bc",
+      "title": "15 AI Marketing Prompts for Growth Hacking - AirOps",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "acea2115-23a6-40a5-b2a5-b20341832bdd",
+      "title": "20 Best Growth Hacking Strategies to Grow Your Business - OptinMonster",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "bd3aaa91-d8e1-4559-af0d-ca2b33baa5ec",
+      "title": "20+ DALL\u00b7E Prompts - MLQ.ai",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "64b7268a-c9db-46f1-935c-703f49d14044",
+      "title": "2026 Beginner Class - AI Rating & Data Annotation - Complete Roadmap",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c6a469bb-bb44-4e4c-8f36-fbbadccdff53",
+      "title": "22 Free and Open Healthcare Datasets for Machine Learning and AI Development in 2025",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3e637ac0-9d00-4045-b088-a180eb1f2e77",
+      "title": "23. Max Mutual Information (MMI) Prompting Explained in 5 Minutes | Find the Best AI Prompts",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ffa4652b-2890-4151-bb65-8ded0b637c3b",
+      "title": "26 Proven Growth Hacking Examples for Inspiration - Upthrust",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "2aa48c22-2886-4049-a9ff-e6e6943beba4",
+      "title": "27. Multi-Chain Reasoning (MCR) Explained | Advanced AI Prompting Technique for Better LLM Accuracy",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "38fae39a-1a5b-4f6a-9473-9b0a66b88839",
+      "title": "3 simple tips to unlock ChatGPT GENIUS mode... \ud83e\udde0",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "a8e61a18-5eec-4a8e-b5c3-ce0fa83727b3",
+      "title": "33. Cumulative Reasoning (CR) Explained | Advanced AI Prompt Engineering for Smarter LLMs",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "981f7427-b860-47cd-a788-fb0ebb2ed9c9",
+      "title": "5 Incredible Gemini Features Hidden in Plain Sight!",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "6885ae06-3a0b-41ee-aeef-ead1079e7831",
+      "title": "70+ AI Image Prompts to Create Amazing Visuals Effortlessly - Narrato",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3757f3e7-d5ab-401c-b251-7299a24bfb5b",
+      "title": "8 Top Platforms for Prompt Engineering Testing, Versioning & Monitoring - Eden AI",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "abb53bc6-fc71-470d-9cec-fba7cf8c9326",
+      "title": "A Beginner's Guide to End-to-End Machine Learning with Vertex AI (Google Cloud)",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "5e881ae8-5235-41de-879e-9d6fb25f8eef",
+      "title": "A Comprehensive Guide To Growth Marketing: Scaling Success - AI bees",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "272952d2-990f-410a-9087-731d8566646a",
+      "title": "A complete guide to retrieval augmented generation vs fine-tuning - Glean",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "e9e9afb1-e0a9-4644-a078-739165e3744b",
+      "title": "A new AI frontier? Google's AI now capable of creating videos with sound up to eight seconds long",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "7e402d07-3940-4f14-b8c7-b636457e5239",
+      "title": "A practical guide to building agents - OpenAI",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "7153f074-ae5b-4a9f-afae-3b275cae713b",
+      "title": "AI Agent End to End - Workshop | Google Codelabs",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "342820ee-4e2d-4b29-b324-31dc469c6465",
+      "title": "AI Alignment: Fear, Acceleration, and Cooperation",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "908d9717-dca8-4e6f-9037-5a5b818c516f",
+      "title": "AI Literacy for Teachers: A Practical Guide - Structural Learning",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0b065007-d786-4603-8b3b-2f26e549927f",
+      "title": "AI Prompt Engineering Isn't The Future | PDF - Scribd",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4db1fb7b-ec19-4591-91d1-21b80f8951aa",
+      "title": "AI Prompt Library \u2013 Boost App Design & Development | RapidNative",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "6e62dfb6-fdd9-444c-bca3-435011222cc8",
+      "title": "AI Prompt Library \u2013 Discover and Share Powerful Prompts - Glean",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "e7ce8aca-06cd-46d8-9bd8-97b196114410",
+      "title": "AI Prompting: Mode and Format Explained",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "363589e5-101f-4628-a347-8a24679df669",
+      "title": "AI Resources [Updated - Mar 2026]",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c1993b77-2880-46a6-83b8-9064d3562202",
+      "title": "AI Self-Prompting Systems Explained",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "da082a1b-c1d5-4788-ab73-77ecfe422ff1",
+      "title": "AI and Inquiry - AVID Open Access",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ac03652c-3f68-4203-99ee-f86e9382311c",
+      "title": "AI-Powered Children's Story Generator: Cloud-Native Python & React",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "b51e6c8f-a7cd-4aa9-8f6e-f029cd97a9cf",
+      "title": "APRIL 2025 - LA County Department of Arts and Culture",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c2a37ce8-784f-4132-982d-45720acc5645",
+      "title": "Addressing the Limitations of Using Generative AI for Learning - Office of the Executive Vice President and Provost",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "a64257be-ad96-4394-b1f1-b79f11a9dd38",
+      "title": "Advanced Prompt Engineering Research Frontiers.pdf",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "22b8deb6-999a-476b-ad1f-05ddb1cb5ac2",
+      "title": "Advanced Prompt Engineering Techniques: Examples & Best Practices - Patronus AI",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "23ffaa61-72b1-430a-8b5e-8521e5a760a4",
+      "title": "Adversarial Prompt Engineering: The Dark Art of Manipulating LLMs - Obsidian Security",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "f9bb34aa-c6f7-4b89-9019-82497051e557",
+      "title": "Adversarial Prompting in LLMs | Prompt Engineering Guide<!-- -->",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "80a1b428-7504-470a-b57d-bf087465523d",
+      "title": "Algorithmic Literacy - Teaching@Purdue",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4e0a80c1-ddfe-4589-95ca-070102e02afe",
+      "title": "All notes 2/5/2026",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "13eb295e-595c-4a73-9891-e8be00128c0f",
+      "title": "All notes 6/4/2026",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "25365e08-1b1f-4279-ba6c-bc6f313a3098",
+      "title": "All notes 7/17/2026",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "afb1b664-0fda-4770-85bf-c73351f59983",
+      "title": "All notes 8/22/2026",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "473b0ce0-e04b-4ef7-8c4c-f6fcb726e0e3",
+      "title": "All notes 8/23/2026",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "e747eb4d-6f90-40c4-9a13-aa4dcfd7e526",
+      "title": "Applying Chain of Thought with Vertex AI Agent - Google Developer forums",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4a7586ae-d4de-4d9a-8309-59c50f2efa21",
+      "title": "Architecting the AI Agent Platform: A Definitive Guide",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "647a94de-068d-420e-be0a-13f8b5ae9b46",
+      "title": "Architectural Explanation: The Soul & Spark of An\u2026",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "f78d058e-a17d-4bfd-ba3e-b68777c0af69",
+      "title": "Art & Science of Innovation Conference 2024",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "94a2983f-a66d-420c-a183-d682de14f535",
+      "title": "Art of Prompting - MidJourney Docs",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "9cb80d26-cd73-44b5-97f8-b83220617706",
+      "title": "Avoid Common Mistakes in AI Prompt Engineering with AI Literacy - UMU Blog",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "f12497a7-67e2-40ba-a006-4ab6d60b16cc",
+      "title": "Best AI Image Prompts Generator | Free Prompts for DALL-E, Midjourney & Stable Diffusion",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "db658be6-a2fe-470f-b6f2-b54963337f47",
+      "title": "Best Advanced AI Prompt Libraries for Power Users - AI Tools",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "7896b710-e033-48ff-b91d-ff3f836bf639",
+      "title": "Best Healthcare Datasets & Databases 2026 | Datarade",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "adbfde2b-1d5c-442b-a019-15fa5eb9fd2b",
+      "title": "Best Practices for AI Prompt Engineering in Life Sciences in 2025 - Certara",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "5c0fdf66-511a-4a2a-bb57-223915cb85d6",
+      "title": "Beyond Prompt Engineering: How to Improve Your AI Productivity | by Priyal Walpita",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "cb037c47-4dc8-4844-b654-180fb8a7523a",
+      "title": "Beyond Prompt Engineering: Skills Marketers Need to Successfully Deploy Generative AI",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4b5b459a-4132-4b40-9f3d-aa6ca326cf81",
+      "title": "BitNet b1.58 Zero-FFI Ternary Quantization Specification",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ee9d4c03-d262-404e-8cee-bd60de61f7f1",
+      "title": "Blacklight EULA Scanner: Prompt Engineering Deep Dive",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "7d4ad126-cd20-42f4-b478-6a557e5a69eb",
+      "title": "Blueprint for a Universal Query Enhancement and Reformulation Engine",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "497a17d3-4f30-4270-925c-f2d2438de56f",
+      "title": "Break down complex tasks into simpler prompts | Generative AI on Vertex AI",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "143c44b0-0a6d-4ebc-8ae3-83b23c2c8766",
+      "title": "COSTAR Prompt Engineering: What It Is and Why It Matters - Portkey",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0aca5b81-12ef-4267-bae2-80b52c27c4c7",
+      "title": "Camelot-OS APEE Evolution Protocol 6.5.0",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "1977d408-1d3c-4e55-a2a5-159f8ef1112e",
+      "title": "Can LLMs Correct Themselves? A Benchmark of Self-Correction in LLMs - arXiv",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "9d033177-3243-4574-8a5f-4bdd71975b1a",
+      "title": "Category: A Survival Guide to AI and Teaching - Wordpress + Temple",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "f36675f6-9b1e-4ffe-bbbb-b547f25dcb17",
+      "title": "CoT-Self-Instruct: Building high-quality synthetic prompts data for reasoning and non-reasoning tasks | OpenReview",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "05053b7c-6ff1-4996-9fac-d9d02226a4a5",
+      "title": "Complete Guide to ChatGPT 5.6 + Prompting Guide",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "204011d3-43f4-4b8c-afcf-3ab6aa34b747",
+      "title": "Context Engineering Is Just Data Fundamentals in Disguise",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "65c5ec6e-8679-4389-ac66-e7a3519aaa4a",
+      "title": "Context Engineering in 29 Minutes: Complete Course",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "88a46fd5-7bcd-4152-95a2-8ebafa3a3774",
+      "title": "Context engineering explained: What every AI developer should know",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "7faab5c7-baf8-40c2-9049-fbde609de2b0",
+      "title": "Context engineering with Dex Horthy",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4f887d69-ffc6-4ed2-9189-edc5d212a753",
+      "title": "Crafting Emergent Intelligence Through Symbolic Evolution",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "b410cc90-1769-4649-88fb-ef4f3e8264f1",
+      "title": "Create storyboards in 10 minutes with these magic AI prompts",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "27c1c88d-33e0-48aa-8764-7d7fce03feb9",
+      "title": "Creating a Culture of Questioning: Inquiry in Lower Elementary | Teaching Channel",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "315b6849-dd04-4516-ba8f-a31b47a70b6b",
+      "title": "Datasets - Intelligent Clinical Care Center (IC3) \u00bb \u00bb University of Florida",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "a5a012ea-07ba-4deb-8a7d-3812c0585946",
+      "title": "Effective Prompts for AI: The Essentials - MIT Sloan Teaching & Learning Technologies",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3245c1d9-d5da-4554-b877-24ea1401470b",
+      "title": "Empowering Inquiry: The Transformative Power of the Question Formulation Technique in Education - Digital Commons @ NJIT",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "d62de303-3146-4d12-b471-a2b6de1fa962",
+      "title": "Empowering Inquiry: The Transformative Power of the Question Formulation Technique in Education - ResearchGate",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "69a8cc63-6c0b-4918-ad72-db862b62da57",
+      "title": "Enabling small language models to solve complex reasoning tasks | MIT News",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "669c0862-0298-44b4-b662-07f84388af43",
+      "title": "Engineering Promptly: Disagreeing with OpenAI's LLM Guide",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "8f97e116-da8f-477d-a6af-85f16920cba1",
+      "title": "Ethical Considerations in Prompt Engineering: Guidelines & Best Practices - Arsturn",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "35404fb1-19fe-436c-b70e-281c9141848e",
+      "title": "Ethical implications of using general-purpose LLMs in clinical settings: a comparative analysis of prompt engineering strategies and their impact on patient safety - PMC - PubMed Central",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "daec7509-0f4c-40d2-832a-d0d6ea604a35",
+      "title": "Evaluating Multimodal Vision-Language Model Prompting Strategies for Visual Question Answering in Road Scene Understanding - CVF Open Access",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "8e799395-2edb-4653-af15-71c941700056",
+      "title": "Every Type of Thinking Explained",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "6637add5-c321-42a3-ad8c-b91c8b65154a",
+      "title": "Fostering AI Literacy in Undergraduates: A ChatGPT Workshop Case Study - Digital Commons @ LMU",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "17e30e36-d9f9-4256-9c02-c59d8d913c28",
+      "title": "From Ideas to Content: Unveiling Effective Prompt Library Examples - promptpanda.io",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "dc0e7a48-8325-408e-ab19-a36af31b05b5",
+      "title": "GPT-5 System Prompt: Seven Prompt Engineering Secrets",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "5f6baa4f-7874-4c02-adc3-81510b589f35",
+      "title": "Gaslit ChatGPT And It Gave Me 10x Better Answers",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ce804795-a2b9-40d5-955e-b4b7186c3f04",
+      "title": "Gemini GEMS has NotebookLM and OPAL: you NEED to learn this ASAP",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "d71b808f-b65c-4ff7-b5aa-ac11a5a2d8ad",
+      "title": "Gemini Super Gems: Google\u2019s New AI Super Agent That Builds Free Apps (No N8N Needed)",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "da81fd5d-f251-4d98-a3df-5efd9aff722c",
+      "title": "Gemini's Latest SKILL Update Solves the Biggest Agent Problem",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "5fc89b72-3aef-4ecb-9447-15da76f16ae4",
+      "title": "Gemini: You said Https://x.com/i/status/208641739899189284",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "e3c97549-ca49-438c-b7bd-b2705b002ec9",
+      "title": "Gemini: You said when you are an AI architect what are the",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "848d6b1b-4028-4b74-908d-f0de37fb91cb",
+      "title": "Generative AI as a Coach to Help Students Enhance Proficiency in Question Formulation",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0af1d658-5756-4797-ba7d-fa02b1bd692b",
+      "title": "GitHub - asgeirtj/system_prompts_leaks: Extracted system prompts from Anthropic - Claude Fable 5, Opus 5, Claude Design, Claude Code. OpenAI - ChatGPT GPT-5.6-Sol, Codex. Google - Gemini 3.5 Flash, 3.1 Pro, Antigravity. xAI - Grok, Cursor, Copilot, VS Code, Perplexity, and more. Updated regularly. \u00b7 GitHub",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "235d5fcb-ca4c-45cb-bb98-bca98b2b1ae7",
+      "title": "GitHub - projectedanx/PeW: prompt_engineering_workbench July \u200e2025 \u00b7 GitHub",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "59ddc946-00e8-46e3-b35e-4a69480f7f9e",
+      "title": "Google NotebookLM's Hidden Settings DESTROY $2K Research Packages \ud83e\udd2f (Nobody's Using This Right)",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "80701f64-c470-4839-9d54-a97b623795e3",
+      "title": "Google Stitch Prompting Template Product Requirements Document",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "9c143e1d-705d-40d2-acee-007c2ced2dd5",
+      "title": "Growth Hacking Made Simple: Definition - Neil Patel",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ffdae632-e8ab-4791-9d46-50da1259463b",
+      "title": "Growth Hacking: 100 Hacks, Strategies & Techniques - wishpond.com",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "cefea0c2-81c0-4432-847b-d593563c6637",
+      "title": "Guide to Writing System Prompts: The Hidden Force Behind Every ...",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ddf551f1-c110-4000-beb9-5f70b18737a9",
+      "title": "Hacking AI: The Jade Puffer Attack, Prompt Injection, and the Dead Internet Theory | Glenn Wilkinson",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c8454e30-258e-4439-aa40-9b813bf5363b",
+      "title": "Harnessing AI Prompts to Build Critical Thinking in Classrooms",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "692e25db-b526-493f-8b54-49fe1fdca186",
+      "title": "Helping Students Develop AI Prompting Skills for Critical Thinking - Faculty Focus",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3a176637-6dc3-4421-9efa-d15329dc4449",
+      "title": "How Image-to-Video AI Works Explained - LeyLine Pro",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0d567680-80d8-46e4-a49a-ef336a4eef5d",
+      "title": "How to Create Consistent Characters with AI",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "d1d737fd-2c70-4e25-8803-900942af0b7d",
+      "title": "How to Get Ahead of 99% of People (with AI)",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "27aa97c4-02fd-4b7d-b4fa-efc5165eb5f9",
+      "title": "How to Get Better Responses from LLM - UT Tyler",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0e69e5ed-7512-4d45-b905-b288b3817855",
+      "title": "How to Use the Question Formulation Technique in the Classroom - Edutopia",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "34a51a60-28ef-4fc1-a60b-d5327120a630",
+      "title": "How to Write Effective System Prompts for AI Assistants: Complete Guide",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "800d1c6f-5fcb-4e80-b7a3-424e01f52f66",
+      "title": "How to improve AI outputs using advanced prompt techniques - Thoughtworks",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "42f49400-70be-4d73-970a-32ca93f87c9a",
+      "title": "I Found 10,000+ Ultimate Secret AI Prompts For FREE (ChatGPT, Gemini, Claude)",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "70171d3e-affa-48a5-b4d4-d40e64263245",
+      "title": "I Stopped Prompting AI One Task At A Time. This Works Better.",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "de8616fd-a875-4965-813d-f9a4717c971b",
+      "title": "I got a private lesson on Google's NEW Nano Banana AI Model",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "2ab26972-2c73-4a42-a53e-f0435f76c67f",
+      "title": "I turned Steve Jobs\u2019 legendary thinking into AI prompts\u2014and now I\u2019m designing life like an Apple product \u2013 EQ4C Tools",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "d0ad7467-be52-47e6-baf5-91acb4d54d8e",
+      "title": "In a World of AI, Content Curation Is More Important Than Ever - John Spencer",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "2685eeff-8db6-45ea-afee-37bcc2c42d53",
+      "title": "Inquiring Minds: Using the Question Formulation Technique to Activate Student Curiosity Andrew P. Minigan and Joshua Beer",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "5df71956-ab3f-48e5-aae6-b340d756adb4",
+      "title": "Inquiry in Action: Using AI to Reimagine Learning and Teaching: Case Studies from the Frontline of Higher Education Practice",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "a9be3c23-d1e8-4946-bd2f-e905d289bbb4",
+      "title": "Introduction to function calling | Generative AI on Vertex AI - Google Cloud Documentation",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "7bf282d7-2818-4ab3-be50-b6602bb49d6c",
+      "title": "Introduction to prompting | Generative AI on Vertex AI | Google Cloud Documentation",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "72428e9c-55a5-4eb2-ad70-65f64a82f599",
+      "title": "Iterative Prompt Refinement: Step-by-Step Guide - Ghost",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "9e0ecf3b-33e3-490b-889b-6c9227a93051",
+      "title": "LLM as Runtime Error Handler: A Promising Pathway to Adaptive Self-Healing of Software Systems - arXiv",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "2480b42b-c096-4c42-9caa-eb57474ec5d6",
+      "title": "Learning IS Changing",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4288c11e-7fd0-4626-b45d-f57b231fd50e",
+      "title": "Learning in the Age of LLMs: Boosting not Bypassing the Learning Process - ResearchGate",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "bdaefafe-a589-4442-b8c2-971a7d0ded55",
+      "title": "LongRoPE2: Near-Lossless LLM Context Window Scaling - arXiv",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "4d5d9216-ad3d-4b67-978b-955a490b091b",
+      "title": "MPO: Boosting LLM Agents with Meta Plan Optimization - arXiv",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c02fd151-1651-41e0-9ef7-1c875591d4cb",
+      "title": "Meta Prompting | Prompt Engineering Guide",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c89dac6a-3ddb-4667-89f7-7cf17f80cb46",
+      "title": "Multimodal Prompt Injection Attacks: Risks and Defenses for Modern LLMs - arXiv",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "52b24c10-89c1-4619-ba03-b616bdfad0b8",
+      "title": "OMNI: A Journey Into Language and Prompting",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "a5c16d51-2de2-4648-97eb-9f1890f598f9",
+      "title": "Overview of prompting strategies | Generative AI on Vertex AI | Google Cloud Documentation",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "b07909f3-f13d-4b4b-8cb9-cd32217d3b82",
+      "title": "Proceedings of - National Institute of Standards and Technology",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0bc0d0e8-7be5-40e9-ad40-ca797568d5a3",
+      "title": "Prompt Chaining and Advanced Orchestration Methods - Refonte Learning",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "15aec236-85e0-4256-a969-19f1f7fb5541",
+      "title": "Prompt Chaining | Prompt Engineering Guide<!-- -->",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "82c0a355-00d8-4945-b009-c6579c8ca3bd",
+      "title": "Prompt Engineering Best Practices: Tips, Tricks, and Tools | DigitalOcean",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0bd6f249-2912-4848-89ae-7b38589c87a5",
+      "title": "Prompt Engineering Guidelines for Using Large Language Models in Requirements Engineering - arXiv",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "2abb9830-8467-4d7d-bff6-7b5729da2a8d",
+      "title": "Prompt Engineering Workshop: Get Better AI Responses | Qolaba.ai",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3adb0df5-fb25-4f58-982e-33206df44235",
+      "title": "Prompt Engineering for AI Guide | Google Cloud",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "911f3847-a7ea-4718-a85c-582421e50a79",
+      "title": "Prompt Engineering for Code Generation: Examples & Best Practices",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "e66cc628-a987-4097-8084-adf0b891ef49",
+      "title": "Prompt Engineering for Finance 101 | Deloitte US",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "6f0702b1-ffee-4e7e-84cd-d0fb5de18314",
+      "title": "Prompt Engineering: From Zero To Scripting AI Work Flows! - LearnWithHasan",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3acad019-cd47-4f37-95d1-1dae70ad0183",
+      "title": "Prompt Engineering: From Zero-Shot to Advanced AI Reasoning - Bluetick Consultants Inc.",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0288bfe1-9fdb-4d00-8863-03bf8e25eb78",
+      "title": "Prompt Injection vs. Jailbreaking: What's the Difference?",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "92e40f68-8609-481c-836c-d73b96453fb3",
+      "title": "Prompt Library - Claude Docs",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "fcb69ba1-5b74-4215-a4e0-fbf5297a0443",
+      "title": "Prompt Literacy in Academics | U-M Generative AI - University of Michigan",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "1586f559-efda-43bd-8711-9ee309433ffc",
+      "title": "Prompt design strategies | Gemini API | Google AI for Developers",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "2f242268-4a88-4d07-8245-6e10b525e6dc",
+      "title": "Prompt engineering - Wikipedia",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "e6f01810-6b22-4a00-9562-c928ae4c4fe9",
+      "title": "Prompt engineering techniques: Top 6 for 2026 - K2view",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "72440727-0a44-4b17-99ce-9473c5c2e177",
+      "title": "Prompt engineering | OpenAI API",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "027bf214-052a-4259-90e8-0e57c00540e3",
+      "title": "PromptWizard: The future of prompt optimization through feedback-driven self-evolving prompts - Microsoft Research",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "30651203-5fae-4ed8-b061-382402a59a0d",
+      "title": "Promptbreeder: Self-Referential Self-Improvement via Prompt Evolution | OpenReview",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "f7defb75-9869-4427-8e32-dcc85236405e",
+      "title": "Prompting Is Not Coding: A New Perspective",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "e53bdf65-e1d5-4c66-b1b8-4b0e8a00508e",
+      "title": "Prompting Progress: An Eight-Week AI Literacy Cohort for Academic Advisors \u2013 A Program Evaluation Report - UNM Digital Repository",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "014ba2f8-ff28-417e-83f9-8e3a0ac1695b",
+      "title": "Prompting Techniques | Prompt Engineering Guide",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "566102e7-4eee-42c8-b8bf-8abaef2407c4",
+      "title": "Prompting a New AI Conversation | Edify.",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "a1d7c16b-ddb6-4509-b6a4-ec1c1c68ee58",
+      "title": "Prompting engineering or AI literacy? How to develop a critical awareness of Generative AI in education - #altc",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c1f350af-c087-4317-a642-b64fa45a7013",
+      "title": "Quantum-Enhanced Training of Large Language Models: A Hybrid Approach",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "c858b98c-b647-4f57-9bd8-b053174f9ee8",
+      "title": "Question Formulation Technique",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "5bd2bf60-aa8b-45f9-9eeb-c55d425bf369",
+      "title": "Question Formulation Technique \u2013 Equitable Teaching",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "9f11ec62-df01-4fe7-9fcb-a35f0e3d10ee",
+      "title": "Questioneering - savoir public",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "b111e604-2cd3-4471-ac6e-40c5b4a9d3c6",
+      "title": "Questioning the Code of Rights and Responsibilities Alison Mazoff A Thesis in The Department of Education Presented in Partial - Concordia's Spectrum",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "d641a3e6-6cf1-42c8-afc0-fe16c99a38bb",
+      "title": "Stop Prompt Claude. Start Loop Engineering.",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "cdbce972-5351-4b6e-a3b2-2f264a624e06",
+      "title": "Synchronization of Distributed Controllers in Cyber-Physical Systems",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "16aff88a-1777-400c-a2a9-83b9c1e79693",
+      "title": "Teoria das Restri\u00e7\u00f5es com IA: Prompt que Analisa seu Neg\u00f3cio",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "1c395b4a-eb56-4490-857c-9d403403b07a",
+      "title": "The Neurosymbolic Persona Engine: Logic-Bound Local Reasoning",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "0a050510-af3d-4cd2-a578-f5dca9aa29c8",
+      "title": "The Next AI Skill Every Engineer Will Learn (Harness Engineering)",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "ce72e744-897a-4cfe-85e5-9fd7e9db90ce",
+      "title": "The Obsidian Forge: Autonomous Evolution and Synthesis Protocols",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "acffc4d9-2f06-4ec2-8888-6ae43d9588e6",
+      "title": "What You Can Build With Claude Fable 5 (Chrome Extension + Secret Prompt)",
+      "kind": "pasted_text",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "100f7311-38a3-4231-9770-c5df9dabc92b",
+      "title": "camelot-ui-generation-prompt.md",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "3cea43b5-1bbf-41aa-8c68-e09fcf97bcb5",
+      "title": "elder-god-consolidation-compressed.md",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "93c291d7-938b-4062-b49e-fb736de55dd4",
+      "title": "omarchy",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "f09fa900-061b-4755-997b-6b2b9a335de5",
+      "title": "thread-audit-note.md",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "209dc41a-d6df-4bc9-91cd-1a56b1ba84bb",
+      "title": "universal-glyph-protocol.md",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    },
+    {
+      "id": "9b2e78ab-08c9-4d74-b4cb-7b686d17d3a8",
+      "title": "\ud83c\udf33 **Wisdom:**",
+      "kind": "markdown",
+      "reason": "Supporting Documentation & Contextual Reference"
+    }
+  ],
+  "grade_d": [],
+  "grade_f": [],
+  "duplicates": [],
+  "audited_at": "2026-09-14T06:37:39.364659+00:00"
+}

@@ -1,0 +1,12 @@
+{
+  "crystal_id": "VKG_FFE846B8DBE8A502",
+  "notebook_id": "79cbec0fcb7e05f8",
+  "notebook_title": "Voice OS Audio Pipeline Study",
+  "sources_count": 42,
+  "category": "VOICE_PIPELINE",
+  "knight": "SIR_HELIO",
+  "manifest_content": "The Voice OS pipeline routes audio through Kitten TTS on :8300. King Arthur enforces human operator authority. Mojo compiles GPU kernels for audio processing. Rust runs low-latency mixing on bare metal. SIR_HELIO synthesizes real-time audio dispatch.",
+  "manifest_sha256": "b9684809e98d33998e6a93727fdd05f775ba9167a5f33bc19bd8b633503940ce",
+  "triplets": [],
+  "created_at": "2026-09-19T12:34:34.439504+00:00"
+}

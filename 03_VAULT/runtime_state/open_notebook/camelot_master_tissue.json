@@ -1,0 +1,34 @@
+[
+  {
+    "knight_id": "CAMELOT_MASTER",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "cloudbrain_expansion",
+    "title": "WORLDTREE_CLOUDBRAIN_EXPANSION_CAMELOT_MASTER",
+    "content": "{\n  \"node\": \"CAMELOT_MASTER\",\n  \"uuid\": \"c5544902-cfb4-4864-b28e-1838b69b9814\",\n  \"role\": \"The Camelot-OS Master Construction Codex\",\n  \"worldtree_root\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n  \"vfs_path\": \"vfs://worldtree/knights/camelot_master/\",\n  \"status\": \"EXPANDED_SYNCHRONIZED\",\n  \"synchronized_with\": [\n    \"CAMELOT_V1000\",\n    \"INSPIRA_HIVE_IDE\",\n    \"UI_UX_MASTERY\"\n  ]\n}",
+    "vfs_path": "vfs://worldtree/knights/camelot_master/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_MASTER",
+    "open_viking_tether": "open_viking://worldtree/camelot_master",
+    "synced_at": "2026-09-08T08:10:44.607205+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_MASTER",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "system_tether",
+    "title": "CAMELOT_MASTER WorldTree Tether Anchor",
+    "content": "{\"knight_id\": \"CAMELOT_MASTER\", \"worldtree_home_id\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\", \"personal_notebook_id\": \"c5544902-cfb4-4864-b28e-1838b69b9814\", \"vfs_path\": \"vfs://worldtree/knights/camelot_master/tether.json\", \"mempalace_wing\": \"WING_WORLDTREE_CAMELOT_MASTER\", \"open_viking_node\": \"open_viking://worldtree/camelot_master\", \"open_notebook_local\": \"C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\open_notebook\\\\camelot_master_tissue.json\", \"tether_active\": true, \"timestamp\": \"2026-08-30T16:07:09.128306+00:00\"}",
+    "vfs_path": "vfs://worldtree/knights/camelot_master/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_MASTER",
+    "open_viking_tether": "open_viking://worldtree/camelot_master",
+    "updated_at": "2026-08-30T16:07:09.128346+00:00"
+  },
+  {
+    "knight_id": "CAMELOT_MASTER",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "notebook_uuid": "c5544902-cfb4-4864-b28e-1838b69b9814",
+    "version": "v1000.54-EXCALIBUR-A",
+    "mempalace_wing": "WING_WORLDTREE_CAMELOT_MASTER",
+    "vfs_path": "vfs://worldtree/knights/camelot_master/tether.json",
+    "status": "ALIGNED_MAX_VERSION",
+    "synced_at": "2026-08-27T22:49:50.659166+00:00"
+  }
+]

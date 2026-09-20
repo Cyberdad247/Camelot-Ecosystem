@@ -1,0 +1,109 @@
+{
+  "lockfile_version": "1.0.0",
+  "canonicalization_standard": "RFC_8785_JCS",
+  "contract_count": 16,
+  "lock_hash": "3486328cfafa7ea07f37a5c013f5ed49bc8b99e000814a8e1d2eb0e35433a3fa",
+  "shared_bindings": {
+    "ts_sha256": "fce9857c40433d4522fbafb7ea339253548a2bb03f96a178048d35c9c4f09d49",
+    "go_sha256": "e9c8fb1bab86221586297ef46ba225a85d1e1b17e92c3e3296c7235bb41b9a67",
+    "rust_sha256": "5f2fb43003988f1ea16e80d92b8034ab52c14b0787c11431103ac01052ad8856"
+  },
+  "schemas": {
+    "actor/1": {
+      "schema_file": "actor.schema.json",
+      "schema_version": "actor/1",
+      "schema_sha256": "4081820475213735191fe62d028bd9fa117a7f0ec82aff31b29d934eb00255ab",
+      "canonical_bytes_len": 1715
+    },
+    "tenant/1": {
+      "schema_file": "tenant.schema.json",
+      "schema_version": "camelot-tenant/1",
+      "schema_sha256": "1ad13620c6b1a8dbc161c800d44273b56f2f753d6db84f296b617f409435f730",
+      "canonical_bytes_len": 2111
+    },
+    "workspace/1": {
+      "schema_file": "workspace.schema.json",
+      "schema_version": "camelot-workspace/1",
+      "schema_sha256": "e07233f41c3fd3012562bea78b5ff3142f67ef6de6f4787c34b9f73674bbfc48",
+      "canonical_bytes_len": 1260
+    },
+    "task/1": {
+      "schema_file": "task.schema.json",
+      "schema_version": "camelot-task/1",
+      "schema_sha256": "ea46daf40d6d1d8ea3e6d1f393dbfc3f888ce347fe703beecbff5ead84932e59",
+      "canonical_bytes_len": 1918
+    },
+    "effect-manifest/1": {
+      "schema_file": "effect-manifest.schema.json",
+      "schema_version": "camelot-effect-manifest/1",
+      "schema_sha256": "0926a135ef66633dbebc49eb2b111e5d898253e2c5ee0dffcfe77757b9b89984",
+      "canonical_bytes_len": 3575
+    },
+    "policy-decision/1": {
+      "schema_file": "policy-decision.schema.json",
+      "schema_version": "camelot-policy-decision/1",
+      "schema_sha256": "2e560d537886206be85e38976e954330e60954a5205bf5aa35b3d78d8efdccec",
+      "canonical_bytes_len": 2238
+    },
+    "approval-certificate/1": {
+      "schema_file": "approval-certificate.schema.json",
+      "schema_version": "camelot-approval-certificate/1",
+      "schema_sha256": "6f617f9ca8055e695b4b767f6906a832ac54f8ce1a8dc1e669ab8f1a40497791",
+      "canonical_bytes_len": 1443
+    },
+    "capability-lease/1": {
+      "schema_file": "capability-lease.schema.json",
+      "schema_version": "camelot-lease/1",
+      "schema_sha256": "0a7230db9d20551bad1ee980bede9182a7c49456471082ea8f82173a43ac8aca",
+      "canonical_bytes_len": 6938
+    },
+    "vfs-attestation/2": {
+      "schema_file": "vfs-attestation.schema.json",
+      "schema_version": "camelot-vfs-attestation/1",
+      "schema_sha256": "3e69373c0764032b115f95a6a9ec50a9daa12ead996bef7910d10278449ff29b",
+      "canonical_bytes_len": 2367
+    },
+    "evidence-envelope/1": {
+      "schema_file": "evidence-envelope.schema.json",
+      "schema_version": "operator-evidence/1",
+      "schema_sha256": "1f442657239ff410e06effb61709ed5768511db50ac637a6e03d761290330b15",
+      "canonical_bytes_len": 1634
+    },
+    "gideon-verdict/1": {
+      "schema_file": "gideon-verdict.schema.json",
+      "schema_version": "camelot-gideon-verdict/1",
+      "schema_sha256": "faacb4c2e672931c0aebfaa0bbd085208492af23b6dc371c1d28099fc3d21b65",
+      "canonical_bytes_len": 1897
+    },
+    "arthur-resolution/1": {
+      "schema_file": "arthur-resolution.schema.json",
+      "schema_version": "camelot-arthur-resolution/1",
+      "schema_sha256": "46e0360e17a9680725c1317a92a5ea3800ebdce6adcf5bed8f8f0ed68eb972e1",
+      "canonical_bytes_len": 1371
+    },
+    "receipt/2": {
+      "schema_file": "receipt.schema.json",
+      "schema_version": "camelot-receipt/1",
+      "schema_sha256": "3c71056cb4a4e62eebf34e0b4c6aa7925344a0e4618e977ac1f0f65227c6592a",
+      "canonical_bytes_len": 5128
+    },
+    "authority-epoch/1": {
+      "schema_file": "authority-epoch.schema.json",
+      "schema_version": "camelot-authority-epoch/1",
+      "schema_sha256": "c2884005142d56598b2222a3606e2c290380e62fe7751018f8cc4b35b9899afc",
+      "canonical_bytes_len": 2016
+    },
+    "promotion/1": {
+      "schema_file": "promotion.schema.json",
+      "schema_version": "camelot-promotion/1",
+      "schema_sha256": "ed04a59725a4487ab32b0c3ead52eb42e1fa916b285ee22c7628079c3b5e12a7",
+      "canonical_bytes_len": 2294
+    },
+    "workspace-event/1": {
+      "schema_file": "workspace-event.schema.json",
+      "schema_version": "camelot-workspace-event/1",
+      "schema_sha256": "9f4fca32e62d9fcdbf0434a31dfbc417dae4886b22fd6615c48c4b2c84248b31",
+      "canonical_bytes_len": 1197
+    }
+  }
+}

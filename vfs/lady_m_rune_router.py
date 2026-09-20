@@ -17,7 +17,7 @@ import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 LOG = logging.getLogger("LadyM_RuneRouter")
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent

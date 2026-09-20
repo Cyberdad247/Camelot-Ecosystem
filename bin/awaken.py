@@ -13,6 +13,15 @@ import os
 import sys
 from pathlib import Path
 
+if sys.platform == "win32":
+    try:
+        if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+            sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+            sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 # Add control_plane to path
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 from control_plane.boot_sequence import _C
@@ -36,6 +45,12 @@ def main():
     ap.add_argument("--status", action="store_true", help="Run boot phases, print status, exit")
     ap.add_argument("--json", action="store_true", help="Machine-readable JSON output")
     ap.add_argument("--quick", action="store_true", help="Terse single-line summary")
+    ap.add_argument("--snapshot", action="store_true",
+                    help="Serve fresh boot_snapshot.json when ports still live (<ttl), else full boot")
+    ap.add_argument("--snapshot-ttl", type=int, default=900,
+                    help="Snapshot freshness in seconds (default 900)")
+    ap.add_argument("--skip", default="",
+                    help="Comma-separated phase substrings to skip (also AWAKEN_SKIP)")
     ap.add_argument("--no-hud", action="store_true", help="Skip HUD, enter REPL")
     ap.add_argument("--no-venv-bootstrap", action="store_true",
                     help="Don't auto-create venv if missing")
@@ -52,6 +67,43 @@ def main():
 
     home = boot_sequence._detect_home()
     os.environ["CAMELOT_OS_HOME"] = str(home)
+    if args.skip:
+        prior = os.environ.get("AWAKEN_SKIP", "")
+        merged = ",".join(t for t in [prior, args.skip] if t)
+        os.environ["AWAKEN_SKIP"] = merged
+
+    # Thread and memory bounds for host (caps BLAS thread pool allocations)
+    for _k, _v in [
+        ("OPENBLAS_NUM_THREADS", "2"),
+        ("OMP_NUM_THREADS", "2"),
+        ("MKL_NUM_THREADS", "2"),
+        ("NUMEXPR_NUM_THREADS", "2"),
+        ("VECLIB_MAXIMUM_THREADS", "2"),
+    ]:
+        os.environ.setdefault(_k, _v)
+
+    # Phase 0: Machine-Actionable VKG Crystal Layer Gate
+    crystal_bin = home / "bin" / ("camelot-vkg-crystal.exe" if sys.platform == "win32" else "camelot-vkg-crystal")
+    if crystal_bin.exists():
+        import subprocess
+        res = subprocess.run([str(crystal_bin), "--verify"], capture_output=True, text=True, encoding="utf-8", errors="replace")
+        if res.returncode != 0:
+            sys.stderr.write(f"{_C['r']}AWAKEN: VKG Crystal gate verification failed:{_C['x']}\n{res.stderr or res.stdout}\n")
+            sys.exit(78)
+        else:
+            if not args.quick and not args.json:
+                print(f"{_C['g']}[VKG_CRYSTAL] All 6 machine-actionable layers verified.{_C['x']}")
+
+    if args.snapshot:
+        snap = boot_sequence.try_snapshot_boot(home, ttl_s=args.snapshot_ttl)
+        if snap is not None:
+            if args.json:
+                print(json.dumps(snap, indent=2))
+            else:
+                s = snap.get("_summary", {})
+                print(f"{_C['g']}AWAKEN (snapshot {s.get('snapshot_age_s', '?')}s old) "
+                      f"{s.get('required_ok', '?')}/{s.get('required_total', '?')} required green{_C['x']}")
+            sys.exit(0)
 
     if args.json:
         results = boot_sequence.run_boot(home, quick=True)

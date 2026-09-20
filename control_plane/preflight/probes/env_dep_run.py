@@ -8,7 +8,6 @@ returns JSON line on stdout with `{"all_ok": bool, ...details}`. Exit 0 iff all_
 from __future__ import annotations
 import json
 import sys
-import os
 import shutil
 import platform
 

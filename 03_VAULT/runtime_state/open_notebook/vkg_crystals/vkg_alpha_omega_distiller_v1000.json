@@ -1,0 +1,16 @@
+{
+  "crystal_id": "\u03a9_ALPHA_OMEGA_DISTILLER_V1000",
+  "spec": "TOON Spec v3.3-PRIME",
+  "protocol": "Omega_DISTILL_AND_RECONSTRUCT v214.2.0",
+  "target_node": "8c656cfa-a189-409e-a72d-07692a47f17e",
+  "created_at": "2026-09-14T04:59:51.423747+00:00",
+  "renormalization_stats": {
+    "total_sources": 315,
+    "grade_a_core": 72,
+    "grade_b_frameworks": 71,
+    "grade_c_peripheral": 114,
+    "grade_d_legacy": 25,
+    "grade_f_noise": 33,
+    "noise_filter_efficiency": "74.8% Mutual Information Efficiency"
+  }
+}

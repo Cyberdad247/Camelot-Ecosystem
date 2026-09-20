@@ -84,16 +84,29 @@ def triage(records: Iterable[FileRecord]) -> GhostReport:
         lines = text.splitlines()
 
         # Secret scan
+        is_test_file = any(p in rec.rel.lower() for p in ("/test/", "/tests/", "/fixtures/", "test_", "_test.", ".test.", "mock_")) or rec.ext == ".md"
         for name, pat in _SECRET_PATTERNS:
             for m in pat.finditer(text):
+                val = m.group(0)
+                val_lower = val.lower()
+                is_mock = is_test_file or any(h in val_lower for h in ("dummy", "mock", "example", "placeholder", "test", "your-", "xxx", "sample", "0000", "1234", "abcdef"))
                 line_no = text[: m.start()].count("\n") + 1
-                report.flags.append(GhostFlag(
-                    kind="secret",
-                    file=rec.rel,
-                    line=line_no,
-                    detail=f"{name}: {_mask(m.group(0))}",
-                    severity="critical",
-                ))
+                if is_mock:
+                    report.flags.append(GhostFlag(
+                        kind="mock_secret",
+                        file=rec.rel,
+                        line=line_no,
+                        detail=f"{name} (test/fixture): {_mask(val)}",
+                        severity="info",
+                    ))
+                else:
+                    report.flags.append(GhostFlag(
+                        kind="secret",
+                        file=rec.rel,
+                        line=line_no,
+                        detail=f"{name}: {_mask(val)}",
+                        severity="critical",
+                    ))
 
         # TODO/FIXME scan
         for i, line in enumerate(lines, 1):

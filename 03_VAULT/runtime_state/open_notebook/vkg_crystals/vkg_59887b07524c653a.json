@@ -1,0 +1,12 @@
+{
+  "crystal_id": "VKG_59887B07524C653A",
+  "notebook_id": "48e475268a143741",
+  "notebook_title": "Test Multi-Agent Platform Study",
+  "sources_count": 23,
+  "category": "AI_MULTIAGENT_RESEARCH",
+  "knight": "SIR_BORIS",
+  "manifest_content": "Mojo compiles GPU. Rust runs on bare metal.",
+  "manifest_sha256": "add5d4a8b9da4dcfef4e332c74a7cca79708baf26e92de9eb96b876b050036f4",
+  "triplets": [],
+  "created_at": "2026-09-19T12:34:48.784258+00:00"
+}

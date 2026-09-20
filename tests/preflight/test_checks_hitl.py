@@ -13,7 +13,6 @@ behave differently — they're tagged in the catalog, not coded into the
 probe module. Tests here focus on probe correctness for the same probes.
 """
 from datetime import datetime, timezone, timedelta
-from pathlib import Path
 import os
 
 from control_plane.preflight.probes import (

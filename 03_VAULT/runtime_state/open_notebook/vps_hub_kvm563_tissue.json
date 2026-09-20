@@ -1,0 +1,121 @@
+[
+  {
+    "node_name": "vps_hub_kvm563",
+    "host_server": "KVM563",
+    "vm_id": "vps3573819",
+    "public_ip": "162.35.107.134",
+    "tailscale_ip": "100.110.180.18",
+    "tailscale_service_ip": "100.110.180.18",
+    "tailscale_hostname": "vps-camelot-hub",
+    "assigned_knight": "HERMES_PRIME",
+    "hermes_prime_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+    "co_guardian": "SIR_HEIMDALL",
+    "heimdall_uuid": "3205f189-91da-4272-96a9-3641fd642763",
+    "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "vfs_wing": "WING_WORLDTREE_VPS_HUB",
+    "version": "Living Camelot-OS v1000 MAX Compendium",
+    "deployed_repository": "https://github.com/Cyberdad247/Camelot-VPS.git",
+    "deployed_branch": "main",
+    "deployed_commit": "27e66d0113879dc39b8122a51284624bcb95e692",
+    "deployed_commit_summary": "feat(vps-hub): implement Omni-Voice DAG, VPS Nexus deployment, and WorldTree integration",
+    "deployed_commit_verified_at": "2026-09-20T01:18:15.571274+00:00",
+    "deployed_commit_verification": "live ssh git rev-parse probe",
+    "last_delivery_id": "del_34aed52a",
+    "services": {
+      "caddy_worldtree_gateway": 80,
+      "bifrost_gateway": 3001,
+      "multivoice_router": 7680,
+      "honcho_self_hosted": 8000,
+      "vps_mobile_mesh_bridge": 8095,
+      "webhook_receiver": 9000
+    },
+    "inference_links": {
+      "cliproxy_sie": {
+        "selector": "cliproxy:default",
+        "backend": "cliproxy",
+        "model_tag": "auto-fallback",
+        "service": "CLIProxyAPI",
+        "local_base_url": "http://127.0.0.1:8080/v1",
+        "bifrost_gateway": "http://100.110.180.18:3001",
+        "mesh_bridge": "http://100.110.180.18:8095",
+        "bifrost_bridge": {
+          "name": "Bifrost Bridge",
+          "module": "control_plane/dispatch/bifrost.py",
+          "gateway_url": "http://100.110.180.18:3001",
+          "mesh_bridge_url": "http://100.110.180.18:8095",
+          "governed_surface": "bifrost_bridge",
+          "co_governors": [
+            "HERMES_PRIME",
+            "SIR_HEIMDALL"
+          ],
+          "auth": {
+            "token_header": "x-camelot-token",
+            "lease_header": "X-Camelot-Lease-ID",
+            "secret_values_serialized": false
+          }
+        },
+        "vps_public_ip": "162.35.107.134",
+        "vps_node": "vps_hub_kvm563",
+        "governing_knight": "HERMES_PRIME",
+        "hermes_prime_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+        "co_guardian": "SIR_HEIMDALL",
+        "air_gapped": false,
+        "loopback_only_upstream": true,
+        "credential_env": "CLIPROXY_API_KEY",
+        "secret_values_serialized": false
+      },
+      "vllm_deepseek_flash": {
+        "selector": "vllm:deepseek-ai/DeepSeek-V4.1-Flash",
+        "backend": "vllm",
+        "model_tag": "deepseek-ai/DeepSeek-V4.1-Flash",
+        "manifest_alias": "deepseek-flash",
+        "service": "vLLM",
+        "local_base_url": "http://127.0.0.1:8000/v1",
+        "bifrost_route": "/bifrost/models/deepseek-flash",
+        "bifrost_gateway": "http://100.110.180.18:3001",
+        "mesh_bridge": "http://100.110.180.18:8095",
+        "vps_public_ip": "162.35.107.134",
+        "vps_node": "vps_hub_kvm563",
+        "governing_knight": "HERMES_PRIME",
+        "hermes_prime_uuid": "28f89cb6-5048-4b5d-9e94-376082d24744",
+        "co_guardian": "SIR_HEIMDALL",
+        "air_gapped": false,
+        "secret_values_serialized": false
+      }
+    },
+    "services_state": {
+      "caddy_worldtree_gateway": "RUNNING (live probe)",
+      "bifrost_gateway": "RUNNING (live probe)",
+      "multivoice_router": "STOPPED (live probe: port closed)",
+      "honcho_self_hosted": "STOPPED (live probe: port closed)",
+      "vps_mobile_mesh_bridge": "RUNNING (live probe)",
+      "webhook_receiver": "STOPPED (live probe: port closed)"
+    },
+    "live_probes": {
+      "port_80": "OPEN",
+      "port_3001": "OPEN",
+      "port_7680": "CLOSED",
+      "port_8000": "CLOSED",
+      "port_8095": "OPEN",
+      "port_9000": "CLOSED",
+      "probe_timestamp": "2026-09-20T01:18:15.571274+00:00"
+    },
+    "drift": {
+      "detected": true,
+      "stopped_services": [
+        "multivoice_router",
+        "honcho_self_hosted",
+        "webhook_receiver"
+      ],
+      "summary": "3 recorded service(s) not reachable"
+    },
+    "status": "MERGED_MAIN_UNIFIED",
+    "timestamp": "2026-09-20T01:18:10.614549+00:00",
+    "last_synced": "2026-09-20T01:18:10.614549+00:00",
+    "active_cartridges": [
+      "omarchy-vps-hermes-v1",
+      "vps-hub-cartridge-v1"
+    ],
+    "latest_assimilation_delivery": "asm_9b05c1596b"
+  }
+]

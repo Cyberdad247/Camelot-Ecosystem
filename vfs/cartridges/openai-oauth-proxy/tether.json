@@ -1,0 +1,33 @@
+{
+  "cartridge_id": "openai-oauth-proxy",
+  "vfs_uri": "vfs://worldtree/cartridges/openai-oauth-proxy/",
+  "cloudbrain_notebook_id": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
+  "cloudbrain_title": "Sovereign_Workspace: SIR_GHOST",
+  "bound_knights": [
+    "SIR_GHOST",
+    "SIR_HERMES",
+    "SIR_HEIMDALL"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "pkce_oauth",
+    "token_rotation",
+    "air_gap_proxy",
+    "auth_sanitization",
+    "ephemeral_tokens"
+  ],
+  "entrypoints": [
+    "authorize",
+    "token_exchange",
+    "proxy"
+  ],
+  "physical_source_path": "cartridges/openai-oauth-proxy",
+  "files": [
+    "manifest.json",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T01:17:15.245130+00:00"
+}

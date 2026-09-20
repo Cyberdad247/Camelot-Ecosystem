@@ -1,0 +1,31 @@
+[Unit]
+Description=HERMES_PRIME & PALADIN_HEIMDALL — Autonomous Bifrost Sentinel & Z3 Gatekeeper
+After=network.target tailscaled.service
+Wants=tailscaled.service
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/camelot-ecosystem
+ExecStart=/usr/bin/python3 -m control_plane.infra.hermes_heimdall_sentinel
+Restart=always
+RestartSec=5s
+Environment=PYTHONUNBUFFERED=1
+Environment=VPS_BRIDGE_PORT=8095
+Environment=BIFROST_PORT=3001
+Environment=CAMELOT_OS_HOME=/opt/camelot-ecosystem
+
+# Hardware Scarcity Caps (cgroups v2) - 8GB Scarcity Protection
+MemoryAccounting=true
+MemoryMax=384M
+CPUAccounting=true
+CPUQuota=60%
+
+# Security & Sandboxing
+ProtectSystem=full
+ProtectHome=read-only
+PrivateTmp=true
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

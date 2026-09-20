@@ -35,6 +35,13 @@
       "type": "integer",
       "minimum": 0
     },
+    "authority_vector": {
+      "description": "6-dimensional authority vector tuple: [E_leadership, R_policy, R_revocation, R_registry, R_identity, R_contract].",
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 },
+      "minItems": 6,
+      "maxItems": 6
+    },
     "manifest_hash": {
       "type": "string",
       "pattern": "^sha256:[0-9a-fA-F]{64}$"

@@ -40,10 +40,29 @@
       "tag": "qwen2.5-coder:3b",
       "air_gapped": false
     },
+    "cliproxy:default": {
+      "backend": "cliproxy",
+      "tag": "gemini-3.7-flash-tiered",
+      "air_gapped": false,
+      "notes": "Opt-in loopback CLIProxyAPI route for high-reasoning and swarm work — pinned to live gemini tiered model (auto-fallback 502 on this host)",
+      "fallback_tag": "auto-fallback"
+    },
     "gemma3:4b": {
       "backend": "ollama",
       "tag": "gemma3:4b",
       "air_gapped": false
+    },
+    "deepseek-flash": {
+      "backend": "vllm",
+      "tag": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "air_gapped": false,
+      "notes": "vLLM served DeepSeek Flash model via OpenAI-compatible endpoint"
+    },
+    "deepseek-ai/DeepSeek-V4.1-Flash": {
+      "backend": "vllm",
+      "tag": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "air_gapped": false,
+      "notes": "Full identifier for vLLM DeepSeek-V4.1-Flash"
     }
   }
 }

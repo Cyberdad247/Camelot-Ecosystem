@@ -99,9 +99,13 @@ func (r *APEEv6Router) matchRoute(intent string, skills []vault.Skill) route {
 // InvokeKnightWithSkills dispatches the intent to the Knight's bound provider,
 // injecting the zero-copy skill region.
 func (r *APEEv6Router) InvokeKnightWithSkills(ctx context.Context, knight, intent string, fd *zeroclaw.SkillFD) (string, error) {
+	norm := strings.ToLower(knight)
+	if norm == "sir_helio" {
+		norm = "sir_helios"
+	}
 	provName := r.fallback.provider
 	for _, rt := range r.routes {
-		if rt.knight == knight {
+		if rt.knight == norm {
 			provName = rt.provider
 			break
 		}

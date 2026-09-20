@@ -3,7 +3,11 @@
   hosts: redis_cluster
   become: true
   vars:
-    redis_password: "MERLIN_SUPER_SECRET_REDIS_AUTH_9981"
+    # Externalized: never commit a password here. Provide via environment
+    # (export REDIS_PASSWORD=... on the operator host, ideally sourced from
+    # the SecretManager store / edge VPS bus canonical secret REDIS_PASSWORD)
+    # or via ansible-vault. Fails closed if unset.
+    redis_password: "{{ lookup('env', 'REDIS_PASSWORD') | mandatory('REDIS_PASSWORD env var must be set (or use ansible-vault)') }}"
     master_node_ip: "{{ hostvars[groups['redis_master'][0]]['ansible_host'] }}"
 
   tasks:

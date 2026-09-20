@@ -1,0 +1,242 @@
+# SPDX-License-Identifier: MIT
+# Camelot-OS Bio-Kinetic Swarm & Horde Skill Manifest
+# Schema: camelot-bio-swarm-skill-manifest/2.0
+version: "2.0.0"
+swarm_profile: "Ω_BIO_KINETIC_SWARM_APEX_20"
+authority: "ARTHUR_OMEGA"
+gatekeeper: "ANYA_OMEGA"
+hardware_ceiling: "8GB_SCARCITY_ENFORCED"
+ipc_transport: "ZeroClaw_memfd_create_slabs + NullClaw_Zig"
+
+defaults:
+  cgroup_memory_max_mb: 32
+  execution_timeout_sec: 45
+  isolation_mode: "linux_user_namespace_unshare"
+  progressive_tier_default: "L0_METADATA"
+
+engines:
+  - id: "bio_apis"
+    rune: "//APIS"
+    archetype: "Bio-Kinetic Swarm & Horde Conductor"
+    executor: "LADY_APIS"
+    cgroup_memory_max_mb: 26
+    skills:
+      - name: "SKILL_APIS_BIO_KINETIC_HARNESS"
+        description: "Postural modulation between Passive SWARM and Aggressive HORDE"
+      - name: "Batch_Creation_Coordinator"
+        description: "Parallel Map-Reduce dispatch of SSU tasks across Formica & Beaver horde"
+      - name: "Ancestral_Chimera_Protocol"
+        description: "3-round war-room research & synthesis tethered to CloudBrain ba87d454"
+      - name: "Camouflage_Cipher_Envelope"
+        description: "AES-256-GCM obfuscation disguising swarm state as innocent dev telemetry"
+    trigger: "//APIS, //HORDE, //BATCH_CREATE, or //CHIMERA directives"
+
+  - id: "bio_formica"
+    rune: "//FORMICA"
+    archetype: "Parallel Map-Reduce Worker Ants"
+    executor: "LADY_APIS"
+    cgroup_memory_max_mb: 12
+    skills:
+      - name: "Micro_Map_Reduce"
+        description: "Concurrent AST execution across 15-50 micro-instances (150-token lifecycle)"
+    trigger: "Parallel batch refactoring / horde execution"
+
+  - id: "bio_beaver"
+    rune: "//BEAVER"
+    archetype: "Speed & Utility Construction"
+    executor: "SIR_BORIS"
+    cgroup_memory_max_mb: 16
+    skills:
+      - name: "SSU_Generation"
+        description: "Smallest Shippable Unit code extraction with zero dead branches"
+      - name: "Strict_DRY_Audit"
+        description: "AST-level deduplication and sub-routine factoring"
+      - name: "Layout_12Col_Validator"
+        description: "Tailwind v4 luxury minimalist brutalist 12-column grid alignment"
+    trigger: "!Forge sprint tasks"
+
+  - id: "bio_gorilla"
+    rune: "//GORILLA"
+    archetype: "Heavy-Lifting API & SDK Integration"
+    executor: "SIR_FORGE"
+    cgroup_memory_max_mb: 28
+    skills:
+      - name: "Zero_Hallucination_Tool_Use"
+        description: "Strict typed connectivity to AWS, Stripe, CloudBrain, and GraphQL"
+    trigger: "Complex external API integration"
+
+  - id: "bio_arachne"
+    rune: "//ARACHNE"
+    archetype: "Neural Web Orchestration & DOM Sentry"
+    executor: "SIR_BORIS"
+    cgroup_memory_max_mb: 32
+    skills:
+      - name: "AsyncStealthySession"
+        description: "Headless browser session with stealth fingerprint masking"
+      - name: "Visual_Layout_Parsing"
+        description: "DOM tree visual bounding box extraction"
+    trigger: "Dynamic web automation pipelines"
+
+  - id: "bio_simian"
+    rune: "//SIMIAN"
+    archetype: "Chaos Monkey & Adversarial Fault Injection"
+    executor: "SIR_SENTINEL"
+    cgroup_memory_max_mb: 20
+    skills:
+      - name: "Entropy_Injection"
+        description: "Simulate port crashes, packet drops, and table corruptions to verify auto-heal"
+    trigger: "Pre-deployment resilience testing"
+
+  - id: "bio_owl"
+    rune: "//OWL"
+    archetype: "High-Logic Strategy & ToT Optimization"
+    executor: "MERLIN_OMEGA"
+    cgroup_memory_max_mb: 32
+    skills:
+      - name: "Tree_of_Thoughts"
+        description: "Multi-branch exploration with backtracking"
+      - name: "Vidal_Foresight_Simulation"
+        description: "Future state trajectory prediction"
+    trigger: "Complex architectural impasses"
+
+  - id: "bio_octopus"
+    rune: "//OCTOPUS"
+    archetype: "Multi-Threaded AST Repair & Self-Healing"
+    executor: "SIR_DEBUG"
+    cgroup_memory_max_mb: 30
+    skills:
+      - name: "Multi_Vector_Diagnosis"
+        description: "Simultaneous stack-trace and memory leak root-cause repair"
+    trigger: "Systemic build exceptions / PIV failure"
+
+  - id: "bio_mantis"
+    rune: "//MANTIS"
+    archetype: "Surgical AST Dissection & Pruning"
+    executor: "SIR_CODEX"
+    cgroup_memory_max_mb: 16
+    skills:
+      - name: "AST_Micro_Scythe"
+        description: "Concrete syntax tree precision excision of unused imports and dead blocks"
+    trigger: "Bundle optimization / dead-code audits"
+
+  - id: "bio_falcon"
+    rune: "//FALCON"
+    archetype: "Sub-10ms Line-Rate Telemetry Interception"
+    executor: "SIR_LUCAS"
+    cgroup_memory_max_mb: 14
+    skills:
+      - name: "Fast_Socket_Sniffer"
+        description: "Sub-10ms packet and stream anomaly capture"
+    trigger: "Live telemetry and packet verification"
+
+  - id: "bio_chameleon"
+    rune: "//CHAMELEON"
+    archetype: "Polymorphic Theme & Layout Adaptation"
+    executor: "LADY_GUINEVERE"
+    cgroup_memory_max_mb: 22
+    skills:
+      - name: "Adaptive_Brutalism_Refactor"
+        description: "Dynamically adapting UI tokens between dark, light, and HUD viewports"
+    trigger: "UI theme shift & adaptive layout requests"
+
+  - id: "bio_elephant"
+    rune: "//ELEPHANT"
+    archetype: "Long-Term MemPalace Vector & FTS5 Indexing"
+    executor: "LADY_MNEMOSYNE"
+    cgroup_memory_max_mb: 28
+    skills:
+      - name: "Unforgettable_Index"
+        description: "Zero context-rot vector persistence across sessions"
+    trigger: "Cross-session memory retrieval"
+
+  - id: "bio_lobo"
+    rune: "//LOBO"
+    archetype: "Distributed Pack Quorum & Revenue Strikes"
+    executor: "KNIGHT_STRATEGOS"
+    cgroup_memory_max_mb: 18
+    skills:
+      - name: "Speed_To_Revenue_Filter"
+        description: "High-probability commercial opportunity detection"
+    trigger: "Commercial pipeline optimization"
+
+  - id: "bio_vulpis"
+    rune: "//VULPIS"
+    archetype: "Growth Hacking, SEO/GEO & Distribution"
+    executor: "LADY_GUINEVERE"
+    cgroup_memory_max_mb: 20
+    skills:
+      - name: "SEO_GEO_Optimization"
+        description: "Generative Engine Optimization and search entity grounding"
+    trigger: "Content distribution deployment"
+
+  - id: "bio_phoenix"
+    rune: "//PHOENIX"
+    archetype: "Automated Failure Recovery & ReZero"
+    executor: "SIR_DEBUG"
+    cgroup_memory_max_mb: 24
+    skills:
+      - name: "ReZero_Protocol"
+        description: "Context wipe and restore to last certified checkpoint"
+    trigger: "System crash or unrecoverable error"
+
+  - id: "bio_corvus"
+    rune: "//CORVUS"
+    archetype: "Dead-Drop Forensic Scavenging & Reverse Engineering"
+    executor: "SIR_CODEX"
+    cgroup_memory_max_mb: 22
+    skills:
+      - name: "DeadDrop_Extraction"
+        description: "Isolated recovery of orphaned scratch files and uncommitted diffs"
+      - name: "Reverse_Engineering_Forensics"
+        description: "Historical commit analysis, AST symbol decomposition, dead-drop extraction, and artifact-to-skill synthesis"
+    trigger: "Legacy codebase, orphaned vector audit, or reverse engineering strike"
+
+  - id: "bio_ghost"
+    rune: "//GHOST"
+    archetype: "Zero-Trust Stealth, Air-Gap & Tor Rotation"
+    executor: "SIR_GHOST"
+    cgroup_memory_max_mb: 28
+    skills:
+      - name: "AirGapped_Execution"
+        description: "Offline local container inference (Ollama qwen2.5-coder:7b)"
+    trigger: "OSINT or sensitive extraction"
+
+  - id: "bio_delphinus"
+    rune: "//DELPHINUS"
+    archetype: "Acoustic Resonance & Voice S2S Routing"
+    executor: "SIR_SONUS"
+    cgroup_memory_max_mb: 26
+    skills:
+      - name: "Aoede_S2S_Streaming"
+        description: "Sub-100ms duplex audio synthesis and phonetic analysis"
+    trigger: "Real-time speech-to-speech interaction"
+
+  - id: "bio_scorpio"
+    rune: "//SCORPIO"
+    archetype: "GIDEON Forensic Risk Needle & Security Gate"
+    executor: "SIR_GIDEON"
+    cgroup_memory_max_mb: 24
+    skills:
+      - name: "Gideon_13Gate_Needle"
+        description: "Adversarial compliance audit and taint puncture"
+    trigger: "Pre-merge security sign-off"
+
+  - id: "bio_octavian"
+    rune: "//OCTAVIAN"
+    archetype: "Parallel Multi-Terminal PTY Execution (:8400)"
+    executor: "SIR_OCTAVIAN"
+    cgroup_memory_max_mb: 28
+    skills:
+      - name: "SplitBrain_IPC_Sync"
+        description: "ZeroClaw memfd lock synchronization across concurrent processes"
+    trigger: "Multi-threaded swarm deployment"
+
+  - id: "bio_alchemist"
+    rune: "//ALCHEMIST"
+    archetype: "TurboQuant 3-Bit Quantization & Compression"
+    executor: "SIR_ALCHEMIST"
+    cgroup_memory_max_mb: 20
+    skills:
+      - name: "BitNet_Quantization"
+        description: "1.58-bit and 3-bit weights compression under 8GB RAM protocol"
+    trigger: "Model quantization & token reduction"

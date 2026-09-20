@@ -1,0 +1,4 @@
+#!/data/data/com.termux/files/usr/bin/sh
+set -eu
+: "${CAMELOT_EDGE_HUB_URL:?CAMELOT_EDGE_HUB_URL must be set to the Tailnet hub URL}"
+exec "$HOME/.local/bin/camelot-edge" refresh --state-dir "$HOME/.camelot-edge"

@@ -9,6 +9,19 @@ export interface SwarmStatus {
   completed: number;
 }
 
+// Omni-Voice D.A.G. decision for the latest utterance: which lane the router
+// took (runic bypass vs. Softmax persona) and with what confidence. Mirrors the
+// subset of `routeOmniVoice()` that the voice HUD renders.
+export interface OmniVoiceTelemetry {
+  status: string;
+  path: string;
+  knight: string | null;
+  tau: number | null;
+  confidence: number | null;
+  /** Rune a deterministic bypass delegated to; null on the Softmax lane. */
+  delegatesRune: string | null;
+}
+
 // Unified, in-memory business metrics broadcast to the PWA as STATE_UPDATE.
 export interface SovereignState {
   portfolioValuation: number;
@@ -25,6 +38,8 @@ export interface SovereignState {
   lastLane: string | null;
   lastLatencyMs: number | null;
   lastRezeroed: boolean;
+  // Omni-Voice D.A.G. ingress routing decision for the latest utterance.
+  lastOmniVoice: OmniVoiceTelemetry | null;
   updatedAt: string;
   swarm: SwarmStatus;
 }
@@ -52,6 +67,7 @@ export const state: SovereignState = {
   lastLane: null,
   lastLatencyMs: null,
   lastRezeroed: false,
+  lastOmniVoice: null,
   updatedAt: new Date().toISOString(),
   swarm: { active: false, tasks: 0, completed: 0 },
 };
@@ -100,6 +116,22 @@ export function setRouteTelemetry(
   s.lastLatencyMs = telemetry.latencyMs;
   s.lastRezeroed = telemetry.rezeroed;
   s.updatedAt = new Date().toISOString();
+  return s;
+}
+
+/**
+ * Record the Omni-Voice D.A.G. routing decision for the current utterance.
+ *
+ * Deliberately does NOT bump `updatedAt`. The client treats an `updatedAt`
+ * change as "a reply is ready to speak", and a routing decision is a sub-signal
+ * of the utterance rather than a reply of its own — so a `ᛟ_` control token
+ * updates the HUD without triggering speech.
+ */
+export function setOmniVoiceTelemetry(
+  telemetry: OmniVoiceTelemetry,
+  s: SovereignState = state,
+): SovereignState {
+  s.lastOmniVoice = telemetry;
   return s;
 }
 

@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-import { randomUUID } from 'node:crypto';
+import { randomUUID, timingSafeEqual } from 'node:crypto';
 import http from 'node:http';
 import express, { type Request } from 'express';
 import rateLimit from 'express-rate-limit';
@@ -10,9 +10,10 @@ import { SWARM_EVENTS, publishHermes } from './hermes';
 import { type Command, parseCommand } from './nlp';
 import { MicrocubicMatrix } from './microcubic';
 import { type RouteOutcome, route } from './router';
+import { routeOmniVoice } from './omniVoice';
 import { z } from 'zod';
 import { SignatureError, verifyActionSignature, verifyWebhookSignature } from './security';
-import { applyCommand, setRouteTelemetry, snapshot, state } from './state';
+import { applyCommand, setOmniVoiceTelemetry, setRouteTelemetry, snapshot, state } from './state';
 import { issueSignedAction } from './issuance';
 import { createOperatorBff } from './operator/bff';
 import { InMemoryEventStore } from './operator/receipts';
@@ -30,6 +31,7 @@ interface RawBodyRequest extends Request {
 
 const PORT = Number(process.env.PORT) || 3001;
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET ?? '';
+const MESH_TELEMETRY_TOKEN = process.env.BIFROST_MESH_TOKEN ?? '';
 
 // The Helios/Swarm AI path is opt-in: it needs a Gemini key and makes live
 // model calls. When disabled, the gateway runs purely on the deterministic NLP
@@ -78,15 +80,77 @@ const operatorBff = createOperatorBff({
   requiredEvidencePresent: (ref: string) => ref.startsWith('receipt://'),
   gideonVerdict: () => 'pass' as const,
   vfsEvidenceOk: () => true,
+  broadcastWs: (envelope) => {
+    const msg = JSON.stringify({ type: 'OPERATOR_EVIDENCE', payload: envelope });
+    for (const client of wss.clients) {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(msg);
+      }
+    }
+  },
 });
 app.use('/v1/operator', operatorBff);
+
+// ── Canonical Tailscale Mesh Node Inventory ──
+// Must agree with control_plane/infra/mesh_topology.py. `camelot-relay-modal`
+// and `kba-services` were listed here and are absent from the tailnet entirely;
+// the hub was missing. tests/test_mesh_topology_single_source.py guards this set.
+export const TAILSCALE_MESH_NODES = [
+  { id: 'cybertronia', name: 'cybertronia', ip: '100.118.224.52', role: 'Primary Windows Orchestrator & Local VFS Factory', status: 'ACTIVE' },
+  { id: 'vashawns-s26-ultra', name: 'vashawns-s26-ultra', ip: '100.106.246.126', role: 'Excalibur Command Center (Kinetic Mobile Sentinel)', status: 'ACTIVE' },
+  { id: 'fothers-camelot', name: 'fothers-camelot', ip: '100.121.48.50', role: 'Windows Sovereign Secondary Node', status: 'ACTIVE' },
+  { id: 'lakesha', name: 'lakesha', ip: '100.100.155.55', role: 'Lakisha Voice OS Host', status: 'ACTIVE' },
+  { id: 'vps-camelot-hub', name: 'vps-camelot-hub', ip: '100.110.180.18', role: 'Camelot-OS Hub & Control Plane (KVM563)', status: 'ACTIVE', governingKnight: 'HERMES_PRIME' },
+  { id: 'macbook-pro-3', name: 'macbook-pro-3', ip: '100.113.101.43', role: 'macOS Workstation (exit node; role unconfirmed)', status: 'ACTIVE' },
+  { id: 'motorola-moto-g-power', name: 'motorola-moto-g-power-5g---2024', ip: '100.89.129.105', role: 'Auxiliary Mobile Sentinel & Backup Telemetry Relay', status: 'ACTIVE', governingKnight: 'SIR_HEIMDALL' },
+];
 
 // ── Health check (graceful deploys / load balancers) ──
 app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'ok', clients: wss.clients.size, helios: ENABLE_HELIOS });
 });
 
+// ── Mesh Topology Endpoints ──
+app.get(['/mesh', '/api/mesh', '/api/mesh/nodes'], requireMeshTelemetryAuth, (_req, res) => {
+  res.status(200).json({
+    status: 'ONLINE',
+    account: 'Cyberdad247@github',
+    nodeCount: TAILSCALE_MESH_NODES.length,
+    nodes: TAILSCALE_MESH_NODES,
+  });
+});
+
+app.get(['/api/mesh/moto', '/api/moto', '/telemetry/moto'], requireMeshTelemetryAuth, (_req, res) => {
+  const motoNode = TAILSCALE_MESH_NODES.find((n) => n.id === 'motorola-moto-g-power');
+  res.status(200).json({
+    node: motoNode,
+    telemetry: {
+      status: 'ONLINE_STANDBY',
+      role: 'Auxiliary Mobile Sentinel & Backup Telemetry Relay',
+      tailscaleIp: '100.89.129.105',
+      primaryCockpit: '100.106.246.126',
+      governingKnight: 'SIR_HEIMDALL',
+      activePorts: { auxSentinelRelay: 8092, termuxSsh: 8023 },
+    },
+  });
+});
+
 // ── Broadcast helper: push unified state to every open client ──
+function requireMeshTelemetryAuth(req: Request, res: express.Response, next: express.NextFunction): void {
+  const provided = req.header('x-camelot-token')?.replace(/^Bearer\s+/i, '') ?? '';
+  if (!MESH_TELEMETRY_TOKEN) {
+    res.status(503).json({ error: 'mesh telemetry authentication is not configured' });
+    return;
+  }
+  const expectedBuffer = Buffer.from(MESH_TELEMETRY_TOKEN);
+  const providedBuffer = Buffer.from(provided);
+  if (expectedBuffer.length !== providedBuffer.length || !timingSafeEqual(expectedBuffer, providedBuffer)) {
+    res.status(401).json({ error: 'mesh telemetry authentication failed' });
+    return;
+  }
+  next();
+}
+
 function broadcastState(): void {
   const msg = JSON.stringify({ type: 'STATE_UPDATE', payload: snapshot() });
   for (const client of wss.clients) {
@@ -367,6 +431,43 @@ wss.on('connection', (ws: LiveSocket) => {
       // Plain-text command frame — treat the whole payload as the command.
     }
 
+    // ── Omni-Voice D.A.G. ingress routing ─────────────────────────────────
+    // Runs before any LLM work: the ᛟ_ runic bypass and the Softmax persona
+    // dispatch are both deterministic, so a control token never pays inference
+    // cost. This mirrors control_plane/dispatch/omni_voice_dag.py, and the port
+    // is pinned to that module by the vectors in omniVoice.crystal.json.
+    const omni = routeOmniVoice(payloadText);
+    setOmniVoiceTelemetry({
+      status: omni.status,
+      path: omni.path,
+      knight: omni.knight ?? null,
+      tau: omni.tau ?? null,
+      confidence: omni.confidence ?? null,
+      delegatesRune: omni.delegatesRune ?? null,
+    });
+    console.log(
+      `omni-voice ${omni.status} path=${omni.path} knight=${omni.knight ?? '-'}` +
+        (omni.tau != null ? ` tau=${omni.tau}` : '') +
+        (omni.delegatesRune ? ` rune=${omni.delegatesRune}` : ''),
+    );
+
+    if (omni.status === 'ROUTED_BYPASS') {
+      // A rune is a control token, not an utterance: it never reaches the NLP
+      // parser or the remote MCP lane. Executing the delegated rune is the
+      // Python router's job (HITL-gated), so the gateway reports the dispatch
+      // rather than pretending it already ran.
+      ws.send(
+        JSON.stringify({
+          type: 'VOICE_FEEDBACK',
+          payload: {
+            text: `Rune ${omni.token} dispatched to ${omni.knight} via ${omni.delegatesRune}.`,
+          },
+        }),
+      );
+      broadcastState();
+      return;
+    }
+
     // Voice commands route through Helios when enabled; everything else uses the
     // deterministic NLP parser so the gateway works without AI keys.
     if (ENABLE_HELIOS && frameType === 'VOICE_COMMAND') {
@@ -401,6 +502,17 @@ const interval = setInterval(() => {
 }, 30_000);
 
 wss.on('close', () => clearInterval(interval));
+
+// Fail fast on unbound datastore: SovereignDB/Prisma need DATABASE_URL
+// (Postgres via @sovereign/db in prod, sqlite file:./vault.db locally —
+// see apps/bifrost/.env.example). Booting deaf to the ledger is worse than
+// refusing to boot.
+const DATABASE_URL = process.env.DATABASE_URL ?? '';
+if (!DATABASE_URL) {
+  throw new Error(
+    'DATABASE_URL is not set — refusing to boot with an unbound datastore.'
+  );
+}
 
 server.listen(PORT, () => {
   console.log(`Bifrost gateway listening on port ${PORT} (helios=${ENABLE_HELIOS})`);

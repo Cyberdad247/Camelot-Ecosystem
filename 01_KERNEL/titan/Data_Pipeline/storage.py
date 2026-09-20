@@ -16,7 +16,7 @@ import json
 import os
 import sqlite3
 import time
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 
 class SystemGlyph:
@@ -236,14 +236,21 @@ class Ledger:
         conn.close()
 
     @staticmethod
-    def get_all_data() -> Dict[str, List[Dict]]:
-        """Get all ledger data."""
+    def get_all_data(limit: Optional[int] = None) -> Dict[str, List[Dict]]:
+        """Get ledger data with optional limit."""
         conn = Ledger._get_connection()
-        data = {
-            "snapshots": [dict(r) for r in conn.execute("SELECT * FROM snapshots ORDER BY timestamp DESC").fetchall()],
-            "artifacts": [dict(r) for r in conn.execute("SELECT * FROM artifacts ORDER BY timestamp DESC").fetchall()],
-            "builds": [dict(r) for r in conn.execute("SELECT * FROM builds ORDER BY timestamp DESC").fetchall()],
-        }
+        if limit:
+            data = {
+                "snapshots": [dict(r) for r in conn.execute("SELECT * FROM snapshots ORDER BY timestamp DESC LIMIT ?", (limit,))],
+                "artifacts": [dict(r) for r in conn.execute("SELECT * FROM artifacts ORDER BY timestamp DESC LIMIT ?", (limit,))],
+                "builds": [dict(r) for r in conn.execute("SELECT * FROM builds ORDER BY timestamp DESC LIMIT ?", (limit,))],
+            }
+        else:
+            data = {
+                "snapshots": [dict(r) for r in conn.execute("SELECT * FROM snapshots ORDER BY timestamp DESC")],
+                "artifacts": [dict(r) for r in conn.execute("SELECT * FROM artifacts ORDER BY timestamp DESC")],
+                "builds": [dict(r) for r in conn.execute("SELECT * FROM builds ORDER BY timestamp DESC")],
+            }
         conn.close()
         return data
 

@@ -1,3 +1,10 @@
+---
+title: "KOA REALM: LIVING BRUTALISM & SPATIAL UI"
+author: "Design Knights"
+updated: 2026-09-15
+status: live
+---
+
 # [KOA REALM]: LIVING BRUTALISM & SPATIAL UI (v2.0)
 
 ## 1. The Dynamic Substrate

@@ -1,0 +1,24 @@
+﻿{
+  "name": "@camelot/install",
+  "version": "1000.5.0",
+  "description": "Sovereign bare-metal bootstrap installer for Camelot-OS nodes (VPS Hub, Edge, KBA)",
+  "main": "bin/index.js",
+  "bin": {
+    "camelot-install": "./bin/index.js",
+    "kba-install": "./bin/index.js"
+  },
+  "keywords": [
+    "camelot-os",
+    "sovereign",
+    "bare-metal",
+    "kba",
+    "bootstrap",
+    "zero-trust"
+  ],
+  "author": "Invisioned Marketing Inc. / King Arthur",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "preferGlobal": true
+}

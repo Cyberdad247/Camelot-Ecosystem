@@ -1,0 +1,15 @@
+{
+  "delivery_id": "asm_451e6a1ebe",
+  "cartridge_id": "vps-hub-cartridge-v1",
+  "target_repo": "https://github.com/Cyberdad247/Camelot-VPS.git",
+  "branch": "cartridge/vps-hub-cartridge-v1",
+  "base_branch": "main",
+  "aspects_count": 5,
+  "payload_hash": "sha256:311b28802ec7180e9a3f72e0f7c6d33059cc06e2f70f4cccefcdd0fba3e429b2",
+  "anya_first_gate": "PASSED",
+  "merlin_crucible": "CERTIFIED",
+  "anya_last_gate": "SEALED",
+  "merge_status": "STAGED_FOR_MAIN",
+  "timestamp": "2026-09-14T20:43:48.101909+00:00",
+  "receipt_signature": "ed25519_sig_667e7b0ffc7476d97fc3c4f22cae4550"
+}

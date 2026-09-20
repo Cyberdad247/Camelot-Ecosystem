@@ -5,7 +5,6 @@
 import hashlib
 import hmac
 import os
-import sys
 from pathlib import Path
 from typing import Any, Optional
 import logging
@@ -25,16 +24,39 @@ except ImportError:
     except ImportError:
         CloudBrainConnector = None  # type: ignore[assignment]
 
+
+def _canonical(*parts: str) -> bytes:
+    """Length-prefixed framing for a tuple of strings.
+
+    Concatenating fields directly makes the boundary between them ambiguous.
+    A 4-byte big-endian length before each field makes the encoding injective.
+    """
+    out = bytearray()
+    for part in parts:
+        raw = part.encode("utf-8")
+        out += len(raw).to_bytes(4, "big")
+        out += raw
+    return bytes(out)
+
+
 class MemPalaceL2:
     """Persistent local vector index manager (Layer 2 Memory)."""
 
     def __init__(self, storage_path: Optional[Path] = None):
-        # System-level secret for HMAC salting
+        # System-level secret for HMAC salting. Required: refusing to fall back
+        # to a hardcoded value means every L2 drawer ID is salted with a real,
+        # operator-supplied secret. Fail fast so a misconfigured deployment is
+        # loud instead of silently forgeable.
         secret_env = os.environ.get("MEMPALACE_SECRET")
         if not secret_env:
-            logger.warning("SECURITY WARNING: Using default MEMPALACE_SECRET. Provide one in env for production purity.")
-            secret_env = "OMEGA_DEER_CORE_FIX_2026"
-            
+            raise RuntimeError(
+                "MEMPALACE_SECRET is not set. MemPalaceL2 requires it to salt "
+                "HMAC drawer IDs; refusing to use a hardcoded fallback. "
+                "Generate one with: python -c "
+                "\"import secrets; print(secrets.token_hex(32))\" "
+                "and export it in the environment."
+            )
+
         self._secret = secret_env.encode()
         if storage_path:
             self.storage_path = storage_path
@@ -53,16 +75,18 @@ class MemPalaceL2:
             logger.warning("chromadb not installed. L2 Memory is in DARK mode.")
 
     def _get_collection_name(self, wing: str, room: str, tenant_id: str = "default") -> str:
-        """Map wing/room/tenant to a valid ChromaDB collection name."""
-        name = f"{tenant_id}_{wing}_{room}"
-        return name.replace("/", "_").replace(".", "_").replace("-", "_")
+        """Map wing/room/tenant to a unique, valid ChromaDB collection name."""
+        import re
+        digest = hashlib.sha256(_canonical(tenant_id, wing, room)).hexdigest()[:16]
+        slug = re.sub(r"[^0-9A-Za-z]+", "_", f"{tenant_id}_{wing}_{room}").strip("_")[:40]
+        slug = slug.rstrip("_")
+        return f"{slug}_{digest}" if slug else f"mp_{digest}"
 
     def _generate_salted_id(self, content: str, tenant_id: str) -> str:
-        """Generate a salted HMAC-SHA256 ID for content and tenant."""
-        h = hmac.new(self._secret, digestmod=hashlib.sha256)
-        h.update(tenant_id.encode())
-        h.update(content.encode())
-        return h.hexdigest()
+        """Generate a salted HMAC-SHA256 ID over the length-prefixed inputs."""
+        return hmac.new(
+            self._secret, _canonical(tenant_id, content), hashlib.sha256
+        ).hexdigest()
 
     def store(self, wing: str, room: str, content: str, metadata: Optional[dict[str, Any]] = None, tenant_id: str = "default", push_to_cloudbrain: bool = True):
         """Store a drawer (entry) in the specified wing/room with integrity checksum."""

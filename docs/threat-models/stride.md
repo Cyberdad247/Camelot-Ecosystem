@@ -1,8 +1,6 @@
 # Camelot-OS Threat Model (STRIDE)
 
-*Adapted copy (2026-08-16): this file describes **this repository** (`Cyberdad247/Camelot-Ecosystem`). The canonical copy lives in the package repo `Cyberdad247/CAMELOT_OS`. The §16 fixture-map wording differs here: this repo ships the 4 operator-console fixtures; the full §22.1 set lives in the package repo.*
-
-**Authoritative companion:** `Camelot-OS SADD + LLDD v1.2.md` (canonical copy in the package repo `Cyberdad247/CAMELOT_OS`).
+**Authoritative companion:** `Camelot-OS SADD + LLDD v1.2.md` (this directory's parent).
 **Version:** v1.2 (delta on v1.1 — adds two-person rule, trust bands, witness, mobile epoch cache, cache-namespace HMAC, receipt chain canonicality).
 **Scope:** All six planes of Camelot-OS (Experience, Control, Safety, Cloudbrain Execution, Evidence Data, Evidence Audit) and the active/standby Hub twin.
 **Out of scope:** Underlying hypervisor/container escapes, physical hardware attacks, language-runtime bugs in third-party libraries (handled at supply-chain level, not in this document).
@@ -271,12 +269,12 @@ A flat view of what every fixture and gate looks like, organised by STRIDE categ
 
 | STRIDE | Fixtures | Production gates |
 |--------|----------|------------------|
-| S | forged_operator_request, forged_node_receipt, cross_tenant_event_query, cross_tenant_cache_key, duplicate_provider_webhook, carbonate_signer_mismatch (in `cartridge_exceeding_risk_tier_invariant_cap`), equota_promotion_with_witness_unreachable | MFA_for_operators, no_shared_admin_accounts, node_and_workload_identity, receipt_signature_verified, cross_tenant_retrieval_denied, cache_namespace_verified, webhook_signature_verified, idempotent_provider_action_verified, risk_tier_invariant_enforced, promotion_quorum_verified, authority_epoch_verified |
+| S | forged_operator_request, forged_node_receipt, cross_tenant_event_query, cross_tenant_cache_key, duplicate_provider_webhook, cartridge_signer_mismatch (in `cartridge_exceeding_risk_tier_invariant_cap`), equota_promotion_with_witness_unreachable | MFA_for_operators, no_shared_admin_accounts, node_and_workload_identity, receipt_signature_verified, cross_tenant_retrieval_denied, cache_namespace_verified, webhook_signature_verified, idempotent_provider_action_verified, risk_tier_invariant_enforced, promotion_quorum_verified, authority_epoch_verified |
 | T | receipt_parent_hash_tamper, VFS_path_escape, expired_effect_manifest, forged_node_receipt, untrusted_memory_promotion, cross_policy_namespace_cache_hit, cached_epoch_across_policy_bump, stale_authority_epoch | tamper_detection_verified, receipt_chain_verified, ledger_anchor_verified, VFS_path_escape_denied, protected_write_denied, manifest_bound_leases, manifest_expiry_enforced, memory_promotion_verified, source_admission_enforced, cache_namespace_verified, stale_epoch_rejection_tested, policy_outside_models, lease_revocation_tested |
 | R | forged_operator_request, forged_node_receipt, duplicate_provider_webhook, local_twin_promotion, equota_promotion_with_witness_unreachable, expired_effect_manifest | receipt_chain_verified, manifest_bound_leases, manifest_expiry_enforced, idempotent_provider_action_verified, webhook_signature_verified, promotion_fencing_verified, promotion_quorum_verified |
 | I | unauthorized_secret_handle, cross_tenant_event_query, cross_tenant_cache_key, prompt_injection_document, untrusted_memory_promotion, forged_node_receipt, cached_epoch_across_policy_bump, mobile_epoch_window_expired, malformed_symbolect_tree, local_twin_promotion | secret_handle_authorization_verified, cross_tenant_retrieval_denied, cache_namespace_verified, prompt_injection_fixture_denied, memory_promotion_verified, retrieval_trajectory_receipted, replication_integrity_verified, receipt_chain_verified, mobile_epoch_window_enforced, no_offline_effect_bypass, symbolect_validation_enforced |
 | D | expired_effect_manifest, stale_authority_epoch, single_operator_t3_approval_attempt, VPS_network_partition, local_twin_promotion, equota_promotion_with_witness_unreachable, mobile_permission_denied, mobile_epoch_window_expired, duplicate_provider_webhook | manifest_expiry_enforced, resource_budget_enforced, worker_cleanup_verified, stale_epoch_rejection_tested, failback_verified, promotion_quorum_verified, replication_integrity_verified, two_person_rule_enforced, mobile_epoch_window_enforced, OS_permission_flow_verified, idempotent_provider_action_verified |
-| E | unauthorized_persona_capability, network_call_without_lease, prohibited_process_execution, malformed_symbolect_tree, single_operator_t3_approval_attempt, carbonate_exceeding_risk_tier_invariant_cap, equota_promotion_with_witness_unreachable, untrusted_memory_promotion | persona_prohibited_enforced, risk_tier_invariant_enforced, lease_revocation_tested, manifest_bound_leases, unapproved_process_denied, symbolect_validation_enforced, two_person_rule_enforced, promotion_quorum_verified, memory_promotion_verified, network_lease_enforced |
+| E | unauthorized_persona_capability, network_call_without_lease, prohibited_process_execution, malformed_symbolect_tree, single_operator_t3_approval_attempt, cartridge_exceeding_risk_tier_invariant_cap, equota_promotion_with_witness_unreachable, untrusted_memory_promotion | persona_prohibited_enforced, risk_tier_invariant_enforced, lease_revocation_tested, manifest_bound_leases, unapproved_process_denied, symbolect_validation_enforced, two_person_rule_enforced, promotion_quorum_verified, memory_promotion_verified, network_lease_enforced |
 
 > Note: some fixtures appear in multiple columns because the v1.2 fixture catalog describes the *attack*, while the production gate asserts the *defence* that covers many similar attacks. For example, `forged_operator_request` exercises spoofing, repudiation, and (in some variants) tampering — and is matched by several gates.
 
@@ -312,7 +310,7 @@ Cross-link audit:
 
 ## 16. Fixture implementation map (Appendix F)
 
-The fixture names in §5–§13 are the §22.1 catalog. **This repository** ships the 4 operator-console fixtures below under `harness/fixtures/`; the remaining 21 §22.1 fixtures are ported in the package repo (`Cyberdad247/CAMELOT_OS`), where divergence D-3 closed (2026-08-15; canonical map: `docs/architecture/repo-alignment.md` §3, SADD Appendix F).
+The fixture names in §5–§13 are the §22.1 catalog. The live Camelot-OS repository ships every one of them as a real file under `harness/fixtures/` (canonical map: `docs/architecture/repo-alignment.md` §3, SADD Appendix F). The table below maps the STRIDE rows to the real harness files — all 25 §22.1 fixtures plus the 4 operator-console fixtures exist on disk (divergence D-3 closed, 2026-08-15).
 
 | STRIDE row(s) exercised | Real harness fixture | What the fixture proves |
 |-------------------------|----------------------|--------------------------|
@@ -321,7 +319,7 @@ The fixture names in §5–§13 are the §22.1 catalog. **This repository** ship
 | S-4, T-1, I-8 | `harness/fixtures/operator-console-integrity-failure/` | Snapshot carries `integrity: integrity_failed` with a forged receipt hash: alert raised, approval disabled, record preserved (AC17–AC18) |
 | I-8, D-10 | `harness/fixtures/operator-console-readonly-audit/` | Deterministic read-only audit task: six panels render real state, no fabricated content, no-write receipt (AC19) |
 
-**All §22.1 fixtures ported in the package repo (2026-08-15).** The 21 non-operator-console fixtures (chain-tamper, epoch-stale, mobile-epoch-window, cross-policy-cache, tier-quorum, …) carry READMEs citing production gate + SADD § under the package repo's `harness/fixtures/`. This repository's `harness/fixtures/` tracks the 4 operator-console fixtures above, and the harness gate that exercises them lives here too (`docs/architecture/harness-gate.md`). The full mapping and divergence register live in `docs/architecture/repo-alignment.md` §3 + §9.
+**All §22.1 fixtures ported (2026-08-15).** The other 21 §22.1 fixtures (chain-tamper, epoch-stale, mobile-epoch-window, cross-policy-cache, tier-quorum, …) now have real READMEs under `harness/fixtures/`; each cites its production gate and SADD section. The full mapping and divergence register live in `docs/architecture/repo-alignment.md` §3 + §9.
 
 ---
 

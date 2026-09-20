@@ -1,0 +1,48 @@
+# Camelot Bifrost Hub — cartridge/node registry unit
+#   Role: cartridge + node registry (enrollment, trust bands, registry pinning)
+#   DB:   /opt/camelot/bifrost-hub/data/registry.db (auto-created on first run)
+#   Data: /opt/camelot/bifrost-hub/registry (registry state sidecars)
+#
+# The unit stays INACTIVE (not failing) until the registry-service binary exists
+# at /opt/camelot/bifrost-hub/bin/registry-service (ConditionPathExists below).
+# Deploy the binary, then:
+#   sudo systemctl daemon-reload && sudo systemctl restart registry-service
+
+[Unit]
+Description=Camelot Bifrost Hub — cartridge/node registry
+Documentation=https://github.com/Cyberdad247/Camelot-Ecosystem/blob/main/ops/bifrost-hub/README.md
+After=network-online.target
+Wants=network-online.target
+
+ConditionPathExists=/opt/camelot/bifrost-hub/bin/registry-service
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/camelot/bifrost-hub
+# NOTE: binary path + flags are placeholders until the registry is built. Node
+# records mirror packages/contracts/node.schema.json.
+ExecStart=/opt/camelot/bifrost-hub/bin/registry-service \
+    --db /opt/camelot/bifrost-hub/data/registry.db
+Restart=on-failure
+RestartSec=5
+
+# Optional overrides (dash = file may be absent)
+EnvironmentFile=-/etc/camelot/registry-service.env
+
+# Hardening — the service only ever touches its data + registry dirs.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/camelot/bifrost-hub/data /opt/camelot/bifrost-hub/registry
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictRealtime=true
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

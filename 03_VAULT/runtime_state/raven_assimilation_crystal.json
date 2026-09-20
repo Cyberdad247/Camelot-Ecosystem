@@ -1,0 +1,34 @@
+﻿{
+  "schema": "camelot-os.system/schema/harness_forge/v1",
+  "blueprint": "MERLIN_NATIVE_HARNESS_FORGE",
+  "origin": "https://github.com/EverMind-AI/Raven.git",
+  "subject": "Raven",
+  "governance": {
+    "rule_7_hotpath": "100% native Rust / WASM; zero Python runtime in hot path",
+    "architecture_adaptation": "Plan-and-execute loop extracted into native Rust service emitting Wasmtime WASI 0.2 harness targets",
+    "zero_trust_security": "Every generated harness signed by Ledger (Ed25519) and policy-checked by Sentinel before execution",
+    "isolation": "Zero-trust sandbox execution under Wasmtime or Firecracker microVM with strict egress control"
+  },
+  "subsystems": {
+    "harness_forge_core": {
+      "crate": "camelot-harness-forge",
+      "runtime": "Rust / tokio / serde / sha2",
+      "mount": "/vfs/swarms/forges/harness_forge",
+      "responsibilities": [
+        "Task decomposition from user specification",
+        "Graph Memory component query & template hydration",
+        "Cargo / Wasm project skeleton generation",
+        "Ed25519 cryptographic signing of generated harnesses"
+      ]
+    },
+    "tool_capability_registry": {
+      "format": "Declarative Skill/Pill capability leases",
+      "runtime_binding": "Wasmtime WASI 0.2 import capability scoping"
+    },
+    "sentinel_audit_gate": {
+      "validator": "SIR_SENTINEL",
+      "policy": "Path containment, zero-secret leak, capability lease bound check"
+    }
+  },
+  "seal": "⚜️_SOVEREIGN_TRUTH"
+}

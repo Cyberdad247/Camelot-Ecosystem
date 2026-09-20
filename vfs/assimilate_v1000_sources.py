@@ -16,7 +16,7 @@ import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, Optional
 
 LOG = logging.getLogger("V1000_Assimilator")
 CAMELOT_ROOT = Path(__file__).resolve().parent.parent

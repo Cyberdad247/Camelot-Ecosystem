@@ -136,8 +136,12 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         cost_tier="free", capability=[
             "agent","tool_use","nous","openrouter","kinetic","autonomous",
             "shopify_admin","shopify_storefront","graphql_orchestration","webhook_choreography",
+            # Commander surface for the Hermes automation fabric. Must stay in
+            # sync with COMMANDER_ROLE in control_plane/infra/hermes_commander_fabric.py
+            # and with soul_router.FOUNDRY_COUNCIL's sir_hermes function string.
+            "commander","hermes_automation","memory_fabric","all_knight_coordination",
         ],
-        probe_port=0, notes="Nous Hermes Agent — autonomous tool-calling via subprocess (-q mode)",
+        probe_port=0, notes="Nous Hermes Agent — autonomous tool-calling via subprocess (-q mode); commander of the all-knight automation fabric",
     ),
     "sir_openclaw": Terminal(
         id="sir_openclaw", engine="openclaw", weight=0.90,

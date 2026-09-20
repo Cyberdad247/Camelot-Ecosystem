@@ -20,6 +20,7 @@ Pipeline: Anya APEE v6.5 -> Sentinel audit DAG -> Iron Gate HITL.
 
 import os
 import re
+import shlex
 import shutil
 import subprocess
 from pathlib import Path
@@ -1000,8 +1001,9 @@ def _tool_available(name: str) -> bool:
 def _run_check(cmd: str, timeout: int = 30) -> dict:
     """Run an audit command and capture output. Never raises."""
     try:
+        args = shlex.split(cmd, posix=os.name != "nt")
         result = subprocess.run(
-            cmd, shell=True, capture_output=True, text=True,
+            args, shell=False, capture_output=True, text=True,
             timeout=timeout, encoding="utf-8", errors="replace",
         )
         return {

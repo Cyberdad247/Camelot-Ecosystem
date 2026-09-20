@@ -1,0 +1,52 @@
+{
+  "schema_version": "camelot-gideon-verdict/1",
+  "verdict_id": "gv_5684d9847250",
+  "task_id": "task_ba8a5c41d2da",
+  "correlation_id": "cor_7e828e483063",
+  "tenant_id": "tenant_sovereign",
+  "manifest_hash": "sha256:10cfb8846e190452ef395b26ec71d88eae3138a3d7f734d8bff5000e56fc659a",
+  "verdict": "pass",
+  "gates": [
+    "contract_conformance",
+    "path_scope_conformance",
+    "diff_integrity",
+    "test_result_validity",
+    "dependency_risk",
+    "secret_exposure",
+    "security_regression",
+    "accessibility_baseline",
+    "rollback_availability",
+    "lifecycle_cleanup",
+    "memory_provenance_for_material_claims",
+    "declared_risk_tier_matches_observable_effect",
+    "declared_effect_class_consistent"
+  ],
+  "block_reasons": [],
+  "evidence_refs": [
+    "receipt://evaluation/gv_5684d9847250"
+  ],
+  "issued_at": "2026-09-09T04:20:29.137578+00:00",
+  "signature": "ed25519:sig_6ccbee4d19ab4d73abedde9700a45007",
+  "simulation_telemetry": {
+    "candidate": "test_cartridge",
+    "weighted_score": 0.9635,
+    "dimensions": {
+      "correctness": 0.95,
+      "security": 0.98,
+      "path_scope": 1.0,
+      "test_validity": 0.92,
+      "efficiency": 0.94
+    },
+    "suites_evaluated": [
+      "unit",
+      "fuzzing",
+      "vfs_containment",
+      "lease_boundary"
+    ],
+    "sandbox_runtime": "camelot-wasmtime-wasi0.2",
+    "memory_rss_mb": 24.5,
+    "elapsed_ms": 0.92,
+    "promotion_eligible": true,
+    "hitl_approval_required": true
+  }
+}

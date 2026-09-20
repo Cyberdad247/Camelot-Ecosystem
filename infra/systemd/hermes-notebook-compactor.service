@@ -1,0 +1,20 @@
+[Unit]
+Description=HERMES_PRIME & LADY_MNEMOSYNE — Open-Notebook Compactor & Trajectory Harvester
+After=network.target
+
+[Service]
+Type=oneshot
+User=ubuntu
+WorkingDirectory=/opt/camelot-ecosystem
+ExecStart=/usr/bin/python3 -m control_plane.infra.open_notebook_compactor
+Environment=PYTHONUNBUFFERED=1
+Environment=CAMELOT_OS_HOME=/opt/camelot-ecosystem
+
+# Scarcity Protection (cgroups v2)
+MemoryAccounting=true
+MemoryMax=256M
+CPUAccounting=true
+CPUQuota=40%
+
+ProtectSystem=full
+NoNewPrivileges=true

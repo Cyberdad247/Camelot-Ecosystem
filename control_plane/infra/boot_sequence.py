@@ -8,6 +8,7 @@
 from __future__ import annotations
 
 import asyncio
+import concurrent.futures
 import importlib.util
 import json
 import os
@@ -32,6 +33,7 @@ from control_plane.core.knight_configuration import write_knight_configuration
 from .nano_swarm_runtime import boot_nano_swarm_runtime
 from .orchestration_state import summarize_boot_results
 from .symbiotic_maintenance import boot_symbiotic_maintenance
+from .vps_hermes_prime import boot_vps_hermes_prime
 
 _C = {
     "g": "\033[92m",
@@ -130,6 +132,95 @@ def _probe_port(host: str, port: int, timeout: float = 1.0) -> bool:
             return True
     except OSError:
         return False
+
+
+_SNAPSHOT_TTL_S = 900
+_SNAPSHOT_NAME = "boot_snapshot.json"
+# Phases that must stay serial (ordering / spawn side-effects / heavy FS writes)
+_SERIAL_PHASE_HINTS = (
+    "vfs preflight",
+    "excalibur",
+    "cliproxy",
+    "defense grid",
+    "kinetic edge",
+    "morgana bridge",
+    "bifrost sidecar",
+    "symbiotic",
+)
+# Port probes used to validate a cached snapshot (host, port, label-hint)
+# NOTE: 8080 added 2026-09-19 — stale snapshot hid dead CLIProxyAPI (PID 3272 TIME_WAIT)
+_SNAPSHOT_PORTS: tuple[tuple[str, int], ...] = (
+    ("127.0.0.1", 8080),
+    ("127.0.0.1", 3000),
+    ("127.0.0.1", 3002),
+    ("127.0.0.1", 8001),
+    ("127.0.0.1", 8011),
+    ("127.0.0.1", 8200),
+    ("127.0.0.1", 8300),
+    ("127.0.0.1", 8400),
+    ("127.0.0.1", 10100),
+    ("127.0.0.1", 20128),
+)
+
+
+def _snapshot_path(home: Path) -> Path:
+    return home / "03_VAULT" / "runtime_state" / _SNAPSHOT_NAME
+
+
+def _skipped_phases(explicit: set[str] | None = None) -> set[str]:
+    raw = ",".join(
+        [os.environ.get("AWAKEN_SKIP", ""), ",".join(sorted(explicit or set()))]
+    )
+    return {t.strip().lower() for t in raw.split(",") if t.strip()}
+
+
+def _write_boot_snapshot(home: Path, results: dict[str, Any]) -> None:
+    try:
+        summary = results.get("_summary", {})
+        if summary and summary.get("required_ok", 0) < summary.get("required_total", 0):
+            return  # only cache GREEN-required boots
+        payload = {
+            "captured_at": time.time(),
+            "total_ms": results.get("_total_ms", 0),
+            "summary": summary,
+            "results": {
+                k: v for k, v in results.items() if not k.startswith("_")
+            },
+            "ports": [
+                {"host": h, "port": p, "open": _probe_port(h, p, timeout=0.5)}
+                for h, p in _SNAPSHOT_PORTS
+            ],
+        }
+        _snapshot_path(home).write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    except Exception:
+        pass
+
+
+def try_snapshot_boot(home: Path, ttl_s: int = _SNAPSHOT_TTL_S) -> dict[str, Any] | None:
+    """Return cached boot results if fresh and ports still live, else None."""
+    try:
+        path = _snapshot_path(home)
+        if not path.exists():
+            return None
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        age = time.time() - float(payload.get("captured_at", 0))
+        if age > ttl_s:
+            return None
+        for entry in payload.get("ports", []):
+            if entry.get("open") and not _probe_port(
+                entry.get("host", "127.0.0.1"), int(entry.get("port", 0)), timeout=0.5
+            ):
+                return None  # a previously-live port died -> full boot
+        results: dict[str, Any] = dict(payload.get("results", {}))
+        results["_total_ms"] = 0
+        summary = dict(payload.get("summary", {}))
+        summary["snapshot"] = True
+        summary["snapshot_age_s"] = round(age)
+        results["_summary"] = summary
+        results["_snapshot"] = True
+        return results
+    except Exception:
+        return None
 
 
 def _read_bifrost_token() -> str | None:
@@ -404,7 +495,9 @@ def boot_bifrost_go_sidecar(home: Path) -> tuple[bool, str]:
 
 
 def boot_harness(home: Path):
-    harness_py = home / "control_plane" / "harness.py"
+    harness_py = home / "control_plane" / "infra" / "harness.py"
+    if not harness_py.exists():
+        harness_py = home / "control_plane" / "harness.py"
     pid_file = home / "logs" / "harness.pid"
     if not harness_py.exists():
         return False, "harness.py not found - skipped"
@@ -1025,7 +1118,9 @@ def boot_sir_octavian(home: Path) -> tuple[bool, str]:
     if _probe_port("127.0.0.1", 8400):
         return True, "Sir Octavian already running on :8400"
 
-    octavian_py = home / "control_plane" / "sir_octavian.py"
+    octavian_py = home / "control_plane" / "infra" / "sir_octavian.py"
+    if not octavian_py.exists():
+        octavian_py = home / "control_plane" / "sir_octavian.py"
     if not octavian_py.exists():
         return False, "sir_octavian.py not found"
 
@@ -1072,9 +1167,12 @@ def boot_cloud_brain_auth(home: Path) -> tuple[bool, str]:
 
 def boot_pydantic_ai_knight(home: Path) -> tuple[bool, str]:
     """Phase 9 - Pydantic AI Knight (Sir Helio v400)."""
-    knight_py = home / "control_plane" / "pydantic_ai_knight.py"
+    knight_py = home / "control_plane" / "infra" / "pydantic_ai_knight.py"
+    if not knight_py.exists():
+        knight_py = home / "control_plane" / "pydantic_ai_knight.py"
     if not knight_py.exists():
         return False, "pydantic_ai_knight.py not found"
+
     
     try:
         import pydantic_ai
@@ -1083,6 +1181,99 @@ def boot_pydantic_ai_knight(home: Path) -> tuple[bool, str]:
         return False, "pydantic-ai library not installed"
     except Exception as exc:
         return False, f"Pydantic AI init failed: {exc}"
+
+
+def boot_opencodex(home: Path) -> tuple[bool, str]:
+    """Start the OpenCodex universal provider proxy sidecar.
+
+    OpenCodex translates the OpenAI Responses API into any LLM provider's
+    wire format, providing 40+ provider support, combo failover, and
+    account pooling for all CAMELOT-OS knights.
+
+    Phase: runs right after CLIProxyAPI (:8080) since opencodex sits
+    upstream of cliproxy on :10100.
+    """
+    import socket
+
+    ocx_host = os.getenv("OCX_HOST", "127.0.0.1")
+    ocx_port = int(os.getenv("OCX_PORT", "10100"))
+
+    # Check if already running
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(1.0)
+            if sock.connect_ex((ocx_host, ocx_port)) == 0:
+                # Port occupied — check if it's actually opencodex
+                try:
+                    from control_plane.core.ocx_bridge import OCXBridge
+                    bridge = OCXBridge()
+                    if bridge.is_live():
+                        return True, f"OpenCodex already running on {ocx_host}:{ocx_port}"
+                except Exception:
+                    pass
+                return True, f"Port {ocx_port} occupied (non-ocx process); skipping launch"
+    except OSError:
+        pass
+
+    # Try to start opencodex via npx
+    node_bin = shutil.which("node")
+    npm_bin = shutil.which("npm")
+    npx_bin = shutil.which("npx")
+
+    ocx_cli = home / "node_modules" / "@bitkyc08" / "opencodex" / "bin" / "ocx.mjs"
+    if not ocx_cli.exists():
+        # Try the global install path
+        ocx_cli = None
+
+    if ocx_cli is None and npx_bin is None:
+        return False, "opencodex not installed (npm install @bitkyc08/opencodex) and npx unavailable"
+
+    log_dir = home / "logs"
+    log_dir.mkdir(parents=True, exist_ok=True)
+    ocx_log = log_dir / "opencodex.log"
+    pid_file = log_dir / "opencodex.pid"
+
+    env = os.environ.copy()
+    env.setdefault("OCX_HOST", ocx_host)
+    env.setdefault("OCX_PORT", str(ocx_port))
+
+    try:
+        if ocx_cli is not None:
+            launch_cmd = [node_bin or "node", str(ocx_cli), "start", "--port", str(ocx_port)]
+        else:
+            launch_cmd = [npx_bin, "ocx", "start", "--port", str(ocx_port)]
+
+        log_fh = open(ocx_log, "a", encoding="utf-8")
+        kwargs = _child_spawn_kwargs(cwd=str(home))
+        kwargs["env"] = env
+        kwargs["stdin"] = subprocess.DEVNULL
+        proc = subprocess.Popen(
+            launch_cmd,
+            stdout=log_fh,
+            stderr=log_fh,
+            **kwargs,
+        )
+
+        pid_file.write_text(str(proc.pid), encoding="utf-8")
+
+        # Wait up to 8 seconds for the proxy to become ready
+        import time
+        for _ in range(16):
+            time.sleep(0.5)
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+                    sock.settimeout(0.5)
+                    if sock.connect_ex((ocx_host, ocx_port)) == 0:
+                        return True, f"OpenCodex started on {ocx_host}:{ocx_port} (pid={proc.pid})"
+            except OSError:
+                pass
+            if proc.poll() is not None:
+                return False, f"OpenCodex exited early (code={proc.returncode}); see {ocx_log}"
+
+        return False, f"OpenCodex started but not ready after 8s; see {ocx_log}"
+
+    except Exception as exc:
+        return False, f"OpenCodex launch failed: {exc}"
 
 
 def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
@@ -1101,7 +1292,10 @@ def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
     return ok, msg
 
 
-def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
+def run_boot(
+    home: Path, quick: bool = False, skip: set[str] | None = None
+) -> dict[str, Any]:
+    skip_tokens = _skipped_phases(skip)
     # Load local LT env overrides before integration_brain is imported so module-level
     # constants pick up localhost:8200 URLs instead of the Modal cloud endpoints
     lt_env = home / "03_VAULT" / "training" / "configs" / ".env.lt_local"
@@ -1123,6 +1317,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
          "fn": lambda: _boot_vfs_preflight_stage0(home)},
         {"name": "EXCALIBUR Pre-Flight", "required": False, "fn": lambda: boot_excalibur_preflight(home)},
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
+        {"name": "OpenCodex    :10100", "required": False, "fn": lambda: boot_opencodex(home)},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},
         {"name": "OmniVoice     :3002", "required": False, "fn": lambda: boot_omnivoice_router(home)},
@@ -1133,6 +1328,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
         {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},
         {"name": "OmniRoute    :20128", "required": False, "fn": lambda: boot_omniroute_gateway(home)},
         {"name": "Hermes OmniRoute", "required": False, "fn": lambda: boot_hermes_omniroute_orchestrator(home)},
+        {"name": "VPS Hermes_Prime", "required": False, "fn": lambda: boot_vps_hermes_prime(home)},
         {"name": "Heimdall Bifrost Governance", "required": False, "fn": lambda: boot_heimdall_bifrost_governance(home)},
         {"name": "Local LT Memory:8200","required": False, "fn": lambda: start_local_lt_memory(home)},
         {"name": "Cloud Brain  Auth",  "required": False, "fn": lambda: boot_cloud_brain_auth(home)},
@@ -1154,7 +1350,7 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
     summary_phases: list[dict[str, Any]] = []
     t_total = time.perf_counter()
 
-    for phase in phases:
+    def _run_one(phase: dict[str, Any]) -> tuple[str, bool, str, int, bool]:
         label = phase["name"]
         fn = phase["fn"]
         t0 = time.perf_counter()
@@ -1170,20 +1366,57 @@ def run_boot(home: Path, quick: bool = False) -> dict[str, Any]:
             ok = False
             clean = f"exception: {type(exc).__name__}: {exc}"
         dt = round((time.perf_counter() - t0) * 1000)
-        results[label] = {"ok": ok, "msg": clean, "ms": dt}
-        summary_phases.append(
-            {
-                "name": label,
-                "ok": ok,
-                "required": bool(phase["required"]),
-                "detail": clean,
-                "ms": dt,
-            }
-        )
+        return label, ok, clean, dt, bool(phase["required"])
+
+    def _emit(label: str, ok: bool, clean: str, dt: int) -> None:
         if not quick:
             glyph = f"{_C['g']}OK{_C['x']}" if ok else f"{_C['y']}WARN{_C['x']}"
             print(f"  {glyph} {_C['B']}{label}{_C['x']}  {clean}  {_C['d']}({dt}ms){_C['x']}")
 
+    active: list[dict[str, Any]] = []
+    for phase in phases:
+        lname = str(phase["name"]).lower()
+        if skip_tokens and any(tok in lname for tok in skip_tokens):
+            results[phase["name"]] = {"ok": True, "msg": "skipped via AWAKEN_SKIP", "ms": 0}
+            summary_phases.append(
+                {"name": phase["name"], "ok": True, "required": False,
+                 "detail": "skipped via AWAKEN_SKIP", "ms": 0}
+            )
+            continue
+        active.append(phase)
+
+    serial = [p for p in active if any(h in str(p["name"]).lower() for h in _SERIAL_PHASE_HINTS)]
+    parallel = [p for p in active if p not in serial]
+
+    for phase in serial:
+        label, ok, clean, dt, req = _run_one(phase)
+        results[label] = {"ok": ok, "msg": clean, "ms": dt}
+        summary_phases.append(
+            {"name": label, "ok": ok, "required": req, "detail": clean, "ms": dt}
+        )
+        _emit(label, ok, clean, dt)
+
+    if parallel:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+            futs = {pool.submit(_run_one, p): p["name"] for p in parallel}
+            done: dict[str, tuple[bool, str, int, bool]] = {}
+            for fut in concurrent.futures.as_completed(futs):
+                label, ok, clean, dt, req = fut.result()
+                done[label] = (ok, clean, dt, req)
+                _emit(label, ok, clean, dt)
+            for phase in parallel:
+                label = phase["name"]
+                ok, clean, dt, req = done[label]
+                results[label] = {"ok": ok, "msg": clean, "ms": dt}
+                summary_phases.append(
+                    {"name": label, "ok": ok, "required": req, "detail": clean, "ms": dt}
+                )
+
+    # Restore canonical phase order for summary stability
+    order = [p["name"] for p in phases if p["name"] in results]
+    summary_phases.sort(key=lambda s: order.index(s["name"]) if s["name"] in order else 999)
+
     results["_total_ms"] = round((time.perf_counter() - t_total) * 1000)
     results["_summary"] = summarize_boot_results(summary_phases)
+    _write_boot_snapshot(home, results)
     return results

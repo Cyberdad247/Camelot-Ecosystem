@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: MIT
+#
+# Drives camelot-selfcheck.service.
+#
+# Cadence: every 15 minutes. The audit is read-only and cheap (service-state reads and
+# two local curls), so the cost of running it often is negligible and the cost of
+# running it late is exactly the drift this was built to catch.
+#
+# No `Persistent=true` here on purpose: that directive only applies to OnCalendar
+# timers, and setting it on a monotonic timer would imply catch-up behaviour that does
+# not exist.
+
+[Unit]
+Description=Camelot-OS Hub self-check cadence (post-condition audit every 15m)
+# Deliberately NO `Requires=camelot-selfcheck.service` here. A timer's job is to
+# SCHEDULE, and `Unit=` in [Timer] below is the directive that names its target —
+# `Requires=` would not add a trigger, it would add a DEPENDENCY, with two effects:
+#   1. starting the timer also starts the service immediately, bypassing the schedule
+#   2. the timer's liveness becomes coupled to a unit whose contract (see
+#      camelot-selfcheck.service) is *expected to fail* while the hub is not
+#      production-ready. A monitor must not depend on the thing it watches.
+
+[Timer]
+Unit=camelot-selfcheck.service
+OnBootSec=5min
+OnUnitActiveSec=15min
+AccuracySec=30s
+# AccuracySec is deliberately not 0: a 15-minute cadence does not need millisecond
+# precision, and a loose accuracy window lets systemd coalesce this wakeup with other
+# timers instead of waking an idle hub for nothing.
+
+[Install]
+WantedBy=timers.target
