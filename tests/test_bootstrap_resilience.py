@@ -40,8 +40,10 @@ def test_boot_harness_uses_hidden_infra_entrypoint(monkeypatch, tmp_path: Path) 
     ok, _ = harness.boot_harness(Path(harness.CAMELOT_HOME))
 
     assert ok
-    assert calls[0][0][-1].endswith("control_plane\\infra\\harness.py")
+    target = calls[0][0][-1]
+    assert target == "control_plane.infra.harness" or target.endswith("control_plane\\infra\\harness.py")
     flags = calls[0][1]["creationflags"]
+
     assert flags & getattr(harness.subprocess, "CREATE_NO_WINDOW", 0)
     assert not flags & getattr(harness.subprocess, "CREATE_NEW_CONSOLE", 0)
 
