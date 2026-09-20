@@ -43,6 +43,7 @@ data/.pytest_temp/
 03_VAULT/runtime_state/harness_heartbeat.jsonl
 03_VAULT/runtime_state/boot_snapshot.json
 03_VAULT/runtime_state/*_snapshot.json
+03_VAULT/memory/qdrant/
 
 # 4. Python / Node Runtime
 __pycache__/
