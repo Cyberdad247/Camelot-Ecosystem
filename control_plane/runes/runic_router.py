@@ -940,6 +940,38 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_activate_reya_nostr_bridge",
         "hydrate": False,
     },
+    "//REYA_CHANNEL": {
+        "knight": "sir_sonus",
+        "description": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//channel": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//voice_interchange": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//reya_voice": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -3452,8 +3484,52 @@ def _handle_activate_reya_nostr_bridge(param: Any, context: dict) -> dict:
     }
 
 
+def _handle_reya_channel(param: Any, context: dict) -> dict:
+    """//REYA_CHANNEL — Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric."""
+    param_str = str(param or "").strip()
+    action = context.get("action") if context else None
+    action_payload = context.get("payload") if context else None
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.ReyaUniversalFabric()
+
+        trigger_match = fabric.detect_voice_interchange_trigger(param_str)
+        target_knight = trigger_match if trigger_match else param_str
+
+        if target_knight:
+            switch_res = fabric.switch_knight(target_knight)
+        else:
+            switch_res = fabric.get_current_state()
+
+        if action:
+            action_res = fabric.execute_fabric_action(action, action_payload or {})
+        else:
+            action_res = None
+
+        return {
+            "action": "reya_channel",
+            "detected_trigger": trigger_match,
+            "switch_result": switch_res,
+            "action_result": action_res,
+            "status": "REYA_CHANNEL_DISPATCHED",
+        }
+    else:
+        return {
+            "action": "reya_channel",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_reya_channel": _handle_reya_channel,
     "_handle_activate_reya_nostr_bridge": _handle_activate_reya_nostr_bridge,
     "_handle_arthur_merlin_handshake": _handle_arthur_merlin_handshake,
     "_handle_sovereign_seal": _handle_sovereign_seal,
@@ -3828,6 +3904,9 @@ def parse_rune(text: str) -> Optional[tuple[str, str]]:
 
 def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> RuneResult:
     """Route a rune to the correct knight and queue the task."""
+    if isinstance(param, dict) and context is None:
+        context = param
+        param = ""
     if not param and " " in (rune or "").strip():
         parts = (rune or "").strip().split(None, 1)
         rune = parts[0]

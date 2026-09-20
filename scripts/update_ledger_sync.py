@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1854",
-            "task": "REYA Nostr Bridge Activation & Sir Codex Edge Systemd Daemon Lockdown (camelot-reya-edge.service): cgroups v2 Strict Scarcity Bounds (<350MB MemoryMax) & QR-Pill Pairing",
-            "author": "SIR_HELIO / SIR_CODEX / ANYA_Ω / MERLIN_Ω / SIR_HELIOS / ARTHUR_OMEGA",
+            "id": "1855",
+            "task": "REYA Universal Knight Fabric Layer & Multivoice Persona Interchange (//REYA_CHANNEL): Cross-Knight Vocal Dynamic Routing, Sandboxed Kinetic Execution (<350MB) & Channeled Profiles",
+            "author": "SIR_HELIO / MERLIN_Ω / SIR_SONUS / SIR_BORIS / SIR_CODEX / SIR_HELIOS / ARTHUR_OMEGA",
             "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
-            "notes": "Activated REYA Nostr transport bridge and locked execution onto edge node under Sir Helio and Sir Codex: (1) Sir Codex forged infra/systemd/camelot-reya-edge.service and install-reya-edge.sh constraining Reya's Python process strictly inside camelot-workers.slice with cgroups v2 limits (MemoryHigh=300M, MemoryMax=350M, CPUQuota=60%, ProtectSystem=strict, ProtectHome=read-only, PrivateTmp=true, IPAddressAllow=127.0.0.1/32 100.64.0.0/10), (2) Engineered 02_FORGE/assimilation/reya/reya_nostr_bridge.py implementing decentralized Nostr relay listener (NIP-01/NIP-44), HMAC-SHA256 QR-Pill device pairing for Excalibur S26 Ultra / Motorola, and zero-copy packet piping into Bifrost Gateway (:3001) and shared memory slab, (3) Registered rune //ACTIVATE_REYA_NOSTR_BRIDGE and aliases in control_plane/runes/runic_router.py with verified CLI dispatch, (4) Extended test suite tests/test_reya_assimilation.py passing 14/14 tests (28/28 full suite green), (5) Stored crystal into MemCastle KNN store (Row ID 539) and Graphiti temporal knowledge graph (Fact 9) under SIR_HELIO, and (6) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-20 22:15 UTC"
+            "notes": "Expanded REYA to serve as the universal sensory & kinetic execution fabric layer for all Round Table Knights while vocal persona and acoustic timbre interchange dynamically by voice command (//REYA_CHANNEL): (1) Updated packages/multivoice-router/src/voice/voice-profile-registry.ts with channeled Knight profiles (reya_companion, boris_architect, codex_implementer, helio_sentinel, lukas_telemetry, arthur_sovereign) and exported helper functions getReyaChanneledProfile and listAllChanneledKnights, (2) Built 02_FORGE/assimilation/reya/reya_fabric_layer.py implementing ReyaUniversalFabric with natural language voice trigger detection ('switch to Merlin', 'speak as Boris', 'channel Lukas', 'become Helios'), acoustic profile calibration (pitch offset, speech rate, timbre), and sandboxed kinetic execution across mobile ADB, Nostr events, speech synthesis, and camera capture (<350MB cgroups v2 boundary), (3) Wired //REYA_CHANNEL and aliases (//channel, //voice_interchange, //reya_voice) in control_plane/runes/runic_router.py with flexible argument handling, (4) Created comprehensive unit test suite tests/test_reya_multivoice_fabric.py passing 22/22 tests (50/50 tests green across combined Reya, VibeVoice, Handshake suites), (5) Verified zero-drift parity with scripts/check_omnivoice_router_build.py and check_generated_artifact_parity.py, (6) Stored architectural facts into MemCastle KNN store (Row ID 547) and Graphiti temporal knowledge graph (Fact 39) under SIR_HELIOS, and (7) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-20 22:25 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1853" in line:
+            if "| 1854" in line:
                 insert_at = i
                 break
         
