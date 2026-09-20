@@ -25,9 +25,11 @@ sys.path.insert(0, str(CAMELOT_ROOT / "01_KERNEL"))
 sys.path.insert(0, str(CAMELOT_ROOT / "vfs"))
 
 try:
-    from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS, CloudBrainConnector
+    from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS, CARTRIDGE_NOTEBOOKS, CARTRIDGE_DOMAIN_TAGS, CloudBrainConnector
 except ImportError:
     KNIGHT_NOTEBOOKS = {}
+    CARTRIDGE_NOTEBOOKS = {}
+    CARTRIDGE_DOMAIN_TAGS = {}
     CloudBrainConnector = None
 
 try:
@@ -38,11 +40,24 @@ except ImportError:
 
 # Scabbard Cartridge Default Knight Assignments
 CARTRIDGE_KNIGHT_MAP: Dict[str, List[str]] = {
-    "ANT":      ["LADY_APIS", "SIR_SCAVENGER"],                    # Scraping & Extraction
-    "BEAVER":   ["SIR_FORGE", "SIR_CODEX", "SIR_ALCHEMIST"],        # AST & Code Refactoring
-    "SPIDER":   ["MERLIN_OMEGA", "LADY_APIS", "SIR_HERMES"],        # BASHR Web Research & Foraging
-    "OCTOPUS":  ["SIR_BORIS", "SIR_ALEX", "LADY_MNEMOSYNE"],        # Multi-Agent Swarm Orchestration
-    "HIVE_IDE_SWARM": ["MERLIN_OMEGA", "SIR_VISAGE", "SIR_CODEX", "SIR_BORIS"]  # Reactive WebGPU & WASM Swarm
+    # Canonical Cartridge IDs
+    "cartridge-hive-ide-swarm": ["MERLIN_OMEGA", "SIR_VISAGE", "SIR_CODEX", "SIR_BORIS"],
+    "darwin-mac-edge":          ["SIR_DARWIN_MAC", "SIR_LANCELOT", "HERMES_PRIME"],
+    "freellmapi-gateway":       ["SIR_HERMES", "SIR_PROXY", "SIR_HELIOS"],
+    "huginn-agents":            ["LADY_APIS", "SIR_HERMES", "SIR_SCAVENGER"],
+    "lisa-shopify-app-sandbox": ["LADY_LISA", "KNIGHT_STRATEGOS", "SIR_BORIS"],
+    "litert-lm-inference":      ["SIR_OCTAVIAN", "SIR_LANCELOT", "SIR_KAY"],
+    "moa-routing-capture":      ["MERLIN_OMEGA", "SIR_HELIOS", "SIR_SENTINEL"],
+    "openai-oauth-proxy":       ["SIR_GHOST", "SIR_HERMES", "SIR_HEIMDALL"],
+    "openinterpreter-codex":    ["SIR_CODEX", "SIR_FORGE", "SIR_OCTAVIAN"],
+    "system-ui":                ["SIR_STITCH", "LADY_GUINEVERE", "SIR_BORIS"],
+
+    # Legacy Short-Name Aliases
+    "ANT":                      ["LADY_APIS", "SIR_SCAVENGER"],
+    "BEAVER":                   ["SIR_FORGE", "SIR_CODEX", "SIR_ALCHEMIST"],
+    "SPIDER":                   ["MERLIN_OMEGA", "LADY_APIS", "SIR_HERMES"],
+    "OCTOPUS":                  ["SIR_BORIS", "SIR_ALEX", "LADY_MNEMOSYNE"],
+    "HIVE_IDE_SWARM":           ["MERLIN_OMEGA", "SIR_VISAGE", "SIR_CODEX", "SIR_BORIS"],
 }
 
 
@@ -54,9 +69,25 @@ class WorldtreeCartridgeKnightBridge:
 
     def resolve_vfs_uri(self, uri: str) -> Dict[str, Any]:
         """
-        Parses `vfs://worldtree/knights/{knight_id}/{target}` into actionable node metadata.
+        Parses `vfs://worldtree/knights/{knight_id}/{target}` or
+        `vfs://worldtree/cartridges/{cartridge_id}` into actionable node metadata.
         Target options: `brain`, `cartridge`, `notebook`
         """
+        if uri.startswith("vfs://worldtree/cartridges/"):
+            cartridge_id = uri.replace("vfs://worldtree/cartridges/", "").strip("/")
+            notebook_id = CARTRIDGE_NOTEBOOKS.get(cartridge_id, "a0a4bfb9-e847-4c38-be39-7aee398f0795")
+            bound_knights = CARTRIDGE_KNIGHT_MAP.get(cartridge_id, [])
+            tags = CARTRIDGE_DOMAIN_TAGS.get(cartridge_id, [])
+            return {
+                "vfs_uri": uri,
+                "type": "cartridge",
+                "cartridge_id": cartridge_id,
+                "notebook_id": notebook_id,
+                "bound_knights": bound_knights,
+                "domain_tags": tags,
+                "resolved_at": datetime.now(timezone.utc).isoformat()
+            }
+
         clean = uri.replace("vfs://worldtree/knights/", "").strip("/")
         parts = clean.split("/")
 
@@ -110,11 +141,24 @@ class WorldtreeCartridgeKnightBridge:
             endpoints.append(self.resolve_vfs_uri(f"vfs://worldtree/knights/{knight_id}/brain"))
         return endpoints
 
+    def list_all_vfs_cartridges(self) -> List[Dict[str, Any]]:
+        """Returns VFS endpoints for all registered Scabbard cartridges."""
+        endpoints = []
+        for cid in CARTRIDGE_NOTEBOOKS:
+            endpoints.append(self.resolve_vfs_uri(f"vfs://worldtree/cartridges/{cid}"))
+        return endpoints
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(levelname)s [%(name)s] %(message)s")
     bridge = WorldtreeCartridgeKnightBridge()
     res = bridge.resolve_vfs_uri("vfs://worldtree/knights/SIR_FORGE/brain")
-    print("\n── VFS Resolution Test ──")
+    cart_res = bridge.resolve_vfs_uri("vfs://worldtree/cartridges/cartridge-hive-ide-swarm")
+    print("\n-- VFS Resolution Test --")
     print(json.dumps(res, indent=2))
+    print("\n-- Cartridge VFS Resolution Test --")
+    print(json.dumps(cart_res, indent=2))
     print(f"\nTotal VFS Knight Endpoints: {len(bridge.list_all_vfs_knights())}")
+    print(f"Total VFS Cartridge Endpoints: {len(bridge.list_all_vfs_cartridges())}")
+
+

@@ -1,0 +1,40 @@
+{
+  "cartridge_id": "cartridge-hive-ide-swarm",
+  "vfs_uri": "vfs://worldtree/cartridges/cartridge-hive-ide-swarm/",
+  "cloudbrain_notebook_id": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",
+  "cloudbrain_title": "HiveIDE-aka Inspira",
+  "bound_knights": [
+    "MERLIN_OMEGA",
+    "SIR_VISAGE",
+    "SIR_CODEX",
+    "SIR_BORIS"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "webgpu",
+    "ast_runner",
+    "zeroclaw_ipc",
+    "reactive_swarm",
+    "hive_engine",
+    "ide"
+  ],
+  "entrypoints": [
+    "forge",
+    "plan",
+    "test",
+    "audit",
+    "execute"
+  ],
+  "physical_source_path": "cartridges/cartridge-hive-ide-swarm",
+  "files": [
+    "hive_engine.py",
+    "manifest.json",
+    "parallel_ast_runner.py",
+    "signing_key.pub",
+    "system_instruction.md",
+    "zeroclaw_ipc.py"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T01:17:15.227799+00:00"
+}

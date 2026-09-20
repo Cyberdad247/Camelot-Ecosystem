@@ -1,0 +1,40 @@
+{
+  "cartridge_id": "system-ui",
+  "vfs_uri": "vfs://worldtree/cartridges/system-ui/",
+  "cloudbrain_notebook_id": "f7707daa-2d10-4db8-8fda-be4661a27793",
+  "cloudbrain_title": "Sovereign_Workspace: SIR_BORIS",
+  "bound_knights": [
+    "SIR_STITCH",
+    "LADY_GUINEVERE",
+    "SIR_BORIS"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "vite_react",
+    "tailwind",
+    "luxora_gold",
+    "threejs_canvas",
+    "spatial_hud",
+    "webgpu_ui"
+  ],
+  "entrypoints": [
+    "dev",
+    "build",
+    "preview"
+  ],
+  "physical_source_path": "cartridges/system-ui",
+  "files": [
+    "index.html",
+    "package-lock.json",
+    "package.json",
+    "postcss.config.js",
+    "system_instruction.md",
+    "tailwind.config.js",
+    "tsconfig.json",
+    "vite-proxy.test.ts",
+    "vite.config.ts"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T01:17:15.250364+00:00"
+}

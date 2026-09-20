@@ -41,6 +41,8 @@ data/.pytest_tmp/
 data/.pytest_temp/
 03_VAULT/runtime_state/wasm_sandbox/
 03_VAULT/runtime_state/harness_heartbeat.jsonl
+03_VAULT/runtime_state/boot_snapshot.json
+03_VAULT/runtime_state/*_snapshot.json
 
 # 4. Python / Node Runtime
 __pycache__/

@@ -183,6 +183,33 @@ NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
     "KNIGHT_STRATEGOS":    ["marketing", "strategy", "assimilation", "skillgraph4", "videneptus", "growth", "advertising"],
 }
 
+# ── Scabbard Cartridge CloudBrain Bindings ──────────────────────────────────
+CARTRIDGE_NOTEBOOKS: Dict[str, str] = {
+    "cartridge-hive-ide-swarm": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",  # HiveIDE-aka Inspira
+    "darwin-mac-edge":          "39299131-0ade-4f48-8ad4-a68878a6d3d9",  # Father's Camelot / Sovereign Edge
+    "freellmapi-gateway":       "6fd09912-c216-44c7-a3b2-d5357d185ab6",  # Unlimited AI Access via AntiGravity
+    "huginn-agents":            "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",  # Sovereign_Workspace: LADY_APIS
+    "lisa-shopify-app-sandbox": "a0a4bfb9-e847-4c38-be39-7aee398f0795",  # Invisioned Marketing Systems
+    "litert-lm-inference":      "74895628-d98d-4d93-a789-dde10e7f27ff",  # Leech-Lattice Quantization
+    "moa-routing-capture":      "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",  # Synergizing NotebookLM + Sir Helios
+    "openai-oauth-proxy":       "422a184b-93e7-4dfd-8a12-75d2268b6c60",  # Sovereign_Workspace: SIR_GHOST
+    "openinterpreter-codex":    "8c656cfa-a189-409e-a72d-07692a47f17e",  # Camelot-OS v.1000 / Sovereign Codex
+    "system-ui":                "f7707daa-2d10-4db8-8fda-be4661a27793",  # Sovereign_Workspace: SIR_BORIS
+}
+
+CARTRIDGE_DOMAIN_TAGS: Dict[str, List[str]] = {
+    "cartridge-hive-ide-swarm": ["webgpu", "ast_runner", "zeroclaw_ipc", "reactive_swarm", "hive_engine", "ide"],
+    "darwin-mac-edge":          ["apple_silicon", "metal3", "neural_engine", "darwin", "hardware_telemetry", "launchd"],
+    "freellmapi-gateway":       ["free_llm", "api_gateway", "scoped_network", "inference_proxy", "token_sanitization"],
+    "huginn-agents":            ["research_courier", "multi_agent", "autonomous_summary", "webhooks", "apis_forage"],
+    "lisa-shopify-app-sandbox": ["shopify", "polaris", "liquid", "ecommerce", "graphql_admin", "remix_app"],
+    "litert-lm-inference":      ["litert", "on_device_slm", "quantized_inference", "smollm", "gemma", "npu_acceleration"],
+    "moa-routing-capture":      ["two_hook_routing", "signal_mining", "mixture_of_agents", "training_signal", "latency_verdict"],
+    "openai-oauth-proxy":       ["pkce_oauth", "token_rotation", "air_gap_proxy", "auth_sanitization", "ephemeral_tokens"],
+    "openinterpreter-codex":    ["wasm32_wasi", "sandboxed_pty", "isolated_evaluator", "codex_terminal", "ast_check"],
+    "system-ui":                ["vite_react", "tailwind", "luxora_gold", "threejs_canvas", "spatial_hud", "webgpu_ui"],
+}
+
 RUNE_SYMBOLECT: Dict[str, List[str]] = {
     "\u16B1": ["LADY_APIS", "MERLIN_OMEGA", "HERMES_PRIME"],             # ᚱ RESEARCH
     "\u16A0": ["SIR_FORGE", "SIR_CODEX", "CAMELOT_V1000"],               # ᚠ FORGE
@@ -452,3 +479,34 @@ def list_all_notebooks() -> List[Dict[str, Any]]:
         for kid, nid in KNIGHT_NOTEBOOKS.items()
         if _NOTEBOOK_UUID_RE.match(nid)
     ]
+
+
+def list_all_cartridges() -> List[Dict[str, Any]]:
+    """Returns structured list of all registered Scabbard cartridges and their CloudBrain bindings."""
+    now = datetime.now(timezone.utc).isoformat()
+    return [
+        {
+            "cartridge_id": cid,
+            "notebook_id": nid,
+            "domain_tags": CARTRIDGE_DOMAIN_TAGS.get(cid, []),
+            "vfs_path": f"vfs://worldtree/cartridges/{cid}/",
+            "last_checked": now,
+        }
+        for cid, nid in CARTRIDGE_NOTEBOOKS.items()
+    ]
+
+
+def route_cartridge_by_domain(task_keywords: List[str]) -> List[str]:
+    """
+    Mathematical domain router for Scabbard cartridges.
+    Returns cartridge IDs sorted by descending relevance score.
+    """
+    kw_set = {k.lower() for k in task_keywords}
+    scores: Dict[str, float] = {}
+    for cid, tags in CARTRIDGE_DOMAIN_TAGS.items():
+        tag_set = set(tags)
+        score = len(kw_set & tag_set) / len(tag_set) if tag_set else 0.0
+        if score > 0:
+            scores[cid] = score
+    return sorted(scores, key=lambda k: scores[k], reverse=True)
+

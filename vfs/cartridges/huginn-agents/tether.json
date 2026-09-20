@@ -1,0 +1,33 @@
+{
+  "cartridge_id": "huginn-agents",
+  "vfs_uri": "vfs://worldtree/cartridges/huginn-agents/",
+  "cloudbrain_notebook_id": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
+  "cloudbrain_title": "Sovereign_Workspace: LADY_APIS",
+  "bound_knights": [
+    "LADY_APIS",
+    "SIR_HERMES",
+    "SIR_SCAVENGER"
+  ],
+  "risk_tier_cap": "T2",
+  "domain_tags": [
+    "research_courier",
+    "multi_agent",
+    "autonomous_summary",
+    "webhooks",
+    "apis_forage"
+  ],
+  "entrypoints": [
+    "execute",
+    "summarize",
+    "fetch"
+  ],
+  "physical_source_path": "cartridges/huginn-agents",
+  "files": [
+    "manifest.json",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T01:17:15.235006+00:00"
+}

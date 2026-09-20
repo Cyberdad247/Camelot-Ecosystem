@@ -1,0 +1,32 @@
+{
+  "cartridge_id": "freellmapi-gateway",
+  "vfs_uri": "vfs://worldtree/cartridges/freellmapi-gateway/",
+  "cloudbrain_notebook_id": "6fd09912-c216-44c7-a3b2-d5357d185ab6",
+  "cloudbrain_title": "Unlimited AI Access via AntiGravity and OmniRoute",
+  "bound_knights": [
+    "SIR_HERMES",
+    "SIR_PROXY",
+    "SIR_HELIOS"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "free_llm",
+    "api_gateway",
+    "scoped_network",
+    "inference_proxy",
+    "token_sanitization"
+  ],
+  "entrypoints": [
+    "fetch",
+    "execute"
+  ],
+  "physical_source_path": "cartridges/freellmapi-gateway",
+  "files": [
+    "manifest.json",
+    "signing_key.pub",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T01:17:15.232917+00:00"
+}

@@ -31,19 +31,14 @@ _UNUSED_IMPORT_PY = re.compile(r"^import\s+(\w+)|^from\s+[\w.]+\s+import\s+(\w+)
 _DUPLICATE_WINDOW = 128  # bytes — check first N bytes for duplicate detection
 
 
+_WORD_RE = re.compile(r"[A-Za-z_][A-Za-z0-9_]*")
+
+
 def sweep(records: Iterable[FileRecord]) -> SweepReport:
     report = SweepReport()
     recs = list(records)
 
-    # Build a set of all referenced file names (cross-reference sweep)
-    all_text_by_file: dict[str, str] = {}
-    for rec in recs:
-        if not rec.is_binary:
-            all_text_by_file[rec.rel] = rec.read_text()
-
-    all_content = "\n".join(all_text_by_file.values())
-
-    # Duplicate content detection (header hash)
+    # 1. Duplicate content detection (header hash — fast, zero text decode)
     header_seen: dict[str, str] = {}
     for rec in recs:
         if rec.is_binary or rec.size < 64:
@@ -62,39 +57,56 @@ def sweep(records: Iterable[FileRecord]) -> SweepReport:
         else:
             header_seen[key] = rec.rel
 
-    # Unused Python imports (naive: import name not found elsewhere in file)
-    for rec in recs:
-        if rec.ext != ".py" or rec.is_binary:
-            continue
-        text = all_text_by_file.get(rec.rel, "")
-        lines = text.splitlines()
-        for i, line in enumerate(lines, 1):
-            m = re.match(r"^import\s+(\w+)$", line.strip())
-            if m:
-                name = m.group(1)
-                # Check if name appears anywhere else in the file
-                rest = text.replace(line, "", 1)
-                if name not in rest:
-                    report.flags.append(OrphanFlag(
-                        kind="unused_import",
-                        file=rec.rel,
-                        line=i,
-                        detail=f"'{name}' imported but not referenced",
-                    ))
-
-    # Unreferenced files — Python modules not imported anywhere
+    # 2. Target python module base names for unreferenced detection
     py_modules = {
         rec.rel.replace("/", ".").removesuffix(".py")
         for rec in recs
         if rec.ext == ".py" and "/__" not in rec.rel
     }
+    targets = {
+        mod.rsplit(".", 1)[-1]
+        for mod in py_modules
+    } - {"__init__", "colony", "main", "__main__"}
+    found_bases: set[str] = set()
+
+    # 3. Stream through records: check unused imports and resolve module references
+    for rec in recs:
+        if rec.is_binary:
+            continue
+        text = rec.read_text()
+        if not text:
+            continue
+
+        # Unused Python imports (per-file)
+        if rec.ext == ".py":
+            lines = text.splitlines()
+            for i, line in enumerate(lines, 1):
+                m = re.match(r"^import\s+(\w+)$", line.strip())
+                if m:
+                    name = m.group(1)
+                    rest = text.replace(line, "", 1)
+                    if name not in rest:
+                        report.flags.append(OrphanFlag(
+                            kind="unused_import",
+                            file=rec.rel,
+                            line=i,
+                            detail=f"'{name}' imported but not referenced",
+                        ))
+
+        # Check target module mentions via word tokens
+        if targets:
+            words = set(_WORD_RE.findall(text))
+            matched = words & targets
+            if matched:
+                found_bases.update(matched)
+                targets -= matched
+
+    # 4. Flag unreferenced modules
     for mod in py_modules:
         base = mod.rsplit(".", 1)[-1]
         if base in ("__init__", "colony", "main", "__main__"):
             continue
-        # Check if base name appears in any file text
-        if not re.search(r"\b" + re.escape(base) + r"\b", all_content):
-            # Only flag if not an obvious entry point
+        if base not in found_bases:
             rel = mod.replace(".", "/") + ".py"
             report.flags.append(OrphanFlag(
                 kind="unreferenced_file",

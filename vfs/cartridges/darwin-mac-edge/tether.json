@@ -1,0 +1,34 @@
+{
+  "cartridge_id": "darwin-mac-edge",
+  "vfs_uri": "vfs://worldtree/cartridges/darwin-mac-edge/",
+  "cloudbrain_notebook_id": "39299131-0ade-4f48-8ad4-a68878a6d3d9",
+  "cloudbrain_title": "Father's Camelot / Sovereign Edge",
+  "bound_knights": [
+    "SIR_DARWIN_MAC",
+    "SIR_LANCELOT",
+    "HERMES_PRIME"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "apple_silicon",
+    "metal3",
+    "neural_engine",
+    "darwin",
+    "hardware_telemetry",
+    "launchd"
+  ],
+  "entrypoints": [
+    "audit",
+    "probe",
+    "telemetry"
+  ],
+  "physical_source_path": "cartridges/darwin-mac-edge",
+  "files": [
+    "darwin_agent.py",
+    "probe_mac.sh",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T01:17:15.230308+00:00"
+}

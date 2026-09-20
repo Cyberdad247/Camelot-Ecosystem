@@ -13,12 +13,12 @@
     "heimdall_uuid": "3205f189-91da-4272-96a9-3641fd642763",
     "worldtree_anchor": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "vfs_wing": "WING_WORLDTREE_VPS_HUB",
-    "version": "v1000.54-EXCALIBUR-A",
+    "version": "Living Camelot-OS v1000 MAX Compendium",
     "deployed_repository": "https://github.com/Cyberdad247/Camelot-VPS.git",
     "deployed_branch": "main",
     "deployed_commit": "27e66d0113879dc39b8122a51284624bcb95e692",
     "deployed_commit_summary": "feat(vps-hub): implement Omni-Voice DAG, VPS Nexus deployment, and WorldTree integration",
-    "deployed_commit_verified_at": "2026-09-17T17:19:34.886713+00:00",
+    "deployed_commit_verified_at": "2026-09-20T01:18:15.571274+00:00",
     "deployed_commit_verification": "live ssh git rev-parse probe",
     "last_delivery_id": "del_34aed52a",
     "services": {
@@ -98,7 +98,7 @@
       "port_8000": "CLOSED",
       "port_8095": "OPEN",
       "port_9000": "CLOSED",
-      "probe_timestamp": "2026-09-17T17:19:34.886713+00:00"
+      "probe_timestamp": "2026-09-20T01:18:15.571274+00:00"
     },
     "drift": {
       "detected": true,
@@ -110,8 +110,8 @@
       "summary": "3 recorded service(s) not reachable"
     },
     "status": "MERGED_MAIN_UNIFIED",
-    "timestamp": "2026-09-17T17:19:31.063975+00:00",
-    "last_synced": "2026-09-19T15:04:02.436917+00:00",
+    "timestamp": "2026-09-20T01:18:10.614549+00:00",
+    "last_synced": "2026-09-20T01:18:10.614549+00:00",
     "active_cartridges": [
       "omarchy-vps-hermes-v1",
       "vps-hub-cartridge-v1"
