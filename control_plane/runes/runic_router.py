@@ -972,6 +972,38 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_reya_channel",
         "hydrate": False,
     },
+    "//HUMANISTIC_VOICE": {
+        "knight": "sir_sonus",
+        "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
+    "//humanistic": {
+        "knight": "sir_sonus",
+        "description": "Alias for //HUMANISTIC_VOICE human-to-humanistic AI conversation",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
+    "//vocal_prosody": {
+        "knight": "sir_sonus",
+        "description": "Alias for //HUMANISTIC_VOICE vocal pattern & prosody extraction",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
+    "//live_speech": {
+        "knight": "sir_sonus",
+        "description": "Alias for //HUMANISTIC_VOICE live speech communication loop",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -3527,8 +3559,46 @@ def _handle_reya_channel(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_humanistic_voice(param: Any, context: dict) -> dict:
+    """//HUMANISTIC_VOICE — Realtime vocal pattern analysis, prosody mirroring & humanistic conversation loop."""
+    import math
+    import struct
+    text_hint = str(param or "").strip() or "Greetings"
+    knight_id = context.get("knight", "reya_companion") if context else "reya_companion"
+    pcm_bytes = context.get("pcm_bytes") if context else None
+
+    import importlib.util
+    loop_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "humanistic_voice" / "humanistic_conversational_loop.py"
+    spec = importlib.util.spec_from_file_location("humanistic_conversational_loop", str(loop_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        loop = mod.get_humanistic_conversational_loop()
+
+        # Generate synthetic PCM if none passed
+        if not pcm_bytes:
+            samples = [int(1200 * math.sin(2 * math.pi * 200 * i / 16000)) for i in range(16000)]
+            pcm_bytes = struct.pack(f"<{len(samples)}h", *samples)
+
+        result = loop.process_incoming_human_turn(pcm_bytes, text_hint, knight_id)
+        return {
+            "action": "humanistic_voice_turn",
+            "knight": knight_id,
+            "turn_result": result,
+            "status": "HUMANISTIC_CONVERSATION_ACTIVE",
+        }
+    else:
+        return {
+            "action": "humanistic_voice_turn",
+            "error": "Failed to load humanistic_conversational_loop module",
+            "status": "ERROR",
+        }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_humanistic_voice": _handle_humanistic_voice,
     "_handle_reya_channel": _handle_reya_channel,
     "_handle_activate_reya_nostr_bridge": _handle_activate_reya_nostr_bridge,
     "_handle_arthur_merlin_handshake": _handle_arthur_merlin_handshake,
