@@ -31,6 +31,7 @@ from __future__ import annotations
 
 __version__ = "9000.14"  # CYBERTRONIA
 
+import os
 import re
 import sys
 from dataclasses import dataclass, field
@@ -49,12 +50,19 @@ INVARIANTS: tuple[str, ...] = (
 
 # Dangerous-effect grounding: pattern → fluent it negates (PDDL action effects).
 _DANGER: list[tuple[re.Pattern, str]] = [
-    (re.compile(r"\b(provenance|ledger)\b.*\b(delete|remove|rm|drop|truncate|wipe|purge)\b"
-                r"|\b(delete|remove|rm|drop|truncate|wipe|purge)\b.*\b(provenance|ledger)\b", re.I),
+    (re.compile(r"(?:provenance|ledger|\.shadow)"
+                r".*\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
+                r"|\b(?:delete|remove|rm|drop|truncate|wipe|purge|overwrite|clobber)\b"
+                r".*(?:provenance|ledger|\.shadow)"
+                r"|>\s*\S*(?:provenance|ledger)\S*", re.I),
      "provenance_intact"),
-    (re.compile(r"\b(force[-\s]?push|push\s+--force|--force-with-lease|reset\s+--hard)\b"
-                r".*\b(main|master|origin)\b"
-                r"|\b(main|master|origin)\b.*\b(force[-\s]?push|reset\s+--hard)\b", re.I),
+    (re.compile(
+        r"\bgit\s+push\b[^\n]*?(--force(?:-with-lease)?|(?<!\w)-f(?!\w))"
+        r"|\bgit\s+push\b[^\n]*?\+\s*(?:refs/heads/)?(?:main|master)\b"
+        r"|\bforce[-\s]?push\b"
+        r"|\breset\s+--hard\b"
+        r"|\bdenyNonFastForwards\s*(?:=|\s+)\s*false\b"
+        r"|\breceive\.denyDeletes\s*(?:=|\s+)\s*false\b", re.I),
      "main_branch_protected"),
     (re.compile(r"\b(bypass|disable|skip|remove|drop)\b\s*(the\s+)?"
                 r"(hitl|iron[-\s]?gate|approval|human[-\s]?gate|verification\s+gate)", re.I),
