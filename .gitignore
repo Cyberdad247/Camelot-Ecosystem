@@ -317,3 +317,7 @@ deploy/multivoice-router/
 appendonly.aof
 appendonly.aof.*
 *.aof
+
+# Local model weights binaries (keep configs/manifests tracked)
+03_VAULT/models/**/*.safetensors
+03_VAULT/models/**/*.ggml

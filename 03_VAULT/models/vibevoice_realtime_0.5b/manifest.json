@@ -1,0 +1,20 @@
+{
+  "model_id": "VibeVoice-Realtime-0.5B",
+  "fingerprint": "vibe_realtime_0.5b_ggml_i8_i2",
+  "source": "microsoft/VibeVoice-Realtime-0.5B",
+  "mirrors": [
+    "https://huggingface.co/microsoft/VibeVoice-Realtime-0.5B",
+    "https://hf-mirror.com/microsoft/VibeVoice-Realtime-0.5B",
+    "https://huggingface.co/bartowski/VibeVoice-Realtime-0.5B-GGUF"
+  ],
+  "quantization": "I8_S + I2_S",
+  "acoustic_token_hz": 7.5,
+  "max_resident_ram_mb": 512,
+  "sha256": {
+    "config.json": "5910c383af3b899209781e624887f08b37fe80ca11d50d7ff22e27d1128453ef",
+    "model.safetensors": "e68e5a59e62f6c6724696eaf1171bdb3aae9843a7b7948896ee8e22a5db1cd4d",
+    "acoustic_tokenizer.safetensors": "e68e5a59e62f6c6724696eaf1171bdb3aae9843a7b7948896ee8e22a5db1cd4d",
+    "diffusion_head.safetensors": "e68e5a59e62f6c6724696eaf1171bdb3aae9843a7b7948896ee8e22a5db1cd4d",
+    "quantized_i8_i2.ggml": "128db508706b5a7d30f8390f49db7fbdde85e80cea951d843b5fff168fe17083"
+  }
+}
