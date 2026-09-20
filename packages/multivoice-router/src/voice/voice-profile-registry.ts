@@ -142,3 +142,46 @@ export function listAllChanneledKnights(): string[] {
   return VOICE_PROFILES.map(v => v.knightId);
 }
 
+export type AudioTransport = 'webrtc' | 'websocket' | 'agora_sd_rtn' | 'shared_memory_pipe';
+
+export interface S2SOmniRoutingConfig {
+  transport: AudioTransport;
+  channelName: string;
+  enableRadixCache: boolean;
+  enablePlc: boolean;
+  enableAec: boolean;
+  maxCacheTokens?: number;
+  sampleRate: number;
+}
+
+export function getDefaultS2SOmniConfig(channelName = 'camelot_omni_s2s'): S2SOmniRoutingConfig {
+  return {
+    transport: 'agora_sd_rtn',
+    channelName,
+    enableRadixCache: true,
+    enablePlc: true,
+    enableAec: true,
+    maxCacheTokens: 16384,
+    sampleRate: 16000,
+  };
+}
+
+export function createS2SOmniSessionParams(knightId: string, channelName = 'camelot_omni_s2s') {
+  const profile = getReyaChanneledProfile(knightId);
+  const config = getDefaultS2SOmniConfig(channelName);
+  return {
+    profile,
+    config,
+    handshakePayload: {
+      client_id: `omni_s2s_${Date.now()}`,
+      channel_name: config.channelName,
+      transport: config.transport,
+      knight_id: profile.knightId,
+      speaker_id: profile.speakerId,
+      radix_cache: config.enableRadixCache,
+      plc: config.enablePlc,
+      aec: config.enableAec,
+    },
+  };
+}
+

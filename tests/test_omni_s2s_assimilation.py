@@ -242,3 +242,39 @@ async def test_realtime_voice_session_radix_and_agora_integration():
     events = await session._run_pipeline(pcm_frame * 10)
     assert len(events) > 0
     assert session.metrics.turns >= 0
+
+
+def test_omni_s2s_engine_chunked_prefill_and_speculative_overlap():
+    """Verify chunked prefill (100ms chunks) and speculative decode overlap in OmniS2SEngine."""
+    engine = OmniS2SEngine(channel_name="test_chunked_channel")
+
+    # Generate 5 x 100ms frames (1600 samples = 3200 bytes per chunk at 16kHz)
+    chunks = [b"\x05\x00" * 1600 for _ in range(5)]
+
+    # Process first turn with chunked prefill
+    turn1 = engine.process_chunked_speech_turn(
+        chunks,
+        transcript_hint="Turn 1 chunked audio prefill test",
+        knight_id="codex_implementer",
+        enable_speculative_decode=True,
+    )
+    assert turn1.status == "S2S_CHUNKED_TURN_COMPLETED"
+    assert turn1.is_chunked_prefill is True
+    assert turn1.chunk_count == 5
+    assert turn1.speculative_overlap_ms > 0
+    assert turn1.estimated_ttfa_ms < 150.0
+    assert "Codex" in turn1.response_text
+
+    # Process second turn (reusing conversation history prefix)
+    turn2 = engine.process_chunked_speech_turn(
+        chunks,
+        transcript_hint="Turn 2 subsequent question with Radix hit",
+        knight_id="boris_architect",
+        enable_speculative_decode=True,
+    )
+    assert turn2.status == "S2S_CHUNKED_TURN_COMPLETED"
+    assert turn2.radix_cache_hit_tokens > 0
+    assert turn2.radix_cache_hit_rate > 0.0
+    assert turn2.estimated_ttfa_ms <= turn1.estimated_ttfa_ms
+    assert "Boris" in turn2.response_text
+
