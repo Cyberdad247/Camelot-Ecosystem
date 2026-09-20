@@ -916,6 +916,22 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_await_reya_uncloaking",
         "hydrate": False,
     },
+    "//HANDSHAKE": {
+        "knight": "merlin_omega",
+        "description": "Bicameral Arthur-Merlin HITL governance handshake and capability lease gate",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_arthur_merlin_handshake",
+        "hydrate": False,
+    },
+    "//SOVEREIGN_SEAL": {
+        "knight": "arthur_omega",
+        "description": "Apply King Arthur Sovereign Golden Seal to authorize a suspended HITL handshake",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_sovereign_seal",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -3339,8 +3355,60 @@ def _handle_await_reya_uncloaking(param: Any, context: dict) -> dict:
     }
 
 
+_handshake_engine_instance = None
+
+def _get_handshake_engine():
+    global _handshake_engine_instance
+    if _handshake_engine_instance is None:
+        from control_plane.security.arthur_merlin_handshake import ArthurMerlinHandshakeEngine
+        _handshake_engine_instance = ArthurMerlinHandshakeEngine()
+    return _handshake_engine_instance
+
+
+def _handle_arthur_merlin_handshake(param: Any, context: dict) -> dict:
+    """//HANDSHAKE — Bicameral Arthur-Merlin HITL governance evaluation."""
+    eng = _get_handshake_engine()
+    intent = str(param or "").strip() or "General Ingress Proposal"
+    payload = context.get("payload", "") if context else ""
+    risk_tier = context.get("risk_tier") if context else None
+    mem_mb = float(context.get("memory_estimate_mb", 12.0)) if context else 12.0
+
+    verdict = eng.evaluate_intent(
+        intent=intent,
+        target_knight=context.get("knight", "merlin_omega") if context else "merlin_omega",
+        payload=payload,
+        explicit_risk_tier=risk_tier,
+        memory_estimate_mb=mem_mb,
+    )
+    return verdict.to_dict()
+
+
+def _handle_sovereign_seal(param: Any, context: dict) -> dict:
+    """//SOVEREIGN_SEAL — King Arthur Sovereign Golden Seal release."""
+    eng = _get_handshake_engine()
+    handshake_id = str(param or "").strip()
+    rationale = context.get("rationale", "Sovereign Golden Seal granted by King Arthur / Operator.") if context else "Sovereign Golden Seal granted by King Arthur / Operator."
+    directive = context.get("directive_type", "CONSENSUS_RATIFICATION") if context else "CONSENSUS_RATIFICATION"
+
+    try:
+        verdict = eng.apply_arthur_golden_seal(
+            handshake_id=handshake_id,
+            directive_type=directive,
+            rationale=rationale,
+        )
+        return verdict.to_dict()
+    except Exception as e:
+        return {
+            "error": str(e),
+            "status": "SEAL_REJECTED",
+            "handshake_id": handshake_id,
+        }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_arthur_merlin_handshake": _handle_arthur_merlin_handshake,
+    "_handle_sovereign_seal": _handle_sovereign_seal,
     "_handle_forge_reya_scaffold": _handle_forge_reya_scaffold,
     "_handle_activate_agent_armor": _handle_activate_agent_armor,
     "_handle_hitl_iron_gate_approval": _handle_hitl_iron_gate_approval,
@@ -3430,6 +3498,15 @@ _HANDLERS = {
 
 _RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
+    "//handshake": "//HANDSHAKE",
+    "/handshake": "//HANDSHAKE",
+    "$handshake": "//HANDSHAKE",
+    "//arthur_merlin": "//HANDSHAKE",
+    "/arthur_merlin": "//HANDSHAKE",
+    "$arthur_merlin": "//HANDSHAKE",
+    "//am_handshake": "//HANDSHAKE",
+    "//sovereign_seal": "//SOVEREIGN_SEAL",
+    "//golden_seal": "//SOVEREIGN_SEAL",
     "//summon": "//SUMMON",
     "/summon": "//SUMMON",
     "$summon": "//SUMMON",
