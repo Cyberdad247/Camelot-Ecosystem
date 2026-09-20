@@ -2007,3 +2007,16 @@
 - Missing: `nextjs` — create `.hive/skills/nextjs.md`
 - Missing: `reasoning` — create `.hive/skills/reasoning.md`
 - Missing: `voice-media` — create `.hive/skills/voice-media.md`
+
+## Archivist Scan — 2026-09-20T06:16:40.454074+00:00 (14ms)
+
+### Skills: 0/0 @ v400.1.0 OK
+
+### Skill Gaps (FRAGMENTED)
+- Missing: `rust-kinetic` — create `.hive/skills/rust-kinetic.md`
+- Missing: `security` — create `.hive/skills/security.md`
+- Missing: `swarm-colony` — create `.hive/skills/swarm-colony.md`
+- Missing: `python-api` — create `.hive/skills/python-api.md`
+- Missing: `nextjs` — create `.hive/skills/nextjs.md`
+- Missing: `reasoning` — create `.hive/skills/reasoning.md`
+- Missing: `voice-media` — create `.hive/skills/voice-media.md`
