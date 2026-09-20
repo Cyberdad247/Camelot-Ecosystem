@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1859",
-            "task": "Omni Speech-to-Speech (S2S) Architecture Hardening: 100ms Chunked Prefill Overlap, Speculative Decode & TypeScript Multivoice Router S2S Transport Registry",
-            "author": "SIR_SONUS / SIR_CODEX / SIR_BORIS / MERLIN_Ω / SIR_HELIO / SIR_HELIOS / ARTHUR_OMEGA",
+            "id": "1860",
+            "task": "Omni Speech-to-Speech (S2S) Ecosystem Activation: Antigravity CLI FastMCP Tools (omni_s2s_turn, omni_s2s_status) & Camelot-OS Global CLI (camelot s2s)",
+            "author": "SIR_HELIOS / SIR_SONUS / SIR_CODEX / MERLIN_Ω / SIR_HELIO / ARTHUR_OMEGA",
             "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
-            "notes": "Implemented all architectural recommendations from the 4-repo S2S assimilation: (1) Added process_chunked_speech_turn in 02_FORGE/assimilation/omni_s2s/omni_s2s_engine.py enabling continuous 100ms chunked prefill, incremental Radix Tree token insertion, and speculative decode overlap saving 40-50ms TTFA, (2) Extended TypeScript Multivoice Router in packages/multivoice-router/src/voice/voice-profile-registry.ts with AudioTransport ('webrtc' | 'websocket' | 'agora_sd_rtn' | 'shared_memory_pipe'), S2SOmniRoutingConfig, getDefaultS2SOmniConfig, and createS2SOmniSessionParams handshake generator, (3) Authored test_omni_s2s_engine_chunked_prefill_and_speculative_overlap in tests/test_omni_s2s_assimilation.py passing 10/10 tests and 68/68 across the combined voice regression suite, (4) Verified apps/pwa typecheck and parity gates (check_omnivoice_router_build.py, check_generated_artifact_parity.py), (5) Persisted facts into MemCastle KNN store (Row ID 551) and Graphiti temporal knowledge graph (Fact 9) under SIR_SONUS, and (6) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-20 23:25 UTC"
+            "notes": "Extended both Antigravity CLI and Camelot-OS Global CLI with live Omni S2S control plane capabilities: (1) Added omni_s2s_turn and omni_s2s_status tools to control_plane/mcp/cloudbrain_mcp_server.py and registered corresponding schemas in .gemini/antigravity-cli/mcp/camelot-cloudbrain/, enabling Antigravity to trigger real-time S2S inference and monitor Radix/Agora telemetry, (2) Implemented camelot s2s subcommand in bin/camelot.py supporting prompt query execution, knight persona selection (--knight), Agora channel configuration (--channel), 100ms chunked prefill simulation (--chunked), multi-turn dialog (--turns), machine output (--json), and live transport statistics (--stats), (3) Authored test_antigravity_and_camelot_cli_s2s_integration in tests/test_omni_s2s_assimilation.py passing 11/11 tests and 69/69 across the combined voice regression suite, (4) Verified apps/pwa typecheck and parity gates (check_omnivoice_router_build.py, check_generated_artifact_parity.py), (5) Persisted facts into MemCastle KNN store (Row ID 552) and Graphiti temporal knowledge graph (Fact 10) under SIR_HELIOS, and (6) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-20 23:35 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1858" in line:
+            if "| 1859" in line:
                 insert_at = i
                 break
         

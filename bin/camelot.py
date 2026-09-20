@@ -46,7 +46,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s"}
 
 
 def _banner() -> None:
@@ -401,6 +401,86 @@ Register-ArgumentCompleter -Native -CommandName @('camelot','ai') -ScriptBlock {
         sys.exit(1)
 
 
+def _cmd_s2s(argv: list[str]) -> None:
+    """Omni Speech-to-Speech (S2S) CLI with RadixAttention prefix caching and Agora RTC.
+
+    Usage: camelot s2s ["prompt text"] [--knight id] [--channel name] [--chunked] [--turns n] [--json] [--stats]
+    """
+    import argparse
+    import math
+    import struct
+    parser = argparse.ArgumentParser(prog="camelot s2s", description="Camelot Omni S2S Engine CLI")
+    parser.add_argument("query", nargs="*", default=[], help="Prompt text for S2S turn")
+    parser.add_argument("--knight", "-k", default="reya_companion", help="Channeled Knight persona")
+    parser.add_argument("--channel", "-c", default="camelot_omni_s2s", help="Agora RTC SD-RTN channel")
+    parser.add_argument("--chunked", action="store_true", help="Simulate 100ms chunked prefill & speculative overlap")
+    parser.add_argument("--turns", "-t", type=int, default=1, help="Number of turns to simulate")
+    parser.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+    parser.add_argument("--stats", action="store_true", help="Display Radix cache and Agora RTC stats")
+    parsed = parser.parse_args(argv)
+
+    s2s_dir = _REPO / "02_FORGE" / "assimilation" / "omni_s2s"
+    if str(s2s_dir) not in sys.path:
+        sys.path.insert(0, str(s2s_dir))
+    from omni_s2s_engine import get_omni_s2s_engine
+
+    engine = get_omni_s2s_engine()
+
+    if parsed.stats:
+        stats = {
+            "radix_cache": engine.radix_cache.get_stats(),
+            "agora_rtc": engine.agora_bridge.get_stats(),
+            "turn_counter": engine.turn_counter,
+        }
+        if parsed.json:
+            print(json.dumps(stats, indent=2))
+        else:
+            print("=== OMNI S2S SYSTEM STATUS ===")
+            print(f"Channel:     {stats['agora_rtc']['channel']} (Connected: {stats['agora_rtc']['connected']})")
+            print(f"SHM Slab:    {stats['agora_rtc']['shm_slab']}")
+            print(f"Radix Cache: {stats['radix_cache']['cached_tokens']}/{stats['radix_cache']['max_tokens']} tokens")
+            print(f"Cache Hits:  {stats['radix_cache']['hits']} (Rate: {stats['radix_cache']['hit_rate_pct']}%)")
+            print(f"TTFT Saved:  {stats['radix_cache']['estimated_ttft_saving_ms']} ms")
+            print(f"Total Turns: {engine.turn_counter}")
+        return
+
+    prompt_text = " ".join(parsed.query) if parsed.query else "Status check on fortress systems"
+    samples = [int(1500 * math.sin(2 * math.pi * 220 * i / 16000)) for i in range(8000)]
+    pcm_bytes = struct.pack(f"<{len(samples)}h", *samples)
+
+    results = []
+    for turn_idx in range(parsed.turns):
+        turn_prompt = prompt_text if parsed.turns == 1 else f"{prompt_text} (turn {turn_idx + 1})"
+        if parsed.chunked:
+            chunks = [pcm_bytes[i:i + 3200] for i in range(0, len(pcm_bytes), 3200)]
+            res = engine.process_chunked_speech_turn(
+                chunks,
+                transcript_hint=turn_prompt,
+                knight_id=parsed.knight,
+                enable_speculative_decode=True,
+            )
+        else:
+            res = engine.process_speech_turn(
+                pcm_bytes,
+                transcript_hint=turn_prompt,
+                knight_id=parsed.knight,
+            )
+        results.append(res.to_dict())
+
+    if parsed.json:
+        print(json.dumps(results if len(results) > 1 else results[0], indent=2))
+    else:
+        for r in results:
+            print(f"\n[S2S] OMNI S2S TURN {r['turn_index']}  //  Knight: {r['active_knight']}")
+            print(f"  Input:       {r['input_text']}")
+            print(f"  Response:    {r['response_text']}")
+            print(f"  TTFA:        {r['estimated_ttfa_ms']} ms")
+            print(f"  Radix Cache: {r['radix_cache_hit_rate']}% hit rate ({r['radix_cache_hit_tokens']}/{r['radix_total_tokens']} tokens)")
+            if r.get("is_chunked_prefill"):
+                print(f"  Prefill:     100ms Chunked ({r['chunk_count']} chunks, {r['speculative_overlap_ms']}ms speculative overlap)")
+            print(f"  Transport:   Agora SD-RTN ({r['channel_name']})")
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -417,6 +497,10 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("s2s", "voice-s2s", "omni-s2s"):
+        _cmd_s2s(args[1:])
+        return
+
     if first == "configure" or first == "config":
         verbose = "--verbose" in args or "-v" in args
         _cmd_configure(verbose=verbose)

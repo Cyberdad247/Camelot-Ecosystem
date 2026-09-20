@@ -278,3 +278,29 @@ def test_omni_s2s_engine_chunked_prefill_and_speculative_overlap():
     assert turn2.estimated_ttfa_ms <= turn1.estimated_ttfa_ms
     assert "Boris" in turn2.response_text
 
+
+def test_antigravity_and_camelot_cli_s2s_integration():
+    """Verify Antigravity FastMCP tools and Camelot CLI s2s subcommand."""
+    # 1. Test FastMCP tools
+    from control_plane.mcp.cloudbrain_mcp_server import omni_s2s_turn, omni_s2s_status
+
+    status_res = omni_s2s_status()
+    assert status_res["status"] == "OMNI_S2S_OPERATIONAL"
+    assert "radix_cache" in status_res
+    assert "agora_rtc" in status_res
+
+    turn_res = omni_s2s_turn(prompt="Antigravity Test Prompt", knight_id="reya_companion")
+    assert turn_res["status"] == "S2S_CHUNKED_TURN_COMPLETED"
+    assert "Reya" in turn_res["response_text"]
+    assert turn_res["radix_cache_hit_rate"] > 0
+
+    # 2. Test Camelot CLI s2s subcommand
+    from bin.camelot import _cmd_s2s
+
+    # Test stats call
+    _cmd_s2s(["--stats", "--json"])
+
+    # Test single turn JSON call
+    _cmd_s2s(["Test CLI dispatch", "--knight", "codex_implementer", "--json"])
+
+

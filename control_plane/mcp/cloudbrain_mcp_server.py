@@ -284,6 +284,59 @@ def crystallize_infinite_context(
         return {"error": str(e)}
 
 
+@mcp_server.tool()
+def omni_s2s_turn(
+    prompt: str = "Fortress status report",
+    knight_id: str = "reya_companion",
+    channel_name: str = "camelot_omni_s2s",
+    chunked: bool = True,
+) -> dict:
+    """Execute real-time Omni S2S speech turn using RadixAttention KV cache and Agora SD-RTN."""
+    s2s_dir = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omni_s2s"
+    if str(s2s_dir) not in sys.path:
+        sys.path.insert(0, str(s2s_dir))
+    try:
+        from omni_s2s_engine import get_omni_s2s_engine
+        import math
+        import struct
+
+        engine = get_omni_s2s_engine()
+        samples = [int(1500 * math.sin(2 * math.pi * 220 * i / 16000)) for i in range(8000)]
+        pcm_bytes = struct.pack(f"<{len(samples)}h", *samples)
+
+        if chunked:
+            chunks = [pcm_bytes[i:i + 3200] for i in range(0, len(pcm_bytes), 3200)]
+            res = engine.process_chunked_speech_turn(
+                chunks, transcript_hint=prompt, knight_id=knight_id, enable_speculative_decode=True
+            )
+        else:
+            res = engine.process_speech_turn(pcm_bytes, transcript_hint=prompt, knight_id=knight_id)
+        return res.to_dict()
+    except Exception as e:
+        return {"error": str(e), "status": "OMNI_S2S_ERROR"}
+
+
+@mcp_server.tool()
+def omni_s2s_status() -> dict:
+    """Return status of RadixAudioCache, Agora RTC transport, and shared memory slabs."""
+    s2s_dir = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omni_s2s"
+    if str(s2s_dir) not in sys.path:
+        sys.path.insert(0, str(s2s_dir))
+    try:
+        from omni_s2s_engine import get_omni_s2s_engine
+
+        engine = get_omni_s2s_engine()
+        return {
+            "radix_cache": engine.radix_cache.get_stats(),
+            "agora_rtc": engine.agora_bridge.get_stats(),
+            "turns_completed": engine.turn_counter,
+            "shm_slab": engine.agora_bridge.shm_slab_path,
+            "status": "OMNI_S2S_OPERATIONAL",
+        }
+    except Exception as e:
+        return {"error": str(e), "status": "OMNI_S2S_ERROR"}
+
+
 if __name__ == "__main__":
     mcp_server.run()
 
