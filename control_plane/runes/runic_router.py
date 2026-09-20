@@ -1004,6 +1004,38 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_humanistic_voice",
         "hydrate": False,
     },
+    "//OMNI_S2S": {
+        "knight": "sir_sonus",
+        "description": "Omni Speech-to-Speech stream with SGLang RadixAttention prefix caching & Agora RTC transport",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
+    "//sglang_omni": {
+        "knight": "sir_sonus",
+        "description": "Alias for //OMNI_S2S RadixAttention speech streaming",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
+    "//agora_rtc": {
+        "knight": "sir_sonus",
+        "description": "Alias for //OMNI_S2S Agora RTC transport bridge",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
+    "//s2s_stream": {
+        "knight": "sir_sonus",
+        "description": "Alias for //OMNI_S2S Speech-to-Speech streaming pipeline",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -3596,8 +3628,46 @@ def _handle_humanistic_voice(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_omni_s2s(param: Any, context: dict) -> dict:
+    """//OMNI_S2S — Omni Speech-to-Speech stream with SGLang RadixAttention prefix caching & Agora RTC transport."""
+    import math
+    import struct
+    text_hint = str(param or "").strip() or "Omni stream sync"
+    knight_id = context.get("knight", "reya_companion") if context else "reya_companion"
+    pcm_bytes = context.get("pcm_bytes") if context else None
+    channel_name = context.get("channel", "camelot_omni_s2s") if context else "camelot_omni_s2s"
+
+    import importlib.util
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omni_s2s" / "omni_s2s_engine.py"
+    spec = importlib.util.spec_from_file_location("omni_s2s_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.get_omni_s2s_engine()
+
+        if not pcm_bytes:
+            samples = [int(1500 * math.sin(2 * math.pi * 220 * i / 16000)) for i in range(8000)]
+            pcm_bytes = struct.pack(f"<{len(samples)}h", *samples)
+
+        result = engine.process_speech_turn(pcm_bytes, text_hint, knight_id)
+        return {
+            "action": "omni_s2s_turn",
+            "knight": knight_id,
+            "turn_result": result.to_dict(),
+            "status": "OMNI_S2S_STREAM_ACTIVE",
+        }
+    else:
+        return {
+            "action": "omni_s2s_turn",
+            "error": "Failed to load omni_s2s_engine module",
+            "status": "ERROR",
+        }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_omni_s2s": _handle_omni_s2s,
     "_handle_humanistic_voice": _handle_humanistic_voice,
     "_handle_reya_channel": _handle_reya_channel,
     "_handle_activate_reya_nostr_bridge": _handle_activate_reya_nostr_bridge,
