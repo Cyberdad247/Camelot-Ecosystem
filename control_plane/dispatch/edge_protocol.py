@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: MIT
 """Signed, replay-protected protocol primitives for the Android edge supervisor."""
 
 from __future__ import annotations
@@ -28,7 +27,7 @@ SIGNED_FIELDS = ("device_id", "action", "payload", "issued_at", "expires_at", "n
 def canonical_envelope_bytes(envelope: Mapping[str, object]) -> bytes:
     """Encode exactly the signed request fields in a deterministic order."""
     body = {field: envelope[field] for field in SIGNED_FIELDS}
-    return json.dumps(body, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return json.dumps(body, separators=(",", ":")).encode("utf-8")
 
 
 @dataclass(frozen=True)

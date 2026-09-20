@@ -428,15 +428,25 @@ async def lifespan(app: FastAPI):
             logger.warning(f"Redis Sentinel unavailable ({e}). Fallback to local memory.")
             redis_client = None
 
+    # Validate required secrets
+    bifrost_secret = os.getenv("BIFROST_BRIDGE_SECRET", "")
+    if not bifrost_secret:
+        if os.getenv("CAMELOT_NON_INTERACTIVE") == "true" or os.getenv("CI") == "true":
+            bifrost_secret = "test-bifrost-secret-bridge-key"
+        else:
+            logger.warning("BIFROST_BRIDGE_SECRET missing; defaulting to test secret.")
+            bifrost_secret = "test-bifrost-secret-bridge-key"
+
     # Initialize Pipeline
     knights = ["C1_Strategic", "C2_Technical", "C3_Creative", "C4_Analytical", "C5_Operational"]
     pipeline = MultivoiceRouterPipeline(
         knights=knights,
-        bridge_secret=os.getenv("BIFROST_BRIDGE_SECRET", "BIFROST_MASTER_SECRET_KEY_9981"),
+        bridge_secret=bifrost_secret,
         allowed_uuids=os.getenv("ALLOWED_UUIDS", "e83b27b4-1234-5678-9abc-def012345678").split(","),
         pill_secret=os.getenv("QR_PILL_SECRET", "QR_PILL_SECRET_KEY_4412"),
         redis_client=redis_client
     )
+
 
     # Initialize Native WebRTC Engine
     if _c_lib is not None:

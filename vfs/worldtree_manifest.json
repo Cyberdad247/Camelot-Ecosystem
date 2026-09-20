@@ -527,9 +527,20 @@
       "entrypoints": ["dev", "build", "preview"],
       "domain_tags": ["vite_react", "tailwind", "luxora_gold", "threejs_canvas", "spatial_hud", "webgpu_ui"],
       "status": "ONLINE_ACTIVE"
+    },
+    {
+      "cartridge_id": "vps-operator-console",
+      "vfs_path": "vfs://worldtree/cartridges/vps-operator-console/",
+      "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+      "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+      "bound_knights": ["SIR_BORIS", "HERMES_PRIME", "SIR_HELIOS"],
+      "risk_tier_cap": "T1",
+      "entrypoints": ["serve", "health"],
+      "domain_tags": ["operator_console", "go_server", "htmx", "threejs_canvas", "vps_cockpit", "omarchy"],
+      "status": "ONLINE_ACTIVE"
     }
   ],
-  "updated": "2026-09-20T01:16:00.000000+00:00",
+  "updated": "2026-09-20T03:25:00.000000+00:00",
   "verified_knights_count": 44,
-  "verified_cartridges_count": 10
+  "verified_cartridges_count": 11
 }

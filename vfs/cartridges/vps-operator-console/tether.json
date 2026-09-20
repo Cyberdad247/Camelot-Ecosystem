@@ -1,0 +1,33 @@
+{
+  "cartridge_id": "vps-operator-console",
+  "vfs_uri": "vfs://worldtree/cartridges/vps-operator-console/",
+  "cloudbrain_notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+  "cloudbrain_title": "Camelot WorldTree Root & Operator Infrastructure",
+  "bound_knights": [
+    "SIR_BORIS",
+    "HERMES_PRIME",
+    "SIR_HELIOS"
+  ],
+  "risk_tier_cap": "T1",
+  "domain_tags": [
+    "operator_console",
+    "go_server",
+    "htmx",
+    "threejs_canvas",
+    "vps_cockpit",
+    "omarchy"
+  ],
+  "entrypoints": [
+    "serve",
+    "health"
+  ],
+  "physical_source_path": "cartridges/vps-operator-console",
+  "files": [
+    "go.mod",
+    "camelot.toml",
+    "system_instruction.md"
+  ],
+  "status": "ONLINE_ACTIVE",
+  "tether_type": "POSITION_ADDRESSED_VFS_CARTRIDGE",
+  "updated_at": "2026-09-20T03:25:00.000000+00:00"
+}

@@ -51,6 +51,8 @@ CARTRIDGE_KNIGHT_MAP: Dict[str, List[str]] = {
     "openai-oauth-proxy":       ["SIR_GHOST", "SIR_HERMES", "SIR_HEIMDALL"],
     "openinterpreter-codex":    ["SIR_CODEX", "SIR_FORGE", "SIR_OCTAVIAN"],
     "system-ui":                ["SIR_STITCH", "LADY_GUINEVERE", "SIR_BORIS"],
+    "vps-operator-console":     ["SIR_BORIS", "HERMES_PRIME", "SIR_HELIOS"],
+
 
     # Legacy Short-Name Aliases
     "ANT":                      ["LADY_APIS", "SIR_SCAVENGER"],

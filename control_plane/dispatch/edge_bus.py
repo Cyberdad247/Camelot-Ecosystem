@@ -1,4 +1,3 @@
-# SPDX-License-Identifier: MIT
 """Isolated, Tailnet-only signed bus for Android Camelot edge supervisors.
 
 This deliberately does not modify the legacy mesh bridge: that process has
@@ -17,12 +16,11 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
 from control_plane.dispatch.edge_protocol import EdgeProtocol, ValidationResult, issue_snapshot
-from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
 
 LOG = logging.getLogger("CamelotEdgeBus")
 EDGE_ENVELOPE_HEADER = "x-camelot-edge-envelope"
 EDGE_BUS_PORT = int(os.getenv("CAMELOT_EDGE_BUS_PORT", "8096"))
-VPS_TAILSCALE_IP = HUB_TAILSCALE_IP
+VPS_TAILSCALE_IP = "100.110.180.18"
 _protocol_cache: tuple[str, EdgeProtocol] | None = None
 
 

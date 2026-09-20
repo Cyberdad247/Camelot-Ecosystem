@@ -1,0 +1,17 @@
+[cartridge]
+id = "vps-operator-console"
+version = "0.1.0"
+name = "VPS Operator Console"
+description = "Lightweight Go/HTMX administrative cockpit and 3D WorldTree WebGL spatial viewer for VPS nodes."
+risk_tier_cap = "T1"
+bound_knights = ["SIR_BORIS", "HERMES_PRIME", "SIR_HELIOS"]
+
+[runtime]
+engine = "go"
+port = 3004
+memory_mb = 128
+timeout_s = 60
+
+[capabilities]
+requested = ["vfs.read", "telemetry.stream"]
+denied = ["secret.export", "direct_main_branch_write"]

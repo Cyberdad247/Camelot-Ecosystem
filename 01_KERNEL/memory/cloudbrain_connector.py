@@ -195,6 +195,7 @@ CARTRIDGE_NOTEBOOKS: Dict[str, str] = {
     "openai-oauth-proxy":       "422a184b-93e7-4dfd-8a12-75d2268b6c60",  # Sovereign_Workspace: SIR_GHOST
     "openinterpreter-codex":    "8c656cfa-a189-409e-a72d-07692a47f17e",  # Camelot-OS v.1000 / Sovereign Codex
     "system-ui":                "f7707daa-2d10-4db8-8fda-be4661a27793",  # Sovereign_Workspace: SIR_BORIS
+    "vps-operator-console":     "a0a4bfb9-e847-4c38-be39-7aee398f0795",  # WorldTree Root & Operator Infrastructure
 }
 
 CARTRIDGE_DOMAIN_TAGS: Dict[str, List[str]] = {
@@ -208,7 +209,9 @@ CARTRIDGE_DOMAIN_TAGS: Dict[str, List[str]] = {
     "openai-oauth-proxy":       ["pkce_oauth", "token_rotation", "air_gap_proxy", "auth_sanitization", "ephemeral_tokens"],
     "openinterpreter-codex":    ["wasm32_wasi", "sandboxed_pty", "isolated_evaluator", "codex_terminal", "ast_check"],
     "system-ui":                ["vite_react", "tailwind", "luxora_gold", "threejs_canvas", "spatial_hud", "webgpu_ui"],
+    "vps-operator-console":     ["operator_console", "go_server", "htmx", "threejs_canvas", "vps_cockpit", "omarchy"],
 }
+
 
 RUNE_SYMBOLECT: Dict[str, List[str]] = {
     "\u16B1": ["LADY_APIS", "MERLIN_OMEGA", "HERMES_PRIME"],             # ᚱ RESEARCH
