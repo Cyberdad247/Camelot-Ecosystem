@@ -1028,6 +1028,22 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_magsafe_dispatch",
         "hydrate": False,
     },
+    "//FREELLMAPI": {
+        "knight": "sir_helios",
+        "description": "Zero-cost LLM query via pooled FreeLLMAPI gateway (~34 providers)",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_freellmapi",
+        "hydrate": False,
+    },
+    "//ZERO_COST": {
+        "knight": "sir_helios",
+        "description": "Alias for //FREELLMAPI zero-cost pooled inference",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_freellmapi",
+        "hydrate": False,
+    },
     "//HUMANISTIC_VOICE": {
         "knight": "sir_sonus",
         "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
@@ -3822,6 +3838,61 @@ def _handle_magsafe_dispatch(param: Any, context: dict) -> dict:
     return _handle_magsafe_ingest(param, ctx)
 
 
+def _handle_freellmapi(param: Any, context: dict) -> dict:
+    """//FREELLMAPI / //ZERO_COST — Execute zero-cost chat completion via FreeLLMAPI."""
+    import importlib.util
+
+    prompt = str(param or "").strip()
+    if not prompt:
+        prompt = context.get("task", "Hello from Camelot-OS") if context else "Hello from Camelot-OS"
+
+    model = context.get("model", "auto") if context else "auto"
+    system = context.get("system", "You are a helpful sovereign intelligence assistant in Camelot-OS.") if context else "You are a helpful sovereign intelligence assistant in Camelot-OS."
+    knight = context.get("knight", "SIR_HELIOS") if context else "SIR_HELIOS"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        try:
+            resp = bridge.chat_completion(
+                prompt=prompt,
+                system_prompt=system,
+                model=model,
+                calling_knight=knight,
+            )
+            return {
+                "action": "freellmapi_chat",
+                "status": "SUCCESS",
+                "content": resp.content,
+                "model_used": resp.model_used,
+                "provider": resp.provider,
+                "is_fallback": resp.is_fallback,
+                "tokens": resp.total_tokens,
+                "duration_ms": resp.duration_ms,
+            }
+        except mod.SecretSanitizationViolation as e:
+            return {
+                "action": "freellmapi_chat",
+                "status": "SECRET_FENCE_TRIGGERED",
+                "error": str(e),
+            }
+        except Exception as e:
+            return {
+                "action": "freellmapi_chat",
+                "status": "ERROR",
+                "error": str(e),
+            }
+    return {
+        "action": "freellmapi_chat",
+        "status": "ERROR",
+        "error": "Failed to load freellmapi_bridge module",
+    }
+
+
 def _handle_humanistic_voice(param: Any, context: dict) -> dict:
     """//HUMANISTIC_VOICE — Realtime vocal pattern analysis, prosody mirroring & humanistic conversation loop."""
     import math
@@ -3988,6 +4059,7 @@ _HANDLERS = {
     "_handle_scarcity_gov": _handle_scarcity_gov,
     "_handle_magsafe_ingest": _handle_magsafe_ingest,
     "_handle_magsafe_dispatch": _handle_magsafe_dispatch,
+    "_handle_freellmapi": _handle_freellmapi,
 }
 
 

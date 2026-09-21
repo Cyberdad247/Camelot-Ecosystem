@@ -396,6 +396,74 @@ def magsafe_status() -> dict:
     return {"error": "Failed to load magsafe_audio_bridge", "status": "MAGSAFE_ERROR"}
 
 
+@mcp_server.tool()
+def freellmapi_chat(
+    prompt: str,
+    model: str = "auto",
+    system_prompt: str = "You are a helpful sovereign intelligence assistant in Camelot-OS.",
+    calling_knight: str = "SIR_HELIOS",
+) -> dict:
+    """Execute zero-cost chat completion via FreeLLMAPI multi-provider gateway. Strictly rejects secrets."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        try:
+            resp = bridge.chat_completion(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                model=model,
+                calling_knight=calling_knight,
+            )
+            return resp.to_dict()
+        except mod.SecretSanitizationViolation as e:
+            return {"error": str(e), "status": "SECRET_FENCE_TRIGGERED"}
+        except Exception as e:
+            return {"error": str(e), "status": "DISPATCH_ERROR"}
+    return {"error": "Failed to load freellmapi_bridge", "status": "MODULE_LOAD_ERROR"}
+
+
+@mcp_server.tool()
+def freellmapi_status() -> dict:
+    """Query live status of FreeLLMAPI zero-cost pooled gateway."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        alive, msg = bridge.is_alive()
+        return {
+            "status": "ONLINE" if alive else "STANDBY",
+            "base_url": bridge.base_url,
+            "gateway_message": msg,
+            "observatory_tap": "ENABLED" if bridge.enable_observatory_tap else "DISABLED",
+            "curated_model_count": len(mod.FREE_MODEL_CATALOG),
+        }
+    return {"error": "Failed to load freellmapi_bridge", "status": "MODULE_LOAD_ERROR"}
+
+
+@mcp_server.tool()
+def freellmapi_list_models() -> list[dict]:
+    """List all available free LLM models from FreeLLMAPI gateway or curated fallback catalog."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        return bridge.list_models()
+    return []
+
+
 if __name__ == "__main__":
     mcp_server.run()
 

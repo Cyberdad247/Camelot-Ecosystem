@@ -881,6 +881,105 @@ def _cmd_magsafe(argv: list[str]) -> None:
         return
 
 
+def _cmd_freellmapi(argv: list[str]) -> None:
+    """FreeLLMAPI Zero-Cost Gateway CLI.
+
+    Usage:
+        camelot freellmapi status [--json]
+        camelot freellmapi models [--json]
+        camelot freellmapi chat --prompt <TEXT> [--model auto] [--system <TEXT>] [--json]
+    """
+    import argparse
+    import importlib.util
+
+    bridge_path = Path(__file__).resolve().parent.parent / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if not spec or not spec.loader:
+        print("[ERROR] Could not load freellmapi_bridge.py")
+        return
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    bridge = mod.get_freellmapi_bridge()
+
+    parser = argparse.ArgumentParser(prog="camelot freellmapi", description="FreeLLMAPI Zero-Cost Universal Gateway")
+    sub = parser.add_subparsers(dest="action", help="Action")
+
+    p_status = sub.add_parser("status", help="Check gateway status")
+    p_status.add_argument("--json", action="store_true")
+
+    p_models = sub.add_parser("models", help="List available free models")
+    p_models.add_argument("--json", action="store_true")
+
+    p_chat = sub.add_parser("chat", help="Execute chat completion")
+    p_chat.add_argument("--prompt", "-p", required=True, help="User prompt to process")
+    p_chat.add_argument("--model", "-m", default="auto", help="Target model alias")
+    p_chat.add_argument("--system", "-s", default="You are a helpful sovereign intelligence assistant in Camelot-OS.", help="System prompt")
+    p_chat.add_argument("--knight", "-k", default="SIR_HELIOS", help="Calling Knight")
+    p_chat.add_argument("--json", action="store_true")
+
+    args = parser.parse_args(argv)
+
+    if args.action in (None, "status"):
+        alive, msg = bridge.is_alive()
+        data = {
+            "status": "ONLINE" if alive else "STANDBY",
+            "base_url": bridge.base_url,
+            "gateway_message": msg,
+            "observatory_tap": "ENABLED" if bridge.enable_observatory_tap else "DISABLED",
+            "curated_model_count": len(mod.FREE_MODEL_CATALOG),
+        }
+        if getattr(args, "json", False):
+            print(json.dumps(data, indent=2))
+        else:
+            print("=" * 64)
+            print("  [FREELLMAPI] ZERO-COST UNIVERSAL POOLED GATEWAY")
+            print(f"  Status:       {data['status']} ({data['gateway_message']})")
+            print(f"  Endpoint:     {data['base_url']}")
+            print(f"  Observatory:  {data['observatory_tap']} (+35 XP / turn)")
+            print(f"  Catalog:      {data['curated_model_count']} curated free tiers")
+            print("=" * 64)
+        return
+
+    if args.action == "models":
+        models = bridge.list_models()
+        if args.json:
+            print(json.dumps(models, indent=2))
+        else:
+            print("=" * 64)
+            print(f"  [FREELLMAPI] CURATED / DETECTED MODELS ({len(models)} Total)")
+            print("=" * 64)
+            for m in models:
+                mid = m.get("id", "unknown")
+                prov = m.get("provider", "pooled")
+                tier = m.get("tier", "free")
+                desc = m.get("desc", "")
+                print(f"  - {mid:<22} [{prov:<20}] ({tier}) {desc}")
+        return
+
+    if args.action == "chat":
+        try:
+            resp = bridge.chat_completion(
+                prompt=args.prompt,
+                system_prompt=args.system,
+                model=args.model,
+                calling_knight=args.knight,
+            )
+            if args.json:
+                print(json.dumps(resp.to_dict(), indent=2))
+            else:
+                print("=" * 64)
+                print(f"  [FREELLMAPI] RESPONSE (Model: {resp.model_used} | Provider: {resp.provider})")
+                print(f"  Latency: {resp.duration_ms}ms | Tokens: {resp.total_tokens} | Fallback: {resp.is_fallback}")
+                print("=" * 64)
+                print(f"\n{resp.content}\n")
+        except mod.SecretSanitizationViolation as e:
+            print(f"[SECURITY FENCE REJECTED]: {e}")
+        except Exception as e:
+            print(f"[ERROR]: {e}")
+        return
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -897,6 +996,10 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("freellmapi", "zero-cost", "freellm"):
+        _cmd_freellmapi(args[1:])
+        return
+
     if first in ("magsafe", "magsafe-audio", "magsafe-bridge"):
         _cmd_magsafe(args[1:])
         return
