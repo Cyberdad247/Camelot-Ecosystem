@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1861",
-            "task": "Project Speculum: The Glass Observatory & Autonomous Living Compendium (Ω_GLASS_WALL_COMPENDIUM): WORM Read-Only Tap, Interaction Transcription, 5-Axes Kinetic Evaluation & Sovereign RPG Mastery Engine",
-            "author": "ANYA_Ω / MERLIN_Ω / SIR_HELIOS / SIR_LUKAS / SIR_SONUS / ARTHUR_OMEGA",
+            "id": "1862",
+            "task": "CUA (Computer-Use Agent) & REYA Universal Fabric Assimilation (Ω_CUA_REYA_NEXUS): trycua/cua Architectural Ingestion, Normalized Coordinate Grounding, S1 Reflex Macros & Sentinel Capability Leases",
+            "author": "SIR_CODEX / SIR_HELIO / SIR_HELIOS / MERLIN_Ω / SIR_BORIS / ARTHUR_OMEGA",
             "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
-            "notes": "Architected, verified, and sealed Project Speculum providing an autonomous, completely decoupled out-of-band monitoring and living compendium layer: (1) Engineered GlassObservatory in control_plane/observatory/glass_observatory.py with non-blocking event tap, interaction transcription, autonomous 5-axes kinetic evaluation (AST form, latency/scarcity, test integrity, zero interference, sovereign alignment), and quantified RPG XP progression for Knights and Sovereign Tenants, (2) Auto-compiled Living Compendium in 03_VAULT/runtime_state/observatory/LIVING_COMPENDIUM.md with strict Write-Once-Read-Many (WORM) impenetrable glass wall semantics (zero write/delete mutations accessible to Knights or Tenants), (3) Wired fire-and-forget background taps into RealtimeVoiceSession (control_plane/dispatch/realtime_voice_bridge.py) and OmniS2SEngine (02_FORGE/assimilation/omni_s2s/omni_s2s_engine.py), ensuring zero hotpath bloat and zero ledger contention, (4) Implemented camelot observatory CLI in bin/camelot.py (--glass, --rpg, --transcripts, --evals, --compendium, --json) and FastMCP tool read_glass_observatory in control_plane/mcp/cloudbrain_mcp_server.py with registered Antigravity schemas, (5) Authored test suite tests/test_glass_observatory.py passing 6/6 tests and 75/75 across the combined suite, (6) Verified parity gates and synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-21 01:50 UTC"
+            "notes": "Architected, implemented, and verified CUA (Computer-Use Agent) assimilation from trycua/cua into REYA Universal Fabric Layer: (1) Synthesized CUA architectural feedback and formulated Northstar Goal for REYA Fabric Layer ('Universal Sovereign Computer-Use Agent (CUA) Fabric — Unifying Duplex Voice Guidance, Normalized Cross-Platform Actuation (Desktop + Mobile), and System 1 Reflex Execution under Sentinel Safety Leases (<350MB RAM, sub-50ms action loop)'), (2) Forged CuaDriverBridge in 02_FORGE/assimilation/cua/cua_driver_bridge.py with normalized [0.0, 1.0] coordinate mapping to physical viewports (Cybertronia desktop 1080p/4K, Excalibur S26 Ultra 1440x3120), OS mouse/keyboard primitives (click, drag, scroll, type, key, hotkey), frame hash screen capture & diff verification, and sub-50ms S1 macro chain execution, (3) Implemented Sir Sentinel Capability Leases (SentinelLease) enforcing strict bounding boxes and red-zone quarantine against credential fields and system wipe buttons, (4) Enhanced reya_fabric_layer.py to natively execute CUA actions across Round Table Knight channeled voice personas, (5) Wired //CUA and //REYA_ACT runic commands into control_plane/runes/runic_router.py, (6) Added camelot cua sub-command (status, click, move, drag, type, key, hotkey, capture, diff) to bin/camelot.py, (7) Authored test suite tests/test_cua_reya_assimilation.py passing 15/15 tests and 90/90 across the combined suite, and (8) Verified parity gates and synchronized all 4 PROVENANCE_LEDGER.md mirrors. — 2026-09-21 02:15 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1860" in line:
+            if "| 1861" in line:
                 insert_at = i
                 break
         

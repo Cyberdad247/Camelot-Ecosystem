@@ -972,6 +972,30 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_reya_channel",
         "hydrate": False,
     },
+    "//CUA": {
+        "knight": "sir_codex",
+        "description": "Universal Sovereign Computer-Use Agent (CUA) action dispatch via Reya Fabric",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
+    "//cua": {
+        "knight": "sir_codex",
+        "description": "Alias for //CUA action dispatch",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
+    "//REYA_ACT": {
+        "knight": "sir_helio",
+        "description": "Execute kinetic desktop/mobile action under active Reya persona",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
     "//HUMANISTIC_VOICE": {
         "knight": "sir_sonus",
         "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
@@ -3591,6 +3615,73 @@ def _handle_reya_channel(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_cua_dispatch(param: Any, context: dict) -> dict:
+    """//CUA / //REYA_ACT — Sovereign Computer-Use Agent (CUA) action execution via REYA Fabric."""
+    param_str = str(param or "").strip()
+    action = context.get("action") if context else None
+    action_payload = (context.get("payload") or {}) if context else {}
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.get_reya_fabric()
+
+        target_action = action or "cua_mouse_click"
+        payload = dict(action_payload or {})
+
+        if param_str:
+            tokens = param_str.split(maxsplit=1)
+            first_tok = tokens[0].lower()
+            rest = tokens[1] if len(tokens) > 1 else ""
+            if first_tok in ("click", "mouse_click", "tap"):
+                target_action = "cua_mouse_click"
+                coords = rest.split()
+                if len(coords) >= 2:
+                    try:
+                        payload["norm_x"] = float(coords[0])
+                        payload["norm_y"] = float(coords[1])
+                    except ValueError:
+                        pass
+            elif first_tok in ("type", "keyboard_type"):
+                target_action = "cua_keyboard_type"
+                payload["text"] = rest
+            elif first_tok in ("move", "mouse_move"):
+                target_action = "cua_mouse_move"
+                coords = rest.split()
+                if len(coords) >= 2:
+                    try:
+                        payload["norm_x"] = float(coords[0])
+                        payload["norm_y"] = float(coords[1])
+                    except ValueError:
+                        pass
+            elif first_tok in ("key", "key_press"):
+                target_action = "cua_key_press"
+                payload["key"] = rest or "Return"
+            elif first_tok in ("hotkey",):
+                target_action = "cua_hotkey"
+                payload["keys"] = rest.split()
+            elif first_tok in ("capture", "screenshot"):
+                target_action = "cua_screen_capture"
+
+        action_res = fabric.execute_fabric_action(target_action, payload)
+        return {
+            "action": "cua_dispatch",
+            "target_action": target_action,
+            "result": action_res,
+            "status": "CUA_ACTION_EXECUTED",
+        }
+    else:
+        return {
+            "action": "cua_dispatch",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
 def _handle_humanistic_voice(param: Any, context: dict) -> dict:
     """//HUMANISTIC_VOICE — Realtime vocal pattern analysis, prosody mirroring & humanistic conversation loop."""
     import math
@@ -3667,6 +3758,7 @@ def _handle_omni_s2s(param: Any, context: dict) -> dict:
 
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_cua_dispatch": _handle_cua_dispatch,
     "_handle_omni_s2s": _handle_omni_s2s,
     "_handle_humanistic_voice": _handle_humanistic_voice,
     "_handle_reya_channel": _handle_reya_channel,

@@ -46,7 +46,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg", "cua", "computer-use", "reya-cua"}
 
 
 def _banner() -> None:
@@ -551,6 +551,131 @@ def _cmd_observatory(argv: list[str]) -> None:
             print(f"    Verdict:  {ev['rationale']}")
 
 
+def _cmd_cua(argv: list[str]) -> None:
+    """Universal Sovereign Computer-Use Agent (CUA) CLI via REYA Fabric.
+
+    Usage:
+        camelot cua status [--json]
+        camelot cua click <X> <Y> [--button left|right] [--clicks 1|2] [--device desktop|mobile] [--json]
+        camelot cua move <X> <Y> [--device desktop|mobile] [--json]
+        camelot cua drag <X1> <Y1> <X2> <Y2> [--device desktop|mobile] [--json]
+        camelot cua type <TEXT> [--delay-ms 10] [--json]
+        camelot cua key <KEY> [--json]
+        camelot cua hotkey <KEYS...> [--json]
+        camelot cua capture [--device desktop|mobile] [--json]
+        camelot cua diff <HASH1> <HASH2> [--json]
+    """
+    import argparse
+    parser = argparse.ArgumentParser(prog="camelot cua", description="Camelot-OS Universal Sovereign CUA Engine (trycua/cua assimilation)")
+    sub = parser.add_subparsers(dest="action", help="CUA sub-command")
+
+    p_status = sub.add_parser("status", help="Get CUA engine & REYA fabric status")
+    p_status.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_click = sub.add_parser("click", help="Click normalized coordinates [0.0, 1.0]")
+    p_click.add_argument("x", type=float, help="Normalized X in [0.0, 1.0]")
+    p_click.add_argument("y", type=float, help="Normalized Y in [0.0, 1.0]")
+    p_click.add_argument("--button", default="left", choices=["left", "right", "middle"])
+    p_click.add_argument("--clicks", type=int, default=1)
+    p_click.add_argument("--device", default="desktop", choices=["desktop", "desktop_4k", "mobile_s26_ultra", "mobile_moto_g"])
+    p_click.add_argument("--json", action="store_true")
+
+    p_move = sub.add_parser("move", help="Move mouse to normalized coordinates")
+    p_move.add_argument("x", type=float)
+    p_move.add_argument("y", type=float)
+    p_move.add_argument("--device", default="desktop")
+    p_move.add_argument("--json", action="store_true")
+
+    p_drag = sub.add_parser("drag", help="Drag and drop from start to end")
+    p_drag.add_argument("x1", type=float)
+    p_drag.add_argument("y1", type=float)
+    p_drag.add_argument("x2", type=float)
+    p_drag.add_argument("y2", type=float)
+    p_drag.add_argument("--button", default="left")
+    p_drag.add_argument("--device", default="desktop")
+    p_drag.add_argument("--json", action="store_true")
+
+    p_type = sub.add_parser("type", help="Type text sequence")
+    p_type.add_argument("text", type=str)
+    p_type.add_argument("--delay-ms", type=int, default=10)
+    p_type.add_argument("--json", action="store_true")
+
+    p_key = sub.add_parser("key", help="Press single key")
+    p_key.add_argument("key", type=str)
+    p_key.add_argument("--json", action="store_true")
+
+    p_hotkey = sub.add_parser("hotkey", help="Execute hotkey combo")
+    p_hotkey.add_argument("keys", nargs="+", type=str)
+    p_hotkey.add_argument("--json", action="store_true")
+
+    p_capture = sub.add_parser("capture", help="Capture viewport frame hash")
+    p_capture.add_argument("--device", default="desktop")
+    p_capture.add_argument("--json", action="store_true")
+
+    p_diff = sub.add_parser("diff", help="Verify screen state diff")
+    p_diff.add_argument("hash1", type=str)
+    p_diff.add_argument("hash2", type=str)
+    p_diff.add_argument("--json", action="store_true")
+
+    parsed = parser.parse_args(argv)
+
+    import importlib.util
+    from pathlib import Path
+    _fab_path = Path(__file__).resolve().parent.parent / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    _spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(_fab_path))
+    _mod = importlib.util.module_from_spec(_spec)
+    sys.modules["reya_fabric_layer"] = _mod
+    _spec.loader.exec_module(_mod)
+
+    fabric = _mod.get_reya_fabric()
+
+    if not parsed.action or parsed.action == "status":
+        status = fabric.get_status()
+        if getattr(parsed, "json", False):
+            print(json.dumps(status, indent=2))
+        else:
+            print("=" * 68)
+            print("  [CUA] UNIVERSAL SOVEREIGN COMPUTER-USE AGENT (REYA FABRIC)")
+            print(f"  Active Knight:   {status['active_name']} ({status['active_knight']})")
+            print(f"  Driver Attached: {status['cua_driver_attached']}")
+            print(f"  Viewport:        {status['cua_viewport']}")
+            print(f"  Memory Ceiling:  {status['cgroups_memory_max_mb']} MB (Rule 7)")
+            print(f"  Status:          {status['status']}")
+            print("=" * 68)
+        return
+
+    action_map = {
+        "click": ("cua_mouse_click", {"norm_x": getattr(parsed, "x", 0.5), "norm_y": getattr(parsed, "y", 0.5), "button": getattr(parsed, "button", "left"), "clicks": getattr(parsed, "clicks", 1)}),
+        "move": ("cua_mouse_move", {"norm_x": getattr(parsed, "x", 0.5), "norm_y": getattr(parsed, "y", 0.5)}),
+        "drag": ("cua_mouse_drag", {"start_x": getattr(parsed, "x1", 0.0), "start_y": getattr(parsed, "y1", 0.0), "end_x": getattr(parsed, "x2", 0.5), "end_y": getattr(parsed, "y2", 0.5), "button": getattr(parsed, "button", "left")}),
+        "type": ("cua_keyboard_type", {"text": getattr(parsed, "text", ""), "delay_ms": getattr(parsed, "delay_ms", 10)}),
+        "key": ("cua_key_press", {"key": getattr(parsed, "key", "Return")}),
+        "hotkey": ("cua_hotkey", {"keys": getattr(parsed, "keys", ["ctrl", "c"])}),
+        "capture": ("cua_screen_capture", {}),
+        "diff": ("cua_screen_diff_verify", {"pre_hash": getattr(parsed, "hash1", ""), "post_hash": getattr(parsed, "hash2", "")}),
+    }
+
+    if parsed.action in action_map:
+        act_type, params = action_map[parsed.action]
+        res = fabric.execute_fabric_action(act_type, params)
+        if getattr(parsed, "json", False):
+            print(json.dumps(res, indent=2))
+        else:
+            c_exec = res.get("result", {}).get("cua_driver_execution", {})
+            print(f"[CUA] Action '{act_type}' Executed Successfully by [{res['speaking_name']}]")
+            if "physical_coords" in c_exec:
+                print(f"  Normalized:  {c_exec['normalized_coords']} -> Physical: {c_exec['physical_coords']} ({c_exec['device']})")
+            elif "start_physical" in c_exec:
+                print(f"  Drag:        {c_exec['start_physical']} -> {c_exec['end_physical']} ({c_exec['device']})")
+            elif "char_count" in c_exec:
+                print(f"  Typed:       {c_exec['char_count']} chars (preview: {c_exec['masked_preview']})")
+            elif "state_hash" in c_exec:
+                print(f"  Captured:    Frame Hash: {c_exec['state_hash']} ({c_exec['viewport']['width']}x{c_exec['viewport']['height']})")
+            elif "state_changed" in c_exec:
+                print(f"  Diff:        Changed={c_exec['state_changed']}, Delta={c_exec['delta_pct']}, Verified={c_exec['verified']}")
+            print(f"  Latency:     {c_exec.get('latency_ms', 0)} ms")
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -567,6 +692,10 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("cua", "computer-use", "reya-cua"):
+        _cmd_cua(args[1:])
+        return
+
     if first in ("observatory", "glass", "compendium", "rpg"):
         _cmd_observatory(args[1:])
         return

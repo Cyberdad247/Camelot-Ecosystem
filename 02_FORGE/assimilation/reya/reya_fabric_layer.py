@@ -25,7 +25,40 @@ import sys
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple
+
+try:
+    if "cua_driver_bridge" in sys.modules:
+        _mod = sys.modules["cua_driver_bridge"]
+    else:
+        import importlib.util
+        _cua_path = Path(__file__).resolve().parent.parent / "cua" / "cua_driver_bridge.py"
+        if _cua_path.exists():
+            _spec = importlib.util.spec_from_file_location("cua_driver_bridge", str(_cua_path))
+            _mod = importlib.util.module_from_spec(_spec)
+            sys.modules["cua_driver_bridge"] = _mod
+            _spec.loader.exec_module(_mod)  # type: ignore
+        else:
+            _mod = None
+
+    if _mod is not None:
+        CuaDriverBridge = _mod.CuaDriverBridge
+        DeviceViewport = _mod.DeviceViewport
+        SentinelLease = _mod.SentinelLease
+        SentinelViolationError = _mod.SentinelViolationError
+        get_cua_driver = _mod.get_cua_driver
+    else:
+        CuaDriverBridge = None  # type: ignore
+        DeviceViewport = None  # type: ignore
+        SentinelLease = None  # type: ignore
+        SentinelViolationError = Exception  # type: ignore
+        get_cua_driver = None  # type: ignore
+except Exception:
+    CuaDriverBridge = None  # type: ignore
+    DeviceViewport = None  # type: ignore
+    SentinelLease = None  # type: ignore
+    SentinelViolationError = Exception  # type: ignore
+    get_cua_driver = None  # type: ignore
 
 logging.basicConfig(
     level=logging.INFO,
@@ -33,6 +66,7 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger("reya_fabric_layer")
+
 
 
 @dataclass(frozen=True)
@@ -214,6 +248,17 @@ class ReyaUniversalFabric:
         "camera_frame_capture",
         "audio_stt_stream",
         "web_action",
+        # CUA Actions (trycua/cua assimilation)
+        "cua_mouse_click",
+        "cua_mouse_move",
+        "cua_mouse_drag",
+        "cua_mouse_scroll",
+        "cua_keyboard_type",
+        "cua_key_press",
+        "cua_hotkey",
+        "cua_screen_capture",
+        "cua_screen_diff_verify",
+        "cua_s1_chain",
     }
 
     def __init__(self, default_knight: str = "reya_companion"):
@@ -222,6 +267,29 @@ class ReyaUniversalFabric:
             "Local\\Camelot_Reya_Slab" if sys.platform == "win32" else "/dev/shm/camelot_reya_slab"
         )
         self.cgroups_memory_max_mb = 350.0
+        self.cua_driver = get_cua_driver() if get_cua_driver is not None else None
+        self.active_lease: Optional[Any] = None
+
+    def create_sentinel_lease(
+        self,
+        target_device: str = "desktop",
+        allowed_rect: Optional[Tuple[float, float, float, float]] = None,
+        red_zones: Optional[List[Tuple[float, float, float, float]]] = None,
+        max_actions: int = 500,
+    ) -> Any:
+        """Forges a Sir Sentinel capability lease restricting CUA actions."""
+        if SentinelLease is None:
+            return None
+        lease = SentinelLease(
+            lease_id=f"lease_{os.urandom(4).hex()}",
+            target_device=target_device,
+            allowed_rect=allowed_rect,
+            red_zones=red_zones or [],
+            max_actions=max_actions,
+        )
+        self.active_lease = lease
+        logger.info(f"Sentinel lease active: {lease.lease_id} (device={target_device})")
+        return lease
 
     @property
     def current_persona(self) -> ChanneledKnightPersona:
@@ -326,9 +394,78 @@ class ReyaUniversalFabric:
         persona = self.current_persona
         action_id = f"act_{action_type}_{os.urandom(4).hex()}"
 
-        logger.info(
-            f"Executing kinetic action '{action_type}' for active knight [{persona.display_name}]"
-        )
+        cua_result: Optional[Dict[str, Any]] = None
+        if action_type.startswith("cua_") and self.cua_driver is not None:
+            lease = params.get("lease", self.active_lease)
+            if action_type == "cua_mouse_click":
+                cua_result = self.cua_driver.mouse_click(
+                    norm_x=params.get("norm_x", 0.5),
+                    norm_y=params.get("norm_y", 0.5),
+                    button=params.get("button", "left"),
+                    clicks=params.get("clicks", 1),
+                    lease=lease,
+                )
+            elif action_type == "cua_mouse_move":
+                cua_result = self.cua_driver.mouse_move(
+                    norm_x=params.get("norm_x", 0.5),
+                    norm_y=params.get("norm_y", 0.5),
+                    lease=lease,
+                )
+            elif action_type == "cua_mouse_drag":
+                cua_result = self.cua_driver.mouse_drag(
+                    start_x=params.get("start_x", 0.0),
+                    start_y=params.get("start_y", 0.0),
+                    end_x=params.get("end_x", 0.5),
+                    end_y=params.get("end_y", 0.5),
+                    button=params.get("button", "left"),
+                    lease=lease,
+                )
+            elif action_type == "cua_mouse_scroll":
+                cua_result = self.cua_driver.mouse_scroll(
+                    dx=params.get("dx", 0),
+                    dy=params.get("dy", -120),
+                    lease=lease,
+                )
+            elif action_type == "cua_keyboard_type":
+                cua_result = self.cua_driver.keyboard_type(
+                    text=params.get("text", ""),
+                    delay_ms=params.get("delay_ms", 10),
+                    lease=lease,
+                )
+            elif action_type == "cua_key_press":
+                cua_result = self.cua_driver.key_press(
+                    key=params.get("key", "Return"),
+                    lease=lease,
+                )
+            elif action_type == "cua_hotkey":
+                cua_result = self.cua_driver.hotkey(
+                    keys=params.get("keys", ["ctrl", "c"]),
+                    lease=lease,
+                )
+            elif action_type == "cua_screen_capture":
+                cua_result = self.cua_driver.screen_capture(
+                    bounding_box=params.get("bounding_box", None),
+                )
+            elif action_type == "cua_screen_diff_verify":
+                cua_result = self.cua_driver.screen_diff_verify(
+                    pre_hash=params.get("pre_hash", ""),
+                    post_hash=params.get("post_hash", ""),
+                    min_delta_pct=params.get("min_delta_pct", 0.01),
+                )
+            elif action_type == "cua_s1_chain":
+                cua_result = self.cua_driver.execute_s1_chain(
+                    actions=params.get("actions", []),
+                    lease=lease,
+                )
+
+        combined_result: Dict[str, Any] = {
+            "action_type": action_type,
+            "voice_engine": persona.voice_engine,
+            "text_length": len(params.get("text", "")),
+            **params,
+        }
+        if cua_result:
+            combined_result["cua_driver_execution"] = cua_result
 
         return {
             "status": "SUCCESS",
@@ -341,13 +478,9 @@ class ReyaUniversalFabric:
                 "cgroups_memory_max": "350M",
                 "memory_ceiling_mb": self.cgroups_memory_max_mb,
                 "shm_slab": self.shm_slab_path,
+                "sentinel_lease_active": self.active_lease.lease_id if self.active_lease else None,
             },
-            "result": {
-                "action_type": action_type,
-                "voice_engine": persona.voice_engine,
-                "text_length": len(params.get("text", "")),
-                **params,
-            },
+            "result": combined_result,
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
@@ -361,6 +494,9 @@ class ReyaUniversalFabric:
             "available_knights": list(CANONICAL_KNIGHT_PERSONAS.keys()),
             "shm_slab": self.shm_slab_path,
             "cgroups_memory_max_mb": self.cgroups_memory_max_mb,
+            "cua_driver_attached": self.cua_driver is not None,
+            "cua_viewport": self.cua_driver.viewport.device_id if self.cua_driver else None,
+            "sentinel_lease": self.active_lease.lease_id if self.active_lease else None,
             "status": "FABRIC_READY",
         }
 
