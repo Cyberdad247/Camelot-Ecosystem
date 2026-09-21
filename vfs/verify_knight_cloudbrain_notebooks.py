@@ -25,17 +25,30 @@ CAMELOT_ROOT = Path(__file__).resolve().parent.parent
 def run_verification():
     now_iso = datetime.now(timezone.utc).isoformat()
     
-    # 1. Parse .agent/AGENTS.md
+    # 1. Parse .agent/AGENTS.md & cross-reference knight_character_sheets.json
+    sheets_file = CAMELOT_ROOT / "03_VAULT" / "training" / "configs" / "knight_character_sheets.json"
+    sheet_knights = json.load(open(sheets_file, encoding="utf-8")).get("knights", {})
+
     agents_md = CAMELOT_ROOT / ".agent" / "AGENTS.md"
-    row_pat = re.compile(r"\|\s*\*\*([A-Z0-9_]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*`([a-f0-9-]+)`\s*\|")
+    row_pat = re.compile(r"\|\s*\*\*([A-Z0-9_Ω]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*([^|]+)\|")
     knights = []
-    for m in row_pat.finditer(agents_md.read_text(encoding="utf-8", errors="ignore")):
-        knights.append({
-            "knight_id": m.group(1).strip(),
-            "role": m.group(2).strip(),
-            "model": m.group(3).strip(),
-            "canonical_uuid": m.group(4).strip()
-        })
+    if agents_md.exists():
+        for m in row_pat.finditer(agents_md.read_text(encoding="utf-8", errors="ignore")):
+            raw_kid = m.group(1).strip().replace("Ω", "OMEGA").strip("_")
+            # Lookup canonical UUID in sheet_knights
+            matching_key = next((k for k in sheet_knights if k == raw_kid or k.startswith(raw_kid) or raw_kid.startswith(k)), raw_kid)
+            meta = sheet_knights.get(matching_key, {})
+            uuid = meta.get("cloudbrain_uuid", "")
+            if not uuid:
+                uuid_match = re.search(r"([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})", m.group(4))
+                uuid = uuid_match.group(1) if uuid_match else ""
+            if uuid:
+                knights.append({
+                    "knight_id": matching_key,
+                    "role": m.group(2).strip(),
+                    "model": m.group(3).strip(),
+                    "canonical_uuid": uuid
+                })
 
     # 2. Check cloudbrain_connector.py
     connector_file = CAMELOT_ROOT / "01_KERNEL" / "memory" / "cloudbrain_connector.py"

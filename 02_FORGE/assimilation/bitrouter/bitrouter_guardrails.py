@@ -137,6 +137,29 @@ class BitRouterEngine:
 
         return state
 
+    def evaluate_reflex_step(self, loop_id: str, proposed_action: str) -> Dict[str, Any]:
+        """Use TypeSafe Jev System 1 model to reflexively validate action before token expenditure."""
+        import importlib
+        mod = importlib.import_module("02_FORGE.assimilation.omniroute.typesafe_jev_client")
+        get_typesafe_jev_client = mod.get_typesafe_jev_client
+
+        client = get_typesafe_jev_client()
+        state = f"Loop: {loop_id} | Proposed Action: {proposed_action}"
+        questions = {
+            "can_execute_reflexively": {"type": "boolean"},
+            "recommended_system": {"type": "choice", "options": ["system1_reflex", "system2_deliberative", "circuit_halt"]},
+            "risk_score": {"type": "score", "min": 0, "max": 100},
+        }
+        res = client.decide(state, questions)
+        return {
+            "loop_id": loop_id,
+            "proposed_action": proposed_action,
+            "system1_model": res.model,
+            "decisions": res.decisions,
+            "latency_ms": res.latency_ms,
+            "status": res.status,
+        }
+
     def get_loop(self, loop_id: str) -> Optional[AgentLoopState]:
         return self._active_loops.get(loop_id)
 

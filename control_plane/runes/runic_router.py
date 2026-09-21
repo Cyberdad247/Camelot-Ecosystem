@@ -1068,6 +1068,22 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_bitrouter_eval",
         "hydrate": False,
     },
+    "//SYSTEM1": {
+        "knight": "sir_ghost",
+        "description": "TypeSafe AI Jev System 1 sub-50ms non-autoregressive decision & triage",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_system1",
+        "hydrate": False,
+    },
+    "//JEV": {
+        "knight": "sir_ghost",
+        "description": "Direct TypeSafe Jev structured decision execution & rapid routing",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_jev",
+        "hydrate": False,
+    },
     "//HUMANISTIC_VOICE": {
         "knight": "sir_sonus",
         "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
@@ -4064,8 +4080,51 @@ def _handle_bitrouter_eval(param: Any, context: dict) -> dict:
         )
         return {"action": "bitrouter_eval", "status": "SUCCESS", **state.to_dict()}
     return {"action": "bitrouter_eval", "status": "ERROR", "error": "Failed to load bitrouter_guardrails"}
- 
- 
+
+
+def _handle_system1(param: Any, context: dict) -> dict:
+    """//SYSTEM1 — TypeSafe AI Jev System 1 sub-50ms non-autoregressive decision & triage."""
+    import importlib.util
+
+    state = str(param or "").strip()
+    if not state and context:
+        state = context.get("task", "") or context.get("state", "") or "System 1 evaluation"
+
+    questions = context.get("questions") if context else None
+    if not questions:
+        questions = {
+            "classification": {"type": "choice", "options": ["execute", "clarify", "delegate", "triage", "reject"]},
+            "risk_level": {"type": "choice", "options": ["R0_TRIVIAL", "R1_READONLY", "R2_MUTATION", "R3_PRIVILEGED", "R4_CRITICAL"]},
+            "requires_hitl": {"type": "boolean"},
+            "confidence": {"type": "score", "min": 0.0, "max": 1.0},
+        }
+
+    client_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omniroute" / "typesafe_jev_client.py"
+    spec = importlib.util.spec_from_file_location("typesafe_jev_client", str(client_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        client = mod.get_typesafe_jev_client()
+        res = client.decide(state=state, questions=questions)
+        return {
+            "action": "system1_decision",
+            "status": res.status,
+            "model": res.model,
+            "decisions": res.decisions,
+            "confidence_scores": res.confidence_scores,
+            "latency_ms": res.latency_ms,
+            "is_live_call": res.is_live_call,
+            "error_message": res.error_message,
+        }
+    return {"action": "system1_decision", "status": "ERROR", "error": "Failed to load typesafe_jev_client"}
+
+
+def _handle_jev(param: Any, context: dict) -> dict:
+    """//JEV — Direct TypeSafe Jev structured decision execution & rapid routing."""
+    return _handle_system1(param, context)
+
+
 def _handle_northstar_dispatch(param: Any, context: dict) -> dict:
     """//NORTHSTAR — Decompose and launch autonomous Northstar Goal background worker."""
     import importlib.util

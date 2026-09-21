@@ -37,6 +37,8 @@ ROUTING_STRATEGIES = [
     {"id": "auto/coding", "name": "Code Specialist", "description": "Routes to DeepSeek-Coder, Qwen 2.5, or Claude Free"},
     {"id": "auto/fast", "name": "Ultra-Low Latency", "description": "Routes to Cerebras, Groq, or Sambanova (<200ms TTFT)"},
     {"id": "auto/offline", "name": "Local Air-Gap", "description": "Routes strictly to local Ollama / SIR_GHOST"},
+    {"id": "system1/jev", "name": "TypeSafe Jev (System 1)", "description": "Ultra-fast (<50ms) structured decision, routing & triage model"},
+    {"id": "system1/reflex", "name": "System 1 Reflex Triage", "description": "Non-autoregressive fast classification & lane selection"},
     {"id": "voice/low-latency", "name": "Voice Interactive", "description": "Optimized for duplex audio turn-taking (<120ms)"},
     {"id": "voice/high-fidelity", "name": "Voice High-Fidelity", "description": "Rich dialect reasoning with prosody markers"},
 ]
@@ -220,7 +222,47 @@ class OmniRouteBridge:
                 "saved_percent": comp_res["saved_percent"],
             }
 
-        # 3. Attempt live gateway dispatch
+        # 3. System 1 Reflex / TypeSafe Jev Non-Autoregressive Dispatch
+        if strategy.startswith("system1") or "jev" in strategy.lower():
+            try:
+                from .typesafe_jev_client import get_typesafe_jev_client
+            except (ImportError, ValueError):
+                import importlib
+                mod = importlib.import_module("02_FORGE.assimilation.omniroute.typesafe_jev_client")
+                get_typesafe_jev_client = mod.get_typesafe_jev_client
+
+            jev_client = get_typesafe_jev_client()
+            jev_res = jev_client.decide(
+                state=final_prompt,
+                questions={
+                    "classification": {"type": "choice", "options": ["execute", "clarify", "delegate", "triage"]},
+                    "risk_assessment": {"type": "choice", "options": ["R0_TRIVIAL", "R1_READONLY", "R2_MUTATION", "R3_PRIVILEGED", "R4_CRITICAL"]},
+                    "reflex_confidence": {"type": "score", "min": 0.0, "max": 1.0},
+                },
+            )
+            elapsed = (datetime.now(timezone.utc) - start_time).total_seconds() * 1000.0
+            content = json.dumps({
+                "system1_model": jev_res.model,
+                "decisions": jev_res.decisions,
+                "confidence_scores": jev_res.confidence_scores,
+                "status": jev_res.status,
+                "raw_summary": f"[TypeSafe Jev System 1 Decision] Route: {jev_res.decisions.get('classification')}, Risk: {jev_res.decisions.get('risk_assessment')}",
+            }, indent=2)
+            res = OmniRouteResponse(
+                content=content,
+                strategy_used=strategy,
+                provider="typesafe.ai/jev-latest",
+                original_tokens=comp_info["original_tokens"],
+                compressed_tokens=comp_info["compressed_tokens"],
+                saved_percent=comp_info["saved_percent"],
+                duration_ms=round(elapsed, 2),
+                is_fallback=not jev_res.is_live_call,
+                status=jev_res.status,
+            )
+            self._tap_observatory(calling_knight, prompt, res)
+            return res
+
+        # 4. Attempt live gateway dispatch
         gateways = self.check_gateways()
         endpoint = None
         if gateways["9router_go"]["status"] == "ONLINE":
@@ -286,6 +328,40 @@ class OmniRouteBridge:
         )
         self._tap_observatory(calling_knight, prompt, res)
         return res
+
+    def route_system1_decision(
+        self,
+        state: str,
+        questions: Dict[str, Any],
+        calling_knight: str = "SIR_HELIOS",
+    ) -> Dict[str, Any]:
+        """Directly dispatch a structured non-autoregressive decision to TypeSafe Jev."""
+        try:
+            from .typesafe_jev_client import get_typesafe_jev_client
+        except (ImportError, ValueError):
+            import importlib
+            mod = importlib.import_module("02_FORGE.assimilation.omniroute.typesafe_jev_client")
+            get_typesafe_jev_client = mod.get_typesafe_jev_client
+
+        client = get_typesafe_jev_client()
+        res = client.decide(state, questions)
+        res_dict = res.to_dict()
+
+        if self.enable_observatory_tap:
+            synthetic_resp = OmniRouteResponse(
+                content=json.dumps(res.decisions),
+                strategy_used="system1/jev",
+                provider=res.model,
+                original_tokens=max(1, len(state.split())),
+                compressed_tokens=max(1, len(state.split())),
+                saved_percent=0.0,
+                duration_ms=res.latency_ms,
+                is_fallback=not res.is_live_call,
+                status=res.status,
+            )
+            self._tap_observatory(calling_knight, state, synthetic_resp)
+
+        return res_dict
 
     def _tap_observatory(self, knight_id: str, prompt: str, resp: OmniRouteResponse) -> None:
         if not self.enable_observatory_tap:
