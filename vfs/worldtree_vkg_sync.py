@@ -247,20 +247,20 @@ class WorldTreeVKGManager:
                 try:
                     data = json.loads(f.read_text(encoding="utf-8"))
                     crystals.append({
-                        "crystal_id": data.get("crystal_id"),
-                        "title": data.get("title"),
-                        "category": data.get("category"),
-                        "anchor_knight": data.get("anchor_knight"),
-                        "notebook_uuid": data.get("notebook_uuid"),
+                        "crystal_id": data.get("crystal_id") or data.get("identity") or data.get("id") or f.stem,
+                        "title": data.get("title") or data.get("identity") or f.stem,
+                        "category": data.get("category") or "SPECIALIZED_SUBSTRATES",
+                        "anchor_knight": data.get("anchor_knight") or "ANYA_OMEGA",
+                        "notebook_uuid": data.get("notebook_uuid") or WORLDTREE_UUID,
                         "node_count": len(data.get("nodes", [])),
                         "edge_count": len(data.get("edges", [])),
-                        "sha256": data.get("sha256_hash"),
-                        "vfs_coordinate": data.get("vfs_coordinate"),
+                        "sha256": data.get("sha256_hash") or data.get("provenance_ledger_hash", ""),
+                        "vfs_coordinate": data.get("vfs_coordinate") or f"vfs://worldtree/crystals/{f.name}",
                         "file": str(f.name),
                     })
                 except Exception:
                     pass
-        return sorted(crystals, key=lambda x: x["crystal_id"])
+        return sorted(crystals, key=lambda x: str(x.get("crystal_id") or ""))
 
     def trigger_sync_pass(self) -> Dict[str, Any]:
         """Executes a full synchronization pass across WorldTree Navigational Atlas and Open-Notebook crystals."""

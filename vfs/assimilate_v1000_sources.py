@@ -112,8 +112,27 @@ class V1000MasterAssimilator:
             if idx % 50 == 0 or idx == len(items):
                 LOG.info(f"  [{idx}/{len(items)}] Distilled: '{item_title[:45]}' (~{tokens} tokens)")
 
-            # Compress via Anya Glyph Engine
-            if VFSGlyphEngine:
+            # Compress via Anya Glyph Engine with Triple-QFT Semantic Flattening
+            if VFSGlyphEngine and hasattr(VFSGlyphEngine, "flatten_source"):
+                flattened = VFSGlyphEngine.flatten_source(
+                    raw_text=raw_text,
+                    title=item_title,
+                    path=f"vfs://v1000/{item_title[:30]}"
+                )
+                glyph = flattened.get("glyph")
+                node = glyph.compiled_glyph if glyph else None
+                assimilated_concepts.append({
+                    "title": item_title,
+                    "glyph_token": flattened.get("glyph_token", "⚡"),
+                    "q_focus": flattened.get("q_focus", f"⚡ [VFS: vfs://v1000] {item_title}"),
+                    "task_type": getattr(node, "task_type", "Kinetic"),
+                    "determinism": getattr(node, "determinism", "High"),
+                    "raw_token_weight": tokens,
+                    "compressed_token_weight": flattened.get("compressed_tokens", tokens),
+                    "reduction_pct": flattened.get("reduction_pct", 0.0),
+                    "anchors": flattened.get("anchors", [])
+                })
+            elif VFSGlyphEngine:
                 glyph = VFSGlyphEngine.construct_vfs_glyph(
                     intent_focus=f"Assimilated: {item_title}",
                     path=f"vfs://v1000/{item_title[:30]}"
@@ -168,6 +187,22 @@ class V1000MasterAssimilator:
                 except Exception as e:
                     LOG.error(f"  Failed to delete item {sid}: {e}")
 
+        # 6. Bi-Temporal Knowledge Graph Pulse (Graphiti)
+        if not self.dry_run:
+            try:
+                from memory.graphiti_engine import KnightGraphitiEngine
+                for k_id in ["ANYA_OMEGA", "SIR_HELIOS"]:
+                    kg = KnightGraphitiEngine(k_id)
+                    kg.add_fact(
+                        subject="CAMELOT_OS_V1000",
+                        predicate="master_assimilation_pulse",
+                        object_=f"items:{len(items)},tokens_reduced:{total_tokens_reduced}",
+                        source="v1000_assimilator"
+                    )
+                LOG.info("[GRAPHITI] Injected assimilation pulse into Anya Omega & Sir Helios Graphiti.")
+            except Exception as e:
+                LOG.warning(f"[GRAPHITI] Graphiti injection deferred: {e}")
+
         # Cleanup
         if self._cm:
             try:
@@ -184,7 +219,7 @@ class V1000MasterAssimilator:
 
         return {
             "status": "success",
-            "sources_assimilated": len(sources),
+            "sources_assimilated": len(items),
             "tokens_compressed": total_tokens_reduced,
             "purged": purged_count if not self.dry_run else 0,
             "mode": mode

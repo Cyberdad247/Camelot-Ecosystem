@@ -30,13 +30,22 @@ def audit_fleet():
     if agents_md_path.exists():
         text = agents_md_path.read_text(encoding="utf-8", errors="ignore")
         # Match table rows: | **SIR_BORIS** | Lead Architect... | Gemini... | `f7707daa...` |
-        row_pat = re.compile(r"\|\s*\*\*([A-Z0-9_]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*`([a-f0-9-]+)`\s*\|")
+        row_pat = re.compile(r"\|\s*\*\*([A-Z0-9_Ω]+)\*\*\s*\|\s*([^|]+)\|\s*([^|]+)\|\s*([^|]+)\|")
+        sheets_file = CAMELOT_ROOT / "03_VAULT" / "training" / "configs" / "knight_character_sheets.json"
+        sheet_knights = json.load(open(sheets_file, encoding="utf-8")).get("knights", {}) if sheets_file.exists() else {}
+
         for m in row_pat.finditer(text):
+            raw_kid = m.group(1).strip().replace("Ω", "OMEGA").strip("_")
+            meta = sheet_knights.get(raw_kid, {})
+            uuid = meta.get("cloudbrain_uuid", "")
+            if not uuid:
+                uuid_match = re.search(r"([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})", m.group(4))
+                uuid = uuid_match.group(1) if uuid_match else ""
             knight_roster.append({
-                "knight": m.group(1).strip(),
+                "knight": raw_kid,
                 "role": m.group(2).strip(),
                 "model": m.group(3).strip(),
-                "uuid": m.group(4).strip()
+                "uuid": uuid
             })
 
     # 3. Check Open-Notebook local tissues

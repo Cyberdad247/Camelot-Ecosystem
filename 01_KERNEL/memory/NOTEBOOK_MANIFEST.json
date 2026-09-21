@@ -496,7 +496,7 @@
     },
     "c499f2a8-e246-496e-b21d-20456a1540ab": {
       "id": "c499f2a8-e246-496e-b21d-20456a1540ab",
-      "title": "Sir Lumi\u00e8re and the Signal in the Noise",
+      "title": "Sir Lumière and the Signal in the Noise",
       "category": "SPECIALIZED_SUBSTRATES",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -2342,7 +2342,7 @@
     },
     "efd05be8-ac3b-4616-9433-eb5c2f886679": {
       "id": "efd05be8-ac3b-4616-9433-eb5c2f886679",
-      "title": "The Cybertronia PWA Cartridge Operational Protocol \u269c\ufe0f",
+      "title": "The Cybertronia PWA Cartridge Operational Protocol ⚜️",
       "category": "CAMELOT_SYSTEMS_ARCHITECTURE",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -3162,7 +3162,7 @@
     },
     "6b49cc67-ea71-4bdb-9955-bc12d05d35cf": {
       "id": "6b49cc67-ea71-4bdb-9955-bc12d05d35cf",
-      "title": "Cybertronia Universal Empirical Architecture: The Sovereign Bifr\u00f6st Topology",
+      "title": "Cybertronia Universal Empirical Architecture: The Sovereign Bifröst Topology",
       "category": "SPECIALIZED_SUBSTRATES",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -4118,10 +4118,10 @@
     },
     "bebdf3e3-bbb0-455b-9c02-1469202baf74": {
       "id": "bebdf3e3-bbb0-455b-9c02-1469202baf74",
-      "title": "Lukas M\u00fcller v3.0: The Ultimate Cognitive Forge Persona",
+      "title": "Lukas Müller v3.0: The Ultimate Cognitive Forge Persona",
       "category": "SOVEREIGN_ROUND_TABLE",
-      "knight_id": null,
-      "is_sovereign_workspace": false,
+      "knight_id": "SIR_LUKAS",
+      "is_sovereign_workspace": true,
       "is_duplicate": false,
       "canonical_uuid": "bebdf3e3-bbb0-455b-9c02-1469202baf74",
       "anchor_tether": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
@@ -4133,7 +4133,12 @@
         "persona",
         "lukas",
         "ller",
-        "sovereign_round_table"
+        "sovereign_round_table",
+        "telemetry",
+        "visualization",
+        "hud",
+        "observability",
+        "verified_state"
       ],
       "growth_targets": [
         "docs/architecture/sovereign_round_table",
@@ -4397,7 +4402,7 @@
     },
     "e0b3c81c-4544-4047-ba4d-4939bbd29050": {
       "id": "e0b3c81c-4544-4047-ba4d-4939bbd29050",
-      "title": "The X Ecosystem: Elon Musk\u2019s New Creator Economy Playbook",
+      "title": "The X Ecosystem: Elon Musk’s New Creator Economy Playbook",
       "category": "SPECIALIZED_SUBSTRATES",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -5185,7 +5190,7 @@
     },
     "e699156b-f280-4ac6-8ae0-23a236d7130e": {
       "id": "e699156b-f280-4ac6-8ae0-23a236d7130e",
-      "title": "The Price of Control: How Berry Gordy Failed Motown\u2019s Legends",
+      "title": "The Price of Control: How Berry Gordy Failed Motown’s Legends",
       "category": "AI_MULTIAGENT_RESEARCH",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -5533,7 +5538,7 @@
     },
     "fc8ec0c3-8511-4b00-931e-412881ec7b0b": {
       "id": "fc8ec0c3-8511-4b00-931e-412881ec7b0b",
-      "title": "Lisa\u2019s Custom Keychains: Strategic Social Media Launch Plan",
+      "title": "Lisa’s Custom Keychains: Strategic Social Media Launch Plan",
       "category": "AI_MULTIAGENT_RESEARCH",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -5836,7 +5841,7 @@
     },
     "b7454711-f464-4ca6-bc81-e2ed7e205087": {
       "id": "b7454711-f464-4ca6-bc81-e2ed7e205087",
-      "title": "The Agentic Web: Google Chrome\u2019s Gemini AI Evolution",
+      "title": "The Agentic Web: Google Chrome’s Gemini AI Evolution",
       "category": "AI_MULTIAGENT_RESEARCH",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -6448,7 +6453,7 @@
     },
     "00e7df0e-2ddc-4ba2-9ab7-b81a24e21be5": {
       "id": "00e7df0e-2ddc-4ba2-9ab7-b81a24e21be5",
-      "title": "Gamer\u2019s Lair Digital Presence and GEO Strategy Audit",
+      "title": "Gamer’s Lair Digital Presence and GEO Strategy Audit",
       "category": "CODEBASES_DEV_TOOLING",
       "knight_id": null,
       "is_sovereign_workspace": false,
@@ -6603,7 +6608,7 @@
     },
     "c940302e-2817-4b43-a472-9f3c87848a7f": {
       "id": "c940302e-2817-4b43-a472-9f3c87848a7f",
-      "title": "Proprius-\u03a9: The Autonomous Real Estate Synthetic Enterprise Asset",
+      "title": "Proprius-Ω: The Autonomous Real Estate Synthetic Enterprise Asset",
       "category": "PERSONAL_FINANCE_REALESTATE",
       "knight_id": null,
       "is_sovereign_workspace": false,

@@ -1,0 +1,63 @@
+{
+  "schema_version": "camelot.cua-nexus/1",
+  "fingerprint": "νKG_CRYSTAL_OMEGA_CUA_NEXUS",
+  "system_identity": "OMEGA_CUA_REYA_NEXUS",
+  "hardware_ceiling_mb": 350,
+  "provenance": {
+    "origin": "trycua_cua_assimilation_forge",
+    "trust": "sovereign_compiler_bootstrap",
+    "governance": "AGENTS.md evidence classes — confirmed upon live reproduction",
+    "root_orchestrator": "MERLIN_Ω",
+    "hitl_required_for_process_launch": false
+  },
+  "prime_directive": {
+    "root": "REYA_COMPANION",
+    "role": "UNIVERSAL_COMPUTER_USE_FABRIC",
+    "constraint": "350MB_EDGE_CEILING (Zero hotpath bloat; sub-50ms S1 action loop; Sentinel capability leases)",
+    "strategy": "Assimilate trycua/cua to establish a full-duplex Sovereign Computer-Use Agent (CUA) unifying voice guidance, normalized desktop/mobile actuation, and Sentinel safety leases."
+  },
+  "assimilated_repositories": [
+    {
+      "repo": "https://github.com/trycua/cua",
+      "designation": "CUA_CORE",
+      "extracted_pattern": "Cross-platform OS input drivers (cua-driver), S1 rapid reflex decision loop (cua-s1), sandboxed desktop fleets (cua-fleets), closed-loop benchmark diffing (cua-bench)"
+    }
+  ],
+  "northstar_goal": "Universal Sovereign Computer-Use Agent (CUA) Fabric — Unifying Duplex Voice Guidance, Normalized Cross-Platform Actuation (Desktop + Mobile), and System 1 Reflex Execution under Sentinel Safety Leases (<350MB RAM, sub-50ms action loop).",
+  "architectural_pillars": {
+    "pillar_1_grounded_coordinate_space": "Normalized [0.0, 1.0] coordinate system resolving to physical desktop (3840x2160, 1920x1080) and mobile (Excalibur S26 Ultra 1440x3120) displays",
+    "pillar_2_cua_action_primitives": "Native mouse click, drag, scroll, keyboard type, hotkeys, and S1 fast macro chains executing in <50ms",
+    "pillar_3_sentinel_safety_leases": "AgentArmor Z3 bounds, red zone quarantine, and HITL gate escalation protecting credentials and system-critical actions",
+    "pillar_4_duplex_voice_interchange": "Tight integration with Omni S2S and Reya Multivoice Interchange allowing any Knight to narrate or receive voice interruptions during computer use"
+  },
+  "kinetic_flow_dag": [
+    {
+      "step": 1,
+      "name": "CUA_DRIVER_BRIDGE",
+      "knight": "SIR_CODEX",
+      "action": "Forge CuaDriverBridge with normalized coordinate mapping and Sentinel bounds",
+      "evidence_class": "confirmed"
+    },
+    {
+      "step": 2,
+      "name": "REYA_FABRIC_ENHANCEMENT",
+      "knight": "SIR_HELIO",
+      "action": "Wire CUA action primitives and S1 reflex execution into reya_fabric_layer.py",
+      "evidence_class": "confirmed"
+    },
+    {
+      "step": 3,
+      "name": "RUNIC_ROUTER_CUA",
+      "knight": "MERLIN_Ω",
+      "action": "Register //CUA and //REYA_ACT runes for instant agentic and CLI dispatch",
+      "evidence_class": "confirmed"
+    },
+    {
+      "step": 4,
+      "name": "CAMELOT_CLI_CUA",
+      "knight": "SIR_HELIOS",
+      "action": "Add 'camelot cua' sub-command to Camelot-OS Global CLI",
+      "evidence_class": "confirmed"
+    }
+  ]
+}

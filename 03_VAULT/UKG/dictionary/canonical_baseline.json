@@ -1,0 +1,67 @@
+{
+  "schema_version": "ukg-dictionary/1",
+  "dictionary_id": "dict_canonical_baseline_v10001",
+  "version": "v10001.00-CYBERTRONIA",
+  "created_at": "2026-09-21T06:00:00Z",
+  "immutable": true,
+  "entries": {
+    "//NORTHSTAR": {
+      "semantic_concept": "Background Worker Daemon & Personal CPU Sandbox Pool",
+      "target_ast_fragment": {
+        "engine": "02_FORGE.assimilation.workers.northstar_worker_engine",
+        "sandbox": "02_FORGE.assimilation.workers.personal_cpu_sandbox",
+        "permission_broker": "02_FORGE.assimilation.workers.permission_broker"
+      },
+      "category": "WORKER_INFRASTRUCTURE"
+    },
+    "//OMNIROUTE": {
+      "semantic_concept": "Multi-Provider AI Gateway & Intelligent Fallback Routing",
+      "target_ast_fragment": {
+        "gateway": "02_FORGE.assimilation.omniroute.omniroute_gateway",
+        "protocol": "BIFROST_EDGE_GATEWAY"
+      },
+      "category": "NETWORK_ROUTING"
+    },
+    "//BITROUTER": {
+      "semantic_concept": "High-Throughput Streaming Audio & Token Router",
+      "target_ast_fragment": {
+        "router": "02_FORGE.assimilation.bitrouter.bitrouter_engine",
+        "transport": "HTTP_CHUNKED_STREAMING"
+      },
+      "category": "STREAMING_INFRASTRUCTURE"
+    },
+    "//FREELLMAPI": {
+      "semantic_concept": "Zero-Cost Pooled Multi-Provider LLM Gateway",
+      "target_ast_fragment": {
+        "client": "02_FORGE.assimilation.freellmapi.freellmapi_client",
+        "quota": "ZERO_COST_TIER"
+      },
+      "category": "LLM_INFERENCE"
+    },
+    "//SYNTHETOS": {
+      "semantic_concept": "Deterministic Decompressor & Read-Only Reference Prover",
+      "target_ast_fragment": {
+        "prover": "control_plane.pipeline.synthetos_proof",
+        "doctrine": "1_TO_M_TO_A"
+      },
+      "category": "EPISTEMIC_PROOF"
+    },
+    "//ANYA_GATE": {
+      "semantic_concept": "Sovereign Compiler & Enterprise Blast Radius Gatekeeper",
+      "target_ast_fragment": {
+        "gate": "control_plane.gates.anya_gate",
+        "invariant": "DELTA_M_LE_0_12_MIB"
+      },
+      "category": "GOVERNANCE_GATE"
+    },
+    "//SENTINEL_LEASE": {
+      "semantic_concept": "Sole Authority Policy & Nonce-Bounded Kinetic Lease Granter",
+      "target_ast_fragment": {
+        "authority": "control_plane.security.sentinel_lease",
+        "scope": "DUAL_GATE_Z3"
+      },
+      "category": "AUTHORITY_ENFORCEMENT"
+    }
+  },
+  "checksum": "c92a94f87740f90c377317e1451fef4815a5180f688005b8a5d3f27aeeb9e9d6"
+}

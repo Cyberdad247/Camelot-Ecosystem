@@ -1,0 +1,73 @@
+{
+  "schema_version": "camelot-ukg/3",
+  "node_id": "crystal_northstar",
+  "vfs_coordinate": "vfs://worldtree/crystals/crystal_northstar",
+  "glyph_handle": "[\u2713//NORTHSTAR]",
+  "glyph_operator": "\u2713",
+  "seed": "833da0d58223cfa376e9f788173dbc67053a95bc40653f3ee592582fa0f5ee99",
+  "decompression_dictionary_ref": "vfs://worldtree/ukg/dictionary/dict_canonical_baseline_v10001",
+  "ontology_version": "v10001.00-CYBERTRONIA",
+  "provenance_dag": {
+    "parent_nodes": [
+      "vfs://worldtree/crystals/omega_production_kernel"
+    ],
+    "edges": [
+      {
+        "source": "vfs://worldtree/crystals/crystal_northstar",
+        "target": "vfs://worldtree/crystals/omega_production_kernel",
+        "relation": "EVOLVED_FROM"
+      }
+    ],
+    "lineage_height": 23,
+    "merkle_root": "65cfb92fe36a253a7027a7854c54be4e378b339bb6bd68378e941a411fcf0b77"
+  },
+  "adoption_verdicts": {
+    "synthetos": "VERIFIED",
+    "merlin": "PASS",
+    "anya": "ANYA_IS_THE_GATE_CLEARED",
+    "sentinel": "LEASE_GRANTED",
+    "gideon": "pass",
+    "arthur": "RATIFIED"
+  },
+  "uncertainty_markers": {
+    "confidence_score": 1.0,
+    "contested_claims": [],
+    "open_questions": []
+  },
+  "architectural_lineage": [
+    "LINEAGE_NODE_01",
+    "LINEAGE_NODE_02",
+    "LINEAGE_NODE_03",
+    "LINEAGE_NODE_04",
+    "LINEAGE_NODE_05",
+    "LINEAGE_NODE_06",
+    "LINEAGE_NODE_07",
+    "LINEAGE_NODE_08",
+    "LINEAGE_NODE_09",
+    "LINEAGE_NODE_10",
+    "LINEAGE_NODE_11",
+    "LINEAGE_NODE_12",
+    "LINEAGE_NODE_13",
+    "LINEAGE_NODE_14",
+    "LINEAGE_NODE_15",
+    "LINEAGE_NODE_16",
+    "LINEAGE_NODE_17",
+    "LINEAGE_NODE_18",
+    "LINEAGE_NODE_19",
+    "LINEAGE_NODE_20",
+    "LINEAGE_NODE_21",
+    "LINEAGE_NODE_22",
+    "LINEAGE_NODE_23"
+  ],
+  "doctrine": "1_TO_M_TO_A",
+  "source_digests": {
+    "crystal_source": "641f2626b22a67df40d1e34edc2673dede1782d5e664f4872446da2d64ade9e7",
+    "lease_hash": "92dc84c46a85f5297b84cb2ecb754c6e6f6ad522ee74f1949e8632a1e0b5f518"
+  },
+  "compatibility_metadata": {
+    "memory_ceiling_mb": 12.0,
+    "cpu_quota_pct": 10.0,
+    "zero_hotpath_bloat": true,
+    "complexity_points": 0
+  }
+}

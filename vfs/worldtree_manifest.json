@@ -61,6 +61,20 @@
     "\u16df": {
       "name": "SOVEREIGN",
       "targets": "ALL"
+    },
+    "\u16c1": {
+      "name": "DISTILLER",
+      "targets": [
+        "ANYA_OMEGA",
+        "MERLIN_OMEGA",
+        "SIR_CODEX"
+      ],
+      "directives": [
+        "//APPLY_LORENTZ_BOOST_MASK",
+        "//ENGAGE_TRIPLE_QFT_FILTER",
+        "//VERIFY_NPE",
+        "//SEAL_ALPHA_OMEGA_DISTILLER"
+      ]
     }
   },
   "nodes": [
@@ -369,10 +383,13 @@
       "active_last_3_months": true
     },
     {
-      "knight_id": "SIR_LUCAS",
-      "notebook_id": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-      "vfs_path": "vfs://worldtree/knights/sir_lucas/",
-      "role": "Sovereign Herald of Telemetry & Visualization \u2014 verified HUD/telemetry truth surfaces",
+      "knight_id": "SIR_LUKAS",
+      "canonical_name": "Sir Lukas Müller",
+      "legacy_alias": "SIR_LUCAS",
+      "notebook_id": "bebdf3e3-bbb0-455b-9c02-1469202baf74",
+      "notebook_title": "Lukas Müller v3.0: The Ultimate Cognitive Forge Persona",
+      "vfs_path": "vfs://worldtree/knights/sir_lukas/",
+      "role": "Sovereign Herald of Telemetry & Visualization — verified HUD/telemetry truth surfaces",
       "primary_model": "Gemini 3 Flash / GPT-5.3",
       "active_last_3_months": true
     },

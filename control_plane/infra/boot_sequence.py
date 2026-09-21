@@ -1292,6 +1292,49 @@ def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
     return ok, msg
 
 
+def boot_redis_go_l1_cache(home: Path) -> tuple[bool, str]:
+    """Verify Redis L1 Flash cache is listening on :6379 and Bifrost Go sidecar on :8011."""
+    redis_live = _probe_port("127.0.0.1", 6379, timeout=0.5)
+    go_sidecar_live = _probe_port("127.0.0.1", 8011, timeout=0.5)
+    if not redis_live:
+        candidates = [
+            Path("C:/Users/vizio/AppData/Local/CamelotTools/redis/redis-server.exe"),
+            Path("C:/Program Files/Redis/redis-server.exe"),
+        ]
+        for exe in candidates:
+            if exe.exists():
+                try:
+                    subprocess.Popen(
+                        [str(exe)],
+                        stdout=subprocess.DEVNULL,
+                        stderr=subprocess.DEVNULL,
+                        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),
+                    )
+                    time.sleep(0.5)
+                    redis_live = _probe_port("127.0.0.1", 6379, timeout=1.0)
+                    break
+                except Exception:
+                    pass
+
+    sidecar_label = "+ Go Sidecar :8011" if go_sidecar_live else ""
+    if redis_live:
+        return True, f"Redis :6379 LIVE (L1 Flash Memory sub-10ms) {sidecar_label}".strip()
+    return False, "Redis :6379 not detected"
+
+
+def boot_local_qdrant_engine(home: Path) -> tuple[bool, str]:
+    """Verify local embedded Qdrant vector database is initialized and healthy."""
+    try:
+        from control_plane.infra.qdrant_manager import LocalQdrantManager
+        qm = LocalQdrantManager()
+        status = qm.get_status()
+        pts = status.get("points_count", 0)
+        qm.close()
+        return True, f"Qdrant Embedded LIVE (HNSW vector store, {pts} points)"
+    except Exception as exc:
+        return False, f"Qdrant initialization warning: {exc}"
+
+
 def run_boot(
     home: Path, quick: bool = False, skip: set[str] | None = None
 ) -> dict[str, Any]:
@@ -1326,6 +1369,8 @@ def run_boot(
         {"name": "Sir Octavian  :8400", "required": False, "fn": lambda: boot_sir_octavian(home)},
         {"name": "Morgana Bridge :8001", "required": True, "fn": lambda: boot_morgana_bridge(home)},
         {"name": "Bifrost Sidecar:8011", "required": False, "fn": lambda: boot_bifrost_go_sidecar(home)},
+        {"name": "Redis-Go L1 Cache :6379", "required": False, "fn": lambda: boot_redis_go_l1_cache(home)},
+        {"name": "Local Qdrant Engine", "required": False, "fn": lambda: boot_local_qdrant_engine(home)},
         {"name": "OmniRoute    :20128", "required": False, "fn": lambda: boot_omniroute_gateway(home)},
         {"name": "Hermes OmniRoute", "required": False, "fn": lambda: boot_hermes_omniroute_orchestrator(home)},
         {"name": "VPS Hermes_Prime", "required": False, "fn": lambda: boot_vps_hermes_prime(home)},

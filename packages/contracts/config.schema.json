@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.camelot.os/contracts/camelot-config-1.json",
+  "title": "CamelotConfig1",
+  "description": "Configuration contract schema with classified authority and mutation policies",
+  "type": "object",
+  "required": ["schema_version", "config_id", "version", "environment", "entries"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-config/1"
+    },
+    "config_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_\\-\\.:]+$"
+    },
+    "version": {
+      "type": "string"
+    },
+    "environment": {
+      "type": "string",
+      "enum": ["production", "staging", "development", "airgap", "sandbox"]
+    },
+    "entries": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["value", "classification"],
+        "properties": {
+          "value": {},
+          "classification": {
+            "type": "string",
+            "enum": [
+              "STATIC",
+              "RELOADABLE",
+              "SECRET_REFERENCE",
+              "BOOTSTRAP_ONLY",
+              "AUTHORITY_CRITICAL"
+            ]
+          },
+          "description": { "type": "string" },
+          "requires_restart": { "type": "boolean" }
+        }
+      }
+    },
+    "checksum": {
+      "type": "string",
+      "description": "SHA-256 canonical hash of the configuration object"
+    }
+  }
+}

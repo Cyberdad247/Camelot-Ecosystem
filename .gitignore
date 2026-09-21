@@ -40,9 +40,12 @@ tmp_awesome_repo/
 data/.pytest_tmp/
 data/.pytest_temp/
 03_VAULT/runtime_state/wasm_sandbox/
+03_VAULT/runtime_state/sandboxes/
+03_VAULT/runtime_state/workers/
 03_VAULT/runtime_state/harness_heartbeat.jsonl
 03_VAULT/runtime_state/boot_snapshot.json
 03_VAULT/runtime_state/*_snapshot.json
+03_VAULT/memory/qdrant/
 
 # 4. Python / Node Runtime
 __pycache__/
@@ -316,3 +319,7 @@ deploy/multivoice-router/
 appendonly.aof
 appendonly.aof.*
 *.aof
+
+# Local model weights binaries (keep configs/manifests tracked)
+03_VAULT/models/**/*.safetensors
+03_VAULT/models/**/*.ggml

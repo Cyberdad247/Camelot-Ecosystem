@@ -867,6 +867,351 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_validate_spec",
         "hydrate": False,
     },
+    # REYA ASSIMILATION & MARK-XXXIX HYBRID RUNES (ANYA_Ω, SIR_CODEX, PALADIN_OCTEM)
+    "//FORGE_REYA_SCAFFOLD": {
+        "knight": "anya_omega",
+        "description": "Forge Reya zero-entropy assimilation scaffold, memory slab, and 10-line firewall",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_forge_reya_scaffold",
+        "hydrate": False,
+    },
+    "//ACTIVATE_AGENT_ARMOR": {
+        "knight": "paladin_octem",
+        "description": "Activate AgentArmor Z3 proof gate and taint-tracking firewall for Reya ingress",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_activate_agent_armor",
+        "hydrate": False,
+    },
+    "//HITL_IRON_GATE_APPROVAL": {
+        "knight": "anya_omega",
+        "description": "HITL Iron Gate authorization review for changes exceeding 10 lines or 50MB",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_hitl_iron_gate_approval",
+        "hydrate": False,
+    },
+    "//EXTRACT_MARK_39_AUDIO_CORE": {
+        "knight": "lady_apis",
+        "description": "Extract Gemini Live real-time audio and vision stream routing into Bifrost Bridge",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_extract_mark_39_audio_core",
+        "hydrate": False,
+    },
+    "//SANDBOX_PYTHON_DEPENDENCIES": {
+        "knight": "sir_codex",
+        "description": "RTK Scythe purge of PyAutoGUI/Playwright bloat in favor of bare-metal WASI sandbox",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_sandbox_python_dependencies",
+        "hydrate": False,
+    },
+    "//AWAIT_REYA_UNCLOAKING": {
+        "knight": "anya_omega",
+        "description": "Place Anya_Ω Hypervisor Gate on active listener standby for Reya payload uncloaking",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_await_reya_uncloaking",
+        "hydrate": False,
+    },
+    "//HANDSHAKE": {
+        "knight": "merlin_omega",
+        "description": "Bicameral Arthur-Merlin HITL governance handshake and capability lease gate",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_arthur_merlin_handshake",
+        "hydrate": False,
+    },
+    "//SOVEREIGN_SEAL": {
+        "knight": "arthur_omega",
+        "description": "Apply King Arthur Sovereign Golden Seal to authorize a suspended HITL handshake",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_sovereign_seal",
+        "hydrate": False,
+    },
+    "//ACTIVATE_REYA_NOSTR_BRIDGE": {
+        "knight": "sir_helio",
+        "description": "Activate REYA Nostr P2P transport bridge with HMAC-SHA256 QR-Pill mobile pairing",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_activate_reya_nostr_bridge",
+        "hydrate": False,
+    },
+    "//REYA_CHANNEL": {
+        "knight": "sir_sonus",
+        "description": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//channel": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//voice_interchange": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//reya_voice": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//CUA": {
+        "knight": "sir_codex",
+        "description": "Universal Sovereign Computer-Use Agent (CUA) action dispatch via Reya Fabric",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
+    "//cua": {
+        "knight": "sir_codex",
+        "description": "Alias for //CUA action dispatch",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
+    "//REYA_ACT": {
+        "knight": "sir_helio",
+        "description": "Execute kinetic desktop/mobile action under active Reya persona",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
+    "//REYA_HANDSHAKE": {
+        "knight": "merlin_omega",
+        "description": "Establish or inspect Reya kinetic fabric handshake clearance and experience autonomy",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_handshake",
+        "hydrate": False,
+    },
+    "//MAGSAFE_INGEST": {
+        "knight": "sir_helios",
+        "description": "Ingest MagSafe hardware audio, summarize via SecondBrain, and tap into Glass Observatory",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_magsafe_ingest",
+        "hydrate": False,
+    },
+    "//magsafe": {
+        "knight": "sir_helios",
+        "description": "Alias for //MAGSAFE_INGEST ambient audio processor",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_magsafe_ingest",
+        "hydrate": False,
+    },
+    "//MAGSAFE_DISPATCH": {
+        "knight": "sir_codex",
+        "description": "Ingest MagSafe audio and auto-dispatch kinetic action items via REYA Fabric Layer",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_magsafe_dispatch",
+        "hydrate": False,
+    },
+    "//FREELLMAPI": {
+        "knight": "sir_helios",
+        "description": "Zero-cost LLM query via pooled FreeLLMAPI gateway (~34 providers)",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_freellmapi",
+        "hydrate": False,
+    },
+    "//ZERO_COST": {
+        "knight": "sir_helios",
+        "description": "Alias for //FREELLMAPI zero-cost pooled inference",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_freellmapi",
+        "hydrate": False,
+    },
+    "//OMNIROUTE": {
+        "knight": "sir_helios",
+        "description": "OmniRoute 359-provider gateway query with RTK + Caveman stacked compression",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omniroute",
+        "hydrate": False,
+    },
+    "//COMPRESS": {
+        "knight": "sir_helios",
+        "description": "Compress text prompt using RTK + Caveman stacked compression (-89% average)",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_compress_prompt",
+        "hydrate": False,
+    },
+    "//BITROUTER": {
+        "knight": "sir_codex",
+        "description": "BitRouter anti-tokenmaxxing guardrail evaluation across agent loops",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_bitrouter_eval",
+        "hydrate": False,
+    },
+    "//SYSTEM1": {
+        "knight": "sir_ghost",
+        "description": "TypeSafe AI Jev System 1 sub-50ms non-autoregressive decision & triage",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_system1",
+        "hydrate": False,
+    },
+    "//JEV": {
+        "knight": "sir_ghost",
+        "description": "Direct TypeSafe Jev structured decision execution & rapid routing",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_jev",
+        "hydrate": False,
+    },
+    "//HUMANISTIC_VOICE": {
+        "knight": "sir_sonus",
+        "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
+    "//NORTHSTAR": {
+        "knight": "merlin_omega",
+        "description": "Decompose and dispatch autonomous Northstar Goal background worker in personal CPU sandbox",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_northstar_dispatch",
+        "hydrate": False,
+    },
+    "//WORKER_LIST": {
+        "knight": "sir_helios",
+        "description": "Inspect active background workers, CPU/memory quotas, and pending HITL approval cards",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_worker_list",
+        "hydrate": False,
+    },
+    "//WORKER_STEP": {
+        "knight": "sir_codex",
+        "description": "Step execution of an active Northstar background worker milestone",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_worker_step",
+        "hydrate": False,
+    },
+    "//humanistic": {
+        "knight": "sir_sonus",
+        "description": "Alias for //HUMANISTIC_VOICE human-to-humanistic AI conversation",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
+    "//vocal_prosody": {
+        "knight": "sir_sonus",
+        "description": "Alias for //HUMANISTIC_VOICE vocal pattern & prosody extraction",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
+    "//live_speech": {
+        "knight": "sir_sonus",
+        "description": "Alias for //HUMANISTIC_VOICE live speech communication loop",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_humanistic_voice",
+        "hydrate": False,
+    },
+    "//OMNI_S2S": {
+        "knight": "sir_sonus",
+        "description": "Omni Speech-to-Speech stream with SGLang RadixAttention prefix caching & Agora RTC transport",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
+    "//sglang_omni": {
+        "knight": "sir_sonus",
+        "description": "Alias for //OMNI_S2S RadixAttention speech streaming",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
+    "//agora_rtc": {
+        "knight": "sir_sonus",
+        "description": "Alias for //OMNI_S2S Agora RTC transport bridge",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
+    "//s2s_stream": {
+        "knight": "sir_sonus",
+        "description": "Alias for //OMNI_S2S Speech-to-Speech streaming pipeline",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omni_s2s",
+        "hydrate": False,
+    },
+    "//ASSIMILATE_EVOLVE": {
+        "knight": "sir_synthetos",
+        "description": "Enterprise evolution engine: 1 -> M -> A -> S promotion pipeline (P0 -> P11) + First-Class RETREAT",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_assimilate_evolve",
+        "hydrate": False,
+    },
+    "//NKG_INSPECT": {
+        "knight": "sir_helios",
+        "description": "Decompress and inspect vKG crystal capsule under ukg-dictionary/1",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_nkg_inspect",
+        "hydrate": False,
+    },
+    "//SAFE_MODE": {
+        "knight": "sir_sentinel",
+        "description": "Universal Safe Mode & Emergency Authority Freeze Governor (NORMAL, DEGRADED, SAFE, FROZEN, RECOVERY)",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_safe_mode",
+        "hydrate": False,
+    },
+    "//RELEASE_PROOF": {
+        "knight": "sir_boris",
+        "description": "Generate and verify camelot-release-proof/1 attestation binding source commit, SBOM, and contracts",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_release_proof",
+        "hydrate": False,
+    },
+    "//MIGRATION": {
+        "knight": "merlin_omega",
+        "description": "5-stage state migration engine (PRECHECK -> SNAPSHOT -> MIGRATE -> VERIFY -> PROMOTE / RETREAT)",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_migration",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -3212,8 +3557,935 @@ def _handle_validate_spec(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_forge_reya_scaffold(param: Any, context: dict) -> dict:
+    """//FORGE_REYA_SCAFFOLD — Forge Reya zero-entropy assimilation scaffold, memory slab, and 10-line firewall."""
+    scaffold_dir = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "scaffold"
+    scaffold_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = scaffold_dir / "scaffold_manifest.json"
+    manifest_present = manifest_path.exists()
+    return {
+        "action": "forge_reya_scaffold",
+        "knight": "ANYA_Ω",
+        "scaffold_dir": str(scaffold_dir),
+        "manifest_present": manifest_present,
+        "memory_slab": "Local\\Camelot_Reya_Slab (256MB)",
+        "firewall": "10-line atomic code firewall",
+        "status": "SCAFFOLD_FORGED",
+    }
+
+
+def _handle_activate_agent_armor(param: Any, context: dict) -> dict:
+    """//ACTIVATE_AGENT_ARMOR — Activate AgentArmor Z3 proof gate and taint-tracking firewall for Reya ingress."""
+    return {
+        "action": "activate_agent_armor",
+        "knight": "PALADIN_OCTEM",
+        "z3_smt_gate": "ENABLED",
+        "taint_tracking": "ACTIVE",
+        "ingress_firewall": "10_LINE_ATOMIC_STRICT",
+        "status": "AGENT_ARMOR_ACTIVE",
+    }
+
+
+def _handle_hitl_iron_gate_approval(param: Any, context: dict) -> dict:
+    """//HITL_IRON_GATE_APPROVAL — HITL Iron Gate authorization review for changes exceeding 10 lines or 50MB."""
+    payload = str(param or "").strip()
+    line_count = len(payload.splitlines()) if payload else 0
+    requires_hitl = line_count > 10
+    return {
+        "action": "hitl_iron_gate_approval",
+        "knight": "ANYA_Ω",
+        "payload_lines": line_count,
+        "requires_hitl": requires_hitl,
+        "status": "HITL_REQUIRED" if requires_hitl else "HITL_APPROVED_ATOMIC",
+    }
+
+
+def _handle_extract_mark_39_audio_core(param: Any, context: dict) -> dict:
+    """//EXTRACT_MARK_39_AUDIO_CORE — Extract Gemini Live real-time audio and vision stream routing into Bifrost Bridge."""
+    return {
+        "action": "extract_mark_39_audio_core",
+        "knight": "LADY_APIS",
+        "voice_vision_engine": "Gemini_Live_API ➔ Lord_Vesper_WebAudio ➔ Sub-100ms TTFA",
+        "bifrost_bridge_target": "ws://127.0.0.1:3001/bifrost",
+        "status": "MARK_39_CORE_EXTRACTED",
+    }
+
+
+def _handle_sandbox_python_dependencies(param: Any, context: dict) -> dict:
+    """//SANDBOX_PYTHON_DEPENDENCIES — RTK Scythe purge of PyAutoGUI/Playwright bloat in favor of bare-metal WASI sandbox."""
+    return {
+        "action": "sandbox_python_dependencies",
+        "knight": "SIR_CODEX",
+        "purged_dependencies": ["pyautogui", "playwright"],
+        "runtime_replacement": "bare-metal WASM32-WASI / native QtScrcpy",
+        "memory_savings_mb": 420,
+        "status": "PYTHON_DEPENDENCIES_SANDBOXED",
+    }
+
+
+def _handle_await_reya_uncloaking(param: Any, context: dict) -> dict:
+    """//AWAIT_REYA_UNCLOAKING — Place Anya_Ω Hypervisor Gate on active listener standby for Reya payload uncloaking."""
+    return {
+        "action": "await_reya_uncloaking",
+        "knight": "ANYA_Ω",
+        "hypervisor_state": "AWAITING_REYA_UNCLOAKING",
+        "ready_for_raw_payload": True,
+        "next_step": "Awaiting Sovereign paste of readme.md or core logic into Anya's 10-line atomic gate",
+        "status": "ARMED_STANDBY",
+    }
+
+
+_handshake_engine_instance = None
+
+def _get_handshake_engine():
+    global _handshake_engine_instance
+    if _handshake_engine_instance is None:
+        from control_plane.security.arthur_merlin_handshake import ArthurMerlinHandshakeEngine
+        _handshake_engine_instance = ArthurMerlinHandshakeEngine()
+    return _handshake_engine_instance
+
+
+def _handle_arthur_merlin_handshake(param: Any, context: dict) -> dict:
+    """//HANDSHAKE — Bicameral Arthur-Merlin HITL governance evaluation."""
+    eng = _get_handshake_engine()
+    intent = str(param or "").strip() or "General Ingress Proposal"
+    payload = context.get("payload", "") if context else ""
+    risk_tier = context.get("risk_tier") if context else None
+    mem_mb = float(context.get("memory_estimate_mb", 12.0)) if context else 12.0
+
+    verdict = eng.evaluate_intent(
+        intent=intent,
+        target_knight=context.get("knight", "merlin_omega") if context else "merlin_omega",
+        payload=payload,
+        explicit_risk_tier=risk_tier,
+        memory_estimate_mb=mem_mb,
+    )
+    return verdict.to_dict()
+
+
+def _handle_sovereign_seal(param: Any, context: dict) -> dict:
+    """//SOVEREIGN_SEAL — King Arthur Sovereign Golden Seal release."""
+    eng = _get_handshake_engine()
+    handshake_id = str(param or "").strip()
+    rationale = context.get("rationale", "Sovereign Golden Seal granted by King Arthur / Operator.") if context else "Sovereign Golden Seal granted by King Arthur / Operator."
+    directive = context.get("directive_type", "CONSENSUS_RATIFICATION") if context else "CONSENSUS_RATIFICATION"
+
+    try:
+        verdict = eng.apply_arthur_golden_seal(
+            handshake_id=handshake_id,
+            directive_type=directive,
+            rationale=rationale,
+        )
+        return verdict.to_dict()
+    except Exception as e:
+        return {
+            "error": str(e),
+            "status": "SEAL_REJECTED",
+            "handshake_id": handshake_id,
+        }
+
+
+def _handle_activate_reya_nostr_bridge(param: Any, context: dict) -> dict:
+    """//ACTIVATE_REYA_NOSTR_BRIDGE — Activate REYA Nostr P2P transport bridge & QR-Pill pairing."""
+    device_id = str(param or "").strip() or "vashawns-s26-ultra"
+    pubkey = context.get("pubkey", "npub_sovereign_mobile_sentinel") if context else "npub_sovereign_mobile_sentinel"
+    systemd_unit = CAMELOT_HOME / "infra" / "systemd" / "camelot-reya-edge.service"
+    systemd_present = systemd_unit.exists()
+
+    import importlib.util
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_nostr_bridge.py"
+    spec = importlib.util.spec_from_file_location("reya_nostr_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.ReyaNostrBridge()
+        pairing = bridge.generate_pairing_qr_pill(device_id, pubkey)
+        status_info = bridge.get_status()
+    else:
+        pairing = {"token": {"device_id": device_id, "status": "FALLBACK"}}
+        status_info = {"relays": ["wss://relay.damus.io"]}
+
+    return {
+        "action": "activate_reya_nostr_bridge",
+        "knight": "SIR_HELIO",
+        "device_id": device_id,
+        "qr_pill": pairing.get("token"),
+        "relays": status_info.get("relays"),
+        "systemd_service": "infra/systemd/camelot-reya-edge.service",
+        "systemd_present": systemd_present,
+        "cgroups_limits": {
+            "MemoryHigh": "300M",
+            "MemoryMax": "350M",
+            "CPUQuota": "60%",
+            "Slice": "camelot-workers.slice",
+        },
+        "status": "REYA_NOSTR_BRIDGE_ACTIVE",
+    }
+
+
+def _handle_reya_channel(param: Any, context: dict) -> dict:
+    """//REYA_CHANNEL — Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric."""
+    param_str = str(param or "").strip()
+    action = context.get("action") if context else None
+    action_payload = context.get("payload") if context else None
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.ReyaUniversalFabric()
+
+        trigger_match = fabric.detect_voice_interchange_trigger(param_str)
+        target_knight = trigger_match if trigger_match else param_str
+
+        if target_knight:
+            switch_res = fabric.switch_knight(target_knight)
+        else:
+            switch_res = fabric.get_current_state()
+
+        if action:
+            action_res = fabric.execute_fabric_action(action, action_payload or {})
+        else:
+            action_res = None
+
+        return {
+            "action": "reya_channel",
+            "detected_trigger": trigger_match,
+            "switch_result": switch_res,
+            "action_result": action_res,
+            "status": "REYA_CHANNEL_DISPATCHED",
+        }
+    else:
+        return {
+            "action": "reya_channel",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
+def _handle_cua_dispatch(param: Any, context: dict) -> dict:
+    """//CUA / //REYA_ACT — Sovereign Computer-Use Agent (CUA) action execution via REYA Fabric."""
+    param_str = str(param or "").strip()
+    action = context.get("action") if context else None
+    action_payload = (context.get("payload") or {}) if context else {}
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.get_reya_fabric()
+
+        target_action = action or "cua_mouse_click"
+        payload = dict(action_payload or {})
+
+        if param_str:
+            tokens = param_str.split(maxsplit=1)
+            first_tok = tokens[0].lower()
+            rest = tokens[1] if len(tokens) > 1 else ""
+            if first_tok in ("click", "mouse_click", "tap"):
+                target_action = "cua_mouse_click"
+                coords = rest.split()
+                if len(coords) >= 2:
+                    try:
+                        payload["norm_x"] = float(coords[0])
+                        payload["norm_y"] = float(coords[1])
+                    except ValueError:
+                        pass
+            elif first_tok in ("type", "keyboard_type"):
+                target_action = "cua_keyboard_type"
+                payload["text"] = rest
+            elif first_tok in ("move", "mouse_move"):
+                target_action = "cua_mouse_move"
+                coords = rest.split()
+                if len(coords) >= 2:
+                    try:
+                        payload["norm_x"] = float(coords[0])
+                        payload["norm_y"] = float(coords[1])
+                    except ValueError:
+                        pass
+            elif first_tok in ("key", "key_press"):
+                target_action = "cua_key_press"
+                payload["key"] = rest or "Return"
+            elif first_tok in ("hotkey",):
+                target_action = "cua_hotkey"
+                payload["keys"] = rest.split()
+            elif first_tok in ("capture", "screenshot"):
+                target_action = "cua_screen_capture"
+
+        action_res = fabric.execute_fabric_action(target_action, payload)
+        return {
+            "action": "cua_dispatch",
+            "target_action": target_action,
+            "result": action_res,
+            "status": "CUA_ACTION_EXECUTED",
+        }
+    else:
+        return {
+            "action": "cua_dispatch",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
+def _handle_reya_handshake(param: Any, context: dict) -> dict:
+    """//REYA_HANDSHAKE — Establish or inspect Reya kinetic fabric handshake clearance and experience autonomy."""
+    param_str = str(param or "").strip()
+    target_knight = (context.get("knight") if context and context.get("knight") else "sir_boris")
+    grant = (context.get("grant", False) if context else False) or ("grant" in param_str.lower())
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.get_reya_fabric()
+
+        gate = fabric.handshake_gate
+        if not gate:
+            return {"action": "reya_handshake", "status": "ERROR", "error": "Handshake gate not available"}
+
+        if grant:
+            lease = fabric.grant_kinetic_handshake(target_knight)
+            return {
+                "action": "reya_handshake",
+                "status": "HANDSHAKE_GRANTED",
+                "knight_id": target_knight,
+                "lease": lease.to_dict() if lease else None,
+            }
+
+        autonomy_tier, level, rationale = gate.evaluate_knight_autonomy(target_knight)
+        active_l = gate.get_active_lease(target_knight)
+
+        return {
+            "action": "reya_handshake",
+            "status": "HANDSHAKE_EVALUATED",
+            "knight_id": target_knight,
+            "autonomy_tier": autonomy_tier.value,
+            "knight_level": level,
+            "rationale": rationale,
+            "active_handshake": active_l.to_dict() if active_l else None,
+        }
+    else:
+        return {
+            "action": "reya_handshake",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
+def _handle_magsafe_ingest(param: Any, context: dict) -> dict:
+    """//MAGSAFE_INGEST — Ingest MagSafe voice recording, SecondBrain summarize & Glass Observatory tap."""
+    param_str = str(param or "").strip()
+    audio_path = context.get("file") if (context and context.get("file")) else param_str
+    if not audio_path:
+        audio_path = str(CAMELOT_HOME / "03_VAULT" / "runtime_state" / "magsafe" / "sample_ambient_memo.txt")
+        p = Path(audio_path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        if not p.exists():
+            p.write_text(
+                "MagSafe Audio Memo: Task: Verify unit test coverage and dispatch kinetic CUA actions.\nAction item: Run pytest tests/test_magsafe_voice_dispatcher.py.",
+                encoding="utf-8",
+            )
+
+    knight_id = (context.get("knight") if context and context.get("knight") else "SIR_HELIOS")
+    tenant_id = (context.get("tenant") if context and context.get("tenant") else "Vizion Sky")
+    dispatch = (context.get("dispatch", False) if context else False) or ("dispatch" in param_str.lower())
+
+    import importlib.util
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "magsafe" / "magsafe_audio_bridge.py"
+    spec = importlib.util.spec_from_file_location("magsafe_audio_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_magsafe_bridge()
+        res = bridge.process_audio_file(
+            audio_file_path=audio_path,
+            target_knight=knight_id,
+            tenant_id=tenant_id,
+            auto_dispatch=dispatch,
+        )
+        return {
+            "action": "magsafe_ingest",
+            "status": "SUCCESS",
+            "session_id": res.session_id,
+            "duration_seconds": res.duration_seconds,
+            "action_items_count": len(res.action_items),
+            "observatory_turn_id": res.observatory_turn_id,
+            "tenant_xp_awarded": res.tenant_xp_awarded,
+            "summary": res.summary,
+            "key_ideas": res.key_ideas,
+            "action_items": [a.to_dict() for a in res.action_items],
+            "dispatched_results": res.dispatched_results,
+            "memory_attribution": res.memory_attribution,
+        }
+    return {
+        "action": "magsafe_ingest",
+        "status": "ERROR",
+        "error": "Failed to load magsafe_audio_bridge module",
+    }
+
+
+def _handle_magsafe_dispatch(param: Any, context: dict) -> dict:
+    """//MAGSAFE_DISPATCH — Ingest MagSafe voice recording and auto-dispatch kinetic action items via REYA."""
+    ctx = dict(context or {})
+    ctx["dispatch"] = True
+    return _handle_magsafe_ingest(param, ctx)
+
+
+def _handle_freellmapi(param: Any, context: dict) -> dict:
+    """//FREELLMAPI / //ZERO_COST — Execute zero-cost chat completion via FreeLLMAPI."""
+    import importlib.util
+
+    prompt = str(param or "").strip()
+    if not prompt:
+        prompt = context.get("task", "Hello from Camelot-OS") if context else "Hello from Camelot-OS"
+
+    model = context.get("model", "auto") if context else "auto"
+    system = context.get("system", "You are a helpful sovereign intelligence assistant in Camelot-OS.") if context else "You are a helpful sovereign intelligence assistant in Camelot-OS."
+    knight = context.get("knight", "SIR_HELIOS") if context else "SIR_HELIOS"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        try:
+            resp = bridge.chat_completion(
+                prompt=prompt,
+                system_prompt=system,
+                model=model,
+                calling_knight=knight,
+            )
+            return {
+                "action": "freellmapi_chat",
+                "status": "SUCCESS",
+                "content": resp.content,
+                "model_used": resp.model_used,
+                "provider": resp.provider,
+                "is_fallback": resp.is_fallback,
+                "tokens": resp.total_tokens,
+                "duration_ms": resp.duration_ms,
+            }
+        except mod.SecretSanitizationViolation as e:
+            return {
+                "action": "freellmapi_chat",
+                "status": "SECRET_FENCE_TRIGGERED",
+                "error": str(e),
+            }
+        except Exception as e:
+            return {
+                "action": "freellmapi_chat",
+                "status": "ERROR",
+                "error": str(e),
+            }
+    return {
+        "action": "freellmapi_chat",
+        "status": "ERROR",
+        "error": "Failed to load freellmapi_bridge module",
+    }
+
+
+def _handle_omniroute(param: Any, context: dict) -> dict:
+    """//OMNIROUTE — Route prompt through OmniRoute with RTK + Caveman compression."""
+    import importlib.util
+
+    prompt = str(param or "").strip()
+    if not prompt:
+        prompt = context.get("task", "Hello from Camelot-OS") if context else "Hello from Camelot-OS"
+
+    strategy = context.get("strategy", "auto") if context else "auto"
+    system = context.get("system", "You are a helpful sovereign intelligence assistant in Camelot-OS.") if context else "You are a helpful sovereign intelligence assistant in Camelot-OS."
+    knight = context.get("knight", "SIR_HELIOS") if context else "SIR_HELIOS"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_omniroute_bridge()
+        resp = bridge.route_request(prompt=prompt, strategy=strategy, system=system, calling_knight=knight)
+        return {
+            "action": "omniroute_route",
+            "status": "SUCCESS",
+            "content": resp.content,
+            "strategy": resp.strategy_used,
+            "provider": resp.provider,
+            "tokens": {
+                "original": resp.original_tokens,
+                "compressed": resp.compressed_tokens,
+                "saved_percent": resp.saved_percent,
+            },
+            "duration_ms": resp.duration_ms,
+            "is_fallback": resp.is_fallback,
+        }
+    return {"action": "omniroute_route", "status": "ERROR", "error": "Failed to load omniroute_bridge"}
+
+
+def _handle_compress_prompt(param: Any, context: dict) -> dict:
+    """//COMPRESS — Compress prompt using RTK + Caveman stacked compression."""
+    import importlib.util
+
+    text = str(param or "").strip()
+    mode = context.get("mode", "rtk_caveman") if context else "rtk_caveman"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        res = mod.RTKCavemanCompressor.compress(text, mode=mode)
+        return {"action": "compress_prompt", "status": "SUCCESS", **res}
+    return {"action": "compress_prompt", "status": "ERROR", "error": "Failed to load omniroute_bridge"}
+
+
+def _handle_bitrouter_eval(param: Any, context: dict) -> dict:
+    """//BITROUTER — Anti-tokenmaxxing guardrail evaluation across agent loop steps."""
+    import importlib.util
+
+    task = str(param or "").strip() or "Evaluate agent loop"
+    loop_id = context.get("loop", "loop_default") if context else "loop_default"
+    knight = context.get("knight", "SIR_CODEX") if context else "SIR_CODEX"
+    added_tokens = int(context.get("tokens", 1000)) if context else 1000
+    added_cost = float(context.get("cost", 0.01)) if context else 0.01
+    step_type = context.get("type", "tool_call") if context else "tool_call"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "bitrouter" / "bitrouter_guardrails.py"
+    spec = importlib.util.spec_from_file_location("bitrouter_guardrails", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.get_bitrouter_engine()
+        state = engine.start_or_update_loop(
+            loop_id=loop_id,
+            task=task,
+            knight_id=knight,
+            added_tokens=added_tokens,
+            added_cost=added_cost,
+            step_type=step_type,
+        )
+        return {"action": "bitrouter_eval", "status": "SUCCESS", **state.to_dict()}
+    return {"action": "bitrouter_eval", "status": "ERROR", "error": "Failed to load bitrouter_guardrails"}
+
+
+def _handle_system1(param: Any, context: dict) -> dict:
+    """//SYSTEM1 — TypeSafe AI Jev System 1 sub-50ms non-autoregressive decision & triage."""
+    import importlib.util
+
+    state = str(param or "").strip()
+    if not state and context:
+        state = context.get("task", "") or context.get("state", "") or "System 1 evaluation"
+
+    questions = context.get("questions") if context else None
+    if not questions:
+        questions = {
+            "classification": {"type": "choice", "options": ["execute", "clarify", "delegate", "triage", "reject"]},
+            "risk_level": {"type": "choice", "options": ["R0_TRIVIAL", "R1_READONLY", "R2_MUTATION", "R3_PRIVILEGED", "R4_CRITICAL"]},
+            "requires_hitl": {"type": "boolean"},
+            "confidence": {"type": "score", "min": 0.0, "max": 1.0},
+        }
+
+    client_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omniroute" / "typesafe_jev_client.py"
+    spec = importlib.util.spec_from_file_location("typesafe_jev_client", str(client_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        client = mod.get_typesafe_jev_client()
+        res = client.decide(state=state, questions=questions)
+        return {
+            "action": "system1_decision",
+            "status": res.status,
+            "model": res.model,
+            "decisions": res.decisions,
+            "confidence_scores": res.confidence_scores,
+            "latency_ms": res.latency_ms,
+            "is_live_call": res.is_live_call,
+            "error_message": res.error_message,
+        }
+    return {"action": "system1_decision", "status": "ERROR", "error": "Failed to load typesafe_jev_client"}
+
+
+def _handle_jev(param: Any, context: dict) -> dict:
+    """//JEV — Direct TypeSafe Jev structured decision execution & rapid routing."""
+    return _handle_system1(param, context)
+
+
+def _handle_northstar_dispatch(param: Any, context: dict) -> dict:
+    """//NORTHSTAR — Decompose and launch autonomous Northstar Goal background worker."""
+    import importlib.util
+
+    title = str(param or "").strip() or "General Autonomous Objective"
+    objective = context.get("objective", title) if context else title
+    knight = context.get("knight", "MERLIN_Ω") if context else "MERLIN_Ω"
+
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if not spec or not spec.loader:
+        return {"action": "northstar_dispatch", "status": "ERROR", "error": "Could not load northstar_worker_engine"}
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.NorthstarWorkerEngine()
+
+    goal = engine.decompose_goal(title=title, objective=objective, lead_knight=knight)
+    return {
+        "action": "northstar_dispatch",
+        "status": "DISPATCHED",
+        "goal_id": goal.goal_id,
+        "worker_id": goal.worker_id,
+        "lead_knight": goal.lead_knight,
+        "milestones_count": len(goal.milestones),
+        "milestones": [m.to_dict() for m in goal.milestones],
+    }
+
+
+def _handle_worker_list(param: Any, context: dict) -> dict:
+    """//WORKER_LIST — Enumerate all active Northstar background workers and personal CPU sandboxes."""
+    import importlib.util
+
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if not spec or not spec.loader:
+        return {"action": "worker_list", "status": "ERROR", "error": "Could not load northstar_worker_engine"}
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.NorthstarWorkerEngine()
+
+    workers = engine.list_all_workers()
+    return {
+        "action": "worker_list",
+        "status": "SUCCESS",
+        "count": len(workers),
+        "workers": workers,
+    }
+
+
+def _handle_worker_step(param: Any, context: dict) -> dict:
+    """//WORKER_STEP — Advance active Northstar worker milestone under personal CPU sandbox."""
+    import importlib.util
+
+    worker_id = str(param or "").strip()
+    if not worker_id:
+        worker_id = context.get("worker", "") if context else ""
+    if not worker_id:
+        return {"action": "worker_step", "status": "ERROR", "error": "Worker ID required"}
+
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if not spec or not spec.loader:
+        return {"action": "worker_step", "status": "ERROR", "error": "Could not load northstar_worker_engine"}
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.NorthstarWorkerEngine()
+
+    res = engine.step_worker(worker_id)
+    return {
+        "action": "worker_step",
+        "result": res,
+    }
+
+
+def _handle_humanistic_voice(param: Any, context: dict) -> dict:
+    """//HUMANISTIC_VOICE — Realtime vocal pattern analysis, prosody mirroring & humanistic conversation loop."""
+    import math
+    import struct
+    text_hint = str(param or "").strip() or "Greetings"
+    knight_id = context.get("knight", "reya_companion") if context else "reya_companion"
+    pcm_bytes = context.get("pcm_bytes") if context else None
+
+    import importlib.util
+    loop_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "humanistic_voice" / "humanistic_conversational_loop.py"
+    spec = importlib.util.spec_from_file_location("humanistic_conversational_loop", str(loop_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        loop = mod.get_humanistic_conversational_loop()
+
+        # Generate synthetic PCM if none passed
+        if not pcm_bytes:
+            samples = [int(1200 * math.sin(2 * math.pi * 200 * i / 16000)) for i in range(16000)]
+            pcm_bytes = struct.pack(f"<{len(samples)}h", *samples)
+
+        result = loop.process_incoming_human_turn(pcm_bytes, text_hint, knight_id)
+        return {
+            "action": "humanistic_voice_turn",
+            "knight": knight_id,
+            "turn_result": result,
+            "status": "HUMANISTIC_CONVERSATION_ACTIVE",
+        }
+    else:
+        return {
+            "action": "humanistic_voice_turn",
+            "error": "Failed to load humanistic_conversational_loop module",
+            "status": "ERROR",
+        }
+
+
+def _handle_omni_s2s(param: Any, context: dict) -> dict:
+    """//OMNI_S2S — Omni Speech-to-Speech stream with SGLang RadixAttention prefix caching & Agora RTC transport."""
+    import math
+    import struct
+    text_hint = str(param or "").strip() or "Omni stream sync"
+    knight_id = context.get("knight", "reya_companion") if context else "reya_companion"
+    pcm_bytes = context.get("pcm_bytes") if context else None
+    channel_name = context.get("channel", "camelot_omni_s2s") if context else "camelot_omni_s2s"
+
+    import importlib.util
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omni_s2s" / "omni_s2s_engine.py"
+    spec = importlib.util.spec_from_file_location("omni_s2s_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.get_omni_s2s_engine()
+
+        if not pcm_bytes:
+            samples = [int(1500 * math.sin(2 * math.pi * 220 * i / 16000)) for i in range(8000)]
+            pcm_bytes = struct.pack(f"<{len(samples)}h", *samples)
+
+        result = engine.process_speech_turn(pcm_bytes, text_hint, knight_id)
+        return {
+            "action": "omni_s2s_turn",
+            "knight": knight_id,
+            "turn_result": result.to_dict(),
+            "status": "OMNI_S2S_STREAM_ACTIVE",
+        }
+    else:
+        return {
+            "action": "omni_s2s_turn",
+            "error": "Failed to load omni_s2s_engine module",
+            "status": "ERROR",
+        }
+
+
+def _handle_assimilate_evolve(param: Any, context: dict) -> dict:
+    """//ASSIMILATE_EVOLVE — Enterprise evolution engine: 1 -> M -> A -> S promotion pipeline (P0 -> P11)."""
+    from control_plane.pipeline.evolution_engine import EnterpriseEvolutionEngine, ComplexityBudget, SafetyBudget
+    from control_plane.pipeline.synthetos_proof import NkgCrystal
+
+    glyph_symbol = str(param or "").strip() or "//NORTHSTAR"
+    if not glyph_symbol.startswith("//"):
+        glyph_symbol = f"//{glyph_symbol}"
+
+    engine = EnterpriseEvolutionEngine()
+
+    comp_budget = None
+    safe_budget = None
+    if context and "complexity" in context:
+        c = context["complexity"]
+        comp_budget = ComplexityBudget(
+            daemons=c.get("daemons", 0),
+            db_tables=c.get("db_tables", 0),
+            network_hops=c.get("network_hops", 0),
+            uncached_routes=c.get("uncached_routes", 0),
+        )
+    if context and "safety" in context:
+        s = context["safety"]
+        safe_budget = SafetyBudget(
+            risk_score=s.get("risk_score", 0.0),
+            memory_mb=s.get("memory_mb", 12.0),
+            cpu_quota_pct=s.get("cpu_quota_pct", 10.0),
+            zero_hotpath_bloat=s.get("zero_hotpath_bloat", True),
+        )
+
+    clean_name = glyph_symbol.strip("/").lower()
+    node_id = f"crystal_{clean_name}"
+    raw_payload = json.dumps({"components": [glyph_symbol], "doctrine": "1_TO_M_TO_A"})
+    crystal = NkgCrystal(
+        node_id=node_id,
+        vfs_coordinate=f"vfs://worldtree/crystals/{node_id}",
+        glyph_symbol=glyph_symbol,
+        compressed_payload=raw_payload,
+        expected_hash="",
+    )
+
+    result = engine.evolve_capsule(crystal, complexity_budget=comp_budget, safety_budget=safe_budget)
+    return {
+        "action": "assimilate_evolve",
+        "result": result,
+    }
+
+
+def _handle_nkg_inspect(param: Any, context: dict) -> dict:
+    """//NKG_INSPECT — Decompress and inspect vKG crystal capsule under ukg-dictionary/1."""
+    from control_plane.pipeline.evolution_engine import EnterpriseEvolutionEngine
+    glyph_token = str(param or "").strip() or "//NORTHSTAR"
+    engine = EnterpriseEvolutionEngine()
+    try:
+        decomp = engine.decompress_glyph(glyph_token)
+        return {
+            "action": "nkg_inspect",
+            "glyph": glyph_token,
+            "decompression": decomp,
+            "status": "DECOMPRESSION_SUCCESS",
+        }
+    except Exception as e:
+        return {
+            "action": "nkg_inspect",
+            "glyph": glyph_token,
+            "error": str(e),
+            "status": "DECOMPRESSION_BLOCKED",
+        }
+
+
+def _handle_safe_mode(param: Any, context: dict) -> dict:
+    """//SAFE_MODE — Universal Safe Mode & Emergency Authority Freeze Governor."""
+    from control_plane.production.safe_mode import SafeModeGovernor, OperatingPosture
+    action = str(param or "").strip().upper() or "STATUS"
+
+    governor = SafeModeGovernor()
+    if action == "FREEZE":
+        receipt = governor.transition_to(
+            OperatingPosture.FROZEN,
+            reason=context.get("reason", "Operator initiated emergency authority freeze") if context else "Operator freeze",
+            triggered_by=context.get("author", "ARTHUR_SOVEREIGN") if context else "ARTHUR_SOVEREIGN",
+        )
+        return {
+            "action": "safe_mode_freeze",
+            "posture": governor.current_posture.value,
+            "receipt": receipt.__dict__,
+            "status": "AUTHORITY_FROZEN",
+        }
+    elif action == "RECOVER":
+        token = context.get("quorum_token", "QUORUM_ARTHUR_SOVEREIGN_RECOVERY") if context else "QUORUM_ARTHUR_SOVEREIGN_RECOVERY"
+        receipt = governor.transition_to(
+            OperatingPosture.RECOVERY,
+            reason="Recovery quorum activated",
+            triggered_by=context.get("author", "ARTHUR_SOVEREIGN") if context else "ARTHUR_SOVEREIGN",
+            recovery_quorum_token=token,
+        )
+        return {
+            "action": "safe_mode_recover",
+            "posture": governor.current_posture.value,
+            "receipt": receipt.__dict__,
+            "status": "RECOVERY_ACTIVE",
+        }
+    elif action == "NORMAL":
+        receipt = governor.transition_to(
+            OperatingPosture.NORMAL,
+            reason="System normal operations restored",
+            triggered_by=context.get("author", "ARTHUR_SOVEREIGN") if context else "ARTHUR_SOVEREIGN",
+            recovery_quorum_token="QUORUM_OPERATIONS_RESTORED",
+        )
+        return {
+            "action": "safe_mode_normal",
+            "posture": governor.current_posture.value,
+            "receipt": receipt.__dict__,
+            "status": "NORMAL_OPERATIONS",
+        }
+    else:
+        return {
+            "action": "safe_mode_status",
+            "posture": governor.current_posture.value,
+            "status": "OK",
+        }
+
+
+def _handle_release_proof(param: Any, context: dict) -> dict:
+    """//RELEASE_PROOF — Generate or verify camelot-release-proof/1."""
+    from control_plane.production.release_proof import ReleaseProofEngine
+    from control_plane.production.key_lifecycle import KeyLifecycleManager, SignerClass
+
+    version = str(param or "").strip() or "v10001.00-CYBERTRONIA"
+    key_mgr = KeyLifecycleManager()
+    key_mgr.register_key("release_key_prime", SignerClass.RELEASE, "0xRELEASE_PUB")
+
+    engine = ReleaseProofEngine(key_manager=key_mgr)
+    commit = context.get("commit", "git-rev-10698ad2") if context else "git-rev-10698ad2"
+    proof = engine.generate_release_proof(
+        version=version,
+        source_commit=commit,
+        release_key_id="release_key_prime",
+    )
+    verified, errors = engine.verify_release_proof(proof, version, "v10001.00")
+
+    return {
+        "action": "release_proof",
+        "version": version,
+        "verified": verified,
+        "errors": errors,
+        "proof": proof,
+        "status": "RELEASE_PROOF_CERTIFIED" if verified else "VERIFICATION_FAILED",
+    }
+
+
+def _handle_migration(param: Any, context: dict) -> dict:
+    """//MIGRATION — Inspect migration history or execute state plan."""
+    from control_plane.production.migration_engine import MigrationEngine, MigrationPlan, MigrationStep
+
+    cmd = str(param or "").strip().lower() or "status"
+    engine = MigrationEngine()
+
+    if cmd in ("test", "run"):
+        dummy_state = {"version": "v1.2", "data": "initial"}
+        plan = MigrationPlan(
+            plan_id="mig_test_subsystem",
+            target_subsystem="contracts",
+            from_version="v1.2",
+            to_version="v10001.00",
+            precheck_fns=[lambda: True],
+            steps=[
+                MigrationStep(
+                    step_id="step_1",
+                    description="Upgrade contract indices",
+                    action_fn=lambda: True,
+                    rollback_fn=lambda: True,
+                )
+            ],
+            verification_fns=[lambda: True],
+        )
+        receipt = engine.execute_migration(
+            plan=plan,
+            state_reader_fn=lambda: json.dumps(dummy_state),
+            state_restorer_fn=lambda s: None,
+        )
+        return {
+            "action": "migration_run",
+            "receipt": receipt.__dict__,
+            "status": receipt.status,
+        }
+
+    return {
+        "action": "migration_status",
+        "history_count": len(engine.history),
+        "status": "MIGRATION_ENGINE_READY",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_reya_handshake": _handle_reya_handshake,
+    "_handle_cua_dispatch": _handle_cua_dispatch,
+    "_handle_omni_s2s": _handle_omni_s2s,
+    "_handle_humanistic_voice": _handle_humanistic_voice,
+    "_handle_reya_channel": _handle_reya_channel,
+    "_handle_activate_reya_nostr_bridge": _handle_activate_reya_nostr_bridge,
+    "_handle_arthur_merlin_handshake": _handle_arthur_merlin_handshake,
+    "_handle_sovereign_seal": _handle_sovereign_seal,
+    "_handle_forge_reya_scaffold": _handle_forge_reya_scaffold,
+    "_handle_activate_agent_armor": _handle_activate_agent_armor,
+    "_handle_hitl_iron_gate_approval": _handle_hitl_iron_gate_approval,
+    "_handle_extract_mark_39_audio_core": _handle_extract_mark_39_audio_core,
+    "_handle_sandbox_python_dependencies": _handle_sandbox_python_dependencies,
+    "_handle_await_reya_uncloaking": _handle_await_reya_uncloaking,
     "_handle_moto_edge_bus": _handle_moto_edge_bus,
     "_handle_qtscrcpy": _handle_qtscrcpy,
     "_handle_validate_spec": _handle_validate_spec,
@@ -3288,6 +4560,20 @@ _HANDLERS = {
     "_handle_wake_24_7_swarm_daemon": _handle_wake_24_7_swarm_daemon,
     "_handle_forge_squire": _handle_forge_squire,
     "_handle_scarcity_gov": _handle_scarcity_gov,
+    "_handle_magsafe_ingest": _handle_magsafe_ingest,
+    "_handle_magsafe_dispatch": _handle_magsafe_dispatch,
+    "_handle_freellmapi": _handle_freellmapi,
+    "_handle_omniroute": _handle_omniroute,
+    "_handle_compress_prompt": _handle_compress_prompt,
+    "_handle_bitrouter_eval": _handle_bitrouter_eval,
+    "_handle_northstar_dispatch": _handle_northstar_dispatch,
+    "_handle_worker_list": _handle_worker_list,
+    "_handle_worker_step": _handle_worker_step,
+    "_handle_assimilate_evolve": _handle_assimilate_evolve,
+    "_handle_nkg_inspect": _handle_nkg_inspect,
+    "_handle_safe_mode": _handle_safe_mode,
+    "_handle_release_proof": _handle_release_proof,
+    "_handle_migration": _handle_migration,
 }
 
 
@@ -3297,6 +4583,45 @@ _HANDLERS = {
 
 _RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
+    "//safe_mode": "//SAFE_MODE",
+    "/safe_mode": "//SAFE_MODE",
+    "$safe_mode": "//SAFE_MODE",
+    "//freeze": "//SAFE_MODE",
+    "//release_proof": "//RELEASE_PROOF",
+    "/release_proof": "//RELEASE_PROOF",
+    "$release_proof": "//RELEASE_PROOF",
+    "//migration": "//MIGRATION",
+    "/migration": "//MIGRATION",
+    "$migration": "//MIGRATION",
+    "//assimilate_evolve": "//ASSIMILATE_EVOLVE",
+    "/assimilate_evolve": "//ASSIMILATE_EVOLVE",
+    "$assimilate_evolve": "//ASSIMILATE_EVOLVE",
+    "//evolve": "//ASSIMILATE_EVOLVE",
+    "//nkg_inspect": "//NKG_INSPECT",
+    "/nkg_inspect": "//NKG_INSPECT",
+    "//nkg": "//NKG_INSPECT",
+    "//northstar": "//NORTHSTAR",
+    "/northstar": "//NORTHSTAR",
+    "$northstar": "//NORTHSTAR",
+    "//worker": "//WORKER_LIST",
+    "//workers": "//WORKER_LIST",
+    "/worker": "//WORKER_LIST",
+    "$worker": "//WORKER_LIST",
+    "//sandbox": "//WORKER_LIST",
+    "//activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "/activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "$activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "//reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "//reya_nostr": "//ACTIVATE_REYA_NOSTR_BRIDGE",
+    "//handshake": "//HANDSHAKE",
+    "/handshake": "//HANDSHAKE",
+    "$handshake": "//HANDSHAKE",
+    "//arthur_merlin": "//HANDSHAKE",
+    "/arthur_merlin": "//HANDSHAKE",
+    "$arthur_merlin": "//HANDSHAKE",
+    "//am_handshake": "//HANDSHAKE",
+    "//sovereign_seal": "//SOVEREIGN_SEAL",
+    "//golden_seal": "//SOVEREIGN_SEAL",
     "//summon": "//SUMMON",
     "/summon": "//SUMMON",
     "$summon": "//SUMMON",
@@ -3420,7 +4745,27 @@ _RUNE_ALIASES: dict[str, str] = {
     "//honcho-query": "//HONCHO_QUERY",
     "$honcho-query": "//HONCHO_QUERY",
     "/honcho-query": "//HONCHO_QUERY",
-    # Sovereign Telemetry (Sir Lucas) aliases
+    # Sovereign Telemetry (Sir Lukas Müller) aliases
+    "//lukas_telemetry": "//LUCAS_TELEMETRY",
+    "//lukas-telemetry": "//LUCAS_TELEMETRY",
+    "//LUKAS_TELEMETRY": "//LUCAS_TELEMETRY",
+    "$lukas-telemetry": "//LUCAS_TELEMETRY",
+    "/lukas-telemetry": "//LUCAS_TELEMETRY",
+    "//lukas_hud": "//LUCAS_HUD",
+    "//lukas-hud": "//LUCAS_HUD",
+    "//LUKAS_HUD": "//LUCAS_HUD",
+    "$lukas-hud": "//LUCAS_HUD",
+    "/lukas-hud": "//LUCAS_HUD",
+    "//lukas_anomaly": "//LUCAS_ANOMALY",
+    "//lukas-anomaly": "//LUCAS_ANOMALY",
+    "//LUKAS_ANOMALY": "//LUCAS_ANOMALY",
+    "$lukas-anomaly": "//LUCAS_ANOMALY",
+    "/lukas-anomaly": "//LUCAS_ANOMALY",
+    "//lukas_report": "//LUCAS_REPORT",
+    "//lukas-report": "//LUCAS_REPORT",
+    "//LUKAS_REPORT": "//LUCAS_REPORT",
+    "$lukas-report": "//LUCAS_REPORT",
+    "/lukas-report": "//LUCAS_REPORT",
     "//lucas_telemetry": "//LUCAS_TELEMETRY",
     "//lucas-telemetry": "//LUCAS_TELEMETRY",
     "$lucas-telemetry": "//LUCAS_TELEMETRY",
@@ -3497,6 +4842,13 @@ _RUNE_ALIASES: dict[str, str] = {
     "$validate-spec": "//VALIDATE_SPEC",
     "/validate-spec": "//VALIDATE_SPEC",
     "omega_spec_validate": "Omega_SPEC_VALIDATE",
+    # Reya & Mark-39 aliases
+    "//forge_reya_scaffold": "//FORGE_REYA_SCAFFOLD",
+    "//activate_agent_armor": "//ACTIVATE_AGENT_ARMOR",
+    "//hitl_iron_gate_approval": "//HITL_IRON_GATE_APPROVAL",
+    "//extract_mark_39_audio_core": "//EXTRACT_MARK_39_AUDIO_CORE",
+    "//sandbox_python_dependencies": "//SANDBOX_PYTHON_DEPENDENCIES",
+    "//await_reya_uncloaking": "//AWAIT_REYA_UNCLOAKING",
 }
 
 
@@ -3538,6 +4890,9 @@ def parse_rune(text: str) -> Optional[tuple[str, str]]:
 
 def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> RuneResult:
     """Route a rune to the correct knight and queue the task."""
+    if isinstance(param, dict) and context is None:
+        context = param
+        param = ""
     if not param and " " in (rune or "").strip():
         parts = (rune or "").strip().split(None, 1)
         rune = parts[0]

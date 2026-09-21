@@ -14,6 +14,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Diogenes of Sinope (Unvarnished Truth & Cynic Simplicity)",
+      "Alan Pinkerton (Unblinking Surveillance)",
+      "Edward Snowden (Air-Gap Protection)",
+      "Phil Zimmermann (PGP Privacy)",
+      "Hermes Trismegistus (Hermetic Sealing)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +31,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]
