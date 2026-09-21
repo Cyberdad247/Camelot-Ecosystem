@@ -980,6 +980,142 @@ def _cmd_freellmapi(argv: list[str]) -> None:
         return
 
 
+def _cmd_omniroute(argv: list[str]) -> None:
+    """OmniRoute & 9Router-Go Gateway CLI.
+
+    Usage:
+        camelot omniroute status [--json]
+        camelot omniroute compress --text <TEXT> [--mode rtk_caveman] [--json]
+        camelot omniroute route --prompt <TEXT> [--strategy auto] [--json]
+    """
+    import argparse
+    import importlib.util
+
+    bridge_path = Path(__file__).resolve().parent.parent / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if not spec or not spec.loader:
+        print("[ERROR] Could not load omniroute_bridge.py")
+        return
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    bridge = mod.get_omniroute_bridge()
+
+    parser = argparse.ArgumentParser(prog="camelot omniroute", description="OmniRoute 359-Provider Gateway & 9Router-Go Accelerator")
+    sub = parser.add_subparsers(dest="action", help="Action")
+
+    p_status = sub.add_parser("status", help="Probe gateways and active strategies")
+    p_status.add_argument("--json", action="store_true")
+
+    p_comp = sub.add_parser("compress", help="Compress prompt using RTK + Caveman heuristics")
+    p_comp.add_argument("--text", "-t", required=True, help="Text to compress")
+    p_comp.add_argument("--mode", "-m", default="rtk_caveman", choices=["rtk", "caveman", "rtk_caveman"])
+    p_comp.add_argument("--json", action="store_true")
+
+    p_route = sub.add_parser("route", help="Route prompt through OmniRoute")
+    p_route.add_argument("--prompt", "-p", required=True, help="Prompt to route")
+    p_route.add_argument("--strategy", "-s", default="auto", help="Strategy (auto, auto/coding, auto/fast, auto/offline, voice/low-latency)")
+    p_route.add_argument("--knight", "-k", default="SIR_HELIOS", help="Calling Knight")
+    p_route.add_argument("--json", action="store_true")
+
+    args = parser.parse_args(argv)
+
+    if args.action in (None, "status"):
+        gateways = bridge.check_gateways()
+        if getattr(args, "json", False):
+            print(json.dumps(gateways, indent=2))
+        else:
+            print("=" * 68)
+            print("  [OMNIROUTE & 9ROUTER-GO] UNIVERSAL ACCELERATION GATEWAY")
+            print(f"  OmniRoute (:20128):  {gateways['omniroute']['status']} ({gateways['omniroute']['url']})")
+            print(f"  9Router-Go (:3002):  {gateways['9router_go']['status']} ({gateways['9router_go']['url']}) [{gateways['9router_go']['peak_rps_rating']}, {gateways['9router_go']['target_ram']}]")
+            print(f"  Compression Engine:  {gateways['compression_engine']} (~89% average reduction)")
+            print(f"  Active Strategies:   {gateways['active_strategies_count']} strategies")
+            print("=" * 68)
+        return
+
+    if args.action == "compress":
+        res = mod.RTKCavemanCompressor.compress(args.text, mode=args.mode)
+        if args.json:
+            print(json.dumps(res, indent=2))
+        else:
+            print("=" * 68)
+            print(f"  [RTK + CAVEMAN COMPRESSOR] {res['original_tokens']} -> {res['compressed_tokens']} Tokens (-{res['saved_percent']}%)")
+            print("=" * 68)
+            print(f"\nOriginal ({res['original_tokens']} tokens):\n{res['original_text']}\n")
+            print(f"Compressed ({res['compressed_tokens']} tokens):\n{res['compressed_text']}\n")
+        return
+
+    if args.action == "route":
+        resp = bridge.route_request(prompt=args.prompt, strategy=args.strategy, calling_knight=args.knight)
+        if args.json:
+            print(json.dumps(resp.to_dict(), indent=2))
+        else:
+            print("=" * 68)
+            print(f"  [OMNIROUTE RESPONSE] Strategy: {resp.strategy_used} | Provider: {resp.provider}")
+            print(f"  Tokens: {resp.original_tokens} -> {resp.compressed_tokens} (-{resp.saved_percent}%) | Latency: {resp.duration_ms}ms")
+            print("=" * 68)
+            print(f"\n{resp.content}\n")
+        return
+
+
+def _cmd_bitrouter(argv: list[str]) -> None:
+    """BitRouter Anti-Tokenmaxxing Agent Guardrails CLI.
+
+    Usage:
+        camelot bitrouter eval --loop <ID> --task <TASK> [--steps N] [--tokens N] [--cost F] [--json]
+    """
+    import argparse
+    import importlib.util
+
+    bridge_path = Path(__file__).resolve().parent.parent / "02_FORGE" / "assimilation" / "bitrouter" / "bitrouter_guardrails.py"
+    spec = importlib.util.spec_from_file_location("bitrouter_guardrails", str(bridge_path))
+    if not spec or not spec.loader:
+        print("[ERROR] Could not load bitrouter_guardrails.py")
+        return
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.get_bitrouter_engine()
+
+    parser = argparse.ArgumentParser(prog="camelot bitrouter", description="BitRouter Anti-Tokenmaxxing Agent Guardrails")
+    sub = parser.add_subparsers(dest="action", help="Action")
+
+    p_eval = sub.add_parser("eval", help="Evaluate agent step and tighten model tier")
+    p_eval.add_argument("--loop", "-l", default="default_loop", help="Loop identifier")
+    p_eval.add_argument("--task", "-t", default="Execute agentic task", help="Task description")
+    p_eval.add_argument("--knight", "-k", default="SIR_CODEX", help="Calling Knight")
+    p_eval.add_argument("--tokens", type=int, default=1500, help="Added tokens in step")
+    p_eval.add_argument("--cost", type=float, default=0.015, help="Added cost in USD")
+    p_eval.add_argument("--type", default="tool_call", choices=["tool_call", "file_read", "subagent_hop", "retry"])
+    p_eval.add_argument("--json", action="store_true")
+
+    args = parser.parse_args(argv)
+
+    if args.action in (None, "eval"):
+        state = engine.start_or_update_loop(
+            loop_id=args.loop,
+            task=args.task,
+            knight_id=args.knight,
+            added_tokens=args.tokens,
+            added_cost=args.cost,
+            step_type=args.type,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps(state.to_dict(), indent=2))
+        else:
+            print("=" * 68)
+            print("  [BITROUTER] ANTI-TOKENMAXXING AGENT GUARDRAILS")
+            print(f"  Loop ID:          {state.loop_id} (Iteration #{state.iteration})")
+            print(f"  Calling Knight:   {state.calling_knight}")
+            print(f"  Recommended Tier: {state.recommended_model.upper()}")
+            print(f"  Circuit Breaker:  {'TRIPPED [HALT]' if state.circuit_breaker_tripped else 'CLEAR [OK]'}")
+            print(f"  Tokens Consumed:  {state.total_tokens:,} tokens | Cost: ${state.estimated_cost_usd:.4f}")
+            print(f"  Rationale:        {state.rationale}")
+            print("=" * 68)
+        return
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -996,6 +1132,14 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("omniroute", "9router", "nine-router"):
+        _cmd_omniroute(args[1:])
+        return
+
+    if first in ("bitrouter", "guardrails", "tokenmax"):
+        _cmd_bitrouter(args[1:])
+        return
+
     if first in ("freellmapi", "zero-cost", "freellm"):
         _cmd_freellmapi(args[1:])
         return

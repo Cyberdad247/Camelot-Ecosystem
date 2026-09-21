@@ -464,6 +464,65 @@ def freellmapi_list_models() -> list[dict]:
     return []
 
 
+@mcp_server.tool()
+def omniroute_compress_prompt(text: str, mode: str = "rtk_caveman") -> dict:
+    """Compress prompt using RTK + Caveman stacked compression (saving 15-95% tokens)."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        return mod.RTKCavemanCompressor.compress(text, mode=mode)
+    return {"error": "Failed to load omniroute_bridge"}
+
+
+@mcp_server.tool()
+def omniroute_status() -> dict:
+    """Return status of OmniRoute (:20128) and 9router-go (:3002) gateways and routing strategies."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_omniroute_bridge()
+        return bridge.check_gateways()
+    return {"error": "Failed to load omniroute_bridge"}
+
+
+@mcp_server.tool()
+def bitrouter_evaluate_loop(
+    loop_id: str,
+    task: str,
+    knight_id: str = "SIR_CODEX",
+    added_tokens: int = 0,
+    added_cost: float = 0.0,
+    step_type: str = "tool_call",
+) -> dict:
+    """Evaluate agent loop iteration and tighten model tier to prevent tokenmaxxing."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "bitrouter" / "bitrouter_guardrails.py"
+    spec = importlib.util.spec_from_file_location("bitrouter_guardrails", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.get_bitrouter_engine()
+        state = engine.start_or_update_loop(
+            loop_id=loop_id,
+            task=task,
+            knight_id=knight_id,
+            added_tokens=added_tokens,
+            added_cost=added_cost,
+            step_type=step_type,
+        )
+        return state.to_dict()
+    return {"error": "Failed to load bitrouter_guardrails"}
+
+
 if __name__ == "__main__":
     mcp_server.run()
 

@@ -1044,6 +1044,30 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_freellmapi",
         "hydrate": False,
     },
+    "//OMNIROUTE": {
+        "knight": "sir_helios",
+        "description": "OmniRoute 359-provider gateway query with RTK + Caveman stacked compression",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_omniroute",
+        "hydrate": False,
+    },
+    "//COMPRESS": {
+        "knight": "sir_helios",
+        "description": "Compress text prompt using RTK + Caveman stacked compression (-89% average)",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_compress_prompt",
+        "hydrate": False,
+    },
+    "//BITROUTER": {
+        "knight": "sir_codex",
+        "description": "BitRouter anti-tokenmaxxing guardrail evaluation across agent loops",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_bitrouter_eval",
+        "hydrate": False,
+    },
     "//HUMANISTIC_VOICE": {
         "knight": "sir_sonus",
         "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
@@ -3893,6 +3917,91 @@ def _handle_freellmapi(param: Any, context: dict) -> dict:
     }
 
 
+def _handle_omniroute(param: Any, context: dict) -> dict:
+    """//OMNIROUTE — Route prompt through OmniRoute with RTK + Caveman compression."""
+    import importlib.util
+
+    prompt = str(param or "").strip()
+    if not prompt:
+        prompt = context.get("task", "Hello from Camelot-OS") if context else "Hello from Camelot-OS"
+
+    strategy = context.get("strategy", "auto") if context else "auto"
+    system = context.get("system", "You are a helpful sovereign intelligence assistant in Camelot-OS.") if context else "You are a helpful sovereign intelligence assistant in Camelot-OS."
+    knight = context.get("knight", "SIR_HELIOS") if context else "SIR_HELIOS"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_omniroute_bridge()
+        resp = bridge.route_request(prompt=prompt, strategy=strategy, system=system, calling_knight=knight)
+        return {
+            "action": "omniroute_route",
+            "status": "SUCCESS",
+            "content": resp.content,
+            "strategy": resp.strategy_used,
+            "provider": resp.provider,
+            "tokens": {
+                "original": resp.original_tokens,
+                "compressed": resp.compressed_tokens,
+                "saved_percent": resp.saved_percent,
+            },
+            "duration_ms": resp.duration_ms,
+            "is_fallback": resp.is_fallback,
+        }
+    return {"action": "omniroute_route", "status": "ERROR", "error": "Failed to load omniroute_bridge"}
+
+
+def _handle_compress_prompt(param: Any, context: dict) -> dict:
+    """//COMPRESS — Compress prompt using RTK + Caveman stacked compression."""
+    import importlib.util
+
+    text = str(param or "").strip()
+    mode = context.get("mode", "rtk_caveman") if context else "rtk_caveman"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        res = mod.RTKCavemanCompressor.compress(text, mode=mode)
+        return {"action": "compress_prompt", "status": "SUCCESS", **res}
+    return {"action": "compress_prompt", "status": "ERROR", "error": "Failed to load omniroute_bridge"}
+
+
+def _handle_bitrouter_eval(param: Any, context: dict) -> dict:
+    """//BITROUTER — Anti-tokenmaxxing guardrail evaluation across agent loop steps."""
+    import importlib.util
+
+    task = str(param or "").strip() or "Evaluate agent loop"
+    loop_id = context.get("loop", "loop_default") if context else "loop_default"
+    knight = context.get("knight", "SIR_CODEX") if context else "SIR_CODEX"
+    added_tokens = int(context.get("tokens", 1000)) if context else 1000
+    added_cost = float(context.get("cost", 0.01)) if context else 0.01
+    step_type = context.get("type", "tool_call") if context else "tool_call"
+
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "bitrouter" / "bitrouter_guardrails.py"
+    spec = importlib.util.spec_from_file_location("bitrouter_guardrails", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.get_bitrouter_engine()
+        state = engine.start_or_update_loop(
+            loop_id=loop_id,
+            task=task,
+            knight_id=knight,
+            added_tokens=added_tokens,
+            added_cost=added_cost,
+            step_type=step_type,
+        )
+        return {"action": "bitrouter_eval", "status": "SUCCESS", **state.to_dict()}
+    return {"action": "bitrouter_eval", "status": "ERROR", "error": "Failed to load bitrouter_guardrails"}
+
+
 def _handle_humanistic_voice(param: Any, context: dict) -> dict:
     """//HUMANISTIC_VOICE — Realtime vocal pattern analysis, prosody mirroring & humanistic conversation loop."""
     import math
@@ -4060,6 +4169,9 @@ _HANDLERS = {
     "_handle_magsafe_ingest": _handle_magsafe_ingest,
     "_handle_magsafe_dispatch": _handle_magsafe_dispatch,
     "_handle_freellmapi": _handle_freellmapi,
+    "_handle_omniroute": _handle_omniroute,
+    "_handle_compress_prompt": _handle_compress_prompt,
+    "_handle_bitrouter_eval": _handle_bitrouter_eval,
 }
 
 
