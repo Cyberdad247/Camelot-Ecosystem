@@ -493,7 +493,12 @@ class ReyaUniversalFabric:
 
         if is_kinetic and channeled_kid != "reya_companion" and self.handshake_gate is not None:
             hsk_lease = self.handshake_gate.get_active_lease(channeled_kid)
-            if not hsk_lease or not hsk_lease.is_valid:
+            if hsk_lease and hsk_lease.is_valid:
+                if hsk_lease.autonomy_tier in (AutonomyTier.SOVEREIGN_ROOT, AutonomyTier.HITL_GUIDED_ALPHA_OMEGA):
+                    handshake_status_label = "ALPHA_OMEGA_AUTONOMOUS"
+                else:
+                    handshake_status_label = "USER_APPROVED_HANDSHAKE"
+            else:
                 autonomy_tier, level, rationale = self.handshake_gate.evaluate_knight_autonomy(channeled_kid)
                 user_approved = params.get("user_approved") or os.environ.get("CAMELOT_AUTO_APPROVE") == "true"
 

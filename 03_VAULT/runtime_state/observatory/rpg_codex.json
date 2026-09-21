@@ -1,6 +1,6 @@
 {
   "schema_version": "camelot.observatory-rpg/1",
-  "last_updated": "2026-09-21T03:22:37.735625+00:00",
+  "last_updated": "2026-09-21T03:47:43.052978+00:00",
   "knights": {
     "boris_architect": {
       "knight_id": "boris_architect",
@@ -43,10 +43,10 @@
     "reya_companion": {
       "knight_id": "reya_companion",
       "level": 5,
-      "xp": 880,
-      "xp_to_next": 239,
+      "xp": 940,
+      "xp_to_next": 179,
       "title": "Kinetic Guard",
-      "turns_transcribed": 20,
+      "turns_transcribed": 21,
       "tasks_evaluated": 0,
       "average_score": 0.0,
       "skills": {},
@@ -63,16 +63,87 @@
       "average_score": 0.0,
       "skills": {},
       "achievements": []
+    },
+    "SIR_HELIOS": {
+      "knight_id": "SIR_HELIOS",
+      "level": 6,
+      "xp": 1260,
+      "xp_to_next": 210,
+      "title": "Kinetic Guard",
+      "turns_transcribed": 21,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "MERLIN_\u03a9": {
+      "knight_id": "MERLIN_\u03a9",
+      "level": 2,
+      "xp": 180,
+      "xp_to_next": 103,
+      "title": "Squire",
+      "turns_transcribed": 3,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "novice_squire_test": {
+      "knight_id": "novice_squire_test",
+      "level": 3,
+      "xp": 480,
+      "xp_to_next": 40,
+      "title": "Squire",
+      "turns_transcribed": 8,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "arthur_omega": {
+      "knight_id": "arthur_omega",
+      "level": 3,
+      "xp": 360,
+      "xp_to_next": 160,
+      "title": "Squire",
+      "turns_transcribed": 6,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "merlin_omega": {
+      "knight_id": "merlin_omega",
+      "level": 3,
+      "xp": 480,
+      "xp_to_next": 40,
+      "title": "Squire",
+      "turns_transcribed": 8,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
     }
   },
   "tenants": {
     "Vizion Sky": {
       "tenant_id": "Vizion Sky",
-      "sovereign_level": 9,
-      "xp": 2400,
-      "xp_to_next": 300,
-      "title": "Citadel Vanguard",
-      "dialogue_turns": 53,
+      "sovereign_level": 14,
+      "xp": 4740,
+      "xp_to_next": 499,
+      "title": "High Governor",
+      "dialogue_turns": 92,
+      "missions_dispatched": 0,
+      "resonance_affinity": "Omni-Sovereign",
+      "milestones": []
+    },
+    "Unranked_Tenant": {
+      "tenant_id": "Unranked_Tenant",
+      "sovereign_level": 3,
+      "xp": 480,
+      "xp_to_next": 40,
+      "title": "Sovereign Seeker",
+      "dialogue_turns": 8,
       "missions_dispatched": 0,
       "resonance_affinity": "Omni-Sovereign",
       "milestones": []

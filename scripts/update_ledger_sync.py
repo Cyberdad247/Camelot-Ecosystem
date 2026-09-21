@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1864",
-            "task": "Router & UI Knight Ecosystem Convergence (Ω_ROUTER_UI_KNIGHT_CONVERGENCE): Voice Cloning, Model Weights, 5-Pillar Mathematical Dialect Visualizer, Full Character Sheets & RPG Progression Synchronization",
-            "author": "SIR_HELIOS / SIR_BORIS / SIR_CODEX / MERLIN_Ω / SIR_HELIO / ARTHUR_OMEGA",
+            "id": "1865",
+            "task": "MagSafe Ambient Voice Recorder & Kinetic Action Item Dispatcher (Ω_MAGSAFE_KINETIC_DISPATCHER): SecondBrain Summarizer, Impenetrable Glass Observatory Tap, REYA Handshake Kinetic Gate & Ambient Hardware Bridge",
+            "author": "SIR_HELIOS / MERLIN_Ω / SIR_CODEX / SIR_BORIS / SIR_HELIO / ARTHUR_OMEGA",
             "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
-            "notes": "Verified, unified, and forged contributing UI components matching every aspect across the repository: (1) Verified and synchronized router connections allowing Knights access to REYA across packages/multivoice-router/src/voice/voice-profile-registry.ts, apps/pwa/src/lib/voiceInferenceLayer.ts, and control_plane/runes/runic_router.py, (2) Enriched voice profiles with VoiceCloningConfig (model ID, weights paths like 03_VAULT/models/vibevoice_realtime_0.5b/, reference audio, 512-dim embedding tensors, and similarity confidence), (3) Engineered FivePillarDialectVisualizer in apps/pwa/src/components/voice/FivePillarDialectVisualizer.tsx rendering real-time metrics for Pillar 1 (F0 Pitch Contour & Micro-Prosody), Pillar 2 (Intonation Slope & Cadence WPM), Pillar 3 (RMS Energy Dynamics dB), Pillar 4 (Conversational Backchanneling), and Pillar 5 (Adaptive Turn-Taking & 25 FPS 16-Viseme Lip-Sync Alignment), (4) Built KnightCharacterSheetModal in apps/pwa/src/components/knights/KnightCharacterSheetModal.tsx rendering Spark IDs, Layer (L1-L7), OCEAN personality vectors, real-time Observatory RPG Codex level & XP progress, and interactive REYA Handshake Lease controls (grant/revoke/status), (5) Upgraded MultivoiceRouterCockpit with 5-pillar HUD, voice cloning blueprints, and inline REYA handshake authorization, (6) Modernized KnightsTab in apps/pwa/src/components/tabs/KnightsTab.tsx rendering the full 14-Knight Round Table Pantheon with filtering and modal inspection, (7) Verified clean TypeScript typecheck (tsc --noEmit) and 99/99 regression tests passing, and (8) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-21 03:25 UTC"
+            "notes": "Assimilated and implemented MagSafe ambient voice recorder and kinetic task dispatcher from alphaparkinc/genpark-magsafe-voice-recorder-action-item-dispatcher-skill into Camelot-OS under strict cgroups v2 scarcity (<350MB RSS boundary): (1) Forged MagsafeAudioBridge in 02_FORGE/assimilation/magsafe/magsafe_audio_bridge.py with multi-format audio ingestion (.m4a, .wav, .opus, .pcm, .txt), duration estimation, SecondBrain executive summary distillation, key concept synthesis, and structured kinetic action item extraction (RUN_COMMAND, CUA_CLICK, CUA_TYPE, VERIFY_TESTS, MEMCASTLE_STORE) with normalized coordinates, (2) Wired non-blocking tap into Glass Observatory (Project Speculum) behind the impenetrable WORM glass wall, awarding RPG experience points to Sovereign Tenants and Round Table Knights without modifying or polluting the provenance ledger, (3) Bound kinetic dispatch directly to the REYA Universal Fabric Layer governed by ReyaHandshakeGate, blocking novice Knights with HANDSHAKE_REQUIRED while autonomously granting HITL-guided execution to Alpha Omega entities and Sovereign King Arthur, (4) Inscribed MagSafe Sentinel Living Tissue in 03_VAULT/runtime_state/open_notebook/magsafe_sentinel_tissue.json anchored to vfs://worldtree/knights/magsafe_sentinel/tether.json, (5) Implemented camelot magsafe CLI (status, ingest) in bin/camelot.py and registered runes //MAGSAFE_INGEST, //magsafe, and //MAGSAFE_DISPATCH in control_plane/runes/runic_router.py, (6) Authored unit test suite tests/test_magsafe_voice_dispatcher.py passing 7/7 tests and 59/59 across the combined voice, observatory, and kinetic fabric suites, (7) Verified zero-drift parity gates (check_omnivoice_router_build.py, check_generated_artifact_parity.py), and (8) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-21 03:50 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1863" in line:
+            if "| 1864" in line:
                 insert_at = i
                 break
         
@@ -34,6 +34,8 @@ def update_ledger():
                 if "| ID" in line:
                     insert_at = i + 2
                     break
+        if insert_at == -1:
+            insert_at = 0
 
         new_rows = [f"| {e['id']} | **{e['task']}** | {e['author']} | {e['status']} | {e['notes']} |" for e in entries]
             

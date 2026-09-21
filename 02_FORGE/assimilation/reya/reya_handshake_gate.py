@@ -46,7 +46,7 @@ CAMELOT_HOME = Path(__file__).resolve().parent.parent.parent.parent
 RPG_CODEX_PATH = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "observatory" / "rpg_codex.json"
 
 ALPHA_OMEGA_LEVEL_THRESHOLD = 10
-CANONICAL_OMEGA_KNIGHTS = {"anya_omega", "merlin_omega", "arthur_omega"}
+CANONICAL_OMEGA_KNIGHTS = {"anya_omega", "merlin_omega", "arthur_omega", "anya_ω", "merlin_ω", "arthur_ω"}
 
 
 class AutonomyTier(str, Enum):
@@ -136,26 +136,25 @@ class ReyaHandshakeGate:
         # Check Knight mastery level in RPG Codex
         knights_data = codex.get("knights", {})
         knight_rec = knights_data.get(kid, {})
+        if not knight_rec:
+            for k_key, k_val in knights_data.items():
+                if kid in k_key or k_key in kid:
+                    knight_rec = k_val
+                    break
         knight_level = knight_rec.get("level", 1)
 
-        # Check Tenant sovereign level
-        tenants_data = codex.get("tenants", {})
-        tenant_rec = tenants_data.get(tenant_id, {})
-        tenant_level = tenant_rec.get("sovereign_level", 1)
-
-        # Gaining Alpha Omega level (Knight Level >= 10 or Tenant Level >= 10) allows HITL-guided autonomy
-        effective_level = max(knight_level, tenant_level)
-        if effective_level >= ALPHA_OMEGA_LEVEL_THRESHOLD:
+        # Gaining Alpha Omega level (Knight Level >= 10) allows HITL-guided autonomy
+        if knight_level >= ALPHA_OMEGA_LEVEL_THRESHOLD:
             return (
                 AutonomyTier.HITL_GUIDED_ALPHA_OMEGA,
-                effective_level,
-                f"Alpha Omega Mastery Achieved (Level {effective_level} >= {ALPHA_OMEGA_LEVEL_THRESHOLD})",
+                knight_level,
+                f"Alpha Omega Mastery Achieved (Knight Level {knight_level} >= {ALPHA_OMEGA_LEVEL_THRESHOLD})",
             )
 
         return (
             AutonomyTier.MANUAL_APPROVAL_REQUIRED,
-            effective_level,
-            f"Squire/Apprentice Level {effective_level} < {ALPHA_OMEGA_LEVEL_THRESHOLD} (User Approval Required)",
+            knight_level,
+            f"Squire/Apprentice Level {knight_level} < {ALPHA_OMEGA_LEVEL_THRESHOLD} (User Approval Required)",
         )
 
     def request_handshake(

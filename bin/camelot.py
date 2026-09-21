@@ -46,7 +46,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg", "cua", "computer-use", "reya-cua", "reya"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg", "cua", "computer-use", "reya-cua", "reya", "magsafe", "magsafe-audio", "magsafe-bridge"}
 
 
 def _banner() -> None:
@@ -799,6 +799,88 @@ def _cmd_reya(argv: list[str]) -> None:
             print("=" * 68)
 
 
+def _cmd_magsafe(argv: list[str]) -> None:
+    """MagSafe Ambient Voice Recorder & Kinetic Action Item Dispatcher CLI.
+
+    Usage:
+        camelot magsafe status [--json]
+        camelot magsafe ingest <file> [--knight <id>] [--tenant <name>] [--dispatch] [--json]
+    """
+    import argparse
+    import importlib.util
+    parser = argparse.ArgumentParser(
+        prog="camelot magsafe",
+        description="MagSafe Voice Recorder Audio Processor & Kinetic Action Item Dispatcher",
+    )
+    sub = parser.add_subparsers(dest="action", help="MagSafe sub-command")
+
+    p_status = sub.add_parser("status", help="Display MagSafe Audio Sentinel & Glass Observatory bridge status")
+    p_status.add_argument("--json", action="store_true", help="Output JSON")
+
+    p_ingest = sub.add_parser("ingest", help="Ingest audio recording / transcript and dispatch kinetic tasks")
+    p_ingest.add_argument("file", type=str, help="Audio file path (.m4a, .wav, .opus, .pcm, .txt)")
+    p_ingest.add_argument("--knight", "-k", type=str, default="SIR_HELIOS", help="Attributed Knight ID")
+    p_ingest.add_argument("--tenant", "-t", type=str, default="Vizion Sky", help="Attributed Sovereign Tenant")
+    p_ingest.add_argument("--dispatch", "-d", action="store_true", help="Auto-dispatch extracted action items through REYA")
+    p_ingest.add_argument("--json", action="store_true", help="Output JSON result")
+
+    parsed = parser.parse_args(argv)
+
+    bridge_path = _REPO / "02_FORGE" / "assimilation" / "magsafe" / "magsafe_audio_bridge.py"
+    if not bridge_path.exists():
+        print(f"Error: MagSafe audio bridge not found at {bridge_path}", file=sys.stderr)
+        sys.exit(1)
+
+    spec = importlib.util.spec_from_file_location("magsafe_audio_bridge", str(bridge_path))
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules["magsafe_audio_bridge"] = mod
+    spec.loader.exec_module(mod)
+
+    bridge = mod.get_magsafe_audio_bridge()
+
+    if parsed.action == "status" or parsed.action is None:
+        status_info = {
+            "status": "ARMED_AND_ACTIVE",
+            "memory_ceiling_mb": bridge.cgroups_memory_max_mb,
+            "recorded_sessions": len(bridge.get_sessions()),
+            "glass_observatory_tap": "ACTIVE" if mod.get_glass_observatory is not None else "INACTIVE",
+            "reya_fabric_layer": "ACTIVE" if mod.get_reya_fabric is not None else "INACTIVE",
+            "handshake_gate": "ACTIVE" if mod.get_handshake_gate is not None else "INACTIVE",
+        }
+        if getattr(parsed, "json", False):
+            print(json.dumps(status_info, indent=2))
+        else:
+            print("=" * 72)
+            print("  [MAGSAFE AUDIO SENTINEL & KINETIC ACTION DISPATCHER]")
+            print(f"  Status: {status_info['status']} (MemoryMax: {status_info['memory_ceiling_mb']}MB)")
+            print(f"  Recorded Sessions:     {status_info['recorded_sessions']}")
+            print(f"  Glass Observatory Tap: {status_info['glass_observatory_tap']}")
+            print(f"  REYA Fabric Layer:     {status_info['reya_fabric_layer']}")
+            print(f"  Handshake Gate:        {status_info['handshake_gate']}")
+            print("=" * 72)
+        return
+
+    if parsed.action == "ingest":
+        res = bridge.process_audio_file(
+            audio_file_path=parsed.file,
+            target_knight=parsed.knight,
+            tenant_id=parsed.tenant,
+            auto_dispatch=parsed.dispatch,
+        )
+        if getattr(parsed, "json", False):
+            print(json.dumps(res.to_dict(), indent=2))
+        else:
+            print(f"\n[MAGSAFE INGEST] Session {res.session_id} Complete")
+            print(f"  Audio Source:   {res.audio_path} ({res.duration_seconds}s)")
+            print(f"  Observatory:    Turn {res.observatory_turn_id} (+{res.tenant_xp_awarded} XP)")
+            print(f"  Action Items:   {len(res.action_items)} extracted")
+            for idx, it in enumerate(res.action_items, 1):
+                disp_str = "DISPATCHED" if it.dispatched else "BLOCKED/PENDING"
+                print(f"    [{idx}] {it.title} ({it.action_type}) -> {it.target_knight} [{disp_str}]")
+            print(f"\n{res.summary}")
+        return
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -815,6 +897,10 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("magsafe", "magsafe-audio", "magsafe-bridge"):
+        _cmd_magsafe(args[1:])
+        return
+
     if first == "reya":
         _cmd_reya(args[1:])
         return

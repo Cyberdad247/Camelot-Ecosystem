@@ -1004,6 +1004,30 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_reya_handshake",
         "hydrate": False,
     },
+    "//MAGSAFE_INGEST": {
+        "knight": "sir_helios",
+        "description": "Ingest MagSafe hardware audio, summarize via SecondBrain, and tap into Glass Observatory",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_magsafe_ingest",
+        "hydrate": False,
+    },
+    "//magsafe": {
+        "knight": "sir_helios",
+        "description": "Alias for //MAGSAFE_INGEST ambient audio processor",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_magsafe_ingest",
+        "hydrate": False,
+    },
+    "//MAGSAFE_DISPATCH": {
+        "knight": "sir_codex",
+        "description": "Ingest MagSafe audio and auto-dispatch kinetic action items via REYA Fabric Layer",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_magsafe_dispatch",
+        "hydrate": False,
+    },
     "//HUMANISTIC_VOICE": {
         "knight": "sir_sonus",
         "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
@@ -3738,6 +3762,66 @@ def _handle_reya_handshake(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_magsafe_ingest(param: Any, context: dict) -> dict:
+    """//MAGSAFE_INGEST — Ingest MagSafe voice recording, SecondBrain summarize & Glass Observatory tap."""
+    param_str = str(param or "").strip()
+    audio_path = context.get("file") if (context and context.get("file")) else param_str
+    if not audio_path:
+        audio_path = str(CAMELOT_HOME / "03_VAULT" / "runtime_state" / "magsafe" / "sample_ambient_memo.txt")
+        p = Path(audio_path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        if not p.exists():
+            p.write_text(
+                "MagSafe Audio Memo: Task: Verify unit test coverage and dispatch kinetic CUA actions.\nAction item: Run pytest tests/test_magsafe_voice_dispatcher.py.",
+                encoding="utf-8",
+            )
+
+    knight_id = (context.get("knight") if context and context.get("knight") else "SIR_HELIOS")
+    tenant_id = (context.get("tenant") if context and context.get("tenant") else "Vizion Sky")
+    dispatch = (context.get("dispatch", False) if context else False) or ("dispatch" in param_str.lower())
+
+    import importlib.util
+    bridge_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "magsafe" / "magsafe_audio_bridge.py"
+    spec = importlib.util.spec_from_file_location("magsafe_audio_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_magsafe_bridge()
+        res = bridge.process_audio_file(
+            audio_file_path=audio_path,
+            target_knight=knight_id,
+            tenant_id=tenant_id,
+            auto_dispatch=dispatch,
+        )
+        return {
+            "action": "magsafe_ingest",
+            "status": "SUCCESS",
+            "session_id": res.session_id,
+            "duration_seconds": res.duration_seconds,
+            "action_items_count": len(res.action_items),
+            "observatory_turn_id": res.observatory_turn_id,
+            "tenant_xp_awarded": res.tenant_xp_awarded,
+            "summary": res.summary,
+            "key_ideas": res.key_ideas,
+            "action_items": [a.to_dict() for a in res.action_items],
+            "dispatched_results": res.dispatched_results,
+            "memory_attribution": res.memory_attribution,
+        }
+    return {
+        "action": "magsafe_ingest",
+        "status": "ERROR",
+        "error": "Failed to load magsafe_audio_bridge module",
+    }
+
+
+def _handle_magsafe_dispatch(param: Any, context: dict) -> dict:
+    """//MAGSAFE_DISPATCH — Ingest MagSafe voice recording and auto-dispatch kinetic action items via REYA."""
+    ctx = dict(context or {})
+    ctx["dispatch"] = True
+    return _handle_magsafe_ingest(param, ctx)
+
+
 def _handle_humanistic_voice(param: Any, context: dict) -> dict:
     """//HUMANISTIC_VOICE — Realtime vocal pattern analysis, prosody mirroring & humanistic conversation loop."""
     import math
@@ -3902,6 +3986,8 @@ _HANDLERS = {
     "_handle_wake_24_7_swarm_daemon": _handle_wake_24_7_swarm_daemon,
     "_handle_forge_squire": _handle_forge_squire,
     "_handle_scarcity_gov": _handle_scarcity_gov,
+    "_handle_magsafe_ingest": _handle_magsafe_ingest,
+    "_handle_magsafe_dispatch": _handle_magsafe_dispatch,
 }
 
 
