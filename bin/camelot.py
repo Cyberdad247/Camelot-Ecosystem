@@ -46,7 +46,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg", "cua", "computer-use", "reya-cua"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg", "cua", "computer-use", "reya-cua", "reya"}
 
 
 def _banner() -> None:
@@ -676,6 +676,129 @@ def _cmd_cua(argv: list[str]) -> None:
             print(f"  Latency:     {c_exec.get('latency_ms', 0)} ms")
 
 
+def _cmd_reya(argv: list[str]) -> None:
+    """REYA Universal Knight Fabric Layer & Kinetic Handshake CLI.
+
+    Usage:
+        camelot reya status [--json]
+        camelot reya handshake [--knight <id>] [--grant|--revoke|--status] [--json]
+        camelot reya switch <knight_id> [--json]
+        camelot reya reset [--json]
+    """
+    import argparse
+    parser = argparse.ArgumentParser(prog="camelot reya", description="Camelot-OS REYA Universal Kinetic Fabric Layer")
+    sub = parser.add_subparsers(dest="action", help="REYA sub-command")
+
+    p_status = sub.add_parser("status", help="Display REYA fabric and active Knight status")
+    p_status.add_argument("--json", action="store_true")
+
+    p_hsk = sub.add_parser("handshake", help="Manage Knight kinetic handshake clearance")
+    p_hsk.add_argument("--knight", type=str, default=None, help="Knight ID to inspect or manage")
+    p_hsk.add_argument("--grant", action="store_true", help="Grant explicit user allowance for kinetic access")
+    p_hsk.add_argument("--revoke", action="store_true", help="Revoke active kinetic handshake lease")
+    p_hsk.add_argument("--json", action="store_true")
+
+    p_switch = sub.add_parser("switch", help="Switch active vocal persona to Knight")
+    p_switch.add_argument("knight_id", type=str, help="Target Knight ID or alias")
+    p_switch.add_argument("--json", action="store_true")
+
+    p_reset = sub.add_parser("reset", help="Reset REYA to default companion persona")
+    p_reset.add_argument("--json", action="store_true")
+
+    parsed = parser.parse_args(argv)
+
+    import importlib.util
+    from pathlib import Path
+    _fab_path = Path(__file__).resolve().parent.parent / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    _spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(_fab_path))
+    _mod = importlib.util.module_from_spec(_spec)
+    sys.modules["reya_fabric_layer"] = _mod
+    _spec.loader.exec_module(_mod)
+
+    fabric = _mod.get_reya_fabric()
+
+    if not parsed.action or parsed.action == "status":
+        status = fabric.get_status()
+        if getattr(parsed, "json", False):
+            print(json.dumps(status, indent=2))
+        else:
+            print("=" * 68)
+            print("  [REYA] UNIVERSAL KNIGHT KINETIC FABRIC & SENSORY INGRESS")
+            print(f"  Active Persona:  {status['active_name']} ({status['active_knight']})")
+            print(f"  Voice Engine:    {status['active_engine']}")
+            print(f"  CUA Driver:      Attached={status['cua_driver_attached']} ({status['cua_viewport']})")
+            print(f"  Handshake:       Active={status['handshake_active']} (ID: {status['handshake_id']})")
+            print(f"  Memory Ceiling:  {status['cgroups_memory_max_mb']} MB (Rule 7)")
+            print(f"  Available:       {len(status['available_knights'])} Knights")
+            print("=" * 68)
+        return
+
+    if parsed.action == "switch":
+        res = fabric.switch_knight(parsed.knight_id)
+        if getattr(parsed, "json", False):
+            print(json.dumps(res, indent=2))
+        else:
+            print(f"[REYA] Channeled Knight Persona: {res['display_name']} ({res['active_knight_id']})")
+            print(f"  Spoken Greeting: \"{res['greeting_spoken']}\"")
+            print(f"  Voice Engine:    {res['voice_engine']}")
+        return
+
+    if parsed.action == "reset":
+        res = fabric.switch_knight("reya_companion")
+        if getattr(parsed, "json", False):
+            print(json.dumps(res, indent=2))
+        else:
+            print("[REYA] Reset to Default Companion Persona: REYA (The Sovereign Companion)")
+        return
+
+    if parsed.action == "handshake":
+        target_k = parsed.knight or fabric.active_knight_id
+        gate = fabric.handshake_gate
+        if not gate:
+            print("[ERROR] Handshake gate not loaded.")
+            return
+
+        if parsed.grant:
+            lease = fabric.grant_kinetic_handshake(target_k)
+            if getattr(parsed, "json", False):
+                print(json.dumps(lease.to_dict(), indent=2))
+            else:
+                print(f"[REYA HANDSHAKE] GRANTED user allowance for Knight [{target_k}]")
+                print(f"  Handshake ID: {lease.handshake_id}")
+                print(f"  Autonomy:     {lease.autonomy_tier.value}")
+                print(f"  Allowed:      {', '.join(lease.allowed_actions[:3])}...")
+            return
+
+        if parsed.revoke:
+            ok = fabric.revoke_kinetic_handshake(target_k)
+            if getattr(parsed, "json", False):
+                print(json.dumps({"revoked": ok, "knight": target_k}, indent=2))
+            else:
+                print(f"[REYA HANDSHAKE] Revoked kinetic access for Knight [{target_k}]")
+            return
+
+        # Default: inspect handshake and autonomy evaluation
+        autonomy_tier, level, rationale = gate.evaluate_knight_autonomy(target_k)
+        active_l = gate.get_active_lease(target_k)
+        res_info = {
+            "knight_id": target_k,
+            "autonomy_tier": autonomy_tier.value,
+            "level": level,
+            "rationale": rationale,
+            "active_handshake": active_l.to_dict() if active_l else None,
+        }
+        if getattr(parsed, "json", False):
+            print(json.dumps(res_info, indent=2))
+        else:
+            print("=" * 68)
+            print(f"  [REYA HANDSHAKE PROTOCOL] Knight: {target_k}")
+            print(f"  Autonomy Tier:  {autonomy_tier.value}")
+            print(f"  Mastery Level:  Level {level}")
+            print(f"  Rationale:      {rationale}")
+            print(f"  Active Lease:   {active_l.handshake_id if active_l else 'None (Approval Required)'}")
+            print("=" * 68)
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -692,6 +815,9 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first == "reya":
+        _cmd_reya(args[1:])
+        return
     if first in ("cua", "computer-use", "reya-cua"):
         _cmd_cua(args[1:])
         return

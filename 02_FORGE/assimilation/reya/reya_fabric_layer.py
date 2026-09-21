@@ -60,6 +60,42 @@ except Exception:
     SentinelViolationError = Exception  # type: ignore
     get_cua_driver = None  # type: ignore
 
+try:
+    if "reya_handshake_gate" in sys.modules:
+        _hsk_mod = sys.modules["reya_handshake_gate"]
+    else:
+        import importlib.util
+        _hsk_path = Path(__file__).resolve().parent / "reya_handshake_gate.py"
+        if _hsk_path.exists():
+            _hsk_spec = importlib.util.spec_from_file_location("reya_handshake_gate", str(_hsk_path))
+            _hsk_mod = importlib.util.module_from_spec(_hsk_spec)
+            sys.modules["reya_handshake_gate"] = _hsk_mod
+            _hsk_spec.loader.exec_module(_hsk_mod)  # type: ignore
+        else:
+            _hsk_mod = None
+
+    if _hsk_mod is not None:
+        ReyaHandshakeGate = _hsk_mod.ReyaHandshakeGate
+        HandshakeLease = _hsk_mod.HandshakeLease
+        HandshakeStatus = _hsk_mod.HandshakeStatus
+        AutonomyTier = _hsk_mod.AutonomyTier
+        get_handshake_gate = _hsk_mod.get_handshake_gate
+        CANONICAL_OMEGA_KNIGHTS = _hsk_mod.CANONICAL_OMEGA_KNIGHTS
+    else:
+        ReyaHandshakeGate = None  # type: ignore
+        HandshakeLease = None  # type: ignore
+        HandshakeStatus = None  # type: ignore
+        AutonomyTier = None  # type: ignore
+        get_handshake_gate = None  # type: ignore
+        CANONICAL_OMEGA_KNIGHTS = {"anya_omega", "merlin_omega", "arthur_omega"}
+except Exception:
+    ReyaHandshakeGate = None  # type: ignore
+    HandshakeLease = None  # type: ignore
+    HandshakeStatus = None  # type: ignore
+    AutonomyTier = None  # type: ignore
+    get_handshake_gate = None  # type: ignore
+    CANONICAL_OMEGA_KNIGHTS = {"anya_omega", "merlin_omega", "arthur_omega"}
+
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s] [%(levelname)s] [REYA_FABRIC] %(message)s",
@@ -268,7 +304,63 @@ class ReyaUniversalFabric:
         )
         self.cgroups_memory_max_mb = 350.0
         self.cua_driver = get_cua_driver() if get_cua_driver is not None else None
+        self.handshake_gate = get_handshake_gate() if get_handshake_gate is not None else None
         self.active_lease: Optional[Any] = None
+
+    def request_kinetic_handshake(
+        self,
+        intent: str,
+        knight_id: Optional[str] = None,
+        tenant_id: str = "Vizion Sky",
+        requested_actions: Optional[List[str]] = None,
+        auto_approve_if_eligible: bool = True,
+    ) -> Any:
+        """Requests kinetic handshake clearance for the active or specified Knight."""
+        target_knight = (knight_id or self.active_knight_id).lower().strip()
+        if self.handshake_gate is None:
+            return None
+        lease = self.handshake_gate.request_handshake(
+            knight_id=target_knight,
+            intent=intent,
+            requested_actions=requested_actions,
+            tenant_id=tenant_id,
+            auto_approve_if_eligible=auto_approve_if_eligible,
+        )
+        if lease.is_valid:
+            self.create_sentinel_lease(
+                target_device="desktop",
+                allowed_rect=lease.allowed_rect,
+                red_zones=lease.red_zones,
+                max_actions=lease.max_actions,
+            )
+        return lease
+
+    def grant_kinetic_handshake(self, knight_id: Optional[str] = None) -> Any:
+        """Called when user explicitly grants permission to access Reya."""
+        target_knight = (knight_id or self.active_knight_id).lower().strip()
+        if self.handshake_gate is None:
+            return None
+        lease = self.handshake_gate.request_handshake(
+            knight_id=target_knight,
+            intent="User Explicit Allowance Granted",
+            auto_approve_if_eligible=True,
+        )
+        approved = self.handshake_gate.grant_user_approval(lease)
+        self.create_sentinel_lease(
+            target_device="desktop",
+            allowed_rect=approved.allowed_rect,
+            red_zones=approved.red_zones,
+            max_actions=approved.max_actions,
+        )
+        return approved
+
+    def revoke_kinetic_handshake(self, knight_id: Optional[str] = None) -> bool:
+        """Instantly revokes Reya kinetic access for a Knight."""
+        target_knight = (knight_id or self.active_knight_id).lower().strip()
+        if self.handshake_gate is None:
+            return False
+        self.active_lease = None
+        return self.handshake_gate.revoke_handshake(target_knight)
 
     def create_sentinel_lease(
         self,
@@ -394,6 +486,76 @@ class ReyaUniversalFabric:
         persona = self.current_persona
         action_id = f"act_{action_type}_{os.urandom(4).hex()}"
 
+        # Kinetic Gate & Handshake Protocol Enforcement
+        is_kinetic = action_type.startswith("cua_") or action_type == "mobile_adb_tap"
+        channeled_kid = persona.knight_id.lower().strip()
+        handshake_status_label = "REYA_NATIVE"
+
+        if is_kinetic and channeled_kid != "reya_companion" and self.handshake_gate is not None:
+            hsk_lease = self.handshake_gate.get_active_lease(channeled_kid)
+            if not hsk_lease or not hsk_lease.is_valid:
+                autonomy_tier, level, rationale = self.handshake_gate.evaluate_knight_autonomy(channeled_kid)
+                user_approved = params.get("user_approved") or os.environ.get("CAMELOT_AUTO_APPROVE") == "true"
+
+                if user_approved:
+                    hsk_lease = self.handshake_gate.request_handshake(
+                        knight_id=channeled_kid,
+                        intent=params.get("intent", f"User allowance for {action_type}"),
+                        auto_approve_if_eligible=True,
+                    )
+                    self.handshake_gate.grant_user_approval(hsk_lease)
+                    handshake_status_label = "USER_APPROVED_HANDSHAKE"
+                elif autonomy_tier in (AutonomyTier.SOVEREIGN_ROOT, AutonomyTier.HITL_GUIDED_ALPHA_OMEGA):
+                    hsk_lease = self.handshake_gate.request_handshake(
+                        knight_id=channeled_kid,
+                        intent=params.get("intent", f"Alpha Omega autonomous {action_type}"),
+                        auto_approve_if_eligible=True,
+                    )
+                    handshake_status_label = "ALPHA_OMEGA_AUTONOMOUS"
+                else:
+                    logger.warning(
+                        f"Reya kinetic access blocked for [{persona.display_name}]: Handshake required ({rationale})"
+                    )
+                    return {
+                        "status": "HANDSHAKE_REQUIRED",
+                        "error": "KINETIC_HANDSHAKE_REQUIRED",
+                        "message": (
+                            f"Sire, [{persona.display_name}] requests permission to bind to REYA Kinetic Fabric "
+                            f"for action '{action_type}'. Gaining Alpha Omega level will grant autonomous access. "
+                            f"Handshake approval required."
+                        ),
+                        "knight_id": channeled_kid,
+                        "speaking_name": persona.display_name,
+                        "autonomy_tier": autonomy_tier.value,
+                        "knight_level": level,
+                        "action": action_type,
+                        "handshake_prompt": f"Approve Reya kinetic access for [{persona.display_name}]? (Y/N)",
+                        "timestamp": datetime.now(timezone.utc).isoformat(),
+                    }
+
+            if hsk_lease and hsk_lease.is_valid:
+                hsk_lease.actions_executed += 1
+                if not self.active_lease:
+                    self.create_sentinel_lease(
+                        target_device="desktop",
+                        allowed_rect=hsk_lease.allowed_rect,
+                        red_zones=hsk_lease.red_zones,
+                        max_actions=hsk_lease.max_actions,
+                    )
+
+        # Sovereign Memory Attribution
+        attribution = {
+            "initiating_knight": persona.knight_id,
+            "speaking_name": persona.display_name,
+            "kinetic_fabric": "REYA_EDGE_FABRIC",
+            "memory_routing": {
+                "memcastle_partition": persona.knight_id.upper(),
+                "graphiti_partition": f"{persona.knight_id.lower()}_graphiti.db",
+                "observatory_xp_recipient": persona.knight_id,
+            },
+            "handshake_status": handshake_status_label,
+        }
+
         cua_result: Optional[Dict[str, Any]] = None
         if action_type.startswith("cua_") and self.cua_driver is not None:
             lease = params.get("lease", self.active_lease)
@@ -474,6 +636,7 @@ class ReyaUniversalFabric:
             "channeled_knight": persona.knight_id,
             "speaking_name": persona.display_name,
             "executed_by": "REYA_UNIVERSAL_FABRIC",
+            "attribution": attribution,
             "sandbox": {
                 "cgroups_memory_max": "350M",
                 "memory_ceiling_mb": self.cgroups_memory_max_mb,
@@ -486,6 +649,11 @@ class ReyaUniversalFabric:
 
     def get_status(self) -> Dict[str, Any]:
         persona = self.current_persona
+        hsk = (
+            self.handshake_gate.get_active_lease(persona.knight_id)
+            if self.handshake_gate
+            else None
+        )
         return {
             "fabric": "REYA_UNIVERSAL_KNIGHT_FABRIC",
             "active_knight": persona.knight_id,
@@ -497,6 +665,8 @@ class ReyaUniversalFabric:
             "cua_driver_attached": self.cua_driver is not None,
             "cua_viewport": self.cua_driver.viewport.device_id if self.cua_driver else None,
             "sentinel_lease": self.active_lease.lease_id if self.active_lease else None,
+            "handshake_active": hsk.is_valid if hsk else (persona.knight_id == "reya_companion"),
+            "handshake_id": hsk.handshake_id if hsk else None,
             "status": "FABRIC_READY",
         }
 

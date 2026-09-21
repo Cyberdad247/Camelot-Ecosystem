@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1862",
-            "task": "CUA (Computer-Use Agent) & REYA Universal Fabric Assimilation (Ω_CUA_REYA_NEXUS): trycua/cua Architectural Ingestion, Normalized Coordinate Grounding, S1 Reflex Macros & Sentinel Capability Leases",
+            "id": "1863",
+            "task": "REYA Kinetic Fabric Layer & Experience-Gated Handshake Protocol (Ω_REYA_KINETIC_HANDSHAKE_PROTOCOL): Handshake Gate, Real-Time RPG Level Autonomy & Dual-Attributed Memory Routing",
             "author": "SIR_CODEX / SIR_HELIO / SIR_HELIOS / MERLIN_Ω / SIR_BORIS / ARTHUR_OMEGA",
             "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
-            "notes": "Architected, implemented, and verified CUA (Computer-Use Agent) assimilation from trycua/cua into REYA Universal Fabric Layer: (1) Synthesized CUA architectural feedback and formulated Northstar Goal for REYA Fabric Layer ('Universal Sovereign Computer-Use Agent (CUA) Fabric — Unifying Duplex Voice Guidance, Normalized Cross-Platform Actuation (Desktop + Mobile), and System 1 Reflex Execution under Sentinel Safety Leases (<350MB RAM, sub-50ms action loop)'), (2) Forged CuaDriverBridge in 02_FORGE/assimilation/cua/cua_driver_bridge.py with normalized [0.0, 1.0] coordinate mapping to physical viewports (Cybertronia desktop 1080p/4K, Excalibur S26 Ultra 1440x3120), OS mouse/keyboard primitives (click, drag, scroll, type, key, hotkey), frame hash screen capture & diff verification, and sub-50ms S1 macro chain execution, (3) Implemented Sir Sentinel Capability Leases (SentinelLease) enforcing strict bounding boxes and red-zone quarantine against credential fields and system wipe buttons, (4) Enhanced reya_fabric_layer.py to natively execute CUA actions across Round Table Knight channeled voice personas, (5) Wired //CUA and //REYA_ACT runic commands into control_plane/runes/runic_router.py, (6) Added camelot cua sub-command (status, click, move, drag, type, key, hotkey, capture, diff) to bin/camelot.py, (7) Authored test suite tests/test_cua_reya_assimilation.py passing 15/15 tests and 90/90 across the combined suite, and (8) Verified parity gates and synchronized all 4 PROVENANCE_LEDGER.md mirrors. — 2026-09-21 02:15 UTC"
+            "notes": "Architected, implemented, and verified REYA Kinetic Fabric Handshake Protocol and Experience-Gated Autonomy: (1) Forged ReyaHandshakeGate in 02_FORGE/assimilation/reya/reya_handshake_gate.py with three autonomy tiers (MANUAL_APPROVAL_REQUIRED, HITL_GUIDED_ALPHA_OMEGA, SOVEREIGN_ROOT), dynamic RPG level and XP evaluation from 03_VAULT/runtime_state/observatory/rpg_codex.json, lease lifecycle management (request_handshake, grant_handshake, revoke_handshake), and automatic HITL-guided autonomy for Knights reaching Alpha Omega Level (Level >= 10) or canonical Omega entities (ANYA_Ω, MERLIN_Ω, ARTHUR_OMEGA), (2) Integrated handshake gate into execute_fabric_action in 02_FORGE/assimilation/reya/reya_fabric_layer.py, blocking unauthorized novice Knights with HANDSHAKE_REQUIRED until explicit user approval while allowing Alpha Omega Knights autonomous execution, (3) Implemented dual-attributed memory routing returning structured attribution metadata (memcastle_partition, graphiti_partition, observatory_xp_recipient, kinetic_fabric), (4) Extended camelot reya CLI in bin/camelot.py with handshake subcommands (status, grant, revoke), (5) Registered runic command //REYA_HANDSHAKE in control_plane/runes/runic_router.py with inspect/grant handlers, (6) Authored unit test suite tests/test_reya_handshake_protocol.py passing 9/9 tests and 99/99 across the combined regression suite, (7) Verified parity gates and synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-21 02:45 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1861" in line:
+            if "| 1862" in line:
                 insert_at = i
                 break
         

@@ -996,6 +996,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_cua_dispatch",
         "hydrate": False,
     },
+    "//REYA_HANDSHAKE": {
+        "knight": "merlin_omega",
+        "description": "Establish or inspect Reya kinetic fabric handshake clearance and experience autonomy",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_handshake",
+        "hydrate": False,
+    },
     "//HUMANISTIC_VOICE": {
         "knight": "sir_sonus",
         "description": "Humanistic voice conversational loop with live prosody analysis, F0 inflection & LiveTalking visemes",
@@ -3682,6 +3690,54 @@ def _handle_cua_dispatch(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_reya_handshake(param: Any, context: dict) -> dict:
+    """//REYA_HANDSHAKE — Establish or inspect Reya kinetic fabric handshake clearance and experience autonomy."""
+    param_str = str(param or "").strip()
+    target_knight = (context.get("knight") if context and context.get("knight") else "sir_boris")
+    grant = (context.get("grant", False) if context else False) or ("grant" in param_str.lower())
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.get_reya_fabric()
+
+        gate = fabric.handshake_gate
+        if not gate:
+            return {"action": "reya_handshake", "status": "ERROR", "error": "Handshake gate not available"}
+
+        if grant:
+            lease = fabric.grant_kinetic_handshake(target_knight)
+            return {
+                "action": "reya_handshake",
+                "status": "HANDSHAKE_GRANTED",
+                "knight_id": target_knight,
+                "lease": lease.to_dict() if lease else None,
+            }
+
+        autonomy_tier, level, rationale = gate.evaluate_knight_autonomy(target_knight)
+        active_l = gate.get_active_lease(target_knight)
+
+        return {
+            "action": "reya_handshake",
+            "status": "HANDSHAKE_EVALUATED",
+            "knight_id": target_knight,
+            "autonomy_tier": autonomy_tier.value,
+            "knight_level": level,
+            "rationale": rationale,
+            "active_handshake": active_l.to_dict() if active_l else None,
+        }
+    else:
+        return {
+            "action": "reya_handshake",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
 def _handle_humanistic_voice(param: Any, context: dict) -> dict:
     """//HUMANISTIC_VOICE — Realtime vocal pattern analysis, prosody mirroring & humanistic conversation loop."""
     import math
@@ -3758,6 +3814,7 @@ def _handle_omni_s2s(param: Any, context: dict) -> dict:
 
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_reya_handshake": _handle_reya_handshake,
     "_handle_cua_dispatch": _handle_cua_dispatch,
     "_handle_omni_s2s": _handle_omni_s2s,
     "_handle_humanistic_voice": _handle_humanistic_voice,
