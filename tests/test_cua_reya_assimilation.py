@@ -211,10 +211,10 @@ class TestReyaUniversalFabricCua:
         assert switch_res["active_knight_id"] == "sir_boris"
         assert switch_res["display_name"] == "Sir Boris"
 
-        # Execute CUA type action as Sir Boris
+        # Execute CUA type action as Sir Boris (user approved)
         res = fabric.execute_fabric_action(
             "cua_keyboard_type",
-            {"text": "pnpm build", "delay_ms": 5},
+            {"text": "pnpm build", "delay_ms": 5, "user_approved": True},
         )
         assert res["status"] == "SUCCESS"
         assert res["speaking_name"] == "Sir Boris"

@@ -1116,6 +1116,149 @@ def _cmd_bitrouter(argv: list[str]) -> None:
         return
 
 
+def _cmd_worker(argv: list[str]) -> None:
+    """Northstar Goal Background Workers & Personal CPU Sandboxes CLI.
+
+    Usage:
+        camelot worker list [--json]
+        camelot worker decompose --title <TITLE> --objective <OBJ> [--knight KNIGHT] [--json]
+        camelot worker step --worker <ID> [--json]
+        camelot worker status --worker <ID> [--json]
+        camelot worker approve --request <ID> [--operator OP] [--reason REASON] [--json]
+        camelot worker deny --request <ID> [--operator OP] [--reason REASON] [--json]
+    """
+    import argparse
+    import importlib.util
+
+    engine_path = Path(__file__).resolve().parent.parent / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if not spec or not spec.loader:
+        print("[FAIL] Could not load northstar_worker_engine")
+        return
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.NorthstarWorkerEngine()
+
+    parser = argparse.ArgumentParser(prog="camelot worker", description="Northstar Background Workers & Sandboxes")
+    subparsers = parser.add_subparsers(dest="subcmd")
+
+    # list
+    p_list = subparsers.add_parser("list")
+    p_list.add_argument("--json", action="store_true")
+
+    # decompose
+    p_dec = subparsers.add_parser("decompose")
+    p_dec.add_argument("--title", required=True)
+    p_dec.add_argument("--objective", default="")
+    p_dec.add_argument("--knight", default="MERLIN_Ω")
+    p_dec.add_argument("--json", action="store_true")
+
+    # step
+    p_step = subparsers.add_parser("step")
+    p_step.add_argument("--worker", required=True)
+    p_step.add_argument("--json", action="store_true")
+
+    # status
+    p_status = subparsers.add_parser("status")
+    p_status.add_argument("--worker", required=True)
+    p_status.add_argument("--json", action="store_true")
+
+    # approve
+    p_app = subparsers.add_parser("approve")
+    p_app.add_argument("--request", required=True)
+    p_app.add_argument("--operator", default="Arthur_Omega")
+    p_app.add_argument("--reason", default="Approved via CLI")
+    p_app.add_argument("--json", action="store_true")
+
+    # deny
+    p_deny = subparsers.add_parser("deny")
+    p_deny.add_argument("--request", required=True)
+    p_deny.add_argument("--operator", default="Arthur_Omega")
+    p_deny.add_argument("--reason", default="Denied via CLI")
+    p_deny.add_argument("--json", action="store_true")
+
+    def _safe_str(s: Any) -> str:
+        return str(s).replace("Ω", "OMEGA")
+
+    sub_args = parser.parse_args(argv)
+    if not sub_args.subcmd or sub_args.subcmd == "list":
+        workers = engine.list_all_workers()
+        if getattr(sub_args, "json", False):
+            print(json.dumps(workers, indent=2))
+        else:
+            print(f"\n[NORTHSTAR] Active Background Workers ({len(workers)}):")
+            if not workers:
+                print("  No active workers. Decompose a goal: 'camelot worker decompose --title \"<title>\"'")
+            for w in workers:
+                reqs = len(w.get("pending_hitl_requests", []))
+                hitl_tag = f" [HITL PENDING: {reqs}]" if reqs > 0 else ""
+                print(_safe_str(f"  * {w['worker_id']} [{w['status']}{hitl_tag}] {w['title']}"))
+                print(_safe_str(f"    Knight: {w['lead_knight']} | Progress: {w['progress_pct']}% | Milestones: {w['current_milestone_index']}/{w['total_milestones']}"))
+                metrics = w.get("sandbox_metrics", {})
+                print(f"    Sandbox: RSS {metrics.get('memory_rss_mb', 0)}MB / 350MB | CPU {metrics.get('cpu_usage_pct', 0)}% (Quota: 60%)")
+        return
+
+    if sub_args.subcmd == "decompose":
+        goal = engine.decompose_goal(
+            title=sub_args.title,
+            objective=sub_args.objective or sub_args.title,
+            lead_knight=sub_args.knight
+        )
+        if sub_args.json:
+            print(json.dumps(goal.to_dict(), indent=2))
+        else:
+            print(f"\n[OK] Decomposed Northstar Goal: {goal.goal_id}")
+            print(_safe_str(f"  Worker Assigned: {goal.worker_id} (Lead: {goal.lead_knight})"))
+            print(f"  Milestones ({len(goal.milestones)}):")
+            for idx, m in enumerate(goal.milestones, 1):
+                print(_safe_str(f"    {idx}. [{m.assigned_knight}] {m.title} ({m.risk_tier})"))
+        return
+
+    if sub_args.subcmd == "step":
+        res = engine.step_worker(sub_args.worker)
+        if sub_args.json:
+            print(json.dumps(res, indent=2))
+        else:
+            if res.get("status") == "BLOCKED_ON_HITL":
+                print(_safe_str(f"\n[HITL_PAUSE] Worker {sub_args.worker} paused on milestone: {res.get('blocked_milestone')}"))
+                print(f"  Request ID: {res.get('permission_request_id')}")
+                print(_safe_str(f"  Message: {res.get('message')}"))
+                print(f"  Action: run 'camelot worker approve --request {res.get('permission_request_id')}' to proceed")
+            else:
+                print(f"\n[OK] Worker {sub_args.worker} stepped: status {res.get('status')} (Progress: {res.get('progress_pct')}%)")
+        return
+
+    if sub_args.subcmd == "status":
+        st = engine.get_worker_status(sub_args.worker)
+        if sub_args.json:
+            print(json.dumps(st, indent=2))
+        else:
+            print(_safe_str(f"\n[STATUS] Worker {st['worker_id']} - {st['title']}"))
+            print(f"  Status: {st['status']} | Progress: {st['progress_pct']}%")
+            print(_safe_str(f"  Lead Knight: {st['lead_knight']}"))
+            print(f"  Sandbox RSS: {st['sandbox_metrics']['memory_rss_mb']}MB / 350MB (CPU: {st['sandbox_metrics']['cpu_usage_pct']}%)")
+            if st.get("pending_hitl_requests"):
+                print(f"  Pending HITL Requests: {len(st['pending_hitl_requests'])}")
+        return
+
+    if sub_args.subcmd == "approve":
+        ok = engine.broker.approve(sub_args.request, operator_id=sub_args.operator, reason=sub_args.reason)
+        if sub_args.json:
+            print(json.dumps({"request_id": sub_args.request, "approved": ok}))
+        else:
+            print(f"\n[{'OK' if ok else 'FAIL'}] Permission request {sub_args.request} approved: {ok}")
+        return
+
+    if sub_args.subcmd == "deny":
+        ok = engine.broker.deny(sub_args.request, operator_id=sub_args.operator, reason=sub_args.reason)
+        if sub_args.json:
+            print(json.dumps({"request_id": sub_args.request, "denied": ok}))
+        else:
+            print(f"\n[{'OK' if ok else 'FAIL'}] Permission request {sub_args.request} denied: {ok}")
+        return
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -1132,6 +1275,9 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("worker", "workers", "northstar", "sandbox"):
+        _cmd_worker(args[1:])
+        return
     if first in ("omniroute", "9router", "nine-router"):
         _cmd_omniroute(args[1:])
         return

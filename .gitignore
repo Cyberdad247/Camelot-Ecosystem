@@ -40,6 +40,8 @@ tmp_awesome_repo/
 data/.pytest_tmp/
 data/.pytest_temp/
 03_VAULT/runtime_state/wasm_sandbox/
+03_VAULT/runtime_state/sandboxes/
+03_VAULT/runtime_state/workers/
 03_VAULT/runtime_state/harness_heartbeat.jsonl
 03_VAULT/runtime_state/boot_snapshot.json
 03_VAULT/runtime_state/*_snapshot.json

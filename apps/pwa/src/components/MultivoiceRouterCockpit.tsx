@@ -16,6 +16,7 @@ import { FivePillarDialectVisualizer } from './voice/FivePillarDialectVisualizer
 import { KnightCharacterSheetModal } from './knights/KnightCharacterSheetModal';
 import { MagsafeRecorderCard } from './voice/MagsafeRecorderCard';
 import { OmniRouteExplorerCard } from './voice/OmniRouteExplorerCard';
+import { NorthstarWorkerDashboard } from './workers/NorthstarWorkerDashboard';
 
 interface Props {
   activeTenantId: string;
@@ -36,7 +37,7 @@ export function MultivoiceRouterCockpit({
   const [audioLatencyMs, setAudioLatencyMs] = useState<number>(18);
   const [waveformBars, setWaveformBars] = useState<number[]>([15, 30, 60, 45, 80, 50, 95, 40, 70, 25, 45, 20]);
   const [inputPrompt, setInputPrompt] = useState<string>('');
-  const [activeCockpitTab, setActiveCockpitTab] = useState<'CONSOLE' | 'FIVE_PILLARS' | 'CLONING_SPEC' | 'MAGSAFE_EDGE' | 'OMNI_ROUTER'>('CONSOLE');
+  const [activeCockpitTab, setActiveCockpitTab] = useState<'CONSOLE' | 'FIVE_PILLARS' | 'CLONING_SPEC' | 'MAGSAFE_EDGE' | 'OMNI_ROUTER' | 'WORKERS'>('CONSOLE');
   const [isCharacterSheetOpen, setIsCharacterSheetOpen] = useState<boolean>(false);
   const [transcripts, setTranscripts] = useState<Array<{ sender: string; text: string; time: string }>>([
     {
@@ -251,6 +252,18 @@ export function MultivoiceRouterCockpit({
           <span>🚀</span>
           <span>OmniRoute Explorer</span>
         </button>
+        <button
+          type="button"
+          onClick={() => setActiveCockpitTab('WORKERS')}
+          className={`px-4 py-2 font-bold uppercase transition-all border-b-2 -mb-px flex items-center gap-2 ${
+            activeCockpitTab === 'WORKERS'
+              ? 'border-gold text-gold-royal bg-gold/10'
+              : 'border-transparent text-white/50 hover:text-white/80'
+          }`}
+        >
+          <span>🛡️</span>
+          <span>Goal Workers & Sandboxes</span>
+        </button>
       </div>
 
       {/* ── View 1: Console & Duplex Stream ────────────────────── */}
@@ -406,9 +419,14 @@ export function MultivoiceRouterCockpit({
         <MagsafeRecorderCard />
       )}
 
-      {/* ── View 5: OmniRoute AI Explorer & BitRouter Guardrails ── */}
+      {/* ── View 5: OmniRoute AI Explorer & BitRouter Guardrails ────── */}
       {activeCockpitTab === 'OMNI_ROUTER' && (
         <OmniRouteExplorerCard />
+      )}
+
+      {/* ── View 6: Northstar Goal Workers & Personal CPU Sandboxes ── */}
+      {activeCockpitTab === 'WORKERS' && (
+        <NorthstarWorkerDashboard />
       )}
 
       {/* ── Round Table Persona Selector Matrix ─────────────────── */}

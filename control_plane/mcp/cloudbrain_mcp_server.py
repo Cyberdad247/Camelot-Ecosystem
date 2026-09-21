@@ -523,6 +523,73 @@ def bitrouter_evaluate_loop(
     return {"error": "Failed to load bitrouter_guardrails"}
 
 
+@mcp_server.tool()
+def northstar_dispatch_goal(title: str, objective: str = "", knight: str = "MERLIN_Ω") -> dict:
+    """Decompose and dispatch an autonomous Northstar Goal background worker inside a Personal CPU Sandbox."""
+    import importlib.util
+    engine_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.NorthstarWorkerEngine()
+        goal = engine.decompose_goal(title=title, objective=objective or title, lead_knight=knight)
+        return {
+            "status": "DISPATCHED",
+            "goal_id": goal.goal_id,
+            "worker_id": goal.worker_id,
+            "lead_knight": goal.lead_knight,
+            "milestones": [m.to_dict() for m in goal.milestones]
+        }
+    return {"error": "Failed to load northstar_worker_engine"}
+
+
+@mcp_server.tool()
+def northstar_worker_status(worker_id: str = "") -> dict:
+    """Query active Northstar background workers, CPU/Memory telemetry, and pending HITL requests."""
+    import importlib.util
+    engine_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.NorthstarWorkerEngine()
+        if worker_id:
+            try:
+                return engine.get_worker_status(worker_id)
+            except Exception as e:
+                return {"error": str(e)}
+        return {"workers": engine.list_all_workers()}
+    return {"error": "Failed to load northstar_worker_engine"}
+
+
+@mcp_server.tool()
+def northstar_permission_review(
+    request_id: str,
+    action: str = "approve",
+    operator_id: str = "Arthur_Omega",
+    reason: str = "Approved via FastMCP"
+) -> dict:
+    """Review and approve/deny an inline HITL permission request from a sandboxed worker."""
+    import importlib.util
+    engine_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.NorthstarWorkerEngine()
+        if action.lower() == "approve":
+            ok = engine.broker.approve(request_id, operator_id=operator_id, reason=reason)
+            return {"request_id": request_id, "action": "approve", "success": ok}
+        else:
+            ok = engine.broker.deny(request_id, operator_id=operator_id, reason=reason)
+            return {"request_id": request_id, "action": "deny", "success": ok}
+    return {"error": "Failed to load northstar_worker_engine"}
+
+
 if __name__ == "__main__":
     mcp_server.run()
 

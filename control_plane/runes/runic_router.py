@@ -1076,6 +1076,30 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_humanistic_voice",
         "hydrate": False,
     },
+    "//NORTHSTAR": {
+        "knight": "merlin_omega",
+        "description": "Decompose and dispatch autonomous Northstar Goal background worker in personal CPU sandbox",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_northstar_dispatch",
+        "hydrate": False,
+    },
+    "//WORKER_LIST": {
+        "knight": "sir_helios",
+        "description": "Inspect active background workers, CPU/memory quotas, and pending HITL approval cards",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_worker_list",
+        "hydrate": False,
+    },
+    "//WORKER_STEP": {
+        "knight": "sir_codex",
+        "description": "Step execution of an active Northstar background worker milestone",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_worker_step",
+        "hydrate": False,
+    },
     "//humanistic": {
         "knight": "sir_sonus",
         "description": "Alias for //HUMANISTIC_VOICE human-to-humanistic AI conversation",
@@ -4000,6 +4024,83 @@ def _handle_bitrouter_eval(param: Any, context: dict) -> dict:
         )
         return {"action": "bitrouter_eval", "status": "SUCCESS", **state.to_dict()}
     return {"action": "bitrouter_eval", "status": "ERROR", "error": "Failed to load bitrouter_guardrails"}
+ 
+ 
+def _handle_northstar_dispatch(param: Any, context: dict) -> dict:
+    """//NORTHSTAR — Decompose and launch autonomous Northstar Goal background worker."""
+    import importlib.util
+
+    title = str(param or "").strip() or "General Autonomous Objective"
+    objective = context.get("objective", title) if context else title
+    knight = context.get("knight", "MERLIN_Ω") if context else "MERLIN_Ω"
+
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if not spec or not spec.loader:
+        return {"action": "northstar_dispatch", "status": "ERROR", "error": "Could not load northstar_worker_engine"}
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.NorthstarWorkerEngine()
+
+    goal = engine.decompose_goal(title=title, objective=objective, lead_knight=knight)
+    return {
+        "action": "northstar_dispatch",
+        "status": "DISPATCHED",
+        "goal_id": goal.goal_id,
+        "worker_id": goal.worker_id,
+        "lead_knight": goal.lead_knight,
+        "milestones_count": len(goal.milestones),
+        "milestones": [m.to_dict() for m in goal.milestones],
+    }
+
+
+def _handle_worker_list(param: Any, context: dict) -> dict:
+    """//WORKER_LIST — Enumerate all active Northstar background workers and personal CPU sandboxes."""
+    import importlib.util
+
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if not spec or not spec.loader:
+        return {"action": "worker_list", "status": "ERROR", "error": "Could not load northstar_worker_engine"}
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.NorthstarWorkerEngine()
+
+    workers = engine.list_all_workers()
+    return {
+        "action": "worker_list",
+        "status": "SUCCESS",
+        "count": len(workers),
+        "workers": workers,
+    }
+
+
+def _handle_worker_step(param: Any, context: dict) -> dict:
+    """//WORKER_STEP — Advance active Northstar worker milestone under personal CPU sandbox."""
+    import importlib.util
+
+    worker_id = str(param or "").strip()
+    if not worker_id:
+        worker_id = context.get("worker", "") if context else ""
+    if not worker_id:
+        return {"action": "worker_step", "status": "ERROR", "error": "Worker ID required"}
+
+    engine_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if not spec or not spec.loader:
+        return {"action": "worker_step", "status": "ERROR", "error": "Could not load northstar_worker_engine"}
+    mod = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = mod
+    spec.loader.exec_module(mod)
+    engine = mod.NorthstarWorkerEngine()
+
+    res = engine.step_worker(worker_id)
+    return {
+        "action": "worker_step",
+        "result": res,
+    }
 
 
 def _handle_humanistic_voice(param: Any, context: dict) -> dict:
@@ -4172,6 +4273,9 @@ _HANDLERS = {
     "_handle_omniroute": _handle_omniroute,
     "_handle_compress_prompt": _handle_compress_prompt,
     "_handle_bitrouter_eval": _handle_bitrouter_eval,
+    "_handle_northstar_dispatch": _handle_northstar_dispatch,
+    "_handle_worker_list": _handle_worker_list,
+    "_handle_worker_step": _handle_worker_step,
 }
 
 
@@ -4181,6 +4285,14 @@ _HANDLERS = {
 
 _RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
+    "//northstar": "//NORTHSTAR",
+    "/northstar": "//NORTHSTAR",
+    "$northstar": "//NORTHSTAR",
+    "//worker": "//WORKER_LIST",
+    "//workers": "//WORKER_LIST",
+    "/worker": "//WORKER_LIST",
+    "$worker": "//WORKER_LIST",
+    "//sandbox": "//WORKER_LIST",
     "//activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
     "/activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
     "$activate_reya_nostr_bridge": "//ACTIVATE_REYA_NOSTR_BRIDGE",
