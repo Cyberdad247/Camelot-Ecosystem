@@ -46,7 +46,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg"}
 
 
 def _banner() -> None:
@@ -481,6 +481,76 @@ def _cmd_s2s(argv: list[str]) -> None:
             print(f"  Transport:   Agora SD-RTN ({r['channel_name']})")
 
 
+def _cmd_observatory(argv: list[str]) -> None:
+    """Project Speculum: The Glass Observatory & Living Compendium CLI.
+
+    Usage: camelot observatory [--glass|--rpg|--transcripts|--evals|--compendium|--json]
+    """
+    import argparse
+    parser = argparse.ArgumentParser(prog="camelot observatory", description="Camelot Glass Observatory & Living Compendium")
+    parser.add_argument("--glass", action="store_true", help="Display full read-only Glass Wall HUD")
+    parser.add_argument("--rpg", action="store_true", help="Display Sovereign RPG leaderboard and mastery stats")
+    parser.add_argument("--transcripts", action="store_true", help="Display recent conversational transcripts")
+    parser.add_argument("--evals", action="store_true", help="Display autonomous implementation evaluation grades")
+    parser.add_argument("--compendium", action="store_true", help="Print the Living Compendium markdown directly")
+    parser.add_argument("--json", action="store_true", help="Output machine-readable JSON")
+    parsed = parser.parse_args(argv)
+
+    from control_plane.observatory.glass_observatory import get_glass_observatory
+    obs = get_glass_observatory()
+
+    if parsed.compendium:
+        print(obs.get_compendium_markdown())
+        return
+
+    view_type = "all"
+    if parsed.rpg:
+        view_type = "rpg"
+    elif parsed.transcripts:
+        view_type = "transcripts"
+    elif parsed.evals:
+        view_type = "evaluations"
+
+    data = obs.get_glass_wall_view(view_type)
+
+    if parsed.json:
+        print(json.dumps(data, indent=2))
+        return
+
+    print("=" * 72)
+    print("  [GLASS WALL] THE IMPENETRABLE SOVEREIGN OBSERVATORY")
+    print("  Status: LOCKED READ-ONLY (WORM) // Zero Hotpath Contention")
+    print(f"  Compendium: {data['compendium_path']}")
+    print("=" * 72)
+
+    if "leaderboard" in data:
+        print("\n[SOVEREIGN TENANT XP LEADERBOARD]:")
+        for t in data["leaderboard"]["tenants"]:
+            print(f"  - {t['tenant_id']:<15} {t['title']:<22} Lvl {t['sovereign_level']:<3} ({t['xp']:,} XP, {t['xp_to_next']:,} to next) [{t['dialogue_turns']} turns]")
+        print("\n[ROUND TABLE KNIGHT MASTERY]:")
+        for k in data["leaderboard"]["knights"]:
+            ach = f" [{', '.join(k['achievements'])}]" if k['achievements'] else ""
+            print(f"  - {k['knight_id']:<18} {k['title']:<24} Lvl {k['level']:<3} ({k['xp']:,} XP) [Turns: {k['turns_transcribed']}, Evals: {k['tasks_evaluated']}]{ach}")
+
+    if "transcripts" in data:
+        print("\n[RECENT CONVERSATIONAL TRANSCRIPTS]:")
+        if not data["transcripts"]:
+            print("  (No transcripts captured yet)")
+        for tr in data["transcripts"][-5:]:
+            print(f"  [{tr['turn_id']}] {tr['tenant_id']} -> {tr['knight_id']} (+{tr['xp_awarded']} XP | TTFA: {tr['ttfa_ms']}ms)")
+            print(f"    Prompt:   \"{tr['user_prompt']}\"")
+            print(f"    Response: \"{tr['knight_response']}\"")
+
+    if "evaluations" in data:
+        print("\n[AUTONOMOUS IMPLEMENTATION EVALUATIONS]:")
+        if not data["evaluations"]:
+            print("  (No evaluations recorded yet)")
+        for ev in data["evaluations"][-5:]:
+            print(f"  [{ev['eval_id']}] {ev['knight_id']} -> Rank [{ev['grade']}: {ev['score']}/100] (+{ev['xp_awarded']} XP)")
+            print(f"    Task:     {ev['task_description']}")
+            print(f"    Verdict:  {ev['rationale']}")
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -497,6 +567,10 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("observatory", "glass", "compendium", "rpg"):
+        _cmd_observatory(args[1:])
+        return
+
     if first in ("s2s", "voice-s2s", "omni-s2s"):
         _cmd_s2s(args[1:])
         return

@@ -1,0 +1,81 @@
+{
+  "schema_version": "camelot.observatory-rpg/1",
+  "last_updated": "2026-09-21T01:47:20.330745+00:00",
+  "knights": {
+    "boris_architect": {
+      "knight_id": "boris_architect",
+      "level": 2,
+      "xp": 100,
+      "xp_to_next": 183,
+      "title": "Squire",
+      "turns_transcribed": 2,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "codex_implementer": {
+      "knight_id": "codex_implementer",
+      "level": 2,
+      "xp": 247,
+      "xp_to_next": 36,
+      "title": "Squire",
+      "turns_transcribed": 2,
+      "tasks_evaluated": 1,
+      "average_score": 98.2,
+      "skills": {},
+      "achievements": [
+        "Flawless Kinetic S-Rank"
+      ]
+    },
+    "sir_codex": {
+      "knight_id": "sir_codex",
+      "level": 2,
+      "xp": 120,
+      "xp_to_next": 163,
+      "title": "Squire",
+      "turns_transcribed": 3,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "reya_companion": {
+      "knight_id": "reya_companion",
+      "level": 2,
+      "xp": 220,
+      "xp_to_next": 63,
+      "title": "Squire",
+      "turns_transcribed": 5,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "alloy": {
+      "knight_id": "alloy",
+      "level": 1,
+      "xp": 90,
+      "xp_to_next": 10,
+      "title": "Squire",
+      "turns_transcribed": 2,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    }
+  },
+  "tenants": {
+    "Vizion Sky": {
+      "tenant_id": "Vizion Sky",
+      "sovereign_level": 4,
+      "xp": 630,
+      "xp_to_next": 170,
+      "title": "Sovereign Seeker",
+      "dialogue_turns": 14,
+      "missions_dispatched": 0,
+      "resonance_affinity": "Omni-Sovereign",
+      "milestones": []
+    }
+  }
+}

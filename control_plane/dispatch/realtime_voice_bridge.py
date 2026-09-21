@@ -945,6 +945,24 @@ class RealtimeVoiceSession:
         events.append(resp_done)
         await self.emit_event(resp_done)
 
+        # Fire-and-forget tap into Glass Observatory (Project Speculum)
+        try:
+            from control_plane.observatory.glass_observatory import get_glass_observatory
+            obs = get_glass_observatory()
+            obs.tap_interaction(
+                tenant_id="Vizion Sky",
+                knight_id=self.config.voice,
+                user_prompt=transcript,
+                knight_response=reply_text,
+                metrics={
+                    "ttfa_ms": self.metrics.ttfa_ms,
+                    "ttft_ms": self.metrics.ttft_ms,
+                    "radix_cache_hit_rate": self.metrics.radix_cache_hit_rate_pct,
+                },
+            )
+        except Exception:
+            pass
+
         self.in_response = False
         return events
 

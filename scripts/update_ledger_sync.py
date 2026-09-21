@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1860",
-            "task": "Omni Speech-to-Speech (S2S) Ecosystem Activation: Antigravity CLI FastMCP Tools (omni_s2s_turn, omni_s2s_status) & Camelot-OS Global CLI (camelot s2s)",
-            "author": "SIR_HELIOS / SIR_SONUS / SIR_CODEX / MERLIN_Ω / SIR_HELIO / ARTHUR_OMEGA",
+            "id": "1861",
+            "task": "Project Speculum: The Glass Observatory & Autonomous Living Compendium (Ω_GLASS_WALL_COMPENDIUM): WORM Read-Only Tap, Interaction Transcription, 5-Axes Kinetic Evaluation & Sovereign RPG Mastery Engine",
+            "author": "ANYA_Ω / MERLIN_Ω / SIR_HELIOS / SIR_LUKAS / SIR_SONUS / ARTHUR_OMEGA",
             "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
-            "notes": "Extended both Antigravity CLI and Camelot-OS Global CLI with live Omni S2S control plane capabilities: (1) Added omni_s2s_turn and omni_s2s_status tools to control_plane/mcp/cloudbrain_mcp_server.py and registered corresponding schemas in .gemini/antigravity-cli/mcp/camelot-cloudbrain/, enabling Antigravity to trigger real-time S2S inference and monitor Radix/Agora telemetry, (2) Implemented camelot s2s subcommand in bin/camelot.py supporting prompt query execution, knight persona selection (--knight), Agora channel configuration (--channel), 100ms chunked prefill simulation (--chunked), multi-turn dialog (--turns), machine output (--json), and live transport statistics (--stats), (3) Authored test_antigravity_and_camelot_cli_s2s_integration in tests/test_omni_s2s_assimilation.py passing 11/11 tests and 69/69 across the combined voice regression suite, (4) Verified apps/pwa typecheck and parity gates (check_omnivoice_router_build.py, check_generated_artifact_parity.py), (5) Persisted facts into MemCastle KNN store (Row ID 552) and Graphiti temporal knowledge graph (Fact 10) under SIR_HELIOS, and (6) Synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-20 23:35 UTC"
+            "notes": "Architected, verified, and sealed Project Speculum providing an autonomous, completely decoupled out-of-band monitoring and living compendium layer: (1) Engineered GlassObservatory in control_plane/observatory/glass_observatory.py with non-blocking event tap, interaction transcription, autonomous 5-axes kinetic evaluation (AST form, latency/scarcity, test integrity, zero interference, sovereign alignment), and quantified RPG XP progression for Knights and Sovereign Tenants, (2) Auto-compiled Living Compendium in 03_VAULT/runtime_state/observatory/LIVING_COMPENDIUM.md with strict Write-Once-Read-Many (WORM) impenetrable glass wall semantics (zero write/delete mutations accessible to Knights or Tenants), (3) Wired fire-and-forget background taps into RealtimeVoiceSession (control_plane/dispatch/realtime_voice_bridge.py) and OmniS2SEngine (02_FORGE/assimilation/omni_s2s/omni_s2s_engine.py), ensuring zero hotpath bloat and zero ledger contention, (4) Implemented camelot observatory CLI in bin/camelot.py (--glass, --rpg, --transcripts, --evals, --compendium, --json) and FastMCP tool read_glass_observatory in control_plane/mcp/cloudbrain_mcp_server.py with registered Antigravity schemas, (5) Authored test suite tests/test_glass_observatory.py passing 6/6 tests and 75/75 across the combined suite, (6) Verified parity gates and synchronized all 4 PROVENANCE_LEDGER.md mirrors with exact byte-hash parity. — 2026-09-21 01:50 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1859" in line:
+            if "| 1860" in line:
                 insert_at = i
                 break
         

@@ -152,6 +152,15 @@ class OmniS2SEngine:
         out_pcm = pcm_bytes[:640] if len(pcm_bytes) >= 640 else b"\x00" * 640
         self.agora_bridge.pull_egress_frame(out_pcm)
 
+        self._tap_to_observatory(
+            knight_id=knight_id,
+            prompt=transcript_hint,
+            response=response_text,
+            ttfa_ms=ttfa_ms,
+            hit_rate=hit_rate,
+            prosody=prosody_info,
+        )
+
         return S2STurnResult(
             status="S2S_TURN_COMPLETED",
             channel_name=self.agora_bridge.config.channel_name,
@@ -230,6 +239,15 @@ class OmniS2SEngine:
         out_pcm = bytes(full_audio_bytes[:640]) if len(full_audio_bytes) >= 640 else b"\x00" * 640
         self.agora_bridge.pull_egress_frame(out_pcm)
 
+        self._tap_to_observatory(
+            knight_id=knight_id,
+            prompt=transcript_hint,
+            response=response_text,
+            ttfa_ms=ttfa_ms,
+            hit_rate=hit_rate,
+            prosody=prosody_info,
+        )
+
         return S2STurnResult(
             status="S2S_CHUNKED_TURN_COMPLETED",
             channel_name=self.agora_bridge.config.channel_name,
@@ -248,6 +266,33 @@ class OmniS2SEngine:
             speculative_overlap_ms=round(speculative_overlap_ms, 1),
             is_chunked_prefill=True,
         )
+
+    def _tap_to_observatory(
+        self,
+        knight_id: str,
+        prompt: str,
+        response: str,
+        ttfa_ms: float,
+        hit_rate: float,
+        prosody: Dict[str, Any],
+    ) -> None:
+        """Fire-and-forget tap into the Glass Observatory living compendium."""
+        try:
+            from control_plane.observatory.glass_observatory import get_glass_observatory
+            obs = get_glass_observatory()
+            obs.tap_interaction(
+                tenant_id="Vizion Sky",
+                knight_id=knight_id,
+                user_prompt=prompt,
+                knight_response=response,
+                metrics={
+                    "estimated_ttfa_ms": ttfa_ms,
+                    "radix_cache_hit_rate": hit_rate,
+                    "prosody_summary": prosody,
+                },
+            )
+        except Exception:
+            pass
 
     def _generate_response(self, text: str, knight_id: str, prosody: Dict[str, Any]) -> str:
         is_urgent = prosody.get("is_urgent", False)

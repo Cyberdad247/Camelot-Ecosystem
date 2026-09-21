@@ -337,6 +337,17 @@ def omni_s2s_status() -> dict:
         return {"error": str(e), "status": "OMNI_S2S_ERROR"}
 
 
+@mcp_server.tool()
+def read_glass_observatory(view_type: str = "all") -> dict:
+    """Read the impenetrable Glass Observatory (transcripts, RPG leaderboard, evaluations, and compendium path)."""
+    try:
+        from control_plane.observatory.glass_observatory import get_glass_observatory
+        obs = get_glass_observatory()
+        return obs.get_glass_wall_view(view_type=view_type)
+    except Exception as e:
+        return {"error": str(e), "status": "OBSERVATORY_ERROR"}
+
+
 if __name__ == "__main__":
     mcp_server.run()
 
