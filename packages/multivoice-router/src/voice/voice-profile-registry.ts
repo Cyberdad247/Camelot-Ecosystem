@@ -1,6 +1,89 @@
 export type VoiceEngine = 'vibevoice_realtime' | 'kokoro_onnx' | 'piper' | 'gemini_live' | 'suno' | 'udio' | 'notebooklm_audio' | 'stub';
 export type VoiceMode = 'single' | 'council' | 'podcast' | 'automation';
 
+export interface VoiceCloningConfig {
+  engine: VoiceEngine;
+  modelId: string;
+  weightsPath: string;
+  referenceAudioSample: string;
+  speakerEmbeddingDim: number;
+  cloningSimilarityScore: number;
+  pitchOffsetSemitones: number;
+  tempoMultiplier: number;
+}
+
+export interface FivePillarDialectConfig {
+  pillar1_pitchContour: {
+    basePitchHz: number;
+    deltaPitchHz: number;
+    f0Trajectory: number[];
+    jitterVariance: number;
+    hnrDb: number;
+  };
+  pillar2_intonationAndCadence: {
+    intonationSlope: number; // dF0/dt
+    speechCadenceWpm: number;
+    syllabicRhythm: number[];
+  };
+  pillar3_rmsEnergyDynamics: {
+    rmsEnergyDb: number;
+    energyTier: 'QUIET' | 'CONVERSATIONAL' | 'EMPHATIC';
+    dynamicRangeRatio: number;
+    breathinessCurve: number;
+  };
+  pillar4_conversationalBackchanneling: {
+    backchannelProbability: number;
+    activeTokens: string[];
+    bargeInAcousticThresholdDb: number;
+    nonDestructiveDuplex: boolean;
+  };
+  pillar5_adaptiveTurnTakingAndVisemes: {
+    adaptiveSilenceThresholdMs: number;
+    visemeFps: number;
+    visemeBlendWeights: Record<string, number>;
+    lipSyncLatencyMs: number;
+  };
+}
+
+export interface KnightCharacterSheetConfig {
+  sparkId: string;
+  layer: string;
+  role: string;
+  summoningRune: string;
+  cloudBrainUuid: string;
+  vfsPath: string;
+  mempalaceWing: string;
+  openVikingNode: string;
+  behavioralContract: string;
+  oceanVector: { O: number; C: number; E: number; A: number; N: number };
+  domainTags: string[];
+}
+
+export interface KnightRpgCodexConfig {
+  level: number;
+  xp: number;
+  xpToNext: number;
+  title: string;
+  turnsTranscribed: number;
+  tasksEvaluated: number;
+  averageScore: number;
+  achievements: string[];
+}
+
+export interface KnightReyaFabricConfig {
+  handshakeStatus: 'APPROVED_LEASE' | 'HITL_GUIDED_ALPHA_OMEGA' | 'HANDSHAKE_REQUIRED' | 'SOVEREIGN_ROOT';
+  autonomyTier: 'SOVEREIGN_ROOT' | 'HITL_GUIDED_ALPHA_OMEGA' | 'MANUAL_APPROVAL_REQUIRED';
+  leaseActive: boolean;
+  leaseExpiresAt: string | null;
+  dualAttribution: {
+    memcastlePartition: string;
+    graphitiPartition: string;
+    observatoryXpRecipient: string;
+    kineticFabric: 'REYA_EDGE_FABRIC';
+  };
+  maxEdgeMemoryMb: number;
+}
+
 export interface VoiceProfile {
   speakerId: string;
   knightId: string;
@@ -9,6 +92,11 @@ export interface VoiceProfile {
   style: string;
   allowedModes: VoiceMode[];
   safetyNotes: string[];
+  voiceCloning?: VoiceCloningConfig;
+  fivePillars?: FivePillarDialectConfig;
+  characterSheet?: KnightCharacterSheetConfig;
+  rpgProgression?: KnightRpgCodexConfig;
+  reyaFabricConnection?: KnightReyaFabricConfig;
 }
 
 export const VOICE_PROFILES: VoiceProfile[] = [
