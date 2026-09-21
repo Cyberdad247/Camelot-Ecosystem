@@ -348,6 +348,54 @@ def read_glass_observatory(view_type: str = "all") -> dict:
         return {"error": str(e), "status": "OBSERVATORY_ERROR"}
 
 
+@mcp_server.tool()
+def magsafe_process_audio(
+    audio_path: str,
+    target_knight: str = "SIR_HELIOS",
+    tenant_id: str = "Vizion Sky",
+    auto_dispatch: bool = False,
+) -> dict:
+    """Ingest MagSafe voice recording, perform SecondBrain summarization, tap Glass Observatory, and dispatch kinetic actions."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "magsafe" / "magsafe_audio_bridge.py"
+    spec = importlib.util.spec_from_file_location("magsafe_audio_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_magsafe_bridge()
+        res = bridge.process_audio_file(
+            audio_file_path=audio_path,
+            target_knight=target_knight,
+            tenant_id=tenant_id,
+            auto_dispatch=auto_dispatch,
+        )
+        return res.to_dict()
+    return {"error": "Failed to load magsafe_audio_bridge", "status": "MAGSAFE_ERROR"}
+
+
+@mcp_server.tool()
+def magsafe_status() -> dict:
+    """Return status of MagSafe Audio Sentinel, cgroups memory ceiling (<350MB), and Glass Observatory tap."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "magsafe" / "magsafe_audio_bridge.py"
+    spec = importlib.util.spec_from_file_location("magsafe_audio_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_magsafe_bridge()
+        return {
+            "status": "ARMED_AND_ACTIVE",
+            "memory_ceiling_mb": bridge.cgroups_memory_max_mb,
+            "recorded_sessions": len(bridge.get_sessions()),
+            "glass_observatory_tap": "ACTIVE" if mod.get_glass_observatory is not None else "INACTIVE",
+            "reya_fabric_layer": "ACTIVE" if mod.get_reya_fabric is not None else "INACTIVE",
+            "handshake_gate": "ACTIVE" if mod.get_handshake_gate is not None else "INACTIVE",
+        }
+    return {"error": "Failed to load magsafe_audio_bridge", "status": "MAGSAFE_ERROR"}
+
+
 if __name__ == "__main__":
     mcp_server.run()
 

@@ -175,3 +175,17 @@ class TestMagsafeRunicAndCliIntegration:
         assert res.metadata["status"] == "SUCCESS"
         assert len(res.metadata["action_items"]) >= 1
         assert res.metadata["action_items"][0]["dispatched"] is True
+
+    def test_fastmcp_magsafe_tools(self, tmp_path):
+        from control_plane.mcp.cloudbrain_mcp_server import magsafe_status, magsafe_process_audio
+        st = magsafe_status()
+        assert st["status"] == "ARMED_AND_ACTIVE"
+        assert st["memory_ceiling_mb"] == 350.0
+
+        memo = tmp_path / "mcp_memo.txt"
+        memo.write_text("Task: Run tests on cloudbrain FastMCP.", encoding="utf-8")
+        res = magsafe_process_audio(str(memo), target_knight="SIR_HELIOS")
+        assert res["session_id"].startswith("magsafe_")
+        assert len(res["action_items"]) >= 1
+        assert res["tenant_xp_awarded"] > 0
+

@@ -14,6 +14,7 @@ import {
 import { useBifrost } from '../context/BifrostContext';
 import { FivePillarDialectVisualizer } from './voice/FivePillarDialectVisualizer';
 import { KnightCharacterSheetModal } from './knights/KnightCharacterSheetModal';
+import { MagsafeRecorderCard } from './voice/MagsafeRecorderCard';
 
 interface Props {
   activeTenantId: string;
@@ -34,7 +35,7 @@ export function MultivoiceRouterCockpit({
   const [audioLatencyMs, setAudioLatencyMs] = useState<number>(18);
   const [waveformBars, setWaveformBars] = useState<number[]>([15, 30, 60, 45, 80, 50, 95, 40, 70, 25, 45, 20]);
   const [inputPrompt, setInputPrompt] = useState<string>('');
-  const [activeCockpitTab, setActiveCockpitTab] = useState<'CONSOLE' | 'FIVE_PILLARS' | 'CLONING_SPEC'>('CONSOLE');
+  const [activeCockpitTab, setActiveCockpitTab] = useState<'CONSOLE' | 'FIVE_PILLARS' | 'CLONING_SPEC' | 'MAGSAFE_EDGE'>('CONSOLE');
   const [isCharacterSheetOpen, setIsCharacterSheetOpen] = useState<boolean>(false);
   const [transcripts, setTranscripts] = useState<Array<{ sender: string; text: string; time: string }>>([
     {
@@ -225,6 +226,18 @@ export function MultivoiceRouterCockpit({
           <span>⚔️</span>
           <span>Voice Cloning & Model Weights</span>
         </button>
+        <button
+          type="button"
+          onClick={() => setActiveCockpitTab('MAGSAFE_EDGE')}
+          className={`px-4 py-2 font-bold uppercase transition-all border-b-2 -mb-px flex items-center gap-2 ${
+            activeCockpitTab === 'MAGSAFE_EDGE'
+              ? 'border-gold text-gold-royal bg-gold/10'
+              : 'border-transparent text-white/50 hover:text-white/80'
+          }`}
+        >
+          <span>🧲</span>
+          <span>MagSafe Ambient Dispatcher</span>
+        </button>
       </div>
 
       {/* ── View 1: Console & Duplex Stream ────────────────────── */}
@@ -373,6 +386,11 @@ export function MultivoiceRouterCockpit({
             </div>
           </div>
         </div>
+      )}
+
+      {/* ── View 4: MagSafe Ambient Recorder & Action Dispatcher ── */}
+      {activeCockpitTab === 'MAGSAFE_EDGE' && (
+        <MagsafeRecorderCard />
       )}
 
       {/* ── Round Table Persona Selector Matrix ─────────────────── */}
