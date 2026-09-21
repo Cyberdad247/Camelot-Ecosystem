@@ -46,7 +46,7 @@ if not _FROZEN:
 __version__ = "400.1.0"
 _WARP_GATE  = "1.0.0"
 
-_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg", "cua", "computer-use", "reya-cua", "reya", "magsafe", "magsafe-audio", "magsafe-bridge"}
+_WRAPPER_SUBCOMMANDS = {"configure", "config", "status", "boot", "dev", "hermes", "vps-hermes", "install", "build", "update", "warp", "shell-setup", "keys", "cockpit", "completion", "moto", "s26", "excalibur", "tmux", "vps-tmux", "s2s", "voice-s2s", "omni-s2s", "observatory", "glass", "compendium", "rpg", "cua", "computer-use", "reya-cua", "reya", "magsafe", "magsafe-audio", "magsafe-bridge", "lane", "lanes", "helios-lane"}
 
 
 def _banner() -> None:
@@ -1259,6 +1259,13 @@ def _cmd_worker(argv: list[str]) -> None:
         return
 
 
+def _cmd_lane(argv: list[str]) -> None:
+    """Manage isolated Helios parallel agent worktrees."""
+    from scripts.helios_lane import main as lane_main
+    sys.argv = ["helios_lane"] + argv
+    raise SystemExit(lane_main())
+
+
 def main() -> None:
     args = sys.argv[1:]
 
@@ -1275,6 +1282,10 @@ def main() -> None:
     first = args[0].lstrip("-").lower() if not args[0].startswith("-") else ""
 
     # Route sub-commands
+    if first in ("lane", "lanes", "helios-lane"):
+        _cmd_lane(args[1:])
+        return
+
     if first in ("worker", "workers", "northstar", "sandbox"):
         _cmd_worker(args[1:])
         return

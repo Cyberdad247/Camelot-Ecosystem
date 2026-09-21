@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.camelot.os/ukg/camelot-ukg-3.json",
+  "title": "CamelotUKG3Node",
+  "description": "Universal Knowledge Graph (vKG) Crystal Capsule Contract Family 3.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "node_id",
+    "vfs_coordinate",
+    "glyph_handle",
+    "glyph_operator",
+    "seed",
+    "decompression_dictionary_ref",
+    "ontology_version",
+    "provenance_dag",
+    "adoption_verdicts",
+    "uncertainty_markers",
+    "architectural_lineage",
+    "doctrine",
+    "source_digests",
+    "compatibility_metadata"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-ukg/3"
+    },
+    "node_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_\\-\\.:]+$"
+    },
+    "vfs_coordinate": {
+      "type": "string",
+      "pattern": "^vfs://worldtree/"
+    },
+    "glyph_handle": {
+      "type": "string",
+      "description": "Human/LLM-facing handle (e.g. [✓//NORTHSTAR])"
+    },
+    "glyph_operator": {
+      "type": "string",
+      "enum": ["✓", "~", "?", "!", "ø"],
+      "description": "✓ qualified, ~ provisional, ? unresolved, ! contested, ø rejected"
+    },
+    "seed": {
+      "type": "string",
+      "description": "Cryptographic seed or origin hash"
+    },
+    "decompression_dictionary_ref": {
+      "type": "string",
+      "description": "URI or digest pointing to canonical ukg-dictionary/1"
+    },
+    "ontology_version": {
+      "type": "string",
+      "description": "Target ontology version (e.g. v10001.00-CYBERTRONIA)"
+    },
+    "provenance_dag": {
+      "type": "object",
+      "required": ["parent_nodes", "edges", "lineage_height", "merkle_root"],
+      "properties": {
+        "parent_nodes": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["source", "target", "relation"],
+            "properties": {
+              "source": { "type": "string" },
+              "target": { "type": "string" },
+              "relation": { "type": "string" }
+            }
+          }
+        },
+        "lineage_height": { "type": "integer", "minimum": 0 },
+        "merkle_root": { "type": "string" }
+      }
+    },
+    "adoption_verdicts": {
+      "type": "object",
+      "required": ["synthetos", "merlin", "anya", "sentinel"],
+      "properties": {
+        "synthetos": { "type": "string", "enum": ["VERIFIED", "UNVERIFIED", "REJECTED"] },
+        "merlin": { "type": "string", "enum": ["PASS", "BLOCK", "PROVISIONAL"] },
+        "anya": { "type": "string", "enum": ["ANYA_IS_THE_GATE_CLEARED", "REJECTED"] },
+        "sentinel": { "type": "string", "enum": ["LEASE_GRANTED", "LEASE_DENIED"] },
+        "gideon": { "type": "string", "enum": ["pass", "block", "pending"] },
+        "arthur": { "type": "string", "enum": ["RATIFIED", "VETOED", "PENDING"] }
+      }
+    },
+    "uncertainty_markers": {
+      "type": "object",
+      "required": ["confidence_score", "contested_claims", "open_questions"],
+      "properties": {
+        "confidence_score": { "type": "number", "minimum": 0.0, "maximum": 1.0 },
+        "contested_claims": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "open_questions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "architectural_lineage": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "23-node canonical lineage trail"
+    },
+    "doctrine": {
+      "type": "string",
+      "enum": ["1_TO_M_TO_A", "FAST_PATH_IMMUTABLE", "SOVEREIGN_OVERRIDE"]
+    },
+    "source_digests": {
+      "type": "object",
+      "additionalProperties": { "type": "string" },
+      "description": "Mapping of relative file paths to SHA-256 digests"
+    },
+    "compatibility_metadata": {
+      "type": "object",
+      "required": ["memory_ceiling_mb", "cpu_quota_pct", "zero_hotpath_bloat"],
+      "properties": {
+        "memory_ceiling_mb": { "type": "number", "maximum": 350.0 },
+        "cpu_quota_pct": { "type": "number", "maximum": 60.0 },
+        "zero_hotpath_bloat": { "type": "boolean" },
+        "complexity_points": { "type": "integer", "maximum": 25 }
+      }
+    }
+  }
+}

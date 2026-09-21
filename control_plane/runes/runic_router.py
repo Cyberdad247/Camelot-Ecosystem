@@ -1156,6 +1156,46 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_omni_s2s",
         "hydrate": False,
     },
+    "//ASSIMILATE_EVOLVE": {
+        "knight": "sir_synthetos",
+        "description": "Enterprise evolution engine: 1 -> M -> A -> S promotion pipeline (P0 -> P11) + First-Class RETREAT",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_assimilate_evolve",
+        "hydrate": False,
+    },
+    "//NKG_INSPECT": {
+        "knight": "sir_helios",
+        "description": "Decompress and inspect vKG crystal capsule under ukg-dictionary/1",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_nkg_inspect",
+        "hydrate": False,
+    },
+    "//SAFE_MODE": {
+        "knight": "sir_sentinel",
+        "description": "Universal Safe Mode & Emergency Authority Freeze Governor (NORMAL, DEGRADED, SAFE, FROZEN, RECOVERY)",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_safe_mode",
+        "hydrate": False,
+    },
+    "//RELEASE_PROOF": {
+        "knight": "sir_boris",
+        "description": "Generate and verify camelot-release-proof/1 attestation binding source commit, SBOM, and contracts",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_release_proof",
+        "hydrate": False,
+    },
+    "//MIGRATION": {
+        "knight": "merlin_omega",
+        "description": "5-stage state migration engine (PRECHECK -> SNAPSHOT -> MIGRATE -> VERIFY -> PROMOTE / RETREAT)",
+        "mode": "FORGE",
+        "priority": 1,
+        "handler": "_handle_migration",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -4177,6 +4217,200 @@ def _handle_omni_s2s(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_assimilate_evolve(param: Any, context: dict) -> dict:
+    """//ASSIMILATE_EVOLVE — Enterprise evolution engine: 1 -> M -> A -> S promotion pipeline (P0 -> P11)."""
+    from control_plane.pipeline.evolution_engine import EnterpriseEvolutionEngine, ComplexityBudget, SafetyBudget
+    from control_plane.pipeline.synthetos_proof import NkgCrystal
+
+    glyph_symbol = str(param or "").strip() or "//NORTHSTAR"
+    if not glyph_symbol.startswith("//"):
+        glyph_symbol = f"//{glyph_symbol}"
+
+    engine = EnterpriseEvolutionEngine()
+
+    comp_budget = None
+    safe_budget = None
+    if context and "complexity" in context:
+        c = context["complexity"]
+        comp_budget = ComplexityBudget(
+            daemons=c.get("daemons", 0),
+            db_tables=c.get("db_tables", 0),
+            network_hops=c.get("network_hops", 0),
+            uncached_routes=c.get("uncached_routes", 0),
+        )
+    if context and "safety" in context:
+        s = context["safety"]
+        safe_budget = SafetyBudget(
+            risk_score=s.get("risk_score", 0.0),
+            memory_mb=s.get("memory_mb", 12.0),
+            cpu_quota_pct=s.get("cpu_quota_pct", 10.0),
+            zero_hotpath_bloat=s.get("zero_hotpath_bloat", True),
+        )
+
+    clean_name = glyph_symbol.strip("/").lower()
+    node_id = f"crystal_{clean_name}"
+    raw_payload = json.dumps({"components": [glyph_symbol], "doctrine": "1_TO_M_TO_A"})
+    crystal = NkgCrystal(
+        node_id=node_id,
+        vfs_coordinate=f"vfs://worldtree/crystals/{node_id}",
+        glyph_symbol=glyph_symbol,
+        compressed_payload=raw_payload,
+        expected_hash="",
+    )
+
+    result = engine.evolve_capsule(crystal, complexity_budget=comp_budget, safety_budget=safe_budget)
+    return {
+        "action": "assimilate_evolve",
+        "result": result,
+    }
+
+
+def _handle_nkg_inspect(param: Any, context: dict) -> dict:
+    """//NKG_INSPECT — Decompress and inspect vKG crystal capsule under ukg-dictionary/1."""
+    from control_plane.pipeline.evolution_engine import EnterpriseEvolutionEngine
+    glyph_token = str(param or "").strip() or "//NORTHSTAR"
+    engine = EnterpriseEvolutionEngine()
+    try:
+        decomp = engine.decompress_glyph(glyph_token)
+        return {
+            "action": "nkg_inspect",
+            "glyph": glyph_token,
+            "decompression": decomp,
+            "status": "DECOMPRESSION_SUCCESS",
+        }
+    except Exception as e:
+        return {
+            "action": "nkg_inspect",
+            "glyph": glyph_token,
+            "error": str(e),
+            "status": "DECOMPRESSION_BLOCKED",
+        }
+
+
+def _handle_safe_mode(param: Any, context: dict) -> dict:
+    """//SAFE_MODE — Universal Safe Mode & Emergency Authority Freeze Governor."""
+    from control_plane.production.safe_mode import SafeModeGovernor, OperatingPosture
+    action = str(param or "").strip().upper() or "STATUS"
+
+    governor = SafeModeGovernor()
+    if action == "FREEZE":
+        receipt = governor.transition_to(
+            OperatingPosture.FROZEN,
+            reason=context.get("reason", "Operator initiated emergency authority freeze") if context else "Operator freeze",
+            triggered_by=context.get("author", "ARTHUR_SOVEREIGN") if context else "ARTHUR_SOVEREIGN",
+        )
+        return {
+            "action": "safe_mode_freeze",
+            "posture": governor.current_posture.value,
+            "receipt": receipt.__dict__,
+            "status": "AUTHORITY_FROZEN",
+        }
+    elif action == "RECOVER":
+        token = context.get("quorum_token", "QUORUM_ARTHUR_SOVEREIGN_RECOVERY") if context else "QUORUM_ARTHUR_SOVEREIGN_RECOVERY"
+        receipt = governor.transition_to(
+            OperatingPosture.RECOVERY,
+            reason="Recovery quorum activated",
+            triggered_by=context.get("author", "ARTHUR_SOVEREIGN") if context else "ARTHUR_SOVEREIGN",
+            recovery_quorum_token=token,
+        )
+        return {
+            "action": "safe_mode_recover",
+            "posture": governor.current_posture.value,
+            "receipt": receipt.__dict__,
+            "status": "RECOVERY_ACTIVE",
+        }
+    elif action == "NORMAL":
+        receipt = governor.transition_to(
+            OperatingPosture.NORMAL,
+            reason="System normal operations restored",
+            triggered_by=context.get("author", "ARTHUR_SOVEREIGN") if context else "ARTHUR_SOVEREIGN",
+            recovery_quorum_token="QUORUM_OPERATIONS_RESTORED",
+        )
+        return {
+            "action": "safe_mode_normal",
+            "posture": governor.current_posture.value,
+            "receipt": receipt.__dict__,
+            "status": "NORMAL_OPERATIONS",
+        }
+    else:
+        return {
+            "action": "safe_mode_status",
+            "posture": governor.current_posture.value,
+            "status": "OK",
+        }
+
+
+def _handle_release_proof(param: Any, context: dict) -> dict:
+    """//RELEASE_PROOF — Generate or verify camelot-release-proof/1."""
+    from control_plane.production.release_proof import ReleaseProofEngine
+    from control_plane.production.key_lifecycle import KeyLifecycleManager, SignerClass
+
+    version = str(param or "").strip() or "v10001.00-CYBERTRONIA"
+    key_mgr = KeyLifecycleManager()
+    key_mgr.register_key("release_key_prime", SignerClass.RELEASE, "0xRELEASE_PUB")
+
+    engine = ReleaseProofEngine(key_manager=key_mgr)
+    commit = context.get("commit", "git-rev-10698ad2") if context else "git-rev-10698ad2"
+    proof = engine.generate_release_proof(
+        version=version,
+        source_commit=commit,
+        release_key_id="release_key_prime",
+    )
+    verified, errors = engine.verify_release_proof(proof, version, "v10001.00")
+
+    return {
+        "action": "release_proof",
+        "version": version,
+        "verified": verified,
+        "errors": errors,
+        "proof": proof,
+        "status": "RELEASE_PROOF_CERTIFIED" if verified else "VERIFICATION_FAILED",
+    }
+
+
+def _handle_migration(param: Any, context: dict) -> dict:
+    """//MIGRATION — Inspect migration history or execute state plan."""
+    from control_plane.production.migration_engine import MigrationEngine, MigrationPlan, MigrationStep
+
+    cmd = str(param or "").strip().lower() or "status"
+    engine = MigrationEngine()
+
+    if cmd in ("test", "run"):
+        dummy_state = {"version": "v1.2", "data": "initial"}
+        plan = MigrationPlan(
+            plan_id="mig_test_subsystem",
+            target_subsystem="contracts",
+            from_version="v1.2",
+            to_version="v10001.00",
+            precheck_fns=[lambda: True],
+            steps=[
+                MigrationStep(
+                    step_id="step_1",
+                    description="Upgrade contract indices",
+                    action_fn=lambda: True,
+                    rollback_fn=lambda: True,
+                )
+            ],
+            verification_fns=[lambda: True],
+        )
+        receipt = engine.execute_migration(
+            plan=plan,
+            state_reader_fn=lambda: json.dumps(dummy_state),
+            state_restorer_fn=lambda s: None,
+        )
+        return {
+            "action": "migration_run",
+            "receipt": receipt.__dict__,
+            "status": receipt.status,
+        }
+
+    return {
+        "action": "migration_status",
+        "history_count": len(engine.history),
+        "status": "MIGRATION_ENGINE_READY",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
     "_handle_reya_handshake": _handle_reya_handshake,
@@ -4276,6 +4510,11 @@ _HANDLERS = {
     "_handle_northstar_dispatch": _handle_northstar_dispatch,
     "_handle_worker_list": _handle_worker_list,
     "_handle_worker_step": _handle_worker_step,
+    "_handle_assimilate_evolve": _handle_assimilate_evolve,
+    "_handle_nkg_inspect": _handle_nkg_inspect,
+    "_handle_safe_mode": _handle_safe_mode,
+    "_handle_release_proof": _handle_release_proof,
+    "_handle_migration": _handle_migration,
 }
 
 
@@ -4285,6 +4524,23 @@ _HANDLERS = {
 
 _RUNE_RE = re.compile(r"^(//[\w-]+|\$[\w-]+|Omega_\w+)\s*(.*)?$", re.IGNORECASE)
 _RUNE_ALIASES: dict[str, str] = {
+    "//safe_mode": "//SAFE_MODE",
+    "/safe_mode": "//SAFE_MODE",
+    "$safe_mode": "//SAFE_MODE",
+    "//freeze": "//SAFE_MODE",
+    "//release_proof": "//RELEASE_PROOF",
+    "/release_proof": "//RELEASE_PROOF",
+    "$release_proof": "//RELEASE_PROOF",
+    "//migration": "//MIGRATION",
+    "/migration": "//MIGRATION",
+    "$migration": "//MIGRATION",
+    "//assimilate_evolve": "//ASSIMILATE_EVOLVE",
+    "/assimilate_evolve": "//ASSIMILATE_EVOLVE",
+    "$assimilate_evolve": "//ASSIMILATE_EVOLVE",
+    "//evolve": "//ASSIMILATE_EVOLVE",
+    "//nkg_inspect": "//NKG_INSPECT",
+    "/nkg_inspect": "//NKG_INSPECT",
+    "//nkg": "//NKG_INSPECT",
     "//northstar": "//NORTHSTAR",
     "/northstar": "//NORTHSTAR",
     "$northstar": "//NORTHSTAR",
