@@ -1,32 +1,32 @@
 {
-    "name": "anya-lyte-pkg",
-    "version": "0.1.0",
-    "main": "index.js",
-    "scripts": {
-        "start": "expo start",
-        "android": "expo start --android",
-        "ios": "expo start --ios",
-        "web": "expo start --web",
-        "build": "echo 'Expo package typecheck skipped (heavy TS compilation); use typecheck and lint for CI'",
-        "lint": "tsc --noEmit",
-        "typecheck": "tsc --noEmit",
-        "clean": "rimraf dist"
-    },
-    "dependencies": {
-        "@camelot/anya-domain": "workspace:*",
-        "@tamagui/config": "latest",
-        "drizzle-orm": "latest",
-        "expo": "~50.0.21",
-        "expo-sqlite": "~13.2.2",
-        "expo-status-bar": "~1.11.1",
-        "lucide-react-native": "latest",
-        "react": "18.2.0",
-        "react-native": "0.73.2",
-        "tamagui": "latest"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.29.0",
-        "typescript": "^5.9.3"
-    },
-    "private": true
+  "name": "anya-lyte-pkg",
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "build": "echo 'Expo package typecheck skipped (heavy TS compilation); use typecheck and lint for CI'",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@camelot/anya-domain": "workspace:*",
+    "@tamagui/config": "latest",
+    "drizzle-orm": "latest",
+    "expo": "~50.0.21",
+    "expo-sqlite": "~13.2.2",
+    "expo-status-bar": "~1.11.1",
+    "lucide-react-native": "latest",
+    "react": "18.2.0",
+    "react-native": "0.73.2",
+    "tamagui": "latest"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "typescript": "^5.9.3"
+  },
+  "private": true
 }
