@@ -40,6 +40,22 @@ SESSION_CANDIDATES: List[Path] = [
 LIVE_PROBE_TIMEOUT_S = 20.0
 HELIOS_TISSUE_KNIGHT = "SIR_HELIO"  # hydration-canonical Helios id
 
+# Shelf discipline: NotebookLM caps sources per notebook. Standing rule —
+# distill-then-purge BEFORE ingesting, so the cap never silently eats sources.
+SHELF_CAP = 300
+SHELF_PRESSURE_AT = 270
+SHELF_NOTEBOOK_ID = "140101e0-bc2a-41c8-87c0-cd512f130387"  # Anya Omega governed shelf
+SHELF_RULE = "distill-then-purge before ingest: audit, evict D/F/dups, then push"
+
+
+def classify_shelf(count: int, cap: int = SHELF_CAP, pressure_at: int = SHELF_PRESSURE_AT) -> str:
+    """Shelf pressure state for a source count: OK | PRESSURE | FULL."""
+    if count >= cap:
+        return "FULL"
+    if count >= pressure_at:
+        return "PRESSURE"
+    return "OK"
+
 
 def _ensure_sys_path() -> None:
     for extra in (_CAMELOT_ROOT, _CAMELOT_ROOT / "01_KERNEL", _CAMELOT_ROOT / "vfs"):
@@ -132,6 +148,38 @@ def live_probe(timeout_s: float = LIVE_PROBE_TIMEOUT_S) -> Dict[str, Any]:
     return {"live": True, "notebook_count": len(notebooks)}
 
 
+def check_shelf(notebook_id: str = SHELF_NOTEBOOK_ID) -> Dict[str, Any]:
+    """Live shelf census for the governed notebook. Read-only; never raises."""
+    try:
+        _ensure_sys_path()
+        from notebooklm_client import _find_notebook_by_id, _open_client, _run_async  # noqa: PLC0415
+
+        async def _census():
+            async with _open_client() as client:
+                if not client:
+                    return None
+                nb = await _find_notebook_by_id(client, notebook_id)
+                if not nb:
+                    return None
+                sources = await client.sources.list(notebook_id)
+                return {"title": nb.title, "count": len(sources)}
+
+        result = _run_async(_census())
+        if not result:
+            return {"state": "UNKNOWN", "detail": "census unavailable"}
+        state = classify_shelf(result["count"])
+        return {
+            "state": state,
+            "notebook_id": notebook_id,
+            "title": result["title"],
+            "sources": result["count"],
+            "cap": SHELF_CAP,
+            "rule": SHELF_RULE,
+        }
+    except Exception as exc:  # noqa: BLE001
+        return {"state": "UNKNOWN", "detail": "%s: %s" % (type(exc).__name__, str(exc)[:150])}
+
+
 def tri_brain_consumers() -> Dict[str, Any]:
     """Static wiring map of the three NotebookLM consumers (no I/O)."""
     return {
@@ -185,6 +233,9 @@ def verify(live: bool = True, mirror_tissue: bool = True) -> Dict[str, Any]:
         "sdk_present": sdk,
         "live_verified": bool(probe.get("live")),
     }
+    shelf: Optional[Dict[str, Any]] = None
+    if probe.get("live"):
+        shelf = check_shelf()
     report = {
         "action": "helios_notebooklm_verify",
         "status": status,
@@ -194,6 +245,7 @@ def verify(live: bool = True, mirror_tissue: bool = True) -> Dict[str, Any]:
         "sdk_available": sdk,
         "probe": probe,
         "summary": summary,
+        "shelf": shelf,
         "tri_brain_consumers": tri_brain_consumers(),
         "remediation": session.get("remediation", ".venv\\Scripts\\notebooklm login") if status != "CONNECTED" else "",
     }

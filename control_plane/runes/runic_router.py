@@ -167,10 +167,11 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
     },
     "//ASSIMILATE": {
         "knight": "sir_helio",
-        "description": "Cloud Brain scour + CLAUDE.md enhancement",
+        "description": "CloudBrain scour: per-knight registry/tissue/Honcho readiness matrix (CLAUDE.md half retired with quarantine)",
         "mode": "ORACLE",
         "priority": 3,
         "handler": "_handle_assimilate",
+        "hydrate": False,
     },
     "//SCAVENGE": {
         "knight": "lady_apis",
@@ -213,6 +214,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "mode": "ORACLE",
         "priority": 2,
         "handler": "_handle_vps_hub",
+        "hydrate": False,
+    },
+    "//OMEGA_TRIAGE": {
+        "knight": "merlin_omega",
+        "description": "OMEGA Triage & Crucible pipeline: Anya triage -> Socrates dialectic -> firewall+Z3 fabrication -> 5-probe crucible -> seal",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_omega_triage",
         "hydrate": False,
     },
     "//TRIAGE": {
@@ -1618,7 +1627,47 @@ def _handle_genesis(param: str, context: dict) -> dict:
 
 
 def _handle_assimilate(param: str, context: dict) -> dict:
-    return {"action": "omega_assimilate", "source": "cloud_brain_scour", "target": "CLAUDE.md"}
+    """//ASSIMILATE — CloudBrain scour across the knight registry.
+
+    For every KNIGHT_NOTEBOOKS knight: notebook UUID registered, open-notebook
+    tissue present, Honcho L4 embedded. Reports ready/partial counts plus the
+    shortfall list. Read-only; mutates nothing.
+    """
+    import re as _re
+
+    for _extra in (CAMELOT_HOME, CAMELOT_HOME / "01_KERNEL"):
+        if str(_extra) not in sys.path:
+            sys.path.insert(0, str(_extra))
+    from control_plane.infra.honcho_bridge import honcho_bridge
+
+    _UUID_RE = _re.compile(r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$", _re.I)
+    try:
+        from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
+    except Exception as exc:
+        return {"action": "omega_assimilate", "status": "ERROR", "error": "registry unavailable: %s" % exc}
+    tissue_dir = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "open_notebook"
+    shortfall = []
+    ready = 0
+    for knight_id, notebook_id in KNIGHT_NOTEBOOKS.items():
+        kid = str(knight_id).upper()
+        if kid == "SIR_HELIOS":
+            kid = "SIR_HELIO"
+        checks = {
+            "uuid_registered": bool(_UUID_RE.match(str(notebook_id or ""))),
+            "tissue_present": (tissue_dir / ("%s_tissue.json" % kid.lower())).is_file(),
+            "honcho_embedded": honcho_bridge.is_knight_embedded(kid),
+        }
+        if all(checks.values()):
+            ready += 1
+        else:
+            shortfall.append({"knight_id": kid, "missing": sorted(k for k, v in checks.items() if not v)})
+    return {
+        "action": "omega_assimilate",
+        "status": "SCOURED",
+        "knights_total": len(KNIGHT_NOTEBOOKS),
+        "knights_ready": ready,
+        "shortfall": shortfall,
+    }
 
 
 def _handle_scavenge(param: str, context: dict) -> dict:
@@ -1640,6 +1689,30 @@ def _handle_scan(param: str, context: dict) -> dict:
 
 def _handle_status(param: str, context: dict) -> dict:
     return {"action": "system_status", "detail": "run: python -m control_plane.harness --status"}
+
+
+def _handle_omega_triage(param: str, context: dict) -> dict:
+    tokens = shlex.split(str(param or ""), posix=False) if param else []
+    no_seal = "--no-seal" in tokens
+    payload = str(param or "")
+    if no_seal:
+        payload = payload.replace("--no-seal", "").strip()
+    try:
+        from control_plane.infra.omega_triage_crucible import run
+
+        report = run(payload or "empty triage probe", seal=not no_seal)
+        crucible = report.get("crucible") or {}
+        dialectic = report.get("dialectic") or {}
+        return {
+            "action": "omega_triage_crucible",
+            "verdict": report.get("verdict"),
+            "seal": report.get("seal"),
+            "probes_passed": "%s/%s" % (crucible.get("passed"), crucible.get("total")),
+            "socratic_flaws": len(dialectic.get("socratic_flaws", [])),
+            "duration_s": report.get("duration_s"),
+        }
+    except Exception as exc:
+        return {"action": "omega_triage_crucible", "status": "ERROR", "error": str(exc)}
 
 
 def _handle_vps_hub(param: str, context: dict) -> dict:
@@ -4554,6 +4627,7 @@ _HANDLERS = {
     "_handle_scan": _handle_scan,
     "_handle_status": _handle_status,
     "_handle_vps_hub": _handle_vps_hub,
+    "_handle_omega_triage": _handle_omega_triage,
     "_handle_triage": _handle_triage,
     "_handle_think": _handle_think,
     "_handle_bifrost_lock": _handle_bifrost_lock,

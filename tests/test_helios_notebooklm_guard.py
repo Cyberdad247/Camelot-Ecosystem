@@ -110,6 +110,34 @@ class TestAuthFailureClassification(unittest.TestCase):
             self.skipTest("notebooklm SDK not installed")
 
 
+class TestShelfDiscipline(unittest.TestCase):
+    def test_thresholds(self):
+        from control_plane.infra.helios_notebooklm_guard import SHELF_CAP, classify_shelf
+
+        self.assertEqual(classify_shelf(0), "OK")
+        self.assertEqual(classify_shelf(269), "OK")
+        self.assertEqual(classify_shelf(270), "PRESSURE")
+        self.assertEqual(classify_shelf(292), "PRESSURE")
+        self.assertEqual(classify_shelf(300), "FULL")
+        self.assertEqual(classify_shelf(301), "FULL")
+        self.assertEqual(SHELF_CAP, 300)
+
+    def test_verify_carries_shelf_key(self):
+        report = verify(live=False, mirror_tissue=False)
+        self.assertIn("shelf", report)
+        self.assertIsNone(report["shelf"])
+
+    def test_assimilate_scour_dispatch(self):
+        from control_plane.runes.runic_router import route_rune
+
+        res = route_rune("//ASSIMILATE readiness", context={})
+        self.assertTrue(res.queued)
+        self.assertEqual(res.metadata.get("action"), "omega_assimilate")
+        self.assertEqual(res.metadata.get("status"), "SCOURED")
+        self.assertGreater(res.metadata.get("knights_total", 0), 30)
+        self.assertGreaterEqual(res.metadata.get("knights_ready", 0), 1)
+
+
 class TestTriBrainMap(unittest.TestCase):
     def test_three_consumers_defined(self):
         consumers = tri_brain_consumers()
