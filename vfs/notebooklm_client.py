@@ -63,6 +63,25 @@ def _run_async(coro):
 
 # ── Core async operations ────────────────────────────────────────────────────
 
+# SDK message contract (tools/notebooklm-py/.../_auth/extraction.py
+# _token_not_found_message): an off-app-host response carries this marker and
+# means redirect/environment trouble — NOT expired credentials. Anything else
+# in the auth-failure path is treated as genuinely expired/missing auth.
+TRANSIENT_AUTH_MARKER = "redirect/environment problem"
+
+
+def _classify_auth_failure(exc: BaseException) -> str:
+    """Classify an auth-path failure as 'transient' or 'expired'.
+
+    Transient = the request never reached the NotebookLM app host (proxy,
+    redirect, support-page landing). Expired = credentials rejected or absent.
+    Only 'expired' may advise `.venv\\Scripts\\notebooklm login`.
+    """
+    if TRANSIENT_AUTH_MARKER in str(exc):
+        return "transient"
+    return "expired"
+
+
 async def _get_client() -> Optional[Any]:
     """Acquire authenticated NotebookLMClient from stored session."""
     if not NOTEBOOKLM_AVAILABLE:
@@ -101,11 +120,19 @@ async def _get_client() -> Optional[Any]:
         auth = AuthTokens(cookies=cookies, csrf_token=csrf_token, session_id=session_id)
         return NotebookLMClient(auth)
     except (AuthError, ValueError) as e:
-        LOG.warning(
-            "[NLM] NotebookLM authentication expired or missing. "
-            "Run in terminal: .venv\\Scripts\\notebooklm login  (%s)",
-            e,
-        )
+        detail = str(e)[:300]
+        if _classify_auth_failure(e) == "transient":
+            LOG.warning(
+                "[NLM] NotebookLM endpoint unreachable (redirect/environment, "
+                "transient). Session file untouched; will retry on next call. (%s)",
+                detail,
+            )
+        else:
+            LOG.warning(
+                "[NLM] NotebookLM authentication expired or missing. "
+                "Run in terminal: .venv\\Scripts\\notebooklm login  (%s)",
+                detail,
+            )
         return None
     except Exception as e:
         LOG.warning(f"[NLM] Client init failed: {e}")
@@ -123,17 +150,20 @@ async def _open_client():
         yield None
         return
 
-    try:
-        async with NotebookLMClient.from_storage() as client:
-            yield client
-            return
-    except Exception as e:
-        LOG.debug(f"[NLM] Context manager from_storage failed ({e}), trying _get_client()...")
-
+    # Explicit session discovery first (deterministic): the CLI-written
+    # storage_state.json via the 3-candidate lookup. Profile-system resolution
+    # second (environment-aware). Previous order paid a guaranteed exception
+    # round-trip on hosts where the active profile misses the file layout.
     client = await _get_client()
     if client is None:
-        yield None
-        return
+        try:
+            async with NotebookLMClient.from_storage() as profile_client:
+                yield profile_client
+                return
+        except Exception as e:
+            LOG.debug(f"[NLM] Profile-resolved from_storage failed ({e}); no NotebookLM backend.")
+            yield None
+            return
     async with client:
         yield client
 

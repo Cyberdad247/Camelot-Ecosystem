@@ -1,0 +1,33 @@
+[
+  {
+    "knight_id": "MAGSAFE_SENTINEL",
+    "cloudbrain_uuid": "ab8aa359-2b3b-4bc1-b41f-34979cdc184e",
+    "spark_id": "0x5AFE8AA3592B3B4BC1B41F34979CDC184E",
+    "role": "MagSafe Ambient Voice Recorder & Kinetic Action Item Dispatcher",
+    "model": "FastMCP / agy + GGML ASR (<350MB RSS)",
+    "summoning_rune": "//MAGSAFE_INGEST",
+    "vfs_mount": "vfs://worldtree/knights/magsafe_sentinel/tether.json",
+    "files": [
+      "magsafe_audio_bridge.py",
+      "magsafe_sessions.jsonl",
+      "glass_observatory.py",
+      "reya_fabric_layer.py",
+      "reya_handshake_gate.py"
+    ],
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vashawns-s26-ultra",
+      "motorola-moto-g-power-5g---2024",
+      "vps-camelot-hub"
+    ],
+    "memory_attribution": {
+      "primary_knight": "SIR_HELIOS",
+      "kinetic_fabric": "REYA_EDGE_FABRIC",
+      "glass_wall": "PROJECT_SPECULUM",
+      "cgroups_limit_mb": 350.0
+    },
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-20T23:45:00.000000+00:00"
+  }
+]

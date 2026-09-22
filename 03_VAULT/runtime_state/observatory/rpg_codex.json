@@ -1,0 +1,152 @@
+{
+  "schema_version": "camelot.observatory-rpg/1",
+  "last_updated": "2026-09-21T03:56:35.929562+00:00",
+  "knights": {
+    "boris_architect": {
+      "knight_id": "boris_architect",
+      "level": 2,
+      "xp": 280,
+      "xp_to_next": 3,
+      "title": "Squire",
+      "turns_transcribed": 5,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "codex_implementer": {
+      "knight_id": "codex_implementer",
+      "level": 4,
+      "xp": 547,
+      "xp_to_next": 253,
+      "title": "Squire",
+      "turns_transcribed": 8,
+      "tasks_evaluated": 1,
+      "average_score": 98.2,
+      "skills": {},
+      "achievements": [
+        "Flawless Kinetic S-Rank"
+      ]
+    },
+    "sir_codex": {
+      "knight_id": "sir_codex",
+      "level": 3,
+      "xp": 480,
+      "xp_to_next": 40,
+      "title": "Squire",
+      "turns_transcribed": 12,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "reya_companion": {
+      "knight_id": "reya_companion",
+      "level": 5,
+      "xp": 940,
+      "xp_to_next": 179,
+      "title": "Kinetic Guard",
+      "turns_transcribed": 21,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "alloy": {
+      "knight_id": "alloy",
+      "level": 3,
+      "xp": 360,
+      "xp_to_next": 160,
+      "title": "Squire",
+      "turns_transcribed": 8,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "SIR_HELIOS": {
+      "knight_id": "SIR_HELIOS",
+      "level": 6,
+      "xp": 1440,
+      "xp_to_next": 30,
+      "title": "Kinetic Guard",
+      "turns_transcribed": 24,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "MERLIN_\u03a9": {
+      "knight_id": "MERLIN_\u03a9",
+      "level": 2,
+      "xp": 180,
+      "xp_to_next": 103,
+      "title": "Squire",
+      "turns_transcribed": 3,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "novice_squire_test": {
+      "knight_id": "novice_squire_test",
+      "level": 4,
+      "xp": 540,
+      "xp_to_next": 260,
+      "title": "Squire",
+      "turns_transcribed": 9,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "arthur_omega": {
+      "knight_id": "arthur_omega",
+      "level": 3,
+      "xp": 420,
+      "xp_to_next": 100,
+      "title": "Squire",
+      "turns_transcribed": 7,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    },
+    "merlin_omega": {
+      "knight_id": "merlin_omega",
+      "level": 4,
+      "xp": 540,
+      "xp_to_next": 260,
+      "title": "Squire",
+      "turns_transcribed": 9,
+      "tasks_evaluated": 0,
+      "average_score": 0.0,
+      "skills": {},
+      "achievements": []
+    }
+  },
+  "tenants": {
+    "Vizion Sky": {
+      "tenant_id": "Vizion Sky",
+      "sovereign_level": 14,
+      "xp": 5040,
+      "xp_to_next": 199,
+      "title": "High Governor",
+      "dialogue_turns": 97,
+      "missions_dispatched": 0,
+      "resonance_affinity": "Omni-Sovereign",
+      "milestones": []
+    },
+    "Unranked_Tenant": {
+      "tenant_id": "Unranked_Tenant",
+      "sovereign_level": 4,
+      "xp": 540,
+      "xp_to_next": 260,
+      "title": "Sovereign Seeker",
+      "dialogue_turns": 9,
+      "missions_dispatched": 0,
+      "resonance_affinity": "Omni-Sovereign",
+      "milestones": []
+    }
+  }
+}

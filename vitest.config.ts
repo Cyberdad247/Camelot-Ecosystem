@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    include: ['**/*.test.ts'],
+    include: ['apps/*/src/**/*.test.ts', 'packages/*/src/**/*.test.ts'],
     // The exclude list has to cover every non-source tree in this repo, not just
     // node_modules/dist. Two concrete reasons:
     //
@@ -33,6 +33,7 @@ export default defineConfig({
       '**/venv/**',
       '**/.pytest_cache/**',
       '**/.pytest_temp/**',
+      '**/.pytest_tmp*/**',
       '**/__pycache__/**',
       '**/.git/**',
     ],

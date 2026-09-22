@@ -13,6 +13,7 @@ import json
 import re
 import secrets
 import sys
+import unittest.mock
 from pathlib import Path
 
 import pytest
@@ -105,6 +106,32 @@ def test_status_returns_html_fragment_with_luxora_palette(client: TestClient) ->
     assert "text-luxora" in body
     assert "text-royal" in body
     assert "PAUSED" in body
+
+
+def test_status_returns_html_fragment_with_alternative_branches(client: TestClient) -> None:
+    # Use patch.dict to avoid mutating the global state for other tests
+    with unittest.mock.patch.dict(
+        ec.SYSTEM_STATE,
+        {
+            "merlin": "SLEEP_MODE",
+            "lukas": "COMPILING_AST",
+            "gate_paused": False,
+        },
+    ):
+        response = client.get("/api/status")
+        assert response.status_code == 200
+        body = response.text
+
+    # Check for merlin text-green-400
+    assert "text-green-400" in body
+    assert "SLEEP_MODE" in body
+
+    # Check for lukas text-luxora animate-pulse
+    assert "COMPILING_AST" in body
+
+    # Check for LIVE badge instead of PAUSED
+    assert "LIVE" in body
+    assert "PAUSED" not in body
 
 
 def test_health_returns_ok(client: TestClient) -> None:

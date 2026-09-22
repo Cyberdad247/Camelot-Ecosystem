@@ -5,7 +5,7 @@
 **Authoritative Operator:** King Arthur (VaShawn O. Head / Vizion)
 **Max Camelot-OS Version:** `Living Camelot-OS v1000 MAX Compendium`
 **WorldTree Home Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`
-**Generated Timestamp:** 2026-09-19 23:09:59 UTC
+**Generated Timestamp:** 2026-09-22 08:13:12 UTC
 ========================================================================================
 
 ## 1. SOVEREIGN TAILSCALE MESH TOPOLOGY
@@ -131,6 +131,24 @@ C:\
 2. **Zero-Trust Proof-of-Execution:** Every node modification and build verification appends a cryptographically chained entry to `03_VAULT/Missions/verification_ledger.jsonl`.
 3. **Hybrid 4-Tier Memory:** Redis L1 Hot Cache -> Qdrant L2 Semantic Embeddings -> Open-Notebook L3 Local VFS -> WorldTree L4 CloudBrain (Gemini NotebookLM).
 4. **Bifrost Mesh Resilience:** Free Frontier First auto-fallback routing via OmniRoute (`:20128`), 9Router (`:8079`), CLIProxyAPI (`:8080`), and Gemini Live Gateway (`:8765`).
+
+---
+
+## 6. KNOWN BROKEN OR STALE REFERENCES
+
+The following references appear in older docs but are not valid canonical
+anchors for this checkout (see `docs/architecture/SOURCE_OF_TRUTH_MAP.md`):
+
+- Root `OS_MANIFEST.md` does not exist
+- Root `VERSION` does not exist
+- Root `config.json` does not exist
+- Repo-root `cloud_orchestrator/` does not exist
+- `kinetic_edge/mcp_server/` does not exist under the current `kinetic_edge/`
+  tree
+- `02_FORGE/web/` does not exist as the active dashboard path
+
+If a doc still uses any of those as current canonical anchors, treat that doc
+as historical or stale until corrected.
 
 ========================================================================================
 *END OF CYBERTRONIA WORLDTREE ENTIRE MAP · RECONCILED & RATIFIED*

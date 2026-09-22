@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.camelot.os/contracts/camelot-release-proof-1.json",
+  "title": "CamelotReleaseProof1",
+  "description": "Deterministic release proof contract binding code, binary digests, SBOM, and contracts",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "release",
+    "contracts",
+    "artifacts",
+    "supply_chain",
+    "migration",
+    "compatibility",
+    "verification",
+    "proof_signature"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "camelot-release-proof/1"
+    },
+    "release": {
+      "type": "object",
+      "required": ["version", "source_commit", "source_tree_digest", "released_at"],
+      "properties": {
+        "version": { "type": "string" },
+        "source_commit": { "type": "string" },
+        "source_tree_digest": { "type": "string" },
+        "released_at": { "type": "string" }
+      }
+    },
+    "contracts": {
+      "type": "object",
+      "required": ["registry_digest", "lock_digest"],
+      "properties": {
+        "registry_digest": { "type": "string" },
+        "lock_digest": { "type": "string" }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "supply_chain": {
+      "type": "object",
+      "required": ["sbom_digest", "dependency_lock_digest"],
+      "properties": {
+        "sbom_digest": { "type": "string" },
+        "dependency_lock_digest": { "type": "string" },
+        "build_provenance": { "type": "string" }
+      }
+    },
+    "migration": {
+      "type": "object",
+      "required": ["migration_set", "rollback_set"],
+      "properties": {
+        "migration_set": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "rollback_set": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "required": ["minimum_state_version", "maximum_state_version"],
+      "properties": {
+        "minimum_state_version": { "type": "string" },
+        "maximum_state_version": { "type": "string" },
+        "required_features": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["test_report_digest", "security_report_digest"],
+      "properties": {
+        "test_report_digest": { "type": "string" },
+        "security_report_digest": { "type": "string" },
+        "chaos_report_digest": { "type": "string" }
+      }
+    },
+    "proof_signature": {
+      "type": "string",
+      "description": "Cryptographic signature by RELEASE signer class"
+    }
+  }
+}

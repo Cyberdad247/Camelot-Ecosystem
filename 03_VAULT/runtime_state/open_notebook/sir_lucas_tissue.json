@@ -1,46 +1,36 @@
 [
   {
     "knight_id": "SIR_LUCAS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "MISSION_002: Roster Drift Reconciliation (0 anomalies)",
-    "content": "{\n  \"mission\": \"ROSTER_DRIFT_RECONCILIATION\",\n  \"evidence_class\": \"confirmed\",\n  \"result\": \"0 anomalies across HUD/WorldTree/AGENTS/CloudBrain surfaces\",\n  \"changes\": [\n    \"SIR_KAY + LADY_LAKISHA added to worldtree_manifest (41 nodes)\",\n    \"LADY_LAKISHA added to AGENTS.md roster + CloudBrain registry\"\n  ]\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_lucas/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_LUCAS",
-    "open_viking_tether": "open_viking://worldtree/sir_lucas",
-    "updated_at": "2026-09-14T20:21:04.393220+00:00"
-  },
-  {
-    "knight_id": "SIR_LUCAS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "note",
-    "title": "MISSION_001: Verified Fleet Telemetry Report (Sir Lucas)",
-    "content": "{\n  \"mission\": \"MISSION_001_FLEET_TELEMETRY_REPORT\",\n  \"knight\": \"SIR_LUCAS\",\n  \"evidence_class\": \"confirmed\",\n  \"sources\": [\n    \"KNIGHT_REGISTRY\",\n    \"knight_xp_ledger.json\",\n    \"live TCP probes\",\n    \"worldtree_manifest.json\",\n    \"cloudbrain_connector.list_all_notebooks\"\n  ],\n  \"roster\": {\n    \"hud_registered\": 11,\n    \"xp_ledger_entries\": 11,\n    \"all_registered_have_xp\": true,\n    \"knights\": {\n      \"MERLIN_OMEGA\": {\n        \"registered\": true,\n        \"xp\": 29500,\n        \"level\": 6\n      },\n      \"SIR_BORIS\": {\n        \"registered\": true,\n        \"xp\": 18200,\n        \"level\": 5\n      },\n      \"SIR_CODEX\": {\n        \"registered\": true,\n        \"xp\": 16800,\n        \"level\": 5\n      },\n      \"SIR_FORGE\": {\n        \"registered\": true,\n        \"xp\": 13900,\n        \"level\": 4\n      },\n      \"HERMES_PRIME\": {\n        \"registered\": true,\n        \"xp\": 15400,\n        \"level\": 4\n      },\n      \"LADY_LAKISHA\": {\n        \"registered\": true,\n        \"xp\": 14200,\n        \"level\": 4\n      },\n      \"SIR_HEIMDALL\": {\n        \"registered\": true,\n        \"xp\": 13500,\n        \"level\": 4\n      },\n      \"SIR_SENTINEL\": {\n        \"registered\": true,\n        \"xp\": 15800,\n        \"level\": 4\n      },\n      \"SIR_GHOST\": {\n        \"registered\": true,\n        \"xp\": 12700,\n        \"level\": 4\n      },\n      \"SIR_KAY\": {\n        \"registered\": true,\n        \"xp\": 17500,\n        \"level\": 5\n      },\n      \"SIR_LUCAS\": {\n        \"registered\": true,\n        \"xp\": 11000,\n        \"level\": 4\n      }\n    }\n  },\n  \"router_fleet\": {\n    \"probed\": 8,\n    \"online\": [],\n    \"offline\": [\n      \"OmniRoute Gateway\",\n      \"9Router Engine\",\n      \"Bifrost Gateway\",\n      \"CLIProxyAPI\",\n      \"BitRouter\",\n      \"Mesh Bridge\",\n      \"Gemini Live Gateway\",\n      \"Morgana Rust Bridge\"\n    ]\n  },\n  \"worldtree\": {\n    \"manifest_entries\": 39,\n    \"sir_lucas_listed\": true\n  },\n  \"cloudbrain\": {\n    \"sir_lucas_registered\": true,\n    \"domain_tags\": [\n      \"telemetry\",\n      \"visualization\",\n      \"hud\",\n      \"observability\",\n      \"dashboard\",\n      \"verified_state\",\n      \"evidence_class\",\n      \"truth_surface\"\n    ]\n  },\n  \"anomalies\": [\n    \"LADY_LAKISHA in HUD registry but missing from worldtree manifest nodes\",\n    \"SIR_KAY in HUD registry but missing from worldtree manifest nodes\",\n    \"All 8 router gateways offline - fleet services not running (correct telemetry, not fabrication)\"\n  ]\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_lucas/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_LUCAS",
-    "open_viking_tether": "open_viking://worldtree/sir_lucas",
-    "updated_at": "2026-09-14T20:10:52.042437+00:00"
-  },
-  {
-    "knight_id": "SIR_LUCAS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "genesis_tether",
-    "title": "Sir Lucas - Sovereign Herald of Telemetry & Visualization Tether",
-    "content": "{\n  \"status\": \"ACTIVATED\",\n  \"role\": \"Sovereign Herald of Telemetry & Visualization\",\n  \"chain\": \"Council level - reports to ANYA_OMEGA / King Arthur\",\n  \"lead_directive\": \"Render sovereign state visible, trustworthy, decision-ready via probe-then-render verified telemetry surfaces.\",\n  \"blueprint\": \".hive/agents/OMEGA_SIR_LUCAS_BLUEPRINT_v1.0.nkg.md\",\n  \"spark_id\": \"0x5AC0DE5AC0DE5AC0DE5AC0DE5AC0DE5A\",\n  \"notes\": \"Re-sync after NotebookLM re-login. Local tissue is canonical mirror.\"\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_lucas/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_LUCAS",
-    "open_viking_tether": "open_viking://worldtree/sir_lucas",
-    "updated_at": "2026-09-14T19:08:08.823951+00:00"
-  },
-  {
-    "knight_id": "SIR_LUCAS",
-    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
-    "artifact_type": "genesis_tether",
-    "title": "Sir Lucas - Sovereign Herald of Telemetry & Visualization Tether",
-    "content": "{\n  \"status\": \"ACTIVATED\",\n  \"role\": \"Sovereign Herald of Telemetry & Visualization\",\n  \"chain\": \"Council level - reports to ANYA_OMEGA / King Arthur\",\n  \"lead_directive\": \"Render sovereign state visible, trustworthy, decision-ready via probe-then-render verified telemetry surfaces.\",\n  \"blueprint\": \".hive/agents/OMEGA_SIR_LUCAS_BLUEPRINT_v1.0.nkg.md\",\n  \"spark_id\": \"0x5AC0DE5AC0DE5AC0DE5AC0DE5AC0DE5A\"\n}",
-    "vfs_path": "vfs://worldtree/knights/sir_lucas/tether.json",
-    "mempalace_wing": "WING_WORLDTREE_SIR_LUCAS",
-    "open_viking_tether": "open_viking://worldtree/sir_lucas",
-    "updated_at": "2026-09-14T18:41:13.618982+00:00"
+    "cloudbrain_uuid": "bebdf3e3-bbb0-455b-9c02-1469202baf74",
+    "spark_id": "0x5AC0DE5AC0DE5AC0DE5AC0DE5AC0DE5A",
+    "role": "Sovereign Herald of Telemetry & Visualization \u2014 verified HUD/telemetry truth surfaces",
+    "model": "Gemini 3 Flash / GPT-5.3",
+    "summoning_rune": "//LUKAS_TELEMETRY",
+    "vfs_mount": "vfs/notebooks/bebdf3e3-bbb0-455b-9c02-1469202baf74/",
+    "files": [
+      "soul.md",
+      "spark.md",
+      "phial-engine.md",
+      "Master_Compendium.md",
+      "system_instruction.md"
+    ],
+    "five_pillars": [
+      "Aristotle (Axiomatic Logic & Categorization)",
+      "Hypatia of Alexandria (Mathematical Courage)",
+      "Leonardo da Vinci (Universal Invention)",
+      "Ada Lovelace (First Algorithmic Visionary)",
+      "Marcus Aurelius (Steadfast Sovereign Duty)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
+    "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "mesh_nodes": [
+      "cybertronia",
+      "vps-camelot-hub",
+      "vashawns-s26-ultra",
+      "lakesha"
+    ],
+    "status": "LIVING_CLOUDBRAIN_EMBEDDED",
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

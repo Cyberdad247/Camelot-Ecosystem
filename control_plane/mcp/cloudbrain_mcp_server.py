@@ -284,6 +284,333 @@ def crystallize_infinite_context(
         return {"error": str(e)}
 
 
+@mcp_server.tool()
+def omni_s2s_turn(
+    prompt: str = "Fortress status report",
+    knight_id: str = "reya_companion",
+    channel_name: str = "camelot_omni_s2s",
+    chunked: bool = True,
+) -> dict:
+    """Execute real-time Omni S2S speech turn using RadixAttention KV cache and Agora SD-RTN."""
+    s2s_dir = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omni_s2s"
+    if str(s2s_dir) not in sys.path:
+        sys.path.insert(0, str(s2s_dir))
+    try:
+        from omni_s2s_engine import get_omni_s2s_engine
+        import math
+        import struct
+
+        engine = get_omni_s2s_engine()
+        samples = [int(1500 * math.sin(2 * math.pi * 220 * i / 16000)) for i in range(8000)]
+        pcm_bytes = struct.pack(f"<{len(samples)}h", *samples)
+
+        if chunked:
+            chunks = [pcm_bytes[i:i + 3200] for i in range(0, len(pcm_bytes), 3200)]
+            res = engine.process_chunked_speech_turn(
+                chunks, transcript_hint=prompt, knight_id=knight_id, enable_speculative_decode=True
+            )
+        else:
+            res = engine.process_speech_turn(pcm_bytes, transcript_hint=prompt, knight_id=knight_id)
+        return res.to_dict()
+    except Exception as e:
+        return {"error": str(e), "status": "OMNI_S2S_ERROR"}
+
+
+@mcp_server.tool()
+def omni_s2s_status() -> dict:
+    """Return status of RadixAudioCache, Agora RTC transport, and shared memory slabs."""
+    s2s_dir = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omni_s2s"
+    if str(s2s_dir) not in sys.path:
+        sys.path.insert(0, str(s2s_dir))
+    try:
+        from omni_s2s_engine import get_omni_s2s_engine
+
+        engine = get_omni_s2s_engine()
+        return {
+            "radix_cache": engine.radix_cache.get_stats(),
+            "agora_rtc": engine.agora_bridge.get_stats(),
+            "turns_completed": engine.turn_counter,
+            "shm_slab": engine.agora_bridge.shm_slab_path,
+            "status": "OMNI_S2S_OPERATIONAL",
+        }
+    except Exception as e:
+        return {"error": str(e), "status": "OMNI_S2S_ERROR"}
+
+
+@mcp_server.tool()
+def read_glass_observatory(view_type: str = "all") -> dict:
+    """Read the impenetrable Glass Observatory (transcripts, RPG leaderboard, evaluations, and compendium path)."""
+    try:
+        from control_plane.observatory.glass_observatory import get_glass_observatory
+        obs = get_glass_observatory()
+        return obs.get_glass_wall_view(view_type=view_type)
+    except Exception as e:
+        return {"error": str(e), "status": "OBSERVATORY_ERROR"}
+
+
+@mcp_server.tool()
+def magsafe_process_audio(
+    audio_path: str,
+    target_knight: str = "SIR_HELIOS",
+    tenant_id: str = "Vizion Sky",
+    auto_dispatch: bool = False,
+) -> dict:
+    """Ingest MagSafe voice recording, perform SecondBrain summarization, tap Glass Observatory, and dispatch kinetic actions."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "magsafe" / "magsafe_audio_bridge.py"
+    spec = importlib.util.spec_from_file_location("magsafe_audio_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_magsafe_bridge()
+        res = bridge.process_audio_file(
+            audio_file_path=audio_path,
+            target_knight=target_knight,
+            tenant_id=tenant_id,
+            auto_dispatch=auto_dispatch,
+        )
+        return res.to_dict()
+    return {"error": "Failed to load magsafe_audio_bridge", "status": "MAGSAFE_ERROR"}
+
+
+@mcp_server.tool()
+def magsafe_status() -> dict:
+    """Return status of MagSafe Audio Sentinel, cgroups memory ceiling (<350MB), and Glass Observatory tap."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "magsafe" / "magsafe_audio_bridge.py"
+    spec = importlib.util.spec_from_file_location("magsafe_audio_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_magsafe_bridge()
+        return {
+            "status": "ARMED_AND_ACTIVE",
+            "memory_ceiling_mb": bridge.cgroups_memory_max_mb,
+            "recorded_sessions": len(bridge.get_sessions()),
+            "glass_observatory_tap": "ACTIVE" if mod.get_glass_observatory is not None else "INACTIVE",
+            "reya_fabric_layer": "ACTIVE" if mod.get_reya_fabric is not None else "INACTIVE",
+            "handshake_gate": "ACTIVE" if mod.get_handshake_gate is not None else "INACTIVE",
+        }
+    return {"error": "Failed to load magsafe_audio_bridge", "status": "MAGSAFE_ERROR"}
+
+
+@mcp_server.tool()
+def freellmapi_chat(
+    prompt: str,
+    model: str = "auto",
+    system_prompt: str = "You are a helpful sovereign intelligence assistant in Camelot-OS.",
+    calling_knight: str = "SIR_HELIOS",
+) -> dict:
+    """Execute zero-cost chat completion via FreeLLMAPI multi-provider gateway. Strictly rejects secrets."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        try:
+            resp = bridge.chat_completion(
+                prompt=prompt,
+                system_prompt=system_prompt,
+                model=model,
+                calling_knight=calling_knight,
+            )
+            return resp.to_dict()
+        except mod.SecretSanitizationViolation as e:
+            return {"error": str(e), "status": "SECRET_FENCE_TRIGGERED"}
+        except Exception as e:
+            return {"error": str(e), "status": "DISPATCH_ERROR"}
+    return {"error": "Failed to load freellmapi_bridge", "status": "MODULE_LOAD_ERROR"}
+
+
+@mcp_server.tool()
+def freellmapi_status() -> dict:
+    """Query live status of FreeLLMAPI zero-cost pooled gateway."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        alive, msg = bridge.is_alive()
+        return {
+            "status": "ONLINE" if alive else "STANDBY",
+            "base_url": bridge.base_url,
+            "gateway_message": msg,
+            "observatory_tap": "ENABLED" if bridge.enable_observatory_tap else "DISABLED",
+            "curated_model_count": len(mod.FREE_MODEL_CATALOG),
+        }
+    return {"error": "Failed to load freellmapi_bridge", "status": "MODULE_LOAD_ERROR"}
+
+
+@mcp_server.tool()
+def freellmapi_list_models() -> list[dict]:
+    """List all available free LLM models from FreeLLMAPI gateway or curated fallback catalog."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "freellmapi" / "freellmapi_bridge.py"
+    spec = importlib.util.spec_from_file_location("freellmapi_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_freellmapi_bridge()
+        return bridge.list_models()
+    return []
+
+
+@mcp_server.tool()
+def omniroute_compress_prompt(text: str, mode: str = "rtk_caveman") -> dict:
+    """Compress prompt using RTK + Caveman stacked compression (saving 15-95% tokens)."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        return mod.RTKCavemanCompressor.compress(text, mode=mode)
+    return {"error": "Failed to load omniroute_bridge"}
+
+
+@mcp_server.tool()
+def omniroute_status() -> dict:
+    """Return status of OmniRoute (:20128) and 9router-go (:3002) gateways and routing strategies."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "omniroute" / "omniroute_bridge.py"
+    spec = importlib.util.spec_from_file_location("omniroute_bridge", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        bridge = mod.get_omniroute_bridge()
+        return bridge.check_gateways()
+    return {"error": "Failed to load omniroute_bridge"}
+
+
+@mcp_server.tool()
+def bitrouter_evaluate_loop(
+    loop_id: str,
+    task: str,
+    knight_id: str = "SIR_CODEX",
+    added_tokens: int = 0,
+    added_cost: float = 0.0,
+    step_type: str = "tool_call",
+) -> dict:
+    """Evaluate agent loop iteration and tighten model tier to prevent tokenmaxxing."""
+    import importlib.util
+    bridge_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "bitrouter" / "bitrouter_guardrails.py"
+    spec = importlib.util.spec_from_file_location("bitrouter_guardrails", str(bridge_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.get_bitrouter_engine()
+        state = engine.start_or_update_loop(
+            loop_id=loop_id,
+            task=task,
+            knight_id=knight_id,
+            added_tokens=added_tokens,
+            added_cost=added_cost,
+            step_type=step_type,
+        )
+        return state.to_dict()
+    return {"error": "Failed to load bitrouter_guardrails"}
+
+
+@mcp_server.tool()
+def northstar_dispatch_goal(title: str, objective: str = "", knight: str = "MERLIN_Ω") -> dict:
+    """Decompose and dispatch an autonomous Northstar Goal background worker inside a Personal CPU Sandbox."""
+    import importlib.util
+    engine_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.NorthstarWorkerEngine()
+        goal = engine.decompose_goal(title=title, objective=objective or title, lead_knight=knight)
+        return {
+            "status": "DISPATCHED",
+            "goal_id": goal.goal_id,
+            "worker_id": goal.worker_id,
+            "lead_knight": goal.lead_knight,
+            "milestones": [m.to_dict() for m in goal.milestones]
+        }
+    return {"error": "Failed to load northstar_worker_engine"}
+
+
+@mcp_server.tool()
+def northstar_worker_status(worker_id: str = "") -> dict:
+    """Query active Northstar background workers, CPU/Memory telemetry, and pending HITL requests."""
+    import importlib.util
+    engine_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.NorthstarWorkerEngine()
+        if worker_id:
+            try:
+                return engine.get_worker_status(worker_id)
+            except Exception as e:
+                return {"error": str(e)}
+        return {"workers": engine.list_all_workers()}
+    return {"error": "Failed to load northstar_worker_engine"}
+
+
+@mcp_server.tool()
+def northstar_permission_review(
+    request_id: str,
+    action: str = "approve",
+    operator_id: str = "Arthur_Omega",
+    reason: str = "Approved via FastMCP"
+) -> dict:
+    """Review and approve/deny an inline HITL permission request from a sandboxed worker."""
+    import importlib.util
+    engine_path = CAMELOT_ROOT / "02_FORGE" / "assimilation" / "workers" / "northstar_worker_engine.py"
+    spec = importlib.util.spec_from_file_location("northstar_worker_engine", str(engine_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        engine = mod.NorthstarWorkerEngine()
+        if action.lower() == "approve":
+            ok = engine.broker.approve(request_id, operator_id=operator_id, reason=reason)
+            return {"request_id": request_id, "action": "approve", "success": ok}
+        else:
+            ok = engine.broker.deny(request_id, operator_id=operator_id, reason=reason)
+            return {"request_id": request_id, "action": "deny", "success": ok}
+    return {"error": "Failed to load northstar_worker_engine"}
+
+
+@mcp_server.tool()
+def vps_hub_status(live: bool = False) -> dict:
+    """Read-only Cybertronia VPS hub status: vendored contracts, endpoints, CloudBrain lease scope. Live TCP probes only when live=True (needs human approval)."""
+    from control_plane.infra.vps_hub_client import hub_status
+    return hub_status(live=live)
+
+
+@mcp_server.tool()
+def vps_hub_validate_artifact(schema_name: str, artifact_json: str) -> dict:
+    """Validate a JSON artifact against a vendored VPS hub contract schema (offline, fail-closed)."""
+    import json as _json
+    from control_plane.infra.vps_hub_client import validate_artifact
+    try:
+        artifact = _json.loads(artifact_json)
+    except Exception as exc:
+        return {"ok": False, "schema": schema_name, "errors": ["invalid JSON: %s" % exc]}
+    if not isinstance(artifact, dict):
+        return {"ok": False, "schema": schema_name, "errors": ["artifact must be a JSON object"]}
+    return validate_artifact(schema_name, artifact)
+
+
 if __name__ == "__main__":
     mcp_server.run()
 

@@ -63,6 +63,37 @@ class ObjectModel(BaseModel):
             raise DatabaseOperationError(e)
 
     @classmethod
+    async def get_many(cls: Type[T], ids: List[str]) -> List[T]:
+        if not ids:
+            return []
+
+        try:
+            record_ids = [ensure_record_id(id) for id in ids]
+
+            result = await repo_query("SELECT * FROM $ids", {"ids": record_ids})
+            if not result:
+                return []
+
+            objects = []
+            for item in result:
+                item_id = str(item.get("id", ""))
+                table_name = item_id.split(":")[0] if ":" in item_id else item_id
+
+                if cls.table_name and cls.table_name == table_name:
+                    target_class: Type[T] = cls
+                else:
+                    found_class = cls._get_class_by_table_name(table_name)
+                    target_class = cast(Type[T], found_class) if found_class else cls
+
+                objects.append(target_class(**item))
+
+            return objects
+        except Exception as e:
+            logger.error(f"Error fetching objects with ids {ids}: {str(e)}")
+            logger.exception(e)
+            raise DatabaseOperationError(e)
+
+    @classmethod
     async def get(cls: Type[T], id: str) -> T:
         if not id:
             raise InvalidInputError("ID cannot be empty")

@@ -214,9 +214,9 @@ class CodeMigrator:
             for file_path, matches in results.items():
                 rel_path = file_path.relative_to(self.ROOT_DIR)
                 print(f"\n  {rel_path}:")
-                for line_num, line, cred in matches:
+                for line_num, _line, cred in matches:
                     print(f"    Line {line_num}: {cred}")
-                    print(f"      {line}")
+                    print(f"      {_line}")
         
         print("="*60)
     
