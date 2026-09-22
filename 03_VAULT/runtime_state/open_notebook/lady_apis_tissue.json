@@ -2,7 +2,7 @@
   {
     "knight_id": "LADY_APIS",
     "cloudbrain_uuid": "378d6049-ffc3-4ed3-a9e7-47ffc5c0ac3f",
-    "spark_id": "0x378D6049FFC34ED3A9E747FFC5C0AC3F",
+    "spark_id": "0x378D6049FFC34ED3A9E74FFC5C0AC3F",
     "role": "Bio-Kinetic Swarm/Horde Conductor & BASHR Forager",
     "model": "Gemini 3.8 Flash / NullClaw",
     "summoning_rune": "Omega_Apis",
@@ -14,6 +14,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Rachel Carson (Systems Ecology)",
+      "Karl von Frisch (Bee Dance Communication)",
+      "Barbara McClintock (Transposable Genetics)",
+      "Lynn Margulis (Symbiogenesis)",
+      "Jane Goodall (Ethological Swarm Observation)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +31,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

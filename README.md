@@ -1,3 +1,4 @@
+<!-- Copyright © 2026 Invisioned Marketing inc. All Rights Reserved. -->
 <div align="center">
 
 # ⚔️ CAMELOT-OS
@@ -225,5 +226,9 @@ tsnet mesh (tags/grants/k8s), Aperture wiring, and the one-command `scripts/wsl_
 **Built on private, low-resource, independent enterprise technology. Zero vendor lock-in. Forever.**
 
 ⚔️ *Anya is the Gate.* ⚔️
+
+<br />
+
+<sub>Copyright © 2026 Invisioned Marketing Inc. All Rights Reserved. Protected under Sovereign Aegis Shield.</sub>
 
 </div>

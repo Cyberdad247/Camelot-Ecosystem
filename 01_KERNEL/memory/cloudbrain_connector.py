@@ -74,7 +74,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "SIR_STITCH":          "0fdccdc1-a1d2-48c2-8948-187398bfbeb5",
     "SIR_ALCHEMIST":       "d6bdd57c-84d2-4e24-bb10-ad1fd179fb04",
     "SIR_RUSTCLAW":        "2b3b6ec3-e020-484d-914d-92241a97ea55",
-    "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+    "ANYA_OMEGA":          "140101e0-bc2a-41c8-87c0-cd512f130387",   # CloudBrain Home (verified live 2026-09-22; 32d38906… is her Spark ID, not the notebook)
     "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
     "HERMES_PRIME":        "28f89cb6-5048-4b5d-9e94-376082d24744",   # hermes_prime_vfs_forge (verified 2026-08-10)
     "HERMES_PRIME_VFS_FORGE": "28f89cb6-5048-4b5d-9e94-376082d24744",# Hermes_prime_vfs_forge CloudBrain Node
@@ -127,12 +127,14 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "SIR_VISAGE":          "e41c0c29-a7ba-4bd8-94df-30eb9224f7f8",   # Sovereign_Workspace: SIR VISAGE
     "SIR_MARCUS":          "1c55963f-4a02-4c26-92ed-e087ecfdf8b8",   # Sovereign_Workspace: SIR MARCUS
     "SIR_KAY":             "7e4a8c12-f9b3-d650-e1a8-c7b2d3e4f5a6",   # Sovereign_Workspace: SIR KAY (Kai Richter: Agentic Architect)
-    "SIR_LUCAS":           "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # WorldTree-tethered: SIR LUCAS (Lukas Müller: Telemetry & Visualization)
+    "SIR_LUKAS":           "bebdf3e3-bbb0-455b-9c02-1469202baf74",   # Sovereign_Workspace: SIR LUKAS (Lukas Müller v3.0: The Ultimate Cognitive Forge Persona)
+    "SIR_LUCAS":           "bebdf3e3-bbb0-455b-9c02-1469202baf74",   # Legacy alias mapped to Lukas Müller v3.0
     "LADY_LAKISHA":        "a0a4bfb9-e847-4c38-be39-7aee398f0795",   # WorldTree-tethered: LADY LAKISHA (Voice OS Sentinel & Intercom Matrix)
 }
 
 NOTEBOOK_DOMAIN_TAGS: Dict[str, List[str]] = {
-    "SIR_LUCAS":           ["telemetry", "visualization", "hud", "observability", "dashboard", "verified_state", "evidence_class", "truth_surface"],
+    "SIR_LUKAS":           ["telemetry", "visualization", "hud", "observability", "dashboard", "verified_state", "evidence_class", "truth_surface", "cognitive_forge", "lukas_muller_v3_0"],
+    "SIR_LUCAS":           ["telemetry", "visualization", "hud", "observability", "dashboard", "verified_state", "evidence_class", "truth_surface", "cognitive_forge", "lukas_muller_v3_0"],
     "LADY_LAKISHA":        ["voice", "tts", "audio", "realtime", "webrtc", "intercom", "vad", "luxury_brutalism"],
     "SIR_KAY":             ["kinetic_engineering", "agentic_architect", "hotpath_purity", "zero_regression", "sprint_governance", "dkesi"],
     "SIR_BORIS":           ["architecture", "crucible", "design", "review", "pwa", "desktop_grid", "vkg_hud"],

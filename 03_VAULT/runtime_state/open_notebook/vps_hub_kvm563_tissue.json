@@ -18,7 +18,7 @@
     "deployed_branch": "main",
     "deployed_commit": "27e66d0113879dc39b8122a51284624bcb95e692",
     "deployed_commit_summary": "feat(vps-hub): implement Omni-Voice DAG, VPS Nexus deployment, and WorldTree integration",
-    "deployed_commit_verified_at": "2026-09-20T01:18:15.571274+00:00",
+    "deployed_commit_verified_at": "2026-09-20T16:50:38.560165+00:00",
     "deployed_commit_verification": "live ssh git rev-parse probe",
     "last_delivery_id": "del_34aed52a",
     "services": {
@@ -98,7 +98,7 @@
       "port_8000": "CLOSED",
       "port_8095": "OPEN",
       "port_9000": "CLOSED",
-      "probe_timestamp": "2026-09-20T01:18:15.571274+00:00"
+      "probe_timestamp": "2026-09-20T16:50:38.560165+00:00"
     },
     "drift": {
       "detected": true,
@@ -110,12 +110,12 @@
       "summary": "3 recorded service(s) not reachable"
     },
     "status": "MERGED_MAIN_UNIFIED",
-    "timestamp": "2026-09-20T01:18:10.614549+00:00",
-    "last_synced": "2026-09-20T01:18:10.614549+00:00",
+    "timestamp": "2026-09-20T16:50:34.267853+00:00",
+    "last_synced": "2026-09-20T16:50:34.267853+00:00",
     "active_cartridges": [
       "omarchy-vps-hermes-v1",
       "vps-hub-cartridge-v1"
     ],
-    "latest_assimilation_delivery": "asm_9b05c1596b"
+    "latest_assimilation_delivery": "asm_33f01ea98f"
   }
 ]

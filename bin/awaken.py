@@ -29,10 +29,26 @@ from control_plane.boot_sequence import _C
 from control_plane import boot_sequence
 
 
-def _banner():
+BOOT_PROFILES = {
+    "razor": {
+        "name": "RAZOR SENTINEL (Thin Client)",
+        "skip": "titan,local lt,octavian,clawdbot,bio-swarm,symbiotic",
+    },
+    "citadel": {
+        "name": "HEADLESS CITADEL (VPS Apex)",
+        "skip": "local lt,titan,octavian,bio-swarm,symbiotic,kitten,clawdbot",
+    },
+    "airgap": {
+        "name": "SOVEREIGN AIR-GAP (Local Autonomous)",
+        "skip": "",
+    },
+}
+
+def _banner(mode: str | None = None):
+    mode_label = f" [{BOOT_PROFILES[mode]['name']}]" if mode in BOOT_PROFILES else ""
     print(f"{_C['m']}{_C['B']}")
     print("+------------------------------------------------------------+")
-    print("|  AWAKEN - Camelot Apex OS v.999.3 (Sovereign Lattice)     |")
+    print(f"|  AWAKEN{mode_label.ljust(52)}|")
     print("|  ANYA_OMEGA - Anya First & Anya Last. Knight at the Helm. |")
     print("|  Global Boot: engines -> OmniRoute -> Hermes -> Cloud ->  |")
     print("|               Vizion Telemetry -> Sovereign Harness       |")
@@ -42,6 +58,10 @@ def _banner():
 
 def main():
     ap = argparse.ArgumentParser(prog="awaken", description="Universal Camelot-OS bootstrap")
+    ap.add_argument("mode", nargs="?", default=None,
+                    help="Boot profile mode: razor | airgap | citadel (or 'status')")
+    ap.add_argument("--mode", choices=["razor", "airgap", "citadel"], default=None,
+                    help="Boot profile mode")
     ap.add_argument("--status", action="store_true", help="Run boot phases, print status, exit")
     ap.add_argument("--json", action="store_true", help="Machine-readable JSON output")
     ap.add_argument("--quick", action="store_true", help="Terse single-line summary")
@@ -56,6 +76,12 @@ def main():
                     help="Don't auto-create venv if missing")
     args = ap.parse_args()
 
+    # Handle mode positional vs flag vs status alias
+    active_mode = args.mode if args.mode in BOOT_PROFILES else None
+    if args.mode == "status":
+        args.status = True
+        active_mode = None
+
     # Bifrost gate
     try:
         sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -67,6 +93,15 @@ def main():
 
     home = boot_sequence._detect_home()
     os.environ["CAMELOT_OS_HOME"] = str(home)
+
+    # Apply mode-specific phase skips
+    if active_mode:
+        mode_skip = BOOT_PROFILES[active_mode]["skip"]
+        if mode_skip:
+            prior = os.environ.get("AWAKEN_SKIP", "")
+            merged = ",".join(t for t in [prior, mode_skip] if t)
+            os.environ["AWAKEN_SKIP"] = merged
+
     if args.skip:
         prior = os.environ.get("AWAKEN_SKIP", "")
         merged = ",".join(t for t in [prior, args.skip] if t)
@@ -118,7 +153,7 @@ def main():
         print(f"{color}AWAKEN {green}/{total} phases in {results['_total_ms']}ms{_C['x']}")
         sys.exit(0 if green == total else 1)
 
-    _banner()
+    _banner(mode=active_mode)
     results = boot_sequence.run_boot(home)
     total = sum(1 for k in results if not k.startswith("_"))
     green = sum(1 for k, v in results.items() if not k.startswith("_") and v["ok"])

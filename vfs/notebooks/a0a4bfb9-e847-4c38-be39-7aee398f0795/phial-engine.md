@@ -2,23 +2,57 @@
 **Phial ID:** `PHIAL_SIR_ARTHUR_v1000`  
 **Knight Target:** `SIR_ARTHUR`  
 **Node UUID:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`  
-**Engine Architecture:** Monitor-Generate-Verify (MGV) Autonomous Loop  
-**Memory Substrate:** Ouroboros 1.58-bit WAL + duckdb-wasm MemPalace  
-**Governance:** `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_LAW`  
-**Compiled:** 2026-09-20T00:29:47.551119+00:00  
+**Engine Architecture:** Monitor-Generate-Verify (MGV) Autonomous Scaling Loop  
+**Memory Architecture:** 24D Leech Lattice / DuckDB-WASM MemPalace / Graphiti Temporal KG  
+**RPG Progression System:** Glass Observatory Level & XP Matrix  
+**Governance:** `8GB_SCARCITY_PROTOCOL` // `ANYA_LAST_GATE` // `FATHER_CAMELOT`  
+**Compiled:** 2026-09-21T23:00:51.973982+00:00  
 
 ---
 
-## 1. Phial Hyperparameters & Tuning
-- **Max Memory Depth:** 50 state transitions per rolling window
-- **Adaptive Learning Rate:** $\eta = 0.10$
-- **Blacklist Penalty Threshold:** 1.0 (auto-skip verified failing pathways)
-- **Max Concurrency:** Bound to thread throttle (`OMP=2`, `OPENBLAS=2`, `MKL=2`)
+## 1. Phial Hyperparameters & Engine Tuning
+- **Max Memory Depth:** 64 state transitions per rolling window
+- **TTC Token Budget:** Dynamic allocation up to 32,768 tokens for deep System 2 synthesis
+- **Adaptive Learning Rate:** $\eta = 0.08$
+- **Blacklist Penalty Threshold:** 1.0 (immediate pruning of verified failing or tainted pathways)
+- **Max Resident Memory (RSS):** Bounded under $\le 350\text{MB}$
+- **Thread Throttle:** `OMP=2`, `OPENBLAS=2`, `MKL=2`
 
 ---
 
-## 2. Symbolect Triggers & Kinetic Hooks
-- `🧲 [FORAGE]`: Extract clean domain context via headless tools and MCP connectors.
-- `🧪 [TEST]`: Validate invariants via AST verification and test-driven gates before state promotion.
-- `📈 [EVOLVE]`: Re-weight internal hyper-parameters upon receiving operator feedback.
-- `🏆 [DEPLOY]`: Emit cryptographically signed verification receipt to the Provenance Ledger.
+## 2. Autonomous Scaling & MGV Self-Improvement Loop
+SIR_ARTHUR executes an autonomous self-improvement loop:
+1. **Monitor ($\mathcal{M}$):** Observes task execution metrics, token latency, and error signatures.
+2. **Generate ($\mathcal{G}$):** Formulates optimized execution paths and tool parameterizations.
+3. **Verify ($\mathcal{V}$):** Validates AST syntax, invariant proofs, and policy contracts before committing state.
+4. **Evolve ($\mathcal{E}$):** Adjusts heuristic branching weights and logs verified milestones into the local Ouroboros WAL.
+
+---
+
+## 3. Glass Observatory RPG Experience Point (XP) System
+SIR_ARTHUR earns experience points and scales attributes through verified operational achievements:
+
+### XP Attribution Schedule
+- **Milestone Cleared:** `+50 XP`
+- **Complex Domain Task Resolved:** `+200 XP`
+- **Zero-Defect Architectural Synthesis:** `+500 XP`
+- **Formal Invariant Proved & Sealed:** `+1000 XP`
+- **Zero-Data-Loss Crisis Mitigation:** `+2500 XP`
+
+### Dynamic Stat Scaling
+- **Wisdom (Context Depth):** Scales associative recall fidelity across the 24D Leech Lattice.
+- **Intellect (Execution Efficiency):** Maximizes output density per token spent.
+- **Defense (Gate Strictness):** Enforces AST verification, memory slabs, and taint boundaries.
+- **Agility (Reflex Latency):** Accelerates pre-computation and fast-path dispatch ($<35\text{ms}$).
+
+---
+
+## 4. Memory Substrates & 1-Source Mutate Compliance
+- **Ouroboros 1.58-bit WAL:** Bitwise write-ahead log for milestone records.
+- **DuckDB-WASM MemPalace:** In-memory zero-cloud analytical telemetry database.
+- **Graphiti Temporal KG:** Persists bi-temporal fact triplets partitioned for `SIR_ARTHUR`.
+- **1-Source Mutate Law:** In Open-Notebook environments, all state updates mutate `Master_Compendium.md` in-place, preserving $O(1)$ slot economy.
+
+---
+
+*Compiled under Sovereign Law by MERLIN_OMEGA at 2026-09-21T23:00:51.973982+00:00.*
