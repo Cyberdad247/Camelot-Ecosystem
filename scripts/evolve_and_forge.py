@@ -11,24 +11,24 @@ Implements the //EVOLVE_AND_FORGE composite rune pipeline:
 5. Automatic merge once Sovereign-approved, or raise high-severity alert on failure.
 """
 
-from __future__ import annotations
+from __future__ import annotations  # noqa: E402
 
-import argparse
+import argparse  # noqa: E402
 import json
-import subprocess
+import subprocess  # noqa: E402
 import sys
-from datetime import datetime, timezone
-from pathlib import Path
+from datetime import datetime, timezone  # noqa: E402
+from pathlib import Path  # noqa: E402
 
 # Ensure control_plane can be imported
 REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from control_plane.hyper_evolve import promote_mutation
-from control_plane.runic_router import route_rune
+from control_plane.hyper_evolve import promote_mutation  # noqa: E402
+from control_plane.runic_router import route_rune  # noqa: E402
 
-from control_plane.worker import QueueTask, _call_llm_raw
+from control_plane.worker import QueueTask, _call_llm_raw  # noqa: E402
 
 
 def run_cmd(cmd: list[str], cwd: Path = REPO_ROOT, capture: bool = True) -> tuple[int, str, str]:

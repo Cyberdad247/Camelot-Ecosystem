@@ -67,11 +67,16 @@ def generate_tree(root_path, padding_str="  "):
 
         # Determine status annotation
         status = ""
-        if "KERNEL" in root: status = " [CORE]"
-        elif "VAULT" in root: status = " [SECURE]"
-        elif "FORGE" in root: status = " [FORGE]"
-        elif "control_plane" in root: status = " [CONTROL]"
-        elif "kinetic_edge" in root: status = " [KINETIC]"
+        if "KERNEL" in root:
+            status = " [CORE]"
+        elif "VAULT" in root:
+            status = " [SECURE]"
+        elif "FORGE" in root:
+            status = " [FORGE]"
+        elif "control_plane" in root:
+            status = " [CONTROL]"
+        elif "kinetic_edge" in root:
+            status = " [KINETIC]"
 
         tree_lines.append(f"{indent}📂 {folder_name}/{status}")
 

@@ -1,6 +1,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 # Camelot Apex OS — CONFIDENTIAL AND PROPRIETARY
 import hashlib
+import os
 import uuid
 from datetime import datetime
 from typing import Any, Dict, List, Literal
