@@ -25,6 +25,10 @@
       "cargo check*": "allow",
       "cargo test*": "allow",
       "python -m pytest tests*": "allow",
+      "python -m control_plane.infra.vps_hub_client --status": "allow",
+      "python -m control_plane.infra.vps_hub_client --validate *": "allow",
+      "python -m control_plane.infra.vps_hub_client --lease-scope *": "allow",
+      "python -m control_plane.runes.runic_router --rune VPS_HUB*": "allow",
       "git push --force*": "deny",
       "git gc*": "deny",
       "rm -rf *": "deny"
