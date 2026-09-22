@@ -74,7 +74,7 @@ KNIGHT_NOTEBOOKS: Dict[str, str] = {
     "SIR_STITCH":          "0fdccdc1-a1d2-48c2-8948-187398bfbeb5",
     "SIR_ALCHEMIST":       "d6bdd57c-84d2-4e24-bb10-ad1fd179fb04",
     "SIR_RUSTCLAW":        "2b3b6ec3-e020-484d-914d-92241a97ea55",
-    "ANYA_OMEGA":          "32d38906-5ae8-4ecc-b77e-705d12c89f4a",
+    "ANYA_OMEGA":          "140101e0-bc2a-41c8-87c0-cd512f130387",   # CloudBrain Home (verified live 2026-09-22; 32d38906… is her Spark ID, not the notebook)
     "SIR_HERMES":          "5dc31b8d-169d-4d4d-ab90-d12724fca720",
     "HERMES_PRIME":        "28f89cb6-5048-4b5d-9e94-376082d24744",   # hermes_prime_vfs_forge (verified 2026-08-10)
     "HERMES_PRIME_VFS_FORGE": "28f89cb6-5048-4b5d-9e94-376082d24744",# Hermes_prime_vfs_forge CloudBrain Node

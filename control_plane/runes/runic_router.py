@@ -207,6 +207,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 1,
         "handler": "_handle_status",
     },
+    "//VPS_HUB": {
+        "knight": "hermes_prime",
+        "description": "Cybertronia VPS hub authority-plane status + contract check (offline-safe; --live opts into hub TCP probes)",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_vps_hub",
+        "hydrate": False,
+    },
     "//TRIAGE": {
         "knight": "sir_codex",
         "description": "Evidence-gated read-only system architecture triage",
@@ -1028,6 +1036,14 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_magsafe_dispatch",
         "hydrate": False,
     },
+    "//HELIOS": {
+        "knight": "sir_helios",
+        "description": "Sir Helios autonomous NotebookLM link verification (tri-brain dynamic source health)",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_helios_link",
+        "hydrate": False,
+    },
     "//FREELLMAPI": {
         "knight": "sir_helios",
         "description": "Zero-cost LLM query via pooled FreeLLMAPI gateway (~34 providers)",
@@ -1624,6 +1640,20 @@ def _handle_scan(param: str, context: dict) -> dict:
 
 def _handle_status(param: str, context: dict) -> dict:
     return {"action": "system_status", "detail": "run: python -m control_plane.harness --status"}
+
+
+def _handle_vps_hub(param: str, context: dict) -> dict:
+    tokens = shlex.split(param, posix=False) if param else []
+    allowed = {"--live", "--json"}
+    normalized = [token for token in tokens if token in allowed]
+    try:
+        from control_plane.infra.vps_hub_client import hub_status
+
+        status = hub_status(live=("--live" in normalized))
+        status["requested_options"] = normalized
+        return status
+    except Exception as exc:
+        return {"action": "vps_hub_status", "status": "ERROR", "error": str(exc)}
 
 
 def _handle_triage(param: str, context: dict) -> dict:
@@ -3942,6 +3972,18 @@ def _handle_magsafe_dispatch(param: Any, context: dict) -> dict:
     return _handle_magsafe_ingest(param, ctx)
 
 
+def _handle_helios_link(param: Any, context: dict) -> dict:
+    """//HELIOS — Sir Helios autonomously verifies the NotebookLM connection."""
+    tokens = shlex.split(str(param or ""), posix=False) if param else []
+    offline = "--offline" in tokens
+    try:
+        from control_plane.infra.helios_notebooklm_guard import verify
+
+        return verify(live=not offline)
+    except Exception as exc:
+        return {"action": "helios_notebooklm_verify", "status": "ERROR", "error": str(exc)}
+
+
 def _handle_freellmapi(param: Any, context: dict) -> dict:
     """//FREELLMAPI / //ZERO_COST — Execute zero-cost chat completion via FreeLLMAPI."""
     import importlib.util
@@ -4511,6 +4553,7 @@ _HANDLERS = {
     "_handle_vocal": _handle_vocal,
     "_handle_scan": _handle_scan,
     "_handle_status": _handle_status,
+    "_handle_vps_hub": _handle_vps_hub,
     "_handle_triage": _handle_triage,
     "_handle_think": _handle_think,
     "_handle_bifrost_lock": _handle_bifrost_lock,
@@ -4562,6 +4605,7 @@ _HANDLERS = {
     "_handle_scarcity_gov": _handle_scarcity_gov,
     "_handle_magsafe_ingest": _handle_magsafe_ingest,
     "_handle_magsafe_dispatch": _handle_magsafe_dispatch,
+    "_handle_helios_link": _handle_helios_link,
     "_handle_freellmapi": _handle_freellmapi,
     "_handle_omniroute": _handle_omniroute,
     "_handle_compress_prompt": _handle_compress_prompt,

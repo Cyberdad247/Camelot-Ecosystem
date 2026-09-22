@@ -590,6 +590,27 @@ def northstar_permission_review(
     return {"error": "Failed to load northstar_worker_engine"}
 
 
+@mcp_server.tool()
+def vps_hub_status(live: bool = False) -> dict:
+    """Read-only Cybertronia VPS hub status: vendored contracts, endpoints, CloudBrain lease scope. Live TCP probes only when live=True (needs human approval)."""
+    from control_plane.infra.vps_hub_client import hub_status
+    return hub_status(live=live)
+
+
+@mcp_server.tool()
+def vps_hub_validate_artifact(schema_name: str, artifact_json: str) -> dict:
+    """Validate a JSON artifact against a vendored VPS hub contract schema (offline, fail-closed)."""
+    import json as _json
+    from control_plane.infra.vps_hub_client import validate_artifact
+    try:
+        artifact = _json.loads(artifact_json)
+    except Exception as exc:
+        return {"ok": False, "schema": schema_name, "errors": ["invalid JSON: %s" % exc]}
+    if not isinstance(artifact, dict):
+        return {"ok": False, "schema": schema_name, "errors": ["artifact must be a JSON object"]}
+    return validate_artifact(schema_name, artifact)
+
+
 if __name__ == "__main__":
     mcp_server.run()
 
