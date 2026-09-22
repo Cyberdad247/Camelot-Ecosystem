@@ -3,8 +3,8 @@
 from datetime import datetime
 
 
-def get_current_timestamp() -> str:
+def get_current_timestamp(format_string: str = "%Y%m%d%H%M%S") -> str:
     """
-    Returns the current timestamp in the format YYYYMMDDHHmmss.
+    Returns the current timestamp in the given format.
     """
-    return datetime.now().strftime("%Y%m%d%H%M%S")
+    return datetime.now().strftime(format_string)
