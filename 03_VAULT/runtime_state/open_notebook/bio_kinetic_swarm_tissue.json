@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-23T16:02:57.831602+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-23T16:02:56.717836+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:39:42.363539+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:39:40.750402+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:38:43.671530+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:38:42.045775+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:37:02.660028+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:37:00.949574+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:35:54.057132+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for BIO_KINETIC_SWARM",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_bio_kinetic_swarm\",\n  \"session_id\": \"sess_knight_bio_kinetic_swarm\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/bio_kinetic_swarm/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_BIO_KINETIC_SWARM",
+    "open_viking_tether": "open_viking://worldtree/bio_kinetic_swarm",
+    "updated_at": "2026-09-22T14:35:52.887925+00:00"
+  },
+  {
+    "knight_id": "BIO_KINETIC_SWARM",
     "cloudbrain_uuid": "93b21c40-10ff-4e89-a212-08f37b1297e1",
     "spark_id": "0x93B21C4010FF4E89A21208F37B1297E1",
     "role": "Bio-Kinetic Matrix, Cellular Diode Isolation, Mitosis",

@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-23T16:02:57.301417+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-23T16:02:56.519437+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:39:41.852310+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:39:40.247421+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:38:43.128403+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:38:41.547742+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:37:02.094264+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:37:00.422706+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:35:53.819697+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_RUSTCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_rustclaw\",\n  \"session_id\": \"sess_knight_sir_rustclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_rustclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_RUSTCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_rustclaw",
+    "updated_at": "2026-09-22T14:35:51.941030+00:00"
+  },
+  {
+    "knight_id": "SIR_RUSTCLAW",
     "cloudbrain_uuid": "2b3b6ec3-e020-484d-914d-92241a97ea55",
     "spark_id": "0x2B3B6EC3E020484D914D92241A97EA55",
     "role": "Rust Image & Kernel Pipelines, Bare-Metal Decompressor",

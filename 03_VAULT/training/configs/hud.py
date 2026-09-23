@@ -52,7 +52,12 @@ CLIPROXY_DIR = os.path.join(HOME_DIR, "CLIProxyAPI")
 # Override with CAMELOT_KINETIC_EDGE_BIN env var to restore legacy binary.
 # Revert: git checkout HEAD -- 03_VAULT/training/configs/hud.py
 # or restore from 03_VAULT/runtime_state/backups/hiveide_cut_*/
-_KINETIC_EDGE_BIN_NAME = os.environ.get("CAMELOT_KINETIC_EDGE_BIN") or "pmcp-server.exe"  # was: camelot-mcp-edge.exe
+# 2026-09-23: default restored to camelot-mcp-edge.exe. pmcp-server.exe is
+# stdio-only ("tcp/unix pending Phase 1 cut" — its own boot log) so it can
+# never satisfy the REQUIRED Kinetic Edge :3001 probe; with no stdio client
+# it self-exits after scaffolding, pinning boot DEGRADED (3/4 required).
+# Re-flip only once pmcp-server binds a TCP listener on :3001.
+_KINETIC_EDGE_BIN_NAME = os.environ.get("CAMELOT_KINETIC_EDGE_BIN") or "camelot-mcp-edge.exe"
 KINETIC_EDGE_BIN = os.path.join(HOME_DIR, "CAMELOT_OS", "bin", _KINETIC_EDGE_BIN_NAME)
 KINETIC_EDGE_URL = "http://127.0.0.1:3001"
 SALTARE_URL = "http://localhost:8080/route"
@@ -150,20 +155,35 @@ def _boot_kinetic_edge():
         if detach:
             flags |= getattr(subprocess, "DETACHED_PROCESS", 0)
             flags |= getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
-        _kinetic_edge_proc = subprocess.Popen(
-            [KINETIC_EDGE_BIN],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-            stdin=subprocess.DEVNULL,
-            creationflags=flags,
-            close_fds=True,
-        )
+        # Log to a real file, not DEVNULL — DEVNULL made spawn-time crashes
+        # undiagnosable (observed 2026-09-23: child died within the boot run
+        # with zero evidence; exact-fidelity repro outside the boot survived).
+        log_path = os.path.join(HOME_DIR, "CAMELOT_OS", "logs", "kinetic_edge.log")
+        os.makedirs(os.path.dirname(log_path), exist_ok=True)
+        logf = open(log_path, "ab")
+        try:
+            _kinetic_edge_proc = subprocess.Popen(
+                [KINETIC_EDGE_BIN],
+                stdout=logf,
+                stderr=logf,
+                stdin=subprocess.DEVNULL,
+                creationflags=flags,
+                close_fds=True,
+            )
+        finally:
+            logf.close()  # child keeps its inherited handle
         if not detach:
             atexit.register(_shutdown_kinetic_edge)
-        time.sleep(1.0)
-        if _tcp_open("127.0.0.1", 3001, timeout=1.0):
+        # Probe up to ~6s — the Axum bind can lag the first second under load.
+        online = False
+        for _ in range(6):
+            time.sleep(1.0)
+            if _tcp_open("127.0.0.1", 3001, timeout=1.0):
+                online = True
+                break
+        if online:
             return _kinetic_edge_proc.pid, f"[green]Kinetic Edge online[/] (PID {_kinetic_edge_proc.pid}, port 3001)"
-        return None, f"[yellow]Kinetic Edge spawned (PID {_kinetic_edge_proc.pid}) but :3001 not reachable yet[/]"
+        return None, f"[yellow]Kinetic Edge spawned (PID {_kinetic_edge_proc.pid}) but :3001 not reachable yet — see logs/kinetic_edge.log[/]"
     except Exception as e:
         return None, f"[red]Kinetic Edge failed: {e}[/]"
 

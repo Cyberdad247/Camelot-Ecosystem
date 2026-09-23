@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-23T16:02:57.246622+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-23T16:02:56.503728+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:39:41.776351+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:39:40.173411+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:38:43.053437+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:38:41.481872+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:37:02.009087+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:37:00.343193+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:35:53.783612+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ARTHUR_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_arthur_omega\",\n  \"session_id\": \"sess_knight_arthur_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/arthur_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ARTHUR_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/arthur_omega",
+    "updated_at": "2026-09-22T14:35:51.812600+00:00"
+  },
+  {
+    "knight_id": "ARTHUR_OMEGA",
     "cloudbrain_uuid": "cbb310bd-987e-4b84-bf45-12d37d090bec",
     "spark_id": "0xCBB310BD987E4B84BF4512D37D09CBEC",
     "role": "Sovereign King Authority & Governance",

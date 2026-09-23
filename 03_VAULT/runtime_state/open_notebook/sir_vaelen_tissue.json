@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-23T16:02:58.340690+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-23T16:02:56.828306+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:39:42.816101+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:39:41.210673+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:38:44.138150+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:38:42.460675+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:37:03.149314+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:37:01.428625+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:35:54.237361+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_VAELEN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_vaelen\",\n  \"session_id\": \"sess_knight_sir_vaelen\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_vaelen/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_VAELEN",
+    "open_viking_tether": "open_viking://worldtree/sir_vaelen",
+    "updated_at": "2026-09-22T14:35:53.360336+00:00"
+  },
+  {
+    "knight_id": "SIR_VAELEN",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "spark_id": "0x10VAELEN0000000000000000000010",
     "role": "24D Leech-Lattice Shell Similarity Retrieval",

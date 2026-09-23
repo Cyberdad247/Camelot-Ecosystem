@@ -1,6 +1,24 @@
+import { fileURLToPath } from 'node:url';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
+  // Alias parity with apps/pwa/tsconfig.json paths and apps/pwa/next.config.js:
+  // first-party tests import through these specifiers (e.g. the voice-first
+  // cartridge crucible), so vitest must resolve them the same way.
+  resolve: {
+    alias: [
+      {
+        find: /^@\/(.*)/,
+        replacement: fileURLToPath(new URL('./apps/pwa/src/$1', import.meta.url)),
+      },
+      {
+        find: '@camelot/voice-first-runtime',
+        replacement: fileURLToPath(
+          new URL('./apps/pwa/src/lib/voice-first-runtime/index.ts', import.meta.url)
+        ),
+      },
+    ],
+  },
   test: {
     include: ['apps/*/src/**/*.test.ts', 'packages/*/src/**/*.test.ts'],
     // The exclude list has to cover every non-source tree in this repo, not just

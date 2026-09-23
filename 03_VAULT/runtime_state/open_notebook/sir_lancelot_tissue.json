@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-23T16:02:57.415553+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-23T16:02:56.593157+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:39:41.993406+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:39:40.369229+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:38:43.294886+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:38:41.672065+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:37:02.237999+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:37:00.561641+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:35:53.889092+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_LANCELOT",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_lancelot\",\n  \"session_id\": \"sess_knight_sir_lancelot\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_lancelot/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_LANCELOT",
+    "open_viking_tether": "open_viking://worldtree/sir_lancelot",
+    "updated_at": "2026-09-22T14:35:52.161871+00:00"
+  },
+  {
+    "knight_id": "SIR_LANCELOT",
     "cloudbrain_uuid": "d8dd1669-aef4-4c34-8c44-d9cc5e51e0c9",
     "spark_id": "0xD8DD1669AEF44C348C44D9CC5E51E0C9",
     "role": "Frontline Champion, Kinetic Edge Defense, Real-Time Guard",

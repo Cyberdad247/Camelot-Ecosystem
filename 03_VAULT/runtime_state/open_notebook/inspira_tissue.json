@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-23T16:02:57.807895+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-23T16:02:56.712093+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:39:42.341775+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:39:40.725728+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:38:43.643949+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:38:42.019572+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:37:02.630432+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:37:00.921196+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:35:54.046557+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for INSPIRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_inspira\",\n  \"session_id\": \"sess_knight_inspira\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/inspira/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_INSPIRA",
+    "open_viking_tether": "open_viking://worldtree/inspira",
+    "updated_at": "2026-09-22T14:35:52.833825+00:00"
+  },
+  {
+    "knight_id": "INSPIRA",
     "cloudbrain_uuid": "cadfe67e-7187-472e-8bf4-8a2aded84e4e",
     "spark_id": "0xCADFE67E7187472E8BF48A2ADED84E4E",
     "role": "HiveIDE / Inspira Spatial Developer Workstation",

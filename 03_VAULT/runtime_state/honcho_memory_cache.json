@@ -19,6 +19,676 @@
         "worldtree_anchor": "KING_ARTHUR_VIZION"
       },
       "created_at": "2026-09-14T18:55:27.938275+00:00"
+    },
+    "knight_hermes_prime": {
+      "id": "knight_hermes_prime",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "HERMES_PRIME",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:50.835065+00:00"
+    },
+    "knight_sir_boris": {
+      "id": "knight_sir_boris",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_BORIS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.183282+00:00"
+    },
+    "knight_sir_alex": {
+      "id": "knight_sir_alex",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_ALEX",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.238023+00:00"
+    },
+    "knight_sir_forge": {
+      "id": "knight_sir_forge",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_FORGE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.281136+00:00"
+    },
+    "knight_sir_sentinel": {
+      "id": "knight_sir_sentinel",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_SENTINEL",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.318259+00:00"
+    },
+    "knight_sir_debug": {
+      "id": "knight_sir_debug",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_DEBUG",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.358643+00:00"
+    },
+    "knight_sir_ghost": {
+      "id": "knight_sir_ghost",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_GHOST",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.405027+00:00"
+    },
+    "knight_lady_apis": {
+      "id": "knight_lady_apis",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "LADY_APIS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.451316+00:00"
+    },
+    "knight_merlin_omega": {
+      "id": "knight_merlin_omega",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "MERLIN_OMEGA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.500875+00:00"
+    },
+    "knight_sir_helio": {
+      "id": "knight_sir_helio",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_HELIO",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.549694+00:00"
+    },
+    "knight_sir_sonus": {
+      "id": "knight_sir_sonus",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_SONUS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.598184+00:00"
+    },
+    "knight_sir_codex": {
+      "id": "knight_sir_codex",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_CODEX",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.637903+00:00"
+    },
+    "knight_sir_heimdall": {
+      "id": "knight_sir_heimdall",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_HEIMDALL",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.692959+00:00"
+    },
+    "knight_sir_galahad": {
+      "id": "knight_sir_galahad",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_GALAHAD",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.733988+00:00"
+    },
+    "knight_arthur_omega": {
+      "id": "knight_arthur_omega",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "ARTHUR_OMEGA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.786730+00:00"
+    },
+    "knight_sir_stitch": {
+      "id": "knight_sir_stitch",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_STITCH",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.826117+00:00"
+    },
+    "knight_sir_alchemist": {
+      "id": "knight_sir_alchemist",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_ALCHEMIST",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.867947+00:00"
+    },
+    "knight_sir_rustclaw": {
+      "id": "knight_sir_rustclaw",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_RUSTCLAW",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.914167+00:00"
+    },
+    "knight_anya_omega": {
+      "id": "knight_anya_omega",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "ANYA_OMEGA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.957698+00:00"
+    },
+    "knight_sir_hermes": {
+      "id": "knight_sir_hermes",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_HERMES",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:51.989021+00:00"
+    },
+    "knight_hermes_prime_vfs_forge": {
+      "id": "knight_hermes_prime_vfs_forge",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "HERMES_PRIME_VFS_FORGE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.041502+00:00"
+    },
+    "knight_hermes_agent_evolution": {
+      "id": "knight_hermes_agent_evolution",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "HERMES_AGENT_EVOLUTION",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.089152+00:00"
+    },
+    "knight_sir_lancelot": {
+      "id": "knight_sir_lancelot",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_LANCELOT",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.134504+00:00"
+    },
+    "knight_lady_guinevere": {
+      "id": "knight_lady_guinevere",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "LADY_GUINEVERE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.180967+00:00"
+    },
+    "knight_sir_huggingface": {
+      "id": "knight_sir_huggingface",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_HUGGINGFACE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.227858+00:00"
+    },
+    "knight_sir_mnemo": {
+      "id": "knight_sir_mnemo",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_MNEMO",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.280831+00:00"
+    },
+    "knight_lady_mnemosyne": {
+      "id": "knight_lady_mnemosyne",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "LADY_MNEMOSYNE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.326539+00:00"
+    },
+    "knight_anya_quantum_mantra": {
+      "id": "knight_anya_quantum_mantra",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "ANYA_QUANTUM_MANTRA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.368158+00:00"
+    },
+    "knight_camelot_v1000": {
+      "id": "knight_camelot_v1000",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "CAMELOT_V1000",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.403495+00:00"
+    },
+    "knight_camelot_master": {
+      "id": "knight_camelot_master",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "CAMELOT_MASTER",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.453273+00:00"
+    },
+    "knight_bifrost": {
+      "id": "knight_bifrost",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "BIFROST",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.505821+00:00"
+    },
+    "knight_father_camelot": {
+      "id": "knight_father_camelot",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "FATHER_CAMELOT",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.547546+00:00"
+    },
+    "knight_world_tree": {
+      "id": "knight_world_tree",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "WORLD_TREE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.597929+00:00"
+    },
+    "knight_alpha_omega": {
+      "id": "knight_alpha_omega",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "ALPHA_OMEGA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.638460+00:00"
+    },
+    "knight_antigravity": {
+      "id": "knight_antigravity",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "ANTIGRAVITY",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.702551+00:00"
+    },
+    "knight_kickbox": {
+      "id": "knight_kickbox",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "KICKBOX",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.755051+00:00"
+    },
+    "knight_inspira": {
+      "id": "knight_inspira",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "INSPIRA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.803782+00:00"
+    },
+    "knight_bio_kinetic_swarm": {
+      "id": "knight_bio_kinetic_swarm",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "BIO_KINETIC_SWARM",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.857878+00:00"
+    },
+    "knight_ancestral_chimera_research_swarm_protocol_v400": {
+      "id": "knight_ancestral_chimera_research_swarm_protocol_v400",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "ANCESTRAL_CHIMERA_RESEARCH_SWARM_PROTOCOL_V400",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.912548+00:00"
+    },
+    "knight_chimera_research_swarm": {
+      "id": "knight_chimera_research_swarm",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "CHIMERA_RESEARCH_SWARM",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:52.960427+00:00"
+    },
+    "knight_sir_gideon": {
+      "id": "knight_sir_gideon",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_GIDEON",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.009346+00:00"
+    },
+    "knight_sir_socrates": {
+      "id": "knight_sir_socrates",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_SOCRATES",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.027071+00:00"
+    },
+    "knight_invisioned_marketing": {
+      "id": "knight_invisioned_marketing",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "INVISIONED_MARKETING",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.047469+00:00"
+    },
+    "knight_knight_strategos": {
+      "id": "knight_knight_strategos",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "KNIGHT_STRATEGOS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.064179+00:00"
+    },
+    "knight_sir_octavian": {
+      "id": "knight_sir_octavian",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_OCTAVIAN",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.082100+00:00"
+    },
+    "knight_sir_openclaw": {
+      "id": "knight_sir_openclaw",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_OPENCLAW",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.099138+00:00"
+    },
+    "knight_sir_ouroboros": {
+      "id": "knight_sir_ouroboros",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_OUROBOROS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.116888+00:00"
+    },
+    "knight_sir_liberte": {
+      "id": "knight_sir_liberte",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_LIBERTE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.132273+00:00"
+    },
+    "knight_sir_zeroclaw": {
+      "id": "knight_sir_zeroclaw",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_ZEROCLAW",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.151168+00:00"
+    },
+    "knight_lady_nanobot": {
+      "id": "knight_lady_nanobot",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "LADY_NANOBOT",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.173847+00:00"
+    },
+    "knight_sir_nanobot": {
+      "id": "knight_sir_nanobot",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_NANOBOT",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.195153+00:00"
+    },
+    "knight_sir_gawain": {
+      "id": "knight_sir_gawain",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_GAWAIN",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.212103+00:00"
+    },
+    "knight_sir_hashimoto": {
+      "id": "knight_sir_hashimoto",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_HASHIMOTO",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.229243+00:00"
+    },
+    "knight_sir_valerian": {
+      "id": "knight_sir_valerian",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_VALERIAN",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.248403+00:00"
+    },
+    "knight_sir_veritas": {
+      "id": "knight_sir_veritas",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_VERITAS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.269580+00:00"
+    },
+    "knight_sir_proxy": {
+      "id": "knight_sir_proxy",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_PROXY",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.291380+00:00"
+    },
+    "knight_sir_aurelius": {
+      "id": "knight_sir_aurelius",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_AURELIUS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.312014+00:00"
+    },
+    "knight_sir_vaelen": {
+      "id": "knight_sir_vaelen",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_VAELEN",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.340092+00:00"
+    },
+    "knight_sir_scavenger": {
+      "id": "knight_sir_scavenger",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_SCAVENGER",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.380272+00:00"
+    },
+    "knight_lady_sparkle": {
+      "id": "knight_lady_sparkle",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "LADY_SPARKLE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.407861+00:00"
+    },
+    "knight_sir_visage": {
+      "id": "knight_sir_visage",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_VISAGE",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.434407+00:00"
+    },
+    "knight_sir_marcus": {
+      "id": "knight_sir_marcus",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_MARCUS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.478704+00:00"
+    },
+    "knight_sir_kay": {
+      "id": "knight_sir_kay",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_KAY",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.505505+00:00"
+    },
+    "knight_sir_lukas": {
+      "id": "knight_sir_lukas",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_LUKAS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.529392+00:00"
+    },
+    "knight_sir_lucas": {
+      "id": "knight_sir_lucas",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "SIR_LUCAS",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.554470+00:00"
+    },
+    "knight_lady_lakisha": {
+      "id": "knight_lady_lakisha",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "LADY_LAKISHA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-22T14:35:53.578400+00:00"
+    },
+    "knight_lukas_omega": {
+      "id": "knight_lukas_omega",
+      "metadata": {
+        "role": "Round Table Knight",
+        "knight_id": "LUKAS_OMEGA",
+        "created_by": "HONCHO_EMBED",
+        "worldtree_anchor": "KING_ARTHUR_VIZION"
+      },
+      "created_at": "2026-09-23T16:02:40.935274+00:00"
     }
   },
   "sessions": {
@@ -201,11 +871,702 @@
           "content": "Deploy Honcho memory to WorldTree",
           "metadata": {},
           "timestamp": "2026-09-19T15:03:08.020795+00:00"
+        },
+        {
+          "user_id": "test_user_arthur",
+          "role": "user",
+          "content": "Deploy Honcho memory to WorldTree",
+          "metadata": {},
+          "timestamp": "2026-09-23T15:54:33.455370+00:00"
+        },
+        {
+          "user_id": "test_user_arthur",
+          "role": "user",
+          "content": "Deploy Honcho memory to WorldTree",
+          "metadata": {},
+          "timestamp": "2026-09-23T15:58:15.601801+00:00"
+        },
+        {
+          "user_id": "test_user_arthur",
+          "role": "user",
+          "content": "Deploy Honcho memory to WorldTree",
+          "metadata": {},
+          "timestamp": "2026-09-23T16:06:34.539334+00:00"
         }
       ],
       "created_at": "2026-09-14T18:55:21.863437+00:00"
+    },
+    "sess_knight_hermes_prime": {
+      "id": "sess_knight_hermes_prime",
+      "user_id": "knight_hermes_prime",
+      "metadata": {
+        "knight_id": "HERMES_PRIME",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:50.856134+00:00"
+    },
+    "sess_knight_sir_boris": {
+      "id": "sess_knight_sir_boris",
+      "user_id": "knight_sir_boris",
+      "metadata": {
+        "knight_id": "SIR_BORIS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.212132+00:00"
+    },
+    "sess_knight_sir_alex": {
+      "id": "sess_knight_sir_alex",
+      "user_id": "knight_sir_alex",
+      "metadata": {
+        "knight_id": "SIR_ALEX",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.261887+00:00"
+    },
+    "sess_knight_sir_forge": {
+      "id": "sess_knight_sir_forge",
+      "user_id": "knight_sir_forge",
+      "metadata": {
+        "knight_id": "SIR_FORGE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.294992+00:00"
+    },
+    "sess_knight_sir_sentinel": {
+      "id": "sess_knight_sir_sentinel",
+      "user_id": "knight_sir_sentinel",
+      "metadata": {
+        "knight_id": "SIR_SENTINEL",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.332892+00:00"
+    },
+    "sess_knight_sir_debug": {
+      "id": "sess_knight_sir_debug",
+      "user_id": "knight_sir_debug",
+      "metadata": {
+        "knight_id": "SIR_DEBUG",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.381599+00:00"
+    },
+    "sess_knight_sir_ghost": {
+      "id": "sess_knight_sir_ghost",
+      "user_id": "knight_sir_ghost",
+      "metadata": {
+        "knight_id": "SIR_GHOST",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.426057+00:00"
+    },
+    "sess_knight_lady_apis": {
+      "id": "sess_knight_lady_apis",
+      "user_id": "knight_lady_apis",
+      "metadata": {
+        "knight_id": "LADY_APIS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.474048+00:00"
+    },
+    "sess_knight_merlin_omega": {
+      "id": "sess_knight_merlin_omega",
+      "user_id": "knight_merlin_omega",
+      "metadata": {
+        "knight_id": "MERLIN_OMEGA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.522048+00:00"
+    },
+    "sess_knight_sir_helio": {
+      "id": "sess_knight_sir_helio",
+      "user_id": "knight_sir_helio",
+      "metadata": {
+        "knight_id": "SIR_HELIO",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.582318+00:00"
+    },
+    "sess_knight_sir_sonus": {
+      "id": "sess_knight_sir_sonus",
+      "user_id": "knight_sir_sonus",
+      "metadata": {
+        "knight_id": "SIR_SONUS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.616107+00:00"
+    },
+    "sess_knight_sir_codex": {
+      "id": "sess_knight_sir_codex",
+      "user_id": "knight_sir_codex",
+      "metadata": {
+        "knight_id": "SIR_CODEX",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.662400+00:00"
+    },
+    "sess_knight_sir_heimdall": {
+      "id": "sess_knight_sir_heimdall",
+      "user_id": "knight_sir_heimdall",
+      "metadata": {
+        "knight_id": "SIR_HEIMDALL",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.718644+00:00"
+    },
+    "sess_knight_sir_galahad": {
+      "id": "sess_knight_sir_galahad",
+      "user_id": "knight_sir_galahad",
+      "metadata": {
+        "knight_id": "SIR_GALAHAD",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.754472+00:00"
+    },
+    "sess_knight_arthur_omega": {
+      "id": "sess_knight_arthur_omega",
+      "user_id": "knight_arthur_omega",
+      "metadata": {
+        "knight_id": "ARTHUR_OMEGA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.809691+00:00"
+    },
+    "sess_knight_sir_stitch": {
+      "id": "sess_knight_sir_stitch",
+      "user_id": "knight_sir_stitch",
+      "metadata": {
+        "knight_id": "SIR_STITCH",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.848885+00:00"
+    },
+    "sess_knight_sir_alchemist": {
+      "id": "sess_knight_sir_alchemist",
+      "user_id": "knight_sir_alchemist",
+      "metadata": {
+        "knight_id": "SIR_ALCHEMIST",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.890843+00:00"
+    },
+    "sess_knight_sir_rustclaw": {
+      "id": "sess_knight_sir_rustclaw",
+      "user_id": "knight_sir_rustclaw",
+      "metadata": {
+        "knight_id": "SIR_RUSTCLAW",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.937892+00:00"
+    },
+    "sess_knight_anya_omega": {
+      "id": "sess_knight_anya_omega",
+      "user_id": "knight_anya_omega",
+      "metadata": {
+        "knight_id": "ANYA_OMEGA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:51.971253+00:00"
+    },
+    "sess_knight_sir_hermes": {
+      "id": "sess_knight_sir_hermes",
+      "user_id": "knight_sir_hermes",
+      "metadata": {
+        "knight_id": "SIR_HERMES",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.011479+00:00"
+    },
+    "sess_knight_hermes_prime_vfs_forge": {
+      "id": "sess_knight_hermes_prime_vfs_forge",
+      "user_id": "knight_hermes_prime_vfs_forge",
+      "metadata": {
+        "knight_id": "HERMES_PRIME_VFS_FORGE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.062146+00:00"
+    },
+    "sess_knight_hermes_agent_evolution": {
+      "id": "sess_knight_hermes_agent_evolution",
+      "user_id": "knight_hermes_agent_evolution",
+      "metadata": {
+        "knight_id": "HERMES_AGENT_EVOLUTION",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.113164+00:00"
+    },
+    "sess_knight_sir_lancelot": {
+      "id": "sess_knight_sir_lancelot",
+      "user_id": "knight_sir_lancelot",
+      "metadata": {
+        "knight_id": "SIR_LANCELOT",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.159505+00:00"
+    },
+    "sess_knight_lady_guinevere": {
+      "id": "sess_knight_lady_guinevere",
+      "user_id": "knight_lady_guinevere",
+      "metadata": {
+        "knight_id": "LADY_GUINEVERE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.206269+00:00"
+    },
+    "sess_knight_sir_huggingface": {
+      "id": "sess_knight_sir_huggingface",
+      "user_id": "knight_sir_huggingface",
+      "metadata": {
+        "knight_id": "SIR_HUGGINGFACE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.251202+00:00"
+    },
+    "sess_knight_sir_mnemo": {
+      "id": "sess_knight_sir_mnemo",
+      "user_id": "knight_sir_mnemo",
+      "metadata": {
+        "knight_id": "SIR_MNEMO",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.299128+00:00"
+    },
+    "sess_knight_lady_mnemosyne": {
+      "id": "sess_knight_lady_mnemosyne",
+      "user_id": "knight_lady_mnemosyne",
+      "metadata": {
+        "knight_id": "LADY_MNEMOSYNE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.347517+00:00"
+    },
+    "sess_knight_anya_quantum_mantra": {
+      "id": "sess_knight_anya_quantum_mantra",
+      "user_id": "knight_anya_quantum_mantra",
+      "metadata": {
+        "knight_id": "ANYA_QUANTUM_MANTRA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.388158+00:00"
+    },
+    "sess_knight_camelot_v1000": {
+      "id": "sess_knight_camelot_v1000",
+      "user_id": "knight_camelot_v1000",
+      "metadata": {
+        "knight_id": "CAMELOT_V1000",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.425776+00:00"
+    },
+    "sess_knight_camelot_master": {
+      "id": "sess_knight_camelot_master",
+      "user_id": "knight_camelot_master",
+      "metadata": {
+        "knight_id": "CAMELOT_MASTER",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.479614+00:00"
+    },
+    "sess_knight_bifrost": {
+      "id": "sess_knight_bifrost",
+      "user_id": "knight_bifrost",
+      "metadata": {
+        "knight_id": "BIFROST",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.527624+00:00"
+    },
+    "sess_knight_father_camelot": {
+      "id": "sess_knight_father_camelot",
+      "user_id": "knight_father_camelot",
+      "metadata": {
+        "knight_id": "FATHER_CAMELOT",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.573219+00:00"
+    },
+    "sess_knight_world_tree": {
+      "id": "sess_knight_world_tree",
+      "user_id": "knight_world_tree",
+      "metadata": {
+        "knight_id": "WORLD_TREE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.623301+00:00"
+    },
+    "sess_knight_alpha_omega": {
+      "id": "sess_knight_alpha_omega",
+      "user_id": "knight_alpha_omega",
+      "metadata": {
+        "knight_id": "ALPHA_OMEGA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.660305+00:00"
+    },
+    "sess_knight_antigravity": {
+      "id": "sess_knight_antigravity",
+      "user_id": "knight_antigravity",
+      "metadata": {
+        "knight_id": "ANTIGRAVITY",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.726133+00:00"
+    },
+    "sess_knight_kickbox": {
+      "id": "sess_knight_kickbox",
+      "user_id": "knight_kickbox",
+      "metadata": {
+        "knight_id": "KICKBOX",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.775795+00:00"
+    },
+    "sess_knight_inspira": {
+      "id": "sess_knight_inspira",
+      "user_id": "knight_inspira",
+      "metadata": {
+        "knight_id": "INSPIRA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.828536+00:00"
+    },
+    "sess_knight_bio_kinetic_swarm": {
+      "id": "sess_knight_bio_kinetic_swarm",
+      "user_id": "knight_bio_kinetic_swarm",
+      "metadata": {
+        "knight_id": "BIO_KINETIC_SWARM",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.883769+00:00"
+    },
+    "sess_knight_ancestral_chimera_research_swarm_protocol_v400": {
+      "id": "sess_knight_ancestral_chimera_research_swarm_protocol_v400",
+      "user_id": "knight_ancestral_chimera_research_swarm_protocol_v400",
+      "metadata": {
+        "knight_id": "ANCESTRAL_CHIMERA_RESEARCH_SWARM_PROTOCOL_V400",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.937657+00:00"
+    },
+    "sess_knight_chimera_research_swarm": {
+      "id": "sess_knight_chimera_research_swarm",
+      "user_id": "knight_chimera_research_swarm",
+      "metadata": {
+        "knight_id": "CHIMERA_RESEARCH_SWARM",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:52.982476+00:00"
+    },
+    "sess_knight_sir_gideon": {
+      "id": "sess_knight_sir_gideon",
+      "user_id": "knight_sir_gideon",
+      "metadata": {
+        "knight_id": "SIR_GIDEON",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.017570+00:00"
+    },
+    "sess_knight_sir_socrates": {
+      "id": "sess_knight_sir_socrates",
+      "user_id": "knight_sir_socrates",
+      "metadata": {
+        "knight_id": "SIR_SOCRATES",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.037796+00:00"
+    },
+    "sess_knight_invisioned_marketing": {
+      "id": "sess_knight_invisioned_marketing",
+      "user_id": "knight_invisioned_marketing",
+      "metadata": {
+        "knight_id": "INVISIONED_MARKETING",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.055535+00:00"
+    },
+    "sess_knight_knight_strategos": {
+      "id": "sess_knight_knight_strategos",
+      "user_id": "knight_knight_strategos",
+      "metadata": {
+        "knight_id": "KNIGHT_STRATEGOS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.071963+00:00"
+    },
+    "sess_knight_sir_octavian": {
+      "id": "sess_knight_sir_octavian",
+      "user_id": "knight_sir_octavian",
+      "metadata": {
+        "knight_id": "SIR_OCTAVIAN",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.090398+00:00"
+    },
+    "sess_knight_sir_openclaw": {
+      "id": "sess_knight_sir_openclaw",
+      "user_id": "knight_sir_openclaw",
+      "metadata": {
+        "knight_id": "SIR_OPENCLAW",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.106713+00:00"
+    },
+    "sess_knight_sir_ouroboros": {
+      "id": "sess_knight_sir_ouroboros",
+      "user_id": "knight_sir_ouroboros",
+      "metadata": {
+        "knight_id": "SIR_OUROBOROS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.124737+00:00"
+    },
+    "sess_knight_sir_liberte": {
+      "id": "sess_knight_sir_liberte",
+      "user_id": "knight_sir_liberte",
+      "metadata": {
+        "knight_id": "SIR_LIBERTE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.140976+00:00"
+    },
+    "sess_knight_sir_zeroclaw": {
+      "id": "sess_knight_sir_zeroclaw",
+      "user_id": "knight_sir_zeroclaw",
+      "metadata": {
+        "knight_id": "SIR_ZEROCLAW",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.161723+00:00"
+    },
+    "sess_knight_lady_nanobot": {
+      "id": "sess_knight_lady_nanobot",
+      "user_id": "knight_lady_nanobot",
+      "metadata": {
+        "knight_id": "LADY_NANOBOT",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.183604+00:00"
+    },
+    "sess_knight_sir_nanobot": {
+      "id": "sess_knight_sir_nanobot",
+      "user_id": "knight_sir_nanobot",
+      "metadata": {
+        "knight_id": "SIR_NANOBOT",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.204118+00:00"
+    },
+    "sess_knight_sir_gawain": {
+      "id": "sess_knight_sir_gawain",
+      "user_id": "knight_sir_gawain",
+      "metadata": {
+        "knight_id": "SIR_GAWAIN",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.222022+00:00"
+    },
+    "sess_knight_sir_hashimoto": {
+      "id": "sess_knight_sir_hashimoto",
+      "user_id": "knight_sir_hashimoto",
+      "metadata": {
+        "knight_id": "SIR_HASHIMOTO",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.239154+00:00"
+    },
+    "sess_knight_sir_valerian": {
+      "id": "sess_knight_sir_valerian",
+      "user_id": "knight_sir_valerian",
+      "metadata": {
+        "knight_id": "SIR_VALERIAN",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.258517+00:00"
+    },
+    "sess_knight_sir_veritas": {
+      "id": "sess_knight_sir_veritas",
+      "user_id": "knight_sir_veritas",
+      "metadata": {
+        "knight_id": "SIR_VERITAS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.279441+00:00"
+    },
+    "sess_knight_sir_proxy": {
+      "id": "sess_knight_sir_proxy",
+      "user_id": "knight_sir_proxy",
+      "metadata": {
+        "knight_id": "SIR_PROXY",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.301798+00:00"
+    },
+    "sess_knight_sir_aurelius": {
+      "id": "sess_knight_sir_aurelius",
+      "user_id": "knight_sir_aurelius",
+      "metadata": {
+        "knight_id": "SIR_AURELIUS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.324938+00:00"
+    },
+    "sess_knight_sir_vaelen": {
+      "id": "sess_knight_sir_vaelen",
+      "user_id": "knight_sir_vaelen",
+      "metadata": {
+        "knight_id": "SIR_VAELEN",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.355786+00:00"
+    },
+    "sess_knight_sir_scavenger": {
+      "id": "sess_knight_sir_scavenger",
+      "user_id": "knight_sir_scavenger",
+      "metadata": {
+        "knight_id": "SIR_SCAVENGER",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.397665+00:00"
+    },
+    "sess_knight_lady_sparkle": {
+      "id": "sess_knight_lady_sparkle",
+      "user_id": "knight_lady_sparkle",
+      "metadata": {
+        "knight_id": "LADY_SPARKLE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.420025+00:00"
+    },
+    "sess_knight_sir_visage": {
+      "id": "sess_knight_sir_visage",
+      "user_id": "knight_sir_visage",
+      "metadata": {
+        "knight_id": "SIR_VISAGE",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.452351+00:00"
+    },
+    "sess_knight_sir_marcus": {
+      "id": "sess_knight_sir_marcus",
+      "user_id": "knight_sir_marcus",
+      "metadata": {
+        "knight_id": "SIR_MARCUS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.491376+00:00"
+    },
+    "sess_knight_sir_kay": {
+      "id": "sess_knight_sir_kay",
+      "user_id": "knight_sir_kay",
+      "metadata": {
+        "knight_id": "SIR_KAY",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.516741+00:00"
+    },
+    "sess_knight_sir_lukas": {
+      "id": "sess_knight_sir_lukas",
+      "user_id": "knight_sir_lukas",
+      "metadata": {
+        "knight_id": "SIR_LUKAS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.542013+00:00"
+    },
+    "sess_knight_sir_lucas": {
+      "id": "sess_knight_sir_lucas",
+      "user_id": "knight_sir_lucas",
+      "metadata": {
+        "knight_id": "SIR_LUCAS",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.563743+00:00"
+    },
+    "sess_knight_lady_lakisha": {
+      "id": "sess_knight_lady_lakisha",
+      "user_id": "knight_lady_lakisha",
+      "metadata": {
+        "knight_id": "LADY_LAKISHA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-22T14:35:53.589884+00:00"
+    },
+    "sess_knight_lukas_omega": {
+      "id": "sess_knight_lukas_omega",
+      "user_id": "knight_lukas_omega",
+      "metadata": {
+        "knight_id": "LUKAS_OMEGA",
+        "purpose": "L4_metamemory"
+      },
+      "messages": [],
+      "created_at": "2026-09-23T16:02:40.959169+00:00"
     }
   },
   "metamemory": {},
-  "updated_at": "2026-09-19T15:03:09.523909+00:00"
+  "updated_at": "2026-09-23T16:06:34.540111+00:00"
 }

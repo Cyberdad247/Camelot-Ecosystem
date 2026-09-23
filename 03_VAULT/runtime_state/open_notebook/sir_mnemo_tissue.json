@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-23T16:02:57.482599+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-23T16:02:56.615631+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:39:42.070334+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:39:40.447837+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:38:43.369375+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:38:41.745727+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:37:02.314808+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:37:00.638560+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:35:53.925640+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_MNEMO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_mnemo\",\n  \"session_id\": \"sess_knight_sir_mnemo\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_mnemo/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_MNEMO",
+    "open_viking_tether": "open_viking://worldtree/sir_mnemo",
+    "updated_at": "2026-09-22T14:35:52.302057+00:00"
+  },
+  {
+    "knight_id": "SIR_MNEMO",
     "cloudbrain_uuid": "8bf3f24e-da2e-45b9-8719-162fcd02a80d",
     "spark_id": "0x8BF3F24EDA2E45B98719162FCD02A80D",
     "role": "Dual-Tier Memory Sync, Vector Indexing, Tissue Journaling",

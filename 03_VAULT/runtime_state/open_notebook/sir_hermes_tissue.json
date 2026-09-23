@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-23T16:02:57.344764+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-23T16:02:56.553343+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:39:41.901122+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:39:40.298313+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:38:43.179678+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:38:41.597172+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:37:02.144015+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:37:00.472475+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:35:53.843598+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HERMES",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_hermes\",\n  \"session_id\": \"sess_knight_sir_hermes\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_hermes/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HERMES",
+    "open_viking_tether": "open_viking://worldtree/sir_hermes",
+    "updated_at": "2026-09-22T14:35:52.014056+00:00"
+  },
+  {
+    "knight_id": "SIR_HERMES",
     "cloudbrain_uuid": "5dc31b8d-169d-4d4d-ab90-d12724fca720",
     "spark_id": "0x5DC31B8D169D4D4DAB90D12724FCA720",
     "role": "Courier Dispatch, Inbound Webhooks, GraphQL Mesh & Realtime Events",

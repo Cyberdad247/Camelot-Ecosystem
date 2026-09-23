@@ -82,6 +82,13 @@ def main():
         args.status = True
         active_mode = None
 
+    # One-shot modes exit immediately after run_boot; without detach, hud.py's
+    # atexit handlers reap services this run just spawned (observed: Kinetic
+    # Edge killed on boot exit -> :3001 DARK in the very status being printed).
+    # Interactive sessions keep the supervise-and-reap behavior.
+    if args.status or args.json or args.quick:
+        os.environ.setdefault("AWAKEN_DETACH_CHILDREN", "1")
+
     # Bifrost gate
     try:
         sys.path.insert(0, str(Path(__file__).resolve().parent))

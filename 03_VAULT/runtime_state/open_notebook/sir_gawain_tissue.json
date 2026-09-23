@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-23T16:02:58.211018+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-23T16:02:56.797819+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:39:42.661208+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:39:41.085238+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:38:43.984039+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:38:42.333590+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:37:02.997807+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:37:01.294561+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:35:54.185109+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GAWAIN",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_gawain\",\n  \"session_id\": \"sess_knight_sir_gawain\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_gawain/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GAWAIN",
+    "open_viking_tether": "open_viking://worldtree/sir_gawain",
+    "updated_at": "2026-09-22T14:35:53.223489+00:00"
+  },
+  {
+    "knight_id": "SIR_GAWAIN",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "spark_id": "0x05GAWAIN00000000000000000000005",
     "role": "Ruff / Pytest / Cargo Audit Enforcement",

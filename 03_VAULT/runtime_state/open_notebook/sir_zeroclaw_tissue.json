@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-23T16:02:58.131268+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-23T16:02:56.782964+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:39:42.602450+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:39:41.019744+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:38:43.905229+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:38:42.267431+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:37:02.932371+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:37:01.214955+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:35:54.159768+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_ZEROCLAW",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_zeroclaw\",\n  \"session_id\": \"sess_knight_sir_zeroclaw\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_zeroclaw/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_ZEROCLAW",
+    "open_viking_tether": "open_viking://worldtree/sir_zeroclaw",
+    "updated_at": "2026-09-22T14:35:53.164450+00:00"
+  },
+  {
+    "knight_id": "SIR_ZEROCLAW",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "spark_id": "0x08ZEROCLAW00000000000000000008",
     "role": "ZeroClaw Rust Engine & memfd Leasing",

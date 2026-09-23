@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-23T16:02:57.398548+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-23T16:02:56.582467+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:39:41.969759+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:39:40.351181+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:38:43.268081+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:38:41.646268+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:37:02.214092+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:37:00.538276+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:35:53.878708+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for HERMES_AGENT_EVOLUTION",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_hermes_agent_evolution\",\n  \"session_id\": \"sess_knight_hermes_agent_evolution\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/hermes_agent_evolution/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_HERMES_AGENT_EVOLUTION",
+    "open_viking_tether": "open_viking://worldtree/hermes_agent_evolution",
+    "updated_at": "2026-09-22T14:35:52.115738+00:00"
+  },
+  {
+    "knight_id": "HERMES_AGENT_EVOLUTION",
     "cloudbrain_uuid": "24f4a450-6456-49fe-bfab-8cfcf7c2a33b",
     "spark_id": "0x24F4A450645649FEBFAB8CFCF7C2A33B",
     "role": "OpenClaw Transcendence, Nous Research, Autonomous Evolution & Multi-Agent Fusion",

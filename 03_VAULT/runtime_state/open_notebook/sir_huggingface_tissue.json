@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-23T16:02:57.458627+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-23T16:02:56.609132+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:39:42.041080+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:39:40.424778+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:38:43.344340+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:38:41.722028+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:37:02.291078+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:37:00.612223+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:35:53.913762+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HUGGINGFACE",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_huggingface\",\n  \"session_id\": \"sess_knight_sir_huggingface\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_huggingface/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HUGGINGFACE",
+    "open_viking_tether": "open_viking://worldtree/sir_huggingface",
+    "updated_at": "2026-09-22T14:35:52.255812+00:00"
+  },
+  {
+    "knight_id": "SIR_HUGGINGFACE",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "spark_id": "0xHFHUB777000000000000000000007777",
     "role": "Model Inspection, Spaces Management, Transformer Pipelines",

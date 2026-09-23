@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-23T16:02:57.229509+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-23T16:02:56.498049+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:39:41.753868+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:39:40.146477+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:38:43.029774+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:38:41.459489+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:37:01.981868+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:37:00.315224+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:35:53.769654+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_GALAHAD",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_galahad\",\n  \"session_id\": \"sess_knight_sir_galahad\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_galahad/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GALAHAD",
+    "open_viking_tether": "open_viking://worldtree/sir_galahad",
+    "updated_at": "2026-09-22T14:35:51.759011+00:00"
+  },
+  {
+    "knight_id": "SIR_GALAHAD",
     "cloudbrain_uuid": "e0110853-14ef-403f-8def-bf3a5123986f",
     "spark_id": "0xE011085314EF403F8DEFBF3A5123986F",
     "role": "Chivalric Verification, Cryptographic Purity, Truth Audit",

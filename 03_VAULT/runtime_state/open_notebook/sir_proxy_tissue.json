@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-23T16:02:58.301653+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-23T16:02:56.815766+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:39:42.770559+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:39:41.175985+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:38:44.086547+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:38:42.414609+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:37:03.102424+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:37:01.377057+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:35:54.219593+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_PROXY",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_proxy\",\n  \"session_id\": \"sess_knight_sir_proxy\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_proxy/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_PROXY",
+    "open_viking_tether": "open_viking://worldtree/sir_proxy",
+    "updated_at": "2026-09-22T14:35:53.303482+00:00"
+  },
+  {
+    "knight_id": "SIR_PROXY",
     "cloudbrain_uuid": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "spark_id": "0x02PROXY0000000000000000000000002",
     "role": "Ghost Swarm Protocol & TLS Fingerprinting",

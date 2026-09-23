@@ -19,7 +19,7 @@
       }
     ],
     "lineage_height": 23,
-    "merkle_root": "65cfb92fe36a253a7027a7854c54be4e378b339bb6bd68378e941a411fcf0b77"
+    "merkle_root": "38fe9190e8c3cf86a7d9a1fa4e93d56dda2a3bb4d63b6a3d04a6dfee4fd5ef7b"
   },
   "adoption_verdicts": {
     "synthetos": "VERIFIED",
@@ -62,7 +62,7 @@
   "doctrine": "1_TO_M_TO_A",
   "source_digests": {
     "crystal_source": "641f2626b22a67df40d1e34edc2673dede1782d5e664f4872446da2d64ade9e7",
-    "lease_hash": "92dc84c46a85f5297b84cb2ecb754c6e6f6ad522ee74f1949e8632a1e0b5f518"
+    "lease_hash": "4a1188b72742140c41db0176e607fc218192ede0f9d2a4530e6375357af2aa28"
   },
   "compatibility_metadata": {
     "memory_ceiling_mb": 12.0,
