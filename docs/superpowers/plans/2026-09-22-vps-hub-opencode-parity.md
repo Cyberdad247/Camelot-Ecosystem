@@ -30,7 +30,7 @@
 - Consumes: nothing (standalone agent definition, mirrors `.opencode/agents/sir-sentinel.md` pattern)
 - Produces: `hermes-prime` agent usable by opencode runtime
 
-- [ ] **Step 1: Create the agent file**
+- [x] **Step 1: Create the agent file**
 
 ```markdown
 ---
@@ -53,12 +53,12 @@ Rules:
 - Report findings with file:line references. Notebook pins: HERMES_PRIME `28f89cb6-5048-4b5d-9e94-376082d24744`, SIR_HEIMDALL `3205f189-91da-4272-96a9-3641fd642763`, WORLD_TREE `a0a4bfb9-e847-4c38-be39-7aee398f0795`, BIFROST `cbbb0c32-3919-4b77-9158-1d9f9ebf359f`.
 ```
 
-- [ ] **Step 2: Verify the file reads back**
+- [x] **Step 2: Verify the file reads back**
 
 Run: Read `.opencode/agents/hermes-prime.md`
 Expected: content matches above, frontmatter intact
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add .opencode/agents/hermes-prime.md
@@ -75,7 +75,7 @@ git commit -m "feat: add hermes-prime vps hub opencode agent"
 - Consumes: `control_plane.infra.vps_hub_client` CLI (existing)
 - Produces: `vps-hub` skill workflow for agents
 
-- [ ] **Step 1: Create the skill file**
+- [x] **Step 1: Create the skill file**
 
 ```markdown
 # Skill: vps-hub
@@ -125,12 +125,12 @@ without explicit human approval for that invocation.
 Base directory for this skill: C:\Users\vizio\CAMELOT_OS\.agents\skills\vps-hub
 ```
 
-- [ ] **Step 2: Run offline validation**
+- [x] **Step 2: Run offline validation**
 
 Run: `.venv\Scripts\python.exe -m control_plane.infra.vps_hub_client --status`
 Expected: `status: OK`, `mode: OFFLINE`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add .agents/skills/vps-hub/SKILL.md
@@ -148,7 +148,7 @@ git commit -m "feat: add vps-hub skill"
 - Consumes: Task 2 skill workflow (same CLI surface)
 - Produces: `/vps-hub-validate`, `/vps-hub-lease` opencode commands
 
-- [ ] **Step 1: Create vps-hub-validate.md**
+- [x] **Step 1: Create vps-hub-validate.md**
 
 ```markdown
 ---
@@ -164,7 +164,7 @@ Validate `$ARGUMENTS` (expected `<schema> <file>`):
 Focus: $ARGUMENTS
 ```
 
-- [ ] **Step 2: Create vps-hub-lease.md**
+- [x] **Step 2: Create vps-hub-lease.md**
 
 ```markdown
 ---
@@ -179,7 +179,7 @@ Print lease scope for `$ARGUMENTS` (expected `<workspace> <notebook>`):
 Focus: $ARGUMENTS
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add .opencode/commands/vps-hub-validate.md .opencode/commands/vps-hub-lease.md
@@ -196,7 +196,7 @@ git commit -m "feat: add vps-hub validate and lease commands"
 - Consumes: Tasks 1–3 command strings (must match exactly)
 - Produces: offline commands runnable without `ask` prompts; `--live`/`--ssh` stay gated
 
-- [ ] **Step 1: Add allow entries**
+- [x] **Step 1: Add allow entries**
 
 In `opencode.json` `permission.bash`, after `"python -m pytest tests*": "allow",` insert:
 
@@ -209,12 +209,12 @@ In `opencode.json` `permission.bash`, after `"python -m pytest tests*": "allow",
 
 `--live` and `--ssh` intentionally absent → fall through to `"*": "ask"`.
 
-- [ ] **Step 2: Verify JSON + diff scope**
+- [x] **Step 2: Verify JSON + diff scope**
 
 Run: `.venv\Scripts\python.exe -c "import json; json.load(open('opencode.json')); print('JSON OK')"`
 Expected: `JSON OK`, and `git diff --stat` shows only `opencode.json`
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add opencode.json
@@ -230,17 +230,17 @@ git commit -m "feat: allowlist offline vps-hub commands in opencode"
 - Consumes: Tasks 1–4 deliverables
 - Produces: verified parity report (this chat message, not a file)
 
-- [ ] **Step 1: Offline status**
+- [x] **Step 1: Offline status**
 
 Run: `.venv\Scripts\python.exe -m control_plane.infra.vps_hub_client --status`
 Expected: `mode: OFFLINE`, contracts `VENDORED` count 11
 
-- [ ] **Step 2: Runic dispatch**
+- [x] **Step 2: Runic dispatch**
 
 Run: `.venv\Scripts\python.exe -m control_plane.runes.runic_router --rune VPS_HUB --task "parity check"`
 Expected: `vps_hub_status` payload, `mode: OFFLINE`
 
-- [ ] **Step 3: Canonical pytest (single file)**
+- [x] **Step 3: Canonical pytest (single file)**
 
 Run: `.venv\Scripts\python.exe -m pytest tests/control_plane/test_kinetic_trinity_vps_hub.py -x -q`
 Expected: PASS (no repo-root sweep)
