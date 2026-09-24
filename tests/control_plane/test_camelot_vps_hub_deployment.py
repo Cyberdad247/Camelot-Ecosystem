@@ -14,9 +14,8 @@ import hashlib
 import hmac
 import json
 from pathlib import Path
-import pytest
 
-from control_plane.infra.vps_github_webhook import CamelotVPSWebhookHandler, WebhookDeliveryReceipt
+from control_plane.infra.vps_github_webhook import CamelotVPSWebhookHandler
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent

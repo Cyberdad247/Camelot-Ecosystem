@@ -149,12 +149,23 @@ require_port() {
 }
 
 # Token-aware endpoint probe. Once MESH_BRIDGE_TOKEN is provisioned, the mesh bridge
-# requires it; probing without it would report a healthy host as broken.
+# requires it; probing without it would report a healthy host as broken. The token is
+# read from the environment or the root-only env file on the hub and is NEVER echoed.
+mesh_token() {
+  local token="${MESH_BRIDGE_TOKEN:-}"
+  if [[ -z "$token" && -r /etc/camelot/mesh.env ]]; then
+    token="$(grep -s '^MESH_BRIDGE_TOKEN=' /etc/camelot/mesh.env | head -1 | cut -d= -f2-)"
+  fi
+  printf '%s' "$token"
+}
+
 mesh_http_code() {
   local url="$1"
-  if [[ -n "${MESH_BRIDGE_TOKEN:-}" ]]; then
+  local token
+  token="$(mesh_token)"
+  if [[ -n "$token" ]]; then
     curl -s -o /dev/null -w '%{http_code}' --max-time 8 \
-      -H "x-camelot-token: ${MESH_BRIDGE_TOKEN}" "$url"
+      -H "x-camelot-token: ${token}" "$url"
   else
     curl -s -o /dev/null -w '%{http_code}' --max-time 8 "$url"
   fi
@@ -249,11 +260,26 @@ if [[ "$MODE" == "apply" ]]; then
   fi
 fi
 
+# Build/vector toolchain is conditional (R4, HITL 2026-09-23): the minimal hub
+# topology runs no Rust/Go builds and no local vector store, so absence is
+# expected state (WARN), not a failed post-condition. Present-but-broken => FAIL.
 for tool in cargo go qdrant tailscale; do
-  check "$tool installed" command -v "$tool"
+  if command -v "$tool" >/dev/null 2>&1; then
+    ok "$tool installed"
+  else
+    warn "$tool not installed (not part of the minimal hub topology)"
+  fi
 done
-check "postgresql active" systemctl is-active --quiet postgresql
-check "minio-user exists" id minio-user
+
+# Conditional datastore checks (R4, HITL 2026-09-23): honcho/postgres were dropped
+# from the hub topology, so their absence is expected state, not a failed post-condition.
+# Absent => WARN (informational). Present-but-broken => FAIL, as before.
+if command -v psql >/dev/null 2>&1 || systemctl list-unit-files --type=service --no-pager --no-legend 2>/dev/null | grep -q '^postgresql'; then
+  check "postgresql active" systemctl is-active --quiet postgresql
+  check "minio-user exists" id minio-user
+else
+  warn "postgresql not deployed (dropped from hub topology, docs/HITL_VPS_REMEDIATION_PLAN.md R2/R4) — datastore checks skipped"
+fi
 
 # ========================================================================================
 # PHASE 3 — CAMELOT ECOSYSTEM & SYSTEMD UNITS
@@ -441,9 +467,17 @@ if [[ "$MODE" == "apply" ]]; then
     "curl -s -X PUT http://localhost:6333/collections/world_tree -H 'Content-Type: application/json' -d '{\"vectors\":{\"size\":24,\"distance\":\"Cosine\"}}' >/dev/null"
 fi
 
-check "database camelot_vmax exists" bash -c \
-  "sudo -u postgres psql -tAc \"SELECT 1 FROM pg_database WHERE datname='camelot_vmax'\" 2>/dev/null | grep -q 1"
-check "qdrant collection world_tree reachable" curl -sf http://localhost:6333/collections/world_tree
+if command -v psql >/dev/null 2>&1; then
+  check "database camelot_vmax exists" bash -c \
+    "sudo -u postgres psql -tAc \"SELECT 1 FROM pg_database WHERE datname='camelot_vmax'\" 2>/dev/null | grep -q 1"
+else
+  warn "postgres datastore absent — camelot_vmax check skipped (dropped from hub topology)"
+fi
+if command -v qdrant >/dev/null 2>&1; then
+  check "qdrant collection world_tree reachable" curl -sf http://localhost:6333/collections/world_tree
+else
+  warn "qdrant binary absent — world_tree collection check skipped (dropped from hub topology)"
+fi
 
 # ========================================================================================
 # PHASE 5 — ALWAYS-ON DAEMONS (the phase whose failures used to be invisible)
@@ -474,7 +508,18 @@ done
 # The freshness rule itself lives in the bridge (`hermes_prime_status`), so this asserts
 # the SERVED verdict instead of restating the window here. A second copy of the threshold
 # would be a second source of truth, which is what let the original claim rot.
-hp_served="$(curl -fsS -m 10 "http://127.0.0.1:8095/api/hermes" 2>/dev/null \
+#
+# Bind-plane note (2026-09-23): camelot-vps-mesh listens on the tailscale0 address
+# ONLY, so 127.0.0.1:8095 refuses connections and this check falsely reports the
+# engine dead. Resolve the mesh bind dynamically; fall back to loopback only if
+# tailscale0 is missing. Additionally, the assignment is guarded: under
+# `set -euo pipefail` an unguarded `$(curl ... | python3 ...)` aborts the whole
+# audit with curl's exit code (7 = connection refused) before any FAIL is
+# recorded — the exact mechanism that produced the exit-7 selfcheck failures.
+mesh_bind="$(ip -4 -o addr show tailscale0 2>/dev/null | awk '{print $4}' | cut -d/ -f1 | head -1 || true)"
+[[ -n "$mesh_bind" ]] || mesh_bind="127.0.0.1"
+_hp_token="$(mesh_token)"
+hp_served="$(curl -fsS -m 10 ${_hp_token:+-H "x-camelot-token: ${_hp_token}"} "http://${mesh_bind}:8095/api/hermes" 2>/dev/null \
   | python3 -c 'import json,sys
 try:
     d = json.load(sys.stdin)
@@ -482,7 +527,7 @@ except Exception:
     print("unreachable"); raise SystemExit
 # Only the fields /api/hermes actually carries. Printing a field this endpoint does
 # not expose would render `cycles=None` as though data were missing.
-print("%s age=%ss" % (d.get("status"), d.get("last_cycle_age_s")))' 2>/dev/null)"
+print("%s age=%ss" % (d.get("status"), d.get("last_cycle_age_s")))' 2>/dev/null || true)"
 if [[ "$hp_served" == ALWAYS_ON_HUB* ]]; then
   ok "hermes prime engine producing fresh cycles (${hp_served})"
 else
@@ -504,6 +549,22 @@ done
 # Outcome, not implementation: nginx serves the hub today, so requiring `caddy` would
 # fail a correctly-working host. What matters is that the daemons above are enabled and
 # the ports answer. Anything else is reported as drift for a human to judge.
+
+# Webhook ingress parity (R3, HITL 2026-09-23 — nginx parity chosen over Caddy).
+# While the receiver is not deployed this stays a WARN; once the snippet is installed
+# it must be ACTIVE in the effective nginx config, else the parity silently rotted.
+if [[ -f /etc/nginx/snippets/camelot-webhook.conf ]] && command -v nginx >/dev/null 2>&1; then
+  # Whitespace-tolerant: the snippet aligns values with padding, and -F with a
+  # single space would report a healthy route as missing.
+  if nginx -T 2>/dev/null | grep -Eq 'proxy_pass[[:space:]]+http://127\.0\.0\.1:9000'; then
+    ok "nginx webhook route parity (/webhook -> 127.0.0.1:9000)"
+  else
+    bad "nginx webhook parity: snippet installed but route not active in nginx -T"
+  fi
+else
+  warn "nginx webhook parity snippet not installed (docs/HITL_VPS_REMEDIATION_PLAN.md R3 — pending receiver deployment)"
+fi
+
 if systemctl is-active --quiet caddy 2>/dev/null; then
   ok "caddy active"
 elif ss -ltn 2>/dev/null | awk '{print $4}' | grep -qE '[:.]443$'; then

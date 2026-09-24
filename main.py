@@ -15,7 +15,6 @@ import numpy as np
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, status, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response
-from pydantic import BaseModel
 
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 

@@ -2098,3 +2098,55 @@
 - Missing: `nextjs` — create `.hive/skills/nextjs.md`
 - Missing: `reasoning` — create `.hive/skills/reasoning.md`
 - Missing: `voice-media` — create `.hive/skills/voice-media.md`
+
+## Archivist Scan — 2026-09-23T20:45:29.992975+00:00 (25ms)
+
+### Skills: 0/0 @ v400.1.0 OK
+
+### Skill Gaps (FRAGMENTED)
+- Missing: `rust-kinetic` — create `.hive/skills/rust-kinetic.md`
+- Missing: `security` — create `.hive/skills/security.md`
+- Missing: `swarm-colony` — create `.hive/skills/swarm-colony.md`
+- Missing: `python-api` — create `.hive/skills/python-api.md`
+- Missing: `nextjs` — create `.hive/skills/nextjs.md`
+- Missing: `reasoning` — create `.hive/skills/reasoning.md`
+- Missing: `voice-media` — create `.hive/skills/voice-media.md`
+
+## Archivist Scan — 2026-09-23T21:45:30.038420+00:00 (19ms)
+
+### Skills: 0/0 @ v400.1.0 OK
+
+### Skill Gaps (FRAGMENTED)
+- Missing: `rust-kinetic` — create `.hive/skills/rust-kinetic.md`
+- Missing: `security` — create `.hive/skills/security.md`
+- Missing: `swarm-colony` — create `.hive/skills/swarm-colony.md`
+- Missing: `python-api` — create `.hive/skills/python-api.md`
+- Missing: `nextjs` — create `.hive/skills/nextjs.md`
+- Missing: `reasoning` — create `.hive/skills/reasoning.md`
+- Missing: `voice-media` — create `.hive/skills/voice-media.md`
+
+## Archivist Scan — 2026-09-23T22:45:30.073677+00:00 (23ms)
+
+### Skills: 0/0 @ v400.1.0 OK
+
+### Skill Gaps (FRAGMENTED)
+- Missing: `rust-kinetic` — create `.hive/skills/rust-kinetic.md`
+- Missing: `security` — create `.hive/skills/security.md`
+- Missing: `swarm-colony` — create `.hive/skills/swarm-colony.md`
+- Missing: `python-api` — create `.hive/skills/python-api.md`
+- Missing: `nextjs` — create `.hive/skills/nextjs.md`
+- Missing: `reasoning` — create `.hive/skills/reasoning.md`
+- Missing: `voice-media` — create `.hive/skills/voice-media.md`
+
+## Archivist Scan — 2026-09-23T23:45:30.118428+00:00 (15ms)
+
+### Skills: 0/0 @ v400.1.0 OK
+
+### Skill Gaps (FRAGMENTED)
+- Missing: `rust-kinetic` — create `.hive/skills/rust-kinetic.md`
+- Missing: `security` — create `.hive/skills/security.md`
+- Missing: `swarm-colony` — create `.hive/skills/swarm-colony.md`
+- Missing: `python-api` — create `.hive/skills/python-api.md`
+- Missing: `nextjs` — create `.hive/skills/nextjs.md`
+- Missing: `reasoning` — create `.hive/skills/reasoning.md`
+- Missing: `voice-media` — create `.hive/skills/voice-media.md`

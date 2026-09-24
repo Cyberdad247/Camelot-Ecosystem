@@ -16,16 +16,14 @@
     "version": "Living Camelot-OS v1000 MAX Compendium",
     "deployed_repository": "https://github.com/Cyberdad247/Camelot-VPS.git",
     "deployed_branch": "main",
-    "deployed_commit": "27e66d0113879dc39b8122a51284624bcb95e692",
-    "deployed_commit_summary": "feat(vps-hub): implement Omni-Voice DAG, VPS Nexus deployment, and WorldTree integration",
-    "deployed_commit_verified_at": "2026-09-20T01:18:15.571274+00:00",
+    "deployed_commit": "77c947e7535ac8681e5b13e6b275f077bc0c84e2",
+    "deployed_commit_summary": "feat(cloudbrain): implement zero-login autonomous fallback and harvest 8 architectural jewels into main",
+    "deployed_commit_verified_at": "2026-09-23T23:28:57.754880+00:00",
     "deployed_commit_verification": "live ssh git rev-parse probe",
     "last_delivery_id": "del_34aed52a",
     "services": {
-      "caddy_worldtree_gateway": 80,
+      "nginx_worldtree_gateway": 80,
       "bifrost_gateway": 3001,
-      "multivoice_router": 7680,
-      "honcho_self_hosted": 8000,
       "vps_mobile_mesh_bridge": 8095,
       "webhook_receiver": 9000
     },
@@ -84,34 +82,28 @@
       }
     },
     "services_state": {
-      "caddy_worldtree_gateway": "RUNNING (live probe)",
+      "nginx_worldtree_gateway": "RUNNING (live probe)",
       "bifrost_gateway": "RUNNING (live probe)",
-      "multivoice_router": "STOPPED (live probe: port closed)",
-      "honcho_self_hosted": "STOPPED (live probe: port closed)",
       "vps_mobile_mesh_bridge": "RUNNING (live probe)",
-      "webhook_receiver": "STOPPED (live probe: port closed)"
+      "webhook_receiver": "RUNNING (live probe)"
     },
     "live_probes": {
       "port_80": "OPEN",
       "port_3001": "OPEN",
-      "port_7680": "CLOSED",
-      "port_8000": "CLOSED",
       "port_8095": "OPEN",
-      "port_9000": "CLOSED",
-      "probe_timestamp": "2026-09-20T01:18:15.571274+00:00"
+      "port_9000": "OPEN",
+      "probe_timestamp": "2026-09-23T23:28:57.754880+00:00",
+      "worldtree_http_status": 200,
+      "bifrost_health_status": 200
     },
     "drift": {
-      "detected": true,
-      "stopped_services": [
-        "multivoice_router",
-        "honcho_self_hosted",
-        "webhook_receiver"
-      ],
-      "summary": "3 recorded service(s) not reachable"
+      "detected": false,
+      "stopped_services": [],
+      "summary": "all recorded services reachable"
     },
     "status": "MERGED_MAIN_UNIFIED",
-    "timestamp": "2026-09-20T01:18:10.614549+00:00",
-    "last_synced": "2026-09-20T01:18:10.614549+00:00",
+    "timestamp": "2026-09-23T23:28:53.657081+00:00",
+    "last_synced": "2026-09-23T23:28:53.657081+00:00",
     "active_cartridges": [
       "omarchy-vps-hermes-v1",
       "vps-hub-cartridge-v1"

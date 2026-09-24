@@ -98,10 +98,14 @@ class CamelotVPSWebhookHandler:
         ref = data.get("ref", "refs/heads/main")
         commit_sha = data.get("after", "unknown")
 
-        # 3. Simulate or execute deployment
-        LOG.info(f"[WEBHOOK_SYNC] Verified push from {repo_name} ({ref} @ {commit_sha[:7]}). Deploying to /var/www/worldtree...")
-        
-        build_status = "DEPLOYED"
+        # 3. Deployment: verified push -> ACCEPTED receipt; the real pipeline
+        # (branch-gated, SHA-verified pull/build/sync) runs in a background
+        # thread and FINALIZES this receipt afterwards. Without
+        # CAMELOT_DEPLOY_ENABLED=1 the receipt stays ACCEPTED with an explicit
+        # note — it never claims a deploy that did not happen.
+        LOG.info(
+            f"[WEBHOOK_SYNC] Verified push from {repo_name} ({ref} @ {commit_sha[:7]})"
+        )
 
         receipt = WebhookDeliveryReceipt(
             delivery_id=delivery_id,
@@ -109,11 +113,41 @@ class CamelotVPSWebhookHandler:
             ref=ref,
             commit_sha=commit_sha,
             verified=True,
-            build_status=build_status
+            build_status="ACCEPTED",
         )
 
         self._save_receipt(receipt)
+
+        if os.getenv("CAMELOT_DEPLOY_ENABLED", "") == "1":
+            from control_plane.infra.webhook_deploy import spawn_deploy
+
+            def _finalize(res) -> None:
+                self._update_receipt(
+                    receipt.delivery_id,
+                    build_status=res.status,
+                    deploy_steps=res.steps,
+                    deploy_error=res.error,
+                )
+                LOG.info("[WEBHOOK_DEPLOY] %s -> %s", receipt.delivery_id, res.status)
+
+            spawn_deploy(data, _finalize)
+        else:
+            self._update_receipt(
+                receipt.delivery_id,
+                deploy_error="deploy disabled (CAMELOT_DEPLOY_ENABLED not set)",
+            )
+
         return receipt
+
+    def _update_receipt(self, delivery_id: str, **fields) -> None:
+        """Merge extra fields into a saved receipt (deploy finalization)."""
+        target_file = self.state_dir / f"{delivery_id}.json"
+        try:
+            record = json.loads(target_file.read_text(encoding="utf-8"))
+        except Exception:
+            return
+        record.update(fields)
+        target_file.write_text(json.dumps(record, indent=2), encoding="utf-8")
 
     def _save_receipt(self, receipt: WebhookDeliveryReceipt) -> None:
         target_file = self.state_dir / f"{receipt.delivery_id}.json"

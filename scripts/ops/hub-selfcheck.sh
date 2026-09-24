@@ -174,13 +174,27 @@ deliver() {
   fi
 
   if [[ -n "${CAMELOT_ALERT_WEBHOOK:-}" ]]; then
-    if curl -sS -m 10 -X POST -H 'Content-Type: application/json' \
-         --data "$(python3 -c 'import json,sys;print(json.dumps({"text":open(sys.argv[1]).read()}))' "$STATUS")" \
-         "$CAMELOT_ALERT_WEBHOOK" >/dev/null 2>&1; then
-      channels+=("webhook")
+    local hook_code
+    if [[ "$CAMELOT_ALERT_WEBHOOK" == *ntfy.sh* ]]; then
+      # ntfy: raw message body with the subject as Title header — the JSON
+      # {"text"} envelope is not a payload ntfy displays. Optional bearer
+      # token (CAMELOT_ALERT_NTFY_TOKEN) for private topics; a public
+      # ntfy.sh topic is readable by anyone who knows its name.
+      hook_code="$(curl -sS -m 15 -o /dev/null -w '%{http_code}' \
+        -H "Title: ${subject}" \
+        ${CAMELOT_ALERT_NTFY_TOKEN:+-H "Authorization: Bearer ${CAMELOT_ALERT_NTFY_TOKEN}"} \
+        --data-binary "$body" \
+        "$CAMELOT_ALERT_WEBHOOK" 2>/dev/null)"
     else
-      channels+=("webhook:FAILED")
+      hook_code="$(curl -sS -m 15 -o /dev/null -w '%{http_code}' -X POST \
+        -H 'Content-Type: application/json' \
+        --data "$(python3 -c 'import json,sys;print(json.dumps({"text":open(sys.argv[1]).read()}))' "$STATUS")" \
+        "$CAMELOT_ALERT_WEBHOOK" 2>/dev/null)"
     fi
+    case "$hook_code" in
+      200|201|202) channels+=("webhook:delivered") ;;
+      *)           channels+=("webhook:FAILED(http_${hook_code:-000})") ;;
+    esac
   else
     channels+=("webhook:unconfigured")
   fi
