@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 import json
 
-import pytest
 
 from control_plane.dispatch import vps_mobile_mesh_bridge as bridge
 from control_plane.dispatch.vps_mobile_mesh_bridge import load_mesh_topology

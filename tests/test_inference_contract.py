@@ -2,7 +2,7 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 
 import pytest
-from control_plane.dispatch.inference_contract import InferenceBroker, InferenceIntent
+from control_plane.dispatch.inference_contract import InferenceBroker
 
 
 def test_inference_intent_creation_and_signing():

@@ -11,12 +11,6 @@ Validates the complete 6-stage lifecycle orchestrator:
 """
 from __future__ import annotations
 
-import copy
-import hashlib
-import json
-import time
-import uuid
-import pytest
 
 from control_plane.dispatch.idempotency_guardian import (
     DurableIdempotencyStore,
@@ -26,7 +20,6 @@ from control_plane.dispatch.idempotency_guardian import (
     IdempotencyStatus,
 )
 from control_plane.pipeline.sovereign_pipeline import (
-    PipelineExecutionResult,
     PipelineStage,
     PipelineStatus,
     SovereignPipeline,
@@ -43,8 +36,6 @@ from control_plane.security.arthur_resolution import (
 from control_plane.security.authority_vector import AuthorityVector
 from control_plane.security.receipt_chain import (
     SovereignMerkleCheckpointGovernor,
-    TenantIsolationViolation,
-    TenantReceiptChain,
 )
 from control_plane.security.sir_gideon import GideonVerifier
 from security.warden import SecurityWarden

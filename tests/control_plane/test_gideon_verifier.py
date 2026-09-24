@@ -20,11 +20,9 @@ Validates:
 """
 from __future__ import annotations
 
-import pytest
 
 from control_plane.security.sir_gideon import (
     GideonVerifier,
-    GideonVerdict,
     CANONICAL_GIDEON_GATES,
 )
 

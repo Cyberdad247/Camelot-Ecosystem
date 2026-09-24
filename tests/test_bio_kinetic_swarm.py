@@ -5,11 +5,9 @@ Unit tests for Bio-Kinetic Swarm Coordinator & Nanobot Embedding Engine.
 """
 from __future__ import annotations
 
-import pytest
 from control_plane.swarm.bio_kinetic_swarm import (
     BioKineticSwarmCoordinator,
-    NanobotEmbeddingEngine,
-    BioKineticCell
+    NanobotEmbeddingEngine
 )
 
 def test_nanobot_self_healing_missing_import():

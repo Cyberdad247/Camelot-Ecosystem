@@ -1,7 +1,5 @@
-import json
 import sys
 from pathlib import Path
-import pytest
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
@@ -11,7 +9,7 @@ sys.path.insert(0, str(REPO_ROOT / "01_KERNEL"))
 
 def test_sir_helios_session_keepalive_cron():
     """Verify Sir Helios responsibility to keep session alive as a cron job."""
-    from control_plane.dispatch.session_keepalive_cron import helios_keepalive_daemon, SessionKeepAliveReport
+    from control_plane.dispatch.session_keepalive_cron import helios_keepalive_daemon
     from control_plane.infra.knight_registry import ArchLibrarianRegistry
 
     # 1. Verify keepalive tick execution
@@ -70,7 +68,7 @@ def test_sir_sonus_multivoice_router_engineer_responsibilities():
 
 def test_lady_mnemosyne_active_triggered_sync_loop():
     """Verify Lady Mnemosyne active sync triggered loop per 5 changes to Cloudbrain system."""
-    from vfs.worldtree_vkg_sync import LadyMnemosyneTriggerLoop, TRIGGER_STATE_PATH
+    from vfs.worldtree_vkg_sync import LadyMnemosyneTriggerLoop
     from control_plane.infra.knight_registry import ArchLibrarianRegistry
 
     # 1. Verify character sheet

@@ -16,7 +16,6 @@ import pytest
 from control_plane.security.arthur_resolution import (
     ArthurResolutionGovernor,
     ArthurResolutionError,
-    ArthurResolution,
 )
 from control_plane.security.receipt_chain import TenantReceiptChain
 from control_plane.security.sir_gideon import GideonVerifier, GideonVerdict

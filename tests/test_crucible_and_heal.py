@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 
-import pytest
 from control_plane.consensus.crucible_engine import CrucibleConsensusEngine, KnightVote
 from control_plane.infra.piv_auto_heal import PIVSelfHealingDaemon
 

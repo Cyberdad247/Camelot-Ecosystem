@@ -22,7 +22,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from control_plane.runes.runic_router import route_rune, _handle_reverse_engineer, _handle_horde, _handle_fauna_corvus
+from control_plane.runes.runic_router import route_rune
 
 
 @pytest.fixture

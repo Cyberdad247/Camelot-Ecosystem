@@ -10,26 +10,22 @@ Coordinates operator execution of the Sovereign End-to-End Pipeline:
 from __future__ import annotations
 
 import json
-import os
 import sys
 import uuid
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from control_plane.cli.renderer import _emit, _print_json, _stream_print
+from control_plane.cli.renderer import _print_json, _stream_print
 from control_plane.infra.scarcity_guardian import (
     ScarcityGuardian,
     verify_zero_docker_compliance,
 )
 from control_plane.pipeline.sovereign_pipeline import (
-    PipelineExecutionResult,
-    PipelineStage,
     PipelineStatus,
     SovereignPipeline,
     TaskProposal,
 )
 from control_plane.security.authority_vector import AuthorityVector
-from control_plane.security.sir_gideon import sha256_canonical
 
 
 def _load_manifest(manifest_arg: Optional[str]) -> Dict[str, Any]:

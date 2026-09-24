@@ -2,14 +2,12 @@
 """Unit tests for VPS Fallback Governing Law under 4GB scarcity constraint."""
 
 import time
-from pathlib import Path
 
 import pytest
 
 from control_plane.dispatch.vps_fallback_governing_law import (
     BoundedEdgeOutbox,
     FallbackState,
-    MAX_OUTBOX_ENTRIES,
     MAX_RSS_BYTES,
     VPSFallbackGovernor,
 )

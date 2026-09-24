@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
@@ -21,7 +21,7 @@ from control_plane.cli.iron_gate import (
     set_non_interactive as set_non_interactive,
 )
 from control_plane.runes.camelot_cli import *  # noqa: F401, F403
-from security.warden import SecurityDecision, SecurityException, warden
+from security.warden import SecurityDecision, warden
 
 
 def execute_governed_command(

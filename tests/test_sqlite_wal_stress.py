@@ -14,7 +14,6 @@ import tempfile
 import threading
 import time
 import tracemalloc
-import pytest
 
 
 def setup_wal_db(db_path: str):

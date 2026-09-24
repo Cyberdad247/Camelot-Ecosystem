@@ -20,7 +20,7 @@ import time
 import json
 import logging
 import subprocess
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 # Try importing Z3 verification engine

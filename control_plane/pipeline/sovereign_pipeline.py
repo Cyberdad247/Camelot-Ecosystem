@@ -28,19 +28,14 @@ import logging
 import re
 import time
 import uuid
-from dataclasses import asdict, dataclass, field
-from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Sequence, Tuple, Union
+from dataclasses import dataclass, field
+from typing import Any, Callable, Dict, List, Optional, Sequence, Union
 
 from control_plane.dispatch.idempotency_guardian import (
-    DurableIdempotencyStore,
-    FastMutexAccelerator,
     IdempotencyConflictError,
     IdempotencyDecision,
     IdempotencyGuardian,
     IdempotencyPayloadMismatchError,
-    IdempotencyRecord,
-    IdempotencyStatus,
 )
 from control_plane.infra.scarcity_guardian import (
     ScarcityGuardian,
@@ -48,29 +43,22 @@ from control_plane.infra.scarcity_guardian import (
 )
 from control_plane.sandbox.wasmtime_runner import (
     BoundedExecutionEnvelope,
-    CapabilityLeaseError,
     HostEvidenceEnclave,
     HostVFSEnclave,
-    VFSConfinementError,
     WasmtimeSandboxRunner,
 )
 from control_plane.security.arthur_resolution import (
     ArthurResolution,
-    ArthurResolutionError,
     ArthurResolutionGovernor,
 )
 from control_plane.security.authority_vector import AuthorityVector
 from control_plane.security.receipt_chain import (
     Receipt,
-    ReceiptActor,
-    ReceiptProof,
     SovereignMerkleCheckpoint,
     SovereignMerkleCheckpointGovernor,
     TenantReceiptChain,
 )
 from control_plane.security.sir_gideon import (
-    CANONICAL_EFFECT_CLASSES,
-    CANONICAL_GIDEON_GATES,
     GideonVerdict,
     GideonVerifier,
     sha256_canonical,
