@@ -1,0 +1,13 @@
+{
+  "step": "VALIDATION_SWARM",
+  "rigor_ladder": {
+    "L4": "cross-verified proof",
+    "L3": "property battery",
+    "L2": "SMT bound",
+    "L1": "self-test"
+  },
+  "results": {
+    "mission_layout_self_test": "11/11 PASS",
+    "governance_guard": "docs/ and ledger basenames blocked at any depth"
+  }
+}

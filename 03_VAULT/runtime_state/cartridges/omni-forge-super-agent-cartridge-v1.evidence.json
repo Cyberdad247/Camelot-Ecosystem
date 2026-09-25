@@ -1,12 +1,12 @@
 {
   "schema": "camelot.crucible_receipt/1",
   "cartridge_id": "omni-forge-super-agent-cartridge-v1",
-  "manifest_sha256": "66974e1df69c3f2e2bd99b20c7d4882cde82500da68a72dac85b863d7f4d11c5",
+  "manifest_sha256": "5fb805e96df42727ef8a5a270cae12b4c24d363f48edcd1cde94580b79540413",
   "manifest_path": "03_VAULT\\runtime_state\\cartridges\\omni-forge-super-agent-cartridge-v1.json",
   "verdict": "CERTIFIED",
   "risk_score": 0,
   "gates_passed": 5,
   "sealed_by": "MERLIN_OMEGA_CRUCIBLE_SEAL",
-  "sealed_at": "2026-09-24T21:45:43Z",
+  "sealed_at": "2026-09-25T00:35:24Z",
   "crucible_version": "1.0.0"
 }

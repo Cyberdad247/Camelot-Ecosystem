@@ -27,9 +27,9 @@
       "//EQUIP_SKILLS",
       "//CRUCIBLE_AUDIT"
     ],
-    "status": "planned",
-    "note": "Not yet in control_plane/runes/runic_router.py RUNIC_COMMANDS. Registration (RUNES entry + handler + aliases + unit tests) is deferred work; until then these runes have no dispatch authority. Emoji-prefixed variants from the source spec are rejected as non-canonical; aliases will be bare //UPPER_SNAKE forms.",
-    "alias_plan": {
+    "status": "registered",
+    "note": "Registered in control_plane/runes/runic_router.py RUNIC_COMMANDS with handlers routed to control_plane.mission_layout.MissionSession, 16 hyphen aliases, and unit tests (tests/control_plane/test_factory_runes.py). Emoji-prefixed variants from the source spec are rejected as non-canonical; aliases are bare //UPPER_SNAKE / hyphen / $ / / forms.",
+    "registered_aliases": {
       "//forge-factory": "//FORGE_FACTORY",
       "//translate-dag": "//TRANSLATE_DAG",
       "//equip-skills": "//EQUIP_SKILLS",
@@ -93,11 +93,12 @@
       "TOON toolchain (control_plane/cli/toon_manifest.py, control_plane/toon_encoder.py)",
       "Z3 patch verification over 5 safety fluents (control_plane/infra/z3_verify.py)",
       "Per-mission runtime_state layout with sha256 pinning (control_plane/mission_layout.py, 11/11 self-test)",
-      "5-gate cartridge crucible with seal/verify continuity (control_plane/infra/cartridge_crucible.py, 13/13 self-test)"
+      "5-gate cartridge crucible with seal/verify continuity (control_plane/infra/cartridge_crucible.py, 13/13 self-test)",
+      "Factory runes //FORGE_FACTORY, //TRANSLATE_DAG, //EQUIP_SKILLS, //CRUCIBLE_AUDIT registered in runic_router.py with handlers, aliases, and tests (test_factory_runes.py, 20 cases)"
     ],
     "planned": [
-      "Registration of //FORGE_FACTORY, //TRANSLATE_DAG, //EQUIP_SKILLS, //CRUCIBLE_AUDIT in runic_router.py",
-      "Mission runner binding factory steps to mission_layout.MissionSession"
+      "Full mission runner binding all 5 DAG steps to one orchestrated flow (runes cover Steps 1-4 scaffold/seed plus Step 5 audit; Step 3 blueprint refinement is operator/knight-driven)",
+      "Demo mission runner generalization beyond the mission_layout --demo seed data"
     ],
     "aspirational": [
       "Symbolect/TOON compression ratios (>70% token reduction, <10% semantic loss) — asserted by source spec, not yet benchmarked in this repo; measure before quoting"

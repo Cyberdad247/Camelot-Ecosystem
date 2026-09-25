@@ -93,6 +93,24 @@ def is_governance_path(path: Path) -> bool:
     return any(part in GOVERNANCE_DOC_DIRS for part in path.parts)
 
 
+def slugify_mission_id(text: str, fallback: str = "factory-mission") -> str:
+    """Turn free-form intent text into a valid mission id slug.
+
+    Lowercase, collapse non-alphanumerics to '-', trim, cap at 64 chars.
+    Falls back to `<fallback>-<date>` when nothing usable survives.
+    """
+    slug = re.sub(r"[^a-z0-9]+", "-", (text or "").lower()).strip("-")
+    slug = slug[:64].rstrip("-")
+    if not _MISSION_ID_RE.match(slug):
+        slug = f"{fallback}-{time.strftime('%Y%m%d')}"
+    return slug
+
+
+def is_valid_mission_id(mission_id: str) -> bool:
+    """True when mission_id satisfies the layout contract regex."""
+    return bool(_MISSION_ID_RE.match((mission_id or "").strip()))
+
+
 def _sha256_file(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as fh:
