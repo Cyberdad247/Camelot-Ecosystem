@@ -82,7 +82,7 @@ def _log_run(
 
 KNOWN_COMMANDS = {
     "chat", "route", "triage", "cloudbrain", "orchestrator", "sarda",
-    "hermes", "ledger", "toon", "glyph", "glyth", "forge-unify", "cockpit",
+    "hermes", "bifrost", "contracts", "ledger", "toon", "glyph", "glyth", "forge-unify", "cockpit",
     "evolve", "team", "codex", "bio-swarm", "nano-swarm", "microcubed",
     "gemini-ext", "scripts", "ctx7", "pipeline", "health", "templates",
 }
@@ -151,10 +151,14 @@ def main() -> int:
         from control_plane.cli.iron_gate import set_non_interactive
         set_non_interactive(True)
 
-    # Load config + provenance managers
-    import control_plane.camelot_cli as _cli_mod
-    config_mgr = _cli_mod.ConfigManager()
-    prov_mgr = _cli_mod.ProvenanceManager()
+    # Load config + provenance managers only for commands that can use them.
+    if args.command in {"bifrost", "contracts"}:
+        config_mgr = None
+        prov_mgr = None
+    else:
+        import control_plane.camelot_cli as _cli_mod
+        config_mgr = _cli_mod.ConfigManager()
+        prov_mgr = _cli_mod.ProvenanceManager()
 
     # Look up handler in registry
     handler = COMMAND_REGISTRY.get(args.command)
