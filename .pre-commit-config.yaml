@@ -149,4 +149,24 @@ repos:
         language: system
         pass_filenames: false
         files: ^PROVENANCE_LEDGER\.md$
+      - id: graft-graph-freshness
+        name: Graft context-graph freshness (advisory)
+        description: >-
+          Reports graft/ staleness via `graft check` before a commit touching
+          indexed code. Advisory by design: every degraded outcome (CLI
+          missing, STALE, native abort, timeout) exits 0 so the commit still
+          lands — graft's tree-sitter pass can abort with 0xC0000409 on
+          memory-pressured hosts (upstream NanoNets/Graft#122), and the graph
+          is a git-ignored regenerable cache. Use
+          `python scripts/check_graft_graph.py --strict` to enforce instead.
+        entry: python scripts/check_graft_graph.py
+        language: system
+        pass_filenames: false
+        files: |
+          (?x)^(
+              control_plane/.*\.py
+            | squires/.*\.py
+            | 01_KERNEL/.*\.py
+            | scripts/check_graft_graph\.py
+          )$
 
