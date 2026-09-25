@@ -445,6 +445,13 @@ else
   warn "camelot-vps-mesh CAMELOT_OS_HOME not set — code would fall back to \$HOME/CAMELOT_OS"
 fi
 
+vps_envfiles=$(systemctl show camelot-vps-mesh.service -p EnvironmentFiles --value 2>/dev/null || true)
+if [[ "$vps_envfiles" == *"/etc/camelot/mesh.env"* ]]; then
+  ok "camelot-vps-mesh loads the operator-managed mesh environment file"
+else
+  bad "camelot-vps-mesh does not load /etc/camelot/mesh.env"
+fi
+
 check "$CUBE_DIR is a git checkout" test -d "$CUBE_DIR/.git"
 if compgen -G "/etc/systemd/system/camelot-*.service" >/dev/null; then
   ok "camelot units present in /etc/systemd/system"
@@ -487,7 +494,12 @@ phase "[PHASE 5] Always-On Sovereign Hub Daemons"
 if [[ "$MODE" == "apply" ]]; then
   for unit in "${REQUIRED_UNITS[@]}"; do
     if [[ -f "/etc/systemd/system/$unit" ]]; then
-      attempt "enable --now $unit" sudo systemctl enable --now "$unit"
+      if [[ "$unit" == *.timer ]]; then
+        attempt "enable --now $unit" sudo systemctl enable --now "$unit"
+      else
+        attempt "enable $unit" sudo systemctl enable "$unit"
+        attempt "restart $unit" sudo systemctl restart "$unit"
+      fi
     else
       bad "$unit not installed (cannot be enabled)"
     fi
@@ -603,15 +615,21 @@ fi
 # other two answer 302 from the Hermes dashboard while this audit reported the contract
 # satisfied. The routes live in infra/nginx/camelot-mesh-bridge.conf and are installed by
 # scripts/ops/install-mesh-bridge-routes.sh — this file does not restate them.
-# Asserting the routes without offering a way to satisfy them leaves a fresh hub
-# permanently red, so install the snippet from this payload when it is absent.
-if [[ "$MODE" == "apply" && ! -f /etc/nginx/snippets/camelot-mesh-bridge.conf ]]; then
-  if [[ -x "$CUBE_DIR/scripts/ops/install-mesh-bridge-routes.sh" ]]; then
+if [[ "$MODE" == "apply" ]]; then
+  if [[ -f "$CUBE_DIR/scripts/ops/install-mesh-bridge-routes.sh" ]]; then
     attempt "install mesh-bridge nginx routes" \
-      bash -c "cd '$CUBE_DIR' && ./scripts/ops/install-mesh-bridge-routes.sh"
+      bash -c "cd '$CUBE_DIR' && bash ./scripts/ops/install-mesh-bridge-routes.sh"
   else
     bad "$CUBE_DIR/scripts/ops/install-mesh-bridge-routes.sh missing — cannot install the routes"
   fi
+elif [[ -f "$CUBE_DIR/infra/nginx/camelot-mesh-bridge.conf" && -f /etc/nginx/snippets/camelot-mesh-bridge.conf ]]; then
+  if cmp -s "$CUBE_DIR/infra/nginx/camelot-mesh-bridge.conf" /etc/nginx/snippets/camelot-mesh-bridge.conf; then
+    ok "nginx mesh-bridge snippet matches the versioned checkout"
+  else
+    bad "nginx mesh-bridge snippet differs from the versioned checkout"
+  fi
+else
+  bad "nginx mesh-bridge snippet is missing from the checkout or live host"
 fi
 
 check_endpoint "mesh telemetry through nginx"      "http://localhost/mesh/status"

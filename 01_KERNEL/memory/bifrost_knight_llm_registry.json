@@ -124,6 +124,7 @@
       "knight_id": "DEEPSEEK_FLASH_ENGINE",
       "pill_name": "DeepSeek Flash vLLM High-Throughput Engine",
       "assigned_tiny_llm": "vllm/deepseek-ai/DeepSeek-V4.1-Flash",
+      "inference_scope": "bifrost_hub",
       "bifrost_route": "/bifrost/models/deepseek-flash",
       "cloudbrain_uuid": "876f30c4-efce-415d-8098-cad500de159c",
       "endpoint": "http://127.0.0.1:8000/v1"

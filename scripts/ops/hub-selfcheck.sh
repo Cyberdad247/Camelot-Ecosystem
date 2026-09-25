@@ -175,7 +175,9 @@ deliver() {
 
   if [[ -n "${CAMELOT_ALERT_WEBHOOK:-}" ]]; then
     local hook_code
-    if [[ "$CAMELOT_ALERT_WEBHOOK" == *ntfy.sh* ]]; then
+    # ntfy mode triggers on ntfy.sh URLs or explicitly via CAMELOT_ALERT_NTFY_MODE=1
+    # (self-hosted ntfy on a bare tailscale IP carries no 'ntfy' substring).
+    if [[ "$CAMELOT_ALERT_WEBHOOK" == *ntfy.sh* || "${CAMELOT_ALERT_NTFY_MODE:-}" == "1" ]]; then
       # ntfy: raw message body with the subject as Title header — the JSON
       # {"text"} envelope is not a payload ntfy displays. Optional bearer
       # token (CAMELOT_ALERT_NTFY_TOKEN) for private topics; a public

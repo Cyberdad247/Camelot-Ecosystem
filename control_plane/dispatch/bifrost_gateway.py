@@ -35,7 +35,7 @@ from typing import Any, Callable
 from control_plane.hermes_bridge import HermesBus
 
 GATEWAY_URL = os.environ.get("BIFROST_GATEWAY_URL", "http://127.0.0.1:3001")
-WEBHOOK_SECRET = os.environ.get("WEBHOOK_SECRET", "")
+WEBHOOK_SECRET = (os.environ.get("WEBHOOK_SECRET") or "").strip()
 
 # Channel the gateway emits to (must match apps/bifrost/src/hermes.ts SWARM_EVENTS).
 SWARM_EVENTS_CHANNEL = "swarm.events"
@@ -43,11 +43,15 @@ SWARM_EVENTS_CHANNEL = "swarm.events"
 DEFAULT_TIMEOUT = 5.0
 
 
+def _gateway_base() -> str:
+    return GATEWAY_URL.strip().rstrip("/")
+
+
 # ── Outbound: health + command injection ───────────────────────────────────
 
 def health(timeout: float = DEFAULT_TIMEOUT) -> dict[str, Any]:
     """GET /health. Returns the parsed body plus an `ok` flag (never raises)."""
-    url = f"{GATEWAY_URL}/health"
+    url = f"{_gateway_base()}/health"
     try:
         with urllib.request.urlopen(url, timeout=timeout) as resp:
             body = resp.read().decode("utf-8")
@@ -66,15 +70,16 @@ def _sign(raw: str, secret: str) -> str:
 
 def send_command(message: str, timeout: float = DEFAULT_TIMEOUT) -> dict[str, Any]:
     """Inject a command into the gateway via its HMAC-signed /webhook/sms route."""
-    if not WEBHOOK_SECRET:
+    secret = WEBHOOK_SECRET.strip()
+    if not secret:
         return {"ok": False, "error": "WEBHOOK_SECRET not set in environment"}
 
     # The signature must cover the exact bytes the server reads as rawBody.
     raw = json.dumps({"message": message})
-    signature = _sign(raw, WEBHOOK_SECRET)
+    signature = _sign(raw, secret)
 
     req = urllib.request.Request(
-        f"{GATEWAY_URL}/webhook/sms",
+        f"{_gateway_base()}/webhook/sms",
         data=raw.encode("utf-8"),
         headers={
             "Content-Type": "application/json",

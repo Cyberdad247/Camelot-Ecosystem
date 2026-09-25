@@ -1,0 +1,6 @@
+[mcp_servers.graft]
+command = "npx"
+args = ["-y", "@nanonets/graft@0.19.0", "mcp"]
+
+[mcp_servers.graft.env]
+DO_NOT_TRACK = "1"

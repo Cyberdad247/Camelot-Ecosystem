@@ -1,6 +1,17 @@
 [
   {
     "knight_id": "SIR_GHOST",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//BIFROST security verification: read-only audit of Bifrost bridge, mTLS boundary, token presence, route mesh, and local model policy; do not mutate configuration",
+    "content": "{\"action\": \"bifrost_bridge_dispatch\", \"guardian\": \"SIR_HEIMDALL\", \"directive\": \"security verification: read-only audit of Bifrost bridge, mTLS boundary, token presence, route mesh, and local model policy; do not mutate configuration\", \"components\": [\"CLIProxyAPI\", \"OmniRoute\", \"BitRouter\", \"9Router\", \"MultivoiceRouter\"], \"nano_knights\": [\"Watchman\", \"Rune Law\", \"Mesh Probe\", \"Token Warden\", \"Ledger Scribe\", \"Appwrite Egress\", \"Hermes Mesh Sentinel\"], \"bridge_routes\": {\"multivoice\": \"C:/Users/vizio/Multivoice-router\", \"kinetic_switchboard\": \"04_KINETIC/multivoice\", \"broker_port\": 8080, \"gatekeeper_port\": 8777}, \"status\": \"ACTIVE_GUARDED\"}",
+    "vfs_path": "vfs://worldtree/knights/sir_ghost/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_GHOST",
+    "open_viking_tether": "open_viking://worldtree/sir_ghost",
+    "updated_at": "2026-09-24T05:27:36.547822+00:00"
+  },
+  {
+    "knight_id": "SIR_GHOST",
     "cloudbrain_uuid": "422a184b-93e7-4dfd-8a12-75d2268b6c60",
     "spark_id": "0x422A184B93E74DFD8A1275D2268B6C60",
     "role": "Privacy Scanner & Local Air-Gap Vault",

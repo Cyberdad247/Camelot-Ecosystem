@@ -27,19 +27,19 @@
 
     # 1. Mesh Bridge & Node Telemetry (Hermes + Heimdall)
     handle /mesh/* {
-        reverse_proxy 127.0.0.1:8095
+        reverse_proxy 100.110.180.18:8095
     }
     handle /bifrost/knights {
-        reverse_proxy 127.0.0.1:8095
+        reverse_proxy 100.110.180.18:8095
     }
     handle /hermes/* {
-        reverse_proxy 127.0.0.1:8095
+        reverse_proxy 100.110.180.18:8095
     }
     handle /heimdall/* {
-        reverse_proxy 127.0.0.1:8095
+        reverse_proxy 100.110.180.18:8095
     }
     handle /api/topology {
-        reverse_proxy 127.0.0.1:8095
+        reverse_proxy 100.110.180.18:8095
     }
 
     # 2. Bifrost WebRTC & WebSocket Gateway
@@ -47,6 +47,7 @@
         reverse_proxy 127.0.0.1:3001
     }
     handle /bifrost/* {
+        uri strip_prefix /bifrost
         reverse_proxy 127.0.0.1:3001
     }
 

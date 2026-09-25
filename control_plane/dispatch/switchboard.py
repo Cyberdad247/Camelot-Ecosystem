@@ -31,6 +31,11 @@ HEALTH_TTL_S   = 60.0   # re-probe after 60s
 PROBE_TIMEOUT  = 2.0    # max seconds per probe
 
 
+def _bifrost_health_url(base: str | None = None) -> str:
+    gateway = base or os.environ.get("BIFROST_GATEWAY_URL", "http://127.0.0.1:3001")
+    return f"{gateway.strip().rstrip('/')}/health"
+
+
 # ── Terminal definitions ──────────────────────────────────────────────────────
 
 @dataclass
@@ -176,7 +181,7 @@ TERMINAL_REGISTRY: dict[str, Terminal] = {
         cost_tier="free", capability=[
             "gateway","websocket","webhook","ingress","swarm","pwa","voice",
         ],
-        probe_url=os.environ.get("BIFROST_GATEWAY_URL", "http://127.0.0.1:3001") + "/health",
+        probe_url=_bifrost_health_url(),
         probe_port=0,
         notes="Bifrost TS gateway — voice/webhook ingress + Microcubic swarm (:3001); bridge via control_plane.bifrost_gateway",
     ),

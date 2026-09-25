@@ -1,0 +1,41 @@
+{
+  "step": "DECOMPOSE_TASK_DAG",
+  "derived_from": "blueprint.json",
+  "nodes": [
+    {
+      "id": "n1",
+      "task": "materialize hld",
+      "assignee": "squire_mason"
+    },
+    {
+      "id": "n2",
+      "task": "materialize objective",
+      "assignee": "squire_mason",
+      "after": [
+        "n1"
+      ]
+    },
+    {
+      "id": "n3",
+      "task": "materialize schemas",
+      "assignee": "squire_mason",
+      "after": [
+        "n2"
+      ],
+      "inputs": [
+        "Mission"
+      ]
+    }
+  ],
+  "parallel_sequences": [
+    [
+      "n1"
+    ],
+    [
+      "n2"
+    ],
+    [
+      "n3"
+    ]
+  ]
+}

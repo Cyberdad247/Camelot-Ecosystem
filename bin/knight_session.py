@@ -107,7 +107,7 @@ _fallback    = _routing.get("fallback_chain", ["cliproxy", "gemini", "codex", "o
 _engines     = OMNIROUTE.get("engines", {})
 
 # ── Constants ─────────────────────────────────────────────────────────────────
-CLIPROXY_KEY   = os.environ.get("CLIPROXY_KEY", _cliproxy.get("api_key", "proxy-admin-key"))
+CLIPROXY_KEY   = (os.environ.get("CLIPROXY_KEY") or "").strip()
 OLLAMA_URL     = "http://127.0.0.1:11434/v1"
 STREAM_TIMEOUT = _constraints.get("request_timeout_ms", 120000) / 1000
 
@@ -414,7 +414,9 @@ def _stream(
     fallback_knights: Optional[list[str]] = None,
 ) -> str:
     url = base_url.rstrip("/") + "/chat/completions"
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
     payload = {"model": model, "messages": messages, "stream": True, "temperature": 0.7}
     full: list[str] = []
     try:

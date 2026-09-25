@@ -101,7 +101,9 @@ func (p *OpenAIProvider) Invoke(ctx context.Context, knight, intent, skills stri
 		return "", fmt.Errorf("openai: build request: %w", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("Authorization", "Bearer "+p.APIKey)
+	if p.APIKey != "" {
+		req.Header.Set("Authorization", "Bearer "+p.APIKey)
+	}
 
 	resp, err := p.Client.Do(req)
 	if err != nil {

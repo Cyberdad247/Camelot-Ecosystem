@@ -146,8 +146,8 @@ def load_mesh_topology() -> dict:
 
 def is_mesh_request_authorized(headers: dict) -> bool:
     """Require the runtime-only mesh token for topology and telemetry reads."""
-    expected = os.getenv("MESH_BRIDGE_TOKEN", "")
-    provided = headers.get("x-camelot-token", "")
+    expected = os.getenv("MESH_BRIDGE_TOKEN", "").strip()
+    provided = headers.get("x-camelot-token", "").strip()
     if not expected or not provided:
         return False
     return hmac.compare_digest(provided, expected)
