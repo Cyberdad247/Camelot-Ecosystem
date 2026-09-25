@@ -29,6 +29,7 @@ from __future__ import annotations
 
 import os
 import shlex
+import shutil
 import subprocess
 import sys
 from pathlib import Path
@@ -54,6 +55,57 @@ def _resolve_python() -> str:
         except (FileNotFoundError, OSError, subprocess.TimeoutExpired):
             continue
     return sys.executable
+
+
+def _resolve_bash() -> str:
+    """Return an absolute path to a usable bash.
+
+    On Windows, `subprocess.run(["bash", ...])` resolves through
+    CreateProcess, which searches %SystemRoot%\\System32 *before* PATH —
+    and System32\\bash.exe is the WSL launcher, which cannot always
+    create its VM on memory-pressured hosts (it fails with
+    "Catastrophic failure / Bash/Service/CreateInstance"). So scan PATH
+    directly for a bash that is not the System32/WindowsApps launcher,
+    and use its absolute path. On POSIX this returns the first bash on
+    PATH — identical to the previous bare-name behavior.
+    """
+    sysroot = os.environ.get("SystemRoot", r"C:\Windows").lower()
+    skip_prefixes = (
+        os.path.join(sysroot, "system32"),
+        os.path.join(sysroot, "syswow64"),
+        os.path.join(sysroot, "windowsapps"),
+    )
+    candidates: list[str] = []
+    for entry in os.environ.get("PATH", "").split(os.pathsep):
+        entry = entry.strip('"')
+        if not entry:
+            continue
+        low = entry.lower()
+        if any(low == s or low.startswith(s + os.sep) for s in skip_prefixes):
+            continue
+        for name in ("bash.exe", "bash"):
+            candidates.append(os.path.join(entry, name))
+    # Git for Windows ships bash but only adds `Git\cmd` (git.exe) to PATH,
+    # so probe its usual layout relative to the resolved git executable
+    # and the standard install locations.
+    git = shutil.which("git")
+    git_roots = []
+    if git:
+        git_roots.append(Path(git).resolve().parent.parent)
+    git_roots += [Path(p) for p in (
+        r"C:\Program Files\Git",
+        r"C:\Program Files (x86)\Git",
+    )]
+    for root in git_roots:
+        candidates.append(str(root / "bin" / "bash.exe"))
+        candidates.append(str(root / "usr" / "bin" / "bash.exe"))
+    for candidate in candidates:
+        if os.path.isfile(candidate):
+            low = candidate.lower()
+            if any(low == s or low.startswith(s + os.sep) for s in skip_prefixes):
+                continue
+            return candidate
+    return shutil.which("bash") or "bash"
 
 
 def _camelot_root() -> Path:
@@ -97,6 +149,7 @@ def main() -> int:
     # Direct subprocess with absolute python path works on both Windows
     # and Linux/macOS without any indirection.
     python_path = _resolve_python()
+    bash_path = _resolve_bash()
 
     failures: list[tuple[str, str, int, str]] = []
     for task in TASK_PLAN:
@@ -121,8 +174,9 @@ def main() -> int:
             # bash -c for tasks with bash-specific syntax (T1 uses `!`,
             # T2/T4 use `&&`, T5 uses `test -f`). Simple grep/test
             # commands work fine through bash -c on both platforms.
+            # _resolve_bash() pins an absolute non-WSL path (Windows).
             proc = subprocess.run(
-                ["bash", "-c", task.verify_cmd],
+                [bash_path, "-c", task.verify_cmd],
                 cwd=str(root),
                 env=os.environ,
                 capture_output=True,
