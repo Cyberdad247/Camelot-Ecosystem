@@ -59,17 +59,28 @@ graph TD
         D1 --> D2 --> D3 --> D4
     end
 
+    %% Stream Epsilon: Context Graph & Forge Integration
+    subgraph "Stream ε: Context Graph & Forge Integration"
+        E1["Task ε1: //CONTEXT Runic Wire<br/>(runic_router.py → graft ask/grep/callers/skeleton)"]
+        E2["Task ε2: Colony Graph CLI<br/>(squires.colony graph [--query])"]
+        E3["Task ε3: Boot Freshness Probe<br/>(boot_graft_graph non-required phase)"]
+        E4["Task ε4: Advisory Freshness Gate<br/>(scripts/check_graft_graph.py + pre-commit)"]
+        E1 --> E2 --> E3 --> E4
+    end
+
     %% Topological Dispatch Connections
     SPLIT ==> A1
     SPLIT ==> B1
     SPLIT ==> C1
     SPLIT ==> D1
+    SPLIT ==> E1
 
     %% Synchronization Barriers
     A3 --> BARRIER{"⚖️ ANYA_Ω SYNCHRONIZATION BARRIER<br/>(APEE v6.5 Pre-Commit Parity & Iron Gate)"}
     B4 --> BARRIER
     C4 --> BARRIER
     D4 --> BARRIER
+    E4 --> BARRIER
 
     %% Final Convergence
     BARRIER ==> CONVERGE["👑 ARTHUR_OMEGA SOVEREIGN RATIFICATION<br/>(Fast-Forward Merge to origin/main & Remote Push)"]
