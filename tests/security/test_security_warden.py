@@ -1,10 +1,7 @@
 # SPDX-License-Identifier: MIT
 """Unit and integration test suite for SecurityWarden, Iron Gate, and Harness Heartbeat."""
 
-import json
 import os
-import sys
-from pathlib import Path
 from unittest.mock import patch
 
 import pytest
@@ -18,7 +15,6 @@ from security.warden import (
     SecurityDecision,
     SecurityException,
     SecurityWarden,
-    warden,
 )
 
 

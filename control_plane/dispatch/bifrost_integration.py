@@ -13,10 +13,11 @@ On pill activation:
   5. Ledger tracks all optimizations
   6. Continuous monitoring + adaptive optimization
 
-Result: CAMELOT-OS optimized and forged for the specific hardware/OS.
+Result: CAMELOT-OS reports a governed integration status; unimplemented forge steps remain planned.
 """
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
@@ -28,6 +29,9 @@ from control_plane.system_analyzer import (
     SystemAnalyzer,
     SystemProfile,
 )
+
+CAMELOT_HOME = Path(os.environ.get("CAMELOT_OS_HOME", Path.home() / "CAMELOT_OS")).resolve()
+BIFROST_RUNTIME_DIR = CAMELOT_HOME / "03_VAULT" / "runtime_state" / "bifrost"
 
 
 @dataclass
@@ -92,33 +96,43 @@ class BifrostIntegration:
         self.analyzer = SystemAnalyzer()
         self.optimization_profile: Optional[OptimizationProfile] = None
         self.is_integrated = False
+        self.integration_status = "NOT_STARTED"
         self.optimization_ledger: List[str] = []
 
     async def integrate(self, pill_id: str) -> bool:
         """Integrate with Bifrost bridge during pill bootstrap."""
+        self.is_integrated = False
+        self.integration_status = "IN_PROGRESS"
+        self.optimization_ledger.clear()
         try:
-            # Step 1: Analyze system
             system_profile = await self.analyzer.analyze()
             print(f"[BIFROST] System analyzed: {system_profile.performance_tier} tier")
 
-            # Step 2: Generate optimization profile
             opt_profile = await self._generate_optimization_profile(system_profile)
             self.optimization_profile = opt_profile
 
-            # Step 3: Apply optimizations
-            await self._apply_optimizations(pill_id)
-
-            # Step 4: Configure Bifrost
-            await self._configure_bifrost(opt_profile)
-
-            # Step 5: Self-forge CAMELOT-OS
-            await self._forge_camelot_os(opt_profile)
+            if not await self._apply_optimizations(pill_id):
+                self.integration_status = "FAILED"
+                self.optimization_ledger.append("✗ Optimization profile was not prepared")
+                await self._log_integration(pill_id)
+                return False
+            if not await self._configure_bifrost(opt_profile):
+                self.integration_status = "FAILED"
+                await self._log_integration(pill_id)
+                return False
+            if not await self._forge_camelot_os(opt_profile):
+                self.integration_status = "PARTIAL"
+                await self._log_integration(pill_id)
+                return False
 
             self.is_integrated = True
+            self.integration_status = "INTEGRATED"
             await self._log_integration(pill_id)
             return True
 
         except Exception as e:
+            self.is_integrated = False
+            self.integration_status = "FAILED"
             print(f"[BIFROST] Integration failed: {e}")
             return False
 
@@ -208,57 +222,50 @@ class BifrostIntegration:
         return opt
 
     async def _apply_optimizations(self, pill_id: str) -> bool:
-        """Apply optimizations to CAMELOT-OS components."""
+        """Prepare an optimization profile for downstream configuration."""
         if not self.optimization_profile:
             return False
 
         opt = self.optimization_profile
         ledger = []
 
-        # Apply CPU optimizations
         if opt.enable_multithreading:
-            ledger.append(f"✓ CPU: Enabled multithreading ({opt.thread_pool_size} threads)")
+            ledger.append(f"↪ planned: CPU multithreading ({opt.thread_pool_size} threads)")
         if opt.enable_avx:
-            ledger.append("✓ CPU: Enabled AVX vector optimization")
+            ledger.append("↪ planned: CPU AVX vector optimization")
         if opt.enable_sse:
-            ledger.append("✓ CPU: Enabled SSE optimization")
+            ledger.append("↪ planned: CPU SSE optimization")
         if opt.enable_neon:
-            ledger.append("✓ CPU: Enabled NEON optimization (ARM)")
+            ledger.append("↪ planned: CPU NEON optimization (ARM)")
 
-        # Apply GPU optimizations
         if opt.enable_gpu_acceleration:
-            ledger.append(f"✓ GPU: Enabled {opt.gpu_type} acceleration ({opt.gpu_memory_pool_mb}MB)")
+            ledger.append(f"↪ planned: GPU {opt.gpu_type} acceleration ({opt.gpu_memory_pool_mb}MB)")
         else:
-            ledger.append("✓ GPU: CPU-only mode")
+            ledger.append("↪ planned: GPU CPU-only mode")
 
-        # Apply memory optimizations
-        ledger.append(f"✓ Memory: Cache configured ({opt.cache_size_mb}MB)")
+        ledger.append(f"↪ planned: memory cache ({opt.cache_size_mb}MB)")
         if opt.enable_memory_compression:
-            ledger.append("✓ Memory: Compression enabled for edge devices")
+            ledger.append("↪ planned: memory compression for edge devices")
 
-        # Apply storage optimizations
-        ledger.append(f"✓ Storage: {opt.storage_type.upper()} optimization")
+        ledger.append(f"↪ planned: storage {opt.storage_type.upper()} optimization")
         if opt.enable_ssd_optimization:
-            ledger.append(f"✓ Storage: SSD prefetch depth={opt.prefetch_depth}")
+            ledger.append(f"↪ planned: SSD prefetch depth={opt.prefetch_depth}")
 
-        # Apply network optimizations
         if opt.enable_http2:
-            ledger.append("✓ Network: HTTP/2 enabled")
+            ledger.append("↪ planned: HTTP/2")
         if opt.enable_websocket:
-            ledger.append("✓ Network: WebSocket enabled")
+            ledger.append("↪ planned: WebSocket")
 
-        # Apply feature flags
         if opt.enable_redis:
-            ledger.append("✓ Features: Redis L1 cache enabled")
+            ledger.append("↪ planned: Redis L1 cache")
         if opt.enable_qdrant:
-            ledger.append("✓ Features: Qdrant L2 search enabled")
+            ledger.append("↪ planned: Qdrant L2 search")
         if opt.enable_pytorch:
-            ledger.append("✓ Features: PyTorch ML enabled")
+            ledger.append("↪ planned: PyTorch ML")
 
-        # Apply scaling
         if opt.worker_processes > 1:
-            ledger.append(f"✓ Scaling: {opt.worker_processes} worker processes")
-        ledger.append(f"✓ Scaling: {opt.async_workers} async workers")
+            ledger.append(f"↪ planned: {opt.worker_processes} worker processes")
+        ledger.append(f"↪ planned: {opt.async_workers} async workers")
 
         opt.applied_optimizations = ledger
         self.optimization_ledger.extend(ledger)
@@ -288,7 +295,7 @@ class BifrostIntegration:
             }
 
             # Write config to Bifrost
-            config_path = Path(".bifrost/config.json")
+            config_path = BIFROST_RUNTIME_DIR / "config.json"
             config_path.parent.mkdir(parents=True, exist_ok=True)
 
             import json
@@ -333,10 +340,11 @@ class BifrostIntegration:
 
             # Step 6: Generate system-specific startup scripts
             forge_steps.append("Generating startup scripts...")
-            await self._forge_startup_scripts(opt)
+            if not await self._forge_startup_scripts(opt):
+                return False
             self.optimization_ledger.append("✓ Generated: startup scripts")
-
-            return True
+            self.optimization_ledger.append("↪ partial: forge plan contains no-op steps")
+            return False
         except Exception as e:
             self.optimization_ledger.append(f"✗ Forge failed: {e}")
             return False
@@ -359,26 +367,27 @@ class BifrostIntegration:
     async def _forge_memory_pyramid(self, opt: OptimizationProfile) -> bool:
         """Customize memory pyramid (Redis/Qdrant/CloudBrain)."""
         if opt.enable_redis:
-            self.optimization_ledger.append("  → Redis L1 cache optimized")
+            self.optimization_ledger.append("  ↪ planned (no-op): Redis L1 cache")
         if opt.enable_qdrant:
-            self.optimization_ledger.append("  → Qdrant L2 search optimized")
-        self.optimization_ledger.append("  → CloudBrain L3 synthesis optimized")
+            self.optimization_ledger.append("  ↪ planned (no-op): Qdrant L2 search")
+        self.optimization_ledger.append("  ↪ planned (no-op): CloudBrain L3 synthesis")
         return True
 
     async def _forge_distance_travel(self, opt: OptimizationProfile) -> bool:
         """Customize distance travel for system."""
-        self.optimization_ledger.append(f"  → Agent pool: {opt.async_workers} workers")
-        self.optimization_ledger.append("  → Consensus voting optimized")
-        self.optimization_ledger.append(f"  → Memory sync tuned for {opt.storage_type}")
+        self.optimization_ledger.append(f"  ↪ planned (no-op): agent pool ({opt.async_workers} workers)")
+        self.optimization_ledger.append("  ↪ planned (no-op): consensus voting")
+        self.optimization_ledger.append(f"  ↪ planned (no-op): memory sync for {opt.storage_type}")
         return True
 
     async def _forge_startup_scripts(self, opt: OptimizationProfile) -> bool:
         """Generate system-specific startup scripts."""
         script = self._generate_startup_script(opt)
-        script_path = Path(".camelot/startup.sh")
+        script_path = BIFROST_RUNTIME_DIR / "startup.sh"
         script_path.parent.mkdir(parents=True, exist_ok=True)
         with open(script_path, "w") as f:
             f.write(script)
+        script_path.chmod(0o700)
         self.optimization_ledger.append(f"✓ Startup script: {script_path}")
         return True
 
@@ -410,30 +419,32 @@ python -m control_plane.main \\
     --gpu-type {opt.gpu_type}
 """
 
-    async def _log_integration(self, pill_id: str) -> None:
-        """Log integration to ledger."""
-        ledger_path = Path("BIFROST_INTEGRATION_LEDGER.md")
-
+    async def _log_integration(self, pill_id: str, status: str | None = None) -> None:
+        """Log integration state to the governed runtime directory."""
+        ledger_path = BIFROST_RUNTIME_DIR / "integration_ledger.md"
+        profile = self.optimization_profile
+        system_profile = profile.system_profile if profile else None
         timestamp = datetime.now(timezone.utc).isoformat()
         entry = f"""
 ## QR Pill Integration: {pill_id}
 **Timestamp**: {timestamp}
+**Status**: {status or self.integration_status}
 
 ### System Profile
-- Performance Tier: {self.optimization_profile.performance_tier.upper() if self.optimization_profile else 'unknown'}
-- CPU: {self.optimization_profile.system_profile.cpu.cores if self.optimization_profile else 'unknown'} cores
-- RAM: {self.optimization_profile.system_profile.memory.total_gb if self.optimization_profile else 'unknown'} GB
-- Storage: {self.optimization_profile.storage_type if self.optimization_profile else 'unknown'}
-- GPU: {self.optimization_profile.gpu_type if self.optimization_profile else 'none'}
+- Performance Tier: {profile.performance_tier.upper() if profile else 'unknown'}
+- CPU: {system_profile.cpu.cores if system_profile else 'unknown'} cores
+- RAM: {system_profile.memory.total_gb if system_profile else 'unknown'} GB
+- Storage: {profile.storage_type if profile else 'unknown'}
+- GPU: {profile.gpu_type if profile else 'none'}
 
-### Applied Optimizations
+### Planned and Applied Changes
 """
         for opt in self.optimization_ledger:
             entry += f"- {opt}\n"
 
         entry += "\n"
-
-        with open(ledger_path, "a") as f:
+        ledger_path.parent.mkdir(parents=True, exist_ok=True)
+        with ledger_path.open("a", encoding="utf-8") as f:
             f.write(entry)
 
     def get_optimization_summary(self) -> str:
@@ -477,7 +488,7 @@ Features:
   Qdrant: {opt.enable_qdrant}
   PyTorch: {opt.enable_pytorch}
 
-Applied Optimizations: {len(opt.applied_optimizations)}
+Planned Optimizations: {len(opt.applied_optimizations)}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 """
 

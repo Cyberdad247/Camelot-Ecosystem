@@ -17,9 +17,9 @@ first_executable_path: "νKG → deterministic decompression → Sir Synthetos �
 
 ---
 
-## 1. The 11-Tier Production Promotion Matrix (P0 – P11)
+## 1. The 12-Tier Production Promotion Matrix (P0 – P12)
 
-Every proposal traversing the Sovereign Pipeline is evaluated against the sequential, non-bypassable P0–P11 promotion matrix:
+Every proposal traversing the Sovereign Pipeline is evaluated against the sequential, non-bypassable P0–P12 promotion matrix:
 
 | Tier | Gate Name | Responsible Knight | Verification Target & Invariant | Rejection Action |
 |:---|:---|:---|:---|:---|
@@ -35,6 +35,7 @@ Every proposal traversing the Sovereign Pipeline is evaluated against the sequen
 | **`P9`** | **Chaos & Fault Injection** | `SIMIAN_01` | Resilience against transient network drops, socket timeouts, and memory spikes | Fallback Circuit Trip |
 | **`P10`** | **Sir Gideon 13-Gate Forensic Audit** | `SIR_GIDEON` | Formal 13-gate audit emitting signed `GideonVerdict` (`camelot-gideon-verdict/1`) | Gate Failure Block |
 | **`P11`** | **Arthur Sovereign Crown Ratification** | `ARTHUR_OMEGA` | Human-in-the-loop Sovereign Resolution (`camelot-arthur-resolution/1`) & Merkle Commit | Golden Seal Refusal |
+| **`P12`** | **Context Graph Freshness** | `SIR_FORGE` | `graft check` rc=0 **or** graceful warn-only abort; `colony graph` returns; scoped pytest green (52 pass); `ruff` clean on touched files | Graceful WARN — never block |
 
 ---
 
@@ -118,6 +119,12 @@ The first proof path strictly enforces:
 
 ### §10 Chaos & Fault Injection
 - Bounded fault injection tests simulate network drops, socket errors, and corrupted payloads, verifying clean failure classification (`PipelineStatus.ERROR` or `BLOCKED`).
+
+### §11 Context Graph Freshness
+- `python scripts/check_graft_graph.py` executes `graft check` (60s cap) on control-plane/squire changes; `graft-graph-freshness` wires it into pre-commit.
+- **Never blocking on this host**: missing CLI, stale graph (`rc=1`), native abort (`0xC0000409`, NanoNets/Graft#122 under commit exhaustion), and timeout all exit `0`. Enforcement requires explicit `--strict`.
+- Boot probe `Repo Context Graph` mirrors the same contract as a non-required phase.
+- Evidence class: `CONFIRMED_EMPIRICAL` — 15 scoped tests (`test_graft_runes`, `test_squires_colony_cli`), 52 across the full scoped suite, live `graft ask --source` / `colony graph` queries, and an observed graceful-abort warn path.
 
 ---
 

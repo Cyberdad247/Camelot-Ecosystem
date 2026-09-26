@@ -23,13 +23,10 @@ import http.server
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
-import sys
 import tarfile
 import tempfile
 import threading
-import time
 import pytest
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519

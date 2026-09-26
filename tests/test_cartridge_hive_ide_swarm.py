@@ -25,7 +25,6 @@ sys.path.insert(0, str(ROOT / "cartridges" / "cartridge-hive-ide-swarm"))
 from hive_engine import (
     HiveEngine,
     MEMORY_LIMIT_PER_NODE_MB,
-    GLOBAL_EDGE_CEILING_GB,
     COW_DELTA_LIMIT_MIB,
 )
 from parallel_ast_runner import ParallelASTExecutionEngine
@@ -34,7 +33,6 @@ from zeroclaw_ipc import (
     WASMComponentRuntime,
     VFSGuardianError,
     CgroupsV2QuotaExceeded,
-    LINEAR_MEMORY_HARD_CAP_MB,
     COW_OVERHEAD_CEILING_MIB,
 )
 from vfs.worldtree_cartridge_knight_bridge import WorldtreeCartridgeKnightBridge

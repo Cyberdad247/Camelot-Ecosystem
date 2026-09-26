@@ -10,7 +10,6 @@ import jsonschema
 
 from control_plane.runners.evaluation_chamber_runner import (
     EvaluationChamberEngine,
-    execute_evaluation_run,
     MANDATORY_HARD_GATES,
 )
 

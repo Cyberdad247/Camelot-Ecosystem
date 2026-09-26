@@ -22,7 +22,7 @@ import json
 import hashlib
 import uuid
 import logging
-from dataclasses import dataclass, field, asdict
+from dataclasses import dataclass, asdict
 from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):

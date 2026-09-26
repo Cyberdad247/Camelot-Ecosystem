@@ -1,8 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 
-import pytest
-import json
 from dataclasses import asdict
 from control_plane.cartridges.qr_bridge import QRBridgeEngine, WORLDTREE_ROOT_UUID
 

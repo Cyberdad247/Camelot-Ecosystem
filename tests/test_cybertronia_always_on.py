@@ -8,15 +8,13 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import pytest
 
 from control_plane.infra.cybertronia_always_on import (
     CybertroniaSupervisor,
-    DaemonSpec,
     get_memory_info,
-    get_status_overview,
     probe_socket,
 )
 

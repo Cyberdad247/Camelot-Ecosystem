@@ -1,11 +1,13 @@
 """
 CLARITY_CORE v1.0.0 — Squire Colony CLI
-Usage: python -m squires.colony [scan|index|ghost|vector|triage|status] [path] [options]
+Usage: python -m squires.colony [scan|index|ghost|vector|triage|status|graph] [path] [options]
 """
 from __future__ import annotations
 
 import argparse
 import json
+import shutil
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -252,6 +254,12 @@ def cmd_status(root: Path, args: argparse.Namespace) -> None:
         row("Root", str(root))
         row("Index", str(index_file), "green" if index_file.exists() else "red")
         row("Report", str(report_file), "green" if report_file.exists() else "dim")
+        graft_manifest = base_dir / "graft" / "manifest.json"
+        row(
+            "Graft graph",
+            str(graft_manifest),
+            "green" if graft_manifest.exists() else "dim",
+        )
 
         if index_file.exists():
             try:
@@ -268,6 +276,25 @@ def cmd_status(root: Path, args: argparse.Namespace) -> None:
         print(f"Root:   {root}")
         print(f"Index:  {'✅' if index_file.exists() else '❌'} {index_file}")
         print(f"Report: {'✅' if report_file.exists() else '—'} {report_file}")
+        graft_manifest = base_dir / "graft" / "manifest.json"
+        print(f"Graft:  {'✅' if graft_manifest.exists() else '—'} {graft_manifest}")
+
+
+def cmd_graph(root: Path, args: argparse.Namespace) -> None:
+    """Read-only graft context-graph query — `map` by default, `ask` with --query."""
+    graft = shutil.which("graft")
+    if not graft:
+        _print("❌ graft CLI not found on PATH — npm install -g @nanonets/graft", "red")
+        sys.exit(1)
+    if args.query:
+        argv = ["ask", " ".join(args.query), "--source"]
+    else:
+        argv = ["map"]
+    base = root if root.is_dir() else root.parent
+    _print(f"🔗 graft {' '.join(argv)}", "dim")
+    rc = subprocess.run([graft, *argv], cwd=str(base)).returncode
+    if rc:
+        sys.exit(rc)
 
 
 # ── Cron helpers ─────────────────────────────────────────────────────────────
@@ -345,7 +372,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     parser.add_argument(
         "command",
-        choices=["scan", "index", "ghost", "vector", "triage", "status"],
+        choices=["scan", "index", "ghost", "vector", "triage", "status", "graph"],
         help="Squire pipeline stage to run",
     )
     parser.add_argument(
@@ -354,7 +381,7 @@ def main(argv: list[str] | None = None) -> None:
         default=".",
         help="Root directory to analyze (default: current dir)",
     )
-    parser.add_argument("--query", nargs="+", help="Search query (vector command only)")
+    parser.add_argument("--query", nargs="+", help="Search query (vector: keywords; graph: graft ask)")
     parser.add_argument("--top-k", type=int, default=10, help="Number of vector results (default: 10)")
     parser.add_argument("--auto-approve", action="store_true", help="Skip SENTINEL HITL gate (CI mode)")
     parser.add_argument("--schedule", metavar="INTERVAL", default="",
@@ -374,6 +401,7 @@ def main(argv: list[str] | None = None) -> None:
         "vector": cmd_vector,
         "triage": cmd_triage,
         "status": cmd_status,
+        "graph":  cmd_graph,
     }
 
     if args.schedule and args.command == "triage":

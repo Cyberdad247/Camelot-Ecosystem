@@ -200,6 +200,13 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "priority": 2,
         "handler": "_handle_scan",
     },
+    "//CONTEXT": {
+        "knight": "squire_colony",
+        "description": "Query the graft repo context graph (ask/map/grep/callers/skeleton)",
+        "mode": "ORACLE",
+        "priority": 2,
+        "handler": "_handle_context",
+    },
     "//STATUS": {
         "knight": "sir_boris",
         "description": "Live system status + port probes",
@@ -867,6 +874,49 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_validate_spec",
         "hydrate": False,
     },
+    # OMNI_FORGE SUPER-AGENT FACTORY RUNES (MERLIN_OMEGA planner / ANYA_GATE gatekeeper)
+    # Routed to control_plane.mission_layout.MissionSession — per-mission artifacts
+    # under 03_VAULT/runtime_state/missions/<id>/; governance docs unwritable.
+    "//FORGE_FACTORY": {
+        "knight": "merlin_omega",
+        "description": "OMNI_FORGE factory ignition — scaffold per-mission VFS workspace and 5-step DAG loop (Step_1 OBSERVE_AND_SCAFFOLD)",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_forge_factory",
+        "hydrate": False,
+    },
+    "//TRANSLATE_DAG": {
+        "knight": "sir_boris",
+        "description": "Deconstruct frozen blueprint into task DAG for swarm squire execution (Step_3 DECOMPOSE_TASK_DAG)",
+        "mode": "SWARM",
+        "priority": 1,
+        "handler": "_handle_translate_dag",
+        "hydrate": False,
+    },
+    "//EQUIP_SKILLS": {
+        "knight": "sir_forge",
+        "description": "Populate per-mission skills manifest with domain tool contracts (Step_4 EQUIP_KNIGHTS)",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_equip_skills",
+        "hydrate": False,
+    },
+    "//CRUCIBLE_AUDIT": {
+        "knight": "merlin_omega",
+        "description": "Validation swarm — Z3-grounded crucible audit, hash-pin verify, SEALED/DRIFT status (Step_5 VALIDATION_SWARM)",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_crucible_audit",
+        "hydrate": False,
+    },
+    "//FORGE_MISSION": {
+        "knight": "sir_boris",
+        "description": "One-command factory orchestration — runs all 5 DAG steps (scaffold, blueprint, DAG, equip, audit) with frozen-blueprint guard",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_forge_mission",
+        "hydrate": False,
+    },
 }
 
 # 29 Omega Runes — system-level operations
@@ -1275,6 +1325,36 @@ def _handle_vocal(param: str, context: dict) -> dict:
 def _handle_scan(param: str, context: dict) -> dict:
     rust_bin = str(CAMELOT_HOME / "04_KINETIC" / "squires_rs" / "target" / "release" / "squires_rs.exe")
     return {"action": "squires_colony_triage", "path": param or ".", "detail": f"run: {rust_bin} scan"}
+
+
+# graft context-graph subverbs: no args / pattern-quoted / free-form (flags pass through)
+_GRAFT_FLAGLESS = ("map", "check", "stats")
+_GRAFT_QUOTED = ("grep", "skeleton")
+_GRAFT_SPACED = ("callers", "blast")
+
+
+def _handle_context(param: str, context: dict) -> dict:
+    """Canonical `graft` command for //CONTEXT — read-only, never executed here."""
+    raw = (param or "").strip()
+    verb, _, rest = raw.partition(" ")
+    verb = verb.lower()
+    rest = rest.strip()
+    if verb in _GRAFT_FLAGLESS:
+        command = f"graft {verb}" + (f" {rest}" if rest else "")
+    elif verb in _GRAFT_QUOTED and rest:
+        command = f"graft {verb} {shlex.quote(rest)}"
+    elif verb in _GRAFT_SPACED and rest:
+        command = f"graft {verb} {rest}"
+    else:
+        query = raw or "orient me: what is this repository"
+        command = f"graft ask {shlex.quote(query)} --source"
+    return {
+        "action": "graft_context_query",
+        "knight": "squire_colony",
+        "canonical_command": command,
+        "read_only": True,
+        "detail": f"run: {command}",
+    }
 
 
 def _handle_status(param: str, context: dict) -> dict:
@@ -2853,6 +2933,336 @@ def _handle_cartridge_verify(param: Any, context: dict) -> dict:
         }
 
 
+# ---------------------------------------------------------------------------
+# OMNI_FORGE factory rune handlers — routed to control_plane.mission_layout
+# Artifacts land under 03_VAULT/runtime_state/missions/<id>/; the governance
+# guard inside MissionSession makes docs/ and ledger basenames unwritable.
+# ---------------------------------------------------------------------------
+
+
+def _resolve_factory_mission(param: Any, context: Optional[dict]) -> tuple[Any, str, str]:
+    """Resolve (session, mission_id, intent_text) from a factory rune param.
+
+    Param grammar: `[--mission-id <id>] [free-text intent]`. Mission ids are
+    slugified from the intent when absent. `context['missions_root']`
+    overrides the artifact root (used by tests and sandboxed dispatch).
+    Raises ValueError (MissionLayoutError) on invalid ids or governance paths.
+    """
+    from control_plane.mission_layout import (
+        MissionSession,
+        is_valid_mission_id,
+        slugify_mission_id,
+    )
+
+    missions_root: Optional[Path] = None
+    if isinstance(context, dict) and context.get("missions_root"):
+        missions_root = Path(str(context["missions_root"]))
+
+    text = (str(param).strip() if param and not isinstance(param, dict) else "") or ""
+    mission_id = ""
+    if text:
+        m = re.search(r"--mission-id[= ]([A-Za-z0-9_-]+)", text)
+        if m:
+            mission_id = m.group(1).strip().lower()
+            text = (text[: m.start()] + text[m.end() :]).strip()
+    if not mission_id:
+        mission_id = slugify_mission_id(text)
+    if not is_valid_mission_id(mission_id):
+        raise ValueError(f"invalid mission id derived from param: {mission_id!r}")
+
+    root = missions_root / mission_id if missions_root else None
+    objective = text or "OMNI_FORGE factory mission"
+    return MissionSession(mission_id, objective=objective, root=root), mission_id, objective
+
+
+def _seed_or_keep_blueprint(session: Any, objective: str) -> dict:
+    """Freeze-guard for blueprint.json (Step_2).
+
+    Blueprint is the mission's frozen artifact — never silently clobbered:
+      SEEDED         — fresh mission, skeleton written and pinned
+      KEPT_FROZEN    — already pinned and unmodified; left untouched
+      ADOPTED_FROZEN — existed unregistered (operator hand-placed); pinned as-is
+      MUTATED        — was pinned but content changed since; refusal required
+    """
+    bp_path = session.root / "blueprint.json"
+    if session.manifest_path.exists():
+        verdict = session.verify_mission()
+        state = next(
+            (a["status"] for a in verdict["artifacts"] if a["artifact"] == "blueprint.json"),
+            None,
+        )
+        if state == "PINNED":
+            return {"blueprint_state": "KEPT_FROZEN", "blueprint_sha256": next(
+                a["sha256"] for a in verdict["artifacts"] if a["artifact"] == "blueprint.json"
+            )}
+        if state == "MUTATED":
+            return {"blueprint_state": "MUTATED", "blueprint_sha256": None}
+    if bp_path.exists():
+        adopted = json.loads(bp_path.read_text(encoding="utf-8"))
+        receipt = session.write_artifact("blueprint.json", adopted)
+        return {"blueprint_state": "ADOPTED_FROZEN", "blueprint_sha256": receipt["sha256"]}
+    blueprint = {
+        "step": "ARCHITECT_BLUEPRINT",
+        "frozen": {
+            "objective": objective,
+            "schemas": {"Mission": "camelot.mission/1"},
+            "hld": "Seeded by //FORGE_FACTORY; refine before //TRANSLATE_DAG",
+        },
+        "governance_writes": "forbidden",
+    }
+    receipt = session.write_artifact("blueprint.json", blueprint)
+    return {"blueprint_state": "SEEDED", "blueprint_sha256": receipt["sha256"]}
+
+
+def _handle_forge_factory(param: Any, context: Optional[dict]) -> dict:
+    """//FORGE_FACTORY — scaffold the per-mission workspace and 5-step DAG loop.
+
+    Seeds blueprint.json (Step_2 skeleton) on fresh missions so the mission
+    registers at least one hash-pinned artifact and //TRANSLATE_DAG works out
+    of the box. An existing pinned blueprint is never clobbered (see
+    _seed_or_keep_blueprint); drift blocks instead of overwriting.
+    """
+    session, mission_id, objective = _resolve_factory_mission(param, context)
+    manifest = session.create()
+    guard = _seed_or_keep_blueprint(session, objective)
+    status = "BLOCKED_BLUEPRINT_DRIFT" if guard["blueprint_state"] == "MUTATED" else "SCAFFOLDED"
+    return {
+        "action": "forge_factory",
+        "mission_id": mission_id,
+        "objective": objective,
+        "root": str(session.root),
+        "steps": manifest["steps"],
+        "blueprint_state": guard["blueprint_state"],
+        "blueprint_sha256": guard["blueprint_sha256"],
+        "status": status,
+    }
+
+
+def _handle_translate_dag(param: Any, context: Optional[dict]) -> dict:
+    """//TRANSLATE_DAG — deconstruct the frozen blueprint into task_dag.json."""
+    session, mission_id, _ = _resolve_factory_mission(param, context)
+    blueprint_path = session.root / "blueprint.json"
+    if not blueprint_path.exists():
+        return {
+            "action": "translate_dag",
+            "mission_id": mission_id,
+            "root": str(session.root),
+            "status": "BLOCKED_NO_BLUEPRINT",
+        }
+    blueprint = json.loads(blueprint_path.read_text(encoding="utf-8"))
+    frozen = blueprint.get("frozen") or blueprint
+    nodes: list[dict[str, Any]] = []
+    for idx, (key, value) in enumerate(sorted(frozen.items()) if isinstance(frozen, dict) else []):
+        node = {"id": f"n{idx + 1}", "task": f"materialize {key}", "assignee": "squire_mason"}
+        if idx > 0:
+            node["after"] = [f"n{idx}"]
+        nodes.append(node)
+        if isinstance(value, dict):
+            node["inputs"] = sorted(value.keys())
+    task_dag = {
+        "step": "DECOMPOSE_TASK_DAG",
+        "derived_from": "blueprint.json",
+        "nodes": nodes,
+        "parallel_sequences": [[f"n{i + 1}"] for i in range(len(nodes))],
+    }
+    receipt = session.write_artifact("task_dag.json", task_dag)
+    return {
+        "action": "translate_dag",
+        "mission_id": mission_id,
+        "nodes": len(nodes),
+        "artifact_sha256": receipt["sha256"],
+        "status": "DAG_TRANSLATED",
+    }
+
+
+def _handle_equip_skills(param: Any, context: Optional[dict]) -> dict:
+    """//EQUIP_SKILLS — write the per-mission skills manifest (referenced, never injected)."""
+    session, mission_id, _ = _resolve_factory_mission(param, context)
+    if not session.manifest_path.exists():
+        return {
+            "action": "equip_skills",
+            "mission_id": mission_id,
+            "root": str(session.root),
+            "status": "BLOCKED_NO_MISSION",
+        }
+    param_str = str(param).strip() if param and not isinstance(param, dict) else ""
+    clean = re.sub(r"--mission-id[= ][A-Za-z0-9_-]+", "", param_str)
+    requested = [
+        t.strip().lower()
+        for t in clean.replace(",", " ").split()
+        if t.strip() and not t.startswith("--")
+    ]
+    contracts = [
+        {"knight": "sir_forge", "tools": ["write_artifact", "verify_mission"], "boundary": "missions/<id>/ only"},
+        {"knight": "merlin_omega", "tools": ["run_crucible"], "boundary": "verification.json write-only"},
+        {"knight": "anya_gate", "tools": ["is_governance_path"], "boundary": "gatekeeper, read-only"},
+    ]
+    skills = {
+        "step": "EQUIP_KNIGHTS",
+        "requested_capabilities": requested,
+        "contracts": contracts,
+        "note": "Global skills surface immutable; squires reference this manifest.",
+    }
+    receipt = session.write_artifact("skills_manifest.json", skills)
+    return {
+        "action": "equip_skills",
+        "mission_id": mission_id,
+        "contract_count": len(contracts),
+        "artifact_sha256": receipt["sha256"],
+        "status": "KNIGHTS_EQUIPPED",
+    }
+
+
+def _append_factory_hitl(action: str, mission_id: str, verdict: str, detail: str) -> Optional[str]:
+    """Append a HITL suspension entry for a non-CERTIFIED crucible verdict.
+
+    Mirrors soul_oversight._append_hitl / factory_lane.enqueue_human_gate
+    conventions: one JSON line in logs/hitl_queue.jsonl for operator review.
+    Returns the queue path, or None when the append fails (fail-soft — the
+    audit verdict itself is never swallowed by queue errors).
+    """
+    try:
+        home = Path(os.environ.get("CAMELOT_OS_HOME", str(CAMELOT_HOME)))
+        queue = home / "logs" / "hitl_queue.jsonl"
+        queue.parent.mkdir(parents=True, exist_ok=True)
+        entry = {
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "source": "runic_router",
+            "action": action,
+            "mission_id": mission_id,
+            "verdict": verdict,
+            "note": detail,
+        }
+        with queue.open("a", encoding="utf-8") as fh:
+            fh.write(json.dumps(entry) + "\n")
+        return str(queue)
+    except Exception:
+        return None
+
+
+def _handle_crucible_audit(param: Any, context: Optional[dict]) -> dict:
+    """//CRUCIBLE_AUDIT — hash-pin verify the mission + cartridge crucible verdict."""
+    session, mission_id, _ = _resolve_factory_mission(param, context)
+    if not session.manifest_path.exists():
+        return {
+            "action": "crucible_audit",
+            "mission_id": mission_id,
+            "root": str(session.root),
+            "status": "BLOCKED_NO_MISSION",
+        }
+    verdict = session.verify_mission()
+    cartridge_verdict: Optional[str] = None
+    cartridge_manifest = (
+        CAMELOT_HOME / "03_VAULT" / "runtime_state" / "cartridges"
+        / "omni-forge-super-agent-cartridge-v1.json"
+    )
+    if cartridge_manifest.exists():
+        try:
+            from control_plane.infra.cartridge_crucible import run_crucible
+
+            cartridge_verdict = run_crucible(
+                json.loads(cartridge_manifest.read_text(encoding="utf-8"))
+            ).get("verdict")
+        except Exception as exc:  # fail-soft: mission verdict still authoritative
+            cartridge_verdict = f"UNAVAILABLE ({exc})"
+    status = "SEALED" if verdict["ok"] else "DRIFT"
+    session.set_status(status)
+    # Iron Gate HITL: non-CERTIFIED outcomes suspend for operator review.
+    # Mission drift (status != SEALED) or a REJECTED/HITL_SUSPENDED cartridge
+    # both queue; UNAVAILABLE (crucible crashed) also queues — fail closed.
+    hitl_path: Optional[str] = None
+    needs_hitl = (status != "SEALED") or (
+        cartridge_verdict is not None and cartridge_verdict != "CERTIFIED"
+    )
+    if needs_hitl:
+        hitl_verdict = (
+            cartridge_verdict
+            if cartridge_verdict not in (None, "CERTIFIED")
+            else "MISSION_DRIFT"
+        )
+        hitl_path = _append_factory_hitl(
+            "crucible_audit",
+            mission_id,
+            hitl_verdict,
+            f"mission status={status}; cartridge verdict={cartridge_verdict}",
+    )
+    return {
+        "action": "crucible_audit",
+        "mission_id": mission_id,
+        "pinned": verdict["ok"],
+        "artifacts": verdict["artifacts"],
+        "cartridge_verdict": cartridge_verdict,
+        "hitl_enqueued": hitl_path is not None,
+        "hitl_queue": hitl_path,
+        "status": status,
+    }
+
+
+def _handle_forge_mission(param: Any, context: Optional[dict]) -> dict:
+    """//FORGE_MISSION — orchestrate all 5 factory DAG steps in one dispatch.
+
+    OBSERVE_AND_SCAFFOLD + ARCHITECT_BLUEPRINT (//FORGE_FACTORY) ->
+    DECOMPOSE_TASK_DAG (//TRANSLATE_DAG) -> EQUIP_KNIGHTS (//EQUIP_SKILLS) ->
+    VALIDATION_SWARM (//CRUCIBLE_AUDIT). Aborts at the first blocked step;
+    the frozen blueprint is never clobbered on re-runs (KEPT_FROZEN).
+    """
+    session, mission_id, objective = _resolve_factory_mission(param, context)
+    steps: list[dict[str, Any]] = []
+
+    r1 = _handle_forge_factory(param, context)
+    steps.append({
+        "step": "OBSERVE_AND_SCAFFOLD + ARCHITECT_BLUEPRINT",
+        "status": r1["status"],
+        "blueprint_state": r1.get("blueprint_state"),
+    })
+    if r1["status"] != "SCAFFOLDED":
+        return {
+            "action": "forge_mission",
+            "mission_id": mission_id,
+            "root": str(session.root),
+            "steps": steps,
+            "status": r1["status"],
+        }
+
+    r3 = _handle_translate_dag(f"--mission-id {mission_id}", context)
+    steps.append({"step": "DECOMPOSE_TASK_DAG", "status": r3["status"], "nodes": r3.get("nodes")})
+    if r3["status"] != "DAG_TRANSLATED":
+        return {
+            "action": "forge_mission",
+            "mission_id": mission_id,
+            "root": str(session.root),
+            "steps": steps,
+            "status": r3["status"],
+        }
+
+    r4 = _handle_equip_skills(f"--mission-id {mission_id}", context)
+    steps.append({"step": "EQUIP_KNIGHTS", "status": r4["status"], "contract_count": r4.get("contract_count")})
+    if r4["status"] != "KNIGHTS_EQUIPPED":
+        return {
+            "action": "forge_mission",
+            "mission_id": mission_id,
+            "root": str(session.root),
+            "steps": steps,
+            "status": r4["status"],
+        }
+
+    r5 = _handle_crucible_audit(f"--mission-id {mission_id}", context)
+    steps.append({
+        "step": "VALIDATION_SWARM",
+        "status": r5["status"],
+        "pinned": r5.get("pinned"),
+        "cartridge_verdict": r5.get("cartridge_verdict"),
+    })
+    return {
+        "action": "forge_mission",
+        "mission_id": mission_id,
+        "objective": objective,
+        "root": str(session.root),
+        "steps": steps,
+        "status": r5["status"],
+    }
+
+
 def _handle_purge_branches(param: Any, context: dict) -> dict:
     """Purge unnecessary and merged branches from repository to maintain a clean single trunk."""
     param_str = str(param or "").strip() if param and not isinstance(param, dict) else ""
@@ -3238,6 +3648,7 @@ _HANDLERS = {
     "_handle_defense_init": _handle_defense_init,
     "_handle_vocal": _handle_vocal,
     "_handle_scan": _handle_scan,
+    "_handle_context": _handle_context,
     "_handle_status": _handle_status,
     "_handle_triage": _handle_triage,
     "_handle_think": _handle_think,
@@ -3288,6 +3699,11 @@ _HANDLERS = {
     "_handle_wake_24_7_swarm_daemon": _handle_wake_24_7_swarm_daemon,
     "_handle_forge_squire": _handle_forge_squire,
     "_handle_scarcity_gov": _handle_scarcity_gov,
+    "_handle_forge_factory": _handle_forge_factory,
+    "_handle_translate_dag": _handle_translate_dag,
+    "_handle_equip_skills": _handle_equip_skills,
+    "_handle_crucible_audit": _handle_crucible_audit,
+    "_handle_forge_mission": _handle_forge_mission,
 }
 
 
@@ -3497,6 +3913,27 @@ _RUNE_ALIASES: dict[str, str] = {
     "$validate-spec": "//VALIDATE_SPEC",
     "/validate-spec": "//VALIDATE_SPEC",
     "omega_spec_validate": "Omega_SPEC_VALIDATE",
+    # OMNI_FORGE factory rune aliases (bare //UPPER_SNAKE canonical; emoji prefixes rejected)
+    "//forge_factory": "//FORGE_FACTORY",
+    "//forge-factory": "//FORGE_FACTORY",
+    "$forge-factory": "//FORGE_FACTORY",
+    "/forge-factory": "//FORGE_FACTORY",
+    "//translate_dag": "//TRANSLATE_DAG",
+    "//translate-dag": "//TRANSLATE_DAG",
+    "$translate-dag": "//TRANSLATE_DAG",
+    "/translate-dag": "//TRANSLATE_DAG",
+    "//equip_skills": "//EQUIP_SKILLS",
+    "//equip-skills": "//EQUIP_SKILLS",
+    "$equip-skills": "//EQUIP_SKILLS",
+    "/equip-skills": "//EQUIP_SKILLS",
+    "//crucible_audit": "//CRUCIBLE_AUDIT",
+    "//crucible-audit": "//CRUCIBLE_AUDIT",
+    "$crucible-audit": "//CRUCIBLE_AUDIT",
+    "/crucible-audit": "//CRUCIBLE_AUDIT",
+    "//forge_mission": "//FORGE_MISSION",
+    "//forge-mission": "//FORGE_MISSION",
+    "$forge-mission": "//FORGE_MISSION",
+    "/forge-mission": "//FORGE_MISSION",
 }
 
 

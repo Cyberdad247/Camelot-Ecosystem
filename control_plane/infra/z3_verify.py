@@ -31,7 +31,6 @@ from __future__ import annotations
 
 __version__ = "9000.14"  # CYBERTRONIA
 
-import os
 import re
 import sys
 from dataclasses import dataclass, field

@@ -1,0 +1,123 @@
+{
+  "schema": "camelot.cartridge/1",
+  "cartridge_id": "omni-forge-super-agent-cartridge-v1",
+  "version": "1.0.0",
+  "name": "OMNI_FORGE_SUPER_AGENT — Sovereign MetaCompiler Digital Factory",
+  "description": "Principal AI systems architect hypervisor implementing the 5-step kinetic factory DAG loop (OBSERVE_AND_SCAFFOLD -> ARCHITECT_BLUEPRINT -> DECOMPOSE_TASK_DAG -> EQUIP_KNIGHTS -> VALIDATION_SWARM) over per-mission runtime_state artifacts, crucible-verified before any disk commit.",
+  "origin": {
+    "spec": "ctx:camelot-os.dev/ukg/v4000/omni_forge_super_agent",
+    "spec_type": "Sovereign_MetaCompiler_Digital_Factory",
+    "review_ref": "docs/architecture/OMNI_FORGE_MISSION_LAYOUT.md",
+    "operating_law": "dreams don't come true visions do"
+  },
+  "identity": {
+    "role_separation": {
+      "planner": "merlin_omega",
+      "gatekeeper": "anya_gate",
+      "kinetic": "sir_forge",
+      "orchestrator": "sir_boris",
+      "note": "Planner and gatekeeper are distinct authorities. The fused MERLIN_OMEGA+ANYA_OMEGA synthesis from the source spec was rejected in review: the auditor must not be the persona that authored the plan (Socratic halt / Type III prevention)."
+    }
+  },
+  "roles": ["planner", "gatekeeper", "kinetic", "orchestrator"],
+  "runes": {
+    "declared": [
+      "//FORGE_FACTORY",
+      "//TRANSLATE_DAG",
+      "//EQUIP_SKILLS",
+      "//CRUCIBLE_AUDIT"
+    ],
+    "status": "registered",
+    "note": "Registered in control_plane/runes/runic_router.py RUNIC_COMMANDS with handlers routed to control_plane.mission_layout.MissionSession, 16 hyphen aliases, and unit tests (tests/control_plane/test_factory_runes.py). Emoji-prefixed variants from the source spec are rejected as non-canonical; aliases are bare //UPPER_SNAKE / hyphen / $ / / forms.",
+    "registered_aliases": {
+      "//forge-factory": "//FORGE_FACTORY",
+      "//translate-dag": "//TRANSLATE_DAG",
+      "//equip-skills": "//EQUIP_SKILLS",
+      "//crucible-audit": "//CRUCIBLE_AUDIT"
+    }
+  },
+  "artifacts": {
+    "hash_pinning": true,
+    "layout": "camelot.mission/1",
+    "module": "control_plane.mission_layout",
+    "root": "03_VAULT/runtime_state/missions/<mission_id>/",
+    "canonical_set": ["blueprint.json", "task_dag.json", "skills_manifest.json", "verification.json", "receipts"],
+    "governance_writes": "forbidden",
+    "mapping_from_spec": {
+      "docs/blueprint.md": "missions/<id>/blueprint.json",
+      "docs/task.md": "missions/<id>/task_dag.json",
+      "docs/verification.md": "missions/<id>/verification.json",
+      "agent/skills.md": "missions/<id>/skills_manifest.json (global skill surface is immutable; per-mission manifests are referenced, never injected)"
+    }
+  },
+  "runtime": {
+    "engine": "python_control_plane",
+    "memory_budget_mb": 2048,
+    "scarcity_profile": "background_2gb",
+    "container": "none",
+    "hardware_ceiling": "8GB_EDGE_STRICT_1.58_BIT_TERNARY_CORE",
+    "memory_invariants": {
+      "delta_m_mib": 0.12,
+      "max_heap_mb": 150,
+      "source": "control_plane/infra/paladin_crucible.py proof obligations"
+    }
+  },
+  "verification": {
+    "rigor_ladder": {
+      "L4": "cross-verified proof (Z3 + independent re-derivation)",
+      "L3": "property-based test battery",
+      "L2": "SMT-verified bound (z3 ground_effects over safety fluents)",
+      "L1": "deterministic self-test",
+      "note": "Enumerated rungs replace the spec's L4-to-L2 gap; the ladder composes with, and never replaces, the 5-gate crucible."
+    },
+    "crucible": {
+      "module": "control_plane.infra.cartridge_crucible",
+      "gates": ["schema_contract", "scarcity_ceiling", "iron_gate_hitl", "air_gap_privacy", "provenance_continuity"],
+      "z3_composition": "control_plane.infra.z3_verify.ground_effects (deterministic PDDL grounding; LLM drafts intents, never verdicts)",
+      "fallback": "z3 optional; Z3_UNAVAILABLE degrades fail-soft with anya_gate shatterpoint guard still applying"
+    }
+  },
+  "privacy": {
+    "keyword_routing": "sir_ghost_air_gapped",
+    "secret_storage": "boolean presence flags only",
+    "cloud_calls_for_secret_class": "never"
+  },
+  "hitl": {
+    "gate": "iron_gate",
+    "required_above_risk": 50,
+    "operator_authorization": "CAMELOT_DASHBOARD_OPERATOR_TOKEN or explicit y/N pause; HUMAN_GATE jobs always suspend"
+  },
+  "evidence_classes": {
+    "confirmed": [
+      "Videneptus LaC 3-phase crucible (01_KERNEL/agora/videneptus.py, wired at merlin_omega.py:521)",
+      "TOON toolchain (control_plane/cli/toon_manifest.py, control_plane/toon_encoder.py)",
+      "Z3 patch verification over 5 safety fluents (control_plane/infra/z3_verify.py)",
+      "Per-mission runtime_state layout with sha256 pinning (control_plane/mission_layout.py, 11/11 self-test)",
+      "5-gate cartridge crucible with seal/verify continuity (control_plane/infra/cartridge_crucible.py, 13/13 self-test)",
+      "Factory runes //FORGE_FACTORY, //TRANSLATE_DAG, //EQUIP_SKILLS, //CRUCIBLE_AUDIT registered in runic_router.py with handlers, aliases, and tests (test_factory_runes.py, 20 cases)"
+    ],
+    "planned": [
+      "Full mission runner binding all 5 DAG steps to one orchestrated flow (runes cover Steps 1-4 scaffold/seed plus Step 5 audit; Step 3 blueprint refinement is operator/knight-driven)",
+      "Demo mission runner generalization beyond the mission_layout --demo seed data"
+    ],
+    "aspirational": [
+      "Symbolect/TOON compression ratios (>70% token reduction, <10% semantic loss) — asserted by source spec, not yet benchmarked in this repo; measure before quoting"
+    ],
+    "rejected": [
+      "Direct mission writes to docs/blueprint.md, docs/task.md, docs/verification.md (governance artifacts)",
+      "Runtime mutation of any global skills surface (violates immutable authority closure)",
+      "Fused planner+gatekeeper identity (single persona plans and audits)",
+      "Emoji-prefixed rune tokens as dispatch keys (break CLI parsing and --detect)",
+      "Direct writes to PROVENANCE_LEDGER.md (hook-owned, receipt-staged only)"
+    ]
+  },
+  "governance": {
+    "guardian": "anya_gate",
+    "mirror_ledgers": "hook-written only",
+    "review_adr": "docs/architecture/OMNI_FORGE_MISSION_LAYOUT.md"
+  },
+  "multi_model_harness": {
+    "existing_infra": ["//OMNIROUTE", "//BITROUTER", "//BIFROST", "01_KERNEL/memory/bifrost_knight_llm_registry.json"],
+    "policy": "Route workloads via the existing router surface; do not re-declare a parallel harness."
+  }
+}

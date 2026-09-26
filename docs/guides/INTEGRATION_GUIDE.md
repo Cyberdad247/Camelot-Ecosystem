@@ -257,8 +257,9 @@ See `.env.template` for all options. Critical ones:
 
 ```bash
 AGENT_MEMORY_API_KEY=  # Redis Agent Memory (required for memory features)
-CLIPROXY_KEY=proxy-admin-key  # Default; change in CLIProxy config.yaml
+CLIPROXY_KEY=<operator-managed-key>  # Required for CLIProxyAPI dispatch; keep secret
 CLIPROXY_BASE=http://127.0.0.1:8080/v1  # Default
+BIFROST_ALLOWED_BASE_HOSTS=  # Optional exact hosts; non-loopback bases require HTTPS
 OLLAMA_BASE=http://127.0.0.1:11434  # Default
 ```
 

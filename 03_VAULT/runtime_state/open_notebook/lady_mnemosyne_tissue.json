@@ -4,6 +4,17 @@
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "knight_summoning",
     "title": "Summoned Knight: ANYA_OMEGA",
+    "content": "{\n  \"action\": \"summon_knight\",\n  \"knight_id\": \"ANYA_OMEGA\",\n  \"interconnect\": {\n    \"knight_id\": \"ANYA_OMEGA\",\n    \"spark_id\": \"0x32D389065AE84ECCB77E705D12C89F4A\",\n    \"name\": \"Anya Omega (The Sovereign Gatekeeper)\",\n    \"title\": \"Alpha First & Omega Last - Knight at the Helm\",\n    \"summoning_rune\": \"Omega_ANYA\",\n    \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"cloudbrain_uuid\": \"32d38906-5ae8-4ecc-b77e-705d12c89f4a\",\n    \"vfs_path\": \"vfs://worldtree/knights/anya_omega/tether.json\",\n    \"mempalace_wing\": \"WING_WORLDTREE_ANYA_OMEGA\",\n    \"open_viking_node\": \"open_viking://worldtree/anya_omega\",\n    \"primary_engine\": \"Sovereign Lattice Substrate\",\n    \"ocean_vector\": {\n      \"O\": 0.97,\n      \"C\": 0.99,\n      \"E\": 0.51,\n      \"A\": 0.83,\n      \"N\": 0.17\n    },\n    \"brain_interconnected\": true,\n    \"timestamp\": \"2026-09-24T20:30:34.009124+00:00\"\n  },\n  \"timestamp\": \"2026-09-24T20:30:34.012628+00:00\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",
+    "open_viking_tether": "open_viking://worldtree/lady_mnemosyne",
+    "synced_at": "2026-09-24T20:30:34.012724+00:00"
+  },
+  {
+    "knight_id": "LADY_MNEMOSYNE",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "knight_summoning",
+    "title": "Summoned Knight: ANYA_OMEGA",
     "content": "{\n  \"action\": \"summon_knight\",\n  \"knight_id\": \"ANYA_OMEGA\",\n  \"interconnect\": {\n    \"knight_id\": \"ANYA_OMEGA\",\n    \"spark_id\": \"0x32D389065AE84ECCB77E705D12C89F4A\",\n    \"name\": \"Anya Omega (The Sovereign Gatekeeper)\",\n    \"title\": \"Alpha First & Omega Last - Knight at the Helm\",\n    \"summoning_rune\": \"Omega_ANYA\",\n    \"worldtree_home\": \"a0a4bfb9-e847-4c38-be39-7aee398f0795\",\n    \"cloudbrain_uuid\": \"32d38906-5ae8-4ecc-b77e-705d12c89f4a\",\n    \"vfs_path\": \"vfs://worldtree/knights/anya_omega/tether.json\",\n    \"mempalace_wing\": \"WING_WORLDTREE_ANYA_OMEGA\",\n    \"open_viking_node\": \"open_viking://worldtree/anya_omega\",\n    \"primary_engine\": \"Sovereign Lattice Substrate\",\n    \"ocean_vector\": {\n      \"O\": 0.97,\n      \"C\": 0.99,\n      \"E\": 0.51,\n      \"A\": 0.83,\n      \"N\": 0.17\n    },\n    \"brain_interconnected\": true,\n    \"timestamp\": \"2026-09-20T11:57:58.375527+00:00\"\n  },\n  \"timestamp\": \"2026-09-20T11:57:58.379632+00:00\"\n}",
     "vfs_path": "vfs://worldtree/knights/lady_mnemosyne/tether.json",
     "mempalace_wing": "WING_WORLDTREE_LADY_MNEMOSYNE",

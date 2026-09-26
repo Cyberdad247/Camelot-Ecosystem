@@ -1,8 +1,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 
-import pytest
-from control_plane.infra.camelot_vitals import CamelotVitalsCollector, MetricSample
+from control_plane.infra.camelot_vitals import CamelotVitalsCollector
 
 
 def test_camelot_vitals_collection_and_prometheus_export():

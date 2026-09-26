@@ -107,8 +107,11 @@ def _boot_cliproxy():
     # Check if port 8080 is already in use (proxy already running)
     try:
         import httpx
-        resp = httpx.get("http://127.0.0.1:8080/v1/models",
-                         headers={"Authorization": "Bearer proxy-admin-key"}, timeout=2)
+        headers = {}
+        cliproxy_key = (os.environ.get("CLIPROXY_KEY") or "").strip()
+        if cliproxy_key:
+            headers["Authorization"] = f"Bearer {cliproxy_key}"
+        resp = httpx.get("http://127.0.0.1:8080/v1/models", headers=headers, timeout=2)
         if resp.status_code == 200:
             return None, "[green]CLIProxyAPI already running[/] on :8080"
     except Exception:

@@ -27,7 +27,7 @@ _KNOWN_KEYS = {
     "anthropic":  ("ANTHROPIC_API_KEY",  "Anthropic Claude API key"),
     "google":     ("GOOGLE_API_KEY",     "Google Gemini API key"),
     "openai":     ("OPENAI_API_KEY",     "OpenAI API key"),
-    "cliproxy":   ("CLIPROXY_API_KEY",   "CLIProxy OAuth key (proxy-admin-key)"),
+    "cliproxy":   ("CLIPROXY_API_KEY",   "CLIProxy OAuth key"),
     "groq":       ("GROQ_API_KEY",       "Groq API key"),
     "cerebras":   ("CEREBRAS_API_KEY",   "Cerebras API key"),
 }

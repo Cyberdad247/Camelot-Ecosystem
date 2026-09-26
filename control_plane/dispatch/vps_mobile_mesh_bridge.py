@@ -1,11 +1,104 @@
 # SPDX-License-Identifier: MIT
 import base64
 import hmac
-import json, os, logging
+import json
+import logging
+import os
 import time
-from http.server import HTTPServer, BaseHTTPRequestHandler
+from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, HTTPServer
+from typing import Any, Optional
 
 from control_plane.dispatch.edge_protocol import EdgeProtocol, ValidationResult, issue_snapshot
+
+# --- HERMES_PRIME freshness (restored from 4d5bfebd after a merge regression) ---
+# A cycle is treated as current for GRACE x cadence before the status degrades,
+# so one slow or skipped run does not flap the dashboard.
+HERMES_PRIME_CADENCE_S = 60
+HERMES_PRIME_GRACE_MULTIPLIER = 3
+
+PHIAL_STATE_PATH = os.path.join(
+    os.path.dirname(__file__), '../../03_VAULT/runtime_state/hermes_prime_phial.json'
+)
+
+
+def read_phial_state() -> dict[str, Any]:
+    """PhialEngine state as last written, or {} if absent or unreadable."""
+    if not os.path.exists(PHIAL_STATE_PATH):
+        return {}
+    try:
+        with open(PHIAL_STATE_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception as e:
+        logging.warning(f"phial state unreadable: {e}")
+        return {}
+
+
+def _parse_ts(value: Any) -> Optional[datetime]:
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        ts = datetime.fromisoformat(value.strip().replace('Z', '+00:00'))
+    except ValueError:
+        return None
+    return ts if ts.tzinfo else ts.replace(tzinfo=timezone.utc)
+
+
+def _latest_cycle(state: dict[str, Any]) -> Optional[dict[str, Any]]:
+    """Most recent memory entry carrying a parseable timestamp."""
+    memory = state.get('memory') if isinstance(state, dict) else None
+    if not isinstance(memory, list):
+        return None
+    for entry in reversed(memory):
+        if isinstance(entry, dict) and _parse_ts(entry.get('ts')) is not None:
+            return entry
+    return None
+
+
+def hermes_prime_status(
+    state: Optional[dict[str, Any]] = None,
+    now: Optional[datetime] = None,
+) -> dict[str, Any]:
+    """Derive liveness from the state the engine actually writes.
+
+    Returns ALWAYS_ON_HUB only when a cycle landed inside the freshness window.
+    Otherwise STALE (state present but old), UNPARSEABLE (state present, no
+    usable timestamp) or NO_STATE (nothing written yet). Diagnostics ride along
+    so a dashboard can show why, rather than just a degraded label.
+    """
+    if state is None:
+        state = read_phial_state()
+    if not isinstance(state, dict):
+        state = {}
+    if now is None:
+        now = datetime.now(timezone.utc)
+
+    memory = state.get('memory')
+    result: dict[str, Any] = {
+        "status": "NO_STATE",
+        "cycles": len(memory) if isinstance(memory, list) else 0,
+        "last_cycle_ts": None,
+        "last_cycle_age_s": None,
+        "fresh_within_s": HERMES_PRIME_CADENCE_S * HERMES_PRIME_GRACE_MULTIPLIER,
+        "cadence_s": HERMES_PRIME_CADENCE_S,
+    }
+
+    latest = _latest_cycle(state)
+    if latest is None:
+        if result["cycles"]:
+            result["status"] = "UNPARSEABLE"
+        return result
+
+    ts = _parse_ts(latest.get('ts'))
+    if ts is None:  # pragma: no cover - _latest_cycle already guarantees a ts
+        result["status"] = "UNPARSEABLE"
+        return result
+
+    age = (now - ts).total_seconds()
+    result["last_cycle_ts"] = latest.get('ts')
+    result["last_cycle_age_s"] = round(age, 3)
+    result["status"] = "ALWAYS_ON_HUB" if age <= result["fresh_within_s"] else "STALE"
+    return result
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] [%(name)s] %(message)s')
 LOG = logging.getLogger('VpsMobileMeshBridge')
@@ -53,8 +146,8 @@ def load_mesh_topology() -> dict:
 
 def is_mesh_request_authorized(headers: dict) -> bool:
     """Require the runtime-only mesh token for topology and telemetry reads."""
-    expected = os.getenv("MESH_BRIDGE_TOKEN", "")
-    provided = headers.get("x-camelot-token", "")
+    expected = os.getenv("MESH_BRIDGE_TOKEN", "").strip()
+    provided = headers.get("x-camelot-token", "").strip()
     if not expected or not provided:
         return False
     return hmac.compare_digest(provided, expected)
@@ -139,9 +232,16 @@ class MeshBridgeHandler(BaseHTTPRequestHandler):
             }
             self._send_json(status)
         elif self.path in ['/bifrost/knights', '/api/bifrost/knights']:
+            hermes = hermes_prime_status()
             knights = [
                 {"id": "SIR_HEIMDALL", "role": "Bifrost Guardian & Boundary Sentinel", "status": "ALWAYS_ON_HUB"},
-                {"id": "HERMES_PRIME", "role": "Always-on VPS Co-Pilot & MGV Synthesis", "status": "ALWAYS_ON_HUB"},
+                {
+                    "id": "HERMES_PRIME",
+                    "role": "Always-on VPS Co-Pilot & MGV Synthesis",
+                    "status": hermes["status"],
+                    "last_cycle_age_s": hermes["last_cycle_age_s"],
+                    "cycles": hermes["cycles"],
+                },
                 {"id": "SIR_LANCELOT", "role": "Kinetic Edge & Frontline Defense", "status": "ACTIVE_ESCORT"},
                 {"id": "SIR_GALAHAD", "role": "Verification, Chivalric Purity & Z3 Formal Gate", "status": "ACTIVE_ESCORT"},
                 {"id": "SIR_SENTINEL", "role": "AgentArmor, Zero-Trust Leases & Security Shield", "status": "ACTIVE_ESCORT"},
@@ -158,11 +258,19 @@ class MeshBridgeHandler(BaseHTTPRequestHandler):
                         phial_data = json.load(f)
                 except Exception:
                     pass
+            # Derived verdict served here (wiring contract; keys literal for the pin).
+            hermes = hermes_prime_status()
             self._send_json({
                 "agent": "HERMES_PRIME",
                 "role": "VPS Hub Co-Pilot & Research Synthesis",
                 "host": VPS_HOST,
                 "phial_engine": phial_data,
+                "status": hermes["status"],
+                "last_cycle_ts": hermes["last_cycle_ts"],
+                "last_cycle_age_s": hermes["last_cycle_age_s"],
+                "cycles": hermes["cycles"],
+                "fresh_within_s": hermes["fresh_within_s"],
+                "cadence_s": hermes["cadence_s"],
             })
         elif self.path in ['/telemetry/cockpit', '/api/cockpit', '/excalibur/cockpit']:
             always_on_path = os.path.join(os.path.dirname(__file__), '../../03_VAULT/runtime_state/cybertronia_always_on.json')

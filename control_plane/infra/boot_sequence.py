@@ -658,6 +658,30 @@ def sync_knight_configuration(home: Path):
         return False, f"Knight config snapshot failed: {type(exc).__name__}: {exc}"
 
 
+def boot_graft_graph(home: Path) -> tuple[bool, str]:
+    """Non-blocking graft context-graph freshness probe (orientation only)."""
+    graft = shutil.which("graft")
+    if not graft:
+        return True, "graft CLI not on PATH — context graph unavailable (optional)"
+    try:
+        rc = subprocess.run(
+            [graft, "check"],
+            cwd=str(home),
+            capture_output=True,
+            text=True,
+            timeout=30,
+        ).returncode
+    except subprocess.TimeoutExpired:
+        return True, "graft check timed out (optional, non-blocking)"
+    except OSError:
+        return True, "graft check unavailable (optional)"
+    if rc == 0:
+        return True, "graft graph in sync"
+    if rc == 1:
+        return False, "graft graph stale — run: graft build (non-blocking)"
+    return False, f"graft check aborted (rc={rc}) — graft #122 pattern; rebuild when memory frees"
+
+
 def datetime_utc_iso() -> str:
     from datetime import datetime, timezone
 
@@ -1339,6 +1363,7 @@ def run_boot(
         {"name": "Clawdbot  :18789",   "required": False, "fn": lambda: boot_clawdbot_gateway(home)},
         {"name": "Sir Pi   [PI_AGENT]", "required": False, "fn": lambda: boot_sir_pi(home)},
         {"name": "Knight Config Sync", "required": False, "fn": lambda: sync_knight_configuration(home)},
+        {"name": "Repo Context Graph", "required": False, "fn": lambda: boot_graft_graph(home)},
         {"name": "Vizion Telemetry", "required": False, "fn": lambda: boot_telemetry(home)},
         {"name": "Sovereign Harness", "required": False, "fn": lambda: boot_harness(home)},
         {"name": "Bio-Swarm (Nano)", "required": False, "fn": lambda: boot_bioswarm(home)},

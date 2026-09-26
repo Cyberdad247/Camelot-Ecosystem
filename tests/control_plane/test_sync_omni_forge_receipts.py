@@ -11,7 +11,6 @@ owns chain genesis and the merkle root is unaffected.
 
 import sqlite3
 
-import pytest
 
 from control_plane.runes import runic_router as rr
 

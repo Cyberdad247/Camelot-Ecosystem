@@ -1,0 +1,29 @@
+{
+  "step": "EQUIP_KNIGHTS",
+  "requested_capabilities": [],
+  "contracts": [
+    {
+      "knight": "sir_forge",
+      "tools": [
+        "write_artifact",
+        "verify_mission"
+      ],
+      "boundary": "missions/<id>/ only"
+    },
+    {
+      "knight": "merlin_omega",
+      "tools": [
+        "run_crucible"
+      ],
+      "boundary": "verification.json write-only"
+    },
+    {
+      "knight": "anya_gate",
+      "tools": [
+        "is_governance_path"
+      ],
+      "boundary": "gatekeeper, read-only"
+    }
+  ],
+  "note": "Global skills surface immutable; squires reference this manifest."
+}

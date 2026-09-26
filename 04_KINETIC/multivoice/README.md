@@ -41,8 +41,8 @@ that serves models via **CLI OAuth** (your Claude/Gemini/Codex CLI subscriptions
 
 If the gateway is offline each Knight **degrades gracefully** to the local TinyLM
 stub (`NewLocalStubProvider`) — Kinetic Resilience, no hard failure. The loopback
-`CLIPROXY_KEY` (`proxy-admin-key`) authorizes the local proxy only; it is **not** a
-paid credential.
+`CLIPROXY_KEY` is an operator-managed proxy credential; it is not a paid
+provider credential and must be supplied explicitly.
 
 ## Local-first inference policy
 

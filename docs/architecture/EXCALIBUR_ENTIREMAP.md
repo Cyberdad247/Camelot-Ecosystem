@@ -5,9 +5,9 @@
 **Operator Authority:** King Arthur (VaShawn O. Head / Vizion)
 **Arch-Sovereign Governance:** Anya Law (King Arthur -> ANYA_OMEGA -> Symbollect -> Knights -> King Arthur)
 **System Version:** `Living Camelot-OS v1000 MAX Compendium`
-**CI/CD Snapshot ID:** `excalibur_cicd_20260919_231007`
+**CI/CD Snapshot ID:** `excalibur_cicd_20260925_110428`
 **WorldTree Home Anchor:** `a0a4bfb9-e847-4c38-be39-7aee398f0795`
-**Generated Timestamp:** 2026-09-19 23:10:07 UTC
+**Generated Timestamp:** 2026-09-25 11:04:28 UTC
 ========================================================================================
 
 ## 1. EXCALIBUR TOPOLOGY & HARDWARE SUBSTRATE
@@ -61,7 +61,7 @@ flowchart TD
 The Excalibur EntireMap is bound to an immutable CI/CD Snapshot pipeline:
 
 1. **Active Release Version:** `Living Camelot-OS v1000 MAX Compendium`
-2. **Snapshot Hash:** Computed per build and archived in `03_VAULT/runtime_state/snapshots/snapshot_excalibur_cicd_20260919_231007.json`
+2. **Snapshot Hash:** Computed per build and archived in `03_VAULT/runtime_state/snapshots/snapshot_excalibur_cicd_20260925_110428.json`
 3. **Cryptographic Proof Chain:** Chained to `03_VAULT/Missions/verification_ledger.jsonl` with sequential parent-hash linkage.
 4. **Reversible Rollback:** In the event of a deployment regression, the snapshot runner can roll back node topology to the exact prior snapshot.
 

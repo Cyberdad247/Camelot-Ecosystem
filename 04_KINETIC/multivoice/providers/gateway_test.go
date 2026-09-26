@@ -18,7 +18,7 @@ func mockCLIProxy(t *testing.T) *httptest.Server {
 		_, _ = w.Write([]byte(`{"data":[{"id":"gpt-4o"},{"id":"gemini-2.5-flash"},{"id":"claude-sonnet-4-6"}]}`))
 	})
 	mux.HandleFunc("/v1/chat/completions", func(w http.ResponseWriter, r *http.Request) {
-		if got := r.Header.Get("Authorization"); got != "Bearer proxy-admin-key" {
+		if got := r.Header.Get("Authorization"); got != "Bearer fixture-key" {
 			t.Errorf("auth = %q, want the local proxy key", got)
 		}
 		w.Header().Set("Content-Type", "application/json")
@@ -31,7 +31,7 @@ func TestGateway_ZeroCostRoundTrip(t *testing.T) {
 	srv := mockCLIProxy(t)
 	defer srv.Close()
 	t.Setenv("CLIPROXY_BASE", srv.URL+"/v1")
-	// CLIPROXY_KEY default is "proxy-admin-key" (a loopback key, not a paid one).
+	t.Setenv("CLIPROXY_KEY", "fixture-key")
 
 	if !GatewayReachable(2 * time.Second) {
 		t.Fatal("expected gateway reachable via /models")

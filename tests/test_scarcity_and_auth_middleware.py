@@ -2,7 +2,6 @@
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 
 import hashlib
-import pytest
 from datetime import datetime, timezone
 from control_plane.infra.lease_auth_middleware import LeaseAuthMiddleware
 from control_plane.infra.scarcity_guardian import ScarcityGuardian

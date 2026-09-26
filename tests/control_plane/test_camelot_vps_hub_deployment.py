@@ -13,11 +13,10 @@ Validates:
 import hashlib
 import hmac
 import json
+import re
 from pathlib import Path
-import pytest
 
-from control_plane.infra.vps_github_webhook import CamelotVPSWebhookHandler, WebhookDeliveryReceipt
-
+from control_plane.infra.vps_github_webhook import CamelotVPSWebhookHandler
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
@@ -42,7 +41,7 @@ def test_camelot_vps_repo_sync_and_structure():
 
 
 def test_camelot_vps_webhook_processing(tmp_path):
-    """Verify webhook correctly parses push event for commit 960c2c2b and marks DEPLOYED."""
+    """Verify webhook correctly parses push event for commit 960c2c2b and records acceptance."""
     secret = "test_sovereign_secret_2026"
     handler = CamelotVPSWebhookHandler(secret=secret, state_dir=tmp_path)
 
@@ -60,7 +59,7 @@ def test_camelot_vps_webhook_processing(tmp_path):
 
     receipt = handler.process_github_event(payload_bytes, sig, event_type="push")
     assert receipt.verified is True
-    assert receipt.build_status == "DEPLOYED"
+    assert receipt.build_status == "ACCEPTED"
     assert receipt.commit_sha == commit_sha
     assert receipt.repository == "Cyberdad247/Camelot-VPS"
 
@@ -94,6 +93,19 @@ def test_caddyfile_worldtree_routing():
     assert "/var/www/worldtree" in content
     assert "/webhook/*" in content
     assert "reverse_proxy 127.0.0.1:9000" in content
+    assert "reverse_proxy 127.0.0.1:8095" not in content
+    assert "reverse_proxy 100.110.180.18:8095" in content
+
+
+def test_caddyfile_strips_bifrost_prefix_before_proxy():
+    content = (REPO_ROOT / "infra" / "caddy" / "Caddyfile").read_text(encoding="utf-8")
+
+    assert re.search(
+        r"(?ms)^\s*handle\s+/bifrost/\*\s*\{\s*"
+        r"uri\s+strip_prefix\s+/bifrost\s*"
+        r"reverse_proxy\s+127\.0\.0\.1:3001\s*\}",
+        content,
+    )
 
 
 def test_vps_hub_tissue_deployment_metadata():

@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 
-import pytest
 from control_plane.memory.worldtree_graph_sync import WorldTreeGraphSyncEngine, WORLDTREE_ROOT_UUID
 
 

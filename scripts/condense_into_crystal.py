@@ -9,7 +9,6 @@ from __future__ import annotations
 import argparse
 import json
 import hashlib
-import os
 import sys
 import re
 from datetime import datetime, timezone

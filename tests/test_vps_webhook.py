@@ -4,7 +4,6 @@
 import hashlib
 import hmac
 import json
-import pytest
 from control_plane.infra.vps_github_webhook import CamelotVPSWebhookHandler
 
 

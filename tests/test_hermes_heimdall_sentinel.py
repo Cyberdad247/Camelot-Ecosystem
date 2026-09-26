@@ -5,7 +5,6 @@ Unit tests for HERMES_PRIME & PALADIN_HEIMDALL Sentinel Integration.
 """
 from __future__ import annotations
 
-import pytest
 from control_plane.infra.hermes_heimdall_sentinel import HermesHeimdallSentinel
 
 def test_paladin_heimdall_perimeter_audit(tmp_path):

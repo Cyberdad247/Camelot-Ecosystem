@@ -9,7 +9,7 @@ across VPS Hub KVM563, Excalibur S26 Ultra, and local workstation nodes.
 """
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from typing import Sequence
 import hashlib
 import json

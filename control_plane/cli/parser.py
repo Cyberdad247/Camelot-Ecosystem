@@ -89,6 +89,25 @@ def _build_parser() -> argparse.ArgumentParser:
         help="Skip live probes and show configured contract only",
     )
 
+    bifrost = sub.add_parser("bifrost", help="Preview Bifrost routing and validate local model policy")
+    bifrost_sub = bifrost.add_subparsers(dest="bifrost_command", required=True)
+    bifrost_route = bifrost_sub.add_parser("route", help="Preview a route without invoking a model")
+    bifrost_route.add_argument("intent", nargs="+")
+    bifrost_route.add_argument("--json", action="store_true", default=argparse.SUPPRESS, help="Emit JSON output")
+    bifrost_status = bifrost_sub.add_parser("status", help="Show configured or probed Bifrost status")
+    bifrost_status.add_argument("--probe", action="store_true", help="Run a read-only gateway health probe")
+    bifrost_status.add_argument("--json", action="store_true", default=argparse.SUPPRESS, help="Emit JSON output")
+    bifrost_validate = bifrost_sub.add_parser("validate", help="Validate the local model manifest policy")
+    bifrost_validate.add_argument("path", nargs="?", default=None)
+    bifrost_validate.add_argument("--registry", default=None, help="Optional Bifrost registry path")
+    bifrost_validate.add_argument("--json", action="store_true", default=argparse.SUPPRESS, help="Emit JSON output")
+
+    contracts = sub.add_parser("contracts", help="Validate canonical contract schemas")
+    contracts_sub = contracts.add_subparsers(dest="contracts_command", required=True)
+    contracts_validate = contracts_sub.add_parser("validate", help="Validate the contract schema catalog")
+    contracts_validate.add_argument("path", nargs="?", default=None)
+    contracts_validate.add_argument("--json", action="store_true", default=argparse.SUPPRESS, help="Emit JSON output")
+
     ledger = sub.add_parser("ledger", help="Update and sync repository-side ledgers")
     ledger_sub = ledger.add_subparsers(dest="ledger_command", required=True)
     ledger_sub.add_parser("status", help="Show repository ledger status")

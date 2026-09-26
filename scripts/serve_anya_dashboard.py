@@ -148,7 +148,7 @@ def build_camelot_os_dashboard_state() -> dict:
 # ── Cartridge dispatch via CLIProxy ──────────────────────────────────────────
 
 _CLIPROXY_URL = "http://127.0.0.1:8080/v1/chat/completions"
-_CLIPROXY_KEY = "proxy-admin-key"
+_CLIPROXY_KEY = (os.environ.get("CLIPROXY_KEY") or "").strip()
 
 _CARTRIDGE_SYSTEM_PROMPTS: dict[str, str] = {
     "COGNITIVE": (
@@ -246,6 +246,13 @@ def dispatch_cartridge(cartridge: str, intent: str, params: dict) -> dict:
         "max_tokens": 1024,
     }
     body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+
+    if not _CLIPROXY_KEY:
+        return {
+            "error": "CLIPROXY_KEY is not configured",
+            "cartridge": cartridge_id,
+            "source": "CLIPROXY",
+        }
 
     t0 = time.monotonic()
     try:

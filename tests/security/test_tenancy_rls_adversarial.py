@@ -27,16 +27,12 @@ if str(REPO_ROOT) not in sys.path:
 from control_plane.dispatch.idempotency_guardian import (
     IdempotencyGuardian,
     IdempotencyDecision,
-    IdempotencyConflictError,
     IdempotencyPayloadMismatchError,
-    compute_compound_key,
 )
 from control_plane.security.connection_handshake import (
     MockPostgresConnection,
     TenancyHandshakeError,
     generate_handshake_sql,
-    sanitize_and_bind_connection,
-    reset_connection_session,
     scoped_tenant_connection,
     validate_handshake_parameters,
 )

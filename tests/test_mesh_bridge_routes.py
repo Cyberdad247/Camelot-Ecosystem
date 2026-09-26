@@ -36,8 +36,10 @@ INSTALLER = REPO_ROOT / "scripts" / "ops" / "install-mesh-bridge-routes.sh"
 AUDIT = REPO_ROOT / "scripts" / "vps_hub_bootstrap.sh"
 LAB_DEPLOY = REPO_ROOT / "scripts" / "deploy_luxora_nexus_lab.sh"
 BRIDGE = REPO_ROOT / "control_plane" / "dispatch" / "vps_mobile_mesh_bridge.py"
+SERVICE = REPO_ROOT / "infra" / "systemd" / "camelot-vps-mesh.service"
 
 BRIDGE_PORT = "8095"
+BRIDGE_HOST = "100.110.180.18"
 
 # Paths the snippet must route: the client contract that the bridge itself serves.
 EXPECTED_ROUTED = {
@@ -161,7 +163,7 @@ def test_the_routes_use_exact_match_so_they_cannot_shadow_the_gateway() -> None:
 
 def test_the_routes_point_at_the_bridge_and_not_another_port() -> None:
     code = _code(SNIPPET.read_text(encoding="utf-8"))
-    assert f"127.0.0.1:{BRIDGE_PORT}" in code, f"the snippet does not proxy to :{BRIDGE_PORT}"
+    assert f"{BRIDGE_HOST}:{BRIDGE_PORT}" in code, f"the snippet does not proxy to {BRIDGE_HOST}:{BRIDGE_PORT}"
     # :3001 is the Bifrost gateway and :9119 the Hermes dashboard; neither belongs here.
     for other in ("127.0.0.1:3001", "127.0.0.1:9119", "127.0.0.1:8642"):
         assert other not in code, f"the snippet proxies a mesh route to {other}"
@@ -188,6 +190,21 @@ def test_access_rules_are_inside_locations_and_never_at_server_level() -> None:
     assert code.count("deny  all;") == code.count("location = "), (
         "some locations are ungated — an ungated route publishes the mesh inventory"
     )
+
+
+def test_mesh_service_loads_an_operator_managed_token_file() -> None:
+    text = SERVICE.read_text(encoding="utf-8")
+    assert "EnvironmentFile=-/etc/camelot/mesh.env" in text
+    assert "Environment=MESH_BRIDGE_TOKEN=" not in text
+
+
+def test_lab_deploy_does_not_treat_auth_failures_as_online():
+    text = LAB_DEPLOY.read_text(encoding="utf-8")
+    assert 'if [ "$code" == "200" ]; then' in text
+    assert 'code" == "401"' not in text
+    assert "x-camelot-token" in text
+    assert "check_browser_endpoint" in text
+    assert "BROWSER AUTH REQUIRED" in text
 
 
 def test_the_closed_exposure_is_documented_and_reversible() -> None:
@@ -234,6 +251,29 @@ def test_the_installer_refuses_a_backup_left_inside_an_include_glob() -> None:
     assert "INCLUDE_GLOBS" in text and "bak-*" in text, (
         "the installer no longer checks for stray backups inside include globs"
     )
+
+
+def test_bootstrap_reconciles_existing_snippets_and_checks_parity() -> None:
+    text = AUDIT.read_text(encoding="utf-8")
+    assert 'if [[ "$MODE" == "apply" ]]; then' in text
+    assert '! -f /etc/nginx/snippets/camelot-mesh-bridge.conf' not in text
+    assert "cmp -s \"$CUBE_DIR/infra/nginx/camelot-mesh-bridge.conf\"" in text
+    assert "EnvironmentFiles" in text
+    assert "/etc/camelot/mesh.env" in text
+    assert '[[ -f "$CUBE_DIR/scripts/ops/install-mesh-bridge-routes.sh" ]]' in text
+    assert "bash ./scripts/ops/install-mesh-bridge-routes.sh" in text
+    assert 'systemctl restart "$unit"' in text
+
+
+def test_installer_restores_the_snippet_and_accepts_authenticated_route_checks() -> None:
+    text = INSTALLER.read_text(encoding="utf-8")
+    assert "SNIPPET_BACKUP" in text
+    assert "restore_install" in text
+    assert "install_started" in text
+    assert "install_committed" in text
+    assert "rollback_on_exit" in text
+    assert "mesh_contract_code" in text
+    assert "expected authenticated 200" in text
 
 
 def test_the_installer_covers_every_contract_path() -> None:

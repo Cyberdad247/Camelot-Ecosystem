@@ -1,0 +1,21 @@
+{
+  "schema": "camelot.mission/1",
+  "mission_id": "omni-forge-demo-20260924",
+  "objective": "OMNI_FORGE 5-step factory DAG loop (demo)",
+  "steps": [
+    "OBSERVE_AND_SCAFFOLD",
+    "ARCHITECT_BLUEPRINT",
+    "DECOMPOSE_TASK_DAG",
+    "EQUIP_KNIGHTS",
+    "VALIDATION_SWARM"
+  ],
+  "status": "SEALED",
+  "artifacts": {
+    "blueprint.json": "e35961136e902504dabac82ec059ab900edd92d54cca1c608a26f97578fe88db",
+    "task_dag.json": "0c388f4693033afb430a12ff8e5bc51bf5ad7e3c96bfcadfd96fe6e15231458e",
+    "skills_manifest.json": "b01f1f9e72542a77088e6aa5f7810bb207ade544dc31d11ce59c4d282c8b720f",
+    "verification.json": "7b12d251331ae5d27ea79377cbc881d90a6b1e2a2c6180e72a0803145e764c29"
+  },
+  "created_at": "2026-09-25T00:21:20Z",
+  "updated_at": "2026-09-25T00:21:20Z"
+}

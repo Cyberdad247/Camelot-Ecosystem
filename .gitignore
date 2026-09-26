@@ -102,6 +102,7 @@ tests/tmp_vault_audit/
 tests/tmp_*/
 
 # Camelot generated runtime state
+graft/
 .hive/context/
 # Runtime databases and memory stores (binary churn — never version)
 *.rdb
@@ -316,3 +317,15 @@ deploy/multivoice-router/
 appendonly.aof
 appendonly.aof.*
 *.aof
+
+# graft's local repository settings — not committed.
+/.graft/
+
+# Model weights (625MB+ binary — never commit; rebuilt/downloaded on demand)
+03_VAULT/models/
+
+# Qdrant runtime state on the vault memory path (same rule as data/qdrant/)
+03_VAULT/memory/qdrant/
+
+# Locked pytest temp workspaces (Permission denied for git)
+.pytest_tmp*

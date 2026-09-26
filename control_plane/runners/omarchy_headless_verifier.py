@@ -17,7 +17,7 @@ import os
 import subprocess
 import sys
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, List, Optional
+from typing import List
 
 VPS_HOST = os.environ.get("CAMELOT_VPS_HOST", "162.35.107.134")
 VPS_USER = "root"

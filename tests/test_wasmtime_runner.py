@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Invisioned Marketing Inc. All rights reserved.
 
-import pytest
 from control_plane.sandbox.wasmtime_runner import WasmtimeSandboxRunner
 
 
