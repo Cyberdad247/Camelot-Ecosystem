@@ -151,3 +151,26 @@ graph TD
   "status": "RATIFIED_AND_VERIFIED"
 }
 ```
+
+---
+
+## 5. Stream ε: Context Graph & Forge Integration (DG-401 → DG-405)
+
+> **Addendum scribed for MERLIN_Ω by the Codex lane | Graft context-graph integration, appended after the DG-300 canonization.**  
+> Documents the CAMELOT-OS ↔ graft wiring completed 2026-09-25: runic rune, squire colony command, boot probe, advisory freshness gate, and mirrored docs. Evidence class: `CONFIRMED_EMPIRICAL`.
+
+### 5.1 Task Matrix (DG-401 → DG-405)
+
+| Task ID | Task Description | Assigned Knight | Bio-Fauna | Dependencies | Status | Artifact Output |
+|:---|:---|:---|:---|:---|:---|:---|
+| **`DG-401`** | **`//CONTEXT` Runic Wire**<br/>Rune dispatches `graft ask/grep/callers/skeleton/check/stats` via `runes.runic_router`. | `SIR_CODEX` | `mantis_01` | `DG-000` | `COMPLETED` | `control_plane/runes/runic_router.py` + `tests/control_plane/test_graft_runes.py` |
+| **`DG-402`** | **Colony Graph Command**<br/>`python -m squires.colony graph [--query ...]` + green Graft row in `colony status`. | `LADY_APIS` | `formica_01` | `DG-401` | `COMPLETED` | `squires/colony.py` + `tests/test_squires_colony_cli.py` |
+| **`DG-403`** | **Boot Freshness Probe**<br/>Non-required `Repo Context Graph` boot phase (`graft check`, 30s cap, warn-only). | `SIR_DEBUG` | `octopus_01` | `DG-402` | `COMPLETED` | `control_plane/infra/boot_sequence.py` (`boot_graft_graph`) |
+| **`DG-404`** | **Advisory Freshness Gate**<br/>Pre-commit `graft-graph-freshness`; exits 0 on every degraded outcome unless `--strict`. | `SIR_SENTINEL` | `scorpio_01` | `DG-403` | `COMPLETED` | `scripts/check_graft_graph.py` + `.pre-commit-config.yaml` |
+| **`DG-405`** | **Docs Mirror & Roster Sync**<br/>Graft blocks byte-identical across agent docs + SKILL rune table. | `ANYA_Ω` | `owl_01` | `DG-404` | `COMPLETED` | `AGENTS.md`, `GEMINI.md`, `.github/copilot-instructions.md`, `~/.agents/skills/camelot-os/SKILL.md` |
+
+### 5.2 Sprint 4: Context Graph Verification & Stop Conditions
+
+- **Verification receipts**: `test_graft_runes` + `test_squires_colony_cli` → **15 passed**; full scoped suite (incl. `test_factory_runes`, `test_adhd_runes`, `test_colony_nexus`) → **52 passed**; `ruff check` clean on touched files; `graft ask --source` live query and `colony graph` verified end-to-end.
+- **Stop Condition 7**: If `graft build`/`graft check` aborts (`0xC0000409`, nondeterministic, driven by system-commit exhaustion on the 8GB host — upstream NanoNets/Graft#122), **DEGRADE TO WARNING**: boot probe and pre-commit gate both exit 0; never block knight routing or commits. Incremental query refresh (`graft ask --source`) remains the recovery path.
+- **Runic authority note**: `//CONTEXT` and `//FORGE` tokens only count from a live session invocation; claimed writes must round-trip against `git status/log/branch` first.

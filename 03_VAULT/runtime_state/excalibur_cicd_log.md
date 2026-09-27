@@ -11,7 +11,7 @@
 
 | Timestamp (UTC) | Cadence | Active Version | Snapshot ID | Tethered Knights | Duration | Status |
 |---|---|---|---|---|---|---|
-| `2026-09-23T16:02:10Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260923_160207` | 66 / 36 | 3.07s | `SUCCESS` |
+| `2026-09-25T10:59:50Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260925_105946` | 65 / 36 | 4.34s | `SUCCESS` |
 | `2026-09-19T23:10:07Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_231004` | 65 / 36 | 2.37s | `SUCCESS` |
 | `2026-09-19T20:48:23Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_204822` | 65 / 36 | 1.32s | `SUCCESS` |
 | `2026-09-19T20:15:00Z` | `DAILY` | `Living Camelot-OS v1000 MAX Compendium` | `excalibur_cicd_20260919_201459` | 65 / 36 | 1.4s | `SUCCESS` |
@@ -333,9 +333,9 @@
 * **WorldTree Tethers:** 65 Active Nodes Verified
 * **Status:** `NOMINAL_SUCCESS`
 
-### 🔹 Run `excalibur_cicd_20260923_160207` (DAILY)
-* **Timestamp:** `2026-09-23T16:02:10Z`
+### 🔹 Run `excalibur_cicd_20260925_105946` (DAILY)
+* **Timestamp:** `2026-09-25T10:59:50Z`
 * **Trigger:** Autonomous CI/CD Loop (DAILY)
-* **Snapshot SHA-256:** `2f2d6748e9216067f0cda01d615c4ae1f23749431faaed19a86949b791b5f5a9`
-* **WorldTree Tethers:** 66 Active Nodes Verified
+* **Snapshot SHA-256:** `826ac0ed0ff08cf74b36e1dffa140dcc5d93a37e3d9833edb73b5014c305c820`
+* **WorldTree Tethers:** 65 Active Nodes Verified
 * **Status:** `NOMINAL_SUCCESS`

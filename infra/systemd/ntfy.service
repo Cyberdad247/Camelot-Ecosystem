@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: MIT
+#
+# Camelot-OS Hub ntfy server — private push-alert bus on the Tailscale plane.
+#
+# WHY SELF-HOSTED
+#
+# Public ntfy.sh topics are readable by anyone who learns the topic name; the
+# hub's self-check alerts carry operational detail (hosts, audit output, drift)
+# that must not be world-readable. This server binds the tailscale0 address
+# ONLY (unreachable from the public internet), requires authentication for
+# every publish/subscribe (auth-default-access: deny-all), and issues a
+# per-user access token that the alert unit uses as a bearer token.
+#
+# The deploy script (scripts/ops/deploy-hub-ntfy.sh) installs this unit,
+# the config, the admin user, and the access token idempotently.
+
+[Unit]
+Description=Camelot-OS ntfy alert bus (tailscale-only, auth required)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/usr/local/bin/ntfy serve --config /etc/camelot/ntfy/server.yml
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

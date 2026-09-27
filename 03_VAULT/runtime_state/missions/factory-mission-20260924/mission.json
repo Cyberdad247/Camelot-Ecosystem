@@ -1,0 +1,20 @@
+{
+  "schema": "camelot.mission/1",
+  "mission_id": "factory-mission-20260924",
+  "objective": "OMNI_FORGE factory mission",
+  "steps": [
+    "OBSERVE_AND_SCAFFOLD",
+    "ARCHITECT_BLUEPRINT",
+    "DECOMPOSE_TASK_DAG",
+    "EQUIP_KNIGHTS",
+    "VALIDATION_SWARM"
+  ],
+  "status": "SEALED",
+  "artifacts": {
+    "blueprint.json": "06a42bb79b7d326be04940271a5b7cd536d5bfc500882d9c2c13e074846bf4bb",
+    "task_dag.json": "32c5ecd3e1c82f1335ddd457bc963468c7ad9f992f149a1e977c1d13a0cb4e00",
+    "skills_manifest.json": "5e3d3c2c962d40a5a2013af0da2442f3d4557ae743ccd5e298fa0918521a768b"
+  },
+  "created_at": "2026-09-25T01:04:06Z",
+  "updated_at": "2026-09-25T01:04:06Z"
+}

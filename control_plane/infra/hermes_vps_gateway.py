@@ -19,8 +19,7 @@ import shlex
 import subprocess
 import sys
 import webbrowser
-from dataclasses import dataclass
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from control_plane.infra.mesh_topology import HUB_TAILSCALE_IP
 

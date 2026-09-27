@@ -14,15 +14,13 @@ Core Axioms:
 from __future__ import annotations
 
 import json
-import re
 import uuid
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
-from control_plane.security.authority_vector import AuthorityVector
 from control_plane.security.receipt_chain import TenantReceiptChain, Receipt, ReceiptActor, ReceiptProof
 from control_plane.security.sir_gideon import GideonVerdict
 

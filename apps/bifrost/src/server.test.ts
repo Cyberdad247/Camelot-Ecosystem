@@ -34,9 +34,25 @@ afterAll(async () => {
 
 describe('Bifrost WebSocket gateway', () => {
   it('rejects anonymous mesh telemetry requests', async () => {
-    const response = await fetch(`http://127.0.0.1:${(server.address() as AddressInfo).port}/api/mesh/nodes`);
+    const response = await fetch(
+      `http://127.0.0.1:${(server.address() as AddressInfo).port}/api/mesh/nodes`,
+    );
 
     expect(response.status).toBe(503);
+  });
+
+  it('serves the upstream health contract', async () => {
+    const response = await fetch(`${url.replace(/^ws/, 'http')}/health`);
+    const body = (await response.json()) as {
+      status: string;
+      clients: number;
+      helios: boolean;
+    };
+
+    expect(response.status).toBe(200);
+    expect(body.status).toBe('ok');
+    expect(Number.isInteger(body.clients)).toBe(true);
+    expect(typeof body.helios).toBe('boolean');
   });
 
   it('transmits a STATE_UPDATE with valid metrics on connect', async () => {

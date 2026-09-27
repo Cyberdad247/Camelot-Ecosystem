@@ -2,8 +2,8 @@
   "cartridge_id": "vps-hub-cartridge-v1",
   "version": "1.0.0",
   "name": "Camelot VPS Hub Singularity Cartridge",
-  "description": "Modular capability cartridge for https://github.com/Cyberdad247/Camelot-VPS.git",
-  "target_repo": "https://github.com/Cyberdad247/Camelot-VPS.git",
+  "description": "Modular capability cartridge for https://github.com/Cyberdad247/notebooklm-mcp-cli",
+  "target_repo": "https://github.com/Cyberdad247/notebooklm-mcp-cli",
   "branch": "cartridge/vps-hub-cartridge-v1",
   "base_branch": "main",
   "aspects": [
@@ -83,7 +83,7 @@
     "engine": "native_binary",
     "env": {
       "CARTRIDGE_ID": "vps-hub-cartridge-v1",
-      "TARGET_REPO": "https://github.com/Cyberdad247/Camelot-VPS.git",
+      "TARGET_REPO": "https://github.com/Cyberdad247/notebooklm-mcp-cli",
       "CARTRIDGE_BRANCH": "cartridge/vps-hub-cartridge-v1"
     }
   },
@@ -94,8 +94,8 @@
     "zero_trust": true
   },
   "integrity": {
-    "payload_hash": "sha256:311b28802ec7180e9a3f72e0f7c6d33059cc06e2f70f4cccefcdd0fba3e429b2",
+    "payload_hash": "sha256:4260112c9194d13ad10a1d84a97c26c1c867c05f73072f008fd7e194b44861d7",
     "signed_by": "ANYA_OMEGA_SOVEREIGN_SEAL",
-    "signed_at": "2026-09-14T20:46:08.346164+00:00"
+    "signed_at": "2026-09-24T20:26:55.534858+00:00"
   }
 }

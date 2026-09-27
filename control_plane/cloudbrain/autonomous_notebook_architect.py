@@ -22,12 +22,11 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
-import os
 import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -36,7 +35,7 @@ sys.path.insert(0, str(CAMELOT_ROOT))
 sys.path.insert(0, str(CAMELOT_ROOT / "01_KERNEL"))
 sys.path.insert(0, str(CAMELOT_ROOT / "vfs"))
 
-from vfs.notebooklm_client import _open_client, _get_client
+from vfs.notebooklm_client import _open_client
 from memory.cloudbrain_connector import KNIGHT_NOTEBOOKS
 
 LOG = logging.getLogger("AutonomousNotebookArchitect")

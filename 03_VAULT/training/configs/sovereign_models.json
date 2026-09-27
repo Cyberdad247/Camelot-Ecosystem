@@ -56,13 +56,19 @@
       "backend": "vllm",
       "tag": "deepseek-ai/DeepSeek-V4.1-Flash",
       "air_gapped": false,
-      "notes": "vLLM served DeepSeek Flash model via OpenAI-compatible endpoint"
+      "inference_scope": "bifrost_hub",
+      "bifrost_route": "/bifrost/models/deepseek-flash",
+      "bifrost_endpoint": "http://127.0.0.1:8000/v1",
+      "notes": "VPS Bifrost hub vLLM endpoint; not a local control-plane model"
     },
     "deepseek-ai/DeepSeek-V4.1-Flash": {
       "backend": "vllm",
       "tag": "deepseek-ai/DeepSeek-V4.1-Flash",
       "air_gapped": false,
-      "notes": "Full identifier for vLLM DeepSeek-V4.1-Flash"
+      "inference_scope": "bifrost_hub",
+      "bifrost_route": "/bifrost/models/deepseek-flash",
+      "bifrost_endpoint": "http://127.0.0.1:8000/v1",
+      "notes": "Full identifier for the VPS Bifrost hub vLLM service"
     }
   }
 }

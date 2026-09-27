@@ -15,7 +15,6 @@ import logging
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 

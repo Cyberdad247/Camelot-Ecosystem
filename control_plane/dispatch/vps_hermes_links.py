@@ -64,6 +64,7 @@ def build_vps_hermes_inference_links(
             "selector": "vllm:deepseek-ai/DeepSeek-V4.1-Flash",
             "backend": "vllm",
             "model_tag": "deepseek-ai/DeepSeek-V4.1-Flash",
+            "inference_scope": "bifrost_hub",
             "manifest_alias": "deepseek-flash",
             "service": "vLLM",
             "local_base_url": "http://127.0.0.1:8000/v1",

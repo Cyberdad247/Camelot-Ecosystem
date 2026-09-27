@@ -18,10 +18,8 @@ from mcp.server.fastmcp import FastMCP
 from memory.cloudbrain_connector import (
     CloudBrainConnector,
     KNIGHT_NOTEBOOKS,
-    NOTEBOOK_DOMAIN_TAGS,
     list_all_notebooks,
     route_by_domain,
-    batch_query,
 )
 from vfs.notebooklm_client import (
     NOTEBOOKLM_AVAILABLE,

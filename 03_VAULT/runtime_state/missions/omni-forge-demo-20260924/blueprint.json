@@ -1,0 +1,16 @@
+{
+  "step": "ARCHITECT_BLUEPRINT",
+  "frozen": {
+    "schemas": {
+      "Mission": "camelot.mission/1",
+      "Receipt": "append-only sha256"
+    },
+    "types": [
+      "mission_id: slug",
+      "artifact: canonical-set",
+      "sha256: hex64"
+    ],
+    "hld": "Per-mission runtime_state isolation; governance docs immutable"
+  },
+  "governance_writes": "forbidden"
+}

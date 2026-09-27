@@ -28,7 +28,7 @@ LOCAL_LLM_BASE = os.environ.get("LOCAL_LLM_HOST", "http://127.0.0.1:8090/v1")
 OLLAMA_BASE = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")
 OPENROUTER_BASE = "https://openrouter.ai/api/v1"
 CLIPROXY_BASE = os.environ.get("CLIPROXY_BASE", "http://127.0.0.1:8080/v1")
-CLIPROXY_KEY = os.environ.get("CLIPROXY_KEY", "proxy-admin-key")
+CLIPROXY_KEY = (os.environ.get("CLIPROXY_KEY") or "").strip()
 
 @dataclass
 class ProviderConfig:
@@ -46,8 +46,10 @@ class ProviderConfig:
 
     @property
     def available(self) -> bool:
-        if self.name in ("local_daemon", "bitgpu", "litert", "ollama", "cliproxy"):
-            return True  # Zero-cost and local services, always attempt
+        if self.name == "cliproxy":
+            return bool(self.api_key)
+        if self.name in ("local_daemon", "bitgpu", "litert", "ollama"):
+            return True
         return self.active and bool(self.api_key)
 
 
@@ -73,7 +75,7 @@ PROVIDERS = {
         api_key_env="CLIPROXY_KEY",
         default_model="gemini-2.5-flash",
         models=[],  # Populated dynamically from proxy /v1/models
-        headers={"Authorization": f"Bearer {CLIPROXY_KEY}"},
+        headers={},
     ),
     "gemini": ProviderConfig(
         name="gemini",

@@ -1,0 +1,11 @@
+{
+  "step": "ARCHITECT_BLUEPRINT",
+  "frozen": {
+    "objective": "OMNI_FORGE factory mission",
+    "schemas": {
+      "Mission": "camelot.mission/1"
+    },
+    "hld": "Seeded by //FORGE_FACTORY; refine before //TRANSLATE_DAG"
+  },
+  "governance_writes": "forbidden"
+}

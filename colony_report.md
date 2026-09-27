@@ -1,5 +1,5 @@
 # CLARITY_CORE Colony Report
-**Generated:** 2026-09-20 00:16 UTC
+**Generated:** 2026-09-23 21:27 UTC
 **Root:** `C:\Users\vizio\CAMELOT_OS`
 
 ---
@@ -8,21 +8,21 @@
 
 | Metric | Value |
 |--------|-------|
-| Files scanned | 10,375 |
-| Total lines | 2,440,498 |
-| Symbols indexed | 30,354 |
+| Files scanned | 10,863 |
+| Total lines | 2,444,760 |
+| Symbols indexed | 30,451 |
 | Risk Score | 100.0 / 100 |
 | Risk Label | **CRITICAL** |
 | HITL Required | Yes ⚠️ |
 
 ## Findings
 
-- 19 potential secret(s) detected — CRITICAL
-- 29 large file(s) (>500 KB) found
+- 20 potential secret(s) detected — CRITICAL
+- 28 large file(s) (>500 KB) found
 - 216 TODO/FIXME markers — technical debt accumulation
-- 2059 duplicate file(s) detected
+- 2215 duplicate file(s) detected
 - 80 unused imports (dead code)
-- Large codebase: 2,440,498 lines — context management critical
+- Large codebase: 2,444,760 lines — context management critical
 
 ## Recommendations
 
@@ -37,9 +37,9 @@
 
 | Category | Count |
 |----------|-------|
-| Secrets (critical) | 19 |
-| Warnings | 29 |
-| Info | 369 |
+| Secrets (critical) | 20 |
+| Warnings | 28 |
+| Info | 371 |
 
 ### Critical Flags
 
@@ -58,6 +58,7 @@
 - `apps/excalibur-cmd-1/src/state/useEcosystemStore.ts:233` — secret: generic_token: Toke...ION'
 - `deploy/multivoice-router/firebase-applet-config.json:4` — secret: google_api_key: AIza...Zw4M
 - `harness/contracts/verify_operator_request.py:59` — secret: generic_token: TOKE...ied"
+- `kinetic_edge/camelot_edge/src/protocol.rs:39` — secret: private_key: ----...----
 - `kinetic_edge/saltare/internal/gateway/http/middleware.go:133` — secret: generic_token: Toke...ken"
 - `packages/policy-engine/schemas/approval-states.yaml:84` — secret: generic_token: toke...KEN"
 - `scripts/verify_frozen_bundle.py:41` — secret: generic_token: TOKE...R-A"
@@ -67,28 +68,28 @@
 
 | Category | Count |
 |----------|-------|
-| Duplicate Content | 2059 |
+| Duplicate Content | 2215 |
 | Unused Import | 80 |
-| Unreferenced File | 420 |
+| Unreferenced File | 426 |
 
 ## Language Breakdown
 
 | Extension | Files |
 |-----------|-------|
-| `.py` | 2883 |
-| `.json` | 2685 |
-| `.md` | 1993 |
+| `.json` | 3118 |
+| `.py` | 2897 |
+| `.md` | 2020 |
 | `.ts` | 1098 |
 | `.tsx` | 425 |
-| `.yaml` | 218 |
-| `.js` | 209 |
+| `.yaml` | 220 |
+| `.js` | 210 |
 | `.sh` | 178 |
-| `.rs` | 144 |
-| `.go` | 141 |
+| `.rs` | 152 |
+| `.go` | 143 |
 | `.c` | 88 |
 | `.h` | 88 |
 | `.txt` | 83 |
-| `.toml` | 74 |
+| `.toml` | 75 |
 | `.ps1` | 37 |
 
 ## Symbol Index (Top 30)
@@ -126,7 +127,7 @@
 | `stream_avatar_faculty` | function | `excalibur_controller.py` | 739 |
 | `health` | function | `excalibur_controller.py` | 750 |
 
-*...and 30324 more symbols in full index.*
+*...and 30421 more symbols in full index.*
 
 ---
 

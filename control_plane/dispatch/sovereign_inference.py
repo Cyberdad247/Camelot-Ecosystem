@@ -203,8 +203,7 @@ class CLIProxyBackend:
         host = parsed.hostname
         if parsed.scheme not in {"http", "https"} or not host or not self._is_loopback(host):
             raise ValueError("CLIProxyAPI base URL must use a loopback host")
-        # Default to proxy-admin-key for operator-local use; env still wins when set.
-        self._api_key = api_key if api_key is not None else os.environ.get("CLIPROXY_API_KEY", "proxy-admin-key")
+        self._api_key = (api_key if api_key is not None else (os.environ.get("CLIPROXY_API_KEY") or "")).strip()
         self._timeout_seconds = timeout_seconds
 
     @staticmethod

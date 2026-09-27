@@ -51,11 +51,32 @@ UNTOUCHED=(/ /bifrost/ /ws)
 SSH=(ssh -o BatchMode=yes -o ConnectTimeout=15 "$HUB")
 SCP=(scp -o BatchMode=yes -o ConnectTimeout=15)
 STAMP="$(date -u +%Y%m%d%H%M%S)"
+SITE_BACKUP="$BACKUP_DIR/hermesagent.conf.bak-$STAMP"
+AVAIL_BACKUP="$BACKUP_DIR/hermesagent.conf.sites-available.bak-$STAMP"
+SNIPPET_BACKUP="$BACKUP_DIR/camelot-mesh-bridge.conf.bak-$STAMP"
+install_started=0
+install_committed=0
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 say() { printf '\n\033[1m%s\033[0m\n' "$1"; }
 die() { printf '  FAIL %s\n' "$1" >&2; exit 1; }
+
+restore_install() {
+  "${SSH[@]}" "if [ -e '$SNIPPET_BACKUP' ] || [ -L '$SNIPPET_BACKUP' ]; then rm -f '$SNIPPET_DST'; cp -a '$SNIPPET_BACKUP' '$SNIPPET_DST'; else rm -f '$SNIPPET_DST'; fi" || true
+  "${SSH[@]}" "if [ -e '$SITE_BACKUP' ] || [ -L '$SITE_BACKUP' ]; then rm -f '$SITE'; cp -a '$SITE_BACKUP' '$SITE'; else rm -f '$SITE'; fi" || true
+  "${SSH[@]}" "if [ -e '$AVAIL_BACKUP' ] || [ -L '$AVAIL_BACKUP' ]; then rm -f '$AVAIL'; cp -a '$AVAIL_BACKUP' '$AVAIL'; fi" || true
+  "${SSH[@]}" "nginx -t && systemctl reload nginx" || true
+}
+
+rollback_on_exit() {
+  if (( install_started && ! install_committed )); then
+    restore_install
+  fi
+  rm -rf "$TMP"
+}
+
+trap rollback_on_exit EXIT
 
 # One batched probe: `path|status|bytes|identifying headers`. Batching keeps the baseline
 # and the comparison consistent (same moment, same method) rather than 12 separate
@@ -116,10 +137,13 @@ awk -v inc="$INCLUDE_LINE" '
 echo "  include is inside the server block"
 
 say "4) back up, then install the snippet and the edited server block"
-"${SSH[@]}" "mkdir -p '$BACKUP_DIR' /etc/nginx/snippets
-  cp -a '$SITE' '$BACKUP_DIR/hermesagent.conf.bak-$STAMP'
-  [ -f '$AVAIL' ] && cp -a '$AVAIL' '$BACKUP_DIR/hermesagent.conf.sites-available.bak-$STAMP'
-  echo '  backup: $BACKUP_DIR/hermesagent.conf.bak-$STAMP'"
+"${SSH[@]}" "set -e
+  mkdir -p '$BACKUP_DIR' /etc/nginx/snippets
+  cp -a '$SITE' '$SITE_BACKUP'
+  if [ -e '$AVAIL' ] || [ -L '$AVAIL' ]; then cp -a '$AVAIL' '$AVAIL_BACKUP'; fi
+  if [ -e '$SNIPPET_DST' ] || [ -L '$SNIPPET_DST' ]; then cp -a '$SNIPPET_DST' '$SNIPPET_BACKUP'; fi
+  echo '  backup: $SITE_BACKUP'"
+install_started=1
 "${SCP[@]}" "$SNIPPET_SRC" "$HUB:$SNIPPET_DST"
 "${SCP[@]}" "$TMP/site.new" "$HUB:$SITE"
 
@@ -128,14 +152,12 @@ say "5) validate BEFORE reloading — a bad config must never reach the live ing
 # glob is a live config, not a backup.
 for d in "${INCLUDE_GLOBS[@]}"; do
   if "${SSH[@]}" "ls $d/*.bak-* >/dev/null 2>&1"; then
-    "${SSH[@]}" "cp -a '$BACKUP_DIR/hermesagent.conf.bak-$STAMP' '$SITE'" || true
-    die "a backup is sitting inside the include glob $d — nginx would load it as a second default server; restored and stopped"
+    die "a backup is sitting inside the include glob $d — nginx would load it as a second default server; restored on exit"
   fi
 done
 
 if ! "${SSH[@]}" "nginx -t" 2>&1 | sed 's/^/  /'; then
-  "${SSH[@]}" "cp -a '$BACKUP_DIR/hermesagent.conf.bak-$STAMP' '$SITE'" || true
-  die "nginx rejected the new config; restored from $BACKUP_DIR/hermesagent.conf.bak-$STAMP (ingress was never reloaded)"
+  die "nginx rejected the new config; restored on exit from $SITE_BACKUP (ingress was never reloaded)"
 fi
 
 say "6) reload"
@@ -143,12 +165,16 @@ say "6) reload"
 
 say "7) post-conditions"
 fail=0
+mesh_contract_code() {
+  local url="$1"
+  "${SSH[@]}" "token=\$(grep -s '^MESH_BRIDGE_TOKEN=' /etc/camelot/mesh.env 2>/dev/null | head -1 | cut -d= -f2-); if [ -n \"\$token\" ]; then curl -s -o /dev/null -m 8 -w '%{http_code}' -H \"x-camelot-token: \$token\" '$url'; else curl -s -o /dev/null -m 8 -w '%{http_code}' '$url'; fi"
+}
 for p in "${CONTRACT_PATHS[@]}"; do
-  code="$("${SSH[@]}" "curl -s -o /dev/null -m 8 -w '%{http_code}' http://localhost$p")"
+  code="$(mesh_contract_code "http://localhost$p")"
   if [[ "$code" == "200" ]]; then
     echo "  PASS $p -> 200"
   else
-    echo "  FAIL $p -> $code (expected 200)"; fail=1
+    echo "  FAIL $p -> $code (expected authenticated 200)"; fail=1
   fi
 done
 
@@ -172,10 +198,20 @@ else
   fail=1
 fi
 
+for p in "${UNTOUCHED[@]}"; do
+  before="$(awk -F'|' -v p="$p" '$1 == p { print; exit }' "$TMP/baseline.txt")"
+  after="$(awk -F'|' -v p="$p" '$1 == p { print; exit }' "$TMP/after.txt")"
+  if [[ -z "$before" || "$before" != "$after" ]]; then
+    echo "  FAIL untouched path changed: $p (before=${before:-<none>}, after=${after:-<none>})"
+    fail=1
+  fi
+done
+
 say "8) rollback"
-echo "  restore config : cp -a $BACKUP_DIR/hermesagent.conf.bak-$STAMP $SITE && nginx -t && systemctl reload nginx"
+echo "  restore config : cp -a $BACKUP_DIR/hermesagent.conf.bak-$STAMP $SITE && if [ -f $SNIPPET_BACKUP ]; then cp -a $SNIPPET_BACKUP $SNIPPET_DST; else rm -f $SNIPPET_DST; fi && nginx -t && systemctl reload nginx"
 echo "  drop the route : rm $SNIPPET_DST, delete the include line from $SITE, then reload"
 
-(( fail == 0 )) || die "post-conditions failed; ingress is live but the contract is not met"
+(( fail == 0 )) || die "post-conditions failed; restored on exit"
+install_committed=1
 echo
 echo "  done — all ${#CONTRACT_PATHS[@]} contract paths served through nginx."

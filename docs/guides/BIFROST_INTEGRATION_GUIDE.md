@@ -94,15 +94,15 @@ Based on system specs, auto-assigned:
    ↓
 3. Bifrost configuration generated
    ↓
-4. Configuration written to .bifrost/config.json
+4. Configuration written to `03_VAULT/runtime_state/bifrost/config.json`
    ↓
-5. CAMELOT-OS components "forged" (customized)
+5. Forge plan recorded; unimplemented component changes remain explicitly planned
    ↓
-6. Startup scripts auto-generated
+6. Startup script auto-generated under governed runtime state
    ↓
-7. Ledger entry created
+7. Status ledger entry created
    ↓
-8. System optimized and LIVE
+8. Integration reports `PARTIAL` until real forge acknowledgements exist
 ```
 
 ### Configuration Customization
@@ -273,7 +273,7 @@ python -m control_plane.main \
 
 ## Integration Ledger
 
-All optimizations logged to `BIFROST_INTEGRATION_LEDGER.md`:
+All integration states are logged to `03_VAULT/runtime_state/bifrost/integration_ledger.md`:
 
 ```markdown
 ## QR Pill Integration: pill_abc123
@@ -286,24 +286,24 @@ All optimizations logged to `BIFROST_INTEGRATION_LEDGER.md`:
 - Storage: SSD
 - GPU: NVIDIA RTX 4060
 
-### Applied Optimizations
-- ✓ CPU: Enabled multithreading (7 threads)
-- ✓ CPU: Enabled AVX vector optimization
-- ✓ GPU: Enabled NVIDIA acceleration (8192MB)
-- ✓ Memory: Cache configured (2048MB)
-- ✓ Storage: SSD optimization
-- ✓ Network: HTTP/2 enabled
-- ✓ Features: Redis L1 cache enabled
-- ✓ Features: Qdrant L2 search enabled
-- ✓ Scaling: 4 worker processes
-- ✓ Scaling: 8 async workers
+### Planned and Applied Changes
+- ↪ planned: CPU multithreading (7 threads)
+- ↪ planned: CPU AVX vector optimization
+- ↪ planned: GPU NVIDIA acceleration (8192MB)
+- ↪ planned: memory cache (2048MB)
+- ↪ planned: storage SSD optimization
+- ↪ planned: HTTP/2
+- ↪ planned: Redis L1 cache
+- ↪ planned: Qdrant L2 search
+- ↪ planned: 4 worker processes
+- ↪ planned: 8 async workers
 - ✓ Bifrost: Configuration written
-- ✓ Forged: main.py
-- ✓ Forged: bifrost.py
-- ✓ Forged: knight_knowledgebase.py
-- ✓ Forged: memory pyramid
-- ✓ Forged: distance travel
-- ✓ Startup script: .camelot/startup.sh
+- ↪ planned (no-op): main.py
+- ↪ planned (no-op): bifrost.py
+- ↪ planned (no-op): knight_knowledgebase.py
+- ↪ planned (no-op): memory pyramid
+- ↪ planned (no-op): distance travel
+- ✓ Startup script: `03_VAULT/runtime_state/bifrost/startup.sh`
 ```
 
 ---

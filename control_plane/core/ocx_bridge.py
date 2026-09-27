@@ -43,11 +43,11 @@ logger = logging.getLogger("camelot.ocx_bridge")
 OCX_HOST = os.getenv("OCX_HOST", "127.0.0.1")
 OCX_PORT = int(os.getenv("OCX_PORT", "10100"))
 OCX_BASE = f"http://{OCX_HOST}:{OCX_PORT}"
-OCX_API_KEY = os.getenv("OPENCODEX_API_AUTH_TOKEN", "")
+OCX_API_KEY = (os.getenv("OPENCODEX_API_AUTH_TOKEN") or "").strip()
 
 # Fallback to cliproxy when opencodex is not available
 CLIPROXY_URL = os.getenv("CLIPROXY_URL", "http://127.0.0.1:8080/v1")
-CLIPROXY_KEY = os.getenv("CLIPROXY_KEY", "proxy-admin-key")
+CLIPROXY_KEY = (os.getenv("CLIPROXY_KEY") or "").strip()
 OLLAMA_URL = "http://127.0.0.1:11434/v1"
 
 
@@ -1542,7 +1542,7 @@ class OCXBridge:
             if tier_config.local_only:
                 return tier_config.primary.model, tier_config.primary.base_url or OLLAMA_URL, ""
             wire_id = tier_config.primary.wire_id
-            return wire_id, self._base, OCX_API_KEY or "proxy-admin-key"
+            return wire_id, self._base, OCX_API_KEY.strip()
 
         if tier_config.local_only:
             return tier_config.primary.model, tier_config.primary.base_url or OLLAMA_URL, ""
@@ -1568,7 +1568,7 @@ class OCXBridge:
         if self.is_ready() and not tier_config.local_only:
             for fb in tier_config.fallbacks:
                 wire_id = fb.wire_id
-                result.append((wire_id, self._base, OCX_API_KEY or "proxy-admin-key"))
+                result.append((wire_id, self._base, OCX_API_KEY.strip()))
         else:
             for fb in tier_config.fallbacks:
                 target_url = fb.base_url or (OLLAMA_URL if tier_config.local_only else CLIPROXY_URL)

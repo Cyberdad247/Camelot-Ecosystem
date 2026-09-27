@@ -23,20 +23,17 @@ Guarantees:
 """
 from __future__ import annotations
 
-import dataclasses
 from dataclasses import dataclass, field
 import datetime
 from datetime import timezone
 import hashlib
 import json
 import time
-import uuid
 from typing import Any, Dict, List, Optional, Tuple
 
 from control_plane.security.sir_gideon import (
     GideonVerdict,
     GideonVerifier,
-    sha256_canonical,
 )
 from control_plane.security.arthur_resolution import (
     ArthurResolution,
@@ -44,11 +41,8 @@ from control_plane.security.arthur_resolution import (
 )
 from control_plane.security.receipt_chain import (
     Receipt,
-    ReceiptActor,
-    ReceiptProof,
     TenantReceiptChain,
 )
-from control_plane.security.authority_vector import AuthorityVector
 
 
 @dataclass(frozen=True)

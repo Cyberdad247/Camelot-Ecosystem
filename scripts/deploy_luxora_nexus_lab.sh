@@ -92,15 +92,37 @@ echo "========================================================================"
 echo "📡 VERIFYING CONNECTED HUB SERVICES..."
 echo "========================================================================"
 
+fail=0
 check_endpoint() {
+  local name="$1"
+  local url="$2"
+  local code token=""
+  if [ -r /etc/camelot/mesh.env ]; then
+    token=$(grep -s '^MESH_BRIDGE_TOKEN=' /etc/camelot/mesh.env | head -1 | cut -d= -f2-)
+  fi
+  if [ -n "$token" ]; then
+    code=$(curl -s -o /dev/null -w "%{http_code}" -H "x-camelot-token: $token" "$url" || echo "FAILED")
+  else
+    code=$(curl -s -o /dev/null -w "%{http_code}" "$url" || echo "FAILED")
+  fi
+  if [ "$code" == "200" ]; then
+    echo "  🟢 [ONLINE] $name ($url) -> HTTP $code"
+  else
+    echo "  🟡 [STANDBY] $name ($url) -> HTTP $code"
+    fail=1
+  fi
+}
+
+check_browser_endpoint() {
   local name="$1"
   local url="$2"
   local code
   code=$(curl -s -o /dev/null -w "%{http_code}" "$url" || echo "FAILED")
-  if [ "$code" == "200" ] || [ "$code" == "401" ] || [ "$code" == "404" ]; then
-    echo "  🟢 [ONLINE] $name ($url) -> HTTP $code"
+  if [ "$code" == "200" ]; then
+    echo "  🟢 [BROWSER] $name ($url) -> HTTP $code"
   else
-    echo "  🟡 [STANDBY] $name ($url) -> HTTP $code"
+    echo "  🔴 [BROWSER AUTH REQUIRED] $name ($url) -> HTTP $code"
+    fail=1
   fi
 }
 
@@ -109,7 +131,17 @@ check_endpoint "Mesh Bridge Telemetry" "http://localhost/mesh/status"
 check_endpoint "Bifrost Knights Registry" "http://localhost/bifrost/knights"
 check_endpoint "Hermes Research Telemetry" "http://localhost/hermes/telemetry"
 check_endpoint "Heimdall Zero-Trust Governance" "http://localhost/heimdall/governance"
+check_browser_endpoint "Mesh Bridge Telemetry" "http://localhost/mesh/status"
+check_browser_endpoint "Bifrost Knights Registry" "http://localhost/bifrost/knights"
+check_browser_endpoint "Hermes Research Telemetry" "http://localhost/hermes/telemetry"
+check_browser_endpoint "Heimdall Zero-Trust Governance" "http://localhost/heimdall/governance"
 check_endpoint "Qdrant Vector Mesh" "http://localhost/qdrant/collections"
+
+if [ "$fail" -ne 0 ]; then
+  echo "========================================================================"
+  echo "  ✗ one or more connected hub services failed their authenticated contract"
+  exit 1
+fi
 
 echo "========================================================================"
 echo "✨ LUXORA NEXUS LAB SUCCESSFULLY LINKED TO CAMELOT-OS VPS HUB"

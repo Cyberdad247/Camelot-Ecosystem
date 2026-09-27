@@ -59,17 +59,64 @@ OPEN_NOTEBOOK_DIR = REPO_ROOT / "03_VAULT" / "runtime_state" / "open_notebook"
 OPEN_NOTEBOOK_DIR.mkdir(parents=True, exist_ok=True)
 
 # Services recorded in the tissue services map -> TCP port probed live.
+# TRUTHED 2026-09-23 against the live box (KVM563): only services with a
+# unit file and a listener are listed. multivoice_router (:7680) and
+# honcho_self_hosted (:8000) have never been deployed there (no units, no
+# listeners, no containers) and were removed; re-add them only after actual
+# deployment (see docs/HITL_VPS_REMEDIATION_PLAN.md). webhook_receiver (:9000)
+# was deployed 2026-09-23 (camelot-webhook-receiver.service, loopback bind).
 SERVICE_PORT_MAP: Dict[str, int] = {
-    "caddy_worldtree_gateway": 80,
+    "nginx_worldtree_gateway": 80,  # nginx owns :80 on KVM563 (R3 truthing; Caddyfile dormant)
     "bifrost_gateway": 3001,
-    "multivoice_router": 7680,
-    "honcho_self_hosted": 8000,
     "vps_mobile_mesh_bridge": 8095,  # camelot-vps-mesh systemd unit
-    "webhook_receiver": 9000,
+    "webhook_receiver": 9000,  # camelot-webhook-receiver systemd unit (loopback)
 }
+
+# Ports bound to the Tailscale interface only (loopback probe would falsely
+# report them CLOSED). Verified on-box 2026-09-23: camelot-vps-mesh listens
+# on the tailscale0 address, not 127.0.0.1.
+TS_IP_BOUND_PORTS = {8095}
 
 VPS_SSH_TARGET = f"root@{VPS_PUBLIC_IP}"
 VPS_DEPLOY_DIR = "/opt/camelot-ecosystem"
+
+# HTTP health endpoints. Historical note: the original tissue carried
+# worldtree_http_status / bifrost_health_status but as hardcoded 200s
+# (removed in 7aaea895 along with the fabrication). These are the real
+# probe targets: WorldTree is served publicly via Caddy :80, while
+# Bifrost :3001 is Tailscale-only, so its health check must run on-box.
+WORLDTREE_HTTP_URL = f"http://{VPS_PUBLIC_IP}/"
+BIFROST_HEALTH_URL = "http://127.0.0.1:3001/health"
+
+
+def _http_status_probe(url: str, timeout: float = 4.0) -> Optional[int]:
+    """Public-plane HTTP status probe. Returns status code or None."""
+    try:
+        from urllib.error import URLError  # noqa: F401
+        from urllib.request import urlopen
+
+        with urlopen(url, timeout=timeout) as resp:  # noqa: S310 - fixed operator-owned URL
+            return int(resp.status)
+    except Exception:
+        return None
+
+
+def _ssh_http_status_probe(url: str, timeout: float = 4.0) -> Optional[int]:
+    """On-box HTTP status probe via SSH curl (loopback/Tailscale-bound services)."""
+    remote = f"curl -s -o /dev/null -w '%{{http_code}}' --max-time {int(timeout)} {url}"
+    try:
+        proc = subprocess.run(
+            ["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=8", VPS_SSH_TARGET, remote],
+            capture_output=True,
+            text=True,
+            timeout=timeout + 6,
+            encoding="utf-8",
+            errors="replace",
+        )
+        out = proc.stdout.strip()
+        return int(out) if proc.returncode == 0 and out.isdigit() else None
+    except (subprocess.TimeoutExpired, OSError, ValueError):
+        return None
 
 
 def _tcp_probe(host: str, port: int, timeout: float = 2.0) -> bool:
@@ -86,16 +133,18 @@ def _tcp_probe(host: str, port: int, timeout: float = 2.0) -> bool:
 
 
 def _ssh_tcp_probe(host: str, port: int, timeout: float = 2.0) -> bool:
-    """On-box TCP probe of 127.0.0.1:<port> via SSH (service-state plane).
+    """On-box TCP probe of host:<port> via SSH (service-state plane).
 
-    The public firewall deliberately keeps mesh ports (3001/7680/8000/8095/9000)
+    `host` is honored so Tailscale-bound services can be probed on their
+    tailscale0 address; default remains 127.0.0.1 for loopback binds.
+    The public firewall deliberately keeps mesh ports (3001/8095)
     Tailscale-only, so probing them over the public IP misreports RUNNING
-    services as STOPPED. Probing loopback on the box answers the actual
-    question: is the service listening?
+    services as STOPPED. Probing on the box answers the actual question:
+    is the service listening?
     """
     remote = (
         f"(timeout {int(timeout)} bash -c "
-        f"'exec 3<>/dev/tcp/127.0.0.1/{port}' 2>/dev/null && echo OPEN) || echo CLOSED"
+        f"'exec 3<>/dev/tcp/{host}/{port}' 2>/dev/null && echo OPEN) || echo CLOSED"
     )
     try:
         proc = subprocess.run(
@@ -140,6 +189,8 @@ def _ssh_commit_probe(
 def _probe_vps_live_state(
     tcp_prober: Callable[[str, int, float], bool] = _ssh_tcp_probe,
     commit_prober: Callable[[str, str, float], Tuple[Optional[str], Optional[str]]] = _ssh_commit_probe,
+    http_prober: Callable[[str, float], Optional[int]] = _http_status_probe,
+    ssh_http_prober: Callable[[str, float], Optional[int]] = _ssh_http_status_probe,
     host: str = VPS_PUBLIC_IP,
     target: str = VPS_SSH_TARGET,
     workdir: str = VPS_DEPLOY_DIR,
@@ -147,12 +198,16 @@ def _probe_vps_live_state(
     """Probe live VPS state. Pure with respect to injected probers (test seam).
 
     Returns dict with keys: ports, deployed_commit, deployed_commit_summary,
-    stopped_services, drift_detected.
+    stopped_services, drift_detected, worldtree_http_status,
+    bifrost_health_status (HTTP statuses; None = probe failed).
     """
     ports: Dict[int, bool] = {}
     for port in SERVICE_PORT_MAP.values():
+        # Route Tailscale-bound ports at the tailscale0 address; the rest at
+        # loopback. (Public-plane probing is never correct for either.)
+        bind_target = VPS_TAILSCALE_IP if port in TS_IP_BOUND_PORTS else "127.0.0.1"
         try:
-            ports[port] = bool(tcp_prober(host, port, 2.0))
+            ports[port] = bool(tcp_prober(bind_target, port, 2.0))
         except Exception:
             ports[port] = False
 
@@ -161,6 +216,17 @@ def _probe_vps_live_state(
         sha, subject = commit_prober(target, workdir, 8.0)
     except Exception:
         sha, subject = (None, None)
+
+    worldtree_status: Optional[int] = None
+    try:
+        worldtree_status = http_prober(f"http://{host}/", 4.0)
+    except Exception:
+        worldtree_status = None
+    bifrost_status: Optional[int] = None
+    try:
+        bifrost_status = ssh_http_prober(BIFROST_HEALTH_URL, 4.0)
+    except Exception:
+        bifrost_status = None
 
     stopped = [
         name for name, port in SERVICE_PORT_MAP.items() if not ports.get(port)
@@ -174,6 +240,8 @@ def _probe_vps_live_state(
         "deployed_commit_summary": subject,
         "stopped_services": stopped,
         "drift_detected": drift,
+        "worldtree_http_status": worldtree_status,
+        "bifrost_health_status": bifrost_status,
     }
 
 
@@ -217,6 +285,13 @@ class WorldTreeCloudBrainVPSSync:
             **{f"port_{p}": ("OPEN" if ok else "CLOSED") for p, ok in ports.items()},
             "probe_timestamp": now_probe_iso,
         }
+        # HTTP health probes (restored after regression 7aaea895). A failed
+        # probe is recorded explicitly — never asserted as a verified status.
+        for key, val in (
+            ("worldtree_http_status", live["worldtree_http_status"]),
+            ("bifrost_health_status", live["bifrost_health_status"]),
+        ):
+            live_probes[key] = val if val is not None else "PROBE_FAILED"
         if live["deployed_commit"] is not None:
             deployed_commit = live["deployed_commit"]
             deployed_commit_summary = live["deployed_commit_summary"] or ""
@@ -259,9 +334,9 @@ class WorldTreeCloudBrainVPSSync:
             "deployed_commit_verified_at": now_probe_iso if live["deployed_commit"] else None,
             "deployed_commit_verification": commit_verification,
             "last_delivery_id": existing_data.get("last_delivery_id", "del_34aed52a"),
-            "services": existing_data.get("services", {
+            "services": {
                 name: port for name, port in SERVICE_PORT_MAP.items()
-            }),
+            },
             "inference_links": inference_links,
             "services_state": services_state,
             "live_probes": live_probes,

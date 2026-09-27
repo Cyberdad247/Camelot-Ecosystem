@@ -236,7 +236,7 @@ class SoulRouter:
             return resolve_knight_model(knight_id, engine)
         except ImportError:
             # Bridge not available — fall back to cliproxy
-            return "gemini-2.5-flash", CLIPROXY_URL, "proxy-admin-key"
+            return "gemini-2.5-flash", CLIPROXY_URL, (os.getenv("CLIPROXY_KEY") or "").strip()
 
     def get_engine(self, knight_id: str) -> Optional[KnightEngine]:
         return self._engines.get(knight_id)

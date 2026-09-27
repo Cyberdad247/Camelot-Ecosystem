@@ -17,20 +17,18 @@ Invariants:
 """
 from __future__ import annotations
 
-import copy
 import hashlib
-import json
 import sys
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional, Sequence
+from typing import Any, Optional
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from packages.contracts.canonicalize import canonicalize_json, sha256_canonical
+from packages.contracts.canonicalize import sha256_canonical
 
 
 GENESIS_PARENT_HASH = "sha256:" + "0" * 64
@@ -414,7 +412,6 @@ class SovereignMerkleCheckpointGovernor:
         checkpoint_id: Optional[str] = None,
     ) -> SovereignMerkleCheckpoint:
         """Issue a Signed Merkle Root Checkpoint with the Arthur Ed25519 Seal."""
-        from cryptography.hazmat.primitives.asymmetric import ed25519
 
         key = private_key or self.get_default_arthur_key()
         pub_bytes = key.public_key().public_bytes_raw()

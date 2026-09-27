@@ -1,0 +1,49 @@
+# SPDX-License-Identifier: MIT
+#
+# Camelot-OS Webhook Receiver — GitHub push ingestion on 127.0.0.1:9000.
+#
+# WHY THIS UNIT EXISTS
+#
+# The repo asserted a `webhook_receiver` on :9000 (tissue services map,
+# Caddyfile /webhook/* route) while no such service was ever deployed: the
+# hub advertised a listener that did not exist, the same defect shape the
+# 4d5bfebd hardening removed elsewhere. This unit makes the record true.
+#
+# SECURITY CONTRACT
+#
+# - Binds 127.0.0.1 ONLY. The public plane is nginx on :80, which proxies
+#   /webhook/* (infra/nginx/webhook.conf, R3 nginx parity). This port must
+#   never be reachable directly.
+# - Fail-closed: the server refuses to start without GITHUB_WEBHOOK_SECRET.
+#   The value is never stored in this repo; it lives in the operator-managed
+#   EnvironmentFile (presence referenced here, value provisioned on-box).
+
+[Unit]
+Description=Camelot-OS Webhook Receiver (GitHub push ingestion, loopback :9000)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/camelot-ecosystem
+# Created by the operator on the hub (chmod 0600 root:root):
+#   GITHUB_WEBHOOK_SECRET=<value from the GitHub webhook configuration>
+EnvironmentFile=-/etc/camelot/webhook.env
+# The server lives in /usr/local/lib/camelot (outside both git checkouts, per
+# the deploy-hub-selfcheck staleness rule) but imports the repo's handler
+# library, so the canonical checkout is pinned via PYTHONPATH.
+Environment=PYTHONPATH=/opt/camelot-ecosystem
+# Deployment pipeline (docs/HITL_VPS_REMEDIATION_PLAN.md R2, operator-approved
+# 2026-09-23: main-only, full pull+build+sync). Remove CAMELOT_DEPLOY_ENABLED
+# to reduce the receiver to receipt-only operation.
+Environment=CAMELOT_DEPLOY_ENABLED=1
+# TEMPORARY (operator decision 2026-09-23): deploy from cloudbrain-prod-hardening
+# until it merges to main — then set this back to main and restart the unit.
+Environment=CAMELOT_DEPLOY_BRANCH=cloudbrain-prod-hardening
+ExecStart=/usr/bin/python3 /usr/local/lib/camelot/webhook_server.py --port 9000
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

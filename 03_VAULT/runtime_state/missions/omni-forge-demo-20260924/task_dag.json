@@ -1,0 +1,37 @@
+{
+  "step": "DECOMPOSE_TASK_DAG",
+  "nodes": [
+    {
+      "id": "n1",
+      "task": "parse intent",
+      "assignee": "squire_scan"
+    },
+    {
+      "id": "n2",
+      "task": "extract symbols",
+      "assignee": "squire_index",
+      "after": [
+        "n1"
+      ]
+    },
+    {
+      "id": "n3",
+      "task": "emit artifacts",
+      "assignee": "squire_mason",
+      "after": [
+        "n2"
+      ]
+    }
+  ],
+  "parallel_sequences": [
+    [
+      "n1"
+    ],
+    [
+      "n2"
+    ],
+    [
+      "n3"
+    ]
+  ]
+}

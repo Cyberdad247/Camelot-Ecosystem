@@ -33,5 +33,15 @@
       "git gc*": "deny",
       "rm -rf *": "deny"
     }
+  },
+  "mcp": {
+    "graft": {
+      "type": "local",
+      "command": ["npx", "-y", "@nanonets/graft@0.19.0", "mcp"],
+      "environment": {
+        "DO_NOT_TRACK": "1"
+      },
+      "enabled": true
+    }
   }
 }

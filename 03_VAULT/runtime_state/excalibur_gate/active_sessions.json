@@ -1,11 +1,11 @@
 {
-  "session_id": "sess_e0ae2826a6a644f7adcb67ff2e46d200",
+  "session_id": "sess_ba1e9154766c4bc491eddb6b1e86fdc1",
   "device_id": "vashawns-s26-ultra",
   "authenticated": true,
   "face_vector_verified": true,
   "voice_vad_verified": true,
   "qr_verified": true,
-  "round_trip_ms": 0.0,
-  "issued_at": "2026-09-23T16:06:17.616984+00:00",
-  "signature": "ed25519:sig_b99ee75aca7b4337aca866047ab1e3e9"
+  "round_trip_ms": 0.01,
+  "issued_at": "2026-09-25T00:38:06.922310+00:00",
+  "signature": "ed25519:sig_e5ed543fc5014e0dbe7a6780188f4348"
 }

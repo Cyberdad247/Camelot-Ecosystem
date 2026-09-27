@@ -1,0 +1,9 @@
+{
+  "schema": "camelot-sandbox/1",
+  "worker_id": "WRK-KNN-01",
+  "knight_id": "MERLIN_\u03a9",
+  "vfs_root": "vfs://worldtree/knights/MERLIN_\u03a9/sandbox/WRK-KNN-01",
+  "max_memory_mb": 350.0,
+  "cpu_quota_pct": 60.0,
+  "created_at": "2026-09-21T10:23:19.977359+00:00"
+}
