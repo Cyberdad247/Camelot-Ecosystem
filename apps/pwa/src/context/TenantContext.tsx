@@ -22,7 +22,7 @@ const STORAGE_KEY_AUTH = 'camelot_authenticated_v4';
 export const DEFAULT_TENANTS: TenantProfile[] = [
   {
     id: 'vashon-arch',
-    handle: 'VASHAWN_ARCH',
+    handle: 'VASHON_ARCH',
     name: 'VaShawn Arch-Architect',
     role: 'Human Sovereign VaShawn Arch-Architect · Master Root Controller',
     tenantId: 'SOV-ARCH-01',
@@ -51,7 +51,7 @@ export const DEFAULT_TENANTS: TenantProfile[] = [
       voicePersona: 'Lakisha',
       autoArmDefense: true,
       allowKnightSwitchOverride: true,
-      customTokens: ['TOKEN_VASHAWN_ARCH', 'SIGIL_SOVEREIGN_ARCH_ARCHITECT'],
+      customTokens: ['TOKEN_VASHON_ARCH', 'SIGIL_SOVEREIGN_ARCH_ARCHITECT'],
       cartridges: [
         {
           id: 'cart-arch-kernel',
