@@ -21,8 +21,9 @@ import sys
 import threading
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
+from control_plane._paths import REPO_ROOT
 
-_REPO = Path(__file__).resolve().parent.parent
+_REPO = REPO_ROOT
 _KNIGHTS = _REPO / "01_KERNEL" / "iron_gate" / "DEFENSE_GRID" / "knights"
 if str(_KNIGHTS) not in sys.path:
     sys.path.insert(0, str(_KNIGHTS))

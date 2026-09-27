@@ -85,12 +85,7 @@ export function DesktopGrid() {
     setCartridges((prev) =>
       prev.map((c) => {
         if (c.id !== id) return c;
-        const nextStatus =
-          c.status === 'RUNNING'
-            ? 'OFFLINE'
-            : c.status === 'OFFLINE'
-            ? 'RUNNING'
-            : 'RUNNING';
+        const nextStatus: CartridgeTile['status'] = c.status === 'RUNNING' ? 'OFFLINE' : 'RUNNING';
         return { ...c, status: nextStatus };
       })
     );

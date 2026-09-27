@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 """Truthful cockpit snapshot and runic exec helpers for Warp/PowerShell."""
 
 from __future__ import annotations
@@ -20,13 +18,14 @@ except Exception:  # pragma: no cover - optional dependency fallback
     psutil = None
 
 from control_plane.runes.runic_router import route_rune
+from control_plane._paths import REPO_ROOT
 
 
 def _detect_home() -> Path:
     env = os.environ.get("CAMELOT_OS_HOME")
     if env and Path(env).is_dir():
         return Path(env)
-    return Path(__file__).resolve().parent.parent
+    return REPO_ROOT
 
 
 CAMELOT_HOME = _detect_home()
@@ -359,7 +358,7 @@ def cockpit_exec(text: str) -> dict[str, Any]:
 
     # Approval grant gating (CAMELOT_COCKPIT_REQUIRE_APPROVAL_GRANT)
     if os.environ.get("CAMELOT_COCKPIT_REQUIRE_APPROVAL_GRANT") == "true":
-        from control_plane import approval_grants
+        from control_plane.core import approval_grants
 
         grant = os.environ.get("CAMELOT_COCKPIT_APPROVAL_GRANT", "")
         try:

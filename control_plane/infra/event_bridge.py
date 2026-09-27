@@ -15,9 +15,8 @@ from pathlib import Path
 from fastapi import FastAPI, Header, HTTPException
 from pydantic import BaseModel
 
-# Add control_plane to path
-sys.path.append(str(Path(__file__).resolve().parent.parent))
-from control_plane.soul_router import SoulRouter
+from control_plane._paths import REPO_ROOT
+from control_plane.core.soul_router import SoulRouter
 
 app = FastAPI(title="Camelot Event Bridge")
 router = SoulRouter()

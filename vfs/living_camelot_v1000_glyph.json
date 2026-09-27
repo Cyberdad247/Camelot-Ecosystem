@@ -18,15 +18,8 @@
         "SMT-LIB Z3 Formal Verification",
         "Genome Evolution Protocol (GEP)"
       ],
-      "risk": [
-        "Entropy Drift",
-        "Uncontrolled Mutation",
-        "Secret Exposure"
-      ],
-      "temporal": [
-        "Real-time 2026-08-10",
-        "Continuous Self-Evolution"
-      ]
+      "risk": ["Entropy Drift", "Uncontrolled Mutation", "Secret Exposure"],
+      "temporal": ["Real-time 2026-08-10", "Continuous Self-Evolution"]
     },
     "blacklight": {
       "money": "High",

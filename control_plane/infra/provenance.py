@@ -108,7 +108,7 @@ class ProvenanceManager:
             self.vault_path = vault_path
         else:
             # Default to 03_VAULT/Missions
-            repo_root = Path(__file__).resolve().parent.parent
+            repo_root = Path(__file__).resolve().parents[2]
             self.vault_path = repo_root / "03_VAULT" / "Missions"
         
         self.vault_path.mkdir(parents=True, exist_ok=True)

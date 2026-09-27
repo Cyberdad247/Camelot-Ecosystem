@@ -1,22 +1,33 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
+import { CARTRIDGES } from '@/features/cartridges/registry';
 import { cn } from '@/lib/utils';
 import {
-  LayoutDashboard, BrainCircuit, FlaskConical, Map, LayoutGrid,
-  Globe, ChevronDown, Sword, Wifi, WifiOff, ShieldCheck, Layers3,
+  BrainCircuit,
+  ChevronDown,
+  FlaskConical,
+  Globe,
+  Layers3,
+  LayoutDashboard,
+  LayoutGrid,
+  Map,
+  ShieldCheck,
+  Sword,
+  Wifi,
+  WifiOff,
 } from 'lucide-react';
-import { CARTRIDGES } from '@/features/cartridges/registry';
-import { useAnyaSocket } from '@/features/brain/useAnyaSocket';
+import type React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const navLinkBase =
   'flex items-center gap-2.5 rounded-lg px-3 py-2 text-sm transition-colors duration-150';
-const navActive =
-  'bg-fuchsia-950/60 text-fuchsia-200 font-semibold border border-fuchsia-500/30';
-const navIdle =
-  'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50';
+const navActive = 'bg-fuchsia-950/60 text-fuchsia-200 font-semibold border border-fuchsia-500/30';
+const navIdle = 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50';
 
 function SideLink({
-  to, icon: Icon, label, end = false,
+  to,
+  icon: Icon,
+  label,
+  end = false,
 }: { to: string; icon: React.ElementType; label: string; end?: boolean }) {
   return (
     <NavLink
@@ -82,9 +93,7 @@ export default function Sidebar({ collapsed }: SidebarProps) {
             <NavLink
               key={c.id}
               to={`/cartridge/${c.slug}`}
-              className={({ isActive }) =>
-                cn(navLinkBase, isActive ? navActive : navIdle)
-              }
+              className={({ isActive }) => cn(navLinkBase, isActive ? navActive : navIdle)}
             >
               <Icon className={cn('h-4 w-4 shrink-0', c.textClass)} />
               <span>{c.label}</span>
@@ -107,10 +116,11 @@ export default function Sidebar({ collapsed }: SidebarProps) {
 
       {/* Status footer */}
       <div className="border-t border-slate-800/60 px-4 py-2.5 flex items-center gap-2">
-        {isConnected
-          ? <Wifi className="h-3.5 w-3.5 text-emerald-400" />
-          : <WifiOff className="h-3.5 w-3.5 text-red-500" />
-        }
+        {isConnected ? (
+          <Wifi className="h-3.5 w-3.5 text-emerald-400" />
+        ) : (
+          <WifiOff className="h-3.5 w-3.5 text-red-500" />
+        )}
         <span className="text-[10px] text-slate-500">
           {isConnected ? 'Bifrost LIVE' : 'Bifrost DARK'}
         </span>

@@ -5,9 +5,7 @@
   "evidence_class": "planned",
   "evidence_path": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\universal_vkg_crystal.toon.evidence.json",
   "format": "TOON",
-  "input_paths": [
-    "user_proposed_vkg_crystal_spec"
-  ],
+  "input_paths": ["user_proposed_vkg_crystal_spec"],
   "note": "Universal VKG Crystal Spec v9000.50 compiled and cached into secure vault runtime state.",
   "output_path": "C:\\\\Users\\\\vizio\\\\CAMELOT_OS\\\\03_VAULT\\\\runtime_state\\\\universal_vkg_crystal.toon",
   "reduction_pct": -7.22,

@@ -5,9 +5,12 @@ Research Agency Swarm (LangGraph Implementation)
 Deploys Lady Apis, Sir Oracle, and Sir Systéma for competitor intelligence.
 """
 
+import asyncio
+import os
 from typing import Dict, List, TypedDict
 
 from langgraph.graph import END, StateGraph
+from playwright.async_api import async_playwright
 
 
 class ResearchState(TypedDict):
@@ -19,10 +22,6 @@ class ResearchState(TypedDict):
     tech_stack: List[str]
     final_report: str
 
-
-import asyncio
-
-from playwright.async_api import async_playwright
 
 
 def agent_recon(state: ResearchState) -> ResearchState:

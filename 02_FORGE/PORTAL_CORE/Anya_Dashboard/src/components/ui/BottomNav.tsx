@@ -1,6 +1,13 @@
+import {
+  BrainCircuit,
+  FlaskConical,
+  Layers3,
+  LayoutDashboard,
+  Settings2,
+  ShieldCheck,
+} from 'lucide-react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, BrainCircuit, FlaskConical, Layers3, ShieldCheck, Settings2 } from 'lucide-react';
 
 const navItems = [
   { path: '/', icon: LayoutDashboard, label: 'Hub', end: true },

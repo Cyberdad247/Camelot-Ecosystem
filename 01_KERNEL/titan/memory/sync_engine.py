@@ -83,7 +83,7 @@ class UKGDeltaEngine:
             json.dump(state, f, indent=4)
         try:
             print(f"[UKG] Ingested intel from {str(intel.get('agent', 'unknown')).encode('ascii', 'ignore').decode()}")
-        except:
+        except Exception:
             print("[UKG] Intel Ingested.")
 
     def ingest_node(self, node: Dict[str, Any]):

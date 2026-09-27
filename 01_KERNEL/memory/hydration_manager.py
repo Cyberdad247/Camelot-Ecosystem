@@ -59,6 +59,10 @@ class HydrationManager:
         if kid == "SIR_HELIOS":
             kid = "SIR_HELIO"
         self.knight_id = kid
+        # Honcho L4 metamemory identity (one user+session per knight; lazy, offline-safe)
+        self.honcho_user_id = "knight_%s" % kid.lower()
+        self.honcho_session_id = "sess_knight_%s" % kid.lower()
+        self._honcho = None
         self.cloudbrain = CloudBrainConnector(knight_id=self.knight_id)
         self.graphiti = KnightGraphitiEngine(self.knight_id) if KnightGraphitiEngine else None
         self.memcastle = MemCastle() if MemCastle else None
@@ -177,8 +181,33 @@ class HydrationManager:
                 self._log_provenance("L2_REJECT", f"RAM Limit Exceeded | Intent: {intent}", "VIOLATION")
                 results["L2_ERROR"] = "L2 Mount Rejected: 8GB RAM Law Violation"
 
+        # L4: Honcho self-hosted metamemory (per-knight user model, local-cache resilient)
+        if complexity >= 7:
+            try:
+                honcho = self._honcho_bridge()
+                if honcho is not None:
+                    if not honcho.is_knight_embedded(self.knight_id):
+                        honcho.ensure_knight(self.knight_id)
+                    meta = honcho.get_metamemory(self.honcho_user_id)
+                    if meta:
+                        results["L4_HONCHO"] = meta
+                        results["tiers_active"].append("L4_HONCHO")
+            except Exception:
+                pass
+
         self._log_provenance("HYDRATE", f"Intent: {intent}, Tiers: {','.join(results['tiers_active'])}")
         return results
+
+    def _honcho_bridge(self):
+        """Lazy HonchoBridge accessor (import-deferred: keeps hydration import-light and cycle-free)."""
+        if self._honcho is None:
+            try:
+                from control_plane.infra.honcho_bridge import HonchoBridge
+
+                self._honcho = HonchoBridge()
+            except Exception:
+                self._honcho = False
+        return self._honcho or None
 
     def store_tissue(self, intent: str, content: Any, complexity: int, tier: str = "L0"):
         """Store context tissue in the appropriate tier."""
@@ -235,6 +264,31 @@ class HydrationManager:
                 title=f"L2_Artifact_{intent}"
             )
             self._log_provenance("L2_CLOUD_PUSH", f"Pushed intent '{intent}' to Cloud Brain")
+
+        # L4: Honcho metamemory ingest + tissue mirror (same gate as the L2 push)
+        if tier == "L2" or complexity >= 8:
+            try:
+                honcho = self._honcho_bridge()
+                if honcho is not None:
+                    if not honcho.is_knight_embedded(self.knight_id):
+                        honcho.ensure_knight(self.knight_id)
+                    honcho.get_or_create_session(self.honcho_session_id, self.honcho_user_id)
+                    preview = content_json if len(content_json) <= 2000 else content_json[:2000]
+                    honcho.sync_knight_tissue(
+                        self.knight_id,
+                        title=f"Honcho L4 ingest: {intent}",
+                        content={
+                            "engine": "honcho_self_hosted",
+                            "user_id": self.honcho_user_id,
+                            "session_id": self.honcho_session_id,
+                            "intent": intent,
+                            "preview": preview,
+                            "vfs_mount": "vfs://worldtree/memory/honcho/",
+                            "mode": "L4_metamemory",
+                        },
+                    )
+            except Exception:
+                pass
             
         self._log_provenance("STORE", f"Tier: {tier}, Intent: {intent}")
 

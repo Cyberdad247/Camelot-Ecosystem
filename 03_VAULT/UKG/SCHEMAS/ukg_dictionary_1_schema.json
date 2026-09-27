@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schema.camelot.os/ukg/ukg-dictionary-1.json",
+  "title": "UKGDictionary1",
+  "description": "Universal Knowledge Graph Decompression Dictionary Contract 1.0",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "dictionary_id",
+    "version",
+    "created_at",
+    "immutable",
+    "entries",
+    "checksum"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "ukg-dictionary/1"
+    },
+    "dictionary_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_\\-\\.:]+$"
+    },
+    "version": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "immutable": {
+      "type": "boolean",
+      "const": true
+    },
+    "entries": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["semantic_concept", "target_ast_fragment", "category"],
+        "properties": {
+          "semantic_concept": { "type": "string" },
+          "target_ast_fragment": { "type": "object" },
+          "category": { "type": "string" }
+        }
+      }
+    },
+    "checksum": {
+      "type": "string",
+      "description": "SHA-256 canonical hash of sorted entries"
+    }
+  }
+}

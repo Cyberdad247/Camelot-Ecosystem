@@ -24,7 +24,7 @@ class CommandService:
                 import commands.podcast_commands  # noqa: F401
             except ImportError as import_err:
                 logger.error(f"Failed to import command modules: {import_err}")
-                raise ValueError("Command modules not available")
+                raise ValueError("Command modules not available") from import_err
 
             # surreal-commands expects: submit_command(app_name, command_name, args)
             cmd_id = submit_command(

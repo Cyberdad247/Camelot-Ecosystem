@@ -42,10 +42,7 @@
   },
   "swarm": {
     "gateway": "Anya -> Merlin",
-    "delegates": [
-      "Sir Syntax",
-      "Sir Visage"
-    ]
+    "delegates": ["Sir Syntax", "Sir Visage"]
   },
   "checksum": "UKG-ANYA-Ω-SOUL-v6"
 }

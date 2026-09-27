@@ -447,6 +447,33 @@
         "max_cognition_ceiling",
         "authority_semantics"
       ]
+    },
+    {
+      "file": "config.schema.json",
+      "$id": "https://camelot-os/schemas/config.schema.json",
+      "schema_version": "camelot-config/1",
+      "purpose": "Configuration contract schema with classified authority and mutation policies",
+      "key_fields_v12": [
+        "schema_version",
+        "config_id",
+        "version",
+        "environment",
+        "entries"
+      ]
+    },
+    {
+      "file": "release-proof.schema.json",
+      "$id": "https://camelot-os/schemas/release-proof.schema.json",
+      "schema_version": "camelot-release-proof/1",
+      "purpose": "Deterministic release proof contract binding code, binary digests, SBOM, and contracts",
+      "key_fields_v12": [
+        "schema_version",
+        "release",
+        "contracts",
+        "artifacts",
+        "supply_chain",
+        "proof_signature"
+      ]
     }
   ]
 }

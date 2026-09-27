@@ -60,6 +60,37 @@ class ObjectModel(BaseModel):
         except Exception as e:
             logger.error(f"Error fetching all {cls.table_name}: {str(e)}")
             logger.exception(e)
+            raise DatabaseOperationError(e) from e
+
+    @classmethod
+    async def get_many(cls: Type[T], ids: List[str]) -> List[T]:
+        if not ids:
+            return []
+
+        try:
+            record_ids = [ensure_record_id(id) for id in ids]
+
+            result = await repo_query("SELECT * FROM $ids", {"ids": record_ids})
+            if not result:
+                return []
+
+            objects = []
+            for item in result:
+                item_id = str(item.get("id", ""))
+                table_name = item_id.split(":")[0] if ":" in item_id else item_id
+
+                if cls.table_name and cls.table_name == table_name:
+                    target_class: Type[T] = cls
+                else:
+                    found_class = cls._get_class_by_table_name(table_name)
+                    target_class = cast(Type[T], found_class) if found_class else cls
+
+                objects.append(target_class(**item))
+
+            return objects
+        except Exception as e:
+            logger.error(f"Error fetching objects with ids {ids}: {str(e)}")
+            logger.exception(e)
             raise DatabaseOperationError(e)
 
     @classmethod
@@ -88,7 +119,7 @@ class ObjectModel(BaseModel):
         except Exception as e:
             logger.error(f"Error fetching object with id {id}: {str(e)}")
             logger.exception(e)
-            raise NotFoundError(f"Object with id {id} not found - {str(e)}")
+            raise NotFoundError(f"Object with id {id} not found - {str(e)}") from e
 
     @classmethod
     def _get_class_by_table_name(cls, table_name: str) -> Optional[Type["ObjectModel"]]:
@@ -155,7 +186,7 @@ class ObjectModel(BaseModel):
             raise
         except Exception as e:
             logger.error(f"Error saving record: {e}")
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
     def _prepare_save_data(self) -> Dict[str, Any]:
         data = self.model_dump()
@@ -169,7 +200,7 @@ class ObjectModel(BaseModel):
             return await repo_delete(self.id)
         except Exception as e:
             logger.error(f"Error deleting {self.__class__.table_name} with id {self.id}: {str(e)}")
-            raise DatabaseOperationError(f"Failed to delete {self.__class__.table_name}")
+            raise DatabaseOperationError(f"Failed to delete {self.__class__.table_name}") from e
 
     async def relate(self, relationship: str, target_id: str, data: Optional[Dict] = None) -> Any:
         if data is None:
@@ -181,7 +212,7 @@ class ObjectModel(BaseModel):
         except Exception as e:
             logger.error(f"Error creating relationship: {str(e)}")
             logger.exception(e)
-            raise DatabaseOperationError(e)
+            raise DatabaseOperationError(e) from e
 
     @field_validator("created", "updated", mode="before")
     @classmethod

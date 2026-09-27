@@ -66,15 +66,16 @@
       "title": "Parallel Thread B — Resonance & Synthesis",
       "declared_service": "camelot-multivoice",
       "declared_runtime": "Python",
-      "action": "Generate local Piper VITS PCM audio buffer",
+      "action": "Generate VibeVoice Realtime 0.5B diffusion PCM audio buffer (TTFA < 300ms) with Piper fallback",
       "memory_budget_mb": 128,
       "predecessors": ["node_02_routing"],
       "evidence_class": "confirmed",
       "resolved_paths": [
         "control_plane/multivoice_bridge.py",
-        "01_KERNEL/agora/swarms/piper_tts.py"
+        "01_KERNEL/agora/swarms/piper_tts.py",
+        "control_plane/dispatch/realtime_voice_bridge.py"
       ],
-      "notes": "Multivoice bridge and the local Piper ONNX VITS engine are both deployed and confirmed."
+      "notes": "Multivoice bridge, Piper ONNX VITS engine, and VibeVoice Realtime 0.5B diffusion head (control_plane/dispatch/realtime_voice_bridge.py) are deployed and confirmed."
     },
     {
       "node_id": "node_04_egress",

@@ -97,7 +97,8 @@ class KittenService:
             # Yield audio chunk when we hit punctuation or a natural break
             if any(punc in token for punc in ['.', '!', '?', '\n', ',']):
                 chunk_text = buffer.strip()
-                if not chunk_text: continue
+                if not chunk_text:
+                    continue
                 
                 chunk_hash = hashlib.sha256(chunk_text.encode()).hexdigest()[:12]
                 cached = self.get_cached_chunk(chunk_hash)

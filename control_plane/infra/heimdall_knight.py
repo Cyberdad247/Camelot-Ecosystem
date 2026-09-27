@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 # -*- coding: utf-8 -*-
 """
 Sir Heimdall — Bifrost Guardian & Mesh Network Sentinel

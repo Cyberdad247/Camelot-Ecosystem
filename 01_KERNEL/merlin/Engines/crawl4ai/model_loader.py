@@ -7,9 +7,7 @@ import subprocess
 from functools import lru_cache
 from pathlib import Path
 
-from crawl4ai.config import MODEL_REPO_BRANCH
-
-from .model_loader import *
+from .config import MODEL_REPO_BRANCH
 
 __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 

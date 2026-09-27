@@ -66,10 +66,7 @@ export function assertFresh(opts: FreshnessOptions): void {
 
   const skewMs = now - opts.timestamp;
   if (skewMs > pastSkewMs) {
-    throw new SignatureError(
-      'EXPIRED',
-      `signature too old (age=${skewMs}ms > ${pastSkewMs}ms)`,
-    );
+    throw new SignatureError('EXPIRED', `signature too old (age=${skewMs}ms > ${pastSkewMs}ms)`);
   }
   if (skewMs < -futureSkewMs) {
     throw new SignatureError(

@@ -1,0 +1,52 @@
+{
+  "source_repo": "Cyberdad247/Camelot-VPS",
+  "branch": "main",
+  "fetched_at": "2026-09-22T13:13:55.363227+00:00",
+  "files": {
+    "actor.schema.json": {
+      "blob_sha": "6ff69ca645402b94faaaec21c116eb6e13191f10",
+      "bytes": 829
+    },
+    "arthur-resolution.schema.json": {
+      "blob_sha": "e6951adf55ba3f7c2c90df05291fa49cf0225ec6",
+      "bytes": 1723
+    },
+    "authority-epoch.schema.json": {
+      "blob_sha": "e4737621eecb38d5e5bef306182fb391ee31f52c",
+      "bytes": 1395
+    },
+    "bifrost-envelope.schema.json": {
+      "blob_sha": "23446da4126927017d117dc363fa0c4b2dcf247c",
+      "bytes": 2405
+    },
+    "context-packet.schema.json": {
+      "blob_sha": "8375111a423c625090e1106967f0de9d650b7da8",
+      "bytes": 2152
+    },
+    "gideon-verdict.schema.json": {
+      "blob_sha": "5d5f62016ae1ccadc72d55ffd85952f17c267707",
+      "bytes": 1860
+    },
+    "receipt.schema.json": {
+      "blob_sha": "dedf283facf502e026af0ed6cda45dad5183ede5",
+      "bytes": 2263
+    },
+    "task-snapshot.schema.json": {
+      "blob_sha": "6ec15bf6a7c630f7e8777f8457170a710985364a",
+      "bytes": 1451
+    },
+    "vfs-attestation.schema.json": {
+      "blob_sha": "b777621130ce964bbb087665a271847baf87371c",
+      "bytes": 1305
+    },
+    "wasm-execution.schema.json": {
+      "blob_sha": "cc6e21eb000c22afe3d2d3576f43d2eae68770eb",
+      "bytes": 902
+    },
+    "workspace-event.schema.json": {
+      "blob_sha": "90b8aa9a3def1116fa47a332173283d9d418eeba",
+      "bytes": 2417
+    }
+  },
+  "contract_count": 11
+}

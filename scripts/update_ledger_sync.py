@@ -11,11 +11,11 @@ def update_ledger():
     
     entries = [
         {
-            "id": "1846",
-            "task": "Sovereign Swarm Archival & Living Memory State Synchronization (Helios Session Keepalive & Archivist Telemetry)",
-            "author": "SIR_HELIOS / LADY_MNEMOSYNE / ANYA_Ω / ARTHUR_OMEGA",
-            "status": "✅ SYNCHRONIZED, AUDITED, CERTIFIED & SEALED",
-            "notes": "Synchronized sovereign runtime state and archivist telemetry: (1) Updated Helios session keepalive tissue in 03_VAULT/runtime_state/helios_session_keepalive.json (pulse acknowledged, 39 cookies tracked, local fallback active), (2) Inscribed periodic archivist skill gap diagnostics into control_plane/03_VAULT/Knights/learnings.md across sovereign domains (rust-kinetic, security, swarm-colony, python-api, nextjs, reasoning, voice-media), (3) Re-synchronized all 4 PROVENANCE_LEDGER.md mirrors with byte-identical SHA-256 parity, and (4) Executed authenticated git commit and push to origin/feat/cloudbrain-zero-login-autonomous. — 2026-09-20 06:05 UTC"
+            "id": "1868",
+            "task": "OmniRoute, 9Router-Go & BitRouter Unified Assimilation (Ω_OMNIROUTE_BITROUTER_NEXUS): 359-Provider Pool, RTK + Caveman Stacked Compression (-89% Tokens), Antigravity Tool Cloaking, Anti-Tokenmaxxing Guardrails & PWA Cockpit Explorer",
+            "author": "SIR_HELIOS / SIR_CODEX / SIR_BORIS / SIR_SENTINEL / SIR_HELIO / ARTHUR_OMEGA",
+            "status": "✅ IMPLEMENTED, VERIFIED, SYNCHRONIZED & SEALED",
+            "notes": "Assimilated diegosouzapw/OmniRoute, 47thtechcorner/RayCodes_OmniRoute-Explorer, luqman-v1/9router-go, and Cyberdad247/bitrouter into Camelot-OS: (1) Engineered OmniRouteBridge and RTKCavemanCompressor in 02_FORGE/assimilation/omniroute/omniroute_bridge.py achieving 15-95% (avg ~89%) token reduction and Antigravity 21-tool decoy cloaking with competitor prompt stripping from 9router-go, (2) Implemented BitRouterEngine in 02_FORGE/assimilation/bitrouter/bitrouter_guardrails.py with adaptive agent loop budgeting and anti-tokenmaxxing guardrails (stopping runaway loops >25 iterations or >$1.50 budget), (3) Ported RayCodes OmniRoute-Explorer into native Next.js 14 component apps/pwa/src/components/voice/OmniRouteExplorerCard.tsx mounted under dedicated OMNI_ROUTER tab in MultivoiceRouterCockpit.tsx, passing clean tsc --noEmit, (4) Exposed FastMCP tools omniroute_compress_prompt, omniroute_status, and bitrouter_evaluate_loop on control_plane/mcp/cloudbrain_mcp_server.py, (5) Wired CLI subcommands 'camelot omniroute' and 'camelot bitrouter' in bin/camelot.py and runes //OMNIROUTE, //COMPRESS, and //BITROUTER in control_plane/runes/runic_router.py, (6) Validated 7/7 tests in tests/test_omniroute_bitrouter_assimilation.py and 75/75 across the complete regression suite, (7) Verified zero-drift parity gates (check_omnivoice_router_build.py, check_generated_artifact_parity.py). — 2026-09-21 04:45 UTC"
         }
     ]
 
@@ -25,7 +25,7 @@ def update_ledger():
         
         insert_at = -1
         for i, line in enumerate(lines):
-            if "| 1845" in line:
+            if "| 1867" in line:
                 insert_at = i
                 break
         
@@ -34,6 +34,8 @@ def update_ledger():
                 if "| ID" in line:
                     insert_at = i + 2
                     break
+        if insert_at == -1:
+            insert_at = 0
 
         new_rows = [f"| {e['id']} | **{e['task']}** | {e['author']} | {e['status']} | {e['notes']} |" for e in entries]
             

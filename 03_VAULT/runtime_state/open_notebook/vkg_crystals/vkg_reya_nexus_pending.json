@@ -1,0 +1,70 @@
+{
+  "schema_version": "camelot.omni-voice-dag/1",
+  "fingerprint": "νKG_CRYSTAL_REYA_NEXUS_PENDING",
+  "system_identity": "REYA_NEXUS_PENDING",
+  "hardware_ceiling_mb": 256,
+  "provenance": {
+    "origin": "reya_assimilation_protocol",
+    "trust": "sovereign_meta_compiler_harness",
+    "governance": "AGENTS.md evidence classes — confirmed upon payload injection",
+    "root_orchestrator": "ANYA_Ω",
+    "hitl_required_for_process_launch": false
+  },
+  "prime_directive": {
+    "root": "ANYA_Ω",
+    "role": "HYPERVISOR_GATE",
+    "constraint": "8GB_EDGE_CEILING ➔ (Babylonian_Static == NULL)",
+    "strategy": "Prep reya repository for zero-entropy assimilation into the Camelot-OS Multi-Agent Swarm"
+  },
+  "kinetic_flow_dag": [
+    {
+      "step": 1,
+      "name": "OBSERVE_&_MAP",
+      "knight": "SIR_HELIO",
+      "action": "Awaiting raw AST / directory tree for reya injection",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "02_FORGE/assimilation/reya/reya_hypervisor_gate.py"
+      ],
+      "status": "AWAITING_PAYLOAD"
+    },
+    {
+      "step": 2,
+      "name": "ORIENT_&_STRIP",
+      "knight": "ANYA_Ω",
+      "action": "Execute Triple-QFT to eliminate conversational fluff from reya logic",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "02_FORGE/assimilation/reya/reya_hypervisor_gate.py"
+      ],
+      "status": "ARMED"
+    },
+    {
+      "step": 3,
+      "name": "DELEGATE",
+      "knight": "MERLIN_Ω",
+      "action": "Route isolated functions to Bio-Kinetic Swarm (Sir Codex / Sir Boris)",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "01_KERNEL/bio_kinetic/bio_horde_engine.py"
+      ],
+      "status": "ARMED"
+    },
+    {
+      "step": 4,
+      "name": "Z3_VERIFY",
+      "knight": "PALADIN_OCTEM",
+      "action": "Audit code against structural and security boundaries",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "control_plane/runes/runic_router.py"
+      ],
+      "status": "ARMED"
+    }
+  ],
+  "harmony_runes": [
+    "//FORGE_REYA_SCAFFOLD",
+    "//ACTIVATE_AGENT_ARMOR",
+    "//HITL_IRON_GATE_APPROVAL"
+  ]
+}

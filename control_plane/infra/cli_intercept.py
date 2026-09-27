@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 """CLI Intercept — Bridges camelot-cli to the MFOE Soul Router.
 
 Every camelot-cli command passes through this intercept layer which:
@@ -9,7 +7,7 @@ Every camelot-cli command passes through this intercept layer which:
 4. Dispatches execution to the appropriate backend (CLIProxyAPI, Ollama, or direct)
 
 Usage:
-    from control_plane.cli_intercept import CLIIntercept
+    from control_plane.infra.cli_intercept import CLIIntercept
     intercept = CLIIntercept()
     result = intercept.process("critique this architecture")
 """

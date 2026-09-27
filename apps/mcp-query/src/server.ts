@@ -7,7 +7,13 @@
 import http from 'node:http';
 import { answerQuery } from './query';
 
-const PORT = Number(process.env.PORT) || 7800;
+const PORT =
+  Number(
+    process.env.MCP_PORT ||
+      (process.env.PORT && process.env.PORT !== '3000' && process.env.PORT !== '3001'
+        ? process.env.PORT
+        : undefined),
+  ) || 7800;
 const MULTIVOICE_URL = process.env.MULTIVOICE_URL;
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL;
 const OLLAMA_URL = process.env.OLLAMA_URL;
@@ -65,7 +71,41 @@ export async function handleRpc(body: RpcRequest): Promise<object> {
   }
 }
 
+const SOVEREIGN_SHARED_SECRET = process.env.SOVEREIGN_MESH_KEY;
+
+function isAllowedClient(remoteIp?: string): boolean {
+  if (!remoteIp) return false;
+  // Localhost loopback
+  if (remoteIp === '127.0.0.1' || remoteIp === '::1' || remoteIp === '::ffff:127.0.0.1') {
+    return true;
+  }
+  // Strip IPv4-mapped IPv6 prefix
+  const ip = remoteIp.replace(/^::ffff:/, '');
+  // Tailscale Carrier-Grade NAT (CGNAT) range: 100.64.0.0 to 100.127.255.255
+  if (/^100\.(6[4-9]|[7-9]\d|1[0-1]\d|12[0-7])\./.test(ip)) {
+    return true;
+  }
+  return false;
+}
+
 export const server = http.createServer((req, res) => {
+  const remoteAddr = req.socket.remoteAddress;
+  if (!isAllowedClient(remoteAddr)) {
+    res.writeHead(403, { 'content-type': 'application/json' });
+    res.end(JSON.stringify({ error: 'Forbidden: Untrusted network perimeter' }));
+    return;
+  }
+
+  // If a shared mesh secret is configured, enforce x-sovereign-mesh header
+  if (SOVEREIGN_SHARED_SECRET) {
+    const meshHeader = req.headers['x-sovereign-mesh'] || req.headers['authorization'];
+    if (meshHeader !== SOVEREIGN_SHARED_SECRET && meshHeader !== `Bearer ${SOVEREIGN_SHARED_SECRET}`) {
+      res.writeHead(401, { 'content-type': 'application/json' });
+      res.end(JSON.stringify({ error: 'Unauthorized: Invalid mesh authorization token' }));
+      return;
+    }
+  }
+
   if (req.method === 'GET' && req.url === '/health') {
     res.writeHead(200, { 'content-type': 'application/json' });
     res.end(
@@ -110,9 +150,25 @@ export const server = http.createServer((req, res) => {
 
 // Bind all interfaces so the Tailscale IP is reachable.
 if (require.main === module) {
+  server.on('error', (err: NodeJS.ErrnoException) => {
+    if (err.code === 'EADDRINUSE') {
+      console.warn(`[mcp-query] Port ${PORT} in use; continuing gracefully.`);
+    } else {
+      console.error('[mcp-query] Server error:', err);
+    }
+  });
+
   server.listen(PORT, '0.0.0.0', () => {
     console.log(
       `mcp-query server on :${PORT} (multivoice=${MULTIVOICE_URL ? 'on' : 'off'}, ollama=${OLLAMA_MODEL ?? 'off'})`,
     );
   });
+
+  const shutdown = (signal: string) => {
+    console.log(`[mcp-query] ${signal} received — shutting down server...`);
+    server.close(() => process.exit(0));
+  };
+
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
 }

@@ -8,7 +8,7 @@ import sys
 kernel_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../"))
 sys.path.append(kernel_path)
 
-from assimilation.core.handlers import assimilate_repo
+from assimilation.core.handlers import assimilate_repo  # noqa: E402
 
 
 def main():

@@ -1,6 +1,182 @@
 [
   {
     "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-23T16:02:57.089137+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-23T16:02:56.433764+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 ingest: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"intent\": \"//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree\",\n  \"preview\": \"{\\\"action\\\": \\\"symbolect_compilation\\\", \\\"architect\\\": \\\"MERLIN_OMEGA\\\", \\\"compiler\\\": \\\"ANYA_\\\\u03a9\\\", \\\"protocol\\\": \\\"Triple-QFT Context-as-a-Compiler\\\", \\\"original_prompt\\\": \\\"Synthesize character sheet for Sir Hermes Prime from World Tree\\\", \\\"symbolect_glyph\\\": \\\"|\\\\ud83e\\\\udde0\\\\u2297(\\\\u26a1\\\\ud83d\\\\udcac)\\\\u27e9 \\\\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\\\u27e9\\\", \\\"anchor_tokens\\\": [\\\"Synthesize\\\", \\\"character\\\", \\\"sheet\\\", \\\"Hermes\\\", \\\"Prime\\\", \\\"World\\\", \\\"Tree\\\"], \\\"reduction_percentage\\\": \\\"20.0%\\\", \\\"token_savings\\\": \\\"80%+ inter-knight token reduction\\\", \\\"status\\\": \\\"COMPILED\\\"}\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:39:52.969149+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:39:49.372841+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:39:41.625479+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:39:40.061734+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 ingest: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"intent\": \"//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree\",\n  \"preview\": \"{\\\"action\\\": \\\"symbolect_compilation\\\", \\\"architect\\\": \\\"MERLIN_OMEGA\\\", \\\"compiler\\\": \\\"ANYA_\\\\u03a9\\\", \\\"protocol\\\": \\\"Triple-QFT Context-as-a-Compiler\\\", \\\"original_prompt\\\": \\\"Synthesize character sheet for Sir Hermes Prime from World Tree\\\", \\\"symbolect_glyph\\\": \\\"|\\\\ud83e\\\\udde0\\\\u2297(\\\\u26a1\\\\ud83d\\\\udcac)\\\\u27e9 \\\\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\\\u27e9\\\", \\\"anchor_tokens\\\": [\\\"Synthesize\\\", \\\"character\\\", \\\"sheet\\\", \\\"Hermes\\\", \\\"Prime\\\", \\\"World\\\", \\\"Tree\\\"], \\\"reduction_percentage\\\": \\\"20.0%\\\", \\\"token_savings\\\": \\\"80%+ inter-knight token reduction\\\", \\\"status\\\": \\\"COMPILED\\\"}\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:38:54.284381+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:38:51.087789+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:38:42.888356+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:38:41.334636+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:37:01.851077+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:37:00.238625+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 ingest: //SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"intent\": \"//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree\",\n  \"preview\": \"{\\\"action\\\": \\\"symbolect_compilation\\\", \\\"architect\\\": \\\"MERLIN_OMEGA\\\", \\\"compiler\\\": \\\"ANYA_\\\\u03a9\\\", \\\"protocol\\\": \\\"Triple-QFT Context-as-a-Compiler\\\", \\\"original_prompt\\\": \\\"Synthesize character sheet for Sir Hermes Prime from World Tree\\\", \\\"symbolect_glyph\\\": \\\"|\\\\ud83e\\\\udde0\\\\u2297(\\\\u26a1\\\\ud83d\\\\udcac)\\\\u27e9 \\\\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\\\u27e9\\\", \\\"anchor_tokens\\\": [\\\"Synthesize\\\", \\\"character\\\", \\\"sheet\\\", \\\"Hermes\\\", \\\"Prime\\\", \\\"World\\\", \\\"Tree\\\"], \\\"reduction_percentage\\\": \\\"20.0%\\\", \\\"token_savings\\\": \\\"80%+ inter-knight token reduction\\\", \\\"status\\\": \\\"COMPILED\\\"}\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:36:09.356512+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//SYMBOLECT Synthesize character sheet for Sir Hermes Prime from World Tree",
+    "content": "{\"action\": \"symbolect_compilation\", \"architect\": \"MERLIN_OMEGA\", \"compiler\": \"ANYA_\\u03a9\", \"protocol\": \"Triple-QFT Context-as-a-Compiler\", \"original_prompt\": \"Synthesize character sheet for Sir Hermes Prime from World Tree\", \"symbolect_glyph\": \"|\\ud83e\\udde0\\u2297(\\u26a1\\ud83d\\udcac)\\u27e9 \\u27e8Omega:Synthesize|character|sheet|Hermes|Prime|World|Tree\\u27e9\", \"anchor_tokens\": [\"Synthesize\", \"character\", \"sheet\", \"Hermes\", \"Prime\", \"World\", \"Tree\"], \"reduction_percentage\": \"20.0%\", \"token_savings\": \"80%+ inter-knight token reduction\", \"status\": \"COMPILED\"}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:36:05.622882+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:35:53.708863+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for MERLIN_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_merlin_omega\",\n  \"session_id\": \"sess_knight_merlin_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/merlin_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_MERLIN_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/merlin_omega",
+    "updated_at": "2026-09-22T14:35:51.524204+00:00"
+  },
+  {
+    "knight_id": "MERLIN_OMEGA",
     "cloudbrain_uuid": "af927fde-d7eb-42ee-8c79-51b3e78ef39b",
     "spark_id": "0xAF927FDED7EB42EE8C7951B3E78EF39B",
     "role": "System 2 Orchestration & TTC Deep DAG",
@@ -14,6 +190,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Thoth / Hermes Trismegistus (Sacred Geometry)",
+      "Gandalf the White (Strategic Patience)",
+      "John von Neumann (Polymathic Computing)",
+      "Alan Turing (Universal Computation)",
+      "Archimedes of Syracuse (Spatial Leverage)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +207,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

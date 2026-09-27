@@ -14,7 +14,7 @@
 | **LADY_APIS** | Bio-Kinetic Swarm/Horde Conductor & BASHR Forager | Gemini 3.8 Flash / NullClaw | Autonomous R&D loop, Swarm/Horde mode shifting, <150 tok/pulse; `vfs://worldtree/knights/lady_apis/` |
 | **HERMES_PRIME** | Always-on VPS Co-Pilot & Synthesis Engine | Gemini / Hermes OS | 60s continuous trajectory loop under 768M RAM slice; `vfs://worldtree/knights/hermes_prime/` |
 | **SIR_KAY** | High Seneschal & Kinetic Engineering Lead | Gemini 3 Pro / GPT-5.5 | DKESI sprint orchestration; kinetic direct builds; `vfs://worldtree/knights/sir_kay/` |
-| **SIR_LUCAS** | Herald of Telemetry & Visual Verification | Gemini 3 Flash / GPT-5.3 | Live TCP/state anomaly detection, visual telemetry; `vfs://worldtree/knights/sir_lucas/` |
+| **SIR_LUKAS** | Herald of Telemetry & Visual Verification (Sir Lukas Müller) | Gemini 3 Flash / GPT-5.3 | Live TCP/state anomaly detection, visual telemetry; NotebookLM `bebdf3e3-bbb0-455b-9c02-1469202baf74`; `vfs://worldtree/knights/sir_lukas/` (alias: `sir_lucas`) |
 | **SIR_SONUS** | Multivoice Audio Routing & Aoede S2S | Gemini 3.8 Flash | Port :7680 real-time duplex voice, LMCache KV affinity; `vfs://worldtree/knights/sir_sonus/` |
 | **SIR_GHOST** | Privacy Scanner & Local Air-Gap Vault | Ollama Local Container | Strict zero-cloud routing for credentials and keys; `vfs://worldtree/knights/sir_ghost/` |
 | **SIR_OCTAVIAN** | Factory Warden & WASM PTY Execution | Rust 1.96 / Wasmtime 14.0 | Port :8400 JSON telemetry, multi-terminal sandbox; `vfs://worldtree/knights/sir_octavian/` |

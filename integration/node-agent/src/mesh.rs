@@ -202,6 +202,15 @@ fn split_url(url: &str) -> Option<(String, u16, String)> {
     Some((host, port, path.to_string()))
 }
 
+/// Bearer credential for the governed gateway surface (P1). Read per call so
+/// a rotated token is picked up without restarting the agent.
+fn auth_header() -> String {
+    match std::env::var("CAMELOT_API_TOKEN") {
+        Ok(t) if !t.trim().is_empty() => format!("Authorization: Bearer {}\r\n", t.trim()),
+        _ => String::new(),
+    }
+}
+
 /// POST a JSON body and return the response body. Bounded by connect/read
 /// timeouts so a wedged gateway can never stall the agent.
 pub fn post_json(url: &str, body: &str) -> Result<String, String> {
@@ -212,8 +221,9 @@ pub fn post_json(url: &str, body: &str) -> Result<String, String> {
         .set_read_timeout(Some(Duration::from_secs(10)))
         .map_err(|e| e.to_string())?;
     let request = format!(
-        "POST {path} HTTP/1.1\r\nHost: {host}\r\nContent-Type: application/json\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
-        body.len()
+        "POST {path} HTTP/1.1\r\nHost: {host}\r\nContent-Type: application/json\r\n{auth}Content-Length: {len}\r\nConnection: close\r\n\r\n{body}",
+        auth = auth_header(),
+        len = body.len()
     );
     stream
         .write_all(request.as_bytes())

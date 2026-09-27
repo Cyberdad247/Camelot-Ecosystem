@@ -74,7 +74,11 @@
       "capabilities": ["code generation", "code review", "debugging", "multi-language"],
       "camelot_assessment": {
         "bio_swarm_species": "Castor",
-        "use_cases": ["kinetic code generation", "AST-aware patching", "Rust/Python/Go scaffolding"],
+        "use_cases": [
+          "kinetic code generation",
+          "AST-aware patching",
+          "Rust/Python/Go scaffolding"
+        ],
         "camelot_role": "Sir Forge / Sir Debug — specialized code tasks where qwen3:4b is overkill",
         "recommendation": "KEEP — code-specialized model is faster than general Qwen3 for pure code tasks",
         "priority": "P1",
@@ -83,12 +87,24 @@
     }
   ],
   "species_model_routing": {
-    "Formica (Ant)":      {"primary": "qwen3:1.7b",       "fallback": "qwen3.5:0.8b", "budget_tokens": 150},
-    "Pongid (Gorilla)":   {"primary": "gemma4:latest",    "fallback": "qwen3:4b",     "budget_tokens": 300},
-    "Castor (Beaver)":    {"primary": "qwen2.5-coder:3b", "fallback": "qwen3:4b",     "budget_tokens": 200},
-    "Arachne (Spider)":   {"primary": "qwen3:4b",          "fallback": "qwen3:1.7b",   "budget_tokens": 200},
-    "Simian (Chaos)":     {"primary": "qwen3:1.7b",        "fallback": "qwen3.5:0.8b", "budget_tokens": 150},
-    "Strigiform (Owl)":   {"primary": "qwen3.5:0.8b",     "fallback": "qwen3:0.6b",   "budget_tokens": 100}
+    "Formica (Ant)": { "primary": "qwen3:1.7b", "fallback": "qwen3.5:0.8b", "budget_tokens": 150 },
+    "Pongid (Gorilla)": {
+      "primary": "gemma4:latest",
+      "fallback": "qwen3:4b",
+      "budget_tokens": 300
+    },
+    "Castor (Beaver)": {
+      "primary": "qwen2.5-coder:3b",
+      "fallback": "qwen3:4b",
+      "budget_tokens": 200
+    },
+    "Arachne (Spider)": { "primary": "qwen3:4b", "fallback": "qwen3:1.7b", "budget_tokens": 200 },
+    "Simian (Chaos)": { "primary": "qwen3:1.7b", "fallback": "qwen3.5:0.8b", "budget_tokens": 150 },
+    "Strigiform (Owl)": {
+      "primary": "qwen3.5:0.8b",
+      "fallback": "qwen3:0.6b",
+      "budget_tokens": 100
+    }
   },
   "ram_analysis": {
     "note": "Ollama loads models lazily — one at a time by default",
@@ -101,7 +117,14 @@
   "recommended_actions": [
     {
       "action": "KEEP",
-      "models": ["gemma4:latest", "qwen3:4b", "qwen3:1.7b", "qwen3:0.6b", "qwen3.5:0.8b", "qwen2.5-coder:3b"],
+      "models": [
+        "gemma4:latest",
+        "qwen3:4b",
+        "qwen3:1.7b",
+        "qwen3:0.6b",
+        "qwen3.5:0.8b",
+        "qwen2.5-coder:3b"
+      ],
       "reason": "Full species coverage — each model maps to a Bio-Swarm role"
     },
     {

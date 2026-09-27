@@ -22,7 +22,7 @@ done
 
 # Mesh view: trust bands and health as the gateway sees them.
 if [[ $ENABLE_TAILSCALE_MESH == true ]]; then
-  nodes=$(curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" 2>/dev/null || true)
+  nodes=$(gw_curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" 2>/dev/null || true)
   if [[ -n $nodes ]]; then
     echo "$nodes" | python3 -c "
 import json, sys

@@ -1,12 +1,7 @@
 {
   "protocol": "HITL_GATE_v1.1",
   "authorizer": "VaShawn O. Head",
-  "critical_cmds": [
-    "OMEGA_FORK",
-    "OMEGA_GOD_MODE",
-    "OMEGA_WIPE",
-    "OMEGA_DESTROY"
-  ],
+  "critical_cmds": ["OMEGA_FORK", "OMEGA_GOD_MODE", "OMEGA_WIPE", "OMEGA_DESTROY"],
   "requires_confirmation": true,
   "confirmation_env_var": "CAMELOT_HITL_CONFIRM_TOKEN",
   "confirmation_token": "",

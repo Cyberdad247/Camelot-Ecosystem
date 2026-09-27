@@ -75,7 +75,7 @@ async def merge_agents(request: FusionRequest):
 
     except Exception as e:
         print(f"[API] Fusion Error: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Fusion Engine Failure: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Fusion Engine Failure: {str(e)}") from e
 
 @router.get("/capabilities")
 async def list_capabilities():

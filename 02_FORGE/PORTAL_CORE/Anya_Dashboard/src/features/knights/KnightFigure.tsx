@@ -1,5 +1,5 @@
-import React, { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
+import React, { useRef } from 'react';
 import type { Group } from 'three';
 
 /**
@@ -17,7 +17,12 @@ export default function KnightFigure({ color }: { color: string }) {
     <group ref={group} position={[0, -0.6, 0]}>
       <mesh position={[0, 1.12, 0]}>
         <sphereGeometry args={[0.32, 32, 32]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={0.5} roughness={0.3} />
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={0.5}
+          roughness={0.3}
+        />
       </mesh>
       <mesh position={[0, 0.35, 0]}>
         <capsuleGeometry args={[0.32, 0.7, 8, 16]} />

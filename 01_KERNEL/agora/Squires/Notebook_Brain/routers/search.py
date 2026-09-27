@@ -50,13 +50,13 @@ async def search_knowledge_base(search_request: SearchRequest):
         )
 
     except InvalidInputError as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=str(e)) from e
     except DatabaseOperationError as e:
         logger.error(f"Database error during search: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}") from e
     except Exception as e:
         logger.error(f"Unexpected error during search: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Search failed: {str(e)}") from e
 
 
 async def stream_ask_response(
@@ -150,7 +150,7 @@ async def ask_knowledge_base(ask_request: AskRequest):
         raise
     except Exception as e:
         logger.error(f"Error in ask endpoint: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Ask operation failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Ask operation failed: {str(e)}") from e
 
 
 @router.post("/search/ask/simple", response_model=AskResponse)
@@ -210,4 +210,4 @@ async def ask_knowledge_base_simple(ask_request: AskRequest):
         raise
     except Exception as e:
         logger.error(f"Error in ask simple endpoint: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Ask operation failed: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Ask operation failed: {str(e)}") from e

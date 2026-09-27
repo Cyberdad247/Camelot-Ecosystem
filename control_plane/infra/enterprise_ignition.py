@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 """Enterprise ignition and doctor preflight for Camelot-OS."""
 
 from __future__ import annotations

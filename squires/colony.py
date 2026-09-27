@@ -140,6 +140,15 @@ def cmd_ghost(root: Path, args: argparse.Namespace) -> None:
             print(f"[{flag.severity.upper()}] {flag.kind} {flag.file}:{flag.line} - {flag.detail}")
         print(f"\nSummary: {summary}")
 
+    # CI mode: non-zero exit when critical flags exist (GHOST itself is
+    # read-only — no HITL gate involved, unlike triage's report write).
+    if getattr(args, "fail_on_critical", False) and report.critical:
+        _print(
+            f"❌ {len(report.critical)} critical flag(s) — failing (CI)",
+            "red",
+        )
+        sys.exit(2)
+
 
 def cmd_vector(root: Path, args: argparse.Namespace) -> None:
     from .scan import scan
@@ -384,6 +393,8 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--query", nargs="+", help="Search query (vector: keywords; graph: graft ask)")
     parser.add_argument("--top-k", type=int, default=10, help="Number of vector results (default: 10)")
     parser.add_argument("--auto-approve", action="store_true", help="Skip SENTINEL HITL gate (CI mode)")
+    parser.add_argument("--fail-on-critical", action="store_true",
+                        help="ghost: exit 2 when critical flags found (CI secret gate)")
     parser.add_argument("--schedule", metavar="INTERVAL", default="",
                         help="Cron mode for triage: repeat on interval e.g. '6h', '30m', '3600'")
 

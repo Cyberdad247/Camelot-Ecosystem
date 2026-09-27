@@ -1,6 +1,116 @@
 [
   {
     "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-23T16:02:57.541290+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-23T16:02:56.627566+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:39:42.109619+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:39:40.494389+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:38:43.412444+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:38:41.794239+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:37:02.358196+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:37:00.689524+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:35:53.948536+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for ANYA_QUANTUM_MANTRA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_anya_quantum_mantra\",\n  \"session_id\": \"sess_knight_anya_quantum_mantra\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/anya_quantum_mantra/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_ANYA_QUANTUM_MANTRA",
+    "open_viking_tether": "open_viking://worldtree/anya_quantum_mantra",
+    "updated_at": "2026-09-22T14:35:52.390789+00:00"
+  },
+  {
+    "knight_id": "ANYA_QUANTUM_MANTRA",
     "cloudbrain_uuid": "219e765a-0c8e-4b66-b356-f277cb441b14",
     "spark_id": "0x219E765A0C8E4B66B356F277CB441B14",
     "role": "Glyph Quantum Engine, Token Compression, VFS Mantra",
@@ -14,6 +124,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Aristotle (Axiomatic Logic & Categorization)",
+      "Hypatia of Alexandria (Mathematical Courage)",
+      "Leonardo da Vinci (Universal Invention)",
+      "Ada Lovelace (First Algorithmic Visionary)",
+      "Marcus Aurelius (Steadfast Sovereign Duty)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +141,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

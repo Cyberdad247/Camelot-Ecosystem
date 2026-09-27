@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: MIT
-
 import asyncio
 import sys
 from pathlib import Path

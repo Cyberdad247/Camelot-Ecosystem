@@ -4,7 +4,10 @@ class DetailsModal extends HTMLElement {
     this.detailsContainer = this.querySelector('details');
     this.summaryToggle = this.querySelector('summary');
 
-    this.detailsContainer.addEventListener('keyup', (event) => event.code.toUpperCase() === 'ESCAPE' && this.close());
+    this.detailsContainer.addEventListener(
+      'keyup',
+      (event) => event.code.toUpperCase() === 'ESCAPE' && this.close(),
+    );
     this.summaryToggle.addEventListener('click', this.onSummaryClick.bind(this));
     this.querySelector('button[type="button"]').addEventListener('click', this.close.bind(this));
 
@@ -21,7 +24,8 @@ class DetailsModal extends HTMLElement {
   }
 
   onBodyClick(event) {
-    if (!this.contains(event.target) || event.target.classList.contains('modal-overlay')) this.close(false);
+    if (!this.contains(event.target) || event.target.classList.contains('modal-overlay'))
+      this.close(false);
   }
 
   open(event) {
@@ -32,7 +36,7 @@ class DetailsModal extends HTMLElement {
 
     trapFocus(
       this.detailsContainer.querySelector('[tabindex="-1"]'),
-      this.detailsContainer.querySelector('input:not([type="hidden"])')
+      this.detailsContainer.querySelector('input:not([type="hidden"])'),
     );
   }
 

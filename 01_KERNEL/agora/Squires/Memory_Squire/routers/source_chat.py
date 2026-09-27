@@ -102,10 +102,10 @@ async def create_source_chat_session(
             message_count=0,
         )
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Source not found")
+        raise HTTPException(status_code=404, detail="Source not found") from None
     except Exception as e:
         logger.error(f"Error creating source chat session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error creating source chat session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error creating source chat session: {str(e)}") from e
 
 
 @router.get("/sources/{source_id}/chat/sessions", response_model=List[SourceChatSessionResponse])
@@ -130,6 +130,19 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
                 session_result = await repo_query(f"SELECT * FROM {session_id}")
                 if session_result and len(session_result) > 0:
                     session_data = session_result[0]
+
+                    # Extract raw ID for thread_id
+                    raw_id = session_id.split(":")[-1] if ":" in session_id else session_id
+
+                    # Get message count from state
+                    message_count = 0
+                    try:
+                        thread_state = source_chat_graph.get_state(config=RunnableConfig(configurable={"thread_id": raw_id}))
+                        if thread_state and thread_state.values and "messages" in thread_state.values:
+                            message_count = len(thread_state.values["messages"])
+                    except Exception as state_err:
+                        logger.warning(f"Could not fetch state for session {session_id}: {str(state_err)}")
+
                     sessions.append(
                         SourceChatSessionResponse(
                             id=session_data.get("id") or "",
@@ -138,7 +151,7 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
                             model_override=session_data.get("model_override"),
                             created=str(session_data.get("created")),
                             updated=str(session_data.get("updated")),
-                            message_count=0,  # TODO: Add message count if needed
+                            message_count=message_count,
                         )
                     )
 
@@ -146,10 +159,10 @@ async def get_source_chat_sessions(source_id: str = Path(..., description="Sourc
         sessions.sort(key=lambda x: x.created, reverse=True)
         return sessions
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Source not found")
+        raise HTTPException(status_code=404, detail="Source not found") from None
     except Exception as e:
         logger.error(f"Error fetching source chat sessions: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching source chat sessions: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching source chat sessions: {str(e)}") from e
 
 
 @router.get("/sources/{source_id}/chat/sessions/{session_id}", response_model=SourceChatSessionWithMessagesResponse)
@@ -220,10 +233,10 @@ async def get_source_chat_session(
             context_indicators=context_indicators,
         )
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Source or session not found")
+        raise HTTPException(status_code=404, detail="Source or session not found") from None
     except Exception as e:
         logger.error(f"Error fetching source chat session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error fetching source chat session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error fetching source chat session: {str(e)}") from e
 
 
 @router.put("/sources/{source_id}/chat/sessions/{session_id}", response_model=SourceChatSessionResponse)
@@ -273,10 +286,10 @@ async def update_source_chat_session(
             message_count=0,
         )
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Source or session not found")
+        raise HTTPException(status_code=404, detail="Source or session not found") from None
     except Exception as e:
         logger.error(f"Error updating source chat session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error updating source chat session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error updating source chat session: {str(e)}") from e
 
 
 @router.delete("/sources/{source_id}/chat/sessions/{session_id}", response_model=SuccessResponse)
@@ -310,10 +323,10 @@ async def delete_source_chat_session(
 
         return SuccessResponse(success=True, message="Source chat session deleted successfully")
     except NotFoundError:
-        raise HTTPException(status_code=404, detail="Source or session not found")
+        raise HTTPException(status_code=404, detail="Source or session not found") from None
     except Exception as e:
         logger.error(f"Error deleting source chat session: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error deleting source chat session: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error deleting source chat session: {str(e)}") from e
 
 
 async def stream_source_chat_response(
@@ -425,4 +438,4 @@ async def send_message_to_source_chat(
         raise
     except Exception as e:
         logger.error(f"Error sending message to source chat: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"Error sending message: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error sending message: {str(e)}") from e

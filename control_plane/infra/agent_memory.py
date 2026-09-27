@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 """
 Knight Flash Memory — Redis Agent Memory with 24-hour Purge System.
 
@@ -7,7 +5,7 @@ Stores session context, terminal state, and long-term facts for the Hive.
 Automatic purge of stale sessions (>24h) and periodic compaction.
 
 Usage:
-    from control_plane.agent_memory import KnightMemory
+    from control_plane.infra.agent_memory import KnightMemory
     mem = KnightMemory()
 
     # Log a dispatch

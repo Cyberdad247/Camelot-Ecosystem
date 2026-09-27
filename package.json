@@ -4,10 +4,7 @@
   "private": true,
   "packageManager": "npm@11.11.0",
   "description": "Sovereign System monorepo — PWA + Bifrost gateway + Prisma DB (Vault_Ω / Raven_Ω / Echo_Ω)",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "workspaces": ["apps/*", "packages/*"],
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -32,7 +29,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/express": "^5.0.6",
-    "@types/node": "^20.10.5",
+    "@types/node": "^26.6.1",
     "@types/ws": "^8.18.1",
     "jsdom": "^29.1.1",
     "prisma": "^5.22.0",
@@ -42,7 +39,7 @@
     "vitest": "^2.1.8"
   },
   "dependencies": {
-    "@bitkyc08/opencodex": "^2.29.0",
+    "@bitkyc08/opencodex": "^2.57.0",
     "@google/generative-ai": "^0.24.1",
     "@mariozechner/pi-coding-agent": "^0.73.1",
     "@prisma/client": "^5.22.0",

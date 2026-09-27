@@ -3,9 +3,9 @@
   "updated_at": 1787701978.3722885,
   "knights": {
     "MERLIN_OMEGA": {
-      "total_xp": 30500,
+      "total_xp": 31000,
       "level": 6,
-      "missions_completed": 44,
+      "missions_completed": 45,
       "rank": "Archon Sovereign"
     },
     "SIR_BORIS": {
@@ -62,10 +62,16 @@
       "missions_completed": 14,
       "rank": "Grand Knight Commander"
     },
+    "SIR_LUKAS": {
+      "total_xp": 12500,
+      "level": 4,
+      "missions_completed": 3,
+      "rank": "Master of the Blade"
+    },
     "SIR_LUCAS": {
       "total_xp": 12500,
       "level": 4,
-      "missions_completed": 2,
+      "missions_completed": 3,
       "rank": "Master of the Blade"
     }
   }

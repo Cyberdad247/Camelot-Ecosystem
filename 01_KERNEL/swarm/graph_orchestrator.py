@@ -46,7 +46,7 @@ def log_to_ledger(task_name: str, author: str, status: str, notes: str):
     last_id = 2000 # Default if we can't find it
     try:
         content = ledger_path.read_text(encoding="utf-8")
-        lines = [l for l in content.splitlines() if l.startswith("|") and not l.startswith("| ID")]
+        lines = [ln for ln in content.splitlines() if ln.startswith("|") and not ln.startswith("| ID")]
         if lines:
             # Extract IDs from lines
             ids = []

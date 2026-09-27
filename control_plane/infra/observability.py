@@ -20,7 +20,7 @@ import functools
 import time
 from typing import Any, Callable
 
-from control_plane.tracing import get_tracer
+from control_plane.infra.tracing import get_tracer
 
 try:
     from prometheus_client import Counter, Histogram, start_http_server

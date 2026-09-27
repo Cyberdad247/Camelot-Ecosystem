@@ -2,6 +2,39 @@
   {
     "knight_id": "LUKAS_OMEGA",
     "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 ingest: //EXECUTE_PROMPT forge-0123456789abcdef",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lukas_omega\",\n  \"session_id\": \"sess_knight_lukas_omega\",\n  \"intent\": \"//EXECUTE_PROMPT forge-0123456789abcdef\",\n  \"preview\": \"{\\\"action\\\": \\\"execute_prompt\\\", \\\"cartridge_id\\\": \\\"forge-0123456789abcdef\\\", \\\"approval_id\\\": null}\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lukas_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LUKAS_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/lukas_omega",
+    "updated_at": "2026-09-23T16:02:40.993141+00:00"
+  },
+  {
+    "knight_id": "LUKAS_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for LUKAS_OMEGA",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_lukas_omega\",\n  \"session_id\": \"sess_knight_lukas_omega\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/lukas_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LUKAS_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/lukas_omega",
+    "updated_at": "2026-09-23T16:02:40.964231+00:00"
+  },
+  {
+    "knight_id": "LUKAS_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "note",
+    "title": "L2_Artifact_//EXECUTE_PROMPT forge-0123456789abcdef",
+    "content": "{\"action\": \"execute_prompt\", \"cartridge_id\": \"forge-0123456789abcdef\", \"approval_id\": null}",
+    "vfs_path": "vfs://worldtree/knights/lukas_omega/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_LUKAS_OMEGA",
+    "open_viking_tether": "open_viking://worldtree/lukas_omega",
+    "updated_at": "2026-09-23T16:02:36.934190+00:00"
+  },
+  {
+    "knight_id": "LUKAS_OMEGA",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "artifact_type": "note",
     "title": "L2_Artifact_//EXECUTE_PROMPT forge-0123456789abcdef",
     "content": "{\"action\": \"execute_prompt\", \"cartridge_id\": \"forge-0123456789abcdef\", \"approval_id\": null}",

@@ -1,6 +1,237 @@
 [
   {
     "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-23T16:02:57.731449+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-23T16:02:57.122082+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-23T16:02:56.670625+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-23T16:02:56.443051+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "notebooklm_link",
+    "title": "Helios NotebookLM link verification: DEGRADED",
+    "content": "{\n  \"stale_session_file\": true,\n  \"sdk_present\": true,\n  \"live_verified\": false\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-23T16:02:48.756054+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:39:42.274364+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:39:41.649663+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:39:40.638149+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:39:40.066038+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:38:43.573360+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:38:42.919543+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:38:41.933832+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:38:41.359489+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:37:02.558689+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:37:01.877320+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:37:00.842739+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:37:00.244318+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:35:54.014855+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:35:53.721151+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:35:52.681841+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
+    "worldtree_home": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
+    "artifact_type": "honcho_memory_engine",
+    "title": "Honcho L4 embedding for SIR_HELIO",
+    "content": "{\n  \"engine\": \"honcho_self_hosted\",\n  \"user_id\": \"knight_sir_helio\",\n  \"session_id\": \"sess_knight_sir_helio\",\n  \"vfs_mount\": \"vfs://worldtree/memory/honcho/\",\n  \"mode\": \"L4_metamemory\"\n}",
+    "vfs_path": "vfs://worldtree/knights/sir_helio/tether.json",
+    "mempalace_wing": "WING_WORLDTREE_SIR_HELIO",
+    "open_viking_tether": "open_viking://worldtree/sir_helio",
+    "updated_at": "2026-09-22T14:35:51.587046+00:00"
+  },
+  {
+    "knight_id": "SIR_HELIO",
     "cloudbrain_uuid": "56820318-bb91-451f-aac4-4b46424898cf",
     "spark_id": "0x56820318BB91451FAAC44B46424898CF",
     "role": "Sovereign Spire Sentinel, Telemetry Cockpit & CloudBrain Synergy",
@@ -14,6 +245,15 @@
       "Master_Compendium.md",
       "system_instruction.md"
     ],
+    "five_pillars": [
+      "Heimdall (Bifrost Watcher)",
+      "Alexander Graham Bell (Acoustic Transmission)",
+      "Heinrich Hertz (Electromagnetic Waves)",
+      "Guglielmo Marconi (Wireless Telemetry)",
+      "Orpheus (Acoustic Power)"
+    ],
+    "law_of_non_reproducibility": "ENFORCED",
+    "rpg_progression": "Glass Observatory Level & XP Matrix",
     "worldtree_root": "a0a4bfb9-e847-4c38-be39-7aee398f0795",
     "mesh_nodes": [
       "cybertronia",
@@ -22,6 +262,6 @@
       "lakesha"
     ],
     "status": "LIVING_CLOUDBRAIN_EMBEDDED",
-    "updated_at": "2026-09-20T00:29:47.551119+00:00"
+    "updated_at": "2026-09-21T23:00:51.689974+00:00"
   }
 ]

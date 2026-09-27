@@ -6,15 +6,8 @@
   "signer_trust_band": "camelot-community",
   "hash_algorithm": "sha256",
   "signature_algorithm": "ed25519",
-  "entrypoints": [
-    "execute",
-    "summarize",
-    "fetch"
-  ],
-  "supported_node_profiles": [
-    "research",
-    "experience"
-  ],
+  "entrypoints": ["execute", "summarize", "fetch"],
+  "supported_node_profiles": ["research", "experience"],
   "requested_capabilities": [
     "vfs.read",
     "process.allowlisted",
@@ -38,21 +31,13 @@
     "timeout_s": 300,
     "max_workers": 2
   },
-  "verification": [
-    "contract_test",
-    "Gideon_verdict",
-    "Scribe_summary",
-    "receipt_issued"
-  ],
+  "verification": ["contract_test", "Gideon_verdict", "Scribe_summary", "receipt_issued"],
   "risk_tier_invariant_cap": "T2",
   "rollback": {
     "strategy": "manual_compensation_required"
   },
   "compat": {
-    "supported_knight_classes": [
-      "research_agent",
-      "experience_agent"
-    ]
+    "supported_knight_classes": ["research_agent", "experience_agent"]
   },
   "artifact_hash": "sha256:c5851df899820b609cbba030c0a45b6c825624505804a21a30040084ef9f2ed7",
   "signature": "ed25519:etRU4mwzxGEQNiqA8CiXUfFNKxSYXZNwXbM99h8hthco_dDU0xGJ3WdQGUC86ckf2l7CTl3zOBU11qrf66CuCA"

@@ -54,7 +54,7 @@ class AppwriteMemoryBridge:
                         {"last_accessed": datetime.utcnow().isoformat()},
                     )
                     return True
-                except:
+                except Exception:
                     pass
             print(f"Appwrite Sync Error: {e}")
             return False

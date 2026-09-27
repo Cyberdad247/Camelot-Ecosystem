@@ -1,0 +1,86 @@
+{
+  "schema_version": "camelot.omni-voice-dag/1",
+  "fingerprint": "νKG_CRYSTAL_OMEGA_MARK39_REYA_NEXUS",
+  "system_identity": "OMEGA_MARK39_REYA_NEXUS",
+  "hardware_ceiling_mb": 512,
+  "provenance": {
+    "origin": "dual_repo_assimilation",
+    "trust": "sovereign_meta_compiler_harness",
+    "governance": "AGENTS.md evidence classes — confirmed upon live execution",
+    "root_orchestrator": "ANYA_Ω",
+    "hitl_required_for_process_launch": false
+  },
+  "prime_directive": {
+    "root": "ANYA_Ω",
+    "role": "ASSIMILATION_HYPERVISOR",
+    "constraint": "8GB_EDGE_CEILING ➔ (Python_Bloat == PURGED)",
+    "strategy": "Assimilate Gemini Live real-time audio streams into Bifrost Bridge; prepare reya for structural injection"
+  },
+  "kinetic_flow_dag": [
+    {
+      "step": 1,
+      "name": "OBSERVE_&_EXTRACT",
+      "knight": "LADY_APIS",
+      "action": "Strip Gemini Audio/Vision routing logic from Mark-XXXIX-OR",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "packages/multivoice-router/src/hooks/use-gemini-live.ts"
+      ],
+      "status": "EXTRACTED"
+    },
+    {
+      "step": 2,
+      "name": "ORIENT_&_PRUNE",
+      "knight": "SIR_SYNTAX",
+      "action": "Execute RTK Scythe on Playwright/PyAutoGUI dependencies. Replace with bare-metal WASI equivalents",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "02_FORGE/assimilation/reya/specs/HYBRID_ROUTING_MATRIX.md"
+      ],
+      "status": "PRUNED"
+    },
+    {
+      "step": 3,
+      "name": "DECIDE_&_ROUTE",
+      "knight": "MERLIN_Ω",
+      "action": "Wire OpenRouter tool-fallback logic into Camelot-OS Polyglot Matrix",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "04_KINETIC/multivoice/orchestration/router.go"
+      ],
+      "status": "ROUTED"
+    },
+    {
+      "step": 4,
+      "name": "ACT_&_SANDBOX",
+      "knight": "SIR_CODEX",
+      "action": "Compile extracted voice engine into systemd daemon limited by cgroups v2",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "02_FORGE/assimilation/reya/scaffold/scaffold_manifest.json"
+      ],
+      "status": "SANDBOXED"
+    },
+    {
+      "step": 5,
+      "name": "VERIFY_&_WAIT",
+      "knight": "PALADIN_OCTEM",
+      "action": "Standby for reya uncloaking. Enforce 10-line atomic code firewall on ingress",
+      "evidence_class": "confirmed",
+      "resolved_paths": [
+        "02_FORGE/assimilation/reya/reya_hypervisor_gate.py"
+      ],
+      "status": "ARMED_STANDBY"
+    }
+  ],
+  "hybrid_routing_matrix": {
+    "voice_vision_engine": "Gemini_Live_API ➔ Lord_Vesper_WebAudio ➔ Sub-100ms TTFA",
+    "tool_execution_engine": "OpenRouter_FreeTier ➔ Sir_Octavian_Kinetic_Hand ➔ Background_Task"
+  },
+  "harmony_runes": [
+    "//EXTRACT_MARK_39_AUDIO_CORE",
+    "//SANDBOX_PYTHON_DEPENDENCIES",
+    "//AWAIT_REYA_UNCLOAKING",
+    "⚜️_SOVEREIGN_TRUTH"
+  ]
+}

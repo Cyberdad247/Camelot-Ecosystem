@@ -39,7 +39,7 @@ const DEFAULT_POLICY: VoiceBudgetPolicy = {
   preferLocal: true,
 };
 
-const LOCAL_ENGINES = ['kokoro_onnx', 'piper', 'browser_speech_synthesis', 'android_system_tts'];
+const LOCAL_ENGINES = ['vibevoice_realtime', 'kokoro_onnx', 'piper', 'browser_speech_synthesis', 'android_system_tts'];
 const REMOTE_FREE_ENGINES = ['omniroute_free_voice', 'free_tts_endpoint'];
 const PAID_ENGINES = ['suno', 'udio', 'notebooklm_audio', 'premium_cloud_tts'];
 

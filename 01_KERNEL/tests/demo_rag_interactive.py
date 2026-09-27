@@ -25,7 +25,7 @@ if sys.platform == 'win32':
     sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
     sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
-from integrations.haystack_ukg_bridge import HaystackUKGBridge
+from integrations.haystack_ukg_bridge import HaystackUKGBridge  # noqa: E402
 
 
 def print_banner():

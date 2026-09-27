@@ -27,7 +27,7 @@ def verify_cloud_sync():
             print("✅ [UPTIME] API is Radiant (Online).")
         else:
             print("⚠️ [UPTIME] API is Degraded.")
-    except:
+    except Exception:
         print("❌ [UPTIME] API is Offline.")
 
     # 2. Check Data Integrity

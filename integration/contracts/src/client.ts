@@ -44,12 +44,16 @@ export interface CamelotClientOptions {
   fetchImpl?: typeof fetch;
   /** Injectable for tests; defaults to global WebSocket. */
   webSocketImpl?: typeof WebSocket;
+  /** Bearer token for the governed surface. The gateway refuses every route
+   *  except /healthz without it. */
+  token?: string;
 }
 
 export class CamelotClient {
   readonly #baseUrl: string;
   readonly #fetch: typeof fetch;
   readonly #WebSocket: typeof WebSocket | undefined;
+  readonly #token: string;
 
   constructor(options: CamelotClientOptions) {
     this.#baseUrl = options.baseUrl.replace(/\/+$/, '');
@@ -58,6 +62,7 @@ export class CamelotClient {
     this.#fetch = options.fetchImpl ?? ((...args: Parameters<typeof fetch>) => fetch(...args));
     this.#WebSocket =
       options.webSocketImpl ?? (typeof WebSocket !== 'undefined' ? WebSocket : undefined);
+    this.#token = options.token ?? '';
     Object.freeze(this);
   }
 
@@ -87,13 +92,23 @@ export class CamelotClient {
       throw new Error('No WebSocket implementation available');
     }
     const wsBase = this.#baseUrl.replace(/^http/, 'ws');
+    // A browser cannot set Authorization on a WebSocket handshake, so the
+    // token rides the query string here — the gateway accepts it on this route
+    // only, for that reason.
+    const query = this.#token ? `?token=${encodeURIComponent(this.#token)}` : '';
     const socket = new this.#WebSocket(
-      `${wsBase}/v1/sessions/${encodeURIComponent(sessionId)}/events`,
+      `${wsBase}/v1/sessions/${encodeURIComponent(sessionId)}/events${query}`,
     );
     socket.onmessage = (msg: MessageEvent) => {
       onEvent(JSON.parse(String(msg.data)) as SessionEvent);
     };
     return () => socket.close();
+  }
+
+  /** Authorization header, omitted entirely when no token is configured so
+   *  the failure is a clean 401 rather than a malformed header. */
+  #authHeaders(): Record<string, string> {
+    return this.#token ? { authorization: `Bearer ${this.#token}` } : {};
   }
 
   #guard(path: string): void {
@@ -107,7 +122,7 @@ export class CamelotClient {
     this.#guard(path);
     const res = await this.#fetch(`${this.#baseUrl}${path}`, {
       method: 'POST',
-      headers: { 'content-type': 'application/json' },
+      headers: { 'content-type': 'application/json', ...this.#authHeaders() },
       body: JSON.stringify(body),
     });
     if (!res.ok) {
@@ -119,7 +134,7 @@ export class CamelotClient {
 
   async #get<T>(path: string): Promise<T> {
     this.#guard(path);
-    const res = await this.#fetch(`${this.#baseUrl}${path}`);
+    const res = await this.#fetch(`${this.#baseUrl}${path}`, { headers: this.#authHeaders() });
     if (!res.ok) {
       const text = await res.text();
       throw new Error(`${path} -> HTTP ${res.status}: ${text}`);

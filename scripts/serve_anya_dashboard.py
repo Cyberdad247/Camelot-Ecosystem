@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 """Serve the built Anya Dashboard with SPA route fallback."""
 
 from __future__ import annotations

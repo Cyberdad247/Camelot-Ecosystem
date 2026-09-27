@@ -1,5 +1,39 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md", "harness.md"],
+  "share": "disabled",
+  "skills": {
+    "paths": [".agents/skills"]
+  },
+  "permission": {
+    "edit": {
+      "*": "allow",
+      "**/PROVENANCE_LEDGER.md": "deny",
+      "**/HELIO_PATCH.json": "deny",
+      "**/omnivoice-router.js": "deny",
+      "**/.env": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git log*": "allow",
+      "git diff*": "allow",
+      "git branch*": "allow",
+      "npm run lint*": "allow",
+      "npm run typecheck*": "allow",
+      "npm run test*": "allow",
+      "cargo check*": "allow",
+      "cargo test*": "allow",
+      "python -m pytest tests*": "allow",
+      "python -m control_plane.infra.vps_hub_client --status": "allow",
+      "python -m control_plane.infra.vps_hub_client --validate *": "allow",
+      "python -m control_plane.infra.vps_hub_client --lease-scope *": "allow",
+      "python -m control_plane.runes.runic_router --rune VPS_HUB*": "allow",
+      "git push --force*": "deny",
+      "git gc*": "deny",
+      "rm -rf *": "deny"
+    }
+  },
   "mcp": {
     "graft": {
       "type": "local",

@@ -1,0 +1,6 @@
+{
+  "name": "Camelot-OS Sovereign Terminal & VFS Matrix",
+  "description": "Camelot-OS Living Notebook System with ThreeUI Spatial WebGPU Engine, Multivoice-Router Underlayer, Sovereign Digital Factory, and HiveIDE Command Deck",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
