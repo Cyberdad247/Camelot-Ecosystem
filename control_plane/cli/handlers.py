@@ -135,6 +135,18 @@ def _handle_hermes(args: Any, _cm: Any, _pm: Any, _argv: list[str]) -> int:
     return 0 if output.get("status") in {"CONFIGURED", "ONLINE", "DEGRADED"} else 2
 
 
+def _handle_bifrost(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str]) -> int:
+    from control_plane.cli.bifrost_cmd import handle_bifrost
+
+    return handle_bifrost(args, config_mgr, prov_mgr, argv)
+
+
+def _handle_contracts(args: Any, config_mgr: Any, prov_mgr: Any, argv: list[str]) -> int:
+    from control_plane.cli.contracts_cmd import handle_contracts
+
+    return handle_contracts(args, config_mgr, prov_mgr, argv)
+
+
 # ---------------------------------------------------------------------------
 # ledger
 # ---------------------------------------------------------------------------
@@ -1000,6 +1012,8 @@ COMMAND_REGISTRY: dict[str, HandlerFn] = {
     "triage": _handle_triage,
     "orchestrator": _handle_orchestrator,
     "hermes": _handle_hermes,
+    "bifrost": _handle_bifrost,
+    "contracts": _handle_contracts,
     "ledger": _handle_ledger,
     "toon": _handle_toon,
     "glyph": _handle_glyph,
