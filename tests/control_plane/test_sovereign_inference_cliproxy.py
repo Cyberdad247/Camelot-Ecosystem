@@ -53,6 +53,14 @@ def proxy_url():
         thread.join()
 
 
+def test_cliproxy_does_not_ship_a_default_credential(monkeypatch, proxy_url):
+    monkeypatch.delenv("CLIPROXY_API_KEY", raising=False)
+
+    backend = CLIProxyBackend(base_url=proxy_url)
+
+    assert backend._api_key == ""
+
+
 def test_cliproxy_discovers_models_and_uses_openai_chat_shape(proxy_url):
     backend = CLIProxyBackend(base_url=proxy_url, api_key="fixture-proxy-key")
     assert backend.list_models() == ["reasoner", "codex"]

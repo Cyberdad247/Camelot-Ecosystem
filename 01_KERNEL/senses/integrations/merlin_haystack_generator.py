@@ -24,7 +24,8 @@ except ImportError:
     HAYSTACK_AVAILABLE = False
     # Stub for type hints
     def component(cls): return cls
-    class Document: pass
+    class Document:
+        pass
 
 # Merlin engine import
 try:

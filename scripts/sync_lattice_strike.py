@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 # -*- coding: utf-8 -*-
 """
 //INITIATE_SYNCHRONIZATION_STRIKE — 7-agent consensus bridge
@@ -91,7 +89,7 @@ for f in CAMELOT_HOME.rglob("*.py"):
     try:
         prod_src += f.read_text(encoding="utf-8", errors="replace")[:300]
     except Exception:
-            pass
+        pass
 
 gideon_clean = True
 gideon_flags = []

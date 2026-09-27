@@ -5,7 +5,6 @@ Unit tests for PaladinCrucibleEngine (Phase 4 Z3 Formal Prover).
 """
 from __future__ import annotations
 
-import pytest
 from control_plane.infra.paladin_crucible import PaladinCrucibleEngine
 
 def test_paladin_crucible_memory_boundedness():

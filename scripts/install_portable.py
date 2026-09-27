@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-# SPDX-License-Identifier: MIT
-
 """
 CAMELOT-OS Portable Installer — Zero Dependencies
 WARP_GATE v1.0.0
@@ -47,8 +45,12 @@ def banner():
     print(f"{YELLOW}{BOLD}  ============================================{RESET}\n")
 
 def step(msg: str):  print(f"\n{CYAN}{BOLD}  >>  {RESET}{msg}")
-def ok(msg: str):    print(f"  {GREEN}[OK]{RESET} {msg}")
-def warn(msg: str):  print(f"  {YELLOW}[!!]{RESET} {msg}")
+def ok(msg: str):
+    print(f"  {GREEN}[OK]{RESET} {msg}")
+
+def warn(msg: str):
+    print(f"  {YELLOW}[!!]{RESET} {msg}")
+
 def fail(msg: str):
     print(f"  {RED}[XX]{RESET} {msg}")
     sys.exit(1)

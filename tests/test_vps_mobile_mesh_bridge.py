@@ -22,6 +22,15 @@ def test_mesh_bridge_rejects_missing_or_wrong_token(monkeypatch):
     assert is_mesh_request_authorized({"x-camelot-token": "fixture-mesh-token"}) is True
 
 
+def test_mesh_bridge_rejects_blank_environment_tokens(monkeypatch):
+    for token in ("", " ", "\t"):
+        monkeypatch.setenv("MESH_BRIDGE_TOKEN", token)
+        assert is_mesh_request_authorized({"x-camelot-token": token}) is False
+
+    monkeypatch.delenv("MESH_BRIDGE_TOKEN", raising=False)
+    assert is_mesh_request_authorized({"x-camelot-token": "any-token"}) is False
+
+
 def test_edge_endpoint_rejects_missing_signed_envelope(monkeypatch):
     monkeypatch.delenv("CAMELOT_EDGE_PUBLIC_KEYS_JSON", raising=False)
 

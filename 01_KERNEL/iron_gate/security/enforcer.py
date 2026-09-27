@@ -121,7 +121,7 @@ class PolicyEnforcer:
             regex = "^" + re.escape(pattern).replace("\\*", ".*") + "$"
             flags = re.IGNORECASE if os.name == "nt" else 0
             return bool(re.match(regex, target, flags=flags))
-        except:
+        except Exception:
             return False
 
 

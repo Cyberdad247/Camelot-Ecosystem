@@ -49,7 +49,7 @@ sys.path.insert(0, str(REPO_ROOT / "01_KERNEL"))
 sys.path.insert(0, str(REPO_ROOT / "vfs"))
 
 from vfs.worldtree_vkg_sync import worldtree_vkg_sync, WORLDTREE_UUID, VPS_IP, VPS_TS_IP
-from vfs.notebooklm_client import push_source_async, query_notebook_async
+from vfs.notebooklm_client import push_source_async
 from vfs.open_notebook_bridge import OpenNotebookBridge
 
 LADY_MNEMOSYNE_ID = "LADY_MNEMOSYNE"

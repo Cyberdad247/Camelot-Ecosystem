@@ -13,7 +13,6 @@ from __future__ import annotations
 
 import datetime
 from datetime import timezone
-from pathlib import Path
 import pytest
 
 from control_plane.sandbox.wasmtime_runner import (

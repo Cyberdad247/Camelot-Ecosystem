@@ -4,3 +4,5 @@
 *.db
 gateway/gateway
 camelot-node-agent
+# minted per stack by scripts/dev-up.sh
+kickbox/dev-token.txt

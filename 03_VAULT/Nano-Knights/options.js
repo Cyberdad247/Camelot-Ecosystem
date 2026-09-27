@@ -98,7 +98,7 @@ function renderResults(results) {
     let html = '';
     const renderCat = (title, items) => {
         if (!items || items.length === 0) return '';
-        let list = items.map(i => `
+        const list = items.map(i => `
             <div class="result-item ${i.status.toLowerCase()}">
                 <span class="status">[${i.status}]</span>
                 <span class="msg">${i.message}</span>

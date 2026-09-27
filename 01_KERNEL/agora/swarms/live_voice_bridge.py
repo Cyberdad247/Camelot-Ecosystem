@@ -10,6 +10,7 @@ import logging
 import os
 
 from agora.swarms.piper_tts import synthesize_stream
+from livekit import api as auth
 from livekit import rtc
 
 logging.basicConfig(level=logging.INFO)

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { AionTimelineCache } from './aionTimeline';
 
 describe('AionTimelineCache', () => {
@@ -6,7 +6,7 @@ describe('AionTimelineCache', () => {
     const timeline = new AionTimelineCache(3);
     timeline.push({ cpu: 15, ram: 42 });
     timeline.push({ cpu: 25, ram: 43 });
-    
+
     expect(timeline.getHistory().length).toBe(2);
     expect(timeline.getFrame(0)?.cpu).toBe(15);
   });
@@ -16,7 +16,7 @@ describe('AionTimelineCache', () => {
     timeline.push({ cpu: 10, ram: 40 });
     timeline.push({ cpu: 20, ram: 41 });
     timeline.push({ cpu: 30, ram: 42 });
-    
+
     expect(timeline.getHistory().length).toBe(2);
     expect(timeline.getFrame(0)?.cpu).toBe(20);
   });

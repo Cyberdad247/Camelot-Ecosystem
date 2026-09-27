@@ -1,19 +1,19 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import Articles from './pages/Articles';
+import Navbar from './components/Navbar';
 import ArticleDetail from './pages/ArticleDetail';
-import Podcasts from './pages/Podcasts';
+import Articles from './pages/Articles';
+import Home from './pages/Home';
 import PodcastDetail from './pages/PodcastDetail';
-import Sources from './pages/Sources';
-import SourceDetail from './pages/SourceDetail';
-import SourceEdit from './pages/SourceEdit';
-import StudioLanding from './pages/StudioLanding';
-import StudioChat from './pages/StudioChat';
-import Voyager from './pages/Voyager';
+import Podcasts from './pages/Podcasts';
 import SocialMedia from './pages/SocialMedia';
 import SocialMediaDetail from './pages/SocialMediaDetail';
+import SourceDetail from './pages/SourceDetail';
+import SourceEdit from './pages/SourceEdit';
+import Sources from './pages/Sources';
+import StudioChat from './pages/StudioChat';
+import StudioLanding from './pages/StudioLanding';
+import Voyager from './pages/Voyager';
 
 const AppLayout = ({ children }) => {
   const location = useLocation();
@@ -118,21 +118,21 @@ function App() {
             }
           />
           <Route
-  path="/social-media"
-  element={
-    <AppLayout>
-      <SocialMedia />
-    </AppLayout>
-  }
-/>
-<Route
-  path="/social-media/:postId"
-  element={
-    <AppLayout>
-      <SocialMediaDetail />
-    </AppLayout>
-  }
-/>
+            path="/social-media"
+            element={
+              <AppLayout>
+                <SocialMedia />
+              </AppLayout>
+            }
+          />
+          <Route
+            path="/social-media/:postId"
+            element={
+              <AppLayout>
+                <SocialMediaDetail />
+              </AppLayout>
+            }
+          />
         </Routes>
       </div>
     </Router>

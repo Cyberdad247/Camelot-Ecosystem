@@ -10,9 +10,6 @@ from __future__ import annotations
 import argparse
 import io
 import json
-import sys
-from pathlib import Path
-from typing import Any, Dict
 from unittest.mock import patch
 
 import pytest
@@ -24,7 +21,6 @@ from control_plane.cli.pipeline_cmd import (
     handle_pipeline_status,
     handle_pipeline_verify,
 )
-from control_plane.pipeline.sovereign_pipeline import PipelineStatus
 
 
 @pytest.fixture

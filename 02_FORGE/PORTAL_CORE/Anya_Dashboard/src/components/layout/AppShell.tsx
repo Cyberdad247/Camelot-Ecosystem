@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Outlet } from 'react-router-dom';
-import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
-import Sidebar from './Sidebar';
 import MobileNav from '@/components/ui/BottomNav';
 import { useDisplayProfile } from '@/hooks/useDisplayProfile';
+import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 export default function AppShell() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -22,10 +22,11 @@ export default function AppShell() {
               onClick={() => setSidebarOpen((s) => !s)}
               className="rounded p-1 text-slate-500 hover:text-slate-300 hover:bg-slate-800/50 transition-colors"
             >
-              {sidebarOpen
-                ? <PanelLeftClose className="h-4 w-4" />
-                : <PanelLeftOpen className="h-4 w-4" />
-              }
+              {sidebarOpen ? (
+                <PanelLeftClose className="h-4 w-4" />
+              ) : (
+                <PanelLeftOpen className="h-4 w-4" />
+              )}
             </button>
             <div className="flex items-center gap-4 text-[10px] font-mono text-slate-500 w-full justify-between select-none">
               <span className="uppercase tracking-widest text-slate-600 font-bold">

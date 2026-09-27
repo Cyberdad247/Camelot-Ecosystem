@@ -7,10 +7,9 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-import pytest
 
 from control_plane.infra.hermes_bridge import CHANNELS
-from control_plane.multivoice_bridge import MultivoiceBridge, parse_metrics
+from control_plane.multivoice_bridge import MultivoiceBridge
 from control_plane.runes.runic_router import RUNIC_COMMANDS, normalize_rune, route_rune
 
 

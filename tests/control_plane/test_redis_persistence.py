@@ -4,7 +4,6 @@ Test battery for Redis L1 Hot Cache Persistence & Auto-Snapshotting.
 """
 
 from pathlib import Path
-import pytest
 from control_plane.infra.redis_persistence import RedisPersistenceManager
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent

@@ -1,0 +1,96 @@
+{
+  "$comment": [
+    "CANONICAL SKILL DEFINITIONS. This file is the single source of truth for the",
+    "governed skill catalog. The Go registry (gateway/skills_gen.go) and the",
+    "TypeScript contract (contracts/src/skills.gen.ts) are GENERATED from it by",
+    "contracts/gen/generate.mjs — do not edit those by hand.",
+    "",
+    "Adding a skill is one edit here plus a behavior implementation in",
+    "gateway/skills.go (read_only/local_effect fixture or effect body). Run",
+    "`make generate`; `make test` fails if the generated files drift.",
+    "",
+    "The manifest is language-neutral on purpose: Go owns enforcement, TypeScript",
+    "owns the UI contract, and Rust may own node-side effects later. None of them",
+    "owns the product definition."
+  ],
+  "manifestVersion": 1,
+  "policyVersion": "v1",
+  "skills": [
+    {
+      "id": "ops.staging.read",
+      "version": 1,
+      "tier": 1,
+      "effect": "read_only",
+      "confirmationRequired": false,
+      "intent": {
+        "phrases": ["staging status", "staging"],
+        "priority": 0
+      },
+      "idempotency": "natural",
+      "retry": "safe",
+      "artifactKind": "staging_status",
+      "audit": {
+        "kind": "tool.executed",
+        "redactTranscript": false
+      },
+      "summary": "Read staging health. No lease required (ADR-001 rule 1)."
+    },
+    {
+      "id": "deployment.review.prepare",
+      "version": 1,
+      "tier": 2,
+      "effect": "read_only",
+      "confirmationRequired": false,
+      "intent": {
+        "phrases": ["deployment review", "deploy review"],
+        "priority": 0
+      },
+      "idempotency": "natural",
+      "retry": "safe",
+      "artifactKind": "deployment_review_draft",
+      "audit": {
+        "kind": "tool.executed",
+        "redactTranscript": true
+      },
+      "summary": "Draft a deployment review. Effectful by policy tier; produces no durable side effect yet."
+    },
+    {
+      "id": "change_request.create",
+      "version": 1,
+      "tier": 3,
+      "effect": "read_only",
+      "confirmationRequired": true,
+      "intent": {
+        "phrases": ["change request"],
+        "priority": 0
+      },
+      "idempotency": "natural",
+      "retry": "safe",
+      "artifactKind": "change_request",
+      "audit": {
+        "kind": "tool.executed",
+        "redactTranscript": true
+      },
+      "summary": "File a change request. Blocks until a human confirms."
+    },
+    {
+      "id": "notes.local.write",
+      "version": 1,
+      "tier": 2,
+      "effect": "local_effect",
+      "confirmationRequired": false,
+      "intent": {
+        "phrases": ["save a note", "write a note", "note this"],
+        "priority": 10
+      },
+      "idempotency": "lease_single_use",
+      "retry": "never",
+      "artifactKind": "local_note",
+      "audit": {
+        "kind": "tool.executed",
+        "redactTranscript": true
+      },
+      "summary": "Write a size-capped note to the runtime artifact directory. The first skill with a REAL durable side effect: the broker derives the path from skillId+turnId, the skill accepts no path input, and the single-use lease is the idempotency key."
+    }
+  ]
+}

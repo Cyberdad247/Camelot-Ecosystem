@@ -17,12 +17,9 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-import pytest
 
 from control_plane.infra.repo_assimilation_engine import (
     RepoAssimilationEngine,
-    CartridgeAspect,
-    CartridgeConfig,
     build_vps_hub_default_cartridge,
 )
 from control_plane.runes.runic_router import RUNIC_COMMANDS, normalize_rune, route_rune

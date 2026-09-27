@@ -1,6 +1,4 @@
-# SPDX-License-Identifier: MIT
-
-from pathlib import Path  # noqa: E402
+from pathlib import Path
 
 repo_root = Path(__file__).resolve().parent.parent.parent
 import importlib.util  # noqa: E402

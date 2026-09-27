@@ -259,6 +259,10 @@ class PhialEngine:
             else:
                 hyps.append(Hypothesis("probe", tok, f"probe:{tok}"))
 
+        # Hypothesis cap from Phial weight (density control) — bounds both
+        # the forage loop below and baseline filler trimming.
+        cap = max(2, min(_MAX_HYPOTHESES, int(2 + self.weights["hypothesis_count"] * 8)))
+
         # Domain routing from signals (only when explicitly seeded)
         if re.search(r"forage|research|nexus", seed, re.IGNORECASE):
             hyps.append(Hypothesis("imports", "control_plane.runes.runic_router", "domain:router"))
@@ -269,9 +273,6 @@ class PhialEngine:
                     text = str(sig.get("target", ""))[:60]
                     if text:
                         hyps.append(Hypothesis("probe", text, "queue:foraged"))
-
-        # Hypothesis cap from Phial weight (density control) — filler only.
-        cap = max(2, min(_MAX_HYPOTHESES, int(2 + self.weights["hypothesis_count"] * 8)))
 
         # Baseline filler (VFS scaffold integrity + engine self-check).
         # Ouroboros: known-bad baseline targets are skipped while their penalty

@@ -15,16 +15,20 @@ function websocketFromHttp(origin: string) {
   return `${origin}/ws`;
 }
 
-const bridgeOrigin = trimTrailingSlash(withDefault(env.VITE_BIFROST_HTTP_URL, 'http://127.0.0.1:8001'));
-const goRouterOrigin = trimTrailingSlash(withDefault(env.VITE_GO_ROUTER_URL, 'http://127.0.0.1:8077'));
+const bridgeOrigin = trimTrailingSlash(
+  withDefault(env.VITE_BIFROST_HTTP_URL, 'http://127.0.0.1:8001'),
+);
+const goRouterOrigin = trimTrailingSlash(
+  withDefault(env.VITE_GO_ROUTER_URL, 'http://127.0.0.1:8077'),
+);
 
 export const runtimeConfig = {
   appHomeRoute: withDefault(env.VITE_APP_HOME_ROUTE, '/openviking'),
-  visualContextUrl: withDefault(env.VITE_ANYA_VISUAL_CONTEXT_URL, 'https://en.m.wikipedia.org/wiki/Special:Random'),
-  cloudBrainUrl: withDefault(
-    env.VITE_CLOUD_BRAIN_URL,
-    `${bridgeOrigin}/modal/cloud-brain`,
+  visualContextUrl: withDefault(
+    env.VITE_ANYA_VISUAL_CONTEXT_URL,
+    'https://en.m.wikipedia.org/wiki/Special:Random',
   ),
+  cloudBrainUrl: withDefault(env.VITE_CLOUD_BRAIN_URL, `${bridgeOrigin}/modal/cloud-brain`),
   bifrost: {
     origin: bridgeOrigin,
     statusUrl: `${bridgeOrigin}/bifrost/status`,

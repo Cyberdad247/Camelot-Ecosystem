@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 # -*- coding: utf-8 -*-
 """Evolve and Forge Orchestrator.
 
@@ -11,14 +9,14 @@ Implements the //EVOLVE_AND_FORGE composite rune pipeline:
 5. Automatic merge once Sovereign-approved, or raise high-severity alert on failure.
 """
 
-from __future__ import annotations  # noqa: E402
+from __future__ import annotations
 
-import argparse  # noqa: E402
+import argparse
 import json
-import subprocess  # noqa: E402
+import subprocess
 import sys
-from datetime import datetime, timezone  # noqa: E402
-from pathlib import Path  # noqa: E402
+from datetime import datetime, timezone
+from pathlib import Path
 
 # Ensure control_plane can be imported
 REPO_ROOT = Path(__file__).resolve().parent.parent

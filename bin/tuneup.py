@@ -12,7 +12,6 @@ Orchestrates a complete one-command daily maintenance pass:
 5. Synchronizes all 4 cryptographic provenance ledger mirrors
 """
 
-import os
 import sys
 import time
 import subprocess

@@ -48,7 +48,7 @@ else
 fi
 
 # Mesh endpoints must report nothing enrolled.
-node_count=$(curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" \
+node_count=$(gw_curl -sf "http://localhost:$GATEWAY_PORT/v1/nodes" \
   | python3 -c "import json,sys; print(len(json.load(sys.stdin)['nodes']))" 2>/dev/null || echo "?")
 if [[ $node_count == 0 ]]; then
   echo "   ✔ gateway registry is empty (no enrolment happened)"

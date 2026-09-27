@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 """
 SPRINT 8 — Cloud Brain Enrichment (Full Pipeline Closure + Qdrant)
 Protocol: URL source injection + UKG delta for S8 state
@@ -8,15 +6,15 @@ S8-01: Qdrant vector DB docs (qdrant_store.py semantic memory)
 S8-02: sentence-transformers docs (embedding ref for qdrant_store)
 S8-03: UKG_SPRINT8_DELTA_V706 delta note (S8 state)
 """
-from __future__ import annotations  # noqa: E402
+from __future__ import annotations
 
-import asyncio  # noqa: E402
-import importlib.util  # noqa: E402
+import asyncio
+import importlib.util
 import json
 import os
 import sys
-from datetime import datetime, timezone  # noqa: E402
-from pathlib import Path  # noqa: E402
+from datetime import datetime, timezone
+from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

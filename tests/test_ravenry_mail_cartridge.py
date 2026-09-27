@@ -3,7 +3,7 @@
 
 import pytest
 import time
-from control_plane.cartridges.ravenry_mail import RavenryMailCartridge, CapabilityLease
+from control_plane.cartridges.ravenry_mail import RavenryMailCartridge
 
 
 def test_ravenry_mail_lease_enforcement():

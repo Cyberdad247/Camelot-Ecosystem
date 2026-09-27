@@ -5,8 +5,6 @@ Unit tests for OpenNotebookCompactor and TrajectoryHarvestEngine.
 """
 from __future__ import annotations
 
-import pytest
-from pathlib import Path
 from control_plane.infra.open_notebook_compactor import (
     OpenNotebookCompactor,
     TrajectoryHarvestEngine,

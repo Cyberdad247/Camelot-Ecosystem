@@ -29,10 +29,16 @@ sys.path.append(str(_CAMELOT_ROOT / "vfs"))
 # ── Real notebooklm-py SDK ────────────────────────────────────────────────────
 try:
     from notebooklm_client import (
-        push_note as _nlm_push_note,
-        push_source as _nlm_push_source,
-        query_notebook as _nlm_query,
         list_notebooks as _nlm_list,
+    )
+    from notebooklm_client import (
+        push_note as _nlm_push_note,
+    )
+    from notebooklm_client import (
+        push_source as _nlm_push_source,
+    )
+    from notebooklm_client import (
+        query_notebook as _nlm_query,
     )
     _NLM_REAL = True
 except ImportError:

@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: MIT
 
 # -*- coding: utf-8 -*-
+import importlib
 import shutil
 import sys
 import unittest
@@ -14,7 +15,6 @@ project_root = Path(__file__).resolve().parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-import importlib
 
 hydration_mgr_mod = importlib.import_module("01_KERNEL.memory.hydration_manager")
 HydrationManager = hydration_mgr_mod.HydrationManager

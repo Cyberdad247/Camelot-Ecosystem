@@ -11,7 +11,6 @@ from pathlib import Path
 from time import time
 from typing import Dict, List, Optional
 
-from .utils import *
 from .utils import (
     apply_png_predictor,
     clean_pdf_text,
@@ -76,7 +75,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
         try:
             import PyPDF2  # noqa: F401
         except ImportError:
-            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
+            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'") from None
 
         self.image_dpi = image_dpi
         self.image_quality = image_quality
@@ -92,7 +91,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
         try:
             from PyPDF2 import PdfReader
         except ImportError:
-            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
+            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'") from None
 
         start_time = time()
         result = PDFProcessResult(metadata=PDFMetadata(), pages=[], version="1.1")
@@ -140,7 +139,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
             import PyPDF2  # For type checking  # noqa: F401
             from PyPDF2 import PdfReader
         except ImportError:
-            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
+            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'") from None
 
         import concurrent.futures
         import threading
@@ -247,7 +246,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
         try:
             import PyPDF2
         except ImportError:
-            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
+            raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'") from None
 
         if not self.extract_images:
             return []
@@ -437,7 +436,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
 
                 reader = PdfReader(pdf_path)
             except ImportError:
-                raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'")
+                raise ImportError("PyPDF2 is required for PDF processing. Install with 'pip install crawl4ai[pdf]'") from None
 
         meta = reader.metadata or {}
         created = self._parse_pdf_date(meta.get("/CreationDate", ""))
@@ -468,7 +467,7 @@ class NaivePDFProcessorStrategy(PDFProcessorStrategy):
                 minute=int(match[5]),
                 second=int(match[6]),
             )
-        except:
+        except Exception:
             return None
 
 

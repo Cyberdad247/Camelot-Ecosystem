@@ -117,7 +117,7 @@ class SecOps:
                                 if matches:
                                     security["vulnerabilities"] += len(matches)
                                     security["critical_findings"].append(f"Potential secret in {f}")
-                    except:
+                    except Exception:
                         continue
 
         security["critical_findings"] = list(set(security["critical_findings"]))

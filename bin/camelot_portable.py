@@ -95,7 +95,7 @@ _engines     = OMNIROUTE.get("engines", {})
 _constraints = OMNIROUTE.get("constraints", {})
 
 CLIPROXY_URL   = _cliproxy.get("base_url", "http://127.0.0.1:8080/v1")
-CLIPROXY_KEY   = os.environ.get("CLIPROXY_KEY", _cliproxy.get("api_key", "proxy-admin-key"))
+CLIPROXY_KEY   = (os.environ.get("CLIPROXY_KEY") or "").strip()
 OLLAMA_URL     = "http://127.0.0.1:11434/v1"
 STREAM_TIMEOUT = _constraints.get("request_timeout_ms", 60000) / 1000
 
@@ -332,7 +332,9 @@ def _stream(
     fallback_chain: Optional[list[str]] = None,
 ) -> str:
     url = base_url.rstrip("/") + "/chat/completions"
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json"}
+    if api_key:
+        headers["Authorization"] = f"Bearer {api_key}"
     payload = {"model": model, "messages": messages, "stream": True, "temperature": 0.7}
     full: list[str] = []
     try:

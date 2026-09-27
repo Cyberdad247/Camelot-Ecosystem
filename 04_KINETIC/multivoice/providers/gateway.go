@@ -15,9 +15,6 @@ import (
 // existing Claude/Gemini/Codex CLI subscriptions, not pay-per-token API keys.
 // Bifrost dispatches through it. Because it speaks the OpenAI Chat Completions
 // protocol, every Knight routes through it with just a different model string.
-//
-// This is the "utilize the bifrost bridge + omnirouter zero-cost options" path:
-// no paid provider keys, no per-token billing.
 
 func env(key, def string) string {
 	if v := os.Getenv(key); v != "" {
@@ -34,12 +31,10 @@ func GatewayBase() string {
 
 // NewGatewayProvider builds a zero-cost provider that routes a Knight through
 // the Bifrost/CLIProxy gateway with the given free model (e.g. "gpt-4o",
-// "gemini-2.5-flash", "claude-sonnet-4-6"). The local proxy key (CLIPROXY_KEY,
-// default "proxy-admin-key") is NOT a paid credential — it authorizes the
-// loopback proxy only.
+// "gemini-2.5-flash", "claude-sonnet-4-6").
 func NewGatewayProvider(label, model string) *OpenAIProvider {
 	return &OpenAIProvider{
-		APIKey:  env("CLIPROXY_KEY", "proxy-admin-key"),
+		APIKey:  env("CLIPROXY_KEY", ""),
 		Model:   model,
 		BaseURL: GatewayBase(),
 		Client:  &http.Client{Timeout: 60 * time.Second},

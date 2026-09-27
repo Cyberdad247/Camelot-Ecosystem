@@ -936,6 +936,7 @@ class LLMContentFilter(RelevantContentFilter):
                     api_token: str,
                     base_url: Optional[str] = None,
                     extra_args: Dict = None,
+                    chunk_num: int = i + 1,
                 ) -> List[str]:
                     if extra_args is None:
                         extra_args = {}
@@ -943,7 +944,7 @@ class LLMContentFilter(RelevantContentFilter):
                         self.logger.info(
                             "LLM Markdown: Processing chunk {chunk_num}",
                             tag="CHUNK",
-                            params={"chunk_num": i + 1},
+                            params={"chunk_num": chunk_num},
                         )
                     return perform_completion_with_backoff(
                         provider,

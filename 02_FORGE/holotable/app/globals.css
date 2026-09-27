@@ -4,15 +4,15 @@
   /* CAMELOT OS: CYBER-KNIGHT PALETTE */
   --background: #020617; /* Slate 950 */
   --foreground: #f8fafc; /* Slate 50 */
-  
+
   --primary: #a855f7; /* Purple 500 */
   --primary-glow: #a855f7aa;
-  
+
   --secondary: #eab308; /* Yellow 500 */
   --secondary-glow: #eab308aa;
-  
+
   --accent: #06b6d4; /* Cyan 500 */
-  
+
   --glass-border: rgba(255, 255, 255, 0.1);
   --glass-bg: rgba(15, 23, 42, 0.6); /* Slate 900 / 60% */
 }
@@ -23,7 +23,7 @@
   --color-primary: var(--primary);
   --color-secondary: var(--secondary);
   --color-accent: var(--accent);
-  
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

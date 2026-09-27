@@ -3,7 +3,7 @@
 // AVATAR MANAGER (Mobile Logic)
 // Maps Backend Personas to Frontend Assets & Voice Profiles
 
-export type KnightPersona = "Merlin_Omega" | "Lukas_Omega" | "Anya_Omega" | "Sir_Sentinel";
+export type KnightPersona = 'Merlin_Omega' | 'Lukas_Omega' | 'Anya_Omega' | 'Sir_Sentinel';
 
 export interface AvatarState {
   id: KnightPersona;
@@ -14,38 +14,38 @@ export interface AvatarState {
 }
 
 const PROFILES: Record<KnightPersona, AvatarState> = {
-  "Merlin_Omega": {
-    id: "Merlin_Omega",
-    asset: "🔮", // In real app: require('./assets/merlin.riv')
-    voiceId: "onyx",
-    color: "#8A2BE2", // Purple
-    statusMsg: "Architecting Strategy..."
+  Merlin_Omega: {
+    id: 'Merlin_Omega',
+    asset: '🔮', // In real app: require('./assets/merlin.riv')
+    voiceId: 'onyx',
+    color: '#8A2BE2', // Purple
+    statusMsg: 'Architecting Strategy...',
   },
-  "Lukas_Omega": {
-    id: "Lukas_Omega",
-    asset: "🦫", // In real app: require('./assets/lukas.riv')
-    voiceId: "echo",
-    color: "#FF8C00", // Orange
-    statusMsg: "Forging Artifacts..."
+  Lukas_Omega: {
+    id: 'Lukas_Omega',
+    asset: '🦫', // In real app: require('./assets/lukas.riv')
+    voiceId: 'echo',
+    color: '#FF8C00', // Orange
+    statusMsg: 'Forging Artifacts...',
   },
-  "Anya_Omega": {
-    id: "Anya_Omega",
-    asset: "🎭", // In real app: require('./assets/anya.riv')
-    voiceId: "nova",
-    color: "#00FFFF", // Cyan
-    statusMsg: "Awaiting Input"
+  Anya_Omega: {
+    id: 'Anya_Omega',
+    asset: '🎭', // In real app: require('./assets/anya.riv')
+    voiceId: 'nova',
+    color: '#00FFFF', // Cyan
+    statusMsg: 'Awaiting Input',
   },
-  "Sir_Sentinel": {
-    id: "Sir_Sentinel",
-    asset: "🛡️", // In real app: require('./assets/sentinel.riv')
-    voiceId: "fable",
-    color: "#FF0000", // Red
-    statusMsg: "Scanning Perimeter..."
-  }
+  Sir_Sentinel: {
+    id: 'Sir_Sentinel',
+    asset: '🛡️', // In real app: require('./assets/sentinel.riv')
+    voiceId: 'fable',
+    color: '#FF0000', // Red
+    statusMsg: 'Scanning Perimeter...',
+  },
 };
 
 export class AvatarManager {
   static getState(persona: KnightPersona): AvatarState {
-    return PROFILES[persona] || PROFILES["Anya_Omega"];
+    return PROFILES[persona] || PROFILES['Anya_Omega'];
   }
 }

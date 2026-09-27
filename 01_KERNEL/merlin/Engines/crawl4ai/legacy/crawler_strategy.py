@@ -22,8 +22,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.chrome.service import Service as ChromeService
 # from webdriver_manager.chrome import ChromeDriverManager
 # from urllib3.exceptions import MaxRetryError
-from .config import *
-from .utils import *
+from ..utils import sanitize_input_encode, wrap_text
 
 logger = logging.getLogger("selenium.webdriver.remote.remote_connection")
 logger.setLevel(logging.WARNING)
@@ -253,13 +252,13 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
 
             # Execute JS code if provided
             self.js_code = kwargs.get("js_code", self.js_code)
-            if self.js_code and type(self.js_code) == str:
+            if self.js_code and isinstance(self.js_code, str):
                 self.driver.execute_script(self.js_code)
                 # Optionally, wait for some condition after executing the JS code
                 WebDriverWait(self.driver, 10).until(
                     lambda driver: driver.execute_script("return document.readyState") == "complete"
                 )
-            elif self.js_code and type(self.js_code) == list:
+            elif self.js_code and isinstance(self.js_code, list):
                 for js in self.js_code:
                     self.driver.execute_script(js)
                     WebDriverWait(self.driver, 10).until(
@@ -297,16 +296,16 @@ class LocalSeleniumCrawlerStrategy(CrawlerStrategy):
         except InvalidArgumentException as e:
             if not hasattr(e, "msg"):
                 e.msg = sanitize_input_encode(str(e))
-            raise InvalidArgumentException(f"Failed to crawl {url}: {e.msg}")
+            raise InvalidArgumentException(f"Failed to crawl {url}: {e.msg}") from e
         except WebDriverException as e:
             # If e does nlt have msg attribute create it and set it to str(e)
             if not hasattr(e, "msg"):
                 e.msg = sanitize_input_encode(str(e))
-            raise WebDriverException(f"Failed to crawl {url}: {e.msg}")
+            raise WebDriverException(f"Failed to crawl {url}: {e.msg}") from e
         except Exception as e:
             if not hasattr(e, "msg"):
                 e.msg = sanitize_input_encode(str(e))
-            raise Exception(f"Failed to crawl {url}: {e.msg}")
+            raise Exception(f"Failed to crawl {url}: {e.msg}") from e
 
     def take_screenshot(self) -> str:
         try:

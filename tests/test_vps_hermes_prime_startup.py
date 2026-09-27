@@ -2,7 +2,6 @@
 
 import json
 
-import pytest
 
 from control_plane import boot_sequence
 from control_plane.cli.parser import _build_parser

@@ -1,7 +1,6 @@
 # SPDX-License-Identifier: MIT
 """Failing-first test for Cribo bundle validator (Task 3)."""
 
-from pathlib import Path
 from unittest.mock import patch, MagicMock
 from control_plane.infra.cribo_bundle_validator import CriboBundleValidator
 

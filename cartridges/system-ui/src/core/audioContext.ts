@@ -8,7 +8,7 @@
 export class KickboxAudioController {
   public ctx: AudioContext | null = null;
   private gainNode: GainNode | null = null;
-  private volume: number = 1.0;
+  private volume = 1.0;
 
   /** Initialise the AudioContext and connect the master gain node. */
   public init() {

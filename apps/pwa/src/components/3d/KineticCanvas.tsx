@@ -7,6 +7,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import { type WeatherCondition, useClevelandWeather } from '../../hooks/useClevelandWeather';
+import { useGreenComputing } from '../../hooks/useGreenComputing';
 
 const GOLD = '#D4AF37';
 const VIOLET = '#9D4EDD';
@@ -127,11 +128,18 @@ function Scene({ condition, isDay }: { condition: WeatherCondition; isDay: boole
 
 export default function KineticCanvas() {
   const { condition, isDay } = useClevelandWeather();
+  const { isTabVisible, isLowPowerMode } = useGreenComputing();
+
   return (
     <Canvas
       camera={{ position: [0, 0, 18], fov: 32 }}
-      gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
-      dpr={[1, 1.5]}
+      gl={{
+        antialias: !isLowPowerMode,
+        alpha: false,
+        powerPreference: isLowPowerMode ? 'low-power' : 'high-performance',
+      }}
+      dpr={isLowPowerMode ? [0.75, 1] : [1, 1.5]}
+      frameloop={!isTabVisible ? 'never' : isLowPowerMode ? 'demand' : 'always'}
     >
       <Scene condition={condition} isDay={isDay} />
     </Canvas>

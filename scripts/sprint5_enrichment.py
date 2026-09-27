@@ -1,5 +1,3 @@
-# SPDX-License-Identifier: MIT
-
 """
 SPRINT 5 — Cloud Brain Enrichment (NORTHSTAR Phase 3 sources)
 Protocol: URL source injection for Sprint 3+4 technical references
@@ -10,15 +8,15 @@ S5-03: OIDC Core spec + PyJWT (Bifrost Rule C mobile gateway)
 S5-04: Silero VAD model (energy VAD + Silero integration reference)
 S5-05: UKG_SPRINT3_DELTA_V704 delta note (S3+S4 state)
 """
-from __future__ import annotations  # noqa: E402
+from __future__ import annotations
 
-import asyncio  # noqa: E402
-import importlib.util  # noqa: E402
+import asyncio
+import importlib.util
 import json
 import os
 import sys
-from datetime import datetime, timezone  # noqa: E402
-from pathlib import Path  # noqa: E402
+from datetime import datetime, timezone
+from pathlib import Path
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")

@@ -40,11 +40,7 @@
   "primitives": {
     "sub_8gb_edge_ceiling": true,
     "babylonian_static_is_null": true,
-    "topology": [
-      "Vercel_Edge",
-      "Rust_Iron_Daemon_WSS",
-      "Kyber-768_Omni-Router"
-    ],
+    "topology": ["Vercel_Edge", "Rust_Iron_Daemon_WSS", "Kyber-768_Omni-Router"],
     "hardware_tiers": {
       "mobile": {
         "ram_gb": 4,
@@ -119,9 +115,7 @@
         "name": "HARDWARE_ALLOCATION",
         "domain": "SubstrateAdjudication",
         "summary": "Mobile 4GB / Desktop 16GB tier adjudication",
-        "depends_on": [
-          "step_1_auth_shield"
-        ],
+        "depends_on": ["step_1_auth_shield"],
         "subtasks": [
           {
             "id": "2.1",
@@ -163,9 +157,7 @@
         "name": "TOPOLOGY_MOUNT",
         "domain": "Mesh",
         "summary": "Vercel Edge + Rust Iron Daemon WSS + Kyber-768 mTLS",
-        "depends_on": [
-          "step_2_hardware_allocation"
-        ],
+        "depends_on": ["step_2_hardware_allocation"],
         "subtasks": [
           {
             "id": "3.1",
@@ -210,9 +202,7 @@
         "name": "CARTRIDGE_IGNITION",
         "domain": "CartridgeScabbard",
         "summary": "Six business cartridges + scabbard ignite + ledger observability",
-        "depends_on": [
-          "step_3_topology_mount"
-        ],
+        "depends_on": ["step_3_topology_mount"],
         "subtasks": [
           {
             "id": "4.1",
@@ -238,58 +228,42 @@
           {
             "id": "AALIYAH",
             "domain": "Email_SaaS",
-            "vendor_stack": [
-              "Listmonk",
-              "Mautic"
-            ],
+            "vendor_stack": ["Listmonk", "Mautic"],
             "requires_vendor_review": true,
             "knight_lead": "sir_helio"
           },
           {
             "id": "CASTELLON",
             "domain": "Property_Management",
-            "vendor_stack": [
-              "Plane",
-              "Docspell"
-            ],
+            "vendor_stack": ["Plane", "Docspell"],
             "requires_vendor_review": true,
             "knight_lead": "sir_boris"
           },
           {
             "id": "AEGIS",
             "domain": "Streaming_Support",
-            "vendor_stack": [
-              "Chatwoot",
-              "KillBill"
-            ],
+            "vendor_stack": ["Chatwoot", "KillBill"],
             "requires_vendor_review": true,
             "knight_lead": "sir_sentinel"
           },
           {
             "id": "BARISTA",
             "domain": "Coffee_Logistics",
-            "vendor_stack": [
-              "Odoo_Community"
-            ],
+            "vendor_stack": ["Odoo_Community"],
             "requires_vendor_review": true,
             "knight_lead": "sir_forge"
           },
           {
             "id": "CHRONO",
             "domain": "Executive_Scheduling",
-            "vendor_stack": [
-              "Cal.com",
-              "n8n"
-            ],
+            "vendor_stack": ["Cal.com", "n8n"],
             "requires_vendor_review": true,
             "knight_lead": "lord_archivist"
           },
           {
             "id": "LEDGER",
             "domain": "Financial_Core",
-            "vendor_stack": [
-              "Frappe_Accounting"
-            ],
+            "vendor_stack": ["Frappe_Accounting"],
             "requires_vendor_review": true,
             "knight_lead": "sir_gideon"
           }
@@ -355,9 +329,7 @@
   ],
   "feature_gate": {
     "env_var": "CAMELOT_GCMN_STUBS_ENABLED",
-    "accepted_values": [
-      "1"
-    ],
+    "accepted_values": ["1"],
     "default": null,
     "shipped_value": null,
     "hitl_required_before_activation": true,
@@ -614,9 +586,7 @@
       }
     ],
     "runic_router_modifications_sha256_summary": {
-      "audit_required_modules": [
-        "control_plane/runic_router.py"
-      ],
+      "audit_required_modules": ["control_plane/runic_router.py"],
       "audit_sha256": "f99a848226f117848ef90b336d97f6278d91cc6cd98dae6b78fd36bd7cf47f0b",
       "audit_sha256_pre_rename": "53908cc2852a4442798971b76af672de8d33bbd7da5284e98c231b5a98e8e521",
       "audit_at": "2026-07-15T05:35:00Z",

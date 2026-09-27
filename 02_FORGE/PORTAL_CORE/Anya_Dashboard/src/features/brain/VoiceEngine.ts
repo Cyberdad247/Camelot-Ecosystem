@@ -4,7 +4,11 @@
 let voiceReady = false;
 
 function hasSpeechSynthesis(): boolean {
-  return typeof window !== 'undefined' && 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
+  return (
+    typeof window !== 'undefined' &&
+    'speechSynthesis' in window &&
+    'SpeechSynthesisUtterance' in window
+  );
 }
 
 export const initVoice = async () => {

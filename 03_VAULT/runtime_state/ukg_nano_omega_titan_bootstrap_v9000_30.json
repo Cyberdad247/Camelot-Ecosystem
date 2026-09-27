@@ -9,23 +9,17 @@
   "claimed_status": "SYSTEM_INSTRUCTIONS_INTEGRATED_ACTIVATION_PENDING",
   "physical_nodes": {
     "Helio_Hydration": {
-      "stack": [
-        "Frontier Gemini"
-      ],
+      "stack": ["Frontier Gemini"],
       "claimed_core_logic": "deep-context ingestion, scan /brain/ for provenance, construct UKG foundation",
       "evidence_class": "planned"
     },
     "Codex_Fabrication": {
-      "stack": [
-        "Frontier Codex"
-      ],
+      "stack": ["Frontier Codex"],
       "claimed_core_logic": "parse UKG, verify environment dependencies, build atomic Rust/Go scaffolding, wire mTLS zero-trust proxies",
       "evidence_class": "planned"
     },
     "Boris_Presentation": {
-      "stack": [
-        "Claude"
-      ],
+      "stack": ["Claude"],
       "claimed_core_logic": "render Luxury Minimalist Brutalist Dashboard shell, 12-column grid",
       "evidence_class": "planned"
     }

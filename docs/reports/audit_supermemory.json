@@ -7,11 +7,7 @@
   "phases": {
     "architecture": {
       "type": "Service/App",
-      "stack": [
-        "Next.js",
-        "Python",
-        "Node.js"
-      ]
+      "stack": ["Next.js", "Python", "Node.js"]
     },
     "quality": {
       "score": 70,
@@ -19,10 +15,7 @@
       "configs": []
     },
     "testing": {
-      "frameworks": [
-        "Jest",
-        "Pytest"
-      ],
+      "frameworks": ["Jest", "Pytest"],
       "test_count": 8
     },
     "security": {
@@ -31,9 +24,7 @@
     },
     "documentation": {
       "grade": "B",
-      "missing": [
-        "ARCHITECTURE.md"
-      ]
+      "missing": ["ARCHITECTURE.md"]
     }
   },
   "score": {

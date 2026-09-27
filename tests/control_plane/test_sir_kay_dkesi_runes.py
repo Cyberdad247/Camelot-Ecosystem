@@ -10,7 +10,6 @@ the Department of Kinetic Engineering & Systems Implementation (DKESI) Runes:
 
 import json
 from pathlib import Path
-import pytest
 from control_plane.runes.runic_router import normalize_rune, route_rune, RUNIC_COMMANDS
 
 

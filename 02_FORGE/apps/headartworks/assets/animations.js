@@ -22,7 +22,9 @@ function onIntersection(elements, observer) {
 }
 
 function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent = false) {
-  const animationTriggerElements = Array.from(rootEl.getElementsByClassName(SCROLL_ANIMATION_TRIGGER_CLASSNAME));
+  const animationTriggerElements = Array.from(
+    rootEl.getElementsByClassName(SCROLL_ANIMATION_TRIGGER_CLASSNAME),
+  );
   if (animationTriggerElements.length === 0) return;
 
   if (isDesignModeEvent) {
@@ -42,7 +44,9 @@ function initializeScrollAnimationTrigger(rootEl = document, isDesignModeEvent =
 function initializeScrollZoomAnimationTrigger() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const animationTriggerElements = Array.from(document.getElementsByClassName(SCROLL_ZOOM_IN_TRIGGER_CLASSNAME));
+  const animationTriggerElements = Array.from(
+    document.getElementsByClassName(SCROLL_ZOOM_IN_TRIGGER_CLASSNAME),
+  );
 
   if (animationTriggerElements.length === 0) return;
 
@@ -66,7 +70,7 @@ function initializeScrollZoomAnimationTrigger() {
 
         element.style.setProperty('--zoom-in-ratio', 1 + scaleAmount * percentageSeen(element));
       }),
-      { passive: true }
+      { passive: true },
     );
   });
 }
@@ -87,7 +91,7 @@ function percentageSeen(element) {
 
   // When the image is in the viewport
   const distance = scrollY + viewportHeight - elementPositionY;
-  let percentage = distance / ((viewportHeight + elementHeight) / 100);
+  const percentage = distance / ((viewportHeight + elementHeight) / 100);
   return Math.round(percentage);
 }
 
@@ -97,6 +101,10 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 if (Shopify.designMode) {
-  document.addEventListener('shopify:section:load', (event) => initializeScrollAnimationTrigger(event.target, true));
-  document.addEventListener('shopify:section:reorder', () => initializeScrollAnimationTrigger(document, true));
+  document.addEventListener('shopify:section:load', (event) =>
+    initializeScrollAnimationTrigger(event.target, true),
+  );
+  document.addEventListener('shopify:section:reorder', () =>
+    initializeScrollAnimationTrigger(document, true),
+  );
 }

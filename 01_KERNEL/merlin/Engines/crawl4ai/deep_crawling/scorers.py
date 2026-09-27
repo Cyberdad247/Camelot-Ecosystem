@@ -116,37 +116,8 @@ class CompositeScorer(URLScorer):
         self._weights_array = array("f", [s.weight for s in scorers])
         self._score_array = array("f", [0.0] * len(scorers))
 
-    @lru_cache(maxsize=10000)
     def _calculate_score(self, url: str) -> float:
-        """Calculate combined score from all scoring strategies.
-
-        Uses:
-        1. Pre-allocated arrays for scores
-        2. Short-circuit on zero scores
-        3. Optimized normalization
-        4. Vectorized operations where possible
-
-        Args:
-            url: URL to score
-
-        Returns:
-            Combined and optionally normalized score
-        """
-        total_score = 0.0
-        scores = self._score_array
-
-        # Get scores from all scorers
-        for i, scorer in enumerate(self._scorers):
-            # Use public score() method which applies weight
-            scores[i] = scorer.score(url)
-            total_score += scores[i]
-
-        # Normalize if requested
-        if self._normalize and self._scorers:
-            count = len(self._scorers)
-            return total_score / count
-
-        return total_score
+        return _CompositeScorer__calculate_score_cached(self, url)
 
     def score(self, url: str) -> float:
         """Public scoring interface with stats tracking.
@@ -171,10 +142,8 @@ class KeywordRelevanceScorer(URLScorer):
         # Pre-process keywords once
         self._keywords = [k if case_sensitive else k.lower() for k in keywords]
 
-    @lru_cache(maxsize=10000)
     def _url_bytes(self, url: str) -> bytes:
-        """Cache decoded URL bytes"""
-        return url.encode("utf-8") if self._case_sensitive else url.lower().encode("utf-8")
+        return _KeywordRelevanceScorer__url_bytes_cached(self, url)
 
     def _calculate_score(self, url: str) -> float:
         """Fast string matching without regex or byte conversion"""
@@ -232,22 +201,8 @@ class PathDepthScorer(URLScorer):
 
         return depth
 
-    @lru_cache(maxsize=10000)  # Cache the whole calculation
     def _calculate_score(self, url: str) -> float:
-        pos = url.find("/", url.find("://") + 3)
-        if pos == -1:
-            depth = 0
-        else:
-            depth = self._quick_depth(url[pos:])
-
-        # Use lookup table for common distances
-        distance = depth - self._optimal_depth
-        distance = distance if distance >= 0 else -distance  # Faster than abs()
-
-        if distance < 4:
-            return _SCORE_LOOKUP[distance]
-
-        return 1.0 / (1.0 + distance)
+        return _PathDepthScorer__calculate_score_cached(self, url)
 
 
 class ContentTypeScorer(URLScorer):
@@ -307,33 +262,8 @@ class ContentTypeScorer(URLScorer):
 
         return url[pos + 1 : end].lower()
 
-    @lru_cache(maxsize=10000)
     def _calculate_score(self, url: str) -> float:
-        """Calculate content type score for URL.
-
-        Uses staged approach:
-        1. Try exact extension match (fast path)
-        2. Fall back to regex patterns if needed
-
-        Args:
-            url: URL to score
-
-        Returns:
-            Score between 0.0 and 1.0 * weight
-        """
-        # Fast path: direct extension lookup
-        ext = self._quick_extension(url)
-        if ext:
-            score = self._exact_types.get(ext, None)
-            if score is not None:
-                return score
-
-        # Slow path: regex patterns
-        for pattern, score in self._regex_types:
-            if pattern.search(url):
-                return score
-
-        return 0.0
+        return _ContentTypeScorer__calculate_score_cached(self, url)
 
 
 class FreshnessScorer(URLScorer):
@@ -371,51 +301,11 @@ class FreshnessScorer(URLScorer):
             r")?"  # Month/day group is optional
         )
 
-    @lru_cache(maxsize=10000)
     def _extract_year(self, url: str) -> Optional[int]:
-        """Extract the most recent year from URL.
+        return _FreshnessScorer__extract_year_cached(self, url)
 
-        Args:
-            url: URL to extract year from
-
-        Returns:
-            Year as int or None if no valid year found
-        """
-        matches = self._date_pattern.finditer(url)
-        latest_year = None
-
-        # Find most recent year
-        for match in matches:
-            year = int(match.group(1))
-            if year <= self._current_year and (latest_year is None or year > latest_year):  # Sanity check
-                latest_year = year
-
-        return latest_year
-
-    @lru_cache(maxsize=10000)
     def _calculate_score(self, url: str) -> float:
-        """Calculate freshness score based on URL date.
-
-        More recent years score higher. Uses pre-computed scoring
-        table for common year differences.
-
-        Args:
-            url: URL to score
-
-        Returns:
-            Score between 0.0 and 1.0 * weight
-        """
-        year = self._extract_year(url)
-        if year is None:
-            return 0.5  # Default score
-
-        # Use lookup table for common year differences
-        year_diff = self._current_year - year
-        if year_diff < len(_FRESHNESS_SCORES):
-            return _FRESHNESS_SCORES[year_diff]
-
-        # Fallback calculation for older content
-        return max(0.1, 1.0 - year_diff * 0.1)
+        return _FreshnessScorer__calculate_score_cached(self, url)
 
 
 class DomainAuthorityScorer(URLScorer):
@@ -496,27 +386,171 @@ class DomainAuthorityScorer(URLScorer):
 
         return domain.lower()
 
-    @lru_cache(maxsize=10000)
     def _calculate_score(self, url: str) -> float:
-        """Calculate domain authority score.
+        return _DomainAuthorityScorer__calculate_score_cached(self, url)
 
-        Uses staged approach:
-        1. Check top domains (fastest)
-        2. Check full domain weights
-        3. Return default weight
 
-        Args:
-            url: URL to score
+@lru_cache(maxsize=10000)
+def _CompositeScorer__calculate_score_cached(self, url):
+    """Calculate combined score from all scoring strategies.
 
-        Returns:
-            Authority score between 0.0 and 1.0 * weight
-        """
-        domain = self._extract_domain(url)
+    Uses:
+    1. Pre-allocated arrays for scores
+    2. Short-circuit on zero scores
+    3. Optimized normalization
+    4. Vectorized operations where possible
 
-        # Fast path: check top domains first
-        score = self._top_domains.get(domain)
+    Args:
+        url: URL to score
+
+    Returns:
+        Combined and optionally normalized score
+    """
+    total_score = 0.0
+    scores = self._score_array
+
+    # Get scores from all scorers
+    for i, scorer in enumerate(self._scorers):
+        # Use public score() method which applies weight
+        scores[i] = scorer.score(url)
+        total_score += scores[i]
+
+    # Normalize if requested
+    if self._normalize and self._scorers:
+        count = len(self._scorers)
+        return total_score / count
+
+    return total_score
+
+
+
+@lru_cache(maxsize=10000)
+def _KeywordRelevanceScorer__url_bytes_cached(self, url):
+    """Cache decoded URL bytes"""
+    return url.encode("utf-8") if self._case_sensitive else url.lower().encode("utf-8")
+
+
+
+@lru_cache(maxsize=10000)  # Cache the whole calculation
+def _PathDepthScorer__calculate_score_cached(self, url):
+    pos = url.find("/", url.find("://") + 3)
+    if pos == -1:
+        depth = 0
+    else:
+        depth = self._quick_depth(url[pos:])
+
+    # Use lookup table for common distances
+    distance = depth - self._optimal_depth
+    distance = distance if distance >= 0 else -distance  # Faster than abs()
+
+    if distance < 4:
+        return _SCORE_LOOKUP[distance]
+
+    return 1.0 / (1.0 + distance)
+
+
+
+@lru_cache(maxsize=10000)
+def _ContentTypeScorer__calculate_score_cached(self, url):
+    """Calculate content type score for URL.
+
+    Uses staged approach:
+    1. Try exact extension match (fast path)
+    2. Fall back to regex patterns if needed
+
+    Args:
+        url: URL to score
+
+    Returns:
+        Score between 0.0 and 1.0 * weight
+    """
+    # Fast path: direct extension lookup
+    ext = self._quick_extension(url)
+    if ext:
+        score = self._exact_types.get(ext, None)
         if score is not None:
             return score
 
-        # Regular path: check all domains
-        return self._domain_weights.get(domain, self._default_weight)
+    # Slow path: regex patterns
+    for pattern, score in self._regex_types:
+        if pattern.search(url):
+            return score
+
+    return 0.0
+
+
+
+@lru_cache(maxsize=10000)
+def _FreshnessScorer__extract_year_cached(self, url):
+    """Extract the most recent year from URL.
+
+    Args:
+        url: URL to extract year from
+
+    Returns:
+        Year as int or None if no valid year found
+    """
+    matches = self._date_pattern.finditer(url)
+    latest_year = None
+
+    # Find most recent year
+    for match in matches:
+        year = int(match.group(1))
+        if year <= self._current_year and (latest_year is None or year > latest_year):  # Sanity check
+            latest_year = year
+
+    return latest_year
+
+
+
+@lru_cache(maxsize=10000)
+def _FreshnessScorer__calculate_score_cached(self, url):
+    """Calculate freshness score based on URL date.
+
+    More recent years score higher. Uses pre-computed scoring
+    table for common year differences.
+
+    Args:
+        url: URL to score
+
+    Returns:
+        Score between 0.0 and 1.0 * weight
+    """
+    year = self._extract_year(url)
+    if year is None:
+        return 0.5  # Default score
+
+    # Use lookup table for common year differences
+    year_diff = self._current_year - year
+    if year_diff < len(_FRESHNESS_SCORES):
+        return _FRESHNESS_SCORES[year_diff]
+
+    # Fallback calculation for older content
+    return max(0.1, 1.0 - year_diff * 0.1)
+
+
+
+@lru_cache(maxsize=10000)
+def _DomainAuthorityScorer__calculate_score_cached(self, url):
+    """Calculate domain authority score.
+
+    Uses staged approach:
+    1. Check top domains (fastest)
+    2. Check full domain weights
+    3. Return default weight
+
+    Args:
+        url: URL to score
+
+    Returns:
+        Authority score between 0.0 and 1.0 * weight
+    """
+    domain = self._extract_domain(url)
+
+    # Fast path: check top domains first
+    score = self._top_domains.get(domain)
+    if score is not None:
+        return score
+
+    # Regular path: check all domains
+    return self._domain_weights.get(domain, self._default_weight)

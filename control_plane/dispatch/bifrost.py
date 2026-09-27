@@ -13,7 +13,7 @@ The Switchboard probes health; Bifrost dispatches real payloads.
 
 Usage:
     # Direct streaming
-    from control_plane.bifrost import Bifrost
+    from control_plane.dispatch.bifrost import Bifrost
     async for chunk in Bifrost().stream("sir_boris", "Explain MCP protocol"):
         print(chunk, end="", flush=True)
 
@@ -121,7 +121,7 @@ class Bifrost:
     """Universal dispatch gateway — send a prompt to any registered terminal."""
 
     def __init__(self) -> None:
-        from control_plane.switchboard import TERMINAL_REGISTRY
+        from control_plane.dispatch.switchboard import TERMINAL_REGISTRY
         self._reg = TERMINAL_REGISTRY
 
     # ── Public API ────────────────────────────────────────────────────────────
@@ -140,7 +140,7 @@ class Bifrost:
 
         # Log dispatch to agent memory
         try:
-            from control_plane.agent_memory import log_dispatch as mem_log_dispatch
+            from control_plane.infra.agent_memory import log_dispatch as mem_log_dispatch
             asyncio.create_task(
                 mem_log_dispatch(terminal_id, prompt, system, "")
             )
@@ -150,7 +150,7 @@ class Bifrost:
         # Enrich with knowledge base context (similar past dispatches)
         enriched_system = system
         try:
-            from control_plane.symbol_compressor import find_similar_dispatches
+            from control_plane.infra.symbol_compressor import find_similar_dispatches
             similar = await find_similar_dispatches(prompt, terminal_id, limit=3)
             if similar:
                 similar_context = "\n".join([
@@ -193,7 +193,7 @@ class Bifrost:
 
         # Post-dispatch learning (async, fire-and-forget)
         try:
-            from control_plane.knight_self_enhancer import post_dispatch as enhancer_post_dispatch
+            from control_plane.core.knight_self_enhancer import post_dispatch as enhancer_post_dispatch
             response_text = "".join(response_chunks)
             tokens_out = len(response_text.split())
             tokens_in = len(prompt.split())
@@ -227,8 +227,8 @@ class Bifrost:
         First chunk has terminal_id="route" and contains the routing decision.
         Subsequent chunks have the actual terminal_id.
         """
-        from control_plane.intent_router import route_by_intent
-        from control_plane.switchboard import Switchboard
+        from control_plane.dispatch.intent_router import route_by_intent
+        from control_plane.dispatch.switchboard import Switchboard
 
         board = Switchboard()
         await board.probe_all()
@@ -240,7 +240,7 @@ class Bifrost:
 
         # Log routing decision to agent memory
         try:
-            from control_plane.agent_memory import store_dispatch_context
+            from control_plane.infra.agent_memory import store_dispatch_context
             asyncio.create_task(
                 store_dispatch_context(
                     terminal.id,
@@ -296,7 +296,7 @@ class Bifrost:
 
     async def status(self) -> list[dict]:
         """Return current health of all terminals."""
-        from control_plane.switchboard import Switchboard
+        from control_plane.dispatch.switchboard import Switchboard
         board = Switchboard()
         await board.probe_all()
         return [
@@ -409,7 +409,7 @@ class Bifrost:
     ) -> AsyncIterator[str]:
         """Dispatch via the Sovereign Inference Engine (in-process, no HTTP)."""
         try:
-            from control_plane.sovereign_inference import SIE, HITLBlock, SIEHooks  # noqa: F401
+            from control_plane.dispatch.sovereign_inference import SIE, HITLBlock, SIEHooks  # noqa: F401
         except ImportError as e:
             yield f"[BIFROST] SIE import failed: {e}"
             return
@@ -466,7 +466,7 @@ class Bifrost:
 
     async def _query_cloudbrain(self, prompt: str) -> str:
         try:
-            from control_plane.cloudbrain_sync import query_cloud_brain
+            from control_plane.infra.cloudbrain_sync import query_cloud_brain
             result = await asyncio.to_thread(query_cloud_brain, prompt)
             return result or "[CLOUDBRAIN] Empty response"
         except ImportError:

@@ -3,7 +3,7 @@ function hideProductModal() {
   productModal && productModal.forEach((modal) => modal.hide());
 }
 
-document.addEventListener('shopify:block:select', function (event) {
+document.addEventListener('shopify:block:select', (event) => {
   hideProductModal();
   const blockSelectedIsSlide = event.target.classList.contains('slideshow__slide');
   if (!blockSelectedIsSlide) return;
@@ -11,14 +11,14 @@ document.addEventListener('shopify:block:select', function (event) {
   const parentSlideshowComponent = event.target.closest('slideshow-component');
   parentSlideshowComponent.pause();
 
-  setTimeout(function () {
+  setTimeout(() => {
     parentSlideshowComponent.slider.scrollTo({
       left: event.target.offsetLeft,
     });
   }, 200);
 });
 
-document.addEventListener('shopify:block:deselect', function (event) {
+document.addEventListener('shopify:block:deselect', (event) => {
   const blockDeselectedIsSlide = event.target.classList.contains('slideshow__slide');
   if (!blockDeselectedIsSlide) return;
   const parentSlideshowComponent = event.target.closest('slideshow-component');

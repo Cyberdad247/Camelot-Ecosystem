@@ -16,7 +16,7 @@ def check_port(port, name):
             s.settimeout(1)
             s.connect(("localhost", port))
             return True
-        except:
+        except Exception:
             return False
 
 

@@ -20,7 +20,6 @@ from control_plane.core.airgap import (
     AirgapCapabilities,
     AirgapUnavailableError,
     probe,
-    require_airgap,
     run_airgapped,
 )
 

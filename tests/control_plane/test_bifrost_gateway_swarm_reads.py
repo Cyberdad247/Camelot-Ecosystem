@@ -12,8 +12,9 @@ Pins:
 
 import json
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
-from control_plane.dispatch import bifrost_gateway
+from control_plane.dispatch import bifrost_gateway, switchboard
 from control_plane.infra.hermes_bridge import HermesBus
 
 
@@ -24,6 +25,46 @@ def _swarm_file(tmp_path: Path) -> Path:
 
 def _make_bus(tmp_path: Path) -> HermesBus:
     return HermesBus(hermes_home=tmp_path)
+
+
+def test_health_uses_a_single_slash_for_a_prefixed_gateway(monkeypatch):
+    response = MagicMock()
+    response.status = 200
+    response.read.return_value = b'{"status":"ok"}'
+    response.__enter__.return_value = response
+    monkeypatch.setattr(
+        bifrost_gateway,
+        "GATEWAY_URL",
+        "https://gateway.test/bifrost/",
+    )
+
+    with patch.object(
+        bifrost_gateway.urllib.request,
+        "urlopen",
+        return_value=response,
+    ) as urlopen:
+        result = bifrost_gateway.health(timeout=1.25)
+
+    urlopen.assert_called_once_with(
+        "https://gateway.test/bifrost/health",
+        timeout=1.25,
+    )
+    assert result == {"ok": True, "status_code": 200, "status": "ok"}
+
+
+def test_send_command_rejects_a_blank_webhook_secret(monkeypatch):
+    monkeypatch.setattr(bifrost_gateway, "WEBHOOK_SECRET", " \t")
+
+    result = bifrost_gateway.send_command("fixture")
+
+    assert result["ok"] is False
+    assert "WEBHOOK_SECRET" in result["error"]
+
+
+def test_switchboard_bifrost_probe_preserves_a_prefixed_gateway():
+    assert switchboard._bifrost_health_url("https://gateway.test/bifrost/") == (
+        "https://gateway.test/bifrost/health"
+    )
 
 
 def test_poll_swarm_events_survives_corrupt_line(tmp_path):

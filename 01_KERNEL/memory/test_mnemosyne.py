@@ -9,6 +9,7 @@ MNEMOSYNE Integration Tests — Validating the Lady M Pipeline
 Tests the tripartite data flow from Redis (L1) -> NotebookLM (L2).
 """
 
+import importlib.util
 import sys
 import unittest
 from pathlib import Path
@@ -18,8 +19,6 @@ root = Path("C:/Users/vizio/CAMELOT_OS")
 if str(root) not in sys.path:
     sys.path.append(str(root))
 
-# Rename the numeric package for importability
-import importlib.util
 
 
 def force_import_kernel():

@@ -1,17 +1,17 @@
 {
-    "@context": "https://camelot.os/ukg",
-    "UKG_NODE": {
-        "TYPE": "ASSIMILATION_EVENT",
-        "SOURCE": "02_FORGE/assimilated/",
-        "DATE": "2026-02-10",
-        "SUMMARY": "Activated Great Assimilation Protocol for gemini-cli and langextract repositories. Integrated into 02_FORGE under kinetic tissue standards.",
-        "KEY_MECHANICS": [
-            "Forensic_Deep_Dive",
-            "Kinetic_Tissue_Mapping",
-            "Extension_Frame_Assimilation",
-            "Source_Grounding_Logic"
-        ],
-        "STATUS": "RADIANT",
-        "PROVENANCE_HASH": "0xGREAT_ASSIMILATION_V1"
-    }
+  "@context": "https://camelot.os/ukg",
+  "UKG_NODE": {
+    "TYPE": "ASSIMILATION_EVENT",
+    "SOURCE": "02_FORGE/assimilated/",
+    "DATE": "2026-02-10",
+    "SUMMARY": "Activated Great Assimilation Protocol for gemini-cli and langextract repositories. Integrated into 02_FORGE under kinetic tissue standards.",
+    "KEY_MECHANICS": [
+      "Forensic_Deep_Dive",
+      "Kinetic_Tissue_Mapping",
+      "Extension_Frame_Assimilation",
+      "Source_Grounding_Logic"
+    ],
+    "STATUS": "RADIANT",
+    "PROVENANCE_HASH": "0xGREAT_ASSIMILATION_V1"
+  }
 }

@@ -8,12 +8,11 @@ Tethers high-density domain notebooks directly into WorldTree Root (a0a4bfb9-e84
 import asyncio
 import json
 import logging
-import os
 import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
@@ -21,7 +20,6 @@ CAMELOT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(CAMELOT_ROOT))
 
 from vfs.notebooklm_client import _get_client
-from merlin.context.merlin_infinite_context import merlin_context
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("LivingArtifactForger")

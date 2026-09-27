@@ -6,7 +6,6 @@ import pytest
 from pathlib import Path
 from control_plane.infra.scarcity_guardian import (
     DockerFootprintViolation,
-    NodeMemoryProfile,
     PSIReading,
     ScarcityGuardian,
     parse_psi_pressure_data,

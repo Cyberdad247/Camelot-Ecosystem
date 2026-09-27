@@ -9,10 +9,9 @@ Tests for Honcho Self-Hosted L4 Memory & Hermes Integration:
 
 import json
 from pathlib import Path
-import pytest
 
-from control_plane.infra.hermes_bridge import HermesBus, CHANNELS
-from control_plane.infra.honcho_bridge import HonchoBridge, honcho_bridge
+from control_plane.infra.hermes_bridge import CHANNELS
+from control_plane.infra.honcho_bridge import HonchoBridge
 from control_plane.runes.runic_router import normalize_rune, route_rune, RUNIC_COMMANDS
 
 

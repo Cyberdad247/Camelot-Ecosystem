@@ -220,9 +220,9 @@ def main():
 
     if licenses:
         print(f"\nLicenses ({len(licenses)}):")
-        for l in licenses[:5]:
-            forbidden_flag = " [FORBIDDEN]" if l["forbidden"] else ""
-            print(f"  - {l['name']}{forbidden_flag}")
+        for lic in licenses[:5]:
+            forbidden_flag = " [FORBIDDEN]" if lic["forbidden"] else ""
+            print(f"  - {lic['name']}{forbidden_flag}")
 
 
 if __name__ == "__main__":

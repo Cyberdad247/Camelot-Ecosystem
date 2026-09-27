@@ -2,6 +2,7 @@
 
 'use client';
 
+import { useAvatarConfig } from '../../context/AvatarConfigContext';
 import { useLakishaVoice } from '../../hooks/useLakishaVoice';
 import { LakishaAvatar } from './LakishaAvatar';
 
@@ -10,6 +11,7 @@ import { LakishaAvatar } from './LakishaAvatar';
 // primary, VAD-only failsafe, so if one input path fails the other keeps her live.
 export function LakishaEnclave() {
   const { connected, connect, isSpeaking, mode, error } = useLakishaVoice({ continuous: true });
+  const { isConfigOpen, toggleConfig } = useAvatarConfig();
 
   const status = isSpeaking
     ? 'Lakisha Active'
@@ -21,7 +23,7 @@ export function LakishaEnclave() {
     <div className="fixed right-8 bottom-8 z-[60] flex flex-col items-end gap-2">
       <LakishaAvatar speaking={isSpeaking} connected={connected} />
       <div
-        className={`flex w-56 items-center gap-3 border border-gold bg-smoke-800/85 px-4 py-3 backdrop-blur-md transition-shadow duration-200 ${
+        className={`flex w-64 items-center justify-between gap-3 border border-gold bg-smoke-800/85 px-4 py-3 backdrop-blur-md transition-shadow duration-200 ${
           isSpeaking ? 'animate-pulse shadow-glow-lg' : 'shadow-none'
         }`}
       >
@@ -37,7 +39,7 @@ export function LakishaEnclave() {
           </button>
         ) : (
           // The Active HUD.
-          <>
+          <div className="flex items-center gap-2">
             <span
               className={`relative flex h-2.5 w-2.5 ${isSpeaking ? 'text-violet-light' : 'text-white/40'}`}
             >
@@ -56,8 +58,35 @@ export function LakishaEnclave() {
             >
               {status}
             </span>
-          </>
+          </div>
         )}
+
+        <button
+          type="button"
+          onClick={toggleConfig}
+          aria-label="Avatar Configuration"
+          title="Configure Avatar (Chat, Live, Media, Transcribe)"
+          className={`flex h-7 w-7 items-center justify-center border transition-all ${
+            isConfigOpen
+              ? 'border-gold bg-gold/20 text-gold'
+              : 'border-gold/30 text-gold-light hover:border-gold hover:bg-gold/10'
+          }`}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            className="h-3.5 w-3.5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+            />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </button>
       </div>
     </div>
   );
