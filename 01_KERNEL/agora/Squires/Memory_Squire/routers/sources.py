@@ -318,10 +318,14 @@ async def create_source(
 
     try:
         # Verify all specified notebooks exist (backward compatibility support)
-        for notebook_id in source_data.notebooks or []:
-            notebook = await Notebook.get(notebook_id)
-            if not notebook:
-                raise HTTPException(status_code=404, detail=f"Notebook {notebook_id} not found")
+        notebook_ids = source_data.notebooks or []
+        if notebook_ids:
+            notebooks = await Notebook.get_many(notebook_ids)
+            found_notebook_ids = {n.id for n in notebooks if n.id}
+            missing_notebooks = set(notebook_ids) - found_notebook_ids
+            if missing_notebooks:
+                # Report first missing notebook for consistency with previous error
+                raise HTTPException(status_code=404, detail=f"Notebook {next(iter(missing_notebooks))} not found")
 
         # Handle file upload if provided
         file_path = None
@@ -361,10 +365,15 @@ async def create_source(
 
         # Validate transformations exist
         transformation_ids = source_data.transformations or []
-        for trans_id in transformation_ids:
-            transformation = await Transformation.get(trans_id)
-            if not transformation:
-                raise HTTPException(status_code=404, detail=f"Transformation {trans_id} not found")
+        if transformation_ids:
+            transformations = await Transformation.get_many(transformation_ids)
+            found_transformation_ids = {t.id for t in transformations if t.id}
+            missing_transformations = set(transformation_ids) - found_transformation_ids
+            if missing_transformations:
+                # Report first missing transformation
+                raise HTTPException(
+                    status_code=404, detail=f"Transformation {next(iter(missing_transformations))} not found"
+                )
 
         # Branch based on processing mode
         if source_data.async_processing:
