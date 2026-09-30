@@ -270,9 +270,21 @@ async def rebuild_embeddings_command(
 
         # Process sources
         logger.info(f"\nProcessing {len(items['sources'])} sources...")
+        sources_map = {}
+        if items["sources"]:
+            try:
+                sources_ids_formatted = [ensure_record_id(sid) for sid in items["sources"]]
+                sources_data = await repo_query("SELECT * FROM source WHERE id IN $ids", {"ids": sources_ids_formatted})
+                sources_map = {str(s["id"]): Source(**s) for s in sources_data} if sources_data else {}
+            except Exception as e:
+                logger.error(f"Failed to batch fetch sources: {e}")
+
         for idx, source_id in enumerate(items["sources"], 1):
             try:
-                source = await Source.get(source_id)
+                source = sources_map.get(str(source_id))
+                if not source:
+                    # Fallback to individual fetch if batch fetch failed or item was missing
+                    source = await Source.get(source_id)
                 if not source:
                     logger.warning(f"Source {source_id} not found, skipping")
                     failed_items += 1
@@ -290,9 +302,21 @@ async def rebuild_embeddings_command(
 
         # Process notes
         logger.info(f"\nProcessing {len(items['notes'])} notes...")
+        notes_map = {}
+        if items["notes"]:
+            try:
+                notes_ids_formatted = [ensure_record_id(nid) for nid in items["notes"]]
+                notes_data = await repo_query("SELECT * FROM note WHERE id IN $ids", {"ids": notes_ids_formatted})
+                notes_map = {str(n["id"]): Note(**n) for n in notes_data} if notes_data else {}
+            except Exception as e:
+                logger.error(f"Failed to batch fetch notes: {e}")
+
         for idx, note_id in enumerate(items["notes"], 1):
             try:
-                note = await Note.get(note_id)
+                note = notes_map.get(str(note_id))
+                if not note:
+                    # Fallback to individual fetch if batch fetch failed or item was missing
+                    note = await Note.get(note_id)
                 if not note:
                     logger.warning(f"Note {note_id} not found, skipping")
                     failed_items += 1
@@ -310,9 +334,23 @@ async def rebuild_embeddings_command(
 
         # Process insights
         logger.info(f"\nProcessing {len(items['insights'])} insights...")
+        insights_map = {}
+        if items["insights"]:
+            try:
+                insights_ids_formatted = [ensure_record_id(iid) for iid in items["insights"]]
+                insights_data = await repo_query(
+                    "SELECT * FROM source_insight WHERE id IN $ids", {"ids": insights_ids_formatted}
+                )
+                insights_map = {str(i["id"]): SourceInsight(**i) for i in insights_data} if insights_data else {}
+            except Exception as e:
+                logger.error(f"Failed to batch fetch insights: {e}")
+
         for idx, insight_id in enumerate(items["insights"], 1):
             try:
-                insight = await SourceInsight.get(insight_id)
+                insight = insights_map.get(str(insight_id))
+                if not insight:
+                    # Fallback to individual fetch if batch fetch failed or item was missing
+                    insight = await SourceInsight.get(insight_id)
                 if not insight:
                     logger.warning(f"Insight {insight_id} not found, skipping")
                     failed_items += 1
