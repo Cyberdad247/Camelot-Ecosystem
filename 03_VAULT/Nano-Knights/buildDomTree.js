@@ -795,25 +795,6 @@ window.buildDomTree = (
 
     const rects = getCachedClientRects(element); // Replace element.getClientRects()
 
-    // --- PHASE 22: SOURCE GROUNDING ---
-    // Inject stable ID for extraction engine
-    if (element.nodeType === Node.ELEMENT_NODE && !element.hasAttribute('data-nano-id')) {
-        element.setAttribute('data-nano-id', ID.current);
-        ID.current++;
-    }
-    const nodeId = element.getAttribute ? element.getAttribute('data-nano-id') : null;
-
-    // ... (rest of logic) ...
-
-    // When constructing node data, include the ID:
-    // This part is hypothetical as I don't see the full processNode function in the view.
-    // I need to find where the node object is constructed and inject the ID.
-    
-    // RE-READING STRATEGY: 
-    // Since I cannot see the specific lines for node construction (it was truncated),
-    // I will read the REST of buildDomTree.js first.
-
-
     let isAnyRectInViewport = false;
     for (const rect of rects) {
       // Use the same logic as isInExpandedViewport check
@@ -1263,9 +1244,14 @@ window.buildDomTree = (
 
     // Special handling for root node (body)
     if (node === document.body) {
+      if (!node.hasAttribute('data-nano-id')) {
+        node.setAttribute('data-nano-id', ID.current++);
+      }
       const nodeData = {
         tagName: 'body',
-        attributes: {},
+        attributes: {
+          'data-nano-id': node.getAttribute('data-nano-id')
+        },
         xpath: '/body',
         children: [],
       };
@@ -1341,6 +1327,10 @@ window.buildDomTree = (
       }
     }
 
+    if (node.nodeType === Node.ELEMENT_NODE && !node.hasAttribute('data-nano-id')) {
+      node.setAttribute('data-nano-id', ID.current++);
+    }
+
     /**
      * @type {
       {
@@ -1363,6 +1353,10 @@ window.buildDomTree = (
       xpath: getXPathTree(node, true),
       children: [],
     };
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      nodeData.attributes['data-nano-id'] = node.getAttribute('data-nano-id');
+    }
 
     // Get attributes for interactive elements or potential text containers
     if (
@@ -1495,12 +1489,6 @@ window.buildDomTree = (
           else if (node.attributes && node.attributes.placeholder) text = limitText(node.attributes.placeholder);
           else if (node.attributes && node.attributes['aria-label']) text = limitText(node.attributes['aria-label']);
           
-          // Get the Real Grounding ID (injected earlier)
-          // Note: map[id] is the nodeData. We need the original element to get the attribute? 
-          // Wait, buildDomTree returns an ID to map, but doesn't store the Grounding ID in nodeData.
-          // FIX: We need to store the Grounding ID in nodeData during traversal.
-          
-          // Fallback if not stored (will fix in next step if needed, but for now assuming logic flow)
           const groundingId = node.attributes && node.attributes['data-nano-id'] ? node.attributes['data-nano-id'] : "_";
 
           // Format: Indent | ID | Tag | Vis | Text | GroundingID
