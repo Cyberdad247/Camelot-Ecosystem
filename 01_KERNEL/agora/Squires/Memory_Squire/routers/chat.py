@@ -90,18 +90,34 @@ async def get_sessions(notebook_id: str = Query(..., description="Notebook ID"))
         # Get sessions for this notebook
         sessions = await notebook.get_chat_sessions()
 
-        return [
-            ChatSessionResponse(
-                id=session.id or "",
-                title=session.title or "Untitled Session",
-                notebook_id=notebook_id,
-                created=str(session.created),
-                updated=str(session.updated),
-                message_count=0,  # TODO: Add message count if needed
-                model_override=getattr(session, "model_override", None),
+        result = []
+        for session in sessions:
+            # Extract raw ID for thread_id
+            session_id = session.id or ""
+            raw_id = session_id.split(":")[-1] if ":" in session_id else session_id
+
+            # Get message count from state
+            message_count = 0
+            try:
+                thread_state = chat_graph.get_state(config=RunnableConfig(configurable={"thread_id": raw_id}))
+                if thread_state and thread_state.values and "messages" in thread_state.values:
+                    message_count = len(thread_state.values["messages"])
+            except Exception as state_err:
+                logger.warning(f"Could not fetch state for session {session_id}: {str(state_err)}")
+
+            result.append(
+                ChatSessionResponse(
+                    id=session_id,
+                    title=session.title or "Untitled Session",
+                    notebook_id=notebook_id,
+                    created=str(session.created),
+                    updated=str(session.updated),
+                    message_count=message_count,
+                    model_override=getattr(session, "model_override", None),
+                )
             )
-            for session in sessions
-        ]
+
+        return result
     except NotFoundError:
         raise HTTPException(status_code=404, detail="Notebook not found")
     except Exception as e:
