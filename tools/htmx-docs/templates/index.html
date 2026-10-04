@@ -84,5 +84,42 @@
                hx-swap="innerHTML">
     </div>
 
+    <!-- WP-G/WP-H/WP-I: Capabilities Detection Engine -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const stream = document.getElementById("mcp-stream");
+            function log(msg) {
+                const p = document.createElement("p");
+                p.innerHTML = msg;
+                stream.appendChild(p);
+                stream.scrollTop = stream.scrollHeight;
+            }
+
+            log("> [N210] Assimilating WebMCP Manifest...");
+            try {
+                const res = await fetch("/.well-known/mcp.json");
+                if (res.ok) log("> [N211] WebMCP Toolkit Registered.");
+            } catch(e) {
+                log("<span style='color: #ef4444'>[N211] WebMCP Sync Failed.</span>");
+            }
+
+            // N220: Device Detect (WebGPU)
+            if ("gpu" in navigator) {
+                try {
+                    const adapter = await navigator.gpu.requestAdapter();
+                    if (adapter) {
+                        log("> <span style='color: #10b981'>[N220] WebGPU Compute Available. Profile A Active.</span>");
+                        log("> [N221] Hardware accelerated tensor pipelines unsealed.");
+                    } else {
+                        log("> <span style='color: #f59e0b'>[N225] WebGPU Adapter restricted. CPU Fallback (Profile B).</span>");
+                    }
+                } catch(e) {
+                    log("> <span style='color: #f59e0b'>[N225] WebGPU Error. CPU Fallback Active.</span>");
+                }
+            } else {
+                log("> <span style='color: #ef4444'>[N225] WebGPU Unsupported. Edge/Air-gapped (Profile C) active.</span>");
+            }
+        });
+    </script>
 </body>
 </html>

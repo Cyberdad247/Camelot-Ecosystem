@@ -17,6 +17,10 @@ func NewApp() http.Handler {
 	mux.HandleFunc("/api/search", searchHandler)
 	mux.HandleFunc("/api/mcp", mcpHandler)
 
+	// WP-G: WebMCP Surface
+	mux.HandleFunc("/.well-known/mcp.json", mcpManifestHandler)
+	mux.HandleFunc("/api/mcp/manifest", mcpManifestHandler)
+
 	// N200: Agent-Native Surface Routes
 	mux.HandleFunc("/api/agent/dump", agentDumpHandler)
 	mux.HandleFunc("/api/agent/doc/", agentDocHandler)
