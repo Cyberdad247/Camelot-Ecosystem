@@ -76,3 +76,21 @@ def test_status_reports_graft_graph(monkeypatch, tmp_path, capsys):
     (tmp_path / "graft" / "manifest.json").write_text("{}", encoding="utf-8")
     colony.cmd_status(tmp_path, None)
     assert "✅" in capsys.readouterr().out
+
+
+def test_pagekeeper_cli(capsys, tmp_path):
+    colony.main(["pagekeeper", str(tmp_path), "--json"])
+    captured = capsys.readouterr().out
+    assert "node_ceiling_mb" in captured
+    assert "utilization_pct" in captured
+
+
+def test_tokenpress_cli(capsys, tmp_path):
+    import json
+    colony.main(["tokenpress", str(tmp_path), "--query", "ANYA_IS_THE_GATE on CYBERTRONIA", "--json"])
+    captured = capsys.readouterr().out
+    data = json.loads(captured)
+    assert "metrics" in data
+    assert "symbolect" in data
+    assert "⟐ANYA_GATE⟐" in data["symbolect"]
+

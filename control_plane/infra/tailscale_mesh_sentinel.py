@@ -241,16 +241,22 @@ class TailscaleMeshSentinel:
     def ensure_adb_connected(self) -> bool:
         """Ensures that the active wireless path is connected in ADB."""
         # Try Wi-Fi first (lowest latency)
-        res_wifi = subprocess.run(["adb", "connect", f"{PEER_S26_WIFI_IP}:{PEER_ADB_PORT}"], capture_output=True, text=True, timeout=5)
-        if "connected" in res_wifi.stdout.lower():
-            LOG.info(f"[SENTINEL] ADB connected via {PEER_S26_WIFI_IP}:{PEER_ADB_PORT}")
-            return True
+        try:
+            res_wifi = subprocess.run(["adb", "connect", f"{PEER_S26_WIFI_IP}:{PEER_ADB_PORT}"], capture_output=True, text=True, timeout=2)
+            if "connected" in res_wifi.stdout.lower():
+                LOG.info(f"[SENTINEL] ADB connected via {PEER_S26_WIFI_IP}:{PEER_ADB_PORT}")
+                return True
+        except Exception:
+            pass
 
         # Try Tailscale second
-        res_ts = subprocess.run(["adb", "connect", f"{PEER_S26_TAILSCALE_IP}:{PEER_ADB_PORT}"], capture_output=True, text=True, timeout=5)
-        if "connected" in res_ts.stdout.lower():
-            LOG.info(f"[SENTINEL] ADB connected via {PEER_S26_TAILSCALE_IP}:{PEER_ADB_PORT}")
-            return True
+        try:
+            res_ts = subprocess.run(["adb", "connect", f"{PEER_S26_TAILSCALE_IP}:{PEER_ADB_PORT}"], capture_output=True, text=True, timeout=2)
+            if "connected" in res_ts.stdout.lower():
+                LOG.info(f"[SENTINEL] ADB connected via {PEER_S26_TAILSCALE_IP}:{PEER_ADB_PORT}")
+                return True
+        except Exception:
+            pass
 
         return False
 
