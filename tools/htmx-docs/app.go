@@ -25,6 +25,10 @@ func NewApp() http.Handler {
 	mux.HandleFunc("/api/agent/dump", agentDumpHandler)
 	mux.HandleFunc("/api/agent/doc/", agentDocHandler)
 
+	// CloudBrain Search & Telemetry Endpoints
+	mux.HandleFunc("/api/cloudbrain/search", cloudbrainSearchHandler)
+	mux.HandleFunc("/api/cloudbrain/status", cloudbrainStatusHandler)
+
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(StaticFS))))
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {

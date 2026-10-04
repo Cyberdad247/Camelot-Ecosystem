@@ -20,13 +20,21 @@
             <div class="badge">v3.4.1 Baseline</div>
         </div>
         
-        <!-- N060 & N061: Search Input & HTMX Triggers -->
+        <!-- Unified CloudBrain & Canonical Search Interface -->
         <div class="search-container">
+            <div class="search-scope-bar">
+                <label class="scope-pill"><input type="radio" name="scope" value="all" checked hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> All</label>
+                <label class="scope-pill"><input type="radio" name="scope" value="canonical" hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> Docs</label>
+                <label class="scope-pill"><input type="radio" name="scope" value="cloudbrain" hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> Brain</label>
+                <label class="scope-pill"><input type="radio" name="scope" value="memcastle" hx-post="/api/cloudbrain/search" hx-include="#search-query, [name='scope']:checked" hx-target="#search-results"> Vector</label>
+            </div>
             <input type="search" 
+                   id="search-query"
                    name="q"
-                   placeholder="Search documentation..." 
-                   hx-post="/api/search" 
-                   hx-trigger="keyup changed delay:500ms" 
+                   placeholder="Search Docs & CloudBrain..." 
+                   hx-post="/api/cloudbrain/search" 
+                   hx-include="[name='scope']:checked"
+                   hx-trigger="keyup changed delay:400ms" 
                    hx-target="#search-results">
             
             <!-- N062: Results UI (A11Y Politeness added) -->

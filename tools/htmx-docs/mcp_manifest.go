@@ -47,6 +47,27 @@ func mcpManifestHandler(w http.ResponseWriter, r *http.Request) {
 							"required": []string{"slug"},
 						},
 					},
+					{
+						"name": "search_cloudbrain",
+						"description": "Unified semantic search over Camelot Canonical Docs, MemCastle KNN vectors, and Knight Cloudbrains",
+						"parameters": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{
+								"query":  map[string]interface{}{"type": "string", "description": "Search query or natural language prompt"},
+								"scope":  map[string]interface{}{"type": "string", "enum": []string{"all", "canonical", "cloudbrain", "memcastle"}, "description": "Search scope filter"},
+								"knight": map[string]interface{}{"type": "string", "description": "Target Knight Persona (e.g., ANYA_OMEGA, SIR_BORIS)"},
+							},
+							"required": []string{"query"},
+						},
+					},
+					{
+						"name": "cloudbrain_status",
+						"description": "Retrieve live telemetry for connected CloudBrain and MemCastle engines",
+						"parameters": map[string]interface{}{
+							"type": "object",
+							"properties": map[string]interface{}{},
+						},
+					},
 				},
 			},
 		},
