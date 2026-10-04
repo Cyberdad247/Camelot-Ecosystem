@@ -67,6 +67,11 @@ class AffinityStats:
     rtk_savings_pct: float = 0.0
     voice_pro_jobs: int = 0
     voice_pro_audio_s: float = 0.0
+    # sanoTTS Local Voice Telemetry extensions
+    sanotts_syntheses: int = 0
+    sanotts_audio_s: float = 0.0
+    sanotts_avg_latency_ms: float = 0.0
+    sanotts_mode: str = ""
     detail: str = ""
 
 
@@ -106,6 +111,10 @@ def parse_metrics(payload: dict[str, Any]) -> AffinityStats:
         rtk_savings_pct=round(float(payload.get("rtk_savings_pct", 0.0)), 1),
         voice_pro_jobs=int(payload.get("voice_pro_jobs", payload.get("completed_jobs", 0))),
         voice_pro_audio_s=round(float(payload.get("voice_pro_audio_s", payload.get("total_audio_seconds", 0.0))), 2),
+        sanotts_syntheses=int(payload.get("sanotts_syntheses", 0)),
+        sanotts_audio_s=round(float(payload.get("sanotts_audio_s", 0.0)), 2),
+        sanotts_avg_latency_ms=round(float(payload.get("sanotts_avg_latency_ms", 0.0)), 1),
+        sanotts_mode=str(payload.get("sanotts_mode", "")),
         detail="ok",
     )
 
@@ -126,6 +135,7 @@ class MultivoiceBridge:
         self._realtime_bridge: Optional[Any] = None
         self._nine_router: Optional[Any] = None
         self._voice_pro: Optional[Any] = None
+        self._sanotts: Optional[Any] = None
 
     def attach_adapter(self, adapter: Any) -> None:
         """Attach an in-process LMCacheAffinityAdapter instance."""
@@ -142,6 +152,10 @@ class MultivoiceBridge:
     def attach_voice_pro(self, adapter: Any) -> None:
         """Attach an in-process VoiceProAdapter instance."""
         self._voice_pro = adapter
+
+    def attach_sanotts(self, provider: Any) -> None:
+        """Attach an in-process SanoTTSProvider instance."""
+        self._sanotts = provider
 
     @property
     def metrics_url(self) -> str:
@@ -225,6 +239,15 @@ class MultivoiceBridge:
             except Exception:
                 pass
 
+        # Overlay in-process SanoTTSProvider if attached
+        if self._sanotts is not None:
+            try:
+                sano_telemetry = self._sanotts.export_telemetry()
+                metrics.update(sano_telemetry)
+                connected = True
+            except Exception:
+                pass
+
         if not connected:
             return AffinityStats(connected=False, detail="router offline")
 
@@ -267,6 +290,13 @@ def render_panel(s: AffinityStats, gold: str = "#D4AF37") -> str:
             f'9Router RTK: {s.rtk_savings_pct:.1f}% saved · Voice-Pro: {s.voice_pro_jobs} dubs ({s.voice_pro_audio_s:.1f}s)</div>'
         )
 
+    sano_stats = ""
+    if s.sanotts_syntheses > 0:
+        sano_stats = (
+            f'<div style="font-size:10px;opacity:.9;margin-top:4px;border-top:1px solid rgba(212,175,55,0.2);padding-top:2px;color:{gold}">'
+            f'sanoTTS Local: {s.sanotts_syntheses} synths ({s.sanotts_audio_s:.1f}s) · {s.sanotts_avg_latency_ms:.0f}ms</div>'
+        )
+
     return (
         '<div id="omniroute" class="card">'
         f'<span class="label">OMNIROUTE AFFINITY</span>'
@@ -276,6 +306,7 @@ def render_panel(s: AffinityStats, gold: str = "#D4AF37") -> str:
         + extra_stats
         + voice_stats
         + nine_stats
+        + sano_stats
         + (f'<div style="margin-top:4px;color:{gold}">TTFT/engine</div>{ttft}' if ttft else '')
         + '</div>'
     )
@@ -299,15 +330,18 @@ def _selftest() -> int:
                        "avg_ttft_ms": {"sir_codex": 120.0},
                        "hit_tokens": 1400, "ttft_savings_pct": 45.0, "p2p_transfers": 2,
                        "realtime_sessions": 2, "active_pbx_calls": 1, "avg_ttfa_ms": 180.0,
-                       "rtk_savings_pct": 32.5, "completed_jobs": 4, "total_audio_seconds": 42.0})
+                       "rtk_savings_pct": 32.5, "completed_jobs": 4, "total_audio_seconds": 42.0,
+                       "sanotts_syntheses": 3, "sanotts_audio_s": 9.5, "sanotts_avg_latency_ms": 22.0})
     check("parse aggregates", s.connected and s.cache_hit_pct == 70.0 and s.pins == 3)
     check("parse lmcache fields", s.tokens_hit == 1400 and s.ttft_savings_pct == 45.0 and s.p2p_transfers == 2)
     check("parse realtime voice & pbx fields", s.realtime_sessions == 2 and s.active_pbx_calls == 1 and s.ttfa_ms == 180.0)
     check("parse 9router & voice-pro telemetry", s.rtk_savings_pct == 32.5 and s.voice_pro_jobs == 4 and s.voice_pro_audio_s == 42.0)
+    check("parse sanotts telemetry", s.sanotts_syntheses == 3 and s.sanotts_audio_s == 9.5 and s.sanotts_avg_latency_ms == 22.0)
     check("panel shows cache %", "70% cache" in render_panel(s) and "OMNIROUTE" in render_panel(s))
     check("panel shows ttft saved", "TTFT Saved: 45%" in render_panel(s))
     check("panel shows voice telemetry", "S2S / PBX Voice" in render_panel(s) and "180ms" in render_panel(s))
     check("panel shows 9router rtk and voice-pro", "9Router RTK: 32.5% saved" in render_panel(s) and "Voice-Pro: 4 dubs" in render_panel(s))
+    check("panel shows sanotts local voice", "sanoTTS Local: 3 synths" in render_panel(s) and "22ms" in render_panel(s))
 
     bad = MultivoiceBridge("http://127.0.0.1:1", timeout_s=0.3).fetch_affinity()
     check("unreachable -> disconnected (no raise)", bad.connected is False)
