@@ -66,6 +66,70 @@ _dedup_state: dict[tuple[str, str], deque[float]] = defaultdict(deque)
 # 11 Runic Commands — sovereign execution runes
 
 RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
+    "//REYA_CHANNEL": {
+        "knight": "sir_sonus",
+        "description": "Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//channel": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//voice_interchange": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//reya_voice": {
+        "knight": "sir_sonus",
+        "description": "Alias for //REYA_CHANNEL voice persona interchange",
+        "mode": "ORACLE",
+        "priority": 1,
+        "handler": "_handle_reya_channel",
+        "hydrate": False,
+    },
+    "//CUA": {
+        "knight": "sir_codex",
+        "description": "Universal Sovereign Computer-Use Agent (CUA) action dispatch via Reya Fabric",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
+    "//REYA_ACT": {
+        "knight": "sir_codex",
+        "description": "Alias for //CUA action dispatch via Reya Fabric",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_cua_dispatch",
+        "hydrate": False,
+    },
+    "//REYA_HANDSHAKE": {
+        "knight": "sir_sentinel",
+        "description": "Manage kinetic handshake permissions across Round Table Knights via Reya Handshake Gate",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_reya_handshake",
+        "hydrate": False,
+    },
+    "//handshake": {
+        "knight": "sir_sentinel",
+        "description": "Alias for //REYA_HANDSHAKE",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_reya_handshake",
+        "hydrate": False,
+    },
     "//FLEET": {
         "knight": "sir_boris",
         "description": "Stateful Graph-based Swarm Dispatch",
@@ -3700,8 +3764,137 @@ def _handle_validate_spec(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_reya_channel(param: Any, context: dict) -> dict:
+    """//REYA_CHANNEL — Dynamic voice persona interchange across Round Table Knights via Reya Universal Fabric."""
+    param_str = str(param or "").strip()
+    action = context.get("action") if context else None
+    action_payload = context.get("payload") if context else None
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.ReyaUniversalFabric()
+
+        trigger_match = fabric.detect_voice_interchange_trigger(param_str)
+        target_knight = trigger_match if trigger_match else param_str
+
+        if target_knight:
+            switch_res = fabric.switch_knight(target_knight)
+        else:
+            switch_res = fabric.get_current_state()
+
+        if action:
+            action_res = fabric.execute_fabric_action(action, action_payload or {})
+        else:
+            action_res = None
+
+        return {
+            "action": "reya_channel",
+            "detected_trigger": trigger_match,
+            "switch_result": switch_res,
+            "action_result": action_res,
+            "status": "REYA_CHANNEL_DISPATCHED",
+        }
+    else:
+        return {
+            "action": "reya_channel",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
+def _handle_cua_dispatch(param: Any, context: dict) -> dict:
+    """//CUA / //REYA_ACT — Sovereign Computer-Use Agent (CUA) action execution via REYA Fabric."""
+    param_str = str(param or "").strip()
+    action = context.get("action") if context else None
+    action_payload = (context.get("payload") or {}) if context else {}
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.ReyaUniversalFabric()
+
+        act_type = action or param_str or "cua_mouse_click"
+        action_res = fabric.execute_fabric_action(act_type, action_payload)
+        return {
+            "action": "cua_dispatch",
+            "action_type": act_type,
+            "result": action_res,
+            "status": "CUA_ACTION_DISPATCHED",
+        }
+    else:
+        return {
+            "action": "cua_dispatch",
+            "error": "Failed to load reya_fabric_layer module",
+            "status": "ERROR",
+        }
+
+
+def _handle_reya_handshake(param: Any, context: dict) -> dict:
+    """//REYA_HANDSHAKE — Manage kinetic handshake permissions across Round Table Knights."""
+    param_str = str(param or "").strip().lower()
+    target_knight = (context.get("knight_id") or "sir_boris") if context else "sir_boris"
+
+    import importlib.util
+    fabric_path = CAMELOT_HOME / "02_FORGE" / "assimilation" / "reya" / "reya_fabric_layer.py"
+    spec = importlib.util.spec_from_file_location("reya_fabric_layer", str(fabric_path))
+    if spec and spec.loader:
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules[spec.name] = mod
+        spec.loader.exec_module(mod)
+        fabric = mod.ReyaUniversalFabric()
+
+        if "grant" in param_str:
+            approved = fabric.grant_kinetic_handshake(target_knight)
+            lease_status = (
+                approved.status.value
+                if (approved and getattr(approved, "status", None) and hasattr(approved.status, "value"))
+                else "APPROVED"
+            )
+            return {
+                "action": "reya_handshake",
+                "status": "HANDSHAKE_GRANTED",
+                "lease": {
+                    "status": lease_status,
+                    "knight_id": target_knight,
+                    "handshake_id": approved.handshake_id if approved else None,
+                },
+            }
+        elif "revoke" in param_str:
+            revoked = fabric.revoke_kinetic_handshake(target_knight)
+            return {
+                "action": "reya_handshake",
+                "status": "HANDSHAKE_REVOKED" if revoked else "HANDSHAKE_NOT_FOUND",
+                "revoked": revoked,
+            }
+        else:
+            eval_res = fabric.handshake_gate.evaluate_knight_autonomy(target_knight) if fabric.handshake_gate else None
+            return {
+                "action": "reya_handshake",
+                "status": "HANDSHAKE_EVALUATED",
+                "target_knight": target_knight,
+                "autonomy_evaluation": eval_res,
+            }
+    return {
+        "action": "reya_handshake",
+        "error": "Failed to load reya_fabric_layer module",
+        "status": "ERROR",
+    }
+
+
 # Handler lookup table (Runic Commands)
 _HANDLERS = {
+    "_handle_reya_channel": _handle_reya_channel,
+    "_handle_cua_dispatch": _handle_cua_dispatch,
+    "_handle_reya_handshake": _handle_reya_handshake,
     "_handle_moto_edge_bus": _handle_moto_edge_bus,
     "_handle_qtscrcpy": _handle_qtscrcpy,
     "_handle_validate_spec": _handle_validate_spec,
@@ -4059,8 +4252,11 @@ def parse_rune(text: str) -> Optional[tuple[str, str]]:
     return None
 
 
-def route_rune(rune: str, param: str = "", context: Optional[dict] = None) -> RuneResult:
+def route_rune(rune: str, param: Any = "", context: Optional[dict] = None) -> RuneResult:
     """Route a rune to the correct knight and queue the task."""
+    if isinstance(param, dict) and context is None:
+        context = param
+        param = ""
     if not param and " " in (rune or "").strip():
         parts = (rune or "").strip().split(None, 1)
         rune = parts[0]
