@@ -17,11 +17,14 @@ $PidFullPath = Join-Path $RepoRoot $PidPath
 
 function Get-DaemonProcess {
     if (Test-Path $PidFullPath) {
-        $savedPid = Get-Content $PidFullPath -ErrorAction SilentlyContinue
-        if ($savedPid -match '^\d+$') {
-            $proc = Get-Process -Id ([int]$savedPid) -ErrorAction SilentlyContinue
-            if ($proc -and $proc.ProcessName -match "squires_rs") {
-                return $proc
+        $raw = Get-Content $PidFullPath -Raw -ErrorAction SilentlyContinue
+        if ($raw) {
+            $savedPid = $raw.Trim()
+            if ($savedPid -match '^\d+$') {
+                $proc = Get-Process -Id ([int]$savedPid) -ErrorAction SilentlyContinue
+                if ($proc -and $proc.ProcessName -match "squires_rs") {
+                    return $proc
+                }
             }
         }
     }

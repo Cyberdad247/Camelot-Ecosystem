@@ -145,3 +145,33 @@ def test_harness_wiring_calls_watchtower_each_cycle() -> None:
     assert "watchtower_tick(self._watchtower_cycle)" in source
     assert "self._watchtower_cycle += 1" in source
     assert "self._watchtower_cycle = 0" in source
+
+
+def test_pagekeeper_rs_probe() -> None:
+    from control_plane.infra.watchtower import pagekeeper_rs_probe
+    probe = pagekeeper_rs_probe()
+    assert probe["daemon"] == "PAGEKEEPER_RS"
+    assert "status" in probe
+    assert probe["node_ceiling_mb"] == 4096.0
+    assert probe["node_compliant"] is True
+    assert "resident_mb" in probe
+
+
+def test_watchtower_visual_and_html(tmp_path: Path) -> None:
+    from control_plane.infra.watchtower import (
+        export_html_dashboard,
+        render_watchtower_visual,
+        tick,
+    )
+    telemetry = tick(0, cpu_sample_s=0.01)
+    visual = render_watchtower_visual(telemetry)
+    assert "WATCHTOWER SOVEREIGN TELEMETRY COCKPIT" in visual
+    assert "PAGEKEEPER_RS" in visual
+    assert "CYBERTRONIA" in visual
+
+    html_file = tmp_path / "test_dashboard.html"
+    res_path = export_html_dashboard(telemetry, output_path=html_file)
+    assert res_path.exists()
+    content = res_path.read_text(encoding="utf-8")
+    assert "Watchtower Sovereign Dashboard" in content
+    assert "PageKeeper RS" in content
