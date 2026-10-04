@@ -1,7 +1,6 @@
 package htmxdocs
 
 import (
-	"os"
 	"strings"
 	"testing"
 )
@@ -20,10 +19,15 @@ func TestLoadAndRenderDoc_Valid(t *testing.T) {
 }
 
 func TestLoadAndRenderDoc_InvalidFrontMatter(t *testing.T) {
-	// Create a temporary markdown file that violates Wave 0 (No Front Matter)
-	badFilePath := "docs/invalid-test.md"
-	os.WriteFile(badFilePath, []byte("# I have no front matter\nAnd I should fail N002 validation."), 0644)
-	defer os.Remove(badFilePath) // Cleanup
+	// Mock the file reader to return bad markdown
+	originalReader := fileReader
+	fileReader = func(name string) ([]byte, error) {
+		if name == "docs/invalid-test.md" {
+			return []byte("# I have no front matter\nAnd I should fail N002 validation."), nil
+		}
+		return originalReader(name)
+	}
+	defer func() { fileReader = originalReader }()
 
 	_, err := LoadAndRenderDoc("invalid-test")
 	if err == nil {

@@ -14,6 +14,8 @@ import (
 // In-Memory AST Cache (N111 Resolution)
 var docCache sync.Map
 
+var fileReader = DocsFS.ReadFile
+
 // LoadAndRenderDoc fulfills N011 (Doc Loader) and N012 (Markdown).
 // It reads the file, parses the front matter (N002), and returns an HTML fragment.
 func LoadAndRenderDoc(slug string) (string, error) {
@@ -26,7 +28,7 @@ func LoadAndRenderDoc(slug string) (string, error) {
 	safeSlug := filepath.Clean(slug)
 	filePath := filepath.Join("docs", safeSlug+".md")
 
-	content, err := DocsFS.ReadFile(filepath.ToSlash(filePath))
+	content, err := fileReader(filepath.ToSlash(filePath))
 	if err != nil {
 		return "", fmt.Errorf("Document not found: %s", safeSlug)
 	}

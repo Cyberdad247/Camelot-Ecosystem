@@ -84,8 +84,45 @@
                hx-swap="innerHTML">
     </div>
 
-    <!-- WP-G/WP-H/WP-I: Capabilities Detection Engine -->
+    <!-- WP-G/WP-H/WP-I/Phase 4: Capabilities & WebGPU Compute Pipeline -->
     <script>
+        // WGSL Shader for parallel vector dot-product / cosine similarity (Phase 4 Compute Offload)
+        const COSINE_SIMILARITY_WGSL = `
+            struct VectorBuffer {
+                data: array<f32>,
+            };
+
+            @group(0) @binding(0) var<storage, read> queryVector : VectorBuffer;
+            @group(0) @binding(1) var<storage, read> docVectors : VectorBuffer;
+            @group(0) @binding(2) var<storage, read_write> similarityScores : VectorBuffer;
+
+            @compute @workgroup_size(64)
+            fn main(@builtin(global_invocation_id) global_id : vec3<u32>) {
+                let docIndex = global_id.x;
+                let dims : u32 = 64u; // Vector embedding dimension
+                let baseOffset = docIndex * dims;
+
+                var dotProduct : f32 = 0.0;
+                var queryNorm : f32 = 0.0;
+                var docNorm : f32 = 0.0;
+
+                for (var i : u32 = 0u; i < dims; i = i + 1u) {
+                    let q = queryVector.data[i];
+                    let d = docVectors.data[baseOffset + i];
+                    dotProduct = dotProduct + (q * d);
+                    queryNorm = queryNorm + (q * q);
+                    docNorm = docNorm + (d * d);
+                }
+
+                let denominator = sqrt(queryNorm) * sqrt(docNorm);
+                if (denominator > 0.0) {
+                    similarityScores.data[docIndex] = dotProduct / denominator;
+                } else {
+                    similarityScores.data[docIndex] = 0.0;
+                }
+            }
+        `;
+
         document.addEventListener("DOMContentLoaded", async () => {
             const stream = document.getElementById("mcp-stream");
             function log(msg) {
@@ -103,18 +140,30 @@
                 log("<span style='color: #ef4444'>[N211] WebMCP Sync Failed.</span>");
             }
 
-            // N220: Device Detect (WebGPU)
+            // N220: Device Detect (WebGPU) + Phase 4 Compute Offload
             if ("gpu" in navigator) {
                 try {
                     const adapter = await navigator.gpu.requestAdapter();
                     if (adapter) {
+                        const device = await adapter.requestDevice();
                         log("> <span style='color: #10b981'>[N220] WebGPU Compute Available. Profile A Active.</span>");
-                        log("> [N221] Hardware accelerated tensor pipelines unsealed.");
+                        
+                        // N222: Compile WGSL Compute Pipeline
+                        const shaderModule = device.createShaderModule({
+                            code: COSINE_SIMILARITY_WGSL
+                        });
+                        const computePipeline = device.createComputePipeline({
+                            layout: 'auto',
+                            compute: { module: shaderModule, entryPoint: 'main' }
+                        });
+                        
+                        window.CamelotGPU = { device, computePipeline };
+                        log("> <span style='color: #38bdf8'>[N222] WGSL Tensor Pipeline Compiled. Client VRAM vector offload ready.</span>");
                     } else {
                         log("> <span style='color: #f59e0b'>[N225] WebGPU Adapter restricted. CPU Fallback (Profile B).</span>");
                     }
                 } catch(e) {
-                    log("> <span style='color: #f59e0b'>[N225] WebGPU Error. CPU Fallback Active.</span>");
+                    log("> <span style='color: #f59e0b'>[N225] WebGPU Error. CPU Fallback Active: " + e.message + "</span>");
                 }
             } else {
                 log("> <span style='color: #ef4444'>[N225] WebGPU Unsupported. Edge/Air-gapped (Profile C) active.</span>");

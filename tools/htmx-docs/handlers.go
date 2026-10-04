@@ -17,6 +17,25 @@ func docsHandler(w http.ResponseWriter, r *http.Request) {
 		slug = "getting-started"
 	}
 
+	state := GetSearchState()
+	var docHash string
+	if state != nil {
+		if meta, ok := state.DocBySlug[slug]; ok {
+			docHash = meta.Hash
+		}
+	}
+
+	// Phase 1: Edge ETag Caching (304 Not Modified when hash matches)
+	if docHash != "" {
+		etag := fmt.Sprintf(`"%s"`, docHash)
+		if match := r.Header.Get("If-None-Match"); match == etag || match == docHash {
+			w.WriteHeader(http.StatusNotModified)
+			return
+		}
+		w.Header().Set("ETag", etag)
+		w.Header().Set("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400")
+	}
+
 	htmlFragment, err := LoadAndRenderDoc(slug)
 	if err != nil {
 		w.WriteHeader(http.StatusNotFound)

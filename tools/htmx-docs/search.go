@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"sync"
+	"sync/atomic"
 
 	"github.com/yuin/goldmark"
 	meta "github.com/yuin/goldmark-meta"
@@ -27,13 +27,32 @@ type DocumentMeta struct {
 	Hash  string   `json:"hash"` // N030
 }
 
-var (
-	// SearchIndex fulfills N050 (VCL Ledger)
-	SearchIndex []DocumentMeta
-	// InvertedIndex maps words -> slices of Slugs for O(1) Search (N111)
+// SearchState holds an immutable snapshot of search and VCL structures for lock-free reads.
+type SearchState struct {
+	SearchIndex   []DocumentMeta
 	InvertedIndex map[string]map[string]DocumentMeta
-	indexMutex    sync.RWMutex
+	DocBySlug     map[string]DocumentMeta
+	AggregateHash string
+}
+
+var (
+	// Backward-compatible exports
+	SearchIndex   []DocumentMeta
+	InvertedIndex map[string]map[string]DocumentMeta
+
+	// Phase 2: Lock-free atomic state snapshot (Copy-On-Write)
+	searchState atomic.Pointer[SearchState]
 )
+
+// GetSearchState returns the current immutable snapshot without locks.
+func GetSearchState() *SearchState {
+	s := searchState.Load()
+	if s == nil {
+		_ = InitSearchIndex()
+		s = searchState.Load()
+	}
+	return s
+}
 
 func tokenize(text string) []string {
 	text = strings.ToLower(text)
@@ -43,11 +62,9 @@ func tokenize(text string) []string {
 
 // InitSearchIndex parses all markdown files on startup or fsnotify triggers
 func InitSearchIndex() error {
-	indexMutex.Lock()
-	defer indexMutex.Unlock()
-
-	SearchIndex = []DocumentMeta{}
-	InvertedIndex = make(map[string]map[string]DocumentMeta)
+	newSearchIndex := []DocumentMeta{}
+	newInvertedIndex := make(map[string]map[string]DocumentMeta)
+	newDocBySlug := make(map[string]DocumentMeta)
 
 	files, err := fs.Glob(DocsFS, "docs/*.md")
 	if err != nil {
@@ -55,6 +72,7 @@ func InitSearchIndex() error {
 	}
 
 	markdown := goldmark.New(goldmark.WithExtensions(meta.Meta))
+	aggregateHasher := sha256.New()
 
 	for _, file := range files {
 		content, err := DocsFS.ReadFile(filepath.ToSlash(file))
@@ -64,6 +82,7 @@ func InitSearchIndex() error {
 
 		hashBytes := sha256.Sum256(content)
 		hashStr := hex.EncodeToString(hashBytes[:])
+		aggregateHasher.Write(hashBytes[:])
 
 		var buf bytes.Buffer
 		context := parser.NewContext()
@@ -89,21 +108,39 @@ func InitSearchIndex() error {
 			Tags:  tags,
 			Hash:  hashStr,
 		}
-		SearchIndex = append(SearchIndex, doc)
+		newSearchIndex = append(newSearchIndex, doc)
+		newDocBySlug[slug] = doc
 
 		// N111: Populate Inverted Index
 		tokens := append(tokenize(doc.Title), tags...)
 		for _, token := range tokens {
-			if InvertedIndex[token] == nil {
-				InvertedIndex[token] = make(map[string]DocumentMeta)
+			if newInvertedIndex[token] == nil {
+				newInvertedIndex[token] = make(map[string]DocumentMeta)
 			}
-			InvertedIndex[token][slug] = doc
+			newInvertedIndex[token][slug] = doc
 		}
 	}
+
+	aggHashStr := hex.EncodeToString(aggregateHasher.Sum(nil))
+
+	newState := &SearchState{
+		SearchIndex:   newSearchIndex,
+		InvertedIndex: newInvertedIndex,
+		DocBySlug:     newDocBySlug,
+		AggregateHash: aggHashStr,
+	}
+
+	// Phase 2: Atomic pointer swap (0-contention read snapshot)
+	searchState.Store(newState)
+
+	// Keep backward-compatible globals in sync
+	SearchIndex = newSearchIndex
+	InvertedIndex = newInvertedIndex
+
 	return nil
 }
 
-// N051: Search API Endpoint
+// N051: Search API Endpoint (Lock-Free)
 func searchHandler(w http.ResponseWriter, r *http.Request) {
 	query := strings.ToLower(r.FormValue("q"))
 
@@ -113,14 +150,17 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	indexMutex.RLock()
-	defer indexMutex.RUnlock()
+	state := GetSearchState()
+	if state == nil {
+		w.Write([]byte("<li style='color: var(--text-secondary);'>Index unavailable.</li>"))
+		return
+	}
 
 	// Find matches in O(1) or via O(k) substring over the smaller token dictionary
 	matchedDocs := make(map[string]DocumentMeta)
 	
-	// Quick O(k) prefix/substring search across the dictionary keys
-	for token, docs := range InvertedIndex {
+	// Quick O(k) prefix/substring search across the dictionary keys without locks
+	for token, docs := range state.InvertedIndex {
 		if strings.Contains(token, query) {
 			for slug, doc := range docs {
 				matchedDocs[slug] = doc
@@ -149,15 +189,30 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(strings.Join(results, "\n")))
 }
 
-// N032: VCL Endpoint
+// N032: VCL Endpoint with Phase 1 Edge ETag Caching
 func vclHandler(w http.ResponseWriter, r *http.Request) {
-	indexMutex.RLock()
-	defer indexMutex.RUnlock()
-	
+	state := GetSearchState()
+	if state == nil {
+		http.Error(w, `{"error":"index uninitialized"}`, http.StatusInternalServerError)
+		return
+	}
+
+	// Phase 1: Edge ETag Caching on VCL Ledger
+	if state.AggregateHash != "" {
+		etag := fmt.Sprintf(`"%s"`, state.AggregateHash)
+		if match := r.Header.Get("If-None-Match"); match == etag || match == state.AggregateHash {
+			w.WriteHeader(http.StatusNotModified)
+			return
+		}
+		w.Header().Set("ETag", etag)
+		w.Header().Set("Cache-Control", "public, max-age=60, stale-while-revalidate=600")
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(map[string]interface{}{
-		"status": "VCL Active",
-		"count":  len(SearchIndex),
-		"index":  SearchIndex,
+		"status":         "VCL Active",
+		"aggregate_hash": state.AggregateHash,
+		"count":          len(state.SearchIndex),
+		"index":          state.SearchIndex,
 	})
 }
