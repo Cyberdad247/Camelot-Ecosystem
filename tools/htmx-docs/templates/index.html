@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camelot HTMX Docs</title>
+    
+    <!-- N020: Include HTMX Library -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    
+    <!-- N023: Include Styles -->
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="layout">
+    
+    <!-- N021: Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="branding">
+            <h2>Camelot Docs</h2>
+            <div class="badge">v3.4.1 Baseline</div>
+        </div>
+        
+        <!-- N060 & N061: Search Input & HTMX Triggers -->
+        <div class="search-container">
+            <input type="search" 
+                   name="q"
+                   placeholder="Search documentation..." 
+                   hx-post="/api/search" 
+                   hx-trigger="keyup changed delay:500ms" 
+                   hx-target="#search-results">
+            
+            <!-- N062: Results UI (A11Y Politeness added) -->
+            <ul id="search-results" aria-live="polite"></ul>
+        </div>
+
+        <nav class="doc-links">
+            <h3>Infrastructure</h3>
+            <ul>
+                <!-- HTMX declarative navigation. Notice there's no JS onclick handlers here. -->
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/getting-started" 
+                       hx-target="#content" 
+                       hx-push-url="true">Getting Started</a>
+                </li>
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/architecture" 
+                       hx-target="#content" 
+                       hx-push-url="true">DAG Architecture</a>
+                </li>
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/wave-0" 
+                       hx-target="#content" 
+                       hx-push-url="true">Wave 0 Interfaces</a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- N022: Dynamic Content Area (A11Y Politeness added) -->
+    <main id="content" class="content-area" aria-live="polite">
+        <h1>Initialization Complete</h1>
+        <p>Backend Core and Frontend Shell are successfully linked.</p>
+        <p><em>Select a document from the sidebar. HTMX will fetch the HTML fragment from the Go server and swap it into this pane.</em></p>
+    </main>
+
+    <!-- Master UI/UX Cartridge: AI Native MCP Interface -->
+    <div id="mcp-hud" class="mcp-hud-container" aria-live="polite">
+        <div class="mcp-header">
+            <span>ANYA // I-O MIDDLEWARE</span>
+            <span class="pulse-indicator"></span>
+        </div>
+        <div id="mcp-stream" class="mcp-stream">
+            <p>System aligned. Living canonical documents active. Awaiting tensor execution...</p>
+        </div>
+        <input type="text" 
+               class="mcp-input" 
+               placeholder="Execute Runic Symbolect (e.g., //OPTIMIZE)..." 
+               name="cmd"
+               hx-post="/api/mcp" 
+               hx-target="#mcp-stream" 
+               hx-swap="innerHTML">
+    </div>
+
+</body>
+</html>

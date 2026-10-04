@@ -1,0 +1,216 @@
+/* N023: Base Application Styling */
+:root {
+    --bg-color: #0f172a;
+    --surface-color: #1e293b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #38bdf8;
+    --border: #334155;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden; /* Prevent full page scroll, rely on content-area scroll */
+}
+
+/* N020: Grid Layout */
+.layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    height: 100vh;
+}
+
+/* N021: Sidebar */
+.sidebar {
+    background-color: var(--surface-color);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.branding h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background-color: var(--accent);
+    color: #0f172a;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* N060: Search Input */
+.search-container input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+#search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
+
+#search-results li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+#search-results li:hover {
+    background-color: var(--bg-color);
+    color: var(--accent);
+    cursor: pointer;
+}
+
+/* Sidebar Navigation */
+.doc-links h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin: 0 0 1rem 0;
+}
+
+.doc-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.doc-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: block;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.doc-links a:hover {
+    background-color: var(--bg-color);
+    color: var(--accent);
+}
+
+/* N022: Main Content Area */
+.content-area {
+    padding: 3rem 4rem;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.content-area h1 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+/* HTMX transition indicators */
+.htmx-indicator {
+    opacity: 0;
+    transition: opacity 200ms ease-in;
+}
+.htmx-request .htmx-indicator {
+    opacity: 1;
+}
+.htmx-request.htmx-indicator {
+    opacity: 1;
+}
+
+/* Master UI/UX Cartridge (GPU LLM Interface) */
+.mcp-hud-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 400px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    animation: slideUp 0.5s ease-out;
+}
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.mcp-header {
+    background: #0f172a;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.05em;
+}
+.pulse-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+.mcp-stream {
+    padding: 1rem;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    height: 150px;
+    overflow-y: auto;
+}
+.mcp-stream p {
+    margin: 0 0 0.5rem 0;
+}
+.mcp-input {
+    background: var(--surface-color);
+    border: none;
+    border-top: 1px solid var(--border);
+    padding: 0.8rem 1rem;
+    color: var(--text-primary);
+    font-family: "JetBrains Mono", Consolas, monospace;
+    width: 100%;
+    box-sizing: border-box;
+}
+.mcp-input:focus {
+    outline: none;
+    background: #0f172a;
+}

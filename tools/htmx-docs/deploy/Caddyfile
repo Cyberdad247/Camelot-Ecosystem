@@ -1,0 +1,15 @@
+# N041: Caddy Reverse Proxy Configuration
+
+docs.camelot-system.internal {
+    # Terminate SSL and reverse proxy traffic to our Go backend
+    reverse_proxy 127.0.0.1:8484
+
+    # Optimize delivery by compressing HTMX fragments and static assets
+    encode zstd gzip
+
+    # Logging for WP-E (Evidence / Verification)
+    log {
+        output file /var/log/caddy/htmx-docs.log
+        format console
+    }
+}

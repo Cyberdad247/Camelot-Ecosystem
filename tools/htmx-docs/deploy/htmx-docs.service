@@ -1,0 +1,22 @@
+[Unit]
+Description=Camelot HTMX Documentation Server
+# Ensure network is up before starting the server
+After=network.target
+
+[Service]
+Type=simple
+# Security: Run as a dedicated non-root user
+User=sys-docs
+Group=sys-docs
+WorkingDirectory=/opt/htmx-docs
+ExecStart=/opt/htmx-docs/htmx-docs-server
+
+# Resilience: Automatically restart if the Go binary panics
+Restart=on-failure
+RestartSec=5
+
+# Environment overrides
+Environment=PORT=8484
+
+[Install]
+WantedBy=multi-user.target
