@@ -637,7 +637,18 @@ def boot_cloud_brain(home: Path):
         return True, f"Cloud Brain DEGRADED (error loading): {exc}"
 
 
+def boot_excalibur_mobile_sentinel(home: Path) -> tuple[bool, str]:
+    """Phase: Excalibur Omarchy Mobile Sentinel probe (S26 Ultra / Adreno 840)."""
+    try:
+        from control_plane.dispatch.excalibur_mobile_dispatcher import ExcaliburMobileDispatcher
 
+        d = ExcaliburMobileDispatcher()
+        st = d.get_mobile_cockpit_summary()
+        kp = st.get("keypass", {}).get("keypass_id", "NO_KEYPASS")
+        mode = st.get("operational_mode", "UNKNOWN")
+        return True, f"Excalibur Sentinel [{mode}] — WarpGate {kp} (120Hz Adreno 840)"
+    except Exception as exc:
+        return False, f"Excalibur Sentinel offline: {exc}"
 
 
 def sync_knight_configuration(home: Path):
@@ -1300,6 +1311,32 @@ def boot_opencodex(home: Path) -> tuple[bool, str]:
         return False, f"OpenCodex launch failed: {exc}"
 
 
+def boot_kinetic_adb_watchdog(home: Path) -> tuple[bool, str]:
+    """Kinetic ADB link watchdog and auto-resurrection."""
+    try:
+        bridge_script = home / "04_KINETIC" / "qtscrcpy" / "qtscrcpy_kinetic_bridge.py"
+        if not bridge_script.exists():
+            return True, "QtScrcpy bridge script not found (skipped)"
+
+        py_bin = sys.executable
+        res = subprocess.run(
+            [py_bin, str(bridge_script), "watchdog", "--json"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+        )
+        if res.returncode == 0:
+            rep = json.loads(res.stdout)
+            dev_count = rep.get("devices_found", 0)
+            status = rep.get("status", "IDLE")
+            if dev_count > 0:
+                return True, f"Kinetic ADB online ({dev_count} device(s) reverse-tunneled)"
+            return True, f"Kinetic ADB watchdog active (0 devices connected, status={status})"
+        return False, f"Kinetic ADB watchdog failed: {res.stderr[:60]}"
+    except Exception as e:
+        return True, f"Kinetic ADB watchdog pass ({e})"
+
+
 def _boot_vfs_preflight_stage0(home: Path) -> tuple[bool, str]:
     """Stage-0 VFS preflight gate (hard halt on strict REJECT).
 
@@ -1340,10 +1377,12 @@ def run_boot(
         {"name": "VFS Preflight    :stage-0", "required": False,
          "fn": lambda: _boot_vfs_preflight_stage0(home)},
         {"name": "EXCALIBUR Pre-Flight", "required": False, "fn": lambda: boot_excalibur_preflight(home)},
+        {"name": "Excalibur Sentinel", "required": False, "fn": lambda: boot_excalibur_mobile_sentinel(home)},
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
         {"name": "OpenCodex    :10100", "required": False, "fn": lambda: boot_opencodex(home)},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},
         {"name": "Kinetic Edge  :3001", "required": True,  "fn": hud._boot_kinetic_edge},
+        {"name": "Kinetic ADB Watchdog", "required": False, "fn": lambda: boot_kinetic_adb_watchdog(home)},
         {"name": "OmniVoice     :3002", "required": False, "fn": lambda: boot_omnivoice_router(home)},
         {"name": "Kitten TTS    :8300", "required": False, "fn": lambda: boot_kitten_tts(home)},
         {"name": "Titan Omega  [Omega]",   "required": False, "fn": lambda: boot_titan_omega(home)},

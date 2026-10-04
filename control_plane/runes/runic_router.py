@@ -866,6 +866,22 @@ RUNIC_COMMANDS: dict[str, dict[str, Any]] = {
         "handler": "_handle_qtscrcpy",
         "hydrate": False,
     },
+    "//EXCALIBUR": {
+        "knight": "sir_helio",
+        "description": "Sir Helio Excalibur mobile sentinel dispatch, S26 Ultra Adreno 840 bridge, and telemetry cockpit",
+        "mode": "SENTINEL",
+        "priority": 1,
+        "handler": "_handle_excalibur",
+        "hydrate": False,
+    },
+    "//OMARCHY": {
+        "knight": "sir_helio",
+        "description": "Omarchy Desktop and rootless ARM64 mobile container orchestrator",
+        "mode": "KINETIC",
+        "priority": 1,
+        "handler": "_handle_excalibur",
+        "hydrate": False,
+    },
     "//VALIDATE_SPEC": {
         "knight": "hermes_prime",
         "description": "Formal specification and authority closure validation against Camelot-OS contract forge",
@@ -958,6 +974,7 @@ OMEGA_RUNES: dict[str, dict[str, Any]] = {
     "Omega_FatherCamelot": {"knight": "father_camelot", "description": "Father's Camelot ancestral compass — behavioral contract audit for the full knight roster"},
     "Omega_MOTO_EDGE": {"knight": "sir_heimdall", "description": "Moto Edge Bus signed outbox and telemetry drain (:8096)"},
     "Omega_QTSCRCPY": {"knight": "sir_heimdall", "description": "QtScrcpy mobile kinetic bridge and ADB device control"},
+    "Omega_EXCALIBUR": {"knight": "sir_helio", "description": "Excalibur Mobile Sentinel S26 Ultra rootless Omarchy cockpit", "mode": "SENTINEL", "handler": "_handle_excalibur"},
     "Omega_SPEC_VALIDATE": {"knight": "hermes_prime", "description": "Formal specification, 36 Draft 2020-12 schemas and authority closure validation"},
 }
 
@@ -3552,6 +3569,67 @@ def _handle_qtscrcpy(param: Any, context: dict) -> dict:
         }
 
 
+def _handle_excalibur(param: Any, context: dict) -> dict:
+    """//EXCALIBUR & //OMARCHY — Excalibur Mobile Sentinel S26 Ultra Omarchy Bridge orchestration."""
+    cmd = (str(param).strip() if param and not isinstance(param, dict) else "") or "status"
+    try:
+        from control_plane.dispatch.excalibur_mobile_dispatcher import (
+            ExcaliburMobileDispatcher,
+            MobileTaskRequest,
+            OperationalMode,
+        )
+        disp = ExcaliburMobileDispatcher()
+
+        if "doctor" in cmd.lower() or "check" in cmd.lower():
+            doc = disp.bridge.run_doctor()
+            return {
+                "action": "excalibur_mobile_sentinel",
+                "subcommand": "doctor",
+                "guardian": "SIR_HELIO",
+                "doctor": doc.to_dict(),
+                "status": doc.overall_status,
+            }
+        elif "mode" in cmd.lower():
+            parts = cmd.split()
+            target_mode = parts[1].upper() if len(parts) > 1 else "WORKSTATION"
+            try:
+                disp.set_mode(OperationalMode(target_mode))
+                return {
+                    "action": "excalibur_mobile_sentinel",
+                    "subcommand": "set_mode",
+                    "mode": target_mode,
+                    "status": "MODE_SET",
+                }
+            except Exception as e:
+                return {"action": "excalibur_mobile_sentinel", "error": str(e), "status": "INVALID_MODE"}
+        elif "dispatch" in cmd.lower() or "task" in cmd.lower():
+            req = MobileTaskRequest(
+                task_id=f"EXCALIBUR-TASK-{int(time.time())}",
+                action="MOBILE_AGENT_DISPATCH",
+                target_module="excalibur_core",
+                payload={"command": cmd},
+                mode=disp.current_mode,
+            )
+            res = disp.dispatch_task(req)
+            return {
+                "action": "excalibur_mobile_sentinel",
+                "subcommand": "dispatch",
+                "response": res.to_dict(),
+                "status": "DISPATCHED",
+            }
+        else:
+            summary = disp.get_mobile_cockpit_summary()
+            return {
+                "action": "excalibur_mobile_sentinel",
+                "subcommand": "status",
+                "guardian": "SIR_HELIO",
+                "cockpit": summary,
+                "status": "ONLINE",
+            }
+    except Exception as exc:
+        return {"action": "excalibur_mobile_sentinel", "error": str(exc), "status": "ERROR"}
+
+
 def _handle_validate_spec(param: Any, context: dict) -> dict:
     """//VALIDATE_SPEC — Formal specification and authority closure validation against Camelot-OS contract forge."""
     target_repo = (str(param).strip() if param and not isinstance(param, dict) else "") or "https://github.com/Cyberdad247/CAMELOT_OS.git"
@@ -3906,8 +3984,16 @@ _RUNE_ALIASES: dict[str, str] = {
     "//qtscrcpy": "//QTSCRCPY",
     "//qt_scrcpy": "//QTSCRCPY",
     "$qtscrcpy": "//QTSCRCPY",
-    "/qtscrcpy": "//QTSCRCPY",
     "omega_qtscrcpy": "Omega_QTSCRCPY",
+    "//excalibur": "//EXCALIBUR",
+    "//excalibur_mobile": "//EXCALIBUR",
+    "$excalibur": "//EXCALIBUR",
+    "/excalibur": "//EXCALIBUR",
+    "omega_excalibur": "Omega_EXCALIBUR",
+    "//omarchy": "//OMARCHY",
+    "//omarchy_mobile": "//OMARCHY",
+    "$omarchy": "//OMARCHY",
+    "/omarchy": "//OMARCHY",
     "//validate_spec": "//VALIDATE_SPEC",
     "//validate-spec": "//VALIDATE_SPEC",
     "$validate-spec": "//VALIDATE_SPEC",
