@@ -34,6 +34,16 @@ body {
     gap: 2rem;
 }
 
+.brand-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.25rem;
+    opacity: 0.9;
+}
+
 .branding h2 {
     margin: 0 0 0.5rem 0;
     font-size: 1.25rem;

@@ -16,7 +16,8 @@
     <!-- N021: Sidebar Navigation -->
     <aside class="sidebar">
         <div class="branding">
-            <h2>Camelot Docs</h2>
+            <div class="brand-eyebrow">Invisioned // Agentic Systems</div>
+            <h2>Camelot-OS</h2>
             <div class="badge">v3.4.1 Baseline</div>
         </div>
         
@@ -45,6 +46,12 @@
             <h3>Infrastructure</h3>
             <ul>
                 <!-- HTMX declarative navigation. Notice there's no JS onclick handlers here. -->
+                <li>
+                    <a href="#" 
+                       hx-get="/docs/brand-integration" 
+                       hx-target="#content" 
+                       hx-push-url="true">Brand Architecture</a>
+                </li>
                 <li>
                     <a href="#" 
                        hx-get="/docs/getting-started" 
