@@ -443,6 +443,88 @@ def cmd_tokenpress(root: Path, args: argparse.Namespace) -> None:
         print(f"Symbolect:    {sym_compressed}")
 
 
+def cmd_uma(root: Path, args: argparse.Namespace) -> None:
+    """Unified Memory Architecture (UMA) fleet memory balancer & offloader."""
+    from .uma_sentry import SquireUMASentry
+    threshold = getattr(args, "threshold", 78.0) or 78.0
+    sentry = SquireUMASentry(home=root, pressure_threshold_pct=threshold)
+
+    balance = sentry.get_fleet_memory_balance()
+
+    if getattr(args, "offload_test", False):
+        res = sentry.dispatch_offload(
+            task_id=f"uma-test-{int(time.time())}",
+            action="heavy_ast_parse",
+            target_module="control_plane",
+            payload={"test": "sample_offload_payload", "timestamp": time.time()},
+            estimated_ram_mb=850.0,
+        )
+        if getattr(args, "json", False):
+            print(json.dumps(res, indent=2, ensure_ascii=False))
+            return
+        _print(f"⚡ UMA Offload Result: {res['status']} -> {res['execution_node']}", "bold green")
+        return
+
+    if getattr(args, "json", False):
+        print(json.dumps(balance.to_dict(), indent=2, ensure_ascii=False))
+        return
+
+    if _RICH:
+        console = _console()
+        table = Table(title="Squire UMA Sentry — Fleet Memory Balance", show_header=False, box=None)
+        table.add_column("Node", style="bold", width=22)
+        table.add_column("Memory Status")
+
+        def r(k, v, s=""):
+            table.add_row(k, f"[{s}]{v}[/{s}]" if s else str(v))
+
+        r("Cybertronia (Host)", f"{balance.cybertronia_used_mb:,.0f}/{balance.cybertronia_total_mb:,.0f} MB ({balance.cybertronia_util_pct}%)", "yellow" if balance.cybertronia_util_pct > 80 else "green")
+        r("Excalibur (S26 Ultra)", f"{balance.excalibur_free_mb:,.0f} MB Free / {balance.excalibur_total_mb:,.0f} MB LPDDR5X", "bold green")
+        r("VPS Sovereign Hub", f"{balance.vps_free_mb:,.0f} MB Free / {balance.vps_total_mb:,.0f} MB", "cyan")
+        r("Offload Recommended", str(balance.offload_recommended), "bold magenta" if balance.offload_recommended else "dim")
+        r("Sentry Rationale", balance.rationale, "italic")
+        console.print(table)
+    else:
+        print(f"Cybertronia:  {balance.cybertronia_used_mb:,.0f}/{balance.cybertronia_total_mb:,.0f} MB ({balance.cybertronia_util_pct}%)")
+        print(f"S26 Ultra:    {balance.excalibur_free_mb:,.0f} MB Free / {balance.excalibur_total_mb:,.0f} MB")
+        print(f"VPS Hub:      {balance.vps_free_mb:,.0f} MB Free / {balance.vps_total_mb:,.0f} MB")
+        print(f"Offload Rec:  {balance.offload_recommended}")
+        print(f"Rationale:    {balance.rationale}")
+
+
+def cmd_coldvault(root: Path, args: argparse.Namespace) -> None:
+    """Episodic memory compactor & SQLite-vec / Graphiti vacuuming."""
+    from .coldvault import SquireColdVault
+    vault = SquireColdVault(home=root)
+    do_vacuum = getattr(args, "vacuum", False)
+    max_dbs = getattr(args, "max_dbs", 50) or 50
+
+    report = vault.vacuum_vault(force_vacuum=do_vacuum, max_dbs=max_dbs)
+
+    if getattr(args, "json", False):
+        print(json.dumps(report.to_dict(), indent=2, ensure_ascii=False))
+        return
+
+    if _RICH:
+        console = _console()
+        table = Table(title="Squire ColdVault — Database Compaction Report", show_header=False, box=None)
+        table.add_column("Metric", style="bold", width=25)
+        table.add_column("Value")
+        table.add_row("Databases Scanned", str(report.total_databases_scanned))
+        table.add_row("Databases Compacted", str(report.total_databases_compacted), "green")
+        table.add_row("Disk Size Before", f"{report.bytes_before / (1024*1024):,.2f} MB")
+        table.add_row("Disk Size After", f"{report.bytes_after / (1024*1024):,.2f} MB")
+        table.add_row("Reclaimed Storage", f"+{report.reclaimed_mb} MB", "bold green")
+        table.add_row("Compaction Status", report.status, "cyan")
+        console.print(table)
+    else:
+        print(f"Databases Scanned:   {report.total_databases_scanned}")
+        print(f"Databases Compacted: {report.total_databases_compacted}")
+        print(f"Size Before:         {report.bytes_before / (1024*1024):,.2f} MB")
+        print(f"Size After:          {report.bytes_after / (1024*1024):,.2f} MB")
+        print(f"Reclaimed:           +{report.reclaimed_mb} MB")
+
+
 # ── Cron helpers ─────────────────────────────────────────────────────────────
 
 def _parse_schedule(s: str) -> int:
@@ -518,7 +600,7 @@ def main(argv: list[str] | None = None) -> None:
     )
     parser.add_argument(
         "command",
-        choices=["scan", "index", "ghost", "vector", "triage", "status", "graph", "conform", "pagekeeper", "tokenpress"],
+        choices=["scan", "index", "ghost", "vector", "triage", "status", "graph", "conform", "pagekeeper", "tokenpress", "uma", "coldvault"],
         help="Squire pipeline stage to run",
     )
     parser.add_argument(
@@ -538,7 +620,10 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--dry-run", action="store_true", help="conform: simulate deduplication without linking")
     parser.add_argument("--min-size", type=int, default=1, help="conform: minimum file size in bytes for dedupe")
     parser.add_argument("--trim", action="store_true", help="pagekeeper: execute working set trim")
-    parser.add_argument("--threshold", type=float, default=80.0, help="pagekeeper: RAM utilization pressure threshold pct")
+    parser.add_argument("--threshold", type=float, default=80.0, help="pagekeeper/uma: RAM utilization threshold pct")
+    parser.add_argument("--offload-test", action="store_true", help="uma: dispatch test offload payload to Excalibur")
+    parser.add_argument("--vacuum", action="store_true", help="coldvault: execute force database vacuuming")
+    parser.add_argument("--max-dbs", type=int, default=50, help="coldvault: max databases to vacuum in single run")
     parser.add_argument("--json", action="store_true", help="output machine-readable JSON")
 
     args = parser.parse_args(argv)
@@ -559,6 +644,8 @@ def main(argv: list[str] | None = None) -> None:
         "conform":    cmd_conform,
         "pagekeeper": cmd_pagekeeper,
         "tokenpress": cmd_tokenpress,
+        "uma":        cmd_uma,
+        "coldvault":  cmd_coldvault,
     }
 
     if args.schedule and args.command == "triage":

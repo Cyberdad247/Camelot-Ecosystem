@@ -94,3 +94,24 @@ def test_tokenpress_cli(capsys, tmp_path):
     assert "symbolect" in data
     assert "⟐ANYA_GATE⟐" in data["symbolect"]
 
+
+def test_uma_cli(capsys, tmp_path):
+    import json
+    colony.main(["uma", str(tmp_path), "--json"])
+    captured = capsys.readouterr().out
+    data = json.loads(captured)
+    assert "cybertronia_total_mb" in data
+    assert "excalibur_free_mb" in data
+
+
+def test_coldvault_cli(capsys, tmp_path):
+    import json
+    # Setup dummy db inside tmp_path
+    (tmp_path / "03_VAULT" / "memory").mkdir(parents=True, exist_ok=True)
+    colony.main(["coldvault", str(tmp_path), "--json"])
+    captured = capsys.readouterr().out
+    data = json.loads(captured)
+    assert "total_databases_scanned" in data
+    assert "status" in data
+
+
