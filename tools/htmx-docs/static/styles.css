@@ -1,16 +1,46 @@
-/* N023: Base Application Styling */
+/* ═══ BRAND TOKENS (BRAND-INTEGRATION-v1) ════════════════════ */
 :root {
-    --bg-color: #0f172a;
-    --surface-color: #1e293b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-    --accent: #38bdf8;
-    --border: #334155;
+    /* Corporate parent — Invisioned Marketing */
+    --im-purple:        #8B5CF6;  /* primary brand purple */
+    --im-purple-deep:   #5B21B6;  /* shadow */
+    --im-gold:          #D4AF37;  /* accent gold */
+    --im-gold-bright:   #E6C068;  /* highlight */
+    --im-black:         #0A0A0A;
+
+    /* Product — Camelot-OS */
+    --obsidian-void:    #050505;  /* primary background */
+    --luxora-gold:      #D4AF37;  /* matches im-gold */
+    --matrix-cyan:      #00E5FF;  /* mesh, wireframe, live signal */
+    --chrome-silver:    #C8CDD4;  /* knight plating, neutral text */
+    --circuit-violet:   #7C3AED;  /* crest circuit traces */
+
+    /* Semantic */
+    --capability-local: var(--im-gold);      /* local-only mode */
+    --capability-cloud: var(--matrix-cyan);  /* local+cloud mode */
+    --signal-active:    var(--matrix-cyan);
+    --signal-warn:      #E6B84D;
+    --signal-error:     #E05252;
+    --signal-ok:        #6EC07A;
+
+    /* Surface & Background */
+    --bg-color:         var(--obsidian-void);
+    --surface-color:    #111216;
+    --surface-2:        #181a20;
+    --border:           #242731;
+    --text-primary:     #f1f3f7;
+    --text-secondary:   #8e94a0;
+    --text-faint:       #555a66;
+    --accent:           var(--luxora-gold);
+
+    /* Typography */
+    --font-title:       'Cinzel', ui-serif, Georgia, serif;
+    --font-sans:        ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono:        ui-monospace, 'JetBrains Mono', monospace;
 }
 
 body {
     margin: 0;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--bg-color);
     color: var(--text-primary);
     height: 100vh;
@@ -20,7 +50,7 @@ body {
 /* N020: Grid Layout */
 .layout {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 300px 1fr;
     height: 100vh;
 }
 
@@ -31,30 +61,59 @@ body {
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 }
 
 .brand-eyebrow {
+    font-family: var(--font-mono);
     font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--im-purple);
     margin-bottom: 0.25rem;
-    opacity: 0.9;
 }
 
 .branding h2 {
+    font-family: var(--font-title);
     margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
-    color: var(--text-primary);
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--luxora-gold);
+    text-transform: uppercase;
 }
+
+/* Capability Badge — brand-aligned */
+.cap-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+}
+.cap-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 6px currentColor;
+}
+.cap-local-only  { color: var(--im-gold);     border-color: color-mix(in srgb, var(--im-gold) 40%, transparent); }
+.cap-local-cloud { color: var(--matrix-cyan); border-color: color-mix(in srgb, var(--matrix-cyan) 40%, transparent); }
+.cap-unavailable { color: var(--text-faint);  border-color: var(--border); }
 
 .badge {
     display: inline-block;
     padding: 0.2rem 0.5rem;
     background-color: var(--accent);
-    color: #0f172a;
+    color: #050505;
     font-size: 0.75rem;
     font-weight: bold;
     border-radius: 4px;
