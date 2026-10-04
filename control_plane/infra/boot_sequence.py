@@ -651,6 +651,16 @@ def boot_excalibur_mobile_sentinel(home: Path) -> tuple[bool, str]:
         return False, f"Excalibur Sentinel offline: {exc}"
 
 
+def boot_always_on_tailscale(home: Path) -> tuple[bool, str]:
+    """Phase: Always-On Tailscale Mesh Sentinel probe (dual-path failover)."""
+    try:
+        from control_plane.infra.tailscale_mesh_sentinel import boot_tailscale_sentinel
+
+        return boot_tailscale_sentinel(home)
+    except Exception as exc:
+        return False, f"Tailscale Sentinel offline: {exc}"
+
+
 def sync_knight_configuration(home: Path):
     """Refresh the shared knight roster and cartridge configuration artifact."""
     try:
@@ -1378,6 +1388,7 @@ def run_boot(
          "fn": lambda: _boot_vfs_preflight_stage0(home)},
         {"name": "EXCALIBUR Pre-Flight", "required": False, "fn": lambda: boot_excalibur_preflight(home)},
         {"name": "Excalibur Sentinel", "required": False, "fn": lambda: boot_excalibur_mobile_sentinel(home)},
+        {"name": "Tailscale Sentinel", "required": False, "fn": lambda: boot_always_on_tailscale(home)},
         {"name": "CLIProxyAPI   :8080", "required": True,  "fn": hud._boot_cliproxy},
         {"name": "OpenCodex    :10100", "required": False, "fn": lambda: boot_opencodex(home)},
         {"name": "Defense Grid",        "required": True,  "fn": hud._boot_defense_grid},
