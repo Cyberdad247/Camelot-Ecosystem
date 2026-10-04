@@ -1,4 +1,4 @@
-﻿package htmxdocs
+package htmxdocs
 
 import (
 	"log"
@@ -16,6 +16,10 @@ func NewApp() http.Handler {
 	mux.HandleFunc("/api/vcl", vclHandler)
 	mux.HandleFunc("/api/search", searchHandler)
 	mux.HandleFunc("/api/mcp", mcpHandler)
+
+	// N200: Agent-Native Surface Routes
+	mux.HandleFunc("/api/agent/dump", agentDumpHandler)
+	mux.HandleFunc("/api/agent/doc/", agentDocHandler)
 
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.FS(StaticFS))))
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {

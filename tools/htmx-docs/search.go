@@ -128,6 +128,13 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	// N203: Content Negotiation for Agents
+	if r.Header.Get("Accept") == "application/json" {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(matchedDocs)
+		return
+	}
+
 	var results []string
 	for _, doc := range matchedDocs {
 		res := fmt.Sprintf(`<li><a href="#" hx-get="/docs/%s" hx-target="#content" hx-push-url="true">%s <span style="font-size: 0.7em; color: var(--text-secondary);">[%s]</span></a></li>`, doc.Slug, doc.Title, doc.ID)
