@@ -1,4 +1,4 @@
-﻿package htmxdocs
+package htmxdocs
 import "embed"
 
 //go:embed docs/*.md

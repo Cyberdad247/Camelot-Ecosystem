@@ -1,0 +1,320 @@
+/* ═══ BRAND TOKENS (BRAND-INTEGRATION-v1) ════════════════════ */
+:root {
+    /* Corporate parent — Invisioned Marketing */
+    --im-purple:        #8B5CF6;  /* primary brand purple */
+    --im-purple-deep:   #5B21B6;  /* shadow */
+    --im-gold:          #D4AF37;  /* accent gold */
+    --im-gold-bright:   #E6C068;  /* highlight */
+    --im-black:         #0A0A0A;
+
+    /* Product — Camelot-OS */
+    --obsidian-void:    #050505;  /* primary background */
+    --luxora-gold:      #D4AF37;  /* matches im-gold */
+    --matrix-cyan:      #00E5FF;  /* mesh, wireframe, live signal */
+    --chrome-silver:    #C8CDD4;  /* knight plating, neutral text */
+    --circuit-violet:   #7C3AED;  /* crest circuit traces */
+
+    /* Semantic */
+    --capability-local: var(--im-gold);      /* local-only mode */
+    --capability-cloud: var(--matrix-cyan);  /* local+cloud mode */
+    --signal-active:    var(--matrix-cyan);
+    --signal-warn:      #E6B84D;
+    --signal-error:     #E05252;
+    --signal-ok:        #6EC07A;
+
+    /* Surface & Background */
+    --bg-color:         var(--obsidian-void);
+    --surface-color:    #111216;
+    --surface-2:        #181a20;
+    --border:           #242731;
+    --text-primary:     #f1f3f7;
+    --text-secondary:   #8e94a0;
+    --text-faint:       #555a66;
+    --accent:           var(--luxora-gold);
+
+    /* Typography */
+    --font-title:       'Cinzel', ui-serif, Georgia, serif;
+    --font-sans:        ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-mono:        ui-monospace, 'JetBrains Mono', monospace;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden; /* Prevent full page scroll, rely on content-area scroll */
+}
+
+/* N020: Grid Layout */
+.layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    height: 100vh;
+}
+
+/* N021: Sidebar */
+.sidebar {
+    background-color: var(--surface-color);
+    border-right: 1px solid var(--border);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.brand-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--im-purple);
+    margin-bottom: 0.25rem;
+}
+
+.branding h2 {
+    font-family: var(--font-title);
+    margin: 0 0 0.5rem 0;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--luxora-gold);
+    text-transform: uppercase;
+}
+
+/* Capability Badge — brand-aligned */
+.cap-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 8px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+}
+.cap-badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 6px currentColor;
+}
+.cap-local-only  { color: var(--im-gold);     border-color: color-mix(in srgb, var(--im-gold) 40%, transparent); }
+.cap-local-cloud { color: var(--matrix-cyan); border-color: color-mix(in srgb, var(--matrix-cyan) 40%, transparent); }
+.cap-unavailable { color: var(--text-faint);  border-color: var(--border); }
+
+.badge {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    background-color: var(--accent);
+    color: #050505;
+    font-size: 0.75rem;
+    font-weight: bold;
+    border-radius: 4px;
+}
+
+/* CloudBrain Scope Filter Bar */
+.search-scope-bar {
+    display: flex;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+    background: var(--bg-color);
+    padding: 0.2rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+}
+
+.scope-pill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    padding: 0.25rem 0.2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s, color 0.15s;
+}
+
+.scope-pill input {
+    display: none;
+}
+
+.scope-pill:has(input:checked) {
+    background: var(--surface-color);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* N060: Search Input */
+.search-container input[type="search"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75rem;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+#search-results {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+}
+
+#search-results li {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+#search-results li:hover {
+    background-color: var(--bg-color);
+    color: var(--accent);
+    cursor: pointer;
+}
+
+/* Sidebar Navigation */
+.doc-links h3 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin: 0 0 1rem 0;
+}
+
+.doc-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.doc-links a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    display: block;
+    padding: 0.4rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.doc-links a:hover {
+    background-color: var(--bg-color);
+    color: var(--accent);
+}
+
+/* N022: Main Content Area */
+.content-area {
+    padding: 3rem 4rem;
+    overflow-y: auto;
+    line-height: 1.6;
+}
+
+.content-area h1 {
+    margin-top: 0;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+}
+
+/* HTMX transition indicators */
+.htmx-indicator {
+    opacity: 0;
+    transition: opacity 200ms ease-in;
+}
+.htmx-request .htmx-indicator {
+    opacity: 1;
+}
+.htmx-request.htmx-indicator {
+    opacity: 1;
+}
+
+/* Master UI/UX Cartridge (GPU LLM Interface) */
+.mcp-hud-container {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 400px;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    animation: slideUp 0.5s ease-out;
+}
+@keyframes slideUp {
+    from { transform: translateY(100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.mcp-header {
+    background: #0f172a;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.05em;
+}
+.pulse-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+.mcp-stream {
+    padding: 1rem;
+    font-family: "JetBrains Mono", Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    height: 150px;
+    overflow-y: auto;
+}
+.mcp-stream p {
+    margin: 0 0 0.5rem 0;
+}
+.mcp-input {
+    background: var(--surface-color);
+    border: none;
+    border-top: 1px solid var(--border);
+    padding: 0.8rem 1rem;
+    color: var(--text-primary);
+    font-family: "JetBrains Mono", Consolas, monospace;
+    width: 100%;
+    box-sizing: border-box;
+}
+.mcp-input:focus {
+    outline: none;
+    background: #0f172a;
+}

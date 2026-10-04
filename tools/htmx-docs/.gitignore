@@ -2,3 +2,5 @@ server
 server.exe
 *.exe
 *.log
+
+.vercel

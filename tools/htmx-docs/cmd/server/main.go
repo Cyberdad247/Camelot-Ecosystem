@@ -1,10 +1,10 @@
-﻿package main
+package main
 
 import (
 	"fmt"
 	"log"
 	"net/http"
-	htmxdocs "htmx-docs"
+	htmxdocs "htmx-docs/pkg/htmxdocs"
 )
 
 func main() {

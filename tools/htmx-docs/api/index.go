@@ -1,8 +1,8 @@
-﻿package api
+package handler
 
 import (
 	"net/http"
-	htmxdocs "htmx-docs"
+	htmxdocs "htmx-docs/pkg/htmxdocs"
 )
 
 var app = htmxdocs.NewApp()
