@@ -1,9 +1,8 @@
-package main
+package htmxdocs
 
 import (
 	"bytes"
 	"fmt"
-	"os"
 	"path/filepath"
 	"sync"
 
@@ -27,7 +26,7 @@ func LoadAndRenderDoc(slug string) (string, error) {
 	safeSlug := filepath.Clean(slug)
 	filePath := filepath.Join("docs", safeSlug+".md")
 
-	content, err := os.ReadFile(filePath)
+	content, err := DocsFS.ReadFile(filepath.ToSlash(filePath))
 	if err != nil {
 		return "", fmt.Errorf("Document not found: %s", safeSlug)
 	}

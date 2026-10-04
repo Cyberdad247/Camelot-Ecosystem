@@ -1,4 +1,4 @@
-package main
+package htmxdocs
 
 import (
 	"bytes"
@@ -6,8 +6,8 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"io/fs"
 	"net/http"
-	"os"
 	"path/filepath"
 	"regexp"
 	"strings"
@@ -49,7 +49,7 @@ func InitSearchIndex() error {
 	SearchIndex = []DocumentMeta{}
 	InvertedIndex = make(map[string]map[string]DocumentMeta)
 
-	files, err := filepath.Glob("docs/*.md")
+	files, err := fs.Glob(DocsFS, "docs/*.md")
 	if err != nil {
 		return err
 	}
@@ -57,7 +57,7 @@ func InitSearchIndex() error {
 	markdown := goldmark.New(goldmark.WithExtensions(meta.Meta))
 
 	for _, file := range files {
-		content, err := os.ReadFile(file)
+		content, err := DocsFS.ReadFile(filepath.ToSlash(file))
 		if err != nil {
 			continue
 		}
