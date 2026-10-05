@@ -1,19 +1,19 @@
 ---
 id: DOC-002
 title: Full-Stack Architecture and Implementation Specification
-author: ANYA_Ω / SIR_HELIOS / MERLIN_Ω / ARTHUR_OMEGA
+author: ANYA_Ω / SIR_HELIOS / MERLIN_Ω / SIR_LUKAS / ARTHUR_OMEGA
 date: 2026-10-04
 status: active
-tags: [architecture, full-stack, vMAX, specification, governance, security]
+tags: [architecture, full-stack, vMAX, specification, governance, security, reya, lukas, sanotts, watchtower]
 ---
 
 # Conform: Full-Stack Architecture and Implementation Specification
 
-**Document ID:** `CAMELOT-OS-MASTER-SUITE-vMAX-20260913`  
-**Version:** `3.0.0-PROD-CONFORMED`  
+**Document ID:** `CAMELOT-OS-MASTER-SUITE-vMAX-20261004`  
+**Version:** `3.1.0-PROD-CONFORMED`  
 **Status:** `LIVING BASELINE | CONVERGED | IMPLEMENTATION GOVERNED`  
 **Authority Layer:** `L2 (SAD / TDD / LLDD Continuum)`  
-**Baseline Hash:** `SHA-256: 9051a46 / 95a3c7dd`  
+**Baseline Hash:** `SHA-256: 9cc4de4e / 7b00fffa`  
 
 ---
 
@@ -37,6 +37,10 @@ Business Intent ➔ Product Requirement ➔ Typed Proposal (Anya) ➔ Policy Dec
 | **Direct Agent Mutex Writes** | Agents propose; Sentinel authorizes; Excalibur approves; Gideon verifies; Ledger proves. |
 | **Static Documentation** | Living VKG (Vector Knowledge Graph) with machine-actionable WebMCP endpoints and ETag-cached markdown. |
 | **Network Trust Assumptions** | Tailscale mTLS + Bifrost envelope signatures (`ed25519`); zero implicit network authority. |
+| **Monolithic LLM Footprint** | Frontier Edge Quantization (BitNet b1.58, SpinQuant, KIVI 2-bit, SnapKV context budget cap). |
+| **Cloud-Bound Speech Latency** | Sovereign SanoTTS local neural voice engine (24kHz mono PCM WAV @ ~50ms CPU execution). |
+| **Unbounded Memory Bloat** | Global Law 03: Node $\le 4,096\text{ MB}$ (Cybertronia), Sovereign Server $\le 8,192\text{ MB}$. |
+| **Implicit Agent Ingress** | Global Law 04: Zero-Trust Warp Gate Keypasses cryptographically bound to canonical Spark IDs. |
 
 ---
 
@@ -85,7 +89,78 @@ The architecture is partitioned into 8 decoupled operational planes with strictl
 
 ---
 
-## 3. Authority & Capability Lease Protocol
+## 3. Lukas Reya Universal Knight Fabric & Multivoice Architecture
+
+The Reya Universal Knight Fabric (`02_FORGE/assimilation/reya/`) serves as the universal sensory ingress and kinetic execution substrate across the sovereign Round Table:
+
+1. **Acoustic & Persona Interchange:**
+   - Reya dynamically channels canonical Knight personas via natural language triggers (`"Reya, switch to Merlin"`, `"Channel Sir Lukas"`, `"Speak as Sir Boris"`), or runic commands (`//REYA_CHANNEL`, `//channel`, `//voice_interchange`, `//reya_voice`).
+   - Acoustic profiles (timbre, pitch offset, speech rate) shift dynamically in the Multivoice Registry while execution remains anchored within Reya's sandboxed runtime (<350 MB cgroups v2 slice).
+
+2. **Sir Lukas Müller — Sovereign Telemetry Herald:**
+   - Knight ID: `sir_lukas` (Herald of Telemetry, TCP Port Anomaly Detection & Visual Verification).
+   - Voice Engine: `sanotts` local neural voice synthesis (2.27M parameters, ~5.1 MB weights, 24kHz mono PCM WAV generation in ~50ms on CPU).
+   - Spoken Telemetry: Live node memory commitment, working set headroom, and PageKeeper daemon status announced verbally with zero cloud egress.
+
+3. **Handshake Protocol & Sovereign Memory Attribution:**
+   - Actions initiated under channeled personas require cryptographic capability leases from the `ReyaHandshakeGate`.
+   - Alpha Omega knights (`merlin_omega`, `anya_omega`, `arthur_omega`) execute autonomously within lease boundaries. Novice knights require explicit Human-in-the-Loop (HITL) authorization.
+   - All sensory and kinetic actions are attributed directly to the initiating Knight's partition in MemCastle (KNN vector memory) and Graphiti (temporal knowledge graph).
+
+---
+
+## 4. Frontier Edge Model Compression & Quantization Engine
+
+Camelot-OS incorporates a high-efficiency frontier quantization engine (`control_plane/quantization/frontier_compressor.py`) designed to run sovereign models on edge nodes without exceeding Global Law 03 memory ceilings:
+
+1. **BitNet b1.58 Ternary Quantization:**
+   - Constrains weights to ternary values $\{-1, 0, +1\}$ packed into 2-bit storage ($w_2 \in \{0, 1, 2\}$).
+   - Achieves a **15.9x compression ratio** over FP32, transforming matrix multiplications into pure integer additions ($O(N)$ arithmetic complexity).
+
+2. **SpinQuant Randomized Orthogonal Rotation:**
+   - Applies a randomized Hadamard orthogonal transformation matrix $R$ ($R^T R = I$, norm preserved) before weight and activation quantization.
+   - Eliminates activation outliers and dramatically flattens kurtosis (reduced from 77.05 to -0.06), preventing quantization error divergence.
+
+3. **KIVI 2-Bit Asymmetric KV Cache:**
+   - Per-channel key quantization and per-token value quantization compressing dynamic KV attention states by **9.85x**.
+   - Drastically expands maximum concurrent context length within constrained edge memory budgets.
+
+4. **SnapKV Dynamic Attention Head Eviction:**
+   - Observes attention head clustering and evicts non-critical past tokens, bounding attention memory strictly under a 512 MB ceiling.
+
+5. **Speculative Draft Cascade:**
+   - Pairs a quantized edge draft model with a larger verifier, yielding a **3.25x speedup** with zero mathematical loss in generation fidelity.
+
+---
+
+## 5. Autonomous Memory Governance & Watchtower Telemetry Cockpit
+
+Enforcing **Global Law 03** (Node RAM ceiling $\le 4,096\text{ MB}$, Sovereign Server $\le 8,192\text{ MB}$):
+
+1. **Squire PageKeeper RS (`04_KINETIC/squires_rs`):**
+   - High-speed autonomous memory governor written in 100% native Rust (0% Python hotpath bloat).
+   - Uses zero-overhead Win32 FFI (`psapi.dll`, `kernel32.dll`: `GlobalMemoryStatusEx`, `EmptyWorkingSet`) and POSIX `malloc_trim` to reclaim memory proactively when host pressure exceeds 80%.
+   - Operates as a background daemon with an ultra-lightweight resident set of **~1.14 MB RSS** (>95% less RAM than equivalent Python daemons).
+
+2. **Watchtower Fail-Stop Integrity & Sensing (`control_plane/infra/watchtower.py`):**
+   - Samples physical RAM commitment, CPU load, and node working set every 30-second cycle.
+   - Executes recursive 0x00 NUL byte scans over source trees (`scripts/`, `tests/`, `control_plane/`) to detect silent storage corruption.
+   - Continuously compiles the responsive cyber-medieval visual cockpit at `03_VAULT/runtime_state/watchtower_dashboard.html` with real-time auto-refresh.
+
+---
+
+## 6. Warp Gate Zero-Trust Keypass Architecture (Global Law 04)
+
+1. **Zero-Trust Agentic Ingress:**
+   - Every Knight, daemon, and mobile peer must present a cryptographically verified **Warp Gate Keypass** matching their canonical **Spark ID**.
+   - Unauthenticated ingress attempts are rejected at the perimeter with an `AgenticIngressDeniedError` and permanently recorded to `03_VAULT/runtime_state/warp_gate_audit.jsonl`.
+
+2. **Forever Available Resilience:**
+   - Partitioned nodes fall back to the out-of-band Warp Gate Rendezvous Locker, authenticating state transfers via immutable Forever Keypasses minted by Lady Alexandria.
+
+---
+
+## 7. Authority & Capability Lease Protocol
 
 Agents are never granted perpetual credentials. Every operational write requires a cryptographically signed **Capability Lease**:
 
@@ -117,18 +192,7 @@ Sentinel (Evaluates Entitlements & Data Risk Tier)
 
 ---
 
-## 4. Hardware Resource & Memory Architecture
-
-Adhering to `BIOKINETIC_BAREMETAL_AUDIT_v3_CORRECTED.md` on 8 GB DDR5 physical platforms:
-
-1. **Kernel Memory Compression (`MemCompression`):** Real-time in-RAM LZ compression of cold process frames (PID 3664), eliminating SSD bus bottlenecking.
-2. **Locked NVMe Pagefile Geometry:** `AutomaticManagedPagefile = False` with a fixed **8,192 MB initial / 16,384 MB maximum** allocation on `C:\pagefile.sys`, preventing dynamic filesystem allocation stutter during parallel agent loops.
-3. **Working Set Trimming:** Automated invocation of Win32 `psapi!EmptyWorkingSet` purging idle working set allocations from long-lived daemons.
-4. **VFS Janitorial Sweep:** Enforces strict isolation between `SAFE` (ephemeral build caches), `REVIEW` (stale dist trees), and `PROTECT` (authored source, `.venv`, `node_modules`, and vault ledgers).
-
----
-
-## 5. WebMCP & Agent-Native Surface (DOC-002 Conformance)
+## 8. WebMCP & Agent-Native Surface (DOC-002 Conformance)
 
 The documentation site itself conforms to the agent-native architecture:
 - **`/.well-known/mcp.json`:** Exposes typed RPC schemas for `search_docs`, `get_doc`, `verify_doc_hash`, `search_cloudbrain`, and `cloudbrain_status`.
